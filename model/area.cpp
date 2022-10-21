@@ -13,8 +13,10 @@ using namespace mrw::model;
 
 Area::Area(
 	ModelRailway     *    model_railway,
-	const QDomElement  &  element) :
+	const QDomElement  &  element,
+	const bool            station) :
 	name(element.attribute("name")),
+	is_station(station),
 	model(model_railway)
 {
 	const QDomNodeList & child_nodes = element.childNodes();
@@ -26,7 +28,6 @@ Area::Area(
 		if (node.isElement())
 		{
 			const QDomElement & child = node.toElement();
-			const QString       type  = child.attribute("xsi:type");
 
 			if (node.nodeName() == "abschnitt")
 			{

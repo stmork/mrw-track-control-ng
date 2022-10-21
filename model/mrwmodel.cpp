@@ -53,20 +53,26 @@ void ModelRailway::create()
 	name = model.attribute("name");
 	for (int n = 0; n < child_nodes.count(); ++n)
 	{
-		const QDomNode & child = child_nodes.at(n);
+		const QDomNode & node = child_nodes.at(n);
 
-		if (child.nodeName() == "controller")
+		if (node.isElement())
 		{
-			Controller * controller = new Controller(this, child.toElement());
+			const QDomElement & child = node.toElement();
+			const QString  &    type  = child.attribute("xsi:type");
 
-			add(controller);
-		}
+			if (child.nodeName() == "controller")
+			{
+				Controller * controller = new Controller(this, child.toElement());
 
-		if (child.nodeName() == "gruppe")
-		{
-			Area * area = new Area(this, child.toElement());
+				add(controller);
+			}
 
-			add(area);
+			if (child.nodeName() == "gruppe")
+			{
+				Area * area = new Area(this, child.toElement(), type == "Bahnhof");
+
+				add(area);
+			}
 		}
 	}
 }

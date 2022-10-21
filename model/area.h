@@ -22,13 +22,15 @@ namespace mrw::model
 	class Area
 	{
 		const QString           name;
+		const bool              is_station;
 		ModelRailway      *     model = nullptr;
 		std::vector<Section *>  sections;
 
 	public:
 		explicit Area(
 			ModelRailway     *    model_railway,
-			const QDomElement  &  element);
+			const QDomElement  &  element,
+			const bool            station);
 		virtual ~Area();
 
 		void add(Section * section);
