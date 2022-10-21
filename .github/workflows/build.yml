@@ -1,0 +1,15 @@
+name: Yakindu SCT C++11 Timer Service.
+on: [push]
+
+jobs:
+   CPP-Check:
+      runs-on: ubuntu-latest
+      steps:
+         - uses: actions/checkout@v3
+         - run: sudo apt update -y
+         - name: Install needed components
+           run: sudo apt install -y qt5-qmake qt5-default cppcheck
+         - name: QMake
+           run: qmake
+         - name: Build
+           run: make
