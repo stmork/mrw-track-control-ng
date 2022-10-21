@@ -1,0 +1,58 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+//
+
+#pragma once
+
+#ifndef MRW_MODEL_SECTION_H
+#define MRW_MODEL_SECTION_H
+
+#include <vector>
+#include <regex>
+
+#include <QDomElement>
+
+#include "module.h"
+
+namespace mrw::model
+{
+	class ModelRailway;
+	class SectionModule;
+	class RailPart;
+
+	class Section
+	{
+		static const std::regex  path_regex;
+
+		const QString            name;
+		const UnitNo             unit_no;
+		ModelRailway      *      model  = nullptr;
+		SectionModule       *       module = nullptr;
+		std::vector<RailPart *>  rail_parts;
+
+	public:
+		explicit Section(
+			ModelRailway     *    model_railway,
+			const QDomElement  &  element);
+		virtual ~Section();
+
+		inline UnitNo id() const
+		{
+			return unit_no;
+		}
+
+		void add(RailPart * rait_part);
+		void link();
+
+		inline RailPart * railPart(const UnitNo no) const
+		{
+			return rail_parts.at(no);
+		}
+
+	protected:
+		SectionModule * resolve(const std::string & path) const;
+	};
+}
+
+#endif // MRW_MODEL_SECTION_H
