@@ -58,7 +58,6 @@ void ModelRailway::create()
 		if (node.isElement())
 		{
 			const QDomElement & child = node.toElement();
-			const QString  &    type  = child.attribute("xsi:type");
 
 			if (child.nodeName() == "controller")
 			{
@@ -69,7 +68,7 @@ void ModelRailway::create()
 
 			if (child.nodeName() == "gruppe")
 			{
-				Area * area = new Area(this, child.toElement(), type == "Bahnhof");
+				Area * area = new Area(this, child.toElement(), type(child) == "Bahnhof");
 
 				add(area);
 			}
