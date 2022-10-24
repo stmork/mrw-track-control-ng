@@ -31,7 +31,7 @@ namespace mrw::model
 			const QDomElement  &  element,
 			const bool            is_main);
 
-		void link();
+		void link() override;
 	};
 }
 

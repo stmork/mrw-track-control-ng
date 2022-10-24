@@ -32,7 +32,7 @@ namespace mrw::model
 			const bool            is_main,
 			const unsigned        light_count);
 
-		void link();
+		void link() override;
 	};
 }
 
