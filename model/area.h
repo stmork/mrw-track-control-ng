@@ -12,6 +12,7 @@
 
 #include <QDomElement>
 
+#include "util/string.h"
 #include "model/module.h"
 
 namespace mrw::model
@@ -19,7 +20,7 @@ namespace mrw::model
 	class ModelRailway;
 	class Section;
 
-	class Area
+	class Area : public mrw::util::String
 	{
 		const QString           name;
 		const bool              is_station;
@@ -40,6 +41,8 @@ namespace mrw::model
 		{
 			return sections.at(index);
 		}
+
+		QString toString() const override;
 	};
 }
 

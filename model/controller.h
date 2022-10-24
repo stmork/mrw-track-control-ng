@@ -13,6 +13,7 @@
 
 #include <QDomElement>
 
+#include "util/string.h"
 #include "model/module.h"
 
 namespace mrw::model
@@ -22,7 +23,7 @@ namespace mrw::model
 	class ModelRailway;
 	class MultiplexConnection;
 
-	class Controller
+	class Controller : public mrw::util::String
 	{
 		const ControllerId  controller_id;
 		ModelRailway    *   model = nullptr;
@@ -53,6 +54,8 @@ namespace mrw::model
 		{
 			return connections.at(index);
 		}
+
+		virtual QString toString() const override;
 	};
 }
 

@@ -20,7 +20,8 @@ SOURCES += \
 	model/section.cpp \
 	model/sectionmodule.cpp \
 	model/signal.cpp \
-	model/switchmodule.cpp
+	model/switchmodule.cpp \
+	util/method.cpp
 
 HEADERS += \
 	mainwindow.h \
@@ -40,7 +41,9 @@ HEADERS += \
 	model/section.h \
 	model/sectionmodule.h \
 	model/signal.h \
-	model/switchmodule.h
+	model/switchmodule.h \
+	util/method.h \
+	util/string.h
 
 FORMS += \
 	mainwindow.ui
@@ -51,7 +54,7 @@ FORMS += \
 #
 #####################################################################
 
-astyle.commands = astyle *.cpp *.h model/*.cpp model/*.h
+astyle.commands = astyle *.cpp *.h */*.cpp */*.h
 
 cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--inline-suppr\
@@ -59,7 +62,7 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--language=c++ --std=c++14\
 	--library=qt\
 	--xml-version=2 --force -q\
-	*.h *.cpp model/*.cpp model/*.h 2>cppcheck.xml
+	*.h *.cpp */*.cpp */*.h 2>cppcheck.xml
 
 QMAKE_EXTRA_TARGETS += cppcheck astyle $$TARGET
 QMAKE_CLEAN         += cppcheck.xml

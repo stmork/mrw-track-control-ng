@@ -8,6 +8,7 @@
 #include <QDomElement>
 
 #include "model/mrwmodel.h"
+#include "util/method.h"
 
 using namespace mrw::model;
 
@@ -47,6 +48,8 @@ void ModelRailway::dump() const
 
 void ModelRailway::create()
 {
+	__METHOD__;
+
 	const QDomElement  & model = xml.documentElement();
 	const QDomNodeList & child_nodes = model.childNodes();
 
@@ -64,6 +67,7 @@ void ModelRailway::create()
 				Controller * controller = new Controller(this, child.toElement());
 
 				add(controller);
+				qDebug() << *controller;
 			}
 
 			if (child.nodeName() == "gruppe")
@@ -71,9 +75,11 @@ void ModelRailway::create()
 				Area * area = new Area(this, child.toElement(), type(child) == "Bahnhof");
 
 				add(area);
+				qDebug() << *area;
 			}
 		}
 	}
+	qDebug() << *this;
 }
 
 void mrw::model::ModelRailway::link()
@@ -124,6 +130,11 @@ unsigned ModelRailway::value(const QDomElement & node, const char * attr, const 
 QString mrw::model::ModelRailway::string(const QDomElement & node, const char * attr)
 {
 	return node.attribute(attr);
+}
+
+QString mrw::model::ModelRailway::toString() const
+{
+	return QString("Modelrailway %1 with %2 controllers and %3 area(s).").arg(name).arg(controllers.size()).arg(areas.size());
 }
 
 bool ModelRailway::boolean(const QDomElement & node, const char * attr, const bool default_value)

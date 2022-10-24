@@ -113,3 +113,8 @@ void Controller::link()
 		connection->link();
 	}
 }
+
+QString Controller::toString() const
+{
+	return QString::asprintf("  Controller %03d", controller_id);
+}

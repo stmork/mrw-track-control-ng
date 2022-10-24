@@ -64,3 +64,8 @@ void mrw::model::Area::link()
 		section->link();
 	}
 }
+
+QString mrw::model::Area::toString() const
+{
+	return QString("  Area %1 (%2)").arg(name).arg(is_station ? "Station" : "rail road");
+}

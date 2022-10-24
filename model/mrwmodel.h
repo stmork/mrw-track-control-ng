@@ -17,11 +17,13 @@
 #include "model/area.h"
 #include "model/section.h"
 
+#include "util/string.h"
+
 namespace mrw::model
 {
 	class RailPart;
 
-	class ModelRailway
+	class ModelRailway : public mrw::util::String
 	{
 		QDomDocument               xml;
 		QString                    name;
@@ -83,6 +85,8 @@ namespace mrw::model
 		static bool     boolean(const QDomElement & node, const char * attr, const bool default_value = false);
 		static unsigned value(const QDomElement & node, const char * attr, const unsigned default_value = 0);
 		static QString  string(const QDomElement & node, const char * attr);
+
+		QString toString() const override;
 
 	private:
 		void dump(const QDomNode & node, const QString & indent = "") const;
