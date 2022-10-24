@@ -33,7 +33,7 @@ namespace mrw::util
 		 *
 		 * @param method_name The methods name. Use the \c __FUNCTION__ macro here.
 		 */
-		Method(const char * method_name);
+		explicit Method(const char * method_name);
 
 		/**
 		 * The destructor logs the exit of a method and the time spent inside
