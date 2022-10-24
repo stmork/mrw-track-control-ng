@@ -16,6 +16,22 @@ pipeline
 			}
 		}
 
+		stage ('Doxygen')
+		{
+			steps
+			{
+				sh 'doxygen'
+				publishHTML([
+					allowMissing: false,
+					alwaysLinkToLastBuild: false,
+					keepAll: false,
+					reportDir: 'doc/html',
+					reportFiles: 'index.html',
+					reportName: 'MRW-NG Doxygen',
+					reportTitles: ''])
+			}
+		}
+
 		stage('CppCheck')
 		{
 			steps

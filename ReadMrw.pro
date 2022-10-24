@@ -64,5 +64,5 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--xml-version=2 --force -q\
 	*.h *.cpp */*.cpp */*.h 2>cppcheck.xml
 
-QMAKE_EXTRA_TARGETS += cppcheck astyle $$TARGET
-QMAKE_CLEAN         += cppcheck.xml
+QMAKE_EXTRA_TARGETS += cppcheck astyle
+QMAKE_CLEAN         += $$TARGET cppcheck.xml *.qch

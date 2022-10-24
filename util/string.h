@@ -62,7 +62,7 @@ namespace mrw::util
 	 * This shift operator writes the contents of a String instance as human
 	 * readable text to the given QDebug instance.
 	 *
-	 * @param os The output stream to write to.
+	 * @param debug The output debug instance to write to.
 	 * @param instance The instance containing the binary data.
 	 * @return The given output stream for convenience.
 	 *
@@ -87,8 +87,8 @@ namespace mrw::util
 	@endcode
 	 *
 	 * @param left The C style const char pointer string.
-	 * @param right The Stringify based data.
-	 * @return a std::string instance of the concatenated string.
+	 * @param right The String based data.
+	 * @return a QString instance of the concatenated string.
 	 */
 	inline QString operator+(const QString & left, const String & right)
 	{
