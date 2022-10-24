@@ -1,5 +1,6 @@
-QT     += core gui widgets xml
-CONFIG += c++17
+QT             += core gui widgets xml
+CONFIG         += c++17
+QMAKE_CXXFLAGS += -Wextra -Wshadow -Wsuggest-override
 
 SOURCES += \
 	main.cpp \
