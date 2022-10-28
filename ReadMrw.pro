@@ -33,3 +33,18 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 QMAKE_EXTRA_TARGETS += cppcheck astyle
 QMAKE_CLEAN         += cppcheck.xml qtest*.xml valgrind*.xml
 QMAKE_CLEAN         += *.qch
+
+#####################################################################
+#
+# Extra target valgrind
+#
+#####################################################################
+
+valgrind.commands = valgrind\
+	--tool=memcheck --leak-check=full\
+	--show-reachable=no --undef-value-errors=no --track-origins=no\
+	--child-silent-after-fork=no --trace-children=no --gen-suppressions=no\
+	--xml=yes --xml-file=valgrind.xml test/MRW-Test
+
+QMAKE_EXTRA_TARGETS += valgrind
+QMAKE_CLEAN         += valgrind.xml
