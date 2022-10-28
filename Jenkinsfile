@@ -45,7 +45,7 @@ pipeline
 		{
 			steps
 			{
-				sh 'valgrind test/MRW-Test'
+				sh 'valgrind --xml=yes --xml-file=valgrind.xml test/MRW-Test'
 				xunit checksName: '', tools: [
 					QtTest(excludesPattern: '', pattern: 'qtest-*.xml', stopProcessingIfError: true),
 					Valgrind(excludesPattern: '', pattern: 'valgrind*.xml', stopProcessingIfError: false)]		
