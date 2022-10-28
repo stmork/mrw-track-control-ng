@@ -1,17 +1,15 @@
-QT += core gui widgets xml
+QT += core testlib
+CONFIG += testcase
 
 include(../common.pri)
 
 SOURCES += \
 	main.cpp \
-	mainwindow.cpp
-
-HEADERS += \
-	mainwindow.h
-
-FORMS += \
-	mainwindow.ui
+	testutil.cpp
 
 LIBS            += -lMRW-Model -lMRW-Util
 
 QMAKE_CLEAN     += $$TARGET
+
+HEADERS += \
+	testutil.h

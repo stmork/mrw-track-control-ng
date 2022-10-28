@@ -2,13 +2,16 @@ TEMPLATE = subdirs
 SUBDIRS  = \
 	model \
 	util \
+	test \
 	track-control-ng
 
 model.file                = model/MRW-Model.pro
 util.file                 = util/MRW-Util.pro
+test.file                 = test/MRW-Test.pro
 track-control-ng.file     = track-control-ng/MRW-Reader.pro
 
 model.depends             = util
+test.depends              = util model
 track-control-ng.depends  = util model
 
 #####################################################################

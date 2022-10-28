@@ -6,4 +6,3 @@ QMAKE_CXXFLAGS  += -Wsuggest-override
 INCLUDEPATH      = ..
 
 LIBS            += -L../model -L../util
-LIBS            += -lMRW-Model -lMRW-Util
