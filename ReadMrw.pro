@@ -1,54 +1,15 @@
-QT             += core gui widgets xml
-CONFIG         += c++17
-QMAKE_CXXFLAGS += -Wextra -Wshadow -Wsuggest-override
+TEMPLATE = subdirs
+SUBDIRS  = \
+	model \
+	util \
+	track-control-ng
 
-SOURCES += \
-	main.cpp \
-	mainwindow.cpp \
-	model/area.cpp \
-	model/controller.cpp \
-	model/formsignal.cpp \
-	model/light.cpp \
-	model/lightmodule.cpp \
-	model/lightsignal.cpp \
-	model/module.cpp \
-	model/mrwmodel.cpp \
-	model/multiplexconnection.cpp \
-	model/rail.cpp \
-	model/raildoubleswitch.cpp \
-	model/railpart.cpp \
-	model/railswitch.cpp \
-	model/section.cpp \
-	model/sectionmodule.cpp \
-	model/signal.cpp \
-	model/switchmodule.cpp \
-	util/method.cpp
+model.file             = model/MRW-Model.pro
+util.file              = util/MRW-Util.pro
+track-control-ng.file  = track-control-ng/MRW-Reader.pro
 
-HEADERS += \
-	mainwindow.h \
-	model/area.h \
-	model/controller.h \
-	model/formsignal.h \
-	model/light.h \
-	model/lightmodule.h \
-	model/lightsignal.h \
-	model/module.h \
-	model/mrwmodel.h \
-	model/multiplexconnection.h \
-	model/rail.h \
-	model/raildoubleswitch.h \
-	model/railpart.h \
-	model/railswitch.h \
-	model/section.h \
-	model/sectionmodule.h \
-	model/signal.h \
-	model/switchmodule.h \
-	util/method.h \
-	util/singleton.h \
-	util/string.h
-
-FORMS += \
-	mainwindow.ui
+model.depends          = util
+control.depends        = util model
 
 #####################################################################
 #
