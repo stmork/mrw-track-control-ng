@@ -44,6 +44,7 @@ HEADERS += \
 	model/signal.h \
 	model/switchmodule.h \
 	util/method.h \
+	util/singleton.h \
 	util/string.h
 
 FORMS += \
