@@ -4,12 +4,12 @@ SUBDIRS  = \
 	util \
 	track-control-ng
 
-model.file             = model/MRW-Model.pro
-util.file              = util/MRW-Util.pro
-track-control-ng.file  = track-control-ng/MRW-Reader.pro
+model.file                = model/MRW-Model.pro
+util.file                 = util/MRW-Util.pro
+track-control-ng.file     = track-control-ng/MRW-Reader.pro
 
-model.depends          = util
-control.depends        = util model
+model.depends             = util
+track-control-ng.depends  = util model
 
 #####################################################################
 #
