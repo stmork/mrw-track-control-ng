@@ -6,3 +6,17 @@ QMAKE_CXXFLAGS  += -Wsuggest-override
 INCLUDEPATH      = ..
 
 LIBS            += -L../model -L../util
+
+linux:CONFIG(gcov) {
+	CONFIG         += debug
+	CONFIG         -= release
+
+	QMAKE_CXXFLAGS += --coverage
+	QMAKE_LFLAGS   += --coverage
+	LIBS           += -lgcov
+	QMAKE_CLEAN    += ../*.info *.gcda *.gcno
+
+	message("=== Instrumenting code coverage...");
+}
+
+ QMAKE_CLEAN += *.gcno *gcda

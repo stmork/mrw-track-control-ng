@@ -20,7 +20,7 @@ track-control-ng.depends  = util model
 #
 #####################################################################
 
-astyle.commands = astyle *.cpp *.h */*.cpp */*.h
+astyle.commands = astyle */*.cpp */*.h
 
 cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--inline-suppr\
@@ -28,7 +28,8 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--language=c++ --std=c++14\
 	--library=qt\
 	--xml-version=2 --force -q\
-	*.h *.cpp */*.cpp */*.h 2>cppcheck.xml
+	*/*.cpp */*.h 2>cppcheck.xml
 
 QMAKE_EXTRA_TARGETS += cppcheck astyle
-QMAKE_CLEAN         += $$TARGET cppcheck.xml *.qch
+QMAKE_CLEAN         += cppcheck.xml qtest*.xml valgrind*.xml
+QMAKE_CLEAN         += *.qch

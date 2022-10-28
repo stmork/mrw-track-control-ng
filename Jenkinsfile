@@ -4,13 +4,13 @@ pipeline
 
 	stages
 	{
-		stage('Build')
+		stage ('Build')
 		{
 			steps
 			{
 				sh """
 				test -f Makefile && make clean distclean
-				qmake -r
+				qmake -r CONFIG+=gcov
 				make -j
 				"""
 			}
@@ -32,12 +32,23 @@ pipeline
 			}
 		}
 
-		stage('CppCheck')
+		stage ('CppCheck')
 		{
 			steps
 			{
 				sh 'make cppcheck'
 				publishCppcheck pattern: 'cppcheck.xml'
+			}
+		}
+
+		stage ('Test')
+		{
+			steps
+			{
+				sh 'valgrind test/MRW-Test'
+				xunit checksName: '', tools: [
+					QtTest(excludesPattern: '', pattern: 'qtest-*.xml', stopProcessingIfError: true),
+					Valgrind(excludesPattern: '', pattern: 'valgrind*.xml', stopProcessingIfError: false)]		
 			}
 		}
 	}

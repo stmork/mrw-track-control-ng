@@ -17,7 +17,7 @@ namespace mrw::test
 		Q_OBJECT
 
 	public:
-		explicit TestUtil(QObject *parent = nullptr);
+		explicit TestUtil(QObject * parent = nullptr);
 
 	private slots:
 		void testMethod();

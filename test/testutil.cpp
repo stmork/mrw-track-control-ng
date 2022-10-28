@@ -10,7 +10,7 @@
 
 using namespace mrw::test;
 
-TestUtil::TestUtil(QObject *parent) : QObject(parent)
+TestUtil::TestUtil(QObject * parent) : QObject(parent)
 {
 }
 
