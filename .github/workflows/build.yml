@@ -1,4 +1,4 @@
-name: Yakindu SCT C++11 Timer Service.
+name: Track control NG for model railways.
 on: [push]
 
 jobs:
