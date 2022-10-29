@@ -14,9 +14,6 @@ linux:CONFIG(gcov) {
 	QMAKE_CXXFLAGS += --coverage
 	QMAKE_LFLAGS   += --coverage
 	LIBS           += -lgcov
-	QMAKE_CLEAN    += ../*.info *.gcda *.gcno
-
-	message("=== Instrumenting code coverage...");
 }
 
- QMAKE_CLEAN += *.gcno *gcda
+QMAKE_CLEAN += *.gcno *gcda

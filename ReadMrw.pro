@@ -5,6 +5,8 @@ SUBDIRS  = \
 	test \
 	track-control-ng
 
+QMAKE_CLEAN              += qtest*.xml valgrind*.xml
+
 model.file                = model/MRW-Model.pro
 util.file                 = util/MRW-Util.pro
 test.file                 = test/MRW-Test.pro
@@ -16,7 +18,7 @@ track-control-ng.depends  = util model
 
 #####################################################################
 #
-# Extra cppcheck target
+# Extra astyle and cppcheck target
 #
 #####################################################################
 
@@ -31,8 +33,18 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	*/*.cpp */*.h 2>cppcheck.xml
 
 QMAKE_EXTRA_TARGETS += cppcheck astyle
-QMAKE_CLEAN         += cppcheck.xml qtest*.xml valgrind*.xml
-QMAKE_CLEAN         += *.qch
+QMAKE_CLEAN         += cppcheck.xml
+
+#####################################################################
+#
+# Extra Doxygen target
+#
+#####################################################################
+
+doxygen.commands = doxygen
+
+QMAKE_EXTRA_TARGETS += doxygen
+QMAKE_CLEAN         += $$_PRO_FILE_PWD_/doc/ *.qch
 
 #####################################################################
 #
@@ -48,3 +60,18 @@ valgrind.commands = valgrind\
 
 QMAKE_EXTRA_TARGETS += valgrind
 QMAKE_CLEAN         += valgrind.xml
+
+#####################################################################
+#
+# Extra target lcov
+#
+#####################################################################
+
+LCOV_DIR       = $$_PRO_FILE_PWD_/lcov-out
+
+#  --no-external
+lcov.commands += lcov -c -d $$_PRO_FILE_PWD_ -o coverage.info;
+lcov.commands += genhtml coverage.info --legend --title=\"MRW-NG Test Coverage\" --output-directory $$LCOV_DIR --rc genhtml_med_limit=50
+
+QMAKE_EXTRA_TARGETS += lcov
+QMAKE_CLEAN         += $$LCOV_DIR/ coverage.info

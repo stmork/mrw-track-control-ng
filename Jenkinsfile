@@ -9,6 +9,7 @@ pipeline
 			steps
 			{
 				sh """
+				rm -rf doc lcov-out
 				test -f Makefile && make clean distclean
 				qmake -r CONFIG+=gcov
 				make -j
@@ -20,7 +21,7 @@ pipeline
 		{
 			steps
 			{
-				sh 'doxygen'
+				sh 'make doxygen'
 				publishHTML([
 					allowMissing: false,
 					alwaysLinkToLastBuild: false,
@@ -48,7 +49,23 @@ pipeline
 				sh 'make valgrind'
 				xunit checksName: '', tools: [
 					QtTest(excludesPattern: '', pattern: 'qtest-*.xml', stopProcessingIfError: true),
-					Valgrind(excludesPattern: '', pattern: 'valgrind*.xml', stopProcessingIfError: false)]		
+					Valgrind(excludesPattern: '', pattern: 'valgrind*.xml', stopProcessingIfError: false)]
+			}
+		}
+
+		stage ('Coverage')
+		{
+			steps
+			{
+				sh 'make lcov'
+				publishHTML([
+					allowMissing: false,
+					alwaysLinkToLastBuild: false,
+					keepAll: false,
+					reportDir: 'lcov-out',
+					reportFiles: 'index.html',
+					reportName: 'MRW-NG Coverage Report',
+					reportTitles: ''])
 			}
 		}
 	}
