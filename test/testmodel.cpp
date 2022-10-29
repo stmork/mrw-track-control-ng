@@ -37,7 +37,7 @@ void TestModel::testController()
 {
 	const size_t count = model->controllerCount();
 
-	for(unsigned i = 0; i < count; i++)
+	for (unsigned i = 0; i < count; i++)
 	{
 		Controller * controller = model->controller(i);
 
@@ -52,7 +52,7 @@ void TestModel::testArea()
 {
 	const size_t count = model->areaCount();
 
-	for(unsigned i = 0; i < count; i++)
+	for (unsigned i = 0; i < count; i++)
 	{
 		Area * area = model->area(i);
 
