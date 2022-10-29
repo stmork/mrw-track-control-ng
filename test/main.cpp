@@ -6,6 +6,7 @@
 #include <QTest>
 #include <QDebug>
 
+#include "testmodel.h"
 #include "testutil.h"
 
 using namespace mrw::test;
@@ -23,12 +24,13 @@ static int testUtil()
 
 static int testModel()
 {
+	TestModel   test("Test-Railway");
 	QStringList args
 	{
 		"MRW-Test", "-o", "qtest-model.xml", "-xml"
 	};
 
-	return EXIT_SUCCESS;
+	return QTest::qExec(&test, args);
 }
 
 int main(int argc, char * argv[])

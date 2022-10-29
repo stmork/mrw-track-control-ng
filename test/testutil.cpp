@@ -5,7 +5,8 @@
 
 #include <unistd.h>
 
-#include "util/method.h"
+#include <util/method.h>
+
 #include "testutil.h"
 
 using namespace mrw::test;

@@ -47,6 +47,11 @@ namespace mrw::model
 			return controllers.at(idx);
 		}
 
+		inline size_t controllerCount() const
+		{
+			return controllers.size();
+		}
+
 		inline Module * module(
 			const ControllerId controller_idx,
 			const ModuleId     module_idx) const
@@ -64,6 +69,11 @@ namespace mrw::model
 		inline Area * area(const size_t index) const
 		{
 			return areas.at(index);
+		}
+
+		inline size_t areaCount() const
+		{
+			return areas.size();
 		}
 
 		inline Section * section(

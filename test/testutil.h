@@ -24,4 +24,4 @@ namespace mrw::test
 	};
 }
 
-#endif // MRW_TEST_TESTUTIL_H
+#endif
