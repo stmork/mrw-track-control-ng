@@ -67,11 +67,10 @@ QMAKE_CLEAN         += valgrind.xml
 #
 #####################################################################
 
-LCOV_DIR       = $$_PRO_FILE_PWD_/lcov-out
+LCOV_DIR = $$(PWD)/lcov-out
 
-#  --no-external
-lcov.commands += lcov -c -d $$_PRO_FILE_PWD_ -o coverage.info;
-lcov.commands += genhtml coverage.info --legend --title=\"MRW-NG Test Coverage\" --output-directory $$LCOV_DIR --rc genhtml_med_limit=50
+lcov.commands += lcov --no-external -c -d $$(PWD) -o coverage.info;
+lcov.commands += genhtml coverage.info -s --num-spaces 4 --legend -t \"MRW-NG Test Coverage\" --output-directory $$LCOV_DIR --rc genhtml_med_limit=50
 
 QMAKE_EXTRA_TARGETS += lcov
 QMAKE_CLEAN         += $$LCOV_DIR/ coverage.info
