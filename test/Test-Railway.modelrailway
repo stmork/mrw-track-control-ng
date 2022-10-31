@@ -6,7 +6,16 @@
   </controller>
   <controller id="2">
     <module xsi:type="Modelrailway:Gleismodul" nummer="201" abschnitte="//@gruppe.0/@abschnitt.4 //@gruppe.1/@abschnitt.0 //@gruppe.1/@abschnitt.1 //@gruppe.2/@abschnitt.4"/>
-    <module xsi:type="Modelrailway:Beleuchtungsmodul" nummer="202"/>
+    <module xsi:type="Modelrailway:Beleuchtungsmodul" nummer="202">
+      <lampen name="Licht 1" unit_no="210" schwellwert="30"/>
+      <lampen name="Licht 2" unit_no="220" schwellwert="40" typ="1"/>
+      <lampen name="Licht 3" unit_no="230" schwellwert="50" typ="2"/>
+      <lampen name="Licht 4" unit_no="240" schwellwert="60" typ="3"/>
+      <lampen name="Licht 5" unit_no="250" schwellwert="70" typ="4"/>
+      <lampen name="Licht 6" unit_no="260" schwellwert="80" typ="5"/>
+      <lampen name="Licht 7" unit_no="270" schwellwert="90" typ="6"/>
+      <lampen name="Licht 8" unit_no="280" schwellwert="100" typ="7"/>
+    </module>
   </controller>
   <controller id="3">
     <module xsi:type="Modelrailway:Gleismodul" nummer="301" abschnitte="//@gruppe.2/@abschnitt.0 //@gruppe.2/@abschnitt.1 //@gruppe.2/@abschnitt.2 //@gruppe.2/@abschnitt.3"/>

@@ -6,3 +6,4 @@
 moc_*
 ui_*.h
 .qmake.stash
+RemoteSystemsTempFiles/
