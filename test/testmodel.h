@@ -18,7 +18,7 @@ namespace mrw::test
 	{
 		Q_OBJECT
 
-	private:
+	protected:
 		QString                    filename;
 		mrw::model::ModelRailway * model = nullptr;
 

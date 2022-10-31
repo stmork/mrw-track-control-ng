@@ -6,10 +6,14 @@ include(../common.pri)
 SOURCES += \
 	main.cpp \
 	testmodel.cpp \
+	testswitch.cpp \
+	testlight.cpp \
 	testutil.cpp
 
 HEADERS += \
 	testmodel.h \
+	testswitch.h \
+	testlight.h \
 	testutil.h
 
 LIBS            += -lMRW-Model -lMRW-Util

@@ -7,6 +7,7 @@
 #include <QDebug>
 
 #include "testmodel.h"
+#include "testswitch.h"
 #include "testutil.h"
 
 using namespace mrw::test;
@@ -33,6 +34,28 @@ static int testModel()
 	return QTest::qExec(&test, args);
 }
 
+static int testSimpleSwitch()
+{
+	TestSwitch test;
+	QStringList args
+	{
+		"MRW-Test", "-o", "qtest-switch.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
+static int testSimpleLight()
+{
+	TestSwitch test;
+	QStringList args
+	{
+		"MRW-Test", "-o", "qtest-light.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
 int main(int argc, char * argv[])
 {
 	Q_UNUSED(argc)
@@ -42,6 +65,8 @@ int main(int argc, char * argv[])
 
 	status += testUtil();
 	status += testModel();
+	status += testSimpleSwitch();
+	status += testSimpleLight();
 
 	return status;
 }
