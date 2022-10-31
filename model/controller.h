@@ -45,7 +45,7 @@ namespace mrw::model
 			return controller_id;
 		}
 
-		inline Module * module(const ModuleId index) const
+		inline Module * module(const int index) const
 		{
 			return modules.at(index);
 		}

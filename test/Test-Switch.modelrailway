@@ -17,7 +17,7 @@
       <bauelement xsi:type="Modelrailway:Weiche" name="switch 3" modul="//@controller.0/@module.0" unit_no="2019" neu="true"/>
       <bauelement xsi:type="Modelrailway:Weiche" name="switch 4" modul="//@controller.0/@module.0" unit_no="2001" neu="true"/>
       <bauelement xsi:type="Modelrailway:Vorsignal" name="a" unit_no="102" anschluss="//@controller.0/@anschluesse.0"/>
-      <bauelement xsi:type="Modelrailway:Gleissperrsignal" unit_no="103" anschluss="//@controller.0/@anschluesse.0"/>
+      <bauelement xsi:type="Modelrailway:Gleissperrsignal" name="I" unit_no="103" anschluss="//@controller.0/@anschluesse.0"/>
     </abschnitt>
     <abschnitt name="area 3" unit_no="203" modul="//@controller.0/@module.1"/>
     <abschnitt name="area 4" unit_no="204" modul="//@controller.0/@module.1"/>

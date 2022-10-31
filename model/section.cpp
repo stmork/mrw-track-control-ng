@@ -125,7 +125,8 @@ Section::Section(
 			}
 		}
 	}
-	module = resolve(ModelRailway::string(element, "module").toStdString());
+
+	section_module = resolve(ModelRailway::string(element, "modul").toStdString());
 }
 
 Section::~Section()

@@ -11,6 +11,7 @@ SOURCES += \
 	testutil.cpp
 
 HEADERS += \
+	testdef.h \
 	testmodel.h \
 	testswitch.h \
 	testlight.h \

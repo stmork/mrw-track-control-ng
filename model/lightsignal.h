@@ -23,7 +23,7 @@ namespace mrw::model
 
 		const unsigned lights;
 
-		MultiplexConnection * connection = nullptr;
+		MultiplexConnection * mux_connection = nullptr;
 
 	public:
 		explicit LightSignal(
@@ -33,6 +33,11 @@ namespace mrw::model
 			const unsigned        light_count);
 
 		void link() override;
+
+		inline MultiplexConnection * connection() const
+		{
+			return mux_connection;
+		}
 	};
 }
 

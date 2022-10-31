@@ -28,7 +28,7 @@ namespace mrw::model
 		const QString            name;
 		const UnitNo             unit_no;
 		ModelRailway      *      model  = nullptr;
-		SectionModule       *       module = nullptr;
+		SectionModule      *     section_module = nullptr;
 		std::vector<RailPart *>  rail_parts;
 
 	public:
@@ -45,9 +45,19 @@ namespace mrw::model
 		void add(RailPart * rait_part);
 		void link();
 
-		inline RailPart * railPart(const UnitNo no) const
+		inline RailPart * railPart(const int idx) const
 		{
-			return rail_parts.at(no);
+			return rail_parts.at(idx);
+		}
+
+		inline size_t railPartCount() const
+		{
+			return rail_parts.size();
+		}
+
+		inline SectionModule * module() const
+		{
+			return section_module;
 		}
 
 	protected:

@@ -20,9 +20,8 @@ namespace mrw::model
 	{
 		static const std::regex path_regex;
 
-		const QString      name;
-
 	protected:
+		const QString      name;
 		ModelRailway   *   model = nullptr;
 		const QDomElement  reference;
 

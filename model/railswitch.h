@@ -7,10 +7,14 @@
 #define MRW_MODEL_RAILSWITCH_H
 
 #include "railpart.h"
+#include "model/switchmodulereference.h"
 
 namespace mrw::model
 {
-	class RailSwitch : public RailPart
+	class SwitchModule;
+	class SwitchModuleReference;
+
+	class RailSwitch : public RailPart, public SwitchModuleReference
 	{
 		const bool           left_branch;
 		const bool           right_branch;

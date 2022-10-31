@@ -13,19 +13,18 @@
       <lampen name="Light 7" unit_no="306" schwellwert="96" typ="6"/>
       <lampen name="Light 8" unit_no="307" schwellwert="108" typ="7"/>
     </module>
-    <module xsi:type="Modelrailway:Beleuchtungsmodul" nummer="2"/>
     <module xsi:type="Modelrailway:Gleismodul" nummer="3" abschnitte="//@gruppe.0/@abschnitt.0 //@gruppe.0/@abschnitt.1 //@gruppe.0/@abschnitt.2 //@gruppe.0/@abschnitt.3"/>
   </controller>
   <gruppe xsi:type="Modelrailway:Bahnhof">
-    <abschnitt name="area 1" unit_no="201" modul="//@controller.0/@module.2">
+    <abschnitt name="area 1" unit_no="201" modul="//@controller.0/@module.1">
       <bauelement xsi:type="Modelrailway:Einfahrsignal" name="A" unit_no="100" anschluss="//@controller.0/@anschluesse.1"/>
       <bauelement xsi:type="Modelrailway:Vorsignal" name="b" unit_no="101" anschluss="//@controller.0/@anschluesse.1"/>
     </abschnitt>
-    <abschnitt name="area 2" unit_no="202" modul="//@controller.0/@module.2">
+    <abschnitt name="area 2" unit_no="202" modul="//@controller.0/@module.1">
       <bauelement xsi:type="Modelrailway:Vorsignal" name="a" unit_no="102" anschluss="//@controller.0/@anschluesse.0"/>
       <bauelement xsi:type="Modelrailway:Gleissperrsignal" unit_no="103" anschluss="//@controller.0/@anschluesse.0"/>
     </abschnitt>
-    <abschnitt name="area 3" unit_no="203" modul="//@controller.0/@module.2"/>
-    <abschnitt name="area 4" unit_no="204" modul="//@controller.0/@module.2"/>
+    <abschnitt name="area 3" unit_no="203" modul="//@controller.0/@module.1"/>
+    <abschnitt name="area 4" unit_no="204" modul="//@controller.0/@module.1"/>
   </gruppe>
 </Modelrailway:Modell>

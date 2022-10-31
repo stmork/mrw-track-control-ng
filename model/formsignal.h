@@ -10,20 +10,14 @@
 
 #include <regex>
 
-#include "model/module.h"
 #include "model/signal.h"
+#include "model/switchmodulereference.h"
 
 namespace mrw::model
 {
-	class SwitchModule;
-
-	class FormSignal : public Signal
+	class FormSignal : public Signal, public SwitchModuleReference
 	{
-		static const std::regex path_regex;
-
 		const unsigned inductors;
-
-		SwitchModule * module = nullptr;
 
 	public:
 		explicit FormSignal(

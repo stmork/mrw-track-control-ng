@@ -21,7 +21,8 @@ SOURCES += \
 	section.cpp \
 	sectionmodule.cpp \
 	signal.cpp \
-	switchmodule.cpp
+	switchmodule.cpp \
+	switchmodulereference.cpp
 
 HEADERS += \
 	area.h \
@@ -40,6 +41,7 @@ HEADERS += \
 	section.h \
 	sectionmodule.h \
 	signal.h \
-	switchmodule.h
+	switchmodule.h \
+	switchmodulereference.h
 
 QMAKE_CLEAN         += $$TARGET

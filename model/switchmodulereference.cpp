@@ -3,8 +3,11 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <QtGlobal>
+
 #include "model/mrwmodel.h"
-#include "model/lightsignal.h"
+#include "model/switchmodule.h"
+#include "model/switchmodulereference.h"
 
 using namespace mrw::model;
 
@@ -37,38 +40,26 @@ using namespace mrw::model;
  *
  * The following test patterns may be used:
  * @verbatim
-//@controller.9/@anschluesse.1
-//@controller.11/@anschluesse.0
+//@controller.3/@module.0
+//@controller.7/@module.1
 @endverbatim
  */
-const std::regex  LightSignal::path_regex(R"(^\/\/@controller\.(\d+)\/@anschluesse\.(\d+))");
+const std::regex  SwitchModuleReference::path_regex(R"(^\/\/@controller\.(\d+)\/@module\.(\d+))");
 
-LightSignal::LightSignal(
+SwitchModuleReference::SwitchModuleReference(
 	ModelRailway     *    model_railway,
-	const QDomElement  &  element,
-	const bool            is_main,
-	const unsigned        light_count) :
-	Signal(model_railway, element, is_main),
-	lights(light_count)
+	const QDomElement  &  element)
 {
-	const std::string & path = reference.attribute("anschluss").toStdString();
-	std::smatch         matcher;
+	std::string path = ModelRailway::string(element, "modul").toStdString();
+	std::smatch matcher;
 
 	if (std::regex_match(path, matcher, path_regex))
 	{
 		Q_ASSERT(matcher.size() >= 3);
 
-		const unsigned controller_idx = std::stoul(matcher[1]);
-		const unsigned conn_idx       = std::stoul(matcher[2]);
+		const unsigned constroller_idx = std::stoul(matcher[1]);
+		const unsigned module_idx      = std::stoul(matcher[2]);
 
-		mux_connection = model->connection(controller_idx, conn_idx);
+		switch_module = static_cast<SwitchModule *>(model_railway->module(constroller_idx, module_idx));
 	}
-	else
-	{
-		qWarning().noquote() << "Signal" << name << "has no connection module!";
-	}
-}
-
-void mrw::model::LightSignal::link()
-{
 }

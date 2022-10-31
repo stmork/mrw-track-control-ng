@@ -12,6 +12,7 @@ RailSwitch::RailSwitch(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) :
 	RailPart(model_railway, element),
+	SwitchModuleReference(model_railway, element),
 	left_branch( ModelRailway::boolean(element, "bIstAbzweig", false)),
 	right_branch(ModelRailway::boolean(element, "cIstAbzweig", false)),
 	left_prio(   ModelRailway::boolean(element, "bIstBevorzugt", false)),

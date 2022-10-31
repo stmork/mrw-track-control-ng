@@ -29,8 +29,9 @@ namespace mrw::test
 		void initTestCase();
 		void cleanupTestCase();
 
-		void testController();
-		void testArea();
+		void testControllers();
+		void testAreas();
+		void testSections();
 	};
 }
 

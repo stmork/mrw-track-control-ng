@@ -6,11 +6,12 @@
 #ifndef MRW_MODEL_RAILDOUBLESWITCH_H
 #define MRW_MODEL_RAILDOUBLESWITCH_H
 
-#include "railpart.h"
+#include "model/railpart.h"
+#include "model/switchmodulereference.h"
 
 namespace mrw::model
 {
-	class RailDoubleSwitch : public RailPart
+	class RailDoubleSwitch : public RailPart, public SwitchModuleReference
 	{
 		const bool ad_branch;
 		const bool bc_branch;

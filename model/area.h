@@ -42,6 +42,12 @@ namespace mrw::model
 			return sections.at(index);
 		}
 
+
+		inline size_t sectionCount() const
+		{
+			return sections.size();
+		}
+
 		QString toString() const override;
 	};
 }
