@@ -12,7 +12,7 @@
 
 #include <QDomElement>
 
-#include "util/string.h"
+#include "util/stringutil.h"
 #include "model/module.h"
 
 namespace mrw::model

@@ -5,8 +5,8 @@
 
 #pragma once
 
-#ifndef MRW_UTIL_STRING_H
-#define MRW_UTIL_STRING_H
+#ifndef MRW_UTIL_STRINGUTIL_H
+#define MRW_UTIL_STRINGUTIL_H
 
 #include <ostream>
 
@@ -39,6 +39,46 @@ namespace mrw::util
 		{
 			return toString();
 		}
+
+		/**
+		 * This method surrounds a string with a given console format command.
+		 * After the given input string to format command is reset.
+		 *
+		 * @param code The format command to switch on.
+		 * @param input The input string to surround with format commands.
+		 * @return The formatted string.
+		 */
+		static inline QString format(
+			const QString & code,
+			const QString & input)
+		{
+			return code + input + ALL_OFF;
+		}
+
+		/**
+		 * This method surrounds a string with a console format code to
+		 * print the input string as bold. After the given input string to
+		 * format command is reset.
+		 *
+		 * @param input The input string to surround with format commands.
+		 * @return The formatted string.
+		 */
+		static inline QString Bold(const QString & input)
+		{
+			return format(BOLD_ON, input);
+		}
+
+		static const QString RED_ON;
+		static const QString GREEN_ON;
+		static const QString BLUE_ON;
+		static const QString MAGENTA_ON;
+		static const QString CYAN_ON;
+		static const QString WHITE_ON;
+
+		static const QString BOLD_ON;
+		static const QString ITALIC_ON;
+		static const QString UNDERLINE_ON;
+		static const QString ALL_OFF;
 	};
 
 	/**
@@ -76,6 +116,7 @@ namespace mrw::util
 
 		return debug;
 	}
+
 	/**
 	 * This add operator allows convenient concatenation of a const char
 	 * pointer string with a std::string. So you can use a Stringify instance

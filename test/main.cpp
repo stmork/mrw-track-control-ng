@@ -11,6 +11,7 @@
 #include "testutil.h"
 
 using namespace mrw::test;
+using namespace mrw::util;
 
 static int testUtil()
 {
@@ -67,6 +68,17 @@ int main(int argc, char * argv[])
 	status += testModel();
 	status += testSimpleSwitch();
 	status += testSimpleLight();
+
+	if (status == 0)
+	{
+		qDebug().noquote() << "All tests" << String::format(
+				String::GREEN_ON + String::BOLD_ON, "OK!");
+	}
+	else
+	{
+		qDebug().noquote() << status << "tests" << String::format(
+				String::RED_ON + String::BOLD_ON, "failed!");
+	}
 
 	return status;
 }

@@ -17,7 +17,7 @@
 #include "model/area.h"
 #include "model/section.h"
 
-#include "util/string.h"
+#include "util/stringutil.h"
 
 namespace mrw::model
 {

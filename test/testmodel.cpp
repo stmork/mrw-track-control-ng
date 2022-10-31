@@ -12,9 +12,9 @@ using namespace mrw::test;
 using namespace mrw::model;
 
 TestModel::TestModel(const char * modelname, QObject * parent) :
-	QObject(parent)
+	QObject(parent),
+	filename(QString(modelname) + ".modelrailway")
 {
-	filename = QString(modelname) + ".modelrailway";
 	if (!QFile::exists(filename))
 	{
 		filename = "test/" + filename;
@@ -42,7 +42,6 @@ void TestModel::testController()
 		Controller * controller = model->controller(i);
 
 		QVERIFY(controller != nullptr);
-		QCOMPARE(controller->id(), 101 + i);
 	}
 
 	QVERIFY_EXCEPTION_THROWN(model->controller(count), std::out_of_range);

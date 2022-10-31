@@ -10,7 +10,7 @@
 using namespace mrw::test;
 using namespace mrw::model;
 
-TestLight::TestLight() : TestModel("Test-Switch")
+TestLight::TestLight() : TestModel("Test-Light")
 {
 }
 
