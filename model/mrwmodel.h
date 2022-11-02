@@ -13,11 +13,10 @@
 
 #include <vector>
 
-#include "model/controller.h"
-#include "model/area.h"
-#include "model/section.h"
-
 #include "util/stringutil.h"
+#include <model/controller.h>
+#include <model/area.h>
+#include <model/section.h>
 
 namespace mrw::model
 {

@@ -10,7 +10,7 @@
 
 #include <vector>
 
-#include "model/module.h"
+#include <model/module.h>
 
 namespace mrw::model
 {

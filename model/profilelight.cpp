@@ -12,5 +12,4 @@ ProfileLight::ProfileLight(const QDomElement & element) :
 	Light(element),
 	profile(ModelRailway::value(element, "typ"))
 {
-
 }

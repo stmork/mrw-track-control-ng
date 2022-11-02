@@ -33,7 +33,7 @@ MultiplexConnection::MultiplexConnection(
 
 			if (node_name == "lichter")
 			{
-				Light *light = new Light(child);
+				Light * light = new Light(child);
 
 				lights.push_back(light);
 			}
@@ -47,7 +47,7 @@ MultiplexConnection::MultiplexConnection(
 
 MultiplexConnection::~MultiplexConnection()
 {
-	for(Light * light : lights)
+	for (Light * light : lights)
 	{
 		delete light;
 	}
