@@ -5,6 +5,7 @@
 
 #include <QStringList>
 
+#include "util/stringutil.h"
 #include "model/mrwmodel.h"
 #include "model/multiplexconnection.h"
 #include "model/lightsignal.h"
@@ -22,7 +23,7 @@ MultiplexConnection::MultiplexConnection(
 
 void mrw::model::MultiplexConnection::link()
 {
-	QStringList references = reference.attribute("lichtsignale").split(' ', QString::SkipEmptyParts);
+	QStringList references = reference.attribute("lichtsignale").split(' ', SKIP_EMPTY_PARTS);
 
 	for (const QString & signal_reference : references)
 	{

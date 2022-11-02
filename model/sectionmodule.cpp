@@ -5,6 +5,7 @@
 
 #include <QStringList>
 
+#include "util/stringutil.h"
 #include "model/mrwmodel.h"
 #include "model/section.h"
 #include "model/sectionmodule.h"
@@ -56,7 +57,7 @@ SectionModule::SectionModule(
 
 void SectionModule::link()
 {
-	QStringList references = reference.attribute("abschnitte").split(' ', QString::SkipEmptyParts);
+	QStringList references = reference.attribute("abschnitte").split(' ', SKIP_EMPTY_PARTS);
 
 	for (const QString & part_reference : references)
 	{
