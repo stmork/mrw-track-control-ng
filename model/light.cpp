@@ -10,7 +10,7 @@ using namespace mrw::model;
 
 Light::Light(const QDomElement & element) :
 	name(ModelRailway::string(element, "name")),
-	type(ModelRailway::value(element, "type")),
+	unit_no(ModelRailway::value(element, "unit_no")),
 	threshold(ModelRailway::value(element, "schwellwert"))
 {
 }

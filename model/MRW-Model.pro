@@ -14,6 +14,7 @@ SOURCES += \
 	module.cpp \
 	mrwmodel.cpp \
 	multiplexconnection.cpp \
+	profilelight.cpp \
 	rail.cpp \
 	raildoubleswitch.cpp \
 	railpart.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
 	module.h \
 	mrwmodel.h \
 	multiplexconnection.h \
+	profilelight.h \
 	rail.h \
 	raildoubleswitch.h \
 	railpart.h \

@@ -9,13 +9,15 @@
 #define MRW_MODEL_LIGHT_H
 
 #include <QDomElement>
+#include <model/module.h>
 
 namespace mrw::model
 {
 	class Light
 	{
+	protected:
 		const QString  name;
-		const unsigned type;
+		const UnitNo   unit_no;
 		const unsigned threshold;
 
 	public:

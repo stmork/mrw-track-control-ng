@@ -37,7 +37,7 @@ static int testModel()
 
 static int testSimpleSwitch()
 {
-	TestSwitch test;
+	TestSwitch  test;
 	QStringList args
 	{
 		"MRW-Test", "-o", "qtest-switch.xml", "-xml"
@@ -48,7 +48,7 @@ static int testSimpleSwitch()
 
 static int testSimpleLight()
 {
-	TestSwitch test;
+	TestSwitch  test;
 	QStringList args
 	{
 		"MRW-Test", "-o", "qtest-light.xml", "-xml"

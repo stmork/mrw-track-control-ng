@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<Modelrailway:Modell xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Modelrailway="http://www.morknet.de/Modelrailway" name="Yakindu">
+<Modelrailway:Modell xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Modelrailway="http://www.morknet.de/Modelrailway" name="Test Railway">
   <controller id="1">
     <module xsi:type="Modelrailway:Gleismodul" nummer="101" abschnitte="//@gruppe.0/@abschnitt.0 //@gruppe.0/@abschnitt.1 //@gruppe.0/@abschnitt.2 //@gruppe.0/@abschnitt.3"/>
     <module xsi:type="Modelrailway:Impulsmodul" nummer="102" magnetartikel="//@gruppe.0/@abschnitt.2/@bauelement.0 //@gruppe.0/@abschnitt.2/@bauelement.1"/>
   </controller>
   <controller id="2">
+    <anschluesse nummer="204">
+      <lichter name="Licht 1" unit_no="410" schwellwert="30"/>
+      <lichter name="Licht 2" unit_no="420" schwellwert="40"/>
+      <lichter name="Licht 3" unit_no="430" schwellwert="50"/>
+      <lichter name="Licht 4" unit_no="440" schwellwert="60"/>
+      <lichter name="Licht 5" unit_no="450" schwellwert="70"/>
+      <lichter name="Licht 6" unit_no="460" schwellwert="80"/>
+      <lichter name="Licht 7" unit_no="470" schwellwert="90"/>
+      <lichter name="Licht 8" unit_no="480" schwellwert="100"/>
+    </anschluesse>
     <module xsi:type="Modelrailway:Gleismodul" nummer="201" abschnitte="//@gruppe.0/@abschnitt.4 //@gruppe.1/@abschnitt.0 //@gruppe.1/@abschnitt.1 //@gruppe.2/@abschnitt.4"/>
     <module xsi:type="Modelrailway:Beleuchtungsmodul" nummer="202">
-      <lampen name="Licht 1" unit_no="210" schwellwert="30"/>
-      <lampen name="Licht 2" unit_no="220" schwellwert="40" typ="1"/>
-      <lampen name="Licht 3" unit_no="230" schwellwert="50" typ="2"/>
-      <lampen name="Licht 4" unit_no="240" schwellwert="60" typ="3"/>
-      <lampen name="Licht 5" unit_no="250" schwellwert="70" typ="4"/>
-      <lampen name="Licht 6" unit_no="260" schwellwert="80" typ="5"/>
-      <lampen name="Licht 7" unit_no="270" schwellwert="90" typ="6"/>
-      <lampen name="Licht 8" unit_no="280" schwellwert="100" typ="7"/>
+      <lampen name="Lampe 1" unit_no="210" schwellwert="30"/>
+      <lampen name="Lampe 2" unit_no="220" schwellwert="40" typ="1"/>
+      <lampen name="Lampe 3" unit_no="230" schwellwert="50" typ="2"/>
+      <lampen name="Lampe 4" unit_no="240" schwellwert="60" typ="3"/>
+      <lampen name="Lampe 5" unit_no="250" schwellwert="70" typ="4"/>
+      <lampen name="Lampe 6" unit_no="260" schwellwert="80" typ="5"/>
+      <lampen name="Lampe 7" unit_no="270" schwellwert="90" typ="6"/>
+      <lampen name="Lampe 8" unit_no="280" schwellwert="100" typ="7"/>
     </module>
   </controller>
   <controller id="3">

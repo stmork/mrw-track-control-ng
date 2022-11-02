@@ -14,6 +14,7 @@
 
 namespace mrw::model
 {
+	class Light;
 	class LightSignal;
 
 	class MultiplexConnection
@@ -24,11 +25,13 @@ namespace mrw::model
 		const ModuleId      connection_id;
 
 		std::vector<LightSignal *> light_signals;
+		std::vector<Light *>       lights;
 
 	public:
 		explicit MultiplexConnection(
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
+		virtual ~MultiplexConnection();
 
 		inline ModuleId id() const
 		{

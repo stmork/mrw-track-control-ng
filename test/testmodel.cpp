@@ -118,4 +118,3 @@ void TestModel::testSections()
 		QVERIFY_EXCEPTION_THROWN(area->section(section_count), std::out_of_range);
 	}
 }
-
