@@ -5,8 +5,8 @@
 
 #include <QDebug>
 
+#include "model/mrwmodel.h"
 #include "model/area.h"
-
 #include "model/section.h"
 
 using namespace mrw::model;
@@ -37,7 +37,7 @@ Area::Area(
 			}
 			else
 			{
-				qCritical() << "Unknown group area element" << node.nodeName();
+				model->error("Unknown group area element: " + node.nodeName());
 			}
 		}
 	}

@@ -33,10 +33,11 @@ Controller::Controller(
 
 		if (node.isElement())
 		{
-			const QDomElement & child = node.toElement();
-			const QString       type  = ModelRailway::type(child);
+			const QDomElement & child     = node.toElement();
+			const QString   &   node_name = child.nodeName();
+			const QString       type      = ModelRailway::type(child);
 
-			if (node.nodeName() == "module")
+			if (node_name == "module")
 			{
 				Module * module = nullptr;
 
@@ -54,11 +55,11 @@ Controller::Controller(
 				}
 				else
 				{
-					qWarning() << "Unknown module type" << type;
+					model->error("Unknown module type: " + type);
 				}
 				add(module);
 			}
-			else if (node.nodeName() == "anschluesse")
+			else if (node_name == "anschluesse")
 			{
 				MultiplexConnection * connection = new MultiplexConnection(model, child);
 
@@ -66,7 +67,7 @@ Controller::Controller(
 			}
 			else
 			{
-				qWarning() << "Unknown controller element" << node.nodeName();
+				model->error("Unknown controller element: " + node_name);
 			}
 		}
 	}

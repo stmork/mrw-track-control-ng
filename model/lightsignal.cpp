@@ -65,7 +65,7 @@ LightSignal::LightSignal(
 	}
 	else
 	{
-		qWarning().noquote() << "Signal" << name << "has no connection module!";
+		model->warning("Signal " + name + " has no connection module!");
 	}
 }
 

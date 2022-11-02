@@ -15,5 +15,4 @@ LightModule::LightModule(
 
 void LightModule::link()
 {
-
 }

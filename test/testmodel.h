@@ -29,6 +29,7 @@ namespace mrw::test
 		void initTestCase();
 		void cleanupTestCase();
 
+		void testModel();
 		void testControllers();
 		void testAreas();
 		void testSections();

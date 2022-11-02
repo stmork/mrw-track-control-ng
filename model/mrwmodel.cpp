@@ -61,21 +61,25 @@ void ModelRailway::create()
 		if (node.isElement())
 		{
 			const QDomElement & child = node.toElement();
+			const QString   &   node_name = child.nodeName();
 
-			if (child.nodeName() == "controller")
+			if (node_name == "controller")
 			{
 				Controller * controller = new Controller(this, child.toElement());
 
 				add(controller);
-				qDebug() << *controller;
+				qDebug().noquote() << *controller;
 			}
-
-			if (child.nodeName() == "gruppe")
+			else if (node_name == "gruppe")
 			{
 				Area * area = new Area(this, child.toElement(), type(child) == "Bahnhof");
 
 				add(area);
-				qDebug() << *area;
+				qDebug().noquote() << *area;
+			}
+			else
+			{
+				error("Unknown node name: " + child.nodeName());
 			}
 		}
 	}
@@ -130,6 +134,18 @@ unsigned ModelRailway::value(const QDomElement & node, const char * attr, const 
 QString mrw::model::ModelRailway::string(const QDomElement & node, const char * attr)
 {
 	return node.attribute(attr);
+}
+
+void ModelRailway::warning(const QString & message)
+{
+	warnings++;
+	qWarning().noquote() << message;
+}
+
+void ModelRailway::error(const QString & message)
+{
+	errors++;
+	qCritical().noquote() << message;
 }
 
 QString mrw::model::ModelRailway::toString() const

@@ -36,6 +36,12 @@ void TestModel::cleanupTestCase()
 	model = nullptr;
 }
 
+void TestModel::testModel()
+{
+	QVERIFY(model != nullptr);
+	QVERIFY(model->isValid());
+}
+
 void TestModel::testControllers()
 {
 	const size_t count = model->controllerCount();

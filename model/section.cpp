@@ -121,7 +121,7 @@ Section::Section(
 			}
 			else
 			{
-				qWarning() << "Unknown rail part" << node.nodeName();
+				model->error("Unknown rail part: " + node.nodeName());
 			}
 		}
 	}

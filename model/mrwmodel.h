@@ -29,6 +29,8 @@ namespace mrw::model
 		QString                    name;
 		std::vector<Controller *>  controllers;
 		std::vector<Area *>        areas;
+		size_t                     warnings = 0;
+		size_t                     errors   = 0;
 
 	public:
 		explicit ModelRailway(const QString & filename);
@@ -95,6 +97,15 @@ namespace mrw::model
 		static bool     boolean(const QDomElement & node, const char * attr, const bool default_value = false);
 		static unsigned value(const QDomElement & node, const char * attr, const unsigned default_value = 0);
 		static QString  string(const QDomElement & node, const char * attr);
+
+		void warning(const QString & message);
+		void error(const QString & message);
+
+		inline bool isValid() const
+		{
+			return errors == 0;
+		}
+
 
 		QString toString() const override;
 

@@ -15,7 +15,7 @@
 namespace mrw::model
 {
 	typedef uint16_t ModuleId;
-	typedef unsigned UnitNo;
+	typedef uint16_t UnitNo;
 
 	class ModelRailway;
 	class RailPart;

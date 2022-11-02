@@ -60,6 +60,10 @@ SwitchModuleReference::SwitchModuleReference(
 		const unsigned constroller_idx = std::stoul(matcher[1]);
 		const unsigned module_idx      = std::stoul(matcher[2]);
 
-		switch_module = static_cast<SwitchModule *>(model_railway->module(constroller_idx, module_idx));
+		switch_module = dynamic_cast<SwitchModule *>(model_railway->module(constroller_idx, module_idx));
+	}
+	else
+	{
+		model_railway->error("Inductive rail part " + element.nodeName() + " has no switch module!");
 	}
 }

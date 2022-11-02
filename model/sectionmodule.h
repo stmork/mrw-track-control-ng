@@ -13,7 +13,7 @@
 
 #include <QDomElement>
 
-#include "module.h"
+#include <model/module.h>
 
 namespace mrw::model
 {
