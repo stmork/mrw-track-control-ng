@@ -20,8 +20,8 @@ TestSwitch::TestSwitch() : TestModel("Test-Switch")
 
 void TestSwitch::testSwitch()
 {
-	QCOMPARE(model->controllerCount(), 1);
-	QCOMPARE(model->areaCount(), 2);
+	QCOMPARE(model->controllerCount(), 1u);
+	QCOMPARE(model->areaCount(), 2u);
 
 	Controller * controller = model->controller(0);
 
