@@ -5,6 +5,7 @@
 
 #include <QStringList>
 
+#include "util/stringutil.h"
 #include "model/switchmodule.h"
 #include "model/railpart.h"
 
@@ -18,7 +19,7 @@ SwitchModule::SwitchModule(
 
 void SwitchModule::link()
 {
-	QStringList references = reference.attribute("magnetartikel").split(' ', QString::SkipEmptyParts);
+	QStringList references = reference.attribute("magnetartikel").split(' ', SKIP_EMPTY_PARTS);
 
 	for (const QString & part_reference : references)
 	{
