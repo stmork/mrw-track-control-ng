@@ -18,7 +18,7 @@ namespace mrw::model
 		const UnitNo             unit_no;
 
 	public:
-		Device(const QDomElement  &  element);
+		explicit Device(const QDomElement  &  element);
 
 		inline UnitNo id() const
 		{
