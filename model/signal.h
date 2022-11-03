@@ -10,14 +10,16 @@
 
 #include "model/module.h"
 #include "model/assemblypart.h"
+#include <model/device.h>
 
 namespace mrw::model
 {
-	class Signal : public AssemblyPart
+	class Signal :
+			public AssemblyPart,
+			public Device
 	{
 	protected:
 		const bool       direction;
-		const UnitNo     unit_no;
 		const bool       is_main_signal;
 
 	public:
@@ -25,11 +27,6 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element,
 			const bool            is_main);
-
-		inline UnitNo id() const
-		{
-			return unit_no;
-		}
 	};
 }
 

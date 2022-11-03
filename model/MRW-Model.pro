@@ -8,6 +8,7 @@ SOURCES += \
 	area.cpp \
 	assemblypart.cpp \
 	controller.cpp \
+	device.cpp \
 	formsignal.cpp \
 	light.cpp \
 	lightmodule.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
 	area.h \
 	assemblypart.h \
 	controller.h \
+	device.h \
 	formsignal.h \
 	light.h \
 	lightmodule.h \

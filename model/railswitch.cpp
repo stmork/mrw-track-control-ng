@@ -12,6 +12,7 @@ RailSwitch::RailSwitch(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) :
 	AssemblyPart(model_railway, element),
+	Device(element),
 	SwitchModuleReference(model_railway, element),
 	left_branch( ModelRailway::boolean(element, "bIstAbzweig", false)),
 	right_branch(ModelRailway::boolean(element, "cIstAbzweig", false)),

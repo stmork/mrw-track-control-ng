@@ -13,8 +13,8 @@ Signal::Signal(
 	const QDomElement  &  element,
 	const bool            is_main) :
 	AssemblyPart(model_railway, element),
+	Device(element),
 	direction(ModelRailway::boolean(element, "inZaehlrichtung")),
-	unit_no(ModelRailway::value(element, "unit_no")),
 	is_main_signal(is_main)
 {
 }

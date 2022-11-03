@@ -14,6 +14,7 @@
 #include <QDomElement>
 
 #include <model/module.h>
+#include <model/device.h>
 
 namespace mrw::model
 {
@@ -21,14 +22,13 @@ namespace mrw::model
 	class SectionModule;
 	class AssemblyPart;
 
-	class Section
+	class Section : public Device
 	{
-		static const std::regex  path_regex;
+		static const std::regex      path_regex;
 
-		const QString            name;
-		const UnitNo             unit_no;
-		ModelRailway      *      model  = nullptr;
-		SectionModule      *     section_module = nullptr;
+		const QString                name;
+		ModelRailway        *        model  = nullptr;
+		SectionModule        *       section_module = nullptr;
 		std::vector<AssemblyPart *>  rail_parts;
 
 	public:
@@ -36,11 +36,6 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
 		virtual ~Section();
-
-		inline UnitNo id() const
-		{
-			return unit_no;
-		}
 
 		void add(AssemblyPart * rait_part);
 		void link();

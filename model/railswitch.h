@@ -8,15 +8,19 @@
 #ifndef MRW_MODEL_RAILSWITCH_H
 #define MRW_MODEL_RAILSWITCH_H
 
-#include "assemblypart.h"
-#include "model/switchmodulereference.h"
+#include <model/assemblypart.h>
+#include <model/switchmodulereference.h>
+#include <model/device.h>
 
 namespace mrw::model
 {
 	class SwitchModule;
 	class SwitchModuleReference;
 
-	class RailSwitch : public AssemblyPart, public SwitchModuleReference
+	class RailSwitch :
+		public AssemblyPart,
+		public Device,
+		public SwitchModuleReference
 	{
 		const bool     left_branch;
 		const bool     right_branch;
