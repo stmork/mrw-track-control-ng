@@ -10,7 +10,7 @@
 
 #include <QObject>
 
-#include <model/mrwmodel.h>
+#include <model/modelrailway.h>
 
 namespace mrw::test
 {

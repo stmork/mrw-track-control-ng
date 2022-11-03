@@ -5,8 +5,8 @@
 
 #include <QDebug>
 
-#include "model/mrwmodel.h"
-#include "model/railpart.h"
+#include "model/modelrailway.h"
+#include "model/assemblypart.h"
 
 using namespace mrw::model;
 
@@ -43,9 +43,9 @@ using namespace mrw::model;
 //@gruppe.2/@abschnitt.10/@bauelement.0
 @endverbatim
  */
-const std::regex  RailPart::path_regex(R"(^\/\/@gruppe\.(\d+)\/@abschnitt\.(\d+)\/@bauelement\.(\d+))");
+const std::regex  AssemblyPart::path_regex(R"(^\/\/@gruppe\.(\d+)\/@abschnitt\.(\d+)\/@bauelement\.(\d+))");
 
-RailPart::RailPart(
+AssemblyPart::AssemblyPart(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) :
 	name(ModelRailway::string(element, "name")),
@@ -54,7 +54,7 @@ RailPart::RailPart(
 {
 }
 
-RailPart * mrw::model::RailPart::resolve(
+AssemblyPart * mrw::model::AssemblyPart::resolve(
 	const mrw::model::ModelRailway * model,
 	const QString          &         reference)
 {
@@ -74,7 +74,7 @@ RailPart * mrw::model::RailPart::resolve(
 	return nullptr;
 }
 
-RailPart * RailPart::resolve(const char * attr) const
+AssemblyPart * AssemblyPart::resolve(const char * attr) const
 {
 	const QString & value = reference.attribute(attr, "");
 

@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "model/mrwmodel.h"
+#include "model/modelrailway.h"
 #include "model/formsignal.h"
 #include "model/switchmodule.h"
 

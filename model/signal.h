@@ -9,11 +9,11 @@
 #define MRW_MODEL_SIGNAL_H
 
 #include "model/module.h"
-#include "model/railpart.h"
+#include "model/assemblypart.h"
 
 namespace mrw::model
 {
-	class Signal : public RailPart
+	class Signal : public AssemblyPart
 	{
 	protected:
 		const bool       direction;

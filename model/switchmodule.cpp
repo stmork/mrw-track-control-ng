@@ -7,7 +7,7 @@
 
 #include "util/stringutil.h"
 #include "model/switchmodule.h"
-#include "model/railpart.h"
+#include "model/assemblypart.h"
 
 using namespace mrw::model;
 
@@ -23,7 +23,7 @@ void SwitchModule::link()
 
 	for (const QString & part_reference : references)
 	{
-		RailPart * part = RailPart::resolve(model, part_reference);
+		AssemblyPart * part = AssemblyPart::resolve(model, part_reference);
 
 		rail_parts.push_back(part);
 	}

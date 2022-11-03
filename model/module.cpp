@@ -5,9 +5,9 @@
 
 #include <QStringList>
 
-#include "model/mrwmodel.h"
+#include "model/modelrailway.h"
 #include "model/module.h"
-#include "model/railpart.h"
+#include "model/assemblypart.h"
 
 using namespace mrw::model;
 

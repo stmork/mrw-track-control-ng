@@ -6,18 +6,18 @@ include(../common.pri)
 
 SOURCES += \
 	area.cpp \
+	assemblypart.cpp \
 	controller.cpp \
 	formsignal.cpp \
 	light.cpp \
 	lightmodule.cpp \
 	lightsignal.cpp \
+	modelrailway.cpp \
 	module.cpp \
-	mrwmodel.cpp \
 	multiplexconnection.cpp \
 	profilelight.cpp \
 	rail.cpp \
 	raildoubleswitch.cpp \
-	railpart.cpp \
 	railswitch.cpp \
 	section.cpp \
 	sectionmodule.cpp \
@@ -27,18 +27,18 @@ SOURCES += \
 
 HEADERS += \
 	area.h \
+	assemblypart.h \
 	controller.h \
 	formsignal.h \
 	light.h \
 	lightmodule.h \
 	lightsignal.h \
+	modelrailway.h \
 	module.h \
-	mrwmodel.h \
 	multiplexconnection.h \
 	profilelight.h \
 	rail.h \
 	raildoubleswitch.h \
-	railpart.h \
 	railswitch.h \
 	section.h \
 	sectionmodule.h \

@@ -5,7 +5,7 @@
 
 #include <QDebug>
 
-#include "model/mrwmodel.h"
+#include "model/modelrailway.h"
 #include "model/area.h"
 #include "model/section.h"
 

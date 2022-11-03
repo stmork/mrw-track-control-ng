@@ -6,7 +6,7 @@
 #include <QStringList>
 
 #include "util/stringutil.h"
-#include "model/mrwmodel.h"
+#include "model/modelrailway.h"
 #include "model/multiplexconnection.h"
 #include "model/light.h"
 #include "model/lightsignal.h"
@@ -60,7 +60,7 @@ void mrw::model::MultiplexConnection::link()
 
 	for (const QString & signal_reference : references)
 	{
-		LightSignal * signal = static_cast<LightSignal *>(RailPart::resolve(model, signal_reference));
+		LightSignal * signal = static_cast<LightSignal *>(AssemblyPart::resolve(model, signal_reference));
 
 		light_signals.push_back(signal);
 	}

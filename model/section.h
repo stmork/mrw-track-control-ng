@@ -19,7 +19,7 @@ namespace mrw::model
 {
 	class ModelRailway;
 	class SectionModule;
-	class RailPart;
+	class AssemblyPart;
 
 	class Section
 	{
@@ -29,7 +29,7 @@ namespace mrw::model
 		const UnitNo             unit_no;
 		ModelRailway      *      model  = nullptr;
 		SectionModule      *     section_module = nullptr;
-		std::vector<RailPart *>  rail_parts;
+		std::vector<AssemblyPart *>  rail_parts;
 
 	public:
 		explicit Section(
@@ -42,10 +42,10 @@ namespace mrw::model
 			return unit_no;
 		}
 
-		void add(RailPart * rait_part);
+		void add(AssemblyPart * rait_part);
 		void link();
 
-		inline RailPart * railPart(const int idx) const
+		inline AssemblyPart * railPart(const int idx) const
 		{
 			return rail_parts.at(idx);
 		}

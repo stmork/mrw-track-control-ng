@@ -6,7 +6,7 @@
 #include <QDomDocument>
 #include <QDebug>
 
-#include "model/mrwmodel.h"
+#include "model/modelrailway.h"
 
 #include "model/controller.h"
 

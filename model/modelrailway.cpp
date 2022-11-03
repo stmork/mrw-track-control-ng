@@ -7,7 +7,7 @@
 #include <QDebug>
 #include <QDomElement>
 
-#include "model/mrwmodel.h"
+#include "model/modelrailway.h"
 #include "util/method.h"
 
 using namespace mrw::model;

@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "model/mrwmodel.h"
+#include "model/modelrailway.h"
 #include "model/lightmodule.h"
 #include "model/profilelight.h"
 

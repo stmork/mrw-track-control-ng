@@ -5,7 +5,7 @@
 
 #include <QDebug>
 
-#include "model/mrwmodel.h"
+#include "model/modelrailway.h"
 #include "model/section.h"
 #include "model/sectionmodule.h"
 #include "model/rail.h"
@@ -71,7 +71,7 @@ Section::Section(
 
 			if (node.nodeName() == "bauelement")
 			{
-				RailPart * rail_part = nullptr;
+				AssemblyPart * rail_part = nullptr;
 
 				if (type == "Gleis")
 				{
@@ -131,21 +131,21 @@ Section::Section(
 
 Section::~Section()
 {
-	for (RailPart * rail_part : rail_parts)
+	for (AssemblyPart * rail_part : rail_parts)
 	{
 		delete rail_part;
 	}
 	rail_parts.clear();
 }
 
-void Section::add(RailPart * rait_part)
+void Section::add(AssemblyPart * rait_part)
 {
 	rail_parts.push_back(rait_part);
 }
 
 void Section::link()
 {
-	for (RailPart * rail_part : rail_parts)
+	for (AssemblyPart * rail_part : rail_parts)
 	{
 		if (rail_part != nullptr)
 		{

@@ -6,7 +6,7 @@
 #include <QStringList>
 
 #include "util/stringutil.h"
-#include "model/mrwmodel.h"
+#include "model/modelrailway.h"
 #include "model/section.h"
 #include "model/sectionmodule.h"
 

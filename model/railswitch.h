@@ -3,10 +3,12 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#pragma once
+
 #ifndef MRW_MODEL_RAILSWITCH_H
 #define MRW_MODEL_RAILSWITCH_H
 
-#include "railpart.h"
+#include "assemblypart.h"
 #include "model/switchmodulereference.h"
 
 namespace mrw::model
@@ -14,16 +16,16 @@ namespace mrw::model
 	class SwitchModule;
 	class SwitchModuleReference;
 
-	class RailSwitch : public RailPart, public SwitchModuleReference
+	class RailSwitch : public AssemblyPart, public SwitchModuleReference
 	{
-		const bool           left_branch;
-		const bool           right_branch;
-		const bool           left_prio;
-		const bool           right_prio;
+		const bool     left_branch;
+		const bool     right_branch;
+		const bool     left_prio;
+		const bool     right_prio;
 
-		RailPart    *    a = nullptr;
-		RailPart    *    b = nullptr;
-		RailPart    *    c = nullptr;
+		AssemblyPart * a = nullptr;
+		AssemblyPart * b = nullptr;
+		AssemblyPart * c = nullptr;
 
 	public:
 		explicit RailSwitch(

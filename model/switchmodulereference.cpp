@@ -5,7 +5,7 @@
 
 #include <QtGlobal>
 
-#include "model/mrwmodel.h"
+#include "model/modelrailway.h"
 #include "model/switchmodule.h"
 #include "model/switchmodulereference.h"
 

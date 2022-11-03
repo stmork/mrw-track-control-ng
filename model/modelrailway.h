@@ -5,8 +5,8 @@
 
 #pragma once
 
-#ifndef MRW_MODULE_MRWMODEL_H
-#define MRW_MODULE_MRWMODEL_H
+#ifndef MRW_MODULE_MODELRAILWAY_H
+#define MRW_MODULE_MODELRAILWAY_H
 
 #include <QDomDocument>
 #include <QString>
@@ -20,7 +20,7 @@
 
 namespace mrw::model
 {
-	class RailPart;
+	class AssemblyPart;
 
 	class ModelRailway : public mrw::util::String
 	{
@@ -84,7 +84,7 @@ namespace mrw::model
 			return area(area_idx)->section(section_idx);
 		}
 
-		inline RailPart * railPart(
+		inline AssemblyPart * railPart(
 			const size_t area_idx,
 			const UnitNo section_idx,
 			const UnitNo rail_idx) const

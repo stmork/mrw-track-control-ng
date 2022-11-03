@@ -18,7 +18,7 @@ namespace mrw::model
 {
 	class SwitchModule : public Module
 	{
-		std::vector<RailPart *> rail_parts;
+		std::vector<AssemblyPart *> rail_parts;
 
 	public:
 		explicit SwitchModule(

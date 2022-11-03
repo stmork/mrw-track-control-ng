@@ -9,7 +9,7 @@
 #include <QDebug>
 
 #include "mainwindow.h"
-#include "model/mrwmodel.h"
+#include "model/modelrailway.h"
 
 int main(int argc, char * argv[])
 {

@@ -3,23 +3,25 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#pragma once
+
 #ifndef MRW_MODEL_RAILDOUBLESWITCH_H
 #define MRW_MODEL_RAILDOUBLESWITCH_H
 
-#include "model/railpart.h"
+#include "model/assemblypart.h"
 #include "model/switchmodulereference.h"
 
 namespace mrw::model
 {
-	class RailDoubleSwitch : public RailPart, public SwitchModuleReference
+	class RailDoubleSwitch : public AssemblyPart, public SwitchModuleReference
 	{
-		const bool ad_branch;
-		const bool bc_branch;
+		const bool     ad_branch;
+		const bool     bc_branch;
 
-		RailPart    *    a = nullptr;
-		RailPart    *    b = nullptr;
-		RailPart    *    c = nullptr;
-		RailPart    *    d = nullptr;
+		AssemblyPart * a = nullptr;
+		AssemblyPart * b = nullptr;
+		AssemblyPart * c = nullptr;
+		AssemblyPart * d = nullptr;
 
 	public:
 		explicit RailDoubleSwitch(

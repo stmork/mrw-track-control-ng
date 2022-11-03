@@ -5,8 +5,8 @@
 
 #pragma once
 
-#ifndef MRW_MODEL_RAILPART_H
-#define MRW_MODEL_RAILPART_H
+#ifndef MRW_MODEL_ASSEMBLYPART_H
+#define MRW_MODEL_ASSEMBLYPART_H
 
 #include <regex>
 
@@ -16,7 +16,7 @@ namespace mrw::model
 {
 	class ModelRailway;
 
-	class RailPart
+	class AssemblyPart
 	{
 		static const std::regex path_regex;
 
@@ -26,19 +26,19 @@ namespace mrw::model
 		const QDomElement  reference;
 
 	public:
-		explicit RailPart(
+		explicit AssemblyPart(
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
-		virtual ~RailPart() = default;
+		virtual ~AssemblyPart() = default;
 
 		virtual void link() = 0;
 
-		static RailPart * resolve(
+		static AssemblyPart * resolve(
 			const ModelRailway * model,
 			const QString    &   reference);
 
 	protected:
-		RailPart * resolve(const char * attr) const;
+		AssemblyPart * resolve(const char * attr) const;
 	};
 }
 

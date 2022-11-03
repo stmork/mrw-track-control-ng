@@ -94,7 +94,7 @@ void TestModel::testSections()
 			const size_t rail_count = section->railPartCount();
 			for (unsigned r = 0; r < rail_count; r++)
 			{
-				RailPart * part = section->railPart(r);
+				AssemblyPart * part = section->railPart(r);
 
 				QVERIFY(part != nullptr);
 

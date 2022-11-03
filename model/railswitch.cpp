@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "model/mrwmodel.h"
+#include "model/modelrailway.h"
 #include "model/railswitch.h"
 
 using namespace mrw::model;
@@ -11,7 +11,7 @@ using namespace mrw::model;
 RailSwitch::RailSwitch(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) :
-	RailPart(model_railway, element),
+	AssemblyPart(model_railway, element),
 	SwitchModuleReference(model_railway, element),
 	left_branch( ModelRailway::boolean(element, "bIstAbzweig", false)),
 	right_branch(ModelRailway::boolean(element, "cIstAbzweig", false)),
