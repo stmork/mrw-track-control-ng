@@ -21,7 +21,7 @@ namespace mrw::model
 		static const std::regex path_regex;
 
 	protected:
-		const QString      name;
+		const QString      part_name;
 		ModelRailway   *   model = nullptr;
 		const QDomElement  reference;
 
@@ -32,6 +32,11 @@ namespace mrw::model
 		virtual ~AssemblyPart() = default;
 
 		virtual void link() = 0;
+
+		inline const QString & name() const
+		{
+			return part_name;
+		}
 
 		static AssemblyPart * resolve(
 			const ModelRailway * model,

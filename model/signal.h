@@ -15,8 +15,8 @@
 namespace mrw::model
 {
 	class Signal :
-			public AssemblyPart,
-			public Device
+		public AssemblyPart,
+		public Device
 	{
 	protected:
 		const bool       direction;

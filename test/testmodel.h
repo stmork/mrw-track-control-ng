@@ -11,6 +11,8 @@
 #include <QObject>
 
 #include <model/modelrailway.h>
+#include <model/section.h>
+#include <model/assemblypart.h>
 
 namespace mrw::test
 {
@@ -24,6 +26,10 @@ namespace mrw::test
 
 	public:
 		explicit TestModel(const char * modelname, QObject * parent = nullptr);
+
+	private:
+		void testSection(mrw::model::Section * section);
+		void testAssemblyPart(mrw::model::AssemblyPart * part);
 
 	private slots:
 		void initTestCase();

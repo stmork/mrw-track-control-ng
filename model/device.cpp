@@ -8,7 +8,13 @@
 
 using namespace mrw::model;
 
-Device::Device(const QDomElement  &  element) :
+Device::Device(
+	ModelRailway     *    model_railway,
+	const QDomElement  &  element) :
 	unit_no(ModelRailway::value(element, "unit_no"))
 {
+	if (unit_no == 0)
+	{
+		model_railway->error(element.nodeName() + " has no unit number!");
+	}
 }

@@ -54,7 +54,7 @@ const std::regex  Section::path_regex(R"(^\/\/@controller\.(\d+)\/@module\.(\d+)
 Section::Section(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) :
-	Device(element),
+	Device(model_railway, element),
 	name(ModelRailway::string(element, "name")),
 	model(model_railway)
 {

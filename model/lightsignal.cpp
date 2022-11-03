@@ -65,7 +65,7 @@ LightSignal::LightSignal(
 	}
 	else
 	{
-		model->warning("Signal " + name + " has no connection module!");
+		model->warning("Signal " + part_name + " has no connection module!");
 	}
 }
 

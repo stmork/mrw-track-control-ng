@@ -18,7 +18,9 @@ namespace mrw::model
 		const UnitNo             unit_no;
 
 	public:
-		explicit Device(const QDomElement  &  element);
+		explicit Device(
+			ModelRailway     *    model_railway,
+			const QDomElement  &  element);
 
 		inline UnitNo id() const
 		{

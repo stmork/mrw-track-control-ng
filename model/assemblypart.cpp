@@ -48,7 +48,7 @@ const std::regex  AssemblyPart::path_regex(R"(^\/\/@gruppe\.(\d+)\/@abschnitt\.(
 AssemblyPart::AssemblyPart(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) :
-	name(ModelRailway::string(element, "name")),
+	part_name(ModelRailway::string(element, "name")),
 	model(model_railway),
 	reference(element)
 {

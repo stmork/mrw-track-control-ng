@@ -12,7 +12,7 @@ RailDoubleSwitch::RailDoubleSwitch(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) :
 	AssemblyPart(model_railway, element),
-	Device(element),
+	Device(model_railway, element),
 	SwitchModuleReference(model_railway, element),
 	ad_branch(ModelRailway::boolean(element, "adIstAbzweig")),
 	bc_branch(ModelRailway::boolean(element, "bcIstAbzweig"))
