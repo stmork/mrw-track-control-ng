@@ -26,17 +26,22 @@ void Rail::link()
 	{
 		model->error("Rail not connected: " + name());
 	}
+
+	if (a != nullptr)
+	{
+		advance(aIsDir()).insert(a);
+	}
+
+	if (b != nullptr)
+	{
+		advance(!aIsDir()).insert(b);
+	}
 }
 
-bool Rail::contains(const RailPart * rail) const
-{
-	return (rail == a) || (rail == b);
-}
-
-bool Rail::valid() const
+bool Rail::valid()
 {
 	return (
-			((a != nullptr) && a->contains(this)) ||
-			((b != nullptr) && b->contains(this))
+			((a != nullptr) && a->contains(this,  aIsDir())) ||
+			((b != nullptr) && b->contains(this, !aIsDir()))
 		);
 }

@@ -30,15 +30,18 @@ void RailSwitch::link()
 	if ((a == nullptr) || (b == nullptr) || (c == nullptr))
 	{
 		model->error("Switch not completely connected: " + name());
+		return;
 	}
+
+	advance( aIsDir()).insert(a);
+	advance(!aIsDir()).insert(b);
+	advance(!aIsDir()).insert(c);
 }
 
-bool RailSwitch::contains(const RailPart * rail) const
+bool RailSwitch::valid()
 {
-	return (a == rail) || (b == rail) || (c == rail);
-}
-
-bool RailSwitch::valid() const
-{
-	return a->contains(this) && b->contains(this) && c->contains(this);
+	return
+		a->contains(this,  aIsDir()) &&
+		b->contains(this, !aIsDir()) &&
+		c->contains(this, !aIsDir());
 }

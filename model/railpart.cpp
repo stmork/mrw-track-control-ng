@@ -18,9 +18,26 @@ RailPart::RailPart(
 {
 }
 
+bool RailPart::contains(RailPart * rail, const bool dir) const
+{
+	const std::set<RailPart *> & rails = advance(!dir);
+
+	return rails.find(rail) != rails.end();
+}
+
 RailPart * RailPart::resolve(const char * attr) const
 {
 	const QString & value = reference.attribute(attr, "");
 
 	return dynamic_cast<RailPart *>(AssemblyPart::resolve(model, value));
+}
+
+std::set<RailPart *> & RailPart::advance(const bool dir)
+{
+	return dir ? rail_forward : rail_backward;
+}
+
+const std::set<RailPart *> & RailPart::advance(const bool dir) const
+{
+	return dir ? rail_forward : rail_backward;
 }

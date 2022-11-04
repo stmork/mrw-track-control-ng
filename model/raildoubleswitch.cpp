@@ -29,15 +29,20 @@ void RailDoubleSwitch::link()
 	if ((a == nullptr) || (b == nullptr) || (c == nullptr) || (d == nullptr))
 	{
 		model->error("Cross switch not completely connected: " + name());
+		return;
 	}
+
+	advance(aIsDir()).insert(a);
+	advance(aIsDir()).insert(b);
+	advance(!aIsDir()).insert(c);
+	advance(!aIsDir()).insert(d);
 }
 
-bool RailDoubleSwitch::contains(const RailPart * rail) const
+bool RailDoubleSwitch::valid()
 {
-	return (a == rail) || (b == rail) || (c == rail) || (d == rail);
-}
-
-bool RailDoubleSwitch::valid() const
-{
-	return a->contains(this) && b->contains(this) && c->contains(this) && d->contains(this);
+	return
+		a->contains(this, aIsDir()) &&
+		b->contains(this, aIsDir()) &&
+		c->contains(this, !aIsDir()) &&
+		d->contains(this, !aIsDir());
 }

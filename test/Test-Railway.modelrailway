@@ -36,7 +36,7 @@
       <bauelement xsi:type="Modelrailway:Gleis" name="w1" b="//@gruppe.0/@abschnitt.2/@bauelement.1"/>
     </abschnitt>
     <abschnitt name="W2" unit_no="21" modul="//@controller.0/@module.0">
-      <bauelement xsi:type="Modelrailway:Gleis" name="w2" aInZaehlrichtung="true" b="//@gruppe.0/@abschnitt.2/@bauelement.0"/>
+      <bauelement xsi:type="Modelrailway:Gleis" name="w2" b="//@gruppe.0/@abschnitt.2/@bauelement.0"/>
     </abschnitt>
     <abschnitt name="WS" unit_no="31" modul="//@controller.0/@module.0">
       <bauelement xsi:type="Modelrailway:Weiche" name="Switch 1" modul="//@controller.0/@module.1" unit_no="41" neu="true" bIstAbzweig="true" cIstBevorzugt="true" b="//@gruppe.0/@abschnitt.2/@bauelement.1" c="//@gruppe.0/@abschnitt.4/@bauelement.0" a="//@gruppe.0/@abschnitt.1/@bauelement.0"/>

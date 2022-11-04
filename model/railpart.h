@@ -9,6 +9,7 @@
 #define MRW_MODEL_RAILPART_H
 
 #include <regex>
+#include <set>
 
 #include <QDomElement>
 
@@ -24,6 +25,8 @@ namespace mrw::model
 
 	protected:
 		const bool              a_in_dir;
+		std::set<RailPart *>    rail_forward;
+		std::set<RailPart *>    rail_backward;
 
 	public:
 		explicit RailPart(
@@ -36,11 +39,13 @@ namespace mrw::model
 			return a_in_dir;
 		}
 
-		virtual bool contains(const RailPart * rail) const = 0;
-		virtual bool valid() const = 0;
+		virtual bool contains(RailPart * rail, const bool dir) const;
+		virtual bool valid() = 0;
 
 	protected:
 		RailPart * resolve(const char * attr) const;
+		std::set<RailPart *> & advance(const bool dir);
+		const std::set<RailPart *> & advance(const bool dir) const;
 	};
 }
 
