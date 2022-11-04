@@ -48,6 +48,11 @@ namespace mrw::model
 			return modules.at(index);
 		}
 
+		inline size_t moduleCount() const
+		{
+			return modules.size();
+		}
+
 		inline MultiplexConnection * connection(const ModuleId index) const
 		{
 			return connections.at(index);

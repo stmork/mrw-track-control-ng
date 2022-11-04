@@ -9,6 +9,7 @@
 #include <model/switchmodulereference.h>
 #include <model/lightsignal.h>
 #include <model/railpart.h>
+#include <model/controller.h>
 
 #include "testmodel.h"
 
@@ -47,14 +48,41 @@ void TestModel::testControllers()
 {
 	const size_t count = model->controllerCount();
 
-	for (unsigned i = 0; i < count; i++)
+	for (unsigned c = 0; c < count; c++)
 	{
-		Controller * controller = model->controller(i);
+		Controller * controller = model->controller(c);
 
 		QVERIFY(controller != nullptr);
+		QVERIFY(controller->id() != 0);
 	}
 
 	QVERIFY_EXCEPTION_THROWN(model->controller(count), std::out_of_range);
+}
+
+void TestModel::testModules()
+{
+	const size_t count = model->controllerCount();
+
+	for (unsigned c = 0; c < count; c++)
+	{
+		Controller * controller = model->controller(c);
+
+		QVERIFY(controller != nullptr);
+
+		const size_t module_count = controller->moduleCount();
+		for (unsigned m = 0; m < module_count; m++)
+		{
+			Module * module = controller->module(m);
+
+			testModule(module);
+		}
+	}
+}
+
+void TestModel::testModule(Module * module)
+{
+	QVERIFY(module != nullptr);
+	QVERIFY(module->id() != 0);
 }
 
 void TestModel::testAreas()

@@ -28,6 +28,7 @@ namespace mrw::test
 		explicit TestModel(const char * modelname, QObject * parent = nullptr);
 
 	private:
+		void testModule(mrw::model::Module * module);
 		void testSection(mrw::model::Section * section);
 		void testAssemblyPart(mrw::model::AssemblyPart * part);
 
@@ -37,6 +38,7 @@ namespace mrw::test
 
 		void testModel();
 		void testControllers();
+		void testModules();
 		void testAreas();
 		void testSections();
 	};
