@@ -31,6 +31,9 @@ namespace mrw::model
 			const QDomElement  &  element);
 
 		void link() override;
+
+		bool contains(const RailPart * rail) const override;
+		bool valid() const override;
 	};
 }
 

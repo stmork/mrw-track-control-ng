@@ -27,3 +27,16 @@ void Rail::link()
 		model->error("Rail not connected: " + name());
 	}
 }
+
+bool Rail::contains(const RailPart * rail) const
+{
+	return (rail == a) || (rail == b);
+}
+
+bool Rail::valid() const
+{
+	return (
+			((a != nullptr) && a->contains(this)) ||
+			((b != nullptr) && b->contains(this))
+		);
+}

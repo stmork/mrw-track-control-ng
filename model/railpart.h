@@ -36,6 +36,9 @@ namespace mrw::model
 			return a_in_dir;
 		}
 
+		virtual bool contains(const RailPart * rail) const = 0;
+		virtual bool valid() const = 0;
+
 	protected:
 		RailPart * resolve(const char * attr) const;
 	};

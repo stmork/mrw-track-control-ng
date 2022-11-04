@@ -31,3 +31,13 @@ void RailDoubleSwitch::link()
 		model->error("Cross switch not completely connected: " + name());
 	}
 }
+
+bool RailDoubleSwitch::contains(const RailPart * rail) const
+{
+	return (a == rail) || (b == rail) || (c == rail) || (d == rail);
+}
+
+bool RailDoubleSwitch::valid() const
+{
+	return a->contains(this) && b->contains(this) && c->contains(this) && d->contains(this);
+}

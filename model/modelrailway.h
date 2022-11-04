@@ -89,7 +89,7 @@ namespace mrw::model
 			const UnitNo section_idx,
 			const UnitNo rail_idx) const
 		{
-			return section(area_idx, section_idx)->railPart(rail_idx);
+			return section(area_idx, section_idx)->assemblyPart(rail_idx);
 		}
 
 		static QString  type(const QDomElement & node);

@@ -45,7 +45,7 @@ namespace mrw::model
 			return section_name;
 		}
 
-		inline AssemblyPart * railPart(const int idx) const
+		inline AssemblyPart * assemblyPart(const int idx) const
 		{
 			return rail_parts.at(idx);
 		}

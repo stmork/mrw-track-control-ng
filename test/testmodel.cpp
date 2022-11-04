@@ -105,11 +105,11 @@ void TestModel::testSection(Section * section)
 	const size_t rail_count = section->railPartCount();
 	for (unsigned r = 0; r < rail_count; r++)
 	{
-		AssemblyPart * part = section->railPart(r);
+		AssemblyPart * part = section->assemblyPart(r);
 
 		testAssemblyPart(part);
 	}
-	QVERIFY_EXCEPTION_THROWN(section->railPart(rail_count), std::out_of_range);
+	QVERIFY_EXCEPTION_THROWN(section->assemblyPart(rail_count), std::out_of_range);
 }
 
 void TestModel::testAssemblyPart(AssemblyPart * part)
@@ -142,5 +142,6 @@ void TestModel::testAssemblyPart(AssemblyPart * part)
 	if (rail != nullptr)
 	{
 		QVERIFY2(signal == nullptr, name.c_str());
+		QVERIFY2(rail->valid(), name.c_str());
 	}
 }

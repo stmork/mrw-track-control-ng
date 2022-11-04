@@ -32,3 +32,13 @@ void RailSwitch::link()
 		model->error("Switch not completely connected: " + name());
 	}
 }
+
+bool RailSwitch::contains(const RailPart * rail) const
+{
+	return (a == rail) || (b == rail) || (c == rail);
+}
+
+bool RailSwitch::valid() const
+{
+	return a->contains(this) && b->contains(this) && c->contains(this);
+}
