@@ -20,6 +20,10 @@ Signal::Signal(
 {
 }
 
+void Signal::link()
+{
+}
+
 QString Signal::toString() const
 {
 	const SwitchModuleReference * module = dynamic_cast<const SwitchModuleReference *>(this);

@@ -32,8 +32,6 @@ namespace mrw::model
 			const SignalType      type,
 			const unsigned        light_count);
 
-		void link() override;
-
 		inline MultiplexConnection * connection() const
 		{
 			return mux_connection;

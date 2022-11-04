@@ -140,12 +140,17 @@ QString ModelRailway::type(const QDomElement & element)
 	return "";
 }
 
-unsigned ModelRailway::value(const QDomElement & node, const char * attr, const unsigned default_value)
+unsigned ModelRailway::value(
+	const QDomElement  &  node,
+	const char      *     attr,
+	const unsigned        default_value)
 {
 	return node.attribute(attr, QString::number(default_value)).toUInt();
 }
 
-QString mrw::model::ModelRailway::string(const QDomElement & node, const char * attr)
+QString mrw::model::ModelRailway::string(
+	const QDomElement  &  node,
+	const char      *     attr)
 {
 	return node.attribute(attr);
 }

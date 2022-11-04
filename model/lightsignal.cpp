@@ -68,7 +68,3 @@ LightSignal::LightSignal(
 		model->warning("Signal " + part_name + " has no connection module!");
 	}
 }
-
-void mrw::model::LightSignal::link()
-{
-}

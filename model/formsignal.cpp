@@ -18,7 +18,3 @@ FormSignal::FormSignal(
 	inductors(model->value(element, "spulen"))
 {
 }
-
-void FormSignal::link()
-{
-}
