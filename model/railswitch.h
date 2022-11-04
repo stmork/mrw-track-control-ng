@@ -38,7 +38,8 @@ namespace mrw::model
 
 		void link() override;
 
-		bool valid() override;
+		bool valid() const override;
+		QString toString() const override;
 	};
 }
 

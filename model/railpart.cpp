@@ -18,11 +18,11 @@ RailPart::RailPart(
 {
 }
 
-bool RailPart::contains(RailPart * rail, const bool dir) const
+bool RailPart::contains(const RailPart * rail, const bool dir) const
 {
 	const std::set<RailPart *> & rails = advance(!dir);
 
-	return rails.find(rail) != rails.end();
+	return rails.find((RailPart *)rail) != rails.end();
 }
 
 RailPart * RailPart::resolve(const char * attr) const

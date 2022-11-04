@@ -38,10 +38,20 @@ void RailSwitch::link()
 	advance(!aIsDir()).insert(c);
 }
 
-bool RailSwitch::valid()
+bool RailSwitch::valid() const
 {
 	return
 		a->contains(this,  aIsDir()) &&
 		b->contains(this, !aIsDir()) &&
 		c->contains(this, !aIsDir());
+}
+
+QString RailSwitch::toString() const
+{
+	return QString::asprintf("%s %s %s--%s: %s",
+			aIsDir() ? ">" : "<",
+			valid() ? "V" : "-",
+			aIsDir() ? "bc" : " a",
+			aIsDir() ? " a" : "bc",
+			name().toStdString().c_str());
 }

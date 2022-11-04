@@ -36,8 +36,6 @@ namespace mrw::model
 			const QDomElement & element);
 		virtual ~Controller();
 
-		void add(Module * module);
-		void add(MultiplexConnection * connection);
 		void link();
 
 		inline ControllerId id() const

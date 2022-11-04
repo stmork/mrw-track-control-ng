@@ -39,8 +39,8 @@ namespace mrw::model
 			return a_in_dir;
 		}
 
-		virtual bool contains(RailPart * rail, const bool dir) const;
-		virtual bool valid() = 0;
+		virtual bool contains(const RailPart * rail, const bool dir) const;
+		virtual bool valid() const = 0;
 
 	protected:
 		RailPart * resolve(const char * attr) const;

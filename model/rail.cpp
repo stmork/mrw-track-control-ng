@@ -38,10 +38,19 @@ void Rail::link()
 	}
 }
 
-bool Rail::valid()
+bool Rail::valid() const
 {
 	return (
 			((a != nullptr) && a->contains(this,  aIsDir())) ||
 			((b != nullptr) && b->contains(this, !aIsDir()))
 		);
+}
+
+QString Rail::toString() const
+{
+	return QString::asprintf("# %s %s--%s: %s",
+			valid() ? "V" : "-",
+			a == nullptr ? " |" : aIsDir() ? " a" : " b",
+			b == nullptr ? "| " : aIsDir() ? "b " : "a ",
+			name().toStdString().c_str());
 }

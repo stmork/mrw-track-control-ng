@@ -12,11 +12,13 @@
 
 #include <QDomElement>
 
+#include <util/stringutil.h>
+
 namespace mrw::model
 {
 	class ModelRailway;
 
-	class AssemblyPart
+	class AssemblyPart : public mrw::util::String
 	{
 		static const std::regex path_regex;
 

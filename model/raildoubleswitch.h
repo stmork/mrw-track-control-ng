@@ -33,7 +33,8 @@ namespace mrw::model
 			const QDomElement  &  element);
 
 		void link() override;
-		bool valid() override;
+		bool valid() const override;
+		QString toString() const override;
 	};
 }
 

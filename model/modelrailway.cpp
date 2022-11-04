@@ -67,14 +67,14 @@ void ModelRailway::create()
 			{
 				Controller * controller = new Controller(this, child.toElement());
 
-				add(controller);
+				controllers.push_back(controller);
 				qDebug().noquote() << *controller;
 			}
 			else if (node_name == "gruppe")
 			{
 				Area * area = new Area(this, child.toElement(), type(child) == "Bahnhof");
 
-				add(area);
+				areas.push_back(area);
 				qDebug().noquote() << *area;
 			}
 			else
@@ -96,21 +96,6 @@ void mrw::model::ModelRailway::link()
 	{
 		area->link();
 	}
-}
-
-void ModelRailway::traverse() const
-{
-	traverse(xml.documentElement());
-}
-
-void ModelRailway::add(Controller * controller)
-{
-	controllers.push_back(controller);
-}
-
-void ModelRailway::add(Area * area)
-{
-	areas.push_back(area);
 }
 
 QString ModelRailway::type(const QDomElement & element)
@@ -185,16 +170,4 @@ void ModelRailway::dump(const QDomNode & node, const QString & indent) const
 		dump(child, indent + "  ");
 	}
 	qDebug().noquote().nospace() << indent << "</" << node.nodeName() << ">";
-}
-
-void ModelRailway::traverse(const QDomNode & node, const size_t level) const
-{
-	const QDomNodeList & child_nodes = node.childNodes();
-
-	for (int n = 0; n < child_nodes.count(); ++n)
-	{
-		const QDomNode & child = child_nodes.at(n);
-
-		traverse(child, level + 1);
-	}
 }

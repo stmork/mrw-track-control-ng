@@ -27,6 +27,8 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element,
 			const bool            is_main);
+
+		QString toString() const override;
 	};
 }
 

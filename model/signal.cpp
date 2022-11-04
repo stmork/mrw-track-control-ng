@@ -18,3 +18,9 @@ Signal::Signal(
 	is_main_signal(is_main)
 {
 }
+
+QString Signal::toString() const
+{
+	// TODO: Implement!
+	return "";
+}

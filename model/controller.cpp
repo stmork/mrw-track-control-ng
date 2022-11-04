@@ -57,13 +57,13 @@ Controller::Controller(
 				{
 					model->error("Unknown module type: " + type);
 				}
-				add(module);
+				modules.push_back(module);
 			}
 			else if (node_name == "anschluesse")
 			{
 				MultiplexConnection * connection = new MultiplexConnection(model, child);
 
-				add(connection);
+				connections.push_back(connection);
 			}
 			else
 			{
@@ -87,19 +87,6 @@ Controller::~Controller()
 
 	modules.clear();
 	connections.clear();
-}
-
-void Controller::add(Module * module)
-{
-	if (module != nullptr)
-	{
-		modules.push_back(module);
-	}
-}
-
-void Controller::add(MultiplexConnection * connection)
-{
-	connections.push_back(connection);
 }
 
 void Controller::link()

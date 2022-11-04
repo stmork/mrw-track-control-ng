@@ -38,11 +38,20 @@ void RailDoubleSwitch::link()
 	advance(!aIsDir()).insert(d);
 }
 
-bool RailDoubleSwitch::valid()
+bool RailDoubleSwitch::valid() const
 {
 	return
 		a->contains(this, aIsDir()) &&
 		b->contains(this, aIsDir()) &&
 		c->contains(this, !aIsDir()) &&
 		d->contains(this, !aIsDir());
+}
+
+QString RailDoubleSwitch::toString() const
+{
+	return QString::asprintf("X %s %s--%s: %s",
+			valid() ? "V" : "-",
+			aIsDir() ? "cd" : "ab",
+			aIsDir() ? "ab" : "cd",
+			name().toStdString().c_str());
 }

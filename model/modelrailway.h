@@ -38,10 +38,6 @@ namespace mrw::model
 		void dump() const;
 		void create();
 		void link();
-		void traverse() const;
-
-		void add(Controller * controller);
-		void add(Area * area);
 
 		inline Controller * controller(const ControllerId idx) const
 		{
@@ -110,7 +106,6 @@ namespace mrw::model
 
 	private:
 		void dump(const QDomNode & node, const QString & indent = "") const;
-		void traverse(const QDomNode & node, const size_t level = 0) const;
 	};
 }
 
