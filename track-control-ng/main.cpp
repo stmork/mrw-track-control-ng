@@ -26,6 +26,7 @@ int main(int argc, char * argv[])
 		mrw::model::ModelRailway     model(filename);
 
 //		model.dump();
+		model.info();
 		settings.setValue("model/filename", filename);
 	}
 	else

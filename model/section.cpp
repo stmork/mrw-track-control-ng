@@ -138,9 +138,9 @@ Section::~Section()
 	rail_parts.clear();
 }
 
-void Section::add(AssemblyPart * rait_part)
+void Section::add(AssemblyPart * rail_part)
 {
-	rail_parts.push_back(rait_part);
+	rail_parts.push_back(rail_part);
 }
 
 void Section::link()
@@ -152,6 +152,11 @@ void Section::link()
 			rail_part->link();
 		}
 	}
+}
+
+QString Section::toString() const
+{
+	return "    Section: " + name();
 }
 
 SectionModule * Section::resolve(const std::string & path) const

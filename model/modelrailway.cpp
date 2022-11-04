@@ -7,8 +7,9 @@
 #include <QDebug>
 #include <QDomElement>
 
-#include "model/modelrailway.h"
 #include "util/method.h"
+#include "model/modelrailway.h"
+#include "model/assemblypart.h"
 
 using namespace mrw::model;
 
@@ -95,6 +96,34 @@ void mrw::model::ModelRailway::link()
 	for (Area * area : areas)
 	{
 		area->link();
+	}
+}
+
+void ModelRailway::info()
+{
+	qInfo() << *this;
+
+	for (Controller * controller : controllers)
+	{
+		qInfo() << *controller;
+	}
+	for (Area * area : areas)
+	{
+		qInfo() << *area;
+
+		for (size_t s = 0; s < area->sectionCount(); s++)
+		{
+			Section * section = area->section(s);
+
+			qInfo() << *section;
+
+			for (size_t a = 0; a < section->railPartCount(); a++)
+			{
+				AssemblyPart * part = section->assemblyPart(a);
+
+				qInfo() << *part;
+			}
+		}
 	}
 }
 

@@ -38,6 +38,7 @@ namespace mrw::model
 		void dump() const;
 		void create();
 		void link();
+		void info();
 
 		inline Controller * controller(const ControllerId idx) const
 		{

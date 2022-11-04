@@ -49,9 +49,9 @@ bool RailDoubleSwitch::valid() const
 
 QString RailDoubleSwitch::toString() const
 {
-	return QString::asprintf("X %s %s--%s: %s",
-			valid() ? "V" : "-",
-			aIsDir() ? "cd" : "ab",
-			aIsDir() ? "ab" : "cd",
-			name().toStdString().c_str());
+	return QString("      X %1 %2--%3: %4").
+			arg(valid() ? "V" : "-").
+			arg(aIsDir() ? "cd" : "ab").
+			arg(aIsDir() ? "ab" : "cd").
+			arg(name());
 }

@@ -48,9 +48,9 @@ bool Rail::valid() const
 
 QString Rail::toString() const
 {
-	return QString::asprintf("# %s %s--%s: %s",
-			valid() ? "V" : "-",
-			a == nullptr ? " |" : aIsDir() ? " a" : " b",
-			b == nullptr ? "| " : aIsDir() ? "b " : "a ",
-			name().toStdString().c_str());
+	return QString("      # %1 %2--%3: %4").
+		arg(valid() ? "V" : "-").
+		arg(a == nullptr ? " |" : aIsDir() ? " a" : " b").
+		arg(b == nullptr ? "| " : aIsDir() ? "b " : "a ").
+		arg(name());
 }

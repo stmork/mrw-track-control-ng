@@ -13,6 +13,7 @@
 
 #include <QDomElement>
 
+#include <util/stringutil.h>
 #include <model/module.h>
 #include <model/device.h>
 
@@ -22,7 +23,7 @@ namespace mrw::model
 	class SectionModule;
 	class AssemblyPart;
 
-	class Section : public Device
+	class Section : public Device, public mrw::util::String
 	{
 		static const std::regex      path_regex;
 
@@ -37,13 +38,15 @@ namespace mrw::model
 			const QDomElement  &  element);
 		virtual ~Section();
 
-		void add(AssemblyPart * rait_part);
+		void add(AssemblyPart * rail_part);
 		void link();
 
 		inline const QString & name() const
 		{
 			return section_name;
 		}
+
+		QString toString() const override;
 
 		inline AssemblyPart * assemblyPart(const int idx) const
 		{

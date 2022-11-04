@@ -21,6 +21,7 @@ Signal::Signal(
 
 QString Signal::toString() const
 {
-	// TODO: Implement!
-	return "";
+	return QString("      %1    %2 : %3").
+			arg(is_main_signal ? "M" : "P").
+			arg(direction ? " --O" : "O-- ").arg(name());
 }
