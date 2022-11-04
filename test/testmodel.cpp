@@ -42,6 +42,7 @@ void TestModel::testModel()
 {
 	QVERIFY(model != nullptr);
 	QVERIFY(model->isValid());
+	model->info();
 }
 
 void TestModel::testControllers()
