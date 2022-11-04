@@ -12,8 +12,8 @@ using namespace mrw::model;
 FormSignal::FormSignal(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element,
-	const bool            is_main) :
-	Signal(model_railway, element, is_main),
+	const SignalType      type) :
+	Signal(model_railway, element, type),
 	SwitchModuleReference(model_railway, element),
 	inductors(model->value(element, "spulen"))
 {

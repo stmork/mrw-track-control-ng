@@ -29,7 +29,7 @@ namespace mrw::model
 		explicit LightSignal(
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element,
-			const bool            is_main,
+			const SignalType      type,
 			const unsigned        light_count);
 
 		void link() override;

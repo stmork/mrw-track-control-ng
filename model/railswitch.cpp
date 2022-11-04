@@ -49,9 +49,9 @@ bool RailSwitch::valid() const
 QString RailSwitch::toString() const
 {
 	return QString("      %1 %2 %3--%4: %5").
-			arg(aIsDir() ? ">" : "<").
-			arg(valid() ? "V" : "-").
-			arg(aIsDir() ? "bc" : " a").
-			arg(aIsDir() ? " a" : "bc").
-			arg(name());
+		arg(aIsDir() ? ">" : "<").
+		arg(valid() ? "V" : "-").
+		arg(aIsDir() ? "bc" : " a").
+		arg(aIsDir() ? " a" : "bc").
+		arg(name());
 }

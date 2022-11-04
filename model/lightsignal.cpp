@@ -46,9 +46,9 @@ const std::regex  LightSignal::path_regex(R"(^\/\/@controller\.(\d+)\/@anschlues
 LightSignal::LightSignal(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element,
-	const bool            is_main,
+	const SignalType      type,
 	const unsigned        light_count) :
-	Signal(model_railway, element, is_main),
+	Signal(model_railway, element, type),
 	lights(light_count)
 {
 	const std::string & path = reference.attribute("anschluss").toStdString();

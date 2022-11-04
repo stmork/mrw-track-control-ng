@@ -23,7 +23,7 @@ namespace mrw::model
 		explicit FormSignal(
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element,
-			const bool            is_main);
+			const SignalType      is_main);
 
 		void link() override;
 	};

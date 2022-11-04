@@ -18,15 +18,23 @@ namespace mrw::model
 		public AssemblyPart,
 		public Device
 	{
+	public:
+		enum SignalType
+		{
+			MAIN_SIGNAL,
+			PRE_SIGNAL,
+			SHUNT_SIGNAL
+		};
+
 	protected:
-		const bool       direction;
-		const bool       is_main_signal;
+		const bool          direction;
+		const SignalType    signal_type;
 
 	public:
 		explicit Signal(
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element,
-			const bool            is_main);
+			const SignalType      type);
 
 		QString toString() const override;
 	};

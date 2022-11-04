@@ -87,31 +87,31 @@ Section::Section(
 				}
 				else if (type == "Gleissperrsignal")
 				{
-					rail_part = new LightSignal(model, child, false, 2);
+					rail_part = new LightSignal(model, child, Signal::SHUNT_SIGNAL, 2);
 				}
 				else if (type == "Vorsignal")
 				{
-					rail_part = new LightSignal(model, child, false, 4);
+					rail_part = new LightSignal(model, child, Signal::PRE_SIGNAL, 4);
 				}
 				else if (type == "Blocksignal")
 				{
-					rail_part = new LightSignal(model, child, true, 2);
+					rail_part = new LightSignal(model, child, Signal::MAIN_SIGNAL, 2);
 				}
 				else if (type == "Einfahrsignal")
 				{
-					rail_part = new LightSignal(model, child, true, 3);
+					rail_part = new LightSignal(model, child, Signal::MAIN_SIGNAL, 3);
 				}
 				else if (type == "Ausfahrsignal")
 				{
-					rail_part = new LightSignal(model, child, true, 5);
+					rail_part = new LightSignal(model, child, Signal::MAIN_SIGNAL, 5);
 				}
 				else if (type == "Formvorsignal")
 				{
-					rail_part = new FormSignal(model, child, false);
+					rail_part = new FormSignal(model, child, Signal::PRE_SIGNAL);
 				}
 				else if (type == "Formhauptsignal")
 				{
-					rail_part = new FormSignal(model, child, true);
+					rail_part = new FormSignal(model, child, Signal::MAIN_SIGNAL);
 				}
 				else
 				{
