@@ -12,8 +12,8 @@
 
 #include <QDomElement>
 
-#include "util/stringutil.h"
-#include "model/module.h"
+#include <util/stringutil.h>
+#include <model/module.h>
 
 namespace mrw::model
 {

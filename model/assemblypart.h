@@ -41,9 +41,6 @@ namespace mrw::model
 		static AssemblyPart * resolve(
 			const ModelRailway * model,
 			const QString    &   reference);
-
-	protected:
-		AssemblyPart * resolve(const char * attr) const;
 	};
 }
 

@@ -54,9 +54,9 @@ AssemblyPart::AssemblyPart(
 {
 }
 
-AssemblyPart * mrw::model::AssemblyPart::resolve(
-	const mrw::model::ModelRailway * model,
-	const QString          &         reference)
+AssemblyPart * AssemblyPart::resolve(
+	const ModelRailway  *  model,
+	const QString     &    reference)
 {
 	std::smatch         matcher;
 	const std::string & path = reference.toStdString();
@@ -72,11 +72,4 @@ AssemblyPart * mrw::model::AssemblyPart::resolve(
 		return model->railPart(area_idx, section_idx, part_idx);
 	}
 	return nullptr;
-}
-
-AssemblyPart * AssemblyPart::resolve(const char * attr) const
-{
-	const QString & value = reference.attribute(attr, "");
-
-	return resolve(model, value);
 }

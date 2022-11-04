@@ -16,15 +16,16 @@ int main(int argc, char * argv[])
 	QApplication app(argc, argv);
 	QDir         home = QDir::homePath();
 	QSettings    settings("mrw", "model");
-	QString      filename = settings.value("model/filename", argc > 1 ?
-			argv[1] :
+	QString      filename = argc > 1 ?
+		argv[1] :
+		settings.value("model/filename",
 			home.filePath("mrw/RailwayModel.modelrailway")).toString();
 
 	if (QFile::exists(filename))
 	{
 		mrw::model::ModelRailway     model(filename);
 
-		model.dump();
+//		model.dump();
 		settings.setValue("model/filename", filename);
 	}
 	else

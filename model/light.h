@@ -9,19 +9,22 @@
 #define MRW_MODEL_LIGHT_H
 
 #include <QDomElement>
+
 #include <model/module.h>
+#include <model/device.h>
 
 namespace mrw::model
 {
-	class Light
+	class Light : public Device
 	{
 	protected:
 		const QString  name;
-		const UnitNo   unit_no;
 		const unsigned threshold;
 
 	public:
-		explicit Light(const QDomElement & element);
+		explicit Light(
+			ModelRailway     *    model_railway,
+			const QDomElement  &  element);
 	};
 }
 

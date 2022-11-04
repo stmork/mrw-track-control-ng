@@ -26,7 +26,7 @@ LightModule::LightModule(
 
 			if (node_name == "lampen")
 			{
-				ProfileLight * light = new ProfileLight(child);
+				ProfileLight * light = new ProfileLight(model, child);
 
 				lights.push_back(light);
 			}

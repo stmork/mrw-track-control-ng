@@ -55,7 +55,7 @@ Section::Section(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) :
 	Device(model_railway, element),
-	name(ModelRailway::string(element, "name")),
+	section_name(ModelRailway::string(element, "name")),
 	model(model_railway)
 {
 	const QDomNodeList & child_nodes = element.childNodes();
@@ -115,7 +115,7 @@ Section::Section(
 				}
 				else
 				{
-					qWarning() << "Unknown rail type" << type;
+					model->warning("Unknown rail type: " + type);
 				}
 				add(rail_part);
 			}

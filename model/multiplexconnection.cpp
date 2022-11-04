@@ -33,7 +33,7 @@ MultiplexConnection::MultiplexConnection(
 
 			if (node_name == "lichter")
 			{
-				Light * light = new Light(child);
+				Light * light = new Light(model, child);
 
 				lights.push_back(light);
 			}

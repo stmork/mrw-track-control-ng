@@ -26,7 +26,7 @@ namespace mrw::model
 	{
 		static const std::regex      path_regex;
 
-		const QString                name;
+		const QString                section_name;
 		ModelRailway        *        model  = nullptr;
 		SectionModule        *       section_module = nullptr;
 		std::vector<AssemblyPart *>  rail_parts;
@@ -39,6 +39,11 @@ namespace mrw::model
 
 		void add(AssemblyPart * rait_part);
 		void link();
+
+		inline const QString & name() const
+		{
+			return section_name;
+		}
 
 		inline AssemblyPart * railPart(const int idx) const
 		{

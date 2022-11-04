@@ -19,6 +19,7 @@ SOURCES += \
 	profilelight.cpp \
 	rail.cpp \
 	raildoubleswitch.cpp \
+	railpart.cpp \
 	railswitch.cpp \
 	section.cpp \
 	sectionmodule.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 HEADERS += \
 	area.h \
 	assemblypart.h \
+	commands.h \
 	controller.h \
 	device.h \
 	formsignal.h \
@@ -41,6 +43,7 @@ HEADERS += \
 	profilelight.h \
 	rail.h \
 	raildoubleswitch.h \
+	railpart.h \
 	railswitch.h \
 	section.h \
 	sectionmodule.h \

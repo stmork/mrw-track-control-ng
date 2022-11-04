@@ -8,17 +8,22 @@
 #ifndef MRW_MODEL_RAIL_H
 #define MRW_MODEL_RAIL_H
 
-#include "assemblypart.h"
+#include <model/railpart.h>
 
 namespace mrw::model
 {
-	class Rail : public AssemblyPart
+	/**
+	 * This class represents a simple rail with two connectors to other
+	 * Assembly Parts. In opposite to switches one connector may be not
+	 * connected representing an end rail.
+	 */
+	class Rail : public RailPart
 	{
 		const bool     is_main;
 		const bool     is_branch;
 
-		AssemblyPart * a = nullptr;
-		AssemblyPart * b = nullptr;
+		RailPart   *   a = nullptr;
+		RailPart   *   b = nullptr;
 
 	public:
 		explicit Rail(

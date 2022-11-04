@@ -11,7 +11,7 @@ using namespace mrw::model;
 RailDoubleSwitch::RailDoubleSwitch(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) :
-	AssemblyPart(model_railway, element),
+	RailPart(model_railway, element),
 	Device(model_railway, element),
 	SwitchModuleReference(model_railway, element),
 	ad_branch(ModelRailway::boolean(element, "adIstAbzweig")),
@@ -25,4 +25,9 @@ void RailDoubleSwitch::link()
 	b = resolve("b");
 	c = resolve("c");
 	d = resolve("d");
+
+	if ((a == nullptr) || (b == nullptr) || (c == nullptr) || (d == nullptr))
+	{
+		model->error("Cross switch not completely connected: " + name());
+	}
 }

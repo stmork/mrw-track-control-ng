@@ -8,6 +8,7 @@
 
 #include <model/switchmodulereference.h>
 #include <model/lightsignal.h>
+#include <model/railpart.h>
 
 #include "testmodel.h"
 
@@ -99,7 +100,7 @@ void TestModel::testSection(Section * section)
 
 	SectionModule * module = section->module();
 
-	QVERIFY(module != nullptr);
+	QVERIFY2(module != nullptr, section->name().toStdString().c_str());
 
 	const size_t rail_count = section->railPartCount();
 	for (unsigned r = 0; r < rail_count; r++)
@@ -117,22 +118,29 @@ void TestModel::testAssemblyPart(AssemblyPart * part)
 
 	SwitchModuleReference * reference = dynamic_cast<SwitchModuleReference *>(part);
 	LightSignal      *      signal    = dynamic_cast<LightSignal *>(part);
+	RailPart        *       rail      = dynamic_cast<RailPart *>(part);
 	Device         *        device    = dynamic_cast<Device *>(part);
-	const char       *      name      = part->name().toStdString().c_str();
+	const std::string   &   name      = part->name().toStdString();
 
 	if (reference != nullptr)
 	{
-		QVERIFY2(signal == nullptr, name);
-		QVERIFY2(device != nullptr, name);
-		QVERIFY2(reference->module() != nullptr, name);
-		QVERIFY2(device->id() != 0, name);
+		QVERIFY2(signal == nullptr, name.c_str());
+		QVERIFY2(device != nullptr, name.c_str());
+		QVERIFY2(reference->module() != nullptr, name.c_str());
+		QVERIFY2(device->id() != 0, name.c_str());
 	}
 
 	if (signal != nullptr)
 	{
-		QVERIFY2(reference == nullptr, name);
-		QVERIFY2(device != nullptr, name);
-		QVERIFY2(signal->connection() != nullptr, name);
-		QVERIFY2(device->id() != 0, name);
+		QVERIFY2(reference == nullptr, name.c_str());
+		QVERIFY2(device != nullptr, name.c_str());
+		QVERIFY2(rail == nullptr, name.c_str());
+		QVERIFY2(signal->connection() != nullptr, name.c_str());
+		QVERIFY2(device->id() != 0, name.c_str());
+	}
+
+	if (rail != nullptr)
+	{
+		QVERIFY2(signal == nullptr, name.c_str());
 	}
 }

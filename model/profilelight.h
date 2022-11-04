@@ -17,7 +17,9 @@ namespace mrw::model
 		const unsigned profile;
 
 	public:
-		explicit ProfileLight(const QDomElement & element);
+		explicit ProfileLight(
+			ModelRailway     *    model_railway,
+			const QDomElement  &  element);
 	};
 }
 

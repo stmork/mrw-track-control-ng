@@ -8,18 +8,22 @@
   </controller>
   <gruppe xsi:type="Modelrailway:Bahnhof">
     <abschnitt name="area 1" unit_no="201" modul="//@controller.0/@module.1">
-      <bauelement xsi:type="Modelrailway:Weiche" name="switch 1" modul="//@controller.0/@module.0" unit_no="2020" neu="true"/>
-      <bauelement xsi:type="Modelrailway:Weiche" name="switch 2" modul="//@controller.0/@module.0" unit_no="2021" neu="true"/>
+      <bauelement xsi:type="Modelrailway:Weiche" name="switch 1" modul="//@controller.0/@module.0" unit_no="2020" neu="true" b="//@gruppe.0/@abschnitt.0/@bauelement.1" c="//@gruppe.0/@abschnitt.0/@bauelement.1" a="//@gruppe.0/@abschnitt.2/@bauelement.0"/>
+      <bauelement xsi:type="Modelrailway:Weiche" name="switch 2" aInZaehlrichtung="true" modul="//@controller.0/@module.0" unit_no="2021" neu="true" b="//@gruppe.0/@abschnitt.0/@bauelement.0" c="//@gruppe.0/@abschnitt.0/@bauelement.0" a="//@gruppe.0/@abschnitt.1/@bauelement.0"/>
       <bauelement xsi:type="Modelrailway:Einfahrsignal" name="A" unit_no="100" anschluss="//@controller.0/@anschluesse.1"/>
       <bauelement xsi:type="Modelrailway:Vorsignal" name="b" unit_no="101" anschluss="//@controller.0/@anschluesse.1"/>
     </abschnitt>
     <abschnitt name="area 2" unit_no="202" modul="//@controller.0/@module.1">
-      <bauelement xsi:type="Modelrailway:Weiche" name="switch 3" modul="//@controller.0/@module.0" unit_no="2019" neu="true"/>
-      <bauelement xsi:type="Modelrailway:Weiche" name="switch 4" modul="//@controller.0/@module.0" unit_no="2001" neu="true"/>
+      <bauelement xsi:type="Modelrailway:Weiche" name="switch 3" modul="//@controller.0/@module.0" unit_no="2019" neu="true" b="//@gruppe.0/@abschnitt.1/@bauelement.1" c="//@gruppe.0/@abschnitt.1/@bauelement.1" a="//@gruppe.0/@abschnitt.0/@bauelement.1"/>
+      <bauelement xsi:type="Modelrailway:Weiche" name="switch 4" aInZaehlrichtung="true" modul="//@controller.0/@module.0" unit_no="2001" neu="true" b="//@gruppe.0/@abschnitt.1/@bauelement.0" c="//@gruppe.0/@abschnitt.1/@bauelement.0" a="//@gruppe.0/@abschnitt.3/@bauelement.0"/>
       <bauelement xsi:type="Modelrailway:Vorsignal" name="a" unit_no="102" anschluss="//@controller.0/@anschluesse.0"/>
       <bauelement xsi:type="Modelrailway:Gleissperrsignal" name="I" unit_no="103" anschluss="//@controller.0/@anschluesse.0"/>
     </abschnitt>
-    <abschnitt name="area 3" unit_no="203" modul="//@controller.0/@module.1"/>
-    <abschnitt name="area 4" unit_no="204" modul="//@controller.0/@module.1"/>
+    <abschnitt name="area 3" unit_no="203" modul="//@controller.0/@module.1">
+      <bauelement xsi:type="Modelrailway:Gleis" name="left" b="//@gruppe.0/@abschnitt.0/@bauelement.0"/>
+    </abschnitt>
+    <abschnitt name="area 4" unit_no="204" modul="//@controller.0/@module.1">
+      <bauelement xsi:type="Modelrailway:Gleis" name="right" a="//@gruppe.0/@abschnitt.1/@bauelement.1"/>
+    </abschnitt>
   </gruppe>
 </Modelrailway:Modell>

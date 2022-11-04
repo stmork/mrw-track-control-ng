@@ -11,7 +11,7 @@ using namespace mrw::model;
 RailSwitch::RailSwitch(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) :
-	AssemblyPart(model_railway, element),
+	RailPart(model_railway, element),
 	Device(model_railway, element),
 	SwitchModuleReference(model_railway, element),
 	left_branch( ModelRailway::boolean(element, "bIstAbzweig", false)),
@@ -26,4 +26,9 @@ void RailSwitch::link()
 	a = resolve("a");
 	b = resolve("b");
 	c = resolve("c");
+
+	if ((a == nullptr) || (b == nullptr) || (c == nullptr))
+	{
+		model->error("Switch not completely connected: " + name());
+	}
 }

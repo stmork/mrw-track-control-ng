@@ -8,24 +8,24 @@
 #ifndef MRW_MODEL_RAILDOUBLESWITCH_H
 #define MRW_MODEL_RAILDOUBLESWITCH_H
 
-#include <model/assemblypart.h>
+#include <model/railpart.h>
 #include <model/switchmodulereference.h>
 #include <model/device.h>
 
 namespace mrw::model
 {
 	class RailDoubleSwitch :
-		public AssemblyPart,
+		public RailPart,
 		public Device,
 		public SwitchModuleReference
 	{
 		const bool     ad_branch;
 		const bool     bc_branch;
 
-		AssemblyPart * a = nullptr;
-		AssemblyPart * b = nullptr;
-		AssemblyPart * c = nullptr;
-		AssemblyPart * d = nullptr;
+		RailPart   *   a = nullptr;
+		RailPart   *   b = nullptr;
+		RailPart   *   c = nullptr;
+		RailPart   *   d = nullptr;
 
 	public:
 		explicit RailDoubleSwitch(

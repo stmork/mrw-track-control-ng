@@ -10,8 +10,8 @@
 
 #include <regex>
 
-#include "model/module.h"
-#include "model/signal.h"
+#include <model/module.h>
+#include <model/signal.h>
 
 namespace mrw::model
 {
