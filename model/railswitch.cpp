@@ -40,9 +40,9 @@ void RailSwitch::link()
 bool RailSwitch::valid() const
 {
 	return
-		a->contains(this,  aIsDir()) &&
-		b->contains(this, !aIsDir()) &&
-		c->contains(this, !aIsDir());
+		(a != nullptr) && a->contains(this,  aIsDir()) &&
+		(b != nullptr) && b->contains(this, !aIsDir()) &&
+		(c != nullptr) && c->contains(this, !aIsDir());
 }
 
 QString RailSwitch::toString() const

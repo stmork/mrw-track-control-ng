@@ -13,6 +13,16 @@
 
 namespace mrw::model
 {
+	/**
+	 * This RailPart represents a double cross switch with four connectors.
+	 * The naming is as follows:
+	 * <pre>
+	 *     A_   _C
+	 *       \_/
+	 *      _/ \_
+	 *     B     D
+	 * </pre>
+	 */
 	class RailDoubleSwitch :
 		public RailPart,
 		public SwitchModuleReference

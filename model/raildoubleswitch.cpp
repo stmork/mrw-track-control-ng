@@ -40,10 +40,10 @@ void RailDoubleSwitch::link()
 bool RailDoubleSwitch::valid() const
 {
 	return
-		a->contains(this, aIsDir()) &&
-		b->contains(this, aIsDir()) &&
-		c->contains(this, !aIsDir()) &&
-		d->contains(this, !aIsDir());
+		(a != nullptr) && a->contains(this, aIsDir()) &&
+		(b != nullptr) && b->contains(this, aIsDir()) &&
+		(c != nullptr) && c->contains(this, !aIsDir()) &&
+		(d != nullptr) && d->contains(this, !aIsDir());
 }
 
 QString RailDoubleSwitch::toString() const
