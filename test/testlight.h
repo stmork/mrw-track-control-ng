@@ -16,6 +16,8 @@ namespace mrw::test
 {
 	class TestLight : public TestModel
 	{
+		Q_OBJECT
+
 	public:
 		TestLight();
 

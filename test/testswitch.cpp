@@ -15,13 +15,12 @@ using namespace mrw::model;
 
 TestSwitch::TestSwitch() : TestModel("Test-Switch")
 {
-
 }
 
 void TestSwitch::testSwitch()
 {
 	QCOMPARE(model->controllerCount(), 1u);
-	QCOMPARE(model->areaCount(), 2u);
+	QCOMPARE(model->areaCount(), 1u);
 
 	Controller * controller = model->controller(0);
 

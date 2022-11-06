@@ -3,7 +3,6 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include <QFile>
 #include <QTest>
 
 #include <model/switchmodulereference.h>
@@ -17,25 +16,8 @@ using namespace mrw::test;
 using namespace mrw::model;
 
 TestModel::TestModel(const char * modelname, QObject * parent) :
-	QObject(parent),
-	filename(QString(modelname) + ".modelrailway")
+	TestModelBase(modelname, parent)
 {
-	if (!QFile::exists(filename))
-	{
-		filename = "test/" + filename;
-	}
-}
-
-void TestModel::initTestCase()
-{
-	model = new ModelRailway(filename);
-	QVERIFY(model != nullptr);
-}
-
-void TestModel::cleanupTestCase()
-{
-	delete model;
-	model = nullptr;
 }
 
 void TestModel::testModel()

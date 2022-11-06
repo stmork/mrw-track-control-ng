@@ -16,6 +16,8 @@ namespace mrw::test
 {
 	class TestSwitch : public TestModel
 	{
+		Q_OBJECT
+
 	public:
 		TestSwitch();
 

@@ -195,8 +195,10 @@ void ModelRailway::add(Device * device)
 	}
 	else
 	{
-		error(QString("Devices %1 and %2 have both the same unit no: %3!").
-			arg(it->second->name()).arg(device->name()).arg(id));
+		Device * other = it->second;
+
+		error(QString("Devices %1 and %2 have both the same unit no: %2!").
+			arg(other->name()).arg(id));
 	}
 }
 

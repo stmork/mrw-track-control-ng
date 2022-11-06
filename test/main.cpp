@@ -8,6 +8,8 @@
 
 #include "testmodel.h"
 #include "testswitch.h"
+#include "testlight.h"
+#include "testnumbering.h"
 #include "testutil.h"
 
 using namespace mrw::test;
@@ -48,10 +50,21 @@ static int testSimpleSwitch()
 
 static int testSimpleLight()
 {
-	TestSwitch  test;
+	TestLight   test;
 	QStringList args
 	{
 		"MRW-Test", "-o", "qtest-light.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
+static int testNumbering()
+{
+	TestNumbering  test;
+	QStringList    args
+	{
+		"MRW-Test", "-o", "qtest-numbering.xml", "-xml"
 	};
 
 	return QTest::qExec(&test, args);
@@ -68,6 +81,7 @@ int main(int argc, char * argv[])
 	status += testModel();
 	status += testSimpleSwitch();
 	status += testSimpleLight();
+	status += testNumbering();
 
 	if (status == 0)
 	{

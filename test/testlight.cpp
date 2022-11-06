@@ -18,7 +18,7 @@ TestLight::TestLight() : TestModel("Test-Light")
 void TestLight::testLight()
 {
 	QCOMPARE(model->controllerCount(), 1u);
-	QCOMPARE(model->areaCount(), 2u);
+	QCOMPARE(model->areaCount(), 1u);
 
 	Controller * controller = model->controller(0);
 

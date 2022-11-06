@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Modelrailway:Modell xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Modelrailway="http://www.morknet.de/Modelrailway">
+  <controller/>
+  <gruppe xsi:type="Modelrailway:Bahnhof">
+    <abschnitt>
+      <bauelement xsi:type="Modelrailway:Gleis" name="left end" b="//@gruppe.0/@abschnitt.0/@bauelement.1"/>
+      <bauelement xsi:type="Modelrailway:Weiche" name="left" unit_no="3" b="//@gruppe.0/@abschnitt.0/@bauelement.2" c="//@gruppe.0/@abschnitt.0/@bauelement.2" a="//@gruppe.0/@abschnitt.0/@bauelement.0"/>
+      <bauelement xsi:type="Modelrailway:Weiche" name="right" b="//@gruppe.0/@abschnitt.0/@bauelement.1" c="//@gruppe.0/@abschnitt.0/@bauelement.0" a="//@gruppe.0/@abschnitt.0/@bauelement.3"/>
+      <bauelement xsi:type="Modelrailway:Gleis" name="right end" a="//@gruppe.0/@abschnitt.0/@bauelement.2"/>
+    </abschnitt>
+  </gruppe>
+</Modelrailway:Modell>
