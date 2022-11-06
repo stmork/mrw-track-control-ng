@@ -159,7 +159,7 @@ QString Section::toString() const
 	return "    Section: " + name();
 }
 
-SectionModule * Section::resolve(const std::string & path) const
+SectionModule * Section::resolve(const std::string & path)
 {
 	std::smatch matcher;
 
@@ -167,10 +167,11 @@ SectionModule * Section::resolve(const std::string & path) const
 	{
 		Q_ASSERT(matcher.size() >= 3);
 
-		const unsigned constroller_idx = std::stoul(matcher[1]);
-		const unsigned module_idx      = std::stoul(matcher[2]);
+		const unsigned controller_idx = std::stoul(matcher[1]);
+		const unsigned module_idx     = std::stoul(matcher[2]);
 
-		return static_cast<SectionModule *>(model->module(constroller_idx, module_idx));
+		section_controller = model->controller(controller_idx);
+		return static_cast<SectionModule *>(model->module(controller_idx, module_idx));
 	}
 	return nullptr;
 }

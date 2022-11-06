@@ -10,7 +10,6 @@
 
 #include <model/railpart.h>
 #include <model/switchmodulereference.h>
-#include <model/device.h>
 
 namespace mrw::model
 {
@@ -19,7 +18,6 @@ namespace mrw::model
 
 	class RailSwitch :
 		public RailPart,
-		public Device,
 		public SwitchModuleReference
 	{
 		const bool     left_branch;

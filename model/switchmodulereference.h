@@ -12,21 +12,30 @@
 
 #include <QDomElement>
 
+#include <model/device.h>
+
 namespace mrw::model
 {
 	class ModelRailway;
+	class Controller;
 	class SwitchModule;
 
-	class SwitchModuleReference
+	class SwitchModuleReference : public Device
 	{
 		static const std::regex  path_regex;
 
-		SwitchModule * switch_module = nullptr;
+		Controller  *  switch_controller = nullptr;
+		SwitchModule * switch_module     = nullptr;
 
 	public:
 		explicit SwitchModuleReference(
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
+
+		inline Controller * controller() const override
+		{
+			return switch_controller;
+		}
 
 		inline SwitchModule * module() const
 		{

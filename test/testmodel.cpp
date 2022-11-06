@@ -125,7 +125,7 @@ void TestModel::testSections()
 void TestModel::testSection(Section * section)
 {
 	QVERIFY(section != nullptr);
-	QVERIFY(section->id() != 0);
+	QVERIFY(section->unitNo() != 0);
 
 	SectionModule * module = section->module();
 
@@ -156,7 +156,6 @@ void TestModel::testAssemblyPart(AssemblyPart * part)
 		QVERIFY2(signal == nullptr, name.c_str());
 		QVERIFY2(device != nullptr, name.c_str());
 		QVERIFY2(reference->module() != nullptr, name.c_str());
-		QVERIFY2(device->id() != 0, name.c_str());
 	}
 
 	if (signal != nullptr)
@@ -165,12 +164,17 @@ void TestModel::testAssemblyPart(AssemblyPart * part)
 		QVERIFY2(device != nullptr, name.c_str());
 		QVERIFY2(rail == nullptr, name.c_str());
 		QVERIFY2(signal->connection() != nullptr, name.c_str());
-		QVERIFY2(device->id() != 0, name.c_str());
 	}
 
 	if (rail != nullptr)
 	{
 		QVERIFY2(signal == nullptr, name.c_str());
 		QVERIFY2(rail->valid(), name.c_str());
+	}
+
+	if (device != nullptr)
+	{
+		QVERIFY2(device->unitNo() != 0, name.c_str());
+		QVERIFY2(device->controller() != nullptr, name.c_str());
 	}
 }

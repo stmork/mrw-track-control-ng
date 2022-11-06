@@ -28,8 +28,9 @@ namespace mrw::model
 		static const std::regex      path_regex;
 
 		const QString                section_name;
-		ModelRailway        *        model  = nullptr;
-		SectionModule        *       section_module = nullptr;
+		ModelRailway        *        model              = nullptr;
+		Controller         *         section_controller = nullptr;
+		SectionModule        *       section_module     = nullptr;
 		std::vector<AssemblyPart *>  rail_parts;
 
 	public:
@@ -63,8 +64,13 @@ namespace mrw::model
 			return section_module;
 		}
 
-	protected:
-		SectionModule * resolve(const std::string & path) const;
+		inline Controller * controller() const override
+		{
+			return section_controller;
+		}
+
+	private:
+		SectionModule * resolve(const std::string & path);
 	};
 }
 

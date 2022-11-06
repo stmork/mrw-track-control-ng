@@ -31,6 +31,11 @@ namespace mrw::model
 		{
 			return light_name;
 		}
+
+		inline Controller * controller() const override
+		{
+			return nullptr;
+		}
 	};
 }
 

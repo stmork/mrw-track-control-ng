@@ -10,13 +10,11 @@
 
 #include "model/module.h"
 #include "model/assemblypart.h"
-#include <model/device.h>
 
 namespace mrw::model
 {
 	class Signal :
-		public AssemblyPart,
-		public Device
+		public AssemblyPart
 	{
 	public:
 		enum SignalType
@@ -35,11 +33,6 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element,
 			const SignalType      type);
-
-		inline const QString & name() const override
-		{
-			return part_name;
-		}
 
 		void link() override;
 		QString toString() const override;

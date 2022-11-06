@@ -24,6 +24,11 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element,
 			const SignalType      is_main);
+
+		inline const QString & name() const override
+		{
+			return part_name;
+		}
 	};
 }
 

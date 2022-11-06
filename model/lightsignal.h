@@ -12,18 +12,20 @@
 
 #include <model/module.h>
 #include <model/signal.h>
+#include <model/device.h>
 
 namespace mrw::model
 {
 	class MultiplexConnection;
 
-	class LightSignal : public Signal
+	class LightSignal : public Signal, public Device
 	{
 		static const std::regex path_regex;
 
 		const unsigned lights;
 
-		MultiplexConnection * mux_connection = nullptr;
+		Controller      *     signal_controller = nullptr;
+		MultiplexConnection * mux_connection    = nullptr;
 
 	public:
 		explicit LightSignal(
@@ -32,9 +34,19 @@ namespace mrw::model
 			const SignalType      type,
 			const unsigned        light_count);
 
+		inline Controller * controller() const override
+		{
+			return signal_controller;
+		}
+
 		inline MultiplexConnection * connection() const
 		{
 			return mux_connection;
+		}
+
+		inline const QString & name() const override
+		{
+			return part_name;
 		}
 	};
 }

@@ -48,7 +48,8 @@ const std::regex  SwitchModuleReference::path_regex(R"(^\/\/@controller\.(\d+)\/
 
 SwitchModuleReference::SwitchModuleReference(
 	ModelRailway     *    model_railway,
-	const QDomElement  &  element)
+	const QDomElement  &  element) :
+	Device(model_railway, element)
 {
 	std::string path = ModelRailway::string(element, "modul").toStdString();
 	std::smatch matcher;
@@ -60,7 +61,9 @@ SwitchModuleReference::SwitchModuleReference(
 		const unsigned constroller_idx = std::stoul(matcher[1]);
 		const unsigned module_idx      = std::stoul(matcher[2]);
 
-		switch_module = dynamic_cast<SwitchModule *>(model_railway->module(constroller_idx, module_idx));
+		switch_controller = model_railway->controller(constroller_idx);
+		switch_module     = dynamic_cast<SwitchModule *>(
+				model_railway->module(constroller_idx, module_idx));
 	}
 	else
 	{

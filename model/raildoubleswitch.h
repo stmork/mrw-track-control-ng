@@ -10,13 +10,11 @@
 
 #include <model/railpart.h>
 #include <model/switchmodulereference.h>
-#include <model/device.h>
 
 namespace mrw::model
 {
 	class RailDoubleSwitch :
 		public RailPart,
-		public Device,
 		public SwitchModuleReference
 	{
 		const bool     ad_branch;

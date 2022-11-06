@@ -186,7 +186,7 @@ void ModelRailway::add(Controller * controller)
 
 void ModelRailway::add(Device * device)
 {
-	const UnitNo id = device->id();
+	const UnitNo id = device->unitNo();
 	const auto   it = device_map.find(id);
 
 	if (it == device_map.end())

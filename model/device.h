@@ -14,19 +14,23 @@ namespace mrw::model
 {
 	typedef uint16_t UnitNo;
 
+	class Controller;
+
 	class Device
 	{
-		const UnitNo             unit_no;
+		const UnitNo   unit_no;
 
 	public:
 		explicit Device(
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
 
-		inline UnitNo id() const
+		inline UnitNo unitNo() const
 		{
 			return unit_no;
 		}
+
+		virtual Controller * controller() const = 0;
 
 		virtual const QString & name() const = 0;
 	};

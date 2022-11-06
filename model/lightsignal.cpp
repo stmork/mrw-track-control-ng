@@ -49,6 +49,7 @@ LightSignal::LightSignal(
 	const SignalType      type,
 	const unsigned        light_count) :
 	Signal(model_railway, element, type),
+	Device(model_railway, element),
 	lights(light_count)
 {
 	const std::string & path = reference.attribute("anschluss").toStdString();
@@ -61,7 +62,8 @@ LightSignal::LightSignal(
 		const unsigned controller_idx = std::stoul(matcher[1]);
 		const unsigned conn_idx       = std::stoul(matcher[2]);
 
-		mux_connection = model->connection(controller_idx, conn_idx);
+		signal_controller = model->controller(controller_idx);
+		mux_connection    = model->connection(controller_idx, conn_idx);
 	}
 	else
 	{
