@@ -18,13 +18,19 @@ namespace mrw::model
 	class Light : public Device
 	{
 	protected:
-		const QString  name;
+		const QString  light_name;
 		const unsigned threshold;
 
 	public:
 		explicit Light(
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
+		virtual ~Light() = default;
+
+		inline const QString & name() const override
+		{
+			return light_name;
+		}
 	};
 }
 

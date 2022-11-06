@@ -35,6 +35,11 @@ namespace mrw::model
 		bool valid() const override;
 
 		QString toString() const override;
+
+		inline const QString & name() const
+		{
+			return part_name;
+		}
 	};
 }
 

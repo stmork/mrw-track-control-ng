@@ -12,6 +12,7 @@
 
 namespace mrw::model
 {
+	typedef uint16_t UnitNo;
 
 	class Device
 	{
@@ -26,6 +27,8 @@ namespace mrw::model
 		{
 			return unit_no;
 		}
+
+		virtual const QString & name() const = 0;
 	};
 }
 

@@ -41,7 +41,7 @@ namespace mrw::model
 		void add(AssemblyPart * rail_part);
 		void link();
 
-		inline const QString & name() const
+		inline const QString & name() const override
 		{
 			return section_name;
 		}

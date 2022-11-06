@@ -12,7 +12,7 @@ Light::Light(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) :
 	Device(model_railway, element),
-	name(ModelRailway::string(element, "name")),
+	light_name(ModelRailway::string(element, "name")),
 	threshold(ModelRailway::value(element, "schwellwert"))
 {
 }

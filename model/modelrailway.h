@@ -12,6 +12,7 @@
 #include <QString>
 
 #include <vector>
+#include <unordered_map>
 
 #include <util/stringutil.h>
 #include <model/controller.h>
@@ -28,6 +29,8 @@ namespace mrw::model
 		QString                    name;
 		std::vector<Controller *>  controllers;
 		std::vector<Area *>        areas;
+		std::unordered_map<ControllerId, Controller *> controller_map;
+		std::unordered_map<ControllerId, Device *>     device_map;
 		size_t                     warnings = 0;
 		size_t                     errors   = 0;
 
@@ -40,9 +43,19 @@ namespace mrw::model
 		void link();
 		void info();
 
-		inline Controller * controller(const ControllerId idx) const
+		inline Controller * controller(const size_t idx) const
 		{
 			return controllers.at(idx);
+		}
+
+		inline Controller * controllerById(const ControllerId id) const
+		{
+			return controller_map.find(id)->second;
+		}
+
+		inline Device * deviceById(const UnitNo id) const
+		{
+			return device_map.find(id)->second;
 		}
 
 		inline size_t controllerCount() const
@@ -51,8 +64,8 @@ namespace mrw::model
 		}
 
 		inline Module * module(
-			const ControllerId controller_idx,
-			const ModuleId     module_idx) const
+			const size_t controller_idx,
+			const size_t     module_idx) const
 		{
 			return controller(controller_idx)->module(module_idx);
 		}
@@ -76,15 +89,15 @@ namespace mrw::model
 
 		inline Section * section(
 			const size_t area_idx,
-			const UnitNo section_idx) const
+			const size_t section_idx) const
 		{
 			return area(area_idx)->section(section_idx);
 		}
 
 		inline AssemblyPart * railPart(
 			const size_t area_idx,
-			const UnitNo section_idx,
-			const UnitNo rail_idx) const
+			const size_t section_idx,
+			const size_t rail_idx) const
 		{
 			return section(area_idx, section_idx)->assemblyPart(rail_idx);
 		}
@@ -102,6 +115,8 @@ namespace mrw::model
 			return errors == 0;
 		}
 
+		void add(Controller * controller);
+		void add(Device * device);
 
 		QString toString() const override;
 

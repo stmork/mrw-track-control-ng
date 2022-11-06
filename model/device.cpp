@@ -17,4 +17,5 @@ Device::Device(
 	{
 		model_railway->error(element.nodeName() + " has no unit number!");
 	}
+	model_railway->add(this);
 }

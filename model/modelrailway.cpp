@@ -68,7 +68,8 @@ void ModelRailway::create()
 			{
 				Controller * controller = new Controller(this, child.toElement());
 
-				controllers.push_back(controller);
+				add(controller);
+
 				qDebug().noquote() << *controller;
 			}
 			else if (node_name == "gruppe")
@@ -165,6 +166,38 @@ void ModelRailway::error(const QString & message)
 {
 	errors++;
 	qCritical().noquote() << message;
+}
+
+void ModelRailway::add(Controller * controller)
+{
+	const ControllerId id = controller->id();
+
+	controllers.push_back(controller);
+	if (controller_map.find(id) == controller_map.end())
+	{
+		controller_map.emplace(id, controller);
+	}
+	else
+	{
+		error(QString(
+				"There is already a registered controoler with id: %1!").arg(id));
+	}
+}
+
+void ModelRailway::add(Device * device)
+{
+	const UnitNo id = device->id();
+	const auto   it = device_map.find(id);
+
+	if (it == device_map.end())
+	{
+		device_map.emplace(id, device);
+	}
+	else
+	{
+		error(QString("Devices %1 and %2 have both the same unit no: %3!").
+			arg(it->second->name()).arg(device->name()).arg(id));
+	}
 }
 
 QString mrw::model::ModelRailway::toString() const

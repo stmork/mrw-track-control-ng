@@ -13,7 +13,6 @@
 #include <QDomElement>
 
 #include <util/stringutil.h>
-#include <model/module.h>
 
 namespace mrw::model
 {
@@ -37,7 +36,7 @@ namespace mrw::model
 		void add(Section * section);
 		void link();
 
-		inline Section * section(const UnitNo index) const
+		inline Section * section(const size_t index) const
 		{
 			return sections.at(index);
 		}

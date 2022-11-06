@@ -25,8 +25,8 @@ namespace mrw::model
 
 	class Controller : public mrw::util::String
 	{
-		const ControllerId  controller_id;
-		ModelRailway    *   model = nullptr;
+		const ControllerId                  controller_id;
+		ModelRailway            *           model = nullptr;
 		std::vector<Module *>               modules;
 		std::vector<MultiplexConnection *>  connections;
 

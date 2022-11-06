@@ -36,6 +36,11 @@ namespace mrw::model
 			const QDomElement  &  element,
 			const SignalType      type);
 
+		inline const QString & name() const override
+		{
+			return part_name;
+		}
+
 		void link() override;
 		QString toString() const override;
 	};
