@@ -25,6 +25,8 @@ namespace mrw::model
 
 	class ModelRailway : public mrw::util::String
 	{
+		friend class Device;
+
 		QDomDocument               xml;
 		QString                    name;
 		std::vector<Controller *>  controllers;
@@ -39,8 +41,6 @@ namespace mrw::model
 		virtual ~ModelRailway();
 
 		void dump() const;
-		void create();
-		void link();
 		void info();
 
 		inline Controller * controller(const size_t idx) const
@@ -115,12 +115,14 @@ namespace mrw::model
 			return errors == 0;
 		}
 
-		void add(Controller * controller);
-		void add(Device * device);
-
 		QString toString() const override;
 
 	private:
+		void create();
+		void add(Controller * controller);
+		void add(Device * device);
+		void link();
+
 		void dump(const QDomNode & node, const QString & indent = "") const;
 	};
 }

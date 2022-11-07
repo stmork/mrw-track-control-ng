@@ -19,6 +19,8 @@ namespace mrw::model
 
 	class MultiplexConnection
 	{
+		friend class Controller;
+
 		ModelRailway    *   model = nullptr;
 
 		const QDomElement   reference;
@@ -38,6 +40,7 @@ namespace mrw::model
 			return connection_id;
 		}
 
+	private:
 		void link();
 	};
 }

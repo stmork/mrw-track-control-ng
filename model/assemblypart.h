@@ -24,6 +24,8 @@ namespace mrw::model
 	 */
 	class AssemblyPart : public mrw::util::String
 	{
+		friend class Section;
+
 		static const std::regex path_regex;
 
 	protected:
@@ -36,11 +38,6 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
 		virtual ~AssemblyPart() = default;
-
-		/**
-		 * This method links all elements needed for the implementation.
-		 */
-		virtual void link() = 0;
 
 		/**
 		 * This method returns the name modelled inside the EMF/XMI model
@@ -56,6 +53,12 @@ namespace mrw::model
 		static AssemblyPart * resolve(
 			const ModelRailway * model,
 			const QString    &   reference);
+
+	protected:
+		/**
+		 * This method links all elements needed for the implementation.
+		 */
+		virtual void link() = 0;
 	};
 }
 

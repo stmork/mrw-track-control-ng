@@ -20,8 +20,8 @@ namespace mrw::model
 {
 	typedef uint16_t ControllerId;
 
-	class ModelRailway;
 	class MultiplexConnection;
+	class ModelRailway;
 
 	/**
 	 * This class represents a CAN-Node named as Controller here. It can
@@ -48,13 +48,14 @@ namespace mrw::model
 		std::vector<Module *>               modules;
 		std::vector<MultiplexConnection *>  connections;
 
+		friend class ModelRailway;
+
+
 	public:
 		explicit Controller(
 			ModelRailway * model_railway,
 			const QDomElement & element);
 		virtual ~Controller();
-
-		void link();
 
 		/**
 		 * This method returns the controller ID which is part of the
@@ -74,7 +75,7 @@ namespace mrw::model
 		/**
 		 * This method returns the nth Module element. It is not ID-based
 		 * but index based and is used for linking the modules after the
-		 * model is loaded into memory.
+		 * model has loaded into memory.
 		 *
 		 * @param index The zero based index of connected Module boards.
 		 * @return The found Module instance.
@@ -104,8 +105,6 @@ namespace mrw::model
 		 * @param index The zero based index of connected MultiplexConnection
 		 * boards.
 		 * @return The found MultiplexConnection instance.
-		 *
-		 * @see link()
 		 */
 		inline MultiplexConnection * connection(const ModuleId index) const
 		{
@@ -113,6 +112,12 @@ namespace mrw::model
 		}
 
 		virtual QString toString() const override;
+
+	private:
+		/**
+		 * This method links all elements needed for the implementation.
+		 */
+		void link();
 	};
 }
 

@@ -88,7 +88,7 @@ void ModelRailway::create()
 	qDebug() << *this;
 }
 
-void mrw::model::ModelRailway::link()
+void ModelRailway::link()
 {
 	for (Controller * controller : controllers)
 	{

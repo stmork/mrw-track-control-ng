@@ -21,6 +21,8 @@ namespace mrw::model
 
 	class Module
 	{
+		friend class Controller;
+
 		const ModuleId      module_id;
 
 	protected:
@@ -38,6 +40,7 @@ namespace mrw::model
 			return module_id;
 		}
 
+	private:
 		virtual void link() = 0;
 	};
 }

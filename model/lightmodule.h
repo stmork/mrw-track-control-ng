@@ -28,6 +28,7 @@ namespace mrw::model
 			const QDomElement  &  element);
 		virtual ~LightModule();
 
+	private:
 		void link() override;
 	};
 }

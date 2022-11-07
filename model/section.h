@@ -25,6 +25,8 @@ namespace mrw::model
 
 	class Section : public Device, public mrw::util::String
 	{
+		friend class Region;
+
 		static const std::regex      path_regex;
 
 		const QString                section_name;
@@ -38,9 +40,6 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
 		virtual ~Section();
-
-		void add(AssemblyPart * rail_part);
-		void link();
 
 		inline const QString & name() const override
 		{
@@ -70,6 +69,8 @@ namespace mrw::model
 		}
 
 	private:
+		void            add(AssemblyPart * rail_part);
+		void            link();
 		SectionModule * resolve(const std::string & path);
 	};
 }

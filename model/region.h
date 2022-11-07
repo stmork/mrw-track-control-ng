@@ -16,7 +16,6 @@
 
 namespace mrw::model
 {
-	class ModelRailway;
 	class Section;
 
 	/**
@@ -28,10 +27,13 @@ namespace mrw::model
 	 */
 	class Region : public mrw::util::String
 	{
+		friend class ModelRailway;
+
 		const QString           name;
 		const bool              is_station;
 		ModelRailway      *     model = nullptr;
 		std::vector<Section *>  sections;
+
 
 	public:
 		explicit Region(
@@ -40,21 +42,36 @@ namespace mrw::model
 			const bool            station);
 		virtual ~Region();
 
-		void add(Section * section);
-		void link();
-
+		/**
+		 * This method returns the nth Section element. It is not ID-based
+		 * but index based and is used for linking the Sections after the
+		 * model has loaded into memory.
+		 *
+		 * @param index The zero based index of the Section.
+		 * @return The found Section instance.
+		 *
+		 * @see link()
+		 */
 		inline Section * section(const size_t index) const
 		{
 			return sections.at(index);
 		}
 
-
+		/**
+		 * This method returns the amount of included Section elements.
+		 *
+		 * @return The Section count.
+		 */
 		inline size_t sectionCount() const
 		{
 			return sections.size();
 		}
 
 		QString toString() const override;
+
+	private:
+		void add(Section * section);
+		void link();
 	};
 }
 
