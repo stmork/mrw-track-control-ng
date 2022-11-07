@@ -42,6 +42,12 @@ namespace mrw::model
 		 */
 		virtual void link() = 0;
 
+		/**
+		 * This method returns the name modelled inside the EMF/XMI model
+		 * file.
+		 *
+		 * @return The Device name modelled inside the EMF/XMI model.
+		 */
 		inline const QString & name() const
 		{
 			return part_name;

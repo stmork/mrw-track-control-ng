@@ -34,6 +34,7 @@ namespace mrw::model
 
 		inline Controller * controller() const override
 		{
+			// FIXME: Initialize pointer!
 			return nullptr;
 		}
 	};

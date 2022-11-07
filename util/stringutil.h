@@ -51,7 +51,18 @@ namespace mrw::util
 		 * This method surrounds a string with a given console format command.
 		 * After the given input string to format command is reset.
 		 *
-		 * @param code The format command to switch on.
+		 * @note The final ALL_OFF formatting code deactivates all previous
+		 * codes so you have to prepare the strings as your needs by multiple
+		 * calls to this method.
+		 *
+		 * @code
+		 * const QString & result =
+			String::format(RED_ON + ITALIC_ON, "red italic") +
+			String::format(ITALIC_ON, " only italic");
+		 * @endcode
+		 *
+		 * @param code The format command to switch on. You can concatinate any
+		 * of the console formatting code given below.
 		 * @param input The input string to surround with format commands.
 		 * @return The formatted string.
 		 */
@@ -75,16 +86,18 @@ namespace mrw::util
 			return format(BOLD_ON, input);
 		}
 
-		static const QString RED_ON;
-		static const QString GREEN_ON;
-		static const QString BLUE_ON;
-		static const QString MAGENTA_ON;
-		static const QString CYAN_ON;
-		static const QString WHITE_ON;
+		static const QString RED_ON;     ///< Turns console output into red.
+		static const QString GREEN_ON;   ///< Turns console output into green.
+		static const QString BLUE_ON;    ///< Turns console output into blue.
+		static const QString MAGENTA_ON; ///< Turns console output into magenta.
+		static const QString CYAN_ON;    ///< Turns console output into cyan.
+		static const QString WHITE_ON;   ///< Turns console output into white.
 
-		static const QString BOLD_ON;
-		static const QString ITALIC_ON;
-		static const QString UNDERLINE_ON;
+		static const QString BOLD_ON;       ///< Turns console output into bold.
+		static const QString ITALIC_ON;     ///< Turns console output into italic.
+		static const QString UNDERLINE_ON;  ///< Turns on underlined console output.
+
+		/** This turns off all of the previously activated console formatting. */
 		static const QString ALL_OFF;
 	};
 
