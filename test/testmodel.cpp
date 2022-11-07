@@ -68,39 +68,39 @@ void TestModel::testModule(Module * module)
 	QVERIFY(module->id() != 0);
 }
 
-void TestModel::testAreas()
+void TestModel::testRegions()
 {
-	const size_t count = model->areaCount();
+	const size_t count = model->regionCount();
 
 	for (unsigned i = 0; i < count; i++)
 	{
-		Area * area = model->area(i);
+		Region * region = model->region(i);
 
-		QVERIFY(area != nullptr);
+		QVERIFY(region != nullptr);
 	}
 
-	QVERIFY_EXCEPTION_THROWN(model->area(count), std::out_of_range);
+	QVERIFY_EXCEPTION_THROWN(model->region(count), std::out_of_range);
 }
 
 void TestModel::testSections()
 {
-	const size_t area_count = model->areaCount();
+	const size_t region_count = model->regionCount();
 
-	for (unsigned a = 0; a < area_count; a++)
+	for (unsigned a = 0; a < region_count; a++)
 	{
-		Area * area = model->area(a);
+		Region * region = model->region(a);
 
-		QVERIFY(area != nullptr);
+		QVERIFY(region != nullptr);
 
-		const size_t section_count = area->sectionCount();
+		const size_t section_count = region->sectionCount();
 		for (unsigned s = 0; s < section_count; s++)
 		{
-			Section * section = area->section(s);
+			Section * section = region->section(s);
 
 			testSection(section);
 		}
 
-		QVERIFY_EXCEPTION_THROWN(area->section(section_count), std::out_of_range);
+		QVERIFY_EXCEPTION_THROWN(region->section(section_count), std::out_of_range);
 	}
 }
 

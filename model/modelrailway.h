@@ -16,7 +16,7 @@
 
 #include <util/stringutil.h>
 #include <model/controller.h>
-#include <model/area.h>
+#include <model/region.h>
 #include <model/section.h>
 
 namespace mrw::model
@@ -28,7 +28,7 @@ namespace mrw::model
 		QDomDocument               xml;
 		QString                    name;
 		std::vector<Controller *>  controllers;
-		std::vector<Area *>        areas;
+		std::vector<Region *>      regions;
 		std::unordered_map<ControllerId, Controller *> controller_map;
 		std::unordered_map<ControllerId, Device *>     device_map;
 		size_t                     warnings = 0;
@@ -77,29 +77,29 @@ namespace mrw::model
 			return controller(controller_idx)->connection(connection_idx);
 		}
 
-		inline Area * area(const size_t index) const
+		inline Region * region(const size_t index) const
 		{
-			return areas.at(index);
+			return regions.at(index);
 		}
 
-		inline size_t areaCount() const
+		inline size_t regionCount() const
 		{
-			return areas.size();
+			return regions.size();
 		}
 
 		inline Section * section(
-			const size_t area_idx,
+			const size_t region_idx,
 			const size_t section_idx) const
 		{
-			return area(area_idx)->section(section_idx);
+			return region(region_idx)->section(section_idx);
 		}
 
 		inline AssemblyPart * railPart(
-			const size_t area_idx,
+			const size_t region_idx,
 			const size_t section_idx,
 			const size_t rail_idx) const
 		{
-			return section(area_idx, section_idx)->assemblyPart(rail_idx);
+			return section(region_idx, section_idx)->assemblyPart(rail_idx);
 		}
 
 		static QString  type(const QDomElement & node);

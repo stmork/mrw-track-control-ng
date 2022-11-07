@@ -5,7 +5,6 @@ CONFIG   += staticlib
 include(../common.pri)
 
 SOURCES += \
-	area.cpp \
 	assemblypart.cpp \
 	controller.cpp \
 	device.cpp \
@@ -21,6 +20,7 @@ SOURCES += \
 	raildoubleswitch.cpp \
 	railpart.cpp \
 	railswitch.cpp \
+	region.cpp \
 	section.cpp \
 	sectionmodule.cpp \
 	signal.cpp \
@@ -28,7 +28,6 @@ SOURCES += \
 	switchmodulereference.cpp
 
 HEADERS += \
-	area.h \
 	assemblypart.h \
 	commands.h \
 	controller.h \
@@ -45,6 +44,7 @@ HEADERS += \
 	raildoubleswitch.h \
 	railpart.h \
 	railswitch.h \
+	region.h \
 	section.h \
 	sectionmodule.h \
 	signal.h \

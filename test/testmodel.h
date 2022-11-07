@@ -29,7 +29,7 @@ namespace mrw::test
 		void testModel();
 		void testControllers();
 		void testModules();
-		void testAreas();
+		void testRegions();
 		void testSections();
 	};
 }

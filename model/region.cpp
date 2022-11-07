@@ -6,12 +6,12 @@
 #include <QDebug>
 
 #include "model/modelrailway.h"
-#include "model/area.h"
+#include "model/region.h"
 #include "model/section.h"
 
 using namespace mrw::model;
 
-Area::Area(
+Region::Region(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element,
 	const bool            station) :
@@ -37,13 +37,13 @@ Area::Area(
 			}
 			else
 			{
-				model->error("Unknown group area element: " + node.nodeName());
+				model->error("Unknown group region element: " + node.nodeName());
 			}
 		}
 	}
 }
 
-Area::~Area()
+Region::~Region()
 {
 	for (Section * section : sections)
 	{
@@ -52,12 +52,12 @@ Area::~Area()
 	sections.clear();
 }
 
-void Area::add(Section * section)
+void Region::add(Section * section)
 {
 	sections.push_back(section);
 }
 
-void mrw::model::Area::link()
+void mrw::model::Region::link()
 {
 	for (Section * section : sections)
 	{
@@ -65,7 +65,7 @@ void mrw::model::Area::link()
 	}
 }
 
-QString mrw::model::Area::toString() const
+QString mrw::model::Region::toString() const
 {
-	return QString("  Area %1 (%2)").arg(name).arg(is_station ? "Station" : "rail road");
+	return QString("  Region %1 (%2)").arg(name).arg(is_station ? "Station" : "rail road");
 }

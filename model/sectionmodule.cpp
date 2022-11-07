@@ -68,10 +68,10 @@ void SectionModule::link()
 		{
 			Q_ASSERT(matcher.size() >= 3);
 
-			const unsigned area_idx    = std::stoul(matcher[1]);
+			const unsigned region_idx  = std::stoul(matcher[1]);
 			const unsigned section_idx = std::stoul(matcher[2]);
 
-			Section * section = model->section(area_idx, section_idx);
+			Section * section = model->section(region_idx, section_idx);
 			sections.push_back(section);
 		}
 	}

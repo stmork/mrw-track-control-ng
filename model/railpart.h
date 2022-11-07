@@ -105,7 +105,7 @@ namespace mrw::model
 		 * path.
 		 * @return The connected RailPart.
 		 */
-		RailPart *                   resolve(const char * attr) const;
+		RailPart          *          resolve(const char * attr) const;
 
 		/**
 		 * This method returns all connectors in the given counting
@@ -115,7 +115,7 @@ namespace mrw::model
 		 * @return The collection of connected rail parts. The collection
 		 * may be empty in case of an end rail.
 		 */
-		std::set<RailPart *> &       advance(const bool dir);
+		std::set<RailPart *>    &    advance(const bool dir);
 
 		/**
 		 * This method returns all connectors in the given counting

@@ -65,11 +65,11 @@ AssemblyPart * AssemblyPart::resolve(
 	{
 		Q_ASSERT(matcher.size() >= 4);
 
-		const unsigned area_idx    = std::stoul(matcher[1]);
+		const unsigned region_idx  = std::stoul(matcher[1]);
 		const unsigned section_idx = std::stoul(matcher[2]);
 		const unsigned part_idx    = std::stoul(matcher[3]);
 
-		return model->railPart(area_idx, section_idx, part_idx);
+		return model->railPart(region_idx, section_idx, part_idx);
 	}
 	return nullptr;
 }

@@ -33,13 +33,13 @@ ModelRailway::~ModelRailway()
 	{
 		delete controller;
 	}
-	for (Area * area : areas)
+	for (Region * region : regions)
 	{
-		delete area;
+		delete region;
 	}
 
 	controllers.clear();
-	areas.clear();
+	regions.clear();
 }
 
 void ModelRailway::dump() const
@@ -74,10 +74,10 @@ void ModelRailway::create()
 			}
 			else if (node_name == "gruppe")
 			{
-				Area * area = new Area(this, child.toElement(), type(child) == "Bahnhof");
+				Region * region = new Region(this, child.toElement(), type(child) == "Bahnhof");
 
-				areas.push_back(area);
-				qDebug().noquote() << *area;
+				regions.push_back(region);
+				qDebug().noquote() << *region;
 			}
 			else
 			{
@@ -94,9 +94,9 @@ void mrw::model::ModelRailway::link()
 	{
 		controller->link();
 	}
-	for (Area * area : areas)
+	for (Region * region : regions)
 	{
-		area->link();
+		region->link();
 	}
 }
 
@@ -108,13 +108,13 @@ void ModelRailway::info()
 	{
 		qInfo() << *controller;
 	}
-	for (Area * area : areas)
+	for (Region * region : regions)
 	{
-		qInfo() << *area;
+		qInfo() << *region;
 
-		for (size_t s = 0; s < area->sectionCount(); s++)
+		for (size_t s = 0; s < region->sectionCount(); s++)
 		{
-			Section * section = area->section(s);
+			Section * section = region->section(s);
 
 			qInfo() << *section;
 
@@ -204,7 +204,7 @@ void ModelRailway::add(Device * device)
 
 QString mrw::model::ModelRailway::toString() const
 {
-	return QString("Modelrailway %1 with %2 controllers and %3 area(s).").arg(name).arg(controllers.size()).arg(areas.size());
+	return QString("Modelrailway %1 with %2 controllers and %3 region(s).").arg(name).arg(controllers.size()).arg(regions.size());
 }
 
 bool ModelRailway::boolean(const QDomElement & node, const char * attr, const bool default_value)
