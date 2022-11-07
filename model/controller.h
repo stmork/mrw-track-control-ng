@@ -15,12 +15,12 @@
 
 #include <util/stringutil.h>
 #include <model/module.h>
+#include <model/multiplexconnection.h>
 
 namespace mrw::model
 {
 	typedef uint16_t ControllerId;
 
-	class MultiplexConnection;
 	class ModelRailway;
 
 	/**
@@ -109,6 +109,17 @@ namespace mrw::model
 		inline MultiplexConnection * connection(const ModuleId index) const
 		{
 			return connections.at(index);
+		}
+
+		/**
+		 * This method returns the amount of connected serial multiplex
+		 * connection modules.
+		 *
+		 * @return The connected MultiplexConnection count.
+		 */
+		inline size_t connectionCount() const
+		{
+			return connections.size();
 		}
 
 		virtual QString toString() const override;

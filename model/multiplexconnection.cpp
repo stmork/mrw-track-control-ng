@@ -54,6 +54,18 @@ MultiplexConnection::~MultiplexConnection()
 	lights.clear();
 }
 
+bool MultiplexConnection::valid() const
+{
+	size_t pins = lights.size();
+
+	for (LightSignal * signal : light_signals)
+	{
+		pins += signal->usedPins();
+	}
+
+	return pins <= MAX_PINS;
+}
+
 void mrw::model::MultiplexConnection::link()
 {
 	QStringList references = reference.attribute("lichtsignale").split(' ', SKIP_EMPTY_PARTS);

@@ -6,6 +6,7 @@
 #include <QTest>
 
 #include <model/switchmodulereference.h>
+#include <model/controller.h>
 #include <model/lightsignal.h>
 #include <model/railpart.h>
 #include <model/controller.h>
@@ -59,6 +60,17 @@ void TestModel::testModules()
 
 			testModule(module);
 		}
+		QVERIFY_EXCEPTION_THROWN(controller->module(module_count), std::out_of_range);
+
+		const size_t mux_count = controller->connectionCount();
+		for (unsigned m = 0; m < mux_count; m++)
+		{
+			MultiplexConnection * module = controller->connection(m);
+
+			QVERIFY(module != nullptr);
+			QVERIFY(module->valid());
+		}
+		QVERIFY_EXCEPTION_THROWN(controller->connection(mux_count), std::out_of_range);
 	}
 }
 

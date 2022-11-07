@@ -18,11 +18,26 @@ namespace mrw::model
 {
 	class MultiplexConnection;
 
+	/**
+	 * This class represents the handling of several light signals. These
+	 * signals may be the following in detail:
+	 * - Shunting signal using two pins.
+	 * - A pre signal with Vr0 and Vr1 using two pins.
+	 * - A pre signal with Vr0, Vr1 and Vr2 using four pins.
+	 * - A main block signal using two pins.
+	 * - A main incoming signal using three pins.
+	 * - A main outgoing signal using five pins.
+	 *
+	 * These signals are connected to a MultiplexConnection module.
+	 *
+	 * @see MultiplexConnection
+	 * @see Device
+	 */
 	class LightSignal : public Signal, public Device
 	{
 		static const std::regex path_regex;
 
-		const unsigned lights;
+		const size_t          lights;
 
 		Controller      *     signal_controller = nullptr;
 		MultiplexConnection * mux_connection    = nullptr;
@@ -34,11 +49,22 @@ namespace mrw::model
 			const SignalType      type,
 			const unsigned        light_count);
 
+		/**
+		 * This method returns the pointer to the CAN Controller module.
+		 *
+		 * @return The CAN Controller module.
+		 */
 		inline Controller * controller() const override
 		{
 			return signal_controller;
 		}
 
+		/**
+		 * This method returns the pointer to the controlling
+		 * MultiplexConnection module.
+		 *
+		 * @return The controlling MultiplexConnection module.
+		 */
 		inline MultiplexConnection * connection() const
 		{
 			return mux_connection;
@@ -47,6 +73,17 @@ namespace mrw::model
 		inline const QString & name() const override
 		{
 			return part_name;
+		}
+
+		/**
+		 * This method returns how much pins are used by the controlling
+		 * MultiplexConnection module.
+		 *
+		 * @return The pin count used to control this LightSignal.
+		 */
+		inline size_t usedPins() const
+		{
+			return lights;
 		}
 	};
 }

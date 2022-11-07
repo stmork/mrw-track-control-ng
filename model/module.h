@@ -35,6 +35,12 @@ namespace mrw::model
 			const QDomElement & element);
 		virtual ~Module() = default;
 
+		/**
+		 * This method returns the module ID. This ID is not used to by
+		 * any CAN command.
+		 *
+		 * @return The modules' ID.
+		 */
 		inline ModuleId id() const
 		{
 			return module_id;
