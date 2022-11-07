@@ -19,6 +19,15 @@ namespace mrw::model
 {
 	class Section;
 
+	/**
+	 * This class represents a section module which is connected to a CAN
+	 * controller using the 16-pin connector.
+	 *
+	 * @image html section-module.jpg width=40%
+	 *
+	 * A section module can control up to four sections. A control line
+	 * can supply power for driving and signal the occupation of a section.
+	 */
 	class SectionModule : public Module
 	{
 		static const std::regex path_regex;

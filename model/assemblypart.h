@@ -18,6 +18,10 @@ namespace mrw::model
 {
 	class ModelRailway;
 
+	/**
+	 * This absstract base class represents all elements contained in a
+	 * Section. It may be RailParts and Signals.
+	 */
 	class AssemblyPart : public mrw::util::String
 	{
 		static const std::regex path_regex;
@@ -33,6 +37,9 @@ namespace mrw::model
 			const QDomElement  &  element);
 		virtual ~AssemblyPart() = default;
 
+		/**
+		 * This method links all elements needed for the implementation.
+		 */
 		virtual void link() = 0;
 
 		inline const QString & name() const
