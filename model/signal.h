@@ -13,19 +13,31 @@
 
 namespace mrw::model
 {
-	class Signal :
-		public AssemblyPart
+	/**
+	 * This class represents all Signal representations. It may represent
+	 * LightSignal parts as well as FormSignal parts.
+	 *
+	 * @note In fact a Section can only have six Signal parts maximum: Every
+	 * SignalType in both directions.
+	 */
+	class Signal : public AssemblyPart
 	{
 	public:
+		/**
+		 * This enumeration represents which basic type of the Signal.
+		 */
 		enum SignalType
 		{
-			MAIN_SIGNAL,
-			PRE_SIGNAL,
-			SHUNT_SIGNAL
+			MAIN_SIGNAL, ///< Main signal.
+			PRE_SIGNAL,  ///< Pre signal.
+			SHUNT_SIGNAL ///< Signal for shunting.
 		};
 
 	protected:
+		/** The orientation referenced to the counting direction. */
 		const bool          direction;
+
+		/** The signal type. */
 		const SignalType    signal_type;
 
 	public:
