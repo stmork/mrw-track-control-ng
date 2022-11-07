@@ -19,6 +19,15 @@ namespace mrw::model
 	class ModelRailway;
 	class AssemblyPart;
 
+	/**
+	 * This base class represents all modules which are connected to the
+	 * CAN Controller using the 16-pin connector. Actually there are three
+	 * different module:
+	 * - A section module (SectionModule) to control Section parts.
+	 * - A switch module (SwitchModule) to control switches and FormSignal
+	 * parts.
+	 * - A light module (LightModule) to control ProfileLight parts.
+	 */
 	class Module
 	{
 		friend class Controller;

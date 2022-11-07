@@ -32,9 +32,9 @@ namespace mrw::model
 	 * @image html controller.jpg width=40%
 	 *
 	 * The Module elements may be:
-	 * - section module (@see SectionModule)
-	 * - switch module (@see SwitchModule)
-	 * - light module (@see LightModule)
+	 * - section module (SectionModule)
+	 * - switch module (SwitchModule)
+	 * - light module (LightModule)
 	 *
 	 * The Module elements and serial MultiplexConnection elements do not
 	 * have any intelligence. They are controlled from this controller and

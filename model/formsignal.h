@@ -10,11 +10,26 @@
 
 #include <regex>
 
-#include "model/signal.h"
-#include "model/switchmodulereference.h"
+#include <model/signal.h>
+#include <model/switchmodulereference.h>
 
 namespace mrw::model
 {
+	/**
+	 * This class represents the handling of several form signals. These
+	 * signals may be the following in detail:
+	 * - Shunting signal using two pins.
+	 * - A pre signal with Vr0 and Vr1 using two pins.
+	 * - A pre signal with Vr0, Vr1 and Vr2 using three pins.
+	 * - A main signal with Hp0 and Hp1 using two pins.
+	 * - A main signal with Hp0, Hp1 and Hp2 using three pins.
+	 *
+	 * These signals are connected to a SwitchModule.
+	 *
+	 * @see SwitchModule
+	 * @see SwitchModuleReference
+	 * @see Device
+	 */
 	class FormSignal : public Signal, public SwitchModuleReference
 	{
 		const unsigned inductors;

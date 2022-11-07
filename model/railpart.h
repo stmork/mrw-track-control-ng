@@ -21,9 +21,9 @@ namespace mrw::model
 
 	/**
 	 * This base class represents any kind of rail elements which can be:
-	 * - simple rail
-	 * - switch
-	 * - double cross switch.
+	 * - simple rail (Rail)
+	 * - switch (RailSwitch)
+	 * - double cross switch. (RailDoubleSwitch)
 	 *
 	 * The rail parts are connected by connectors which in fact are doubly
 	 * linked lists. So when a rail part is connected to another rail part
