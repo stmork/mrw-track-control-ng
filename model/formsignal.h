@@ -24,7 +24,8 @@ namespace mrw::model
 	 * - A main signal with Hp0 and Hp1 using two pins.
 	 * - A main signal with Hp0, Hp1 and Hp2 using three pins.
 	 *
-	 * These signals are connected to a SwitchModule.
+	 * The form signals are connected to a SwitchModule referenced using the
+	 * SwitchModuleReference class.
 	 *
 	 * @see SwitchModule
 	 * @see SwitchModuleReference
@@ -47,4 +48,4 @@ namespace mrw::model
 	};
 }
 
-#endif // MRW_MODEL_SIGNAL_H
+#endif

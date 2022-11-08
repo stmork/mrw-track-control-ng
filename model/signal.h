@@ -14,7 +14,7 @@
 namespace mrw::model
 {
 	/**
-	 * This class represents all Signal representations. It may represent
+	 * This class represents all Signal variants. It may represent
 	 * LightSignal parts as well as FormSignal parts.
 	 *
 	 * @note In fact a Section can only have six Signal parts maximum: Every

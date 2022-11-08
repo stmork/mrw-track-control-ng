@@ -20,9 +20,12 @@ RailPart::RailPart(
 
 bool RailPart::contains(const RailPart * rail, const bool dir) const
 {
-	const std::set<RailPart *> & rails = advance(!dir);
+	const std::set<RailInfo> & rails = advance(!dir);
 
-	return rails.find((RailPart *)rail) != rails.end();
+	return std::any_of(rails.begin(), rails.end(), [rail] (const RailInfo & info)
+	{
+		return info == rail;
+	});
 }
 
 RailPart * RailPart::resolve(const char * attr) const
@@ -32,12 +35,30 @@ RailPart * RailPart::resolve(const char * attr) const
 	return dynamic_cast<RailPart *>(AssemblyPart::resolve(model, value));
 }
 
-std::set<RailPart *> & RailPart::advance(const bool dir)
+std::set<RailInfo> & RailPart::advance(const bool dir)
 {
 	return dir ? rail_forward : rail_backward;
 }
 
-const std::set<RailPart *> & RailPart::advance(const bool dir) const
+const std::set<RailInfo> & RailPart::advance(const bool dir) const
 {
 	return dir ? rail_forward : rail_backward;
+}
+
+RailInfo::RailInfo(
+	RailPart * rail_part,
+	const bool preferred,
+	const bool curved) : rail(rail_part)
+{
+	unsigned flags = 0;
+
+	if (!preferred)
+	{
+		flags |= PREFERRED_FLAG;
+	}
+	if (curved)
+	{
+		flags |= CURVED_FLAG;
+	}
+	code = static_cast<PreferCode>(flags);
 }

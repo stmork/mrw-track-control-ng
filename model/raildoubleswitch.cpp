@@ -31,10 +31,10 @@ void RailDoubleSwitch::link()
 		return;
 	}
 
-	advance(aIsDir()).insert(a);
-	advance(aIsDir()).insert(b);
-	advance(!aIsDir()).insert(c);
-	advance(!aIsDir()).insert(d);
+	advance(aIsDir()).insert(RailInfo( a, false, ad_branch));
+	advance(aIsDir()).insert(RailInfo( b, false, bc_branch));
+	advance(!aIsDir()).insert(RailInfo(c, false, bc_branch));
+	advance(!aIsDir()).insert(RailInfo(d, false, ad_branch));
 }
 
 bool RailDoubleSwitch::valid() const

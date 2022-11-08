@@ -79,8 +79,6 @@ namespace mrw::model
 		 *
 		 * @param index The zero based index of connected Module boards.
 		 * @return The found Module instance.
-		 *
-		 * @see link()
 		 */
 		inline Module * module(const int index) const
 		{

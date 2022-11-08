@@ -32,9 +32,9 @@ void RailSwitch::link()
 		return;
 	}
 
-	advance( aIsDir()).insert(a);
-	advance(!aIsDir()).insert(b);
-	advance(!aIsDir()).insert(c);
+	advance( aIsDir()).insert(RailInfo(a));
+	advance(!aIsDir()).insert(RailInfo(b, left_prio,  left_branch));
+	advance(!aIsDir()).insert(RailInfo(c, right_prio, right_branch));
 }
 
 bool RailSwitch::valid() const
@@ -50,7 +50,7 @@ QString RailSwitch::toString() const
 	return QString("      %1 %2 %3--%4: %5").
 		arg(aIsDir() ? ">" : "<").
 		arg(valid() ? "V" : "-").
-		arg(aIsDir() ? "bc" : " a").
+		arg(aIsDir() ? "bc" : "a ").
 		arg(aIsDir() ? " a" : "bc").
 		arg(name());
 }

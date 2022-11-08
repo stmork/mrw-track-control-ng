@@ -18,6 +18,40 @@
 namespace mrw::model
 {
 	class ModelRailway;
+	class RailPart;
+
+	class RailInfo
+	{
+		enum PreferCode
+		{
+			PREFERRED_STRAIGHT = 0,
+			PREFERRED_CURVED,
+			STRAIGHT,
+			CURVED,
+
+			PREFERRED_FLAG = 2,
+			CURVED_FLAG = 1
+		};
+
+		RailPart   *   rail = nullptr;
+		PreferCode     code = PREFERRED_STRAIGHT;
+
+	public:
+		RailInfo(
+			RailPart  *  rail_part,
+			const bool   preferred = true,
+			const bool   curved = false);
+
+		inline bool operator<(const RailInfo & other) const
+		{
+			return code < other.code;
+		}
+
+		inline operator RailPart * () const
+		{
+			return rail;
+		}
+	};
 
 	/**
 	 * This base class represents any kind of rail elements which can be:
@@ -55,10 +89,10 @@ namespace mrw::model
 		const bool              a_in_dir;
 
 		/** All connectors in counting direction. */
-		std::set<RailPart *>    rail_forward;
+		std::set<RailInfo>      rail_forward;
 
 		/** All connectors against counting direction. */
-		std::set<RailPart *>    rail_backward;
+		std::set<RailInfo>      rail_backward;
 
 	public:
 		explicit RailPart(
@@ -115,7 +149,7 @@ namespace mrw::model
 		 * @return The collection of connected rail parts. The collection
 		 * may be empty in case of an end rail.
 		 */
-		std::set<RailPart *>    &    advance(const bool dir);
+		std::set<RailInfo> & advance(const bool dir);
 
 		/**
 		 * This method returns all connectors in the given counting
@@ -125,7 +159,7 @@ namespace mrw::model
 		 * @return The collection of connected rail parts. The collection
 		 * may be empty in case of an end rail.
 		 */
-		const std::set<RailPart *> & advance(const bool dir) const;
+		const std::set<RailInfo> & advance(const bool dir) const;
 	};
 }
 
