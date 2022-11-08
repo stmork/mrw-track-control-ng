@@ -19,7 +19,7 @@ namespace mrw::model
 	class ModelRailway;
 
 	/**
-	 * This absstract base class represents all elements contained in a
+	 * This abstract base class represents all elements contained in a
 	 * Section. It may be RailParts and Signals.
 	 */
 	class AssemblyPart : public mrw::util::String
