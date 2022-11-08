@@ -70,3 +70,8 @@ LightSignal::LightSignal(
 		model->warning("Signal " + part_name + " has no connection module!");
 	}
 }
+
+QString LightSignal::toString() const
+{
+	return QString("      L    %2 : %3").arg(symbol()).arg(name());
+}

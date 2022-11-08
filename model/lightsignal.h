@@ -75,6 +75,8 @@ namespace mrw::model
 			return part_name;
 		}
 
+		QString toString() const override;
+
 		/**
 		 * This method returns how much pins are used by the controlling
 		 * MultiplexConnection module.

@@ -51,7 +51,17 @@ namespace mrw::model
 			const QDomElement  &  element,
 			const SignalType      type);
 
-		QString toString() const override;
+	protected:
+		/**
+		 * This method returns a brief symbol representing the direction and
+		 * SignalType regardless if it is a LightSignal or a FormSignal:
+		 * - <pre> --O</pre> or <pre>O-- </pre> Main signal.
+		 * - <pre> -o </pre> or <pre> o- </pre> Distant signal.
+		 * - <pre> ]  </pre> or <pre>  [ </pre> Shunting signal.
+		 *
+		 * @return The brief symbol of what signal is configured.
+		 */
+		QString symbol() const;
 
 	private:
 		void link() override;

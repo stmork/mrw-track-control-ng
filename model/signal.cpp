@@ -23,9 +23,8 @@ void Signal::link()
 {
 }
 
-QString Signal::toString() const
+QString Signal::symbol() const
 {
-	const SwitchModuleReference * module = dynamic_cast<const SwitchModuleReference *>(this);
 	QString type_descr;
 
 	switch (signal_type)
@@ -42,8 +41,5 @@ QString Signal::toString() const
 		type_descr = direction ? " ]  " : "  [ ";
 		break;
 	}
-
-	return QString("      %1    %2 : %3").
-		arg(module != nullptr ? "F" : "L").
-		arg(type_descr).arg(name());
+	return type_descr;
 }

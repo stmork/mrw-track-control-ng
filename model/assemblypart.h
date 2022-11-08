@@ -39,17 +39,6 @@ namespace mrw::model
 			const QDomElement  &  element);
 		virtual ~AssemblyPart() = default;
 
-		/**
-		 * This method returns the name modelled inside the EMF/XMI model
-		 * file.
-		 *
-		 * @return The Device name modelled inside the EMF/XMI model.
-		 */
-		inline const QString & name() const
-		{
-			return part_name;
-		}
-
 		static AssemblyPart * resolve(
 			const ModelRailway * model,
 			const QString    &   reference);

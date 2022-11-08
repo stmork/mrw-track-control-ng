@@ -143,7 +143,7 @@ void TestModel::testAssemblyPart(AssemblyPart * part)
 	LightSignal      *      signal    = dynamic_cast<LightSignal *>(part);
 	RailPart        *       rail      = dynamic_cast<RailPart *>(part);
 	Device         *        device    = dynamic_cast<Device *>(part);
-	const std::string   &   name      = part->name().toStdString();
+	const std::string   &   name      = part->toString().toStdString();
 
 	if (reference != nullptr)
 	{
