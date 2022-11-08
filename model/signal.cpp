@@ -34,7 +34,7 @@ QString Signal::toString() const
 		type_descr = direction ? " --O" : "O-- ";
 		break;
 
-	case PRE_SIGNAL:
+	case DISTANT_SIGNAL:
 		type_descr = direction ? " -o " : " o- ";
 		break;
 

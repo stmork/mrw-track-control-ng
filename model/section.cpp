@@ -91,7 +91,7 @@ Section::Section(
 				}
 				else if (type == "Vorsignal")
 				{
-					rail_part = new LightSignal(model, child, Signal::PRE_SIGNAL, 4);
+					rail_part = new LightSignal(model, child, Signal::DISTANT_SIGNAL, 4);
 				}
 				else if (type == "Blocksignal")
 				{
@@ -107,7 +107,7 @@ Section::Section(
 				}
 				else if (type == "Formvorsignal")
 				{
-					rail_part = new FormSignal(model, child, Signal::PRE_SIGNAL);
+					rail_part = new FormSignal(model, child, Signal::DISTANT_SIGNAL);
 				}
 				else if (type == "Formhauptsignal")
 				{

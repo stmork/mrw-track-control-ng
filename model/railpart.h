@@ -20,6 +20,11 @@ namespace mrw::model
 	class ModelRailway;
 	class RailPart;
 
+	/**
+	 * This class contains information about a classfified connection to
+	 * another RailPart. It is used to select a best fit RailPart when
+	 * creating a new track.
+	 */
 	class RailInfo
 	{
 		enum PreferCode
@@ -42,11 +47,23 @@ namespace mrw::model
 			const bool   preferred = true,
 			const bool   curved = false);
 
+		/**
+		 * The less operator is used to sort this information instance by
+		 * preferred priority.
+		 *
+		 * @param other The other RailInfo to compare to.
+		 * @return True if this instance has a higher priority when selecting
+		 * a new track.
+		 */
 		inline bool operator<(const RailInfo & other) const
 		{
 			return code < other.code;
 		}
 
+		/**
+		 * This cast operator returns the RailPart of this information
+		 * instance.
+		 */
 		inline operator RailPart * () const
 		{
 			return rail;

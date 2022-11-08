@@ -22,11 +22,11 @@ namespace mrw::model
 	 * This class represents the handling of several light signals. These
 	 * signals may be the following in detail:
 	 * - Shunting signal using two pins.
-	 * - A pre signal with Vr0 and Vr1 using two pins.
-	 * - A pre signal with Vr0, Vr1 and Vr2 using four pins.
+	 * - A distant signal showing aspects Vr0 and Vr1 using two pins.
+	 * - A distant signal showing aspects Vr0, Vr1 and Vr2 using four pins.
 	 * - A main block signal using two pins.
-	 * - A main incoming signal using three pins.
-	 * - A main outgoing signal using five pins.
+	 * - A main incoming main signal using three pins.
+	 * - A main outgoing main signal using five pins.
 	 *
 	 * These signals are connected to a MultiplexConnection module.
 	 *

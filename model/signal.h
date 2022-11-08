@@ -28,9 +28,9 @@ namespace mrw::model
 		 */
 		enum SignalType
 		{
-			MAIN_SIGNAL, ///< Main signal.
-			PRE_SIGNAL,  ///< Pre signal.
-			SHUNT_SIGNAL ///< Signal for shunting.
+			MAIN_SIGNAL,     ///< Main signal.
+			DISTANT_SIGNAL,  ///< Distant signal displaying position of main signal.
+			SHUNT_SIGNAL     ///< Signal for shunting.
 		};
 
 	protected:
