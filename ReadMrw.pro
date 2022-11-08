@@ -44,7 +44,7 @@ QMAKE_CLEAN         += cppcheck.xml
 doxygen.commands = doxygen
 
 QMAKE_EXTRA_TARGETS += doxygen
-QMAKE_CLEAN         += $$_PRO_FILE_PWD_/doc/ *.qch
+QMAKE_CLEAN         += *.qch
 
 #####################################################################
 #
@@ -73,4 +73,4 @@ lcov.commands += lcov --no-external -c -d $$(PWD) -o coverage.info;
 lcov.commands += genhtml coverage.info -s --num-spaces 4 --legend -t \"MRW-NG Test Coverage\" --output-directory $$LCOV_DIR --rc genhtml_med_limit=50
 
 QMAKE_EXTRA_TARGETS += lcov
-QMAKE_CLEAN         += $$LCOV_DIR/ coverage.info
+QMAKE_CLEAN         += coverage.info

@@ -9,7 +9,7 @@
 #include <model/controller.h>
 #include <model/lightsignal.h>
 #include <model/railpart.h>
-#include <model/controller.h>
+#include <model/switchmodule.h>
 
 #include "testmodel.h"
 
@@ -150,6 +150,7 @@ void TestModel::testAssemblyPart(AssemblyPart * part)
 		QVERIFY2(signal == nullptr, name.c_str());
 		QVERIFY2(device != nullptr, name.c_str());
 		QVERIFY2(reference->module() != nullptr, name.c_str());
+		QVERIFY2(reference->controller() != nullptr, name.c_str());
 	}
 
 	if (signal != nullptr)
@@ -158,6 +159,7 @@ void TestModel::testAssemblyPart(AssemblyPart * part)
 		QVERIFY2(device != nullptr, name.c_str());
 		QVERIFY2(rail == nullptr, name.c_str());
 		QVERIFY2(signal->connection() != nullptr, name.c_str());
+		QVERIFY2(signal->controller() != nullptr, name.c_str());
 	}
 
 	if (rail != nullptr)
