@@ -32,6 +32,8 @@ namespace mrw::model
 	{
 		static const std::regex  path_regex;
 
+		const unsigned inductor_count;
+
 		Controller  *  switch_controller = nullptr;
 		SwitchModule * switch_module     = nullptr;
 
@@ -39,6 +41,19 @@ namespace mrw::model
 		explicit SwitchModuleReference(
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
+
+		/**
+		 * This method returns how many inductive actuators this Device
+		 * contain. Normal FormSignals and RailSwitches need only two
+		 * actuators where as a FormSignal having aspect Hp2 needs three
+		 * actuators.
+		 *
+		 * @return The number of inductive actuators needed by this Device.
+		 */
+		inline size_t inductors() const
+		{
+			return inductor_count;
+		}
 
 		/**
 		 * This method returns the controlling SwitchModule.

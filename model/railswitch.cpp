@@ -40,6 +40,7 @@ void RailSwitch::link()
 bool RailSwitch::valid() const
 {
 	return
+		(inductors() == 2) &&
 		(a != nullptr) && a->contains(this,  aIsDir()) &&
 		(b != nullptr) && b->contains(this, !aIsDir()) &&
 		(c != nullptr) && c->contains(this, !aIsDir());
@@ -47,7 +48,7 @@ bool RailSwitch::valid() const
 
 QString RailSwitch::toString() const
 {
-	return QString("      %1 %2 %3--%4: %5").
+	return QString("      %1 %2 %3--%4 : %5").
 		arg(aIsDir() ? ">" : "<").
 		arg(valid()  ? "V" : "-").
 		arg(aIsDir() ? "bc" : " a").

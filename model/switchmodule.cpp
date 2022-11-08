@@ -8,6 +8,7 @@
 #include "util/stringutil.h"
 #include "model/switchmodule.h"
 #include "model/assemblypart.h"
+#include "model/switchmodulereference.h"
 
 using namespace mrw::model;
 
@@ -15,6 +16,24 @@ SwitchModule::SwitchModule(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) : Module(model_railway, element)
 {
+}
+
+bool SwitchModule::valid() const
+{
+	size_t inductors = 0;
+
+	for (const AssemblyPart * part : rail_parts)
+	{
+		const SwitchModuleReference * actor = dynamic_cast<const SwitchModuleReference *>(part);
+
+		if (actor == nullptr)
+		{
+			return false;
+		}
+		inductors += actor->inductors();
+	}
+
+	return inductors <= 8;
 }
 
 void SwitchModule::link()

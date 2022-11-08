@@ -39,6 +39,8 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
 
+		bool valid() const override;
+
 	private:
 		void link() override;
 	};

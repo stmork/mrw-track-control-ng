@@ -47,6 +47,11 @@ LightModule::~LightModule()
 	lights.clear();
 }
 
+bool LightModule::valid() const
+{
+	return lights.size() <= 8;
+}
+
 void LightModule::link()
 {
 }

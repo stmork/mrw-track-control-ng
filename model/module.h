@@ -55,6 +55,14 @@ namespace mrw::model
 			return module_id;
 		}
 
+		/**
+		 * This method verifies if this Module is not overprovisioned.
+		 *
+		 * @return True if all pins/connectors satifies the connected
+		 * Device elements.
+		 */
+		virtual bool valid() const = 0;
+
 	private:
 		virtual void link() = 0;
 	};

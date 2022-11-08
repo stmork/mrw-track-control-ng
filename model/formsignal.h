@@ -35,8 +35,6 @@ namespace mrw::model
 	 */
 	class FormSignal : public Signal, public SwitchModuleReference
 	{
-		const unsigned inductors;
-
 	public:
 		explicit FormSignal(
 			ModelRailway     *    model_railway,

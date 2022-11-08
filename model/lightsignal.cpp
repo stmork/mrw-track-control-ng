@@ -73,5 +73,5 @@ LightSignal::LightSignal(
 
 QString LightSignal::toString() const
 {
-	return QString("      L    %2 : %3").arg(symbol()).arg(name());
+	return QString("      L    %2  : %3").arg(symbol()).arg(name());
 }

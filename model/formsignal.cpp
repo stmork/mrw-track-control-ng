@@ -14,12 +14,11 @@ FormSignal::FormSignal(
 	const QDomElement  &  element,
 	const SignalType      type) :
 	Signal(model_railway, element, type),
-	SwitchModuleReference(model_railway, element),
-	inductors(model->value(element, "spulen"))
+	SwitchModuleReference(model_railway, element)
 {
 }
 
 QString FormSignal::toString() const
 {
-	return QString("      F    %2 : %3").arg(symbol()).arg(name());
+	return QString("      F    %2  : %3").arg(symbol()).arg(name());
 }

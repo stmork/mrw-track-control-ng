@@ -77,12 +77,14 @@ void TestModel::testModules()
 void TestModel::testModule(Module * module)
 {
 	QVERIFY(module != nullptr);
+	QVERIFY(module->valid());
 	QVERIFY(module->id() != 0);
 }
 
 void mrw::test::TestModel::testMuxConnection(MultiplexConnection * connection)
 {
 	QVERIFY(connection != nullptr);
+	QVERIFY(connection->valid());
 	QVERIFY(connection->id() != 0);
 }
 

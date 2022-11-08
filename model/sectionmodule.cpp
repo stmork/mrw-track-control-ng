@@ -55,6 +55,11 @@ SectionModule::SectionModule(
 {
 }
 
+bool SectionModule::valid() const
+{
+	return sections.size() <= 4;
+}
+
 void SectionModule::link()
 {
 	QStringList references = reference.attribute("abschnitte").split(' ', SKIP_EMPTY_PARTS);
