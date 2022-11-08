@@ -42,7 +42,7 @@ namespace mrw::model
 		PreferCode     code = PREFERRED_STRAIGHT;
 
 	public:
-		RailInfo(
+		explicit RailInfo(
 			RailPart  *  rail_part,
 			const bool   preferred = true,
 			const bool   curved = false);

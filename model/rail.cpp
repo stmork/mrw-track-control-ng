@@ -29,12 +29,12 @@ void Rail::link()
 
 	if (a != nullptr)
 	{
-		advance(aIsDir()).insert(a);
+		advance(aIsDir()).insert(RailInfo(a));
 	}
 
 	if (b != nullptr)
 	{
-		advance(!aIsDir()).insert(b);
+		advance(!aIsDir()).insert(RailInfo(b));
 	}
 }
 
