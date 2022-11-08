@@ -22,6 +22,7 @@ namespace mrw::test
 
 	private:
 		void testModule(mrw::model::Module * module);
+		void testMuxConnection(mrw::model::MultiplexConnection * connection);
 		void testSection(mrw::model::Section * section);
 		void testAssemblyPart(mrw::model::AssemblyPart * part);
 

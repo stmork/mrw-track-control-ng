@@ -26,6 +26,7 @@ void TestModel::testModel()
 	QVERIFY(model != nullptr);
 	QVERIFY(model->isValid());
 	model->info();
+	model->dump();
 }
 
 void TestModel::testControllers()
@@ -67,8 +68,7 @@ void TestModel::testModules()
 		{
 			MultiplexConnection * module = controller->connection(m);
 
-			QVERIFY(module != nullptr);
-			QVERIFY(module->valid());
+			testMuxConnection(module);
 		}
 		QVERIFY_EXCEPTION_THROWN(controller->connection(mux_count), std::out_of_range);
 	}
@@ -78,6 +78,12 @@ void TestModel::testModule(Module * module)
 {
 	QVERIFY(module != nullptr);
 	QVERIFY(module->id() != 0);
+}
+
+void mrw::test::TestModel::testMuxConnection(MultiplexConnection * connection)
+{
+	QVERIFY(connection != nullptr);
+	QVERIFY(connection->id() != 0);
 }
 
 void TestModel::testRegions()
@@ -120,6 +126,7 @@ void TestModel::testSection(Section * section)
 {
 	QVERIFY(section != nullptr);
 	QVERIFY(section->unitNo() != 0);
+	QVERIFY(section->controller() != nullptr);
 
 	SectionModule * module = section->module();
 
