@@ -3,6 +3,9 @@
   <controller id="2040">
     <anschluesse nummer="10" lichtsignale="//@gruppe.0/@abschnitt.1/@bauelement.0 //@gruppe.0/@abschnitt.1/@bauelement.1"/>
     <anschluesse nummer="11" lichtsignale="//@gruppe.0/@abschnitt.0/@bauelement.0 //@gruppe.0/@abschnitt.0/@bauelement.1"/>
+    <anschluesse nummer="12">
+      <lichter name="Beispiel" unit_no="1" schwellwert="50"/>
+    </anschluesse>
     <module xsi:type="Modelrailway:Beleuchtungsmodul" nummer="1">
       <lampen name="Light 1" unit_no="300" schwellwert="26"/>
       <lampen name="Light 2" unit_no="301" schwellwert="38" typ="1"/>

@@ -19,6 +19,7 @@ namespace mrw::model
 	public:
 		explicit ProfileLight(
 			ModelRailway     *    model_railway,
+			Controller      *     controller,
 			const QDomElement  &  element);
 	};
 }

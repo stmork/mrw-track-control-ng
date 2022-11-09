@@ -17,6 +17,8 @@ namespace mrw::model
 {
 	class Light : public Device
 	{
+		Controller  *  light_controller;
+
 	protected:
 		const QString  light_name;
 		const unsigned threshold;
@@ -24,6 +26,7 @@ namespace mrw::model
 	public:
 		explicit Light(
 			ModelRailway     *    model_railway,
+			Controller      *     controller,
 			const QDomElement  &  element);
 		virtual ~Light() = default;
 
@@ -34,8 +37,7 @@ namespace mrw::model
 
 		inline Controller * controller() const override
 		{
-			// FIXME: Initialize pointer!
-			return nullptr;
+			return light_controller;
 		}
 	};
 }

@@ -15,6 +15,7 @@ using namespace mrw::model;
 
 MultiplexConnection::MultiplexConnection(
 	ModelRailway     *    model_railway,
+	Controller      *     controller,
 	const QDomElement  &  element) :
 	model(model_railway),
 	reference(element),
@@ -33,7 +34,7 @@ MultiplexConnection::MultiplexConnection(
 
 			if (node_name == "lichter")
 			{
-				Light * light = new Light(model, child);
+				Light * light = new Light(model, controller, child);
 
 				lights.push_back(light);
 			}
@@ -61,6 +62,11 @@ bool MultiplexConnection::valid() const
 	for (LightSignal * signal : light_signals)
 	{
 		pins += signal->usedPins();
+		if ((signal->controller() == nullptr) ||
+			(signal->connection() == nullptr))
+		{
+			return false;
+		}
 	}
 
 	return pins <= MAX_PINS;

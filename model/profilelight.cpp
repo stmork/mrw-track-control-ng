@@ -10,8 +10,9 @@ using namespace mrw::model;
 
 ProfileLight::ProfileLight(
 	ModelRailway     *    model_railway,
+	Controller      *     controller,
 	const QDomElement  &  element) :
-	Light(model_railway, element),
+	Light(model_railway, controller, element),
 	profile(ModelRailway::value(element, "typ"))
 {
 }

@@ -16,6 +16,7 @@ namespace mrw::model
 {
 	class Light;
 	class LightSignal;
+	class Controller;
 
 	/**
 	 * This class represents a serial multiplex connection module. Since this
@@ -47,6 +48,7 @@ namespace mrw::model
 
 		explicit MultiplexConnection(
 			ModelRailway     *    model_railway,
+			Controller      *     controller,
 			const QDomElement  &  element);
 		virtual ~MultiplexConnection();
 

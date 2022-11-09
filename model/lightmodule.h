@@ -17,6 +17,7 @@
 namespace mrw::model
 {
 	class ProfileLight;
+	class Controller;
 
 	class LightModule : public Module
 	{
@@ -27,6 +28,7 @@ namespace mrw::model
 	public:
 		explicit LightModule(
 			ModelRailway     *    model_railway,
+			Controller      *     controller,
 			const QDomElement  &  element);
 		virtual ~LightModule();
 

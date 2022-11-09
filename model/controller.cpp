@@ -51,7 +51,7 @@ Controller::Controller(
 				}
 				else if (type == "Beleuchtungsmodul")
 				{
-					module = new LightModule(model, child);
+					module = new LightModule(model, this, child);
 				}
 				else
 				{
@@ -61,7 +61,7 @@ Controller::Controller(
 			}
 			else if (node_name == "anschluesse")
 			{
-				MultiplexConnection * connection = new MultiplexConnection(model, child);
+				MultiplexConnection * connection = new MultiplexConnection(model, this, child);
 
 				connections.push_back(connection);
 			}
@@ -102,9 +102,7 @@ bool Controller::valid() const
 		ports += module->ports();
 	}
 
-	if (!std::all_of(
-			connections.begin(), connections.end(),
-			[](MultiplexConnection * conn)
+	if (!std::all_of(connections.begin(), connections.end(), [](MultiplexConnection * conn)
 {
 	return conn->valid();
 	}))
