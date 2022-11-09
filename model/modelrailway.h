@@ -94,7 +94,7 @@ namespace mrw::model
 			return region(region_idx)->section(section_idx);
 		}
 
-		inline AssemblyPart * railPart(
+		inline AssemblyPart * assemblyPart(
 			const size_t region_idx,
 			const size_t section_idx,
 			const size_t rail_idx) const

@@ -69,7 +69,7 @@ AssemblyPart * AssemblyPart::resolve(
 		const unsigned section_idx = std::stoul(matcher[2]);
 		const unsigned part_idx    = std::stoul(matcher[3]);
 
-		return model->railPart(region_idx, section_idx, part_idx);
+		return model->assemblyPart(region_idx, section_idx, part_idx);
 	}
 	return nullptr;
 }

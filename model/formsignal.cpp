@@ -18,6 +18,11 @@ FormSignal::FormSignal(
 {
 }
 
+bool FormSignal::valid() const
+{
+	return (controller() != nullptr) && (module() != nullptr);
+}
+
 QString FormSignal::toString() const
 {
 	return QString("      F    %2  : %3").arg(symbol()).arg(name());

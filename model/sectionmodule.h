@@ -34,6 +34,8 @@ namespace mrw::model
 
 		std::vector<Section *> sections;
 
+		static const size_t MAX_SECTIONS = 4;
+
 	public:
 		SectionModule(
 			ModelRailway     *    model_railway,

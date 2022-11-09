@@ -104,5 +104,5 @@ void Controller::link()
 
 QString Controller::toString() const
 {
-	return QString::asprintf("  Controller %03d", controller_id);
+	return QString::asprintf("  Controller %4d", controller_id);
 }

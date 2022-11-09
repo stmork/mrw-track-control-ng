@@ -46,6 +46,8 @@ namespace mrw::model
 			return part_name;
 		}
 
+		bool valid() const override;
+
 		QString toString() const override;
 	};
 }

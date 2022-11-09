@@ -138,6 +138,11 @@ Section::~Section()
 	rail_parts.clear();
 }
 
+bool Section::valid() const
+{
+	return (section_controller != nullptr) && (section_module != nullptr);
+}
+
 void Section::add(AssemblyPart * rail_part)
 {
 	rail_parts.push_back(rail_part);

@@ -21,6 +21,9 @@ namespace mrw::test
 
 	private slots:
 		void testInvalid();
+		void testMissingModule();
+		void testDirectionFail();
+		void testToManyLights();
 	};
 }
 

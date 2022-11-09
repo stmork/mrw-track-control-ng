@@ -71,6 +71,11 @@ LightSignal::LightSignal(
 	}
 }
 
+bool LightSignal::valid() const
+{
+	return (signal_controller != nullptr) && (mux_connection != nullptr);
+}
+
 QString LightSignal::toString() const
 {
 	return QString("      L    %2  : %3").arg(symbol()).arg(name());

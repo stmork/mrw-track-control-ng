@@ -49,7 +49,7 @@ LightModule::~LightModule()
 
 bool LightModule::valid() const
 {
-	return lights.size() <= 8;
+	return lights.size() <= MAX_LIGHTS;
 }
 
 void LightModule::link()

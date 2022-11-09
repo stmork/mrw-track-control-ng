@@ -49,6 +49,8 @@ namespace mrw::model
 			const SignalType      type,
 			const unsigned        light_count);
 
+		bool valid() const override;
+
 		/**
 		 * This method returns the pointer to the CAN Controller module.
 		 *

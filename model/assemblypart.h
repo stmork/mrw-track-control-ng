@@ -39,6 +39,15 @@ namespace mrw::model
 			const QDomElement  &  element);
 		virtual ~AssemblyPart() = default;
 
+		/**
+		 * This method verifies if all connectors of this rail part are
+		 * correctly connected which their counter parts.
+		 *
+		 * @return True if the connectors are correctly linked.
+		 * @see contains()
+		 */
+		virtual bool valid() const = 0;
+
 		static AssemblyPart * resolve(
 			const ModelRailway * model,
 			const QString    &   reference);

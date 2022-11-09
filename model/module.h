@@ -35,7 +35,16 @@ namespace mrw::model
 		const ModuleId      module_id;
 
 	protected:
+		/**
+		 * The pointer to the top level model root element needed for resolving
+		 * other components.
+		 */
 		ModelRailway    *   model = nullptr;
+
+		/**
+		 * The XML-DOM element representing this instance. It contains the
+		 * path top down to another element to be resolved.
+		 */
 		const QDomElement   reference;
 
 	public:

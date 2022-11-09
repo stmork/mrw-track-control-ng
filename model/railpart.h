@@ -139,15 +139,6 @@ namespace mrw::model
 		 */
 		virtual bool contains(const RailPart * rail, const bool dir) const;
 
-		/**
-		 * This method verifies if all connectors of this rail part are
-		 * correctly connected which their counter parts.
-		 *
-		 * @return True if the connectors are correctly linked.
-		 * @see contains()
-		 */
-		virtual bool valid() const = 0;
-
 	protected:
 		/**
 		 * This method resolves a connected RailPart from the EMF model.

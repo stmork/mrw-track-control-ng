@@ -51,6 +51,8 @@ namespace mrw::model
 			return section_name;
 		}
 
+		bool valid() const;
+
 		QString toString() const override;
 
 		/**

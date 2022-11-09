@@ -57,7 +57,7 @@ SectionModule::SectionModule(
 
 bool SectionModule::valid() const
 {
-	return sections.size() <= 4;
+	return sections.size() <= MAX_SECTIONS;
 }
 
 void SectionModule::link()

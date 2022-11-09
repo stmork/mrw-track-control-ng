@@ -22,6 +22,8 @@ namespace mrw::model
 	{
 		std::vector<ProfileLight *> lights;
 
+		static const size_t MAX_LIGHTS = 8;
+
 	public:
 		explicit LightModule(
 			ModelRailway     *    model_railway,
