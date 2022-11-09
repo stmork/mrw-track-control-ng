@@ -32,6 +32,7 @@
       <lampen name="209" unit_no="209" schwellwert="90" typ="9"/>
     </module>
     <module xsi:type="Modelrailway:Impulsmodul" magnetartikel="//@gruppe.0/@abschnitt.0/@bauelement.4 //@gruppe.0/@abschnitt.0/@bauelement.5 //@gruppe.0/@abschnitt.0/@bauelement.6"/>
+    <module xsi:type="Modelrailway:Gleismodul"/>
   </controller>
   <gruppe xsi:type="Modelrailway:Bahnhof">
     <abschnitt>
