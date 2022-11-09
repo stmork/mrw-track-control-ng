@@ -89,6 +89,32 @@ Controller::~Controller()
 	connections.clear();
 }
 
+bool Controller::valid() const
+{
+	size_t ports = 0;
+
+	for (Module * module : modules)
+	{
+		if (!module->valid())
+		{
+			return false;
+		}
+		ports += module->ports();
+	}
+
+	if (!std::all_of(
+			connections.begin(), connections.end(),
+			[](MultiplexConnection * conn)
+{
+	return conn->valid();
+	}))
+	{
+		return false;
+	}
+
+	return ports <= MAX_PORTS;
+}
+
 void Controller::link()
 {
 	for (Module * module : modules)

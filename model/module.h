@@ -65,6 +65,14 @@ namespace mrw::model
 		}
 
 		/**
+		 * This method returns the needed amount of 16-Bit Ports of the CAN
+		 * controller.
+		 *
+		 * @return The needed 16-Bit ports of the CAN controller.
+		 */
+		virtual size_t ports() const = 0;
+
+		/**
 		 * This method verifies if this Module is not overprovisioned.
 		 *
 		 * @return True if all pins/connectors satifies the connected

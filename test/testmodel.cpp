@@ -38,6 +38,7 @@ void TestModel::testControllers()
 		Controller * controller = model->controller(c);
 
 		QVERIFY(controller != nullptr);
+		QVERIFY(controller->valid());
 		QVERIFY(controller->id() != 0);
 	}
 
@@ -127,6 +128,7 @@ void TestModel::testSections()
 void TestModel::testSection(Section * section)
 {
 	QVERIFY(section != nullptr);
+	QVERIFY(section->valid());
 	QVERIFY(section->unitNo() != 0);
 	QVERIFY(section->controller() != nullptr);
 
@@ -153,6 +155,8 @@ void TestModel::testAssemblyPart(AssemblyPart * part)
 	RailPart        *       rail      = dynamic_cast<RailPart *>(part);
 	Device         *        device    = dynamic_cast<Device *>(part);
 	const std::string   &   name      = part->toString().toStdString();
+
+	QVERIFY2(part->valid(), name.c_str());
 
 	if (reference != nullptr)
 	{

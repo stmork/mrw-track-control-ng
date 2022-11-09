@@ -20,6 +20,7 @@ TestNumbering::TestNumbering() : TestModelBase("Test-Numbering")
 void TestNumbering::testInvalid()
 {
 	QVERIFY(!model->isValid());
+	QVERIFY(!model->controller(0)->valid());
 }
 
 void TestNumbering::testMissingModule()
@@ -39,4 +40,9 @@ void TestNumbering::testToManyLights()
 {
 	QVERIFY(!model->controller(0)->connection(0)->valid());
 	QVERIFY(!model->module(0, 0)->valid());
+}
+
+void TestNumbering::testToManyInductors()
+{
+	QVERIFY(!model->module(0, 1)->valid());
 }

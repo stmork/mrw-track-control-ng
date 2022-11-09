@@ -50,6 +50,8 @@ namespace mrw::model
 
 		friend class ModelRailway;
 
+		static const size_t MAX_PORTS      = 3;
+		static const size_t MAX_CONNECTORS = 4;
 
 	public:
 		explicit Controller(
@@ -120,6 +122,7 @@ namespace mrw::model
 			return connections.size();
 		}
 
+		bool valid() const;
 		virtual QString toString() const override;
 
 	private:

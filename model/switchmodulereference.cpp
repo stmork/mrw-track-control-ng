@@ -48,9 +48,11 @@ const std::regex  SwitchModuleReference::path_regex(R"(^\/\/@controller\.(\d+)\/
 
 SwitchModuleReference::SwitchModuleReference(
 	ModelRailway     *    model_railway,
-	const QDomElement  &  element) :
+	const QDomElement  &  element,
+	const bool            cutoff) :
 	Device(model_railway, element),
-	inductor_count(model_railway->value(element, "spulen", 2))
+	inductor_count(model_railway->value(element, "spulen", 2)),
+	has_cut_off(cutoff)
 {
 	std::string path = ModelRailway::string(element, "modul").toStdString();
 	std::smatch matcher;

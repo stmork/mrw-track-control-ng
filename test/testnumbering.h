@@ -24,6 +24,7 @@ namespace mrw::test
 		void testMissingModule();
 		void testDirectionFail();
 		void testToManyLights();
+		void testToManyInductors();
 	};
 }
 

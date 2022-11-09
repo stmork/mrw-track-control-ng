@@ -33,6 +33,7 @@ namespace mrw::model
 		static const std::regex  path_regex;
 
 		const unsigned inductor_count;
+		const bool     has_cut_off;
 
 		Controller  *  switch_controller = nullptr;
 		SwitchModule * switch_module     = nullptr;
@@ -40,7 +41,8 @@ namespace mrw::model
 	public:
 		explicit SwitchModuleReference(
 			ModelRailway     *    model_railway,
-			const QDomElement  &  element);
+			const QDomElement  &  element,
+			const bool            cutoff = true);
 
 		/**
 		 * This method returns how many inductive actuators this Device
@@ -53,6 +55,17 @@ namespace mrw::model
 		inline size_t inductors() const
 		{
 			return inductor_count;
+		}
+
+		/**
+		 * This method returns true if the inductive actuators have automatic
+		 * cutoff at end position.
+		 *
+		 * @return True on automatic end position cutoff.
+		 */
+		inline bool isNew() const
+		{
+			return has_cut_off;
 		}
 
 		/**

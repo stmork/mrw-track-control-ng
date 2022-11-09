@@ -30,6 +30,11 @@ namespace mrw::model
 			const QDomElement  &  element);
 		virtual ~LightModule();
 
+		inline size_t ports() const override
+		{
+			return 1;
+		}
+
 		bool valid() const override;
 
 	private:

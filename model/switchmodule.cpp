@@ -18,6 +18,20 @@ SwitchModule::SwitchModule(
 {
 }
 
+size_t SwitchModule::ports() const
+{
+	for (const AssemblyPart * part : rail_parts)
+	{
+		const SwitchModuleReference * actor = dynamic_cast<const SwitchModuleReference *>(part);
+
+		if ((actor == nullptr) && (actor->isNew()))
+		{
+			return 2;
+		}
+	}
+	return 1;
+}
+
 bool SwitchModule::valid() const
 {
 	size_t inductors = 0;

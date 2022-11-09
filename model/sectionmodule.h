@@ -41,6 +41,11 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
 
+		inline size_t ports() const override
+		{
+			return 1;
+		}
+
 		bool valid() const override;
 
 	private:
