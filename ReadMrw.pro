@@ -3,6 +3,7 @@ SUBDIRS  = \
 	model \
 	util \
 	test \
+	ping \
 	track-control-ng
 
 QMAKE_CLEAN              += qtest*.xml valgrind*.xml
@@ -10,10 +11,12 @@ QMAKE_CLEAN              += qtest*.xml valgrind*.xml
 model.file                = model/MRW-Model.pro
 util.file                 = util/MRW-Util.pro
 test.file                 = test/MRW-Test.pro
+ping.file                 = tools/ping/MRW-Ping.pro
 track-control-ng.file     = track-control-ng/MRW-Reader.pro
 
 model.depends             = util
 test.depends              = util model
+ping.depends              = test
 track-control-ng.depends  = util model
 
 #####################################################################
@@ -22,7 +25,7 @@ track-control-ng.depends  = util model
 #
 #####################################################################
 
-astyle.commands = astyle */*.cpp */*.h
+astyle.commands = astyle */*.cpp */*.h tools/*/*.cpp
 
 cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--inline-suppr\
@@ -30,7 +33,7 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--language=c++ --std=c++14\
 	--library=qt\
 	--xml-version=2 --force -q\
-	*/*.cpp */*.h 2>cppcheck.xml
+	*/*.cpp */*.h tools/*/*.cpp 2>cppcheck.xml
 
 QMAKE_EXTRA_TARGETS += cppcheck astyle
 QMAKE_CLEAN         += cppcheck.xml

@@ -3,9 +3,9 @@ QMAKE_CXXFLAGS  += -Wextra -fstack-protector-strong
 QMAKE_CXXFLAGS  += -Wshadow
 QMAKE_CXXFLAGS  += -Wsuggest-override
 
-INCLUDEPATH      = ..
+INCLUDEPATH      = $$PWD
 
-LIBS            += -L../model -L../util
+LIBS            += -L$$PWD/model -L$$PWD/util
 
 linux:CONFIG(gcov) {
 	CONFIG         += debug
