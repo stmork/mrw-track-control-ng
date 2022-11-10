@@ -63,7 +63,7 @@ namespace mrw::model
 		 *
 		 * @return True on automatic end position cutoff.
 		 */
-		inline bool isNew() const
+		inline bool hasCutOff() const
 		{
 			return has_cut_off;
 		}

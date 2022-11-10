@@ -24,7 +24,7 @@ size_t SwitchModule::ports() const
 	{
 		const SwitchModuleReference * actor = dynamic_cast<const SwitchModuleReference *>(part);
 
-		if ((actor != nullptr) && (actor->isNew()))
+		if ((actor != nullptr) && (actor->hasCutOff()))
 		{
 			return 2;
 		}
