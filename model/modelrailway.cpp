@@ -122,7 +122,14 @@ void ModelRailway::info()
 			{
 				AssemblyPart * part = section->assemblyPart(a);
 
-				qInfo() << *part;
+				if (part != nullptr)
+				{
+					qInfo() << *part;
+				}
+				else
+				{
+					qInfo("      <-nil->");
+				}
 			}
 		}
 	}
@@ -180,7 +187,7 @@ void ModelRailway::add(Controller * controller)
 	else
 	{
 		error(QString(
-				"There is already a registered controoler with id: %1!").arg(id));
+				"There is already a registered controller with id: %1!").arg(id));
 	}
 }
 

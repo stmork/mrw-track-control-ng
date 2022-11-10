@@ -25,5 +25,6 @@ bool FormSignal::valid() const
 
 QString FormSignal::toString() const
 {
-	return QString("      F    %2  : %3").arg(symbol()).arg(name());
+	return QString("      F %1  %2  : %3").
+		arg(valid()  ? "V" : "-").arg(symbol()).arg(name());
 }

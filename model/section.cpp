@@ -176,7 +176,7 @@ SectionModule * Section::resolve(const std::string & path)
 		const unsigned module_idx     = std::stoul(matcher[2]);
 
 		section_controller = model->controller(controller_idx);
-		return static_cast<SectionModule *>(model->module(controller_idx, module_idx));
+		return dynamic_cast<SectionModule *>(model->module(controller_idx, module_idx));
 	}
 	return nullptr;
 }

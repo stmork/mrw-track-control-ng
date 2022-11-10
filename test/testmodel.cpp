@@ -163,6 +163,7 @@ void TestModel::testAssemblyPart(AssemblyPart * part)
 		QVERIFY2(signal == nullptr, name.c_str());
 		QVERIFY2(device != nullptr, name.c_str());
 		QVERIFY2(reference->module() != nullptr, name.c_str());
+		QCOMPARE(reference->module()->ports(), reference->isNew() ? 2 : 1);
 		QVERIFY2(reference->controller() != nullptr, name.c_str());
 	}
 

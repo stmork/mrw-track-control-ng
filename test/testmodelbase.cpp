@@ -32,3 +32,9 @@ void TestModelBase::cleanupTestCase()
 	delete model;
 	model = nullptr;
 }
+
+void TestModelBase::testInfo()
+{
+	model->info();
+	model->dump();
+}

@@ -95,6 +95,10 @@ bool Controller::valid() const
 
 	for (Module * module : modules)
 	{
+		if (module == nullptr)
+		{
+			return false;
+		}
 		if (!module->valid())
 		{
 			return false;
@@ -104,7 +108,7 @@ bool Controller::valid() const
 
 	if (!std::all_of(connections.begin(), connections.end(), [](MultiplexConnection * conn)
 {
-	return conn->valid();
+	return (conn != nullptr) && conn->valid();
 	}))
 	{
 		return false;
@@ -117,12 +121,18 @@ void Controller::link()
 {
 	for (Module * module : modules)
 	{
-		module->link();
+		if (module != nullptr)
+		{
+			module->link();
+		}
 	}
 
 	for (MultiplexConnection * connection : connections)
 	{
-		connection->link();
+		if (connection != nullptr)
+		{
+			connection->link();
+		}
 	}
 }
 

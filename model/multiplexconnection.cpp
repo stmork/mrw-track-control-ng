@@ -61,12 +61,15 @@ bool MultiplexConnection::valid() const
 
 	for (LightSignal * signal : light_signals)
 	{
-		pins += signal->usedPins();
-		if ((signal->controller() == nullptr) ||
-			(signal->connection() == nullptr))
+		if (signal == nullptr)
 		{
 			return false;
 		}
+		if (!signal->valid())
+		{
+			return false;
+		}
+		pins += signal->usedPins();
 	}
 
 	return pins <= MAX_PINS;
@@ -78,7 +81,7 @@ void mrw::model::MultiplexConnection::link()
 
 	for (const QString & signal_reference : references)
 	{
-		LightSignal * signal = static_cast<LightSignal *>(AssemblyPart::resolve(model, signal_reference));
+		LightSignal * signal = dynamic_cast<LightSignal *>(AssemblyPart::resolve(model, signal_reference));
 
 		light_signals.push_back(signal);
 	}

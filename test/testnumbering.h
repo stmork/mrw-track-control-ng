@@ -23,8 +23,10 @@ namespace mrw::test
 		void testInvalid();
 		void testMissingModule();
 		void testDirectionFail();
+		void testEmptyFail();
 		void testToManyLights();
 		void testToManyInductors();
+		void testPorts();
 	};
 }
 

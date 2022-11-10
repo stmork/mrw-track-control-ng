@@ -36,6 +36,13 @@ void TestNumbering::testDirectionFail()
 	QVERIFY(!model->assemblyPart(0, 0, 3)->valid());
 }
 
+void TestNumbering::testEmptyFail()
+{
+	QVERIFY(!model->assemblyPart(0, 1, 0)->valid());
+	QVERIFY(!model->assemblyPart(0, 1, 1)->valid());
+	QVERIFY(!model->assemblyPart(0, 1, 2)->valid());
+}
+
 void TestNumbering::testToManyLights()
 {
 	QVERIFY(!model->controller(0)->connection(0)->valid());
@@ -45,4 +52,12 @@ void TestNumbering::testToManyLights()
 void TestNumbering::testToManyInductors()
 {
 	QVERIFY(!model->module(0, 1)->valid());
+}
+
+void TestNumbering::testPorts()
+{
+	QCOMPARE(model->module(1, 0)->ports(), 1);
+	QCOMPARE(model->module(1, 1)->ports(), 1);
+	QCOMPARE(model->module(1, 2)->ports(), 1);
+	QCOMPARE(model->module(2, 0)->ports(), 2);
 }

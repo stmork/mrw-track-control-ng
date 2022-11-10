@@ -34,6 +34,14 @@
     <module xsi:type="Modelrailway:Impulsmodul" magnetartikel="//@gruppe.0/@abschnitt.0/@bauelement.4 //@gruppe.0/@abschnitt.0/@bauelement.5 //@gruppe.0/@abschnitt.0/@bauelement.6"/>
     <module xsi:type="Modelrailway:Gleismodul"/>
   </controller>
+  <controller id="1">
+    <module xsi:type="Modelrailway:Gleismodul"/>
+    <module xsi:type="Modelrailway:Beleuchtungsmodul"/>
+    <module xsi:type="Modelrailway:Impulsmodul"/>
+  </controller>
+  <controller id="1">
+    <module xsi:type="Modelrailway:Impulsmodul" nummer="2" magnetartikel="//@gruppe.0/@abschnitt.1/@bauelement.0"/>
+  </controller>
   <gruppe xsi:type="Modelrailway:Bahnhof">
     <abschnitt>
       <bauelement xsi:type="Modelrailway:Gleis" name="left end" b="//@gruppe.0/@abschnitt.0/@bauelement.1"/>
@@ -43,6 +51,17 @@
       <bauelement xsi:type="Modelrailway:Formhauptsignal" spulen="3" modul="//@controller.0/@module.1"/>
       <bauelement xsi:type="Modelrailway:Formhauptsignal" spulen="3" modul="//@controller.0/@module.1"/>
       <bauelement xsi:type="Modelrailway:Formhauptsignal" spulen="3" modul="//@controller.0/@module.1"/>
+    </abschnitt>
+    <abschnitt>
+      <bauelement xsi:type="Modelrailway:Weiche" modul="//@controller.2/@module.0" neu="true"/>
+      <bauelement xsi:type="Modelrailway:DKW"/>
+      <bauelement xsi:type="Modelrailway:Gleis"/>
+      <bauelement xsi:type="Modelrailway:Ausfahrsignal"/>
+      <bauelement xsi:type="Modelrailway:Einfahrsignal"/>
+      <bauelement xsi:type="Modelrailway:Blocksignal"/>
+      <bauelement xsi:type="Modelrailway:Vorsignal"/>
+      <bauelement xsi:type="Modelrailway:Formhauptsignal"/>
+      <bauelement xsi:type="Modelrailway:Formvorsignal"/>
     </abschnitt>
   </gruppe>
 </Modelrailway:Modell>
