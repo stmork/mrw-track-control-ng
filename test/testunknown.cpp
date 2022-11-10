@@ -19,7 +19,7 @@ TestUnknown::TestUnknown() : TestModelBase("Test-Unknown")
 
 void TestUnknown::testInvalid()
 {
-	QVERIFY(!model->isValid());
+	QVERIFY(!model->valid());
 }
 
 void TestUnknown::testController()

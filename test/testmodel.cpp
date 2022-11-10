@@ -24,7 +24,7 @@ TestModel::TestModel(const char * modelname, QObject * parent) :
 void TestModel::testModel()
 {
 	QVERIFY(model != nullptr);
-	QVERIFY(model->isValid());
+	QVERIFY(model->valid());
 	model->info();
 	model->dump();
 }

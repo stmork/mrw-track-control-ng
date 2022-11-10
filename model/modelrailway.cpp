@@ -175,6 +175,16 @@ void ModelRailway::error(const QString & message)
 	qCritical().noquote() << message;
 }
 
+bool ModelRailway::valid() const
+{
+	const bool ok = std::all_of(controllers.begin(), controllers.end(), [] (Controller * controller)
+	{
+		return controller->valid();
+	});
+
+	return ok && (errors == 0);
+}
+
 void ModelRailway::add(Controller * controller)
 {
 	const ControllerId id = controller->id();

@@ -81,7 +81,7 @@ namespace mrw::util
 		 * @param input The input string to surround with format commands.
 		 * @return The formatted string.
 		 */
-		static inline QString Bold(const QString & input)
+		static inline QString bold(const QString & input)
 		{
 			return format(BOLD_ON, input);
 		}

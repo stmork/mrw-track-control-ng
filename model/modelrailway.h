@@ -44,12 +44,14 @@ namespace mrw::model
 		friend class ProfileLight;
 		friend class Signal;
 
+		std::unordered_map<ControllerId, Controller *> controller_map;
+		std::unordered_map<ControllerId, Device *>     device_map;
+
 		QDomDocument               xml;
 		QString                    name;
 		std::vector<Controller *>  controllers;
 		std::vector<Region *>      regions;
-		std::unordered_map<ControllerId, Controller *> controller_map;
-		std::unordered_map<ControllerId, Device *>     device_map;
+
 		size_t                     warnings = 0;
 		size_t                     errors   = 0;
 
@@ -213,13 +215,32 @@ namespace mrw::model
 			return section(region_idx, section_idx)->assemblyPart(part_idx);
 		}
 
+		/**
+		 * This method displays a warning message and increases the internal
+		 * warning counter.
+		 *
+		 * @param message The message to log.
+		 */
 		void warning(const QString & message);
+
+		/**
+		 * This method displays an error message and increases the internal
+		 * error counter. It also makes this instance invalid.
+		 *
+		 * @param message The message to log.
+		 * @see valid()
+		 */
 		void error(const QString & message);
 
-		inline bool isValid() const
-		{
-			return errors == 0;
-		}
+		/**
+		 * This method validates if all underlying controllers are valid and
+		 * no error was reported.
+		 *
+		 * @return True if the ModelRailway configuration is fine.
+		 * @see Controller::valid()
+		 * @see error()
+		 */
+		bool valid() const;
 
 		QString toString() const override;
 

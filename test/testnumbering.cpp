@@ -19,7 +19,7 @@ TestNumbering::TestNumbering() : TestModelBase("Test-Numbering")
 
 void TestNumbering::testInvalid()
 {
-	QVERIFY(!model->isValid());
+	QVERIFY(!model->valid());
 	QVERIFY(!model->controller(0)->valid());
 }
 
