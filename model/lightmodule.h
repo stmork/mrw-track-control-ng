@@ -19,6 +19,15 @@ namespace mrw::model
 	class ProfileLight;
 	class Controller;
 
+	/**
+	 * This module connects light sources such as LEDs or light bulbs. The
+	 * lighting up may follow different profiles using PWM of the controlling
+	 * CAN controller. The lighting starts when the sensor values fall below
+	 * the threshold. The light turns off when the sensor values go beyound
+	 * the threshold + 4 (hysteresis).
+	 *
+	 * @see https://github.com/stmork/mrw/wiki/LichtProfile
+	 */
 	class LightModule : public Module
 	{
 		std::vector<ProfileLight *> lights;

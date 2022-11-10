@@ -122,7 +122,16 @@ namespace mrw::model
 			return connections.size();
 		}
 
+		/**
+		 * This method validates if all underlying modules and connections
+		 * are also valid.
+		 *
+		 * @return True if every configuration is fine.
+		 * @see Module::valid()
+		 * @see MultiplexConnection::valid()
+		 */
 		bool valid() const;
+
 		virtual QString toString() const override;
 
 	private:

@@ -15,13 +15,24 @@
 
 namespace mrw::model
 {
+	/**
+	 * This class represents a LED or bulb light source which can only simply
+	 * turn on or off the light. Every light can have a configured lighting
+	 * threshold. The lighting starts when the sensor values fall below the
+	 * threshold. The light turns off when the sensor values go beyound the
+	 * threshold + 4 (hysteresis).
+	 *
+	 * This light is connected to a MultiplexConnection instance.
+	 *
+	 * @see https://github.com/stmork/mrw/wiki/LichtProfile
+	 */
 	class Light : public Device
 	{
 		Controller  *  light_controller;
 
 	protected:
-		const QString  light_name;
-		const unsigned threshold;
+		const QString  light_name;  ///< The light name.
+		const unsigned threshold;   ///< The lighting sensor threshold.
 
 	public:
 		explicit Light(

@@ -34,6 +34,11 @@ namespace mrw::model
 
 		QString toString() const override;
 
+		/**
+		 * This method returns the rail name.
+		 *
+		 * @return The rail name.
+		 */
 		inline const QString & name() const
 		{
 			return part_name;

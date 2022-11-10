@@ -12,6 +12,17 @@
 
 namespace mrw::model
 {
+	/**
+	 * This class represents a LED or bulb light source which can light up
+	 * using different light up profiles. Every light can have a configured
+	 * lighting threshold. The lighting starts when the sensor values fall
+	 * below the threshold. The light turns off when the sensor values go
+	 * beyound the threshold + 4 (hysteresis).
+	 *
+	 * This light is connected to a LightModule instance.
+	 *
+	 * @see https://github.com/stmork/mrw/wiki/LichtProfile
+	 */
 	class ProfileLight : public Light
 	{
 		const unsigned profile;

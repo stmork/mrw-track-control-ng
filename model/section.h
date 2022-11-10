@@ -46,12 +46,17 @@ namespace mrw::model
 			const QDomElement  &  element);
 		virtual ~Section();
 
+		/**
+		 * This method validates if all references are configured correctly.
+		 *
+		 * @return True if every configuration is fine.
+		 */
+		bool valid() const;
+
 		inline const QString & name() const override
 		{
 			return section_name;
 		}
-
-		bool valid() const;
 
 		QString toString() const override;
 
