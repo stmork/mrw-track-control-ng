@@ -64,7 +64,11 @@ namespace mrw::can
 		QRYBUF      = CAT_EXT | 0x0b,
 		QRYERR      = CAT_EXT | 0x0c,
 		GETVER      = CAT_EXT | 0x0d,
-		SENSOR      = CAT_EXT | 0x0e
+		SENSOR      = CAT_EXT | 0x0e,
+
+		CMD_MASK      = 0x7f,
+		CMD_RESULT    = UINT8_MAX - CMD_MASK,
+		CMD_ILLEGAL   =    0
 	};
 
 	enum CommandResult : uint8_t
@@ -91,9 +95,7 @@ namespace mrw::can
 		MSG_SWITCH_FAILED       = 19,
 		MSG_CONFIG_BUFFER_FULL  = 20,
 
-		MSG_MASK        = 0x7f,
-		MSG_RESULT      = 0x80,
-		NO_RESULT       = 0xff // not really sent
+		MSG_NO_RESULT           = UINT8_MAX // not really sent
 	};
 
 	enum SignalState : uint8_t
@@ -122,8 +124,8 @@ namespace mrw::can
 		SENSOR_TEMP  = 2
 	};
 
-	static constexpr uint8_t CMD_MASK      = 0x7f;
-	static constexpr uint8_t CMD_ILLEGAL   =    0;
+	static constexpr uint16_t CAN_GATEWAY_ID   = 0x000;
+	static constexpr uint16_t CAN_BROADCAST_ID = 0x7ff;
 }
 
 #endif

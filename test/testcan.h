@@ -10,11 +10,18 @@
 
 #include <QObject>
 
+#include <model/controller.h>
+#include <model/device.h>
+
 namespace mrw::test
 {
 	class TestCan : public QObject
 	{
 		Q_OBJECT
+
+		static constexpr mrw::model::ControllerId TEST_CTRL_ID = 0x1234 >> 2;
+		static constexpr mrw::model::UnitNo       TEST_UNIT_NO = 0x5678;
+		static constexpr quint32                  TEST_ID      = 0x12345678;
 
 	public:
 		explicit TestCan(QObject * parent = nullptr);
@@ -22,6 +29,9 @@ namespace mrw::test
 	private slots:
 		void testEmptyCanFrame();
 		void testCanFrame();
+		void testBroadcast();
+		void testCommand();
+		void testResult();
 	};
 }
 
