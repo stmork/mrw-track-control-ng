@@ -8,8 +8,10 @@
 #ifndef MRW_MODEL_SIGNAL_H
 #define MRW_MODEL_SIGNAL_H
 
-#include "model/module.h"
-#include "model/assemblypart.h"
+#include <can/commands.h>
+#include <util/constantenumerator.h>
+#include <model/module.h>
+#include <model/assemblypart.h>
 
 namespace mrw::model
 {
@@ -22,6 +24,8 @@ namespace mrw::model
 	 */
 	class Signal : public AssemblyPart
 	{
+		static const mrw::util::ConstantEnumerator<mrw::can::SignalState> signal_constants;
+
 	public:
 		/**
 		 * This enumeration represents which basic type of the Signal.

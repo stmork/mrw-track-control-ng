@@ -8,6 +8,22 @@
 #include "model/switchmodulereference.h"
 
 using namespace mrw::model;
+using namespace mrw::util;
+using namespace mrw::can;
+
+const ConstantEnumerator<SignalState> Signal::signal_constants
+{
+	CONSTANT(SIGNAL_OFF),
+	CONSTANT(SIGNAL_HP0),
+	CONSTANT(SIGNAL_HP1),
+	CONSTANT(SIGNAL_HP2),
+	CONSTANT(SIGNAL_VR0),
+	CONSTANT(SIGNAL_VR1),
+	CONSTANT(SIGNAL_VR2),
+	CONSTANT(SIGNAL_SH0),
+	CONSTANT(SIGNAL_SH1),
+	CONSTANT(SIGNAL_TST)
+};
 
 Signal::Signal(
 	ModelRailway     *    model_railway,

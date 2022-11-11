@@ -9,6 +9,8 @@ SOURCES += \
 	stringutil.cpp
 
 HEADERS += \
+	constantenumerator.h \
+	constantenumerator.h \
 	method.h \
 	singleton.h \
 	stringutil.h

@@ -10,17 +10,24 @@
 
 #include <QObject>
 
+#include <util/constantenumerator.h>
+
 namespace mrw::test
 {
 	class TestUtil : public QObject
 	{
 		Q_OBJECT
 
+	private:
+		static const mrw::util::ConstantEnumerator<unsigned> map;
+
 	public:
 		explicit TestUtil(QObject * parent = nullptr);
 
 	private slots:
 		void testMethod();
+		void testConstantEnumerator();
+		void testSingleton();
 	};
 }
 
