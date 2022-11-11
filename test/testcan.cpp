@@ -31,7 +31,7 @@ void TestCan::testReceivedResult()
 	QByteArray   array;
 	QCanBusFrame frame;
 
-	array.append(GETRBS | CMD_RESULT);
+	array.append(GETRBS | CMD_RESPONSE);
 	array.append(MSG_QUEUED);
 	array.append(0x33);
 	array.append(0x44);
@@ -145,7 +145,7 @@ void TestCan::testResult()
 	QVERIFY(frame.hasExtendedFrameFormat());
 	QCOMPARE(frame.frameId(), TEST_CTRL_ID);
 	QCOMPARE(array.size(), 4);
-	QCOMPARE(array[0], SETLFT | CMD_RESULT);
+	QCOMPARE(array[0], SETLFT | CMD_RESPONSE);
 	QCOMPARE(array[1], MSG_OK);
 	QCOMPARE(array[2], 0x78);
 	QCOMPARE(array[3], 0x56);

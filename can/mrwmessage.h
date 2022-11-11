@@ -42,7 +42,7 @@ namespace mrw::can
 		size_t              len;
 		bool                is_result;
 		bool                is_extended;
-		uint8_t             info[4];
+		uint8_t             info[8];
 
 	public:
 		explicit MrwMessage(const Command command);

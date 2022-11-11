@@ -136,9 +136,9 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 	if (len >= 1)
 	{
 		mrw_command =  Command(payload[0] & CMD_MASK);
-		is_result   = (payload[0] & CMD_RESULT) != 0;
+		is_result   = (payload[0] & CMD_RESPONSE) != 0;
 
-		if ((mrw_result) && (len >= 4))
+		if ((is_result) && (len >= 4))
 		{
 			dst         = is_extended ? id >> CAN_SID_SHIFT : id & CAN_SID_MASK;
 			src         = is_extended ? id &  CAN_EID_UNITNO_MASK : 0;
@@ -153,6 +153,8 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 			src         = 0;
 			mrw_result  = MSG_NO_RESULT;
 			unit_no     = is_extended ? id & CAN_EID_UNITNO_MASK : 0;
+
+			std::copy(payload.begin() + 1, payload.end(), info);
 		}
 	}
 	else
@@ -221,7 +223,7 @@ MrwMessage::operator QCanBusFrame() const
 
 	if (is_result)
 	{
-		array.append(mrw_command | CMD_RESULT);
+		array.append(mrw_command | CMD_RESPONSE);
 		array.append(mrw_result);
 		array.append(unit_no & 0xff);
 		array.append(unit_no >> 8);
@@ -243,15 +245,15 @@ QString MrwMessage::toString() const
 {
 	if (is_result)
 	{
-		return QString::asprintf("ID: %04x:%04x # %04x > %-11.11s %s",
-				dst, src, unit_no,
+		return QString::asprintf("ID: %04x:%04x len=%zu # %04x > %-11.11s %s",
+				sid(), eid(), len, unit_no,
 				command_map.get(mrw_command).toStdString().c_str(),
 				result_map.get(mrw_result).toStdString().c_str());
 	}
 	else
 	{
-		return QString::asprintf("ID: %04x:%04x #      < %-11.11s",
-				dst, unit_no,
+		return QString::asprintf("ID: %04x:%04x len=%zu #      < %-11.11s",
+				sid(), eid(), len,
 				command_map.get(mrw_command).toStdString().c_str());
 	}
 }

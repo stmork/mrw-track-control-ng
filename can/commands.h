@@ -67,7 +67,7 @@ namespace mrw::can
 		SENSOR      = CAT_EXT | 0x0e,
 
 		CMD_MASK      = 0x7f,
-		CMD_RESULT    = UINT8_MAX - CMD_MASK,
+		CMD_RESPONSE  = UINT8_MAX - CMD_MASK,
 		CMD_ILLEGAL   =    0
 	};
 
