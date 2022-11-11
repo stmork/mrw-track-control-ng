@@ -7,7 +7,7 @@
 #include <QCanBus>
 #include <QDebug>
 
-#include <can/commands.h>
+#include <can/mrwmessage.h>
 
 using namespace mrw::can;
 
@@ -32,17 +32,16 @@ int main(int argc, char * argv[])
 	{
 		for (const QCanBusFrame & frame : device->readAllFrames())
 		{
-			qInfo() << frame.frameId() << frame.payload();
+			qInfo() << MrwMessage(frame);
 		}
 	});
 
-	QByteArray payload;
-
-	payload += Command::PING;
 	device->connectDevice();
 
-	QCanBusFrame    frame(0x7ffu, payload);
-	device->writeFrame(frame);
+	MrwMessage message(PING);
+
+	device->writeFrame(message);
+	qInfo() << message;
 
 	return app.exec();
 }

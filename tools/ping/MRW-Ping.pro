@@ -1,5 +1,5 @@
 QT -= gui
-QT += serialbus
+QT += xml serialbus
 
 include(../../common.pri)
 
@@ -19,4 +19,4 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
 	main.cpp
 
-LIBS            += -lMRW-Model -lMRW-Util
+LIBS            += -lMRW-Model -lMRW-Util -lMRW-Can
