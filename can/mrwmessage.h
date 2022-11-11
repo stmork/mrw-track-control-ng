@@ -14,9 +14,14 @@
 #include <model/controller.h>
 #include <model/device.h>
 #include <util/stringutil.h>
+#include <util/constantenumerator.h>
 
 namespace mrw::can
 {
+	static constexpr uint16_t CAN_SID_MASK         = 0x07ff;
+	static constexpr uint16_t CAN_EID_UNITNO_MASK  = 0xffff;
+	static constexpr size_t   CAN_SID_SHIFT        = 18;
+
 	/**
 	 * This class represents a CAN bus frame in model railway manner. It may
 	 * have two states:
@@ -25,6 +30,9 @@ namespace mrw::can
 	 */
 	class MrwMessage : public mrw::util::String
 	{
+		static const mrw::util::ConstantEnumerator<Command>       command_map;
+		static const mrw::util::ConstantEnumerator<CommandResult> result_map;
+
 		mrw::model::ControllerId   src;
 		mrw::model::ControllerId   dst;
 		mrw::model::UnitNo         unit_no;

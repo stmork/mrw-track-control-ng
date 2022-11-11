@@ -7,6 +7,77 @@
 
 using namespace mrw::can;
 using namespace mrw::model;
+using namespace mrw::util;
+
+const ConstantEnumerator<Command>       MrwMessage::command_map
+{
+	CONSTANT(SETLFT),
+	CONSTANT(SETRGT),
+	CONSTANT(GETDIR),
+
+	CONSTANT(SETRON),
+	CONSTANT(SETROF),
+	CONSTANT(GETRBS),
+
+	CONSTANT(SETSGN),
+
+	CONSTANT(CFGSWN),
+	CONSTANT(CFGSWO),
+	CONSTANT(CFGRAI),
+	CONSTANT(CFGPF2),
+	CONSTANT(CFGPF3),
+	CONSTANT(CFGMF2),
+	CONSTANT(CFGMF3),
+	CONSTANT(CFGPL2),
+	CONSTANT(CFGPL3),
+	CONSTANT(CFGSL2),
+	CONSTANT(CFGML2),
+	CONSTANT(CFGML3),
+	CONSTANT(CFGML4),
+	CONSTANT(CFGLGT),
+
+	CONSTANT(CFGBGN),
+	CONSTANT(CFGEND),
+	CONSTANT(SET_ID),
+	CONSTANT(PING),
+	CONSTANT(RESET),
+	CONSTANT(GETCFG),
+	CONSTANT(GETDVC),
+	CONSTANT(FLASH_REQ),
+	CONSTANT(FLASH_DATA),
+	CONSTANT(FLASH_CHECK),
+	CONSTANT(QRYBUF),
+	CONSTANT(QRYERR),
+	CONSTANT(GETVER),
+	CONSTANT(SENSOR)
+};
+
+const ConstantEnumerator<CommandResult> MrwMessage::result_map
+{
+	CONSTANT(MSG_OK),
+	CONSTANT(MSG_QUEUE_FULL),
+	CONSTANT(MSG_UNKNOWN_CMD),
+	CONSTANT(MSG_PENDING),
+	CONSTANT(MSG_IGNORED),
+	CONSTANT(MSG_QUEUED),
+	CONSTANT(MSG_NOT_CONFIGURED_YET),
+	CONSTANT(MSG_NO_UNITNO_DEFINED),
+	CONSTANT(MSG_UNITTYPE_WRONG),
+	CONSTANT(MSG_RESET_PENDING),
+	CONSTANT(MSG_UNITNO_MISSING),
+	CONSTANT(MSG_UNIT_NOT_FOUND),
+	CONSTANT(MSG_NOT_IN_CONFIG_MODE),
+	CONSTANT(MSG_BOOTED),
+	CONSTANT(MSG_ID_NOT_CHANGED),
+	CONSTANT(MSG_CHECKSUM_ERROR),
+	CONSTANT(MSG_INFO),
+	CONSTANT(MSG_ID_CHANGE_DISABLED),
+	CONSTANT(MSG_HARDWARE_MISMATCH),
+	CONSTANT(MSG_SWITCH_FAILED),
+	CONSTANT(MSG_CONFIG_BUFFER_FULL),
+
+	CONSTANT(MSG_NO_RESULT)
+};
 
 MrwMessage::MrwMessage(const Command command) :
 	src(0),
@@ -61,17 +132,37 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 
 	is_extended = frame.hasExtendedFrameFormat();
 	len         = payload.size();
-	dst         = is_extended ? id >> 18 : id & 0x7ff;
-	src         = is_extended ? id & 0xffff : 0;
 
-	if (len >= 4)
+	if (len >= 1)
 	{
 		mrw_command =  Command(payload[0] & CMD_MASK);
-		mrw_result  =  (CommandResult)payload[1];
 		is_result   = (payload[0] & CMD_RESULT) != 0;
-		unit_no     =  payload[2] | (payload[3] << 8);
 
-		std::copy(payload.begin() + 4, payload.end(), info);
+		if ((mrw_result) && (len >= 4))
+		{
+			dst         = is_extended ? id >> CAN_SID_SHIFT : id & CAN_SID_MASK;
+			src         = is_extended ? id &  CAN_EID_UNITNO_MASK : 0;
+			mrw_result  = (CommandResult)payload[1];
+			unit_no     = payload[2] | (payload[3] << 8);
+
+			std::copy(payload.begin() + 4, payload.end(), info);
+		}
+		else
+		{
+			dst         = is_extended ? id >> CAN_SID_SHIFT : id & CAN_SID_MASK;
+			src         = 0;
+			mrw_result  = MSG_NO_RESULT;
+			unit_no     = is_extended ? id & CAN_EID_UNITNO_MASK : 0;
+		}
+	}
+	else
+	{
+		src         = 0;
+		dst         = 0;
+		unit_no     = 0;
+		is_result   = false;
+		mrw_command = CMD_ILLEGAL;
+		mrw_result  = MSG_NO_RESULT;
 	}
 }
 
@@ -100,11 +191,11 @@ quint32 MrwMessage::id() const
 {
 	if (is_result)
 	{
-		return (dst << 18) | src;
+		return (dst << CAN_SID_SHIFT) | src;
 	}
 	else if (is_extended)
 	{
-		return (dst << 18) | unit_no;
+		return (dst << CAN_SID_SHIFT) | unit_no;
 	}
 	else
 	{
@@ -150,5 +241,17 @@ MrwMessage::operator QCanBusFrame() const
 
 QString MrwMessage::toString() const
 {
-	return QString::asprintf("ID: %04x:%04x %02x %02x", eid(), sid(), command(), result());
+	if (is_result)
+	{
+		return QString::asprintf("ID: %04x:%04x # %04x > %-11.11s %s",
+				dst, src, unit_no,
+				command_map.get(mrw_command).toStdString().c_str(),
+				result_map.get(mrw_result).toStdString().c_str());
+	}
+	else
+	{
+		return QString::asprintf("ID: %04x:%04x #      < %-11.11s",
+				dst, unit_no,
+				command_map.get(mrw_command).toStdString().c_str());
+	}
 }

@@ -26,7 +26,7 @@ void TestCan::testEmptyCanFrame()
 	QVERIFY(message.toString().size() > 0);
 }
 
-void TestCan::testCanFrame()
+void TestCan::testReceivedResult()
 {
 	QByteArray   array;
 	QCanBusFrame frame;
@@ -45,6 +45,44 @@ void TestCan::testCanFrame()
 	QCOMPARE(message.command(), GETRBS);
 	QCOMPARE(message.result(),  MSG_QUEUED);
 	QCOMPARE(message.unitNo(),  0x4433);
+	QVERIFY(message.toString().size() > 0);
+}
+
+void TestCan::testReceivedBroadcast()
+{
+	QByteArray   array;
+	QCanBusFrame frame;
+
+	array.append(SENSOR);
+	frame.setFrameId(CAN_BROADCAST_ID);
+	frame.setPayload(array);
+	MrwMessage message(frame);
+
+	QVERIFY(message.valid());
+	QCOMPARE(message.eid(),     0);
+	QCOMPARE(message.sid(),     CAN_BROADCAST_ID);
+	QCOMPARE(message.command(), SENSOR);
+	QCOMPARE(message.result(),  MSG_NO_RESULT);
+	QCOMPARE(message.unitNo(),  0);
+	QVERIFY(message.toString().size() > 0);
+}
+
+void TestCan::testReceivedCommand()
+{
+	QByteArray   array;
+	QCanBusFrame frame;
+
+	array.append(GETRBS);
+	frame.setFrameId(TEST_ID);
+	frame.setPayload(array);
+	MrwMessage message(frame);
+
+	QVERIFY(message.valid());
+	QCOMPARE(message.eid(),     TEST_UNIT_NO);
+	QCOMPARE(message.sid(),     TEST_CTRL_ID);
+	QCOMPARE(message.command(), GETRBS);
+	QCOMPARE(message.result(),  MSG_NO_RESULT);
+	QCOMPARE(message.unitNo(),  TEST_UNIT_NO);
 	QVERIFY(message.toString().size() > 0);
 }
 
