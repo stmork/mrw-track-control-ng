@@ -1,22 +1,24 @@
 TEMPLATE = subdirs
 SUBDIRS  = \
-	model \
 	util \
+	model \
+	can \
 	test \
 	ping \
 	track-control-ng
 
 QMAKE_CLEAN              += qtest*.xml valgrind*.xml
 
-model.file                = model/MRW-Model.pro
 util.file                 = util/MRW-Util.pro
+model.file                = model/MRW-Model.pro
+can.file                  = can/MRW-Can.pro
 test.file                 = test/MRW-Test.pro
 ping.file                 = tools/ping/MRW-Ping.pro
 track-control-ng.file     = track-control-ng/MRW-Reader.pro
 
 model.depends             = util
 test.depends              = util model
-ping.depends              = test
+ping.depends              = test can
 track-control-ng.depends  = util model
 
 #####################################################################

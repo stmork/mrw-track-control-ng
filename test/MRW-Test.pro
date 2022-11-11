@@ -1,10 +1,11 @@
-QT     += core xml testlib
+QT     += core xml serialbus testlib
 CONFIG += testcase
 
 include(../common.pri)
 
 SOURCES += \
 	main.cpp \
+	testcan.cpp \
 	testmodel.cpp \
 	testmodelbase.cpp \
 	testnumbering.cpp \
@@ -14,6 +15,7 @@ SOURCES += \
 	testutil.cpp
 
 HEADERS += \
+	testcan.h \
 	testdef.h \
 	testmodel.h \
 	testmodelbase.h \
@@ -23,6 +25,6 @@ HEADERS += \
 	testlight.h \
 	testutil.h
 
-LIBS            += -lMRW-Model -lMRW-Util
+LIBS            += -lMRW-Model -lMRW-Util -lMRW-Can
 
 QMAKE_CLEAN     += $$TARGET qtest*.xml

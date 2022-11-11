@@ -7,9 +7,9 @@
 #include <QCanBus>
 #include <QDebug>
 
-#include <model/commands.h>
+#include <can/commands.h>
 
-using namespace mrw::model;
+using namespace mrw::can;
 
 int main(int argc, char * argv[])
 {

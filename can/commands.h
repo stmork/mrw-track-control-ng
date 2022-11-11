@@ -5,12 +5,12 @@
 
 #pragma once
 
-#ifndef MRW_TEST_COMMANDS_H
-#define MRW_TEST_COMMANDS_H
+#ifndef MRW_CAN_COMMANDS_H
+#define MRW_CAN_COMMANDS_H
 
 #include <cinttypes>
 
-namespace mrw::model
+namespace mrw::can
 {
 	enum CommandCategory : uint8_t
 	{
@@ -21,8 +21,7 @@ namespace mrw::model
 		CAT_EXT         = 0x40,
 		CAT_MASK        = 0x70,
 
-		CMD_NEED_UNITNO = 0x40,
-		MSG_RESULT      = 0x80
+		CMD_NEED_UNITNO = 0x40
 	};
 
 	enum Command : uint8_t
@@ -92,6 +91,8 @@ namespace mrw::model
 		MSG_SWITCH_FAILED       = 19,
 		MSG_CONFIG_BUFFER_FULL  = 20,
 
+		MSG_MASK        = 0x7f,
+		MSG_RESULT      = 0x80,
 		NO_RESULT       = 0xff // not really sent
 	};
 

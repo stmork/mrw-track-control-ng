@@ -6,12 +6,15 @@
 #include <QTest>
 #include <QDebug>
 
+#include <util/stringutil.h>
+
 #include "testmodel.h"
 #include "testswitch.h"
 #include "testlight.h"
 #include "testnumbering.h"
 #include "testunknown.h"
 #include "testutil.h"
+#include "testcan.h"
 
 using namespace mrw::test;
 using namespace mrw::util;
@@ -82,6 +85,17 @@ static int testNumbering()
 	return QTest::qExec(&test, args);
 }
 
+static int testCan()
+{
+	TestCan        test;
+	QStringList    args
+	{
+		"MRW-Test", "-o", "qtest-can.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
 int main(int argc, char * argv[])
 {
 	Q_UNUSED(argc)
@@ -95,6 +109,7 @@ int main(int argc, char * argv[])
 	status += testSimpleLight();
 	status += testNumbering();
 	status += testUnknown();
+	status += testCan();
 
 	if (status == 0)
 	{

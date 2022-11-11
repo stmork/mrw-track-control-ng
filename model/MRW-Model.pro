@@ -29,7 +29,6 @@ SOURCES += \
 
 HEADERS += \
 	assemblypart.h \
-	commands.h \
 	controller.h \
 	device.h \
 	formsignal.h \

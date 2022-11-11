@@ -5,7 +5,7 @@ QMAKE_CXXFLAGS  += -Wsuggest-override
 
 INCLUDEPATH      = $$PWD
 
-LIBS            += -L$$PWD/model -L$$PWD/util
+LIBS            += -L$$PWD/model -L$$PWD/util -L$$PWD/can
 
 linux:CONFIG(gcov) {
 	CONFIG         += debug
