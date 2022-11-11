@@ -133,19 +133,19 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 	is_extended = frame.hasExtendedFrameFormat();
 	len         = payload.size();
 
-	if (len >= 1)
+	if (len >= IDX_COMMAND_SIZE)
 	{
 		mrw_command =  Command(payload[0] & CMD_MASK);
 		is_result   = (payload[0] & CMD_RESPONSE) != 0;
 
-		if ((is_result) && (len >= 4))
+		if ((is_result) && (len >= IDX_RESULT_SIZE))
 		{
 			dst         = is_extended ? id >> CAN_SID_SHIFT : id & CAN_SID_MASK;
 			src         = is_extended ? id &  CAN_EID_UNITNO_MASK : 0;
 			mrw_result  = (CommandResult)payload[1];
 			unit_no     = payload[2] | (payload[3] << 8);
 
-			std::copy(payload.begin() + 4, payload.end(), info);
+			std::copy(payload.begin() + IDX_RESULT_SIZE, payload.end(), info);
 		}
 		else
 		{
@@ -154,7 +154,7 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 			mrw_result  = MSG_NO_RESULT;
 			unit_no     = is_extended ? id & CAN_EID_UNITNO_MASK : 0;
 
-			std::copy(payload.begin() + 1, payload.end(), info);
+			std::copy(payload.begin() + IDX_COMMAND_SIZE, payload.end(), info);
 		}
 	}
 	else
@@ -209,11 +209,11 @@ bool MrwMessage::valid() const
 {
 	if (is_result)
 	{
-		return is_extended && (len >= 4);
+		return is_extended && (len >= IDX_RESULT_SIZE);
 	}
 	else
 	{
-		return len >= 1;
+		return len >= IDX_COMMAND_SIZE;
 	}
 }
 
@@ -243,17 +243,28 @@ MrwMessage::operator QCanBusFrame() const
 
 QString MrwMessage::toString() const
 {
+	QString appendix = QByteArray((const char *)info, max()).toHex(' ');
+
 	if (is_result)
 	{
-		return QString::asprintf("ID: %04x:%04x len=%zu # %04x > %-11.11s %s",
+		return QString::asprintf("ID: %04x:%04x len=%zu # %04x > %-11.11s %-22.22s %s",
 				sid(), eid(), len, unit_no,
 				command_map.get(mrw_command).toStdString().c_str(),
-				result_map.get(mrw_result).toStdString().c_str());
+				result_map.get(mrw_result).toStdString().c_str(),
+				appendix.toStdString().c_str());
 	}
 	else
 	{
-		return QString::asprintf("ID: %04x:%04x len=%zu #      < %-11.11s",
+		return QString::asprintf("ID: %04x:%04x len=%zu #      < %-11.11s %-22.22s %s",
 				sid(), eid(), len,
-				command_map.get(mrw_command).toStdString().c_str());
+				command_map.get(mrw_command).toStdString().c_str(), "",
+				appendix.toStdString().c_str());
 	}
+}
+
+size_t MrwMessage::max() const
+{
+	const size_t start = is_result ? IDX_RESULT_SIZE : IDX_COMMAND_SIZE;
+
+	return len < start ? 0 : len - start;
 }

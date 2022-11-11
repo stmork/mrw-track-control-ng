@@ -33,6 +33,17 @@ namespace mrw::can
 		static const mrw::util::ConstantEnumerator<Command>       command_map;
 		static const mrw::util::ConstantEnumerator<CommandResult> result_map;
 
+		enum InfoIdx
+		{
+			IDX_COMMAND    = 0,
+			IDX_COMMAND_SIZE,
+
+			IDX_RESULT     = IDX_COMMAND_SIZE,
+			IDX_UNITNO_L,
+			IDX_UNITNO_H,
+			IDX_RESULT_SIZE
+		};
+
 		mrw::model::ControllerId   src;
 		mrw::model::ControllerId   dst;
 		mrw::model::UnitNo         unit_no;
@@ -59,7 +70,7 @@ namespace mrw::can
 
 		uint16_t eid() const;
 		uint16_t sid() const;
-		quint32 id() const;
+		quint32  id() const;
 
 		inline mrw::model::UnitNo unitNo() const
 		{
@@ -81,6 +92,9 @@ namespace mrw::can
 		operator QCanBusFrame() const;
 
 		QString toString() const override;
+
+	private:
+		size_t max() const;
 	};
 }
 
