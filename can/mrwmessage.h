@@ -48,12 +48,12 @@ namespace mrw::can
 		mrw::model::ControllerId   dst;
 		mrw::model::UnitNo         unit_no;
 
-		Command             mrw_command;
-		CommandResult       mrw_result;
-		size_t              len;
-		bool                is_result;
-		bool                is_extended;
-		uint8_t             info[8];
+		Command                    msg_command;
+		CommandResult              msg_result;
+		size_t                     len;
+		bool                       is_response;
+		bool                       is_extended;
+		uint8_t                    info[8];
 
 	public:
 		explicit MrwMessage(const Command command);
@@ -79,12 +79,12 @@ namespace mrw::can
 
 		inline Command command() const
 		{
-			return mrw_command;
+			return msg_command;
 		}
 
 		inline CommandResult result() const
 		{
-			return mrw_result;
+			return msg_result;
 		}
 
 		bool valid() const;

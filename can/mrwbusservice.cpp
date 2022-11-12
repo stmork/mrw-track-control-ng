@@ -37,6 +37,7 @@ MrwBusService::~MrwBusService()
 	if (device != nullptr)
 	{
 		device->disconnectDevice();
+		delete device;
 	}
 }
 

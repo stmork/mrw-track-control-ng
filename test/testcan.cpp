@@ -27,6 +27,24 @@ void TestCan::testEmptyCanFrame()
 	QVERIFY(message.toString().size() > 0);
 }
 
+void TestCan::testInvalidCanFrame()
+{
+	QByteArray array;
+
+	array.append(PING | CMD_RESPONSE);
+
+	const QCanBusFrame frame_single(CAN_BROADCAST_ID, array);
+	const QCanBusFrame frame_ext(TEST_ID, array);
+	const MrwMessage   message_single(frame_single);
+	const MrwMessage   message_ext(frame_ext);
+
+	QVERIFY(!message_single.valid());
+	QVERIFY(message_single.toString().size() > 0);
+
+	QVERIFY(!message_ext.valid());
+	QVERIFY(message_ext.toString().size() > 0);
+}
+
 void TestCan::testService()
 {
 	MrwBusService service_valid("can0");
