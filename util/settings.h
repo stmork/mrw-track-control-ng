@@ -12,13 +12,17 @@
 
 namespace mrw::util
 {
+	/**
+	 * This class extends the QSettings class by some convenience methods. The
+	 * organization is "mrw" and the app_name is given into the constructor.
+	 */
 	class Settings : public QSettings
 	{
 		Q_OBJECT
 
 	public:
 		Settings() = delete;
-		explicit Settings(const char * name, QObject * parent = nullptr);
+		explicit Settings(const char * app_name, QObject * parent = nullptr);
 	};
 
 	/**
