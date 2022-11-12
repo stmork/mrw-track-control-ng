@@ -8,6 +8,7 @@ pipeline
 		{
 			steps
 			{
+				cleanWs()
 				sh """
 				rm -rf doc lcov-out
 				test -f Makefile && make clean distclean
