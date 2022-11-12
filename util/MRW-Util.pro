@@ -11,7 +11,8 @@ include(../common.pri)
 SOURCES += \
 	method.cpp \
 	settings.cpp \
-	stringutil.cpp
+	stringutil.cpp \
+	termhandler.cpp
 
 HEADERS += \
 	constantenumerator.h \
@@ -19,6 +20,7 @@ HEADERS += \
 	method.h \
 	settings.h \
 	singleton.h \
-	stringutil.h
+	stringutil.h \
+	termhandler.h
 
 QMAKE_CLEAN         += $$TARGET

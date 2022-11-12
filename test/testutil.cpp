@@ -10,6 +10,7 @@
 #include <util/method.h>
 #include <util/settings.h>
 #include <util/singleton.h>
+#include <util/termhandler.h>
 
 #include "testutil.h"
 
@@ -37,6 +38,7 @@ public:
 
 TestUtil::TestUtil(QObject * parent) : QObject(parent)
 {
+	TermHandler      term_handler( { SIGTERM, SIGINT } );
 }
 
 void TestUtil::testSettings()
