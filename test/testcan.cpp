@@ -27,35 +27,60 @@ void TestCan::testEmptyCanFrame()
 	QVERIFY(message.toString().size() > 0);
 }
 
-void TestCan::testInvalidCanFrame()
+void TestCan::testInvalidStandardCanFrame()
 {
 	QByteArray array;
 
 	array.append(PING | CMD_RESPONSE);
 
-	const QCanBusFrame frame_single(CAN_BROADCAST_ID, array);
-	const QCanBusFrame frame_ext(TEST_ID, array);
-	const MrwMessage   message_single(frame_single);
-	const MrwMessage   message_ext(frame_ext);
+	const QCanBusFrame frame(CAN_BROADCAST_ID, array);
+	const MrwMessage   message(frame);
 
-	QVERIFY(!message_single.valid());
-	QVERIFY(message_single.toString().size() > 0);
-
-	QVERIFY(!message_ext.valid());
-	QVERIFY(message_ext.toString().size() > 0);
+	QVERIFY(!message.valid());
+	QVERIFY(message.toString().size() > 0);
 }
 
-void TestCan::testService()
+void TestCan::testInvalidExtendedCanFrame()
 {
-	MrwBusService service_valid("can0");
-	MrwBusService service_invalid("no-interface", "no-plugin");
+	QByteArray array;
+
+	array.append(PING | CMD_RESPONSE);
+
+	const QCanBusFrame frame(TEST_ID, array);
+	const MrwMessage   message(frame);
+
+	QVERIFY(!message.valid());
+	QVERIFY(message.toString().size() > 0);
+}
+
+void TestCan::testValidService()
+{
+	MrwBusService service("can0");
 	MrwMessage    message(PING);
 
-	QVERIFY(service_valid.valid());
-	QVERIFY(!service_invalid.valid());
+	QVERIFY(service.valid());
+	QVERIFY(service.write(message));
+	service.list();
+}
 
-	QVERIFY(service_valid.write(message));
-	QVERIFY(!service_invalid.write(message));
+void TestCan::testTryValidService()
+{
+	MrwBusService service("eth0");
+	MrwMessage    message(PING);
+
+	QVERIFY(service.valid());
+	QVERIFY(service.write(message));
+	service.list();
+}
+
+void TestCan::testInvalidService()
+{
+	MrwBusService service("no-interface", "no-plugin");
+	MrwMessage    message(PING);
+
+	QVERIFY(!service.valid());
+	QVERIFY(!service.write(message));
+	service.list();
 }
 
 void TestCan::testReceivedResult()

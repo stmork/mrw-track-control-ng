@@ -19,12 +19,21 @@ MrwBusService::MrwBusService(
 
 {
 	QString error;
+	QString selected = select(interface, plugin);
 
-	device = can_bus->createDevice(plugin, select(interface, plugin), &error);
+	device = can_bus->createDevice(plugin, selected, &error);
 	if (device != nullptr)
 	{
-		device->connectDevice();
 		connect(device, &QCanBusDevice::framesReceived, this, &MrwBusService::receive);
+		connect(device, &QCanBusDevice::stateChanged, [] (auto state)
+		{
+			qDebug() << state;
+		});
+		connect(device, &QCanBusDevice::errorOccurred, [] (auto reason)
+		{
+			qCritical() << reason;
+		});
+		device->connectDevice();
 	}
 	else
 	{
@@ -48,18 +57,32 @@ bool MrwBusService::valid()
 		(device->state() == QCanBusDevice::ConnectedState);
 }
 
-void MrwBusService::list()
+bool MrwBusService::list()
 {
-	QString error;
+	bool success = true;
 
 	for (const QString & plugin : can_bus->plugins())
 	{
+		QString error;
+
 		qInfo().noquote() << plugin;
-		for (const QCanBusDeviceInfo & info : can_bus->availableDevices(plugin, &error))
+		const QList<QCanBusDeviceInfo> & infos = can_bus->availableDevices(plugin, &error);
+
+		if (!error.isEmpty())
 		{
-			qInfo().noquote().nospace() << "  " << info.name() << ": " << info.description();
+			qCritical().noquote() << error;
+			success = false;
+		}
+		else
+		{
+			for (const QCanBusDeviceInfo & info : infos)
+			{
+
+				qInfo().noquote().nospace() << "  " << info.name() << ": " << info.description();
+			}
 		}
 	}
+	return success;
 }
 
 bool MrwBusService::write(const MrwMessage & message)
@@ -77,21 +100,25 @@ QString MrwBusService::select(
 	const QString & interface,
 	const QString & plugin)
 {
-	const QList<QCanBusDeviceInfo> & infos = can_bus->availableDevices(plugin);
+	QString error;
+	const QList<QCanBusDeviceInfo> & infos = can_bus->availableDevices(plugin, &error);
 
-	for (const QCanBusDeviceInfo & info : infos)
+	if (error.isEmpty())
 	{
-		const QString & name = info.name();
-
-		if (name == interface)
+		for (const QCanBusDeviceInfo & info : infos)
 		{
-			return interface;
-		}
-	}
+			const QString & name = info.name();
 
-	if (!infos.isEmpty())
-	{
-		return infos.first().name();
+			if (name == interface)
+			{
+				return interface;
+			}
+		}
+
+		if (!infos.isEmpty())
+		{
+			return infos.first().name();
+		}
 	}
 
 	return "";

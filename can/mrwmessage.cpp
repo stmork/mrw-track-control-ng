@@ -257,16 +257,21 @@ QString MrwMessage::toString() const
 
 	if (is_response)
 	{
-		return QString::asprintf("ID: %04x:%04x len=%zu # %04x > %-11.11s %-22.22s %s",
-				sid(), eid(), len, unit_no,
+		return QString::asprintf("ID: %04x:%04x len=%zu %c%c # %04x > %-11.11s %-22.22s %s",
+				sid(), eid(), len,
+				valid() ? 'V' : '-',
+				is_extended ? 'X' : 's',
+				unit_no,
 				command_map.get(msg_command).toStdString().c_str(),
 				result_map.get(msg_result).toStdString().c_str(),
 				appendix.toStdString().c_str());
 	}
 	else
 	{
-		return QString::asprintf("ID: %04x:%04x len=%zu #      < %-11.11s %-22.22s %s",
+		return QString::asprintf("ID: %04x:%04x len=%zu %c%c #      < %-11.11s %-22.22s %s",
 				sid(), eid(), len,
+				valid() ? 'V' : '-',
+				is_extended ? 'X' : 's',
 				command_map.get(msg_command).toStdString().c_str(), "",
 				appendix.toStdString().c_str());
 	}

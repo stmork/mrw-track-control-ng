@@ -28,7 +28,7 @@ namespace mrw::can
 		~MrwBusService();
 
 		bool valid();
-		void list();
+		bool list();
 		bool write(const MrwMessage & message);
 		virtual void process(const MrwMessage & message);
 

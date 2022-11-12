@@ -28,8 +28,11 @@ namespace mrw::test
 
 	private slots:
 		void testEmptyCanFrame();
-		void testInvalidCanFrame();
-		void testService();
+		void testInvalidStandardCanFrame();
+		void testInvalidExtendedCanFrame();
+		void testValidService();
+		void testTryValidService();
+		void testInvalidService();
 		void testReceivedResult();
 		void testReceivedBroadcast();
 		void testReceivedCommand();
