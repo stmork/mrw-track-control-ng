@@ -8,8 +8,6 @@ CONFIG   += staticlib
 
 include(../common.pri)
 
-QMAKE_CLEAN         += $$TARGET
-
 HEADERS += \
 	commands.h \
 	mrwbusservice.h \
@@ -18,3 +16,5 @@ HEADERS += \
 SOURCES += \
 	mrwbusservice.cpp \
 	mrwmessage.cpp
+
+QMAKE_CLEAN  += $$TARGET
