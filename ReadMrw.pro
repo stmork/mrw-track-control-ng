@@ -1,3 +1,8 @@
+#
+#  SPDX-License-Identifier: MIT
+#  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+#
+
 TEMPLATE = subdirs
 SUBDIRS  = \
 	util \
@@ -16,10 +21,10 @@ test.file                 = test/MRW-Test.pro
 ping.file                 = tools/ping/MRW-Ping.pro
 track-control-ng.file     = track-control-ng/MRW-Reader.pro
 
-model.depends             = util
-test.depends              = util model
-ping.depends              = test can
-track-control-ng.depends  = util model
+model.depends             = util can
+test.depends              = util model can
+ping.depends              = test
+track-control-ng.depends  = util model can
 
 #####################################################################
 #

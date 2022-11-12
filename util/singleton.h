@@ -29,9 +29,7 @@ namespace mrw::util
 		 * class ExampleSingleton : public Singleton<ExampleSingleton>
 		 * {
 		 * 	// private default constructor!!!
-		 * 	ExampleSingleton()
-		 * 	{
-		 * 	}
+		 * 	ExampleSingleton() = default;
 		 *
 		 * 	friend class Singleton<ExampleSingleton>;
 		 * public:

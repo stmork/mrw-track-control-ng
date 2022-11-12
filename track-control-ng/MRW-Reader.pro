@@ -1,4 +1,9 @@
-QT += core gui widgets xml
+#
+#  SPDX-License-Identifier: MIT
+#  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+#
+
+QT += gui widgets
 
 include(../common.pri)
 
@@ -12,6 +17,6 @@ HEADERS += \
 FORMS += \
 	mainwindow.ui
 
-LIBS            += -lMRW-Model -lMRW-Util
+LIBS            += -lMRW-Model -lMRW-Util -lMRW-Can
 
 QMAKE_CLEAN     += $$TARGET

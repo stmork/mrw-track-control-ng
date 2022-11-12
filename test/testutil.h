@@ -25,6 +25,7 @@ namespace mrw::test
 		explicit TestUtil(QObject * parent = nullptr);
 
 	private slots:
+		void testSettings();
 		void testMethod();
 		void testConstantEnumerator();
 		void testSingleton();

@@ -6,6 +6,7 @@
 #include <QCanBusFrame>
 #include <QTest>
 
+#include "can/mrwbusservice.h"
 #include "can/mrwmessage.h"
 
 #include "testcan.h"
@@ -24,6 +25,19 @@ void TestCan::testEmptyCanFrame()
 
 	QVERIFY(!message.valid());
 	QVERIFY(message.toString().size() > 0);
+}
+
+void TestCan::testService()
+{
+	MrwBusService service_valid("can0");
+	MrwBusService service_invalid("no-interface", "no-plugin");
+	MrwMessage    message(PING);
+
+	QVERIFY(service_valid.valid());
+	QVERIFY(!service_invalid.valid());
+
+	QVERIFY(service_valid.write(message));
+	QVERIFY(!service_invalid.write(message));
 }
 
 void TestCan::testReceivedResult()

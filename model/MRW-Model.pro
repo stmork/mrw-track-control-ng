@@ -1,4 +1,8 @@
-QT       += xml
+#
+#  SPDX-License-Identifier: MIT
+#  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+#
+
 TEMPLATE  = lib
 CONFIG   += staticlib
 

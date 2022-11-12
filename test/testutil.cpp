@@ -8,6 +8,7 @@
 #include <QTest>
 
 #include <util/method.h>
+#include <util/settings.h>
 #include <util/singleton.h>
 
 #include "testutil.h"
@@ -23,9 +24,7 @@ const ConstantEnumerator<unsigned> TestUtil::map
 
 class SingletonImpl : public mrw::util::Singleton<SingletonImpl>
 {
-	SingletonImpl()
-	{
-	}
+	SingletonImpl() = default;
 
 	friend class Singleton<SingletonImpl>;
 
@@ -38,6 +37,16 @@ public:
 
 TestUtil::TestUtil(QObject * parent) : QObject(parent)
 {
+}
+
+void TestUtil::testSettings()
+{
+	Settings      settings("model");
+	SettingsGroup group(&settings, "model");
+
+	const QString & filename = settings.value("filename", "Example").toString();
+
+	QVERIFY(filename.size() > 0);
 }
 
 void TestUtil::testMethod()

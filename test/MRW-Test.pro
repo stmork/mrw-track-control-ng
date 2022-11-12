@@ -1,4 +1,9 @@
-QT     += core xml serialbus testlib
+#
+#  SPDX-License-Identifier: MIT
+#  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+#
+
+QT     += testlib
 CONFIG += testcase
 
 include(../common.pri)

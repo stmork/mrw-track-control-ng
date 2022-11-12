@@ -9,16 +9,20 @@
 #include <QDebug>
 
 #include "mainwindow.h"
-#include "model/modelrailway.h"
+#include <model/modelrailway.h>
+#include <util/settings.h>
+
+using namespace mrw::util;
 
 int main(int argc, char * argv[])
 {
-	QApplication app(argc, argv);
-	QDir         home = QDir::homePath();
-	QSettings    settings("mrw", "model");
-	QString      filename = argc > 1 ?
+	QApplication  app(argc, argv);
+	QDir          home = QDir::homePath();
+	Settings      settings("model");
+	SettingsGroup group(&settings, "model");
+	QString       filename = argc > 1 ?
 		argv[1] :
-		settings.value("model/filename",
+		settings.value("filename",
 			home.filePath("mrw/RailwayModel.modelrailway")).toString();
 
 	if (QFile::exists(filename))
@@ -27,7 +31,7 @@ int main(int argc, char * argv[])
 
 //		model.dump();
 		model.info();
-		settings.setValue("model/filename", filename);
+		settings.setValue("filename", filename);
 	}
 	else
 	{
