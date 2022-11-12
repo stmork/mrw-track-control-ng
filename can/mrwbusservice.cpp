@@ -25,6 +25,8 @@ MrwBusService::MrwBusService(
 	if (device != nullptr)
 	{
 		connect(device, &QCanBusDevice::framesReceived, this, &MrwBusService::receive);
+
+#ifdef MRW_VERBOSE
 		connect(device, &QCanBusDevice::stateChanged, [] (auto state)
 		{
 			qDebug() << state;
@@ -33,6 +35,8 @@ MrwBusService::MrwBusService(
 		{
 			qCritical() << reason;
 		});
+#endif
+
 		device->connectDevice();
 	}
 	else
