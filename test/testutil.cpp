@@ -11,11 +11,27 @@
 #include <util/settings.h>
 #include <util/singleton.h>
 #include <util/termhandler.h>
+#include <util/stringutil.h>
 
 #include "testutil.h"
 
 using namespace mrw::test;
 using namespace mrw::util;
+
+class TestString : public String
+{
+	const QString string;
+
+public:
+	explicit TestString(const char * input) : string(input)
+	{
+	}
+
+	inline QString toString() const override
+	{
+		return string;
+	}
+};
 
 const ConstantEnumerator<unsigned> TestUtil::map
 {
@@ -49,6 +65,15 @@ void TestUtil::testSettings()
 	const QString & filename = settings.value("filename", "Example").toString();
 
 	QVERIFY(filename.size() > 0);
+}
+
+void TestUtil::testStringConcat()
+{
+	QString     left("a");
+	TestString  right("b");
+	QString     result = left + right;
+
+	QCOMPARE(result, "ab");
 }
 
 void TestUtil::testMethod()

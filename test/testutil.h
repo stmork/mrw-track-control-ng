@@ -26,6 +26,7 @@ namespace mrw::test
 
 	private slots:
 		void testSettings();
+		void testStringConcat();
 		void testMethod();
 		void testConstantEnumerator();
 		void testSingleton();
