@@ -2,7 +2,7 @@ name: Track control NG for model railways.
 on: [push]
 
 jobs:
-   CPP-Check:
+    MRW-NG:
       runs-on: ubuntu-latest
       steps:
          - uses: actions/checkout@v3
@@ -13,3 +13,5 @@ jobs:
            run: qmake
          - name: Build
            run: make
+         - name: CPP-Check
+           run: make cppcheck
