@@ -35,8 +35,6 @@ void DoubleCrossSwitch::link()
 	advance(aIsDir()).insert(RailInfo( b, false, bc_branch));
 	advance(!aIsDir()).insert(RailInfo(c, false, bc_branch));
 	advance(!aIsDir()).insert(RailInfo(d, false, ad_branch));
-
-	findFlankSwitches();
 }
 
 void mrw::model::DoubleCrossSwitch::findFlankSwitches()
@@ -46,19 +44,19 @@ void mrw::model::DoubleCrossSwitch::findFlankSwitches()
 	RegularSwitch * c_switch = dynamic_cast<RegularSwitch *>(c);
 	RegularSwitch * d_switch = dynamic_cast<RegularSwitch *>(d);
 
-	if ((a_switch != nullptr) && (a_switch->b == this))
+	if ((a_switch != nullptr) && (a_switch->c == this))
 	{
 		flank_switches.insert(a_switch);
 	}
-	if ((b_switch != nullptr) && (b_switch->a == this))
+	if ((b_switch != nullptr) && (b_switch->b == this))
 	{
 		flank_switches.insert(b_switch);
 	}
-	if ((c_switch != nullptr) && (c_switch->a == this))
+	if ((c_switch != nullptr) && (c_switch->b == this))
 	{
 		flank_switches.insert(c_switch);
 	}
-	if ((d_switch != nullptr) && (d_switch->b == this))
+	if ((d_switch != nullptr) && (d_switch->c == this))
 	{
 		flank_switches.insert(d_switch);
 	}

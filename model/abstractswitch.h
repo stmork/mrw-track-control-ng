@@ -27,6 +27,8 @@ namespace mrw::model
 		public RailPart,
 		public SwitchModuleReference
 	{
+		friend class Section;
+
 	protected:
 		/**
 		 * The partner switches which may by flank protection switches.

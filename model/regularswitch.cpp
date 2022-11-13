@@ -38,18 +38,18 @@ void RegularSwitch::link()
 	findFlankSwitches();
 }
 
-void mrw::model::RegularSwitch::findFlankSwitches()
+void RegularSwitch::findFlankSwitches()
 {
-	RegularSwitch * left  = dynamic_cast<RegularSwitch *>(a);
-	RegularSwitch * right = dynamic_cast<RegularSwitch *>(b);
+	RegularSwitch * b_switch = dynamic_cast<RegularSwitch *>(b);
+	RegularSwitch * c_switch = dynamic_cast<RegularSwitch *>(c);
 
-	if ((left != nullptr) && (left->a == this))
+	if ((b_switch != nullptr) && (b_switch->b == this))
 	{
-		flank_switches.insert(left);
+		flank_switches.insert(b_switch);
 	}
-	if ((right != nullptr) && (right->b == this))
+	if ((c_switch != nullptr) && (c_switch->c == this))
 	{
-		flank_switches.insert(right);
+		flank_switches.insert(c_switch);
 	}
 }
 

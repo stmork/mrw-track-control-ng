@@ -16,11 +16,13 @@ namespace mrw::test
 {
 	class TestFlankSwitch : public TestModel
 	{
+		Q_OBJECT
+
 	public:
 		TestFlankSwitch();
 
 	private slots:
-		void TestSwitches();
+		void testFlankProtection();
 	};
 }
 
