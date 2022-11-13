@@ -104,12 +104,12 @@ int main(int argc, char * argv[])
 	int status = 0;
 
 	status += testUtil();
+	status += testCan();
 	status += testModel();
 	status += testSimpleSwitch();
 	status += testSimpleLight();
 	status += testNumbering();
 	status += testUnknown();
-	status += testCan();
 
 	if (status == 0)
 	{
