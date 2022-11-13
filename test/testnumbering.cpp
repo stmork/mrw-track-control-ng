@@ -5,7 +5,7 @@
 
 #include <QTest>
 
-#include <model/railswitch.h>
+#include <model/regularswitch.h>
 
 #include "testnumbering.h"
 #include "testdef.h"

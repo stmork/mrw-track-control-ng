@@ -5,11 +5,10 @@
 
 #pragma once
 
-#ifndef MRW_MODEL_RAILDOUBLESWITCH_H
-#define MRW_MODEL_RAILDOUBLESWITCH_H
+#ifndef MRW_MODEL_CROSSDOUBLESWITCH_H
+#define MRW_MODEL_CROSSDOUBLESWITCH_H
 
-#include <model/railpart.h>
-#include <model/switchmodulereference.h>
+#include <model/abstractswitch.h>
 
 namespace mrw::model
 {
@@ -23,9 +22,7 @@ namespace mrw::model
 	 *     B     D
 	 * </pre>
 	 */
-	class RailDoubleSwitch :
-		public RailPart,
-		public SwitchModuleReference
+	class DoubleCrossSwitch : public AbstractSwitch
 	{
 		const bool     ad_branch;
 		const bool     bc_branch;
@@ -36,20 +33,16 @@ namespace mrw::model
 		RailPart   *   d = nullptr;
 
 	public:
-		explicit RailDoubleSwitch(
+		explicit DoubleCrossSwitch(
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
 
 		bool valid() const override;
 		QString toString() const override;
 
-		inline const QString & name() const override
-		{
-			return part_name;
-		}
-
 	private:
 		void link() override;
+		void findFlankSwitches() override;
 	};
 }
 

@@ -38,8 +38,9 @@ namespace mrw::model
 		friend class AssemblyPart;
 		friend class RailPart;
 		friend class Rail;
-		friend class RailSwitch;
-		friend class RailDoubleSwitch;
+		friend class AbstractSwitch;
+		friend class RegularSwitch;
+		friend class DoubleCrossSwitch;
 		friend class Light;
 		friend class ProfileLight;
 		friend class Signal;

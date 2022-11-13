@@ -25,8 +25,8 @@ namespace mrw::model
 	 * Device to the corresponding SwitchModule. An inductive actuator may
 	 * be one of the following Devices:
 	 * - A form signal (FormSignal)
-	 * - A simple switch (RailSwitch)
-	 * - A cross double switch (RailDoubleSwitch)
+	 * - A regular switch (RegularSwitch)
+	 * - A double cross switch (DoubleCrossSwitch)
 	 */
 	class SwitchModuleReference : public Device
 	{
@@ -46,7 +46,7 @@ namespace mrw::model
 
 		/**
 		 * This method returns how many inductive actuators this Device
-		 * contain. Normal FormSignals and RailSwitches need only two
+		 * contain. Normal FormSignal and AbstractSwitch parts need only two
 		 * actuators where as a FormSignal having aspect Hp2 needs three
 		 * actuators.
 		 *

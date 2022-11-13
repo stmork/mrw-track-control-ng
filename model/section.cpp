@@ -9,8 +9,8 @@
 #include "model/section.h"
 #include "model/sectionmodule.h"
 #include "model/rail.h"
-#include "model/railswitch.h"
-#include "model/raildoubleswitch.h"
+#include "model/regularswitch.h"
+#include "model/doublecrossswitch.h"
 #include "model/lightsignal.h"
 #include "model/formsignal.h"
 
@@ -79,11 +79,11 @@ Section::Section(
 				}
 				else if (type == "Weiche")
 				{
-					rail_part = new RailSwitch(model, child);
+					rail_part = new RegularSwitch(model, child);
 				}
 				else if (type == "DKW")
 				{
-					rail_part = new RailDoubleSwitch(model, child);
+					rail_part = new DoubleCrossSwitch(model, child);
 				}
 				else if (type == "Gleissperrsignal")
 				{

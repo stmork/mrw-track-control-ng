@@ -9,9 +9,11 @@ CONFIG   += staticlib
 include(../common.pri)
 
 SOURCES += \
+	abstractswitch.cpp \
 	assemblypart.cpp \
 	controller.cpp \
 	device.cpp \
+	doublecrossswitch.cpp \
 	formsignal.cpp \
 	light.cpp \
 	lightmodule.cpp \
@@ -21,10 +23,9 @@ SOURCES += \
 	multiplexconnection.cpp \
 	profilelight.cpp \
 	rail.cpp \
-	raildoubleswitch.cpp \
 	railpart.cpp \
-	railswitch.cpp \
 	region.cpp \
+	regularswitch.cpp \
 	section.cpp \
 	sectionmodule.cpp \
 	signal.cpp \
@@ -32,9 +33,11 @@ SOURCES += \
 	switchmodulereference.cpp
 
 HEADERS += \
+	abstractswitch.h \
 	assemblypart.h \
 	controller.h \
 	device.h \
+	doublecrossswitch.h \
 	formsignal.h \
 	light.h \
 	lightmodule.h \
@@ -44,10 +47,9 @@ HEADERS += \
 	multiplexconnection.h \
 	profilelight.h \
 	rail.h \
-	raildoubleswitch.h \
 	railpart.h \
-	railswitch.h \
 	region.h \
+	regularswitch.h \
 	section.h \
 	sectionmodule.h \
 	signal.h \

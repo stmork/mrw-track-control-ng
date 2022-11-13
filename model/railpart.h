@@ -73,8 +73,8 @@ namespace mrw::model
 	/**
 	 * This base class represents any kind of rail elements which can be:
 	 * - simple rail (Rail)
-	 * - switch (RailSwitch)
-	 * - double cross switch. (RailDoubleSwitch)
+	 * - regular switch (RegularSwitch)
+	 * - double cross switch. (DoubleCrossSwitch)
 	 *
 	 * The rail parts are connected by connectors which in fact are doubly
 	 * linked lists. So when a rail part is connected to another rail part
@@ -83,13 +83,12 @@ namespace mrw::model
 	 *
 	 * All rail parts follow a counting direction which is normally read
 	 * from left to right. You can invert the counting direction which is
-	 * normally necessary for switches (@see RailSwitch). If the aIsDir()
+	 * normally necessary for switches (@see RegularSwitch). If the aIsDir()
 	 * method returns true the counting direction is internally inverted.
 	 *
-	 * Depeding on the
-	 * rail part there are multiple connectors in forward and backward
-	 * counting direction. For creating a track route you can follow in
-	 * counting direction an against the counting direction. To get a list
+	 * Depeding on the rail part there are multiple connectors in forward and
+	 * backward counting direction. For creating a track route you can follow
+	 * in counting direction an against the counting direction. To get a list
 	 * of appropiate connectors use the advance() method.
 	 */
 	class RailPart : public AssemblyPart
@@ -145,6 +144,7 @@ namespace mrw::model
 		 *
 		 * @param attr The EMF/XMI attribute name which contains the link
 		 * path.
+		 *
 		 * @return The connected RailPart.
 		 */
 		RailPart          *          resolve(const char * attr) const;

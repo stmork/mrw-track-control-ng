@@ -4,22 +4,21 @@
 //
 
 #include "model/modelrailway.h"
-#include "model/raildoubleswitch.h"
+#include "model/doublecrossswitch.h"
+#include "model/regularswitch.h"
 
 using namespace mrw::model;
 
-RailDoubleSwitch::RailDoubleSwitch(
+DoubleCrossSwitch::DoubleCrossSwitch(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) :
-	RailPart(model_railway, element),
-	SwitchModuleReference(
-		model_railway, element, ModelRailway::boolean(element, "neu")),
+	AbstractSwitch(model_railway, element),
 	ad_branch(ModelRailway::boolean(element, "adIstAbzweig")),
 	bc_branch(ModelRailway::boolean(element, "bcIstAbzweig"))
 {
 }
 
-void RailDoubleSwitch::link()
+void DoubleCrossSwitch::link()
 {
 	a = resolve("a");
 	b = resolve("b");
@@ -36,9 +35,36 @@ void RailDoubleSwitch::link()
 	advance(aIsDir()).insert(RailInfo( b, false, bc_branch));
 	advance(!aIsDir()).insert(RailInfo(c, false, bc_branch));
 	advance(!aIsDir()).insert(RailInfo(d, false, ad_branch));
+
+	findFlankSwitches();
 }
 
-bool RailDoubleSwitch::valid() const
+void mrw::model::DoubleCrossSwitch::findFlankSwitches()
+{
+	RegularSwitch * a_switch = dynamic_cast<RegularSwitch *>(a);
+	RegularSwitch * b_switch = dynamic_cast<RegularSwitch *>(b);
+	RegularSwitch * c_switch = dynamic_cast<RegularSwitch *>(c);
+	RegularSwitch * d_switch = dynamic_cast<RegularSwitch *>(d);
+
+	if ((a_switch != nullptr) && (a_switch->b == this))
+	{
+		flank_switches.push_back(a_switch);
+	}
+	if ((b_switch != nullptr) && (b_switch->a == this))
+	{
+		flank_switches.push_back(b_switch);
+	}
+	if ((c_switch != nullptr) && (c_switch->a == this))
+	{
+		flank_switches.push_back(c_switch);
+	}
+	if ((d_switch != nullptr) && (d_switch->b == this))
+	{
+		flank_switches.push_back(d_switch);
+	}
+}
+
+bool DoubleCrossSwitch::valid() const
 {
 	return
 		(a != nullptr) && a->contains(this, aIsDir()) &&
@@ -47,7 +73,7 @@ bool RailDoubleSwitch::valid() const
 		(d != nullptr) && d->contains(this, !aIsDir());
 }
 
-QString RailDoubleSwitch::toString() const
+QString DoubleCrossSwitch::toString() const
 {
 	return QString("      X %1 %2--%3 : %4").
 		arg(valid()  ? "V" : "-").

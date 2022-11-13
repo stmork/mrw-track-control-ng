@@ -4,16 +4,14 @@
 //
 
 #include "model/modelrailway.h"
-#include "model/railswitch.h"
+#include "model/regularswitch.h"
 
 using namespace mrw::model;
 
-RailSwitch::RailSwitch(
+RegularSwitch::RegularSwitch(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element) :
-	RailPart(model_railway, element),
-	SwitchModuleReference(
-		model_railway, element, ModelRailway::boolean(element, "neu")),
+	AbstractSwitch(model_railway, element),
 	left_branch( ModelRailway::boolean(element, "bIstAbzweig", false)),
 	right_branch(ModelRailway::boolean(element, "cIstAbzweig", false)),
 	left_prio(   ModelRailway::boolean(element, "bIstBevorzugt", false)),
@@ -21,7 +19,7 @@ RailSwitch::RailSwitch(
 {
 }
 
-void RailSwitch::link()
+void RegularSwitch::link()
 {
 	a = resolve("a");
 	b = resolve("b");
@@ -36,9 +34,26 @@ void RailSwitch::link()
 	advance( aIsDir()).insert(RailInfo(a));
 	advance(!aIsDir()).insert(RailInfo(b, left_prio,  left_branch));
 	advance(!aIsDir()).insert(RailInfo(c, right_prio, right_branch));
+
+	findFlankSwitches();
 }
 
-bool RailSwitch::valid() const
+void mrw::model::RegularSwitch::findFlankSwitches()
+{
+	RegularSwitch * left  = dynamic_cast<RegularSwitch *>(a);
+	RegularSwitch * right = dynamic_cast<RegularSwitch *>(b);
+
+	if ((left != nullptr) && (left->a == this))
+	{
+		flank_switches.push_back(left);
+	}
+	if ((right != nullptr) && (right->b == this))
+	{
+		flank_switches.push_back(right);
+	}
+}
+
+bool RegularSwitch::valid() const
 {
 	return
 		(inductors() == 2) &&
@@ -47,7 +62,7 @@ bool RailSwitch::valid() const
 		(c != nullptr) && c->contains(this, !aIsDir());
 }
 
-QString RailSwitch::toString() const
+QString RegularSwitch::toString() const
 {
 	return QString("      %1 %2 %3--%4 : %5").
 		arg(aIsDir() ? ">" : "<").
