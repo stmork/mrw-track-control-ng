@@ -11,6 +11,7 @@ include(../common.pri)
 SOURCES += \
 	main.cpp \
 	testcan.cpp \
+	testflankswitch.cpp \
 	testmodel.cpp \
 	testmodelbase.cpp \
 	testnumbering.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 HEADERS += \
 	testcan.h \
 	testdef.h \
+	testflankswitch.h \
 	testmodel.h \
 	testmodelbase.h \
 	testnumbering.h \

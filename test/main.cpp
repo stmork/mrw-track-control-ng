@@ -8,13 +8,14 @@
 
 #include <util/stringutil.h>
 
+#include "testutil.h"
+#include "testcan.h"
 #include "testmodel.h"
 #include "testswitch.h"
 #include "testlight.h"
+#include "testflankswitch.h"
 #include "testnumbering.h"
 #include "testunknown.h"
-#include "testutil.h"
-#include "testcan.h"
 
 using namespace mrw::test;
 using namespace mrw::util;
@@ -25,6 +26,17 @@ static int testUtil()
 	QStringList args
 	{
 		"MRW-Test", "-o", "qtest-util.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
+static int testCan()
+{
+	TestCan        test;
+	QStringList    args
+	{
+		"MRW-Test", "-o", "qtest-can.xml", "-xml"
 	};
 
 	return QTest::qExec(&test, args);
@@ -85,12 +97,12 @@ static int testNumbering()
 	return QTest::qExec(&test, args);
 }
 
-static int testCan()
+static int testFlankSwitch()
 {
-	TestCan        test;
-	QStringList    args
+	TestFlankSwitch test;
+	QStringList     args
 	{
-		"MRW-Test", "-o", "qtest-can.xml", "-xml"
+		"MRW-Test", "-o", "qtest-flank.xml", "-xml"
 	};
 
 	return QTest::qExec(&test, args);
@@ -110,6 +122,7 @@ int main(int argc, char * argv[])
 	status += testSimpleLight();
 	status += testNumbering();
 	status += testUnknown();
+	status += testFlankSwitch();
 
 	if (status == 0)
 	{

@@ -48,19 +48,19 @@ void mrw::model::DoubleCrossSwitch::findFlankSwitches()
 
 	if ((a_switch != nullptr) && (a_switch->b == this))
 	{
-		flank_switches.push_back(a_switch);
+		flank_switches.insert(a_switch);
 	}
 	if ((b_switch != nullptr) && (b_switch->a == this))
 	{
-		flank_switches.push_back(b_switch);
+		flank_switches.insert(b_switch);
 	}
 	if ((c_switch != nullptr) && (c_switch->a == this))
 	{
-		flank_switches.push_back(c_switch);
+		flank_switches.insert(c_switch);
 	}
 	if ((d_switch != nullptr) && (d_switch->b == this))
 	{
-		flank_switches.push_back(d_switch);
+		flank_switches.insert(d_switch);
 	}
 }
 

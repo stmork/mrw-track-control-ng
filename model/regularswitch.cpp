@@ -45,11 +45,11 @@ void mrw::model::RegularSwitch::findFlankSwitches()
 
 	if ((left != nullptr) && (left->a == this))
 	{
-		flank_switches.push_back(left);
+		flank_switches.insert(left);
 	}
 	if ((right != nullptr) && (right->b == this))
 	{
-		flank_switches.push_back(right);
+		flank_switches.insert(right);
 	}
 }
 

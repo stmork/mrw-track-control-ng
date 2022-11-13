@@ -8,6 +8,8 @@
 #ifndef MRW_MODEL_ABSTRACTSWITCH_H
 #define MRW_MODEL_ABSTRACTSWITCH_H
 
+#include <unordered_set>
+
 #include <model/railpart.h>
 #include <model/switchmodulereference.h>
 
@@ -29,7 +31,7 @@ namespace mrw::model
 		/**
 		 * The partner switches which may by flank protection switches.
 		 */
-		std::vector<RegularSwitch *> flank_switches;
+		std::unordered_set<AbstractSwitch *> flank_switches;
 
 	public:
 		explicit AbstractSwitch(
@@ -40,6 +42,8 @@ namespace mrw::model
 		{
 			return part_name;
 		}
+
+		bool isFlankProtection(AbstractSwitch * other) const;
 
 	protected:
 		/**

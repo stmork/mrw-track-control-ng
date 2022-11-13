@@ -17,3 +17,8 @@ AbstractSwitch::AbstractSwitch(
 		model_railway, element, ModelRailway::boolean(element, "neu"))
 {
 }
+
+bool AbstractSwitch::isFlankProtection(AbstractSwitch * other) const
+{
+	return flank_switches.find(other) != flank_switches.end();
+}

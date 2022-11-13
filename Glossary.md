@@ -1,10 +1,11 @@
-# Translations
+# Translations en/de
 - actuator / Antrieb
 - automatic endpoint cutoff / Endabschaltung
 - cross switch / einfache Kreuzungsweiche
 - distant signal / Vorsignal
 - double cross switch / doppelte Kreuzungsweiche
 - form signal, mechanical signal, semaphore / Formsignal
+- flank protection / Flankenschutz
 - frog / Herzstück
 - light signal / Lichtsignal
 - main signal / Hauptsignal
