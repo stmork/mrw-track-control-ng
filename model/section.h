@@ -38,7 +38,7 @@ namespace mrw::model
 		ModelRailway        *        model              = nullptr;
 		Controller         *         section_controller = nullptr;
 		SectionModule        *       section_module     = nullptr;
-		std::vector<AssemblyPart *>  rail_parts;
+		std::vector<AssemblyPart *>  assembly_parts;
 
 	public:
 		explicit Section(
@@ -70,7 +70,7 @@ namespace mrw::model
 		 */
 		inline AssemblyPart * assemblyPart(const int index) const
 		{
-			return rail_parts.at(index);
+			return assembly_parts.at(index);
 		}
 
 		/**
@@ -81,7 +81,7 @@ namespace mrw::model
 		 */
 		inline size_t railPartCount() const
 		{
-			return rail_parts.size();
+			return assembly_parts.size();
 		}
 
 		/**
@@ -108,6 +108,7 @@ namespace mrw::model
 	private:
 		void            add(AssemblyPart * rail_part);
 		void            link();
+		void            findSignalPair();
 		SectionModule * resolve(const std::string & path);
 	};
 }

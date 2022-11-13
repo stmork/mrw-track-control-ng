@@ -27,6 +27,9 @@ namespace mrw::test
 		void testToManyLights();
 		void testToManyInductors();
 		void testPorts();
+		void testPairSignalSection1();
+		void testPairSignalSection2();
+		void testPairSignalSection3();
 	};
 }
 

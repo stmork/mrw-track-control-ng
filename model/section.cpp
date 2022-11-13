@@ -131,11 +131,11 @@ Section::Section(
 
 Section::~Section()
 {
-	for (AssemblyPart * rail_part : rail_parts)
+	for (AssemblyPart * rail_part : assembly_parts)
 	{
 		delete rail_part;
 	}
-	rail_parts.clear();
+	assembly_parts.clear();
 }
 
 bool Section::valid() const
@@ -143,19 +143,39 @@ bool Section::valid() const
 	return (section_controller != nullptr) && (section_module != nullptr);
 }
 
-void Section::add(AssemblyPart * rail_part)
+void Section::add(AssemblyPart * part)
 {
-	rail_parts.push_back(rail_part);
+	assembly_parts.push_back(part);
 }
 
 void Section::link()
 {
-	for (AssemblyPart * rail_part : rail_parts)
+	for (AssemblyPart * part : assembly_parts)
 	{
-		if (rail_part != nullptr)
+		if (part != nullptr)
 		{
-			rail_part->link();
+			part->link();
 		}
+	}
+}
+
+void Section::findSignalPair()
+{
+	std::vector<LightSignal *> light_signals;
+
+	for (AssemblyPart * part : assembly_parts)
+	{
+		LightSignal * signal = dynamic_cast<LightSignal *>(part);
+
+		if (signal != nullptr)
+		{
+			light_signals.push_back(signal);
+		}
+	}
+
+	for (LightSignal * signal : light_signals)
+	{
+		signal->findPair(light_signals);
 	}
 }
 

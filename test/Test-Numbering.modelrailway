@@ -63,5 +63,12 @@
       <bauelement xsi:type="Modelrailway:Formhauptsignal"/>
       <bauelement xsi:type="Modelrailway:Formvorsignal"/>
     </abschnitt>
+    <abschnitt>
+      <bauelement xsi:type="Modelrailway:Ausfahrsignal"/>
+      <bauelement xsi:type="Modelrailway:Vorsignal"/>
+      <bauelement xsi:type="Modelrailway:Einfahrsignal" inZaehlrichtung="true"/>
+      <bauelement xsi:type="Modelrailway:Vorsignal" inZaehlrichtung="true"/>
+      <bauelement xsi:type="Modelrailway:Gleissperrsignal" inZaehlrichtung="true"/>
+    </abschnitt>
   </gruppe>
 </Modelrailway:Modell>

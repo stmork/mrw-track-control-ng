@@ -62,6 +62,7 @@ void mrw::model::Region::link()
 	for (Section * section : sections)
 	{
 		section->link();
+		section->findSignalPair();
 	}
 }
 

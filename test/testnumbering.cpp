@@ -6,6 +6,7 @@
 #include <QTest>
 
 #include <model/regularswitch.h>
+#include <model/lightsignal.h>
 
 #include "testnumbering.h"
 #include "testdef.h"
@@ -60,4 +61,58 @@ void TestNumbering::testPorts()
 	QCOMPARE(model->module(1, 1)->ports(), 1);
 	QCOMPARE(model->module(1, 2)->ports(), 1);
 	QCOMPARE(model->module(2, 0)->ports(), 2);
+}
+
+void TestNumbering::testPairSignalSection1()
+{
+	LightSignal * lr1 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 0, 4));
+	LightSignal * lr2 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 0, 5));
+	LightSignal * lr3 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 0, 6));
+
+	QVERIFY(lr1 == nullptr);
+	QVERIFY(lr2 == nullptr);
+	QVERIFY(lr3 == nullptr);
+}
+
+void TestNumbering::testPairSignalSection2()
+{
+	LightSignal * lr1 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 3));
+	LightSignal * lr2 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 4));
+	LightSignal * lr3 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 5));
+	LightSignal * lr4 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 6));
+	LightSignal * lr5 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 7));
+	LightSignal * lr6 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 8));
+
+	QVERIFY(lr1 != nullptr);
+	QVERIFY(lr2 != nullptr);
+	QVERIFY(lr3 != nullptr);
+	QVERIFY(lr4 != nullptr);
+	QVERIFY(lr5 == nullptr);
+	QVERIFY(lr6 == nullptr);
+
+	QCOMPARE(lr1->pair(), lr4);
+	QCOMPARE(lr2->pair(), lr4);
+	QCOMPARE(lr3->pair(), lr4);
+	QCOMPARE(lr4->pair(), nullptr);
+}
+
+void TestNumbering::testPairSignalSection3()
+{
+	LightSignal * ll1 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 0));
+	LightSignal * ll2 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 1));
+	LightSignal * lr1 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 2));
+	LightSignal * lr2 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 3));
+	LightSignal * lr3 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 4));
+
+	QVERIFY(ll1 != nullptr);
+	QVERIFY(ll2 != nullptr);
+	QVERIFY(lr1 != nullptr);
+	QVERIFY(lr2 != nullptr);
+	QVERIFY(lr3 != nullptr);
+
+	QCOMPARE(ll1->pair(), ll2);
+	QCOMPARE(ll2->pair(), nullptr);
+	QCOMPARE(lr1->pair(), lr2);
+	QCOMPARE(lr2->pair(), nullptr);
+	QCOMPARE(lr3->pair(), nullptr);
 }

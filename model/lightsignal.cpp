@@ -81,3 +81,18 @@ QString LightSignal::toString() const
 	return QString("      L %1  %2  : %3").
 		arg(valid()  ? "V" : "-").arg(symbol()).arg(name());
 }
+
+void LightSignal::findPair(const std::vector<LightSignal *> & light_signals)
+{
+	if (signal_type == MAIN_SIGNAL)
+	{
+		for (LightSignal * signal : light_signals)
+		{
+			if ((signal->signal_type == DISTANT_SIGNAL) &&
+				(direction == signal->direction))
+			{
+				main_distant_pair = signal;
+			}
+		}
+	}
+}
