@@ -221,7 +221,9 @@ void ModelRailway::add(Device * device)
 
 QString mrw::model::ModelRailway::toString() const
 {
-	return QString("Modelrailway %1 with %2 controllers and %3 region(s).").arg(name).arg(controllers.size()).arg(regions.size());
+	return QString("Modelrailway %1 with %2 controllers and %3 region(s), %4 warnings and %5 errors.").
+		arg(name).arg(controllers.size()).arg(regions.size()).
+		arg(warnings).arg(errors);
 }
 
 bool ModelRailway::boolean(const QDomElement & node, const char * attr, const bool default_value)
