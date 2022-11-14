@@ -31,8 +31,8 @@ void DoubleCrossSwitch::link()
 		return;
 	}
 
-	advance(aIsDir()).insert(RailInfo( a, false, ad_branch));
-	advance(aIsDir()).insert(RailInfo( b, false, bc_branch));
+	advance( aIsDir()).insert(RailInfo(a, false, ad_branch));
+	advance( aIsDir()).insert(RailInfo(b, false, bc_branch));
 	advance(!aIsDir()).insert(RailInfo(c, false, bc_branch));
 	advance(!aIsDir()).insert(RailInfo(d, false, ad_branch));
 }
@@ -65,6 +65,8 @@ void mrw::model::DoubleCrossSwitch::findFlankSwitches()
 bool DoubleCrossSwitch::valid() const
 {
 	return
+		(inductors() == 2) &&
+		((advance(false).size() + advance(true).size()) == 4) &&
 		(a != nullptr) && a->contains(this, aIsDir()) &&
 		(b != nullptr) && b->contains(this, aIsDir()) &&
 		(c != nullptr) && c->contains(this, !aIsDir()) &&

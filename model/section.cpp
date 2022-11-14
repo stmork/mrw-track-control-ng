@@ -190,7 +190,7 @@ void Section::findSignalPair()
 
 QString Section::toString() const
 {
-	return QString::asprintf("    Section %c %4d: ", valid() ? 'V' : '-', unitNo()) + name();
+	return QString::asprintf("    Sec %c %4d: ", valid() ? 'V' : '-', unitNo()) + name();
 }
 
 SectionModule * Section::resolve(const std::string & path)

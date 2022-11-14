@@ -57,6 +57,7 @@ bool RegularSwitch::valid() const
 {
 	return
 		(inductors() == 2) &&
+		((advance(false).size() + advance(true).size()) == 3) &&
 		(a != nullptr) && a->contains(this,  aIsDir()) &&
 		(b != nullptr) && b->contains(this, !aIsDir()) &&
 		(c != nullptr) && c->contains(this, !aIsDir());

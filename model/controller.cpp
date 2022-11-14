@@ -153,7 +153,7 @@ size_t mrw::model::Controller::ports() const
 
 QString Controller::toString() const
 {
-	return QString::asprintf("  Controller %c modules=%zu ports=%zu %4d",
-							 valid() ? 'V' : '-', modules.size(), ports(),
-							 controller_id);
+	return QString::asprintf("  Controller %c modules=%zu ports=%zu : %4d",
+			valid() ? 'V' : '-', modules.size(), ports(),
+			controller_id);
 }

@@ -50,7 +50,7 @@ QString Rail::toString() const
 {
 	return QString("      # %1 %2--%3 : %4").
 		arg(valid() ? "V" : "-").
-		arg(a == nullptr ? " |" : aIsDir() ? " a" : " b").
-		arg(b == nullptr ? "| " : aIsDir() ? "b " : "a ").
+		arg(a == nullptr ? " |" : aIsDir() ? " b" : " a").
+		arg(b == nullptr ? "| " : aIsDir() ? "a " : "b ").
 		arg(name());
 }

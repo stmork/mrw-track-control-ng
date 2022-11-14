@@ -62,3 +62,12 @@ RailInfo::RailInfo(
 	}
 	code = static_cast<PreferCode>(flags);
 }
+
+bool mrw::model::RailInfo::operator<(const mrw::model::RailInfo & other) const
+{
+	if (code == other.code)
+	{
+		return rail < other.rail;
+	}
+	return code < other.code;
+}

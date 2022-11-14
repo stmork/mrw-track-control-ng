@@ -52,6 +52,11 @@ namespace mrw::model
 			const ModelRailway * model,
 			const QString    &   reference);
 
+		inline const QString & partName() const
+		{
+			return part_name;
+		}
+
 	protected:
 		/**
 		 * This method links all elements needed for the implementation.

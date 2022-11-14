@@ -1,6 +1,7 @@
 # Translations en/de
 - actuator / Antrieb
 - automatic endpoint cutoff / Endabschaltung
+- counting direction / Zählrichtung
 - cross switch / einfache Kreuzungsweiche
 - distant signal / Vorsignal
 - double cross switch / doppelte Kreuzungsweiche

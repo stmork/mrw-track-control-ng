@@ -55,10 +55,7 @@ namespace mrw::model
 		 * @return True if this instance has a higher priority when selecting
 		 * a new track.
 		 */
-		inline bool operator<(const RailInfo & other) const
-		{
-			return code < other.code;
-		}
+		bool operator<(const RailInfo & other) const;
 
 		/**
 		 * This cast operator returns the RailPart of this information
