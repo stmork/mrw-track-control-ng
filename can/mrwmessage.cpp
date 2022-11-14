@@ -95,16 +95,16 @@ MrwMessage::MrwMessage(const Command command) :
 MrwMessage::MrwMessage(
 	const Command        command,
 	const ControllerId   id,
-	const UnitNo         no)
+	const UnitNo         no) :
+	src(0),
+	dst(id),
+	unit_no(no),
+	msg_command(command),
+	msg_response(MSG_NO_RESPONSE)
 {
-	dst         = id;
-	src         = 0;
+	len         = 1;
 	is_extended = true;
 	is_response = false;
-	msg_command = command;
-	msg_response  = MSG_NO_RESPONSE;
-	unit_no     = no;
-	len         = 1;
 	bzero(info, sizeof(info));
 }
 
@@ -112,15 +112,15 @@ MrwMessage::MrwMessage(
 	const ControllerId  id,
 	const UnitNo        no,
 	const Command       command,
-	const Response code)
+	const Response code) :
+	src(id),
+	dst(CAN_GATEWAY_ID),
+	unit_no(no),
+	msg_command(command),
+	msg_response(code)
 {
-	dst         = CAN_GATEWAY_ID;
-	src         = id;
 	is_extended = true;
 	is_response = true;
-	msg_command = command;
-	msg_response  = code;
-	unit_no     = no;
 	len         = 4;
 	bzero(info, sizeof(info));
 }
@@ -154,27 +154,27 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 			{
 				// Invalid! message response needs at least four bytes.
 				msg_response = MSG_NO_RESPONSE;
-				unit_no    = 0;
+				unit_no      = NO_UNITNO;
 			}
 		}
 		else
 		{
-			dst         = is_extended ? id >> CAN_SID_SHIFT : id & CAN_SID_MASK;
-			src         = 0;
+			dst           = is_extended ? id >> CAN_SID_SHIFT : id & CAN_SID_MASK;
+			src           = 0;
 			msg_response  = MSG_NO_RESPONSE;
-			unit_no     = is_extended ? id & CAN_EID_UNITNO_MASK : 0;
+			unit_no       = is_extended ? id & CAN_EID_UNITNO_MASK : NO_UNITNO;
 
 			std::copy(payload.begin() + IDX_COMMAND_SIZE, payload.end(), info);
 		}
 	}
 	else
 	{
-		src         = 0;
-		dst         = 0;
-		unit_no     = 0;
-		is_response = false;
-		msg_command = CMD_ILLEGAL;
-		msg_response  = MSG_NO_RESPONSE;
+		src          = 0;
+		dst          = 0;
+		unit_no      = NO_UNITNO;
+		is_response  = false;
+		msg_command  = CMD_ILLEGAL;
+		msg_response = MSG_NO_RESPONSE;
 	}
 }
 

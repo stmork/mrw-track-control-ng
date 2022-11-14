@@ -170,16 +170,6 @@ namespace mrw::can
 		SENSOR_LIGHT = 1,
 		SENSOR_TEMP  = 2
 	};
-
-	/**
-	 * This is the high priority gateway ID.
-	 */
-	static constexpr ControllerId CAN_GATEWAY_ID   = 0x000;
-
-	/**
-	 * This is the low priority broadcast ID.
-	 */
-	static constexpr ControllerId CAN_BROADCAST_ID = 0x7ff;
 }
 
 #endif
