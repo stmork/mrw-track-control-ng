@@ -22,7 +22,9 @@ namespace mrw::test
 		TestFlankSwitch();
 
 	private slots:
-		void testFlankProtection();
+		void testFlankProtectionLeft();
+		void testFlankProtectionMid();
+		void testFlankProtectionRight();
 	};
 }
 
