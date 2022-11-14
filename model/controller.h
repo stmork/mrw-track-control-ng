@@ -139,6 +139,7 @@ namespace mrw::model
 		 * This method links all elements needed for the implementation.
 		 */
 		void link();
+		size_t ports() const;
 	};
 }
 

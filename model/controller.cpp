@@ -136,7 +136,24 @@ void Controller::link()
 	}
 }
 
+size_t mrw::model::Controller::ports() const
+{
+	size_t ports = 0;
+
+	for (Module * module : modules)
+	{
+		if (module != nullptr)
+		{
+			ports += module->ports();
+		}
+	}
+
+	return ports;
+}
+
 QString Controller::toString() const
 {
-	return QString::asprintf("  Controller %4d", controller_id);
+	return QString::asprintf("  Controller %c modules=%zu ports=%zu %4d",
+							 valid() ? 'V' : '-', modules.size(), ports(),
+							 controller_id);
 }
