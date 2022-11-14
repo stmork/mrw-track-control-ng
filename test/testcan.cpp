@@ -97,11 +97,11 @@ void TestCan::testReceivedResult()
 	MrwMessage message(frame);
 
 	QVERIFY(message.valid());
-	QCOMPARE(message.eid(),     TEST_UNIT_NO);
-	QCOMPARE(message.sid(),     TEST_CTRL_ID);
-	QCOMPARE(message.command(), GETRBS);
-	QCOMPARE(message.result(),  MSG_QUEUED);
-	QCOMPARE(message.unitNo(),  0x4433);
+	QCOMPARE(message.eid(),      TEST_UNIT_NO);
+	QCOMPARE(message.sid(),      TEST_CTRL_ID);
+	QCOMPARE(message.command(),  GETRBS);
+	QCOMPARE(message.response(), MSG_QUEUED);
+	QCOMPARE(message.unitNo(),   0x4433);
 	QVERIFY(message.toString().size() > 0);
 }
 
@@ -116,11 +116,11 @@ void TestCan::testReceivedBroadcast()
 	MrwMessage message(frame);
 
 	QVERIFY(message.valid());
-	QCOMPARE(message.eid(),     0);
-	QCOMPARE(message.sid(),     CAN_BROADCAST_ID);
-	QCOMPARE(message.command(), SENSOR);
-	QCOMPARE(message.result(),  MSG_NO_RESULT);
-	QCOMPARE(message.unitNo(),  0);
+	QCOMPARE(message.eid(),       0);
+	QCOMPARE(message.sid(),       CAN_BROADCAST_ID);
+	QCOMPARE(message.command(),   SENSOR);
+	QCOMPARE(message.response(),  MSG_NO_RESPONSE);
+	QCOMPARE(message.unitNo(),    0);
 	QVERIFY(message.toString().size() > 0);
 }
 
@@ -135,11 +135,11 @@ void TestCan::testReceivedCommand()
 	MrwMessage message(frame);
 
 	QVERIFY(message.valid());
-	QCOMPARE(message.eid(),     TEST_UNIT_NO);
-	QCOMPARE(message.sid(),     TEST_CTRL_ID);
-	QCOMPARE(message.command(), GETRBS);
-	QCOMPARE(message.result(),  MSG_NO_RESULT);
-	QCOMPARE(message.unitNo(),  TEST_UNIT_NO);
+	QCOMPARE(message.eid(),      TEST_UNIT_NO);
+	QCOMPARE(message.sid(),      TEST_CTRL_ID);
+	QCOMPARE(message.command(),  GETRBS);
+	QCOMPARE(message.response(), MSG_NO_RESPONSE);
+	QCOMPARE(message.unitNo(),   TEST_UNIT_NO);
 	QVERIFY(message.toString().size() > 0);
 }
 
@@ -150,11 +150,11 @@ void TestCan::testBroadcast()
 	QByteArray   array(frame.payload());
 
 	QVERIFY(message.valid());
-	QCOMPARE(message.eid(),     0);
-	QCOMPARE(message.sid(),     CAN_BROADCAST_ID);
-	QCOMPARE(message.command(), PING);
-	QCOMPARE(message.result(),  MSG_NO_RESULT);
-	QCOMPARE(message.unitNo(),  0);
+	QCOMPARE(message.eid(),      0);
+	QCOMPARE(message.sid(),      CAN_BROADCAST_ID);
+	QCOMPARE(message.command(),  PING);
+	QCOMPARE(message.response(), MSG_NO_RESPONSE);
+	QCOMPARE(message.unitNo(),   0);
 	QVERIFY(message.toString().size() > 0);
 
 	QVERIFY(!frame.hasExtendedFrameFormat());
@@ -170,12 +170,12 @@ void TestCan::testCommand()
 	QByteArray   array(frame.payload());
 
 	QVERIFY(message.valid());
-	QCOMPARE(message.eid(),     TEST_UNIT_NO);
-	QCOMPARE(message.sid(),     TEST_CTRL_ID);
-	QCOMPARE(message.id(),      TEST_ID);
-	QCOMPARE(message.command(), SETLFT);
-	QCOMPARE(message.result(),  MSG_NO_RESULT);
-	QCOMPARE(message.unitNo(),  TEST_UNIT_NO);
+	QCOMPARE(message.eid(),      TEST_UNIT_NO);
+	QCOMPARE(message.sid(),      TEST_CTRL_ID);
+	QCOMPARE(message.id(),       TEST_ID);
+	QCOMPARE(message.command(),  SETLFT);
+	QCOMPARE(message.response(), MSG_NO_RESPONSE);
+	QCOMPARE(message.unitNo(),   TEST_UNIT_NO);
 	QVERIFY(message.toString().size() > 0);
 
 	QVERIFY(frame.hasExtendedFrameFormat());
@@ -191,12 +191,12 @@ void TestCan::testResult()
 	QByteArray   array(frame.payload());
 
 	QVERIFY(message.valid());
-	QCOMPARE(message.eid(),     TEST_CTRL_ID);
-	QCOMPARE(message.sid(),     CAN_GATEWAY_ID);
-	QCOMPARE(message.id(),      TEST_CTRL_ID);
-	QCOMPARE(message.command(), SETLFT);
-	QCOMPARE(message.result(),  MSG_OK);
-	QCOMPARE(message.unitNo(),  TEST_UNIT_NO);
+	QCOMPARE(message.eid(),      TEST_CTRL_ID);
+	QCOMPARE(message.sid(),      CAN_GATEWAY_ID);
+	QCOMPARE(message.id(),       TEST_CTRL_ID);
+	QCOMPARE(message.command(),  SETLFT);
+	QCOMPARE(message.response(), MSG_OK);
+	QCOMPARE(message.unitNo(),   TEST_UNIT_NO);
 	QVERIFY(message.toString().size() > 0);
 
 	QVERIFY(frame.hasExtendedFrameFormat());

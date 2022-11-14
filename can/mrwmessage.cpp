@@ -52,7 +52,7 @@ const ConstantEnumerator<Command>       MrwMessage::command_map
 	CONSTANT(SENSOR)
 };
 
-const ConstantEnumerator<CommandResult> MrwMessage::result_map
+const ConstantEnumerator<Response> MrwMessage::response_map
 {
 	CONSTANT(MSG_OK),
 	CONSTANT(MSG_QUEUE_FULL),
@@ -76,7 +76,7 @@ const ConstantEnumerator<CommandResult> MrwMessage::result_map
 	CONSTANT(MSG_SWITCH_FAILED),
 	CONSTANT(MSG_CONFIG_BUFFER_FULL),
 
-	CONSTANT(MSG_NO_RESULT)
+	CONSTANT(MSG_NO_RESPONSE)
 };
 
 MrwMessage::MrwMessage(const Command command) :
@@ -84,7 +84,7 @@ MrwMessage::MrwMessage(const Command command) :
 	dst(CAN_BROADCAST_ID),
 	unit_no(0),
 	msg_command(command),
-	msg_result(MSG_NO_RESULT)
+	msg_response(MSG_NO_RESPONSE)
 {
 	is_extended = false;
 	is_response = false;
@@ -102,7 +102,7 @@ MrwMessage::MrwMessage(
 	is_extended = true;
 	is_response = false;
 	msg_command = command;
-	msg_result  = MSG_NO_RESULT;
+	msg_response  = MSG_NO_RESPONSE;
 	unit_no     = no;
 	len         = 1;
 	bzero(info, sizeof(info));
@@ -112,14 +112,14 @@ MrwMessage::MrwMessage(
 	const ControllerId  id,
 	const UnitNo        no,
 	const Command       command,
-	const CommandResult code)
+	const Response code)
 {
 	dst         = CAN_GATEWAY_ID;
 	src         = id;
 	is_extended = true;
 	is_response = true;
 	msg_command = command;
-	msg_result  = code;
+	msg_response  = code;
 	unit_no     = no;
 	len         = 4;
 	bzero(info, sizeof(info));
@@ -143,17 +143,17 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 			dst         = is_extended ? id >> CAN_SID_SHIFT : id & CAN_SID_MASK;
 			src         = is_extended ? id &  CAN_EID_UNITNO_MASK : 0;
 
-			if (len >= IDX_RESULT_SIZE)
+			if (len >= IDX_RESPONSE_SIZE)
 			{
-				msg_result  = (CommandResult)payload[1];
+				msg_response  = (Response)payload[1];
 				unit_no     = payload[2] | (payload[3] << 8);
 
-				std::copy(payload.begin() + IDX_RESULT_SIZE, payload.end(), info);
+				std::copy(payload.begin() + IDX_RESPONSE_SIZE, payload.end(), info);
 			}
 			else
 			{
-				// Invalid! message result needs at least four bytes.
-				msg_result = MSG_NO_RESULT;
+				// Invalid! message response needs at least four bytes.
+				msg_response = MSG_NO_RESPONSE;
 				unit_no    = 0;
 			}
 		}
@@ -161,7 +161,7 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 		{
 			dst         = is_extended ? id >> CAN_SID_SHIFT : id & CAN_SID_MASK;
 			src         = 0;
-			msg_result  = MSG_NO_RESULT;
+			msg_response  = MSG_NO_RESPONSE;
 			unit_no     = is_extended ? id & CAN_EID_UNITNO_MASK : 0;
 
 			std::copy(payload.begin() + IDX_COMMAND_SIZE, payload.end(), info);
@@ -174,7 +174,7 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 		unit_no     = 0;
 		is_response = false;
 		msg_command = CMD_ILLEGAL;
-		msg_result  = MSG_NO_RESULT;
+		msg_response  = MSG_NO_RESPONSE;
 	}
 }
 
@@ -219,7 +219,7 @@ bool MrwMessage::valid() const
 {
 	if (is_response)
 	{
-		return is_extended && (len >= IDX_RESULT_SIZE);
+		return is_extended && (len >= IDX_RESPONSE_SIZE);
 	}
 	else
 	{
@@ -234,7 +234,7 @@ MrwMessage::operator QCanBusFrame() const
 	if (is_response)
 	{
 		array.append(msg_command | CMD_RESPONSE);
-		array.append(msg_result);
+		array.append(msg_response);
 		array.append(unit_no & 0xff);
 		array.append(unit_no >> 8);
 
@@ -263,7 +263,7 @@ QString MrwMessage::toString() const
 				is_extended ? 'X' : 's',
 				unit_no,
 				command_map.get(msg_command).toStdString().c_str(),
-				result_map.get(msg_result).toStdString().c_str(),
+				response_map.get(msg_response).toStdString().c_str(),
 				appendix.toStdString().c_str());
 	}
 	else
@@ -279,7 +279,7 @@ QString MrwMessage::toString() const
 
 size_t MrwMessage::max() const
 {
-	const size_t start = is_response ? IDX_RESULT_SIZE : IDX_COMMAND_SIZE;
+	const size_t start = is_response ? IDX_RESPONSE_SIZE : IDX_COMMAND_SIZE;
 
 	return len < start ? 0 : len - start;
 }

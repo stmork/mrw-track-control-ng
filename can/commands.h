@@ -71,7 +71,7 @@ namespace mrw::can
 		CMD_ILLEGAL   =    0
 	};
 
-	enum CommandResult : uint8_t
+	enum Response : uint8_t
 	{
 		MSG_OK                  =  0,
 		MSG_QUEUE_FULL          =  1,
@@ -95,7 +95,7 @@ namespace mrw::can
 		MSG_SWITCH_FAILED       = 19,
 		MSG_CONFIG_BUFFER_FULL  = 20,
 
-		MSG_NO_RESULT           = UINT8_MAX // not really sent
+		MSG_NO_RESPONSE           = UINT8_MAX // not really sent
 	};
 
 	enum SignalState : uint8_t

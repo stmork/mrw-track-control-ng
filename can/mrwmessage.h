@@ -24,24 +24,31 @@ namespace mrw::can
 
 	/**
 	 * This class represents a CAN bus frame in model railway manner. It may
-	 * have two states:
+	 * have two message types:
 	 * 1. As a command to be sent.
-	 * 2. As a result from a previous command.
+	 * 2. As a response from a previous command.
+	 *
+	 * A command may address all Controller instances using the broadcast ID
+	 * CAN_BROADCAST_ID. In case a Device is addressed both is needed: the
+	 * Controller ID and the Device unit number.
+	 *
+	 * @see Controller:id()
+	 * @see Device::unitNo()
 	 */
 	class MrwMessage : public mrw::util::String
 	{
-		static const mrw::util::ConstantEnumerator<Command>       command_map;
-		static const mrw::util::ConstantEnumerator<CommandResult> result_map;
+		static const mrw::util::ConstantEnumerator<Command>    command_map;
+		static const mrw::util::ConstantEnumerator<Response>   response_map;
 
 		enum InfoIdx
 		{
 			IDX_COMMAND    = 0,
 			IDX_COMMAND_SIZE,
 
-			IDX_RESULT     = IDX_COMMAND_SIZE,
+			IDX_RESPONSE   = IDX_COMMAND_SIZE,
 			IDX_UNITNO_L,
 			IDX_UNITNO_H,
-			IDX_RESULT_SIZE
+			IDX_RESPONSE_SIZE
 		};
 
 		mrw::model::ControllerId   src;
@@ -49,7 +56,7 @@ namespace mrw::can
 		mrw::model::UnitNo         unit_no;
 
 		Command                    msg_command;
-		CommandResult              msg_result;
+		Response                   msg_response;
 		size_t                     len;
 		bool                       is_response;
 		bool                       is_extended;
@@ -84,13 +91,13 @@ namespace mrw::can
 		 * @param id The addressed Controller, mostly the CAN gateway ID.
 		 * @param no The sending Device unit number.
 		 * @param command The processed Command.
-		 * @param code The CommandResult code.
+		 * @param code The Response code.
 		 */
 		explicit MrwMessage(
 			const mrw::model::ControllerId  id,
 			const mrw::model::UnitNo        no,
 			const Command                   command,
-			const CommandResult             code);
+			const Response        code);
 		explicit MrwMessage(const QCanBusFrame & frame);
 
 		uint16_t eid() const;
@@ -110,7 +117,7 @@ namespace mrw::can
 
 		/**
 		 * This method returns the command inside the MrwMessage. If it is
-		 * a response the response flag (CommandResult::CMD_RESPONSE) is
+		 * a response the response flag (Response::CMD_RESPONSE) is
 		 * already cleared.
 		 *
 		 * @return The command inside this MrwMessage
@@ -120,9 +127,9 @@ namespace mrw::can
 			return msg_command;
 		}
 
-		inline CommandResult result() const
+		inline Response response() const
 		{
-			return msg_result;
+			return msg_response;
 		}
 
 		/**
