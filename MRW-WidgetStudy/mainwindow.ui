@@ -84,6 +84,16 @@
      </rect>
     </property>
    </widget>
+   <widget class="mrw::ui::RegularSwitchWidget" name="left_forward_2" native="true">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>230</y>
+      <width>200</width>
+      <height>200</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
