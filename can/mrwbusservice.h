@@ -13,6 +13,11 @@
 
 namespace mrw::can
 {
+	/**
+	 * This class connects to the CAN bus for input and output processing. If
+	 * the given interface is not available the service looks for another
+	 * available interface.
+	 */
 	class MrwBusService : public QObject
 	{
 		Q_OBJECT
@@ -27,9 +32,40 @@ namespace mrw::can
 			QObject   *  parent    = nullptr);
 		~MrwBusService();
 
+		/**
+		 * This method returns true on successful connection to the CAN bus.
+		 *
+		 * @return True on succesful CAN bus connection.
+		 */
 		bool valid();
+
+		/**
+		 * This is a convenience method which shows all CAN plugins and their
+		 * connected devices.
+		 *
+		 * @return True on success.
+		 */
 		bool list();
+
+		/**
+		 * This method writes a MrwMessage as a CAN frame onto the CAN bus.
+		 *
+		 * @param message The MrwMessage to write.
+		 * @return True on successful writing.
+		 */
 		bool write(const MrwMessage & message);
+
+		/**
+		 * This method processes a single MrwMessage. It is intended to
+		 * overload this method to do further processing. The default
+		 * implementation simply dumps the MrwMessage.
+		 *
+		 * @note The given MrwMessage may be invalid.
+		 *
+		 * @param message The received MrwMessage.
+		 *
+		 * @see MrwMessage::valid()
+		 */
 		virtual void process(const MrwMessage & message);
 
 	private:

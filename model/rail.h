@@ -41,7 +41,7 @@ namespace mrw::model
 		 */
 		inline const QString & name() const
 		{
-			return part_name;
+			return partName();
 		}
 
 	private:

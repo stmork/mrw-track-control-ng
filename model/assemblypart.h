@@ -52,6 +52,11 @@ namespace mrw::model
 			const ModelRailway * model,
 			const QString    &   reference);
 
+		/**
+		 * This method returns the name of this assembly part.
+		 *
+		 * @return The assembly part name.
+		 */
 		inline const QString & partName() const
 		{
 			return part_name;

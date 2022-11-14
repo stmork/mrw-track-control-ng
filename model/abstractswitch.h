@@ -42,9 +42,17 @@ namespace mrw::model
 
 		inline const QString & name() const override
 		{
-			return part_name;
+			return partName();
 		}
 
+		/**
+		 * This method checks whether a connected AbstractSwitch is a flank
+		 * protection switch.
+		 *
+		 * @param other The AbstractSwitch to check.
+		 * @return True if the connected AbstractSwitch is a flank protection
+		 * switch.
+		 */
 		bool isFlankProtection(AbstractSwitch * other) const;
 
 	protected:

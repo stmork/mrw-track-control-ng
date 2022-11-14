@@ -56,11 +56,36 @@ namespace mrw::can
 		uint8_t                    info[8];
 
 	public:
+		/**
+		 * This constructor creates a command MrwMessage using a basic frame
+		 * format to address all controllers by broadcast.
+		 *
+		 * @param command The Command to send.
+		 */
 		explicit MrwMessage(const Command command);
+
+		/**
+		 * This constructor creates a command MrwMessage using an extended
+		 * frame format to address a specific Controller and Device.
+		 *
+		 * @param command The command to process.
+		 * @param id The Controller to address by its ID.
+		 * @param no The Device to address by its unit number.
+		 */
 		explicit MrwMessage(
 			const Command                   command,
 			const mrw::model::ControllerId  id,
 			const mrw::model::UnitNo        no);
+
+		/**
+		 * This constructor creates a response MrwMessage using always an
+		 * extended frame format.
+		 *
+		 * @param id The addressed Controller, mostly the CAN gateway ID.
+		 * @param no The sending Device unit number.
+		 * @param command The processed Command.
+		 * @param code The CommandResult code.
+		 */
 		explicit MrwMessage(
 			const mrw::model::ControllerId  id,
 			const mrw::model::UnitNo        no,
@@ -72,11 +97,24 @@ namespace mrw::can
 		uint16_t sid() const;
 		quint32  id() const;
 
+		/**
+		 * This method returns the Device unit number. In case of a broadcast
+		 * MrwMessage this unit number is \c 0.
+		 *
+		 * @return
+		 */
 		inline mrw::model::UnitNo unitNo() const
 		{
 			return unit_no;
 		}
 
+		/**
+		 * This method returns the command inside the MrwMessage. If it is
+		 * a response the response flag (CommandResult::CMD_RESPONSE) is
+		 * already cleared.
+		 *
+		 * @return The command inside this MrwMessage
+		 */
 		inline Command command() const
 		{
 			return msg_command;
@@ -87,8 +125,20 @@ namespace mrw::can
 			return msg_result;
 		}
 
+		/**
+		 * This method returns true if the underlying CAN frame is a valid
+		 * MrwMessage.
+		 *
+		 * @return True if this is a valid MrwMessage.
+		 */
 		bool valid() const;
 
+		/**
+		 * This cast operator converts this MrwMessage into a CAN bus frame
+		 * ready for sending.
+		 *
+		 * @return The converted CAN bus frame.
+		 */
 		operator QCanBusFrame() const;
 
 		QString toString() const override;
