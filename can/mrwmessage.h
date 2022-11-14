@@ -52,9 +52,9 @@ namespace mrw::can
 			IDX_RESPONSE_SIZE
 		};
 
-		mrw::model::ControllerId   src;
-		mrw::model::ControllerId   dst;
-		mrw::model::UnitNo         unit_no;
+		ControllerId               src;
+		ControllerId               dst;
+		UnitNo                     unit_no;
 
 		Command                    msg_command;
 		Response                   msg_response;
@@ -82,9 +82,9 @@ namespace mrw::can
 		 * @param no The mrw::model::Device to address by its unit number.
 		 */
 		explicit MrwMessage(
-			const Command                   command,
-			const mrw::model::ControllerId  id,
-			const mrw::model::UnitNo        no);
+			const Command       command,
+			const ControllerId  id,
+			const UnitNo        no);
 
 		/**
 		 * This constructor creates a response MrwMessage using always an
@@ -97,10 +97,10 @@ namespace mrw::can
 		 * @param code The Response code.
 		 */
 		explicit MrwMessage(
-			const mrw::model::ControllerId  id,
-			const mrw::model::UnitNo        no,
-			const Command                   command,
-			const Response        code);
+			const ControllerId  id,
+			const UnitNo        no,
+			const Command       command,
+			const Response      code);
 
 		/**
 		 * This constructor parses a receive CAN frame. Depending on the
@@ -121,7 +121,7 @@ namespace mrw::can
 		 *
 		 * @return The used mrw::model::Device unit number.
 		 */
-		inline mrw::model::UnitNo unitNo() const
+		inline UnitNo unitNo() const
 		{
 			return unit_no;
 		}

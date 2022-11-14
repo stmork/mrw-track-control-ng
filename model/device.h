@@ -8,12 +8,11 @@
 #ifndef MRW_MODEL_DEVICE_H
 #define MRW_MODEL_DEVICE_H
 
+#include <can/types.h>
 #include <model/module.h>
 
 namespace mrw::model
 {
-	typedef uint16_t UnitNo;
-
 	class Controller;
 
 	/**
@@ -25,7 +24,7 @@ namespace mrw::model
 	 */
 	class Device
 	{
-		const UnitNo   unit_no;
+		const mrw::can::UnitNo   unit_no;
 
 	public:
 		explicit Device(
@@ -43,7 +42,7 @@ namespace mrw::model
 		 * @return The unit number of this Device.
 		 * @see Controller::id()
 		 */
-		inline UnitNo unitNo() const
+		inline mrw::can::UnitNo unitNo() const
 		{
 			return unit_no;
 		}

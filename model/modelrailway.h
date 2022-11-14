@@ -45,8 +45,8 @@ namespace mrw::model
 		friend class ProfileLight;
 		friend class Signal;
 
-		std::unordered_map<ControllerId, Controller *> controller_map;
-		std::unordered_map<ControllerId, Device *>     device_map;
+		std::unordered_map<mrw::can::ControllerId, Controller *> controller_map;
+		std::unordered_map<mrw::can::ControllerId, Device *>     device_map;
 
 		QDomDocument               xml;
 		QString                    name;
@@ -90,7 +90,7 @@ namespace mrw::model
 		 * @param id The ID of the Controller.
 		 * @return The Controller looked up by its ID.
 		 */
-		inline Controller * controllerById(const ControllerId id) const
+		inline Controller * controllerById(const mrw::can::ControllerId id) const
 		{
 			return controller_map.find(id)->second;
 		}
@@ -103,7 +103,7 @@ namespace mrw::model
 		 * @param unit_no The unit number of the Device.
 		 * @return The Device looked up by its unit number.
 		 */
-		inline Device * deviceById(const UnitNo unit_no) const
+		inline Device * deviceById(const mrw::can::UnitNo unit_no) const
 		{
 			return device_map.find(unit_no)->second;
 		}
@@ -149,8 +149,8 @@ namespace mrw::model
 		 * @see controller()
 		 */
 		inline MultiplexConnection * connection(
-			const ControllerId controller_idx,
-			const ModuleId     connection_idx) const
+			const size_t   controller_idx,
+			const size_t   connection_idx) const
 		{
 			return controller(controller_idx)->connection(connection_idx);
 		}

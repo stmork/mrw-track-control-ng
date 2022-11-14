@@ -19,9 +19,9 @@ namespace mrw::test
 	{
 		Q_OBJECT
 
-		static constexpr mrw::model::ControllerId TEST_CTRL_ID = 0x1234 >> 2;
-		static constexpr mrw::model::UnitNo       TEST_UNIT_NO = 0x5678;
-		static constexpr quint32                  TEST_ID      = 0x12345678;
+		static constexpr mrw::can::ControllerId TEST_CTRL_ID = 0x1234 >> 2;
+		static constexpr mrw::can::UnitNo       TEST_UNIT_NO = 0x5678;
+		static constexpr quint32                TEST_ID      = 0x12345678;
 
 	public:
 		explicit TestCan(QObject * parent = nullptr);

@@ -11,7 +11,8 @@ include(../common.pri)
 HEADERS += \
 	commands.h \
 	mrwbusservice.h \
-	mrwmessage.h
+	mrwmessage.h \
+	types.h
 
 SOURCES += \
 	mrwbusservice.cpp \

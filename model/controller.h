@@ -14,13 +14,12 @@
 #include <QDomElement>
 
 #include <util/stringutil.h>
+#include <can/types.h>
 #include <model/module.h>
 #include <model/multiplexconnection.h>
 
 namespace mrw::model
 {
-	typedef uint16_t ControllerId;
-
 	class ModelRailway;
 
 	/**
@@ -43,7 +42,7 @@ namespace mrw::model
 	 */
 	class Controller : public mrw::util::String
 	{
-		const ControllerId                  controller_id;
+		const mrw::can::ControllerId        controller_id;
 		ModelRailway            *           model = nullptr;
 		std::vector<Module *>               modules;
 		std::vector<MultiplexConnection *>  connections;
@@ -69,7 +68,7 @@ namespace mrw::model
 		 *
 		 * @return The controllers CAN ID.
 		 */
-		inline ControllerId id() const
+		inline mrw::can::ControllerId id() const
 		{
 			return controller_id;
 		}

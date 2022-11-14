@@ -11,6 +11,7 @@
 #include "model/modelrailway.h"
 #include "model/assemblypart.h"
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 ModelRailway::ModelRailway(const QString & filename)

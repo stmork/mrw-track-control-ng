@@ -8,11 +8,11 @@
 #ifndef MRW_TEST_TESTDEF_H
 #define MRW_TEST_TESTDEF_H
 
-#include "model/controller.h"
+#include <can/types.h>
 
 namespace mrw::test
 {
-	static constexpr mrw::model::ControllerId TEST_SID = 2040;
+	static constexpr mrw::can::ControllerId TEST_SID = 2040;
 }
 
 #endif

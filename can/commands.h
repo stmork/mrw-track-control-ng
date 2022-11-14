@@ -10,6 +10,8 @@
 
 #include <cinttypes>
 
+#include <can/types.h>
+
 namespace mrw::can
 {
 	enum CommandCategory : uint8_t
@@ -172,12 +174,12 @@ namespace mrw::can
 	/**
 	 * This is the high priority gateway ID.
 	 */
-	static constexpr uint16_t CAN_GATEWAY_ID   = 0x000;
+	static constexpr ControllerId CAN_GATEWAY_ID   = 0x000;
 
 	/**
 	 * This is the low priority broadcast ID.
 	 */
-	static constexpr uint16_t CAN_BROADCAST_ID = 0x7ff;
+	static constexpr ControllerId CAN_BROADCAST_ID = 0x7ff;
 }
 
 #endif
