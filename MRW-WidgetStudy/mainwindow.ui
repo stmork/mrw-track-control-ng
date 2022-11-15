@@ -14,6 +14,9 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
    <widget class="mrw::ui::RegularSwitchWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
@@ -24,11 +27,11 @@
      </rect>
     </property>
    </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="left_forward" native="true">
+   <widget class="mrw::ui::RegularSwitchWidget" name="left_forward_top" native="true">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>30</y>
+      <x>200</x>
+      <y>50</y>
       <width>200</width>
       <height>200</height>
      </rect>
@@ -47,48 +50,78 @@
    <widget class="mrw::ui::RegularSwitchWidget" name="widget_4" native="true">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>410</y>
+      <x>200</x>
+      <y>460</y>
       <width>201</width>
       <height>80</height>
      </rect>
     </property>
    </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="right_forward" native="true">
+   <widget class="mrw::ui::RegularSwitchWidget" name="right_forward_top" native="true">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>30</y>
+      <x>400</x>
+      <y>50</y>
       <width>200</width>
       <height>200</height>
      </rect>
     </property>
    </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="left_backward" native="true">
+   <widget class="mrw::ui::RegularSwitchWidget" name="left_backward_top" native="true">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>30</y>
+      <x>600</x>
+      <y>50</y>
       <width>200</width>
       <height>200</height>
      </rect>
     </property>
    </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="right_backward" native="true">
+   <widget class="mrw::ui::RegularSwitchWidget" name="right_backward_top" native="true">
     <property name="geometry">
      <rect>
       <x>800</x>
-      <y>30</y>
+      <y>50</y>
       <width>200</width>
       <height>200</height>
      </rect>
     </property>
    </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="left_forward_2" native="true">
+   <widget class="mrw::ui::RegularSwitchWidget" name="right_backward_bottom" native="true">
     <property name="geometry">
      <rect>
       <x>800</x>
-      <y>230</y>
+      <y>250</y>
+      <width>200</width>
+      <height>200</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="mrw::ui::RegularSwitchWidget" name="left_forward_bottom" native="true">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>250</y>
+      <width>200</width>
+      <height>200</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="mrw::ui::RegularSwitchWidget" name="right_forward_bottom" native="true">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>250</y>
+      <width>200</width>
+      <height>200</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="mrw::ui::RegularSwitchWidget" name="left_backward_bottom" native="true">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>250</y>
       <width>200</width>
       <height>200</height>
      </rect>
