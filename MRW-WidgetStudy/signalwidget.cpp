@@ -52,6 +52,8 @@ void SignalWidget::paintEvent(QPaintEvent * event)
 	const int xSize = size().width();
 	const int ySize = size().height();
 
+	painter.setRenderHint(QPainter::Antialiasing, true);
+
 	// TODO: Remove drawing the orientation later.
 	painter.setPen(Qt::gray);
 	painter.drawRect(0, 0, xSize - 1, ySize - 1);
@@ -79,7 +81,7 @@ void SignalWidget::paintEvent(QPaintEvent * event)
 	painter.setPen(QPen(Qt::red, 20.0));
 	painter.drawLine( -100.0f, 0.0f, 100.0f, 0.0f);
 
-	QPen pen(Qt::red, 5.0);
+	QPen pen(Qt::red, 8.0);
 
 	pen.setCapStyle(Qt::FlatCap);
 	painter.setPen(pen);
