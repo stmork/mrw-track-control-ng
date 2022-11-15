@@ -10,11 +10,13 @@ include(../common.pri)
 SOURCES += \
 	main.cpp \
 	mainwindow.cpp \
-	regularswitchwidget.cpp
+	regularswitchwidget.cpp \
+	signalwidget.cpp
 
 HEADERS += \
 	mainwindow.h \
-	regularswitchwidget.h
+	regularswitchwidget.h \
+	signalwidget.h
 
 FORMS += \
 	mainwindow.ui
