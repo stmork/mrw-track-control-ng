@@ -35,10 +35,10 @@ void SignalWidget::setDirection(const bool dir)
 
 static const QVector<QPointF> points
 {
-	QPointF(  -5.0,   55.0),
-	QPointF(  15.0,   35.0),
-	QPointF(  55.0,   75.0),
-	QPointF(  35.0,   95.0)
+	QPointF(  -5.0,   50.0),
+	QPointF(  15.0,   30.0),
+	QPointF(  55.0,   70.0),
+	QPointF(  35.0,   90.0)
 };
 
 void SignalWidget::paintEvent(QPaintEvent * event)
@@ -83,15 +83,15 @@ void SignalWidget::paintEvent(QPaintEvent * event)
 
 	pen.setCapStyle(Qt::FlatCap);
 	painter.setPen(pen);
-	painter.drawLine(-30, 40, -30, 80);
+	painter.drawLine(-30, 35, -30, 75);
 
 	pen.setWidth(10.0);
 	painter.setPen(pen);
-	painter.drawLine(-30, 60, hasDistant() || hasShunting() ? 30 : 70, 60);
+	painter.drawLine(-30, 55, hasDistant() || hasShunting() ? 30 : 70, 55);
 
 	if (hasShunting())
 	{
-		painter.fillRect(10, 40, 40, 40, Qt::red);
+		painter.fillRect(10, 35, 40, 40, Qt::red);
 	}
 	else if (hasDistant())
 	{
@@ -105,7 +105,7 @@ void SignalWidget::paintEvent(QPaintEvent * event)
 		pen.setWidth(1);
 		painter.setPen(pen);
 		painter.setBrush(QBrush(Qt::red));
-		painter.drawEllipse(50, 40, 40, 40);
+		painter.drawEllipse(50, 35, 40, 40);
 	}
 }
 
