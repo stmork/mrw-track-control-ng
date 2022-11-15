@@ -46,6 +46,24 @@ MainWindow::MainWindow(QWidget * parent)
 	ui->right_backward_bottom->setLeftHanded();
 	ui->right_backward_bottom->setRight();
 	ui->right_backward_bottom->setDirection(true);
+
+	ui->signalWidget1->setShunting();
+	ui->signalWidget2->setDistant();
+	ui->signalWidget3->setShunting();
+	ui->signalWidget3->setMain(false);
+
+	ui->signal_backward_paired_shunt->setDirection(false);
+	ui->signal_backward_paired_shunt->setDistant(true);
+	ui->signal_backward_paired_shunt->setShunting(true);
+	ui->signal_backward_paired->setDirection(false);
+	ui->signal_backward_paired->setDistant(true);
+	ui->signal_backward_single->setDirection(false);
+	ui->signal_forward_single->setDirection(true);
+	ui->signal_forward_paired->setDirection(true);
+	ui->signal_forward_paired->setDistant(true);
+	ui->signal_forward_paired_shunt->setDirection(true);
+	ui->signal_forward_paired_shunt->setDistant(true);
+	ui->signal_forward_paired_shunt->setShunting(true);
 }
 
 MainWindow::~MainWindow()
