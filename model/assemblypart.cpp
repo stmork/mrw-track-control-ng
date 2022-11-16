@@ -13,24 +13,11 @@ using namespace mrw::model;
 /**
  * Regular expression prolog:
  * \d matches one digit.
+ * \s whitespace character
  * \w matches one digit or case insensitive letter.
  * "." matches one character.
  * \d+ matches a number with at least one digit
  * (\d+) marks a matching group
- *
- *
- * This initializes the regular expressions as follows:
- *
- * First group: (\d+) Collects the tag number in match 1.
- * At least one whitespace.
- * Second group ([A-Z\d_]+) matches at least one of upper case letters, digits and "_" which is the chara
- * set of a cipher.
- * At least one whitespace.
- * The third group has to match the constant keywort "inline:".
- * The fourth group ([\w\/+=]+) matches all alpha numeric letters (lower case and upper case) and additio
- * "/", "+" and "=" which matches all possible characters of a BASE64 encoded string.
- * All further groups may match a beginning "|" with at least one letter. Since "|" is a keyword for divi
- * alternatives it has to be escaped by "\". The regex is: (\|.+)*
  *
  * Since we use C++11 raw string literals we do not need to escape the '\' char to "\\".
  *

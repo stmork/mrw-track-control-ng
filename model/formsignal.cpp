@@ -14,7 +14,7 @@ FormSignal::FormSignal(
 	const QDomElement  &  element,
 	const SignalType      type) :
 	Signal(model_railway, element, type),
-	SwitchModuleReference(model_railway, element)
+	SwitchModuleReference(model_railway, element, false)
 {
 }
 
