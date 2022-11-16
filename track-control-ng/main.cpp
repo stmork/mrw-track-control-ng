@@ -8,34 +8,35 @@
 #include <QSettings>
 #include <QDebug>
 
-#include "mainwindow.h"
-#include <model/modelrailway.h>
 #include <util/settings.h>
+#include <model/modelrailway.h>
+
+#include "mainwindow.h"
+#include "modelrepository.h"
 
 using namespace mrw::util;
 
 int main(int argc, char * argv[])
 {
 	QApplication  app(argc, argv);
-	QDir          home = QDir::homePath();
 	Settings      settings("model");
 	SettingsGroup group(&settings, "model");
-	QString       filename = argc > 1 ?
+	QString       modelname = argc > 1 ?
 		argv[1] :
-		settings.value("filename",
-			home.filePath("mrw/RailwayModel.modelrailway")).toString();
+		settings.value("filename", "RailwayModel").toString();
+	ModelRepository repo(modelname);
 
-	if (QFile::exists(filename))
+	if (repo)
 	{
-		mrw::model::ModelRailway     model(filename);
+		mrw::model::ModelRailway * model = repo;
 
-//		model.dump();
-		model.info();
-		settings.setValue("filename", filename);
+//		model->dump();
+		model->info();
+		settings.setValue("filename", modelname);
 	}
 	else
 	{
-		qCritical() << "No model available: " << filename;
+		qCritical() << "No model available: " << modelname;
 	}
 
 #if 0

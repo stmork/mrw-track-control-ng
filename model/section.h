@@ -105,6 +105,26 @@ namespace mrw::model
 			return section_controller;
 		}
 
+		/**
+		 * This template class returns all AssemblyPart elements of the given
+		 * type T. The found elements are stored into the given std::vector.
+		 *
+		 * @param result The result vector collecting the AssembyPart elements
+		 * of type T.
+		 */
+		template <class T> void parts(std::vector<T *> & result)
+		{
+			for (AssemblyPart * part : assembly_parts)
+			{
+				T * element = dynamic_cast<T *>(part);
+
+				if (element != nullptr)
+				{
+					result.push_back(element);
+				}
+			}
+		}
+
 	private:
 		void            add(AssemblyPart * rail_part);
 		void            link();

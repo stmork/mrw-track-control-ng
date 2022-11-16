@@ -15,7 +15,7 @@ Region::Region(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element,
 	const bool            station) :
-	name(element.attribute("name")),
+	region_name(element.attribute("name")),
 	is_station(station),
 	model(model_railway)
 {
@@ -68,5 +68,10 @@ void mrw::model::Region::link()
 
 QString mrw::model::Region::toString() const
 {
-	return QString("  Region %1 (%2)").arg(name).arg(is_station ? "Station" : "rail road");
+	return QString("  Region %1 (%2)").arg(region_name).arg(is_station ? "Station" : "rail road");
+}
+
+QString Region::key() const
+{
+	return (is_station ? "Bahnhof" : "Strecke") + region_name;
 }

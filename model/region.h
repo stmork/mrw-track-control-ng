@@ -13,10 +13,11 @@
 #include <QDomElement>
 
 #include <util/stringutil.h>
+#include <model/section.h>
 
 namespace mrw::model
 {
-	class Section;
+	class ModelRailway;
 
 	/**
 	 * The control region is a structural division into overviewable parts
@@ -29,10 +30,11 @@ namespace mrw::model
 	{
 		friend class ModelRailway;
 
-		const QString           name;
+		const QString           region_name;
 		const bool              is_station;
 		ModelRailway      *     model = nullptr;
 		std::vector<Section *>  sections;
+		bool                    direction_view;
 
 
 	public:
@@ -67,7 +69,39 @@ namespace mrw::model
 			return sections.size();
 		}
 
+		inline const QString & name() const
+		{
+			return region_name;
+		}
+
+		inline bool direction() const
+		{
+			return direction_view;
+		}
+
+		inline void setDirection(const bool dir)
+		{
+			direction_view = dir;
+		}
+
 		QString toString() const override;
+
+		QString key() const;
+
+		/**
+		 * This template class returns all AssemblyPart elements of the given
+		 * type T. The found elements are stored into the given std::vector.
+		 *
+		 * @param result The result vector collecting the AssembyPart elements
+		 * of type T.
+		 */
+		template <class T> void parts(std::vector<T *> & result)
+		{
+			for (Section * sub : sections)
+			{
+				sub->parts<T>(result);
+			}
+		}
 
 	private:
 		void add(Section * section);

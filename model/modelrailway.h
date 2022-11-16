@@ -58,6 +58,11 @@ namespace mrw::model
 
 	public:
 		explicit ModelRailway(const QString & filename);
+
+		// Copy not allowed.
+		ModelRailway(const ModelRailway & other) = delete;
+		ModelRailway & operator=(const ModelRailway & other) = delete;
+
 		virtual ~ModelRailway();
 
 		/**
@@ -244,6 +249,21 @@ namespace mrw::model
 		bool valid() const;
 
 		QString toString() const override;
+
+		/**
+		 * This template class returns all AssemblyPart elements of the given
+		 * type T. The found elements are stored into the given std::vector.
+		 *
+		 * @param result The result vector collecting the AssembyPart elements
+		 * of type T.
+		 */
+		template <class T> void parts(std::vector<T *> & result)
+		{
+			for (Region * sub : regions)
+			{
+				sub->parts<T>(result);
+			}
+		}
 
 	private:
 		static QString  type(const QDomElement & node);

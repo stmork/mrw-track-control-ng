@@ -9,10 +9,12 @@ include(../common.pri)
 
 SOURCES += \
 	main.cpp \
-	mainwindow.cpp
+	mainwindow.cpp \
+	modelrepository.cpp
 
 HEADERS += \
-	mainwindow.h
+	mainwindow.h \
+	modelrepository.h
 
 FORMS += \
 	mainwindow.ui
