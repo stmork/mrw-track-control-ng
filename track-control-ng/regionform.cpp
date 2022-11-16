@@ -15,7 +15,7 @@ RegionForm::RegionForm(mrw::model::Region * region, QWidget * parent) :
 	ui(new Ui::RegionForm)
 {
 	ui->setupUi(this);
-
+	ui->stationWidget->setStationLabel(region->name());
 	setAutoFillBackground(true);
 	setPalette(background_color);
 }

@@ -16,8 +16,15 @@ namespace mrw::ui
 	class StationWidget : public QWidget
 	{
 		Q_OBJECT
+
+	private:
+		static const QPen pen;
+		QString station_label;
+
 	public:
 		explicit StationWidget(QWidget * parent = nullptr);
+
+		void setStationLabel(const QString & label);
 
 	protected:
 		void paintEvent(QPaintEvent * event) override;

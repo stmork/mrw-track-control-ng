@@ -24,7 +24,7 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	MainWindow(ModelRepository & model_repo, QWidget * parent = nullptr);
+	explicit MainWindow(ModelRepository & model_repo, QWidget * parent = nullptr);
 	~MainWindow();
 
 private:

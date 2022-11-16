@@ -9,8 +9,16 @@
 
 using namespace mrw::ui;
 
+const QPen StationWidget::pen(Qt::white, 3.0);
+
 StationWidget::StationWidget(QWidget * parent) : QWidget(parent)
 {
+}
+
+void StationWidget::setStationLabel(const QString & label)
+{
+	station_label = label;
+	update();
 }
 
 void StationWidget::paintEvent(QPaintEvent * event)
@@ -18,8 +26,7 @@ void StationWidget::paintEvent(QPaintEvent * event)
 	Q_UNUSED(event)
 
 	QPainter     painter(this);
-	QPainterPath path;
-	QFont        font = painter.font();
+	QFont        font;
 
 	const int xSize = size().width();
 	const int ySize = size().height();
@@ -27,10 +34,12 @@ void StationWidget::paintEvent(QPaintEvent * event)
 	painter.setRenderHint(QPainter::Antialiasing, true);
 
 	// TODO: Remove drawing the orientation later.
-	painter.setPen(Qt::gray);
+	painter.setPen(pen);
 	painter.drawRect(0, 0, xSize - 1, ySize - 1);
 
-	// Unify coordinates
-	painter.translate(xSize >> 1, ySize >> 1);
-	painter.scale(xSize / 200.0, ySize / 200.0);
+	// Draw switch name before rotating to prevent rotated font drawing.
+	font.setPixelSize(ySize / 2);
+	painter.setFont(font);
+	painter.drawText(QRect(0,0,xSize,ySize),
+		Qt::AlignCenter | Qt::AlignHCenter, station_label);
 }
