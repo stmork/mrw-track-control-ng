@@ -10,12 +10,18 @@
 
 #include <QObject>
 #include <QWidget>
-
+#include <QTimer>
 namespace mrw::ui
 {
 	class CircleLiveWidget : public QWidget
 	{
 		Q_OBJECT
+
+	private:
+		static const QPen pen;
+		QTimer            timer;
+		unsigned          counter = 0;
+
 	public:
 		explicit CircleLiveWidget(QWidget * parent = nullptr);
 

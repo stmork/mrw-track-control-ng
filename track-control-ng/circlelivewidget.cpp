@@ -9,8 +9,19 @@
 
 using namespace mrw::ui;
 
+const QPen CircleLiveWidget::pen(Qt::white, 10.0);
+
 CircleLiveWidget::CircleLiveWidget(QWidget * parent) : QWidget(parent)
 {
+	timer.setInterval(1000);
+	timer.setSingleShot(false);
+	timer.start();
+
+	connect(&timer, &QTimer::timeout, [this] ()
+	{
+		update();
+		counter++;
+	});
 }
 
 void CircleLiveWidget::paintEvent(QPaintEvent * event)
@@ -18,8 +29,6 @@ void CircleLiveWidget::paintEvent(QPaintEvent * event)
 	Q_UNUSED(event)
 
 	QPainter     painter(this);
-	QPainterPath path;
-	QFont        font = painter.font();
 
 	const int xSize = size().width();
 	const int ySize = size().height();
@@ -33,4 +42,8 @@ void CircleLiveWidget::paintEvent(QPaintEvent * event)
 	// Unify coordinates
 	painter.translate(xSize >> 1, ySize >> 1);
 	painter.scale(xSize / 200.0, ySize / 200.0);
+	painter.rotate(counter * 45.0);
+
+	painter.setPen(pen);
+	painter.drawLine(-100, 0, 100, 0);
 }

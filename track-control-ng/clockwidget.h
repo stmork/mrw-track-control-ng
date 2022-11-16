@@ -10,12 +10,17 @@
 
 #include <QObject>
 #include <QWidget>
+#include <QTimer>
 
 namespace mrw::ui
 {
 	class ClockWidget : public QWidget
 	{
 		Q_OBJECT
+
+	private:
+		QTimer timer;
+
 	public:
 		explicit ClockWidget(QWidget * parent = nullptr);
 

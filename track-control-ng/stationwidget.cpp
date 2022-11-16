@@ -40,6 +40,6 @@ void StationWidget::paintEvent(QPaintEvent * event)
 	// Draw switch name before rotating to prevent rotated font drawing.
 	font.setPixelSize(ySize / 2);
 	painter.setFont(font);
-	painter.drawText(QRect(0,0,xSize,ySize),
+	painter.drawText(QRect(0, 0, xSize, ySize),
 		Qt::AlignCenter | Qt::AlignHCenter, station_label);
 }

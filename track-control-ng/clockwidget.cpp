@@ -4,6 +4,7 @@
 //
 
 #include <QPainter>
+#include <QTime>
 
 #include "clockwidget.h"
 
@@ -11,6 +12,14 @@ using namespace mrw::ui;
 
 ClockWidget::ClockWidget(QWidget * parent) : QWidget(parent)
 {
+	timer.setInterval(1000);
+	timer.setSingleShot(false);
+	timer.start();
+
+	connect(&timer, &QTimer::timeout, [this] ()
+	{
+		update();
+	});
 }
 
 void ClockWidget::paintEvent(QPaintEvent * event)
@@ -18,8 +27,8 @@ void ClockWidget::paintEvent(QPaintEvent * event)
 	Q_UNUSED(event)
 
 	QPainter     painter(this);
-	QPainterPath path;
 	QFont        font = painter.font();
+	QTime        now  = QTime::currentTime();
 
 	const int xSize = size().width();
 	const int ySize = size().height();
@@ -30,7 +39,10 @@ void ClockWidget::paintEvent(QPaintEvent * event)
 	painter.setPen(Qt::gray);
 	painter.drawRect(0, 0, xSize - 1, ySize - 1);
 
-	// Unify coordinates
-	painter.translate(xSize >> 1, ySize >> 1);
-	painter.scale(xSize / 200.0, ySize / 200.0);
+	// Draw switch name before rotating to prevent rotated font drawing.
+	font.setPixelSize(ySize / 2);
+	painter.setPen(Qt::white);
+	painter.setFont(font);
+	painter.drawText(QRect(0, 0, xSize, ySize),
+		Qt::AlignCenter | Qt::AlignHCenter, now.toString("hh:mm:ss"));
 }

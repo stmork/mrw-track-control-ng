@@ -72,7 +72,7 @@
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>50</height>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -94,7 +94,7 @@
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>50</height>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -142,12 +142,6 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>mrw::ui::CircleLiveWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">circlelivewidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>mrw::ui::StationWidget</class>
    <extends>QWidget</extends>
    <header location="global">stationwidget.h</header>
@@ -157,6 +151,12 @@
    <class>mrw::ui::ClockWidget</class>
    <extends>QWidget</extends>
    <header location="global">clockwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>mrw::ui::CircleLiveWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">circlelivewidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
