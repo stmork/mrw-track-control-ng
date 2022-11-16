@@ -30,6 +30,8 @@ namespace mrw::test
 		void testPairSignalSection1();
 		void testPairSignalSection2();
 		void testPairSignalSection3();
+		void testSignalCount();
+		void testRailCount();
 	};
 }
 

@@ -5,7 +5,10 @@
 
 #include <QTest>
 
+#include <model/rail.h>
 #include <model/regularswitch.h>
+#include <model/doublecrossswitch.h>
+#include <model/formsignal.h>
 #include <model/lightsignal.h>
 
 #include "testnumbering.h"
@@ -115,4 +118,31 @@ void TestNumbering::testPairSignalSection3()
 	QCOMPARE(lr1->pair(), lr2);
 	QCOMPARE(lr2->pair(), nullptr);
 	QCOMPARE(lr3->pair(), nullptr);
+}
+
+void TestNumbering::testSignalCount()
+{
+	std::vector<FormSignal *>  form_signals;
+	std::vector<LightSignal *> light_signals;
+
+	model->parts<FormSignal>(form_signals);
+	model->parts<LightSignal>(light_signals);
+
+	QCOMPARE(light_signals.size(), 9);
+	QCOMPARE(form_signals.size(), 5);
+}
+
+void TestNumbering::testRailCount()
+{
+	std::vector<Rail *>              rails;
+	std::vector<RegularSwitch *>     switches;
+	std::vector<DoubleCrossSwitch *> doubles;
+
+	model->parts<Rail>(rails);
+	model->parts<RegularSwitch>(switches);
+	model->parts<DoubleCrossSwitch>(doubles);
+
+	QCOMPARE(rails.size(), 3);
+	QCOMPARE(switches.size(), 3);
+	QCOMPARE(doubles.size(), 1);
 }
