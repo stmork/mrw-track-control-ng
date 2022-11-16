@@ -30,7 +30,7 @@ void MainWindow::initRegion()
 
 	for (size_t r = 0; r < model->regionCount(); r++)
 	{
-		Region *     region = model->region(r);
+		Region   *   region = model->region(r);
 		RegionForm * form = new RegionForm(region);
 
 		ui->regionTabWidget->addTab(form, region->name());

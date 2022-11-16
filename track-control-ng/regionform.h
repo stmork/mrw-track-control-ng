@@ -22,14 +22,14 @@ class RegionForm : public QWidget
 	Q_OBJECT
 
 public:
-	explicit RegionForm(mrw::model::Region * region, QWidget *parent = nullptr);
+	explicit RegionForm(mrw::model::Region * region, QWidget * parent = nullptr);
 	~RegionForm();
 
 protected:
-	void changeEvent(QEvent *e) override;
+	void changeEvent(QEvent * e) override;
 
 private:
-	Ui::RegionForm *ui;
+	Ui::RegionForm * ui;
 	static const QPalette    background_color;
 };
 

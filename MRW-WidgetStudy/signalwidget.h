@@ -17,8 +17,8 @@ namespace mrw::ui
 		Q_OBJECT
 
 	private:
-		bool direction = true;
-		bool shunting = false;
+		bool direction      = true;
+		bool shunting       = false;
 		bool distant_signal = false;
 		bool main_signal    = true;
 

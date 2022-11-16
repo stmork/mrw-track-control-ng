@@ -8,15 +8,23 @@ QT += gui widgets
 include(../common.pri)
 
 SOURCES += \
+	barwidget.cpp \
+	circlelivewidget.cpp \
+	clockwidget.cpp \
 	main.cpp \
 	mainwindow.cpp \
 	modelrepository.cpp \
-	regionform.cpp
+	regionform.cpp \
+	stationwidget.cpp
 
 HEADERS += \
+	barwidget.h \
+	circlelivewidget.h \
+	clockwidget.h \
 	mainwindow.h \
 	modelrepository.h \
-	regionform.h
+	regionform.h \
+	stationwidget.h
 
 FORMS += \
 	mainwindow.ui \

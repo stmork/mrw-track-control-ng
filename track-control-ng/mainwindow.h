@@ -31,7 +31,7 @@ private:
 	void initRegion();
 
 private:
-	Ui::MainWindow *  ui;
+	Ui::MainWindow  * ui;
 	ModelRepository & repo;
 };
 #endif // MAINWINDOW_H

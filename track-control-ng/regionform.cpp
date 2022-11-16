@@ -10,7 +10,7 @@
 // Qt::black / "#000000" / "black"
 const QPalette RegionForm::background_color(QPalette::Window, Qt::black);
 
-RegionForm::RegionForm(mrw::model::Region * region, QWidget *parent) :
+RegionForm::RegionForm(mrw::model::Region * region, QWidget * parent) :
 	QWidget(parent),
 	ui(new Ui::RegionForm)
 {
@@ -25,10 +25,11 @@ RegionForm::~RegionForm()
 	delete ui;
 }
 
-void RegionForm::changeEvent(QEvent *e)
+void RegionForm::changeEvent(QEvent * e)
 {
 	QWidget::changeEvent(e);
-	switch (e->type()) {
+	switch (e->type())
+	{
 	case QEvent::LanguageChange:
 		ui->retranslateUi(this);
 		break;
