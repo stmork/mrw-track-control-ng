@@ -7,7 +7,7 @@
 
 using namespace mrw::util;
 
-Settings::Settings(const char * app_name, QObject * parent) :
+Settings::Settings(const QString & app_name, QObject * parent) :
 	QSettings("mrw", app_name, parent)
 {
 }

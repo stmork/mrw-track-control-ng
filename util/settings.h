@@ -22,7 +22,7 @@ namespace mrw::util
 
 	public:
 		Settings() = delete;
-		explicit Settings(const char * app_name, QObject * parent = nullptr);
+		explicit Settings(const QString & app_name, QObject * parent = nullptr);
 	};
 
 	/**
