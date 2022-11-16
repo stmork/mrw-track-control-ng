@@ -39,7 +39,7 @@ int main(int argc, char * argv[])
 		qCritical() << "No model available: " << modelname;
 	}
 
-#if 0
+#if 1
 	MainWindow   main_window;
 
 	main_window.show();
