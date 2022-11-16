@@ -10,6 +10,8 @@
 
 #include <QMainWindow>
 
+#include "modelrepository.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui
 {
@@ -22,10 +24,14 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	MainWindow(QWidget * parent = nullptr);
+	MainWindow(ModelRepository & model_repo, QWidget * parent = nullptr);
 	~MainWindow();
 
 private:
-	Ui::MainWindow * ui;
+	void initRegion();
+
+private:
+	Ui::MainWindow *  ui;
+	ModelRepository & repo;
 };
 #endif // MAINWINDOW_H

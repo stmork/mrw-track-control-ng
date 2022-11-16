@@ -10,14 +10,17 @@ include(../common.pri)
 SOURCES += \
 	main.cpp \
 	mainwindow.cpp \
-	modelrepository.cpp
+	modelrepository.cpp \
+	regionform.cpp
 
 HEADERS += \
 	mainwindow.h \
-	modelrepository.h
+	modelrepository.h \
+	regionform.h
 
 FORMS += \
-	mainwindow.ui
+	mainwindow.ui \
+	regionform.ui
 
 LIBS            += -lMRW-Model -lMRW-Util -lMRW-Can
 

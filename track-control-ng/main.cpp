@@ -40,7 +40,7 @@ int main(int argc, char * argv[])
 	}
 
 #if 1
-	MainWindow   main_window;
+	MainWindow   main_window(repo);
 
 	main_window.show();
 	return app.exec();
