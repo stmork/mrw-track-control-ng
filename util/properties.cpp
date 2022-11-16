@@ -33,10 +33,10 @@ Special=a.-_,
 11ss=xx
 1=2
 ss1=2
+empty=
 @endverbatim
  */
-const std::regex  Properties::regex(R"(^\s*([a-zA-Z]\w+)\s*=\s*([\w_\-\.\,]+))");
-
+const std::regex  Properties::regex(R"(^\s*([a-zA-Z]\w+)\s*=\s*([\w_\-\.\,]*))");
 
 Properties::Properties(const QString & filename)
 {

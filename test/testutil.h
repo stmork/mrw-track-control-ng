@@ -30,6 +30,7 @@ namespace mrw::test
 		void testMethod();
 		void testConstantEnumerator();
 		void testSingleton();
+		void testProperties();
 	};
 }
 

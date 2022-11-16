@@ -8,6 +8,7 @@
 #include <QTest>
 
 #include <util/method.h>
+#include <util/properties.h>
 #include <util/settings.h>
 #include <util/singleton.h>
 #include <util/termhandler.h>
@@ -102,4 +103,19 @@ void TestUtil::testSingleton()
 	SingletonImpl & singleton(SingletonImpl::instance());
 
 	QVERIFY(singleton.demo());
+}
+
+void TestUtil::testProperties()
+{
+	QString    filename = QFile::exists("test.properties") ? "test.properties" : "test/test.properties";
+	Properties props(filename);
+
+	QCOMPARE(props.size(), 5);
+	QCOMPARE(props.at("AvalidProp"), "xyvc_,");
+	QCOMPARE(props.at("Another11Prop"), "ccc");
+	QCOMPARE(props.at("Special"), "a.-_,");
+	QCOMPARE(props.at("ss1"), "2");
+	QCOMPARE(props.at("empty"), "");
+	QVERIFY_EXCEPTION_THROWN(props.at("11ss"), std::out_of_range);
+	QVERIFY_EXCEPTION_THROWN(props.at("1"), std::out_of_range);
 }
