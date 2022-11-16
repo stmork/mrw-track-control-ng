@@ -12,12 +12,14 @@ SOURCES += \
 	mainwindow.cpp \
 	regularswitchcontroller.cpp \
 	regularswitchwidget.cpp \
+	signalcontroller.cpp \
 	signalwidget.cpp
 
 HEADERS += \
 	mainwindow.h \
 	regularswitchcontroller.h \
 	regularswitchwidget.h \
+	signalcontroller.h \
 	signalwidget.h
 
 FORMS += \

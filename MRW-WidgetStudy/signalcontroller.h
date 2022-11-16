@@ -5,18 +5,18 @@
 
 #pragma once
 
-#ifndef MRW_CTRL_REGULARSWITCHCONTROLLER_H
-#define MRW_CTRL_REGULARSWITCHCONTROLLER_H
+#ifndef MRW_CTRL_SIGNALCONTROLLER_H
+#define MRW_CTRL_SIGNALCONTROLLER_H
 
 #include <QObject>
 
 namespace mrw::ctrl
 {
-	class RegularSwitchController : public QObject
+	class SignalController : public QObject
 	{
 		Q_OBJECT
 	public:
-		explicit RegularSwitchController(QObject * parent = nullptr);
+		explicit SignalController(QObject * parent = nullptr);
 
 	signals:
 
