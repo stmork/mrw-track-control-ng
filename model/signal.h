@@ -8,6 +8,8 @@
 #ifndef MRW_MODEL_SIGNAL_H
 #define MRW_MODEL_SIGNAL_H
 
+#include <QPoint>
+
 #include <can/commands.h>
 #include <util/constantenumerator.h>
 #include <model/module.h>
@@ -49,11 +51,25 @@ namespace mrw::model
 		/** The signal type. */
 		const SignalType    signal_type;
 
+		/** The logical position on the track control screen. */
+		QPoint              signal_position;
+
 	public:
 		explicit Signal(
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element,
 			const SignalType      type);
+
+		/**
+		 * This method sets the logical coordinates for the track control
+		 * screen.
+		 *
+		 * @param pos The new logical position.
+		 */
+		inline void setPosition(const QPoint & pos)
+		{
+			signal_position = pos;
+		}
 
 	protected:
 		/**

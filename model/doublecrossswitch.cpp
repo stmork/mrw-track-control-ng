@@ -81,3 +81,8 @@ QString DoubleCrossSwitch::toString() const
 		arg(aIsDir() ? "ab" : "cd").
 		arg(name());
 }
+
+QString mrw::model::DoubleCrossSwitch::key() const
+{
+	return "DKW" + name();
+}

@@ -32,8 +32,6 @@ namespace mrw::model
 
 		bool valid() const override;
 
-		QString toString() const override;
-
 		/**
 		 * This method returns the rail name.
 		 *
@@ -43,6 +41,9 @@ namespace mrw::model
 		{
 			return partName();
 		}
+
+		QString toString() const override;
+		QString key() const override;
 
 	private:
 		void link() override;

@@ -69,23 +69,48 @@ namespace mrw::model
 			return sections.size();
 		}
 
+		/**
+		 * This method returns the name of this Region.
+		 *
+		 * @return  The name of this Region.
+		 */
 		inline const QString & name() const
 		{
 			return region_name;
 		}
 
+		/**
+		 * This method returns the projected counting direction used on the
+		 * track control screen. The projected counting direction facilitate
+		 * the usage of the operating user.
+		 *
+		 * @return The projection direction of the counting direction for the
+		 * GUI.
+		 */
 		inline bool direction() const
 		{
 			return direction_view;
 		}
 
+		/**
+		 * This method sets the the projected counting direction used on the
+		 * track control screen. The projected counting direction facilitate
+		 * the usage of the operating user.
+		 *
+		 * @param dir The projection direction of the counting direction for
+		 * the GUI.
+		 */
 		inline void setDirection(const bool dir)
 		{
 			direction_view = dir;
 		}
 
-		QString toString() const override;
-
+		/**
+		 * This method returns a key to determine the logical coordinates from
+		 * the description file.
+		 *
+		 * @return The key for looking up the logical coordinates
+		 */
 		QString key() const;
 
 		/**
@@ -102,6 +127,8 @@ namespace mrw::model
 				sub->parts<T>(result);
 			}
 		}
+
+		QString toString() const override;
 
 	private:
 		void add(Section * section);

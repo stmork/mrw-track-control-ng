@@ -12,6 +12,7 @@
 #include <set>
 
 #include <QDomElement>
+#include <QPoint>
 
 #include <model/assemblypart.h>
 
@@ -107,6 +108,9 @@ namespace mrw::model
 		/** All connectors against counting direction. */
 		std::set<RailInfo>      rail_backward;
 
+		/** The logical position on the track control screen. */
+		QPoint                  part_position;
+
 	public:
 		explicit RailPart(
 			ModelRailway     *    model_railway,
@@ -122,6 +126,25 @@ namespace mrw::model
 		inline bool aIsDir() const
 		{
 			return a_in_dir;
+		}
+
+		/**
+		 * This method returns a key to determine the logical coordinates from
+		 * the description file.
+		 *
+		 * @return The key for looking up the logical coordinates
+		 */
+		virtual QString key() const = 0;
+
+		/**
+		 * This method sets the logical coordinates for the track control
+		 * screen.
+		 *
+		 * @param pos The new logical position.
+		 */
+		inline void setPosition(const QPoint & pos)
+		{
+			part_position = pos;
 		}
 
 		/**

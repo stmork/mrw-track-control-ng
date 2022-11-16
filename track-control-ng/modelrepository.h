@@ -16,6 +16,7 @@
 #include <util/properties.h>
 #include <util/settings.h>
 #include <model/modelrailway.h>
+#include <model/region.h>
 
 class ModelRepository
 {
@@ -57,8 +58,11 @@ private:
 	QStringList lookupProperties(const QString & base);
 	void        setFilenames();
 	void        prepareRegions();
+	void        prepareRailParts();
+	void        prepareSignals(mrw::model::Region * region);
 
 	static QString & prepareKey(QString & input);
+	static QPoint    parseCoord(const std::string & value);
 };
 
 #endif // MODELREPOSITORY_H

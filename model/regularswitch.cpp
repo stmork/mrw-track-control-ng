@@ -72,3 +72,8 @@ QString RegularSwitch::toString() const
 		arg(aIsDir() ? "a " : "bc").
 		arg(name());
 }
+
+QString mrw::model::RegularSwitch::key() const
+{
+	return "Weiche" + name();
+}

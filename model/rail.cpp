@@ -54,3 +54,8 @@ QString Rail::toString() const
 		arg(b == nullptr ? "| " : aIsDir() ? "a " : "b ").
 		arg(name());
 }
+
+QString Rail::key() const
+{
+	return "Gleis" + name();
+}

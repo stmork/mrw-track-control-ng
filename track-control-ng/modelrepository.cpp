@@ -6,9 +6,10 @@
 #include <QDirIterator>
 #include <QDebug>
 
-#include "modelrepository.h"
-
 #include <model/signal.h>
+#include <model/railpart.h>
+
+#include "modelrepository.h"
 
 using namespace mrw::util;
 using namespace mrw::model;
@@ -46,6 +47,7 @@ ModelRepository::ModelRepository(const QString & model_name) :
 	railpart_map.read(railpart_filename);
 
 	prepareRegions();
+	prepareRailParts();
 }
 
 ModelRepository::~ModelRepository()
@@ -137,7 +139,7 @@ void ModelRepository::prepareRegions()
 {
 	for (size_t r = 0; r < model->regionCount(); r++)
 	{
-		Region        *       region = model->region(r);
+		Region * region = model->region(r);
 
 		try
 		{
@@ -152,10 +154,70 @@ void ModelRepository::prepareRegions()
 		{
 			qWarning() << "No direction found for " << *region;
 		}
+		prepareSignals(region);
+	}
+}
+
+void ModelRepository::prepareRailParts()
+{
+	std::vector<RailPart *> parts;
+
+	model->parts<RailPart>(parts);
+	for (RailPart * part : parts)
+	{
+		try
+		{
+			QString             prep  = part->key();
+			const std::string & key   = prepareKey(prep).toStdString();
+			const std::string & value = railpart_map.at(key);
+			QPoint              pos   = parseCoord(value);
+
+			part->setPosition(pos);
+		}
+		catch (std::out_of_range & e)
+		{
+			qWarning() << "No coordinate found for " << *part;
+		}
+	}
+}
+
+void ModelRepository::prepareSignals(Region * region)
+{
+	QString               region_key = region->key();
+	std::vector<Signal *> region_signals;
+
+	region->parts<Signal>(region_signals);
+
+	for (Signal * signal : region_signals)
+	{
+		try
+		{
+			QString             prep  = region_key + signal->partName();
+			const std::string & key   = prepareKey(prep).toStdString();
+			const std::string & value = signal_map.at(key);
+			QPoint              pos   = parseCoord(value);
+
+			signal->setPosition(pos);
+		}
+		catch (std::out_of_range & e)
+		{
+			qWarning() << "No coordinate found for " << *signal;
+		}
 	}
 }
 
 QString & ModelRepository::prepareKey(QString & input)
 {
 	return input.replace(" ", "");
+}
+
+QPoint ModelRepository::parseCoord(const std::string & value)
+{
+	QStringList tokens = QString(value.c_str()).split(",");
+	QPoint      pos;
+
+	pos.setX(tokens[0].toInt());
+	pos.setY(tokens[1].toInt());
+
+	return pos;
 }

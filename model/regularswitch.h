@@ -40,8 +40,9 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
 
-		bool valid() const override;
+		bool    valid() const override;
 		QString toString() const override;
+		QString key() const override;
 
 	private:
 		void link() override;
