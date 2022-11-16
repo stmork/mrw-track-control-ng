@@ -98,6 +98,7 @@ void TestModel::testRegions()
 		Region * region = model->region(i);
 
 		QVERIFY(region != nullptr);
+		QVERIFY(region->key().contains(region->name()));
 	}
 
 	QVERIFY_EXCEPTION_THROWN(model->region(count), std::out_of_range);
@@ -179,6 +180,7 @@ void TestModel::testAssemblyPart(AssemblyPart * part)
 	{
 		QVERIFY2(signal == nullptr, name.c_str());
 		QVERIFY2(rail->valid(), name.c_str());
+		QVERIFY2(rail->key().contains(rail->partName()), name.c_str());
 	}
 
 	if (device != nullptr)

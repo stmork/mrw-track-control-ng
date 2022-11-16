@@ -218,8 +218,11 @@ QPoint ModelRepository::parseCoord(const std::string & value)
 	bool        ok1 = false;
 	bool        ok2 = false;
 
-	pos.setX(tokens[0].toInt(&ok1));
-	pos.setY(tokens[1].toInt(&ok2));
+	if (tokens.size() == 2)
+	{
+		pos.setX(tokens[0].toInt(&ok1));
+		pos.setY(tokens[1].toInt(&ok2));
+	}
 
 	if (!(ok1 && ok2))
 	{
