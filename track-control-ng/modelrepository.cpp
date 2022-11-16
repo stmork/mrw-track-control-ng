@@ -215,9 +215,18 @@ QPoint ModelRepository::parseCoord(const std::string & value)
 {
 	QStringList tokens = QString(value.c_str()).split(",");
 	QPoint      pos;
+	bool        ok1 = false;
+	bool        ok2 = false;
 
-	pos.setX(tokens[0].toInt());
-	pos.setY(tokens[1].toInt());
+	pos.setX(tokens[0].toInt(&ok1));
+	pos.setY(tokens[1].toInt(&ok2));
 
+	if (!(ok1 && ok2))
+	{
+		pos.setX(counter % 40);
+		pos.setY(counter / 40);
+
+		counter++;
+	}
 	return pos;
 }
