@@ -8,6 +8,7 @@ SUBDIRS  = \
 	can \
 	util \
 	model \
+	ui \
 	test \
 	ping \
 	track-control-ng \
@@ -16,6 +17,7 @@ SUBDIRS  = \
 can.file                  = can/MRW-Can.pro
 util.file                 = util/MRW-Util.pro
 model.file                = model/MRW-Model.pro
+ui.file                   = ui/MRW-UI.pro
 test.file                 = test/MRW-Test.pro
 ping.file                 = tools/ping/MRW-Ping.pro
 track-control-ng.file     = track-control-ng/MRW-Reader.pro
@@ -24,8 +26,8 @@ study.file                = MRW-WidgetStudy/MRW-WidgetStudy.pro
 model.depends             = util can
 test.depends              = util can model
 ping.depends              = test
-track-control-ng.depends  = util can model
-study.depends             = util can model
+study.depends             = util can model ui
+track-control-ng.depends  = study
 
 QMAKE_CLEAN              += qtest*.xml
 

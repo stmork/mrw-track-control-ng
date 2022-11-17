@@ -27,7 +27,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QListWidget" name="routeListWidget"/>
+         <widget class="QListWidget" name="routeListWidget">
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="routeButtonLayout">
@@ -71,6 +78,12 @@
             <horstretch>0</horstretch>
             <verstretch>1</verstretch>
            </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>16777215</height>
+           </size>
           </property>
          </widget>
         </item>

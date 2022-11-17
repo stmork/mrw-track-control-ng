@@ -138,25 +138,25 @@
   <customwidget>
    <class>mrw::ui::BarWidget</class>
    <extends>QWidget</extends>
-   <header location="global">barwidget.h</header>
+   <header location="global">ui/barwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>mrw::ui::StationWidget</class>
    <extends>QWidget</extends>
-   <header location="global">stationwidget.h</header>
+   <header location="global">ui/stationwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>mrw::ui::ClockWidget</class>
    <extends>QWidget</extends>
-   <header location="global">clockwidget.h</header>
+   <header location="global">ui/clockwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>mrw::ui::CircleLiveWidget</class>
    <extends>QWidget</extends>
-   <header location="global">circlelivewidget.h</header>
+   <header location="global">ui/circlelivewidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

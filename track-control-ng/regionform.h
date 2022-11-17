@@ -8,9 +8,13 @@
 #ifndef REGIONFORM_H
 #define REGIONFORM_H
 
+#include <vector>
+
 #include <QWidget>
 
 #include <model/region.h>
+#include <model/signal.h>
+#include <model/regularswitch.h>
 
 namespace Ui
 {
@@ -20,6 +24,10 @@ namespace Ui
 class RegionForm : public QWidget
 {
 	Q_OBJECT
+
+private:
+	std::vector<mrw::model::Signal *> region_signals;
+	std::vector<mrw::model::RegularSwitch *> region_switches;
 
 public:
 	explicit RegionForm(mrw::model::Region * region, QWidget * parent = nullptr);

@@ -147,6 +147,11 @@ namespace mrw::model
 			part_position = pos;
 		}
 
+		inline const QPoint & position() const
+		{
+			return part_position;
+		}
+
 		/**
 		 * This method verifies if the given rail part is inside the
 		 * corresponding connector set of the given counting direction.

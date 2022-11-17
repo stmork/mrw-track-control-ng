@@ -71,6 +71,11 @@ namespace mrw::model
 			signal_position = pos;
 		}
 
+		inline const QPoint & position() const
+		{
+			return signal_position;
+		}
+
 	protected:
 		/**
 		 * This method returns a brief symbol representing the direction and

@@ -234,13 +234,13 @@
   <customwidget>
    <class>mrw::ui::RegularSwitchWidget</class>
    <extends>QWidget</extends>
-   <header location="global">regularswitchwidget.h</header>
+   <header location="global">ui/regularswitchwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>mrw::ui::SignalWidget</class>
    <extends>QWidget</extends>
-   <header location="global">signalwidget.h</header>
+   <header location="global">ui/signalwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

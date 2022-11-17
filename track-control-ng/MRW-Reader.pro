@@ -8,23 +8,27 @@ QT += gui widgets
 include(../common.pri)
 
 SOURCES += \
-	barwidget.cpp \
-	circlelivewidget.cpp \
-	clockwidget.cpp \
 	main.cpp \
 	mainwindow.cpp \
 	modelrepository.cpp \
 	regionform.cpp \
-	stationwidget.cpp
+	../ui/barwidget.cpp \
+	../ui/circlelivewidget.cpp \
+	../ui/clockwidget.cpp \
+	../ui/regularswitchwidget.cpp \
+	../ui/stationwidget.cpp \
+	../ui/signalwidget.cpp
 
 HEADERS += \
-	barwidget.h \
-	circlelivewidget.h \
-	clockwidget.h \
 	mainwindow.h \
 	modelrepository.h \
 	regionform.h \
-	stationwidget.h
+	../ui/barwidget.h \
+	../ui/circlelivewidget.h \
+	../ui/clockwidget.h \
+	../ui/regularswitchwidget.h \
+	../ui/stationwidget.h \
+	../ui/signalwidget.h
 
 FORMS += \
 	mainwindow.ui \
