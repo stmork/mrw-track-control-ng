@@ -8,11 +8,11 @@
 #ifndef MRW_UI_SIGNALWIDGET_H
 #define MRW_UI_SIGNALWIDGET_H
 
-#include <QWidget>
+#include <ui/basewidget.h>
 
 namespace mrw::ui
 {
-	class SignalWidget : public QWidget
+	class SignalWidget : public BaseWidget
 	{
 		Q_OBJECT
 

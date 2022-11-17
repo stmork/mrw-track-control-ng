@@ -8,13 +8,13 @@
 #ifndef MRW_UI_CLOCKWIDGET_H
 #define MRW_UI_CLOCKWIDGET_H
 
-#include <QObject>
-#include <QWidget>
 #include <QTimer>
+
+#include <ui/basewidget.h>
 
 namespace mrw::ui
 {
-	class ClockWidget : public QWidget
+	class ClockWidget : public BaseWidget
 	{
 		Q_OBJECT
 

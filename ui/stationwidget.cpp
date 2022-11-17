@@ -11,7 +11,7 @@ using namespace mrw::ui;
 
 const QPen StationWidget::pen(Qt::white, 3.0);
 
-StationWidget::StationWidget(QWidget * parent) : QWidget(parent)
+StationWidget::StationWidget(QWidget * parent) : BaseWidget(parent)
 {
 }
 

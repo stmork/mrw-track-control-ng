@@ -10,7 +10,7 @@
 
 using namespace mrw::ui;
 
-ClockWidget::ClockWidget(QWidget * parent) : QWidget(parent)
+ClockWidget::ClockWidget(QWidget * parent) : BaseWidget(parent)
 {
 	timer.setInterval(1000);
 	timer.setSingleShot(false);

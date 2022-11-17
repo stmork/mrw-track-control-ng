@@ -9,7 +9,7 @@
 
 using namespace mrw::ui;
 
-SignalWidget::SignalWidget(QWidget * parent) : QWidget(parent)
+SignalWidget::SignalWidget(QWidget * parent) : BaseWidget(parent)
 {
 }
 

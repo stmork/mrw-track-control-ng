@@ -12,6 +12,7 @@ SOURCES += \
 	mainwindow.cpp \
 	modelrepository.cpp \
 	regionform.cpp \
+	../ui/basewidget.cpp \
 	../ui/barwidget.cpp \
 	../ui/circlelivewidget.cpp \
 	../ui/clockwidget.cpp \
@@ -23,6 +24,7 @@ HEADERS += \
 	mainwindow.h \
 	modelrepository.h \
 	regionform.h \
+	../ui/basewidget.h \
 	../ui/barwidget.h \
 	../ui/circlelivewidget.h \
 	../ui/clockwidget.h \

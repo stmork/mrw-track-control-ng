@@ -8,12 +8,13 @@
 #ifndef MRW_UI_CIRCLELIVEWIDGET_H
 #define MRW_UI_CIRCLELIVEWIDGET_H
 
-#include <QObject>
-#include <QWidget>
 #include <QTimer>
+
+#include <ui/basewidget.h>
+
 namespace mrw::ui
 {
-	class CircleLiveWidget : public QWidget
+	class CircleLiveWidget : public BaseWidget
 	{
 		Q_OBJECT
 

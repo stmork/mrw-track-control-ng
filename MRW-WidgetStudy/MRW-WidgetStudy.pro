@@ -12,6 +12,7 @@ SOURCES += \
 	mainwindow.cpp \
 	regularswitchcontroller.cpp \
 	signalcontroller.cpp \
+	../ui/basewidget.cpp \
 	../ui/regularswitchwidget.cpp \
 	../ui/signalwidget.cpp
 
@@ -19,6 +20,7 @@ HEADERS += \
 	mainwindow.h \
 	regularswitchcontroller.h \
 	signalcontroller.h \
+	../ui/basewidget.h \
 	../ui/regularswitchwidget.h \
 	../ui/signalwidget.h
 

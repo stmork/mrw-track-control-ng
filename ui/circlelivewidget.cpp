@@ -11,7 +11,7 @@ using namespace mrw::ui;
 
 const QPen CircleLiveWidget::pen(Qt::white, 10.0);
 
-CircleLiveWidget::CircleLiveWidget(QWidget * parent) : QWidget(parent)
+CircleLiveWidget::CircleLiveWidget(QWidget * parent) : BaseWidget(parent)
 {
 	timer.setInterval(1000);
 	timer.setSingleShot(false);

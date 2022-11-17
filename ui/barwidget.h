@@ -8,12 +8,11 @@
 #ifndef MRW_UI_BARWIDGET_H
 #define MRW_UI_BARWIDGET_H
 
-#include <QObject>
-#include <QWidget>
+#include <ui/basewidget.h>
 
 namespace mrw::ui
 {
-	class BarWidget : public QWidget
+	class BarWidget : public BaseWidget
 	{
 		Q_OBJECT
 	public:

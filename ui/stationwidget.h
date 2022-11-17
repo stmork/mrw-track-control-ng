@@ -8,12 +8,11 @@
 #ifndef MRW_UI_STATIONWIDGET_H
 #define MRW_UI_STATIONWIDGET_H
 
-#include <QObject>
-#include <QWidget>
+#include <ui/basewidget.h>
 
 namespace mrw::ui
 {
-	class StationWidget : public QWidget
+	class StationWidget : public BaseWidget
 	{
 		Q_OBJECT
 

@@ -9,7 +9,7 @@
 
 using namespace mrw::ui;
 
-BarWidget::BarWidget(QWidget * parent) : QWidget(parent)
+BarWidget::BarWidget(QWidget * parent) : BaseWidget(parent)
 {
 }
 

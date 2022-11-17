@@ -11,6 +11,7 @@ include(../common.pri)
 
 SOURCES += \
 	barwidget.cpp \
+	basewidget.cpp \
 	circlelivewidget.cpp \
 	clockwidget.cpp \
 	regularswitchwidget.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 	stationwidget.cpp
 HEADERS += \
 	barwidget.h \
+	basewidget.h \
 	circlelivewidget.h \
 	clockwidget.h \
 	regularswitchwidget.h \

@@ -30,17 +30,17 @@ RegionForm::RegionForm(mrw::model::Region * region, QWidget * parent) :
 	{
 		SignalWidget * widget = new SignalWidget(ui->controlWidget);
 
-		widget->setFixedSize(40, 40);
-		widget->move(signal->position() * 40);
+		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
+		widget->move(signal->position() * BaseWidget::SIZE);
 	}
 
 	region->parts<RegularSwitch>(region_switches);
-	for (RegularSwitch * signal : region_switches)
+	for (RegularSwitch * part : region_switches)
 	{
 		RegularSwitchWidget * widget = new RegularSwitchWidget(ui->controlWidget);
 
-		widget->setFixedSize(40, 40);
-		widget->move(signal->position() * 40);
+		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
+		widget->move(part->position() * BaseWidget::SIZE);
 	}
 }
 
