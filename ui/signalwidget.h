@@ -20,28 +20,15 @@ namespace mrw::ui
 	private:
 		mrw::ctrl::SignalController * controller = nullptr;
 
-		bool direction      = true;
-		bool shunting       = false;
-		bool distant_signal = false;
-		bool main_signal    = true;
-
 	public:
 		explicit SignalWidget(
 			QWidget           *           parent     = nullptr,
 			mrw::ctrl::SignalController * controller = nullptr);
 
 		void setController(mrw::ctrl::SignalController * ctrl);
-		void setDirection(const bool dir = true);
-		void setShunting(const bool shunt = true);
-		void setDistant(const bool distant = true);
-		void setMain(const bool main = true);
 
 	protected:
 		void paintEvent(QPaintEvent * event) override;
-		bool isDirection() const;
-		bool hasShunting() const;
-		bool hasDistant() const;
-		bool hasMain() const;
 	};
 }
 

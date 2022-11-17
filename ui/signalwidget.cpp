@@ -23,26 +23,6 @@ void SignalWidget::setController(SignalController * ctrl)
 	controller = ctrl;
 }
 
-void SignalWidget::setShunting(const bool shunt)
-{
-	shunting = shunt;
-}
-
-void SignalWidget::setDistant(const bool distant)
-{
-	distant_signal = distant;
-}
-
-void SignalWidget::setMain(const bool main)
-{
-	main_signal = main;
-}
-
-void SignalWidget::setDirection(const bool dir)
-{
-	direction = dir;
-}
-
 static const QVector<QPointF> points
 {
 	QPointF(  -5.0,   50.0),
@@ -58,6 +38,8 @@ void SignalWidget::paintEvent(QPaintEvent * event)
 	QPainter     painter(this);
 	QPainterPath path;
 	QFont        font = painter.font();
+
+	Q_ASSERT(controller != nullptr);
 
 	const int xSize = size().width();
 	const int ySize = size().height();
@@ -77,11 +59,11 @@ void SignalWidget::paintEvent(QPaintEvent * event)
 	painter.setFont(font);
 	painter.setPen(Qt::yellow);
 	painter.drawText(QRectF(
-			isDirection() ? -20 : -100,
-			isDirection() ? -80 : 30, 120, 50),
+			controller->isDirection() ? -20 : -100,
+			controller->isDirection() ? -80 : 30, 120, 50),
 		Qt::AlignCenter | Qt::AlignHCenter, "N3");
 
-	if (!isDirection())
+	if (!controller->isDirection())
 	{
 		// Draw from left to right but rotate 180° if counter direction.
 		painter.scale(-1.0f, -1.0f);
@@ -99,44 +81,24 @@ void SignalWidget::paintEvent(QPaintEvent * event)
 
 	pen.setWidth(10.0);
 	painter.setPen(pen);
-	painter.drawLine(-30, 55, hasDistant() || hasShunting() ? 30 : 70, 55);
+	painter.drawLine(-30, 55, controller->hasDistant() || controller->hasShunting() ? 30 : 70, 55);
 
-	if (hasShunting())
+	if (controller->hasShunting())
 	{
 		painter.fillRect(10, 35, 40, 40, Qt::red);
 	}
-	else if (hasDistant())
+	else if (controller->hasDistant())
 	{
 		path.addPolygon(points);
 		path.closeSubpath();
 		painter.fillPath(path, QBrush(Qt::green));
 	}
 
-	if (hasMain())
+	if (controller->hasMain())
 	{
 		pen.setWidth(1);
 		painter.setPen(pen);
 		painter.setBrush(QBrush(Qt::red));
 		painter.drawEllipse(50, 35, 40, 40);
 	}
-}
-
-bool SignalWidget::isDirection() const
-{
-	return direction;
-}
-
-bool SignalWidget::hasShunting() const
-{
-	return shunting;
-}
-
-bool SignalWidget::hasDistant() const
-{
-	return distant_signal || (!hasMain());
-}
-
-bool SignalWidget::hasMain() const
-{
-	return main_signal;
 }

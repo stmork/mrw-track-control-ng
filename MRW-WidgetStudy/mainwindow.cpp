@@ -55,18 +55,25 @@ MainWindow::MainWindow(QWidget * parent)
 	ui->signalWidget2->setController(&mock_ss2);
 	ui->signalWidget3->setController(&mock_ss3);
 
-	ui->signal_backward_paired_shunt->setDirection(false);
-	ui->signal_backward_paired_shunt->setDistant(true);
-	ui->signal_backward_paired_shunt->setShunting(true);
-	ui->signal_backward_paired->setDirection(false);
-	ui->signal_backward_paired->setDistant(true);
-	ui->signal_backward_single->setDirection(false);
-	ui->signal_forward_single->setDirection(true);
-	ui->signal_forward_paired->setDirection(true);
-	ui->signal_forward_paired->setDistant(true);
-	ui->signal_forward_paired_shunt->setDirection(true);
-	ui->signal_forward_paired_shunt->setDistant(true);
-	ui->signal_forward_paired_shunt->setShunting(true);
+	mock_sb1.setDirection(false);
+	mock_sb1.setDistant(true);
+	mock_sb1.setShunting(true);
+	mock_sb2.setDirection(false);
+	mock_sb2.setDistant(true);
+	mock_sb3.setDirection(false);
+	mock_sb4.setDirection(true);
+	mock_sb5.setDirection(true);
+	mock_sb5.setDistant(true);
+	mock_sb6.setDirection(true);
+	mock_sb6.setDistant(true);
+	mock_sb6.setShunting(true);
+
+	ui->signal_backward_paired_shunt->setController(&mock_sb1);
+	ui->signal_backward_paired->setController(&mock_sb2);
+	ui->signal_backward_single->setController(&mock_sb3);
+	ui->signal_forward_single->setController(&mock_sb4);
+	ui->signal_forward_paired->setController(&mock_sb5);
+	ui->signal_forward_paired_shunt->setController(&mock_sb6);
 }
 
 MainWindow::~MainWindow()
