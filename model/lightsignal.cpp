@@ -76,7 +76,7 @@ void LightSignal::findPair(const std::vector<LightSignal *> & light_signals)
 		for (LightSignal * signal : light_signals)
 		{
 			if ((signal->signal_type == DISTANT_SIGNAL) &&
-				(direction == signal->direction))
+				(signal_direction == signal->signal_direction))
 			{
 				main_distant_pair = signal;
 			}

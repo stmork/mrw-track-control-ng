@@ -50,3 +50,8 @@ bool SignalControllerMock::hasMain() const
 {
 	return main_signal;
 }
+
+QString SignalControllerMock::name() const
+{
+	return isDirection() ? "N3" : "P3";
+}

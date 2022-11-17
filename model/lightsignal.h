@@ -43,7 +43,6 @@ namespace mrw::model
 
 		Controller      *     signal_controller = nullptr;
 		MultiplexConnection * mux_connection    = nullptr;
-		LightSignal     *     main_distant_pair = nullptr;
 
 	public:
 		explicit LightSignal(
@@ -91,21 +90,6 @@ namespace mrw::model
 		inline size_t usedPins() const
 		{
 			return lights;
-		}
-
-		/**
-		 * If there is a combined signal (main and distant) counting in the
-		 * same direction this method returns the paired LightSignal. This
-		 * has some implications:
-		 * 1. This instance has to bei a main signal.
-		 * 2. The paired signal is a distant signal.
-		 * 3. Both are LightSignal instances.
-		 *
-		 * @return The paired distant LightSignal.
-		 */
-		inline LightSignal * pair() const
-		{
-			return main_distant_pair;
 		}
 
 	private:

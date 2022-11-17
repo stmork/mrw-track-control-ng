@@ -45,8 +45,10 @@ namespace mrw::model
 		};
 
 	protected:
+		Signal     *        main_distant_pair = nullptr;
+
 		/** The orientation referenced to the counting direction. */
-		const bool          direction;
+		const bool          signal_direction;
 
 		/** The signal type. */
 		const SignalType    signal_type;
@@ -59,6 +61,31 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element,
 			const SignalType      type);
+
+		inline bool direction() const
+		{
+			return signal_direction;
+		}
+
+		inline SignalType type() const
+		{
+			return signal_type;
+		}
+
+		/**
+		 * If there is a combined signal (main and distant) counting in the
+		 * same direction this method returns the paired LightSignal. This
+		 * has some implications:
+		 * 1. This instance has to bei a main signal.
+		 * 2. The paired signal is a distant signal.
+		 * 3. Both are LightSignal instances.
+		 *
+		 * @return The paired distant LightSignal.
+		 */
+		inline Signal * pair() const
+		{
+			return main_distant_pair;
+		}
 
 		/**
 		 * This method sets the logical coordinates for the track control

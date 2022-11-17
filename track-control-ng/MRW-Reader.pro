@@ -12,6 +12,8 @@ SOURCES += \
 	mainwindow.cpp \
 	modelrepository.cpp \
 	regionform.cpp \
+	../ctrl/signalcontroller.cpp \
+	../ctrl/signalcontrollerproxy.cpp \
 	../ui/basewidget.cpp \
 	../ui/barwidget.cpp \
 	../ui/circlelivewidget.cpp \
@@ -24,6 +26,8 @@ HEADERS += \
 	mainwindow.h \
 	modelrepository.h \
 	regionform.h \
+	../ctrl/signalcontroller.h \
+	../ctrl/signalcontrollerproxy.h \
 	../ui/basewidget.h \
 	../ui/barwidget.h \
 	../ui/circlelivewidget.h \

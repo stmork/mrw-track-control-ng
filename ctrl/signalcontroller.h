@@ -23,6 +23,7 @@ namespace mrw::ctrl
 		virtual bool hasShunting() const = 0;
 		virtual bool hasDistant() const = 0;
 		virtual bool hasMain() const = 0;
+		virtual QString name() const = 0;
 	};
 }
 

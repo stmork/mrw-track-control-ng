@@ -61,7 +61,7 @@ void SignalWidget::paintEvent(QPaintEvent * event)
 	painter.drawText(QRectF(
 			controller->isDirection() ? -20 : -100,
 			controller->isDirection() ? -80 : 30, 120, 50),
-		Qt::AlignCenter | Qt::AlignHCenter, "N3");
+		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
 
 	if (!controller->isDirection())
 	{

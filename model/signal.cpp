@@ -30,7 +30,7 @@ Signal::Signal(
 	const QDomElement  &  element,
 	const SignalType      type) :
 	AssemblyPart(model_railway, element),
-	direction(ModelRailway::boolean(element, "inZaehlrichtung")),
+	signal_direction(ModelRailway::boolean(element, "inZaehlrichtung")),
 	signal_type(type)
 {
 }
@@ -46,15 +46,15 @@ QString Signal::symbol() const
 	switch (signal_type)
 	{
 	case MAIN_SIGNAL:
-		type_descr = direction ? " --O" : "O-- ";
+		type_descr = signal_direction ? " --O" : "O-- ";
 		break;
 
 	case DISTANT_SIGNAL:
-		type_descr = direction ? " -o " : " o- ";
+		type_descr = signal_direction ? " -o " : " o- ";
 		break;
 
 	case SHUNT_SIGNAL:
-		type_descr = direction ? " ]  " : "  [ ";
+		type_descr = signal_direction ? " ]  " : "  [ ";
 		break;
 	}
 	return type_descr;

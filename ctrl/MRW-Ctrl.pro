@@ -12,10 +12,12 @@ include(../common.pri)
 SOURCES +=  \
 	regularswitchcontroller.cpp \
 	signalcontroller.cpp \
-	signalcontrollermock.cpp
+	signalcontrollermock.cpp \
+	signalcontrollerproxy.cpp
 HEADERS +=  \
 	regularswitchcontroller.h \
 	signalcontroller.h \
-	signalcontrollermock.h
+	signalcontrollermock.h \
+	signalcontrollerproxy.h
 
 QMAKE_CLEAN         += $$TARGET

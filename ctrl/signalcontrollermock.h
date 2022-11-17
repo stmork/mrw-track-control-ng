@@ -34,6 +34,7 @@ namespace mrw::ctrl
 		virtual bool hasShunting() const override;
 		virtual bool hasDistant() const override;
 		virtual bool hasMain() const override;
+		virtual QString name() const override;
 	};
 }
 

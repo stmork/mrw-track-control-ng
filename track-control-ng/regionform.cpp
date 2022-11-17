@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <ctrl/signalcontrollerproxy.h>
+
 #include <ui/signalwidget.h>
 #include <ui/regularswitchwidget.h>
 
@@ -10,6 +12,7 @@
 #include "ui_regionform.h"
 
 using namespace mrw::model;
+using namespace mrw::ctrl;
 using namespace mrw::ui;
 
 // set black background
@@ -28,8 +31,10 @@ RegionForm::RegionForm(mrw::model::Region * region, QWidget * parent) :
 	region->parts<Signal>(region_signals);
 	for (Signal * signal : region_signals)
 	{
-		SignalWidget * widget = new SignalWidget(ui->controlWidget);
+		SignalControllerProxy * ctrl   = new SignalControllerProxy(this);
+		SignalWidget *          widget = new SignalWidget(ui->controlWidget, ctrl);
 
+		ctrl->setSignal(signal);
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
 		widget->move(signal->position() * BaseWidget::SIZE);
 	}
