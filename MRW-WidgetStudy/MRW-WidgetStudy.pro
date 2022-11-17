@@ -10,16 +10,18 @@ include(../common.pri)
 SOURCES += \
 	main.cpp \
 	mainwindow.cpp \
-	regularswitchcontroller.cpp \
-	signalcontroller.cpp \
+	../ctrl/regularswitchcontroller.cpp \
+	../ctrl/signalcontroller.cpp \
+	../ctrl/signalcontrollermock.cpp \
 	../ui/basewidget.cpp \
 	../ui/regularswitchwidget.cpp \
 	../ui/signalwidget.cpp
 
 HEADERS += \
 	mainwindow.h \
-	regularswitchcontroller.h \
-	signalcontroller.h \
+	../ctrl/regularswitchcontroller.h \
+	../ctrl/signalcontroller.h \
+	../ctrl/signalcontrollermock.h \
 	../ui/basewidget.h \
 	../ui/regularswitchwidget.h \
 	../ui/signalwidget.h

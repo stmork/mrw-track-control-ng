@@ -11,6 +11,7 @@
 #include <QMainWindow>
 
 #include <can/mrwbusservice.h>
+#include <ctrl/signalcontrollermock.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -29,5 +30,17 @@ public:
 
 private:
 	Ui::MainWindow * ui;
+
+	mrw::ctrl::SignalControllerMock mock_ss1;
+	mrw::ctrl::SignalControllerMock mock_ss2;
+	mrw::ctrl::SignalControllerMock mock_ss3;
+
+	mrw::ctrl::SignalControllerMock mock_sb1;
+	mrw::ctrl::SignalControllerMock mock_sb2;
+	mrw::ctrl::SignalControllerMock mock_sb3;
+	mrw::ctrl::SignalControllerMock mock_sb4;
+	mrw::ctrl::SignalControllerMock mock_sb5;
+	mrw::ctrl::SignalControllerMock mock_sb6;
 };
-#endif // MAINWINDOW_H
+
+#endif

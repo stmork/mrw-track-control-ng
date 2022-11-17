@@ -47,10 +47,13 @@ MainWindow::MainWindow(QWidget * parent)
 	ui->right_backward_bottom->setRight();
 	ui->right_backward_bottom->setDirection(true);
 
-	ui->signalWidget1->setShunting();
-	ui->signalWidget2->setDistant();
-	ui->signalWidget3->setShunting();
-	ui->signalWidget3->setMain(false);
+	mock_ss1.setShunting();
+	mock_ss2.setDistant();
+	mock_ss3.setShunting();
+	mock_ss3.setMain(false);
+	ui->signalWidget1->setController(&mock_ss1);
+	ui->signalWidget2->setController(&mock_ss2);
+	ui->signalWidget3->setController(&mock_ss3);
 
 	ui->signal_backward_paired_shunt->setDirection(false);
 	ui->signal_backward_paired_shunt->setDistant(true);

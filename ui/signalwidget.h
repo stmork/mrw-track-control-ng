@@ -9,6 +9,7 @@
 #define MRW_UI_SIGNALWIDGET_H
 
 #include <ui/basewidget.h>
+#include <ctrl/signalcontroller.h>
 
 namespace mrw::ui
 {
@@ -17,14 +18,19 @@ namespace mrw::ui
 		Q_OBJECT
 
 	private:
+		mrw::ctrl::SignalController * controller = nullptr;
+
 		bool direction      = true;
 		bool shunting       = false;
 		bool distant_signal = false;
 		bool main_signal    = true;
 
 	public:
-		explicit SignalWidget(QWidget * parent = nullptr);
+		explicit SignalWidget(
+			QWidget           *           parent     = nullptr,
+			mrw::ctrl::SignalController * controller = nullptr);
 
+		void setController(mrw::ctrl::SignalController * ctrl);
 		void setDirection(const bool dir = true);
 		void setShunting(const bool shunt = true);
 		void setDistant(const bool distant = true);

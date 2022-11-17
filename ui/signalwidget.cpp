@@ -8,9 +8,19 @@
 #include "signalwidget.h"
 
 using namespace mrw::ui;
+using namespace mrw::ctrl;
 
-SignalWidget::SignalWidget(QWidget * parent) : BaseWidget(parent)
+SignalWidget::SignalWidget(
+	QWidget      *     parent,
+	SignalController * ctrl) :
+	BaseWidget(parent),
+	controller(ctrl)
 {
+}
+
+void SignalWidget::setController(SignalController * ctrl)
+{
+	controller = ctrl;
 }
 
 void SignalWidget::setShunting(const bool shunt)
