@@ -21,32 +21,17 @@ MainWindow::MainWindow(QWidget * parent)
 	centralWidget()->setPalette(pal);
 	centralWidget()->show();
 
-	ui->left_forward_top->setLeftHanded();
-	ui->left_forward_top->setLeft();
-	ui->left_forward_top->setDirection(false);
-	ui->right_forward_top->setRightHanded();
-	ui->right_forward_top->setRight();
-	ui->right_forward_top->setDirection(false);
-	ui->left_backward_top->setLeftHanded();
-	ui->left_backward_top->setRight();
-	ui->left_backward_top->setDirection(false);
-	ui->right_backward_top->setRightHanded();
-	ui->right_backward_top->setLeft();
-	ui->right_backward_top->setDirection(false);
+	setupSignals();
+	setupRegularSwitches();
+}
 
-	ui->left_forward_bottom->setRightHanded();
-	ui->left_forward_bottom->setRight();
-	ui->left_forward_bottom->setDirection(true);
-	ui->right_forward_bottom->setLeftHanded();
-	ui->right_forward_bottom->setLeft();
-	ui->right_forward_bottom->setDirection(true);
-	ui->left_backward_bottom->setRightHanded();
-	ui->left_backward_bottom->setLeft();
-	ui->left_backward_bottom->setDirection(true);
-	ui->right_backward_bottom->setLeftHanded();
-	ui->right_backward_bottom->setRight();
-	ui->right_backward_bottom->setDirection(true);
+MainWindow::~MainWindow()
+{
+	delete ui;
+}
 
+void MainWindow::setupSignals()
+{
 	mock_ss1.setShunting();
 	mock_ss2.setDistant();
 	mock_ss3.setShunting();
@@ -76,8 +61,45 @@ MainWindow::MainWindow(QWidget * parent)
 	ui->signal_forward_paired_shunt->setController(&mock_sb6);
 }
 
-MainWindow::~MainWindow()
+void MainWindow::setupRegularSwitches()
 {
-	delete ui;
+	mock_top_lf.setLeftHanded();
+	mock_top_lf.setLeft();
+	mock_top_lf.setDirection(false);
+	mock_top_rf.setRightHanded();
+	mock_top_rf.setRight();
+	mock_top_rf.setDirection(false);
+	mock_top_lb.setLeftHanded();
+	mock_top_lb.setRight();
+	mock_top_lb.setDirection(false);
+	mock_top_rb.setRightHanded();
+	mock_top_rb.setLeft();
+	mock_top_rb.setDirection(false);
+
+	mock_bottom_lf.setRightHanded();
+	mock_bottom_lf.setRight();
+	mock_bottom_lf.setDirection(true);
+	mock_bottom_rf.setLeftHanded();
+	mock_bottom_rf.setLeft();
+	mock_bottom_rf.setDirection(true);
+	mock_bottom_lb.setRightHanded();
+	mock_bottom_lb.setLeft();
+	mock_bottom_lb.setDirection(true);
+	mock_bottom_rb.setLeftHanded();
+	mock_bottom_rb.setRight();
+	mock_bottom_rb.setDirection(true);
+
+	ui->left_forward_top->setController(&mock_top_lf);
+	ui->right_forward_top->setController(&mock_top_rf);
+	ui->left_backward_top->setController(&mock_top_lb);
+	ui->right_backward_top->setController(&mock_top_rb);
+	ui->left_forward_bottom->setController(&mock_bottom_lf);
+	ui->right_forward_bottom->setController(&mock_bottom_rf);
+	ui->left_backward_bottom->setController(&mock_bottom_lb);
+	ui->right_backward_bottom->setController(&mock_bottom_rb);
+
+	ui->switchWidget1->setController(&mock_rss1);
+	ui->switchWidget2->setController(&mock_rss2);
+	ui->switchWidget3->setController(&mock_rss3);
 }
 

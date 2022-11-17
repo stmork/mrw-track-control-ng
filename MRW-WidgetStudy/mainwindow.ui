@@ -17,7 +17,7 @@
    <property name="autoFillBackground">
     <bool>true</bool>
    </property>
-   <widget class="mrw::ui::RegularSwitchWidget" name="widget" native="true">
+   <widget class="mrw::ui::RegularSwitchWidget" name="switchWidget2" native="true">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -37,7 +37,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="switchWidget" native="true">
+   <widget class="mrw::ui::RegularSwitchWidget" name="switchWidget1" native="true">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -47,7 +47,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="widget_4" native="true">
+   <widget class="mrw::ui::RegularSwitchWidget" name="switchWidget3" native="true">
     <property name="geometry">
      <rect>
       <x>50</x>

@@ -18,29 +18,11 @@ RegularSwitchWidget::RegularSwitchWidget(
 {
 }
 
-void RegularSwitchWidget::setLeft(const bool left)
+void mrw::ui::RegularSwitchWidget::setController(mrw::ctrl::RegularSwitchController * ctrl)
 {
-	switch_state = left ? SWITCH_STATE_LEFT : SWITCH_STATE_RIGHT;
-}
+	Q_ASSERT(controller == nullptr);
 
-void RegularSwitchWidget::setRight(const bool right)
-{
-	switch_state = right ? SWITCH_STATE_RIGHT : SWITCH_STATE_LEFT;
-}
-
-void RegularSwitchWidget::setLeftHanded(const bool left)
-{
-	left_handed = left;
-}
-
-void RegularSwitchWidget::setRightHanded(const bool right)
-{
-	left_handed = !right;
-}
-
-void RegularSwitchWidget::setDirection(const bool dir)
-{
-	direction = dir;
+	controller = ctrl;
 }
 
 static const QVector<QPointF> points_active
@@ -67,6 +49,8 @@ void RegularSwitchWidget::paintEvent(QPaintEvent * event)
 	QPainterPath path;
 	QFont        font = painter.font();
 
+	Q_ASSERT(controller != nullptr);
+
 	const int xSize = size().width();
 	const int ySize = size().height();
 
@@ -83,23 +67,23 @@ void RegularSwitchWidget::paintEvent(QPaintEvent * event)
 	painter.setFont(font);
 	painter.setPen(Qt::yellow);
 	painter.drawText(QRectF(
-			isDirection() ? -100 : -20,
-			isRightHanded() ? -80 : 30, 120, 50),
-		Qt::AlignCenter | Qt::AlignHCenter, "207");
+			controller->isDirection() ? -100 : -20,
+			controller->isRightHanded() ? -80 : 30, 120, 50),
+		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
 
-	if (isRightHanded())
+	if (controller->isRightHanded())
 	{
 		// Draw always left handed but invert vertically if right handed.
 		painter.scale( 1.0f, -1.0f);
 	}
-	if (!isDirection())
+	if (!controller->isDirection())
 	{
 		// Draw from left to right but invert horizontally if counter direction.
-		painter.scale(-1.0f,  1.0f);
+		painter.scale(-1.0f, -1.0f);
 	}
 
 	// Draw curved part of switch
-	path.addPolygon(isLeft() ? points_active : points_inactive);
+	path.addPolygon(isTurnOut() ? points_active : points_inactive);
 	path.closeSubpath();
 	painter.fillPath(path, QBrush(Qt::green));
 
@@ -112,25 +96,10 @@ void RegularSwitchWidget::paintEvent(QPaintEvent * event)
 
 	// Draw straight part of switch
 	painter.setPen(QPen(Qt::red, 20.0));
-	painter.drawLine( isRight() ? -10.0f : 70.0f, 0.0f, 100.0f, 0.0f);
+	painter.drawLine(!isTurnOut() ? -10.0f : 70.0f, 0.0f, 100.0f, 0.0f);
 }
 
-bool RegularSwitchWidget::isLeft() const
+bool mrw::ui::RegularSwitchWidget::isTurnOut() const
 {
-	return ((switch_state == SWITCH_STATE_LEFT) != left_handed) != direction;
-}
-
-bool RegularSwitchWidget::isRight() const
-{
-	return ((switch_state == SWITCH_STATE_RIGHT) != left_handed) != direction;
-}
-
-bool RegularSwitchWidget::isRightHanded() const
-{
-	return !left_handed;
-}
-
-bool RegularSwitchWidget::isDirection() const
-{
-	return direction;
+	return controller->isLeft() != controller->isRightHanded();
 }

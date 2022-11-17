@@ -24,6 +24,12 @@ namespace mrw::ctrl
 		RegularSwitchControllerProxy(QObject * parent = nullptr);
 
 		void setSwitch(mrw::model::RegularSwitch * new_part);
+
+		virtual bool isLeft() const override;
+		virtual bool isRight() const override;
+		virtual bool isRightHanded() const override;
+		virtual bool isDirection() const override;
+		virtual QString name() const override;
 	};
 }
 

@@ -8,6 +8,7 @@
 #ifndef MRW_MODEL_REGULARSWITCH_H
 #define MRW_MODEL_REGULARSWITCH_H
 
+#include <can/commands.h>
 #include <model/abstractswitch.h>
 
 namespace mrw::model
@@ -35,10 +36,22 @@ namespace mrw::model
 		RailPart   *   b = nullptr;
 		RailPart   *   c = nullptr;
 
+		mrw::can::SwitchState  switch_state = mrw::can::SwitchState::SWITCH_STATE_LEFT;
+
 	public:
 		explicit RegularSwitch(
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
+
+		inline bool isRightHanded() const
+		{
+			return right_branch;
+		}
+
+		inline mrw::can::SwitchState state() const
+		{
+			return switch_state;
+		}
 
 		bool    valid() const override;
 		QString toString() const override;

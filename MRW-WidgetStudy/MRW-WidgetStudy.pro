@@ -11,6 +11,7 @@ SOURCES += \
 	main.cpp \
 	mainwindow.cpp \
 	../ctrl/regularswitchcontroller.cpp \
+	../ctrl/regularswitchcontrollermock.cpp \
 	../ctrl/signalcontroller.cpp \
 	../ctrl/signalcontrollermock.cpp \
 	../ui/basewidget.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
 HEADERS += \
 	mainwindow.h \
 	../ctrl/regularswitchcontroller.h \
+	../ctrl/regularswitchcontrollermock.h \
 	../ctrl/signalcontroller.h \
 	../ctrl/signalcontrollermock.h \
 	../ui/basewidget.h \

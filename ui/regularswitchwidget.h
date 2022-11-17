@@ -19,30 +19,20 @@ namespace mrw::ui
 		Q_OBJECT
 
 	private:
-		bool left_handed = true;
-		bool direction = true;
-
 		mrw::ctrl::RegularSwitchController * controller = nullptr;
-		mrw::can::SwitchState switch_state = mrw::can::SWITCH_STATE_LEFT;
 
 	public:
 		explicit RegularSwitchWidget(
 			QWidget               *              parent = nullptr,
 			mrw::ctrl::RegularSwitchController * controller = nullptr);
 
-		void setLeft(const bool left = true);
-		void setRight(const bool right = true);
-		void setLeftHanded(const bool left = true);
-		void setRightHanded(const bool right = true);
-		void setDirection(const bool dir = true);
+		void setController(mrw::ctrl::RegularSwitchController * ctrl);
 
 	protected:
 		void paintEvent(QPaintEvent * event) override;
 
-		bool isLeft() const;
-		bool isRight() const;
-		bool isRightHanded() const;
-		bool isDirection() const;
+	private:
+		bool isTurnOut() const;
 	};
 }
 
