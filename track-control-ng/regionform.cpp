@@ -3,6 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/signalcontrollerproxy.h>
 
 #include <ui/signalwidget.h>
@@ -32,7 +33,7 @@ RegionForm::RegionForm(mrw::model::Region * region, QWidget * parent) :
 	for (Signal * signal : region_signals)
 	{
 		SignalControllerProxy * ctrl   = new SignalControllerProxy(this);
-		SignalWidget *          widget = new SignalWidget(ui->controlWidget, ctrl);
+		SignalWidget      *     widget = new SignalWidget(ui->controlWidget, ctrl);
 
 		ctrl->setSignal(signal);
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
@@ -42,8 +43,10 @@ RegionForm::RegionForm(mrw::model::Region * region, QWidget * parent) :
 	region->parts<RegularSwitch>(region_switches);
 	for (RegularSwitch * part : region_switches)
 	{
-		RegularSwitchWidget * widget = new RegularSwitchWidget(ui->controlWidget);
+		RegularSwitchControllerProxy * ctrl   = new RegularSwitchControllerProxy(this);
+		RegularSwitchWidget      *     widget = new RegularSwitchWidget(ui->controlWidget, ctrl);
 
+		ctrl->setSwitch(part);
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
 		widget->move(part->position() * BaseWidget::SIZE);
 	}

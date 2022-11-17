@@ -10,7 +10,11 @@
 using namespace mrw::can;
 using namespace mrw::ui;
 
-RegularSwitchWidget::RegularSwitchWidget(QWidget * parent) : BaseWidget(parent)
+RegularSwitchWidget::RegularSwitchWidget(
+	QWidget               *              parent,
+	mrw::ctrl::RegularSwitchController * ctrl) :
+	BaseWidget(parent),
+	controller(ctrl)
 {
 }
 

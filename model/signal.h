@@ -45,7 +45,7 @@ namespace mrw::model
 		};
 
 	protected:
-		Signal     *        main_distant_pair = nullptr;
+		Signal       *      main_distant_pair = nullptr;
 
 		/** The orientation referenced to the counting direction. */
 		const bool          signal_direction;

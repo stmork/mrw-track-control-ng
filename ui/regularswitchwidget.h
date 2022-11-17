@@ -10,6 +10,7 @@
 
 #include <can/commands.h>
 #include <ui/basewidget.h>
+#include <ctrl/regularswitchcontroller.h>
 
 namespace mrw::ui
 {
@@ -21,10 +22,13 @@ namespace mrw::ui
 		bool left_handed = true;
 		bool direction = true;
 
+		mrw::ctrl::RegularSwitchController * controller = nullptr;
 		mrw::can::SwitchState switch_state = mrw::can::SWITCH_STATE_LEFT;
 
 	public:
-		explicit RegularSwitchWidget(QWidget * parent = nullptr);
+		explicit RegularSwitchWidget(
+			QWidget               *              parent = nullptr,
+			mrw::ctrl::RegularSwitchController * controller = nullptr);
 
 		void setLeft(const bool left = true);
 		void setRight(const bool right = true);
