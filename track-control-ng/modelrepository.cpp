@@ -40,6 +40,8 @@ ModelRepository::ModelRepository(const QString & model_name) :
 		railpart_filename = settings_model.value("railparts").toString();
 	}
 
+	// cppcheck-suppress noCopyConstructor
+	// cppcheck-suppress noOperatorEq
 	model = new ModelRailway(model_filename);
 
 	region_map.read(region_filename);
