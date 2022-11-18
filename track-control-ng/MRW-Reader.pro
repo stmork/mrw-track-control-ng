@@ -21,6 +21,7 @@ SOURCES += \
 	../ui/circlelivewidget.cpp \
 	../ui/clockwidget.cpp \
 	../ui/regularswitchwidget.cpp \
+	../ui/sectionwidget.cpp \
 	../ui/stationwidget.cpp \
 	../ui/signalwidget.cpp
 
@@ -38,6 +39,7 @@ HEADERS += \
 	../ui/clockwidget.h \
 	../ui/regularswitchwidget.h \
 	../ui/stationwidget.h \
+	../ui/sectionwidget.h \
 	../ui/signalwidget.h
 
 FORMS += \

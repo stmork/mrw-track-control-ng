@@ -9,6 +9,8 @@
 
 using namespace mrw::ui;
 
+const QStringList BarWidget::colors { "GN", "WS", "RT", "GE", "BL" };
+
 BarWidget::BarWidget(QWidget * parent) : BaseWidget(parent)
 {
 }
@@ -25,9 +27,6 @@ void BarWidget::paint(QPainter & painter)
 	font.setPixelSize(ySize / 3);
 	painter.setPen(Qt::white);
 	painter.setFont(font);
-
-	// TODO: Make static
-	const QStringList colors { "GN", "WS", "RT", "GE", "BL" };
 
 	for (unsigned c = 0; c < 5; c++)
 	{

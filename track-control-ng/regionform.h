@@ -37,6 +37,7 @@ protected:
 	void changeEvent(QEvent * e) override;
 
 private:
+	void setupSection(mrw::model::Section * section);
 	void setupSignals(mrw::model::Section * section, const bool direction);
 
 	Ui::RegionForm * ui;

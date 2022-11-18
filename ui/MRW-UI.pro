@@ -15,6 +15,7 @@ SOURCES += \
 	circlelivewidget.cpp \
 	clockwidget.cpp \
 	regularswitchwidget.cpp \
+	sectionwidget.cpp \
 	signalwidget.cpp \
 	stationwidget.cpp
 HEADERS += \
@@ -23,6 +24,7 @@ HEADERS += \
 	circlelivewidget.h \
 	clockwidget.h \
 	regularswitchwidget.h \
+	sectionwidget.h \
 	signalwidget.h \
 	stationwidget.h
 

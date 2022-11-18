@@ -5,26 +5,22 @@
 
 #pragma once
 
-#ifndef MRW_UI_BARWIDGET_H
-#define MRW_UI_BARWIDGET_H
+#ifndef MRW_UI_SECTIONWIDGET_H
+#define MRW_UI_SECTIONWIDGET_H
 
 #include <ui/basewidget.h>
+#include <model/rail.h>
 
 namespace mrw::ui
 {
-	class BarWidget : public BaseWidget
+	class SectionWidget : public mrw::ui::BaseWidget
 	{
 		Q_OBJECT
-
 	public:
-		explicit BarWidget(QWidget * parent = nullptr);
+		explicit SectionWidget(QWidget * parent);
 
 	protected:
 		void paint(QPainter & painter) override;
-
-	private:
-		static const QStringList colors;
-
 	};
 }
 

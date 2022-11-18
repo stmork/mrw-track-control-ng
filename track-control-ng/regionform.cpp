@@ -8,6 +8,7 @@
 
 #include <ui/signalwidget.h>
 #include <ui/regularswitchwidget.h>
+#include <ui/sectionwidget.h>
 
 #include "regionform.h"
 #include "ui_regionform.h"
@@ -33,6 +34,7 @@ RegionForm::RegionForm(mrw::model::Region * region, QWidget * parent) :
 	{
 		Section * section = region->section(s);
 
+		setupSection(section);
 		setupSignals(section, true);
 		setupSignals(section, false);
 	}
@@ -64,6 +66,23 @@ void RegionForm::changeEvent(QEvent * e)
 		break;
 	default:
 		break;
+	}
+}
+
+void RegionForm::setupSection(Section * section)
+{
+	std::vector<Rail *> section_signals;
+
+	section->parts<Rail>(section_signals);
+
+	if (section_signals.size() > 0)
+	{
+		// TODO: Implement SectionController!
+//		SignalControllerProxy * ctrl   = new SignalControllerProxy(section, direction, this);
+		SectionWidget      *     widget = new SectionWidget(ui->controlWidget);
+
+		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
+		widget->move(section_signals[0]->position() * BaseWidget::SIZE);
 	}
 }
 
