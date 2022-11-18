@@ -8,6 +8,7 @@ QT       += gui widgets
 include(../common.pri)
 
 SOURCES += \
+	doublecrossswitchstudy.cpp \
 	main.cpp \
 	mainwindow.cpp \
 	../ctrl/regularswitchcontroller.cpp \
@@ -18,9 +19,13 @@ SOURCES += \
 	../ui/doublecrossswitchwidget.cpp \
 	../ui/regularswitchwidget.cpp \
 	../ui/sectionwidget.cpp \
-	../ui/signalwidget.cpp
+	../ui/signalwidget.cpp \
+	sectionstudy.cpp \
+	signalstudy.cpp \
+	switchstudy.cpp
 
 HEADERS += \
+	doublecrossswitchstudy.h \
 	mainwindow.h \
 	../ctrl/regularswitchcontroller.h \
 	../ctrl/regularswitchcontrollermock.h \
@@ -30,10 +35,17 @@ HEADERS += \
 	../ui/doublecrossswitchwidget.h \
 	../ui/regularswitchwidget.h \
 	../ui/sectionwidget.h \
-	../ui/signalwidget.h
+	../ui/signalwidget.h \
+	sectionstudy.h \
+	signalstudy.h \
+	switchstudy.h
 
 FORMS += \
-	mainwindow.ui
+	doublecrossswitchstudy.ui \
+	mainwindow.ui \
+	sectionstudy.ui \
+	signalstudy.ui \
+	switchstudy.ui
 
 LIBS            += -lMRW-Model -lMRW-Util -lMRW-Can
 

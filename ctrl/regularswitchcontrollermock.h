@@ -26,17 +26,18 @@ namespace mrw::ctrl
 	public:
 		RegularSwitchControllerMock(QObject * parent = nullptr);
 
-		void setLeft(const bool left = true);
-		void setRight(const bool right = true);
-		void setLeftHanded(const bool left = true);
-		void setRightHanded(const bool right = true);
-		void setDirection(const bool dir = true);
-
 		virtual bool isLeft() const override;
 		virtual bool isRight() const override;
 		virtual bool isRightHanded() const override;
 		virtual bool isDirection() const override;
 		virtual QString name() const override;
+
+	public slots:
+		void setLeft(const bool left = true);
+		void setRight(const bool right = true);
+		void setLeftHanded(const bool left = true);
+		void setRightHanded(const bool right = true);
+		void setDirection(const bool dir = true);
 	};
 }
 

@@ -17,206 +17,35 @@
    <property name="autoFillBackground">
     <bool>true</bool>
    </property>
-   <widget class="mrw::ui::RegularSwitchWidget" name="switchWidget2" native="true">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>30</y>
-      <width>91</width>
-      <height>191</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="left_forward_top" native="true">
-    <property name="geometry">
-     <rect>
-      <x>250</x>
-      <y>50</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="switchWidget1" native="true">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>250</y>
-      <width>40</width>
-      <height>40</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="switchWidget3" native="true">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>310</y>
-      <width>141</width>
-      <height>61</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="right_forward_top" native="true">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>50</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="left_backward_top" native="true">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>50</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="right_backward_top" native="true">
-    <property name="geometry">
-     <rect>
-      <x>850</x>
-      <y>50</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="right_backward_bottom" native="true">
-    <property name="geometry">
-     <rect>
-      <x>850</x>
-      <y>250</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="left_forward_bottom" native="true">
-    <property name="geometry">
-     <rect>
-      <x>250</x>
-      <y>250</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="right_forward_bottom" native="true">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>250</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::RegularSwitchWidget" name="left_backward_bottom" native="true">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>250</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::SignalWidget" name="signal_backward_paired" native="true">
-    <property name="geometry">
-     <rect>
-      <x>250</x>
-      <y>480</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::SignalWidget" name="signal_forward_single" native="true">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>480</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::SignalWidget" name="signal_forward_paired" native="true">
-    <property name="geometry">
-     <rect>
-      <x>850</x>
-      <y>480</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::SignalWidget" name="signal_backward_single" native="true">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>480</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::SignalWidget" name="signal_forward_paired_shunt" native="true">
-    <property name="geometry">
-     <rect>
-      <x>1050</x>
-      <y>480</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::SignalWidget" name="signal_backward_paired_shunt" native="true">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>480</y>
-      <width>200</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::SignalWidget" name="signalWidget1" native="true">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>250</y>
-      <width>40</width>
-      <height>40</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::SignalWidget" name="signalWidget2" native="true">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>250</y>
-      <width>40</width>
-      <height>40</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="mrw::ui::SignalWidget" name="signalWidget3" native="true">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>250</y>
-      <width>40</width>
-      <height>40</height>
-     </rect>
-    </property>
-   </widget>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="studyWidgets">
+      <property name="currentIndex">
+       <number>3</number>
+      </property>
+      <widget class="SwitchStudy" name="switchTab">
+       <attribute name="title">
+        <string>Weiche</string>
+       </attribute>
+      </widget>
+      <widget class="DoubleCrossSwitchStudy" name="dcSwitchTab">
+       <attribute name="title">
+        <string>DKW</string>
+       </attribute>
+      </widget>
+      <widget class="SignalStudy" name="signalTab">
+       <attribute name="title">
+        <string>Signal</string>
+       </attribute>
+      </widget>
+      <widget class="SectionStudy" name="sectionTab">
+       <attribute name="title">
+        <string>Abschnitt</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -232,15 +61,27 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>mrw::ui::RegularSwitchWidget</class>
+   <class>SwitchStudy</class>
    <extends>QWidget</extends>
-   <header location="global">ui/regularswitchwidget.h</header>
+   <header location="global">switchstudy.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>mrw::ui::SignalWidget</class>
+   <class>DoubleCrossSwitchStudy</class>
    <extends>QWidget</extends>
-   <header location="global">ui/signalwidget.h</header>
+   <header location="global">doublecrossswitchstudy.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SignalStudy</class>
+   <extends>QWidget</extends>
+   <header location="global">signalstudy.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SectionStudy</class>
+   <extends>QWidget</extends>
+   <header location="global">sectionstudy.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

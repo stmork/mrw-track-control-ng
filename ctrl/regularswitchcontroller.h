@@ -24,6 +24,9 @@ namespace mrw::ctrl
 		virtual bool isRightHanded() const = 0;
 		virtual bool isDirection() const = 0;
 		virtual QString name() const = 0;
+
+	signals:
+		void update();
 	};
 }
 
