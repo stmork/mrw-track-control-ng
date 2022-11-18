@@ -7,6 +7,7 @@
 
 using namespace mrw::ctrl;
 
-RegularSwitchController::RegularSwitchController(QObject * parent) : QObject(parent)
+RegularSwitchController::RegularSwitchController(QObject * parent) :
+	QObject(parent)
 {
 }

@@ -57,6 +57,11 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 	connect(
 		&mock, &RegularSwitchControllerMock::update,
 		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
+
+	ui->leftButton->setChecked(true);
+	ui->leftHandedButton->setChecked(true);
+	ui->backwardButton->setChecked(true);
+	ui->freeButton->setChecked(true);
 }
 
 SwitchStudy::~SwitchStudy()

@@ -19,6 +19,9 @@ SectionStudy::SectionStudy(QWidget * parent) :
 
 	ui->symbolWidget->setAutoFillBackground(true);
 	ui->symbolWidget->setPalette(pal);
+
+	ui->backwardButton->setChecked(true);
+	ui->freeButton->setChecked(true);
 }
 
 SectionStudy::~SectionStudy()

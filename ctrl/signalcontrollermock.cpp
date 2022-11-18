@@ -7,28 +7,33 @@
 
 using namespace mrw::ctrl;
 
-SignalControllerMock::SignalControllerMock()
+SignalControllerMock::SignalControllerMock(QObject * parent) :
+	SignalController(parent)
 {
 }
 
 void SignalControllerMock::setShunting(const bool shunt)
 {
 	shunting = shunt;
+	emit update();
 }
 
 void SignalControllerMock::setDistant(const bool distant)
 {
 	distant_signal = distant;
+	emit update();
 }
 
 void SignalControllerMock::setMain(const bool main)
 {
 	main_signal = main;
+	emit update();
 }
 
 void SignalControllerMock::setDirection(const bool dir)
 {
 	direction = dir;
+	emit update();
 }
 
 bool SignalControllerMock::isDirection() const

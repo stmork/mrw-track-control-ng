@@ -23,18 +23,19 @@ namespace mrw::ctrl
 		bool main_signal    = true;
 
 	public:
-		SignalControllerMock();
-
-		void setDirection(const bool dir = true);
-		void setShunting(const bool shunt = true);
-		void setDistant(const bool distant = true);
-		void setMain(const bool main = true);
+		explicit SignalControllerMock(QObject * parent = nullptr);
 
 		virtual bool isDirection() const override;
 		virtual bool hasShunting() const override;
 		virtual bool hasDistant() const override;
 		virtual bool hasMain() const override;
 		virtual QString name() const override;
+
+public slots:
+		void setDirection(const bool dir = true);
+		void setShunting(const bool shunt = true);
+		void setDistant(const bool distant = true);
+		void setMain(const bool main = true);
 	};
 }
 

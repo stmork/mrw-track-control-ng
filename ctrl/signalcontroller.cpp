@@ -7,6 +7,7 @@
 
 using namespace mrw::ctrl;
 
-SignalController::SignalController(QObject * parent) : QObject(parent)
+SignalController::SignalController(QObject * parent) :
+	QObject(parent)
 {
 }
