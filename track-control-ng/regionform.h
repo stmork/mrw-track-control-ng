@@ -16,6 +16,7 @@
 #include <model/signal.h>
 #include <model/section.h>
 #include <model/regularswitch.h>
+#include <model/doublecrossswitch.h>
 
 namespace Ui
 {
@@ -27,7 +28,8 @@ class RegionForm : public QWidget
 	Q_OBJECT
 
 private:
-	std::vector<mrw::model::RegularSwitch *> region_switches;
+	std::vector<mrw::model::RegularSwitch *>     region_reg_switches;
+	std::vector<mrw::model::DoubleCrossSwitch *> region_dc_switches;
 
 public:
 	explicit RegionForm(mrw::model::Region * region, QWidget * parent = nullptr);

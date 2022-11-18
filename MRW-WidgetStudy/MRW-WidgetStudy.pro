@@ -15,7 +15,9 @@ SOURCES += \
 	../ctrl/signalcontroller.cpp \
 	../ctrl/signalcontrollermock.cpp \
 	../ui/basewidget.cpp \
+	../ui/doublecrossswitchwidget.cpp \
 	../ui/regularswitchwidget.cpp \
+	../ui/sectionwidget.cpp \
 	../ui/signalwidget.cpp
 
 HEADERS += \
@@ -25,7 +27,9 @@ HEADERS += \
 	../ctrl/signalcontroller.h \
 	../ctrl/signalcontrollermock.h \
 	../ui/basewidget.h \
+	../ui/doublecrossswitchwidget.h \
 	../ui/regularswitchwidget.h \
+	../ui/sectionwidget.h \
 	../ui/signalwidget.h
 
 FORMS += \

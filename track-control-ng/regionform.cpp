@@ -6,9 +6,10 @@
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/signalcontrollerproxy.h>
 
+#include <ui/sectionwidget.h>
 #include <ui/signalwidget.h>
 #include <ui/regularswitchwidget.h>
-#include <ui/sectionwidget.h>
+#include <ui/doublecrossswitchwidget.h>
 
 #include "regionform.h"
 #include "ui_regionform.h"
@@ -39,13 +40,25 @@ RegionForm::RegionForm(mrw::model::Region * region, QWidget * parent) :
 		setupSignals(section, false);
 	}
 
-	region->parts<RegularSwitch>(region_switches);
-	for (RegularSwitch * part : region_switches)
+	region->parts<RegularSwitch>(region_reg_switches);
+	for (RegularSwitch * part : region_reg_switches)
 	{
 		RegularSwitchControllerProxy * ctrl   = new RegularSwitchControllerProxy(this);
 		RegularSwitchWidget      *     widget = new RegularSwitchWidget(ui->controlWidget, ctrl);
 
 		ctrl->setSwitch(part);
+		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
+		widget->move(part->position() * BaseWidget::SIZE);
+	}
+
+	region->parts<DoubleCrossSwitch>(region_dc_switches);
+	for (DoubleCrossSwitch * part : region_dc_switches)
+	{
+		// TODO: Implement DoubleCrossSwitchControllerProxy!
+//		DoubleCrossSwitchControllerProxy * ctrl   = new DoubleCrossSwitchControllerProxy(this);
+		DoubleCrossSwitchWidget      *     widget = new DoubleCrossSwitchWidget(ui->controlWidget);
+
+//		ctrl->setSwitch(part);
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
 		widget->move(part->position() * BaseWidget::SIZE);
 	}

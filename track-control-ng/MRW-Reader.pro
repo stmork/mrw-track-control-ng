@@ -19,6 +19,7 @@ SOURCES += \
 	../ui/basewidget.cpp \
 	../ui/barwidget.cpp \
 	../ui/circlelivewidget.cpp \
+	../ui/doublecrossswitchwidget.cpp \
 	../ui/clockwidget.cpp \
 	../ui/regularswitchwidget.cpp \
 	../ui/sectionwidget.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
 	../ui/barwidget.h \
 	../ui/circlelivewidget.h \
 	../ui/clockwidget.h \
+	../ui/doublecrossswitchwidget.h \
 	../ui/regularswitchwidget.h \
 	../ui/stationwidget.h \
 	../ui/sectionwidget.h \
