@@ -27,14 +27,14 @@ namespace mrw::ui
 		virtual void paint(QPainter & painter) = 0;
 
 		void rescale(
-				QPainter & painter,
-				const float xSize, const float ySize,
-				const float xPos,
-				const float yPos);
+			QPainter & painter,
+			const float xSize, const float ySize,
+			const float xPos,
+			const float yPos);
 
 		void rescale(
-				QPainter & painter,
-				const float xSize, const float ySize, const bool center = true);
+			QPainter & painter,
+			const float xSize, const float ySize, const bool center = true);
 	};
 }
 

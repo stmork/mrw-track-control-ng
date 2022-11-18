@@ -48,9 +48,6 @@ void RegularSwitchWidget::paint(QPainter & painter)
 
 	Q_ASSERT(controller != nullptr);
 
-	const int xSize = size().width();
-	const int ySize = size().height();
-
 	// Unify coordinates
 	rescale(painter, 200, 200);
 

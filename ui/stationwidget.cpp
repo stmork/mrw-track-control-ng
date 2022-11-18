@@ -23,7 +23,7 @@ void StationWidget::setStationLabel(const QString & label)
 
 void StationWidget::paint(QPainter & painter)
 {
-	QFont        font;
+	QFont font;
 
 	const int xSize = size().width();
 	const int ySize = size().height();

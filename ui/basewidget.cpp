@@ -28,15 +28,17 @@ void mrw::ui::BaseWidget::paintEvent(QPaintEvent * event)
 }
 
 void BaseWidget::rescale(
-		QPainter & painter,
-		const float xSize, const float ySize,
-		const float xPos,  const float yPos)
+	QPainter & painter,
+	const float xSize, const float ySize,
+	const float xPos,  const float yPos)
 {
 	painter.translate(xPos, yPos);
 	painter.scale(width() / xSize, height() / ySize);
 }
 
-void BaseWidget::rescale(QPainter & painter, const float xSize, const float ySize, const bool center)
+void BaseWidget::rescale(
+	QPainter & painter,
+	const float xSize, const float ySize, const bool center)
 {
 	rescale(painter, xSize, ySize, center ? width() * 0.5f : 0.0f, center ? height() * 0.5f : 0.0f);
 }
