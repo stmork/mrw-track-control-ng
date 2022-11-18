@@ -31,7 +31,7 @@ namespace mrw::ctrl
 		virtual bool hasMain() const override;
 		virtual QString name() const override;
 
-public slots:
+	public slots:
 		void setDirection(const bool dir = true);
 		void setShunting(const bool shunt = true);
 		void setDistant(const bool distant = true);

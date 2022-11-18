@@ -40,9 +40,7 @@ namespace mrw::util
 		 * @note The default constructor of the derived class should be
 		 * private to meet the singleton pattern.
 		 */
-		Singleton()
-		{
-		}
+		Singleton() = default;
 
 	public:
 		Singleton(const Singleton & other) = delete;

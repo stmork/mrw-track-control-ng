@@ -40,14 +40,14 @@ SignalStudy::SignalStudy(QWidget * parent) :
 	});
 
 	connect(
-				ui->availableButton_1, &QRadioButton::clicked,
-				&mock, &SignalControllerMock::setShunting);
+		ui->availableButton_1, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setShunting);
 	connect(
-				ui->availableButton_2, &QRadioButton::clicked,
-				&mock, &SignalControllerMock::setDistant);
+		ui->availableButton_2, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setDistant);
 	connect(
-				ui->availableButton_3, &QRadioButton::clicked,
-				&mock, &SignalControllerMock::setMain);
+		ui->availableButton_3, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setMain);
 
 	connect(
 		&mock, &SignalControllerMock::update,

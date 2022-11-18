@@ -9,6 +9,7 @@ CONFIG   += staticlib
 include(../common.pri)
 
 SOURCES += \
+	clockservice.cpp \
 	method.cpp \
 	properties.cpp \
 	settings.cpp \
@@ -16,6 +17,7 @@ SOURCES += \
 	termhandler.cpp
 
 HEADERS += \
+	clockservice.h \
 	constantenumerator.h \
 	constantenumerator.h \
 	method.h \

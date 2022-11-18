@@ -3,10 +3,12 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <QCoreApplication>
 #include <QTest>
 #include <QDebug>
 
 #include <util/stringutil.h>
+#include <util/clockservice.h>
 
 #include "testutil.h"
 #include "testcan.h"
@@ -110,6 +112,7 @@ static int testFlankSwitch()
 
 int main(int argc, char * argv[])
 {
+	QCoreApplication  app(argc, argv);
 	Q_UNUSED(argc)
 	Q_UNUSED(argv)
 

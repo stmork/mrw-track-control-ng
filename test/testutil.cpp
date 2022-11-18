@@ -6,6 +6,7 @@
 #include <unistd.h>
 
 #include <QTest>
+#include <QSignalSpy>
 
 #include <util/method.h>
 #include <util/properties.h>
@@ -13,6 +14,7 @@
 #include <util/singleton.h>
 #include <util/termhandler.h>
 #include <util/stringutil.h>
+#include <util/clockservice.h>
 
 #include "testutil.h"
 
@@ -117,5 +119,20 @@ void TestUtil::testProperties()
 	QCOMPARE(props.at("ss1"), "2");
 	QCOMPARE(props.at("empty"), "");
 	QVERIFY_EXCEPTION_THROWN(props.at("11ss"), std::out_of_range);
-	QVERIFY_EXCEPTION_THROWN(props.at("1"), std::out_of_range);
+	QVERIFY_EXCEPTION_THROWN(props.at("1"),    std::out_of_range);
+}
+
+void TestUtil::testClockService()
+{
+	QSignalSpy spy_1Hz(&ClockService::instance(), &ClockService::Hz1);
+	QSignalSpy spy_2Hz(&ClockService::instance(), &ClockService::Hz2);
+	QSignalSpy spy_4Hz(&ClockService::instance(), &ClockService::Hz4);
+	QSignalSpy spy_8Hz(&ClockService::instance(), &ClockService::Hz8);
+
+	QTest::qWait(2100);
+
+	QCOMPARE(spy_1Hz.count(),  2);
+	QCOMPARE(spy_2Hz.count(),  4);
+	QCOMPARE(spy_4Hz.count(),  8);
+	QCOMPARE(spy_8Hz.count(), 16);
 }

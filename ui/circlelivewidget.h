@@ -20,7 +20,6 @@ namespace mrw::ui
 
 	private:
 		static const QPen pen;
-		QTimer            timer;
 		unsigned          counter = 0;
 
 	public:

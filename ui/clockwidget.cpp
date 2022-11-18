@@ -6,17 +6,15 @@
 #include <QPainter>
 #include <QTime>
 
-#include "clockwidget.h"
+#include <ui/clockwidget.h>
+#include <util/clockservice.h>
 
 using namespace mrw::ui;
+using namespace mrw::util;
 
 ClockWidget::ClockWidget(QWidget * parent) : BaseWidget(parent)
 {
-	timer.setInterval(1000);
-	timer.setSingleShot(false);
-	timer.start();
-
-	connect(&timer, &QTimer::timeout, [this] ()
+	connect(&ClockService::instance(), &ClockService::Hz1, [this] ()
 	{
 		update();
 	});

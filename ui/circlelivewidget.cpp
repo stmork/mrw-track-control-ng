@@ -5,21 +5,19 @@
 
 #include <QPainter>
 
-#include "circlelivewidget.h"
+#include <ui/circlelivewidget.h>
+#include <util/clockservice.h>
 
 using namespace mrw::ui;
+using namespace mrw::util;
 
 const QPen CircleLiveWidget::pen(Qt::white, 10.0);
 
 CircleLiveWidget::CircleLiveWidget(QWidget * parent) : BaseWidget(parent)
 {
-	timer.setInterval(1000);
-	timer.setSingleShot(false);
-	timer.start();
-
-	connect(&timer, &QTimer::timeout, [this] ()
+	connect(&ClockService::instance(), &ClockService::Hz2, [this] ()
 	{
-		update();
+		repaint();
 		counter++;
 	});
 }

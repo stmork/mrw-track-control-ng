@@ -31,6 +31,7 @@ namespace mrw::test
 		void testConstantEnumerator();
 		void testSingleton();
 		void testProperties();
+		void testClockService();
 	};
 }
 

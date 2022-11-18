@@ -18,9 +18,6 @@ namespace mrw::ui
 	{
 		Q_OBJECT
 
-	private:
-		QTimer timer;
-
 	public:
 		explicit ClockWidget(QWidget * parent = nullptr);
 
