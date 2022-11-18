@@ -67,7 +67,7 @@ QString Signal::symbol() const
 
 void Signal::findPair(const std::vector<Signal *> & section_signals)
 {
-	if (signal_type == MAIN_SIGNAL)
+	if (signal_type & MAIN_SIGNAL)
 	{
 		for (Signal * signal : section_signals)
 		{
