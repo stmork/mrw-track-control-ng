@@ -9,6 +9,7 @@
 #define MRW_UI_BASEWIDGET_H
 
 #include <QWidget>
+#include <QPainter>
 
 namespace mrw::ui
 {
@@ -20,6 +21,20 @@ namespace mrw::ui
 		static const int SIZE = 40;
 
 		explicit BaseWidget(QWidget * parent = nullptr);
+
+	protected:
+		virtual void paintEvent(QPaintEvent * event) override;
+		virtual void paint(QPainter & painter) = 0;
+
+		void rescale(
+				QPainter & painter,
+				const float xSize, const float ySize,
+				const float xPos,
+				const float yPos);
+
+		void rescale(
+				QPainter & painter,
+				const float xSize, const float ySize, const bool center = true);
 	};
 }
 

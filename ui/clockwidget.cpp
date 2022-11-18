@@ -22,22 +22,13 @@ ClockWidget::ClockWidget(QWidget * parent) : BaseWidget(parent)
 	});
 }
 
-void ClockWidget::paintEvent(QPaintEvent * event)
+void ClockWidget::paint(QPainter & painter)
 {
-	Q_UNUSED(event)
-
-	QPainter     painter(this);
 	QFont        font = painter.font();
 	QTime        now  = QTime::currentTime();
 
 	const int xSize = size().width();
 	const int ySize = size().height();
-
-	painter.setRenderHint(QPainter::Antialiasing, true);
-
-	// TODO: Remove drawing the orientation later.
-	painter.setPen(Qt::gray);
-	painter.drawRect(0, 0, xSize - 1, ySize - 1);
 
 	// Draw switch name before rotating to prevent rotated font drawing.
 	font.setPixelSize(ySize / 2);

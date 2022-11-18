@@ -29,7 +29,7 @@ namespace mrw::ui
 		void setController(mrw::ctrl::RegularSwitchController * ctrl);
 
 	protected:
-		void paintEvent(QPaintEvent * event) override;
+		void paint(QPainter & painter) override;
 
 	private:
 		bool isTurnOut() const;

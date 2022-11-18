@@ -31,28 +31,15 @@ static const QVector<QPointF> points
 	QPointF(  35.0,   90.0)
 };
 
-void SignalWidget::paintEvent(QPaintEvent * event)
+void SignalWidget::paint(QPainter & painter)
 {
-	Q_UNUSED(event)
-
-	QPainter     painter(this);
 	QPainterPath path;
 	QFont        font = painter.font();
 
 	Q_ASSERT(controller != nullptr);
 
-	const int xSize = size().width();
-	const int ySize = size().height();
-
-	painter.setRenderHint(QPainter::Antialiasing, true);
-
-	// TODO: Remove drawing the orientation later.
-	painter.setPen(Qt::gray);
-	painter.drawRect(0, 0, xSize - 1, ySize - 1);
-
 	// Unify coordinates
-	painter.translate(xSize >> 1, ySize >> 1);
-	painter.scale(xSize / 200.0, ySize / 200.0);
+	rescale(painter, 200, 200);
 
 	// Draw switch name before rotating to prevent rotated font drawing.
 	font.setPixelSize(50);

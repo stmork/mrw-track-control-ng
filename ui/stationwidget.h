@@ -26,7 +26,7 @@ namespace mrw::ui
 		void setStationLabel(const QString & label);
 
 	protected:
-		void paintEvent(QPaintEvent * event) override;
+		void paint(QPainter & painter) override;
 	};
 }
 

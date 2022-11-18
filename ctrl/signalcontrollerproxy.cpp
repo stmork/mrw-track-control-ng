@@ -62,5 +62,5 @@ bool SignalControllerProxy::hasMain() const
 
 QString SignalControllerProxy::name() const
 {
-	return "-";
+	return section_signals[0]->partName();
 }

@@ -25,7 +25,7 @@ namespace mrw::ui
 		explicit ClockWidget(QWidget * parent = nullptr);
 
 	protected:
-		void paintEvent(QPaintEvent * event) override;
+		void paint(QPainter & painter) override;
 	};
 }
 

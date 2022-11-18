@@ -28,7 +28,7 @@ namespace mrw::ui
 		void setController(mrw::ctrl::SignalController * ctrl);
 
 	protected:
-		void paintEvent(QPaintEvent * event) override;
+		void paint(QPainter & painter) override;
 	};
 }
 

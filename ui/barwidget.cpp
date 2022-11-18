@@ -13,27 +13,20 @@ BarWidget::BarWidget(QWidget * parent) : BaseWidget(parent)
 {
 }
 
-void BarWidget::paintEvent(QPaintEvent * event)
+void BarWidget::paint(QPainter & painter)
 {
-	Q_UNUSED(event)
-
-	QPainter     painter(this);
 	QPainterPath path;
 	QFont        font = painter.font();
 
 	const int xSize = size().width();
 	const int ySize = size().height();
 
-	painter.setRenderHint(QPainter::Antialiasing, true);
-
-	// TODO: Remove drawing the orientation later.
-	painter.setPen(Qt::gray);
-	painter.drawRect(0, 0, xSize - 1, ySize - 1);
-
+	// Define fonts for color labels.
 	font.setPixelSize(ySize / 3);
 	painter.setPen(Qt::white);
 	painter.setFont(font);
 
+	// TODO: Make static
 	const QStringList colors { "GN", "WS", "RT", "GE", "BL" };
 
 	for (unsigned c = 0; c < 5; c++)

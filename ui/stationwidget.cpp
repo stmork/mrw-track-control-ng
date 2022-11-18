@@ -21,19 +21,13 @@ void StationWidget::setStationLabel(const QString & label)
 	update();
 }
 
-void StationWidget::paintEvent(QPaintEvent * event)
+void StationWidget::paint(QPainter & painter)
 {
-	Q_UNUSED(event)
-
-	QPainter     painter(this);
 	QFont        font;
 
 	const int xSize = size().width();
 	const int ySize = size().height();
 
-	painter.setRenderHint(QPainter::Antialiasing, true);
-
-	// TODO: Remove drawing the orientation later.
 	painter.setPen(pen);
 	painter.drawRect(0, 0, xSize - 1, ySize - 1);
 

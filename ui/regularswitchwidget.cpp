@@ -41,11 +41,8 @@ static const QVector<QPointF> points_inactive
 	QPointF(  -5.0,  -70.0)
 };
 
-void RegularSwitchWidget::paintEvent(QPaintEvent * event)
+void RegularSwitchWidget::paint(QPainter & painter)
 {
-	Q_UNUSED(event)
-
-	QPainter     painter(this);
 	QPainterPath path;
 	QFont        font = painter.font();
 
@@ -54,13 +51,8 @@ void RegularSwitchWidget::paintEvent(QPaintEvent * event)
 	const int xSize = size().width();
 	const int ySize = size().height();
 
-	// TODO: Remove drawing the orientation later.
-	painter.setPen(Qt::gray);
-	painter.drawRect(0, 0, xSize - 1, ySize - 1);
-
 	// Unify coordinates
-	painter.translate(xSize >> 1, ySize >> 1);
-	painter.scale(xSize / 200.0, ySize / 200.0);
+	rescale(painter, 200, 200);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
 	font.setPixelSize(50);
