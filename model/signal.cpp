@@ -50,6 +50,10 @@ QString Signal::symbol() const
 		type_descr = signal_direction ? " --O" : "O-- ";
 		break;
 
+	case MAIN_SIGNAL | SHUNT_SIGNAL:
+		type_descr = signal_direction ? " -\\O" : "O\\- ";
+		break;
+
 	case DISTANT_SIGNAL:
 		type_descr = signal_direction ? " -o " : " o- ";
 		break;

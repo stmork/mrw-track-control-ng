@@ -36,7 +36,8 @@ LightSignal::LightSignal(
 	const QDomElement  &  element,
 	const SignalType      type,
 	const unsigned        light_count) :
-	Signal(model_railway, model_section, element, type),
+	Signal(
+		model_railway, model_section, element, type),
 	Device(model_railway, element),
 	lights(light_count)
 {

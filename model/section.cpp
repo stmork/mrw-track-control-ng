@@ -90,7 +90,7 @@ Section::Section(
 				}
 				else if (type == "Ausfahrsignal")
 				{
-					rail_part = new LightSignal(model, this, child, Signal::MAIN_SIGNAL, 5);
+					rail_part = new LightSignal(model, this, child, Signal::MAIN_SHUNT_SIGNAL, 5);
 				}
 				else if (type == "Formvorsignal")
 				{

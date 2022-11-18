@@ -40,7 +40,7 @@ bool SignalControllerProxy::hasShunting() const
 {
 	return std::any_of(section_signals.begin(), section_signals.end(), [] (Signal * input)
 	{
-		return input->type() == Signal::SHUNT_SIGNAL;
+		return (input->type() & Signal::SHUNT_SIGNAL) != 0;
 	});
 }
 
@@ -56,7 +56,7 @@ bool SignalControllerProxy::hasMain() const
 {
 	return std::any_of(section_signals.begin(), section_signals.end(), [] (Signal * input)
 	{
-		return input->type() == Signal::MAIN_SIGNAL;
+		return (input->type() & Signal::MAIN_SIGNAL) != 0;
 	});
 }
 
