@@ -8,6 +8,7 @@
 #ifndef MRW_CTRL_SIGNALCONTROLLERPROXY_H
 #define MRW_CTRL_SIGNALCONTROLLERPROXY_H
 
+#include <model/section.h>
 #include <model/signal.h>
 #include <ctrl/signalcontroller.h>
 
@@ -18,13 +19,17 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
-		mrw::model::Signal * signal = nullptr;
+		std::vector<mrw::model::Signal *> section_signals;
+		mrw::model::Section       *       section   = nullptr;
+		const bool                        direction = true;
 
 	public:
-		explicit SignalControllerProxy(QObject * parent = nullptr);
+		explicit SignalControllerProxy(
+			mrw::model::Section * parent_section,
+			const bool direction,
+			QObject       *       parent);
 
-		void setSignal(mrw::model::Signal * new_signal);
-
+		QPoint point() const;
 		virtual bool isDirection() const override;
 		virtual bool hasShunting() const override;
 		virtual bool hasDistant() const override;

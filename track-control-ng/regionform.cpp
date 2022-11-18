@@ -29,15 +29,12 @@ RegionForm::RegionForm(mrw::model::Region * region, QWidget * parent) :
 	setAutoFillBackground(true);
 	setPalette(background_color);
 
-	region->parts<Signal>(region_signals);
-	for (Signal * signal : region_signals)
+	for (size_t s = 0; s < region->sectionCount(); s++)
 	{
-		SignalControllerProxy * ctrl   = new SignalControllerProxy(this);
-		SignalWidget      *     widget = new SignalWidget(ui->controlWidget, ctrl);
+		Section * section = region->section(s);
 
-		ctrl->setSignal(signal);
-		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
-		widget->move(signal->position() * BaseWidget::SIZE);
+		setupSignals(section, true);
+		setupSignals(section, false);
 	}
 
 	region->parts<RegularSwitch>(region_switches);
@@ -67,5 +64,24 @@ void RegionForm::changeEvent(QEvent * e)
 		break;
 	default:
 		break;
+	}
+}
+
+void RegionForm::setupSignals(Section * section, const bool direction)
+{
+	std::vector<Signal *> section_signals;
+
+	section->parts<Signal>(section_signals, [direction] (const Signal * input)
+	{
+		return direction == input->direction();
+	});
+
+	if (section_signals.size() > 0)
+	{
+		SignalControllerProxy * ctrl   = new SignalControllerProxy(section, direction, this);
+		SignalWidget      *     widget = new SignalWidget(ui->controlWidget, ctrl);
+
+		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
+		widget->move(ctrl->point() * BaseWidget::SIZE);
 	}
 }

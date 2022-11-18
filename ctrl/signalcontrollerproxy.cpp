@@ -3,45 +3,64 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "signalcontrollerproxy.h"
+#include <can/commands.h>
+#include <ctrl/signalcontrollerproxy.h>
 
+using namespace mrw::can;
 using namespace mrw::ctrl;
 using namespace mrw::model;
 
-SignalControllerProxy::SignalControllerProxy(QObject * parent) :
-	SignalController(parent)
+SignalControllerProxy::SignalControllerProxy(
+	mrw::model::Section * parent_section,
+	const bool            dir,
+	QObject * parent) :
+	SignalController(parent),
+	section(parent_section),
+	direction(dir)
 {
+	section->parts<Signal>(section_signals, [dir] (const Signal * input)
+	{
+		return dir == input->direction();
+	});
+
+	Q_ASSERT(section_signals.size() > 0);
 }
 
-void SignalControllerProxy::setSignal(Signal * new_signal)
+QPoint SignalControllerProxy::point() const
 {
-	Q_ASSERT(signal == nullptr);
-
-	signal = new_signal;
+	return section_signals[0]->position();
 }
 
 bool SignalControllerProxy::isDirection() const
 {
-	return signal->direction();
+	return direction;
 }
 
 bool SignalControllerProxy::hasShunting() const
 {
-	// TODO: Implement in mrw::model::Signal and mrw::model::Section.
-	return false;
+	return std::any_of(section_signals.begin(), section_signals.end(), [] (Signal * input)
+	{
+		return input->type() == Signal::SHUNT_SIGNAL;
+	});
 }
 
 bool SignalControllerProxy::hasDistant() const
 {
-	return signal->pair() != nullptr;
+	return std::any_of(section_signals.begin(), section_signals.end(), [] (Signal * input)
+	{
+		return input->type() == Signal::DISTANT_SIGNAL;
+	});
 }
 
 bool SignalControllerProxy::hasMain() const
 {
-	return signal->type() == Signal::MAIN_SIGNAL;
+	return std::any_of(section_signals.begin(), section_signals.end(), [] (Signal * input)
+	{
+		return input->type() == Signal::MAIN_SIGNAL;
+	});
 }
 
 QString SignalControllerProxy::name() const
 {
-	return signal->partName();
+	return "-";
 }

@@ -14,6 +14,7 @@
 
 #include <model/region.h>
 #include <model/signal.h>
+#include <model/section.h>
 #include <model/regularswitch.h>
 
 namespace Ui
@@ -26,7 +27,6 @@ class RegionForm : public QWidget
 	Q_OBJECT
 
 private:
-	std::vector<mrw::model::Signal *> region_signals;
 	std::vector<mrw::model::RegularSwitch *> region_switches;
 
 public:
@@ -37,6 +37,8 @@ protected:
 	void changeEvent(QEvent * e) override;
 
 private:
+	void setupSignals(mrw::model::Section * section, const bool direction);
+
 	Ui::RegionForm * ui;
 	static const QPalette    background_color;
 };
