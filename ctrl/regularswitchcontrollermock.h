@@ -14,7 +14,7 @@
 namespace mrw::ctrl
 {
 	class RegularSwitchControllerMock :
-			public mrw::ctrl::RegularSwitchController
+		public mrw::ctrl::RegularSwitchController
 	{
 		Q_OBJECT
 

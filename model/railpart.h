@@ -114,6 +114,7 @@ namespace mrw::model
 	public:
 		explicit RailPart(
 			ModelRailway     *    model_railway,
+			Section       *       model_section,
 			const QDomElement  &  element);
 		virtual ~RailPart() = default;
 

@@ -10,8 +10,9 @@ using namespace mrw::model;
 
 RegularSwitch::RegularSwitch(
 	ModelRailway     *    model_railway,
+	Section       *       model_section,
 	const QDomElement  &  element) :
-	AbstractSwitch(model_railway, element),
+	AbstractSwitch(model_railway, model_section, element),
 	left_branch( ModelRailway::boolean(element, "bIstAbzweig", false)),
 	right_branch(ModelRailway::boolean(element, "cIstAbzweig", false)),
 	left_prio(   ModelRailway::boolean(element, "bIstBevorzugt", false)),

@@ -38,6 +38,7 @@ namespace mrw::model
 	public:
 		explicit AbstractSwitch(
 			ModelRailway     *    model_railway,
+			Section       *       model_section,
 			const QDomElement  &  element);
 
 		inline const QString & name() const override

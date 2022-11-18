@@ -47,6 +47,7 @@ namespace mrw::model
 	public:
 		explicit LightSignal(
 			ModelRailway     *    model_railway,
+			Section       *       model_section,
 			const QDomElement  &  element,
 			const SignalType      type,
 			const unsigned        light_count);
@@ -91,9 +92,6 @@ namespace mrw::model
 		{
 			return lights;
 		}
-
-	private:
-		void findPair(const std::vector<LightSignal *> & light_signals);
 	};
 }
 

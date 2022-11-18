@@ -38,6 +38,7 @@ namespace mrw::model
 	public:
 		explicit FormSignal(
 			ModelRailway     *    model_railway,
+			Section       *       model_section,
 			const QDomElement  &  element,
 			const SignalType      is_main);
 

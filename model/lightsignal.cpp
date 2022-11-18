@@ -32,10 +32,11 @@ const std::regex  LightSignal::path_regex(R"(^\/\/@controller\.(\d+)\/@anschlues
 
 LightSignal::LightSignal(
 	ModelRailway     *    model_railway,
+	Section       *       model_section,
 	const QDomElement  &  element,
 	const SignalType      type,
 	const unsigned        light_count) :
-	Signal(model_railway, element, type),
+	Signal(model_railway, model_section, element, type),
 	Device(model_railway, element),
 	lights(light_count)
 {
@@ -67,19 +68,4 @@ QString LightSignal::toString() const
 {
 	return QString("      L %1  %2  : %3").
 		arg(valid()  ? "V" : "-").arg(symbol()).arg(name());
-}
-
-void LightSignal::findPair(const std::vector<LightSignal *> & light_signals)
-{
-	if (signal_type == MAIN_SIGNAL)
-	{
-		for (LightSignal * signal : light_signals)
-		{
-			if ((signal->signal_type == DISTANT_SIGNAL) &&
-				(signal_direction == signal->signal_direction))
-			{
-				main_distant_pair = signal;
-			}
-		}
-	}
 }

@@ -85,6 +85,12 @@ void TestNumbering::testPairSignalSection2()
 	LightSignal * lr4 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 6));
 	LightSignal * lr5 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 7));
 	LightSignal * lr6 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 8));
+	FormSignal  * fr1 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 3));
+	FormSignal  * fr2 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 4));
+	FormSignal  * fr3 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 5));
+	FormSignal  * fr4 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 6));
+	FormSignal  * fr5 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 7));
+	FormSignal  * fr6 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 8));
 
 	QVERIFY(lr1 != nullptr);
 	QVERIFY(lr2 != nullptr);
@@ -97,6 +103,16 @@ void TestNumbering::testPairSignalSection2()
 	QCOMPARE(lr2->pair(), lr4);
 	QCOMPARE(lr3->pair(), lr4);
 	QCOMPARE(lr4->pair(), nullptr);
+
+	QVERIFY(fr1 == nullptr);
+	QVERIFY(fr2 == nullptr);
+	QVERIFY(fr3 == nullptr);
+	QVERIFY(fr4 == nullptr);
+	QVERIFY(fr5 != nullptr);
+	QVERIFY(fr6 != nullptr);
+
+	QCOMPARE(fr5->pair(), fr6);
+	QCOMPARE(fr6->pair(), nullptr);
 }
 
 void TestNumbering::testPairSignalSection3()

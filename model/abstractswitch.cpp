@@ -11,8 +11,9 @@ using namespace mrw::model;
 
 AbstractSwitch::AbstractSwitch(
 	ModelRailway     *    model_railway,
+	Section       *       model_section,
 	const QDomElement  &  element) :
-	RailPart(model_railway, element),
+	RailPart(model_railway, model_section, element),
 	SwitchModuleReference(
 		model_railway, element, ModelRailway::boolean(element, "neu"))
 {

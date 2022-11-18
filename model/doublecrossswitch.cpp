@@ -11,8 +11,9 @@ using namespace mrw::model;
 
 DoubleCrossSwitch::DoubleCrossSwitch(
 	ModelRailway     *    model_railway,
+	Section       *       model_section,
 	const QDomElement  &  element) :
-	AbstractSwitch(model_railway, element),
+	AbstractSwitch(model_railway, model_section, element),
 	ad_branch(ModelRailway::boolean(element, "adIstAbzweig")),
 	bc_branch(ModelRailway::boolean(element, "bcIstAbzweig"))
 {

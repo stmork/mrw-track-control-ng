@@ -62,43 +62,43 @@ Section::Section(
 
 				if (type == "Gleis")
 				{
-					rail_part = new Rail(model, child);
+					rail_part = new Rail(model, this, child);
 				}
 				else if (type == "Weiche")
 				{
-					rail_part = new RegularSwitch(model, child);
+					rail_part = new RegularSwitch(model, this,  child);
 				}
 				else if (type == "DKW")
 				{
-					rail_part = new DoubleCrossSwitch(model, child);
+					rail_part = new DoubleCrossSwitch(model, this, child);
 				}
 				else if (type == "Gleissperrsignal")
 				{
-					rail_part = new LightSignal(model, child, Signal::SHUNT_SIGNAL, 2);
+					rail_part = new LightSignal(model, this, child, Signal::SHUNT_SIGNAL, 2);
 				}
 				else if (type == "Vorsignal")
 				{
-					rail_part = new LightSignal(model, child, Signal::DISTANT_SIGNAL, 4);
+					rail_part = new LightSignal(model, this, child, Signal::DISTANT_SIGNAL, 4);
 				}
 				else if (type == "Blocksignal")
 				{
-					rail_part = new LightSignal(model, child, Signal::MAIN_SIGNAL, 2);
+					rail_part = new LightSignal(model, this, child, Signal::MAIN_SIGNAL, 2);
 				}
 				else if (type == "Einfahrsignal")
 				{
-					rail_part = new LightSignal(model, child, Signal::MAIN_SIGNAL, 3);
+					rail_part = new LightSignal(model, this, child, Signal::MAIN_SIGNAL, 3);
 				}
 				else if (type == "Ausfahrsignal")
 				{
-					rail_part = new LightSignal(model, child, Signal::MAIN_SIGNAL, 5);
+					rail_part = new LightSignal(model, this, child, Signal::MAIN_SIGNAL, 5);
 				}
 				else if (type == "Formvorsignal")
 				{
-					rail_part = new FormSignal(model, child, Signal::DISTANT_SIGNAL);
+					rail_part = new FormSignal(model, this, child, Signal::DISTANT_SIGNAL);
 				}
 				else if (type == "Formhauptsignal")
 				{
-					rail_part = new FormSignal(model, child, Signal::MAIN_SIGNAL);
+					rail_part = new FormSignal(model, this, child, Signal::MAIN_SIGNAL);
 				}
 				else
 				{
@@ -157,21 +157,12 @@ void Section::link()
 
 void Section::findSignalPair()
 {
-	std::vector<LightSignal *> light_signals;
+	std::vector<Signal *> sction_signals;
 
-	for (AssemblyPart * part : assembly_parts)
+	parts<Signal>(sction_signals);
+	for (Signal * signal : sction_signals)
 	{
-		LightSignal * signal = dynamic_cast<LightSignal *>(part);
-
-		if (signal != nullptr)
-		{
-			light_signals.push_back(signal);
-		}
-	}
-
-	for (LightSignal * signal : light_signals)
-	{
-		signal->findPair(light_signals);
+		signal->findPair(sction_signals);
 	}
 }
 

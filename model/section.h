@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <regex>
+#include <functional>
 
 #include <QDomElement>
 
@@ -112,13 +113,20 @@ namespace mrw::model
 		 * @param result The result vector collecting the AssembyPart elements
 		 * of type T.
 		 */
-		template <class T> void parts(std::vector<T *> & result)
+		template <class T> void parts(
+			std::vector<T *> & result,
+			std::function<bool(const T * part)> guard = [](const T * part)
+		{
+			(void)part;
+
+			return true;
+		})
 		{
 			for (AssemblyPart * part : assembly_parts)
 			{
 				T * element = dynamic_cast<T *>(part);
 
-				if (element != nullptr)
+				if ((element != nullptr) && guard(element))
 				{
 					result.push_back(element);
 				}

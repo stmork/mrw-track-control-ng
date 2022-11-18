@@ -11,9 +11,10 @@ using namespace mrw::model;
 
 FormSignal::FormSignal(
 	ModelRailway     *    model_railway,
+	Section       *       model_section,
 	const QDomElement  &  element,
 	const SignalType      type) :
-	Signal(model_railway, element, type),
+	Signal(model_railway, model_section, element, type),
 	SwitchModuleReference(model_railway, element, false)
 {
 }

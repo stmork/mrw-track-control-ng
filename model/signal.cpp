@@ -27,9 +27,10 @@ const ConstantEnumerator<SignalState> Signal::signal_constants
 
 Signal::Signal(
 	ModelRailway     *    model_railway,
+	Section       *       model_section,
 	const QDomElement  &  element,
 	const SignalType      type) :
-	AssemblyPart(model_railway, element),
+	AssemblyPart(model_railway, model_section, element),
 	signal_direction(ModelRailway::boolean(element, "inZaehlrichtung")),
 	signal_type(type)
 {
@@ -58,4 +59,19 @@ QString Signal::symbol() const
 		break;
 	}
 	return type_descr;
+}
+
+void Signal::findPair(const std::vector<Signal *> & section_signals)
+{
+	if (signal_type == MAIN_SIGNAL)
+	{
+		for (Signal * signal : section_signals)
+		{
+			if ((signal->signal_type == DISTANT_SIGNAL) &&
+				(signal_direction == signal->signal_direction))
+			{
+				main_distant_pair = signal;
+			}
+		}
+	}
 }

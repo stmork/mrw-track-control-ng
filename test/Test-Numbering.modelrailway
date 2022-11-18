@@ -60,8 +60,8 @@
       <bauelement xsi:type="Modelrailway:Einfahrsignal"/>
       <bauelement xsi:type="Modelrailway:Blocksignal"/>
       <bauelement xsi:type="Modelrailway:Vorsignal"/>
-      <bauelement xsi:type="Modelrailway:Formhauptsignal"/>
-      <bauelement xsi:type="Modelrailway:Formvorsignal"/>
+      <bauelement xsi:type="Modelrailway:Formhauptsignal" inZaehlrichtung="true"/>
+      <bauelement xsi:type="Modelrailway:Formvorsignal" inZaehlrichtung="true"/>
     </abschnitt>
     <abschnitt>
       <bauelement xsi:type="Modelrailway:Ausfahrsignal"/>

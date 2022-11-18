@@ -48,7 +48,7 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--enable=style,warning,performance,portability\
 	--language=c++ --std=c++14\
 	--library=qt\
-	--xml-version=2 --force -q\
+	--xml-version=2 --force -q -j 4\
 	*/*.cpp */*.h tools/*/*.cpp 2>cppcheck.xml
 
 QMAKE_EXTRA_TARGETS += cppcheck astyle

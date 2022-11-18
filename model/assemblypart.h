@@ -17,6 +17,7 @@
 namespace mrw::model
 {
 	class ModelRailway;
+	class Section;
 
 	/**
 	 * This abstract base class represents all elements contained in a
@@ -30,12 +31,14 @@ namespace mrw::model
 
 	protected:
 		const QString      part_name;
-		ModelRailway   *   model = nullptr;
+		ModelRailway   *   model   = nullptr;
+		Section      *     section = nullptr;
 		const QDomElement  reference;
 
 	public:
 		explicit AssemblyPart(
 			ModelRailway     *    model_railway,
+			Section       *       model_section,
 			const QDomElement  &  element);
 		virtual ~AssemblyPart() = default;
 

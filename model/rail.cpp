@@ -10,8 +10,9 @@ using namespace mrw::model;
 
 Rail::Rail(
 	ModelRailway     *    model_railway,
+	Section       *       model_section,
 	const QDomElement  &  element) :
-	RailPart(model_railway, element),
+	RailPart(model_railway, model_section, element),
 	is_main(  ModelRailway::boolean(element, "istHauptgleis")),
 	is_branch(ModelRailway::boolean(element, "istAbzweig"))
 {

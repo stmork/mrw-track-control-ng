@@ -12,8 +12,9 @@ using namespace mrw::model;
 
 RailPart::RailPart(
 	ModelRailway     *    model_railway,
+	Section       *       model_section,
 	const QDomElement  &  element) :
-	AssemblyPart(model_railway, element),
+	AssemblyPart(model_railway, model_section, element),
 	a_in_dir(ModelRailway::boolean(element, "aInZaehlrichtung"))
 {
 }

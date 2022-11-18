@@ -59,6 +59,7 @@ namespace mrw::model
 	public:
 		explicit Signal(
 			ModelRailway     *    model_railway,
+			Section       *       model_section,
 			const QDomElement  &  element,
 			const SignalType      type);
 
@@ -102,6 +103,9 @@ namespace mrw::model
 		{
 			return signal_position;
 		}
+
+		// TODO: Move into SignalController!
+		void findPair(const std::vector<Signal *> & section_signals);
 
 	protected:
 		/**

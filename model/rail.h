@@ -28,6 +28,7 @@ namespace mrw::model
 	public:
 		explicit Rail(
 			ModelRailway     *    model_railway,
+			Section       *       model_section,
 			const QDomElement  &  element);
 
 		bool valid() const override;

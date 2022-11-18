@@ -41,6 +41,7 @@ namespace mrw::model
 	public:
 		explicit RegularSwitch(
 			ModelRailway     *    model_railway,
+			Section       *       model_section,
 			const QDomElement  &  element);
 
 		inline bool isRightHanded() const
