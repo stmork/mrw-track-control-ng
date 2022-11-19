@@ -10,6 +10,8 @@
 
 #include <QWidget>
 
+#include <ctrl/doublecrossswitchcontrollermock.h>
+
 namespace Ui
 {
 	class DoubleCrossSwitchStudy;
@@ -27,7 +29,9 @@ protected:
 	void changeEvent(QEvent * e) override;
 
 private:
-	Ui::DoubleCrossSwitchStudy * ui;
+	Ui::DoubleCrossSwitchStudy *               ui;
+
+	mrw::ctrl::DoubleCrossSwitchControllerMock mock;
 };
 
 #endif // DOUBLECROSSSWITCHSTUDY_H

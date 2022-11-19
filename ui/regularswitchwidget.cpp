@@ -19,7 +19,7 @@ RegularSwitchWidget::RegularSwitchWidget(
 {
 }
 
-void mrw::ui::RegularSwitchWidget::setController(mrw::ctrl::RegularSwitchController * ctrl)
+void RegularSwitchWidget::setController(mrw::ctrl::RegularSwitchController * ctrl)
 {
 	Q_ASSERT(controller == nullptr);
 
@@ -92,7 +92,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	painter.drawLine(!isTurnOut() ? -10.0f : 70.0f, 0.0f, 100.0f, 0.0f);
 }
 
-bool mrw::ui::RegularSwitchWidget::isTurnOut() const
+bool RegularSwitchWidget::isTurnOut() const
 {
 	return controller->isLeft() != controller->isRightHanded();
 }

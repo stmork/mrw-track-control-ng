@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "signalcontroller.h"
+#include <ctrl/signalcontroller.h>
 
 using namespace mrw::ctrl;
 

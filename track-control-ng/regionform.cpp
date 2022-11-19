@@ -4,6 +4,7 @@
 //
 
 #include <ctrl/regularswitchcontrollerproxy.h>
+#include <ctrl/doublecrossswitchcontrollerproxy.h>
 #include <ctrl/signalcontrollerproxy.h>
 
 #include <ui/sectionwidget.h>
@@ -54,11 +55,10 @@ RegionForm::RegionForm(mrw::model::Region * region, QWidget * parent) :
 	region->parts<DoubleCrossSwitch>(region_dc_switches);
 	for (DoubleCrossSwitch * part : region_dc_switches)
 	{
-		// TODO: Implement DoubleCrossSwitchControllerProxy!
-//		DoubleCrossSwitchControllerProxy * ctrl   = new DoubleCrossSwitchControllerProxy(this);
+		DoubleCrossSwitchControllerProxy * ctrl   = new DoubleCrossSwitchControllerProxy(this);
 		DoubleCrossSwitchWidget      *     widget = new DoubleCrossSwitchWidget(ui->controlWidget);
 
-//		ctrl->setSwitch(part);
+		ctrl->setSwitch(part);
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
 		widget->move(part->position() * BaseWidget::SIZE);
 	}

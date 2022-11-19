@@ -17,6 +17,9 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	QPalette pal = QPalette();
 	pal.setColor(QPalette::Window, Qt::black);
 
+	ui->bigSwitchWidget->setController(&mock);
+	ui->smallSwitchWidget->setController(&mock);
+
 	ui->symbolWidget->setAutoFillBackground(true);
 	ui->symbolWidget->setPalette(pal);
 

@@ -14,6 +14,8 @@ SOURCES += \
 	../ctrl/basecontroller.cpp \
 	../ctrl/regularswitchcontroller.cpp \
 	../ctrl/regularswitchcontrollermock.cpp \
+	../ctrl/doublecrossswitchcontroller.cpp \
+	../ctrl/doublecrossswitchcontrollermock.cpp \
 	../ctrl/signalcontroller.cpp \
 	../ctrl/signalcontrollermock.cpp \
 	../ui/basewidget.cpp \
@@ -31,6 +33,8 @@ HEADERS += \
 	../ctrl/basecontroller.h \
 	../ctrl/regularswitchcontroller.h \
 	../ctrl/regularswitchcontrollermock.h \
+	../ctrl/doublecrossswitchcontroller.h \
+	../ctrl/doublecrossswitchcontrollermock.h \
 	../ctrl/signalcontroller.h \
 	../ctrl/signalcontrollermock.h \
 	../ui/basewidget.h \

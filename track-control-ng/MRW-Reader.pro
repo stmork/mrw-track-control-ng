@@ -15,6 +15,8 @@ SOURCES += \
 	../ctrl/basecontroller.cpp \
 	../ctrl/regularswitchcontroller.cpp \
 	../ctrl/regularswitchcontrollerproxy.cpp \
+	../ctrl/doublecrossswitchcontroller.cpp \
+	../ctrl/doublecrossswitchcontrollerproxy.cpp \
 	../ctrl/signalcontroller.cpp \
 	../ctrl/signalcontrollerproxy.cpp \
 	../ui/basewidget.cpp \
@@ -34,6 +36,8 @@ HEADERS += \
 	../ctrl/basecontroller.h \
 	../ctrl/regularswitchcontroller.h \
 	../ctrl/regularswitchcontrollerproxy.h \
+	../ctrl/doublecrossswitchcontroller.h \
+	../ctrl/doublecrossswitchcontrollerproxy.h \
 	../ctrl/signalcontroller.h \
 	../ctrl/signalcontrollerproxy.h \
 	../ui/basewidget.h \

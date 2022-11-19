@@ -12,6 +12,13 @@ DoubleCrossSwitchWidget::DoubleCrossSwitchWidget(QWidget * parent) :
 {
 }
 
+void DoubleCrossSwitchWidget::setController(mrw::ctrl::DoubleCrossSwitchController * ctrl)
+{
+	Q_ASSERT(controller == nullptr);
+
+	controller = ctrl;
+}
+
 void DoubleCrossSwitchWidget::paint(QPainter & painter)
 {
 	rescale(painter, 200, 200);

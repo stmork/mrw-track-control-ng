@@ -10,6 +10,7 @@
 
 #include <ui/basewidget.h>
 #include <model/doublecrossswitch.h>
+#include <ctrl/doublecrossswitchcontroller.h>
 
 namespace mrw::ui
 {
@@ -17,8 +18,13 @@ namespace mrw::ui
 	{
 		Q_OBJECT
 
+	private:
+		mrw::ctrl::DoubleCrossSwitchController * controller = nullptr;
+
 	public:
 		explicit DoubleCrossSwitchWidget(QWidget * parent);
+
+		void setController(mrw::ctrl::DoubleCrossSwitchController * ctrl);
 
 	protected:
 		void paint(QPainter & painter) override;

@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "regularswitchcontrollerproxy.h"
+#include <ctrl/regularswitchcontrollerproxy.h>
 
 using namespace mrw::can;
 using namespace mrw::ctrl;

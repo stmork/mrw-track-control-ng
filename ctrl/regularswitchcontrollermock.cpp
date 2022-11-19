@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "regularswitchcontrollermock.h"
+#include <ctrl/regularswitchcontrollermock.h>
 
 using namespace mrw::can;
 using namespace mrw::ctrl;

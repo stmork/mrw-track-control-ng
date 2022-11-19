@@ -3,11 +3,11 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include <ctrl/regularswitchcontroller.h>
+#include <ctrl/doublecrossswitchcontroller.h>
 
 using namespace mrw::ctrl;
 
-RegularSwitchController::RegularSwitchController(QObject * parent) :
+DoubleCrossSwitchController::DoubleCrossSwitchController(QObject * parent) :
 	BaseController(parent)
 {
 }
