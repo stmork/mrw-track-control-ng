@@ -8,8 +8,8 @@
 using namespace mrw::ui;
 
 DoubleCrossSwitchWidget::DoubleCrossSwitchWidget(
-		QWidget *                                parent,
-		mrw::ctrl::DoubleCrossSwitchController * ctrl) :
+	QWidget                 *                parent,
+	mrw::ctrl::DoubleCrossSwitchController * ctrl) :
 	BaseWidget(parent),
 	controller(ctrl)
 {
@@ -24,10 +24,10 @@ void DoubleCrossSwitchWidget::setController(mrw::ctrl::DoubleCrossSwitchControll
 
 void DoubleCrossSwitchWidget::paint(QPainter & painter)
 {
-	rescale(painter, 200, 200);
+	rescale(painter);
 
 	// TODO: Draw correctly!
 	painter.setPen(QPen(sectionColor(controller->state()), 20.0));
-	painter.drawLine(-100.0f, 0.0f, 100.0f, 0.0f);
-	painter.drawLine(-50.0f, -100.0f, 50.0f, 100.0f);
+	painter.drawLine(-SCALE,   0.0f, SCALE, 0.0f);
+	painter.drawLine(-50.0f, -SCALE, 50.0f, SCALE);
 }

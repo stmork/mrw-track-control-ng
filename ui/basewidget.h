@@ -23,7 +23,8 @@ namespace mrw::ui
 		Q_OBJECT
 
 	public:
-		static const int SIZE = 40;
+		static constexpr int   SIZE  = 40;
+		static constexpr float SCALE = 100.0f;
 
 		static const QColor GREEN;
 		static const QColor WHITE;
@@ -48,10 +49,13 @@ namespace mrw::ui
 
 		void rescale(
 			QPainter & painter,
-			const float xSize, const float ySize, const bool center = true);
+			const float xSize = SCALE * 2.0,
+			const float ySize = SCALE * 2.0, const bool center = true);
 
 	private:
 		static const std::unordered_map<mrw::model::SectionState, QColor> color_map;
+
+		const bool verbose = true;
 	};
 }
 

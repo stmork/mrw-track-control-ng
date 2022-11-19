@@ -36,10 +36,11 @@ void mrw::ui::BaseWidget::paintEvent(QPaintEvent * event)
 
 	painter.setRenderHint(QPainter::Antialiasing, true);
 
-#if 1
-	painter.setPen(Qt::gray);
-	painter.drawRect(0, 0, width() - 1, height() - 1);
-#endif
+	if (verbose)
+	{
+		painter.setPen(Qt::gray);
+		painter.drawRect(0, 0, width() - 1, height() - 1);
+	}
 
 	paint(painter);
 }

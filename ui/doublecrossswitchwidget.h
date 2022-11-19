@@ -23,8 +23,8 @@ namespace mrw::ui
 
 	public:
 		explicit DoubleCrossSwitchWidget(
-				QWidget *                                parent     = nullptr,
-				mrw::ctrl::DoubleCrossSwitchController * controller = nullptr);
+			QWidget                 *                parent     = nullptr,
+			mrw::ctrl::DoubleCrossSwitchController * controller = nullptr);
 
 		void setController(mrw::ctrl::DoubleCrossSwitchController * ctrl);
 

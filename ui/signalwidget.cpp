@@ -41,7 +41,7 @@ void SignalWidget::paint(QPainter & painter)
 	Q_ASSERT(controller != nullptr);
 
 	// Unify coordinates
-	rescale(painter, 200, 200);
+	rescale(painter);
 
 	// Draw switch name before rotating to prevent rotated font drawing.
 	font.setPixelSize(50);

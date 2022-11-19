@@ -8,8 +8,8 @@
 using namespace mrw::ui;
 
 SectionWidget::SectionWidget(
-		QWidget *                 parent,
-		ctrl::SectionController * ctrl) :
+	QWidget         *         parent,
+	ctrl::SectionController * ctrl) :
 	BaseWidget(parent),
 	controller(ctrl)
 {
@@ -24,9 +24,9 @@ void SectionWidget::setController(mrw::ctrl::SectionController * ctrl)
 
 void SectionWidget::paint(QPainter & painter)
 {
-	rescale(painter, 200, 200);
+	rescale(painter);
 
 	// Draw point part of switch
 	painter.setPen(QPen(sectionColor(controller->state()), 20.0));
-	painter.drawLine(-100.0f, 0.0f, 100.0f, 0.0f);
+	painter.drawLine(-SCALE, 0.0f, SCALE, 0.0f);
 }

@@ -22,8 +22,8 @@ namespace mrw::ui
 
 	public:
 		explicit SectionWidget(
-				QWidget *                      parent     = nullptr,
-				mrw::ctrl::SectionController * controller = nullptr);
+			QWidget            *           parent     = nullptr,
+			mrw::ctrl::SectionController * controller = nullptr);
 
 		void setController(mrw::ctrl::SectionController * ctrl);
 

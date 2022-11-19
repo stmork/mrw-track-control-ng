@@ -50,14 +50,14 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	Q_ASSERT(controller != nullptr);
 
 	// Unify coordinates
-	rescale(painter, 200, 200);
+	rescale(painter);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
 	font.setPixelSize(50);
 	painter.setFont(font);
 	painter.setPen(YELLOW);
 	painter.drawText(QRectF(
-			controller->isDirection() ? -100 : -20,
+			controller->isDirection() ? -SCALE : -20,
 			controller->isRightHanded() ? -80 : 30, 120, 50),
 		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
 
