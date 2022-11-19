@@ -24,6 +24,15 @@ namespace mrw::model
 	class SectionModule;
 	class AssemblyPart;
 
+	enum SectionState
+	{
+		FREE,
+		SHUNTING,
+		TOUR,
+		OCCUPIED,
+		PASSED
+	};
+
 	/**
 	 * A Section manages exactly one occupation state for a RailPart
 	 * collection. It may also manage several Signal instances. The Section
@@ -39,6 +48,7 @@ namespace mrw::model
 		ModelRailway        *        model              = nullptr;
 		Controller         *         section_controller = nullptr;
 		SectionModule        *       section_module     = nullptr;
+		SectionState                 section_state      = FREE;
 		std::vector<AssemblyPart *>  assembly_parts;
 
 	public:
@@ -57,6 +67,11 @@ namespace mrw::model
 		inline const QString & name() const override
 		{
 			return section_name;
+		}
+
+		inline SectionState state() const
+		{
+			return section_state;
 		}
 
 		QString toString() const override;

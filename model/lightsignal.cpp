@@ -51,12 +51,12 @@ LightSignal::LightSignal(
 		const unsigned controller_idx = std::stoul(matcher[1]);
 		const unsigned conn_idx       = std::stoul(matcher[2]);
 
-		signal_controller = model->controller(controller_idx);
-		mux_connection    = model->connection(controller_idx, conn_idx);
+		signal_controller = part_model->controller(controller_idx);
+		mux_connection    = part_model->connection(controller_idx, conn_idx);
 	}
 	else
 	{
-		model->warning("Signal " + part_name + " has no connection module!");
+		part_model->warning("Signal " + part_name + " has no connection module!");
 	}
 }
 

@@ -9,6 +9,7 @@
 
 using namespace mrw::can;
 using namespace mrw::ui;
+using namespace mrw::model;
 
 RegularSwitchWidget::RegularSwitchWidget(
 	QWidget               *              parent,
@@ -54,7 +55,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	// Draw switch name before mirroring to prevent mirrored font drawing.
 	font.setPixelSize(50);
 	painter.setFont(font);
-	painter.setPen(Qt::yellow);
+	painter.setPen(YELLOW);
 	painter.drawText(QRectF(
 			controller->isDirection() ? -100 : -20,
 			controller->isRightHanded() ? -80 : 30, 120, 50),
@@ -71,20 +72,23 @@ void RegularSwitchWidget::paint(QPainter & painter)
 		painter.scale(-1.0f, -1.0f);
 	}
 
+	QColor section_color = sectionColor(controller->state());
+	QColor outside_color = sectionColor(SectionState::FREE);
+
 	// Draw curved part of switch
 	path.addPolygon(isTurnOut() ? points_active : points_inactive);
 	path.closeSubpath();
-	painter.fillPath(path, QBrush(Qt::green));
+	painter.fillPath(path, QBrush(isTurnOut() ? section_color : outside_color));
 
 	// Draw point lock
-	painter.fillRect(-65.0, -11.0, 40.0, 22.0, Qt::white);
+	painter.fillRect(-65.0, -11.0, 40.0, 22.0, WHITE);
 
 	// Draw point part of switch
-	painter.setPen(QPen(Qt::red, 20.0));
+	painter.setPen(QPen(section_color, 20.0));
 	painter.drawLine(-100.0f, 0.0f, -80.0f, 0.0f);
 
 	// Draw straight part of switch
-	painter.setPen(QPen(Qt::red, 20.0));
+	painter.setPen(QPen(!isTurnOut() ? section_color : outside_color, 20.0));
 	painter.drawLine(!isTurnOut() ? -10.0f : 70.0f, 0.0f, 100.0f, 0.0f);
 }
 

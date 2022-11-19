@@ -37,8 +37,8 @@ AssemblyPart::AssemblyPart(
 	Section       *       model_section,
 	const QDomElement  &  element) :
 	part_name(ModelRailway::string(element, "name")),
-	model(model_railway),
-	section(model_section),
+	part_model(model_railway),
+	part_section(model_section),
 	reference(element)
 {
 }

@@ -30,6 +30,11 @@ namespace mrw::ctrl
 		virtual bool isRightHanded() const override;
 		virtual bool isDirection() const override;
 		virtual QString name() const override;
+
+		virtual mrw::model::SectionState state() const override
+		{
+			return part->section()->state();
+		}
 	};
 }
 

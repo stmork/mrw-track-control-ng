@@ -28,7 +28,7 @@ void DoubleCrossSwitch::link()
 
 	if ((a == nullptr) || (b == nullptr) || (c == nullptr) || (d == nullptr))
 	{
-		model->error("Cross switch not completely connected: " + name());
+		part_model->error("Cross switch not completely connected: " + name());
 		return;
 	}
 

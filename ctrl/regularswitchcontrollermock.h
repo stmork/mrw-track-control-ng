@@ -21,23 +21,31 @@ namespace mrw::ctrl
 	private:
 		bool                  left_handed  = true;
 		bool                  direction    = false;
-		mrw::can::SwitchState switch_state = mrw::can::SWITCH_STATE_LEFT;
+
+		mrw::model::SectionState section_state = mrw::model::SectionState::FREE;
+		mrw::can::SwitchState    switch_state  = mrw::can::SWITCH_STATE_LEFT;
 
 	public:
 		RegularSwitchControllerMock(QObject * parent = nullptr);
 
-		virtual bool isLeft() const override;
-		virtual bool isRight() const override;
-		virtual bool isRightHanded() const override;
-		virtual bool isDirection() const override;
+		virtual bool    isLeft() const override;
+		virtual bool    isRight() const override;
+		virtual bool    isRightHanded() const override;
+		virtual bool    isDirection() const override;
 		virtual QString name() const override;
+		virtual mrw::model::SectionState state() const override
+		{
+			return section_state;
+		}
+
+		void setSectionState(const mrw::model::SectionState state);
+		void setDirection(const bool dir = true);
 
 	public slots:
 		void setLeft(const bool left = true);
 		void setRight(const bool right = true);
 		void setLeftHanded(const bool left = true);
 		void setRightHanded(const bool right = true);
-		void setDirection(const bool dir = true);
 	};
 }
 

@@ -8,6 +8,7 @@
 
 using namespace mrw::ctrl;
 using namespace mrw::ui;
+using namespace mrw::model;
 
 SwitchStudy::SwitchStudy(QWidget * parent) :
 	QWidget(parent),
@@ -38,6 +39,7 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 	connect(
 		ui->rightButton, &QRadioButton::clicked,
 		&mock, &RegularSwitchControllerMock::setRight);
+
 	connect(
 		ui->forwardButton, &QRadioButton::clicked,
 		&mock, [&]()
@@ -49,6 +51,37 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 		&mock, [&]()
 	{
 		mock.setDirection(false);
+	});
+
+	connect(
+		ui->freeButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::FREE);
+	});
+	connect(
+		ui->shuntButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::SHUNTING);
+	});
+	connect(
+		ui->tourButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::TOUR);
+	});
+	connect(
+		ui->occupiedButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::OCCUPIED);
+	});
+	connect(
+		ui->passedButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::PASSED);
 	});
 
 	connect(

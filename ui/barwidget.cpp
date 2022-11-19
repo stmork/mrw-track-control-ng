@@ -37,9 +37,9 @@ void BarWidget::paint(QPainter & painter)
 	// Unify coordinates
 	painter.scale(xSize / 50.0, ySize / 10.0);
 
-	painter.fillRect( 0, 5, 10, 5, Qt::green);
-	painter.fillRect(10, 5, 10, 5, Qt::white);
-	painter.fillRect(20, 5, 10, 5, Qt::red);
-	painter.fillRect(30, 5, 10, 5, Qt::yellow);
-	painter.fillRect(40, 5, 10, 5, Qt::blue);
+	painter.fillRect( 0, 5, 10, 5, GREEN);
+	painter.fillRect(10, 5, 10, 5, WHITE);
+	painter.fillRect(20, 5, 10, 5, RED);
+	painter.fillRect(30, 5, 10, 5, YELLOW);
+	painter.fillRect(40, 5, 10, 5, BLUE);
 }

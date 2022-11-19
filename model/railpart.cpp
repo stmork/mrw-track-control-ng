@@ -33,7 +33,7 @@ RailPart * RailPart::resolve(const char * attr) const
 {
 	const QString & value = reference.attribute(attr, "");
 
-	return dynamic_cast<RailPart *>(AssemblyPart::resolve(model, value));
+	return dynamic_cast<RailPart *>(AssemblyPart::resolve(part_model, value));
 }
 
 std::set<RailInfo> & RailPart::advance(const bool dir)

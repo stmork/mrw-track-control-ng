@@ -25,7 +25,7 @@ void Rail::link()
 
 	if ((a == nullptr) && (b == nullptr))
 	{
-		model->error("Rail not connected: " + name());
+		part_model->error("Rail not connected: " + name());
 	}
 
 	if (a != nullptr)

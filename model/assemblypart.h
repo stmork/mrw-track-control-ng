@@ -31,8 +31,8 @@ namespace mrw::model
 
 	protected:
 		const QString      part_name;
-		ModelRailway   *   model   = nullptr;
-		Section      *     section = nullptr;
+		ModelRailway   *   part_model   = nullptr;
+		Section      *     part_section = nullptr;
 		const QDomElement  reference;
 
 	public:
@@ -52,7 +52,7 @@ namespace mrw::model
 		virtual bool valid() const = 0;
 
 		static AssemblyPart * resolve(
-			const ModelRailway * model,
+			const ModelRailway * part_model,
 			const QString    &   reference);
 
 		/**
@@ -63,6 +63,11 @@ namespace mrw::model
 		inline const QString & partName() const
 		{
 			return part_name;
+		}
+
+		inline Section * section() const
+		{
+			return part_section;
 		}
 
 	protected:
