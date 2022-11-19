@@ -36,6 +36,12 @@ void SignalControllerMock::setDirection(const bool dir)
 	emit update();
 }
 
+void mrw::ctrl::SignalControllerMock::setSectionState(const mrw::model::SectionState state)
+{
+	section_state = state;
+	emit update();
+}
+
 bool SignalControllerMock::isDirection() const
 {
 	return direction;

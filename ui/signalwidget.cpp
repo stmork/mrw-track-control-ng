@@ -44,7 +44,7 @@ void SignalWidget::paint(QPainter & painter)
 	// Draw switch name before rotating to prevent rotated font drawing.
 	font.setPixelSize(50);
 	painter.setFont(font);
-	painter.setPen(Qt::yellow);
+	painter.setPen(YELLOW);
 	painter.drawText(QRectF(
 			controller->isDirection() ? -20 : -100,
 			controller->isDirection() ? -80 : 30, 120, 50),
@@ -56,8 +56,8 @@ void SignalWidget::paint(QPainter & painter)
 		painter.scale(-1.0f, -1.0f);
 	}
 
-	// Draw straight part of switch
-	painter.setPen(QPen(Qt::red, 20.0));
+	// Draw straight part of rail
+	painter.setPen(QPen(sectionColor(controller->state()), 20.0));
 	painter.drawLine( -100.0f, 0.0f, 100.0f, 0.0f);
 
 	QPen pen(Qt::red, 8.0);
@@ -72,20 +72,20 @@ void SignalWidget::paint(QPainter & painter)
 
 	if (controller->hasShunting())
 	{
-		painter.fillRect(10, 35, 40, 40, Qt::red);
+		painter.fillRect(10, 35, 40, 40, RED);
 	}
 	else if (controller->hasDistant())
 	{
 		path.addPolygon(points);
 		path.closeSubpath();
-		painter.fillPath(path, QBrush(Qt::green));
+		painter.fillPath(path, QBrush(GREEN));
 	}
 
 	if (controller->hasMain())
 	{
 		pen.setWidth(1);
 		painter.setPen(pen);
-		painter.setBrush(QBrush(Qt::red));
+		painter.setBrush(QBrush(RED));
 		painter.drawEllipse(50, 35, 40, 40);
 	}
 }

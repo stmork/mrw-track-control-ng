@@ -35,6 +35,10 @@ namespace mrw::ctrl
 		virtual bool hasDistant() const override;
 		virtual bool hasMain() const override;
 		virtual QString name() const override;
+		virtual mrw::model::SectionState state() const override
+		{
+			return section->state();
+		}
 	};
 }
 

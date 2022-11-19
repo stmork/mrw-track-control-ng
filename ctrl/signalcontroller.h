@@ -10,6 +10,8 @@
 
 #include <QObject>
 
+#include <model/section.h>
+
 namespace mrw::ctrl
 {
 	class SignalController : public QObject
@@ -24,6 +26,7 @@ namespace mrw::ctrl
 		virtual bool hasDistant() const = 0;
 		virtual bool hasMain() const = 0;
 		virtual QString name() const = 0;
+		virtual mrw::model::SectionState state() const = 0;
 
 	signals:
 		void update();

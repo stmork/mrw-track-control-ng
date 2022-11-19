@@ -8,6 +8,7 @@
 
 using namespace mrw::ctrl;
 using namespace mrw::ui;
+using namespace mrw::model;
 
 SignalStudy::SignalStudy(QWidget * parent) :
 	QWidget(parent),
@@ -48,6 +49,37 @@ SignalStudy::SignalStudy(QWidget * parent) :
 	connect(
 		ui->availableButton_3, &QRadioButton::clicked,
 		&mock, &SignalControllerMock::setMain);
+
+	connect(
+		ui->freeButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::FREE);
+	});
+	connect(
+		ui->shuntButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::SHUNTING);
+	});
+	connect(
+		ui->tourButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::TOUR);
+	});
+	connect(
+		ui->occupiedButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::OCCUPIED);
+	});
+	connect(
+		ui->passedButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::PASSED);
+	});
 
 	connect(
 		&mock, &SignalControllerMock::update,

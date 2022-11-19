@@ -12,8 +12,8 @@ const QColor BaseWidget::GREEN(Qt::green);
 const QColor BaseWidget::WHITE(Qt::white);
 const QColor BaseWidget::RED(Qt::red);
 const QColor BaseWidget::YELLOW(Qt::yellow);
-const QColor BaseWidget::BLUE(64,64,255);
-const QColor BaseWidget::RED_LIGHT(255,96,96);
+const QColor BaseWidget::BLUE(64, 64, 255);
+const QColor BaseWidget::RED_LIGHT(255, 128, 128);
 
 const std::unordered_map<SectionState, QColor> BaseWidget::color_map
 {

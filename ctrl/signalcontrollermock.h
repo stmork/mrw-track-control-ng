@@ -22,6 +22,8 @@ namespace mrw::ctrl
 		bool distant_signal = false;
 		bool main_signal    = true;
 
+		mrw::model::SectionState section_state = mrw::model::SectionState::FREE;
+
 	public:
 		explicit SignalControllerMock(QObject * parent = nullptr);
 
@@ -30,9 +32,15 @@ namespace mrw::ctrl
 		virtual bool hasDistant() const override;
 		virtual bool hasMain() const override;
 		virtual QString name() const override;
+		virtual mrw::model::SectionState state() const override
+		{
+			return section_state;
+		}
+
+		void setDirection(const bool dir = true);
+		void setSectionState(const mrw::model::SectionState state);
 
 	public slots:
-		void setDirection(const bool dir = true);
 		void setShunting(const bool shunt = true);
 		void setDistant(const bool distant = true);
 		void setMain(const bool main = true);
