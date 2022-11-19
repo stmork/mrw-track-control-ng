@@ -56,7 +56,7 @@ namespace mrw::ui
 	private:
 		static const std::unordered_map<mrw::model::SectionState, QColor> color_map;
 
-		const bool verbose = true;
+		const bool verbose;
 	};
 }
 
