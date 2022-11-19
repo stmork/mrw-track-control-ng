@@ -11,6 +11,7 @@
 #include <vector>
 #include <regex>
 #include <functional>
+#include <type_traits>
 
 #include <QDomElement>
 
@@ -137,6 +138,8 @@ namespace mrw::model
 			return true;
 		})
 		{
+			static_assert(std::is_base_of<AssemblyPart, T>(), "Collection only allowed for assembly parts.");
+
 			for (AssemblyPart * part : assembly_parts)
 			{
 				T * element = dynamic_cast<T *>(part);

@@ -8,6 +8,8 @@
 #ifndef MRW_UTIL_SINGLETON_H
 #define MRW_UTIL_SINGLETON_H
 
+#include <type_traits>
+
 namespace mrw::util
 {
 	/**
@@ -53,6 +55,8 @@ namespace mrw::util
 		 */
 		static T & instance()
 		{
+			static_assert(std::is_base_of<Singleton, T>(), "Template class is not a singleton!");
+
 			static T singleton;
 
 			return singleton;
