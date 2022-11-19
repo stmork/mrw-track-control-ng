@@ -6,6 +6,10 @@
 #include "sectionstudy.h"
 #include "ui_sectionstudy.h"
 
+using namespace mrw::ctrl;
+using namespace mrw::ui;
+using namespace mrw::model;
+
 SectionStudy::SectionStudy(QWidget * parent) :
 	QWidget(parent),
 	ui(new Ui::SectionStudy)
@@ -19,6 +23,47 @@ SectionStudy::SectionStudy(QWidget * parent) :
 
 	ui->symbolWidget->setAutoFillBackground(true);
 	ui->symbolWidget->setPalette(pal);
+
+	ui->bigSwitchWidget->setController(&mock);
+	ui->smallSwitchWidget->setController(&mock);
+
+	connect(
+		ui->freeButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::FREE);
+	});
+	connect(
+		ui->shuntButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::SHUNTING);
+	});
+	connect(
+		ui->tourButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::TOUR);
+	});
+	connect(
+		ui->occupiedButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::OCCUPIED);
+	});
+	connect(
+		ui->passedButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::PASSED);
+	});
+
+	connect(
+		&mock, &SectionControllerMock::update,
+		ui->bigSwitchWidget, qOverload<>(&QWidget::repaint));
+	connect(
+		&mock, &SectionControllerMock::update,
+		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
 
 	ui->backwardButton->setChecked(true);
 	ui->freeButton->setChecked(true);

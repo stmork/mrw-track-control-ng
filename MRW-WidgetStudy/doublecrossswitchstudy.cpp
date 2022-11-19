@@ -6,6 +6,10 @@
 #include "doublecrossswitchstudy.h"
 #include "ui_doublecrossswitchstudy.h"
 
+using namespace mrw::ctrl;
+using namespace mrw::ui;
+using namespace mrw::model;
+
 DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	QWidget(parent),
 	ui(new Ui::DoubleCrossSwitchStudy)
@@ -19,6 +23,44 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 
 	ui->bigSwitchWidget->setController(&mock);
 	ui->smallSwitchWidget->setController(&mock);
+
+	connect(
+		ui->freeButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::FREE);
+	});
+	connect(
+		ui->shuntButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::SHUNTING);
+	});
+	connect(
+		ui->tourButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::TOUR);
+	});
+	connect(
+		ui->occupiedButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::OCCUPIED);
+	});
+	connect(
+		ui->passedButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setSectionState(SectionState::PASSED);
+	});
+
+	connect(
+		&mock, &DoubleCrossSwitchControllerMock::update,
+		ui->bigSwitchWidget, qOverload<>(&QWidget::repaint));
+	connect(
+		&mock, &DoubleCrossSwitchControllerMock::update,
+		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
 
 	ui->symbolWidget->setAutoFillBackground(true);
 	ui->symbolWidget->setPalette(pal);

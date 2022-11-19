@@ -6,11 +6,14 @@
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
 #include <ctrl/signalcontrollerproxy.h>
+#include <ctrl/sectioncontrollerproxy.h>
 
 #include <ui/sectionwidget.h>
 #include <ui/signalwidget.h>
 #include <ui/regularswitchwidget.h>
 #include <ui/doublecrossswitchwidget.h>
+
+#include <model/rail.h>
 
 #include "regionform.h"
 #include "ui_regionform.h"
@@ -56,7 +59,7 @@ RegionForm::RegionForm(mrw::model::Region * region, QWidget * parent) :
 	for (DoubleCrossSwitch * part : region_dc_switches)
 	{
 		DoubleCrossSwitchControllerProxy * ctrl   = new DoubleCrossSwitchControllerProxy(this);
-		DoubleCrossSwitchWidget      *     widget = new DoubleCrossSwitchWidget(ui->controlWidget);
+		DoubleCrossSwitchWidget      *     widget = new DoubleCrossSwitchWidget(ui->controlWidget, ctrl);
 
 		ctrl->setSwitch(part);
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
@@ -84,18 +87,17 @@ void RegionForm::changeEvent(QEvent * e)
 
 void RegionForm::setupSection(Section * section)
 {
-	std::vector<Rail *> section_signals;
+	std::vector<Rail *> rials;
 
-	section->parts<Rail>(section_signals);
+	section->parts<Rail>(rials);
 
-	if (section_signals.size() > 0)
+	if (rials.size() > 0)
 	{
-		// TODO: Implement SectionController!
-//		SignalControllerProxy * ctrl   = new SignalControllerProxy(section, direction, this);
-		SectionWidget      *     widget = new SectionWidget(ui->controlWidget);
+		SectionControllerProxy * ctrl   = new SectionControllerProxy(section, this);
+		SectionWidget      *     widget = new SectionWidget(ui->controlWidget, ctrl);
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
-		widget->move(section_signals[0]->position() * BaseWidget::SIZE);
+		widget->move(rials[0]->position() * BaseWidget::SIZE);
 	}
 }
 

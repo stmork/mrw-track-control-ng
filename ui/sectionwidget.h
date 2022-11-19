@@ -9,7 +9,7 @@
 #define MRW_UI_SECTIONWIDGET_H
 
 #include <ui/basewidget.h>
-#include <model/rail.h>
+#include <ctrl/sectioncontroller.h>
 
 namespace mrw::ui
 {
@@ -17,8 +17,15 @@ namespace mrw::ui
 	{
 		Q_OBJECT
 
+	private:
+		mrw::ctrl::SectionController * controller = nullptr;
+
 	public:
-		explicit SectionWidget(QWidget * parent);
+		explicit SectionWidget(
+				QWidget *                      parent     = nullptr,
+				mrw::ctrl::SectionController * controller = nullptr);
+
+		void setController(mrw::ctrl::SectionController * ctrl);
 
 	protected:
 		void paint(QPainter & painter) override;

@@ -20,6 +20,8 @@ SignalWidget::SignalWidget(
 
 void SignalWidget::setController(SignalController * ctrl)
 {
+	Q_ASSERT(controller == nullptr);
+
 	controller = ctrl;
 }
 

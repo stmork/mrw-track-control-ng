@@ -18,6 +18,8 @@ SOURCES += \
 	../ctrl/doublecrossswitchcontrollermock.cpp \
 	../ctrl/signalcontroller.cpp \
 	../ctrl/signalcontrollermock.cpp \
+	../ctrl/sectioncontroller.cpp \
+	../ctrl/sectioncontrollermock.cpp \
 	../ui/basewidget.cpp \
 	../ui/doublecrossswitchwidget.cpp \
 	../ui/regularswitchwidget.cpp \
@@ -37,6 +39,8 @@ HEADERS += \
 	../ctrl/doublecrossswitchcontrollermock.h \
 	../ctrl/signalcontroller.h \
 	../ctrl/signalcontrollermock.h \
+	../ctrl/sectioncontroller.h \
+	../ctrl/sectioncontrollermock.h \
 	../ui/basewidget.h \
 	../ui/doublecrossswitchwidget.h \
 	../ui/regularswitchwidget.h \

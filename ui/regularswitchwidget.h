@@ -23,7 +23,7 @@ namespace mrw::ui
 
 	public:
 		explicit RegularSwitchWidget(
-			QWidget               *              parent = nullptr,
+			QWidget               *              parent     = nullptr,
 			mrw::ctrl::RegularSwitchController * controller = nullptr);
 
 		void setController(mrw::ctrl::RegularSwitchController * ctrl);

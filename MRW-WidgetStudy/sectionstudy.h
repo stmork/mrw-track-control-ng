@@ -10,6 +10,8 @@
 
 #include <QWidget>
 
+#include <ctrl/sectioncontrollermock.h>
+
 namespace Ui
 {
 	class SectionStudy;
@@ -27,7 +29,9 @@ protected:
 	void changeEvent(QEvent * e) override;
 
 private:
-	Ui::SectionStudy * ui;
+	Ui::SectionStudy        *        ui;
+
+	mrw::ctrl::SectionControllerMock mock;
 };
 
 #endif // SECTIONSTUDY_H

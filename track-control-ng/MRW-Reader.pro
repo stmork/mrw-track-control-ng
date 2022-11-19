@@ -19,6 +19,8 @@ SOURCES += \
 	../ctrl/doublecrossswitchcontrollerproxy.cpp \
 	../ctrl/signalcontroller.cpp \
 	../ctrl/signalcontrollerproxy.cpp \
+	../ctrl/sectioncontroller.cpp \
+	../ctrl/sectioncontrollerproxy.cpp \
 	../ui/basewidget.cpp \
 	../ui/barwidget.cpp \
 	../ui/circlelivewidget.cpp \
@@ -40,6 +42,8 @@ HEADERS += \
 	../ctrl/doublecrossswitchcontrollerproxy.h \
 	../ctrl/signalcontroller.h \
 	../ctrl/signalcontrollerproxy.h \
+	../ctrl/sectioncontroller.h \
+	../ctrl/sectioncontrollerproxy.h \
 	../ui/basewidget.h \
 	../ui/barwidget.h \
 	../ui/circlelivewidget.h \
