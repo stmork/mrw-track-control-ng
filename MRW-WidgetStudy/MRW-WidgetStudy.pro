@@ -11,6 +11,7 @@ SOURCES += \
 	doublecrossswitchstudy.cpp \
 	main.cpp \
 	mainwindow.cpp \
+	../ctrl/basecontroller.cpp \
 	../ctrl/regularswitchcontroller.cpp \
 	../ctrl/regularswitchcontrollermock.cpp \
 	../ctrl/signalcontroller.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 HEADERS += \
 	doublecrossswitchstudy.h \
 	mainwindow.h \
+	../ctrl/basecontroller.h \
 	../ctrl/regularswitchcontroller.h \
 	../ctrl/regularswitchcontrollermock.h \
 	../ctrl/signalcontroller.h \

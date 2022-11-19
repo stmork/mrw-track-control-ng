@@ -10,6 +10,7 @@ CONFIG   += staticlib
 include(../common.pri)
 
 SOURCES +=  \
+	basecontroller.cpp \
 	regularswitchcontroller.cpp \
 	regularswitchcontrollermock.cpp \
 	regularswitchcontrollerproxy.cpp \
@@ -17,6 +18,7 @@ SOURCES +=  \
 	signalcontrollermock.cpp \
 	signalcontrollerproxy.cpp
 HEADERS +=  \
+	basecontroller.h \
 	regularswitchcontroller.h \
 	regularswitchcontrollermock.h \
 	regularswitchcontrollerproxy.h \

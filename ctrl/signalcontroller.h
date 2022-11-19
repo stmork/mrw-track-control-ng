@@ -8,13 +8,11 @@
 #ifndef MRW_CTRL_SIGNALCONTROLLER_H
 #define MRW_CTRL_SIGNALCONTROLLER_H
 
-#include <QObject>
-
-#include <model/section.h>
+#include <ctrl/basecontroller.h>
 
 namespace mrw::ctrl
 {
-	class SignalController : public QObject
+	class SignalController : public BaseController
 	{
 		Q_OBJECT
 
@@ -25,11 +23,6 @@ namespace mrw::ctrl
 		virtual bool hasShunting() const = 0;
 		virtual bool hasDistant() const = 0;
 		virtual bool hasMain() const = 0;
-		virtual QString name() const = 0;
-		virtual mrw::model::SectionState state() const = 0;
-
-	signals:
-		void update();
 	};
 }
 

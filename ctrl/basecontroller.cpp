@@ -3,11 +3,10 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "regularswitchcontroller.h"
+#include "ctrl/basecontroller.h"
 
 using namespace mrw::ctrl;
 
-RegularSwitchController::RegularSwitchController(QObject * parent) :
-	BaseController(parent)
+BaseController::BaseController(QObject * parent) : QObject(parent)
 {
 }

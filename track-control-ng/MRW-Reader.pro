@@ -12,6 +12,7 @@ SOURCES += \
 	mainwindow.cpp \
 	modelrepository.cpp \
 	regionform.cpp \
+	../ctrl/basecontroller.cpp \
 	../ctrl/regularswitchcontroller.cpp \
 	../ctrl/regularswitchcontrollerproxy.cpp \
 	../ctrl/signalcontroller.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
 	mainwindow.h \
 	modelrepository.h \
 	regionform.h \
+	../ctrl/basecontroller.h \
 	../ctrl/regularswitchcontroller.h \
 	../ctrl/regularswitchcontrollerproxy.h \
 	../ctrl/signalcontroller.h \
