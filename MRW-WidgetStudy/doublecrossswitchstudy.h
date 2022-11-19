@@ -29,7 +29,7 @@ protected:
 	void changeEvent(QEvent * e) override;
 
 private:
-	Ui::DoubleCrossSwitchStudy *               ui;
+	Ui::DoubleCrossSwitchStudy        *        ui;
 
 	mrw::ctrl::DoubleCrossSwitchControllerMock mock;
 };
