@@ -10,6 +10,7 @@
 
 #include <unordered_set>
 
+#include <can/commands.h>
 #include <model/railpart.h>
 #include <model/switchmodulereference.h>
 
@@ -55,6 +56,14 @@ namespace mrw::model
 		 * switch.
 		 */
 		bool isFlankProtection(AbstractSwitch * other) const;
+
+		/**
+		 * This method converts the internal switch state into the right
+		 * token for a MrwMessage;
+		 *
+		 * @return The turn command for a MrwMessage.
+		 */
+		virtual mrw::can::SwitchState commandState() const = 0;
 
 	protected:
 		/**

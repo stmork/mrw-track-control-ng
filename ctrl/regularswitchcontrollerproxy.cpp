@@ -7,6 +7,7 @@
 
 using namespace mrw::can;
 using namespace mrw::ctrl;
+using namespace mrw::model;
 
 RegularSwitchControllerProxy::RegularSwitchControllerProxy(QObject * parent) :
 	RegularSwitchController(parent)
@@ -22,12 +23,12 @@ void RegularSwitchControllerProxy::setSwitch(mrw::model::RegularSwitch * new_par
 
 bool RegularSwitchControllerProxy::isLeft() const
 {
-	return part->state() == SwitchState::SWITCH_STATE_LEFT;
+	return part->state() == RegularSwitch::State::AB;
 }
 
 bool RegularSwitchControllerProxy::isRight() const
 {
-	return part->state() == SwitchState::SWITCH_STATE_RIGHT;
+	return part->state() == RegularSwitch::State::AC;
 }
 
 bool RegularSwitchControllerProxy::isRightHanded() const

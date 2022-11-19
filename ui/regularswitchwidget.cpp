@@ -58,7 +58,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	painter.setPen(YELLOW);
 	painter.drawText(QRectF(
 			controller->isDirection() ? -SCALE : -20,
-			controller->isRightHanded() ? -80 : 30, 120, 50),
+			controller->isDirection() == controller->isRightHanded() ? -80 : 30, 120, 50),
 		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
 
 	if (controller->isRightHanded())

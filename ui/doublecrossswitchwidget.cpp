@@ -24,7 +24,18 @@ void DoubleCrossSwitchWidget::setController(mrw::ctrl::DoubleCrossSwitchControll
 
 void DoubleCrossSwitchWidget::paint(QPainter & painter)
 {
+	QFont        font = painter.font();
+
 	rescale(painter);
+
+	// Draw switch name before mirroring to prevent mirrored font drawing.
+	font.setPixelSize(FONT_HEIGHT);
+	painter.setFont(font);
+	painter.setPen(YELLOW);
+	painter.drawText(QRectF(
+			controller->isDirection() ? -SCALE : -20,
+			controller->isDirection() ? 30 : -80, 120, FONT_HEIGHT),
+		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
 
 	// TODO: Draw correctly!
 	painter.setPen(QPen(sectionColor(controller->state()), 20.0));

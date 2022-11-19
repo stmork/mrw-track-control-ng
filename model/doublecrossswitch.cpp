@@ -7,6 +7,7 @@
 #include "model/doublecrossswitch.h"
 #include "model/regularswitch.h"
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 DoubleCrossSwitch::DoubleCrossSwitch(
@@ -86,4 +87,14 @@ QString DoubleCrossSwitch::toString() const
 QString mrw::model::DoubleCrossSwitch::key() const
 {
 	return "DKW" + name();
+}
+
+mrw::can::SwitchState mrw::model::DoubleCrossSwitch::commandState() const
+{
+	const bool b_active = unsigned(switch_state) & B_MASK;
+	const bool d_active = unsigned(switch_state) & D_MASK;
+
+	return b_active == d_active ?
+		SwitchState::SWITCH_STATE_LEFT :
+		SwitchState::SWITCH_STATE_RIGHT;
 }

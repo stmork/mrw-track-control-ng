@@ -25,6 +25,19 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	ui->smallSwitchWidget->setController(&mock);
 
 	connect(
+		ui->forwardButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setDirection(true);
+	});
+	connect(
+		ui->backwardButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setDirection(false);
+	});
+
+	connect(
 		ui->freeButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{

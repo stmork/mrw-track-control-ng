@@ -36,9 +36,13 @@ namespace mrw::model
 		RailPart   *   b = nullptr;
 		RailPart   *   c = nullptr;
 
-		mrw::can::SwitchState  switch_state = mrw::can::SwitchState::SWITCH_STATE_LEFT;
-
 	public:
+		enum class State : unsigned
+		{
+			AB = 1,
+			AC = 2
+		};
+
 		explicit RegularSwitch(
 			ModelRailway     *    model_railway,
 			Section       *       model_section,
@@ -49,18 +53,42 @@ namespace mrw::model
 			return right_branch;
 		}
 
-		inline mrw::can::SwitchState state() const
+		/**
+		 * This method returns the internal state of this RegularSwitch. As
+		 * of the RegularSwitch::State enumeration it can have two states. So
+		 * The active track state and the actuator state are the same.
+		 *
+		 * @return The internal state.
+		 * @see commandState()
+		 */
+		inline State state() const
 		{
 			return switch_state;
+		}
+
+		/**
+		 * This method sets the internal state of this RegularSwitch. As
+		 * of the RegularSwitch::State enumeration it can have two states. So
+		 * The active track state and the actuator state are the same.
+		 *
+		 * @param state The new internal state.
+		 * @see commandState()
+		 */
+		inline void setState(const State state)
+		{
+			switch_state = state;
 		}
 
 		bool    valid() const override;
 		QString toString() const override;
 		QString key() const override;
+		mrw::can::SwitchState commandState() const override;
 
 	private:
 		void link() override;
 		void findFlankSwitches() override;
+
+		State switch_state = State::AB;
 	};
 }
 

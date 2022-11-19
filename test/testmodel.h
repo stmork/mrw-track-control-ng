@@ -32,6 +32,8 @@ namespace mrw::test
 		void testModules();
 		void testRegions();
 		void testSections();
+		void testRegularSwitchStates();
+		void tesDoubleCrossSwitchStates();
 	};
 }
 

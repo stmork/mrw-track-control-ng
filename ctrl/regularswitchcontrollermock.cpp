@@ -5,7 +5,7 @@
 
 #include <ctrl/regularswitchcontrollermock.h>
 
-using namespace mrw::can;
+using namespace mrw::model;
 using namespace mrw::ctrl;
 
 RegularSwitchControllerMock::RegularSwitchControllerMock(QObject * parent) :
@@ -15,13 +15,13 @@ RegularSwitchControllerMock::RegularSwitchControllerMock(QObject * parent) :
 
 void RegularSwitchControllerMock::setLeft(const bool left)
 {
-	switch_state = left ? SWITCH_STATE_LEFT : SWITCH_STATE_RIGHT;
+	switch_state = left ? RegularSwitch::State::AB : RegularSwitch::State::AC;
 	emit update();
 }
 
 void RegularSwitchControllerMock::setRight(const bool right)
 {
-	switch_state = right ? SWITCH_STATE_RIGHT : SWITCH_STATE_LEFT;
+	switch_state = right ? RegularSwitch::State::AC : RegularSwitch::State::AB;
 	emit update();
 }
 
@@ -51,12 +51,12 @@ void RegularSwitchControllerMock::setSectionState(const mrw::model::SectionState
 
 bool RegularSwitchControllerMock::isLeft() const
 {
-	return switch_state == SWITCH_STATE_LEFT;
+	return switch_state == RegularSwitch::State::AB;
 }
 
 bool RegularSwitchControllerMock::isRight() const
 {
-	return switch_state == SWITCH_STATE_RIGHT;
+	return switch_state == RegularSwitch::State::AC;
 }
 
 bool RegularSwitchControllerMock::isRightHanded() const

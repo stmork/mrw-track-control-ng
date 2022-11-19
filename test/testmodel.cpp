@@ -5,14 +5,18 @@
 
 #include <QTest>
 
+#include <can/commands.h>
 #include <model/switchmodulereference.h>
 #include <model/controller.h>
 #include <model/lightsignal.h>
 #include <model/railpart.h>
+#include <model/regularswitch.h>
+#include <model/doublecrossswitch.h>
 #include <model/switchmodule.h>
 
 #include "testmodel.h"
 
+using namespace mrw::can;
 using namespace mrw::test;
 using namespace mrw::model;
 
@@ -123,6 +127,48 @@ void TestModel::testSections()
 		}
 
 		QVERIFY_EXCEPTION_THROWN(region->section(section_count), std::out_of_range);
+	}
+}
+
+void TestModel::testRegularSwitchStates()
+{
+	std::vector<RegularSwitch *> switches;
+
+	model->parts<RegularSwitch>(switches);
+	for (RegularSwitch * part : switches)
+	{
+		part->setState(RegularSwitch::State::AB);
+		QCOMPARE(part->state(), RegularSwitch::State::AB);
+		QCOMPARE(part->commandState(), SwitchState::SWITCH_STATE_LEFT);
+
+		part->setState(RegularSwitch::State::AC);
+		QCOMPARE(part->state(), RegularSwitch::State::AC);
+		QCOMPARE(part->commandState(), SwitchState::SWITCH_STATE_RIGHT);
+	}
+}
+
+void TestModel::tesDoubleCrossSwitchStates()
+{
+	std::vector<DoubleCrossSwitch *> switches;
+
+	model->parts<DoubleCrossSwitch>(switches);
+	for (DoubleCrossSwitch * part : switches)
+	{
+		part->setState(DoubleCrossSwitch::State::AC);
+		QCOMPARE(part->state(), DoubleCrossSwitch::State::AC);
+		QCOMPARE(part->commandState(), SwitchState::SWITCH_STATE_LEFT);
+
+		part->setState(DoubleCrossSwitch::State::AD);
+		QCOMPARE(part->state(), DoubleCrossSwitch::State::AD);
+		QCOMPARE(part->commandState(), SwitchState::SWITCH_STATE_RIGHT);
+
+		part->setState(DoubleCrossSwitch::State::BC);
+		QCOMPARE(part->state(), DoubleCrossSwitch::State::BC);
+		QCOMPARE(part->commandState(), SwitchState::SWITCH_STATE_RIGHT);
+
+		part->setState(DoubleCrossSwitch::State::BD);
+		QCOMPARE(part->state(), DoubleCrossSwitch::State::BD);
+		QCOMPARE(part->commandState(), SwitchState::SWITCH_STATE_LEFT);
 	}
 }
 

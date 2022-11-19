@@ -44,12 +44,12 @@ void SignalWidget::paint(QPainter & painter)
 	rescale(painter);
 
 	// Draw switch name before rotating to prevent rotated font drawing.
-	font.setPixelSize(50);
+	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
 	painter.setPen(YELLOW);
 	painter.drawText(QRectF(
 			controller->isDirection() ? -20 : -100,
-			controller->isDirection() ? -80 : 30, 120, 50),
+			controller->isDirection() ? -80 : 30, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
 
 	if (!controller->isDirection())
@@ -62,7 +62,7 @@ void SignalWidget::paint(QPainter & painter)
 	painter.setPen(QPen(sectionColor(controller->state()), 20.0));
 	painter.drawLine( -100.0f, 0.0f, 100.0f, 0.0f);
 
-	QPen pen(Qt::red, 8.0);
+	QPen pen(RED, 8.0);
 
 	pen.setCapStyle(Qt::FlatCap);
 	painter.setPen(pen);

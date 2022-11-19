@@ -8,7 +8,7 @@
 #ifndef MRW_CTRL_REGULARSWITCHCONTROLLERMOCK_H
 #define MRW_CTRL_REGULARSWITCHCONTROLLERMOCK_H
 
-#include <can/commands.h>
+#include <model/regularswitch.h>
 #include <ctrl/regularswitchcontroller.h>
 
 namespace mrw::ctrl
@@ -22,8 +22,8 @@ namespace mrw::ctrl
 		bool                  left_handed  = true;
 		bool                  direction    = false;
 
-		mrw::model::SectionState section_state = mrw::model::SectionState::FREE;
-		mrw::can::SwitchState    switch_state  = mrw::can::SWITCH_STATE_LEFT;
+		mrw::model::SectionState          section_state = mrw::model::SectionState::FREE;
+		mrw::model::RegularSwitch::State  switch_state  = mrw::model::RegularSwitch::State::AB;
 
 	public:
 		RegularSwitchControllerMock(QObject * parent = nullptr);

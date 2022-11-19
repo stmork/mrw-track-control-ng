@@ -6,6 +6,7 @@
 #include "model/modelrailway.h"
 #include "model/regularswitch.h"
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 RegularSwitch::RegularSwitch(
@@ -74,7 +75,12 @@ QString RegularSwitch::toString() const
 		arg(name());
 }
 
-QString mrw::model::RegularSwitch::key() const
+QString RegularSwitch::key() const
 {
 	return "Weiche" + name();
+}
+
+SwitchState mrw::model::RegularSwitch::commandState() const
+{
+	return static_cast<SwitchState>(switch_state);
 }

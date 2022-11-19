@@ -25,6 +25,7 @@ namespace mrw::ui
 	public:
 		static constexpr int   SIZE  = 40;
 		static constexpr float SCALE = 100.0f;
+		static constexpr int   FONT_HEIGHT = 50;
 
 		static const QColor GREEN;
 		static const QColor WHITE;
