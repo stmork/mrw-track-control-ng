@@ -18,6 +18,9 @@ namespace mrw::ctrl
 
 	private:
 		mrw::model::SectionState section_state = mrw::model::SectionState::FREE;
+		bool                     direction     = true;
+		bool                     a_ends        = false;
+		bool                     b_ends        = false;
 
 	public:
 		explicit SectionControllerMock(QObject * parent = nullptr);
@@ -28,7 +31,24 @@ namespace mrw::ctrl
 			return section_state;
 		}
 
+		virtual bool isDirection() const override
+		{
+			return direction;
+		}
+
+		virtual bool forwardEnds() const override
+		{
+			return a_ends;
+		}
+
+		virtual bool backwardEnds() const override
+		{
+			return b_ends;
+		}
+
 		void setSectionState(const mrw::model::SectionState state);
+		void setDirection(const bool dir = true);
+		void setEnds(const bool a, const bool b);
 	};
 }
 

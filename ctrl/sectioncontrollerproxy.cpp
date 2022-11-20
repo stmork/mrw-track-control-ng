@@ -18,6 +18,12 @@ SectionControllerProxy::SectionControllerProxy(
 	SectionController(parent),
 	section(parent_section)
 {
+	std::vector<Rail *> rails;
+
+	section->parts<Rail>(rails);
+
+	Q_ASSERT(rails.size() > 0);
+	rail = rails[0];
 }
 
 QPoint SectionControllerProxy::point() const

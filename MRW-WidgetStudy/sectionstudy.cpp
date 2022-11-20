@@ -28,6 +28,38 @@ SectionStudy::SectionStudy(QWidget * parent) :
 	ui->smallSwitchWidget->setController(&mock);
 
 	connect(
+		ui->forwardButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setDirection(true);
+	});
+	connect(
+		ui->backwardButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setDirection(false);
+	});
+
+	connect(
+		ui->leftButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setEnds(true, false);
+	});
+	connect(
+		ui->noButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setEnds(false, false);
+	});
+	connect(
+		ui->rightButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setEnds(false, true);
+	});
+
+	connect(
 		ui->freeButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
@@ -66,6 +98,7 @@ SectionStudy::SectionStudy(QWidget * parent) :
 		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
 
 	ui->backwardButton->setChecked(true);
+	ui->noButton->setChecked(true);
 	ui->freeButton->setChecked(true);
 }
 

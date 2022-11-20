@@ -87,17 +87,17 @@ void RegionForm::changeEvent(QEvent * e)
 
 void RegionForm::setupSection(Section * section)
 {
-	std::vector<Rail *> rials;
+	std::vector<Rail *> rails;
 
-	section->parts<Rail>(rials);
+	section->parts<Rail>(rails);
 
-	if (rials.size() > 0)
+	if (rails.size() > 0)
 	{
 		SectionControllerProxy * ctrl   = new SectionControllerProxy(section, this);
 		SectionWidget      *     widget = new SectionWidget(ui->controlWidget, ctrl);
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
-		widget->move(rials[0]->position() * BaseWidget::SIZE);
+		widget->move(rails[0]->position() * BaseWidget::SIZE);
 	}
 }
 

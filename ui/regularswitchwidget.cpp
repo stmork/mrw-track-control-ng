@@ -19,7 +19,7 @@ RegularSwitchWidget::RegularSwitchWidget(
 {
 }
 
-void RegularSwitchWidget::setController(mrw::ctrl::RegularSwitchController * ctrl)
+void RegularSwitchWidget::setController(RegularSwitchController * ctrl)
 {
 	Q_ASSERT(controller == nullptr);
 

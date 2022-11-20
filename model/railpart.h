@@ -164,17 +164,6 @@ namespace mrw::model
 		 */
 		virtual bool contains(const RailPart * rail, const bool dir) const;
 
-	protected:
-		/**
-		 * This method resolves a connected RailPart from the EMF model.
-		 *
-		 * @param attr The EMF/XMI attribute name which contains the link
-		 * path.
-		 *
-		 * @return The connected RailPart.
-		 */
-		RailPart          *          resolve(const char * attr) const;
-
 		/**
 		 * This method returns all connectors in the given counting
 		 * direction.
@@ -194,6 +183,17 @@ namespace mrw::model
 		 * may be empty in case of an end rail.
 		 */
 		const std::set<RailInfo> & advance(const bool dir) const;
+
+	protected:
+		/**
+		 * This method resolves a connected RailPart from the EMF model.
+		 *
+		 * @param attr The EMF/XMI attribute name which contains the link
+		 * path.
+		 *
+		 * @return The connected RailPart.
+		 */
+		RailPart          *          resolve(const char * attr) const;
 	};
 }
 

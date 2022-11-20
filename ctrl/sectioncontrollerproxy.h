@@ -8,8 +8,10 @@
 #ifndef MRW_CTRL_SECTIONCONTROLLERPROXY_H
 #define MRW_CTRL_SECTIONCONTROLLERPROXY_H
 
-#include <model/section.h>
 #include <ctrl/sectioncontroller.h>
+#include <model/region.h>
+#include <model/section.h>
+#include <model/rail.h>
 
 namespace mrw::ctrl
 {
@@ -19,6 +21,7 @@ namespace mrw::ctrl
 
 	private:
 		mrw::model::Section  *  section   = nullptr;
+		mrw::model::Rail    *   rail      = nullptr;
 
 	public:
 		explicit SectionControllerProxy(
@@ -32,6 +35,21 @@ namespace mrw::ctrl
 		virtual mrw::model::SectionState state() const override
 		{
 			return section->state();
+		}
+
+		virtual bool isDirection() const override
+		{
+			return rail->aIsDir() == section->region()->direction();
+		}
+
+		virtual bool forwardEnds() const override
+		{
+			return rail->advance(true).empty();
+		}
+
+		virtual bool backwardEnds() const override
+		{
+			return rail->advance(false).empty();
 		}
 	};
 }

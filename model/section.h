@@ -57,7 +57,7 @@ namespace mrw::model
 	public:
 		explicit Section(
 			ModelRailway     *    model_railway,
-			Region *              region,
+			Region        *       region,
 			const QDomElement  &  element);
 		virtual ~Section();
 
