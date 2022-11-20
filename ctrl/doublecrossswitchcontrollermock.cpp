@@ -20,6 +20,12 @@ void DoubleCrossSwitchControllerMock::setDirection(const bool dir)
 	emit update();
 }
 
+void DoubleCrossSwitchControllerMock::setLock(const BaseController::LockState lock)
+{
+	lock_state = lock;
+	emit update();
+}
+
 void DoubleCrossSwitchControllerMock::setSectionState(const SectionState state)
 {
 	section_state = state;

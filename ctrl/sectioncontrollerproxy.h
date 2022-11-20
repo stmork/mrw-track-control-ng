@@ -51,6 +51,11 @@ namespace mrw::ctrl
 		{
 			return rail->advance(false).empty();
 		}
+
+		virtual LockState lock() const override
+		{
+			return LockState::UNLOCKED;
+		}
 	};
 }
 

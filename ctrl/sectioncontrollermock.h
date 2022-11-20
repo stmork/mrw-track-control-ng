@@ -21,14 +21,21 @@ namespace mrw::ctrl
 		bool                     direction     = true;
 		bool                     a_ends        = false;
 		bool                     b_ends        = false;
+		LockState                lock_state    = LockState::UNLOCKED;
 
 	public:
 		explicit SectionControllerMock(QObject * parent = nullptr);
 
 		virtual QString name() const override;
+
 		virtual mrw::model::SectionState state() const override
 		{
 			return section_state;
+		}
+
+		virtual LockState lock() const override
+		{
+			return lock_state;
 		}
 
 		virtual bool isDirection() const override

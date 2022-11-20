@@ -101,7 +101,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_6">
+    <layout class="QVBoxLayout" name="verticalLayout_7">
      <item>
       <widget class="QGroupBox" name="groupBox_4">
        <property name="title">
@@ -140,6 +140,36 @@
          <widget class="QRadioButton" name="passedButton">
           <property name="text">
            <string>durchgefahren</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_5">
+       <property name="title">
+        <string>Verschluss</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QRadioButton" name="openButton">
+          <property name="text">
+           <string>offen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="transitButton">
+          <property name="text">
+           <string>Umlauf</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="closedButton">
+          <property name="text">
+           <string>verschlossen</string>
           </property>
          </widget>
         </item>

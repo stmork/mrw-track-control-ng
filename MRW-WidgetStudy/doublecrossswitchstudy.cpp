@@ -37,6 +37,22 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 		mock.setDirection(false);
 	});
 
+	connect(ui->openButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(BaseController::LockState::UNLOCKED);
+	});
+	connect(ui->transitButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(BaseController::LockState::TRANSIT);
+	});
+	connect(ui->closedButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(BaseController::LockState::LOCKED);
+	});
+
 	connect(
 		ui->freeButton, &QRadioButton::clicked,
 		&mock, [&]()

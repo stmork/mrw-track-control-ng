@@ -15,6 +15,7 @@
 #include <QColor>
 
 #include <model/section.h>
+#include <ctrl/basecontroller.h>
 
 namespace mrw::ui
 {
@@ -28,6 +29,8 @@ namespace mrw::ui
 		static constexpr int   FONT_HEIGHT =  50;
 		static constexpr float RAIL_WIDTH  =  20.0f;
 		static constexpr float RAIL_SLOPE  =   2.0f;
+		static constexpr int   LOCK_WIDTH  =  40;
+		static constexpr int   LOCK_HEIGHT =  22;
 
 		static const QColor GREEN;
 		static const QColor WHITE;
@@ -43,6 +46,7 @@ namespace mrw::ui
 		virtual void paint(QPainter & painter) = 0;
 
 		static QColor sectionColor(const mrw::model::SectionState state);
+		bool drawLock(const mrw::ctrl::BaseController::LockState state) const;
 
 		void rescale(
 			QPainter & painter,
@@ -55,6 +59,10 @@ namespace mrw::ui
 			const float xSize = SCALE * 2.0,
 			const float ySize = SCALE * 2.0, const bool center = true);
 
+		void drawLock(
+			QPainter  & painter,
+			QColor      color,
+			const float x, const float y);
 		void drawSheared(
 			QPainter  & painter,
 			QColor      color,
@@ -66,6 +74,7 @@ namespace mrw::ui
 		static const std::unordered_map<mrw::model::SectionState, QColor> color_map;
 
 		const bool verbose;
+		unsigned counter = 0;
 	};
 }
 

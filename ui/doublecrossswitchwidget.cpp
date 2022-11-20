@@ -49,11 +49,22 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	}
 
 	// Draw point lock
-	painter.fillRect(-20.0, -11.0, 40.0, 22.0, WHITE);
+	// Draw point lock
+	if (drawLock(controller->lock()))
+	{
+		drawLock(
+			painter,
+			controller->lock() == BaseController::LockState::LOCKED ?
+			section_color : WHITE,
+			0, 0);
+	}
 
+	// Draw A segment
 	drawSheared(painter,
 		isA() ? section_color : outside_color, -50, -100,
 		isA() ?  70.0f :  15.0f, -RAIL_SLOPE);
+
+	// Draw D segment
 	drawSheared(painter,
 		isD() ? section_color : outside_color,  50,  100,
 		isD() ? -70.0f : -15.0f, -RAIL_SLOPE);
@@ -61,12 +72,12 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	pen.setCapStyle(Qt::FlatCap);
 	pen.setWidth(RAIL_WIDTH);
 
-	// Draw point part of switch
+	// Draw B segment
 	pen.setColor(isB() ? section_color : outside_color);
 	painter.setPen(pen);
 	painter.drawLine(-100.0f, 0.0f, isB() ? -27.0f : -80.0f, 0.0f);
 
-	// Draw point part of switch
+	// Draw C segment
 	pen.setColor(isC() ? section_color : outside_color);
 	painter.setPen(pen);
 	painter.drawLine( 100.0f, 0.0f, isC() ?  27.0f :  80.0f, 0.0f);

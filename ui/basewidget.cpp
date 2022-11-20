@@ -3,10 +3,14 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "basewidget.h"
+#include <util/clockservice.h>
+#include "ctrl/basecontroller.h"
+#include <ui/basewidget.h>
 
-using namespace mrw::ui;
+using namespace mrw::util;
 using namespace mrw::model;
+using namespace mrw::ctrl;
+using namespace mrw::ui;
 
 const QColor BaseWidget::GREEN(Qt::green);
 const QColor BaseWidget::WHITE(Qt::white);
@@ -26,6 +30,11 @@ const std::unordered_map<SectionState, QColor> BaseWidget::color_map
 
 BaseWidget::BaseWidget(QWidget * parent) : QWidget(parent), verbose(true)
 {
+	connect(&ClockService::instance(), &ClockService::Hz8, [this]()
+	{
+		counter++;
+		repaint();
+	});
 }
 
 void BaseWidget::paintEvent(QPaintEvent * event)
@@ -52,6 +61,11 @@ QColor BaseWidget::sectionColor(const SectionState state)
 	return it != color_map.end() ? it->second : Qt::white;
 }
 
+bool BaseWidget::drawLock(const BaseController::LockState state) const
+{
+	return (state != BaseController::LockState::TRANSIT) || (counter & 1);
+}
+
 void BaseWidget::rescale(
 	QPainter & painter,
 	const float xSize, const float ySize,
@@ -66,6 +80,11 @@ void BaseWidget::rescale(
 	const float xSize, const float ySize, const bool center)
 {
 	rescale(painter, xSize, ySize, center ? width() * 0.5f : 0.0f, center ? height() * 0.5f : 0.0f);
+}
+
+void BaseWidget::drawLock(QPainter & painter, QColor color, const float x, const float y)
+{
+	painter.fillRect(x - LOCK_WIDTH * 0.5, y - LOCK_HEIGHT * 0.5, LOCK_WIDTH, LOCK_HEIGHT, color);
 }
 
 void BaseWidget::drawSheared(

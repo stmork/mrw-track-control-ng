@@ -25,6 +25,7 @@ namespace mrw::ctrl
 		TourState shunt_state   = TourState::STOP;
 		TourState distant_state = TourState::STOP;
 		TourState main_state    = TourState::STOP;
+		LockState lock_state    = LockState::UNLOCKED;
 
 		mrw::model::SectionState section_state = mrw::model::SectionState::FREE;
 
@@ -36,13 +37,16 @@ namespace mrw::ctrl
 		virtual bool hasDistant() const override;
 		virtual bool hasMain() const override;
 		virtual QString name() const override;
+
 		virtual mrw::model::SectionState state() const override
 		{
 			return section_state;
 		}
 
-		void setDirection(const bool dir = true);
-		void setSectionState(const mrw::model::SectionState state);
+		virtual LockState lock() const override
+		{
+			return lock_state;
+		}
 
 		inline TourState distant() const override
 		{
@@ -58,6 +62,9 @@ namespace mrw::ctrl
 		{
 			return main_state;
 		}
+
+		void setDirection(const bool dir = true);
+		void setSectionState(const mrw::model::SectionState state);
 
 	public slots:
 		void setShuntStop();

@@ -62,10 +62,20 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	QColor outside_color = sectionColor(SectionState::FREE);
 
 	// Draw curved part of switch
-	drawSheared(painter, isTurnOut() ? section_color : outside_color, 0, -100, isTurnOut() ? 70 : 15);
+	drawSheared(
+		painter,
+		isTurnOut() ? section_color : outside_color,
+		0, -100, isTurnOut() ? 70 : 15);
 
 	// Draw point lock
-	painter.fillRect(-65.0, -11.0, 40.0, 22.0, WHITE);
+	if (drawLock(controller->lock()))
+	{
+		drawLock(
+			painter,
+			controller->lock() == BaseController::LockState::LOCKED ?
+			section_color : WHITE,
+			-45, 0);
+	}
 
 	QPen pen;
 	pen.setCapStyle(Qt::FlatCap);

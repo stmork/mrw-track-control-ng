@@ -49,6 +49,11 @@ namespace mrw::ctrl
 		{
 			return section->state();
 		}
+
+		virtual LockState lock() const override
+		{
+			return LockState::UNLOCKED;
+		}
 	};
 }
 

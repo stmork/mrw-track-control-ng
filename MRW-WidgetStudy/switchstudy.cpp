@@ -40,45 +40,54 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 		ui->rightButton, &QRadioButton::clicked,
 		&mock, &RegularSwitchControllerMock::setRight);
 
-	connect(
-		ui->forwardButton, &QRadioButton::clicked,
+	connect(ui->forwardButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setDirection(true);
 	});
-	connect(
-		ui->backwardButton, &QRadioButton::clicked,
+	connect(ui->backwardButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setDirection(false);
 	});
 
-	connect(
-		ui->freeButton, &QRadioButton::clicked,
+	connect(ui->openButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(BaseController::LockState::UNLOCKED);
+	});
+	connect(ui->transitButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(BaseController::LockState::TRANSIT);
+	});
+	connect(ui->closedButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(BaseController::LockState::LOCKED);
+	});
+
+	connect(ui->freeButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setSectionState(SectionState::FREE);
 	});
-	connect(
-		ui->shuntButton, &QRadioButton::clicked,
+	connect(ui->shuntButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setSectionState(SectionState::SHUNTING);
 	});
-	connect(
-		ui->tourButton, &QRadioButton::clicked,
+	connect(ui->tourButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setSectionState(SectionState::TOUR);
 	});
-	connect(
-		ui->occupiedButton, &QRadioButton::clicked,
+	connect(ui->occupiedButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setSectionState(SectionState::OCCUPIED);
 	});
-	connect(
-		ui->passedButton, &QRadioButton::clicked,
+	connect(ui->passedButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setSectionState(SectionState::PASSED);
