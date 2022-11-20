@@ -136,7 +136,7 @@ void Controller::link()
 	}
 }
 
-size_t mrw::model::Controller::ports() const
+size_t Controller::ports() const
 {
 	size_t ports = 0;
 

@@ -15,6 +15,7 @@
 #include "modelrepository.h"
 
 using namespace mrw::util;
+using namespace mrw::model;
 
 int main(int argc, char * argv[])
 {
@@ -28,7 +29,7 @@ int main(int argc, char * argv[])
 
 	if (repo)
 	{
-		mrw::model::ModelRailway * model = repo;
+		ModelRailway * model = repo;
 
 //		model->dump();
 		model->info();

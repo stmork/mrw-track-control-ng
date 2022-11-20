@@ -42,7 +42,7 @@ const ConstantEnumerator<unsigned> TestUtil::map
 	CONSTANT(EBUSY)
 };
 
-class SingletonImpl : public mrw::util::Singleton<SingletonImpl>
+class SingletonImpl : public Singleton<SingletonImpl>
 {
 	SingletonImpl() = default;
 

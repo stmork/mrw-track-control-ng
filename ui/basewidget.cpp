@@ -28,7 +28,7 @@ BaseWidget::BaseWidget(QWidget * parent) : QWidget(parent), verbose(true)
 {
 }
 
-void mrw::ui::BaseWidget::paintEvent(QPaintEvent * event)
+void BaseWidget::paintEvent(QPaintEvent * event)
 {
 	Q_UNUSED(event);
 
@@ -68,7 +68,7 @@ void BaseWidget::rescale(
 	rescale(painter, xSize, ySize, center ? width() * 0.5f : 0.0f, center ? height() * 0.5f : 0.0f);
 }
 
-void mrw::ui::BaseWidget::drawSheared(
+void BaseWidget::drawSheared(
 	QPainter  & painter,
 	QColor      color,
 	const float x, const float y,

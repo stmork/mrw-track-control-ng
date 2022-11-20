@@ -39,7 +39,7 @@ void DoubleCrossSwitch::link()
 	advance(!aIsDir()).insert(RailInfo(d, false, ad_branch));
 }
 
-void mrw::model::DoubleCrossSwitch::findFlankSwitches()
+void DoubleCrossSwitch::findFlankSwitches()
 {
 	RegularSwitch * a_switch = dynamic_cast<RegularSwitch *>(a);
 	RegularSwitch * b_switch = dynamic_cast<RegularSwitch *>(b);
@@ -84,12 +84,12 @@ QString DoubleCrossSwitch::toString() const
 		arg(name());
 }
 
-QString mrw::model::DoubleCrossSwitch::key() const
+QString DoubleCrossSwitch::key() const
 {
 	return "DKW" + name();
 }
 
-mrw::can::SwitchState mrw::model::DoubleCrossSwitch::commandState() const
+SwitchState DoubleCrossSwitch::commandState() const
 {
 	const bool b_active = unsigned(switch_state) & B_MASK;
 	const bool d_active = unsigned(switch_state) & D_MASK;

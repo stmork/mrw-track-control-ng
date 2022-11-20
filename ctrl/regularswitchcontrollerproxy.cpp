@@ -15,7 +15,7 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(QObject * parent) :
 {
 }
 
-void RegularSwitchControllerProxy::setSwitch(mrw::model::RegularSwitch * new_part)
+void RegularSwitchControllerProxy::setSwitch(RegularSwitch * new_part)
 {
 	Q_ASSERT(part == nullptr);
 

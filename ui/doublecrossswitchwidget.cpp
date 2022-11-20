@@ -6,17 +6,18 @@
 #include <ui/doublecrossswitchwidget.h>
 
 using namespace mrw::ui;
+using namespace mrw::ctrl;
 using namespace mrw::model;
 
 DoubleCrossSwitchWidget::DoubleCrossSwitchWidget(
-	QWidget                 *                parent,
-	mrw::ctrl::DoubleCrossSwitchController * ctrl) :
+	QWidget           *           parent,
+	DoubleCrossSwitchController * ctrl) :
 	BaseWidget(parent),
 	controller(ctrl)
 {
 }
 
-void DoubleCrossSwitchWidget::setController(mrw::ctrl::DoubleCrossSwitchController * ctrl)
+void DoubleCrossSwitchWidget::setController(DoubleCrossSwitchController * ctrl)
 {
 	Q_ASSERT(controller == nullptr);
 
@@ -71,28 +72,28 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	painter.drawLine( 100.0f, 0.0f, isC() ?  27.0f :  80.0f, 0.0f);
 }
 
-bool mrw::ui::DoubleCrossSwitchWidget::isA() const
+bool DoubleCrossSwitchWidget::isA() const
 {
 	const unsigned state = (unsigned)controller->switchState();
 
 	return (state & DoubleCrossSwitch::B_MASK) == 0;
 }
 
-bool mrw::ui::DoubleCrossSwitchWidget::isB() const
+bool DoubleCrossSwitchWidget::isB() const
 {
 	const unsigned state = (unsigned)controller->switchState();
 
 	return (state & DoubleCrossSwitch::B_MASK) != 0;
 }
 
-bool mrw::ui::DoubleCrossSwitchWidget::isC() const
+bool DoubleCrossSwitchWidget::isC() const
 {
 	const unsigned state = (unsigned)controller->switchState();
 
 	return (state & DoubleCrossSwitch::D_MASK) == 0;
 }
 
-bool mrw::ui::DoubleCrossSwitchWidget::isD() const
+bool DoubleCrossSwitchWidget::isD() const
 {
 	const unsigned state = (unsigned)controller->switchState();
 

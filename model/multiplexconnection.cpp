@@ -75,7 +75,7 @@ bool MultiplexConnection::valid() const
 	return pins <= MAX_PINS;
 }
 
-void mrw::model::MultiplexConnection::link()
+void MultiplexConnection::link()
 {
 	QStringList references = reference.attribute("lichtsignale").split(' ', SKIP_EMPTY_PARTS);
 

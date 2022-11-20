@@ -6,14 +6,16 @@
 #include <QPainter>
 
 #include <ui/regularswitchwidget.h>
+#include <ctrl/doublecrossswitchcontroller.h>
 
 using namespace mrw::can;
 using namespace mrw::ui;
+using namespace mrw::ctrl;
 using namespace mrw::model;
 
 RegularSwitchWidget::RegularSwitchWidget(
-	QWidget               *              parent,
-	mrw::ctrl::RegularSwitchController * ctrl) :
+	QWidget         *         parent,
+	RegularSwitchController * ctrl) :
 	BaseWidget(parent),
 	controller(ctrl)
 {

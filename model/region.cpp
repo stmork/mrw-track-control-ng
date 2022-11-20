@@ -57,7 +57,7 @@ void Region::add(Section * section)
 	sections.push_back(section);
 }
 
-void mrw::model::Region::link()
+void Region::link()
 {
 	for (Section * section : sections)
 	{
@@ -66,7 +66,7 @@ void mrw::model::Region::link()
 	}
 }
 
-QString mrw::model::Region::toString() const
+QString Region::toString() const
 {
 	return QString("  Region %1 (%2)").arg(region_name).arg(is_station ? "Station" : "rail road");
 }

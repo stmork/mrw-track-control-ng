@@ -6,6 +6,7 @@
 #include <ctrl/doublecrossswitchcontrollermock.h>
 
 using namespace mrw::can;
+using namespace mrw::model;
 using namespace mrw::ctrl;
 
 DoubleCrossSwitchControllerMock::DoubleCrossSwitchControllerMock(QObject * parent) :
@@ -19,13 +20,13 @@ void DoubleCrossSwitchControllerMock::setDirection(const bool dir)
 	emit update();
 }
 
-void DoubleCrossSwitchControllerMock::setSectionState(const mrw::model::SectionState state)
+void DoubleCrossSwitchControllerMock::setSectionState(const SectionState state)
 {
 	section_state = state;
 	emit update();
 }
 
-void DoubleCrossSwitchControllerMock::setSwitchState(const mrw::model::DoubleCrossSwitch::State state)
+void DoubleCrossSwitchControllerMock::setSwitchState(const DoubleCrossSwitch::State state)
 {
 	switch_state = state;
 	emit update();

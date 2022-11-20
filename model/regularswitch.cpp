@@ -80,7 +80,7 @@ QString RegularSwitch::key() const
 	return "Weiche" + name();
 }
 
-SwitchState mrw::model::RegularSwitch::commandState() const
+SwitchState RegularSwitch::commandState() const
 {
 	return static_cast<SwitchState>(switch_state);
 }

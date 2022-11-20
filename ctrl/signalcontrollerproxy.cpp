@@ -12,14 +12,14 @@ using namespace mrw::ctrl;
 using namespace mrw::model;
 
 SignalControllerProxy::SignalControllerProxy(
-	mrw::model::Section * parent_section,
-	const bool            dir,
-	QObject * parent) :
+	Section  *  parent_section,
+	const bool  dir,
+	QObject  *  parent) :
 	SignalController(parent),
 	section(parent_section),
 	direction(dir)
 {
-	std::vector<mrw::model::Signal *> section_signals;
+	std::vector<Signal *> section_signals;
 
 	section->parts<Signal>(section_signals, [dir] (const Signal * input)
 	{
@@ -84,17 +84,17 @@ QString SignalControllerProxy::name() const
 	return signal_name;
 }
 
-SignalController::TourState mrw::ctrl::SignalControllerProxy::main() const
+SignalController::TourState SignalControllerProxy::main() const
 {
 	return TourState::STOP;
 }
 
-SignalController::TourState mrw::ctrl::SignalControllerProxy::distant() const
+SignalController::TourState SignalControllerProxy::distant() const
 {
 	return TourState::STOP;
 }
 
-SignalController::TourState mrw::ctrl::SignalControllerProxy::shunt() const
+SignalController::TourState SignalControllerProxy::shunt() const
 {
 	return TourState::STOP;
 }

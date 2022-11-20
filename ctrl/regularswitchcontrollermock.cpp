@@ -43,7 +43,7 @@ void RegularSwitchControllerMock::setDirection(const bool dir)
 	emit update();
 }
 
-void RegularSwitchControllerMock::setSectionState(const mrw::model::SectionState state)
+void RegularSwitchControllerMock::setSectionState(const SectionState state)
 {
 	section_state = state;
 	emit update();

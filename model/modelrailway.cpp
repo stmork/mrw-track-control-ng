@@ -157,7 +157,7 @@ unsigned ModelRailway::value(
 	return node.attribute(attr, QString::number(default_value)).toUInt();
 }
 
-QString mrw::model::ModelRailway::string(
+QString ModelRailway::string(
 	const QDomElement  &  node,
 	const char      *     attr)
 {
@@ -220,7 +220,7 @@ void ModelRailway::add(Device * device)
 	}
 }
 
-QString mrw::model::ModelRailway::toString() const
+QString ModelRailway::toString() const
 {
 	return QString("Modelrailway %1 with %2 controllers and %3 region(s), %4 warnings and %5 errors.").
 		arg(name).arg(controllers.size()).arg(regions.size()).

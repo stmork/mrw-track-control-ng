@@ -5,6 +5,7 @@
 
 #include <ctrl/sectioncontrollermock.h>
 
+using namespace mrw::model;
 using namespace mrw::ctrl;
 
 SectionControllerMock::SectionControllerMock(QObject * parent) :
@@ -12,7 +13,7 @@ SectionControllerMock::SectionControllerMock(QObject * parent) :
 {
 }
 
-void SectionControllerMock::setSectionState(const mrw::model::SectionState state)
+void SectionControllerMock::setSectionState(const SectionState state)
 {
 	section_state = state;
 	emit update();

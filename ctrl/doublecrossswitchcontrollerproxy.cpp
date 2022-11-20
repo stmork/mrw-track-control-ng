@@ -7,6 +7,7 @@
 #include <model/region.h>
 
 using namespace mrw::can;
+using namespace mrw::model;
 using namespace mrw::ctrl;
 
 DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(QObject * parent) :
@@ -14,7 +15,7 @@ DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(QObject * par
 {
 }
 
-void DoubleCrossSwitchControllerProxy::setSwitch(mrw::model::DoubleCrossSwitch * new_part)
+void DoubleCrossSwitchControllerProxy::setSwitch(DoubleCrossSwitch * new_part)
 {
 	Q_ASSERT(part == nullptr);
 

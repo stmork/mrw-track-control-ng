@@ -13,8 +13,8 @@ using namespace mrw::ctrl;
 using namespace mrw::model;
 
 SectionControllerProxy::SectionControllerProxy(
-	mrw::model::Section * parent_section,
-	QObject       *       parent) :
+	Section * parent_section,
+	QObject * parent) :
 	SectionController(parent),
 	section(parent_section)
 {

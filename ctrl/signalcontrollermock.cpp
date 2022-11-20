@@ -5,6 +5,7 @@
 
 #include <ctrl/signalcontrollermock.h>
 
+using namespace mrw::model;
 using namespace mrw::ctrl;
 
 SignalControllerMock::SignalControllerMock(QObject * parent) :
@@ -36,43 +37,43 @@ void SignalControllerMock::setDirection(const bool dir)
 	emit update();
 }
 
-void SignalControllerMock::setSectionState(const mrw::model::SectionState state)
+void SignalControllerMock::setSectionState(const SectionState state)
 {
 	section_state = state;
 	emit update();
 }
 
-void mrw::ctrl::SignalControllerMock::setShuntStop()
+void SignalControllerMock::setShuntStop()
 {
 	shunt_state = TourState::STOP;
 	emit update();
 }
 
-void mrw::ctrl::SignalControllerMock::setShuntGo()
+void SignalControllerMock::setShuntGo()
 {
 	shunt_state = TourState::GO;
 	emit update();
 }
 
-void mrw::ctrl::SignalControllerMock::setDistantStop()
+void SignalControllerMock::setDistantStop()
 {
 	distant_state = TourState::STOP;
 	emit update();
 }
 
-void mrw::ctrl::SignalControllerMock::setDistantGo()
+void SignalControllerMock::setDistantGo()
 {
 	distant_state = TourState::GO;
 	emit update();
 }
 
-void mrw::ctrl::SignalControllerMock::setMainStop()
+void SignalControllerMock::setMainStop()
 {
 	main_state = TourState::STOP;
 	emit update();
 }
 
-void mrw::ctrl::SignalControllerMock::setMainGo()
+void SignalControllerMock::setMainGo()
 {
 	main_state = TourState::GO;
 	emit update();
