@@ -22,6 +22,10 @@ namespace mrw::ctrl
 		bool distant_signal = false;
 		bool main_signal    = true;
 
+		TourState shunt_state   = TourState::STOP;
+		TourState distant_state = TourState::STOP;
+		TourState main_state    = TourState::STOP;
+
 		mrw::model::SectionState section_state = mrw::model::SectionState::FREE;
 
 	public:
@@ -40,7 +44,29 @@ namespace mrw::ctrl
 		void setDirection(const bool dir = true);
 		void setSectionState(const mrw::model::SectionState state);
 
+		inline TourState distant() const override
+		{
+			return distant_state;
+		}
+
+		inline TourState shunt() const override
+		{
+			return shunt_state;
+		}
+
+		inline TourState main() const override
+		{
+			return main_state;
+		}
+
 	public slots:
+		void setShuntStop();
+		void setShuntGo();
+		void setDistantStop();
+		void setDistantGo();
+		void setMainStop();
+		void setMainGo();
+
 		void setShunting(const bool shunt = true);
 		void setDistant(const bool distant = true);
 		void setMain(const bool main = true);

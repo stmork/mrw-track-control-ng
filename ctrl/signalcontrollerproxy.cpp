@@ -18,17 +18,44 @@ SignalControllerProxy::SignalControllerProxy(
 	section(parent_section),
 	direction(dir)
 {
+	std::vector<mrw::model::Signal *> section_signals;
+
 	section->parts<Signal>(section_signals, [dir] (const Signal * input)
 	{
 		return dir == input->direction();
 	});
 
 	Q_ASSERT(section_signals.size() > 0);
+	signal_name = section_signals[0]->partName();
+	position    = section_signals[0]->position();
+
+	for (Signal * signal : section_signals)
+	{
+		switch (signal->type())
+		{
+		case Signal::SHUNT_SIGNAL:
+			shunt_signal = signal;
+			break;
+
+		case Signal::DISTANT_SIGNAL:
+			distant_signal = signal;
+			break;
+
+		case Signal::MAIN_SIGNAL:
+			main_signal = signal;
+			break;
+
+		case Signal::MAIN_SHUNT_SIGNAL:
+			main_signal = signal;
+			shunt_signal = signal;
+			break;
+		}
+	}
 }
 
 QPoint SignalControllerProxy::point() const
 {
-	return section_signals[0]->position();
+	return position;
 }
 
 bool SignalControllerProxy::isDirection() const
@@ -38,29 +65,35 @@ bool SignalControllerProxy::isDirection() const
 
 bool SignalControllerProxy::hasShunting() const
 {
-	return std::any_of(section_signals.begin(), section_signals.end(), [] (Signal * input)
-	{
-		return (input->type() & Signal::SHUNT_SIGNAL) != 0;
-	});
+	return shunt_signal != nullptr;
 }
 
 bool SignalControllerProxy::hasDistant() const
 {
-	return std::any_of(section_signals.begin(), section_signals.end(), [] (Signal * input)
-	{
-		return input->type() == Signal::DISTANT_SIGNAL;
-	});
+	return distant_signal != nullptr;
 }
 
 bool SignalControllerProxy::hasMain() const
 {
-	return std::any_of(section_signals.begin(), section_signals.end(), [] (Signal * input)
-	{
-		return (input->type() & Signal::MAIN_SIGNAL) != 0;
-	});
+	return main_signal != nullptr;
 }
 
 QString SignalControllerProxy::name() const
 {
-	return section_signals[0]->partName();
+	return signal_name;
+}
+
+SignalController::TourState mrw::ctrl::SignalControllerProxy::main() const
+{
+	return TourState::STOP;
+}
+
+SignalController::TourState mrw::ctrl::SignalControllerProxy::distant() const
+{
+	return TourState::STOP;
+}
+
+SignalController::TourState mrw::ctrl::SignalControllerProxy::shunt() const
+{
+	return TourState::STOP;
 }

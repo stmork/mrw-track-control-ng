@@ -42,6 +42,42 @@ void SignalControllerMock::setSectionState(const mrw::model::SectionState state)
 	emit update();
 }
 
+void mrw::ctrl::SignalControllerMock::setShuntStop()
+{
+	shunt_state = TourState::STOP;
+	emit update();
+}
+
+void mrw::ctrl::SignalControllerMock::setShuntGo()
+{
+	shunt_state = TourState::GO;
+	emit update();
+}
+
+void mrw::ctrl::SignalControllerMock::setDistantStop()
+{
+	distant_state = TourState::STOP;
+	emit update();
+}
+
+void mrw::ctrl::SignalControllerMock::setDistantGo()
+{
+	distant_state = TourState::GO;
+	emit update();
+}
+
+void mrw::ctrl::SignalControllerMock::setMainStop()
+{
+	main_state = TourState::STOP;
+	emit update();
+}
+
+void mrw::ctrl::SignalControllerMock::setMainGo()
+{
+	main_state = TourState::GO;
+	emit update();
+}
+
 bool SignalControllerMock::isDirection() const
 {
 	return direction;
@@ -54,7 +90,7 @@ bool SignalControllerMock::hasShunting() const
 
 bool SignalControllerMock::hasDistant() const
 {
-	return distant_signal || (!hasMain());
+	return distant_signal;
 }
 
 bool SignalControllerMock::hasMain() const

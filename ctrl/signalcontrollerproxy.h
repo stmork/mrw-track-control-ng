@@ -19,9 +19,14 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
-		std::vector<mrw::model::Signal *> section_signals;
-		mrw::model::Section       *       section   = nullptr;
-		const bool                        direction = true;
+		mrw::model::Section * section   = nullptr;
+		const bool            direction = true;
+		QPoint                position;
+		QString               signal_name;
+
+		mrw::model::Signal  * main_signal    = nullptr;
+		mrw::model::Signal  * distant_signal = nullptr;
+		mrw::model::Signal  * shunt_signal   = nullptr;
 
 	public:
 		explicit SignalControllerProxy(
@@ -35,6 +40,11 @@ namespace mrw::ctrl
 		virtual bool hasDistant() const override;
 		virtual bool hasMain() const override;
 		virtual QString name() const override;
+
+		TourState distant() const override;
+		TourState shunt() const override;
+		TourState main() const override;
+
 		virtual mrw::model::SectionState state() const override
 		{
 			return section->state();

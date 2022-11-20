@@ -62,32 +62,75 @@ void SignalWidget::paint(QPainter & painter)
 	painter.setPen(QPen(sectionColor(controller->state()), 20.0));
 	painter.drawLine( -100.0f, 0.0f, 100.0f, 0.0f);
 
-	QPen pen(RED, 8.0);
+	QColor mast_color(RED);
+	QPen   pen;
+	QColor main_color    = controller->main() ==
+		SignalController::TourState::STOP ? RED : GREEN;
+	QColor distant_color = controller->distant() ==
+		SignalController::TourState::STOP ? YELLOW : GREEN;
+	QColor shunt_color   = controller->shunt() ==
+		SignalController::TourState::STOP ? RED : WHITE;
+	bool draw_shunt = false;
+	bool draw_distant = false;
 
+	if (controller->hasMain())
+	{
+		mast_color = main_color;
+		if (controller->main() == SignalController::TourState::GO)
+		{
+			draw_distant = controller->hasDistant();
+			if (draw_distant)
+			{
+				mast_color = distant_color;
+			}
+		}
+		else
+		{
+			draw_shunt = controller->hasShunting();
+		}
+	}
+	else
+	{
+		draw_distant = controller->hasDistant();
+		if (draw_distant)
+		{
+			mast_color = distant_color;
+		}
+		else
+		{
+			draw_shunt = controller->hasShunting();
+		}
+	}
+
+	// Draw mast foot
+	pen.setColor(mast_color);
+	pen.setWidth(8);
 	pen.setCapStyle(Qt::FlatCap);
 	painter.setPen(pen);
 	painter.drawLine(-30, 35, -30, 75);
 
+	// Draw mast
 	pen.setWidth(10.0);
 	painter.setPen(pen);
-	painter.drawLine(-30, 55, controller->hasDistant() || controller->hasShunting() ? 30 : 70, 55);
+	painter.drawLine(-30, 55, draw_distant || draw_shunt ? 30 : 70, 55);
 
-	if (controller->hasShunting())
+	if (draw_shunt)
 	{
-		painter.fillRect(10, 35, 40, 40, RED);
+		painter.fillRect(10, 35, 40, 40, shunt_color);
 	}
-	else if (controller->hasDistant())
+	if (draw_distant)
 	{
 		path.addPolygon(points);
 		path.closeSubpath();
-		painter.fillPath(path, QBrush(GREEN));
+		painter.fillPath(path, QBrush(distant_color));
 	}
 
 	if (controller->hasMain())
 	{
+		pen.setColor(main_color);
 		pen.setWidth(1);
 		painter.setPen(pen);
-		painter.setBrush(QBrush(RED));
+		painter.setBrush(QBrush(main_color));
 		painter.drawEllipse(50, 35, 40, 40);
 	}
 }

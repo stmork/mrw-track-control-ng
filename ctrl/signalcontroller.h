@@ -17,12 +17,21 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
+		enum class TourState
+		{
+			STOP, GO
+		};
+
 		explicit SignalController(QObject * parent = nullptr);
 
 		virtual bool isDirection() const = 0;
 		virtual bool hasShunting() const = 0;
 		virtual bool hasDistant() const = 0;
 		virtual bool hasMain() const = 0;
+
+		virtual TourState distant() const = 0;
+		virtual TourState shunt() const = 0;
+		virtual TourState main() const = 0;
 	};
 }
 

@@ -44,11 +44,29 @@ SignalStudy::SignalStudy(QWidget * parent) :
 		ui->availableButton_1, &QRadioButton::clicked,
 		&mock, &SignalControllerMock::setShunting);
 	connect(
+		ui->stopButton_1, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setShuntStop);
+	connect(
+		ui->goButton_1, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setShuntGo);
+	connect(
 		ui->availableButton_2, &QRadioButton::clicked,
 		&mock, &SignalControllerMock::setDistant);
 	connect(
+		ui->stopButton_2, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setDistantStop);
+	connect(
+		ui->goButton_2, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setDistantGo);
+	connect(
 		ui->availableButton_3, &QRadioButton::clicked,
 		&mock, &SignalControllerMock::setMain);
+	connect(
+		ui->stopButton_3, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setMainStop);
+	connect(
+		ui->goButton_3, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setMainGo);
 
 	connect(
 		ui->freeButton, &QRadioButton::clicked,
@@ -91,9 +109,9 @@ SignalStudy::SignalStudy(QWidget * parent) :
 	ui->backwardButton->setChecked(true);
 	ui->freeButton->setChecked(true);
 
-	ui->availableButton_1->setChecked(true);
+	ui->availableButton_1->setChecked(false);
 	ui->availableButton_2->setChecked(false);
-	ui->availableButton_3->setChecked(false);
+	ui->availableButton_3->setChecked(true);
 	ui->stopButton_1->setChecked(true);
 	ui->stopButton_2->setChecked(true);
 	ui->stopButton_3->setChecked(true);
