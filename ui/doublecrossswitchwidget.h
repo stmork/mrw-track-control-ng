@@ -30,6 +30,12 @@ namespace mrw::ui
 
 	protected:
 		void paint(QPainter & painter) override;
+
+	private:
+		bool isA() const;
+		bool isB() const;
+		bool isC() const;
+		bool isD() const;
 	};
 }
 

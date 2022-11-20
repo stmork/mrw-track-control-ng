@@ -67,3 +67,22 @@ void BaseWidget::rescale(
 {
 	rescale(painter, xSize, ySize, center ? width() * 0.5f : 0.0f, center ? height() * 0.5f : 0.0f);
 }
+
+void mrw::ui::BaseWidget::drawSheared(
+	QPainter  & painter,
+	QColor      color,
+	const float x, const float y,
+	const float height,
+	const float slope)
+{
+	QPainterPath path;
+	static constexpr float HALF = RAIL_WIDTH * 0.5f;
+	const float distant = height / slope;
+
+	path.moveTo(x - HALF, y);
+	path.lineTo(x + HALF, y);
+	path.lineTo(x + HALF - distant, y + height);
+	path.lineTo(x - HALF - distant, y + height);
+	path.closeSubpath();
+	painter.fillPath(path, QBrush(color));
+}

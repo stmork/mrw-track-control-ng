@@ -69,6 +69,31 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	});
 
 	connect(
+		ui->acButton, &QRadioButton::clicked,
+		&mock, [&] ()
+	{
+		mock.setSwitchState(DoubleCrossSwitch::State::AC);
+	});
+	connect(
+		ui->adButton, &QRadioButton::clicked,
+		&mock, [&] ()
+	{
+		mock.setSwitchState(DoubleCrossSwitch::State::AD);
+	});
+	connect(
+		ui->bcButton, &QRadioButton::clicked,
+		&mock, [&] ()
+	{
+		mock.setSwitchState(DoubleCrossSwitch::State::BC);
+	});
+	connect(
+		ui->bdButton, &QRadioButton::clicked,
+		&mock, [&] ()
+	{
+		mock.setSwitchState(DoubleCrossSwitch::State::BD);
+	});
+
+	connect(
 		&mock, &DoubleCrossSwitchControllerMock::update,
 		ui->bigSwitchWidget, qOverload<>(&QWidget::repaint));
 	connect(

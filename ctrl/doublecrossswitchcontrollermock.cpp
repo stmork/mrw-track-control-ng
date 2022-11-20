@@ -25,6 +25,12 @@ void DoubleCrossSwitchControllerMock::setSectionState(const mrw::model::SectionS
 	emit update();
 }
 
+void DoubleCrossSwitchControllerMock::setSwitchState(const mrw::model::DoubleCrossSwitch::State state)
+{
+	switch_state = state;
+	emit update();
+}
+
 bool DoubleCrossSwitchControllerMock::isDirection() const
 {
 	return direction;

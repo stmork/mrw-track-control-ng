@@ -9,6 +9,7 @@
 #define MRW_CTRL_DOUBLECROSSSWITCHCONTROLLER_H
 
 #include <ctrl/basecontroller.h>
+#include <model/doublecrossswitch.h>
 
 namespace mrw::ctrl
 {
@@ -20,6 +21,7 @@ namespace mrw::ctrl
 		explicit DoubleCrossSwitchController(QObject * parent = nullptr);
 
 		virtual bool isDirection() const = 0;
+		virtual mrw::model::DoubleCrossSwitch::State  switchState() const = 0;
 	};
 }
 

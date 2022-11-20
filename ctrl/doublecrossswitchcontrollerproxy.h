@@ -32,6 +32,11 @@ namespace mrw::ctrl
 		{
 			return part->section()->state();
 		}
+
+		virtual mrw::model::DoubleCrossSwitch::State switchState() const override
+		{
+			return part->state();
+		}
 	};
 }
 

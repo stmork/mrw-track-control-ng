@@ -32,10 +32,10 @@ namespace mrw::model
 		RailPart   *   c = nullptr;
 		RailPart   *   d = nullptr;
 
+	public:
 		static const unsigned B_MASK = 2;
 		static const unsigned D_MASK = 1;
 
-	public:
 		enum class State : unsigned
 		{
 			AC = 0,

@@ -23,9 +23,11 @@ namespace mrw::ui
 		Q_OBJECT
 
 	public:
-		static constexpr int   SIZE  = 40;
-		static constexpr float SCALE = 100.0f;
-		static constexpr int   FONT_HEIGHT = 50;
+		static constexpr int   SIZE        =  40;
+		static constexpr float SCALE       = 100.0f;
+		static constexpr int   FONT_HEIGHT =  50;
+		static constexpr float RAIL_WIDTH  =  20.0f;
+		static constexpr float RAIL_SLOPE  =   2.0f;
 
 		static const QColor GREEN;
 		static const QColor WHITE;
@@ -52,6 +54,13 @@ namespace mrw::ui
 			QPainter & painter,
 			const float xSize = SCALE * 2.0,
 			const float ySize = SCALE * 2.0, const bool center = true);
+
+		void drawSheared(
+			QPainter  & painter,
+			QColor      color,
+			const float x, const float y,
+			const float height,
+			const float slope = RAIL_SLOPE);
 
 	private:
 		static const std::unordered_map<mrw::model::SectionState, QColor> color_map;

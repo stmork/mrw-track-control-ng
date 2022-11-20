@@ -5,7 +5,7 @@
 
 #include <QPainter>
 
-#include "regularswitchwidget.h"
+#include <ui/regularswitchwidget.h>
 
 using namespace mrw::can;
 using namespace mrw::ui;
@@ -26,22 +26,6 @@ void RegularSwitchWidget::setController(mrw::ctrl::RegularSwitchController * ctr
 	controller = ctrl;
 }
 
-static const QVector<QPointF> points_active
-{
-	QPointF( -52.5,  -15.0),
-	QPointF( -10.0, -100.0),
-	QPointF(  10.0, -100.0),
-	QPointF( -32.5,  -15.0)
-};
-
-static const QVector<QPointF> points_inactive
-{
-	QPointF( -25.0,  -70.0),
-	QPointF( -10.0, -100.0),
-	QPointF(  10.0, -100.0),
-	QPointF(  -5.0,  -70.0)
-};
-
 void RegularSwitchWidget::paint(QPainter & painter)
 {
 	QPainterPath path;
@@ -53,12 +37,12 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	rescale(painter);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
-	font.setPixelSize(50);
+	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
 	painter.setPen(YELLOW);
 	painter.drawText(QRectF(
 			controller->isDirection() ? -SCALE : -20,
-			controller->isDirection() == controller->isRightHanded() ? -80 : 30, 120, 50),
+			controller->isDirection() == controller->isRightHanded() ? -80 : 30, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
 
 	if (controller->isRightHanded())
@@ -76,20 +60,24 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	QColor outside_color = sectionColor(SectionState::FREE);
 
 	// Draw curved part of switch
-	path.addPolygon(isTurnOut() ? points_active : points_inactive);
-	path.closeSubpath();
-	painter.fillPath(path, QBrush(isTurnOut() ? section_color : outside_color));
+	drawSheared(painter, isTurnOut() ? section_color : outside_color, 0, -100, isTurnOut() ? 70 : 15);
 
 	// Draw point lock
 	painter.fillRect(-65.0, -11.0, 40.0, 22.0, WHITE);
 
+	QPen pen;
+	pen.setCapStyle(Qt::FlatCap);
+	pen.setWidth(RAIL_WIDTH);
+
 	// Draw point part of switch
-	painter.setPen(QPen(section_color, 20.0));
-	painter.drawLine(-100.0f, 0.0f, -80.0f, 0.0f);
+	pen.setColor(section_color);
+	painter.setPen(pen);
+	painter.drawLine(-100.0f, 0.0f, -70.0f, 0.0f);
 
 	// Draw straight part of switch
-	painter.setPen(QPen(!isTurnOut() ? section_color : outside_color, 20.0));
-	painter.drawLine(!isTurnOut() ? -10.0f : 70.0f, 0.0f, 100.0f, 0.0f);
+	pen.setColor(!isTurnOut() ? section_color : outside_color);
+	painter.setPen(pen);
+	painter.drawLine(!isTurnOut() ? -20.0f : 80.0f, 0.0f, 100.0f, 0.0f);
 }
 
 bool RegularSwitchWidget::isTurnOut() const

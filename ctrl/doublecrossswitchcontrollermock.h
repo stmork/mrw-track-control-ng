@@ -21,7 +21,7 @@ namespace mrw::ctrl
 		bool                  direction    = false;
 
 		mrw::model::SectionState section_state = mrw::model::SectionState::FREE;
-		mrw::can::SwitchState    switch_state  = mrw::can::SWITCH_STATE_LEFT;
+		mrw::model::DoubleCrossSwitch::State switch_state = mrw::model::DoubleCrossSwitch::State::AC;
 
 	public:
 		DoubleCrossSwitchControllerMock(QObject * parent = nullptr);
@@ -34,7 +34,13 @@ namespace mrw::ctrl
 			return section_state;
 		}
 
+		virtual mrw::model::DoubleCrossSwitch::State switchState() const override
+		{
+			return switch_state;
+		}
+
 		void setSectionState(const mrw::model::SectionState state);
+		void setSwitchState(const mrw::model::DoubleCrossSwitch::State state);
 		void setDirection(const bool dir = true);
 	};
 }
