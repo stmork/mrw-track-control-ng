@@ -5,6 +5,7 @@
 
 #include <can/commands.h>
 #include <ctrl/signalcontrollerproxy.h>
+#include <model/region.h>
 
 using namespace mrw::can;
 using namespace mrw::ctrl;
@@ -60,7 +61,7 @@ QPoint SignalControllerProxy::point() const
 
 bool SignalControllerProxy::isDirection() const
 {
-	return direction;
+	return direction == section->region()->direction();
 }
 
 bool SignalControllerProxy::hasShunting() const

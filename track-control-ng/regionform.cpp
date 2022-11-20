@@ -26,7 +26,7 @@ using namespace mrw::ui;
 // Qt::black / "#000000" / "black"
 const QPalette RegionForm::background_color(QPalette::Window, Qt::black);
 
-RegionForm::RegionForm(mrw::model::Region * region, QWidget * parent) :
+RegionForm::RegionForm(Region * region, QWidget * parent) :
 	QWidget(parent),
 	ui(new Ui::RegionForm)
 {

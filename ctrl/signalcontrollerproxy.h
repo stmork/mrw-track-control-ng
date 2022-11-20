@@ -31,7 +31,7 @@ namespace mrw::ctrl
 	public:
 		explicit SignalControllerProxy(
 			mrw::model::Section * parent_section,
-			const bool direction,
+			const bool            direction,
 			QObject       *       parent);
 
 		QPoint point() const;

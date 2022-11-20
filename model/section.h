@@ -22,6 +22,7 @@
 namespace mrw::model
 {
 	class ModelRailway;
+	class Region;
 	class SectionModule;
 	class AssemblyPart;
 
@@ -47,6 +48,7 @@ namespace mrw::model
 
 		const QString                section_name;
 		ModelRailway        *        model              = nullptr;
+		Region           *           section_region     = nullptr;
 		Controller         *         section_controller = nullptr;
 		SectionModule        *       section_module     = nullptr;
 		SectionState                 section_state      = FREE;
@@ -55,6 +57,7 @@ namespace mrw::model
 	public:
 		explicit Section(
 			ModelRailway     *    model_railway,
+			Region *              region,
 			const QDomElement  &  element);
 		virtual ~Section();
 
@@ -120,6 +123,16 @@ namespace mrw::model
 		inline Controller * controller() const override
 		{
 			return section_controller;
+		}
+
+		/**
+		 * This method returns the Region to which this Section is belonging to.
+		 *
+		 * @return The Region of this Section.
+		 */
+		inline Region * region() const
+		{
+			return section_region;
 		}
 
 		/**

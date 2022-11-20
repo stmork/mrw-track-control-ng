@@ -4,6 +4,7 @@
 //
 
 #include <ctrl/regularswitchcontrollerproxy.h>
+#include <model/region.h>
 
 using namespace mrw::can;
 using namespace mrw::ctrl;
@@ -38,7 +39,7 @@ bool RegularSwitchControllerProxy::isRightHanded() const
 
 bool RegularSwitchControllerProxy::isDirection() const
 {
-	return !part->aIsDir();
+	return part->aIsDir() != part->section()->region()->direction();
 }
 
 QString RegularSwitchControllerProxy::name() const

@@ -31,7 +31,7 @@ Region::Region(
 
 			if (node.nodeName() == "abschnitt")
 			{
-				Section * section = new Section(model, child);
+				Section * section = new Section(model, this, child);
 
 				add(section);
 			}

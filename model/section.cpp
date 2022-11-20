@@ -40,10 +40,12 @@ const std::regex  Section::path_regex(R"(^\/\/@controller\.(\d+)\/@module\.(\d+)
 
 Section::Section(
 	ModelRailway     *    model_railway,
+	Region *              region,
 	const QDomElement  &  element) :
 	Device(model_railway, element),
 	section_name(ModelRailway::string(element, "name")),
-	model(model_railway)
+	model(model_railway),
+	section_region(region)
 {
 	const QDomNodeList & child_nodes = element.childNodes();
 

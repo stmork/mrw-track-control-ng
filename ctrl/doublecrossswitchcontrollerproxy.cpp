@@ -4,6 +4,7 @@
 //
 
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
+#include <model/region.h>
 
 using namespace mrw::can;
 using namespace mrw::ctrl;
@@ -22,7 +23,7 @@ void DoubleCrossSwitchControllerProxy::setSwitch(mrw::model::DoubleCrossSwitch *
 
 bool DoubleCrossSwitchControllerProxy::isDirection() const
 {
-	return !part->aIsDir();
+	return part->aIsDir() != part->section()->region()->direction();
 }
 
 QString DoubleCrossSwitchControllerProxy::name() const
