@@ -44,6 +44,10 @@ namespace mrw::ui
 	protected:
 		virtual void paintEvent(QPaintEvent * event) override;
 		virtual void paint(QPainter & painter) = 0;
+		virtual bool isLockTransit() const
+		{
+			return false;
+		}
 
 		static QColor sectionColor(const mrw::model::SectionState state);
 		bool drawLock(const mrw::ctrl::BaseController::LockState state) const;

@@ -33,7 +33,10 @@ BaseWidget::BaseWidget(QWidget * parent) : QWidget(parent), verbose(true)
 	connect(&ClockService::instance(), &ClockService::Hz8, [this]()
 	{
 		counter++;
-		repaint();
+		if (isLockTransit())
+		{
+			repaint();
+		}
 	});
 }
 

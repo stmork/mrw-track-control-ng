@@ -92,6 +92,11 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	painter.drawLine(!isTurnOut() ? -20.0f : 80.0f, 0.0f, 100.0f, 0.0f);
 }
 
+bool RegularSwitchWidget::isLockTransit() const
+{
+	return controller->lock() == BaseController::LockState::TRANSIT;
+}
+
 bool RegularSwitchWidget::isTurnOut() const
 {
 	return controller->isLeft() != controller->isRightHanded();

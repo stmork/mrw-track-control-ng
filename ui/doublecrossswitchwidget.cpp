@@ -83,6 +83,11 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	painter.drawLine( 100.0f, 0.0f, isC() ?  27.0f :  80.0f, 0.0f);
 }
 
+bool DoubleCrossSwitchWidget::isLockTransit() const
+{
+	return controller->lock() == BaseController::LockState::TRANSIT;
+}
+
 bool DoubleCrossSwitchWidget::isA() const
 {
 	const unsigned state = (unsigned)controller->switchState();
