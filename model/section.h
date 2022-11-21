@@ -18,6 +18,7 @@
 #include <util/stringutil.h>
 #include <model/module.h>
 #include <model/device.h>
+#include <model/position.h>
 
 namespace mrw::model
 {
@@ -40,7 +41,7 @@ namespace mrw::model
 	 * collection. It may also manage several Signal instances. The Section
 	 * is controlled by a SectionModule.
 	 */
-	class Section : public Device, public mrw::util::String
+	class Section : public Device, public Position, public mrw::util::String
 	{
 		friend class Region;
 
@@ -151,8 +152,6 @@ namespace mrw::model
 			return true;
 		})
 		{
-			static_assert(std::is_base_of<AssemblyPart, T>(), "Collection only allowed for assembly parts.");
-
 			for (AssemblyPart * part : assembly_parts)
 			{
 				T * element = dynamic_cast<T *>(part);
@@ -162,6 +161,11 @@ namespace mrw::model
 					result.push_back(element);
 				}
 			}
+		}
+
+		virtual QString key() const override
+		{
+			return "";
 		}
 
 	private:

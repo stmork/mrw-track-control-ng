@@ -22,9 +22,9 @@ namespace mrw::ctrl
 		bool                           b_ends        = false;
 
 		mrw::model::Device::LockState  lock_state    =
-				mrw::model::Device::LockState::UNLOCKED;
+			mrw::model::Device::LockState::UNLOCKED;
 		mrw::model::SectionState       section_state =
-				mrw::model::SectionState::FREE;
+			mrw::model::SectionState::FREE;
 
 	public:
 		explicit SectionControllerMock(QObject * parent = nullptr);

@@ -14,6 +14,8 @@
 #include <util/constantenumerator.h>
 #include <model/module.h>
 #include <model/assemblypart.h>
+#include <model/position.h>
+#include <model/region.h>
 
 namespace mrw::model
 {
@@ -24,7 +26,7 @@ namespace mrw::model
 	 * @note In fact a Section can only have six Signal parts maximum: Every
 	 * SignalType in both directions.
 	 */
-	class Signal : public AssemblyPart
+	class Signal : public AssemblyPart, public Position
 	{
 		static const mrw::util::ConstantEnumerator<mrw::can::SignalState> signal_constants;
 
@@ -55,9 +57,6 @@ namespace mrw::model
 
 		/** The signal type. */
 		const SignalType    signal_type;
-
-		/** The logical position on the track control screen. */
-		QPoint              signal_position;
 
 	public:
 		explicit Signal(
@@ -91,24 +90,13 @@ namespace mrw::model
 			return main_distant_pair;
 		}
 
-		/**
-		 * This method sets the logical coordinates for the track control
-		 * screen.
-		 *
-		 * @param pos The new logical position.
-		 */
-		inline void setPosition(const QPoint & pos)
-		{
-			signal_position = pos;
-		}
-
-		inline const QPoint & position() const
-		{
-			return signal_position;
-		}
-
 		// TODO: Move into SignalController!
 		void findPair(const std::vector<Signal *> & section_signals);
+
+		virtual QString key() const override
+		{
+			return section()->region()->name() + partName();
+		}
 
 	protected:
 		/**

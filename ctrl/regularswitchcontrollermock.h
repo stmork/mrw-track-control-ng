@@ -22,11 +22,11 @@ namespace mrw::ctrl
 		bool                  direction    = false;
 
 		mrw::model::Device::LockState     lock_state =
-				mrw::model::Device::LockState::UNLOCKED;
+			mrw::model::Device::LockState::UNLOCKED;
 		mrw::model::SectionState          section_state =
-				mrw::model::SectionState::FREE;
+			mrw::model::SectionState::FREE;
 		mrw::model::RegularSwitch::State  switch_state =
-				mrw::model::RegularSwitch::State::AB;
+			mrw::model::RegularSwitch::State::AB;
 
 	public:
 		RegularSwitchControllerMock(QObject * parent = nullptr);

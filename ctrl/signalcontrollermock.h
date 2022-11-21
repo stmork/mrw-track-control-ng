@@ -27,9 +27,9 @@ namespace mrw::ctrl
 		TourState main_state    = TourState::STOP;
 
 		mrw::model::Device::LockState lock_state =
-				mrw::model::Device::LockState::UNLOCKED;
+			mrw::model::Device::LockState::UNLOCKED;
 		mrw::model::SectionState      section_state =
-				mrw::model::SectionState::FREE;
+			mrw::model::SectionState::FREE;
 
 	public:
 		explicit SignalControllerMock(QObject * parent = nullptr);

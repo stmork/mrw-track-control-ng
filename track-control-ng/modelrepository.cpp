@@ -8,11 +8,13 @@
 
 #include <model/signal.h>
 #include <model/railpart.h>
+#include <ui/basewidget.h>
 
 #include "modelrepository.h"
 
 using namespace mrw::util;
 using namespace mrw::model;
+using namespace mrw::ui;
 
 const char * ModelRepository::REGION_FILENAME   = "Gruppen.properties";
 const char * ModelRepository::SIGNAL_FILENAME   = "Signale.properties";
@@ -23,10 +25,31 @@ ModelRepository::ModelRepository(const QString & model_name) :
 	settings_host("localhost"),
 	home_dir(QDir::homePath())
 {
-	SettingsGroup group(&settings_model, "files");
-
 	filename += model_name + ".modelrailway";
 	filter << model_name;
+
+	readMaps();
+	prepareRegions();
+	prepareRailParts();
+}
+
+ModelRepository::~ModelRepository()
+{
+	SettingsGroup           group(&settings_model, "positions");
+	std::vector<Position *> positions;
+
+	model->parts<Position>(positions);
+	for(Position * pos : positions)
+	{
+		pos->write(settings_model);
+	}
+
+	delete model;
+}
+
+void ModelRepository::readMaps()
+{
+	SettingsGroup group(&settings_model, "files");
 
 	model_filename = settings_model.value("filename", home_dir.absolutePath() + "/mrw/" + filename).toString();
 	if (!QFile::exists(model_filename))
@@ -47,14 +70,6 @@ ModelRepository::ModelRepository(const QString & model_name) :
 	region_map.read(region_filename);
 	signal_map.read(signal_filename);
 	railpart_map.read(railpart_filename);
-
-	prepareRegions();
-	prepareRailParts();
-}
-
-ModelRepository::~ModelRepository()
-{
-	delete model;
 }
 
 ModelRepository::operator bool() const
@@ -154,7 +169,7 @@ void ModelRepository::prepareRegions()
 		}
 		catch (std::out_of_range & e)
 		{
-			qWarning() << "No direction found for " << *region;
+			qWarning() << "No direction found for " << *region << e.what();
 		}
 		prepareSignals(region);
 	}
@@ -162,6 +177,7 @@ void ModelRepository::prepareRegions()
 
 void ModelRepository::prepareRailParts()
 {
+	SettingsGroup           group(&settings_model, "positions");
 	std::vector<RailPart *> parts;
 
 	model->parts<RailPart>(parts);
@@ -172,9 +188,8 @@ void ModelRepository::prepareRailParts()
 			QString             prep  = part->key();
 			const std::string & key   = prepareKey(prep).toStdString();
 			const std::string & value = railpart_map.at(key);
-			QPoint              pos   = parseCoord(value);
 
-			part->setPosition(pos);
+			part->parse(settings_model, QString(value.c_str()));
 		}
 		catch (std::out_of_range & e)
 		{
@@ -185,6 +200,7 @@ void ModelRepository::prepareRailParts()
 
 void ModelRepository::prepareSignals(Region * region)
 {
+	SettingsGroup         group(&settings_model, "positions");
 	QString               region_key = region->key();
 	std::vector<Signal *> region_signals;
 
@@ -197,9 +213,8 @@ void ModelRepository::prepareSignals(Region * region)
 			QString             prep  = region_key + signal->partName();
 			const std::string & key   = prepareKey(prep).toStdString();
 			const std::string & value = signal_map.at(key);
-			QPoint              pos   = parseCoord(value);
 
-			signal->setPosition(pos);
+			signal->parse(settings_model, QString(value.c_str()));
 		}
 		catch (std::out_of_range & e)
 		{
@@ -211,27 +226,4 @@ void ModelRepository::prepareSignals(Region * region)
 QString & ModelRepository::prepareKey(QString & input)
 {
 	return input.replace(" ", "");
-}
-
-QPoint ModelRepository::parseCoord(const std::string & value)
-{
-	QStringList tokens = QString(value.c_str()).split(",");
-	QPoint      pos;
-	bool        ok1 = false;
-	bool        ok2 = false;
-
-	if (tokens.size() == 2)
-	{
-		pos.setX(tokens[0].toInt(&ok1));
-		pos.setY(tokens[1].toInt(&ok2));
-	}
-
-	if (!(ok1 && ok2))
-	{
-		pos.setX(counter % 40);
-		pos.setY(counter / 40);
-
-		counter++;
-	}
-	return pos;
 }

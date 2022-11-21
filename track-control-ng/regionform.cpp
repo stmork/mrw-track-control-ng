@@ -51,7 +51,7 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 		RegularSwitchWidget      *     widget = new RegularSwitchWidget(ui->controlWidget, ctrl);
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
-		widget->move(part->position() * BaseWidget::SIZE);
+		widget->move(part->point() * BaseWidget::SIZE / 2);
 	}
 
 	region->parts<DoubleCrossSwitch>(region_dc_switches);
@@ -61,7 +61,7 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 		DoubleCrossSwitchWidget      *     widget = new DoubleCrossSwitchWidget(ui->controlWidget, ctrl);
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
-		widget->move(part->position() * BaseWidget::SIZE);
+		widget->move(part->point() * BaseWidget::SIZE / 2);
 	}
 }
 
@@ -95,7 +95,7 @@ void RegionForm::setupSection(Section * section)
 		SectionWidget      *     widget = new SectionWidget(ui->controlWidget, ctrl);
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
-		widget->move(rails[0]->position() * BaseWidget::SIZE);
+		widget->move(rails[0]->point() * BaseWidget::SIZE / 2);
 	}
 }
 
@@ -114,6 +114,6 @@ void RegionForm::setupSignals(Section * section, const bool direction)
 		SignalWidget      *     widget = new SignalWidget(ui->controlWidget, ctrl);
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
-		widget->move(section_signals[0]->position() * BaseWidget::SIZE);
+		widget->move(section_signals[0]->point() * BaseWidget::SIZE / 2);
 	}
 }

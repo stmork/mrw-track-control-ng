@@ -21,6 +21,7 @@ SOURCES += \
 	modelrailway.cpp \
 	module.cpp \
 	multiplexconnection.cpp \
+	position.cpp \
 	profilelight.cpp \
 	rail.cpp \
 	railpart.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
 	modelrailway.h \
 	module.h \
 	multiplexconnection.h \
+	position.h \
 	profilelight.h \
 	rail.h \
 	railpart.h \

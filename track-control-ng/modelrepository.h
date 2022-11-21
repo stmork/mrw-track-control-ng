@@ -35,7 +35,6 @@ class ModelRepository
 	QString                      railpart_filename;
 	QString                      region_filename;
 	QStringList                  filter;
-	int                          counter = 0;
 
 	mrw::model::ModelRailway  *  model = nullptr;
 	mrw::util::Properties        region_map;
@@ -54,6 +53,7 @@ public:
 	operator bool() const;
 
 private:
+	void        readMaps();
 	QString     lookup();
 	QString     lookupModel(const QString & base);
 	QStringList lookupProperties(const QString & base);
@@ -61,7 +61,6 @@ private:
 	void        prepareRegions();
 	void        prepareRailParts();
 	void        prepareSignals(mrw::model::Region * region);
-	QPoint      parseCoord(const std::string & value);
 
 	static QString & prepareKey(QString & input);
 };

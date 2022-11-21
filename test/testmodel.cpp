@@ -233,5 +233,6 @@ void TestModel::testAssemblyPart(AssemblyPart * part)
 	{
 		QVERIFY2(device->unitNo() != 0, name.c_str());
 		QVERIFY2(device->controller() != nullptr, name.c_str());
+		QCOMPARE(device->lock(), Device::LockState::UNLOCKED);
 	}
 }

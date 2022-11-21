@@ -9,6 +9,7 @@
 #include <QDebug>
 
 #include <util/settings.h>
+#include <util/termhandler.h>
 #include <model/modelrailway.h>
 
 #include "mainwindow.h"
@@ -20,6 +21,7 @@ using namespace mrw::model;
 int main(int argc, char * argv[])
 {
 	QApplication  app(argc, argv);
+	TermHandler   terminator( { SIGTERM, SIGINT } );
 	Settings      settings("model");
 	SettingsGroup group(&settings, "model");
 	QString       modelname = argc > 1 ?
