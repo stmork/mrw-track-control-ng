@@ -31,6 +31,8 @@ private:
 	std::vector<mrw::model::RegularSwitch *>     region_reg_switches;
 	std::vector<mrw::model::DoubleCrossSwitch *> region_dc_switches;
 
+	QSize fields;
+
 public:
 	explicit RegionForm(mrw::model::Region * region, QWidget * parent = nullptr);
 	~RegionForm();
@@ -39,6 +41,7 @@ protected:
 	void changeEvent(QEvent * e) override;
 
 private:
+	void setupSize(mrw::model::Region * region);
 	void setupSection(mrw::model::Section * section);
 	void setupSignals(mrw::model::Section * section, const bool direction);
 

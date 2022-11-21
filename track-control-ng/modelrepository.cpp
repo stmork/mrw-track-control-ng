@@ -39,7 +39,7 @@ ModelRepository::~ModelRepository()
 	std::vector<Position *> positions;
 
 	model->parts<Position>(positions);
-	for(Position * pos : positions)
+	for (Position * pos : positions)
 	{
 		pos->write(settings_model);
 	}

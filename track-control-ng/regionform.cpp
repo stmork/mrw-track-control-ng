@@ -63,6 +63,8 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
 		widget->move(part->point() * BaseWidget::SIZE / 2);
 	}
+
+	setupSize(region);
 }
 
 RegionForm::~RegionForm()
@@ -81,6 +83,29 @@ void RegionForm::changeEvent(QEvent * e)
 	default:
 		break;
 	}
+}
+
+void RegionForm::setupSize(mrw::model::Region * region)
+{
+	std::vector<Position *> positions;
+	int xMax = 20;
+	int yMax = 10;
+
+	region->parts<Position>(positions);
+	for (Position * pos : positions)
+	{
+		QPoint point = pos->point();
+
+		xMax = std::max(xMax, point.x());
+		yMax = std::max(yMax, point.y());
+	}
+
+	fields.setWidth(xMax);
+	fields.setHeight(yMax);
+
+	ui->controlWidget->setFixedSize(
+		xMax * BaseWidget::SIZE / 2 + 100,
+		yMax * BaseWidget::SIZE / 2 + 100);
 }
 
 void RegionForm::setupSection(Section * section)
