@@ -19,11 +19,10 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
-		mrw::model::Section * section   = nullptr;
 		const bool            direction = true;
-		QPoint                position;
 		QString               signal_name;
 
+		mrw::model::Section * section        = nullptr;
 		mrw::model::Signal  * main_signal    = nullptr;
 		mrw::model::Signal  * distant_signal = nullptr;
 		mrw::model::Signal  * shunt_signal   = nullptr;
@@ -34,7 +33,6 @@ namespace mrw::ctrl
 			const bool            direction,
 			QObject       *       parent);
 
-		QPoint point() const;
 		virtual bool isDirection() const override;
 		virtual bool hasShunting() const override;
 		virtual bool hasDistant() const override;

@@ -16,8 +16,8 @@ SignalControllerProxy::SignalControllerProxy(
 	const bool  dir,
 	QObject  *  parent) :
 	SignalController(parent),
-	section(parent_section),
-	direction(dir)
+	direction(dir),
+	section(parent_section)
 {
 	std::vector<Signal *> section_signals;
 
@@ -28,7 +28,6 @@ SignalControllerProxy::SignalControllerProxy(
 
 	Q_ASSERT(section_signals.size() > 0);
 	signal_name = section_signals[0]->partName();
-	position    = section_signals[0]->position();
 
 	for (Signal * signal : section_signals)
 	{
@@ -52,11 +51,6 @@ SignalControllerProxy::SignalControllerProxy(
 			break;
 		}
 	}
-}
-
-QPoint SignalControllerProxy::point() const
-{
-	return position;
 }
 
 bool SignalControllerProxy::isDirection() const

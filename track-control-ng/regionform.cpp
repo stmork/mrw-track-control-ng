@@ -114,6 +114,6 @@ void RegionForm::setupSignals(Section * section, const bool direction)
 		SignalWidget      *     widget = new SignalWidget(ui->controlWidget, ctrl);
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
-		widget->move(ctrl->point() * BaseWidget::SIZE);
+		widget->move(section_signals[0]->position() * BaseWidget::SIZE);
 	}
 }

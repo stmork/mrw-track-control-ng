@@ -28,8 +28,6 @@ namespace mrw::ctrl
 			mrw::model::Section * parent_section,
 			QObject       *       parent);
 
-		QPoint point() const;
-
 		virtual QString name() const override;
 
 		virtual mrw::model::SectionState state() const override

@@ -26,11 +26,6 @@ SectionControllerProxy::SectionControllerProxy(
 	rail = rails[0];
 }
 
-QPoint SectionControllerProxy::point() const
-{
-	return QPoint(0, 0);
-}
-
 QString SectionControllerProxy::name() const
 {
 	return section->name();
