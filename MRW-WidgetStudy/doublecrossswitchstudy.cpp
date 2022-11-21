@@ -24,18 +24,24 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	ui->bigSwitchWidget->setController(&mock);
 	ui->smallSwitchWidget->setController(&mock);
 
-	connect(
-		ui->forwardButton, &QRadioButton::clicked,
+	/********************************************************/
+	/*   Counting direction                                 */
+	/********************************************************/
+
+	connect(ui->forwardButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setDirection(true);
 	});
-	connect(
-		ui->backwardButton, &QRadioButton::clicked,
+	connect(ui->backwardButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setDirection(false);
 	});
+
+	/********************************************************/
+	/*   Lock state                                         */
+	/********************************************************/
 
 	connect(ui->openButton, &QRadioButton::clicked,
 		&mock, [&]()
@@ -52,6 +58,10 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	{
 		mock.setLock(Device::LockState::LOCKED);
 	});
+
+	/********************************************************/
+	/*   Section state                                      */
+	/********************************************************/
 
 	connect(
 		ui->freeButton, &QRadioButton::clicked,
@@ -84,6 +94,10 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 		mock.setSectionState(SectionState::PASSED);
 	});
 
+	/********************************************************/
+	/*  Switch direction                                    */
+	/********************************************************/
+
 	connect(
 		ui->acButton, &QRadioButton::clicked,
 		&mock, [&] ()
@@ -108,6 +122,10 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	{
 		mock.setSwitchState(DoubleCrossSwitch::State::BD);
 	});
+
+	/********************************************************/
+	/*   Repaint connection                                 */
+	/********************************************************/
 
 	connect(
 		&mock, &DoubleCrossSwitchControllerMock::update,

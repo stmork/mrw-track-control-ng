@@ -27,18 +27,31 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 	ui->bigSwitchWidget->setController(&mock);
 	ui->smallSwitchWidget->setController(&mock);
 
+	/********************************************************/
+	/*  Switch orientation                                  */
+	/********************************************************/
+
 	connect(
 		ui->leftHandedButton, &QRadioButton::clicked,
 		&mock, &RegularSwitchControllerMock::setLeftHanded);
 	connect(
 		ui->rightHandedButton, &QRadioButton::clicked,
 		&mock, &RegularSwitchControllerMock::setRightHanded);
+
+	/********************************************************/
+	/*  Switch direction                                    */
+	/********************************************************/
+
 	connect(
 		ui->leftButton, &QRadioButton::clicked,
 		&mock, &RegularSwitchControllerMock::setLeft);
 	connect(
 		ui->rightButton, &QRadioButton::clicked,
 		&mock, &RegularSwitchControllerMock::setRight);
+
+	/********************************************************/
+	/*   Counting direction                                 */
+	/********************************************************/
 
 	connect(ui->forwardButton, &QRadioButton::clicked,
 		&mock, [&]()
@@ -50,6 +63,10 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 	{
 		mock.setDirection(false);
 	});
+
+	/********************************************************/
+	/*   Lock state                                         */
+	/********************************************************/
 
 	connect(ui->openButton, &QRadioButton::clicked,
 		&mock, [&]()
@@ -66,6 +83,10 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 	{
 		mock.setLock(Device::LockState::LOCKED);
 	});
+
+	/********************************************************/
+	/*   Section state                                      */
+	/********************************************************/
 
 	connect(ui->freeButton, &QRadioButton::clicked,
 		&mock, [&]()
@@ -92,6 +113,10 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 	{
 		mock.setSectionState(SectionState::PASSED);
 	});
+
+	/********************************************************/
+	/*   Repaint connection                                 */
+	/********************************************************/
 
 	connect(
 		&mock, &RegularSwitchControllerMock::update,

@@ -15,6 +15,11 @@
 
 namespace mrw::ctrl
 {
+	/**
+	 * This controller base class unifies the interface for all widget
+	 * controller classes. All derived classes have the role as a controller
+	 * related to the MVC paradigma.
+	 */
 	class BaseController : public QObject
 	{
 		Q_OBJECT
@@ -22,11 +27,39 @@ namespace mrw::ctrl
 	public:
 		explicit BaseController(QObject * parent = nullptr);
 
+		/**
+		 * This method returns the name of the controlled Device.
+		 *
+		 * @return The name of the controlled Device.
+		 */
 		virtual QString name() const = 0;
+
+		/**
+		 * A controlled Device is always in conjunction with a surrounding
+		 * Section. This method returns the SectionState of this Section.
+		 *
+		 * @note The controlled Device may be the Section itself.
+		 *
+		 * @return The SectionState.
+		 */
 		virtual mrw::model::SectionState state() const = 0;
+
+		/**
+		 * This method returns the modification state of the controlled Device.
+		 *
+		 * @return The LockState of the controlled Device.
+		 *
+		 * @see mrw::model::Device::LockState
+		 * @see mrw::model::Device::lock()
+		 */
 		virtual mrw::model::Device::LockState lock() const = 0;
 
 	signals:
+		/**
+		 * This signal causes the refresh of the paired widget class.
+		 *
+		 * @see mrw::ui::BaseWidget
+		 */
 		void update();
 
 	};

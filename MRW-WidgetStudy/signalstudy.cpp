@@ -27,18 +27,24 @@ SignalStudy::SignalStudy(QWidget * parent) :
 	ui->bigSwitchWidget->setController(&mock);
 	ui->smallSwitchWidget->setController(&mock);
 
-	connect(
-		ui->forwardButton, &QRadioButton::clicked,
+	/********************************************************/
+	/*   Counting direction                                 */
+	/********************************************************/
+
+	connect(ui->forwardButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setDirection(true);
 	});
-	connect(
-		ui->backwardButton, &QRadioButton::clicked,
+	connect(ui->backwardButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setDirection(false);
 	});
+
+	/********************************************************/
+	/*  Signal existance and state                          */
+	/********************************************************/
 
 	connect(
 		ui->availableButton_1, &QRadioButton::clicked,
@@ -68,36 +74,39 @@ SignalStudy::SignalStudy(QWidget * parent) :
 		ui->goButton_3, &QRadioButton::clicked,
 		&mock, &SignalControllerMock::setMainGo);
 
-	connect(
-		ui->freeButton, &QRadioButton::clicked,
+	/********************************************************/
+	/*   Section state                                      */
+	/********************************************************/
+
+	connect(ui->freeButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setSectionState(SectionState::FREE);
 	});
-	connect(
-		ui->shuntButton, &QRadioButton::clicked,
+	connect(ui->shuntButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setSectionState(SectionState::SHUNTING);
 	});
-	connect(
-		ui->tourButton, &QRadioButton::clicked,
+	connect(ui->tourButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setSectionState(SectionState::TOUR);
 	});
-	connect(
-		ui->occupiedButton, &QRadioButton::clicked,
+	connect(ui->occupiedButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setSectionState(SectionState::OCCUPIED);
 	});
-	connect(
-		ui->passedButton, &QRadioButton::clicked,
+	connect(ui->passedButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setSectionState(SectionState::PASSED);
 	});
+
+	/********************************************************/
+	/*   Repaint connection                                 */
+	/********************************************************/
 
 	connect(
 		&mock, &SignalControllerMock::update,
