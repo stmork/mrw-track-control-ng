@@ -64,9 +64,9 @@ QColor BaseWidget::sectionColor(const SectionState state)
 	return it != color_map.end() ? it->second : Qt::white;
 }
 
-bool BaseWidget::drawLock(const BaseController::LockState state) const
+bool BaseWidget::drawLock(const Device::LockState state) const
 {
-	return (state != BaseController::LockState::TRANSIT) || (counter & 1);
+	return (state != Device::LockState::TRANSIT) || (counter & 1);
 }
 
 void BaseWidget::rescale(

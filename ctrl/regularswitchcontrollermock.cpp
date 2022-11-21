@@ -43,7 +43,7 @@ void RegularSwitchControllerMock::setDirection(const bool dir)
 	emit update();
 }
 
-void RegularSwitchControllerMock::setLock(const BaseController::LockState lock)
+void RegularSwitchControllerMock::setLock(const Device::LockState lock)
 {
 	lock_state = lock;
 	emit update();

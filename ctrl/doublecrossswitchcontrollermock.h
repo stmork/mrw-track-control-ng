@@ -19,8 +19,7 @@ namespace mrw::ctrl
 
 	private:
 		bool                  direction    = false;
-		LockState             lock_state   = LockState::UNLOCKED;
-
+		mrw::model::Device::LockState             lock_state   = mrw::model::Device::LockState::UNLOCKED;
 		mrw::model::SectionState section_state = mrw::model::SectionState::FREE;
 		mrw::model::DoubleCrossSwitch::State switch_state = mrw::model::DoubleCrossSwitch::State::AC;
 
@@ -40,7 +39,7 @@ namespace mrw::ctrl
 			return switch_state;
 		}
 
-		virtual LockState lock() const override
+		virtual mrw::model::Device::LockState lock() const override
 		{
 			return lock_state;
 		}
@@ -48,7 +47,7 @@ namespace mrw::ctrl
 		void setSectionState(const mrw::model::SectionState state);
 		void setSwitchState(const mrw::model::DoubleCrossSwitch::State state);
 		void setDirection(const bool dir = true);
-		void setLock(const LockState lock);
+		void setLock(const mrw::model::Device::LockState lock);
 	};
 }
 

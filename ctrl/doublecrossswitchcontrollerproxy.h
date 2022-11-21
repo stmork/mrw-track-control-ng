@@ -21,7 +21,9 @@ namespace mrw::ctrl
 		mrw::model::DoubleCrossSwitch * part = nullptr;
 
 	public:
-		DoubleCrossSwitchControllerProxy(QObject * parent = nullptr);
+		explicit DoubleCrossSwitchControllerProxy(
+			mrw::model::DoubleCrossSwitch * new_part,
+			QObject            *            parent = nullptr);
 
 		void setSwitch(mrw::model::DoubleCrossSwitch * new_part);
 
@@ -38,9 +40,9 @@ namespace mrw::ctrl
 			return part->state();
 		}
 
-		virtual LockState lock() const override
+		virtual mrw::model::Device::LockState lock() const override
 		{
-			return LockState::UNLOCKED;
+			return part->lock();
 		}
 	};
 }

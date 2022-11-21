@@ -21,9 +21,9 @@ namespace mrw::ctrl
 		mrw::model::RegularSwitch * part = nullptr;
 
 	public:
-		RegularSwitchControllerProxy(QObject * parent = nullptr);
-
-		void setSwitch(mrw::model::RegularSwitch * new_part);
+		explicit RegularSwitchControllerProxy(
+			mrw::model::RegularSwitch * new_part,
+			QObject          *          parent = nullptr);
 
 		virtual bool isLeft() const override;
 		virtual bool isRight() const override;
@@ -36,9 +36,9 @@ namespace mrw::ctrl
 			return part->section()->state();
 		}
 
-		virtual LockState lock() const override
+		virtual mrw::model::Device::LockState lock() const override
 		{
-			return LockState::UNLOCKED;
+			return part->lock();
 		}
 	};
 }

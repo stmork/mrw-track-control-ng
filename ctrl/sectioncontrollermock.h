@@ -17,11 +17,11 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
-		mrw::model::SectionState section_state = mrw::model::SectionState::FREE;
-		bool                     direction     = true;
-		bool                     a_ends        = false;
-		bool                     b_ends        = false;
-		LockState                lock_state    = LockState::UNLOCKED;
+		mrw::model::SectionState       section_state = mrw::model::SectionState::FREE;
+		mrw::model::Device::LockState  lock_state    = mrw::model::Device::LockState::UNLOCKED;
+		bool                           direction     = true;
+		bool                           a_ends        = false;
+		bool                           b_ends        = false;
 
 	public:
 		explicit SectionControllerMock(QObject * parent = nullptr);
@@ -33,7 +33,7 @@ namespace mrw::ctrl
 			return section_state;
 		}
 
-		virtual LockState lock() const override
+		virtual mrw::model::Device::LockState lock() const override
 		{
 			return lock_state;
 		}

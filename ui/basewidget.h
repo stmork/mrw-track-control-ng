@@ -14,6 +14,7 @@
 #include <QPainter>
 #include <QColor>
 
+#include <model/device.h>
 #include <model/section.h>
 #include <ctrl/basecontroller.h>
 
@@ -50,7 +51,7 @@ namespace mrw::ui
 		}
 
 		static QColor sectionColor(const mrw::model::SectionState state);
-		bool drawLock(const mrw::ctrl::BaseController::LockState state) const;
+		bool drawLock(const mrw::model::Device::LockState state) const;
 
 		void rescale(
 			QPainter & painter,

@@ -72,7 +72,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	{
 		drawLock(
 			painter,
-			controller->lock() == BaseController::LockState::LOCKED ?
+			controller->lock() == Device::LockState::LOCKED ?
 			section_color : WHITE,
 			-45, 0);
 	}
@@ -94,7 +94,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 
 bool RegularSwitchWidget::isLockTransit() const
 {
-	return controller->lock() == BaseController::LockState::TRANSIT;
+	return controller->lock() == Device::LockState::TRANSIT;
 }
 
 bool RegularSwitchWidget::isTurnOut() const

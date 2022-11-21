@@ -10,17 +10,14 @@ using namespace mrw::can;
 using namespace mrw::ctrl;
 using namespace mrw::model;
 
-RegularSwitchControllerProxy::RegularSwitchControllerProxy(QObject * parent) :
-	RegularSwitchController(parent)
+RegularSwitchControllerProxy::RegularSwitchControllerProxy(
+	RegularSwitch * new_part,
+	QObject    *    parent) :
+	RegularSwitchController(parent),
+	part(new_part)
 {
 }
 
-void RegularSwitchControllerProxy::setSwitch(RegularSwitch * new_part)
-{
-	Q_ASSERT(part == nullptr);
-
-	part = new_part;
-}
 
 bool RegularSwitchControllerProxy::isLeft() const
 {

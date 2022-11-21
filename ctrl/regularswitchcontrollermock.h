@@ -20,8 +20,7 @@ namespace mrw::ctrl
 	private:
 		bool                  left_handed  = true;
 		bool                  direction    = false;
-		LockState             lock_state   = LockState::UNLOCKED;
-
+		mrw::model::Device::LockState     lock_state    = mrw::model::Device::LockState::UNLOCKED;
 		mrw::model::SectionState          section_state = mrw::model::SectionState::FREE;
 		mrw::model::RegularSwitch::State  switch_state  = mrw::model::RegularSwitch::State::AB;
 
@@ -39,14 +38,14 @@ namespace mrw::ctrl
 			return section_state;
 		}
 
-		virtual LockState lock() const override
+		virtual mrw::model::Device::LockState lock() const override
 		{
 			return lock_state;
 		}
 
 		void setSectionState(const mrw::model::SectionState state);
 		void setDirection(const bool dir = true);
-		void setLock(const LockState lock);
+		void setLock(const mrw::model::Device::LockState lock);
 
 	public slots:
 		void setLeft(const bool left = true);

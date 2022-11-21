@@ -27,6 +27,13 @@ namespace mrw::model
 		const mrw::can::UnitNo   unit_no;
 
 	public:
+		enum class LockState
+		{
+			UNLOCKED,
+			TRANSIT,
+			LOCKED
+		};
+
 		explicit Device(
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element);
@@ -47,6 +54,11 @@ namespace mrw::model
 			return unit_no;
 		}
 
+		inline LockState lock() const
+		{
+			return lock_state;
+		}
+
 		/**
 		 * This method returns the pointer to the managing controller.
 		 *
@@ -61,6 +73,9 @@ namespace mrw::model
 		 * @return The Device name modelled inside the EMF/XMI model.
 		 */
 		virtual const QString & name() const = 0;
+
+	private:
+		LockState                lock_state = LockState::UNLOCKED;
 	};
 }
 

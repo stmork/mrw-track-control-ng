@@ -20,7 +20,7 @@ void DoubleCrossSwitchControllerMock::setDirection(const bool dir)
 	emit update();
 }
 
-void DoubleCrossSwitchControllerMock::setLock(const BaseController::LockState lock)
+void DoubleCrossSwitchControllerMock::setLock(const Device::LockState lock)
 {
 	lock_state = lock;
 	emit update();

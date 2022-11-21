@@ -50,9 +50,10 @@ namespace mrw::ctrl
 			return section->state();
 		}
 
-		virtual LockState lock() const override
+		virtual mrw::model::Device::LockState lock() const override
 		{
-			return LockState::UNLOCKED;
+			// TODO: Compute from three possible signals.
+			return mrw::model::Device::LockState::UNLOCKED;
 		}
 	};
 }

@@ -54,7 +54,7 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	{
 		drawLock(
 			painter,
-			controller->lock() == BaseController::LockState::LOCKED ?
+			controller->lock() == Device::LockState::LOCKED ?
 			section_color : WHITE,
 			0, 0);
 	}
@@ -85,7 +85,7 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 
 bool DoubleCrossSwitchWidget::isLockTransit() const
 {
-	return controller->lock() == BaseController::LockState::TRANSIT;
+	return controller->lock() == Device::LockState::TRANSIT;
 }
 
 bool DoubleCrossSwitchWidget::isA() const

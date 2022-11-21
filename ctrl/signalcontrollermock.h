@@ -25,7 +25,7 @@ namespace mrw::ctrl
 		TourState shunt_state   = TourState::STOP;
 		TourState distant_state = TourState::STOP;
 		TourState main_state    = TourState::STOP;
-		LockState lock_state    = LockState::UNLOCKED;
+		mrw::model::Device::LockState lock_state    = mrw::model::Device::LockState::UNLOCKED;
 
 		mrw::model::SectionState section_state = mrw::model::SectionState::FREE;
 
@@ -43,7 +43,7 @@ namespace mrw::ctrl
 			return section_state;
 		}
 
-		virtual LockState lock() const override
+		virtual mrw::model::Device::LockState lock() const override
 		{
 			return lock_state;
 		}

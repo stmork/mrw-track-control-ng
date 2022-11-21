@@ -10,16 +10,12 @@ using namespace mrw::can;
 using namespace mrw::model;
 using namespace mrw::ctrl;
 
-DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(QObject * parent) :
-	DoubleCrossSwitchController(parent)
+DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(
+	DoubleCrossSwitch * new_part,
+	QObject      *      parent) :
+	DoubleCrossSwitchController(parent),
+	part(new_part)
 {
-}
-
-void DoubleCrossSwitchControllerProxy::setSwitch(DoubleCrossSwitch * new_part)
-{
-	Q_ASSERT(part == nullptr);
-
-	part = new_part;
 }
 
 bool DoubleCrossSwitchControllerProxy::isDirection() const
