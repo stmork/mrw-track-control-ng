@@ -123,7 +123,7 @@ void TestModel::testSections()
 		{
 			Section * section = region->section(s);
 
-			testSection(section);
+			testSection(region, section);
 		}
 
 		QVERIFY_EXCEPTION_THROWN(region->section(section_count), std::out_of_range);
@@ -172,12 +172,14 @@ void TestModel::tesDoubleCrossSwitchStates()
 	}
 }
 
-void TestModel::testSection(Section * section)
+void TestModel::testSection(Region * region, Section * section)
 {
 	QVERIFY(section != nullptr);
 	QVERIFY(section->valid());
 	QVERIFY(section->unitNo() != 0);
 	QVERIFY(section->controller() != nullptr);
+	QVERIFY(section->key().size() > 0);
+	QCOMPARE(section->region(), region);
 
 	SectionModule * module = section->module();
 
@@ -188,14 +190,15 @@ void TestModel::testSection(Section * section)
 	{
 		AssemblyPart * part = section->assemblyPart(r);
 
-		testAssemblyPart(part);
+		testAssemblyPart(section, part);
 	}
 	QVERIFY_EXCEPTION_THROWN(section->assemblyPart(rail_count), std::out_of_range);
 }
 
-void TestModel::testAssemblyPart(AssemblyPart * part)
+void TestModel::testAssemblyPart(Section * section, AssemblyPart * part)
 {
 	QVERIFY(part != nullptr);
+	QCOMPARE(part->section(), section);
 
 	SwitchModuleReference * reference = dynamic_cast<SwitchModuleReference *>(part);
 	LightSignal      *      signal    = dynamic_cast<LightSignal *>(part);
@@ -220,6 +223,7 @@ void TestModel::testAssemblyPart(AssemblyPart * part)
 		QVERIFY2(rail == nullptr, name.c_str());
 		QVERIFY2(signal->connection() != nullptr, name.c_str());
 		QVERIFY2(signal->controller() != nullptr, name.c_str());
+		QVERIFY2(signal->key().contains(signal->partName()), name.c_str());
 	}
 
 	if (rail != nullptr)

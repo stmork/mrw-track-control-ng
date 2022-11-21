@@ -23,8 +23,8 @@ namespace mrw::test
 	private:
 		void testModule(mrw::model::Module * module);
 		void testMuxConnection(mrw::model::MultiplexConnection * connection);
-		void testSection(mrw::model::Section * section);
-		void testAssemblyPart(mrw::model::AssemblyPart * part);
+		void testSection(model::Region * region, mrw::model::Section * section);
+		void testAssemblyPart(model::Section * section, mrw::model::AssemblyPart * part);
 
 	private slots:
 		void testModel();

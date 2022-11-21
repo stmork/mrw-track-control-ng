@@ -165,7 +165,7 @@ namespace mrw::model
 
 		virtual QString key() const override
 		{
-			return "";
+			return name();
 		}
 
 	private:
