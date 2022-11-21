@@ -94,7 +94,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 
 bool RegularSwitchWidget::isLockTransit() const
 {
-	return controller->lock() == Device::LockState::TRANSIT;
+	return controller->lock() == Device::LockState::PENDING;
 }
 
 bool RegularSwitchWidget::isTurnOut() const

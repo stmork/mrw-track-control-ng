@@ -24,13 +24,24 @@ namespace mrw::model
 	 */
 	class Device
 	{
-		const mrw::can::UnitNo   unit_no;
+		const mrw::can::UnitNo   unit_no = 0;
 
 	public:
-		enum class LockState
+		/**
+		 * This enumeration represents the processing state of this Device.
+		 */
+		enum class LockState : int
 		{
-			UNLOCKED,
-			TRANSIT,
+			/** An error occured during pending processing. */
+			FAIL = -1,
+
+			/** The Device is unlocked and can be modified. */
+			UNLOCKED = 0,
+
+			/** The Device is actually modifying its state. */
+			PENDING,
+
+			/** The Device is in a state where state modification is prohibited. */
 			LOCKED
 		};
 
@@ -54,6 +65,11 @@ namespace mrw::model
 			return unit_no;
 		}
 
+		/**
+		 * This method returns the actual modification state of this Device.
+		 *
+		 * @return The actual modification state.
+		 */
 		inline LockState lock() const
 		{
 			return lock_state;

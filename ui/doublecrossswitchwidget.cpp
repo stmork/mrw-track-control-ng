@@ -85,7 +85,7 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 
 bool DoubleCrossSwitchWidget::isLockTransit() const
 {
-	return controller->lock() == Device::LockState::TRANSIT;
+	return controller->lock() == Device::LockState::PENDING;
 }
 
 bool DoubleCrossSwitchWidget::isA() const

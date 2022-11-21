@@ -66,7 +66,7 @@ QColor BaseWidget::sectionColor(const SectionState state)
 
 bool BaseWidget::drawLock(const Device::LockState state) const
 {
-	return (state != Device::LockState::TRANSIT) || (counter & 1);
+	return (state != Device::LockState::PENDING) || (counter & 1);
 }
 
 void BaseWidget::rescale(

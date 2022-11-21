@@ -45,7 +45,7 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	connect(ui->transitButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
-		mock.setLock(Device::LockState::TRANSIT);
+		mock.setLock(Device::LockState::PENDING);
 	});
 	connect(ui->closedButton, &QRadioButton::clicked,
 		&mock, [&]()

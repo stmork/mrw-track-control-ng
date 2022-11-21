@@ -18,10 +18,14 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
-		bool                  direction    = false;
-		mrw::model::Device::LockState             lock_state   = mrw::model::Device::LockState::UNLOCKED;
-		mrw::model::SectionState section_state = mrw::model::SectionState::FREE;
-		mrw::model::DoubleCrossSwitch::State switch_state = mrw::model::DoubleCrossSwitch::State::AC;
+		bool                                 direction    = false;
+
+		mrw::model::Device::LockState        lock_state =
+				mrw::model::Device::LockState::UNLOCKED;
+		mrw::model::SectionState             section_state =
+				mrw::model::SectionState::FREE;
+		mrw::model::DoubleCrossSwitch::State switch_state =
+				mrw::model::DoubleCrossSwitch::State::AC;
 
 	public:
 		DoubleCrossSwitchControllerMock(QObject * parent = nullptr);
