@@ -38,7 +38,7 @@ static const QVector<QPointF> points
 void SignalWidget::paint(QPainter & painter)
 {
 	QPainterPath path;
-	QFont        font = painter.font();
+	QFont        font   = painter.font();
 	const float  shift  = SCALE * controller->extensions() / Position::FRACTION;
 	const float  border = SCALE + shift;
 	const float  start  = SCALE - border;

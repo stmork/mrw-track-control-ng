@@ -20,11 +20,14 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent)
 	ui->setupUi(this);
 	initRegion();
 
+#if 0
+	// NOTE: Disabled for the first.
 	QList<ControllerWidget *> widgets = findChildren<ControllerWidget *>();
 
 	for (ControllerWidget * w : widgets)
 	{
 	}
+#endif
 }
 
 MainWindow::~MainWindow()
