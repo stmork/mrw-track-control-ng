@@ -127,7 +127,8 @@ void RegionForm::setupSection(Section * section)
 		SectionControllerProxy * ctrl   = new SectionControllerProxy(section, rail, this);
 		SectionWidget      *     widget = new SectionWidget(ui->controlWidget, ctrl);
 
-		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
+		widget->setFixedHeight(BaseWidget::SIZE);
+		widget->extend();
 		widget->move(rail->point() * BaseWidget::SIZE / 2);
 
 		connect(
@@ -150,7 +151,8 @@ void RegionForm::setupSignals(Section * section, const bool direction)
 		SignalControllerProxy * ctrl   = new SignalControllerProxy(section, direction, this);
 		SignalWidget      *     widget = new SignalWidget(ui->controlWidget, ctrl);
 
-		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
+		widget->setFixedHeight(BaseWidget::SIZE);
+		widget->extend();
 		widget->move(section_signals[0]->point() * BaseWidget::SIZE / 2);
 
 		connect(
