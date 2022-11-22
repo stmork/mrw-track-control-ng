@@ -36,3 +36,10 @@ QString SectionControllerMock::name() const
 {
 	return "301";
 }
+
+void mrw::ctrl::SectionControllerMock::setExtension(const int new_extension)
+{
+	extension = new_extension;
+	emit update();
+	emit extend();
+}

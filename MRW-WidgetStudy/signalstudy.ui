@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1058</width>
+    <width>681</width>
     <height>498</height>
    </rect>
   </property>
@@ -33,6 +33,13 @@
          <widget class="QRadioButton" name="forwardButton">
           <property name="text">
            <string>vorwärts</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="extensionBox">
+          <property name="maximum">
+           <number>4</number>
           </property>
          </widget>
         </item>
@@ -216,8 +223,8 @@
      <widget class="mrw::ui::SignalWidget" name="smallSwitchWidget" native="true">
       <property name="geometry">
        <rect>
-        <x>390</x>
-        <y>100</y>
+        <x>100</x>
+        <y>310</y>
         <width>40</width>
         <height>40</height>
        </rect>
@@ -226,8 +233,8 @@
      <widget class="mrw::ui::SignalWidget" name="bigSwitchWidget" native="true">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>50</y>
+        <x>30</x>
+        <y>30</y>
         <width>200</width>
         <height>200</height>
        </rect>
@@ -245,6 +252,25 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>backwardButton</tabstop>
+  <tabstop>forwardButton</tabstop>
+  <tabstop>extensionBox</tabstop>
+  <tabstop>freeButton</tabstop>
+  <tabstop>shuntButton</tabstop>
+  <tabstop>tourButton</tabstop>
+  <tabstop>occupiedButton</tabstop>
+  <tabstop>passedButton</tabstop>
+  <tabstop>availableButton_1</tabstop>
+  <tabstop>stopButton_1</tabstop>
+  <tabstop>goButton_1</tabstop>
+  <tabstop>availableButton_2</tabstop>
+  <tabstop>stopButton_2</tabstop>
+  <tabstop>goButton_2</tabstop>
+  <tabstop>availableButton_3</tabstop>
+  <tabstop>stopButton_3</tabstop>
+  <tabstop>goButton_3</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

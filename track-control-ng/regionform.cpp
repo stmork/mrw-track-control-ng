@@ -52,6 +52,10 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
 		widget->move(part->point() * BaseWidget::SIZE / 2);
+
+		connect(
+			ctrl, &BaseController::update,
+			widget, qOverload<>(&BaseWidget::repaint));
 	}
 
 	region->parts<DoubleCrossSwitch>(region_dc_switches);
@@ -62,6 +66,10 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
 		widget->move(part->point() * BaseWidget::SIZE / 2);
+
+		connect(
+			ctrl, &BaseController::update,
+			widget, qOverload<>(&BaseWidget::repaint));
 	}
 
 	setupSize(region);
@@ -121,6 +129,10 @@ void RegionForm::setupSection(Section * section)
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
 		widget->move(rails[0]->point() * BaseWidget::SIZE / 2);
+
+		connect(
+			ctrl, &BaseController::update,
+			widget, qOverload<>(&BaseWidget::repaint));
 	}
 }
 
@@ -140,5 +152,9 @@ void RegionForm::setupSignals(Section * section, const bool direction)
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
 		widget->move(section_signals[0]->point() * BaseWidget::SIZE / 2);
+
+		connect(
+			ctrl, &BaseController::update,
+			widget, qOverload<>(&BaseWidget::repaint));
 	}
 }

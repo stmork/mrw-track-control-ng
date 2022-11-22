@@ -28,8 +28,9 @@ void SectionWidget::paint(QPainter & painter)
 	QPainterPath path;
 	QFont        font = painter.font();
 	QPen         pen;
+	const float  border = SCALE * (1.0 + controller->extensions() * 0.5);
 
-	rescale(painter);
+	rescale(painter, (2.0 + controller->extensions()) * SCALE);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
 	pen.setColor(YELLOW);
@@ -44,7 +45,7 @@ void SectionWidget::paint(QPainter & painter)
 	pen.setColor(sectionColor(controller->state()));
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
-	painter.drawLine(-SCALE, 0.0f, SCALE, 0.0f);
+	painter.drawLine(-border, 0.0f, border, 0.0f);
 
 	if (controller->forwardEnds() || controller->backwardEnds())
 	{
@@ -54,12 +55,17 @@ void SectionWidget::paint(QPainter & painter)
 			painter.scale(-1.0f, 1.0f);
 		}
 
-		path.moveTo( 90 - 5, -RAIL_WIDTH * 2);
-		path.lineTo(100 - 5, -RAIL_WIDTH * 2);
-		path.lineTo(100 - 5,  RAIL_WIDTH * 2);
-		path.lineTo( 90 - 5,  RAIL_WIDTH * 2);
+		path.moveTo(border - 15, -RAIL_WIDTH * 2);
+		path.lineTo(border -  5, -RAIL_WIDTH * 2);
+		path.lineTo(border -  5,  RAIL_WIDTH * 2);
+		path.lineTo(border - 15,  RAIL_WIDTH * 2);
 		pen.setWidth(RAIL_WIDTH * 0.5);
 		painter.setPen(pen);
 		painter.drawPath(path);
 	}
+}
+
+void SectionWidget::extend()
+{
+	setFixedWidth(height() * (1.0 + controller->extensions() * 0.5));
 }

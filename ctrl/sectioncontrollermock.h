@@ -17,6 +17,7 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
+		unsigned                       extension     = 0;
 		bool                           direction     = true;
 		bool                           a_ends        = false;
 		bool                           b_ends        = false;
@@ -56,9 +57,20 @@ namespace mrw::ctrl
 			return b_ends;
 		}
 
+		virtual unsigned extensions() const override
+		{
+			return extension;
+		}
+
 		void setSectionState(const mrw::model::SectionState state);
 		void setDirection(const bool dir = true);
 		void setEnds(const bool a, const bool b);
+
+	signals:
+		void extend();
+
+	public slots:
+		void setExtension(const int extension);
 	};
 }
 

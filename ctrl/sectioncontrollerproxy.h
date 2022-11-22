@@ -50,6 +50,11 @@ namespace mrw::ctrl
 			return rail->advance(false).empty();
 		}
 
+		virtual unsigned extensions() const override
+		{
+			return rail->extend();
+		}
+
 		virtual mrw::model::Device::LockState lock() const override
 		{
 			return section->lock();

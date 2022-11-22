@@ -41,6 +41,9 @@ SignalStudy::SignalStudy(QWidget * parent) :
 	{
 		mock.setDirection(false);
 	});
+	connect(
+		ui->extensionBox, qOverload<int>(&QSpinBox::valueChanged),
+		&mock, &SignalControllerMock::setExtension);
 
 	/********************************************************/
 	/*  Signal existance and state                          */
@@ -112,8 +115,14 @@ SignalStudy::SignalStudy(QWidget * parent) :
 		&mock, &SignalControllerMock::update,
 		ui->bigSwitchWidget, qOverload<>(&QWidget::repaint));
 	connect(
+		&mock, &SignalControllerMock::extend,
+		ui->bigSwitchWidget, qOverload<>(&SignalWidget::extend));
+	connect(
 		&mock, &SignalControllerMock::update,
 		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
+	connect(
+		&mock, &SignalControllerMock::extend,
+		ui->smallSwitchWidget, qOverload<>(&SignalWidget::extend));
 
 	ui->backwardButton->setChecked(true);
 	ui->freeButton->setChecked(true);

@@ -29,6 +29,9 @@ namespace mrw::ui
 
 	protected:
 		void paint(QPainter & painter) override;
+
+	public slots:
+		void extend();
 	};
 }
 

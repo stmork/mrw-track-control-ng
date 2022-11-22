@@ -41,6 +41,9 @@ SectionStudy::SectionStudy(QWidget * parent) :
 	{
 		mock.setDirection(false);
 	});
+	connect(
+		ui->extensionBox, qOverload<int>(&QSpinBox::valueChanged),
+		&mock, &SectionControllerMock::setExtension);
 
 	/********************************************************/
 	/*   Lock state                                         */
@@ -100,8 +103,14 @@ SectionStudy::SectionStudy(QWidget * parent) :
 		&mock, &SectionControllerMock::update,
 		ui->bigSwitchWidget, qOverload<>(&QWidget::repaint));
 	connect(
+		&mock, &SectionControllerMock::extend,
+		ui->bigSwitchWidget, qOverload<>(&SectionWidget::extend));
+	connect(
 		&mock, &SectionControllerMock::update,
 		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
+	connect(
+		&mock, &SectionControllerMock::extend,
+		ui->smallSwitchWidget, qOverload<>(&SectionWidget::extend));
 
 	ui->backwardButton->setChecked(true);
 	ui->noButton->setChecked(true);

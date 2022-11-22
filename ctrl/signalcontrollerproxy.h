@@ -33,10 +33,10 @@ namespace mrw::ctrl
 			const bool            direction,
 			QObject       *       parent);
 
-		virtual bool isDirection() const override;
-		virtual bool hasShunting() const override;
-		virtual bool hasDistant() const override;
-		virtual bool hasMain() const override;
+		virtual bool    isDirection() const override;
+		virtual bool    hasShunting() const override;
+		virtual bool    hasDistant() const override;
+		virtual bool    hasMain() const override;
 		virtual QString name() const override;
 
 		TourState distant() const override;
@@ -52,6 +52,12 @@ namespace mrw::ctrl
 		{
 			// TODO: Compute from three possible signals.
 			return mrw::model::Device::LockState::UNLOCKED;
+		}
+
+		virtual unsigned extensions() const override
+		{
+			// TODO: Select correct signal.
+			return 0;
 		}
 	};
 }

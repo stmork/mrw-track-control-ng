@@ -43,6 +43,13 @@ void SignalControllerMock::setSectionState(const SectionState state)
 	emit update();
 }
 
+void mrw::ctrl::SignalControllerMock::setExtension(const int new_extension)
+{
+	extension = new_extension;
+	emit update();
+	emit extend();
+}
+
 void SignalControllerMock::setShuntStop()
 {
 	shunt_state = TourState::STOP;

@@ -24,14 +24,15 @@ namespace mrw::ctrl
 
 		explicit SignalController(QObject * parent = nullptr);
 
-		virtual bool isDirection() const = 0;
-		virtual bool hasShunting() const = 0;
-		virtual bool hasDistant() const = 0;
-		virtual bool hasMain() const = 0;
+		virtual bool      isDirection() const = 0;
+		virtual bool      hasShunting() const = 0;
+		virtual bool      hasDistant()  const = 0;
+		virtual bool      hasMain()     const = 0;
+		virtual unsigned  extensions()  const = 0;
 
-		virtual TourState distant() const = 0;
-		virtual TourState shunt() const = 0;
-		virtual TourState main() const = 0;
+		virtual TourState distant()     const = 0;
+		virtual TourState shunt()       const = 0;
+		virtual TourState main()        const = 0;
 	};
 }
 

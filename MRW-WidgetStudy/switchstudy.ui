@@ -23,6 +23,13 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
+         <widget class="QCheckBox" name="inclinedBox">
+          <property name="text">
+           <string>geneigt</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QRadioButton" name="leftHandedButton">
           <property name="text">
            <string>Linksweiche</string>

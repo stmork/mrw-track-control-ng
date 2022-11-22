@@ -17,14 +17,15 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
-		bool direction      = true;
-		bool shunting       = false;
-		bool distant_signal = false;
-		bool main_signal    = true;
+		unsigned  extension      = 0;
+		bool      direction      = true;
+		bool      shunting       = false;
+		bool      distant_signal = false;
+		bool      main_signal    = true;
 
-		TourState shunt_state   = TourState::STOP;
-		TourState distant_state = TourState::STOP;
-		TourState main_state    = TourState::STOP;
+		TourState shunt_state    = TourState::STOP;
+		TourState distant_state  = TourState::STOP;
+		TourState main_state     = TourState::STOP;
 
 		mrw::model::Device::LockState lock_state =
 			mrw::model::Device::LockState::UNLOCKED;
@@ -50,6 +51,11 @@ namespace mrw::ctrl
 			return lock_state;
 		}
 
+		virtual unsigned extensions() const override
+		{
+			return extension;
+		}
+
 		inline TourState distant() const override
 		{
 			return distant_state;
@@ -68,7 +74,12 @@ namespace mrw::ctrl
 		void setDirection(const bool dir = true);
 		void setSectionState(const mrw::model::SectionState state);
 
+	signals:
+		void extend();
+
 	public slots:
+		void setExtension(const int extension);
+
 		void setShuntStop();
 		void setShuntGo();
 		void setDistantStop();

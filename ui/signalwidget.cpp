@@ -37,11 +37,12 @@ void SignalWidget::paint(QPainter & painter)
 {
 	QPainterPath path;
 	QFont        font = painter.font();
+	const float  border = SCALE * (1.0 + controller->extensions() * 0.5);
 
 	Q_ASSERT(controller != nullptr);
 
 	// Unify coordinates
-	rescale(painter);
+	rescale(painter, (2.0 + controller->extensions()) * SCALE);
 
 	// Draw switch name before rotating to prevent rotated font drawing.
 	font.setPixelSize(FONT_HEIGHT);
@@ -60,7 +61,7 @@ void SignalWidget::paint(QPainter & painter)
 
 	// Draw straight part of rail
 	painter.setPen(QPen(sectionColor(controller->state()), 20.0));
-	painter.drawLine( -100.0f, 0.0f, 100.0f, 0.0f);
+	painter.drawLine( -border, 0.0f, border, 0.0f);
 
 	QColor mast_color(RED);
 	QPen   pen;
@@ -133,4 +134,9 @@ void SignalWidget::paint(QPainter & painter)
 		painter.setBrush(QBrush(main_color));
 		painter.drawEllipse(50, 35, 40, 40);
 	}
+}
+
+void SignalWidget::extend()
+{
+	setFixedWidth(height() * (1.0 + controller->extensions() * 0.5));
 }
