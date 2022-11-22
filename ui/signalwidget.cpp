@@ -41,6 +41,7 @@ void SignalWidget::paint(QPainter & painter)
 	QFont        font = painter.font();
 	const float  shift  = SCALE * controller->extensions() / Position::FRACTION;
 	const float  border = SCALE + shift;
+	const float  start  = SCALE - border;
 
 	Q_ASSERT(controller != nullptr);
 
@@ -52,7 +53,7 @@ void SignalWidget::paint(QPainter & painter)
 	painter.setFont(font);
 	painter.setPen(YELLOW);
 	painter.drawText(QRectF(
-			controller->isDirection() ? -20 : -100,
+			controller->isDirection() ? -border : border - 120,
 			controller->isDirection() ? -80 : 30, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
 
@@ -111,21 +112,23 @@ void SignalWidget::paint(QPainter & painter)
 	pen.setWidth(8);
 	pen.setCapStyle(Qt::FlatCap);
 	painter.setPen(pen);
-	painter.drawLine(-30, 35, -30, 75);
+	painter.drawLine(start - 30, 35, start - 30, 75);
 
 	// Draw mast
 	pen.setWidth(10.0);
 	painter.setPen(pen);
-	painter.drawLine(-30, 55, draw_distant || draw_shunt ? 30 : 70, 55);
+	painter.drawLine(start - 30, 55, start + (draw_distant || draw_shunt ? 30 : 70), 55);
 
 	if (draw_shunt)
 	{
-		painter.fillRect(10, 35, 40, 40, shunt_color);
+		painter.fillRect(start + 10, 35, 40, 40, shunt_color);
 	}
+
 	if (draw_distant)
 	{
 		path.addPolygon(points);
 		path.closeSubpath();
+		path.translate(start, 0);
 		painter.fillPath(path, QBrush(distant_color));
 	}
 
@@ -135,7 +138,7 @@ void SignalWidget::paint(QPainter & painter)
 		pen.setWidth(1);
 		painter.setPen(pen);
 		painter.setBrush(QBrush(main_color));
-		painter.drawEllipse(50, 35, 40, 40);
+		painter.drawEllipse(start + 50, 35, 40, 40);
 	}
 }
 
