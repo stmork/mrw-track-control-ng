@@ -85,14 +85,14 @@
         <item>
          <widget class="QRadioButton" name="backwardButton">
           <property name="text">
-           <string>rückwärts</string>
+           <string>A links</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QRadioButton" name="forwardButton">
           <property name="text">
-           <string>vorwärts</string>
+           <string>A rechts</string>
           </property>
          </widget>
         </item>

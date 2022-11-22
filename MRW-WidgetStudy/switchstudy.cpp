@@ -53,15 +53,15 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 	/*   Counting direction                                 */
 	/********************************************************/
 
-	connect(ui->forwardButton, &QRadioButton::clicked,
-		&mock, [&]()
-	{
-		mock.setDirection(true);
-	});
 	connect(ui->backwardButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setDirection(false);
+	});
+	connect(ui->forwardButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setDirection(true);
 	});
 
 	/********************************************************/

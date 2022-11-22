@@ -40,10 +40,10 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	painter.setPen(YELLOW);
 	painter.drawText(QRectF(
 			false ? -SCALE : -20,
-			!controller->isDirection() ? 30 : -80, 120, FONT_HEIGHT),
+			controller->isDirection() ? 30 : -80, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
 
-	if (!controller->isDirection())
+	if (controller->isDirection())
 	{
 		// Draw from left to right but invert horizontally if counter direction.
 		painter.scale(-1.0f, 1.0f);
@@ -88,27 +88,31 @@ bool DoubleCrossSwitchWidget::isLockTransit() const
 bool DoubleCrossSwitchWidget::isA() const
 {
 	const unsigned state = (unsigned)controller->switchState();
+	const unsigned mask  = controller->isDirection() ? DoubleCrossSwitch::B_MASK : 0;
 
-	return (state & DoubleCrossSwitch::B_MASK) == 0;
+	return (state & DoubleCrossSwitch::B_MASK) == mask;
 }
 
 bool DoubleCrossSwitchWidget::isB() const
 {
 	const unsigned state = (unsigned)controller->switchState();
+	const unsigned mask  = controller->isDirection() ? DoubleCrossSwitch::B_MASK : 0;
 
-	return (state & DoubleCrossSwitch::B_MASK) != 0;
+	return (state & DoubleCrossSwitch::B_MASK) != mask;
 }
 
 bool DoubleCrossSwitchWidget::isC() const
 {
 	const unsigned state = (unsigned)controller->switchState();
+	const unsigned mask  = controller->isDirection() ? DoubleCrossSwitch::D_MASK : 0;
 
-	return (state & DoubleCrossSwitch::D_MASK) == 0;
+	return (state & DoubleCrossSwitch::D_MASK) == mask;
 }
 
 bool DoubleCrossSwitchWidget::isD() const
 {
 	const unsigned state = (unsigned)controller->switchState();
+	const unsigned mask  = controller->isDirection() ? DoubleCrossSwitch::D_MASK : 0;
 
-	return (state & DoubleCrossSwitch::D_MASK) != 0;
+	return (state & DoubleCrossSwitch::D_MASK) != mask;
 }
