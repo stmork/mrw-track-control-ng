@@ -30,7 +30,6 @@ void RegularSwitchWidget::setController(RegularSwitchController * ctrl)
 
 void RegularSwitchWidget::paint(QPainter & painter)
 {
-	QPainterPath path;
 	QFont        font    = painter.font();
 	const bool   pending = drawLock(controller->lock());
 
@@ -94,7 +93,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	// Draw straight part of switch
 	pen.setColor(!isTurnOut() ? section_color : outside_color);
 	painter.setPen(pen);
-	painter.drawLine(!isTurnOut() && pending ? (controller->isInclined() ? 20 :-20.0f) : 80.0f, 0.0f, 100.0f, 0.0f);
+	painter.drawLine(!isTurnOut() && pending ? (controller->isInclined() ? 20 : -20.0f) : 80.0f, 0.0f, 100.0f, 0.0f);
 }
 
 bool RegularSwitchWidget::isLockTransit() const

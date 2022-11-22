@@ -78,7 +78,7 @@ void BaseWidget::rescale(
 	painter.scale(width() / xSize, height() / ySize);
 	if (verbose)
 	{
-		painter.fillRect(-95,-95, 5,5, Qt::lightGray);
+		painter.fillRect(-95, -95, 5, 5, Qt::lightGray);
 	}
 }
 

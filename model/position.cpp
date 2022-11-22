@@ -42,11 +42,17 @@ void Position::parse(QSettings & settings, const QString & default_value)
 		{
 			switch (c.toLatin1())
 			{
+			case 'i':
+			case 'I':
+				inclined = true;
+				break;
+
 			case 'x':
 			case 'X':
 				extension++;
 				break;
 
+			case 'h':
 			case 'o':
 			case 'O':
 				offset = 1;
@@ -69,9 +75,13 @@ void Position::write(QSettings & settings)
 	QString ext;
 
 	offset = position.x() & 1;
+	if (inclined)
+	{
+		ext += 'i';
+	}
 	if (offset != 0)
 	{
-		ext += 'o';
+		ext += 'h';
 	}
 	for (unsigned i = 0; i < extension; i++)
 	{
