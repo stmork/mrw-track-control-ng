@@ -19,10 +19,10 @@ namespace mrw::ctrl
 	public:
 		explicit SectionController(QObject * parent = nullptr);
 
-		virtual bool     isDirection()  const = 0;
-		virtual bool     forwardEnds()  const = 0;
-		virtual bool     backwardEnds() const = 0;
-		virtual unsigned extensions()   const = 0;
+		virtual bool  isDirection()  const = 0;
+		virtual bool  forwardEnds()  const = 0;
+		virtual bool  backwardEnds() const = 0;
+		virtual float extensions()   const = 0;
 	};
 }
 

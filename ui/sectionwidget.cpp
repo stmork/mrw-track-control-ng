@@ -4,7 +4,9 @@
 //
 
 #include <ui/sectionwidget.h>
+#include <model/position.h>
 
+using namespace mrw::model;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 
@@ -28,9 +30,9 @@ void SectionWidget::paint(QPainter & painter)
 	QPainterPath path;
 	QFont        font = painter.font();
 	QPen         pen;
-	const float  border = SCALE * (1.0 + controller->extensions() * 0.5);
+	const float  border = SCALE * (1.0 + controller->extensions() / Position::FRACTION);
 
-	rescale(painter, (2.0 + controller->extensions()) * SCALE);
+	rescale(painter, (Position::FRACTION + controller->extensions()) * SCALE / Position::HALF);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
 	pen.setColor(YELLOW);
@@ -67,5 +69,5 @@ void SectionWidget::paint(QPainter & painter)
 
 void SectionWidget::extend()
 {
-	setFixedWidth(height() * (1.0 + controller->extensions() * 0.5));
+	setFixedWidth(height() * (1.0 + controller->extensions() / Position::FRACTION));
 }

@@ -39,7 +39,7 @@
         <item>
          <widget class="QSpinBox" name="extensionBox">
           <property name="maximum">
-           <number>4</number>
+           <number>8</number>
           </property>
          </widget>
         </item>

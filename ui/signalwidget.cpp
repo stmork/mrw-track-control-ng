@@ -6,7 +6,9 @@
 #include <QPainter>
 
 #include <ui/signalwidget.h>
+#include <model/position.h>
 
+using namespace mrw::model;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 
@@ -37,13 +39,13 @@ void SignalWidget::paint(QPainter & painter)
 {
 	QPainterPath path;
 	QFont        font = painter.font();
-	const float  shift  = SCALE * controller->extensions() * 0.5;
+	const float  shift  = SCALE * controller->extensions() / Position::FRACTION;
 	const float  border = SCALE + shift;
 
 	Q_ASSERT(controller != nullptr);
 
 	// Unify coordinates
-	rescale(painter, (2.0 + controller->extensions()) * SCALE);
+	rescale(painter, (Position::FRACTION + controller->extensions()) * SCALE / Position::HALF);
 
 	// Draw switch name before rotating to prevent rotated font drawing.
 	font.setPixelSize(FONT_HEIGHT);
@@ -139,5 +141,5 @@ void SignalWidget::paint(QPainter & painter)
 
 void SignalWidget::extend()
 {
-	setFixedWidth(height() * (1.0 + controller->extensions() * 0.5));
+	setFixedWidth(height() * (1.0 + (float)controller->extensions() / Position::FRACTION));
 }

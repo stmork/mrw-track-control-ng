@@ -51,7 +51,7 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 		RegularSwitchWidget      *     widget = new RegularSwitchWidget(ui->controlWidget, ctrl);
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
-		widget->move(part->point() * BaseWidget::SIZE / 2);
+		widget->move(part->point() * BaseWidget::SIZE / Position::FRACTION);
 
 		connect(
 			ctrl, &BaseController::update,
@@ -65,7 +65,7 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 		DoubleCrossSwitchWidget      *     widget = new DoubleCrossSwitchWidget(ui->controlWidget, ctrl);
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
-		widget->move(part->point() * BaseWidget::SIZE / 2);
+		widget->move(part->point() * BaseWidget::SIZE / Position::FRACTION);
 
 		connect(
 			ctrl, &BaseController::update,
@@ -112,8 +112,8 @@ void RegionForm::setupSize(mrw::model::Region * region)
 	fields.setHeight(yMax);
 
 	ui->controlWidget->setFixedSize(
-		xMax * BaseWidget::SIZE / 2 + 100,
-		yMax * BaseWidget::SIZE / 2 + 100);
+		xMax * BaseWidget::SIZE / Position::FRACTION + 100,
+		yMax * BaseWidget::SIZE / Position::FRACTION + 100);
 }
 
 void RegionForm::setupSection(Section * section)
@@ -129,7 +129,7 @@ void RegionForm::setupSection(Section * section)
 
 		widget->setFixedHeight(BaseWidget::SIZE);
 		widget->extend();
-		widget->move(rail->point() * BaseWidget::SIZE / 2);
+		widget->move(rail->point() * BaseWidget::SIZE / Position::FRACTION);
 
 		connect(
 			ctrl, &BaseController::update,
@@ -153,7 +153,7 @@ void RegionForm::setupSignals(Section * section, const bool direction)
 
 		widget->setFixedHeight(BaseWidget::SIZE);
 		widget->extend();
-		widget->move(section_signals[0]->point() * BaseWidget::SIZE / 2);
+		widget->move(section_signals[0]->point() * BaseWidget::SIZE / Position::FRACTION);
 
 		connect(
 			ctrl, &BaseController::update,

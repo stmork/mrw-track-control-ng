@@ -37,6 +37,11 @@ namespace mrw::model
 		static unsigned counter;
 
 	public:
+		static constexpr unsigned FRACTION = 4;
+		static constexpr unsigned MASK     = FRACTION - 1;
+		static constexpr unsigned HALF     = FRACTION >> 1;
+		static constexpr unsigned QUARTER  = FRACTION >> 2;
+
 		Position() = default;
 
 		/**

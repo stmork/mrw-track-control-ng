@@ -57,7 +57,7 @@ namespace mrw::ctrl
 			return b_ends;
 		}
 
-		virtual unsigned extensions() const override
+		virtual float extensions() const override
 		{
 			return extension;
 		}

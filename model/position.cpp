@@ -55,7 +55,11 @@ void Position::parse(QSettings & settings, const QString & default_value)
 			case 'h':
 			case 'o':
 			case 'O':
-				offset = 1;
+				offset  = HALF;
+				break;
+
+			case 'q':
+				offset += QUARTER;
 				break;
 
 			default:
@@ -64,24 +68,33 @@ void Position::parse(QSettings & settings, const QString & default_value)
 			}
 		}
 	}
-	position.setX(x * 2 + offset);
-	position.setY(y * 2);
+	position.setX(x * FRACTION + offset);
+	position.setY(y * FRACTION);
 }
 
 void Position::write(QSettings & settings)
 {
 	QString pos_key = key().replace(" ", "");
-	QString value   = QString("%1,%2").arg(position.x() / 2).arg(position.y() / 2);
+	QString value   = QString("%1,%2").
+		arg(position.x() / FRACTION).
+		arg(position.y() / FRACTION);
 	QString ext;
 
-	offset = position.x() & 1;
+	offset = position.x() & MASK;
 	if (inclined)
 	{
 		ext += 'i';
 	}
-	if (offset != 0)
+	if (offset == HALF)
 	{
 		ext += 'h';
+	}
+	else
+	{
+		for (unsigned o = 0; o < (offset & MASK); o++)
+		{
+			ext += 'q';
+		}
 	}
 	for (unsigned i = 0; i < extension; i++)
 	{

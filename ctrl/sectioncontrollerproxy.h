@@ -51,7 +51,7 @@ namespace mrw::ctrl
 			return rail->advance(false).empty();
 		}
 
-		virtual unsigned extensions() const override
+		virtual float extensions() const override
 		{
 			return rail->extend();
 		}
