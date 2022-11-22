@@ -29,6 +29,7 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	QFont  font          = painter.font();
 	QColor section_color = sectionColor(controller->state());
 	QColor outside_color = sectionColor(SectionState::FREE);
+	const bool   pending = drawLock(controller->lock());
 	QPen   pen;
 
 	rescale(painter);
@@ -49,25 +50,21 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	}
 
 	// Draw point lock
-	// Draw point lock
-	if (drawLock(controller->lock()))
-	{
-		drawLock(
-			painter,
-			controller->lock() == Device::LockState::LOCKED ?
-			section_color : WHITE,
-			0, 0);
-	}
+	drawLock(
+		painter,
+		controller->lock() == Device::LockState::LOCKED ?
+		section_color : WHITE,
+		0, 0);
 
 	// Draw A segment
 	drawSheared(painter,
 		isA() ? section_color : outside_color, -50, -100,
-		isA() ?  70.0f :  15.0f, -RAIL_SLOPE);
+		isA() && pending ?  70.0f :  15.0f, -RAIL_SLOPE);
 
 	// Draw D segment
 	drawSheared(painter,
 		isD() ? section_color : outside_color,  50,  100,
-		isD() ? -70.0f : -15.0f, -RAIL_SLOPE);
+		isD() && pending  ? -70.0f : -15.0f, -RAIL_SLOPE);
 
 	pen.setCapStyle(Qt::FlatCap);
 	pen.setWidth(RAIL_WIDTH);
@@ -75,12 +72,12 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	// Draw B segment
 	pen.setColor(isB() ? section_color : outside_color);
 	painter.setPen(pen);
-	painter.drawLine(-100.0f, 0.0f, isB() ? -27.0f : -80.0f, 0.0f);
+	painter.drawLine(-100.0f, 0.0f, isB() && pending  ? -27.0f : -80.0f, 0.0f);
 
 	// Draw C segment
 	pen.setColor(isC() ? section_color : outside_color);
 	painter.setPen(pen);
-	painter.drawLine( 100.0f, 0.0f, isC() ?  27.0f :  80.0f, 0.0f);
+	painter.drawLine( 100.0f, 0.0f, isC() && pending  ?  27.0f :  80.0f, 0.0f);
 }
 
 bool DoubleCrossSwitchWidget::isLockTransit() const

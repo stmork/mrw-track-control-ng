@@ -31,7 +31,8 @@ void RegularSwitchWidget::setController(RegularSwitchController * ctrl)
 void RegularSwitchWidget::paint(QPainter & painter)
 {
 	QPainterPath path;
-	QFont        font = painter.font();
+	QFont        font    = painter.font();
+	const bool   pending = drawLock(controller->lock());
 
 	Q_ASSERT(controller != nullptr);
 
@@ -65,17 +66,14 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	drawSheared(
 		painter,
 		isTurnOut() ? section_color : outside_color,
-		0, -100, isTurnOut() ? 70 : 15);
+		0, -100, isTurnOut() && pending ? 70 : 15);
 
 	// Draw point lock
-	if (drawLock(controller->lock()))
-	{
-		drawLock(
-			painter,
-			controller->lock() == Device::LockState::LOCKED ?
-			section_color : WHITE,
-			-45, 0);
-	}
+	drawLock(
+		painter,
+		controller->lock() == Device::LockState::LOCKED ?
+		section_color : WHITE,
+		-45, 0);
 
 	QPen pen;
 	pen.setCapStyle(Qt::FlatCap);
@@ -89,7 +87,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	// Draw straight part of switch
 	pen.setColor(!isTurnOut() ? section_color : outside_color);
 	painter.setPen(pen);
-	painter.drawLine(!isTurnOut() ? -20.0f : 80.0f, 0.0f, 100.0f, 0.0f);
+	painter.drawLine(!isTurnOut() && pending ? -20.0f : 80.0f, 0.0f, 100.0f, 0.0f);
 }
 
 bool RegularSwitchWidget::isLockTransit() const
