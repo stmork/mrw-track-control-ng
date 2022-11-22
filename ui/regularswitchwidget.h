@@ -8,13 +8,12 @@
 #ifndef MRW_UI_REGULARSWITCHWIDGET_H
 #define MRW_UI_REGULARSWITCHWIDGET_H
 
-#include <can/commands.h>
-#include <ui/basewidget.h>
+#include <ui/controllerwidget.h>
 #include <ctrl/regularswitchcontroller.h>
 
 namespace mrw::ui
 {
-	class RegularSwitchWidget : public BaseWidget
+	class RegularSwitchWidget : public ControllerWidget
 	{
 		Q_OBJECT
 

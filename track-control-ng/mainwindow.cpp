@@ -4,12 +4,14 @@
 //
 
 #include <model/modelrailway.h>
+#include <ui/controllerwidget.h>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "regionform.h"
 
 using namespace mrw::model;
+using namespace mrw::ui;
 
 MainWindow::MainWindow(ModelRepository & repository, QWidget * parent)
 	: QMainWindow(parent)
@@ -17,6 +19,12 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent)
 {
 	ui->setupUi(this);
 	initRegion();
+
+	QList<ControllerWidget *> widgets = findChildren<ControllerWidget *>();
+
+	for (ControllerWidget * w : widgets)
+	{
+	}
 }
 
 MainWindow::~MainWindow()

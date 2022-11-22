@@ -5,7 +5,7 @@
 
 #include <QPainter>
 
-#include "signalwidget.h"
+#include <ui/signalwidget.h>
 
 using namespace mrw::ui;
 using namespace mrw::ctrl;
@@ -13,7 +13,7 @@ using namespace mrw::ctrl;
 SignalWidget::SignalWidget(
 	QWidget      *     parent,
 	SignalController * ctrl) :
-	BaseWidget(parent),
+	ControllerWidget(parent),
 	controller(ctrl)
 {
 }

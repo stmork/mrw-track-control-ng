@@ -12,7 +12,7 @@ using namespace mrw::model;
 DoubleCrossSwitchWidget::DoubleCrossSwitchWidget(
 	QWidget           *           parent,
 	DoubleCrossSwitchController * ctrl) :
-	BaseWidget(parent),
+	ControllerWidget(parent),
 	controller(ctrl)
 {
 }

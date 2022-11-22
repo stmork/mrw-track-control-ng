@@ -21,6 +21,7 @@ SOURCES += \
 	../ctrl/sectioncontroller.cpp \
 	../ctrl/sectioncontrollermock.cpp \
 	../ui/basewidget.cpp \
+	../ui/controllerwidget.cpp \
 	../ui/doublecrossswitchwidget.cpp \
 	../ui/regularswitchwidget.cpp \
 	../ui/sectionwidget.cpp \
@@ -42,6 +43,7 @@ HEADERS += \
 	../ctrl/sectioncontroller.h \
 	../ctrl/sectioncontrollermock.h \
 	../ui/basewidget.h \
+	../ui/controllerwidget.h \
 	../ui/doublecrossswitchwidget.h \
 	../ui/regularswitchwidget.h \
 	../ui/sectionwidget.h \

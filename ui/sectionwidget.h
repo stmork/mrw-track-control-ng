@@ -8,12 +8,12 @@
 #ifndef MRW_UI_SECTIONWIDGET_H
 #define MRW_UI_SECTIONWIDGET_H
 
-#include <ui/basewidget.h>
+#include <ui/controllerwidget.h>
 #include <ctrl/sectioncontroller.h>
 
 namespace mrw::ui
 {
-	class SectionWidget : public BaseWidget
+	class SectionWidget : public ControllerWidget
 	{
 		Q_OBJECT
 

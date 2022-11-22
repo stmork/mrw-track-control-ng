@@ -8,13 +8,13 @@
 #ifndef MRW_UI_DOUBLECROSSSWITCHWIDGET_H
 #define MRW_UI_DOUBLECROSSSWITCHWIDGET_H
 
-#include <ui/basewidget.h>
+#include <ui/controllerwidget.h>
 #include <model/doublecrossswitch.h>
 #include <ctrl/doublecrossswitchcontroller.h>
 
 namespace mrw::ui
 {
-	class DoubleCrossSwitchWidget : public BaseWidget
+	class DoubleCrossSwitchWidget : public ControllerWidget
 	{
 		Q_OBJECT
 

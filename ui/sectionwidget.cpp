@@ -11,7 +11,7 @@ using namespace mrw::ctrl;
 SectionWidget::SectionWidget(
 	QWidget         *         parent,
 	ctrl::SectionController * ctrl) :
-	BaseWidget(parent),
+	ControllerWidget(parent),
 	controller(ctrl)
 {
 }

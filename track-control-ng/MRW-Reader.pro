@@ -22,6 +22,7 @@ SOURCES += \
 	../ctrl/sectioncontroller.cpp \
 	../ctrl/sectioncontrollerproxy.cpp \
 	../ui/basewidget.cpp \
+	../ui/controllerwidget.cpp \
 	../ui/barwidget.cpp \
 	../ui/circlelivewidget.cpp \
 	../ui/doublecrossswitchwidget.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
 	../ctrl/sectioncontroller.h \
 	../ctrl/sectioncontrollerproxy.h \
 	../ui/basewidget.h \
+	../ui/controllerwidget.h \
 	../ui/barwidget.h \
 	../ui/circlelivewidget.h \
 	../ui/clockwidget.h \

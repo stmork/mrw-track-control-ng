@@ -16,7 +16,7 @@ using namespace mrw::model;
 RegularSwitchWidget::RegularSwitchWidget(
 	QWidget         *         parent,
 	RegularSwitchController * ctrl) :
-	BaseWidget(parent),
+	ControllerWidget(parent),
 	controller(ctrl)
 {
 }
