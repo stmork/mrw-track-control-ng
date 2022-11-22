@@ -162,3 +162,25 @@ void TestNumbering::testRailCount()
 	QCOMPARE(switches.size(), 3);
 	QCOMPARE(doubles.size(), 1);
 }
+
+void TestNumbering::testSignalSort()
+{
+	std::vector<Signal *> segment_signals;
+
+	model->section(0, 2)->parts < Signal>(segment_signals);
+	std::sort(segment_signals.begin(), segment_signals.end(), Signal::compare);
+
+	QCOMPARE(segment_signals.size(), 5);
+
+	QCOMPARE(segment_signals[0]->direction(), true);
+	QCOMPARE(segment_signals[1]->direction(), true);
+	QCOMPARE(segment_signals[2]->direction(), true);
+	QCOMPARE(segment_signals[3]->direction(), false);
+	QCOMPARE(segment_signals[4]->direction(), false);
+
+	QCOMPARE(segment_signals[0]->type(), Signal::MAIN_SIGNAL);
+	QCOMPARE(segment_signals[1]->type(), Signal::DISTANT_SIGNAL);
+	QCOMPARE(segment_signals[2]->type(), Signal::SHUNT_SIGNAL);
+	QCOMPARE(segment_signals[3]->type(), Signal::MAIN_SHUNT_SIGNAL);
+	QCOMPARE(segment_signals[4]->type(), Signal::DISTANT_SIGNAL);
+}

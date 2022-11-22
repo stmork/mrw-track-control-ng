@@ -32,6 +32,7 @@ namespace mrw::test
 		void testPairSignalSection3();
 		void testSignalCount();
 		void testRailCount();
+		void testSignalSort();
 	};
 }
 

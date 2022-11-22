@@ -98,6 +98,8 @@ namespace mrw::model
 			return section()->region()->name() + partName();
 		}
 
+		static bool compare(Signal * left, Signal * right);
+
 	protected:
 		/**
 		 * This method returns a brief symbol representing the direction and

@@ -79,3 +79,12 @@ void Signal::findPair(const std::vector<Signal *> & section_signals)
 		}
 	}
 }
+
+bool Signal::compare(Signal * left, Signal * right)
+{
+	if (left->direction() == right->direction())
+	{
+		return left->type() > right->type();
+	}
+	return left->direction() > right->direction();
+}
