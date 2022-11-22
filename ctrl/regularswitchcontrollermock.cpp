@@ -37,6 +37,12 @@ void RegularSwitchControllerMock::setRightHanded(const bool right)
 	emit update();
 }
 
+void mrw::ctrl::RegularSwitchControllerMock::setInclined(const bool incl)
+{
+	inclined = incl;
+	emit update();
+}
+
 void RegularSwitchControllerMock::setDirection(const bool dir)
 {
 	direction = dir;

@@ -37,6 +37,9 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 	connect(
 		ui->rightHandedButton, &QRadioButton::clicked,
 		&mock, &RegularSwitchControllerMock::setRightHanded);
+	connect(
+		ui->inclinedBox, &QCheckBox::clicked,
+		&mock, &RegularSwitchControllerMock::setInclined);
 
 	/********************************************************/
 	/*  Switch direction                                    */

@@ -32,6 +32,7 @@ namespace mrw::model
 		QPoint   position;
 		unsigned offset    = 0;
 		unsigned extension = 0;
+		bool     inclined  = false;
 
 		static unsigned counter;
 
@@ -76,6 +77,11 @@ namespace mrw::model
 		inline unsigned extend() const
 		{
 			return extension;
+		}
+
+		inline bool isInclined() const
+		{
+			return inclined;
 		}
 
 		/**

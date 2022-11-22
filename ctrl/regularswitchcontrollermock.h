@@ -19,6 +19,7 @@ namespace mrw::ctrl
 
 	private:
 		bool                  left_handed  = true;
+		bool                  inclined     = false;
 		bool                  direction    = false;
 
 		mrw::model::Device::LockState     lock_state =
@@ -47,6 +48,11 @@ namespace mrw::ctrl
 			return lock_state;
 		}
 
+		virtual bool isInclined() const override
+		{
+			return inclined;
+		}
+
 		void setSectionState(const mrw::model::SectionState state);
 		void setDirection(const bool dir = true);
 		void setLock(const mrw::model::Device::LockState lock);
@@ -56,6 +62,7 @@ namespace mrw::ctrl
 		void setRight(const bool right = true);
 		void setLeftHanded(const bool left = true);
 		void setRightHanded(const bool right = true);
+		void setInclined(const bool inclined = true);
 	};
 }
 

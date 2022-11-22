@@ -18,7 +18,6 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 {
 }
 
-
 bool RegularSwitchControllerProxy::isLeft() const
 {
 	return part->state() == RegularSwitch::State::AB;
@@ -36,7 +35,12 @@ bool RegularSwitchControllerProxy::isRightHanded() const
 
 bool RegularSwitchControllerProxy::isDirection() const
 {
-	return part->aIsDir() != part->section()->region()->direction();
+	return part->aIsDir() == part->section()->region()->direction();
+}
+
+bool RegularSwitchControllerProxy::isInclined() const
+{
+	return part->isInclined();
 }
 
 QString RegularSwitchControllerProxy::name() const

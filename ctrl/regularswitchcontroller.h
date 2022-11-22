@@ -23,6 +23,7 @@ namespace mrw::ctrl
 		virtual bool isRight() const = 0;
 		virtual bool isRightHanded() const = 0;
 		virtual bool isDirection() const = 0;
+		virtual bool isInclined() const = 0;
 	};
 }
 

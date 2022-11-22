@@ -44,16 +44,16 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	painter.setFont(font);
 	painter.setPen(YELLOW);
 	painter.drawText(QRectF(
-			controller->isDirection() ? -SCALE : -20,
-			controller->isDirection() == controller->isRightHanded() ? -80 : 30, 120, FONT_HEIGHT),
+			controller->isDirection() != controller->isInclined() ? -SCALE : -20,
+			controller->isDirection() != controller->isRightHanded() ? -80 : 30, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
 
-	if (controller->isRightHanded())
+	if (controller->isRightHanded() != controller->isInclined())
 	{
 		// Draw always left handed but invert vertically if right handed.
 		painter.scale( 1.0f, -1.0f);
 	}
-	if (!controller->isDirection())
+	if (controller->isDirection())
 	{
 		// Draw from left to right but invert horizontally if counter direction.
 		painter.scale(-1.0f, -1.0f);
@@ -62,18 +62,12 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	QColor section_color = sectionColor(controller->state());
 	QColor outside_color = sectionColor(SectionState::FREE);
 
-	// Draw curved part of switch
-	drawSheared(
-		painter,
-		isTurnOut() ? section_color : outside_color,
-		0, -100, isTurnOut() && pending ? 70 : 15);
-
 	// Draw point lock
 	drawLock(
 		painter,
 		controller->lock() == Device::LockState::LOCKED ?
 		section_color : WHITE,
-		-45, 0);
+		controller->isInclined() ? -5 : -45, 0);
 
 	QPen pen;
 	pen.setCapStyle(Qt::FlatCap);
@@ -82,12 +76,25 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	// Draw point part of switch
 	pen.setColor(section_color);
 	painter.setPen(pen);
-	painter.drawLine(-100.0f, 0.0f, -70.0f, 0.0f);
+	if (controller->isInclined())
+	{
+		drawSheared(painter, section_color, -50, 100, -85);
+	}
+	else
+	{
+		painter.drawLine(-100.0f, 0.0f, -70.0f, 0.0f);
+	}
+
+	// Draw curved part of switch
+	drawSheared(
+		painter,
+		isTurnOut() ? section_color : outside_color,
+		controller->isInclined() ? 50 : 0, -100, isTurnOut() && pending ? 70 : 15);
 
 	// Draw straight part of switch
 	pen.setColor(!isTurnOut() ? section_color : outside_color);
 	painter.setPen(pen);
-	painter.drawLine(!isTurnOut() && pending ? -20.0f : 80.0f, 0.0f, 100.0f, 0.0f);
+	painter.drawLine(!isTurnOut() && pending ? (controller->isInclined() ? 20 :-20.0f) : 80.0f, 0.0f, 100.0f, 0.0f);
 }
 
 bool RegularSwitchWidget::isLockTransit() const
@@ -97,5 +104,5 @@ bool RegularSwitchWidget::isLockTransit() const
 
 bool RegularSwitchWidget::isTurnOut() const
 {
-	return controller->isLeft() != controller->isRightHanded();
+	return (controller->isLeft() != controller->isRightHanded()) != controller->isInclined();
 }

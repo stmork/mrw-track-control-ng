@@ -29,6 +29,7 @@ namespace mrw::ctrl
 		virtual bool isRight() const override;
 		virtual bool isRightHanded() const override;
 		virtual bool isDirection() const override;
+		virtual bool isInclined() const override;
 		virtual QString name() const override;
 
 		virtual mrw::model::SectionState state() const override
