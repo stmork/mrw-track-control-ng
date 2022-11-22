@@ -32,7 +32,9 @@ void SectionWidget::paint(QPainter & painter)
 	QPen         pen;
 	const float  border = SCALE * (1.0 + controller->extensions() / Position::FRACTION);
 
-	rescale(painter, (Position::FRACTION + controller->extensions()) * SCALE / Position::HALF);
+	rescale(painter,
+		(Position::FRACTION + controller->extensions()) * SCALE / Position::HALF,
+		SCALE * 2.0);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
 	pen.setColor(YELLOW);
@@ -40,7 +42,9 @@ void SectionWidget::paint(QPainter & painter)
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
 	painter.setPen(pen);
-	painter.drawText(QRectF(-60, -80, 120, FONT_HEIGHT),
+	painter.drawText(QRectF(
+			controller->isDirection() ? border - 120 : -border,
+			controller->isDirection() ? 30 : -80, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
 
 	// Draw point part of switch
