@@ -27,7 +27,8 @@ SignalControllerProxy::SignalControllerProxy(
 	});
 
 	Q_ASSERT(section_signals.size() > 0);
-	signal_name = section_signals[0]->partName();
+
+	base_signal = section_signals[0];
 
 	for (Signal * signal : section_signals)
 	{
@@ -75,12 +76,25 @@ bool SignalControllerProxy::hasMain() const
 
 QString SignalControllerProxy::name() const
 {
-	return signal_name;
+	return base_signal->partName();
 }
 
 SignalController::TourState SignalControllerProxy::main() const
 {
 	return TourState::STOP;
+}
+
+Device::LockState mrw::ctrl::SignalControllerProxy::lock() const
+{
+	Device * device = dynamic_cast<Device *>(base_signal);
+
+	Q_ASSERT(device != nullptr);
+	return device->lock();
+}
+
+unsigned mrw::ctrl::SignalControllerProxy::extensions() const
+{
+	return base_signal->extend();
 }
 
 SignalController::TourState SignalControllerProxy::distant() const

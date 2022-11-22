@@ -37,7 +37,8 @@ void SignalWidget::paint(QPainter & painter)
 {
 	QPainterPath path;
 	QFont        font = painter.font();
-	const float  border = SCALE * (1.0 + controller->extensions() * 0.5);
+	const float  shift  = SCALE * controller->extensions() * 0.5;
+	const float  border = SCALE + shift;
 
 	Q_ASSERT(controller != nullptr);
 

@@ -20,9 +20,9 @@ namespace mrw::ctrl
 
 	private:
 		const bool            direction = true;
-		QString               signal_name;
 
 		mrw::model::Section * section        = nullptr;
+		mrw::model::Signal  * base_signal    = nullptr;
 		mrw::model::Signal  * main_signal    = nullptr;
 		mrw::model::Signal  * distant_signal = nullptr;
 		mrw::model::Signal  * shunt_signal   = nullptr;
@@ -48,17 +48,9 @@ namespace mrw::ctrl
 			return section->state();
 		}
 
-		virtual mrw::model::Device::LockState lock() const override
-		{
-			// TODO: Compute from three possible signals.
-			return mrw::model::Device::LockState::UNLOCKED;
-		}
+		virtual mrw::model::Device::LockState lock() const override;
 
-		virtual unsigned extensions() const override
-		{
-			// TODO: Select correct signal.
-			return 0;
-		}
+		virtual unsigned extensions() const override;
 	};
 }
 

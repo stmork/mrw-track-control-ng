@@ -26,6 +26,7 @@ namespace mrw::ctrl
 	public:
 		explicit SectionControllerProxy(
 			mrw::model::Section * parent_section,
+			mrw::model::Rail   *  referenced_rail,
 			QObject       *       parent);
 
 		virtual QString name() const override;

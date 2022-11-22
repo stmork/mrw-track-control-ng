@@ -14,16 +14,12 @@ using namespace mrw::model;
 
 SectionControllerProxy::SectionControllerProxy(
 	Section * parent_section,
+	Rail   *  referenced_rail,
 	QObject * parent) :
 	SectionController(parent),
-	section(parent_section)
+	section(parent_section),
+	rail(referenced_rail)
 {
-	std::vector<Rail *> rails;
-
-	section->parts<Rail>(rails);
-
-	Q_ASSERT(rails.size() > 0);
-	rail = rails[0];
 }
 
 QString SectionControllerProxy::name() const

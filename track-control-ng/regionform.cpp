@@ -122,13 +122,13 @@ void RegionForm::setupSection(Section * section)
 
 	section->parts<Rail>(rails);
 
-	if (rails.size() > 0)
+	for (Rail * rail : rails)
 	{
-		SectionControllerProxy * ctrl   = new SectionControllerProxy(section, this);
+		SectionControllerProxy * ctrl   = new SectionControllerProxy(section, rail, this);
 		SectionWidget      *     widget = new SectionWidget(ui->controlWidget, ctrl);
 
 		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
-		widget->move(rails[0]->point() * BaseWidget::SIZE / 2);
+		widget->move(rail->point() * BaseWidget::SIZE / 2);
 
 		connect(
 			ctrl, &BaseController::update,

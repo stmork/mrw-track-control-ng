@@ -82,7 +82,10 @@ void BaseWidget::rescale(
 	QPainter & painter,
 	const float xSize, const float ySize, const bool center)
 {
-	rescale(painter, xSize, ySize, center ? width() * 0.5f : 0.0f, center ? height() * 0.5f : 0.0f);
+	rescale(painter,
+		xSize, ySize,
+		center ? width()  * 0.5f : 0.0f,
+		center ? height() * 0.5f : 0.0f);
 }
 
 void BaseWidget::drawLock(QPainter & painter, QColor color, const float x, const float y)
