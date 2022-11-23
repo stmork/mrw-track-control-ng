@@ -29,7 +29,7 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	QFont  font          = painter.font();
 	QColor section_color = sectionColor(controller->state());
 	QColor outside_color = sectionColor(SectionState::FREE);
-	const bool   pending = drawLock(controller->lock());
+	const bool   pending = lockVisible(controller->lock());
 	QPen   pen;
 
 	rescale(painter);

@@ -27,7 +27,7 @@ namespace mrw::ui
 	protected:
 		virtual void mousePressEvent(QMouseEvent *event) override;
 
-		bool drawLock(const mrw::model::Device::LockState state) const;
+		bool lockVisible(const mrw::model::Device::LockState state) const;
 		void drawLock(
 			QPainter  & painter,
 			QColor      color,

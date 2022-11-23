@@ -31,7 +31,7 @@ void RegularSwitchWidget::setController(RegularSwitchController * ctrl)
 void RegularSwitchWidget::paint(QPainter & painter)
 {
 	QFont        font    = painter.font();
-	const bool   pending = drawLock(controller->lock());
+	const bool   pending = lockVisible(controller->lock());
 
 	Q_ASSERT(controller != nullptr);
 

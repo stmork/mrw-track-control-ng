@@ -27,14 +27,14 @@ ControllerWidget::ControllerWidget(QWidget * parent) :
 	});
 }
 
-void mrw::ui::ControllerWidget::mousePressEvent(QMouseEvent * event)
+void ControllerWidget::mousePressEvent(QMouseEvent * event)
 {
 	Q_UNUSED(event);
 
 	emit clicked(&list_item);
 }
 
-bool ControllerWidget::drawLock(const Device::LockState state) const
+bool ControllerWidget::lockVisible(const Device::LockState state) const
 {
 	return (state != Device::LockState::PENDING) || (counter & 1);
 }
