@@ -22,23 +22,25 @@ RegularSwitchWidget::RegularSwitchWidget(
 
 void RegularSwitchWidget::computeConnectors()
 {
+	RegularSwitchController * ctrl = controller<RegularSwitchController>();
+
 	connector_list.clear();
-	if (controller<RegularSwitchController>()->isInclined())
+	if (ctrl->isInclined())
 	{
-		if (base_controller->isDirection())
+		if (ctrl->isRightHanded())
 		{
-			connector_list.append(QPoint(1, 0));
-			connector_list.append(QPoint(3, 4));
+			connector_list.append(QPoint(3, 0));
+			connector_list.append(QPoint(1, 4));
 		}
 		else
 		{
-			connector_list.append(QPoint(3, 4));
 			connector_list.append(QPoint(1, 0));
+			connector_list.append(QPoint(3, 4));
 		}
 	}
 	else
 	{
-		if (base_controller->isDirection())
+		if (ctrl->isDirection() == ctrl->isRightHanded())
 		{
 			connector_list.append(QPoint(2, 0));
 		}

@@ -21,8 +21,8 @@ void DoubleCrossSwitchWidget::computeConnectors()
 	connector_list.clear();
 	if (base_controller->isDirection())
 	{
-		connector_list.append(QPoint(1, 0));
-		connector_list.append(QPoint(3, 4));
+		connector_list.append(QPoint(3, 0));
+		connector_list.append(QPoint(1, 4));
 	}
 	else
 	{
