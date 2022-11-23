@@ -174,14 +174,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="transitButton">
+         <widget class="QRadioButton" name="pendingButton">
           <property name="text">
            <string>Umlauf</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="closedButton">
+         <widget class="QRadioButton" name="lockedButton">
           <property name="text">
            <string>verschlossen</string>
           </property>
@@ -260,8 +260,8 @@
   <tabstop>passedButton</tabstop>
   <tabstop>errorButton</tabstop>
   <tabstop>openButton</tabstop>
-  <tabstop>transitButton</tabstop>
-  <tabstop>closedButton</tabstop>
+  <tabstop>pendingButton</tabstop>
+  <tabstop>lockedButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

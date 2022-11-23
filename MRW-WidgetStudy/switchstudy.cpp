@@ -111,12 +111,12 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 	{
 		mock.setLock(Device::LockState::UNLOCKED);
 	});
-	connect(ui->transitButton, &QRadioButton::clicked,
+	connect(ui->pendingButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setLock(Device::LockState::PENDING);
 	});
-	connect(ui->closedButton, &QRadioButton::clicked,
+	connect(ui->lockedButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
 		mock.setLock(Device::LockState::LOCKED);
