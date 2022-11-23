@@ -39,7 +39,15 @@ void ControllerWidget::setController(BaseController * ctrl)
 	{
 		list_item.setText(base_controller->name());
 		list_item.setData(Qt::UserRole, QVariant::fromValue(base_controller));
+		connect(base_controller, &BaseController::reposition, this, &ControllerWidget::reposition);
 	}
+}
+
+void mrw::ui::ControllerWidget::reposition()
+{
+	setFixedHeight(BaseWidget::SIZE);
+	extend();
+	move(base_controller->position()->point() * BaseWidget::SIZE / Position::FRACTION);
 }
 
 void ControllerWidget::extend()

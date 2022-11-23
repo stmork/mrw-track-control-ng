@@ -36,6 +36,7 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent)
 	connect(ui->actionNeigung,     &QAction::triggered, this, &MainWindow::incline);
 	connect(ui->actionErweitern,   &QAction::triggered, this, &MainWindow::expand);
 	connect(ui->actionTeilschritt, &QAction::triggered, this, &MainWindow::extend);
+
 	connect(ui->actionRechts, &QAction::triggered, [this] ()
 	{
 		move(1, 0);

@@ -29,6 +29,7 @@ namespace mrw::ui
 		void clicked(QListWidgetItem * item);
 
 	public slots:
+		void reposition();
 		void extend();
 
 	protected:

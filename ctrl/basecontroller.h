@@ -64,7 +64,7 @@ namespace mrw::ctrl
 
 		void refresh()
 		{
-			emit update();
+			emit reposition();
 		}
 
 	signals:
@@ -74,6 +74,7 @@ namespace mrw::ctrl
 		 * @see mrw::ui::BaseWidget
 		 */
 		void update();
+		void reposition();
 	};
 }
 

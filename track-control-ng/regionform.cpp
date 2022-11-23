@@ -50,10 +50,7 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 		RegularSwitchControllerProxy * ctrl   = new RegularSwitchControllerProxy(part, this);
 		RegularSwitchWidget      *     widget = new RegularSwitchWidget(ui->controlWidget, ctrl);
 
-		widget->setFixedHeight(BaseWidget::SIZE);
-		widget->extend();
-		widget->move(part->point() * BaseWidget::SIZE / Position::FRACTION);
-
+		ctrl->refresh();
 		connect(
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
@@ -65,10 +62,7 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 		DoubleCrossSwitchControllerProxy * ctrl   = new DoubleCrossSwitchControllerProxy(part, this);
 		DoubleCrossSwitchWidget      *     widget = new DoubleCrossSwitchWidget(ui->controlWidget, ctrl);
 
-		widget->setFixedHeight(BaseWidget::SIZE);
-		widget->extend();
-		widget->move(part->point() * BaseWidget::SIZE / Position::FRACTION);
-
+		ctrl->refresh();
 		connect(
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
@@ -129,10 +123,7 @@ void RegionForm::setupSection(Section * section)
 		SectionControllerProxy * ctrl   = new SectionControllerProxy(section, rail, this);
 		SectionWidget      *     widget = new SectionWidget(ui->controlWidget, ctrl);
 
-		widget->setFixedHeight(BaseWidget::SIZE);
-		widget->extend();
-		widget->move(rail->point() * BaseWidget::SIZE / Position::FRACTION);
-
+		ctrl->refresh();
 		connect(
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
@@ -153,10 +144,7 @@ void RegionForm::setupSignals(Section * section, const bool direction)
 		SignalControllerProxy * ctrl   = new SignalControllerProxy(section, direction, this);
 		SignalWidget      *     widget = new SignalWidget(ui->controlWidget, ctrl);
 
-		widget->setFixedHeight(BaseWidget::SIZE);
-		widget->extend();
-		widget->move(section_signals[0]->point() * BaseWidget::SIZE / Position::FRACTION);
-
+		ctrl->refresh();
 		connect(
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
