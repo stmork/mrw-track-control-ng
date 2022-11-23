@@ -39,9 +39,9 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	rescale(painter);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
+	prepareFailed(painter, controller->lock() == Device::LockState::FAIL);
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
-	painter.setPen(YELLOW);
 	painter.drawText(QRectF(
 			controller->isDirection() != controller->isInclined() ? -SCALE : -20,
 			controller->isDirection() != controller->isRightHanded() ? -80 : 30, 120, FONT_HEIGHT),

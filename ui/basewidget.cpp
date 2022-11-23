@@ -115,3 +115,19 @@ void BaseWidget::drawSheared(
 	path.closeSubpath();
 	painter.fillPath(path, QBrush(color));
 }
+
+void mrw::ui::BaseWidget::prepareFailed(
+		QPainter  & painter,
+		const bool  fail)
+{
+	if (fail)
+	{
+		painter.setBackgroundMode(Qt::OpaqueMode);
+		painter.setBackground(RED);
+		painter.setPen(WHITE);
+	}
+	else
+	{
+		painter.setPen(YELLOW);
+	}
+}

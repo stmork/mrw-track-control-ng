@@ -167,6 +167,13 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
+         <widget class="QRadioButton" name="errorButton">
+          <property name="text">
+           <string>Fehler</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QRadioButton" name="openButton">
           <property name="text">
            <string>offen</string>

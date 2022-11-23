@@ -75,6 +75,10 @@ namespace mrw::ui
 			const float height,
 			const float slope = RAIL_SLOPE);
 
+		void prepareFailed(
+				QPainter  & painter,
+				const bool  fail);
+
 	private:
 		static const std::unordered_map<mrw::model::SectionState, QColor> color_map;
 

@@ -19,6 +19,12 @@ void SectionControllerMock::setSectionState(const SectionState state)
 	emit update();
 }
 
+void mrw::ctrl::SectionControllerMock::setLock(const Device::LockState lock)
+{
+	lock_state = lock;
+	emit update();
+}
+
 void SectionControllerMock::setDirection(const bool dir)
 {
 	direction = dir;

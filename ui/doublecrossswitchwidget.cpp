@@ -35,12 +35,12 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	rescale(painter);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
+	prepareFailed(painter, controller->lock() == Device::LockState::FAIL);
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
-	painter.setPen(YELLOW);
 	painter.drawText(QRectF(
 			false ? -SCALE : -20,
-			controller->isDirection() ? 30 : -80, 120, FONT_HEIGHT),
+			controller->isDirection() ? 35 : -85, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
 
 	if (controller->isDirection())

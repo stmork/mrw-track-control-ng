@@ -37,17 +37,16 @@ void SectionWidget::paint(QPainter & painter)
 		SCALE * 2.0);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
-	pen.setColor(YELLOW);
-	pen.setCapStyle(Qt::FlatCap);
+	prepareFailed(painter, controller->lock() == Device::LockState::FAIL);
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
-	painter.setPen(pen);
 	painter.drawText(QRectF(
 			controller->isDirection() ? border - 120 : -border,
 			controller->isDirection() ? 30 : -80, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
 
 	// Draw point part of switch
+	pen.setCapStyle(Qt::FlatCap);
 	pen.setColor(sectionColor(controller->state()));
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);

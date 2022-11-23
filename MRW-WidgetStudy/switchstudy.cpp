@@ -68,26 +68,6 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 	});
 
 	/********************************************************/
-	/*   Lock state                                         */
-	/********************************************************/
-
-	connect(ui->openButton, &QRadioButton::clicked,
-		&mock, [&]()
-	{
-		mock.setLock(Device::LockState::UNLOCKED);
-	});
-	connect(ui->transitButton, &QRadioButton::clicked,
-		&mock, [&]()
-	{
-		mock.setLock(Device::LockState::PENDING);
-	});
-	connect(ui->closedButton, &QRadioButton::clicked,
-		&mock, [&]()
-	{
-		mock.setLock(Device::LockState::LOCKED);
-	});
-
-	/********************************************************/
 	/*   Section state                                      */
 	/********************************************************/
 
@@ -118,6 +98,31 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 	});
 
 	/********************************************************/
+	/*   Lock state                                         */
+	/********************************************************/
+
+	connect(ui->errorButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(Device::LockState::FAIL);
+	});
+	connect(ui->openButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(Device::LockState::UNLOCKED);
+	});
+	connect(ui->transitButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(Device::LockState::PENDING);
+	});
+	connect(ui->closedButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(Device::LockState::LOCKED);
+	});
+
+	/********************************************************/
 	/*   Repaint connection                                 */
 	/********************************************************/
 
@@ -129,6 +134,7 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
 
 	ui->leftButton->setChecked(true);
+	ui->openButton->setChecked(true);
 	ui->leftHandedButton->setChecked(true);
 	ui->backwardButton->setChecked(true);
 	ui->freeButton->setChecked(true);

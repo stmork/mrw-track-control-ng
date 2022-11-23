@@ -40,23 +40,32 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	});
 
 	/********************************************************/
-	/*   Lock state                                         */
+	/*  Switch direction                                    */
 	/********************************************************/
 
-	connect(ui->openButton, &QRadioButton::clicked,
-		&mock, [&]()
+	connect(
+		ui->acButton, &QRadioButton::clicked,
+		&mock, [&] ()
 	{
-		mock.setLock(Device::LockState::UNLOCKED);
+		mock.setSwitchState(DoubleCrossSwitch::State::AC);
 	});
-	connect(ui->transitButton, &QRadioButton::clicked,
-		&mock, [&]()
+	connect(
+		ui->adButton, &QRadioButton::clicked,
+		&mock, [&] ()
 	{
-		mock.setLock(Device::LockState::PENDING);
+		mock.setSwitchState(DoubleCrossSwitch::State::AD);
 	});
-	connect(ui->closedButton, &QRadioButton::clicked,
-		&mock, [&]()
+	connect(
+		ui->bcButton, &QRadioButton::clicked,
+		&mock, [&] ()
 	{
-		mock.setLock(Device::LockState::LOCKED);
+		mock.setSwitchState(DoubleCrossSwitch::State::BC);
+	});
+	connect(
+		ui->bdButton, &QRadioButton::clicked,
+		&mock, [&] ()
+	{
+		mock.setSwitchState(DoubleCrossSwitch::State::BD);
 	});
 
 	/********************************************************/
@@ -95,32 +104,28 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	});
 
 	/********************************************************/
-	/*  Switch direction                                    */
+	/*   Lock state                                         */
 	/********************************************************/
 
-	connect(
-		ui->acButton, &QRadioButton::clicked,
-		&mock, [&] ()
+	connect(ui->errorButton, &QRadioButton::clicked,
+		&mock, [&]()
 	{
-		mock.setSwitchState(DoubleCrossSwitch::State::AC);
+		mock.setLock(Device::LockState::FAIL);
 	});
-	connect(
-		ui->adButton, &QRadioButton::clicked,
-		&mock, [&] ()
+	connect(ui->openButton, &QRadioButton::clicked,
+		&mock, [&]()
 	{
-		mock.setSwitchState(DoubleCrossSwitch::State::AD);
+		mock.setLock(Device::LockState::UNLOCKED);
 	});
-	connect(
-		ui->bcButton, &QRadioButton::clicked,
-		&mock, [&] ()
+	connect(ui->transitButton, &QRadioButton::clicked,
+		&mock, [&]()
 	{
-		mock.setSwitchState(DoubleCrossSwitch::State::BC);
+		mock.setLock(Device::LockState::PENDING);
 	});
-	connect(
-		ui->bdButton, &QRadioButton::clicked,
-		&mock, [&] ()
+	connect(ui->closedButton, &QRadioButton::clicked,
+		&mock, [&]()
 	{
-		mock.setSwitchState(DoubleCrossSwitch::State::BD);
+		mock.setLock(Device::LockState::LOCKED);
 	});
 
 	/********************************************************/
@@ -137,10 +142,11 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	ui->symbolWidget->setAutoFillBackground(true);
 	ui->symbolWidget->setPalette(pal);
 
-	ui->acButton->setChecked(true);
-	ui->leftHandedButton->setChecked(true);
 	ui->backwardButton->setChecked(true);
+	ui->openButton->setChecked(true);
+	ui->leftHandedButton->setChecked(true);
 	ui->freeButton->setChecked(true);
+	ui->acButton->setChecked(true);
 }
 
 DoubleCrossSwitchStudy::~DoubleCrossSwitchStudy()

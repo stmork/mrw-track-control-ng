@@ -160,6 +160,13 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
+         <widget class="QRadioButton" name="errorButton">
+          <property name="text">
+           <string>Fehler</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QRadioButton" name="openButton">
           <property name="text">
            <string>offen</string>
@@ -238,6 +245,24 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>inclinedBox</tabstop>
+  <tabstop>leftHandedButton</tabstop>
+  <tabstop>rightHandedButton</tabstop>
+  <tabstop>leftButton</tabstop>
+  <tabstop>rightButton</tabstop>
+  <tabstop>backwardButton</tabstop>
+  <tabstop>forwardButton</tabstop>
+  <tabstop>freeButton</tabstop>
+  <tabstop>shuntButton</tabstop>
+  <tabstop>tourButton</tabstop>
+  <tabstop>occupiedButton</tabstop>
+  <tabstop>passedButton</tabstop>
+  <tabstop>errorButton</tabstop>
+  <tabstop>openButton</tabstop>
+  <tabstop>transitButton</tabstop>
+  <tabstop>closedButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

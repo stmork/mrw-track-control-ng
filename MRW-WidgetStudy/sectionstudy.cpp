@@ -96,6 +96,31 @@ SectionStudy::SectionStudy(QWidget * parent) :
 	});
 
 	/********************************************************/
+	/*   Lock state                                         */
+	/********************************************************/
+
+	connect(ui->errorButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(Device::LockState::FAIL);
+	});
+	connect(ui->openButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(Device::LockState::UNLOCKED);
+	});
+	connect(ui->transitButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(Device::LockState::PENDING);
+	});
+	connect(ui->closedButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(Device::LockState::LOCKED);
+	});
+
+	/********************************************************/
 	/*   Repaint connection                                 */
 	/********************************************************/
 
