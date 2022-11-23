@@ -8,6 +8,8 @@
 #ifndef MRW_UI_CONTROLLERWIDGET_H
 #define MRW_UI_CONTROLLERWIDGET_H
 
+#include <QListWidgetItem>
+
 #include <ui/basewidget.h>
 
 namespace mrw::ui
@@ -19,7 +21,12 @@ namespace mrw::ui
 	public:
 		explicit ControllerWidget(QWidget * parent = nullptr);
 
+	signals:
+		void clicked(QListWidgetItem * item);
+
 	protected:
+		virtual void mousePressEvent(QMouseEvent *event) override;
+
 		bool drawLock(const mrw::model::Device::LockState state) const;
 		void drawLock(
 			QPainter  & painter,
@@ -37,7 +44,8 @@ namespace mrw::ui
 			const bool  fail);
 
 	private:
-		unsigned counter = 0;
+		unsigned        counter = 0;
+		QListWidgetItem list_item;
 	};
 }
 

@@ -14,6 +14,9 @@ using namespace mrw::ui;
 ControllerWidget::ControllerWidget(QWidget * parent) :
 	BaseWidget(parent)
 {
+	list_item.setText("AaAa");
+//	list_item.setData(Qt::UserRole, this);
+
 	connect(&ClockService::instance(), &ClockService::Hz8, [this]()
 	{
 		counter++;
@@ -22,6 +25,13 @@ ControllerWidget::ControllerWidget(QWidget * parent) :
 			repaint();
 		}
 	});
+}
+
+void mrw::ui::ControllerWidget::mousePressEvent(QMouseEvent * event)
+{
+	Q_UNUSED(event);
+
+	emit clicked(&list_item);
 }
 
 bool ControllerWidget::drawLock(const Device::LockState state) const

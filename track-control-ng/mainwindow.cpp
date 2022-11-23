@@ -20,18 +20,20 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent)
 	ui->setupUi(this);
 	initRegion();
 
-#if 0
-	// NOTE: Disabled for the first.
+	connect(ui->clearSection, &QPushButton::clicked, this, &MainWindow::clearSelectedItems);
+	connect(ui->clearAllSections, &QPushButton::clicked, this, &MainWindow::clearAllItems);
+
 	QList<ControllerWidget *> widgets = findChildren<ControllerWidget *>();
 
 	for (ControllerWidget * w : widgets)
 	{
+		connect(w, &ControllerWidget::clicked, this, &MainWindow::itemClicked);
 	}
-#endif
 }
 
 MainWindow::~MainWindow()
 {
+	clearAllItems();
 	delete ui;
 }
 
@@ -48,3 +50,34 @@ void MainWindow::initRegion()
 	}
 }
 
+void MainWindow::itemClicked(QListWidgetItem * item)
+{
+	if (item->listWidget() == nullptr)
+	{
+		ui->sectionListWidget->addItem(item);
+	}
+	else
+	{
+		int row = ui->sectionListWidget->row(item);
+
+		ui->sectionListWidget->takeItem(row);
+	}
+}
+
+void MainWindow::clearSelectedItems()
+{
+	for (QListWidgetItem * item : ui->sectionListWidget->selectedItems())
+	{
+		int row = ui->sectionListWidget->row(item);
+
+		ui->sectionListWidget->takeItem(row);
+	}
+}
+
+void MainWindow::clearAllItems()
+{
+	while (ui->sectionListWidget->count() > 0)
+	{
+		ui->sectionListWidget->takeItem(0);
+	}
+}

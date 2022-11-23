@@ -9,6 +9,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QListWidgetItem>
 
 #include "modelrepository.h"
 
@@ -26,6 +27,13 @@ class MainWindow : public QMainWindow
 public:
 	explicit MainWindow(ModelRepository & model_repo, QWidget * parent = nullptr);
 	~MainWindow();
+
+public slots:
+	void itemClicked(QListWidgetItem * item);
+
+private slots:
+	void clearSelectedItems();
+	void clearAllItems();
 
 private:
 	void initRegion();
