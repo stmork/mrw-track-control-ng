@@ -12,7 +12,7 @@ DoubleCrossSwitchController::DoubleCrossSwitchController(QObject * parent) :
 {
 }
 
-float mrw::ctrl::DoubleCrossSwitchController::extensions() const
+float DoubleCrossSwitchController::extensions() const
 {
 	return 0.0;
 }

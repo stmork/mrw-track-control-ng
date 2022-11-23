@@ -25,6 +25,8 @@ namespace mrw::ui
 
 		void setController(mrw::ctrl::BaseController * ctrl);
 
+		bool isConnector(const QPoint & point) const;
+
 	signals:
 		void clicked(QListWidgetItem * item);
 
@@ -32,10 +34,16 @@ namespace mrw::ui
 		void reposition();
 		void extend();
 
+		virtual void computeConnectors()
+		{
+			connector_list.clear();
+		}
+
 	protected:
 		virtual void mousePressEvent(QMouseEvent * event) override;
 
 		bool lockVisible(const mrw::model::Device::LockState state) const;
+
 		void drawLock(
 			QPainter  & painter,
 			QColor      color,
@@ -51,6 +59,8 @@ namespace mrw::ui
 			QPainter  & painter,
 			const bool  fail);
 
+		void drawConnectors(QPainter & painter);
+
 		inline float extensions() const
 		{
 			return base_controller->extensions();
@@ -62,11 +72,11 @@ namespace mrw::ui
 		}
 
 		mrw::ctrl::BaseController * base_controller = nullptr;
+		QList<QPoint>               connector_list;
 
 	private:
 		unsigned        counter = 0;
 		QListWidgetItem list_item;
-
 	};
 }
 

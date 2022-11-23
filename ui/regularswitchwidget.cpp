@@ -20,6 +20,35 @@ RegularSwitchWidget::RegularSwitchWidget(
 {
 }
 
+void RegularSwitchWidget::computeConnectors()
+{
+	connector_list.clear();
+	if (controller<RegularSwitchController>()->isInclined())
+	{
+		if (base_controller->isDirection())
+		{
+			connector_list.append(QPoint(1, 0));
+			connector_list.append(QPoint(3, 4));
+		}
+		else
+		{
+			connector_list.append(QPoint(3, 4));
+			connector_list.append(QPoint(1, 0));
+		}
+	}
+	else
+	{
+		if (base_controller->isDirection())
+		{
+			connector_list.append(QPoint(2, 0));
+		}
+		else
+		{
+			connector_list.append(QPoint(2, 4));
+		}
+	}
+}
+
 void RegularSwitchWidget::paint(QPainter & painter)
 {
 	QFont        font    = painter.font();
@@ -92,6 +121,9 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	pen.setColor(!is_turn_out ? section_color : outside_color);
 	painter.setPen(pen);
 	painter.drawLine(!is_turn_out && pending ? (is_inclined ? 20 : -20.0f) : 80.0f, 0.0f, 100.0f, 0.0f);
+
+	// Draw connector markers
+	drawConnectors(painter);
 }
 
 bool RegularSwitchWidget::isLockPending() const

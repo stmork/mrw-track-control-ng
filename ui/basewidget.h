@@ -63,10 +63,11 @@ namespace mrw::ui
 			const float xSize = SCALE * 2.0,
 			const float ySize = SCALE * 2.0, const bool center = true);
 
+		static bool verbose;
+
 	private:
 		static const std::unordered_map<mrw::model::SectionState, QColor> color_map;
 
-		const bool verbose;
 	};
 }
 

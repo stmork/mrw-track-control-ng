@@ -27,7 +27,9 @@ const std::unordered_map<SectionState, QColor> BaseWidget::color_map
 	{ SectionState::PASSED,   RED_LIGHT }
 };
 
-BaseWidget::BaseWidget(QWidget * parent) : QWidget(parent), verbose(true)
+bool BaseWidget::verbose = true;
+
+BaseWidget::BaseWidget(QWidget * parent) : QWidget(parent)
 {
 }
 

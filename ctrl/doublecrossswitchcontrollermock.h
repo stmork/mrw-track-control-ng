@@ -52,6 +52,9 @@ namespace mrw::ctrl
 		void setSwitchState(const mrw::model::DoubleCrossSwitch::State state);
 		void setDirection(const bool dir = true);
 		void setLock(const mrw::model::Device::LockState lock);
+
+	signals:
+		void computeConnectors();
 	};
 }
 

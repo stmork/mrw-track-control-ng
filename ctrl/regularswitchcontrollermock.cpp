@@ -28,24 +28,28 @@ void RegularSwitchControllerMock::setRight(const bool right)
 void RegularSwitchControllerMock::setLeftHanded(const bool left)
 {
 	left_handed = left;
+	emit computeConnectors();
 	emit update();
 }
 
 void RegularSwitchControllerMock::setRightHanded(const bool right)
 {
 	left_handed = !right;
+	emit computeConnectors();
 	emit update();
 }
 
 void mrw::ctrl::RegularSwitchControllerMock::setInclined(const bool incl)
 {
 	inclined = incl;
+	emit computeConnectors();
 	emit update();
 }
 
 void RegularSwitchControllerMock::setDirection(const bool dir)
 {
 	direction = dir;
+	emit computeConnectors();
 	emit update();
 }
 

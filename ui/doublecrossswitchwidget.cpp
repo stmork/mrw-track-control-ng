@@ -16,6 +16,21 @@ DoubleCrossSwitchWidget::DoubleCrossSwitchWidget(
 {
 }
 
+void DoubleCrossSwitchWidget::computeConnectors()
+{
+	connector_list.clear();
+	if (base_controller->isDirection())
+	{
+		connector_list.append(QPoint(1, 0));
+		connector_list.append(QPoint(3, 4));
+	}
+	else
+	{
+		connector_list.append(QPoint(3, 4));
+		connector_list.append(QPoint(1, 0));
+	}
+}
+
 void DoubleCrossSwitchWidget::paint(QPainter & painter)
 {
 	QFont  font          = painter.font();
@@ -70,6 +85,9 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	pen.setColor(isC() ? section_color : outside_color);
 	painter.setPen(pen);
 	painter.drawLine( 100.0f, 0.0f, isC() && pending  ?  27.0f :  80.0f, 0.0f);
+
+	// Draw connector markers
+	drawConnectors(painter);
 }
 
 bool DoubleCrossSwitchWidget::isLockPending() const

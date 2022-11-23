@@ -130,8 +130,14 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 		&mock, &RegularSwitchControllerMock::update,
 		ui->bigSwitchWidget, qOverload<>(&QWidget::repaint));
 	connect(
+		&mock, &RegularSwitchControllerMock::computeConnectors,
+		ui->bigSwitchWidget, &RegularSwitchWidget::computeConnectors);
+	connect(
 		&mock, &RegularSwitchControllerMock::update,
 		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
+	connect(
+		&mock, &RegularSwitchControllerMock::computeConnectors,
+		ui->smallSwitchWidget, &RegularSwitchWidget::computeConnectors);
 
 	ui->leftButton->setChecked(true);
 	ui->openButton->setChecked(true);

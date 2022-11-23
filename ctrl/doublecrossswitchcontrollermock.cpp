@@ -17,6 +17,7 @@ DoubleCrossSwitchControllerMock::DoubleCrossSwitchControllerMock(QObject * paren
 void DoubleCrossSwitchControllerMock::setDirection(const bool dir)
 {
 	direction = dir;
+	emit computeConnectors();
 	emit update();
 }
 

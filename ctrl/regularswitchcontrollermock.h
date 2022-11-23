@@ -57,6 +57,9 @@ namespace mrw::ctrl
 		void setSectionState(const mrw::model::SectionState state);
 		void setLock(const mrw::model::Device::LockState lock);
 
+	signals:
+		void computeConnectors();
+
 	public slots:
 		void setLeft(const bool left = true);
 		void setRight(const bool right = true);

@@ -136,8 +136,14 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 		&mock, &DoubleCrossSwitchControllerMock::update,
 		ui->bigSwitchWidget, qOverload<>(&QWidget::repaint));
 	connect(
+		&mock, &DoubleCrossSwitchControllerMock::computeConnectors,
+		ui->bigSwitchWidget, &DoubleCrossSwitchWidget::computeConnectors);
+	connect(
 		&mock, &DoubleCrossSwitchControllerMock::update,
 		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
+	connect(
+		&mock, &DoubleCrossSwitchControllerMock::computeConnectors,
+		ui->smallSwitchWidget, &DoubleCrossSwitchWidget::computeConnectors);
 
 	ui->symbolWidget->setAutoFillBackground(true);
 	ui->symbolWidget->setPalette(pal);

@@ -40,14 +40,36 @@ void ControllerWidget::setController(BaseController * ctrl)
 		list_item.setText(base_controller->name());
 		list_item.setData(Qt::UserRole, QVariant::fromValue(base_controller));
 		connect(base_controller, &BaseController::reposition, this, &ControllerWidget::reposition);
+
+		computeConnectors();
 	}
 }
 
-void mrw::ui::ControllerWidget::reposition()
+bool ControllerWidget::isConnector(const QPoint & point) const
+{
+	const QPoint base(
+		x() * Position::FRACTION / SIZE,
+		y() * Position::FRACTION / SIZE);
+
+	for (const QPoint & local : connector_list)
+	{
+		const QPoint compare = local + base;
+
+		if (compare == point)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void ControllerWidget::reposition()
 {
 	setFixedHeight(BaseWidget::SIZE);
 	extend();
 	move(base_controller->position()->point() * BaseWidget::SIZE / Position::FRACTION);
+
+	computeConnectors();
 }
 
 void ControllerWidget::extend()
@@ -104,5 +126,21 @@ void ControllerWidget::prepareFailed(
 	else
 	{
 		painter.setPen(YELLOW);
+	}
+}
+
+void ControllerWidget::drawConnectors(QPainter & painter)
+{
+	if (verbose)
+	{
+		painter.resetTransform();
+		for (const QPoint & conn : connector_list)
+		{
+			const QPoint point(
+				conn.x() * width() / Position::FRACTION,
+				conn.y() * height() / Position::FRACTION);
+
+			painter.fillRect(point.x() - 2, point.y() - 2, 5, 5, Qt::magenta);
+		}
 	}
 }
