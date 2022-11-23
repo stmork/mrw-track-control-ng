@@ -18,6 +18,26 @@ namespace mrw::ui
 
 	public:
 		explicit ControllerWidget(QWidget * parent = nullptr);
+
+	protected:
+		bool drawLock(const mrw::model::Device::LockState state) const;
+		void drawLock(
+			QPainter  & painter,
+			QColor      color,
+			const float x, const float y);
+		void drawSheared(
+			QPainter  & painter,
+			QColor      color,
+			const float x, const float y,
+			const float height,
+			const float slope = RAIL_SLOPE);
+
+		void prepareFailed(
+			QPainter  & painter,
+			const bool  fail);
+
+	private:
+		unsigned counter = 0;
 	};
 }
 

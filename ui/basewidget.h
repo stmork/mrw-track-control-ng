@@ -45,13 +45,12 @@ namespace mrw::ui
 	protected:
 		virtual void paintEvent(QPaintEvent * event) override;
 		virtual void paint(QPainter & painter) = 0;
-		virtual bool isLockTransit() const
+		virtual bool isLockPending() const
 		{
 			return false;
 		}
 
 		static QColor sectionColor(const mrw::model::SectionState state);
-		bool drawLock(const mrw::model::Device::LockState state) const;
 
 		void rescale(
 			QPainter & painter,
@@ -64,26 +63,10 @@ namespace mrw::ui
 			const float xSize = SCALE * 2.0,
 			const float ySize = SCALE * 2.0, const bool center = true);
 
-		void drawLock(
-			QPainter  & painter,
-			QColor      color,
-			const float x, const float y);
-		void drawSheared(
-			QPainter  & painter,
-			QColor      color,
-			const float x, const float y,
-			const float height,
-			const float slope = RAIL_SLOPE);
-
-		void prepareFailed(
-				QPainter  & painter,
-				const bool  fail);
-
 	private:
 		static const std::unordered_map<mrw::model::SectionState, QColor> color_map;
 
 		const bool verbose;
-		unsigned counter = 0;
 	};
 }
 

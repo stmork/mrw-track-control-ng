@@ -80,7 +80,7 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	painter.drawLine( 100.0f, 0.0f, isC() && pending  ?  27.0f :  80.0f, 0.0f);
 }
 
-bool DoubleCrossSwitchWidget::isLockTransit() const
+bool DoubleCrossSwitchWidget::isLockPending() const
 {
 	return controller->lock() == Device::LockState::PENDING;
 }

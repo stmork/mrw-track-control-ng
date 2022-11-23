@@ -96,7 +96,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	painter.drawLine(!isTurnOut() && pending ? (controller->isInclined() ? 20 : -20.0f) : 80.0f, 0.0f, 100.0f, 0.0f);
 }
 
-bool RegularSwitchWidget::isLockTransit() const
+bool RegularSwitchWidget::isLockPending() const
 {
 	return controller->lock() == Device::LockState::PENDING;
 }

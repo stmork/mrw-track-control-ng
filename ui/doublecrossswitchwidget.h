@@ -30,7 +30,7 @@ namespace mrw::ui
 
 	protected:
 		void paint(QPainter & painter) override;
-		virtual bool isLockTransit() const override;
+		virtual bool isLockPending() const override;
 
 	private:
 		bool isA() const;

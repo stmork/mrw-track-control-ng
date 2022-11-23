@@ -3,11 +3,68 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "controllerwidget.h"
+#include <util/clockservice.h>
+#include <model/device.h>
+#include <ui/controllerwidget.h>
 
+using namespace mrw::util;
+using namespace mrw::model;
 using namespace mrw::ui;
 
 ControllerWidget::ControllerWidget(QWidget * parent) :
 	BaseWidget(parent)
 {
+	connect(&ClockService::instance(), &ClockService::Hz8, [this]()
+	{
+		counter++;
+		if (isLockPending())
+		{
+			repaint();
+		}
+	});
+}
+
+bool ControllerWidget::drawLock(const Device::LockState state) const
+{
+	return (state != Device::LockState::PENDING) || (counter & 1);
+}
+
+void ControllerWidget::drawLock(QPainter & painter, QColor color, const float x, const float y)
+{
+	painter.fillRect(x - LOCK_WIDTH * 0.5, y - LOCK_HEIGHT * 0.5, LOCK_WIDTH, LOCK_HEIGHT, color);
+}
+
+void ControllerWidget::drawSheared(
+	QPainter  & painter,
+	QColor      color,
+	const float x, const float y,
+	const float height,
+	const float slope)
+{
+	QPainterPath path;
+	static constexpr float HALF = RAIL_WIDTH * 0.5f;
+	const float distant = height / slope;
+
+	path.moveTo(x - HALF, y);
+	path.lineTo(x + HALF, y);
+	path.lineTo(x + HALF - distant, y + height);
+	path.lineTo(x - HALF - distant, y + height);
+	path.closeSubpath();
+	painter.fillPath(path, QBrush(color));
+}
+
+void ControllerWidget::prepareFailed(
+	QPainter  & painter,
+	const bool  fail)
+{
+	if (fail)
+	{
+		painter.setBackgroundMode(Qt::OpaqueMode);
+		painter.setBackground(RED);
+		painter.setPen(WHITE);
+	}
+	else
+	{
+		painter.setPen(YELLOW);
+	}
 }
