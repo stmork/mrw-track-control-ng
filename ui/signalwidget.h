@@ -17,21 +17,13 @@ namespace mrw::ui
 	{
 		Q_OBJECT
 
-	private:
-		mrw::ctrl::SignalController * controller = nullptr;
-
 	public:
 		explicit SignalWidget(
 			QWidget           *           parent     = nullptr,
 			mrw::ctrl::SignalController * controller = nullptr);
 
-		void setController(mrw::ctrl::SignalController * ctrl);
-
 	protected:
 		void paint(QPainter & painter) override;
-
-	public slots:
-		void extend();
 	};
 }
 

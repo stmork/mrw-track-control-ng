@@ -18,15 +18,10 @@ namespace mrw::ui
 	{
 		Q_OBJECT
 
-	private:
-		mrw::ctrl::DoubleCrossSwitchController * controller = nullptr;
-
 	public:
 		explicit DoubleCrossSwitchWidget(
 			QWidget                 *                parent     = nullptr,
 			mrw::ctrl::DoubleCrossSwitchController * controller = nullptr);
-
-		void setController(mrw::ctrl::DoubleCrossSwitchController * ctrl);
 
 	protected:
 		void paint(QPainter & painter) override;
@@ -37,6 +32,7 @@ namespace mrw::ui
 		bool isB() const;
 		bool isC() const;
 		bool isD() const;
+		unsigned switchState() const;
 	};
 }
 

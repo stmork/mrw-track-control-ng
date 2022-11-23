@@ -16,57 +16,55 @@ using namespace mrw::model;
 RegularSwitchWidget::RegularSwitchWidget(
 	QWidget         *         parent,
 	RegularSwitchController * ctrl) :
-	ControllerWidget(parent),
-	controller(ctrl)
+	ControllerWidget(parent, ctrl)
 {
-}
-
-void RegularSwitchWidget::setController(RegularSwitchController * ctrl)
-{
-	Q_ASSERT(controller == nullptr);
-
-	controller = ctrl;
 }
 
 void RegularSwitchWidget::paint(QPainter & painter)
 {
 	QFont        font    = painter.font();
-	const bool   pending = lockVisible(controller->lock());
+	const bool   pending = lockVisible(base_controller->lock());
+	const bool   is_inclined     =
+		controller<RegularSwitchController>()->isInclined();
+	const bool   is_right_handed =
+		controller<RegularSwitchController>()->isRightHanded();
+	const bool   is_turn_out     =
+		(controller<RegularSwitchController>()->isLeft() != is_right_handed) != is_inclined;
 
-	Q_ASSERT(controller != nullptr);
+	Q_ASSERT(base_controller != nullptr);
 
 	// Unify coordinates
 	rescale(painter);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
-	prepareFailed(painter, controller->lock() == Device::LockState::FAIL);
+	prepareFailed(painter, base_controller->lock() == Device::LockState::FAIL);
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
 	painter.drawText(QRectF(
-			controller->isDirection() != controller->isInclined() ? -SCALE : -20,
-			controller->isDirection() != controller->isRightHanded() ? -80 : 30, 120, FONT_HEIGHT),
-		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
+			base_controller->isDirection() != is_inclined ? -SCALE : -20,
+			base_controller->isDirection() != is_right_handed ? -80 : 30, 120, FONT_HEIGHT),
+		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
 
-	if (controller->isRightHanded() != controller->isInclined())
+	if (is_right_handed != is_inclined)
 	{
 		// Draw always left handed but invert vertically if right handed.
 		painter.scale( 1.0f, -1.0f);
 	}
-	if (controller->isDirection())
+	if (base_controller->isDirection())
 	{
 		// Draw from left to right but invert horizontally if counter direction.
 		painter.scale(-1.0f, -1.0f);
 	}
 
-	QColor section_color = sectionColor(controller->state());
+	QColor section_color = sectionColor(base_controller->state());
 	QColor outside_color = sectionColor(SectionState::FREE);
 
 	// Draw point lock
 	drawLock(
 		painter,
-		controller->lock() == Device::LockState::LOCKED ?
+		base_controller->lock() == Device::LockState::LOCKED ?
 		section_color : WHITE,
-		controller->isInclined() ? -5 : -45, 0);
+		is_inclined ? -5 : -45, 0);
 
 	QPen pen;
 	pen.setCapStyle(Qt::FlatCap);
@@ -75,7 +73,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	// Draw point part of switch
 	pen.setColor(section_color);
 	painter.setPen(pen);
-	if (controller->isInclined())
+	if (is_inclined)
 	{
 		drawSheared(painter, section_color, -50, 100, -85);
 	}
@@ -87,21 +85,16 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	// Draw curved part of switch
 	drawSheared(
 		painter,
-		isTurnOut() ? section_color : outside_color,
-		controller->isInclined() ? 50 : 0, -100, isTurnOut() && pending ? 70 : 15);
+		is_turn_out ? section_color : outside_color,
+		is_inclined ? 50 : 0, -100, is_turn_out && pending ? 70 : 15);
 
 	// Draw straight part of switch
-	pen.setColor(!isTurnOut() ? section_color : outside_color);
+	pen.setColor(!is_turn_out ? section_color : outside_color);
 	painter.setPen(pen);
-	painter.drawLine(!isTurnOut() && pending ? (controller->isInclined() ? 20 : -20.0f) : 80.0f, 0.0f, 100.0f, 0.0f);
+	painter.drawLine(!is_turn_out && pending ? (is_inclined ? 20 : -20.0f) : 80.0f, 0.0f, 100.0f, 0.0f);
 }
 
 bool RegularSwitchWidget::isLockPending() const
 {
-	return controller->lock() == Device::LockState::PENDING;
-}
-
-bool RegularSwitchWidget::isTurnOut() const
-{
-	return (controller->isLeft() != controller->isRightHanded()) != controller->isInclined();
+	return base_controller->lock() == Device::LockState::PENDING;
 }

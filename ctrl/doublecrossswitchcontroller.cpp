@@ -11,3 +11,8 @@ DoubleCrossSwitchController::DoubleCrossSwitchController(QObject * parent) :
 	BaseController(parent)
 {
 }
+
+float mrw::ctrl::DoubleCrossSwitchController::extensions() const
+{
+	return 0.0;
+}

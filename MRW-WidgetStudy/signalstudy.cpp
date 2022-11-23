@@ -124,7 +124,7 @@ SignalStudy::SignalStudy(QWidget * parent) :
 		&mock, &SignalControllerMock::extend,
 		ui->smallSwitchWidget, qOverload<>(&SignalWidget::extend));
 
-	ui->backwardButton->setChecked(true);
+	ui->forwardButton->setChecked(true);
 	ui->freeButton->setChecked(true);
 
 	ui->availableButton_1->setChecked(false);

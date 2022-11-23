@@ -51,7 +51,7 @@ namespace mrw::ctrl
 			return lock_state;
 		}
 
-		virtual unsigned extensions() const override
+		virtual float extensions() const override
 		{
 			return extension;
 		}

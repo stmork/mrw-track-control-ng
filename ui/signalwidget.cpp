@@ -12,19 +12,12 @@ using namespace mrw::model;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 
+
 SignalWidget::SignalWidget(
 	QWidget      *     parent,
 	SignalController * ctrl) :
-	ControllerWidget(parent),
-	controller(ctrl)
+	ControllerWidget(parent, ctrl)
 {
-}
-
-void SignalWidget::setController(SignalController * ctrl)
-{
-	Q_ASSERT(controller == nullptr);
-
-	controller = ctrl;
 }
 
 static const QVector<QPointF> points
@@ -37,53 +30,61 @@ static const QVector<QPointF> points
 
 void SignalWidget::paint(QPainter & painter)
 {
-	QPainterPath path;
-	QFont        font   = painter.font();
-	const float  shift  = SCALE * controller->extensions() / Position::FRACTION;
-	const float  border = SCALE + shift;
-	const float  start  = SCALE - border;
+	SignalController * signal_controller = controller<SignalController>();
+	QPainterPath       path;
+	QFont              font   = painter.font();
 
-	Q_ASSERT(controller != nullptr);
+	const float        shift  = SCALE * extensions() / Position::FRACTION;
+	const float        border = SCALE + shift;
+	const float        start  = SCALE - border;
+
+	const SignalController::TourState main_state    = signal_controller->main();
+	const SignalController::TourState distant_state = signal_controller->distant();
+	const SignalController::TourState shunt_state   = signal_controller->shunt();
+
+	const bool has_main     = signal_controller->hasMain();
+	const bool has_distant  = signal_controller->hasDistant();
+	const bool has_shunting = signal_controller->hasShunting();
 
 	// Unify coordinates
-	rescale(painter, (Position::FRACTION + controller->extensions()) * SCALE / Position::HALF);
+	rescale(painter, (Position::FRACTION + extensions()) * SCALE / Position::HALF);
 
 	// Draw switch name before rotating to prevent rotated font drawing.
-	prepareFailed(painter, controller->lock() == Device::LockState::FAIL);
+	prepareFailed(painter, base_controller->lock() == Device::LockState::FAIL);
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
 	painter.drawText(QRectF(
-			controller->isDirection() ? -border : border - 120,
-			controller->isDirection() ? -80 : 30, 120, FONT_HEIGHT),
-		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
+			base_controller->isDirection() ? -border : border - 120,
+			base_controller->isDirection() ? -80 : 30, 120, FONT_HEIGHT),
+		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
 
-	if (!controller->isDirection())
+	if (!base_controller->isDirection())
 	{
 		// Draw from left to right but rotate 180° if counter direction.
 		painter.scale(-1.0f, -1.0f);
 	}
 
 	// Draw straight part of rail
-	painter.setPen(QPen(sectionColor(controller->state()), 20.0));
+	painter.setPen(QPen(sectionColor(base_controller->state()), 20.0));
 	painter.drawLine( -border, 0.0f, border, 0.0f);
 
 	QColor mast_color(RED);
 	QPen   pen;
-	QColor main_color    = controller->main() ==
+	QColor main_color    = main_state ==
 		SignalController::TourState::STOP ? RED : GREEN;
-	QColor distant_color = controller->distant() ==
+	QColor distant_color = distant_state ==
 		SignalController::TourState::STOP ? YELLOW : GREEN;
-	QColor shunt_color   = controller->shunt() ==
+	QColor shunt_color   = shunt_state ==
 		SignalController::TourState::STOP ? RED : WHITE;
-	bool draw_shunt = false;
+	bool draw_shunt   = false;
 	bool draw_distant = false;
 
-	if (controller->hasMain())
+	if (has_main)
 	{
 		mast_color = main_color;
-		if (controller->main() == SignalController::TourState::GO)
+		if (main_state == SignalController::TourState::GO)
 		{
-			draw_distant = controller->hasDistant();
+			draw_distant = has_distant;
 			if (draw_distant)
 			{
 				mast_color = distant_color;
@@ -91,19 +92,19 @@ void SignalWidget::paint(QPainter & painter)
 		}
 		else
 		{
-			draw_shunt = controller->hasShunting();
+			draw_shunt = has_shunting;
 		}
 	}
 	else
 	{
-		draw_distant = controller->hasDistant();
+		draw_distant = has_distant;
 		if (draw_distant)
 		{
 			mast_color = distant_color;
 		}
 		else
 		{
-			draw_shunt = controller->hasShunting();
+			draw_shunt = has_shunting;
 		}
 	}
 
@@ -132,7 +133,7 @@ void SignalWidget::paint(QPainter & painter)
 		painter.fillPath(path, QBrush(distant_color));
 	}
 
-	if (controller->hasMain())
+	if (has_main)
 	{
 		pen.setColor(main_color);
 		pen.setWidth(1);
@@ -140,9 +141,4 @@ void SignalWidget::paint(QPainter & painter)
 		painter.setBrush(QBrush(main_color));
 		painter.drawEllipse(start + 50, 35, 40, 40);
 	}
-}
-
-void SignalWidget::extend()
-{
-	setFixedWidth(height() * (1.0 + (float)controller->extensions() / Position::FRACTION));
 }

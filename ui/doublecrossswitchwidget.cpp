@@ -12,38 +12,30 @@ using namespace mrw::model;
 DoubleCrossSwitchWidget::DoubleCrossSwitchWidget(
 	QWidget           *           parent,
 	DoubleCrossSwitchController * ctrl) :
-	ControllerWidget(parent),
-	controller(ctrl)
+	ControllerWidget(parent, ctrl)
 {
-}
-
-void DoubleCrossSwitchWidget::setController(DoubleCrossSwitchController * ctrl)
-{
-	Q_ASSERT(controller == nullptr);
-
-	controller = ctrl;
 }
 
 void DoubleCrossSwitchWidget::paint(QPainter & painter)
 {
 	QFont  font          = painter.font();
-	QColor section_color = sectionColor(controller->state());
+	QColor section_color = sectionColor(base_controller->state());
 	QColor outside_color = sectionColor(SectionState::FREE);
-	const bool   pending = lockVisible(controller->lock());
+	const bool   pending = lockVisible(base_controller->lock());
 	QPen   pen;
 
 	rescale(painter);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
-	prepareFailed(painter, controller->lock() == Device::LockState::FAIL);
+	prepareFailed(painter, base_controller->lock() == Device::LockState::FAIL);
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
 	painter.drawText(QRectF(
 			false ? -SCALE : -20,
-			controller->isDirection() ? 35 : -85, 120, FONT_HEIGHT),
-		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
+			base_controller->isDirection() ? 35 : -85, 120, FONT_HEIGHT),
+		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
 
-	if (controller->isDirection())
+	if (base_controller->isDirection())
 	{
 		// Draw from left to right but invert horizontally if counter direction.
 		painter.scale(-1.0f, 1.0f);
@@ -52,7 +44,7 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	// Draw point lock
 	drawLock(
 		painter,
-		controller->lock() == Device::LockState::LOCKED ?
+		base_controller->lock() == Device::LockState::LOCKED ?
 		section_color : WHITE,
 		0, 0);
 
@@ -82,37 +74,38 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 
 bool DoubleCrossSwitchWidget::isLockPending() const
 {
-	return controller->lock() == Device::LockState::PENDING;
+	return base_controller->lock() == Device::LockState::PENDING;
 }
 
 bool DoubleCrossSwitchWidget::isA() const
 {
-	const unsigned state = (unsigned)controller->switchState();
-	const unsigned mask  = controller->isDirection() ? DoubleCrossSwitch::B_MASK : 0;
+	const unsigned mask  = base_controller->isDirection() ? DoubleCrossSwitch::B_MASK : 0;
 
-	return (state & DoubleCrossSwitch::B_MASK) == mask;
+	return (switchState() & DoubleCrossSwitch::B_MASK) == mask;
 }
 
 bool DoubleCrossSwitchWidget::isB() const
 {
-	const unsigned state = (unsigned)controller->switchState();
-	const unsigned mask  = controller->isDirection() ? DoubleCrossSwitch::B_MASK : 0;
+	const unsigned mask  = base_controller->isDirection() ? DoubleCrossSwitch::B_MASK : 0;
 
-	return (state & DoubleCrossSwitch::B_MASK) != mask;
+	return (switchState() & DoubleCrossSwitch::B_MASK) != mask;
 }
 
 bool DoubleCrossSwitchWidget::isC() const
 {
-	const unsigned state = (unsigned)controller->switchState();
-	const unsigned mask  = controller->isDirection() ? DoubleCrossSwitch::D_MASK : 0;
+	const unsigned mask  = base_controller->isDirection() ? DoubleCrossSwitch::D_MASK : 0;
 
-	return (state & DoubleCrossSwitch::D_MASK) == mask;
+	return (switchState() & DoubleCrossSwitch::D_MASK) == mask;
 }
 
 bool DoubleCrossSwitchWidget::isD() const
 {
-	const unsigned state = (unsigned)controller->switchState();
-	const unsigned mask  = controller->isDirection() ? DoubleCrossSwitch::D_MASK : 0;
+	const unsigned mask  = base_controller->isDirection() ? DoubleCrossSwitch::D_MASK : 0;
 
-	return (state & DoubleCrossSwitch::D_MASK) != mask;
+	return (switchState() & DoubleCrossSwitch::D_MASK) != mask;
+}
+
+unsigned mrw::ui::DoubleCrossSwitchWidget::switchState() const
+{
+	return (unsigned)controller<DoubleCrossSwitchController>()->switchState();
 }

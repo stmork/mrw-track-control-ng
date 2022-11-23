@@ -11,3 +11,8 @@ RegularSwitchController::RegularSwitchController(QObject * parent) :
 	BaseController(parent)
 {
 }
+
+float RegularSwitchController::extensions() const
+{
+	return 0;
+}

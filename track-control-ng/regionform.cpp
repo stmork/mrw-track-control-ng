@@ -50,7 +50,8 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 		RegularSwitchControllerProxy * ctrl   = new RegularSwitchControllerProxy(part, this);
 		RegularSwitchWidget      *     widget = new RegularSwitchWidget(ui->controlWidget, ctrl);
 
-		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
+		widget->setFixedHeight(BaseWidget::SIZE);
+		widget->extend();
 		widget->move(part->point() * BaseWidget::SIZE / Position::FRACTION);
 
 		connect(
@@ -64,7 +65,8 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 		DoubleCrossSwitchControllerProxy * ctrl   = new DoubleCrossSwitchControllerProxy(part, this);
 		DoubleCrossSwitchWidget      *     widget = new DoubleCrossSwitchWidget(ui->controlWidget, ctrl);
 
-		widget->setFixedSize(BaseWidget::SIZE, BaseWidget::SIZE);
+		widget->setFixedHeight(BaseWidget::SIZE);
+		widget->extend();
 		widget->move(part->point() * BaseWidget::SIZE / Position::FRACTION);
 
 		connect(

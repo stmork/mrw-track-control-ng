@@ -46,7 +46,7 @@ SectionStudy::SectionStudy(QWidget * parent) :
 		&mock, &SectionControllerMock::setExtension);
 
 	/********************************************************/
-	/*   Lock state                                         */
+	/*   End rail state                                     */
 	/********************************************************/
 
 	connect(ui->leftButton, &QRadioButton::clicked,
@@ -137,9 +137,10 @@ SectionStudy::SectionStudy(QWidget * parent) :
 		&mock, &SectionControllerMock::extend,
 		ui->smallSwitchWidget, qOverload<>(&SectionWidget::extend));
 
-	ui->backwardButton->setChecked(true);
+	ui->forwardButton->setChecked(true);
 	ui->noButton->setChecked(true);
 	ui->freeButton->setChecked(true);
+	ui->openButton->setChecked(true);
 }
 
 SectionStudy::~SectionStudy()

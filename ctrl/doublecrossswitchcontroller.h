@@ -20,7 +20,7 @@ namespace mrw::ctrl
 	public:
 		explicit DoubleCrossSwitchController(QObject * parent = nullptr);
 
-		virtual bool isDirection() const = 0;
+		virtual float extensions() const override;
 		virtual mrw::model::DoubleCrossSwitch::State  switchState() const = 0;
 	};
 }

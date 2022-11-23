@@ -94,7 +94,7 @@ Device::LockState mrw::ctrl::SignalControllerProxy::lock() const
 	return device->lock();
 }
 
-unsigned mrw::ctrl::SignalControllerProxy::extensions() const
+float SignalControllerProxy::extensions() const
 {
 	return base_signal->extend();
 }

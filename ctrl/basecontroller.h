@@ -54,6 +54,9 @@ namespace mrw::ctrl
 		 */
 		virtual mrw::model::Device::LockState lock() const = 0;
 
+		virtual float extensions()   const = 0;
+		virtual bool  isDirection() const = 0;
+
 	signals:
 		/**
 		 * This signal causes the refresh of the paired widget class.

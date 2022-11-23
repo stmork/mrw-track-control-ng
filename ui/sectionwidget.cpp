@@ -11,18 +11,10 @@ using namespace mrw::ui;
 using namespace mrw::ctrl;
 
 SectionWidget::SectionWidget(
-	QWidget         *         parent,
-	ctrl::SectionController * ctrl) :
-	ControllerWidget(parent),
-	controller(ctrl)
+	QWidget   *         parent,
+	SectionController * ctrl) :
+	ControllerWidget(parent, ctrl)
 {
-}
-
-void SectionWidget::setController(SectionController * ctrl)
-{
-	Q_ASSERT(controller == nullptr);
-
-	controller = ctrl;
 }
 
 void SectionWidget::paint(QPainter & painter)
@@ -30,31 +22,33 @@ void SectionWidget::paint(QPainter & painter)
 	QPainterPath path;
 	QFont        font = painter.font();
 	QPen         pen;
-	const float  border = SCALE * (1.0 + controller->extensions() / Position::FRACTION);
+	const float  border = SCALE * (1.0 + extensions() / Position::FRACTION);
+	const bool   forward_ends  = controller<SectionController>()->forwardEnds();
+	const bool   backward_ends = controller<SectionController>()->backwardEnds();
 
 	rescale(painter,
-		(Position::FRACTION + controller->extensions()) * SCALE / Position::HALF,
+		(Position::FRACTION + extensions()) * SCALE / Position::HALF,
 		SCALE * 2.0);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
-	prepareFailed(painter, controller->lock() == Device::LockState::FAIL);
+	prepareFailed(painter, base_controller->lock() == Device::LockState::FAIL);
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
 	painter.drawText(QRectF(
-			controller->isDirection() ? border - 120 : -border,
-			controller->isDirection() ? 30 : -80, 120, FONT_HEIGHT),
-		Qt::AlignCenter | Qt::AlignHCenter, controller->name());
+			base_controller->isDirection() ? border - 120 : -border,
+			base_controller->isDirection() ? 30 : -80, 120, FONT_HEIGHT),
+		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
 
 	// Draw point part of switch
 	pen.setCapStyle(Qt::FlatCap);
-	pen.setColor(sectionColor(controller->state()));
+	pen.setColor(sectionColor(base_controller->state()));
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
 	painter.drawLine(-border, 0.0f, border, 0.0f);
 
-	if (controller->forwardEnds() || controller->backwardEnds())
+	if (forward_ends || backward_ends)
 	{
-		if (controller->isDirection() != controller->backwardEnds())
+		if (base_controller->isDirection() != backward_ends)
 		{
 			// Draw from left to right but invert horizontally if counter direction.
 			painter.scale(-1.0f, 1.0f);
@@ -68,9 +62,4 @@ void SectionWidget::paint(QPainter & painter)
 		painter.setPen(pen);
 		painter.drawPath(path);
 	}
-}
-
-void SectionWidget::extend()
-{
-	setFixedWidth(height() * (1.0 + controller->extensions() / Position::FRACTION));
 }

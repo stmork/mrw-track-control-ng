@@ -10,9 +10,13 @@
 using namespace mrw::util;
 using namespace mrw::model;
 using namespace mrw::ui;
+using namespace mrw::ctrl;
 
-ControllerWidget::ControllerWidget(QWidget * parent) :
-	BaseWidget(parent)
+ControllerWidget::ControllerWidget(
+	QWidget *        parent,
+	BaseController * ctrl) :
+	BaseWidget(parent),
+	base_controller(ctrl)
 {
 	list_item.setText("AaAa");
 //	list_item.setData(Qt::UserRole, this);
@@ -25,6 +29,18 @@ ControllerWidget::ControllerWidget(QWidget * parent) :
 			repaint();
 		}
 	});
+}
+
+void ControllerWidget::setController(BaseController * ctrl)
+{
+	Q_ASSERT(base_controller == nullptr);
+
+	base_controller = ctrl;
+}
+
+void ControllerWidget::extend()
+{
+	setFixedWidth(height() * (1.0 + extensions() / Position::FRACTION));
 }
 
 void ControllerWidget::mousePressEvent(QMouseEvent * event)

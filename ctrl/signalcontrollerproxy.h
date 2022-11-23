@@ -50,7 +50,7 @@ namespace mrw::ctrl
 
 		virtual mrw::model::Device::LockState lock() const override;
 
-		virtual unsigned extensions() const override;
+		virtual float extensions() const override;
 	};
 }
 

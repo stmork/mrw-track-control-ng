@@ -19,13 +19,20 @@ namespace mrw::ui
 		Q_OBJECT
 
 	public:
-		explicit ControllerWidget(QWidget * parent = nullptr);
+		explicit ControllerWidget(
+				QWidget * parent = nullptr,
+				mrw::ctrl::BaseController * ctrl = nullptr);
+
+		void setController(mrw::ctrl::BaseController * ctrl);
 
 	signals:
 		void clicked(QListWidgetItem * item);
 
+	public slots:
+		void extend();
+
 	protected:
-		virtual void mousePressEvent(QMouseEvent *event) override;
+		virtual void mousePressEvent(QMouseEvent * event) override;
 
 		bool lockVisible(const mrw::model::Device::LockState state) const;
 		void drawLock(
@@ -43,9 +50,22 @@ namespace mrw::ui
 			QPainter  & painter,
 			const bool  fail);
 
+		inline float extensions() const
+		{
+			return base_controller->extensions();
+		}
+
+		template<class C> C * controller() const
+		{
+			return dynamic_cast<C *>(base_controller);
+		}
+
+		mrw::ctrl::BaseController * base_controller = nullptr;
+
 	private:
 		unsigned        counter = 0;
 		QListWidgetItem list_item;
+
 	};
 }
 
