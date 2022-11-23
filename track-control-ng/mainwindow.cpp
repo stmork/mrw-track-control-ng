@@ -5,6 +5,7 @@
 
 #include <model/modelrailway.h>
 #include <ui/controllerwidget.h>
+#include <ctrl/basecontroller.h>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -12,6 +13,7 @@
 
 using namespace mrw::model;
 using namespace mrw::ui;
+using namespace mrw::ctrl;
 
 MainWindow::MainWindow(ModelRepository & repository, QWidget * parent)
 	: QMainWindow(parent)
@@ -29,6 +31,27 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent)
 	{
 		connect(w, &ControllerWidget::clicked, this, &MainWindow::itemClicked);
 	}
+
+	connect(ui->actionBeenden,     &QAction::triggered, QCoreApplication::instance(), &QCoreApplication::quit);
+	connect(ui->actionNeigung,     &QAction::triggered, this, &MainWindow::incline);
+	connect(ui->actionErweitern,   &QAction::triggered, this, &MainWindow::expand);
+	connect(ui->actionTeilschritt, &QAction::triggered, this, &MainWindow::extend);
+	connect(ui->actionRechts, &QAction::triggered, [this] ()
+	{
+		move(1, 0);
+	});
+	connect(ui->actionLinks, &QAction::triggered, [this] ()
+	{
+		move(-1, 0);
+	});
+	connect(ui->actionHoch, &QAction::triggered, [this] ()
+	{
+		move(0, -1);
+	});
+	connect(ui->actionRunter, &QAction::triggered, [this] ()
+	{
+		move(0, 1);
+	});
 }
 
 MainWindow::~MainWindow()
@@ -80,4 +103,35 @@ void MainWindow::clearAllItems()
 	{
 		ui->sectionListWidget->takeItem(0);
 	}
+}
+
+void MainWindow::move(int right, int down)
+{
+	for (int i = 0; i < ui->sectionListWidget->count(); i++)
+	{
+		QListWidgetItem * item       = ui->sectionListWidget->item(i);
+		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
+		Position * position = controller->position();
+
+		if (position != nullptr)
+		{
+			position->move(right, down);
+			controller->refresh();
+		}
+	}
+}
+
+void MainWindow::extend()
+{
+
+}
+
+void MainWindow::expand()
+{
+
+}
+
+void MainWindow::incline()
+{
+
 }

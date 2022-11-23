@@ -73,6 +73,8 @@ namespace mrw::model
 		 */
 		void write(QSettings & settings);
 
+		void move(const int right, const int down);
+
 		/**
 		 * This getter returns the half extension unit of the controlling widget
 		 * size.

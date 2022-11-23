@@ -43,6 +43,11 @@ namespace mrw::ctrl
 		TourState shunt() const override;
 		TourState main() const override;
 
+		virtual mrw::model::Position * position() const override
+		{
+			return base_signal;
+		}
+
 		virtual mrw::model::SectionState state() const override
 		{
 			return section->state();

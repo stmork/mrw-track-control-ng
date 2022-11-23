@@ -57,6 +57,16 @@ namespace mrw::ctrl
 		virtual float extensions()   const = 0;
 		virtual bool  isDirection() const = 0;
 
+		virtual mrw::model::Position * position() const
+		{
+			return nullptr;
+		}
+
+		void refresh()
+		{
+			emit update();
+		}
+
 	signals:
 		/**
 		 * This signal causes the refresh of the paired widget class.
@@ -64,7 +74,6 @@ namespace mrw::ctrl
 		 * @see mrw::ui::BaseWidget
 		 */
 		void update();
-
 	};
 }
 

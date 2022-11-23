@@ -31,11 +31,6 @@ namespace mrw::ctrl
 
 		virtual QString name() const override;
 
-		virtual mrw::model::SectionState state() const override
-		{
-			return section->state();
-		}
-
 		virtual bool isDirection() const override
 		{
 			return rail->aIsDir() == section->region()->direction();
@@ -54,6 +49,16 @@ namespace mrw::ctrl
 		virtual float extensions() const override
 		{
 			return rail->extend();
+		}
+
+		virtual mrw::model::Position * position() const override
+		{
+			return rail;
+		}
+
+		virtual mrw::model::SectionState state() const override
+		{
+			return section->state();
 		}
 
 		virtual mrw::model::Device::LockState lock() const override

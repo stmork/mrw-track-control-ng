@@ -107,3 +107,10 @@ void Position::write(QSettings & settings)
 
 	settings.setValue(pos_key, value);
 }
+
+void Position::move(const int right, const int down)
+{
+	const QPoint increment(right * FRACTION, down  * FRACTION);
+
+	position += increment;
+}

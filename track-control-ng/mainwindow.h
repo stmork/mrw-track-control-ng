@@ -34,6 +34,10 @@ public slots:
 private slots:
 	void clearSelectedItems();
 	void clearAllItems();
+	void move(int right, int down);
+	void extend();
+	void expand();
+	void incline();
 
 private:
 	void initRegion();

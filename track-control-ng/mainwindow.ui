@@ -203,8 +203,93 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuDaten">
+    <property name="title">
+     <string>Daten</string>
+    </property>
+    <addaction name="actionBeenden"/>
+   </widget>
+   <widget class="QMenu" name="menuEditieren">
+    <property name="title">
+     <string>Editieren</string>
+    </property>
+    <addaction name="actionRechts"/>
+    <addaction name="actionLinks"/>
+    <addaction name="actionHoch"/>
+    <addaction name="actionRunter"/>
+    <addaction name="separator"/>
+    <addaction name="actionTeilschritt"/>
+    <addaction name="actionErweitern"/>
+    <addaction name="actionNeigung"/>
+   </widget>
+   <addaction name="menuDaten"/>
+   <addaction name="menuEditieren"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionBeenden">
+   <property name="text">
+    <string>Beenden</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionRechts">
+   <property name="text">
+    <string>Rechts</string>
+   </property>
+   <property name="shortcut">
+    <string>Right</string>
+   </property>
+  </action>
+  <action name="actionLinks">
+   <property name="text">
+    <string>Links</string>
+   </property>
+   <property name="shortcut">
+    <string>Left</string>
+   </property>
+  </action>
+  <action name="actionHoch">
+   <property name="text">
+    <string>Hoch</string>
+   </property>
+   <property name="shortcut">
+    <string>Up</string>
+   </property>
+  </action>
+  <action name="actionRunter">
+   <property name="text">
+    <string>Runter</string>
+   </property>
+   <property name="shortcut">
+    <string>Down</string>
+   </property>
+  </action>
+  <action name="actionNeigung">
+   <property name="text">
+    <string>Neigung</string>
+   </property>
+   <property name="shortcut">
+    <string>I</string>
+   </property>
+  </action>
+  <action name="actionTeilschritt">
+   <property name="text">
+    <string>Teilschritt</string>
+   </property>
+   <property name="shortcut">
+    <string>O</string>
+   </property>
+  </action>
+  <action name="actionErweitern">
+   <property name="text">
+    <string>Erweitern</string>
+   </property>
+   <property name="shortcut">
+    <string>X</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
