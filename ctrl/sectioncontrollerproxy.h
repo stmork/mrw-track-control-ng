@@ -48,7 +48,7 @@ namespace mrw::ctrl
 
 		virtual float extensions() const override
 		{
-			return rail->extend();
+			return rail->extension();
 		}
 
 		virtual mrw::model::Position * position() const override

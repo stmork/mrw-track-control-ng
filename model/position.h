@@ -31,7 +31,7 @@ namespace mrw::model
 	{
 		QPoint   position;
 		unsigned offset    = 0;
-		unsigned extension = 0;
+		unsigned ext_count = 0;
 		bool     inclined  = false;
 
 		static unsigned counter;
@@ -81,9 +81,19 @@ namespace mrw::model
 		 *
 		 * @return The extension size in half controlling widget size.
 		 */
-		inline unsigned extend() const
+		inline unsigned extension() const
 		{
-			return extension;
+			return ext_count;
+		}
+
+		inline void toggleInclination()
+		{
+			inclined = !inclined;
+		}
+
+		inline void extend(const int inc = 1)
+		{
+			ext_count += inc;
 		}
 
 		inline bool isInclined() const

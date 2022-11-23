@@ -207,26 +207,27 @@
     <property name="title">
      <string>Daten</string>
     </property>
-    <addaction name="actionBeenden"/>
+    <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuEditieren">
     <property name="title">
      <string>Editieren</string>
     </property>
-    <addaction name="actionRechts"/>
-    <addaction name="actionLinks"/>
-    <addaction name="actionHoch"/>
-    <addaction name="actionRunter"/>
+    <addaction name="actionRight"/>
+    <addaction name="actionLeft"/>
+    <addaction name="actionUp"/>
+    <addaction name="actionDown"/>
     <addaction name="separator"/>
-    <addaction name="actionTeilschritt"/>
-    <addaction name="actionErweitern"/>
-    <addaction name="actionNeigung"/>
+    <addaction name="actionInclination"/>
+    <addaction name="actionExpand"/>
+    <addaction name="actionExtend"/>
+    <addaction name="actionReduce"/>
    </widget>
    <addaction name="menuDaten"/>
    <addaction name="menuEditieren"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionBeenden">
+  <action name="actionQuit">
    <property name="text">
     <string>Beenden</string>
    </property>
@@ -234,7 +235,7 @@
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="actionRechts">
+  <action name="actionRight">
    <property name="text">
     <string>Rechts</string>
    </property>
@@ -242,7 +243,7 @@
     <string>Right</string>
    </property>
   </action>
-  <action name="actionLinks">
+  <action name="actionLeft">
    <property name="text">
     <string>Links</string>
    </property>
@@ -250,7 +251,7 @@
     <string>Left</string>
    </property>
   </action>
-  <action name="actionHoch">
+  <action name="actionUp">
    <property name="text">
     <string>Hoch</string>
    </property>
@@ -258,7 +259,7 @@
     <string>Up</string>
    </property>
   </action>
-  <action name="actionRunter">
+  <action name="actionDown">
    <property name="text">
     <string>Runter</string>
    </property>
@@ -266,7 +267,7 @@
     <string>Down</string>
    </property>
   </action>
-  <action name="actionNeigung">
+  <action name="actionInclination">
    <property name="text">
     <string>Neigung</string>
    </property>
@@ -274,20 +275,31 @@
     <string>I</string>
    </property>
   </action>
-  <action name="actionTeilschritt">
+  <action name="actionExpand">
    <property name="text">
-    <string>Teilschritt</string>
-   </property>
-   <property name="shortcut">
-    <string>O</string>
-   </property>
-  </action>
-  <action name="actionErweitern">
-   <property name="text">
-    <string>Erweitern</string>
+    <string>Auffüllen</string>
    </property>
    <property name="shortcut">
     <string>X</string>
+   </property>
+  </action>
+  <action name="actionExtend">
+   <property name="text">
+    <string>Vergrößern</string>
+   </property>
+   <property name="toolTip">
+    <string>Vergrößern</string>
+   </property>
+   <property name="shortcut">
+    <string>+</string>
+   </property>
+  </action>
+  <action name="actionReduce">
+   <property name="text">
+    <string>Verkleinern</string>
+   </property>
+   <property name="shortcut">
+    <string>-</string>
    </property>
   </action>
  </widget>

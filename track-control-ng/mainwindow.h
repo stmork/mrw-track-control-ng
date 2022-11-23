@@ -35,7 +35,7 @@ private slots:
 	void clearSelectedItems();
 	void clearAllItems();
 	void move(int right, int down);
-	void extend();
+	void extend(int inc);
 	void expand();
 	void incline();
 

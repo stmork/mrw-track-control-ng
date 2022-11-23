@@ -62,11 +62,6 @@ namespace mrw::ctrl
 			return nullptr;
 		}
 
-		void refresh()
-		{
-			emit reposition();
-		}
-
 	signals:
 		/**
 		 * This signal causes the refresh of the paired widget class.

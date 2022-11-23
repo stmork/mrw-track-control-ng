@@ -96,7 +96,7 @@ Device::LockState mrw::ctrl::SignalControllerProxy::lock() const
 
 float SignalControllerProxy::extensions() const
 {
-	return base_signal->extend();
+	return base_signal->extension();
 }
 
 SignalController::TourState SignalControllerProxy::distant() const

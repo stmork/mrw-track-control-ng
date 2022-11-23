@@ -49,7 +49,7 @@ void Position::parse(QSettings & settings, const QString & default_value)
 
 			case 'x':
 			case 'X':
-				extension++;
+				ext_count++;
 				break;
 
 			case 'h':
@@ -96,7 +96,7 @@ void Position::write(QSettings & settings)
 			ext += 'q';
 		}
 	}
-	for (unsigned i = 0; i < extension; i++)
+	for (unsigned i = 0; i < ext_count; i++)
 	{
 		ext += 'X';
 	}
@@ -110,7 +110,7 @@ void Position::write(QSettings & settings)
 
 void Position::move(const int right, const int down)
 {
-	const QPoint increment(right * FRACTION, down  * FRACTION);
+	const QPoint increment(right, down);
 
 	position += increment;
 }

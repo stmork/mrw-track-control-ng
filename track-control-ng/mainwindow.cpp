@@ -32,26 +32,34 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent)
 		connect(w, &ControllerWidget::clicked, this, &MainWindow::itemClicked);
 	}
 
-	connect(ui->actionBeenden,     &QAction::triggered, QCoreApplication::instance(), &QCoreApplication::quit);
-	connect(ui->actionNeigung,     &QAction::triggered, this, &MainWindow::incline);
-	connect(ui->actionErweitern,   &QAction::triggered, this, &MainWindow::expand);
-	connect(ui->actionTeilschritt, &QAction::triggered, this, &MainWindow::extend);
+	connect(ui->actionQuit,        &QAction::triggered, QCoreApplication::instance(), &QCoreApplication::quit);
+	connect(ui->actionInclination, &QAction::triggered, this, &MainWindow::incline);
+	connect(ui->actionExpand,      &QAction::triggered, this, &MainWindow::expand);
 
-	connect(ui->actionRechts, &QAction::triggered, [this] ()
+	connect(ui->actionRight, &QAction::triggered, [this] ()
 	{
 		move(1, 0);
 	});
-	connect(ui->actionLinks, &QAction::triggered, [this] ()
+	connect(ui->actionLeft, &QAction::triggered, [this] ()
 	{
 		move(-1, 0);
 	});
-	connect(ui->actionHoch, &QAction::triggered, [this] ()
+	connect(ui->actionUp, &QAction::triggered, [this] ()
 	{
-		move(0, -1);
+		move(0, -Position::FRACTION);
 	});
-	connect(ui->actionRunter, &QAction::triggered, [this] ()
+	connect(ui->actionDown, &QAction::triggered, [this] ()
 	{
-		move(0, 1);
+		move(0, Position::FRACTION);
+	});
+
+	connect(ui->actionExtend, &QAction::triggered, [this] ()
+	{
+		extend(1);
+	});
+	connect(ui->actionReduce, &QAction::triggered, [this] ()
+	{
+		extend(-1);
 	});
 }
 
@@ -117,14 +125,25 @@ void MainWindow::move(int right, int down)
 		if (position != nullptr)
 		{
 			position->move(right, down);
-			controller->refresh();
+			controller->reposition();
 		}
 	}
 }
 
-void MainWindow::extend()
+void MainWindow::extend(int inc)
 {
+	for (int i = 0; i < ui->sectionListWidget->count(); i++)
+	{
+		QListWidgetItem * item       = ui->sectionListWidget->item(i);
+		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
+		Position * position = controller->position();
 
+		if (position != nullptr)
+		{
+			position->extend(inc);
+			controller->reposition();
+		}
+	}
 }
 
 void MainWindow::expand()
@@ -134,5 +153,16 @@ void MainWindow::expand()
 
 void MainWindow::incline()
 {
+	for (int i = 0; i < ui->sectionListWidget->count(); i++)
+	{
+		QListWidgetItem * item       = ui->sectionListWidget->item(i);
+		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
+		Position * position = controller->position();
 
+		if (position != nullptr)
+		{
+			position->toggleInclination();
+			controller->update();
+		}
+	}
 }
