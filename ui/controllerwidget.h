@@ -20,8 +20,8 @@ namespace mrw::ui
 
 	public:
 		explicit ControllerWidget(
-				QWidget * parent = nullptr,
-				mrw::ctrl::BaseController * ctrl = nullptr);
+			QWidget * parent = nullptr,
+			mrw::ctrl::BaseController * ctrl = nullptr);
 
 		void setController(mrw::ctrl::BaseController * ctrl);
 

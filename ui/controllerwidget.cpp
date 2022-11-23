@@ -13,13 +13,11 @@ using namespace mrw::ui;
 using namespace mrw::ctrl;
 
 ControllerWidget::ControllerWidget(
-	QWidget *        parent,
+	QWidget     *    parent,
 	BaseController * ctrl) :
-	BaseWidget(parent),
-	base_controller(ctrl)
+	BaseWidget(parent)
 {
-	list_item.setText("AaAa");
-//	list_item.setData(Qt::UserRole, this);
+	setController(ctrl);
 
 	connect(&ClockService::instance(), &ClockService::Hz8, [this]()
 	{
@@ -36,6 +34,12 @@ void ControllerWidget::setController(BaseController * ctrl)
 	Q_ASSERT(base_controller == nullptr);
 
 	base_controller = ctrl;
+
+	if (base_controller != nullptr)
+	{
+		list_item.setText(base_controller->name());
+		list_item.setData(Qt::UserRole, QVariant::fromValue(base_controller));
+	}
 }
 
 void ControllerWidget::extend()

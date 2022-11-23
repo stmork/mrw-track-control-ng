@@ -11,7 +11,7 @@ using namespace mrw::ui;
 using namespace mrw::ctrl;
 
 SectionWidget::SectionWidget(
-	QWidget   *         parent,
+	QWidget      *      parent,
 	SectionController * ctrl) :
 	ControllerWidget(parent, ctrl)
 {
