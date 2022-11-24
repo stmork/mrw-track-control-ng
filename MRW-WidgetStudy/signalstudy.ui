@@ -47,6 +47,36 @@
       </widget>
      </item>
      <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Abknickung</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QRadioButton" name="leftCurveButton">
+          <property name="text">
+           <string>links</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="straightButton">
+          <property name="text">
+           <string>gerade</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rightCurveButton">
+          <property name="text">
+           <string>rechts</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
       <widget class="QGroupBox" name="groupBox_4">
        <property name="title">
         <string>Abschnitt</string>

@@ -29,14 +29,14 @@ namespace mrw::model
 	 */
 	class Position
 	{
-		QPoint   position;
-		unsigned offset    = 0;
-		unsigned ext_count = 0;
-		bool     inclined  = false;
-
-		static unsigned counter;
-
 	public:
+		enum class Curve
+		{
+			LEFT,
+			STRAIGHT,
+			RIGHT
+		};
+
 		static constexpr unsigned FRACTION = 4;
 		static constexpr unsigned MASK     = FRACTION - 1;
 		static constexpr unsigned HALF     = FRACTION >> 1;
@@ -138,6 +138,25 @@ namespace mrw::model
 			}
 			return left->position.y() < right->position.y();
 		}
+
+		inline Curve curve() const
+		{
+			return curve_state;
+		}
+
+		inline void setCurve(const Curve input)
+		{
+			curve_state = input;
+		}
+
+	private:
+		static unsigned counter;
+
+		QPoint   position;
+		unsigned offset      = 0;
+		unsigned ext_count   = 0;
+		bool     inclined    = false;
+		Curve    curve_state = Curve::STRAIGHT;
 	};
 }
 

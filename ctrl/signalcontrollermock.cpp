@@ -34,6 +34,7 @@ void SignalControllerMock::setMain(const bool main)
 void SignalControllerMock::setDirection(const bool dir)
 {
 	direction = dir;
+	emit computeConnectors();
 	emit update();
 }
 
@@ -43,11 +44,19 @@ void SignalControllerMock::setSectionState(const SectionState state)
 	emit update();
 }
 
+void SignalControllerMock::setCurve(const Position::Curve curve)
+{
+	curve_state = curve;
+	emit computeConnectors();
+	emit update();
+}
+
 void mrw::ctrl::SignalControllerMock::setExtension(const int new_extension)
 {
 	extension = new_extension;
-	emit update();
 	emit extend();
+	emit computeConnectors();
+	emit update();
 }
 
 void SignalControllerMock::setShuntStop()

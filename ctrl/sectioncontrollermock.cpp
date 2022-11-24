@@ -27,7 +27,7 @@ void mrw::ctrl::SectionControllerMock::setLock(const Device::LockState lock)
 
 void SectionControllerMock::setDirection(const bool dir)
 {
-	direction = dir;
+	a_is_dir = !dir;
 	emit update();
 }
 
@@ -35,6 +35,12 @@ void SectionControllerMock::setEnds(const bool a, const bool b)
 {
 	a_ends = a;
 	b_ends = b;
+	emit update();
+}
+
+void mrw::ctrl::SectionControllerMock::setCurve(const Position::Curve curve)
+{
+	curve_state = curve;
 	emit update();
 }
 

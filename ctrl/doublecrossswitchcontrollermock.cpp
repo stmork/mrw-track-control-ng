@@ -48,3 +48,8 @@ QString DoubleCrossSwitchControllerMock::name() const
 {
 	return "819";
 }
+
+Position::Curve mrw::ctrl::DoubleCrossSwitchControllerMock::curve() const
+{
+	return Position::Curve::STRAIGHT;
+}

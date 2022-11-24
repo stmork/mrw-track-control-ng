@@ -49,6 +49,11 @@ namespace mrw::ctrl
 		{
 			return part->lock();
 		}
+
+		virtual mrw::model::Position::Curve curve() const override
+		{
+			return part->curve();
+		}
 	};
 }
 

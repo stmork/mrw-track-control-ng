@@ -19,8 +19,8 @@ namespace mrw::ctrl
 	public:
 		explicit SectionController(QObject * parent = nullptr);
 
-		virtual bool  forwardEnds()  const = 0;
-		virtual bool  backwardEnds() const = 0;
+		virtual bool  aEnds()  const = 0;
+		virtual bool  bEnds() const = 0;
 	};
 }
 

@@ -55,6 +55,16 @@ namespace mrw::ctrl
 		virtual mrw::model::Device::LockState lock() const = 0;
 
 		virtual float extensions()   const = 0;
+
+		/**
+		 * This method returns true if the mrw::model::AssemblyPart is
+		 * orientated left to right. So mrw::model::Signal instances have
+		 * isDirection == true and mrw::model::RailPart instances have their
+		 * "a" connector on the left side.
+		 *
+		 * @return True if the mrw::model::AssemblyPart is orientated left to
+		 * right.
+		 */
 		virtual bool  isDirection() const = 0;
 
 		virtual bool isExpandable() const
@@ -66,6 +76,8 @@ namespace mrw::ctrl
 		{
 			return nullptr;
 		}
+
+		virtual mrw::model::Position::Curve curve () const = 0;
 
 	signals:
 		/**

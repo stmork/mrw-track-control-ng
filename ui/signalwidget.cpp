@@ -12,12 +12,36 @@ using namespace mrw::model;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 
+using Curve = Position::Curve;
 
 SignalWidget::SignalWidget(
 	QWidget      *     parent,
 	SignalController * ctrl) :
 	ControllerWidget(parent, ctrl)
 {
+}
+
+void mrw::ui::SignalWidget::computeConnectors()
+{
+	const Curve    curve = base_controller->curve();
+	const unsigned ext   = base_controller->extensions();
+
+	connector_list.clear();
+	if ((curve != Curve::STRAIGHT) && (ext >= Position::FRACTION))
+	{
+		if (base_controller->isDirection())
+		{
+			connector_list.append(QPoint(
+					Position::FRACTION + ext - Position::QUARTER,
+					curve == Curve::RIGHT ? 4 : 0));
+		}
+		else
+		{
+			connector_list.append(QPoint(
+					Position::QUARTER,
+					curve == Curve::LEFT ? 4 : 0));
+		}
+	}
 }
 
 static const QVector<QPointF> points
@@ -33,6 +57,9 @@ void SignalWidget::paint(QPainter & painter)
 	SignalController * signal_controller = controller<SignalController>();
 	QPainterPath       path;
 	QFont              font   = painter.font();
+	QPen               pen;
+	Curve              curve  = extensions() >= Position::FRACTION ?
+		base_controller->curve() : Curve::STRAIGHT;
 
 	const float        shift  = SCALE * extensions() / Position::FRACTION;
 	const float        border = SCALE + shift;
@@ -65,11 +92,29 @@ void SignalWidget::paint(QPainter & painter)
 	}
 
 	// Draw straight part of rail
-	painter.setPen(QPen(sectionColor(base_controller->state()), 20.0));
-	painter.drawLine( -border, 0.0f, border, 0.0f);
+	pen.setCapStyle(Qt::FlatCap);
+	pen.setColor(sectionColor(base_controller->state()));
+	pen.setWidth(RAIL_WIDTH);
+	painter.setPen(pen);
+	painter.drawLine( -border, 0.0f, curve == Curve::STRAIGHT ? border : border - SCALE, 0.0f);
+
+	// Rail bending to neighbour.
+	if (curve != Curve::STRAIGHT)
+	{
+		const float height = SCALE + RAIL_WIDTH / 2;
+		const float x      = border - SCALE / Position::HALF;
+
+		if (curve == Curve::RIGHT)
+		{
+			drawSheared(painter, pen.color(), x,  SCALE, -height, -RAIL_SLOPE);
+		}
+		else
+		{
+			drawSheared(painter, pen.color(), x, -SCALE,  height,  RAIL_SLOPE);
+		}
+	}
 
 	QColor mast_color(RED);
-	QPen   pen;
 	QColor main_color    = main_state ==
 		SignalController::TourState::STOP ? RED : GREEN;
 	QColor distant_color = distant_state ==
@@ -141,4 +186,7 @@ void SignalWidget::paint(QPainter & painter)
 		painter.setBrush(QBrush(main_color));
 		painter.drawEllipse(start + 50, 35, 40, 40);
 	}
+
+	// Draw connector markers
+	drawConnectors(painter);
 }

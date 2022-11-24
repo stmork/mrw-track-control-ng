@@ -58,6 +58,11 @@ namespace mrw::ctrl
 			return section->state();
 		}
 
+		virtual mrw::model::Position::Curve curve() const override
+		{
+			return section->curve();
+		}
+
 		virtual mrw::model::Device::LockState lock() const override;
 
 		virtual float extensions() const override;

@@ -23,16 +23,16 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QRadioButton" name="backwardButton">
+         <widget class="QRadioButton" name="forwardButton">
           <property name="text">
-           <string>rückwärts</string>
+           <string>vorwärts (A links)</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="forwardButton">
+         <widget class="QRadioButton" name="backwardButton">
           <property name="text">
-           <string>vorwärts</string>
+           <string>rückwärts (A rechts)</string>
           </property>
          </widget>
         </item>
@@ -55,7 +55,7 @@
         <item>
          <widget class="QRadioButton" name="leftButton">
           <property name="text">
-           <string>links</string>
+           <string>A</string>
           </property>
          </widget>
         </item>
@@ -68,6 +68,36 @@
         </item>
         <item>
          <widget class="QRadioButton" name="rightButton">
+          <property name="text">
+           <string>B</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_5">
+       <property name="title">
+        <string>Abknickung</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="QRadioButton" name="leftCurveButton">
+          <property name="text">
+           <string>links</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="straightButton">
+          <property name="text">
+           <string>gerade</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rightCurveButton">
           <property name="text">
            <string>rechts</string>
           </property>
@@ -230,7 +260,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>backwardButton</tabstop>
   <tabstop>forwardButton</tabstop>
   <tabstop>extensionBox</tabstop>
   <tabstop>leftButton</tabstop>

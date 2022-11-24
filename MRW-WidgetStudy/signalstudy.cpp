@@ -46,36 +46,24 @@ SignalStudy::SignalStudy(QWidget * parent) :
 		&mock, &SignalControllerMock::setExtension);
 
 	/********************************************************/
-	/*  Signal existance and state                          */
+	/*   Curved state                                       */
 	/********************************************************/
 
-	connect(
-		ui->availableButton_1, &QRadioButton::clicked,
-		&mock, &SignalControllerMock::setShunting);
-	connect(
-		ui->stopButton_1, &QRadioButton::clicked,
-		&mock, &SignalControllerMock::setShuntStop);
-	connect(
-		ui->goButton_1, &QRadioButton::clicked,
-		&mock, &SignalControllerMock::setShuntGo);
-	connect(
-		ui->availableButton_2, &QRadioButton::clicked,
-		&mock, &SignalControllerMock::setDistant);
-	connect(
-		ui->stopButton_2, &QRadioButton::clicked,
-		&mock, &SignalControllerMock::setDistantStop);
-	connect(
-		ui->goButton_2, &QRadioButton::clicked,
-		&mock, &SignalControllerMock::setDistantGo);
-	connect(
-		ui->availableButton_3, &QRadioButton::clicked,
-		&mock, &SignalControllerMock::setMain);
-	connect(
-		ui->stopButton_3, &QRadioButton::clicked,
-		&mock, &SignalControllerMock::setMainStop);
-	connect(
-		ui->goButton_3, &QRadioButton::clicked,
-		&mock, &SignalControllerMock::setMainGo);
+	connect(ui->leftCurveButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setCurve(Position::Curve::LEFT);
+	});
+	connect(ui->straightButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setCurve(Position::Curve::STRAIGHT);
+	});
+	connect(ui->rightCurveButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setCurve(Position::Curve::RIGHT);
+	});
 
 	/********************************************************/
 	/*   Section state                                      */
@@ -108,6 +96,38 @@ SignalStudy::SignalStudy(QWidget * parent) :
 	});
 
 	/********************************************************/
+	/*  Signal existance and state                          */
+	/********************************************************/
+
+	connect(
+		ui->availableButton_1, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setShunting);
+	connect(
+		ui->stopButton_1, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setShuntStop);
+	connect(
+		ui->goButton_1, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setShuntGo);
+	connect(
+		ui->availableButton_2, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setDistant);
+	connect(
+		ui->stopButton_2, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setDistantStop);
+	connect(
+		ui->goButton_2, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setDistantGo);
+	connect(
+		ui->availableButton_3, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setMain);
+	connect(
+		ui->stopButton_3, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setMainStop);
+	connect(
+		ui->goButton_3, &QRadioButton::clicked,
+		&mock, &SignalControllerMock::setMainGo);
+
+	/********************************************************/
 	/*   Repaint connection                                 */
 	/********************************************************/
 
@@ -116,15 +136,22 @@ SignalStudy::SignalStudy(QWidget * parent) :
 		ui->bigSwitchWidget, qOverload<>(&QWidget::repaint));
 	connect(
 		&mock, &SignalControllerMock::extend,
-		ui->bigSwitchWidget, qOverload<>(&SignalWidget::extend));
+		ui->bigSwitchWidget, &SignalWidget::extend);
+	connect(
+		&mock, &SignalControllerMock::computeConnectors,
+		ui->bigSwitchWidget, &SignalWidget::computeConnectors);
 	connect(
 		&mock, &SignalControllerMock::update,
 		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
 	connect(
 		&mock, &SignalControllerMock::extend,
-		ui->smallSwitchWidget, qOverload<>(&SignalWidget::extend));
+		ui->smallSwitchWidget, &SignalWidget::extend);
+	connect(
+		&mock, &SignalControllerMock::computeConnectors,
+		ui->smallSwitchWidget, &SignalWidget::computeConnectors);
 
 	ui->forwardButton->setChecked(true);
+	ui->straightButton->setChecked(true);
 	ui->freeButton->setChecked(true);
 
 	ui->availableButton_1->setChecked(false);

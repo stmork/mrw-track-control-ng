@@ -68,13 +68,13 @@ void ControllerWidget::reposition()
 	setFixedHeight(BaseWidget::SIZE);
 	extend();
 	move(base_controller->position()->point() * BaseWidget::SIZE / Position::FRACTION);
-
-	computeConnectors();
 }
 
 void ControllerWidget::extend()
 {
 	setFixedWidth(height() * (1.0 + extensions() / Position::FRACTION));
+
+	computeConnectors();
 }
 
 void ControllerWidget::mousePressEvent(QMouseEvent * event)
@@ -137,7 +137,7 @@ void ControllerWidget::drawConnectors(QPainter & painter)
 		for (const QPoint & conn : connector_list)
 		{
 			const QPoint point(
-				conn.x() * width() / Position::FRACTION,
+				conn.x() * width() / (base_controller->extensions() + Position::FRACTION),
 				conn.y() * height() / Position::FRACTION);
 
 			painter.fillRect(point.x() - 2, point.y() - 2, 5, 5, Qt::magenta);

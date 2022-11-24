@@ -36,12 +36,12 @@ namespace mrw::ctrl
 			return rail->aIsDir() == section->region()->direction();
 		}
 
-		virtual bool forwardEnds() const override
+		virtual bool aEnds() const override
 		{
 			return rail->advance(true).empty();
 		}
 
-		virtual bool backwardEnds() const override
+		virtual bool bEnds() const override
 		{
 			return rail->advance(false).empty();
 		}
@@ -69,6 +69,11 @@ namespace mrw::ctrl
 		virtual mrw::model::Device::LockState lock() const override
 		{
 			return section->lock();
+		}
+
+		virtual mrw::model::Position::Curve curve() const override
+		{
+			return section->curve();
 		}
 	};
 }

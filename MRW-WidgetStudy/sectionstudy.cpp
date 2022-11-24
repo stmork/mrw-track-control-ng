@@ -66,6 +66,26 @@ SectionStudy::SectionStudy(QWidget * parent) :
 	});
 
 	/********************************************************/
+	/*   Curved state                                       */
+	/********************************************************/
+
+	connect(ui->leftCurveButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setCurve(Position::Curve::LEFT);
+	});
+	connect(ui->straightButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setCurve(Position::Curve::STRAIGHT);
+	});
+	connect(ui->rightCurveButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setCurve(Position::Curve::RIGHT);
+	});
+
+	/********************************************************/
 	/*   Section state                                      */
 	/********************************************************/
 
@@ -139,6 +159,7 @@ SectionStudy::SectionStudy(QWidget * parent) :
 
 	ui->forwardButton->setChecked(true);
 	ui->noButton->setChecked(true);
+	ui->straightButton->setChecked(true);
 	ui->freeButton->setChecked(true);
 	ui->openButton->setChecked(true);
 }

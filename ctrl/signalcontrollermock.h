@@ -27,10 +27,12 @@ namespace mrw::ctrl
 		TourState distant_state  = TourState::STOP;
 		TourState main_state     = TourState::STOP;
 
-		mrw::model::Device::LockState lock_state =
+		mrw::model::Device::LockState lock_state    =
 			mrw::model::Device::LockState::UNLOCKED;
 		mrw::model::SectionState      section_state =
 			mrw::model::SectionState::FREE;
+		mrw::model::Position::Curve   curve_state   =
+			mrw::model::Position::Curve::STRAIGHT;
 
 	public:
 		explicit SignalControllerMock(QObject * parent = nullptr);
@@ -71,11 +73,18 @@ namespace mrw::ctrl
 			return main_state;
 		}
 
+		virtual mrw::model::Position::Curve curve() const override
+		{
+			return curve_state;
+		}
+
 		void setDirection(const bool dir = true);
 		void setSectionState(const mrw::model::SectionState state);
+		void setCurve(const mrw::model::Position::Curve curve);
 
 	signals:
 		void extend();
+		void computeConnectors();
 
 	public slots:
 		void setExtension(const int extension);

@@ -18,7 +18,7 @@ namespace mrw::ctrl
 
 	private:
 		unsigned                       extension     = 0;
-		bool                           direction     = true;
+		bool                           a_is_dir      = false;
 		bool                           a_ends        = false;
 		bool                           b_ends        = false;
 
@@ -26,6 +26,8 @@ namespace mrw::ctrl
 			mrw::model::Device::LockState::UNLOCKED;
 		mrw::model::SectionState       section_state =
 			mrw::model::SectionState::FREE;
+		mrw::model::Position::Curve    curve_state   =
+			mrw::model::Position::Curve::STRAIGHT;
 
 	public:
 		explicit SectionControllerMock(QObject * parent = nullptr);
@@ -44,15 +46,15 @@ namespace mrw::ctrl
 
 		virtual bool isDirection() const override
 		{
-			return direction;
+			return !a_is_dir;
 		}
 
-		virtual bool forwardEnds() const override
+		virtual bool aEnds() const override
 		{
 			return a_ends;
 		}
 
-		virtual bool backwardEnds() const override
+		virtual bool bEnds() const override
 		{
 			return b_ends;
 		}
@@ -62,10 +64,16 @@ namespace mrw::ctrl
 			return extension;
 		}
 
+		virtual mrw::model::Position::Curve curve() const override
+		{
+			return curve_state;
+		}
+
 		void setDirection(const bool dir = true);
 		void setSectionState(const mrw::model::SectionState state);
 		void setLock(const mrw::model::Device::LockState lock);
 		void setEnds(const bool a, const bool b);
+		void setCurve(const mrw::model::Position::Curve curve);
 
 	signals:
 		void extend();

@@ -10,6 +10,8 @@ using namespace mrw::model;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 
+using Curve = Position::Curve;
+
 SectionWidget::SectionWidget(
 	QWidget      *      parent,
 	SectionController * ctrl) :
@@ -22,9 +24,11 @@ void SectionWidget::paint(QPainter & painter)
 	QPainterPath path;
 	QFont        font = painter.font();
 	QPen         pen;
+	Curve        curve  = base_controller->curve();
+
 	const float  border = SCALE * (1.0 + extensions() / Position::FRACTION);
-	const bool   forward_ends  = controller<SectionController>()->forwardEnds();
-	const bool   backward_ends = controller<SectionController>()->backwardEnds();
+	const bool   a_ends = controller<SectionController>()->aEnds();
+	const bool   b_ends = controller<SectionController>()->bEnds();
 
 	rescale(painter,
 		(Position::FRACTION + extensions()) * SCALE / Position::HALF,
@@ -35,20 +39,42 @@ void SectionWidget::paint(QPainter & painter)
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
 	painter.drawText(QRectF(
-			base_controller->isDirection() ? border - 120 : -border,
+			base_controller->isDirection() ? border - 140 : 20 - border,
 			base_controller->isDirection() ? 30 : -80, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
 
-	// Draw point part of switch
+	if (!base_controller->isDirection())
+	{
+//		painter.scale(-1.0f, -1.0f);
+	}
+
+	// Draw rail
 	pen.setCapStyle(Qt::FlatCap);
 	pen.setColor(sectionColor(base_controller->state()));
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
-	painter.drawLine(-border, 0.0f, border, 0.0f);
+	painter.drawLine(curve == Curve::STRAIGHT ? -border : SCALE - border, 0.0f, border, 0.0f);
 
-	if (forward_ends || backward_ends)
+	// Rail bending to neighbour.
+	if (curve != Curve::STRAIGHT)
 	{
-		if (base_controller->isDirection() != backward_ends)
+		const float height = SCALE + RAIL_WIDTH / 2;
+		const float x      = SCALE / Position::HALF - border;
+
+		if (curve == Curve::LEFT)
+		{
+			drawSheared(painter, pen.color(), x,  SCALE, -height,  RAIL_SLOPE);
+		}
+		else
+		{
+			drawSheared(painter, pen.color(), x, -SCALE,  height, -RAIL_SLOPE);
+		}
+	}
+
+	// End rail drawing
+	if (a_ends || b_ends)
+	{
+		if (base_controller->isDirection() != b_ends)
 		{
 			// Draw from left to right but invert horizontally if counter direction.
 			painter.scale(-1.0f, 1.0f);
