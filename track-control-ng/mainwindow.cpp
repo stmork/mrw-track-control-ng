@@ -37,31 +37,38 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent)
 	connect(ui->actionQuit,        &QAction::triggered, QCoreApplication::instance(), &QCoreApplication::quit);
 	connect(ui->actionInclination, &QAction::triggered, this, &MainWindow::incline);
 	connect(ui->actionExpand,      &QAction::triggered, this, &MainWindow::expand);
-	connect(ui->actionBendLeft,    &QAction::triggered, this, &MainWindow::bendLeft);
-	connect(ui->actionBendRight,   &QAction::triggered, this, &MainWindow::bendRight);
 
-	connect(ui->actionRight, &QAction::triggered, [this] ()
+	connect(ui->actionBendLeft,    &QAction::triggered, [this]()
+	{
+		bend(Bending::LEFT);
+	}		);
+	connect(ui->actionBendRight,   &QAction::triggered, [this]()
+	{
+		bend(Bending::RIGHT);
+	}		);
+
+	connect(ui->actionRight,      &QAction::triggered, [this] ()
 	{
 		move(1, 0);
 	});
-	connect(ui->actionLeft, &QAction::triggered, [this] ()
+	connect(ui->actionLeft,       &QAction::triggered, [this] ()
 	{
 		move(-1, 0);
 	});
-	connect(ui->actionUp, &QAction::triggered, [this] ()
+	connect(ui->actionUp,         &QAction::triggered, [this] ()
 	{
 		move(0, -Position::FRACTION);
 	});
-	connect(ui->actionDown, &QAction::triggered, [this] ()
+	connect(ui->actionDown,       &QAction::triggered, [this] ()
 	{
 		move(0, Position::FRACTION);
 	});
 
-	connect(ui->actionExtend, &QAction::triggered, [this] ()
+	connect(ui->actionExtend,     &QAction::triggered, [this] ()
 	{
 		extend(1);
 	});
-	connect(ui->actionReduce, &QAction::triggered, [this] ()
+	connect(ui->actionReduce,     &QAction::triggered, [this] ()
 	{
 		extend(-1);
 	});
@@ -216,48 +223,18 @@ void MainWindow::incline()
 	});
 }
 
-void MainWindow::bendLeft()
+void MainWindow::bend(const Position::Bending bend)
 {
-	for (int i = 0; i < ui->sectionListWidget->count(); i++)
+	edit([bend](BaseController * controller, Position * position)
 	{
-		QListWidgetItem * item       = ui->sectionListWidget->item(i);
-		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
-		Position     *    position   = controller->position();
-
-		if (position != nullptr)
+		if (position->bending() != bend)
 		{
-			if (position->bending() != Bending::LEFT)
-			{
-				position->setBending(Bending::LEFT);
-			}
-			else
-			{
-				position->setBending(Bending::STRAIGHT);
-			}
-			emit controller->update();
+			position->setBending(bend);
 		}
-	}
-}
-
-void MainWindow::bendRight()
-{
-	for (int i = 0; i < ui->sectionListWidget->count(); i++)
-	{
-		QListWidgetItem * item       = ui->sectionListWidget->item(i);
-		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
-		Position     *    position   = controller->position();
-
-		if (position != nullptr)
+		else
 		{
-			if (position->bending() != Bending::RIGHT)
-			{
-				position->setBending(Bending::RIGHT);
-			}
-			else
-			{
-				position->setBending(Bending::STRAIGHT);
-			}
-			emit controller->update();
+			position->setBending(Bending::STRAIGHT);
 		}
-	}
+		emit controller->update();
+	});
 }

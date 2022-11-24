@@ -43,8 +43,7 @@ private slots:
 	void extend(int inc);
 	void expand();
 	void incline();
-	void bendLeft();
-	void bendRight();
+	void bend(const mrw::model::Position::Bending bend);
 
 private:
 	void initRegion();
