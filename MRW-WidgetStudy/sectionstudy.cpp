@@ -149,13 +149,19 @@ SectionStudy::SectionStudy(QWidget * parent) :
 		ui->bigSwitchWidget, qOverload<>(&QWidget::repaint));
 	connect(
 		&mock, &SectionControllerMock::extend,
-		ui->bigSwitchWidget, qOverload<>(&SectionWidget::extend));
+		ui->bigSwitchWidget, &SectionWidget::extend);
+	connect(
+		&mock, &SectionControllerMock::computeConnectors,
+		ui->bigSwitchWidget, &SectionWidget::computeConnectors);
 	connect(
 		&mock, &SectionControllerMock::update,
 		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
 	connect(
 		&mock, &SectionControllerMock::extend,
-		ui->smallSwitchWidget, qOverload<>(&SectionWidget::extend));
+		ui->smallSwitchWidget, &SectionWidget::extend);
+	connect(
+		&mock, &SectionControllerMock::computeConnectors,
+		ui->smallSwitchWidget, &SectionWidget::computeConnectors);
 
 	ui->forwardButton->setChecked(true);
 	ui->noButton->setChecked(true);

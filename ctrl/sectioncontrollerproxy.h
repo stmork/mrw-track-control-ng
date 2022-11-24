@@ -73,7 +73,7 @@ namespace mrw::ctrl
 
 		virtual mrw::model::Position::Bending bending() const override
 		{
-			return section->bending();
+			return rail->bending();
 		}
 	};
 }

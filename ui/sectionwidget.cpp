@@ -19,6 +19,30 @@ SectionWidget::SectionWidget(
 {
 }
 
+void SectionWidget::computeConnectors()
+{
+	const Bending  bending = base_controller->bending();
+	const unsigned ext     = base_controller->extensions();
+
+	connector_list.clear();
+	if ((bending != Bending::STRAIGHT) &&
+		(!controller<SectionController>()->aEnds()))
+	{
+		if (base_controller->isDirection())
+		{
+			connector_list.append(QPoint(
+					Position::FRACTION + ext - Position::QUARTER,
+					bending == Bending::RIGHT ? 4 : 0));
+		}
+		else
+		{
+			connector_list.append(QPoint(
+					Position::QUARTER,
+					bending == Bending::LEFT ? 4 : 0));
+		}
+	}
+}
+
 void SectionWidget::paint(QPainter & painter)
 {
 	QPainterPath path;
@@ -26,9 +50,10 @@ void SectionWidget::paint(QPainter & painter)
 	QFont        font    = painter.font();
 	Bending      bending = base_controller->bending();
 
-	const float  border = SCALE * (1.0 + extensions() / Position::FRACTION);
-	const bool   a_ends = controller<SectionController>()->aEnds();
-	const bool   b_ends = controller<SectionController>()->bEnds();
+	const float  border  = SCALE * (1.0 + extensions() / Position::FRACTION);
+	const bool   a_ends  = controller<SectionController>()->aEnds();
+	const bool   b_ends  = controller<SectionController>()->bEnds();
+	const bool   do_bend = (bending != Bending::STRAIGHT) && (!a_ends);
 
 	rescale(painter,
 		(Position::FRACTION + extensions()) * SCALE / Position::HALF,
@@ -40,12 +65,12 @@ void SectionWidget::paint(QPainter & painter)
 	painter.setFont(font);
 	painter.drawText(QRectF(
 			base_controller->isDirection() ? border - 140 : 20 - border,
-			base_controller->isDirection() ? 30 : -80, 120, FONT_HEIGHT),
+			base_controller->isDirection() == (bending != Bending::LEFT) ? 30 : -80, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
 
 	if (!base_controller->isDirection())
 	{
-//		painter.scale(-1.0f, -1.0f);
+		painter.scale(-1.0f, -1.0f);
 	}
 
 	// Draw rail
@@ -54,11 +79,11 @@ void SectionWidget::paint(QPainter & painter)
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
 	painter.drawLine(
-		bending == Bending::STRAIGHT ? -border : SCALE - border, 0.0f,
+		do_bend ? SCALE - border :  - border, 0.0f,
 		border, 0.0f);
 
 	// Rail bending to neighbour.
-	if (bending != Bending::STRAIGHT)
+	if (do_bend)
 	{
 		const float height = SCALE + RAIL_WIDTH / 2;
 		const float x      = SCALE / Position::HALF - border;
@@ -76,7 +101,7 @@ void SectionWidget::paint(QPainter & painter)
 	// End rail drawing
 	if (a_ends || b_ends)
 	{
-		if (base_controller->isDirection() != b_ends)
+		if (a_ends)
 		{
 			// Draw from left to right but invert horizontally if counter direction.
 			painter.scale(-1.0f, 1.0f);
@@ -90,4 +115,7 @@ void SectionWidget::paint(QPainter & painter)
 		painter.setPen(pen);
 		painter.drawPath(path);
 	}
+
+	// Draw connector markers
+	drawConnectors(painter);
 }

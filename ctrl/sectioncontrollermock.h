@@ -77,6 +77,7 @@ namespace mrw::ctrl
 
 	signals:
 		void extend();
+		void computeConnectors();
 
 	public slots:
 		void setExtension(const int extension);

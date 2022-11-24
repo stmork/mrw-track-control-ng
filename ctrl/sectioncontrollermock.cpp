@@ -30,6 +30,7 @@ void mrw::ctrl::SectionControllerMock::setLock(const Device::LockState lock)
 void SectionControllerMock::setDirection(const bool dir)
 {
 	a_is_dir = !dir;
+	emit computeConnectors();
 	emit update();
 }
 
@@ -43,6 +44,7 @@ void SectionControllerMock::setEnds(const bool a, const bool b)
 void SectionControllerMock::setBending(const Bending bending)
 {
 	bending_state = bending;
+	emit computeConnectors();
 	emit update();
 }
 
@@ -54,6 +56,7 @@ QString SectionControllerMock::name() const
 void SectionControllerMock::setExtension(const int new_extension)
 {
 	extension = new_extension;
-	emit update();
 	emit extend();
+	emit computeConnectors();
+	emit update();
 }

@@ -22,6 +22,8 @@ namespace mrw::ui
 			QWidget            *           parent     = nullptr,
 			mrw::ctrl::SectionController * controller = nullptr);
 
+		virtual void computeConnectors() override;
+
 	protected:
 		void paint(QPainter & painter) override;
 	};

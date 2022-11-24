@@ -222,7 +222,7 @@ void MainWindow::bendLeft()
 	{
 		QListWidgetItem * item       = ui->sectionListWidget->item(i);
 		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
-		Position     *    position = controller->position();
+		Position     *    position   = controller->position();
 
 		if (position != nullptr)
 		{
@@ -245,7 +245,7 @@ void MainWindow::bendRight()
 	{
 		QListWidgetItem * item       = ui->sectionListWidget->item(i);
 		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
-		Position     *    position = controller->position();
+		Position     *    position   = controller->position();
 
 		if (position != nullptr)
 		{
