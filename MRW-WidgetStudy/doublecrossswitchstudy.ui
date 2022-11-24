@@ -83,16 +83,16 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QRadioButton" name="backwardButton">
+         <widget class="QRadioButton" name="forwardButton">
           <property name="text">
-           <string>A links</string>
+           <string>vorwärts (A links)</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="forwardButton">
+         <widget class="QRadioButton" name="backwardButton">
           <property name="text">
-           <string>A rechts</string>
+           <string>rückwärts (A rechts)</string>
           </property>
          </widget>
         </item>
@@ -259,8 +259,8 @@
   <tabstop>adButton</tabstop>
   <tabstop>bcButton</tabstop>
   <tabstop>bdButton</tabstop>
-  <tabstop>backwardButton</tabstop>
   <tabstop>forwardButton</tabstop>
+  <tabstop>backwardButton</tabstop>
   <tabstop>freeButton</tabstop>
   <tabstop>shuntButton</tabstop>
   <tabstop>tourButton</tabstop>

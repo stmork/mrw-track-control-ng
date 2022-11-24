@@ -18,7 +18,7 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
-		bool                                 direction    = false;
+		bool                                 a_is_dir   = false;
 
 		mrw::model::Device::LockState        lock_state =
 			mrw::model::Device::LockState::UNLOCKED;

@@ -148,7 +148,7 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	ui->symbolWidget->setAutoFillBackground(true);
 	ui->symbolWidget->setPalette(pal);
 
-	ui->backwardButton->setChecked(true);
+	ui->forwardButton->setChecked(true);
 	ui->openButton->setChecked(true);
 	ui->leftHandedButton->setChecked(true);
 	ui->freeButton->setChecked(true);

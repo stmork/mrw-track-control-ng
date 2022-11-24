@@ -23,13 +23,13 @@ void DoubleCrossSwitchWidget::computeConnectors()
 	connector_list.clear();
 	if (base_controller->isDirection())
 	{
-		connector_list.append(QPoint(3, 0));
-		connector_list.append(QPoint(1, 4));
+		connector_list.append(QPoint(1, 0));
+		connector_list.append(QPoint(3, 4));
 	}
 	else
 	{
-		connector_list.append(QPoint(3, 4));
-		connector_list.append(QPoint(1, 0));
+		connector_list.append(QPoint(3, 0));
+		connector_list.append(QPoint(1, 4));
 	}
 }
 
@@ -49,10 +49,10 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	painter.setFont(font);
 	painter.drawText(QRectF(
 			false ? -SCALE : -20,
-			base_controller->isDirection() ? 35 : -85, 120, FONT_HEIGHT),
+			base_controller->isDirection() ? -85 : 35, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
 
-	if (base_controller->isDirection())
+	if (!base_controller->isDirection())
 	{
 		// Draw from left to right but invert horizontally if counter direction.
 		painter.scale(-1.0f, 1.0f);
@@ -101,28 +101,28 @@ bool DoubleCrossSwitchWidget::isA() const
 {
 	const unsigned mask  = base_controller->isDirection() ? DoubleCrossSwitch::B_MASK : 0;
 
-	return (switchState() & DoubleCrossSwitch::B_MASK) == mask;
+	return (switchState() & DoubleCrossSwitch::B_MASK) != mask;
 }
 
 bool DoubleCrossSwitchWidget::isB() const
 {
 	const unsigned mask  = base_controller->isDirection() ? DoubleCrossSwitch::B_MASK : 0;
 
-	return (switchState() & DoubleCrossSwitch::B_MASK) != mask;
+	return (switchState() & DoubleCrossSwitch::B_MASK) == mask;
 }
 
 bool DoubleCrossSwitchWidget::isC() const
 {
 	const unsigned mask  = base_controller->isDirection() ? DoubleCrossSwitch::D_MASK : 0;
 
-	return (switchState() & DoubleCrossSwitch::D_MASK) == mask;
+	return (switchState() & DoubleCrossSwitch::D_MASK) != mask;
 }
 
 bool DoubleCrossSwitchWidget::isD() const
 {
 	const unsigned mask  = base_controller->isDirection() ? DoubleCrossSwitch::D_MASK : 0;
 
-	return (switchState() & DoubleCrossSwitch::D_MASK) != mask;
+	return (switchState() & DoubleCrossSwitch::D_MASK) == mask;
 }
 
 unsigned mrw::ui::DoubleCrossSwitchWidget::switchState() const
