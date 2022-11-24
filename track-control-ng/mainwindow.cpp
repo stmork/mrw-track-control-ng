@@ -15,6 +15,8 @@ using namespace mrw::model;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 
+using Bending = Position::Bending;
+
 MainWindow::MainWindow(ModelRepository & repository, QWidget * parent)
 	: QMainWindow(parent)
 	, ui(new Ui::MainWindow), repo(repository)
@@ -35,6 +37,8 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent)
 	connect(ui->actionQuit,        &QAction::triggered, QCoreApplication::instance(), &QCoreApplication::quit);
 	connect(ui->actionInclination, &QAction::triggered, this, &MainWindow::incline);
 	connect(ui->actionExpand,      &QAction::triggered, this, &MainWindow::expand);
+	connect(ui->actionBendLeft,    &QAction::triggered, this, &MainWindow::bendLeft);
+	connect(ui->actionBendRight,   &QAction::triggered, this, &MainWindow::bendRight);
 
 	connect(ui->actionRight, &QAction::triggered, [this] ()
 	{
@@ -118,6 +122,21 @@ void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Po
 	}
 }
 
+void MainWindow::edit(std::function<void(BaseController *, Position *)> editor)
+{
+	for (int i = 0; i < ui->sectionListWidget->count(); i++)
+	{
+		QListWidgetItem * item       = ui->sectionListWidget->item(i);
+		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
+		Position     *    position   = controller->position();
+
+		if (position != nullptr)
+		{
+			editor(controller, position);
+		}
+	}
+}
+
 void MainWindow::itemClicked(QListWidgetItem * item)
 {
 	if (item->listWidget() == nullptr)
@@ -152,34 +171,22 @@ void MainWindow::clearAllItems()
 
 void MainWindow::move(int right, int down)
 {
-	for (int i = 0; i < ui->sectionListWidget->count(); i++)
+	edit([right, down](BaseController * controller, Position * position)
 	{
-		QListWidgetItem * item       = ui->sectionListWidget->item(i);
-		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
-		Position * position = controller->position();
+		position->move(right, down);
 
-		if (position != nullptr)
-		{
-			position->move(right, down);
-			controller->reposition();
-		}
-	}
+		emit controller->reposition();
+	});
 }
 
 void MainWindow::extend(int inc)
 {
-	for (int i = 0; i < ui->sectionListWidget->count(); i++)
+	edit([inc](BaseController * controller, Position * position)
 	{
-		QListWidgetItem * item       = ui->sectionListWidget->item(i);
-		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
-		Position * position = controller->position();
+		position->extend(inc);
 
-		if (position != nullptr)
-		{
-			position->extend(inc);
-			controller->reposition();
-		}
-	}
+		emit controller->reposition();
+	});
 }
 
 void MainWindow::expand()
@@ -202,16 +209,55 @@ void MainWindow::expand()
 
 void MainWindow::incline()
 {
+	edit([](BaseController * controller, Position * position)
+	{
+		position->toggleInclination();
+		controller->update();
+	});
+}
+
+void MainWindow::bendLeft()
+{
 	for (int i = 0; i < ui->sectionListWidget->count(); i++)
 	{
 		QListWidgetItem * item       = ui->sectionListWidget->item(i);
 		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
-		Position * position = controller->position();
+		Position     *    position = controller->position();
 
 		if (position != nullptr)
 		{
-			position->toggleInclination();
-			controller->update();
+			if (position->bending() != Bending::LEFT)
+			{
+				position->setBending(Bending::LEFT);
+			}
+			else
+			{
+				position->setBending(Bending::STRAIGHT);
+			}
+			emit controller->update();
+		}
+	}
+}
+
+void MainWindow::bendRight()
+{
+	for (int i = 0; i < ui->sectionListWidget->count(); i++)
+	{
+		QListWidgetItem * item       = ui->sectionListWidget->item(i);
+		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
+		Position     *    position = controller->position();
+
+		if (position != nullptr)
+		{
+			if (position->bending() != Bending::RIGHT)
+			{
+				position->setBending(Bending::RIGHT);
+			}
+			else
+			{
+				position->setBending(Bending::STRAIGHT);
+			}
+			emit controller->update();
 		}
 	}
 }

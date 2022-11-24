@@ -118,7 +118,7 @@ namespace mrw::model
 		{
 			const int result = ext_count + inc;
 
-			ext_count = std::clamp(result, 0, 20);
+			ext_count = std::clamp(result, 0, 40);
 		}
 
 		inline bool isInclined() const

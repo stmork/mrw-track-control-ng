@@ -222,6 +222,9 @@
     <addaction name="actionExpand"/>
     <addaction name="actionExtend"/>
     <addaction name="actionReduce"/>
+    <addaction name="separator"/>
+    <addaction name="actionBendLeft"/>
+    <addaction name="actionBendRight"/>
    </widget>
    <addaction name="menuDaten"/>
    <addaction name="menuEditieren"/>
@@ -300,6 +303,22 @@
    </property>
    <property name="shortcut">
     <string>-</string>
+   </property>
+  </action>
+  <action name="actionBendLeft">
+   <property name="text">
+    <string>Linksknick</string>
+   </property>
+   <property name="shortcut">
+    <string>L</string>
+   </property>
+  </action>
+  <action name="actionBendRight">
+   <property name="text">
+    <string>Rechtsknick</string>
+   </property>
+   <property name="shortcut">
+    <string>R</string>
    </property>
   </action>
  </widget>

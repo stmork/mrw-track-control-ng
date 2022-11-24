@@ -54,8 +54,8 @@ void SectionWidget::paint(QPainter & painter)
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
 	painter.drawLine(
-				bending == Bending::STRAIGHT ? -border : SCALE - border, 0.0f,
-				border, 0.0f);
+		bending == Bending::STRAIGHT ? -border : SCALE - border, 0.0f,
+		border, 0.0f);
 
 	// Rail bending to neighbour.
 	if (bending != Bending::STRAIGHT)

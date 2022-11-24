@@ -60,7 +60,7 @@ namespace mrw::ctrl
 
 		virtual mrw::model::Position::Bending bending() const override
 		{
-			return section->bending();
+			return base_signal->bending();
 		}
 
 		virtual mrw::model::Device::LockState lock() const override;

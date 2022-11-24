@@ -107,7 +107,7 @@ void Position::write(QSettings & settings)
 	{
 		ext += 'X';
 	}
-	switch(bending_state)
+	switch (bending_state)
 	{
 	case Bending::LEFT:
 		ext += 'L';

@@ -8,6 +8,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <functional>
+
 #include <QMainWindow>
 #include <QListWidgetItem>
 
@@ -41,10 +43,15 @@ private slots:
 	void extend(int inc);
 	void expand();
 	void incline();
+	void bendLeft();
+	void bendRight();
 
 private:
 	void initRegion();
 	void expandBorder(RegionForm * form, mrw::ctrl::BaseController * controller, mrw::model::Position * position);
+	void edit(std::function<void(
+			mrw::ctrl::BaseController *,
+			mrw::model::Position *)> editor);
 
 private:
 	Ui::MainWindow  * ui;
