@@ -40,7 +40,7 @@ void RegularSwitchWidget::computeConnectors()
 	}
 	else
 	{
-		if (ctrl->isDirection() == ctrl->isRightHanded())
+		if (ctrl->isDirection() != ctrl->isRightHanded())
 		{
 			connector_list.append(QPoint(2, 0));
 		}
@@ -72,8 +72,8 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
 	painter.drawText(QRectF(
-			base_controller->isDirection() != is_inclined ? -SCALE : -20,
-			base_controller->isDirection() != is_right_handed ? -80 : 30, 120, FONT_HEIGHT),
+			base_controller->isDirection() == is_inclined ? -SCALE : -20,
+			base_controller->isDirection() == is_right_handed ? -80 : 30, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
 
 	if (is_right_handed != is_inclined)
@@ -81,7 +81,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 		// Draw always left handed but invert vertically if right handed.
 		painter.scale( 1.0f, -1.0f);
 	}
-	if (base_controller->isDirection())
+	if (!base_controller->isDirection())
 	{
 		// Draw from left to right but invert horizontally if counter direction.
 		painter.scale(-1.0f, -1.0f);

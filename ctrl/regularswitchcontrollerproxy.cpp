@@ -35,7 +35,7 @@ bool RegularSwitchControllerProxy::isRightHanded() const
 
 bool RegularSwitchControllerProxy::isDirection() const
 {
-	return part->aIsDir() == part->section()->region()->direction();
+	return part->aIsDir() != part->section()->region()->direction();
 }
 
 bool RegularSwitchControllerProxy::isInclined() const

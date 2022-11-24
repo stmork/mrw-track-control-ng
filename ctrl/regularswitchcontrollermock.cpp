@@ -48,7 +48,7 @@ void mrw::ctrl::RegularSwitchControllerMock::setInclined(const bool incl)
 
 void RegularSwitchControllerMock::setDirection(const bool dir)
 {
-	direction = dir;
+	a_is_dir = !dir;
 	emit computeConnectors();
 	emit update();
 }
@@ -82,10 +82,30 @@ bool RegularSwitchControllerMock::isRightHanded() const
 
 bool RegularSwitchControllerMock::isDirection() const
 {
-	return direction;
+	return !a_is_dir;
 }
 
 QString RegularSwitchControllerMock::name() const
 {
 	return "819";
+}
+
+Position::Curve RegularSwitchControllerMock::curve() const
+{
+	return isRightHanded() ?  Position::Curve::RIGHT : Position::Curve::LEFT;
+}
+
+SectionState RegularSwitchControllerMock::state() const
+{
+	return section_state;
+}
+
+Device::LockState RegularSwitchControllerMock::lock() const
+{
+	return lock_state;
+}
+
+bool RegularSwitchControllerMock::isInclined() const
+{
+	return inclined;
 }

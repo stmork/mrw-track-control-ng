@@ -20,7 +20,7 @@ namespace mrw::ctrl
 	private:
 		bool                  left_handed  = true;
 		bool                  inclined     = false;
-		bool                  direction    = false;
+		bool                  a_is_dir     = false;
 
 		mrw::model::Device::LockState     lock_state =
 			mrw::model::Device::LockState::UNLOCKED;
@@ -36,22 +36,12 @@ namespace mrw::ctrl
 		virtual bool    isRight() const override;
 		virtual bool    isRightHanded() const override;
 		virtual bool    isDirection() const override;
+		virtual bool    isInclined() const override;
 		virtual QString name() const override;
 
-		virtual mrw::model::SectionState state() const override
-		{
-			return section_state;
-		}
-
-		virtual mrw::model::Device::LockState lock() const override
-		{
-			return lock_state;
-		}
-
-		virtual bool isInclined() const override
-		{
-			return inclined;
-		}
+		virtual mrw::model::SectionState      state() const override;
+		virtual mrw::model::Device::LockState lock() const override;
+		virtual mrw::model::Position::Curve   curve() const override;
 
 		void setDirection(const bool dir = true);
 		void setSectionState(const mrw::model::SectionState state);

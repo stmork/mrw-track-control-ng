@@ -139,10 +139,10 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 		&mock, &RegularSwitchControllerMock::computeConnectors,
 		ui->smallSwitchWidget, &RegularSwitchWidget::computeConnectors);
 
+	ui->forwardButton->setChecked(true);
 	ui->leftButton->setChecked(true);
 	ui->openButton->setChecked(true);
 	ui->leftHandedButton->setChecked(true);
-	ui->backwardButton->setChecked(true);
 	ui->freeButton->setChecked(true);
 }
 
