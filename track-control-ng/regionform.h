@@ -30,12 +30,20 @@ class RegionForm : public QWidget
 private:
 	std::vector<mrw::model::RegularSwitch *>     region_reg_switches;
 	std::vector<mrw::model::DoubleCrossSwitch *> region_dc_switches;
+	mrw::model::Region             *             form_region;
 
 	QSize fields;
 
 public:
 	explicit RegionForm(mrw::model::Region * region, QWidget * parent = nullptr);
 	~RegionForm();
+
+	inline mrw::model::Region * region() const
+	{
+		return form_region;
+	}
+
+	void line(std::vector<mrw::model::Position *> & positions, const int y) const;
 
 protected:
 	void changeEvent(QEvent * e) override;

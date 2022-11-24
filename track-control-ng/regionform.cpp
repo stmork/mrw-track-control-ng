@@ -28,6 +28,7 @@ const QPalette RegionForm::background_color(QPalette::Window, Qt::black);
 
 RegionForm::RegionForm(Region * region, QWidget * parent) :
 	QWidget(parent),
+	form_region(region),
 	ui(new Ui::RegionForm)
 {
 	ui->setupUi(this);
@@ -74,6 +75,14 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 RegionForm::~RegionForm()
 {
 	delete ui;
+}
+
+void RegionForm::line(std::vector<Position *> & positions, const int y) const
+{
+	form_region->parts<Position>(positions, [&](const Position * input)
+	{
+		return input->point().y() == y;
+	});
 }
 
 void RegionForm::changeEvent(QEvent * e)

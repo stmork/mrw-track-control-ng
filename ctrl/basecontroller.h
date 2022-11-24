@@ -57,6 +57,11 @@ namespace mrw::ctrl
 		virtual float extensions()   const = 0;
 		virtual bool  isDirection() const = 0;
 
+		virtual bool isExpandable() const
+		{
+			return false;
+		}
+
 		virtual mrw::model::Position * position() const
 		{
 			return nullptr;

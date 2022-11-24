@@ -11,7 +11,10 @@
 #include <QMainWindow>
 #include <QListWidgetItem>
 
+#include <ctrl/basecontroller.h>
+
 #include "modelrepository.h"
+#include "regionform.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -41,6 +44,7 @@ private slots:
 
 private:
 	void initRegion();
+	void expandBorder(RegionForm * form, mrw::ctrl::BaseController * controller, mrw::model::Position * position);
 
 private:
 	Ui::MainWindow  * ui;

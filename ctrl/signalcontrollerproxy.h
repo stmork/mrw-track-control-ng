@@ -43,6 +43,11 @@ namespace mrw::ctrl
 		TourState shunt() const override;
 		TourState main() const override;
 
+		virtual bool isExpandable() const override
+		{
+			return true;
+		}
+
 		virtual mrw::model::Position * position() const override
 		{
 			return base_signal;

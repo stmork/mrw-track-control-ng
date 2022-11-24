@@ -114,3 +114,8 @@ void Position::move(const int right, const int down)
 
 	position += increment;
 }
+
+void Position::setX(const int x)
+{
+	position.setX(x);
+}

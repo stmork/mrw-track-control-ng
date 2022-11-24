@@ -120,11 +120,17 @@ namespace mrw::model
 		 * @param result The result vector collecting the AssembyPart elements
 		 * of type T.
 		 */
-		template <class T> void parts(std::vector<T *> & result)
+		template <class T> void parts(std::vector<T *> & result,
+			std::function<bool(const T * part)> guard = [](const T * part)
+		{
+			(void)part;
+
+			return true;
+		})
 		{
 			for (Section * sub : sections)
 			{
-				sub->parts<T>(result);
+				sub->parts<T>(result, guard);
 			}
 		}
 

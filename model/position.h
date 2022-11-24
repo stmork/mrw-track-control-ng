@@ -75,6 +75,8 @@ namespace mrw::model
 
 		void move(const int right, const int down);
 
+		void setX(const int x);
+
 		/**
 		 * This getter returns the half extension unit of the controlling widget
 		 * size.
@@ -93,7 +95,9 @@ namespace mrw::model
 
 		inline void extend(const int inc = 1)
 		{
-			ext_count += inc;
+			const int result = ext_count + inc;
+
+			ext_count = std::max(result, 0);
 		}
 
 		inline bool isInclined() const
@@ -120,6 +124,20 @@ namespace mrw::model
 		 * @return The key for looking up the logical coordinates
 		 */
 		virtual QString key() const = 0;
+
+		inline int width() const
+		{
+			return FRACTION + ext_count;
+		}
+
+		inline static bool compare(const Position * left, const Position * right)
+		{
+			if (left->position.y() == right->position.y())
+			{
+				return left->position.x() < right->position.x();
+			}
+			return left->position.y() < right->position.y();
+		}
 	};
 }
 

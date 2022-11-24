@@ -82,6 +82,42 @@ void MainWindow::initRegion()
 	}
 }
 
+void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Position * position)
+{
+	std::vector<Position *> positions;
+
+	form->line(positions, position->point().y());
+	std::sort(positions.begin(), positions.end(), &Position::compare);
+
+	for (unsigned i = 0; i < positions.size(); i++)
+	{
+		if (positions[i] == position)
+		{
+			if (i > 0)
+			{
+				const Position * prev = positions[i - 1];
+				const int        x    = prev->point().x() + prev->width();
+
+				position->setX(x);
+			}
+			if (i < positions.size())
+			{
+				const Position * next = positions[i + 1];
+				const int        inc  = next->point().x() - position->point().x() - Position::FRACTION;
+				const int        diff = inc - position->extension();
+
+				position->extend(diff);
+			}
+			else
+			{
+				position->extend(20);
+			}
+			controller->reposition();
+			return;
+		}
+	}
+}
+
 void MainWindow::itemClicked(QListWidgetItem * item)
 {
 	if (item->listWidget() == nullptr)
@@ -148,7 +184,20 @@ void MainWindow::extend(int inc)
 
 void MainWindow::expand()
 {
+	if (ui->sectionListWidget->count() == 1)
+	{
+		QListWidgetItem * item       = ui->sectionListWidget->item(0);
+		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
+		Position     *    position   = controller->position();
 
+		Q_ASSERT(controller != nullptr);
+		if ((position != nullptr) && controller->isExpandable())
+		{
+			RegionForm * form = dynamic_cast<RegionForm *>(ui->regionTabWidget->currentWidget());
+
+			expandBorder(form, controller, position);
+		}
+	}
 }
 
 void MainWindow::incline()

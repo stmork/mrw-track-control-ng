@@ -51,6 +51,11 @@ namespace mrw::ctrl
 			return rail->extension();
 		}
 
+		virtual bool isExpandable() const override
+		{
+			return true;
+		}
+
 		virtual mrw::model::Position * position() const override
 		{
 			return rail;
