@@ -10,7 +10,7 @@ using namespace mrw::model;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 
-using Curve = Position::Curve;
+using Bending = Position::Bending;
 
 SectionWidget::SectionWidget(
 	QWidget      *      parent,
@@ -22,9 +22,9 @@ SectionWidget::SectionWidget(
 void SectionWidget::paint(QPainter & painter)
 {
 	QPainterPath path;
-	QFont        font = painter.font();
 	QPen         pen;
-	Curve        curve  = base_controller->curve();
+	QFont        font    = painter.font();
+	Bending      bending = base_controller->bending();
 
 	const float  border = SCALE * (1.0 + extensions() / Position::FRACTION);
 	const bool   a_ends = controller<SectionController>()->aEnds();
@@ -53,15 +53,17 @@ void SectionWidget::paint(QPainter & painter)
 	pen.setColor(sectionColor(base_controller->state()));
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
-	painter.drawLine(curve == Curve::STRAIGHT ? -border : SCALE - border, 0.0f, border, 0.0f);
+	painter.drawLine(
+				bending == Bending::STRAIGHT ? -border : SCALE - border, 0.0f,
+				border, 0.0f);
 
 	// Rail bending to neighbour.
-	if (curve != Curve::STRAIGHT)
+	if (bending != Bending::STRAIGHT)
 	{
 		const float height = SCALE + RAIL_WIDTH / 2;
 		const float x      = SCALE / Position::HALF - border;
 
-		if (curve == Curve::LEFT)
+		if (bending == Bending::LEFT)
 		{
 			drawSheared(painter, pen.color(), x,  SCALE, -height,  RAIL_SLOPE);
 		}

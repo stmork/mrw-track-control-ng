@@ -9,6 +9,8 @@ using namespace mrw::ui;
 using namespace mrw::ctrl;
 using namespace mrw::model;
 
+using LockState = Device::LockState;
+
 DoubleCrossSwitchWidget::DoubleCrossSwitchWidget(
 	QWidget           *           parent,
 	DoubleCrossSwitchController * ctrl) :
@@ -59,7 +61,7 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	// Draw point lock
 	drawLock(
 		painter,
-		base_controller->lock() == Device::LockState::LOCKED ?
+		base_controller->lock() == LockState::LOCKED ?
 		section_color : WHITE,
 		0, 0);
 
@@ -92,7 +94,7 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 
 bool DoubleCrossSwitchWidget::isLockPending() const
 {
-	return base_controller->lock() == Device::LockState::PENDING;
+	return base_controller->lock() == LockState::PENDING;
 }
 
 bool DoubleCrossSwitchWidget::isA() const

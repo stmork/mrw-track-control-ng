@@ -9,6 +9,8 @@ using namespace mrw::can;
 using namespace mrw::model;
 using namespace mrw::ctrl;
 
+using Bending = Position::Bending;
+
 DoubleCrossSwitchControllerMock::DoubleCrossSwitchControllerMock(QObject * parent) :
 	DoubleCrossSwitchController(parent)
 {
@@ -49,7 +51,7 @@ QString DoubleCrossSwitchControllerMock::name() const
 	return "819";
 }
 
-Position::Curve mrw::ctrl::DoubleCrossSwitchControllerMock::curve() const
+Bending mrw::ctrl::DoubleCrossSwitchControllerMock::bending() const
 {
-	return Position::Curve::STRAIGHT;
+	return Bending::STRAIGHT;
 }

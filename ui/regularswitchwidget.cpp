@@ -13,6 +13,8 @@ using namespace mrw::ui;
 using namespace mrw::ctrl;
 using namespace mrw::model;
 
+using LockState = Device::LockState;
+
 RegularSwitchWidget::RegularSwitchWidget(
 	QWidget         *         parent,
 	RegularSwitchController * ctrl) :
@@ -68,7 +70,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	rescale(painter);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
-	prepareFailed(painter, base_controller->lock() == Device::LockState::FAIL);
+	prepareFailed(painter, base_controller->lock() == LockState::FAIL);
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
 	painter.drawText(QRectF(
@@ -93,7 +95,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	// Draw point lock
 	drawLock(
 		painter,
-		base_controller->lock() == Device::LockState::LOCKED ?
+		base_controller->lock() == LockState::LOCKED ?
 		section_color : WHITE,
 		is_inclined ? -5 : -45, 0);
 
@@ -130,5 +132,5 @@ void RegularSwitchWidget::paint(QPainter & painter)
 
 bool RegularSwitchWidget::isLockPending() const
 {
-	return base_controller->lock() == Device::LockState::PENDING;
+	return base_controller->lock() == LockState::PENDING;
 }

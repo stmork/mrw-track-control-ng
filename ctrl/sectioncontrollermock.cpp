@@ -8,6 +8,8 @@
 using namespace mrw::model;
 using namespace mrw::ctrl;
 
+using Bending = Position::Bending;
+
 SectionControllerMock::SectionControllerMock(QObject * parent) :
 	SectionController(parent)
 {
@@ -38,9 +40,9 @@ void SectionControllerMock::setEnds(const bool a, const bool b)
 	emit update();
 }
 
-void mrw::ctrl::SectionControllerMock::setCurve(const Position::Curve curve)
+void SectionControllerMock::setBending(const Bending bending)
 {
-	curve_state = curve;
+	bending_state = bending;
 	emit update();
 }
 
@@ -49,7 +51,7 @@ QString SectionControllerMock::name() const
 	return "301";
 }
 
-void mrw::ctrl::SectionControllerMock::setExtension(const int new_extension)
+void SectionControllerMock::setExtension(const int new_extension)
 {
 	extension = new_extension;
 	emit update();

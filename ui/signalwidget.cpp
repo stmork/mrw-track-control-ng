@@ -12,7 +12,7 @@ using namespace mrw::model;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 
-using Curve = Position::Curve;
+using Bending = Position::Bending;
 
 SignalWidget::SignalWidget(
 	QWidget      *     parent,
@@ -23,23 +23,23 @@ SignalWidget::SignalWidget(
 
 void mrw::ui::SignalWidget::computeConnectors()
 {
-	const Curve    curve = base_controller->curve();
-	const unsigned ext   = base_controller->extensions();
+	const Bending  bending = base_controller->bending();
+	const unsigned ext     = base_controller->extensions();
 
 	connector_list.clear();
-	if ((curve != Curve::STRAIGHT) && (ext >= Position::FRACTION))
+	if ((bending != Bending::STRAIGHT) && (ext >= Position::FRACTION))
 	{
 		if (base_controller->isDirection())
 		{
 			connector_list.append(QPoint(
 					Position::FRACTION + ext - Position::QUARTER,
-					curve == Curve::RIGHT ? 4 : 0));
+					bending == Bending::RIGHT ? 4 : 0));
 		}
 		else
 		{
 			connector_list.append(QPoint(
 					Position::QUARTER,
-					curve == Curve::LEFT ? 4 : 0));
+					bending == Bending::LEFT ? 4 : 0));
 		}
 	}
 }
@@ -56,10 +56,10 @@ void SignalWidget::paint(QPainter & painter)
 {
 	SignalController * signal_controller = controller<SignalController>();
 	QPainterPath       path;
-	QFont              font   = painter.font();
 	QPen               pen;
-	Curve              curve  = extensions() >= Position::FRACTION ?
-		base_controller->curve() : Curve::STRAIGHT;
+	QFont              font     = painter.font();
+	Bending            bending  = extensions() >= Position::FRACTION ?
+		base_controller->bending() : Bending::STRAIGHT;
 
 	const float        shift  = SCALE * extensions() / Position::FRACTION;
 	const float        border = SCALE + shift;
@@ -96,15 +96,15 @@ void SignalWidget::paint(QPainter & painter)
 	pen.setColor(sectionColor(base_controller->state()));
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
-	painter.drawLine( -border, 0.0f, curve == Curve::STRAIGHT ? border : border - SCALE, 0.0f);
+	painter.drawLine( -border, 0.0f, bending == Bending::STRAIGHT ? border : border - SCALE, 0.0f);
 
 	// Rail bending to neighbour.
-	if (curve != Curve::STRAIGHT)
+	if (bending != Bending::STRAIGHT)
 	{
 		const float height = SCALE + RAIL_WIDTH / 2;
 		const float x      = border - SCALE / Position::HALF;
 
-		if (curve == Curve::RIGHT)
+		if (bending == Bending::RIGHT)
 		{
 			drawSheared(painter, pen.color(), x,  SCALE, -height, -RAIL_SLOPE);
 		}

@@ -31,8 +31,8 @@ namespace mrw::ctrl
 			mrw::model::Device::LockState::UNLOCKED;
 		mrw::model::SectionState      section_state =
 			mrw::model::SectionState::FREE;
-		mrw::model::Position::Curve   curve_state   =
-			mrw::model::Position::Curve::STRAIGHT;
+		mrw::model::Position::Bending bending_state =
+			mrw::model::Position::Bending::STRAIGHT;
 
 	public:
 		explicit SignalControllerMock(QObject * parent = nullptr);
@@ -73,14 +73,14 @@ namespace mrw::ctrl
 			return main_state;
 		}
 
-		virtual mrw::model::Position::Curve curve() const override
+		virtual mrw::model::Position::Bending bending() const override
 		{
-			return curve_state;
+			return bending_state;
 		}
 
 		void setDirection(const bool dir = true);
 		void setSectionState(const mrw::model::SectionState state);
-		void setCurve(const mrw::model::Position::Curve curve);
+		void setBending(const mrw::model::Position::Bending bending);
 
 	signals:
 		void extend();

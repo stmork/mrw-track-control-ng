@@ -48,7 +48,7 @@ namespace mrw::ctrl
 			return lock_state;
 		}
 
-		virtual mrw::model::Position::Curve curve() const override;
+		virtual mrw::model::Position::Bending bending() const override;
 
 		void setSectionState(const mrw::model::SectionState state);
 		void setSwitchState(const mrw::model::DoubleCrossSwitch::State state);

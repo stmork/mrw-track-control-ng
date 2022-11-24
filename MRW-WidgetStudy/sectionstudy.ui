@@ -83,7 +83,7 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
-         <widget class="QRadioButton" name="leftCurveButton">
+         <widget class="QRadioButton" name="leftBendButton">
           <property name="text">
            <string>links</string>
           </property>
@@ -97,7 +97,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="rightCurveButton">
+         <widget class="QRadioButton" name="rightBendButton">
           <property name="text">
            <string>rechts</string>
           </property>

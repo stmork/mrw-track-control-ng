@@ -8,6 +8,8 @@
 using namespace mrw::model;
 using namespace mrw::ctrl;
 
+using Bending = Position::Bending;
+
 RegularSwitchControllerMock::RegularSwitchControllerMock(QObject * parent) :
 	RegularSwitchController(parent)
 {
@@ -90,9 +92,9 @@ QString RegularSwitchControllerMock::name() const
 	return "819";
 }
 
-Position::Curve RegularSwitchControllerMock::curve() const
+Bending RegularSwitchControllerMock::bending() const
 {
-	return isRightHanded() ?  Position::Curve::RIGHT : Position::Curve::LEFT;
+	return isRightHanded() ?  Bending::RIGHT : Bending::LEFT;
 }
 
 SectionState RegularSwitchControllerMock::state() const

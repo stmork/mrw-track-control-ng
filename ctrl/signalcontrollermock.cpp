@@ -8,6 +8,8 @@
 using namespace mrw::model;
 using namespace mrw::ctrl;
 
+using Bending = Position::Bending;
+
 SignalControllerMock::SignalControllerMock(QObject * parent) :
 	SignalController(parent)
 {
@@ -44,9 +46,9 @@ void SignalControllerMock::setSectionState(const SectionState state)
 	emit update();
 }
 
-void SignalControllerMock::setCurve(const Position::Curve curve)
+void SignalControllerMock::setBending(const Bending bending)
 {
-	curve_state = curve;
+	bending_state = bending;
 	emit computeConnectors();
 	emit update();
 }

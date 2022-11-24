@@ -17,10 +17,26 @@ namespace mrw::model
 	 * This class stores the position of the controlling widget onto the GUI.
 	 * It can read coordinates from mrw::util::Settings and can store back into
 	 * the same mrw::util::Settings. The coordiates are comma seperasted. A
-	 * third field may contain additional behavior. The coordinates are in
-	 * standard positions so you have to multiply the position by the pixel
-	 * size of the controlling widget.
-	 * 1. Any 'o' or 'O' character shifts the widget to the right by one half
+	 * third field may contain additional behavior.
+	 *
+	 * The coordinates uses fractional units. The smallest unit is one
+	 * Position::FRACTION. The logical height is always Position::FRACTION in
+	 * height. A normal widget is intended to be quadratical. So the width
+	 * ist normally also in Position::FRACTION units. For long rails it is
+	 * possible to extend the witdth.
+	 *
+	 * When you have the position (3,5) stored in mrw::util::Settings the
+	 * coordinates are (12,20) in Position::FRACTION units.
+	 *
+	 * When drawing the coordinates are scaled into a coordinate system of
+	 * Position::SCALE units. The coordinete (0,0) is centered into a
+	 * squared widget with (-SCALE, -SCALE) as the upper left corner and
+	 * (SCALE, SCALE) as the lower right corner. So its easier to rotate
+	 * the coordinate system in case the counting direction is inverted.
+	 *
+	 * The third field are command sequences to fine tune the widgets
+	 * behaviour.
+	 * 1. Any 'o' or 'O' character shifts the widget to the right by one quarter
 	 * size. Many occurences leads into only one shift.
 	 * 2. Any 'x' or 'X' enlarges the controlling widget by a half standard
 	 * widget size. Many occurences leads into the multiple of them.
@@ -30,11 +46,16 @@ namespace mrw::model
 	class Position
 	{
 	public:
-		enum class Curve
+		/**
+		 * Bending is a special drawing of widgets where the symbolic rail
+		 * swaps into another neighboured widget row. The values are related
+		 * to the counting direction of the displayed component.
+		 */
+		enum class Bending
 		{
-			LEFT,
-			STRAIGHT,
-			RIGHT
+			LEFT,      ///< Bend rail to left.
+			STRAIGHT,  ///< Do not bend anyway.
+			RIGHT      ///< Bend rail to right.
 		};
 
 		static constexpr unsigned FRACTION = 4;
@@ -97,7 +118,7 @@ namespace mrw::model
 		{
 			const int result = ext_count + inc;
 
-			ext_count = std::max(result, 0);
+			ext_count = std::clamp(result, 0, 20);
 		}
 
 		inline bool isInclined() const
@@ -130,6 +151,20 @@ namespace mrw::model
 			return FRACTION + ext_count;
 		}
 
+		/**
+		 * This method compares two positions according to their coordinates.
+		 * The vertical component has more priority than the horizontal one.
+		 * This method can be used to sort a collection using std::sort().
+		 *
+		 * @code
+		 * std::vector<Position *> vector;
+		 *
+		 * std::sort(vector.begin(), vector.end(), &Position::compare);
+		 *
+		 * @param left The lower Position.
+		 * @param right The upper Position.
+		 * @return True if left is lower than the right Position.
+		 */
 		inline static bool compare(const Position * left, const Position * right)
 		{
 			if (left->position.y() == right->position.y())
@@ -139,24 +174,40 @@ namespace mrw::model
 			return left->position.y() < right->position.y();
 		}
 
-		inline Curve curve() const
+		/**
+		 * This returns the actual bending behaviour.
+		 *
+		 * @note This is only implemented for mrw::ui::SignalWidget and
+		 * mrw::ui::SectionWidget.
+		 *
+		 * @return The actual Bending.
+		 */
+		inline Bending bending() const
 		{
-			return curve_state;
+			return bending_state;
 		}
 
-		inline void setCurve(const Curve input)
+		/**
+		 * This sets the bending behaviour.
+		 *
+		 * @note This is only implemented for mrw::ui::SignalWidget and
+		 * mrw::ui::SectionWidget.
+		 *
+		 * @param input
+		 */
+		inline void setBending(const Bending input)
 		{
-			curve_state = input;
+			bending_state = input;
 		}
 
 	private:
 		static unsigned counter;
 
 		QPoint   position;
-		unsigned offset      = 0;
-		unsigned ext_count   = 0;
-		bool     inclined    = false;
-		Curve    curve_state = Curve::STRAIGHT;
+		unsigned offset        = 0;
+		unsigned ext_count     = 0;
+		bool     inclined      = false;
+		Bending  bending_state = Bending::STRAIGHT;
 	};
 }
 

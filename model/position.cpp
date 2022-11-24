@@ -62,6 +62,13 @@ void Position::parse(QSettings & settings, const QString & default_value)
 				offset += QUARTER;
 				break;
 
+			case 'L':
+				bending_state = Bending::LEFT;
+				break;
+			case 'R':
+				bending_state = Bending::RIGHT;
+				break;
+
 			default:
 				// Intentionally do nothing.
 				break;
@@ -100,6 +107,20 @@ void Position::write(QSettings & settings)
 	{
 		ext += 'X';
 	}
+	switch(bending_state)
+	{
+	case Bending::LEFT:
+		ext += 'L';
+		break;
+	case Bending::RIGHT:
+		ext += 'R';
+		break;
+
+	default:
+		// Intentionally do nothing.
+		break;
+	}
+
 	if (!ext.isEmpty())
 	{
 		value += "," + ext;

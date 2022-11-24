@@ -58,9 +58,9 @@ namespace mrw::ctrl
 			return section->state();
 		}
 
-		virtual mrw::model::Position::Curve curve() const override
+		virtual mrw::model::Position::Bending bending() const override
 		{
-			return section->curve();
+			return section->bending();
 		}
 
 		virtual mrw::model::Device::LockState lock() const override;

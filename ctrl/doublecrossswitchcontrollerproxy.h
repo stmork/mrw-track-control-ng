@@ -50,9 +50,9 @@ namespace mrw::ctrl
 			return part->lock();
 		}
 
-		virtual mrw::model::Position::Curve curve() const override
+		virtual mrw::model::Position::Bending bending() const override
 		{
-			return part->curve();
+			return part->bending();
 		}
 	};
 }

@@ -77,7 +77,7 @@ namespace mrw::ctrl
 			return nullptr;
 		}
 
-		virtual mrw::model::Position::Curve curve () const = 0;
+		virtual mrw::model::Position::Bending bending() const = 0;
 
 	signals:
 		/**

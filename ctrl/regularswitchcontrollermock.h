@@ -41,7 +41,7 @@ namespace mrw::ctrl
 
 		virtual mrw::model::SectionState      state() const override;
 		virtual mrw::model::Device::LockState lock() const override;
-		virtual mrw::model::Position::Curve   curve() const override;
+		virtual mrw::model::Position::Bending bending() const override;
 
 		void setDirection(const bool dir = true);
 		void setSectionState(const mrw::model::SectionState state);

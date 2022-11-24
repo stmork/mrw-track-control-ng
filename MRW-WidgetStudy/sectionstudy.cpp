@@ -66,23 +66,23 @@ SectionStudy::SectionStudy(QWidget * parent) :
 	});
 
 	/********************************************************/
-	/*   Curved state                                       */
+	/*   Bended state                                       */
 	/********************************************************/
 
-	connect(ui->leftCurveButton, &QRadioButton::clicked,
+	connect(ui->leftBendButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
-		mock.setCurve(Position::Curve::LEFT);
+		mock.setBending(Position::Bending::LEFT);
 	});
 	connect(ui->straightButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
-		mock.setCurve(Position::Curve::STRAIGHT);
+		mock.setBending(Position::Bending::STRAIGHT);
 	});
-	connect(ui->rightCurveButton, &QRadioButton::clicked,
+	connect(ui->rightBendButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
-		mock.setCurve(Position::Curve::RIGHT);
+		mock.setBending(Position::Bending::RIGHT);
 	});
 
 	/********************************************************/
