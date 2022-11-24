@@ -17,9 +17,9 @@ using namespace mrw::ctrl;
 
 using Bending = Position::Bending;
 
-MainWindow::MainWindow(ModelRepository & repository, QWidget * parent)
-	: QMainWindow(parent)
-	, ui(new Ui::MainWindow), repo(repository)
+MainWindow::MainWindow(ModelRepository & repository, QWidget * parent) :
+	QMainWindow(parent),
+	ui(new Ui::MainWindow), repo(repository)
 {
 	ui->setupUi(this);
 	initRegion();
