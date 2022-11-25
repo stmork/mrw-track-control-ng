@@ -77,7 +77,7 @@ bool RegularSwitchControllerMock::isRight() const
 	return switch_state == RegularSwitch::State::AC;
 }
 
-bool RegularSwitchControllerMock::isRightHanded() const
+bool RegularSwitchControllerMock::isRightBended() const
 {
 	return !left_handed;
 }
@@ -94,7 +94,7 @@ QString RegularSwitchControllerMock::name() const
 
 Bending RegularSwitchControllerMock::bending() const
 {
-	return isRightHanded() ?  Bending::RIGHT : Bending::LEFT;
+	return isRightBended() ?  Bending::RIGHT : Bending::LEFT;
 }
 
 SectionState RegularSwitchControllerMock::state() const

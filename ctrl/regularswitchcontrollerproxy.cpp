@@ -28,9 +28,9 @@ bool RegularSwitchControllerProxy::isRight() const
 	return part->state() == RegularSwitch::State::AC;
 }
 
-bool RegularSwitchControllerProxy::isRightHanded() const
+bool RegularSwitchControllerProxy::isRightBended() const
 {
-	return part->isRightHanded();
+	return part->bending() == Position::Bending::RIGHT;
 }
 
 bool RegularSwitchControllerProxy::isDirection() const

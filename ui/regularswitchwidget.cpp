@@ -29,7 +29,7 @@ void RegularSwitchWidget::computeConnectors()
 	connector_list.clear();
 	if (ctrl->isInclined())
 	{
-		if (ctrl->isRightHanded())
+		if (ctrl->isRightBended())
 		{
 			connector_list.append(QPoint(3, 0));
 			connector_list.append(QPoint(1, 4));
@@ -42,7 +42,7 @@ void RegularSwitchWidget::computeConnectors()
 	}
 	else
 	{
-		if (ctrl->isDirection() != ctrl->isRightHanded())
+		if (ctrl->isDirection() != ctrl->isRightBended())
 		{
 			connector_list.append(QPoint(2, 0));
 		}
@@ -60,7 +60,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	const bool   is_inclined     =
 		controller<RegularSwitchController>()->isInclined();
 	const bool   is_right_handed =
-		controller<RegularSwitchController>()->isRightHanded();
+		controller<RegularSwitchController>()->isRightBended();
 	const bool   is_turn_out     =
 		(controller<RegularSwitchController>()->isLeft() != is_right_handed) != is_inclined;
 

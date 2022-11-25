@@ -9,6 +9,8 @@
 using namespace mrw::can;
 using namespace mrw::model;
 
+using Bending = Position::Bending;
+
 RegularSwitch::RegularSwitch(
 	ModelRailway     *    model_railway,
 	Section       *       model_section,
@@ -19,6 +21,14 @@ RegularSwitch::RegularSwitch(
 	left_prio(   ModelRailway::boolean(element, "bIstBevorzugt", false)),
 	right_prio(  ModelRailway::boolean(element, "cIstBevorzugt", false))
 {
+	if (right_branch)
+	{
+		setBending(Bending::RIGHT);
+	}
+	if (left_branch)
+	{
+		setBending(Bending::LEFT);
+	}
 }
 
 void RegularSwitch::link()

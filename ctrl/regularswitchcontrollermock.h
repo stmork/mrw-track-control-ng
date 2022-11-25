@@ -34,7 +34,7 @@ namespace mrw::ctrl
 
 		virtual bool    isLeft() const override;
 		virtual bool    isRight() const override;
-		virtual bool    isRightHanded() const override;
+		virtual bool    isRightBended() const override;
 		virtual bool    isDirection() const override;
 		virtual bool    isInclined() const override;
 		virtual QString name() const override;
