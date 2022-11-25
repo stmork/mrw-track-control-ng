@@ -67,16 +67,38 @@ namespace mrw::ctrl
 		 */
 		virtual bool  isDirection() const = 0;
 
+		/**
+		 * This method returns true if the controlled widget is expandable.
+		 *
+		 * @note The switches are not expandable only simple rail representing
+		 * widgets.
+		 * @return True if the controlled widget is expandable.
+		 */
 		virtual bool isExpandable() const
 		{
 			return false;
 		}
 
+		/**
+		 * This method returns the view attributes such as position, extension
+		 * and orientation of the mrw::model::AssemblyPart to be rendered.
+		 *
+		 * @return The view attributes.
+		 * @see mrw::model::Position
+		 */
 		virtual mrw::model::Position * position() const
 		{
 			return nullptr;
 		}
 
+		/**
+		 * This method returns the bending nature of the
+		 * mrw::model::AssemblyPart for rendering purposes.
+		 *
+		 * @return The rendering hint concerning the mrw::model::AssembyPart
+		 * to be rendered.
+		 * @see mrw::model::Position::Bending
+		 */
 		virtual mrw::model::Position::Bending bending() const = 0;
 
 	signals:
@@ -86,6 +108,10 @@ namespace mrw::ctrl
 		 * @see mrw::ui::BaseWidget
 		 */
 		void update();
+
+		/**
+		 * This signal causes a recomputation of the paired widget class.
+		 */
 		void reposition();
 	};
 }

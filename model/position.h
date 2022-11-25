@@ -58,9 +58,17 @@ namespace mrw::model
 			RIGHT      ///< Bend rail to right.
 		};
 
+		/** The relative fractional count of a quadratic controlled widget. */
+
 		static constexpr unsigned FRACTION = 4;
+
+		/** The mask to compute fractional part of Position::FRACTION width. */
 		static constexpr unsigned MASK     = FRACTION - 1;
+
+		/** The fractional units of the half controlled widget. */
 		static constexpr unsigned HALF     = FRACTION >> 1;
+
+		/** The fractional units of the quarter of controlled widget. */
 		static constexpr unsigned QUARTER  = FRACTION >> 2;
 
 		Position() = default;
@@ -94,8 +102,21 @@ namespace mrw::model
 		 */
 		void write(QSettings & settings);
 
+		/**
+		 * This method moves the controlled widgets in Position::FRACTION units.
+		 * The given coordinates are deltas which allows negative moving.
+		 *
+		 * @param right The horizontal delta.
+		 * @param down The vertical delta.
+		 */
 		void move(const int right, const int down);
 
+		/**
+		 * This sets the controlled widget to an absolut horizontal position
+		 * in Position::FRACTION units.
+		 *
+		 * @param x The absolut x position in Position::FRACTION units.
+		 */
 		void setX(const int x);
 
 		/**
@@ -109,11 +130,23 @@ namespace mrw::model
 			return ext_count;
 		}
 
+		/**
+		 * This method inverts the inclination flag.
+		 *
+		 * @see isInclined()
+		 */
 		inline void toggleInclination()
 		{
 			inclined = !inclined;
 		}
 
+		/**
+		 * This method extends a rail drawing away from quadratic rendering.
+		 * Negative increments are allowed but the the resulting extends does
+		 * not underflow zero.
+		 *
+		 * @param inc The increment to add to the extension.
+		 */
 		inline void extend(const int inc = 1)
 		{
 			const int result = ext_count + inc;
@@ -121,6 +154,13 @@ namespace mrw::model
 			ext_count = std::clamp(result, 0, 40);
 		}
 
+		/**
+		 * This method returns true if the drawing of a
+		 * mrw::model::RegularSwitch is inclined.
+		 *
+		 * @return True if the drawing of the mrw::model::RegularSwitch is
+		 * inclined.
+		 */
 		inline bool isInclined() const
 		{
 			return inclined;
@@ -146,6 +186,13 @@ namespace mrw::model
 		 */
 		virtual QString key() const = 0;
 
+		/**
+		 * This method returns the width of the controlled widget in
+		 * Position::FRACTION units.
+		 *
+		 * @return The width of the controlled widget in Position::FRACTION
+		 * units.
+		 */
 		inline int width() const
 		{
 			return FRACTION + ext_count;
