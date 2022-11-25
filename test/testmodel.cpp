@@ -230,32 +230,46 @@ void TestModel::testPosition()
 	TestPosition position1;
 	TestPosition position2;
 
+	QVERIFY(position1 == position2);
 	QCOMPARE(position1.point(), QPoint(0, 0));
+	QCOMPARE(position2.point(), QPoint(0, 0));
 	position1.move(4, 7);
+	QVERIFY(position1 != position2);
 	QCOMPARE(position1.point(), QPoint(4, 7));
 	position1.move(-1, -2);
+	QVERIFY(position1 != position2);
 	QCOMPARE(position1.point(), QPoint(3, 5));
 	position1.setX(12);
+	QVERIFY(position1 != position2);
 	QCOMPARE(position1.point(), QPoint(12, 5));
 
-	QCOMPARE(Position::compare(&position1, &position2), false);
-	QCOMPARE(Position::compare(&position2, &position1), true);
+	QVERIFY(position1 != position2);
+	QCOMPARE(Position::less(&position1, &position2), false);
+	QCOMPARE(Position::less(&position2, &position1), true);
 	position2.move(12, 5);
-	QCOMPARE(Position::compare(&position1, &position2), false);
-	QCOMPARE(Position::compare(&position2, &position1), false);
+	QVERIFY(position1 == position2);
+	QCOMPARE(Position::less(&position1, &position2), false);
+	QCOMPARE(Position::less(&position2, &position1), false);
 
+	QVERIFY(position1 == position2);
 	QCOMPARE(position1.isInclined(), false);
 	position1.toggleInclination();
+	QVERIFY(position1 != position2);
 	QCOMPARE(position1.isInclined(), true);
 	position1.toggleInclination();
+	QVERIFY(position1 == position2);
 	QCOMPARE(position1.isInclined(), false);
 
+	QVERIFY(position1 == position2);
 	QCOMPARE(position2.bending(), Bending::STRAIGHT);
 	position2.setBending(Bending::LEFT);
+	QVERIFY(position1 != position2);
 	QCOMPARE(position2.bending(), Bending::LEFT);
 	position2.setBending(Bending::RIGHT);
+	QVERIFY(position1 != position2);
 	QCOMPARE(position2.bending(), Bending::RIGHT);
 	position2.setBending(Bending::STRAIGHT);
+	QVERIFY(position1 == position2);
 	QCOMPARE(position2.bending(), Bending::STRAIGHT);
 
 }

@@ -199,6 +199,51 @@ namespace mrw::model
 		}
 
 		/**
+		 * This method compares this Position instance against to another
+		 * Position instance against equality.
+		 *
+		 * @param other The other Position instance to compare to.
+		 * @return True if both instances have the same value.
+		 */
+		bool operator==(const Position & other) const
+		{
+			return
+				(position      == other.position) &&
+				(ext_count     == other.ext_count) &&
+				(inclined      == other.inclined) &&
+				(bending_state == other.bending_state);
+		}
+
+		/**
+		 * This method compares this Position instance against to another
+		 * Position instance against unequality.
+		 *
+		 * @param other The other Position instance to compare to.
+		 * @return True if both instances have different value.
+		 */
+		bool operator != (const Position & other) const
+		{
+			return !operator ==(other);
+		}
+
+		/**
+		 * This method compares this Position instance and another Position
+		 * instance positions according to their coordinates. The vertical
+		 * component has more priority than the horizontal one.
+		 *
+		 * @param other The other Position instance to compare to.
+		 * @return True if this Position is lower than the other Position.
+		 */
+		bool operator<(const Position & other) const
+		{
+			if (position.y() == other.position.y())
+			{
+				return position.x() < other.position.x();
+			}
+			return position.y() < other.position.y();
+		}
+
+		/**
 		 * This method compares two positions according to their coordinates.
 		 * The vertical component has more priority than the horizontal one.
 		 * This method can be used to sort a collection using std::sort().
@@ -212,13 +257,9 @@ namespace mrw::model
 		 * @param right The upper Position.
 		 * @return True if left is lower than the right Position.
 		 */
-		inline static bool compare(const Position * left, const Position * right)
+		inline static bool less(const Position * left, const Position * right)
 		{
-			if (left->position.y() == right->position.y())
-			{
-				return left->position.x() < right->position.x();
-			}
-			return left->position.y() < right->position.y();
+			return left->operator <(*right);
 		}
 
 		/**

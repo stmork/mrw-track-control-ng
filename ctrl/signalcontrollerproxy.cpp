@@ -29,7 +29,7 @@ SignalControllerProxy::SignalControllerProxy(
 	Q_ASSERT(section_signals.size() > 0);
 
 	// Sort by most significant signal first.
-	std::sort(section_signals.begin(), section_signals.end(), Signal::compare);
+	std::sort(section_signals.begin(), section_signals.end(), Signal::less);
 	base_signal = section_signals[0];
 
 	for (Signal * signal : section_signals)

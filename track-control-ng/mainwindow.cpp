@@ -100,7 +100,7 @@ void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Po
 	std::vector<Position *> positions;
 
 	form->line(positions, position->point().y());
-	std::sort(positions.begin(), positions.end(), &Position::compare);
+	std::sort(positions.begin(), positions.end(), &Position::less);
 
 	for (unsigned i = 0; i < positions.size(); i++)
 	{

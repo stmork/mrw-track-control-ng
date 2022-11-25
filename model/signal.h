@@ -98,7 +98,7 @@ namespace mrw::model
 			return section()->region()->name() + partName();
 		}
 
-		static bool compare(Signal * left, Signal * right);
+		static bool less(Signal * left, Signal * right);
 
 	protected:
 		/**

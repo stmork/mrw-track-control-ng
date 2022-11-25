@@ -168,7 +168,7 @@ void TestNumbering::testSignalSort()
 	std::vector<Signal *> segment_signals;
 
 	model->section(0, 2)->parts < Signal>(segment_signals);
-	std::sort(segment_signals.begin(), segment_signals.end(), Signal::compare);
+	std::sort(segment_signals.begin(), segment_signals.end(), Signal::less);
 
 	QCOMPARE(segment_signals.size(), 5);
 

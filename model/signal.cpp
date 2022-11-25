@@ -80,7 +80,7 @@ void Signal::findPair(const std::vector<Signal *> & section_signals)
 	}
 }
 
-bool Signal::compare(Signal * left, Signal * right)
+bool Signal::less(Signal * left, Signal * right)
 {
 	if (left->direction() == right->direction())
 	{
