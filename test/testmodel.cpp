@@ -4,6 +4,7 @@
 //
 
 #include <QTest>
+#include <QStringLiteral>
 
 #include <can/commands.h>
 #include <model/switchmodulereference.h>
@@ -19,6 +20,8 @@
 using namespace mrw::can;
 using namespace mrw::test;
 using namespace mrw::model;
+
+using Bending = Position::Bending;
 
 TestModel::TestModel(const char * modelname, QObject * parent) :
 	TestModelBase(modelname, parent)
@@ -170,6 +173,91 @@ void TestModel::tesDoubleCrossSwitchStates()
 		QCOMPARE(part->state(), DoubleCrossSwitch::State::BD);
 		QCOMPARE(part->commandState(), SwitchState::SWITCH_STATE_LEFT);
 	}
+}
+
+class TestPosition : public Position
+{
+	const QString text;
+public:
+	static const QString TEST_KEY;
+
+	explicit TestPosition(const QString & input = "") : text(input)
+	{
+	}
+
+	QString key() const override
+	{
+		return text;
+	}
+};
+
+const QString TestPosition::TEST_KEY = "test-key";
+
+void TestModel::testDefaultPosition()
+{
+	TestPosition position(TestPosition::TEST_KEY);
+
+	QCOMPARE(position.bending(), Bending::STRAIGHT);
+	QCOMPARE(position.isInclined(), false);
+	QCOMPARE(position.extension(), 0);
+	QCOMPARE(position.point(), QPoint(0, 0));
+	QCOMPARE(position.key(), TestPosition::TEST_KEY);
+}
+
+void TestModel::testExtension()
+{
+	TestPosition position;
+
+	QCOMPARE(Position::FRACTION, 4);
+	QCOMPARE(position.extension(), 0);
+	QCOMPARE(position.width(), 4);
+	position.extend();
+	QCOMPARE(position.extension(), 1);
+	QCOMPARE(position.width(), 5);
+	position.extend(2);
+	QCOMPARE(position.extension(), 3);
+	QCOMPARE(position.width(), 7);
+	position.extend(-1);
+	QCOMPARE(position.extension(), 2);
+	QCOMPARE(position.width(), 6);
+	position.extend(-4);
+	QCOMPARE(position.extension(), 0);
+	QCOMPARE(position.width(), 4);
+}
+
+void TestModel::testPosition()
+{
+	TestPosition position1;
+	TestPosition position2;
+
+	QCOMPARE(position1.point(), QPoint(0, 0));
+	position1.move(4, 7);
+	QCOMPARE(position1.point(), QPoint(4, 7));
+	position1.move(-1, -2);
+	QCOMPARE(position1.point(), QPoint(3, 5));
+	position1.setX(12);
+	QCOMPARE(position1.point(), QPoint(12, 5));
+
+	QCOMPARE(Position::compare(&position1, &position2), false);
+	QCOMPARE(Position::compare(&position2, &position1), true);
+	position2.move(12, 5);
+	QCOMPARE(Position::compare(&position1, &position2), false);
+	QCOMPARE(Position::compare(&position2, &position1), false);
+
+	QCOMPARE(position1.isInclined(), false);
+	position1.toggleInclination();
+	QCOMPARE(position1.isInclined(), true);
+	position1.toggleInclination();
+	QCOMPARE(position1.isInclined(), false);
+
+	QCOMPARE(position2.bending(), Bending::STRAIGHT);
+	position2.setBending(Bending::LEFT);
+	QCOMPARE(position2.bending(), Bending::LEFT);
+	position2.setBending(Bending::RIGHT);
+	QCOMPARE(position2.bending(), Bending::RIGHT);
+	position2.setBending(Bending::STRAIGHT);
+	QCOMPARE(position2.bending(), Bending::STRAIGHT);
+
 }
 
 void TestModel::testSection(Region * region, Section * section)
