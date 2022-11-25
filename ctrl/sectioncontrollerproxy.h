@@ -29,52 +29,20 @@ namespace mrw::ctrl
 			mrw::model::Rail   *  referenced_rail,
 			QObject       *       parent);
 
+		// Implementations from BaseController
 		virtual QString name() const override;
+		virtual float   extensions() const override;
+		virtual bool    isDirection() const override;
+		virtual bool    isExpandable() const override;
 
-		virtual bool isDirection() const override
-		{
-			return rail->aIsDir() == section->region()->direction();
-		}
+		virtual mrw::model::Position     *    position() const override;
+		virtual mrw::model::SectionState      state() const override;
+		virtual mrw::model::Device::LockState lock() const override;
+		virtual mrw::model::Position::Bending bending() const override;
 
-		virtual bool aEnds() const override
-		{
-			return rail->advance(true).empty();
-		}
-
-		virtual bool bEnds() const override
-		{
-			return rail->advance(false).empty();
-		}
-
-		virtual float extensions() const override
-		{
-			return rail->extension();
-		}
-
-		virtual bool isExpandable() const override
-		{
-			return true;
-		}
-
-		virtual mrw::model::Position * position() const override
-		{
-			return rail;
-		}
-
-		virtual mrw::model::SectionState state() const override
-		{
-			return section->state();
-		}
-
-		virtual mrw::model::Device::LockState lock() const override
-		{
-			return section->lock();
-		}
-
-		virtual mrw::model::Position::Bending bending() const override
-		{
-			return rail->bending();
-		}
+		// Implementations from SectionController
+		virtual bool    aEnds() const override;
+		virtual bool    bEnds() const override;
 	};
 }
 

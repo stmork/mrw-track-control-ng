@@ -27,33 +27,17 @@ namespace mrw::ctrl
 
 		void setSwitch(mrw::model::DoubleCrossSwitch * new_part);
 
-		virtual bool isDirection() const override;
+		// Implementations from BaseController
 		virtual QString name() const override;
+		virtual bool    isDirection() const override;
 
-		virtual mrw::model::Position * position() const override
-		{
-			return part;
-		}
+		virtual mrw::model::Position     *    position() const override;
+		virtual mrw::model::SectionState      state() const override;
+		virtual mrw::model::Device::LockState lock() const override;
+		virtual mrw::model::Position::Bending bending() const override;
 
-		virtual mrw::model::SectionState state() const override
-		{
-			return part->section()->state();
-		}
-
-		virtual mrw::model::DoubleCrossSwitch::State switchState() const override
-		{
-			return part->state();
-		}
-
-		virtual mrw::model::Device::LockState lock() const override
-		{
-			return part->lock();
-		}
-
-		virtual mrw::model::Position::Bending bending() const override
-		{
-			return part->bending();
-		}
+		// Implementations from DoubleCrossSwitchController
+		virtual mrw::model::DoubleCrossSwitch::State switchState() const override;
 	};
 }
 

@@ -18,12 +18,37 @@ DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(
 {
 }
 
+QString DoubleCrossSwitchControllerProxy::name() const
+{
+	return part->name();
+}
+
 bool DoubleCrossSwitchControllerProxy::isDirection() const
 {
 	return part->aIsDir() != part->section()->region()->direction();
 }
 
-QString DoubleCrossSwitchControllerProxy::name() const
+Position * DoubleCrossSwitchControllerProxy::position() const
 {
-	return part->name();
+	return part;
+}
+
+SectionState DoubleCrossSwitchControllerProxy::state() const
+{
+	return part->section()->state();
+}
+
+Device::LockState DoubleCrossSwitchControllerProxy::lock() const
+{
+	return part->lock();
+}
+
+Position::Bending DoubleCrossSwitchControllerProxy::bending() const
+{
+	return part->bending();
+}
+
+DoubleCrossSwitch::State DoubleCrossSwitchControllerProxy::switchState() const
+{
+	return part->state();
 }

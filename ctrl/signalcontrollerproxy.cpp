@@ -56,9 +56,47 @@ SignalControllerProxy::SignalControllerProxy(
 	}
 }
 
+QString SignalControllerProxy::name() const
+{
+	return base_signal->partName();
+}
+
+float SignalControllerProxy::extensions() const
+{
+	return base_signal->extension();
+}
+
 bool SignalControllerProxy::isDirection() const
 {
 	return direction == section->region()->direction();
+}
+
+bool SignalControllerProxy::isExpandable() const
+{
+	return true;
+}
+
+Position * SignalControllerProxy::position() const
+{
+	return base_signal;
+}
+
+SectionState SignalControllerProxy::state() const
+{
+	return section->state();
+}
+
+Device::LockState SignalControllerProxy::lock() const
+{
+	Device * device = dynamic_cast<Device *>(base_signal);
+
+	Q_ASSERT(device != nullptr);
+	return device->lock();
+}
+
+Position::Bending SignalControllerProxy::bending() const
+{
+	return base_signal->bending();
 }
 
 bool SignalControllerProxy::hasShunting() const
@@ -76,27 +114,9 @@ bool SignalControllerProxy::hasMain() const
 	return main_signal != nullptr;
 }
 
-QString SignalControllerProxy::name() const
-{
-	return base_signal->partName();
-}
-
 SignalController::TourState SignalControllerProxy::main() const
 {
 	return TourState::STOP;
-}
-
-Device::LockState mrw::ctrl::SignalControllerProxy::lock() const
-{
-	Device * device = dynamic_cast<Device *>(base_signal);
-
-	Q_ASSERT(device != nullptr);
-	return device->lock();
-}
-
-float SignalControllerProxy::extensions() const
-{
-	return base_signal->extension();
 }
 
 SignalController::TourState SignalControllerProxy::distant() const

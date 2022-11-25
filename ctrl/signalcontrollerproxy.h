@@ -33,39 +33,25 @@ namespace mrw::ctrl
 			const bool            direction,
 			QObject       *       parent);
 
+		// Implementations from BaseController
+		virtual QString name() const override;
+		virtual float   extensions() const override;
 		virtual bool    isDirection() const override;
+		virtual bool    isExpandable() const override;
+
+		virtual mrw::model::Position     *    position() const override;
+		virtual mrw::model::SectionState      state() const override;
+		virtual mrw::model::Device::LockState lock() const override;
+		virtual mrw::model::Position::Bending bending() const override;
+
+		// Implementations from SignalController
 		virtual bool    hasShunting() const override;
 		virtual bool    hasDistant() const override;
 		virtual bool    hasMain() const override;
-		virtual QString name() const override;
 
-		TourState distant() const override;
-		TourState shunt() const override;
-		TourState main() const override;
-
-		virtual bool isExpandable() const override
-		{
-			return true;
-		}
-
-		virtual mrw::model::Position * position() const override
-		{
-			return base_signal;
-		}
-
-		virtual mrw::model::SectionState state() const override
-		{
-			return section->state();
-		}
-
-		virtual mrw::model::Position::Bending bending() const override
-		{
-			return base_signal->bending();
-		}
-
-		virtual mrw::model::Device::LockState lock() const override;
-
-		virtual float extensions() const override;
+		TourState       distant() const override;
+		TourState       shunt() const override;
+		TourState       main() const override;
 	};
 }
 

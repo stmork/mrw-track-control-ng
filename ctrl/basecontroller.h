@@ -35,25 +35,13 @@ namespace mrw::ctrl
 		virtual QString name() const = 0;
 
 		/**
-		 * A controlled Device is always in conjunction with a surrounding
-		 * Section. This method returns the SectionState of this Section.
+		 * This method returns the extensions of the controlled
+		 * mrw::model::AssemblyPart.
 		 *
-		 * @note The controlled Device may be the Section itself.
-		 *
-		 * @return The SectionState.
+		 * @return The extension count of the controlled
+		 * mrw::model::AssemblyPart.
+		 * @see mrw::model::Position::extensions()
 		 */
-		virtual mrw::model::SectionState state() const = 0;
-
-		/**
-		 * This method returns the modification state of the controlled Device.
-		 *
-		 * @return The LockState of the controlled Device.
-		 *
-		 * @see mrw::model::Device::LockState
-		 * @see mrw::model::Device::lock()
-		 */
-		virtual mrw::model::Device::LockState lock() const = 0;
-
 		virtual float extensions()   const = 0;
 
 		/**
@@ -90,6 +78,26 @@ namespace mrw::ctrl
 		{
 			return nullptr;
 		}
+
+		/**
+		 * This method returns the modification state of the controlled Device.
+		 *
+		 * @return The LockState of the controlled Device.
+		 *
+		 * @see mrw::model::Device::LockState
+		 * @see mrw::model::Device::lock()
+		 */
+		virtual mrw::model::Device::LockState lock() const = 0;
+
+		/**
+		 * A controlled Device is always in conjunction with a surrounding
+		 * Section. This method returns the SectionState of this Section.
+		 *
+		 * @note The controlled Device may be the Section itself.
+		 *
+		 * @return The SectionState.
+		 */
+		virtual mrw::model::SectionState state() const = 0;
 
 		/**
 		 * This method returns the bending nature of the
