@@ -6,6 +6,7 @@
 #include <model/modelrailway.h>
 #include <ui/controllerwidget.h>
 #include <ctrl/basecontroller.h>
+#include <ctrl/regularswitchcontroller.h>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -227,7 +228,8 @@ void MainWindow::bend(const Position::Bending bend)
 {
 	edit([bend](BaseController * controller, Position * position)
 	{
-		if (position->bending() != bend)
+		if ((position->bending() != bend) ||
+			(dynamic_cast<RegularSwitchController *>(controller) != nullptr))
 		{
 			position->setBending(bend);
 		}
