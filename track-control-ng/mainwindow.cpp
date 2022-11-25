@@ -27,6 +27,7 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent) :
 
 	connect(ui->clearSection, &QPushButton::clicked, this, &MainWindow::clearSelectedItems);
 	connect(ui->clearAllSections, &QPushButton::clicked, this, &MainWindow::clearAllItems);
+	connect(ui->regionTabWidget, &QTabWidget::currentChanged, this, &MainWindow::clearAllItems);
 
 	QList<ControllerWidget *> widgets = findChildren<ControllerWidget *>();
 
