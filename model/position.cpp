@@ -13,14 +13,40 @@ unsigned Position::counter = 0;
 
 void Position::parse(QSettings & settings, const QString & default_value)
 {
-	QString     pos_key = key().replace(" ", "");
-	QString     value   = settings.value(pos_key, default_value).toString();
+	const QString  pos_key = key().replace(" ", "");
+	const QString  value   = settings.value(pos_key, default_value).toString();
+
+	parse(value);
+}
+
+void Position::write(QSettings & settings)
+{
+	QString pos_key = key().replace(" ", "");
+
+	settings.setValue(pos_key, value());
+}
+
+void Position::move(const int right, const int down)
+{
+	const QPoint increment(right, down);
+
+	position += increment;
+}
+
+void Position::setX(const int x)
+{
+	position.setX(x);
+}
+
+void Position::parse(const QString & value)
+{
 	QStringList tokens  = value.split(",");
+	bool        ok1     = false;
+	bool        ok2     = false;
+	int         x       = 0;
+	int         y       = 0;
+	int         offset  = 0;
 	QPoint      pos;
-	bool        ok1 = false;
-	bool        ok2 = false;
-	int         x   = 0;
-	int         y   = 0;
 
 	if (tokens.size() >= 2)
 	{
@@ -36,6 +62,9 @@ void Position::parse(QSettings & settings, const QString & default_value)
 		counter++;
 	}
 
+	inclined      = false;
+	ext_count     = 0;
+	bending_state = Bending::STRAIGHT;
 	if (tokens.size() >= 3)
 	{
 		for (QChar c : tokens[2])
@@ -79,19 +108,15 @@ void Position::parse(QSettings & settings, const QString & default_value)
 	position.setY(y * FRACTION);
 }
 
-void Position::write(QSettings & settings)
+QString Position::value() const
 {
-	QString pos_key = key().replace(" ", "");
-	QString value   = QString("%1,%2").
+	const int offset = position.x() & MASK;
+	QString   value   = QString("%1,%2").
 		arg(position.x() / FRACTION).
 		arg(position.y() / FRACTION);
-	QString ext;
+	QString   ext;
 
-	offset = position.x() & MASK;
-	if (inclined)
-	{
-		ext += 'i';
-	}
+	// Add fractional offset
 	if (offset == HALF)
 	{
 		ext += 'h';
@@ -103,10 +128,20 @@ void Position::write(QSettings & settings)
 			ext += 'q';
 		}
 	}
+
+	// Add extensions
 	for (unsigned i = 0; i < ext_count; i++)
 	{
 		ext += 'X';
 	}
+
+	// Add inclination
+	if (inclined)
+	{
+		ext += 'i';
+	}
+
+	// Add bending
 	switch (bending_state)
 	{
 	case Bending::LEFT:
@@ -126,17 +161,5 @@ void Position::write(QSettings & settings)
 		value += "," + ext;
 	}
 
-	settings.setValue(pos_key, value);
-}
-
-void Position::move(const int right, const int down)
-{
-	const QPoint increment(right, down);
-
-	position += increment;
-}
-
-void Position::setX(const int x)
-{
-	position.setX(x);
+	return value;
 }

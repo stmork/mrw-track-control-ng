@@ -208,10 +208,11 @@ namespace mrw::model
 		bool operator==(const Position & other) const
 		{
 			return
-				(position      == other.position) &&
-				(ext_count     == other.ext_count) &&
-				(inclined      == other.inclined) &&
-				(bending_state == other.bending_state);
+				(position.x()               == other.position.x()) &&
+				((position.y()) / FRACTION  == (other.position.y() / FRACTION)) &&
+				(ext_count                  == other.ext_count) &&
+				(inclined                   == other.inclined) &&
+				(bending_state              == other.bending_state);
 		}
 
 		/**
@@ -288,11 +289,14 @@ namespace mrw::model
 			bending_state = input;
 		}
 
+	protected:
+		void    parse(const QString & value);
+		QString value() const;
+
 	private:
 		static unsigned counter;
 
 		QPoint   position;
-		unsigned offset        = 0;
 		unsigned ext_count     = 0;
 		bool     inclined      = false;
 		Bending  bending_state = Bending::STRAIGHT;
