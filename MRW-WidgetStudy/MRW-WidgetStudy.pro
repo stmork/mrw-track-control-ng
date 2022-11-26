@@ -11,7 +11,7 @@ SOURCES += \
 	main.cpp \
 	mainwindow.cpp \
 	doublecrossswitchstudy.cpp \
-	sectionstudy.cpp \
+	railstudy.cpp \
 	signalstudy.cpp \
 	switchstudy.cpp \
 	../ctrl/basecontroller.cpp \
@@ -33,7 +33,7 @@ SOURCES += \
 HEADERS += \
 	mainwindow.h \
 	doublecrossswitchstudy.h \
-	sectionstudy.h \
+	railstudy.h \
 	signalstudy.h \
 	switchstudy.h \
 	../ctrl/basecontroller.h \
@@ -55,7 +55,7 @@ HEADERS += \
 FORMS += \
 	doublecrossswitchstudy.ui \
 	mainwindow.ui \
-	sectionstudy.ui \
+	railstudy.ui \
 	signalstudy.ui \
 	switchstudy.ui
 

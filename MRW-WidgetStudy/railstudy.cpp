@@ -3,16 +3,16 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "sectionstudy.h"
+#include "railstudy.h"
 #include "ui_sectionstudy.h"
 
 using namespace mrw::ctrl;
 using namespace mrw::ui;
 using namespace mrw::model;
 
-SectionStudy::SectionStudy(QWidget * parent) :
+RailStudy::RailStudy(QWidget * parent) :
 	QWidget(parent),
-	ui(new Ui::SectionStudy)
+	ui(new Ui::RailStudy)
 {
 	ui->setupUi(this);
 
@@ -170,12 +170,12 @@ SectionStudy::SectionStudy(QWidget * parent) :
 	ui->openButton->setChecked(true);
 }
 
-SectionStudy::~SectionStudy()
+RailStudy::~RailStudy()
 {
 	delete ui;
 }
 
-void SectionStudy::changeEvent(QEvent * e)
+void RailStudy::changeEvent(QEvent * e)
 {
 	QWidget::changeEvent(e);
 	switch (e->type())

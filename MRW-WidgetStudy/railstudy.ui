@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SectionStudy</class>
- <widget class="QWidget" name="SectionStudy">
+ <class>RailStudy</class>
+ <widget class="QWidget" name="RailStudy">
   <property name="geometry">
    <rect>
     <x>0</x>

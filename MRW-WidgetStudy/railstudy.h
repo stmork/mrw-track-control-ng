@@ -5,8 +5,8 @@
 
 #pragma once
 
-#ifndef SECTIONSTUDY_H
-#define SECTIONSTUDY_H
+#ifndef RAILSTUDY_H
+#define RAILSTUDY_H
 
 #include <QWidget>
 
@@ -14,23 +14,22 @@
 
 namespace Ui
 {
-	class SectionStudy;
+	class RailStudy;
 }
 
-class SectionStudy : public QWidget
+class RailStudy : public QWidget
 {
 	Q_OBJECT
 
 public:
-	explicit SectionStudy(QWidget * parent = nullptr);
-	~SectionStudy();
+	explicit RailStudy(QWidget * parent = nullptr);
+	~RailStudy();
 
 protected:
 	void changeEvent(QEvent * e) override;
 
 private:
-	Ui::SectionStudy        *        ui;
-
+	Ui::RailStudy          *         ui;
 	mrw::ctrl::RailControllerMock    mock;
 };
 

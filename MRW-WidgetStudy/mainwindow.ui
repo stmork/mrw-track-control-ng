@@ -38,9 +38,9 @@
         <string>Signal</string>
        </attribute>
       </widget>
-      <widget class="SectionStudy" name="sectionTab">
+      <widget class="RailStudy" name="sectionTab">
        <attribute name="title">
-        <string>Abschnitt</string>
+        <string>Gleis</string>
        </attribute>
       </widget>
      </widget>
@@ -79,9 +79,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>SectionStudy</class>
+   <class>RailStudy</class>
    <extends>QWidget</extends>
-   <header location="global">sectionstudy.h</header>
+   <header location="global">railstudy.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
