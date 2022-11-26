@@ -227,32 +227,43 @@ void TestModel::testDefaultPosition()
 void TestModel::testParsingPosition()
 {
 	TestPosition position;
+	TestPosition copy;
 
 	position.testParse("");
+	copy.testParseValue(position);
+	QCOMPARE(copy, position);
 	QCOMPARE(position.bending(), Bending::STRAIGHT);
 	QCOMPARE(position.isInclined(), false);
 	QCOMPARE(position.extension(), 0);
 	QCOMPARE(position.point(), QPoint(0, 0));
 
 	position.testParse("x,y,i");
+	copy.testParseValue(position);
+	QCOMPARE(copy, position);
 	QCOMPARE(position.bending(), Bending::STRAIGHT);
 	QCOMPARE(position.isInclined(), true);
 	QCOMPARE(position.extension(), 0);
 	QCOMPARE(position.point(), QPoint(4, 0));
 
 	position.testParse("2,3,xxxr");
+	copy.testParseValue(position);
+	QCOMPARE(copy, position);
 	QCOMPARE(position.bending(), Bending::RIGHT);
 	QCOMPARE(position.isInclined(), false);
 	QCOMPARE(position.extension(), 3);
 	QCOMPARE(position.point(), QPoint(8, 12));
 
 	position.testParse("4,5,ql");
+	copy.testParseValue(position);
+	QCOMPARE(copy, position);
 	QCOMPARE(position.bending(), Bending::LEFT);
 	QCOMPARE(position.isInclined(), false);
 	QCOMPARE(position.extension(), 0);
 	QCOMPARE(position.point(), QPoint(17, 20));
 
-	position.testParse("6,7,hrxi");
+	position.testParse("6,7,hrxyi");
+	copy.testParseValue(position);
+	QCOMPARE(copy, position);
 	QCOMPARE(position.bending(), Bending::RIGHT);
 	QCOMPARE(position.isInclined(), true);
 	QCOMPARE(position.extension(), 1);
