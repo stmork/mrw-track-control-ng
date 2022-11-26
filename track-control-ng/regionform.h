@@ -28,8 +28,6 @@ class RegionForm : public QWidget
 	Q_OBJECT
 
 private:
-	std::vector<mrw::model::RegularSwitch *>     region_reg_switches;
-	std::vector<mrw::model::DoubleCrossSwitch *> region_dc_switches;
 	mrw::model::Region             *             form_region;
 
 	QSize fields;
@@ -52,6 +50,8 @@ private:
 	void setupSize(mrw::model::Region * region);
 	void setupSection(mrw::model::Section * section);
 	void setupSignals(mrw::model::Section * section, const bool direction);
+	void setupRegularSwitches(mrw::model::Section * section);
+	void setupDoubleCrossSwitches(mrw::model::Section * section);
 
 	Ui::RegionForm * ui;
 	static const QPalette    background_color;

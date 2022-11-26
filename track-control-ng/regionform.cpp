@@ -43,30 +43,8 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 		setupSection(section);
 		setupSignals(section, true);
 		setupSignals(section, false);
-	}
-
-	region->parts<RegularSwitch>(region_reg_switches);
-	for (RegularSwitch * part : region_reg_switches)
-	{
-		RegularSwitchControllerProxy * ctrl   = new RegularSwitchControllerProxy(part, this);
-		RegularSwitchWidget      *     widget = new RegularSwitchWidget(ui->controlWidget, ctrl);
-
-		ctrl->reposition();
-		connect(
-			ctrl, &BaseController::update,
-			widget, qOverload<>(&BaseWidget::repaint));
-	}
-
-	region->parts<DoubleCrossSwitch>(region_dc_switches);
-	for (DoubleCrossSwitch * part : region_dc_switches)
-	{
-		DoubleCrossSwitchControllerProxy * ctrl   = new DoubleCrossSwitchControllerProxy(part, this);
-		DoubleCrossSwitchWidget      *     widget = new DoubleCrossSwitchWidget(ui->controlWidget, ctrl);
-
-		ctrl->reposition();
-		connect(
-			ctrl, &BaseController::update,
-			widget, qOverload<>(&BaseWidget::repaint));
+		setupRegularSwitches(section);
+		setupDoubleCrossSwitches(section);
 	}
 
 	setupSize(region);
@@ -98,7 +76,7 @@ void RegionForm::changeEvent(QEvent * e)
 	}
 }
 
-void RegionForm::setupSize(mrw::model::Region * region)
+void RegionForm::setupSize(Region * region)
 {
 	std::vector<Position *> positions;
 	int xMax = 20;
@@ -152,6 +130,40 @@ void RegionForm::setupSignals(Section * section, const bool direction)
 	{
 		SignalControllerProxy * ctrl   = new SignalControllerProxy(section, direction, this);
 		SignalWidget      *     widget = new SignalWidget(ui->controlWidget, ctrl);
+
+		ctrl->reposition();
+		connect(
+			ctrl, &BaseController::update,
+			widget, qOverload<>(&BaseWidget::repaint));
+	}
+}
+
+void RegionForm::setupRegularSwitches(Section * section)
+{
+	std::vector<RegularSwitch *>     switches;
+
+	section->parts<RegularSwitch>(switches);
+	for (RegularSwitch * part : switches)
+	{
+		RegularSwitchControllerProxy * ctrl   = new RegularSwitchControllerProxy(part, this);
+		RegularSwitchWidget      *     widget = new RegularSwitchWidget(ui->controlWidget, ctrl);
+
+		ctrl->reposition();
+		connect(
+			ctrl, &BaseController::update,
+			widget, qOverload<>(&BaseWidget::repaint));
+	}
+}
+
+void RegionForm::setupDoubleCrossSwitches(Section * section)
+{
+	std::vector<DoubleCrossSwitch *> switches;
+
+	section->parts<DoubleCrossSwitch>(switches);
+	for (DoubleCrossSwitch * part : switches)
+	{
+		DoubleCrossSwitchControllerProxy * ctrl   = new DoubleCrossSwitchControllerProxy(part, this);
+		DoubleCrossSwitchWidget      *     widget = new DoubleCrossSwitchWidget(ui->controlWidget, ctrl);
 
 		ctrl->reposition();
 		connect(
