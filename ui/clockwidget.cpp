@@ -14,10 +14,9 @@ using namespace mrw::util;
 
 ClockWidget::ClockWidget(QWidget * parent) : BaseWidget(parent)
 {
-	connect(&ClockService::instance(), &ClockService::Hz1, [this] ()
-	{
-		update();
-	});
+	connect(
+		&ClockService::instance(), &ClockService::Hz1,
+		this, qOverload<>(&QWidget::update));
 }
 
 void ClockWidget::paint(QPainter & painter)

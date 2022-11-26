@@ -18,22 +18,10 @@ ClockService::ClockService() : QObject(nullptr)
 	timer_8hz.setInterval(125);
 	timer_8hz.setSingleShot(false);
 
-	connect(&timer_1hz, &QTimer::timeout, [this] ()
-	{
-		emit Hz1();
-	} );
-	connect(&timer_2hz, &QTimer::timeout, [this] ()
-	{
-		emit Hz2();
-	} );
-	connect(&timer_4hz, &QTimer::timeout, [this] ()
-	{
-		emit Hz4();
-	} );
-	connect(&timer_8hz, &QTimer::timeout, [this] ()
-	{
-		emit Hz8();
-	} );
+	connect(&timer_1hz, &QTimer::timeout, this, &ClockService::Hz1);
+	connect(&timer_2hz, &QTimer::timeout, this, &ClockService::Hz2);
+	connect(&timer_4hz, &QTimer::timeout, this, &ClockService::Hz4);
+	connect(&timer_8hz, &QTimer::timeout, this, &ClockService::Hz8);
 
 	timer_1hz.start();
 	timer_2hz.start();
