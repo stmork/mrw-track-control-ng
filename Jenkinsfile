@@ -12,7 +12,7 @@ pipeline
 			steps
 			{
 				sh """
-				rm -rf doc lcov-out
+				rm -rf doc lcov-out */moc_* */ui_* */*.o
 				test -f Makefile && make clean distclean
 				qmake -r CONFIG+=gcov
 				make -j
