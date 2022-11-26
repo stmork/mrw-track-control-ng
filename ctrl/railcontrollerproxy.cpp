@@ -24,7 +24,7 @@ RailControllerProxy::RailControllerProxy(
 
 QString RailControllerProxy::name() const
 {
-	return section->name();
+	return rail->partName();
 }
 
 float RailControllerProxy::extensions() const

@@ -21,6 +21,7 @@ SOURCES += \
 	../ctrl/railcontrollerproxy.cpp \
 	../ctrl/signalcontroller.cpp \
 	../ctrl/signalcontrollerproxy.cpp \
+	../ctrl/sectioncontroller.cpp \
 	../ui/basewidget.cpp \
 	../ui/controllerwidget.cpp \
 	../ui/barwidget.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
 	../ctrl/railcontrollerproxy.h \
 	../ctrl/signalcontroller.h \
 	../ctrl/signalcontrollerproxy.h \
+	../ctrl/sectioncontroller.h \
 	../ui/basewidget.h \
 	../ui/controllerwidget.h \
 	../ui/barwidget.h \

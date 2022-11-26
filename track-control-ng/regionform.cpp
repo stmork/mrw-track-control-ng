@@ -38,13 +38,14 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 
 	for (size_t s = 0; s < region->sectionCount(); s++)
 	{
-		Section * section = region->section(s);
+		Section      *      section    = region->section(s);
+		SectionController * controller = new SectionController(section, this);
 
-		setupSection(section);
-		setupSignals(section, true);
-		setupSignals(section, false);
-		setupRegularSwitches(section);
-		setupDoubleCrossSwitches(section);
+		setupRails(controller);
+		setupSignals(controller, true);
+		setupSignals(controller, false);
+		setupRegularSwitches(controller);
+		setupDoubleCrossSwitches(controller);
 	}
 
 	setupSize(region);
@@ -99,27 +100,31 @@ void RegionForm::setupSize(Region * region)
 		yMax * BaseWidget::SIZE / Position::FRACTION + 100);
 }
 
-void RegionForm::setupSection(Section * section)
+void RegionForm::setupRails(SectionController * controller)
 {
-	std::vector<Rail *> rails;
+	Section       *      section = controller->section();
+	std::vector<Rail *>  rails;
 
 	section->parts<Rail>(rails);
-
 	for (Rail * rail : rails)
 	{
 		RailControllerProxy * ctrl   = new RailControllerProxy(section, rail, this);
-		RailWidget    *    widget = new RailWidget(ui->controlWidget, ctrl);
+		RailWidget      *     widget = new RailWidget(ui->controlWidget, ctrl);
 
 		ctrl->reposition();
 		connect(
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
+		connect(
+			controller, &BaseController::update, ctrl,
+			&BaseController::update);
 	}
 }
 
-void RegionForm::setupSignals(Section * section, const bool direction)
+void RegionForm::setupSignals(SectionController * controller, const bool direction)
 {
-	std::vector<Signal *> section_signals;
+	Section        *       section = controller->section();
+	std::vector<Signal *>  section_signals;
 
 	section->parts<Signal>(section_signals, [direction] (const Signal * input)
 	{
@@ -135,12 +140,16 @@ void RegionForm::setupSignals(Section * section, const bool direction)
 		connect(
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
+		connect(
+			controller, &BaseController::update, ctrl,
+			&BaseController::update);
 	}
 }
 
-void RegionForm::setupRegularSwitches(Section * section)
+void RegionForm::setupRegularSwitches(SectionController * controller)
 {
-	std::vector<RegularSwitch *>     switches;
+	Section           *           section = controller->section();
+	std::vector<RegularSwitch *>  switches;
 
 	section->parts<RegularSwitch>(switches);
 	for (RegularSwitch * part : switches)
@@ -152,12 +161,16 @@ void RegionForm::setupRegularSwitches(Section * section)
 		connect(
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
+		connect(
+			controller, &BaseController::update, ctrl,
+			&BaseController::update);
 	}
 }
 
-void RegionForm::setupDoubleCrossSwitches(Section * section)
+void RegionForm::setupDoubleCrossSwitches(SectionController * controller)
 {
-	std::vector<DoubleCrossSwitch *> switches;
+	Section             *             section = controller->section();
+	std::vector<DoubleCrossSwitch *>  switches;
 
 	section->parts<DoubleCrossSwitch>(switches);
 	for (DoubleCrossSwitch * part : switches)
@@ -169,5 +182,8 @@ void RegionForm::setupDoubleCrossSwitches(Section * section)
 		connect(
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
+		connect(
+			controller, &BaseController::update, ctrl,
+			&BaseController::update);
 	}
 }

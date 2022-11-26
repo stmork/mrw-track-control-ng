@@ -20,6 +20,7 @@ SOURCES +=  \
 	railcontroller.cpp \
 	railcontrollermock.cpp \
 	railcontrollerproxy.cpp \
+	sectioncontroller.cpp \
 	signalcontroller.cpp \
 	signalcontrollermock.cpp \
 	signalcontrollerproxy.cpp
@@ -35,6 +36,7 @@ HEADERS +=  \
 	railcontroller.h \
 	railcontrollermock.h \
 	railcontrollerproxy.h \
+	sectioncontroller.h \
 	signalcontroller.h \
 	signalcontrollermock.h \
 	signalcontrollerproxy.h

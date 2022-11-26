@@ -17,6 +17,7 @@
 #include <model/section.h>
 #include <model/regularswitch.h>
 #include <model/doublecrossswitch.h>
+#include <ctrl/sectioncontroller.h>
 
 namespace Ui
 {
@@ -48,10 +49,10 @@ protected:
 
 private:
 	void setupSize(mrw::model::Region * region);
-	void setupSection(mrw::model::Section * section);
-	void setupSignals(mrw::model::Section * section, const bool direction);
-	void setupRegularSwitches(mrw::model::Section * section);
-	void setupDoubleCrossSwitches(mrw::model::Section * section);
+	void setupRails(mrw::ctrl::SectionController * controller);
+	void setupSignals(mrw::ctrl::SectionController * controller, const bool direction);
+	void setupRegularSwitches(mrw::ctrl::SectionController * controller);
+	void setupDoubleCrossSwitches(mrw::ctrl::SectionController * controller);
 
 	Ui::RegionForm * ui;
 	static const QPalette    background_color;
