@@ -11,10 +11,13 @@
 #include <model/section.h>
 #include <model/signal.h>
 #include <ctrl/signalcontroller.h>
+#include <ctrl/controllerregistrand.h>
 
 namespace mrw::ctrl
 {
-	class SignalControllerProxy : public SignalController
+	class SignalControllerProxy :
+		public SignalController,
+		public ControllerRegistrand
 	{
 		Q_OBJECT
 
@@ -32,6 +35,7 @@ namespace mrw::ctrl
 			mrw::model::Section * parent_section,
 			const bool            direction,
 			QObject       *       parent);
+		virtual ~SignalControllerProxy();
 
 		// Implementations from BaseController
 		virtual QString name() const override;

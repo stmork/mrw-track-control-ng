@@ -8,6 +8,8 @@
 #ifndef MRW_CAN_TYPES_H
 #define MRW_CAN_TYPES_H
 
+#include <cstdint>
+
 namespace mrw::can
 {
 	/**

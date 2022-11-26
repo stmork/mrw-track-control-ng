@@ -8,12 +8,15 @@
 #ifndef MRW_CTRL_DOUBLECROSSSWITCHCONTROLLERPROXY_H
 #define MRW_CTRL_DOUBLECROSSSWITCHCONTROLLERPROXY_H
 
-#include <ctrl/doublecrossswitchcontroller.h>
 #include <model/doublecrossswitch.h>
+#include <ctrl/doublecrossswitchcontroller.h>
+#include <ctrl/controllerregistrand.h>
 
 namespace mrw::ctrl
 {
-	class DoubleCrossSwitchControllerProxy : public DoubleCrossSwitchController
+	class DoubleCrossSwitchControllerProxy :
+		public DoubleCrossSwitchController,
+		public ControllerRegistrand
 	{
 		Q_OBJECT
 
@@ -24,6 +27,7 @@ namespace mrw::ctrl
 		explicit DoubleCrossSwitchControllerProxy(
 			mrw::model::DoubleCrossSwitch * new_part,
 			QObject            *            parent = nullptr);
+		virtual ~DoubleCrossSwitchControllerProxy();
 
 		void setSwitch(mrw::model::DoubleCrossSwitch * new_part);
 

@@ -4,8 +4,9 @@
 //
 
 #include <can/commands.h>
-#include <ctrl/signalcontrollerproxy.h>
 #include <model/region.h>
+#include <ctrl/signalcontrollerproxy.h>
+#include <ctrl/controllerregistry.h>
 
 using namespace mrw::can;
 using namespace mrw::ctrl;
@@ -34,6 +35,8 @@ SignalControllerProxy::SignalControllerProxy(
 
 	for (Signal * signal : section_signals)
 	{
+		ControllerRegistry::instance().registerController(dynamic_cast<Device *>(signal), this);
+
 		switch (signal->type())
 		{
 		case Signal::SHUNT_SIGNAL:
@@ -53,7 +56,18 @@ SignalControllerProxy::SignalControllerProxy(
 			shunt_signal = signal;
 			break;
 		}
+
 	}
+}
+
+mrw::ctrl::SignalControllerProxy::~SignalControllerProxy()
+{
+	ControllerRegistry::instance().unregisterController(
+		dynamic_cast<Device *>(main_signal));
+	ControllerRegistry::instance().unregisterController(
+		dynamic_cast<Device *>(distant_signal));
+	ControllerRegistry::instance().unregisterController(
+		dynamic_cast<Device *>(shunt_signal));
 }
 
 QString SignalControllerProxy::name() const

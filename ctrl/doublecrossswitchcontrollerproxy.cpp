@@ -3,8 +3,9 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include <ctrl/doublecrossswitchcontrollerproxy.h>
 #include <model/region.h>
+#include <ctrl/doublecrossswitchcontrollerproxy.h>
+#include <ctrl/controllerregistry.h>
 
 using namespace mrw::can;
 using namespace mrw::model;
@@ -16,6 +17,12 @@ DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(
 	DoubleCrossSwitchController(parent),
 	part(new_part)
 {
+	ControllerRegistry::instance().registerController(part, this);
+}
+
+mrw::ctrl::DoubleCrossSwitchControllerProxy::~DoubleCrossSwitchControllerProxy()
+{
+	ControllerRegistry::instance().unregisterController(part);
 }
 
 QString DoubleCrossSwitchControllerProxy::name() const

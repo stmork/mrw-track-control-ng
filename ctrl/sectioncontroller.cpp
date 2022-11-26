@@ -3,7 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "sectioncontroller.h"
+#include <ctrl/sectioncontroller.h>
+#include <ctrl/controllerregistry.h>
 
 using namespace mrw::model;
 using namespace mrw::ctrl;
@@ -14,6 +15,12 @@ SectionController::SectionController(
 	BaseController(parent),
 	ctrl_section(input)
 {
+	ControllerRegistry::instance().registerController(ctrl_section, this);
+}
+
+SectionController::~SectionController()
+{
+	ControllerRegistry::instance().unregisterController(ctrl_section);
 }
 
 Section * SectionController::section() const

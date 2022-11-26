@@ -8,12 +8,15 @@
 #ifndef MRW_CTRL_REGULARSWITCHCONTROLLERPROXY_H
 #define MRW_CTRL_REGULARSWITCHCONTROLLERPROXY_H
 
-#include <ctrl/regularswitchcontroller.h>
 #include <model/regularswitch.h>
+#include <ctrl/regularswitchcontroller.h>
+#include <ctrl/controllerregistrand.h>
 
 namespace mrw::ctrl
 {
-	class RegularSwitchControllerProxy : public RegularSwitchController
+	class RegularSwitchControllerProxy :
+		public RegularSwitchController,
+		public ControllerRegistrand
 	{
 		Q_OBJECT
 
@@ -24,6 +27,7 @@ namespace mrw::ctrl
 		explicit RegularSwitchControllerProxy(
 			mrw::model::RegularSwitch * new_part,
 			QObject          *          parent = nullptr);
+		virtual ~RegularSwitchControllerProxy();
 
 		// Implementations from BaseController
 		virtual QString name() const override;

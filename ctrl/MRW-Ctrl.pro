@@ -11,6 +11,8 @@ include(../common.pri)
 
 SOURCES +=  \
 	basecontroller.cpp \
+	controllerregistrand.cpp \
+	controllerregistry.cpp \
 	regularswitchcontroller.cpp \
 	regularswitchcontrollermock.cpp \
 	regularswitchcontrollerproxy.cpp \
@@ -27,6 +29,8 @@ SOURCES +=  \
 
 HEADERS +=  \
 	basecontroller.h \
+	controllerregistrand.h \
+	controllerregistry.h \
 	regularswitchcontroller.h \
 	regularswitchcontrollermock.h \
 	regularswitchcontrollerproxy.h \

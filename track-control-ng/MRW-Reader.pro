@@ -13,6 +13,8 @@ SOURCES += \
 	modelrepository.cpp \
 	regionform.cpp \
 	../ctrl/basecontroller.cpp \
+	../ctrl/controllerregistrand.cpp \
+	../ctrl/controllerregistry.cpp \
 	../ctrl/regularswitchcontroller.cpp \
 	../ctrl/regularswitchcontrollerproxy.cpp \
 	../ctrl/doublecrossswitchcontroller.cpp \
@@ -38,6 +40,8 @@ HEADERS += \
 	modelrepository.h \
 	regionform.h \
 	../ctrl/basecontroller.h \
+	../ctrl/controllerregistrand.h \
+	../ctrl/controllerregistry.h \
 	../ctrl/regularswitchcontroller.h \
 	../ctrl/regularswitchcontrollerproxy.h \
 	../ctrl/doublecrossswitchcontroller.h \

@@ -8,12 +8,15 @@
 #ifndef MRW_CTRL_SECTIONCONTROLLER_H
 #define MRW_CTRL_SECTIONCONTROLLER_H
 
-#include <ctrl/basecontroller.h>
 #include <model/section.h>
+#include <ctrl/basecontroller.h>
+#include <ctrl/controllerregistrand.h>
 
 namespace mrw::ctrl
 {
-	class SectionController : public mrw::ctrl::BaseController
+	class SectionController :
+		public BaseController,
+		public ControllerRegistrand
 	{
 		Q_OBJECT
 
@@ -24,6 +27,7 @@ namespace mrw::ctrl
 		explicit SectionController(
 			mrw::model::Section * input,
 			QObject       *       parent = nullptr);
+		virtual ~SectionController();
 
 		operator mrw::model::Section * () const;
 

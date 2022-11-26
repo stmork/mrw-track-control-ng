@@ -3,8 +3,9 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include <ctrl/regularswitchcontrollerproxy.h>
 #include <model/region.h>
+#include <ctrl/regularswitchcontrollerproxy.h>
+#include <ctrl/controllerregistry.h>
 
 using namespace mrw::can;
 using namespace mrw::ctrl;
@@ -16,6 +17,12 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 	RegularSwitchController(parent),
 	part(new_part)
 {
+	ControllerRegistry::instance().registerController(part, this);
+}
+
+mrw::ctrl::RegularSwitchControllerProxy::~RegularSwitchControllerProxy()
+{
+	ControllerRegistry::instance().unregisterController(part);
 }
 
 QString RegularSwitchControllerProxy::name() const
