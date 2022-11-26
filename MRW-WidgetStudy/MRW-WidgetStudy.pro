@@ -25,9 +25,9 @@ SOURCES += \
 	../ctrl/signalcontrollermock.cpp \
 	../ui/basewidget.cpp \
 	../ui/controllerwidget.cpp \
-	../ui/doublecrossswitchwidget.cpp \
 	../ui/regularswitchwidget.cpp \
-	../ui/sectionwidget.cpp \
+	../ui/doublecrossswitchwidget.cpp \
+	../ui/railwidget.cpp \
 	../ui/signalwidget.cpp
 
 HEADERS += \
@@ -47,9 +47,9 @@ HEADERS += \
 	../ctrl/signalcontrollermock.h \
 	../ui/basewidget.h \
 	../ui/controllerwidget.h \
-	../ui/doublecrossswitchwidget.h \
 	../ui/regularswitchwidget.h \
-	../ui/sectionwidget.h \
+	../ui/doublecrossswitchwidget.h \
+	../ui/railwidget.h \
 	../ui/signalwidget.h
 
 FORMS += \

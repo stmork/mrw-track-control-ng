@@ -5,20 +5,20 @@
 
 #pragma once
 
-#ifndef MRW_UI_SECTIONWIDGET_H
-#define MRW_UI_SECTIONWIDGET_H
+#ifndef MRW_UI_RAILWIDGET_H
+#define MRW_UI_RAILWIDGET_H
 
 #include <ui/controllerwidget.h>
 #include <ctrl/railcontroller.h>
 
 namespace mrw::ui
 {
-	class SectionWidget : public ControllerWidget
+	class RailWidget : public ControllerWidget
 	{
 		Q_OBJECT
 
 	public:
-		explicit SectionWidget(
+		explicit RailWidget(
 			QWidget          *          parent     = nullptr,
 			mrw::ctrl::RailController * controller = nullptr);
 

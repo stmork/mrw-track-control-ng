@@ -227,7 +227,7 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <widget class="mrw::ui::SectionWidget" name="smallSwitchWidget" native="true">
+     <widget class="mrw::ui::RailWidget" name="smallSwitchWidget" native="true">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -237,7 +237,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="mrw::ui::SectionWidget" name="bigSwitchWidget" native="true">
+     <widget class="mrw::ui::RailWidget" name="bigSwitchWidget" native="true">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -253,9 +253,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>mrw::ui::SectionWidget</class>
+   <class>mrw::ui::RailWidget</class>
    <extends>QWidget</extends>
-   <header location="global">ui/sectionwidget.h</header>
+   <header location="global">ui/railwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

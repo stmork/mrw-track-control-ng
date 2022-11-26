@@ -8,7 +8,7 @@
 #include <ctrl/signalcontrollerproxy.h>
 #include <ctrl/railcontrollerproxy.h>
 
-#include <ui/sectionwidget.h>
+#include <ui/railwidget.h>
 #include <ui/signalwidget.h>
 #include <ui/regularswitchwidget.h>
 #include <ui/doublecrossswitchwidget.h>
@@ -130,7 +130,7 @@ void RegionForm::setupSection(Section * section)
 	for (Rail * rail : rails)
 	{
 		RailControllerProxy * ctrl   = new RailControllerProxy(section, rail, this);
-		SectionWidget      *  widget = new SectionWidget(ui->controlWidget, ctrl);
+		RailWidget    *    widget = new RailWidget(ui->controlWidget, ctrl);
 
 		ctrl->reposition();
 		connect(

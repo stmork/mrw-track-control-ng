@@ -17,9 +17,10 @@ SOURCES += \
 	controllerwidget.cpp \
 	doublecrossswitchwidget.cpp \
 	regularswitchwidget.cpp \
-	sectionwidget.cpp \
+	railwidget.cpp \
 	signalwidget.cpp \
 	stationwidget.cpp
+
 HEADERS += \
 	barwidget.h \
 	basewidget.h \
@@ -28,7 +29,7 @@ HEADERS += \
 	controllerwidget.h \
 	doublecrossswitchwidget.h \
 	regularswitchwidget.h \
-	sectionwidget.h \
+	railwidget.h \
 	signalwidget.h \
 	stationwidget.h
 

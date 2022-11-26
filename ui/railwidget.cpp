@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include <ui/sectionwidget.h>
+#include <ui/railwidget.h>
 #include <model/position.h>
 
 using namespace mrw::model;
@@ -12,14 +12,14 @@ using namespace mrw::ctrl;
 
 using Bending = Position::Bending;
 
-SectionWidget::SectionWidget(
+RailWidget::RailWidget(
 	QWidget     *    parent,
 	RailController * ctrl) :
 	ControllerWidget(parent, ctrl)
 {
 }
 
-void SectionWidget::computeConnectors()
+void RailWidget::computeConnectors()
 {
 	const Bending  bending = base_controller->bending();
 	const unsigned ext     = base_controller->extensions();
@@ -43,7 +43,7 @@ void SectionWidget::computeConnectors()
 	}
 }
 
-void SectionWidget::paint(QPainter & painter)
+void RailWidget::paint(QPainter & painter)
 {
 	QPainterPath path;
 	QPen         pen;

@@ -25,11 +25,11 @@ SOURCES += \
 	../ui/controllerwidget.cpp \
 	../ui/barwidget.cpp \
 	../ui/circlelivewidget.cpp \
-	../ui/doublecrossswitchwidget.cpp \
 	../ui/clockwidget.cpp \
-	../ui/regularswitchwidget.cpp \
-	../ui/sectionwidget.cpp \
 	../ui/stationwidget.cpp \
+	../ui/railwidget.cpp \
+	../ui/regularswitchwidget.cpp \
+	../ui/doublecrossswitchwidget.cpp \
 	../ui/signalwidget.cpp
 
 HEADERS += \
@@ -50,10 +50,10 @@ HEADERS += \
 	../ui/barwidget.h \
 	../ui/circlelivewidget.h \
 	../ui/clockwidget.h \
-	../ui/doublecrossswitchwidget.h \
-	../ui/regularswitchwidget.h \
 	../ui/stationwidget.h \
-	../ui/sectionwidget.h \
+	../ui/railwidget.h \
+	../ui/regularswitchwidget.h \
+	../ui/doublecrossswitchwidget.h \
 	../ui/signalwidget.h
 
 FORMS += \
