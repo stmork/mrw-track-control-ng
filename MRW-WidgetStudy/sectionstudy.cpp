@@ -43,7 +43,7 @@ SectionStudy::SectionStudy(QWidget * parent) :
 	});
 	connect(
 		ui->extensionBox, qOverload<int>(&QSpinBox::valueChanged),
-		&mock, &SectionControllerMock::setExtension);
+		&mock, &RailControllerMock::setExtension);
 
 	/********************************************************/
 	/*   End rail state                                     */
@@ -145,22 +145,22 @@ SectionStudy::SectionStudy(QWidget * parent) :
 	/********************************************************/
 
 	connect(
-		&mock, &SectionControllerMock::update,
+		&mock, &RailControllerMock::update,
 		ui->bigSwitchWidget, qOverload<>(&QWidget::repaint));
 	connect(
-		&mock, &SectionControllerMock::extend,
+		&mock, &RailControllerMock::extend,
 		ui->bigSwitchWidget, &SectionWidget::extend);
 	connect(
-		&mock, &SectionControllerMock::computeConnectors,
+		&mock, &RailControllerMock::computeConnectors,
 		ui->bigSwitchWidget, &SectionWidget::computeConnectors);
 	connect(
-		&mock, &SectionControllerMock::update,
+		&mock, &RailControllerMock::update,
 		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
 	connect(
-		&mock, &SectionControllerMock::extend,
+		&mock, &RailControllerMock::extend,
 		ui->smallSwitchWidget, &SectionWidget::extend);
 	connect(
-		&mock, &SectionControllerMock::computeConnectors,
+		&mock, &RailControllerMock::computeConnectors,
 		ui->smallSwitchWidget, &SectionWidget::computeConnectors);
 
 	ui->forwardButton->setChecked(true);

@@ -13,8 +13,8 @@ using namespace mrw::ctrl;
 using Bending = Position::Bending;
 
 SectionWidget::SectionWidget(
-	QWidget      *      parent,
-	SectionController * ctrl) :
+	QWidget     *    parent,
+	RailController * ctrl) :
 	ControllerWidget(parent, ctrl)
 {
 }
@@ -26,7 +26,7 @@ void SectionWidget::computeConnectors()
 
 	connector_list.clear();
 	if ((bending != Bending::STRAIGHT) &&
-		(!controller<SectionController>()->aEnds()))
+		(!controller<RailController>()->aEnds()))
 	{
 		if (base_controller->isDirection())
 		{
@@ -51,8 +51,8 @@ void SectionWidget::paint(QPainter & painter)
 	Bending      bending = base_controller->bending();
 
 	const float  border  = SCALE * (1.0 + extensions() / Position::FRACTION);
-	const bool   a_ends  = controller<SectionController>()->aEnds();
-	const bool   b_ends  = controller<SectionController>()->bEnds();
+	const bool   a_ends  = controller<RailController>()->aEnds();
+	const bool   b_ends  = controller<RailController>()->bEnds();
 	const bool   do_bend = (bending != Bending::STRAIGHT) && (!a_ends);
 
 	rescale(painter,

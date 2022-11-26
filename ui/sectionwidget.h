@@ -9,7 +9,7 @@
 #define MRW_UI_SECTIONWIDGET_H
 
 #include <ui/controllerwidget.h>
-#include <ctrl/sectioncontroller.h>
+#include <ctrl/railcontroller.h>
 
 namespace mrw::ui
 {
@@ -19,8 +19,8 @@ namespace mrw::ui
 
 	public:
 		explicit SectionWidget(
-			QWidget            *           parent     = nullptr,
-			mrw::ctrl::SectionController * controller = nullptr);
+			QWidget          *          parent     = nullptr,
+			mrw::ctrl::RailController * controller = nullptr);
 
 		virtual void computeConnectors() override;
 

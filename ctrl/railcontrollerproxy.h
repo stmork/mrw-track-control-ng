@@ -5,17 +5,17 @@
 
 #pragma once
 
-#ifndef MRW_CTRL_SECTIONCONTROLLERPROXY_H
-#define MRW_CTRL_SECTIONCONTROLLERPROXY_H
+#ifndef MRW_CTRL_RAILCONTROLLERPROXY_H
+#define MRW_CTRL_RAILCONTROLLERPROXY_H
 
-#include <ctrl/sectioncontroller.h>
+#include <ctrl/railcontroller.h>
 #include <model/region.h>
 #include <model/section.h>
 #include <model/rail.h>
 
 namespace mrw::ctrl
 {
-	class SectionControllerProxy : public SectionController
+	class RailControllerProxy : public RailController
 	{
 		Q_OBJECT
 
@@ -24,7 +24,7 @@ namespace mrw::ctrl
 		mrw::model::Rail    *   rail      = nullptr;
 
 	public:
-		explicit SectionControllerProxy(
+		explicit RailControllerProxy(
 			mrw::model::Section * parent_section,
 			mrw::model::Rail   *  referenced_rail,
 			QObject       *       parent);

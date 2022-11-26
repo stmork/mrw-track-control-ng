@@ -17,10 +17,10 @@ SOURCES += \
 	../ctrl/regularswitchcontrollerproxy.cpp \
 	../ctrl/doublecrossswitchcontroller.cpp \
 	../ctrl/doublecrossswitchcontrollerproxy.cpp \
+	../ctrl/railcontroller.cpp \
+	../ctrl/railcontrollerproxy.cpp \
 	../ctrl/signalcontroller.cpp \
 	../ctrl/signalcontrollerproxy.cpp \
-	../ctrl/sectioncontroller.cpp \
-	../ctrl/sectioncontrollerproxy.cpp \
 	../ui/basewidget.cpp \
 	../ui/controllerwidget.cpp \
 	../ui/barwidget.cpp \
@@ -41,10 +41,10 @@ HEADERS += \
 	../ctrl/regularswitchcontrollerproxy.h \
 	../ctrl/doublecrossswitchcontroller.h \
 	../ctrl/doublecrossswitchcontrollerproxy.h \
+	../ctrl/railcontroller.h \
+	../ctrl/railcontrollerproxy.h \
 	../ctrl/signalcontroller.h \
 	../ctrl/signalcontrollerproxy.h \
-	../ctrl/sectioncontroller.h \
-	../ctrl/sectioncontrollerproxy.h \
 	../ui/basewidget.h \
 	../ui/controllerwidget.h \
 	../ui/barwidget.h \

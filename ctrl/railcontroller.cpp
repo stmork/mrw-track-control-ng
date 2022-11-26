@@ -3,11 +3,11 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include <ctrl/sectioncontroller.h>
+#include <ctrl/railcontroller.h>
 
 using namespace mrw::ctrl;
 
-SectionController::SectionController(QObject * parent) :
+RailController::RailController(QObject * parent) :
 	BaseController(parent)
 {
 }

@@ -10,7 +10,7 @@
 
 #include <QWidget>
 
-#include <ctrl/sectioncontrollermock.h>
+#include <ctrl/railcontrollermock.h>
 
 namespace Ui
 {
@@ -31,7 +31,7 @@ protected:
 private:
 	Ui::SectionStudy        *        ui;
 
-	mrw::ctrl::SectionControllerMock mock;
+	mrw::ctrl::RailControllerMock    mock;
 };
 
 #endif // SECTIONSTUDY_H

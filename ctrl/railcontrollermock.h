@@ -5,14 +5,14 @@
 
 #pragma once
 
-#ifndef MRW_CTRL_SECTIONCONTROLLERMOCK_H
-#define MRW_CTRL_SECTIONCONTROLLERMOCK_H
+#ifndef MRW_CTRL_RAILCONTROLLERMOCK_H
+#define MRW_CTRL_RAILCONTROLLERMOCK_H
 
-#include <ctrl/sectioncontroller.h>
+#include <ctrl/railcontroller.h>
 
 namespace mrw::ctrl
 {
-	class SectionControllerMock : public SectionController
+	class RailControllerMock : public RailController
 	{
 		Q_OBJECT
 
@@ -30,7 +30,7 @@ namespace mrw::ctrl
 			mrw::model::Position::Bending::STRAIGHT;
 
 	public:
-		explicit SectionControllerMock(QObject * parent = nullptr);
+		explicit RailControllerMock(QObject * parent = nullptr);
 
 		virtual QString name() const override;
 

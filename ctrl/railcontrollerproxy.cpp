@@ -6,68 +6,68 @@
 #include <QPoint>
 
 #include <can/commands.h>
-#include <ctrl/sectioncontrollerproxy.h>
+#include <ctrl/railcontrollerproxy.h>
 
 using namespace mrw::can;
 using namespace mrw::ctrl;
 using namespace mrw::model;
 
-SectionControllerProxy::SectionControllerProxy(
+RailControllerProxy::RailControllerProxy(
 	Section * parent_section,
 	Rail   *  referenced_rail,
 	QObject * parent) :
-	SectionController(parent),
+	RailController(parent),
 	section(parent_section),
 	rail(referenced_rail)
 {
 }
 
-QString SectionControllerProxy::name() const
+QString RailControllerProxy::name() const
 {
 	return section->name();
 }
 
-float SectionControllerProxy::extensions() const
+float RailControllerProxy::extensions() const
 {
 	return rail->extension();
 }
 
-bool SectionControllerProxy::isDirection() const
+bool RailControllerProxy::isDirection() const
 {
 	return rail->aIsDir() == section->region()->direction();
 }
 
-bool SectionControllerProxy::isExpandable() const
+bool RailControllerProxy::isExpandable() const
 {
 	return true;
 }
 
-Position * SectionControllerProxy::position() const
+Position * RailControllerProxy::position() const
 {
 	return rail;
 }
 
-SectionState SectionControllerProxy::state() const
+SectionState RailControllerProxy::state() const
 {
 	return section->state();
 }
 
-Device::LockState SectionControllerProxy::lock() const
+Device::LockState RailControllerProxy::lock() const
 {
 	return section->lock();
 }
 
-Position::Bending SectionControllerProxy::bending() const
+Position::Bending RailControllerProxy::bending() const
 {
 	return rail->bending();
 }
 
-bool SectionControllerProxy::aEnds() const
+bool RailControllerProxy::aEnds() const
 {
 	return rail->advance(true).empty();
 }
 
-bool SectionControllerProxy::bEnds() const
+bool RailControllerProxy::bEnds() const
 {
 	return rail->advance(false).empty();
 }

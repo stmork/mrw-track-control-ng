@@ -17,12 +17,13 @@ SOURCES +=  \
 	doublecrossswitchcontroller.cpp \
 	doublecrossswitchcontrollermock.cpp \
 	doublecrossswitchcontrollerproxy.cpp \
-	sectioncontroller.cpp \
-	sectioncontrollermock.cpp \
-	sectioncontrollerproxy.cpp \
+	railcontroller.cpp \
+	railcontrollermock.cpp \
+	railcontrollerproxy.cpp \
 	signalcontroller.cpp \
 	signalcontrollermock.cpp \
 	signalcontrollerproxy.cpp
+
 HEADERS +=  \
 	basecontroller.h \
 	regularswitchcontroller.h \
@@ -31,9 +32,9 @@ HEADERS +=  \
 	doublecrossswitchcontroller.h \
 	doublecrossswitchcontrollermock.h \
 	doublecrossswitchcontrollerproxy.h \
-	sectioncontroller.h \
-	sectioncontrollermock.h \
-	sectioncontrollerproxy.h \
+	railcontroller.h \
+	railcontrollermock.h \
+	railcontrollerproxy.h \
 	signalcontroller.h \
 	signalcontrollermock.h \
 	signalcontrollerproxy.h
