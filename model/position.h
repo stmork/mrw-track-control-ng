@@ -293,9 +293,9 @@ namespace mrw::model
 		void    parse(const QString & value);
 		QString value() const;
 
-	private:
 		static unsigned counter;
 
+	private:
 		QPoint   position;
 		unsigned ext_count     = 0;
 		bool     inclined      = false;

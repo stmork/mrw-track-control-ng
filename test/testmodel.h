@@ -27,6 +27,8 @@ namespace mrw::test
 		void testAssemblyPart(model::Section * section, mrw::model::AssemblyPart * part);
 
 	private slots:
+		void init();
+
 		void testModel();
 		void testControllers();
 		void testModules();
@@ -35,6 +37,7 @@ namespace mrw::test
 		void testRegularSwitchStates();
 		void tesDoubleCrossSwitchStates();
 		void testDefaultPosition();
+		void testParsingPosition();
 		void testExtension();
 		void testPosition();
 	};

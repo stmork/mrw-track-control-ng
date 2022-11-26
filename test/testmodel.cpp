@@ -179,6 +179,8 @@ class TestPosition : public Position
 {
 	const QString text;
 
+	friend class TestModel;
+
 public:
 	static const QString TEST_KEY;
 
@@ -197,6 +199,16 @@ public:
 
 		parse(value);
 	}
+
+	void testParse(const QString & value)
+	{
+		parse(value);
+	}
+
+	static void reset()
+	{
+		counter = 0;
+	}
 };
 
 const QString TestPosition::TEST_KEY = "test-key";
@@ -210,6 +222,41 @@ void TestModel::testDefaultPosition()
 	QCOMPARE(position.extension(), 0);
 	QCOMPARE(position.point(), QPoint(0, 0));
 	QCOMPARE(position.key(), TestPosition::TEST_KEY);
+}
+
+void TestModel::testParsingPosition()
+{
+	TestPosition position;
+
+	position.testParse("");
+	QCOMPARE(position.bending(), Bending::STRAIGHT);
+	QCOMPARE(position.isInclined(), false);
+	QCOMPARE(position.extension(), 0);
+	QCOMPARE(position.point(), QPoint(0, 0));
+
+	position.testParse("x,y,i");
+	QCOMPARE(position.bending(), Bending::STRAIGHT);
+	QCOMPARE(position.isInclined(), true);
+	QCOMPARE(position.extension(), 0);
+	QCOMPARE(position.point(), QPoint(4, 0));
+
+	position.testParse("2,3,xxxr");
+	QCOMPARE(position.bending(), Bending::RIGHT);
+	QCOMPARE(position.isInclined(), false);
+	QCOMPARE(position.extension(), 3);
+	QCOMPARE(position.point(), QPoint(8, 12));
+
+	position.testParse("4,5,ql");
+	QCOMPARE(position.bending(), Bending::LEFT);
+	QCOMPARE(position.isInclined(), false);
+	QCOMPARE(position.extension(), 0);
+	QCOMPARE(position.point(), QPoint(17, 20));
+
+	position.testParse("6,7,hrxi");
+	QCOMPARE(position.bending(), Bending::RIGHT);
+	QCOMPARE(position.isInclined(), true);
+	QCOMPARE(position.extension(), 1);
+	QCOMPARE(position.point(), QPoint(26, 28));
 }
 
 void TestModel::testExtension()
@@ -395,4 +442,9 @@ void TestModel::testAssemblyPart(Section * section, AssemblyPart * part)
 		QVERIFY2(device->controller() != nullptr, name.c_str());
 		QCOMPARE(device->lock(), Device::LockState::UNLOCKED);
 	}
+}
+
+void TestModel::init()
+{
+	TestPosition::reset();
 }

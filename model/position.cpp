@@ -91,9 +91,11 @@ void Position::parse(const QString & value)
 				offset += QUARTER;
 				break;
 
+			case 'l':
 			case 'L':
 				bending_state = Bending::LEFT;
 				break;
+			case 'r':
 			case 'R':
 				bending_state = Bending::RIGHT;
 				break;
