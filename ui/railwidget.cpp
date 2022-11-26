@@ -31,14 +31,14 @@ void RailWidget::computeConnectors()
 		if (base_controller->isDirection())
 		{
 			connector_list.append(QPoint(
-					Position::FRACTION + ext - Position::QUARTER,
-					bending == Bending::RIGHT ? 4 : 0));
+					Position::QUARTER,
+					bending == Bending::LEFT ? 4 : 0));
 		}
 		else
 		{
 			connector_list.append(QPoint(
-					Position::QUARTER,
-					bending == Bending::LEFT ? 4 : 0));
+					Position::FRACTION + ext - Position::QUARTER,
+					bending == Bending::RIGHT ? 4 : 0));
 		}
 	}
 }
