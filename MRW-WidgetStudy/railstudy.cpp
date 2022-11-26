@@ -4,7 +4,7 @@
 //
 
 #include "railstudy.h"
-#include "ui_sectionstudy.h"
+#include "ui_railstudy.h"
 
 using namespace mrw::ctrl;
 using namespace mrw::ui;
