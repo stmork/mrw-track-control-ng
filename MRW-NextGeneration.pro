@@ -12,6 +12,7 @@ SUBDIRS  = \
 	ui \
 	test \
 	ping \
+	proxy \
 	track-control-ng \
 	study
 
@@ -22,6 +23,7 @@ ctrl.file                 = ctrl/MRW-Ctrl.pro
 ui.file                   = ui/MRW-UI.pro
 test.file                 = test/MRW-Test.pro
 ping.file                 = tools/ping/MRW-Ping.pro
+proxy.file                = tools/proxy/MRW-Proxy.pro
 track-control-ng.file     = track-control-ng/MRW-Reader.pro
 study.file                = MRW-WidgetStudy/MRW-WidgetStudy.pro
 
@@ -30,6 +32,7 @@ test.depends              = util can model
 ctrl.depends              = model
 ui.depends                = ctrl
 ping.depends              = test
+proxy.depends             = test
 study.depends             = util can model ctrl ui
 track-control-ng.depends  = study
 

@@ -25,12 +25,9 @@ MrwBusService::MrwBusService(
 	if (device != nullptr)
 	{
 		connect(device, &QCanBusDevice::framesReceived, this, &MrwBusService::receive);
+		connect(device, &QCanBusDevice::stateChanged,   this, &MrwBusService::stateChanged);
 
 #ifdef MRW_VERBOSE
-		connect(device, &QCanBusDevice::stateChanged, [] (auto state)
-		{
-			qDebug() << state;
-		});
 		connect(device, &QCanBusDevice::errorOccurred, [] (auto reason)
 		{
 			qCritical() << reason;
@@ -126,6 +123,24 @@ QString MrwBusService::select(
 	}
 
 	return "";
+}
+
+void MrwBusService::stateChanged(QCanBusDevice::CanBusDeviceState state)
+{
+	switch (state)
+	{
+	case QCanBusDevice::ConnectedState:
+		emit connected();
+		break;
+
+	case QCanBusDevice::UnconnectedState:
+		emit disconnected();
+		break;
+
+	default:
+		// States intenionally ignored.
+		break;
+	}
 }
 
 void MrwBusService::receive()

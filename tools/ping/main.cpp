@@ -5,7 +5,10 @@
 
 #include <QCoreApplication>
 #include <QCanBus>
+#include <QTimer>
 #include <QDebug>
+
+#include <unistd.h>
 
 #include <can/mrwmessage.h>
 #include <can/mrwbusservice.h>
@@ -18,11 +21,15 @@ int main(int argc, char * argv[])
 {
 	QCoreApplication app(argc, argv);
 	MrwMessage       message(PING);
-	MrwBusService    service("can0");
+	MrwBusService    service("can0", "virtualcan");
 	TermHandler      term_handler( { SIGTERM, SIGINT } );
 
 	service.list();
-	service.write(message);
+
+	QObject::connect(&service, &MrwBusService::connected, [&]()
+	{
+		service.write(message);
+	});
 
 	return app.exec();
 }

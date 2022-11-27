@@ -68,10 +68,15 @@ namespace mrw::can
 		 */
 		virtual void process(const MrwMessage & message);
 
+	signals:
+		void connected();
+		void disconnected();
+
 	private:
 		QString select(const QString & interface, const QString & plugin);
 
 	private slots:
+		void stateChanged(QCanBusDevice::CanBusDeviceState state);
 		void receive();
 	};
 }
