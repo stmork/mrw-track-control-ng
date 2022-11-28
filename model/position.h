@@ -131,6 +131,16 @@ namespace mrw::model
 		}
 
 		/**
+		 * This method returns the number of <em>etended</em> line counts. One
+		 * line count is the full height of the controlled widget representing
+		 * four Position::FRACTION units.
+		 */
+		inline unsigned lines() const
+		{
+			return line_count;
+		}
+
+		/**
 		 * This method inverts the inclination flag.
 		 *
 		 * @see isInclined()
@@ -211,6 +221,7 @@ namespace mrw::model
 				(position.x()               == other.position.x()) &&
 				((position.y()) / FRACTION  == (other.position.y() / FRACTION)) &&
 				(ext_count                  == other.ext_count) &&
+				(line_count                 == other.line_count) &&
 				(inclined                   == other.inclined) &&
 				(bending_state              == other.bending_state);
 		}
@@ -298,6 +309,7 @@ namespace mrw::model
 	private:
 		QPoint   position;
 		unsigned ext_count     = 0;
+		unsigned line_count    = 0;
 		bool     inclined      = false;
 		Bending  bending_state = Bending::STRAIGHT;
 	};

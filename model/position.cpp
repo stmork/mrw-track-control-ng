@@ -64,6 +64,7 @@ void Position::parse(const QString & value)
 
 	inclined      = false;
 	ext_count     = 0;
+	line_count    = 0;
 	bending_state = Bending::STRAIGHT;
 	if (tokens.size() >= 3)
 	{
@@ -79,6 +80,11 @@ void Position::parse(const QString & value)
 			case 'x':
 			case 'X':
 				ext_count++;
+				break;
+
+			case 'v':
+			case 'V':
+				line_count++;
 				break;
 
 			case 'h':
@@ -135,6 +141,12 @@ QString Position::value() const
 	for (unsigned i = 0; i < ext_count; i++)
 	{
 		ext += 'X';
+	}
+
+	// Add extensions
+	for (unsigned i = 0; i < line_count; i++)
+	{
+		ext += 'V';
 	}
 
 	// Add inclination
