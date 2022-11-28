@@ -68,7 +68,10 @@ void Region::link()
 
 QString Region::toString() const
 {
-	return QString("  Region %1 (%2)").arg(region_name).arg(is_station ? "Station" : "rail road");
+	return QString("  Region %1 (%2) %3").
+		arg(region_name).
+		arg(is_station ? "Station" : "rail road").
+		arg(direction_view ? "-->" : "<--");
 }
 
 QString Region::key() const

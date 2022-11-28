@@ -53,16 +53,17 @@ void RailWidget::paint(QPainter & painter)
 	const float  border     = -SCALE - extensions() * SCALE / Position::HALF;
 	const bool   a_ends     = controller<RailController>()->aEnds();
 	const bool   b_ends     = controller<RailController>()->bEnds();
+	const bool   is_dir     = base_controller->isDirection();
+	const float  text_width = extensions() <= 2 ? 120 : 160;
 	const bool   do_bend    = (bending != Bending::STRAIGHT) && (!a_ends);
-	const float  text_width = base_controller->extensions() <= 2 ? 120 : 160;
 
 	// Unify coordinates
 	const float x_size = Position::FRACTION + extensions();
 	const float y_size = Position::FRACTION * (1.0 + lines());
-	const float x_pos  = base_controller->isDirection() ?
+	const float x_pos  = is_dir ?
 		x_size - Position::HALF :
 		Position::HALF;
-	const float y_pos  = (bending != Bending::LEFT) == base_controller->isDirection() ?
+	const float y_pos  = (bending != Bending::LEFT) == is_dir ?
 		y_size - Position::HALF :
 		Position::HALF;
 
@@ -71,17 +72,16 @@ void RailWidget::paint(QPainter & painter)
 		y_size * SCALE / Position::HALF,
 		x_pos * width() / x_size, y_pos * height() / y_size);
 
-	// Draw switch name before mirroring to prevent mirrored font drawing.
+	// Draw rail name before mirroring to prevent mirrored font drawing.
 	prepareFailed(painter, base_controller->lock() == Device::LockState::FAIL);
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
-
 	painter.drawText(QRectF(
-			(base_controller->isDirection() == (bending != Bending::STRAIGHT)) || a_ends ? SCALE - text_width : -SCALE,
-			base_controller->isDirection() == (bending != Bending::LEFT) ? 30 : -80, text_width, FONT_HEIGHT),
+			(is_dir == (bending != Bending::STRAIGHT)) || a_ends ? SCALE - text_width : -SCALE,
+			is_dir == (bending != Bending::LEFT) ? 30 : -80, text_width, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
 
-	if (!base_controller->isDirection())
+	if (!is_dir)
 	{
 		painter.scale(-1.0f, -1.0f);
 	}

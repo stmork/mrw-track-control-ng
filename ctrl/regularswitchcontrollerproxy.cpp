@@ -32,7 +32,7 @@ QString RegularSwitchControllerProxy::name() const
 
 bool RegularSwitchControllerProxy::isDirection() const
 {
-	return part->aIsDir() != part->section()->region()->direction();
+	return !part->aIsDir() == part->section()->region()->direction();
 }
 
 bool RegularSwitchControllerProxy::isExpandable() const

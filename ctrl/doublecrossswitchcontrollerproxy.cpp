@@ -32,7 +32,7 @@ QString DoubleCrossSwitchControllerProxy::name() const
 
 bool DoubleCrossSwitchControllerProxy::isDirection() const
 {
-	return part->aIsDir() != part->section()->region()->direction();
+	return !part->aIsDir() == part->section()->region()->direction();
 }
 
 Position * DoubleCrossSwitchControllerProxy::position() const
