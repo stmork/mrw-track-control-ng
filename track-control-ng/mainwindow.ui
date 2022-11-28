@@ -223,6 +223,9 @@
     <addaction name="actionExtend"/>
     <addaction name="actionReduce"/>
     <addaction name="separator"/>
+    <addaction name="actionLineUp"/>
+    <addaction name="actionLineDown"/>
+    <addaction name="separator"/>
     <addaction name="actionBendLeft"/>
     <addaction name="actionBendRight"/>
    </widget>
@@ -319,6 +322,22 @@
    </property>
    <property name="shortcut">
     <string>R</string>
+   </property>
+  </action>
+  <action name="actionLineUp">
+   <property name="text">
+    <string>Zeile ergänzen</string>
+   </property>
+   <property name="shortcut">
+    <string>V</string>
+   </property>
+  </action>
+  <action name="actionLineDown">
+   <property name="text">
+    <string>Zeile entfernen</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+V</string>
    </property>
   </action>
  </widget>

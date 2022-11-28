@@ -74,6 +74,15 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent) :
 	{
 		extend(-1);
 	});
+
+	connect(ui->actionLineUp,     &QAction::triggered, [this] ()
+	{
+		lineup(1);
+	});
+	connect(ui->actionLineDown,   &QAction::triggered, [this] ()
+	{
+		lineup(-1);
+	});
 }
 
 MainWindow::~MainWindow()
@@ -193,6 +202,16 @@ void MainWindow::extend(int inc)
 	edit([inc](BaseController * controller, Position * position)
 	{
 		position->extend(inc);
+
+		emit controller->reposition();
+	});
+}
+
+void MainWindow::lineup(int inc)
+{
+	edit([inc](BaseController * controller, Position * position)
+	{
+		position->lineup(inc);
 
 		emit controller->reposition();
 	});

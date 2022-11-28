@@ -41,6 +41,7 @@ private slots:
 	void clearAllItems();
 	void move(int right, int down);
 	void extend(int inc);
+	void lineup(int inc);
 	void expand();
 	void incline();
 	void bend(const mrw::model::Position::Bending bend);

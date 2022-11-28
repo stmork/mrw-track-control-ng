@@ -167,6 +167,20 @@ namespace mrw::model
 		}
 
 		/**
+		 * This method extends a rail drawing away from quadratic rendering.
+		 * Negative increments are allowed but the the resulting extends does
+		 * not underflow zero.
+		 *
+		 * @param inc The increment to add to the extension.
+		 */
+		inline void lineup(const int inc = 1)
+		{
+			const int result = line_count + inc;
+
+			line_count = std::clamp(result, 0, 10);
+		}
+
+		/**
 		 * This method returns true if the drawing of a
 		 * mrw::model::RegularSwitch is inclined.
 		 *
