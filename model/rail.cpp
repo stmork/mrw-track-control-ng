@@ -51,8 +51,12 @@ QString Rail::toString() const
 {
 	return QString("      # %1 %2--%3 : %4").
 		arg(valid() ? "V" : "-").
-		arg(a == nullptr ? " |" : aIsDir() ? " b" : " a").
-		arg(b == nullptr ? "| " : aIsDir() ? "a " : "b ").
+		arg(aIsDir() ?
+				(b == nullptr ? " |" : " b") :
+				(a == nullptr ? " |" : " a")).
+		arg(aIsDir() ?
+				(a == nullptr ? "| " : "a ") :
+				(b == nullptr ? "| " : "b ")).
 		arg(name());
 }
 
