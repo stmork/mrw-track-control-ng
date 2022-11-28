@@ -42,7 +42,20 @@ namespace mrw::ctrl
 		 * mrw::model::AssemblyPart.
 		 * @see mrw::model::Position::extensions()
 		 */
-		virtual float extensions()   const = 0;
+		virtual float extensions() const = 0;
+
+		/**
+		 * This method returns the number of <em>extended</em> line counts. One
+		 * line count is the full height of the controlled widget representing
+		 * four mrw::model::Position::FRACTION units.
+		 *
+		 * @return The multiple height of the widget.
+		 * @see mrw::model::Position::lines()
+		 */
+		virtual float lines() const
+		{
+			return 0;
+		}
 
 		/**
 		 * This method returns true if the mrw::model::AssemblyPart is

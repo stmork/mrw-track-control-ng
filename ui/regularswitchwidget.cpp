@@ -71,15 +71,17 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	Q_ASSERT(base_controller != nullptr);
 
 	// Unify coordinates
-	const float x_size = Position::FRACTION + base_controller->extensions();
+	const float x_size = Position::FRACTION + extensions();
+	const float y_size = Position::FRACTION * (1.0 + lines());
 	const float x_pos  = base_controller->isDirection() != is_inclined ?
 		x_size - Position::HALF :
 		Position::HALF;
+	const float y_pos  = Position::HALF;
 
 	rescale(painter,
-		(Position::FRACTION + extensions()) * SCALE / Position::HALF,
-		SCALE * 2.0,
-		x_pos * width() / x_size, height() / Position::HALF);
+			x_size * SCALE / Position::HALF,
+			y_size * SCALE / Position::HALF,
+		x_pos * width() / x_size, y_pos * height() / y_size);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
 	prepareFailed(painter, base_controller->lock() == LockState::FAIL);

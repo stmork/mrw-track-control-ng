@@ -32,6 +32,11 @@ float RailControllerProxy::extensions() const
 	return rail->extension();
 }
 
+float mrw::ctrl::RailControllerProxy::lines() const
+{
+	return rail->lines();
+}
+
 bool RailControllerProxy::isDirection() const
 {
 	return rail->aIsDir() == section->region()->direction();

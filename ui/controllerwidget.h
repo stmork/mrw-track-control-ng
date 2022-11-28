@@ -61,9 +61,30 @@ namespace mrw::ui
 
 		void drawConnectors(QPainter & painter);
 
+		/**
+		 * This method returns the extensions of the controlled
+		 * mrw::model::AssemblyPart.
+		 *
+		 * @return The extension count of the controlled
+		 * mrw::model::AssemblyPart.
+		 * @see mrw::model::Position::extensions()
+		 */
 		inline float extensions() const
 		{
 			return base_controller->extensions();
+		}
+
+		/**
+		 * This method returns the number of <em>extended</em> line counts. One
+		 * line count is the full height of the controlled widget representing
+		 * four mrw::model::Position::FRACTION units.
+		 *
+		 * @return The multiple height of the widget.
+		 * @see mrw::model::Position::lines()
+		 */
+		inline float lines() const
+		{
+			return base_controller->lines();
 		}
 
 		template<class C> C * controller() const

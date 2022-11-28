@@ -46,7 +46,6 @@ void Position::parse(const QString & value)
 	int         x       = 0;
 	int         y       = 0;
 	int         offset  = 0;
-	QPoint      pos;
 
 	if (tokens.size() >= 2)
 	{

@@ -131,9 +131,11 @@ namespace mrw::model
 		}
 
 		/**
-		 * This method returns the number of <em>etended</em> line counts. One
+		 * This method returns the number of <em>extended</em> line counts. One
 		 * line count is the full height of the controlled widget representing
 		 * four Position::FRACTION units.
+		 *
+		 * @return The multiple height of the widget.
 		 */
 		inline unsigned lines() const
 		{

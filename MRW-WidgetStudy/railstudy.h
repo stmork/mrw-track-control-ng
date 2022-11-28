@@ -28,7 +28,12 @@ public:
 protected:
 	void changeEvent(QEvent * e) override;
 
+private slots:
+	void updateLines(const int new_ext_lines);
+
 private:
+	static void resize(QWidget * widget, const float rel);
+
 	Ui::RailStudy          *         ui;
 	mrw::ctrl::RailControllerMock    mock;
 };

@@ -18,7 +18,8 @@ namespace mrw::ctrl
 
 	private:
 		bool                           a_is_dir      = false;
-		unsigned                       extension     = 0;
+		unsigned                       ext_count     = 0;
+		unsigned                       line_count    = 0;
 		bool                           a_ends        = false;
 		bool                           b_ends        = false;
 
@@ -61,7 +62,12 @@ namespace mrw::ctrl
 
 		virtual float extensions() const override
 		{
-			return extension;
+			return ext_count;
+		}
+
+		virtual float lines() const override
+		{
+			return line_count;
 		}
 
 		virtual mrw::model::Position::Bending bending() const override
@@ -80,7 +86,8 @@ namespace mrw::ctrl
 		void computeConnectors();
 
 	public slots:
-		void setExtension(const int extension);
+		void setExtension(const int ext_count);
+		void setLines(const int line_count);
 	};
 }
 

@@ -44,6 +44,9 @@ RailStudy::RailStudy(QWidget * parent) :
 	connect(
 		ui->extensionBox, qOverload<int>(&QSpinBox::valueChanged),
 		&mock, &RailControllerMock::setExtension);
+	connect(
+		ui->lineBox, qOverload<int>(&QSpinBox::valueChanged),
+		this, &RailStudy::updateLines);
 
 	/********************************************************/
 	/*   End rail state                                     */
@@ -186,4 +189,19 @@ void RailStudy::changeEvent(QEvent * e)
 	default:
 		break;
 	}
+}
+
+void RailStudy::updateLines(const int new_ext_lines)
+{
+	const float rel = (1.0f + new_ext_lines) / (1.0f + mock.lines());
+
+	resize(ui->smallSwitchWidget, rel);
+	resize(ui->bigSwitchWidget, rel);
+
+	mock.setLines(new_ext_lines);
+}
+
+void RailStudy::resize(QWidget * widget, const float rel)
+{
+	widget->setFixedHeight(widget->height() * rel);
 }

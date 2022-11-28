@@ -38,6 +38,7 @@ void RailControllerMock::setEnds(const bool a, const bool b)
 {
 	a_ends = a;
 	b_ends = b;
+	emit computeConnectors();
 	emit update();
 }
 
@@ -53,9 +54,17 @@ QString RailControllerMock::name() const
 	return "301";
 }
 
-void RailControllerMock::setExtension(const int new_extension)
+void RailControllerMock::setExtension(const int input)
 {
-	extension = new_extension;
+	ext_count = input;
+	emit extend();
+	emit computeConnectors();
+	emit update();
+}
+
+void RailControllerMock::setLines(const int input)
+{
+	line_count = input;
 	emit extend();
 	emit computeConnectors();
 	emit update();
