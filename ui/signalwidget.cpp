@@ -81,8 +81,8 @@ void SignalWidget::paint(QPainter & painter)
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
 	painter.drawText(QRectF(
-			base_controller->isDirection() ? -border : border - 120,
-			base_controller->isDirection() ? -80 : 30, 120, FONT_HEIGHT),
+			base_controller->isDirection() ? -border : border - 130,
+			base_controller->isDirection() ? -80 : 30, 130, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
 
 	if (!base_controller->isDirection())

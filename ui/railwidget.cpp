@@ -50,10 +50,11 @@ void RailWidget::paint(QPainter & painter)
 	QFont        font    = painter.font();
 	Bending      bending = base_controller->bending();
 
-	const float  border  = SCALE * (1.0 + extensions() / Position::FRACTION);
-	const bool   a_ends  = controller<RailController>()->aEnds();
-	const bool   b_ends  = controller<RailController>()->bEnds();
-	const bool   do_bend = (bending != Bending::STRAIGHT) && (!a_ends);
+	const float  border     = SCALE * (1.0 + extensions() / Position::FRACTION);
+	const bool   a_ends     = controller<RailController>()->aEnds();
+	const bool   b_ends     = controller<RailController>()->bEnds();
+	const bool   do_bend    = (bending != Bending::STRAIGHT) && (!a_ends);
+	const float  text_width = base_controller->extensions() <= 2 ? 120 : 160;
 
 	rescale(painter,
 		(Position::FRACTION + extensions()) * SCALE / Position::HALF,
@@ -64,8 +65,8 @@ void RailWidget::paint(QPainter & painter)
 	font.setPixelSize(FONT_HEIGHT);
 	painter.setFont(font);
 	painter.drawText(QRectF(
-			base_controller->isDirection() ? border - 140 : 20 - border,
-			base_controller->isDirection() == (bending != Bending::LEFT) ? 30 : -80, 120, FONT_HEIGHT),
+			base_controller->isDirection() ? border - text_width : text_width - SCALE - border,
+			base_controller->isDirection() == (bending != Bending::LEFT) ? 30 : -80, text_width, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
 
 	if (!base_controller->isDirection())

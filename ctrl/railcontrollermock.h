@@ -17,8 +17,8 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
-		unsigned                       extension     = 0;
 		bool                           a_is_dir      = false;
+		unsigned                       extension     = 0;
 		bool                           a_ends        = false;
 		bool                           b_ends        = false;
 

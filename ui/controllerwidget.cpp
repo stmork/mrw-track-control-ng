@@ -65,7 +65,7 @@ bool ControllerWidget::isConnector(const QPoint & point) const
 
 void ControllerWidget::reposition()
 {
-	setFixedHeight(BaseWidget::SIZE);
+	setFixedHeight(BaseWidget::SIZE * (1 + base_controller->position()->lines()));
 	extend();
 	move(base_controller->position()->point() * BaseWidget::SIZE / Position::FRACTION);
 }

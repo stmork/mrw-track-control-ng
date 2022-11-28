@@ -253,8 +253,8 @@
      <widget class="mrw::ui::SignalWidget" name="smallSwitchWidget" native="true">
       <property name="geometry">
        <rect>
-        <x>100</x>
-        <y>310</y>
+        <x>30</x>
+        <y>330</y>
         <width>40</width>
         <height>40</height>
        </rect>

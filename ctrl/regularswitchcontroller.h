@@ -19,8 +19,6 @@ namespace mrw::ctrl
 	public:
 		explicit RegularSwitchController(QObject * parent = nullptr);
 
-		virtual float extensions() const override;
-
 		virtual bool  isLeft() const = 0;
 		virtual bool  isRight() const = 0;
 		virtual bool  isRightBended() const = 0;

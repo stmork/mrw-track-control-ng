@@ -48,6 +48,14 @@ void mrw::ctrl::RegularSwitchControllerMock::setInclined(const bool incl)
 	emit update();
 }
 
+void mrw::ctrl::RegularSwitchControllerMock::setExtension(const int input)
+{
+	extension = input;
+	emit extend();
+	emit computeConnectors();
+	emit update();
+}
+
 void RegularSwitchControllerMock::setDirection(const bool dir)
 {
 	a_is_dir = !dir;
@@ -90,6 +98,11 @@ bool RegularSwitchControllerMock::isDirection() const
 QString RegularSwitchControllerMock::name() const
 {
 	return "819";
+}
+
+float mrw::ctrl::RegularSwitchControllerMock::extensions() const
+{
+	return extension;
 }
 
 Bending RegularSwitchControllerMock::bending() const
