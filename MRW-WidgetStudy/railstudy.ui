@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>602</width>
-    <height>452</height>
+    <width>924</width>
+    <height>758</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,6 +40,13 @@
          <widget class="QSpinBox" name="extensionBox">
           <property name="maximum">
            <number>8</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="lineBox">
+          <property name="maximum">
+           <number>2</number>
           </property>
          </widget>
         </item>
@@ -230,8 +237,8 @@
      <widget class="mrw::ui::RailWidget" name="smallSwitchWidget" native="true">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>250</y>
+        <x>10</x>
+        <y>690</y>
         <width>40</width>
         <height>40</height>
        </rect>

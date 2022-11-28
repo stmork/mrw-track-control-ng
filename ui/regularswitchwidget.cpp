@@ -29,26 +29,30 @@ void RegularSwitchWidget::computeConnectors()
 	connector_list.clear();
 	if (ctrl->isInclined())
 	{
+		const int ext = ctrl->isDirection() ? 0 : ctrl->extensions();
+
 		if (ctrl->isRightBended())
 		{
-			connector_list.append(QPoint(3, 0));
-			connector_list.append(QPoint(1, 4));
+			connector_list.append(QPoint(3 + ext, 0));
+			connector_list.append(QPoint(1 + ext, 4));
 		}
 		else
 		{
-			connector_list.append(QPoint(1, 0));
-			connector_list.append(QPoint(3, 4));
+			connector_list.append(QPoint(1 + ext, 0));
+			connector_list.append(QPoint(3 + ext, 4));
 		}
 	}
 	else
 	{
+		const int ext = ctrl->isDirection() ? ctrl->extensions() : 0;
+
 		if (ctrl->isDirection() != ctrl->isRightBended())
 		{
-			connector_list.append(QPoint(2, 0));
+			connector_list.append(QPoint(2 + ext, 0));
 		}
 		else
 		{
-			connector_list.append(QPoint(2, 4));
+			connector_list.append(QPoint(2 + ext, 4));
 		}
 	}
 }
@@ -67,7 +71,15 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	Q_ASSERT(base_controller != nullptr);
 
 	// Unify coordinates
-	rescale(painter);
+	const float x_size = Position::FRACTION + base_controller->extensions();
+	const float x_pos  = base_controller->isDirection() != is_inclined ?
+		x_size - Position::HALF :
+		Position::HALF;
+
+	rescale(painter,
+		(Position::FRACTION + extensions()) * SCALE / Position::HALF,
+		SCALE * 2.0,
+		x_pos * width() / x_size, height() / Position::HALF);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
 	prepareFailed(painter, base_controller->lock() == LockState::FAIL);
@@ -112,7 +124,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	}
 	else
 	{
-		painter.drawLine(-100.0f, 0.0f, -70.0f, 0.0f);
+		painter.drawLine(-SCALE - extensions() * SCALE * 0.5f, 0.0f, -70.0f, 0.0f);
 	}
 
 	// Draw curved part of switch
@@ -124,7 +136,9 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	// Draw straight part of switch
 	pen.setColor(!is_turn_out ? section_color : outside_color);
 	painter.setPen(pen);
-	painter.drawLine(!is_turn_out && pending ? (is_inclined ? 20 : -20.0f) : 80.0f, 0.0f, 100.0f, 0.0f);
+	painter.drawLine(
+		!is_turn_out && pending ? (is_inclined ? 20 : -20.0f) : 80.0f, 0.0f,
+		100.0f + extensions() * SCALE, 0.0f);
 
 	// Draw connector markers
 	drawConnectors(painter);
