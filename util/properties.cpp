@@ -37,6 +37,7 @@ empty=
 @endverbatim
  */
 const std::regex  Properties::regex(R"(^\s*([a-zA-Z]\w+)\s*=\s*([\w_\-\.\,]*))");
+const std::string Properties::EMPTY = "";
 
 Properties::Properties(const QString & filename)
 {
@@ -71,4 +72,9 @@ bool Properties::read(const QString & filename)
 		file.close();
 	}
 	return success;
+}
+
+const std::string & mrw::util::Properties::lookup(const std::string & key) const
+{
+	return find(key) != end() ? at(key) : EMPTY;
 }

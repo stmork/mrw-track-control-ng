@@ -162,7 +162,7 @@ void ModelRepository::prepareRegions()
 		{
 			QString             prep  = region->key();
 			const std::string & key   = prepareKey(prep).toStdString();
-			const std::string & value = region_map.at(key);
+			const std::string & value = region_map.lookup(key);
 
 			// Values stored as invert direction flag.
 			region->setDirection(value != "true");
@@ -187,7 +187,7 @@ void ModelRepository::prepareRailParts()
 		{
 			QString             prep  = part->key();
 			const std::string & key   = prepareKey(prep).toStdString();
-			const std::string & value = railpart_map.at(key);
+			const std::string & value = railpart_map.lookup(key);
 
 			part->parse(settings_model, QString(value.c_str()));
 		}
@@ -212,7 +212,7 @@ void ModelRepository::prepareSignals(Region * region)
 		{
 			QString             prep  = region_key + signal->partName();
 			const std::string & key   = prepareKey(prep).toStdString();
-			const std::string & value = signal_map.at(key);
+			const std::string & value = signal_map.lookup(key);
 
 			signal->parse(settings_model, QString(value.c_str()));
 		}

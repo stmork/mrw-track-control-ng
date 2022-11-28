@@ -113,6 +113,7 @@ void TestUtil::testProperties()
 	Properties props(filename);
 
 	QCOMPARE(props.size(), 5);
+
 	QCOMPARE(props.at("AvalidProp"), "xyvc_,");
 	QCOMPARE(props.at("Another11Prop"), "ccc");
 	QCOMPARE(props.at("Special"), "a.-_,");
@@ -120,6 +121,14 @@ void TestUtil::testProperties()
 	QCOMPARE(props.at("empty"), "");
 	QVERIFY_EXCEPTION_THROWN(props.at("11ss"), std::out_of_range);
 	QVERIFY_EXCEPTION_THROWN(props.at("1"),    std::out_of_range);
+
+	QCOMPARE(props.lookup("AvalidProp"), "xyvc_,");
+	QCOMPARE(props.lookup("Another11Prop"), "ccc");
+	QCOMPARE(props.lookup("Special"), "a.-_,");
+	QCOMPARE(props.lookup("ss1"), "2");
+	QCOMPARE(props.lookup("empty"), "");
+	QCOMPARE(props.lookup("11ss"), Properties::EMPTY);
+	QCOMPARE(props.lookup("1"),    Properties::EMPTY);
 }
 
 void TestUtil::testClockService()

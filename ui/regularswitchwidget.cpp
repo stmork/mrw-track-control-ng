@@ -79,8 +79,8 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	const float y_pos  = Position::HALF;
 
 	rescale(painter,
-			x_size * SCALE / Position::HALF,
-			y_size * SCALE / Position::HALF,
+		x_size * SCALE / Position::HALF,
+		y_size * SCALE / Position::HALF,
 		x_pos * width() / x_size, y_pos * height() / y_size);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.

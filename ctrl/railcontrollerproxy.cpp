@@ -39,7 +39,7 @@ float mrw::ctrl::RailControllerProxy::lines() const
 
 bool RailControllerProxy::isDirection() const
 {
-	return rail->aIsDir() == section->region()->direction();
+	return !rail->aIsDir() != section->region()->direction();
 }
 
 bool RailControllerProxy::isExpandable() const

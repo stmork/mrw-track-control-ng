@@ -24,6 +24,8 @@ namespace mrw::util
 		static const std::regex  regex;
 
 	public:
+		static const std::string EMPTY;
+
 		Properties() = default;
 		/**
 		 * This constructor reads in a Java style properties file.
@@ -40,6 +42,8 @@ namespace mrw::util
 		 * @return True on success.
 		 */
 		bool read(const QString & filename);
+
+		const std::string & lookup(const std::string & key) const;
 	};
 }
 

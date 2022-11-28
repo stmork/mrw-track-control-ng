@@ -38,7 +38,7 @@ void RailWidget::computeConnectors()
 		{
 			connector_list.append(QPoint(
 					Position::FRACTION + ext - Position::QUARTER,
-					bending == Bending::RIGHT ? 4 * (1 + lines()): 0));
+					bending == Bending::RIGHT ? 4 * (1 + lines()) : 0));
 		}
 	}
 }
@@ -95,7 +95,7 @@ void RailWidget::paint(QPainter & painter)
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
 	painter.drawLine(
-		SCALE,0,do_bend ? border + x_offset : border,0);
+		SCALE, 0, do_bend ? border + x_offset : border, 0);
 
 	// Rail bending to neighbour.
 	if (do_bend)
