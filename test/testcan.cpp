@@ -90,8 +90,8 @@ void TestCan::testReceivedResult()
 
 	array.append(GETRBS | CMD_RESPONSE);
 	array.append(MSG_QUEUED);
-	array.append(0x33);
-	array.append(0x44);
+	array.append(TEST_LSB);
+	array.append(TEST_MSB);
 	frame.setFrameId(TEST_ID);
 	frame.setPayload(array);
 	MrwMessage message(frame);
@@ -101,7 +101,7 @@ void TestCan::testReceivedResult()
 	QCOMPARE(message.sid(),      TEST_CTRL_ID);
 	QCOMPARE(message.command(),  GETRBS);
 	QCOMPARE(message.response(), MSG_QUEUED);
-	QCOMPARE(message.unitNo(),   0x4433);
+	QCOMPARE(message.unitNo(),   TEST_UNIT_NO);
 	QVERIFY(message.toString().size() > 0);
 }
 
@@ -204,6 +204,6 @@ void TestCan::testResult()
 	QCOMPARE(array.size(), 4);
 	QCOMPARE(array[0], SETLFT | CMD_RESPONSE);
 	QCOMPARE(array[1], MSG_OK);
-	QCOMPARE(array[2], 0x78);
-	QCOMPARE(array[3], 0x56);
+	QCOMPARE(array[2], TEST_LSB);
+	QCOMPARE(array[3], TEST_MSB);
 }

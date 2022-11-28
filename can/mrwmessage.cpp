@@ -146,7 +146,9 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 			if (len >= IDX_RESPONSE_SIZE)
 			{
 				msg_response  = (Response)payload[1];
-				unit_no     = payload[2] | (payload[3] << 8);
+				unit_no       =
+					(UnitNo(payload[2]) & 0xff) |
+					(UnitNo(payload[3]) << 8);
 
 				std::copy(payload.begin() + IDX_RESPONSE_SIZE, payload.end(), info);
 			}
