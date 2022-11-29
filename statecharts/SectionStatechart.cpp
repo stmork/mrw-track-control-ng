@@ -234,9 +234,9 @@ namespace mrw
 					return  (stateConfVector[scvi_main_region_Failed] == mrw::statechart::SectionStatechart::State::main_region_Failed);
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Inquiry :
+			case mrw::statechart::SectionStatechart::State::main_region_Wait_for_Start :
 				{
-					return  (stateConfVector[scvi_main_region_Inquiry] == mrw::statechart::SectionStatechart::State::main_region_Inquiry);
+					return  (stateConfVector[scvi_main_region_Wait_for_Start] == mrw::statechart::SectionStatechart::State::main_region_Wait_for_Start);
 					break;
 				}
 			default:
@@ -269,6 +269,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Init'. */
 			timerService->setTimer(this, 0, timeout, false);
+			emit entered();
 		}
 
 		/* Entry action for state 'Relay'. */
@@ -295,6 +296,13 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Failed()
 		{
 			completed = true;
+		}
+
+		/* Entry action for state 'Wait for Start'. */
+		void SectionStatechart::enact_main_region_Wait_for_Start()
+		{
+			/* Entry action for state 'Wait for Start'. */
+			emit waiting();
 		}
 
 		/* Exit action for state 'Init'. */
@@ -348,11 +356,12 @@ namespace mrw
 			stateConfVectorPosition = 0;
 		}
 
-		/* 'default' enter sequence for state Inquiry */
-		void SectionStatechart::enseq_main_region_Inquiry_default()
+		/* 'default' enter sequence for state Wait for Start */
+		void SectionStatechart::enseq_main_region_Wait_for_Start_default()
 		{
-			/* 'default' enter sequence for state Inquiry */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Inquiry;
+			/* 'default' enter sequence for state Wait for Start */
+			enact_main_region_Wait_for_Start();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Wait_for_Start;
 			stateConfVectorPosition = 0;
 		}
 
@@ -418,10 +427,10 @@ namespace mrw
 			stateConfVectorPosition = 0;
 		}
 
-		/* Default exit sequence for state Inquiry */
-		void SectionStatechart::exseq_main_region_Inquiry()
+		/* Default exit sequence for state Wait for Start */
+		void SectionStatechart::exseq_main_region_Wait_for_Start()
 		{
-			/* Default exit sequence for state Inquiry */
+			/* Default exit sequence for state Wait for Start */
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
 			stateConfVectorPosition = 0;
 		}
@@ -448,9 +457,9 @@ namespace mrw
 					exseq_main_region_Failed();
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Inquiry :
+			case mrw::statechart::SectionStatechart::State::main_region_Wait_for_Start :
 				{
-					exseq_main_region_Inquiry();
+					exseq_main_region_Wait_for_Start();
 					break;
 				}
 			default:
@@ -542,7 +551,7 @@ namespace mrw
 		void SectionStatechart::react_main_region__entry_Default()
 		{
 			/* Default react sequence for initial entry  */
-			enseq_main_region_Inquiry_default();
+			enseq_main_region_Wait_for_Start_default();
 		}
 
 		/* Default react sequence for initial entry  */
@@ -725,9 +734,9 @@ namespace mrw
 			return transitioned_after;
 		}
 
-		sc::integer SectionStatechart::main_region_Inquiry_react(const sc::integer transitioned_before)
+		sc::integer SectionStatechart::main_region_Wait_for_Start_react(const sc::integer transitioned_before)
 		{
-			/* The reactions of state Inquiry. */
+			/* The reactions of state Wait for Start. */
 			sc::integer transitioned_after = transitioned_before;
 			if (!doCompletion)
 			{
@@ -735,7 +744,8 @@ namespace mrw
 				{
 					if (inquire_raised)
 					{
-						exseq_main_region_Inquiry();
+						exseq_main_region_Wait_for_Start();
+						emit entering();
 						enseq_main_region_Init_default();
 						react(0);
 						transitioned_after = 0;
@@ -781,9 +791,9 @@ namespace mrw
 					transitioned = main_region_Failed_react(transitioned);
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Inquiry :
+			case mrw::statechart::SectionStatechart::State::main_region_Wait_for_Start :
 				{
-					transitioned = main_region_Inquiry_react(transitioned);
+					transitioned = main_region_Wait_for_Start_react(transitioned);
 					break;
 				}
 			default:

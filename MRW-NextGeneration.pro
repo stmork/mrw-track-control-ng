@@ -29,6 +29,7 @@ proxy.file                = tools/proxy/MRW-Proxy.pro
 track-control-ng.file     = track-control-ng/MRW-Reader.pro
 study.file                = MRW-WidgetStudy/MRW-WidgetStudy.pro
 
+can.depends               = util
 model.depends             = util can
 test.depends              = util can model
 ctrl.depends              = model

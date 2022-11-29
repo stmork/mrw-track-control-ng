@@ -51,7 +51,7 @@ namespace mrw
 				main_region_Init_Init_Process_Requesting_state_Occupation,
 				main_region_Operating,
 				main_region_Failed,
-				main_region_Inquiry
+				main_region_Wait_for_Start
 			};
 
 			/*! The number of states. */
@@ -62,7 +62,7 @@ namespace mrw
 			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_state_Occupation = 1;
 			static const sc::integer scvi_main_region_Operating = 0;
 			static const sc::integer scvi_main_region_Failed = 0;
-			static const sc::integer scvi_main_region_Inquiry = 0;
+			static const sc::integer scvi_main_region_Wait_for_Start = 0;
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -188,8 +188,17 @@ namespace mrw
 
 
 		signals:
+			/*! Signal representing the out event 'waiting' that is defined in the default interface scope. */
+			void waiting();
+
 			/*! Signal representing the out event 'inquired' that is defined in the default interface scope. */
 			void inquired();
+
+			/*! Signal representing the out event 'entering' that is defined in the default interface scope. */
+			void entering();
+
+			/*! Signal representing the out event 'entered' that is defined in the default interface scope. */
+			void entered();
 
 
 		protected:
@@ -236,13 +245,14 @@ namespace mrw
 			void enact_main_region_Init_Init_Process_Requesting_state_Occupation();
 			void enact_main_region_Operating();
 			void enact_main_region_Failed();
+			void enact_main_region_Wait_for_Start();
 			void exact_main_region_Init();
 			void enseq_main_region_Init_default();
 			void enseq_main_region_Init_Init_Process_Requesting_relais_Relay_default();
 			void enseq_main_region_Init_Init_Process_Requesting_state_Occupation_default();
 			void enseq_main_region_Operating_default();
 			void enseq_main_region_Failed_default();
-			void enseq_main_region_Inquiry_default();
+			void enseq_main_region_Wait_for_Start_default();
 			void enseq_main_region_default();
 			void enseq_main_region_Init_Init_Process_default();
 			void exseq_main_region_Init();
@@ -251,7 +261,7 @@ namespace mrw
 			void exseq_main_region_Init_Init_Process_Requesting_state_Occupation();
 			void exseq_main_region_Operating();
 			void exseq_main_region_Failed();
-			void exseq_main_region_Inquiry();
+			void exseq_main_region_Wait_for_Start();
 			void exseq_main_region();
 			void exseq_main_region_Init_Init_Process();
 			void exseq_main_region_Init_Init_Process_Requesting_relais();
@@ -267,7 +277,7 @@ namespace mrw
 			sc::integer main_region_Init_Init_Process_Requesting_state_Occupation_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
-			sc::integer main_region_Inquiry_react(const sc::integer transitioned_before);
+			sc::integer main_region_Wait_for_Start_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
 			void runCycle();

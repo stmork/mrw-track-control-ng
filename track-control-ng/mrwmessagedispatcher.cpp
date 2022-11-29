@@ -7,9 +7,11 @@
 
 #include <ctrl/controllerregistry.h>
 #include <statecharts/timerservice.h>
+#include <util/method.h>
 
 #include "mrwmessagedispatcher.h"
 
+using namespace mrw::util;
 using namespace mrw::can;
 using namespace mrw::model;
 using namespace mrw::ctrl;
@@ -24,6 +26,8 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 	statechart(nullptr),
 	model(model_railway)
 {
+	__METHOD__;
+
 	ControllerRegistry::instance().registerService(this);
 
 	connect(
@@ -38,7 +42,7 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 
 	if (can_device->state() == QCanBusDevice::ConnectedState)
 	{
-		statechart.connected();
+//		statechart.connected();
 	}
 }
 

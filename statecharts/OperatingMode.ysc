@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_PiCOkG_dEe2Ds--x8yNBEw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var timeout : integer = 1000&#xA;&#xA;in event connected&#xA;in event inquired&#xA;in event edit&#xA;in event operate&#xA;&#xA;out event inquire&#xA;out event failed&#xA;out event operating&#xA;" namespace="mrw.statechart" name="OperatingMode">
+  <sgraph:Statechart xmi:id="_PiCOkG_dEe2Ds--x8yNBEw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var timeout : integer = 1000&#xA;var retry : integer = 150&#xA;&#xA;in event connected&#xA;in event inquired&#xA;in event edit&#xA;in event operate&#xA;&#xA;out event inquire&#xA;out event failed&#xA;out event operating&#xA;" namespace="mrw.statechart" name="OperatingMode">
     <regions xmi:id="_PiGgA2_dEe2Ds--x8yNBEw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_PiGgBG_dEe2Ds--x8yNBEw">
         <outgoingTransitions xmi:id="_PiGgBW_dEe2Ds--x8yNBEw" target="_PiGgBm_dEe2Ds--x8yNBEw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_PiGgBm_dEe2Ds--x8yNBEw" name="Init" incomingTransitions="_PiGgBW_dEe2Ds--x8yNBEw">
         <outgoingTransitions xmi:id="_PiGgCW_dEe2Ds--x8yNBEw" specification="connected" target="_PiHHFm_dEe2Ds--x8yNBEw"/>
-        <outgoingTransitions xmi:id="_Vd9lAG_eEe2lm7yxWipHjw" specification="after timeout ms" target="_UPF-IG_eEe2lm7yxWipHjw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_PiHHFm_dEe2Ds--x8yNBEw" name="Operating" incomingTransitions="_PiGgCW_dEe2Ds--x8yNBEw _psDrcG_dEe2lm7yxWipHjw">
         <outgoingTransitions xmi:id="_ckvP4G_dEe2Ds--x8yNBEw" specification="edit" target="_VbyQMG_dEe2Ds--x8yNBEw"/>
@@ -25,7 +24,7 @@
       <vertices xsi:type="sgraph:State" xmi:id="_VbyQMG_dEe2Ds--x8yNBEw" name="Editing" incomingTransitions="_ckvP4G_dEe2Ds--x8yNBEw">
         <outgoingTransitions xmi:id="_psDrcG_dEe2lm7yxWipHjw" target="_PiHHFm_dEe2Ds--x8yNBEw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_UPF-IG_eEe2lm7yxWipHjw" specification="entry / raise failed" name="Fail" incomingTransitions="_Vd9lAG_eEe2lm7yxWipHjw _j7-GsG_eEe2lm7yxWipHjw"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_UPF-IG_eEe2lm7yxWipHjw" specification="entry / raise failed" name="Fail" incomingTransitions="_j7-GsG_eEe2lm7yxWipHjw"/>
     </regions>
   </sgraph:Statechart>
   <notation:Diagram xmi:id="_PiHuK2_dEe2Ds--x8yNBEw" type="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor" element="_PiCOkG_dEe2Ds--x8yNBEw" measurementUnit="Pixel">
@@ -244,19 +243,10 @@
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_FahWkm_eEe2lm7yxWipHjw" points="[-1, 27, 47, -89]$[-1, 96, 47, -20]"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_FajLwG_eEe2lm7yxWipHjw" id="(0.21428571428571427,0.37735849056603776)"/>
     </edges>
-    <edges xmi:id="_Vd-MEG_eEe2lm7yxWipHjw" type="Transition" element="_Vd9lAG_eEe2lm7yxWipHjw" source="_PiHuO2_dEe2Ds--x8yNBEw" target="_UPJBcG_eEe2lm7yxWipHjw">
-      <children xsi:type="notation:DecorationNode" xmi:id="_Vd-zIG_eEe2lm7yxWipHjw" type="TransitionExpression">
-        <styles xsi:type="notation:ShapeStyle" xmi:id="_Vd-zIW_eEe2lm7yxWipHjw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_Vd-zIm_eEe2lm7yxWipHjw" x="-36" y="-17"/>
-      </children>
-      <styles xsi:type="notation:ConnectorStyle" xmi:id="_Vd-MEW_eEe2lm7yxWipHjw" routing="Rectilinear" lineColor="4210752"/>
-      <styles xsi:type="notation:FontStyle" xmi:id="_Vd-ME2_eEe2lm7yxWipHjw" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_Vd-MEm_eEe2lm7yxWipHjw" points="[117, 10, -190, -155]$[306, 10, -1, -155]$[306, 75, -1, -90]"/>
-    </edges>
     <edges xmi:id="_j7-twG_eEe2lm7yxWipHjw" type="Transition" element="_j7-GsG_eEe2lm7yxWipHjw" source="_13XxwG_dEe2lm7yxWipHjw" target="_UPJBcG_eEe2lm7yxWipHjw">
       <children xsi:type="notation:DecorationNode" xmi:id="_j7_U0W_eEe2lm7yxWipHjw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_j7_U0m_eEe2lm7yxWipHjw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_j7_U02_eEe2lm7yxWipHjw" y="10"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_j7_U02_eEe2lm7yxWipHjw" x="18" y="18"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_j7-twW_eEe2lm7yxWipHjw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_j7_U0G_eEe2lm7yxWipHjw" fontName="Verdana"/>

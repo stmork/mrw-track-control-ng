@@ -8,7 +8,7 @@
 #include <QDebug>
 #include <QTimer>
 
-#include "mrwbusservice.h"
+#include <can/mrwbusservice.h>
 
 using namespace mrw::can;
 
@@ -89,18 +89,10 @@ bool MrwBusService::list()
 
 bool MrwBusService::write(const MrwMessage & message)
 {
-	qDebug() << message;
+	QCanBusFrame frame = message;
+	qDebug().noquote() << message;// << " ## " << frame.frameId() << "#" << frame.payload().toHex();
 
-#if 0
-	QTimer::singleShot(10, [&] ()
-	{
-		can_device->writeFrame(message);
-	} );
-
-	return can_device != nullptr;
-#else
 	return (can_device != nullptr) && (can_device->writeFrame(message));
-#endif
 }
 
 void MrwBusService::process(const MrwMessage & message)

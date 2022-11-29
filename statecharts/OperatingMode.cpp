@@ -16,6 +16,7 @@ namespace mrw
 		OperatingMode::OperatingMode(QObject * parent) :
 			QObject(parent),
 			timeout(1000),
+			retry(150),
 			timerService(nullptr),
 			completed(false),
 			doCompletion(false),
@@ -85,10 +86,9 @@ namespace mrw
 				}
 
 
-			case mrw::statechart::OperatingMode::Event::_te0_main_region_Init_:
-			case mrw::statechart::OperatingMode::Event::_te1_main_region_Operating_operating_Inquiry_:
+			case mrw::statechart::OperatingMode::Event::_te0_main_region_Operating_operating_Inquiry_:
 				{
-					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::OperatingMode::Event::_te0_main_region_Init_)] = true;
+					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::OperatingMode::Event::_te0_main_region_Operating_operating_Inquiry_)] = true;
 					break;
 				}
 			default:
@@ -170,7 +170,7 @@ namespace mrw
 		{
 			if (evid < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::OperatingMode::Event>(evid + static_cast<sc::integer>(mrw::statechart::OperatingMode::Event::_te0_main_region_Init_))));
+				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::OperatingMode::Event>(evid + static_cast<sc::integer>(mrw::statechart::OperatingMode::Event::_te0_main_region_Operating_operating_Inquiry_))));
 				runCycle();
 			}
 		}
@@ -229,20 +229,23 @@ namespace mrw
 			this->timeout = timeout_;
 		}
 
-
-// implementations of all internal functions
-		/* Entry action for state 'Init'. */
-		void OperatingMode::enact_main_region_Init()
+		sc::integer OperatingMode::getRetry() const
 		{
-			/* Entry action for state 'Init'. */
-			timerService->setTimer(this, 0, timeout, false);
+			return retry;
 		}
 
+		void OperatingMode::setRetry(sc::integer retry_)
+		{
+			this->retry = retry_;
+		}
+
+
+// implementations of all internal functions
 		/* Entry action for state 'Inquiry'. */
 		void OperatingMode::enact_main_region_Operating_operating_Inquiry()
 		{
 			/* Entry action for state 'Inquiry'. */
-			timerService->setTimer(this, 1, timeout, false);
+			timerService->setTimer(this, 0, timeout, false);
 			emit inquire();
 		}
 
@@ -265,25 +268,17 @@ namespace mrw
 			emit failed();
 		}
 
-		/* Exit action for state 'Init'. */
-		void OperatingMode::exact_main_region_Init()
-		{
-			/* Exit action for state 'Init'. */
-			timerService->unsetTimer(this, 0);
-		}
-
 		/* Exit action for state 'Inquiry'. */
 		void OperatingMode::exact_main_region_Operating_operating_Inquiry()
 		{
 			/* Exit action for state 'Inquiry'. */
-			timerService->unsetTimer(this, 1);
+			timerService->unsetTimer(this, 0);
 		}
 
 		/* 'default' enter sequence for state Init */
 		void OperatingMode::enseq_main_region_Init_default()
 		{
 			/* 'default' enter sequence for state Init */
-			enact_main_region_Init();
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Init;
 		}
 
@@ -345,7 +340,6 @@ namespace mrw
 		{
 			/* Default exit sequence for state Init */
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::NO_STATE;
-			exact_main_region_Init();
 		}
 
 		/* Default exit sequence for state Operating */
@@ -480,17 +474,6 @@ namespace mrw
 						react(0);
 						transitioned_after = 0;
 					}
-					else
-					{
-						if (timeEvents[0])
-						{
-							exseq_main_region_Init();
-							timeEvents[0] = false;
-							enseq_main_region_Fail_default();
-							react(0);
-							transitioned_after = 0;
-						}
-					}
 				}
 				/* If no transition was taken then execute local reactions */
 				if ((transitioned_after) == (transitioned_before))
@@ -543,10 +526,10 @@ namespace mrw
 					}
 					else
 					{
-						if (timeEvents[1])
+						if (timeEvents[0])
 						{
 							exseq_main_region_Operating();
-							timeEvents[1] = false;
+							timeEvents[0] = false;
 							enseq_main_region_Fail_default();
 							react(0);
 							transitioned_after = 0;
@@ -631,7 +614,6 @@ namespace mrw
 			edit_raised = false;
 			operate_raised = false;
 			timeEvents[0] = false;
-			timeEvents[1] = false;
 		}
 
 		void OperatingMode::microStep()
@@ -695,7 +677,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((connected_raised) || (inquired_raised)) || (edit_raised)) || (operate_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while (((((connected_raised) || (inquired_raised)) || (edit_raised)) || (operate_raised)) || (timeEvents[0]));
 			isExecuting = false;
 		}
 

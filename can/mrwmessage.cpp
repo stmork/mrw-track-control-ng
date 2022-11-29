@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "mrwmessage.h"
+#include <can/mrwmessage.h>
 
 using namespace mrw::can;
 using namespace mrw::model;

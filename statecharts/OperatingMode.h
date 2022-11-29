@@ -70,8 +70,7 @@ namespace mrw
 				inquired,
 				edit,
 				operate,
-				_te0_main_region_Init_,
-				_te1_main_region_Operating_operating_Inquiry_
+				_te0_main_region_Operating_operating_Inquiry_
 			};
 
 			class EventInstance
@@ -90,6 +89,12 @@ namespace mrw
 
 			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
 			void setTimeout(sc::integer timeout);
+
+			/*! Gets the value of the variable 'retry' that is defined in the default interface scope. */
+			sc::integer getRetry() const;
+
+			/*! Sets the value of the variable 'retry' that is defined in the default interface scope. */
+			void setRetry(sc::integer retry);
 
 
 			/*
@@ -134,7 +139,7 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 2;
+			static const sc::integer timeEventsCount = 1;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
@@ -181,6 +186,7 @@ namespace mrw
 			OperatingMode & operator=(const OperatingMode &);
 
 			sc::integer timeout;
+			sc::integer retry;
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
@@ -202,12 +208,10 @@ namespace mrw
 
 			// prototypes of all internal functions
 
-			void enact_main_region_Init();
 			void enact_main_region_Operating_operating_Inquiry();
 			void enact_main_region_Operating_operating_Running();
 			void enact_main_region_Editing();
 			void enact_main_region_Fail();
-			void exact_main_region_Init();
 			void exact_main_region_Operating_operating_Inquiry();
 			void enseq_main_region_Init_default();
 			void enseq_main_region_Operating_default();

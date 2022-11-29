@@ -4,13 +4,16 @@
 //
 
 #include <ctrl/controllerregistry.h>
+#include <util/method.h>
 
+using namespace mrw::util;
 using namespace mrw::can;
 using namespace mrw::model;
 using namespace mrw::ctrl;
 
 mrw::ctrl::ControllerRegistry::ControllerRegistry() : QObject(nullptr)
 {
+	__METHOD__;
 }
 
 ControllerRegistry::~ControllerRegistry()

@@ -3,6 +3,9 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <QDebug>
+
+#include <util/method.h>
 #include <ctrl/sectioncontroller.h>
 #include <ctrl/controllerregistry.h>
 #include <statecharts/timerservice.h>
@@ -24,7 +27,26 @@ SectionController::SectionController(
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
 		&statechart, &SectionStatechart::inquire);
-
+	connect(
+		&statechart, &SectionStatechart::entered, [&]()
+	{
+		qDebug().noquote() << ctrl_section->toString() << "enteredd.";
+	});
+	connect(
+		&statechart, &SectionStatechart::waiting, [&]()
+	{
+		qDebug().noquote() << ctrl_section->toString() << "wait for start.";
+	});
+	connect(
+		&statechart, &SectionStatechart::entering, [&]()
+	{
+		qDebug().noquote() << ctrl_section->toString() << "entering.";
+	});
+	connect(
+		&ControllerRegistry::instance(), &ControllerRegistry::inquire, [&]()
+	{
+		qDebug().noquote() << ctrl_section->toString() << "inquiry";
+	});
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
 	statechart.enter();
@@ -117,6 +139,8 @@ bool SectionController::process(const mrw::can::MrwMessage & message)
 
 void SectionController::request()
 {
+	__METHOD__;
+
 	const MrwMessage command(GETRBS, ctrl_section->controller()->id(), ctrl_section->unitNo());
 
 	ControllerRegistry::can()->write(command);
@@ -124,6 +148,8 @@ void SectionController::request()
 
 void SectionController::on()
 {
+	__METHOD__;
+
 	const MrwMessage command(SETRON, ctrl_section->controller()->id(), ctrl_section->unitNo());
 
 	ControllerRegistry::can()->write(command);
@@ -131,6 +157,8 @@ void SectionController::on()
 
 void SectionController::off()
 {
+	__METHOD__;
+
 	const MrwMessage command(SETROF, ctrl_section->controller()->id(), ctrl_section->unitNo());
 
 	ControllerRegistry::can()->write(command);
