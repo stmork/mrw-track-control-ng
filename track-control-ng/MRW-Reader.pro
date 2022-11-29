@@ -11,6 +11,7 @@ SOURCES += \
 	main.cpp \
 	mainwindow.cpp \
 	modelrepository.cpp \
+	mrwmessagedispatcher.cpp \
 	regionform.cpp \
 	../ctrl/basecontroller.cpp \
 	../ctrl/controllerregistrand.cpp \
@@ -38,6 +39,7 @@ SOURCES += \
 HEADERS += \
 	mainwindow.h \
 	modelrepository.h \
+	mrwmessagedispatcher.h \
 	regionform.h \
 	../ctrl/basecontroller.h \
 	../ctrl/controllerregistrand.h \

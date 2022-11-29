@@ -46,7 +46,7 @@ namespace mrw::model
 		friend class Signal;
 
 		std::unordered_map<mrw::can::ControllerId, Controller *> controller_map;
-		std::unordered_map<mrw::can::ControllerId, Device *>     device_map;
+		std::unordered_map<mrw::can::UnitNo, Device *>           device_map;
 
 		QDomDocument               xml;
 		QString                    name;
@@ -95,10 +95,7 @@ namespace mrw::model
 		 * @param id The ID of the Controller.
 		 * @return The Controller looked up by its ID.
 		 */
-		inline Controller * controllerById(const mrw::can::ControllerId id) const
-		{
-			return controller_map.find(id)->second;
-		}
+		Controller * controllerById(const mrw::can::ControllerId id) const;
 
 		/**
 		 * This method returns a Device instance based on its unit number. This
@@ -108,10 +105,7 @@ namespace mrw::model
 		 * @param unit_no The unit number of the Device.
 		 * @return The Device looked up by its unit number.
 		 */
-		inline Device * deviceById(const mrw::can::UnitNo unit_no) const
-		{
-			return device_map.find(unit_no)->second;
-		}
+		Device * deviceByUnitNo(const mrw::can::UnitNo unit_no) const;
 
 		/**
 		 * This method return the amount of containing Controller elements.

@@ -168,6 +168,11 @@ namespace mrw::can
 		 */
 		operator QCanBusFrame() const;
 
+		inline bool isResponse() const
+		{
+			return is_response;
+		}
+
 		QString toString() const override;
 
 	private:

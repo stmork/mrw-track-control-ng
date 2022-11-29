@@ -14,6 +14,7 @@
 
 #include "mainwindow.h"
 #include "modelrepository.h"
+#include "mrwmessagedispatcher.h"
 
 using namespace mrw::util;
 using namespace mrw::model;
@@ -31,23 +32,21 @@ int main(int argc, char * argv[])
 
 	if (repo)
 	{
-		ModelRailway * model = repo;
+		MrwMessageDispatcher dispatcher(repo, "can0", "virtualcan");
+		ModelRailway *       model = repo;
+		MainWindow           main_window(repo);
 
 //		model->dump();
 		model->info();
+
 		settings.setValue("filename", modelname);
+		main_window.show();
+		return app.exec();
 	}
 	else
 	{
 		qCritical() << "No model available: " << modelname;
+
+		return EXIT_FAILURE;
 	}
-
-#if 1
-	MainWindow   main_window(repo);
-
-	main_window.show();
-	return app.exec();
-#else
-	return EXIT_SUCCESS;
-#endif
 }

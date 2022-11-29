@@ -23,7 +23,7 @@ namespace mrw::can
 		Q_OBJECT
 
 		QCanBus     *    can_bus;
-		QCanBusDevice  * device;
+		QCanBusDevice  * can_device;
 
 	public:
 		explicit MrwBusService(

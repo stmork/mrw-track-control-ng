@@ -21,11 +21,11 @@ MrwBusService::MrwBusService(
 	QString error;
 	QString selected = select(interface, plugin);
 
-	device = can_bus->createDevice(plugin, selected, &error);
-	if (device != nullptr)
+	can_device = can_bus->createDevice(plugin, selected, &error);
+	if (can_device != nullptr)
 	{
-		connect(device, &QCanBusDevice::framesReceived, this, &MrwBusService::receive);
-		connect(device, &QCanBusDevice::stateChanged,   this, &MrwBusService::stateChanged);
+		connect(can_device, &QCanBusDevice::framesReceived, this, &MrwBusService::receive);
+		connect(can_device, &QCanBusDevice::stateChanged,   this, &MrwBusService::stateChanged);
 
 #ifdef MRW_VERBOSE
 		connect(device, &QCanBusDevice::errorOccurred, [] (auto reason)
@@ -34,7 +34,7 @@ MrwBusService::MrwBusService(
 		});
 #endif
 
-		device->connectDevice();
+		can_device->connectDevice();
 	}
 	else
 	{
@@ -44,18 +44,18 @@ MrwBusService::MrwBusService(
 
 MrwBusService::~MrwBusService()
 {
-	if (device != nullptr)
+	if (can_device != nullptr)
 	{
-		device->disconnectDevice();
-		delete device;
+		can_device->disconnectDevice();
+		delete can_device;
 	}
 }
 
 bool MrwBusService::valid()
 {
 	return
-		(device != nullptr) &&
-		(device->state() == QCanBusDevice::ConnectedState);
+		(can_device != nullptr) &&
+		(can_device->state() == QCanBusDevice::ConnectedState);
 }
 
 bool MrwBusService::list()
@@ -89,7 +89,7 @@ bool MrwBusService::list()
 bool MrwBusService::write(const MrwMessage & message)
 {
 	qDebug() << message;
-	return (device != nullptr) && (device->writeFrame(message));
+	return (can_device != nullptr) && (can_device->writeFrame(message));
 }
 
 void MrwBusService::process(const MrwMessage & message)
@@ -145,7 +145,7 @@ void MrwBusService::stateChanged(QCanBusDevice::CanBusDeviceState state)
 
 void MrwBusService::receive()
 {
-	for (const QCanBusFrame & frame : device->readAllFrames())
+	for (const QCanBusFrame & frame : can_device->readAllFrames())
 	{
 		process(MrwMessage(frame));
 	}

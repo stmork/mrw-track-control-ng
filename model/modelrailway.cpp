@@ -260,3 +260,17 @@ void ModelRailway::dump(const QDomNode & node, const QString & indent) const
 	}
 	qDebug().noquote().nospace() << indent << "</" << node.nodeName() << ">";
 }
+
+Controller * ModelRailway::controllerById(const ControllerId id) const
+{
+	auto it = controller_map.find(id);
+
+	return it != controller_map.end() ? it->second : nullptr;
+}
+
+Device * ModelRailway::deviceByUnitNo(const mrw::can::UnitNo unit_no) const
+{
+	auto it = device_map.find(unit_no);
+
+	return it != device_map.end() ? it->second : nullptr;
+}
