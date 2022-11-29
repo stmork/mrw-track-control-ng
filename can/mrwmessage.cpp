@@ -281,19 +281,38 @@ QString MrwMessage::toString() const
 	}
 }
 
-void mrw::can::MrwMessage::copy(QByteArray & array) const
+void MrwMessage::append(const uint8_t input)
 {
-	size_t start = is_response ? IDX_RESPONSE_SIZE : IDX_COMMAND_SIZE;
+	const size_t s = start();
 
-	for (size_t i = start; i < len; i++)
+	if (len < 8)
 	{
-		array.append(info[i - start]);
+		info[len++ - s] = input;
+	}
+	else
+	{
+		throw std::out_of_range("CAN payload exceeded!");
+	}
+}
+
+void MrwMessage::copy(QByteArray & array) const
+{
+	size_t s = start();
+
+	for (size_t i = s; i < len; i++)
+	{
+		array.append(info[i - s]);
 	}
 }
 
 size_t MrwMessage::max() const
 {
-	const size_t start = is_response ? IDX_RESPONSE_SIZE : IDX_COMMAND_SIZE;
+	const size_t s = start();
 
-	return len < start ? 0 : len - start;
+	return len < s ? 0 : len - s;
+}
+
+size_t mrw::can::MrwMessage::start() const
+{
+	return is_response ? IDX_RESPONSE_SIZE : IDX_COMMAND_SIZE;
 }

@@ -207,3 +207,76 @@ void TestCan::testResult()
 	QCOMPARE(array[2], TEST_LSB);
 	QCOMPARE(array[3], TEST_MSB);
 }
+
+void TestCan::testCopyRequest()
+{
+	const size_t start = 1;
+
+	for (size_t i = start; i < 8; i++)
+	{
+		MrwMessage   message(PING);
+
+		for (unsigned v = start; v <= i; v++)
+		{
+			message.append(0x11 * v);
+		}
+
+		QCanBusFrame frame(message);
+		QByteArray   array(frame.payload());
+
+		QVERIFY(message.valid());
+		QCOMPARE(message.eid(),      0);
+		QCOMPARE(message.sid(),      CAN_BROADCAST_ID);
+		QCOMPARE(message.command(),  PING);
+		QCOMPARE(message.response(), MSG_NO_RESPONSE);
+		QCOMPARE(message.unitNo(),   0);
+		QVERIFY(message.toString().size() > 0);
+
+		QVERIFY(!frame.hasExtendedFrameFormat());
+		QCOMPARE(frame.frameId(), CAN_BROADCAST_ID);
+		QCOMPARE(array.size(), i + 1);
+		QCOMPARE(array[0], PING);
+
+		for (unsigned v = start; v <= i; v++)
+		{
+			QCOMPARE(array[v], 0x11 * v);
+		}
+	}
+}
+
+void TestCan::testCopyResponse()
+{
+	const size_t start = 4;
+
+	for (size_t i = start; i < 8; i++)
+	{
+		MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, MSG_QUEUED);
+
+		for (unsigned v = start; v <= i; v++)
+		{
+			message.append(0x11 * v);
+		}
+
+		QCanBusFrame frame(message);
+		QByteArray   array(frame.payload());
+
+		QVERIFY(message.valid());
+		QCOMPARE(message.eid(),      TEST_CTRL_ID);
+		QCOMPARE(message.sid(),      CAN_GATEWAY_ID);
+		QCOMPARE(message.command(),  SETLFT);
+		QCOMPARE(message.response(), MSG_QUEUED);
+		QCOMPARE(message.unitNo(),   TEST_UNIT_NO);
+		QVERIFY(message.toString().size() > 0);
+
+		QVERIFY(frame.hasExtendedFrameFormat());
+		QCOMPARE(frame.frameId(), TEST_CTRL_ID);
+		QCOMPARE(array.size(), i + 1);
+		QCOMPARE(array[0], SETLFT | CMD_RESPONSE);
+		QCOMPARE(array[1], MSG_QUEUED);
+
+		for (unsigned v = start; v <= i; v++)
+		{
+			QCOMPARE(array[v], 0x11 * v);
+		}
+	}
+}

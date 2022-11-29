@@ -41,6 +41,8 @@ namespace mrw::test
 		void testBroadcast();
 		void testCommand();
 		void testResult();
+		void testCopyRequest();
+		void testCopyResponse();
 	};
 }
 

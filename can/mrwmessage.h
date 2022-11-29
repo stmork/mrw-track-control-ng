@@ -180,9 +180,12 @@ namespace mrw::can
 			return info[index];
 		}
 
+		void append(const uint8_t input);
+
 	private:
 		size_t max() const;
-		void copy(QByteArray & array) const;
+		size_t start() const;
+		void   copy(QByteArray & array) const;
 	};
 }
 
