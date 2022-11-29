@@ -20,8 +20,9 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
-		mrw::model::Section  *  section   = nullptr;
-		mrw::model::Rail    *   rail      = nullptr;
+		mrw::model::Section    *   section   = nullptr;
+		mrw::model::Rail     *     rail      = nullptr;
+		mrw::model::SectionState   section_state = mrw::model::SectionState::FREE;
 
 	public:
 		explicit RailControllerProxy(

@@ -42,7 +42,7 @@ Position * DoubleCrossSwitchControllerProxy::position() const
 
 SectionState DoubleCrossSwitchControllerProxy::state() const
 {
-	return part->section()->state();
+	return part->section()->occupation() ? SectionState::OCCUPIED : SectionState::FREE;
 }
 
 Device::LockState DoubleCrossSwitchControllerProxy::lock() const

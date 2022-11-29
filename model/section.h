@@ -52,7 +52,7 @@ namespace mrw::model
 		Region           *           section_region     = nullptr;
 		Controller         *         section_controller = nullptr;
 		SectionModule        *       section_module     = nullptr;
-		SectionState                 section_state      = FREE;
+		bool                         occupied           = false;
 		std::vector<AssemblyPart *>  assembly_parts;
 
 	public:
@@ -74,9 +74,14 @@ namespace mrw::model
 			return section_name;
 		}
 
-		inline SectionState state() const
+		inline void setOccupation(const bool input = true)
 		{
-			return section_state;
+			occupied = input;
+		}
+
+		inline bool occupation() const
+		{
+			return occupied;
 		}
 
 		QString toString() const override;

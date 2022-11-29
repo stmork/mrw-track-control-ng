@@ -239,6 +239,7 @@ MrwMessage::operator QCanBusFrame() const
 		array.append(msg_response);
 		array.append(unit_no & 0xff);
 		array.append(unit_no >> 8);
+		copy(array);
 
 		QCanBusFrame frame = QCanBusFrame(id(), array);
 		frame.setExtendedFrameFormat(is_extended);
@@ -248,6 +249,7 @@ MrwMessage::operator QCanBusFrame() const
 	else
 	{
 		array.append(msg_command);
+		copy(array);
 
 		return QCanBusFrame(id(), array);
 	}
@@ -276,6 +278,16 @@ QString MrwMessage::toString() const
 				is_extended ? 'X' : 's',
 				command_map.get(msg_command).toStdString().c_str(), "",
 				appendix.toStdString().c_str());
+	}
+}
+
+void mrw::can::MrwMessage::copy(QByteArray & array) const
+{
+	size_t start = is_response ? IDX_RESPONSE_SIZE : IDX_COMMAND_SIZE;
+
+	for (size_t i = start; i < len; i++)
+	{
+		array.append(info[i - start]);
 	}
 }
 

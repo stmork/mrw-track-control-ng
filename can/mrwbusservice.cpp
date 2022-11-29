@@ -6,6 +6,7 @@
 #include <QCanBus>
 #include <QCanBusDeviceInfo>
 #include <QDebug>
+#include <QTimer>
 
 #include "mrwbusservice.h"
 
@@ -89,7 +90,17 @@ bool MrwBusService::list()
 bool MrwBusService::write(const MrwMessage & message)
 {
 	qDebug() << message;
+
+#if 0
+	QTimer::singleShot(10, [&] ()
+	{
+		can_device->writeFrame(message);
+	} );
+
+	return can_device != nullptr;
+#else
 	return (can_device != nullptr) && (can_device->writeFrame(message));
+#endif
 }
 
 void MrwBusService::process(const MrwMessage & message)

@@ -32,9 +32,9 @@ int main(int argc, char * argv[])
 
 	if (repo)
 	{
-		MrwMessageDispatcher dispatcher(repo, "can0", "virtualcan");
-		ModelRailway *       model = repo;
 		MainWindow           main_window(repo);
+		MrwMessageDispatcher dispatcher(repo, "can0", "virtualcan");
+		ModelRailway    *    model = repo;
 
 //		model->dump();
 		model->info();

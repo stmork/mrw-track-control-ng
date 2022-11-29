@@ -6,12 +6,14 @@
 #include <QDebug>
 
 #include <ctrl/controllerregistry.h>
+#include <statecharts/timerservice.h>
 
 #include "mrwmessagedispatcher.h"
 
 using namespace mrw::can;
 using namespace mrw::model;
 using namespace mrw::ctrl;
+using namespace mrw::statechart;
 
 MrwMessageDispatcher::MrwMessageDispatcher(
 	mrw::model::ModelRailway  *  model_railway,
@@ -19,8 +21,30 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 	const char         *         plugin,
 	QObject           *          parent) :
 	MrwBusService(interface, plugin, parent),
+	statechart(nullptr),
 	model(model_railway)
 {
+	ControllerRegistry::instance().registerService(this);
+
+	connect(
+		this, &MrwBusService::connected,
+		&statechart, &OperatingMode::connected);
+	connect(
+		&statechart, &OperatingMode::inquire,
+		&ControllerRegistry::instance(), &ControllerRegistry::inquire);
+
+	statechart.setTimerService(&TimerService::instance());
+	statechart.enter();
+
+	if (can_device->state() == QCanBusDevice::ConnectedState)
+	{
+		statechart.connected();
+	}
+}
+
+MrwMessageDispatcher::~MrwMessageDispatcher()
+{
+	statechart.exit();
 }
 
 void MrwMessageDispatcher::process(const MrwMessage & message)
@@ -39,12 +63,13 @@ void MrwMessageDispatcher::process(const MrwMessage & message)
 
 			if (controller != nullptr)
 			{
-				controller->process(message);
+				if (controller->process(message))
+				{
+					return;
+				}
 			}
 		}
 	}
-	else
-	{
-		qDebug().noquote() << message;
-	}
+
+	qDebug().noquote() << message << "---";
 }

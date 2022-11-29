@@ -22,6 +22,7 @@ namespace mrw::can
 	{
 		Q_OBJECT
 
+	protected:
 		QCanBus     *    can_bus;
 		QCanBusDevice  * can_device;
 

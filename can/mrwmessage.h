@@ -175,8 +175,14 @@ namespace mrw::can
 
 		QString toString() const override;
 
+		uint8_t operator[] (const int index) const
+		{
+			return info[index];
+		}
+
 	private:
 		size_t max() const;
+		void copy(QByteArray & array) const;
 	};
 }
 

@@ -68,6 +68,6 @@ FORMS += \
 	mainwindow.ui \
 	regionform.ui
 
-LIBS            += -lMRW-Model -lMRW-Util -lMRW-Can
+LIBS            += -lMRW-Model -lMRW-Util -lMRW-Can -l MRW-Statecharts
 
 QMAKE_CLEAN     += $$TARGET

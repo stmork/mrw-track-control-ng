@@ -1,0 +1,46 @@
+GeneratorModel for yakindu::cpp::qt
+{
+	const PROJECT : string = "mrw.statecharts"
+	const FOLDER  : string = "."
+	const COMMON :  string = "common"
+
+	statechart mrw.statechart.OperatingMode
+	{
+		feature GeneralFeatures
+		{
+			timerService = false
+		}
+
+		feature LicenseHeader
+		{
+			licenseText = "Copyright (C) Steffen A. Mork"
+		}
+
+		feature Outlet
+		{
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
+			libraryTargetFolder = COMMON
+		}
+	}
+
+	statechart mrw.statechart.SectionStatechart
+	{
+		feature GeneralFeatures
+		{
+			timerService = false
+		}
+
+		feature LicenseHeader
+		{
+			licenseText = "Copyright (C) Steffen A. Mork"
+		}
+
+		feature Outlet
+		{
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
+			libraryTargetFolder = COMMON
+		}
+	}
+}

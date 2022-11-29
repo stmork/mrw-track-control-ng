@@ -1,0 +1,33 @@
+GeneratorModel for yakindu::images
+{
+	const PROJECT : string = "mrw.statecharts"
+	const FOLDER  : string = "images"
+
+	statechart mrw.statechart.OperatingMode
+	{
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+		}
+
+		feature Renderer
+		{
+			format = "png"
+		}
+	}
+
+	statechart mrw.statechart.SectionStatechart
+	{
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+		}
+
+		feature Renderer
+		{
+			format = "png"
+		}
+	}
+}

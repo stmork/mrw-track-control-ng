@@ -7,6 +7,7 @@ TEMPLATE = subdirs
 SUBDIRS  = \
 	can \
 	util \
+	statecharts \
 	model \
 	ctrl \
 	ui \
@@ -18,6 +19,7 @@ SUBDIRS  = \
 
 can.file                  = can/MRW-Can.pro
 util.file                 = util/MRW-Util.pro
+statecharts.file          = statecharts/MRW-Statecharts.pro 
 model.file                = model/MRW-Model.pro
 ctrl.file                 = ctrl/MRW-Ctrl.pro
 ui.file                   = ui/MRW-UI.pro
@@ -34,7 +36,7 @@ ui.depends                = ctrl
 ping.depends              = test
 proxy.depends             = test
 study.depends             = util can model ctrl ui
-track-control-ng.depends  = study
+track-control-ng.depends  = statecharts study
 
 QMAKE_CLEAN              += qtest*.xml
 
@@ -48,6 +50,8 @@ astyle.commands = astyle */*.cpp */*.h tools/*/*.cpp
 
 cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--inline-suppr\
+	--suppress=noExplicitConstructor:statecharts/*.h\
+	--suppress=duplicateBreak:statecharts/*.cpp\
 	--enable=style,warning,performance,portability\
 	--language=c++ --std=c++14\
 	--library=qt\

@@ -11,17 +11,20 @@
 #include <model/section.h>
 #include <ctrl/basecontroller.h>
 #include <ctrl/controllerregistrand.h>
+#include <statecharts/SectionStatechart.h>
 
 namespace mrw::ctrl
 {
 	class SectionController :
 		public BaseController,
-		public ControllerRegistrand
+		public ControllerRegistrand,
+		public mrw::statechart::SectionStatechart::OperationCallback
 	{
 		Q_OBJECT
 
 	private:
-		mrw::model::Section * ctrl_section;
+		mrw::statechart::SectionStatechart  statechart;
+		mrw::model::Section        *        ctrl_section;
 
 	public:
 		explicit SectionController(
@@ -43,6 +46,14 @@ namespace mrw::ctrl
 		virtual mrw::model::SectionState      state() const override;
 		virtual mrw::model::Device::LockState lock() const override;
 		virtual mrw::model::Position::Bending bending() const override;
+
+		// Implementations from ControllerRegistrand
+		virtual bool process(const can::MrwMessage & message) override;
+
+		// Implementations from OperationCallback
+		virtual void off() override;
+		virtual void on() override;
+		virtual void request() override;
 	};
 }
 

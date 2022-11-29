@@ -10,13 +10,15 @@
 
 #include <can/mrwbusservice.h>
 #include <model/modelrailway.h>
+#include <statecharts/OperatingMode.h>
 
 class MrwMessageDispatcher : public mrw::can::MrwBusService
 {
 	Q_OBJECT
 
 private:
-	mrw::model::ModelRailway * model = nullptr;
+	mrw::statechart::OperatingMode   statechart;
+	mrw::model::ModelRailway    *    model   = nullptr;
 
 public:
 	MrwMessageDispatcher() = delete;
@@ -25,6 +27,8 @@ public:
 		const char         *         interface = "can0",
 		const char         *         plugin    = "socketcan",
 		QObject           *          parent = nullptr);
+
+	virtual ~MrwMessageDispatcher();
 
 protected:
 	virtual void process(const mrw::can::MrwMessage & message) override;
