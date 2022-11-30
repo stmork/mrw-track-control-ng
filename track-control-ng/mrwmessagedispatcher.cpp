@@ -42,6 +42,7 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 
 	if (can_device->state() == QCanBusDevice::ConnectedState)
 	{
+		// TODO: Add API to start manually.
 //		statechart.connected();
 	}
 }

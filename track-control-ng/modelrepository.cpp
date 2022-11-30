@@ -178,7 +178,8 @@ void ModelRepository::prepareHost()
 	can_iface   = settings_host.value("interface", "can0").toString();
 	dump_result = settings_host.value("dump", dump_result).toBool();
 	dump_xml    = settings_host.value("xml",  dump_xml).toBool();
-	qDebug() << can_plugin << can_iface;
+
+	qDebug().noquote().nospace() << can_plugin << "/" << can_iface;
 }
 
 void ModelRepository::prepareRegions()
