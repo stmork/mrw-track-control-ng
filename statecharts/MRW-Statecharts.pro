@@ -11,6 +11,7 @@ include(../common.pri)
 HEADERS += \
 	OperatingMode.h \
 	SectionStatechart.h \
+	SwitchStatechart.h \
 	common/sc_statemachine.h \
 	common/sc_timer.h \
 	common/sc_types.h \
@@ -19,6 +20,7 @@ HEADERS += \
 SOURCES += \
 	OperatingMode.cpp \
 	SectionStatechart.cpp \
+	SwitchStatechart.cpp \
 	timerservice.cpp
 
 QMAKE_CLEAN         += $$TARGET
