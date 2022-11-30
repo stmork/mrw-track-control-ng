@@ -33,7 +33,7 @@ void TestModel::testModel()
 	QVERIFY(model != nullptr);
 	QVERIFY(model->valid());
 	model->info();
-	model->dump();
+	model->info();
 }
 
 void TestModel::testControllers()

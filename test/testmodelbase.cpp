@@ -36,5 +36,5 @@ void TestModelBase::cleanupTestCase()
 void TestModelBase::testInfo()
 {
 	model->info();
-	model->dump();
+	model->info();
 }

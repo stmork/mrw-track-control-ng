@@ -19,8 +19,8 @@ using namespace mrw::statechart;
 
 MrwMessageDispatcher::MrwMessageDispatcher(
 	mrw::model::ModelRailway  *  model_railway,
-	const char         *         interface,
-	const char         *         plugin,
+	const QString        &       interface,
+	const QString        &       plugin,
 	QObject           *          parent) :
 	MrwBusService(interface, plugin, parent),
 	statechart(nullptr),

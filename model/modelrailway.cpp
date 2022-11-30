@@ -20,7 +20,7 @@ ModelRailway::ModelRailway(const QString & filename)
 
 	if (file.open(QIODevice::ReadOnly))
 	{
-		xml.setContent(&file);
+		xml_doc.setContent(&file);
 		file.close();
 
 		create();
@@ -43,16 +43,16 @@ ModelRailway::~ModelRailway()
 	regions.clear();
 }
 
-void ModelRailway::dump() const
+void ModelRailway::xml() const
 {
-	dump(xml.documentElement());
+	xml(xml_doc.documentElement());
 }
 
 void ModelRailway::create()
 {
 	__METHOD__;
 
-	const QDomElement  & model = xml.documentElement();
+	const QDomElement  & model = xml_doc.documentElement();
 	const QDomNodeList & child_nodes = model.childNodes();
 
 	name = model.attribute("name");
@@ -232,7 +232,7 @@ bool ModelRailway::boolean(const QDomElement & node, const char * attr, const bo
 	return node.attribute(attr, default_value ? "true" : "false") == "true";
 }
 
-void ModelRailway::dump(const QDomNode & node, const QString & indent) const
+void ModelRailway::xml(const QDomNode & node, const QString & indent) const
 {
 	const QDomNodeList & child_nodes = node.childNodes();
 
@@ -256,7 +256,7 @@ void ModelRailway::dump(const QDomNode & node, const QString & indent) const
 	{
 		const QDomNode & child = child_nodes.at(n);
 
-		dump(child, indent + "  ");
+		xml(child, indent + "  ");
 	}
 	qDebug().noquote().nospace() << indent << "</" << node.nodeName() << ">";
 }

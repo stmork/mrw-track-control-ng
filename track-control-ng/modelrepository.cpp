@@ -3,6 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <QHostInfo>
 #include <QDirIterator>
 #include <QDebug>
 
@@ -22,13 +23,13 @@ const char * ModelRepository::RAILPART_FILENAME = "Gleisteile.properties";
 
 ModelRepository::ModelRepository(const QString & model_name) :
 	settings_model(model_name),
-	settings_host("localhost"),
 	home_dir(QDir::homePath())
 {
 	filename += model_name + ".modelrailway";
 	filter << model_name;
 
 	readMaps();
+	prepareHost();
 	prepareRegions();
 	prepareRailParts();
 }
@@ -45,6 +46,22 @@ ModelRepository::~ModelRepository()
 	}
 
 	delete model;
+}
+
+void ModelRepository::info()
+{
+	if (dump_result)
+	{
+		model->info();
+	}
+}
+
+void ModelRepository::xml()
+{
+	if (dump_xml)
+	{
+		model->xml();
+	}
 }
 
 void ModelRepository::readMaps()
@@ -150,6 +167,18 @@ void ModelRepository::setFilenames()
 	settings_model.setValue("regions", region_filename);
 	settings_model.setValue("railparts", railpart_filename);
 	settings_model.sync();
+}
+
+void ModelRepository::prepareHost()
+{
+	QString       hostname = QHostInfo::localHostName();
+	SettingsGroup group (&settings_host, hostname);
+
+	can_plugin  = settings_host.value("plugin", "socketcan").toString();
+	can_iface   = settings_host.value("interface", "can0").toString();
+	dump_result = settings_host.value("dump", dump_result).toBool();
+	dump_xml    = settings_host.value("xml",  dump_xml).toBool();
+	qDebug() << can_plugin << can_iface;
 }
 
 void ModelRepository::prepareRegions()

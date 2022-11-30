@@ -33,11 +33,10 @@ int main(int argc, char * argv[])
 	if (repo)
 	{
 		MainWindow           main_window(repo);
-		MrwMessageDispatcher dispatcher(repo, "can0", "virtualcan");
-		ModelRailway    *    model = repo;
+		MrwMessageDispatcher dispatcher(repo, repo.interface(), repo.plugin());
 
-//		model->dump();
-		model->info();
+		repo.info();
+		repo.xml();
 
 		settings.setValue("filename", modelname);
 		main_window.show();

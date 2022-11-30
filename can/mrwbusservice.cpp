@@ -15,9 +15,9 @@
 using namespace mrw::can;
 
 MrwBusService::MrwBusService(
-	const char * interface,
-	const char * plugin,
-	QObject   *  parent) : QObject(parent),
+	const QString & interface,
+	const QString & plugin,
+	QObject    *    parent) : QObject(parent),
 	can_bus(QCanBus::instance())
 
 {

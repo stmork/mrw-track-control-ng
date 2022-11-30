@@ -24,8 +24,8 @@ public:
 	MrwMessageDispatcher() = delete;
 	explicit MrwMessageDispatcher(
 		mrw::model::ModelRailway  *  model_railway,
-		const char         *         interface = "can0",
-		const char         *         plugin    = "socketcan",
+		const QString        &       interface = "can0",
+		const QString        &       plugin    = "socketcan",
 		QObject           *          parent = nullptr);
 
 	virtual ~MrwMessageDispatcher();

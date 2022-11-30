@@ -36,6 +36,12 @@ class ModelRepository
 	QString                      region_filename;
 	QStringList                  filter;
 
+	// Per host configuration
+	QString                      can_plugin;
+	QString                      can_iface;
+	bool                         dump_result = false;
+	bool                         dump_xml    = false;
+
 	mrw::model::ModelRailway  *  model = nullptr;
 	mrw::util::Properties        region_map;
 	mrw::util::Properties        signal_map;
@@ -52,12 +58,27 @@ public:
 
 	operator bool() const;
 
+	inline const QString & plugin() const
+	{
+		return can_plugin;
+	}
+
+	inline const QString & interface() const
+	{
+		return can_iface;
+	}
+
+	void info();
+	void xml();
+
 private:
 	void        readMaps();
 	QString     lookup();
 	QString     lookupModel(const QString & base);
 	QStringList lookupProperties(const QString & base);
 	void        setFilenames();
+
+	void        prepareHost();
 	void        prepareRegions();
 	void        prepareRailParts();
 	void        prepareSignals(mrw::model::Region * region);

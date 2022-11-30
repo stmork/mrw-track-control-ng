@@ -48,7 +48,7 @@ namespace mrw::model
 		std::unordered_map<mrw::can::ControllerId, Controller *> controller_map;
 		std::unordered_map<mrw::can::UnitNo, Device *>           device_map;
 
-		QDomDocument               xml;
+		QDomDocument               xml_doc;
 		QString                    name;
 		std::vector<Controller *>  controllers;
 		std::vector<Region *>      regions;
@@ -68,7 +68,7 @@ namespace mrw::model
 		/**
 		 * This method dumps the parsed EMF/XMI nodes and attributes.
 		 */
-		void dump() const;
+		void xml() const;
 
 		/**
 		 * This method dumps the parsed information about the model railway.
@@ -270,7 +270,7 @@ namespace mrw::model
 		void add(Device * device);
 		void link();
 
-		void dump(const QDomNode & node, const QString & indent = "") const;
+		void xml(const QDomNode & node, const QString & indent = "") const;
 	};
 }
 

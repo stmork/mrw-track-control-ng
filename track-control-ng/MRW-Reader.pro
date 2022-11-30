@@ -3,7 +3,7 @@
 #  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 #
 
-QT += gui widgets
+QT += gui widgets network
 
 include(../common.pri)
 
