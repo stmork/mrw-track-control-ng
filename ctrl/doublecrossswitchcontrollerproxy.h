@@ -11,17 +11,20 @@
 #include <model/doublecrossswitch.h>
 #include <ctrl/doublecrossswitchcontroller.h>
 #include <ctrl/controllerregistrand.h>
+#include <statecharts/SwitchStatechart.h>
 
 namespace mrw::ctrl
 {
 	class DoubleCrossSwitchControllerProxy :
 		public DoubleCrossSwitchController,
-		public ControllerRegistrand
+		public ControllerRegistrand,
+		public mrw::statechart::SwitchStatechart::OperationCallback
 	{
 		Q_OBJECT
 
 	private:
-		mrw::model::DoubleCrossSwitch * part = nullptr;
+		mrw::statechart::SwitchStatechart   statechart;
+		mrw::model::DoubleCrossSwitch   *   part = nullptr;
 
 	public:
 		explicit DoubleCrossSwitchControllerProxy(
@@ -42,6 +45,14 @@ namespace mrw::ctrl
 
 		// Implementations from DoubleCrossSwitchController
 		virtual mrw::model::DoubleCrossSwitch::State switchState() const override;
+
+		// Implementations from ControllerRegistrand
+		virtual bool process(const can::MrwMessage & message) override;
+
+		// Implementations from OperationCallback
+		virtual void left() override;
+		virtual void right() override;
+		virtual void request() override;
 	};
 }
 
