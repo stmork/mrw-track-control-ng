@@ -15,12 +15,11 @@ namespace mrw
 
 		OperatingMode::OperatingMode(QObject * parent) :
 			QObject(parent),
-			timeout(1000),
+			timeout(3000),
 			retry(150),
 			timerService(nullptr),
-			completed(false),
-			doCompletion(false),
 			isExecuting(false),
+			stateConfVectorChanged(false),
 			connected_raised(false),
 			inquired_raised(false),
 			edit_raised(false),
@@ -256,11 +255,6 @@ namespace mrw
 			emit operating();
 		}
 
-		void OperatingMode::enact_main_region_Editing()
-		{
-			completed = true;
-		}
-
 		/* Entry action for state 'Fail'. */
 		void OperatingMode::enact_main_region_Fail()
 		{
@@ -280,6 +274,7 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Init */
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Init;
+			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Operating */
@@ -295,6 +290,7 @@ namespace mrw
 			/* 'default' enter sequence for state Inquiry */
 			enact_main_region_Operating_operating_Inquiry();
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Operating_operating_Inquiry;
+			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Running */
@@ -303,14 +299,15 @@ namespace mrw
 			/* 'default' enter sequence for state Running */
 			enact_main_region_Operating_operating_Running();
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Operating_operating_Running;
+			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Editing */
 		void OperatingMode::enseq_main_region_Editing_default()
 		{
 			/* 'default' enter sequence for state Editing */
-			enact_main_region_Editing();
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Editing;
+			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Fail */
@@ -319,6 +316,7 @@ namespace mrw
 			/* 'default' enter sequence for state Fail */
 			enact_main_region_Fail();
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Fail;
+			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for region main region */
@@ -463,23 +461,20 @@ namespace mrw
 		{
 			/* The reactions of state Init. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
+				if (connected_raised)
 				{
-					if (connected_raised)
-					{
-						exseq_main_region_Init();
-						enseq_main_region_Operating_default();
-						react(0);
-						transitioned_after = 0;
-					}
+					exseq_main_region_Init();
+					enseq_main_region_Operating_default();
+					react(0);
+					transitioned_after = 0;
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -488,23 +483,20 @@ namespace mrw
 		{
 			/* The reactions of state Operating. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
+				if (edit_raised)
 				{
-					if (edit_raised)
-					{
-						exseq_main_region_Operating();
-						enseq_main_region_Editing_default();
-						react(0);
-						transitioned_after = 0;
-					}
+					exseq_main_region_Operating();
+					enseq_main_region_Editing_default();
+					react(0);
+					transitioned_after = 0;
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -513,34 +505,31 @@ namespace mrw
 		{
 			/* The reactions of state Inquiry. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
+				if (inquired_raised)
 				{
-					if (inquired_raised)
+					exseq_main_region_Operating_operating_Inquiry();
+					enseq_main_region_Operating_operating_Running_default();
+					main_region_Operating_react(0);
+					transitioned_after = 0;
+				}
+				else
+				{
+					if (timeEvents[0])
 					{
-						exseq_main_region_Operating_operating_Inquiry();
-						enseq_main_region_Operating_operating_Running_default();
-						main_region_Operating_react(0);
+						exseq_main_region_Operating();
+						timeEvents[0] = false;
+						enseq_main_region_Fail_default();
+						react(0);
 						transitioned_after = 0;
 					}
-					else
-					{
-						if (timeEvents[0])
-						{
-							exseq_main_region_Operating();
-							timeEvents[0] = false;
-							enseq_main_region_Fail_default();
-							react(0);
-							transitioned_after = 0;
-						}
-					}
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = main_region_Operating_react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -549,16 +538,13 @@ namespace mrw
 		{
 			/* The reactions of state Running. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
-				{
-				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = main_region_Operating_react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -567,24 +553,20 @@ namespace mrw
 		{
 			/* The reactions of state Editing. */
 			sc::integer transitioned_after = transitioned_before;
-			if (doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				/* Default exit sequence for state Editing */
-				stateConfVector[0] = mrw::statechart::OperatingMode::State::NO_STATE;
-				/* 'default' enter sequence for state Operating */
-				enseq_main_region_Operating_operating_default();
-				react(0);
+				if (operate_raised)
+				{
+					exseq_main_region_Editing();
+					enseq_main_region_Operating_default();
+					react(0);
+					transitioned_after = 0;
+				}
 			}
-			else
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
 			{
-				if ((transitioned_after) < (0))
-				{
-				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
+				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -593,16 +575,13 @@ namespace mrw
 		{
 			/* The reactions of state Fail. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
-				{
-				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -662,18 +641,12 @@ namespace mrw
 			dispatchEvent(getNextEvent());
 			do
 			{
-				doCompletion = false;
 				do
 				{
-					if (completed)
-					{
-						doCompletion = true;
-					}
-					completed = false;
+					stateConfVectorChanged = false;
 					microStep();
-					doCompletion = false;
 				}
-				while (completed);
+				while (stateConfVectorChanged);
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
@@ -691,18 +664,12 @@ namespace mrw
 			isExecuting = true;
 			/* Default enter sequence for statechart OperatingMode */
 			enseq_main_region_default();
-			doCompletion = false;
 			do
 			{
-				if (completed)
-				{
-					doCompletion = true;
-				}
-				completed = false;
+				stateConfVectorChanged = false;
 				microStep();
-				doCompletion = false;
 			}
-			while (completed);
+			while (stateConfVectorChanged);
 			isExecuting = false;
 		}
 

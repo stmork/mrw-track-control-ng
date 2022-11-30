@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <unistd.h>
+
 #include <QCanBus>
 #include <QCanBusDeviceInfo>
 #include <QDebug>
@@ -27,13 +29,10 @@ MrwBusService::MrwBusService(
 	{
 		connect(can_device, &QCanBusDevice::framesReceived, this, &MrwBusService::receive);
 		connect(can_device, &QCanBusDevice::stateChanged,   this, &MrwBusService::stateChanged);
-
-#ifdef MRW_VERBOSE
-		connect(device, &QCanBusDevice::errorOccurred, [] (auto reason)
+		connect(can_device, &QCanBusDevice::errorOccurred, [] (auto reason)
 		{
 			qCritical() << reason;
 		});
-#endif
 
 		can_device->connectDevice();
 	}
@@ -89,9 +88,12 @@ bool MrwBusService::list()
 
 bool MrwBusService::write(const MrwMessage & message)
 {
-	QCanBusFrame frame = message;
-	qDebug().noquote() << message;// << " ## " << frame.frameId() << "#" << frame.payload().toHex();
+	const QCanBusFrame frame = message;
 
+	if (delay > 0)
+	{
+		usleep(delay);
+	}
 	return (can_device != nullptr) && (can_device->writeFrame(message));
 }
 

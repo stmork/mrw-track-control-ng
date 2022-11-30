@@ -6,6 +6,7 @@
 #include <QCoreApplication>
 #include <QCanBus>
 #include <QDebug>
+#include <QTimer>
 
 #include <can/mrwmessage.h>
 #include <can/mrwbusservice.h>
@@ -13,7 +14,6 @@
 
 using namespace mrw::can;
 using namespace mrw::util;
-
 
 class CanBusProxyService : public MrwBusService
 {
@@ -26,6 +26,11 @@ public:
 		QObject   *  parent    = nullptr) :
 		MrwBusService(interface, plugin, parent)
 	{
+	}
+
+	void setDelay(const unsigned input)
+	{
+		delay = input;
 	}
 
 	void setProxy(MrwBusService * other)
@@ -48,6 +53,7 @@ int main(int argc, char * argv[])
 	CanBusProxyService    can_service("can0");
 	TermHandler           term_handler( { SIGTERM, SIGINT } );
 
+	can_service.setDelay(1500);
 	tcp_service.setProxy(&can_service);
 	can_service.setProxy(&tcp_service);
 

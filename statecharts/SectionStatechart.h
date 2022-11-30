@@ -48,18 +48,22 @@ namespace mrw
 				main_region_Init,
 				main_region_Init_Init_Process_Requesting,
 				main_region_Init_Init_Process_Requesting_relais_Relay,
+				main_region_Init_Init_Process_Requesting_relais_Wait,
 				main_region_Init_Init_Process_Requesting_state_Occupation,
+				main_region_Init_Init_Process_Requesting_state_Wait,
 				main_region_Operating,
 				main_region_Failed,
 				main_region_Wait_for_Start
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 7;
+			static const sc::integer numStates = 9;
 			static const sc::integer scvi_main_region_Init = 0;
 			static const sc::integer scvi_main_region_Init_Init_Process_Requesting = 0;
 			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_relais_Relay = 0;
+			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_relais_Wait = 0;
 			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_state_Occupation = 1;
+			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_state_Wait = 1;
 			static const sc::integer scvi_main_region_Operating = 0;
 			static const sc::integer scvi_main_region_Failed = 0;
 			static const sc::integer scvi_main_region_Wait_for_Start = 0;
@@ -232,10 +236,9 @@ namespace mrw
 			OperationCallback * ifaceOperationCallback;
 
 
-			bool completed;
-			bool doCompletion;
 			bool isExecuting;
 			sc::integer stateConfVectorPosition;
+			bool stateConfVectorChanged;
 
 
 			// prototypes of all internal functions
@@ -244,12 +247,13 @@ namespace mrw
 			void enact_main_region_Init_Init_Process_Requesting_relais_Relay();
 			void enact_main_region_Init_Init_Process_Requesting_state_Occupation();
 			void enact_main_region_Operating();
-			void enact_main_region_Failed();
 			void enact_main_region_Wait_for_Start();
 			void exact_main_region_Init();
 			void enseq_main_region_Init_default();
 			void enseq_main_region_Init_Init_Process_Requesting_relais_Relay_default();
+			void enseq_main_region_Init_Init_Process_Requesting_relais_Wait_default();
 			void enseq_main_region_Init_Init_Process_Requesting_state_Occupation_default();
+			void enseq_main_region_Init_Init_Process_Requesting_state_Wait_default();
 			void enseq_main_region_Operating_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_Wait_for_Start_default();
@@ -258,7 +262,9 @@ namespace mrw
 			void exseq_main_region_Init();
 			void exseq_main_region_Init_Init_Process_Requesting();
 			void exseq_main_region_Init_Init_Process_Requesting_relais_Relay();
+			void exseq_main_region_Init_Init_Process_Requesting_relais_Wait();
 			void exseq_main_region_Init_Init_Process_Requesting_state_Occupation();
+			void exseq_main_region_Init_Init_Process_Requesting_state_Wait();
 			void exseq_main_region_Operating();
 			void exseq_main_region_Failed();
 			void exseq_main_region_Wait_for_Start();
@@ -274,7 +280,9 @@ namespace mrw
 			sc::integer main_region_Init_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_Init_Process_Requesting_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_Init_Process_Requesting_relais_Relay_react(const sc::integer transitioned_before);
+			sc::integer main_region_Init_Init_Process_Requesting_relais_Wait_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_Init_Process_Requesting_state_Occupation_react(const sc::integer transitioned_before);
+			sc::integer main_region_Init_Init_Process_Requesting_state_Wait_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_for_Start_react(const sc::integer transitioned_before);
