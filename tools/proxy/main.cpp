@@ -28,11 +28,6 @@ public:
 	{
 	}
 
-	void setDelay(const unsigned input)
-	{
-		delay = input;
-	}
-
 	void setProxy(MrwBusService * other)
 	{
 		proxy = other;
@@ -53,7 +48,6 @@ int main(int argc, char * argv[])
 	CanBusProxyService    can_service("can0");
 	TermHandler           term_handler( { SIGTERM, SIGINT } );
 
-	can_service.setDelay(1500);
 	tcp_service.setProxy(&can_service);
 	can_service.setProxy(&tcp_service);
 

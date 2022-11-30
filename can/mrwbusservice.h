@@ -25,7 +25,6 @@ namespace mrw::can
 	protected:
 		QCanBus     *    can_bus;
 		QCanBusDevice  * can_device;
-		unsigned         delay = 0;
 
 	public:
 		explicit MrwBusService(
