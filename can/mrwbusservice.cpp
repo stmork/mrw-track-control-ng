@@ -88,8 +88,6 @@ bool MrwBusService::list()
 
 bool MrwBusService::write(const MrwMessage & message)
 {
-	const QCanBusFrame frame = message;
-
 	qDebug().noquote() << message;
 
 	return (can_device != nullptr) && (can_device->writeFrame(message));

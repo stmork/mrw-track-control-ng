@@ -63,6 +63,8 @@ namespace mrw
 			{
 				NO_EVENT,
 				inquire,
+				leftResponse,
+				rightResponse,
 				response,
 				clear,
 				failed,
@@ -156,6 +158,12 @@ namespace mrw
 			/*! Slot for the in event 'inquire' that is defined in the default interface scope. */
 			void inquire();
 
+			/*! Slot for the in event 'leftResponse' that is defined in the default interface scope. */
+			void leftResponse();
+
+			/*! Slot for the in event 'rightResponse' that is defined in the default interface scope. */
+			void rightResponse();
+
 			/*! Slot for the in event 'response' that is defined in the default interface scope. */
 			void response();
 
@@ -244,6 +252,12 @@ namespace mrw
 
 			/*! Indicates event 'inquire' of default interface scope is active. */
 			bool inquire_raised;
+
+			/*! Indicates event 'leftResponse' of default interface scope is active. */
+			bool leftResponse_raised;
+
+			/*! Indicates event 'rightResponse' of default interface scope is active. */
+			bool rightResponse_raised;
 
 			/*! Indicates event 'response' of default interface scope is active. */
 			bool response_raised;

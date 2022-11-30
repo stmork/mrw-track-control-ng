@@ -20,6 +20,8 @@ namespace mrw
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
 			inquire_raised(false),
+			leftResponse_raised(false),
+			rightResponse_raised(false),
 			response_raised(false),
 			clear_raised(false),
 			failed_raised(false)
@@ -67,6 +69,16 @@ namespace mrw
 					inquire_raised = true;
 					break;
 				}
+			case mrw::statechart::SwitchStatechart::Event::leftResponse:
+				{
+					leftResponse_raised = true;
+					break;
+				}
+			case mrw::statechart::SwitchStatechart::Event::rightResponse:
+				{
+					rightResponse_raised = true;
+					break;
+				}
 			case mrw::statechart::SwitchStatechart::Event::response:
 				{
 					response_raised = true;
@@ -100,6 +112,20 @@ namespace mrw
 		void mrw::statechart::SwitchStatechart::inquire()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::inquire));
+			runCycle();
+		}
+
+
+		void mrw::statechart::SwitchStatechart::leftResponse()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::leftResponse));
+			runCycle();
+		}
+
+
+		void mrw::statechart::SwitchStatechart::rightResponse()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::rightResponse));
 			runCycle();
 		}
 
@@ -475,6 +501,8 @@ namespace mrw
 		void SwitchStatechart::clearInEvents()
 		{
 			inquire_raised = false;
+			leftResponse_raised = false;
+			rightResponse_raised = false;
 			response_raised = false;
 			clear_raised = false;
 			failed_raised = false;
@@ -526,7 +554,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((inquire_raised) || (response_raised)) || (clear_raised)) || (failed_raised)) || (timeEvents[0]));
+			while (((((((inquire_raised) || (leftResponse_raised)) || (rightResponse_raised)) || (response_raised)) || (clear_raised)) || (failed_raised)) || (timeEvents[0]));
 			isExecuting = false;
 		}
 

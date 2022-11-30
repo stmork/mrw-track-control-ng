@@ -11,17 +11,20 @@
 #include <model/regularswitch.h>
 #include <ctrl/regularswitchcontroller.h>
 #include <ctrl/controllerregistrand.h>
+#include <statecharts/SwitchStatechart.h>
 
 namespace mrw::ctrl
 {
 	class RegularSwitchControllerProxy :
 		public RegularSwitchController,
-		public ControllerRegistrand
+		public ControllerRegistrand,
+		public mrw::statechart::SwitchStatechart::OperationCallback
 	{
 		Q_OBJECT
 
 	private:
-		mrw::model::RegularSwitch * part = nullptr;
+		mrw::statechart::SwitchStatechart   statechart;
+		mrw::model::RegularSwitch     *     part = nullptr;
 
 	public:
 		explicit RegularSwitchControllerProxy(
@@ -45,6 +48,14 @@ namespace mrw::ctrl
 		virtual bool isRight() const override;
 		virtual bool isRightBended() const override;
 		virtual bool isInclined() const override;
+
+		// Implementations from ControllerRegistrand
+		virtual bool process(const can::MrwMessage & message) override;
+
+		// Implementations from OperationCallback
+		virtual void left() override;
+		virtual void right() override;
+		virtual void request() override;
 	};
 }
 

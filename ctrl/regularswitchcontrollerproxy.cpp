@@ -3,25 +3,59 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <QDebug>
+
+#include <util/method.h>
 #include <model/region.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/controllerregistry.h>
+#include <statecharts/timerservice.h>
 
 using namespace mrw::can;
 using namespace mrw::ctrl;
 using namespace mrw::model;
+using namespace mrw::statechart;
 
 RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 	RegularSwitch * new_part,
 	QObject    *    parent) :
 	RegularSwitchController(parent),
+	statechart(nullptr),
 	part(new_part)
 {
 	ControllerRegistry::instance().registerController(part, this);
+
+	connect(
+		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
+		&statechart, &SwitchStatechart::inquire);
+	connect(
+		&statechart, &SwitchStatechart::entered, [&]()
+	{
+		qDebug().noquote() << part->toString() << "enteredd.";
+	});
+	connect(
+		&statechart, &SwitchStatechart::waiting, [&]()
+	{
+		qDebug().noquote() << part->toString() << "wait for start.";
+	});
+	connect(
+		&statechart, &SwitchStatechart::entering, [&]()
+	{
+		qDebug().noquote() << part->toString() << "entering.";
+	});
+	connect(
+		&ControllerRegistry::instance(), &ControllerRegistry::inquire, [&]()
+	{
+		qDebug().noquote() << part->toString() << "inquiry";
+	});
+	statechart.setTimerService(&TimerService::instance());
+	statechart.setOperationCallback(this);
+	statechart.enter();
 }
 
 mrw::ctrl::RegularSwitchControllerProxy::~RegularSwitchControllerProxy()
 {
+	statechart.exit();
 	ControllerRegistry::instance().unregisterController(part);
 }
 
@@ -83,4 +117,67 @@ bool RegularSwitchControllerProxy::isRightBended() const
 bool RegularSwitchControllerProxy::isInclined() const
 {
 	return part->isInclined();
+}
+
+bool mrw::ctrl::RegularSwitchControllerProxy::process(const MrwMessage & message)
+{
+	qDebug().noquote() << message << "(regular switch)";
+
+	if (message.response() != Response::MSG_OK)
+	{
+		statechart.failed();
+		return true;
+	}
+
+	switch (message.command())
+	{
+	case SETLFT:
+		part->setState(RegularSwitch::State::AB);
+		statechart.leftResponse();
+		emit update();
+		return true;
+
+	case SETRGT:
+		part->setState(RegularSwitch::State::AC);
+		statechart.rightResponse();
+		emit update();
+		return true;
+
+	case GETDIR:
+		part->setState(RegularSwitch::State(message[0]));
+		statechart.response();
+		emit update();
+		return true;
+
+	default:
+		break;
+	}
+	return false;
+}
+
+void RegularSwitchControllerProxy::left()
+{
+	__METHOD__;
+
+	const MrwMessage  command(SETLFT, part->controller()->id(), part->unitNo());
+
+	ControllerRegistry::can()->write(command);
+}
+
+void RegularSwitchControllerProxy::right()
+{
+	__METHOD__;
+
+	const MrwMessage  command(SETRGT, part->controller()->id(), part->unitNo());
+
+	ControllerRegistry::can()->write(command);
+}
+
+void RegularSwitchControllerProxy::request()
+{
+	__METHOD__;
+
+	const MrwMessage  command(GETDIR, part->controller()->id(), part->unitNo());
+
+	ControllerRegistry::can()->write(command);
 }

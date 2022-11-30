@@ -6,6 +6,7 @@
 #include <QDebug>
 
 #include <util/method.h>
+#include <can/mrwmessage.h>
 #include <ctrl/sectioncontroller.h>
 #include <ctrl/controllerregistry.h>
 #include <statecharts/timerservice.h>
