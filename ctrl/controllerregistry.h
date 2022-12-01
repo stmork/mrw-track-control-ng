@@ -8,6 +8,7 @@
 #ifndef MRW_CTRL_CONTROLLERREGISTRY_H
 #define MRW_CTRL_CONTROLLERREGISTRY_H
 
+#include <unordered_set>
 #include <unordered_map>
 
 #include <QObject>
@@ -33,8 +34,9 @@ namespace mrw::ctrl
 
 		friend class Singleton<ControllerRegistry>;
 
-		std::unordered_map<mrw::model::Device *, ControllerRegistrand * > registry;
-		mrw::can::MrwBusService * can_service = nullptr;
+		std::unordered_set<ControllerRegistrand *>                         transaction;
+		std::unordered_map<mrw::model::Device *, ControllerRegistrand * >  registry;
+		mrw::can::MrwBusService                      *                     can_service = nullptr;
 
 	public:
 		void registerController(
@@ -46,8 +48,13 @@ namespace mrw::ctrl
 		void registerService(mrw::can::MrwBusService * service);
 		static mrw::can::MrwBusService * can();
 
+		void increase(ControllerRegistrand * ctrl);
+		void decrease(ControllerRegistrand * ctrl);
+		void reset();
+
 	signals:
 		void inquire();
+		void completed();
 	};
 }
 

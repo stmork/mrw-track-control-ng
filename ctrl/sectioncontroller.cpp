@@ -31,23 +31,16 @@ SectionController::SectionController(
 	connect(
 		&statechart, &SectionStatechart::entered, [&]()
 	{
-		qDebug().noquote() << ctrl_section->toString() << "enteredd.";
+		ControllerRegistry::instance().increase(this);
+		qDebug().noquote() << ctrl_section->toString() << "Inquiry started.";
 	});
 	connect(
-		&statechart, &SectionStatechart::waiting, [&]()
+		&statechart, &SectionStatechart::inquired, [&]()
 	{
-		qDebug().noquote() << ctrl_section->toString() << "wait for start.";
+		ControllerRegistry::instance().decrease(this);
+		qDebug().noquote() << ctrl_section->toString() << "Inquiry completed.";
 	});
-	connect(
-		&statechart, &SectionStatechart::entering, [&]()
-	{
-		qDebug().noquote() << ctrl_section->toString() << "entering.";
-	});
-	connect(
-		&ControllerRegistry::instance(), &ControllerRegistry::inquire, [&]()
-	{
-		qDebug().noquote() << ctrl_section->toString() << "inquiry";
-	});
+
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
 	statechart.enter();
@@ -106,7 +99,7 @@ Position::Bending SectionController::bending() const
 	return position()->bending();
 }
 
-bool SectionController::process(const mrw::can::MrwMessage & message)
+bool SectionController::process(const MrwMessage & message)
 {
 	qDebug().noquote() << message << "(Section)";
 

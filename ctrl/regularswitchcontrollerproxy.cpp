@@ -31,23 +31,16 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 	connect(
 		&statechart, &SwitchStatechart::entered, [&]()
 	{
-		qDebug().noquote() << part->toString() << "enteredd.";
+		ControllerRegistry::instance().increase(this);
+		qDebug().noquote() << part->toString() << "Inquiry started.";
 	});
 	connect(
-		&statechart, &SwitchStatechart::waiting, [&]()
+		&statechart, &SwitchStatechart::inquired, [&]()
 	{
-		qDebug().noquote() << part->toString() << "wait for start.";
+		ControllerRegistry::instance().decrease(this);
+		qDebug().noquote() << part->toString() << "Inquiry completed.";
 	});
-	connect(
-		&statechart, &SwitchStatechart::entering, [&]()
-	{
-		qDebug().noquote() << part->toString() << "entering.";
-	});
-	connect(
-		&ControllerRegistry::instance(), &ControllerRegistry::inquire, [&]()
-	{
-		qDebug().noquote() << part->toString() << "inquiry";
-	});
+
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
 	statechart.enter();
