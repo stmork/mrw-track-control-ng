@@ -24,6 +24,7 @@ namespace mrw
 			connected_raised(false),
 			clear_raised(false),
 			inquired_raised(false),
+			fail_raised(false),
 			edit_raised(false),
 			operate_raised(false)
 		{
@@ -80,6 +81,11 @@ namespace mrw
 					inquired_raised = true;
 					break;
 				}
+			case mrw::statechart::OperatingMode::Event::fail:
+				{
+					fail_raised = true;
+					break;
+				}
 			case mrw::statechart::OperatingMode::Event::edit:
 				{
 					edit_raised = true;
@@ -122,6 +128,13 @@ namespace mrw
 		void mrw::statechart::OperatingMode::inquired()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::OperatingMode::EventInstance(mrw::statechart::OperatingMode::Event::inquired));
+			runCycle();
+		}
+
+
+		void mrw::statechart::OperatingMode::fail()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::OperatingMode::EventInstance(mrw::statechart::OperatingMode::Event::fail));
 			runCycle();
 		}
 
@@ -552,6 +565,16 @@ namespace mrw
 					react(0);
 					transitioned_after = 0;
 				}
+				else
+				{
+					if (fail_raised)
+					{
+						exseq_main_region_Operating();
+						enseq_main_region_Fail_default();
+						react(0);
+						transitioned_after = 0;
+					}
+				}
 			}
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
@@ -566,6 +589,7 @@ namespace mrw
 			connected_raised = false;
 			clear_raised = false;
 			inquired_raised = false;
+			fail_raised = false;
 			edit_raised = false;
 			operate_raised = false;
 			timeEvents[0] = false;
@@ -626,7 +650,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((connected_raised) || (clear_raised)) || (inquired_raised)) || (edit_raised)) || (operate_raised)) || (timeEvents[0]));
+			while (((((((connected_raised) || (clear_raised)) || (inquired_raised)) || (fail_raised)) || (edit_raised)) || (operate_raised)) || (timeEvents[0]));
 			isExecuting = false;
 		}
 

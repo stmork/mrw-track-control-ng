@@ -40,6 +40,11 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 		&ControllerRegistry::instance(), &ControllerRegistry::completed,
 		&statechart, &OperatingMode::inquired);
 	connect(
+		&statechart, &OperatingMode::failed, [] ()
+	{
+		qCritical("Failed...");
+	});
+	connect(
 		&statechart, &OperatingMode::operating, [] ()
 	{
 		qInfo("Operating...");

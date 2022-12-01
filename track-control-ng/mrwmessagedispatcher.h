@@ -28,7 +28,7 @@ public:
 		mrw::model::ModelRailway  *  model_railway,
 		const QString        &       interface = "can0",
 		const QString        &       plugin    = "socketcan",
-		QObject           *          parent = nullptr);
+		QObject           *          parent    = nullptr);
 
 	virtual ~MrwMessageDispatcher();
 

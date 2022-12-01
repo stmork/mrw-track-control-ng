@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_PiCOkG_dEe2Ds--x8yNBEw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 3000&#xA;var retry : integer = 150&#xA;&#xA;in event connected&#xA;in event clear&#xA;in event inquired&#xA;in event edit&#xA;in event operate&#xA;&#xA;out event inquire&#xA;out event failed&#xA;out event operating&#xA;out event editing&#xA;&#xA;operation connectBus()&#xA;operation reset()" namespace="mrw.statechart" name="OperatingMode">
+  <sgraph:Statechart xmi:id="_PiCOkG_dEe2Ds--x8yNBEw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 3000&#xA;var retry : integer = 150&#xA;&#xA;in event connected&#xA;in event clear&#xA;in event inquired&#xA;in event fail&#xA;in event edit&#xA;in event operate&#xA;&#xA;out event inquire&#xA;out event failed&#xA;out event operating&#xA;out event editing&#xA;&#xA;operation connectBus()&#xA;operation reset()" namespace="mrw.statechart" name="OperatingMode">
     <regions xmi:id="_PiGgA2_dEe2Ds--x8yNBEw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_PiGgBG_dEe2Ds--x8yNBEw">
         <outgoingTransitions xmi:id="_PiGgBW_dEe2Ds--x8yNBEw" target="_PiGgBm_dEe2Ds--x8yNBEw"/>
@@ -15,11 +15,12 @@
       <vertices xsi:type="sgraph:State" xmi:id="_VbyQMG_dEe2Ds--x8yNBEw" specification="entry / raise editing" name="Editing" incomingTransitions="_ckvP4G_dEe2Ds--x8yNBEw">
         <outgoingTransitions xmi:id="_psDrcG_dEe2lm7yxWipHjw" specification="operate" target="_UUs58HFqEe2Wlo6A2eTnng"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_UPF-IG_eEe2lm7yxWipHjw" specification="entry / raise failed" name="Fail" incomingTransitions="_j7-GsG_eEe2lm7yxWipHjw">
+      <vertices xsi:type="sgraph:State" xmi:id="_UPF-IG_eEe2lm7yxWipHjw" specification="entry / raise failed" name="Fail" incomingTransitions="_j7-GsG_eEe2lm7yxWipHjw _7hV0YHFxEe2peawiS1OZpw">
         <outgoingTransitions xmi:id="_1ftGQHFqEe2peawiS1OZpw" specification="clear" target="_PiHHFm_dEe2Ds--x8yNBEw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_UUs58HFqEe2Wlo6A2eTnng" specification="entry / raise operating" name="Operating" incomingTransitions="_psDrcG_dEe2lm7yxWipHjw _FagvgG_eEe2lm7yxWipHjw">
         <outgoingTransitions xmi:id="_ckvP4G_dEe2Ds--x8yNBEw" specification="edit" target="_VbyQMG_dEe2Ds--x8yNBEw"/>
+        <outgoingTransitions xmi:id="_7hV0YHFxEe2peawiS1OZpw" specification="fail" target="_UPF-IG_eEe2lm7yxWipHjw"/>
       </vertices>
     </regions>
   </sgraph:Statechart>
@@ -212,6 +213,16 @@
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_1fu7cnFqEe2peawiS1OZpw" points="[-102, 33, 249, 22]$[-224, 33, 127, 22]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_1fxXsHFqEe2peawiS1OZpw" id="(0.5425531914893617,0.1)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_1fxXsXFqEe2peawiS1OZpw" id="(0.45726495726495725,0.06534090909090909)"/>
+    </edges>
+    <edges xmi:id="_7hXpkHFxEe2peawiS1OZpw" type="Transition" element="_7hV0YHFxEe2peawiS1OZpw" source="_UUuIEHFqEe2Wlo6A2eTnng" target="_UPJBcG_eEe2lm7yxWipHjw">
+      <children xsi:type="notation:DecorationNode" xmi:id="_7hYQoHFxEe2peawiS1OZpw" type="TransitionExpression">
+        <styles xsi:type="notation:ShapeStyle" xmi:id="_7hYQoXFxEe2peawiS1OZpw"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_7hYQonFxEe2peawiS1OZpw" y="10"/>
+      </children>
+      <styles xsi:type="notation:ConnectorStyle" xmi:id="_7hXpkXFxEe2peawiS1OZpw" routing="Rectilinear" lineColor="4210752"/>
+      <styles xsi:type="notation:FontStyle" xmi:id="_7hXpk3FxEe2peawiS1OZpw" fontName="Verdana"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_7hXpknFxEe2peawiS1OZpw" points="[-3, -11, 1, 150]$[-3, -251, 1, -90]"/>
+      <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_7hY3sHFxEe2peawiS1OZpw" id="(0.5212765957446809,0.09322033898305085)"/>
     </edges>
   </notation:Diagram>
 </xmi:XMI>

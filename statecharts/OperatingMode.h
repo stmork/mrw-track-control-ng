@@ -67,6 +67,7 @@ namespace mrw
 				connected,
 				clear,
 				inquired,
+				fail,
 				edit,
 				operate,
 				_te0_main_region_Init_
@@ -169,6 +170,9 @@ namespace mrw
 			/*! Slot for the in event 'inquired' that is defined in the default interface scope. */
 			void inquired();
 
+			/*! Slot for the in event 'fail' that is defined in the default interface scope. */
+			void fail();
+
 			/*! Slot for the in event 'edit' that is defined in the default interface scope. */
 			void edit();
 
@@ -268,6 +272,9 @@ namespace mrw
 
 			/*! Indicates event 'inquired' of default interface scope is active. */
 			bool inquired_raised;
+
+			/*! Indicates event 'fail' of default interface scope is active. */
+			bool fail_raised;
 
 			/*! Indicates event 'edit' of default interface scope is active. */
 			bool edit_raised;
