@@ -62,7 +62,9 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 
 MrwMessageDispatcher::~MrwMessageDispatcher()
 {
-	qInfo("Shutting down MRW message dispatcher.");
+	__METHOD__;
+
+	qInfo(" Shutting down MRW message dispatcher.");
 	statechart.exit();
 }
 
@@ -95,9 +97,15 @@ void MrwMessageDispatcher::process(const MrwMessage & message)
 
 void MrwMessageDispatcher::connectBus()
 {
+	__METHOD__;
+
 	if (can_device->state() != QCanBusDevice::ConnectedState)
 	{
 		can_device->connectDevice();
+	}
+	else
+	{
+		qWarning("CAN bus already connected.");
 	}
 }
 

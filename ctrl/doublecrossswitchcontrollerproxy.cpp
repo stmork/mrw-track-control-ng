@@ -16,6 +16,8 @@ using namespace mrw::model;
 using namespace mrw::ctrl;
 using namespace mrw::statechart;
 
+using LockState = Device::LockState;
+
 DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(
 	DoubleCrossSwitch * new_part,
 	QObject      *      parent) :
@@ -26,7 +28,7 @@ DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(
 	ControllerRegistry::instance().registerController(part, this);
 }
 
-mrw::ctrl::DoubleCrossSwitchControllerProxy::~DoubleCrossSwitchControllerProxy()
+DoubleCrossSwitchControllerProxy::~DoubleCrossSwitchControllerProxy()
 {
 	ControllerRegistry::instance().unregisterController(part);
 }
@@ -127,4 +129,42 @@ void DoubleCrossSwitchControllerProxy::request()
 	const MrwMessage  command(GETDIR, part->controller()->id(), part->unitNo());
 
 	ControllerRegistry::can()->write(command);
+}
+
+bool DoubleCrossSwitchControllerProxy::isTurnedLeft()
+{
+	__METHOD__;
+
+	return part->state() == DoubleCrossSwitch::State::AC;
+}
+
+void DoubleCrossSwitchControllerProxy::lock(bool do_it)
+{
+	__METHOD__;
+
+	part->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
+	emit update();
+}
+
+void DoubleCrossSwitchControllerProxy::pending()
+{
+	__METHOD__;
+
+	part->setLock(LockState::PENDING);
+	emit update();
+}
+
+void mrw::ctrl::DoubleCrossSwitchControllerProxy::fail()
+{
+	__METHOD__;
+
+	part->setLock(LockState::FAIL);
+	emit update();
+}
+
+bool DoubleCrossSwitchControllerProxy::isFree()
+{
+	__METHOD__;
+
+	return state() == SectionState::FREE;
 }

@@ -48,14 +48,28 @@ namespace mrw
 				main_region_Wait_for_Start,
 				main_region_Init,
 				main_region_Operating,
+				main_region_Operating_operating_Unlocked,
+				main_region_Operating_operating_Locked,
+				main_region_Operating_operating_Turning,
+				main_region_Operating_operating_Turning_r1_Turn_Right,
+				main_region_Operating_operating_Turning_r1_Turn,
+				main_region_Operating_operating_Turning_r1_Turn_Left,
+				main_region_Operating_operating_Turning_r1_Pending,
 				main_region_Failed
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 4;
+			static const sc::integer numStates = 11;
 			static const sc::integer scvi_main_region_Wait_for_Start = 0;
 			static const sc::integer scvi_main_region_Init = 0;
 			static const sc::integer scvi_main_region_Operating = 0;
+			static const sc::integer scvi_main_region_Operating_operating_Unlocked = 0;
+			static const sc::integer scvi_main_region_Operating_operating_Locked = 0;
+			static const sc::integer scvi_main_region_Operating_operating_Turning = 0;
+			static const sc::integer scvi_main_region_Operating_operating_Turning_r1_Turn_Right = 0;
+			static const sc::integer scvi_main_region_Operating_operating_Turning_r1_Turn = 0;
+			static const sc::integer scvi_main_region_Operating_operating_Turning_r1_Turn_Left = 0;
+			static const sc::integer scvi_main_region_Operating_operating_Turning_r1_Pending = 0;
 			static const sc::integer scvi_main_region_Failed = 0;
 
 			/*! Enumeration of all events which are consumed. */
@@ -67,8 +81,14 @@ namespace mrw
 				rightResponse,
 				response,
 				clear,
+				queued,
 				failed,
-				_te0_main_region_Init_
+				unlocked,
+				turnLeft,
+				turn,
+				turnRight,
+				_te0_main_region_Init_,
+				_te1_main_region_Operating_operating_Turning_
 			};
 
 			class EventInstance
@@ -99,6 +119,16 @@ namespace mrw
 				virtual void right() = 0;
 
 				virtual void request() = 0;
+
+				virtual bool isTurnedLeft() = 0;
+
+				virtual bool isFree() = 0;
+
+				virtual void fail() = 0;
+
+				virtual void pending() = 0;
+
+				virtual void lock(bool do_it) = 0;
 
 
 			};
@@ -148,7 +178,7 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 1;
+			static const sc::integer timeEventsCount = 2;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
@@ -170,8 +200,23 @@ namespace mrw
 			/*! Slot for the in event 'clear' that is defined in the default interface scope. */
 			void clear();
 
+			/*! Slot for the in event 'queued' that is defined in the default interface scope. */
+			void queued();
+
 			/*! Slot for the in event 'failed' that is defined in the default interface scope. */
 			void failed();
+
+			/*! Slot for the in event 'unlocked' that is defined in the default interface scope. */
+			void unlocked();
+
+			/*! Slot for the in event 'turnLeft' that is defined in the default interface scope. */
+			void turnLeft();
+
+			/*! Slot for the in event 'turn' that is defined in the default interface scope. */
+			void turn();
+
+			/*! Slot for the in event 'turnRight' that is defined in the default interface scope. */
+			void turnRight();
 
 
 		signals:
@@ -214,27 +259,61 @@ namespace mrw
 
 
 			bool isExecuting;
+			bool stateConfVectorChanged;
 
 
 			// prototypes of all internal functions
 
 			void enact_main_region_Init();
+			void enact_main_region_Operating_operating_Unlocked();
+			void enact_main_region_Operating_operating_Locked();
+			void enact_main_region_Operating_operating_Turning();
+			void enact_main_region_Operating_operating_Turning_r1_Turn_Right();
+			void enact_main_region_Operating_operating_Turning_r1_Turn();
+			void enact_main_region_Operating_operating_Turning_r1_Turn_Left();
+			void enact_main_region_Failed();
 			void exact_main_region_Init();
+			void exact_main_region_Operating_operating_Turning();
 			void enseq_main_region_Wait_for_Start_default();
 			void enseq_main_region_Init_default();
 			void enseq_main_region_Operating_default();
+			void enseq_main_region_Operating_operating_Unlocked_default();
+			void enseq_main_region_Operating_operating_Locked_default();
+			void enseq_main_region_Operating_operating_Turning_r1_Turn_Right_default();
+			void enseq_main_region_Operating_operating_Turning_r1_Turn_default();
+			void enseq_main_region_Operating_operating_Turning_r1_Turn_Left_default();
+			void enseq_main_region_Operating_operating_Turning_r1_Pending_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_default();
+			void enseq_main_region_Operating_operating_default();
 			void exseq_main_region_Wait_for_Start();
 			void exseq_main_region_Init();
 			void exseq_main_region_Operating();
+			void exseq_main_region_Operating_operating_Unlocked();
+			void exseq_main_region_Operating_operating_Locked();
+			void exseq_main_region_Operating_operating_Turning();
+			void exseq_main_region_Operating_operating_Turning_r1_Turn_Right();
+			void exseq_main_region_Operating_operating_Turning_r1_Turn();
+			void exseq_main_region_Operating_operating_Turning_r1_Turn_Left();
+			void exseq_main_region_Operating_operating_Turning_r1_Pending();
 			void exseq_main_region_Failed();
 			void exseq_main_region();
+			void exseq_main_region_Operating_operating();
+			void exseq_main_region_Operating_operating_Turning_r1();
+			void react_main_region_Operating_operating__choice_0();
 			void react_main_region__entry_Default();
+			void react_main_region_Operating_operating__entry_Default();
 			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_for_Start_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Unlocked_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Locked_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Turning_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Turning_r1_Turn_Right_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Turning_r1_Turn_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Turning_r1_Turn_Left_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Turning_r1_Pending_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
@@ -258,8 +337,23 @@ namespace mrw
 			/*! Indicates event 'clear' of default interface scope is active. */
 			bool clear_raised;
 
+			/*! Indicates event 'queued' of default interface scope is active. */
+			bool queued_raised;
+
 			/*! Indicates event 'failed' of default interface scope is active. */
 			bool failed_raised;
+
+			/*! Indicates event 'unlocked' of default interface scope is active. */
+			bool unlocked_raised;
+
+			/*! Indicates event 'turnLeft' of default interface scope is active. */
+			bool turnLeft_raised;
+
+			/*! Indicates event 'turn' of default interface scope is active. */
+			bool turn_raised;
+
+			/*! Indicates event 'turnRight' of default interface scope is active. */
+			bool turnRight_raised;
 
 
 

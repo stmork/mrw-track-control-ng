@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QTimer>
 
+#include <util/method.h>
 #include <can/mrwbusservice.h>
 
 using namespace mrw::can;
@@ -48,7 +49,9 @@ MrwBusService::MrwBusService(
 
 MrwBusService::~MrwBusService()
 {
-	qInfo("Shutting down MRW bus service.");
+//	__METHOD__;
+
+	qInfo(" Shutting down MRW bus service.");
 	if (can_device != nullptr)
 	{
 		can_device->disconnectDevice();

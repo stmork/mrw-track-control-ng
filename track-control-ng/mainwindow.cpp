@@ -6,7 +6,8 @@
 #include <model/modelrailway.h>
 #include <ui/controllerwidget.h>
 #include <ctrl/basecontroller.h>
-#include <ctrl/regularswitchcontroller.h>
+#include <ctrl/regularswitchcontrollerproxy.h>
+#include <ctrl/doublecrossswitchcontrollerproxy.h>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -25,10 +26,6 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent) :
 	ui->setupUi(this);
 	initRegion();
 
-	connect(ui->clearSection, &QPushButton::clicked, this, &MainWindow::clearSelectedItems);
-	connect(ui->clearAllSections, &QPushButton::clicked, this, &MainWindow::clearAllItems);
-	connect(ui->regionTabWidget, &QTabWidget::currentChanged, this, &MainWindow::clearAllItems);
-
 	QList<ControllerWidget *> widgets = findChildren<ControllerWidget *>();
 
 	for (ControllerWidget * w : widgets)
@@ -37,17 +34,15 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent) :
 	}
 
 	connect(ui->actionQuit,        &QAction::triggered, QCoreApplication::instance(), &QCoreApplication::quit);
-	connect(ui->actionInclination, &QAction::triggered, this, &MainWindow::incline);
-	connect(ui->actionExpand,      &QAction::triggered, this, &MainWindow::expand);
 
 	connect(ui->actionBendLeft,    &QAction::triggered, [this]()
 	{
 		bend(Bending::LEFT);
-	}		);
+	});
 	connect(ui->actionBendRight,   &QAction::triggered, [this]()
 	{
 		bend(Bending::RIGHT);
-	}		);
+	});
 
 	connect(ui->actionRight,      &QAction::triggered, [this] ()
 	{
@@ -87,7 +82,7 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent) :
 
 MainWindow::~MainWindow()
 {
-	clearAllItems();
+	on_clearAllSections_clicked();
 	delete ui;
 }
 
@@ -169,7 +164,7 @@ void MainWindow::itemClicked(QListWidgetItem * item)
 	}
 }
 
-void MainWindow::clearSelectedItems()
+void MainWindow::on_clearSection_clicked()
 {
 	for (QListWidgetItem * item : ui->sectionListWidget->selectedItems())
 	{
@@ -179,7 +174,7 @@ void MainWindow::clearSelectedItems()
 	}
 }
 
-void MainWindow::clearAllItems()
+void MainWindow::on_clearAllSections_clicked()
 {
 	while (ui->sectionListWidget->count() > 0)
 	{
@@ -217,7 +212,7 @@ void MainWindow::lineup(int inc)
 	});
 }
 
-void MainWindow::expand()
+void MainWindow::on_actionExpand_triggered()
 {
 	if (ui->sectionListWidget->count() == 1)
 	{
@@ -235,7 +230,7 @@ void MainWindow::expand()
 	}
 }
 
-void MainWindow::incline()
+void MainWindow::on_actionInclination_triggered()
 {
 	edit([](BaseController * controller, Position * position)
 	{
@@ -259,4 +254,52 @@ void MainWindow::bend(const Position::Bending bend)
 		}
 		emit controller->update();
 	});
+}
+
+void MainWindow::on_actionTurnSwitchLeft_triggered()
+{
+	edit([](BaseController * controller, Position * position)
+	{
+		Q_UNUSED(position);
+
+		RegularSwitchControllerProxy * ctrl = dynamic_cast<RegularSwitchControllerProxy *>(controller);
+
+		if (ctrl != nullptr)
+		{
+			ctrl->turnLeft();
+		}
+	});
+	on_clearAllSections_clicked();
+}
+
+void MainWindow::on_actionTurnSwitch_triggered()
+{
+	edit([](BaseController * controller, Position * position)
+	{
+		Q_UNUSED(position);
+
+		RegularSwitchControllerProxy * ctrl = dynamic_cast<RegularSwitchControllerProxy *>(controller);
+
+		if (ctrl != nullptr)
+		{
+			ctrl->turn();
+		}
+	});
+	on_clearAllSections_clicked();
+}
+
+void MainWindow::on_actionTurnSwitchRight_triggered()
+{
+	edit([](BaseController * controller, Position * position)
+	{
+		Q_UNUSED(position);
+
+		RegularSwitchControllerProxy * ctrl = dynamic_cast<RegularSwitchControllerProxy *>(controller);
+
+		if (ctrl != nullptr)
+		{
+			ctrl->turnRight();
+		}
+	});
+	on_clearAllSections_clicked();
 }

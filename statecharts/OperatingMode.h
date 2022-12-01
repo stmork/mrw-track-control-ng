@@ -70,7 +70,8 @@ namespace mrw
 				fail,
 				edit,
 				operate,
-				_te0_main_region_Init_
+				_te0_main_region_Prepare_Bus_,
+				_te1_main_region_Init_
 			};
 
 			class EventInstance
@@ -154,7 +155,7 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 1;
+			static const sc::integer timeEventsCount = 2;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
@@ -237,6 +238,7 @@ namespace mrw
 			void enact_main_region_Editing();
 			void enact_main_region_Fail();
 			void enact_main_region_Operating();
+			void exact_main_region_Prepare_Bus();
 			void exact_main_region_Init();
 			void enseq_main_region_Prepare_Bus_default();
 			void enseq_main_region_Init_default();

@@ -32,6 +32,10 @@ namespace mrw::ctrl
 			QObject          *          parent = nullptr);
 		virtual ~RegularSwitchControllerProxy();
 
+		void turnLeft();
+		void turn();
+		void turnRight();
+
 		// Implementations from BaseController
 		virtual QString name() const override;
 		virtual bool    isDirection() const override;
@@ -56,6 +60,12 @@ namespace mrw::ctrl
 		virtual void left() override;
 		virtual void right() override;
 		virtual void request() override;
+		virtual bool isTurnedLeft() override;
+		virtual bool isFree() override;
+
+		virtual void pending() override;
+		virtual void fail() override;
+		virtual void lock(bool do_it) override;
 	};
 }
 

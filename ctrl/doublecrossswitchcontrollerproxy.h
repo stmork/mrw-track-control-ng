@@ -53,6 +53,12 @@ namespace mrw::ctrl
 		virtual void left() override;
 		virtual void right() override;
 		virtual void request() override;
+		virtual bool isTurnedLeft() override;
+		virtual bool isFree() override;
+
+		virtual void pending() override;
+		virtual void fail() override;
+		virtual void lock(bool do_it) override;
 	};
 }
 

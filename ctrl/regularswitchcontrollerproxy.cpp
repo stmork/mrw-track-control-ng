@@ -16,6 +16,8 @@ using namespace mrw::ctrl;
 using namespace mrw::model;
 using namespace mrw::statechart;
 
+using LockState = Device::LockState;
+
 RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 	RegularSwitch * new_part,
 	QObject    *    parent) :
@@ -50,6 +52,21 @@ mrw::ctrl::RegularSwitchControllerProxy::~RegularSwitchControllerProxy()
 {
 	statechart.exit();
 	ControllerRegistry::instance().unregisterController(part);
+}
+
+void mrw::ctrl::RegularSwitchControllerProxy::turnLeft()
+{
+	statechart.turnLeft();
+}
+
+void mrw::ctrl::RegularSwitchControllerProxy::turn()
+{
+	statechart.turn();
+}
+
+void mrw::ctrl::RegularSwitchControllerProxy::turnRight()
+{
+	statechart.turnRight();
 }
 
 QString RegularSwitchControllerProxy::name() const
@@ -116,33 +133,41 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 {
 	qDebug().noquote() << message << "(regular switch)";
 
-	if (message.response() != Response::MSG_OK)
+	switch (message.response())
 	{
-		statechart.failed();
-		return true;
-	}
-
-	switch (message.command())
-	{
-	case SETLFT:
-		part->setState(RegularSwitch::State::AB);
-		statechart.leftResponse();
-		emit update();
+	case MSG_QUEUED:
+		statechart.queued();
 		return true;
 
-	case SETRGT:
-		part->setState(RegularSwitch::State::AC);
-		statechart.rightResponse();
-		emit update();
-		return true;
+	case MSG_OK:
+		switch (message.command())
+		{
+		case SETLFT:
+			part->setState(RegularSwitch::State::AB);
+			statechart.leftResponse();
+			emit update();
+			return true;
 
-	case GETDIR:
-		part->setState(RegularSwitch::State(message[0]));
-		statechart.response();
-		emit update();
-		return true;
+		case SETRGT:
+			part->setState(RegularSwitch::State::AC);
+			statechart.rightResponse();
+			emit update();
+			return true;
+
+		case GETDIR:
+			part->setState(RegularSwitch::State(message[0]));
+			statechart.response();
+			emit update();
+			return true;
+
+		default:
+			// Intentionally do nothing.
+			break;
+		}
+		break;
 
 	default:
+		statechart.failed();
 		break;
 	}
 	return false;
@@ -173,4 +198,44 @@ void RegularSwitchControllerProxy::request()
 	const MrwMessage  command(GETDIR, part->controller()->id(), part->unitNo());
 
 	ControllerRegistry::can()->write(command);
+}
+
+bool RegularSwitchControllerProxy::isTurnedLeft()
+{
+	__METHOD__;
+
+	return isLeft();
+}
+
+void mrw::ctrl::RegularSwitchControllerProxy::lock(bool do_it)
+{
+	__METHOD__;
+
+	ControllerRegistry::instance().decrease(this);
+	part->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
+	emit update();
+}
+
+void mrw::ctrl::RegularSwitchControllerProxy::fail()
+{
+	__METHOD__;
+
+	part->setLock(LockState::FAIL);
+	emit update();
+}
+
+void mrw::ctrl::RegularSwitchControllerProxy::pending()
+{
+	__METHOD__;
+
+	ControllerRegistry::instance().increase(this);
+	part->setLock(LockState::PENDING);
+	emit update();
+}
+
+bool RegularSwitchControllerProxy::isFree()
+{
+	__METHOD__;
+
+	return state() == SectionState::FREE;
 }

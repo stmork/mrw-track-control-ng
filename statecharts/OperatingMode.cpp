@@ -98,9 +98,10 @@ namespace mrw
 				}
 
 
-			case mrw::statechart::OperatingMode::Event::_te0_main_region_Init_:
+			case mrw::statechart::OperatingMode::Event::_te0_main_region_Prepare_Bus_:
+			case mrw::statechart::OperatingMode::Event::_te1_main_region_Init_:
 				{
-					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::OperatingMode::Event::_te0_main_region_Init_)] = true;
+					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::OperatingMode::Event::_te0_main_region_Prepare_Bus_)] = true;
 					break;
 				}
 			default:
@@ -200,7 +201,7 @@ namespace mrw
 		{
 			if (evid < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::OperatingMode::Event>(evid + static_cast<sc::integer>(mrw::statechart::OperatingMode::Event::_te0_main_region_Init_))));
+				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::OperatingMode::Event>(evid + static_cast<sc::integer>(mrw::statechart::OperatingMode::Event::_te0_main_region_Prepare_Bus_))));
 				runCycle();
 			}
 		}
@@ -274,6 +275,7 @@ namespace mrw
 		void OperatingMode::enact_main_region_Prepare_Bus()
 		{
 			/* Entry action for state 'Prepare Bus'. */
+			timerService->setTimer(this, 0, timeout, false);
 			ifaceOperationCallback->connectBus();
 		}
 
@@ -281,7 +283,7 @@ namespace mrw
 		void OperatingMode::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(this, 0, timeout, false);
+			timerService->setTimer(this, 1, timeout, false);
 			ifaceOperationCallback->reset();
 			emit inquire();
 		}
@@ -307,11 +309,18 @@ namespace mrw
 			emit operating();
 		}
 
+		/* Exit action for state 'Prepare Bus'. */
+		void OperatingMode::exact_main_region_Prepare_Bus()
+		{
+			/* Exit action for state 'Prepare Bus'. */
+			timerService->unsetTimer(this, 0);
+		}
+
 		/* Exit action for state 'Init'. */
 		void OperatingMode::exact_main_region_Init()
 		{
 			/* Exit action for state 'Init'. */
-			timerService->unsetTimer(this, 0);
+			timerService->unsetTimer(this, 1);
 		}
 
 		/* 'default' enter sequence for state Prepare Bus */
@@ -371,6 +380,7 @@ namespace mrw
 		{
 			/* Default exit sequence for state Prepare Bus */
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::NO_STATE;
+			exact_main_region_Prepare_Bus();
 		}
 
 		/* Default exit sequence for state Init */
@@ -466,6 +476,17 @@ namespace mrw
 					react(0);
 					transitioned_after = 0;
 				}
+				else
+				{
+					if (timeEvents[0])
+					{
+						exseq_main_region_Prepare_Bus();
+						timeEvents[0] = false;
+						enseq_main_region_Fail_default();
+						react(0);
+						transitioned_after = 0;
+					}
+				}
 			}
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
@@ -481,10 +502,10 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (timeEvents[0])
+				if (timeEvents[1])
 				{
 					exseq_main_region_Init();
-					timeEvents[0] = false;
+					timeEvents[1] = false;
 					enseq_main_region_Fail_default();
 					react(0);
 					transitioned_after = 0;
@@ -593,6 +614,7 @@ namespace mrw
 			edit_raised = false;
 			operate_raised = false;
 			timeEvents[0] = false;
+			timeEvents[1] = false;
 		}
 
 		void OperatingMode::microStep()
@@ -650,7 +672,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((connected_raised) || (clear_raised)) || (inquired_raised)) || (fail_raised)) || (edit_raised)) || (operate_raised)) || (timeEvents[0]));
+			while ((((((((connected_raised) || (clear_raised)) || (inquired_raised)) || (fail_raised)) || (edit_raised)) || (operate_raised)) || (timeEvents[0])) || (timeEvents[1]));
 			isExecuting = false;
 		}
 

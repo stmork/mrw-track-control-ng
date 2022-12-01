@@ -37,14 +37,18 @@ public slots:
 	void itemClicked(QListWidgetItem * item);
 
 private slots:
-	void clearSelectedItems();
-	void clearAllItems();
+	void on_clearSection_clicked();
+	void on_clearAllSections_clicked();
 	void move(int right, int down);
 	void extend(int inc);
 	void lineup(int inc);
-	void expand();
-	void incline();
+	void on_actionExpand_triggered();
+	void on_actionInclination_triggered();
 	void bend(const mrw::model::Position::Bending bend);
+
+	void on_actionTurnSwitchLeft_triggered();
+	void on_actionTurnSwitch_triggered();
+	void on_actionTurnSwitchRight_triggered();
 
 private:
 	void initRegion();

@@ -229,8 +229,26 @@
     <addaction name="actionBendLeft"/>
     <addaction name="actionBendRight"/>
    </widget>
+   <widget class="QMenu" name="menuModus">
+    <property name="title">
+     <string>Modus</string>
+    </property>
+    <addaction name="actionEdit"/>
+    <addaction name="actionOperate"/>
+    <addaction name="actionClear"/>
+   </widget>
+   <widget class="QMenu" name="menuBetrieb">
+    <property name="title">
+     <string>Betrieb</string>
+    </property>
+    <addaction name="actionTurnSwitchLeft"/>
+    <addaction name="actionTurnSwitchRight"/>
+    <addaction name="actionTurnSwitch"/>
+   </widget>
    <addaction name="menuDaten"/>
    <addaction name="menuEditieren"/>
+   <addaction name="menuModus"/>
+   <addaction name="menuBetrieb"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionQuit">
@@ -338,6 +356,36 @@
    </property>
    <property name="shortcut">
     <string>Shift+V</string>
+   </property>
+  </action>
+  <action name="actionEdit">
+   <property name="text">
+    <string>Editieren</string>
+   </property>
+  </action>
+  <action name="actionOperate">
+   <property name="text">
+    <string>Fahrdienst</string>
+   </property>
+  </action>
+  <action name="actionClear">
+   <property name="text">
+    <string>Fehler auflösen</string>
+   </property>
+  </action>
+  <action name="actionTurnSwitchLeft">
+   <property name="text">
+    <string>Weiche links</string>
+   </property>
+  </action>
+  <action name="actionTurnSwitchRight">
+   <property name="text">
+    <string>Weiche rechts</string>
+   </property>
+  </action>
+  <action name="actionTurnSwitch">
+   <property name="text">
+    <string>Weiche umschalten</string>
    </property>
   </action>
  </widget>
