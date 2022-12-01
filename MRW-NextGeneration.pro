@@ -5,8 +5,8 @@
 
 TEMPLATE = subdirs
 SUBDIRS  = \
-	can \
 	util \
+	can \
 	statecharts \
 	model \
 	ctrl \
@@ -17,9 +17,9 @@ SUBDIRS  = \
 	track-control-ng \
 	study
 
-can.file                  = can/MRW-Can.pro
 util.file                 = util/MRW-Util.pro
-statecharts.file          = statecharts/MRW-Statecharts.pro 
+can.file                  = can/MRW-Can.pro
+statecharts.file          = statecharts/MRW-Statecharts.pro
 model.file                = model/MRW-Model.pro
 ctrl.file                 = ctrl/MRW-Ctrl.pro
 ui.file                   = ui/MRW-UI.pro
@@ -32,12 +32,12 @@ study.file                = MRW-WidgetStudy/MRW-WidgetStudy.pro
 can.depends               = util
 model.depends             = util can
 test.depends              = util can model
-ctrl.depends              = model
+ctrl.depends              = model statecharts
 ui.depends                = ctrl
 ping.depends              = test
 proxy.depends             = test
-study.depends             = util can model ctrl ui
-track-control-ng.depends  = statecharts study
+study.depends             = test ctrl ui
+track-control-ng.depends  = study
 
 QMAKE_CLEAN              += qtest*.xml
 

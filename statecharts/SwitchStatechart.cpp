@@ -27,7 +27,7 @@ namespace mrw
 			clear_raised(false),
 			queued_raised(false),
 			failed_raised(false),
-			unlocked_raised(false),
+			unlock_raised(false),
 			turnLeft_raised(false),
 			turn_raised(false),
 			turnRight_raised(false)
@@ -105,9 +105,9 @@ namespace mrw
 					failed_raised = true;
 					break;
 				}
-			case mrw::statechart::SwitchStatechart::Event::unlocked:
+			case mrw::statechart::SwitchStatechart::Event::unlock:
 				{
-					unlocked_raised = true;
+					unlock_raised = true;
 					break;
 				}
 			case mrw::statechart::SwitchStatechart::Event::turnLeft:
@@ -190,9 +190,9 @@ namespace mrw
 		}
 
 
-		void mrw::statechart::SwitchStatechart::unlocked()
+		void mrw::statechart::SwitchStatechart::unlock()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::unlocked));
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::unlock));
 			runCycle();
 		}
 
@@ -929,7 +929,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (unlocked_raised)
+				if (unlock_raised)
 				{
 					exseq_main_region_Operating_operating_Locked();
 					enseq_main_region_Operating_operating_Unlocked_default();
@@ -1098,7 +1098,7 @@ namespace mrw
 			clear_raised = false;
 			queued_raised = false;
 			failed_raised = false;
-			unlocked_raised = false;
+			unlock_raised = false;
 			turnLeft_raised = false;
 			turn_raised = false;
 			turnRight_raised = false;
@@ -1181,7 +1181,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((((((((inquire_raised) || (leftResponse_raised)) || (rightResponse_raised)) || (response_raised)) || (clear_raised)) || (queued_raised)) || (failed_raised)) || (unlocked_raised)) || (turnLeft_raised)) || (turn_raised)) || (turnRight_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while (((((((((((((inquire_raised) || (leftResponse_raised)) || (rightResponse_raised)) || (response_raised)) || (clear_raised)) || (queued_raised)) || (failed_raised)) || (unlock_raised)) || (turnLeft_raised)) || (turn_raised)) || (turnRight_raised)) || (timeEvents[0])) || (timeEvents[1]));
 			isExecuting = false;
 		}
 

@@ -49,7 +49,7 @@ MrwBusService::MrwBusService(
 
 MrwBusService::~MrwBusService()
 {
-//	__METHOD__;
+	__METHOD__;
 
 	qInfo(" Shutting down MRW bus service.");
 	if (can_device != nullptr)

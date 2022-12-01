@@ -83,7 +83,7 @@ namespace mrw
 				clear,
 				queued,
 				failed,
-				unlocked,
+				unlock,
 				turnLeft,
 				turn,
 				turnRight,
@@ -206,8 +206,8 @@ namespace mrw
 			/*! Slot for the in event 'failed' that is defined in the default interface scope. */
 			void failed();
 
-			/*! Slot for the in event 'unlocked' that is defined in the default interface scope. */
-			void unlocked();
+			/*! Slot for the in event 'unlock' that is defined in the default interface scope. */
+			void unlock();
 
 			/*! Slot for the in event 'turnLeft' that is defined in the default interface scope. */
 			void turnLeft();
@@ -343,8 +343,8 @@ namespace mrw
 			/*! Indicates event 'failed' of default interface scope is active. */
 			bool failed_raised;
 
-			/*! Indicates event 'unlocked' of default interface scope is active. */
-			bool unlocked_raised;
+			/*! Indicates event 'unlock' of default interface scope is active. */
+			bool unlock_raised;
 
 			/*! Indicates event 'turnLeft' of default interface scope is active. */
 			bool turnLeft_raised;

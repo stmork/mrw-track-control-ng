@@ -12,4 +12,4 @@ CONFIG += console
 SOURCES += \
 	main.cpp
 
-LIBS            += -lMRW-Model -lMRW-Util -lMRW-Can
+LIBS            += -lMRW-Model -lMRW-Can -lMRW-Util
