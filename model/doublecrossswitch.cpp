@@ -77,10 +77,11 @@ bool DoubleCrossSwitch::valid() const
 
 QString DoubleCrossSwitch::toString() const
 {
-	return QString("      X %1 %2--%3 : %4").
+	return QString("      X %1 %2--%3 : [%4] %5").
 		arg(valid()  ? "V" : "-").
 		arg(aIsDir() ? "cd" : "ab").
 		arg(aIsDir() ? "ab" : "cd").
+		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name());
 }
 

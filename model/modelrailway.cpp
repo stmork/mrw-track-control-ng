@@ -268,7 +268,7 @@ Controller * ModelRailway::controllerById(const ControllerId id) const
 	return it != controller_map.end() ? it->second : nullptr;
 }
 
-Device * ModelRailway::deviceByUnitNo(const mrw::can::UnitNo unit_no) const
+Device * ModelRailway::deviceByUnitNo(const UnitNo unit_no) const
 {
 	auto it = device_map.find(unit_no);
 

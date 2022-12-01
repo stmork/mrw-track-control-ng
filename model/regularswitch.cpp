@@ -77,11 +77,12 @@ bool RegularSwitch::valid() const
 
 QString RegularSwitch::toString() const
 {
-	return QString("      %1 %2 %3--%4 : %5").
+	return QString("      %1 %2 %3--%4 : [%5] %6").
 		arg(aIsDir() ? ">" : "<").
 		arg(valid()  ? "V" : "-").
 		arg(aIsDir() ? "bc" : " a").
 		arg(aIsDir() ? "a " : "bc").
+		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name());
 }
 

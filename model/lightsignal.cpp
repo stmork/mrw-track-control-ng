@@ -67,6 +67,9 @@ bool LightSignal::valid() const
 
 QString LightSignal::toString() const
 {
-	return QString("      L %1  %2  : %3").
-		arg(valid()  ? "V" : "-").arg(symbol()).arg(name());
+	return QString("      L %1  %2  : [%3] %4").
+		arg(valid()  ? "V" : "-").
+		arg(symbol()).
+		arg(unitNo(), 4, 16, QChar('0')).
+		arg(name());
 }
