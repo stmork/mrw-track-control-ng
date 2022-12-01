@@ -179,7 +179,9 @@ void RegularSwitchControllerProxy::left()
 
 	const MrwMessage  command(SETLFT, part->controller()->id(), part->unitNo());
 
+	part->setState(RegularSwitch::State::AB);
 	ControllerRegistry::can()->write(command);
+	emit update();
 }
 
 void RegularSwitchControllerProxy::right()
@@ -188,7 +190,9 @@ void RegularSwitchControllerProxy::right()
 
 	const MrwMessage  command(SETRGT, part->controller()->id(), part->unitNo());
 
+	part->setState(RegularSwitch::State::AC);
 	ControllerRegistry::can()->write(command);
+	emit update();
 }
 
 void RegularSwitchControllerProxy::request()

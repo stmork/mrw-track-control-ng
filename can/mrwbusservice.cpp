@@ -136,6 +136,8 @@ QString MrwBusService::select(
 
 void MrwBusService::stateChanged(QCanBusDevice::CanBusDeviceState state)
 {
+	__METHOD__;
+
 	switch (state)
 	{
 	case QCanBusDevice::ConnectedState:
