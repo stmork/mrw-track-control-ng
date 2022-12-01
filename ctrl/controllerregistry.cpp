@@ -18,6 +18,7 @@ ControllerRegistry::ControllerRegistry() : QObject(nullptr)
 
 ControllerRegistry::~ControllerRegistry()
 {
+	qInfo("Shutting down controller registry.");
 	Q_ASSERT(registry.empty());
 }
 

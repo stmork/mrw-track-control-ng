@@ -57,6 +57,7 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 
 MrwMessageDispatcher::~MrwMessageDispatcher()
 {
+	qInfo("Shutting down MRW message dispatcher.");
 	statechart.exit();
 }
 

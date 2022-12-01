@@ -36,6 +36,8 @@ ModelRepository::ModelRepository(const QString & model_name) :
 
 ModelRepository::~ModelRepository()
 {
+	qInfo("Saving positions.");
+
 	SettingsGroup           group(&settings_model, "positions");
 	std::vector<Position *> positions;
 
@@ -45,6 +47,7 @@ ModelRepository::~ModelRepository()
 		pos->write(settings_model);
 	}
 
+	qInfo("Shutting down model.");
 	delete model;
 }
 

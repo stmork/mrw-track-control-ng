@@ -48,6 +48,7 @@ MrwBusService::MrwBusService(
 
 MrwBusService::~MrwBusService()
 {
+	qInfo("Shutting down MRW bus service.");
 	if (can_device != nullptr)
 	{
 		can_device->disconnectDevice();
