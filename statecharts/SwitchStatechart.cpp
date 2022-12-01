@@ -262,13 +262,6 @@ namespace mrw
 			ifaceOperationCallback->request();
 		}
 
-		/* Entry action for state 'Operating'. */
-		void SwitchStatechart::enact_main_region_Operating()
-		{
-			/* Entry action for state 'Operating'. */
-			emit inquired();
-		}
-
 		/* Exit action for state 'Init'. */
 		void SwitchStatechart::exact_main_region_Init()
 		{
@@ -295,7 +288,6 @@ namespace mrw
 		void SwitchStatechart::enseq_main_region_Operating_default()
 		{
 			/* 'default' enter sequence for state Operating */
-			enact_main_region_Operating();
 			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating;
 		}
 
@@ -397,7 +389,6 @@ namespace mrw
 				if (inquire_raised)
 				{
 					exseq_main_region_Wait_for_Start();
-					emit entering();
 					enseq_main_region_Init_default();
 					react(0);
 					transitioned_after = 0;
@@ -420,6 +411,7 @@ namespace mrw
 				if (response_raised)
 				{
 					exseq_main_region_Init();
+					emit inquired();
 					enseq_main_region_Operating_default();
 					react(0);
 					transitioned_after = 0;

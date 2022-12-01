@@ -12,7 +12,9 @@
 #include <model/modelrailway.h>
 #include <statecharts/OperatingMode.h>
 
-class MrwMessageDispatcher : public mrw::can::MrwBusService
+class MrwMessageDispatcher :
+	public mrw::can::MrwBusService,
+	public mrw::statechart::OperatingMode::OperationCallback
 {
 	Q_OBJECT
 
@@ -32,6 +34,8 @@ public:
 
 protected:
 	virtual void process(const mrw::can::MrwMessage & message) override;
+	virtual void connectBus() override;
+	virtual void reset() override;
 };
 
 #endif

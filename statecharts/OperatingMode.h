@@ -45,32 +45,31 @@ namespace mrw
 			enum class State
 			{
 				NO_STATE,
+				main_region_Prepare_Bus,
 				main_region_Init,
-				main_region_Operating,
-				main_region_Operating_operating_Inquiry,
-				main_region_Operating_operating_Running,
 				main_region_Editing,
-				main_region_Fail
+				main_region_Fail,
+				main_region_Operating
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 6;
+			static const sc::integer numStates = 5;
+			static const sc::integer scvi_main_region_Prepare_Bus = 0;
 			static const sc::integer scvi_main_region_Init = 0;
-			static const sc::integer scvi_main_region_Operating = 0;
-			static const sc::integer scvi_main_region_Operating_operating_Inquiry = 0;
-			static const sc::integer scvi_main_region_Operating_operating_Running = 0;
 			static const sc::integer scvi_main_region_Editing = 0;
 			static const sc::integer scvi_main_region_Fail = 0;
+			static const sc::integer scvi_main_region_Operating = 0;
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
 			{
 				NO_EVENT,
 				connected,
+				clear,
 				inquired,
 				edit,
 				operate,
-				_te0_main_region_Operating_operating_Inquiry_
+				_te0_main_region_Init_
 			};
 
 			class EventInstance
@@ -96,6 +95,21 @@ namespace mrw
 			/*! Sets the value of the variable 'retry' that is defined in the default interface scope. */
 			void setRetry(sc::integer retry);
 
+			//! Inner class for default interface scope operation callbacks.
+			class OperationCallback
+			{
+			public:
+				virtual ~OperationCallback() = 0;
+
+				virtual void connectBus() = 0;
+
+				virtual void reset() = 0;
+
+
+			};
+
+			/*! Set the working instance of the operation callback interface 'OperationCallback'. */
+			void setOperationCallback(OperationCallback * operationCallback);
 
 			/*
 			 * Functions inherited from StatemachineInterface
@@ -149,6 +163,9 @@ namespace mrw
 			/*! Slot for the in event 'connected' that is defined in the default interface scope. */
 			void connected();
 
+			/*! Slot for the in event 'clear' that is defined in the default interface scope. */
+			void clear();
+
 			/*! Slot for the in event 'inquired' that is defined in the default interface scope. */
 			void inquired();
 
@@ -168,6 +185,9 @@ namespace mrw
 
 			/*! Signal representing the out event 'operating' that is defined in the default interface scope. */
 			void operating();
+
+			/*! Signal representing the out event 'editing' that is defined in the default interface scope. */
+			void editing();
 
 
 		protected:
@@ -199,6 +219,7 @@ namespace mrw
 			State stateConfVector[maxOrthogonalStates];
 
 
+			OperationCallback * ifaceOperationCallback;
 
 
 			bool isExecuting;
@@ -207,35 +228,31 @@ namespace mrw
 
 			// prototypes of all internal functions
 
-			void enact_main_region_Operating_operating_Inquiry();
-			void enact_main_region_Operating_operating_Running();
+			void enact_main_region_Prepare_Bus();
+			void enact_main_region_Init();
+			void enact_main_region_Editing();
 			void enact_main_region_Fail();
-			void exact_main_region_Operating_operating_Inquiry();
+			void enact_main_region_Operating();
+			void exact_main_region_Init();
+			void enseq_main_region_Prepare_Bus_default();
 			void enseq_main_region_Init_default();
-			void enseq_main_region_Operating_default();
-			void enseq_main_region_Operating_operating_Inquiry_default();
-			void enseq_main_region_Operating_operating_Running_default();
 			void enseq_main_region_Editing_default();
 			void enseq_main_region_Fail_default();
+			void enseq_main_region_Operating_default();
 			void enseq_main_region_default();
-			void enseq_main_region_Operating_operating_default();
+			void exseq_main_region_Prepare_Bus();
 			void exseq_main_region_Init();
-			void exseq_main_region_Operating();
-			void exseq_main_region_Operating_operating_Inquiry();
-			void exseq_main_region_Operating_operating_Running();
 			void exseq_main_region_Editing();
 			void exseq_main_region_Fail();
+			void exseq_main_region_Operating();
 			void exseq_main_region();
-			void exseq_main_region_Operating_operating();
 			void react_main_region__entry_Default();
-			void react_main_region_Operating_operating__entry_Default();
 			sc::integer react(const sc::integer transitioned_before);
+			sc::integer main_region_Prepare_Bus_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_operating_Inquiry_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_operating_Running_react(const sc::integer transitioned_before);
 			sc::integer main_region_Editing_react(const sc::integer transitioned_before);
 			sc::integer main_region_Fail_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
 			void runCycle();
@@ -245,6 +262,9 @@ namespace mrw
 
 			/*! Indicates event 'connected' of default interface scope is active. */
 			bool connected_raised;
+
+			/*! Indicates event 'clear' of default interface scope is active. */
+			bool clear_raised;
 
 			/*! Indicates event 'inquired' of default interface scope is active. */
 			bool inquired_raised;
@@ -260,6 +280,7 @@ namespace mrw
 		};
 
 
+		inline OperatingMode::OperationCallback::~OperationCallback() {}
 
 	}
 }

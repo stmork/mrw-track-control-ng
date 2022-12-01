@@ -295,20 +295,6 @@ namespace mrw
 			ifaceOperationCallback->request();
 		}
 
-		/* Entry action for state 'Operating'. */
-		void SectionStatechart::enact_main_region_Operating()
-		{
-			/* Entry action for state 'Operating'. */
-			emit inquired();
-		}
-
-		/* Entry action for state 'Wait for Start'. */
-		void SectionStatechart::enact_main_region_Wait_for_Start()
-		{
-			/* Entry action for state 'Wait for Start'. */
-			emit waiting();
-		}
-
 		/* Exit action for state 'Init'. */
 		void SectionStatechart::exact_main_region_Init()
 		{
@@ -366,7 +352,6 @@ namespace mrw
 		void SectionStatechart::enseq_main_region_Operating_default()
 		{
 			/* 'default' enter sequence for state Operating */
-			enact_main_region_Operating();
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating;
 			stateConfVectorPosition = 0;
 			stateConfVectorChanged = true;
@@ -385,7 +370,6 @@ namespace mrw
 		void SectionStatechart::enseq_main_region_Wait_for_Start_default()
 		{
 			/* 'default' enter sequence for state Wait for Start */
-			enact_main_region_Wait_for_Start();
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Wait_for_Start;
 			stateConfVectorPosition = 0;
 			stateConfVectorChanged = true;
@@ -639,6 +623,7 @@ namespace mrw
 		{
 			/* The reactions of state null. */
 			exseq_main_region_Init();
+			emit inquired();
 			enseq_main_region_Operating_default();
 			react(0);
 		}
@@ -833,7 +818,6 @@ namespace mrw
 				if (inquire_raised)
 				{
 					exseq_main_region_Wait_for_Start();
-					emit entering();
 					enseq_main_region_Init_default();
 					react(0);
 					transitioned_after = 0;

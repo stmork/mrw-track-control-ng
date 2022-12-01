@@ -22,7 +22,7 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 	const QString        &       interface,
 	const QString        &       plugin,
 	QObject           *          parent) :
-	MrwBusService(interface, plugin, parent),
+	MrwBusService(interface, plugin, parent, false),
 	statechart(nullptr),
 	model(model_railway)
 {
@@ -36,15 +36,23 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 	connect(
 		&statechart, &OperatingMode::inquire,
 		&ControllerRegistry::instance(), &ControllerRegistry::inquire);
+	connect(
+		&ControllerRegistry::instance(), &ControllerRegistry::completed,
+		&statechart, &OperatingMode::inquired);
+	connect(
+		&statechart, &OperatingMode::operating, [] ()
+	{
+		qInfo("Operating...");
+	});
+	connect(
+		&statechart, &OperatingMode::editing, [] ()
+	{
+		qInfo("Editing...");
+	});
 
 	statechart.setTimerService(&TimerService::instance());
+	statechart.setOperationCallback(this);
 	statechart.enter();
-
-	if (can_device->state() == QCanBusDevice::ConnectedState)
-	{
-		// TODO: Add API to start manually.
-//		statechart.connected();
-	}
 }
 
 MrwMessageDispatcher::~MrwMessageDispatcher()
@@ -77,4 +85,17 @@ void MrwMessageDispatcher::process(const MrwMessage & message)
 	}
 
 	qDebug().noquote() << message << "---";
+}
+
+void MrwMessageDispatcher::connectBus()
+{
+	if (can_device->state() != QCanBusDevice::ConnectedState)
+	{
+		can_device->connectDevice();
+	}
+}
+
+void MrwMessageDispatcher::reset()
+{
+	ControllerRegistry::instance().reset();
 }

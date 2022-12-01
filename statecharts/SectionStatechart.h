@@ -192,14 +192,8 @@ namespace mrw
 
 
 		signals:
-			/*! Signal representing the out event 'waiting' that is defined in the default interface scope. */
-			void waiting();
-
 			/*! Signal representing the out event 'inquired' that is defined in the default interface scope. */
 			void inquired();
-
-			/*! Signal representing the out event 'entering' that is defined in the default interface scope. */
-			void entering();
 
 			/*! Signal representing the out event 'entered' that is defined in the default interface scope. */
 			void entered();
@@ -246,8 +240,6 @@ namespace mrw
 			void enact_main_region_Init();
 			void enact_main_region_Init_Init_Process_Requesting_relais_Relay();
 			void enact_main_region_Init_Init_Process_Requesting_state_Occupation();
-			void enact_main_region_Operating();
-			void enact_main_region_Wait_for_Start();
 			void exact_main_region_Init();
 			void enseq_main_region_Init_default();
 			void enseq_main_region_Init_Init_Process_Requesting_relais_Relay_default();

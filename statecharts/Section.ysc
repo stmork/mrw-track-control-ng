@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_eA-_4G_nEe2NWacukCztjQ" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;&#xA;in event inquire&#xA;in event relaisResponse : boolean&#xA;in event stateResponse&#xA;in event clear&#xA;in event failed&#xA;&#xA;out event waiting&#xA;out event inquired&#xA;out event entering&#xA;out event entered&#xA;&#xA;operation off()&#xA;operation on()&#xA;operation request()&#xA;" namespace="mrw.statechart" name="SectionStatechart">
+  <sgraph:Statechart xmi:id="_eA-_4G_nEe2NWacukCztjQ" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;&#xA;in event inquire&#xA;in event relaisResponse : boolean&#xA;in event stateResponse&#xA;in event clear&#xA;in event failed&#xA;&#xA;out event inquired&#xA;out event entered&#xA;&#xA;operation off()&#xA;operation on()&#xA;operation request()&#xA;" namespace="mrw.statechart" name="SectionStatechart">
     <regions xmi:id="_eBBcI2_nEe2NWacukCztjQ" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_eBBcJG_nEe2NWacukCztjQ">
         <outgoingTransitions xmi:id="_eBBcJW_nEe2NWacukCztjQ" target="_gX9dUG_yEe2YefuTX77gAw"/>
@@ -13,7 +13,7 @@
             <outgoingTransitions xmi:id="_ofBPkG_oEe2YefuTX77gAw" specification="" target="_ncie4G_oEe2YefuTX77gAw"/>
           </vertices>
           <vertices xsi:type="sgraph:Synchronization" xmi:id="_Pm2cIG_oEe2YefuTX77gAw" incomingTransitions="_DeY_0HCIEe2rVLYxSRawxw _PxkosHCIEe2rVLYxSRawxw">
-            <outgoingTransitions xmi:id="_8-hZoG_oEe2YefuTX77gAw" specification="" target="_eBBcMG_nEe2NWacukCztjQ"/>
+            <outgoingTransitions xmi:id="_8-hZoG_oEe2YefuTX77gAw" specification="/ raise inquired" target="_eBBcMG_nEe2NWacukCztjQ"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_SIcPIG_oEe2YefuTX77gAw" specification="" name="Requesting">
             <regions xmi:id="_SIc2MG_oEe2YefuTX77gAw" name="relais">
@@ -39,14 +39,14 @@
           </vertices>
         </regions>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_eBBcMG_nEe2NWacukCztjQ" specification="entry / raise inquired" name="Operating" incomingTransitions="_8-hZoG_oEe2YefuTX77gAw">
+      <vertices xsi:type="sgraph:State" xmi:id="_eBBcMG_nEe2NWacukCztjQ" specification="" name="Operating" incomingTransitions="_8-hZoG_oEe2YefuTX77gAw">
         <outgoingTransitions xmi:id="_OPUhIG_rEe2YefuTX77gAw" specification="failed" target="_tx568G_nEe2YefuTX77gAw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_tx568G_nEe2YefuTX77gAw" name="Failed" incomingTransitions="_yKSQcG_nEe2YefuTX77gAw _OPUhIG_rEe2YefuTX77gAw _UuQ6gG_rEe2YefuTX77gAw">
         <outgoingTransitions xmi:id="_5_pFEHCVEe2rVLYxSRawxw" specification="clear" target="_eBBcJm_nEe2NWacukCztjQ"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_gX9dUG_yEe2YefuTX77gAw" specification="entry / raise waiting" name="Wait for Start" incomingTransitions="_eBBcJW_nEe2NWacukCztjQ">
-        <outgoingTransitions xmi:id="_ma86gG_yEe2YefuTX77gAw" specification="inquire / raise entering" target="_eBBcJm_nEe2NWacukCztjQ"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_gX9dUG_yEe2YefuTX77gAw" specification="" name="Wait for Start" incomingTransitions="_eBBcJW_nEe2NWacukCztjQ">
+        <outgoingTransitions xmi:id="_ma86gG_yEe2YefuTX77gAw" specification="inquire" target="_eBBcJm_nEe2NWacukCztjQ"/>
       </vertices>
     </regions>
   </sgraph:Statechart>
@@ -341,7 +341,7 @@
     <edges xmi:id="_8-iAsG_oEe2YefuTX77gAw" type="Transition" element="_8-hZoG_oEe2YefuTX77gAw" source="_Pm3DMG_oEe2YefuTX77gAw" target="_eBCDVG_nEe2NWacukCztjQ">
       <children xsi:type="notation:DecorationNode" xmi:id="_8-iAtG_oEe2YefuTX77gAw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_8-iAtW_oEe2YefuTX77gAw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_8-iAtm_oEe2YefuTX77gAw" x="-1" y="-57"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_8-iAtm_oEe2YefuTX77gAw" x="15" y="-69"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_8-iAsW_oEe2YefuTX77gAw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_8-iAs2_oEe2YefuTX77gAw" fontName="Verdana"/>
