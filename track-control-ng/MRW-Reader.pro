@@ -24,17 +24,7 @@ SOURCES += \
 	../ctrl/railcontrollerproxy.cpp \
 	../ctrl/signalcontroller.cpp \
 	../ctrl/signalcontrollerproxy.cpp \
-	../ctrl/sectioncontroller.cpp \
-	../ui/basewidget.cpp \
-	../ui/controllerwidget.cpp \
-	../ui/barwidget.cpp \
-	../ui/circlelivewidget.cpp \
-	../ui/clockwidget.cpp \
-	../ui/stationwidget.cpp \
-	../ui/railwidget.cpp \
-	../ui/regularswitchwidget.cpp \
-	../ui/doublecrossswitchwidget.cpp \
-	../ui/signalwidget.cpp
+	../ctrl/sectioncontroller.cpp
 
 HEADERS += \
 	mainwindow.h \
@@ -52,22 +42,12 @@ HEADERS += \
 	../ctrl/railcontrollerproxy.h \
 	../ctrl/signalcontroller.h \
 	../ctrl/signalcontrollerproxy.h \
-	../ctrl/sectioncontroller.h \
-	../ui/basewidget.h \
-	../ui/controllerwidget.h \
-	../ui/barwidget.h \
-	../ui/circlelivewidget.h \
-	../ui/clockwidget.h \
-	../ui/stationwidget.h \
-	../ui/railwidget.h \
-	../ui/regularswitchwidget.h \
-	../ui/doublecrossswitchwidget.h \
-	../ui/signalwidget.h
+	../ctrl/sectioncontroller.h
 
 FORMS += \
 	mainwindow.ui \
 	regionform.ui
 
-LIBS            += -lMRW-Model -lMRW-Can -l MRW-Statecharts -lMRW-Util
+LIBS            += -lMRW-UI -lMRW-Model -lMRW-Can -l MRW-Statecharts -lMRW-Util
 
 QMAKE_CLEAN     += $$TARGET
