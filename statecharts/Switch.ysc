@@ -30,6 +30,7 @@
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_teY2AHF8Ee2peawiS1OZpw" specification="entry / lock(true)" name="Locked" incomingTransitions="_-NU4gHF8Ee2peawiS1OZpw">
             <outgoingTransitions xmi:id="_dXLlEHGAEe2peawiS1OZpw" specification="unlock" target="_KiWb0HF6Ee2peawiS1OZpw"/>
+            <outgoingTransitions xmi:id="_z_sAAHGhEe2peawiS1OZpw" specification="leftResponse, rightResponse" target="_T17jEHCVEe2rVLYxSRawxw"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_iR4E0HF9Ee2peawiS1OZpw" specification="entry / pending" name="Turning">
             <outgoingTransitions xmi:id="_SN_m8HF8Ee2peawiS1OZpw" specification="after timeout ms" target="_T17jEHCVEe2rVLYxSRawxw"/>
@@ -50,7 +51,7 @@
           </vertices>
         </regions>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_T17jEHCVEe2rVLYxSRawxw" specification="entry / fail" name="Failed" incomingTransitions="_VG_iUHCVEe2rVLYxSRawxw _Z7sAYHCVEe2rVLYxSRawxw _dNuY4HCVEe2rVLYxSRawxw _SN_m8HF8Ee2peawiS1OZpw">
+      <vertices xsi:type="sgraph:State" xmi:id="_T17jEHCVEe2rVLYxSRawxw" specification="entry / fail" name="Failed" incomingTransitions="_VG_iUHCVEe2rVLYxSRawxw _Z7sAYHCVEe2rVLYxSRawxw _dNuY4HCVEe2rVLYxSRawxw _SN_m8HF8Ee2peawiS1OZpw _z_sAAHGhEe2peawiS1OZpw">
         <outgoingTransitions xmi:id="_fBYu4HCVEe2rVLYxSRawxw" specification="clear" target="_r089enCUEe2rVLYxSRawxw"/>
       </vertices>
     </regions>
@@ -452,11 +453,11 @@
     <edges xmi:id="_SOCDMHF8Ee2peawiS1OZpw" type="Transition" element="_SN_m8HF8Ee2peawiS1OZpw" source="_iR56AHF9Ee2peawiS1OZpw" target="_T18KIHCVEe2rVLYxSRawxw">
       <children xsi:type="notation:DecorationNode" xmi:id="_SOCDNHF8Ee2peawiS1OZpw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_SOCDNXF8Ee2peawiS1OZpw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_SOCDNnF8Ee2peawiS1OZpw" x="219" y="-53"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_SOCDNnF8Ee2peawiS1OZpw" x="212" y="-53"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_SOCDMXF8Ee2peawiS1OZpw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_SOCDM3F8Ee2peawiS1OZpw" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_SOCDMnF8Ee2peawiS1OZpw" points="[204, 131, 47, 516]$[268, 131, 111, 516]$[268, -376, 111, 9]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_SOCDMnF8Ee2peawiS1OZpw" points="[204, 131, 47, 516]$[255, 131, 98, 516]$[255, -376, 98, 9]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_tIclwHF9Ee2peawiS1OZpw" id="(0.7222963951935915,0.05166051660516605)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_SOD4YHF8Ee2peawiS1OZpw" id="(0.5634920634920635,0.9419354838709677)"/>
     </edges>
@@ -510,6 +511,17 @@
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_dXMMInGAEe2peawiS1OZpw" points="[-653, 5, -300, 587]$[-796, 5, -443, 587]$[-796, -568, -443, 14]$[-647, -568, -294, 14]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_dXNaQHGAEe2peawiS1OZpw" id="(0.893296853625171,0.41509433962264153)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_dXNaQXGAEe2peawiS1OZpw" id="(0.4021887824897401,0.05660377358490566)"/>
+    </edges>
+    <edges xmi:id="_z_ucQHGhEe2peawiS1OZpw" type="Transition" element="_z_sAAHGhEe2peawiS1OZpw" source="_teZdEHF8Ee2peawiS1OZpw" target="_T18KIHCVEe2rVLYxSRawxw">
+      <children xsi:type="notation:DecorationNode" xmi:id="_z_ucRHGhEe2peawiS1OZpw" type="TransitionExpression">
+        <styles xsi:type="notation:ShapeStyle" xmi:id="_z_ucRXGhEe2peawiS1OZpw"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_z_ucRnGhEe2peawiS1OZpw" x="-255" y="-86"/>
+      </children>
+      <styles xsi:type="notation:ConnectorStyle" xmi:id="_z_ucQXGhEe2peawiS1OZpw" routing="Rectilinear" lineColor="4210752"/>
+      <styles xsi:type="notation:FontStyle" xmi:id="_z_ucQ3GhEe2peawiS1OZpw" fontName="Verdana"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_z_ucQnGhEe2peawiS1OZpw" points="[53, 11, -77, 849]$[147, 11, 17, 849]$[147, -818, 17, 20]"/>
+      <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_z_vqYHGhEe2peawiS1OZpw" id="(0.9274965800273598,0.2830188679245283)"/>
+      <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_z_vqYXGhEe2peawiS1OZpw" id="(0.8705583756345178,0.8709677419354839)"/>
     </edges>
   </notation:Diagram>
 </xmi:XMI>

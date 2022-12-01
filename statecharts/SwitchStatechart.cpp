@@ -936,6 +936,16 @@ namespace mrw
 					main_region_Operating_react(0);
 					transitioned_after = 0;
 				}
+				else
+				{
+					if ((leftResponse_raised) || (rightResponse_raised))
+					{
+						exseq_main_region_Operating();
+						enseq_main_region_Failed_default();
+						react(0);
+						transitioned_after = 0;
+					}
+				}
 			}
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
