@@ -28,9 +28,10 @@ namespace mrw::can
 
 	public:
 		explicit MrwBusService(
-			const QString & interface = "can0",
-			const QString & plugin    = "socketcan",
-			QObject    *    parent    = nullptr);
+			const QString & interface    = "can0",
+			const QString & plugin       = "socketcan",
+			QObject    *    parent       = nullptr,
+			const bool      auto_connect = true);
 		~MrwBusService();
 
 		/**

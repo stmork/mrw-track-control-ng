@@ -17,7 +17,8 @@ using namespace mrw::can;
 MrwBusService::MrwBusService(
 	const QString & interface,
 	const QString & plugin,
-	QObject    *    parent) : QObject(parent),
+	QObject    *    parent,
+	const bool      auto_connect) : QObject(parent),
 	can_bus(QCanBus::instance())
 
 {
@@ -34,7 +35,10 @@ MrwBusService::MrwBusService(
 			qCritical() << reason;
 		});
 
-		can_device->connectDevice();
+		if (auto_connect)
+		{
+			can_device->connectDevice();
+		}
 	}
 	else
 	{
