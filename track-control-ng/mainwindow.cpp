@@ -262,11 +262,18 @@ void MainWindow::on_actionTurnSwitchLeft_triggered()
 	{
 		Q_UNUSED(position);
 
-		RegularSwitchControllerProxy * ctrl = dynamic_cast<RegularSwitchControllerProxy *>(controller);
+		RegularSwitchControllerProxy * rs_ctrl =
+			dynamic_cast<RegularSwitchControllerProxy *>(controller);
+		DoubleCrossSwitchControllerProxy * dcs_ctrl =
+			dynamic_cast<DoubleCrossSwitchControllerProxy *>(controller);
 
-		if (ctrl != nullptr)
+		if (rs_ctrl != nullptr)
 		{
-			ctrl->turnLeft();
+			rs_ctrl->turnLeft();
+		}
+		if (dcs_ctrl != nullptr)
+		{
+			dcs_ctrl->turnLeft();
 		}
 	});
 	on_clearAllSections_clicked();
@@ -278,11 +285,18 @@ void MainWindow::on_actionTurnSwitch_triggered()
 	{
 		Q_UNUSED(position);
 
-		RegularSwitchControllerProxy * ctrl = dynamic_cast<RegularSwitchControllerProxy *>(controller);
+		RegularSwitchControllerProxy * rs_ctrl =
+			dynamic_cast<RegularSwitchControllerProxy *>(controller);
+		DoubleCrossSwitchControllerProxy * dcs_ctrl =
+			dynamic_cast<DoubleCrossSwitchControllerProxy *>(controller);
 
-		if (ctrl != nullptr)
+		if (rs_ctrl != nullptr)
 		{
-			ctrl->turn();
+			rs_ctrl->turn();
+		}
+		if (dcs_ctrl != nullptr)
+		{
+			dcs_ctrl->turn();
 		}
 	});
 	on_clearAllSections_clicked();
@@ -294,11 +308,18 @@ void MainWindow::on_actionTurnSwitchRight_triggered()
 	{
 		Q_UNUSED(position);
 
-		RegularSwitchControllerProxy * ctrl = dynamic_cast<RegularSwitchControllerProxy *>(controller);
+		RegularSwitchControllerProxy * rs_ctrl =
+			dynamic_cast<RegularSwitchControllerProxy *>(controller);
+		DoubleCrossSwitchControllerProxy * dcs_ctrl =
+			dynamic_cast<DoubleCrossSwitchControllerProxy *>(controller);
 
-		if (ctrl != nullptr)
+		if (rs_ctrl != nullptr)
 		{
-			ctrl->turnRight();
+			rs_ctrl->turnRight();
+		}
+		if (dcs_ctrl != nullptr)
+		{
+			dcs_ctrl->turnRight();
 		}
 	});
 	on_clearAllSections_clicked();

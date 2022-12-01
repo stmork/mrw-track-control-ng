@@ -7,13 +7,14 @@
 
 #include <ctrl/controllerregistrand.h>
 
+using namespace mrw::can;
 using namespace mrw::ctrl;
 
 ControllerRegistrand::ControllerRegistrand()
 {
 }
 
-bool ControllerRegistrand::process(const mrw::can::MrwMessage & message)
+bool ControllerRegistrand::process(const MrwMessage & message)
 {
 	qInfo().noquote() << "Unprocessed message:" << message;
 

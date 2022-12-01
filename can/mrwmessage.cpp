@@ -312,7 +312,7 @@ size_t MrwMessage::max() const
 	return len < s ? 0 : len - s;
 }
 
-size_t mrw::can::MrwMessage::start() const
+size_t MrwMessage::start() const
 {
 	return is_response ? IDX_RESPONSE_SIZE : IDX_COMMAND_SIZE;
 }

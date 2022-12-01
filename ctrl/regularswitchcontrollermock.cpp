@@ -41,14 +41,14 @@ void RegularSwitchControllerMock::setRightHanded(const bool right)
 	emit update();
 }
 
-void mrw::ctrl::RegularSwitchControllerMock::setInclined(const bool incl)
+void RegularSwitchControllerMock::setInclined(const bool incl)
 {
 	inclined = incl;
 	emit computeConnectors();
 	emit update();
 }
 
-void mrw::ctrl::RegularSwitchControllerMock::setExtension(const int input)
+void RegularSwitchControllerMock::setExtension(const int input)
 {
 	extension = input;
 	emit extend();
@@ -100,7 +100,7 @@ QString RegularSwitchControllerMock::name() const
 	return "819";
 }
 
-float mrw::ctrl::RegularSwitchControllerMock::extensions() const
+float RegularSwitchControllerMock::extensions() const
 {
 	return extension;
 }

@@ -32,7 +32,9 @@ namespace mrw::ctrl
 			QObject            *            parent = nullptr);
 		virtual ~DoubleCrossSwitchControllerProxy();
 
-		void setSwitch(mrw::model::DoubleCrossSwitch * new_part);
+		void turnLeft();
+		void turn();
+		void turnRight();
 
 		// Implementations from BaseController
 		virtual QString name() const override;

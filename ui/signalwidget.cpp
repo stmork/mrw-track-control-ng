@@ -21,7 +21,7 @@ SignalWidget::SignalWidget(
 {
 }
 
-void mrw::ui::SignalWidget::computeConnectors()
+void SignalWidget::computeConnectors()
 {
 	const Bending  bending = base_controller->bending();
 	const unsigned ext     = base_controller->extensions();

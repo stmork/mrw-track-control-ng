@@ -32,7 +32,7 @@ float RailControllerProxy::extensions() const
 	return rail->extension();
 }
 
-float mrw::ctrl::RailControllerProxy::lines() const
+float RailControllerProxy::lines() const
 {
 	return rail->lines();
 }

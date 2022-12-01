@@ -60,7 +60,7 @@ SignalControllerProxy::SignalControllerProxy(
 	}
 }
 
-mrw::ctrl::SignalControllerProxy::~SignalControllerProxy()
+SignalControllerProxy::~SignalControllerProxy()
 {
 	ControllerRegistry::instance().unregisterController(
 		dynamic_cast<Device *>(main_signal));

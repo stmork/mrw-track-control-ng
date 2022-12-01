@@ -18,10 +18,10 @@ using namespace mrw::ctrl;
 using namespace mrw::statechart;
 
 MrwMessageDispatcher::MrwMessageDispatcher(
-	mrw::model::ModelRailway  *  model_railway,
-	const QString        &       interface,
-	const QString        &       plugin,
-	QObject           *          parent) :
+	ModelRailway   *  model_railway,
+	const QString  &  interface,
+	const QString  &  plugin,
+	QObject     *     parent) :
 	MrwBusService(interface, plugin, parent, false),
 	statechart(nullptr),
 	model(model_railway)
@@ -32,13 +32,16 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 
 	connect(
 		this, &MrwBusService::connected,
-		&statechart, &OperatingMode::connected);
+		&statechart, &OperatingMode::connected,
+		Qt::QueuedConnection);
 	connect(
 		&statechart, &OperatingMode::inquire,
-		&ControllerRegistry::instance(), &ControllerRegistry::inquire);
+		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
+		Qt::QueuedConnection);
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::completed,
-		&statechart, &OperatingMode::inquired);
+		&statechart, &OperatingMode::inquired,
+		Qt::QueuedConnection);
 	connect(
 		&statechart, &OperatingMode::failed, [] ()
 	{
@@ -111,5 +114,7 @@ void MrwMessageDispatcher::connectBus()
 
 void MrwMessageDispatcher::reset()
 {
+	__METHOD__;
+
 	ControllerRegistry::instance().reset();
 }

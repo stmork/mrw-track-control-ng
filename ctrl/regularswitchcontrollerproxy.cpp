@@ -29,7 +29,8 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
-		&statechart, &SwitchStatechart::inquire);
+		&statechart, &SwitchStatechart::inquire,
+		Qt::QueuedConnection);
 	connect(
 		&statechart, &SwitchStatechart::entered, [&]()
 	{
@@ -48,23 +49,23 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 	statechart.enter();
 }
 
-mrw::ctrl::RegularSwitchControllerProxy::~RegularSwitchControllerProxy()
+RegularSwitchControllerProxy::~RegularSwitchControllerProxy()
 {
 	statechart.exit();
 	ControllerRegistry::instance().unregisterController(part);
 }
 
-void mrw::ctrl::RegularSwitchControllerProxy::turnLeft()
+void RegularSwitchControllerProxy::turnLeft()
 {
 	statechart.turnLeft();
 }
 
-void mrw::ctrl::RegularSwitchControllerProxy::turn()
+void RegularSwitchControllerProxy::turn()
 {
 	statechart.turn();
 }
 
-void mrw::ctrl::RegularSwitchControllerProxy::turnRight()
+void RegularSwitchControllerProxy::turnRight()
 {
 	statechart.turnRight();
 }
@@ -211,7 +212,7 @@ bool RegularSwitchControllerProxy::isTurnedLeft()
 	return isLeft();
 }
 
-void mrw::ctrl::RegularSwitchControllerProxy::lock(bool do_it)
+void RegularSwitchControllerProxy::lock(bool do_it)
 {
 	__METHOD__;
 
@@ -220,7 +221,7 @@ void mrw::ctrl::RegularSwitchControllerProxy::lock(bool do_it)
 	emit update();
 }
 
-void mrw::ctrl::RegularSwitchControllerProxy::fail()
+void RegularSwitchControllerProxy::fail()
 {
 	__METHOD__;
 
@@ -228,7 +229,7 @@ void mrw::ctrl::RegularSwitchControllerProxy::fail()
 	emit update();
 }
 
-void mrw::ctrl::RegularSwitchControllerProxy::pending()
+void RegularSwitchControllerProxy::pending()
 {
 	__METHOD__;
 

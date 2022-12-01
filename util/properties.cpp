@@ -74,7 +74,7 @@ bool Properties::read(const QString & filename)
 	return success;
 }
 
-const std::string & mrw::util::Properties::lookup(const std::string & key) const
+const std::string & Properties::lookup(const std::string & key) const
 {
 	return find(key) != end() ? at(key) : EMPTY;
 }

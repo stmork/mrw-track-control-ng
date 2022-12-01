@@ -51,7 +51,7 @@ QString DoubleCrossSwitchControllerMock::name() const
 	return "819";
 }
 
-Bending mrw::ctrl::DoubleCrossSwitchControllerMock::bending() const
+Bending DoubleCrossSwitchControllerMock::bending() const
 {
 	return Bending::STRAIGHT;
 }

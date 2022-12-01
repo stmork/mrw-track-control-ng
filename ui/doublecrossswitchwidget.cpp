@@ -125,7 +125,7 @@ bool DoubleCrossSwitchWidget::isD() const
 	return (switchState() & DoubleCrossSwitch::D_MASK) == mask;
 }
 
-unsigned mrw::ui::DoubleCrossSwitchWidget::switchState() const
+unsigned DoubleCrossSwitchWidget::switchState() const
 {
 	return (unsigned)controller<DoubleCrossSwitchController>()->switchState();
 }

@@ -53,7 +53,7 @@ void SignalControllerMock::setBending(const Bending bending)
 	emit update();
 }
 
-void mrw::ctrl::SignalControllerMock::setExtension(const int new_extension)
+void SignalControllerMock::setExtension(const int new_extension)
 {
 	extension = new_extension;
 	emit extend();

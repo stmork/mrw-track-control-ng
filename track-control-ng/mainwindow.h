@@ -57,7 +57,6 @@ private:
 			mrw::ctrl::BaseController *,
 			mrw::model::Position *)> editor);
 
-private:
 	Ui::MainWindow  * ui;
 	ModelRepository & repo;
 };

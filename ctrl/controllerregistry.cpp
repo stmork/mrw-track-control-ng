@@ -41,7 +41,7 @@ ControllerRegistrand * ControllerRegistry::find(Device * device)
 	return registry[device];
 }
 
-void ControllerRegistry::registerService(mrw::can::MrwBusService * service)
+void ControllerRegistry::registerService(MrwBusService * service)
 {
 	Q_ASSERT(can_service == nullptr);
 	Q_ASSERT(service != nullptr);

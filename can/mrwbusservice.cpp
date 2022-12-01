@@ -29,9 +29,15 @@ MrwBusService::MrwBusService(
 	can_device = can_bus->createDevice(plugin, selected, &error);
 	if (can_device != nullptr)
 	{
-		connect(can_device, &QCanBusDevice::framesReceived, this, &MrwBusService::receive);
-		connect(can_device, &QCanBusDevice::stateChanged,   this, &MrwBusService::stateChanged);
-		connect(can_device, &QCanBusDevice::errorOccurred, [] (auto reason)
+		connect(
+			can_device, &QCanBusDevice::framesReceived,
+			this, &MrwBusService::receive, Qt::QueuedConnection);
+		connect(
+			can_device, &QCanBusDevice::stateChanged,
+			this, &MrwBusService::stateChanged, Qt::QueuedConnection);
+
+		connect(
+			can_device, &QCanBusDevice::errorOccurred, [] (auto reason)
 		{
 			qCritical() << reason;
 		});

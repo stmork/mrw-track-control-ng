@@ -26,11 +26,49 @@ DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(
 	part(new_part)
 {
 	ControllerRegistry::instance().registerController(part, this);
+
+	connect(
+		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
+		&statechart, &SwitchStatechart::inquire,
+		Qt::QueuedConnection);
+	connect(
+		&statechart, &SwitchStatechart::entered, [&]()
+	{
+		ControllerRegistry::instance().increase(this);
+		qDebug().noquote() << part->toString() << "Inquiry started.";
+	});
+	connect(
+		&statechart, &SwitchStatechart::inquired, [&]()
+	{
+		ControllerRegistry::instance().decrease(this);
+		qDebug().noquote() << part->toString() << "Inquiry completed.";
+	});
+
+	statechart.setTimerService(&TimerService::instance());
+	statechart.setOperationCallback(this);
+	statechart.enter();
+
 }
 
 DoubleCrossSwitchControllerProxy::~DoubleCrossSwitchControllerProxy()
 {
+	statechart.exit();
 	ControllerRegistry::instance().unregisterController(part);
+}
+
+void DoubleCrossSwitchControllerProxy::turnLeft()
+{
+	statechart.turnLeft();
+}
+
+void DoubleCrossSwitchControllerProxy::turn()
+{
+	statechart.turn();
+}
+
+void DoubleCrossSwitchControllerProxy::turnRight()
+{
+	statechart.turnRight();
 }
 
 QString DoubleCrossSwitchControllerProxy::name() const
@@ -154,7 +192,7 @@ void DoubleCrossSwitchControllerProxy::pending()
 	emit update();
 }
 
-void mrw::ctrl::DoubleCrossSwitchControllerProxy::fail()
+void DoubleCrossSwitchControllerProxy::fail()
 {
 	__METHOD__;
 
