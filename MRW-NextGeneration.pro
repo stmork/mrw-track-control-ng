@@ -47,7 +47,7 @@ QMAKE_CLEAN              += qtest*.xml
 #
 #####################################################################
 
-astyle.commands = astyle */*.cpp */*.h tools/*/*.cpp
+astyle.commands = astyle */*.cpp */*.h tools/*/*.cpp */ctrl/*.cpp */ctrl/*.h
 
 cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--inline-suppr\

@@ -229,6 +229,15 @@ bool MrwMessage::valid() const
 	}
 }
 
+uint8_t mrw::can::MrwMessage::operator[](const size_t index) const
+{
+	if (index >= start())
+	{
+		throw std::out_of_range("Index out of payload bounds!");
+	}
+	return info[index];
+}
+
 MrwMessage::operator QCanBusFrame() const
 {
 	QByteArray array;

@@ -3,8 +3,10 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "model/modelrailway.h"
-#include "model/regularswitch.h"
+#include <stdexcept>
+
+#include <model/modelrailway.h>
+#include <model/regularswitch.h>
 
 using namespace mrw::can;
 using namespace mrw::model;
@@ -28,6 +30,24 @@ RegularSwitch::RegularSwitch(
 	if (left_branch)
 	{
 		setBending(Bending::LEFT);
+	}
+}
+
+void RegularSwitch::setState(
+	const RailPart * left,
+	const RailPart * right)
+{
+	if ((b == left) || (b == right))
+	{
+		switch_state = State::AB;
+	}
+	else if ((c == left) || (c == right))
+	{
+		switch_state = State::AC;
+	}
+	else
+	{
+		throw std::invalid_argument("Given rail parts are not neighbours.");
 	}
 }
 

@@ -20,6 +20,25 @@ DoubleCrossSwitch::DoubleCrossSwitch(
 {
 }
 
+void DoubleCrossSwitch::setState(
+	const RailPart * left,
+	const RailPart * right)
+{
+	unsigned state = 0;
+
+	if ((b == left) || (b == right))
+	{
+		state |= B_MASK;
+	}
+
+	if ((d == left) || (d == right))
+	{
+		state |= D_MASK;
+	}
+
+	switch_state = static_cast<State>(state);
+}
+
 void DoubleCrossSwitch::link()
 {
 	a = resolve("a");

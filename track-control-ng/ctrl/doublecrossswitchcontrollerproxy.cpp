@@ -110,33 +110,48 @@ bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 {
 	qDebug().noquote() << message << "(double cross switch)";
 
-	if (message.response() != Response::MSG_OK)
+	switch (message.response())
 	{
-		statechart.failed();
-		return true;
-	}
-
-	switch (message.command())
-	{
-	case SETLFT:
-		part->setState(DoubleCrossSwitch::State::AC);
-		statechart.leftResponse();
-		emit update();
+	case MSG_QUEUED:
+		statechart.queued();
 		return true;
 
-	case SETRGT:
-		part->setState(DoubleCrossSwitch::State::AD);
-		statechart.rightResponse();
-		emit update();
-		return true;
+	case MSG_OK:
+		switch (message.command())
+		{
+		case SETLFT:
+			if (part->commandState() != SwitchState::SWITCH_STATE_LEFT)
+			{
+				part->setState(DoubleCrossSwitch::State::AC);
+			}
+			statechart.leftResponse();
+			emit update();
+			return true;
 
-	case GETDIR:
-		part->setState(DoubleCrossSwitch::State(message[0]));
-		statechart.response();
-		emit update();
-		return true;
+		case SETRGT:
+			if (part->commandState() != SwitchState::SWITCH_STATE_RIGHT)
+			{
+				part->setState(DoubleCrossSwitch::State::BC);
+			}
+			statechart.rightResponse();
+			emit update();
+			return true;
+
+		case GETDIR:
+			part->setState(DoubleCrossSwitch::State(message[0]));
+			statechart.response();
+			emit update();
+			return true;
+
+		default:
+			// Intentionally do nothing.
+			break;
+		}
+		break;
 
 	default:
+		qCritical().noquote() << "Error switching" << part->toString();
+		statechart.failed();
 		break;
 	}
 	return false;
@@ -148,7 +163,9 @@ void DoubleCrossSwitchControllerProxy::left()
 
 	const MrwMessage  command(SETLFT, part->controller()->id(), part->unitNo());
 
+	part->setState(DoubleCrossSwitch::State::AC);
 	ControllerRegistry::can()->write(command);
+	emit update();
 }
 
 void DoubleCrossSwitchControllerProxy::right()
@@ -157,7 +174,9 @@ void DoubleCrossSwitchControllerProxy::right()
 
 	const MrwMessage  command(SETRGT, part->controller()->id(), part->unitNo());
 
+	part->setState(DoubleCrossSwitch::State::BC);
 	ControllerRegistry::can()->write(command);
+	emit update();
 }
 
 void DoubleCrossSwitchControllerProxy::request()
@@ -173,14 +192,23 @@ bool DoubleCrossSwitchControllerProxy::isTurnedLeft()
 {
 	__METHOD__;
 
-	return part->state() == DoubleCrossSwitch::State::AC;
+	return
+		(switchState() == DoubleCrossSwitch::State::AC) ||
+		(switchState() == DoubleCrossSwitch::State::BD);
 }
 
-void DoubleCrossSwitchControllerProxy::lock(bool do_it)
+bool DoubleCrossSwitchControllerProxy::isFree()
 {
 	__METHOD__;
 
-	part->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
+	return state() == SectionState::FREE;
+}
+
+void DoubleCrossSwitchControllerProxy::fail()
+{
+	__METHOD__;
+
+	part->setLock(LockState::FAIL);
 	emit update();
 }
 
@@ -192,17 +220,10 @@ void DoubleCrossSwitchControllerProxy::pending()
 	emit update();
 }
 
-void DoubleCrossSwitchControllerProxy::fail()
+void DoubleCrossSwitchControllerProxy::lock(bool do_it)
 {
 	__METHOD__;
 
-	part->setLock(LockState::FAIL);
+	part->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
 	emit update();
-}
-
-bool DoubleCrossSwitchControllerProxy::isFree()
-{
-	__METHOD__;
-
-	return state() == SectionState::FREE;
 }

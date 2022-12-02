@@ -173,14 +173,28 @@ namespace mrw::can
 			return is_response;
 		}
 
-		QString toString() const override;
+		/**
+		 * This method returns a payload byte. The payload is related to the
+		 * MRW payload which is seven bytes for a command and four bytes for
+		 * a response.
+		 *
+		 * @param index The access index into the payload.
+		 * @return The accessed payload byte.
+		 * @exception std::out_of_range if the index exceeds the payload range.
+		 */
+		uint8_t operator[] (const size_t index) const;
 
-		uint8_t operator[] (const int index) const
-		{
-			return info[index];
-		}
-
+		/**
+		 * This method appends a payload byte. The payload is related to the
+		 * MRW payload which may be seven bytes for a command and four bytes for
+		 * a response.
+		 *
+		 * @param input The byte to append to the payload.
+		 * @exception std::out:of:range If the payload exceeds available space.
+		 */
 		void append(const uint8_t input);
+
+		QString toString() const override;
 
 	private:
 		size_t max() const;

@@ -6,6 +6,7 @@
 #include "model/modelrailway.h"
 #include "model/device.h"
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 Device::Device(

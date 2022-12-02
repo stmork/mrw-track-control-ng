@@ -63,8 +63,8 @@ namespace mrw::ctrl
 		virtual bool isTurnedLeft() override;
 		virtual bool isFree() override;
 
-		virtual void pending() override;
 		virtual void fail() override;
+		virtual void pending() override;
 		virtual void lock(bool do_it) override;
 	};
 }

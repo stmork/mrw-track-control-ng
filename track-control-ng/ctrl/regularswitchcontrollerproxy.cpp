@@ -144,13 +144,19 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 		switch (message.command())
 		{
 		case SETLFT:
-			part->setState(RegularSwitch::State::AB);
+			if (part->commandState() != SwitchState::SWITCH_STATE_LEFT)
+			{
+				part->setState(RegularSwitch::State::AB);
+			}
 			statechart.leftResponse();
 			emit update();
 			return true;
 
 		case SETRGT:
-			part->setState(RegularSwitch::State::AC);
+			if (part->commandState() != SwitchState::SWITCH_STATE_RIGHT)
+			{
+				part->setState(RegularSwitch::State::AC);
+			}
 			statechart.rightResponse();
 			emit update();
 			return true;
@@ -168,6 +174,7 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 		break;
 
 	default:
+		qCritical().noquote() << "Error switching" << part->toString();
 		statechart.failed();
 		break;
 	}
@@ -212,13 +219,11 @@ bool RegularSwitchControllerProxy::isTurnedLeft()
 	return isLeft();
 }
 
-void RegularSwitchControllerProxy::lock(bool do_it)
+bool RegularSwitchControllerProxy::isFree()
 {
 	__METHOD__;
 
-	ControllerRegistry::instance().decrease(this);
-	part->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
-	emit update();
+	return state() == SectionState::FREE;
 }
 
 void RegularSwitchControllerProxy::fail()
@@ -238,9 +243,11 @@ void RegularSwitchControllerProxy::pending()
 	emit update();
 }
 
-bool RegularSwitchControllerProxy::isFree()
+void RegularSwitchControllerProxy::lock(bool do_it)
 {
 	__METHOD__;
 
-	return state() == SectionState::FREE;
+	ControllerRegistry::instance().decrease(this);
+	part->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
+	emit update();
 }

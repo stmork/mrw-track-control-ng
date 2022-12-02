@@ -8,7 +8,7 @@
 #ifndef MRW_MODEL_DEVICE_H
 #define MRW_MODEL_DEVICE_H
 
-#include <can/types.h>
+#include <can/mrwmessage.h>
 #include <model/module.h>
 
 namespace mrw::model

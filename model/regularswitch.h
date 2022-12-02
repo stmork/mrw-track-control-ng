@@ -79,6 +79,8 @@ namespace mrw::model
 			switch_state = state;
 		}
 
+		void setState(const RailPart * left, const RailPart * right) override;
+
 		bool    valid() const override;
 		QString toString() const override;
 		QString key() const override;
