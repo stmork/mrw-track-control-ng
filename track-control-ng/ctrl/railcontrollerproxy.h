@@ -30,6 +30,8 @@ namespace mrw::ctrl
 			mrw::model::Rail   *  referenced_rail,
 			QObject       *       parent);
 
+	private:
+
 		// Implementations from BaseController
 		virtual QString name() const override;
 		virtual float   extensions() const override;

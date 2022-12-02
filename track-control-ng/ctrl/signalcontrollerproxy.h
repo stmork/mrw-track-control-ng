@@ -37,6 +37,8 @@ namespace mrw::ctrl
 			QObject       *       parent);
 		virtual ~SignalControllerProxy();
 
+	private:
+
 		// Implementations from BaseController
 		virtual QString name() const override;
 		virtual float   extensions() const override;

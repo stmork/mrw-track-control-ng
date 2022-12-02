@@ -37,6 +37,7 @@ namespace mrw::ctrl
 		void turnRight();
 
 	private:
+
 		// Implementations from BaseController
 		virtual QString name() const override;
 		virtual bool    isDirection() const override;

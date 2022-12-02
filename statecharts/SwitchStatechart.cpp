@@ -758,8 +758,8 @@ namespace mrw
 				if (response_raised)
 				{
 					exseq_main_region_Init();
-					emit inquired();
 					ifaceOperationCallback->dec();
+					emit inquired();
 					enseq_main_region_Operating_default();
 					react(0);
 					transitioned_after = 0;

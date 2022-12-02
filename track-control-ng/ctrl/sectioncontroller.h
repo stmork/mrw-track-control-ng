@@ -36,7 +36,12 @@ namespace mrw::ctrl
 
 		model::Section * section() const;
 
+	private:
+
 		// Implementations from BaseController
+		virtual void inc() override;
+		virtual void dec() override;
+
 		virtual QString name() const override;
 		virtual float   extensions() const override;
 		virtual bool    isDirection() const override;

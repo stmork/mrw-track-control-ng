@@ -32,13 +32,11 @@ SectionController::SectionController(
 	connect(
 		&statechart, &SectionStatechart::entered, [&]()
 	{
-		ControllerRegistry::instance().increase(this);
 		qDebug().noquote() << ctrl_section->toString() << "Inquiry started.";
 	});
 	connect(
 		&statechart, &SectionStatechart::inquired, [&]()
 	{
-		ControllerRegistry::instance().decrease(this);
 		qDebug().noquote() << ctrl_section->toString() << "Inquiry completed.";
 	});
 
@@ -56,6 +54,16 @@ SectionController::~SectionController()
 Section * SectionController::section() const
 {
 	return *this;
+}
+
+void SectionController::inc()
+{
+	ControllerRegistry::instance().increase(this);
+}
+
+void SectionController::dec()
+{
+	ControllerRegistry::instance().decrease(this);
 }
 
 QString SectionController::name() const

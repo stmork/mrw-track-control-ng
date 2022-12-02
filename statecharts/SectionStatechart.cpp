@@ -279,6 +279,7 @@ namespace mrw
 			/* Entry action for state 'Init'. */
 			timerService->setTimer(this, 0, timeout, false);
 			emit entered();
+			ifaceOperationCallback->inc();
 		}
 
 		/* Entry action for state 'Relay'. */
@@ -623,6 +624,7 @@ namespace mrw
 		{
 			/* The reactions of state null. */
 			exseq_main_region_Init();
+			ifaceOperationCallback->dec();
 			emit inquired();
 			enseq_main_region_Operating_default();
 			react(0);

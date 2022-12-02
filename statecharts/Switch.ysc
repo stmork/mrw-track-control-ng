@@ -9,7 +9,7 @@
         <outgoingTransitions xmi:id="_r089c3CUEe2rVLYxSRawxw" specification="inquire" target="_r089enCUEe2rVLYxSRawxw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_r089enCUEe2rVLYxSRawxw" specification="entry / raise entered&#xA;entry / request&#xA;entry / inc()" name="Init" incomingTransitions="_r089c3CUEe2rVLYxSRawxw _fBYu4HCVEe2rVLYxSRawxw">
-        <outgoingTransitions xmi:id="_O0is0HCVEe2rVLYxSRawxw" specification="response / raise inquired; dec()" target="_NmiBkHCVEe2rVLYxSRawxw"/>
+        <outgoingTransitions xmi:id="_O0is0HCVEe2rVLYxSRawxw" specification="response /  dec(); raise inquired" target="_NmiBkHCVEe2rVLYxSRawxw"/>
         <outgoingTransitions xmi:id="_VG_iUHCVEe2rVLYxSRawxw" specification="after timeout ms" target="_T17jEHCVEe2rVLYxSRawxw"/>
         <outgoingTransitions xmi:id="_Z7sAYHCVEe2rVLYxSRawxw" specification="failed" target="_T17jEHCVEe2rVLYxSRawxw"/>
       </vertices>
