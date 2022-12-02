@@ -142,11 +142,13 @@ void TestModel::testRegularSwitchStates()
 	{
 		part->setState(RegularSwitch::State::AB);
 		QCOMPARE(part->state(), RegularSwitch::State::AB);
-		QCOMPARE(part->commandState(), SwitchState::SWITCH_STATE_LEFT);
+		QCOMPARE(part->switchState(), SwitchState::SWITCH_STATE_LEFT);
+		QCOMPARE(part->commandState(), Command::SETLFT);
 
 		part->setState(RegularSwitch::State::AC);
 		QCOMPARE(part->state(), RegularSwitch::State::AC);
-		QCOMPARE(part->commandState(), SwitchState::SWITCH_STATE_RIGHT);
+		QCOMPARE(part->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+		QCOMPARE(part->commandState(), Command::SETRGT);
 	}
 }
 
@@ -159,19 +161,22 @@ void TestModel::tesDoubleCrossSwitchStates()
 	{
 		part->setState(DoubleCrossSwitch::State::AC);
 		QCOMPARE(part->state(), DoubleCrossSwitch::State::AC);
-		QCOMPARE(part->commandState(), SwitchState::SWITCH_STATE_LEFT);
+		QCOMPARE(part->switchState(), SwitchState::SWITCH_STATE_LEFT);
 
 		part->setState(DoubleCrossSwitch::State::AD);
 		QCOMPARE(part->state(), DoubleCrossSwitch::State::AD);
-		QCOMPARE(part->commandState(), SwitchState::SWITCH_STATE_RIGHT);
+		QCOMPARE(part->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+		QCOMPARE(part->commandState(), Command::SETRGT);
 
 		part->setState(DoubleCrossSwitch::State::BC);
 		QCOMPARE(part->state(), DoubleCrossSwitch::State::BC);
-		QCOMPARE(part->commandState(), SwitchState::SWITCH_STATE_RIGHT);
+		QCOMPARE(part->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+		QCOMPARE(part->commandState(), Command::SETRGT);
 
 		part->setState(DoubleCrossSwitch::State::BD);
 		QCOMPARE(part->state(), DoubleCrossSwitch::State::BD);
-		QCOMPARE(part->commandState(), SwitchState::SWITCH_STATE_LEFT);
+		QCOMPARE(part->switchState(), SwitchState::SWITCH_STATE_LEFT);
+		QCOMPARE(part->commandState(), Command::SETLFT);
 	}
 }
 

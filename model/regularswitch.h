@@ -84,7 +84,7 @@ namespace mrw::model
 		bool    valid() const override;
 		QString toString() const override;
 		QString key() const override;
-		mrw::can::SwitchState commandState() const override;
+		mrw::can::SwitchState switchState() const override;
 
 	private:
 		void link() override;

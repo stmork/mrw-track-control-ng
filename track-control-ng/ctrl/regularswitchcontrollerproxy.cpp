@@ -57,17 +57,22 @@ RegularSwitchControllerProxy::~RegularSwitchControllerProxy()
 
 void RegularSwitchControllerProxy::turnLeft()
 {
-	statechart.turnLeft();
+	part->setState(RegularSwitch::State::AB);
+	statechart.turn();
 }
 
 void RegularSwitchControllerProxy::turn()
 {
+	part->setState(isTurnedLeft() ?
+		RegularSwitch::State::AC :
+		RegularSwitch::State::AB);
 	statechart.turn();
 }
 
 void RegularSwitchControllerProxy::turnRight()
 {
-	statechart.turnRight();
+	part->setState(RegularSwitch::State::AC);
+	statechart.turn();
 }
 
 QString RegularSwitchControllerProxy::name() const
@@ -144,7 +149,7 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 		switch (message.command())
 		{
 		case SETLFT:
-			if (part->commandState() != SwitchState::SWITCH_STATE_LEFT)
+			if (part->switchState() != SwitchState::SWITCH_STATE_LEFT)
 			{
 				part->setState(RegularSwitch::State::AB);
 			}
@@ -153,7 +158,7 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 			return true;
 
 		case SETRGT:
-			if (part->commandState() != SwitchState::SWITCH_STATE_RIGHT)
+			if (part->switchState() != SwitchState::SWITCH_STATE_RIGHT)
 			{
 				part->setState(RegularSwitch::State::AC);
 			}
@@ -187,7 +192,6 @@ void RegularSwitchControllerProxy::left()
 
 	const MrwMessage  command(part->command(SETLFT));
 
-	part->setState(RegularSwitch::State::AB);
 	ControllerRegistry::can()->write(command);
 	emit update();
 }
@@ -198,7 +202,6 @@ void RegularSwitchControllerProxy::right()
 
 	const MrwMessage  command(part->command(SETRGT));
 
-	part->setState(RegularSwitch::State::AC);
 	ControllerRegistry::can()->write(command);
 	emit update();
 }

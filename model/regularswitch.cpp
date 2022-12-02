@@ -111,7 +111,7 @@ QString RegularSwitch::key() const
 	return "Weiche" + name();
 }
 
-SwitchState RegularSwitch::commandState() const
+SwitchState RegularSwitch::switchState() const
 {
 	return static_cast<SwitchState>(switch_state);
 }

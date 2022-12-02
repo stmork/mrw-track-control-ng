@@ -3,10 +3,12 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include <modelrailway.h>
+#include <can/commands.h>
+#include <model/modelrailway.h>
 
 #include "abstractswitch.h"
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 AbstractSwitch::AbstractSwitch(
@@ -22,4 +24,18 @@ AbstractSwitch::AbstractSwitch(
 bool AbstractSwitch::isFlankProtection(AbstractSwitch * other) const
 {
 	return flank_switches.find(other) != flank_switches.end();
+}
+
+mrw::can::Command AbstractSwitch::commandState() const
+{
+	switch (switchState())
+	{
+	case SwitchState::SWITCH_STATE_LEFT:
+		return SETLFT;
+
+	case SwitchState::SWITCH_STATE_RIGHT:
+		return SETRGT;
+	}
+
+	throw std::invalid_argument("Command state not allowed!");
 }

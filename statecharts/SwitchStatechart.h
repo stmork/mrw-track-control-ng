@@ -82,9 +82,7 @@ namespace mrw
 				queued,
 				failed,
 				unlock,
-				turnLeft,
 				turn,
-				turnRight,
 				_te0_main_region_Init_,
 				_te1_main_region_Operating_operating_Turning_
 			};
@@ -207,14 +205,8 @@ namespace mrw
 			/*! Slot for the in event 'unlock' that is defined in the default interface scope. */
 			void unlock();
 
-			/*! Slot for the in event 'turnLeft' that is defined in the default interface scope. */
-			void turnLeft();
-
 			/*! Slot for the in event 'turn' that is defined in the default interface scope. */
 			void turn();
-
-			/*! Slot for the in event 'turnRight' that is defined in the default interface scope. */
-			void turnRight();
 
 
 		signals:
@@ -341,14 +333,8 @@ namespace mrw
 			/*! Indicates event 'unlock' of default interface scope is active. */
 			bool unlock_raised;
 
-			/*! Indicates event 'turnLeft' of default interface scope is active. */
-			bool turnLeft_raised;
-
 			/*! Indicates event 'turn' of default interface scope is active. */
 			bool turn_raised;
-
-			/*! Indicates event 'turnRight' of default interface scope is active. */
-			bool turnRight_raised;
 
 
 

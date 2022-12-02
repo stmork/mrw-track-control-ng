@@ -28,9 +28,7 @@ namespace mrw
 			queued_raised(false),
 			failed_raised(false),
 			unlock_raised(false),
-			turnLeft_raised(false),
-			turn_raised(false),
-			turnRight_raised(false)
+			turn_raised(false)
 		{
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
 			{
@@ -110,19 +108,9 @@ namespace mrw
 					unlock_raised = true;
 					break;
 				}
-			case mrw::statechart::SwitchStatechart::Event::turnLeft:
-				{
-					turnLeft_raised = true;
-					break;
-				}
 			case mrw::statechart::SwitchStatechart::Event::turn:
 				{
 					turn_raised = true;
-					break;
-				}
-			case mrw::statechart::SwitchStatechart::Event::turnRight:
-				{
-					turnRight_raised = true;
 					break;
 				}
 
@@ -197,23 +185,9 @@ namespace mrw
 		}
 
 
-		void mrw::statechart::SwitchStatechart::turnLeft()
-		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::turnLeft));
-			runCycle();
-		}
-
-
 		void mrw::statechart::SwitchStatechart::turn()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::turn));
-			runCycle();
-		}
-
-
-		void mrw::statechart::SwitchStatechart::turnRight()
-		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::turnRight));
 			runCycle();
 		}
 
@@ -724,11 +698,11 @@ namespace mrw
 			/* The reactions of state null. */
 			if (ifaceOperationCallback->isTurnedLeft())
 			{
-				enseq_main_region_Operating_operating_Turning_r1_Turn_Right_default();
+				enseq_main_region_Operating_operating_Turning_r1_Turn_Left_default();
 			}
 			else
 			{
-				enseq_main_region_Operating_operating_Turning_r1_Turn_Left_default();
+				enseq_main_region_Operating_operating_Turning_r1_Turn_Right_default();
 			}
 		}
 
@@ -853,28 +827,6 @@ namespace mrw
 					react_main_region_Operating_operating_Turning_r1__choice_0();
 					main_region_Operating_react(0);
 					transitioned_after = 0;
-				}
-				else
-				{
-					if (turnRight_raised)
-					{
-						exseq_main_region_Operating_operating_Unlocked();
-						enact_main_region_Operating_operating_Turning();
-						enseq_main_region_Operating_operating_Turning_r1_Turn_Right_default();
-						main_region_Operating_react(0);
-						transitioned_after = 0;
-					}
-					else
-					{
-						if (turnLeft_raised)
-						{
-							exseq_main_region_Operating_operating_Unlocked();
-							enact_main_region_Operating_operating_Turning();
-							enseq_main_region_Operating_operating_Turning_r1_Turn_Left_default();
-							main_region_Operating_react(0);
-							transitioned_after = 0;
-						}
-					}
 				}
 			}
 			/* If no transition was taken then execute local reactions */
@@ -1049,9 +1001,7 @@ namespace mrw
 			queued_raised = false;
 			failed_raised = false;
 			unlock_raised = false;
-			turnLeft_raised = false;
 			turn_raised = false;
-			turnRight_raised = false;
 			timeEvents[0] = false;
 			timeEvents[1] = false;
 		}
@@ -1126,7 +1076,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((((((((inquire_raised) || (leftResponse_raised)) || (rightResponse_raised)) || (response_raised)) || (clear_raised)) || (queued_raised)) || (failed_raised)) || (unlock_raised)) || (turnLeft_raised)) || (turn_raised)) || (turnRight_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while (((((((((((inquire_raised) || (leftResponse_raised)) || (rightResponse_raised)) || (response_raised)) || (clear_raised)) || (queued_raised)) || (failed_raised)) || (unlock_raised)) || (turn_raised)) || (timeEvents[0])) || (timeEvents[1]));
 			isExecuting = false;
 		}
 

@@ -63,7 +63,9 @@ namespace mrw::model
 		 *
 		 * @return The turn command for a MrwMessage.
 		 */
-		virtual mrw::can::SwitchState commandState() const = 0;
+		virtual mrw::can::SwitchState switchState() const = 0;
+
+		mrw::can::Command commandState() const;
 
 		/**
 		 * This method sets the internal switch state according to the given

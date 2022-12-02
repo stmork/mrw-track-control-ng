@@ -58,17 +58,22 @@ DoubleCrossSwitchControllerProxy::~DoubleCrossSwitchControllerProxy()
 
 void DoubleCrossSwitchControllerProxy::turnLeft()
 {
-	statechart.turnLeft();
+	part->setState(DoubleCrossSwitch::State::AC);
+	statechart.turn();
 }
 
 void DoubleCrossSwitchControllerProxy::turn()
 {
+	part->setState(isTurnedLeft() ?
+		DoubleCrossSwitch::State::BC :
+		DoubleCrossSwitch::State::AC);
 	statechart.turn();
 }
 
 void DoubleCrossSwitchControllerProxy::turnRight()
 {
-	statechart.turnRight();
+	part->setState(DoubleCrossSwitch::State::BC);
+	statechart.turn();
 }
 
 QString DoubleCrossSwitchControllerProxy::name() const
@@ -120,7 +125,7 @@ bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 		switch (message.command())
 		{
 		case SETLFT:
-			if (part->commandState() != SwitchState::SWITCH_STATE_LEFT)
+			if (part->switchState() != SwitchState::SWITCH_STATE_LEFT)
 			{
 				part->setState(DoubleCrossSwitch::State::AC);
 			}
@@ -129,7 +134,7 @@ bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 			return true;
 
 		case SETRGT:
-			if (part->commandState() != SwitchState::SWITCH_STATE_RIGHT)
+			if (part->switchState() != SwitchState::SWITCH_STATE_RIGHT)
 			{
 				part->setState(DoubleCrossSwitch::State::BC);
 			}

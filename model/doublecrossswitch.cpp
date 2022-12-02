@@ -109,7 +109,7 @@ QString DoubleCrossSwitch::key() const
 	return "DKW" + name();
 }
 
-SwitchState DoubleCrossSwitch::commandState() const
+SwitchState DoubleCrossSwitch::switchState() const
 {
 	const bool b_active = unsigned(switch_state) & B_MASK;
 	const bool d_active = unsigned(switch_state) & D_MASK;
