@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_r08WYHCUEe2rVLYxSRawxw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;&#xA;in event inquire&#xA;in event leftResponse&#xA;in event rightResponse&#xA;in event response&#xA;in event clear&#xA;in event queued&#xA;in event failed&#xA;in event unlock&#xA;&#xA;in event turn&#xA;&#xA;out event inquired&#xA;out event entered&#xA;&#xA;operation left()&#xA;operation right()&#xA;operation request()&#xA;operation isTurnedLeft() : boolean&#xA;operation isFree() : boolean&#xA;&#xA;operation fail()&#xA;operation pending()&#xA;operation lock(do_it : boolean)" namespace="mrw.statechart" name="SwitchStatechart">
+  <sgraph:Statechart xmi:id="_r08WYHCUEe2rVLYxSRawxw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;&#xA;in event inquire&#xA;in event leftResponse&#xA;in event rightResponse&#xA;in event response&#xA;in event clear&#xA;in event queued&#xA;in event failed&#xA;in event unlock&#xA;&#xA;in event turn&#xA;&#xA;out event inquired&#xA;out event entered&#xA;&#xA;operation inc()&#xA;operation dec()&#xA;&#xA;operation left()&#xA;operation right()&#xA;operation request()&#xA;operation isTurnedLeft() : boolean&#xA;operation isFree() : boolean&#xA;&#xA;operation fail()&#xA;operation pending()&#xA;operation lock(do_it : boolean)" namespace="mrw.statechart" name="SwitchStatechart">
     <regions xmi:id="_r08WbHCUEe2rVLYxSRawxw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_r08WbXCUEe2rVLYxSRawxw">
         <outgoingTransitions xmi:id="_r08WbnCUEe2rVLYxSRawxw" target="_r089cHCUEe2rVLYxSRawxw"/>
@@ -8,8 +8,8 @@
       <vertices xsi:type="sgraph:State" xmi:id="_r089cHCUEe2rVLYxSRawxw" name="Wait for Start" incomingTransitions="_r08WbnCUEe2rVLYxSRawxw">
         <outgoingTransitions xmi:id="_r089c3CUEe2rVLYxSRawxw" specification="inquire" target="_r089enCUEe2rVLYxSRawxw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_r089enCUEe2rVLYxSRawxw" specification="entry / raise entered&#xA;entry / request" name="Init" incomingTransitions="_r089c3CUEe2rVLYxSRawxw _fBYu4HCVEe2rVLYxSRawxw">
-        <outgoingTransitions xmi:id="_O0is0HCVEe2rVLYxSRawxw" specification="response / raise inquired" target="_NmiBkHCVEe2rVLYxSRawxw"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_r089enCUEe2rVLYxSRawxw" specification="entry / raise entered&#xA;entry / request&#xA;entry / inc()" name="Init" incomingTransitions="_r089c3CUEe2rVLYxSRawxw _fBYu4HCVEe2rVLYxSRawxw">
+        <outgoingTransitions xmi:id="_O0is0HCVEe2rVLYxSRawxw" specification="response / raise inquired; dec()" target="_NmiBkHCVEe2rVLYxSRawxw"/>
         <outgoingTransitions xmi:id="_VG_iUHCVEe2rVLYxSRawxw" specification="after timeout ms" target="_T17jEHCVEe2rVLYxSRawxw"/>
         <outgoingTransitions xmi:id="_Z7sAYHCVEe2rVLYxSRawxw" specification="failed" target="_T17jEHCVEe2rVLYxSRawxw"/>
       </vertices>
@@ -17,7 +17,7 @@
         <outgoingTransitions xmi:id="_dNuY4HCVEe2rVLYxSRawxw" specification="failed" target="_T17jEHCVEe2rVLYxSRawxw"/>
         <regions xmi:id="_HN0I8HF6Ee2peawiS1OZpw" name="operating">
           <vertices xsi:type="sgraph:State" xmi:id="_KiWb0HF6Ee2peawiS1OZpw" specification="entry / lock(false)" name="Unlocked" incomingTransitions="_Ng53oHF6Ee2peawiS1OZpw _0xsEgHF8Ee2peawiS1OZpw _dXLlEHGAEe2peawiS1OZpw">
-            <outgoingTransitions xmi:id="_tnjD8HF6Ee2peawiS1OZpw" specification="turn" target="_NQW7kHG5Ee2peawiS1OZpw"/>
+            <outgoingTransitions xmi:id="_tnjD8HF6Ee2peawiS1OZpw" specification="turn / inc()" target="_NQW7kHG5Ee2peawiS1OZpw"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_M_qy0HF6Ee2peawiS1OZpw">
             <outgoingTransitions xmi:id="_Ng53oHF6Ee2peawiS1OZpw" target="_KiWb0HF6Ee2peawiS1OZpw"/>
@@ -32,8 +32,8 @@
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_iR4E0HF9Ee2peawiS1OZpw" specification="entry / pending" name="Turning">
             <outgoingTransitions xmi:id="_SN_m8HF8Ee2peawiS1OZpw" specification="after timeout ms" target="_T17jEHCVEe2rVLYxSRawxw"/>
-            <outgoingTransitions xmi:id="_CfsFkHF9Ee2peawiS1OZpw" specification="leftResponse" target="_sAf7sHF8Ee2peawiS1OZpw"/>
-            <outgoingTransitions xmi:id="_EuvXEHF9Ee2peawiS1OZpw" specification="rightResponse" target="_sAf7sHF8Ee2peawiS1OZpw"/>
+            <outgoingTransitions xmi:id="_CfsFkHF9Ee2peawiS1OZpw" specification="leftResponse / dec()" target="_sAf7sHF8Ee2peawiS1OZpw"/>
+            <outgoingTransitions xmi:id="_EuvXEHF9Ee2peawiS1OZpw" specification="rightResponse / dec()" target="_sAf7sHF8Ee2peawiS1OZpw"/>
             <regions xmi:id="_iR4E03F9Ee2peawiS1OZpw" name="r1">
               <vertices xsi:type="sgraph:State" xmi:id="_ENnR4HF7Ee2peawiS1OZpw" specification="entry / right" name="Turn Right" incomingTransitions="_P6VOgHG5Ee2peawiS1OZpw">
                 <outgoingTransitions xmi:id="_YFgpYHF7Ee2peawiS1OZpw" specification="queued&#xA;" target="_QJfOAHF7Ee2peawiS1OZpw"/>
@@ -449,11 +449,11 @@
     <edges xmi:id="_Euv-IHF9Ee2peawiS1OZpw" type="Transition" element="_EuvXEHF9Ee2peawiS1OZpw" source="_iR56AHF9Ee2peawiS1OZpw" target="_sAgiwHF8Ee2peawiS1OZpw">
       <children xsi:type="notation:DecorationNode" xmi:id="_Euv-JHF9Ee2peawiS1OZpw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_Euv-JXF9Ee2peawiS1OZpw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_Euv-JnF9Ee2peawiS1OZpw" x="2" y="11"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_Euv-JnF9Ee2peawiS1OZpw" x="82" y="11"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_Euv-IXF9Ee2peawiS1OZpw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_Euv-I3F9Ee2peawiS1OZpw" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_Euv-InF9Ee2peawiS1OZpw" points="[-43, 4, 147, -39]$[-43, 40, 147, -3]$[-163, 40, 27, -3]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_Euv-InF9Ee2peawiS1OZpw" points="[117, 4, 307, -39]$[117, 40, 307, -3]$[-163, 40, 27, -3]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_7MRF0HF9Ee2peawiS1OZpw" id="(0.5991792065663475,0.9897610921501706)"/>
     </edges>
     <edges xmi:id="_dXMMIHGAEe2peawiS1OZpw" type="Transition" element="_dXLlEHGAEe2peawiS1OZpw" source="_teZdEHF8Ee2peawiS1OZpw" target="_KiXC4HF6Ee2peawiS1OZpw">

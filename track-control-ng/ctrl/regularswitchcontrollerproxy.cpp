@@ -34,13 +34,11 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 	connect(
 		&statechart, &SwitchStatechart::entered, [&]()
 	{
-		ControllerRegistry::instance().increase(this);
 		qDebug().noquote() << part->toString() << "Inquiry started.";
 	});
 	connect(
 		&statechart, &SwitchStatechart::inquired, [&]()
 	{
-		ControllerRegistry::instance().decrease(this);
 		qDebug().noquote() << part->toString() << "Inquiry completed.";
 	});
 
@@ -186,6 +184,16 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 	return false;
 }
 
+void RegularSwitchControllerProxy::inc()
+{
+	ControllerRegistry::instance().increase(this);
+}
+
+void RegularSwitchControllerProxy::dec()
+{
+	ControllerRegistry::instance().decrease(this);
+}
+
 void RegularSwitchControllerProxy::left()
 {
 	__METHOD__;
@@ -241,7 +249,6 @@ void RegularSwitchControllerProxy::pending()
 {
 	__METHOD__;
 
-	ControllerRegistry::instance().increase(this);
 	part->setLock(LockState::PENDING);
 	emit update();
 }
@@ -250,7 +257,6 @@ void RegularSwitchControllerProxy::lock(bool do_it)
 {
 	__METHOD__;
 
-	ControllerRegistry::instance().decrease(this);
 	part->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
 	emit update();
 }

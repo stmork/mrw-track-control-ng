@@ -4,6 +4,8 @@
 //
 
 #include <ctrl/controllerregistry.h>
+#include <ctrl/basecontroller.h>
+
 #include <util/method.h>
 
 using namespace mrw::util;
@@ -56,24 +58,31 @@ MrwBusService * ControllerRegistry::can()
 	return instance().can_service;
 }
 
-void ControllerRegistry::increase(ControllerRegistrand * ctrl)
+void ControllerRegistry::increase(ControllerRegistrand * element)
 {
-	if (transaction.find(ctrl) == transaction.end())
+	BaseController * ctrl = dynamic_cast<BaseController *>(element);
+
+	Q_ASSERT(ctrl != nullptr);
+	if (transaction.find(element) == transaction.end())
 	{
-		transaction.emplace(ctrl);
-		qDebug("Transaction increased to %zu elements.", transaction.size());
+		transaction.emplace(element);
+		qDebug().noquote() << "Transaction increased to" << transaction.size() << "elements: " << ctrl->name();
 	}
 	else
 	{
-		qWarning("Transaction already contains element %p.", ctrl);
+		qWarning().noquote() << "Transaction already contains element" << ctrl->name();
 	}
 }
 
-void ControllerRegistry::decrease(ControllerRegistrand * ctrl)
+void ControllerRegistry::decrease(ControllerRegistrand * element)
 {
-	if (transaction.erase(ctrl) == 1)
+	const BaseController * ctrl  = dynamic_cast<BaseController *>(element);
+	const size_t           count = transaction.erase(element);
+
+	Q_ASSERT(ctrl != nullptr);
+	if (count == 1)
 	{
-		qDebug("Transaction decreased to %zu elements.", transaction.size());
+		qDebug().noquote() << "Transaction decreased to" << transaction.size() << "elements: " << ctrl->name();
 
 		if (transaction.size() == 0)
 		{
@@ -82,7 +91,7 @@ void ControllerRegistry::decrease(ControllerRegistrand * ctrl)
 	}
 	else
 	{
-		qWarning("Transaction does not contain element %p.", ctrl);
+		qWarning().noquote() << "Transaction does not contain element" << ctrl->name();
 	}
 }
 

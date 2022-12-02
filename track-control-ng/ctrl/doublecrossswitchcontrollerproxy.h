@@ -53,6 +53,9 @@ namespace mrw::ctrl
 		virtual bool process(const can::MrwMessage & message) override;
 
 		// Implementations from OperationCallback
+		virtual void inc() override;
+		virtual void dec() override;
+
 		virtual void left() override;
 		virtual void right() override;
 		virtual void request() override;

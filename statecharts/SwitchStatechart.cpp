@@ -331,6 +331,7 @@ namespace mrw
 			timerService->setTimer(this, 0, timeout, false);
 			emit entered();
 			ifaceOperationCallback->request();
+			ifaceOperationCallback->inc();
 		}
 
 		/* Entry action for state 'Unlocked'. */
@@ -758,6 +759,7 @@ namespace mrw
 				{
 					exseq_main_region_Init();
 					emit inquired();
+					ifaceOperationCallback->dec();
 					enseq_main_region_Operating_default();
 					react(0);
 					transitioned_after = 0;
@@ -823,6 +825,7 @@ namespace mrw
 				if (turn_raised)
 				{
 					exseq_main_region_Operating_operating_Unlocked();
+					ifaceOperationCallback->inc();
 					enact_main_region_Operating_operating_Turning();
 					react_main_region_Operating_operating_Turning_r1__choice_0();
 					main_region_Operating_react(0);
@@ -888,6 +891,7 @@ namespace mrw
 					if (leftResponse_raised)
 					{
 						exseq_main_region_Operating_operating_Turning();
+						ifaceOperationCallback->dec();
 						react_main_region_Operating_operating__choice_0();
 						transitioned_after = 0;
 					}
@@ -896,6 +900,7 @@ namespace mrw
 						if (rightResponse_raised)
 						{
 							exseq_main_region_Operating_operating_Turning();
+							ifaceOperationCallback->dec();
 							react_main_region_Operating_operating__choice_0();
 							transitioned_after = 0;
 						}

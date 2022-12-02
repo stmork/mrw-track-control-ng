@@ -110,6 +110,10 @@ namespace mrw
 			public:
 				virtual ~OperationCallback() = 0;
 
+				virtual void inc() = 0;
+
+				virtual void dec() = 0;
+
 				virtual void left() = 0;
 
 				virtual void right() = 0;

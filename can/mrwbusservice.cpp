@@ -31,10 +31,12 @@ MrwBusService::MrwBusService(
 	{
 		connect(
 			can_device, &QCanBusDevice::framesReceived,
-			this, &MrwBusService::receive, Qt::QueuedConnection);
+			this, &MrwBusService::receive,
+			Qt::QueuedConnection);
 		connect(
 			can_device, &QCanBusDevice::stateChanged,
-			this, &MrwBusService::stateChanged, Qt::QueuedConnection);
+			this, &MrwBusService::stateChanged,
+			Qt::QueuedConnection);
 
 		connect(
 			can_device, &QCanBusDevice::errorOccurred, [] (auto reason)

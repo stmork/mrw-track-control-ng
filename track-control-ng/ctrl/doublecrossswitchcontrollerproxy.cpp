@@ -34,13 +34,11 @@ DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(
 	connect(
 		&statechart, &SwitchStatechart::entered, [&]()
 	{
-		ControllerRegistry::instance().increase(this);
 		qDebug().noquote() << part->toString() << "Inquiry started.";
 	});
 	connect(
 		&statechart, &SwitchStatechart::inquired, [&]()
 	{
-		ControllerRegistry::instance().decrease(this);
 		qDebug().noquote() << part->toString() << "Inquiry completed.";
 	});
 
@@ -160,6 +158,16 @@ bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 		break;
 	}
 	return false;
+}
+
+void DoubleCrossSwitchControllerProxy::inc()
+{
+	ControllerRegistry::instance().increase(this);
+}
+
+void DoubleCrossSwitchControllerProxy::dec()
+{
+	ControllerRegistry::instance().decrease(this);
 }
 
 void DoubleCrossSwitchControllerProxy::left()

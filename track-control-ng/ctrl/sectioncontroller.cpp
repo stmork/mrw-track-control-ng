@@ -27,7 +27,8 @@ SectionController::SectionController(
 
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
-		&statechart, &SectionStatechart::inquire);
+		&statechart, &SectionStatechart::inquire,
+		Qt::QueuedConnection);
 	connect(
 		&statechart, &SectionStatechart::entered, [&]()
 	{
