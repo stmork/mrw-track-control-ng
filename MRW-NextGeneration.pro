@@ -57,7 +57,7 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--language=c++ --std=c++14\
 	--library=qt\
 	--xml-version=2 --force -q -j 4\
-	*/*.cpp */*.h tools/*/*.cpp 2>cppcheck.xml
+	*/*.cpp */*.h tools/*/*.cpp */ctrl/*.cpp */ctrl/*.h 2>cppcheck.xml
 
 QMAKE_EXTRA_TARGETS += cppcheck astyle
 QMAKE_CLEAN         += cppcheck.xml
