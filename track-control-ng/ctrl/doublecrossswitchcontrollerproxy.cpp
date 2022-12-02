@@ -161,7 +161,7 @@ void DoubleCrossSwitchControllerProxy::left()
 {
 	__METHOD__;
 
-	const MrwMessage  command(SETLFT, part->controller()->id(), part->unitNo());
+	const MrwMessage  command(part->command(SETLFT));
 
 	part->setState(DoubleCrossSwitch::State::AC);
 	ControllerRegistry::can()->write(command);
@@ -172,7 +172,7 @@ void DoubleCrossSwitchControllerProxy::right()
 {
 	__METHOD__;
 
-	const MrwMessage  command(SETRGT, part->controller()->id(), part->unitNo());
+	const MrwMessage  command(part->command(SETRGT));
 
 	part->setState(DoubleCrossSwitch::State::BC);
 	ControllerRegistry::can()->write(command);
@@ -183,7 +183,7 @@ void DoubleCrossSwitchControllerProxy::request()
 {
 	__METHOD__;
 
-	const MrwMessage  command(GETDIR, part->controller()->id(), part->unitNo());
+	const MrwMessage  command(part->command(GETDIR));
 
 	ControllerRegistry::can()->write(command);
 }

@@ -8,8 +8,13 @@
 #ifndef MRW_MODEL_DEVICE_H
 #define MRW_MODEL_DEVICE_H
 
-#include <can/mrwmessage.h>
+#include <can/commands.h>
 #include <model/module.h>
+
+namespace mrw::can
+{
+	class MrwMessage;
+}
 
 namespace mrw::model
 {
@@ -94,6 +99,19 @@ namespace mrw::model
 		 * @return The Device name modelled inside the EMF/XMI model.
 		 */
 		virtual const QString & name() const = 0;
+
+		/**
+		 * This convenience method creates a command mrw::can::MrwMessage and
+		 * adds the mrw::can::Command. It initializes additionally the
+		 * Controller id and the Device unit number.
+		 *
+		 * @param command The mrw::can::Command specifier.
+		 * @return The resulting mrw::can::MrwCommand.
+		 *
+		 * @see Controller::id()
+		 * @see mrw::can::MrwMessage
+		 */
+		mrw::can::MrwMessage command(const mrw::can::Command command) const;
 
 	private:
 		LockState                lock_state = LockState::UNLOCKED;

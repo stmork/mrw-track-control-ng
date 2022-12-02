@@ -135,7 +135,7 @@ void SectionController::request()
 {
 	__METHOD__;
 
-	const MrwMessage command(GETRBS, ctrl_section->controller()->id(), ctrl_section->unitNo());
+	const MrwMessage command(ctrl_section->command(GETRBS));
 
 	ControllerRegistry::can()->write(command);
 }
@@ -144,7 +144,7 @@ void SectionController::on()
 {
 	__METHOD__;
 
-	const MrwMessage command(SETRON, ctrl_section->controller()->id(), ctrl_section->unitNo());
+	const MrwMessage command(ctrl_section->command(SETRON));
 
 	ControllerRegistry::can()->write(command);
 }
@@ -153,7 +153,7 @@ void SectionController::off()
 {
 	__METHOD__;
 
-	const MrwMessage command(SETROF, ctrl_section->controller()->id(), ctrl_section->unitNo());
+	const MrwMessage command(ctrl_section->command(SETROF));
 
 	ControllerRegistry::can()->write(command);
 }

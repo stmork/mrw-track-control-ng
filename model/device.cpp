@@ -3,6 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <can/mrwmessage.h>
 #include "model/modelrailway.h"
 #include "model/device.h"
 
@@ -19,4 +20,9 @@ Device::Device(
 		model_railway->error(element.nodeName() + " has no unit number!");
 	}
 	model_railway->add(this);
+}
+
+MrwMessage Device::command(const Command command) const
+{
+	return MrwMessage(command, controller()->id(), unitNo());
 }
