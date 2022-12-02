@@ -11,38 +11,16 @@ include(../common.pri)
 
 SOURCES +=  \
 	basecontroller.cpp \
-	controllerregistrand.cpp \
-	controllerregistry.cpp \
 	regularswitchcontroller.cpp \
-	regularswitchcontrollermock.cpp \
-	regularswitchcontrollerproxy.cpp \
 	doublecrossswitchcontroller.cpp \
-	doublecrossswitchcontrollermock.cpp \
-	doublecrossswitchcontrollerproxy.cpp \
 	railcontroller.cpp \
-	railcontrollermock.cpp \
-	railcontrollerproxy.cpp \
-	sectioncontroller.cpp \
-	signalcontroller.cpp \
-	signalcontrollermock.cpp \
-	signalcontrollerproxy.cpp
+	signalcontroller.cpp
 
 HEADERS +=  \
 	basecontroller.h \
-	controllerregistrand.h \
-	controllerregistry.h \
 	regularswitchcontroller.h \
-	regularswitchcontrollermock.h \
-	regularswitchcontrollerproxy.h \
 	doublecrossswitchcontroller.h \
-	doublecrossswitchcontrollermock.h \
-	doublecrossswitchcontrollerproxy.h \
 	railcontroller.h \
-	railcontrollermock.h \
-	railcontrollerproxy.h \
-	sectioncontroller.h \
-	signalcontroller.h \
-	signalcontrollermock.h \
-	signalcontrollerproxy.h
+	signalcontroller.h
 
 QMAKE_CLEAN         += $$TARGET

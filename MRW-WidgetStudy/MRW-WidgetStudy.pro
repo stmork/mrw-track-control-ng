@@ -14,15 +14,10 @@ SOURCES += \
 	railstudy.cpp \
 	signalstudy.cpp \
 	switchstudy.cpp \
-	../ctrl/basecontroller.cpp \
-	../ctrl/regularswitchcontroller.cpp \
-	../ctrl/regularswitchcontrollermock.cpp \
-	../ctrl/doublecrossswitchcontroller.cpp \
-	../ctrl/doublecrossswitchcontrollermock.cpp \
-	../ctrl/railcontroller.cpp \
-	../ctrl/railcontrollermock.cpp \
-	../ctrl/signalcontroller.cpp \
-	../ctrl/signalcontrollermock.cpp
+	ctrl/regularswitchcontrollermock.cpp \
+	ctrl/doublecrossswitchcontrollermock.cpp \
+	ctrl/railcontrollermock.cpp \
+	ctrl/signalcontrollermock.cpp
 
 HEADERS += \
 	mainwindow.h \
@@ -30,15 +25,10 @@ HEADERS += \
 	railstudy.h \
 	signalstudy.h \
 	switchstudy.h \
-	../ctrl/basecontroller.h \
-	../ctrl/regularswitchcontroller.h \
-	../ctrl/regularswitchcontrollermock.h \
-	../ctrl/doublecrossswitchcontroller.h \
-	../ctrl/doublecrossswitchcontrollermock.h \
-	../ctrl/railcontroller.h \
-	../ctrl/railcontrollermock.h \
-	../ctrl/signalcontroller.h \
-	../ctrl/signalcontrollermock.h
+	ctrl/regularswitchcontrollermock.h \
+	ctrl/doublecrossswitchcontrollermock.h \
+	ctrl/railcontrollermock.h \
+	ctrl/signalcontrollermock.h
 
 FORMS += \
 	doublecrossswitchstudy.ui \
@@ -47,6 +37,6 @@ FORMS += \
 	signalstudy.ui \
 	switchstudy.ui
 
-LIBS            += -lMRW-UI -lMRW-Model -lMRW-Util -lMRW-Can
+LIBS            += -lMRW-UI -lMRW-Ctrl -lMRW-Model -lMRW-Can -lMRW-Util
 
 QMAKE_CLEAN     += $$TARGET qtest*.xml

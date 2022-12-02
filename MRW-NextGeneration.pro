@@ -32,12 +32,12 @@ study.file                = MRW-WidgetStudy/MRW-WidgetStudy.pro
 can.depends               = util
 model.depends             = util can
 test.depends              = util can model
-ctrl.depends              = model statecharts
+ctrl.depends              = model can util
 ui.depends                = ctrl
 ping.depends              = test
 proxy.depends             = test
 study.depends             = test ctrl ui
-track-control-ng.depends  = study
+track-control-ng.depends  = study statecharts
 
 QMAKE_CLEAN              += qtest*.xml
 
