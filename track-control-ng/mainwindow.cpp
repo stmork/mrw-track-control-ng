@@ -110,20 +110,25 @@ MainWindow::MainWindow(
 
 	connect(
 		ui->actionOperate, &QAction::triggered,
-		&statechart, &OperatingMode::operate);
+		&statechart, &OperatingMode::operate,
+		Qt::QueuedConnection);
 	connect(
 		ui->actionEdit, &QAction::triggered,
-		&statechart, &OperatingMode::edit);
+		&statechart, &OperatingMode::edit,
+		Qt::QueuedConnection);
 	connect(
 		ui->actionClear, &QAction::triggered,
-		&statechart, &OperatingMode::clear);
+		&statechart, &OperatingMode::clear,
+		Qt::QueuedConnection);
 
 	connect(
 		&statechart, &OperatingMode::operating,
-		this, &MainWindow::onOperate);
+		this, &MainWindow::onOperate,
+		Qt::QueuedConnection);
 	connect(
 		&statechart, &OperatingMode::editing,
-		this, &MainWindow::onEdit);
+		this, &MainWindow::onEdit,
+		Qt::QueuedConnection);
 
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
@@ -150,6 +155,35 @@ void MainWindow::initRegion()
 
 		ui->regionTabWidget->addTab(form, region->name());
 	}
+}
+
+void MainWindow::enable()
+{
+	const bool operating = statechart.isStateActive(OperatingMode::State::main_region_Operating);
+	const bool editing   = statechart.isStateActive(OperatingMode::State::main_region_Editing);
+	const bool fail      = statechart.isStateActive(OperatingMode::State::main_region_Fail);
+	const size_t switch_count = count<RegularSwitchController>() + count<DoubleCrossSwitchController>();
+
+	ui->actionEdit->setEnabled(!editing);
+	ui->actionUp->setEnabled(editing);
+	ui->actionDown->setEnabled(editing);
+	ui->actionLeft->setEnabled(editing);
+	ui->actionRight->setEnabled(editing);
+	ui->actionInclination->setEnabled(editing);
+	ui->actionExpand->setEnabled(editing);
+	ui->actionExtend->setEnabled(editing);
+	ui->actionReduce->setEnabled(editing);
+	ui->actionBendLeft->setEnabled(editing);
+	ui->actionBendRight->setEnabled(editing);
+	ui->actionLineUp->setEnabled(editing);
+	ui->actionLineDown->setEnabled(editing);
+
+	ui->actionOperate->setEnabled(!operating);
+	ui->actionClear->setEnabled(fail);
+
+	ui->actionTurnSwitchLeft->setEnabled(switch_count > 0);
+	ui->actionTurnSwitch->setEnabled(switch_count > 0);
+	ui->actionTurnSwitchRight->setEnabled(switch_count > 0);
 }
 
 void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Position * position)
@@ -215,6 +249,7 @@ void MainWindow::itemClicked(QListWidgetItem * item)
 
 		ui->sectionListWidget->takeItem(row);
 	}
+	enable();
 }
 
 void MainWindow::on_clearSection_clicked()
@@ -415,7 +450,11 @@ void MainWindow::on_actionTurnSwitchRight_triggered()
 
 void MainWindow::onOperate(const bool active)
 {
+	Q_UNUSED(active);
 	__METHOD__;
+
+	enable();
+	on_clearAllSections_clicked();
 }
 
 void MainWindow::onEdit(const bool active)
@@ -423,7 +462,9 @@ void MainWindow::onEdit(const bool active)
 	__METHOD__;
 
 	BaseWidget::setVerbose(active);
+	enable();
 	ui->regionTabWidget->currentWidget()->update();
+	on_clearAllSections_clicked();
 }
 
 void MainWindow::reset()

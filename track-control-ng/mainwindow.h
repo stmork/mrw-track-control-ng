@@ -72,10 +72,30 @@ private slots:
 
 private:
 	void initRegion();
-	void expandBorder(RegionForm * form, mrw::ctrl::BaseController * controller, mrw::model::Position * position);
-	void edit(std::function<void(
-			mrw::ctrl::BaseController *,
-			mrw::model::Position *)> editor);
+	void enable();
+	void expandBorder(
+		RegionForm         *        form,
+		mrw::ctrl::BaseController * controller,
+		mrw::model::Position    *   position);
+	void edit(
+		std::function<void(mrw::ctrl::BaseController *, mrw::model::Position *)> editor);
+	template <class T> size_t count()
+	{
+		size_t count = 0;
+
+		edit([&] (mrw::ctrl::BaseController * ctrl, mrw::model::Position * pos)
+		{
+			Q_UNUSED(pos);
+			T * ptr = dynamic_cast<T *>(ctrl);
+
+			if (ptr != nullptr)
+			{
+				count++;
+			}
+		}
+		);
+		return count;
+	}
 
 	virtual void reset() override;
 

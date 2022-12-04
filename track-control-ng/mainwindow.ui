@@ -242,13 +242,13 @@
      <string>Betrieb</string>
     </property>
     <addaction name="actionTurnSwitchLeft"/>
-    <addaction name="actionTurnSwitchRight"/>
     <addaction name="actionTurnSwitch"/>
+    <addaction name="actionTurnSwitchRight"/>
    </widget>
    <addaction name="menuDaten"/>
-   <addaction name="menuEditieren"/>
    <addaction name="menuModus"/>
    <addaction name="menuBetrieb"/>
+   <addaction name="menuEditieren"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionQuit">
