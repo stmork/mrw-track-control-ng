@@ -18,6 +18,7 @@
 #include "ui_mainwindow.h"
 #include "regionform.h"
 #include "mrwmessagedispatcher.h"
+#include "route.h"
 
 using namespace mrw::statechart;
 using namespace mrw::can;
@@ -255,6 +256,15 @@ void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Po
 	}
 }
 
+RailPart * MainWindow::rail(const int idx) const
+{
+	QListWidgetItem * item       = ui->sectionListWidget->item(idx);
+	BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
+	RailPartInfo   *  info       = dynamic_cast<RailPartInfo *>(controller);
+
+	return info != nullptr ? info->railPart() : nullptr;
+}
+
 void MainWindow::traverse(std::function<void(BaseController *, Position *)> editor)
 {
 	for (int i = 0; i < ui->sectionListWidget->count(); i++)
@@ -336,12 +346,24 @@ void MainWindow::on_clearAllRoutes_clicked()
 
 void MainWindow::on_tourLeftPushButton_clicked()
 {
+	RailPart * first = rail(0);
+	Route      route(first, false);
 
+	for (int i = 1; i < ui->sectionListWidget->count(); i++)
+	{
+		route.extend(rail(i));
+	}
 }
 
 void MainWindow::on_shuntLeftPushButton_clicked()
 {
+	RailPart * first = rail(0);
+	Route      route(first, false);
 
+	for (int i = 1; i < ui->sectionListWidget->count(); i++)
+	{
+		route.extend(rail(i));
+	}
 }
 
 void MainWindow::on_extendPushButton_clicked()
@@ -351,12 +373,24 @@ void MainWindow::on_extendPushButton_clicked()
 
 void MainWindow::on_shuntRightPushButton_clicked()
 {
+	RailPart * first = rail(0);
+	Route      route(first, true);
 
+	for (int i = 1; i < ui->sectionListWidget->count(); i++)
+	{
+		route.extend(rail(i));
+	}
 }
 
 void MainWindow::on_tourRightPushButton_clicked()
 {
+	RailPart * first = rail(0);
+	Route      route(first, true);
 
+	for (int i = 1; i < ui->sectionListWidget->count(); i++)
+	{
+		route.extend(rail(i));
+	}
 }
 
 void MainWindow::move(int right, int down)

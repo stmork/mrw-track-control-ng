@@ -20,7 +20,8 @@ SOURCES += \
 	ctrl/doublecrossswitchcontrollerproxy.cpp \
 	ctrl/railcontrollerproxy.cpp \
 	ctrl/signalcontrollerproxy.cpp \
-	ctrl/sectioncontroller.cpp
+	ctrl/sectioncontroller.cpp \
+	route.cpp
 
 HEADERS += \
 	ctrl/railpartinfo.h \
@@ -34,7 +35,8 @@ HEADERS += \
 	ctrl/doublecrossswitchcontrollerproxy.h \
 	ctrl/railcontrollerproxy.h \
 	ctrl/signalcontrollerproxy.h \
-	ctrl/sectioncontroller.h
+	ctrl/sectioncontroller.h \
+	route.h
 
 FORMS += \
 	mainwindow.ui \

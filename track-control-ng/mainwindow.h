@@ -14,6 +14,7 @@
 #include <QListWidgetItem>
 
 #include <statecharts/OperatingMode.h>
+#include <model/rail.h>
 #include <ctrl/basecontroller.h>
 
 #include "modelrepository.h"
@@ -78,6 +79,7 @@ private:
 		RegionForm         *        form,
 		mrw::ctrl::BaseController * controller,
 		mrw::model::Position    *   position);
+	mrw::model::RailPart * rail(const int idx) const;
 	void traverse(
 		std::function<void(mrw::ctrl::BaseController *, mrw::model::Position *)> editor);
 	bool isSameRegion();
