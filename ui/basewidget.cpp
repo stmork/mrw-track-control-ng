@@ -33,6 +33,11 @@ BaseWidget::BaseWidget(QWidget * parent) : QWidget(parent)
 {
 }
 
+void mrw::ui::BaseWidget::setVerbose(const bool activate)
+{
+	verbose = activate;
+}
+
 void BaseWidget::paintEvent(QPaintEvent * event)
 {
 	Q_UNUSED(event);

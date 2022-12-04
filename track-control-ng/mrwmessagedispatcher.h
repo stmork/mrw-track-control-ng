@@ -8,18 +8,17 @@
 #ifndef MRWMESSAGEDISPATCHER_H
 #define MRWMESSAGEDISPATCHER_H
 
+#include <statecharts/OperatingMode.h>
 #include <can/mrwbusservice.h>
 #include <model/modelrailway.h>
-#include <statecharts/OperatingMode.h>
 
 class MrwMessageDispatcher :
 	public mrw::can::MrwBusService,
-	public mrw::statechart::OperatingMode::OperationCallback
+	public mrw::statechart::OperatingMode::Can::OperationCallback
 {
 	Q_OBJECT
 
 private:
-	mrw::statechart::OperatingMode   statechart;
 	mrw::model::ModelRailway    *    model   = nullptr;
 
 public:
@@ -35,7 +34,6 @@ public:
 protected:
 	virtual void process(const mrw::can::MrwMessage & message) override;
 	virtual void connectBus() override;
-	virtual void reset() override;
 };
 
 #endif

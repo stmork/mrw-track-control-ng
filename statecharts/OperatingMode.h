@@ -64,12 +64,12 @@ namespace mrw
 			enum class Event
 			{
 				NO_EVENT,
-				connected,
 				clear,
 				inquired,
 				fail,
 				edit,
 				operate,
+				Can_connected,
 				_te0_main_region_Prepare_Bus_,
 				_te1_main_region_Init_
 			};
@@ -103,8 +103,6 @@ namespace mrw
 			public:
 				virtual ~OperationCallback() = 0;
 
-				virtual void connectBus() = 0;
-
 				virtual void reset() = 0;
 
 
@@ -112,6 +110,48 @@ namespace mrw
 
 			/*! Set the working instance of the operation callback interface 'OperationCallback'. */
 			void setOperationCallback(OperationCallback * operationCallback);
+			//! Inner class for can interface scope.
+			class Can
+			{
+			public:
+				Can(OperatingMode * parent);
+
+
+
+
+				//! Inner class for can interface scope operation callbacks.
+				class OperationCallback
+				{
+				public:
+					virtual ~OperationCallback() = 0;
+
+					virtual void connectBus() = 0;
+
+
+				};
+
+				/*! Set the working instance of the operation callback interface 'OperationCallback'. */
+				void setOperationCallback(OperationCallback * operationCallback);
+
+
+			private:
+				friend class OperatingMode;
+
+				/*! Indicates event 'connected' of interface scope 'can' is active. */
+				bool connected_raised;
+
+				OperatingMode * parent;
+
+
+
+				OperationCallback * ifaceCanOperationCallback;
+
+
+			};
+
+			/*! Returns an instance of the interface class 'Can'. */
+			Can * can();
+
 
 			/*
 			 * Functions inherited from StatemachineInterface
@@ -162,9 +202,6 @@ namespace mrw
 
 
 		public slots:
-			/*! Slot for the in event 'connected' that is defined in the default interface scope. */
-			void connected();
-
 			/*! Slot for the in event 'clear' that is defined in the default interface scope. */
 			void clear();
 
@@ -180,6 +217,9 @@ namespace mrw
 			/*! Slot for the in event 'operate' that is defined in the default interface scope. */
 			void operate();
 
+			/*! Slot for the in event 'connected' that is defined in the interface scope 'can'. */
+			void can_connected();
+
 
 		signals:
 			/*! Signal representing the out event 'inquire' that is defined in the default interface scope. */
@@ -189,10 +229,10 @@ namespace mrw
 			void failed();
 
 			/*! Signal representing the out event 'operating' that is defined in the default interface scope. */
-			void operating();
+			void operating(bool value);
 
 			/*! Signal representing the out event 'editing' that is defined in the default interface scope. */
-			void editing();
+			void editing(bool value);
 
 
 		protected:
@@ -224,6 +264,7 @@ namespace mrw
 			State stateConfVector[maxOrthogonalStates];
 
 
+			Can ifaceCan;
 			OperationCallback * ifaceOperationCallback;
 
 
@@ -240,6 +281,8 @@ namespace mrw
 			void enact_main_region_Operating();
 			void exact_main_region_Prepare_Bus();
 			void exact_main_region_Init();
+			void exact_main_region_Editing();
+			void exact_main_region_Operating();
 			void enseq_main_region_Prepare_Bus_default();
 			void enseq_main_region_Init_default();
 			void enseq_main_region_Editing_default();
@@ -266,9 +309,6 @@ namespace mrw
 
 
 
-			/*! Indicates event 'connected' of default interface scope is active. */
-			bool connected_raised;
-
 			/*! Indicates event 'clear' of default interface scope is active. */
 			bool clear_raised;
 
@@ -284,12 +324,19 @@ namespace mrw
 			/*! Indicates event 'operate' of default interface scope is active. */
 			bool operate_raised;
 
+			/*! Value of event 'operating' of default interface scope. */
+			bool operating_value;
+
+			/*! Value of event 'editing' of default interface scope. */
+			bool editing_value;
+
 
 
 		};
 
 
 		inline OperatingMode::OperationCallback::~OperationCallback() {}
+		inline OperatingMode::Can::OperationCallback::~OperationCallback() {}
 
 	}
 }

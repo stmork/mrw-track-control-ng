@@ -13,6 +13,7 @@
 #include <QMainWindow>
 #include <QListWidgetItem>
 
+#include <statecharts/OperatingMode.h>
 #include <ctrl/basecontroller.h>
 
 #include "modelrepository.h"
@@ -25,12 +26,19 @@ namespace Ui
 }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class MrwMessageDispatcher;
+
+class MainWindow :
+	public QMainWindow,
+	public mrw::statechart::OperatingMode::OperationCallback
 {
 	Q_OBJECT
 
 public:
-	explicit MainWindow(ModelRepository & model_repo, QWidget * parent = nullptr);
+	explicit MainWindow(
+		ModelRepository    &   repository,
+		MrwMessageDispatcher & dispatcher,
+		QWidget        *       parent = nullptr);
 	~MainWindow();
 
 public slots:
@@ -39,16 +47,28 @@ public slots:
 private slots:
 	void on_clearSection_clicked();
 	void on_clearAllSections_clicked();
+	void on_clearRoute_clicked();
+	void on_clearAllRoutes_clicked();
+
+	void on_tourLeftPushButton_clicked();
+	void on_shuntLeftPushButton_clicked();
+	void on_extendPushButton_clicked();
+	void on_shuntRightPushButton_clicked();
+	void on_tourRightPushButton_clicked();
+
+	void on_actionExpand_triggered();
+	void on_actionInclination_triggered();
 	void move(int right, int down);
 	void extend(int inc);
 	void lineup(int inc);
-	void on_actionExpand_triggered();
-	void on_actionInclination_triggered();
 	void bend(const mrw::model::Position::Bending bend);
 
 	void on_actionTurnSwitchLeft_triggered();
 	void on_actionTurnSwitch_triggered();
 	void on_actionTurnSwitchRight_triggered();
+
+	void onOperate(const bool active);
+	void onEdit(const bool active);
 
 private:
 	void initRegion();
@@ -57,7 +77,10 @@ private:
 			mrw::ctrl::BaseController *,
 			mrw::model::Position *)> editor);
 
+	virtual void reset() override;
+
 	Ui::MainWindow  * ui;
 	ModelRepository & repo;
+	mrw::statechart::OperatingMode   statechart;
 };
 #endif // MAINWINDOW_H

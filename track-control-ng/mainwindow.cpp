@@ -3,26 +3,39 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <util/method.h>
+#include <statecharts/timerservice.h>
 #include <model/modelrailway.h>
-#include <ui/controllerwidget.h>
 #include <ctrl/basecontroller.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
+#include <ctrl/controllerregistry.h>
+#include <ui/controllerwidget.h>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "regionform.h"
+#include "mrwmessagedispatcher.h"
 
+using namespace mrw::statechart;
+using namespace mrw::can;
 using namespace mrw::model;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 
 using Bending = Position::Bending;
 
-MainWindow::MainWindow(ModelRepository & repository, QWidget * parent) :
+MainWindow::MainWindow(
+	ModelRepository    &   repository,
+	MrwMessageDispatcher & dispatcher,
+	QWidget        *       parent) :
 	QMainWindow(parent),
-	ui(new Ui::MainWindow), repo(repository)
+	ui(new Ui::MainWindow),
+	repo(repository),
+	statechart(nullptr)
 {
+	BaseWidget::setVerbose(false);
+
 	ui->setupUi(this);
 	initRegion();
 
@@ -78,10 +91,50 @@ MainWindow::MainWindow(ModelRepository & repository, QWidget * parent) :
 	{
 		lineup(-1);
 	});
+
+
+
+
+	connect(
+		&dispatcher, &MrwBusService::connected,
+		&statechart, &OperatingMode::can_connected,
+		Qt::QueuedConnection);
+	connect(
+		&statechart, &OperatingMode::inquire,
+		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
+		Qt::QueuedConnection);
+	connect(
+		&ControllerRegistry::instance(), &ControllerRegistry::completed,
+		&statechart, &OperatingMode::inquired,
+		Qt::QueuedConnection);
+
+	connect(
+		ui->actionOperate, &QAction::triggered,
+		&statechart, &OperatingMode::operate);
+	connect(
+		ui->actionEdit, &QAction::triggered,
+		&statechart, &OperatingMode::edit);
+	connect(
+		ui->actionClear, &QAction::triggered,
+		&statechart, &OperatingMode::clear);
+
+	connect(
+		&statechart, &OperatingMode::operating,
+		this, &MainWindow::onOperate);
+	connect(
+		&statechart, &OperatingMode::editing,
+		this, &MainWindow::onEdit);
+
+	statechart.setTimerService(&TimerService::instance());
+	statechart.setOperationCallback(this);
+	statechart.can()->setOperationCallback(&dispatcher);
+	statechart.enter();
 }
 
 MainWindow::~MainWindow()
 {
+	statechart.exit();
+
 	on_clearAllSections_clicked();
 	delete ui;
 }
@@ -180,6 +233,41 @@ void MainWindow::on_clearAllSections_clicked()
 	{
 		ui->sectionListWidget->takeItem(0);
 	}
+}
+
+void MainWindow::on_clearRoute_clicked()
+{
+
+}
+
+void MainWindow::on_clearAllRoutes_clicked()
+{
+
+}
+
+void MainWindow::on_tourLeftPushButton_clicked()
+{
+
+}
+
+void MainWindow::on_shuntLeftPushButton_clicked()
+{
+
+}
+
+void MainWindow::on_extendPushButton_clicked()
+{
+
+}
+
+void MainWindow::on_shuntRightPushButton_clicked()
+{
+
+}
+
+void MainWindow::on_tourRightPushButton_clicked()
+{
+
 }
 
 void MainWindow::move(int right, int down)
@@ -323,4 +411,24 @@ void MainWindow::on_actionTurnSwitchRight_triggered()
 		}
 	});
 	on_clearAllSections_clicked();
+}
+
+void MainWindow::onOperate(const bool active)
+{
+	__METHOD__;
+}
+
+void MainWindow::onEdit(const bool active)
+{
+	__METHOD__;
+
+	BaseWidget::setVerbose(active);
+	ui->regionTabWidget->currentWidget()->update();
+}
+
+void MainWindow::reset()
+{
+	__METHOD__;
+
+	ControllerRegistry::instance().reset();
 }

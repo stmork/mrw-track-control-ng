@@ -18,16 +18,19 @@ namespace mrw
 			timeout(3000),
 			retry(150),
 			timerService(nullptr),
+			ifaceCan(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
 			stateConfVectorChanged(false),
-			connected_raised(false),
 			clear_raised(false),
 			inquired_raised(false),
 			fail_raised(false),
 			edit_raised(false),
-			operate_raised(false)
+			operate_raised(false),
+			operating_value(false),
+			editing_value(false)
 		{
+			this->ifaceCan.parent = this;
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
 			{
 				stateConfVector[state_vec_pos] = mrw::statechart::OperatingMode::State::NO_STATE;
@@ -37,6 +40,13 @@ namespace mrw
 		}
 
 		OperatingMode::~OperatingMode()
+		{
+		}
+
+		OperatingMode::Can::Can(OperatingMode * parent_) :
+			connected_raised(false),
+			parent(parent_),
+			ifaceCanOperationCallback(nullptr)
 		{
 		}
 
@@ -66,11 +76,6 @@ namespace mrw
 
 			switch (event->eventId)
 			{
-			case mrw::statechart::OperatingMode::Event::connected:
-				{
-					connected_raised = true;
-					break;
-				}
 			case mrw::statechart::OperatingMode::Event::clear:
 				{
 					clear_raised = true;
@@ -97,6 +102,11 @@ namespace mrw
 					break;
 				}
 
+			case mrw::statechart::OperatingMode::Event::Can_connected:
+				{
+					ifaceCan.connected_raised = true;
+					break;
+				}
 
 			case mrw::statechart::OperatingMode::Event::_te0_main_region_Prepare_Bus_:
 			case mrw::statechart::OperatingMode::Event::_te1_main_region_Init_:
@@ -109,13 +119,6 @@ namespace mrw
 				break;
 			}
 			delete event;
-		}
-
-
-		void mrw::statechart::OperatingMode::connected()
-		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingMode::EventInstance(mrw::statechart::OperatingMode::Event::connected));
-			runCycle();
 		}
 
 
@@ -154,6 +157,13 @@ namespace mrw
 		}
 
 
+		void mrw::statechart::OperatingMode::can_connected()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::OperatingMode::EventInstance(mrw::statechart::OperatingMode::Event::Can_connected));
+			runCycle();
+		}
+
+
 
 		bool OperatingMode::isActive() const
 		{
@@ -175,6 +185,10 @@ namespace mrw
 				return false;
 			}
 			if (this->ifaceOperationCallback == nullptr)
+			{
+				return false;
+			}
+			if (this->ifaceCan.ifaceCanOperationCallback == nullptr)
 			{
 				return false;
 			}
@@ -269,6 +283,14 @@ namespace mrw
 		{
 			ifaceOperationCallback = operationCallback;
 		}
+		OperatingMode::Can * OperatingMode::can()
+		{
+			return &ifaceCan;
+		}
+		void OperatingMode::Can::setOperationCallback(OperationCallback * operationCallback)
+		{
+			ifaceCanOperationCallback = operationCallback;
+		}
 
 // implementations of all internal functions
 		/* Entry action for state 'Prepare Bus'. */
@@ -276,7 +298,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Prepare Bus'. */
 			timerService->setTimer(this, 0, timeout, false);
-			ifaceOperationCallback->connectBus();
+			ifaceCan.ifaceCanOperationCallback->connectBus();
 		}
 
 		/* Entry action for state 'Init'. */
@@ -292,7 +314,8 @@ namespace mrw
 		void OperatingMode::enact_main_region_Editing()
 		{
 			/* Entry action for state 'Editing'. */
-			emit editing();
+			editing_value = true;
+			emit editing(editing_value);
 		}
 
 		/* Entry action for state 'Fail'. */
@@ -306,7 +329,8 @@ namespace mrw
 		void OperatingMode::enact_main_region_Operating()
 		{
 			/* Entry action for state 'Operating'. */
-			emit operating();
+			operating_value = true;
+			emit operating(operating_value);
 		}
 
 		/* Exit action for state 'Prepare Bus'. */
@@ -321,6 +345,22 @@ namespace mrw
 		{
 			/* Exit action for state 'Init'. */
 			timerService->unsetTimer(this, 1);
+		}
+
+		/* Exit action for state 'Editing'. */
+		void OperatingMode::exact_main_region_Editing()
+		{
+			/* Exit action for state 'Editing'. */
+			editing_value = false;
+			emit editing(editing_value);
+		}
+
+		/* Exit action for state 'Operating'. */
+		void OperatingMode::exact_main_region_Operating()
+		{
+			/* Exit action for state 'Operating'. */
+			operating_value = false;
+			emit operating(operating_value);
 		}
 
 		/* 'default' enter sequence for state Prepare Bus */
@@ -396,6 +436,7 @@ namespace mrw
 		{
 			/* Default exit sequence for state Editing */
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::NO_STATE;
+			exact_main_region_Editing();
 		}
 
 		/* Default exit sequence for state Fail */
@@ -410,6 +451,7 @@ namespace mrw
 		{
 			/* Default exit sequence for state Operating */
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::NO_STATE;
+			exact_main_region_Operating();
 		}
 
 		/* Default exit sequence for region main region */
@@ -469,7 +511,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (connected_raised)
+				if (ifaceCan.connected_raised)
 				{
 					exseq_main_region_Prepare_Bus();
 					enseq_main_region_Init_default();
@@ -607,12 +649,12 @@ namespace mrw
 
 		void OperatingMode::clearInEvents()
 		{
-			connected_raised = false;
 			clear_raised = false;
 			inquired_raised = false;
 			fail_raised = false;
 			edit_raised = false;
 			operate_raised = false;
+			ifaceCan.connected_raised = false;
 			timeEvents[0] = false;
 			timeEvents[1] = false;
 		}
@@ -672,7 +714,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((((connected_raised) || (clear_raised)) || (inquired_raised)) || (fail_raised)) || (edit_raised)) || (operate_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while ((((((((clear_raised) || (inquired_raised)) || (fail_raised)) || (edit_raised)) || (operate_raised)) || (ifaceCan.connected_raised)) || (timeEvents[0])) || (timeEvents[1]));
 			isExecuting = false;
 		}
 

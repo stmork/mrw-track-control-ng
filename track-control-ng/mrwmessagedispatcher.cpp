@@ -5,9 +5,8 @@
 
 #include <QDebug>
 
-#include <ctrl/controllerregistry.h>
-#include <statecharts/timerservice.h>
 #include <util/method.h>
+#include <ctrl/controllerregistry.h>
 
 #include "mrwmessagedispatcher.h"
 
@@ -15,7 +14,6 @@ using namespace mrw::util;
 using namespace mrw::can;
 using namespace mrw::model;
 using namespace mrw::ctrl;
-using namespace mrw::statechart;
 
 MrwMessageDispatcher::MrwMessageDispatcher(
 	ModelRailway   *  model_railway,
@@ -23,44 +21,11 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 	const QString  &  plugin,
 	QObject     *     parent) :
 	MrwBusService(interface, plugin, parent, false),
-	statechart(nullptr),
 	model(model_railway)
 {
 	__METHOD__;
 
 	ControllerRegistry::instance().registerService(this);
-
-	connect(
-		this, &MrwBusService::connected,
-		&statechart, &OperatingMode::connected,
-		Qt::QueuedConnection);
-	connect(
-		&statechart, &OperatingMode::inquire,
-		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
-		Qt::QueuedConnection);
-	connect(
-		&ControllerRegistry::instance(), &ControllerRegistry::completed,
-		&statechart, &OperatingMode::inquired,
-		Qt::QueuedConnection);
-	connect(
-		&statechart, &OperatingMode::failed, [] ()
-	{
-		qCritical("Failed...");
-	});
-	connect(
-		&statechart, &OperatingMode::operating, [] ()
-	{
-		qInfo("Operating...");
-	});
-	connect(
-		&statechart, &OperatingMode::editing, [] ()
-	{
-		qInfo("Editing...");
-	});
-
-	statechart.setTimerService(&TimerService::instance());
-	statechart.setOperationCallback(this);
-	statechart.enter();
 }
 
 MrwMessageDispatcher::~MrwMessageDispatcher()
@@ -68,7 +33,6 @@ MrwMessageDispatcher::~MrwMessageDispatcher()
 	__METHOD__;
 
 	qInfo(" Shutting down MRW message dispatcher.");
-	statechart.exit();
 }
 
 void MrwMessageDispatcher::process(const MrwMessage & message)
@@ -110,11 +74,4 @@ void MrwMessageDispatcher::connectBus()
 	{
 		qWarning("CAN bus already connected.");
 	}
-}
-
-void MrwMessageDispatcher::reset()
-{
-	__METHOD__;
-
-	ControllerRegistry::instance().reset();
 }

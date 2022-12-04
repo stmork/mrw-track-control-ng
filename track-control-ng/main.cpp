@@ -32,8 +32,8 @@ int main(int argc, char * argv[])
 
 	if (repo)
 	{
-		MainWindow           main_window(repo);
 		MrwMessageDispatcher dispatcher(repo, repo.interface(), repo.plugin());
+		MainWindow           main_window(repo, dispatcher);
 
 		repo.info();
 		repo.xml();

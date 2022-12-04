@@ -42,6 +42,7 @@ namespace mrw::ui
 
 		explicit BaseWidget(QWidget * parent = nullptr);
 
+		static void setVerbose(const bool activate = false);
 	protected:
 		virtual void paintEvent(QPaintEvent * event) override;
 		virtual void paint(QPainter & painter) = 0;
