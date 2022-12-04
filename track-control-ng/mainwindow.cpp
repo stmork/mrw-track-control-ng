@@ -171,7 +171,7 @@ void MainWindow::enable()
 	const bool editing        = statechart.isStateActive(OperatingMode::State::main_region_Editing);
 	const bool fail           = statechart.isStateActive(OperatingMode::State::main_region_Fail);
 	const size_t switch_count = count<RegularSwitchController>() + count<DoubleCrossSwitchController>();
-	const size_t rail_count   = count<RailController>() + count<SignalController>();
+	const size_t rail_count   = count<RailController>();
 
 	ui->actionEdit->setEnabled(!editing);
 	ui->actionUp->setEnabled(editing);
@@ -201,11 +201,11 @@ void MainWindow::enable()
 
 	ui->tourLeftPushButton->setEnabled(
 		operating &&
-		(rail_count > 0) && (switch_count == 0));
+		(rail_count >= 2) && (switch_count == 0));
 	ui->shuntLeftPushButton->setEnabled(
 		operating &&
 		isSameRegion() &&
-		(rail_count > 0) && (switch_count == 0));
+		(rail_count >= 2) && (switch_count == 0));
 	ui->extendPushButton->setEnabled(
 		operating &&
 		(ui->routeListWidget->currentItem() != nullptr) &&
@@ -213,10 +213,10 @@ void MainWindow::enable()
 	ui->shuntRightPushButton->setEnabled(
 		operating &&
 		isSameRegion() &&
-		(rail_count > 0) && (switch_count == 0));
+		(rail_count >= 2) && (switch_count == 0));
 	ui->tourRightPushButton->setEnabled(
 		operating &&
-		(rail_count > 0) && (switch_count == 0));
+		(rail_count >= 2) && (switch_count == 0));
 }
 
 void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Position * position)
