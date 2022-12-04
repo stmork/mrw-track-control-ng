@@ -9,6 +9,8 @@
 #include <ctrl/basecontroller.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
+#include <ctrl/railcontroller.h>
+#include <ctrl/signalcontroller.h>
 #include <ctrl/controllerregistry.h>
 #include <ui/controllerwidget.h>
 
@@ -46,7 +48,9 @@ MainWindow::MainWindow(
 		connect(w, &ControllerWidget::clicked, this, &MainWindow::itemClicked);
 	}
 
-	connect(ui->actionQuit,        &QAction::triggered, QCoreApplication::instance(), &QCoreApplication::quit);
+	connect(
+		ui->actionQuit,        &QAction::triggered,
+		QCoreApplication::instance(), &QCoreApplication::quit);
 
 	connect(ui->actionBendLeft,    &QAction::triggered, [this]()
 	{
@@ -92,8 +96,12 @@ MainWindow::MainWindow(
 		lineup(-1);
 	});
 
-
-
+	connect(
+		ui->routeListWidget, &QListWidget::currentItemChanged,
+		this, &MainWindow::enable);
+	connect(
+		ui->sectionListWidget, &QListWidget::currentItemChanged,
+		this, &MainWindow::enable);
 
 	connect(
 		&dispatcher, &MrwBusService::connected,
@@ -159,10 +167,11 @@ void MainWindow::initRegion()
 
 void MainWindow::enable()
 {
-	const bool operating = statechart.isStateActive(OperatingMode::State::main_region_Operating);
-	const bool editing   = statechart.isStateActive(OperatingMode::State::main_region_Editing);
-	const bool fail      = statechart.isStateActive(OperatingMode::State::main_region_Fail);
+	const bool operating      = statechart.isStateActive(OperatingMode::State::main_region_Operating);
+	const bool editing        = statechart.isStateActive(OperatingMode::State::main_region_Editing);
+	const bool fail           = statechart.isStateActive(OperatingMode::State::main_region_Fail);
 	const size_t switch_count = count<RegularSwitchController>() + count<DoubleCrossSwitchController>();
+	const size_t rail_count   = count<RailController>() + count<SignalController>();
 
 	ui->actionEdit->setEnabled(!editing);
 	ui->actionUp->setEnabled(editing);
@@ -184,6 +193,30 @@ void MainWindow::enable()
 	ui->actionTurnSwitchLeft->setEnabled(switch_count > 0);
 	ui->actionTurnSwitch->setEnabled(switch_count > 0);
 	ui->actionTurnSwitchRight->setEnabled(switch_count > 0);
+
+	ui->clearRoute->setEnabled(ui->routeListWidget->currentItem() != nullptr);
+	ui->clearAllRoutes->setEnabled(ui->routeListWidget->count() > 0);
+	ui->clearSection->setEnabled(ui->sectionListWidget->currentItem() != nullptr);
+	ui->clearAllSections->setEnabled(ui->sectionListWidget->count() > 0);
+
+	ui->tourLeftPushButton->setEnabled(
+		operating &&
+		(rail_count > 0) && (switch_count == 0));
+	ui->shuntLeftPushButton->setEnabled(
+		operating &&
+		isSameRegion() &&
+		(rail_count > 0) && (switch_count == 0));
+	ui->extendPushButton->setEnabled(
+		operating &&
+		(ui->routeListWidget->currentItem() != nullptr) &&
+		(rail_count > 0) && (switch_count == 0));
+	ui->shuntRightPushButton->setEnabled(
+		operating &&
+		isSameRegion() &&
+		(rail_count > 0) && (switch_count == 0));
+	ui->tourRightPushButton->setEnabled(
+		operating &&
+		(rail_count > 0) && (switch_count == 0));
 }
 
 void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Position * position)
@@ -237,6 +270,25 @@ void MainWindow::edit(std::function<void(BaseController *, Position *)> editor)
 	}
 }
 
+bool MainWindow::isSameRegion()
+{
+	std::unordered_set<Region *> regions;
+
+	edit([&](BaseController * controller, Position * position)
+	{
+		Q_UNUSED(position);
+
+		RailPartInfo * info = dynamic_cast<RailPartInfo *>(controller);
+
+		if (info != nullptr)
+		{
+			regions.emplace(info->region());
+		}
+	});
+
+	return regions.size() == 1;
+}
+
 void MainWindow::itemClicked(QListWidgetItem * item)
 {
 	if (item->listWidget() == nullptr)
@@ -260,6 +312,7 @@ void MainWindow::on_clearSection_clicked()
 
 		ui->sectionListWidget->takeItem(row);
 	}
+	enable();
 }
 
 void MainWindow::on_clearAllSections_clicked()
@@ -268,6 +321,7 @@ void MainWindow::on_clearAllSections_clicked()
 	{
 		ui->sectionListWidget->takeItem(0);
 	}
+	enable();
 }
 
 void MainWindow::on_clearRoute_clicked()

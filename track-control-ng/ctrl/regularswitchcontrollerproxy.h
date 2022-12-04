@@ -10,6 +10,7 @@
 
 #include <model/regularswitch.h>
 #include <ctrl/regularswitchcontroller.h>
+#include <ctrl/railpartinfo.h>
 #include <ctrl/controllerregistrand.h>
 #include <statecharts/SwitchStatechart.h>
 
@@ -17,6 +18,7 @@ namespace mrw::ctrl
 {
 	class RegularSwitchControllerProxy :
 		public RegularSwitchController,
+		public RailPartInfo,
 		public ControllerRegistrand,
 		public mrw::statechart::SwitchStatechart::OperationCallback
 	{
@@ -54,6 +56,9 @@ namespace mrw::ctrl
 		virtual bool isRight() const override;
 		virtual bool isRightBended() const override;
 		virtual bool isInclined() const override;
+
+		// Implementation from RailPartInfo
+		virtual mrw::model::RailPart * railPart() const override;
 
 		// Implementations from ControllerRegistrand
 		virtual bool process(const can::MrwMessage & message) override;

@@ -133,6 +133,11 @@ bool RegularSwitchControllerProxy::isInclined() const
 	return part->isInclined();
 }
 
+RailPart * RegularSwitchControllerProxy::railPart() const
+{
+	return part;
+}
+
 bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 {
 	qDebug().noquote() << message << "(regular switch)";

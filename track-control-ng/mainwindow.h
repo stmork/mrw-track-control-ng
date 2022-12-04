@@ -42,9 +42,11 @@ public:
 	~MainWindow();
 
 public slots:
-	void itemClicked(QListWidgetItem * item);
 
 private slots:
+	void itemClicked(QListWidgetItem * item);
+	void enable();
+
 	void on_clearSection_clicked();
 	void on_clearAllSections_clicked();
 	void on_clearRoute_clicked();
@@ -72,13 +74,13 @@ private slots:
 
 private:
 	void initRegion();
-	void enable();
 	void expandBorder(
 		RegionForm         *        form,
 		mrw::ctrl::BaseController * controller,
 		mrw::model::Position    *   position);
 	void edit(
 		std::function<void(mrw::ctrl::BaseController *, mrw::model::Position *)> editor);
+	bool isSameRegion();
 	template <class T> size_t count()
 	{
 		size_t count = 0;

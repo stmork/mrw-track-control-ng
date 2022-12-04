@@ -167,7 +167,7 @@ namespace mrw::model
 		 *
 		 * @return The connected RailPart.
 		 */
-		RailPart          *          resolve(const char * attr) const;
+		RailPart * resolve(const char * attr) const;
 	};
 }
 

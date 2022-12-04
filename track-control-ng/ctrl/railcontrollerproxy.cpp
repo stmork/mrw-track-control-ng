@@ -13,11 +13,9 @@ using namespace mrw::ctrl;
 using namespace mrw::model;
 
 RailControllerProxy::RailControllerProxy(
-	Section * parent_section,
 	Rail   *  referenced_rail,
 	QObject * parent) :
 	RailController(parent),
-	section(parent_section),
 	rail(referenced_rail)
 {
 }
@@ -39,7 +37,7 @@ float RailControllerProxy::lines() const
 
 bool RailControllerProxy::isDirection() const
 {
-	return !rail->aIsDir() == section->region()->direction();
+	return !rail->aIsDir() == region()->direction();
 }
 
 bool RailControllerProxy::isExpandable() const
@@ -54,12 +52,12 @@ Position * RailControllerProxy::position() const
 
 SectionState RailControllerProxy::state() const
 {
-	return section->occupation() ? SectionState::OCCUPIED : section_state;
+	return section()->occupation() ? SectionState::OCCUPIED : section_state;
 }
 
 Device::LockState RailControllerProxy::lock() const
 {
-	return section->lock();
+	return section()->lock();
 }
 
 Position::Bending RailControllerProxy::bending() const
@@ -75,4 +73,9 @@ bool RailControllerProxy::aEnds() const
 bool RailControllerProxy::bEnds() const
 {
 	return rail->advance(!rail->aIsDir()).empty();
+}
+
+RailPart * RailControllerProxy::railPart() const
+{
+	return rail;
 }

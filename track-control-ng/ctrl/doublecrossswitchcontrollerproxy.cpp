@@ -109,6 +109,11 @@ DoubleCrossSwitch::State DoubleCrossSwitchControllerProxy::switchState() const
 	return part->state();
 }
 
+RailPart * DoubleCrossSwitchControllerProxy::railPart() const
+{
+	return part;
+}
+
 bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 {
 	qDebug().noquote() << message << "(double cross switch)";

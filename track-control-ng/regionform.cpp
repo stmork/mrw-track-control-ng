@@ -108,7 +108,7 @@ void RegionForm::setupRails(SectionController * controller)
 	section->parts<Rail>(rails);
 	for (Rail * rail : rails)
 	{
-		RailControllerProxy * ctrl   = new RailControllerProxy(section, rail, this);
+		RailControllerProxy * ctrl   = new RailControllerProxy(rail, this);
 		RailWidget      *     widget = new RailWidget(ui->controlWidget, ctrl);
 
 		ctrl->reposition();

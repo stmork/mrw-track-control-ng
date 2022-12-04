@@ -10,6 +10,7 @@
 
 #include <model/doublecrossswitch.h>
 #include <ctrl/doublecrossswitchcontroller.h>
+#include <ctrl/railpartinfo.h>
 #include <ctrl/controllerregistrand.h>
 #include <statecharts/SwitchStatechart.h>
 
@@ -17,6 +18,7 @@ namespace mrw::ctrl
 {
 	class DoubleCrossSwitchControllerProxy :
 		public DoubleCrossSwitchController,
+		public RailPartInfo,
 		public ControllerRegistrand,
 		public mrw::statechart::SwitchStatechart::OperationCallback
 	{
@@ -49,6 +51,9 @@ namespace mrw::ctrl
 
 		// Implementations from DoubleCrossSwitchController
 		virtual mrw::model::DoubleCrossSwitch::State switchState() const override;
+
+		// Implementation from RailPartInfo
+		virtual mrw::model::RailPart * railPart() const override;
 
 		// Implementations from ControllerRegistrand
 		virtual bool process(const can::MrwMessage & message) override;

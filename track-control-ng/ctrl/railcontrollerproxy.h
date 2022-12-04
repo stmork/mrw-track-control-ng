@@ -9,26 +9,27 @@
 #define MRW_CTRL_RAILCONTROLLERPROXY_H
 
 #include <ctrl/railcontroller.h>
+#include <ctrl/railpartinfo.h>
 #include <model/region.h>
 #include <model/section.h>
 #include <model/rail.h>
 
 namespace mrw::ctrl
 {
-	class RailControllerProxy : public RailController
+	class RailControllerProxy :
+		public RailController,
+		public RailPartInfo
 	{
 		Q_OBJECT
 
 	private:
-		mrw::model::Section    *   section   = nullptr;
 		mrw::model::Rail     *     rail      = nullptr;
 		mrw::model::SectionState   section_state = mrw::model::SectionState::FREE;
 
 	public:
 		explicit RailControllerProxy(
-			mrw::model::Section * parent_section,
-			mrw::model::Rail   *  referenced_rail,
-			QObject       *       parent);
+			mrw::model::Rail  *  referenced_rail,
+			QObject       *      parent);
 
 	private:
 
@@ -44,9 +45,12 @@ namespace mrw::ctrl
 		virtual mrw::model::Device::LockState lock() const override;
 		virtual mrw::model::Position::Bending bending() const override;
 
-		// Implementations from SectionController
+		// Implementations from RailController
 		virtual bool    aEnds() const override;
 		virtual bool    bEnds() const override;
+
+		// Implementation from RailPartInfo
+		virtual mrw::model::RailPart * railPart() const override;
 	};
 }
 

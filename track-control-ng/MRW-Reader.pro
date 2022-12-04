@@ -8,6 +8,7 @@ QT += gui widgets network
 include(../common.pri)
 
 SOURCES += \
+	ctrl/railpartinfo.cpp \
 	main.cpp \
 	mainwindow.cpp \
 	modelrepository.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 	ctrl/sectioncontroller.cpp
 
 HEADERS += \
+	ctrl/railpartinfo.h \
 	mainwindow.h \
 	modelrepository.h \
 	mrwmessagedispatcher.h \
