@@ -78,14 +78,14 @@ private:
 		RegionForm         *        form,
 		mrw::ctrl::BaseController * controller,
 		mrw::model::Position    *   position);
-	void edit(
+	void traverse(
 		std::function<void(mrw::ctrl::BaseController *, mrw::model::Position *)> editor);
 	bool isSameRegion();
 	template <class T> size_t count()
 	{
 		size_t count = 0;
 
-		edit([&] (mrw::ctrl::BaseController * ctrl, mrw::model::Position * pos)
+		traverse([&] (mrw::ctrl::BaseController * ctrl, mrw::model::Position * pos)
 		{
 			Q_UNUSED(pos);
 			T * ptr = dynamic_cast<T *>(ctrl);

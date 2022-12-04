@@ -255,7 +255,7 @@ void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Po
 	}
 }
 
-void MainWindow::edit(std::function<void(BaseController *, Position *)> editor)
+void MainWindow::traverse(std::function<void(BaseController *, Position *)> editor)
 {
 	for (int i = 0; i < ui->sectionListWidget->count(); i++)
 	{
@@ -274,7 +274,7 @@ bool MainWindow::isSameRegion()
 {
 	std::unordered_set<Region *> regions;
 
-	edit([&](BaseController * controller, Position * position)
+	traverse([&](BaseController * controller, Position * position)
 	{
 		Q_UNUSED(position);
 
@@ -361,7 +361,7 @@ void MainWindow::on_tourRightPushButton_clicked()
 
 void MainWindow::move(int right, int down)
 {
-	edit([right, down](BaseController * controller, Position * position)
+	traverse([right, down](BaseController * controller, Position * position)
 	{
 		position->move(right, down);
 
@@ -371,7 +371,7 @@ void MainWindow::move(int right, int down)
 
 void MainWindow::extend(int inc)
 {
-	edit([inc](BaseController * controller, Position * position)
+	traverse([inc](BaseController * controller, Position * position)
 	{
 		position->extend(inc);
 
@@ -381,7 +381,7 @@ void MainWindow::extend(int inc)
 
 void MainWindow::lineup(int inc)
 {
-	edit([inc](BaseController * controller, Position * position)
+	traverse([inc](BaseController * controller, Position * position)
 	{
 		position->lineup(inc);
 
@@ -409,7 +409,7 @@ void MainWindow::on_actionExpand_triggered()
 
 void MainWindow::on_actionInclination_triggered()
 {
-	edit([](BaseController * controller, Position * position)
+	traverse([](BaseController * controller, Position * position)
 	{
 		position->toggleInclination();
 		controller->update();
@@ -418,7 +418,7 @@ void MainWindow::on_actionInclination_triggered()
 
 void MainWindow::bend(const Position::Bending bend)
 {
-	edit([bend](BaseController * controller, Position * position)
+	traverse([bend](BaseController * controller, Position * position)
 	{
 		if ((position->bending() != bend) ||
 			(dynamic_cast<RegularSwitchController *>(controller) != nullptr))
@@ -435,7 +435,7 @@ void MainWindow::bend(const Position::Bending bend)
 
 void MainWindow::on_actionTurnSwitchLeft_triggered()
 {
-	edit([](BaseController * controller, Position * position)
+	traverse([](BaseController * controller, Position * position)
 	{
 		Q_UNUSED(position);
 
@@ -458,7 +458,7 @@ void MainWindow::on_actionTurnSwitchLeft_triggered()
 
 void MainWindow::on_actionTurnSwitch_triggered()
 {
-	edit([](BaseController * controller, Position * position)
+	traverse([](BaseController * controller, Position * position)
 	{
 		Q_UNUSED(position);
 
@@ -481,7 +481,7 @@ void MainWindow::on_actionTurnSwitch_triggered()
 
 void MainWindow::on_actionTurnSwitchRight_triggered()
 {
-	edit([](BaseController * controller, Position * position)
+	traverse([](BaseController * controller, Position * position)
 	{
 		Q_UNUSED(position);
 
