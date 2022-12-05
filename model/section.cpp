@@ -132,6 +132,11 @@ bool Section::valid() const
 	return (section_controller != nullptr) && (section_module != nullptr);
 }
 
+SectionState Section::state() const
+{
+	return occupied ? OCCUPIED : section_state;
+}
+
 void Section::add(AssemblyPart * part)
 {
 	assembly_parts.push_back(part);

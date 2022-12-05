@@ -45,6 +45,7 @@ namespace mrw::model
 
 		QString toString() const override;
 		QString key() const override;
+		void setState(const RailPart * left, const RailPart * right) override;
 
 	private:
 		void link() override;

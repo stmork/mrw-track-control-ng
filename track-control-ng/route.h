@@ -8,8 +8,12 @@
 #ifndef ROUTE_H
 #define ROUTE_H
 
-#include <QObject>
+#include <list>
 
+#include <QObject>
+#include <QListWidgetItem>
+
+#include <model/section.h>
 #include <model/railpart.h>
 
 class Route : public QObject
@@ -17,16 +21,25 @@ class Route : public QObject
 	Q_OBJECT
 
 private:
-	bool direction;
-	std::vector<mrw::model::RailPart *> track;
+	const bool                          direction;
+	const mrw::model::SectionState      state = mrw::model::SHUNTING;
+	std::list<mrw::model::RailPart *>   track;
+	mrw::model::Section        *        first_section = nullptr;
+	QListWidgetItem                     list_item;
 
 public:
-	explicit Route(mrw::model::RailPart * first, bool dir, QObject * parent = nullptr);
+	static const int                    USER_ROLE = Qt::UserRole + 1;
 
-	void extend(mrw::model::RailPart * rail);
+	explicit Route(
+		const bool                       dir,
+		const mrw::model::SectionState   wanted_state,
+		mrw::model::RailPart      *      first,
+		QObject             *            parent = nullptr);
 
-signals:
+	operator QListWidgetItem * ();
 
+	bool extend(mrw::model::RailPart * rail);
+	void prepare();
 };
 
 #endif // ROUTE_H

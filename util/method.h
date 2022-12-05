@@ -8,6 +8,7 @@
 #ifndef MRW_UTIL_METHOD_H
 #define MRW_UTIL_METHOD_H
 
+#include <QDebug>
 #include <QElapsedTimer>
 
 namespace mrw::util

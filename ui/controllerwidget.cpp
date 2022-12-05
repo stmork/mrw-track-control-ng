@@ -38,7 +38,7 @@ void ControllerWidget::setController(BaseController * ctrl)
 	if (base_controller != nullptr)
 	{
 		list_item.setText(base_controller->name());
-		list_item.setData(Qt::UserRole, QVariant::fromValue(base_controller));
+		list_item.setData(USER_ROLE, QVariant::fromValue(base_controller));
 		connect(base_controller, &BaseController::reposition, this, &ControllerWidget::reposition);
 
 		computeConnectors();

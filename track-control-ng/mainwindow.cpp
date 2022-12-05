@@ -150,6 +150,8 @@ MainWindow::~MainWindow()
 	statechart.exit();
 
 	on_clearAllSections_clicked();
+	on_clearAllRoutes_clicked();
+
 	delete ui;
 }
 
@@ -270,7 +272,7 @@ void MainWindow::traverse(std::function<void(BaseController *, Position *)> edit
 	for (int i = 0; i < ui->sectionListWidget->count(); i++)
 	{
 		QListWidgetItem * item       = ui->sectionListWidget->item(i);
-		BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
+		BaseController  * controller = item->data(ControllerWidget::USER_ROLE).value<BaseController *>();
 		Position     *    position   = controller->position();
 
 		if (position != nullptr)
@@ -336,34 +338,39 @@ void MainWindow::on_clearAllSections_clicked()
 
 void MainWindow::on_clearRoute_clicked()
 {
+	for (QListWidgetItem * item : ui->routeListWidget->selectedItems())
+	{
+		const int row = ui->routeListWidget->row(item);
 
+		ui->routeListWidget->takeItem(row);
+
+		Route * route = item->data(Route::USER_ROLE).value<Route *>();
+
+		delete route;
+	}
+	enable();
 }
 
 void MainWindow::on_clearAllRoutes_clicked()
 {
+	while (ui->routeListWidget->count() > 0)
+	{
+		QListWidgetItem * item  = ui->routeListWidget->takeItem(0);
+		Route      *      route = item->data(Route::USER_ROLE).value<Route *>();
 
+		delete route;
+	}
+	enable();
 }
 
 void MainWindow::on_tourLeftPushButton_clicked()
 {
-	RailPart * first = rail(0);
-	Route      route(first, false);
-
-	for (int i = 1; i < ui->sectionListWidget->count(); i++)
-	{
-		route.extend(rail(i));
-	}
+	create(false, SectionState::TOUR);
 }
 
 void MainWindow::on_shuntLeftPushButton_clicked()
 {
-	RailPart * first = rail(0);
-	Route      route(first, false);
-
-	for (int i = 1; i < ui->sectionListWidget->count(); i++)
-	{
-		route.extend(rail(i));
-	}
+	create(false, SectionState::SHUNTING);
 }
 
 void MainWindow::on_extendPushButton_clicked()
@@ -373,24 +380,12 @@ void MainWindow::on_extendPushButton_clicked()
 
 void MainWindow::on_shuntRightPushButton_clicked()
 {
-	RailPart * first = rail(0);
-	Route      route(first, true);
-
-	for (int i = 1; i < ui->sectionListWidget->count(); i++)
-	{
-		route.extend(rail(i));
-	}
+	create(true, SectionState::SHUNTING);
 }
 
 void MainWindow::on_tourRightPushButton_clicked()
 {
-	RailPart * first = rail(0);
-	Route      route(first, true);
-
-	for (int i = 1; i < ui->sectionListWidget->count(); i++)
-	{
-		route.extend(rail(i));
-	}
+	create(true, SectionState::TOUR);
 }
 
 void MainWindow::move(int right, int down)
@@ -552,7 +547,6 @@ void MainWindow::onEdit(const bool active)
 	BaseWidget::setVerbose(active);
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
-	on_clearAllSections_clicked();
 }
 
 void MainWindow::reset()
@@ -560,4 +554,24 @@ void MainWindow::reset()
 	__METHOD__;
 
 	ControllerRegistry::instance().reset();
+}
+
+Route * MainWindow::create(const bool direction, SectionState state)
+{
+	RailPart * first = rail(0);
+	Route   *  route = new Route(direction, state, first);
+
+	for (int i = 1; i < ui->sectionListWidget->count(); i++)
+	{
+		if (!route->extend(rail(i)))
+		{
+			return nullptr;
+		}
+	}
+	route->prepare();
+	ui->routeListWidget->addItem(*route);
+	ui->regionTabWidget->currentWidget()->update();
+	on_clearAllSections_clicked();
+
+	return route;
 }

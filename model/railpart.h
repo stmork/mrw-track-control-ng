@@ -158,6 +158,19 @@ namespace mrw::model
 		 */
 		const std::set<RailInfo> & advance(const bool dir) const;
 
+		/**
+		 * This method sets the internal switch state according to the given
+		 * connected neighbours. This is useful while computing the track route.
+		 *
+		 * @note Both pointers need to be non nullptr.
+		 *
+		 * @param left One neighbour.
+		 * @param right The other neighbour.
+		 * @exception std::invalid_argument one of the RailPart pointer is not
+		 * a neighbour.
+		 */
+		virtual void setState(const RailPart * left, const RailPart * right) = 0;
+
 	protected:
 		/**
 		 * This method resolves a connected RailPart from the EMF model.

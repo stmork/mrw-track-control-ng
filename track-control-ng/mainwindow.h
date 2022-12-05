@@ -28,6 +28,7 @@ namespace Ui
 QT_END_NAMESPACE
 
 class MrwMessageDispatcher;
+class Route;
 
 class MainWindow :
 	public QMainWindow,
@@ -102,6 +103,7 @@ private:
 	}
 
 	virtual void reset() override;
+	Route * create(const bool direction, mrw::model::SectionState state);
 
 	Ui::MainWindow  * ui;
 	ModelRepository & repo;

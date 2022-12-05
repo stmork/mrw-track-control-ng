@@ -24,7 +24,6 @@ namespace mrw::ctrl
 
 	private:
 		mrw::model::Rail     *     rail      = nullptr;
-		mrw::model::SectionState   section_state = mrw::model::SectionState::FREE;
 
 	public:
 		explicit RailControllerProxy(

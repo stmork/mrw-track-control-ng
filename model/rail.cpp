@@ -64,3 +64,11 @@ QString Rail::key() const
 {
 	return "Gleis" + name();
 }
+
+void Rail::setState(const RailPart * left, const RailPart * right)
+{
+	Q_UNUSED(left);
+	Q_UNUSED(right);
+
+	// This RailPart has no changing "switch" state.
+}

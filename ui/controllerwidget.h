@@ -19,9 +19,11 @@ namespace mrw::ui
 		Q_OBJECT
 
 	public:
+		static const int   USER_ROLE = Qt::UserRole + 0;
+
 		explicit ControllerWidget(
-			QWidget * parent = nullptr,
-			mrw::ctrl::BaseController * ctrl = nullptr);
+			QWidget          *          parent = nullptr,
+			mrw::ctrl::BaseController * ctrl   = nullptr);
 
 		void setController(mrw::ctrl::BaseController * ctrl);
 
@@ -96,8 +98,8 @@ namespace mrw::ui
 		QList<QPoint>               connector_list;
 
 	private:
-		unsigned        counter = 0;
-		QListWidgetItem list_item;
+		unsigned           counter = 0;
+		QListWidgetItem    list_item;
 	};
 }
 
