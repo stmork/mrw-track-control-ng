@@ -47,6 +47,14 @@ void RegularSwitch::setState(
 	}
 	else
 	{
+		qCritical() << "a: " << *a;
+		qCritical() << "b: " << *b;
+		qCritical() << "c: " << *c;
+
+		qCritical() << "Left: " << *left;
+		qCritical() << "This: " << *this;
+		qCritical() << "Right:" << *right;
+
 		throw std::invalid_argument("Given rail parts are not neighbours.");
 	}
 }
@@ -97,9 +105,10 @@ bool RegularSwitch::valid() const
 
 QString RegularSwitch::toString() const
 {
-	return QString("      %1 %2 %3--%4 : [%5] %6").
+	return QString("      %1 %2%3 %4--%5 : [%6] %7").
 		arg(aIsDir() ? ">" : "<").
 		arg(valid()  ? "V" : "-").
+		arg(reserved() ? "R" : "-").
 		arg(aIsDir() ? "bc" : " a").
 		arg(aIsDir() ? "a " : "bc").
 		arg(unitNo(), 4, 16, QChar('0')).

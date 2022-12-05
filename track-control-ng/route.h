@@ -35,11 +35,14 @@ public:
 		const mrw::model::SectionState   wanted_state,
 		mrw::model::RailPart      *      first,
 		QObject             *            parent = nullptr);
+	virtual ~Route();
 
 	operator QListWidgetItem * ();
 
-	bool extend(mrw::model::RailPart * rail);
+	bool extend(mrw::model::RailPart * target);
+	bool extend(mrw::model::RailPart * rail, mrw::model::RailPart * target);
 	void prepare();
+	bool qualified(mrw::model::RailPart * rail) const;
 };
 
 #endif // ROUTE_H

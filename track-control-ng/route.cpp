@@ -49,38 +49,55 @@ Route::Route(
 	list_item.setData(USER_ROLE, QVariant::fromValue(this));
 }
 
+Route::~Route()
+{
+	for (RailPart * rail : track)
+	{
+		rail->reserve(false);
+		rail->section()->setState(SectionState::FREE);
+	}
+}
+
 Route::operator QListWidgetItem * ()
 {
 	return &list_item;
 }
 
-bool Route::extend(RailPart * rail)
+bool Route::extend(RailPart * target)
+{
+	return extend(track.back(), target);
+}
+
+bool Route::extend(RailPart * rail, RailPart * target)
 {
 	__METHOD__;
 
-	Section * section = rail->section();
+	const QString   indent(track.size(), ' ');
 
-	if (section != first_section)
+	qDebug().noquote() << indent << rail->toString();
+
+	if (rail == target)
 	{
-		if (section->state() != FREE)
-		{
-			return false;
-		}
+		rail->reserve();
+		return true;
 	}
 
-	qDebug().noquote() << QString(track.size(), ' ') << rail->toString();
-
-	section->setState(state);
-	track.push_back(rail);
-	for (RailPart * next : rail->advance(direction))
+	for (const RailInfo & info : rail->advance(direction))
 	{
-		if (extend(next))
+		RailPart * next = info;
+
+		if (qualified(next))
 		{
-			return true;
+			next->reserve();
+			track.push_back(next);
+			if (extend(next, target))
+			{
+				return true;
+			}
+			track.remove(next);
+			next->reserve(false);
 		}
 	}
-	track.remove(rail);
-	section->setState(FREE);
 
 	return false;
 }
@@ -96,7 +113,43 @@ void Route::prepare()
 		vector[i]->setState(
 			i > 0 ? vector[i - 1] : nullptr,
 			i < vector.size() ? vector[i + 1] : nullptr);
+		vector[i]->section()->setState(state);
 
 		qDebug().noquote() << "     " << vector[i]->toString();
 	}
+}
+
+bool Route::qualified(RailPart * rail) const
+{
+	const QString   indent(track.size(), ' ');
+	const Section * section = rail->section();
+
+	if (rail->reserved())
+	{
+		qDebug().noquote() << indent << "Rail already reserved:";
+		return false;
+	}
+
+	if (track.size() > 50)
+	{
+		qDebug().noquote() << indent << "Recursion depth reached.";
+		return false;
+	}
+
+	if (section != first_section)
+	{
+		if ((state == SectionState::SHUNTING) &&
+			(first_section->region() != section->region()))
+		{
+			qDebug().noquote() << indent << "Shunting left region.";
+			return false;
+		}
+		if (section->occupation())
+		{
+			qDebug().noquote() << indent << "Section occupied.";
+			return false;
+		}
+	}
+
+	return true;
 }

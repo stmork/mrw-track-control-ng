@@ -52,7 +52,14 @@ Position * RailControllerProxy::position() const
 
 SectionState RailControllerProxy::state() const
 {
-	return section()->state();
+	if (rail->reserved())
+	{
+		return rail->section()->occupation() ? SectionState::OCCUPIED : section()->state();
+	}
+	else
+	{
+		return section()->state();
+	}
 }
 
 Device::LockState RailControllerProxy::lock() const

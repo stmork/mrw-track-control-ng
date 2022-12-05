@@ -349,6 +349,7 @@ void MainWindow::on_clearRoute_clicked()
 		delete route;
 	}
 	enable();
+	ui->regionTabWidget->currentWidget()->update();
 }
 
 void MainWindow::on_clearAllRoutes_clicked()
@@ -361,6 +362,7 @@ void MainWindow::on_clearAllRoutes_clicked()
 		delete route;
 	}
 	enable();
+	ui->regionTabWidget->currentWidget()->update();
 }
 
 void MainWindow::on_tourLeftPushButton_clicked()
@@ -375,7 +377,21 @@ void MainWindow::on_shuntLeftPushButton_clicked()
 
 void MainWindow::on_extendPushButton_clicked()
 {
+	__METHOD__;
 
+	for (QListWidgetItem * item : ui->routeListWidget->selectedItems())
+	{
+		Route * route = item->data(Route::USER_ROLE).value<Route *>();
+
+		for (int i = 0; i < ui->sectionListWidget->count(); i++)
+		{
+			if (!route->extend(rail(i)))
+			{
+				return;
+			}
+		}
+	}
+	enable();
 }
 
 void MainWindow::on_shuntRightPushButton_clicked()
@@ -558,6 +574,8 @@ void MainWindow::reset()
 
 Route * MainWindow::create(const bool direction, SectionState state)
 {
+	__METHOD__;
+
 	RailPart * first = rail(0);
 	Route   *  route = new Route(direction, state, first);
 

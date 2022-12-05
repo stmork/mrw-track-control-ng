@@ -97,7 +97,7 @@ Position * SignalControllerProxy::position() const
 
 SectionState SignalControllerProxy::state() const
 {
-	return section->occupation() ? SectionState::OCCUPIED : SectionState::FREE;
+	return section->occupation() ? SectionState::OCCUPIED : section->state();
 }
 
 Device::LockState SignalControllerProxy::lock() const

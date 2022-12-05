@@ -94,6 +94,8 @@ namespace mrw::model
 	{
 		static const std::regex path_regex;
 
+		bool                    is_reserved = false;
+
 	protected:
 		/**
 		 * The counting direction inversion flag.
@@ -170,6 +172,16 @@ namespace mrw::model
 		 * a neighbour.
 		 */
 		virtual void setState(const RailPart * left, const RailPart * right) = 0;
+
+		inline void reserve(const bool input = true)
+		{
+			is_reserved = input;
+		}
+
+		inline bool reserved() const
+		{
+			return is_reserved;
+		}
 
 	protected:
 		/**
