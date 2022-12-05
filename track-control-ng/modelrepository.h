@@ -48,7 +48,7 @@ class ModelRepository
 	mrw::util::Properties        railpart_map;
 
 public:
-	explicit ModelRepository(const QString & model_name);
+	explicit ModelRepository(const QString & modelname);
 	~ModelRepository();
 
 	inline operator mrw::model::ModelRailway * () const

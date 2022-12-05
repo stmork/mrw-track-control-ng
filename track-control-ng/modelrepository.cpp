@@ -21,12 +21,12 @@ const char * ModelRepository::REGION_FILENAME   = "Gruppen.properties";
 const char * ModelRepository::SIGNAL_FILENAME   = "Signale.properties";
 const char * ModelRepository::RAILPART_FILENAME = "Gleisteile.properties";
 
-ModelRepository::ModelRepository(const QString & model_name) :
-	settings_model(model_name),
+ModelRepository::ModelRepository(const QString & modelname) :
+	settings_model(modelname),
 	home_dir(QDir::homePath())
 {
-	filename += model_name + ".modelrailway";
-	filter << model_name;
+	filename += modelname + ".modelrailway";
+	filter << filename;
 
 	readMaps();
 	prepareHost();
@@ -71,9 +71,11 @@ void ModelRepository::readMaps()
 {
 	SettingsGroup group(&settings_model, "files");
 
+	// First try: Read directly from config by default filename."
 	model_filename = settings_model.value("filename", home_dir.absolutePath() + "/mrw/" + filename).toString();
 	if (!QFile::exists(model_filename))
 	{
+		// lookup file.
 		lookup();
 	}
 	else
@@ -99,16 +101,15 @@ ModelRepository::operator bool() const
 
 QString ModelRepository::lookup()
 {
-	QDirIterator dir_it(QDir::homePath(), filter, QDir::Dirs, QDirIterator::Subdirectories);
+	QDirIterator dir_it(QDir::homePath(), filter, QDir::Files, QDirIterator::Subdirectories);
 
 	while (dir_it.hasNext())
 	{
-		QString dir  = dir_it.next();
-		QString file = lookupModel(dir);
+		QString file = dir_it.next();
 
 		if (!file.isEmpty())
 		{
-			const QStringList & properties = lookupProperties(dir);
+			const QStringList & properties = lookupProperties(file);
 
 			for (const QString & propfile : properties)
 			{
@@ -148,11 +149,15 @@ QString ModelRepository::lookupModel(const QString & base)
 	return "";
 }
 
-QStringList ModelRepository::lookupProperties(const QString & base)
+QStringList ModelRepository::lookupProperties(const QString & input)
 {
+	QDir        base = QDir::cleanPath(input);
 	QStringList properties;
 
-	QDirIterator dir_it(base, QStringList() << SIGNAL_FILENAME << REGION_FILENAME << RAILPART_FILENAME, QDir::Files, QDirIterator::Subdirectories);
+	base.cdUp();
+	base.cdUp();
+	base.cdUp();
+	QDirIterator dir_it(base.absolutePath(), QStringList() << SIGNAL_FILENAME << REGION_FILENAME << RAILPART_FILENAME, QDir::Files, QDirIterator::Subdirectories);
 
 	while (dir_it.hasNext())
 	{
