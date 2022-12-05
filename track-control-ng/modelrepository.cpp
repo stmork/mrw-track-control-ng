@@ -138,17 +138,6 @@ QString ModelRepository::lookup()
 	return "";
 }
 
-QString ModelRepository::lookupModel(const QString & base)
-{
-	QDirIterator dir_it(base, QStringList() << filename, QDir::Files, QDirIterator::Subdirectories);
-
-	while (dir_it.hasNext())
-	{
-		return dir_it.next();
-	}
-	return "";
-}
-
 QStringList ModelRepository::lookupProperties(const QString & input)
 {
 	QDir        base = QDir::cleanPath(input);

@@ -74,7 +74,6 @@ public:
 private:
 	void        readMaps();
 	QString     lookup();
-	QString     lookupModel(const QString & base);
 	QStringList lookupProperties(const QString & base);
 	void        setFilenames();
 
