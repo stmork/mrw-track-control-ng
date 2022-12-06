@@ -39,9 +39,9 @@ namespace mrw::model
 		enum class State : unsigned
 		{
 			AC = 0,
-			AD = 1,
-			BC = 2,
-			BD = 3
+			AD = D_MASK,
+			BC = B_MASK,
+			BD = B_MASK | D_MASK
 		};
 
 		explicit DoubleCrossSwitch(

@@ -6,7 +6,7 @@
 #include <QTest>
 #include <QStringLiteral>
 
-#include <can/commands.h>
+#include <can/mrwmessage.h>
 #include <model/switchmodulereference.h>
 #include <model/controller.h>
 #include <model/lightsignal.h>
@@ -149,6 +149,9 @@ void TestModel::testRegularSwitchStates()
 		QCOMPARE(part->state(), RegularSwitch::State::AC);
 		QCOMPARE(part->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 		QCOMPARE(part->commandState(), Command::SETRGT);
+
+		part->setState(RegularSwitch::State(0xff));
+		QVERIFY_EXCEPTION_THROWN(part->commandState(), std::invalid_argument);
 	}
 }
 
@@ -399,6 +402,24 @@ void TestModel::testPosition()
 	QCOMPARE(copy, position2);
 	QVERIFY(position1 == position2);
 	QCOMPARE(position2.bending(), Bending::STRAIGHT);
+}
+
+void TestModel::testDevice()
+{
+	std::vector<Device *> devices;
+
+	model->parts<Device>(devices);
+	for (Device * device : devices)
+	{
+		MrwMessage message = device->command(PING);
+
+		QCOMPARE(message.command(), PING);
+		QCOMPARE(message.unitNo(), device->unitNo());
+		QCOMPARE(message.sid(), device->controller()->id());
+
+		QCOMPARE(model->deviceByUnitNo(device->unitNo()), device);
+		QCOMPARE(model->controllerById(device->controller()->id()), device->controller());
+	}
 }
 
 void TestModel::testSection(Region * region, Section * section)

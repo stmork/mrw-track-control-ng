@@ -40,6 +40,7 @@ namespace mrw::test
 		void testParsingPosition();
 		void testExtension();
 		void testPosition();
+		void testDevice();
 	};
 }
 

@@ -7,6 +7,9 @@
 
 #include <QTest>
 
+#include <model/regularswitch.h>
+#include <model/doublecrossswitch.h>
+
 #include "testrouting.h"
 
 using namespace mrw::test;
@@ -90,6 +93,13 @@ void TestRouting::testExtension()
 
 	QVERIFY(route.extend(parts[19]));
 	QVERIFY(verify(route));
+
+	route.prepare();
+	QCOMPARE(static_cast<RegularSwitch *>(parts[2])->state(), RegularSwitch::State::AC);
+	QCOMPARE(static_cast<RegularSwitch *>(parts[9])->state(), RegularSwitch::State::AB);
+	QCOMPARE(static_cast<DoubleCrossSwitch *>(parts[13])->state(), DoubleCrossSwitch::State::BC);
+	QCOMPARE(static_cast<RegularSwitch *>(parts[8])->state(),  RegularSwitch::State::AB);
+	QCOMPARE(static_cast<RegularSwitch *>(parts[18])->state(), RegularSwitch::State::AB);
 
 	route.clear();
 	QVERIFY(verify(route));
