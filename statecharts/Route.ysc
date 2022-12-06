@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_L62MwHWAEe2cXugcT2PGGw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;&#xA;in event turned&#xA;in event failed&#xA;in event disable&#xA;in event extended&#xA;&#xA;operation turnSwitches()&#xA;operation activateSections()&#xA;operation turnSignals()&#xA;operation deactivateSections()" namespace="mrw.statechart" name="RouteStatechart">
+  <sgraph:Statechart xmi:id="_L62MwHWAEe2cXugcT2PGGw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;&#xA;in event turned&#xA;in event failed&#xA;in event disable&#xA;in event extended&#xA;&#xA;operation reset()&#xA;operation turnSwitches()&#xA;operation activateSections()&#xA;operation turnSignals()&#xA;operation deactivateSections()" namespace="mrw.statechart" name="RouteStatechart">
     <regions xmi:id="_L64B-3WAEe2cXugcT2PGGw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_L64B_HWAEe2cXugcT2PGGw">
         <outgoingTransitions xmi:id="_L64B_XWAEe2cXugcT2PGGw" target="_lSD6YHWFEe2oVZ4yFrzfuw"/>
@@ -18,12 +18,12 @@
         <outgoingTransitions xmi:id="_RgtMkHWBEe2oVZ4yFrzfuw" specification="after timeout ms" target="_59hPEHWAEe2oVZ4yFrzfuw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_yYvPAHWAEe2oVZ4yFrzfuw" name="Active" incomingTransitions="_yyE8EHWAEe2oVZ4yFrzfuw">
-        <outgoingTransitions xmi:id="_SeMvkHWBEe2oVZ4yFrzfuw" specification="after timeout ms" target="_59hPEHWAEe2oVZ4yFrzfuw"/>
-        <outgoingTransitions xmi:id="_iuFhwHWFEe2oVZ4yFrzfuw" target="_L64pAHWAEe2cXugcT2PGGw"/>
+        <outgoingTransitions xmi:id="_SeMvkHWBEe2oVZ4yFrzfuw" specification="disable" target="_59hPEHWAEe2oVZ4yFrzfuw"/>
+        <outgoingTransitions xmi:id="_iuFhwHWFEe2oVZ4yFrzfuw" specification="extended" target="_L64pAHWAEe2cXugcT2PGGw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_59hPEHWAEe2oVZ4yFrzfuw" specification="entry / deactivateSections" name="Disable" incomingTransitions="_EC0EEHWBEe2oVZ4yFrzfuw _GRx2AHWBEe2oVZ4yFrzfuw _RgtMkHWBEe2oVZ4yFrzfuw _SeMvkHWBEe2oVZ4yFrzfuw"/>
       <vertices xsi:type="sgraph:State" xmi:id="_lSD6YHWFEe2oVZ4yFrzfuw" name="Start" incomingTransitions="_L64B_XWAEe2cXugcT2PGGw">
-        <outgoingTransitions xmi:id="_oCR_QHWFEe2oVZ4yFrzfuw" specification="extended" target="_L64pAHWAEe2cXugcT2PGGw"/>
+        <outgoingTransitions xmi:id="_oCR_QHWFEe2oVZ4yFrzfuw" specification="extended / reset" target="_L64pAHWAEe2cXugcT2PGGw"/>
       </vertices>
     </regions>
   </sgraph:Statechart>
@@ -218,7 +218,7 @@
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_GRzEIXWBEe2oVZ4yFrzfuw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_GRzEI3WBEe2oVZ4yFrzfuw" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_GRzEInWBEe2oVZ4yFrzfuw" points="[19, 45, -56, -110]$[19, 129, -56, -26]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_GRzEInWBEe2oVZ4yFrzfuw" points="[-13, 45, -88, -110]$[-13, 129, -88, -26]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_GR05UHWBEe2oVZ4yFrzfuw" id="(0.5705882352941176,0.1509433962264151)"/>
     </edges>
     <edges xmi:id="_RguasHWBEe2oVZ4yFrzfuw" type="Transition" element="_RgtMkHWBEe2oVZ4yFrzfuw" source="_h0k5IHWAEe2oVZ4yFrzfuw" target="_59idMHWAEe2oVZ4yFrzfuw">

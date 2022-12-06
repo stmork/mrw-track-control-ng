@@ -702,7 +702,7 @@ namespace mrw
 		void SwitchStatechart::react_main_region_Operating_operating_Turning_r1__choice_0()
 		{
 			/* The reactions of state null. */
-			if (ifaceOperationCallback->isTurnedLeft())
+			if (ifaceOperationCallback->doTurnLeft())
 			{
 				enseq_main_region_Operating_operating_Turning_r1_Turn_Left_default();
 			}

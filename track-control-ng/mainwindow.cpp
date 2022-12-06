@@ -174,6 +174,10 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 		&statechart, &OperatingMode::editing,
 		this, &MainWindow::onEdit,
 		Qt::QueuedConnection);
+	connect(
+		&statechart, &OperatingMode::failed,
+		this, &MainWindow::onFailed,
+		Qt::QueuedConnection);
 }
 
 void MainWindow::enable()
@@ -522,11 +526,11 @@ void MainWindow::on_actionTurnSwitch_triggered()
 
 		if (rs_ctrl != nullptr)
 		{
-			rs_ctrl->turn();
+			rs_ctrl->change();
 		}
 		if (dcs_ctrl != nullptr)
 		{
-			dcs_ctrl->turn();
+			dcs_ctrl->change();
 		}
 	});
 	on_clearAllSections_clicked();
@@ -573,6 +577,13 @@ void MainWindow::onEdit(const bool active)
 	ui->regionTabWidget->currentWidget()->update();
 }
 
+void MainWindow::onFailed()
+{
+	__METHOD__;
+
+	ControllerRegistry::instance().dump();
+}
+
 void MainWindow::reset()
 {
 	__METHOD__;
@@ -599,6 +610,8 @@ Route * MainWindow::create(const bool direction, SectionState state)
 	ui->routeListWidget->addItem(*route);
 	ui->regionTabWidget->currentWidget()->update();
 	on_clearAllSections_clicked();
+
+	route->turn();
 
 	return route;
 }

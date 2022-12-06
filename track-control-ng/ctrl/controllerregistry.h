@@ -51,6 +51,7 @@ namespace mrw::ctrl
 		void increase(ControllerRegistrand * ctrl);
 		void decrease(ControllerRegistrand * ctrl);
 		void reset();
+		void dump();
 
 	signals:
 		void inquire();

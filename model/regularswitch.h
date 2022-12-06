@@ -74,10 +74,7 @@ namespace mrw::model
 		 * @param state The new internal state.
 		 * @see commandState()
 		 */
-		inline void setState(const State state)
-		{
-			switch_state = state;
-		}
+		void setState(const State state);
 
 		void setState(const RailPart * left, const RailPart * right) override;
 

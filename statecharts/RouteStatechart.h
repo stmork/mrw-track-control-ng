@@ -77,8 +77,7 @@ namespace mrw
 				extended,
 				_te0_main_region_Switch_Turning_,
 				_te1_main_region_Section_Activation_,
-				_te2_main_region_Signal_Turning_,
-				_te3_main_region_Active_
+				_te2_main_region_Signal_Turning_
 			};
 
 			class EventInstance
@@ -103,6 +102,8 @@ namespace mrw
 			{
 			public:
 				virtual ~OperationCallback() = 0;
+
+				virtual void reset() = 0;
 
 				virtual void turnSwitches() = 0;
 
@@ -160,7 +161,7 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 4;
+			static const sc::integer timeEventsCount = 3;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
@@ -211,8 +212,6 @@ namespace mrw
 			OperationCallback * ifaceOperationCallback;
 
 
-			bool completed;
-			bool doCompletion;
 			bool isExecuting;
 			bool stateConfVectorChanged;
 
@@ -222,12 +221,10 @@ namespace mrw
 			void enact_main_region_Switch_Turning();
 			void enact_main_region_Section_Activation();
 			void enact_main_region_Signal_Turning();
-			void enact_main_region_Active();
 			void enact_main_region_Disable();
 			void exact_main_region_Switch_Turning();
 			void exact_main_region_Section_Activation();
 			void exact_main_region_Signal_Turning();
-			void exact_main_region_Active();
 			void enseq_main_region_Switch_Turning_default();
 			void enseq_main_region_Section_Activation_default();
 			void enseq_main_region_Signal_Turning_default();

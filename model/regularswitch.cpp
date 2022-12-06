@@ -33,6 +33,11 @@ RegularSwitch::RegularSwitch(
 	}
 }
 
+void mrw::model::RegularSwitch::setState(const mrw::model::RegularSwitch::State state)
+{
+	switch_state = state;
+}
+
 void RegularSwitch::setState(
 	const RailPart * left,
 	const RailPart * right)

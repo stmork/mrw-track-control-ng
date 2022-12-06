@@ -71,6 +71,7 @@ private slots:
 
 	void onOperate(const bool active);
 	void onEdit(const bool active);
+	void onFailed();
 
 private:
 	void initRegion();
@@ -108,6 +109,8 @@ private:
 
 	Ui::MainWindow  * ui;
 	ModelRepository & repo;
+
 	mrw::statechart::OperatingMode   statechart;
 };
+
 #endif // MAINWINDOW_H

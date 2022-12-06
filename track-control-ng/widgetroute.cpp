@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <QMetaMethod>
+
 #include <statecharts/timerservice.h>
 #include <ctrl/controllerregistry.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
@@ -28,7 +30,8 @@ WidgetRoute::WidgetRoute(
 
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::completed,
-		&statechart, &RouteStatechart::turned);
+		&statechart, &RouteStatechart::turned,
+		Qt::QueuedConnection);
 
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
@@ -38,6 +41,16 @@ WidgetRoute::WidgetRoute(
 WidgetRoute::~WidgetRoute()
 {
 	statechart.exit();
+}
+
+void WidgetRoute::turn()
+{
+	QMetaObject::invokeMethod(&statechart, &RouteStatechart::extended, Qt::QueuedConnection);
+}
+
+void WidgetRoute::reset()
+{
+	ControllerRegistry::instance().reset();
 }
 
 WidgetRoute::operator QListWidgetItem * ()
@@ -62,11 +75,11 @@ void WidgetRoute::turnSwitches()
 
 			if (rs_ctrl != nullptr)
 			{
-				rs_ctrl->turn();
+				QMetaObject::invokeMethod(rs_ctrl, &RegularSwitchControllerProxy::turn, Qt::QueuedConnection);
 			}
 			if (dcs_ctrl != nullptr)
 			{
-				dcs_ctrl->turn();
+				QMetaObject::invokeMethod(dcs_ctrl, &DoubleCrossSwitchControllerProxy::turn, Qt::QueuedConnection);
 			}
 		}
 	}
@@ -80,7 +93,7 @@ void WidgetRoute::activateSections()
 
 		SectionController * proxy = dynamic_cast<SectionController *>(controller);
 
-		proxy->on();
+		QMetaObject::invokeMethod(proxy, &SectionController::on, Qt::QueuedConnection);
 	}
 }
 
@@ -98,6 +111,6 @@ void WidgetRoute::deactivateSections()
 
 		SectionController * proxy = dynamic_cast<SectionController *>(controller);
 
-		proxy->off();
+		QMetaObject::invokeMethod(proxy, &SectionController::off, Qt::QueuedConnection);
 	}
 }

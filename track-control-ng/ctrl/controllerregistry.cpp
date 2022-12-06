@@ -66,7 +66,7 @@ void ControllerRegistry::increase(ControllerRegistrand * element)
 	if (transaction.find(element) == transaction.end())
 	{
 		transaction.emplace(element);
-		qDebug().noquote() << "Transaction increased to" << transaction.size() << "elements: " << ctrl->name();
+		qDebug().noquote() << "Transaction increased to" << transaction.size() << "element(s). Added: " << ctrl->name();
 	}
 	else
 	{
@@ -82,10 +82,11 @@ void ControllerRegistry::decrease(ControllerRegistrand * element)
 	Q_ASSERT(ctrl != nullptr);
 	if (count == 1)
 	{
-		qDebug().noquote() << "Transaction decreased to" << transaction.size() << "elements: " << ctrl->name();
+		qDebug().noquote() << "Transaction decreased to" << transaction.size() << "element(s). Removed: " << ctrl->name();
 
 		if (transaction.size() == 0)
 		{
+			qDebug("Transaction completed.");
 			emit completed();
 		}
 	}
@@ -97,6 +98,16 @@ void ControllerRegistry::decrease(ControllerRegistrand * element)
 
 void ControllerRegistry::reset()
 {
+	__METHOD__;
+
 	qDebug("Transaction left %zu elements.", transaction.size());
 	transaction.clear();
+}
+
+void mrw::ctrl::ControllerRegistry::dump()
+{
+	for (ControllerRegistrand * registrand : transaction)
+	{
+		qDebug() << *registrand;
+	}
 }

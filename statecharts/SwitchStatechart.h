@@ -125,7 +125,7 @@ namespace mrw
 
 				virtual void request() = 0;
 
-				virtual bool isTurnedLeft() = 0;
+				virtual bool doTurnLeft() = 0;
 
 				virtual bool isFree() = 0;
 

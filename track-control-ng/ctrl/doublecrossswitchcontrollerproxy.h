@@ -35,6 +35,7 @@ namespace mrw::ctrl
 		virtual ~DoubleCrossSwitchControllerProxy();
 
 		void turnLeft();
+		void change();
 		void turn();
 		void turnRight();
 
@@ -56,7 +57,8 @@ namespace mrw::ctrl
 		virtual mrw::model::RailPart * railPart() const override;
 
 		// Implementations from ControllerRegistrand
-		virtual bool process(const can::MrwMessage & message) override;
+		virtual bool    process(const can::MrwMessage & message) override;
+		virtual QString toString() const override;
 
 		// Implementations from OperationCallback
 		virtual void inc() override;
@@ -65,7 +67,7 @@ namespace mrw::ctrl
 		virtual void left() override;
 		virtual void right() override;
 		virtual void request() override;
-		virtual bool isTurnedLeft() override;
+		virtual bool doTurnLeft() override;
 		virtual bool isFree() override;
 
 		virtual void pending() override;

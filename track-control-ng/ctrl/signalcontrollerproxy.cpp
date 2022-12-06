@@ -133,6 +133,17 @@ SignalController::TourState SignalControllerProxy::main() const
 	return TourState::STOP;
 }
 
+bool mrw::ctrl::SignalControllerProxy::process(const MrwMessage & message)
+{
+	// TODO: Implement later!
+	return ControllerRegistrand::process(message);
+}
+
+QString mrw::ctrl::SignalControllerProxy::toString() const
+{
+	return *base_signal;
+}
+
 SignalController::TourState SignalControllerProxy::distant() const
 {
 	return TourState::STOP;

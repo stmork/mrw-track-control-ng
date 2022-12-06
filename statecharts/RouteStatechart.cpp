@@ -23,8 +23,6 @@ namespace mrw
 			timeout(2000),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
-			completed(false),
-			doCompletion(false),
 			isExecuting(false),
 			stateConfVectorChanged(false),
 			turned_raised(false),
@@ -95,7 +93,6 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::Event::_te0_main_region_Switch_Turning_:
 			case mrw::statechart::RouteStatechart::Event::_te1_main_region_Section_Activation_:
 			case mrw::statechart::RouteStatechart::Event::_te2_main_region_Signal_Turning_:
-			case mrw::statechart::RouteStatechart::Event::_te3_main_region_Active_:
 				{
 					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::RouteStatechart::Event::_te0_main_region_Switch_Turning_)] = true;
 					break;
@@ -272,13 +269,6 @@ namespace mrw
 			ifaceOperationCallback->turnSignals();
 		}
 
-		void RouteStatechart::enact_main_region_Active()
-		{
-			/* Entry action for state 'Active'. */
-			timerService->setTimer(this, 3, timeout, false);
-			completed = true;
-		}
-
 		/* Entry action for state 'Disable'. */
 		void RouteStatechart::enact_main_region_Disable()
 		{
@@ -305,13 +295,6 @@ namespace mrw
 		{
 			/* Exit action for state 'Signal Turning'. */
 			timerService->unsetTimer(this, 2);
-		}
-
-		/* Exit action for state 'Active'. */
-		void RouteStatechart::exact_main_region_Active()
-		{
-			/* Exit action for state 'Active'. */
-			timerService->unsetTimer(this, 3);
 		}
 
 		/* 'default' enter sequence for state Switch Turning */
@@ -345,7 +328,6 @@ namespace mrw
 		void RouteStatechart::enseq_main_region_Active_default()
 		{
 			/* 'default' enter sequence for state Active */
-			enact_main_region_Active();
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Active;
 			stateConfVectorChanged = true;
 		}
@@ -403,7 +385,6 @@ namespace mrw
 		{
 			/* Default exit sequence for state Active */
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
-			exact_main_region_Active();
 		}
 
 		/* Default exit sequence for state Disable */
@@ -480,34 +461,31 @@ namespace mrw
 		{
 			/* The reactions of state Switch Turning. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
+				if (turned_raised)
 				{
-					if (turned_raised)
+					exseq_main_region_Switch_Turning();
+					enseq_main_region_Section_Activation_default();
+					react(0);
+					transitioned_after = 0;
+				}
+				else
+				{
+					if (timeEvents[0])
 					{
 						exseq_main_region_Switch_Turning();
-						enseq_main_region_Section_Activation_default();
+						timeEvents[0] = false;
+						enseq_main_region_Disable_default();
 						react(0);
 						transitioned_after = 0;
 					}
-					else
-					{
-						if (timeEvents[0])
-						{
-							exseq_main_region_Switch_Turning();
-							timeEvents[0] = false;
-							enseq_main_region_Disable_default();
-							react(0);
-							transitioned_after = 0;
-						}
-					}
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -516,34 +494,31 @@ namespace mrw
 		{
 			/* The reactions of state Section Activation. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
+				if (turned_raised)
 				{
-					if (turned_raised)
+					exseq_main_region_Section_Activation();
+					enseq_main_region_Signal_Turning_default();
+					react(0);
+					transitioned_after = 0;
+				}
+				else
+				{
+					if (timeEvents[1])
 					{
 						exseq_main_region_Section_Activation();
-						enseq_main_region_Signal_Turning_default();
+						timeEvents[1] = false;
+						enseq_main_region_Disable_default();
 						react(0);
 						transitioned_after = 0;
 					}
-					else
-					{
-						if (timeEvents[1])
-						{
-							exseq_main_region_Section_Activation();
-							timeEvents[1] = false;
-							enseq_main_region_Disable_default();
-							react(0);
-							transitioned_after = 0;
-						}
-					}
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -552,34 +527,31 @@ namespace mrw
 		{
 			/* The reactions of state Signal Turning. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
+				if (turned_raised)
 				{
-					if (turned_raised)
+					exseq_main_region_Signal_Turning();
+					enseq_main_region_Active_default();
+					react(0);
+					transitioned_after = 0;
+				}
+				else
+				{
+					if (timeEvents[2])
 					{
 						exseq_main_region_Signal_Turning();
-						enseq_main_region_Active_default();
+						timeEvents[2] = false;
+						enseq_main_region_Disable_default();
 						react(0);
 						transitioned_after = 0;
 					}
-					else
-					{
-						if (timeEvents[2])
-						{
-							exseq_main_region_Signal_Turning();
-							timeEvents[2] = false;
-							enseq_main_region_Disable_default();
-							react(0);
-							transitioned_after = 0;
-						}
-					}
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -588,35 +560,30 @@ namespace mrw
 		{
 			/* The reactions of state Active. */
 			sc::integer transitioned_after = transitioned_before;
-			if (doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				/* Default exit sequence for state Active */
-				stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
-				exact_main_region_Active();
-				/* 'default' enter sequence for state Switch Turning */
-				enact_main_region_Switch_Turning();
-				stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Switch_Turning;
-				stateConfVectorChanged = true;
-				react(0);
-			}
-			else
-			{
-				if ((transitioned_after) < (0))
+				if (disable_raised)
 				{
-					if (timeEvents[3])
+					exseq_main_region_Active();
+					enseq_main_region_Disable_default();
+					react(0);
+					transitioned_after = 0;
+				}
+				else
+				{
+					if (extended_raised)
 					{
 						exseq_main_region_Active();
-						timeEvents[3] = false;
-						enseq_main_region_Disable_default();
+						enseq_main_region_Switch_Turning_default();
 						react(0);
 						transitioned_after = 0;
 					}
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -625,16 +592,13 @@ namespace mrw
 		{
 			/* The reactions of state Disable. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
-				{
-				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -643,23 +607,21 @@ namespace mrw
 		{
 			/* The reactions of state Start. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
+				if (extended_raised)
 				{
-					if (extended_raised)
-					{
-						exseq_main_region_Start();
-						enseq_main_region_Switch_Turning_default();
-						react(0);
-						transitioned_after = 0;
-					}
+					exseq_main_region_Start();
+					ifaceOperationCallback->reset();
+					enseq_main_region_Switch_Turning_default();
+					react(0);
+					transitioned_after = 0;
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -673,7 +635,6 @@ namespace mrw
 			timeEvents[0] = false;
 			timeEvents[1] = false;
 			timeEvents[2] = false;
-			timeEvents[3] = false;
 		}
 
 		void RouteStatechart::microStep()
@@ -727,27 +688,16 @@ namespace mrw
 			dispatchEvent(getNextEvent());
 			do
 			{
-				doCompletion = false;
 				do
 				{
-					if (completed)
-					{
-						doCompletion = true;
-					}
-					completed = false;
-					do
-					{
-						stateConfVectorChanged = false;
-						microStep();
-					}
-					while (stateConfVectorChanged);
-					doCompletion = false;
+					stateConfVectorChanged = false;
+					microStep();
 				}
-				while (completed);
+				while (stateConfVectorChanged);
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((((turned_raised) || (failed_raised)) || (disable_raised)) || (extended_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3]));
+			while (((((((turned_raised) || (failed_raised)) || (disable_raised)) || (extended_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
 			isExecuting = false;
 		}
 
@@ -764,18 +714,7 @@ namespace mrw
 			do
 			{
 				stateConfVectorChanged = false;
-				doCompletion = false;
-				do
-				{
-					if (completed)
-					{
-						doCompletion = true;
-					}
-					completed = false;
-					microStep();
-					doCompletion = false;
-				}
-				while (completed);
+				microStep();
 			}
 			while (stateConfVectorChanged);
 			isExecuting = false;

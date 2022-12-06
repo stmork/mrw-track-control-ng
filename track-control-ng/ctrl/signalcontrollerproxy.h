@@ -58,6 +58,10 @@ namespace mrw::ctrl
 		TourState       distant() const override;
 		TourState       shunt() const override;
 		TourState       main() const override;
+
+		// Implementations from ControllerRegistrand
+		virtual bool    process(const can::MrwMessage & message) override;
+		virtual QString toString() const override;
 	};
 }
 

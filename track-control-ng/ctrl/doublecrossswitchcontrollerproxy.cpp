@@ -60,11 +60,16 @@ void DoubleCrossSwitchControllerProxy::turnLeft()
 	statechart.turn();
 }
 
-void DoubleCrossSwitchControllerProxy::turn()
+void mrw::ctrl::DoubleCrossSwitchControllerProxy::change()
 {
-	part->setState(isTurnedLeft() ?
+	part->setState(doTurnLeft() ?
 		DoubleCrossSwitch::State::BC :
 		DoubleCrossSwitch::State::AC);
+	statechart.turn();
+}
+
+void DoubleCrossSwitchControllerProxy::turn()
+{
 	statechart.turn();
 }
 
@@ -172,6 +177,11 @@ bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 	return false;
 }
 
+QString mrw::ctrl::DoubleCrossSwitchControllerProxy::toString() const
+{
+	return *part;
+}
+
 void DoubleCrossSwitchControllerProxy::inc()
 {
 	ControllerRegistry::instance().increase(this);
@@ -213,7 +223,7 @@ void DoubleCrossSwitchControllerProxy::request()
 	ControllerRegistry::can()->write(command);
 }
 
-bool DoubleCrossSwitchControllerProxy::isTurnedLeft()
+bool DoubleCrossSwitchControllerProxy::doTurnLeft()
 {
 	__METHOD__;
 

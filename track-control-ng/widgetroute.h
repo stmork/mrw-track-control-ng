@@ -38,7 +38,11 @@ public:
 
 	operator QListWidgetItem * ();
 
+	void turn();
+
 private:
+
+	virtual void reset() override;
 	virtual void turnSwitches() override;
 	virtual void activateSections() override;
 	virtual void turnSignals() override;

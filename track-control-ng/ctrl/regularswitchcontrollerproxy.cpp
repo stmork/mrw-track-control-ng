@@ -59,11 +59,16 @@ void RegularSwitchControllerProxy::turnLeft()
 	statechart.turn();
 }
 
-void RegularSwitchControllerProxy::turn()
+void RegularSwitchControllerProxy::change()
 {
-	part->setState(isTurnedLeft() ?
+	part->setState(isLeft() ?
 		RegularSwitch::State::AC :
 		RegularSwitch::State::AB);
+	statechart.turn();
+}
+
+void RegularSwitchControllerProxy::turn()
+{
 	statechart.turn();
 }
 
@@ -196,6 +201,11 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 	return false;
 }
 
+QString RegularSwitchControllerProxy::toString() const
+{
+	return *part;
+}
+
 void RegularSwitchControllerProxy::inc()
 {
 	ControllerRegistry::instance().increase(this);
@@ -235,7 +245,7 @@ void RegularSwitchControllerProxy::request()
 	ControllerRegistry::can()->write(command);
 }
 
-bool RegularSwitchControllerProxy::isTurnedLeft()
+bool RegularSwitchControllerProxy::doTurnLeft()
 {
 	__METHOD__;
 

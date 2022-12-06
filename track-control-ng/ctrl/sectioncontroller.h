@@ -58,7 +58,8 @@ namespace mrw::ctrl
 		virtual mrw::model::Position::Bending bending() const override;
 
 		// Implementations from ControllerRegistrand
-		virtual bool process(const can::MrwMessage & message) override;
+		virtual bool    process(const can::MrwMessage & message) override;
+		virtual QString toString() const override;
 	};
 }
 
