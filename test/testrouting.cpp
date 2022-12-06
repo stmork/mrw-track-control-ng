@@ -107,6 +107,47 @@ void TestRouting::testExtension()
 	QVERIFY(empty());
 }
 
+void TestRouting::testOccupation()
+{
+	Route                    route(true, SectionState::SHUNTING, parts[1]);
+	const Route::Track   &   reserved = route;
+
+	QVERIFY(verify(route));
+
+	parts[14]->section()->setOccupation();
+
+	QVERIFY(route.extend(parts[19]));
+	QVERIFY(verify(route));
+
+	route.prepare();
+	QCOMPARE(static_cast<RegularSwitch *>(parts[2])->state(),  RegularSwitch::State::AB);
+	QCOMPARE(static_cast<RegularSwitch *>(parts[3])->state(),  RegularSwitch::State::AB);
+	QCOMPARE(static_cast<RegularSwitch *>(parts[6])->state(),  RegularSwitch::State::AB);
+	QCOMPARE(static_cast<RegularSwitch *>(parts[8])->state(),  RegularSwitch::State::AC);
+	QCOMPARE(static_cast<RegularSwitch *>(parts[18])->state(), RegularSwitch::State::AB);
+
+	route.clear();
+	QVERIFY(verify(route));
+	QCOMPARE(reserved.size(), 0);
+	QVERIFY(empty());
+}
+
+void TestRouting::testInverseFail()
+{
+	Route                    route(false, SectionState::SHUNTING, parts[1]);
+	const Route::Track   &   reserved = route;
+
+	QVERIFY(verify(route));
+
+	QVERIFY(!route.extend(parts[19]));
+	QVERIFY(verify(route));
+
+	route.clear();
+	QVERIFY(verify(route));
+	QCOMPARE(reserved.size(), 0);
+	QVERIFY(empty());
+}
+
 bool TestRouting::verify(const Route & route) const
 {
 	return verify( { & route } );
