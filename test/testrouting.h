@@ -30,9 +30,13 @@ namespace mrw::test
 		void init();
 
 		void testSimple();
+		void testCounterPart();
+		void testCrossBlocked();
 
 	private:
 		bool verify(const model::Route & route) const;
+		bool verify(std::initializer_list<const model::Route *> routes) const;
+		bool empty() const;
 	};
 }
 

@@ -49,8 +49,6 @@ Route::Route(
 
 	first->reserve();
 	track.push_back(first);
-//	list_item.setText(first_section->key());
-//	list_item.setData(USER_ROLE, QVariant::fromValue(this));
 }
 
 Route::~Route()
