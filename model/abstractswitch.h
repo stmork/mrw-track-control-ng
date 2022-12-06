@@ -65,6 +65,13 @@ namespace mrw::model
 		 */
 		virtual mrw::can::SwitchState switchState() const = 0;
 
+		/**
+		 * This method returns the CAN command corresponding to the internal
+		 * switch State.
+		 *
+		 * @return The corresponing CAN mrw::can::Command to reach the state.
+		 * @see mrw::can::Command
+		 */
 		mrw::can::Command commandState() const;
 
 	protected:
@@ -77,6 +84,30 @@ namespace mrw::model
 		 * in dthe flank_switches vector.
 		 */
 		virtual void findFlankSwitches() = 0;
+
+		/**
+		 * This method follows a connection part if it is directly connected
+		 * to a RegularSwitch or indirectly connected using a Rail.
+		 *
+		 * @param part The RailPart to follow to a paired switch.
+		 * @return The paired RegularSwitch if any or @c nullptr.
+		 * @note This method is needed to find a paired flank switch but a
+		 * found RegularSwitch is only a candidate for a flank switch.
+		 */
+		RegularSwitch * follow(RailPart * part) const;
+
+		/**
+		 * This method determines if the given candidate for a paired flank
+		 * switch is really linked to the AbstractSwitch to test to.
+		 *
+		 * @param candidate The flank switch candidate to test. This is a non
+		 * @c nullptr result from the follow() method.
+		 * @param self The local flank switch pair.
+		 * @return True if the candidate and self parameter are paired
+		 * flank switches.
+		 * @see follow()
+		 */
+		bool linked(RailPart * candidate, AbstractSwitch * self) const;
 	};
 }
 

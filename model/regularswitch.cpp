@@ -80,14 +80,14 @@ void RegularSwitch::link()
 
 void RegularSwitch::findFlankSwitches()
 {
-	RegularSwitch * b_switch = dynamic_cast<RegularSwitch *>(b);
-	RegularSwitch * c_switch = dynamic_cast<RegularSwitch *>(c);
+	RegularSwitch * b_switch = follow(b);
+	RegularSwitch * c_switch = follow(c);
 
-	if ((b_switch != nullptr) && (b_switch->b == this))
+	if ((b_switch != nullptr) && linked(b_switch->b, this))
 	{
 		flank_switches.insert(b_switch);
 	}
-	if ((c_switch != nullptr) && (c_switch->c == this))
+	if ((c_switch != nullptr) && linked(c_switch->c, this))
 	{
 		flank_switches.insert(c_switch);
 	}

@@ -175,7 +175,7 @@ void Section::findSignalPair()
 
 QString Section::toString() const
 {
-	return QString::asprintf("    Sec %c        : [%04x] ",
+	return QString::asprintf("    Sec %c         : [%04x] ",
 			valid() ? 'V' : '-', unitNo()) + name();
 }
 

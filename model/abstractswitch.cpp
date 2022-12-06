@@ -5,8 +5,8 @@
 
 #include <can/commands.h>
 #include <model/modelrailway.h>
-
-#include "abstractswitch.h"
+#include <model/regularswitch.h>
+#include <model/rail.h>
 
 using namespace mrw::can;
 using namespace mrw::model;
@@ -26,7 +26,7 @@ bool AbstractSwitch::isFlankProtection(AbstractSwitch * other) const
 	return flank_switches.find(other) != flank_switches.end();
 }
 
-mrw::can::Command AbstractSwitch::commandState() const
+Command AbstractSwitch::commandState() const
 {
 	switch (switchState())
 	{
@@ -38,4 +38,45 @@ mrw::can::Command AbstractSwitch::commandState() const
 	}
 
 	throw std::invalid_argument("Command state not allowed!");
+}
+
+RegularSwitch * AbstractSwitch::follow(RailPart * part) const
+{
+	Rail * rail = dynamic_cast<Rail *>(part);
+
+	if (rail != nullptr)
+	{
+		// If this is backward
+		if (rail->contains(this, false))
+		{
+			// Take forward.
+			part = *rail->advance(false).begin();
+		}
+
+		// If this is forward
+		if (rail->contains(this, true))
+		{
+			// Take backward.
+			part = *rail->advance(true).begin();
+		}
+	}
+	return dynamic_cast<RegularSwitch *>(part);
+}
+
+bool AbstractSwitch::linked(RailPart * candidate, AbstractSwitch * self) const
+{
+	const Rail * rail = dynamic_cast<Rail *>(candidate);
+
+	if (candidate == self)
+	{
+		// OK, directly connected.
+		return true;
+	}
+
+	if (rail != nullptr)
+	{
+		// Test if indirectly connected using a simple Rail.
+		return rail->contains(self, true) != rail->contains(self, false);
+	}
+	return false;
 }

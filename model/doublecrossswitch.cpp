@@ -3,9 +3,9 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "model/modelrailway.h"
-#include "model/doublecrossswitch.h"
-#include "model/regularswitch.h"
+#include <model/modelrailway.h>
+#include <model/doublecrossswitch.h>
+#include <model/regularswitch.h>
 
 using namespace mrw::can;
 using namespace mrw::model;
@@ -60,24 +60,24 @@ void DoubleCrossSwitch::link()
 
 void DoubleCrossSwitch::findFlankSwitches()
 {
-	RegularSwitch * a_switch = dynamic_cast<RegularSwitch *>(a);
-	RegularSwitch * b_switch = dynamic_cast<RegularSwitch *>(b);
-	RegularSwitch * c_switch = dynamic_cast<RegularSwitch *>(c);
-	RegularSwitch * d_switch = dynamic_cast<RegularSwitch *>(d);
+	RegularSwitch * a_switch = follow(a);
+	RegularSwitch * b_switch = follow(b);
+	RegularSwitch * c_switch = follow(c);
+	RegularSwitch * d_switch = follow(d);
 
-	if ((a_switch != nullptr) && (a_switch->c == this))
+	if ((a_switch != nullptr) && linked(a_switch->c, this))
 	{
 		flank_switches.insert(a_switch);
 	}
-	if ((b_switch != nullptr) && (b_switch->b == this))
+	if ((b_switch != nullptr) && linked(b_switch->b, this))
 	{
 		flank_switches.insert(b_switch);
 	}
-	if ((c_switch != nullptr) && (c_switch->b == this))
+	if ((c_switch != nullptr) && linked(c_switch->b, this))
 	{
 		flank_switches.insert(c_switch);
 	}
-	if ((d_switch != nullptr) && (d_switch->c == this))
+	if ((d_switch != nullptr) && linked(d_switch->c, this))
 	{
 		flank_switches.insert(d_switch);
 	}
