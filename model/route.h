@@ -36,6 +36,11 @@ namespace mrw::model
 			QObject       *      parent = nullptr);
 		virtual ~Route();
 
+		inline operator const std::list<RailPart *> & () const
+		{
+			return track;
+		}
+
 		bool extend(RailPart * target);
 		bool extend(RailPart * rail, RailPart * target);
 		void prepare();

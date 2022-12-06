@@ -15,6 +15,7 @@ SOURCES += \
 	testmodel.cpp \
 	testmodelbase.cpp \
 	testnumbering.cpp \
+	testrouting.cpp \
 	testunknown.cpp \
 	testswitch.cpp \
 	testlight.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
 	testmodel.h \
 	testmodelbase.h \
 	testnumbering.h \
+	testrouting.h \
 	testunknown.h \
 	testswitch.h \
 	testlight.h \

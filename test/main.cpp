@@ -18,6 +18,7 @@
 #include "testflankswitch.h"
 #include "testnumbering.h"
 #include "testunknown.h"
+#include "testrouting.h"
 
 using namespace mrw::test;
 using namespace mrw::util;
@@ -110,6 +111,17 @@ static int testFlankSwitch()
 	return QTest::qExec(&test, args);
 }
 
+static int testRouting()
+{
+	TestRouting     test;
+	QStringList     args
+	{
+		"MRW-Test", "-o", "qtest-route.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
 int main(int argc, char * argv[])
 {
 	QCoreApplication  app(argc, argv);
@@ -126,6 +138,7 @@ int main(int argc, char * argv[])
 	status += testNumbering();
 	status += testUnknown();
 	status += testFlankSwitch();
+	status += testRouting();
 
 	if (status == 0)
 	{
