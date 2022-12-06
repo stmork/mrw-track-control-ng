@@ -1,4 +1,9 @@
-/* Copyright (C) Steffen A. Mork */
+/* *
+//
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+//
+* */
 
 #ifndef SECTIONSTATECHART_H_
 #define SECTIONSTATECHART_H_

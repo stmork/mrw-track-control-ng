@@ -1,4 +1,9 @@
-/* Copyright (C) Steffen A. Mork */
+/* *
+//
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+//
+* */
 
 #ifndef OPERATINGMODE_H_
 #define OPERATINGMODE_H_
