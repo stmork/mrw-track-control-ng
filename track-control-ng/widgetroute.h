@@ -11,15 +11,20 @@
 #include <QObject>
 #include <QListWidgetItem>
 
+#include <statecharts/RouteStatechart.h>
 #include <model/section.h>
 #include <model/route.h>
 
-class WidgetRoute : public mrw::model::Route
+class WidgetRoute :
+	public mrw::model::Route,
+	public mrw::statechart::RouteStatechart::OperationCallback
 {
 	Q_OBJECT
 
 private:
 	QListWidgetItem list_item;
+
+	mrw::statechart::RouteStatechart statechart;
 
 public:
 	static const int        USER_ROLE = Qt::UserRole + 1;
@@ -29,8 +34,15 @@ public:
 		const mrw::model::SectionState   wanted_state,
 		mrw::model::RailPart      *      first,
 		QObject             *            parent = nullptr);
+	virtual ~WidgetRoute();
 
 	operator QListWidgetItem * ();
+
+private:
+	virtual void turnSwitches() override;
+	virtual void activateSections() override;
+	virtual void turnSignals() override;
+	virtual void deactivateSections() override;
 };
 
 #endif // WIDGETROUTE_H

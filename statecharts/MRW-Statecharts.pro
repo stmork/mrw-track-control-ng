@@ -10,6 +10,7 @@ include(../common.pri)
 
 HEADERS += \
 	OperatingMode.h \
+	RouteStatechart.h \
 	SectionStatechart.h \
 	SwitchStatechart.h \
 	common/sc_statemachine.h \
@@ -19,6 +20,7 @@ HEADERS += \
 
 SOURCES += \
 	OperatingMode.cpp \
+	RouteStatechart.cpp \
 	SectionStatechart.cpp \
 	SwitchStatechart.cpp \
 	timerservice.cpp

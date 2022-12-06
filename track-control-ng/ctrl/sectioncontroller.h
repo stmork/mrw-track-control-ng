@@ -36,6 +36,11 @@ namespace mrw::ctrl
 
 		model::Section * section() const;
 
+		// Implementations from OperationCallback
+		virtual void off() override;
+		virtual void on() override;
+		virtual void request() override;
+
 	private:
 
 		// Implementations from BaseController
@@ -54,11 +59,6 @@ namespace mrw::ctrl
 
 		// Implementations from ControllerRegistrand
 		virtual bool process(const can::MrwMessage & message) override;
-
-		// Implementations from OperationCallback
-		virtual void off() override;
-		virtual void on() override;
-		virtual void request() override;
 	};
 }
 

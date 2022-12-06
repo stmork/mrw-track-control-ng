@@ -41,13 +41,15 @@ namespace mrw::model
 		void prepare();
 		void clear();
 
+	protected:
+		Track                   track;
+		std::list<Section *>    sections;
+
 	private:
 		bool qualified(RailPart * rail) const;
 
 		const bool              direction;
 		const SectionState      state = SHUNTING;
-		Track                   track;
-		std::list<Section *>    sections;
 		Section        *        first_section = nullptr;
 	};
 }

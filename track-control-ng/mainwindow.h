@@ -43,8 +43,6 @@ public:
 		QWidget        *       parent = nullptr);
 	~MainWindow();
 
-public slots:
-
 private slots:
 	void itemClicked(QListWidgetItem * item);
 	void enable();
@@ -76,6 +74,9 @@ private slots:
 
 private:
 	void initRegion();
+	void connectEditActions();
+	void connectOpModes(MrwMessageDispatcher & dispatcher);
+
 	void expandBorder(
 		RegionForm         *        form,
 		mrw::ctrl::BaseController * controller,

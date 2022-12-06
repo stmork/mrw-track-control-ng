@@ -52,7 +52,47 @@ MainWindow::MainWindow(
 	connect(
 		ui->actionQuit,        &QAction::triggered,
 		QCoreApplication::instance(), &QCoreApplication::quit);
+	connect(
+		ui->routeListWidget, &QListWidget::currentItemChanged,
+		this, &MainWindow::enable);
+	connect(
+		ui->sectionListWidget, &QListWidget::currentItemChanged,
+		this, &MainWindow::enable);
 
+	connectEditActions();
+	connectOpModes(dispatcher);
+
+	statechart.setTimerService(&TimerService::instance());
+	statechart.setOperationCallback(this);
+	statechart.can()->setOperationCallback(&dispatcher);
+	statechart.enter();
+}
+
+MainWindow::~MainWindow()
+{
+	statechart.exit();
+
+	on_clearAllSections_clicked();
+	on_clearAllRoutes_clicked();
+
+	delete ui;
+}
+
+void MainWindow::initRegion()
+{
+	ModelRailway * model = repo;
+
+	for (size_t r = 0; r < model->regionCount(); r++)
+	{
+		Region   *   region = model->region(r);
+		RegionForm * form = new RegionForm(region);
+
+		ui->regionTabWidget->addTab(form, region->name());
+	}
+}
+
+void MainWindow::connectEditActions()
+{
 	connect(ui->actionBendLeft,    &QAction::triggered, [this]()
 	{
 		bend(Bending::LEFT);
@@ -96,14 +136,10 @@ MainWindow::MainWindow(
 	{
 		lineup(-1);
 	});
+}
 
-	connect(
-		ui->routeListWidget, &QListWidget::currentItemChanged,
-		this, &MainWindow::enable);
-	connect(
-		ui->sectionListWidget, &QListWidget::currentItemChanged,
-		this, &MainWindow::enable);
-
+void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
+{
 	connect(
 		&dispatcher, &MrwBusService::connected,
 		&statechart, &OperatingMode::can_connected,
@@ -138,34 +174,6 @@ MainWindow::MainWindow(
 		&statechart, &OperatingMode::editing,
 		this, &MainWindow::onEdit,
 		Qt::QueuedConnection);
-
-	statechart.setTimerService(&TimerService::instance());
-	statechart.setOperationCallback(this);
-	statechart.can()->setOperationCallback(&dispatcher);
-	statechart.enter();
-}
-
-MainWindow::~MainWindow()
-{
-	statechart.exit();
-
-	on_clearAllSections_clicked();
-	on_clearAllRoutes_clicked();
-
-	delete ui;
-}
-
-void MainWindow::initRegion()
-{
-	ModelRailway * model = repo;
-
-	for (size_t r = 0; r < model->regionCount(); r++)
-	{
-		Region   *   region = model->region(r);
-		RegionForm * form = new RegionForm(region);
-
-		ui->regionTabWidget->addTab(form, region->name());
-	}
 }
 
 void MainWindow::enable()
