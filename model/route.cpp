@@ -119,7 +119,7 @@ void Route::prepare()
 		// Prepare switch turning.
 		vector[i]->setState(
 			i > 0 ? vector[i - 1] : nullptr,
-			i < vector.size() ? vector[i + 1] : nullptr);
+			(i + 1) < vector.size() ? vector[i + 1] : nullptr);
 
 		qDebug().noquote() << "     " << vector[i]->toString();
 	}
