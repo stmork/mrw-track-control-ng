@@ -75,6 +75,28 @@ void TestRouting::testCrossBlocked()
 	QVERIFY(empty());
 }
 
+void TestRouting::testExtension()
+{
+	Route                    route(true, SectionState::SHUNTING, parts[1]);
+	const Route::Track   &   reserved = route;
+
+	QVERIFY(verify(route));
+
+	QVERIFY(route.extend(parts[14]));
+	QVERIFY(verify(route));
+
+	QVERIFY(!route.extend(parts[0]));
+	QVERIFY(verify(route));
+
+	QVERIFY(route.extend(parts[19]));
+	QVERIFY(verify(route));
+
+	route.clear();
+	QVERIFY(verify(route));
+	QCOMPARE(reserved.size(), 0);
+	QVERIFY(empty());
+}
+
 bool TestRouting::verify(const Route & route) const
 {
 	return verify( { & route } );

@@ -27,6 +27,7 @@ namespace mrw::test
 		void testSimple();
 		void testCounterPart();
 		void testCrossBlocked();
+		void testExtension();
 
 	private:
 		bool verify(const model::Route & route) const;
