@@ -24,6 +24,7 @@ private:
 	const bool                          direction;
 	const mrw::model::SectionState      state = mrw::model::SHUNTING;
 	std::list<mrw::model::RailPart *>   track;
+	std::list<mrw::model::Section *>    sections;
 	mrw::model::Section        *        first_section = nullptr;
 	QListWidgetItem                     list_item;
 

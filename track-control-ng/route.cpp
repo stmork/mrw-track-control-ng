@@ -16,6 +16,8 @@ Route::Route(
 	RailPart     *     first,
 	QObject      *     parent) : QObject(parent), direction(dir), state(wanted_state)
 {
+	__METHOD__;
+
 	bool      loop = true;
 
 	first_section = first->section();
@@ -44,6 +46,7 @@ Route::Route(
 	}
 	while (loop);
 
+	first->reserve();
 	track.push_back(first);
 	list_item.setText(first_section->key());
 	list_item.setData(USER_ROLE, QVariant::fromValue(this));
@@ -51,6 +54,8 @@ Route::Route(
 
 Route::~Route()
 {
+	__METHOD__;
+
 	for (RailPart * rail : track)
 	{
 		rail->reserve(false);
@@ -65,17 +70,15 @@ Route::operator QListWidgetItem * ()
 
 bool Route::extend(RailPart * target)
 {
+	__METHOD__;
+
+	qDebug().noquote() << "---------->" << *target;
+
 	return extend(track.back(), target);
 }
 
 bool Route::extend(RailPart * rail, RailPart * target)
 {
-	__METHOD__;
-
-	const QString   indent(track.size(), ' ');
-
-	qDebug().noquote() << indent << rail->toString();
-
 	if (rail == target)
 	{
 		rail->reserve();
@@ -107,15 +110,33 @@ void Route::prepare()
 	__METHOD__;
 
 	std::vector<RailPart *> vector(track.begin(), track.end());
+	Section        *        prev = nullptr;
 
 	for (size_t i = 0; i < vector.size(); i++)
 	{
+		// Collect sections in a unique manner.
+		Section * act = vector[i]->section();
+
+		if (prev != act)
+		{
+			sections.push_back(act);
+			prev = act;
+		}
+
+		// Set track mode.
+		act->setState(state);
+
+		// Prepare switch turning.
 		vector[i]->setState(
 			i > 0 ? vector[i - 1] : nullptr,
 			i < vector.size() ? vector[i + 1] : nullptr);
-		vector[i]->section()->setState(state);
 
 		qDebug().noquote() << "     " << vector[i]->toString();
+	}
+	qDebug() << "---";
+	for (Section * section : sections)
+	{
+		qDebug().noquote() << "     " << section->toString();
 	}
 }
 
@@ -124,15 +145,17 @@ bool Route::qualified(RailPart * rail) const
 	const QString   indent(track.size(), ' ');
 	const Section * section = rail->section();
 
+	qDebug().noquote() << indent << rail->toString();
+
 	if (rail->reserved())
 	{
-		qDebug().noquote() << indent << "Rail already reserved:";
+		qDebug().noquote() << indent << "      Rail already reserved:";
 		return false;
 	}
 
 	if (track.size() > 50)
 	{
-		qDebug().noquote() << indent << "Recursion depth reached.";
+		qDebug().noquote() << indent << "      Recursion depth reached.";
 		return false;
 	}
 
@@ -141,12 +164,12 @@ bool Route::qualified(RailPart * rail) const
 		if ((state == SectionState::SHUNTING) &&
 			(first_section->region() != section->region()))
 		{
-			qDebug().noquote() << indent << "Shunting left region.";
+			qDebug().noquote() << indent << "      Shunting left region.";
 			return false;
 		}
 		if (section->occupation())
 		{
-			qDebug().noquote() << indent << "Section occupied.";
+			qDebug().noquote() << indent << "      Section occupied.";
 			return false;
 		}
 	}
