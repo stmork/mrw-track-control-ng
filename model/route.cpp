@@ -57,11 +57,7 @@ Route::~Route()
 {
 	__METHOD__;
 
-	for (RailPart * rail : track)
-	{
-		rail->reserve(false);
-		rail->section()->setState(SectionState::FREE);
-	}
+	clear();
 }
 
 bool Route::extend(RailPart * target)
@@ -134,6 +130,16 @@ void Route::prepare()
 	{
 		qDebug().noquote() << "     " << section->toString();
 	}
+}
+
+void mrw::model::Route::clear()
+{
+	for (RailPart * rail : track)
+	{
+		rail->reserve(false);
+		rail->section()->setState(SectionState::FREE);
+	}
+	track.clear();
 }
 
 bool Route::qualified(RailPart * rail) const

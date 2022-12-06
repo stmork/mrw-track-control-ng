@@ -21,14 +21,9 @@ namespace mrw::model
 	{
 		Q_OBJECT
 
-	private:
-		const bool              direction;
-		const SectionState      state = SHUNTING;
-		std::list<RailPart *>   track;
-		std::list<Section *>    sections;
-		Section        *        first_section = nullptr;
-
 	public:
+		typedef std::list<RailPart *> Track;
+
 		explicit Route(
 			const bool           dir,
 			const SectionState   wanted_state,
@@ -36,7 +31,7 @@ namespace mrw::model
 			QObject       *      parent = nullptr);
 		virtual ~Route();
 
-		inline operator const std::list<RailPart *> & () const
+		inline operator const Track & () const
 		{
 			return track;
 		}
@@ -44,7 +39,16 @@ namespace mrw::model
 		bool extend(RailPart * target);
 		bool extend(RailPart * rail, RailPart * target);
 		void prepare();
+		void clear();
+
+	private:
 		bool qualified(RailPart * rail) const;
+
+		const bool              direction;
+		const SectionState      state = SHUNTING;
+		Track                   track;
+		std::list<Section *>    sections;
+		Section        *        first_section = nullptr;
 	};
 }
 

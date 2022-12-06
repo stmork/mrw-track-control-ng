@@ -35,17 +35,21 @@ void TestRouting::init()
 
 void TestRouting::testSimple()
 {
-	Route route(true, SectionState::SHUNTING, parts[0]);
+	Route                    route(true, SectionState::SHUNTING, parts[0]);
+	const Route::Track   &   reserved = route;
 
 	QVERIFY(route.extend(parts[20]));
 	QVERIFY(verify(route));
+
+	route.clear();
+	QVERIFY(verify(route));
+	QCOMPARE(reserved.size(), 0);
 }
 
 bool TestRouting::verify(const Route & route) const
 {
 	std::unordered_set<RailPart *> unreserved(parts.begin(), parts.end());
-
-	const std::list<RailPart *>    reserved = route;
+	const Route::Track      &      reserved = route;
 
 	for (RailPart * part : reserved)
 	{
@@ -61,5 +65,7 @@ bool TestRouting::verify(const Route & route) const
 		return !part->reserved();
 	});
 
-	return is_reserved && is_unreserved;
+	return
+		is_reserved && is_unreserved &&
+		((unreserved.size() + reserved.size()) == parts.size());
 }
