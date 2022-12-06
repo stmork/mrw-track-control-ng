@@ -8,11 +8,13 @@
 #ifndef MRW_TEST_TESTMODELBASE_H
 #define MRW_TEST_TESTMODELBASE_H
 
+#include <vector>
+
 #include <QObject>
 
 #include <model/modelrailway.h>
 #include <model/section.h>
-#include <model/assemblypart.h>
+#include <model/railpart.h>
 
 namespace mrw::test
 {
@@ -21,8 +23,9 @@ namespace mrw::test
 		Q_OBJECT
 
 	protected:
-		QString                    filename;
-		mrw::model::ModelRailway * model = nullptr;
+		QString                             filename;
+		mrw::model::ModelRailway      *     model = nullptr;
+		std::vector<mrw::model::RailPart *> parts;
 
 	public:
 		explicit TestModelBase(const char * modelname, QObject * parent = nullptr);

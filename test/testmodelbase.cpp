@@ -25,6 +25,8 @@ void TestModelBase::initTestCase()
 {
 	model = new ModelRailway(filename);
 	QVERIFY(model != nullptr);
+
+	model->parts<RailPart>(parts);
 }
 
 void TestModelBase::cleanupTestCase()

@@ -16,14 +16,6 @@ TestRouting::TestRouting() : TestModelBase("Test-Flank")
 {
 }
 
-void TestRouting::initTestCase()
-{
-	model = new ModelRailway(filename);
-	QVERIFY(model != nullptr);
-
-	model->parts<RailPart>(parts);
-}
-
 void TestRouting::init()
 {
 	for (RailPart * part : parts)
