@@ -18,7 +18,7 @@
 #include "ui_mainwindow.h"
 #include "regionform.h"
 #include "mrwmessagedispatcher.h"
-#include "route.h"
+#include "widgetroute.h"
 
 using namespace mrw::statechart;
 using namespace mrw::can;
@@ -344,7 +344,7 @@ void MainWindow::on_clearRoute_clicked()
 
 		ui->routeListWidget->takeItem(row);
 
-		Route * route = item->data(Route::USER_ROLE).value<Route *>();
+		Route * route = item->data(WidgetRoute::USER_ROLE).value<Route *>();
 
 		delete route;
 	}
@@ -357,7 +357,7 @@ void MainWindow::on_clearAllRoutes_clicked()
 	while (ui->routeListWidget->count() > 0)
 	{
 		QListWidgetItem * item  = ui->routeListWidget->takeItem(0);
-		Route      *      route = item->data(Route::USER_ROLE).value<Route *>();
+		Route      *      route = item->data(WidgetRoute::USER_ROLE).value<Route *>();
 
 		delete route;
 	}
@@ -381,7 +381,7 @@ void MainWindow::on_extendPushButton_clicked()
 
 	for (QListWidgetItem * item : ui->routeListWidget->selectedItems())
 	{
-		Route * route = item->data(Route::USER_ROLE).value<Route *>();
+		Route * route = item->data(WidgetRoute::USER_ROLE).value<Route *>();
 
 		for (int i = 0; i < ui->sectionListWidget->count(); i++)
 		{
@@ -576,8 +576,8 @@ Route * MainWindow::create(const bool direction, SectionState state)
 {
 	__METHOD__;
 
-	RailPart * first = rail(0);
-	Route   *  route = new Route(direction, state, first);
+	RailPart   *  first = rail(0);
+	WidgetRoute * route = new WidgetRoute(direction, state, first);
 
 	for (int i = 1; i < ui->sectionListWidget->count(); i++)
 	{
@@ -587,6 +587,7 @@ Route * MainWindow::create(const bool direction, SectionState state)
 		}
 	}
 	route->prepare();
+
 	ui->routeListWidget->addItem(*route);
 	ui->regionTabWidget->currentWidget()->update();
 	on_clearAllSections_clicked();

@@ -27,6 +27,7 @@ SOURCES += \
 	railpart.cpp \
 	region.cpp \
 	regularswitch.cpp \
+	route.cpp \
 	section.cpp \
 	sectionmodule.cpp \
 	signal.cpp \
@@ -52,6 +53,7 @@ HEADERS += \
 	railpart.h \
 	region.h \
 	regularswitch.h \
+	route.h \
 	section.h \
 	sectionmodule.h \
 	signal.h \

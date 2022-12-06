@@ -14,7 +14,8 @@ Route::Route(
 	const bool         dir,
 	const SectionState wanted_state,
 	RailPart     *     first,
-	QObject      *     parent) : QObject(parent), direction(dir), state(wanted_state)
+	QObject      *     parent) :
+	QObject(parent), direction(dir), state(wanted_state)
 {
 	__METHOD__;
 
@@ -48,8 +49,8 @@ Route::Route(
 
 	first->reserve();
 	track.push_back(first);
-	list_item.setText(first_section->key());
-	list_item.setData(USER_ROLE, QVariant::fromValue(this));
+//	list_item.setText(first_section->key());
+//	list_item.setData(USER_ROLE, QVariant::fromValue(this));
 }
 
 Route::~Route()
@@ -61,11 +62,6 @@ Route::~Route()
 		rail->reserve(false);
 		rail->section()->setState(SectionState::FREE);
 	}
-}
-
-Route::operator QListWidgetItem * ()
-{
-	return &list_item;
 }
 
 bool Route::extend(RailPart * target)

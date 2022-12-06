@@ -15,6 +15,7 @@
 
 #include <statecharts/OperatingMode.h>
 #include <model/rail.h>
+#include <model/route.h>
 #include <ctrl/basecontroller.h>
 
 #include "modelrepository.h"
@@ -28,7 +29,6 @@ namespace Ui
 QT_END_NAMESPACE
 
 class MrwMessageDispatcher;
-class Route;
 
 class MainWindow :
 	public QMainWindow,
@@ -103,7 +103,7 @@ private:
 	}
 
 	virtual void reset() override;
-	Route * create(const bool direction, mrw::model::SectionState state);
+	mrw::model::Route * create(const bool direction, mrw::model::SectionState state);
 
 	Ui::MainWindow  * ui;
 	ModelRepository & repo;
