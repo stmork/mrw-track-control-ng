@@ -50,6 +50,7 @@ namespace mrw::ctrl
 
 		void increase(ControllerRegistrand * ctrl);
 		void decrease(ControllerRegistrand * ctrl);
+		bool contains(ControllerRegistrand * ctrl);
 		void reset();
 		void dump();
 

@@ -31,7 +31,6 @@ namespace mrw
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
-			stateConfVectorChanged(false),
 			start_raised(false),
 			queued_raised(false),
 			response_raised(false),
@@ -403,7 +402,6 @@ namespace mrw
 			/* 'default' enter sequence for state Turn */
 			enact_main_region_Init_Init_process_Main_signal_Turn_main_Turn();
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Turn;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Pending */
@@ -411,7 +409,6 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Pending */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Pending;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Turn */
@@ -420,7 +417,6 @@ namespace mrw
 			/* 'default' enter sequence for state Turn */
 			enact_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn();
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Turn;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Pending */
@@ -428,7 +424,6 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Pending */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Pending;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Turn */
@@ -437,7 +432,6 @@ namespace mrw
 			/* 'default' enter sequence for state Turn */
 			enact_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn();
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Pending */
@@ -445,7 +439,6 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Pending */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Wait for Start */
@@ -453,7 +446,6 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Wait for Start */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Wait_for_Start;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Operating */
@@ -461,7 +453,6 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Operating */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Operating;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Failed */
@@ -469,7 +460,6 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Failed */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Failed;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for region main region */
@@ -1134,12 +1124,7 @@ namespace mrw
 			dispatchEvent(getNextEvent());
 			do
 			{
-				do
-				{
-					stateConfVectorChanged = false;
-					microStep();
-				}
-				while (stateConfVectorChanged);
+				microStep();
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
@@ -1157,12 +1142,6 @@ namespace mrw
 			isExecuting = true;
 			/* Default enter sequence for statechart SignalStatechart */
 			enseq_main_region_default();
-			do
-			{
-				stateConfVectorChanged = false;
-				microStep();
-			}
-			while (stateConfVectorChanged);
 			isExecuting = false;
 		}
 

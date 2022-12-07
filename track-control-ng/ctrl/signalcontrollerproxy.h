@@ -34,6 +34,7 @@ namespace mrw::ctrl
 		mrw::model::Signal  * shunt_signal   = nullptr;
 
 		std::unordered_map<mrw::can::UnitNo, mrw::model::Signal *> signal_map;
+		QString                                                    grouped_name;
 
 	public:
 		explicit SignalControllerProxy(
@@ -44,7 +45,6 @@ namespace mrw::ctrl
 
 	private:
 		void add(mrw::model::Signal * signal);
-
 
 		// Implementations from BaseController
 		virtual QString name() const override;

@@ -26,7 +26,6 @@ namespace mrw
 			ifaceCan(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
-			stateConfVectorChanged(false),
 			clear_raised(false),
 			inquired_raised(false),
 			fail_raised(false),
@@ -374,7 +373,6 @@ namespace mrw
 			/* 'default' enter sequence for state Prepare Bus */
 			enact_main_region_Prepare_Bus();
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Prepare_Bus;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Init */
@@ -383,7 +381,6 @@ namespace mrw
 			/* 'default' enter sequence for state Init */
 			enact_main_region_Init();
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Init;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Editing */
@@ -392,7 +389,6 @@ namespace mrw
 			/* 'default' enter sequence for state Editing */
 			enact_main_region_Editing();
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Editing;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Fail */
@@ -401,7 +397,6 @@ namespace mrw
 			/* 'default' enter sequence for state Fail */
 			enact_main_region_Fail();
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Fail;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Operating */
@@ -410,7 +405,6 @@ namespace mrw
 			/* 'default' enter sequence for state Operating */
 			enact_main_region_Operating();
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Operating;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for region main region */
@@ -720,12 +714,7 @@ namespace mrw
 			dispatchEvent(getNextEvent());
 			do
 			{
-				do
-				{
-					stateConfVectorChanged = false;
-					microStep();
-				}
-				while (stateConfVectorChanged);
+				microStep();
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
@@ -743,12 +732,6 @@ namespace mrw
 			isExecuting = true;
 			/* Default enter sequence for statechart OperatingMode */
 			enseq_main_region_default();
-			do
-			{
-				stateConfVectorChanged = false;
-				microStep();
-			}
-			while (stateConfVectorChanged);
 			isExecuting = false;
 		}
 

@@ -96,6 +96,11 @@ void ControllerRegistry::decrease(ControllerRegistrand * element)
 	}
 }
 
+bool ControllerRegistry::contains(ControllerRegistrand * ctrl)
+{
+	return transaction.find(ctrl) != transaction.end();
+}
+
 void ControllerRegistry::reset()
 {
 	__METHOD__;

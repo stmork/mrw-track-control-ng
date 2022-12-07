@@ -3,6 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <util/method.h>
 #include <can/commands.h>
 #include <model/formsignal.h>
 #include <ctrl/signalcontrollerproxy.h>
@@ -24,6 +25,7 @@ SignalControllerProxy::SignalControllerProxy(
 	section(parent_section)
 {
 	std::vector<Signal *> section_signals;
+	QStringList           list;
 
 	section->parts<Signal>(section_signals, [dir] (const Signal * input)
 	{
@@ -40,6 +42,7 @@ SignalControllerProxy::SignalControllerProxy(
 	{
 		ControllerRegistry::instance().registerController(dynamic_cast<Device *>(signal), this);
 
+		list << signal->partName();
 		switch (signal->type())
 		{
 		case Signal::SHUNT_SIGNAL:
@@ -60,6 +63,7 @@ SignalControllerProxy::SignalControllerProxy(
 			break;
 		}
 	}
+	grouped_name = list.join("/");
 
 	add(main_signal);
 	add(distant_signal);
@@ -99,7 +103,7 @@ void SignalControllerProxy::add(Signal * signal)
 
 QString SignalControllerProxy::name() const
 {
-	return base_signal->partName();
+	return grouped_name;
 }
 
 float SignalControllerProxy::extensions() const
@@ -164,8 +168,7 @@ bool SignalControllerProxy::process(const MrwMessage & message)
 {
 	Signal * device = signal_map[message.unitNo()];
 
-	qDebug().noquote() << message << "(signal)" << device->toString();
-
+	qDebug().noquote() << message << "  (signal)" << device->toString() << (ControllerRegistry::instance().contains(this) ? "yes" : "no");
 
 	switch (message.response())
 	{
@@ -212,16 +215,25 @@ void SignalControllerProxy::dec()
 
 bool SignalControllerProxy::hasMain()
 {
+	__METHOD__;
+
+	qDebug().noquote() << " " << grouped_name;
 	return main_signal != nullptr;
 }
 
 bool SignalControllerProxy::hasDistant()
 {
+	__METHOD__;
+
+	qDebug().noquote() << " " << grouped_name;
 	return distant_signal != nullptr;
 }
 
 bool SignalControllerProxy::hasShunt()
 {
+	__METHOD__;
+
+	qDebug().noquote() << " " << grouped_name;
 	return shunt_signal != nullptr;
 }
 
@@ -234,7 +246,12 @@ enum Symbol : int
 
 void SignalControllerProxy::turnMainSignal(sc::integer symbol)
 {
+	__METHOD__;
+
+	Q_ASSERT(main_signal != nullptr);
+
 	SignalState state = SIGNAL_OFF;
+	MrwMessage  message(main_signal->device()->command(SETSGN));
 
 	switch (symbol)
 	{
@@ -251,15 +268,20 @@ void SignalControllerProxy::turnMainSignal(sc::integer symbol)
 		break;
 	}
 
-	MrwMessage message(main_signal->device()->command(SETSGN));
-
 	message.append(state);
 	ControllerRegistry::can()->write(message);
+
+	qDebug().noquote() << message << "(signal)" << main_signal->toString() << (ControllerRegistry::instance().contains(this) ? "yes" : "no");
 }
 
 void SignalControllerProxy::turnDistantSignal(sc::integer symbol)
 {
+	__METHOD__;
+
+	Q_ASSERT(distant_signal != nullptr);
+
 	SignalState state = SIGNAL_OFF;
+	MrwMessage  message(distant_signal->device()->command(SETSGN));
 
 	switch (symbol)
 	{
@@ -276,15 +298,21 @@ void SignalControllerProxy::turnDistantSignal(sc::integer symbol)
 		break;
 	}
 
-	MrwMessage message(distant_signal->device()->command(SETSGN));
 
 	message.append(state);
 	ControllerRegistry::can()->write(message);
+
+	qDebug().noquote() << message << "(signal)" << distant_signal->toString() << (ControllerRegistry::instance().contains(this) ? "yes" : "no");
 }
 
 void SignalControllerProxy::turnShuntSignal(sc::integer symbol)
 {
+	__METHOD__;
+
+	Q_ASSERT(shunt_signal != nullptr);
+
 	SignalState state = SIGNAL_OFF;
+	MrwMessage  message(shunt_signal->device()->command(SETSGN));
 
 	switch (symbol)
 	{
@@ -301,10 +329,10 @@ void SignalControllerProxy::turnShuntSignal(sc::integer symbol)
 		break;
 	}
 
-	MrwMessage message(shunt_signal->device()->command(SETSGN));
-
 	message.append(state);
 	ControllerRegistry::can()->write(message);
+
+	qDebug().noquote() << message << "(signal)" << shunt_signal->toString() << (ControllerRegistry::instance().contains(this) ? "yes" : "no");
 }
 
 SignalController::TourState SignalControllerProxy::distant() const

@@ -24,7 +24,6 @@ namespace mrw
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
-			stateConfVectorChanged(false),
 			turned_raised(false),
 			failed_raised(false),
 			disable_raised(false),
@@ -305,7 +304,6 @@ namespace mrw
 			/* 'default' enter sequence for state Switch Turning */
 			enact_main_region_Switch_Turning();
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Switch_Turning;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Section Activation */
@@ -314,7 +312,6 @@ namespace mrw
 			/* 'default' enter sequence for state Section Activation */
 			enact_main_region_Section_Activation();
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Section_Activation;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Signal Turning */
@@ -323,7 +320,6 @@ namespace mrw
 			/* 'default' enter sequence for state Signal Turning */
 			enact_main_region_Signal_Turning();
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Signal_Turning;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Active */
@@ -331,7 +327,6 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Active */
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Active;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Disable */
@@ -340,7 +335,6 @@ namespace mrw
 			/* 'default' enter sequence for state Disable */
 			enact_main_region_Disable();
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Disable;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Start */
@@ -348,7 +342,6 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Start */
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Start;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for region main region */
@@ -690,12 +683,7 @@ namespace mrw
 			dispatchEvent(getNextEvent());
 			do
 			{
-				do
-				{
-					stateConfVectorChanged = false;
-					microStep();
-				}
-				while (stateConfVectorChanged);
+				microStep();
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
@@ -713,12 +701,6 @@ namespace mrw
 			isExecuting = true;
 			/* Default enter sequence for statechart RouteStatechart */
 			enseq_main_region_default();
-			do
-			{
-				stateConfVectorChanged = false;
-				microStep();
-			}
-			while (stateConfVectorChanged);
 			isExecuting = false;
 		}
 
