@@ -51,34 +51,32 @@ namespace mrw
 			{
 				NO_STATE,
 				main_region_Init,
-				main_region_Init_Init_process_Waiting,
-				main_region_Init_Init_process_Waiting_main_Turn,
-				main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn,
-				main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_,
-				main_region_Init_Init_process_Waiting_distant_Turn,
-				main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn,
-				main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_,
-				main_region_Init_Init_process_Waiting_shunt_Turn,
-				main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn,
-				main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_,
+				main_region_Init_Init_process_Main_signal,
+				main_region_Init_Init_process_Main_signal_Turn_main_Turn,
+				main_region_Init_Init_process_Main_signal_Turn_main_Pending,
+				main_region_Init_Init_process_Distant_signal,
+				main_region_Init_Init_process_Distant_signal_Turn_distant_Turn,
+				main_region_Init_Init_process_Distant_signal_Turn_distant_Pending,
+				main_region_Init_Init_process_Shunt_signal,
+				main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn,
+				main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending,
 				main_region_Wait_for_Start,
 				main_region_Operating,
 				main_region_Failed
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 14;
+			static const sc::integer numStates = 13;
 			static const sc::integer scvi_main_region_Init = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Waiting = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Waiting_main_Turn = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_ = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Waiting_distant_Turn = 1;
-			static const sc::integer scvi_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn = 1;
-			static const sc::integer scvi_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_ = 1;
-			static const sc::integer scvi_main_region_Init_Init_process_Waiting_shunt_Turn = 2;
-			static const sc::integer scvi_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn = 2;
-			static const sc::integer scvi_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_ = 2;
+			static const sc::integer scvi_main_region_Init_Init_process_Main_signal = 0;
+			static const sc::integer scvi_main_region_Init_Init_process_Main_signal_Turn_main_Turn = 0;
+			static const sc::integer scvi_main_region_Init_Init_process_Main_signal_Turn_main_Pending = 0;
+			static const sc::integer scvi_main_region_Init_Init_process_Distant_signal = 0;
+			static const sc::integer scvi_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn = 0;
+			static const sc::integer scvi_main_region_Init_Init_process_Distant_signal_Turn_distant_Pending = 0;
+			static const sc::integer scvi_main_region_Init_Init_process_Shunt_signal = 0;
+			static const sc::integer scvi_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn = 0;
+			static const sc::integer scvi_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending = 0;
 			static const sc::integer scvi_main_region_Wait_for_Start = 0;
 			static const sc::integer scvi_main_region_Operating = 0;
 			static const sc::integer scvi_main_region_Failed = 0;
@@ -88,8 +86,11 @@ namespace mrw
 			{
 				NO_EVENT,
 				start,
+				queued,
 				response,
-				_te0_main_region_Init_Init_process_Waiting_
+				fail,
+				clear,
+				_te0_main_region_Init_
 			};
 
 			class EventInstance
@@ -216,8 +217,17 @@ namespace mrw
 			/*! Slot for the in event 'start' that is defined in the default interface scope. */
 			void start();
 
+			/*! Slot for the in event 'queued' that is defined in the default interface scope. */
+			void queued();
+
 			/*! Slot for the in event 'response' that is defined in the default interface scope. */
 			void response();
+
+			/*! Slot for the in event 'fail' that is defined in the default interface scope. */
+			void fail();
+
+			/*! Slot for the in event 'clear' that is defined in the default interface scope. */
+			void clear();
 
 
 		signals:
@@ -250,7 +260,7 @@ namespace mrw
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-			static const sc::ushort maxOrthogonalStates = 3;
+			static const sc::ushort maxOrthogonalStates = 1;
 
 			sc::timer::TimerServiceInterface * timerService;
 			bool timeEvents[timeEventsCount];
@@ -262,75 +272,62 @@ namespace mrw
 			OperationCallback * ifaceOperationCallback;
 
 
-			bool completed;
-			bool doCompletion;
 			bool isExecuting;
-			sc::integer stateConfVectorPosition;
+			bool stateConfVectorChanged;
 
 
 			// prototypes of all internal functions
 
-			void enact_main_region_Init_Init_process_Waiting();
-			void enact_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn();
-			void enact_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn();
-			void enact_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn();
-			void exact_main_region_Init_Init_process_Waiting();
+			void enact_main_region_Init();
+			void enact_main_region_Init_Init_process_Main_signal_Turn_main_Turn();
+			void enact_main_region_Init_Init_process_Distant_signal();
+			void enact_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn();
+			void enact_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn();
+			void exact_main_region_Init();
 			void enseq_main_region_Init_default();
-			void enseq_main_region_Init_Init_process_Waiting_main_Turn_default();
-			void enseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn_default();
-			void enseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final__default();
-			void enseq_main_region_Init_Init_process_Waiting_distant_Turn_default();
-			void enseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn_default();
-			void enseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final__default();
-			void enseq_main_region_Init_Init_process_Waiting_shunt_Turn_default();
-			void enseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn_default();
-			void enseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final__default();
+			void enseq_main_region_Init_Init_process_Main_signal_Turn_main_Turn_default();
+			void enseq_main_region_Init_Init_process_Main_signal_Turn_main_Pending_default();
+			void enseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn_default();
+			void enseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Pending_default();
+			void enseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn_default();
+			void enseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending_default();
 			void enseq_main_region_Wait_for_Start_default();
 			void enseq_main_region_Operating_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_default();
 			void enseq_main_region_Init_Init_process_default();
-			void enseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_default();
-			void enseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_default();
-			void enseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_default();
 			void exseq_main_region_Init();
-			void exseq_main_region_Init_Init_process_Waiting();
-			void exseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn();
-			void exseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_();
-			void exseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn();
-			void exseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_();
-			void exseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn();
-			void exseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_();
+			void exseq_main_region_Init_Init_process_Main_signal();
+			void exseq_main_region_Init_Init_process_Main_signal_Turn_main_Turn();
+			void exseq_main_region_Init_Init_process_Main_signal_Turn_main_Pending();
+			void exseq_main_region_Init_Init_process_Distant_signal();
+			void exseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn();
+			void exseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Pending();
+			void exseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn();
+			void exseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending();
 			void exseq_main_region_Wait_for_Start();
 			void exseq_main_region_Operating();
 			void exseq_main_region_Failed();
 			void exseq_main_region();
 			void exseq_main_region_Init_Init_process();
-			void exseq_main_region_Init_Init_process_Waiting_main();
-			void exseq_main_region_Init_Init_process_Waiting_distant();
-			void exseq_main_region_Init_Init_process_Waiting_shunt();
-			void react_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__choice_0();
-			void react_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__choice_0();
-			void react_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__choice_0();
+			void exseq_main_region_Init_Init_process_Main_signal_Turn_main();
+			void exseq_main_region_Init_Init_process_Distant_signal_Turn_distant();
+			void react_main_region_Init_Init_process__choice_0();
+			void react_main_region_Init_Init_process__choice_1();
+			void react_main_region_Init_Init_process__choice_2();
 			void react_main_region__entry_Default();
-			void react_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__entry_Default();
-			void react_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__entry_Default();
-			void react_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__entry_Default();
 			void react_main_region_Init_Init_process__entry_Default();
-			void react_main_region_Init_Init_process__sync0();
-			void react_main_region_Init_Init_process__sync1();
 			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Waiting_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Waiting_main_Turn_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final__react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Waiting_distant_Turn_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final__react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Waiting_shunt_Turn_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final__react(const sc::integer transitioned_before);
+			sc::integer main_region_Init_Init_process_Main_signal_react(const sc::integer transitioned_before);
+			sc::integer main_region_Init_Init_process_Main_signal_Turn_main_Turn_react(const sc::integer transitioned_before);
+			sc::integer main_region_Init_Init_process_Main_signal_Turn_main_Pending_react(const sc::integer transitioned_before);
+			sc::integer main_region_Init_Init_process_Distant_signal_react(const sc::integer transitioned_before);
+			sc::integer main_region_Init_Init_process_Distant_signal_Turn_distant_Turn_react(const sc::integer transitioned_before);
+			sc::integer main_region_Init_Init_process_Distant_signal_Turn_distant_Pending_react(const sc::integer transitioned_before);
+			sc::integer main_region_Init_Init_process_Shunt_signal_react(const sc::integer transitioned_before);
+			sc::integer main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn_react(const sc::integer transitioned_before);
+			sc::integer main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_for_Start_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
@@ -344,8 +341,17 @@ namespace mrw
 			/*! Indicates event 'start' of default interface scope is active. */
 			bool start_raised;
 
+			/*! Indicates event 'queued' of default interface scope is active. */
+			bool queued_raised;
+
 			/*! Indicates event 'response' of default interface scope is active. */
 			bool response_raised;
+
+			/*! Indicates event 'fail' of default interface scope is active. */
+			bool fail_raised;
+
+			/*! Indicates event 'clear' of default interface scope is active. */
+			bool clear_raised;
 
 
 

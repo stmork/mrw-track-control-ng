@@ -50,6 +50,11 @@ namespace mrw::model
 		bool valid() const override;
 
 		QString toString() const override;
+
+		inline Device * device() override
+		{
+			return this;
+		}
 	};
 }
 

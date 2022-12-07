@@ -100,6 +100,8 @@ namespace mrw::model
 
 		static bool less(Signal * left, Signal * right);
 
+		virtual Device * device() = 0;
+
 	protected:
 		/**
 		 * This method returns a brief symbol representing the direction and

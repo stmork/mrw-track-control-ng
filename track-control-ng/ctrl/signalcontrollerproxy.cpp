@@ -4,19 +4,22 @@
 //
 
 #include <can/commands.h>
-#include <model/region.h>
+#include <model/formsignal.h>
 #include <ctrl/signalcontrollerproxy.h>
 #include <ctrl/controllerregistry.h>
+#include <statecharts/timerservice.h>
 
 using namespace mrw::can;
-using namespace mrw::ctrl;
 using namespace mrw::model;
+using namespace mrw::ctrl;
+using namespace mrw::statechart;
 
 SignalControllerProxy::SignalControllerProxy(
 	Section  *  parent_section,
 	const bool  dir,
 	QObject  *  parent) :
 	SignalController(parent),
+	statechart(nullptr),
 	direction(dir),
 	section(parent_section)
 {
@@ -56,18 +59,42 @@ SignalControllerProxy::SignalControllerProxy(
 			shunt_signal = signal;
 			break;
 		}
-
 	}
+
+	add(main_signal);
+	add(distant_signal);
+	add(shunt_signal);
+
+	connect(
+		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
+		&statechart, &SignalStatechart::start,
+		Qt::QueuedConnection);
+
+	statechart.setTimerService(&TimerService::instance());
+	statechart.setOperationCallback(this);
+	statechart.enter();
 }
 
 SignalControllerProxy::~SignalControllerProxy()
 {
+	statechart.exit();
+
 	ControllerRegistry::instance().unregisterController(
 		dynamic_cast<Device *>(main_signal));
 	ControllerRegistry::instance().unregisterController(
 		dynamic_cast<Device *>(distant_signal));
 	ControllerRegistry::instance().unregisterController(
 		dynamic_cast<Device *>(shunt_signal));
+}
+
+void SignalControllerProxy::add(Signal * signal)
+{
+	if (signal != nullptr)
+	{
+		Device * device = signal->device();
+
+		signal_map.emplace(device->unitNo(), signal);
+	}
 }
 
 QString SignalControllerProxy::name() const
@@ -133,15 +160,151 @@ SignalController::TourState SignalControllerProxy::main() const
 	return TourState::STOP;
 }
 
-bool mrw::ctrl::SignalControllerProxy::process(const MrwMessage & message)
+bool SignalControllerProxy::process(const MrwMessage & message)
 {
-	// TODO: Implement later!
-	return ControllerRegistrand::process(message);
+	Signal * device = signal_map[message.unitNo()];
+
+	qDebug().noquote() << message << "(signal)" << device->toString();
+
+
+	switch (message.response())
+	{
+	case MSG_QUEUED:
+		statechart.queued();
+		return true;
+
+	case MSG_OK:
+		switch (message.command())
+		{
+		case SETSGN:
+			statechart.response();
+			emit update();
+			return true;
+
+		default:
+			// Intentionally do nothing.
+			break;
+		}
+		break;
+
+	default:
+		qCritical().noquote() << "Error turning" << device->toString();
+		statechart.fail();
+		break;
+	}
+	return false;
 }
 
-QString mrw::ctrl::SignalControllerProxy::toString() const
+QString SignalControllerProxy::toString() const
 {
 	return *base_signal;
+}
+
+void SignalControllerProxy::inc()
+{
+	ControllerRegistry::instance().increase(this);
+}
+
+void SignalControllerProxy::dec()
+{
+	ControllerRegistry::instance().decrease(this);
+}
+
+bool SignalControllerProxy::hasMain()
+{
+	return main_signal != nullptr;
+}
+
+bool SignalControllerProxy::hasDistant()
+{
+	return distant_signal != nullptr;
+}
+
+bool SignalControllerProxy::hasShunt()
+{
+	return shunt_signal != nullptr;
+}
+
+enum Symbol : int
+{
+	OFF = -1,
+	STOP = 0,
+	GO = 1
+};
+
+void SignalControllerProxy::turnMainSignal(sc::integer symbol)
+{
+	SignalState state = SIGNAL_OFF;
+
+	switch (symbol)
+	{
+	default:
+		state = SIGNAL_OFF;
+		break;
+
+	case Symbol::STOP:
+		state = SIGNAL_HP0;
+		break;
+
+	case Symbol::GO:
+		state = SIGNAL_HP1;
+		break;
+	}
+
+	MrwMessage message(main_signal->device()->command(SETSGN));
+
+	message.append(state);
+	ControllerRegistry::can()->write(message);
+}
+
+void SignalControllerProxy::turnDistantSignal(sc::integer symbol)
+{
+	SignalState state = SIGNAL_OFF;
+
+	switch (symbol)
+	{
+	default:
+		state = SIGNAL_OFF;
+		break;
+
+	case Symbol::STOP:
+		state = SIGNAL_VR0;
+		break;
+
+	case Symbol::GO:
+		state = SIGNAL_VR1;
+		break;
+	}
+
+	MrwMessage message(distant_signal->device()->command(SETSGN));
+
+	message.append(state);
+	ControllerRegistry::can()->write(message);
+}
+
+void SignalControllerProxy::turnShuntSignal(sc::integer symbol)
+{
+	SignalState state = SIGNAL_OFF;
+
+	switch (symbol)
+	{
+	default:
+		state = SIGNAL_OFF;
+		break;
+
+	case Symbol::STOP:
+		state = SIGNAL_SH0;
+		break;
+
+	case Symbol::GO:
+		state = SIGNAL_SH1;
+		break;
+	}
+
+	MrwMessage message(shunt_signal->device()->command(SETSGN));
+
+	message.append(state);
+	ControllerRegistry::can()->write(message);
 }
 
 SignalController::TourState SignalControllerProxy::distant() const

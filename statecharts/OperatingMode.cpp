@@ -20,7 +20,7 @@ namespace mrw
 
 		OperatingMode::OperatingMode(QObject * parent) :
 			QObject(parent),
-			timeout(3000),
+			timeout(5000),
 			retry(150),
 			timerService(nullptr),
 			ifaceCan(nullptr),

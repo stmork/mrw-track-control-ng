@@ -92,6 +92,11 @@ namespace mrw::model
 		{
 			return lights;
 		}
+
+		inline Device * device() override
+		{
+			return this;
+		}
 	};
 }
 

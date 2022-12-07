@@ -17,9 +17,9 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
-		enum class TourState
+		enum class TourState : int
 		{
-			STOP, GO
+			STOP = 0, GO = 1
 		};
 
 		explicit SignalController(QObject * parent = nullptr);

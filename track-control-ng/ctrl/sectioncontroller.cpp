@@ -148,7 +148,7 @@ bool SectionController::process(const MrwMessage & message)
 	return false;
 }
 
-QString mrw::ctrl::SectionController::toString() const
+QString SectionController::toString() const
 {
 	return *section();
 }

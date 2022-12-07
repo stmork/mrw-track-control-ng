@@ -53,6 +53,7 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--inline-suppr\
 	--suppress=noExplicitConstructor:statecharts/*.h\
 	--suppress=duplicateBreak:statecharts/*.cpp\
+	--suppress=redundantAssignment:statecharts/*.cpp\
 	--enable=style,warning,performance,portability\
 	--language=c++ --std=c++14\
 	--library=qt\

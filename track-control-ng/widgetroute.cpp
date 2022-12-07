@@ -118,7 +118,6 @@ void WidgetRoute::deactivateSections()
 
 void WidgetRoute::unlockSignals()
 {
-
 }
 
 void WidgetRoute::unlockSwitches()

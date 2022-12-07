@@ -43,9 +43,6 @@ namespace mrw::ctrl
 	private:
 
 		// Implementations from BaseController
-		virtual void inc() override;
-		virtual void dec() override;
-
 		virtual QString name() const override;
 		virtual float   extensions() const override;
 		virtual bool    isDirection() const override;
@@ -61,6 +58,9 @@ namespace mrw::ctrl
 		virtual QString toString() const override;
 
 		// Implementations from OperationCallback
+		virtual void inc() override;
+		virtual void dec() override;
+
 		virtual void off() override;
 		virtual void on() override;
 		virtual void request() override;

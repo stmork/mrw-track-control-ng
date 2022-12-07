@@ -30,12 +30,13 @@ namespace mrw
 			symbolShunt(SignalStatechart::STOP),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
-			completed(false),
-			doCompletion(false),
 			isExecuting(false),
-			stateConfVectorPosition(0),
+			stateConfVectorChanged(false),
 			start_raised(false),
-			response_raised(false)
+			queued_raised(false),
+			response_raised(false),
+			fail_raised(false),
+			clear_raised(false)
 		{
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
 			{
@@ -80,16 +81,31 @@ namespace mrw
 					start_raised = true;
 					break;
 				}
+			case mrw::statechart::SignalStatechart::Event::queued:
+				{
+					queued_raised = true;
+					break;
+				}
 			case mrw::statechart::SignalStatechart::Event::response:
 				{
 					response_raised = true;
 					break;
 				}
-
-
-			case mrw::statechart::SignalStatechart::Event::_te0_main_region_Init_Init_process_Waiting_:
+			case mrw::statechart::SignalStatechart::Event::fail:
 				{
-					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::SignalStatechart::Event::_te0_main_region_Init_Init_process_Waiting_)] = true;
+					fail_raised = true;
+					break;
+				}
+			case mrw::statechart::SignalStatechart::Event::clear:
+				{
+					clear_raised = true;
+					break;
+				}
+
+
+			case mrw::statechart::SignalStatechart::Event::_te0_main_region_Init_:
+				{
+					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::SignalStatechart::Event::_te0_main_region_Init_)] = true;
 					break;
 				}
 			default:
@@ -107,6 +123,13 @@ namespace mrw
 		}
 
 
+		void mrw::statechart::SignalStatechart::queued()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::queued));
+			runCycle();
+		}
+
+
 		void mrw::statechart::SignalStatechart::response()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::response));
@@ -114,15 +137,32 @@ namespace mrw
 		}
 
 
+		void mrw::statechart::SignalStatechart::fail()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::fail));
+			runCycle();
+		}
+
+
+		void mrw::statechart::SignalStatechart::clear()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::clear));
+			runCycle();
+		}
+
+
 
 		bool SignalStatechart::isActive() const
 		{
-			return stateConfVector[0] != mrw::statechart::SignalStatechart::State::NO_STATE || stateConfVector[1] != mrw::statechart::SignalStatechart::State::NO_STATE || stateConfVector[2] != mrw::statechart::SignalStatechart::State::NO_STATE;
+			return stateConfVector[0] != mrw::statechart::SignalStatechart::State::NO_STATE;
 		}
 
+		/*
+		 * Always returns 'false' since this state machine can never become final.
+		 */
 		bool SignalStatechart::isFinal() const
 		{
-			return (stateConfVector[0] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_) && (stateConfVector[1] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_) && (stateConfVector[2] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_);
+			return false;
 		}
 
 		bool SignalStatechart::check() const
@@ -158,7 +198,7 @@ namespace mrw
 		{
 			if (evid < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::SignalStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::SignalStatechart::Event::_te0_main_region_Init_Init_process_Waiting_))));
+				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::SignalStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::SignalStatechart::Event::_te0_main_region_Init_))));
 				runCycle();
 			}
 		}
@@ -170,57 +210,52 @@ namespace mrw
 			{
 			case mrw::statechart::SignalStatechart::State::main_region_Init :
 				{
-					return  (stateConfVector[scvi_main_region_Init] >= mrw::statechart::SignalStatechart::State::main_region_Init && stateConfVector[scvi_main_region_Init] <= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_);
+					return  (stateConfVector[scvi_main_region_Init] >= mrw::statechart::SignalStatechart::State::main_region_Init && stateConfVector[scvi_main_region_Init] <= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending);
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal :
 				{
-					return  (stateConfVector[scvi_main_region_Init_Init_process_Waiting] >= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting && stateConfVector[scvi_main_region_Init_Init_process_Waiting] <= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_);
+					return  (stateConfVector[scvi_main_region_Init_Init_process_Main_signal] >= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal && stateConfVector[scvi_main_region_Init_Init_process_Main_signal] <= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Pending);
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Turn :
 				{
-					return  (stateConfVector[scvi_main_region_Init_Init_process_Waiting_main_Turn] >= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn && stateConfVector[scvi_main_region_Init_Init_process_Waiting_main_Turn] <= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_);
+					return  (stateConfVector[scvi_main_region_Init_Init_process_Main_signal_Turn_main_Turn] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Turn);
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Pending :
 				{
-					return  (stateConfVector[scvi_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn);
+					return  (stateConfVector[scvi_main_region_Init_Init_process_Main_signal_Turn_main_Pending] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Pending);
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_ :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal :
 				{
-					return  (stateConfVector[scvi_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_);
+					return  (stateConfVector[scvi_main_region_Init_Init_process_Distant_signal] >= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal && stateConfVector[scvi_main_region_Init_Init_process_Distant_signal] <= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Pending);
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Turn :
 				{
-					return  (stateConfVector[scvi_main_region_Init_Init_process_Waiting_distant_Turn] >= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn && stateConfVector[scvi_main_region_Init_Init_process_Waiting_distant_Turn] <= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_);
+					return  (stateConfVector[scvi_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Turn);
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Pending :
 				{
-					return  (stateConfVector[scvi_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn);
+					return  (stateConfVector[scvi_main_region_Init_Init_process_Distant_signal_Turn_distant_Pending] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Pending);
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_ :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal :
 				{
-					return  (stateConfVector[scvi_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_);
+					return  (stateConfVector[scvi_main_region_Init_Init_process_Shunt_signal] >= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal && stateConfVector[scvi_main_region_Init_Init_process_Shunt_signal] <= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending);
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn :
 				{
-					return  (stateConfVector[scvi_main_region_Init_Init_process_Waiting_shunt_Turn] >= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn && stateConfVector[scvi_main_region_Init_Init_process_Waiting_shunt_Turn] <= mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_);
+					return  (stateConfVector[scvi_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn);
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending :
 				{
-					return  (stateConfVector[scvi_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn);
-					break;
-				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_ :
-				{
-					return  (stateConfVector[scvi_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_);
+					return  (stateConfVector[scvi_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending] == mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending);
 					break;
 				}
 			case mrw::statechart::SignalStatechart::State::main_region_Wait_for_Start :
@@ -308,38 +343,49 @@ namespace mrw
 		}
 
 // implementations of all internal functions
-		/* Entry action for state 'Waiting'. */
-		void SignalStatechart::enact_main_region_Init_Init_process_Waiting()
+		/* Entry action for state 'Init'. */
+		void SignalStatechart::enact_main_region_Init()
 		{
-			/* Entry action for state 'Waiting'. */
+			/* Entry action for state 'Init'. */
 			timerService->setTimer(this, 0, timeout, false);
+			ifaceOperationCallback->inc();
 		}
 
 		/* Entry action for state 'Turn'. */
-		void SignalStatechart::enact_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn()
+		void SignalStatechart::enact_main_region_Init_Init_process_Main_signal_Turn_main_Turn()
 		{
 			/* Entry action for state 'Turn'. */
 			ifaceOperationCallback->turnMainSignal(symbolMain);
 		}
 
+		/* Entry action for state 'Distant signal'. */
+		void SignalStatechart::enact_main_region_Init_Init_process_Distant_signal()
+		{
+			/* Entry action for state 'Distant signal'. */
+			if (ifaceOperationCallback->hasMain())
+			{
+				symbolDistant = SignalStatechart::OFF;
+			}
+		}
+
 		/* Entry action for state 'Turn'. */
-		void SignalStatechart::enact_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn()
+		void SignalStatechart::enact_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn()
 		{
 			/* Entry action for state 'Turn'. */
 			ifaceOperationCallback->turnDistantSignal(symbolDistant);
 		}
 
-		void SignalStatechart::enact_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn()
+		/* Entry action for state 'Turn'. */
+		void SignalStatechart::enact_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn()
 		{
 			/* Entry action for state 'Turn'. */
 			ifaceOperationCallback->turnShuntSignal(symbolShunt);
-			completed = true;
 		}
 
-		/* Exit action for state 'Waiting'. */
-		void SignalStatechart::exact_main_region_Init_Init_process_Waiting()
+		/* Exit action for state 'Init'. */
+		void SignalStatechart::exact_main_region_Init()
 		{
-			/* Exit action for state 'Waiting'. */
+			/* Exit action for state 'Init'. */
 			timerService->unsetTimer(this, 0);
 		}
 
@@ -347,79 +393,59 @@ namespace mrw
 		void SignalStatechart::enseq_main_region_Init_default()
 		{
 			/* 'default' enter sequence for state Init */
+			enact_main_region_Init();
 			enseq_main_region_Init_Init_process_default();
 		}
 
 		/* 'default' enter sequence for state Turn */
-		void SignalStatechart::enseq_main_region_Init_Init_process_Waiting_main_Turn_default()
+		void SignalStatechart::enseq_main_region_Init_Init_process_Main_signal_Turn_main_Turn_default()
 		{
 			/* 'default' enter sequence for state Turn */
-			enseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_default();
+			enact_main_region_Init_Init_process_Main_signal_Turn_main_Turn();
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Turn;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Pending */
+		void SignalStatechart::enseq_main_region_Init_Init_process_Main_signal_Turn_main_Pending_default()
+		{
+			/* 'default' enter sequence for state Pending */
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Pending;
+			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Turn */
-		void SignalStatechart::enseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn_default()
+		void SignalStatechart::enseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn_default()
 		{
 			/* 'default' enter sequence for state Turn */
-			enact_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn();
-			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn;
-			stateConfVectorPosition = 0;
+			enact_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn();
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Turn;
+			stateConfVectorChanged = true;
 		}
 
-		/* Default enter sequence for final state */
-		void SignalStatechart::enseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final__default()
+		/* 'default' enter sequence for state Pending */
+		void SignalStatechart::enseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Pending_default()
 		{
-			/* Default enter sequence for final state */
-			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_;
-			stateConfVectorPosition = 0;
+			/* 'default' enter sequence for state Pending */
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Pending;
+			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Turn */
-		void SignalStatechart::enseq_main_region_Init_Init_process_Waiting_distant_Turn_default()
+		void SignalStatechart::enseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn_default()
 		{
 			/* 'default' enter sequence for state Turn */
-			enseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_default();
+			enact_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn();
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn;
+			stateConfVectorChanged = true;
 		}
 
-		/* 'default' enter sequence for state Turn */
-		void SignalStatechart::enseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn_default()
+		/* 'default' enter sequence for state Pending */
+		void SignalStatechart::enseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending_default()
 		{
-			/* 'default' enter sequence for state Turn */
-			enact_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn();
-			stateConfVector[1] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn;
-			stateConfVectorPosition = 1;
-		}
-
-		/* Default enter sequence for final state */
-		void SignalStatechart::enseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final__default()
-		{
-			/* Default enter sequence for final state */
-			stateConfVector[1] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_;
-			stateConfVectorPosition = 1;
-		}
-
-		/* 'default' enter sequence for state Turn */
-		void SignalStatechart::enseq_main_region_Init_Init_process_Waiting_shunt_Turn_default()
-		{
-			/* 'default' enter sequence for state Turn */
-			enseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_default();
-		}
-
-		/* 'default' enter sequence for state Turn */
-		void SignalStatechart::enseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn_default()
-		{
-			/* 'default' enter sequence for state Turn */
-			enact_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn();
-			stateConfVector[2] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn;
-			stateConfVectorPosition = 2;
-		}
-
-		/* Default enter sequence for final state */
-		void SignalStatechart::enseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final__default()
-		{
-			/* Default enter sequence for final state */
-			stateConfVector[2] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_;
-			stateConfVectorPosition = 2;
+			/* 'default' enter sequence for state Pending */
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending;
+			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Wait for Start */
@@ -427,7 +453,7 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Wait for Start */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Wait_for_Start;
-			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Operating */
@@ -435,7 +461,7 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Operating */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Operating;
-			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Failed */
@@ -443,7 +469,7 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Failed */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Failed;
-			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for region main region */
@@ -460,90 +486,68 @@ namespace mrw
 			react_main_region_Init_Init_process__entry_Default();
 		}
 
-		/* 'default' enter sequence for region Turn main */
-		void SignalStatechart::enseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_default()
-		{
-			/* 'default' enter sequence for region Turn main */
-			react_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__entry_Default();
-		}
-
-		/* 'default' enter sequence for region Turn distant */
-		void SignalStatechart::enseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_default()
-		{
-			/* 'default' enter sequence for region Turn distant */
-			react_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__entry_Default();
-		}
-
-		/* 'default' enter sequence for region Turn shunt */
-		void SignalStatechart::enseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_default()
-		{
-			/* 'default' enter sequence for region Turn shunt */
-			react_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__entry_Default();
-		}
-
 		/* Default exit sequence for state Init */
 		void SignalStatechart::exseq_main_region_Init()
 		{
 			/* Default exit sequence for state Init */
 			exseq_main_region_Init_Init_process();
+			exact_main_region_Init();
 		}
 
-		/* Default exit sequence for state Waiting */
-		void SignalStatechart::exseq_main_region_Init_Init_process_Waiting()
+		/* Default exit sequence for state Main signal */
+		void SignalStatechart::exseq_main_region_Init_Init_process_Main_signal()
 		{
-			/* Default exit sequence for state Waiting */
-			exseq_main_region_Init_Init_process_Waiting_main();
-			exseq_main_region_Init_Init_process_Waiting_distant();
-			exseq_main_region_Init_Init_process_Waiting_shunt();
-			exact_main_region_Init_Init_process_Waiting();
+			/* Default exit sequence for state Main signal */
+			exseq_main_region_Init_Init_process_Main_signal_Turn_main();
 		}
 
 		/* Default exit sequence for state Turn */
-		void SignalStatechart::exseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn()
+		void SignalStatechart::exseq_main_region_Init_Init_process_Main_signal_Turn_main_Turn()
 		{
 			/* Default exit sequence for state Turn */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
-			stateConfVectorPosition = 0;
 		}
 
-		/* Default exit sequence for final state. */
-		void SignalStatechart::exseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_()
+		/* Default exit sequence for state Pending */
+		void SignalStatechart::exseq_main_region_Init_Init_process_Main_signal_Turn_main_Pending()
 		{
-			/* Default exit sequence for final state. */
+			/* Default exit sequence for state Pending */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
-			stateConfVectorPosition = 0;
+		}
+
+		/* Default exit sequence for state Distant signal */
+		void SignalStatechart::exseq_main_region_Init_Init_process_Distant_signal()
+		{
+			/* Default exit sequence for state Distant signal */
+			exseq_main_region_Init_Init_process_Distant_signal_Turn_distant();
 		}
 
 		/* Default exit sequence for state Turn */
-		void SignalStatechart::exseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn()
+		void SignalStatechart::exseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn()
 		{
 			/* Default exit sequence for state Turn */
-			stateConfVector[1] = mrw::statechart::SignalStatechart::State::NO_STATE;
-			stateConfVectorPosition = 1;
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
 		}
 
-		/* Default exit sequence for final state. */
-		void SignalStatechart::exseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_()
+		/* Default exit sequence for state Pending */
+		void SignalStatechart::exseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Pending()
 		{
-			/* Default exit sequence for final state. */
-			stateConfVector[1] = mrw::statechart::SignalStatechart::State::NO_STATE;
-			stateConfVectorPosition = 1;
+			/* Default exit sequence for state Pending */
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
 		}
 
 		/* Default exit sequence for state Turn */
-		void SignalStatechart::exseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn()
+		void SignalStatechart::exseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn()
 		{
 			/* Default exit sequence for state Turn */
-			stateConfVector[2] = mrw::statechart::SignalStatechart::State::NO_STATE;
-			stateConfVectorPosition = 2;
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
 		}
 
-		/* Default exit sequence for final state. */
-		void SignalStatechart::exseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_()
+		/* Default exit sequence for state Pending */
+		void SignalStatechart::exseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending()
 		{
-			/* Default exit sequence for final state. */
-			stateConfVector[2] = mrw::statechart::SignalStatechart::State::NO_STATE;
-			stateConfVectorPosition = 2;
+			/* Default exit sequence for state Pending */
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
 		}
 
 		/* Default exit sequence for state Wait for Start */
@@ -551,7 +555,6 @@ namespace mrw
 		{
 			/* Default exit sequence for state Wait for Start */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
-			stateConfVectorPosition = 0;
 		}
 
 		/* Default exit sequence for state Operating */
@@ -559,7 +562,6 @@ namespace mrw
 		{
 			/* Default exit sequence for state Operating */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
-			stateConfVectorPosition = 0;
 		}
 
 		/* Default exit sequence for state Failed */
@@ -567,7 +569,6 @@ namespace mrw
 		{
 			/* Default exit sequence for state Failed */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
-			stateConfVectorPosition = 0;
 		}
 
 		/* Default exit sequence for region main region */
@@ -577,14 +578,40 @@ namespace mrw
 			/* Handle exit of all possible states (of mrw.statechart.SignalStatechart.main_region) at position 0... */
 			switch (stateConfVector[ 0 ])
 			{
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Turn :
 				{
-					exseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn();
+					exseq_main_region_Init_Init_process_Main_signal_Turn_main_Turn();
+					exact_main_region_Init();
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_ :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Pending :
 				{
-					exseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_();
+					exseq_main_region_Init_Init_process_Main_signal_Turn_main_Pending();
+					exact_main_region_Init();
+					break;
+				}
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Turn :
+				{
+					exseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn();
+					exact_main_region_Init();
+					break;
+				}
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Pending :
+				{
+					exseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Pending();
+					exact_main_region_Init();
+					break;
+				}
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn :
+				{
+					exseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn();
+					exact_main_region_Init();
+					break;
+				}
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending :
+				{
+					exseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending();
+					exact_main_region_Init();
 					break;
 				}
 			case mrw::statechart::SignalStatechart::State::main_region_Wait_for_Start :
@@ -606,42 +633,6 @@ namespace mrw
 				/* do nothing */
 				break;
 			}
-			/* Handle exit of all possible states (of mrw.statechart.SignalStatechart.main_region) at position 1... */
-			switch (stateConfVector[ 1 ])
-			{
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn :
-				{
-					exseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn();
-					break;
-				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_ :
-				{
-					exseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_();
-					break;
-				}
-			default:
-				/* do nothing */
-				break;
-			}
-			/* Handle exit of all possible states (of mrw.statechart.SignalStatechart.main_region) at position 2... */
-			switch (stateConfVector[ 2 ])
-			{
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn :
-				{
-					exseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn();
-					exact_main_region_Init_Init_process_Waiting();
-					break;
-				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_ :
-				{
-					exseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_();
-					exact_main_region_Init_Init_process_Waiting();
-					break;
-				}
-			default:
-				/* do nothing */
-				break;
-			}
 		}
 
 		/* Default exit sequence for region Init process */
@@ -651,50 +642,34 @@ namespace mrw
 			/* Handle exit of all possible states (of mrw.statechart.SignalStatechart.main_region.Init.Init_process) at position 0... */
 			switch (stateConfVector[ 0 ])
 			{
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Turn :
 				{
-					exseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn();
+					exseq_main_region_Init_Init_process_Main_signal_Turn_main_Turn();
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_ :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Pending :
 				{
-					exseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_();
+					exseq_main_region_Init_Init_process_Main_signal_Turn_main_Pending();
 					break;
 				}
-			default:
-				/* do nothing */
-				break;
-			}
-			/* Handle exit of all possible states (of mrw.statechart.SignalStatechart.main_region.Init.Init_process) at position 1... */
-			switch (stateConfVector[ 1 ])
-			{
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Turn :
 				{
-					exseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn();
+					exseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn();
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_ :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Pending :
 				{
-					exseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_();
+					exseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Pending();
 					break;
 				}
-			default:
-				/* do nothing */
-				break;
-			}
-			/* Handle exit of all possible states (of mrw.statechart.SignalStatechart.main_region.Init.Init_process) at position 2... */
-			switch (stateConfVector[ 2 ])
-			{
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn :
 				{
-					exseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn();
-					exact_main_region_Init_Init_process_Waiting();
+					exseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn();
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_ :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending :
 				{
-					exseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_();
-					exact_main_region_Init_Init_process_Waiting();
+					exseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending();
 					break;
 				}
 			default:
@@ -703,44 +678,21 @@ namespace mrw
 			}
 		}
 
-		/* Default exit sequence for region main */
-		void SignalStatechart::exseq_main_region_Init_Init_process_Waiting_main()
+		/* Default exit sequence for region Turn main */
+		void SignalStatechart::exseq_main_region_Init_Init_process_Main_signal_Turn_main()
 		{
-			/* Default exit sequence for region main */
-			/* Handle exit of all possible states (of mrw.statechart.SignalStatechart.main_region.Init.Init_process.Waiting.main) at position 0... */
+			/* Default exit sequence for region Turn main */
+			/* Handle exit of all possible states (of mrw.statechart.SignalStatechart.main_region.Init.Init_process.Main_signal.Turn_main) at position 0... */
 			switch (stateConfVector[ 0 ])
 			{
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Turn :
 				{
-					exseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn();
+					exseq_main_region_Init_Init_process_Main_signal_Turn_main_Turn();
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_ :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Pending :
 				{
-					exseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_();
-					break;
-				}
-			default:
-				/* do nothing */
-				break;
-			}
-		}
-
-		/* Default exit sequence for region distant */
-		void SignalStatechart::exseq_main_region_Init_Init_process_Waiting_distant()
-		{
-			/* Default exit sequence for region distant */
-			/* Handle exit of all possible states (of mrw.statechart.SignalStatechart.main_region.Init.Init_process.Waiting.distant) at position 1... */
-			switch (stateConfVector[ 1 ])
-			{
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn :
-				{
-					exseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn();
-					break;
-				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_ :
-				{
-					exseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_();
+					exseq_main_region_Init_Init_process_Main_signal_Turn_main_Pending();
 					break;
 				}
 			default:
@@ -749,21 +701,21 @@ namespace mrw
 			}
 		}
 
-		/* Default exit sequence for region shunt */
-		void SignalStatechart::exseq_main_region_Init_Init_process_Waiting_shunt()
+		/* Default exit sequence for region Turn distant */
+		void SignalStatechart::exseq_main_region_Init_Init_process_Distant_signal_Turn_distant()
 		{
-			/* Default exit sequence for region shunt */
-			/* Handle exit of all possible states (of mrw.statechart.SignalStatechart.main_region.Init.Init_process.Waiting.shunt) at position 2... */
-			switch (stateConfVector[ 2 ])
+			/* Default exit sequence for region Turn distant */
+			/* Handle exit of all possible states (of mrw.statechart.SignalStatechart.main_region.Init.Init_process.Distant_signal.Turn_distant) at position 0... */
+			switch (stateConfVector[ 0 ])
 			{
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Turn :
 				{
-					exseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn();
+					exseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn();
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_ :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Pending :
 				{
-					exseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_();
+					exseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Pending();
 					break;
 				}
 			default:
@@ -773,44 +725,48 @@ namespace mrw
 		}
 
 		/* The reactions of state null. */
-		void SignalStatechart::react_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__choice_0()
+		void SignalStatechart::react_main_region_Init_Init_process__choice_0()
 		{
 			/* The reactions of state null. */
 			if (ifaceOperationCallback->hasMain())
 			{
-				enseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn_default();
+				enseq_main_region_Init_Init_process_Main_signal_Turn_main_Turn_default();
 			}
 			else
 			{
-				enseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final__default();
+				react_main_region_Init_Init_process__choice_1();
 			}
 		}
 
 		/* The reactions of state null. */
-		void SignalStatechart::react_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__choice_0()
+		void SignalStatechart::react_main_region_Init_Init_process__choice_1()
 		{
 			/* The reactions of state null. */
 			if (ifaceOperationCallback->hasDistant())
 			{
-				enseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn_default();
+				enact_main_region_Init_Init_process_Distant_signal();
+				enseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn_default();
 			}
 			else
 			{
-				enseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final__default();
+				react_main_region_Init_Init_process__choice_2();
 			}
 		}
 
 		/* The reactions of state null. */
-		void SignalStatechart::react_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__choice_0()
+		void SignalStatechart::react_main_region_Init_Init_process__choice_2()
 		{
 			/* The reactions of state null. */
 			if (ifaceOperationCallback->hasShunt())
 			{
-				enseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn_default();
+				enseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn_default();
 			}
 			else
 			{
-				enseq_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final__default();
+				exseq_main_region_Init();
+				ifaceOperationCallback->dec();
+				enseq_main_region_Operating_default();
+				react(0);
 			}
 		}
 
@@ -822,50 +778,10 @@ namespace mrw
 		}
 
 		/* Default react sequence for initial entry  */
-		void SignalStatechart::react_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__entry_Default()
-		{
-			/* Default react sequence for initial entry  */
-			react_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__choice_0();
-		}
-
-		/* Default react sequence for initial entry  */
-		void SignalStatechart::react_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__entry_Default()
-		{
-			/* Default react sequence for initial entry  */
-			react_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__choice_0();
-		}
-
-		/* Default react sequence for initial entry  */
-		void SignalStatechart::react_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__entry_Default()
-		{
-			/* Default react sequence for initial entry  */
-			react_main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__choice_0();
-		}
-
-		/* Default react sequence for initial entry  */
 		void SignalStatechart::react_main_region_Init_Init_process__entry_Default()
 		{
 			/* Default react sequence for initial entry  */
-			react_main_region_Init_Init_process__sync0();
-		}
-
-		/* The reactions of state null. */
-		void SignalStatechart::react_main_region_Init_Init_process__sync0()
-		{
-			/* The reactions of state null. */
-			enact_main_region_Init_Init_process_Waiting();
-			enseq_main_region_Init_Init_process_Waiting_main_Turn_default();
-			enseq_main_region_Init_Init_process_Waiting_distant_Turn_default();
-			enseq_main_region_Init_Init_process_Waiting_shunt_Turn_default();
-		}
-
-		/* The reactions of state null. */
-		void SignalStatechart::react_main_region_Init_Init_process__sync1()
-		{
-			/* The reactions of state null. */
-			exseq_main_region_Init();
-			enseq_main_region_Operating_default();
-			react(0);
+			react_main_region_Init_Init_process__choice_0();
 		}
 
 		sc::integer SignalStatechart::react(const sc::integer transitioned_before)
@@ -878,27 +794,16 @@ namespace mrw
 		{
 			/* The reactions of state Init. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
+				if (fail_raised)
 				{
+					exseq_main_region_Init();
+					enseq_main_region_Failed_default();
+					react(0);
+					transitioned_after = 0;
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
-			}
-			return transitioned_after;
-		}
-
-		sc::integer SignalStatechart::main_region_Init_Init_process_Waiting_react(const sc::integer transitioned_before)
-		{
-			/* The reactions of state Waiting. */
-			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
-			{
-				if ((transitioned_after) < (0))
+				else
 				{
 					if (timeEvents[0])
 					{
@@ -906,217 +811,190 @@ namespace mrw
 						timeEvents[0] = false;
 						enseq_main_region_Failed_default();
 						react(0);
-						transitioned_after = 2;
-					}
-				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = main_region_Init_react(transitioned_before);
-				}
-			}
-			return transitioned_after;
-		}
-
-		sc::integer SignalStatechart::main_region_Init_Init_process_Waiting_main_Turn_react(const sc::integer transitioned_before)
-		{
-			/* The reactions of state Turn. */
-			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
-			{
-				if ((transitioned_after) < (0))
-				{
-					if ((isStateActive(mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn)) && (isStateActive(mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn)))
-					{
-						exseq_main_region_Init_Init_process_Waiting();
-						react_main_region_Init_Init_process__sync1();
 						transitioned_after = 0;
 					}
 				}
 			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
+			}
 			return transitioned_after;
 		}
 
-		sc::integer SignalStatechart::main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn_react(const sc::integer transitioned_before)
+		sc::integer SignalStatechart::main_region_Init_Init_process_Main_signal_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Main signal. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (response_raised)
+				{
+					exseq_main_region_Init_Init_process_Main_signal();
+					react_main_region_Init_Init_process__choice_1();
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Init_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SignalStatechart::main_region_Init_Init_process_Main_signal_Turn_main_Turn_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Turn. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
+				if (queued_raised)
 				{
-					if (response_raised)
-					{
-						exseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn();
-						enseq_main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final__default();
-						transitioned_after = 0;
-					}
+					exseq_main_region_Init_Init_process_Main_signal_Turn_main_Turn();
+					enseq_main_region_Init_Init_process_Main_signal_Turn_main_Pending_default();
+					main_region_Init_Init_process_Main_signal_react(0);
+					transitioned_after = 0;
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = main_region_Init_Init_process_Waiting_main_Turn_react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Init_Init_process_Main_signal_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		sc::integer SignalStatechart::main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final__react(const sc::integer transitioned_before)
+		sc::integer SignalStatechart::main_region_Init_Init_process_Main_signal_Turn_main_Pending_react(const sc::integer transitioned_before)
 		{
-			/* The reactions of state null. */
+			/* The reactions of state Pending. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
-				{
-				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = main_region_Init_Init_process_Waiting_main_Turn_react(transitioned_before);
-				}
 			}
-			else
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
 			{
-				transitioned_after = main_region_Init_Init_process_Waiting_main_Turn_react(transitioned_before);
+				transitioned_after = main_region_Init_Init_process_Main_signal_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		sc::integer SignalStatechart::main_region_Init_Init_process_Waiting_distant_Turn_react(const sc::integer transitioned_before)
+		sc::integer SignalStatechart::main_region_Init_Init_process_Distant_signal_react(const sc::integer transitioned_before)
 		{
-			/* The reactions of state Turn. */
+			/* The reactions of state Distant signal. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (1))
+				if (response_raised)
 				{
-					if ((isStateActive(mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn)) && (isStateActive(mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn)))
-					{
-						exseq_main_region_Init_Init_process_Waiting();
-						react_main_region_Init_Init_process__sync1();
-						transitioned_after = 1;
-					}
+					exseq_main_region_Init_Init_process_Distant_signal();
+					react_main_region_Init_Init_process__choice_2();
+					transitioned_after = 0;
 				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Init_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		sc::integer SignalStatechart::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn_react(const sc::integer transitioned_before)
+		sc::integer SignalStatechart::main_region_Init_Init_process_Distant_signal_Turn_distant_Turn_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Turn. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (1))
+				if (queued_raised)
 				{
-					if (response_raised)
-					{
-						exseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn();
-						enseq_main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final__default();
-						transitioned_after = 1;
-					}
+					exseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn();
+					enseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Pending_default();
+					main_region_Init_Init_process_Distant_signal_react(0);
+					transitioned_after = 0;
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = main_region_Init_Init_process_Waiting_distant_Turn_react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Init_Init_process_Distant_signal_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		sc::integer SignalStatechart::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final__react(const sc::integer transitioned_before)
+		sc::integer SignalStatechart::main_region_Init_Init_process_Distant_signal_Turn_distant_Pending_react(const sc::integer transitioned_before)
 		{
-			/* The reactions of state null. */
+			/* The reactions of state Pending. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (1))
-				{
-				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = main_region_Init_Init_process_Waiting_distant_Turn_react(transitioned_before);
-				}
 			}
-			else
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
 			{
-				transitioned_after = main_region_Init_Init_process_Waiting_distant_Turn_react(transitioned_before);
+				transitioned_after = main_region_Init_Init_process_Distant_signal_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		sc::integer SignalStatechart::main_region_Init_Init_process_Waiting_shunt_Turn_react(const sc::integer transitioned_before)
+		sc::integer SignalStatechart::main_region_Init_Init_process_Shunt_signal_react(const sc::integer transitioned_before)
 		{
-			/* The reactions of state Turn. */
+			/* The reactions of state Shunt signal. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (2))
+				if (response_raised)
 				{
-					if ((isStateActive(mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn)) && (isStateActive(mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn)))
-					{
-						exseq_main_region_Init_Init_process_Waiting();
-						react_main_region_Init_Init_process__sync1();
-						transitioned_after = 2;
-					}
+					exseq_main_region_Init();
+					ifaceOperationCallback->dec();
+					enseq_main_region_Operating_default();
+					react(0);
+					transitioned_after = 0;
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = main_region_Init_Init_process_Waiting_react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Init_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		sc::integer SignalStatechart::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn_react(const sc::integer transitioned_before)
+		sc::integer SignalStatechart::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Turn. */
 			sc::integer transitioned_after = transitioned_before;
-			if (doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				/* Default exit sequence for state Turn */
-				stateConfVector[2] = mrw::statechart::SignalStatechart::State::NO_STATE;
-				stateConfVectorPosition = 2;
-				/* Default enter sequence for final state */
-				stateConfVector[2] = mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_;
-				stateConfVectorPosition = 2;
+				if (queued_raised)
+				{
+					exseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn();
+					enseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending_default();
+					main_region_Init_Init_process_Shunt_signal_react(0);
+					transitioned_after = 0;
+				}
 			}
-			else
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
 			{
-				if ((transitioned_after) < (2))
-				{
-				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = main_region_Init_Init_process_Waiting_shunt_Turn_react(transitioned_before);
-				}
+				transitioned_after = main_region_Init_Init_process_Shunt_signal_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		sc::integer SignalStatechart::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final__react(const sc::integer transitioned_before)
+		sc::integer SignalStatechart::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending_react(const sc::integer transitioned_before)
 		{
-			/* The reactions of state null. */
+			/* The reactions of state Pending. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (2))
-				{
-				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = main_region_Init_Init_process_Waiting_shunt_Turn_react(transitioned_before);
-				}
 			}
-			else
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
 			{
-				transitioned_after = main_region_Init_Init_process_Waiting_shunt_Turn_react(transitioned_before);
+				transitioned_after = main_region_Init_Init_process_Shunt_signal_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -1125,23 +1003,20 @@ namespace mrw
 		{
 			/* The reactions of state Wait for Start. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
+				if (start_raised)
 				{
-					if (start_raised)
-					{
-						exseq_main_region_Wait_for_Start();
-						enseq_main_region_Init_default();
-						react(0);
-						transitioned_after = 0;
-					}
+					exseq_main_region_Wait_for_Start();
+					enseq_main_region_Init_default();
+					react(0);
+					transitioned_after = 0;
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -1150,16 +1025,13 @@ namespace mrw
 		{
 			/* The reactions of state Operating. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
-				{
-				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -1168,16 +1040,20 @@ namespace mrw
 		{
 			/* The reactions of state Failed. */
 			sc::integer transitioned_after = transitioned_before;
-			if (!doCompletion)
+			if ((transitioned_after) < (0))
 			{
-				if ((transitioned_after) < (0))
+				if (clear_raised)
 				{
+					exseq_main_region_Failed();
+					enseq_main_region_Init_default();
+					react(0);
+					transitioned_after = 0;
 				}
-				/* If no transition was taken then execute local reactions */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					transitioned_after = react(transitioned_before);
-				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -1185,82 +1061,65 @@ namespace mrw
 		void SignalStatechart::clearInEvents()
 		{
 			start_raised = false;
+			queued_raised = false;
 			response_raised = false;
+			fail_raised = false;
+			clear_raised = false;
 			timeEvents[0] = false;
 		}
 
 		void SignalStatechart::microStep()
 		{
-			sc::integer transitioned = -1;
-			stateConfVectorPosition = 0;
 			switch (stateConfVector[ 0 ])
 			{
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Turn :
 				{
-					transitioned = main_region_Init_Init_process_Waiting_main_Turn_Turn_main_Turn_react(transitioned);
+					main_region_Init_Init_process_Main_signal_Turn_main_Turn_react(-1);
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final_ :
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Main_signal_Turn_main_Pending :
 				{
-					transitioned = main_region_Init_Init_process_Waiting_main_Turn_Turn_main__final__react(transitioned);
+					main_region_Init_Init_process_Main_signal_Turn_main_Pending_react(-1);
+					break;
+				}
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Turn :
+				{
+					main_region_Init_Init_process_Distant_signal_Turn_distant_Turn_react(-1);
+					break;
+				}
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Distant_signal_Turn_distant_Pending :
+				{
+					main_region_Init_Init_process_Distant_signal_Turn_distant_Pending_react(-1);
+					break;
+				}
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn :
+				{
+					main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn_react(-1);
+					break;
+				}
+			case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending :
+				{
+					main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending_react(-1);
 					break;
 				}
 			case mrw::statechart::SignalStatechart::State::main_region_Wait_for_Start :
 				{
-					transitioned = main_region_Wait_for_Start_react(transitioned);
+					main_region_Wait_for_Start_react(-1);
 					break;
 				}
 			case mrw::statechart::SignalStatechart::State::main_region_Operating :
 				{
-					transitioned = main_region_Operating_react(transitioned);
+					main_region_Operating_react(-1);
 					break;
 				}
 			case mrw::statechart::SignalStatechart::State::main_region_Failed :
 				{
-					transitioned = main_region_Failed_react(transitioned);
+					main_region_Failed_react(-1);
 					break;
 				}
 			default:
 				/* do nothing */
 				break;
-			}
-			if ((stateConfVectorPosition) < (1))
-			{
-				switch (stateConfVector[ 1 ])
-				{
-				case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn :
-					{
-						transitioned = main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant_Turn_react(transitioned);
-						break;
-					}
-				case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final_ :
-					{
-						transitioned = main_region_Init_Init_process_Waiting_distant_Turn_Turn_distant__final__react(transitioned);
-						break;
-					}
-				default:
-					/* do nothing */
-					break;
-				}
-			}
-			if ((stateConfVectorPosition) < (2))
-			{
-				switch (stateConfVector[ 2 ])
-				{
-				case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn :
-					{
-						main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt_Turn_react(transitioned);
-						break;
-					}
-				case mrw::statechart::SignalStatechart::State::main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final_ :
-					{
-						main_region_Init_Init_process_Waiting_shunt_Turn_Turn_shunt__final__react(transitioned);
-						break;
-					}
-				default:
-					/* do nothing */
-					break;
-				}
 			}
 		}
 
@@ -1275,22 +1134,16 @@ namespace mrw
 			dispatchEvent(getNextEvent());
 			do
 			{
-				doCompletion = false;
 				do
 				{
-					if (completed)
-					{
-						doCompletion = true;
-					}
-					completed = false;
+					stateConfVectorChanged = false;
 					microStep();
-					doCompletion = false;
 				}
-				while (completed);
+				while (stateConfVectorChanged);
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((start_raised) || (response_raised)) || (timeEvents[0]));
+			while ((((((start_raised) || (queued_raised)) || (response_raised)) || (fail_raised)) || (clear_raised)) || (timeEvents[0]));
 			isExecuting = false;
 		}
 
@@ -1304,18 +1157,12 @@ namespace mrw
 			isExecuting = true;
 			/* Default enter sequence for statechart SignalStatechart */
 			enseq_main_region_default();
-			doCompletion = false;
 			do
 			{
-				if (completed)
-				{
-					doCompletion = true;
-				}
-				completed = false;
+				stateConfVectorChanged = false;
 				microStep();
-				doCompletion = false;
 			}
-			while (completed);
+			while (stateConfVectorChanged);
 			isExecuting = false;
 		}
 

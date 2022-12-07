@@ -12,6 +12,7 @@ HEADERS += \
 	OperatingMode.h \
 	RouteStatechart.h \
 	SectionStatechart.h \
+	SignalStatechart.h \
 	SwitchStatechart.h \
 	common/sc_statemachine.h \
 	common/sc_timer.h \
@@ -22,6 +23,7 @@ SOURCES += \
 	OperatingMode.cpp \
 	RouteStatechart.cpp \
 	SectionStatechart.cpp \
+	SignalStatechart.cpp \
 	SwitchStatechart.cpp \
 	timerservice.cpp
 
