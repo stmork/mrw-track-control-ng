@@ -43,7 +43,13 @@ namespace mrw::ctrl
 			mrw::model::Device   *   device,
 			ControllerRegistrand  *  ctrl);
 		void unregisterController(mrw::model::Device * device);
-		ControllerRegistrand * find(mrw::model::Device * device);
+
+		ControllerRegistrand * find(mrw::model::Device * device) const;
+
+		template <class R> R * find(mrw::model::Device * device) const
+		{
+			return dynamic_cast<R *>(find(device));
+		}
 
 		void registerService(mrw::can::MrwBusService * service);
 		static mrw::can::MrwBusService * can();

@@ -39,8 +39,6 @@ namespace mrw::ctrl
 	signals:
 		void enable();
 		void disable();
-
-	public slots:
 		void left();
 
 	private:

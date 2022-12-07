@@ -49,6 +49,30 @@ void WidgetRoute::turn()
 	QMetaObject::invokeMethod(&statechart, &RouteStatechart::extended, Qt::QueuedConnection);
 }
 
+void WidgetRoute::prepare()
+{
+	Route::prepare();
+
+	for (Section * section : sections)
+	{
+		SectionController * controller =
+			ControllerRegistry::instance().find<SectionController>(section);
+
+		Q_ASSERT(controller != nullptr);
+		connect(
+			controller, &SectionController::left,
+			this, &WidgetRoute::left,
+			Qt::QueuedConnection);
+	}
+}
+
+void WidgetRoute::left()
+{
+	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
+
+	qDebug().noquote() << "Left:" << *controller;
+}
+
 void WidgetRoute::reset()
 {
 	ControllerRegistry::instance().reset();
@@ -65,23 +89,18 @@ void WidgetRoute::turnSwitches()
 	{
 		Device * device = dynamic_cast<Device *>(part);
 
-		if (device != nullptr)
+		RegularSwitchControllerProxy   *   rs_ctrl  =
+			ControllerRegistry::instance().find<RegularSwitchControllerProxy>(device);
+		DoubleCrossSwitchControllerProxy * dcs_ctrl =
+			ControllerRegistry::instance().find<DoubleCrossSwitchControllerProxy>(device);
+
+		if (rs_ctrl != nullptr)
 		{
-			ControllerRegistrand * controller = ControllerRegistry::instance().find(device);
-
-			RegularSwitchControllerProxy * rs_ctrl =
-				dynamic_cast<RegularSwitchControllerProxy *>(controller);
-			DoubleCrossSwitchControllerProxy * dcs_ctrl =
-				dynamic_cast<DoubleCrossSwitchControllerProxy *>(controller);
-
-			if (rs_ctrl != nullptr)
-			{
-				rs_ctrl->turn();
-			}
-			if (dcs_ctrl != nullptr)
-			{
-				dcs_ctrl->turn();
-			}
+			rs_ctrl->turn();
+		}
+		if (dcs_ctrl != nullptr)
+		{
+			dcs_ctrl->turn();
 		}
 	}
 }
@@ -90,17 +109,14 @@ void WidgetRoute::activateSections()
 {
 	for (Section * section : sections)
 	{
-		ControllerRegistrand * controller = ControllerRegistry::instance().find(section);
+		SectionController * controller = ControllerRegistry::instance().find<SectionController>(section);
 
-		SectionController * proxy = dynamic_cast<SectionController *>(controller);
-
-		proxy->enable();
+		controller->enable();
 	}
 }
 
 void WidgetRoute::turnSignals()
 {
-	// TODO: Implement signal state machine first.
 	statechart.turned();
 }
 
@@ -108,11 +124,9 @@ void WidgetRoute::deactivateSections()
 {
 	for (Section * section : sections)
 	{
-		ControllerRegistrand * controller = ControllerRegistry::instance().find(section);
+		SectionController * controller = ControllerRegistry::instance().find<SectionController>(section);
 
-		SectionController * proxy = dynamic_cast<SectionController *>(controller);
-
-		proxy->disable();
+		controller->disable();
 	}
 }
 
@@ -125,12 +139,11 @@ void WidgetRoute::unlockSwitches()
 	for (RailPart * part : track)
 	{
 		Device * device = dynamic_cast<Device *>(part);
-		ControllerRegistrand * controller = ControllerRegistry::instance().find(device);
 
-		RegularSwitchControllerProxy * rs_ctrl =
-			dynamic_cast<RegularSwitchControllerProxy *>(controller);
+		RegularSwitchControllerProxy   *   rs_ctrl  =
+			ControllerRegistry::instance().find<RegularSwitchControllerProxy>(device);
 		DoubleCrossSwitchControllerProxy * dcs_ctrl =
-			dynamic_cast<DoubleCrossSwitchControllerProxy *>(controller);
+			ControllerRegistry::instance().find<DoubleCrossSwitchControllerProxy>(device);
 
 		if (rs_ctrl != nullptr)
 		{

@@ -41,20 +41,16 @@ void MrwMessageDispatcher::process(const MrwMessage & message)
 
 	if (message.isResponse() && (dst == CAN_GATEWAY_ID))
 	{
-		const UnitNo       unit_no = message.unitNo();
+		const UnitNo           unit_no    = message.unitNo();
+		Device        *        device     = model->deviceByUnitNo(unit_no);
+		ControllerRegistrand * controller =
+			ControllerRegistry::instance().find<ControllerRegistrand>(device);
 
-		Device * device = model->deviceByUnitNo(unit_no);
-
-		if (device != nullptr)
+		if (controller != nullptr)
 		{
-			ControllerRegistrand * controller = ControllerRegistry::instance().find(device);
-
-			if (controller != nullptr)
+			if (controller->process(message))
 			{
-				if (controller->process(message))
-				{
-					return;
-				}
+				return;
 			}
 		}
 	}

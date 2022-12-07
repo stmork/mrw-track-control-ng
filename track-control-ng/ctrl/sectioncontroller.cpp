@@ -68,10 +68,6 @@ Section * SectionController::section() const
 	return *this;
 }
 
-void SectionController::left()
-{
-}
-
 void SectionController::inc()
 {
 	ControllerRegistry::instance().increase(this);

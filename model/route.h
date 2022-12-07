@@ -38,8 +38,9 @@ namespace mrw::model
 
 		bool extend(RailPart * target);
 		bool extend(RailPart * rail, RailPart * target);
-		void prepare();
 		void clear();
+
+		virtual void prepare();
 
 	protected:
 		Track                   track;

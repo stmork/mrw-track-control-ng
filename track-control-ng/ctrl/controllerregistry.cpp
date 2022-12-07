@@ -38,9 +38,15 @@ void ControllerRegistry::unregisterController(Device * device)
 	registry.erase(device);
 }
 
-ControllerRegistrand * ControllerRegistry::find(Device * device)
+ControllerRegistrand * ControllerRegistry::find(Device * device) const
 {
-	return registry[device];
+	if (device == nullptr)
+	{
+		return nullptr;
+	}
+
+	auto it = registry.find(device);
+	return it != registry.end() ? it->second: nullptr;
 }
 
 void ControllerRegistry::registerService(MrwBusService * service)

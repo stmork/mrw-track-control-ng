@@ -40,6 +40,11 @@ public:
 
 	void turn();
 
+	virtual void prepare() override;
+
+public slots:
+	void left();
+
 private:
 
 	virtual void reset() override;
