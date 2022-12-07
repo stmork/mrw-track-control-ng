@@ -59,16 +59,18 @@ namespace mrw
 				main_region_Operating,
 				main_region_Operating_Processing_Unlocked,
 				main_region_Operating_Processing_Locked,
-				main_region_Operating_Processing_Locked_Lock_Handling_Enable,
-				main_region_Operating_Processing_Locked_Lock_Handling_Enabled,
-				main_region_Operating_Processing_Locked_Lock_Handling_Disable,
-				main_region_Operating_Processing_Locked_Lock_Handling_Passed,
+				main_region_Operating_Processing_Locked_Route_active_Enabled,
+				main_region_Operating_Processing_Locked_Route_active_Passed,
+				main_region_Operating_Processing_Locked_Route_active_Waiting,
+				main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left,
+				main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling,
+				main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling,
 				main_region_Failed,
 				main_region_Wait_for_Start
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 15;
+			static const sc::integer numStates = 17;
 			static const sc::integer scvi_main_region_Init = 0;
 			static const sc::integer scvi_main_region_Init_Init_Process_Requesting = 0;
 			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_relais_Relay = 0;
@@ -78,10 +80,12 @@ namespace mrw
 			static const sc::integer scvi_main_region_Operating = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Unlocked = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Locked = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Lock_Handling_Enable = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Lock_Handling_Enabled = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Lock_Handling_Disable = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Lock_Handling_Passed = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Enabled = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Passed = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling = 0;
 			static const sc::integer scvi_main_region_Failed = 0;
 			static const sc::integer scvi_main_region_Wait_for_Start = 0;
 
@@ -97,8 +101,7 @@ namespace mrw
 				clear,
 				failed,
 				_te0_main_region_Init_,
-				_te1_main_region_Operating_Processing_Locked_Lock_Handling_Enable_,
-				_te2_main_region_Operating_Processing_Locked_Lock_Handling_Disable_
+				_te1_main_region_Operating_Processing_Locked_Route_active_Waiting_
 			};
 
 			class EventInstance
@@ -203,7 +206,7 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 3;
+			static const sc::integer timeEventsCount = 2;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
@@ -284,12 +287,13 @@ namespace mrw
 			void enact_main_region_Init_Init_Process_Requesting_state_Occupation();
 			void enact_main_region_Operating_Processing_Unlocked();
 			void enact_main_region_Operating_Processing_Locked();
-			void enact_main_region_Operating_Processing_Locked_Lock_Handling_Enable();
-			void enact_main_region_Operating_Processing_Locked_Lock_Handling_Disable();
-			void enact_main_region_Operating_Processing_Locked_Lock_Handling_Passed();
+			void enact_main_region_Operating_Processing_Locked_Route_active_Passed();
+			void enact_main_region_Operating_Processing_Locked_Route_active_Waiting();
+			void enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left();
+			void enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling();
+			void enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling();
 			void exact_main_region_Init();
-			void exact_main_region_Operating_Processing_Locked_Lock_Handling_Enable();
-			void exact_main_region_Operating_Processing_Locked_Lock_Handling_Disable();
+			void exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
 			void enseq_main_region_Init_default();
 			void enseq_main_region_Init_Init_Process_Requesting_relais_Relay_default();
 			void enseq_main_region_Init_Init_Process_Requesting_relais_Wait_default();
@@ -298,16 +302,17 @@ namespace mrw
 			void enseq_main_region_Operating_default();
 			void enseq_main_region_Operating_Processing_Unlocked_default();
 			void enseq_main_region_Operating_Processing_Locked_default();
-			void enseq_main_region_Operating_Processing_Locked_Lock_Handling_Enable_default();
-			void enseq_main_region_Operating_Processing_Locked_Lock_Handling_Enabled_default();
-			void enseq_main_region_Operating_Processing_Locked_Lock_Handling_Disable_default();
-			void enseq_main_region_Operating_Processing_Locked_Lock_Handling_Passed_default();
+			void enseq_main_region_Operating_Processing_Locked_Route_active_Enabled_default();
+			void enseq_main_region_Operating_Processing_Locked_Route_active_Passed_default();
+			void enseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left_default();
+			void enseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling_default();
+			void enseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_Wait_for_Start_default();
 			void enseq_main_region_default();
 			void enseq_main_region_Init_Init_Process_default();
 			void enseq_main_region_Operating_Processing_default();
-			void enseq_main_region_Operating_Processing_Locked_Lock_Handling_default();
+			void enseq_main_region_Operating_Processing_Locked_Route_active_default();
 			void exseq_main_region_Init();
 			void exseq_main_region_Init_Init_Process_Requesting();
 			void exseq_main_region_Init_Init_Process_Requesting_relais_Relay();
@@ -317,10 +322,12 @@ namespace mrw
 			void exseq_main_region_Operating();
 			void exseq_main_region_Operating_Processing_Unlocked();
 			void exseq_main_region_Operating_Processing_Locked();
-			void exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enable();
-			void exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enabled();
-			void exseq_main_region_Operating_Processing_Locked_Lock_Handling_Disable();
-			void exseq_main_region_Operating_Processing_Locked_Lock_Handling_Passed();
+			void exseq_main_region_Operating_Processing_Locked_Route_active_Enabled();
+			void exseq_main_region_Operating_Processing_Locked_Route_active_Passed();
+			void exseq_main_region_Operating_Processing_Locked_Route_active_Waiting();
+			void exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left();
+			void exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling();
+			void exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling();
 			void exseq_main_region_Failed();
 			void exseq_main_region_Wait_for_Start();
 			void exseq_main_region();
@@ -328,12 +335,13 @@ namespace mrw
 			void exseq_main_region_Init_Init_Process_Requesting_relais();
 			void exseq_main_region_Init_Init_Process_Requesting_state();
 			void exseq_main_region_Operating_Processing();
-			void exseq_main_region_Operating_Processing_Locked_Lock_Handling();
-			void react_main_region_Operating_Processing_Locked_Lock_Handling__choice_0();
+			void exseq_main_region_Operating_Processing_Locked_Route_active();
+			void exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing();
+			void react_main_region_Operating_Processing_Locked_Route_active__choice_0();
 			void react_main_region__entry_Default();
 			void react_main_region_Init_Init_Process__entry_Default();
 			void react_main_region_Operating_Processing__entry_Default();
-			void react_main_region_Operating_Processing_Locked_Lock_Handling__entry_Default();
+			void react_main_region_Operating_Processing_Locked_Route_active__entry_Default();
 			void react_main_region_Init_Init_Process__sync0();
 			void react_main_region_Init_Init_Process__sync1();
 			sc::integer react(const sc::integer transitioned_before);
@@ -346,10 +354,12 @@ namespace mrw
 			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Unlocked_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Locked_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_Processing_Locked_Lock_Handling_Enable_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_Processing_Locked_Lock_Handling_Enabled_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_Processing_Locked_Lock_Handling_Disable_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_Processing_Locked_Lock_Handling_Passed_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Route_active_Enabled_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Route_active_Passed_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Route_active_Waiting_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_for_Start_react(const sc::integer transitioned_before);
 			void clearInEvents();
