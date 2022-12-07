@@ -45,6 +45,20 @@ GeneratorModel for yakindu::images
 		}
 	}
 
+	statechart mrw.statechart.SignalStatechart
+	{
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+		}
+
+		feature Renderer
+		{
+			format = "png"
+		}
+	}
+
 	statechart mrw.statechart.RouteStatechart
 	{
 		feature Outlet
