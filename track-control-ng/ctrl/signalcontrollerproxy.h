@@ -43,6 +43,10 @@ namespace mrw::ctrl
 			QObject       *       parent);
 		virtual ~SignalControllerProxy();
 
+	signals:
+		void queued();
+		void response();
+
 	private:
 		void add(mrw::model::Signal * signal);
 

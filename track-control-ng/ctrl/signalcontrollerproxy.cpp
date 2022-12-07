@@ -73,6 +73,14 @@ SignalControllerProxy::SignalControllerProxy(
 		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
 		&statechart, &SignalStatechart::start,
 		Qt::QueuedConnection);
+	connect(
+		this, &SignalControllerProxy::queued,
+		&statechart, &SignalStatechart::queued,
+		Qt::QueuedConnection);
+	connect(
+		this, &SignalControllerProxy::response,
+		&statechart, &SignalStatechart::response,
+		Qt::QueuedConnection);
 
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
@@ -173,14 +181,14 @@ bool SignalControllerProxy::process(const MrwMessage & message)
 	switch (message.response())
 	{
 	case MSG_QUEUED:
-		statechart.queued();
+		emit queued();
 		return true;
 
 	case MSG_OK:
 		switch (message.command())
 		{
 		case SETSGN:
-			statechart.response();
+			emit response();
 			emit update();
 			return true;
 
@@ -215,25 +223,16 @@ void SignalControllerProxy::dec()
 
 bool SignalControllerProxy::hasMain()
 {
-	__METHOD__;
-
-	qDebug().noquote() << " " << grouped_name;
 	return main_signal != nullptr;
 }
 
 bool SignalControllerProxy::hasDistant()
 {
-	__METHOD__;
-
-	qDebug().noquote() << " " << grouped_name;
 	return distant_signal != nullptr;
 }
 
 bool SignalControllerProxy::hasShunt()
 {
-	__METHOD__;
-
-	qDebug().noquote() << " " << grouped_name;
 	return shunt_signal != nullptr;
 }
 
@@ -270,14 +269,10 @@ void SignalControllerProxy::turnMainSignal(sc::integer symbol)
 
 	message.append(state);
 	ControllerRegistry::can()->write(message);
-
-	qDebug().noquote() << message << "(signal)" << main_signal->toString() << (ControllerRegistry::instance().contains(this) ? "yes" : "no");
 }
 
 void SignalControllerProxy::turnDistantSignal(sc::integer symbol)
 {
-	__METHOD__;
-
 	Q_ASSERT(distant_signal != nullptr);
 
 	SignalState state = SIGNAL_OFF;
@@ -301,14 +296,10 @@ void SignalControllerProxy::turnDistantSignal(sc::integer symbol)
 
 	message.append(state);
 	ControllerRegistry::can()->write(message);
-
-	qDebug().noquote() << message << "(signal)" << distant_signal->toString() << (ControllerRegistry::instance().contains(this) ? "yes" : "no");
 }
 
 void SignalControllerProxy::turnShuntSignal(sc::integer symbol)
 {
-	__METHOD__;
-
 	Q_ASSERT(shunt_signal != nullptr);
 
 	SignalState state = SIGNAL_OFF;
@@ -331,8 +322,6 @@ void SignalControllerProxy::turnShuntSignal(sc::integer symbol)
 
 	message.append(state);
 	ControllerRegistry::can()->write(message);
-
-	qDebug().noquote() << message << "(signal)" << shunt_signal->toString() << (ControllerRegistry::instance().contains(this) ? "yes" : "no");
 }
 
 SignalController::TourState SignalControllerProxy::distant() const
