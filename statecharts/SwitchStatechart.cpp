@@ -24,7 +24,7 @@ namespace mrw
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
-			inquire_raised(false),
+			start_raised(false),
 			leftResponse_raised(false),
 			rightResponse_raised(false),
 			response_raised(false),
@@ -72,9 +72,9 @@ namespace mrw
 
 			switch (event->eventId)
 			{
-			case mrw::statechart::SwitchStatechart::Event::inquire:
+			case mrw::statechart::SwitchStatechart::Event::start:
 				{
-					inquire_raised = true;
+					start_raised = true;
 					break;
 				}
 			case mrw::statechart::SwitchStatechart::Event::leftResponse:
@@ -133,9 +133,9 @@ namespace mrw
 		}
 
 
-		void mrw::statechart::SwitchStatechart::inquire()
+		void mrw::statechart::SwitchStatechart::start()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::inquire));
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::start));
 			runCycle();
 		}
 
@@ -729,7 +729,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (inquire_raised)
+				if (start_raised)
 				{
 					exseq_main_region_Wait_for_Start();
 					enseq_main_region_Init_default();
@@ -755,7 +755,7 @@ namespace mrw
 				{
 					exseq_main_region_Init();
 					ifaceOperationCallback->dec();
-					emit inquired();
+					emit started();
 					enseq_main_region_Operating_default();
 					react(0);
 					transitioned_after = 0;
@@ -994,7 +994,7 @@ namespace mrw
 
 		void SwitchStatechart::clearInEvents()
 		{
-			inquire_raised = false;
+			start_raised = false;
 			leftResponse_raised = false;
 			rightResponse_raised = false;
 			response_raised = false;
@@ -1072,7 +1072,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((((((inquire_raised) || (leftResponse_raised)) || (rightResponse_raised)) || (response_raised)) || (clear_raised)) || (queued_raised)) || (failed_raised)) || (unlock_raised)) || (turn_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while (((((((((((start_raised) || (leftResponse_raised)) || (rightResponse_raised)) || (response_raised)) || (clear_raised)) || (queued_raised)) || (failed_raised)) || (unlock_raised)) || (turn_raised)) || (timeEvents[0])) || (timeEvents[1]));
 			isExecuting = false;
 		}
 

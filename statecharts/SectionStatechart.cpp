@@ -21,7 +21,8 @@ namespace mrw
 		SectionStatechart::SectionStatechart(QObject * parent) :
 			QObject(parent),
 			timeout(2000),
-			auto__(true),
+			auto_off(true),
+			auto_unlock(true),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
@@ -29,7 +30,7 @@ namespace mrw
 			stateConfVectorChanged(false),
 			enable_raised(false),
 			disable_raised(false),
-			inquire_raised(false),
+			start_raised(false),
 			relaisResponse_raised(false),
 			stateResponse_raised(false),
 			stateResponse_value(false),
@@ -84,9 +85,9 @@ namespace mrw
 					disable_raised = true;
 					break;
 				}
-			case mrw::statechart::SectionStatechart::Event::inquire:
+			case mrw::statechart::SectionStatechart::Event::start:
 				{
-					inquire_raised = true;
+					start_raised = true;
 					break;
 				}
 			case mrw::statechart::SectionStatechart::Event::relaisResponse:
@@ -144,9 +145,9 @@ namespace mrw
 		}
 
 
-		void mrw::statechart::SectionStatechart::inquire()
+		void mrw::statechart::SectionStatechart::start()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::inquire));
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::start));
 			runCycle();
 		}
 
@@ -340,14 +341,24 @@ namespace mrw
 			this->timeout = timeout_;
 		}
 
-		bool SectionStatechart::getAuto() const
+		bool SectionStatechart::getAuto_off() const
 		{
-			return auto__;
+			return auto_off;
 		}
 
-		void SectionStatechart::setAuto(bool auto_ID_)
+		void SectionStatechart::setAuto_off(bool auto_off_)
 		{
-			this->auto__ = auto_ID_;
+			this->auto_off = auto_off_;
+		}
+
+		bool SectionStatechart::getAuto_unlock() const
+		{
+			return auto_unlock;
+		}
+
+		void SectionStatechart::setAuto_unlock(bool auto_unlock_)
+		{
+			this->auto_unlock = auto_unlock_;
 		}
 
 		void SectionStatechart::setOperationCallback(OperationCallback * operationCallback)
@@ -413,6 +424,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Left'. */
 			ifaceOperationCallback->off();
+			emit left();
 		}
 
 		/* Entry action for state 'Disabling'. */
@@ -1033,7 +1045,7 @@ namespace mrw
 		void SectionStatechart::react_main_region_Operating_Processing_Locked_Route_active__choice_0()
 		{
 			/* The reactions of state null. */
-			if (auto__)
+			if (auto_unlock)
 			{
 				exseq_main_region_Operating_Processing_Locked();
 				enseq_main_region_Operating_Processing_Unlocked_default();
@@ -1080,7 +1092,7 @@ namespace mrw
 			/* The reactions of state null. */
 			exseq_main_region_Init();
 			ifaceOperationCallback->dec();
-			emit inquired();
+			emit started();
 			enseq_main_region_Operating_default();
 			react(0);
 		}
@@ -1287,7 +1299,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (((stateResponse_raised)) && ((!stateResponse_value)))
+				if (((stateResponse_raised)) && (((!stateResponse_value) && (auto_off))))
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Enabled();
 					enact_main_region_Operating_Processing_Locked_Route_active_Waiting();
@@ -1456,7 +1468,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (inquire_raised)
+				if (start_raised)
 				{
 					exseq_main_region_Wait_for_Start();
 					enseq_main_region_Init_default();
@@ -1476,7 +1488,7 @@ namespace mrw
 		{
 			enable_raised = false;
 			disable_raised = false;
-			inquire_raised = false;
+			start_raised = false;
 			relaisResponse_raised = false;
 			stateResponse_raised = false;
 			clear_raised = false;
@@ -1586,7 +1598,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((((enable_raised) || (disable_raised)) || (inquire_raised)) || (relaisResponse_raised)) || (stateResponse_raised)) || (clear_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while (((((((((enable_raised) || (disable_raised)) || (start_raised)) || (relaisResponse_raised)) || (stateResponse_raised)) || (clear_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1]));
 			isExecuting = false;
 		}
 

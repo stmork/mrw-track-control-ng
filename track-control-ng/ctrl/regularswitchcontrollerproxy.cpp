@@ -25,7 +25,7 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
-		&statechart, &SwitchStatechart::inquire,
+		&statechart, &SwitchStatechart::start,
 		Qt::QueuedConnection);
 	connect(
 		this, &RegularSwitchControllerProxy::turn,
@@ -49,7 +49,7 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 		qDebug().noquote() << part->toString() << "Inquiry started.";
 	});
 	connect(
-		&statechart, &SwitchStatechart::inquired, [&]()
+		&statechart, &SwitchStatechart::started, [&]()
 	{
 		qDebug().noquote() << part->toString() << "Inquiry completed.";
 	});

@@ -40,6 +40,9 @@ namespace mrw::ctrl
 		void enable();
 		void disable();
 
+	public slots:
+		void left();
+
 	private:
 
 		// Implementations from BaseController

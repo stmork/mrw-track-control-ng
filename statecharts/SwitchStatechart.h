@@ -79,7 +79,7 @@ namespace mrw
 			enum class Event
 			{
 				NO_EVENT,
-				inquire,
+				start,
 				leftResponse,
 				rightResponse,
 				response,
@@ -190,8 +190,8 @@ namespace mrw
 
 
 		public slots:
-			/*! Slot for the in event 'inquire' that is defined in the default interface scope. */
-			void inquire();
+			/*! Slot for the in event 'start' that is defined in the default interface scope. */
+			void start();
 
 			/*! Slot for the in event 'leftResponse' that is defined in the default interface scope. */
 			void leftResponse();
@@ -219,8 +219,8 @@ namespace mrw
 
 
 		signals:
-			/*! Signal representing the out event 'inquired' that is defined in the default interface scope. */
-			void inquired();
+			/*! Signal representing the out event 'started' that is defined in the default interface scope. */
+			void started();
 
 			/*! Signal representing the out event 'entered' that is defined in the default interface scope. */
 			void entered();
@@ -317,8 +317,8 @@ namespace mrw
 
 
 
-			/*! Indicates event 'inquire' of default interface scope is active. */
-			bool inquire_raised;
+			/*! Indicates event 'start' of default interface scope is active. */
+			bool start_raised;
 
 			/*! Indicates event 'leftResponse' of default interface scope is active. */
 			bool leftResponse_raised;

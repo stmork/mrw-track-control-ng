@@ -27,7 +27,7 @@ namespace mrw
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
 			clear_raised(false),
-			inquired_raised(false),
+			started_raised(false),
 			fail_raised(false),
 			edit_raised(false),
 			operate_raised(false),
@@ -85,9 +85,9 @@ namespace mrw
 					clear_raised = true;
 					break;
 				}
-			case mrw::statechart::OperatingMode::Event::inquired:
+			case mrw::statechart::OperatingMode::Event::started:
 				{
-					inquired_raised = true;
+					started_raised = true;
 					break;
 				}
 			case mrw::statechart::OperatingMode::Event::fail:
@@ -133,9 +133,9 @@ namespace mrw
 		}
 
 
-		void mrw::statechart::OperatingMode::inquired()
+		void mrw::statechart::OperatingMode::started()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingMode::EventInstance(mrw::statechart::OperatingMode::Event::inquired));
+			incomingEventQueue.push_back(new mrw::statechart::OperatingMode::EventInstance(mrw::statechart::OperatingMode::Event::started));
 			runCycle();
 		}
 
@@ -311,7 +311,7 @@ namespace mrw
 			/* Entry action for state 'Init'. */
 			timerService->setTimer(this, 1, timeout, false);
 			ifaceOperationCallback->reset();
-			emit inquire();
+			emit start();
 		}
 
 		/* Entry action for state 'Editing'. */
@@ -553,7 +553,7 @@ namespace mrw
 				}
 				else
 				{
-					if (inquired_raised)
+					if (started_raised)
 					{
 						exseq_main_region_Init();
 						enseq_main_region_Operating_default();
@@ -659,7 +659,7 @@ namespace mrw
 		void OperatingMode::clearInEvents()
 		{
 			clear_raised = false;
-			inquired_raised = false;
+			started_raised = false;
 			fail_raised = false;
 			edit_raised = false;
 			operate_raised = false;
@@ -718,7 +718,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((((clear_raised) || (inquired_raised)) || (fail_raised)) || (edit_raised)) || (operate_raised)) || (ifaceCan.connected_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while ((((((((clear_raised) || (started_raised)) || (fail_raised)) || (edit_raised)) || (operate_raised)) || (ifaceCan.connected_raised)) || (timeEvents[0])) || (timeEvents[1]));
 			isExecuting = false;
 		}
 

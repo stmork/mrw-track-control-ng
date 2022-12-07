@@ -27,7 +27,7 @@ SectionController::SectionController(
 
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
-		&statechart, &SectionStatechart::inquire,
+		&statechart, &SectionStatechart::start,
 		Qt::QueuedConnection);
 	connect(
 		this, &SectionController::enable,
@@ -38,12 +38,16 @@ SectionController::SectionController(
 		&statechart, &SectionStatechart::disable,
 		Qt::QueuedConnection);
 	connect(
+		&statechart, &SectionStatechart::left,
+		this, &SectionController::left,
+		Qt::QueuedConnection);
+	connect(
 		&statechart, &SectionStatechart::entered, [&]()
 	{
 		qDebug().noquote() << ctrl_section->toString() << "Inquiry started.";
 	});
 	connect(
-		&statechart, &SectionStatechart::inquired, [&]()
+		&statechart, &SectionStatechart::started, [&]()
 	{
 		qDebug().noquote() << ctrl_section->toString() << "Inquiry completed.";
 	});
@@ -62,6 +66,10 @@ SectionController::~SectionController()
 Section * SectionController::section() const
 {
 	return *this;
+}
+
+void SectionController::left()
+{
 }
 
 void SectionController::inc()

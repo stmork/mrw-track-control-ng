@@ -95,7 +95,7 @@ namespace mrw
 				NO_EVENT,
 				enable,
 				disable,
-				inquire,
+				start,
 				relaisResponse,
 				stateResponse,
 				clear,
@@ -132,11 +132,17 @@ namespace mrw
 			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
 			void setTimeout(sc::integer timeout);
 
-			/*! Gets the value of the variable 'auto' that is defined in the default interface scope. */
-			bool getAuto() const;
+			/*! Gets the value of the variable 'auto_off' that is defined in the default interface scope. */
+			bool getAuto_off() const;
 
-			/*! Sets the value of the variable 'auto' that is defined in the default interface scope. */
-			void setAuto(bool auto_ID);
+			/*! Sets the value of the variable 'auto_off' that is defined in the default interface scope. */
+			void setAuto_off(bool auto_off);
+
+			/*! Gets the value of the variable 'auto_unlock' that is defined in the default interface scope. */
+			bool getAuto_unlock() const;
+
+			/*! Sets the value of the variable 'auto_unlock' that is defined in the default interface scope. */
+			void setAuto_unlock(bool auto_unlock);
 
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
@@ -219,8 +225,8 @@ namespace mrw
 			/*! Slot for the in event 'disable' that is defined in the default interface scope. */
 			void disable();
 
-			/*! Slot for the in event 'inquire' that is defined in the default interface scope. */
-			void inquire();
+			/*! Slot for the in event 'start' that is defined in the default interface scope. */
+			void start();
 
 			/*! Slot for the in event 'relaisResponse' that is defined in the default interface scope. */
 			void relaisResponse();
@@ -236,11 +242,14 @@ namespace mrw
 
 
 		signals:
-			/*! Signal representing the out event 'inquired' that is defined in the default interface scope. */
-			void inquired();
+			/*! Signal representing the out event 'started' that is defined in the default interface scope. */
+			void started();
 
 			/*! Signal representing the out event 'entered' that is defined in the default interface scope. */
 			void entered();
+
+			/*! Signal representing the out event 'left' that is defined in the default interface scope. */
+			void left();
 
 
 		protected:
@@ -259,7 +268,8 @@ namespace mrw
 			SectionStatechart & operator=(const SectionStatechart &);
 
 			sc::integer timeout;
-			bool auto__;
+			bool auto_off;
+			bool auto_unlock;
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
@@ -375,8 +385,8 @@ namespace mrw
 			/*! Indicates event 'disable' of default interface scope is active. */
 			bool disable_raised;
 
-			/*! Indicates event 'inquire' of default interface scope is active. */
-			bool inquire_raised;
+			/*! Indicates event 'start' of default interface scope is active. */
+			bool start_raised;
 
 			/*! Indicates event 'relaisResponse' of default interface scope is active. */
 			bool relaisResponse_raised;

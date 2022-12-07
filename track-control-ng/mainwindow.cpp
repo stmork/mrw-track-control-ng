@@ -145,12 +145,12 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 		&statechart, &OperatingMode::can_connected,
 		Qt::QueuedConnection);
 	connect(
-		&statechart, &OperatingMode::inquire,
+		&statechart, &OperatingMode::start,
 		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
 		Qt::QueuedConnection);
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::completed,
-		&statechart, &OperatingMode::inquired,
+		&statechart, &OperatingMode::started,
 		Qt::QueuedConnection);
 
 	connect(

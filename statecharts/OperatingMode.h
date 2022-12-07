@@ -70,7 +70,7 @@ namespace mrw
 			{
 				NO_EVENT,
 				clear,
-				inquired,
+				started,
 				fail,
 				edit,
 				operate,
@@ -210,8 +210,8 @@ namespace mrw
 			/*! Slot for the in event 'clear' that is defined in the default interface scope. */
 			void clear();
 
-			/*! Slot for the in event 'inquired' that is defined in the default interface scope. */
-			void inquired();
+			/*! Slot for the in event 'started' that is defined in the default interface scope. */
+			void started();
 
 			/*! Slot for the in event 'fail' that is defined in the default interface scope. */
 			void fail();
@@ -227,8 +227,8 @@ namespace mrw
 
 
 		signals:
-			/*! Signal representing the out event 'inquire' that is defined in the default interface scope. */
-			void inquire();
+			/*! Signal representing the out event 'start' that is defined in the default interface scope. */
+			void start();
 
 			/*! Signal representing the out event 'failed' that is defined in the default interface scope. */
 			void failed();
@@ -316,8 +316,8 @@ namespace mrw
 			/*! Indicates event 'clear' of default interface scope is active. */
 			bool clear_raised;
 
-			/*! Indicates event 'inquired' of default interface scope is active. */
-			bool inquired_raised;
+			/*! Indicates event 'started' of default interface scope is active. */
+			bool started_raised;
 
 			/*! Indicates event 'fail' of default interface scope is active. */
 			bool fail_raised;
