@@ -70,10 +70,10 @@ MainWindow::MainWindow(
 
 MainWindow::~MainWindow()
 {
-	statechart.exit();
-
-	on_clearAllSections_clicked();
 	on_clearAllRoutes_clicked();
+	on_clearAllSections_clicked();
+
+	statechart.exit();
 
 	delete ui;
 }

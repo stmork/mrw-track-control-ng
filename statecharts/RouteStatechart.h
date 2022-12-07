@@ -113,6 +113,10 @@ namespace mrw
 
 				virtual void deactivateSections() = 0;
 
+				virtual void unlockSignals() = 0;
+
+				virtual void unlockSwitches() = 0;
+
 
 			};
 

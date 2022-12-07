@@ -24,7 +24,6 @@ namespace mrw
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
-			stateConfVectorChanged(false),
 			inquire_raised(false),
 			leftResponse_raised(false),
 			rightResponse_raised(false),
@@ -401,7 +400,6 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Wait for Start */
 			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Wait_for_Start;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Init */
@@ -410,7 +408,6 @@ namespace mrw
 			/* 'default' enter sequence for state Init */
 			enact_main_region_Init();
 			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Init;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Operating */
@@ -426,7 +423,6 @@ namespace mrw
 			/* 'default' enter sequence for state Unlocked */
 			enact_main_region_Operating_operating_Unlocked();
 			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Unlocked;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Locked */
@@ -435,7 +431,6 @@ namespace mrw
 			/* 'default' enter sequence for state Locked */
 			enact_main_region_Operating_operating_Locked();
 			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Locked;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Turn Right */
@@ -444,7 +439,6 @@ namespace mrw
 			/* 'default' enter sequence for state Turn Right */
 			enact_main_region_Operating_operating_Turning_r1_Turn_Right();
 			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_r1_Turn_Right;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Turn Left */
@@ -453,7 +447,6 @@ namespace mrw
 			/* 'default' enter sequence for state Turn Left */
 			enact_main_region_Operating_operating_Turning_r1_Turn_Left();
 			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_r1_Turn_Left;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Pending */
@@ -461,7 +454,6 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Pending */
 			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_r1_Pending;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Failed */
@@ -470,7 +462,6 @@ namespace mrw
 			/* 'default' enter sequence for state Failed */
 			enact_main_region_Failed();
 			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Failed;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for region main region */
@@ -860,7 +851,7 @@ namespace mrw
 				}
 				else
 				{
-					if ((leftResponse_raised) || (rightResponse_raised))
+					if ((leftResponse_raised) || ((rightResponse_raised) || (turn_raised)))
 					{
 						exseq_main_region_Operating();
 						enseq_main_region_Failed_default();
@@ -1077,12 +1068,7 @@ namespace mrw
 			dispatchEvent(getNextEvent());
 			do
 			{
-				do
-				{
-					stateConfVectorChanged = false;
-					microStep();
-				}
-				while (stateConfVectorChanged);
+				microStep();
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
@@ -1100,12 +1086,6 @@ namespace mrw
 			isExecuting = true;
 			/* Default enter sequence for statechart SwitchStatechart */
 			enseq_main_region_default();
-			do
-			{
-				stateConfVectorChanged = false;
-				microStep();
-			}
-			while (stateConfVectorChanged);
 			isExecuting = false;
 		}
 

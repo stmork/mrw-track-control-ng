@@ -258,7 +258,6 @@ namespace mrw
 
 
 			bool isExecuting;
-			bool stateConfVectorChanged;
 
 
 			// prototypes of all internal functions

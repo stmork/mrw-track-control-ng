@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_r08WYHCUEe2rVLYxSRawxw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;&#xA;in event inquire&#xA;in event leftResponse&#xA;in event rightResponse&#xA;in event response&#xA;in event clear&#xA;in event queued&#xA;in event failed&#xA;in event unlock&#xA;&#xA;in event turn&#xA;&#xA;out event inquired&#xA;out event entered&#xA;&#xA;operation inc()&#xA;operation dec()&#xA;&#xA;operation left()&#xA;operation right()&#xA;operation request()&#xA;operation doTurnLeft() : boolean&#xA;operation isFree() : boolean&#xA;&#xA;operation fail()&#xA;operation pending()&#xA;operation lock(do_it : boolean)" namespace="mrw.statechart" name="SwitchStatechart">
+  <sgraph:Statechart xmi:id="_r08WYHCUEe2rVLYxSRawxw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;&#xA;in event inquire&#xA;in event leftResponse&#xA;in event rightResponse&#xA;in event response&#xA;in event clear&#xA;in event queued&#xA;in event failed&#xA;in event unlock&#xA;&#xA;in event turn&#xA;&#xA;out event inquired&#xA;out event entered&#xA;&#xA;operation inc()&#xA;operation dec()&#xA;&#xA;operation left()&#xA;operation right()&#xA;operation request()&#xA;operation doTurnLeft() : boolean&#xA;operation isFree() : boolean&#xA;&#xA;operation fail()&#xA;operation pending()&#xA;operation lock(do_it : boolean)" namespace="mrw.statechart" name="SwitchStatechart">
     <regions xmi:id="_r08WbHCUEe2rVLYxSRawxw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_r08WbXCUEe2rVLYxSRawxw">
         <outgoingTransitions xmi:id="_r08WbnCUEe2rVLYxSRawxw" target="_r089cHCUEe2rVLYxSRawxw"/>
@@ -28,7 +28,7 @@
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_teY2AHF8Ee2peawiS1OZpw" specification="entry / lock(true)" name="Locked" incomingTransitions="_-NU4gHF8Ee2peawiS1OZpw">
             <outgoingTransitions xmi:id="_dXLlEHGAEe2peawiS1OZpw" specification="unlock" target="_KiWb0HF6Ee2peawiS1OZpw"/>
-            <outgoingTransitions xmi:id="_z_sAAHGhEe2peawiS1OZpw" specification="leftResponse, rightResponse" target="_T17jEHCVEe2rVLYxSRawxw"/>
+            <outgoingTransitions xmi:id="_z_sAAHGhEe2peawiS1OZpw" specification="leftResponse, rightResponse, turn" target="_T17jEHCVEe2rVLYxSRawxw"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_iR4E0HF9Ee2peawiS1OZpw" specification="entry / pending" name="Turning">
             <outgoingTransitions xmi:id="_SN_m8HF8Ee2peawiS1OZpw" specification="after timeout ms" target="_T17jEHCVEe2rVLYxSRawxw"/>
@@ -470,7 +470,7 @@
     <edges xmi:id="_z_ucQHGhEe2peawiS1OZpw" type="Transition" element="_z_sAAHGhEe2peawiS1OZpw" source="_teZdEHF8Ee2peawiS1OZpw" target="_T18KIHCVEe2rVLYxSRawxw">
       <children xsi:type="notation:DecorationNode" xmi:id="_z_ucRHGhEe2peawiS1OZpw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_z_ucRXGhEe2peawiS1OZpw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_z_ucRnGhEe2peawiS1OZpw" x="-255" y="-86"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_z_ucRnGhEe2peawiS1OZpw" x="-320" y="-218"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_z_ucQXGhEe2peawiS1OZpw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_z_ucQ3GhEe2peawiS1OZpw" fontName="Verdana"/>

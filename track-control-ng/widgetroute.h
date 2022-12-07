@@ -47,6 +47,8 @@ private:
 	virtual void activateSections() override;
 	virtual void turnSignals() override;
 	virtual void deactivateSections() override;
+	virtual void unlockSignals() override;
+	virtual void unlockSwitches() override;
 };
 
 #endif // WIDGETROUTE_H

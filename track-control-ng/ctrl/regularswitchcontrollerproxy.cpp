@@ -3,13 +3,10 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include <QDebug>
-
 #include <util/method.h>
 #include <model/region.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/controllerregistry.h>
-#include <statecharts/timerservice.h>
 
 using namespace mrw::can;
 using namespace mrw::ctrl;
@@ -22,7 +19,6 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 	RegularSwitch * new_part,
 	QObject    *    parent) :
 	RegularSwitchController(parent),
-	statechart(nullptr),
 	part(new_part)
 {
 	ControllerRegistry::instance().registerController(part, this);
@@ -32,12 +28,20 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 		&statechart, &SwitchStatechart::inquire,
 		Qt::QueuedConnection);
 	connect(
+		this, &RegularSwitchControllerProxy::turn,
+		&statechart, &SwitchStatechart::turn,
+		Qt::QueuedConnection);
+	connect(
 		this, &RegularSwitchControllerProxy::leftResponse,
 		&statechart, &SwitchStatechart::leftResponse,
 		Qt::QueuedConnection);
 	connect(
 		this, &RegularSwitchControllerProxy::rightResponse,
 		&statechart, &SwitchStatechart::rightResponse,
+		Qt::QueuedConnection);
+	connect(
+		this, &RegularSwitchControllerProxy::unlock,
+		&statechart, &SwitchStatechart::unlock,
 		Qt::QueuedConnection);
 	connect(
 		&statechart, &SwitchStatechart::entered, [&]()
@@ -49,22 +53,17 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 	{
 		qDebug().noquote() << part->toString() << "Inquiry completed.";
 	});
-
-	statechart.setTimerService(&TimerService::instance());
-	statechart.setOperationCallback(this);
-	statechart.enter();
 }
 
 RegularSwitchControllerProxy::~RegularSwitchControllerProxy()
 {
-	statechart.exit();
 	ControllerRegistry::instance().unregisterController(part);
 }
 
 void RegularSwitchControllerProxy::turnLeft()
 {
 	part->setState(RegularSwitch::State::AB);
-	statechart.turn();
+	emit turn();
 }
 
 void RegularSwitchControllerProxy::change()
@@ -72,18 +71,13 @@ void RegularSwitchControllerProxy::change()
 	part->setState(isLeft() ?
 		RegularSwitch::State::AC :
 		RegularSwitch::State::AB);
-	statechart.turn();
-}
-
-void RegularSwitchControllerProxy::turn()
-{
-	statechart.turn();
+	emit turn();
 }
 
 void RegularSwitchControllerProxy::turnRight()
 {
 	part->setState(RegularSwitch::State::AC);
-	statechart.turn();
+	emit turn();
 }
 
 QString RegularSwitchControllerProxy::name() const
@@ -212,16 +206,6 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 QString RegularSwitchControllerProxy::toString() const
 {
 	return *part;
-}
-
-void RegularSwitchControllerProxy::inc()
-{
-	ControllerRegistry::instance().increase(this);
-}
-
-void RegularSwitchControllerProxy::dec()
-{
-	ControllerRegistry::instance().decrease(this);
 }
 
 void RegularSwitchControllerProxy::left()

@@ -10,23 +10,18 @@
 
 #include <model/regularswitch.h>
 #include <ctrl/regularswitchcontroller.h>
-#include <ctrl/railpartinfo.h>
-#include <ctrl/controllerregistrand.h>
-#include <statecharts/SwitchStatechart.h>
+#include <ctrl/switchcontroller.h>
 
 namespace mrw::ctrl
 {
 	class RegularSwitchControllerProxy :
 		public RegularSwitchController,
-		public RailPartInfo,
-		public ControllerRegistrand,
-		public mrw::statechart::SwitchStatechart::OperationCallback
+		public SwitchController
 	{
 		Q_OBJECT
 
 	private:
-		mrw::statechart::SwitchStatechart   statechart;
-		mrw::model::RegularSwitch     *     part = nullptr;
+		mrw::model::RegularSwitch  *  part = nullptr;
 
 	public:
 		explicit RegularSwitchControllerProxy(
@@ -36,12 +31,13 @@ namespace mrw::ctrl
 
 		void turnLeft();
 		void change();
-		void turn();
 		void turnRight();
 
 	signals:
+		void turn();
 		void leftResponse();
 		void rightResponse();
+		void unlock();
 
 	private:
 
@@ -70,9 +66,6 @@ namespace mrw::ctrl
 		virtual QString toString() const override;
 
 		// Implementations from OperationCallback
-		virtual void inc() override;
-		virtual void dec() override;
-
 		virtual void left() override;
 		virtual void right() override;
 		virtual void request() override;

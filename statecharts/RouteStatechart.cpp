@@ -274,6 +274,8 @@ namespace mrw
 		{
 			/* Entry action for state 'Disable'. */
 			ifaceOperationCallback->deactivateSections();
+			ifaceOperationCallback->unlockSignals();
+			ifaceOperationCallback->unlockSwitches();
 		}
 
 		/* Exit action for state 'Switch Turning'. */

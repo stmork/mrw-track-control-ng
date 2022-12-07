@@ -40,6 +40,7 @@ WidgetRoute::WidgetRoute(
 
 WidgetRoute::~WidgetRoute()
 {
+	statechart.disable();
 	statechart.exit();
 }
 
@@ -75,11 +76,11 @@ void WidgetRoute::turnSwitches()
 
 			if (rs_ctrl != nullptr)
 			{
-				QMetaObject::invokeMethod(rs_ctrl, &RegularSwitchControllerProxy::turn, Qt::QueuedConnection);
+				rs_ctrl->turn();
 			}
 			if (dcs_ctrl != nullptr)
 			{
-				QMetaObject::invokeMethod(dcs_ctrl, &DoubleCrossSwitchControllerProxy::turn, Qt::QueuedConnection);
+				dcs_ctrl->turn();
 			}
 		}
 	}
@@ -112,5 +113,33 @@ void WidgetRoute::deactivateSections()
 		SectionController * proxy = dynamic_cast<SectionController *>(controller);
 
 		proxy->disable();
+	}
+}
+
+void WidgetRoute::unlockSignals()
+{
+
+}
+
+void WidgetRoute::unlockSwitches()
+{
+	for (RailPart * part : track)
+	{
+		Device * device = dynamic_cast<Device *>(part);
+		ControllerRegistrand * controller = ControllerRegistry::instance().find(device);
+
+		RegularSwitchControllerProxy * rs_ctrl =
+			dynamic_cast<RegularSwitchControllerProxy *>(controller);
+		DoubleCrossSwitchControllerProxy * dcs_ctrl =
+			dynamic_cast<DoubleCrossSwitchControllerProxy *>(controller);
+
+		if (rs_ctrl != nullptr)
+		{
+			rs_ctrl->unlock();
+		}
+		if (dcs_ctrl != nullptr)
+		{
+			dcs_ctrl->unlock();
+		}
 	}
 }

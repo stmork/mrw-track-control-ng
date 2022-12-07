@@ -9,6 +9,7 @@ include(../common.pri)
 
 SOURCES += \
 	ctrl/railpartinfo.cpp \
+	ctrl/switchcontroller.cpp \
 	main.cpp \
 	mainwindow.cpp \
 	modelrepository.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 
 HEADERS += \
 	ctrl/railpartinfo.h \
+	ctrl/switchcontroller.h \
 	mainwindow.h \
 	modelrepository.h \
 	mrwmessagedispatcher.h \
