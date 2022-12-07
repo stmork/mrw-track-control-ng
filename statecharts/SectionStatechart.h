@@ -57,12 +57,18 @@ namespace mrw
 				main_region_Init_Init_Process_Requesting_state_Occupation,
 				main_region_Init_Init_Process_Requesting_state_Wait,
 				main_region_Operating,
+				main_region_Operating_Processing_Unlocked,
+				main_region_Operating_Processing_Locked,
+				main_region_Operating_Processing_Locked_Lock_Handling_Enable,
+				main_region_Operating_Processing_Locked_Lock_Handling_Enabled,
+				main_region_Operating_Processing_Locked_Lock_Handling_Disable,
+				main_region_Operating_Processing_Locked_Lock_Handling_Passed,
 				main_region_Failed,
 				main_region_Wait_for_Start
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 9;
+			static const sc::integer numStates = 15;
 			static const sc::integer scvi_main_region_Init = 0;
 			static const sc::integer scvi_main_region_Init_Init_Process_Requesting = 0;
 			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_relais_Relay = 0;
@@ -70,6 +76,12 @@ namespace mrw
 			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_state_Occupation = 1;
 			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_state_Wait = 1;
 			static const sc::integer scvi_main_region_Operating = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Unlocked = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Lock_Handling_Enable = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Lock_Handling_Enabled = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Lock_Handling_Disable = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Lock_Handling_Passed = 0;
 			static const sc::integer scvi_main_region_Failed = 0;
 			static const sc::integer scvi_main_region_Wait_for_Start = 0;
 
@@ -77,12 +89,16 @@ namespace mrw
 			enum class Event
 			{
 				NO_EVENT,
+				enable,
+				disable,
 				inquire,
 				relaisResponse,
 				stateResponse,
 				clear,
 				failed,
-				_te0_main_region_Init_
+				_te0_main_region_Init_,
+				_te1_main_region_Operating_Processing_Locked_Lock_Handling_Enable_,
+				_te2_main_region_Operating_Processing_Locked_Lock_Handling_Disable_
 			};
 
 			class EventInstance
@@ -113,6 +129,12 @@ namespace mrw
 			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
 			void setTimeout(sc::integer timeout);
 
+			/*! Gets the value of the variable 'auto' that is defined in the default interface scope. */
+			bool getAuto() const;
+
+			/*! Sets the value of the variable 'auto' that is defined in the default interface scope. */
+			void setAuto(bool auto_ID);
+
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
 			{
@@ -128,6 +150,10 @@ namespace mrw
 				virtual void on() = 0;
 
 				virtual void request() = 0;
+
+				virtual void passed() = 0;
+
+				virtual void lock(bool do_it) = 0;
 
 
 			};
@@ -177,21 +203,27 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 1;
+			static const sc::integer timeEventsCount = 3;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
 
 
 		public slots:
+			/*! Slot for the in event 'enable' that is defined in the default interface scope. */
+			void enable();
+
+			/*! Slot for the in event 'disable' that is defined in the default interface scope. */
+			void disable();
+
 			/*! Slot for the in event 'inquire' that is defined in the default interface scope. */
 			void inquire();
 
 			/*! Slot for the in event 'relaisResponse' that is defined in the default interface scope. */
-			void relaisResponse(bool relaisResponse_);
+			void relaisResponse();
 
 			/*! Slot for the in event 'stateResponse' that is defined in the default interface scope. */
-			void stateResponse();
+			void stateResponse(bool stateResponse_);
 
 			/*! Slot for the in event 'clear' that is defined in the default interface scope. */
 			void clear();
@@ -224,6 +256,7 @@ namespace mrw
 			SectionStatechart & operator=(const SectionStatechart &);
 
 			sc::integer timeout;
+			bool auto__;
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
@@ -249,17 +282,32 @@ namespace mrw
 			void enact_main_region_Init();
 			void enact_main_region_Init_Init_Process_Requesting_relais_Relay();
 			void enact_main_region_Init_Init_Process_Requesting_state_Occupation();
+			void enact_main_region_Operating_Processing_Unlocked();
+			void enact_main_region_Operating_Processing_Locked();
+			void enact_main_region_Operating_Processing_Locked_Lock_Handling_Enable();
+			void enact_main_region_Operating_Processing_Locked_Lock_Handling_Disable();
+			void enact_main_region_Operating_Processing_Locked_Lock_Handling_Passed();
 			void exact_main_region_Init();
+			void exact_main_region_Operating_Processing_Locked_Lock_Handling_Enable();
+			void exact_main_region_Operating_Processing_Locked_Lock_Handling_Disable();
 			void enseq_main_region_Init_default();
 			void enseq_main_region_Init_Init_Process_Requesting_relais_Relay_default();
 			void enseq_main_region_Init_Init_Process_Requesting_relais_Wait_default();
 			void enseq_main_region_Init_Init_Process_Requesting_state_Occupation_default();
 			void enseq_main_region_Init_Init_Process_Requesting_state_Wait_default();
 			void enseq_main_region_Operating_default();
+			void enseq_main_region_Operating_Processing_Unlocked_default();
+			void enseq_main_region_Operating_Processing_Locked_default();
+			void enseq_main_region_Operating_Processing_Locked_Lock_Handling_Enable_default();
+			void enseq_main_region_Operating_Processing_Locked_Lock_Handling_Enabled_default();
+			void enseq_main_region_Operating_Processing_Locked_Lock_Handling_Disable_default();
+			void enseq_main_region_Operating_Processing_Locked_Lock_Handling_Passed_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_Wait_for_Start_default();
 			void enseq_main_region_default();
 			void enseq_main_region_Init_Init_Process_default();
+			void enseq_main_region_Operating_Processing_default();
+			void enseq_main_region_Operating_Processing_Locked_Lock_Handling_default();
 			void exseq_main_region_Init();
 			void exseq_main_region_Init_Init_Process_Requesting();
 			void exseq_main_region_Init_Init_Process_Requesting_relais_Relay();
@@ -267,14 +315,25 @@ namespace mrw
 			void exseq_main_region_Init_Init_Process_Requesting_state_Occupation();
 			void exseq_main_region_Init_Init_Process_Requesting_state_Wait();
 			void exseq_main_region_Operating();
+			void exseq_main_region_Operating_Processing_Unlocked();
+			void exseq_main_region_Operating_Processing_Locked();
+			void exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enable();
+			void exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enabled();
+			void exseq_main_region_Operating_Processing_Locked_Lock_Handling_Disable();
+			void exseq_main_region_Operating_Processing_Locked_Lock_Handling_Passed();
 			void exseq_main_region_Failed();
 			void exseq_main_region_Wait_for_Start();
 			void exseq_main_region();
 			void exseq_main_region_Init_Init_Process();
 			void exseq_main_region_Init_Init_Process_Requesting_relais();
 			void exseq_main_region_Init_Init_Process_Requesting_state();
+			void exseq_main_region_Operating_Processing();
+			void exseq_main_region_Operating_Processing_Locked_Lock_Handling();
+			void react_main_region_Operating_Processing_Locked_Lock_Handling__choice_0();
 			void react_main_region__entry_Default();
 			void react_main_region_Init_Init_Process__entry_Default();
+			void react_main_region_Operating_Processing__entry_Default();
+			void react_main_region_Operating_Processing_Locked_Lock_Handling__entry_Default();
 			void react_main_region_Init_Init_Process__sync0();
 			void react_main_region_Init_Init_Process__sync1();
 			sc::integer react(const sc::integer transitioned_before);
@@ -285,6 +344,12 @@ namespace mrw
 			sc::integer main_region_Init_Init_Process_Requesting_state_Occupation_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_Init_Process_Requesting_state_Wait_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Unlocked_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Lock_Handling_Enable_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Lock_Handling_Enabled_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Lock_Handling_Disable_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Lock_Handling_Passed_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_for_Start_react(const sc::integer transitioned_before);
 			void clearInEvents();
@@ -294,17 +359,23 @@ namespace mrw
 
 
 
+			/*! Indicates event 'enable' of default interface scope is active. */
+			bool enable_raised;
+
+			/*! Indicates event 'disable' of default interface scope is active. */
+			bool disable_raised;
+
 			/*! Indicates event 'inquire' of default interface scope is active. */
 			bool inquire_raised;
 
 			/*! Indicates event 'relaisResponse' of default interface scope is active. */
 			bool relaisResponse_raised;
 
-			/*! Value of event 'relaisResponse' of default interface scope. */
-			bool relaisResponse_value;
-
 			/*! Indicates event 'stateResponse' of default interface scope is active. */
 			bool stateResponse_raised;
+
+			/*! Value of event 'stateResponse' of default interface scope. */
+			bool stateResponse_value;
 
 			/*! Indicates event 'clear' of default interface scope is active. */
 			bool clear_raised;

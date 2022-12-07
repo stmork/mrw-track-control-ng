@@ -32,6 +32,14 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 		&statechart, &SwitchStatechart::inquire,
 		Qt::QueuedConnection);
 	connect(
+		this, &RegularSwitchControllerProxy::leftResponse,
+		&statechart, &SwitchStatechart::leftResponse,
+		Qt::QueuedConnection);
+	connect(
+		this, &RegularSwitchControllerProxy::rightResponse,
+		&statechart, &SwitchStatechart::rightResponse,
+		Qt::QueuedConnection);
+	connect(
 		&statechart, &SwitchStatechart::entered, [&]()
 	{
 		qDebug().noquote() << part->toString() << "Inquiry started.";
@@ -168,7 +176,7 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 			{
 				part->setState(RegularSwitch::State::AB);
 			}
-			statechart.leftResponse();
+			emit leftResponse();
 			emit update();
 			return true;
 
@@ -177,7 +185,7 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 			{
 				part->setState(RegularSwitch::State::AC);
 			}
-			statechart.rightResponse();
+			emit rightResponse();
 			emit update();
 			return true;
 

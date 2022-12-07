@@ -21,15 +21,18 @@ namespace mrw
 		SectionStatechart::SectionStatechart(QObject * parent) :
 			QObject(parent),
 			timeout(2000),
+			auto__(true),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
 			stateConfVectorPosition(0),
 			stateConfVectorChanged(false),
+			enable_raised(false),
+			disable_raised(false),
 			inquire_raised(false),
 			relaisResponse_raised(false),
-			relaisResponse_value(false),
 			stateResponse_raised(false),
+			stateResponse_value(false),
 			clear_raised(false),
 			failed_raised(false)
 		{
@@ -71,6 +74,16 @@ namespace mrw
 
 			switch (event->eventId)
 			{
+			case mrw::statechart::SectionStatechart::Event::enable:
+				{
+					enable_raised = true;
+					break;
+				}
+			case mrw::statechart::SectionStatechart::Event::disable:
+				{
+					disable_raised = true;
+					break;
+				}
 			case mrw::statechart::SectionStatechart::Event::inquire:
 				{
 					inquire_raised = true;
@@ -78,17 +91,17 @@ namespace mrw
 				}
 			case mrw::statechart::SectionStatechart::Event::relaisResponse:
 				{
-					mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> * e = static_cast<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>*>(event);
-					if (e != 0)
-					{
-						relaisResponse_value = e->value;
-						relaisResponse_raised = true;
-					}
+					relaisResponse_raised = true;
 					break;
 				}
 			case mrw::statechart::SectionStatechart::Event::stateResponse:
 				{
-					stateResponse_raised = true;
+					mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> * e = static_cast<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>*>(event);
+					if (e != 0)
+					{
+						stateResponse_value = e->value;
+						stateResponse_raised = true;
+					}
 					break;
 				}
 			case mrw::statechart::SectionStatechart::Event::clear:
@@ -104,6 +117,8 @@ namespace mrw
 
 
 			case mrw::statechart::SectionStatechart::Event::_te0_main_region_Init_:
+			case mrw::statechart::SectionStatechart::Event::_te1_main_region_Operating_Processing_Locked_Lock_Handling_Enable_:
+			case mrw::statechart::SectionStatechart::Event::_te2_main_region_Operating_Processing_Locked_Lock_Handling_Disable_:
 				{
 					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::SectionStatechart::Event::_te0_main_region_Init_)] = true;
 					break;
@@ -116,6 +131,20 @@ namespace mrw
 		}
 
 
+		void mrw::statechart::SectionStatechart::enable()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::enable));
+			runCycle();
+		}
+
+
+		void mrw::statechart::SectionStatechart::disable()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::disable));
+			runCycle();
+		}
+
+
 		void mrw::statechart::SectionStatechart::inquire()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::inquire));
@@ -123,16 +152,16 @@ namespace mrw
 		}
 
 
-		void mrw::statechart::SectionStatechart::relaisResponse(bool relaisResponse_)
+		void mrw::statechart::SectionStatechart::relaisResponse()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::relaisResponse, relaisResponse_));
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::relaisResponse));
 			runCycle();
 		}
 
 
-		void mrw::statechart::SectionStatechart::stateResponse()
+		void mrw::statechart::SectionStatechart::stateResponse(bool stateResponse_)
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::stateResponse));
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::stateResponse, stateResponse_));
 			runCycle();
 		}
 
@@ -240,7 +269,37 @@ namespace mrw
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating :
 				{
-					return  (stateConfVector[scvi_main_region_Operating] == mrw::statechart::SectionStatechart::State::main_region_Operating);
+					return  (stateConfVector[scvi_main_region_Operating] >= mrw::statechart::SectionStatechart::State::main_region_Operating && stateConfVector[scvi_main_region_Operating] <= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Passed);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Unlocked] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked] >= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked && stateConfVector[scvi_main_region_Operating_Processing_Locked] <= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Passed);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enable :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Lock_Handling_Enable] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enable);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enabled :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Lock_Handling_Enabled] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enabled);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Disable :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Lock_Handling_Disable] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Disable);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Passed :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Lock_Handling_Passed] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Passed);
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Failed :
@@ -272,6 +331,16 @@ namespace mrw
 			this->timeout = timeout_;
 		}
 
+		bool SectionStatechart::getAuto() const
+		{
+			return auto__;
+		}
+
+		void SectionStatechart::setAuto(bool auto_ID_)
+		{
+			this->auto__ = auto_ID_;
+		}
+
 		void SectionStatechart::setOperationCallback(OperationCallback * operationCallback)
 		{
 			ifaceOperationCallback = operationCallback;
@@ -301,11 +370,63 @@ namespace mrw
 			ifaceOperationCallback->request();
 		}
 
+		/* Entry action for state 'Unlocked'. */
+		void SectionStatechart::enact_main_region_Operating_Processing_Unlocked()
+		{
+			/* Entry action for state 'Unlocked'. */
+			ifaceOperationCallback->lock(false);
+		}
+
+		/* Entry action for state 'Locked'. */
+		void SectionStatechart::enact_main_region_Operating_Processing_Locked()
+		{
+			/* Entry action for state 'Locked'. */
+			ifaceOperationCallback->lock(true);
+		}
+
+		/* Entry action for state 'Enable'. */
+		void SectionStatechart::enact_main_region_Operating_Processing_Locked_Lock_Handling_Enable()
+		{
+			/* Entry action for state 'Enable'. */
+			timerService->setTimer(this, 1, timeout, false);
+			ifaceOperationCallback->inc();
+			ifaceOperationCallback->on();
+		}
+
+		/* Entry action for state 'Disable'. */
+		void SectionStatechart::enact_main_region_Operating_Processing_Locked_Lock_Handling_Disable()
+		{
+			/* Entry action for state 'Disable'. */
+			timerService->setTimer(this, 2, timeout, false);
+			ifaceOperationCallback->off();
+		}
+
+		/* Entry action for state 'Passed'. */
+		void SectionStatechart::enact_main_region_Operating_Processing_Locked_Lock_Handling_Passed()
+		{
+			/* Entry action for state 'Passed'. */
+			ifaceOperationCallback->passed();
+		}
+
 		/* Exit action for state 'Init'. */
 		void SectionStatechart::exact_main_region_Init()
 		{
 			/* Exit action for state 'Init'. */
 			timerService->unsetTimer(this, 0);
+		}
+
+		/* Exit action for state 'Enable'. */
+		void SectionStatechart::exact_main_region_Operating_Processing_Locked_Lock_Handling_Enable()
+		{
+			/* Exit action for state 'Enable'. */
+			timerService->unsetTimer(this, 1);
+		}
+
+		/* Exit action for state 'Disable'. */
+		void SectionStatechart::exact_main_region_Operating_Processing_Locked_Lock_Handling_Disable()
+		{
+			/* Exit action for state 'Disable'. */
+			timerService->unsetTimer(this, 2);
 		}
 
 		/* 'default' enter sequence for state Init */
@@ -358,7 +479,62 @@ namespace mrw
 		void SectionStatechart::enseq_main_region_Operating_default()
 		{
 			/* 'default' enter sequence for state Operating */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating;
+			enseq_main_region_Operating_Processing_default();
+		}
+
+		/* 'default' enter sequence for state Unlocked */
+		void SectionStatechart::enseq_main_region_Operating_Processing_Unlocked_default()
+		{
+			/* 'default' enter sequence for state Unlocked */
+			enact_main_region_Operating_Processing_Unlocked();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Locked */
+		void SectionStatechart::enseq_main_region_Operating_Processing_Locked_default()
+		{
+			/* 'default' enter sequence for state Locked */
+			enact_main_region_Operating_Processing_Locked();
+			enseq_main_region_Operating_Processing_Locked_Lock_Handling_default();
+		}
+
+		/* 'default' enter sequence for state Enable */
+		void SectionStatechart::enseq_main_region_Operating_Processing_Locked_Lock_Handling_Enable_default()
+		{
+			/* 'default' enter sequence for state Enable */
+			enact_main_region_Operating_Processing_Locked_Lock_Handling_Enable();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enable;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Enabled */
+		void SectionStatechart::enseq_main_region_Operating_Processing_Locked_Lock_Handling_Enabled_default()
+		{
+			/* 'default' enter sequence for state Enabled */
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enabled;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Disable */
+		void SectionStatechart::enseq_main_region_Operating_Processing_Locked_Lock_Handling_Disable_default()
+		{
+			/* 'default' enter sequence for state Disable */
+			enact_main_region_Operating_Processing_Locked_Lock_Handling_Disable();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Disable;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Passed */
+		void SectionStatechart::enseq_main_region_Operating_Processing_Locked_Lock_Handling_Passed_default()
+		{
+			/* 'default' enter sequence for state Passed */
+			enact_main_region_Operating_Processing_Locked_Lock_Handling_Passed();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Passed;
 			stateConfVectorPosition = 0;
 			stateConfVectorChanged = true;
 		}
@@ -393,6 +569,20 @@ namespace mrw
 		{
 			/* 'default' enter sequence for region Init Process */
 			react_main_region_Init_Init_Process__entry_Default();
+		}
+
+		/* 'default' enter sequence for region Processing */
+		void SectionStatechart::enseq_main_region_Operating_Processing_default()
+		{
+			/* 'default' enter sequence for region Processing */
+			react_main_region_Operating_Processing__entry_Default();
+		}
+
+		/* 'default' enter sequence for region Lock Handling */
+		void SectionStatechart::enseq_main_region_Operating_Processing_Locked_Lock_Handling_default()
+		{
+			/* 'default' enter sequence for region Lock Handling */
+			react_main_region_Operating_Processing_Locked_Lock_Handling__entry_Default();
 		}
 
 		/* Default exit sequence for state Init */
@@ -447,6 +637,54 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating()
 		{
 			/* Default exit sequence for state Operating */
+			exseq_main_region_Operating_Processing();
+		}
+
+		/* Default exit sequence for state Unlocked */
+		void SectionStatechart::exseq_main_region_Operating_Processing_Unlocked()
+		{
+			/* Default exit sequence for state Unlocked */
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
+		}
+
+		/* Default exit sequence for state Locked */
+		void SectionStatechart::exseq_main_region_Operating_Processing_Locked()
+		{
+			/* Default exit sequence for state Locked */
+			exseq_main_region_Operating_Processing_Locked_Lock_Handling();
+		}
+
+		/* Default exit sequence for state Enable */
+		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enable()
+		{
+			/* Default exit sequence for state Enable */
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
+			exact_main_region_Operating_Processing_Locked_Lock_Handling_Enable();
+		}
+
+		/* Default exit sequence for state Enabled */
+		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enabled()
+		{
+			/* Default exit sequence for state Enabled */
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
+		}
+
+		/* Default exit sequence for state Disable */
+		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Lock_Handling_Disable()
+		{
+			/* Default exit sequence for state Disable */
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
+			exact_main_region_Operating_Processing_Locked_Lock_Handling_Disable();
+		}
+
+		/* Default exit sequence for state Passed */
+		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Lock_Handling_Passed()
+		{
+			/* Default exit sequence for state Passed */
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
 			stateConfVectorPosition = 0;
 		}
@@ -484,9 +722,29 @@ namespace mrw
 					exseq_main_region_Init_Init_Process_Requesting_relais_Wait();
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Operating :
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked :
 				{
-					exseq_main_region_Operating();
+					exseq_main_region_Operating_Processing_Unlocked();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enable :
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enable();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enabled :
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enabled();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Disable :
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Disable();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Passed :
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Passed();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Failed :
@@ -610,6 +868,93 @@ namespace mrw
 			}
 		}
 
+		/* Default exit sequence for region Processing */
+		void SectionStatechart::exseq_main_region_Operating_Processing()
+		{
+			/* Default exit sequence for region Processing */
+			/* Handle exit of all possible states (of mrw.statechart.SectionStatechart.main_region.Operating.Processing) at position 0... */
+			switch (stateConfVector[ 0 ])
+			{
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked :
+				{
+					exseq_main_region_Operating_Processing_Unlocked();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enable :
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enable();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enabled :
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enabled();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Disable :
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Disable();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Passed :
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Passed();
+					break;
+				}
+			default:
+				/* do nothing */
+				break;
+			}
+		}
+
+		/* Default exit sequence for region Lock Handling */
+		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Lock_Handling()
+		{
+			/* Default exit sequence for region Lock Handling */
+			/* Handle exit of all possible states (of mrw.statechart.SectionStatechart.main_region.Operating.Processing.Locked.Lock_Handling) at position 0... */
+			switch (stateConfVector[ 0 ])
+			{
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enable :
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enable();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enabled :
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enabled();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Disable :
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Disable();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Passed :
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Passed();
+					break;
+				}
+			default:
+				/* do nothing */
+				break;
+			}
+		}
+
+		/* The reactions of state null. */
+		void SectionStatechart::react_main_region_Operating_Processing_Locked_Lock_Handling__choice_0()
+		{
+			/* The reactions of state null. */
+			if (auto__)
+			{
+				exseq_main_region_Operating_Processing_Locked();
+				enseq_main_region_Operating_Processing_Unlocked_default();
+				main_region_Operating_react(0);
+			}
+			else
+			{
+				enseq_main_region_Operating_Processing_Locked_Lock_Handling_Passed_default();
+			}
+		}
+
 		/* Default react sequence for initial entry  */
 		void SectionStatechart::react_main_region__entry_Default()
 		{
@@ -622,6 +967,20 @@ namespace mrw
 		{
 			/* Default react sequence for initial entry  */
 			react_main_region_Init_Init_Process__sync1();
+		}
+
+		/* Default react sequence for initial entry  */
+		void SectionStatechart::react_main_region_Operating_Processing__entry_Default()
+		{
+			/* Default react sequence for initial entry  */
+			enseq_main_region_Operating_Processing_Unlocked_default();
+		}
+
+		/* Default react sequence for initial entry  */
+		void SectionStatechart::react_main_region_Operating_Processing_Locked_Lock_Handling__entry_Default()
+		{
+			/* Default react sequence for initial entry  */
+			enseq_main_region_Operating_Processing_Locked_Lock_Handling_Enable_default();
 		}
 
 		/* The reactions of state null. */
@@ -794,6 +1153,154 @@ namespace mrw
 			return transitioned_after;
 		}
 
+		sc::integer SectionStatechart::main_region_Operating_Processing_Unlocked_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Unlocked. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (enable_raised)
+				{
+					exseq_main_region_Operating_Processing_Unlocked();
+					enseq_main_region_Operating_Processing_Locked_default();
+					main_region_Operating_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Locked. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Lock_Handling_Enable_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Enable. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (relaisResponse_raised)
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enable();
+					ifaceOperationCallback->dec();
+					enseq_main_region_Operating_Processing_Locked_Lock_Handling_Enabled_default();
+					main_region_Operating_Processing_Locked_react(0);
+					transitioned_after = 0;
+				}
+				else
+				{
+					if (timeEvents[1])
+					{
+						exseq_main_region_Operating();
+						timeEvents[1] = false;
+						enseq_main_region_Failed_default();
+						react(0);
+						transitioned_after = 0;
+					}
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Lock_Handling_Enabled_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Enabled. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (((stateResponse_raised)) && ((!stateResponse_value)))
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Enabled();
+					enseq_main_region_Operating_Processing_Locked_Lock_Handling_Disable_default();
+					main_region_Operating_Processing_Locked_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Lock_Handling_Disable_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Disable. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (relaisResponse_raised)
+				{
+					exseq_main_region_Operating_Processing_Locked_Lock_Handling_Disable();
+					ifaceOperationCallback->dec();
+					react_main_region_Operating_Processing_Locked_Lock_Handling__choice_0();
+					transitioned_after = 0;
+				}
+				else
+				{
+					if (timeEvents[2])
+					{
+						exseq_main_region_Operating();
+						timeEvents[2] = false;
+						enseq_main_region_Failed_default();
+						react(0);
+						transitioned_after = 0;
+					}
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Lock_Handling_Passed_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Passed. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (disable_raised)
+				{
+					exseq_main_region_Operating_Processing_Locked();
+					enseq_main_region_Operating_Processing_Unlocked_default();
+					main_region_Operating_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
 		sc::integer SectionStatechart::main_region_Failed_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Failed. */
@@ -840,12 +1347,16 @@ namespace mrw
 
 		void SectionStatechart::clearInEvents()
 		{
+			enable_raised = false;
+			disable_raised = false;
 			inquire_raised = false;
 			relaisResponse_raised = false;
 			stateResponse_raised = false;
 			clear_raised = false;
 			failed_raised = false;
 			timeEvents[0] = false;
+			timeEvents[1] = false;
+			timeEvents[2] = false;
 		}
 
 		void SectionStatechart::microStep()
@@ -864,9 +1375,29 @@ namespace mrw
 					transitioned = main_region_Init_Init_Process_Requesting_relais_Wait_react(transitioned);
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Operating :
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked :
 				{
-					transitioned = main_region_Operating_react(transitioned);
+					transitioned = main_region_Operating_Processing_Unlocked_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enable :
+				{
+					transitioned = main_region_Operating_Processing_Locked_Lock_Handling_Enable_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Enabled :
+				{
+					transitioned = main_region_Operating_Processing_Locked_Lock_Handling_Enabled_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Disable :
+				{
+					transitioned = main_region_Operating_Processing_Locked_Lock_Handling_Disable_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Lock_Handling_Passed :
+				{
+					transitioned = main_region_Operating_Processing_Locked_Lock_Handling_Passed_react(transitioned);
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Failed :
@@ -924,7 +1455,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((inquire_raised) || (relaisResponse_raised)) || (stateResponse_raised)) || (clear_raised)) || (failed_raised)) || (timeEvents[0]));
+			while ((((((((((enable_raised) || (disable_raised)) || (inquire_raised)) || (relaisResponse_raised)) || (stateResponse_raised)) || (clear_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
 			isExecuting = false;
 		}
 

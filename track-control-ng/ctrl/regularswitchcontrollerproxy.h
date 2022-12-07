@@ -39,6 +39,10 @@ namespace mrw::ctrl
 		void turn();
 		void turnRight();
 
+	signals:
+		void leftResponse();
+		void rightResponse();
+
 	private:
 
 		// Implementations from BaseController

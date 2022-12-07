@@ -30,6 +30,14 @@ SectionController::SectionController(
 		&statechart, &SectionStatechart::inquire,
 		Qt::QueuedConnection);
 	connect(
+		this, &SectionController::enable,
+		&statechart, &SectionStatechart::enable,
+		Qt::QueuedConnection);
+	connect(
+		this, &SectionController::disable,
+		&statechart, &SectionStatechart::disable,
+		Qt::QueuedConnection);
+	connect(
 		&statechart, &SectionStatechart::entered, [&]()
 	{
 		qDebug().noquote() << ctrl_section->toString() << "Inquiry started.";
@@ -121,16 +129,16 @@ bool SectionController::process(const MrwMessage & message)
 	switch (message.command())
 	{
 	case SETRON:
-		statechart.relaisResponse(true);
+		statechart.relaisResponse();
 		return true;
 
 	case SETROF:
-		statechart.relaisResponse(false);
+		statechart.relaisResponse();
 		return true;
 
 	case GETRBS:
 		ctrl_section->setOccupation(message[0] != 0);
-		statechart.stateResponse();
+		statechart.stateResponse(ctrl_section->occupation());
 		emit update();
 		return true;
 
@@ -152,6 +160,20 @@ void SectionController::request()
 	const MrwMessage command(ctrl_section->command(GETRBS));
 
 	ControllerRegistry::can()->write(command);
+}
+
+void SectionController::passed()
+{
+	__METHOD__;
+
+	section()->setState(SectionState::PASSED);
+}
+
+void SectionController::lock(const bool do_it)
+{
+	__METHOD__;
+
+	section()->setLock(do_it ? Section::LockState::LOCKED : Section::LockState::UNLOCKED);
 }
 
 void SectionController::on()

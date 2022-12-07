@@ -93,7 +93,7 @@ void WidgetRoute::activateSections()
 
 		SectionController * proxy = dynamic_cast<SectionController *>(controller);
 
-		QMetaObject::invokeMethod(proxy, &SectionController::on, Qt::QueuedConnection);
+		proxy->enable();
 	}
 }
 
@@ -111,6 +111,6 @@ void WidgetRoute::deactivateSections()
 
 		SectionController * proxy = dynamic_cast<SectionController *>(controller);
 
-		QMetaObject::invokeMethod(proxy, &SectionController::off, Qt::QueuedConnection);
+		proxy->disable();
 	}
 }
