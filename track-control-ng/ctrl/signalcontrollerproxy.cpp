@@ -59,7 +59,7 @@ SignalControllerProxy::SignalControllerProxy(
 
 		case Signal::MAIN_SHUNT_SIGNAL:
 			main_signal = signal;
-			shunt_signal = signal;
+			shunt_signal = nullptr;
 			break;
 		}
 	}
@@ -71,16 +71,51 @@ SignalControllerProxy::SignalControllerProxy(
 
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
-		&statechart, &SignalStatechart::start,
+		&statechart, &SignalControllerStatechart::start,
+		Qt::QueuedConnection);
+
+	connect(
+		&statechart, &SignalControllerStatechart::turnMain,
+		&statechart_main, &SignalStatechart::turn,
 		Qt::QueuedConnection);
 	connect(
-		this, &SignalControllerProxy::queued,
-		&statechart, &SignalStatechart::queued,
+		&statechart_main, &SignalStatechart::completed,
+		&statechart, &SignalControllerStatechart::completedMain,
 		Qt::QueuedConnection);
 	connect(
-		this, &SignalControllerProxy::response,
-		&statechart, &SignalStatechart::response,
+		&statechart_main, &SignalStatechart::failed,
+		&statechart, &SignalControllerStatechart::fail,
 		Qt::QueuedConnection);
+
+	connect(
+		&statechart, &SignalControllerStatechart::turnDistant,
+		&statechart_distant, &SignalStatechart::turn,
+		Qt::QueuedConnection);
+	connect(
+		&statechart_distant, &SignalStatechart::completed,
+		&statechart, &SignalControllerStatechart::completedDistant,
+		Qt::QueuedConnection);
+	connect(
+		&statechart_distant, &SignalStatechart::failed,
+		&statechart, &SignalControllerStatechart::fail,
+		Qt::QueuedConnection);
+
+	connect(
+		&statechart, &SignalControllerStatechart::turnShunt,
+		&statechart_shunt, &SignalStatechart::turn,
+		Qt::QueuedConnection);
+	connect(
+		&statechart_shunt, &SignalStatechart::completed,
+		&statechart, &SignalControllerStatechart::completedShunt,
+		Qt::QueuedConnection);
+	connect(
+		&statechart_shunt, &SignalStatechart::failed,
+		&statechart, &SignalControllerStatechart::fail,
+		Qt::QueuedConnection);
+
+	statechart_main.start(main_signal);
+	statechart_distant.start(distant_signal);
+	statechart_shunt.start(shunt_signal);
 
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
@@ -152,9 +187,9 @@ Position::Bending SignalControllerProxy::bending() const
 	return base_signal->bending();
 }
 
-bool SignalControllerProxy::hasShunting() const
+bool SignalControllerProxy::hasMain() const
 {
-	return shunt_signal != nullptr;
+	return main_signal != nullptr;
 }
 
 bool SignalControllerProxy::hasDistant() const
@@ -162,48 +197,41 @@ bool SignalControllerProxy::hasDistant() const
 	return distant_signal != nullptr;
 }
 
-bool SignalControllerProxy::hasMain() const
+bool SignalControllerProxy::hasShunting() const
 {
-	return main_signal != nullptr;
+	return shunt_signal != nullptr;
 }
 
-SignalController::TourState SignalControllerProxy::main() const
+Signal::Symbol SignalControllerProxy::main() const
 {
-	return TourState::STOP;
+	return static_cast<Signal::Symbol>(statechart_main.getSignalState());
+}
+
+Signal::Symbol SignalControllerProxy::distant() const
+{
+	return static_cast<Signal::Symbol>(statechart_distant.getSignalState());
+}
+
+Signal::Symbol SignalControllerProxy::shunt() const
+{
+	return static_cast<Signal::Symbol>(statechart_shunt.getSignalState());
 }
 
 bool SignalControllerProxy::process(const MrwMessage & message)
 {
-	Signal * device = signal_map[message.unitNo()];
+	Signal * signal = signal_map[message.unitNo()];
 
-	qDebug().noquote() << message << "  (signal)" << device->toString() << (ControllerRegistry::instance().contains(this) ? "yes" : "no");
+	const bool processed =
+		statechart_main.process(   signal, message) ||
+		statechart_distant.process(signal, message) ||
+		statechart_shunt.process(  signal, message);
 
-	switch (message.response())
+	if (processed)
 	{
-	case MSG_QUEUED:
-		emit queued();
-		return true;
-
-	case MSG_OK:
-		switch (message.command())
-		{
-		case SETSGN:
-			emit response();
-			emit update();
-			return true;
-
-		default:
-			// Intentionally do nothing.
-			break;
-		}
-		break;
-
-	default:
-		qCritical().noquote() << "Error turning" << device->toString();
-		statechart.fail();
-		break;
+		emit update();
 	}
-	return false;
+
+	return processed;
 }
 
 QString SignalControllerProxy::toString() const
@@ -221,115 +249,12 @@ void SignalControllerProxy::dec()
 	ControllerRegistry::instance().decrease(this);
 }
 
-bool SignalControllerProxy::hasMain()
+bool mrw::ctrl::SignalControllerProxy::hasMain()
 {
 	return main_signal != nullptr;
 }
 
-bool SignalControllerProxy::hasDistant()
+void mrw::ctrl::SignalControllerProxy::prepare()
 {
-	return distant_signal != nullptr;
-}
 
-bool SignalControllerProxy::hasShunt()
-{
-	return shunt_signal != nullptr;
-}
-
-enum Symbol : int
-{
-	OFF = -1,
-	STOP = 0,
-	GO = 1
-};
-
-void SignalControllerProxy::turnMainSignal(sc::integer symbol)
-{
-	__METHOD__;
-
-	Q_ASSERT(main_signal != nullptr);
-
-	SignalState state = SIGNAL_OFF;
-	MrwMessage  message(main_signal->device()->command(SETSGN));
-
-	switch (symbol)
-	{
-	default:
-		state = SIGNAL_OFF;
-		break;
-
-	case Symbol::STOP:
-		state = SIGNAL_HP0;
-		break;
-
-	case Symbol::GO:
-		state = SIGNAL_HP1;
-		break;
-	}
-
-	message.append(state);
-	ControllerRegistry::can()->write(message);
-}
-
-void SignalControllerProxy::turnDistantSignal(sc::integer symbol)
-{
-	Q_ASSERT(distant_signal != nullptr);
-
-	SignalState state = SIGNAL_OFF;
-	MrwMessage  message(distant_signal->device()->command(SETSGN));
-
-	switch (symbol)
-	{
-	default:
-		state = SIGNAL_OFF;
-		break;
-
-	case Symbol::STOP:
-		state = SIGNAL_VR0;
-		break;
-
-	case Symbol::GO:
-		state = SIGNAL_VR1;
-		break;
-	}
-
-
-	message.append(state);
-	ControllerRegistry::can()->write(message);
-}
-
-void SignalControllerProxy::turnShuntSignal(sc::integer symbol)
-{
-	Q_ASSERT(shunt_signal != nullptr);
-
-	SignalState state = SIGNAL_OFF;
-	MrwMessage  message(shunt_signal->device()->command(SETSGN));
-
-	switch (symbol)
-	{
-	default:
-		state = SIGNAL_OFF;
-		break;
-
-	case Symbol::STOP:
-		state = SIGNAL_SH0;
-		break;
-
-	case Symbol::GO:
-		state = SIGNAL_SH1;
-		break;
-	}
-
-	message.append(state);
-	ControllerRegistry::can()->write(message);
-}
-
-SignalController::TourState SignalControllerProxy::distant() const
-{
-	return TourState::STOP;
-}
-
-SignalController::TourState SignalControllerProxy::shunt() const
-{
-	return TourState::STOP;
 }

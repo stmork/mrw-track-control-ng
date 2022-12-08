@@ -9,6 +9,7 @@
 #define MRW_CTRL_SIGNALCONTROLLER_H
 
 #include <ctrl/basecontroller.h>
+#include <model/signal.h>
 
 namespace mrw::ctrl
 {
@@ -17,20 +18,15 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
-		enum class TourState : int
-		{
-			STOP = 0, GO = 1
-		};
-
 		explicit SignalController(QObject * parent = nullptr);
 
 		virtual bool      hasShunting() const = 0;
 		virtual bool      hasDistant()  const = 0;
 		virtual bool      hasMain()     const = 0;
 
-		virtual TourState distant()     const = 0;
-		virtual TourState shunt()       const = 0;
-		virtual TourState main()        const = 0;
+		virtual mrw::model::Signal::Symbol distant()     const = 0;
+		virtual mrw::model::Signal::Symbol shunt()       const = 0;
+		virtual mrw::model::Signal::Symbol main()        const = 0;
 	};
 }
 

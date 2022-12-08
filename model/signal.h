@@ -31,6 +31,14 @@ namespace mrw::model
 		static const mrw::util::ConstantEnumerator<mrw::can::SignalState> signal_constants;
 
 	public:
+		enum Symbol : int
+		{
+			OFF  = -1,
+			STOP =  0,
+			GO   =  1,
+			SLOW =  2
+		};
+
 		/**
 		 * This enumeration represents which basic type of the Signal.
 		 */

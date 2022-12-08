@@ -29,7 +29,7 @@ namespace mrw::model
 
 	enum SectionState
 	{
-		FREE,
+		FREE = 0,
 		SHUNTING,
 		TOUR,
 		OCCUPIED,

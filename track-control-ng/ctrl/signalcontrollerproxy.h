@@ -12,6 +12,8 @@
 #include <model/signal.h>
 #include <ctrl/signalcontroller.h>
 #include <ctrl/controllerregistrand.h>
+#include <ctrl/signalproxy.h>
+#include <statecharts/SignalControllerStatechart.h>
 #include <statecharts/SignalStatechart.h>
 
 namespace mrw::ctrl
@@ -19,13 +21,16 @@ namespace mrw::ctrl
 	class SignalControllerProxy :
 		public SignalController,
 		public ControllerRegistrand,
-		public mrw::statechart::SignalStatechart::OperationCallback
+		public mrw::statechart::SignalControllerStatechart::OperationCallback
 	{
 		Q_OBJECT
 
 	private:
-		mrw::statechart::SignalStatechart  statechart;
-		const bool                         direction = true;
+		mrw::statechart::SignalControllerStatechart  statechart;
+		mrw::statechart::MainProxy                   statechart_main;
+		mrw::statechart::DistantProxy                statechart_distant;
+		mrw::statechart::ShuntProxy                  statechart_shunt;
+		const bool                                   direction = true;
 
 		mrw::model::Section * section        = nullptr;
 		mrw::model::Signal  * base_signal    = nullptr;
@@ -66,9 +71,9 @@ namespace mrw::ctrl
 		virtual bool    hasDistant() const override;
 		virtual bool    hasMain() const override;
 
-		TourState       distant() const override;
-		TourState       shunt() const override;
-		TourState       main() const override;
+		mrw::model::Signal::Symbol       distant() const override;
+		mrw::model::Signal::Symbol       shunt() const override;
+		mrw::model::Signal::Symbol       main() const override;
 
 		// Implementations from ControllerRegistrand
 		virtual bool    process(const can::MrwMessage & message) override;
@@ -79,12 +84,7 @@ namespace mrw::ctrl
 		virtual void dec() override;
 
 		virtual bool hasMain() override;
-		virtual bool hasDistant() override;
-		virtual bool hasShunt() override;
-
-		virtual void turnMainSignal(sc::integer symbol) override;
-		virtual void turnDistantSignal(sc::integer symbol) override;
-		virtual void turnShuntSignal(sc::integer symbol) override;
+		virtual void prepare() override;
 	};
 }
 

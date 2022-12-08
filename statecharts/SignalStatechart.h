@@ -50,47 +50,31 @@ namespace mrw
 			enum class State
 			{
 				NO_STATE,
-				main_region_Init,
-				main_region_Init_Init_process_Main_signal,
-				main_region_Init_Init_process_Main_signal_Turn_main_Turn,
-				main_region_Init_Init_process_Main_signal_Turn_main_Pending,
-				main_region_Init_Init_process_Distant_signal,
-				main_region_Init_Init_process_Distant_signal_Turn_distant_Turn,
-				main_region_Init_Init_process_Distant_signal_Turn_distant_Pending,
-				main_region_Init_Init_process_Shunt_signal,
-				main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn,
-				main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending,
-				main_region_Wait_for_Start,
-				main_region_Operating,
-				main_region_Failed
+				main_region_Idle,
+				main_region_Turning,
+				main_region_Turning_Turn_processing_Pending,
+				main_region_Turning_Turn_processing_Turn,
+				main_region_Fail
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 13;
-			static const sc::integer scvi_main_region_Init = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Main_signal = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Main_signal_Turn_main_Turn = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Main_signal_Turn_main_Pending = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Distant_signal = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Distant_signal_Turn_distant_Pending = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Shunt_signal = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending = 0;
-			static const sc::integer scvi_main_region_Wait_for_Start = 0;
-			static const sc::integer scvi_main_region_Operating = 0;
-			static const sc::integer scvi_main_region_Failed = 0;
+			static const sc::integer numStates = 5;
+			static const sc::integer scvi_main_region_Idle = 0;
+			static const sc::integer scvi_main_region_Turning = 0;
+			static const sc::integer scvi_main_region_Turning_Turn_processing_Pending = 0;
+			static const sc::integer scvi_main_region_Turning_Turn_processing_Turn = 0;
+			static const sc::integer scvi_main_region_Fail = 0;
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
 			{
 				NO_EVENT,
-				start,
+				turn,
 				queued,
-				response,
+				ok,
 				fail,
 				clear,
-				_te0_main_region_Init_
+				_te0_main_region_Turning_
 			};
 
 			class EventInstance
@@ -99,6 +83,17 @@ namespace mrw
 				explicit EventInstance(Event id) : eventId(id) {}
 				virtual ~EventInstance() = default;
 				const Event eventId;
+			};
+			template <typename T>
+			class EventInstanceWithValue : public EventInstance
+			{
+			public:
+				explicit EventInstanceWithValue(Event id, T val) :
+					EventInstance(id),
+					value(val)
+				{}
+				virtual ~EventInstanceWithValue() = default;
+				const T value;
 			};
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
@@ -110,32 +105,38 @@ namespace mrw
 			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
 			void setTimeout(sc::integer timeout);
 
+			/*! Gets the value of the variable 'signalState' that is defined in the default interface scope. */
+			sc::integer getSignalState() const;
+
+			/*! Sets the value of the variable 'signalState' that is defined in the default interface scope. */
+			void setSignalState(sc::integer signalState);
+
+			/*! Gets the value of the variable 'sectionState' that is defined in the default interface scope. */
+			sc::integer getSectionState() const;
+
+			/*! Sets the value of the variable 'sectionState' that is defined in the default interface scope. */
+			void setSectionState(sc::integer sectionState);
+
+			/*! Gets the value of the variable 'FREE' that is defined in the default interface scope. */
+			static sc::integer getFREE() ;
+
+			/*! Gets the value of the variable 'SHUNTING' that is defined in the default interface scope. */
+			static sc::integer getSHUNTING() ;
+
+			/*! Gets the value of the variable 'TOUR' that is defined in the default interface scope. */
+			static sc::integer getTOUR() ;
+
+			/*! Gets the value of the variable 'OFF' that is defined in the default interface scope. */
+			static sc::integer getOFF() ;
+
 			/*! Gets the value of the variable 'STOP' that is defined in the default interface scope. */
 			static sc::integer getSTOP() ;
 
 			/*! Gets the value of the variable 'GO' that is defined in the default interface scope. */
 			static sc::integer getGO() ;
 
-			/*! Gets the value of the variable 'OFF' that is defined in the default interface scope. */
-			static sc::integer getOFF() ;
-
-			/*! Gets the value of the variable 'symbolMain' that is defined in the default interface scope. */
-			sc::integer getSymbolMain() const;
-
-			/*! Sets the value of the variable 'symbolMain' that is defined in the default interface scope. */
-			void setSymbolMain(sc::integer symbolMain);
-
-			/*! Gets the value of the variable 'symbolDistant' that is defined in the default interface scope. */
-			sc::integer getSymbolDistant() const;
-
-			/*! Sets the value of the variable 'symbolDistant' that is defined in the default interface scope. */
-			void setSymbolDistant(sc::integer symbolDistant);
-
-			/*! Gets the value of the variable 'symbolShunt' that is defined in the default interface scope. */
-			sc::integer getSymbolShunt() const;
-
-			/*! Sets the value of the variable 'symbolShunt' that is defined in the default interface scope. */
-			void setSymbolShunt(sc::integer symbolShunt);
+			/*! Gets the value of the variable 'SLOW' that is defined in the default interface scope. */
+			static sc::integer getSLOW() ;
 
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
@@ -143,21 +144,9 @@ namespace mrw
 			public:
 				virtual ~OperationCallback() = 0;
 
-				virtual void inc() = 0;
+				virtual bool hasSignal() = 0;
 
-				virtual void dec() = 0;
-
-				virtual bool hasMain() = 0;
-
-				virtual bool hasDistant() = 0;
-
-				virtual bool hasShunt() = 0;
-
-				virtual void turnMainSignal(sc::integer symbol) = 0;
-
-				virtual void turnDistantSignal(sc::integer symbol) = 0;
-
-				virtual void turnShuntSignal(sc::integer symbol) = 0;
+				virtual void send(sc::integer symbol) = 0;
 
 
 			};
@@ -214,14 +203,14 @@ namespace mrw
 
 
 		public slots:
-			/*! Slot for the in event 'start' that is defined in the default interface scope. */
-			void start();
+			/*! Slot for the in event 'turn' that is defined in the default interface scope. */
+			void turn(sc::integer turn_);
 
 			/*! Slot for the in event 'queued' that is defined in the default interface scope. */
 			void queued();
 
-			/*! Slot for the in event 'response' that is defined in the default interface scope. */
-			void response();
+			/*! Slot for the in event 'ok' that is defined in the default interface scope. */
+			void ok();
 
 			/*! Slot for the in event 'fail' that is defined in the default interface scope. */
 			void fail();
@@ -231,8 +220,11 @@ namespace mrw
 
 
 		signals:
-			/*! Signal representing the out event 'started' that is defined in the default interface scope. */
-			void started();
+			/*! Signal representing the out event 'completed' that is defined in the default interface scope. */
+			void completed();
+
+			/*! Signal representing the out event 'failed' that is defined in the default interface scope. */
+			void failed();
 
 
 		protected:
@@ -251,12 +243,16 @@ namespace mrw
 			SignalStatechart & operator=(const SignalStatechart &);
 
 			sc::integer timeout;
+			sc::integer signalState;
+			sc::integer sectionState;
+			static const sc::integer FREE;
+			static const sc::integer SHUNTING;
+			static const sc::integer TOUR;
+			static const sc::integer OFF;
 			static const sc::integer STOP;
 			static const sc::integer GO;
-			static const sc::integer OFF;
-			sc::integer symbolMain;
-			sc::integer symbolDistant;
-			sc::integer symbolShunt;
+			static const sc::integer SLOW;
+
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
@@ -277,59 +273,33 @@ namespace mrw
 
 			// prototypes of all internal functions
 
-			void enact_main_region_Init();
-			void enact_main_region_Init_Init_process_Main_signal_Turn_main_Turn();
-			void enact_main_region_Init_Init_process_Distant_signal();
-			void enact_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn();
-			void enact_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn();
-			void exact_main_region_Init();
-			void enseq_main_region_Init_default();
-			void enseq_main_region_Init_Init_process_Main_signal_Turn_main_Turn_default();
-			void enseq_main_region_Init_Init_process_Main_signal_Turn_main_Pending_default();
-			void enseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn_default();
-			void enseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Pending_default();
-			void enseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn_default();
-			void enseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending_default();
-			void enseq_main_region_Wait_for_Start_default();
-			void enseq_main_region_Operating_default();
-			void enseq_main_region_Failed_default();
+			void enact_main_region_Turning();
+			void enact_main_region_Turning_Turn_processing_Turn();
+			void enact_main_region_Fail();
+			void exact_main_region_Turning();
+			void enseq_main_region_Idle_default();
+			void enseq_main_region_Turning_default();
+			void enseq_main_region_Turning_Turn_processing_Pending_default();
+			void enseq_main_region_Turning_Turn_processing_Turn_default();
+			void enseq_main_region_Fail_default();
 			void enseq_main_region_default();
-			void enseq_main_region_Init_Init_process_default();
-			void exseq_main_region_Init();
-			void exseq_main_region_Init_Init_process_Main_signal();
-			void exseq_main_region_Init_Init_process_Main_signal_Turn_main_Turn();
-			void exseq_main_region_Init_Init_process_Main_signal_Turn_main_Pending();
-			void exseq_main_region_Init_Init_process_Distant_signal();
-			void exseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Turn();
-			void exseq_main_region_Init_Init_process_Distant_signal_Turn_distant_Pending();
-			void exseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn();
-			void exseq_main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending();
-			void exseq_main_region_Wait_for_Start();
-			void exseq_main_region_Operating();
-			void exseq_main_region_Failed();
+			void enseq_main_region_Turning_Turn_processing_default();
+			void exseq_main_region_Idle();
+			void exseq_main_region_Turning();
+			void exseq_main_region_Turning_Turn_processing_Pending();
+			void exseq_main_region_Turning_Turn_processing_Turn();
+			void exseq_main_region_Fail();
 			void exseq_main_region();
-			void exseq_main_region_Init_Init_process();
-			void exseq_main_region_Init_Init_process_Main_signal_Turn_main();
-			void exseq_main_region_Init_Init_process_Distant_signal_Turn_distant();
-			void react_main_region_Init_Init_process__choice_0();
-			void react_main_region_Init_Init_process__choice_1();
-			void react_main_region_Init_Init_process__choice_2();
+			void exseq_main_region_Turning_Turn_processing();
+			void react_main_region__choice_0();
 			void react_main_region__entry_Default();
-			void react_main_region_Init_Init_process__entry_Default();
+			void react_main_region_Turning_Turn_processing__entry_Default();
 			sc::integer react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Main_signal_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Main_signal_Turn_main_Turn_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Main_signal_Turn_main_Pending_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Distant_signal_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Distant_signal_Turn_distant_Turn_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Distant_signal_Turn_distant_Pending_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Shunt_signal_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Shunt_signal_Turn_shunt_Turn_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_Init_process_Shunt_signal_Turn_shunt_Pending_react(const sc::integer transitioned_before);
-			sc::integer main_region_Wait_for_Start_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
-			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
+			sc::integer main_region_Idle_react(const sc::integer transitioned_before);
+			sc::integer main_region_Turning_react(const sc::integer transitioned_before);
+			sc::integer main_region_Turning_Turn_processing_Pending_react(const sc::integer transitioned_before);
+			sc::integer main_region_Turning_Turn_processing_Turn_react(const sc::integer transitioned_before);
+			sc::integer main_region_Fail_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
 			void runCycle();
@@ -337,14 +307,17 @@ namespace mrw
 
 
 
-			/*! Indicates event 'start' of default interface scope is active. */
-			bool start_raised;
+			/*! Indicates event 'turn' of default interface scope is active. */
+			bool turn_raised;
+
+			/*! Value of event 'turn' of default interface scope. */
+			sc::integer turn_value;
 
 			/*! Indicates event 'queued' of default interface scope is active. */
 			bool queued_raised;
 
-			/*! Indicates event 'response' of default interface scope is active. */
-			bool response_raised;
+			/*! Indicates event 'ok' of default interface scope is active. */
+			bool ok_raised;
 
 			/*! Indicates event 'fail' of default interface scope is active. */
 			bool fail_raised;

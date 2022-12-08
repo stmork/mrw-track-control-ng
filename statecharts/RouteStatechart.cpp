@@ -249,6 +249,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Switch Turning'. */
 			timerService->setTimer(this, 0, timeout, false);
+			ifaceOperationCallback->reset();
 			ifaceOperationCallback->turnSwitches();
 		}
 
@@ -257,6 +258,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Section Activation'. */
 			timerService->setTimer(this, 1, timeout, false);
+			ifaceOperationCallback->reset();
 			ifaceOperationCallback->activateSections();
 		}
 
@@ -265,6 +267,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Signal Turning'. */
 			timerService->setTimer(this, 2, timeout, false);
+			ifaceOperationCallback->reset();
 			ifaceOperationCallback->turnSignals();
 		}
 
@@ -272,6 +275,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Disable()
 		{
 			/* Entry action for state 'Disable'. */
+			ifaceOperationCallback->reset();
 			ifaceOperationCallback->deactivateSections();
 			ifaceOperationCallback->unlockSignals();
 			ifaceOperationCallback->unlockSwitches();

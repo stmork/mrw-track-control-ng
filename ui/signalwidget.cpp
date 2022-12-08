@@ -65,9 +65,9 @@ void SignalWidget::paint(QPainter & painter)
 	const float        border = SCALE + shift;
 	const float        start  = SCALE - border;
 
-	const SignalController::TourState main_state    = signal_controller->main();
-	const SignalController::TourState distant_state = signal_controller->distant();
-	const SignalController::TourState shunt_state   = signal_controller->shunt();
+	const Signal::Symbol main_state    = signal_controller->main();
+	const Signal::Symbol distant_state = signal_controller->distant();
+	const Signal::Symbol shunt_state   = signal_controller->shunt();
 
 	const bool has_main     = signal_controller->hasMain();
 	const bool has_distant  = signal_controller->hasDistant();
@@ -116,18 +116,18 @@ void SignalWidget::paint(QPainter & painter)
 
 	QColor mast_color(RED);
 	QColor main_color    = main_state ==
-		SignalController::TourState::STOP ? RED : GREEN;
+		Signal::Symbol::STOP ? RED : GREEN;
 	QColor distant_color = distant_state ==
-		SignalController::TourState::STOP ? YELLOW : GREEN;
+		Signal::Symbol::STOP ? YELLOW : GREEN;
 	QColor shunt_color   = shunt_state ==
-		SignalController::TourState::STOP ? RED : WHITE;
+		Signal::Symbol::STOP ? RED : WHITE;
 	bool draw_shunt   = false;
 	bool draw_distant = false;
 
 	if (has_main)
 	{
 		mast_color = main_color;
-		if (main_state == SignalController::TourState::GO)
+		if (main_state == Signal::Symbol::GO)
 		{
 			draw_distant = has_distant;
 			if (draw_distant)

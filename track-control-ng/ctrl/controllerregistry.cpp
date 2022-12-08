@@ -46,7 +46,7 @@ ControllerRegistrand * ControllerRegistry::find(Device * device) const
 	}
 
 	auto it = registry.find(device);
-	return it != registry.end() ? it->second: nullptr;
+	return it != registry.end() ? it->second : nullptr;
 }
 
 void ControllerRegistry::registerService(MrwBusService * service)

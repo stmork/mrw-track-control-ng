@@ -23,9 +23,9 @@ namespace mrw::ctrl
 		bool      distant_signal = false;
 		bool      main_signal    = true;
 
-		TourState shunt_state    = TourState::STOP;
-		TourState distant_state  = TourState::STOP;
-		TourState main_state     = TourState::STOP;
+		mrw::model::Signal::Symbol shunt_state    = mrw::model::Signal::Symbol::STOP;
+		mrw::model::Signal::Symbol distant_state  = mrw::model::Signal::Symbol::STOP;
+		mrw::model::Signal::Symbol main_state     = mrw::model::Signal::Symbol::STOP;
 
 		mrw::model::Device::LockState lock_state    =
 			mrw::model::Device::LockState::UNLOCKED;
@@ -58,17 +58,17 @@ namespace mrw::ctrl
 			return extension;
 		}
 
-		inline TourState distant() const override
+		inline mrw::model::Signal::Symbol distant() const override
 		{
 			return distant_state;
 		}
 
-		inline TourState shunt() const override
+		inline mrw::model::Signal::Symbol shunt() const override
 		{
 			return shunt_state;
 		}
 
-		inline TourState main() const override
+		inline mrw::model::Signal::Symbol main() const override
 		{
 			return main_state;
 		}
