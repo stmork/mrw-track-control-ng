@@ -49,8 +49,8 @@ namespace mrw::ctrl
 		virtual ~SignalControllerProxy();
 
 	signals:
-		void queued();
-		void response();
+		void enable();
+		void disable();
 
 	private:
 		void add(mrw::model::Signal * signal);

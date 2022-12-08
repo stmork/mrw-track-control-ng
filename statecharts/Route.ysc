@@ -21,7 +21,7 @@
         <outgoingTransitions xmi:id="_SeMvkHWBEe2oVZ4yFrzfuw" specification="disable" target="_59hPEHWAEe2oVZ4yFrzfuw"/>
         <outgoingTransitions xmi:id="_iuFhwHWFEe2oVZ4yFrzfuw" specification="extended" target="_L64pAHWAEe2cXugcT2PGGw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_59hPEHWAEe2oVZ4yFrzfuw" specification="entry / reset&#xA;entry / deactivateSections&#xA;entry / unlockSignals&#xA;entry / unlockSwitches" name="Disable" incomingTransitions="_EC0EEHWBEe2oVZ4yFrzfuw _GRx2AHWBEe2oVZ4yFrzfuw _RgtMkHWBEe2oVZ4yFrzfuw _SeMvkHWBEe2oVZ4yFrzfuw"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_59hPEHWAEe2oVZ4yFrzfuw" specification="entry / reset&#xA;entry / deactivateSections; unlockSignals; unlockSwitches" name="Disable" incomingTransitions="_EC0EEHWBEe2oVZ4yFrzfuw _GRx2AHWBEe2oVZ4yFrzfuw _RgtMkHWBEe2oVZ4yFrzfuw _SeMvkHWBEe2oVZ4yFrzfuw"/>
       <vertices xsi:type="sgraph:State" xmi:id="_lSD6YHWFEe2oVZ4yFrzfuw" name="Start" incomingTransitions="_L64B_XWAEe2cXugcT2PGGw">
         <outgoingTransitions xmi:id="_oCR_QHWFEe2oVZ4yFrzfuw" specification="extended / reset" target="_L64pAHWAEe2cXugcT2PGGw"/>
       </vertices>

@@ -10,6 +10,7 @@
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
 #include <ctrl/sectioncontroller.h>
+#include <ctrl/signalcontrollerproxy.h>
 
 #include "widgetroute.h"
 
@@ -73,6 +74,20 @@ void WidgetRoute::left()
 	qDebug().noquote() << "Left:" << *controller;
 }
 
+void WidgetRoute::collectSignals()
+{
+	main_signals.clear();
+	for (Section * section : sections)
+	{
+		section->parts<Signal>(main_signals, [&](const Signal * signal)
+		{
+			return
+				(signal->direction() == direction) &&
+				((signal->type() & Signal::MAIN_SIGNAL) != 0);
+		});
+	}
+}
+
 void WidgetRoute::reset()
 {
 	ControllerRegistry::instance().reset();
@@ -117,7 +132,13 @@ void WidgetRoute::activateSections()
 
 void WidgetRoute::turnSignals()
 {
-	statechart.turned();
+	collectSignals();
+	for (Signal * signal : main_signals)
+	{
+		SignalControllerProxy * controller = ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
+
+		controller->enable();
+	}
 }
 
 void WidgetRoute::deactivateSections()
@@ -132,6 +153,13 @@ void WidgetRoute::deactivateSections()
 
 void WidgetRoute::unlockSignals()
 {
+	collectSignals();
+	for (Signal * signal : main_signals)
+	{
+		SignalControllerProxy * controller = ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
+
+		controller->disable();
+	}
 }
 
 void WidgetRoute::unlockSwitches()

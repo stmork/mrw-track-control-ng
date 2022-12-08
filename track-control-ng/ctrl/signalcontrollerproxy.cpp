@@ -113,6 +113,15 @@ SignalControllerProxy::SignalControllerProxy(
 		&statechart, &SignalControllerStatechart::fail,
 		Qt::QueuedConnection);
 
+	connect(
+		this, &SignalControllerProxy::enable,
+		&statechart, &SignalControllerStatechart::enable,
+		Qt::QueuedConnection);
+	connect(
+		this, &SignalControllerProxy::disable,
+		&statechart, &SignalControllerStatechart::disable,
+		Qt::QueuedConnection);
+
 	statechart_main.start(main_signal);
 	statechart_distant.start(distant_signal);
 	statechart_shunt.start(shunt_signal);

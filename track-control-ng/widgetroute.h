@@ -13,6 +13,7 @@
 
 #include <statecharts/RouteStatechart.h>
 #include <model/section.h>
+#include <model/signal.h>
 #include <model/route.h>
 
 class WidgetRoute :
@@ -24,7 +25,8 @@ class WidgetRoute :
 private:
 	QListWidgetItem list_item;
 
-	mrw::statechart::RouteStatechart statechart;
+	mrw::statechart::RouteStatechart   statechart;
+	std::vector<mrw::model::Signal *>  main_signals;
 
 public:
 	static const int        USER_ROLE = Qt::UserRole + 1;
@@ -46,6 +48,7 @@ public slots:
 	void left();
 
 private:
+	void collectSignals();
 
 	virtual void reset() override;
 	virtual void turnSwitches() override;
