@@ -306,22 +306,22 @@ void TestModel::testExtension()
 	position.extend(2);
 	copy.testParseValue(position);
 	QCOMPARE(copy, position);
-	QCOMPARE(position.extension(), 3);
-	QCOMPARE(position.lines(), 0);
+	QCOMPARE(position.extension(), 3u);
+	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.width(), 7);
 
 	position.extend(-1);
 	copy.testParseValue(position);
 	QCOMPARE(copy, position);
-	QCOMPARE(position.extension(), 2);
-	QCOMPARE(position.lines(), 0);
+	QCOMPARE(position.extension(), 2u);
+	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.width(), 6);
 
 	position.extend(-4);
 	copy.testParseValue(position);
 	QCOMPARE(copy, position);
-	QCOMPARE(position.extension(), 0);
-	QCOMPARE(position.lines(), 0);
+	QCOMPARE(position.extension(), 0u);
+	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.width(), 4);
 }
 
