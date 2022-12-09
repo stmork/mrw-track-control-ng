@@ -33,7 +33,7 @@ RegularSwitch::RegularSwitch(
 	}
 }
 
-void mrw::model::RegularSwitch::setState(const mrw::model::RegularSwitch::State state)
+void RegularSwitch::setState(const RegularSwitch::State state)
 {
 	switch_state = state;
 }
