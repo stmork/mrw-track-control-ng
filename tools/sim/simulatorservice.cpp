@@ -53,12 +53,12 @@ void SimulatorService::broadcast(const MrwMessage & message)
 {
 	const Command cmd = message.command();
 
-	for(size_t c = 0; c < model->controllerCount(); c++)
+	for (size_t c = 0; c < model->controllerCount(); c++)
 	{
 		Controller * controller = model->controller(c);
 		MrwMessage   response(controller->id(), NO_UNITNO, cmd, MSG_OK);
 
-		switch(cmd)
+		switch (cmd)
 		{
 		case GETVER:
 			response.append(3);
@@ -68,11 +68,11 @@ void SimulatorService::broadcast(const MrwMessage & message)
 			break;
 
 		case QRYBUF:
-			append(response,1);
+			append(response, 1);
 			break;
 
 		case QRYERR:
-			append(response,3);
+			append(response, 3);
 			break;
 
 		default:
@@ -98,10 +98,10 @@ void SimulatorService::device(const MrwMessage & message)
 	const ControllerId id      = message.sid();
 	const UnitNo       unit_no = message.unitNo();
 	const Command      cmd     = message.command();
-	Device *           device  = model->deviceByUnitNo(unit_no);
+	Device      *      device  = model->deviceByUnitNo(unit_no);
 	MrwMessage         response(id, unit_no, cmd, device != nullptr ? MSG_OK : MSG_UNIT_NOT_FOUND);
 
-	switch(cmd)
+	switch (cmd)
 	{
 	case SETLFT:
 		setSwitchState(device, SWITCH_STATE_LEFT);
@@ -136,7 +136,7 @@ uint8_t SimulatorService::getSwitchState(Device * device)
 
 void SimulatorService::setSwitchState(Device * device, const SwitchState switch_state)
 {
-	RegularSwitch *     rs  = dynamic_cast<RegularSwitch *>(device);
+	RegularSwitch   *   rs  = dynamic_cast<RegularSwitch *>(device);
 	DoubleCrossSwitch * dcs = dynamic_cast<DoubleCrossSwitch *>(device);
 
 	if (rs != nullptr)
