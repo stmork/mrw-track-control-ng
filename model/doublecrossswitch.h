@@ -8,6 +8,7 @@
 #ifndef MRW_MODEL_CROSSDOUBLESWITCH_H
 #define MRW_MODEL_CROSSDOUBLESWITCH_H
 
+#include <util/constantenumerator.h>
 #include <model/abstractswitch.h>
 
 namespace mrw::model
@@ -57,10 +58,7 @@ namespace mrw::model
 		 * @return The internal state related to an active track.
 		 * @see commandState()
 		 */
-		inline State state() const
-		{
-			return switch_state;
-		}
+		State state() const;
 
 		/**
 		 * This method sets the internal state of this DoubleCrossSwitch. As
@@ -70,10 +68,7 @@ namespace mrw::model
 		 * @param state The new state related to an active track.
 		 * @see commandState()
 		 */
-		inline void setState(const State state)
-		{
-			switch_state = state;
-		}
+		void setState(const State state);
 
 		void setState(const RailPart * left, const RailPart * right) override;
 
@@ -86,7 +81,8 @@ namespace mrw::model
 		void link() override;
 		void findFlankSwitches() override;
 
-		State switch_state = State::AC;
+		State                                              switch_state = State::AC;
+		const static mrw::util::ConstantEnumerator<State>  state_map;
 	};
 }
 

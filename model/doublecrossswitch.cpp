@@ -7,8 +7,19 @@
 #include <model/doublecrossswitch.h>
 #include <model/regularswitch.h>
 
+using namespace mrw::util;
 using namespace mrw::can;
 using namespace mrw::model;
+
+using State = DoubleCrossSwitch::State;
+
+const ConstantEnumerator<State>  DoubleCrossSwitch::state_map
+{
+	CONSTANT(State::AC),
+	CONSTANT(State::AD),
+	CONSTANT(State::BC),
+	CONSTANT(State::BD)
+};
 
 DoubleCrossSwitch::DoubleCrossSwitch(
 	ModelRailway     *    model_railway,
@@ -37,6 +48,9 @@ void DoubleCrossSwitch::setState(
 	}
 
 	switch_state = static_cast<State>(state);
+#ifdef STATE_VERBOSE
+	qDebug().noquote() << "########## DCS compute state: " << state_map.get(switch_state) << name();
+#endif
 }
 
 void DoubleCrossSwitch::link()
@@ -118,4 +132,22 @@ SwitchState DoubleCrossSwitch::switchState() const
 	return b_active == d_active ?
 		SwitchState::SWITCH_STATE_LEFT :
 		SwitchState::SWITCH_STATE_RIGHT;
+}
+
+void DoubleCrossSwitch::setState(const State state)
+{
+#ifdef STATE_VERBOSE
+	qDebug().noquote() << "########## DCS set state: " << state_map.get(switch_state) << " => " << state_map.get(state) << name();
+#endif
+
+	switch_state = state;
+}
+
+State DoubleCrossSwitch::state() const
+{
+#ifdef STATE_VERBOSE
+	qDebug().noquote() << "DCS get state: " << state_map.get(switch_state) << name();
+#endif
+
+	return switch_state;
 }

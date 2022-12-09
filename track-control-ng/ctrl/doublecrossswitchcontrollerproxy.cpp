@@ -144,7 +144,7 @@ bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 		switch (message.command())
 		{
 		case SETLFT:
-			if (part->switchState() != SwitchState::SWITCH_STATE_LEFT)
+			if (part->commandState() != message.command())
 			{
 				part->setState(DoubleCrossSwitch::State::AC);
 			}
@@ -153,7 +153,7 @@ bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 			return true;
 
 		case SETRGT:
-			if (part->switchState() != SwitchState::SWITCH_STATE_RIGHT)
+			if (part->commandState() != message.command())
 			{
 				part->setState(DoubleCrossSwitch::State::BC);
 			}
@@ -192,7 +192,6 @@ void DoubleCrossSwitchControllerProxy::left()
 
 	const MrwMessage  command(part->command(SETLFT));
 
-	part->setState(DoubleCrossSwitch::State::AC);
 	ControllerRegistry::can()->write(command);
 	emit update();
 }
@@ -203,7 +202,6 @@ void DoubleCrossSwitchControllerProxy::right()
 
 	const MrwMessage  command(part->command(SETRGT));
 
-	part->setState(DoubleCrossSwitch::State::BC);
 	ControllerRegistry::can()->write(command);
 	emit update();
 }
