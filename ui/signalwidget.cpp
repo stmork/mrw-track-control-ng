@@ -4,6 +4,7 @@
 //
 
 #include <QPainter>
+#include <QPainterPath>
 
 #include <ui/signalwidget.h>
 #include <model/position.h>

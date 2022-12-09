@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <QPainterPath>
+
 #include <ui/railwidget.h>
 #include <model/position.h>
 

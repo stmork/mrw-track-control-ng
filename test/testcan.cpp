@@ -160,7 +160,7 @@ void TestCan::testBroadcast()
 	QVERIFY(!frame.hasExtendedFrameFormat());
 	QCOMPARE(frame.frameId(), CAN_BROADCAST_ID);
 	QCOMPARE(array.size(), 1);
-	QCOMPARE(array[0], PING);
+	QCOMPARE(Command(array.at(0)), PING);
 }
 
 void TestCan::testCommand()
@@ -181,7 +181,7 @@ void TestCan::testCommand()
 	QVERIFY(frame.hasExtendedFrameFormat());
 	QCOMPARE(frame.frameId(), TEST_ID);
 	QCOMPARE(array.size(), 1);
-	QCOMPARE(array[0], SETLFT);
+	QCOMPARE(Command(array.at(0)), SETLFT);
 }
 
 void TestCan::testResult()
@@ -202,7 +202,7 @@ void TestCan::testResult()
 	QVERIFY(frame.hasExtendedFrameFormat());
 	QCOMPARE(frame.frameId(), TEST_CTRL_ID);
 	QCOMPARE(array.size(), 4);
-	QCOMPARE(array[0], SETLFT | CMD_RESPONSE);
+	QCOMPARE(Command(array.at(0)), SETLFT | CMD_RESPONSE);
 	QCOMPARE(array[1], MSG_OK);
 	QCOMPARE(array[2], TEST_LSB);
 	QCOMPARE(array[3], TEST_MSB);
@@ -235,7 +235,7 @@ void TestCan::testCopyRequest()
 		QVERIFY(!frame.hasExtendedFrameFormat());
 		QCOMPARE(frame.frameId(), CAN_BROADCAST_ID);
 		QCOMPARE(array.size(), i + 1);
-		QCOMPARE(array[0], PING);
+		QCOMPARE(Command(array.at(0)), PING);
 
 		for (unsigned v = start; v <= i; v++)
 		{
@@ -271,8 +271,8 @@ void TestCan::testCopyResponse()
 		QVERIFY(frame.hasExtendedFrameFormat());
 		QCOMPARE(frame.frameId(), TEST_CTRL_ID);
 		QCOMPARE(array.size(), i + 1);
-		QCOMPARE(array[0], SETLFT | CMD_RESPONSE);
-		QCOMPARE(array[1], MSG_QUEUED);
+		QCOMPARE(Command( array.at(0)), SETLFT | CMD_RESPONSE);
+		QCOMPARE(Response(array.at(1)), MSG_QUEUED);
 
 		for (unsigned v = start; v <= i; v++)
 		{

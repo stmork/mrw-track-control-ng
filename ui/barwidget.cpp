@@ -4,6 +4,7 @@
 //
 
 #include <QPainter>
+#include <QPainterPath>
 
 #include "barwidget.h"
 

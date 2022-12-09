@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <QPainterPath>
+
 #include <util/clockservice.h>
 #include <model/device.h>
 #include <ui/controllerwidget.h>
