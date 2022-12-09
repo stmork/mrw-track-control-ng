@@ -3,7 +3,7 @@
 #  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 #
 
-QT       += widgets
+QT       += widgets gui
 TEMPLATE  = lib
 CONFIG   += staticlib
 
