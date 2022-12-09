@@ -202,10 +202,10 @@ void TestCan::testResult()
 	QVERIFY(frame.hasExtendedFrameFormat());
 	QCOMPARE(frame.frameId(), TEST_CTRL_ID);
 	QCOMPARE(array.size(), 4);
-	QCOMPARE(Command(array.at(0)), SETLFT | CMD_RESPONSE);
-	QCOMPARE(array[1], MSG_OK);
-	QCOMPARE(array[2], TEST_LSB);
-	QCOMPARE(array[3], TEST_MSB);
+	QCOMPARE(Command( array.at(0)), SETLFT | CMD_RESPONSE);
+	QCOMPARE(Response(array.at(1)), MSG_OK);
+	QCOMPARE(UnitNo(  array.at(2)), TEST_LSB);
+	QCOMPARE(UnitNo(  array.at(3)), TEST_MSB);
 }
 
 void TestCan::testCopyRequest()
