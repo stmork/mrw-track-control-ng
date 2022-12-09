@@ -60,10 +60,10 @@ void TestNumbering::testToManyInductors()
 
 void TestNumbering::testPorts()
 {
-	QCOMPARE(model->module(1, 0)->ports(), 1);
-	QCOMPARE(model->module(1, 1)->ports(), 1);
-	QCOMPARE(model->module(1, 2)->ports(), 1);
-	QCOMPARE(model->module(2, 0)->ports(), 2);
+	QCOMPARE(model->module(1, 0)->ports(), 1u);
+	QCOMPARE(model->module(1, 1)->ports(), 1u);
+	QCOMPARE(model->module(1, 2)->ports(), 1u);
+	QCOMPARE(model->module(2, 0)->ports(), 2u);
 }
 
 void TestNumbering::testPairSignalSection1()
@@ -144,8 +144,8 @@ void TestNumbering::testSignalCount()
 	model->parts<FormSignal>(form_signals);
 	model->parts<LightSignal>(light_signals);
 
-	QCOMPARE(light_signals.size(), 9);
-	QCOMPARE(form_signals.size(), 5);
+	QCOMPARE(light_signals.size(), 9u);
+	QCOMPARE(form_signals.size(), 5u);
 }
 
 void TestNumbering::testRailCount()
@@ -158,9 +158,9 @@ void TestNumbering::testRailCount()
 	model->parts<RegularSwitch>(switches);
 	model->parts<DoubleCrossSwitch>(doubles);
 
-	QCOMPARE(rails.size(), 3);
-	QCOMPARE(switches.size(), 3);
-	QCOMPARE(doubles.size(), 1);
+	QCOMPARE(rails.size(), 3u);
+	QCOMPARE(switches.size(), 3u);
+	QCOMPARE(doubles.size(), 1u);
 }
 
 void TestNumbering::testSignalSort()
@@ -170,7 +170,7 @@ void TestNumbering::testSignalSort()
 	model->section(0, 2)->parts < Signal>(segment_signals);
 	std::sort(segment_signals.begin(), segment_signals.end(), Signal::less);
 
-	QCOMPARE(segment_signals.size(), 5);
+	QCOMPARE(segment_signals.size(), 5u);
 
 	QCOMPARE(segment_signals[0]->direction(), true);
 	QCOMPARE(segment_signals[1]->direction(), true);

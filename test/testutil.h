@@ -19,7 +19,7 @@ namespace mrw::test
 		Q_OBJECT
 
 	private:
-		static const mrw::util::ConstantEnumerator<unsigned> map;
+		static const mrw::util::ConstantEnumerator<int> map;
 
 	public:
 		explicit TestUtil(QObject * parent = nullptr);

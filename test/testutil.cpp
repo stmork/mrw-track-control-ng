@@ -36,7 +36,7 @@ public:
 	}
 };
 
-const ConstantEnumerator<unsigned> TestUtil::map
+const ConstantEnumerator<int> TestUtil::map
 {
 	CONSTANT(EINVAL),
 	CONSTANT(EBUSY)
@@ -112,7 +112,7 @@ void TestUtil::testProperties()
 	QString    filename = QFile::exists("test.properties") ? "test.properties" : "test/test.properties";
 	Properties props(filename);
 
-	QCOMPARE(props.size(), 5);
+	QCOMPARE(props.size(), 5u);
 
 	QCOMPARE(props.at("AvalidProp"), "xyvc_,");
 	QCOMPARE(props.at("Another11Prop"), "ccc");

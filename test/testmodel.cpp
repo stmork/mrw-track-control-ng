@@ -227,7 +227,7 @@ void TestModel::testDefaultPosition()
 
 	QCOMPARE(position.bending(), Bending::STRAIGHT);
 	QCOMPARE(position.isInclined(), false);
-	QCOMPARE(position.extension(), 0);
+	QCOMPARE(position.extension(), 0u);
 	QCOMPARE(position.point(), QPoint(0, 0));
 	QCOMPARE(position.key(), TestPosition::TEST_KEY);
 }
@@ -242,8 +242,8 @@ void TestModel::testParsingPosition()
 	QCOMPARE(copy, position);
 	QCOMPARE(position.bending(), Bending::STRAIGHT);
 	QCOMPARE(position.isInclined(), false);
-	QCOMPARE(position.extension(), 0);
-	QCOMPARE(position.lines(), 0);
+	QCOMPARE(position.extension(), 0u);
+	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.point(), QPoint(0, 0));
 
 	position.testParse("x,y,i");
@@ -251,8 +251,8 @@ void TestModel::testParsingPosition()
 	QCOMPARE(copy, position);
 	QCOMPARE(position.bending(), Bending::STRAIGHT);
 	QCOMPARE(position.isInclined(), true);
-	QCOMPARE(position.extension(), 0);
-	QCOMPARE(position.lines(), 0);
+	QCOMPARE(position.extension(), 0u);
+	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.point(), QPoint(4, 0));
 
 	position.testParse("2,3,xxxvvr");
@@ -260,8 +260,8 @@ void TestModel::testParsingPosition()
 	QCOMPARE(copy, position);
 	QCOMPARE(position.bending(), Bending::RIGHT);
 	QCOMPARE(position.isInclined(), false);
-	QCOMPARE(position.extension(), 3);
-	QCOMPARE(position.lines(), 2);
+	QCOMPARE(position.extension(), 3u);
+	QCOMPARE(position.lines(), 2u);
 	QCOMPARE(position.point(), QPoint(8, 12));
 
 	position.testParse("4,5,ql");
@@ -269,8 +269,8 @@ void TestModel::testParsingPosition()
 	QCOMPARE(copy, position);
 	QCOMPARE(position.bending(), Bending::LEFT);
 	QCOMPARE(position.isInclined(), false);
-	QCOMPARE(position.extension(), 0);
-	QCOMPARE(position.lines(), 0);
+	QCOMPARE(position.extension(), 0u);
+	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.point(), QPoint(17, 20));
 
 	position.testParse("6,7,hrxyvi");
@@ -278,8 +278,8 @@ void TestModel::testParsingPosition()
 	QCOMPARE(copy, position);
 	QCOMPARE(position.bending(), Bending::RIGHT);
 	QCOMPARE(position.isInclined(), true);
-	QCOMPARE(position.extension(), 1);
-	QCOMPARE(position.lines(), 1);
+	QCOMPARE(position.extension(), 1u);
+	QCOMPARE(position.lines(), 1u);
 	QCOMPARE(position.point(), QPoint(26, 28));
 }
 
@@ -288,9 +288,9 @@ void TestModel::testExtension()
 	TestPosition position;
 	TestPosition copy;
 
-	QCOMPARE(Position::FRACTION, 4);
-	QCOMPARE(position.extension(), 0);
-	QCOMPARE(position.lines(), 0);
+	QCOMPARE(Position::FRACTION, 4u);
+	QCOMPARE(position.extension(), 0u);
+	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.width(), 4);
 
 	copy.testParseValue(position);
@@ -299,8 +299,8 @@ void TestModel::testExtension()
 	position.extend();
 	copy.testParseValue(position);
 	QCOMPARE(copy, position);
-	QCOMPARE(position.extension(), 1);
-	QCOMPARE(position.lines(), 0);
+	QCOMPARE(position.extension(), 1u);
+	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.width(), 5);
 
 	position.extend(2);

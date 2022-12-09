@@ -40,7 +40,7 @@ void TestRouting::testSimple()
 
 	route.clear();
 	QVERIFY(verify(route));
-	QCOMPARE(reserved.size(), 0);
+	QCOMPARE(reserved.size(), 0u);
 	QVERIFY(empty());
 }
 
@@ -103,7 +103,7 @@ void TestRouting::testExtension()
 
 	route.clear();
 	QVERIFY(verify(route));
-	QCOMPARE(reserved.size(), 0);
+	QCOMPARE(reserved.size(), 0u);
 	QVERIFY(empty());
 }
 
@@ -128,7 +128,7 @@ void TestRouting::testOccupation()
 
 	route.clear();
 	QVERIFY(verify(route));
-	QCOMPARE(reserved.size(), 0);
+	QCOMPARE(reserved.size(), 0u);
 	QVERIFY(empty());
 }
 
@@ -144,7 +144,7 @@ void TestRouting::testInverseFail()
 
 	route.clear();
 	QVERIFY(verify(route));
-	QCOMPARE(reserved.size(), 0);
+	QCOMPARE(reserved.size(), 0u);
 	QVERIFY(empty());
 }
 
