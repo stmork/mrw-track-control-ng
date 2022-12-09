@@ -234,7 +234,7 @@ void TestCan::testCopyRequest()
 
 		QVERIFY(!frame.hasExtendedFrameFormat());
 		QCOMPARE(frame.frameId(), CAN_BROADCAST_ID);
-		QCOMPARE(array.size(), i + 1);
+		QCOMPARE((size_t)array.size(), i + 1);
 		QCOMPARE(Command(array.at(0)), PING);
 
 		for (size_t v = start; v <= i; v++)
