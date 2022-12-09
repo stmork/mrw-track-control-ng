@@ -237,9 +237,9 @@ void TestCan::testCopyRequest()
 		QCOMPARE(array.size(), i + 1);
 		QCOMPARE(Command(array.at(0)), PING);
 
-		for (unsigned v = start; v <= i; v++)
+		for (size_t v = start; v <= i; v++)
 		{
-			QCOMPARE(array[v], 0x11 * v);
+			QCOMPARE((size_t)array.at(v), 0x11 * v);
 		}
 	}
 }
@@ -270,13 +270,13 @@ void TestCan::testCopyResponse()
 
 		QVERIFY(frame.hasExtendedFrameFormat());
 		QCOMPARE(frame.frameId(), TEST_CTRL_ID);
-		QCOMPARE(array.size(), i + 1);
+		QCOMPARE((size_t)array.size(), i + 1);
 		QCOMPARE(Command( array.at(0)), SETLFT | CMD_RESPONSE);
 		QCOMPARE(Response(array.at(1)), MSG_QUEUED);
 
-		for (unsigned v = start; v <= i; v++)
+		for (size_t v = start; v <= i; v++)
 		{
-			QCOMPARE(array[v], 0x11 * v);
+			QCOMPARE((size_t)array.at(v), 0x11 * v);
 		}
 	}
 }
