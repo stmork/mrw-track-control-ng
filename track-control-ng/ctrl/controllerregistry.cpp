@@ -92,7 +92,7 @@ void ControllerRegistry::decrease(ControllerRegistrand * element)
 
 		if (transaction.size() == 0)
 		{
-			qDebug("Transaction completed.");
+			qDebug("======================= Transaction completed.");
 			emit completed();
 		}
 	}
@@ -109,7 +109,7 @@ bool ControllerRegistry::contains(ControllerRegistrand * ctrl)
 
 void ControllerRegistry::reset()
 {
-	qDebug("Transaction left %zu elements.", transaction.size());
+	qDebug("======================= Transaction left %zu elements.", transaction.size());
 	transaction.clear();
 }
 
