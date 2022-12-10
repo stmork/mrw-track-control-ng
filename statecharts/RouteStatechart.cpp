@@ -276,9 +276,9 @@ namespace mrw
 		{
 			/* Entry action for state 'Disable'. */
 			ifaceOperationCallback->reset();
-			ifaceOperationCallback->deactivateSections();
 			ifaceOperationCallback->unlockSignals();
 			ifaceOperationCallback->unlockSwitches();
+			ifaceOperationCallback->deactivateSections();
 		}
 
 		/* Exit action for state 'Switch Turning'. */
@@ -465,7 +465,7 @@ namespace mrw
 				if (turned_raised)
 				{
 					exseq_main_region_Switch_Turning();
-					enseq_main_region_Section_Activation_default();
+					enseq_main_region_Signal_Turning_default();
 					react(0);
 					transitioned_after = 0;
 				}
@@ -498,7 +498,7 @@ namespace mrw
 				if (turned_raised)
 				{
 					exseq_main_region_Section_Activation();
-					enseq_main_region_Signal_Turning_default();
+					enseq_main_region_Active_default();
 					react(0);
 					transitioned_after = 0;
 				}
@@ -531,7 +531,7 @@ namespace mrw
 				if (turned_raised)
 				{
 					exseq_main_region_Signal_Turning();
-					enseq_main_region_Active_default();
+					enseq_main_region_Section_Activation_default();
 					react(0);
 					transitioned_after = 0;
 				}

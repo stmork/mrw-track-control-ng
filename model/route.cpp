@@ -123,14 +123,8 @@ void Route::prepare()
 		vector[i]->setState(
 			i > 0 ? vector[i - 1] : nullptr,
 			(i + 1) < vector.size() ? vector[i + 1] : nullptr);
-
-		qDebug().noquote() << "     " << vector[i]->toString();
 	}
-	qDebug() << "---";
-	for (Section * section : sections)
-	{
-		qDebug().noquote() << "     " << section->toString();
-	}
+	dump();
 }
 
 void Route::clear()
@@ -142,6 +136,19 @@ void Route::clear()
 	first_section = nullptr;
 	sections.clear();
 	track.clear();
+}
+
+void Route::dump()
+{
+	for (RailPart * part : track)
+	{
+		qDebug().noquote() << "     " << part->toString();
+	}
+	qDebug() << "---";
+	for (Section * section : sections)
+	{
+		qDebug().noquote() << "     " << section->toString();
+	}
 }
 
 bool Route::qualified(RailPart * rail) const
