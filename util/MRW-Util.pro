@@ -10,6 +10,7 @@ include(../common.pri)
 
 SOURCES += \
 	clockservice.cpp \
+	dumphandler.cpp \
 	method.cpp \
 	properties.cpp \
 	settings.cpp \
@@ -20,6 +21,7 @@ HEADERS += \
 	clockservice.h \
 	constantenumerator.h \
 	constantenumerator.h \
+	dumphandler.h \
 	method.h \
 	properties.h \
 	settings.h \
