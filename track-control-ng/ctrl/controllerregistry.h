@@ -58,6 +58,7 @@ namespace mrw::ctrl
 		void decrease(ControllerRegistrand * ctrl);
 		bool contains(ControllerRegistrand * ctrl);
 		void reset();
+		void complete();
 		void dump();
 
 	signals:

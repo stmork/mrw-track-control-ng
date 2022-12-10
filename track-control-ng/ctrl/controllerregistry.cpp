@@ -113,6 +113,19 @@ void ControllerRegistry::reset()
 	transaction.clear();
 }
 
+void mrw::ctrl::ControllerRegistry::complete()
+{
+	if (transaction.size() == 0)
+	{
+		qDebug("======================= Transaction completed (was empty).");
+		emit completed();
+	}
+	else
+	{
+		qWarning("======================= Transaction left %zu elements.", transaction.size());
+	}
+}
+
 void mrw::ctrl::ControllerRegistry::dump()
 {
 	for (ControllerRegistrand * registrand : transaction)

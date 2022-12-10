@@ -611,7 +611,6 @@ namespace mrw
 				if (extended_raised)
 				{
 					exseq_main_region_Start();
-					ifaceOperationCallback->reset();
 					enseq_main_region_Switch_Turning_default();
 					react(0);
 					transitioned_after = 0;

@@ -5,6 +5,7 @@
 
 #include <QMetaMethod>
 
+#include <util/method.h>
 #include <statecharts/timerservice.h>
 #include <ctrl/controllerregistry.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
@@ -122,6 +123,10 @@ WidgetRoute::operator QListWidgetItem * ()
 
 void WidgetRoute::turnSwitches()
 {
+	__METHOD__;
+
+	size_t count = 0;
+
 	for (RailPart * part : track)
 	{
 		Device * device = dynamic_cast<Device *>(part);
@@ -134,58 +139,25 @@ void WidgetRoute::turnSwitches()
 		if (rs_ctrl != nullptr)
 		{
 			rs_ctrl->turn();
+			count++;
 		}
 		if (dcs_ctrl != nullptr)
 		{
 			dcs_ctrl->turn();
+			count++;
 		}
 	}
-}
 
-void WidgetRoute::activateSections()
-{
-	for (Section * section : sections)
+	if (count == 0)
 	{
-		SectionController * controller = ControllerRegistry::instance().find<SectionController>(section);
-
-		controller->enable();
-	}
-}
-
-void WidgetRoute::turnSignals()
-{
-	collectSignals();
-	for (Signal * signal : main_signals)
-	{
-		SignalControllerProxy * controller = ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
-
-		controller->enable();
-	}
-}
-
-void WidgetRoute::deactivateSections()
-{
-	for (Section * section : sections)
-	{
-		SectionController * controller = ControllerRegistry::instance().find<SectionController>(section);
-
-		controller->disable();
-	}
-}
-
-void WidgetRoute::unlockSignals()
-{
-	collectSignals();
-	for (Signal * signal : main_signals)
-	{
-		SignalControllerProxy * controller = ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
-
-		controller->disable();
+		ControllerRegistry::instance().complete();
 	}
 }
 
 void WidgetRoute::unlockSwitches()
 {
+	__METHOD__;
+
 	for (RailPart * part : track)
 	{
 		Device * device = dynamic_cast<Device *>(part);
@@ -203,5 +175,71 @@ void WidgetRoute::unlockSwitches()
 		{
 			dcs_ctrl->unlock();
 		}
+	}
+}
+
+void WidgetRoute::activateSections()
+{
+	__METHOD__;
+
+	size_t count = 0;
+
+	for (Section * section : sections)
+	{
+		SectionController * controller = ControllerRegistry::instance().find<SectionController>(section);
+
+		controller->enable();
+		count++;
+	}
+
+	if (count == 0)
+	{
+		ControllerRegistry::instance().complete();
+	}
+}
+
+void WidgetRoute::deactivateSections()
+{
+	__METHOD__;
+
+	for (Section * section : sections)
+	{
+		SectionController * controller = ControllerRegistry::instance().find<SectionController>(section);
+
+		controller->disable();
+	}
+}
+
+void WidgetRoute::turnSignals()
+{
+	__METHOD__;
+
+	size_t count = 0;
+
+	collectSignals();
+	for (Signal * signal : main_signals)
+	{
+		SignalControllerProxy * controller = ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
+
+		controller->enable();
+		count++;
+	}
+
+	if (count == 0)
+	{
+		ControllerRegistry::instance().complete();
+	}
+}
+
+void WidgetRoute::unlockSignals()
+{
+	__METHOD__;
+
+	collectSignals();
+	for (Signal * signal : main_signals)
+	{
+		SignalControllerProxy * controller = ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
+
+		controller->disable();
 	}
 }

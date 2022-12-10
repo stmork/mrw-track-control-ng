@@ -175,6 +175,7 @@ void SectionController::passed()
 void SectionController::free()
 {
 	section()->free();
+	emit update();
 }
 
 void SectionController::fail()

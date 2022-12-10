@@ -86,6 +86,19 @@ namespace mrw::util
 			return format(BOLD_ON, input);
 		}
 
+		/**
+		 * This method surrounds a string with a console format code to
+		 * print the input string in red. After the given input string to
+		 * format command is reset.
+		 *
+		 * @param input The input string to surround with format commands.
+		 * @return The formatted string.
+		 */
+		static inline QString red(const QString & input)
+		{
+			return format(RED_ON, input);
+		}
+
 		static const QString RED_ON;     ///< Turns console output into red.
 		static const QString GREEN_ON;   ///< Turns console output into green.
 		static const QString BLUE_ON;    ///< Turns console output into blue.

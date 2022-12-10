@@ -40,13 +40,13 @@ void Device::setLock(const mrw::model::Device::LockState input)
 {
 	if (input == LockState::FAIL)
 	{
-		qCritical().noquote() << String::format(String::RED_ON, "FAIL!") << name();
+		qCritical().noquote() << String::red("FAIL!") << name();
 	}
 	if (lock_state != input)
 	{
 		if ((input == LockState::UNLOCKED) && !unlockable())
 		{
-			qWarning().noquote() << String::format(String::RED_ON, "Unlockable!") << name();
+			qWarning().noquote() << String::red("Unlockable!") << name();
 		}
 		else
 		{

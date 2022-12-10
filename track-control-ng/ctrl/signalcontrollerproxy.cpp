@@ -265,21 +265,29 @@ bool mrw::ctrl::SignalControllerProxy::hasMain()
 
 void mrw::ctrl::SignalControllerProxy::prepare()
 {
+	__METHOD__;
+
 	// TODO: Compute real signal symbols from what the route/tour wants.
 }
 
 void SignalControllerProxy::fail()
 {
+	__METHOD__;
+
 	// TODO: Implement
+	qCritical().noquote() << String::red(" Signal turn failed!");
 }
 
 void SignalControllerProxy::pending()
 {
 	// TODO: Implement
+	qDebug(" Pending");
 }
 
 void SignalControllerProxy::lock(const bool do_it)
 {
+	__METHOD__;
+
 	// TODO: Implement
-	Q_UNUSED(do_it);
+	qDebug(do_it ? " Lock" : " Unlock");
 }
