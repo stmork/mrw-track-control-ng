@@ -279,7 +279,7 @@ RailPart * MainWindow::rail(const int idx) const
 	return info != nullptr ? info->railPart() : nullptr;
 }
 
-void MainWindow::traverse(std::function<void(BaseController *, Position *)> editor)
+void MainWindow::traverse(Callback callback)
 {
 	for (int i = 0; i < ui->sectionListWidget->count(); i++)
 	{
@@ -289,7 +289,7 @@ void MainWindow::traverse(std::function<void(BaseController *, Position *)> edit
 
 		if (position != nullptr)
 		{
-			editor(controller, position);
+			callback(controller, position);
 		}
 	}
 }

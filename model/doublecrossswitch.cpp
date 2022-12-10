@@ -110,13 +110,14 @@ bool DoubleCrossSwitch::valid() const
 
 QString DoubleCrossSwitch::toString() const
 {
-	return QString("      X %1%2 %3--%4 : [%5] %6").
+	return QString("      X %1%2 %3--%4 : [%5] %6 %7").
 		arg(valid()  ? "V" : "-").
 		arg(reserved() ? "R" : "-").
 		arg(aIsDir() ? "cd" : "ab").
 		arg(aIsDir() ? "ab" : "cd").
 		arg(unitNo(), 4, 16, QChar('0')).
-		arg(name());
+		arg(name(), -10).
+		arg(state_map.get(switch_state));
 }
 
 QString DoubleCrossSwitch::key() const
@@ -136,11 +137,17 @@ SwitchState DoubleCrossSwitch::switchState() const
 
 void DoubleCrossSwitch::setState(const State state)
 {
+	if (lock() == LockState::UNLOCKED)
+	{
 #ifdef STATE_VERBOSE
-	qDebug().noquote() << "########## DCS set state: " << state_map.get(switch_state) << " => " << state_map.get(state) << name();
+		qDebug().noquote() << "########## DCS set state: " << state_map.get(switch_state) << " => " << state_map.get(state) << name();
 #endif
-
-	switch_state = state;
+		switch_state = state;
+	}
+	else
+	{
+		qWarning("Switch locked!");
+	}
 }
 
 State DoubleCrossSwitch::state() const

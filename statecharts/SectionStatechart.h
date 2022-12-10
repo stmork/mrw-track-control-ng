@@ -162,6 +162,8 @@ namespace mrw
 
 				virtual void passed() = 0;
 
+				virtual void fail() = 0;
+
 				virtual void lock(bool do_it) = 0;
 
 
@@ -302,6 +304,7 @@ namespace mrw
 			void enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left();
 			void enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling();
 			void enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling();
+			void enact_main_region_Failed();
 			void exact_main_region_Init();
 			void exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
 			void enseq_main_region_Init_default();

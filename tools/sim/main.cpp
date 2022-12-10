@@ -5,6 +5,7 @@
 
 #include <QCoreApplication>
 
+#include <util/dumphandler.h>
 #include <util/termhandler.h>
 
 #include "simulatorservice.h"
@@ -19,6 +20,10 @@ int main(int argc, char * argv[])
 	QString               interface = "can0";
 	QString               plugin    = "virtualcan";
 	SimulatorService      simulator(argc > 1 ? argv[1] : "", interface.toLatin1().data(), plugin.toLatin1().data());
+	DumpHandler           dumper([&]()
+	{
+		simulator.info();
+	});
 
 	return app.exec();
 }

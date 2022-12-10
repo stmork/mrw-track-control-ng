@@ -26,6 +26,14 @@ SimulatorService::~SimulatorService()
 	delete model;
 }
 
+void SimulatorService::info()
+{
+	if (model != nullptr)
+	{
+		model->info();
+	}
+}
+
 void SimulatorService::process(const MrwMessage & message)
 {
 	qInfo() << message;

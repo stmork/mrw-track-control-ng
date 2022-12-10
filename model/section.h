@@ -15,6 +15,7 @@
 
 #include <QDomElement>
 
+#include <util/constantenumerator.h>
 #include <util/stringutil.h>
 #include <model/module.h>
 #include <model/device.h>
@@ -45,7 +46,8 @@ namespace mrw::model
 	{
 		friend class Region;
 
-		static const std::regex      path_regex;
+		static const std::regex                                   path_regex;
+		static const mrw::util::ConstantEnumerator<SectionState>  state_map;
 
 		const QString                section_name;
 		ModelRailway        *        model              = nullptr;
@@ -185,6 +187,7 @@ namespace mrw::model
 		void            link();
 		void            findSignalPair();
 		SectionModule * resolve(const std::string & path);
+
 	};
 }
 

@@ -16,6 +16,8 @@ using namespace mrw::model;
 using namespace mrw::ctrl;
 using namespace mrw::statechart;
 
+using LockState = Section::LockState;
+
 SectionController::SectionController(
 	Section * input,
 	QObject * parent) :
@@ -173,17 +175,18 @@ void SectionController::passed()
 	section()->setState(SectionState::PASSED);
 }
 
+void SectionController::fail()
+{
+	section()->setLock(LockState::FAIL);
+}
+
 void SectionController::lock(const bool do_it)
 {
-	__METHOD__;
-
-	section()->setLock(do_it ? Section::LockState::LOCKED : Section::LockState::UNLOCKED);
+	section()->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
 }
 
 void SectionController::on()
 {
-	__METHOD__;
-
 	const MrwMessage command(ctrl_section->command(SETRON));
 
 	ControllerRegistry::can()->write(command);
@@ -191,8 +194,6 @@ void SectionController::on()
 
 void SectionController::off()
 {
-	__METHOD__;
-
 	const MrwMessage command(ctrl_section->command(SETROF));
 
 	ControllerRegistry::can()->write(command);

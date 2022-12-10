@@ -71,5 +71,5 @@ QString LightSignal::toString() const
 		arg(valid()  ? "V" : "-").
 		arg(symbol()).
 		arg(unitNo(), 4, 16, QChar('0')).
-		arg(name());
+		arg(name(), -10);
 }

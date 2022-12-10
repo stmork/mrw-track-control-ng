@@ -254,7 +254,6 @@ namespace mrw
 			static const sc::integer SLOW;
 
 
-
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 			static const sc::ushort maxOrthogonalStates = 1;
 

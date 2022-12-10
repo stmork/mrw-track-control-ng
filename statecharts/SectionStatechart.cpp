@@ -441,6 +441,13 @@ namespace mrw
 			ifaceOperationCallback->on();
 		}
 
+		/* Entry action for state 'Failed'. */
+		void SectionStatechart::enact_main_region_Failed()
+		{
+			/* Entry action for state 'Failed'. */
+			ifaceOperationCallback->fail();
+		}
+
 		/* Exit action for state 'Init'. */
 		void SectionStatechart::exact_main_region_Init()
 		{
@@ -579,6 +586,7 @@ namespace mrw
 		void SectionStatechart::enseq_main_region_Failed_default()
 		{
 			/* 'default' enter sequence for state Failed */
+			enact_main_region_Failed();
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Failed;
 			stateConfVectorPosition = 0;
 			stateConfVectorChanged = true;

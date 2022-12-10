@@ -93,7 +93,8 @@ namespace mrw
 				NO_EVENT,
 				start,
 				started,
-				fail,
+				failed,
+				clear,
 				enable,
 				disable,
 				completedMain,
@@ -145,6 +146,12 @@ namespace mrw
 				virtual bool hasMain() = 0;
 
 				virtual void prepare() = 0;
+
+				virtual void fail() = 0;
+
+				virtual void pending() = 0;
+
+				virtual void lock(bool do_it) = 0;
 
 
 			};
@@ -207,8 +214,11 @@ namespace mrw
 			/*! Slot for the in event 'started' that is defined in the default interface scope. */
 			void started();
 
-			/*! Slot for the in event 'fail' that is defined in the default interface scope. */
-			void fail();
+			/*! Slot for the in event 'failed' that is defined in the default interface scope. */
+			void failed();
+
+			/*! Slot for the in event 'clear' that is defined in the default interface scope. */
+			void clear();
 
 			/*! Slot for the in event 'enable' that is defined in the default interface scope. */
 			void enable();
@@ -284,6 +294,7 @@ namespace mrw
 			void enact_main_region_Init_Init_process_Turning_distant_Turn();
 			void enact_main_region_Init_Init_process_Turning_shunt_Turn();
 			void enact_main_region_Operating();
+			void enact_main_region_Operating_processing_Unlocked();
 			void enact_main_region_Operating_processing_Locked();
 			void enact_main_region_Operating_processing_Locked_r1_Go();
 			void enact_main_region_Operating_processing_Locked_r1_Stop();
@@ -367,8 +378,11 @@ namespace mrw
 			/*! Indicates event 'started' of default interface scope is active. */
 			bool started_raised;
 
-			/*! Indicates event 'fail' of default interface scope is active. */
-			bool fail_raised;
+			/*! Indicates event 'failed' of default interface scope is active. */
+			bool failed_raised;
+
+			/*! Indicates event 'clear' of default interface scope is active. */
+			bool clear_raised;
 
 			/*! Indicates event 'enable' of default interface scope is active. */
 			bool enable_raised;

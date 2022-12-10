@@ -8,10 +8,18 @@
 #include <model/modelrailway.h>
 #include <model/regularswitch.h>
 
+using namespace mrw::util;
 using namespace mrw::can;
 using namespace mrw::model;
 
 using Bending = Position::Bending;
+using State   = RegularSwitch::State;
+
+const ConstantEnumerator<State>  RegularSwitch::state_map
+{
+	CONSTANT(State::AB),
+	CONSTANT(State::AC)
+};
 
 RegularSwitch::RegularSwitch(
 	ModelRailway     *    model_railway,
@@ -35,7 +43,14 @@ RegularSwitch::RegularSwitch(
 
 void RegularSwitch::setState(const RegularSwitch::State state)
 {
-	switch_state = state;
+	if (lock() == LockState::UNLOCKED)
+	{
+		switch_state = state;
+	}
+	else
+	{
+		qWarning("Switch locked!");
+	}
 }
 
 void RegularSwitch::setState(
@@ -110,14 +125,15 @@ bool RegularSwitch::valid() const
 
 QString RegularSwitch::toString() const
 {
-	return QString("      %1 %2%3 %4--%5 : [%6] %7").
+	return QString("      %1 %2%3 %4--%5 : [%6] %7 %8").
 		arg(aIsDir() ? ">" : "<").
 		arg(valid()  ? "V" : "-").
 		arg(reserved() ? "R" : "-").
 		arg(aIsDir() ? "bc" : " a").
 		arg(aIsDir() ? "a " : "bc").
 		arg(unitNo(), 4, 16, QChar('0')).
-		arg(name());
+		arg(name(), -10).
+		arg(state_map.get(switch_state));
 }
 
 QString RegularSwitch::key() const

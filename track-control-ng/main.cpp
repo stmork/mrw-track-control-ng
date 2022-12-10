@@ -9,6 +9,7 @@
 #include <QDebug>
 
 #include <util/settings.h>
+#include <util/dumphandler.h>
 #include <util/termhandler.h>
 #include <model/modelrailway.h>
 
@@ -34,6 +35,12 @@ int main(int argc, char * argv[])
 	{
 		MrwMessageDispatcher dispatcher(repo, repo.interface(), repo.plugin());
 		MainWindow           main_window(repo, dispatcher);
+		DumpHandler          dumper([&]()
+		{
+			ModelRailway * model = repo;
+
+			model->info();
+		});
 
 		repo.info();
 		repo.xml();

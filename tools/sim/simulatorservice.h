@@ -28,6 +28,9 @@ public:
 			QObject   *  parent    = nullptr);
 	virtual ~SimulatorService();
 
+	void info();
+
+protected:
 	virtual void process(const mrw::can::MrwMessage & message) override;
 
 private:

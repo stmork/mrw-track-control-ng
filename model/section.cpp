@@ -14,6 +14,7 @@
 #include "model/lightsignal.h"
 #include "model/formsignal.h"
 
+using namespace mrw::util;
 using namespace mrw::model;
 
 /**
@@ -37,6 +38,15 @@ using namespace mrw::model;
 @endverbatim
  */
 const std::regex  Section::path_regex(R"(^\/\/@controller\.(\d+)\/@module\.(\d+))");
+
+const ConstantEnumerator<SectionState>  Section::state_map
+{
+	CONSTANT(FREE),
+	CONSTANT(SHUNTING),
+	CONSTANT(TOUR),
+	CONSTANT(OCCUPIED),
+	CONSTANT(PASSED)
+};
 
 Section::Section(
 	ModelRailway     *    model_railway,
@@ -175,8 +185,11 @@ void Section::findSignalPair()
 
 QString Section::toString() const
 {
-	return QString::asprintf("    Sec %c         : [%04x] ",
-			valid() ? 'V' : '-', unitNo()) + name();
+	return QString("    Sec %1         : [%2] %3 %4").
+		arg(valid() ? 'V' : '-').
+		arg(unitNo(), 4, 16, QChar('0')).
+		arg(name(), -10).
+		arg(state_map.get(section_state));
 }
 
 SectionModule * Section::resolve(const std::string & path)

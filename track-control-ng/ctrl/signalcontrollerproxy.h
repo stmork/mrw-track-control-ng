@@ -85,6 +85,10 @@ namespace mrw::ctrl
 
 		virtual bool hasMain() override;
 		virtual void prepare() override;
+
+		virtual void fail() override;
+		virtual void pending() override;
+		virtual void lock(const bool do_it) override;
 	};
 }
 

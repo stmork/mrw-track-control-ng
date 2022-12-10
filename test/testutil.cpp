@@ -12,6 +12,7 @@
 #include <util/properties.h>
 #include <util/settings.h>
 #include <util/singleton.h>
+#include <util/dumphandler.h>
 #include <util/termhandler.h>
 #include <util/stringutil.h>
 #include <util/clockservice.h>
@@ -58,6 +59,10 @@ public:
 TestUtil::TestUtil(QObject * parent) : QObject(parent)
 {
 	TermHandler      term_handler( { SIGTERM, SIGINT } );
+	DumpHandler      dump_handler( [] ()
+	{
+		qInfo("Called");
+	});
 }
 
 void TestUtil::testSettings()

@@ -33,7 +33,8 @@ namespace mrw
 			stateConfVectorChanged(false),
 			start_raised(false),
 			started_raised(false),
-			fail_raised(false),
+			failed_raised(false),
+			clear_raised(false),
 			enable_raised(false),
 			disable_raised(false),
 			completedMain_raised(false),
@@ -91,9 +92,14 @@ namespace mrw
 					started_raised = true;
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::Event::fail:
+			case mrw::statechart::SignalControllerStatechart::Event::failed:
 				{
-					fail_raised = true;
+					failed_raised = true;
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::Event::clear:
+				{
+					clear_raised = true;
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::Event::enable:
@@ -151,9 +157,16 @@ namespace mrw
 		}
 
 
-		void mrw::statechart::SignalControllerStatechart::fail()
+		void mrw::statechart::SignalControllerStatechart::failed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::fail));
+			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::failed));
+			runCycle();
+		}
+
+
+		void mrw::statechart::SignalControllerStatechart::clear()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::clear));
 			runCycle();
 		}
 
@@ -423,11 +436,19 @@ namespace mrw
 			started_raised = true;
 		}
 
+		/* Entry action for state 'Unlocked'. */
+		void SignalControllerStatechart::enact_main_region_Operating_processing_Unlocked()
+		{
+			/* Entry action for state 'Unlocked'. */
+			ifaceOperationCallback->lock(false);
+		}
+
 		/* Entry action for state 'Locked'. */
 		void SignalControllerStatechart::enact_main_region_Operating_processing_Locked()
 		{
 			/* Entry action for state 'Locked'. */
 			timerService->setTimer(this, 1, timeout, false);
+			ifaceOperationCallback->lock(true);
 		}
 
 		/* Entry action for state 'Go'. */
@@ -548,6 +569,7 @@ namespace mrw
 		void SignalControllerStatechart::enseq_main_region_Operating_processing_Unlocked_default()
 		{
 			/* 'default' enter sequence for state Unlocked */
+			enact_main_region_Operating_processing_Unlocked();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_processing_Unlocked;
 			stateConfVectorPosition = 0;
 			stateConfVectorChanged = true;
@@ -1117,7 +1139,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (fail_raised)
+				if (failed_raised)
 				{
 					exseq_main_region_Init();
 					enseq_main_region_Failed_default();
@@ -1272,6 +1294,13 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
+				if (failed_raised)
+				{
+					exseq_main_region_Operating();
+					enseq_main_region_Failed_default();
+					react(0);
+					transitioned_after = 0;
+				}
 			}
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
@@ -1400,6 +1429,13 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
+				if (clear_raised)
+				{
+					exseq_main_region_Failed();
+					enseq_main_region_Init_default();
+					react(0);
+					transitioned_after = 0;
+				}
 			}
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
@@ -1413,7 +1449,8 @@ namespace mrw
 		{
 			start_raised = false;
 			started_raised = false;
-			fail_raised = false;
+			failed_raised = false;
+			clear_raised = false;
 			enable_raised = false;
 			disable_raised = false;
 			completedMain_raised = false;
@@ -1533,7 +1570,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((((((start_raised) || (started_raised)) || (fail_raised)) || (enable_raised)) || (disable_raised)) || (completedMain_raised)) || (completedDistant_raised)) || (completedShunt_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while (((((((((((start_raised) || (started_raised)) || (failed_raised)) || (clear_raised)) || (enable_raised)) || (disable_raised)) || (completedMain_raised)) || (completedDistant_raised)) || (completedShunt_raised)) || (timeEvents[0])) || (timeEvents[1]));
 			isExecuting = false;
 		}
 

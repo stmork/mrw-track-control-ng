@@ -8,7 +8,7 @@
 #ifndef MRW_MODEL_REGULARSWITCH_H
 #define MRW_MODEL_REGULARSWITCH_H
 
-#include <can/commands.h>
+#include <util/constantenumerator.h>
 #include <model/abstractswitch.h>
 
 namespace mrw::model
@@ -88,6 +88,7 @@ namespace mrw::model
 		void findFlankSwitches() override;
 
 		State switch_state = State::AB;
+		const static mrw::util::ConstantEnumerator<State>  state_map;
 	};
 }
 

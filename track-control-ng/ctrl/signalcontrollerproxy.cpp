@@ -84,7 +84,7 @@ SignalControllerProxy::SignalControllerProxy(
 		Qt::QueuedConnection);
 	connect(
 		&statechart_main, &SignalStatechart::failed,
-		&statechart, &SignalControllerStatechart::fail,
+		&statechart, &SignalControllerStatechart::failed,
 		Qt::QueuedConnection);
 
 	connect(
@@ -97,7 +97,7 @@ SignalControllerProxy::SignalControllerProxy(
 		Qt::QueuedConnection);
 	connect(
 		&statechart_distant, &SignalStatechart::failed,
-		&statechart, &SignalControllerStatechart::fail,
+		&statechart, &SignalControllerStatechart::failed,
 		Qt::QueuedConnection);
 
 	connect(
@@ -110,7 +110,7 @@ SignalControllerProxy::SignalControllerProxy(
 		Qt::QueuedConnection);
 	connect(
 		&statechart_shunt, &SignalStatechart::failed,
-		&statechart, &SignalControllerStatechart::fail,
+		&statechart, &SignalControllerStatechart::failed,
 		Qt::QueuedConnection);
 
 	connect(
@@ -265,5 +265,21 @@ bool mrw::ctrl::SignalControllerProxy::hasMain()
 
 void mrw::ctrl::SignalControllerProxy::prepare()
 {
+	// TODO: Compute real signal symbols from what the route/tour wants.
+}
 
+void SignalControllerProxy::fail()
+{
+	// TODO: Implement
+}
+
+void SignalControllerProxy::pending()
+{
+	// TODO: Implement
+}
+
+void SignalControllerProxy::lock(const bool do_it)
+{
+	// TODO: Implement
+	Q_UNUSED(do_it);
 }

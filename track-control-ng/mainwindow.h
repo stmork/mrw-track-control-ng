@@ -74,6 +74,10 @@ private slots:
 	void onFailed();
 
 private:
+	typedef std::function<void(
+		mrw::ctrl::BaseController *,
+		mrw::model::Position *)> Callback;
+
 	void initRegion();
 	void connectEditActions();
 	void connectOpModes(MrwMessageDispatcher & dispatcher);
@@ -83,9 +87,9 @@ private:
 		mrw::ctrl::BaseController * controller,
 		mrw::model::Position    *   position);
 	mrw::model::RailPart * rail(const int idx) const;
-	void traverse(
-		std::function<void(mrw::ctrl::BaseController *, mrw::model::Position *)> editor);
+	void traverse(Callback callback);
 	bool isSameRegion();
+
 	template <class T> size_t count()
 	{
 		size_t count = 0;
@@ -93,7 +97,7 @@ private:
 		traverse([&] (mrw::ctrl::BaseController * ctrl, mrw::model::Position * pos)
 		{
 			Q_UNUSED(pos);
-			T * ptr = dynamic_cast<T *>(ctrl);
+			const T * ptr = dynamic_cast<T *>(ctrl);
 
 			if (ptr != nullptr)
 			{
