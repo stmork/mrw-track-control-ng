@@ -119,7 +119,7 @@ void ModelRailway::info()
 
 			qInfo() << *section;
 
-			for (size_t a = 0; a < section->railPartCount(); a++)
+			for (size_t a = 0; a < section->assemblyPartCount(); a++)
 			{
 				AssemblyPart * part = section->assemblyPart(a);
 

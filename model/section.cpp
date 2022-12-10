@@ -142,6 +142,18 @@ bool Section::valid() const
 	return (section_controller != nullptr) && (section_module != nullptr);
 }
 
+bool Section::unlockable() const
+{
+	std::vector<RailPart *> reserved_parts;
+
+	parts<RailPart>(reserved_parts, [](const RailPart * part)
+	{
+		return part->reserved();
+	});
+
+	return (reserved_parts.size() == 0) && (section_state == FREE);
+}
+
 SectionState Section::state() const
 {
 	return occupied ? OCCUPIED : section_state;
@@ -191,6 +203,20 @@ QString Section::toString() const
 		arg(name(), -10).
 		arg(Device::get(lock()), -10).
 		arg(state_map.get(section_state));
+}
+
+void Section::free()
+{
+	for (AssemblyPart * part : assembly_parts)
+	{
+		RailPart * rail = dynamic_cast<RailPart *>(part);
+
+		if (rail != nullptr)
+		{
+			rail->reserve(false);
+		}
+	}
+	setState(FREE);
 }
 
 SectionModule * Section::resolve(const std::string & path)

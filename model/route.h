@@ -40,12 +40,12 @@ namespace mrw::model
 		bool extend(RailPart * rail, RailPart * target);
 		void clear();
 
-		virtual void prepare();
-
 	protected:
 		Track                   track;
 		std::list<Section *>    sections;
 		const bool              direction;
+
+		virtual void prepare();
 
 	private:
 		bool qualified(RailPart * rail) const;

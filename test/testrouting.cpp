@@ -94,7 +94,6 @@ void TestRouting::testExtension()
 	QVERIFY(route.extend(parts[19]));
 	QVERIFY(verify(route));
 
-	route.prepare();
 	QCOMPARE(static_cast<RegularSwitch *>(parts[2])->state(), RegularSwitch::State::AC);
 	QCOMPARE(static_cast<RegularSwitch *>(parts[9])->state(), RegularSwitch::State::AB);
 	QCOMPARE(static_cast<DoubleCrossSwitch *>(parts[13])->state(), DoubleCrossSwitch::State::BC);
@@ -119,7 +118,6 @@ void TestRouting::testOccupation()
 	QVERIFY(route.extend(parts[19]));
 	QVERIFY(verify(route));
 
-	route.prepare();
 	QCOMPARE(static_cast<RegularSwitch *>(parts[2])->state(),  RegularSwitch::State::AB);
 	QCOMPARE(static_cast<RegularSwitch *>(parts[3])->state(),  RegularSwitch::State::AB);
 	QCOMPARE(static_cast<RegularSwitch *>(parts[6])->state(),  RegularSwitch::State::AB);
@@ -190,6 +188,6 @@ bool TestRouting::empty() const
 {
 	return std::all_of(parts.begin(), parts.end(), [&](RailPart * part)
 	{
-		return !part->reserved();
+		return !part->reserved() && part->section()->unlockable();
 	});
 }

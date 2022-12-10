@@ -3,7 +3,6 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include <util/method.h>
 #include <model/region.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/controllerregistry.h>
@@ -210,8 +209,6 @@ QString RegularSwitchControllerProxy::toString() const
 
 void RegularSwitchControllerProxy::left()
 {
-	__METHOD__;
-
 	const MrwMessage  command(part->command(SETLFT));
 
 	ControllerRegistry::can()->write(command);
@@ -220,8 +217,6 @@ void RegularSwitchControllerProxy::left()
 
 void RegularSwitchControllerProxy::right()
 {
-	__METHOD__;
-
 	const MrwMessage  command(part->command(SETRGT));
 
 	ControllerRegistry::can()->write(command);
@@ -230,8 +225,6 @@ void RegularSwitchControllerProxy::right()
 
 void RegularSwitchControllerProxy::request()
 {
-	__METHOD__;
-
 	const MrwMessage  command(part->command(GETDIR));
 
 	ControllerRegistry::can()->write(command);
@@ -239,38 +232,28 @@ void RegularSwitchControllerProxy::request()
 
 bool RegularSwitchControllerProxy::doTurnLeft()
 {
-	__METHOD__;
-
 	return isLeft();
 }
 
 bool RegularSwitchControllerProxy::isFree()
 {
-	__METHOD__;
-
 	return state() == SectionState::FREE;
 }
 
 void RegularSwitchControllerProxy::fail()
 {
-	__METHOD__;
-
 	part->setLock(LockState::FAIL);
 	emit update();
 }
 
 void RegularSwitchControllerProxy::pending()
 {
-	__METHOD__;
-
 	part->setLock(LockState::PENDING);
 	emit update();
 }
 
 void RegularSwitchControllerProxy::lock(bool do_it)
 {
-	__METHOD__;
-
 	part->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
 	emit update();
 }

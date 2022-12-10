@@ -52,14 +52,21 @@ void WidgetRoute::turn()
 
 void WidgetRoute::prepare()
 {
+	std::vector<SectionController *> controllers;
+
+	collectSectionControllers(controllers);
+	for (SectionController * controller : controllers)
+	{
+		disconnect(
+			controller, &SectionController::left,
+			this, &WidgetRoute::left);
+	}
+
 	Route::prepare();
 
-	for (Section * section : sections)
+	collectSectionControllers(controllers);
+	for (SectionController * controller : controllers)
 	{
-		SectionController * controller =
-			ControllerRegistry::instance().find<SectionController>(section);
-
-		Q_ASSERT(controller != nullptr);
 		connect(
 			controller, &SectionController::left,
 			this, &WidgetRoute::left,
@@ -85,6 +92,21 @@ void WidgetRoute::collectSignals()
 				(signal->direction() == direction) &&
 				((signal->type() & Signal::MAIN_SIGNAL) != 0);
 		});
+	}
+}
+
+void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & controllers)
+{
+	controllers.clear();
+	for (Section * section : sections)
+	{
+		SectionController * controller =
+			ControllerRegistry::instance().find<SectionController>(section);
+
+		if (controller != nullptr)
+		{
+			controllers.push_back(controller);
+		}
 	}
 }
 

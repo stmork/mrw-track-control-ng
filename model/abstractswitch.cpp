@@ -40,6 +40,11 @@ Command AbstractSwitch::commandState() const
 	throw std::invalid_argument("Command state not allowed!");
 }
 
+bool AbstractSwitch::unlockable() const
+{
+	return !reserved();
+}
+
 RegularSwitch * AbstractSwitch::follow(RailPart * part) const
 {
 	Rail * rail = dynamic_cast<Rail *>(part);

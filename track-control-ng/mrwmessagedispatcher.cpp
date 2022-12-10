@@ -60,8 +60,6 @@ void MrwMessageDispatcher::process(const MrwMessage & message)
 
 void MrwMessageDispatcher::connectBus()
 {
-	__METHOD__;
-
 	if (can_device->state() != QCanBusDevice::ConnectedState)
 	{
 		can_device->connectDevice();

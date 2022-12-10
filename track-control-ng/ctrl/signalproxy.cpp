@@ -39,8 +39,6 @@ bool SignalProxy::hasSignal()
 
 bool SignalProxy::process(Signal * device, const MrwMessage & message)
 {
-	__METHOD__;
-
 	Q_ASSERT(device != nullptr);
 
 	if (device == signal)

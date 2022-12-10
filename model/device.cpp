@@ -3,6 +3,9 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <QDebug>
+
+#include <util/stringutil.h>
 #include <can/mrwmessage.h>
 #include "model/modelrailway.h"
 #include "model/device.h"
@@ -31,6 +34,25 @@ Device::Device(
 		model_railway->error(element.nodeName() + " has no unit number!");
 	}
 	model_railway->add(this);
+}
+
+void Device::setLock(const mrw::model::Device::LockState input)
+{
+	if (input == LockState::FAIL)
+	{
+		qCritical().noquote() << String::format(String::RED_ON, "FAIL!") << name();
+	}
+	if (lock_state != input)
+	{
+		if ((input == LockState::UNLOCKED) && !unlockable())
+		{
+			qWarning().noquote() << String::format(String::RED_ON, "Unlockable!") << name();
+		}
+		else
+		{
+			lock_state = input;
+		}
+	}
 }
 
 MrwMessage Device::command(const Command command) const

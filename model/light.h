@@ -50,6 +50,11 @@ namespace mrw::model
 		{
 			return light_controller;
 		}
+
+		inline bool unlockable() const override
+		{
+			return true;
+		}
 	};
 }
 

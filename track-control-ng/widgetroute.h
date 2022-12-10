@@ -15,6 +15,7 @@
 #include <model/section.h>
 #include <model/signal.h>
 #include <model/route.h>
+#include <ctrl/sectioncontroller.h>
 
 class WidgetRoute :
 	public mrw::model::Route,
@@ -49,6 +50,7 @@ public slots:
 
 private:
 	void collectSignals();
+	void collectSectionControllers(std::vector<mrw::ctrl::SectionController *> & controllers);
 
 	virtual void reset() override;
 	virtual void turnSwitches() override;

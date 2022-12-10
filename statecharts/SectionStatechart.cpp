@@ -395,6 +395,7 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Operating_Processing_Unlocked()
 		{
 			/* Entry action for state 'Unlocked'. */
+			ifaceOperationCallback->free();
 			ifaceOperationCallback->lock(false);
 		}
 

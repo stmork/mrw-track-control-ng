@@ -109,8 +109,6 @@ bool ControllerRegistry::contains(ControllerRegistrand * ctrl)
 
 void ControllerRegistry::reset()
 {
-	__METHOD__;
-
 	qDebug("Transaction left %zu elements.", transaction.size());
 	transaction.clear();
 }

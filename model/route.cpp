@@ -64,7 +64,9 @@ bool Route::extend(RailPart * target)
 
 	qDebug().noquote() << "---------->" << *target;
 
-	return extend(track.back(), target);
+	const bool success = extend(track.back(), target);
+	prepare();
+	return success;
 }
 
 bool Route::extend(RailPart * rail, RailPart * target)
@@ -102,6 +104,7 @@ void Route::prepare()
 	std::vector<RailPart *> vector(track.begin(), track.end());
 	Section        *        prev = nullptr;
 
+	sections.clear();
 	for (size_t i = 0; i < vector.size(); i++)
 	{
 		// Collect sections in a unique manner.
@@ -130,13 +133,14 @@ void Route::prepare()
 	}
 }
 
-void mrw::model::Route::clear()
+void Route::clear()
 {
-	for (RailPart * rail : track)
+	for (Section * section : sections)
 	{
-		rail->reserve(false);
-		rail->section()->setState(SectionState::FREE);
+		section->free();
 	}
+	first_section = nullptr;
+	sections.clear();
 	track.clear();
 }
 

@@ -80,6 +80,12 @@ namespace mrw::model
 			return part_name;
 		}
 
+		inline bool unlockable() const override
+		{
+			// TODO: Implement!
+			return true;
+		}
+
 		QString toString() const override;
 
 		/**

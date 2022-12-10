@@ -163,6 +163,8 @@ namespace mrw
 
 				virtual void passed() = 0;
 
+				virtual void free() = 0;
+
 				virtual void fail() = 0;
 
 				virtual void pending() = 0;

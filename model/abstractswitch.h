@@ -74,6 +74,8 @@ namespace mrw::model
 		 */
 		mrw::can::Command commandState() const;
 
+		bool unlockable() const override;
+
 	protected:
 		/**
 		 * This method finds partner switches which may occur as flank

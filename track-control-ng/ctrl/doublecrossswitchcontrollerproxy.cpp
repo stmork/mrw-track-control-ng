@@ -5,7 +5,6 @@
 
 #include <QDebug>
 
-#include <util/method.h>
 #include <model/region.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
 #include <ctrl/controllerregistry.h>
@@ -188,8 +187,6 @@ QString mrw::ctrl::DoubleCrossSwitchControllerProxy::toString() const
 
 void DoubleCrossSwitchControllerProxy::left()
 {
-	__METHOD__;
-
 	const MrwMessage  command(part->command(SETLFT));
 
 	ControllerRegistry::can()->write(command);
@@ -198,8 +195,6 @@ void DoubleCrossSwitchControllerProxy::left()
 
 void DoubleCrossSwitchControllerProxy::right()
 {
-	__METHOD__;
-
 	const MrwMessage  command(part->command(SETRGT));
 
 	ControllerRegistry::can()->write(command);
@@ -208,8 +203,6 @@ void DoubleCrossSwitchControllerProxy::right()
 
 void DoubleCrossSwitchControllerProxy::request()
 {
-	__METHOD__;
-
 	const MrwMessage  command(part->command(GETDIR));
 
 	ControllerRegistry::can()->write(command);
@@ -217,8 +210,6 @@ void DoubleCrossSwitchControllerProxy::request()
 
 bool DoubleCrossSwitchControllerProxy::doTurnLeft()
 {
-	__METHOD__;
-
 	return
 		(switchState() == DoubleCrossSwitch::State::AC) ||
 		(switchState() == DoubleCrossSwitch::State::BD);
@@ -226,31 +217,23 @@ bool DoubleCrossSwitchControllerProxy::doTurnLeft()
 
 bool DoubleCrossSwitchControllerProxy::isFree()
 {
-	__METHOD__;
-
 	return state() == SectionState::FREE;
 }
 
 void DoubleCrossSwitchControllerProxy::fail()
 {
-	__METHOD__;
-
 	part->setLock(LockState::FAIL);
 	emit update();
 }
 
 void DoubleCrossSwitchControllerProxy::pending()
 {
-	__METHOD__;
-
 	part->setLock(LockState::PENDING);
 	emit update();
 }
 
 void DoubleCrossSwitchControllerProxy::lock(bool do_it)
 {
-	__METHOD__;
-
 	part->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
 	emit update();
 }

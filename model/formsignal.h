@@ -55,6 +55,12 @@ namespace mrw::model
 		{
 			return this;
 		}
+
+		inline bool unlockable() const override
+		{
+			// TODO: Implement!
+			return true;
+		}
 	};
 }
 

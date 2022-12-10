@@ -81,10 +81,9 @@ namespace mrw::model
 			return lock_state;
 		}
 
-		inline void setLock(const LockState input)
-		{
-			lock_state = input;
-		}
+		void setLock(const LockState input);
+
+		virtual bool unlockable() const = 0;
 
 		/**
 		 * This method returns the pointer to the managing controller.

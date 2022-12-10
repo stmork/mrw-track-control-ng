@@ -87,6 +87,8 @@ namespace mrw::model
 			return occupied;
 		}
 
+		bool unlockable() const override;
+
 		SectionState state() const;
 		void setState(const SectionState input)
 		{
@@ -114,7 +116,7 @@ namespace mrw::model
 		 *
 		 * @return The contained RailPart count.
 		 */
-		inline size_t railPartCount() const
+		inline size_t assemblyPartCount() const
 		{
 			return assembly_parts.size();
 		}
@@ -164,7 +166,7 @@ namespace mrw::model
 			(void)part;
 
 			return true;
-		})
+		}) const
 		{
 			for (AssemblyPart * part : assembly_parts)
 			{
@@ -176,6 +178,15 @@ namespace mrw::model
 				}
 			}
 		}
+
+		/**
+		 * This method unreserves all RailPart elements and sets the
+		 * SectionState to SectionState::FREE.
+		 *
+		 * @see RailPart
+		 * @see SectionState
+		 */
+		void free();
 
 		virtual QString key() const override
 		{

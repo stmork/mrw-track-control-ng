@@ -7,6 +7,7 @@
 
 #include <util/method.h>
 #include <can/mrwmessage.h>
+#include <model/railpart.h>
 #include <ctrl/sectioncontroller.h>
 #include <ctrl/controllerregistry.h>
 #include <statecharts/timerservice.h>
@@ -161,8 +162,6 @@ QString SectionController::toString() const
 
 void SectionController::request()
 {
-	__METHOD__;
-
 	const MrwMessage command(ctrl_section->command(GETRBS));
 
 	ControllerRegistry::can()->write(command);
@@ -170,24 +169,30 @@ void SectionController::request()
 
 void SectionController::passed()
 {
-	__METHOD__;
-
 	section()->setState(SectionState::PASSED);
+}
+
+void SectionController::free()
+{
+	section()->free();
 }
 
 void SectionController::fail()
 {
 	section()->setLock(LockState::FAIL);
+	emit update();
 }
 
 void SectionController::pending()
 {
 	section()->setLock(LockState::PENDING);
+	emit update();
 }
 
 void SectionController::lock(const bool do_it)
 {
 	section()->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
+	emit update();
 }
 
 void SectionController::on()
