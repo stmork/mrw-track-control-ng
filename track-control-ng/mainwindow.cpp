@@ -393,7 +393,7 @@ void MainWindow::on_extendPushButton_clicked()
 
 	for (QListWidgetItem * item : ui->routeListWidget->selectedItems())
 	{
-		Route * route = item->data(WidgetRoute::USER_ROLE).value<Route *>();
+		WidgetRoute * route = item->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
 
 		for (int i = 0; i < ui->sectionListWidget->count(); i++)
 		{
@@ -402,6 +402,12 @@ void MainWindow::on_extendPushButton_clicked()
 				return;
 			}
 		}
+		route->prepare();
+
+		ui->regionTabWidget->currentWidget()->update();
+		on_clearAllSections_clicked();
+
+		route->turn();
 	}
 	enable();
 }

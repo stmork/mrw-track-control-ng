@@ -180,6 +180,11 @@ void SectionController::fail()
 	section()->setLock(LockState::FAIL);
 }
 
+void SectionController::pending()
+{
+	section()->setLock(LockState::PENDING);
+}
+
 void SectionController::lock(const bool do_it)
 {
 	section()->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);

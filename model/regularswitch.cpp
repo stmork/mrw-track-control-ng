@@ -125,7 +125,7 @@ bool RegularSwitch::valid() const
 
 QString RegularSwitch::toString() const
 {
-	return QString("      %1 %2%3 %4--%5 : [%6] %7 %8").
+	return QString("      %1 %2%3 %4--%5 : [%6] %7 %8 %9").
 		arg(aIsDir() ? ">" : "<").
 		arg(valid()  ? "V" : "-").
 		arg(reserved() ? "R" : "-").
@@ -133,6 +133,7 @@ QString RegularSwitch::toString() const
 		arg(aIsDir() ? "a " : "bc").
 		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name(), -10).
+		arg(Device::get(lock()), -10).
 		arg(state_map.get(switch_state));
 }
 

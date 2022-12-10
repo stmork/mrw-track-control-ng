@@ -110,13 +110,14 @@ bool DoubleCrossSwitch::valid() const
 
 QString DoubleCrossSwitch::toString() const
 {
-	return QString("      X %1%2 %3--%4 : [%5] %6 %7").
+	return QString("      X %1%2 %3--%4 : [%5] %6 %7 %8").
 		arg(valid()  ? "V" : "-").
 		arg(reserved() ? "R" : "-").
 		arg(aIsDir() ? "cd" : "ab").
 		arg(aIsDir() ? "ab" : "cd").
 		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name(), -10).
+		arg(Device::get(lock()), -10).
 		arg(state_map.get(switch_state));
 }
 

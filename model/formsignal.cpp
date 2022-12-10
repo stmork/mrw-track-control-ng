@@ -26,9 +26,10 @@ bool FormSignal::valid() const
 
 QString FormSignal::toString() const
 {
-	return QString("      F %1  %2   : [%3] %4").
+	return QString("      F %1  %2   : [%3] %4 %5").
 		arg(valid()  ? "V" : "-").
 		arg(symbol()).
 		arg(unitNo(), 4, 16, QChar('0')).
-		arg(name(), -10);
+		arg(name(), -10).
+		arg(Device::get(lock()), -10);
 }

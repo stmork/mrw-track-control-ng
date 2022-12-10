@@ -68,6 +68,7 @@ namespace mrw::ctrl
 		virtual void passed() override;
 
 		virtual void fail() override;
+		virtual void pending() override;
 		virtual void lock(const bool do_it) override;
 	};
 }

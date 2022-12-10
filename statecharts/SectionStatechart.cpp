@@ -119,6 +119,7 @@ namespace mrw
 
 			case mrw::statechart::SectionStatechart::Event::_te0_main_region_Init_:
 			case mrw::statechart::SectionStatechart::Event::_te1_main_region_Operating_Processing_Locked_Route_active_Waiting_:
+			case mrw::statechart::SectionStatechart::Event::_te2_main_region_Operating_Processing_Enabling_:
 				{
 					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::SectionStatechart::Event::_te0_main_region_Init_)] = true;
 					break;
@@ -269,7 +270,7 @@ namespace mrw
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating :
 				{
-					return  (stateConfVector[scvi_main_region_Operating] >= mrw::statechart::SectionStatechart::State::main_region_Operating && stateConfVector[scvi_main_region_Operating] <= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling);
+					return  (stateConfVector[scvi_main_region_Operating] >= mrw::statechart::SectionStatechart::State::main_region_Operating && stateConfVector[scvi_main_region_Operating] <= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling);
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked :
@@ -279,7 +280,7 @@ namespace mrw
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked :
 				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked] >= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked && stateConfVector[scvi_main_region_Operating_Processing_Locked] <= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling);
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked] >= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked && stateConfVector[scvi_main_region_Operating_Processing_Locked] <= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling);
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Enabled :
@@ -294,7 +295,7 @@ namespace mrw
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting :
 				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Route_active_Waiting] >= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting && stateConfVector[scvi_main_region_Operating_Processing_Locked_Route_active_Waiting] <= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling);
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Route_active_Waiting] >= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting && stateConfVector[scvi_main_region_Operating_Processing_Locked_Route_active_Waiting] <= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling);
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left :
@@ -307,9 +308,9 @@ namespace mrw
 					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling);
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling :
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling :
 				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling);
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Enabling] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling);
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Failed :
@@ -435,9 +436,12 @@ namespace mrw
 		}
 
 		/* Entry action for state 'Enabling'. */
-		void SectionStatechart::enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling()
+		void SectionStatechart::enact_main_region_Operating_Processing_Enabling()
 		{
 			/* Entry action for state 'Enabling'. */
+			timerService->setTimer(this, 2, timeout, false);
+			ifaceOperationCallback->inc();
+			ifaceOperationCallback->pending();
 			ifaceOperationCallback->on();
 		}
 
@@ -460,6 +464,13 @@ namespace mrw
 		{
 			/* Exit action for state 'Waiting'. */
 			timerService->unsetTimer(this, 1);
+		}
+
+		/* Exit action for state 'Enabling'. */
+		void SectionStatechart::exact_main_region_Operating_Processing_Enabling()
+		{
+			/* Exit action for state 'Enabling'. */
+			timerService->unsetTimer(this, 2);
 		}
 
 		/* 'default' enter sequence for state Init */
@@ -573,11 +584,11 @@ namespace mrw
 		}
 
 		/* 'default' enter sequence for state Enabling */
-		void SectionStatechart::enseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling_default()
+		void SectionStatechart::enseq_main_region_Operating_Processing_Enabling_default()
 		{
 			/* 'default' enter sequence for state Enabling */
-			enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling();
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling;
+			enact_main_region_Operating_Processing_Enabling();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling;
 			stateConfVectorPosition = 0;
 			stateConfVectorChanged = true;
 		}
@@ -740,11 +751,12 @@ namespace mrw
 		}
 
 		/* Default exit sequence for state Enabling */
-		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling()
+		void SectionStatechart::exseq_main_region_Operating_Processing_Enabling()
 		{
 			/* Default exit sequence for state Enabling */
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
 			stateConfVectorPosition = 0;
+			exact_main_region_Operating_Processing_Enabling();
 		}
 
 		/* Default exit sequence for state Failed */
@@ -807,10 +819,9 @@ namespace mrw
 					exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling :
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling :
 				{
-					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling();
-					exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
+					exseq_main_region_Operating_Processing_Enabling();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Failed :
@@ -968,10 +979,9 @@ namespace mrw
 					exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling :
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling :
 				{
-					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling();
-					exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
+					exseq_main_region_Operating_Processing_Enabling();
 					break;
 				}
 			default:
@@ -1009,12 +1019,6 @@ namespace mrw
 					exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling :
-				{
-					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling();
-					exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
-					break;
-				}
 			default:
 				/* do nothing */
 				break;
@@ -1036,11 +1040,6 @@ namespace mrw
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling();
-					break;
-				}
-			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling :
-				{
-					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling();
 					break;
 				}
 			default:
@@ -1090,8 +1089,7 @@ namespace mrw
 		void SectionStatechart::react_main_region_Operating_Processing_Locked_Route_active__entry_Default()
 		{
 			/* Default react sequence for initial entry  */
-			enact_main_region_Operating_Processing_Locked_Route_active_Waiting();
-			enseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling_default();
+			enseq_main_region_Operating_Processing_Locked_Route_active_Enabled_default();
 		}
 
 		/* The reactions of state null. */
@@ -1273,7 +1271,7 @@ namespace mrw
 				if (enable_raised)
 				{
 					exseq_main_region_Operating_Processing_Unlocked();
-					enseq_main_region_Operating_Processing_Locked_default();
+					enseq_main_region_Operating_Processing_Enabling_default();
 					main_region_Operating_react(0);
 					transitioned_after = 0;
 				}
@@ -1425,7 +1423,7 @@ namespace mrw
 			return transitioned_after;
 		}
 
-		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling_react(const sc::integer transitioned_before)
+		sc::integer SectionStatechart::main_region_Operating_Processing_Enabling_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Enabling. */
 			sc::integer transitioned_after = transitioned_before;
@@ -1433,17 +1431,28 @@ namespace mrw
 			{
 				if (relaisResponse_raised)
 				{
-					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting();
+					exseq_main_region_Operating_Processing_Enabling();
 					ifaceOperationCallback->dec();
-					enseq_main_region_Operating_Processing_Locked_Route_active_Enabled_default();
-					main_region_Operating_Processing_Locked_react(0);
+					enseq_main_region_Operating_Processing_Locked_default();
+					main_region_Operating_react(0);
 					transitioned_after = 0;
+				}
+				else
+				{
+					if (timeEvents[2])
+					{
+						exseq_main_region_Operating();
+						timeEvents[2] = false;
+						enseq_main_region_Failed_default();
+						react(0);
+						transitioned_after = 0;
+					}
 				}
 			}
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
 			{
-				transitioned_after = main_region_Operating_Processing_Locked_Route_active_Waiting_react(transitioned_before);
+				transitioned_after = main_region_Operating_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -1503,6 +1512,7 @@ namespace mrw
 			failed_raised = false;
 			timeEvents[0] = false;
 			timeEvents[1] = false;
+			timeEvents[2] = false;
 		}
 
 		void SectionStatechart::microStep()
@@ -1546,9 +1556,9 @@ namespace mrw
 					transitioned = main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling_react(transitioned);
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling :
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling :
 				{
-					transitioned = main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling_react(transitioned);
+					transitioned = main_region_Operating_Processing_Enabling_react(transitioned);
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Failed :
@@ -1606,7 +1616,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((((enable_raised) || (disable_raised)) || (start_raised)) || (relaisResponse_raised)) || (stateResponse_raised)) || (clear_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while ((((((((((enable_raised) || (disable_raised)) || (start_raised)) || (relaisResponse_raised)) || (stateResponse_raised)) || (clear_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
 			isExecuting = false;
 		}
 

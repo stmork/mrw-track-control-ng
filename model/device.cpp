@@ -7,8 +7,19 @@
 #include "model/modelrailway.h"
 #include "model/device.h"
 
+using namespace mrw::util;
 using namespace mrw::can;
 using namespace mrw::model;
+
+using LockState = Device::LockState;
+
+const ConstantEnumerator<LockState>  Device::lock_map
+{
+	{ LockState::FAIL,     "FAIL" },
+	{ LockState::UNLOCKED, "UNLOCKED" },
+	{ LockState::PENDING,  "PENDING" },
+	{ LockState::LOCKED,   "LOCKED" }
+};
 
 Device::Device(
 	ModelRailway     *    model_railway,
@@ -25,4 +36,9 @@ Device::Device(
 MrwMessage Device::command(const Command command) const
 {
 	return MrwMessage(command, controller()->id(), unitNo());
+}
+
+QString Device::get(const mrw::model::Device::LockState & state)
+{
+	return lock_map.get(state);
 }

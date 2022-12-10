@@ -8,6 +8,7 @@
 #ifndef MRW_MODEL_DEVICE_H
 #define MRW_MODEL_DEVICE_H
 
+#include <util/constantenumerator.h>
 #include <can/commands.h>
 #include <model/module.h>
 
@@ -113,8 +114,12 @@ namespace mrw::model
 		 */
 		mrw::can::MrwMessage command(const mrw::can::Command command) const;
 
+		static QString get(const LockState & state);
+
 	private:
 		LockState                lock_state = LockState::UNLOCKED;
+
+		static const mrw::util::ConstantEnumerator<LockState>  lock_map;
 	};
 }
 
