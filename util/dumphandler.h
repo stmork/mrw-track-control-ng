@@ -26,8 +26,6 @@ namespace mrw::util
 	 */
 	class DumpHandler
 	{
-		static Callback callback;
-
 	public:
 		/** The type definition of the callback. */
 		typedef std::function<void()> Callback;
@@ -50,6 +48,8 @@ namespace mrw::util
 
 	private:
 		static void handler(int sig);
+
+		static Callback callback;
 	};
 }
 
