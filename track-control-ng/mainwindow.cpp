@@ -608,6 +608,8 @@ Route * MainWindow::create(const bool direction, SectionState state)
 	{
 		if (!route->extend(rail(i)))
 		{
+			delete route;
+
 			return nullptr;
 		}
 	}
