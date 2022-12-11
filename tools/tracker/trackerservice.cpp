@@ -71,10 +71,6 @@ void TrackerService::append(const UnitNo unitNo)
 	timer.start(1000);
 }
 
-void TrackerService::append(Section * section)
-{
-}
-
 void TrackerService::remove(const UnitNo unitNo)
 {
 	Device  * device  = model->deviceByUnitNo(unitNo);
