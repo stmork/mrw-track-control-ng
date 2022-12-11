@@ -37,7 +37,7 @@ namespace mrw::ctrl
 		model::Section * section() const;
 
 	signals:
-		void enable();
+		void enable(bool turn_on = true);
 		void disable();
 		void left();
 

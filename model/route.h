@@ -9,6 +9,7 @@
 #define MRW_MODEL_ROUTE_H
 
 #include <list>
+#include <unordered_set>
 
 #include <QObject>
 
@@ -41,6 +42,7 @@ namespace mrw::model
 		bool extend(RailPart * rail, RailPart * target);
 		void clear();
 		void dump();
+		bool isLastSectionEnded();
 
 	protected:
 		RailTrack               track;
@@ -51,6 +53,10 @@ namespace mrw::model
 
 	private:
 		bool qualified(RailPart * rail) const;
+		bool isLastSectionEnded(
+			std::unordered_set<mrw::model::Section *> & neighbours,
+			mrw::model::Section  * section,
+			mrw::model::RailPart * part);
 
 		const SectionState      state = SHUNTING;
 		Section        *        first_section = nullptr;
