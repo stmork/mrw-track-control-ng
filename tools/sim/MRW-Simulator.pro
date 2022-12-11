@@ -4,6 +4,7 @@
 #
 
 QT -= gui
+QT += network
 
 include(../../common.pri)
 

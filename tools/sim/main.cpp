@@ -17,9 +17,13 @@ int main(int argc, char * argv[])
 {
 	QCoreApplication      app(argc, argv);
 	TermHandler           term_handler( { SIGTERM, SIGINT } );
-	QString               interface = "can0";
-	QString               plugin    = "virtualcan";
-	SimulatorService      simulator(argc > 1 ? argv[1] : "", interface.toLatin1().data(), plugin.toLatin1().data());
+	Settings              settings("model");
+	SettingsGroup         group(&settings, "model");
+	QString               modelname = argc > 1 ?
+		argv[1] :
+		settings.value("filename", "RailwayModel").toString();
+	ModelRepository       repo(modelname);
+	SimulatorService      simulator(repo);
 	DumpHandler           dumper([&]()
 	{
 		simulator.info();

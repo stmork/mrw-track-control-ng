@@ -13,17 +13,15 @@ using namespace mrw::can;
 using namespace mrw::model;
 
 SimulatorService::SimulatorService(
-	const char * filename,
-	const char * interface,
-	const char * plugin,
-	QObject   *  parent) : MrwBusService(interface, plugin, parent)
+	ModelRepository & repo,
+	QObject     *     parent) :
+	MrwBusService(repo.interface(), repo.plugin(), parent)
 {
-	model = new ModelRailway(filename);
+	model = repo;
 }
 
 SimulatorService::~SimulatorService()
 {
-	delete model;
 }
 
 void SimulatorService::info()

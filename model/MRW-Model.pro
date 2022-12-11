@@ -3,6 +3,7 @@
 #  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 #
 
+QT       += network
 TEMPLATE  = lib
 CONFIG   += staticlib
 
@@ -19,6 +20,7 @@ SOURCES += \
 	lightmodule.cpp \
 	lightsignal.cpp \
 	modelrailway.cpp \
+	modelrepository.cpp \
 	module.cpp \
 	multiplexconnection.cpp \
 	position.cpp \
@@ -45,6 +47,7 @@ HEADERS += \
 	lightmodule.h \
 	lightsignal.h \
 	modelrailway.h \
+	modelrepository.h \
 	module.h \
 	multiplexconnection.h \
 	position.h \

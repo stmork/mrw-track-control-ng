@@ -9,13 +9,10 @@
 
 #include <model/signal.h>
 #include <model/railpart.h>
-#include <ui/basewidget.h>
-
-#include "modelrepository.h"
+#include <model/modelrepository.h>
 
 using namespace mrw::util;
 using namespace mrw::model;
-using namespace mrw::ui;
 
 const char * ModelRepository::FILE_GROUP        = "files";
 const char * ModelRepository::REGION_GROUP      = "regions";

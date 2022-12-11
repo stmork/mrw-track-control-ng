@@ -14,11 +14,11 @@
 #include <QListWidgetItem>
 
 #include <statecharts/OperatingMode.h>
+#include <model/modelrepository.h>
 #include <model/rail.h>
 #include <model/route.h>
 #include <ctrl/basecontroller.h>
 
-#include "modelrepository.h"
 #include "regionform.h"
 
 QT_BEGIN_NAMESPACE

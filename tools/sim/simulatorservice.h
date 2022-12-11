@@ -9,7 +9,7 @@
 #define SIMULATORSERVICE_H
 
 #include <can/mrwbusservice.h>
-#include <model/modelrailway.h>
+#include <model/modelrepository.h>
 #include <model/device.h>
 
 class SimulatorService : public mrw::can::MrwBusService
@@ -22,10 +22,8 @@ public:
 	SimulatorService() = delete;
 
 	explicit SimulatorService(
-			const char * filename,
-			const char * interface = "can0",
-			const char * plugin    = "socketcan",
-			QObject   *  parent    = nullptr);
+			mrw::model::ModelRepository & repo,
+			QObject   *                   parent    = nullptr);
 	virtual ~SimulatorService();
 
 	void info();

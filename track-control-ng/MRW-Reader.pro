@@ -13,7 +13,6 @@ SOURCES += \
 	ctrl/switchcontroller.cpp \
 	main.cpp \
 	mainwindow.cpp \
-	modelrepository.cpp \
 	mrwmessagedispatcher.cpp \
 	regionform.cpp \
 	ctrl/controllerregistrand.cpp \
@@ -30,7 +29,6 @@ HEADERS += \
 	ctrl/signalproxy.h \
 	ctrl/switchcontroller.h \
 	mainwindow.h \
-	modelrepository.h \
 	mrwmessagedispatcher.h \
 	regionform.h \
 	ctrl/controllerregistrand.h \

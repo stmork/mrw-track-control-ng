@@ -11,10 +11,9 @@
 #include <util/settings.h>
 #include <util/dumphandler.h>
 #include <util/termhandler.h>
-#include <model/modelrailway.h>
+#include <model/modelrepository.h>
 
 #include "mainwindow.h"
-#include "modelrepository.h"
 #include "mrwmessagedispatcher.h"
 
 using namespace mrw::util;
