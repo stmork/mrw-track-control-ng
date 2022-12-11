@@ -15,6 +15,7 @@ SUBDIRS  = \
 	ping \
 	proxy \
 	sim \
+	tracker \
 	track-control-ng \
 	study
 
@@ -28,6 +29,7 @@ test.file                 = test/MRW-Test.pro
 ping.file                 = tools/ping/MRW-Ping.pro
 proxy.file                = tools/proxy/MRW-Proxy.pro
 sim.file                  = tools/sim/MRW-Simulator.pro
+tracker.file              = tools/tracker/MRW-Tracker.pro
 track-control-ng.file     = track-control-ng/MRW-Reader.pro
 study.file                = MRW-WidgetStudy/MRW-WidgetStudy.pro
 
@@ -39,6 +41,7 @@ ui.depends                = ctrl
 ping.depends              = test
 proxy.depends             = test
 sim.depends               = test
+tracker.depends           = test
 study.depends             = test ctrl ui
 track-control-ng.depends  = study statecharts
 

@@ -31,7 +31,7 @@ void TestRouting::init()
 void TestRouting::testSimple()
 {
 	Route                    route(true, SectionState::SHUNTING, parts[0]);
-	const Route::Track   &   reserved = route;
+	const Route::RailTrack & reserved = route;
 
 	QVERIFY(verify(route));
 
@@ -81,7 +81,7 @@ void TestRouting::testCrossBlocked()
 void TestRouting::testExtension()
 {
 	Route                    route(true, SectionState::SHUNTING, parts[1]);
-	const Route::Track   &   reserved = route;
+	const Route::RailTrack & reserved = route;
 
 	QVERIFY(verify(route));
 
@@ -109,7 +109,7 @@ void TestRouting::testExtension()
 void TestRouting::testOccupation()
 {
 	Route                    route(true, SectionState::SHUNTING, parts[1]);
-	const Route::Track   &   reserved = route;
+	const Route::RailTrack & reserved = route;
 
 	QVERIFY(verify(route));
 
@@ -133,7 +133,7 @@ void TestRouting::testOccupation()
 void TestRouting::testInverseFail()
 {
 	Route                    route(false, SectionState::SHUNTING, parts[1]);
-	const Route::Track   &   reserved = route;
+	const Route::RailTrack & reserved = route;
 
 	QVERIFY(verify(route));
 
@@ -159,7 +159,7 @@ bool TestRouting::verify(std::initializer_list<const Route *> routes) const
 	// Collect all reserved rail parts.
 	for (const Route * route : routes)
 	{
-		const Route::Track & track = *route;
+		const Route::RailTrack & track = *route;
 
 		reserved.insert(track.begin(), track.end());
 	}

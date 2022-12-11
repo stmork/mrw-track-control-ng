@@ -24,7 +24,7 @@ public:
 	explicit SimulatorService(
 			mrw::model::ModelRepository & repo,
 			QObject   *                   parent    = nullptr);
-	virtual ~SimulatorService();
+	virtual ~SimulatorService() = default;
 
 	void info();
 

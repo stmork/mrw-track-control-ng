@@ -184,12 +184,15 @@ void WidgetRoute::activateSections()
 
 	size_t count = 0;
 
-	for (Section * section : sections)
+	SectionTrack::reverse_iterator it = sections.rbegin();
+
+	while (it != sections.rend())
 	{
-		SectionController * controller = ControllerRegistry::instance().find<SectionController>(section);
+		SectionController * controller = ControllerRegistry::instance().find<SectionController>(*it);
 
 		controller->enable();
 		count++;
+		++it;
 	}
 
 	if (count == 0)

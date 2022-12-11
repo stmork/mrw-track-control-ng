@@ -22,7 +22,8 @@ namespace mrw::model
 		Q_OBJECT
 
 	public:
-		typedef std::list<RailPart *> Track;
+		typedef std::list<RailPart *> RailTrack;
+		typedef std::list<Section *>  SectionTrack;
 
 		explicit Route(
 			const bool           dir,
@@ -31,7 +32,7 @@ namespace mrw::model
 			QObject       *      parent = nullptr);
 		virtual ~Route();
 
-		inline operator const Track & () const
+		inline operator const RailTrack & () const
 		{
 			return track;
 		}
@@ -42,8 +43,8 @@ namespace mrw::model
 		void dump();
 
 	protected:
-		Track                   track;
-		std::list<Section *>    sections;
+		RailTrack               track;
+		SectionTrack            sections;
 		const bool              direction;
 
 		virtual void prepare();

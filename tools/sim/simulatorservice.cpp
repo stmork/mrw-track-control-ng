@@ -20,10 +20,6 @@ SimulatorService::SimulatorService(
 	model = repo;
 }
 
-SimulatorService::~SimulatorService()
-{
-}
-
 void SimulatorService::info()
 {
 	if (model != nullptr)
@@ -46,7 +42,6 @@ void SimulatorService::process(const MrwMessage & message)
 		else
 		{
 			device(message);
-
 		}
 	}
 	else
