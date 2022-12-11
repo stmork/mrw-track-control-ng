@@ -91,13 +91,14 @@ void TrackerService::trigger()
 	}
 	else if (position == previous)
 	{
+		// Proceed and occupy
 		++position;
 		section = *position;
 		section->setOccupation();
 	}
 	else
 	{
-
+		// Lag behind and free.
 		section = *previous++;
 		section->setOccupation(false);
 
