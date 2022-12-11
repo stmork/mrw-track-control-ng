@@ -38,9 +38,9 @@ class MainWindow :
 
 public:
 	explicit MainWindow(
-		ModelRepository    &   repository,
-		MrwMessageDispatcher & dispatcher,
-		QWidget        *       parent = nullptr);
+		mrw::model::ModelRepository    &   repository,
+		MrwMessageDispatcher       &       dispatcher,
+		QWidget              *             parent = nullptr);
 	~MainWindow();
 
 private slots:
@@ -111,10 +111,9 @@ private:
 	virtual void reset() override;
 	mrw::model::Route * create(const bool direction, mrw::model::SectionState state);
 
-	Ui::MainWindow  * ui;
-	ModelRepository & repo;
-
-	mrw::statechart::OperatingMode   statechart;
+	Ui::MainWindow          *         ui;
+	mrw::model::ModelRepository   &   repo;
+	mrw::statechart::OperatingMode    statechart;
 };
 
 #endif // MAINWINDOW_H

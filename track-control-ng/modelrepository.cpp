@@ -17,6 +17,10 @@ using namespace mrw::util;
 using namespace mrw::model;
 using namespace mrw::ui;
 
+const char * ModelRepository::FILE_GROUP        = "files";
+const char * ModelRepository::REGION_GROUP      = "regions";
+const char * ModelRepository::POSITION_GROUP    = "positions";
+
 const char * ModelRepository::REGION_FILENAME   = "Gruppen.properties";
 const char * ModelRepository::SIGNAL_FILENAME   = "Signale.properties";
 const char * ModelRepository::RAILPART_FILENAME = "Gleisteile.properties";
@@ -37,18 +41,15 @@ ModelRepository::ModelRepository(const QString & modelname) :
 ModelRepository::~ModelRepository()
 {
 	qInfo("Saving positions.");
+	storePositions();
 
-	SettingsGroup           group(&settings_model, "positions");
-	std::vector<Position *> positions;
-
-	model->parts<Position>(positions);
-	for (Position * pos : positions)
-	{
-		pos->write(settings_model);
-	}
+	qInfo("Saving regions.");
+	storeRegions();
 
 	qInfo("Shutting down model.");
 	delete model;
+
+	settings_model.sync();
 }
 
 void ModelRepository::info()
@@ -69,7 +70,7 @@ void ModelRepository::xml()
 
 void ModelRepository::readMaps()
 {
-	SettingsGroup group(&settings_model, "files");
+	SettingsGroup group(&settings_model, FILE_GROUP);
 
 	// First try: Read directly from config by default filename."
 	model_filename = settings_model.value("filename", home_dir.absolutePath() + "/mrw/" + filename).toString();
@@ -159,9 +160,9 @@ QStringList ModelRepository::lookupProperties(const QString & input)
 
 void ModelRepository::setFilenames()
 {
-	settings_model.setValue("filename", model_filename);
-	settings_model.setValue("signals", signal_filename);
-	settings_model.setValue("regions", region_filename);
+	settings_model.setValue("filename",  model_filename);
+	settings_model.setValue("signals",   signal_filename);
+	settings_model.setValue("regions",   region_filename);
 	settings_model.setValue("railparts", railpart_filename);
 	settings_model.sync();
 }
@@ -187,12 +188,13 @@ void ModelRepository::prepareRegions()
 
 		try
 		{
+			SettingsGroup       group(&settings_model, REGION_GROUP);
 			QString             prep  = region->key();
 			const std::string & key   = prepareKey(prep).toStdString();
 			const std::string & value = region_map.lookup(key);
 
 			// Values stored as invert direction flag.
-			region->setDirection(value != "true");
+			region->parse(settings_model, value != "true");
 		}
 		catch (std::out_of_range & e)
 		{
@@ -204,7 +206,7 @@ void ModelRepository::prepareRegions()
 
 void ModelRepository::prepareRailParts()
 {
-	SettingsGroup           group(&settings_model, "positions");
+	SettingsGroup           group(&settings_model, POSITION_GROUP);
 	std::vector<RailPart *> parts;
 
 	model->parts<RailPart>(parts);
@@ -227,7 +229,7 @@ void ModelRepository::prepareRailParts()
 
 void ModelRepository::prepareSignals(Region * region)
 {
-	SettingsGroup         group(&settings_model, "positions");
+	SettingsGroup         group(&settings_model, POSITION_GROUP);
 	QString               region_key = region->key();
 	std::vector<Signal *> region_signals;
 
@@ -247,6 +249,30 @@ void ModelRepository::prepareSignals(Region * region)
 		{
 			qWarning() << "No coordinate found for " << *signal;
 		}
+	}
+}
+
+void ModelRepository::storeRegions()
+{
+	SettingsGroup group(&settings_model, REGION_GROUP);
+
+	for (size_t r = 0; r < model->regionCount(); r++)
+	{
+		Region * region = model->region(r);
+
+		region->write(settings_model);
+	}
+}
+
+void ModelRepository::storePositions()
+{
+	SettingsGroup           group(&settings_model, POSITION_GROUP);
+	std::vector<Position *> positions;
+
+	model->parts<Position>(positions);
+	for (Position * pos : positions)
+	{
+		pos->write(settings_model);
 	}
 }
 

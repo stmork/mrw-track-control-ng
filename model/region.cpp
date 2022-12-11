@@ -52,6 +52,11 @@ Region::~Region()
 	sections.clear();
 }
 
+void Region::parse(QSettings & settings, const bool dir)
+{
+	direction_view = settings.value(key(), dir).toBool();
+}
+
 void Region::add(Section * section)
 {
 	sections.push_back(section);
@@ -76,5 +81,12 @@ QString Region::toString() const
 
 QString Region::key() const
 {
-	return (is_station ? "Bahnhof" : "Strecke") + region_name;
+	QString result = (is_station ? "Bahnhof" : "Strecke") + region_name;
+
+	return result.replace(" ", "");
+}
+
+void Region::write(QSettings & settings) const
+{
+	settings.setValue(key(), direction_view);
 }

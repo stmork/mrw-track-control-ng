@@ -34,7 +34,7 @@ namespace mrw::model
 		const bool              is_station;
 		ModelRailway      *     model = nullptr;
 		std::vector<Section *>  sections;
-		bool                    direction_view;
+		bool                    direction_view = true;
 
 
 	public:
@@ -100,10 +100,7 @@ namespace mrw::model
 		 * @param dir The projection direction of the counting direction for
 		 * the GUI.
 		 */
-		inline void setDirection(const bool dir)
-		{
-			direction_view = dir;
-		}
+		void parse(QSettings & settings, const bool dir);
 
 		/**
 		 * This method returns a key to determine the logical coordinates from
@@ -134,6 +131,7 @@ namespace mrw::model
 			}
 		}
 
+		void write(QSettings & settings) const;
 		QString toString() const override;
 
 	private:

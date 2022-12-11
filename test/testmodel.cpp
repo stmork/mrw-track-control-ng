@@ -103,9 +103,10 @@ void TestModel::testRegions()
 	for (unsigned i = 0; i < count; i++)
 	{
 		Region * region = model->region(i);
+		QString  name   = region->name();
 
 		QVERIFY(region != nullptr);
-		QVERIFY(region->key().contains(region->name()));
+		QVERIFY(region->key().contains(name.replace(" ", "")));
 	}
 
 	QVERIFY_EXCEPTION_THROWN(model->region(count), std::out_of_range);
