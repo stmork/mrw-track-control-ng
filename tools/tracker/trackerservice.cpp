@@ -89,9 +89,9 @@ bool TrackerService::prepareLast()
 	std::unordered_set<Section *> backward;
 	std::vector<Rail *>           rails;
 	auto                          it     = track.rbegin();
-	Section *                     last   = *it++;
-	Section *                     lookup = *it;
-	Section *                     next   = nullptr;
+	Section           *           last   = *it++;
+	Section           *           lookup = *it;
+	Section           *           next   = nullptr;
 
 	last->parts<Rail>(rails);
 
