@@ -40,7 +40,9 @@ protected:
 
 private:
 	void append(const mrw::can::UnitNo unitNo);
+	void append(mrw::model::Section * section);
 	void remove(const mrw::can::UnitNo unitNo);
+	bool prepareLast();
 
 private slots:
 	void trigger();

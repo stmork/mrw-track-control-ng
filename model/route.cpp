@@ -138,7 +138,7 @@ void Route::clear()
 	track.clear();
 }
 
-void Route::dump()
+void Route::dump() const
 {
 	for (RailPart * part : track)
 	{
@@ -151,11 +151,11 @@ void Route::dump()
 	}
 }
 
-bool mrw::model::Route::isLastSectionEnded()
+bool Route::isLastSectionEnded() const
 {
 	std::unordered_set<Section *> neighbours;
 
-	isLastSectionEnded(neighbours, sections.back(), track.back());
+	isLastSectionEnded(neighbours, track.back(), direction);
 	return neighbours.empty();
 }
 
@@ -196,19 +196,20 @@ bool Route::qualified(RailPart * rail) const
 	return true;
 }
 
-bool Route::isLastSectionEnded(
+void Route::isLastSectionEnded(
 	std::unordered_set<Section *> & neighbours,
-	Section            *            section,
-	RailPart            *           part)
+	const RailPart         *        part,
+	const bool                      direction)
 {
 	for (RailPart * next : part->advance(direction))
 	{
-		if (next->section() != section)
+		if (next->section() != part->section())
 		{
 			neighbours.emplace(next->section());
-			return true;
 		}
-		isLastSectionEnded(neighbours, section, next);
+		else
+		{
+			isLastSectionEnded(neighbours, next, direction);
+		}
 	}
-	return false;
 }

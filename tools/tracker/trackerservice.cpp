@@ -6,6 +6,7 @@
 #include <util/method.h>
 #include <can/mrwmessage.h>
 #include <model/section.h>
+#include <model/rail.h>
 
 #include "trackerservice.h"
 
@@ -63,10 +64,15 @@ void TrackerService::append(const UnitNo unitNo)
 
 	track.push_front(section);
 	qDebug().noquote() << *section;
+
 	timer.stop();
 	position = track.end();
 	previous = position;
 	timer.start(1000);
+}
+
+void TrackerService::append(Section * section)
+{
 }
 
 void TrackerService::remove(const UnitNo unitNo)
@@ -77,12 +83,62 @@ void TrackerService::remove(const UnitNo unitNo)
 	track.remove(section);
 }
 
+bool TrackerService::prepareLast()
+{
+	std::unordered_set<Section *> forward;
+	std::unordered_set<Section *> backward;
+	std::vector<Rail *>           rails;
+	auto                          it     = track.rbegin();
+	Section *                     last   = *it++;
+	Section *                     lookup = *it;
+	Section *                     next   = nullptr;
+
+	last->parts<Rail>(rails);
+
+	for (Rail * rail : rails)
+	{
+		Route::isLastSectionEnded(forward,  rail, true);
+		Route::isLastSectionEnded(backward, rail, false);
+	}
+
+	if (forward.empty() || backward.empty())
+	{
+		return false;
+	}
+
+	if (forward.find(lookup) != forward.end())
+	{
+		auto first = backward.begin();
+
+		next = *first;
+	}
+	else if (backward.find(lookup) != backward.end())
+	{
+		auto first = forward.begin();
+
+		next = *first;
+	}
+	else
+	{
+		qCritical("Section not found in neighbour hood!");
+		return false;
+	}
+
+	qDebug("Appending last off turned section:");
+	track.push_back(next);
+	qDebug().noquote() << *next;
+
+	return true;
+}
+
 void TrackerService::trigger()
 {
 	Section * section = nullptr;
 
 	if (position == track.end())
 	{
+		prepareLast();
+
 		// First init!
 		position = track.begin();
 		previous = position;

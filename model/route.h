@@ -41,8 +41,13 @@ namespace mrw::model
 		bool extend(RailPart * target);
 		bool extend(RailPart * rail, RailPart * target);
 		void clear();
-		void dump();
-		bool isLastSectionEnded();
+		void dump() const;
+		bool isLastSectionEnded() const;
+
+		static void isLastSectionEnded(
+			std::unordered_set<mrw::model::Section *> & neighbours,
+			const mrw::model::RailPart         *        part,
+			const bool                                  direction);
 
 	protected:
 		RailTrack               track;
@@ -52,11 +57,7 @@ namespace mrw::model
 		virtual void prepare();
 
 	private:
-		bool qualified(RailPart * rail) const;
-		bool isLastSectionEnded(
-			std::unordered_set<mrw::model::Section *> & neighbours,
-			mrw::model::Section  * section,
-			mrw::model::RailPart * part);
+		bool        qualified(RailPart * rail) const;
 
 		const SectionState      state = SHUNTING;
 		Section        *        first_section = nullptr;
