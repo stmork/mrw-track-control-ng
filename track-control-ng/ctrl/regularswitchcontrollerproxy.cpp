@@ -110,14 +110,7 @@ Position * RegularSwitchControllerProxy::position() const
 
 SectionState RegularSwitchControllerProxy::state() const
 {
-	if (part->reserved())
-	{
-		return part->section()->occupation() ? SectionState::OCCUPIED : section()->state();
-	}
-	else
-	{
-		return SectionState::FREE;
-	}
+	return part->section()->occupation() ? SectionState::OCCUPIED : section()->state();
 }
 
 Device::LockState RegularSwitchControllerProxy::lock() const
