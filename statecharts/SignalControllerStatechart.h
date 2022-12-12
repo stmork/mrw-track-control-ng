@@ -94,7 +94,6 @@ namespace mrw
 				start,
 				started,
 				failed,
-				clear,
 				enable,
 				disable,
 				completedMain,
@@ -216,9 +215,6 @@ namespace mrw
 
 			/*! Slot for the in event 'failed' that is defined in the default interface scope. */
 			void failed();
-
-			/*! Slot for the in event 'clear' that is defined in the default interface scope. */
-			void clear();
 
 			/*! Slot for the in event 'enable' that is defined in the default interface scope. */
 			void enable();
@@ -380,9 +376,6 @@ namespace mrw
 
 			/*! Indicates event 'failed' of default interface scope is active. */
 			bool failed_raised;
-
-			/*! Indicates event 'clear' of default interface scope is active. */
-			bool clear_raised;
 
 			/*! Indicates event 'enable' of default interface scope is active. */
 			bool enable_raised;

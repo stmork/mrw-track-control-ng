@@ -34,7 +34,6 @@ namespace mrw
 			start_raised(false),
 			started_raised(false),
 			failed_raised(false),
-			clear_raised(false),
 			enable_raised(false),
 			disable_raised(false),
 			completedMain_raised(false),
@@ -97,11 +96,6 @@ namespace mrw
 					failed_raised = true;
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::Event::clear:
-				{
-					clear_raised = true;
-					break;
-				}
 			case mrw::statechart::SignalControllerStatechart::Event::enable:
 				{
 					enable_raised = true;
@@ -160,13 +154,6 @@ namespace mrw
 		void mrw::statechart::SignalControllerStatechart::failed()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::failed));
-			runCycle();
-		}
-
-
-		void mrw::statechart::SignalControllerStatechart::clear()
-		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::clear));
 			runCycle();
 		}
 
@@ -1437,7 +1424,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (clear_raised)
+				if (start_raised)
 				{
 					exseq_main_region_Failed();
 					enseq_main_region_Init_default();
@@ -1458,7 +1445,6 @@ namespace mrw
 			start_raised = false;
 			started_raised = false;
 			failed_raised = false;
-			clear_raised = false;
 			enable_raised = false;
 			disable_raised = false;
 			completedMain_raised = false;
@@ -1578,7 +1564,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((((((start_raised) || (started_raised)) || (failed_raised)) || (clear_raised)) || (enable_raised)) || (disable_raised)) || (completedMain_raised)) || (completedDistant_raised)) || (completedShunt_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while ((((((((((start_raised) || (started_raised)) || (failed_raised)) || (enable_raised)) || (disable_raised)) || (completedMain_raised)) || (completedDistant_raised)) || (completedShunt_raised)) || (timeEvents[0])) || (timeEvents[1]));
 			isExecuting = false;
 		}
 

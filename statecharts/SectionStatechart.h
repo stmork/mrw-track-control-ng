@@ -102,7 +102,6 @@ namespace mrw
 				start,
 				relaisResponse,
 				stateResponse,
-				clear,
 				failed,
 				_te0_main_region_Init_,
 				_te1_main_region_Operating_Processing_Locked_Route_active_Waiting_,
@@ -244,9 +243,6 @@ namespace mrw
 
 			/*! Slot for the in event 'stateResponse' that is defined in the default interface scope. */
 			void stateResponse(bool stateResponse_);
-
-			/*! Slot for the in event 'clear' that is defined in the default interface scope. */
-			void clear();
 
 			/*! Slot for the in event 'failed' that is defined in the default interface scope. */
 			void failed();
@@ -417,9 +413,6 @@ namespace mrw
 
 			/*! Value of event 'stateResponse' of default interface scope. */
 			bool stateResponse_value;
-
-			/*! Indicates event 'clear' of default interface scope is active. */
-			bool clear_raised;
 
 			/*! Indicates event 'failed' of default interface scope is active. */
 			bool failed_raised;

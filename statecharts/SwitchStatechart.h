@@ -85,7 +85,6 @@ namespace mrw
 				response,
 				queued,
 				failed,
-				clear,
 				unlock,
 				turn,
 				_te0_main_region_Init_,
@@ -207,9 +206,6 @@ namespace mrw
 
 			/*! Slot for the in event 'failed' that is defined in the default interface scope. */
 			void failed();
-
-			/*! Slot for the in event 'clear' that is defined in the default interface scope. */
-			void clear();
 
 			/*! Slot for the in event 'unlock' that is defined in the default interface scope. */
 			void unlock();
@@ -334,9 +330,6 @@ namespace mrw
 
 			/*! Indicates event 'failed' of default interface scope is active. */
 			bool failed_raised;
-
-			/*! Indicates event 'clear' of default interface scope is active. */
-			bool clear_raised;
 
 			/*! Indicates event 'unlock' of default interface scope is active. */
 			bool unlock_raised;
