@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_PiCOkG_dEe2Ds--x8yNBEw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var timeout : integer = 5000&#xA;var retry : integer = 150&#xA;&#xA;in event clear&#xA;in event started&#xA;in event fail&#xA;in event edit&#xA;in event operate&#xA;&#xA;out event start&#xA;out event failed&#xA;out event operating : boolean&#xA;out event editing : boolean&#xA;&#xA;operation reset()&#xA;&#xA;interface can:&#xA;in event connected&#xA;&#xA;operation connectBus()" namespace="mrw.statechart" name="OperatingMode">
+  <sgraph:Statechart xmi:id="_PiCOkG_dEe2Ds--x8yNBEw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var timeout : integer = 5000&#xA;var retry : integer = 150&#xA;&#xA;in event clear&#xA;in event started&#xA;in event fail&#xA;in event edit&#xA;in event operate&#xA;in event init&#xA;&#xA;out event start&#xA;out event failed&#xA;out event operating : boolean&#xA;out event editing : boolean&#xA;&#xA;operation reset()&#xA;&#xA;interface can:&#xA;in event connected&#xA;&#xA;operation connectBus()" namespace="mrw.statechart" name="OperatingMode">
     <regions xmi:id="_PiGgA2_dEe2Ds--x8yNBEw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_PiGgBG_dEe2Ds--x8yNBEw">
         <outgoingTransitions xmi:id="_PiGgBW_dEe2Ds--x8yNBEw" target="_PiGgBm_dEe2Ds--x8yNBEw"/>
@@ -9,7 +9,7 @@
         <outgoingTransitions xmi:id="_PiGgCW_dEe2Ds--x8yNBEw" specification="can.connected" target="_PiHHFm_dEe2Ds--x8yNBEw"/>
         <outgoingTransitions xmi:id="_PZlfQHF0Ee2peawiS1OZpw" specification="after timeout ms" target="_UPF-IG_eEe2lm7yxWipHjw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_PiHHFm_dEe2Ds--x8yNBEw" specification="entry / reset(); raise start" name="Init" incomingTransitions="_PiGgCW_dEe2Ds--x8yNBEw _1ftGQHFqEe2peawiS1OZpw">
+      <vertices xsi:type="sgraph:State" xmi:id="_PiHHFm_dEe2Ds--x8yNBEw" specification="entry / reset(); raise start" name="Init" incomingTransitions="_PiGgCW_dEe2Ds--x8yNBEw _1ftGQHFqEe2peawiS1OZpw _dOYH4HpTEe2_ZOj2sFqWdg">
         <outgoingTransitions xmi:id="_j7-GsG_eEe2lm7yxWipHjw" specification="after timeout ms" target="_UPF-IG_eEe2lm7yxWipHjw"/>
         <outgoingTransitions xmi:id="_FagvgG_eEe2lm7yxWipHjw" specification="started" target="_UUs58HFqEe2Wlo6A2eTnng"/>
       </vertices>
@@ -23,6 +23,7 @@
       <vertices xsi:type="sgraph:State" xmi:id="_UUs58HFqEe2Wlo6A2eTnng" specification="entry / raise operating : true&#xA;exit / raise operating : false" name="Operating" incomingTransitions="_psDrcG_dEe2lm7yxWipHjw _FagvgG_eEe2lm7yxWipHjw">
         <outgoingTransitions xmi:id="_ckvP4G_dEe2Ds--x8yNBEw" specification="edit" target="_VbyQMG_dEe2Ds--x8yNBEw"/>
         <outgoingTransitions xmi:id="_7hV0YHFxEe2peawiS1OZpw" specification="fail" target="_UPF-IG_eEe2lm7yxWipHjw"/>
+        <outgoingTransitions xmi:id="_dOYH4HpTEe2_ZOj2sFqWdg" specification="init" target="_PiHHFm_dEe2Ds--x8yNBEw"/>
       </vertices>
     </regions>
   </sgraph:Statechart>
@@ -190,7 +191,7 @@
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_FahWkW_eEe2lm7yxWipHjw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_FahWk2_eEe2lm7yxWipHjw" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_FahWkm_eEe2lm7yxWipHjw" points="[1, 85, -133, 11]$[123, 85, -11, 11]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_FahWkm_eEe2lm7yxWipHjw" points="[1, 112, -133, 38]$[123, 112, -11, 38]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_q1jQsHFqEe2Wlo6A2eTnng" id="(0.9957264957264957,0.5880681818181818)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_FajLwG_eEe2lm7yxWipHjw" id="(0.051470588235294115,0.3983050847457627)"/>
     </edges>
@@ -247,6 +248,17 @@
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_EAB7QnTQEe2wC5SuVMSVJA" points="[76, 46, -300, -182]$[376, 211, 0, -17]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_EADwcHTQEe2wC5SuVMSVJA" id="(0.5957446808510638,0.16111111111111112)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_EADwcXTQEe2wC5SuVMSVJA" id="(0.5,0.1440677966101695)"/>
+    </edges>
+    <edges xmi:id="_dOZWAHpTEe2_ZOj2sFqWdg" type="Transition" element="_dOYH4HpTEe2_ZOj2sFqWdg" source="_UUuIEHFqEe2Wlo6A2eTnng" target="_PiHuR2_dEe2Ds--x8yNBEw">
+      <children xsi:type="notation:DecorationNode" xmi:id="_dOZWBHpTEe2_ZOj2sFqWdg" type="TransitionExpression">
+        <styles xsi:type="notation:ShapeStyle" xmi:id="_dOZWBXpTEe2_ZOj2sFqWdg"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_dOZWBnpTEe2_ZOj2sFqWdg" y="10"/>
+      </children>
+      <styles xsi:type="notation:ConnectorStyle" xmi:id="_dOZWAXpTEe2_ZOj2sFqWdg" routing="Rectilinear" lineColor="4210752"/>
+      <styles xsi:type="notation:FontStyle" xmi:id="_dOZWA3pTEe2_ZOj2sFqWdg" fontName="Verdana"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_dOZWAnpTEe2_ZOj2sFqWdg" points="[-123, 16, 146, 23]$[-245, 16, 24, 23]"/>
+      <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_dOakIHpTEe2_ZOj2sFqWdg" id="(0.5540540540540541,0.13559322033898305)"/>
+      <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_dOakIXpTEe2_ZOj2sFqWdg" id="(0.8974358974358975,0.6903409090909091)"/>
     </edges>
   </notation:Diagram>
 </xmi:XMI>

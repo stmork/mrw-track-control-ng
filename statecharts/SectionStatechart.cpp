@@ -1343,6 +1343,16 @@ namespace mrw
 					react(0);
 					transitioned_after = 0;
 				}
+				else
+				{
+					if (start_raised)
+					{
+						exseq_main_region_Operating();
+						enseq_main_region_Init_default();
+						react(0);
+						transitioned_after = 0;
+					}
+				}
 			}
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))

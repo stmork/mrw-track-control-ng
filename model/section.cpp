@@ -197,8 +197,9 @@ void Section::findSignalPair()
 
 QString Section::toString() const
 {
-	return QString("    Sec %1         : [%2] %3 %4 %5").
-		arg(valid() ? 'V' : '-').
+	return QString("    Sec %1%2        : [%3] %4 %5 %6").
+		arg(valid() ?      'V' : '-').
+		arg(occupation() ? 'O' : '-').
 		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name(), -10).
 		arg(Device::get(lock()), -10).

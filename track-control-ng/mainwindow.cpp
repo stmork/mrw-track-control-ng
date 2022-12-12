@@ -162,6 +162,10 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 		&statechart, &OperatingMode::edit,
 		Qt::QueuedConnection);
 	connect(
+		ui->actionInit, &QAction::triggered,
+		&statechart, &OperatingMode::init,
+		Qt::QueuedConnection);
+	connect(
 		ui->actionClear, &QAction::triggered,
 		&statechart, &OperatingMode::clear,
 		Qt::QueuedConnection);
@@ -204,6 +208,7 @@ void MainWindow::enable()
 
 	ui->actionOperate->setEnabled(!operating);
 	ui->actionClear->setEnabled(fail);
+	ui->actionInit->setEnabled(operating);
 
 	ui->actionTurnSwitchLeft->setEnabled(switch_count > 0);
 	ui->actionTurnSwitch->setEnabled(switch_count > 0);

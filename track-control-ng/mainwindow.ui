@@ -236,6 +236,8 @@
     <addaction name="actionEdit"/>
     <addaction name="actionOperate"/>
     <addaction name="actionClear"/>
+    <addaction name="separator"/>
+    <addaction name="actionInit"/>
    </widget>
    <widget class="QMenu" name="menuBetrieb">
     <property name="title">
@@ -399,6 +401,11 @@
   <action name="actionUnlock">
    <property name="text">
     <string>Freigeben</string>
+   </property>
+  </action>
+  <action name="actionInit">
+   <property name="text">
+    <string>Reset</string>
    </property>
   </action>
  </widget>

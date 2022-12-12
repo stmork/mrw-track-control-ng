@@ -74,6 +74,7 @@ namespace mrw
 				fail,
 				edit,
 				operate,
+				init,
 				Can_connected,
 				_te0_main_region_Prepare_Bus_,
 				_te1_main_region_Init_
@@ -222,6 +223,9 @@ namespace mrw
 			/*! Slot for the in event 'operate' that is defined in the default interface scope. */
 			void operate();
 
+			/*! Slot for the in event 'init' that is defined in the default interface scope. */
+			void init();
+
 			/*! Slot for the in event 'connected' that is defined in the interface scope 'can'. */
 			void can_connected();
 
@@ -327,6 +331,9 @@ namespace mrw
 
 			/*! Indicates event 'operate' of default interface scope is active. */
 			bool operate_raised;
+
+			/*! Indicates event 'init' of default interface scope is active. */
+			bool init_raised;
 
 			/*! Value of event 'operating' of default interface scope. */
 			bool operating_value;
