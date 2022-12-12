@@ -39,6 +39,14 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 		&statechart, &SwitchStatechart::rightResponse,
 		Qt::QueuedConnection);
 	connect(
+		this, &RegularSwitchControllerProxy::failed,
+		&statechart, &SwitchStatechart::failed,
+		Qt::QueuedConnection);
+	connect(
+		this, &RegularSwitchControllerProxy::clear,
+		&statechart, &SwitchStatechart::clear,
+		Qt::QueuedConnection);
+	connect(
 		this, &RegularSwitchControllerProxy::unlock,
 		&statechart, &SwitchStatechart::unlock,
 		Qt::QueuedConnection);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_r08WYHCUEe2rVLYxSRawxw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;&#xA;in event start&#xA;in event leftResponse&#xA;in event rightResponse&#xA;in event response&#xA;in event clear&#xA;in event queued&#xA;in event failed&#xA;in event unlock&#xA;&#xA;in event turn&#xA;&#xA;out event started&#xA;out event entered&#xA;&#xA;operation inc()&#xA;operation dec()&#xA;&#xA;operation left()&#xA;operation right()&#xA;operation request()&#xA;operation doTurnLeft() : boolean&#xA;operation isFree() : boolean&#xA;&#xA;operation fail()&#xA;operation pending()&#xA;operation lock(do_it : boolean)" namespace="mrw.statechart" name="SwitchStatechart">
+  <sgraph:Statechart xmi:id="_r08WYHCUEe2rVLYxSRawxw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;&#xA;in event start&#xA;in event leftResponse&#xA;in event rightResponse&#xA;in event response&#xA;in event queued&#xA;in event failed&#xA;in event clear&#xA;in event unlock&#xA;&#xA;in event turn&#xA;&#xA;out event started&#xA;out event entered&#xA;&#xA;operation inc()&#xA;operation dec()&#xA;&#xA;operation left()&#xA;operation right()&#xA;operation request()&#xA;operation doTurnLeft() : boolean&#xA;operation isFree() : boolean&#xA;&#xA;operation fail()&#xA;operation pending()&#xA;operation lock(do_it : boolean)" namespace="mrw.statechart" name="SwitchStatechart">
     <regions xmi:id="_r08WbHCUEe2rVLYxSRawxw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_r08WbXCUEe2rVLYxSRawxw">
         <outgoingTransitions xmi:id="_r08WbnCUEe2rVLYxSRawxw" target="_r089cHCUEe2rVLYxSRawxw"/>
@@ -51,7 +51,7 @@
         </regions>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_T17jEHCVEe2rVLYxSRawxw" specification="entry / fail" name="Failed" incomingTransitions="_VG_iUHCVEe2rVLYxSRawxw _Z7sAYHCVEe2rVLYxSRawxw _dNuY4HCVEe2rVLYxSRawxw _SN_m8HF8Ee2peawiS1OZpw _z_sAAHGhEe2peawiS1OZpw">
-        <outgoingTransitions xmi:id="_fBYu4HCVEe2rVLYxSRawxw" specification="clear" target="_r089enCUEe2rVLYxSRawxw"/>
+        <outgoingTransitions xmi:id="_fBYu4HCVEe2rVLYxSRawxw" specification="clear / lock(false)" target="_r089enCUEe2rVLYxSRawxw"/>
       </vertices>
     </regions>
   </sgraph:Statechart>

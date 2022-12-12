@@ -1603,6 +1603,7 @@ namespace mrw
 				if (clear_raised)
 				{
 					exseq_main_region_Failed();
+					ifaceOperationCallback->lock(false);
 					enseq_main_region_Init_default();
 					react(0);
 					transitioned_after = 0;

@@ -39,6 +39,8 @@ namespace mrw::ctrl
 	signals:
 		void enable(bool turn_on = true);
 		void disable();
+		void failed();
+		void clear();
 		void left();
 
 	private:

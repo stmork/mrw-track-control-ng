@@ -91,7 +91,7 @@
         </regions>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_tx568G_nEe2YefuTX77gAw" specification="entry / fail" name="Failed" incomingTransitions="_yKSQcG_nEe2YefuTX77gAw _OPUhIG_rEe2YefuTX77gAw _UuQ6gG_rEe2YefuTX77gAw _B_gnwHX-Ee21HM-AEZfzIA _fk4hcHiAEe2OXcmdUJ-BFw">
-        <outgoingTransitions xmi:id="_5_pFEHCVEe2rVLYxSRawxw" specification="clear" target="_eBBcJm_nEe2NWacukCztjQ"/>
+        <outgoingTransitions xmi:id="_5_pFEHCVEe2rVLYxSRawxw" specification="clear / lock(false)" target="_eBBcJm_nEe2NWacukCztjQ"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_gX9dUG_yEe2YefuTX77gAw" specification="" name="Wait for Start" incomingTransitions="_eBBcJW_nEe2NWacukCztjQ">
         <outgoingTransitions xmi:id="_ma86gG_yEe2YefuTX77gAw" specification="start" target="_eBBcJm_nEe2NWacukCztjQ"/>

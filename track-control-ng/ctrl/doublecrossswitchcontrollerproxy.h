@@ -37,6 +37,8 @@ namespace mrw::ctrl
 		void turn();
 		void leftResponse();
 		void rightResponse();
+		void failed();
+		void clear();
 		void unlock();
 
 	private:

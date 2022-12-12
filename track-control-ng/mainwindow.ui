@@ -244,6 +244,9 @@
     <addaction name="actionTurnSwitchLeft"/>
     <addaction name="actionTurnSwitch"/>
     <addaction name="actionTurnSwitchRight"/>
+    <addaction name="separator"/>
+    <addaction name="actionLock"/>
+    <addaction name="actionUnlock"/>
    </widget>
    <addaction name="menuDaten"/>
    <addaction name="menuModus"/>
@@ -386,6 +389,16 @@
   <action name="actionTurnSwitch">
    <property name="text">
     <string>Weiche umschalten</string>
+   </property>
+  </action>
+  <action name="actionLock">
+   <property name="text">
+    <string>Sperren</string>
+   </property>
+  </action>
+  <action name="actionUnlock">
+   <property name="text">
+    <string>Freigeben</string>
    </property>
   </action>
  </widget>

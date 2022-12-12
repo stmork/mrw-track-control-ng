@@ -163,8 +163,15 @@ bool Route::qualified(RailPart * rail) const
 {
 	const QString   indent(track.size(), ' ');
 	const Section * section = rail->section();
+	const Device  * device = dynamic_cast<Device *>(rail);
 
 	qDebug().noquote() << indent << rail->toString();
+
+	if ((device != nullptr) && (device->lock() == Device::LockState::FAIL))
+	{
+		qDebug().noquote() << indent << "      Rail in failed state:";
+		return false;
+	}
 
 	if (rail->reserved())
 	{

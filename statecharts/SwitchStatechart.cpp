@@ -28,9 +28,9 @@ namespace mrw
 			leftResponse_raised(false),
 			rightResponse_raised(false),
 			response_raised(false),
-			clear_raised(false),
 			queued_raised(false),
 			failed_raised(false),
+			clear_raised(false),
 			unlock_raised(false),
 			turn_raised(false)
 		{
@@ -92,11 +92,6 @@ namespace mrw
 					response_raised = true;
 					break;
 				}
-			case mrw::statechart::SwitchStatechart::Event::clear:
-				{
-					clear_raised = true;
-					break;
-				}
 			case mrw::statechart::SwitchStatechart::Event::queued:
 				{
 					queued_raised = true;
@@ -105,6 +100,11 @@ namespace mrw
 			case mrw::statechart::SwitchStatechart::Event::failed:
 				{
 					failed_raised = true;
+					break;
+				}
+			case mrw::statechart::SwitchStatechart::Event::clear:
+				{
+					clear_raised = true;
 					break;
 				}
 			case mrw::statechart::SwitchStatechart::Event::unlock:
@@ -161,13 +161,6 @@ namespace mrw
 		}
 
 
-		void mrw::statechart::SwitchStatechart::clear()
-		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::clear));
-			runCycle();
-		}
-
-
 		void mrw::statechart::SwitchStatechart::queued()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::queued));
@@ -178,6 +171,13 @@ namespace mrw
 		void mrw::statechart::SwitchStatechart::failed()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::failed));
+			runCycle();
+		}
+
+
+		void mrw::statechart::SwitchStatechart::clear()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::clear));
 			runCycle();
 		}
 
@@ -979,6 +979,7 @@ namespace mrw
 				if (clear_raised)
 				{
 					exseq_main_region_Failed();
+					ifaceOperationCallback->lock(false);
 					enseq_main_region_Init_default();
 					react(0);
 					transitioned_after = 0;
@@ -998,9 +999,9 @@ namespace mrw
 			leftResponse_raised = false;
 			rightResponse_raised = false;
 			response_raised = false;
-			clear_raised = false;
 			queued_raised = false;
 			failed_raised = false;
+			clear_raised = false;
 			unlock_raised = false;
 			turn_raised = false;
 			timeEvents[0] = false;
@@ -1072,7 +1073,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((((((start_raised) || (leftResponse_raised)) || (rightResponse_raised)) || (response_raised)) || (clear_raised)) || (queued_raised)) || (failed_raised)) || (unlock_raised)) || (turn_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while (((((((((((start_raised) || (leftResponse_raised)) || (rightResponse_raised)) || (response_raised)) || (queued_raised)) || (failed_raised)) || (clear_raised)) || (unlock_raised)) || (turn_raised)) || (timeEvents[0])) || (timeEvents[1]));
 			isExecuting = false;
 		}
 

@@ -502,19 +502,10 @@ void MainWindow::on_actionTurnSwitchLeft_triggered()
 	{
 		Q_UNUSED(position);
 
-		RegularSwitchControllerProxy * rs_ctrl =
-			dynamic_cast<RegularSwitchControllerProxy *>(controller);
-		DoubleCrossSwitchControllerProxy * dcs_ctrl =
-			dynamic_cast<DoubleCrossSwitchControllerProxy *>(controller);
-
-		if (rs_ctrl != nullptr)
-		{
-			rs_ctrl->turnLeft();
-		}
-		if (dcs_ctrl != nullptr)
-		{
-			dcs_ctrl->turnLeft();
-		}
+		callback<RegularSwitchControllerProxy>(
+			controller,     &RegularSwitchControllerProxy::turnLeft);
+		callback<DoubleCrossSwitchControllerProxy>(
+			controller, &DoubleCrossSwitchControllerProxy::turnLeft);
 	});
 	on_clearAllSections_clicked();
 }
@@ -525,19 +516,10 @@ void MainWindow::on_actionTurnSwitch_triggered()
 	{
 		Q_UNUSED(position);
 
-		RegularSwitchControllerProxy * rs_ctrl =
-			dynamic_cast<RegularSwitchControllerProxy *>(controller);
-		DoubleCrossSwitchControllerProxy * dcs_ctrl =
-			dynamic_cast<DoubleCrossSwitchControllerProxy *>(controller);
-
-		if (rs_ctrl != nullptr)
-		{
-			rs_ctrl->change();
-		}
-		if (dcs_ctrl != nullptr)
-		{
-			dcs_ctrl->change();
-		}
+		callback<RegularSwitchControllerProxy>(
+			controller,     &RegularSwitchControllerProxy::change);
+		callback<DoubleCrossSwitchControllerProxy>(
+			controller, &DoubleCrossSwitchControllerProxy::change);
 	});
 	on_clearAllSections_clicked();
 }
@@ -548,21 +530,46 @@ void MainWindow::on_actionTurnSwitchRight_triggered()
 	{
 		Q_UNUSED(position);
 
-		RegularSwitchControllerProxy * rs_ctrl =
-			dynamic_cast<RegularSwitchControllerProxy *>(controller);
-		DoubleCrossSwitchControllerProxy * dcs_ctrl =
-			dynamic_cast<DoubleCrossSwitchControllerProxy *>(controller);
-
-		if (rs_ctrl != nullptr)
-		{
-			rs_ctrl->turnRight();
-		}
-		if (dcs_ctrl != nullptr)
-		{
-			dcs_ctrl->turnRight();
-		}
+		callback<RegularSwitchControllerProxy>(
+			controller,     &RegularSwitchControllerProxy::turnRight);
+		callback<DoubleCrossSwitchControllerProxy>(
+			controller, &DoubleCrossSwitchControllerProxy::turnRight);
 	});
 	on_clearAllSections_clicked();
+}
+
+void MainWindow::on_actionLock_triggered()
+{
+	traverse([](BaseController * controller, Position * position)
+	{
+		Q_UNUSED(position);
+
+		callback<SectionController>(
+			controller,                &SectionController::failed);
+		callback<RegularSwitchControllerProxy>(
+			controller,     &RegularSwitchControllerProxy::failed);
+		callback<DoubleCrossSwitchControllerProxy>(
+			controller, &DoubleCrossSwitchControllerProxy::failed);
+	});
+	on_clearAllSections_clicked();
+	ui->regionTabWidget->currentWidget()->update();
+}
+
+void MainWindow::on_actionUnlock_triggered()
+{
+	traverse([](BaseController * controller, Position * position)
+	{
+		Q_UNUSED(position);
+
+		callback<SectionController>(
+			controller,                &SectionController::clear);
+		callback<RegularSwitchControllerProxy>(
+			controller,     &RegularSwitchControllerProxy::clear);
+		callback<DoubleCrossSwitchControllerProxy>(
+			controller, &DoubleCrossSwitchControllerProxy::clear);
+	});
+	on_clearAllSections_clicked();
+	ui->regionTabWidget->currentWidget()->update();
 }
 
 void MainWindow::onOperate(const bool active)

@@ -68,6 +68,8 @@ private slots:
 	void on_actionTurnSwitchLeft_triggered();
 	void on_actionTurnSwitch_triggered();
 	void on_actionTurnSwitchRight_triggered();
+	void on_actionLock_triggered();
+	void on_actionUnlock_triggered();
 
 	void onOperate(const bool active);
 	void onEdit(const bool active);
@@ -106,6 +108,18 @@ private:
 		}
 		);
 		return count;
+	}
+
+	template <class CTRL> static void callback(
+		mrw::ctrl::BaseController * base,
+		std::function<void(CTRL *)> function)
+	{
+		CTRL * controller = dynamic_cast<CTRL *>(base);
+
+		if (controller != nullptr)
+		{
+			function(controller);
+		}
 	}
 
 	virtual void reset() override;
