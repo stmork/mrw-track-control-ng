@@ -28,6 +28,7 @@ private:
 
 	mrw::statechart::RouteStatechart   statechart;
 	std::vector<mrw::model::Signal *>  main_signals;
+	mrw::model::Section        *       last = nullptr;
 
 public:
 	static const int        USER_ROLE = Qt::UserRole + 1;
@@ -41,9 +42,11 @@ public:
 
 	operator QListWidgetItem * ();
 
-	void turn();
-
 	virtual void prepare() override;
+
+signals:
+	void turn();
+	void finished();
 
 public slots:
 	void left();

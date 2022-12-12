@@ -75,6 +75,8 @@ private slots:
 	void onEdit(const bool active);
 	void onFailed();
 
+	void routeFinished();
+
 private:
 	typedef std::function<void(
 		mrw::ctrl::BaseController *,

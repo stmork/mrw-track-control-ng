@@ -50,34 +50,36 @@ namespace mrw
 			enum class State
 			{
 				NO_STATE,
-				main_region_Switch_Turning,
-				main_region_Section_Activation,
-				main_region_Signal_Turning,
 				main_region_Active,
 				main_region_Disable,
-				main_region_Start
+				main_region_Start,
+				main_region__final_,
+				main_region_Turning,
+				main_region_Turning_Turning_process_Switch_Turning,
+				main_region_Turning_Turning_process_Signal_Turning,
+				main_region_Turning_Turning_process_Section_Activation
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 6;
-			static const sc::integer scvi_main_region_Switch_Turning = 0;
-			static const sc::integer scvi_main_region_Section_Activation = 0;
-			static const sc::integer scvi_main_region_Signal_Turning = 0;
+			static const sc::integer numStates = 8;
 			static const sc::integer scvi_main_region_Active = 0;
 			static const sc::integer scvi_main_region_Disable = 0;
 			static const sc::integer scvi_main_region_Start = 0;
+			static const sc::integer scvi_main_region__final_ = 0;
+			static const sc::integer scvi_main_region_Turning = 0;
+			static const sc::integer scvi_main_region_Turning_Turning_process_Switch_Turning = 0;
+			static const sc::integer scvi_main_region_Turning_Turning_process_Signal_Turning = 0;
+			static const sc::integer scvi_main_region_Turning_Turning_process_Section_Activation = 0;
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
 			{
 				NO_EVENT,
-				turned,
+				completed,
 				failed,
 				disable,
 				extended,
-				_te0_main_region_Switch_Turning_,
-				_te1_main_region_Section_Activation_,
-				_te2_main_region_Signal_Turning_
+				_te0_main_region_Turning_
 			};
 
 			class EventInstance
@@ -165,15 +167,15 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 3;
+			static const sc::integer timeEventsCount = 1;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
 
 
 		public slots:
-			/*! Slot for the in event 'turned' that is defined in the default interface scope. */
-			void turned();
+			/*! Slot for the in event 'completed' that is defined in the default interface scope. */
+			void completed();
 
 			/*! Slot for the in event 'failed' that is defined in the default interface scope. */
 			void failed();
@@ -183,6 +185,11 @@ namespace mrw
 
 			/*! Slot for the in event 'extended' that is defined in the default interface scope. */
 			void extended();
+
+
+		signals:
+			/*! Signal representing the out event 'finished' that is defined in the default interface scope. */
+			void finished();
 
 
 		protected:
@@ -221,35 +228,40 @@ namespace mrw
 
 			// prototypes of all internal functions
 
-			void enact_main_region_Switch_Turning();
-			void enact_main_region_Section_Activation();
-			void enact_main_region_Signal_Turning();
 			void enact_main_region_Disable();
-			void exact_main_region_Switch_Turning();
-			void exact_main_region_Section_Activation();
-			void exact_main_region_Signal_Turning();
-			void enseq_main_region_Switch_Turning_default();
-			void enseq_main_region_Section_Activation_default();
-			void enseq_main_region_Signal_Turning_default();
+			void enact_main_region_Turning();
+			void enact_main_region_Turning_Turning_process_Switch_Turning();
+			void enact_main_region_Turning_Turning_process_Signal_Turning();
+			void enact_main_region_Turning_Turning_process_Section_Activation();
+			void exact_main_region_Turning();
 			void enseq_main_region_Active_default();
 			void enseq_main_region_Disable_default();
 			void enseq_main_region_Start_default();
+			void enseq_main_region__final__default();
+			void enseq_main_region_Turning_Turning_process_Switch_Turning_default();
+			void enseq_main_region_Turning_Turning_process_Signal_Turning_default();
+			void enseq_main_region_Turning_Turning_process_Section_Activation_default();
 			void enseq_main_region_default();
-			void exseq_main_region_Switch_Turning();
-			void exseq_main_region_Section_Activation();
-			void exseq_main_region_Signal_Turning();
 			void exseq_main_region_Active();
 			void exseq_main_region_Disable();
 			void exseq_main_region_Start();
+			void exseq_main_region__final_();
+			void exseq_main_region_Turning();
+			void exseq_main_region_Turning_Turning_process_Switch_Turning();
+			void exseq_main_region_Turning_Turning_process_Signal_Turning();
+			void exseq_main_region_Turning_Turning_process_Section_Activation();
 			void exseq_main_region();
+			void exseq_main_region_Turning_Turning_process();
 			void react_main_region__entry_Default();
 			sc::integer react(const sc::integer transitioned_before);
-			sc::integer main_region_Switch_Turning_react(const sc::integer transitioned_before);
-			sc::integer main_region_Section_Activation_react(const sc::integer transitioned_before);
-			sc::integer main_region_Signal_Turning_react(const sc::integer transitioned_before);
 			sc::integer main_region_Active_react(const sc::integer transitioned_before);
 			sc::integer main_region_Disable_react(const sc::integer transitioned_before);
 			sc::integer main_region_Start_react(const sc::integer transitioned_before);
+			sc::integer main_region__final__react(const sc::integer transitioned_before);
+			sc::integer main_region_Turning_react(const sc::integer transitioned_before);
+			sc::integer main_region_Turning_Turning_process_Switch_Turning_react(const sc::integer transitioned_before);
+			sc::integer main_region_Turning_Turning_process_Signal_Turning_react(const sc::integer transitioned_before);
+			sc::integer main_region_Turning_Turning_process_Section_Activation_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
 			void runCycle();
@@ -257,8 +269,8 @@ namespace mrw
 
 
 
-			/*! Indicates event 'turned' of default interface scope is active. */
-			bool turned_raised;
+			/*! Indicates event 'completed' of default interface scope is active. */
+			bool completed_raised;
 
 			/*! Indicates event 'failed' of default interface scope is active. */
 			bool failed_raised;

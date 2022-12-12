@@ -32,7 +32,15 @@ WidgetRoute::WidgetRoute(
 
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::completed,
-		&statechart, &RouteStatechart::turned,
+		&statechart, &RouteStatechart::completed,
+		Qt::QueuedConnection);
+	connect(
+		this, &WidgetRoute::turn,
+		&statechart, &RouteStatechart::extended,
+		Qt::QueuedConnection);
+	connect(
+		&statechart, &RouteStatechart::finished,
+		this, &WidgetRoute::finished,
 		Qt::QueuedConnection);
 
 	statechart.setTimerService(&TimerService::instance());
@@ -44,11 +52,6 @@ WidgetRoute::~WidgetRoute()
 {
 	statechart.disable();
 	statechart.exit();
-}
-
-void WidgetRoute::turn()
-{
-	QMetaObject::invokeMethod(&statechart, &RouteStatechart::extended, Qt::QueuedConnection);
 }
 
 void WidgetRoute::prepare()
@@ -79,7 +82,16 @@ void WidgetRoute::left()
 {
 	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
 
+	sections.remove(controller->section());
+
 	qDebug().noquote() << "Left:" << *controller;
+	qDebug().noquote() << "Left:" << sections.size();
+
+	if ((sections.size() == 1) && (sections.back() == last))
+	{
+		qDebug().noquote() << "Left: FINITO!";
+		emit finished();
+	}
 }
 
 void WidgetRoute::collectSignals()
@@ -182,7 +194,15 @@ void WidgetRoute::activateSections()
 		SectionController * controller =
 			ControllerRegistry::instance().find<SectionController>(*it);
 
-		controller->enable((it != sections.rbegin()) || last_on);
+		if (it == sections.rbegin())
+		{
+			controller->enable(last_on);
+			last = last_on ? nullptr : controller->section();
+		}
+		else
+		{
+			controller->enable(true);
+		}
 		count++;
 	}
 

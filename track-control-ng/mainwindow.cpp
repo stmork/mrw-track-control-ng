@@ -601,6 +601,21 @@ void MainWindow::onFailed()
 	ControllerRegistry::instance().dump();
 }
 
+void MainWindow::routeFinished()
+{
+	__METHOD__;
+
+	WidgetRoute   *   route = dynamic_cast<WidgetRoute *>(QObject::sender());
+	QListWidgetItem * item  = *route;
+	const int         row   = ui->routeListWidget->row(item);
+
+	ui->routeListWidget->takeItem(row);
+
+	delete route;
+	enable();
+	ui->regionTabWidget->currentWidget()->update();
+}
+
 void MainWindow::reset()
 {
 	__METHOD__;
@@ -629,6 +644,11 @@ Route * MainWindow::create(const bool direction, SectionState state)
 	ui->routeListWidget->addItem(*route);
 	ui->regionTabWidget->currentWidget()->update();
 	on_clearAllSections_clicked();
+
+	connect(
+		route, &WidgetRoute::finished,
+		this,  &MainWindow::routeFinished,
+		Qt::QueuedConnection);
 
 	route->turn();
 

@@ -24,7 +24,7 @@ namespace mrw
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
-			turned_raised(false),
+			completed_raised(false),
 			failed_raised(false),
 			disable_raised(false),
 			extended_raised(false)
@@ -67,9 +67,9 @@ namespace mrw
 
 			switch (event->eventId)
 			{
-			case mrw::statechart::RouteStatechart::Event::turned:
+			case mrw::statechart::RouteStatechart::Event::completed:
 				{
-					turned_raised = true;
+					completed_raised = true;
 					break;
 				}
 			case mrw::statechart::RouteStatechart::Event::failed:
@@ -89,11 +89,9 @@ namespace mrw
 				}
 
 
-			case mrw::statechart::RouteStatechart::Event::_te0_main_region_Switch_Turning_:
-			case mrw::statechart::RouteStatechart::Event::_te1_main_region_Section_Activation_:
-			case mrw::statechart::RouteStatechart::Event::_te2_main_region_Signal_Turning_:
+			case mrw::statechart::RouteStatechart::Event::_te0_main_region_Turning_:
 				{
-					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::RouteStatechart::Event::_te0_main_region_Switch_Turning_)] = true;
+					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::RouteStatechart::Event::_te0_main_region_Turning_)] = true;
 					break;
 				}
 			default:
@@ -104,9 +102,9 @@ namespace mrw
 		}
 
 
-		void mrw::statechart::RouteStatechart::turned()
+		void mrw::statechart::RouteStatechart::completed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::turned));
+			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::completed));
 			runCycle();
 		}
 
@@ -138,12 +136,9 @@ namespace mrw
 			return stateConfVector[0] != mrw::statechart::RouteStatechart::State::NO_STATE;
 		}
 
-		/*
-		 * Always returns 'false' since this state machine can never become final.
-		 */
 		bool RouteStatechart::isFinal() const
 		{
-			return false;
+			return (stateConfVector[0] == mrw::statechart::RouteStatechart::State::main_region__final_);
 		}
 
 		bool RouteStatechart::check() const
@@ -179,7 +174,7 @@ namespace mrw
 		{
 			if (evid < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::RouteStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::RouteStatechart::Event::_te0_main_region_Switch_Turning_))));
+				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::RouteStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::RouteStatechart::Event::_te0_main_region_Turning_))));
 				runCycle();
 			}
 		}
@@ -189,21 +184,6 @@ namespace mrw
 		{
 			switch (state)
 			{
-			case mrw::statechart::RouteStatechart::State::main_region_Switch_Turning :
-				{
-					return  (stateConfVector[scvi_main_region_Switch_Turning] == mrw::statechart::RouteStatechart::State::main_region_Switch_Turning);
-					break;
-				}
-			case mrw::statechart::RouteStatechart::State::main_region_Section_Activation :
-				{
-					return  (stateConfVector[scvi_main_region_Section_Activation] == mrw::statechart::RouteStatechart::State::main_region_Section_Activation);
-					break;
-				}
-			case mrw::statechart::RouteStatechart::State::main_region_Signal_Turning :
-				{
-					return  (stateConfVector[scvi_main_region_Signal_Turning] == mrw::statechart::RouteStatechart::State::main_region_Signal_Turning);
-					break;
-				}
 			case mrw::statechart::RouteStatechart::State::main_region_Active :
 				{
 					return  (stateConfVector[scvi_main_region_Active] == mrw::statechart::RouteStatechart::State::main_region_Active);
@@ -217,6 +197,31 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::State::main_region_Start :
 				{
 					return  (stateConfVector[scvi_main_region_Start] == mrw::statechart::RouteStatechart::State::main_region_Start);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region__final_ :
+				{
+					return  (stateConfVector[scvi_main_region__final_] == mrw::statechart::RouteStatechart::State::main_region__final_);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning :
+				{
+					return  (stateConfVector[scvi_main_region_Turning] >= mrw::statechart::RouteStatechart::State::main_region_Turning && stateConfVector[scvi_main_region_Turning] <= mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning :
+				{
+					return  (stateConfVector[scvi_main_region_Turning_Turning_process_Switch_Turning] == mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Turning :
+				{
+					return  (stateConfVector[scvi_main_region_Turning_Turning_process_Signal_Turning] == mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Turning);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation :
+				{
+					return  (stateConfVector[scvi_main_region_Turning_Turning_process_Section_Activation] == mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation);
 					break;
 				}
 			default:
@@ -244,33 +249,6 @@ namespace mrw
 		}
 
 // implementations of all internal functions
-		/* Entry action for state 'Switch Turning'. */
-		void RouteStatechart::enact_main_region_Switch_Turning()
-		{
-			/* Entry action for state 'Switch Turning'. */
-			timerService->setTimer(this, 0, timeout, false);
-			ifaceOperationCallback->reset();
-			ifaceOperationCallback->turnSwitches();
-		}
-
-		/* Entry action for state 'Section Activation'. */
-		void RouteStatechart::enact_main_region_Section_Activation()
-		{
-			/* Entry action for state 'Section Activation'. */
-			timerService->setTimer(this, 1, timeout, false);
-			ifaceOperationCallback->reset();
-			ifaceOperationCallback->activateSections();
-		}
-
-		/* Entry action for state 'Signal Turning'. */
-		void RouteStatechart::enact_main_region_Signal_Turning()
-		{
-			/* Entry action for state 'Signal Turning'. */
-			timerService->setTimer(this, 2, timeout, false);
-			ifaceOperationCallback->reset();
-			ifaceOperationCallback->turnSignals();
-		}
-
 		/* Entry action for state 'Disable'. */
 		void RouteStatechart::enact_main_region_Disable()
 		{
@@ -281,49 +259,42 @@ namespace mrw
 			ifaceOperationCallback->deactivateSections();
 		}
 
-		/* Exit action for state 'Switch Turning'. */
-		void RouteStatechart::exact_main_region_Switch_Turning()
+		/* Entry action for state 'Turning'. */
+		void RouteStatechart::enact_main_region_Turning()
 		{
-			/* Exit action for state 'Switch Turning'. */
+			/* Entry action for state 'Turning'. */
+			timerService->setTimer(this, 0, timeout, false);
+		}
+
+		/* Entry action for state 'Switch Turning'. */
+		void RouteStatechart::enact_main_region_Turning_Turning_process_Switch_Turning()
+		{
+			/* Entry action for state 'Switch Turning'. */
+			ifaceOperationCallback->reset();
+			ifaceOperationCallback->turnSwitches();
+		}
+
+		/* Entry action for state 'Signal Turning'. */
+		void RouteStatechart::enact_main_region_Turning_Turning_process_Signal_Turning()
+		{
+			/* Entry action for state 'Signal Turning'. */
+			ifaceOperationCallback->reset();
+			ifaceOperationCallback->turnSignals();
+		}
+
+		/* Entry action for state 'Section Activation'. */
+		void RouteStatechart::enact_main_region_Turning_Turning_process_Section_Activation()
+		{
+			/* Entry action for state 'Section Activation'. */
+			ifaceOperationCallback->reset();
+			ifaceOperationCallback->activateSections();
+		}
+
+		/* Exit action for state 'Turning'. */
+		void RouteStatechart::exact_main_region_Turning()
+		{
+			/* Exit action for state 'Turning'. */
 			timerService->unsetTimer(this, 0);
-		}
-
-		/* Exit action for state 'Section Activation'. */
-		void RouteStatechart::exact_main_region_Section_Activation()
-		{
-			/* Exit action for state 'Section Activation'. */
-			timerService->unsetTimer(this, 1);
-		}
-
-		/* Exit action for state 'Signal Turning'. */
-		void RouteStatechart::exact_main_region_Signal_Turning()
-		{
-			/* Exit action for state 'Signal Turning'. */
-			timerService->unsetTimer(this, 2);
-		}
-
-		/* 'default' enter sequence for state Switch Turning */
-		void RouteStatechart::enseq_main_region_Switch_Turning_default()
-		{
-			/* 'default' enter sequence for state Switch Turning */
-			enact_main_region_Switch_Turning();
-			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Switch_Turning;
-		}
-
-		/* 'default' enter sequence for state Section Activation */
-		void RouteStatechart::enseq_main_region_Section_Activation_default()
-		{
-			/* 'default' enter sequence for state Section Activation */
-			enact_main_region_Section_Activation();
-			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Section_Activation;
-		}
-
-		/* 'default' enter sequence for state Signal Turning */
-		void RouteStatechart::enseq_main_region_Signal_Turning_default()
-		{
-			/* 'default' enter sequence for state Signal Turning */
-			enact_main_region_Signal_Turning();
-			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Signal_Turning;
 		}
 
 		/* 'default' enter sequence for state Active */
@@ -348,35 +319,42 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Start;
 		}
 
+		/* Default enter sequence for final state */
+		void RouteStatechart::enseq_main_region__final__default()
+		{
+			/* Default enter sequence for final state */
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region__final_;
+		}
+
+		/* 'default' enter sequence for state Switch Turning */
+		void RouteStatechart::enseq_main_region_Turning_Turning_process_Switch_Turning_default()
+		{
+			/* 'default' enter sequence for state Switch Turning */
+			enact_main_region_Turning_Turning_process_Switch_Turning();
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning;
+		}
+
+		/* 'default' enter sequence for state Signal Turning */
+		void RouteStatechart::enseq_main_region_Turning_Turning_process_Signal_Turning_default()
+		{
+			/* 'default' enter sequence for state Signal Turning */
+			enact_main_region_Turning_Turning_process_Signal_Turning();
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Turning;
+		}
+
+		/* 'default' enter sequence for state Section Activation */
+		void RouteStatechart::enseq_main_region_Turning_Turning_process_Section_Activation_default()
+		{
+			/* 'default' enter sequence for state Section Activation */
+			enact_main_region_Turning_Turning_process_Section_Activation();
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation;
+		}
+
 		/* 'default' enter sequence for region main region */
 		void RouteStatechart::enseq_main_region_default()
 		{
 			/* 'default' enter sequence for region main region */
 			react_main_region__entry_Default();
-		}
-
-		/* Default exit sequence for state Switch Turning */
-		void RouteStatechart::exseq_main_region_Switch_Turning()
-		{
-			/* Default exit sequence for state Switch Turning */
-			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
-			exact_main_region_Switch_Turning();
-		}
-
-		/* Default exit sequence for state Section Activation */
-		void RouteStatechart::exseq_main_region_Section_Activation()
-		{
-			/* Default exit sequence for state Section Activation */
-			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
-			exact_main_region_Section_Activation();
-		}
-
-		/* Default exit sequence for state Signal Turning */
-		void RouteStatechart::exseq_main_region_Signal_Turning()
-		{
-			/* Default exit sequence for state Signal Turning */
-			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
-			exact_main_region_Signal_Turning();
 		}
 
 		/* Default exit sequence for state Active */
@@ -400,6 +378,42 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
 		}
 
+		/* Default exit sequence for final state. */
+		void RouteStatechart::exseq_main_region__final_()
+		{
+			/* Default exit sequence for final state. */
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
+		}
+
+		/* Default exit sequence for state Turning */
+		void RouteStatechart::exseq_main_region_Turning()
+		{
+			/* Default exit sequence for state Turning */
+			exseq_main_region_Turning_Turning_process();
+			exact_main_region_Turning();
+		}
+
+		/* Default exit sequence for state Switch Turning */
+		void RouteStatechart::exseq_main_region_Turning_Turning_process_Switch_Turning()
+		{
+			/* Default exit sequence for state Switch Turning */
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
+		}
+
+		/* Default exit sequence for state Signal Turning */
+		void RouteStatechart::exseq_main_region_Turning_Turning_process_Signal_Turning()
+		{
+			/* Default exit sequence for state Signal Turning */
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
+		}
+
+		/* Default exit sequence for state Section Activation */
+		void RouteStatechart::exseq_main_region_Turning_Turning_process_Section_Activation()
+		{
+			/* Default exit sequence for state Section Activation */
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
+		}
+
 		/* Default exit sequence for region main region */
 		void RouteStatechart::exseq_main_region()
 		{
@@ -407,21 +421,6 @@ namespace mrw
 			/* Handle exit of all possible states (of mrw.statechart.RouteStatechart.main_region) at position 0... */
 			switch (stateConfVector[ 0 ])
 			{
-			case mrw::statechart::RouteStatechart::State::main_region_Switch_Turning :
-				{
-					exseq_main_region_Switch_Turning();
-					break;
-				}
-			case mrw::statechart::RouteStatechart::State::main_region_Section_Activation :
-				{
-					exseq_main_region_Section_Activation();
-					break;
-				}
-			case mrw::statechart::RouteStatechart::State::main_region_Signal_Turning :
-				{
-					exseq_main_region_Signal_Turning();
-					break;
-				}
 			case mrw::statechart::RouteStatechart::State::main_region_Active :
 				{
 					exseq_main_region_Active();
@@ -435,6 +434,57 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::State::main_region_Start :
 				{
 					exseq_main_region_Start();
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region__final_ :
+				{
+					exseq_main_region__final_();
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning :
+				{
+					exseq_main_region_Turning_Turning_process_Switch_Turning();
+					exact_main_region_Turning();
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Turning :
+				{
+					exseq_main_region_Turning_Turning_process_Signal_Turning();
+					exact_main_region_Turning();
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation :
+				{
+					exseq_main_region_Turning_Turning_process_Section_Activation();
+					exact_main_region_Turning();
+					break;
+				}
+			default:
+				/* do nothing */
+				break;
+			}
+		}
+
+		/* Default exit sequence for region Turning process */
+		void RouteStatechart::exseq_main_region_Turning_Turning_process()
+		{
+			/* Default exit sequence for region Turning process */
+			/* Handle exit of all possible states (of mrw.statechart.RouteStatechart.main_region.Turning.Turning_process) at position 0... */
+			switch (stateConfVector[ 0 ])
+			{
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning :
+				{
+					exseq_main_region_Turning_Turning_process_Switch_Turning();
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Turning :
+				{
+					exseq_main_region_Turning_Turning_process_Signal_Turning();
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation :
+				{
+					exseq_main_region_Turning_Turning_process_Section_Activation();
 					break;
 				}
 			default:
@@ -456,105 +506,6 @@ namespace mrw
 			return transitioned_before;
 		}
 
-		sc::integer RouteStatechart::main_region_Switch_Turning_react(const sc::integer transitioned_before)
-		{
-			/* The reactions of state Switch Turning. */
-			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-				if (turned_raised)
-				{
-					exseq_main_region_Switch_Turning();
-					enseq_main_region_Signal_Turning_default();
-					react(0);
-					transitioned_after = 0;
-				}
-				else
-				{
-					if (timeEvents[0])
-					{
-						exseq_main_region_Switch_Turning();
-						timeEvents[0] = false;
-						enseq_main_region_Disable_default();
-						react(0);
-						transitioned_after = 0;
-					}
-				}
-			}
-			/* If no transition was taken then execute local reactions */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				transitioned_after = react(transitioned_before);
-			}
-			return transitioned_after;
-		}
-
-		sc::integer RouteStatechart::main_region_Section_Activation_react(const sc::integer transitioned_before)
-		{
-			/* The reactions of state Section Activation. */
-			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-				if (turned_raised)
-				{
-					exseq_main_region_Section_Activation();
-					enseq_main_region_Active_default();
-					react(0);
-					transitioned_after = 0;
-				}
-				else
-				{
-					if (timeEvents[1])
-					{
-						exseq_main_region_Section_Activation();
-						timeEvents[1] = false;
-						enseq_main_region_Disable_default();
-						react(0);
-						transitioned_after = 0;
-					}
-				}
-			}
-			/* If no transition was taken then execute local reactions */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				transitioned_after = react(transitioned_before);
-			}
-			return transitioned_after;
-		}
-
-		sc::integer RouteStatechart::main_region_Signal_Turning_react(const sc::integer transitioned_before)
-		{
-			/* The reactions of state Signal Turning. */
-			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-				if (turned_raised)
-				{
-					exseq_main_region_Signal_Turning();
-					enseq_main_region_Section_Activation_default();
-					react(0);
-					transitioned_after = 0;
-				}
-				else
-				{
-					if (timeEvents[2])
-					{
-						exseq_main_region_Signal_Turning();
-						timeEvents[2] = false;
-						enseq_main_region_Disable_default();
-						react(0);
-						transitioned_after = 0;
-					}
-				}
-			}
-			/* If no transition was taken then execute local reactions */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				transitioned_after = react(transitioned_before);
-			}
-			return transitioned_after;
-		}
-
 		sc::integer RouteStatechart::main_region_Active_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Active. */
@@ -573,7 +524,8 @@ namespace mrw
 					if (extended_raised)
 					{
 						exseq_main_region_Active();
-						enseq_main_region_Switch_Turning_default();
+						enact_main_region_Turning();
+						enseq_main_region_Turning_Turning_process_Switch_Turning_default();
 						react(0);
 						transitioned_after = 0;
 					}
@@ -593,6 +545,13 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
+				if (completed_raised)
+				{
+					exseq_main_region_Disable();
+					emit finished();
+					enseq_main_region__final__default();
+					transitioned_after = 0;
+				}
 			}
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
@@ -611,7 +570,8 @@ namespace mrw
 				if (extended_raised)
 				{
 					exseq_main_region_Start();
-					enseq_main_region_Switch_Turning_default();
+					enact_main_region_Turning();
+					enseq_main_region_Turning_Turning_process_Switch_Turning_default();
 					react(0);
 					transitioned_after = 0;
 				}
@@ -624,36 +584,123 @@ namespace mrw
 			return transitioned_after;
 		}
 
+		sc::integer RouteStatechart::main_region__final__react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state null. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer RouteStatechart::main_region_Turning_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Turning. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (timeEvents[0])
+				{
+					exseq_main_region_Turning();
+					timeEvents[0] = false;
+					enseq_main_region_Disable_default();
+					react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer RouteStatechart::main_region_Turning_Turning_process_Switch_Turning_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Switch Turning. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (completed_raised)
+				{
+					exseq_main_region_Turning_Turning_process_Switch_Turning();
+					enseq_main_region_Turning_Turning_process_Signal_Turning_default();
+					main_region_Turning_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Turning_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer RouteStatechart::main_region_Turning_Turning_process_Signal_Turning_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Signal Turning. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (completed_raised)
+				{
+					exseq_main_region_Turning_Turning_process_Signal_Turning();
+					enseq_main_region_Turning_Turning_process_Section_Activation_default();
+					main_region_Turning_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Turning_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer RouteStatechart::main_region_Turning_Turning_process_Section_Activation_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Section Activation. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (completed_raised)
+				{
+					exseq_main_region_Turning();
+					enseq_main_region_Active_default();
+					react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Turning_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
 		void RouteStatechart::clearInEvents()
 		{
-			turned_raised = false;
+			completed_raised = false;
 			failed_raised = false;
 			disable_raised = false;
 			extended_raised = false;
 			timeEvents[0] = false;
-			timeEvents[1] = false;
-			timeEvents[2] = false;
 		}
 
 		void RouteStatechart::microStep()
 		{
 			switch (stateConfVector[ 0 ])
 			{
-			case mrw::statechart::RouteStatechart::State::main_region_Switch_Turning :
-				{
-					main_region_Switch_Turning_react(-1);
-					break;
-				}
-			case mrw::statechart::RouteStatechart::State::main_region_Section_Activation :
-				{
-					main_region_Section_Activation_react(-1);
-					break;
-				}
-			case mrw::statechart::RouteStatechart::State::main_region_Signal_Turning :
-				{
-					main_region_Signal_Turning_react(-1);
-					break;
-				}
 			case mrw::statechart::RouteStatechart::State::main_region_Active :
 				{
 					main_region_Active_react(-1);
@@ -667,6 +714,26 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::State::main_region_Start :
 				{
 					main_region_Start_react(-1);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region__final_ :
+				{
+					main_region__final__react(-1);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning :
+				{
+					main_region_Turning_Turning_process_Switch_Turning_react(-1);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Turning :
+				{
+					main_region_Turning_Turning_process_Signal_Turning_react(-1);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation :
+				{
+					main_region_Turning_Turning_process_Section_Activation_react(-1);
 					break;
 				}
 			default:
@@ -690,7 +757,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((turned_raised) || (failed_raised)) || (disable_raised)) || (extended_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
+			while (((((completed_raised) || (failed_raised)) || (disable_raised)) || (extended_raised)) || (timeEvents[0]));
 			isExecuting = false;
 		}
 
