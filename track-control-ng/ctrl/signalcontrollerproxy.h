@@ -51,6 +51,8 @@ namespace mrw::ctrl
 	signals:
 		void enable();
 		void disable();
+		void failed();
+		void clear();
 
 	private:
 		void add(mrw::model::Signal * signal);

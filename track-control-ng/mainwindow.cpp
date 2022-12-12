@@ -6,12 +6,12 @@
 #include <util/method.h>
 #include <statecharts/timerservice.h>
 #include <model/modelrailway.h>
+#include <ctrl/controllerregistry.h>
 #include <ctrl/basecontroller.h>
+#include <ctrl/railcontroller.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
-#include <ctrl/railcontroller.h>
-#include <ctrl/signalcontroller.h>
-#include <ctrl/controllerregistry.h>
+#include <ctrl/signalcontrollerproxy.h>
 #include <ui/controllerwidget.h>
 
 #include "mainwindow.h"
@@ -550,6 +550,8 @@ void MainWindow::on_actionLock_triggered()
 			controller,     &RegularSwitchControllerProxy::failed);
 		BaseController::callback<DoubleCrossSwitchControllerProxy>(
 			controller, &DoubleCrossSwitchControllerProxy::failed);
+		BaseController::callback<SignalControllerProxy>(
+			controller,            &SignalControllerProxy::failed);
 	});
 	on_clearAllSections_clicked();
 	ui->regionTabWidget->currentWidget()->update();
@@ -567,6 +569,8 @@ void MainWindow::on_actionUnlock_triggered()
 			controller,     &RegularSwitchControllerProxy::clear);
 		BaseController::callback<DoubleCrossSwitchControllerProxy>(
 			controller, &DoubleCrossSwitchControllerProxy::clear);
+		BaseController::callback<SignalControllerProxy>(
+			controller,            &SignalControllerProxy::clear);
 	});
 	on_clearAllSections_clicked();
 	ui->regionTabWidget->currentWidget()->update();
