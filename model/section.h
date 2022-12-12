@@ -193,6 +193,8 @@ namespace mrw::model
 			return name();
 		}
 
+		bool anyReserved() const;
+
 	private:
 		void            add(AssemblyPart * rail_part);
 		void            link();

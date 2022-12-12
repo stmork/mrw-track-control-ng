@@ -220,6 +220,17 @@ void Section::free()
 	setState(FREE);
 }
 
+bool Section::anyReserved() const
+{
+	std::vector<RailPart *> rails;
+
+	parts<RailPart>(rails, [](const RailPart * part)
+	{
+		return part->reserved();
+	});
+	return rails.size() > 0;
+}
+
 SectionModule * Section::resolve(const std::string & path)
 {
 	std::smatch matcher;
