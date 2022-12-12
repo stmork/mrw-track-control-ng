@@ -178,6 +178,7 @@ void SectionController::request()
 void SectionController::passed()
 {
 	section()->setState(SectionState::PASSED);
+	emit update();
 }
 
 void SectionController::free()

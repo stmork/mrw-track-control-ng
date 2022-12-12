@@ -442,7 +442,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Left'. */
 			ifaceOperationCallback->off();
-			emit left();
 		}
 
 		/* Entry action for state 'Disabling'. */
@@ -1478,6 +1477,7 @@ namespace mrw
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting();
 					ifaceOperationCallback->dec();
+					emit left();
 					react_main_region_Operating_Processing_Locked_Route_active__choice_0();
 					transitioned_after = 0;
 				}
@@ -1549,6 +1549,16 @@ namespace mrw
 					enseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling_default();
 					main_region_Operating_Processing_Locked_react(0);
 					transitioned_after = 0;
+				}
+				else
+				{
+					if (disable_raised)
+					{
+						exseq_main_region_Operating_Processing_Locked();
+						enseq_main_region_Operating_Processing_Unlocked_default();
+						main_region_Operating_react(0);
+						transitioned_after = 0;
+					}
 				}
 			}
 			/* If no transition was taken then execute local reactions */
