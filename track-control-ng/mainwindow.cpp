@@ -502,9 +502,9 @@ void MainWindow::on_actionTurnSwitchLeft_triggered()
 	{
 		Q_UNUSED(position);
 
-		callback<RegularSwitchControllerProxy>(
+		BaseController::callback<RegularSwitchControllerProxy>(
 			controller,     &RegularSwitchControllerProxy::turnLeft);
-		callback<DoubleCrossSwitchControllerProxy>(
+		BaseController::callback<DoubleCrossSwitchControllerProxy>(
 			controller, &DoubleCrossSwitchControllerProxy::turnLeft);
 	});
 	on_clearAllSections_clicked();
@@ -516,9 +516,9 @@ void MainWindow::on_actionTurnSwitch_triggered()
 	{
 		Q_UNUSED(position);
 
-		callback<RegularSwitchControllerProxy>(
+		BaseController::callback<RegularSwitchControllerProxy>(
 			controller,     &RegularSwitchControllerProxy::change);
-		callback<DoubleCrossSwitchControllerProxy>(
+		BaseController::callback<DoubleCrossSwitchControllerProxy>(
 			controller, &DoubleCrossSwitchControllerProxy::change);
 	});
 	on_clearAllSections_clicked();
@@ -530,9 +530,9 @@ void MainWindow::on_actionTurnSwitchRight_triggered()
 	{
 		Q_UNUSED(position);
 
-		callback<RegularSwitchControllerProxy>(
+		BaseController::callback<RegularSwitchControllerProxy>(
 			controller,     &RegularSwitchControllerProxy::turnRight);
-		callback<DoubleCrossSwitchControllerProxy>(
+		BaseController::callback<DoubleCrossSwitchControllerProxy>(
 			controller, &DoubleCrossSwitchControllerProxy::turnRight);
 	});
 	on_clearAllSections_clicked();
@@ -544,11 +544,11 @@ void MainWindow::on_actionLock_triggered()
 	{
 		Q_UNUSED(position);
 
-		callback<SectionController>(
+		BaseController::callback<SectionController>(
 			controller,                &SectionController::failed);
-		callback<RegularSwitchControllerProxy>(
+		BaseController::callback<RegularSwitchControllerProxy>(
 			controller,     &RegularSwitchControllerProxy::failed);
-		callback<DoubleCrossSwitchControllerProxy>(
+		BaseController::callback<DoubleCrossSwitchControllerProxy>(
 			controller, &DoubleCrossSwitchControllerProxy::failed);
 	});
 	on_clearAllSections_clicked();
@@ -561,11 +561,11 @@ void MainWindow::on_actionUnlock_triggered()
 	{
 		Q_UNUSED(position);
 
-		callback<SectionController>(
+		BaseController::callback<SectionController>(
 			controller,                &SectionController::clear);
-		callback<RegularSwitchControllerProxy>(
+		BaseController::callback<RegularSwitchControllerProxy>(
 			controller,     &RegularSwitchControllerProxy::clear);
-		callback<DoubleCrossSwitchControllerProxy>(
+		BaseController::callback<DoubleCrossSwitchControllerProxy>(
 			controller, &DoubleCrossSwitchControllerProxy::clear);
 	});
 	on_clearAllSections_clicked();

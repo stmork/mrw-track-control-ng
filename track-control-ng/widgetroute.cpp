@@ -129,21 +129,17 @@ void WidgetRoute::turnSwitches()
 
 	for (RailPart * part : track)
 	{
-		Device * device = dynamic_cast<Device *>(part);
+		Device     *     device     = dynamic_cast<Device *>(part);
+		BaseController * controller =
+			ControllerRegistry::instance().find<BaseController>(device);
 
-		RegularSwitchControllerProxy   *   rs_ctrl  =
-			ControllerRegistry::instance().find<RegularSwitchControllerProxy>(device);
-		DoubleCrossSwitchControllerProxy * dcs_ctrl =
-			ControllerRegistry::instance().find<DoubleCrossSwitchControllerProxy>(device);
+		BaseController::callback<RegularSwitchControllerProxy>(
+			controller,     &RegularSwitchControllerProxy::turn);
+		BaseController::callback<DoubleCrossSwitchControllerProxy>(
+			controller, &DoubleCrossSwitchControllerProxy::turn);
 
-		if (rs_ctrl != nullptr)
+		if (controller != nullptr)
 		{
-			rs_ctrl->turn();
-			count++;
-		}
-		if (dcs_ctrl != nullptr)
-		{
-			dcs_ctrl->turn();
 			count++;
 		}
 	}
@@ -160,21 +156,14 @@ void WidgetRoute::unlockSwitches()
 
 	for (RailPart * part : track)
 	{
-		Device * device = dynamic_cast<Device *>(part);
+		Device     *     device     = dynamic_cast<Device *>(part);
+		BaseController * controller =
+			ControllerRegistry::instance().find<BaseController>(device);
 
-		RegularSwitchControllerProxy   *   rs_ctrl  =
-			ControllerRegistry::instance().find<RegularSwitchControllerProxy>(device);
-		DoubleCrossSwitchControllerProxy * dcs_ctrl =
-			ControllerRegistry::instance().find<DoubleCrossSwitchControllerProxy>(device);
-
-		if (rs_ctrl != nullptr)
-		{
-			rs_ctrl->unlock();
-		}
-		if (dcs_ctrl != nullptr)
-		{
-			dcs_ctrl->unlock();
-		}
+		BaseController::callback<RegularSwitchControllerProxy>(
+			controller,     &RegularSwitchControllerProxy::unlock);
+		BaseController::callback<DoubleCrossSwitchControllerProxy>(
+			controller, &DoubleCrossSwitchControllerProxy::unlock);
 	}
 }
 
@@ -190,7 +179,8 @@ void WidgetRoute::activateSections()
 		it != sections.rend();
 		++it)
 	{
-		SectionController * controller = ControllerRegistry::instance().find<SectionController>(*it);
+		SectionController * controller =
+			ControllerRegistry::instance().find<SectionController>(*it);
 
 		controller->enable((it != sections.rbegin()) || last_on);
 		count++;
@@ -208,7 +198,8 @@ void WidgetRoute::deactivateSections()
 
 	for (Section * section : sections)
 	{
-		SectionController * controller = ControllerRegistry::instance().find<SectionController>(section);
+		SectionController * controller =
+			ControllerRegistry::instance().find<SectionController>(section);
 
 		controller->disable();
 	}
@@ -223,7 +214,8 @@ void WidgetRoute::turnSignals()
 	collectSignals();
 	for (Signal * signal : main_signals)
 	{
-		SignalControllerProxy * controller = ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
+		SignalControllerProxy * controller =
+			ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
 
 		controller->enable();
 		count++;
@@ -242,7 +234,8 @@ void WidgetRoute::unlockSignals()
 	collectSignals();
 	for (Signal * signal : main_signals)
 	{
-		SignalControllerProxy * controller = ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
+		SignalControllerProxy * controller =
+			ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
 
 		controller->disable();
 	}

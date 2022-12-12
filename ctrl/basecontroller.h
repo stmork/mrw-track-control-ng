@@ -122,6 +122,18 @@ namespace mrw::ctrl
 		 */
 		virtual mrw::model::Position::Bending bending() const = 0;
 
+		template <class CTRL> static void callback(
+			BaseController       *      base,
+			std::function<void(CTRL *)> function)
+		{
+			CTRL * controller = dynamic_cast<CTRL *>(base);
+
+			if (controller != nullptr)
+			{
+				function(controller);
+			}
+		}
+
 	signals:
 		/**
 		 * This signal causes the refresh of the paired widget class.

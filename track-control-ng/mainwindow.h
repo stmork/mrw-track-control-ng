@@ -110,18 +110,6 @@ private:
 		return count;
 	}
 
-	template <class CTRL> static void callback(
-		mrw::ctrl::BaseController * base,
-		std::function<void(CTRL *)> function)
-	{
-		CTRL * controller = dynamic_cast<CTRL *>(base);
-
-		if (controller != nullptr)
-		{
-			function(controller);
-		}
-	}
-
 	virtual void reset() override;
 	mrw::model::Route * create(const bool direction, mrw::model::SectionState state);
 
