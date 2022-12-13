@@ -190,7 +190,7 @@ void MainWindow::enable()
 	const bool editing        = statechart.isStateActive(OperatingMode::State::main_region_Editing);
 	const bool fail           = statechart.isStateActive(OperatingMode::State::main_region_Fail);
 	const size_t switch_count = count<RegularSwitchController>() + count<DoubleCrossSwitchController>();
-	const size_t rail_count   = count<RailController>();
+	const size_t rail_count   = count<RailController>() + count<SignalControllerProxy>();
 
 	ui->actionEdit->setEnabled(!editing);
 	ui->actionUp->setEnabled(editing);

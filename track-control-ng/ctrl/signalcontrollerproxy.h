@@ -9,9 +9,11 @@
 #define MRW_CTRL_SIGNALCONTROLLERPROXY_H
 
 #include <model/section.h>
+#include <model/rail.h>
 #include <model/signal.h>
 #include <ctrl/signalcontroller.h>
 #include <ctrl/controllerregistrand.h>
+#include <ctrl/railpartinfo.h>
 #include <ctrl/signalproxy.h>
 #include <statecharts/SignalControllerStatechart.h>
 #include <statecharts/SignalStatechart.h>
@@ -20,6 +22,7 @@ namespace mrw::ctrl
 {
 	class SignalControllerProxy :
 		public SignalController,
+		public RailPartInfo,
 		public ControllerRegistrand,
 		public mrw::statechart::SignalControllerStatechart::OperationCallback
 	{
@@ -32,11 +35,12 @@ namespace mrw::ctrl
 		mrw::statechart::ShuntProxy                  statechart_shunt;
 		const bool                                   direction = true;
 
-		mrw::model::Section * section        = nullptr;
+		mrw::model::Section * signal_section = nullptr;
 		mrw::model::Signal  * base_signal    = nullptr;
 		mrw::model::Signal  * main_signal    = nullptr;
 		mrw::model::Signal  * distant_signal = nullptr;
 		mrw::model::Signal  * shunt_signal   = nullptr;
+		mrw::model::Rail   *  signal_rail    = nullptr;
 
 		std::unordered_map<mrw::can::UnitNo, mrw::model::Signal *> signal_map;
 		QString                                                    grouped_name;
@@ -76,6 +80,10 @@ namespace mrw::ctrl
 		mrw::model::Signal::Symbol       distant() const override;
 		mrw::model::Signal::Symbol       shunt() const override;
 		mrw::model::Signal::Symbol       main() const override;
+
+		// Implementation from RailPartInfo
+		virtual mrw::model::RailPart * railPart() const override;
+		virtual mrw::model::Section  * section() const override;
 
 		// Implementations from ControllerRegistrand
 		virtual bool    process(const can::MrwMessage & message) override;

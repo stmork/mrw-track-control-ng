@@ -22,15 +22,21 @@ SignalControllerProxy::SignalControllerProxy(
 	SignalController(parent),
 	statechart(nullptr),
 	direction(dir),
-	section(parent_section)
+	signal_section(parent_section)
 {
 	std::vector<Signal *> section_signals;
+	std::vector<Rail *>   section_rails;
 	QStringList           list;
 
-	section->parts<Signal>(section_signals, [dir] (const Signal * input)
+	// Find signal in specific direction.
+	signal_section->parts<Signal>(section_signals, [dir] (const Signal * input)
 	{
 		return dir == input->direction();
 	});
+
+	// Find unfunctional rails.
+	signal_section->parts<Rail>(section_rails);
+	signal_rail = section_rails.size() > 0 ? section_rails.front() : nullptr;
 
 	Q_ASSERT(section_signals.size() > 0);
 
@@ -169,7 +175,7 @@ float SignalControllerProxy::extensions() const
 
 bool SignalControllerProxy::isDirection() const
 {
-	return direction == section->region()->direction();
+	return direction == region()->direction();
 }
 
 bool SignalControllerProxy::isExpandable() const
@@ -184,7 +190,7 @@ Position * SignalControllerProxy::position() const
 
 SectionState SignalControllerProxy::state() const
 {
-	return section->occupation() ? SectionState::OCCUPIED : section->state();
+	return section()->occupation() ? SectionState::OCCUPIED : section()->state();
 }
 
 Device::LockState SignalControllerProxy::lock() const
@@ -218,6 +224,16 @@ bool SignalControllerProxy::hasShunting() const
 Signal::Symbol SignalControllerProxy::main() const
 {
 	return static_cast<Signal::Symbol>(statechart_main.getSignalState());
+}
+
+RailPart * SignalControllerProxy::railPart() const
+{
+	return signal_rail;
+}
+
+Section * SignalControllerProxy::section() const
+{
+	return signal_section;
 }
 
 Signal::Symbol SignalControllerProxy::distant() const
