@@ -190,7 +190,21 @@ Position * SignalControllerProxy::position() const
 
 SectionState SignalControllerProxy::state() const
 {
-	return section()->occupation() ? SectionState::OCCUPIED : section()->state();
+	if (railPart()->reserved())
+	{
+		return section()->occupation() ? SectionState::OCCUPIED : section()->state();
+	}
+	else
+	{
+		if (section()->anyReserved())
+		{
+			return SectionState::FREE;
+		}
+		else
+		{
+			return section()->occupation() ? SectionState::OCCUPIED : section()->state();
+		}
+	}
 }
 
 Device::LockState SignalControllerProxy::lock() const
