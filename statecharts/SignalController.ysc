@@ -80,7 +80,7 @@
           </vertices>
         </regions>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_BvK_cHbfEe20X8bIRmamkA" name="Failed" incomingTransitions="_T8G0gHbgEe20X8bIRmamkA _Vcj6oHbgEe20X8bIRmamkA _XYBN0Hb4Ee20X8bIRmamkA _n0VUUHhuEe2OXcmdUJ-BFw">
+      <vertices xsi:type="sgraph:State" xmi:id="_BvK_cHbfEe20X8bIRmamkA" specification="entry / fail" name="Failed" incomingTransitions="_T8G0gHbgEe20X8bIRmamkA _Vcj6oHbgEe20X8bIRmamkA _XYBN0Hb4Ee20X8bIRmamkA _n0VUUHhuEe2OXcmdUJ-BFw">
         <outgoingTransitions xmi:id="_lsGcgHhuEe2OXcmdUJ-BFw" specification="start" target="_FbTpKHbWEe2lmIyQXv_DxQ"/>
       </vertices>
     </regions>

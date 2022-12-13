@@ -228,7 +228,9 @@ bool DoubleCrossSwitchControllerProxy::doTurnLeft()
 
 bool DoubleCrossSwitchControllerProxy::isFree()
 {
-	return state() == SectionState::FREE;
+	return
+		(state() != SectionState::SHUNTING) &&
+		(state() != SectionState::TOUR);
 }
 
 void DoubleCrossSwitchControllerProxy::fail()

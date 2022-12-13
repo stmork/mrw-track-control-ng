@@ -87,6 +87,17 @@ void WidgetRoute::left()
 	qDebug().noquote() << "Left:" << *controller;
 	qDebug().noquote() << "Left:" << sections.size();
 
+	// TODO: Refactor!!!
+	main_signals.clear();
+	collectSignals(controller->section());
+	for (Signal * signal : main_signals)
+	{
+		SignalControllerProxy * sig_ctrl =
+			ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
+
+		sig_ctrl->disable();
+	}
+
 	if ((sections.size() == 1) && (sections.back() == last))
 	{
 		qDebug().noquote() << "Left: FINITO!";
@@ -99,13 +110,18 @@ void WidgetRoute::collectSignals()
 	main_signals.clear();
 	for (Section * section : sections)
 	{
-		section->parts<Signal>(main_signals, [&](const Signal * signal)
-		{
-			return
-				(signal->direction() == direction) &&
-				((signal->type() & Signal::MAIN_SIGNAL) != 0);
-		});
+		collectSignals(section);
 	}
+}
+
+void WidgetRoute::collectSignals(Section * section)
+{
+	section->parts<Signal>(main_signals, [&](const Signal * signal)
+	{
+		return
+			(signal->direction() == direction) &&
+			((signal->type() & Signal::MAIN_SIGNAL) != 0);
+	});
 }
 
 void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & controllers)

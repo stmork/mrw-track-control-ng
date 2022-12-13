@@ -456,6 +456,13 @@ namespace mrw
 			emit turnMain(turnMain_value);
 		}
 
+		/* Entry action for state 'Failed'. */
+		void SignalControllerStatechart::enact_main_region_Failed()
+		{
+			/* Entry action for state 'Failed'. */
+			ifaceOperationCallback->fail();
+		}
+
 		/* Exit action for state 'Init'. */
 		void SignalControllerStatechart::exact_main_region_Init()
 		{
@@ -603,6 +610,7 @@ namespace mrw
 		void SignalControllerStatechart::enseq_main_region_Failed_default()
 		{
 			/* 'default' enter sequence for state Failed */
+			enact_main_region_Failed();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Failed;
 			stateConfVectorPosition = 0;
 			stateConfVectorChanged = true;

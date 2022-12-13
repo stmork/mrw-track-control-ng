@@ -321,6 +321,13 @@ namespace mrw
 		}
 
 // implementations of all internal functions
+		/* Entry action for state 'Idle'. */
+		void SignalStatechart::enact_main_region_Idle()
+		{
+			/* Entry action for state 'Idle'. */
+			ifaceOperationCallback->idle();
+		}
+
 		/* Entry action for state 'Turning'. */
 		void SignalStatechart::enact_main_region_Turning()
 		{
@@ -355,6 +362,7 @@ namespace mrw
 		void SignalStatechart::enseq_main_region_Idle_default()
 		{
 			/* 'default' enter sequence for state Idle */
+			enact_main_region_Idle();
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Idle;
 		}
 

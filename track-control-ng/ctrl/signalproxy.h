@@ -29,6 +29,7 @@ namespace mrw::statechart
 
 		void start(mrw::model::Signal * input);
 		bool hasSignal() override;
+		void idle() override;
 		bool process(model::Signal * device, const can::MrwMessage & message);
 	};
 

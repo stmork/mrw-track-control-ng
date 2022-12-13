@@ -37,6 +37,11 @@ bool SignalProxy::hasSignal()
 	return signal != nullptr;
 }
 
+void SignalProxy::idle()
+{
+	__METHOD__;
+}
+
 bool SignalProxy::process(Signal * device, const MrwMessage & message)
 {
 	Q_ASSERT(device != nullptr);
@@ -52,14 +57,14 @@ bool SignalProxy::process(Signal * device, const MrwMessage & message)
 		switch (message.response())
 		{
 		case MSG_QUEUED:
-			queued();
+			QMetaObject::invokeMethod(this, &SignalStatechart::queued, Qt::QueuedConnection);
 			return true;
 
 		case MSG_OK:
 			switch (message.command())
 			{
 			case SETSGN:
-				ok();
+				QMetaObject::invokeMethod(this, &SignalStatechart::ok, Qt::QueuedConnection);
 				return true;
 
 			default:
@@ -70,7 +75,7 @@ bool SignalProxy::process(Signal * device, const MrwMessage & message)
 
 		default:
 			qCritical().noquote() << "Error turning" << signal->toString();
-			failed();
+			QMetaObject::invokeMethod(this, &SignalStatechart::failed, Qt::QueuedConnection);
 			return true;
 		}
 	}

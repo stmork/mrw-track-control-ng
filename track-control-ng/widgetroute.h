@@ -53,6 +53,7 @@ public slots:
 
 private:
 	void collectSignals();
+	void collectSignals(mrw::model::Section * section);
 	void collectSectionControllers(std::vector<mrw::ctrl::SectionController *> & controllers);
 
 	virtual void reset() override;

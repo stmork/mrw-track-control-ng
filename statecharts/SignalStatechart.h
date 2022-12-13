@@ -148,6 +148,8 @@ namespace mrw
 
 				virtual void send(sc::integer symbol) = 0;
 
+				virtual void idle() = 0;
+
 
 			};
 
@@ -272,6 +274,7 @@ namespace mrw
 
 			// prototypes of all internal functions
 
+			void enact_main_region_Idle();
 			void enact_main_region_Turning();
 			void enact_main_region_Turning_Turn_processing_Turn();
 			void enact_main_region_Fail();

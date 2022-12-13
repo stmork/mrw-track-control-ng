@@ -248,7 +248,9 @@ bool RegularSwitchControllerProxy::doTurnLeft()
 
 bool RegularSwitchControllerProxy::isFree()
 {
-	return state() == SectionState::FREE;
+	return
+		(state() != SectionState::SHUNTING) &&
+		(state() != SectionState::TOUR);
 }
 
 void RegularSwitchControllerProxy::fail()

@@ -323,12 +323,14 @@ void SignalControllerProxy::fail()
 
 	// TODO: Implement
 	qCritical().noquote() << String::red(" Signal turn failed!");
+	emit update();
 }
 
 void SignalControllerProxy::pending()
 {
 	// TODO: Implement
 	qDebug(" Pending");
+	emit update();
 }
 
 void SignalControllerProxy::lock(const bool do_it)
@@ -337,4 +339,5 @@ void SignalControllerProxy::lock(const bool do_it)
 
 	// TODO: Implement
 	qDebug(do_it ? " Lock" : " Unlock");
+	emit update();
 }
