@@ -25,7 +25,7 @@ SignalControllerProxy::SignalControllerProxy(
 	signal_section(parent_section)
 {
 	std::vector<Signal *> section_signals;
-	std::vector<Rail *>   section_rails;
+	std::vector<RailPart *>   section_rails;
 	QStringList           list;
 
 	// Find signal in specific direction.
@@ -35,7 +35,7 @@ SignalControllerProxy::SignalControllerProxy(
 	});
 
 	// Find unfunctional rails.
-	signal_section->parts<Rail>(section_rails);
+	signal_section->parts<RailPart>(section_rails);
 	signal_rail = section_rails.size() > 0 ? section_rails.front() : nullptr;
 
 	Q_ASSERT(section_signals.size() > 0);
@@ -81,45 +81,6 @@ SignalControllerProxy::SignalControllerProxy(
 		Qt::QueuedConnection);
 
 	connect(
-		&statechart, &SignalControllerStatechart::turnMain,
-		&statechart_main, &SignalStatechart::turn,
-		Qt::QueuedConnection);
-	connect(
-		&statechart_main, &SignalStatechart::completed,
-		&statechart, &SignalControllerStatechart::completedMain,
-		Qt::QueuedConnection);
-	connect(
-		&statechart_main, &SignalStatechart::failed,
-		&statechart, &SignalControllerStatechart::failed,
-		Qt::QueuedConnection);
-
-	connect(
-		&statechart, &SignalControllerStatechart::turnDistant,
-		&statechart_distant, &SignalStatechart::turn,
-		Qt::QueuedConnection);
-	connect(
-		&statechart_distant, &SignalStatechart::completed,
-		&statechart, &SignalControllerStatechart::completedDistant,
-		Qt::QueuedConnection);
-	connect(
-		&statechart_distant, &SignalStatechart::failed,
-		&statechart, &SignalControllerStatechart::failed,
-		Qt::QueuedConnection);
-
-	connect(
-		&statechart, &SignalControllerStatechart::turnShunt,
-		&statechart_shunt, &SignalStatechart::turn,
-		Qt::QueuedConnection);
-	connect(
-		&statechart_shunt, &SignalStatechart::completed,
-		&statechart, &SignalControllerStatechart::completedShunt,
-		Qt::QueuedConnection);
-	connect(
-		&statechart_shunt, &SignalStatechart::failed,
-		&statechart, &SignalControllerStatechart::failed,
-		Qt::QueuedConnection);
-
-	connect(
 		this, &SignalControllerProxy::enable,
 		&statechart, &SignalControllerStatechart::enable,
 		Qt::QueuedConnection);
@@ -131,6 +92,10 @@ SignalControllerProxy::SignalControllerProxy(
 		this, &SignalControllerProxy::failed,
 		&statechart, &SignalControllerStatechart::failed,
 		Qt::QueuedConnection);
+
+	connectMain();
+	connectDistant();
+	connectShunt();
 
 	statechart_main.start(main_signal);
 	statechart_distant.start(distant_signal);
@@ -151,6 +116,54 @@ SignalControllerProxy::~SignalControllerProxy()
 		dynamic_cast<Device *>(distant_signal));
 	ControllerRegistry::instance().unregisterController(
 		dynamic_cast<Device *>(shunt_signal));
+}
+
+void SignalControllerProxy::connectMain()
+{
+	connect(
+		&statechart, &SignalControllerStatechart::turnMain,
+		&statechart_main, &SignalStatechart::turn,
+		Qt::QueuedConnection);
+	connect(
+		&statechart_main, &SignalStatechart::completed,
+		&statechart, &SignalControllerStatechart::completedMain,
+		Qt::QueuedConnection);
+	connect(
+		&statechart_main, &SignalStatechart::failed,
+		&statechart, &SignalControllerStatechart::failed,
+		Qt::QueuedConnection);
+}
+
+void SignalControllerProxy::connectDistant()
+{
+	connect(
+		&statechart, &SignalControllerStatechart::turnDistant,
+		&statechart_distant, &SignalStatechart::turn,
+		Qt::QueuedConnection);
+	connect(
+		&statechart_distant, &SignalStatechart::completed,
+		&statechart, &SignalControllerStatechart::completedDistant,
+		Qt::QueuedConnection);
+	connect(
+		&statechart_distant, &SignalStatechart::failed,
+		&statechart, &SignalControllerStatechart::failed,
+		Qt::QueuedConnection);
+}
+
+void SignalControllerProxy::connectShunt()
+{
+	connect(
+		&statechart, &SignalControllerStatechart::turnShunt,
+		&statechart_shunt, &SignalStatechart::turn,
+		Qt::QueuedConnection);
+	connect(
+		&statechart_shunt, &SignalStatechart::completed,
+		&statechart, &SignalControllerStatechart::completedShunt,
+		Qt::QueuedConnection);
+	connect(
+		&statechart_shunt, &SignalStatechart::failed,
+		&statechart, &SignalControllerStatechart::failed,
+		Qt::QueuedConnection);
 }
 
 void SignalControllerProxy::add(Signal * signal)

@@ -35,12 +35,12 @@ namespace mrw::ctrl
 		mrw::statechart::ShuntProxy                  statechart_shunt;
 		const bool                                   direction = true;
 
-		mrw::model::Section * signal_section = nullptr;
-		mrw::model::Signal  * base_signal    = nullptr;
-		mrw::model::Signal  * main_signal    = nullptr;
-		mrw::model::Signal  * distant_signal = nullptr;
-		mrw::model::Signal  * shunt_signal   = nullptr;
-		mrw::model::Rail   *  signal_rail    = nullptr;
+		mrw::model::Section  * signal_section = nullptr;
+		mrw::model::Signal  *  base_signal    = nullptr;
+		mrw::model::Signal  *  main_signal    = nullptr;
+		mrw::model::Signal  *  distant_signal = nullptr;
+		mrw::model::Signal  *  shunt_signal   = nullptr;
+		mrw::model::RailPart * signal_rail    = nullptr;
 
 		std::unordered_map<mrw::can::UnitNo, mrw::model::Signal *> signal_map;
 		QString                                                    grouped_name;
@@ -59,6 +59,9 @@ namespace mrw::ctrl
 		void clear();
 
 	private:
+		void connectMain();
+		void connectDistant();
+		void connectShunt();
 		void add(mrw::model::Signal * signal);
 
 		// Implementations from BaseController
