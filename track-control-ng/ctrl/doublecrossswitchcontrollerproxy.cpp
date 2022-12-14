@@ -46,6 +46,10 @@ DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(
 		&statechart, &SwitchStatechart::failed,
 		Qt::QueuedConnection);
 	connect(
+		this, &DoubleCrossSwitchControllerProxy::start,
+		&statechart, &SwitchStatechart::start,
+		Qt::QueuedConnection);
+	connect(
 		this, &DoubleCrossSwitchControllerProxy::unlock,
 		&statechart, &SwitchStatechart::unlock,
 		Qt::QueuedConnection);
@@ -228,9 +232,7 @@ bool DoubleCrossSwitchControllerProxy::doTurnLeft()
 
 bool DoubleCrossSwitchControllerProxy::isFree()
 {
-	return
-		(state() != SectionState::SHUNTING) &&
-		(state() != SectionState::TOUR);
+	return section()->isFree();
 }
 
 void DoubleCrossSwitchControllerProxy::fail()

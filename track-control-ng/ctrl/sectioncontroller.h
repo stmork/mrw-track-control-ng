@@ -40,8 +40,9 @@ namespace mrw::ctrl
 		void enable(bool turn_on = true);
 		void disable();
 		void failed();
-		void clear();
+		void start();
 		void left();
+		void unregister();
 
 	private:
 

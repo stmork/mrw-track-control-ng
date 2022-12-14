@@ -43,6 +43,10 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 		&statechart, &SwitchStatechart::failed,
 		Qt::QueuedConnection);
 	connect(
+		this, &RegularSwitchControllerProxy::start,
+		&statechart, &SwitchStatechart::start,
+		Qt::QueuedConnection);
+	connect(
 		this, &RegularSwitchControllerProxy::unlock,
 		&statechart, &SwitchStatechart::unlock,
 		Qt::QueuedConnection);
@@ -248,9 +252,7 @@ bool RegularSwitchControllerProxy::doTurnLeft()
 
 bool RegularSwitchControllerProxy::isFree()
 {
-	return
-		(state() != SectionState::SHUNTING) &&
-		(state() != SectionState::TOUR);
+	return section()->isFree();
 }
 
 void RegularSwitchControllerProxy::fail()

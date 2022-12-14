@@ -49,9 +49,11 @@ bool Rail::valid() const
 
 QString Rail::toString() const
 {
+	static const QString R = String::format(String::BOLD_ON + String::RED_ON, "R");
+
 	return QString("      # %1%2 %3--%4 :        %5").
 		arg(valid() ? "V" : "-").
-		arg(reserved() ? "R" : "-").
+		arg(reserved() ? R : "-").
 		arg(aIsDir() ?
 			(b == nullptr ? " |" : " b") :
 			(a == nullptr ? " |" : " a")).

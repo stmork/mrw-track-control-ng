@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_eA-_4G_nEe2NWacukCztjQ" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;var auto_off : boolean = true&#xA;var auto_unlock : boolean = true&#xA;&#xA;in event enable : boolean&#xA;in event disable&#xA;in event start&#xA;in event relaisResponse&#xA;in event stateResponse : boolean&#xA;in event failed&#xA;&#xA;out event started&#xA;out event entered&#xA;out event left&#xA;&#xA;operation inc()&#xA;operation dec()&#xA;&#xA;operation off()&#xA;operation on()&#xA;operation request()&#xA;operation passed()&#xA;operation free()&#xA;&#xA;operation fail()&#xA;operation pending()&#xA;operation lock(do_it : boolean)" namespace="mrw.statechart" name="SectionStatechart">
+  <sgraph:Statechart xmi:id="_eA-_4G_nEe2NWacukCztjQ" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;var auto_off : boolean = true&#xA;var auto_unlock : boolean = true&#xA;&#xA;in event enable : boolean&#xA;in event disable&#xA;in event start&#xA;in event relaisResponse&#xA;in event stateResponse : boolean&#xA;in event failed&#xA;&#xA;out event started&#xA;out event entered&#xA;out event left&#xA;out event unregister&#xA;&#xA;operation inc()&#xA;operation dec()&#xA;&#xA;operation off()&#xA;operation on()&#xA;operation request()&#xA;operation passed()&#xA;operation free()&#xA;&#xA;operation fail()&#xA;operation pending()&#xA;operation lock(do_it : boolean)" namespace="mrw.statechart" name="SectionStatechart">
     <regions xmi:id="_eBBcI2_nEe2NWacukCztjQ" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_eBBcJG_nEe2NWacukCztjQ">
         <outgoingTransitions xmi:id="_eBBcJW_nEe2NWacukCztjQ" target="_gX9dUG_yEe2YefuTX77gAw"/>
@@ -49,7 +49,7 @@
           <vertices xsi:type="sgraph:Entry" xmi:id="_nnUTYHX6Ee21HM-AEZfzIA">
             <outgoingTransitions xmi:id="_pA8_0HX6Ee21HM-AEZfzIA" specification="" target="_nNoBAHX6Ee21HM-AEZfzIA"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_q05psHX6Ee21HM-AEZfzIA" specification="entry / lock(true)&#xA;" name="Locked">
+          <vertices xsi:type="sgraph:State" xmi:id="_q05psHX6Ee21HM-AEZfzIA" specification="entry / lock(true)&#xA;exit / raise unregister" name="Locked">
             <regions xmi:id="_wWkigHX6Ee21HM-AEZfzIA" name="Route active">
               <vertices xsi:type="sgraph:State" xmi:id="_DSuqgHX7Ee21HM-AEZfzIA" specification="" name="Enabled" incomingTransitions="_IBmNYHX7Ee21HM-AEZfzIA _C655IHlYEe2mtrNlTXAGRw">
                 <outgoingTransitions xmi:id="_eqqE8HX7Ee21HM-AEZfzIA" specification="stateResponse[!valueof(stateResponse) &amp;&amp; auto_off]" target="_iUFCsHX7Ee21HM-AEZfzIA"/>
@@ -773,11 +773,11 @@
     <edges xmi:id="_1wZmkHX9Ee21HM-AEZfzIA" type="Transition" element="_1wWjQHX9Ee21HM-AEZfzIA" source="_oA-7InX7Ee21HM-AEZfzIA" target="_nNooEHX6Ee21HM-AEZfzIA">
       <children xsi:type="notation:DecorationNode" xmi:id="_1wZmlHX9Ee21HM-AEZfzIA" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_1wZmlXX9Ee21HM-AEZfzIA"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_1wZmlnX9Ee21HM-AEZfzIA" x="-191" y="13"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_1wZmlnX9Ee21HM-AEZfzIA" x="-205" y="13"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_1wZmkXX9Ee21HM-AEZfzIA" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_1wZmk3X9Ee21HM-AEZfzIA" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_1wZmknX9Ee21HM-AEZfzIA" points="[-116, -3, 684, 642]$[-805, -3, -5, 642]$[-805, -610, -5, 35]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_1wZmknX9Ee21HM-AEZfzIA" points="[-116, 25, 684, 670]$[-805, 25, -5, 670]$[-805, -610, -5, 35]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_1wa0sHX9Ee21HM-AEZfzIA" id="(0.40875912408759124,0.16981132075471697)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_1wa0sXX9Ee21HM-AEZfzIA" id="(0.10077519379844961,0.33962264150943394)"/>
     </edges>

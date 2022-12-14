@@ -197,9 +197,11 @@ void Section::findSignalPair()
 
 QString Section::toString() const
 {
+	static const QString O = String::format(String::BOLD_ON + String::RED_ON, "O");
+
 	return QString("    Sec %1%2        : [%3] %4 %5 %6").
 		arg(valid() ?      'V' : '-').
-		arg(occupation() ? 'O' : '-').
+		arg(occupation() ? O : "-").
 		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name(), -10).
 		arg(Device::get(lock()), -10).
@@ -218,6 +220,11 @@ void Section::free()
 		}
 	}
 	setState(FREE);
+}
+
+bool mrw::model::Section::isFree() const
+{
+	return section_state == SectionState::FREE;
 }
 
 bool Section::anyReserved() const

@@ -18,8 +18,8 @@ namespace mrw::ctrl
 	{
 	public:
 		virtual mrw::model::RailPart * railPart() const = 0;
-		virtual mrw::model::Section * section() const;
-		virtual mrw::model::Region  * region() const;
+		virtual mrw::model::Section  * section() const;
+		virtual mrw::model::Region  *  region() const;
 	};
 }
 

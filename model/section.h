@@ -188,6 +188,8 @@ namespace mrw::model
 		 */
 		void free();
 
+		bool isFree() const;
+
 		virtual QString key() const override
 		{
 			return name();

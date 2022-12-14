@@ -258,6 +258,9 @@ namespace mrw
 			/*! Signal representing the out event 'left' that is defined in the default interface scope. */
 			void left();
 
+			/*! Signal representing the out event 'unregister' that is defined in the default interface scope. */
+			void unregister();
+
 
 		protected:
 
@@ -312,6 +315,7 @@ namespace mrw
 			void enact_main_region_Operating_Processing_Enabling();
 			void enact_main_region_Failed();
 			void exact_main_region_Init();
+			void exact_main_region_Operating_Processing_Locked();
 			void exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
 			void exact_main_region_Operating_Processing_Enabling();
 			void enseq_main_region_Init_default();

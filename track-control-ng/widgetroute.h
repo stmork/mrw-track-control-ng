@@ -50,6 +50,7 @@ signals:
 
 public slots:
 	void left();
+	void unregister();
 
 private:
 	void collectSignals();

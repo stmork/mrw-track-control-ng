@@ -6,6 +6,7 @@
 #include <QMetaMethod>
 
 #include <util/method.h>
+#include <util/stringutil.h>
 #include <statecharts/timerservice.h>
 #include <ctrl/controllerregistry.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
@@ -15,6 +16,7 @@
 
 #include "widgetroute.h"
 
+using namespace mrw::util;
 using namespace mrw::statechart;
 using namespace mrw::model;
 using namespace mrw::ctrl;
@@ -64,6 +66,9 @@ void WidgetRoute::prepare()
 		disconnect(
 			controller, &SectionController::left,
 			this, &WidgetRoute::left);
+		disconnect(
+			controller, &SectionController::unregister,
+			this, &WidgetRoute::unregister);
 	}
 
 	Route::prepare();
@@ -74,7 +79,11 @@ void WidgetRoute::prepare()
 		connect(
 			controller, &SectionController::left,
 			this, &WidgetRoute::left,
-			Qt::QueuedConnection);
+			Qt::DirectConnection);
+		connect(
+			controller, &SectionController::unregister,
+			this, &WidgetRoute::unregister,
+			Qt::DirectConnection);
 	}
 }
 
@@ -82,10 +91,7 @@ void WidgetRoute::left()
 {
 	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
 
-	sections.remove(controller->section());
-
-	qDebug().noquote() << "Left:" << *controller;
-	qDebug().noquote() << "Left:" << sections.size();
+	qDebug().noquote() << "Left:      " << *controller;
 
 	// TODO: Refactor!!!
 	main_signals.clear();
@@ -97,11 +103,50 @@ void WidgetRoute::left()
 
 		sig_ctrl->disable();
 	}
+}
 
-	if ((sections.size() == 1) && (sections.back() == last))
+void WidgetRoute::unregister()
+{
+	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
+
+	disconnect(
+		controller, &SectionController::left,
+		this, &WidgetRoute::left);
+	disconnect(
+		controller, &SectionController::unregister,
+		this, &WidgetRoute::unregister);
+
+	qDebug().noquote() << "Unregister:" << *controller;
+
+	sections.remove(controller->section());
+	while (track.front()->section() == controller->section())
 	{
-		qDebug().noquote() << "Left: FINITO!";
-		emit finished();
+		RailPart    *    part      = track.front();
+		Device     *     device    = dynamic_cast<Device *>(part);
+		BaseController * part_ctrl =
+			ControllerRegistry::instance().find<BaseController>(device);
+
+		BaseController::callback<RegularSwitchControllerProxy>(
+			part_ctrl,     &RegularSwitchControllerProxy::unlock);
+		BaseController::callback<DoubleCrossSwitchControllerProxy>(
+			part_ctrl, &DoubleCrossSwitchControllerProxy::unlock);
+
+		track.pop_front();
+	}
+
+	qDebug().noquote() << "Unregister:" << sections.size();
+
+	if (sections.size() == 1)
+	{
+		if (sections.back() == last)
+		{
+			qDebug().noquote() << "Unregister:" << String::bold("Finished!");
+			emit finished();
+		}
+		else
+		{
+			qDebug().noquote() << "Unregister:" << String::bold("Reached!");
+		}
 	}
 }
 

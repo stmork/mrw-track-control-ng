@@ -470,6 +470,13 @@ namespace mrw
 			timerService->unsetTimer(this, 0);
 		}
 
+		/* Exit action for state 'Locked'. */
+		void SectionStatechart::exact_main_region_Operating_Processing_Locked()
+		{
+			/* Exit action for state 'Locked'. */
+			emit unregister();
+		}
+
 		/* Exit action for state 'Waiting'. */
 		void SectionStatechart::exact_main_region_Operating_Processing_Locked_Route_active_Waiting()
 		{
@@ -723,6 +730,7 @@ namespace mrw
 		{
 			/* Default exit sequence for state Locked */
 			exseq_main_region_Operating_Processing_Locked_Route_active();
+			exact_main_region_Operating_Processing_Locked();
 		}
 
 		/* Default exit sequence for state Enabled */
@@ -831,34 +839,40 @@ namespace mrw
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Enabled :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Enabled();
+					exact_main_region_Operating_Processing_Locked();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Passed :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Passed();
+					exact_main_region_Operating_Processing_Locked();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left();
 					exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
+					exact_main_region_Operating_Processing_Locked();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling();
 					exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
+					exact_main_region_Operating_Processing_Locked();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling();
 					exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
+					exact_main_region_Operating_Processing_Locked();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Disabled :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Disabled();
+					exact_main_region_Operating_Processing_Locked();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling :
@@ -1002,34 +1016,40 @@ namespace mrw
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Enabled :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Enabled();
+					exact_main_region_Operating_Processing_Locked();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Passed :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Passed();
+					exact_main_region_Operating_Processing_Locked();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left();
 					exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
+					exact_main_region_Operating_Processing_Locked();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling();
 					exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
+					exact_main_region_Operating_Processing_Locked();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling();
 					exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
+					exact_main_region_Operating_Processing_Locked();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Disabled :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Disabled();
+					exact_main_region_Operating_Processing_Locked();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling :

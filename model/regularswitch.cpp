@@ -125,10 +125,12 @@ bool RegularSwitch::valid() const
 
 QString RegularSwitch::toString() const
 {
+	static const QString R = String::format(String::BOLD_ON + String::RED_ON, "R");
+
 	return QString("      %1 %2%3 %4--%5 : [%6] %7 %8 %9").
 		arg(aIsDir() ? ">" : "<").
 		arg(valid()  ? "V" : "-").
-		arg(reserved() ? "R" : "-").
+		arg(reserved() ? R : "-").
 		arg(aIsDir() ? "bc" : " a").
 		arg(aIsDir() ? "a " : "bc").
 		arg(unitNo(), 4, 16, QChar('0')).
