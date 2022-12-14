@@ -110,6 +110,10 @@ void Route::prepare(
 {
 	__METHOD__;
 
+	// TODO: Use variables.
+	Q_UNUSED(last_section);
+	Q_UNUSED(last_part);
+
 	std::vector<RailPart *> vector(track.begin(), track.end());
 	Section        *        prev = nullptr;
 
