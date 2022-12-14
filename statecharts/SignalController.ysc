@@ -54,7 +54,7 @@
       <vertices xsi:type="sgraph:State" xmi:id="_Oxi_sHbWEe2lmIyQXv_DxQ" specification="entry / dec; raise started" name="Operating" incomingTransitions="_QO5HcHbWEe2lmIyQXv_DxQ">
         <outgoingTransitions xmi:id="_n0VUUHhuEe2OXcmdUJ-BFw" specification="failed" target="_BvK_cHbfEe20X8bIRmamkA"/>
         <outgoingTransitions xmi:id="_tLhEkHpUEe2_ZOj2sFqWdg" specification="start" target="_FbTpKHbWEe2lmIyQXv_DxQ"/>
-        <regions xmi:id="_7QbRAHb3Ee20X8bIRmamkA" name="processing">
+        <regions xmi:id="_7QbRAHb3Ee20X8bIRmamkA" name="Processing">
           <vertices xsi:type="sgraph:State" xmi:id="__pCQAHb3Ee20X8bIRmamkA" specification="entry / lock(false)" name="Unlocked" incomingTransitions="_BkSbwHb4Ee20X8bIRmamkA _mV5iYHb4Ee20X8bIRmamkA">
             <outgoingTransitions xmi:id="_F7N_wHb4Ee20X8bIRmamkA" specification="enable / prepare" target="_DlYw0Hb4Ee20X8bIRmamkA"/>
           </vertices>

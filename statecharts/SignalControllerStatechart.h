@@ -60,11 +60,11 @@ namespace mrw
 				main_region_Init_Init_process_Turning_shunt_Turn,
 				main_region_Init_Init_process_Turning_shunt_Completed,
 				main_region_Operating,
-				main_region_Operating_processing_Unlocked,
-				main_region_Operating_processing_Locked,
-				main_region_Operating_processing_Locked_Processing_Go,
-				main_region_Operating_processing_Locked_Processing_Idle,
-				main_region_Operating_processing_Locked_Processing_Stop,
+				main_region_Operating_Processing_Unlocked,
+				main_region_Operating_Processing_Locked,
+				main_region_Operating_Processing_Locked_Processing_Go,
+				main_region_Operating_Processing_Locked_Processing_Idle,
+				main_region_Operating_Processing_Locked_Processing_Stop,
 				main_region_Failed
 			};
 
@@ -80,11 +80,11 @@ namespace mrw
 			static const sc::integer scvi_main_region_Init_Init_process_Turning_shunt_Turn = 2;
 			static const sc::integer scvi_main_region_Init_Init_process_Turning_shunt_Completed = 2;
 			static const sc::integer scvi_main_region_Operating = 0;
-			static const sc::integer scvi_main_region_Operating_processing_Unlocked = 0;
-			static const sc::integer scvi_main_region_Operating_processing_Locked = 0;
-			static const sc::integer scvi_main_region_Operating_processing_Locked_Processing_Go = 0;
-			static const sc::integer scvi_main_region_Operating_processing_Locked_Processing_Idle = 0;
-			static const sc::integer scvi_main_region_Operating_processing_Locked_Processing_Stop = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Unlocked = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Processing_Go = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Processing_Idle = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Processing_Stop = 0;
 			static const sc::integer scvi_main_region_Failed = 0;
 
 			/*! Enumeration of all events which are consumed. */
@@ -100,7 +100,7 @@ namespace mrw
 				completedDistant,
 				completedShunt,
 				_te0_main_region_Init_,
-				_te1_main_region_Operating_processing_Locked_Processing_Go_
+				_te1_main_region_Operating_Processing_Locked_Processing_Go_
 			};
 
 			class EventInstance
@@ -290,13 +290,13 @@ namespace mrw
 			void enact_main_region_Init_Init_process_Turning_distant_Turn();
 			void enact_main_region_Init_Init_process_Turning_shunt_Turn();
 			void enact_main_region_Operating();
-			void enact_main_region_Operating_processing_Unlocked();
-			void enact_main_region_Operating_processing_Locked();
-			void enact_main_region_Operating_processing_Locked_Processing_Go();
-			void enact_main_region_Operating_processing_Locked_Processing_Stop();
+			void enact_main_region_Operating_Processing_Unlocked();
+			void enact_main_region_Operating_Processing_Locked();
+			void enact_main_region_Operating_Processing_Locked_Processing_Go();
+			void enact_main_region_Operating_Processing_Locked_Processing_Stop();
 			void enact_main_region_Failed();
 			void exact_main_region_Init();
-			void exact_main_region_Operating_processing_Locked_Processing_Go();
+			void exact_main_region_Operating_Processing_Locked_Processing_Go();
 			void enseq_main_region_Wait_for_Start_default();
 			void enseq_main_region_Init_default();
 			void enseq_main_region_Init_Init_process_Turning_main_Turn_default();
@@ -306,16 +306,16 @@ namespace mrw
 			void enseq_main_region_Init_Init_process_Turning_shunt_Turn_default();
 			void enseq_main_region_Init_Init_process_Turning_shunt_Completed_default();
 			void enseq_main_region_Operating_default();
-			void enseq_main_region_Operating_processing_Unlocked_default();
-			void enseq_main_region_Operating_processing_Locked_default();
-			void enseq_main_region_Operating_processing_Locked_Processing_Go_default();
-			void enseq_main_region_Operating_processing_Locked_Processing_Idle_default();
-			void enseq_main_region_Operating_processing_Locked_Processing_Stop_default();
+			void enseq_main_region_Operating_Processing_Unlocked_default();
+			void enseq_main_region_Operating_Processing_Locked_default();
+			void enseq_main_region_Operating_Processing_Locked_Processing_Go_default();
+			void enseq_main_region_Operating_Processing_Locked_Processing_Idle_default();
+			void enseq_main_region_Operating_Processing_Locked_Processing_Stop_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_default();
 			void enseq_main_region_Init_Init_process_default();
-			void enseq_main_region_Operating_processing_default();
-			void enseq_main_region_Operating_processing_Locked_Processing_default();
+			void enseq_main_region_Operating_Processing_default();
+			void enseq_main_region_Operating_Processing_Locked_Processing_default();
 			void exseq_main_region_Wait_for_Start();
 			void exseq_main_region_Init();
 			void exseq_main_region_Init_Init_process_Turning();
@@ -326,23 +326,23 @@ namespace mrw
 			void exseq_main_region_Init_Init_process_Turning_shunt_Turn();
 			void exseq_main_region_Init_Init_process_Turning_shunt_Completed();
 			void exseq_main_region_Operating();
-			void exseq_main_region_Operating_processing_Unlocked();
-			void exseq_main_region_Operating_processing_Locked();
-			void exseq_main_region_Operating_processing_Locked_Processing_Go();
-			void exseq_main_region_Operating_processing_Locked_Processing_Idle();
-			void exseq_main_region_Operating_processing_Locked_Processing_Stop();
+			void exseq_main_region_Operating_Processing_Unlocked();
+			void exseq_main_region_Operating_Processing_Locked();
+			void exseq_main_region_Operating_Processing_Locked_Processing_Go();
+			void exseq_main_region_Operating_Processing_Locked_Processing_Idle();
+			void exseq_main_region_Operating_Processing_Locked_Processing_Stop();
 			void exseq_main_region_Failed();
 			void exseq_main_region();
 			void exseq_main_region_Init_Init_process();
 			void exseq_main_region_Init_Init_process_Turning_main();
 			void exseq_main_region_Init_Init_process_Turning_distant();
 			void exseq_main_region_Init_Init_process_Turning_shunt();
-			void exseq_main_region_Operating_processing();
-			void exseq_main_region_Operating_processing_Locked_Processing();
+			void exseq_main_region_Operating_Processing();
+			void exseq_main_region_Operating_Processing_Locked_Processing();
 			void react_main_region__entry_Default();
 			void react_main_region_Init_Init_process__entry_Default();
-			void react_main_region_Operating_processing__entry_Default();
-			void react_main_region_Operating_processing_Locked_Processing__entry_Default();
+			void react_main_region_Operating_Processing__entry_Default();
+			void react_main_region_Operating_Processing_Locked_Processing__entry_Default();
 			void react_main_region_Init_Init_process__sync0();
 			void react_main_region_Init_Init_process__sync1();
 			sc::integer react(const sc::integer transitioned_before);
@@ -356,11 +356,11 @@ namespace mrw
 			sc::integer main_region_Init_Init_process_Turning_shunt_Turn_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_Init_process_Turning_shunt_Completed_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_processing_Unlocked_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_processing_Locked_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_processing_Locked_Processing_Go_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_processing_Locked_Processing_Idle_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_processing_Locked_Processing_Stop_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Unlocked_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Processing_Go_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Processing_Idle_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Processing_Stop_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
