@@ -56,9 +56,9 @@ namespace mrw
 				main_region_Operating_operating_Unlocked,
 				main_region_Operating_operating_Locked,
 				main_region_Operating_operating_Turning,
-				main_region_Operating_operating_Turning_r1_Turn_Right,
-				main_region_Operating_operating_Turning_r1_Turn_Left,
-				main_region_Operating_operating_Turning_r1_Pending,
+				main_region_Operating_operating_Turning_Turning_process_Turn_Right,
+				main_region_Operating_operating_Turning_Turning_process_Turn_Left,
+				main_region_Operating_operating_Turning_Turning_process_Pending,
 				main_region_Failed
 			};
 
@@ -70,9 +70,9 @@ namespace mrw
 			static const sc::integer scvi_main_region_Operating_operating_Unlocked = 0;
 			static const sc::integer scvi_main_region_Operating_operating_Locked = 0;
 			static const sc::integer scvi_main_region_Operating_operating_Turning = 0;
-			static const sc::integer scvi_main_region_Operating_operating_Turning_r1_Turn_Right = 0;
-			static const sc::integer scvi_main_region_Operating_operating_Turning_r1_Turn_Left = 0;
-			static const sc::integer scvi_main_region_Operating_operating_Turning_r1_Pending = 0;
+			static const sc::integer scvi_main_region_Operating_operating_Turning_Turning_process_Turn_Right = 0;
+			static const sc::integer scvi_main_region_Operating_operating_Turning_Turning_process_Turn_Left = 0;
+			static const sc::integer scvi_main_region_Operating_operating_Turning_Turning_process_Pending = 0;
 			static const sc::integer scvi_main_region_Failed = 0;
 
 			/*! Enumeration of all events which are consumed. */
@@ -262,8 +262,8 @@ namespace mrw
 			void enact_main_region_Operating_operating_Unlocked();
 			void enact_main_region_Operating_operating_Locked();
 			void enact_main_region_Operating_operating_Turning();
-			void enact_main_region_Operating_operating_Turning_r1_Turn_Right();
-			void enact_main_region_Operating_operating_Turning_r1_Turn_Left();
+			void enact_main_region_Operating_operating_Turning_Turning_process_Turn_Right();
+			void enact_main_region_Operating_operating_Turning_Turning_process_Turn_Left();
 			void enact_main_region_Failed();
 			void exact_main_region_Init();
 			void exact_main_region_Operating_operating_Turning();
@@ -272,9 +272,9 @@ namespace mrw
 			void enseq_main_region_Operating_default();
 			void enseq_main_region_Operating_operating_Unlocked_default();
 			void enseq_main_region_Operating_operating_Locked_default();
-			void enseq_main_region_Operating_operating_Turning_r1_Turn_Right_default();
-			void enseq_main_region_Operating_operating_Turning_r1_Turn_Left_default();
-			void enseq_main_region_Operating_operating_Turning_r1_Pending_default();
+			void enseq_main_region_Operating_operating_Turning_Turning_process_Turn_Right_default();
+			void enseq_main_region_Operating_operating_Turning_Turning_process_Turn_Left_default();
+			void enseq_main_region_Operating_operating_Turning_Turning_process_Pending_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_default();
 			void enseq_main_region_Operating_operating_default();
@@ -284,15 +284,15 @@ namespace mrw
 			void exseq_main_region_Operating_operating_Unlocked();
 			void exseq_main_region_Operating_operating_Locked();
 			void exseq_main_region_Operating_operating_Turning();
-			void exseq_main_region_Operating_operating_Turning_r1_Turn_Right();
-			void exseq_main_region_Operating_operating_Turning_r1_Turn_Left();
-			void exseq_main_region_Operating_operating_Turning_r1_Pending();
+			void exseq_main_region_Operating_operating_Turning_Turning_process_Turn_Right();
+			void exseq_main_region_Operating_operating_Turning_Turning_process_Turn_Left();
+			void exseq_main_region_Operating_operating_Turning_Turning_process_Pending();
 			void exseq_main_region_Failed();
 			void exseq_main_region();
 			void exseq_main_region_Operating_operating();
-			void exseq_main_region_Operating_operating_Turning_r1();
+			void exseq_main_region_Operating_operating_Turning_Turning_process();
 			void react_main_region_Operating_operating__choice_0();
-			void react_main_region_Operating_operating_Turning_r1__choice_0();
+			void react_main_region_Operating_operating_Turning_Turning_process__choice_0();
 			void react_main_region__entry_Default();
 			void react_main_region_Operating_operating__entry_Default();
 			sc::integer react(const sc::integer transitioned_before);
@@ -302,9 +302,9 @@ namespace mrw
 			sc::integer main_region_Operating_operating_Unlocked_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_operating_Locked_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_operating_Turning_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_operating_Turning_r1_Turn_Right_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_operating_Turning_r1_Turn_Left_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_operating_Turning_r1_Pending_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Turning_Turning_process_Turn_Right_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Turning_Turning_process_Turn_Left_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Turning_Turning_process_Pending_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();

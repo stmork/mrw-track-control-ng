@@ -35,7 +35,7 @@
             <outgoingTransitions xmi:id="_SN_m8HF8Ee2peawiS1OZpw" specification="after timeout ms" target="_T17jEHCVEe2rVLYxSRawxw"/>
             <outgoingTransitions xmi:id="_CfsFkHF9Ee2peawiS1OZpw" specification="leftResponse / dec()" target="_sAf7sHF8Ee2peawiS1OZpw"/>
             <outgoingTransitions xmi:id="_EuvXEHF9Ee2peawiS1OZpw" specification="rightResponse / dec()" target="_sAf7sHF8Ee2peawiS1OZpw"/>
-            <regions xmi:id="_iR4E03F9Ee2peawiS1OZpw" name="r1">
+            <regions xmi:id="_iR4E03F9Ee2peawiS1OZpw" name="Turning process">
               <vertices xsi:type="sgraph:State" xmi:id="_ENnR4HF7Ee2peawiS1OZpw" specification="entry / right" name="Turn Right" incomingTransitions="_P6VOgHG5Ee2peawiS1OZpw">
                 <outgoingTransitions xmi:id="_YFgpYHF7Ee2peawiS1OZpw" specification="queued&#xA;" target="_QJfOAHF7Ee2peawiS1OZpw"/>
               </vertices>
