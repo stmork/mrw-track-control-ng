@@ -404,10 +404,10 @@ void MainWindow::on_extendPushButton_clicked()
 		{
 			if (!route->extend(rail(i)))
 			{
+				route->dump();
 				return;
 			}
 		}
-		route->prepare();
 
 		ui->regionTabWidget->currentWidget()->update();
 		on_clearAllSections_clicked();
@@ -644,7 +644,6 @@ Route * MainWindow::create(const bool direction, SectionState state)
 			return nullptr;
 		}
 	}
-	route->prepare();
 
 	ui->routeListWidget->addItem(*route);
 	ui->regionTabWidget->currentWidget()->update();

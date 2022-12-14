@@ -54,7 +54,9 @@ namespace mrw::model
 		SectionTrack            sections;
 		const bool              direction;
 
-		virtual void prepare();
+		virtual void prepare(
+			Section  * last_section,
+			RailPart * last_part);
 
 	private:
 		bool        qualified(RailPart * rail) const;

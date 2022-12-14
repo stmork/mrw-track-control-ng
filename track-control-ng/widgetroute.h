@@ -42,7 +42,9 @@ public:
 
 	operator QListWidgetItem * ();
 
-	virtual void prepare() override;
+	virtual void prepare(
+		mrw::model::Section  * last_section,
+		mrw::model::RailPart * last_part) override;
 
 signals:
 	void turn();

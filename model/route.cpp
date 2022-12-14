@@ -64,8 +64,14 @@ bool Route::extend(RailPart * target)
 
 	qDebug().noquote() << "---------->" << *target;
 
-	const bool success = extend(track.back(), target);
-	prepare();
+	Section  * last_section = sections.back();
+	RailPart * last_part    = track.back();
+	const bool success = extend(last_part, target);
+
+	if (success)
+	{
+		prepare(last_section, last_part);
+	}
 	return success;
 }
 
@@ -97,7 +103,9 @@ bool Route::extend(RailPart * rail, RailPart * target)
 	return false;
 }
 
-void Route::prepare()
+void Route::prepare(
+	Section  * last_section,
+	RailPart * last_part)
 {
 	__METHOD__;
 

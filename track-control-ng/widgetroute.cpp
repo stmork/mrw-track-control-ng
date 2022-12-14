@@ -56,7 +56,9 @@ WidgetRoute::~WidgetRoute()
 	statechart.exit();
 }
 
-void WidgetRoute::prepare()
+void WidgetRoute::prepare(
+	Section  * last_section,
+	RailPart * last_part)
 {
 	std::vector<SectionController *> controllers;
 
@@ -71,7 +73,7 @@ void WidgetRoute::prepare()
 			this, &WidgetRoute::unregister);
 	}
 
-	Route::prepare();
+	Route::prepare(last_section, last_part);
 
 	collectSectionControllers(controllers);
 	for (SectionController * controller : controllers)
@@ -211,7 +213,7 @@ void WidgetRoute::turnSwitches()
 		BaseController::callback<DoubleCrossSwitchControllerProxy>(
 			controller, &DoubleCrossSwitchControllerProxy::turn);
 
-		if (controller != nullptr)
+		if (device != nullptr)
 		{
 			count++;
 		}
