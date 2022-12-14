@@ -51,7 +51,7 @@ pipeline
 			{
 				sh 'make valgrind'
 				xunit checksName: '', thresholds: [failed(unstableThreshold: '0')], tools: [
-					QtTest(excludesPattern: '', pattern: 'qtest-*.xml', stopProcessingIfError: true),
+					QtTest(excludesPattern: '', pattern: 'qtest-*.xml', stopProcessingIfError: false),
 					Valgrind(excludesPattern: '', pattern: 'valgrind*.xml', stopProcessingIfError: false)]
 			}
 		}
