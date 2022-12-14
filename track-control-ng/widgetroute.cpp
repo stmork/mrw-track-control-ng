@@ -21,6 +21,8 @@ using namespace mrw::statechart;
 using namespace mrw::model;
 using namespace mrw::ctrl;
 
+using LockState = Device::LockState;
+
 WidgetRoute::WidgetRoute(
 	const bool           dir,
 	const SectionState   wanted_state,
@@ -44,7 +46,10 @@ WidgetRoute::WidgetRoute(
 		&statechart, &RouteStatechart::finished,
 		this, &WidgetRoute::finished,
 		Qt::QueuedConnection);
-
+	connect(
+		&statechart, &RouteStatechart::activated,
+		this, &WidgetRoute::dump,
+		Qt::QueuedConnection);
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
 	statechart.enter();
@@ -62,30 +67,22 @@ void WidgetRoute::prepare(
 {
 	std::vector<SectionController *> controllers;
 
-	collectSectionControllers(controllers);
-	for (SectionController * controller : controllers)
-	{
-		disconnect(
-			controller, &SectionController::left,
-			this, &WidgetRoute::left);
-		disconnect(
-			controller, &SectionController::unregister,
-			this, &WidgetRoute::unregister);
-	}
-
 	Route::prepare(last_section, last_part);
 
 	collectSectionControllers(controllers);
 	for (SectionController * controller : controllers)
 	{
-		connect(
-			controller, &SectionController::left,
-			this, &WidgetRoute::left,
-			Qt::DirectConnection);
-		connect(
-			controller, &SectionController::unregister,
-			this, &WidgetRoute::unregister,
-			Qt::DirectConnection);
+		if (controller->section()->lock() != LockState::LOCKED)
+		{
+			connect(
+				controller, &SectionController::left,
+				this, &WidgetRoute::left,
+				Qt::DirectConnection);
+			connect(
+				controller, &SectionController::unregister,
+				this, &WidgetRoute::unregister,
+				Qt::DirectConnection);
+		}
 	}
 }
 
@@ -179,10 +176,7 @@ void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & c
 		SectionController * controller =
 			ControllerRegistry::instance().find<SectionController>(section);
 
-		if (controller != nullptr)
-		{
-			controllers.push_back(controller);
-		}
+		controllers.push_back(controller);
 	}
 }
 
@@ -208,15 +202,16 @@ void WidgetRoute::turnSwitches()
 		BaseController * controller =
 			ControllerRegistry::instance().find<BaseController>(device);
 
+		if ((device != nullptr) && (device->lock() != LockState::LOCKED))
+		{
+			count++;
+		}
+
 		BaseController::callback<RegularSwitchControllerProxy>(
 			controller,     &RegularSwitchControllerProxy::turn);
 		BaseController::callback<DoubleCrossSwitchControllerProxy>(
 			controller, &DoubleCrossSwitchControllerProxy::turn);
 
-		if (device != nullptr)
-		{
-			count++;
-		}
 	}
 
 	if (count == 0)

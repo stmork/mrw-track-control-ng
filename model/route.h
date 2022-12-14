@@ -41,13 +41,15 @@ namespace mrw::model
 		bool extend(RailPart * target);
 		bool extend(RailPart * rail, RailPart * target);
 		void clear();
-		void dump() const;
 		bool isLastSectionEnded() const;
 
 		static void isLastSectionEnded(
 			std::unordered_set<mrw::model::Section *> & neighbours,
 			const mrw::model::RailPart         *        part,
 			const bool                                  direction);
+
+	public slots:
+		void dump() const;
 
 	protected:
 		RailTrack               track;

@@ -188,6 +188,9 @@ namespace mrw
 
 
 		signals:
+			/*! Signal representing the out event 'activated' that is defined in the default interface scope. */
+			void activated();
+
 			/*! Signal representing the out event 'finished' that is defined in the default interface scope. */
 			void finished();
 
@@ -228,6 +231,7 @@ namespace mrw
 
 			// prototypes of all internal functions
 
+			void enact_main_region_Active();
 			void enact_main_region_Disable();
 			void enact_main_region_Turning();
 			void enact_main_region_Turning_Turning_process_Switch_Turning();

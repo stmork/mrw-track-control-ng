@@ -56,6 +56,7 @@ Route::~Route()
 	__METHOD__;
 
 	clear();
+	dump();
 }
 
 bool Route::extend(RailPart * target)
@@ -141,6 +142,10 @@ void Route::clear()
 	{
 		section->free();
 	}
+	for (RailPart * part : track)
+	{
+		part->reserve(false);
+	}
 	first_section = nullptr;
 	sections.clear();
 	track.clear();
@@ -148,6 +153,8 @@ void Route::clear()
 
 void Route::dump() const
 {
+	__METHOD__;
+
 	for (RailPart * part : track)
 	{
 		qDebug().noquote() << "     " << part->toString();

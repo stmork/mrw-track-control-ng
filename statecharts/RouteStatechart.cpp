@@ -249,6 +249,13 @@ namespace mrw
 		}
 
 // implementations of all internal functions
+		/* Entry action for state 'Active'. */
+		void RouteStatechart::enact_main_region_Active()
+		{
+			/* Entry action for state 'Active'. */
+			emit activated();
+		}
+
 		/* Entry action for state 'Disable'. */
 		void RouteStatechart::enact_main_region_Disable()
 		{
@@ -301,6 +308,7 @@ namespace mrw
 		void RouteStatechart::enseq_main_region_Active_default()
 		{
 			/* 'default' enter sequence for state Active */
+			enact_main_region_Active();
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Active;
 		}
 
