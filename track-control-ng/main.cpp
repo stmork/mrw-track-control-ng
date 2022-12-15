@@ -28,7 +28,7 @@ int main(int argc, char * argv[])
 	QString       modelname = argc > 1 ?
 		argv[1] :
 		settings.value("filename", "RailwayModel").toString();
-	ModelRepository repo(modelname);
+	ModelRepository repo(modelname, true);
 
 	if (repo)
 	{

@@ -38,9 +38,9 @@ class MainWindow :
 
 public:
 	explicit MainWindow(
-		mrw::model::ModelRepository    &   repository,
-		MrwMessageDispatcher       &       dispatcher,
-		QWidget              *             parent = nullptr);
+		mrw::model::ModelRepository   &  repository,
+		MrwMessageDispatcher      &      dispatcher,
+		QWidget             *            parent = nullptr);
 	~MainWindow();
 
 private slots:

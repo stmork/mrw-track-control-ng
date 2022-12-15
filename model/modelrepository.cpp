@@ -22,9 +22,10 @@ const char * ModelRepository::REGION_FILENAME   = "Gruppen.properties";
 const char * ModelRepository::SIGNAL_FILENAME   = "Signale.properties";
 const char * ModelRepository::RAILPART_FILENAME = "Gleisteile.properties";
 
-ModelRepository::ModelRepository(const QString & modelname) :
+ModelRepository::ModelRepository(const QString & modelname, const bool auto_save_input) :
 	settings_model(modelname),
-	home_dir(QDir::homePath())
+	home_dir(QDir::homePath()),
+	auto_save(auto_save_input)
 {
 	filename += modelname + ".modelrailway";
 	filter << filename;
@@ -36,6 +37,14 @@ ModelRepository::ModelRepository(const QString & modelname) :
 }
 
 ModelRepository::~ModelRepository()
+{
+	if (auto_save)
+	{
+		save();
+	}
+}
+
+void ModelRepository::save()
 {
 	qInfo("Saving positions.");
 	storePositions();

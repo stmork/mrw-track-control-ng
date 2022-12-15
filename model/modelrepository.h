@@ -47,6 +47,7 @@ namespace mrw::model
 		QString                      can_iface;
 		bool                         dump_result = false;
 		bool                         dump_xml    = false;
+		bool                         auto_save   = false;
 
 		mrw::model::ModelRailway  *  model = nullptr;
 		mrw::util::Properties        region_map;
@@ -54,8 +55,9 @@ namespace mrw::model
 		mrw::util::Properties        railpart_map;
 
 	public:
-		explicit ModelRepository(const QString & modelname);
-		~ModelRepository();
+		ModelRepository() = delete;
+		explicit ModelRepository(const QString & modelname, const bool auto_save_input = false);
+		virtual ~ModelRepository();
 
 		inline operator mrw::model::ModelRailway * () const
 		{
@@ -74,6 +76,7 @@ namespace mrw::model
 			return can_iface;
 		}
 
+		void save();
 		void info();
 		void xml();
 
