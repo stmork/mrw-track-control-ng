@@ -11,7 +11,7 @@ using namespace mrw::ui;
 using namespace mrw::model;
 
 DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
-	QWidget(parent),
+	WidgetSaver(parent),
 	ui(new Ui::DoubleCrossSwitchStudy)
 {
 	ui->setupUi(this);
@@ -171,4 +171,25 @@ void DoubleCrossSwitchStudy::changeEvent(QEvent * e)
 	default:
 		break;
 	}
+}
+
+QWidget * DoubleCrossSwitchStudy::widget() const
+{
+	return ui->bigSwitchWidget;
+}
+
+QString DoubleCrossSwitchStudy::name() const
+{
+	return QString("XSwitch_%1_%2%3%4").
+		arg(state(mock.switchState())).
+		arg(direction(mock.isDirection())).
+		arg(lockState(mock.lock())).
+		arg(sectionState(mock.state()));
+}
+
+QString DoubleCrossSwitchStudy::state(const DoubleCrossSwitch::State & state)
+{
+	const QString label = DoubleCrossSwitch::get(state);
+
+	return label.split(":").last();
 }

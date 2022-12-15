@@ -65,6 +65,11 @@ namespace mrw::model
 			return part_name;
 		}
 
+		/**
+		 * This method returns the Section this AssemblyPart belongs to.
+		 *
+		 * @return The Section this AssemblyPart belongs to.
+		 */
 		inline Section * section() const
 		{
 			return part_section;

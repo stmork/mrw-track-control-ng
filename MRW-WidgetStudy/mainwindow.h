@@ -29,8 +29,16 @@ public:
 	MainWindow(QWidget * parent = nullptr);
 	~MainWindow();
 
+private slots:
+	void on_actionQuit_triggered();
+	void on_actionSaveWidget_triggered();
+	void on_actionLeft_triggered();
+	void on_actionRight_triggered();
+
 private:
 	Ui::MainWindow * ui;
+
+	void changePage(const int offset);
 };
 
 #endif

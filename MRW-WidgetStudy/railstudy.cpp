@@ -11,7 +11,7 @@ using namespace mrw::ui;
 using namespace mrw::model;
 
 RailStudy::RailStudy(QWidget * parent) :
-	QWidget(parent),
+	WidgetSaver(parent),
 	ui(new Ui::RailStudy)
 {
 	ui->setupUi(this);
@@ -24,8 +24,8 @@ RailStudy::RailStudy(QWidget * parent) :
 	ui->symbolWidget->setAutoFillBackground(true);
 	ui->symbolWidget->setPalette(pal);
 
-	ui->bigSwitchWidget->setController(&mock);
-	ui->smallSwitchWidget->setController(&mock);
+	ui->bigRailWidget->setController(&mock);
+	ui->smallRailWidget->setController(&mock);
 
 	/********************************************************/
 	/*   Counting direction                                 */
@@ -149,22 +149,22 @@ RailStudy::RailStudy(QWidget * parent) :
 
 	connect(
 		&mock, &RailControllerMock::update,
-		ui->bigSwitchWidget, qOverload<>(&QWidget::repaint));
+		ui->bigRailWidget, qOverload<>(&QWidget::repaint));
 	connect(
 		&mock, &RailControllerMock::extend,
-		ui->bigSwitchWidget, &RailWidget::extend);
+		ui->bigRailWidget, &RailWidget::extend);
 	connect(
 		&mock, &RailControllerMock::computeConnectors,
-		ui->bigSwitchWidget, &RailWidget::computeConnectors);
+		ui->bigRailWidget, &RailWidget::computeConnectors);
 	connect(
 		&mock, &RailControllerMock::update,
-		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
+		ui->smallRailWidget, qOverload<>(&QWidget::repaint));
 	connect(
 		&mock, &RailControllerMock::extend,
-		ui->smallSwitchWidget, &RailWidget::extend);
+		ui->smallRailWidget, &RailWidget::extend);
 	connect(
 		&mock, &RailControllerMock::computeConnectors,
-		ui->smallSwitchWidget, &RailWidget::computeConnectors);
+		ui->smallRailWidget, &RailWidget::computeConnectors);
 
 	ui->forwardButton->setChecked(true);
 	ui->noButton->setChecked(true);
@@ -191,12 +191,26 @@ void RailStudy::changeEvent(QEvent * e)
 	}
 }
 
+QWidget * RailStudy::widget() const
+{
+	return ui->bigRailWidget;
+}
+
+QString RailStudy::name() const
+{
+	return QString("Rail____%1_%2%3%4").
+		arg(code(mock.aEnds(), mock.bEnds())).
+		arg(direction(mock.isDirection())).
+		arg(lockState(mock.lock())).
+		arg(sectionState(mock.state()));
+}
+
 void RailStudy::updateLines(const int new_ext_lines)
 {
 	const float rel = (1.0f + new_ext_lines) / (1.0f + mock.lines());
 
-	resize(ui->smallSwitchWidget, rel);
-	resize(ui->bigSwitchWidget, rel);
+	resize(ui->smallRailWidget, rel);
+	resize(ui->bigRailWidget, rel);
 
 	mock.setLines(new_ext_lines);
 }
@@ -204,4 +218,20 @@ void RailStudy::updateLines(const int new_ext_lines)
 void RailStudy::resize(QWidget * widget, const float rel)
 {
 	widget->setFixedHeight(widget->height() * rel);
+}
+
+QString RailStudy::code(const bool a_end, const bool b_end)
+{
+	if (a_end)
+	{
+		return "A";
+	}
+	else if (b_end)
+	{
+		return "B";
+	}
+	else
+	{
+		return "I";
+	}
 }

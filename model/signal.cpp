@@ -11,6 +11,9 @@ using namespace mrw::model;
 using namespace mrw::util;
 using namespace mrw::can;
 
+using Symbol     = Signal::Symbol;
+using SignalType = Signal::SignalType;
+
 const ConstantEnumerator<SignalState> Signal::signal_constants
 {
 	CONSTANT(SIGNAL_OFF),
@@ -23,6 +26,22 @@ const ConstantEnumerator<SignalState> Signal::signal_constants
 	CONSTANT(SIGNAL_SH0),
 	CONSTANT(SIGNAL_SH1),
 	CONSTANT(SIGNAL_TST)
+};
+
+const ConstantEnumerator<SignalType>  Signal::type_map
+{
+	CONSTANT(MAIN_SIGNAL),
+	CONSTANT(DISTANT_SIGNAL),
+	CONSTANT(SHUNT_SIGNAL),
+	CONSTANT(MAIN_SHUNT_SIGNAL)
+};
+
+const ConstantEnumerator<Symbol>  Signal::symbol_map
+{
+	CONSTANT(OFF),
+	CONSTANT(STOP),
+	CONSTANT(GO),
+	CONSTANT(SLOW)
 };
 
 Signal::Signal(
@@ -87,4 +106,14 @@ bool Signal::less(Signal * left, Signal * right)
 		return left->type() > right->type();
 	}
 	return left->direction() > right->direction();
+}
+
+QString Signal::get(const Signal::Symbol & symbol)
+{
+	return symbol_map.get(symbol);
+}
+
+QString Signal::get(const Signal::SignalType & type)
+{
+	return type_map.get(type);
 }

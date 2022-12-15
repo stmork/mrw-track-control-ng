@@ -56,8 +56,65 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuDatei">
+    <property name="title">
+     <string>Datei</string>
+    </property>
+    <addaction name="actionSaveWidget"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuAnsicht">
+    <property name="title">
+     <string>Ansicht</string>
+    </property>
+    <addaction name="actionLeft"/>
+    <addaction name="actionRight"/>
+   </widget>
+   <addaction name="menuDatei"/>
+   <addaction name="menuAnsicht"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSaveWidget">
+   <property name="text">
+    <string>Widget speichern</string>
+   </property>
+   <property name="toolTip">
+    <string>Widget speichern</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Programm beenden</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionLeft">
+   <property name="text">
+    <string>Linker Tab</string>
+   </property>
+   <property name="toolTip">
+    <string>Links</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+PgUp</string>
+   </property>
+  </action>
+  <action name="actionRight">
+   <property name="text">
+    <string>Rechter Tab</string>
+   </property>
+   <property name="toolTip">
+    <string>Rechts</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+PgDown</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>

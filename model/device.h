@@ -83,6 +83,20 @@ namespace mrw::model
 
 		void setLock(const LockState input);
 
+		/**
+		 * This method returns true if it is possible to <em>unlock</em> this
+		 * Device. There are some conditions to be met to ensure a safe
+		 * unlock. This method is called during lock() method with a given
+		 * parameter of LockState::UNLOCKED.
+		 *
+		 * @note This test method is meant that a locked Device is
+		 * <u>un</u>lockable. It is not meant that if this Device is unlocked
+		 * and not lockable!
+		 *
+		 * @return True if this Device is safely possible to unlock.
+		 *
+		 * @see lock()
+		 */
 		virtual bool unlockable() const = 0;
 
 		/**
@@ -113,6 +127,13 @@ namespace mrw::model
 		 */
 		mrw::can::MrwMessage command(const mrw::can::Command command) const;
 
+		/**
+		 * This method returns the clear text QString of the LockState this
+		 * Device is set to.
+		 *
+		 * @param state The LockState enumeration to translate.
+		 * @return The QString clear text of the given LockState enumeration.
+		 */
 		static QString get(const LockState & state);
 
 	private:

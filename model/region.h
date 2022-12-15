@@ -97,6 +97,7 @@ namespace mrw::model
 		 * track control screen. The projected counting direction facilitate
 		 * the usage of the operating user.
 		 *
+		 * @param settings The QSettings where to get the Region view direction.
 		 * @param dir The projection direction of the counting direction for
 		 * the GUI.
 		 */
@@ -116,6 +117,8 @@ namespace mrw::model
 		 *
 		 * @param result The result vector collecting the AssembyPart elements
 		 * of type T.
+		 * @param guard A labmda to fine select if the type T should added to
+		 * the result vector.
 		 */
 		template <class T> void parts(std::vector<T *> & result,
 			std::function<bool(const T * part)> guard = [](const T * part)

@@ -148,3 +148,8 @@ SwitchState RegularSwitch::switchState() const
 {
 	return static_cast<SwitchState>(switch_state);
 }
+
+QString mrw::model::RegularSwitch::get(const mrw::model::RegularSwitch::State & state)
+{
+	return state_map.get(state);
+}

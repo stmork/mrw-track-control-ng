@@ -11,7 +11,7 @@ using namespace mrw::ui;
 using namespace mrw::model;
 
 SwitchStudy::SwitchStudy(QWidget * parent) :
-	QWidget(parent),
+	WidgetSaver(parent),
 	ui(new Ui::SwitchStudy)
 {
 	ui->setupUi(this);
@@ -171,4 +171,25 @@ void SwitchStudy::changeEvent(QEvent * e)
 	default:
 		break;
 	}
+}
+
+QWidget * SwitchStudy::widget() const
+{
+	return ui->bigSwitchWidget;
+}
+
+QString SwitchStudy::name() const
+{
+	return QString("RSwitch_%1_%2%3_%4%5%6").
+		arg(state(mock.isLeft())).
+		arg(mock.isInclined() ? 'I' : 'n').
+		arg(mock.isRightBended() ? 'R' : 'L').
+		arg(direction(mock.isDirection())).
+		arg(lockState(mock.lock())).
+		arg(sectionState(mock.state()));
+}
+
+QString SwitchStudy::state(const bool is_left)
+{
+	return is_left ? "AB" : "AC";
 }

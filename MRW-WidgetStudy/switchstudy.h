@@ -8,16 +8,16 @@
 #ifndef SWITCHSTUDY_H
 #define SWITCHSTUDY_H
 
-#include <QWidget>
-
 #include <ctrl/regularswitchcontrollermock.h>
+
+#include "widgetsaver.h"
 
 namespace Ui
 {
 	class SwitchStudy;
 }
 
-class SwitchStudy : public QWidget
+class SwitchStudy : public WidgetSaver
 {
 	Q_OBJECT
 
@@ -27,11 +27,15 @@ public:
 
 protected:
 	void changeEvent(QEvent * e) override;
+	QWidget * widget() const override;
+	QString   name() const override;
 
 private:
 	Ui::SwitchStudy            *           ui;
 
 	mrw::ctrl::RegularSwitchControllerMock mock;
+
+	static QString state(const bool is_left);
 };
 
 #endif // SWITCHSTUDY_H

@@ -17,7 +17,8 @@ SOURCES += \
 	ctrl/regularswitchcontrollermock.cpp \
 	ctrl/doublecrossswitchcontrollermock.cpp \
 	ctrl/railcontrollermock.cpp \
-	ctrl/signalcontrollermock.cpp
+	ctrl/signalcontrollermock.cpp \
+	widgetsaver.cpp
 
 HEADERS += \
 	mainwindow.h \
@@ -28,7 +29,8 @@ HEADERS += \
 	ctrl/regularswitchcontrollermock.h \
 	ctrl/doublecrossswitchcontrollermock.h \
 	ctrl/railcontrollermock.h \
-	ctrl/signalcontrollermock.h
+	ctrl/signalcontrollermock.h \
+	widgetsaver.h
 
 FORMS += \
 	doublecrossswitchstudy.ui \

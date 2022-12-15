@@ -39,7 +39,32 @@ namespace mrw::model
 	public:
 		enum class State : unsigned
 		{
+			/**
+			 * The turned left RegularSwitch.
+			 *
+			 * @image html RSwitch_AB_nL_RUF.jpg width=25%
+			 *
+			 * @image html RSwitch_AB_nR_RUF.jpg width=25%
+			 *
+			 * In case drawing is inclined:
+			 * @image html RSwitch_AB_IL_RUF.jpg width=25%
+			 *
+			 * @image html RSwitch_AB_IR_RUF.jpg width=25%
+			 */
 			AB = 1,
+
+			/**
+			 * The turned right RegularSwitch.
+			 *
+			 * @image html RSwitch_AC_nL_RUF.jpg width=25%
+			 *
+			 * @image html RSwitch_AC_nR_RUF.jpg width=25%
+			 *
+			 * In case drawing is inclined:
+			 * @image html RSwitch_AC_IL_RUF.jpg width=25%
+			 *
+			 * @image html RSwitch_AC_IR_RUF.jpg width=25%
+			 */
 			AC = 2
 		};
 
@@ -82,6 +107,15 @@ namespace mrw::model
 		QString toString() const override;
 		QString key() const override;
 		mrw::can::SwitchState switchState() const override;
+
+		/**
+		 * This method returns the clear text QString of the State this
+		 * RegularSwitch is set to.
+		 *
+		 * @param state The State enumeration to translate.
+		 * @return The QString clear text of the given State enumeration.
+		 */
+		static QString get(const State & state);
 
 	private:
 		void link() override;

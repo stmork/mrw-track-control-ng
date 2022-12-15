@@ -111,10 +111,10 @@ namespace mrw::model
 		}
 
 		/**
-		 * This method returns the amount of RailPart elements contained in
+		 * This method returns the amount of AssemblyPart elements contained in
 		 * this Section.
 		 *
-		 * @return The contained RailPart count.
+		 * @return The contained AssemblyPart count.
 		 */
 		inline size_t assemblyPartCount() const
 		{
@@ -158,6 +158,8 @@ namespace mrw::model
 		 *
 		 * @param result The result vector collecting the AssembyPart elements
 		 * of type T.
+		 * @param guard A labmda to fine select if the type T should added to
+		 * the result vector.
 		 */
 		template <class T> void parts(
 			std::vector<T *> & result,
@@ -196,6 +198,15 @@ namespace mrw::model
 		}
 
 		bool anyReserved() const;
+
+		/**
+		 * This method returns the clear text QString of the SectionState this
+		 * Section is set to.
+		 *
+		 * @param state The SectionState enumeration to translate.
+		 * @return The QString clear text of the given SectionState enumeration.
+		 */
+		static QString get(const SectionState & state);
 
 	private:
 		void            add(AssemblyPart * rail_part);

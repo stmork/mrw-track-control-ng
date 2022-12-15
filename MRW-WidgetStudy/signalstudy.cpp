@@ -11,7 +11,7 @@ using namespace mrw::ui;
 using namespace mrw::model;
 
 SignalStudy::SignalStudy(QWidget * parent) :
-	QWidget(parent),
+	WidgetSaver(parent),
 	ui(new Ui::SignalStudy)
 {
 	ui->setupUi(this);
@@ -24,8 +24,8 @@ SignalStudy::SignalStudy(QWidget * parent) :
 	ui->symbolWidget->setAutoFillBackground(true);
 	ui->symbolWidget->setPalette(pal);
 
-	ui->bigSwitchWidget->setController(&mock);
-	ui->smallSwitchWidget->setController(&mock);
+	ui->bigSignalWidget->setController(&mock);
+	ui->smallSignalWidget->setController(&mock);
 
 	/********************************************************/
 	/*   Counting direction                                 */
@@ -133,22 +133,22 @@ SignalStudy::SignalStudy(QWidget * parent) :
 
 	connect(
 		&mock, &SignalControllerMock::update,
-		ui->bigSwitchWidget, qOverload<>(&QWidget::repaint));
+		ui->bigSignalWidget, qOverload<>(&QWidget::repaint));
 	connect(
 		&mock, &SignalControllerMock::extend,
-		ui->bigSwitchWidget, &SignalWidget::extend);
+		ui->bigSignalWidget, &SignalWidget::extend);
 	connect(
 		&mock, &SignalControllerMock::computeConnectors,
-		ui->bigSwitchWidget, &SignalWidget::computeConnectors);
+		ui->bigSignalWidget, &SignalWidget::computeConnectors);
 	connect(
 		&mock, &SignalControllerMock::update,
-		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
+		ui->smallSignalWidget, qOverload<>(&QWidget::repaint));
 	connect(
 		&mock, &SignalControllerMock::extend,
-		ui->smallSwitchWidget, &SignalWidget::extend);
+		ui->smallSignalWidget, &SignalWidget::extend);
 	connect(
 		&mock, &SignalControllerMock::computeConnectors,
-		ui->smallSwitchWidget, &SignalWidget::computeConnectors);
+		ui->smallSignalWidget, &SignalWidget::computeConnectors);
 
 	ui->forwardButton->setChecked(true);
 	ui->straightButton->setChecked(true);
@@ -177,5 +177,33 @@ void SignalStudy::changeEvent(QEvent * e)
 		break;
 	default:
 		break;
+	}
+}
+
+QWidget * SignalStudy::widget() const
+{
+	return ui->bigSignalWidget;
+}
+
+QString SignalStudy::name() const
+{
+	return QString("Signal__%1%2%3_%4%5%6").
+		arg(code(mock.hasMain(), mock.main())).
+		arg(code(mock.hasDistant(), mock.distant())).
+		arg(code(mock.hasShunting(), mock.shunt())).
+		arg(direction(mock.isDirection())).
+		arg(lockState(mock.lock())).
+		arg(sectionState(mock.state()));
+}
+
+QString SignalStudy::code(const bool valid, const Signal::Symbol & symbol)
+{
+	if (valid)
+	{
+		return Signal::get(symbol).at(0);
+	}
+	else
+	{
+		return "_";
 	}
 }

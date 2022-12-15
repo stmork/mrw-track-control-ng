@@ -28,8 +28,6 @@ namespace mrw::model
 	 */
 	class Signal : public AssemblyPart, public Position
 	{
-		static const mrw::util::ConstantEnumerator<mrw::can::SignalState> signal_constants;
-
 	public:
 		enum Symbol : int
 		{
@@ -108,7 +106,31 @@ namespace mrw::model
 
 		static bool less(Signal * left, Signal * right);
 
+		/**
+		 * Since Device is not a direct base class this method returns a
+		 * pointer to the Device of this Signal.
+		 *
+		 * @return The Device belonging to this Signal instance.
+		 */
 		virtual Device * device() = 0;
+
+		/**
+		 * This method returns the clear text QString of the Symbol this
+		 * Signal is set to.
+		 *
+		 * @param symbol The Symbol enumeration to translate.
+		 * @return The QString clear text of the given Symbol enumeration.
+		 */
+		static QString get(const Symbol & symbol);
+
+		/**
+		 * This method returns the clear text QString of the SignalType this
+		 * Signal is set to.
+		 *
+		 * @param type The SignalType enumeration to translate.
+		 * @return The QString clear text of the given SignalType enumeration.
+		 */
+		static QString get(const SignalType & type);
 
 	protected:
 		/**
@@ -124,6 +146,10 @@ namespace mrw::model
 
 	private:
 		void link() override;
+
+		static const mrw::util::ConstantEnumerator<mrw::can::SignalState> signal_constants;
+		static const mrw::util::ConstantEnumerator<SignalType>            type_map;
+		static const mrw::util::ConstantEnumerator<Symbol>                symbol_map;
 	};
 }
 

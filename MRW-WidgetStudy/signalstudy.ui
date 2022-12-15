@@ -250,7 +250,7 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <widget class="mrw::ui::SignalWidget" name="smallSwitchWidget" native="true">
+     <widget class="mrw::ui::SignalWidget" name="smallSignalWidget" native="true">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -260,7 +260,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="mrw::ui::SignalWidget" name="bigSwitchWidget" native="true">
+     <widget class="mrw::ui::SignalWidget" name="bigSignalWidget" native="true">
       <property name="geometry">
        <rect>
         <x>30</x>

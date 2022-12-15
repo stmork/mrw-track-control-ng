@@ -238,6 +238,11 @@ bool Section::anyReserved() const
 	return rails.size() > 0;
 }
 
+QString mrw::model::Section::get(const mrw::model::SectionState & state)
+{
+	return state_map.get(state);
+}
+
 SectionModule * Section::resolve(const std::string & path)
 {
 	std::smatch matcher;

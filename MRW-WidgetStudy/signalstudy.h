@@ -8,16 +8,16 @@
 #ifndef SIGNALSTUDY_H
 #define SIGNALSTUDY_H
 
-#include <QWidget>
-
 #include <ctrl/signalcontrollermock.h>
+
+#include "widgetsaver.h"
 
 namespace Ui
 {
 	class SignalStudy;
 }
 
-class SignalStudy : public QWidget
+class SignalStudy : public WidgetSaver
 {
 	Q_OBJECT
 
@@ -27,11 +27,15 @@ public:
 
 protected:
 	void changeEvent(QEvent * e) override;
+	QWidget * widget() const override;
+	QString   name() const override;
 
 private:
 	Ui::SignalStudy        *        ui;
 
 	mrw::ctrl::SignalControllerMock mock;
+
+	static QString code(const bool valid, const mrw::model::Signal::Symbol & symbol);
 };
 
 #endif // SIGNALSTUDY_H

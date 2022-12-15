@@ -39,9 +39,24 @@ namespace mrw::model
 
 		enum class State : unsigned
 		{
+			/**
+			 * @image html XSwitch_AC_RUF.jpg width=25%
+			 */
 			AC = 0,
+
+			/**
+			 * @image html XSwitch_AD_RUF.jpg width=25%
+			 */
 			AD = D_MASK,
+
+			/**
+			 * @image html XSwitch_BC_RUF.jpg width=25%
+			 */
 			BC = B_MASK,
+
+			/**
+			 * @image html XSwitch_BD_RUF.jpg width=25%
+			 */
 			BD = B_MASK | D_MASK
 		};
 
@@ -70,7 +85,25 @@ namespace mrw::model
 		 */
 		void setState(const State state);
 
+		/**
+		 * This method computes the DoubleCrossSwitch::State value depending
+		 * on the given neighbour RaiPart pointers. The RailPart pointer are
+		 * independent on the direction a possible Route is using.
+		 *
+		 * @param left The RailPart at one switch end.
+		 * @param right The RailPart at the opposite end of the switch.
+		 */
+
 		void setState(const RailPart * left, const RailPart * right) override;
+
+		/**
+		 * This method returns the clear text QString of the State this
+		 * DoubleCrossSwitch is set to.
+		 *
+		 * @param state The State enumeration to translate.
+		 * @return The QString clear text of the given State enumeration.
+		 */
+		static QString get(const State & state);
 
 		bool                  valid() const override;
 		QString               toString() const override;

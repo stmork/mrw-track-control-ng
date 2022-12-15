@@ -234,7 +234,7 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <widget class="mrw::ui::RailWidget" name="smallSwitchWidget" native="true">
+     <widget class="mrw::ui::RailWidget" name="smallRailWidget" native="true">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -244,7 +244,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="mrw::ui::RailWidget" name="bigSwitchWidget" native="true">
+     <widget class="mrw::ui::RailWidget" name="bigRailWidget" native="true">
       <property name="geometry">
        <rect>
         <x>20</x>
