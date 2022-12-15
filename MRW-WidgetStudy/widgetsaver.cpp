@@ -18,7 +18,7 @@ WidgetSaver::WidgetSaver(QWidget * parent) : QWidget(parent)
 {
 	const QString base = QCoreApplication::applicationDirPath();
 
-	dir = base;
+	dir.setPath(base);
 	dir.mkdir(subdir);
 }
 
