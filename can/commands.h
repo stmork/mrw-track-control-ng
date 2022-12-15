@@ -147,15 +147,59 @@ namespace mrw::can
 
 	enum SignalState : uint8_t
 	{
+		/** All lights are off. */
 		SIGNAL_OFF = 0,
+
+		/**
+		 * @image html Form_Hp0.gif height=75
+		 * @image html Light_Hp0.gif height=50
+		 * @image html Light_Hp0Sh0.gif height=50
+		 */
 		SIGNAL_HP0,
+
+		/**
+		 * @image html Form_Hp1.gif height=75
+		 * @image html Light_Hp1.gif height=50
+		 */
 		SIGNAL_HP1,
+
+		/**
+		 * @image html Form_Hp2.gif height=75
+		 * @image html Light_Hp2.gif height=50
+		 */
 		SIGNAL_HP2,
+
+		/**
+		 * @image html Form_Vr0.gif height=75
+		 * @image html Light_Vr0.gif height=50
+		 */
 		SIGNAL_VR0,
+
+		/**
+		 * @image html Form_Vr1.gif height=75
+		 * @image html Light_Vr1.gif height=50
+		 */
 		SIGNAL_VR1,
+
+		/**
+		 * @image html Form_Vr2.gif height=75
+		 * @image html Light_Vr2.gif height=50
+		 */
 		SIGNAL_VR2,
+
+		/**
+		 * @image html Light_Sh0.gif height=50
+		 * @image html Light_Hp00.gif height=50
+		 */
 		SIGNAL_SH0,
+
+		/**
+		 * @image html Light_Sh1.gif height=50
+		 * @image html Light_Hp0Sh1.gif height=50
+		 */
 		SIGNAL_SH1,
+
+		/** All lights up for testing purposes. */
 		SIGNAL_TST
 	};
 

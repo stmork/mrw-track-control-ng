@@ -25,15 +25,46 @@ namespace mrw::model
 	 *
 	 * @note In fact a Section can only have six Signal parts maximum: Every
 	 * SignalType in both directions.
+	 *
+	 * 1. Shunting stop:
+	 * @image html Signal____S_RUF.jpg width=100
+	 * 2. Distant expect stop:
+	 * @image html Signal___S__RUF.jpg width=100
+	 * 3. Main stop:
+	 * @image html Signal__S___RUF.jpg width=100
+	 * 4. Main outgoing stop:
+	 * @image html Signal__S_S_RUF.jpg width=100
+	 * 5. Shunting go:
+	 * @image html Signal____G_RUS.jpg width=100
+	 * 6. Shunting outgoing go:
+	 * @image html Signal__S_G_RUS.jpg width=100
+	 * 7. Tour go:
+	 * @image html Signal__G___RUT.jpg width=100
+	 * 8. Tour go expect stop.
+	 * @image html Signal__GS__RUT.jpg width=100
+	 * 9. Tour go expect go.
+	 * @image html Signal__GG__RUT.jpg width=100
 	 */
 	class Signal : public AssemblyPart, public Position
 	{
 	public:
+		/**
+		 * The strategic Symbol of that Signal instance to display/show. This
+		 * will be computed into a mrw::can::SignalState later depending on
+		 * the SignalType.
+		 */
 		enum Symbol : int
 		{
+			/** Will always result in SIGNAL_OFF */
 			OFF  = -1,
+
+			/** Will result in SIGNAL_HP0, SIGNAL_SH0 or SIGNAL_VR0 */
 			STOP =  0,
+
+			/** Will result in SIGNAL_HP1, SIGNAL_SH1 or SIGNAL_VR1 */
 			GO   =  1,
+
+			/** Will result in SIGNAL_HP2 or SIGNAL_VR2 */
 			SLOW =  2
 		};
 
@@ -42,16 +73,37 @@ namespace mrw::model
 		 */
 		enum SignalType
 		{
-			/** Main signal. */
+			/**
+			 * Main Signal.
+			 * @image html Signal__S___RUF.jpg width=100
+			 * @image html Signal__G___RUT.jpg width=100
+			 */
 			MAIN_SIGNAL = 4,
 
-			/** Distant signal displaying position of main signal. */
+			/**
+			 * Distant Signal displaying position of main signal.
+			 * @image html Signal___S__RUT.jpg width=100
+			 * @image html Signal___G__RUT.jpg width=100
+			 *
+			 * Distant signal displaying expected position of main signal
+			 * combined with a local main signal.
+			 * @image html Signal__GS__RUT.jpg width=100
+			 * @image html Signal__GG__RUT.jpg width=100
+			 */
 			DISTANT_SIGNAL = 2,
 
-			/** Signal for shunting. */
+			/**
+			 * Signal for shunting.
+			 * @image html Signal____S_RUF.jpg width=100
+			 * @image html Signal____G_RUS.jpg width=100
+			 */
 			SHUNT_SIGNAL = 1,
 
-			/** Outgoing light signal. */
+			/**
+			 * Outgoing LightSignal.
+			 * @image html Signal__S_S_RUF.jpg width=100
+			 * @image html Signal__S_G_RUS.jpg width=100
+			 */
 			MAIN_SHUNT_SIGNAL = MAIN_SIGNAL | SHUNT_SIGNAL
 		};
 
@@ -71,15 +123,20 @@ namespace mrw::model
 			const QDomElement  &  element,
 			const SignalType      type);
 
-		inline bool direction() const
-		{
-			return signal_direction;
-		}
+		/**
+		 * This method returns @c true if the Signal is aligned counting
+		 * direction and @c false otherwise.
+		 *
+		 * @return The alignment of the Signal to the counting direction.
+		 */
+		bool direction() const;
 
-		inline SignalType type() const
-		{
-			return signal_type;
-		}
+		/**
+		 * This returns the SignalType of this Signal instance.
+		 *
+		 * @return The SignalType of this instance.
+		 */
+		SignalType type() const;
 
 		/**
 		 * If there is a combined signal (main and distant) counting in the
@@ -99,10 +156,7 @@ namespace mrw::model
 		// TODO: Move into SignalController!
 		void findPair(const std::vector<Signal *> & section_signals);
 
-		virtual QString key() const override
-		{
-			return section()->region()->name() + partName();
-		}
+		QString key() const override;
 
 		static bool less(Signal * left, Signal * right);
 

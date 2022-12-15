@@ -959,6 +959,7 @@ EXAMPLE_RECURSIVE      = NO
 # \image command).
 
 IMAGE_PATH            += images
+IMAGE_PATH            += model/images
 IMAGE_PATH            += statecharts/images/
 IMAGE_PATH            += MRW-WidgetStudy/images/
 

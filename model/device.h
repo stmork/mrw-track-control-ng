@@ -66,21 +66,25 @@ namespace mrw::model
 		 * @return The unit number of this Device.
 		 * @see Controller::id()
 		 */
-		inline mrw::can::UnitNo unitNo() const
-		{
-			return unit_no;
-		}
+		mrw::can::UnitNo unitNo() const;
 
 		/**
-		 * This method returns the actual modification state of this Device.
+		 * This method returns the actual LockState of this Device.
 		 *
-		 * @return The actual modification state.
+		 * @return The actual LockState.
 		 */
-		inline LockState lock() const
-		{
-			return lock_state;
-		}
+		LockState lock() const;
 
+		/**
+		 * This method sets a new LockState.
+		 *
+		 * @note In case the new LockState is LockState::UNLOCKED the
+		 * unlockable() method has to return true. Otherwise the Device
+		 * cannot be unlocked.
+		 *
+		 * @param input The new LockState to set.
+		 * @see unlockable()
+		 */
 		void setLock(const LockState input);
 
 		/**

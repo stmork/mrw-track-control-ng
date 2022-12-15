@@ -36,6 +36,16 @@ Device::Device(
 	model_railway->add(this);
 }
 
+UnitNo Device::unitNo() const
+{
+	return unit_no;
+}
+
+Device::LockState Device::lock() const
+{
+	return lock_state;
+}
+
 void Device::setLock(const Device::LockState input)
 {
 	if (input == LockState::FAIL)

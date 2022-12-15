@@ -55,6 +55,16 @@ Signal::Signal(
 {
 }
 
+bool mrw::model::Signal::direction() const
+{
+	return signal_direction;
+}
+
+mrw::model::Signal::SignalType mrw::model::Signal::type() const
+{
+	return signal_type;
+}
+
 void Signal::link()
 {
 }
@@ -97,6 +107,11 @@ void Signal::findPair(const std::vector<Signal *> & section_signals)
 			}
 		}
 	}
+}
+
+QString mrw::model::Signal::key() const
+{
+	return section()->region()->name() + partName();
 }
 
 bool Signal::less(Signal * left, Signal * right)
