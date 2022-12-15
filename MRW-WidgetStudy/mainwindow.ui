@@ -67,8 +67,8 @@
     <property name="title">
      <string>Ansicht</string>
     </property>
-    <addaction name="actionLeft"/>
-    <addaction name="actionRight"/>
+    <addaction name="actionTabLeft"/>
+    <addaction name="actionTabRight"/>
    </widget>
    <addaction name="menuDatei"/>
    <addaction name="menuAnsicht"/>
@@ -93,7 +93,7 @@
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="actionLeft">
+  <action name="actionTabLeft">
    <property name="text">
     <string>Linker Tab</string>
    </property>
@@ -104,7 +104,7 @@
     <string>Ctrl+PgUp</string>
    </property>
   </action>
-  <action name="actionRight">
+  <action name="actionTabRight">
    <property name="text">
     <string>Rechter Tab</string>
    </property>

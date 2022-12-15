@@ -32,8 +32,8 @@ public:
 private slots:
 	void on_actionQuit_triggered();
 	void on_actionSaveWidget_triggered();
-	void on_actionLeft_triggered();
-	void on_actionRight_triggered();
+	void on_actionTabLeft_triggered();
+	void on_actionTabRight_triggered();
 
 private:
 	Ui::MainWindow * ui;

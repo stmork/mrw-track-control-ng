@@ -31,12 +31,12 @@ void MainWindow::on_actionSaveWidget_triggered()
 	widget->save();
 }
 
-void MainWindow::on_actionLeft_triggered()
+void MainWindow::on_actionTabLeft_triggered()
 {
 	changePage(-1);
 }
 
-void MainWindow::on_actionRight_triggered()
+void MainWindow::on_actionTabRight_triggered()
 {
 	changePage(1);
 }

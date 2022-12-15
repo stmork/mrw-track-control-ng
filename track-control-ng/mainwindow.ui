@@ -250,7 +250,15 @@
     <addaction name="actionLock"/>
     <addaction name="actionUnlock"/>
    </widget>
+   <widget class="QMenu" name="menuAnsicht">
+    <property name="title">
+     <string>Ansicht</string>
+    </property>
+    <addaction name="actionTabLeft"/>
+    <addaction name="actionTabRight"/>
+   </widget>
    <addaction name="menuDaten"/>
+   <addaction name="menuAnsicht"/>
    <addaction name="menuModus"/>
    <addaction name="menuBetrieb"/>
    <addaction name="menuEditieren"/>
@@ -406,6 +414,22 @@
   <action name="actionInit">
    <property name="text">
     <string>Reset</string>
+   </property>
+  </action>
+  <action name="actionTabLeft">
+   <property name="text">
+    <string>Tab nach links</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+PgUp</string>
+   </property>
+  </action>
+  <action name="actionTabRight">
+   <property name="text">
+    <string>Tab nach rechts</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+PgDown</string>
    </property>
   </action>
  </widget>

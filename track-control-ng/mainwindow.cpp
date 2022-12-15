@@ -658,3 +658,21 @@ Route * MainWindow::create(const bool direction, SectionState state)
 
 	return route;
 }
+
+void MainWindow::on_actionTabLeft_triggered()
+{
+	changePage(-1);
+}
+
+void MainWindow::on_actionTabRight_triggered()
+{
+	changePage(1);
+}
+
+void MainWindow::changePage(const int offset)
+{
+	const int index = ui->regionTabWidget->currentIndex() + offset;
+	const int count = ui->regionTabWidget->count();
+
+	ui->regionTabWidget->setCurrentIndex((index + count) % count);
+}

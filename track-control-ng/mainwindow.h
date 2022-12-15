@@ -47,6 +47,9 @@ private slots:
 	void itemClicked(QListWidgetItem * item);
 	void enable();
 
+	void on_actionTabLeft_triggered();
+	void on_actionTabRight_triggered();
+
 	void on_clearSection_clicked();
 	void on_clearAllSections_clicked();
 	void on_clearRoute_clicked();
@@ -112,8 +115,9 @@ private:
 		return count;
 	}
 
-	virtual void reset() override;
+	virtual void        reset() override;
 	mrw::model::Route * create(const bool direction, mrw::model::SectionState state);
+	void                changePage(const int offset);
 
 	Ui::MainWindow          *         ui;
 	mrw::model::ModelRepository   &   repo;
