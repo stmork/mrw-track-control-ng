@@ -93,6 +93,7 @@ void Position::parse(const QString & value)
 				break;
 
 			case 'q':
+			case 'Q':
 				offset += QUARTER;
 				break;
 
@@ -175,4 +176,88 @@ QString Position::value() const
 	}
 
 	return value;
+}
+
+unsigned Position::extension() const
+{
+	return ext_count;
+}
+
+unsigned Position::lines() const
+{
+	return line_count;
+}
+
+void Position::toggleInclination()
+{
+	inclined = !inclined;
+}
+
+void Position::extend(const int inc)
+{
+	const int result = ext_count + inc;
+
+	ext_count = std::clamp(result, 0, 40);
+}
+
+void Position::lineup(const int inc)
+{
+	const int result = line_count + inc;
+
+	line_count = std::clamp(result, 0, 10);
+}
+
+bool Position::isInclined() const
+{
+	return inclined;
+}
+
+const QPoint & Position::point() const
+{
+	return position;
+}
+
+int Position::width() const
+{
+	return FRACTION + ext_count;
+}
+
+bool Position::operator==(const Position & other) const
+{
+	return
+		(position.x()               == other.position.x()) &&
+		((position.y()) / FRACTION  == (other.position.y() / FRACTION)) &&
+		(ext_count                  == other.ext_count) &&
+		(line_count                 == other.line_count) &&
+		(inclined                   == other.inclined) &&
+		(bending_state              == other.bending_state);
+}
+
+bool Position::operator !=(const Position & other) const
+{
+	return !operator ==(other);
+}
+
+bool Position::operator<(const Position & other) const
+{
+	if (position.y() == other.position.y())
+	{
+		return position.x() < other.position.x();
+	}
+	return position.y() < other.position.y();
+}
+
+bool Position::less(const Position * left, const Position * right)
+{
+	return left->operator <(*right);
+}
+
+Position::Bending Position::bending() const
+{
+	return bending_state;
+}
+
+void Position::setBending(const Position::Bending input)
+{
+	bending_state = input;
 }

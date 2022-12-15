@@ -93,7 +93,6 @@ namespace mrw::model
 		 * @param left The RailPart at one switch end.
 		 * @param right The RailPart at the opposite end of the switch.
 		 */
-
 		void setState(const RailPart * left, const RailPart * right) override;
 
 		/**

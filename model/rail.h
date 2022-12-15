@@ -38,10 +38,7 @@ namespace mrw::model
 		 *
 		 * @return The rail name.
 		 */
-		inline const QString & name() const
-		{
-			return partName();
-		}
+		const QString & name() const;
 
 		QString toString() const override;
 		QString key() const override;

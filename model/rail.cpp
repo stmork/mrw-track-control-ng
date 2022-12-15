@@ -47,6 +47,11 @@ bool Rail::valid() const
 		);
 }
 
+const QString & Rail::name() const
+{
+	return partName();
+}
+
 QString Rail::toString() const
 {
 	static const QString R = String::format(String::BOLD_ON + String::RED_ON, "R");

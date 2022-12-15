@@ -36,7 +36,7 @@ Device::Device(
 	model_railway->add(this);
 }
 
-void Device::setLock(const mrw::model::Device::LockState input)
+void Device::setLock(const Device::LockState input)
 {
 	if (input == LockState::FAIL)
 	{
@@ -60,7 +60,7 @@ MrwMessage Device::command(const Command command) const
 	return MrwMessage(command, controller()->id(), unitNo());
 }
 
-QString Device::get(const mrw::model::Device::LockState & state)
+QString Device::get(const Device::LockState & state)
 {
 	return lock_map.get(state);
 }

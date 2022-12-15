@@ -173,15 +173,21 @@ namespace mrw::model
 		 */
 		virtual void setState(const RailPart * left, const RailPart * right) = 0;
 
-		inline void reserve(const bool input = true)
-		{
-			is_reserved = input;
-		}
+		/**
+		 * This method reserves this RailPart for routing information so that
+		 * no other router can allocate this RailPart.
+		 *
+		 * @param input True if this RailPart instance should be reserved,
+		 * false if it should be freed.
+		 */
+		void reserve(const bool input = true);
 
-		inline bool reserved() const
-		{
-			return is_reserved;
-		}
+		/**
+		 * This method returns the reservation state of this RailPart instance.
+		 *
+		 * @return The reserveration state of this instance.
+		 */
+		bool reserved() const;
 
 	protected:
 		/**

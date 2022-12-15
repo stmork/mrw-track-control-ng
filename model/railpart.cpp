@@ -46,6 +46,16 @@ const std::set<RailInfo> & RailPart::advance(const bool dir) const
 	return dir ? rail_forward : rail_backward;
 }
 
+void RailPart::reserve(const bool input)
+{
+	is_reserved = input;
+}
+
+bool RailPart::reserved() const
+{
+	return is_reserved;
+}
+
 RailInfo::RailInfo(
 	RailPart * rail_part,
 	const bool preferred,

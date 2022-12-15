@@ -36,10 +36,19 @@ namespace mrw::model
 	 *
 	 * The third field are command sequences to fine tune the widgets
 	 * behaviour.
-	 * 1. Any 'o' or 'O' character shifts the widget to the right by one quarter
-	 * size. Many occurences leads into only one shift.
+	 * 1. Any 'q' or 'Q' character shifts the widget to the right by one
+	 * quarter size. Many occurences leads into multiple shifts.
+	 * 1. Any 'h', 'o' or 'O' character shifts the widget to the right by two
+	 * quarter size. Many occurences leads into multiple shifts.
 	 * 2. Any 'x' or 'X' enlarges the controlling widget by a half standard
 	 * widget size. Many occurences leads into the multiple of them.
+	 * 3. A 'i' or 'I' draws a RegularSwitch as inclined.
+	 * 4. A 'r' or 'R' draws a RegularSwitch right handed. This may differ to a
+	 * real switch.
+	 * 5. A 'l' or 'L' draws a RegularSwitch left handed. This may differ to a
+	 * real switch.
+	 * 6. A 'v' or 'V' extends a corresponding widget vertically which are
+	 * always four Position::FRACTION units.
 	 *
 	 * @see mrw::ui::BaseWidget
 	 */
@@ -84,7 +93,7 @@ namespace mrw::model
 		 *
 		 * @note The Settings use the "positions" group for storage.
 		 *
-		 * @example 12,5,ooxxx leading in one offset shift and additional 3 half
+		 * Example: 12,5,ooxxx leading in one offset shift and additional 3 half
 		 * extends in size.
 		 *
 		 * @param settings The settings to use.
@@ -125,10 +134,7 @@ namespace mrw::model
 		 *
 		 * @return The extension size in half controlling widget size.
 		 */
-		inline unsigned extension() const
-		{
-			return ext_count;
-		}
+		unsigned extension() const;
 
 		/**
 		 * This method returns the number of <em>extended</em> line counts. One
@@ -137,20 +143,14 @@ namespace mrw::model
 		 *
 		 * @return The multiple height of the widget.
 		 */
-		inline unsigned lines() const
-		{
-			return line_count;
-		}
+		unsigned lines() const;
 
 		/**
 		 * This method inverts the inclination flag.
 		 *
 		 * @see isInclined()
 		 */
-		inline void toggleInclination()
-		{
-			inclined = !inclined;
-		}
+		void toggleInclination();
 
 		/**
 		 * This method extends a rail drawing away from quadratic rendering.
@@ -159,12 +159,7 @@ namespace mrw::model
 		 *
 		 * @param inc The increment to add to the extension.
 		 */
-		inline void extend(const int inc = 1)
-		{
-			const int result = ext_count + inc;
-
-			ext_count = std::clamp(result, 0, 40);
-		}
+		void extend(const int inc = 1);
 
 		/**
 		 * This method extends a rail drawing away from quadratic rendering.
@@ -173,24 +168,27 @@ namespace mrw::model
 		 *
 		 * @param inc The increment to add to the extension.
 		 */
-		inline void lineup(const int inc = 1)
-		{
-			const int result = line_count + inc;
-
-			line_count = std::clamp(result, 0, 10);
-		}
+		void lineup(const int inc = 1);
 
 		/**
-		 * This method returns true if the drawing of a
-		 * mrw::model::RegularSwitch is inclined.
+		 * This method returns true if the drawing of a RegularSwitch is
+		 * inclined.
 		 *
-		 * @return True if the drawing of the mrw::model::RegularSwitch is
+		 * Example of a left handed non inclined switch:
+		 * @image html RSwitch_AB_nL_RUF.jpg width=100
+		 *
+		 * Example of a left handed inclined switch:
+		 * @image html RSwitch_AB_IL_RUF.jpg width=100
+		 *
+		 * Example of a right handed inclined switch:
+		 * @image html RSwitch_AB_IR_RUF.jpg width=100
+		 *
+		 * @note Only a RegularSwitch may be inclined.
+		 *
+		 * @return True if the drawing of the RegularSwitch is
 		 * inclined.
 		 */
-		inline bool isInclined() const
-		{
-			return inclined;
-		}
+		bool isInclined() const;
 
 		/**
 		 * This method returns the position. The real pixel position must be
@@ -199,10 +197,7 @@ namespace mrw::model
 		 *
 		 * @return The widget position.
 		 */
-		inline const QPoint & point() const
-		{
-			return position;
-		}
+		const QPoint & point() const;
 
 		/**
 		 * This method returns a key to determine the logical coordinates from
@@ -219,10 +214,7 @@ namespace mrw::model
 		 * @return The width of the controlled widget in Position::FRACTION
 		 * units.
 		 */
-		inline int width() const
-		{
-			return FRACTION + ext_count;
-		}
+		int width() const;
 
 		/**
 		 * This method compares this Position instance against to another
@@ -231,16 +223,7 @@ namespace mrw::model
 		 * @param other The other Position instance to compare to.
 		 * @return True if both instances have the same value.
 		 */
-		bool operator==(const Position & other) const
-		{
-			return
-				(position.x()               == other.position.x()) &&
-				((position.y()) / FRACTION  == (other.position.y() / FRACTION)) &&
-				(ext_count                  == other.ext_count) &&
-				(line_count                 == other.line_count) &&
-				(inclined                   == other.inclined) &&
-				(bending_state              == other.bending_state);
-		}
+		bool operator==(const Position & other) const;
 
 		/**
 		 * This method compares this Position instance against to another
@@ -249,10 +232,7 @@ namespace mrw::model
 		 * @param other The other Position instance to compare to.
 		 * @return True if both instances have different value.
 		 */
-		bool operator != (const Position & other) const
-		{
-			return !operator ==(other);
-		}
+		bool operator != (const Position & other) const;
 
 		/**
 		 * This method compares this Position instance and another Position
@@ -262,14 +242,7 @@ namespace mrw::model
 		 * @param other The other Position instance to compare to.
 		 * @return True if this Position is lower than the other Position.
 		 */
-		bool operator<(const Position & other) const
-		{
-			if (position.y() == other.position.y())
-			{
-				return position.x() < other.position.x();
-			}
-			return position.y() < other.position.y();
-		}
+		bool operator<(const Position & other) const;
 
 		/**
 		 * This method compares two positions according to their coordinates.
@@ -280,15 +253,13 @@ namespace mrw::model
 		 * std::vector<Position *> vector;
 		 *
 		 * std::sort(vector.begin(), vector.end(), &Position::compare);
+		 * @endcode
 		 *
 		 * @param left The lower Position.
 		 * @param right The upper Position.
 		 * @return True if left is lower than the right Position.
 		 */
-		inline static bool less(const Position * left, const Position * right)
-		{
-			return left->operator <(*right);
-		}
+		static bool less(const Position * left, const Position * right);
 
 		/**
 		 * This returns the actual bending behaviour.
@@ -298,10 +269,7 @@ namespace mrw::model
 		 *
 		 * @return The actual Bending.
 		 */
-		inline Bending bending() const
-		{
-			return bending_state;
-		}
+		Bending bending() const;
 
 		/**
 		 * This sets the bending behaviour.
@@ -311,15 +279,29 @@ namespace mrw::model
 		 *
 		 * @param input
 		 */
-		inline void setBending(const Bending input)
-		{
-			bending_state = input;
-		}
+		void setBending(const Bending input);
 
 	protected:
+		/**
+		 * This method parses a position and appearance value for this
+		 * instance.
+		 *
+		 * @param value The value from the QSettings to parse.
+		 */
 		void    parse(const QString & value);
+
+		/**
+		 * This method converts the position and appearance information into
+		 * a QString which can be stored using QSettings.
+		 *
+		 * @return The encoded Position information.
+		 */
 		QString value() const;
 
+		/**
+		 * The increasing counter for each Position in case no initial
+		 * coordinates were configured.
+		 */
 		static unsigned counter;
 
 	private:

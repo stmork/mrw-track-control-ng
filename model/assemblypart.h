@@ -51,10 +51,6 @@ namespace mrw::model
 		 */
 		virtual bool valid() const = 0;
 
-		static AssemblyPart * resolve(
-			const ModelRailway * part_model,
-			const QString    &   reference);
-
 		/**
 		 * This method returns the name of this assembly part.
 		 *
@@ -80,6 +76,15 @@ namespace mrw::model
 		 * This method links all elements needed for the implementation.
 		 */
 		virtual void link() = 0;
+
+	private:
+		static AssemblyPart * resolve(
+			const ModelRailway * part_model,
+			const QString    &   reference);
+
+		friend class SwitchModule;
+		friend class MultiplexConnection;
+		friend class RailPart;
 	};
 }
 

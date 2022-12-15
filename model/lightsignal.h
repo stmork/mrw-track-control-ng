@@ -54,11 +54,6 @@ namespace mrw::model
 
 		bool valid() const override;
 
-		/**
-		 * This method returns the pointer to the CAN Controller module.
-		 *
-		 * @return The CAN Controller module.
-		 */
 		inline Controller * controller() const override
 		{
 			return signal_controller;

@@ -52,6 +52,26 @@ Region::~Region()
 	sections.clear();
 }
 
+Section * Region::section(const size_t index) const
+{
+	return sections.at(index);
+}
+
+size_t Region::sectionCount() const
+{
+	return sections.size();
+}
+
+const QString & Region::name() const
+{
+	return region_name;
+}
+
+bool Region::direction() const
+{
+	return direction_view;
+}
+
 void Region::parse(QSettings & settings, const bool dir)
 {
 	direction_view = settings.value(key(), dir).toBool();

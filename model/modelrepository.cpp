@@ -42,6 +42,24 @@ ModelRepository::~ModelRepository()
 	{
 		save();
 	}
+
+	qInfo("Shutting down model.");
+	delete model;
+}
+
+ModelRepository::operator ModelRailway * () const
+{
+	return model;
+}
+
+const QString & ModelRepository::plugin() const
+{
+	return can_plugin;
+}
+
+const QString & ModelRepository::interface() const
+{
+	return can_iface;
 }
 
 void ModelRepository::save()
@@ -51,9 +69,6 @@ void ModelRepository::save()
 
 	qInfo("Saving regions.");
 	storeRegions();
-
-	qInfo("Shutting down model.");
-	delete model;
 
 	settings_model.sync();
 }

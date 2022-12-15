@@ -54,30 +54,21 @@ namespace mrw::model
 		 *
 		 * @see link()
 		 */
-		inline Section * section(const size_t index) const
-		{
-			return sections.at(index);
-		}
+		Section * section(const size_t index) const;
 
 		/**
 		 * This method returns the amount of included Section elements.
 		 *
 		 * @return The Section count.
 		 */
-		inline size_t sectionCount() const
-		{
-			return sections.size();
-		}
+		size_t sectionCount() const;
 
 		/**
 		 * This method returns the name of this Region.
 		 *
 		 * @return  The name of this Region.
 		 */
-		inline const QString & name() const
-		{
-			return region_name;
-		}
+		const QString & name() const;
 
 		/**
 		 * This method returns the projected counting direction used on the
@@ -87,10 +78,7 @@ namespace mrw::model
 		 * @return The projection direction of the counting direction for the
 		 * GUI.
 		 */
-		inline bool direction() const
-		{
-			return direction_view;
-		}
+		bool direction() const;
 
 		/**
 		 * This method sets the the projected counting direction used on the
@@ -134,7 +122,14 @@ namespace mrw::model
 			}
 		}
 
+		/**
+		 * This method writes the preferred GUI view direction into the given
+		 * QSettings using the key() method for the value key.
+		 *
+		 * @param settings The QSettings to write the configuration to.
+		 */
 		void write(QSettings & settings) const;
+
 		QString toString() const override;
 
 	private:

@@ -73,10 +73,7 @@ namespace mrw::model
 			Section       *       model_section,
 			const QDomElement  &  element);
 
-		inline bool isRightHanded() const
-		{
-			return right_branch;
-		}
+		bool isRightHanded() const;
 
 		/**
 		 * This method returns the internal state of this RegularSwitch. As
@@ -86,10 +83,7 @@ namespace mrw::model
 		 * @return The internal state.
 		 * @see commandState()
 		 */
-		inline State state() const
-		{
-			return switch_state;
-		}
+		State state() const;
 
 		/**
 		 * This method sets the internal state of this RegularSwitch. As

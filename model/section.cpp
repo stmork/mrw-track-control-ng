@@ -142,6 +142,21 @@ bool Section::valid() const
 	return (section_controller != nullptr) && (section_module != nullptr);
 }
 
+const QString & Section::name() const
+{
+	return section_name;
+}
+
+void Section::setOccupation(const bool input)
+{
+	occupied = input;
+}
+
+bool Section::occupation() const
+{
+	return occupied;
+}
+
 bool Section::unlockable() const
 {
 	std::vector<RailPart *> reserved_parts;
@@ -157,6 +172,36 @@ bool Section::unlockable() const
 SectionState Section::state() const
 {
 	return occupied ? OCCUPIED : section_state;
+}
+
+void Section::setState(const SectionState input)
+{
+	section_state = input;
+}
+
+AssemblyPart * Section::assemblyPart(const int index) const
+{
+	return assembly_parts.at(index);
+}
+
+size_t Section::assemblyPartCount() const
+{
+	return assembly_parts.size();
+}
+
+SectionModule * Section::module() const
+{
+	return section_module;
+}
+
+Controller * Section::controller() const
+{
+	return section_controller;
+}
+
+Region * Section::region() const
+{
+	return section_region;
 }
 
 void Section::add(AssemblyPart * part)
@@ -222,9 +267,14 @@ void Section::free()
 	setState(FREE);
 }
 
-bool mrw::model::Section::isFree() const
+bool Section::isFree() const
 {
 	return section_state == SectionState::FREE;
+}
+
+QString Section::key() const
+{
+	return name();
 }
 
 bool Section::anyReserved() const
@@ -238,7 +288,7 @@ bool Section::anyReserved() const
 	return rails.size() > 0;
 }
 
-QString mrw::model::Section::get(const mrw::model::SectionState & state)
+QString Section::get(const SectionState & state)
 {
 	return state_map.get(state);
 }

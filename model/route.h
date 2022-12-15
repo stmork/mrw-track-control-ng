@@ -44,9 +44,9 @@ namespace mrw::model
 		bool isLastSectionEnded() const;
 
 		static void isLastSectionEnded(
-			std::unordered_set<mrw::model::Section *> & neighbours,
-			const mrw::model::RailPart         *        part,
-			const bool                                  direction);
+			std::unordered_set<Section *> & neighbours,
+			const RailPart         *        part,
+			const bool                      direction);
 
 	public slots:
 		void dump() const;

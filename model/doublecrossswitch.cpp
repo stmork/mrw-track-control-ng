@@ -53,7 +53,7 @@ void DoubleCrossSwitch::setState(
 #endif
 }
 
-QString mrw::model::DoubleCrossSwitch::get(const mrw::model::DoubleCrossSwitch::State & state)
+QString DoubleCrossSwitch::get(const DoubleCrossSwitch::State & state)
 {
 	return state_map.get(state);
 }

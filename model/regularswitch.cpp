@@ -41,6 +41,16 @@ RegularSwitch::RegularSwitch(
 	}
 }
 
+bool RegularSwitch::isRightHanded() const
+{
+	return right_branch;
+}
+
+RegularSwitch::State RegularSwitch::state() const
+{
+	return switch_state;
+}
+
 void RegularSwitch::setState(const RegularSwitch::State state)
 {
 	if (lock() == LockState::UNLOCKED)
@@ -149,7 +159,7 @@ SwitchState RegularSwitch::switchState() const
 	return static_cast<SwitchState>(switch_state);
 }
 
-QString mrw::model::RegularSwitch::get(const mrw::model::RegularSwitch::State & state)
+QString RegularSwitch::get(const RegularSwitch::State & state)
 {
 	return state_map.get(state);
 }
