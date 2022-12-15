@@ -19,6 +19,11 @@ FormSignal::FormSignal(
 {
 }
 
+const QString & mrw::model::FormSignal::name() const
+{
+	return part_name;
+}
+
 bool FormSignal::valid() const
 {
 	return (controller() != nullptr) && (module() != nullptr);
@@ -32,4 +37,9 @@ QString FormSignal::toString() const
 		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name(), -10).
 		arg(Device::get(lock()), -10);
+}
+
+Device * mrw::model::FormSignal::device()
+{
+	return this;
 }

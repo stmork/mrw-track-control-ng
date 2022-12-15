@@ -42,21 +42,12 @@ namespace mrw::model
 			const QDomElement  &  element,
 			const SignalType      is_main);
 
-		inline const QString & name() const override
-		{
-			return part_name;
-		}
+		const QString & name()     const override;
+		Device     *    device()         override;
+		bool            valid()    const override;
+		QString         toString() const override;
 
-		bool valid() const override;
-
-		QString toString() const override;
-
-		inline Device * device() override
-		{
-			return this;
-		}
-
-		inline bool unlockable() const override
+		inline bool unlockable()   const override
 		{
 			// TODO: Implement!
 			return true;

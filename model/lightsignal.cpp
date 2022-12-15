@@ -65,6 +65,21 @@ bool LightSignal::valid() const
 	return (signal_controller != nullptr) && (mux_connection != nullptr);
 }
 
+Controller * LightSignal::controller() const
+{
+	return signal_controller;
+}
+
+MultiplexConnection * LightSignal::connection() const
+{
+	return mux_connection;
+}
+
+const QString & LightSignal::name() const
+{
+	return part_name;
+}
+
 QString LightSignal::toString() const
 {
 	return QString("      L %1  %2   : [%3] %4 %5").
@@ -73,4 +88,14 @@ QString LightSignal::toString() const
 		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name(), -10).
 		arg(Device::get(lock()), -10);
+}
+
+size_t LightSignal::usedPins() const
+{
+	return lights;
+}
+
+Device * LightSignal::device()
+{
+	return this;
 }

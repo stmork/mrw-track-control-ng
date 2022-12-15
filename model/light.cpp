@@ -18,3 +18,18 @@ Light::Light(
 	threshold(ModelRailway::value(element, "schwellwert"))
 {
 }
+
+const QString & Light::name() const
+{
+	return light_name;
+}
+
+Controller * Light::controller() const
+{
+	return light_controller;
+}
+
+bool Light::unlockable() const
+{
+	return true;
+}

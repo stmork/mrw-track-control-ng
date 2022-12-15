@@ -52,12 +52,7 @@ namespace mrw::model
 			const SignalType      type,
 			const unsigned        light_count);
 
-		bool valid() const override;
-
-		inline Controller * controller() const override
-		{
-			return signal_controller;
-		}
+		Controller * controller() const override;
 
 		/**
 		 * This method returns the pointer to the controlling
@@ -65,15 +60,13 @@ namespace mrw::model
 		 *
 		 * @return The controlling MultiplexConnection module.
 		 */
-		inline MultiplexConnection * connection() const
-		{
-			return mux_connection;
-		}
+		MultiplexConnection * connection() const;
 
-		inline const QString & name() const override
-		{
-			return part_name;
-		}
+		const QString & name()     const override;
+		Device     *    device()         override;
+		bool            valid()    const override;
+		QString         toString() const override;
+
 
 		inline bool unlockable() const override
 		{
@@ -81,23 +74,14 @@ namespace mrw::model
 			return true;
 		}
 
-		QString toString() const override;
-
 		/**
 		 * This method returns how much pins are used by the controlling
 		 * MultiplexConnection module.
 		 *
 		 * @return The pin count used to control this LightSignal.
 		 */
-		inline size_t usedPins() const
-		{
-			return lights;
-		}
+		size_t usedPins() const;
 
-		inline Device * device() override
-		{
-			return this;
-		}
 	};
 }
 
