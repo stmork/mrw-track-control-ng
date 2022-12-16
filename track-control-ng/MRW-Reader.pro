@@ -11,6 +11,7 @@ SOURCES += \
 	ctrl/railpartinfo.cpp \
 	ctrl/signalproxy.cpp \
 	ctrl/switchcontroller.cpp \
+	extendedmodelrepository.cpp \
 	main.cpp \
 	mainwindow.cpp \
 	mrwmessagedispatcher.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
 	ctrl/railpartinfo.h \
 	ctrl/signalproxy.h \
 	ctrl/switchcontroller.h \
+	extendedmodelrepository.h \
 	mainwindow.h \
 	mrwmessagedispatcher.h \
 	regionform.h \

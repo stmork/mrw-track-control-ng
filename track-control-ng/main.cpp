@@ -11,19 +11,19 @@
 #include <util/settings.h>
 #include <util/dumphandler.h>
 #include <util/termhandler.h>
-#include <model/modelrepository.h>
 
 #include "mainwindow.h"
 #include "mrwmessagedispatcher.h"
+#include "extendedmodelrepository.h"
 
 using namespace mrw::util;
 using namespace mrw::model;
 
 int main(int argc, char * argv[])
 {
-	QApplication    app(argc, argv);
-	TermHandler     terminator( { SIGTERM, SIGINT } );
-	ModelRepository repo(ModelRepository::proposeModelName(), true);
+	QApplication            app(argc, argv);
+	TermHandler             terminator( { SIGTERM, SIGINT } );
+	ExtendedModelRepository repo(ModelRepository::proposeModelName());
 
 	if (repo)
 	{
