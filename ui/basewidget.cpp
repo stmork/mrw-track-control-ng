@@ -33,7 +33,7 @@ BaseWidget::BaseWidget(QWidget * parent) : QWidget(parent)
 {
 }
 
-void mrw::ui::BaseWidget::setVerbose(const bool activate)
+void BaseWidget::setVerbose(const bool activate)
 {
 	verbose = activate;
 }

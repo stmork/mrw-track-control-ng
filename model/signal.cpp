@@ -55,12 +55,12 @@ Signal::Signal(
 {
 }
 
-bool mrw::model::Signal::direction() const
+bool Signal::direction() const
 {
 	return signal_direction;
 }
 
-mrw::model::Signal::SignalType mrw::model::Signal::type() const
+Signal::SignalType Signal::type() const
 {
 	return signal_type;
 }
@@ -109,7 +109,7 @@ void Signal::findPair(const std::vector<Signal *> & section_signals)
 	}
 }
 
-QString mrw::model::Signal::key() const
+QString Signal::key() const
 {
 	return section()->region()->name() + partName();
 }

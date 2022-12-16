@@ -35,7 +35,7 @@ QChar WidgetSaver::direction(const bool dir)
 	return dir ? 'R' : 'L';
 }
 
-QChar WidgetSaver::lockState(const mrw::model::Device::LockState & state)
+QChar WidgetSaver::lockState(const Device::LockState & state)
 {
 	return Device::get(state).at(0);
 }

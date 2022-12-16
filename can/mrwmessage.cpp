@@ -229,7 +229,7 @@ bool MrwMessage::valid() const
 	}
 }
 
-uint8_t mrw::can::MrwMessage::operator[](const size_t index) const
+uint8_t MrwMessage::operator[](const size_t index) const
 {
 	if (index >= start())
 	{

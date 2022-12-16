@@ -113,7 +113,7 @@ void ControllerRegistry::reset()
 	transaction.clear();
 }
 
-void mrw::ctrl::ControllerRegistry::complete()
+void ControllerRegistry::complete()
 {
 	if (transaction.size() == 0)
 	{
@@ -126,7 +126,7 @@ void mrw::ctrl::ControllerRegistry::complete()
 	}
 }
 
-void mrw::ctrl::ControllerRegistry::dump()
+void ControllerRegistry::dump()
 {
 	for (ControllerRegistrand * registrand : transaction)
 	{

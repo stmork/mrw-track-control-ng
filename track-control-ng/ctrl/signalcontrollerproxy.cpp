@@ -309,12 +309,12 @@ void SignalControllerProxy::dec()
 	ControllerRegistry::instance().decrease(this);
 }
 
-bool mrw::ctrl::SignalControllerProxy::hasMain()
+bool SignalControllerProxy::hasMain()
 {
 	return main_signal != nullptr;
 }
 
-void mrw::ctrl::SignalControllerProxy::prepare()
+void SignalControllerProxy::prepare()
 {
 	__METHOD__;
 

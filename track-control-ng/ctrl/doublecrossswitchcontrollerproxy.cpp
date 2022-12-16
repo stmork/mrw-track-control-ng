@@ -76,7 +76,7 @@ void DoubleCrossSwitchControllerProxy::turnLeft()
 	emit turn();
 }
 
-void mrw::ctrl::DoubleCrossSwitchControllerProxy::change()
+void DoubleCrossSwitchControllerProxy::change()
 {
 	part->setState(doTurnLeft() ?
 		DoubleCrossSwitch::State::BC :
@@ -195,7 +195,7 @@ bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 	return false;
 }
 
-QString mrw::ctrl::DoubleCrossSwitchControllerProxy::toString() const
+QString DoubleCrossSwitchControllerProxy::toString() const
 {
 	return *part;
 }

@@ -14,7 +14,7 @@ using namespace mrw::can;
 using namespace mrw::model;
 
 TrackerService::TrackerService(
-	mrw::model::ModelRepository & repo,
+	ModelRepository & repo,
 	QObject           *           parent) :
 	MrwBusService(repo.interface(), repo.plugin(), parent)
 {
@@ -34,7 +34,7 @@ void TrackerService::info()
 	}
 }
 
-void TrackerService::process(const mrw::can::MrwMessage & message)
+void TrackerService::process(const MrwMessage & message)
 {
 	if (message.isResponse() && (message.response() == MSG_OK))
 	{

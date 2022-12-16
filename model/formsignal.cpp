@@ -19,7 +19,7 @@ FormSignal::FormSignal(
 {
 }
 
-const QString & mrw::model::FormSignal::name() const
+const QString & FormSignal::name() const
 {
 	return part_name;
 }
@@ -39,7 +39,7 @@ QString FormSignal::toString() const
 		arg(Device::get(lock()), -10);
 }
 
-Device * mrw::model::FormSignal::device()
+Device * FormSignal::device()
 {
 	return this;
 }

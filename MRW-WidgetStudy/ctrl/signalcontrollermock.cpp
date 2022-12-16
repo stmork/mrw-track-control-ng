@@ -63,37 +63,37 @@ void SignalControllerMock::setExtension(const int new_extension)
 
 void SignalControllerMock::setShuntStop()
 {
-	shunt_state = mrw::model::Signal::Symbol::STOP;
+	shunt_state = Signal::Symbol::STOP;
 	emit update();
 }
 
 void SignalControllerMock::setShuntGo()
 {
-	shunt_state = mrw::model::Signal::Symbol::GO;
+	shunt_state = Signal::Symbol::GO;
 	emit update();
 }
 
 void SignalControllerMock::setDistantStop()
 {
-	distant_state = mrw::model::Signal::Symbol::STOP;
+	distant_state = Signal::Symbol::STOP;
 	emit update();
 }
 
 void SignalControllerMock::setDistantGo()
 {
-	distant_state = mrw::model::Signal::Symbol::GO;
+	distant_state = Signal::Symbol::GO;
 	emit update();
 }
 
 void SignalControllerMock::setMainStop()
 {
-	main_state = mrw::model::Signal::Symbol::STOP;
+	main_state = Signal::Symbol::STOP;
 	emit update();
 }
 
 void SignalControllerMock::setMainGo()
 {
-	main_state = mrw::model::Signal::Symbol::GO;
+	main_state = Signal::Symbol::GO;
 	emit update();
 }
 
