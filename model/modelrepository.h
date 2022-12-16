@@ -46,6 +46,7 @@ namespace mrw::model
 	 */
 	class ModelRepository
 	{
+		static const char      *     MODEL_GROUP;
 		static const char      *     FILE_GROUP;
 		static const char      *     REGION_GROUP;
 		static const char      *     POSITION_GROUP;
@@ -139,7 +140,10 @@ namespace mrw::model
 		void info();
 		void xml();
 
+		static QString modelName(const int index = 1);
+
 	private:
+		void        prepare();
 		void        readMaps();
 		QString     lookup();
 		QStringList lookupProperties(const QString & base);

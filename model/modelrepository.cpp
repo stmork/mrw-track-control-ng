@@ -3,6 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
+#include <QCoreApplication>
 #include <QHostInfo>
 #include <QDirIterator>
 #include <QDebug>
@@ -14,6 +15,7 @@
 using namespace mrw::util;
 using namespace mrw::model;
 
+const char * ModelRepository::MODEL_GROUP       = "model";
 const char * ModelRepository::FILE_GROUP        = "files";
 const char * ModelRepository::REGION_GROUP      = "regions";
 const char * ModelRepository::POSITION_GROUP    = "positions";
@@ -29,6 +31,10 @@ ModelRepository::ModelRepository(const QString & modelname, const bool auto_save
 {
 	filename += modelname + ".modelrailway";
 	filter << filename;
+
+	prepare();
+
+	model = new ModelRailway(model_filename);
 
 	readMaps();
 	prepareHost();
@@ -89,7 +95,18 @@ void ModelRepository::xml()
 	}
 }
 
-void ModelRepository::readMaps()
+QString ModelRepository::modelName(const int index)
+{
+	QStringList   args = QCoreApplication::arguments();
+	Settings      settings("model");
+	SettingsGroup group(&settings, MODEL_GROUP);
+
+	return args.size() > index ?
+				args[index] :
+				settings.value("filename", "RailwayModel").toString();
+}
+
+void ModelRepository::prepare()
 {
 	SettingsGroup group(&settings_model, FILE_GROUP);
 
@@ -106,11 +123,10 @@ void ModelRepository::readMaps()
 		region_filename   = settings_model.value("regions").toString();
 		railpart_filename = settings_model.value("railparts").toString();
 	}
+}
 
-	// cppcheck-suppress noCopyConstructor
-	// cppcheck-suppress noOperatorEq
-	model = new ModelRailway(model_filename);
-
+void ModelRepository::readMaps()
+{
 	region_map.read(region_filename);
 	signal_map.read(signal_filename);
 	railpart_map.read(railpart_filename);
