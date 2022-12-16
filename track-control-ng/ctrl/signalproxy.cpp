@@ -28,7 +28,16 @@ SignalProxy::~SignalProxy()
 
 void SignalProxy::start(Signal * input)
 {
-	signal = input;
+	if ((input != nullptr) && (input->device()->controller() == nullptr))
+	{
+		// Controller for signal not configured.
+		qWarning().noquote() << "No controller for signal" << *input << "configured!";
+		signal = nullptr;
+	}
+	else
+	{
+		signal = input;
+	}
 	enter();
 }
 

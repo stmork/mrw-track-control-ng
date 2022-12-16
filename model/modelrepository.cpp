@@ -24,28 +24,36 @@ const char * ModelRepository::REGION_FILENAME   = "Gruppen.properties";
 const char * ModelRepository::SIGNAL_FILENAME   = "Signale.properties";
 const char * ModelRepository::RAILPART_FILENAME = "Gleisteile.properties";
 
-ModelRepository::ModelRepository(const QString & input, const bool auto_save_input) :
+ModelRepository::ModelRepository(const QString & input, const bool position_using) :
 	modelname(input),
 	settings_model(modelname),
 	home_dir(QDir::homePath()),
-	auto_save(auto_save_input)
+	use_positions(position_using)
 {
 	filename += modelname + ".modelrailway";
 	filter << filename;
 
-	prepare();
+	if (prepareModel())
+	{
+		SettingsGroup group(&settings_host, MODEL_GROUP);
 
-	model = new ModelRailway(model_filename);
+		model = new ModelRailway(model_filename);
 
-	readMaps();
+		readMaps();
+		settings_host.setValue("modelname", modelname);
+	}
 	prepareHost();
-	prepareRegions();
-	prepareRailParts();
+
+	if (use_positions)
+	{
+		prepareRegions();
+		prepareRailParts();
+	}
 }
 
 ModelRepository::~ModelRepository()
 {
-	if (auto_save)
+	if (use_positions)
 	{
 		save();
 	}
@@ -109,19 +117,23 @@ QString ModelRepository::proposeModelName(const int index)
 
 	return args.size() > index ?
 		args[index] :
-		settings.value("filename", "RailwayModel").toString();
+		settings.value("modelname", "RailwayModel").toString();
 }
 
-void ModelRepository::prepare()
+bool ModelRepository::prepareModel()
 {
 	SettingsGroup group(&settings_model, FILE_GROUP);
+
+	qDebug().noquote() << "Preparing model" << modelname;
 
 	// First try: Read directly from config by default filename."
 	model_filename = settings_model.value("filename", home_dir.absolutePath() + "/mrw/" + filename).toString();
 	if (!QFile::exists(model_filename))
 	{
 		// lookup file.
-		lookup();
+		const QString found = lookup();
+
+		return !found.isEmpty();
 	}
 	else
 	{
@@ -129,10 +141,13 @@ void ModelRepository::prepare()
 		region_filename   = settings_model.value("regions").toString();
 		railpart_filename = settings_model.value("railparts").toString();
 	}
+	return true;
 }
 
 void ModelRepository::readMaps()
 {
+	qDebug("Reading position maps...");
+
 	region_map.read(region_filename);
 	signal_map.read(signal_filename);
 	railpart_map.read(railpart_filename);
@@ -147,6 +162,7 @@ QString ModelRepository::lookup()
 {
 	QDirIterator dir_it(QDir::homePath(), filter, QDir::Files, QDirIterator::Subdirectories);
 
+	qDebug().noquote() << "Looking up model file " << model_filename;
 	while (dir_it.hasNext())
 	{
 		QString file = dir_it.next();
@@ -203,6 +219,7 @@ QStringList ModelRepository::lookupProperties(const QString & input)
 
 void ModelRepository::setFilenames()
 {
+	qDebug("Setting filenames...");
 	settings_model.setValue("filename",  model_filename);
 	settings_model.setValue("signals",   signal_filename);
 	settings_model.setValue("regions",   region_filename);
@@ -220,7 +237,7 @@ void ModelRepository::prepareHost()
 	dump_result = settings_host.value("dump", dump_result).toBool();
 	dump_xml    = settings_host.value("xml",  dump_xml).toBool();
 
-	qDebug().noquote().nospace() << can_plugin << "/" << can_iface;
+	qDebug().noquote().nospace() << "Using CAN: " << can_plugin << "/" << can_iface;
 }
 
 void ModelRepository::prepareRegions()

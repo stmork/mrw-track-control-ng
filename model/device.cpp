@@ -67,6 +67,10 @@ void Device::setLock(const Device::LockState input)
 
 MrwMessage Device::command(const Command command) const
 {
+	if (controller() == nullptr)
+	{
+		throw std::invalid_argument("No controller specified!");
+	}
 	return MrwMessage(command, controller()->id(), unitNo());
 }
 

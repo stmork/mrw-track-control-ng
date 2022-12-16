@@ -17,6 +17,7 @@
 #include "model/switchmodule.h"
 #include "model/lightmodule.h"
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 Controller::Controller(
@@ -156,4 +157,29 @@ QString Controller::toString() const
 	return QString::asprintf("  Controller %c modules=%zu ports=%zu : %4d",
 			valid() ? 'V' : '-', modules.size(), ports(),
 			controller_id);
+}
+
+ControllerId Controller::id() const
+{
+	return controller_id;
+}
+
+Module * Controller::module(const int index) const
+{
+	return modules.at(index);
+}
+
+size_t Controller::moduleCount() const
+{
+	return modules.size();
+}
+
+MultiplexConnection * Controller::connection(const ModuleId index) const
+{
+	return connections.at(index);
+}
+
+size_t Controller::connectionCount() const
+{
+	return connections.size();
 }

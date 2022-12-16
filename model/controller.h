@@ -68,10 +68,7 @@ namespace mrw::model
 		 *
 		 * @return The controllers CAN ID.
 		 */
-		inline mrw::can::ControllerId id() const
-		{
-			return controller_id;
-		}
+		mrw::can::ControllerId id() const;
 
 		/**
 		 * This method returns the nth Module element. It is not ID-based
@@ -81,20 +78,14 @@ namespace mrw::model
 		 * @param index The zero based index of connected Module boards.
 		 * @return The found Module instance.
 		 */
-		inline Module * module(const int index) const
-		{
-			return modules.at(index);
-		}
+		Module * module(const int index) const;
 
 		/**
 		 * This method returns the amount of connected Module elements.
 		 *
 		 * @return The connected Module count.
 		 */
-		inline size_t moduleCount() const
-		{
-			return modules.size();
-		}
+		size_t moduleCount() const;
 
 		/**
 		 * This method returns the nth MultiplexConnection. It is not ID-based
@@ -105,10 +96,7 @@ namespace mrw::model
 		 * boards.
 		 * @return The found MultiplexConnection instance.
 		 */
-		inline MultiplexConnection * connection(const ModuleId index) const
-		{
-			return connections.at(index);
-		}
+		MultiplexConnection * connection(const ModuleId index) const;
 
 		/**
 		 * This method returns the amount of connected serial multiplex
@@ -116,10 +104,7 @@ namespace mrw::model
 		 *
 		 * @return The connected MultiplexConnection count.
 		 */
-		inline size_t connectionCount() const
-		{
-			return connections.size();
-		}
+		size_t connectionCount() const;
 
 		/**
 		 * This method validates if all underlying modules and connections

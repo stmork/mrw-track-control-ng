@@ -125,6 +125,7 @@ namespace mrw::model
 		 *
 		 * @param command The mrw::can::Command specifier.
 		 * @return The resulting mrw::can::MrwCommand.
+		 * @throws std::invalid_argument if the Controller was not configured.
 		 *
 		 * @see Controller::id()
 		 * @see mrw::can::MrwMessage

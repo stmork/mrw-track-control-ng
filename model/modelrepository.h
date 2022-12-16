@@ -73,7 +73,7 @@ namespace mrw::model
 		QString                      can_iface;
 		bool                         dump_result = false;
 		bool                         dump_xml    = false;
-		bool                         auto_save   = false;
+		bool                         use_positions   = false;
 
 		ModelRailway        *        model = nullptr;
 		mrw::util::Properties        region_map;
@@ -88,12 +88,12 @@ namespace mrw::model
 		 * the home directory is started.
 		 *
 		 * @param modelname The name of the model configuration to be loaded.
-		 * @param auto_save True if the possibly edited positions should
-		 * saved on destruction.
+		 * @param use_positions True if the possibly edited positions should
+		 * used. Setting this to @c true is only useful when using a GUI.
 		 */
 		explicit ModelRepository(
 			const QString & modelname,
-			const bool      auto_save = false);
+			const bool      use_positions = false);
 		ModelRepository() = delete;
 
 		/**
@@ -137,8 +137,28 @@ namespace mrw::model
 		 */
 		const QString & interface() const;
 
+		/**
+		 * This method saves the Position data into the model named QSettings.
+		 */
 		void save();
+
+		/**
+		 * This method dumps the parsed model configuration data and states if
+		 * this is enabled in the model named QSettings. Inside the
+		 * <modelname>.conf file the value <hostname>/dump has to be set to
+		 * @c true.
+		 *
+		 * @see ModelRailway::info();
+		 */
 		void info();
+
+		/**
+		 * This method dumps the XML/XMI data if this is enabled in the model
+		 * named QSettings. Inside the <modelname>.conf file the value
+		 * <hostname>/xml has to be set tu @c true.
+		 *
+		 * @see ModelRailway::xml();
+		 */
 		void xml();
 
 		/**
@@ -161,7 +181,7 @@ namespace mrw::model
 		static QString proposeModelName(const int index = 1);
 
 	private:
-		void        prepare();
+		bool        prepareModel();
 		void        readMaps();
 		QString     lookup();
 		QStringList lookupProperties(const QString & base);
