@@ -102,8 +102,8 @@ QString ModelRepository::modelName(const int index)
 	SettingsGroup group(&settings, MODEL_GROUP);
 
 	return args.size() > index ?
-				args[index] :
-				settings.value("filename", "RailwayModel").toString();
+		args[index] :
+		settings.value("filename", "RailwayModel").toString();
 }
 
 void ModelRepository::prepare()
