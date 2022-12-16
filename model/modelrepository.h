@@ -122,7 +122,9 @@ namespace mrw::model
 
 		/**
 		 * This method returns the CAN bus plugin name used by the
-		 * QCanBusDevice driver.
+		 * QCanBusDevice driver. The interface name is configured inside the
+		 * <modelname>.conf file under the value <hostname>/interface. The
+		 * default is "socketcan".
 		 *
 		 * @return The CAN plugin name of the QCanBusDevice.
 		 * @see QCanBusDevice
@@ -130,7 +132,9 @@ namespace mrw::model
 		const QString & plugin() const;
 
 		/**
-		 * This method returns the interface of a specific CAN bus plugin.
+		 * This method returns the interface of a specific CAN bus plugin. The
+		 * interface name is configured inside the <modelname>.conf file under
+		 * the value <hostname>/interface. The default is "can0".
 		 *
 		 * @return The interface name of the CAN plugin.
 		 * @see QCanBusDevice
@@ -155,7 +159,7 @@ namespace mrw::model
 		/**
 		 * This method dumps the XML/XMI data if this is enabled in the model
 		 * named QSettings. Inside the <modelname>.conf file the value
-		 * <hostname>/xml has to be set tu @c true.
+		 * <hostname>/xml has to be set to @c true.
 		 *
 		 * @see ModelRailway::xml();
 		 */
