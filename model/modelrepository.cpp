@@ -24,7 +24,8 @@ const char * ModelRepository::REGION_FILENAME   = "Gruppen.properties";
 const char * ModelRepository::SIGNAL_FILENAME   = "Signale.properties";
 const char * ModelRepository::RAILPART_FILENAME = "Gleisteile.properties";
 
-ModelRepository::ModelRepository(const QString & modelname, const bool auto_save_input) :
+ModelRepository::ModelRepository(const QString & input, const bool auto_save_input) :
+	modelname(input),
 	settings_model(modelname),
 	home_dir(QDir::homePath()),
 	auto_save(auto_save_input)
@@ -51,6 +52,11 @@ ModelRepository::~ModelRepository()
 
 	qInfo("Shutting down model.");
 	delete model;
+}
+
+const QString & ModelRepository::modelName() const
+{
+	return modelname;
 }
 
 ModelRepository::operator ModelRailway * () const
@@ -95,10 +101,10 @@ void ModelRepository::xml()
 	}
 }
 
-QString ModelRepository::modelName(const int index)
+QString ModelRepository::proposeModelName(const int index)
 {
 	QStringList   args = QCoreApplication::arguments();
-	Settings      settings("model");
+	Settings      settings;
 	SettingsGroup group(&settings, MODEL_GROUP);
 
 	return args.size() > index ?

@@ -17,12 +17,7 @@ int main(int argc, char * argv[])
 {
 	QCoreApplication      app(argc, argv);
 	TermHandler           term_handler( { SIGTERM, SIGINT } );
-	Settings              settings("model");
-	SettingsGroup         group(&settings, "model");
-	QString               modelname = argc > 1 ?
-		argv[1] :
-		settings.value("filename", "RailwayModel").toString();
-	ModelRepository       repo(modelname);
+	ModelRepository       repo(ModelRepository::proposeModelName());
 	SimulatorService      simulator(repo);
 	DumpHandler           dumper([&]()
 	{

@@ -55,17 +55,18 @@ namespace mrw::model
 		static const char      *     SIGNAL_FILENAME;
 		static const char      *     RAILPART_FILENAME;
 
-		mrw::util::Settings          settings_model;
-		mrw::util::Settings          settings_host;
-
-		QDir                         home_dir;
-
+		QString                      modelname;
 		QString                      filename;
 		QString                      model_filename;
 		QString                      signal_filename;
 		QString                      railpart_filename;
 		QString                      region_filename;
 		QStringList                  filter;
+
+		mrw::util::Settings          settings_model;
+		mrw::util::Settings          settings_host;
+
+		QDir                         home_dir;
 
 		// Per host configuration
 		QString                      can_plugin;
@@ -140,7 +141,24 @@ namespace mrw::model
 		void info();
 		void xml();
 
-		static QString modelName(const int index = 1);
+		/**
+		 * This method returns the configured modelname.
+		 *
+		 * @return The configured modelname.
+		 * @see modelName()
+		 */
+		const QString & modelName() const;
+
+		/**
+		 * This method proposes a modelname from the applications argument list
+		 * or from a stored modelname from the QSettings.
+		 *
+		 * @param index The argument index to use or if not available an entry
+		 * from the QSettings.
+		 *
+		 * @return The proposed modelname.
+		 */
+		static QString proposeModelName(const int index = 1);
 
 	private:
 		void        prepare();

@@ -21,14 +21,9 @@ using namespace mrw::model;
 
 int main(int argc, char * argv[])
 {
-	QApplication  app(argc, argv);
-	TermHandler   terminator( { SIGTERM, SIGINT } );
-	Settings      settings("model");
-	SettingsGroup group(&settings, "model");
-	QString       modelname = argc > 1 ?
-		argv[1] :
-		settings.value("filename", "RailwayModel").toString();
-	ModelRepository repo(modelname, true);
+	QApplication    app(argc, argv);
+	TermHandler     terminator( { SIGTERM, SIGINT } );
+	ModelRepository repo(ModelRepository::proposeModelName(), true);
 
 	if (repo)
 	{
@@ -44,13 +39,12 @@ int main(int argc, char * argv[])
 		repo.info();
 		repo.xml();
 
-		settings.setValue("filename", modelname);
 		main_window.show();
 		return app.exec();
 	}
 	else
 	{
-		qCritical() << "No model available: " << modelname;
+		qCritical().noquote() << "No model available:" << repo.modelName();
 
 		return EXIT_FAILURE;
 	}
