@@ -46,6 +46,12 @@ void SignalControllerMock::setSectionState(const SectionState state)
 	emit update();
 }
 
+void SignalControllerMock::setLock(const Device::LockState lock)
+{
+	lock_state = lock;
+	emit update();
+}
+
 void SignalControllerMock::setBending(const Bending bending)
 {
 	bending_state = bending;

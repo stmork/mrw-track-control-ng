@@ -128,6 +128,31 @@ SignalStudy::SignalStudy(QWidget * parent) :
 		&mock, &SignalControllerMock::setMainGo);
 
 	/********************************************************/
+	/*   Lock state                                         */
+	/********************************************************/
+
+	connect(ui->errorButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(Device::LockState::FAIL);
+	});
+	connect(ui->openButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(Device::LockState::UNLOCKED);
+	});
+	connect(ui->pendingButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(Device::LockState::PENDING);
+	});
+	connect(ui->lockedButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setLock(Device::LockState::LOCKED);
+	});
+
+	/********************************************************/
 	/*   Repaint connection                                 */
 	/********************************************************/
 
@@ -160,6 +185,7 @@ SignalStudy::SignalStudy(QWidget * parent) :
 	ui->stopButton_1->setChecked(true);
 	ui->stopButton_2->setChecked(true);
 	ui->stopButton_3->setChecked(true);
+	ui->openButton->setChecked(true);
 }
 
 SignalStudy::~SignalStudy()

@@ -80,6 +80,7 @@ namespace mrw::ctrl
 
 		void setDirection(const bool dir = true);
 		void setSectionState(const mrw::model::SectionState state);
+		void setLock(const mrw::model::Device::LockState lock);
 		void setBending(const mrw::model::Position::Bending bending);
 
 	signals:

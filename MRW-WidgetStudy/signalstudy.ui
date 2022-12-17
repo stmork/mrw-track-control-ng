@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>681</width>
-    <height>498</height>
+    <width>863</width>
+    <height>614</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -221,6 +221,43 @@
          <widget class="QRadioButton" name="goButton_3">
           <property name="text">
            <string>Fahrt</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_6">
+       <property name="title">
+        <string>Verschluss</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <item>
+         <widget class="QRadioButton" name="errorButton">
+          <property name="text">
+           <string>Fehler</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="openButton">
+          <property name="text">
+           <string>offen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="pendingButton">
+          <property name="text">
+           <string>Umlauf</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="lockedButton">
+          <property name="text">
+           <string>verschlossen</string>
           </property>
          </widget>
         </item>
