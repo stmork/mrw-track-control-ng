@@ -131,11 +131,19 @@ void WidgetRoute::tryUnblock()
 		}
 		while (first != section);
 	}
+	else
+	{
+		qDebug().noquote() << "Try unblock: no signal";
+	}
+	qDebug().noquote() << "Try unblock:" << countAllocatedSections() << "sections left";
+
+	finalize();
 }
 
 void WidgetRoute::unregister()
 {
 	unregister(dynamic_cast<SectionController *>(QObject::sender()));
+	finalize();
 }
 
 void WidgetRoute::unregister(Section * section)
@@ -177,20 +185,33 @@ void WidgetRoute::unregister(SectionController * controller)
 		track.pop_front();
 	}
 
-	qDebug().noquote() << "Unregister: " << sections.size() << "sections left";
+	qDebug().noquote() << "Unregister: " << countAllocatedSections() << "sections left";
+}
 
-	if (sections.size() == 1)
+void WidgetRoute::finalize()
+{
+	if (countAllocatedSections() == 1)
 	{
 		if (sections.back() == last)
 		{
-			qDebug().noquote() << "Unregister: " << String::bold("Finished!");
+			qDebug().noquote() << "Finalize:   " << String::bold("Finished!");
 			emit finished();
 		}
 		else
 		{
-			qDebug().noquote() << "Unregister: " << String::bold("Reached!");
+			qDebug().noquote() << "Finalize:   " << String::bold("Reached!");
 		}
 	}
+}
+
+size_t WidgetRoute::countAllocatedSections()
+{
+	return std::count_if(sections.begin(), sections.end(), [&](Section * section)
+	{
+		return !
+			(section->isFree() ||
+				(section->state() == SectionState::PASSED));
+	});
 }
 
 void WidgetRoute::reset()

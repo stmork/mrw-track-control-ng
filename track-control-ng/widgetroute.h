@@ -62,6 +62,8 @@ private:
 
 	void unregister(mrw::model::Section * section);
 	void unregister(mrw::ctrl::SectionController * controller);
+	void finalize();
+	size_t countAllocatedSections();
 
 	virtual void reset() override;
 	virtual void turnSwitches() override;
