@@ -45,7 +45,12 @@ namespace mrw::statechart
 	{
 		Q_OBJECT
 
+		mrw::model::Signal * main_signal = nullptr;
+
 	public:
+		void start(
+			mrw::model::Signal * input,
+			mrw::model::Signal * combined);
 		void send(sc::integer symbol) override;
 	};
 
@@ -53,7 +58,13 @@ namespace mrw::statechart
 	{
 		Q_OBJECT
 
+		mrw::model::Signal * main_signal = nullptr;
+
 	public:
+		void start(
+			mrw::model::Signal * input,
+			mrw::model::Signal * combined);
+		bool isCombined();
 		void send(sc::integer symbol) override;
 	};
 }

@@ -41,6 +41,8 @@ namespace mrw::model
 	 * only two known triples) the positions were counted up so they are
 	 * initially visible and editable.
 	 *
+	 * @see mrw::model::Position for more information.
+	 *
 	 * This class also maintain per hostname CAN bus configuration. So it is
 	 * possible to make different CAN configuration available on specific hosts.
 	 */
@@ -71,11 +73,11 @@ namespace mrw::model
 		// Per host configuration
 		QString                      can_plugin;
 		QString                      can_iface;
-		bool                         dump_result = false;
-		bool                         dump_xml    = false;
-		bool                         use_positions   = false;
+		bool                         dump_result   = false;
+		bool                         dump_xml      = false;
+		bool                         use_positions = false;
 
-		ModelRailway        *        model = nullptr;
+		ModelRailway        *        model         = nullptr;
 		mrw::util::Properties        region_map;
 		mrw::util::Properties        signal_map;
 		mrw::util::Properties        railpart_map;

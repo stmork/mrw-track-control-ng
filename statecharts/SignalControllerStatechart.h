@@ -144,6 +144,8 @@ namespace mrw
 
 				virtual bool hasMain() = 0;
 
+				virtual bool isMain() = 0;
+
 				virtual void prepare() = 0;
 
 				virtual void fail() = 0;

@@ -33,7 +33,9 @@ namespace mrw::ctrl
 		mrw::statechart::MainProxy                   statechart_main;
 		mrw::statechart::DistantProxy                statechart_distant;
 		mrw::statechart::ShuntProxy                  statechart_shunt;
-		const bool                                   direction = true;
+		const bool                                   direction  = true;
+		mrw::model::Device::LockState                lock_state =
+			mrw::model::Device::LockState::UNLOCKED;
 
 		mrw::model::Section  * signal_section = nullptr;
 		mrw::model::Signal  *  base_signal    = nullptr;
@@ -51,6 +53,8 @@ namespace mrw::ctrl
 			const bool            direction,
 			QObject       *       parent);
 		virtual ~SignalControllerProxy();
+
+		bool isUnlocked() const;
 
 	signals:
 		void enable();
@@ -97,6 +101,7 @@ namespace mrw::ctrl
 		virtual void dec() override;
 
 		virtual bool hasMain() override;
+		virtual bool isMain() override;
 		virtual void prepare() override;
 
 		virtual void fail() override;

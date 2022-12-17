@@ -15,6 +15,8 @@ using namespace mrw::model;
 using namespace mrw::ctrl;
 using namespace mrw::statechart;
 
+using LockState = Device::LockState;
+
 SignalControllerProxy::SignalControllerProxy(
 	Section  *  parent_section,
 	const bool  dir,
@@ -24,9 +26,9 @@ SignalControllerProxy::SignalControllerProxy(
 	direction(dir),
 	signal_section(parent_section)
 {
-	std::vector<Signal *> section_signals;
-	std::vector<RailPart *>   section_rails;
-	QStringList           list;
+	std::vector<Signal *>   section_signals;
+	std::vector<RailPart *> section_rails;
+	QStringList             list;
 
 	// Find signal in specific direction.
 	signal_section->parts<Signal>(section_signals, [dir] (const Signal * input)
@@ -52,7 +54,7 @@ SignalControllerProxy::SignalControllerProxy(
 		switch (signal->type())
 		{
 		case Signal::SHUNT_SIGNAL:
-			shunt_signal = signal;
+			shunt_signal   = signal;
 			break;
 
 		case Signal::DISTANT_SIGNAL:
@@ -60,12 +62,12 @@ SignalControllerProxy::SignalControllerProxy(
 			break;
 
 		case Signal::MAIN_SIGNAL:
-			main_signal = signal;
+			main_signal    = signal;
 			break;
 
 		case Signal::MAIN_SHUNT_SIGNAL:
-			main_signal = signal;
-			shunt_signal = nullptr;
+			main_signal    = signal;
+			shunt_signal   = signal;
 			break;
 		}
 	}
@@ -102,8 +104,8 @@ SignalControllerProxy::SignalControllerProxy(
 	connectShunt();
 
 	statechart_main.start(main_signal);
-	statechart_distant.start(distant_signal);
-	statechart_shunt.start(shunt_signal);
+	statechart_distant.start(distant_signal, main_signal);
+	statechart_shunt.start(shunt_signal, main_signal);
 
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
@@ -120,6 +122,11 @@ SignalControllerProxy::~SignalControllerProxy()
 		dynamic_cast<Device *>(distant_signal));
 	ControllerRegistry::instance().unregisterController(
 		dynamic_cast<Device *>(shunt_signal));
+}
+
+bool mrw::ctrl::SignalControllerProxy::isUnlocked() const
+{
+	return lock() == LockState::UNLOCKED;
 }
 
 void SignalControllerProxy::connectMain()
@@ -226,10 +233,7 @@ SectionState SignalControllerProxy::state() const
 
 Device::LockState SignalControllerProxy::lock() const
 {
-	Device * device = dynamic_cast<Device *>(base_signal);
-
-	Q_ASSERT(device != nullptr);
-	return device->lock();
+	return lock_state;
 }
 
 Position::Bending SignalControllerProxy::bending() const
@@ -314,6 +318,11 @@ bool SignalControllerProxy::hasMain()
 	return main_signal != nullptr;
 }
 
+bool SignalControllerProxy::isMain()
+{
+	return statechart_shunt.isCombined();
+}
+
 void SignalControllerProxy::prepare()
 {
 	__METHOD__;
@@ -323,25 +332,19 @@ void SignalControllerProxy::prepare()
 
 void SignalControllerProxy::fail()
 {
-	__METHOD__;
-
-	// TODO: Implement
-	qCritical().noquote() << String::red(" Signal turn failed!");
+	qCritical().noquote() << String::red(" Signal turn failed!") << name();
+	lock_state = LockState::FAIL;
 	emit update();
 }
 
 void SignalControllerProxy::pending()
 {
-	// TODO: Implement
-	qDebug(" Pending");
+	lock_state = LockState::PENDING;
 	emit update();
 }
 
 void SignalControllerProxy::lock(const bool do_it)
 {
-	__METHOD__;
-
-	// TODO: Implement
-	qDebug(do_it ? " Lock" : " Unlock");
+	lock_state = do_it ? LockState::LOCKED : LockState::UNLOCKED;
 	emit update();
 }

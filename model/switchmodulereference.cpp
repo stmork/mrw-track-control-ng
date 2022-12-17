@@ -60,3 +60,23 @@ SwitchModuleReference::SwitchModuleReference(
 		model_railway->error("Inductive rail part " + element.nodeName() + " has no switch module!");
 	}
 }
+
+size_t SwitchModuleReference::inductors() const
+{
+	return inductor_count;
+}
+
+bool SwitchModuleReference::hasCutOff() const
+{
+	return has_cut_off;
+}
+
+SwitchModule * SwitchModuleReference::module() const
+{
+	return switch_module;
+}
+
+Controller * SwitchModuleReference::controller() const
+{
+	return switch_controller;
+}

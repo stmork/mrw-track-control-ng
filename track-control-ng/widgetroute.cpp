@@ -295,8 +295,11 @@ void WidgetRoute::turnSignals()
 		SignalControllerProxy * controller =
 			ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
 
-		controller->enable();
-		count++;
+		if (controller->isUnlocked())
+		{
+			controller->enable();
+			count++;
+		}
 	}
 
 	if (count == 0)

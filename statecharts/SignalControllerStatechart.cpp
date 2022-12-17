@@ -411,15 +411,21 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Init_Init_process_Turning_shunt_Turn()
 		{
 			/* Entry action for state 'Turn'. */
-			turnShunt_value = SignalControllerStatechart::STOP;
-			emit turnShunt(turnShunt_value);
+			if (!ifaceOperationCallback->isMain())
+			{
+				turnShunt_value = SignalControllerStatechart::STOP;
+				emit turnShunt(turnShunt_value);
+			}
+			if (ifaceOperationCallback->isMain())
+			{
+				completedShunt_raised = true;
+			}
 		}
 
 		/* Entry action for state 'Operating'. */
 		void SignalControllerStatechart::enact_main_region_Operating()
 		{
 			/* Entry action for state 'Operating'. */
-			ifaceOperationCallback->dec();
 			started_raised = true;
 		}
 
@@ -1090,6 +1096,7 @@ namespace mrw
 		{
 			/* The reactions of state null. */
 			exseq_main_region_Init();
+			ifaceOperationCallback->dec();
 			enseq_main_region_Operating_default();
 			react(0);
 		}

@@ -48,7 +48,6 @@ bool SignalProxy::hasSignal()
 
 void SignalProxy::idle()
 {
-	__METHOD__;
 }
 
 bool SignalProxy::process(Signal * device, const MrwMessage & message)
@@ -123,6 +122,12 @@ void MainProxy::send(sc::integer symbol)
 	ControllerRegistry::can()->write(message);
 }
 
+void DistantProxy::start(Signal * input, Signal * combined)
+{
+	main_signal = combined;
+	SignalProxy::start(input);
+}
+
 void DistantProxy::send(sc::integer symbol)
 {
 	__METHOD__;
@@ -153,6 +158,17 @@ void DistantProxy::send(sc::integer symbol)
 
 	message.append(state);
 	ControllerRegistry::can()->write(message);
+}
+
+void ShuntProxy::start(Signal * input, Signal * combined)
+{
+	main_signal = combined;
+	SignalProxy::start(input);
+}
+
+bool ShuntProxy::isCombined()
+{
+	return hasSignal() && (signal == main_signal);
 }
 
 void ShuntProxy::send(sc::integer symbol)
