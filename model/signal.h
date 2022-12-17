@@ -158,6 +158,19 @@ namespace mrw::model
 
 		QString key() const override;
 
+		/**
+		 * This comparator method returns true if the "left" Signal has
+		 * higher priority than the "right" Signal. Left or right is not a
+		 * topology but a mathmatical meaning. It means left from and right
+		 * from "<" sign. There are two criteria to sort:
+		 * 1. The orientation related to counting direction
+		 * 2. The SignalType where a main Signal has higher priority than
+		 * a distant Signal and a shunting Signal.
+		 *
+		 * @param left The left of "<" Signal.
+		 * @param right The right of "<" Signal.
+		 * @return True if left has higher priority than right.
+		 */
 		static bool less(Signal * left, Signal * right);
 
 		/**
