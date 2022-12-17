@@ -646,6 +646,7 @@ Route * MainWindow::create(const bool direction, SectionState state)
 	}
 
 	ui->routeListWidget->addItem(*route);
+	ui->routeListWidget->setCurrentItem(*route);
 	ui->regionTabWidget->currentWidget()->update();
 	on_clearAllSections_clicked();
 
