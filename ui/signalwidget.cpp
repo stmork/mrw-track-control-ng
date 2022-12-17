@@ -117,11 +117,11 @@ void SignalWidget::paint(QPainter & painter)
 
 	QColor mast_color(RED);
 	QColor main_color    = main_state ==
-		Signal::Symbol::STOP ? RED : GREEN;
+		Signal::Symbol::GO ? GREEN : RED;
 	QColor distant_color = distant_state ==
-		Signal::Symbol::STOP ? YELLOW : GREEN;
+		Signal::Symbol::GO ? GREEN : YELLOW;
 	QColor shunt_color   = shunt_state ==
-		Signal::Symbol::STOP ? RED : WHITE;
+		Signal::Symbol::GO ? WHITE : RED;
 	bool draw_shunt   = false;
 	bool draw_distant = false;
 
