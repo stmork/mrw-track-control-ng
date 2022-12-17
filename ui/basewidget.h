@@ -25,7 +25,7 @@ namespace mrw::ui
 		Q_OBJECT
 
 	public:
-		static constexpr int   SIZE        =  40;
+		static constexpr int   SIZE        =  36;
 		static constexpr float SCALE       = 100.0f;
 		static constexpr int   FONT_HEIGHT =  50;
 		static constexpr float RAIL_WIDTH  =  20.0f;
@@ -43,7 +43,9 @@ namespace mrw::ui
 		explicit BaseWidget(QWidget * parent = nullptr);
 
 		static void setVerbose(const bool activate = false);
+
 	protected:
+
 		virtual void paintEvent(QPaintEvent * event) override;
 		virtual void paint(QPainter & painter) = 0;
 		virtual bool isLockPending() const
