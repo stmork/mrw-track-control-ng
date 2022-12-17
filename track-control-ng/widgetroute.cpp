@@ -72,6 +72,7 @@ void WidgetRoute::prepare(
 	collectSectionControllers(controllers);
 	for (SectionController * controller : controllers)
 	{
+		controller->setAutoUnlock(auto_unblock);
 		if (controller->section()->lock() != LockState::LOCKED)
 		{
 			connect(
@@ -79,8 +80,12 @@ void WidgetRoute::prepare(
 				this, &WidgetRoute::left,
 				Qt::DirectConnection);
 			connect(
+				controller, &SectionController::tryUnblock,
+				this, &WidgetRoute::tryUnblock,
+				Qt::DirectConnection);
+			connect(
 				controller, &SectionController::unregister,
-				this, &WidgetRoute::unregister,
+				this, qOverload<>(&WidgetRoute::unregister),
 				Qt::DirectConnection);
 		}
 	}
@@ -90,9 +95,8 @@ void WidgetRoute::left()
 {
 	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
 
-	qDebug().noquote() << "Left:      " << *controller;
+	qDebug().noquote() << "Left:       " << *controller;
 
-	// TODO: Refactor!!!
 	main_signals.clear();
 	collectSignals(controller->section());
 	for (Signal * signal : main_signals)
@@ -104,18 +108,58 @@ void WidgetRoute::left()
 	}
 }
 
-void WidgetRoute::unregister()
+void WidgetRoute::tryUnblock()
 {
 	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
+	Section      *      section    = controller->section();
 
+	main_signals.clear();
+	collectSignals(section);
+	Q_ASSERT(main_signals.size() <= 1);
+
+	if (main_signals.size() > 0)
+	{
+		Section * first;
+
+		qDebug().noquote() << "Try unblock: until >>>" << *main_signals.front();
+		do
+		{
+			first = sections.front();
+
+			qDebug().noquote() << "Try unblock:" << *first;
+			unregister(first);
+		}
+		while (first != section);
+	}
+}
+
+void WidgetRoute::unregister()
+{
+	unregister(dynamic_cast<SectionController *>(QObject::sender()));
+}
+
+void WidgetRoute::unregister(Section * section)
+{
+	SectionController * controller =
+		ControllerRegistry::instance().find<SectionController>(section);
+
+	controller->disable();
+	unregister(controller);
+}
+
+void WidgetRoute::unregister(SectionController * controller)
+{
 	disconnect(
 		controller, &SectionController::left,
 		this, &WidgetRoute::left);
 	disconnect(
+		controller, &SectionController::tryUnblock,
+		this, &WidgetRoute::tryUnblock);
+	disconnect(
 		controller, &SectionController::unregister,
-		this, &WidgetRoute::unregister);
+		this, qOverload<>(&WidgetRoute::unregister));
 
-	qDebug().noquote() << "Unregister:" << *controller;
+	qDebug().noquote() << "Unregister: " << *controller;
 
 	sections.remove(controller->section());
 	while (track.front()->section() == controller->section())
@@ -133,20 +177,30 @@ void WidgetRoute::unregister()
 		track.pop_front();
 	}
 
-	qDebug().noquote() << "Unregister:" << sections.size();
+	qDebug().noquote() << "Unregister: " << sections.size() << "sections left";
 
 	if (sections.size() == 1)
 	{
 		if (sections.back() == last)
 		{
-			qDebug().noquote() << "Unregister:" << String::bold("Finished!");
+			qDebug().noquote() << "Unregister: " << String::bold("Finished!");
 			emit finished();
 		}
 		else
 		{
-			qDebug().noquote() << "Unregister:" << String::bold("Reached!");
+			qDebug().noquote() << "Unregister: " << String::bold("Reached!");
 		}
 	}
+}
+
+void WidgetRoute::reset()
+{
+	ControllerRegistry::instance().reset();
+}
+
+WidgetRoute::operator QListWidgetItem * ()
+{
+	return &list_item;
 }
 
 void WidgetRoute::collectSignals()
@@ -178,16 +232,6 @@ void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & c
 
 		controllers.push_back(controller);
 	}
-}
-
-void WidgetRoute::reset()
-{
-	ControllerRegistry::instance().reset();
-}
-
-WidgetRoute::operator QListWidgetItem * ()
-{
-	return &list_item;
 }
 
 void WidgetRoute::turnSwitches()

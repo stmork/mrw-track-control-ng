@@ -81,7 +81,6 @@ namespace mrw::model
 		 * @return The pin count used to control this LightSignal.
 		 */
 		size_t usedPins() const;
-
 	};
 }
 

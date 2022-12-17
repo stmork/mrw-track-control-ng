@@ -35,7 +35,7 @@ void TestRouting::testSimple()
 
 	QVERIFY(verify(route));
 
-	QVERIFY(route.extend(parts[20]));
+	QVERIFY(route.append(parts[20]));
 	QVERIFY(verify(route));
 
 	route.clear();
@@ -51,8 +51,8 @@ void TestRouting::testCounterPart()
 
 	QVERIFY(verify( { &route_lr, &route_rl } ));
 
-	QVERIFY(route_lr.extend(parts[20]));
-	QVERIFY(route_rl.extend(parts[0]));
+	QVERIFY(route_lr.append(parts[20]));
+	QVERIFY(route_rl.append(parts[0]));
 	QVERIFY(verify( { &route_lr, &route_rl } ));
 
 	route_lr.clear();
@@ -68,8 +68,8 @@ void TestRouting::testCrossBlocked()
 
 	QVERIFY(verify( { &route_lr, &route_rl } ));
 
-	QVERIFY(route_lr.extend(parts[19]));
-	QVERIFY(!route_rl.extend(parts[0]));
+	QVERIFY(route_lr.append(parts[19]));
+	QVERIFY(!route_rl.append(parts[0]));
 	QVERIFY(verify( { &route_lr, &route_rl } ));
 
 	route_lr.clear();
@@ -85,13 +85,13 @@ void TestRouting::testExtension()
 
 	QVERIFY(verify(route));
 
-	QVERIFY(route.extend(parts[14]));
+	QVERIFY(route.append(parts[14]));
 	QVERIFY(verify(route));
 
-	QVERIFY(!route.extend(parts[0]));
+	QVERIFY(!route.append(parts[0]));
 	QVERIFY(verify(route));
 
-	QVERIFY(route.extend(parts[19]));
+	QVERIFY(route.append(parts[19]));
 	QVERIFY(verify(route));
 
 	QCOMPARE(static_cast<RegularSwitch *>(parts[2])->state(), RegularSwitch::State::AC);
@@ -115,7 +115,7 @@ void TestRouting::testOccupation()
 
 	parts[14]->section()->setOccupation();
 
-	QVERIFY(route.extend(parts[19]));
+	QVERIFY(route.append(parts[19]));
 	QVERIFY(verify(route));
 
 	QCOMPARE(static_cast<RegularSwitch *>(parts[2])->state(),  RegularSwitch::State::AB);
@@ -137,7 +137,7 @@ void TestRouting::testInverseFail()
 
 	QVERIFY(verify(route));
 
-	QVERIFY(!route.extend(parts[19]));
+	QVERIFY(!route.append(parts[19]));
 	QVERIFY(verify(route));
 
 	route.clear();

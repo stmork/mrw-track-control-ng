@@ -53,6 +53,10 @@ SectionController::SectionController(
 		this, &SectionController::left,
 		Qt::DirectConnection);
 	connect(
+		&statechart, &SectionStatechart::tryUnblock,
+		this, &SectionController::tryUnblock,
+		Qt::DirectConnection);
+	connect(
 		&statechart, &SectionStatechart::unregister,
 		this, &SectionController::unregister,
 		Qt::DirectConnection);
@@ -81,6 +85,11 @@ SectionController::~SectionController()
 Section * SectionController::section() const
 {
 	return *this;
+}
+
+void SectionController::setAutoUnlock(const bool auto_unlock)
+{
+	statechart.setAuto_unlock(auto_unlock);
 }
 
 void SectionController::inc()

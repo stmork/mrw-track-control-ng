@@ -402,7 +402,7 @@ void MainWindow::on_extendPushButton_clicked()
 
 		for (int i = 0; i < ui->sectionListWidget->count(); i++)
 		{
-			if (!route->extend(rail(i)))
+			if (!route->append(rail(i)))
 			{
 				route->dump();
 				return;
@@ -637,7 +637,7 @@ Route * MainWindow::create(const bool direction, SectionState state)
 
 	for (int i = 1; i < ui->sectionListWidget->count(); i++)
 	{
-		if (!route->extend(rail(i)))
+		if (!route->append(rail(i)))
 		{
 			delete route;
 

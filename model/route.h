@@ -38,8 +38,8 @@ namespace mrw::model
 			return track;
 		}
 
-		bool extend(RailPart * target);
-		bool extend(RailPart * rail, RailPart * target);
+		bool append(RailPart * target);
+		bool append(RailPart * rail, RailPart * target);
 		void clear();
 		bool isLastSectionEnded() const;
 
@@ -55,6 +55,7 @@ namespace mrw::model
 		RailTrack               track;
 		SectionTrack            sections;
 		const bool              direction;
+		const bool              auto_unblock = false;
 
 		virtual void prepare(
 			Section  * last_section,
@@ -63,8 +64,8 @@ namespace mrw::model
 	private:
 		bool        qualified(RailPart * rail) const;
 
-		const SectionState      state = SHUNTING;
 		Section        *        first_section = nullptr;
+		const SectionState      state = FREE;
 	};
 }
 

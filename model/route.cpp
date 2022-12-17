@@ -15,7 +15,9 @@ Route::Route(
 	const SectionState wanted_state,
 	RailPart     *     first,
 	QObject      *     parent) :
-	QObject(parent), direction(dir), state(wanted_state)
+	QObject(parent), direction(dir),
+	auto_unblock(wanted_state != SectionState::TOUR),
+	state(wanted_state)
 {
 	__METHOD__;
 
@@ -59,7 +61,7 @@ Route::~Route()
 	dump();
 }
 
-bool Route::extend(RailPart * target)
+bool Route::append(RailPart * target)
 {
 	__METHOD__;
 
@@ -67,7 +69,7 @@ bool Route::extend(RailPart * target)
 
 	Section  * last_section = sections.back();
 	RailPart * last_part    = track.back();
-	const bool success = extend(last_part, target);
+	const bool success = append(last_part, target);
 
 	if (success)
 	{
@@ -76,7 +78,7 @@ bool Route::extend(RailPart * target)
 	return success;
 }
 
-bool Route::extend(RailPart * rail, RailPart * target)
+bool Route::append(RailPart * rail, RailPart * target)
 {
 	if (rail == target)
 	{
@@ -92,7 +94,7 @@ bool Route::extend(RailPart * rail, RailPart * target)
 		{
 			next->reserve();
 			track.push_back(next);
-			if (extend(next, target))
+			if (append(next, target))
 			{
 				return true;
 			}

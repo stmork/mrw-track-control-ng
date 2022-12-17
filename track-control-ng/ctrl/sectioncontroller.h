@@ -36,12 +36,15 @@ namespace mrw::ctrl
 
 		model::Section * section() const;
 
+		void setAutoUnlock(const bool auto_unlock);
+
 	signals:
 		void enable(bool turn_on = true);
 		void disable();
 		void failed();
 		void start();
 		void left();
+		void tryUnblock();
 		void unregister();
 
 	private:
