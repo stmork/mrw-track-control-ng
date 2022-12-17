@@ -38,8 +38,9 @@ namespace mrw::can
 	 */
 	class MrwMessage : public mrw::util::String
 	{
-		static const mrw::util::ConstantEnumerator<Command>    command_map;
-		static const mrw::util::ConstantEnumerator<Response>   response_map;
+		static const mrw::util::ConstantEnumerator<Command>     command_map;
+		static const mrw::util::ConstantEnumerator<Response>    response_map;
+		static const mrw::util::ConstantEnumerator<SignalState> signal_map;
 
 		enum InfoIdx
 		{
