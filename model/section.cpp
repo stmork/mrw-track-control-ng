@@ -168,7 +168,7 @@ bool Section::unlockable() const
 
 	return
 		(reserved_parts.size() == 0) &&
-		((section_state == FREE) || (section_state == PASSED));
+		(section_state == FREE);
 }
 
 SectionState Section::state() const
