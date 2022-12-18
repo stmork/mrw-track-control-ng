@@ -104,10 +104,7 @@ namespace mrw::model
 		 * @param index The zero based index of the Controller.
 		 * @return The found Controller instance.
 		 */
-		inline Controller * controller(const size_t index) const
-		{
-			return controllers.at(index);
-		}
+		Controller * controller(const size_t index) const;
 
 		/**
 		 * This method returns a Controller instance based on its ID. This ID
@@ -145,10 +142,7 @@ namespace mrw::model
 		 *
 		 * @return The amount of containing Controller elements.
 		 */
-		inline size_t controllerCount() const
-		{
-			return controllers.size();
-		}
+		size_t controllerCount() const;
 
 		/**
 		 * This method returns the nth Module element. It is not ID-based
@@ -161,12 +155,9 @@ namespace mrw::model
 		 *
 		 * @see controller()
 		 */
-		inline Module * module(
+		Module * module(
 			const size_t   controller_idx,
-			const size_t   module_idx) const
-		{
-			return controller(controller_idx)->module(module_idx);
-		}
+			const size_t   module_idx) const;
 
 		/**
 		 * This method returns the nth MultiplexConnection. It is not ID-based
@@ -180,12 +171,9 @@ namespace mrw::model
 		 *
 		 * @see controller()
 		 */
-		inline MultiplexConnection * connection(
+		MultiplexConnection * connection(
 			const size_t   controller_idx,
-			const size_t   connection_idx) const
-		{
-			return controller(controller_idx)->connection(connection_idx);
-		}
+			const size_t   connection_idx) const;
 
 		/**
 		 * This method returns the nth Region element. It is not ID-based
@@ -195,20 +183,14 @@ namespace mrw::model
 		 * @param index The zero based index of the Region.
 		 * @return The found Region instance.
 		 */
-		inline Region * region(const size_t index) const
-		{
-			return regions.at(index);
-		}
+		Region * region(const size_t index) const;
 
 		/**
 		 * This method return the amount of containing Region elements.
 		 *
 		 * @return The amount of containing Region elements.
 		 */
-		inline size_t regionCount() const
-		{
-			return regions.size();
-		}
+		size_t regionCount() const;
 
 		/**
 		 * This method returns the nth Section element. It is not ID-based
@@ -221,12 +203,9 @@ namespace mrw::model
 		 *
 		 * @see region()
 		 */
-		inline Section * section(
+		Section * section(
 			const size_t region_idx,
-			const size_t section_idx) const
-		{
-			return region(region_idx)->section(section_idx);
-		}
+			const size_t section_idx) const;
 
 		/**
 		 * This method returns the nth AssemblyPart element. It is not ID-based
@@ -240,13 +219,10 @@ namespace mrw::model
 		 *
 		 * @see section()
 		 */
-		inline AssemblyPart * assemblyPart(
+		AssemblyPart * assemblyPart(
 			const size_t region_idx,
 			const size_t section_idx,
-			const size_t part_idx) const
-		{
-			return section(region_idx, section_idx)->assemblyPart(part_idx);
-		}
+			const size_t part_idx) const;
 
 		/**
 		 * This method displays a warning message and increases the internal
