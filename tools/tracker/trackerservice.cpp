@@ -43,11 +43,11 @@ void TrackerService::process(const MrwMessage & message)
 		switch (cmd)
 		{
 		case SETRON:
-			append(message.sid(), message.unitNo());
+			append(message.eid(), message.unitNo());
 			break;
 
 		case SETROF:
-			remove(message.sid(), message.unitNo());
+			remove(message.eid(), message.unitNo());
 			break;
 
 		default:
@@ -62,6 +62,11 @@ void TrackerService::append(const ControllerId id, const UnitNo unitNo)
 	Device  * device  = model->deviceById(id, unitNo);
 	Section * section = dynamic_cast<Section *>(device);
 
+	if (section == nullptr)
+	{
+		throw std::invalid_argument(QString::asprintf(
+				"Device not found: %04x:%04x", id, unitNo).toStdString());
+	}
 	track.push_front(section);
 	qDebug().noquote() << *section;
 
@@ -76,6 +81,11 @@ void TrackerService::remove(const ControllerId id, const UnitNo unitNo)
 	Device  * device  = model->deviceById(id, unitNo);
 	Section * section = dynamic_cast<Section *>(device);
 
+	if (section == nullptr)
+	{
+		throw std::invalid_argument(QString::asprintf(
+				"Device not found: %04x:%04x", id, unitNo).toStdString());
+	}
 	track.remove(section);
 }
 
