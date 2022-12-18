@@ -17,6 +17,7 @@ Light::Light(
 	light_name(ModelRailway::string(element, "name")),
 	threshold(ModelRailway::value(element, "schwellwert"))
 {
+	model_railway->add(this);
 }
 
 const QString & Light::name() const

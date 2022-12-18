@@ -418,7 +418,8 @@ void TestModel::testDevice()
 		QCOMPARE(message.unitNo(), device->unitNo());
 		QCOMPARE(message.sid(), device->controller()->id());
 
-		QCOMPARE(model->deviceByUnitNo(device->unitNo()), device);
+		QCOMPARE(model->deviceById(message.sid(), message.unitNo()), device);
+		QCOMPARE(model->deviceById(device->controller()->id(), device->unitNo()), device);
 		QCOMPARE(model->controllerById(device->controller()->id()), device->controller());
 	}
 }

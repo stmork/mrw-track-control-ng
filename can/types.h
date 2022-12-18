@@ -8,6 +8,7 @@
 #ifndef MRW_CAN_TYPES_H
 #define MRW_CAN_TYPES_H
 
+#include <utility>
 #include <cstdint>
 
 namespace mrw::can
@@ -42,6 +43,15 @@ namespace mrw::can
 	 * is used.
 	 */
 	static constexpr UnitNo NO_UNITNO = 0;
+
+	/**
+	 * This is the unique identification of a Device inside a complete
+	 * ModelRailway.
+	 *
+	 * @note A UnitNo is not completely unique but its easier to identify a
+	 * Device if the UnitNo is although unique.
+	 */
+	typedef std::pair<mrw::can::ControllerId, mrw::can::UnitNo> DeviceKey;
 }
 
 #endif // TYPES_H

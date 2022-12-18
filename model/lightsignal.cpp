@@ -58,6 +58,7 @@ LightSignal::LightSignal(
 	{
 		part_model->warning("Signal " + part_name + " has no connection module!");
 	}
+	model_railway->add(this);
 }
 
 bool LightSignal::valid() const

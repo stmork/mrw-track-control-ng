@@ -23,6 +23,26 @@ namespace mrw::model
 {
 	class AssemblyPart;
 
+	struct DeviceId : public mrw::can::DeviceKey
+	{
+		DeviceId() = default;
+		virtual ~DeviceId() = default;
+
+		DeviceId(const Device * device)
+		{
+			Controller * controller = device->controller();
+
+			first  = controller != nullptr ? controller->id() : 0;
+			second = device->unitNo();
+		}
+
+		std::size_t operator () (const mrw::can::DeviceKey & id) const
+		{
+			size_t result = id.first;
+			return (result << 16) | id.second;
+		}
+	};
+
 	/**
 	 * This class contains the complete data structure referring to a
 	 * model railway. It is parsed from a modelrailway EMF/XMI file.
@@ -42,11 +62,12 @@ namespace mrw::model
 		friend class RegularSwitch;
 		friend class DoubleCrossSwitch;
 		friend class Light;
+		friend class LightSignal;
 		friend class ProfileLight;
 		friend class Signal;
 
-		std::unordered_map<mrw::can::ControllerId, Controller *> controller_map;
-		std::unordered_map<mrw::can::UnitNo, Device *>           device_map;
+		std::unordered_map<mrw::can::ControllerId, Controller *>     controller_map;
+		std::unordered_map<mrw::can::DeviceKey, Device *, DeviceId>  device_map;
 
 		QDomDocument               xml_doc;
 		QString                    name;
@@ -102,10 +123,22 @@ namespace mrw::model
 		 * unit number is used to address the Device using a CAN ID in
 		 * combination of the Controller ID.
 		 *
-		 * @param unit_no The unit number of the Device.
+		 * @param id The unit number of the Device.
 		 * @return The Device looked up by its unit number.
 		 */
-		Device * deviceByUnitNo(const mrw::can::UnitNo unit_no) const;
+		Device * deviceById(
+			const mrw::can::ControllerId id,
+			const mrw::can::UnitNo       unit_no) const;
+
+		/**
+		 * This method returns a Device instance based on its unit number. This
+		 * unit number is used to address the Device using a CAN ID in
+		 * combination of the Controller ID.
+		 *
+		 * @param id The unit number of the Device.
+		 * @return The Device looked up by its unit number.
+		 */
+		Device * deviceById(const DeviceId id) const;
 
 		/**
 		 * This method return the amount of containing Controller elements.

@@ -99,7 +99,7 @@ void SimulatorService::device(const MrwMessage & message)
 	const ControllerId id      = message.sid();
 	const UnitNo       unit_no = message.unitNo();
 	const Command      cmd     = message.command();
-	Device      *      device  = model->deviceByUnitNo(unit_no);
+	Device      *      device  = model->deviceById(id, unit_no);
 	MrwMessage         response(id, unit_no, cmd, device != nullptr ? MSG_OK : MSG_UNIT_NOT_FOUND);
 
 	switch (cmd)

@@ -43,11 +43,11 @@ void TrackerService::process(const MrwMessage & message)
 		switch (cmd)
 		{
 		case SETRON:
-			append(message.unitNo());
+			append(message.sid(), message.unitNo());
 			break;
 
 		case SETROF:
-			remove(message.unitNo());
+			remove(message.sid(), message.unitNo());
 			break;
 
 		default:
@@ -57,9 +57,9 @@ void TrackerService::process(const MrwMessage & message)
 	}
 }
 
-void TrackerService::append(const UnitNo unitNo)
+void TrackerService::append(const ControllerId id, const UnitNo unitNo)
 {
-	Device  * device  = model->deviceByUnitNo(unitNo);
+	Device  * device  = model->deviceById(id, unitNo);
 	Section * section = dynamic_cast<Section *>(device);
 
 	track.push_front(section);
@@ -71,9 +71,9 @@ void TrackerService::append(const UnitNo unitNo)
 	timer.start(1000);
 }
 
-void TrackerService::remove(const UnitNo unitNo)
+void TrackerService::remove(const ControllerId id, const UnitNo unitNo)
 {
-	Device  * device  = model->deviceByUnitNo(unitNo);
+	Device  * device  = model->deviceById(id, unitNo);
 	Section * section = dynamic_cast<Section *>(device);
 
 	track.remove(section);

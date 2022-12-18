@@ -204,7 +204,7 @@ void ModelRailway::add(Controller * controller)
 
 void ModelRailway::add(Device * device)
 {
-	const UnitNo id = device->unitNo();
+	const DeviceId id = DeviceId(device);
 	const auto   it = device_map.find(id);
 
 	if (it == device_map.end())
@@ -215,8 +215,8 @@ void ModelRailway::add(Device * device)
 	{
 		Device * other = it->second;
 
-		error(QString("Devices %1 and %2 have both the same unit no: %2!").
-			arg(other->name()).arg(id));
+		error(QString("Devices %1 and %2/%3 have both the same unit no: %2!").
+			arg(other->name()).arg(id.first).arg(id.second));
 	}
 }
 
@@ -268,9 +268,11 @@ Controller * ModelRailway::controllerById(const ControllerId id) const
 	return it != controller_map.end() ? it->second : nullptr;
 }
 
-Device * ModelRailway::deviceByUnitNo(const UnitNo unit_no) const
+Device * ModelRailway::deviceById(
+	const mrw::can::ControllerId id,
+	const mrw::can::UnitNo       unit_no) const
 {
-	auto it = device_map.find(unit_no);
+	auto it = device_map.find(DeviceKey(id, unit_no));
 
 	return it != device_map.end() ? it->second : nullptr;
 }

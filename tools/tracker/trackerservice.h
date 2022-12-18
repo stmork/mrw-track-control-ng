@@ -39,8 +39,8 @@ protected:
 	virtual void process(const mrw::can::MrwMessage & message) override;
 
 private:
-	void append(const mrw::can::UnitNo unitNo);
-	void remove(const mrw::can::UnitNo unitNo);
+	void append(const mrw::can::ControllerId id, const mrw::can::UnitNo unitNo);
+	void remove(const mrw::can::ControllerId id, const mrw::can::UnitNo unitNo);
 	bool prepareLast();
 
 private slots:

@@ -126,6 +126,7 @@ Section::Section(
 	}
 
 	section_module = resolve(ModelRailway::string(element, "modul").toStdString());
+	model->add(this);
 }
 
 Section::~Section()
