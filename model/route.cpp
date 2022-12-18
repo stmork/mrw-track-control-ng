@@ -132,7 +132,10 @@ void Route::prepare(
 		}
 
 		// Set track mode.
-		act->setState(state);
+		if (act->isFree())
+		{
+			act->setState(state);
+		}
 
 		// Prepare switch turning.
 		if ((i > 0) && ((i + 1) < vector.size()))
