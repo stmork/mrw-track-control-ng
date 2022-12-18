@@ -51,7 +51,7 @@ namespace mrw::can
 	 * @note A UnitNo is not completely unique but its easier to identify a
 	 * Device if the UnitNo is although unique.
 	 */
-	typedef std::pair<mrw::can::ControllerId, mrw::can::UnitNo> DeviceKey;
+	typedef std::pair<ControllerId, UnitNo> DeviceKey;
 }
 
 #endif // TYPES_H

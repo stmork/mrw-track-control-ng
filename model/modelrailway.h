@@ -23,11 +23,24 @@ namespace mrw::model
 {
 	class AssemblyPart;
 
+	/**
+	 * This functor class provides a hashing function for Device mapping
+	 * usage. A unique identifier for a Device consists on a Controller id
+	 * and a unit number from a Device.
+	 */
 	struct DeviceId : public mrw::can::DeviceKey
 	{
 		DeviceId() = default;
 		virtual ~DeviceId() = default;
 
+		/**
+		 * This contructor is for conveniance to initialize the
+		 * mrw::can::DeviceKey type. It extracts from the given Device the
+		 * Controller id and the unit number.
+		 *
+		 * @param device The Device to extract the Controller id and unit
+		 * number from.
+		 */
 		DeviceId(const Device * device)
 		{
 			Controller * controller = device->controller();
@@ -36,9 +49,17 @@ namespace mrw::model
 			second = device->unitNo();
 		}
 
+		/**
+		 * This call operator overload computes the hash of the containing
+		 * Device id.
+		 *
+		 * @param id The id from the Device to compute the hash from.
+		 * @return The hashed id.
+		 */
 		std::size_t operator () (const mrw::can::DeviceKey & id) const
 		{
 			size_t result = id.first;
+
 			return (result << 16) | id.second;
 		}
 	};
