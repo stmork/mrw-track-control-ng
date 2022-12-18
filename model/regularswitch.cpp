@@ -67,6 +67,11 @@ void RegularSwitch::setState(
 	const RailPart * left,
 	const RailPart * right)
 {
+	if ((left == nullptr) || (right == nullptr))
+	{
+		throw std::invalid_argument("Given rail parts are not defined.");
+	}
+
 	if ((b == left) || (b == right))
 	{
 		switch_state = State::AB;
@@ -81,9 +86,9 @@ void RegularSwitch::setState(
 		qCritical() << "b: " << *b;
 		qCritical() << "c: " << *c;
 
-		qCritical() << "Left: " << *left;
+		qCritical() << "Left: " << (left != nullptr ? QString(*left) : "<null>");
 		qCritical() << "This: " << *this;
-		qCritical() << "Right:" << *right;
+		qCritical() << "Right:" << (right != nullptr ? QString(*right) : "<null>");
 
 		throw std::invalid_argument("Given rail parts are not neighbours.");
 	}

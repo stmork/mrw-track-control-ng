@@ -35,7 +35,7 @@ namespace mrw::test
 		void testRegions();
 		void testSections();
 		void testRegularSwitchStates();
-		void tesDoubleCrossSwitchStates();
+		void testDoubleCrossSwitchStates();
 		void testDefaultPosition();
 		void testParsingPosition();
 		void testExtension();

@@ -37,6 +37,11 @@ void DoubleCrossSwitch::setState(
 {
 	unsigned state = 0;
 
+	if ((left == nullptr) || (right == nullptr))
+	{
+		throw std::invalid_argument("Given rail parts are not defined.");
+	}
+
 	if ((b == left) || (b == right))
 	{
 		state |= B_MASK;

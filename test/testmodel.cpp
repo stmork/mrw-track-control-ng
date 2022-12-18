@@ -153,10 +153,35 @@ void TestModel::testRegularSwitchStates()
 
 		part->setState(RegularSwitch::State(0xff));
 		QVERIFY_EXCEPTION_THROWN(part->commandState(), std::invalid_argument);
+
+		for (RailPart * left : part->advance(true))
+		{
+			for (RailPart * right : part->advance(false))
+			{
+				part->setState(left, right);
+				QVERIFY(
+					(part->state() == RegularSwitch::State::AB) ||
+					(part->state() == RegularSwitch::State::AC));
+
+				part->setState(right, left);
+				QVERIFY(
+					(part->state() == RegularSwitch::State::AB) ||
+					(part->state() == RegularSwitch::State::AC));
+
+				QVERIFY_EXCEPTION_THROWN(part->setState(right, nullptr), std::invalid_argument);
+				QVERIFY_EXCEPTION_THROWN(part->setState(left, nullptr),  std::invalid_argument);
+
+				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, right), std::invalid_argument);
+				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, left),  std::invalid_argument);
+
+				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
+				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
+			}
+		}
 	}
 }
 
-void TestModel::tesDoubleCrossSwitchStates()
+void TestModel::testDoubleCrossSwitchStates()
 {
 	std::vector<DoubleCrossSwitch *> switches;
 
@@ -181,6 +206,35 @@ void TestModel::tesDoubleCrossSwitchStates()
 		QCOMPARE(part->state(), DoubleCrossSwitch::State::BD);
 		QCOMPARE(part->switchState(), SwitchState::SWITCH_STATE_LEFT);
 		QCOMPARE(part->commandState(), Command::SETLFT);
+
+		for (RailPart * left : part->advance(true))
+		{
+			for (RailPart * right : part->advance(false))
+			{
+				part->setState(left, right);
+				QVERIFY(
+					(part->state() == DoubleCrossSwitch::State::AC) ||
+					(part->state() == DoubleCrossSwitch::State::AD) ||
+					(part->state() == DoubleCrossSwitch::State::BC) ||
+					(part->state() == DoubleCrossSwitch::State::BD));
+
+				part->setState(right, left);
+				QVERIFY(
+					(part->state() == DoubleCrossSwitch::State::AC) ||
+					(part->state() == DoubleCrossSwitch::State::AD) ||
+					(part->state() == DoubleCrossSwitch::State::BC) ||
+					(part->state() == DoubleCrossSwitch::State::BD));
+
+				QVERIFY_EXCEPTION_THROWN(part->setState(right, nullptr), std::invalid_argument);
+				QVERIFY_EXCEPTION_THROWN(part->setState(left, nullptr),  std::invalid_argument);
+
+				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, right), std::invalid_argument);
+				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, left),  std::invalid_argument);
+
+				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
+				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
+			}
+		}
 	}
 }
 
