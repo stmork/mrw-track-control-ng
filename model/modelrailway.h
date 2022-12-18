@@ -41,7 +41,7 @@ namespace mrw::model
 		 * @param device The Device to extract the Controller id and unit
 		 * number from.
 		 */
-		DeviceId(const Device * device);
+		explicit DeviceId(const Device * device);
 
 		/**
 		 * This call operator overload computes the hash of the containing

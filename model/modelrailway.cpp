@@ -293,8 +293,8 @@ Module * mrw::model::ModelRailway::module(const size_t controller_idx, const siz
 }
 
 MultiplexConnection * mrw::model::ModelRailway::connection(
-		const size_t controller_idx,
-		const size_t connection_idx) const
+	const size_t controller_idx,
+	const size_t connection_idx) const
 {
 	return controller(controller_idx)->connection(connection_idx);
 }
@@ -310,16 +310,16 @@ size_t mrw::model::ModelRailway::regionCount() const
 }
 
 Section * mrw::model::ModelRailway::section(
-		const size_t region_idx,
-		const size_t section_idx) const
+	const size_t region_idx,
+	const size_t section_idx) const
 {
 	return region(region_idx)->section(section_idx);
 }
 
 AssemblyPart * mrw::model::ModelRailway::assemblyPart(
-		const size_t region_idx,
-		const size_t section_idx,
-		const size_t part_idx) const
+	const size_t region_idx,
+	const size_t section_idx,
+	const size_t part_idx) const
 {
 	return section(region_idx, section_idx)->assemblyPart(part_idx);
 }

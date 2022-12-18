@@ -35,6 +35,9 @@ namespace mrw::test
 		bool verify(const model::Route & route) const;
 		bool verify(std::initializer_list<const model::Route *> routes) const;
 		bool empty() const;
+		void testIsUnlockable(
+			const model::Route::RailTrack & track,
+			const bool                      is_unlockable) const;
 	};
 }
 

@@ -34,11 +34,16 @@ void TestRouting::testSimple()
 	const Route::RailTrack & reserved = route;
 
 	QVERIFY(verify(route));
+	testIsUnlockable(route, false);
 
 	QVERIFY(route.append(parts[20]));
 	QVERIFY(verify(route));
 
+	testIsUnlockable(route, false);
+
 	route.clear();
+	testIsUnlockable(route, true);
+
 	QVERIFY(verify(route));
 	QCOMPARE(reserved.size(), 0u);
 	QVERIFY(empty());
@@ -50,13 +55,18 @@ void TestRouting::testCounterPart()
 	Route   route_rl(false, SectionState::SHUNTING, parts[19]);
 
 	QVERIFY(verify( { &route_lr, &route_rl } ));
+	testIsUnlockable(route_lr, false);
 
 	QVERIFY(route_lr.append(parts[20]));
+	testIsUnlockable(route_lr, false);
 	QVERIFY(route_rl.append(parts[0]));
+	testIsUnlockable(route_rl, false);
 	QVERIFY(verify( { &route_lr, &route_rl } ));
 
 	route_lr.clear();
 	route_rl.clear();
+	testIsUnlockable(route_lr, true);
+	testIsUnlockable(route_rl, true);
 	QVERIFY(verify( { &route_lr, &route_rl } ));
 	QVERIFY(empty());
 }
@@ -162,6 +172,7 @@ bool TestRouting::verify(std::initializer_list<const Route *> routes) const
 		const Route::RailTrack & track = *route;
 
 		reserved.insert(track.begin(), track.end());
+		testIsUnlockable(track, false);
 	}
 
 	// Remove reserved rail parts from unreserved.
@@ -190,4 +201,21 @@ bool TestRouting::empty() const
 	{
 		return !part->reserved() && part->section()->unlockable();
 	});
+}
+
+void TestRouting::testIsUnlockable(
+	const Route::RailTrack & track,
+	const bool               is_unlockable) const
+{
+	for (RailPart * part : track)
+	{
+		Device * device = dynamic_cast<Device *>(part);
+
+		if (device != nullptr)
+		{
+			QCOMPARE(device->unlockable(), is_unlockable);
+		}
+		QCOMPARE(part->section()->unlockable(),   is_unlockable);
+		QCOMPARE(part->section()->anyReserved(), !is_unlockable);
+	}
 }

@@ -424,6 +424,25 @@ void TestModel::testDevice()
 	}
 }
 
+void TestModel::testEnumerator()
+{
+	QCOMPARE(Signal::get(Signal::Symbol::OFF),  "OFF");
+	QCOMPARE(Signal::get(Signal::Symbol(0xff)), "0xFF");
+
+	QCOMPARE(Signal::get(Signal::SignalType::MAIN_SIGNAL), "MAIN_SIGNAL");
+	QCOMPARE(Signal::get(Signal::SignalType(0xff)),        "0xFF");
+
+	QCOMPARE(RegularSwitch::get(RegularSwitch::State::AB),   "State::AB");
+	QCOMPARE(RegularSwitch::get(RegularSwitch::State::AC),   "State::AC");
+	QCOMPARE(RegularSwitch::get(RegularSwitch::State(0xff)), "0xFF");
+
+	QCOMPARE(DoubleCrossSwitch::get(DoubleCrossSwitch::State::AC), "State::AC");
+	QCOMPARE(DoubleCrossSwitch::get(DoubleCrossSwitch::State(0xff)), "0xFF");
+
+	QCOMPARE(Section::get(SectionState::FREE), "FREE");
+	QCOMPARE(Section::get(SectionState(0xff)), "0xFF");
+}
+
 void TestModel::testSection(Region * region, Section * section)
 {
 	QVERIFY(section != nullptr);
@@ -447,10 +466,13 @@ void TestModel::testSection(Region * region, Section * section)
 	}
 	section->setOccupation(true);
 	QVERIFY(section->unlockable());
+	QVERIFY(section->isFree());
+	QCOMPARE(section->state(), SectionState::OCCUPIED);
 	section->setState(SectionState::TOUR);
 	QVERIFY(!section->unlockable());
 	section->free();
 	QVERIFY(section->unlockable());
+	QVERIFY(section->isFree());
 
 	QVERIFY_EXCEPTION_THROWN(section->assemblyPart(rail_count), std::out_of_range);
 }

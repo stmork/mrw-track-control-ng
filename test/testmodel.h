@@ -41,6 +41,7 @@ namespace mrw::test
 		void testExtension();
 		void testPosition();
 		void testDevice();
+		void testEnumerator();
 	};
 }
 
