@@ -292,7 +292,9 @@ Module * mrw::model::ModelRailway::module(const size_t controller_idx, const siz
 	return controller(controller_idx)->module(module_idx);
 }
 
-MultiplexConnection * mrw::model::ModelRailway::connection(const size_t controller_idx, const size_t connection_idx) const
+MultiplexConnection * mrw::model::ModelRailway::connection(
+		const size_t controller_idx,
+		const size_t connection_idx) const
 {
 	return controller(controller_idx)->connection(connection_idx);
 }
@@ -307,12 +309,32 @@ size_t mrw::model::ModelRailway::regionCount() const
 	return regions.size();
 }
 
-Section * mrw::model::ModelRailway::section(const size_t region_idx, const size_t section_idx) const
+Section * mrw::model::ModelRailway::section(
+		const size_t region_idx,
+		const size_t section_idx) const
 {
 	return region(region_idx)->section(section_idx);
 }
 
-AssemblyPart * mrw::model::ModelRailway::assemblyPart(const size_t region_idx, const size_t section_idx, const size_t part_idx) const
+AssemblyPart * mrw::model::ModelRailway::assemblyPart(
+		const size_t region_idx,
+		const size_t section_idx,
+		const size_t part_idx) const
 {
 	return section(region_idx, section_idx)->assemblyPart(part_idx);
+}
+
+DeviceId::DeviceId(const Device * device)
+{
+	Controller * controller = device->controller();
+
+	first  = controller != nullptr ? controller->id() : 0;
+	second = device->unitNo();
+}
+
+std::size_t DeviceId::operator ()(const DeviceKey & id) const
+{
+	size_t result = id.first;
+
+	return (result << 16) | id.second;
 }
