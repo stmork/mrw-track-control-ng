@@ -29,6 +29,11 @@ DoubleCrossSwitch::DoubleCrossSwitch(
 	ad_branch(ModelRailway::boolean(element, "adIstAbzweig")),
 	bc_branch(ModelRailway::boolean(element, "bcIstAbzweig"))
 {
+	if (ad_branch == bc_branch)
+	{
+		// Ensure that branches are not equal anyway.
+		bc_branch = !ad_branch;
+	}
 }
 
 void DoubleCrossSwitch::setState(

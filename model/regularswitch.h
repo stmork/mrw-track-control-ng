@@ -27,14 +27,14 @@ namespace mrw::model
 	{
 		friend class DoubleCrossSwitch;
 
-		const bool     left_branch;
-		const bool     right_branch;
-		const bool     left_prio;
-		const bool     right_prio;
+		bool         left_branch;
+		bool         right_branch;
+		const bool   left_prio;
+		const bool   right_prio;
 
-		RailPart   *   a = nullptr;
-		RailPart   *   b = nullptr;
-		RailPart   *   c = nullptr;
+		RailPart  *  a = nullptr;
+		RailPart  *  b = nullptr;
+		RailPart  *  c = nullptr;
 
 	public:
 		enum class State : unsigned

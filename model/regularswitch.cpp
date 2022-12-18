@@ -31,6 +31,12 @@ RegularSwitch::RegularSwitch(
 	left_prio(   ModelRailway::boolean(element, "bIstBevorzugt", false)),
 	right_prio(  ModelRailway::boolean(element, "cIstBevorzugt", false))
 {
+	if (right_branch == left_branch)
+	{
+		// Ensure that branches are not equal anyway.
+		right_branch = !left_branch;
+	}
+
 	if (right_branch)
 	{
 		setBending(Bending::RIGHT);

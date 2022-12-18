@@ -25,13 +25,13 @@ namespace mrw::model
 	 */
 	class DoubleCrossSwitch : public AbstractSwitch
 	{
-		const bool     ad_branch;
-		const bool     bc_branch;
+		bool         ad_branch;
+		bool         bc_branch;
 
-		RailPart   *   a = nullptr;
-		RailPart   *   b = nullptr;
-		RailPart   *   c = nullptr;
-		RailPart   *   d = nullptr;
+		RailPart  *  a = nullptr;
+		RailPart  *  b = nullptr;
+		RailPart  *  c = nullptr;
+		RailPart  *  d = nullptr;
 
 	public:
 		static const unsigned B_MASK = 2;

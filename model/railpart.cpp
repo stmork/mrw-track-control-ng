@@ -65,7 +65,7 @@ RailInfo::RailInfo(
 
 	if (!preferred)
 	{
-		flags |= PREFERRED_FLAG;
+		flags |= INFERIOR_FLAG;
 	}
 	if (curved)
 	{
@@ -76,9 +76,5 @@ RailInfo::RailInfo(
 
 bool RailInfo::operator<(const RailInfo & other) const
 {
-	if (code == other.code)
-	{
-		return rail < other.rail;
-	}
 	return code < other.code;
 }

@@ -31,17 +31,17 @@ namespace mrw::model
 	{
 		enum PreferCode
 		{
-			PREFERRED_STRAIGHT = 0,
-			PREFERRED_CURVED,
-			STRAIGHT,
-			CURVED,
+			INFERIOR_FLAG = 2,
+			CURVED_FLAG   = 1,
 
-			PREFERRED_FLAG = 2,
-			CURVED_FLAG = 1
+			PREFERRED        = 0,
+			PREFERRED_CURVED = CURVED_FLAG,
+			STRAIGHT         = INFERIOR_FLAG,
+			CURVED           = INFERIOR_FLAG | CURVED_FLAG
 		};
 
 		RailPart   *   rail = nullptr;
-		PreferCode     code = PREFERRED_STRAIGHT;
+		PreferCode     code = PREFERRED;
 
 	public:
 		explicit RailInfo(

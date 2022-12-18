@@ -200,7 +200,7 @@ bool Route::qualified(RailPart * rail) const
 		return false;
 	}
 
-	if (track.size() > 50)
+	if (track.size() > 100)
 	{
 		qDebug().noquote() << indent << "      Recursion depth reached.";
 		return false;
