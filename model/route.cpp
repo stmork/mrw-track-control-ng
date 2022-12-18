@@ -135,9 +135,10 @@ void Route::prepare(
 		act->setState(state);
 
 		// Prepare switch turning.
-		vector[i]->setState(
-			i > 0 ? vector[i - 1] : nullptr,
-			(i + 1) < vector.size() ? vector[i + 1] : nullptr);
+		if ((i > 0) && ((i + 1) < vector.size()))
+		{
+			vector[i]->setState(vector[i - 1], vector[i + 1]);
+		}
 	}
 	dump();
 }
