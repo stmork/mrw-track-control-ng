@@ -37,6 +37,7 @@ void TestRouting::testSimple()
 	testIsUnlockable(route, false);
 
 	QVERIFY(route.append(parts[20]));
+	QVERIFY(route.isLastSectionEnded());
 	QVERIFY(verify(route));
 
 	testIsUnlockable(route, false);
@@ -97,12 +98,15 @@ void TestRouting::testExtension()
 
 	QVERIFY(route.append(parts[14]));
 	QVERIFY(verify(route));
+	QVERIFY(!route.isLastSectionEnded());
 
 	QVERIFY(!route.append(parts[0]));
 	QVERIFY(verify(route));
+	QVERIFY(!route.isLastSectionEnded());
 
 	QVERIFY(route.append(parts[19]));
 	QVERIFY(verify(route));
+	QVERIFY(route.isLastSectionEnded());
 
 	QCOMPARE(static_cast<RegularSwitch *>(parts[2])->state(), RegularSwitch::State::AC);
 	QCOMPARE(static_cast<RegularSwitch *>(parts[9])->state(), RegularSwitch::State::AB);
