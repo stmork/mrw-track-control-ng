@@ -7,7 +7,7 @@
 
 using namespace mrw::util;
 
-DumpHandler::Callback DumpHandler::callback = []() {};
+DumpHandler::Callback DumpHandler::callback = [] () {};
 
 DumpHandler::DumpHandler(Callback dump_callback)
 {

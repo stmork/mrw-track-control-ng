@@ -31,6 +31,7 @@ namespace mrw
 			enable_raised(false),
 			enable_value(false),
 			disable_raised(false),
+			clear_raised(false),
 			start_raised(false),
 			relaisResponse_raised(false),
 			stateResponse_raised(false),
@@ -90,6 +91,11 @@ namespace mrw
 					disable_raised = true;
 					break;
 				}
+			case mrw::statechart::SectionStatechart::Event::clear:
+				{
+					clear_raised = true;
+					break;
+				}
 			case mrw::statechart::SectionStatechart::Event::start:
 				{
 					start_raised = true;
@@ -142,6 +148,13 @@ namespace mrw
 		void mrw::statechart::SectionStatechart::disable()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::disable));
+			runCycle();
+		}
+
+
+		void mrw::statechart::SectionStatechart::clear()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::clear));
 			runCycle();
 		}
 
@@ -1628,11 +1641,10 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (start_raised)
+				if (clear_raised)
 				{
 					exseq_main_region_Failed();
-					ifaceOperationCallback->lock(false);
-					enseq_main_region_Init_default();
+					enseq_main_region_Wait_for_Start_default();
 					react(0);
 					transitioned_after = 0;
 				}
@@ -1671,6 +1683,7 @@ namespace mrw
 		{
 			enable_raised = false;
 			disable_raised = false;
+			clear_raised = false;
 			start_raised = false;
 			relaisResponse_raised = false;
 			stateResponse_raised = false;
@@ -1791,7 +1804,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((((enable_raised) || (disable_raised)) || (start_raised)) || (relaisResponse_raised)) || (stateResponse_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
+			while ((((((((((enable_raised) || (disable_raised)) || (clear_raised)) || (start_raised)) || (relaisResponse_raised)) || (stateResponse_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
 			isExecuting = false;
 		}
 

@@ -237,6 +237,9 @@ namespace mrw
 			/*! Signal representing the out event 'failed' that is defined in the default interface scope. */
 			void failed();
 
+			/*! Signal representing the out event 'cleared' that is defined in the default interface scope. */
+			void cleared();
+
 			/*! Signal representing the out event 'operating' that is defined in the default interface scope. */
 			void operating(bool value);
 
@@ -290,6 +293,7 @@ namespace mrw
 			void exact_main_region_Prepare_Bus();
 			void exact_main_region_Init();
 			void exact_main_region_Editing();
+			void exact_main_region_Fail();
 			void exact_main_region_Operating();
 			void enseq_main_region_Prepare_Bus_default();
 			void enseq_main_region_Init_default();

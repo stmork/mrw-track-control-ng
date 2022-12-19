@@ -92,6 +92,7 @@ namespace mrw
 			{
 				NO_EVENT,
 				start,
+				clear,
 				started,
 				failed,
 				enable,
@@ -212,6 +213,9 @@ namespace mrw
 			/*! Slot for the in event 'start' that is defined in the default interface scope. */
 			void start();
 
+			/*! Slot for the in event 'clear' that is defined in the default interface scope. */
+			void clear();
+
 			/*! Slot for the in event 'started' that is defined in the default interface scope. */
 			void started();
 
@@ -235,6 +239,9 @@ namespace mrw
 
 
 		signals:
+			/*! Signal representing the out event 'cleared' that is defined in the default interface scope. */
+			void cleared();
+
 			/*! Signal representing the out event 'turnMain' that is defined in the default interface scope. */
 			void turnMain(sc::integer value);
 
@@ -299,6 +306,7 @@ namespace mrw
 			void enact_main_region_Failed();
 			void exact_main_region_Init();
 			void exact_main_region_Operating_Processing_Locked_Processing_Go();
+			void exact_main_region_Failed();
 			void enseq_main_region_Wait_for_Start_default();
 			void enseq_main_region_Init_default();
 			void enseq_main_region_Init_Init_process_Turning_main_Turn_default();
@@ -373,6 +381,9 @@ namespace mrw
 
 			/*! Indicates event 'start' of default interface scope is active. */
 			bool start_raised;
+
+			/*! Indicates event 'clear' of default interface scope is active. */
+			bool clear_raised;
 
 			/*! Indicates event 'started' of default interface scope is active. */
 			bool started_raised;

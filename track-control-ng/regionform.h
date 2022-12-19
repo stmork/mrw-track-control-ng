@@ -10,7 +10,7 @@
 
 #include <vector>
 
-#include <QWidget>
+#include <QTabWidget>
 
 #include <model/region.h>
 #include <model/signal.h>
@@ -18,6 +18,7 @@
 #include <model/regularswitch.h>
 #include <model/doublecrossswitch.h>
 #include <ctrl/sectioncontroller.h>
+#include <ui/basewidget.h>
 
 namespace Ui
 {
@@ -43,6 +44,12 @@ public:
 	}
 
 	void line(std::vector<mrw::model::Position *> & positions, const int y) const;
+
+	static void setOpMode(
+		QTabWidget   *  tab,
+		const QString & text,
+		const QColor  & color = mrw::ui::BaseWidget::WHITE,
+		const bool      blink = false);
 
 protected:
 	void changeEvent(QEvent * e) override;

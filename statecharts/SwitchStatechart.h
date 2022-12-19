@@ -79,6 +79,7 @@ namespace mrw
 			enum class Event
 			{
 				NO_EVENT,
+				clear,
 				start,
 				leftResponse,
 				rightResponse,
@@ -189,6 +190,9 @@ namespace mrw
 
 
 		public slots:
+			/*! Slot for the in event 'clear' that is defined in the default interface scope. */
+			void clear();
+
 			/*! Slot for the in event 'start' that is defined in the default interface scope. */
 			void start();
 
@@ -312,6 +316,9 @@ namespace mrw
 
 
 
+
+			/*! Indicates event 'clear' of default interface scope is active. */
+			bool clear_raised;
 
 			/*! Indicates event 'start' of default interface scope is active. */
 			bool start_raised;

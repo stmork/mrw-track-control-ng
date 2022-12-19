@@ -99,6 +99,7 @@ namespace mrw
 				NO_EVENT,
 				enable,
 				disable,
+				clear,
 				start,
 				relaisResponse,
 				stateResponse,
@@ -234,6 +235,9 @@ namespace mrw
 
 			/*! Slot for the in event 'disable' that is defined in the default interface scope. */
 			void disable();
+
+			/*! Slot for the in event 'clear' that is defined in the default interface scope. */
+			void clear();
 
 			/*! Slot for the in event 'start' that is defined in the default interface scope. */
 			void start();
@@ -408,6 +412,9 @@ namespace mrw
 
 			/*! Indicates event 'disable' of default interface scope is active. */
 			bool disable_raised;
+
+			/*! Indicates event 'clear' of default interface scope is active. */
+			bool clear_raised;
 
 			/*! Indicates event 'start' of default interface scope is active. */
 			bool start_raised;

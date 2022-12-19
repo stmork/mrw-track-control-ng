@@ -19,13 +19,13 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QVBoxLayout" name="verticalLayoutLeft">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <widget class="mrw::ui::BarWidget" name="colorBarWidget" native="true">
            <property name="minimumSize">
@@ -66,7 +66,7 @@
       </layout>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayoutCenter">
        <item>
         <widget class="mrw::ui::ClockWidget" name="clockDateWidget" native="true">
          <property name="sizePolicy">
@@ -114,17 +114,44 @@
       </layout>
      </item>
      <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
+      <layout class="QVBoxLayout" name="verticalLayoutRight">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <spacer name="horizontalTopSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="mrw::ui::OpModeWidget" name="opModeWidget" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget" native="true"/>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>
@@ -151,8 +178,8 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>20</width>
-       <height>254</height>
+       <width>617</width>
+       <height>175</height>
       </size>
      </property>
     </spacer>
@@ -182,6 +209,12 @@
    <class>mrw::ui::CircleLiveWidget</class>
    <extends>QWidget</extends>
    <header location="global">ui/circlelivewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>mrw::ui::OpModeWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">ui/opmodewidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

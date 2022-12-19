@@ -372,6 +372,13 @@ namespace mrw
 			emit editing(editing_value);
 		}
 
+		/* Exit action for state 'Fail'. */
+		void OperatingMode::exact_main_region_Fail()
+		{
+			/* Exit action for state 'Fail'. */
+			emit cleared();
+		}
+
 		/* Exit action for state 'Operating'. */
 		void OperatingMode::exact_main_region_Operating()
 		{
@@ -456,6 +463,7 @@ namespace mrw
 		{
 			/* Default exit sequence for state Fail */
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::NO_STATE;
+			exact_main_region_Fail();
 		}
 
 		/* Default exit sequence for state Operating */

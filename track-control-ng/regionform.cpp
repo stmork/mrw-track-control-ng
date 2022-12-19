@@ -64,6 +64,20 @@ void RegionForm::line(std::vector<Position *> & positions, const int y) const
 	});
 }
 
+void RegionForm::setOpMode(QTabWidget * tab, const QString & text, const QColor & color, const bool blink)
+{
+	for (int i = 0; i < tab->count(); i++)
+	{
+		QWidget   *  widget = tab->widget(i);
+		RegionForm * form   = dynamic_cast<RegionForm *>(widget);
+
+		if (form != nullptr)
+		{
+			form->ui->opModeWidget->setLabel(text, color, blink);
+		}
+	}
+}
+
 void RegionForm::changeEvent(QEvent * e)
 {
 	QWidget::changeEvent(e);

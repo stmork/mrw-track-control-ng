@@ -78,7 +78,11 @@ SignalControllerProxy::SignalControllerProxy(
 	add(shunt_signal);
 
 	connect(
-		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
+		&ControllerRegistry::instance(), &ControllerRegistry::clear,
+		&statechart, &SignalControllerStatechart::clear,
+		Qt::DirectConnection);
+	connect(
+		&ControllerRegistry::instance(), &ControllerRegistry::start,
 		&statechart, &SignalControllerStatechart::start,
 		Qt::QueuedConnection);
 
@@ -136,6 +140,10 @@ void SignalControllerProxy::connectMain()
 		&statechart_main, &SignalStatechart::turn,
 		Qt::QueuedConnection);
 	connect(
+		&statechart, &SignalControllerStatechart::cleared,
+		&statechart_main, &SignalStatechart::clear,
+		Qt::DirectConnection);
+	connect(
 		&statechart_main, &SignalStatechart::completed,
 		&statechart, &SignalControllerStatechart::completedMain,
 		Qt::QueuedConnection);
@@ -152,6 +160,10 @@ void SignalControllerProxy::connectDistant()
 		&statechart_distant, &SignalStatechart::turn,
 		Qt::QueuedConnection);
 	connect(
+		&statechart, &SignalControllerStatechart::cleared,
+		&statechart_distant, &SignalStatechart::clear,
+		Qt::DirectConnection);
+	connect(
 		&statechart_distant, &SignalStatechart::completed,
 		&statechart, &SignalControllerStatechart::completedDistant,
 		Qt::QueuedConnection);
@@ -167,6 +179,10 @@ void SignalControllerProxy::connectShunt()
 		&statechart, &SignalControllerStatechart::turnShunt,
 		&statechart_shunt, &SignalStatechart::turn,
 		Qt::QueuedConnection);
+	connect(
+		&statechart, &SignalControllerStatechart::cleared,
+		&statechart_shunt, &SignalStatechart::clear,
+		Qt::DirectConnection);
 	connect(
 		&statechart_shunt, &SignalStatechart::completed,
 		&statechart, &SignalControllerStatechart::completedShunt,

@@ -29,7 +29,11 @@ SectionController::SectionController(
 	ControllerRegistry::instance().registerController(ctrl_section, this);
 
 	connect(
-		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
+		&ControllerRegistry::instance(), &ControllerRegistry::clear,
+		&statechart, &SectionStatechart::clear,
+		Qt::DirectConnection);
+	connect(
+		&ControllerRegistry::instance(), &ControllerRegistry::start,
 		&statechart, &SectionStatechart::start,
 		Qt::QueuedConnection);
 	connect(

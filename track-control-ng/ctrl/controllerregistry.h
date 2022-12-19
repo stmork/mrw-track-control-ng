@@ -62,7 +62,8 @@ namespace mrw::ctrl
 		void dump();
 
 	signals:
-		void inquire();
+		void clear();
+		void start();
 		void completed();
 	};
 }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_FbTCAHbWEe2lmIyQXv_DxQ" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 5000&#xA;&#xA;const OFF : integer = -1&#xA;const STOP : integer = 0&#xA;const GO : integer = 1&#xA;const SLOW : integer = 2&#xA;&#xA;in event start&#xA;in event started&#xA;in event failed&#xA;&#xA;in event enable&#xA;in event disable&#xA;&#xA;in event completedMain&#xA;in event completedDistant&#xA;in event completedShunt&#xA;&#xA;out event turnMain : integer&#xA;out event turnDistant : integer&#xA;out event turnShunt : integer&#xA;&#xA;operation inc()&#xA;operation dec()&#xA;&#xA;operation hasMain() : boolean&#xA;operation isMain() : boolean&#xA;operation prepare()&#xA;&#xA;operation fail()&#xA;operation pending()&#xA;operation lock(do_it : boolean)&#xA;" namespace="mrw.statechart" name="SignalControllerStatechart">
+  <sgraph:Statechart xmi:id="_FbTCAHbWEe2lmIyQXv_DxQ" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 5000&#xA;&#xA;const OFF : integer = -1&#xA;const STOP : integer = 0&#xA;const GO : integer = 1&#xA;const SLOW : integer = 2&#xA;&#xA;in event start&#xA;in event clear&#xA;in event started&#xA;in event failed&#xA;&#xA;in event enable&#xA;in event disable&#xA;&#xA;in event completedMain&#xA;in event completedDistant&#xA;in event completedShunt&#xA;&#xA;out event cleared&#xA;out event turnMain : integer&#xA;out event turnDistant : integer&#xA;out event turnShunt : integer&#xA;&#xA;operation inc()&#xA;operation dec()&#xA;&#xA;operation hasMain() : boolean&#xA;operation isMain() : boolean&#xA;operation prepare()&#xA;&#xA;operation fail()&#xA;operation pending()&#xA;operation lock(do_it : boolean)&#xA;" namespace="mrw.statechart" name="SignalControllerStatechart">
     <regions xmi:id="_FbTpG3bWEe2lmIyQXv_DxQ" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_FbTpHHbWEe2lmIyQXv_DxQ">
         <outgoingTransitions xmi:id="_FbTpHXbWEe2lmIyQXv_DxQ" target="_FbTpHnbWEe2lmIyQXv_DxQ"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_FbTpHnbWEe2lmIyQXv_DxQ" name="Wait for Start" incomingTransitions="_FbTpHXbWEe2lmIyQXv_DxQ">
+      <vertices xsi:type="sgraph:State" xmi:id="_FbTpHnbWEe2lmIyQXv_DxQ" name="Wait for Start" incomingTransitions="_FbTpHXbWEe2lmIyQXv_DxQ _lsGcgHhuEe2OXcmdUJ-BFw">
         <outgoingTransitions xmi:id="_FbTpIXbWEe2lmIyQXv_DxQ" specification="start" target="_FbTpKHbWEe2lmIyQXv_DxQ"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_FbTpKHbWEe2lmIyQXv_DxQ" specification="entry / inc" name="Init" incomingTransitions="_FbTpIXbWEe2lmIyQXv_DxQ _lsGcgHhuEe2OXcmdUJ-BFw _tLhEkHpUEe2_ZOj2sFqWdg">
+      <vertices xsi:type="sgraph:State" xmi:id="_FbTpKHbWEe2lmIyQXv_DxQ" specification="entry / inc" name="Init" incomingTransitions="_FbTpIXbWEe2lmIyQXv_DxQ _tLhEkHpUEe2_ZOj2sFqWdg">
         <outgoingTransitions xmi:id="_T8G0gHbgEe20X8bIRmamkA" specification="failed" target="_BvK_cHbfEe20X8bIRmamkA"/>
         <outgoingTransitions xmi:id="_Vcj6oHbgEe20X8bIRmamkA" specification="after timeout ms" target="_BvK_cHbfEe20X8bIRmamkA"/>
         <regions xmi:id="_6_a_YHbdEe20X8bIRmamkA" name="Init process">
@@ -80,8 +80,8 @@
           </vertices>
         </regions>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_BvK_cHbfEe20X8bIRmamkA" specification="entry / fail" name="Failed" incomingTransitions="_T8G0gHbgEe20X8bIRmamkA _Vcj6oHbgEe20X8bIRmamkA _XYBN0Hb4Ee20X8bIRmamkA _n0VUUHhuEe2OXcmdUJ-BFw">
-        <outgoingTransitions xmi:id="_lsGcgHhuEe2OXcmdUJ-BFw" specification="start" target="_FbTpKHbWEe2lmIyQXv_DxQ"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_BvK_cHbfEe20X8bIRmamkA" specification="entry / fail&#xA;exit / raise cleared" name="Failed" incomingTransitions="_T8G0gHbgEe20X8bIRmamkA _Vcj6oHbgEe20X8bIRmamkA _XYBN0Hb4Ee20X8bIRmamkA _n0VUUHhuEe2OXcmdUJ-BFw">
+        <outgoingTransitions xmi:id="_lsGcgHhuEe2OXcmdUJ-BFw" specification="clear" target="_FbTpHnbWEe2lmIyQXv_DxQ"/>
       </vertices>
     </regions>
   </sgraph:Statechart>
@@ -707,16 +707,15 @@
       <styles xsi:type="notation:FontStyle" xmi:id="_oCZgc3b4Ee20X8bIRmamkA" fontName="Verdana"/>
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_oCZgcnb4Ee20X8bIRmamkA" points="[13, 27, 13, -84]$[13, 85, 13, -26]"/>
     </edges>
-    <edges xmi:id="_lsIRsHhuEe2OXcmdUJ-BFw" type="Transition" element="_lsGcgHhuEe2OXcmdUJ-BFw" source="_BvK_c3bfEe20X8bIRmamkA" target="_FbUQPHbWEe2lmIyQXv_DxQ">
+    <edges xmi:id="_lsIRsHhuEe2OXcmdUJ-BFw" type="Transition" element="_lsGcgHhuEe2OXcmdUJ-BFw" source="_BvK_c3bfEe20X8bIRmamkA" target="_FbUQMHbWEe2lmIyQXv_DxQ">
       <children xsi:type="notation:DecorationNode" xmi:id="_lsJf0HhuEe2OXcmdUJ-BFw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_lsJf0XhuEe2OXcmdUJ-BFw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_lsJf0nhuEe2OXcmdUJ-BFw" x="1" y="10"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_lsJf0nhuEe2OXcmdUJ-BFw" x="55" y="10"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_lsIRsXhuEe2OXcmdUJ-BFw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_lsI4wHhuEe2OXcmdUJ-BFw" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_lsIRsnhuEe2OXcmdUJ-BFw" points="[-72, 64, 184, 84]$[-194, 64, 62, 84]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_lsIRsnhuEe2OXcmdUJ-BFw" points="[50, -10, 868, 131]$[50, -132, 868, 9]$[-766, -132, 52, 9]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_lsL8EHhuEe2OXcmdUJ-BFw" id="(0.3185840707964602,0.026455026455026454)"/>
-      <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_lsL8EXhuEe2OXcmdUJ-BFw" id="(0.9442446043165468,0.023931623931623933)"/>
     </edges>
     <edges xmi:id="_n0WicHhuEe2OXcmdUJ-BFw" type="Transition" element="_n0VUUHhuEe2OXcmdUJ-BFw" source="_Oxk04HbWEe2lmIyQXv_DxQ" target="_BvK_c3bfEe20X8bIRmamkA">
       <children xsi:type="notation:DecorationNode" xmi:id="_n0WidHhuEe2OXcmdUJ-BFw" type="TransitionExpression">

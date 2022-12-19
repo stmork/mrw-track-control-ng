@@ -145,8 +145,13 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 		&statechart, &OperatingMode::can_connected,
 		Qt::QueuedConnection);
 	connect(
+		&statechart, &OperatingMode::cleared,
+		&ControllerRegistry::instance(), &ControllerRegistry::clear,
+		Qt::DirectConnection);
+
+	connect(
 		&statechart, &OperatingMode::start,
-		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
+		&ControllerRegistry::instance(), &ControllerRegistry::start,
 		Qt::QueuedConnection);
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::completed,
@@ -168,8 +173,12 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 	connect(
 		ui->actionClear, &QAction::triggered,
 		&statechart, &OperatingMode::clear,
-		Qt::QueuedConnection);
+		Qt::DirectConnection);
 
+	connect(
+		&statechart, &OperatingMode::start,
+		this, &MainWindow::onInit,
+		Qt::QueuedConnection);
 	connect(
 		&statechart, &OperatingMode::operating,
 		this, &MainWindow::onOperate,
@@ -192,7 +201,6 @@ void MainWindow::enable()
 	const size_t switch_count = count<RegularSwitchController>() + count<DoubleCrossSwitchController>();
 	const size_t rail_count   = count<RailController>() + count<SignalControllerProxy>();
 
-	ui->actionEdit->setEnabled(!editing);
 	ui->actionUp->setEnabled(editing);
 	ui->actionDown->setEnabled(editing);
 	ui->actionLeft->setEnabled(editing);
@@ -206,7 +214,8 @@ void MainWindow::enable()
 	ui->actionLineUp->setEnabled(editing);
 	ui->actionLineDown->setEnabled(editing);
 
-	ui->actionOperate->setEnabled(!operating);
+	ui->actionOperate->setEnabled(editing);
+	ui->actionEdit->setEnabled(operating || fail);
 	ui->actionClear->setEnabled(fail);
 	ui->actionInit->setEnabled(operating);
 
@@ -581,11 +590,21 @@ void MainWindow::on_actionUnlock_triggered()
 	ui->regionTabWidget->currentWidget()->update();
 }
 
+void MainWindow::onInit()
+{
+	__METHOD__;
+
+	RegionForm::setOpMode(ui->regionTabWidget, "I");
+	enable();
+	on_clearAllSections_clicked();
+}
+
 void MainWindow::onOperate(const bool active)
 {
 	Q_UNUSED(active);
 	__METHOD__;
 
+	RegionForm::setOpMode(ui->regionTabWidget, "O");
 	enable();
 	on_clearAllSections_clicked();
 }
@@ -594,6 +613,7 @@ void MainWindow::onEdit(const bool active)
 {
 	__METHOD__;
 
+	RegionForm::setOpMode(ui->regionTabWidget, "E");
 	BaseWidget::setVerbose(active);
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
@@ -604,6 +624,8 @@ void MainWindow::onFailed()
 	__METHOD__;
 
 	ControllerRegistry::instance().dump();
+	RegionForm::setOpMode(ui->regionTabWidget, "F", BaseWidget::RED, true);
+	enable();
 }
 
 void MainWindow::routeFinished()

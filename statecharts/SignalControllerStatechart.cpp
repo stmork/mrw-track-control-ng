@@ -32,6 +32,7 @@ namespace mrw
 			stateConfVectorPosition(0),
 			stateConfVectorChanged(false),
 			start_raised(false),
+			clear_raised(false),
 			started_raised(false),
 			failed_raised(false),
 			enable_raised(false),
@@ -84,6 +85,11 @@ namespace mrw
 			case mrw::statechart::SignalControllerStatechart::Event::start:
 				{
 					start_raised = true;
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::Event::clear:
+				{
+					clear_raised = true;
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::Event::started:
@@ -140,6 +146,13 @@ namespace mrw
 		void mrw::statechart::SignalControllerStatechart::start()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::start));
+			runCycle();
+		}
+
+
+		void mrw::statechart::SignalControllerStatechart::clear()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::clear));
 			runCycle();
 		}
 
@@ -483,6 +496,13 @@ namespace mrw
 			timerService->unsetTimer(this, 1);
 		}
 
+		/* Exit action for state 'Failed'. */
+		void SignalControllerStatechart::exact_main_region_Failed()
+		{
+			/* Exit action for state 'Failed'. */
+			emit cleared();
+		}
+
 		/* 'default' enter sequence for state Wait for Start */
 		void SignalControllerStatechart::enseq_main_region_Wait_for_Start_default()
 		{
@@ -776,6 +796,7 @@ namespace mrw
 			/* Default exit sequence for state Failed */
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
 			stateConfVectorPosition = 0;
+			exact_main_region_Failed();
 		}
 
 		/* Default exit sequence for region main region */
@@ -1439,10 +1460,10 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (start_raised)
+				if (clear_raised)
 				{
 					exseq_main_region_Failed();
-					enseq_main_region_Init_default();
+					enseq_main_region_Wait_for_Start_default();
 					react(0);
 					transitioned_after = 0;
 				}
@@ -1458,6 +1479,7 @@ namespace mrw
 		void SignalControllerStatechart::clearInEvents()
 		{
 			start_raised = false;
+			clear_raised = false;
 			started_raised = false;
 			failed_raised = false;
 			enable_raised = false;
@@ -1579,7 +1601,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((((((start_raised) || (started_raised)) || (failed_raised)) || (enable_raised)) || (disable_raised)) || (completedMain_raised)) || (completedDistant_raised)) || (completedShunt_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while (((((((((((start_raised) || (clear_raised)) || (started_raised)) || (failed_raised)) || (enable_raised)) || (disable_raised)) || (completedMain_raised)) || (completedDistant_raised)) || (completedShunt_raised)) || (timeEvents[0])) || (timeEvents[1]));
 			isExecuting = false;
 		}
 

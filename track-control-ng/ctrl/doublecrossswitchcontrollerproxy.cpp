@@ -26,7 +26,11 @@ DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(
 	ControllerRegistry::instance().registerController(part, this);
 
 	connect(
-		&ControllerRegistry::instance(), &ControllerRegistry::inquire,
+		&ControllerRegistry::instance(), &ControllerRegistry::clear,
+		&statechart, &SwitchStatechart::clear,
+		Qt::DirectConnection);
+	connect(
+		&ControllerRegistry::instance(), &ControllerRegistry::start,
 		&statechart, &SwitchStatechart::start,
 		Qt::QueuedConnection);
 	connect(

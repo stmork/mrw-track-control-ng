@@ -74,6 +74,7 @@ private slots:
 	void on_actionLock_triggered();
 	void on_actionUnlock_triggered();
 
+	void onInit();
 	void onOperate(const bool active);
 	void onEdit(const bool active);
 	void onFailed();
