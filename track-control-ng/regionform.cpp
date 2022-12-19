@@ -100,7 +100,7 @@ void RegionForm::setupSize(Region * region)
 	region->parts<Position>(positions);
 	for (Position * pos : positions)
 	{
-		QPoint point = pos->point();
+		QPoint point = pos->point() + QPoint(pos->width(), (1 + pos->lines()) * Position::FRACTION);
 
 		xMax = std::max(xMax, point.x());
 		yMax = std::max(yMax, point.y());
@@ -110,8 +110,8 @@ void RegionForm::setupSize(Region * region)
 	fields.setHeight(yMax);
 
 	ui->controlWidget->setFixedSize(
-		xMax * BaseWidget::SIZE / Position::FRACTION + 100,
-		yMax * BaseWidget::SIZE / Position::FRACTION + 100);
+		xMax * BaseWidget::SIZE / Position::FRACTION,
+		yMax * BaseWidget::SIZE / Position::FRACTION);
 }
 
 void RegionForm::setupRails(SectionController * controller)
