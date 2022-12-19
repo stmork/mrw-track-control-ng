@@ -1,0 +1,24 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+//
+
+testclass Switch for statechart mrw.^statechart.SwitchStatechart
+{
+	@Test
+	operation waitForStart()
+	{
+		enter
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Wait_for_Start)
+	}
+
+	@Test
+	operation init()
+	{
+		waitForStart()
+		raise start
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Init)
+		assert entered
+		assert called inc
+	}
+}

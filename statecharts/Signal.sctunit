@@ -1,0 +1,14 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+//
+
+testclass Signal for statechart mrw.^statechart.SignalStatechart
+{
+	@Test
+	operation idle()
+	{
+		enter
+		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
+	}
+}

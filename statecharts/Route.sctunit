@@ -1,0 +1,14 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+//
+
+testclass Route for statechart mrw.^statechart.RouteStatechart
+{
+	@Test
+	operation start()
+	{
+		enter
+		assert active (mrw.^statechart.RouteStatechart.main_region.Start)
+	}
+}

@@ -1,0 +1,25 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+//
+
+testclass OperatingMode for statechart mrw.^statechart.OperatingMode
+{
+	@Test
+	operation wait()
+	{
+		enter
+		assert active (mrw.^statechart.OperatingMode.main_region.Prepare_Bus)
+		assert called can.connectBus
+	}
+
+	@Test
+	operation init()
+	{
+		wait
+		raise can.connected
+		assert active (mrw.^statechart.OperatingMode.main_region.Init)
+		assert called reset
+		assert start
+	}
+}
