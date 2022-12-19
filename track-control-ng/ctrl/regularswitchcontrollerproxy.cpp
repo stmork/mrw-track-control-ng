@@ -261,6 +261,8 @@ bool RegularSwitchControllerProxy::isFree()
 
 void RegularSwitchControllerProxy::fail()
 {
+	qCritical().noquote() << String::red(" Switch turn failed!") << name();
+
 	part->setLock(LockState::FAIL);
 	emit update();
 }

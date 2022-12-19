@@ -248,6 +248,13 @@ void MainWindow::enable()
 		(rail_count >= 2) && (switch_count == 0));
 }
 
+void MainWindow::reset()
+{
+	__METHOD__;
+
+	ControllerRegistry::instance().reset();
+}
+
 void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Position * position)
 {
 	std::vector<Position *> positions;
@@ -327,6 +334,65 @@ bool MainWindow::isSameRegion()
 	return regions.size() == 1;
 }
 
+/*************************************************************************
+**                                                                      **
+**       Routing support                                                **
+**                                                                      **
+*************************************************************************/
+
+Route * MainWindow::create(const bool direction, SectionState state)
+{
+	__METHOD__;
+
+	RailPart   *  first = rail(0);
+	WidgetRoute * route = new WidgetRoute(direction, state, first);
+
+	for (int i = 1; i < ui->sectionListWidget->count(); i++)
+	{
+		if (!route->append(rail(i)))
+		{
+			delete route;
+
+			return nullptr;
+		}
+	}
+
+	ui->routeListWidget->addItem(*route);
+	ui->routeListWidget->setCurrentItem(*route);
+	ui->regionTabWidget->currentWidget()->update();
+	on_clearAllSections_clicked();
+
+	connect(
+		route, &WidgetRoute::finished,
+		this,  &MainWindow::routeFinished,
+		Qt::QueuedConnection);
+
+	route->turn();
+
+	return route;
+}
+
+void MainWindow::routeFinished()
+{
+	__METHOD__;
+
+	WidgetRoute   *   route = dynamic_cast<WidgetRoute *>(QObject::sender());
+	QListWidgetItem * item  = *route;
+	const int         row   = ui->routeListWidget->row(item);
+
+	ui->routeListWidget->takeItem(row);
+
+	delete route;
+	enable();
+	ui->regionTabWidget->currentWidget()->update();
+}
+
+/*************************************************************************
+**                                                                      **
+**       List widget commands                                           **
+**                                                                      **
+*************************************************************************/
+
 void MainWindow::itemClicked(QListWidgetItem * item)
 {
 	if (item->listWidget() == nullptr)
@@ -391,6 +457,12 @@ void MainWindow::on_clearAllRoutes_clicked()
 	ui->regionTabWidget->currentWidget()->update();
 }
 
+/*************************************************************************
+**                                                                      **
+**       Routing commands                                               **
+**                                                                      **
+*************************************************************************/
+
 void MainWindow::on_tourLeftPushButton_clicked()
 {
 	create(false, SectionState::TOUR);
@@ -435,6 +507,12 @@ void MainWindow::on_tourRightPushButton_clicked()
 {
 	create(true, SectionState::TOUR);
 }
+
+/*************************************************************************
+**                                                                      **
+**       Editing commands                                               **
+**                                                                      **
+*************************************************************************/
 
 void MainWindow::move(int right, int down)
 {
@@ -509,6 +587,12 @@ void MainWindow::bend(const Position::Bending bend)
 		emit controller->update();
 	});
 }
+
+/*************************************************************************
+**                                                                      **
+**       Normal operation commands                                      **
+**                                                                      **
+*************************************************************************/
 
 void MainWindow::on_actionTurnSwitchLeft_triggered()
 {
@@ -590,6 +674,12 @@ void MainWindow::on_actionUnlock_triggered()
 	ui->regionTabWidget->currentWidget()->update();
 }
 
+/*************************************************************************
+**                                                                      **
+**       Operation modes                                                **
+**                                                                      **
+*************************************************************************/
+
 void MainWindow::onInit()
 {
 	__METHOD__;
@@ -628,59 +718,11 @@ void MainWindow::onFailed()
 	enable();
 }
 
-void MainWindow::routeFinished()
-{
-	__METHOD__;
-
-	WidgetRoute   *   route = dynamic_cast<WidgetRoute *>(QObject::sender());
-	QListWidgetItem * item  = *route;
-	const int         row   = ui->routeListWidget->row(item);
-
-	ui->routeListWidget->takeItem(row);
-
-	delete route;
-	enable();
-	ui->regionTabWidget->currentWidget()->update();
-}
-
-void MainWindow::reset()
-{
-	__METHOD__;
-
-	ControllerRegistry::instance().reset();
-}
-
-Route * MainWindow::create(const bool direction, SectionState state)
-{
-	__METHOD__;
-
-	RailPart   *  first = rail(0);
-	WidgetRoute * route = new WidgetRoute(direction, state, first);
-
-	for (int i = 1; i < ui->sectionListWidget->count(); i++)
-	{
-		if (!route->append(rail(i)))
-		{
-			delete route;
-
-			return nullptr;
-		}
-	}
-
-	ui->routeListWidget->addItem(*route);
-	ui->routeListWidget->setCurrentItem(*route);
-	ui->regionTabWidget->currentWidget()->update();
-	on_clearAllSections_clicked();
-
-	connect(
-		route, &WidgetRoute::finished,
-		this,  &MainWindow::routeFinished,
-		Qt::QueuedConnection);
-
-	route->turn();
-
-	return route;
-}
+/*************************************************************************
+**                                                                      **
+**       Tab control for regions                                        **
+**                                                                      **
+*************************************************************************/
 
 void MainWindow::on_actionTabLeft_triggered()
 {

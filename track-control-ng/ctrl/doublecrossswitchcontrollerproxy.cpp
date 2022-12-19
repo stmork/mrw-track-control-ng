@@ -241,6 +241,8 @@ bool DoubleCrossSwitchControllerProxy::isFree()
 
 void DoubleCrossSwitchControllerProxy::fail()
 {
+	qCritical().noquote() << String::red(" Switch turn failed!") << name();
+
 	part->setLock(LockState::FAIL);
 	emit update();
 }

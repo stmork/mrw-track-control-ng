@@ -15,6 +15,12 @@ using namespace mrw::can;
 using namespace mrw::model;
 using namespace mrw::ctrl;
 
+/*************************************************************************
+**                                                                      **
+**       Signal proxy base class                                        **
+**                                                                      **
+*************************************************************************/
+
 SignalProxy::SignalProxy() : SignalStatechart(nullptr)
 {
 	setOperationCallback(this);
@@ -90,6 +96,12 @@ bool SignalProxy::process(Signal * device, const MrwMessage & message)
 	return false;
 }
 
+/*************************************************************************
+**                                                                      **
+**       Signal proxy for main signals                                  **
+**                                                                      **
+*************************************************************************/
+
 void MainProxy::send(sc::integer symbol)
 {
 	__METHOD__;
@@ -121,6 +133,12 @@ void MainProxy::send(sc::integer symbol)
 	message.append(state);
 	ControllerRegistry::can()->write(message);
 }
+
+/*************************************************************************
+**                                                                      **
+**       Signal proxy for distant                                       **
+**                                                                      **
+*************************************************************************/
 
 void DistantProxy::start(Signal * input, Signal * combined)
 {
@@ -159,6 +177,12 @@ void DistantProxy::send(sc::integer symbol)
 	message.append(state);
 	ControllerRegistry::can()->write(message);
 }
+
+/*************************************************************************
+**                                                                      **
+**       Signal proxy for shunting                                      **
+**                                                                      **
+*************************************************************************/
 
 void ShuntProxy::start(Signal * input, Signal * combined)
 {
