@@ -94,24 +94,21 @@ void RegionForm::changeEvent(QEvent * e)
 void RegionForm::setupSize(Region * region)
 {
 	std::vector<Position *> positions;
-	int xMax = 20;
-	int yMax = 10;
+	int xMax = 80;
+	int yMax = 20;
 
 	region->parts<Position>(positions);
 	for (Position * pos : positions)
 	{
-		QPoint point = pos->point() + QPoint(pos->width(), (1 + pos->lines()) * Position::FRACTION);
+		QRect rect(pos->point(), QSize(pos->width(), pos->height()));
 
-		xMax = std::max(xMax, point.x());
-		yMax = std::max(yMax, point.y());
+		xMax = std::max(xMax, rect.right());
+		yMax = std::max(yMax, rect.bottom());
 	}
-
-	fields.setWidth(xMax);
-	fields.setHeight(yMax);
 
 	ui->controlWidget->setFixedSize(
 		xMax * BaseWidget::SIZE / Position::FRACTION,
-		yMax * BaseWidget::SIZE / Position::FRACTION);
+		yMax * BaseWidget::SIZE / Position::FRACTION + BaseWidget::SIZE);
 }
 
 void RegionForm::setupRails(SectionController * controller)

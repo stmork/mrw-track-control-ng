@@ -217,6 +217,15 @@ namespace mrw::model
 		int width() const;
 
 		/**
+		 * This method returns the height of the controlled widget in
+		 * Position::FRACTION units.
+		 *
+		 * @return The height of the controlled widget in Position::FRACTION
+		 * units.
+		 */
+		int height() const;
+
+		/**
 		 * This method compares this Position instance against to another
 		 * Position instance against equality.
 		 *

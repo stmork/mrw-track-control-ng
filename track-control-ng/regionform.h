@@ -32,8 +32,6 @@ class RegionForm : public QWidget
 private:
 	mrw::model::Region             *             form_region;
 
-	QSize fields;
-
 public:
 	explicit RegionForm(mrw::model::Region * region, QWidget * parent = nullptr);
 	~RegionForm();

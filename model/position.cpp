@@ -222,6 +222,11 @@ int Position::width() const
 	return FRACTION + ext_count;
 }
 
+int Position::height() const
+{
+	return (1 + line_count) * FRACTION;
+}
+
 bool Position::operator==(const Position & other) const
 {
 	return
