@@ -25,9 +25,9 @@ namespace mrw::ui
 		explicit OpModeWidget(QWidget * parent = nullptr);
 
 		void setLabel(
-				const QString & text,
-				const QColor &  color = WHITE,
-				const bool      blinking = false);
+			const QString & text,
+			const QColor  & color = WHITE,
+			const bool      blinking = false);
 
 	protected:
 		void paint(QPainter & painter) override;

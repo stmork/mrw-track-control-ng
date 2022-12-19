@@ -23,9 +23,9 @@ OpModeWidget::OpModeWidget(QWidget * parent) : BaseWidget(parent)
 }
 
 void OpModeWidget::setLabel(
-		const QString & text,
-		const QColor &  color,
-		const bool      blink)
+	const QString & text,
+	const QColor  & color,
+	const bool      blink)
 {
 	pen.setColor(color);
 	label    = text;
