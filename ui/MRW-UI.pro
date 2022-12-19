@@ -16,6 +16,7 @@ SOURCES += \
 	clockwidget.cpp \
 	controllerwidget.cpp \
 	doublecrossswitchwidget.cpp \
+	opmodewidget.cpp \
 	regularswitchwidget.cpp \
 	railwidget.cpp \
 	signalwidget.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
 	clockwidget.h \
 	controllerwidget.h \
 	doublecrossswitchwidget.h \
+	opmodewidget.h \
 	regularswitchwidget.h \
 	railwidget.h \
 	signalwidget.h \
