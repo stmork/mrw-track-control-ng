@@ -244,6 +244,7 @@ void DoubleCrossSwitchControllerProxy::fail()
 	qCritical().noquote() << String::red(" Switch turn failed!") << name();
 
 	part->setLock(LockState::FAIL);
+	ControllerRegistry::instance().failed();
 	emit update();
 }
 

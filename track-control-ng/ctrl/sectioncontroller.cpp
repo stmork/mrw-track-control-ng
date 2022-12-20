@@ -209,6 +209,7 @@ void SectionController::fail()
 	qCritical().noquote() << String::red(" Section failed!") << name();
 
 	section()->setLock(LockState::FAIL);
+	ControllerRegistry::instance().failed();
 	emit update();
 }
 

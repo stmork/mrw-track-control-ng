@@ -351,6 +351,7 @@ void SignalControllerProxy::fail()
 	qCritical().noquote() << String::red(" Signal turn failed!") << name();
 
 	lock_state = LockState::FAIL;
+	ControllerRegistry::instance().failed();
 	emit update();
 }
 
