@@ -87,8 +87,43 @@ void WidgetRoute::prepare(
 				controller, &SectionController::unregister,
 				this, qOverload<>(&WidgetRoute::unregister),
 				Qt::DirectConnection);
+			connect(
+				controller, &SectionController::stop,
+				&statechart, &RouteStatechart::failed,
+				Qt::DirectConnection);
 		}
 	}
+
+	for (auto it = track.rbegin(); *it != last_part; ++it)
+	{
+		RailPart    *    part      = *it;
+		Device     *     device    = dynamic_cast<Device *>(part);
+		BaseController * part_ctrl =
+			ControllerRegistry::instance().find<BaseController>(device);
+
+		RegularSwitchControllerProxy   *   rs  =
+			dynamic_cast<RegularSwitchControllerProxy *>(part_ctrl);
+		DoubleCrossSwitchControllerProxy * dcs =
+			dynamic_cast<DoubleCrossSwitchControllerProxy *>(part_ctrl);
+
+		if (rs != nullptr)
+		{
+			connect(
+				rs, &RegularSwitchControllerProxy::stop,
+				&statechart, &RouteStatechart::failed,
+				Qt::DirectConnection);
+		}
+
+		if (dcs != nullptr)
+		{
+			connect(
+				dcs, &DoubleCrossSwitchControllerProxy::stop,
+				&statechart, &RouteStatechart::failed,
+				Qt::DirectConnection);
+		}
+	}
+
+	// TODO: Connect signal controller proxy!
 }
 
 void WidgetRoute::left()
@@ -98,7 +133,7 @@ void WidgetRoute::left()
 	qDebug().noquote() << "Left:       " << *controller;
 
 	main_signals.clear();
-	collectSignals(controller->section());
+	collectMainSignals(controller->section());
 	for (Signal * signal : main_signals)
 	{
 		SignalControllerProxy * sig_ctrl =
@@ -114,7 +149,7 @@ void WidgetRoute::tryUnblock()
 	Section      *      section    = controller->section();
 
 	main_signals.clear();
-	collectSignals(section);
+	collectMainSignals(section);
 	Q_ASSERT(main_signals.size() <= 1);
 
 	if (main_signals.size() > 0)
@@ -151,12 +186,13 @@ void WidgetRoute::unregister(Section * section)
 	SectionController * controller =
 		ControllerRegistry::instance().find<SectionController>(section);
 
-	controller->disable();
 	unregister(controller);
 }
 
 void WidgetRoute::unregister(SectionController * controller)
 {
+	controller->disable();
+
 	disconnect(
 		controller, &SectionController::left,
 		this, &WidgetRoute::left);
@@ -166,6 +202,9 @@ void WidgetRoute::unregister(SectionController * controller)
 	disconnect(
 		controller, &SectionController::unregister,
 		this, qOverload<>(&WidgetRoute::unregister));
+	disconnect(
+		controller, &SectionController::stop,
+		&statechart, &RouteStatechart::failed);
 
 	qDebug().noquote() << "Unregister: " << *controller;
 
@@ -177,10 +216,27 @@ void WidgetRoute::unregister(SectionController * controller)
 		BaseController * part_ctrl =
 			ControllerRegistry::instance().find<BaseController>(device);
 
-		BaseController::callback<RegularSwitchControllerProxy>(
-			part_ctrl,     &RegularSwitchControllerProxy::unlock);
-		BaseController::callback<DoubleCrossSwitchControllerProxy>(
-			part_ctrl, &DoubleCrossSwitchControllerProxy::unlock);
+		RegularSwitchControllerProxy   *   rs  =
+			dynamic_cast<RegularSwitchControllerProxy *>(part_ctrl);
+		DoubleCrossSwitchControllerProxy * dcs =
+			dynamic_cast<DoubleCrossSwitchControllerProxy *>(part_ctrl);
+
+		part->reserve(false);
+		if (rs != nullptr)
+		{
+			rs->unlock();
+			disconnect(
+				rs, &RegularSwitchControllerProxy::stop,
+				&statechart, &RouteStatechart::failed);
+		}
+
+		if (dcs != nullptr)
+		{
+			dcs->unlock();
+			disconnect(
+				dcs, &DoubleCrossSwitchControllerProxy::stop,
+				&statechart, &RouteStatechart::failed);
+		}
 
 		track.pop_front();
 	}
@@ -224,16 +280,16 @@ WidgetRoute::operator QListWidgetItem * ()
 	return &list_item;
 }
 
-void WidgetRoute::collectSignals()
+void WidgetRoute::collectMainSignals()
 {
 	main_signals.clear();
 	for (Section * section : sections)
 	{
-		collectSignals(section);
+		collectMainSignals(section);
 	}
 }
 
-void WidgetRoute::collectSignals(Section * section)
+void WidgetRoute::collectMainSignals(Section * section)
 {
 	section->parts<Signal>(main_signals, [&](const Signal * signal)
 	{
@@ -276,7 +332,6 @@ void WidgetRoute::turnSwitches()
 			controller,     &RegularSwitchControllerProxy::turn);
 		BaseController::callback<DoubleCrossSwitchControllerProxy>(
 			controller, &DoubleCrossSwitchControllerProxy::turn);
-
 	}
 
 	if (count == 0)
@@ -295,6 +350,7 @@ void WidgetRoute::unlockSwitches()
 		BaseController * controller =
 			ControllerRegistry::instance().find<BaseController>(device);
 
+		part->reserve(false);
 		BaseController::callback<RegularSwitchControllerProxy>(
 			controller,     &RegularSwitchControllerProxy::unlock);
 		BaseController::callback<DoubleCrossSwitchControllerProxy>(
@@ -354,7 +410,7 @@ void WidgetRoute::turnSignals()
 
 	size_t count = 0;
 
-	collectSignals();
+	collectMainSignals();
 	for (Signal * signal : main_signals)
 	{
 		SignalControllerProxy * controller =
@@ -377,7 +433,7 @@ void WidgetRoute::unlockSignals()
 {
 	__METHOD__;
 
-	collectSignals();
+	collectMainSignals();
 	for (Signal * signal : main_signals)
 	{
 		SignalControllerProxy * controller =

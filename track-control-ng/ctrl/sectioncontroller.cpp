@@ -37,6 +37,10 @@ SectionController::SectionController(
 		&statechart, &SectionStatechart::start,
 		Qt::QueuedConnection);
 	connect(
+		&statechart, &SectionStatechart::stop,
+		this, &SectionController::stop,
+		Qt::QueuedConnection);
+	connect(
 		this, &SectionController::enable,
 		&statechart, &SectionStatechart::enable,
 		Qt::QueuedConnection);

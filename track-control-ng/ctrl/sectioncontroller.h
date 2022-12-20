@@ -46,6 +46,7 @@ namespace mrw::ctrl
 		void left();
 		void tryUnblock();
 		void unregister();
+		void stop();
 
 	private:
 

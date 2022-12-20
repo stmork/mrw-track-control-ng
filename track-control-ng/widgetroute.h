@@ -56,8 +56,8 @@ public slots:
 	void unregister();
 
 private:
-	void collectSignals();
-	void collectSignals(mrw::model::Section * section);
+	void collectMainSignals();
+	void collectMainSignals(mrw::model::Section * section);
 	void collectSectionControllers(std::vector<mrw::ctrl::SectionController *> & controllers);
 
 	void unregister(mrw::model::Section * section);

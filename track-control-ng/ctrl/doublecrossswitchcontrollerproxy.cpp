@@ -34,6 +34,10 @@ DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(
 		&statechart, &SwitchStatechart::start,
 		Qt::QueuedConnection);
 	connect(
+		&statechart, &SwitchStatechart::stop,
+		this, &DoubleCrossSwitchControllerProxy::stop,
+		Qt::QueuedConnection);
+	connect(
 		this, &DoubleCrossSwitchControllerProxy::turn,
 		&statechart, &SwitchStatechart::turn,
 		Qt::QueuedConnection);

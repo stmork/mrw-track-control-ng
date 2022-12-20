@@ -61,6 +61,7 @@ namespace mrw::ctrl
 		void disable();
 		void failed();
 		void start();
+		void stop();
 
 	private:
 		void connectMain();

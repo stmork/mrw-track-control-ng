@@ -85,6 +85,10 @@ SignalControllerProxy::SignalControllerProxy(
 		&ControllerRegistry::instance(), &ControllerRegistry::start,
 		&statechart, &SignalControllerStatechart::start,
 		Qt::QueuedConnection);
+	connect(
+		&statechart, &SignalControllerStatechart::stop,
+		this, &SignalControllerProxy::stop,
+		Qt::QueuedConnection);
 
 	connect(
 		this, &SignalControllerProxy::enable,

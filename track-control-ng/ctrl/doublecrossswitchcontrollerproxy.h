@@ -40,6 +40,7 @@ namespace mrw::ctrl
 		void failed();
 		void start();
 		void unlock();
+		void stop();
 
 	private:
 
