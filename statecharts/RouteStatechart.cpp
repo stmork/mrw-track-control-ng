@@ -537,6 +537,16 @@ namespace mrw
 						react(0);
 						transitioned_after = 0;
 					}
+					else
+					{
+						if (failed_raised)
+						{
+							exseq_main_region_Active();
+							enseq_main_region_Disable_default();
+							react(0);
+							transitioned_after = 0;
+						}
+					}
 				}
 			}
 			/* If no transition was taken then execute local reactions */

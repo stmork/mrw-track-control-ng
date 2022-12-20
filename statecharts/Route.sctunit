@@ -5,10 +5,215 @@
 
 testclass Route for statechart mrw.^statechart.RouteStatechart
 {
+	operation disabled()
+	{
+		assert active (mrw.^statechart.RouteStatechart.main_region.Disable)
+		assert called reset()
+		assert called deactivateSections()
+		assert called unlockSignals()
+		assert called unlockSwitches()
+	}
+
 	@Test
 	operation start()
 	{
 		enter
 		assert active (mrw.^statechart.RouteStatechart.main_region.Start)
+	}
+
+	@Test
+	operation switches()
+	{
+		// Given
+		start()
+
+		// When
+		raise extended
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Switch_Turning)
+		assert called reset()
+		assert called turnSwitches()
+	}
+
+	@Test
+	operation signals()
+	{
+		// Given
+		switches()
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Signal_Turning)
+		assert called reset()
+		assert called turnSignals()
+	}
+
+	@Test
+	operation sections()
+	{
+		// Given
+		signals()
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Section_Activation)
+		assert called reset()
+		assert called activateSections()
+	}
+
+	@Test
+	operation activate()
+	{
+		// When
+		sections()
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Active)
+		assert activated
+	}
+
+	@Test
+	operation extend()
+	{
+		// Given
+		activate()
+
+		// When
+		raise extended
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Switch_Turning)
+		assert called reset()
+		assert called turnSwitches()
+	}
+
+	@Test
+	operation deactivate()
+	{
+		// Given
+		activate()
+
+		// When
+		raise disable
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation finish()
+	{
+		// Given
+		deactivate()
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region._final_)
+		assert finished
+	}
+
+	@Test
+	operation failActive()
+	{
+		// Given
+		activate()
+
+		// When
+		raise failed
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation failTurningSwitches()
+	{
+		// Given
+		switches()
+
+		// When
+		raise failed
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation failTurningSignals()
+	{
+		// Given
+		signals()
+
+		// When
+		raise failed
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation failTurningSections()
+	{
+		// Given
+		sections()
+
+		// When
+		raise failed
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation timeoutTurningSwitches()
+	{
+		// Given
+		switches()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation timeoutTurningSignals()
+	{
+		// Given
+		signals()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation timeoutTurningSections()
+	{
+		// Given
+		sections()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		disabled()
 	}
 }

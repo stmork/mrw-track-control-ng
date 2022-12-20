@@ -16,9 +16,13 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 	@Test
 	operation timeoutAfterWait()
 	{
+		// Given
 		wait()
 
+		// When
 		proceed timeout ms
+
+		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
 		assert failing
 	}
@@ -26,9 +30,13 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 	@Test
 	operation initial()
 	{
+		// Given
 		wait()
 
+		// When
 		raise can.connected
+
+		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Init)
 		assert called reset
 		assert start
@@ -37,19 +45,27 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 	@Test
 	operation failAfterStart()
 	{
+		// Given
 		initial()
 
+		// When
 		raise failed
+
+		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
-		assert failing 
+		assert failing
 	}
 
 	@Test
 	operation timeoutAfterStart()
 	{
+		// Given
 		initial()
 
+		// When
 		proceed timeout ms
+
+		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
 		assert failing
 	}
@@ -57,10 +73,14 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 	@Test
 	operation clearFailState()
 	{
+		// Given
 		failAfterStart()
 		mock can.isConnected returns(true)
 
+		// When
 		raise clear
+
+		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Init)
 		assert cleared
 		assert called reset
@@ -70,19 +90,27 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 	@Test
 	operation stayFailState()
 	{
+		// Given
 		failAfterStart()
 		mock can.isConnected returns(false)
 
+		// When
 		raise clear
+
+		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
 	}
 
 	@Test
 	operation editFailed()
 	{
+		// Given
 		failAfterStart()
 
+		// When
 		raise edit
+
+		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Editing)
 		assert cleared
 		assert editing
@@ -92,9 +120,13 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 	@Test
 	operation doOperating()
 	{
+		// Given
 		initial()
 
+		// When
 		raise started
+
+		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Operating)
 		assert operating
 		assert valueof(operating) == true
@@ -103,18 +135,26 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 	@Test
 	operation failWhileOperating()
 	{
+		// Given
 		doOperating()
 
+		// When
 		raise failed
+
+		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Operating)
 	}
 
 	@Test
 	operation resetWhileOperating()
 	{
+		// Given
 		doOperating()
 
+		// When
 		raise init
+
+		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Init)
 		assert operating
 		assert valueof(operating) == false
@@ -125,9 +165,13 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 	@Test
 	operation doEdit()
 	{
+		// Given
 		doOperating()
 
+		// When
 		raise edit
+
+		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Editing)
 		assert operating
 		assert valueof(operating) == false
@@ -138,9 +182,13 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 	@Test
 	operation operateAfterEdit()
 	{
+		// Given
 		doEdit()
 
+		// When
 		raise operate
+
+		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Operating)
 		assert editing
 		assert valueof(editing) == false

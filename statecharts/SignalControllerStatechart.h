@@ -242,6 +242,9 @@ namespace mrw
 			/*! Signal representing the out event 'cleared' that is defined in the default interface scope. */
 			void cleared();
 
+			/*! Signal representing the out event 'stop' that is defined in the default interface scope. */
+			void stop();
+
 			/*! Signal representing the out event 'turnMain' that is defined in the default interface scope. */
 			void turnMain(sc::integer value);
 

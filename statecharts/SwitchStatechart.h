@@ -225,6 +225,9 @@ namespace mrw
 			/*! Signal representing the out event 'entered' that is defined in the default interface scope. */
 			void entered();
 
+			/*! Signal representing the out event 'stop' that is defined in the default interface scope. */
+			void stop();
+
 
 		protected:
 

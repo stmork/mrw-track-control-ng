@@ -480,6 +480,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Failed'. */
 			ifaceOperationCallback->fail();
+			emit stop();
 		}
 
 		/* Exit action for state 'Init'. */

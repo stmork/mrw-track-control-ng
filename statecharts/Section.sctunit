@@ -5,6 +5,31 @@
 
 testclass Section for statechart mrw.^statechart.SectionStatechart
 {
+	operation failState()
+	{
+		assert active (mrw.^statechart.SectionStatechart.main_region.Failed)
+		assert called fail
+		assert stop
+	}
+
+	operation initing()
+	{
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Relay)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
+		assert entered
+		assert called inc
+	}
+
+	operation unlocked()
+	{
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
+		assert called free
+		assert called lock
+	}
+
 	@Test
 	operation waitForStart()
 	{
@@ -13,91 +38,107 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	}
 
 	@Test
-	operation init()
+	operation initial()
 	{
+		// Given
 		waitForStart()
+
+		// When
 		raise start
-		assert active (mrw.^statechart.SectionStatechart.main_region.Init)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Relay)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
-		assert entered
-		assert called inc
+
+		// Then
+		initing()
 	}
 
 	@Test
 	operation failAfterStart()
 	{
-		init()
+		// Given
+		initial()
+
+		// When
 		raise failed
-		assert active (mrw.^statechart.SectionStatechart.main_region.Failed)
-		assert called fail
+
+		// Then
+		failState()
 	}
 
 	@Test
 	operation timeoutAfterStart()
 	{
-		init()
+		// Given
+		initial()
+
+		// When
 		proceed timeout ms
-		assert active (mrw.^statechart.SectionStatechart.main_region.Failed)
-		assert called fail
+
+		// Then
+		failState()
 	}
 
 	@Test
 	operation operational()
 	{
-		init()
+		// Given
+		initial()
 
+		// When
 		raise relaisResponse
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Wait)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
 
+		// When
 		raise stateResponse : false
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
 
+		// Then
+		unlocked()
 		assert called dec
-		assert called free
-		assert called lock
 	}
 
 	@Test
 	operation restart()
 	{
+		// Given
 		operational()
 
+		// When
 		raise start
-		assert active (mrw.^statechart.SectionStatechart.main_region.Init)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Relay)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
-		assert entered
-		assert called inc
+
+		// Then
+		initing()
 	}
 
 	@Test
 	operation clearing()
 	{
+		// Given
 		failAfterStart()
 
+		// When
 		raise clear
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Wait_for_Start)
 
+		// When
 		raise start
-		assert active (mrw.^statechart.SectionStatechart.main_region.Init)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Relay)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
-		assert entered
-		assert called inc
+
+		// Then
+		initing()
 	}
 
 	@Test
 	operation enabled()
 	{
+		// Given
 		operational()
 
+		// When
 		raise enable : true
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Enabling)
 		assert called dec
 		assert called pending
@@ -107,9 +148,13 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	@Test
 	operation disabled()
 	{
+		// Given
 		operational()
 
+		// When
 		raise enable : false
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Disabled)
 	}
@@ -117,9 +162,13 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	@Test
 	operation locked()
 	{
+		// Given
 		enabled()
 
+		// When
 		raise relaisResponse
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
 		assert called dec
@@ -128,8 +177,10 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	@Test
 	operation failAfterEnable()
 	{
+		// Given
 		enabled()
 
+		// When
 		raise failed
 		assert active (mrw.^statechart.SectionStatechart.main_region.Failed)
 		assert called fail
@@ -138,9 +189,13 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	@Test
 	operation timeoutAfterEnable()
 	{
+		// Given
 		enabled()
 
+		// When
 		proceed timeout ms
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Failed)
 		assert called fail
 	}
@@ -148,9 +203,13 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	@Test
 	operation disableAfterEnabled()
 	{
+		// Given
 		locked()
 
+		// When
 		raise disable
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Disabling)
 		assert called inc
@@ -160,58 +219,67 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	@Test
 	operation disableAfterDisabled()
 	{
+		// Given
 		disabled()
 
+		// When
 		raise disable
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
 
-		assert called dec
+		// Then
 		assert called free
 		assert called lock
+		assert called dec
 	}
 
 	@Test
 	operation unlock()
 	{
+		// Given
 		disableAfterEnabled()
 
+		// When
 		raise relaisResponse
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
 
+		// Then
+		unlocked()
 		assert called dec
-		assert called free
-		assert called lock
 	}
 
 	@Test
 	operation failAfterDisable()
 	{
+		// Given
 		disableAfterEnabled()
 
+		// When
 		raise failed
-		assert active (mrw.^statechart.SectionStatechart.main_region.Failed)
-		assert called fail
+		failState()
 	}
 
 	@Test
 	operation timeAfterDisable()
 	{
+		// Given
 		disableAfterEnabled()
 
+		// When
 		proceed timeout ms
-		assert active (mrw.^statechart.SectionStatechart.main_region.Failed)
-		assert called fail
+
+		// Then
+		failState()
 	}
 
 	@Test
 	operation leave()
 	{
+		// Given
 		locked()
 		auto_off = true
 
+		// When
 		raise stateResponse : false
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Left)
 		assert called inc
@@ -221,10 +289,14 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	@Test
 	operation stay()
 	{
+		// Given
 		locked()
 		auto_off = false
 
+		// When
 		raise stateResponse : false
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
 	}
@@ -232,10 +304,14 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	@Test
 	operation autoUnlock()
 	{
+		// Given
 		leave()
 		auto_unlock = true
 
+		// When
 		raise relaisResponse
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
 		assert called dec
@@ -245,10 +321,14 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	@Test
 	operation passedState()
 	{
+		// Given
 		leave()
 		auto_unlock = false
 
+		// When
 		raise relaisResponse
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Passed)
@@ -261,12 +341,15 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	@Test
 	operation disableAfterPassed()
 	{
+		// Given
 		passedState()
 
+		// When
 		raise disable
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
-
 		assert called free
 		assert called lock
 	}
@@ -274,9 +357,13 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	@Test
 	operation enablingAfterDisabled()
 	{
+		// Given
 		disabled
 
+		// When
 		raise enable : true
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Enabling)
 		assert called inc
@@ -286,9 +373,13 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	@Test
 	operation enabledAfterDisabled()
 	{
+		// Given
 		enablingAfterDisabled
 
+		// When
 		raise relaisResponse
+
+		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
 		assert called dec
