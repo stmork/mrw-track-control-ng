@@ -20,6 +20,7 @@ testclass Switch for statechart mrw.^statechart.SwitchStatechart
 		assert active (mrw.^statechart.SwitchStatechart.main_region.Init)
 		assert entered
 		assert called inc
+		assert called request
 	}
 
 	@Test
@@ -38,5 +39,244 @@ testclass Switch for statechart mrw.^statechart.SwitchStatechart
 		proceed timeout ms
 		assert active (mrw.^statechart.SwitchStatechart.main_region.Failed)
 		assert called fail
+	}
+
+	@Test
+	operation operational()
+	{
+		init()
+
+		raise response
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Unlocked)
+		assert called dec
+		assert started
+		assert called lock
+	}
+
+	@Test
+	operation restart()
+	{
+		operational()
+
+		raise start
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Init)
+		assert entered
+		assert called inc
+		assert called request
+	}
+
+	@Test
+	operation clearing()
+	{
+		failAfterStart()
+
+		raise clear
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Wait_for_Start)
+
+		raise start
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Init)
+		assert entered
+		assert called inc
+		assert called request
+	}
+
+	operation turning()
+	{
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning)
+		assert called inc
+		assert called pending
+	}
+
+	@Test
+	operation turnLeft()
+	{
+		operational()
+		mock doTurnLeft returns (true)
+
+		raise turn
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning.Turning_process.Turn_Left)
+		assert called inc
+		assert called left
+		turning()
+	}
+
+	@Test
+	operation turnRight()
+	{
+		operational()
+		mock doTurnLeft returns (false)
+
+		raise turn
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning.Turning_process.Turn_Right)
+		assert called inc
+		assert called right
+		turning()
+	}
+
+	@Test
+	operation queuedLeft()
+	{
+		turnLeft()
+
+		raise queued
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning.Turning_process.Pending)
+
+		mock isFree returns (false)
+
+		raise leftResponse
+		assert called dec
+		lockedState()
+	}
+
+	@Test
+	operation queuedRight()
+	{
+		turnRight()
+
+		raise queued
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning.Turning_process.Pending)
+
+		mock isFree returns (false)
+
+		raise rightResponse
+		assert called dec
+		lockedState()
+	}
+
+	@Test
+	operation freeLeft()
+	{
+		turnLeft()
+
+		raise queued
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning.Turning_process.Pending)
+
+		mock isFree returns (true)
+
+		raise leftResponse
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Unlocked)
+		assert called dec
+	}
+
+	@Test
+	operation freeRight()
+	{
+		turnRight()
+
+		raise queued
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning.Turning_process.Pending)
+
+		mock isFree returns (true)
+
+		raise leftResponse
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Unlocked)
+		assert called dec
+	}
+
+	operation lockedState()
+	{
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Locked)
+		assert called lock
+	}
+
+	@Test
+	operation okLeft()
+	{
+		turnLeft()
+		mock isFree returns (false)
+
+		raise leftResponse
+		lockedState()
+	}
+
+	@Test
+	operation okRight()
+	{
+		turnRight()
+		mock isFree returns (false)
+
+		raise rightResponse
+		lockedState()
+	}
+
+	operation failState()
+	{
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Failed)
+		assert called fail
+	}
+
+	@Test
+	operation failLeft()
+	{
+		turnLeft()
+		mock isFree returns (false)
+
+		raise failed
+		failState()
+	}
+
+	@Test
+	operation failRight()
+	{
+		turnRight()
+
+		raise failed
+		failState()
+	}
+
+	@Test
+	operation timeoutLeft()
+	{
+		turnLeft()
+		mock isFree returns (false)
+
+		proceed timeout ms
+		failState()
+	}
+
+	@Test
+	operation timeoutRight()
+	{
+		turnRight()
+
+		proceed timeout ms
+		failState()
+	}
+
+	@Test
+	operation unlockLeft()
+	{
+		okLeft()
+
+		raise unlock
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Unlocked)
+	}
+
+	@Test
+	operation unlockRight()
+	{
+		okRight()
+
+		raise unlock
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Unlocked)
+	}
+
+	@Test
+	operation failTurnRight()
+	{
+		okLeft()
+
+		raise rightResponse
+		failState()
+	}
+
+	@Test
+	operation failTurnLeft()
+	{
+		okRight()
+
+		raise leftResponse
+		failState()
 	}
 }
