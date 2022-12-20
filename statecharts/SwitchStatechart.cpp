@@ -861,7 +861,7 @@ namespace mrw
 				}
 				else
 				{
-					if ((leftResponse_raised) || (rightResponse_raised))
+					if (response_raised)
 					{
 						exseq_main_region_Operating();
 						enseq_main_region_Failed_default();

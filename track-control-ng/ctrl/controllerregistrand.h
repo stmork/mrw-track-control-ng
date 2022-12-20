@@ -19,6 +19,7 @@ namespace mrw::ctrl
 		ControllerRegistrand();
 
 		virtual bool process(const can::MrwMessage & message);
+		virtual void restart() = 0;
 	};
 }
 

@@ -221,6 +221,12 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 	return false;
 }
 
+void mrw::ctrl::RegularSwitchControllerProxy::restart()
+{
+	statechart.clear();
+	emit start();
+}
+
 QString RegularSwitchControllerProxy::toString() const
 {
 	return *part;

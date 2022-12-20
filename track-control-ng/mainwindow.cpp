@@ -665,15 +665,10 @@ void MainWindow::on_actionUnlock_triggered()
 	{
 		Q_UNUSED(position);
 
-		BaseController::callback<SectionController>(
-			controller,                &SectionController::start);
-		BaseController::callback<RegularSwitchControllerProxy>(
-			controller,     &RegularSwitchControllerProxy::start);
-		BaseController::callback<DoubleCrossSwitchControllerProxy>(
-			controller, &DoubleCrossSwitchControllerProxy::start);
-		BaseController::callback<SignalControllerProxy>(
-			controller,            &SignalControllerProxy::start);
+		BaseController::callback<ControllerRegistrand>(
+			controller, &ControllerRegistrand::restart);
 	});
+
 	on_clearAllSections_clicked();
 	ui->regionTabWidget->currentWidget()->update();
 }

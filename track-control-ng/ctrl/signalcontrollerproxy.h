@@ -94,6 +94,7 @@ namespace mrw::ctrl
 
 		// Implementations from ControllerRegistrand
 		virtual bool    process(const can::MrwMessage & message) override;
+		virtual void    restart() override;
 		virtual QString toString() const override;
 
 		// Implementations from OperationCallback

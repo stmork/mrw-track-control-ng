@@ -180,6 +180,12 @@ bool SectionController::process(const MrwMessage & message)
 	return false;
 }
 
+void SectionController::restart()
+{
+	statechart.clear();
+	emit start();
+}
+
 QString SectionController::toString() const
 {
 	return *section();

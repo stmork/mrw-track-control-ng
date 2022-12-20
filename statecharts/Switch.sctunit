@@ -267,7 +267,7 @@ testclass Switch for statechart mrw.^statechart.SwitchStatechart
 	{
 		okLeft()
 
-		raise rightResponse
+		raise response
 		failState()
 	}
 
@@ -276,7 +276,7 @@ testclass Switch for statechart mrw.^statechart.SwitchStatechart
 	{
 		okRight()
 
-		raise leftResponse
+		raise response
 		failState()
 	}
 }

@@ -314,6 +314,12 @@ bool SignalControllerProxy::process(const MrwMessage & message)
 	return processed;
 }
 
+void mrw::ctrl::SignalControllerProxy::restart()
+{
+	statechart.clear();
+	emit start();
+}
+
 QString SignalControllerProxy::toString() const
 {
 	return *base_signal;

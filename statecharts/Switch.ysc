@@ -29,7 +29,7 @@
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_teY2AHF8Ee2peawiS1OZpw" specification="entry / lock(true)" name="Locked" incomingTransitions="_-NU4gHF8Ee2peawiS1OZpw">
             <outgoingTransitions xmi:id="_dXLlEHGAEe2peawiS1OZpw" specification="unlock" target="_KiWb0HF6Ee2peawiS1OZpw"/>
-            <outgoingTransitions xmi:id="_z_sAAHGhEe2peawiS1OZpw" specification="leftResponse, rightResponse" target="_T17jEHCVEe2rVLYxSRawxw"/>
+            <outgoingTransitions xmi:id="_z_sAAHGhEe2peawiS1OZpw" specification="response" target="_T17jEHCVEe2rVLYxSRawxw"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_iR4E0HF9Ee2peawiS1OZpw" specification="entry / pending" name="Turning">
             <outgoingTransitions xmi:id="_SN_m8HF8Ee2peawiS1OZpw" specification="after timeout ms" target="_T17jEHCVEe2rVLYxSRawxw"/>
