@@ -8,7 +8,7 @@
       <vertices xsi:type="sgraph:State" xmi:id="_FbTpHnbWEe2lmIyQXv_DxQ" name="Wait for Start" incomingTransitions="_FbTpHXbWEe2lmIyQXv_DxQ _lsGcgHhuEe2OXcmdUJ-BFw">
         <outgoingTransitions xmi:id="_FbTpIXbWEe2lmIyQXv_DxQ" specification="start" target="_FbTpKHbWEe2lmIyQXv_DxQ"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_FbTpKHbWEe2lmIyQXv_DxQ" specification="entry / inc" name="Init" incomingTransitions="_FbTpIXbWEe2lmIyQXv_DxQ _tLhEkHpUEe2_ZOj2sFqWdg">
+      <vertices xsi:type="sgraph:State" xmi:id="_FbTpKHbWEe2lmIyQXv_DxQ" specification="entry / inc&#xA;exit / dec" name="Init" incomingTransitions="_FbTpIXbWEe2lmIyQXv_DxQ _tLhEkHpUEe2_ZOj2sFqWdg">
         <outgoingTransitions xmi:id="_T8G0gHbgEe20X8bIRmamkA" specification="failed" target="_BvK_cHbfEe20X8bIRmamkA"/>
         <outgoingTransitions xmi:id="_Vcj6oHbgEe20X8bIRmamkA" specification="after timeout ms" target="_BvK_cHbfEe20X8bIRmamkA"/>
         <regions xmi:id="_6_a_YHbdEe20X8bIRmamkA" name="Init process">
@@ -47,7 +47,7 @@
             <outgoingTransitions xmi:id="_acbY0HbeEe20X8bIRmamkA" specification="" target="__bsWYHbdEe20X8bIRmamkA"/>
           </vertices>
           <vertices xsi:type="sgraph:Synchronization" xmi:id="_epAuAHbeEe20X8bIRmamkA" incomingTransitions="_Wivl8HboEe20X8bIRmamkA _Y8tG8HboEe20X8bIRmamkA _btoWcHboEe20X8bIRmamkA">
-            <outgoingTransitions xmi:id="_QO5HcHbWEe2lmIyQXv_DxQ" specification="/ dec" target="_Oxi_sHbWEe2lmIyQXv_DxQ"/>
+            <outgoingTransitions xmi:id="_QO5HcHbWEe2lmIyQXv_DxQ" specification="" target="_Oxi_sHbWEe2lmIyQXv_DxQ"/>
           </vertices>
         </regions>
       </vertices>
@@ -63,8 +63,8 @@
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_DlYw0Hb4Ee20X8bIRmamkA" specification="entry / lock(true)" name="Locked" incomingTransitions="_F7N_wHb4Ee20X8bIRmamkA">
             <regions xmi:id="_DlZ-8Hb4Ee20X8bIRmamkA" name="Processing">
-              <vertices xsi:type="sgraph:State" xmi:id="_PqTUMHb4Ee20X8bIRmamkA" specification="entry / inc; raise turnMain() : GO" name="Go" incomingTransitions="_VhAB0Hb4Ee20X8bIRmamkA">
-                <outgoingTransitions xmi:id="_aWOEUHb4Ee20X8bIRmamkA" specification="completedMain / dec" target="_V18XEHb4Ee20X8bIRmamkA"/>
+              <vertices xsi:type="sgraph:State" xmi:id="_PqTUMHb4Ee20X8bIRmamkA" specification="entry / inc; raise turnMain() : GO&#xA;exit / dec" name="Go" incomingTransitions="_VhAB0Hb4Ee20X8bIRmamkA">
+                <outgoingTransitions xmi:id="_aWOEUHb4Ee20X8bIRmamkA" specification="completedMain" target="_V18XEHb4Ee20X8bIRmamkA"/>
                 <outgoingTransitions xmi:id="_XYBN0Hb4Ee20X8bIRmamkA" specification="after timeout ms" target="_BvK_cHbfEe20X8bIRmamkA"/>
               </vertices>
               <vertices xsi:type="sgraph:Entry" xmi:id="_U6xvUHb4Ee20X8bIRmamkA">
@@ -73,8 +73,8 @@
               <vertices xsi:type="sgraph:State" xmi:id="_V18XEHb4Ee20X8bIRmamkA" name="Idle" incomingTransitions="_aWOEUHb4Ee20X8bIRmamkA">
                 <outgoingTransitions xmi:id="_oCY5YHb4Ee20X8bIRmamkA" specification="disable" target="_k75pkHb4Ee20X8bIRmamkA"/>
               </vertices>
-              <vertices xsi:type="sgraph:State" xmi:id="_k75pkHb4Ee20X8bIRmamkA" specification="entry / inc; raise turnMain() : STOP" name="Stop" incomingTransitions="_oCY5YHb4Ee20X8bIRmamkA">
-                <outgoingTransitions xmi:id="_mV5iYHb4Ee20X8bIRmamkA" specification="completedMain / dec" target="__pCQAHb3Ee20X8bIRmamkA"/>
+              <vertices xsi:type="sgraph:State" xmi:id="_k75pkHb4Ee20X8bIRmamkA" specification="entry / inc; raise turnMain() : STOP&#xA;exit / dec" name="Stop" incomingTransitions="_oCY5YHb4Ee20X8bIRmamkA">
+                <outgoingTransitions xmi:id="_mV5iYHb4Ee20X8bIRmamkA" specification="completedMain" target="__pCQAHb3Ee20X8bIRmamkA"/>
               </vertices>
             </regions>
           </vertices>

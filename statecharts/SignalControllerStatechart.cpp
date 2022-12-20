@@ -488,6 +488,7 @@ namespace mrw
 		{
 			/* Exit action for state 'Init'. */
 			timerService->unsetTimer(this, 0);
+			ifaceOperationCallback->dec();
 		}
 
 		/* Exit action for state 'Go'. */
@@ -495,6 +496,14 @@ namespace mrw
 		{
 			/* Exit action for state 'Go'. */
 			timerService->unsetTimer(this, 1);
+			ifaceOperationCallback->dec();
+		}
+
+		/* Exit action for state 'Stop'. */
+		void SignalControllerStatechart::exact_main_region_Operating_Processing_Locked_Processing_Stop()
+		{
+			/* Exit action for state 'Stop'. */
+			ifaceOperationCallback->dec();
 		}
 
 		/* Exit action for state 'Failed'. */
@@ -789,6 +798,7 @@ namespace mrw
 			/* Default exit sequence for state Stop */
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
 			stateConfVectorPosition = 0;
+			exact_main_region_Operating_Processing_Locked_Processing_Stop();
 		}
 
 		/* Default exit sequence for state Failed */
@@ -1118,7 +1128,6 @@ namespace mrw
 		{
 			/* The reactions of state null. */
 			exseq_main_region_Init();
-			ifaceOperationCallback->dec();
 			enseq_main_region_Operating_default();
 			react(0);
 		}
@@ -1385,7 +1394,6 @@ namespace mrw
 				if (completedMain_raised)
 				{
 					exseq_main_region_Operating_Processing_Locked_Processing_Go();
-					ifaceOperationCallback->dec();
 					enseq_main_region_Operating_Processing_Locked_Processing_Idle_default();
 					main_region_Operating_Processing_Locked_react(0);
 					transitioned_after = 0;
@@ -1441,7 +1449,6 @@ namespace mrw
 				if (completedMain_raised)
 				{
 					exseq_main_region_Operating_Processing_Locked();
-					ifaceOperationCallback->dec();
 					enseq_main_region_Operating_Processing_Unlocked_default();
 					main_region_Operating_react(0);
 					transitioned_after = 0;

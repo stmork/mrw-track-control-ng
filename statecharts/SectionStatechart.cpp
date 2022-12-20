@@ -497,6 +497,7 @@ namespace mrw
 		{
 			/* Exit action for state 'Waiting'. */
 			timerService->unsetTimer(this, 1);
+			ifaceOperationCallback->dec();
 		}
 
 		/* Exit action for state 'Enabling'. */
@@ -1508,7 +1509,6 @@ namespace mrw
 				if (relaisResponse_raised)
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting();
-					ifaceOperationCallback->dec();
 					emit left();
 					react_main_region_Operating_Processing_Locked_Route_active__choice_0();
 					transitioned_after = 0;
@@ -1531,7 +1531,6 @@ namespace mrw
 				if (relaisResponse_raised)
 				{
 					exseq_main_region_Operating_Processing_Locked();
-					ifaceOperationCallback->dec();
 					enseq_main_region_Operating_Processing_Unlocked_default();
 					main_region_Operating_react(0);
 					transitioned_after = 0;
@@ -1554,7 +1553,6 @@ namespace mrw
 				if (relaisResponse_raised)
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting();
-					ifaceOperationCallback->dec();
 					enseq_main_region_Operating_Processing_Locked_Route_active_Enabled_default();
 					main_region_Operating_Processing_Locked_react(0);
 					transitioned_after = 0;

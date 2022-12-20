@@ -309,6 +309,7 @@ namespace mrw
 			void enact_main_region_Failed();
 			void exact_main_region_Init();
 			void exact_main_region_Operating_Processing_Locked_Processing_Go();
+			void exact_main_region_Operating_Processing_Locked_Processing_Stop();
 			void exact_main_region_Failed();
 			void enseq_main_region_Wait_for_Start_default();
 			void enseq_main_region_Init_default();
