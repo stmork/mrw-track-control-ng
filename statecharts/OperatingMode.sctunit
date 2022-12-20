@@ -14,12 +14,18 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 	}
 
 	@Test
-	operation init()
+	operation initial()
 	{
-		wait
+		wait()
 		raise can.connected
 		assert active (mrw.^statechart.OperatingMode.main_region.Init)
 		assert called reset
 		assert start
+	}
+
+	@Test
+	operation timeoutAfterStart()
+	{
+		initial()
 	}
 }

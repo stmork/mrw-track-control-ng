@@ -197,7 +197,7 @@ void MainWindow::enable()
 {
 	const bool operating      = statechart.isStateActive(OperatingMode::State::main_region_Operating);
 	const bool editing        = statechart.isStateActive(OperatingMode::State::main_region_Editing);
-	const bool fail           = statechart.isStateActive(OperatingMode::State::main_region_Fail);
+	const bool fail           = statechart.isStateActive(OperatingMode::State::main_region_Failed);
 	const size_t switch_count = count<RegularSwitchController>() + count<DoubleCrossSwitchController>();
 	const size_t rail_count   = count<RailController>() + count<SignalControllerProxy>();
 

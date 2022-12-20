@@ -21,7 +21,6 @@ namespace mrw
 		OperatingMode::OperatingMode(QObject * parent) :
 			QObject(parent),
 			timeout(5000),
-			retry(150),
 			timerService(nullptr),
 			ifaceCan(nullptr),
 			ifaceOperationCallback(nullptr),
@@ -257,9 +256,9 @@ namespace mrw
 					return  (stateConfVector[scvi_main_region_Editing] == mrw::statechart::OperatingMode::State::main_region_Editing);
 					break;
 				}
-			case mrw::statechart::OperatingMode::State::main_region_Fail :
+			case mrw::statechart::OperatingMode::State::main_region_Failed :
 				{
-					return  (stateConfVector[scvi_main_region_Fail] == mrw::statechart::OperatingMode::State::main_region_Fail);
+					return  (stateConfVector[scvi_main_region_Failed] == mrw::statechart::OperatingMode::State::main_region_Failed);
 					break;
 				}
 			case mrw::statechart::OperatingMode::State::main_region_Operating :
@@ -284,16 +283,6 @@ namespace mrw
 		void OperatingMode::setTimeout(sc::integer timeout_)
 		{
 			this->timeout = timeout_;
-		}
-
-		sc::integer OperatingMode::getRetry() const
-		{
-			return retry;
-		}
-
-		void OperatingMode::setRetry(sc::integer retry_)
-		{
-			this->retry = retry_;
 		}
 
 		void OperatingMode::setOperationCallback(OperationCallback * operationCallback)
@@ -335,10 +324,10 @@ namespace mrw
 			emit editing(editing_value);
 		}
 
-		/* Entry action for state 'Fail'. */
-		void OperatingMode::enact_main_region_Fail()
+		/* Entry action for state 'Failed'. */
+		void OperatingMode::enact_main_region_Failed()
 		{
-			/* Entry action for state 'Fail'. */
+			/* Entry action for state 'Failed'. */
 			emit failed();
 		}
 
@@ -372,10 +361,10 @@ namespace mrw
 			emit editing(editing_value);
 		}
 
-		/* Exit action for state 'Fail'. */
-		void OperatingMode::exact_main_region_Fail()
+		/* Exit action for state 'Failed'. */
+		void OperatingMode::exact_main_region_Failed()
 		{
-			/* Exit action for state 'Fail'. */
+			/* Exit action for state 'Failed'. */
 			emit cleared();
 		}
 
@@ -411,12 +400,12 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Editing;
 		}
 
-		/* 'default' enter sequence for state Fail */
-		void OperatingMode::enseq_main_region_Fail_default()
+		/* 'default' enter sequence for state Failed */
+		void OperatingMode::enseq_main_region_Failed_default()
 		{
-			/* 'default' enter sequence for state Fail */
-			enact_main_region_Fail();
-			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Fail;
+			/* 'default' enter sequence for state Failed */
+			enact_main_region_Failed();
+			stateConfVector[0] = mrw::statechart::OperatingMode::State::main_region_Failed;
 		}
 
 		/* 'default' enter sequence for state Operating */
@@ -458,12 +447,12 @@ namespace mrw
 			exact_main_region_Editing();
 		}
 
-		/* Default exit sequence for state Fail */
-		void OperatingMode::exseq_main_region_Fail()
+		/* Default exit sequence for state Failed */
+		void OperatingMode::exseq_main_region_Failed()
 		{
-			/* Default exit sequence for state Fail */
+			/* Default exit sequence for state Failed */
 			stateConfVector[0] = mrw::statechart::OperatingMode::State::NO_STATE;
-			exact_main_region_Fail();
+			exact_main_region_Failed();
 		}
 
 		/* Default exit sequence for state Operating */
@@ -496,9 +485,9 @@ namespace mrw
 					exseq_main_region_Editing();
 					break;
 				}
-			case mrw::statechart::OperatingMode::State::main_region_Fail :
+			case mrw::statechart::OperatingMode::State::main_region_Failed :
 				{
-					exseq_main_region_Fail();
+					exseq_main_region_Failed();
 					break;
 				}
 			case mrw::statechart::OperatingMode::State::main_region_Operating :
@@ -544,7 +533,7 @@ namespace mrw
 					{
 						exseq_main_region_Prepare_Bus();
 						timeEvents[0] = false;
-						enseq_main_region_Fail_default();
+						enseq_main_region_Failed_default();
 						react(0);
 						transitioned_after = 0;
 					}
@@ -568,7 +557,7 @@ namespace mrw
 				{
 					exseq_main_region_Init();
 					timeEvents[1] = false;
-					enseq_main_region_Fail_default();
+					enseq_main_region_Failed_default();
 					react(0);
 					transitioned_after = 0;
 				}
@@ -613,15 +602,15 @@ namespace mrw
 			return transitioned_after;
 		}
 
-		sc::integer OperatingMode::main_region_Fail_react(const sc::integer transitioned_before)
+		sc::integer OperatingMode::main_region_Failed_react(const sc::integer transitioned_before)
 		{
-			/* The reactions of state Fail. */
+			/* The reactions of state Failed. */
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
 				if (clear_raised)
 				{
-					exseq_main_region_Fail();
+					exseq_main_region_Failed();
 					enseq_main_region_Init_default();
 					react(0);
 					transitioned_after = 0;
@@ -630,7 +619,7 @@ namespace mrw
 				{
 					if (edit_raised)
 					{
-						exseq_main_region_Fail();
+						exseq_main_region_Failed();
 						enseq_main_region_Editing_default();
 						react(0);
 						transitioned_after = 0;
@@ -663,7 +652,7 @@ namespace mrw
 					if (fail_raised)
 					{
 						exseq_main_region_Operating();
-						enseq_main_region_Fail_default();
+						enseq_main_region_Failed_default();
 						react(0);
 						transitioned_after = 0;
 					}
@@ -719,9 +708,9 @@ namespace mrw
 					main_region_Editing_react(-1);
 					break;
 				}
-			case mrw::statechart::OperatingMode::State::main_region_Fail :
+			case mrw::statechart::OperatingMode::State::main_region_Failed :
 				{
-					main_region_Fail_react(-1);
+					main_region_Failed_react(-1);
 					break;
 				}
 			case mrw::statechart::OperatingMode::State::main_region_Operating :

@@ -21,4 +21,22 @@ testclass Switch for statechart mrw.^statechart.SwitchStatechart
 		assert entered
 		assert called inc
 	}
+
+	@Test
+	operation failAfterStart()
+	{
+		init()
+		raise failed
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Failed)
+		assert called fail
+	}
+
+	@Test
+	operation timeoutAfterStart()
+	{
+		init()
+		proceed timeout ms
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Failed)
+		assert called fail
+	}
 }

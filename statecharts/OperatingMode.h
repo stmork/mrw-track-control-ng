@@ -53,7 +53,7 @@ namespace mrw
 				main_region_Prepare_Bus,
 				main_region_Init,
 				main_region_Editing,
-				main_region_Fail,
+				main_region_Failed,
 				main_region_Operating
 			};
 
@@ -62,7 +62,7 @@ namespace mrw
 			static const sc::integer scvi_main_region_Prepare_Bus = 0;
 			static const sc::integer scvi_main_region_Init = 0;
 			static const sc::integer scvi_main_region_Editing = 0;
-			static const sc::integer scvi_main_region_Fail = 0;
+			static const sc::integer scvi_main_region_Failed = 0;
 			static const sc::integer scvi_main_region_Operating = 0;
 
 			/*! Enumeration of all events which are consumed. */
@@ -96,12 +96,6 @@ namespace mrw
 
 			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
 			void setTimeout(sc::integer timeout);
-
-			/*! Gets the value of the variable 'retry' that is defined in the default interface scope. */
-			sc::integer getRetry() const;
-
-			/*! Sets the value of the variable 'retry' that is defined in the default interface scope. */
-			void setRetry(sc::integer retry);
 
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
@@ -263,7 +257,6 @@ namespace mrw
 			OperatingMode & operator=(const OperatingMode &);
 
 			sc::integer timeout;
-			sc::integer retry;
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
@@ -288,23 +281,23 @@ namespace mrw
 			void enact_main_region_Prepare_Bus();
 			void enact_main_region_Init();
 			void enact_main_region_Editing();
-			void enact_main_region_Fail();
+			void enact_main_region_Failed();
 			void enact_main_region_Operating();
 			void exact_main_region_Prepare_Bus();
 			void exact_main_region_Init();
 			void exact_main_region_Editing();
-			void exact_main_region_Fail();
+			void exact_main_region_Failed();
 			void exact_main_region_Operating();
 			void enseq_main_region_Prepare_Bus_default();
 			void enseq_main_region_Init_default();
 			void enseq_main_region_Editing_default();
-			void enseq_main_region_Fail_default();
+			void enseq_main_region_Failed_default();
 			void enseq_main_region_Operating_default();
 			void enseq_main_region_default();
 			void exseq_main_region_Prepare_Bus();
 			void exseq_main_region_Init();
 			void exseq_main_region_Editing();
-			void exseq_main_region_Fail();
+			void exseq_main_region_Failed();
 			void exseq_main_region_Operating();
 			void exseq_main_region();
 			void react_main_region__entry_Default();
@@ -312,7 +305,7 @@ namespace mrw
 			sc::integer main_region_Prepare_Bus_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_react(const sc::integer transitioned_before);
 			sc::integer main_region_Editing_react(const sc::integer transitioned_before);
-			sc::integer main_region_Fail_react(const sc::integer transitioned_before);
+			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
