@@ -153,9 +153,9 @@ SwitchState DoubleCrossSwitch::switchState() const
 		SwitchState::SWITCH_STATE_RIGHT;
 }
 
-void DoubleCrossSwitch::setState(const State state)
+void DoubleCrossSwitch::setState(const State state, const bool force)
 {
-	if (lock() == LockState::UNLOCKED)
+	if ((lock() == LockState::UNLOCKED) || force)
 	{
 #ifdef STATE_VERBOSE
 		qDebug().noquote() << "########## DCS set state: " << state_map.get(switch_state) << " => " << state_map.get(state) << name();

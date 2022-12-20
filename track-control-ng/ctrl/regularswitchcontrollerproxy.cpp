@@ -206,7 +206,7 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 			return true;
 
 		case GETDIR:
-			part->setState(RegularSwitch::State(message[0]));
+			part->setState(RegularSwitch::State(message[0]), true);
 			statechart.response();
 			emit update();
 			return true;

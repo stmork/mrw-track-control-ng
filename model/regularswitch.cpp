@@ -57,9 +57,9 @@ RegularSwitch::State RegularSwitch::state() const
 	return switch_state;
 }
 
-void RegularSwitch::setState(const RegularSwitch::State state)
+void RegularSwitch::setState(const State state, const bool force)
 {
-	if (lock() == LockState::UNLOCKED)
+	if ((lock() == LockState::UNLOCKED) || force)
 	{
 		switch_state = state;
 	}

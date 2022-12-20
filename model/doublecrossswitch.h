@@ -81,9 +81,11 @@ namespace mrw::model
 		 * related to a track but only two states related to its actuators.
 		 *
 		 * @param state The new state related to an active track.
+		 * @param force Force setting the state. This is used to force
+		 * update on CAN MrwMessage response.
 		 * @see commandState()
 		 */
-		void setState(const State state);
+		void setState(const State state, const bool force = false);
 
 		/**
 		 * This method computes the DoubleCrossSwitch::State value depending

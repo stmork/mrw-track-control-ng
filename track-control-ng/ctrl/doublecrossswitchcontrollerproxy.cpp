@@ -184,7 +184,7 @@ bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 			return true;
 
 		case GETDIR:
-			part->setState(DoubleCrossSwitch::State(message[0]));
+			part->setState(DoubleCrossSwitch::State(message[0]), true);
 			statechart.response();
 			emit update();
 			return true;
