@@ -41,7 +41,7 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 
 		raise failed
 		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
-		assert failing
+		assert failing 
 	}
 
 	@Test
@@ -55,15 +55,26 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 	}
 
 	@Test
-	operation clearFailed()
+	operation clearFailState()
 	{
 		failAfterStart()
+		mock can.isConnected returns(true)
 
 		raise clear
 		assert active (mrw.^statechart.OperatingMode.main_region.Init)
 		assert cleared
 		assert called reset
 		assert start
+	}
+
+	@Test
+	operation stayFailState()
+	{
+		failAfterStart()
+		mock can.isConnected returns(false)
+
+		raise clear
+		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
 	}
 
 	@Test
@@ -95,10 +106,7 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 		doOperating()
 
 		raise failed
-		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
-		assert operating
-		assert valueof(operating) == false
-		assert failing
+		assert active (mrw.^statechart.OperatingMode.main_region.Operating)
 	}
 
 	@Test

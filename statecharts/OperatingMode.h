@@ -119,6 +119,7 @@ namespace mrw
 
 
 
+
 				//! Inner class for can interface scope operation callbacks.
 				class OperationCallback
 				{
@@ -126,6 +127,8 @@ namespace mrw
 					virtual ~OperationCallback() = 0;
 
 					virtual void connectBus() = 0;
+
+					virtual bool isConnected() = 0;
 
 
 				};
@@ -228,11 +231,11 @@ namespace mrw
 			/*! Signal representing the out event 'start' that is defined in the default interface scope. */
 			void start();
 
-			/*! Signal representing the out event 'failing' that is defined in the default interface scope. */
-			void failing();
-
 			/*! Signal representing the out event 'cleared' that is defined in the default interface scope. */
 			void cleared();
+
+			/*! Signal representing the out event 'failing' that is defined in the default interface scope. */
+			void failing();
 
 			/*! Signal representing the out event 'operating' that is defined in the default interface scope. */
 			void operating(bool value);

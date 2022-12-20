@@ -34,6 +34,7 @@ public:
 protected:
 	virtual void process(const mrw::can::MrwMessage & message) override;
 	virtual void connectBus() override;
+	virtual bool isConnected() override;
 };
 
 #endif

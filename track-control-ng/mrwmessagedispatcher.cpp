@@ -70,3 +70,8 @@ void MrwMessageDispatcher::connectBus()
 		qWarning("CAN bus already connected.");
 	}
 }
+
+bool MrwMessageDispatcher::isConnected()
+{
+	return can_device->state() == QCanBusDevice::ConnectedState;
+}

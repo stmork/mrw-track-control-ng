@@ -117,6 +117,7 @@ private:
 	}
 
 	virtual void        reset() override;
+
 	mrw::model::Route * create(const bool direction, mrw::model::SectionState state);
 	void                changePage(const int offset);
 

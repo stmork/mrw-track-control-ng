@@ -563,19 +563,19 @@ namespace mrw
 				}
 				else
 				{
-					if (started_raised)
+					if (failed_raised)
 					{
 						exseq_main_region_Init();
-						enseq_main_region_Operating_default();
+						enseq_main_region_Failed_default();
 						react(0);
 						transitioned_after = 0;
 					}
 					else
 					{
-						if (failed_raised)
+						if (started_raised)
 						{
 							exseq_main_region_Init();
-							enseq_main_region_Failed_default();
+							enseq_main_region_Operating_default();
 							react(0);
 							transitioned_after = 0;
 						}
@@ -618,7 +618,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (clear_raised)
+				if (((clear_raised)) && ((ifaceCan.ifaceCanOperationCallback->isConnected())))
 				{
 					exseq_main_region_Failed();
 					enseq_main_region_Init_default();
@@ -659,22 +659,12 @@ namespace mrw
 				}
 				else
 				{
-					if (failed_raised)
+					if (init_raised)
 					{
 						exseq_main_region_Operating();
-						enseq_main_region_Failed_default();
+						enseq_main_region_Init_default();
 						react(0);
 						transitioned_after = 0;
-					}
-					else
-					{
-						if (init_raised)
-						{
-							exseq_main_region_Operating();
-							enseq_main_region_Init_default();
-							react(0);
-							transitioned_after = 0;
-						}
 					}
 				}
 			}

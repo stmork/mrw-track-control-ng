@@ -49,7 +49,7 @@ void Device::setLock(const Device::LockState input)
 {
 	if (input == LockState::FAIL)
 	{
-		qCritical().noquote() << String::red("FAIL!") << name();
+		qCritical().noquote() << String::red(" Locking to FAIL!") << name();
 	}
 	if (lock_state != input)
 	{

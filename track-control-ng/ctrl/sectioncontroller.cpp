@@ -206,7 +206,7 @@ void SectionController::free()
 
 void SectionController::fail()
 {
-	qCritical().noquote() << String::red(" Section!") << name();
+	qCritical().noquote() << String::red(" Section failed!") << name();
 
 	section()->setLock(LockState::FAIL);
 	emit update();

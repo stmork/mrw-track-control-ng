@@ -184,6 +184,10 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 		this, &MainWindow::onInit,
 		Qt::QueuedConnection);
 	connect(
+		&statechart, &OperatingMode::failing,
+		this, &MainWindow::onFailed,
+		Qt::QueuedConnection);
+	connect(
 		&statechart, &OperatingMode::operating,
 		this, &MainWindow::onOperate,
 		Qt::QueuedConnection);
@@ -191,17 +195,13 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 		&statechart, &OperatingMode::editing,
 		this, &MainWindow::onEdit,
 		Qt::QueuedConnection);
-	connect(
-		&statechart, &OperatingMode::failed,
-		this, &MainWindow::onFailed,
-		Qt::QueuedConnection);
 }
 
 void MainWindow::enable()
 {
 	const bool operating      = statechart.isStateActive(OperatingMode::State::main_region_Operating);
 	const bool editing        = statechart.isStateActive(OperatingMode::State::main_region_Editing);
-	const bool fail           = statechart.isStateActive(OperatingMode::State::main_region_Failed);
+	const bool failed         = statechart.isStateActive(OperatingMode::State::main_region_Failed);
 	const size_t switch_count = count<RegularSwitchController>() + count<DoubleCrossSwitchController>();
 	const size_t rail_count   = count<RailController>() + count<SignalControllerProxy>();
 
@@ -219,8 +219,8 @@ void MainWindow::enable()
 	ui->actionLineDown->setEnabled(editing);
 
 	ui->actionOperate->setEnabled(editing);
-	ui->actionEdit->setEnabled(operating || fail);
-	ui->actionClear->setEnabled(fail);
+	ui->actionEdit->setEnabled(operating || failed);
+	ui->actionClear->setEnabled(failed);
 	ui->actionInit->setEnabled(operating);
 
 	ui->actionTurnSwitchLeft->setEnabled(switch_count > 0);
