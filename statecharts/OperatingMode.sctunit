@@ -14,9 +14,20 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 	}
 
 	@Test
+	operation timeoutAfterWait()
+	{
+		wait()
+
+		proceed timeout ms
+		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
+		assert failing
+	}
+
+	@Test
 	operation initial()
 	{
 		wait()
+
 		raise can.connected
 		assert active (mrw.^statechart.OperatingMode.main_region.Init)
 		assert called reset
@@ -24,8 +35,108 @@ testclass OperatingMode for statechart mrw.^statechart.OperatingMode
 	}
 
 	@Test
+	operation failAfterStart()
+	{
+		initial()
+
+		raise failed
+		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
+		assert failing
+	}
+
+	@Test
 	operation timeoutAfterStart()
 	{
 		initial()
+
+		proceed timeout ms
+		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
+		assert failing
+	}
+
+	@Test
+	operation clearFailed()
+	{
+		failAfterStart()
+
+		raise clear
+		assert active (mrw.^statechart.OperatingMode.main_region.Init)
+		assert cleared
+		assert called reset
+		assert start
+	}
+
+	@Test
+	operation editFailed()
+	{
+		failAfterStart()
+
+		raise edit
+		assert active (mrw.^statechart.OperatingMode.main_region.Editing)
+		assert cleared
+		assert editing
+		assert valueof(editing) == true
+	}
+
+	@Test
+	operation doOperating()
+	{
+		initial()
+
+		raise started
+		assert active (mrw.^statechart.OperatingMode.main_region.Operating)
+		assert operating
+		assert valueof(operating) == true
+	}
+
+	@Test
+	operation failWhileOperating()
+	{
+		doOperating()
+
+		raise failed
+		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
+		assert operating
+		assert valueof(operating) == false
+		assert failing
+	}
+
+	@Test
+	operation resetWhileOperating()
+	{
+		doOperating()
+
+		raise init
+		assert active (mrw.^statechart.OperatingMode.main_region.Init)
+		assert operating
+		assert valueof(operating) == false
+		assert called reset
+		assert start
+	}
+
+	@Test
+	operation doEdit()
+	{
+		doOperating()
+
+		raise edit
+		assert active (mrw.^statechart.OperatingMode.main_region.Editing)
+		assert operating
+		assert valueof(operating) == false
+		assert editing
+		assert valueof(editing) == true
+	}
+
+	@Test
+	operation operateAfterEdit()
+	{
+		doEdit()
+
+		raise operate
+		assert active (mrw.^statechart.OperatingMode.main_region.Operating)
+		assert editing
+		assert valueof(editing) == false
+		assert operating
+		assert valueof(operating) == true
 	}
 }

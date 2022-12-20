@@ -27,7 +27,7 @@ namespace mrw
 			isExecuting(false),
 			clear_raised(false),
 			started_raised(false),
-			fail_raised(false),
+			failed_raised(false),
 			edit_raised(false),
 			operate_raised(false),
 			init_raised(false),
@@ -90,9 +90,9 @@ namespace mrw
 					started_raised = true;
 					break;
 				}
-			case mrw::statechart::OperatingMode::Event::fail:
+			case mrw::statechart::OperatingMode::Event::failed:
 				{
-					fail_raised = true;
+					failed_raised = true;
 					break;
 				}
 			case mrw::statechart::OperatingMode::Event::edit:
@@ -145,9 +145,9 @@ namespace mrw
 		}
 
 
-		void mrw::statechart::OperatingMode::fail()
+		void mrw::statechart::OperatingMode::failed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingMode::EventInstance(mrw::statechart::OperatingMode::Event::fail));
+			incomingEventQueue.push_back(new mrw::statechart::OperatingMode::EventInstance(mrw::statechart::OperatingMode::Event::failed));
 			runCycle();
 		}
 
@@ -328,7 +328,7 @@ namespace mrw
 		void OperatingMode::enact_main_region_Failed()
 		{
 			/* Entry action for state 'Failed'. */
-			emit failed();
+			emit failing();
 		}
 
 		/* Entry action for state 'Operating'. */
@@ -570,6 +570,16 @@ namespace mrw
 						react(0);
 						transitioned_after = 0;
 					}
+					else
+					{
+						if (failed_raised)
+						{
+							exseq_main_region_Init();
+							enseq_main_region_Failed_default();
+							react(0);
+							transitioned_after = 0;
+						}
+					}
 				}
 			}
 			/* If no transition was taken then execute local reactions */
@@ -649,7 +659,7 @@ namespace mrw
 				}
 				else
 				{
-					if (fail_raised)
+					if (failed_raised)
 					{
 						exseq_main_region_Operating();
 						enseq_main_region_Failed_default();
@@ -680,7 +690,7 @@ namespace mrw
 		{
 			clear_raised = false;
 			started_raised = false;
-			fail_raised = false;
+			failed_raised = false;
 			edit_raised = false;
 			operate_raised = false;
 			init_raised = false;
@@ -739,7 +749,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((((clear_raised) || (started_raised)) || (fail_raised)) || (edit_raised)) || (operate_raised)) || (init_raised)) || (ifaceCan.connected_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while (((((((((clear_raised) || (started_raised)) || (failed_raised)) || (edit_raised)) || (operate_raised)) || (init_raised)) || (ifaceCan.connected_raised)) || (timeEvents[0])) || (timeEvents[1]));
 			isExecuting = false;
 		}
 

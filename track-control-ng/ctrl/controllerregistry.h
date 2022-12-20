@@ -65,6 +65,7 @@ namespace mrw::ctrl
 		void clear();
 		void start();
 		void completed();
+		void failed();
 	};
 }
 
