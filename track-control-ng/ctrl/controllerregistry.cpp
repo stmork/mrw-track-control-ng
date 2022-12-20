@@ -126,6 +126,11 @@ void ControllerRegistry::complete()
 	}
 }
 
+bool ControllerRegistry::isCompleted()
+{
+	return transaction.size() == 0;
+}
+
 void ControllerRegistry::dump()
 {
 	for (ControllerRegistrand * registrand : transaction)

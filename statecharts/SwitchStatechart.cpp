@@ -394,6 +394,7 @@ namespace mrw
 		{
 			/* Exit action for state 'Turning'. */
 			timerService->unsetTimer(this, 1);
+			ifaceOperationCallback->dec();
 		}
 
 		/* 'default' enter sequence for state Wait for Start */
@@ -898,7 +899,6 @@ namespace mrw
 					if (leftResponse_raised)
 					{
 						exseq_main_region_Operating_operating_Turning();
-						ifaceOperationCallback->dec();
 						react_main_region_Operating_operating__choice_0();
 						transitioned_after = 0;
 					}
@@ -907,7 +907,6 @@ namespace mrw
 						if (rightResponse_raised)
 						{
 							exseq_main_region_Operating_operating_Turning();
-							ifaceOperationCallback->dec();
 							react_main_region_Operating_operating__choice_0();
 							transitioned_after = 0;
 						}

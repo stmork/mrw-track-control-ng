@@ -275,6 +275,18 @@ void WidgetRoute::reset()
 	ControllerRegistry::instance().reset();
 }
 
+void WidgetRoute::tryComplete()
+{
+	__METHOD__;
+
+	ControllerRegistry::instance().complete();
+}
+
+bool WidgetRoute::isCompleted()
+{
+	return ControllerRegistry::instance().isCompleted();
+}
+
 WidgetRoute::operator QListWidgetItem * ()
 {
 	return &list_item;

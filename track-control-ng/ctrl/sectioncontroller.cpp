@@ -47,7 +47,7 @@ SectionController::SectionController(
 	connect(
 		this, &SectionController::disable,
 		&statechart, &SectionStatechart::disable,
-		Qt::QueuedConnection);
+		Qt::DirectConnection);
 	connect(
 		this, &SectionController::failed,
 		&statechart, &SectionStatechart::failed,

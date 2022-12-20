@@ -66,6 +66,9 @@ private:
 	size_t countAllocatedSections();
 
 	virtual void reset() override;
+	virtual void tryComplete() override;
+	virtual bool isCompleted() override;
+
 	virtual void turnSwitches() override;
 	virtual void activateSections() override;
 	virtual void turnSignals() override;

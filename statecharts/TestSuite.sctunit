@@ -1,0 +1,14 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+//
+
+testsuite TestSuite
+{
+	OperatingMode,
+	Switch,
+	Signal,
+	SignalController,
+	Section,
+	Route
+}

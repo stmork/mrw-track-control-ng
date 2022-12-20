@@ -57,11 +57,12 @@ namespace mrw
 				main_region_Turning,
 				main_region_Turning_Turning_process_Switch_Turning,
 				main_region_Turning_Turning_process_Signal_Turning,
-				main_region_Turning_Turning_process_Section_Activation
+				main_region_Turning_Turning_process_Section_Activation,
+				main_region_Wait
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 8;
+			static const sc::integer numStates = 9;
 			static const sc::integer scvi_main_region_Active = 0;
 			static const sc::integer scvi_main_region_Disable = 0;
 			static const sc::integer scvi_main_region_Start = 0;
@@ -70,6 +71,7 @@ namespace mrw
 			static const sc::integer scvi_main_region_Turning_Turning_process_Switch_Turning = 0;
 			static const sc::integer scvi_main_region_Turning_Turning_process_Signal_Turning = 0;
 			static const sc::integer scvi_main_region_Turning_Turning_process_Section_Activation = 0;
+			static const sc::integer scvi_main_region_Wait = 0;
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -79,7 +81,9 @@ namespace mrw
 				failed,
 				disable,
 				extended,
-				_te0_main_region_Turning_
+				_te0_main_region_Disable_,
+				_te1_main_region_Turning_,
+				_te2_main_region_Wait_
 			};
 
 			class EventInstance
@@ -107,6 +111,8 @@ namespace mrw
 
 				virtual void reset() = 0;
 
+				virtual bool isCompleted() = 0;
+
 				virtual void turnSwitches() = 0;
 
 				virtual void activateSections() = 0;
@@ -118,6 +124,8 @@ namespace mrw
 				virtual void unlockSignals() = 0;
 
 				virtual void unlockSwitches() = 0;
+
+				virtual void tryComplete() = 0;
 
 
 			};
@@ -167,7 +175,7 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 1;
+			static const sc::integer timeEventsCount = 3;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
@@ -237,7 +245,10 @@ namespace mrw
 			void enact_main_region_Turning_Turning_process_Switch_Turning();
 			void enact_main_region_Turning_Turning_process_Signal_Turning();
 			void enact_main_region_Turning_Turning_process_Section_Activation();
+			void enact_main_region_Wait();
+			void exact_main_region_Disable();
 			void exact_main_region_Turning();
+			void exact_main_region_Wait();
 			void enseq_main_region_Active_default();
 			void enseq_main_region_Disable_default();
 			void enseq_main_region_Start_default();
@@ -245,6 +256,7 @@ namespace mrw
 			void enseq_main_region_Turning_Turning_process_Switch_Turning_default();
 			void enseq_main_region_Turning_Turning_process_Signal_Turning_default();
 			void enseq_main_region_Turning_Turning_process_Section_Activation_default();
+			void enseq_main_region_Wait_default();
 			void enseq_main_region_default();
 			void exseq_main_region_Active();
 			void exseq_main_region_Disable();
@@ -254,8 +266,10 @@ namespace mrw
 			void exseq_main_region_Turning_Turning_process_Switch_Turning();
 			void exseq_main_region_Turning_Turning_process_Signal_Turning();
 			void exseq_main_region_Turning_Turning_process_Section_Activation();
+			void exseq_main_region_Wait();
 			void exseq_main_region();
 			void exseq_main_region_Turning_Turning_process();
+			void react_main_region__choice_0();
 			void react_main_region__entry_Default();
 			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Active_react(const sc::integer transitioned_before);
@@ -266,6 +280,7 @@ namespace mrw
 			sc::integer main_region_Turning_Turning_process_Switch_Turning_react(const sc::integer transitioned_before);
 			sc::integer main_region_Turning_Turning_process_Signal_Turning_react(const sc::integer transitioned_before);
 			sc::integer main_region_Turning_Turning_process_Section_Activation_react(const sc::integer transitioned_before);
+			sc::integer main_region_Wait_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
 			void runCycle();

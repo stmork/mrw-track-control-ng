@@ -59,6 +59,7 @@ namespace mrw::ctrl
 		bool contains(ControllerRegistrand * ctrl);
 		void reset();
 		void complete();
+		bool isCompleted();
 		void dump();
 
 	signals:

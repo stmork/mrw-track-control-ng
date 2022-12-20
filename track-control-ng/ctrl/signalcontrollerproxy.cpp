@@ -97,7 +97,7 @@ SignalControllerProxy::SignalControllerProxy(
 	connect(
 		this, &SignalControllerProxy::disable,
 		&statechart, &SignalControllerStatechart::disable,
-		Qt::QueuedConnection);
+		Qt::DirectConnection);
 	connect(
 		this, &SignalControllerProxy::failed,
 		&statechart, &SignalControllerStatechart::failed,

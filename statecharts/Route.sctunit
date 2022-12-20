@@ -127,6 +127,20 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	}
 
 	@Test
+	operation timeout()
+	{
+		// Given
+		deactivate()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region._final_)
+		assert finished
+	}
+
+	@Test
 	operation failActive()
 	{
 		// Given
@@ -144,6 +158,7 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	{
 		// Given
 		switches()
+		mock isCompleted returns (true)
 
 		// When
 		raise failed
@@ -157,6 +172,7 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	{
 		// Given
 		signals()
+		mock isCompleted returns (true)
 
 		// When
 		raise failed
@@ -170,9 +186,130 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	{
 		// Given
 		sections()
+		mock isCompleted returns (true)
 
 		// When
 		raise failed
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation failTurningSwitchesIncomplete()
+	{
+		// Given
+		switches()
+		mock isCompleted returns (false)
+
+		// When
+		raise failed
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Wait)
+	}
+
+	@Test
+	operation failTurningSignalsIncomplete()
+	{
+		// Given
+		signals()
+		mock isCompleted returns (false)
+
+		// When
+		raise failed
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Wait)
+	}
+
+	@Test
+	operation failTurningSectionsIncomplete()
+	{
+		// Given
+		sections()
+		mock isCompleted returns (false)
+
+		// When
+		raise failed
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Wait)
+	}
+
+	@Test
+	operation failWaitSwitches()
+	{
+		// Given
+		failTurningSwitchesIncomplete()
+
+		// When
+		raise completed
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation failWaitSignals()
+	{
+		// Given
+		failTurningSignalsIncomplete()
+
+		// When
+		raise completed
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation failWaitSections()
+	{
+		// Given
+		failTurningSectionsIncomplete()
+
+		// When
+		raise completed
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation timeoutWaitSwitches()
+	{
+		// Given
+		failTurningSwitchesIncomplete()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation timeoutWaitSignals()
+	{
+		// Given
+		failTurningSignalsIncomplete()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation timeoutWaitSections()
+	{
+		// Given
+		failTurningSectionsIncomplete()
+
+		// When
+		proceed timeout ms
 
 		// Then
 		disabled()
