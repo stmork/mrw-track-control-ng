@@ -130,6 +130,21 @@ bool mrw::ctrl::SignalControllerProxy::isUnlocked() const
 	return lock() == LockState::UNLOCKED;
 }
 
+Signal * SignalControllerProxy::mainSignal() const
+{
+	return main_signal;
+}
+
+void SignalControllerProxy::setCurved(const size_t curved_count)
+{
+	statechart_main.setCurved(curved_count);
+}
+
+void SignalControllerProxy::setDistantSignal(Signal * signal)
+{
+	statechart_distant.setMainSignal(signal);
+}
+
 void SignalControllerProxy::connectMain()
 {
 	connect(
@@ -332,7 +347,7 @@ void SignalControllerProxy::dec()
 	ControllerRegistry::instance().decrease(this);
 }
 
-bool SignalControllerProxy::hasMain()
+bool SignalControllerProxy::hasMainSignal()
 {
 	return main_signal != nullptr;
 }

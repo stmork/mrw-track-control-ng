@@ -37,21 +37,28 @@ namespace mrw::statechart
 	{
 		Q_OBJECT
 
+		size_t curved_count = 0;
+
 	public:
 		void send(sc::integer symbol) override;
+
+		void setCurved(const size_t count);
 	};
 
 	class DistantProxy: public SignalProxy
 	{
 		Q_OBJECT
 
-		mrw::model::Signal * main_signal = nullptr;
+		mrw::model::Signal * combined_signal = nullptr;
+		mrw::model::Signal * main_signal     = nullptr;
 
 	public:
 		void start(
 			mrw::model::Signal * input,
 			mrw::model::Signal * combined);
 		void send(sc::integer symbol) override;
+
+		void setMainSignal(model::Signal * signal);
 	};
 
 	class ShuntProxy: public SignalProxy

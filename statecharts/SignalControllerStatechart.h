@@ -143,7 +143,7 @@ namespace mrw
 
 				virtual void dec() = 0;
 
-				virtual bool hasMain() = 0;
+				virtual bool hasMainSignal() = 0;
 
 				virtual bool isMain() = 0;
 

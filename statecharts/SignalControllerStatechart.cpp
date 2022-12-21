@@ -408,12 +408,12 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Init_Init_process_Turning_distant_Turn()
 		{
 			/* Entry action for state 'Turn'. */
-			if (!ifaceOperationCallback->hasMain())
+			if (!ifaceOperationCallback->hasMainSignal())
 			{
 				turnDistant_value = SignalControllerStatechart::STOP;
 				emit turnDistant(turnDistant_value);
 			}
-			if (ifaceOperationCallback->hasMain())
+			if (ifaceOperationCallback->hasMainSignal())
 			{
 				turnDistant_value = SignalControllerStatechart::OFF;
 				emit turnDistant(turnDistant_value);

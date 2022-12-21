@@ -43,6 +43,8 @@ public:
 
 	operator QListWidgetItem * ();
 
+	// Implementation of mrw::model::Route
+	virtual void dump() const override;
 	virtual void prepare(
 		mrw::model::Section  * last_section,
 		mrw::model::RailPart * last_part) override;
@@ -58,17 +60,25 @@ public slots:
 	void unregister();
 
 private:
-	void collectSignals(std::vector<mrw::ctrl::SignalControllerProxy *> & controllers);
-	mrw::ctrl::SignalControllerProxy * getSignalController(mrw::model::Section * section);
+	void collectSignalController(std::vector<mrw::ctrl::SignalControllerProxy *> & controllers) const;
+	mrw::ctrl::SignalControllerProxy * getSignalController(mrw::model::Section * section) const;
 	void collectMainSignals();
 	void collectMainSignals(mrw::model::Section * section);
-	void collectSectionControllers(std::vector<mrw::ctrl::SectionController *> & controllers);
+	void collectSectionControllers(std::vector<mrw::ctrl::SectionController *> & controllers) const;
 
 	void unregister(mrw::model::Section * section);
 	void unregister(mrw::ctrl::SectionController * controller);
 	void finalize();
 	size_t countAllocatedSections();
 
+	void prepareTrack(
+		mrw::model::Section  * last_section,
+		mrw::model::RailPart * last_part);
+	void prepareSignals(
+		mrw::model::Section  * last_section,
+		mrw::model::RailPart * last_part);
+
+	// Implementation of RouteStatemachine::OperationCallback
 	virtual void reset() override;
 	virtual void tryComplete() override;
 	virtual bool isCompleted() override;

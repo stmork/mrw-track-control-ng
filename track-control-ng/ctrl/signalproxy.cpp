@@ -8,7 +8,8 @@
 #include <statecharts/timerservice.h>
 #include <ctrl/controllerregistry.h>
 
-#include "signalproxy.h"
+#include "ctrl/signalproxy.h"
+#include "ctrl/signalcontrollerproxy.h"
 
 using namespace mrw::statechart;
 using namespace mrw::can;
@@ -122,16 +123,17 @@ void MainProxy::send(sc::integer symbol)
 		break;
 
 	case Signal::Symbol::GO:
-		state = SIGNAL_HP1;
-		break;
-
-	case Signal::Symbol::SLOW:
-		state = SIGNAL_HP2;
+		state = curved_count < 2 ? SIGNAL_HP1 : SIGNAL_HP2;
 		break;
 	}
 
 	message.append(state);
 	ControllerRegistry::can()->write(message);
+}
+
+void MainProxy::setCurved(const size_t count)
+{
+	curved_count = count;
 }
 
 /*************************************************************************
@@ -142,12 +144,13 @@ void MainProxy::send(sc::integer symbol)
 
 void DistantProxy::start(Signal * input, Signal * combined)
 {
-	main_signal = combined;
+	combined_signal = combined;
 	SignalProxy::start(input);
 }
 
 void DistantProxy::send(sc::integer symbol)
 {
+	Q_UNUSED(symbol)
 	__METHOD__;
 
 	Q_ASSERT(signal != nullptr);
@@ -155,27 +158,42 @@ void DistantProxy::send(sc::integer symbol)
 	SignalState state = SIGNAL_OFF;
 	MrwMessage  message(signal->device()->command(SETSGN));
 
-	switch (symbol)
+	if (main_signal != nullptr)
 	{
-	default:
+		Device * device = dynamic_cast<Device *>(main_signal);
+		SignalControllerProxy * proxy = ControllerRegistry::instance().find<SignalControllerProxy>(device);
+
+		switch (proxy->main())
+		{
+		default:
+			state = SIGNAL_OFF;
+			break;
+
+		case Signal::Symbol::STOP:
+			state = SIGNAL_VR0;
+			break;
+
+		case Signal::Symbol::GO:
+			state = SIGNAL_VR1;
+			break;
+
+		case Signal::Symbol::SLOW:
+			state = SIGNAL_VR2;
+			break;
+		}
+	}
+	else
+	{
 		state = SIGNAL_OFF;
-		break;
-
-	case Signal::Symbol::STOP:
-		state = SIGNAL_VR0;
-		break;
-
-	case Signal::Symbol::GO:
-		state = SIGNAL_VR1;
-		break;
-
-	case Signal::Symbol::SLOW:
-		state = SIGNAL_VR2;
-		break;
 	}
 
 	message.append(state);
 	ControllerRegistry::can()->write(message);
+}
+
+void DistantProxy::setMainSignal(Signal * master_signal)
+{
+	main_signal = master_signal;
 }
 
 /*************************************************************************

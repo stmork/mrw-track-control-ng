@@ -66,6 +66,12 @@ WidgetRoute::~WidgetRoute()
 	statechart.exit();
 }
 
+/*************************************************************************
+**                                                                      **
+**       Preparing extension of route                                   **
+**                                                                      **
+*************************************************************************/
+
 void WidgetRoute::prepare(
 	Section  * last_section,
 	RailPart * last_part)
@@ -99,6 +105,16 @@ void WidgetRoute::prepare(
 		}
 	}
 
+	prepareTrack(last_section, last_part);
+	prepareSignals(last_section, last_part);
+}
+
+void WidgetRoute::prepareTrack(
+	Section  * last_section,
+	RailPart * last_part)
+{
+	Q_UNUSED(last_section);
+
 	for (auto it = track.rbegin(); *it != last_part; ++it)
 	{
 		RailPart    *    part      = *it;
@@ -127,9 +143,49 @@ void WidgetRoute::prepare(
 				Qt::DirectConnection);
 		}
 	}
-
-	// TODO: Connect signal controller proxy!
 }
+
+void WidgetRoute::prepareSignals(Section * last_section, RailPart * last_part)
+{
+	Q_UNUSED(last_section);
+	Q_UNUSED(last_part);
+
+	Signal * main_signal = nullptr;
+	size_t   curved      = 0;
+
+	for (auto it = sections.rbegin(); it != sections.rend(); ++it)
+	{
+		Section        *        section    = *it;
+		SignalControllerProxy * controller = getSignalController(section);
+		std::vector<RailPart *> rails;
+
+		section->parts<RailPart>(rails, [](const RailPart * part)
+		{
+			return part->reserved();
+		});
+		curved += rails.size();
+
+		if (controller != nullptr)
+		{
+			if (controller->hasMain())
+			{
+				main_signal = controller->mainSignal();
+				controller->setCurved(curved);
+				curved = 0;
+			}
+			if (controller->hasDistant())
+			{
+				controller->setDistantSignal(main_signal);
+			}
+		}
+	}
+}
+
+/*************************************************************************
+**                                                                      **
+**       Releasing parts of route                                       **
+**                                                                      **
+*************************************************************************/
 
 void WidgetRoute::left()
 {
@@ -184,34 +240,6 @@ void WidgetRoute::unregister()
 {
 	unregister(dynamic_cast<SectionController *>(QObject::sender()));
 	finalize();
-}
-
-void WidgetRoute::collectSignals(std::vector<SignalControllerProxy *> & controllers)
-{
-	controllers.clear();
-	for (Section * section : sections)
-	{
-		SignalControllerProxy * controller = getSignalController(section);
-
-		if (controller != nullptr)
-		{
-			controllers.push_back(controller);
-		}
-	}
-}
-
-SignalControllerProxy * WidgetRoute::getSignalController(Section * section)
-{
-	const std::vector<Signal *> & section_signals = section->getSignals(direction);
-	SignalControllerProxy    *    controller      = nullptr;
-
-	if (section_signals.size() > 0)
-	{
-		Device * device = dynamic_cast<Device *>(section_signals.front());
-
-		controller = ControllerRegistry::instance().find<SignalControllerProxy>(device);
-	}
-	return controller;
 }
 
 void WidgetRoute::unregister(Section * section)
@@ -304,6 +332,21 @@ size_t WidgetRoute::countAllocatedSections()
 	});
 }
 
+void WidgetRoute::dump() const
+{
+	__METHOD__;
+
+	std::vector<SignalControllerProxy *> controllers;
+
+	Route::dump();
+	qDebug() << "---";
+	collectSignalController(controllers);
+	for (SignalControllerProxy * proxy : controllers)
+	{
+		qDebug().noquote() << "     " << *proxy;
+	}
+}
+
 void WidgetRoute::reset()
 {
 	ControllerRegistry::instance().reset();
@@ -326,6 +369,40 @@ WidgetRoute::operator QListWidgetItem * ()
 	return &list_item;
 }
 
+/*************************************************************************
+**                                                                      **
+**       Convenience methods                                            **
+**                                                                      **
+*************************************************************************/
+
+SignalControllerProxy * WidgetRoute::getSignalController(Section * section) const
+{
+	const std::vector<Signal *> & section_signals = section->getSignals(direction);
+	SignalControllerProxy    *    controller      = nullptr;
+
+	if (section_signals.size() > 0)
+	{
+		Device * device = dynamic_cast<Device *>(section_signals.front());
+
+		controller = ControllerRegistry::instance().find<SignalControllerProxy>(device);
+	}
+	return controller;
+}
+
+void WidgetRoute::collectSignalController(std::vector<SignalControllerProxy *> & controllers) const
+{
+	controllers.clear();
+	for (Section * section : sections)
+	{
+		SignalControllerProxy * controller = getSignalController(section);
+
+		if (controller != nullptr)
+		{
+			controllers.push_back(controller);
+		}
+	}
+}
+
 void WidgetRoute::collectMainSignals()
 {
 	main_signals.clear();
@@ -345,7 +422,7 @@ void WidgetRoute::collectMainSignals(Section * section)
 	});
 }
 
-void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & controllers)
+void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & controllers) const
 {
 	controllers.clear();
 	for (Section * section : sections)
@@ -356,6 +433,12 @@ void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & c
 		controllers.push_back(controller);
 	}
 }
+
+/*************************************************************************
+**                                                                      **
+**       Propose actions to controller proxy instances                  **
+**                                                                      **
+*************************************************************************/
 
 void WidgetRoute::turnSwitches()
 {
@@ -481,7 +564,7 @@ void WidgetRoute::unlockSignals()
 
 	std::vector<SignalControllerProxy *> controllers;
 
-	collectSignals(controllers);
+	collectSignalController(controllers);
 	for (SignalControllerProxy * controller : controllers)
 	{
 		controller->disable();

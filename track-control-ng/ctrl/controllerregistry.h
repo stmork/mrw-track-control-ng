@@ -44,7 +44,7 @@ namespace mrw::ctrl
 			ControllerRegistrand  *  ctrl);
 		void unregisterController(mrw::model::Device * device);
 
-		ControllerRegistrand * find(mrw::model::Device * device) const;
+		ControllerRegistrand * find(model::Device * device) const;
 
 		template <class R> R * find(mrw::model::Device * device) const
 		{

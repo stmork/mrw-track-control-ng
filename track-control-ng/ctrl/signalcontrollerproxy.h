@@ -54,7 +54,19 @@ namespace mrw::ctrl
 			QObject       *       parent);
 		virtual ~SignalControllerProxy();
 
-		bool isUnlocked() const;
+		bool                 isUnlocked() const;
+		mrw::model::Signal * mainSignal() const;
+		void                 setCurved(const size_t curved_count);
+		void                 setDistantSignal(mrw::model::Signal * signal);
+
+		// Implementations from SignalController
+		virtual bool               hasShunting() const override;
+		virtual bool               hasDistant() const override;
+		virtual bool               hasMain() const override;
+
+		mrw::model::Signal::Symbol distant() const override;
+		mrw::model::Signal::Symbol shunt() const override;
+		mrw::model::Signal::Symbol main() const override;
 
 	signals:
 		void enable();
@@ -80,15 +92,6 @@ namespace mrw::ctrl
 		virtual mrw::model::Device::LockState lock() const override;
 		virtual mrw::model::Position::Bending bending() const override;
 
-		// Implementations from SignalController
-		virtual bool    hasShunting() const override;
-		virtual bool    hasDistant() const override;
-		virtual bool    hasMain() const override;
-
-		mrw::model::Signal::Symbol       distant() const override;
-		mrw::model::Signal::Symbol       shunt() const override;
-		mrw::model::Signal::Symbol       main() const override;
-
 		// Implementation from RailPartInfo
 		virtual mrw::model::RailPart * railPart() const override;
 		virtual mrw::model::Section  * section() const override;
@@ -102,7 +105,7 @@ namespace mrw::ctrl
 		virtual void inc() override;
 		virtual void dec() override;
 
-		virtual bool hasMain() override;
+		virtual bool hasMainSignal() override;
 		virtual bool isMain() override;
 		virtual void prepare() override;
 

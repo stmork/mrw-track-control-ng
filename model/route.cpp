@@ -58,7 +58,7 @@ Route::~Route()
 	__METHOD__;
 
 	clear();
-	dump();
+	Route::dump();
 }
 
 bool Route::append(RailPart * target)
@@ -163,8 +163,6 @@ void Route::clear()
 
 void Route::dump() const
 {
-	__METHOD__;
-
 	for (RailPart * part : track)
 	{
 		qDebug().noquote() << "     " << part->toString();

@@ -49,7 +49,7 @@ namespace mrw::model
 			const bool                      direction);
 
 	public slots:
-		void dump() const;
+		virtual void dump() const;
 
 	protected:
 		RailTrack               track;
