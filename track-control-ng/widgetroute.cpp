@@ -39,6 +39,10 @@ WidgetRoute::WidgetRoute(
 		&statechart, &RouteStatechart::completed,
 		Qt::QueuedConnection);
 	connect(
+		this, &WidgetRoute::disable,
+		&statechart, &RouteStatechart::disable,
+		Qt::QueuedConnection);
+	connect(
 		this, &WidgetRoute::turn,
 		&statechart, &RouteStatechart::extended,
 		Qt::QueuedConnection);
@@ -50,6 +54,7 @@ WidgetRoute::WidgetRoute(
 		&statechart, &RouteStatechart::activated,
 		this, &WidgetRoute::dump,
 		Qt::QueuedConnection);
+
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
 	statechart.enter();
@@ -181,6 +186,34 @@ void WidgetRoute::unregister()
 	finalize();
 }
 
+void WidgetRoute::collectSignals(std::vector<SignalControllerProxy *> & controllers)
+{
+	controllers.clear();
+	for (Section * section : sections)
+	{
+		SignalControllerProxy * controller = getSignalController(section);
+
+		if (controller != nullptr)
+		{
+			controllers.push_back(controller);
+		}
+	}
+}
+
+SignalControllerProxy * WidgetRoute::getSignalController(Section * section)
+{
+	const std::vector<Signal *> & section_signals = section->getSignals(direction);
+	SignalControllerProxy    *    controller      = nullptr;
+
+	if (section_signals.size() > 0)
+	{
+		Device * device = dynamic_cast<Device *>(section_signals.front());
+
+		controller = ControllerRegistry::instance().find<SignalControllerProxy>(device);
+	}
+	return controller;
+}
+
 void WidgetRoute::unregister(Section * section)
 {
 	SectionController * controller =
@@ -209,7 +242,7 @@ void WidgetRoute::unregister(SectionController * controller)
 	qDebug().noquote() << "Unregister: " << *controller;
 
 	sections.remove(controller->section());
-	while (track.front()->section() == controller->section())
+	while ((track.size() > 0) && (track.front()->section() == controller->section()))
 	{
 		RailPart    *    part      = track.front();
 		Device     *     device    = dynamic_cast<Device *>(part);
@@ -251,7 +284,8 @@ void WidgetRoute::finalize()
 		if (sections.back() == last)
 		{
 			qDebug().noquote() << "Finalize:   " << String::bold("Finished!");
-			emit finished();
+
+			emit disable();
 		}
 		else
 		{
@@ -407,11 +441,11 @@ void WidgetRoute::deactivateSections()
 {
 	__METHOD__;
 
-	for (Section * section : sections)
-	{
-		SectionController * controller =
-			ControllerRegistry::instance().find<SectionController>(section);
+	std::vector<SectionController *> controllers;
 
+	collectSectionControllers(controllers);
+	for (SectionController * controller : controllers)
+	{
 		controller->disable();
 	}
 }
@@ -445,12 +479,11 @@ void WidgetRoute::unlockSignals()
 {
 	__METHOD__;
 
-	collectMainSignals();
-	for (Signal * signal : main_signals)
-	{
-		SignalControllerProxy * controller =
-			ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
+	std::vector<SignalControllerProxy *> controllers;
 
+	collectSignals(controllers);
+	for (SignalControllerProxy * controller : controllers)
+	{
 		controller->disable();
 	}
 }

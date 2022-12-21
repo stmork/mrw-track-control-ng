@@ -111,6 +111,8 @@ namespace mrw
 
 				virtual void reset() = 0;
 
+				virtual void tryComplete() = 0;
+
 				virtual bool isCompleted() = 0;
 
 				virtual void turnSwitches() = 0;
@@ -124,8 +126,6 @@ namespace mrw
 				virtual void unlockSignals() = 0;
 
 				virtual void unlockSwitches() = 0;
-
-				virtual void tryComplete() = 0;
 
 
 			};

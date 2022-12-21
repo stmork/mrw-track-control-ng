@@ -26,15 +26,9 @@ SignalControllerProxy::SignalControllerProxy(
 	direction(dir),
 	signal_section(parent_section)
 {
-	std::vector<Signal *>   section_signals;
-	std::vector<RailPart *> section_rails;
-	QStringList             list;
-
-	// Find signal in specific direction.
-	signal_section->parts<Signal>(section_signals, [dir] (const Signal * input)
-	{
-		return dir == input->direction();
-	});
+	const std::vector<Signal *> & section_signals = signal_section->getSignals(dir);
+	std::vector<RailPart *>       section_rails;
+	QStringList                   list;
 
 	// Find unfunctional rails.
 	signal_section->parts<RailPart>(section_rails);
@@ -43,7 +37,6 @@ SignalControllerProxy::SignalControllerProxy(
 	Q_ASSERT(section_signals.size() > 0);
 
 	// Sort by most significant signal first.
-	std::sort(section_signals.begin(), section_signals.end(), Signal::less);
 	base_signal = section_signals[0];
 
 	for (Signal * signal : section_signals)

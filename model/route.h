@@ -62,7 +62,7 @@ namespace mrw::model
 			RailPart * last_part);
 
 	private:
-		bool        qualified(RailPart * rail) const;
+		bool         qualified(RailPart * rail) const;
 
 		Section        *        first_section = nullptr;
 		const SectionState      state = FREE;

@@ -16,6 +16,7 @@
 #include <model/signal.h>
 #include <model/route.h>
 #include <ctrl/sectioncontroller.h>
+#include <ctrl/signalcontrollerproxy.h>
 
 class WidgetRoute :
 	public mrw::model::Route,
@@ -48,6 +49,7 @@ public:
 
 signals:
 	void turn();
+	void disable();
 	void finished();
 
 public slots:
@@ -56,6 +58,8 @@ public slots:
 	void unregister();
 
 private:
+	void collectSignals(std::vector<mrw::ctrl::SignalControllerProxy *> & controllers);
+	mrw::ctrl::SignalControllerProxy * getSignalController(mrw::model::Section * section);
 	void collectMainSignals();
 	void collectMainSignals(mrw::model::Section * section);
 	void collectSectionControllers(std::vector<mrw::ctrl::SectionController *> & controllers);
