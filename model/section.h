@@ -27,6 +27,7 @@ namespace mrw::model
 	class Region;
 	class SectionModule;
 	class AssemblyPart;
+	class Signal;
 
 	enum SectionState
 	{
@@ -86,6 +87,8 @@ namespace mrw::model
 		SectionState                 section_state      = FREE;
 		bool                         occupied           = false;
 		std::vector<AssemblyPart *>  assembly_parts;
+		std::vector<Signal *>        forward_signals;
+		std::vector<Signal *>        backward_signals;
 
 	public:
 		explicit Section(
@@ -250,6 +253,8 @@ namespace mrw::model
 		 * @return The QString clear text of the given SectionState enumeration.
 		 */
 		static QString get(const SectionState & state);
+
+		const std::vector<Signal *> & getSignals(const bool view);
 
 	private:
 		void            add(AssemblyPart * rail_part);

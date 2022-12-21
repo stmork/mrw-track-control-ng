@@ -127,6 +127,18 @@ Section::Section(
 
 	section_module = resolve(ModelRailway::string(element, "modul").toStdString());
 	model->add(this);
+
+	parts<Signal>(forward_signals, [&](const Signal * signal)
+	{
+		return signal->direction();
+	});
+	parts<Signal>(backward_signals, [&](const Signal * signal)
+	{
+		return !signal->direction();
+	});
+
+	std::sort(forward_signals.begin(),  forward_signals.end(),  Signal::less);
+	std::sort(backward_signals.begin(), backward_signals.end(), Signal::less);
 }
 
 Section::~Section()
@@ -294,6 +306,11 @@ bool Section::anyReserved() const
 QString Section::get(const SectionState & state)
 {
 	return state_map.get(state);
+}
+
+const std::vector<Signal *> & Section::getSignals(const bool view)
+{
+	return view ? forward_signals : backward_signals;
 }
 
 SectionModule * Section::resolve(const std::string & path)
