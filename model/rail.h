@@ -32,6 +32,7 @@ namespace mrw::model
 			const QDomElement  &  element);
 
 		bool valid() const override;
+		bool isBranch() const override;
 
 		/**
 		 * This method returns the rail name.

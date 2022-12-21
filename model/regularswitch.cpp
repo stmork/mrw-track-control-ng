@@ -52,6 +52,11 @@ bool RegularSwitch::isRightHanded() const
 	return right_branch;
 }
 
+bool RegularSwitch::isBranch() const
+{
+	return isRightHanded() == (switch_state == State::AC);
+}
+
 RegularSwitch::State RegularSwitch::state() const
 {
 	return switch_state;

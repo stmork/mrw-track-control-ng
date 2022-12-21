@@ -75,6 +75,8 @@ namespace mrw::model
 
 		bool isRightHanded() const;
 
+		bool isBranch() const override;
+
 		/**
 		 * This method returns the internal state of this RegularSwitch. As
 		 * of the RegularSwitch::State enumeration it can have two states. So

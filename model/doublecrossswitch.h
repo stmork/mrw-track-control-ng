@@ -110,6 +110,7 @@ namespace mrw::model
 		QString               toString() const override;
 		QString               key() const override;
 		mrw::can::SwitchState switchState() const override;
+		bool                  isBranch() const override;
 
 	private:
 		void link() override;

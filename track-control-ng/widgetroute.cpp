@@ -161,20 +161,24 @@ void WidgetRoute::prepareSignals(Section * last_section, RailPart * last_part)
 
 		section->parts<RailPart>(rails, [](const RailPart * part)
 		{
-			return part->reserved();
+			return part->reserved() && part->isBranch();
 		});
 		curved += rails.size();
 
 		if (controller != nullptr)
 		{
+			// OK, there is a signal...
 			if (controller->hasMain())
 			{
+				//  OK, a main signal starts a new block.
 				main_signal = controller->mainSignal();
 				controller->setCurved(curved);
 				curved = 0;
 			}
+
 			if (controller->hasDistant())
 			{
+				// OK, a distant signal has to reflect the main signals state.
 				controller->setDistantSignal(main_signal);
 			}
 		}

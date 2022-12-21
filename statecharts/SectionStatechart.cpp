@@ -20,7 +20,7 @@ namespace mrw
 
 		SectionStatechart::SectionStatechart(QObject * parent) :
 			QObject(parent),
-			timeout(2000),
+			timeout(500),
 			auto_off(true),
 			auto_unlock(true),
 			timerService(nullptr),

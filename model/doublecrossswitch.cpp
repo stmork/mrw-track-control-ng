@@ -145,12 +145,17 @@ QString DoubleCrossSwitch::key() const
 
 SwitchState DoubleCrossSwitch::switchState() const
 {
+	return isBranch() ?
+		SwitchState::SWITCH_STATE_LEFT :
+		SwitchState::SWITCH_STATE_RIGHT;
+}
+
+bool DoubleCrossSwitch::isBranch() const
+{
 	const bool b_active = unsigned(switch_state) & B_MASK;
 	const bool d_active = unsigned(switch_state) & D_MASK;
 
-	return b_active == d_active ?
-		SwitchState::SWITCH_STATE_LEFT :
-		SwitchState::SWITCH_STATE_RIGHT;
+	return b_active == d_active;
 }
 
 void DoubleCrossSwitch::setState(const State state, const bool force)

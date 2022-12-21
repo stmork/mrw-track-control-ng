@@ -189,6 +189,16 @@ namespace mrw::model
 		 */
 		bool reserved() const;
 
+		/**
+		 * This method returns true if the represented RailPart is curved or
+		 * a turn out branch of a switch. In case of a Rail the result is
+		 * static whereas the result of switches depends on its switching
+		 * state.
+		 *
+		 * @return True if the RailPart is a curved or branched.
+		 */
+		virtual bool isBranch() const = 0;
+
 	protected:
 		/**
 		 * This method resolves a connected RailPart from the EMF model.
