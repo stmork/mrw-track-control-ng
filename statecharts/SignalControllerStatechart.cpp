@@ -130,7 +130,7 @@ namespace mrw
 
 
 			case mrw::statechart::SignalControllerStatechart::Event::_te0_main_region_Init_:
-			case mrw::statechart::SignalControllerStatechart::Event::_te1_main_region_Operating_Processing_Locked_Processing_Go_:
+			case mrw::statechart::SignalControllerStatechart::Event::_te1_main_region_Operating_Processing_Locked_Processing_Waiting_:
 				{
 					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::SignalControllerStatechart::Event::_te0_main_region_Init_)] = true;
 					break;
@@ -310,7 +310,7 @@ namespace mrw
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating :
 				{
-					return  (stateConfVector[scvi_main_region_Operating] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating && stateConfVector[scvi_main_region_Operating] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Stop);
+					return  (stateConfVector[scvi_main_region_Operating] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating && stateConfVector[scvi_main_region_Operating] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop);
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Unlocked :
@@ -320,12 +320,7 @@ namespace mrw
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked :
 				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked && stateConfVector[scvi_main_region_Operating_Processing_Locked] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Stop);
-					break;
-				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Go :
-				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Processing_Go] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Go);
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked && stateConfVector[scvi_main_region_Operating_Processing_Locked] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop);
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Idle :
@@ -333,9 +328,19 @@ namespace mrw
 					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Processing_Idle] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Idle);
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Stop :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting :
 				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Processing_Stop] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Stop);
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Processing_Waiting] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting && stateConfVector[scvi_main_region_Operating_Processing_Locked_Processing_Waiting] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop);
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Failed :
@@ -456,23 +461,12 @@ namespace mrw
 			ifaceOperationCallback->lock(true);
 		}
 
-		/* Entry action for state 'Go'. */
-		void SignalControllerStatechart::enact_main_region_Operating_Processing_Locked_Processing_Go()
+		/* Entry action for state 'Waiting'. */
+		void SignalControllerStatechart::enact_main_region_Operating_Processing_Locked_Processing_Waiting()
 		{
-			/* Entry action for state 'Go'. */
+			/* Entry action for state 'Waiting'. */
 			timerService->setTimer(this, 1, timeout, false);
 			ifaceOperationCallback->inc();
-			turnMain_value = SignalControllerStatechart::GO;
-			emit turnMain(turnMain_value);
-		}
-
-		/* Entry action for state 'Stop'. */
-		void SignalControllerStatechart::enact_main_region_Operating_Processing_Locked_Processing_Stop()
-		{
-			/* Entry action for state 'Stop'. */
-			ifaceOperationCallback->inc();
-			turnMain_value = SignalControllerStatechart::STOP;
-			emit turnMain(turnMain_value);
 		}
 
 		/* Entry action for state 'Failed'. */
@@ -491,18 +485,11 @@ namespace mrw
 			ifaceOperationCallback->dec();
 		}
 
-		/* Exit action for state 'Go'. */
-		void SignalControllerStatechart::exact_main_region_Operating_Processing_Locked_Processing_Go()
+		/* Exit action for state 'Waiting'. */
+		void SignalControllerStatechart::exact_main_region_Operating_Processing_Locked_Processing_Waiting()
 		{
-			/* Exit action for state 'Go'. */
+			/* Exit action for state 'Waiting'. */
 			timerService->unsetTimer(this, 1);
-			ifaceOperationCallback->dec();
-		}
-
-		/* Exit action for state 'Stop'. */
-		void SignalControllerStatechart::exact_main_region_Operating_Processing_Locked_Processing_Stop()
-		{
-			/* Exit action for state 'Stop'. */
 			ifaceOperationCallback->dec();
 		}
 
@@ -613,16 +600,6 @@ namespace mrw
 			enseq_main_region_Operating_Processing_Locked_Processing_default();
 		}
 
-		/* 'default' enter sequence for state Go */
-		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Locked_Processing_Go_default()
-		{
-			/* 'default' enter sequence for state Go */
-			enact_main_region_Operating_Processing_Locked_Processing_Go();
-			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Go;
-			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
-		}
-
 		/* 'default' enter sequence for state Idle */
 		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Locked_Processing_Idle_default()
 		{
@@ -632,12 +609,20 @@ namespace mrw
 			stateConfVectorChanged = true;
 		}
 
+		/* 'default' enter sequence for state Go */
+		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go_default()
+		{
+			/* 'default' enter sequence for state Go */
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
 		/* 'default' enter sequence for state Stop */
-		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Locked_Processing_Stop_default()
+		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop_default()
 		{
 			/* 'default' enter sequence for state Stop */
-			enact_main_region_Operating_Processing_Locked_Processing_Stop();
-			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Stop;
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop;
 			stateConfVectorPosition = 0;
 			stateConfVectorChanged = true;
 		}
@@ -775,15 +760,6 @@ namespace mrw
 			exseq_main_region_Operating_Processing_Locked_Processing();
 		}
 
-		/* Default exit sequence for state Go */
-		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked_Processing_Go()
-		{
-			/* Default exit sequence for state Go */
-			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
-			stateConfVectorPosition = 0;
-			exact_main_region_Operating_Processing_Locked_Processing_Go();
-		}
-
 		/* Default exit sequence for state Idle */
 		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked_Processing_Idle()
 		{
@@ -792,13 +768,28 @@ namespace mrw
 			stateConfVectorPosition = 0;
 		}
 
+		/* Default exit sequence for state Waiting */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked_Processing_Waiting()
+		{
+			/* Default exit sequence for state Waiting */
+			exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing();
+			exact_main_region_Operating_Processing_Locked_Processing_Waiting();
+		}
+
+		/* Default exit sequence for state Go */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go()
+		{
+			/* Default exit sequence for state Go */
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
+		}
+
 		/* Default exit sequence for state Stop */
-		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked_Processing_Stop()
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop()
 		{
 			/* Default exit sequence for state Stop */
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
 			stateConfVectorPosition = 0;
-			exact_main_region_Operating_Processing_Locked_Processing_Stop();
 		}
 
 		/* Default exit sequence for state Failed */
@@ -837,19 +828,21 @@ namespace mrw
 					exseq_main_region_Operating_Processing_Unlocked();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Go :
-				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Go();
-					break;
-				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Idle :
 				{
 					exseq_main_region_Operating_Processing_Locked_Processing_Idle();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Stop :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Stop();
+					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go();
+					exact_main_region_Operating_Processing_Locked_Processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop :
+				{
+					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop();
+					exact_main_region_Operating_Processing_Locked_Processing_Waiting();
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Failed :
@@ -1037,19 +1030,21 @@ namespace mrw
 					exseq_main_region_Operating_Processing_Unlocked();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Go :
-				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Go();
-					break;
-				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Idle :
 				{
 					exseq_main_region_Operating_Processing_Locked_Processing_Idle();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Stop :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Stop();
+					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go();
+					exact_main_region_Operating_Processing_Locked_Processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop :
+				{
+					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop();
+					exact_main_region_Operating_Processing_Locked_Processing_Waiting();
 					break;
 				}
 			default:
@@ -1065,19 +1060,44 @@ namespace mrw
 			/* Handle exit of all possible states (of mrw.statechart.SignalControllerStatechart.main_region.Operating.Processing.Locked.Processing) at position 0... */
 			switch (stateConfVector[ 0 ])
 			{
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Go :
-				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Go();
-					break;
-				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Idle :
 				{
 					exseq_main_region_Operating_Processing_Locked_Processing_Idle();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Stop :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Stop();
+					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go();
+					exact_main_region_Operating_Processing_Locked_Processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop :
+				{
+					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop();
+					exact_main_region_Operating_Processing_Locked_Processing_Waiting();
+					break;
+				}
+			default:
+				/* do nothing */
+				break;
+			}
+		}
+
+		/* Default exit sequence for region Turn processing */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing()
+		{
+			/* Default exit sequence for region Turn processing */
+			/* Handle exit of all possible states (of mrw.statechart.SignalControllerStatechart.main_region.Operating.Processing.Locked.Processing.Waiting.Turn_processing) at position 0... */
+			switch (stateConfVector[ 0 ])
+			{
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go :
+				{
+					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop :
+				{
+					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop();
 					break;
 				}
 			default:
@@ -1111,7 +1131,10 @@ namespace mrw
 		void SignalControllerStatechart::react_main_region_Operating_Processing_Locked_Processing__entry_Default()
 		{
 			/* Default react sequence for initial entry  */
-			enseq_main_region_Operating_Processing_Locked_Processing_Go_default();
+			turnMain_value = SignalControllerStatechart::GO;
+			emit turnMain(turnMain_value);
+			enact_main_region_Operating_Processing_Locked_Processing_Waiting();
+			enseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go_default();
 		}
 
 		/* The reactions of state null. */
@@ -1385,39 +1408,6 @@ namespace mrw
 			return transitioned_after;
 		}
 
-		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Locked_Processing_Go_react(const sc::integer transitioned_before)
-		{
-			/* The reactions of state Go. */
-			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-				if (completedMain_raised)
-				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Go();
-					enseq_main_region_Operating_Processing_Locked_Processing_Idle_default();
-					main_region_Operating_Processing_Locked_react(0);
-					transitioned_after = 0;
-				}
-				else
-				{
-					if (timeEvents[1])
-					{
-						exseq_main_region_Operating();
-						timeEvents[1] = false;
-						enseq_main_region_Failed_default();
-						react(0);
-						transitioned_after = 0;
-					}
-				}
-			}
-			/* If no transition was taken then execute local reactions */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
-			}
-			return transitioned_after;
-		}
-
 		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Locked_Processing_Idle_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Idle. */
@@ -1427,7 +1417,10 @@ namespace mrw
 				if (disable_raised)
 				{
 					exseq_main_region_Operating_Processing_Locked_Processing_Idle();
-					enseq_main_region_Operating_Processing_Locked_Processing_Stop_default();
+					turnMain_value = SignalControllerStatechart::STOP;
+					emit turnMain(turnMain_value);
+					enact_main_region_Operating_Processing_Locked_Processing_Waiting();
+					enseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop_default();
 					main_region_Operating_Processing_Locked_react(0);
 					transitioned_after = 0;
 				}
@@ -1440,7 +1433,52 @@ namespace mrw
 			return transitioned_after;
 		}
 
-		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Locked_Processing_Stop_react(const sc::integer transitioned_before)
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Locked_Processing_Waiting_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Waiting. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (timeEvents[1])
+				{
+					exseq_main_region_Operating();
+					timeEvents[1] = false;
+					enseq_main_region_Failed_default();
+					react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Go. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (completedMain_raised)
+				{
+					exseq_main_region_Operating_Processing_Locked_Processing_Waiting();
+					enseq_main_region_Operating_Processing_Locked_Processing_Idle_default();
+					main_region_Operating_Processing_Locked_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Locked_Processing_Waiting_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Stop. */
 			sc::integer transitioned_after = transitioned_before;
@@ -1457,7 +1495,7 @@ namespace mrw
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
 			{
-				transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
+				transitioned_after = main_region_Operating_Processing_Locked_Processing_Waiting_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -1525,19 +1563,19 @@ namespace mrw
 					transitioned = main_region_Operating_Processing_Unlocked_react(transitioned);
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Go :
-				{
-					transitioned = main_region_Operating_Processing_Locked_Processing_Go_react(transitioned);
-					break;
-				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Idle :
 				{
 					transitioned = main_region_Operating_Processing_Locked_Processing_Idle_react(transitioned);
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Stop :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go :
 				{
-					transitioned = main_region_Operating_Processing_Locked_Processing_Stop_react(transitioned);
+					transitioned = main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop :
+				{
+					transitioned = main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop_react(transitioned);
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Failed :

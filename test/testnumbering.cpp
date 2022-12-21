@@ -99,20 +99,12 @@ void TestNumbering::testPairSignalSection2()
 	QVERIFY(lr5 == nullptr);
 	QVERIFY(lr6 == nullptr);
 
-	QCOMPARE(lr1->pair(), lr4);
-	QCOMPARE(lr2->pair(), lr4);
-	QCOMPARE(lr3->pair(), lr4);
-	QCOMPARE(lr4->pair(), nullptr);
-
 	QVERIFY(fr1 == nullptr);
 	QVERIFY(fr2 == nullptr);
 	QVERIFY(fr3 == nullptr);
 	QVERIFY(fr4 == nullptr);
 	QVERIFY(fr5 != nullptr);
 	QVERIFY(fr6 != nullptr);
-
-	QCOMPARE(fr5->pair(), fr6);
-	QCOMPARE(fr6->pair(), nullptr);
 }
 
 void TestNumbering::testPairSignalSection3()
@@ -128,12 +120,6 @@ void TestNumbering::testPairSignalSection3()
 	QVERIFY(lr1 != nullptr);
 	QVERIFY(lr2 != nullptr);
 	QVERIFY(lr3 != nullptr);
-
-	QCOMPARE(ll1->pair(), ll2);
-	QCOMPARE(ll2->pair(), nullptr);
-	QCOMPARE(lr1->pair(), lr2);
-	QCOMPARE(lr2->pair(), nullptr);
-	QCOMPARE(lr3->pair(), nullptr);
 }
 
 void TestNumbering::testSignalCount()

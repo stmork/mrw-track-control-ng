@@ -108,7 +108,6 @@ namespace mrw::model
 		};
 
 	protected:
-		Signal       *      main_distant_pair = nullptr;
 
 		/** The orientation referenced to the counting direction. */
 		const bool          signal_direction;
@@ -137,21 +136,6 @@ namespace mrw::model
 		 * @return The SignalType of this instance.
 		 */
 		SignalType type() const;
-
-		/**
-		 * If there is a combined signal (main and distant) counting in the
-		 * same direction this method returns the paired LightSignal. This
-		 * has some implications:
-		 * 1. This instance has to bei a main signal.
-		 * 2. The paired signal is a distant signal.
-		 * 3. Both are LightSignal instances.
-		 *
-		 * @return The paired distant LightSignal.
-		 */
-		inline Signal * pair() const
-		{
-			return main_distant_pair;
-		}
 
 		QString key() const override;
 
