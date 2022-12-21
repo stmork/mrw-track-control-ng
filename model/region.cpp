@@ -87,7 +87,6 @@ void Region::link()
 	for (Section * section : sections)
 	{
 		section->link();
-		section->findSignalPair();
 	}
 }
 

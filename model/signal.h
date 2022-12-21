@@ -153,9 +153,6 @@ namespace mrw::model
 			return main_distant_pair;
 		}
 
-		// TODO: Move into SignalController!
-		void findPair(const std::vector<Signal *> & section_signals);
-
 		QString key() const override;
 
 		/**

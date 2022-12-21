@@ -94,21 +94,6 @@ QString Signal::symbol() const
 	return type_descr;
 }
 
-void Signal::findPair(const std::vector<Signal *> & section_signals)
-{
-	if (signal_type & MAIN_SIGNAL)
-	{
-		for (Signal * signal : section_signals)
-		{
-			if ((signal->signal_type == DISTANT_SIGNAL) &&
-				(signal_direction == signal->signal_direction))
-			{
-				main_distant_pair = signal;
-			}
-		}
-	}
-}
-
 QString Signal::key() const
 {
 	return section()->region()->name() + partName();

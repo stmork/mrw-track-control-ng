@@ -244,17 +244,6 @@ void Section::link()
 	}
 }
 
-void Section::findSignalPair()
-{
-	std::vector<Signal *> sction_signals;
-
-	parts<Signal>(sction_signals);
-	for (Signal * signal : sction_signals)
-	{
-		signal->findPair(sction_signals);
-	}
-}
-
 QString Section::toString() const
 {
 	static const QString O = String::format(String::BOLD_ON + String::RED_ON, "O");
