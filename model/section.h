@@ -254,6 +254,16 @@ namespace mrw::model
 		 */
 		static QString get(const SectionState & state);
 
+		/**
+		 * This method returns all signals in this Section in a given view
+		 * direction. The resulting Signal elements are sorted with the most
+		 * important Signal first. So if the first Signal is a main signal
+		 * it marks an end of a block.
+		 *
+		 * @param view The direction related to the count direction.
+		 * @return The sorted Signal vector related to the view direction.
+		 * @see Signal::less()
+		 */
 		const std::vector<Signal *> & getSignals(const bool view);
 
 	private:
