@@ -62,10 +62,7 @@ namespace mrw::model
 			STOP =  0,
 
 			/** Will result in SIGNAL_HP1, SIGNAL_SH1 or SIGNAL_VR1 */
-			GO   =  1,
-
-			/** Will result in SIGNAL_HP2 or SIGNAL_VR2 */
-			SLOW =  2
+			GO   =  1
 		};
 
 		/**

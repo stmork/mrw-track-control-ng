@@ -106,8 +106,20 @@ void WidgetRoute::prepare(
 		}
 	}
 
+	prepareSections(last_section, last_part);
 	prepareTrack(last_section, last_part);
 	prepareSignals(last_section, last_part);
+}
+
+void WidgetRoute::prepareSections(Section * last_section, RailPart * last_part)
+{
+	Q_UNUSED(last_section);
+	Q_UNUSED(last_part);
+
+	bool last_on = isLastSectionEnded();
+	auto it      = sections.rbegin();
+
+	last = last_on ? nullptr : *it;
 }
 
 void WidgetRoute::prepareTrack(
@@ -496,10 +508,9 @@ void WidgetRoute::activateSections()
 	__METHOD__;
 
 	size_t count   = 0;
-	bool   last_on = isLastSectionEnded();
 
 	for (
-		SectionTrack::reverse_iterator it = sections.rbegin();
+		auto it = sections.rbegin();
 		it != sections.rend();
 		++it)
 	{
@@ -508,8 +519,7 @@ void WidgetRoute::activateSections()
 
 		if (it == sections.rbegin())
 		{
-			controller->enable(last_on);
-			last = last_on ? nullptr : controller->section();
+			controller->enable(last == nullptr);
 		}
 		else
 		{
@@ -547,8 +557,9 @@ void WidgetRoute::turnSignals()
 	collectSignalController(controllers);
 	for (SignalControllerProxy * controller : controllers)
 	{
-		if (controller->isUnlocked())
+//		if (controller->isUnlocked())
 		{
+			qDebug().noquote() << *controller;
 			controller->enable();
 			count++;
 		}

@@ -40,8 +40,7 @@ const ConstantEnumerator<Symbol>  Signal::symbol_map
 {
 	CONSTANT(OFF),
 	CONSTANT(STOP),
-	CONSTANT(GO),
-	CONSTANT(SLOW)
+	CONSTANT(GO)
 };
 
 Signal::Signal(

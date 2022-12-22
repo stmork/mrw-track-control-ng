@@ -3,9 +3,11 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "model/modelrailway.h"
-#include "model/lightsignal.h"
+#include <can/mrwmessage.h>
+#include <model/modelrailway.h>
+#include <model/lightsignal.h>
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 /**
@@ -83,12 +85,13 @@ const QString & LightSignal::name() const
 
 QString LightSignal::toString() const
 {
-	return QString("      L %1  %2   : [%3] %4 %5").
+	return QString("      L %1  %2   : [%3] %4 %5 %6").
 		arg(valid()  ? "V" : "-").
 		arg(symbol()).
 		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name(), -10).
-		arg(Device::get(lock()), -10);
+		arg(Device::get(lock()), -10).
+		arg(MrwMessage::get(signal_state), -10);
 }
 
 size_t LightSignal::usedPins() const

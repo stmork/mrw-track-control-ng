@@ -144,8 +144,6 @@ namespace mrw
 			public:
 				virtual ~OperationCallback() = 0;
 
-				virtual void idle() = 0;
-
 				virtual bool hasSignal() = 0;
 
 				virtual void prepare(sc::integer symbol) = 0;
@@ -276,7 +274,6 @@ namespace mrw
 
 			// prototypes of all internal functions
 
-			void enact_main_region_Idle();
 			void enact_main_region_Turning();
 			void enact_main_region_Turning_Turn_processing_Turn();
 			void enact_main_region_Fail();

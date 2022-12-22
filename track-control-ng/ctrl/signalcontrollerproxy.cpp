@@ -147,7 +147,7 @@ void SignalControllerProxy::setDistantSignal(SignalControllerProxy * signal)
 
 void SignalControllerProxy::setSymbol(Signal::Symbol new_symbol)
 {
-	symbol = new_symbol;
+	statechart.setSymbol(new_symbol);
 }
 
 void SignalControllerProxy::setState(SectionState new_state)
@@ -349,8 +349,8 @@ QString SignalControllerProxy::toString() const
 		arg(hasDistant()  ? 'D' : '-').
 		arg(hasShunting() ? 'S' : '-').
 
-		arg(grouped_name, -12).
-		arg(Signal::get(symbol));
+		arg(grouped_name, -10).
+		arg(Signal::get(static_cast<Signal::Symbol>(statechart.getSymbol())));
 }
 
 void SignalControllerProxy::inc()

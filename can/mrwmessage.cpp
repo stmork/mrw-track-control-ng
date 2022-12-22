@@ -323,6 +323,11 @@ void MrwMessage::append(const uint8_t input)
 	}
 }
 
+QString MrwMessage::get(const SignalState & state)
+{
+	return signal_map.get(state);
+}
+
 void MrwMessage::copy(QByteArray & array) const
 {
 	size_t s = start();

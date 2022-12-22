@@ -53,10 +53,6 @@ bool SignalProxy::hasSignal()
 	return signal != nullptr;
 }
 
-void SignalProxy::idle()
-{
-}
-
 void mrw::ctrl::SignalProxy::send()
 {
 	__METHOD__;
@@ -169,12 +165,27 @@ void DistantProxy::prepare(Signal::Symbol symbol)
 	Q_UNUSED(symbol)
 	Q_ASSERT(signal != nullptr);
 
-	SignalState state = SIGNAL_OFF;
+	SignalState state      = SIGNAL_OFF;
+	uint8_t     main_state = SIGNAL_OFF;
+
 	if (main_controller != nullptr)
 	{
-		const uint8_t main_state = main_controller->mainSignal()->state();
+		switch (symbol)
+		{
+		case Signal::Symbol::GO:
+			main_state = main_controller->mainSignal()->state();
+			state      = static_cast<SignalState>(main_state + SIGNAL_MAIN_DISTANT_OFFSET);
+			break;
 
-		state = static_cast<SignalState>(main_state + SIGNAL_MAIN_DISTANT_OFFSET);
+		case Signal::Symbol::STOP:
+			state = SIGNAL_VR0;
+			break;
+
+		case Signal::Symbol::OFF:
+			state = SIGNAL_OFF;
+			break;
+		}
+
 	}
 	else
 	{
@@ -220,10 +231,6 @@ void ShuntProxy::prepare(mrw::model::Signal::Symbol symbol)
 		break;
 
 	case Signal::Symbol::GO:
-		state = SIGNAL_SH1;
-		break;
-
-	case Signal::Symbol::SLOW:
 		state = SIGNAL_SH1;
 		break;
 	}

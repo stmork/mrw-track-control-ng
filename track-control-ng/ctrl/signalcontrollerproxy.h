@@ -36,8 +36,6 @@ namespace mrw::ctrl
 
 		const bool                     direction  = true;
 		bool                           is_tour    = false;
-		mrw::model::Signal::Symbol     symbol     =
-			mrw::model::Signal::Symbol::STOP;
 		mrw::model::Device::LockState  lock_state =
 			mrw::model::Device::LockState::UNLOCKED;
 
@@ -108,16 +106,16 @@ namespace mrw::ctrl
 		virtual QString toString() const override;
 
 		// Implementations from OperationCallback
-		virtual void inc() override;
-		virtual void dec() override;
+		virtual void    inc() override;
+		virtual void    dec() override;
 
-		virtual bool hasMainSignal() override;
-		virtual bool isMain() override;
-		virtual bool isTour() override;
+		virtual bool    hasMainSignal() override;
+		virtual bool    isMain() override;
+		virtual bool    isTour() override;
 
-		virtual void fail() override;
-		virtual void pending() override;
-		virtual void lock(const bool do_it) override;
+		virtual void    fail() override;
+		virtual void    pending() override;
+		virtual void    lock(const bool do_it) override;
 	};
 }
 

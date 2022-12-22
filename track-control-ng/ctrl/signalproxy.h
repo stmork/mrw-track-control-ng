@@ -31,8 +31,7 @@ namespace mrw::ctrl
 
 		void start(mrw::model::Signal * input);
 
-		void idle() override;
-		bool hasSignal() override;
+		bool         hasSignal() override;
 		virtual void prepare(sc::integer symbol) override;
 		virtual void send() override;
 

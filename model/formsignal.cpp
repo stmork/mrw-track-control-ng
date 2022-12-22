@@ -3,10 +3,12 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
 //
 
-#include "model/modelrailway.h"
-#include "model/formsignal.h"
-#include "model/switchmodule.h"
+#include <can/mrwmessage.h>
+#include <model/modelrailway.h>
+#include <model/formsignal.h>
+#include <model/switchmodule.h>
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 FormSignal::FormSignal(
@@ -31,12 +33,13 @@ bool FormSignal::valid() const
 
 QString FormSignal::toString() const
 {
-	return QString("      F %1  %2   : [%3] %4 %5").
+	return QString("      F %1  %2   : [%3] %4 %5 %6").
 		arg(valid()  ? "V" : "-").
 		arg(symbol()).
 		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name(), -10).
-		arg(Device::get(lock()), -10);
+		arg(Device::get(lock()), -10).
+		arg(MrwMessage::get(signal_state), -10);
 }
 
 Device * FormSignal::device()

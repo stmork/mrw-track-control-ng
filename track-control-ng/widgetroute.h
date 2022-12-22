@@ -76,6 +76,9 @@ private:
 	void finalize();
 	size_t countAllocatedSections();
 
+	void prepareSections(
+		mrw::model::Section  * last_section,
+		mrw::model::RailPart * last_part);
 	void prepareTrack(
 		mrw::model::Section  * last_section,
 		mrw::model::RailPart * last_part);

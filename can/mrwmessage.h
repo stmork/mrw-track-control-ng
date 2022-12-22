@@ -195,6 +195,14 @@ namespace mrw::can
 		 */
 		void append(const uint8_t input);
 
+		/**
+		 * This method returns the clear text QString of the SignalState.
+		 *
+		 * @param type The SignalState enumeration to translate.
+		 * @return The QString clear text of the given SignalState enumeration.
+		 */
+		static QString get(const SignalState & state);
+
 		QString toString() const override;
 
 	private:

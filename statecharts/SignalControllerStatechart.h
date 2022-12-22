@@ -143,6 +143,12 @@ namespace mrw
 			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
 			void setTimeout(sc::integer timeout);
 
+			/*! Gets the value of the variable 'symbol' that is defined in the default interface scope. */
+			sc::integer getSymbol() const;
+
+			/*! Sets the value of the variable 'symbol' that is defined in the default interface scope. */
+			void setSymbol(sc::integer symbol);
+
 			/*! Gets the value of the variable 'OFF' that is defined in the default interface scope. */
 			static sc::integer getOFF() ;
 
@@ -293,6 +299,7 @@ namespace mrw
 			SignalControllerStatechart & operator=(const SignalControllerStatechart &);
 
 			sc::integer timeout;
+			sc::integer symbol;
 			static const sc::integer OFF;
 			static const sc::integer STOP;
 			static const sc::integer GO;

@@ -26,6 +26,7 @@ namespace mrw
 		SignalControllerStatechart::SignalControllerStatechart(QObject * parent) :
 			QObject(parent),
 			timeout(5000),
+			symbol(SignalControllerStatechart::STOP),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
@@ -414,6 +415,16 @@ namespace mrw
 			this->timeout = timeout_;
 		}
 
+		sc::integer SignalControllerStatechart::getSymbol() const
+		{
+			return symbol;
+		}
+
+		void SignalControllerStatechart::setSymbol(sc::integer symbol_)
+		{
+			this->symbol = symbol_;
+		}
+
 		sc::integer SignalControllerStatechart::getOFF()
 		{
 			return OFF;
@@ -520,7 +531,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go()
 		{
 			/* Entry action for state 'Go'. */
-			turnShunt_value = SignalControllerStatechart::GO;
+			turnShunt_value = symbol;
 			emit turnShunt(turnShunt_value);
 		}
 
@@ -528,7 +539,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop()
 		{
 			/* Entry action for state 'Stop'. */
-			turnShunt_value = SignalControllerStatechart::STOP;
+			turnShunt_value = symbol;
 			emit turnShunt(turnShunt_value);
 		}
 
@@ -551,7 +562,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main()
 		{
 			/* Entry action for state 'Go Main'. */
-			turnMain_value = SignalControllerStatechart::GO;
+			turnMain_value = symbol;
 			emit turnMain(turnMain_value);
 		}
 
@@ -559,7 +570,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main()
 		{
 			/* Entry action for state 'Stop Main'. */
-			turnMain_value = SignalControllerStatechart::STOP;
+			turnMain_value = symbol;
 			emit turnMain(turnMain_value);
 		}
 
@@ -567,7 +578,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant()
 		{
 			/* Entry action for state 'Go Distant'. */
-			turnDistant_value = SignalControllerStatechart::GO;
+			turnDistant_value = symbol;
 			emit turnDistant(turnDistant_value);
 		}
 
@@ -1900,6 +1911,7 @@ namespace mrw
 				if (disable_raised)
 				{
 					exseq_main_region_Operating_Processing_Shunting_Processing_Idle();
+					symbol = SignalControllerStatechart::STOP;
 					enact_main_region_Operating_Processing_Shunting_Processing_Waiting();
 					enseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop_default();
 					main_region_Operating_Processing_Shunting_react(0);
@@ -2160,10 +2172,22 @@ namespace mrw
 				if (disable_raised)
 				{
 					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Idle();
+					symbol = SignalControllerStatechart::STOP;
 					enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
 					react_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting__choice_1();
 					main_region_Operating_Processing_Tour_State_react(0);
 					transitioned_after = 0;
+				}
+				else
+				{
+					if (enable_raised)
+					{
+						exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Idle();
+						enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+						enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main_default();
+						main_region_Operating_Processing_Tour_State_react(0);
+						transitioned_after = 0;
+					}
 				}
 			}
 			/* If no transition was taken then execute local reactions */
