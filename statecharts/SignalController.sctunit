@@ -5,6 +5,13 @@
 
 testclass SignalController for statechart mrw.^statechart.SignalControllerStatechart
 {
+
+	operation failState()
+	{
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Failed)
+		assert called fail
+	}
+
 	@Test
 	operation waitForStart()
 	{
@@ -13,10 +20,15 @@ testclass SignalController for statechart mrw.^statechart.SignalControllerStatec
 	}
 
 	@Test
-	operation init()
+	operation initial()
 	{
+		// Given
 		waitForStart()
+
+		// When
 		raise start
+
+		// Then
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init)
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning)
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.main.Turn)
@@ -28,16 +40,26 @@ testclass SignalController for statechart mrw.^statechart.SignalControllerStatec
 	@Test
 	operation failAfterStart()
 	{
-		init()
+		// Given
+		initial()
+
+		// When
 		raise failed
-		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Failed)
+
+		// Then
+		failState()
 	}
 
 	@Test
 	operation timeoutAfterStart()
 	{
-		init()
+		// Given
+		initial()
+
+		// When
 		proceed timeout ms
-		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Failed)
+
+		// Then
+		failState()
 	}
 }
