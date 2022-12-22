@@ -333,13 +333,14 @@ namespace mrw
 		{
 			/* Entry action for state 'Turning'. */
 			timerService->setTimer(this, 0, timeout, false);
+			ifaceOperationCallback->prepare(signalState);
 		}
 
 		/* Entry action for state 'Turn'. */
 		void SignalStatechart::enact_main_region_Turning_Turn_processing_Turn()
 		{
 			/* Entry action for state 'Turn'. */
-			ifaceOperationCallback->send(turn_value);
+			ifaceOperationCallback->send();
 		}
 
 		/* Entry action for state 'Fail'. */
@@ -347,7 +348,8 @@ namespace mrw
 		{
 			/* Entry action for state 'Fail'. */
 			signalState = SignalStatechart::OFF;
-			ifaceOperationCallback->send(signalState);
+			ifaceOperationCallback->prepare(signalState);
+			ifaceOperationCallback->send();
 			emit failed();
 		}
 
@@ -511,6 +513,7 @@ namespace mrw
 			/* The reactions of state null. */
 			if (ifaceOperationCallback->hasSignal())
 			{
+				signalState = turn_value;
 				enseq_main_region_Turning_default();
 			}
 			else
@@ -570,7 +573,6 @@ namespace mrw
 				if (ok_raised)
 				{
 					exseq_main_region_Turning();
-					signalState = turn_value;
 					emit completed();
 					enseq_main_region_Idle_default();
 					react(0);

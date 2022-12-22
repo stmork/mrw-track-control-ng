@@ -115,6 +115,8 @@ namespace mrw::model
 		/** The signal type. */
 		const SignalType    signal_type;
 
+		mrw::can::SignalState signal_state = mrw::can::SIGNAL_OFF;
+
 	public:
 		explicit Signal(
 			ModelRailway     *    model_railway,
@@ -136,6 +138,10 @@ namespace mrw::model
 		 * @return The SignalType of this instance.
 		 */
 		SignalType type() const;
+
+		mrw::can::SignalState state() const;
+
+		void setState(const mrw::can::SignalState new_state);
 
 		QString key() const override;
 

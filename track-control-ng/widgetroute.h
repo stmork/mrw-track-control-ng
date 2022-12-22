@@ -60,11 +60,16 @@ public slots:
 	void unregister();
 
 private:
-	void collectSignalController(std::vector<mrw::ctrl::SignalControllerProxy *> & controllers) const;
-	mrw::ctrl::SignalControllerProxy * getSignalController(mrw::model::Section * section) const;
+	mrw::ctrl::SignalControllerProxy * getSignalController(
+		mrw::model::Section * section) const;
+
+	void collectSignalController(
+		std::vector<mrw::ctrl::SignalControllerProxy *> & controllers) const;
 	void collectMainSignals();
-	void collectMainSignals(mrw::model::Section * section);
-	void collectSectionControllers(std::vector<mrw::ctrl::SectionController *> & controllers) const;
+	void collectMainSignals(
+		mrw::model::Section               *               section);
+	void collectSectionControllers(
+		std::vector<mrw::ctrl::SectionController *>   &   controllers) const;
 
 	void unregister(mrw::model::Section * section);
 	void unregister(mrw::ctrl::SectionController * controller);

@@ -140,9 +140,19 @@ void SignalControllerProxy::setCurved(const size_t curved_count)
 	statechart_main.setCurved(curved_count);
 }
 
-void SignalControllerProxy::setDistantSignal(Signal * signal)
+void SignalControllerProxy::setDistantSignal(SignalControllerProxy * signal)
 {
-	statechart_distant.setMainSignal(signal);
+	statechart_distant.setMainController(signal);
+}
+
+void SignalControllerProxy::setSymbol(Signal::Symbol new_symbol)
+{
+	symbol = new_symbol;
+}
+
+void SignalControllerProxy::setState(SectionState new_state)
+{
+	is_tour = new_state == SectionState::TOUR;
 }
 
 void SignalControllerProxy::connectMain()
@@ -313,12 +323,12 @@ bool SignalControllerProxy::process(const MrwMessage & message)
 {
 	Signal * signal = signal_map[message.unitNo()];
 
-	const bool processed =
-		statechart_main.process(   signal, message) ||
-		statechart_distant.process(signal, message) ||
+	const size_t processed =
+		statechart_main.process(   signal, message) +
+		statechart_distant.process(signal, message) +
 		statechart_shunt.process(  signal, message);
 
-	if (processed)
+	if (processed > 0)
 	{
 		emit update();
 	}
@@ -334,7 +344,13 @@ void mrw::ctrl::SignalControllerProxy::restart()
 
 QString SignalControllerProxy::toString() const
 {
-	return *base_signal;
+	return QString("SCP %1%2%3           :        %5 %6").
+		arg(hasMain()     ? 'M' : '-').
+		arg(hasDistant()  ? 'D' : '-').
+		arg(hasShunting() ? 'S' : '-').
+
+		arg(grouped_name, -12).
+		arg(Signal::get(symbol));
 }
 
 void SignalControllerProxy::inc()
@@ -357,11 +373,9 @@ bool SignalControllerProxy::isMain()
 	return statechart_shunt.isCombined();
 }
 
-void SignalControllerProxy::prepare()
+bool SignalControllerProxy::isTour()
 {
-	__METHOD__;
-
-	// TODO: Compute real signal symbols from what the route/tour wants.
+	return is_tour;
 }
 
 void SignalControllerProxy::fail()

@@ -15,9 +15,10 @@ Route::Route(
 	const SectionState wanted_state,
 	RailPart     *     first,
 	QObject      *     parent) :
-	QObject(parent), direction(dir),
-	auto_unblock(wanted_state != SectionState::TOUR),
-	state(wanted_state)
+	QObject(parent),
+	state(wanted_state),
+	direction(dir),
+	auto_unblock(wanted_state != SectionState::TOUR)
 {
 	__METHOD__;
 

@@ -65,6 +65,17 @@ Signal::SignalType Signal::type() const
 	return signal_type;
 }
 
+SignalState Signal::state() const
+{
+	return signal_state;
+}
+
+void Signal::setState(const SignalState new_state)
+{
+	// TODO: Respect locking!
+	signal_state = new_state;
+}
+
 void Signal::link()
 {
 }

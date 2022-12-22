@@ -200,8 +200,10 @@ namespace mrw::can
 		SIGNAL_SH1,
 
 		/** All lights up for testing purposes. */
-		SIGNAL_TST
+		SIGNAL_TST,
 	};
+
+	static constexpr uint8_t SIGNAL_MAIN_DISTANT_OFFSET = SIGNAL_VR0 - SIGNAL_HP0;
 
 	enum SwitchState : uint8_t
 	{

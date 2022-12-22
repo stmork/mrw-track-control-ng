@@ -57,6 +57,23 @@ void SignalProxy::idle()
 {
 }
 
+void mrw::ctrl::SignalProxy::send()
+{
+	__METHOD__;
+
+	Q_ASSERT(signal != nullptr);
+
+	MrwMessage  message(signal->device()->command(SETSGN));
+
+	message.append(signal->state());
+	ControllerRegistry::can()->write(message);
+}
+
+void mrw::ctrl::SignalProxy::prepare(sc::integer symbol)
+{
+	prepare(static_cast<Signal::Symbol>(symbol));
+}
+
 bool SignalProxy::process(Signal * device, const MrwMessage & message)
 {
 	Q_ASSERT(device != nullptr);
@@ -103,14 +120,13 @@ bool SignalProxy::process(Signal * device, const MrwMessage & message)
 **                                                                      **
 *************************************************************************/
 
-void MainProxy::send(sc::integer symbol)
+void MainProxy::prepare(Signal::Symbol symbol)
 {
 	__METHOD__;
 
 	Q_ASSERT(signal != nullptr);
 
 	SignalState state = SIGNAL_OFF;
-	MrwMessage  message(signal->device()->command(SETSGN));
 
 	switch (symbol)
 	{
@@ -126,9 +142,7 @@ void MainProxy::send(sc::integer symbol)
 		state = curved_count < 2 ? SIGNAL_HP1 : SIGNAL_HP2;
 		break;
 	}
-
-	message.append(state);
-	ControllerRegistry::can()->write(message);
+	signal->setState(state);
 }
 
 void MainProxy::setCurved(const size_t count)
@@ -148,52 +162,30 @@ void DistantProxy::start(Signal * input, Signal * combined)
 	SignalProxy::start(input);
 }
 
-void DistantProxy::send(sc::integer symbol)
+void DistantProxy::prepare(Signal::Symbol symbol)
 {
-	Q_UNUSED(symbol)
 	__METHOD__;
 
+	Q_UNUSED(symbol)
 	Q_ASSERT(signal != nullptr);
 
 	SignalState state = SIGNAL_OFF;
-	MrwMessage  message(signal->device()->command(SETSGN));
-
-	if (main_signal != nullptr)
+	if (main_controller != nullptr)
 	{
-		Device * device = dynamic_cast<Device *>(main_signal);
-		SignalControllerProxy * proxy = ControllerRegistry::instance().find<SignalControllerProxy>(device);
+		const uint8_t main_state = main_controller->mainSignal()->state();
 
-		switch (proxy->main())
-		{
-		default:
-			state = SIGNAL_OFF;
-			break;
-
-		case Signal::Symbol::STOP:
-			state = SIGNAL_VR0;
-			break;
-
-		case Signal::Symbol::GO:
-			state = SIGNAL_VR1;
-			break;
-
-		case Signal::Symbol::SLOW:
-			state = SIGNAL_VR2;
-			break;
-		}
+		state = static_cast<SignalState>(main_state + SIGNAL_MAIN_DISTANT_OFFSET);
 	}
 	else
 	{
 		state = SIGNAL_OFF;
 	}
-
-	message.append(state);
-	ControllerRegistry::can()->write(message);
+	signal->setState(state);
 }
 
-void DistantProxy::setMainSignal(Signal * master_signal)
+void DistantProxy::setMainController(SignalControllerProxy * proxy)
 {
-	main_signal = master_signal;
+	main_controller = proxy;
 }
 
 /*************************************************************************
@@ -213,14 +205,9 @@ bool ShuntProxy::isCombined()
 	return hasSignal() && (signal == main_signal);
 }
 
-void ShuntProxy::send(sc::integer symbol)
+void ShuntProxy::prepare(mrw::model::Signal::Symbol symbol)
 {
-	__METHOD__;
-
-	Q_ASSERT(signal != nullptr);
-
 	SignalState state = SIGNAL_OFF;
-	MrwMessage  message(signal->device()->command(SETSGN));
 
 	switch (symbol)
 	{
@@ -240,7 +227,5 @@ void ShuntProxy::send(sc::integer symbol)
 		state = SIGNAL_SH1;
 		break;
 	}
-
-	message.append(state);
-	ControllerRegistry::can()->write(message);
+	signal->setState(state);
 }

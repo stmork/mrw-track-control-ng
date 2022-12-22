@@ -22,6 +22,7 @@ using namespace mrw::model;
 using namespace mrw::ctrl;
 
 using LockState = Device::LockState;
+using Symbol    = Signal::Symbol;
 
 WidgetRoute::WidgetRoute(
 	const bool           dir,
@@ -150,8 +151,8 @@ void WidgetRoute::prepareSignals(Section * last_section, RailPart * last_part)
 	Q_UNUSED(last_section);
 	Q_UNUSED(last_part);
 
-	Signal * main_signal = nullptr;
-	size_t   curved      = 0;
+	SignalControllerProxy * main_controller = nullptr;
+	size_t                  curved          = 0;
 
 	for (auto it = sections.rbegin(); it != sections.rend(); ++it)
 	{
@@ -168,19 +169,22 @@ void WidgetRoute::prepareSignals(Section * last_section, RailPart * last_part)
 		if (controller != nullptr)
 		{
 			// OK, there is a signal...
+			if (controller->hasDistant())
+			{
+				// OK, a distant signal has to reflect the main signals state.
+				controller->setDistantSignal(main_controller);
+			}
+
 			if (controller->hasMain())
 			{
 				//  OK, a main signal starts a new block.
-				main_signal = controller->mainSignal();
+				main_controller = controller;
 				controller->setCurved(curved);
 				curved = 0;
 			}
 
-			if (controller->hasDistant())
-			{
-				// OK, a distant signal has to reflect the main signals state.
-				controller->setDistantSignal(main_signal);
-			}
+			controller->setState(state);
+			controller->setSymbol(section != this->last ? Symbol::GO : Symbol::STOP);
 		}
 	}
 }
@@ -193,17 +197,13 @@ void WidgetRoute::prepareSignals(Section * last_section, RailPart * last_part)
 
 void WidgetRoute::left()
 {
-	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
+	SectionController   *   controller = dynamic_cast<SectionController *>(QObject::sender());
+	SignalControllerProxy * sig_ctrl   = getSignalController(controller->section());
 
 	qDebug().noquote() << "Left:       " << *controller;
 
-	main_signals.clear();
-	collectMainSignals(controller->section());
-	for (Signal * signal : main_signals)
+	if (sig_ctrl != nullptr)
 	{
-		SignalControllerProxy * sig_ctrl =
-			ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
-
 		sig_ctrl->disable();
 	}
 }
@@ -541,14 +541,12 @@ void WidgetRoute::turnSignals()
 {
 	__METHOD__;
 
-	size_t count = 0;
+	std::vector<SignalControllerProxy *> controllers;
+	size_t                               count = 0;
 
-	collectMainSignals();
-	for (Signal * signal : main_signals)
+	collectSignalController(controllers);
+	for (SignalControllerProxy * controller : controllers)
 	{
-		SignalControllerProxy * controller =
-			ControllerRegistry::instance().find<SignalControllerProxy>(signal->device());
-
 		if (controller->isUnlocked())
 		{
 			controller->enable();

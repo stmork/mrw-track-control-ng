@@ -30,11 +30,15 @@ namespace mrw::ctrl
 
 	private:
 		mrw::statechart::SignalControllerStatechart  statechart;
-		mrw::statechart::MainProxy                   statechart_main;
-		mrw::statechart::DistantProxy                statechart_distant;
-		mrw::statechart::ShuntProxy                  statechart_shunt;
-		const bool                                   direction  = true;
-		mrw::model::Device::LockState                lock_state =
+		MainProxy                                    statechart_main;
+		DistantProxy                                 statechart_distant;
+		ShuntProxy                                   statechart_shunt;
+
+		const bool                     direction  = true;
+		bool                           is_tour    = false;
+		mrw::model::Signal::Symbol     symbol     =
+			mrw::model::Signal::Symbol::STOP;
+		mrw::model::Device::LockState  lock_state =
 			mrw::model::Device::LockState::UNLOCKED;
 
 		mrw::model::Section  * signal_section = nullptr;
@@ -54,10 +58,12 @@ namespace mrw::ctrl
 			QObject       *       parent);
 		virtual ~SignalControllerProxy();
 
-		bool                 isUnlocked() const;
-		mrw::model::Signal * mainSignal() const;
-		void                 setCurved(const size_t curved_count);
-		void                 setDistantSignal(mrw::model::Signal * signal);
+		bool                       isUnlocked() const;
+		mrw::model::Signal    *    mainSignal() const;
+		void                       setCurved(const size_t curved_count);
+		void                       setDistantSignal(SignalControllerProxy * signal);
+		void                       setSymbol(mrw::model::Signal::Symbol symbol);
+		void                       setState(mrw::model::SectionState new_state);
 
 		// Implementations from SignalController
 		virtual bool               hasShunting() const override;
@@ -107,7 +113,7 @@ namespace mrw::ctrl
 
 		virtual bool hasMainSignal() override;
 		virtual bool isMain() override;
-		virtual void prepare() override;
+		virtual bool isTour() override;
 
 		virtual void fail() override;
 		virtual void pending() override;

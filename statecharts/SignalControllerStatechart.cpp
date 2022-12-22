@@ -130,7 +130,9 @@ namespace mrw
 
 
 			case mrw::statechart::SignalControllerStatechart::Event::_te0_main_region_Init_:
-			case mrw::statechart::SignalControllerStatechart::Event::_te1_main_region_Operating_Processing_Locked_Processing_Waiting_:
+			case mrw::statechart::SignalControllerStatechart::Event::_te1_main_region_Operating_Processing_Shunting_Processing_Waiting_:
+			case mrw::statechart::SignalControllerStatechart::Event::_te2_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_:
+			case mrw::statechart::SignalControllerStatechart::Event::_te3_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay_:
 				{
 					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::SignalControllerStatechart::Event::_te0_main_region_Init_)] = true;
 					break;
@@ -310,7 +312,7 @@ namespace mrw
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating :
 				{
-					return  (stateConfVector[scvi_main_region_Operating] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating && stateConfVector[scvi_main_region_Operating] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop);
+					return  (stateConfVector[scvi_main_region_Operating] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating && stateConfVector[scvi_main_region_Operating] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Idle);
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Unlocked :
@@ -318,29 +320,74 @@ namespace mrw
 					return  (stateConfVector[scvi_main_region_Operating_Processing_Unlocked] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Unlocked);
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting :
 				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked && stateConfVector[scvi_main_region_Operating_Processing_Locked] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop);
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Shunting] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting && stateConfVector[scvi_main_region_Operating_Processing_Shunting] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop);
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Idle :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Idle :
 				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Processing_Idle] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Idle);
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Shunting_Processing_Idle] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Idle);
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting :
 				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Processing_Waiting] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting && stateConfVector[scvi_main_region_Operating_Processing_Locked_Processing_Waiting] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop);
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Shunting_Processing_Waiting] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting && stateConfVector[scvi_main_region_Operating_Processing_Shunting_Processing_Waiting] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop);
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go :
 				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go);
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go);
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop :
 				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop);
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Tour_State] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State && stateConfVector[scvi_main_region_Operating_Processing_Tour_State] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Idle);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting && stateConfVector[scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Idle :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Idle] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Idle);
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Failed :
@@ -454,19 +501,97 @@ namespace mrw
 			ifaceOperationCallback->lock(false);
 		}
 
-		/* Entry action for state 'Locked'. */
-		void SignalControllerStatechart::enact_main_region_Operating_Processing_Locked()
+		/* Entry action for state 'Shunting'. */
+		void SignalControllerStatechart::enact_main_region_Operating_Processing_Shunting()
 		{
-			/* Entry action for state 'Locked'. */
+			/* Entry action for state 'Shunting'. */
 			ifaceOperationCallback->lock(true);
 		}
 
 		/* Entry action for state 'Waiting'. */
-		void SignalControllerStatechart::enact_main_region_Operating_Processing_Locked_Processing_Waiting()
+		void SignalControllerStatechart::enact_main_region_Operating_Processing_Shunting_Processing_Waiting()
 		{
 			/* Entry action for state 'Waiting'. */
 			timerService->setTimer(this, 1, timeout, false);
 			ifaceOperationCallback->inc();
+		}
+
+		/* Entry action for state 'Go'. */
+		void SignalControllerStatechart::enact_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go()
+		{
+			/* Entry action for state 'Go'. */
+			turnShunt_value = SignalControllerStatechart::GO;
+			emit turnShunt(turnShunt_value);
+		}
+
+		/* Entry action for state 'Stop'. */
+		void SignalControllerStatechart::enact_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop()
+		{
+			/* Entry action for state 'Stop'. */
+			turnShunt_value = SignalControllerStatechart::STOP;
+			emit turnShunt(turnShunt_value);
+		}
+
+		/* Entry action for state 'Tour State'. */
+		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State()
+		{
+			/* Entry action for state 'Tour State'. */
+			ifaceOperationCallback->lock(true);
+		}
+
+		/* Entry action for state 'Waiting'. */
+		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting()
+		{
+			/* Entry action for state 'Waiting'. */
+			timerService->setTimer(this, 2, timeout, false);
+			ifaceOperationCallback->inc();
+		}
+
+		/* Entry action for state 'Go Main'. */
+		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main()
+		{
+			/* Entry action for state 'Go Main'. */
+			turnMain_value = SignalControllerStatechart::GO;
+			emit turnMain(turnMain_value);
+		}
+
+		/* Entry action for state 'Stop Main'. */
+		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main()
+		{
+			/* Entry action for state 'Stop Main'. */
+			turnMain_value = SignalControllerStatechart::STOP;
+			emit turnMain(turnMain_value);
+		}
+
+		/* Entry action for state 'Go Distant'. */
+		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant()
+		{
+			/* Entry action for state 'Go Distant'. */
+			turnDistant_value = SignalControllerStatechart::GO;
+			emit turnDistant(turnDistant_value);
+		}
+
+		/* Entry action for state 'Stop Distant'. */
+		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant()
+		{
+			/* Entry action for state 'Stop Distant'. */
+			turnDistant_value = SignalControllerStatechart::STOP;
+			emit turnDistant(turnDistant_value);
+		}
+
+		/* Entry action for state 'Off Distant'. */
+		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant()
+		{
+			/* Entry action for state 'Off Distant'. */
+			turnDistant_value = SignalControllerStatechart::OFF;
+			emit turnDistant(turnDistant_value);
+		}
+
+		/* Entry action for state 'Delay'. */
+		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay()
+		{
+			/* Entry action for state 'Delay'. */
+			timerService->setTimer(this, 3, 500, false);
 		}
 
 		/* Entry action for state 'Failed'. */
@@ -486,11 +611,26 @@ namespace mrw
 		}
 
 		/* Exit action for state 'Waiting'. */
-		void SignalControllerStatechart::exact_main_region_Operating_Processing_Locked_Processing_Waiting()
+		void SignalControllerStatechart::exact_main_region_Operating_Processing_Shunting_Processing_Waiting()
 		{
 			/* Exit action for state 'Waiting'. */
 			timerService->unsetTimer(this, 1);
 			ifaceOperationCallback->dec();
+		}
+
+		/* Exit action for state 'Waiting'. */
+		void SignalControllerStatechart::exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting()
+		{
+			/* Exit action for state 'Waiting'. */
+			timerService->unsetTimer(this, 2);
+			ifaceOperationCallback->dec();
+		}
+
+		/* Exit action for state 'Delay'. */
+		void SignalControllerStatechart::exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay()
+		{
+			/* Exit action for state 'Delay'. */
+			timerService->unsetTimer(this, 3);
 		}
 
 		/* Exit action for state 'Failed'. */
@@ -592,37 +732,100 @@ namespace mrw
 			stateConfVectorChanged = true;
 		}
 
-		/* 'default' enter sequence for state Locked */
-		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Locked_default()
-		{
-			/* 'default' enter sequence for state Locked */
-			enact_main_region_Operating_Processing_Locked();
-			enseq_main_region_Operating_Processing_Locked_Processing_default();
-		}
-
 		/* 'default' enter sequence for state Idle */
-		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Locked_Processing_Idle_default()
+		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Shunting_Processing_Idle_default()
 		{
 			/* 'default' enter sequence for state Idle */
-			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Idle;
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Idle;
 			stateConfVectorPosition = 0;
 			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Go */
-		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go_default()
+		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go_default()
 		{
 			/* 'default' enter sequence for state Go */
-			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go;
+			enact_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go();
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go;
 			stateConfVectorPosition = 0;
 			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Stop */
-		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop_default()
+		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop_default()
 		{
 			/* 'default' enter sequence for state Stop */
-			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop;
+			enact_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop();
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Go Main */
+		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main_default()
+		{
+			/* 'default' enter sequence for state Go Main */
+			enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main();
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Stop Main */
+		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main_default()
+		{
+			/* 'default' enter sequence for state Stop Main */
+			enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main();
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Go Distant */
+		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant_default()
+		{
+			/* 'default' enter sequence for state Go Distant */
+			enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant();
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Stop Distant */
+		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant_default()
+		{
+			/* 'default' enter sequence for state Stop Distant */
+			enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant();
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Off Distant */
+		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant_default()
+		{
+			/* 'default' enter sequence for state Off Distant */
+			enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant();
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Delay */
+		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay_default()
+		{
+			/* 'default' enter sequence for state Delay */
+			enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay();
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Idle */
+		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Idle_default()
+		{
+			/* 'default' enter sequence for state Idle */
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Idle;
 			stateConfVectorPosition = 0;
 			stateConfVectorChanged = true;
 		}
@@ -656,13 +859,6 @@ namespace mrw
 		{
 			/* 'default' enter sequence for region Processing */
 			react_main_region_Operating_Processing__entry_Default();
-		}
-
-		/* 'default' enter sequence for region Processing */
-		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Locked_Processing_default()
-		{
-			/* 'default' enter sequence for region Processing */
-			react_main_region_Operating_Processing_Locked_Processing__entry_Default();
 		}
 
 		/* Default exit sequence for state Wait for Start */
@@ -753,15 +949,15 @@ namespace mrw
 			stateConfVectorPosition = 0;
 		}
 
-		/* Default exit sequence for state Locked */
-		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked()
+		/* Default exit sequence for state Shunting */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Shunting()
 		{
-			/* Default exit sequence for state Locked */
-			exseq_main_region_Operating_Processing_Locked_Processing();
+			/* Default exit sequence for state Shunting */
+			exseq_main_region_Operating_Processing_Shunting_Processing();
 		}
 
 		/* Default exit sequence for state Idle */
-		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked_Processing_Idle()
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Shunting_Processing_Idle()
 		{
 			/* Default exit sequence for state Idle */
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
@@ -769,15 +965,15 @@ namespace mrw
 		}
 
 		/* Default exit sequence for state Waiting */
-		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked_Processing_Waiting()
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Shunting_Processing_Waiting()
 		{
 			/* Default exit sequence for state Waiting */
-			exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing();
-			exact_main_region_Operating_Processing_Locked_Processing_Waiting();
+			exseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing();
+			exact_main_region_Operating_Processing_Shunting_Processing_Waiting();
 		}
 
 		/* Default exit sequence for state Go */
-		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go()
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go()
 		{
 			/* Default exit sequence for state Go */
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
@@ -785,9 +981,81 @@ namespace mrw
 		}
 
 		/* Default exit sequence for state Stop */
-		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop()
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop()
 		{
 			/* Default exit sequence for state Stop */
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
+		}
+
+		/* Default exit sequence for state Tour State */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Tour_State()
+		{
+			/* Default exit sequence for state Tour State */
+			exseq_main_region_Operating_Processing_Tour_State_Tour_processing();
+		}
+
+		/* Default exit sequence for state Waiting */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting()
+		{
+			/* Default exit sequence for state Waiting */
+			exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting();
+			exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+		}
+
+		/* Default exit sequence for state Go Main */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main()
+		{
+			/* Default exit sequence for state Go Main */
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
+		}
+
+		/* Default exit sequence for state Stop Main */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main()
+		{
+			/* Default exit sequence for state Stop Main */
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
+		}
+
+		/* Default exit sequence for state Go Distant */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant()
+		{
+			/* Default exit sequence for state Go Distant */
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
+		}
+
+		/* Default exit sequence for state Stop Distant */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant()
+		{
+			/* Default exit sequence for state Stop Distant */
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
+		}
+
+		/* Default exit sequence for state Off Distant */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant()
+		{
+			/* Default exit sequence for state Off Distant */
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
+		}
+
+		/* Default exit sequence for state Delay */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay()
+		{
+			/* Default exit sequence for state Delay */
+			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
+			exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay();
+		}
+
+		/* Default exit sequence for state Idle */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Idle()
+		{
+			/* Default exit sequence for state Idle */
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
 			stateConfVectorPosition = 0;
 		}
@@ -828,21 +1096,62 @@ namespace mrw
 					exseq_main_region_Operating_Processing_Unlocked();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Idle :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Idle :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Idle();
+					exseq_main_region_Operating_Processing_Shunting_Processing_Idle();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go();
-					exact_main_region_Operating_Processing_Locked_Processing_Waiting();
+					exseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go();
+					exact_main_region_Operating_Processing_Shunting_Processing_Waiting();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop();
-					exact_main_region_Operating_Processing_Locked_Processing_Waiting();
+					exseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop();
+					exact_main_region_Operating_Processing_Shunting_Processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Idle :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Idle();
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Failed :
@@ -1030,21 +1339,62 @@ namespace mrw
 					exseq_main_region_Operating_Processing_Unlocked();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Idle :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Idle :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Idle();
+					exseq_main_region_Operating_Processing_Shunting_Processing_Idle();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go();
-					exact_main_region_Operating_Processing_Locked_Processing_Waiting();
+					exseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go();
+					exact_main_region_Operating_Processing_Shunting_Processing_Waiting();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop();
-					exact_main_region_Operating_Processing_Locked_Processing_Waiting();
+					exseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop();
+					exact_main_region_Operating_Processing_Shunting_Processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Idle :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Idle();
 					break;
 				}
 			default:
@@ -1054,27 +1404,27 @@ namespace mrw
 		}
 
 		/* Default exit sequence for region Processing */
-		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked_Processing()
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Shunting_Processing()
 		{
 			/* Default exit sequence for region Processing */
-			/* Handle exit of all possible states (of mrw.statechart.SignalControllerStatechart.main_region.Operating.Processing.Locked.Processing) at position 0... */
+			/* Handle exit of all possible states (of mrw.statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting.Processing) at position 0... */
 			switch (stateConfVector[ 0 ])
 			{
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Idle :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Idle :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Idle();
+					exseq_main_region_Operating_Processing_Shunting_Processing_Idle();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go();
-					exact_main_region_Operating_Processing_Locked_Processing_Waiting();
+					exseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go();
+					exact_main_region_Operating_Processing_Shunting_Processing_Waiting();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop();
-					exact_main_region_Operating_Processing_Locked_Processing_Waiting();
+					exseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop();
+					exact_main_region_Operating_Processing_Shunting_Processing_Waiting();
 					break;
 				}
 			default:
@@ -1083,26 +1433,171 @@ namespace mrw
 			}
 		}
 
-		/* Default exit sequence for region Turn processing */
-		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing()
+		/* Default exit sequence for region Shunt processing */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing()
 		{
-			/* Default exit sequence for region Turn processing */
-			/* Handle exit of all possible states (of mrw.statechart.SignalControllerStatechart.main_region.Operating.Processing.Locked.Processing.Waiting.Turn_processing) at position 0... */
+			/* Default exit sequence for region Shunt processing */
+			/* Handle exit of all possible states (of mrw.statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting.Processing.Waiting.Shunt_processing) at position 0... */
 			switch (stateConfVector[ 0 ])
 			{
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go();
+					exseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop :
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop();
+					exseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop();
 					break;
 				}
 			default:
 				/* do nothing */
 				break;
+			}
+		}
+
+		/* Default exit sequence for region Tour processing */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Tour_State_Tour_processing()
+		{
+			/* Default exit sequence for region Tour processing */
+			/* Handle exit of all possible states (of mrw.statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Tour_processing) at position 0... */
+			switch (stateConfVector[ 0 ])
+			{
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay();
+					exact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Idle :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Idle();
+					break;
+				}
+			default:
+				/* do nothing */
+				break;
+			}
+		}
+
+		/* Default exit sequence for region Tour waiting */
+		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting()
+		{
+			/* Default exit sequence for region Tour waiting */
+			/* Handle exit of all possible states (of mrw.statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Tour_processing.Waiting.Tour_waiting) at position 0... */
+			switch (stateConfVector[ 0 ])
+			{
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant();
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay :
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay();
+					break;
+				}
+			default:
+				/* do nothing */
+				break;
+			}
+		}
+
+		/* The reactions of state null. */
+		void SignalControllerStatechart::react_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting__choice_0()
+		{
+			/* The reactions of state null. */
+			if (ifaceOperationCallback->hasMainSignal())
+			{
+				enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay_default();
+			}
+			else
+			{
+				exseq_main_region_Operating_Processing_Tour_State();
+				enseq_main_region_Operating_Processing_Unlocked_default();
+				main_region_Operating_react(0);
+			}
+		}
+
+		/* The reactions of state null. */
+		void SignalControllerStatechart::react_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting__choice_1()
+		{
+			/* The reactions of state null. */
+			if (ifaceOperationCallback->hasMainSignal())
+			{
+				enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main_default();
+			}
+			else
+			{
+				enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant_default();
+			}
+		}
+
+		/* The reactions of state null. */
+		void SignalControllerStatechart::react_main_region_Operating_Processing__choice_0()
+		{
+			/* The reactions of state null. */
+			if (ifaceOperationCallback->isTour())
+			{
+				enact_main_region_Operating_Processing_Tour_State();
+				enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+				enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main_default();
+			}
+			else
+			{
+				enact_main_region_Operating_Processing_Shunting();
+				enact_main_region_Operating_Processing_Shunting_Processing_Waiting();
+				enseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go_default();
 			}
 		}
 
@@ -1125,16 +1620,6 @@ namespace mrw
 		{
 			/* Default react sequence for initial entry  */
 			enseq_main_region_Operating_Processing_Unlocked_default();
-		}
-
-		/* Default react sequence for initial entry  */
-		void SignalControllerStatechart::react_main_region_Operating_Processing_Locked_Processing__entry_Default()
-		{
-			/* Default react sequence for initial entry  */
-			turnMain_value = SignalControllerStatechart::GO;
-			emit turnMain(turnMain_value);
-			enact_main_region_Operating_Processing_Locked_Processing_Waiting();
-			enseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go_default();
 		}
 
 		/* The reactions of state null. */
@@ -1379,9 +1864,7 @@ namespace mrw
 				if (enable_raised)
 				{
 					exseq_main_region_Operating_Processing_Unlocked();
-					ifaceOperationCallback->prepare();
-					enseq_main_region_Operating_Processing_Locked_default();
-					main_region_Operating_react(0);
+					react_main_region_Operating_Processing__choice_0();
 					transitioned_after = 0;
 				}
 			}
@@ -1393,9 +1876,9 @@ namespace mrw
 			return transitioned_after;
 		}
 
-		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Locked_react(const sc::integer transitioned_before)
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Shunting_react(const sc::integer transitioned_before)
 		{
-			/* The reactions of state Locked. */
+			/* The reactions of state Shunting. */
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
@@ -1408,7 +1891,7 @@ namespace mrw
 			return transitioned_after;
 		}
 
-		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Locked_Processing_Idle_react(const sc::integer transitioned_before)
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Shunting_Processing_Idle_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Idle. */
 			sc::integer transitioned_after = transitioned_before;
@@ -1416,24 +1899,22 @@ namespace mrw
 			{
 				if (disable_raised)
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Idle();
-					turnMain_value = SignalControllerStatechart::STOP;
-					emit turnMain(turnMain_value);
-					enact_main_region_Operating_Processing_Locked_Processing_Waiting();
-					enseq_main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop_default();
-					main_region_Operating_Processing_Locked_react(0);
+					exseq_main_region_Operating_Processing_Shunting_Processing_Idle();
+					enact_main_region_Operating_Processing_Shunting_Processing_Waiting();
+					enseq_main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop_default();
+					main_region_Operating_Processing_Shunting_react(0);
 					transitioned_after = 0;
 				}
 			}
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
 			{
-				transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
+				transitioned_after = main_region_Operating_Processing_Shunting_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Locked_Processing_Waiting_react(const sc::integer transitioned_before)
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Shunting_Processing_Waiting_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Waiting. */
 			sc::integer transitioned_after = transitioned_before;
@@ -1451,42 +1932,42 @@ namespace mrw
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
 			{
-				transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
+				transitioned_after = main_region_Operating_Processing_Shunting_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go_react(const sc::integer transitioned_before)
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Go. */
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (completedMain_raised)
+				if (completedShunt_raised)
 				{
-					exseq_main_region_Operating_Processing_Locked_Processing_Waiting();
-					enseq_main_region_Operating_Processing_Locked_Processing_Idle_default();
-					main_region_Operating_Processing_Locked_react(0);
+					exseq_main_region_Operating_Processing_Shunting_Processing_Waiting();
+					enseq_main_region_Operating_Processing_Shunting_Processing_Idle_default();
+					main_region_Operating_Processing_Shunting_react(0);
 					transitioned_after = 0;
 				}
 			}
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
 			{
-				transitioned_after = main_region_Operating_Processing_Locked_Processing_Waiting_react(transitioned_before);
+				transitioned_after = main_region_Operating_Processing_Shunting_Processing_Waiting_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop_react(const sc::integer transitioned_before)
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Stop. */
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (completedMain_raised)
+				if (completedShunt_raised)
 				{
-					exseq_main_region_Operating_Processing_Locked();
+					exseq_main_region_Operating_Processing_Shunting();
 					enseq_main_region_Operating_Processing_Unlocked_default();
 					main_region_Operating_react(0);
 					transitioned_after = 0;
@@ -1495,7 +1976,200 @@ namespace mrw
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
 			{
-				transitioned_after = main_region_Operating_Processing_Locked_Processing_Waiting_react(transitioned_before);
+				transitioned_after = main_region_Operating_Processing_Shunting_Processing_Waiting_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Tour_State_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Tour State. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Waiting. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (timeEvents[2])
+				{
+					exseq_main_region_Operating();
+					timeEvents[2] = false;
+					enseq_main_region_Failed_default();
+					react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Tour_State_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Go Main. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (completedMain_raised)
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main();
+					enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant_default();
+					main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Stop Main. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (completedMain_raised)
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main();
+					enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant_default();
+					main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Go Distant. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (completedDistant_raised)
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Idle_default();
+					main_region_Operating_Processing_Tour_State_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Stop Distant. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (completedDistant_raised)
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant();
+					react_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting__choice_0();
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Off Distant. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (completedDistant_raised)
+				{
+					exseq_main_region_Operating_Processing_Tour_State();
+					enseq_main_region_Operating_Processing_Unlocked_default();
+					main_region_Operating_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Delay. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (timeEvents[3])
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay();
+					timeEvents[3] = false;
+					enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant_default();
+					main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Tour_State_Tour_processing_Idle_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Idle. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (disable_raised)
+				{
+					exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Idle();
+					enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
+					react_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting__choice_1();
+					main_region_Operating_Processing_Tour_State_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Tour_State_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -1535,6 +2209,8 @@ namespace mrw
 			completedShunt_raised = false;
 			timeEvents[0] = false;
 			timeEvents[1] = false;
+			timeEvents[2] = false;
+			timeEvents[3] = false;
 		}
 
 		void SignalControllerStatechart::microStep()
@@ -1563,19 +2239,54 @@ namespace mrw
 					transitioned = main_region_Operating_Processing_Unlocked_react(transitioned);
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Idle :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Idle :
 				{
-					transitioned = main_region_Operating_Processing_Locked_Processing_Idle_react(transitioned);
+					transitioned = main_region_Operating_Processing_Shunting_Processing_Idle_react(transitioned);
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go :
 				{
-					transitioned = main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Go_react(transitioned);
+					transitioned = main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Go_react(transitioned);
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop :
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop :
 				{
-					transitioned = main_region_Operating_Processing_Locked_Processing_Waiting_Turn_processing_Stop_react(transitioned);
+					transitioned = main_region_Operating_Processing_Shunting_Processing_Waiting_Shunt_processing_Stop_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main :
+				{
+					transitioned = main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Main_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main :
+				{
+					transitioned = main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant :
+				{
+					transitioned = main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Distant_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant :
+				{
+					transitioned = main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant :
+				{
+					transitioned = main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay :
+				{
+					transitioned = main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Tour_processing_Idle :
+				{
+					transitioned = main_region_Operating_Processing_Tour_State_Tour_processing_Idle_react(transitioned);
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Failed :
@@ -1647,7 +2358,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((((((start_raised) || (clear_raised)) || (started_raised)) || (failed_raised)) || (enable_raised)) || (disable_raised)) || (completedMain_raised)) || (completedDistant_raised)) || (completedShunt_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while (((((((((((((start_raised) || (clear_raised)) || (started_raised)) || (failed_raised)) || (enable_raised)) || (disable_raised)) || (completedMain_raised)) || (completedDistant_raised)) || (completedShunt_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3]));
 			isExecuting = false;
 		}
 

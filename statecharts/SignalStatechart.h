@@ -144,11 +144,13 @@ namespace mrw
 			public:
 				virtual ~OperationCallback() = 0;
 
+				virtual void idle() = 0;
+
 				virtual bool hasSignal() = 0;
 
-				virtual void send(sc::integer symbol) = 0;
+				virtual void prepare(sc::integer symbol) = 0;
 
-				virtual void idle() = 0;
+				virtual void send() = 0;
 
 
 			};

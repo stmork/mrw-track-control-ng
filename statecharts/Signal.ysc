@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_QGdCkHYlEe2MmckDHhInew" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;var signalState : integer = STOP&#xA;var sectionState : integer = FREE&#xA;&#xA;const FREE : integer = 0&#xA;const SHUNTING : integer = 1&#xA;const TOUR : integer = 2&#xA;&#xA;const OFF : integer = -1&#xA;const STOP : integer = 0&#xA;const GO : integer = 1&#xA;const SLOW : integer = 2&#xA;&#xA;in event turn : integer&#xA;in event queued&#xA;in event ok&#xA;in event fail&#xA;in event clear&#xA;&#xA;out event completed&#xA;out event failed&#xA;&#xA;operation hasSignal() : boolean&#xA;operation send(symbol : integer)&#xA;operation idle()&#xA;" namespace="mrw.statechart" name="SignalStatechart">
+  <sgraph:Statechart xmi:id="_QGdCkHYlEe2MmckDHhInew" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var timeout : integer = 2000&#xA;var signalState : integer = STOP&#xA;var sectionState : integer = FREE&#xA;&#xA;const FREE : integer = 0&#xA;const SHUNTING : integer = 1&#xA;const TOUR : integer = 2&#xA;&#xA;const OFF : integer = -1&#xA;const STOP : integer = 0&#xA;const GO : integer = 1&#xA;const SLOW : integer = 2&#xA;&#xA;in event turn : integer&#xA;in event queued&#xA;in event ok&#xA;in event fail&#xA;in event clear&#xA;&#xA;out event completed&#xA;out event failed&#xA;&#xA;operation idle()&#xA;operation hasSignal() : boolean&#xA;operation prepare(symbol : integer)&#xA;operation send()&#xA;" namespace="mrw.statechart" name="SignalStatechart">
     <regions xmi:id="_QGe3y3YlEe2MmckDHhInew" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_QGe3zHYlEe2MmckDHhInew">
         <outgoingTransitions xmi:id="_QGe3zXYlEe2MmckDHhInew" target="_hvYysHYmEe2G25aaLPHasA"/>
@@ -8,13 +8,13 @@
       <vertices xsi:type="sgraph:State" xmi:id="_hvYysHYmEe2G25aaLPHasA" specification="entry / idle" name="Idle" incomingTransitions="_QGe3zXYlEe2MmckDHhInew _PXvnkHbXEe20X8bIRmamkA _glsE0HbYEe20X8bIRmamkA __8L7sHbaEe20X8bIRmamkA">
         <outgoingTransitions xmi:id="__JJ5EHbWEe20X8bIRmamkA" specification="turn" target="_5sMkUHbaEe20X8bIRmamkA"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_Un7HwHbXEe20X8bIRmamkA" name="Turning" incomingTransitions="_63pDwHbaEe20X8bIRmamkA">
-        <outgoingTransitions xmi:id="_PXvnkHbXEe20X8bIRmamkA" specification="ok / signalState = valueof(turn) ; raise completed" target="_hvYysHYmEe2G25aaLPHasA"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_Un7HwHbXEe20X8bIRmamkA" specification="entry / prepare(signalState)" name="Turning" incomingTransitions="_63pDwHbaEe20X8bIRmamkA">
+        <outgoingTransitions xmi:id="_PXvnkHbXEe20X8bIRmamkA" specification="ok / raise completed" target="_hvYysHYmEe2G25aaLPHasA"/>
         <outgoingTransitions xmi:id="_p72YYHbXEe20X8bIRmamkA" specification="fail" target="_nv43IHbXEe20X8bIRmamkA"/>
         <outgoingTransitions xmi:id="_vkwhoHbXEe20X8bIRmamkA" specification="after timeout ms" target="_nv43IHbXEe20X8bIRmamkA"/>
         <regions xmi:id="_Un8V4nbXEe20X8bIRmamkA" name="Turn processing">
           <vertices xsi:type="sgraph:State" xmi:id="_1si0sHbWEe20X8bIRmamkA" name="Pending" incomingTransitions="_-QAqkHbWEe20X8bIRmamkA"/>
-          <vertices xsi:type="sgraph:State" xmi:id="_tegcQHbWEe20X8bIRmamkA" specification="entry / send(valueof(turn))" name="Turn" incomingTransitions="_ohuuUHbYEe20X8bIRmamkA">
+          <vertices xsi:type="sgraph:State" xmi:id="_tegcQHbWEe20X8bIRmamkA" specification="entry / send" name="Turn" incomingTransitions="_ohuuUHbYEe20X8bIRmamkA">
             <outgoingTransitions xmi:id="_-QAqkHbWEe20X8bIRmamkA" specification="queued" target="_1si0sHbWEe20X8bIRmamkA"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_n_HwgHbYEe20X8bIRmamkA">
@@ -22,11 +22,11 @@
           </vertices>
         </regions>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_nv43IHbXEe20X8bIRmamkA" specification="entry / signalState = OFF; send(signalState)&#xA;entry / raise failed" name="Fail" incomingTransitions="_p72YYHbXEe20X8bIRmamkA _vkwhoHbXEe20X8bIRmamkA">
+      <vertices xsi:type="sgraph:State" xmi:id="_nv43IHbXEe20X8bIRmamkA" specification="entry / signalState = OFF; prepare(signalState); send&#xA;entry / raise failed" name="Fail" incomingTransitions="_p72YYHbXEe20X8bIRmamkA _vkwhoHbXEe20X8bIRmamkA">
         <outgoingTransitions xmi:id="_glsE0HbYEe20X8bIRmamkA" specification="clear" target="_hvYysHYmEe2G25aaLPHasA"/>
       </vertices>
       <vertices xsi:type="sgraph:Choice" xmi:id="_5sMkUHbaEe20X8bIRmamkA" incomingTransitions="__JJ5EHbWEe20X8bIRmamkA">
-        <outgoingTransitions xmi:id="_63pDwHbaEe20X8bIRmamkA" specification="[hasSignal]" target="_Un7HwHbXEe20X8bIRmamkA"/>
+        <outgoingTransitions xmi:id="_63pDwHbaEe20X8bIRmamkA" specification="[hasSignal] / signalState = valueof(turn)" target="_Un7HwHbXEe20X8bIRmamkA"/>
         <outgoingTransitions xmi:id="__8L7sHbaEe20X8bIRmamkA" specification="/ raise completed" target="_hvYysHYmEe2G25aaLPHasA"/>
       </vertices>
     </regions>
@@ -154,7 +154,7 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_nv5eMXbXEe20X8bIRmamkA" fontName="Verdana" fillColor="15720400" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_nv5eMnbXEe20X8bIRmamkA"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_nv6sUXbXEe20X8bIRmamkA" name="isHorizontal" booleanValue="true"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_nv5eM3bXEe20X8bIRmamkA" x="723" y="141" width="305" height="538"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_nv5eM3bXEe20X8bIRmamkA" x="723" y="141" width="347" height="538"/>
         </children>
         <children xsi:type="notation:Shape" xmi:id="_5sNLYHbaEe20X8bIRmamkA" type="Choice" element="_5sMkUHbaEe20X8bIRmamkA" fontName="Verdana" lineColor="4210752">
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_5sNLYXbaEe20X8bIRmamkA" x="237" y="233" width="32" height="32"/>
@@ -223,7 +223,7 @@
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_p72_cXbXEe20X8bIRmamkA" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_p72_c3bXEe20X8bIRmamkA" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_p72_cnbXEe20X8bIRmamkA" points="[57, 246, -241, 313]$[195, 246, -103, 313]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_p72_cnbXEe20X8bIRmamkA" points="[57, 246, -255, 313]$[195, 246, -117, 313]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_p74NkHbXEe20X8bIRmamkA" id="(0.8689655172413793,0.04113110539845758)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_p74NkXbXEe20X8bIRmamkA" id="(0.3393939393939394,0.24535315985130113)"/>
     </edges>
@@ -234,7 +234,7 @@
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_vkxvwXbXEe20X8bIRmamkA" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_vkxvw3bXEe20X8bIRmamkA" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_vkxvwnbXEe20X8bIRmamkA" points="[53, 98, -163, 120]$[191, 98, -25, 120]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_vkxvwnbXEe20X8bIRmamkA" points="[53, 98, -167, 120]$[191, 98, -29, 120]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_vky94HbXEe20X8bIRmamkA" id="(0.8781609195402299,0.017994858611825194)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_vky94XbXEe20X8bIRmamkA" id="(0.08484848484848485,0.31226765799256506)"/>
     </edges>
@@ -245,7 +245,7 @@
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_gluhEXbYEe20X8bIRmamkA" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_gluhE3bYEe20X8bIRmamkA" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_gluhEnbYEe20X8bIRmamkA" points="[-179, 7, 151, -18]$[-318, 7, 12, -18]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_gluhEnbYEe20X8bIRmamkA" points="[-203, 7, 151, -18]$[-342, 7, 12, -18]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_glvIIHbYEe20X8bIRmamkA" id="(0.5878787878787879,0.024163568773234202)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_glvIIXbYEe20X8bIRmamkA" id="(0.9722863741339491,0.7169811320754716)"/>
     </edges>
