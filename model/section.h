@@ -105,7 +105,7 @@ namespace mrw::model
 		bool valid() const;
 
 		const QString & name() const override;
-		bool            unlockable() const override;
+		bool            notUnlockable() const override;
 		QString         toString() const override;
 		virtual QString key() const override;
 

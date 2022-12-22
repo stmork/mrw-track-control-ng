@@ -170,7 +170,7 @@ bool Section::occupation() const
 	return occupied;
 }
 
-bool Section::unlockable() const
+bool Section::notUnlockable() const
 {
 	std::vector<RailPart *> reserved_parts;
 

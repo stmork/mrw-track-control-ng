@@ -203,7 +203,7 @@ bool TestRouting::empty() const
 {
 	return std::all_of(parts.begin(), parts.end(), [&](RailPart * part)
 	{
-		return !part->reserved() && part->section()->unlockable();
+		return !part->reserved() && part->section()->notUnlockable();
 	});
 }
 
@@ -217,9 +217,9 @@ void TestRouting::testIsUnlockable(
 
 		if (device != nullptr)
 		{
-			QCOMPARE(device->unlockable(), is_unlockable);
+			QCOMPARE(device->notUnlockable(), is_unlockable);
 		}
-		QCOMPARE(part->section()->unlockable(),   is_unlockable);
+		QCOMPARE(part->section()->notUnlockable(),   is_unlockable);
 		QCOMPARE(part->section()->anyReserved(), !is_unlockable);
 	}
 }

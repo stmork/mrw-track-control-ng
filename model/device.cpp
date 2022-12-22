@@ -53,7 +53,7 @@ void Device::setLock(const Device::LockState input)
 	}
 	if (lock_state != input)
 	{
-		if ((input == LockState::UNLOCKED) && !unlockable())
+		if ((input == LockState::UNLOCKED) && !notUnlockable())
 		{
 			qWarning().noquote() << String::red("Not unlockable!") << name();
 		}

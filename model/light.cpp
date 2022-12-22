@@ -30,7 +30,7 @@ Controller * Light::controller() const
 	return light_controller;
 }
 
-bool Light::unlockable() const
+bool Light::notUnlockable() const
 {
 	return true;
 }

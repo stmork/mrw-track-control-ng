@@ -43,7 +43,7 @@ namespace mrw::model
 
 		const QString & name()       const override;
 		Controller   *  controller() const override;
-		bool            unlockable() const override;
+		bool            notUnlockable() const override;
 	};
 }
 

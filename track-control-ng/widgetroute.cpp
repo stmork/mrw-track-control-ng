@@ -559,6 +559,7 @@ void WidgetRoute::turnSignals()
 	{
 		SignalControllerProxy * controller = *it;
 
+		// TODO: How to handle locking? We have to lock main signals but distant signals are locked elsewehere.
 //		if (controller->isUnlocked())
 		{
 			qDebug().noquote() << *controller;

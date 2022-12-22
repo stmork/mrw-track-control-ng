@@ -504,7 +504,7 @@ void TestModel::testSection(Region * region, Section * section)
 	QVERIFY(section->unitNo() != 0);
 	QVERIFY(section->controller() != nullptr);
 	QVERIFY(section->key().size() > 0);
-	QVERIFY(section->unlockable());
+	QVERIFY(section->notUnlockable());
 	QCOMPARE(section->region(), region);
 
 	SectionModule * module = section->module();
@@ -519,13 +519,13 @@ void TestModel::testSection(Region * region, Section * section)
 		testAssemblyPart(section, part);
 	}
 	section->setOccupation(true);
-	QVERIFY(section->unlockable());
+	QVERIFY(section->notUnlockable());
 	QVERIFY(section->isFree());
 	QCOMPARE(section->state(), SectionState::OCCUPIED);
 	section->setState(SectionState::TOUR);
-	QVERIFY(!section->unlockable());
+	QVERIFY(!section->notUnlockable());
 	section->free();
-	QVERIFY(section->unlockable());
+	QVERIFY(section->notUnlockable());
 	QVERIFY(section->isFree());
 
 	QVERIFY_EXCEPTION_THROWN(section->assemblyPart(rail_count), std::out_of_range);
@@ -568,11 +568,11 @@ void TestModel::testAssemblyPart(Section * section, AssemblyPart * part)
 		QVERIFY2(rail->valid(), name.c_str());
 		QVERIFY2(rail->key().contains(rail->partName()), name.c_str());
 
-		QVERIFY(section->unlockable());
+		QVERIFY(section->notUnlockable());
 		rail->reserve();
-		QVERIFY(!section->unlockable());
+		QVERIFY(!section->notUnlockable());
 		rail->reserve(false);
-		QVERIFY(section->unlockable());
+		QVERIFY(section->notUnlockable());
 	}
 
 	if (device != nullptr)

@@ -40,7 +40,7 @@ Command AbstractSwitch::commandState() const
 	throw std::invalid_argument("Command state not allowed!");
 }
 
-bool AbstractSwitch::unlockable() const
+bool AbstractSwitch::notUnlockable() const
 {
 	return !reserved();
 }
