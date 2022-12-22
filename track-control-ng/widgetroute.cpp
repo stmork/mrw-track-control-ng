@@ -555,8 +555,10 @@ void WidgetRoute::turnSignals()
 	size_t                               count = 0;
 
 	collectSignalController(controllers);
-	for (SignalControllerProxy * controller : controllers)
+	for (auto it = controllers.rbegin(); it != controllers.rend(); ++it)
 	{
+		SignalControllerProxy * controller = *it;
+
 //		if (controller->isUnlocked())
 		{
 			qDebug().noquote() << *controller;

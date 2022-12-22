@@ -75,6 +75,7 @@ namespace mrw::ctrl
 		void start(
 			mrw::model::Signal * input,
 			mrw::model::Signal * combined);
+		SignalControllerProxy * mainController() const;
 		void setMainController(SignalControllerProxy * signal);
 
 		void prepare(mrw::model::Signal::Symbol symbol) override;

@@ -294,11 +294,6 @@ bool SignalControllerProxy::hasShunting() const
 	return shunt_signal != nullptr;
 }
 
-Signal::Symbol SignalControllerProxy::main() const
-{
-	return static_cast<Signal::Symbol>(statechart_main.getSignalState());
-}
-
 RailPart * SignalControllerProxy::railPart() const
 {
 	return signal_rail;
@@ -309,9 +304,18 @@ Section * SignalControllerProxy::section() const
 	return signal_section;
 }
 
+Signal::Symbol SignalControllerProxy::main() const
+{
+	return static_cast<Signal::Symbol>(statechart_main.getSignalState());
+}
+
 Signal::Symbol SignalControllerProxy::distant() const
 {
-	return static_cast<Signal::Symbol>(statechart_distant.getSignalState());
+	SignalControllerProxy * main_controller = statechart_distant.mainController();
+
+	return main_controller != nullptr ?
+		main_controller->main() :
+		static_cast<Signal::Symbol>(statechart_distant.getSignalState());
 }
 
 Signal::Symbol SignalControllerProxy::shunt() const

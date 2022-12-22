@@ -53,7 +53,7 @@ bool SignalProxy::hasSignal()
 	return signal != nullptr;
 }
 
-void mrw::ctrl::SignalProxy::send()
+void SignalProxy::send()
 {
 	__METHOD__;
 
@@ -65,7 +65,7 @@ void mrw::ctrl::SignalProxy::send()
 	ControllerRegistry::can()->write(message);
 }
 
-void mrw::ctrl::SignalProxy::prepare(sc::integer symbol)
+void SignalProxy::prepare(sc::integer symbol)
 {
 	prepare(static_cast<Signal::Symbol>(symbol));
 }
@@ -192,6 +192,11 @@ void DistantProxy::prepare(Signal::Symbol symbol)
 		state = SIGNAL_OFF;
 	}
 	signal->setState(state);
+}
+
+SignalControllerProxy * DistantProxy::mainController() const
+{
+	return main_controller;
 }
 
 void DistantProxy::setMainController(SignalControllerProxy * proxy)

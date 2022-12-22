@@ -73,6 +73,7 @@ void Signal::setState(const SignalState new_state)
 {
 	// TODO: Respect locking!
 	signal_state = new_state;
+	qDebug().noquote() << toString();
 }
 
 void Signal::link()

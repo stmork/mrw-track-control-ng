@@ -75,11 +75,12 @@ namespace mrw
 				main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant,
 				main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay,
 				main_region_Operating_Processing_Tour_State_Tour_processing_Idle,
+				main_region_Operating_Processing_Wait_for_Tour,
 				main_region_Failed
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 26;
+			static const sc::integer numStates = 27;
 			static const sc::integer scvi_main_region_Wait_for_Start = 0;
 			static const sc::integer scvi_main_region_Init = 0;
 			static const sc::integer scvi_main_region_Init_Init_process_Turning = 0;
@@ -105,6 +106,7 @@ namespace mrw
 			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Idle = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Wait_for_Tour = 0;
 			static const sc::integer scvi_main_region_Failed = 0;
 
 			/*! Enumeration of all events which are consumed. */
@@ -142,6 +144,12 @@ namespace mrw
 
 			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
 			void setTimeout(sc::integer timeout);
+
+			/*! Gets the value of the variable 'delay' that is defined in the default interface scope. */
+			sc::integer getDelay() const;
+
+			/*! Sets the value of the variable 'delay' that is defined in the default interface scope. */
+			void setDelay(sc::integer delay);
 
 			/*! Gets the value of the variable 'symbol' that is defined in the default interface scope. */
 			sc::integer getSymbol() const;
@@ -299,6 +307,7 @@ namespace mrw
 			SignalControllerStatechart & operator=(const SignalControllerStatechart &);
 
 			sc::integer timeout;
+			sc::integer delay;
 			sc::integer symbol;
 			static const sc::integer OFF;
 			static const sc::integer STOP;
@@ -370,6 +379,7 @@ namespace mrw
 			void enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Idle_default();
+			void enseq_main_region_Operating_Processing_Wait_for_Tour_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_default();
 			void enseq_main_region_Init_Init_process_default();
@@ -399,6 +409,7 @@ namespace mrw
 			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant();
 			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay();
 			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Idle();
+			void exseq_main_region_Operating_Processing_Wait_for_Tour();
 			void exseq_main_region_Failed();
 			void exseq_main_region();
 			void exseq_main_region_Init_Init_process();
@@ -413,6 +424,7 @@ namespace mrw
 			void react_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting__choice_0();
 			void react_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting__choice_1();
 			void react_main_region_Operating_Processing__choice_0();
+			void react_main_region_Operating_Processing__choice_1();
 			void react_main_region__entry_Default();
 			void react_main_region_Init_Init_process__entry_Default();
 			void react_main_region_Operating_Processing__entry_Default();
@@ -444,6 +456,7 @@ namespace mrw
 			sc::integer main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Tour_State_Tour_processing_Idle_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Wait_for_Tour_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
