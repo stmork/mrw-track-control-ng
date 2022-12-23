@@ -18,7 +18,7 @@
         <outgoingTransitions xmi:id="_k40OkHpUEe2_ZOj2sFqWdg" specification="start" target="_r089enCUEe2rVLYxSRawxw"/>
         <regions xmi:id="_HN0I8HF6Ee2peawiS1OZpw" name="operating">
           <vertices xsi:type="sgraph:State" xmi:id="_KiWb0HF6Ee2peawiS1OZpw" specification="entry / lock(false)" name="Unlocked" incomingTransitions="_Ng53oHF6Ee2peawiS1OZpw _0xsEgHF8Ee2peawiS1OZpw _dXLlEHGAEe2peawiS1OZpw">
-            <outgoingTransitions xmi:id="_tnjD8HF6Ee2peawiS1OZpw" specification="turn / inc()" target="_NQW7kHG5Ee2peawiS1OZpw"/>
+            <outgoingTransitions xmi:id="_tnjD8HF6Ee2peawiS1OZpw" specification="turn" target="_NQW7kHG5Ee2peawiS1OZpw"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_M_qy0HF6Ee2peawiS1OZpw">
             <outgoingTransitions xmi:id="_Ng53oHF6Ee2peawiS1OZpw" target="_KiWb0HF6Ee2peawiS1OZpw"/>
@@ -31,7 +31,7 @@
             <outgoingTransitions xmi:id="_dXLlEHGAEe2peawiS1OZpw" specification="unlock" target="_KiWb0HF6Ee2peawiS1OZpw"/>
             <outgoingTransitions xmi:id="_z_sAAHGhEe2peawiS1OZpw" specification="response" target="_T17jEHCVEe2rVLYxSRawxw"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_iR4E0HF9Ee2peawiS1OZpw" specification="entry / pending&#xA;exit / dec" name="Turning">
+          <vertices xsi:type="sgraph:State" xmi:id="_iR4E0HF9Ee2peawiS1OZpw" specification="entry / inc; pending&#xA;exit / dec" name="Turning">
             <outgoingTransitions xmi:id="_SN_m8HF8Ee2peawiS1OZpw" specification="after timeout ms" target="_T17jEHCVEe2rVLYxSRawxw"/>
             <outgoingTransitions xmi:id="_CfsFkHF9Ee2peawiS1OZpw" specification="leftResponse" target="_sAf7sHF8Ee2peawiS1OZpw"/>
             <outgoingTransitions xmi:id="_EuvXEHF9Ee2peawiS1OZpw" specification="rightResponse" target="_sAf7sHF8Ee2peawiS1OZpw"/>

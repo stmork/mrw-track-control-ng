@@ -357,6 +357,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Turning'. */
 			timerService->setTimer(this, 1, timeout, false);
+			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}
 
@@ -833,7 +834,6 @@ namespace mrw
 				if (turn_raised)
 				{
 					exseq_main_region_Operating_operating_Unlocked();
-					ifaceOperationCallback->inc();
 					enact_main_region_Operating_operating_Turning();
 					react_main_region_Operating_operating_Turning_Turning_process__choice_0();
 					main_region_Operating_react(0);
