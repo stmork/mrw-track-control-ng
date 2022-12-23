@@ -106,20 +106,8 @@ void WidgetRoute::prepare(
 		}
 	}
 
-	prepareSections(last_section, last_part);
 	prepareTrack(last_section, last_part);
 	prepareSignals(last_section, last_part);
-}
-
-void WidgetRoute::prepareSections(Section * last_section, RailPart * last_part)
-{
-	Q_UNUSED(last_section);
-	Q_UNUSED(last_part);
-
-	bool last_on = isLastSectionEnded();
-	auto it      = sections.rbegin();
-
-	last = last_on ? nullptr : *it;
 }
 
 void WidgetRoute::prepareTrack(
@@ -222,18 +210,16 @@ void WidgetRoute::left()
 
 void WidgetRoute::tryUnblock()
 {
-	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
-	Section      *      section    = controller->section();
+	SectionController   *   controller  = dynamic_cast<SectionController *>(QObject::sender());
+	Section        *        section     = controller->section();
+	SignalControllerProxy * sig_ctrl    = getSignalController(section);
+	Signal         *        main_signal = sig_ctrl != nullptr ? sig_ctrl->mainSignal() : nullptr;
 
-	main_signals.clear();
-	collectMainSignals(section);
-	Q_ASSERT(main_signals.size() <= 1);
-
-	if (main_signals.size() > 0)
+	if (main_signal != nullptr)
 	{
 		Section * first;
 
-		qDebug().noquote() << "Try unblock: until >>>" << *main_signals.front();
+		qDebug().noquote() << "Try unblock: until >>>" << *main_signal;
 		do
 		{
 			first = sections.front();
@@ -417,25 +403,6 @@ void WidgetRoute::collectSignalController(std::vector<SignalControllerProxy *> &
 			controllers.push_back(controller);
 		}
 	}
-}
-
-void WidgetRoute::collectMainSignals()
-{
-	main_signals.clear();
-	for (Section * section : sections)
-	{
-		collectMainSignals(section);
-	}
-}
-
-void WidgetRoute::collectMainSignals(Section * section)
-{
-	section->parts<Signal>(main_signals, [&](const Signal * signal)
-	{
-		return
-			(signal->direction() == direction) &&
-			((signal->type() & Signal::MAIN_SIGNAL) != 0);
-	});
 }
 
 void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & controllers) const

@@ -144,6 +144,11 @@ void Route::prepare(
 			vector[i]->setState(vector[i - 1], vector[i + 1]);
 		}
 	}
+
+	const bool last_on = isLastSectionEnded();
+	const auto it      = sections.rbegin();
+
+	last = last_on ? nullptr : *it;
 	dump();
 }
 

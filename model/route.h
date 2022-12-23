@@ -54,6 +54,8 @@ namespace mrw::model
 	protected:
 		RailTrack               track;
 		SectionTrack            sections;
+		Section        *        last          = nullptr;
+		Section        *        first_section = nullptr;
 		const SectionState      state = FREE;
 		const bool              direction;
 		const bool              auto_unblock = false;
@@ -65,7 +67,6 @@ namespace mrw::model
 	private:
 		bool         qualified(RailPart * rail) const;
 
-		Section        *        first_section = nullptr;
 	};
 }
 

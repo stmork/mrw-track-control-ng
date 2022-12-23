@@ -28,8 +28,6 @@ private:
 	QListWidgetItem list_item;
 
 	mrw::statechart::RouteStatechart   statechart;
-	std::vector<mrw::model::Signal *>  main_signals;
-	mrw::model::Section        *       last = nullptr;
 
 public:
 	static const int        USER_ROLE = Qt::UserRole + 1;
@@ -65,9 +63,6 @@ private:
 
 	void collectSignalController(
 		std::vector<mrw::ctrl::SignalControllerProxy *> & controllers) const;
-	void collectMainSignals();
-	void collectMainSignals(
-		mrw::model::Section               *               section);
 	void collectSectionControllers(
 		std::vector<mrw::ctrl::SectionController *>   &   controllers) const;
 
@@ -76,9 +71,6 @@ private:
 	void finalize();
 	size_t countAllocatedSections();
 
-	void prepareSections(
-		mrw::model::Section  * last_section,
-		mrw::model::RailPart * last_part);
 	void prepareTrack(
 		mrw::model::Section  * last_section,
 		mrw::model::RailPart * last_part);
