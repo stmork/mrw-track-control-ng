@@ -56,7 +56,7 @@
         <outgoingTransitions xmi:id="_tLhEkHpUEe2_ZOj2sFqWdg" specification="start" target="_FbTpKHbWEe2lmIyQXv_DxQ"/>
         <regions xmi:id="_7QbRAHb3Ee20X8bIRmamkA" name="Processing">
           <vertices xsi:type="sgraph:State" xmi:id="__pCQAHb3Ee20X8bIRmamkA" specification="entry / lock(false)" name="Unlocked" incomingTransitions="_BkSbwHb4Ee20X8bIRmamkA _mV5iYHb4Ee20X8bIRmamkA _S6fJsIIIEe2pKZIV5OcIFQ _tlIAUIIIEe2pKZIV5OcIFQ">
-            <outgoingTransitions xmi:id="_F7N_wHb4Ee20X8bIRmamkA" specification="enable" target="_Fd9-YIIBEe2hKYEMnABcSg"/>
+            <outgoingTransitions xmi:id="_F7N_wHb4Ee20X8bIRmamkA" specification="enable [symbol == GO]" target="_Fd9-YIIBEe2hKYEMnABcSg"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_A6DzAHb4Ee20X8bIRmamkA">
             <outgoingTransitions xmi:id="_BkSbwHb4Ee20X8bIRmamkA" specification="" target="__pCQAHb3Ee20X8bIRmamkA"/>
@@ -130,7 +130,7 @@
             </regions>
           </vertices>
           <vertices xsi:type="sgraph:Choice" xmi:id="_Fd9-YIIBEe2hKYEMnABcSg" incomingTransitions="_F7N_wHb4Ee20X8bIRmamkA">
-            <outgoingTransitions xmi:id="_SDdfQIIBEe2hKYEMnABcSg" specification="[isTour &amp;&amp; (symbol == GO)]" target="_LcU5UIKoEe20TOmHPSZBNw"/>
+            <outgoingTransitions xmi:id="_SDdfQIIBEe2hKYEMnABcSg" specification="[isTour]" target="_LcU5UIKoEe20TOmHPSZBNw"/>
             <outgoingTransitions xmi:id="_TdP8sIIBEe2hKYEMnABcSg" specification="" target="_PqTUMHb4Ee20X8bIRmamkA"/>
           </vertices>
         </regions>

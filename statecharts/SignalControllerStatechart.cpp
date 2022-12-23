@@ -1724,7 +1724,7 @@ namespace mrw
 		void SignalControllerStatechart::react_main_region_Operating_Processing__choice_0()
 		{
 			/* The reactions of state null. */
-			if ((ifaceOperationCallback->isTour()) && (((symbol) == (SignalControllerStatechart::GO))))
+			if (ifaceOperationCallback->isTour())
 			{
 				enact_main_region_Operating_Processing_Tour_State();
 				enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
@@ -1998,7 +1998,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (enable_raised)
+				if (((enable_raised)) && (((symbol) == (SignalControllerStatechart::GO))))
 				{
 					exseq_main_region_Operating_Processing_Unlocked();
 					react_main_region_Operating_Processing__choice_0();
