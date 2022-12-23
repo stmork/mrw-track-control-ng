@@ -143,7 +143,9 @@ void SignalWidget::paint(QPainter & painter)
 	}
 	else
 	{
-		draw_distant = has_distant;
+		draw_distant =
+			has_distant && (base_controller->state() != SectionState::SHUNTING);
+
 		if (draw_distant)
 		{
 			mast_color = distant_color;
