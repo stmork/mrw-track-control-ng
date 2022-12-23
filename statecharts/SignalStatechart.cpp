@@ -22,7 +22,6 @@ namespace mrw
 		const sc::integer SignalStatechart::OFF = -1;
 		const sc::integer SignalStatechart::STOP = 0;
 		const sc::integer SignalStatechart::GO = 1;
-		const sc::integer SignalStatechart::SLOW = 2;
 
 
 
@@ -223,7 +222,7 @@ namespace mrw
 				}
 			case mrw::statechart::SignalStatechart::State::main_region_Turning :
 				{
-					return  (stateConfVector[scvi_main_region_Turning] >= mrw::statechart::SignalStatechart::State::main_region_Turning && stateConfVector[scvi_main_region_Turning] <= mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Turn);
+					return  (stateConfVector[scvi_main_region_Turning] >= mrw::statechart::SignalStatechart::State::main_region_Turning && stateConfVector[scvi_main_region_Turning] <= mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Send);
 					break;
 				}
 			case mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Pending :
@@ -231,9 +230,9 @@ namespace mrw
 					return  (stateConfVector[scvi_main_region_Turning_Turn_processing_Pending] == mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Pending);
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Send :
 				{
-					return  (stateConfVector[scvi_main_region_Turning_Turn_processing_Turn] == mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Turn);
+					return  (stateConfVector[scvi_main_region_Turning_Turn_processing_Send] == mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Send);
 					break;
 				}
 			case mrw::statechart::SignalStatechart::State::main_region_Fail :
@@ -310,11 +309,6 @@ namespace mrw
 			return GO;
 		}
 
-		sc::integer SignalStatechart::getSLOW()
-		{
-			return SLOW;
-		}
-
 		void SignalStatechart::setOperationCallback(OperationCallback * operationCallback)
 		{
 			ifaceOperationCallback = operationCallback;
@@ -329,10 +323,10 @@ namespace mrw
 			ifaceOperationCallback->prepare(signalState);
 		}
 
-		/* Entry action for state 'Turn'. */
-		void SignalStatechart::enact_main_region_Turning_Turn_processing_Turn()
+		/* Entry action for state 'Send'. */
+		void SignalStatechart::enact_main_region_Turning_Turn_processing_Send()
 		{
-			/* Entry action for state 'Turn'. */
+			/* Entry action for state 'Send'. */
 			ifaceOperationCallback->send();
 		}
 
@@ -375,12 +369,12 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Pending;
 		}
 
-		/* 'default' enter sequence for state Turn */
-		void SignalStatechart::enseq_main_region_Turning_Turn_processing_Turn_default()
+		/* 'default' enter sequence for state Send */
+		void SignalStatechart::enseq_main_region_Turning_Turn_processing_Send_default()
 		{
-			/* 'default' enter sequence for state Turn */
-			enact_main_region_Turning_Turn_processing_Turn();
-			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Turn;
+			/* 'default' enter sequence for state Send */
+			enact_main_region_Turning_Turn_processing_Send();
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Send;
 		}
 
 		/* 'default' enter sequence for state Fail */
@@ -427,10 +421,10 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
 		}
 
-		/* Default exit sequence for state Turn */
-		void SignalStatechart::exseq_main_region_Turning_Turn_processing_Turn()
+		/* Default exit sequence for state Send */
+		void SignalStatechart::exseq_main_region_Turning_Turn_processing_Send()
 		{
-			/* Default exit sequence for state Turn */
+			/* Default exit sequence for state Send */
 			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
 		}
 
@@ -459,9 +453,9 @@ namespace mrw
 					exact_main_region_Turning();
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Send :
 				{
-					exseq_main_region_Turning_Turn_processing_Turn();
+					exseq_main_region_Turning_Turn_processing_Send();
 					exact_main_region_Turning();
 					break;
 				}
@@ -488,9 +482,9 @@ namespace mrw
 					exseq_main_region_Turning_Turn_processing_Pending();
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Send :
 				{
-					exseq_main_region_Turning_Turn_processing_Turn();
+					exseq_main_region_Turning_Turn_processing_Send();
 					break;
 				}
 			default:
@@ -526,7 +520,7 @@ namespace mrw
 		void SignalStatechart::react_main_region_Turning_Turn_processing__entry_Default()
 		{
 			/* Default react sequence for initial entry  */
-			enseq_main_region_Turning_Turn_processing_Turn_default();
+			enseq_main_region_Turning_Turn_processing_Send_default();
 		}
 
 		sc::integer SignalStatechart::react(const sc::integer transitioned_before)
@@ -615,15 +609,15 @@ namespace mrw
 			return transitioned_after;
 		}
 
-		sc::integer SignalStatechart::main_region_Turning_Turn_processing_Turn_react(const sc::integer transitioned_before)
+		sc::integer SignalStatechart::main_region_Turning_Turn_processing_Send_react(const sc::integer transitioned_before)
 		{
-			/* The reactions of state Turn. */
+			/* The reactions of state Send. */
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
 				if (queued_raised)
 				{
-					exseq_main_region_Turning_Turn_processing_Turn();
+					exseq_main_region_Turning_Turn_processing_Send();
 					enseq_main_region_Turning_Turn_processing_Pending_default();
 					main_region_Turning_react(0);
 					transitioned_after = 0;
@@ -683,9 +677,9 @@ namespace mrw
 					main_region_Turning_Turn_processing_Pending_react(-1);
 					break;
 				}
-			case mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Turn :
+			case mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Send :
 				{
-					main_region_Turning_Turn_processing_Turn_react(-1);
+					main_region_Turning_Turn_processing_Send_react(-1);
 					break;
 				}
 			case mrw::statechart::SignalStatechart::State::main_region_Fail :

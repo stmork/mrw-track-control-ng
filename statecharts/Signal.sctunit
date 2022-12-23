@@ -5,10 +5,159 @@
 
 testclass Signal for statechart mrw.^statechart.SignalStatechart
 {
+	operation failState()
+	{
+		assert active (mrw.^statechart.SignalStatechart.main_region.Fail)
+		assert signalState == OFF
+		assert called prepare
+		assert called send
+		assert failed
+	}
+
 	@Test
 	operation idle()
 	{
 		enter
+		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
+	}
+
+	@Test
+	operation turnWithoutSignal()
+	{
+		// Given
+		idle()
+		mock hasSignal returns (false)
+
+		// When
+		raise turn : GO
+
+		// Then
+		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
+		assert signalState == STOP
+	}
+
+	@Test
+	operation turning()
+	{
+		// Given
+		idle()
+		mock hasSignal returns (true)
+
+		// When
+		raise turn : GO
+
+		// Then
+		assert active (mrw.^statechart.SignalStatechart.main_region.Turning)
+		assert active (mrw.^statechart.SignalStatechart.main_region.Turning.Turn_processing.Send)
+		assert signalState == GO
+		assert called prepare
+		assert called send
+	}
+
+	@Test
+	operation pending()
+	{
+		// Given
+		turning()
+
+		// When
+		raise queued
+
+		// Then
+		assert active (mrw.^statechart.SignalStatechart.main_region.Turning)
+		assert active (mrw.^statechart.SignalStatechart.main_region.Turning.Turn_processing.Pending)
+	}
+
+	@Test
+	operation turnCompleted()
+	{
+		// Given
+		turning()
+
+		// When
+		raise ok
+
+		// Then
+		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
+		assert completed
+	}
+
+	@Test
+	operation turnCompletedAfterPending()
+	{
+		// Given
+		pending()
+
+		// When
+		raise ok
+
+		// Then
+		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
+		assert completed
+	}
+
+	@Test
+	operation failSending()
+	{
+		// Given
+		turning()
+
+		// When
+		raise fail
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation failPending()
+	{
+		// Given
+		pending()
+
+		// When
+		raise fail
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation timeoutSending()
+	{
+		// Given
+		turning()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation timeoutPending()
+	{
+		// Given
+		pending()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation clearing()
+	{
+		// Given
+		failSending
+
+		// When
+		raise clear
+
+		// Then
 		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
 	}
 }

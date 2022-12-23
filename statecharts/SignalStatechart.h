@@ -53,7 +53,7 @@ namespace mrw
 				main_region_Idle,
 				main_region_Turning,
 				main_region_Turning_Turn_processing_Pending,
-				main_region_Turning_Turn_processing_Turn,
+				main_region_Turning_Turn_processing_Send,
 				main_region_Fail
 			};
 
@@ -62,7 +62,7 @@ namespace mrw
 			static const sc::integer scvi_main_region_Idle = 0;
 			static const sc::integer scvi_main_region_Turning = 0;
 			static const sc::integer scvi_main_region_Turning_Turn_processing_Pending = 0;
-			static const sc::integer scvi_main_region_Turning_Turn_processing_Turn = 0;
+			static const sc::integer scvi_main_region_Turning_Turn_processing_Send = 0;
 			static const sc::integer scvi_main_region_Fail = 0;
 
 			/*! Enumeration of all events which are consumed. */
@@ -134,9 +134,6 @@ namespace mrw
 
 			/*! Gets the value of the variable 'GO' that is defined in the default interface scope. */
 			static sc::integer getGO() ;
-
-			/*! Gets the value of the variable 'SLOW' that is defined in the default interface scope. */
-			static sc::integer getSLOW() ;
 
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
@@ -253,7 +250,6 @@ namespace mrw
 			static const sc::integer OFF;
 			static const sc::integer STOP;
 			static const sc::integer GO;
-			static const sc::integer SLOW;
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
@@ -275,20 +271,20 @@ namespace mrw
 			// prototypes of all internal functions
 
 			void enact_main_region_Turning();
-			void enact_main_region_Turning_Turn_processing_Turn();
+			void enact_main_region_Turning_Turn_processing_Send();
 			void enact_main_region_Fail();
 			void exact_main_region_Turning();
 			void enseq_main_region_Idle_default();
 			void enseq_main_region_Turning_default();
 			void enseq_main_region_Turning_Turn_processing_Pending_default();
-			void enseq_main_region_Turning_Turn_processing_Turn_default();
+			void enseq_main_region_Turning_Turn_processing_Send_default();
 			void enseq_main_region_Fail_default();
 			void enseq_main_region_default();
 			void enseq_main_region_Turning_Turn_processing_default();
 			void exseq_main_region_Idle();
 			void exseq_main_region_Turning();
 			void exseq_main_region_Turning_Turn_processing_Pending();
-			void exseq_main_region_Turning_Turn_processing_Turn();
+			void exseq_main_region_Turning_Turn_processing_Send();
 			void exseq_main_region_Fail();
 			void exseq_main_region();
 			void exseq_main_region_Turning_Turn_processing();
@@ -299,7 +295,7 @@ namespace mrw
 			sc::integer main_region_Idle_react(const sc::integer transitioned_before);
 			sc::integer main_region_Turning_react(const sc::integer transitioned_before);
 			sc::integer main_region_Turning_Turn_processing_Pending_react(const sc::integer transitioned_before);
-			sc::integer main_region_Turning_Turn_processing_Turn_react(const sc::integer transitioned_before);
+			sc::integer main_region_Turning_Turn_processing_Send_react(const sc::integer transitioned_before);
 			sc::integer main_region_Fail_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
