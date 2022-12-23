@@ -16,9 +16,6 @@ namespace mrw
 	namespace statechart
 	{
 
-		const sc::integer SignalStatechart::FREE = 0;
-		const sc::integer SignalStatechart::SHUNTING = 1;
-		const sc::integer SignalStatechart::TOUR = 2;
 		const sc::integer SignalStatechart::OFF = -1;
 		const sc::integer SignalStatechart::STOP = 0;
 		const sc::integer SignalStatechart::GO = 1;
@@ -29,7 +26,6 @@ namespace mrw
 			QObject(parent),
 			timeout(2000),
 			signalState(SignalStatechart::STOP),
-			sectionState(SignalStatechart::FREE),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
@@ -267,31 +263,6 @@ namespace mrw
 		void SignalStatechart::setSignalState(sc::integer signalState_)
 		{
 			this->signalState = signalState_;
-		}
-
-		sc::integer SignalStatechart::getSectionState() const
-		{
-			return sectionState;
-		}
-
-		void SignalStatechart::setSectionState(sc::integer sectionState_)
-		{
-			this->sectionState = sectionState_;
-		}
-
-		sc::integer SignalStatechart::getFREE()
-		{
-			return FREE;
-		}
-
-		sc::integer SignalStatechart::getSHUNTING()
-		{
-			return SHUNTING;
-		}
-
-		sc::integer SignalStatechart::getTOUR()
-		{
-			return TOUR;
 		}
 
 		sc::integer SignalStatechart::getOFF()

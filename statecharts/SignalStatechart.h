@@ -111,21 +111,6 @@ namespace mrw
 			/*! Sets the value of the variable 'signalState' that is defined in the default interface scope. */
 			void setSignalState(sc::integer signalState);
 
-			/*! Gets the value of the variable 'sectionState' that is defined in the default interface scope. */
-			sc::integer getSectionState() const;
-
-			/*! Sets the value of the variable 'sectionState' that is defined in the default interface scope. */
-			void setSectionState(sc::integer sectionState);
-
-			/*! Gets the value of the variable 'FREE' that is defined in the default interface scope. */
-			static sc::integer getFREE() ;
-
-			/*! Gets the value of the variable 'SHUNTING' that is defined in the default interface scope. */
-			static sc::integer getSHUNTING() ;
-
-			/*! Gets the value of the variable 'TOUR' that is defined in the default interface scope. */
-			static sc::integer getTOUR() ;
-
 			/*! Gets the value of the variable 'OFF' that is defined in the default interface scope. */
 			static sc::integer getOFF() ;
 
@@ -243,10 +228,6 @@ namespace mrw
 
 			sc::integer timeout;
 			sc::integer signalState;
-			sc::integer sectionState;
-			static const sc::integer FREE;
-			static const sc::integer SHUNTING;
-			static const sc::integer TOUR;
 			static const sc::integer OFF;
 			static const sc::integer STOP;
 			static const sc::integer GO;
