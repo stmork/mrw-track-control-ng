@@ -23,6 +23,8 @@ namespace mrw::ctrl
 
 	protected:
 
+		static const size_t SLOW_CURVED_LIMIT = 2;
+
 		mrw::model::Signal * signal = nullptr;
 
 	public:

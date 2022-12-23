@@ -68,13 +68,13 @@ bool Route::append(RailPart * target)
 
 	qDebug().noquote() << "---------->" << *target;
 
-	Section  * last_section = sections.back();
-	RailPart * last_part    = track.back();
-	const bool success = append(last_part, target);
+	Section  * last_valid_section = sections.back();
+	RailPart * last_valid_part    = track.back();
+	const bool success            = append(last_valid_part, target);
 
 	if (success)
 	{
-		prepare(last_section, last_part);
+		prepare(last_valid_section, last_valid_part);
 	}
 	return success;
 }
@@ -108,14 +108,14 @@ bool Route::append(RailPart * rail, RailPart * target)
 }
 
 void Route::prepare(
-	Section  * last_section,
-	RailPart * last_part)
+	Section  * last_valid_section,
+	RailPart * last_valid_part)
 {
 	__METHOD__;
 
 	// TODO: Use variables.
-	Q_UNUSED(last_section);
-	Q_UNUSED(last_part);
+	Q_UNUSED(last_valid_section);
+	Q_UNUSED(last_valid_part);
 
 	std::vector<RailPart *> vector(track.begin(), track.end());
 	Section        *        prev = nullptr;
@@ -148,7 +148,7 @@ void Route::prepare(
 	const bool last_on = isLastSectionEnded();
 	const auto it      = sections.rbegin();
 
-	last = last_on ? nullptr : *it;
+	last_section = last_on ? nullptr : *it;
 	dump();
 }
 

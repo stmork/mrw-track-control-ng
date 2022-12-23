@@ -135,7 +135,7 @@ void MainProxy::prepare(Signal::Symbol symbol)
 		break;
 
 	case Signal::Symbol::GO:
-		state = curved_count < 2 ? SIGNAL_HP1 : SIGNAL_HP2;
+		state = curved_count < SLOW_CURVED_LIMIT ? SIGNAL_HP1 : SIGNAL_HP2;
 		break;
 	}
 	signal->setState(state);

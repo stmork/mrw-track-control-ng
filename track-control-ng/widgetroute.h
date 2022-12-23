@@ -44,8 +44,8 @@ public:
 	// Implementation of mrw::model::Route
 	virtual void dump() const override;
 	virtual void prepare(
-		mrw::model::Section  * last_section,
-		mrw::model::RailPart * last_part) override;
+		mrw::model::Section  * last_valid_section,
+		mrw::model::RailPart * last_valid_part) override;
 
 signals:
 	void turn();
@@ -72,11 +72,11 @@ private:
 	size_t countAllocatedSections();
 
 	void prepareTrack(
-		mrw::model::Section  * last_section,
-		mrw::model::RailPart * last_part);
+		mrw::model::Section  * last_valid_section,
+		mrw::model::RailPart * last_valid_part);
 	void prepareSignals(
-		mrw::model::Section  * last_section,
-		mrw::model::RailPart * last_part);
+		mrw::model::Section  * last_valid_section,
+		mrw::model::RailPart * last_valid_part);
 
 	// Implementation of RouteStatemachine::OperationCallback
 	virtual void reset() override;

@@ -54,15 +54,15 @@ namespace mrw::model
 	protected:
 		RailTrack               track;
 		SectionTrack            sections;
-		Section        *        last          = nullptr;
+		Section        *        last_section  = nullptr;
 		Section        *        first_section = nullptr;
 		const SectionState      state = FREE;
 		const bool              direction;
 		const bool              auto_unblock = false;
 
 		virtual void prepare(
-			Section  * last_section,
-			RailPart * last_part);
+			Section  * last_valid_section,
+			RailPart * last_valid_part);
 
 	private:
 		bool         qualified(RailPart * rail) const;

@@ -262,7 +262,9 @@ SectionState SignalControllerProxy::state() const
 {
 	if (railPart()->reserved())
 	{
-		return section()->occupation() ? SectionState::OCCUPIED : section()->state();
+		return section()->occupation() ?
+			SectionState::OCCUPIED :
+			section()->state();
 	}
 	else
 	{
@@ -272,7 +274,9 @@ SectionState SignalControllerProxy::state() const
 		}
 		else
 		{
-			return section()->occupation() ? SectionState::OCCUPIED : section()->state();
+			return section()->occupation() ?
+				SectionState::OCCUPIED :
+				section()->state();
 		}
 	}
 }

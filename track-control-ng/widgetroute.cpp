@@ -74,12 +74,12 @@ WidgetRoute::~WidgetRoute()
 *************************************************************************/
 
 void WidgetRoute::prepare(
-	Section  * last_section,
-	RailPart * last_part)
+	Section  * last_valid_section,
+	RailPart * last_valid_part)
 {
 	std::vector<SectionController *> controllers;
 
-	Route::prepare(last_section, last_part);
+	Route::prepare(last_valid_section, last_valid_part);
 
 	collectSectionControllers(controllers);
 	for (SectionController * controller : controllers)
@@ -106,17 +106,17 @@ void WidgetRoute::prepare(
 		}
 	}
 
-	prepareTrack(last_section, last_part);
-	prepareSignals(last_section, last_part);
+	prepareTrack(last_valid_section, last_valid_part);
+	prepareSignals(last_valid_section, last_valid_part);
 }
 
 void WidgetRoute::prepareTrack(
-	Section  * last_section,
-	RailPart * last_part)
+	Section  * last_valid_section,
+	RailPart * last_valid_part)
 {
-	Q_UNUSED(last_section);
+	Q_UNUSED(last_valid_section);
 
-	for (auto it = track.rbegin(); *it != last_part; ++it)
+	for (auto it = track.rbegin(); *it != last_valid_part; ++it)
 	{
 		RailPart    *    part      = *it;
 		Device     *     device    = dynamic_cast<Device *>(part);
@@ -146,10 +146,12 @@ void WidgetRoute::prepareTrack(
 	}
 }
 
-void WidgetRoute::prepareSignals(Section * last_section, RailPart * last_part)
+void WidgetRoute::prepareSignals(
+	Section  * last_valid_section,
+	RailPart * last_valid_part)
 {
-	Q_UNUSED(last_section);
-	Q_UNUSED(last_part);
+	Q_UNUSED(last_valid_section);
+	Q_UNUSED(last_valid_part);
 
 	SignalControllerProxy * main_controller = nullptr;
 	size_t                  curved          = 0;
@@ -184,7 +186,9 @@ void WidgetRoute::prepareSignals(Section * last_section, RailPart * last_part)
 			}
 
 			controller->setState(state);
-			controller->setSymbol(section != this->last ? Symbol::GO : Symbol::STOP);
+			controller->setSymbol(section != this->last_section ?
+				Symbol::GO :
+				Symbol::STOP);
 		}
 	}
 }
@@ -311,7 +315,7 @@ void WidgetRoute::finalize()
 {
 	if (countAllocatedSections() == 1)
 	{
-		if (sections.back() == last)
+		if (sections.back() == last_section)
 		{
 			qDebug().noquote() << "Finalize:   " << String::bold("Finished!");
 
@@ -486,7 +490,7 @@ void WidgetRoute::activateSections()
 
 		if (it == sections.rbegin())
 		{
-			controller->enable(last == nullptr);
+			controller->enable(last_section == nullptr);
 		}
 		else
 		{
