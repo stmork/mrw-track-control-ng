@@ -64,8 +64,8 @@ namespace mrw
 				main_region_Operating_Processing_Shunting_State,
 				main_region_Operating_Processing_Shunting_State_Processing_Idle,
 				main_region_Operating_Processing_Shunting_State_Processing_Waiting,
-				main_region_Operating_Processing_Shunting_State_Processing_Waiting_r1_Go,
-				main_region_Operating_Processing_Shunting_State_Processing_Waiting_r1_Stop,
+				main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Go,
+				main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Stop,
 				main_region_Operating_Processing_Tour_State,
 				main_region_Operating_Processing_Tour_State_Tour_processing_Waiting,
 				main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main,
@@ -99,8 +99,8 @@ namespace mrw
 			static const sc::integer scvi_main_region_Operating_Processing_Shunting_State = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Idle = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Waiting = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Waiting_r1_Go = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Waiting_r1_Stop = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Go = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Stop = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Tour_State = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main = 0;
@@ -347,8 +347,8 @@ namespace mrw
 			void enact_main_region_Operating_Processing_Unlocked();
 			void enact_main_region_Operating_Processing_Shunting_State();
 			void enact_main_region_Operating_Processing_Shunting_State_Processing_Waiting();
-			void enact_main_region_Operating_Processing_Shunting_State_Processing_Waiting_r1_Go();
-			void enact_main_region_Operating_Processing_Shunting_State_Processing_Waiting_r1_Stop();
+			void enact_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Go();
+			void enact_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Stop();
 			void enact_main_region_Operating_Processing_Tour_State();
 			void enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting();
 			void enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main();
@@ -380,8 +380,8 @@ namespace mrw
 			void enseq_main_region_Operating_default();
 			void enseq_main_region_Operating_Processing_Unlocked_default();
 			void enseq_main_region_Operating_Processing_Shunting_State_Processing_Idle_default();
-			void enseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_r1_Go_default();
-			void enseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_r1_Stop_default();
+			void enseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Go_default();
+			void enseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Stop_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant_default();
@@ -411,8 +411,8 @@ namespace mrw
 			void exseq_main_region_Operating_Processing_Shunting_State();
 			void exseq_main_region_Operating_Processing_Shunting_State_Processing_Idle();
 			void exseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting();
-			void exseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_r1_Go();
-			void exseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_r1_Stop();
+			void exseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Go();
+			void exseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Stop();
 			void exseq_main_region_Operating_Processing_Tour_State();
 			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main();
 			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant();
@@ -434,7 +434,7 @@ namespace mrw
 			void exseq_main_region_Init_Init_process_Turning_shunt();
 			void exseq_main_region_Operating_Processing();
 			void exseq_main_region_Operating_Processing_Shunting_State_Processing();
-			void exseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_r1();
+			void exseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting();
 			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing();
 			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting();
 			void exseq_main_region_Operating_Processing_Pending_Pending();
@@ -462,8 +462,8 @@ namespace mrw
 			sc::integer main_region_Operating_Processing_Shunting_State_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Shunting_State_Processing_Idle_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Shunting_State_Processing_Waiting_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_Processing_Shunting_State_Processing_Waiting_r1_Go_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_Processing_Shunting_State_Processing_Waiting_r1_Stop_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Go_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Stop_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Tour_State_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Main_react(const sc::integer transitioned_before);
