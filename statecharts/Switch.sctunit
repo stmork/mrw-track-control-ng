@@ -29,6 +29,7 @@ testclass Switch for statechart mrw.^statechart.SwitchStatechart
 	operation waitForStart()
 	{
 		enter
+		assert is_active
 		assert active (mrw.^statechart.SwitchStatechart.main_region.Wait_for_Start)
 	}
 

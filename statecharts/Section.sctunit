@@ -34,6 +34,7 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	operation waitForStart()
 	{
 		enter
+		assert is_active
 		assert active (mrw.^statechart.SectionStatechart.main_region.Wait_for_Start)
 	}
 

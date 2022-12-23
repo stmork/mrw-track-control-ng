@@ -12,10 +12,18 @@ testclass SignalController for statechart mrw.^statechart.SignalControllerStatec
 		assert called fail
 	}
 
+	operation unlockedState()
+	{
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Unlocked)
+		assert called lock
+	}
+
 	@Test
 	operation waitForStart()
 	{
 		enter
+		assert is_active
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Wait_for_Start)
 	}
 
@@ -34,6 +42,9 @@ testclass SignalController for statechart mrw.^statechart.SignalControllerStatec
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.main.Turn)
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.distant.Turn)
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.shunt.Turn)
+		assert turnMain
+		assert turnDistant
+		assert turnShunt
 		assert called inc
 	}
 
@@ -60,6 +71,649 @@ testclass SignalController for statechart mrw.^statechart.SignalControllerStatec
 		proceed timeout ms
 
 		// Then
+		failState()
+	}
+
+	@Test
+	operation operationalVersion1()
+	{
+		// Given
+		initial()
+		mock hasMainSignal returns (false)
+		mock isMainAndShunt returns (true)
+
+		// When
+		raise completedMain
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.main.Completed)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.distant.Turn)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.shunt.Turn)
+
+		// When
+		raise completedDistant
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.main.Completed)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.distant.Completed)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.shunt.Turn)
+
+		// When
+		raise completedShunt
+
+		// Then
+		assert started
+		unlockedState()
+	}
+
+	@Test
+	operation operationalVersion2()
+	{
+		// Given
+		initial()
+		mock hasMainSignal returns (true)
+		mock isMainAndShunt returns (false)
+
+		// When
+		raise completedMain
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.main.Completed)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.distant.Turn)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.shunt.Turn)
+
+		// When
+		raise completedDistant
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.main.Completed)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.distant.Completed)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.shunt.Turn)
+
+		// When
+		raise completedShunt
+
+		// Then
+		assert started
+		unlockedState()
+	}
+
+	@Test
+	operation operational()
+	{
+		// Given
+		initial()
+		mock hasMainSignal  returns (false)
+		mock isMainAndShunt returns (false)
+
+		// When
+		raise completedMain
+		raise completedDistant
+		raise completedShunt
+
+		// Then
+		assert started
+		unlockedState()
+	}
+
+	@Test
+	operation operationalCombined()
+	{
+		// Given
+		initial()
+		mock hasMainSignal  returns (true)
+		mock isMainAndShunt returns (true)
+
+		// When
+		raise completedMain
+		raise completedDistant
+		raise completedShunt
+
+		// Then
+		unlockedState()
+	}
+
+	@Test
+	operation restart()
+	{
+		// Given
+		operational
+
+		// When
+		raise start
+
+		// Then
+		initial
+	}
+
+	@Test
+	operation clearing()
+	{
+		// Given
+		failAfterStart()
+
+		// When
+		raise clear
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Wait_for_Start)
+
+		// When
+		raise start
+
+		// Then
+		initial
+	}
+
+	@Test
+	operation pendingTour()
+	{
+		// Given
+		symbol = GO
+		operational()
+		mock isTour returns (true)
+
+		// When
+		raise enable
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending.Pending.Go_Shunt)
+		assert turnShunt
+		assert valueof(turnShunt) == GO
+		assert called inc
+		assert called pending
+
+		// When
+		raise completedShunt
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending.Pending.Go_Main)
+		assert turnMain
+		assert valueof(turnMain) == GO
+
+		// When
+		raise completedMain
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending.Pending.Go_Distant)
+		assert turnDistant
+		assert valueof(turnDistant) == GO
+	}
+
+	@Test
+	operation pendingTourCombined()
+	{
+		// Given
+		symbol = GO
+		operationalCombined()
+		mock isTour returns (true)
+
+		// When
+		raise enable
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending.Pending.Go_Main)
+		assert turnMain
+		assert valueof(turnMain) == GO
+		assert called inc
+		assert called pending
+
+		// When
+		raise completedMain
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending.Pending.Go_Distant)
+		assert turnDistant
+		assert valueof(turnDistant) == GO
+	}
+
+	@Test
+	operation pendingShunting()
+	{
+		// Given
+		symbol = GO
+		operational()
+		mock isTour returns (false)
+
+		// When
+		raise enable
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending.Pending.Go_Shunting)
+		assert turnShunt
+		assert valueof(turnShunt) == GO
+		assert called inc
+		assert called pending
+	}
+
+	@Test
+	operation tourLocked()
+	{
+		// Given
+		pendingTour()
+
+		// When
+		raise completedDistant
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Idle)
+		assert called dec
+		assert called lock
+	}
+
+	@Test
+	operation tourLockedCombined()
+	{
+		// Given
+		pendingTourCombined
+
+		// When
+		raise completedDistant
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Idle)
+		assert called dec
+		assert called lock
+	}
+
+	@Test
+	operation shuntingLocked()
+	{
+		// Given
+		pendingShunting()
+
+		// When
+		raise completedShunt
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting_State)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting_State.Processing.Idle)
+		assert called dec
+		assert called lock
+	}
+
+	@Test
+	operation disableTour()
+	{
+		// Given
+		tourLocked()
+
+		// When
+		raise disable
+
+		// Then
+		assert symbol == STOP
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Stop_Shunt)
+		assert called inc
+
+		// When
+		raise completedShunt
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Stop_Main)
+		assert turnMain
+		assert valueof(turnMain) == STOP
+
+		// When
+		raise completedMain
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Stop_Distant)
+		assert turnDistant
+		assert valueof(turnMain) == STOP
+
+		// When
+		raise completedDistant
+
+		// Then
+		assert called dec
+		unlockedState()
+	}
+
+	@Test
+	operation disableTourCombined()
+	{
+		// Given
+		tourLockedCombined()
+
+		// When
+		raise disable
+
+		// Then
+		assert symbol == STOP
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Stop_Main)
+		assert called inc
+		assert turnMain
+		assert valueof(turnMain) == STOP
+
+		// When
+		raise completedMain
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Stop_Distant)
+		assert turnDistant
+		assert valueof(turnMain) == STOP
+
+		// When
+		raise completedDistant
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Delay)
+
+		// When
+		proceed delay ms
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Off_Distant)
+		assert turnDistant
+		assert valueof(turnDistant) == OFF
+
+		// When
+		raise completedDistant
+
+		// Then
+		assert called dec
+		unlockedState()
+	}
+
+	@Test
+	operation disableShunting()
+	{
+		// Given
+		shuntingLocked()
+
+		// When
+		raise disable
+
+		// Then
+		assert symbol == STOP
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting_State.Processing.Waiting)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting_State.Processing.Waiting.Shunt_waiting.Stop)
+		assert called inc
+		assert turnShunt
+		assert valueof(turnShunt) == STOP
+
+		// When
+		raise completedShunt
+
+		// Then
+		assert called dec
+		unlockedState
+	}
+
+	@Test
+	operation extendTour()
+	{
+		// Given
+		tourLocked()
+
+		// When
+		raise enable
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Extend)
+
+		// When
+		raise completedDistant
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Idle)
+		assert called dec
+	}
+
+	@Test
+	operation extendTourCombined()
+	{
+		// Given
+		tourLockedCombined()
+
+		// When
+		raise enable
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Extend)
+
+		// When
+		raise completedDistant
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Idle)
+		assert called dec
+	}
+
+	@Test
+	operation extendShunting()
+	{
+		// Given
+		shuntingLocked()
+
+		// When
+		raise enable
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting_State.Processing.Waiting.Shunt_waiting.Extend)
+
+		// When
+		raise completedShunt
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting_State)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting_State.Processing.Idle)
+		assert called dec
+	}
+
+	@Test
+	operation failedTour()
+	{
+		// Given
+		tourLocked()
+
+		// When
+		raise failed
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation failedTourCombined()
+	{
+		// Given
+		tourLockedCombined()
+
+		// When
+		raise failed
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation failedShunting()
+	{
+		// Given
+		shuntingLocked()
+
+		// When
+		raise failed
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation timeoutPendingToTour()
+	{
+		// Given
+		pendingTour
+
+		// When
+		proceed timeout ms
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation timeoutPendingToTourCombined()
+	{
+		// Given
+		pendingTourCombined
+
+		// When
+		proceed timeout ms
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation timeoutPendingToShunting()
+	{
+		// Given
+		pendingShunting
+
+		// When
+		proceed timeout ms
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation timeoutWaitingEnableTour()
+	{
+		// Given
+		tourLocked
+
+		// When
+		raise enable
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Extend)
+		assert called inc
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert called dec
+		failState()
+	}
+
+	@Test
+	operation timeoutWaitingEnableTourCombined()
+	{
+		// Given
+		tourLockedCombined
+
+		// When
+		raise enable
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Extend)
+		assert called inc
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert called dec
+		failState()
+	}
+
+	@Test
+	operation timeoutWaitingEnableShunting()
+	{
+		// Given
+		shuntingLocked
+
+		// When
+		raise enable
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting_State.Processing.Waiting.Shunt_waiting.Extend)
+		assert called inc
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert called dec
+		failState()
+	}
+
+	@Test
+	operation timeoutWaitingDisableTour()
+	{
+		// Given
+		tourLocked
+
+		// When
+		raise disable
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Stop_Shunt)
+		assert called inc
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert called dec
+		failState()
+	}
+
+	@Test
+	operation timeoutWaitingDisableTourCombined()
+	{
+		// Given
+		tourLockedCombined
+
+		// When
+		raise disable
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Stop_Main)
+		assert called inc
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert called dec
+		failState()
+	}
+
+	@Test
+	operation timeoutWaitingDisableShunting()
+	{
+		// Given
+		shuntingLocked
+
+		// When
+		raise disable
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting_State.Processing.Waiting.Shunt_waiting.Stop)
+		assert called inc
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert called dec
 		failState()
 	}
 }
