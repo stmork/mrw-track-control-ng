@@ -70,7 +70,7 @@ bool Route::append(RailPart * target)
 
 	Section  * last_valid_section = sections.back();
 	RailPart * last_valid_part    = track.back();
-	const bool success            = append(last_valid_part, target);
+	const bool success            = append(last_valid_part, target, findSearchRegion(last_valid_part, target));
 
 	if (success)
 	{
@@ -79,7 +79,23 @@ bool Route::append(RailPart * target)
 	return success;
 }
 
-bool Route::append(RailPart * rail, RailPart * target)
+Region * Route::findSearchRegion(const RailPart * last_valid_part, const RailPart * target) const
+{
+	if (state == SectionState::SHUNTING)
+	{
+		return first_section->region();
+	}
+	else
+	{
+		const Region * start_region  = last_valid_part->section()->region();
+		const Region * target_region = target->section()->region();
+
+		return start_region == target_region ?
+			target->section()->region() : nullptr;
+	};
+}
+
+bool Route::append(RailPart * rail, RailPart * target, Region * search_region)
 {
 	if (rail == target)
 	{
@@ -91,11 +107,11 @@ bool Route::append(RailPart * rail, RailPart * target)
 	{
 		RailPart * next = info;
 
-		if (qualified(next))
+		if (qualified(next, search_region))
 		{
 			next->reserve();
 			track.push_back(next);
-			if (append(next, target))
+			if (append(next, target, search_region))
 			{
 				return true;
 			}
@@ -105,6 +121,51 @@ bool Route::append(RailPart * rail, RailPart * target)
 	}
 
 	return false;
+}
+
+bool Route::qualified(
+	const RailPart * rail,
+	const Region  *  search_region) const
+{
+	const QString   indent(track.size(), ' ');
+	const Section * section = rail->section();
+	const Device  * device  = dynamic_cast<const Device *>(rail);
+
+	qDebug().noquote() << indent << rail->toString();
+
+	if ((device != nullptr) && (device->lock() == Device::LockState::FAIL))
+	{
+		qDebug().noquote() << indent << "      Rail in failed state:";
+		return false;
+	}
+
+	if (rail->reserved())
+	{
+		qDebug().noquote() << indent << "      Rail already reserved:";
+		return false;
+	}
+
+	if (track.size() > 100)
+	{
+		qDebug().noquote() << indent << "      Recursion depth reached.";
+		return false;
+	}
+
+	if (section != first_section)
+	{
+		if ((search_region != nullptr) && (section->region() != search_region))
+		{
+			qDebug().noquote() << indent << "      Shunting left region.";
+			return false;
+		}
+		if (section->occupation())
+		{
+			qDebug().noquote() << indent << "      Section occupied.";
+			return false;
+		}
+	}
+
+	return true;
 }
 
 void Route::prepare(
@@ -152,6 +213,32 @@ void Route::prepare(
 	dump();
 }
 
+bool Route::isLastSectionEnded() const
+{
+	std::unordered_set<Section *> neighbours;
+
+	isLastSectionEnded(neighbours, track.back(), direction);
+	return neighbours.empty();
+}
+
+void Route::isLastSectionEnded(
+	std::unordered_set<Section *> & neighbours,
+	const RailPart         *        part,
+	const bool                      direction)
+{
+	for (RailPart * next : part->advance(direction))
+	{
+		if (next->section() != part->section())
+		{
+			neighbours.emplace(next->section());
+		}
+		else
+		{
+			isLastSectionEnded(neighbours, next, direction);
+		}
+	}
+}
+
 void Route::clear()
 {
 	for (Section * section : sections)
@@ -177,75 +264,5 @@ void Route::dump() const
 	for (Section * section : sections)
 	{
 		qDebug().noquote() << "     " << section->toString();
-	}
-}
-
-bool Route::isLastSectionEnded() const
-{
-	std::unordered_set<Section *> neighbours;
-
-	isLastSectionEnded(neighbours, track.back(), direction);
-	return neighbours.empty();
-}
-
-bool Route::qualified(RailPart * rail) const
-{
-	const QString   indent(track.size(), ' ');
-	const Section * section = rail->section();
-	const Device  * device = dynamic_cast<Device *>(rail);
-
-	qDebug().noquote() << indent << rail->toString();
-
-	if ((device != nullptr) && (device->lock() == Device::LockState::FAIL))
-	{
-		qDebug().noquote() << indent << "      Rail in failed state:";
-		return false;
-	}
-
-	if (rail->reserved())
-	{
-		qDebug().noquote() << indent << "      Rail already reserved:";
-		return false;
-	}
-
-	if (track.size() > 100)
-	{
-		qDebug().noquote() << indent << "      Recursion depth reached.";
-		return false;
-	}
-
-	if (section != first_section)
-	{
-		if ((state == SectionState::SHUNTING) &&
-			(first_section->region() != section->region()))
-		{
-			qDebug().noquote() << indent << "      Shunting left region.";
-			return false;
-		}
-		if (section->occupation())
-		{
-			qDebug().noquote() << indent << "      Section occupied.";
-			return false;
-		}
-	}
-
-	return true;
-}
-
-void Route::isLastSectionEnded(
-	std::unordered_set<Section *> & neighbours,
-	const RailPart         *        part,
-	const bool                      direction)
-{
-	for (RailPart * next : part->advance(direction))
-	{
-		if (next->section() != part->section())
-		{
-			neighbours.emplace(next->section());
-		}
-		else
-		{
-			isLastSectionEnded(neighbours, next, direction);
-		}
 	}
 }

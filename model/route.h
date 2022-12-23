@@ -39,7 +39,10 @@ namespace mrw::model
 		}
 
 		bool append(RailPart * target);
-		bool append(RailPart * rail, RailPart * target);
+		bool append(
+			RailPart * rail,
+			RailPart * target,
+			Region  *  search_region);
 		void clear();
 		bool isLastSectionEnded() const;
 
@@ -65,8 +68,12 @@ namespace mrw::model
 			RailPart * last_valid_part);
 
 	private:
-		bool         qualified(RailPart * rail) const;
-
+		Region   *   findSearchRegion(
+			const RailPart * last_valid_part,
+			const RailPart * target) const;
+		bool         qualified(
+			const RailPart * rail,
+			const Region  *  search_region) const;
 	};
 }
 
