@@ -74,13 +74,14 @@ namespace mrw
 				main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant,
 				main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant,
 				main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay,
+				main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Shunt,
+				main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Shunt,
 				main_region_Operating_Processing_Tour_State_Tour_processing_Idle,
-				main_region_Operating_Processing_Wait_for_Tour,
 				main_region_Failed
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 27;
+			static const sc::integer numStates = 28;
 			static const sc::integer scvi_main_region_Wait_for_Start = 0;
 			static const sc::integer scvi_main_region_Init = 0;
 			static const sc::integer scvi_main_region_Init_Init_process_Turning = 0;
@@ -105,8 +106,9 @@ namespace mrw
 			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Shunt = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Shunt = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Tour_processing_Idle = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Wait_for_Tour = 0;
 			static const sc::integer scvi_main_region_Failed = 0;
 
 			/*! Enumeration of all events which are consumed. */
@@ -166,9 +168,6 @@ namespace mrw
 			/*! Gets the value of the variable 'GO' that is defined in the default interface scope. */
 			static sc::integer getGO() ;
 
-			/*! Gets the value of the variable 'SLOW' that is defined in the default interface scope. */
-			static sc::integer getSLOW() ;
-
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
 			{
@@ -181,7 +180,7 @@ namespace mrw
 
 				virtual bool hasMainSignal() = 0;
 
-				virtual bool isMain() = 0;
+				virtual bool isMainAndShunt() = 0;
 
 				virtual bool isTour() = 0;
 
@@ -309,7 +308,6 @@ namespace mrw
 			static const sc::integer OFF;
 			static const sc::integer STOP;
 			static const sc::integer GO;
-			static const sc::integer SLOW;
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
@@ -350,6 +348,8 @@ namespace mrw
 			void enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant();
 			void enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant();
 			void enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay();
+			void enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Shunt();
+			void enact_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Shunt();
 			void enact_main_region_Failed();
 			void exact_main_region_Init();
 			void exact_main_region_Operating_Processing_Shunting_Processing_Waiting();
@@ -375,8 +375,9 @@ namespace mrw
 			void enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay_default();
+			void enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Shunt_default();
+			void enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Shunt_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Tour_processing_Idle_default();
-			void enseq_main_region_Operating_Processing_Wait_for_Tour_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_default();
 			void enseq_main_region_Init_Init_process_default();
@@ -405,8 +406,9 @@ namespace mrw
 			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant();
 			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant();
 			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay();
+			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Shunt();
+			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Shunt();
 			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Idle();
-			void exseq_main_region_Operating_Processing_Wait_for_Tour();
 			void exseq_main_region_Failed();
 			void exseq_main_region();
 			void exseq_main_region_Init_Init_process();
@@ -420,8 +422,8 @@ namespace mrw
 			void exseq_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting();
 			void react_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting__choice_0();
 			void react_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting__choice_1();
+			void react_main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting__choice_2();
 			void react_main_region_Operating_Processing__choice_0();
-			void react_main_region_Operating_Processing__choice_1();
 			void react_main_region__entry_Default();
 			void react_main_region_Init_Init_process__entry_Default();
 			void react_main_region_Operating_Processing__entry_Default();
@@ -452,8 +454,9 @@ namespace mrw
 			sc::integer main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Distant_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Off_Distant_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Delay_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Go_Shunt_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Tour_State_Tour_processing_Waiting_Tour_waiting_Stop_Shunt_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Tour_State_Tour_processing_Idle_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_Processing_Wait_for_Tour_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();

@@ -321,9 +321,8 @@ Signal::Symbol SignalControllerProxy::shunt() const
 
 bool SignalControllerProxy::process(const MrwMessage & message)
 {
-	Signal * signal = signal_map[message.unitNo()];
-
-	const size_t processed =
+	Signal    *    signal    = signal_map[message.unitNo()];
+	const size_t   processed =
 		statechart_main.process(   signal, message) +
 		statechart_distant.process(signal, message) +
 		statechart_shunt.process(  signal, message);
@@ -368,7 +367,7 @@ bool SignalControllerProxy::hasMainSignal()
 	return main_signal != nullptr;
 }
 
-bool SignalControllerProxy::isMain()
+bool SignalControllerProxy::isMainAndShunt()
 {
 	return statechart_shunt.isCombined();
 }
