@@ -121,36 +121,6 @@ SignalControllerProxy::~SignalControllerProxy()
 		dynamic_cast<Device *>(shunt_signal));
 }
 
-bool mrw::ctrl::SignalControllerProxy::isUnlocked() const
-{
-	return lock() == LockState::UNLOCKED;
-}
-
-Signal * SignalControllerProxy::mainSignal() const
-{
-	return main_signal;
-}
-
-void SignalControllerProxy::setCurved(const size_t curved_count)
-{
-	statechart_main.setCurved(curved_count);
-}
-
-void SignalControllerProxy::setDistantSignal(SignalControllerProxy * signal)
-{
-	statechart_distant.setMainController(signal);
-}
-
-void SignalControllerProxy::setSymbol(Signal::Symbol new_symbol)
-{
-	statechart.setSymbol(new_symbol);
-}
-
-void SignalControllerProxy::setState(SectionState new_state)
-{
-	is_tour = new_state == SectionState::TOUR;
-}
-
 void SignalControllerProxy::connectMain()
 {
 	connect(
@@ -221,6 +191,48 @@ void SignalControllerProxy::add(Signal * signal)
 	}
 }
 
+/*************************************************************************
+**                                                                      **
+**       Service methods                                                **
+**                                                                      **
+*************************************************************************/
+
+bool mrw::ctrl::SignalControllerProxy::isUnlocked() const
+{
+	return lock() == LockState::UNLOCKED;
+}
+
+Signal * SignalControllerProxy::mainSignal() const
+{
+	return main_signal;
+}
+
+void SignalControllerProxy::setCurved(const size_t curved_count)
+{
+	statechart_main.setCurved(curved_count);
+}
+
+void SignalControllerProxy::setDistantSignal(SignalControllerProxy * signal)
+{
+	statechart_distant.setMainController(signal);
+}
+
+void SignalControllerProxy::setSymbol(Signal::Symbol new_symbol)
+{
+	statechart.setSymbol(new_symbol);
+}
+
+void SignalControllerProxy::setState(SectionState new_state)
+{
+	is_tour = new_state == SectionState::TOUR;
+}
+
+/*************************************************************************
+**                                                                      **
+**       Implementation of BaseController                               **
+**                                                                      **
+*************************************************************************/
+
 QString SignalControllerProxy::name() const
 {
 	return grouped_name;
@@ -275,6 +287,12 @@ Position::Bending SignalControllerProxy::bending() const
 	return base_signal->bending();
 }
 
+/*************************************************************************
+**                                                                      **
+**       Implementation of SignalController                             **
+**                                                                      **
+*************************************************************************/
+
 bool SignalControllerProxy::hasMain() const
 {
 	return main_signal != nullptr;
@@ -288,16 +306,6 @@ bool SignalControllerProxy::hasDistant() const
 bool SignalControllerProxy::hasShunting() const
 {
 	return shunt_signal != nullptr;
-}
-
-RailPart * SignalControllerProxy::railPart() const
-{
-	return signal_rail;
-}
-
-Section * SignalControllerProxy::section() const
-{
-	return signal_section;
 }
 
 Signal::Symbol SignalControllerProxy::main() const
@@ -318,6 +326,28 @@ Signal::Symbol SignalControllerProxy::shunt() const
 {
 	return static_cast<Signal::Symbol>(statechart_shunt.getSignalState());
 }
+
+/*************************************************************************
+**                                                                      **
+**       Implementation of RailPartInfo                                 **
+**                                                                      **
+*************************************************************************/
+
+RailPart * SignalControllerProxy::railPart() const
+{
+	return signal_rail;
+}
+
+Section * SignalControllerProxy::section() const
+{
+	return signal_section;
+}
+
+/*************************************************************************
+**                                                                      **
+**       Implementation of ControllerRegistrand                         **
+**                                                                      **
+*************************************************************************/
 
 bool SignalControllerProxy::process(const MrwMessage & message)
 {
@@ -351,6 +381,12 @@ QString SignalControllerProxy::toString() const
 		arg(grouped_name, -10).
 		arg(Signal::get(static_cast<Signal::Symbol>(statechart.getSymbol())));
 }
+
+/*************************************************************************
+**                                                                      **
+**       Implementation of OperationCallback                            **
+**                                                                      **
+*************************************************************************/
 
 void SignalControllerProxy::inc()
 {
