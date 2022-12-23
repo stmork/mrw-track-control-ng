@@ -232,7 +232,7 @@ void ShuntProxy::prepare(mrw::model::Signal::Symbol symbol)
 		break;
 
 	case Signal::Symbol::STOP:
-		state = SIGNAL_SH0;
+		state = isCombined() ? SIGNAL_HP0 : SIGNAL_SH0;
 		break;
 
 	case Signal::Symbol::GO:
