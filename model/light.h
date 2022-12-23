@@ -41,9 +41,9 @@ namespace mrw::model
 			const QDomElement  &  element);
 		virtual ~Light() = default;
 
-		const QString & name()       const override;
-		Controller   *  controller() const override;
-		bool            notUnlockable() const override;
+		const QString & name()         const override;
+		Controller   *  controller()   const override;
+		bool            isUnlockable() const override;
 	};
 }
 

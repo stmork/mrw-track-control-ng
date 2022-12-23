@@ -74,7 +74,7 @@ namespace mrw::model
 		 */
 		mrw::can::Command commandState() const;
 
-		bool notUnlockable() const override;
+		bool isUnlockable() const override;
 
 	protected:
 		/**

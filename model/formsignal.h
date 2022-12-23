@@ -47,7 +47,7 @@ namespace mrw::model
 		bool            valid()    const override;
 		QString         toString() const override;
 
-		inline bool notUnlockable()   const override
+		inline bool isUnlockable()   const override
 		{
 			// TODO: Implement!
 			return true;

@@ -101,7 +101,7 @@ namespace mrw::model
 		 *
 		 * @see lock()
 		 */
-		virtual bool notUnlockable() const = 0;
+		virtual bool isUnlockable() const = 0;
 
 		/**
 		 * This method returns the pointer to the managing controller.
