@@ -43,6 +43,7 @@ namespace mrw::ctrl
 		void disable();
 		void failed();
 		void start();
+		void entered();
 		void left();
 		void tryUnblock();
 		void unregister();

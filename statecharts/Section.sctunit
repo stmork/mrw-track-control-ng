@@ -172,7 +172,51 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
 		assert called dec
+		assert !occupied
+	}
+
+	@Test
+	operation sectionFree()
+	{
+		// Given
+		operational()
+		occupied = false
+
+		// When
+		raise enable : true
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Enabling)
+
+		// When
+		raise relaisResponse
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
+	}
+
+	@Test
+	operation sectionOccupied()
+	{
+		// Given
+		operational()
+		occupied = true
+
+		// When
+		raise enable : true
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Enabling)
+
+		// When
+		raise relaisResponse
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Occupied)
 	}
 
 	@Test
@@ -274,17 +318,28 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	operation leave()
 	{
 		// Given
-		locked()
+		sectionFree()
 		auto_off = true
+
+		// When
+		raise stateResponse : true
+
+		// Then
+		assert occupied
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Occupied)
+		assert entered
 
 		// When
 		raise stateResponse : false
 
 		// Then
+		assert !occupied
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Left)
 		assert called inc
 		assert called off
+		assert leaving
 	}
 
 	@Test

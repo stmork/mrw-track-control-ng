@@ -53,6 +53,7 @@ signals:
 	void finished();
 
 public slots:
+	void entered();
 	void left();
 	void tryUnblock();
 	void unregister();

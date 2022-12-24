@@ -88,6 +88,10 @@ void WidgetRoute::prepare(
 		if (controller->section()->lock() != LockState::LOCKED)
 		{
 			connect(
+				controller, &SectionController::entered,
+				this, &WidgetRoute::entered,
+				Qt::DirectConnection);
+			connect(
 				controller, &SectionController::left,
 				this, &WidgetRoute::left,
 				Qt::DirectConnection);
@@ -199,6 +203,13 @@ void WidgetRoute::prepareSignals(
 **                                                                      **
 *************************************************************************/
 
+void WidgetRoute::entered()
+{
+	SectionController   *   controller = dynamic_cast<SectionController *>(QObject::sender());
+
+	qDebug().noquote() << "Entered:    " << *controller;
+}
+
 void WidgetRoute::left()
 {
 	SectionController   *   controller = dynamic_cast<SectionController *>(QObject::sender());
@@ -260,6 +271,9 @@ void WidgetRoute::unregister(SectionController * controller)
 {
 	controller->disable();
 
+	disconnect(
+		controller, &SectionController::entered,
+		this, &WidgetRoute::entered);
 	disconnect(
 		controller, &SectionController::left,
 		this, &WidgetRoute::left);
