@@ -404,7 +404,6 @@ namespace mrw
 			void exseq_main_region_Operating_Processing_Locked_Occupation();
 			void react_main_region_Operating_Processing_Locked_Route_active__choice_0();
 			void react_main_region_Operating_Processing_Locked_Occupation__choice_0();
-			void react_main_region_Operating_Processing__choice_0();
 			void react_main_region__entry_Default();
 			void react_main_region_Init_Init_Process__entry_Default();
 			void react_main_region_Operating_Processing__entry_Default();

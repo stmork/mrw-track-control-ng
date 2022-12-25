@@ -162,12 +162,27 @@ const QString & Section::name() const
 
 void Section::setOccupation(const bool input)
 {
-	occupied = input;
+	section_occupied = input;
 }
 
 bool Section::occupation() const
 {
-	return occupied;
+	return section_occupied;
+}
+
+void Section::enable(const bool enable)
+{
+	section_enabled = enable;
+}
+
+void Section::disable(const bool disable)
+{
+	section_enabled = !disable;
+}
+
+bool Section::enabled() const
+{
+	return section_enabled;
 }
 
 bool Section::isUnlockable() const
@@ -186,7 +201,7 @@ bool Section::isUnlockable() const
 
 SectionState Section::state() const
 {
-	return occupied ? OCCUPIED : section_state;
+	return section_occupied ? OCCUPIED : section_state;
 }
 
 void Section::setState(const SectionState input)

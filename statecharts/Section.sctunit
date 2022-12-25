@@ -131,7 +131,7 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	}
 
 	@Test
-	operation enabled()
+	operation enabling()
 	{
 		// Given
 		operational()
@@ -141,13 +141,13 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 
 		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Enabling)
-		assert called dec
+		assert called inc
 		assert called pending
 		assert called on
 	}
 
 	@Test
-	operation disabled()
+	operation disabling()
 	{
 		// Given
 		operational()
@@ -156,15 +156,17 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 		raise enable : false
 
 		// Then
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Disabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Enabling)
+		assert called inc
+		assert called pending
+		assert called off
 	}
 
 	@Test
-	operation locked()
+	operation enabledLocked()
 	{
 		// Given
-		enabled()
+		enabling()
 
 		// When
 		raise relaisResponse
@@ -174,6 +176,25 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
 		assert called dec
+		assert called lock
+		assert !occupied
+	}
+
+	@Test
+	operation disabledLocked()
+	{
+		// Given
+		disabling()
+
+		// When
+		raise relaisResponse
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Disabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
+		assert called dec
+		assert called lock
 		assert !occupied
 	}
 
@@ -223,7 +244,7 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	operation failAfterEnable()
 	{
 		// Given
-		enabled()
+		enabling()
 
 		// When
 		raise failed
@@ -235,7 +256,7 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	operation timeoutAfterEnable()
 	{
 		// Given
-		enabled()
+		enabling()
 
 		// When
 		proceed timeout ms
@@ -249,7 +270,7 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	operation disableAfterEnabled()
 	{
 		// Given
-		locked()
+		enabledLocked()
 
 		// When
 		raise disable
@@ -265,7 +286,7 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	operation disableAfterDisabled()
 	{
 		// Given
-		disabled()
+		disabling()
 
 		// When
 		raise disable
@@ -346,7 +367,7 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	operation stay()
 	{
 		// Given
-		locked()
+		enabledLocked()
 		auto_off = false
 
 		// When
@@ -414,7 +435,7 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	operation enablingAfterDisabled()
 	{
 		// Given
-		disabled
+		disabledLocked
 
 		// When
 		raise enable : true

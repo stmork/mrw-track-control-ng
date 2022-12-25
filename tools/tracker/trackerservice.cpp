@@ -47,7 +47,14 @@ void TrackerService::process(const MrwMessage & message)
 			break;
 
 		case SETROF:
-			remove(message.eid(), message.unitNo());
+			if (driving)
+			{
+				remove(message.eid(), message.unitNo());
+			}
+			else if (track.empty())
+			{
+				append(message.eid(), message.unitNo(), false);
+			}
 			break;
 
 		default:
@@ -57,7 +64,7 @@ void TrackerService::process(const MrwMessage & message)
 	}
 }
 
-void TrackerService::append(const ControllerId id, const UnitNo unitNo)
+void TrackerService::append(const ControllerId id, const UnitNo unitNo, const bool enable)
 {
 	Device  * device  = model->deviceById(id, unitNo);
 	Section * section = dynamic_cast<Section *>(device);
@@ -67,6 +74,7 @@ void TrackerService::append(const ControllerId id, const UnitNo unitNo)
 		throw std::invalid_argument(QString::asprintf(
 				"Device not found: %04x:%04x", id, unitNo).toStdString());
 	}
+	section->enable(enable);
 	track.push_front(section);
 	qDebug().noquote() << *section;
 
@@ -89,67 +97,35 @@ void TrackerService::remove(const ControllerId id, const UnitNo unitNo)
 	track.remove(section);
 }
 
-bool TrackerService::prepareLast()
-{
-	std::unordered_set<Section *> forward;
-	std::unordered_set<Section *> backward;
-	std::vector<Rail *>           rails;
-	auto                          it     = track.rbegin();
-	Section           *           last   = *it++;
-	Section           *           lookup = *it;
-	Section           *           next   = nullptr;
-
-	last->parts<Rail>(rails);
-
-	for (Rail * rail : rails)
-	{
-		Route::isLastSectionEnded(forward,  rail, true);
-		Route::isLastSectionEnded(backward, rail, false);
-	}
-
-	if (forward.empty() || backward.empty())
-	{
-		return false;
-	}
-
-	if (forward.find(lookup) != forward.end())
-	{
-		auto first = backward.begin();
-
-		next = *first;
-	}
-	else if (backward.find(lookup) != backward.end())
-	{
-		auto first = forward.begin();
-
-		next = *first;
-	}
-	else
-	{
-		qCritical("Section not found in neighbour hood!");
-		return false;
-	}
-
-	qDebug("Appending last off turned section:");
-	track.push_back(next);
-	qDebug().noquote() << *next;
-
-	return true;
-}
-
 void TrackerService::trigger()
 {
 	Section * section = nullptr;
 
 	if (position == track.end())
 	{
-		prepareLast();
+		size_t on  = std::count_if(track.begin(), track.end(), [](Section * candidate)
+		{
+			return candidate->enabled();
+		});
+		size_t off = std::count_if(track.begin(), track.end(), [](Section * candidate)
+		{
+			return !candidate->enabled();
+		});
+
+		if ((on == 0) || (off > 1))
+		{
+			qWarning().noquote() << "Sections on:  " << on;
+			qWarning().noquote() << "Sections off: " << off;
+			track.clear();
+			return;
+		}
 
 		// First init!
 		position = track.begin();
 		previous = position;
 		section  = *position;
 		section->setOccupation();
+		driving = true;
 	}
 	else if (position == previous)
 	{
@@ -180,6 +156,8 @@ void TrackerService::trigger()
 	{
 		qDebug("End of track reached!");
 		track.clear();
+		driving = false;
+
 		return;
 	}
 	else

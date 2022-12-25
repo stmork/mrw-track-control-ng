@@ -85,7 +85,8 @@ namespace mrw::model
 		Controller         *         section_controller = nullptr;
 		SectionModule        *       section_module     = nullptr;
 		SectionState                 section_state      = FREE;
-		bool                         occupied           = false;
+		bool                         section_enabled    = false;
+		bool                         section_occupied   = false;
 		std::vector<AssemblyPart *>  assembly_parts;
 		std::vector<Signal *>        forward_signals;
 		std::vector<Signal *>        backward_signals;
@@ -123,6 +124,40 @@ namespace mrw::model
 		 * @return True if this Section is occupied by a train.
 		 */
 		bool occupation() const;
+
+		/**
+		 * This method marks this Section as enabled.
+		 *
+		 * @note This is only for simuation purposes and does not have any
+		 * influence on driving duty.
+		 *
+		 * @param enable The enable flag.
+		 * @see mrw::can::Command::SETRON
+		 */
+		void enable(const bool enable = true);
+
+		/**
+		 * This method marks this Section as disabled.
+		 *
+		 * @note This is only for simuation purposes and does not have any
+		 * influence on driving duty.
+		 *
+		 * @param enable The disable flag.
+		 * @see mrw::can::Command::SETROF
+		 */
+		void disable(const bool disable = true);
+
+		/**
+		 * This method returns the enabled state of this Section.
+		 *
+		 * @note This is only for simuation purposes and does not have any
+		 * influence on driving duty.
+		 *
+		 * @returns True if this Section is enabled.
+		 * @see mrw::can::Command::SETROF
+		 * @see mrw::can::Command::SETRON
+		 */
+		bool enabled() const;
 
 		/**
 		 * This method returns the SectionState of this Section.

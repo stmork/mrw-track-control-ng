@@ -507,6 +507,18 @@ void TestModel::testSection(Region * region, Section * section)
 	QVERIFY(section->isUnlockable());
 	QCOMPARE(section->region(), region);
 
+	section->enable();
+	QVERIFY(section->enabled());
+
+	section->enable(false);
+	QVERIFY(!section->enabled());
+
+	section->disable(false);
+	QVERIFY(section->enabled());
+
+	section->disable();
+	QVERIFY(!section->enabled());
+
 	SectionModule * module = section->module();
 
 	QVERIFY2(module != nullptr, section->name().toStdString().c_str());

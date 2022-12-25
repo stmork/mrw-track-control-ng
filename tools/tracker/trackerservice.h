@@ -24,7 +24,8 @@ class TrackerService : public mrw::can::MrwBusService
 	mrw::model::Route::SectionTrack::iterator   position;
 	mrw::model::Route::SectionTrack::iterator   previous;
 
-	QTimer                           timer;
+	QTimer                                      timer;
+	bool                                        driving = false;
 
 public:
 	TrackerService() = delete;
@@ -39,9 +40,13 @@ protected:
 	virtual void process(const mrw::can::MrwMessage & message) override;
 
 private:
-	void append(const mrw::can::ControllerId id, const mrw::can::UnitNo unitNo);
-	void remove(const mrw::can::ControllerId id, const mrw::can::UnitNo unitNo);
-	bool prepareLast();
+	void append(
+			const mrw::can::ControllerId id,
+			const mrw::can::UnitNo       unitNo,
+			const bool                   enable = true);
+	void remove(
+			const mrw::can::ControllerId id,
+			const mrw::can::UnitNo       unitNo);
 
 private slots:
 	void trigger();

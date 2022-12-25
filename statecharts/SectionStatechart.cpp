@@ -518,7 +518,14 @@ namespace mrw
 			timerService->setTimer(this, 2, timeout, false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
-			ifaceOperationCallback->on();
+			if (enable_value)
+			{
+				ifaceOperationCallback->on();
+			}
+			if (!enable_value)
+			{
+				ifaceOperationCallback->off();
+			}
 		}
 
 		/* Entry action for state 'Failed'. */
@@ -556,6 +563,7 @@ namespace mrw
 		{
 			/* Exit action for state 'Enabling'. */
 			timerService->unsetTimer(this, 2);
+			ifaceOperationCallback->dec();
 		}
 
 		/* 'default' enter sequence for state Init */
@@ -1353,22 +1361,6 @@ namespace mrw
 			}
 		}
 
-		/* The reactions of state null. */
-		void SectionStatechart::react_main_region_Operating_Processing__choice_0()
-		{
-			/* The reactions of state null. */
-			if (enable_value)
-			{
-				enseq_main_region_Operating_Processing_Enabling_default();
-			}
-			else
-			{
-				enact_main_region_Operating_Processing_Locked();
-				enseq_main_region_Operating_Processing_Locked_Route_active_Disabled_default();
-				enseq_main_region_Operating_Processing_Locked_Occupation_default();
-			}
-		}
-
 		/* Default react sequence for initial entry  */
 		void SectionStatechart::react_main_region__entry_Default()
 		{
@@ -1591,7 +1583,8 @@ namespace mrw
 				if (enable_raised)
 				{
 					exseq_main_region_Operating_Processing_Unlocked();
-					react_main_region_Operating_Processing__choice_0();
+					enseq_main_region_Operating_Processing_Enabling_default();
+					main_region_Operating_react(0);
 					transitioned_after = 0;
 				}
 			}
@@ -1838,10 +1831,9 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (relaisResponse_raised)
+				if (((relaisResponse_raised)) && ((enable_value)))
 				{
 					exseq_main_region_Operating_Processing_Enabling();
-					ifaceOperationCallback->dec();
 					enact_main_region_Operating_Processing_Locked();
 					enseq_main_region_Operating_Processing_Locked_Route_active_Enabled_default();
 					enseq_main_region_Operating_Processing_Locked_Occupation_default();
@@ -1857,6 +1849,18 @@ namespace mrw
 						enseq_main_region_Failed_default();
 						react(0);
 						transitioned_after = 0;
+					}
+					else
+					{
+						if (((relaisResponse_raised)) && ((!enable_value)))
+						{
+							exseq_main_region_Operating_Processing_Enabling();
+							enact_main_region_Operating_Processing_Locked();
+							enseq_main_region_Operating_Processing_Locked_Route_active_Disabled_default();
+							enseq_main_region_Operating_Processing_Locked_Occupation_default();
+							main_region_Operating_react(0);
+							transitioned_after = 0;
+						}
 					}
 				}
 			}
