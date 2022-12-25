@@ -123,4 +123,24 @@ GeneratorModel for yakindu::cpp::qt
 			libraryTargetFolder = COMMON
 		}
 	}
+
+	statechart mrw.statechart.TrackerStatechart
+	{
+		feature GeneralFeatures
+		{
+			timerService = false
+		}
+
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
+			libraryTargetFolder = COMMON
+		}
+	}
 }

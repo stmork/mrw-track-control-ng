@@ -7,23 +7,30 @@
 #include <can/mrwmessage.h>
 #include <model/section.h>
 #include <model/rail.h>
+#include <statecharts/timerservice.h>
 
 #include "trackerservice.h"
 
 using namespace mrw::can;
 using namespace mrw::model;
+using namespace mrw::statechart;
 
 TrackerService::TrackerService(
 	ModelRepository & repo,
 	QObject           *           parent) :
-	MrwBusService(repo.interface(), repo.plugin(), parent)
+	MrwBusService(repo.interface(), repo.plugin(), parent),
+	statechart(nullptr)
 {
 	model = repo;
-	connect(
-		&timer, &QTimer::timeout,
-		this, &TrackerService::trigger,
-		Qt::QueuedConnection);
-	timer.setSingleShot(true);
+
+	statechart.setOperationCallback(this);
+	statechart.setTimerService(&TimerService::instance());
+	statechart.enter();
+}
+
+TrackerService::~TrackerService()
+{
+	statechart.exit();
 }
 
 void TrackerService::info()
@@ -43,18 +50,11 @@ void TrackerService::process(const MrwMessage & message)
 		switch (cmd)
 		{
 		case SETRON:
-			append(message.eid(), message.unitNo());
+			append(message.eid(), message.unitNo(), true);
 			break;
 
 		case SETROF:
-			if (driving)
-			{
-				remove(message.eid(), message.unitNo());
-			}
-			else if (track.empty())
-			{
-				append(message.eid(), message.unitNo(), false);
-			}
+			append(message.eid(), message.unitNo(), false);
 			break;
 
 		default:
@@ -64,24 +64,29 @@ void TrackerService::process(const MrwMessage & message)
 	}
 }
 
-void TrackerService::append(const ControllerId id, const UnitNo unitNo, const bool enable)
+void TrackerService::append(
+	const ControllerId id,
+	const UnitNo unitNo,
+	const bool enable)
 {
-	Device  * device  = model->deviceById(id, unitNo);
-	Section * section = dynamic_cast<Section *>(device);
-
-	if (section == nullptr)
+	if (!statechart.isStateActive(TrackerStatechart::State::main_region_Driving))
 	{
-		throw std::invalid_argument(QString::asprintf(
-				"Device not found: %04x:%04x", id, unitNo).toStdString());
-	}
-	section->enable(enable);
-	track.push_front(section);
-	qDebug().noquote() << *section;
+		Device  * device  = model->deviceById(id, unitNo);
+		Section * section = dynamic_cast<Section *>(device);
 
-	timer.stop();
-	position = track.end();
-	previous = position;
-	timer.start(1000);
+		if (section == nullptr)
+		{
+			throw std::invalid_argument(QString::asprintf(
+					"Device not found: %04x:%04x", id, unitNo).toStdString());
+		}
+		section->enable(enable);
+		track.push_front(section);
+		qDebug().noquote() << *section;
+
+		position = track.end();
+		previous = position;
+	}
+	statechart.received();
 }
 
 void TrackerService::remove(const ControllerId id, const UnitNo unitNo)
@@ -95,6 +100,85 @@ void TrackerService::remove(const ControllerId id, const UnitNo unitNo)
 				"Device not found: %04x:%04x", id, unitNo).toStdString());
 	}
 	track.remove(section);
+}
+
+void TrackerService::send(Section * section)
+{
+	MrwMessage message(section->controller()->id(), section->unitNo(), GETRBS, MSG_OK);
+	message.append(section->occupation());
+	write(message);
+}
+
+void TrackerService::first()
+{
+	__METHOD__;
+
+	Section * section = nullptr;
+
+	position = track.begin();
+	previous = position;
+	section  = *position;
+	section->setOccupation();
+	send(section);
+}
+
+void TrackerService::occupy()
+{
+	__METHOD__;
+
+	Section * section = nullptr;
+
+	// Proceed and occupy
+	++position;
+	section = *position;
+	section->setOccupation();
+	send(section);
+}
+
+void TrackerService::free()
+{
+	__METHOD__;
+
+	// Lag behind and free.
+	Section * section = *previous++;
+	section->setOccupation(false);
+	track.remove(section);
+
+	Q_ASSERT(previous == position);
+	send(section);
+}
+
+bool TrackerService::valid()
+{
+	size_t on  = std::count_if(track.begin(), track.end(), [](Section * candidate)
+	{
+		return candidate->enabled();
+	});
+	size_t off = std::count_if(track.begin(), track.end(), [](Section * candidate)
+	{
+		return !candidate->enabled();
+	});
+
+	if ((on == 0) || (off > 1))
+	{
+		qWarning().noquote() << "Sections on:  " << on;
+		qWarning().noquote() << "Sections off: " << off;
+		return false;
+	}
+	return true;
+}
+
+bool TrackerService::last()
+{
+	return *previous == track.back();
+}
+
+void TrackerService::clear()
+{
+	__METHOD__;
+
+	qDebug("End of track reached!");
+	track.clear();
 }
 
 void TrackerService::trigger()
@@ -125,7 +209,6 @@ void TrackerService::trigger()
 		previous = position;
 		section  = *position;
 		section->setOccupation();
-		driving = true;
 	}
 	else if (position == previous)
 	{
@@ -141,6 +224,7 @@ void TrackerService::trigger()
 		section->setOccupation(false);
 
 		Q_ASSERT(previous == position);
+		send(section);
 	}
 
 	MrwMessage message(section->controller()->id(), section->unitNo(), GETRBS, MSG_OK);
@@ -156,12 +240,7 @@ void TrackerService::trigger()
 	{
 		qDebug("End of track reached!");
 		track.clear();
-		driving = false;
 
 		return;
-	}
-	else
-	{
-		timer.start(300);
 	}
 }

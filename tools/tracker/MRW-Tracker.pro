@@ -8,12 +8,13 @@ QT += network
 
 include(../../common.pri)
 
-CONFIG += console
+CONFIG  += console
 
 SOURCES += \
- main.cpp \
- trackerservice.cpp
-LIBS            += -lMRW-Model -lMRW-Can -lMRW-Util
+	main.cpp \
+	trackerservice.cpp
 
 HEADERS += \
 	trackerservice.h
+
+LIBS    += -lMRW-Model -lMRW-Can -lMRW-Statecharts -lMRW-Util

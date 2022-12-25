@@ -86,4 +86,18 @@ GeneratorModel for yakindu::images
 			format = "png"
 		}
 	}
+
+	statechart mrw.statechart.TrackerStatechart
+	{
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+		}
+
+		feature Renderer
+		{
+			format = "png"
+		}
+	}
 }

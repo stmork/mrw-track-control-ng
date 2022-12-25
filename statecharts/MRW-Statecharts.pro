@@ -15,6 +15,7 @@ HEADERS += \
 	SignalControllerStatechart.h \
 	SignalStatechart.h \
 	SwitchStatechart.h \
+	TrackerStatechart.h \
 	common/sc_statemachine.h \
 	common/sc_timer.h \
 	common/sc_types.h \
@@ -27,6 +28,7 @@ SOURCES += \
 	SignalControllerStatechart.cpp \
 	SignalStatechart.cpp \
 	SwitchStatechart.cpp \
+	TrackerStatechart.cpp \
 	timerservice.cpp
 
 QMAKE_CLEAN         += $$TARGET

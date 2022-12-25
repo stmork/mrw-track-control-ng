@@ -13,10 +13,15 @@
 #include <can/mrwbusservice.h>
 #include <model/modelrepository.h>
 #include <model/route.h>
+#include <statecharts/TrackerStatechart.h>
 
-class TrackerService : public mrw::can::MrwBusService
+class TrackerService :
+		public mrw::can::MrwBusService,
+		public mrw::statechart::TrackerStatechart::OperationCallback
 {
 	Q_OBJECT
+
+	mrw::statechart::TrackerStatechart          statechart;
 
 	mrw::model::ModelRailway *                  model = nullptr;
 	mrw::model::Route::SectionTrack             track;
@@ -24,15 +29,12 @@ class TrackerService : public mrw::can::MrwBusService
 	mrw::model::Route::SectionTrack::iterator   position;
 	mrw::model::Route::SectionTrack::iterator   previous;
 
-	QTimer                                      timer;
-	bool                                        driving = false;
-
 public:
 	TrackerService() = delete;
 	explicit TrackerService(
 			mrw::model::ModelRepository & repo,
 			QObject   *                   parent    = nullptr);
-	virtual ~TrackerService() = default;
+	virtual ~TrackerService();
 
 	void info();
 
@@ -43,10 +45,18 @@ private:
 	void append(
 			const mrw::can::ControllerId id,
 			const mrw::can::UnitNo       unitNo,
-			const bool                   enable = true);
+			const bool                   enable);
 	void remove(
 			const mrw::can::ControllerId id,
 			const mrw::can::UnitNo       unitNo);
+	void send(mrw::model::Section * section);
+
+	void first() override;
+	void occupy() override;
+	void free() override;
+	bool valid() override;
+	bool last() override;
+	void clear() override;
 
 private slots:
 	void trigger();

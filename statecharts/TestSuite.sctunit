@@ -10,5 +10,6 @@ testsuite TestSuite
 	Signal,
 	SignalController,
 	Section,
-	Route
+	Route,
+	Tracker
 }

@@ -41,7 +41,7 @@ ui.depends                = ctrl
 ping.depends              = test
 proxy.depends             = test
 sim.depends               = test
-tracker.depends           = test
+tracker.depends           = test statecharts
 study.depends             = test ctrl ui
 track-control-ng.depends  = study statecharts
 

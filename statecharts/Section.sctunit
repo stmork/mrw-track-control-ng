@@ -286,7 +286,7 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	operation disableAfterDisabled()
 	{
 		// Given
-		disabling()
+		disabledLocked()
 
 		// When
 		raise disable
