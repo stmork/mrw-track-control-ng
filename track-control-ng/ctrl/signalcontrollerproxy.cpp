@@ -4,6 +4,7 @@
 //
 
 #include <util/method.h>
+#include <util/stringutil.h>
 #include <can/commands.h>
 #include <model/lightsignal.h>
 #include <model/formsignal.h>
@@ -11,12 +12,15 @@
 #include <ctrl/controllerregistry.h>
 #include <statecharts/timerservice.h>
 
+using namespace mrw::util;
 using namespace mrw::can;
 using namespace mrw::model;
 using namespace mrw::ctrl;
 using namespace mrw::statechart;
 
+using Bending   = Position::Bending;
 using LockState = Device::LockState;
+using Symbol    = Signal::Symbol;
 
 SignalControllerProxy::SignalControllerProxy(
 	Section  *  parent_section,
@@ -198,7 +202,7 @@ void SignalControllerProxy::add(Signal * signal)
 **                                                                      **
 *************************************************************************/
 
-bool mrw::ctrl::SignalControllerProxy::isUnlocked() const
+bool SignalControllerProxy::isUnlocked() const
 {
 	return lock() == LockState::UNLOCKED;
 }
@@ -282,12 +286,12 @@ SectionState SignalControllerProxy::state() const
 	}
 }
 
-Device::LockState SignalControllerProxy::lock() const
+LockState SignalControllerProxy::lock() const
 {
 	return lock_state;
 }
 
-Position::Bending SignalControllerProxy::bending() const
+Bending SignalControllerProxy::bending() const
 {
 	return base_signal->bending();
 }
@@ -313,21 +317,17 @@ bool SignalControllerProxy::hasShunting() const
 	return shunt_signal != nullptr;
 }
 
-Signal::Symbol SignalControllerProxy::main() const
+Symbol SignalControllerProxy::main() const
 {
 	return static_cast<Signal::Symbol>(statechart_main.getSignalState());
 }
 
-Signal::Symbol SignalControllerProxy::distant() const
+Symbol SignalControllerProxy::distant() const
 {
-	SignalControllerProxy * main_controller = statechart_distant.mainController();
-
-	return main_controller != nullptr ?
-		main_controller->main() :
-		static_cast<Signal::Symbol>(statechart_distant.getSignalState());
+	return static_cast<Signal::Symbol>(statechart_distant.getSignalState());
 }
 
-Signal::Symbol SignalControllerProxy::shunt() const
+Symbol SignalControllerProxy::shunt() const
 {
 	return static_cast<Signal::Symbol>(statechart_shunt.getSignalState());
 }
@@ -440,6 +440,9 @@ void SignalControllerProxy::pending()
 
 void SignalControllerProxy::lock(const bool do_it)
 {
+	Symbol symbol = (Symbol)statechart.getSymbol();
+
+	qDebug().noquote() << String::bold("Lock:") << do_it << Signal::get(symbol) << grouped_name << Signal::get(main()) << Signal::get(distant()) << Signal::get(shunt());
 	lock_state = do_it ? LockState::LOCKED : LockState::UNLOCKED;
 	emit update();
 }

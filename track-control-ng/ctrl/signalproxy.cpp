@@ -16,6 +16,8 @@ using namespace mrw::can;
 using namespace mrw::model;
 using namespace mrw::ctrl;
 
+using Symbol = Signal::Symbol;
+
 /*************************************************************************
 **                                                                      **
 **       Signal proxy base class                                        **
@@ -116,7 +118,7 @@ bool SignalProxy::process(Signal * device, const MrwMessage & message)
 **                                                                      **
 *************************************************************************/
 
-void MainProxy::prepare(Signal::Symbol symbol)
+void MainProxy::prepare(Symbol symbol)
 {
 	__METHOD__;
 
@@ -130,11 +132,11 @@ void MainProxy::prepare(Signal::Symbol symbol)
 		state = SIGNAL_OFF;
 		break;
 
-	case Signal::Symbol::STOP:
+	case Symbol::STOP:
 		state = SIGNAL_HP0;
 		break;
 
-	case Signal::Symbol::GO:
+	case Symbol::GO:
 		state = curved_count < SLOW_CURVED_LIMIT ? SIGNAL_HP1 : SIGNAL_HP2;
 		break;
 	}
@@ -158,39 +160,33 @@ void DistantProxy::start(Signal * input, Signal * combined)
 	SignalProxy::start(input);
 }
 
-void DistantProxy::prepare(Signal::Symbol symbol)
+void DistantProxy::prepare(Symbol symbol)
 {
 	__METHOD__;
 
-	Q_UNUSED(symbol)
 	Q_ASSERT(signal != nullptr);
 
 	SignalState state      = SIGNAL_OFF;
-	uint8_t     main_state = SIGNAL_OFF;
 
-	if (main_controller != nullptr)
+	switch (symbol)
 	{
-		switch (symbol)
+	case Symbol::GO:
+		if (main_controller != nullptr)
 		{
-		case Signal::Symbol::GO:
-			main_state = main_controller->mainSignal()->state();
+			uint8_t main_state = main_controller->mainSignal()->state();
 			state      = static_cast<SignalState>(main_state + SIGNAL_MAIN_DISTANT_OFFSET);
-			break;
-
-		case Signal::Symbol::STOP:
-			state = SIGNAL_VR0;
-			break;
-
-		case Signal::Symbol::OFF:
-			state = SIGNAL_OFF;
-			break;
 		}
+		break;
 
-	}
-	else
-	{
+	case Symbol::STOP:
+		state = SIGNAL_VR0;
+		break;
+
+	case Symbol::OFF:
 		state = SIGNAL_OFF;
+		break;
 	}
+
 	signal->setState(state);
 }
 
@@ -221,7 +217,7 @@ bool ShuntProxy::isCombined()
 	return hasSignal() && (signal == main_signal);
 }
 
-void ShuntProxy::prepare(mrw::model::Signal::Symbol symbol)
+void ShuntProxy::prepare(Symbol symbol)
 {
 	SignalState state = SIGNAL_OFF;
 
@@ -231,11 +227,11 @@ void ShuntProxy::prepare(mrw::model::Signal::Symbol symbol)
 		state = SIGNAL_OFF;
 		break;
 
-	case Signal::Symbol::STOP:
+	case Symbol::STOP:
 		state = isCombined() ? SIGNAL_HP0 : SIGNAL_SH0;
 		break;
 
-	case Signal::Symbol::GO:
+	case Symbol::GO:
 		state = SIGNAL_SH1;
 		break;
 	}
