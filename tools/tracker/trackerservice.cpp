@@ -89,19 +89,6 @@ void TrackerService::append(
 	statechart.received();
 }
 
-void TrackerService::remove(const ControllerId id, const UnitNo unitNo)
-{
-	Device  * device  = model->deviceById(id, unitNo);
-	Section * section = dynamic_cast<Section *>(device);
-
-	if (section == nullptr)
-	{
-		throw std::invalid_argument(QString::asprintf(
-				"Device not found: %04x:%04x", id, unitNo).toStdString());
-	}
-	track.remove(section);
-}
-
 void TrackerService::send(Section * section)
 {
 	MrwMessage message(section->controller()->id(), section->unitNo(), GETRBS, MSG_OK);
@@ -159,13 +146,14 @@ bool TrackerService::valid()
 		return !candidate->enabled();
 	});
 
-	if ((on == 0) || (off > 1))
+	const bool is_invalid = (on == 0) || (off > 1);
+
+	if (is_invalid)
 	{
 		qWarning().noquote() << "Sections on:  " << on;
 		qWarning().noquote() << "Sections off: " << off;
-		return false;
 	}
-	return true;
+	return !is_invalid;
 }
 
 bool TrackerService::last()
@@ -175,72 +163,6 @@ bool TrackerService::last()
 
 void TrackerService::clear()
 {
-	__METHOD__;
-
 	qDebug("End of track reached!");
 	track.clear();
-}
-
-void TrackerService::trigger()
-{
-	Section * section = nullptr;
-
-	if (position == track.end())
-	{
-		size_t on  = std::count_if(track.begin(), track.end(), [](Section * candidate)
-		{
-			return candidate->enabled();
-		});
-		size_t off = std::count_if(track.begin(), track.end(), [](Section * candidate)
-		{
-			return !candidate->enabled();
-		});
-
-		if ((on == 0) || (off > 1))
-		{
-			qWarning().noquote() << "Sections on:  " << on;
-			qWarning().noquote() << "Sections off: " << off;
-			track.clear();
-			return;
-		}
-
-		// First init!
-		position = track.begin();
-		previous = position;
-		section  = *position;
-		section->setOccupation();
-	}
-	else if (position == previous)
-	{
-		// Proceed and occupy
-		++position;
-		section = *position;
-		section->setOccupation();
-	}
-	else
-	{
-		// Lag behind and free.
-		section = *previous++;
-		section->setOccupation(false);
-
-		Q_ASSERT(previous == position);
-		send(section);
-	}
-
-	MrwMessage message(section->controller()->id(), section->unitNo(), GETRBS, MSG_OK);
-	message.append(section->occupation());
-
-#if 0
-	qDebug() << message;
-#else
-	write(message);
-#endif
-
-	if (*previous == track.back())
-	{
-		qDebug("End of track reached!");
-		track.clear();
-
-		return;
-	}
 }

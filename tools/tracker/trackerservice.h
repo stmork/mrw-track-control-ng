@@ -46,9 +46,6 @@ private:
 			const mrw::can::ControllerId id,
 			const mrw::can::UnitNo       unitNo,
 			const bool                   enable);
-	void remove(
-			const mrw::can::ControllerId id,
-			const mrw::can::UnitNo       unitNo);
 	void send(mrw::model::Section * section);
 
 	void first() override;
@@ -57,9 +54,6 @@ private:
 	bool valid() override;
 	bool last() override;
 	void clear() override;
-
-private slots:
-	void trigger();
 };
 
 #endif
