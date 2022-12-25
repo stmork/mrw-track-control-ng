@@ -402,6 +402,14 @@ testclass SignalController for statechart mrw.^statechart.SignalControllerStatec
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Stop_Distant)
 		assert turnDistant
 		assert valueof(turnMain) == STOP
+	}
+
+	@Test
+	operation disableTourCombinedLight()
+	{
+		// Given
+		disableTourCombined()
+		mock isLightSignal returns (true)
 
 		// When
 		raise completedDistant
@@ -416,6 +424,21 @@ testclass SignalController for statechart mrw.^statechart.SignalControllerStatec
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Off_Distant)
 		assert turnDistant
 		assert valueof(turnDistant) == OFF
+
+		// When
+		raise completedDistant
+
+		// Then
+		assert called dec
+		unlockedState()
+	}
+
+	@Test
+	operation disableTourCombinedForm()
+	{
+		// Given
+		disableTourCombined()
+		mock isLightSignal returns (false)
 
 		// When
 		raise completedDistant

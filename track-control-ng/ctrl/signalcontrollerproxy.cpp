@@ -5,6 +5,7 @@
 
 #include <util/method.h>
 #include <can/commands.h>
+#include <model/lightsignal.h>
 #include <model/formsignal.h>
 #include <ctrl/signalcontrollerproxy.h>
 #include <ctrl/controllerregistry.h>
@@ -410,6 +411,11 @@ bool SignalControllerProxy::hasMainSignal()
 bool SignalControllerProxy::isMainAndShunt()
 {
 	return statechart_shunt.isCombined();
+}
+
+bool SignalControllerProxy::isLightSignal()
+{
+	return dynamic_cast<LightSignal *>(distant_signal) != nullptr;
 }
 
 bool SignalControllerProxy::isTour()

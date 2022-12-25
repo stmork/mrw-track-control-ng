@@ -25,7 +25,7 @@ namespace mrw
 		SignalControllerStatechart::SignalControllerStatechart(QObject * parent) :
 			QObject(parent),
 			timeout(5000),
-			delay(750),
+			delay(500),
 			symbol(SignalControllerStatechart::STOP),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
@@ -1795,7 +1795,7 @@ namespace mrw
 		void SignalControllerStatechart::react_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting__choice_0()
 		{
 			/* The reactions of state null. */
-			if (ifaceOperationCallback->hasMainSignal())
+			if ((ifaceOperationCallback->hasMainSignal()) && (ifaceOperationCallback->isLightSignal()))
 			{
 				enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Delay_default();
 			}

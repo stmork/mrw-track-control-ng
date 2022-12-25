@@ -188,6 +188,8 @@ namespace mrw
 
 				virtual bool isMainAndShunt() = 0;
 
+				virtual bool isLightSignal() = 0;
+
 				virtual bool isTour() = 0;
 
 				virtual void fail() = 0;

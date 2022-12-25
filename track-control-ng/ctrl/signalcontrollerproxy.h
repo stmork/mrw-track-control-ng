@@ -110,6 +110,7 @@ namespace mrw::ctrl
 
 		virtual bool    hasMainSignal() override;
 		virtual bool    isMainAndShunt() override;
+		virtual bool    isLightSignal() override;
 		virtual bool    isTour() override;
 
 		virtual void    fail() override;
