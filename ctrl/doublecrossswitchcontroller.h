@@ -17,6 +17,7 @@ namespace mrw::ctrl
 	 * This class provides the logic for a double cross switch.
 	 *
 	 * @see BaseController
+	 * @see mrw::model::DoubleCrossSwitch
 	 */
 	class DoubleCrossSwitchController : public BaseController
 	{

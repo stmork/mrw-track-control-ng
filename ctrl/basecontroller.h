@@ -28,9 +28,9 @@ namespace mrw::ctrl
 		explicit BaseController(QObject * parent = nullptr);
 
 		/**
-		 * This method returns the name of the controlled Device.
+		 * This method returns the name of the controlled mrw::model::Device.
 		 *
-		 * @return The name of the controlled Device.
+		 * @return The name of the controlled mrw::model::Device.
 		 */
 		virtual QString name() const = 0;
 
@@ -93,9 +93,11 @@ namespace mrw::ctrl
 		}
 
 		/**
-		 * This method returns the modification state of the controlled Device.
+		 * This method returns the modification state of the controlled
+		 * mrw::model::Device.
 		 *
-		 * @return The LockState of the controlled Device.
+		 * @return The mrw::model::Device::LockState of the controlled
+		 * mrw::model::Device.
 		 *
 		 * @see mrw::model::Device::LockState
 		 * @see mrw::model::Device::lock()
@@ -103,12 +105,14 @@ namespace mrw::ctrl
 		virtual mrw::model::Device::LockState lock() const = 0;
 
 		/**
-		 * A controlled Device is always in conjunction with a surrounding
-		 * Section. This method returns the SectionState of this Section.
+		 * A controlled mrw::model::Device is always in conjunction with a
+		 * surrounding mrw::model::Section. This method returns the
+		 * mrw::model::SectionState of this mrw::model::Section.
 		 *
-		 * @note The controlled Device may be the Section itself.
+		 * @note The controlled mrw::model::Device may be the
+		 * mrw::model::Section itself.
 		 *
-		 * @return The SectionState.
+		 * @return The mrw::model::SectionState.
 		 */
 		virtual mrw::model::SectionState state() const = 0;
 
@@ -116,7 +120,7 @@ namespace mrw::ctrl
 		 * This method returns the bending nature of the
 		 * mrw::model::AssemblyPart for rendering purposes.
 		 *
-		 * @return The rendering hint concerning the mrw::model::AssembyPart
+		 * @return The rendering hint concerning the mrw::model::AssemblyPart
 		 * to be rendered.
 		 * @see mrw::model::Position::Bending
 		 */
