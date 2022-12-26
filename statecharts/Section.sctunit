@@ -352,6 +352,12 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 		assert entered
 
 		// When
+		raise next
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Next_Reached)
+
+		// When
 		raise stateResponse : false
 
 		// Then
