@@ -142,7 +142,7 @@ namespace mrw::model
 		 * @note This is only for simuation purposes and does not have any
 		 * influence on driving duty.
 		 *
-		 * @param enable The disable flag.
+		 * @param disable The disable flag.
 		 * @see mrw::can::Command::SETROF
 		 */
 		void disable(const bool disable = true);

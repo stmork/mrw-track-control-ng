@@ -15,6 +15,12 @@
 
 namespace mrw::util
 {
+	/**
+	 * This singleton class provides a regular clock service at the clocks of
+	 * 1 Hz, 2 Hz, 4 Hz and 8 Hz. You can simply connect to the appropriate
+	 * signals in the usual Qt manner. To provide a synchron clock you should
+	 * connect using the @c Qt::DirectConnection type.
+	 */
 	class ClockService : public QObject, public Singleton<ClockService>
 	{
 		friend class Singleton<ClockService>;
@@ -28,10 +34,26 @@ namespace mrw::util
 		QTimer timer_8hz;
 
 		ClockService();
+
 	signals:
+		/**
+		 * The one per second clock.
+		 */
 		void Hz1();
+
+		/**
+		 * The two per second clock.
+		 */
 		void Hz2();
+
+		/**
+		 * The four per second clock.
+		 */
 		void Hz4();
+
+		/**
+		 * The eight per second clock.
+		 */
 		void Hz8();
 	};
 }

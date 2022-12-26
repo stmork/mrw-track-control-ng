@@ -130,7 +130,8 @@ namespace mrw::model
 		 * unit number is used to address the Device using a CAN ID in
 		 * combination of the Controller ID.
 		 *
-		 * @param id The unit number of the Device.
+		 * @param id The Controller id of the Device.
+		 * @param unit_no The unit number of the Device.
 		 * @return The Device looked up by its unit number.
 		 */
 		Device * deviceById(

@@ -153,7 +153,7 @@ namespace mrw::can
 		/**
 		 * @image html Form_Hp0.gif height=75
 		 * @image html Light_Hp0.gif height=50
-		 * @image html Light_Hp0Sh0.gif height=50
+		 * @image html Light_Hp00.gif height=50
 		 */
 		SIGNAL_HP0,
 

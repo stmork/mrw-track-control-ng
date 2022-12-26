@@ -12,6 +12,10 @@
 
 namespace mrw::ctrl
 {
+	/**
+	 * This class provides the logic for a simple rail. The "logic" contains
+	 * information about drawing a rail bended or ended.
+	 */
 	class RailController: public BaseController
 	{
 		Q_OBJECT
@@ -19,7 +23,22 @@ namespace mrw::ctrl
 	public:
 		explicit RailController(QObject * parent = nullptr);
 
-		virtual bool  aEnds()  const = 0;
+		/**
+		 * The @c a connector does not have any further RailPart and ends here.
+		 *
+		 * @note Only one of the methods aEnds() and bEnds() may return true.
+		 *
+		 * @return True if the Rail ends here.
+		 */
+		virtual bool  aEnds() const = 0;
+
+		/**
+		 * The @c b connector does not have any further RailPart and ends here.
+		 *
+		 * @note Only one of the methods aEnds() and bEnds() may return true.
+		 *
+		 * @return True if the Rail ends here.
+		 */
 		virtual bool  bEnds() const = 0;
 	};
 }
