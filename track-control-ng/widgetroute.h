@@ -59,6 +59,8 @@ public slots:
 	void unregister();
 
 private:
+	mrw::ctrl::SectionController   *   getSectionController(
+		mrw::model::Section * section) const;
 	mrw::ctrl::SignalControllerProxy * getSignalController(
 		mrw::model::Section * section) const;
 

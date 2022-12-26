@@ -378,13 +378,18 @@ void mrw::ctrl::SignalControllerProxy::restart()
 
 QString SignalControllerProxy::toString() const
 {
-	return QString("SCP %1%2%3           :        %5 %6").
+	Symbol symbol = (Symbol)statechart.getSymbol();
+
+	return QString("SCP %1%2%3           :        %5 %6 - %7 %8 %9").
 		arg(hasMain()     ? 'M' : '-').
 		arg(hasDistant()  ? 'D' : '-').
 		arg(hasShunting() ? 'S' : '-').
 
 		arg(grouped_name, -10).
-		arg(Signal::get(static_cast<Signal::Symbol>(statechart.getSymbol())));
+		arg(Signal::get(symbol), -4).
+		arg(Signal::get(main()),    -4).
+		arg(Signal::get(distant()), -4).
+		arg(Signal::get(shunt()),   -4);
 }
 
 /*************************************************************************
@@ -440,9 +445,10 @@ void SignalControllerProxy::pending()
 
 void SignalControllerProxy::lock(const bool do_it)
 {
-	Symbol symbol = (Symbol)statechart.getSymbol();
+#ifdef VERBOSE
+	qDebug().noquote() << String::bold("Lock:") << *this;
+#endif
 
-	qDebug().noquote() << String::bold("Lock:") << do_it << Signal::get(symbol) << grouped_name << Signal::get(main()) << Signal::get(distant()) << Signal::get(shunt());
 	lock_state = do_it ? LockState::LOCKED : LockState::UNLOCKED;
 	emit update();
 }

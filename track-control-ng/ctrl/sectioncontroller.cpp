@@ -104,6 +104,27 @@ void SectionController::setAutoUnlock(const bool auto_unlock)
 	statechart.setAuto_unlock(auto_unlock);
 }
 
+void SectionController::nextController(SectionController * input)
+{
+	if (input != nullptr)
+	{
+		if (next != nullptr)
+		{
+			disconnect(
+				&next->statechart, &SectionStatechart::entered,
+				&this->statechart, &SectionStatechart::next);
+		}
+		next = input;
+		if (next != nullptr)
+		{
+			connect(
+				&next->statechart, &SectionStatechart::entered,
+				&this->statechart, &SectionStatechart::next,
+				Qt::QueuedConnection);
+		}
+	}
+}
+
 void SectionController::inc()
 {
 	ControllerRegistry::instance().increase(this);
@@ -235,6 +256,10 @@ void SectionController::pending()
 
 void SectionController::lock(const bool do_it)
 {
+	if (!do_it)
+	{
+		nextController(nullptr);
+	}
 	section()->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
 	emit update();
 }

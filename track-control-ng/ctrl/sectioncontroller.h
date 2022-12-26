@@ -26,6 +26,8 @@ namespace mrw::ctrl
 		mrw::statechart::SectionStatechart  statechart;
 		mrw::model::Section        *        ctrl_section;
 
+		SectionController         *         next = nullptr;
+
 	public:
 		explicit SectionController(
 			mrw::model::Section * input,
@@ -37,6 +39,7 @@ namespace mrw::ctrl
 		model::Section * section() const;
 
 		void setAutoUnlock(const bool auto_unlock);
+		void nextController(SectionController * next);
 
 	signals:
 		void enable(bool turn_on = true);

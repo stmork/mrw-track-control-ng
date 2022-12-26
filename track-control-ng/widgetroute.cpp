@@ -158,12 +158,14 @@ void WidgetRoute::prepareSignals(
 	Q_UNUSED(last_valid_part);
 
 	SignalControllerProxy * main_controller = nullptr;
+	SectionController   *   next_ctrl       = nullptr;
 	size_t                  curved          = 0;
 
 	for (auto it = sections.rbegin(); it != sections.rend(); ++it)
 	{
-		Section        *        section    = *it;
-		SignalControllerProxy * controller = getSignalController(section);
+		Section        *        section      = *it;
+		SectionController   *   section_ctrl = getSectionController(section);
+		SignalControllerProxy * controller   = getSignalController(section);
 		std::vector<RailPart *> rails;
 
 		section->parts<RailPart>(rails, [](const RailPart * part)
@@ -194,6 +196,9 @@ void WidgetRoute::prepareSignals(
 				Symbol::GO :
 				Symbol::STOP);
 		}
+
+		section_ctrl->nextController(next_ctrl);
+		next_ctrl = section_ctrl;
 	}
 }
 
@@ -290,6 +295,7 @@ void WidgetRoute::unregister(SectionController * controller)
 	qDebug().noquote() << "Unregister: " << *controller;
 
 	sections.remove(controller->section());
+	controller->nextController(nullptr);
 	while ((track.size() > 0) && (track.front()->section() == controller->section()))
 	{
 		RailPart    *    part      = track.front();
@@ -394,6 +400,11 @@ WidgetRoute::operator QListWidgetItem * ()
 **       Convenience methods                                            **
 **                                                                      **
 *************************************************************************/
+
+SectionController * WidgetRoute::getSectionController(Section * section) const
+{
+	return ControllerRegistry::instance().find<SectionController>(section);
+}
 
 SignalControllerProxy * WidgetRoute::getSignalController(Section * section) const
 {
