@@ -15,10 +15,10 @@
           <vertices xsi:type="sgraph:Entry" xmi:id="_ciSigIRaEe2CDNGUus-J0w">
             <outgoingTransitions xmi:id="_dP4BQIRaEe2CDNGUus-J0w" specification="" target="_cxZVgIRaEe2CDNGUus-J0w"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_cxZVgIRaEe2CDNGUus-J0w" specification="entry / first; raise completed" name="First" incomingTransitions="_dP4BQIRaEe2CDNGUus-J0w">
+          <vertices xsi:type="sgraph:State" xmi:id="_cxZVgIRaEe2CDNGUus-J0w" specification="entry / first" name="First" incomingTransitions="_dP4BQIRaEe2CDNGUus-J0w">
             <outgoingTransitions xmi:id="_0JCKUIRaEe2CDNGUus-J0w" specification="after step ms" target="_f4ELgIRaEe2CDNGUus-J0w"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_f4ELgIRaEe2CDNGUus-J0w" specification="entry / occupy; raise completed" name="Occupy" incomingTransitions="_s6690IRaEe2CDNGUus-J0w _0JCKUIRaEe2CDNGUus-J0w">
+          <vertices xsi:type="sgraph:State" xmi:id="_f4ELgIRaEe2CDNGUus-J0w" specification="entry / occupy" name="Occupy" incomingTransitions="_s6690IRaEe2CDNGUus-J0w _0JCKUIRaEe2CDNGUus-J0w">
             <outgoingTransitions xmi:id="_pQLKYIRaEe2CDNGUus-J0w" specification="after step ms" target="_hM_XEIRaEe2CDNGUus-J0w"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_hM_XEIRaEe2CDNGUus-J0w" specification="entry / free; raise completed" name="Free" incomingTransitions="_pQLKYIRaEe2CDNGUus-J0w">
@@ -28,7 +28,7 @@
       </vertices>
       <vertices xsi:type="sgraph:Choice" xmi:id="_DzG5sIRfEe2CDNGUus-J0w" incomingTransitions="_9ROd4IRaEe2CDNGUus-J0w">
         <outgoingTransitions xmi:id="_Facq8IRfEe2CDNGUus-J0w" specification="[valid]" target="_M43WmoRaEe2CDNGUus-J0w"/>
-        <outgoingTransitions xmi:id="_IZvtoIRfEe2CDNGUus-J0w" specification="/ clear" target="_SYWH8IRjEe2CDNGUus-J0w"/>
+        <outgoingTransitions xmi:id="_IZvtoIRfEe2CDNGUus-J0w" specification="" target="_SYWH8IRjEe2CDNGUus-J0w"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_SYWH8IRjEe2CDNGUus-J0w" specification="entry / clear" name="Idle" incomingTransitions="_M42vjoRaEe2CDNGUus-J0w _M43WnYRaEe2CDNGUus-J0w _IZvtoIRfEe2CDNGUus-J0w">
         <outgoingTransitions xmi:id="_V0jwIIRjEe2CDNGUus-J0w" specification="received" target="_M43WkIRaEe2CDNGUus-J0w"/>

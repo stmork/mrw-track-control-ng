@@ -242,7 +242,6 @@ namespace mrw
 			/* Entry action for state 'First'. */
 			timerService->setTimer(this, 1, step, false);
 			ifaceOperationCallback->first();
-			internalEventQueue.push_back(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::Internal_completed));
 		}
 
 		/* Entry action for state 'Occupy'. */
@@ -251,7 +250,6 @@ namespace mrw
 			/* Entry action for state 'Occupy'. */
 			timerService->setTimer(this, 2, step, false);
 			ifaceOperationCallback->occupy();
-			internalEventQueue.push_back(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::Internal_completed));
 		}
 
 		/* Entry action for state 'Free'. */
@@ -481,7 +479,6 @@ namespace mrw
 			}
 			else
 			{
-				ifaceOperationCallback->clear();
 				enseq_main_region_Idle_default();
 			}
 		}
