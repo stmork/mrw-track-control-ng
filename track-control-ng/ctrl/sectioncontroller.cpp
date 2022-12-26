@@ -106,7 +106,7 @@ void SectionController::setAutoUnlock(const bool auto_unlock)
 
 void SectionController::nextController(SectionController * input)
 {
-	if (input != nullptr)
+	if (input != next)
 	{
 		if (next != nullptr)
 		{
