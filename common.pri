@@ -23,4 +23,6 @@ linux:CONFIG(gcov) {
 	LIBS           += -lgcov
 }
 
-QMAKE_CLEAN += *.gcno *gcda
+install.path  = $$(PREFIX)/usr/bin
+
+QMAKE_CLEAN += *.gcno *gcda *.deb

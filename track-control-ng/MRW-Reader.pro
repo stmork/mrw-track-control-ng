@@ -47,3 +47,9 @@ FORMS += \
 LIBS            += -lMRW-UI -lMRW-Ctrl -lMRW-Model -lMRW-Can -lMRW-Statecharts -lMRW-Util
 
 QMAKE_CLEAN     += $$TARGET
+
+
+install.path  = $$(PREFIX)/usr/bin
+install.files = $$TARGET
+
+INSTALLS        += install

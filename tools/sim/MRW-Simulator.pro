@@ -11,10 +11,14 @@ include(../../common.pri)
 CONFIG += console
 
 SOURCES += \
- main.cpp \
- simulatorservice.cpp
-
-LIBS            += -lMRW-Model -lMRW-Can -lMRW-Util
+	main.cpp \
+	simulatorservice.cpp
 
 HEADERS += \
 	simulatorservice.h
+
+LIBS            += -lMRW-Model -lMRW-Can -lMRW-Util
+
+install.files = $$TARGET
+
+INSTALLS        += install

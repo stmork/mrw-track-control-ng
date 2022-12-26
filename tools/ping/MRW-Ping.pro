@@ -13,3 +13,7 @@ SOURCES += \
 	main.cpp
 
 LIBS            += -lMRW-Model -lMRW-Can -lMRW-Util
+
+install.files = $$TARGET
+
+INSTALLS        += install

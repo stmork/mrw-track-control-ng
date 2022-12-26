@@ -4,7 +4,7 @@
 #
 
 QT     += testlib
-CONFIG += testcase
+CONFIG += testcase no_testcase_installs
 
 include(../common.pri)
 
