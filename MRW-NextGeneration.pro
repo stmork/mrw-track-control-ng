@@ -16,36 +16,36 @@ SUBDIRS  = \
 	proxy \
 	sim \
 	tracker \
-	track-control-ng \
+	track-control \
 	study
 
-util.file                 = util/MRW-Util.pro
-can.file                  = can/MRW-Can.pro
-statecharts.file          = statecharts/MRW-Statecharts.pro
-model.file                = model/MRW-Model.pro
-ctrl.file                 = ctrl/MRW-Ctrl.pro
-ui.file                   = ui/MRW-UI.pro
-test.file                 = test/MRW-Test.pro
-ping.file                 = tools/ping/MRW-Ping.pro
-proxy.file                = tools/proxy/MRW-Proxy.pro
-sim.file                  = tools/sim/MRW-Simulator.pro
-tracker.file              = tools/tracker/MRW-Tracker.pro
-track-control-ng.file     = track-control-ng/MRW-Reader.pro
-study.file                = MRW-WidgetStudy/MRW-WidgetStudy.pro
+util.file              = util/MRW-Util.pro
+can.file               = can/MRW-Can.pro
+statecharts.file       = statecharts/MRW-Statecharts.pro
+model.file             = model/MRW-Model.pro
+ctrl.file              = ctrl/MRW-Ctrl.pro
+ui.file                = ui/MRW-UI.pro
+test.file              = test/MRW-Test.pro
+ping.file              = tools/ping/MRW-Ping.pro
+proxy.file             = tools/proxy/MRW-Proxy.pro
+sim.file               = tools/sim/MRW-Simulator.pro
+tracker.file           = tools/tracker/MRW-Tracker.pro
+track-control.file     = track-control/MRW-TrackControl.pro
+study.file             = MRW-WidgetStudy/MRW-WidgetStudy.pro
 
-can.depends               = util
-model.depends             = util can
-test.depends              = util can model
-ctrl.depends              = model can util
-ui.depends                = ctrl
-ping.depends              = test
-proxy.depends             = test
-sim.depends               = test
-tracker.depends           = test statecharts
-study.depends             = test ctrl ui
-track-control-ng.depends  = study statecharts
+can.depends            = util
+model.depends          = util can
+test.depends           = util can model
+ctrl.depends           = model can util
+ui.depends             = ctrl
+ping.depends           = test
+proxy.depends          = test
+sim.depends            = test
+tracker.depends        = test statecharts
+study.depends          = test ctrl ui
+track-control.depends  = study statecharts
 
-QMAKE_CLEAN              += qtest*.xml
+QMAKE_CLEAN           += qtest*.xml
 
 #####################################################################
 #

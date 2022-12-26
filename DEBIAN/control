@@ -7,4 +7,3 @@ Depends: libqt5widgets5, libqt5serialbus5
 Maintainer: Eisenbahnsteuerung <info@eisenbahnsteuerung.org>
 Homepage: http://eisenbahnsteuerung.org/
 Description: Next generation modelrailway control.
-
