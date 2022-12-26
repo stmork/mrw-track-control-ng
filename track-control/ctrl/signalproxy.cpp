@@ -67,11 +67,6 @@ void SignalProxy::send()
 	ControllerRegistry::can()->write(message);
 }
 
-void SignalProxy::prepare(sc::integer symbol)
-{
-	prepare(static_cast<Signal::Symbol>(symbol));
-}
-
 bool SignalProxy::process(Signal * device, const MrwMessage & message)
 {
 	Q_ASSERT(device != nullptr);
@@ -118,7 +113,7 @@ bool SignalProxy::process(Signal * device, const MrwMessage & message)
 **                                                                      **
 *************************************************************************/
 
-void MainProxy::prepare(Symbol symbol)
+void MainProxy::prepare()
 {
 	__METHOD__;
 
@@ -126,7 +121,7 @@ void MainProxy::prepare(Symbol symbol)
 
 	SignalState state = SIGNAL_OFF;
 
-	switch (symbol)
+	switch (getSymbol())
 	{
 	default:
 		state = SIGNAL_OFF;
@@ -160,7 +155,7 @@ void DistantProxy::start(Signal * input, Signal * combined)
 	SignalProxy::start(input);
 }
 
-void DistantProxy::prepare(Symbol symbol)
+void DistantProxy::prepare()
 {
 	__METHOD__;
 
@@ -168,7 +163,7 @@ void DistantProxy::prepare(Symbol symbol)
 
 	SignalState state      = SIGNAL_OFF;
 
-	switch (symbol)
+	switch (getSymbol())
 	{
 	case Symbol::GO:
 		if (main_controller != nullptr)
@@ -188,6 +183,17 @@ void DistantProxy::prepare(Symbol symbol)
 	}
 
 	signal->setState(state);
+}
+
+Symbol mrw::ctrl::DistantProxy::getPreparedSymbol() const
+{
+	Symbol result = (Symbol)getSymbol();
+
+	if ((result == Symbol::GO) && (main_controller != nullptr))
+	{
+		result = main_controller->main();
+	}
+	return result;
 }
 
 SignalControllerProxy * DistantProxy::mainController() const
@@ -217,11 +223,11 @@ bool ShuntProxy::isCombined()
 	return hasSignal() && (signal == main_signal);
 }
 
-void ShuntProxy::prepare(Symbol symbol)
+void ShuntProxy::prepare()
 {
 	SignalState state = SIGNAL_OFF;
 
-	switch (symbol)
+	switch (getSymbol())
 	{
 	default:
 		state = SIGNAL_OFF;

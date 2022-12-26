@@ -25,7 +25,7 @@ namespace mrw
 		SignalStatechart::SignalStatechart(QObject * parent) :
 			QObject(parent),
 			timeout(2000),
-			signalState(SignalStatechart::STOP),
+			symbol(SignalStatechart::STOP),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
@@ -255,14 +255,14 @@ namespace mrw
 			this->timeout = timeout_;
 		}
 
-		sc::integer SignalStatechart::getSignalState() const
+		sc::integer SignalStatechart::getSymbol() const
 		{
-			return signalState;
+			return symbol;
 		}
 
-		void SignalStatechart::setSignalState(sc::integer signalState_)
+		void SignalStatechart::setSymbol(sc::integer symbol_)
 		{
-			this->signalState = signalState_;
+			this->symbol = symbol_;
 		}
 
 		sc::integer SignalStatechart::getOFF()
@@ -291,7 +291,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Turning'. */
 			timerService->setTimer(this, 0, timeout, false);
-			ifaceOperationCallback->prepare(signalState);
+			ifaceOperationCallback->prepare();
 		}
 
 		/* Entry action for state 'Send'. */
@@ -305,8 +305,8 @@ namespace mrw
 		void SignalStatechart::enact_main_region_Fail()
 		{
 			/* Entry action for state 'Fail'. */
-			signalState = SignalStatechart::OFF;
-			ifaceOperationCallback->prepare(signalState);
+			symbol = SignalStatechart::OFF;
+			ifaceOperationCallback->prepare();
 			ifaceOperationCallback->send();
 			emit failed();
 		}
@@ -470,7 +470,7 @@ namespace mrw
 			/* The reactions of state null. */
 			if (ifaceOperationCallback->hasSignal())
 			{
-				signalState = turn_value;
+				symbol = turn_value;
 				enseq_main_region_Turning_default();
 			}
 			else

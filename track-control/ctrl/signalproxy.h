@@ -34,10 +34,7 @@ namespace mrw::ctrl
 		void start(mrw::model::Signal * input);
 
 		bool         hasSignal() override;
-		virtual void prepare(sc::integer symbol) override;
 		virtual void send() override;
-
-		virtual void prepare(mrw::model::Signal::Symbol symbol) = 0;
 
 		bool process(model::Signal * device, const can::MrwMessage & message);
 	};
@@ -55,7 +52,7 @@ namespace mrw::ctrl
 		size_t curved_count = 0;
 
 	public:
-		void prepare(mrw::model::Signal::Symbol symbol) override;
+		void prepare() override;
 
 		void setCurved(const size_t count);
 	};
@@ -80,7 +77,9 @@ namespace mrw::ctrl
 		SignalControllerProxy * mainController() const;
 		void setMainController(SignalControllerProxy * signal);
 
-		void prepare(mrw::model::Signal::Symbol symbol) override;
+		void prepare() override;
+
+		mrw::model::Signal::Symbol getPreparedSymbol() const;
 	};
 
 	/*************************************************************************
@@ -101,7 +100,7 @@ namespace mrw::ctrl
 			mrw::model::Signal * combined);
 		bool isCombined();
 
-		void prepare(mrw::model::Signal::Symbol symbol) override;
+		void prepare() override;
 	};
 }
 

@@ -8,7 +8,7 @@ testclass Signal for statechart mrw.^statechart.SignalStatechart
 	operation failState()
 	{
 		assert active (mrw.^statechart.SignalStatechart.main_region.Fail)
-		assert signalState == OFF
+		assert symbol == OFF
 		assert called prepare
 		assert called send
 		assert failed
@@ -34,7 +34,7 @@ testclass Signal for statechart mrw.^statechart.SignalStatechart
 
 		// Then
 		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
-		assert signalState == STOP
+		assert symbol == STOP
 	}
 
 	@Test
@@ -50,7 +50,7 @@ testclass Signal for statechart mrw.^statechart.SignalStatechart
 		// Then
 		assert active (mrw.^statechart.SignalStatechart.main_region.Turning)
 		assert active (mrw.^statechart.SignalStatechart.main_region.Turning.Turn_processing.Send)
-		assert signalState == GO
+		assert symbol == GO
 		assert called prepare
 		assert called send
 	}

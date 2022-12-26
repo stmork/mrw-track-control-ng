@@ -105,11 +105,11 @@ namespace mrw
 			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
 			void setTimeout(sc::integer timeout);
 
-			/*! Gets the value of the variable 'signalState' that is defined in the default interface scope. */
-			sc::integer getSignalState() const;
+			/*! Gets the value of the variable 'symbol' that is defined in the default interface scope. */
+			sc::integer getSymbol() const;
 
-			/*! Sets the value of the variable 'signalState' that is defined in the default interface scope. */
-			void setSignalState(sc::integer signalState);
+			/*! Sets the value of the variable 'symbol' that is defined in the default interface scope. */
+			void setSymbol(sc::integer symbol);
 
 			/*! Gets the value of the variable 'OFF' that is defined in the default interface scope. */
 			static sc::integer getOFF() ;
@@ -128,7 +128,7 @@ namespace mrw
 
 				virtual bool hasSignal() = 0;
 
-				virtual void prepare(sc::integer symbol) = 0;
+				virtual void prepare() = 0;
 
 				virtual void send() = 0;
 
@@ -227,7 +227,7 @@ namespace mrw
 			SignalStatechart & operator=(const SignalStatechart &);
 
 			sc::integer timeout;
-			sc::integer signalState;
+			sc::integer symbol;
 			static const sc::integer OFF;
 			static const sc::integer STOP;
 			static const sc::integer GO;

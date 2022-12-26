@@ -25,7 +25,7 @@ namespace mrw
 		SignalControllerStatechart::SignalControllerStatechart(QObject * parent) :
 			QObject(parent),
 			timeout(5000),
-			delay(500),
+			delay(350),
 			symbol(SignalControllerStatechart::STOP),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),

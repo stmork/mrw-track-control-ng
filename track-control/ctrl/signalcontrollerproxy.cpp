@@ -319,17 +319,17 @@ bool SignalControllerProxy::hasShunting() const
 
 Symbol SignalControllerProxy::main() const
 {
-	return static_cast<Signal::Symbol>(statechart_main.getSignalState());
+	return static_cast<Signal::Symbol>(statechart_main.getSymbol());
 }
 
 Symbol SignalControllerProxy::distant() const
 {
-	return static_cast<Signal::Symbol>(statechart_distant.getSignalState());
+	return statechart_distant.getPreparedSymbol();
 }
 
 Symbol SignalControllerProxy::shunt() const
 {
-	return static_cast<Signal::Symbol>(statechart_shunt.getSignalState());
+	return static_cast<Signal::Symbol>(statechart_shunt.getSymbol());
 }
 
 /*************************************************************************
