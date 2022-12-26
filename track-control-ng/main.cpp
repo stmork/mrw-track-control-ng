@@ -8,6 +8,7 @@
 #include <QSettings>
 #include <QDebug>
 
+#include <util/method.h>
 #include <util/settings.h>
 #include <util/dumphandler.h>
 #include <util/termhandler.h>
@@ -22,6 +23,9 @@ using namespace mrw::model;
 int main(int argc, char * argv[])
 {
 	QApplication             app(argc, argv);
+
+	Method::pattern();
+
 	TermHandler              terminator( { SIGTERM, SIGINT } );
 	ModelRepository          repo(ModelRepository::proposeModelName(), true);
 

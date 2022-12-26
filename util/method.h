@@ -41,6 +41,12 @@ namespace mrw::util
 		 * the method.
 		 */
 		virtual ~Method();
+
+		/**
+		 * This method sets the logging information to a unique pattern with
+		 * timestamp logging type and of course its message.
+		 */
+		static void pattern();
 	};
 }
 

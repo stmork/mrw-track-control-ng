@@ -20,3 +20,14 @@ Method::~Method()
 
 	qDebug("<%s() took %u ms.", method_name, elapsed);
 }
+
+void Method::pattern()
+{
+	qSetMessagePattern(
+		"%{time yyyy/MM/dd h:mm:ss.zzz} "
+		"%{if-debug}D%{endif}"
+		"%{if-info}I%{endif}"
+		"%{if-warning}W%{endif}"
+		"%{if-critical}C%{endif}"
+		"%{if-fatal}F%{endif} - %{message}");
+}

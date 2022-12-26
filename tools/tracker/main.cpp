@@ -5,6 +5,7 @@
 
 #include <QCoreApplication>
 
+#include <util/method.h>
 #include <util/dumphandler.h>
 #include <util/termhandler.h>
 
@@ -16,6 +17,9 @@ using namespace mrw::model;
 int main(int argc, char * argv[])
 {
 	QCoreApplication      app(argc, argv);
+
+	Method::pattern();
+
 	TermHandler           term_handler( { SIGTERM, SIGINT } );
 	ModelRepository       repo(ModelRepository::proposeModelName());
 	TrackerService        tracker(repo);

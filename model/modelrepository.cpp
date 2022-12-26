@@ -24,7 +24,9 @@ const char * ModelRepository::REGION_FILENAME   = "Gruppen.properties";
 const char * ModelRepository::SIGNAL_FILENAME   = "Signale.properties";
 const char * ModelRepository::RAILPART_FILENAME = "Gleisteile.properties";
 
-ModelRepository::ModelRepository(const QString & input, const bool position_using) :
+ModelRepository::ModelRepository(
+	const QString & input,
+	const bool      position_using) :
 	modelname(input),
 	settings_model(modelname),
 	home_dir(QDir::homePath()),
