@@ -16,6 +16,7 @@ namespace mrw::ctrl
 	 * This class provides the logic for a simple regular switch.
 	 *
 	 * @see BaseController
+	 * @see mrw::model::RegularSwitch
 	 */
 	class RegularSwitchController : public BaseController
 	{
