@@ -14,6 +14,7 @@ SUBDIRS  = \
 	test \
 	ping \
 	proxy \
+	reader \
 	sim \
 	tracker \
 	track-control \
@@ -28,6 +29,7 @@ ui.file                = ui/MRW-UI.pro
 test.file              = test/MRW-Test.pro
 ping.file              = tools/ping/MRW-Ping.pro
 proxy.file             = tools/proxy/MRW-Proxy.pro
+reader.file            = tools/reader/MRW-Reader.pro
 sim.file               = tools/sim/MRW-Simulator.pro
 tracker.file           = tools/tracker/MRW-Tracker.pro
 track-control.file     = track-control/MRW-TrackControl.pro
@@ -40,6 +42,7 @@ ctrl.depends           = model can util
 ui.depends             = ctrl
 ping.depends           = test
 proxy.depends          = test
+reader.depends         = test
 sim.depends            = test
 tracker.depends        = test statecharts
 study.depends          = test ctrl ui
@@ -109,4 +112,4 @@ lcov.commands += lcov -c --no-external -d $$(PWD) -o coverage.info\
 lcov.commands += genhtml coverage.info -s --num-spaces 4 --legend -t \"MRW-NG Test Coverage\" --output-directory $$LCOV_DIR --rc genhtml_med_limit=50
 
 QMAKE_EXTRA_TARGETS += lcov
-QMAKE_CLEAN         += coverage.info
+QMAKE_CLEAN         += coverage.info *.deb

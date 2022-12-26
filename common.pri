@@ -25,4 +25,4 @@ linux:CONFIG(gcov) {
 
 install.path  = $$(PREFIX)/usr/bin
 
-QMAKE_CLEAN += *.gcno *gcda *.deb
+QMAKE_CLEAN += *.gcno *gcda
