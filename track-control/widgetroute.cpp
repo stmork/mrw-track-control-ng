@@ -445,6 +445,22 @@ void WidgetRoute::collectSignalController(std::vector<SignalControllerProxy *> &
 	}
 }
 
+void WidgetRoute::collectSignalController(
+	std::vector<SignalControllerProxy *> & controllers,
+	const bool                             unlocked) const
+{
+	controllers.clear();
+	for (Section * section : sections)
+	{
+		SignalControllerProxy * controller = getSignalController(section);
+
+		if ((controller != nullptr) && (controller->isUnlocked() == unlocked))
+		{
+			controllers.push_back(controller);
+		}
+	}
+}
+
 void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & controllers) const
 {
 	controllers.clear();
@@ -554,29 +570,42 @@ void WidgetRoute::deactivateSections()
 	}
 }
 
+#define DIVIDED_UPDATE
+
 void WidgetRoute::turnSignals()
 {
 	__METHOD__;
 
-	std::vector<SignalControllerProxy *> controllers;
+	collectSignalController(controllers_unlocked, true);
+	collectSignalController(controllers_locked,   false);
 
-	collectSignalController(controllers);
-	for (auto it = controllers.rbegin(); it != controllers.rend(); ++it)
+	for (auto it = controllers_unlocked.rbegin(); it != controllers_unlocked.rend(); ++it)
 	{
 		SignalControllerProxy * controller = *it;
 
-		if (controller->isUnlocked())
-		{
-			controller->enable();
-		}
-		else
-		{
-			controller->update();
-		}
+		controller->enable();
 		qDebug().noquote() << *controller;
 	}
 
-	if (controllers.size() == 0)
+	if (controllers_unlocked.size() == 0)
+	{
+		ControllerRegistry::instance().complete();
+	}
+}
+
+void WidgetRoute::updateSignals()
+{
+	__METHOD__;
+
+	for (auto it = controllers_locked.rbegin(); it != controllers_locked.rend(); ++it)
+	{
+		SignalControllerProxy * controller = *it;
+
+		controller->update();
+		qDebug().noquote() << *controller;
+	}
+
+	if (controllers_locked.size() == 0)
 	{
 		ControllerRegistry::instance().complete();
 	}

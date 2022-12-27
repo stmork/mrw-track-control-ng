@@ -107,7 +107,7 @@ void RegionForm::setupSize(Region * region)
 	}
 
 	ui->controlWidget->setFixedSize(
-		xMax * BaseWidget::SIZE / Position::FRACTION,
+		xMax * BaseWidget::SIZE / Position::FRACTION + BaseWidget::SIZE,
 		yMax * BaseWidget::SIZE / Position::FRACTION + BaseWidget::SIZE);
 }
 

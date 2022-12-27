@@ -55,10 +55,26 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	}
 
 	@Test
-	operation sections()
+	operation updatingSignals()
 	{
 		// Given
 		turningSignals()
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Signal_Updating)
+		assert called reset()
+		assert called turnSignals()
+	}
+
+	@Test
+	operation sections()
+	{
+		// Given
+		updatingSignals()
 
 		// When
 		raise completed
@@ -185,6 +201,20 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	}
 
 	@Test
+	operation failUpdatingSignals()
+	{
+		// Given
+		updatingSignals()
+		mock isCompleted returns (true)
+
+		// When
+		raise failed
+
+		// Then
+		disabled()
+	}
+
+	@Test
 	operation failTurningSections()
 	{
 		// Given
@@ -217,6 +247,20 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	{
 		// Given
 		turningSignals()
+		mock isCompleted returns (false)
+
+		// When
+		raise failed
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Wait)
+	}
+
+	@Test
+	operation failUpdatingSignalsIncomplete()
+	{
+		// Given
+		updatingSignals()
 		mock isCompleted returns (false)
 
 		// When
@@ -342,6 +386,25 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	{
 		// Given
 		turningSignals()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Emergency_Shutdown)
+
+		// When
+		proceed emergency ms
+
+		// Then
+		disabled()
+	}
+
+	@Test
+	operation timeoutUpdatingSignals()
+	{
+		// Given
+		updatingSignals()
 
 		// When
 		proceed timeout ms

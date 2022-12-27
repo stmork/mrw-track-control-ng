@@ -67,7 +67,7 @@ void SignalProxy::send()
 	ControllerRegistry::can()->write(message);
 }
 
-void mrw::ctrl::SignalProxy::dump()
+void SignalProxy::dump()
 {
 	__METHOD__;
 

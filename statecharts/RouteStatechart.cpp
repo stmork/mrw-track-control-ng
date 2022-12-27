@@ -210,7 +210,7 @@ namespace mrw
 				}
 			case mrw::statechart::RouteStatechart::State::main_region_Turning :
 				{
-					return  (stateConfVector[scvi_main_region_Turning] >= mrw::statechart::RouteStatechart::State::main_region_Turning && stateConfVector[scvi_main_region_Turning] <= mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation);
+					return  (stateConfVector[scvi_main_region_Turning] >= mrw::statechart::RouteStatechart::State::main_region_Turning && stateConfVector[scvi_main_region_Turning] <= mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Updating);
 					break;
 				}
 			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning :
@@ -226,6 +226,11 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation :
 				{
 					return  (stateConfVector[scvi_main_region_Turning_Turning_process_Section_Activation] == mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Updating :
+				{
+					return  (stateConfVector[scvi_main_region_Turning_Turning_process_Signal_Updating] == mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Updating);
 					break;
 				}
 			case mrw::statechart::RouteStatechart::State::main_region_Wait :
@@ -321,6 +326,14 @@ namespace mrw
 			/* Entry action for state 'Section Activation'. */
 			ifaceOperationCallback->reset();
 			ifaceOperationCallback->activateSections();
+		}
+
+		/* Entry action for state 'Signal Updating'. */
+		void RouteStatechart::enact_main_region_Turning_Turning_process_Signal_Updating()
+		{
+			/* Entry action for state 'Signal Updating'. */
+			ifaceOperationCallback->reset();
+			ifaceOperationCallback->updateSignals();
 		}
 
 		/* Entry action for state 'Wait'. */
@@ -421,6 +434,14 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation;
 		}
 
+		/* 'default' enter sequence for state Signal Updating */
+		void RouteStatechart::enseq_main_region_Turning_Turning_process_Signal_Updating_default()
+		{
+			/* 'default' enter sequence for state Signal Updating */
+			enact_main_region_Turning_Turning_process_Signal_Updating();
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Updating;
+		}
+
 		/* 'default' enter sequence for state Wait */
 		void RouteStatechart::enseq_main_region_Wait_default()
 		{
@@ -502,6 +523,13 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
 		}
 
+		/* Default exit sequence for state Signal Updating */
+		void RouteStatechart::exseq_main_region_Turning_Turning_process_Signal_Updating()
+		{
+			/* Default exit sequence for state Signal Updating */
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
+		}
+
 		/* Default exit sequence for state Wait */
 		void RouteStatechart::exseq_main_region_Wait()
 		{
@@ -563,6 +591,12 @@ namespace mrw
 					exact_main_region_Turning();
 					break;
 				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Updating :
+				{
+					exseq_main_region_Turning_Turning_process_Signal_Updating();
+					exact_main_region_Turning();
+					break;
+				}
 			case mrw::statechart::RouteStatechart::State::main_region_Wait :
 				{
 					exseq_main_region_Wait();
@@ -599,6 +633,11 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation :
 				{
 					exseq_main_region_Turning_Turning_process_Section_Activation();
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Updating :
+				{
+					exseq_main_region_Turning_Turning_process_Signal_Updating();
 					break;
 				}
 			default:
@@ -812,7 +851,7 @@ namespace mrw
 				if (completed_raised)
 				{
 					exseq_main_region_Turning_Turning_process_Signal_Turning();
-					enseq_main_region_Turning_Turning_process_Section_Activation_default();
+					enseq_main_region_Turning_Turning_process_Signal_Updating_default();
 					main_region_Turning_react(0);
 					transitioned_after = 0;
 				}
@@ -836,6 +875,28 @@ namespace mrw
 					exseq_main_region_Turning();
 					enseq_main_region_Active_default();
 					react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Turning_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer RouteStatechart::main_region_Turning_Turning_process_Signal_Updating_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Signal Updating. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (completed_raised)
+				{
+					exseq_main_region_Turning_Turning_process_Signal_Updating();
+					enseq_main_region_Turning_Turning_process_Section_Activation_default();
+					main_region_Turning_react(0);
 					transitioned_after = 0;
 				}
 			}
@@ -952,6 +1013,11 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation :
 				{
 					main_region_Turning_Turning_process_Section_Activation_react(-1);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Updating :
+				{
+					main_region_Turning_Turning_process_Signal_Updating_react(-1);
 					break;
 				}
 			case mrw::statechart::RouteStatechart::State::main_region_Wait :

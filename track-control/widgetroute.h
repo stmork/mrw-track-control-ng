@@ -29,6 +29,9 @@ private:
 
 	mrw::statechart::RouteStatechart   statechart;
 
+	std::vector<mrw::ctrl::SignalControllerProxy *> controllers_unlocked;
+	std::vector<mrw::ctrl::SignalControllerProxy *> controllers_locked;
+
 public:
 	static const int        USER_ROLE = Qt::UserRole + 1;
 
@@ -66,6 +69,9 @@ private:
 
 	void collectSignalController(
 		std::vector<mrw::ctrl::SignalControllerProxy *> & controllers) const;
+	void collectSignalController(
+		std::vector<mrw::ctrl::SignalControllerProxy *> & controllers,
+		const bool                                        unlocked) const;
 	void collectSectionControllers(
 		std::vector<mrw::ctrl::SectionController *>   &   controllers) const;
 
@@ -90,6 +96,7 @@ private:
 	virtual void turnSwitches() override;
 	virtual void activateSections() override;
 	virtual void turnSignals() override;
+	virtual void updateSignals() override;
 	virtual void deactivateSections() override;
 	virtual void unlockSignals() override;
 	virtual void unlockSwitches() override;
