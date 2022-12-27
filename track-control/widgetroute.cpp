@@ -382,6 +382,13 @@ void WidgetRoute::reset()
 	ControllerRegistry::instance().reset();
 }
 
+void WidgetRoute::fail()
+{
+	__METHOD__;
+
+	dump();
+}
+
 void WidgetRoute::tryComplete()
 {
 	__METHOD__;
@@ -558,28 +565,14 @@ void WidgetRoute::turnSignals()
 	{
 		SignalControllerProxy * controller = *it;
 
-		controller->enable();
-		qDebug().noquote() << *controller;
-	}
-
-	if (controllers.size() == 0)
-	{
-		ControllerRegistry::instance().complete();
-	}
-}
-
-void WidgetRoute::updateSignals()
-{
-	__METHOD__;
-
-	std::vector<SignalControllerProxy *> controllers;
-
-	collectSignalController(controllers);
-	for (auto it = controllers.rbegin(); it != controllers.rend(); ++it)
-	{
-		SignalControllerProxy * controller = *it;
-
-		controller->update();
+		if (controller->isUnlocked())
+		{
+			controller->enable();
+		}
+		else
+		{
+			controller->update();
+		}
 		qDebug().noquote() << *controller;
 	}
 

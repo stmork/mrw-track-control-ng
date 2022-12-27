@@ -208,7 +208,7 @@ void SignalControllerProxy::add(Signal * signal)
 
 bool SignalControllerProxy::isUnlocked() const
 {
-	return lock() == LockState::UNLOCKED;
+	return lock_state == LockState::UNLOCKED;
 }
 
 Signal * SignalControllerProxy::mainSignal() const
@@ -384,13 +384,14 @@ QString SignalControllerProxy::toString() const
 {
 	Symbol symbol = (Symbol)statechart.getSymbol();
 
-	return QString("SCP %1%2%3           :        %5 %6 - %7 %8 %9").
+	return QString("SCP %1%2%3           :        %4 %5 %6 - %7 %8 %9").
 		arg(hasMain()     ? 'M' : '-').
 		arg(hasDistant()  ? 'D' : '-').
 		arg(hasShunting() ? 'S' : '-').
 
 		arg(grouped_name, -10).
 		arg(Signal::get(symbol), -4).
+		arg(Device::get(lock_state), -7).
 		arg(Signal::get(main()),    -4).
 		arg(Signal::get(distant()), -4).
 		arg(Signal::get(shunt()),   -4);
@@ -449,7 +450,7 @@ void SignalControllerProxy::pending()
 
 void SignalControllerProxy::lock(const bool do_it)
 {
-#ifdef VERBOSE
+#ifndef VERBOSE
 	qDebug().noquote() << String::bold("Lock:") << *this;
 #endif
 

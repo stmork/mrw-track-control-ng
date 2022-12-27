@@ -55,26 +55,10 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	}
 
 	@Test
-	operation updatingSignals()
-	{
-		// Given
-		turningSignals()
-
-		// When
-		raise completed
-
-		// Then
-		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
-		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Signal_Updating)
-		assert called reset()
-		assert called turnSignals()
-	}
-
-	@Test
 	operation sections()
 	{
 		// Given
-		updatingSignals()
+		turningSignals()
 
 		// When
 		raise completed
@@ -201,20 +185,6 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	}
 
 	@Test
-	operation failupdatingSignals()
-	{
-		// Given
-		updatingSignals()
-		mock isCompleted returns (true)
-
-		// When
-		raise failed
-
-		// Then
-		disabled()
-	}
-
-	@Test
 	operation failTurningSections()
 	{
 		// Given
@@ -247,20 +217,6 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	{
 		// Given
 		turningSignals()
-		mock isCompleted returns (false)
-
-		// When
-		raise failed
-
-		// Then
-		assert active (mrw.^statechart.RouteStatechart.main_region.Wait)
-	}
-
-	@Test
-	operation failUpdatingSignalsIncomplete()
-	{
-		// Given
-		updatingSignals()
 		mock isCompleted returns (false)
 
 		// When
@@ -372,6 +328,12 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 		proceed timeout ms
 
 		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Emergency_Shutdown)
+
+		// When
+		proceed emergency ms
+
+		// Then
 		disabled()
 	}
 
@@ -385,17 +347,10 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 		proceed timeout ms
 
 		// Then
-		disabled()
-	}
-
-	@Test
-	operation timeoutUpdatngSignals()
-	{
-		// Given
-		updatingSignals()
+		assert active (mrw.^statechart.RouteStatechart.main_region.Emergency_Shutdown)
 
 		// When
-		proceed timeout ms
+		proceed emergency ms
 
 		// Then
 		disabled()
@@ -409,6 +364,12 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 
 		// When
 		proceed timeout ms
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Emergency_Shutdown)
+
+		// When
+		proceed emergency ms
 
 		// Then
 		disabled()

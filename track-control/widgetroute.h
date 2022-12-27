@@ -83,13 +83,13 @@ private:
 
 	// Implementation of RouteStatemachine::OperationCallback
 	virtual void reset() override;
+	virtual void fail() override;
 	virtual void tryComplete() override;
 	virtual bool isCompleted() override;
 
 	virtual void turnSwitches() override;
 	virtual void activateSections() override;
 	virtual void turnSignals() override;
-	virtual void updateSignals() override;
 	virtual void deactivateSections() override;
 	virtual void unlockSignals() override;
 	virtual void unlockSwitches() override;

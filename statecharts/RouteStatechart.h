@@ -58,8 +58,8 @@ namespace mrw
 				main_region_Turning_Turning_process_Switch_Turning,
 				main_region_Turning_Turning_process_Signal_Turning,
 				main_region_Turning_Turning_process_Section_Activation,
-				main_region_Turning_Turning_process_Signal_Updating,
-				main_region_Wait
+				main_region_Wait,
+				main_region_Emergency_Shutdown
 			};
 
 			/*! The number of states. */
@@ -72,8 +72,8 @@ namespace mrw
 			static const sc::integer scvi_main_region_Turning_Turning_process_Switch_Turning = 0;
 			static const sc::integer scvi_main_region_Turning_Turning_process_Signal_Turning = 0;
 			static const sc::integer scvi_main_region_Turning_Turning_process_Section_Activation = 0;
-			static const sc::integer scvi_main_region_Turning_Turning_process_Signal_Updating = 0;
 			static const sc::integer scvi_main_region_Wait = 0;
+			static const sc::integer scvi_main_region_Emergency_Shutdown = 0;
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -85,7 +85,8 @@ namespace mrw
 				extended,
 				_te0_main_region_Disable_,
 				_te1_main_region_Turning_,
-				_te2_main_region_Wait_
+				_te2_main_region_Wait_,
+				_te3_main_region_Emergency_Shutdown_
 			};
 
 			class EventInstance
@@ -105,6 +106,12 @@ namespace mrw
 			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
 			void setTimeout(sc::integer timeout);
 
+			/*! Gets the value of the variable 'emergency' that is defined in the default interface scope. */
+			sc::integer getEmergency() const;
+
+			/*! Sets the value of the variable 'emergency' that is defined in the default interface scope. */
+			void setEmergency(sc::integer emergency);
+
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
 			{
@@ -112,6 +119,8 @@ namespace mrw
 				virtual ~OperationCallback() = 0;
 
 				virtual void reset() = 0;
+
+				virtual void fail() = 0;
 
 				virtual void tryComplete() = 0;
 
@@ -122,8 +131,6 @@ namespace mrw
 				virtual void activateSections() = 0;
 
 				virtual void turnSignals() = 0;
-
-				virtual void updateSignals() = 0;
 
 				virtual void deactivateSections() = 0;
 
@@ -179,7 +186,7 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 3;
+			static const sc::integer timeEventsCount = 4;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
@@ -223,6 +230,7 @@ namespace mrw
 			RouteStatechart & operator=(const RouteStatechart &);
 
 			sc::integer timeout;
+			sc::integer emergency;
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
@@ -249,11 +257,12 @@ namespace mrw
 			void enact_main_region_Turning_Turning_process_Switch_Turning();
 			void enact_main_region_Turning_Turning_process_Signal_Turning();
 			void enact_main_region_Turning_Turning_process_Section_Activation();
-			void enact_main_region_Turning_Turning_process_Signal_Updating();
 			void enact_main_region_Wait();
+			void enact_main_region_Emergency_Shutdown();
 			void exact_main_region_Disable();
 			void exact_main_region_Turning();
 			void exact_main_region_Wait();
+			void exact_main_region_Emergency_Shutdown();
 			void enseq_main_region_Active_default();
 			void enseq_main_region_Disable_default();
 			void enseq_main_region_Start_default();
@@ -261,8 +270,8 @@ namespace mrw
 			void enseq_main_region_Turning_Turning_process_Switch_Turning_default();
 			void enseq_main_region_Turning_Turning_process_Signal_Turning_default();
 			void enseq_main_region_Turning_Turning_process_Section_Activation_default();
-			void enseq_main_region_Turning_Turning_process_Signal_Updating_default();
 			void enseq_main_region_Wait_default();
+			void enseq_main_region_Emergency_Shutdown_default();
 			void enseq_main_region_default();
 			void exseq_main_region_Active();
 			void exseq_main_region_Disable();
@@ -272,8 +281,8 @@ namespace mrw
 			void exseq_main_region_Turning_Turning_process_Switch_Turning();
 			void exseq_main_region_Turning_Turning_process_Signal_Turning();
 			void exseq_main_region_Turning_Turning_process_Section_Activation();
-			void exseq_main_region_Turning_Turning_process_Signal_Updating();
 			void exseq_main_region_Wait();
+			void exseq_main_region_Emergency_Shutdown();
 			void exseq_main_region();
 			void exseq_main_region_Turning_Turning_process();
 			void react_main_region__choice_0();
@@ -287,8 +296,8 @@ namespace mrw
 			sc::integer main_region_Turning_Turning_process_Switch_Turning_react(const sc::integer transitioned_before);
 			sc::integer main_region_Turning_Turning_process_Signal_Turning_react(const sc::integer transitioned_before);
 			sc::integer main_region_Turning_Turning_process_Section_Activation_react(const sc::integer transitioned_before);
-			sc::integer main_region_Turning_Turning_process_Signal_Updating_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_react(const sc::integer transitioned_before);
+			sc::integer main_region_Emergency_Shutdown_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
 			void runCycle();
