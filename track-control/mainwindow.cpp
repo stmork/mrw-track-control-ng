@@ -40,6 +40,7 @@ MainWindow::MainWindow(
 	BaseWidget::setVerbose(false);
 
 	ui->setupUi(this);
+	setWindowTitle("Modelbased railway control (next generation) - " + repository.modelName());
 	initRegion();
 
 	QList<ControllerWidget *> widgets = findChildren<ControllerWidget *>();
