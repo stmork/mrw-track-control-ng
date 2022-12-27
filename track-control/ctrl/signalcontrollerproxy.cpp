@@ -450,7 +450,7 @@ void SignalControllerProxy::pending()
 
 void SignalControllerProxy::lock(const bool do_it)
 {
-#ifndef VERBOSE
+#ifdef VERBOSE
 	qDebug().noquote() << String::bold("Lock:") << *this;
 #endif
 
