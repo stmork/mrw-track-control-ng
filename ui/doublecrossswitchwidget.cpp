@@ -39,6 +39,8 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	QColor section_color = sectionColor(base_controller->state());
 	QColor outside_color = sectionColor(SectionState::FREE);
 	const bool   pending = lockVisible(base_controller->lock());
+	const bool   is_right_bended =
+		controller<DoubleCrossSwitchController>()->isRightBended();
 	QPen   pen;
 
 	rescale(painter);

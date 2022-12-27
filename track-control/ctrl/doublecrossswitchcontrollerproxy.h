@@ -54,6 +54,7 @@ namespace mrw::ctrl
 		virtual mrw::model::Position::Bending bending() const override;
 
 		// Implementations from DoubleCrossSwitchController
+		virtual bool isRightBended() const override;
 		virtual mrw::model::DoubleCrossSwitch::State switchState() const override;
 
 		// Implementation from RailPartInfo

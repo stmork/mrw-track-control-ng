@@ -18,9 +18,9 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
+		unsigned              extension    = 0;
 		bool                  inclined     = false;
 		bool                  a_is_dir     = false;
-		unsigned              extension    = 0;
 		bool                  left_handed  = true;
 
 		mrw::model::Device::LockState     lock_state =

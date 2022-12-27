@@ -25,19 +25,15 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	ui->smallSwitchWidget->setController(&mock);
 
 	/********************************************************/
-	/*   Counting direction                                 */
+	/*  Switch orientation                                  */
 	/********************************************************/
 
-	connect(ui->backwardButton, &QRadioButton::clicked,
-		&mock, [&]()
-	{
-		mock.setDirection(false);
-	});
-	connect(ui->forwardButton, &QRadioButton::clicked,
-		&mock, [&]()
-	{
-		mock.setDirection(true);
-	});
+	connect(
+		ui->leftHandedButton, &QRadioButton::clicked,
+		&mock, &DoubleCrossSwitchControllerMock::setLeftHanded);
+	connect(
+		ui->rightHandedButton, &QRadioButton::clicked,
+		&mock, &DoubleCrossSwitchControllerMock::setRightHanded);
 
 	/********************************************************/
 	/*  Switch direction                                    */
@@ -66,6 +62,21 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 		&mock, [&] ()
 	{
 		mock.setSwitchState(DoubleCrossSwitch::State::BD);
+	});
+
+	/********************************************************/
+	/*   Counting direction                                 */
+	/********************************************************/
+
+	connect(ui->backwardButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setDirection(false);
+	});
+	connect(ui->forwardButton, &QRadioButton::clicked,
+		&mock, [&]()
+	{
+		mock.setDirection(true);
 	});
 
 	/********************************************************/

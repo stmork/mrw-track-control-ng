@@ -63,10 +63,10 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	const bool   pending = lockVisible(base_controller->lock());
 	const bool   is_inclined     =
 		controller<RegularSwitchController>()->isInclined();
-	const bool   is_right_handed =
+	const bool   is_right_bended =
 		controller<RegularSwitchController>()->isRightBended();
 	const bool   is_turn_out     =
-		(controller<RegularSwitchController>()->isLeft() != is_right_handed) != is_inclined;
+		(controller<RegularSwitchController>()->isLeft() != is_right_bended) != is_inclined;
 
 	Q_ASSERT(base_controller != nullptr);
 
@@ -89,10 +89,10 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	painter.setFont(font);
 	painter.drawText(QRectF(
 			base_controller->isDirection() == is_inclined ? -SCALE : -20,
-			base_controller->isDirection() == is_right_handed ? -80 : 30, 120, FONT_HEIGHT),
+			base_controller->isDirection() == is_right_bended ? -80 : 30, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
 
-	if (is_right_handed != is_inclined)
+	if (is_right_bended != is_inclined)
 	{
 		// Draw always left handed but invert vertically if right handed.
 		painter.scale( 1.0f, -1.0f);
