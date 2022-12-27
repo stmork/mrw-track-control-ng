@@ -76,7 +76,7 @@ void RailWidget::paint(QPainter & painter)
 
 	// Draw rail name before mirroring to prevent mirrored font drawing.
 	prepareFailed(painter, base_controller->lock() == Device::LockState::FAIL);
-	font.setPixelSize(FONT_HEIGHT);
+	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
 	painter.drawText(QRectF(
 			(is_dir == (bending != Bending::STRAIGHT)) || a_ends ? SCALE - text_width : -SCALE,

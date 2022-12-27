@@ -21,7 +21,7 @@ DoubleCrossSwitchWidget::DoubleCrossSwitchWidget(
 void DoubleCrossSwitchWidget::computeConnectors()
 {
 	connector_list.clear();
-	if (base_controller->isDirection())
+	if (controller<DoubleCrossSwitchController>()->isRightBended())
 	{
 		connector_list.append(QPoint(1, 0));
 		connector_list.append(QPoint(3, 4));
@@ -39,6 +39,7 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	QColor section_color = sectionColor(base_controller->state());
 	QColor outside_color = sectionColor(SectionState::FREE);
 	const bool   pending = lockVisible(base_controller->lock());
+	const bool   is_direction    = base_controller->isDirection();
 	const bool   is_right_bended =
 		controller<DoubleCrossSwitchController>()->isRightBended();
 	QPen   pen;
@@ -47,17 +48,23 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
 	prepareFailed(painter, base_controller->lock() == Device::LockState::FAIL);
-	font.setPixelSize(FONT_HEIGHT);
+	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
 	painter.drawText(QRectF(
 			false ? -SCALE : -20,
-			base_controller->isDirection() ? -85 : 35, 120, FONT_HEIGHT),
+			is_right_bended ? -85 : 35, 120, FONT_HEIGHT),
 		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
 
-	if (!base_controller->isDirection())
+	if (!is_direction)
 	{
 		// Draw from left to right but invert horizontally if counter direction.
-		painter.scale(-1.0f, 1.0f);
+		painter.scale(-1.0f, -1.0f);
+	}
+
+	if (!is_right_bended)
+	{
+		// Draw from left to right but invert horizontally if counter direction.
+		painter.scale(1.0f, -1.0f);
 	}
 
 	// Draw point lock
@@ -66,6 +73,9 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 		base_controller->lock() == LockState::LOCKED ?
 		section_color : WHITE,
 		0, 0);
+
+	pen.setCapStyle(Qt::FlatCap);
+	pen.setWidth(RAIL_WIDTH);
 
 	// Draw A segment
 	drawSheared(painter,
@@ -76,9 +86,6 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	drawSheared(painter,
 		isD() ? section_color : outside_color,  50,  100,
 		isD() && pending  ? -70.0f : -15.0f, -RAIL_SLOPE);
-
-	pen.setCapStyle(Qt::FlatCap);
-	pen.setWidth(RAIL_WIDTH);
 
 	// Draw B segment
 	pen.setColor(isB() ? section_color : outside_color);
@@ -101,28 +108,32 @@ bool DoubleCrossSwitchWidget::isLockPending() const
 
 bool DoubleCrossSwitchWidget::isA() const
 {
-	const unsigned mask  = base_controller->isDirection() ? DoubleCrossSwitch::B_MASK : 0;
+	const bool is_right_bended = controller<DoubleCrossSwitchController>()->isRightBended();
+	const unsigned mask        = is_right_bended ? DoubleCrossSwitch::B_MASK : 0;
 
 	return (switchState() & DoubleCrossSwitch::B_MASK) != mask;
 }
 
 bool DoubleCrossSwitchWidget::isB() const
 {
-	const unsigned mask  = base_controller->isDirection() ? DoubleCrossSwitch::B_MASK : 0;
+	const bool is_right_bended = controller<DoubleCrossSwitchController>()->isRightBended();
+	const unsigned mask        = is_right_bended ? DoubleCrossSwitch::B_MASK : 0;
 
 	return (switchState() & DoubleCrossSwitch::B_MASK) == mask;
 }
 
 bool DoubleCrossSwitchWidget::isC() const
 {
-	const unsigned mask  = base_controller->isDirection() ? DoubleCrossSwitch::D_MASK : 0;
+	const bool is_right_bended = controller<DoubleCrossSwitchController>()->isRightBended();
+	const unsigned mask        = is_right_bended ? DoubleCrossSwitch::D_MASK : 0;
 
 	return (switchState() & DoubleCrossSwitch::D_MASK) != mask;
 }
 
 bool DoubleCrossSwitchWidget::isD() const
 {
-	const unsigned mask  = base_controller->isDirection() ? DoubleCrossSwitch::D_MASK : 0;
+	const bool is_right_bended = controller<DoubleCrossSwitchController>()->isRightBended();
+	const unsigned mask        = is_right_bended ? DoubleCrossSwitch::D_MASK : 0;
 
 	return (switchState() & DoubleCrossSwitch::D_MASK) == mask;
 }

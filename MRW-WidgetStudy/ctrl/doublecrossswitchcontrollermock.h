@@ -14,7 +14,7 @@
 namespace mrw::ctrl
 {
 	class DoubleCrossSwitchControllerMock :
-			public DoubleCrossSwitchController
+		public DoubleCrossSwitchController
 	{
 		Q_OBJECT
 
@@ -32,6 +32,11 @@ namespace mrw::ctrl
 	public:
 		DoubleCrossSwitchControllerMock(QObject * parent = nullptr);
 
+		void setSectionState(const mrw::model::SectionState state);
+		void setSwitchState(const mrw::model::DoubleCrossSwitch::State state);
+		void setDirection(const bool dir = true);
+		void setLock(const mrw::model::Device::LockState lock);
+
 		// Implementations from BaseController
 		virtual QString name() const override;
 		virtual bool    isDirection() const override;
@@ -43,11 +48,6 @@ namespace mrw::ctrl
 		// Implementations from DoubleCrossSwitchController
 		virtual bool isRightBended() const override;
 		virtual mrw::model::DoubleCrossSwitch::State switchState() const override;
-
-		void setSectionState(const mrw::model::SectionState state);
-		void setSwitchState(const mrw::model::DoubleCrossSwitch::State state);
-		void setDirection(const bool dir = true);
-		void setLock(const mrw::model::Device::LockState lock);
 
 	public slots:
 		void setLeftHanded(const bool left = true);

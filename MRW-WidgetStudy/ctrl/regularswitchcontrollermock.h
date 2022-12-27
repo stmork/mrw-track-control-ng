@@ -33,6 +33,10 @@ namespace mrw::ctrl
 	public:
 		RegularSwitchControllerMock(QObject * parent = nullptr);
 
+		void setDirection(const bool dir = true);
+		void setSectionState(const mrw::model::SectionState state);
+		void setLock(const mrw::model::Device::LockState lock);
+
 		// Implementations from BaseController
 		virtual QString name() const override;
 		virtual bool    isDirection() const override;
@@ -47,10 +51,6 @@ namespace mrw::ctrl
 		virtual bool    isRight() const override;
 		virtual bool    isRightBended() const override;
 		virtual bool    isInclined() const override;
-
-		void setDirection(const bool dir = true);
-		void setSectionState(const mrw::model::SectionState state);
-		void setLock(const mrw::model::Device::LockState lock);
 
 	signals:
 		void extend();

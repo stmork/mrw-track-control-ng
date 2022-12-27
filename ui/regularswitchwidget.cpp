@@ -85,7 +85,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
 	prepareFailed(painter, base_controller->lock() == LockState::FAIL);
-	font.setPixelSize(FONT_HEIGHT);
+	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
 	painter.drawText(QRectF(
 			base_controller->isDirection() == is_inclined ? -SCALE : -20,

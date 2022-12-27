@@ -79,12 +79,17 @@ void SignalWidget::paint(QPainter & painter)
 
 	// Draw switch name before rotating to prevent rotated font drawing.
 	prepareFailed(painter, base_controller->lock() == Device::LockState::FAIL);
-	font.setPixelSize(FONT_HEIGHT);
+	font.setPixelSize(FONT_SIZE);
+
+	const QFontMetrics metrics(font);
+	const QString      name = base_controller->name();
+	const float        text_width = metrics.horizontalAdvance(name) + 10;
+
 	painter.setFont(font);
 	painter.drawText(QRectF(
-			base_controller->isDirection() ? -border : border - 130,
-			base_controller->isDirection() ? -80 : 30, 130, FONT_HEIGHT),
-		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
+			base_controller->isDirection() ? -border : border - text_width,
+			base_controller->isDirection() ? -80 : 30, text_width, FONT_HEIGHT),
+		Qt::AlignCenter | Qt::AlignHCenter, name);
 
 	if (!base_controller->isDirection())
 	{
