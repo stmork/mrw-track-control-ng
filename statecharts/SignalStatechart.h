@@ -132,6 +132,8 @@ namespace mrw
 
 				virtual void send() = 0;
 
+				virtual void dump() = 0;
+
 
 			};
 

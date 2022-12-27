@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_FbTCAHbWEe2lmIyQXv_DxQ" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 5000&#xA;var delay : integer = 350&#xA;var symbol : integer = STOP&#xA;&#xA;const OFF : integer = -1&#xA;const STOP : integer = 0&#xA;const GO : integer = 1&#xA;&#xA;in event start&#xA;in event clear&#xA;in event failed&#xA;&#xA;in event enable&#xA;in event disable&#xA;&#xA;out event turnMain : integer&#xA;out event turnDistant : integer&#xA;out event turnShunt : integer&#xA;&#xA;in event completedMain&#xA;in event completedDistant&#xA;in event completedShunt&#xA;&#xA;out event started&#xA;out event cleared&#xA;&#xA;operation inc()&#xA;operation dec()&#xA;&#xA;operation hasMainSignal() : boolean&#xA;operation isMainAndShunt() : boolean&#xA;operation isLightSignal() : boolean&#xA;operation isTour() : boolean&#xA;&#xA;operation fail()&#xA;operation pending()&#xA;operation lock(do_it : boolean)" namespace="mrw.statechart" name="SignalControllerStatechart">
+  <sgraph:Statechart xmi:id="_FbTCAHbWEe2lmIyQXv_DxQ" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;var timeout : integer = 5000&#xA;var delay : integer = 350&#xA;var symbol : integer = STOP&#xA;&#xA;const OFF : integer = -1&#xA;const STOP : integer = 0&#xA;const GO : integer = 1&#xA;&#xA;in event start&#xA;in event clear&#xA;in event failed&#xA;&#xA;in event enable&#xA;in event update&#xA;in event disable&#xA;&#xA;out event turnMain : integer&#xA;out event turnDistant : integer&#xA;out event turnShunt : integer&#xA;&#xA;in event completedMain&#xA;in event completedDistant&#xA;in event completedShunt&#xA;&#xA;out event started&#xA;out event cleared&#xA;&#xA;operation inc()&#xA;operation dec()&#xA;&#xA;operation hasMainSignal() : boolean&#xA;operation isMainAndShunt() : boolean&#xA;operation isLightSignal() : boolean&#xA;operation isTour() : boolean&#xA;&#xA;operation fail()&#xA;operation pending()&#xA;operation lock(do_it : boolean)" namespace="mrw.statechart" name="SignalControllerStatechart">
     <regions xmi:id="_FbTpG3bWEe2lmIyQXv_DxQ" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_FbTpHHbWEe2lmIyQXv_DxQ">
         <outgoingTransitions xmi:id="_FbTpHXbWEe2lmIyQXv_DxQ" target="_FbTpHnbWEe2lmIyQXv_DxQ"/>
@@ -65,7 +65,7 @@
             <regions xmi:id="_DlZ-8Hb4Ee20X8bIRmamkA" name="Processing">
               <vertices xsi:type="sgraph:State" xmi:id="_V18XEHb4Ee20X8bIRmamkA" name="Idle" incomingTransitions="_aWOEUHb4Ee20X8bIRmamkA _M8AToIK5Ee2Fisp2xhAv8A">
                 <outgoingTransitions xmi:id="_oCY5YHb4Ee20X8bIRmamkA" specification="disable / symbol = STOP" target="_k75pkHb4Ee20X8bIRmamkA"/>
-                <outgoingTransitions xmi:id="_gg2fMIKsEe2Fisp2xhAv8A" specification="enable" target="_IYEOYIK5Ee2Fisp2xhAv8A"/>
+                <outgoingTransitions xmi:id="_gg2fMIKsEe2Fisp2xhAv8A" specification="update" target="_IYEOYIK5Ee2Fisp2xhAv8A"/>
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_VifoUIK5Ee2Fisp2xhAv8A" specification="entry / inc&#xA;exit / dec" name="Waiting">
                 <outgoingTransitions xmi:id="_1_qeQIK5Ee2Fisp2xhAv8A" specification="after timeout ms" target="_BvK_cHbfEe20X8bIRmamkA"/>
@@ -115,7 +115,7 @@
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_q_5SMIICEe2pKZIV5OcIFQ" name="Idle" incomingTransitions="_s-9qIIIGEe2pKZIV5OcIFQ _w2xcYIK6Ee2Fisp2xhAv8A">
                 <outgoingTransitions xmi:id="_2A9y8IICEe2pKZIV5OcIFQ" specification="disable / symbol = STOP" target="_A-m9gIIJEe2pKZIV5OcIFQ"/>
-                <outgoingTransitions xmi:id="_jp7tQIIuEe2WxPwbvFTZlA" specification="enable" target="_sIFfsIK6Ee2Fisp2xhAv8A"/>
+                <outgoingTransitions xmi:id="_jp7tQIIuEe2WxPwbvFTZlA" specification="update" target="_sIFfsIK6Ee2Fisp2xhAv8A"/>
               </vertices>
             </regions>
           </vertices>

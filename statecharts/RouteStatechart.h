@@ -58,11 +58,12 @@ namespace mrw
 				main_region_Turning_Turning_process_Switch_Turning,
 				main_region_Turning_Turning_process_Signal_Turning,
 				main_region_Turning_Turning_process_Section_Activation,
+				main_region_Turning_Turning_process_Signal_Updating,
 				main_region_Wait
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 9;
+			static const sc::integer numStates = 10;
 			static const sc::integer scvi_main_region_Active = 0;
 			static const sc::integer scvi_main_region_Disable = 0;
 			static const sc::integer scvi_main_region_Start = 0;
@@ -71,6 +72,7 @@ namespace mrw
 			static const sc::integer scvi_main_region_Turning_Turning_process_Switch_Turning = 0;
 			static const sc::integer scvi_main_region_Turning_Turning_process_Signal_Turning = 0;
 			static const sc::integer scvi_main_region_Turning_Turning_process_Section_Activation = 0;
+			static const sc::integer scvi_main_region_Turning_Turning_process_Signal_Updating = 0;
 			static const sc::integer scvi_main_region_Wait = 0;
 
 			/*! Enumeration of all events which are consumed. */
@@ -120,6 +122,8 @@ namespace mrw
 				virtual void activateSections() = 0;
 
 				virtual void turnSignals() = 0;
+
+				virtual void updateSignals() = 0;
 
 				virtual void deactivateSections() = 0;
 
@@ -245,6 +249,7 @@ namespace mrw
 			void enact_main_region_Turning_Turning_process_Switch_Turning();
 			void enact_main_region_Turning_Turning_process_Signal_Turning();
 			void enact_main_region_Turning_Turning_process_Section_Activation();
+			void enact_main_region_Turning_Turning_process_Signal_Updating();
 			void enact_main_region_Wait();
 			void exact_main_region_Disable();
 			void exact_main_region_Turning();
@@ -256,6 +261,7 @@ namespace mrw
 			void enseq_main_region_Turning_Turning_process_Switch_Turning_default();
 			void enseq_main_region_Turning_Turning_process_Signal_Turning_default();
 			void enseq_main_region_Turning_Turning_process_Section_Activation_default();
+			void enseq_main_region_Turning_Turning_process_Signal_Updating_default();
 			void enseq_main_region_Wait_default();
 			void enseq_main_region_default();
 			void exseq_main_region_Active();
@@ -266,6 +272,7 @@ namespace mrw
 			void exseq_main_region_Turning_Turning_process_Switch_Turning();
 			void exseq_main_region_Turning_Turning_process_Signal_Turning();
 			void exseq_main_region_Turning_Turning_process_Section_Activation();
+			void exseq_main_region_Turning_Turning_process_Signal_Updating();
 			void exseq_main_region_Wait();
 			void exseq_main_region();
 			void exseq_main_region_Turning_Turning_process();
@@ -280,6 +287,7 @@ namespace mrw
 			sc::integer main_region_Turning_Turning_process_Switch_Turning_react(const sc::integer transitioned_before);
 			sc::integer main_region_Turning_Turning_process_Signal_Turning_react(const sc::integer transitioned_before);
 			sc::integer main_region_Turning_Turning_process_Section_Activation_react(const sc::integer transitioned_before);
+			sc::integer main_region_Turning_Turning_process_Signal_Updating_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();

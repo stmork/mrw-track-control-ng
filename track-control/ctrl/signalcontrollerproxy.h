@@ -74,6 +74,7 @@ namespace mrw::ctrl
 
 	signals:
 		void enable();
+		void update();
 		void disable();
 		void failed();
 		void start();

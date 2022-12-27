@@ -154,6 +154,8 @@ void WidgetRoute::prepareSignals(
 	Section  * last_valid_section,
 	RailPart * last_valid_part)
 {
+	__METHOD__;
+
 	Q_UNUSED(last_valid_section);
 	Q_UNUSED(last_valid_part);
 
@@ -195,6 +197,8 @@ void WidgetRoute::prepareSignals(
 			controller->setSymbol(section != this->last_section ?
 				Symbol::GO :
 				Symbol::STOP);
+
+			qDebug().noquote() << *controller;
 		}
 
 		section_ctrl->nextController(next_ctrl);
@@ -548,23 +552,38 @@ void WidgetRoute::turnSignals()
 	__METHOD__;
 
 	std::vector<SignalControllerProxy *> controllers;
-	size_t                               count = 0;
 
 	collectSignalController(controllers);
 	for (auto it = controllers.rbegin(); it != controllers.rend(); ++it)
 	{
 		SignalControllerProxy * controller = *it;
 
-		// TODO: How to handle locking? We have to lock main signals but distant signals are locked elsewehere.
-//		if (controller->isUnlocked())
-		{
-			qDebug().noquote() << *controller;
-			controller->enable();
-			count++;
-		}
+		controller->enable();
+		qDebug().noquote() << *controller;
 	}
 
-	if (count == 0)
+	if (controllers.size() == 0)
+	{
+		ControllerRegistry::instance().complete();
+	}
+}
+
+void WidgetRoute::updateSignals()
+{
+	__METHOD__;
+
+	std::vector<SignalControllerProxy *> controllers;
+
+	collectSignalController(controllers);
+	for (auto it = controllers.rbegin(); it != controllers.rend(); ++it)
+	{
+		SignalControllerProxy * controller = *it;
+
+		controller->update();
+		qDebug().noquote() << *controller;
+	}
+
+	if (controllers.size() == 0)
 	{
 		ControllerRegistry::instance().complete();
 	}

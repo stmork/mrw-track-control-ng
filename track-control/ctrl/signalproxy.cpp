@@ -67,6 +67,16 @@ void SignalProxy::send()
 	ControllerRegistry::can()->write(message);
 }
 
+void mrw::ctrl::SignalProxy::dump()
+{
+	__METHOD__;
+
+	if (signal != nullptr)
+	{
+		qDebug().noquote() << *signal;
+	}
+}
+
 bool SignalProxy::process(Signal * device, const MrwMessage & message)
 {
 	Q_ASSERT(device != nullptr);
@@ -225,6 +235,8 @@ bool ShuntProxy::isCombined()
 
 void ShuntProxy::prepare()
 {
+	__METHOD__;
+
 	SignalState state = SIGNAL_OFF;
 
 	switch (getSymbol())

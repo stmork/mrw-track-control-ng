@@ -191,10 +191,12 @@ bool SectionController::process(const MrwMessage & message)
 	{
 	case SETRON:
 		statechart.relaisResponse();
+		section()->enable();
 		return true;
 
 	case SETROF:
 		statechart.relaisResponse();
+		section()->disable();
 		return true;
 
 	case GETRBS:

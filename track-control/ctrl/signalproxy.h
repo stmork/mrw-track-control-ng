@@ -35,6 +35,7 @@ namespace mrw::ctrl
 
 		bool         hasSignal() override;
 		virtual void send() override;
+		virtual void dump() override;
 
 		bool process(model::Signal * device, const can::MrwMessage & message);
 	};

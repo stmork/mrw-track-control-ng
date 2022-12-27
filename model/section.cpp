@@ -263,9 +263,10 @@ QString Section::toString() const
 {
 	static const QString O = String::format(String::BOLD_ON + String::RED_ON, "O");
 
-	return QString("    Sec %1%2        : [%3] %4 %5 %6").
+	return QString("    Sec %1%2%3       : [%4] %5 %6 %7").
 		arg(valid() ?      'V' : '-').
 		arg(occupation() ? O : "-").
+		arg(enabled() ? "e" : "-").
 		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name(), -10).
 		arg(Device::get(lock()), -10).
