@@ -3,7 +3,6 @@ Version: 2.0-%BUILD%
 Section: embedded
 Priority: optional
 Architecture: %ARCH%
-Depends: libqt5widgets5, libqt5serialbus5, libqt5xml5, libqt5network5
 Maintainer: Steffen A. Mork <info@eisenbahnsteuerung.org>
 Homepage: http://eisenbahnsteuerung.org/
-Description: Next generation modelrailway control.
+Description: API documentation of modelbased railway control (NG).

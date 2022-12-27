@@ -2,22 +2,21 @@
 
 set -e
 
-export PREFIX=$PWD/rootfs
 export PACKAGE=mrw-ng
+export PREFIX=$PWD/rootfs/${PACKAGE}
 export COPYRIGHT=${PREFIX}/usr/share/doc/${PACKAGE}/copyright
 export BUILD_NUMBER=${BUILD_NUMBER:=0}
 export ARCH=`dpkg --print-architecture`
 
-test -f Makefile && make clean distclean
 rm -rf ${PREFIX}
-
+test -f Makefile && make clean distclean
 qmake -r
 make -j `nproc`
 make install
 
 mkdir -p ${PREFIX}/usr/share/doc/${PACKAGE}
 mkdir ${PREFIX}/DEBIAN
-cp -a DEBIAN/control ${PREFIX}/DEBIAN/
+cp -a DEBIAN/control-ng  ${PREFIX}/DEBIAN/control
 
 echo "Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/" > $COPYRIGHT
 echo "Upstream-Name: $PACKAGE" >> ${COPYRIGHT}
