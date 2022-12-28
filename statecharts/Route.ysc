@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_L62MwHWAEe2cXugcT2PGGw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var switch_timeout : integer = 2100&#xA;var signal_timeout : integer = 3100&#xA;var section_timeout : integer = 200&#xA;var emergency : integer = 3500&#xA;&#xA;in event completed&#xA;in event failed&#xA;in event disable&#xA;in event extended&#xA;&#xA;out event activated&#xA;out event finished&#xA;&#xA;operation reset()&#xA;operation fail()&#xA;operation tryComplete()&#xA;operation isCompleted() : boolean&#xA;&#xA;operation turnSwitches()&#xA;operation activateSections()&#xA;operation turnSignals()&#xA;operation extendSignals()&#xA;&#xA;operation deactivateSections()&#xA;operation unlockSignals()&#xA;operation unlockSwitches()" namespace="mrw.statechart" name="RouteStatechart">
+  <sgraph:Statechart xmi:id="_L62MwHWAEe2cXugcT2PGGw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var switch_timeout : integer = 2100&#xA;var signal_timeout : integer = 3100&#xA;var section_timeout : integer = 200&#xA;var emergency : integer = 3500&#xA;&#xA;in event completed&#xA;in event failed&#xA;in event disable&#xA;in event extended&#xA;&#xA;out event activated&#xA;out event finished&#xA;&#xA;operation reset()&#xA;operation fail()&#xA;operation tryComplete()&#xA;operation isCompleted() : boolean&#xA;&#xA;operation turnSwitches()&#xA;operation activateSections()&#xA;operation turnSignals()&#xA;operation updateSignals()&#xA;&#xA;operation deactivateSections()&#xA;operation unlockSignals()&#xA;operation unlockSwitches()&#xA;" namespace="mrw.statechart" name="RouteStatechart">
     <regions xmi:id="_L64B-3WAEe2cXugcT2PGGw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_L64B_HWAEe2cXugcT2PGGw">
         <outgoingTransitions xmi:id="_L64B_XWAEe2cXugcT2PGGw" target="_lSD6YHWFEe2oVZ4yFrzfuw"/>
@@ -33,7 +33,7 @@
             <outgoingTransitions xmi:id="_jxc1gHWAEe2oVZ4yFrzfuw" specification="completed" target="_yYvPAHWAEe2oVZ4yFrzfuw"/>
             <outgoingTransitions xmi:id="_EC0EEHWBEe2oVZ4yFrzfuw" specification="after section_timeout ms" target="_yqc6cIYxEe2KYdnsQIjglw"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_cSXE0IY2Ee2KYdnsQIjglw" specification="entry / reset; extendSignals" name="Signal Updating" incomingTransitions="_yyE8EHWAEe2oVZ4yFrzfuw">
+          <vertices xsi:type="sgraph:State" xmi:id="_cSXE0IY2Ee2KYdnsQIjglw" specification="entry / reset; updateSignals" name="Signal Updating" incomingTransitions="_yyE8EHWAEe2oVZ4yFrzfuw">
             <outgoingTransitions xmi:id="_gt-7kIY2Ee2KYdnsQIjglw" specification="completed" target="_L64pCnWAEe2cXugcT2PGGw"/>
             <outgoingTransitions xmi:id="_MI8h4IaREe2yx5oO4CMMcQ" specification="after signal_timeout ms" target="_yqc6cIYxEe2KYdnsQIjglw"/>
           </vertices>

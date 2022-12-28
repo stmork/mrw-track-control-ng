@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_M42vgIRaEe2CDNGUus-J0w" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var start : integer = 1500&#xA;var step : integer = 300&#xA;&#xA;in event received&#xA;&#xA;operation first()&#xA;operation free()&#xA;operation occupy()&#xA;operation valid() : boolean&#xA;operation last() : boolean&#xA;operation clear()&#xA;&#xA;internal:&#xA;event completed&#xA;" namespace="mrw.statechart" name="TrackerStatechart">
+  <sgraph:Statechart xmi:id="_M42vgIRaEe2CDNGUus-J0w" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var start : integer = 1000&#xA;var step : integer = 300&#xA;&#xA;in event received&#xA;&#xA;operation first()&#xA;operation free()&#xA;operation occupy()&#xA;operation valid() : boolean&#xA;operation last() : boolean&#xA;operation clear()&#xA;&#xA;internal:&#xA;event completed&#xA;" namespace="mrw.statechart" name="TrackerStatechart">
     <regions xmi:id="_M42vjIRaEe2CDNGUus-J0w" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_M42vjYRaEe2CDNGUus-J0w">
         <outgoingTransitions xmi:id="_M42vjoRaEe2CDNGUus-J0w" target="_SYWH8IRjEe2CDNGUus-J0w"/>

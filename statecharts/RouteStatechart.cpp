@@ -355,7 +355,7 @@ namespace mrw
 			/* Entry action for state 'Signal Updating'. */
 			timerService->setTimer(this, 4, signal_timeout, false);
 			ifaceOperationCallback->reset();
-			ifaceOperationCallback->extendSignals();
+			ifaceOperationCallback->updateSignals();
 		}
 
 		/* Entry action for state 'Wait'. */
