@@ -372,6 +372,7 @@ namespace mrw
 			/* Entry action for state 'Emergency Shutdown'. */
 			timerService->setTimer(this, 6, section_timeout, false);
 			ifaceOperationCallback->fail();
+			ifaceOperationCallback->unlockSignals();
 			ifaceOperationCallback->deactivateSections();
 		}
 
