@@ -370,6 +370,43 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 	}
 
 	@Test
+	operation leaveBeforeNext()
+	{
+		// Given
+		sectionFree()
+		auto_off = true
+
+		// When
+		raise stateResponse : true
+
+		// Then
+		assert occupied
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Occupied)
+		assert entered
+
+		// When (Note: This may occur on dirty rails!)
+		raise stateResponse : false
+
+		// Then
+		assert !occupied
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Occupied)
+
+		// When
+		raise next
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Next_Reached)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Left)
+		assert called inc
+		assert called off
+		assert called leftBefore
+		assert leaving
+	}
+
+	@Test
 	operation stay()
 	{
 		// Given
