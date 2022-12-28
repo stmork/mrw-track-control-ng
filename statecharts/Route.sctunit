@@ -151,7 +151,7 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 		deactivate()
 
 		// When
-		proceed timeout ms
+		proceed emergency ms
 
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region._final_)
@@ -330,7 +330,7 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 		failTurningSwitchesIncomplete()
 
 		// When
-		proceed timeout ms
+		proceed emergency ms
 
 		// Then
 		disabled()
@@ -343,7 +343,7 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 		failTurningSignalsIncomplete()
 
 		// When
-		proceed timeout ms
+		proceed emergency ms
 
 		// Then
 		disabled()
@@ -356,7 +356,7 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 		failTurningSectionsIncomplete()
 
 		// When
-		proceed timeout ms
+		proceed emergency ms
 
 		// Then
 		disabled()
@@ -369,7 +369,7 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 		switches()
 
 		// When
-		proceed timeout ms
+		proceed switch_timeout ms
 
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region.Emergency_Shutdown)
@@ -388,7 +388,7 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 		turningSignals()
 
 		// When
-		proceed timeout ms
+		proceed signal_timeout ms
 
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region.Emergency_Shutdown)
@@ -407,7 +407,7 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 		updatingSignals()
 
 		// When
-		proceed timeout ms
+		proceed signal_timeout ms
 
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region.Emergency_Shutdown)
@@ -426,7 +426,7 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 		sections()
 
 		// When
-		proceed timeout ms
+		proceed section_timeout ms
 
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region.Emergency_Shutdown)
