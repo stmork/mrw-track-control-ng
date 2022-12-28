@@ -159,6 +159,18 @@
         <children xsi:type="notation:Shape" xmi:id="_5sNLYHbaEe20X8bIRmamkA" type="Choice" element="_5sMkUHbaEe20X8bIRmamkA" fontName="Verdana" lineColor="4210752">
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_5sNLYXbaEe20X8bIRmamkA" x="237" y="233" width="32" height="32"/>
         </children>
+        <children xsi:type="notation:Shape" xmi:id="_a8yNMIbfEe25PaND2nD09Q" type="Note" fontName="Verdana" description="This is for the fail&#xA;tolerant case, that&#xA;a real signal is not&#xA;configured." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+          <children xsi:type="notation:BasicDecorationNode" xmi:id="_a80CYIbfEe25PaND2nD09Q" type="DiagramName">
+            <element xsi:nil="true"/>
+          </children>
+          <children xsi:type="notation:BasicDecorationNode" xmi:id="_a80CYYbfEe25PaND2nD09Q" type="Description">
+            <element xsi:nil="true"/>
+          </children>
+          <styles xsi:type="notation:TextStyle" xmi:id="_a8yNMYbfEe25PaND2nD09Q"/>
+          <styles xsi:type="notation:LineTypeStyle" xmi:id="_a8yNMobfEe25PaND2nD09Q"/>
+          <element xsi:nil="true"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_a8yNM4bfEe25PaND2nD09Q" x="26" y="233" width="133" height="74"/>
+        </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_QGgGEHYlEe2MmckDHhInew"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_QGgGEXYlEe2MmckDHhInew" fontName="Verdana" fillColor="16448250" lineColor="12632256"/>
@@ -278,6 +290,13 @@
       <styles xsi:type="notation:FontStyle" xmi:id="__8NJ03baEe20X8bIRmamkA" fontName="Verdana"/>
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="__8NJ0nbaEe20X8bIRmamkA" points="[0, -16, 10, 62]$[-67, -16, -57, 62]$[-67, -55, -57, 23]"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="__8OX8HbaEe20X8bIRmamkA" id="(0.21247113163972287,0.5660377358490566)"/>
+    </edges>
+    <edges xsi:type="notation:Connector" xmi:id="_a81QgIbfEe25PaND2nD09Q" type="NoteAttachment" source="__8NJ0HbaEe20X8bIRmamkA" target="_a8yNMIbfEe25PaND2nD09Q" routing="Rectilinear" lineColor="4210752" lineWidth="1">
+      <styles xsi:type="notation:ArrowStyle" xmi:id="_a81QgYbfEe25PaND2nD09Q"/>
+      <styles xsi:type="notation:LineTypeStyle" xmi:id="_a81QgobfEe25PaND2nD09Q"/>
+      <element xsi:nil="true"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_a81Qg4bfEe25PaND2nD09Q" points="[-34, -37, 186, 197]$[-220, -234, 0, 0]"/>
+      <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_a813kIbfEe25PaND2nD09Q" id="(0.5,1.0)"/>
     </edges>
   </notation:Diagram>
 </xmi:XMI>
