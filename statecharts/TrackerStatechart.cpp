@@ -20,7 +20,7 @@ namespace mrw
 
 		TrackerStatechart::TrackerStatechart(QObject * parent) :
 			QObject(parent),
-			start(1000),
+			start(1500),
 			step(300),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),

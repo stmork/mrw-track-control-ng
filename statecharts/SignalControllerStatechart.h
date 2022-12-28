@@ -125,7 +125,7 @@ namespace mrw
 				clear,
 				failed,
 				enable,
-				update,
+				extend,
 				disable,
 				completedMain,
 				completedDistant,
@@ -266,8 +266,8 @@ namespace mrw
 			/*! Slot for the in event 'enable' that is defined in the default interface scope. */
 			void enable();
 
-			/*! Slot for the in event 'update' that is defined in the default interface scope. */
-			void update();
+			/*! Slot for the in event 'extend' that is defined in the default interface scope. */
+			void extend();
 
 			/*! Slot for the in event 'disable' that is defined in the default interface scope. */
 			void disable();
@@ -502,8 +502,8 @@ namespace mrw
 			/*! Indicates event 'enable' of default interface scope is active. */
 			bool enable_raised;
 
-			/*! Indicates event 'update' of default interface scope is active. */
-			bool update_raised;
+			/*! Indicates event 'extend' of default interface scope is active. */
+			bool extend_raised;
 
 			/*! Indicates event 'disable' of default interface scope is active. */
 			bool disable_raised;

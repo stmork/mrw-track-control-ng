@@ -22,6 +22,8 @@ using Bending   = Position::Bending;
 using LockState = Device::LockState;
 using Symbol    = Signal::Symbol;
 
+#define not_VERBOSE
+
 SignalControllerProxy::SignalControllerProxy(
 	Section  *  parent_section,
 	const bool  dir,
@@ -89,13 +91,13 @@ SignalControllerProxy::SignalControllerProxy(
 		&statechart, &SignalControllerStatechart::enable,
 		Qt::DirectConnection);
 	connect(
-		this, &SignalControllerProxy::update,
-		&statechart, &SignalControllerStatechart::update,
+		this, &SignalControllerProxy::extend,
+		&statechart, &SignalControllerStatechart::extend,
 		Qt::QueuedConnection);
 	connect(
 		this, &SignalControllerProxy::disable,
 		&statechart, &SignalControllerStatechart::disable,
-		Qt::QueuedConnection);
+		Qt::DirectConnection);
 	connect(
 		this, &SignalControllerProxy::failed,
 		&statechart, &SignalControllerStatechart::failed,
@@ -244,7 +246,11 @@ void SignalControllerProxy::setState(SectionState new_state)
 
 QString SignalControllerProxy::name() const
 {
+#ifdef VERBOSE
 	return grouped_name;
+#else
+	return section()->getSignals(direction).front()->partName();
+#endif
 }
 
 float SignalControllerProxy::extensions() const
@@ -446,14 +452,18 @@ void SignalControllerProxy::pending()
 {
 	lock_state = LockState::PENDING;
 	emit update();
+
+#ifdef VERBOSE
+	qDebug().noquote() << String::bold("Pend:") << *this;
+#endif
 }
 
 void SignalControllerProxy::lock(const bool do_it)
 {
+	lock_state = do_it ? LockState::LOCKED : LockState::UNLOCKED;
+	emit update();
+
 #ifdef VERBOSE
 	qDebug().noquote() << String::bold("Lock:") << *this;
 #endif
-
-	lock_state = do_it ? LockState::LOCKED : LockState::UNLOCKED;
-	emit update();
 }

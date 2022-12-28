@@ -55,7 +55,7 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	}
 
 	@Test
-	operation updatingSignals()
+	operation extendingSignals()
 	{
 		// Given
 		turningSignals()
@@ -74,7 +74,7 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	operation sections()
 	{
 		// Given
-		updatingSignals()
+		extendingSignals()
 
 		// When
 		raise completed
@@ -201,10 +201,10 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	}
 
 	@Test
-	operation failUpdatingSignals()
+	operation failExtendingSignals()
 	{
 		// Given
-		updatingSignals()
+		extendingSignals()
 		mock isCompleted returns (true)
 
 		// When
@@ -257,10 +257,10 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	}
 
 	@Test
-	operation failUpdatingSignalsIncomplete()
+	operation failExtendingSignalsIncomplete()
 	{
 		// Given
-		updatingSignals()
+		extendingSignals()
 		mock isCompleted returns (false)
 
 		// When
@@ -401,10 +401,10 @@ testclass Route for statechart mrw.^statechart.RouteStatechart
 	}
 
 	@Test
-	operation timeoutUpdatingSignals()
+	operation timeoutExtendingSignals()
 	{
 		// Given
-		updatingSignals()
+		extendingSignals()
 
 		// When
 		proceed signal_timeout ms

@@ -214,7 +214,7 @@ void WidgetRoute::prepareSignals(
 
 void WidgetRoute::entered()
 {
-	SectionController   *   controller = dynamic_cast<SectionController *>(QObject::sender());
+	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
 
 	qDebug().noquote() << "Entered:    " << *controller;
 }
@@ -224,12 +224,12 @@ void WidgetRoute::left()
 	SectionController   *   controller = dynamic_cast<SectionController *>(QObject::sender());
 	SignalControllerProxy * sig_ctrl   = getSignalController(controller->section());
 
-	qDebug().noquote() << "Left:       " << *controller;
-
 	if (sig_ctrl != nullptr)
 	{
 		sig_ctrl->disable();
+		qDebug().noquote() << "Left: dis.  " << *sig_ctrl;
 	}
+	qDebug().noquote() << "Left:       " << *controller;
 }
 
 void WidgetRoute::tryUnblock()
@@ -370,7 +370,7 @@ void WidgetRoute::dump() const
 
 	Route::dump();
 	qDebug() << "---";
-	collectSignalController(controllers);
+	collectSignalControllers(controllers);
 	for (SignalControllerProxy * proxy : controllers)
 	{
 		qDebug().noquote() << "     " << *proxy;
@@ -431,34 +431,30 @@ SignalControllerProxy * WidgetRoute::getSignalController(Section * section) cons
 	return controller;
 }
 
-void WidgetRoute::collectSignalController(std::vector<SignalControllerProxy *> & controllers) const
+void WidgetRoute::collectSignalControllers(
+	std::vector<SignalControllerProxy *>       &      controllers,
+	std::function<bool(SignalControllerProxy * ctrl)> guard) const
 {
 	controllers.clear();
 	for (Section * section : sections)
 	{
 		SignalControllerProxy * controller = getSignalController(section);
 
-		if (controller != nullptr)
+		if ((controller != nullptr) && guard(controller))
 		{
 			controllers.push_back(controller);
 		}
 	}
 }
 
-void WidgetRoute::collectSignalController(
+void WidgetRoute::collectSignalControllers(
 	std::vector<SignalControllerProxy *> & controllers,
 	const bool                             unlocked) const
 {
-	controllers.clear();
-	for (Section * section : sections)
+	collectSignalControllers(controllers, [unlocked](SignalControllerProxy * proxy)
 	{
-		SignalControllerProxy * controller = getSignalController(section);
-
-		if ((controller != nullptr) && (controller->isUnlocked() == unlocked))
-		{
-			controllers.push_back(controller);
-		}
-	}
+		return proxy->isUnlocked() == unlocked;
+	});
 }
 
 void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & controllers) const
@@ -576,8 +572,8 @@ void WidgetRoute::turnSignals()
 {
 	__METHOD__;
 
-	collectSignalController(controllers_unlocked, true);
-	collectSignalController(controllers_locked,   false);
+	collectSignalControllers(controllers_unlocked, true);
+	collectSignalControllers(controllers_locked,   false);
 
 	for (auto it = controllers_unlocked.rbegin(); it != controllers_unlocked.rend(); ++it)
 	{
@@ -593,7 +589,7 @@ void WidgetRoute::turnSignals()
 	}
 }
 
-void WidgetRoute::updateSignals()
+void WidgetRoute::extendSignals()
 {
 	__METHOD__;
 
@@ -601,7 +597,7 @@ void WidgetRoute::updateSignals()
 	{
 		SignalControllerProxy * controller = *it;
 
-		controller->update();
+		controller->extend();
 		qDebug().noquote() << *controller;
 	}
 
@@ -617,7 +613,7 @@ void WidgetRoute::unlockSignals()
 
 	std::vector<SignalControllerProxy *> controllers;
 
-	collectSignalController(controllers);
+	collectSignalControllers(controllers);
 	for (SignalControllerProxy * controller : controllers)
 	{
 		controller->disable();

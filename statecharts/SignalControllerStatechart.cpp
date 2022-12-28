@@ -36,7 +36,7 @@ namespace mrw
 			clear_raised(false),
 			failed_raised(false),
 			enable_raised(false),
-			update_raised(false),
+			extend_raised(false),
 			disable_raised(false),
 			turnMain_value(0),
 			turnDistant_value(0),
@@ -103,9 +103,9 @@ namespace mrw
 					enable_raised = true;
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::Event::update:
+			case mrw::statechart::SignalControllerStatechart::Event::extend:
 				{
-					update_raised = true;
+					extend_raised = true;
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::Event::disable:
@@ -175,9 +175,9 @@ namespace mrw
 		}
 
 
-		void mrw::statechart::SignalControllerStatechart::update()
+		void mrw::statechart::SignalControllerStatechart::extend()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::update));
+			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::extend));
 			runCycle();
 		}
 
@@ -2171,7 +2171,7 @@ namespace mrw
 				}
 				else
 				{
-					if (update_raised)
+					if (extend_raised)
 					{
 						exseq_main_region_Operating_Processing_Shunting_State_Processing_Idle();
 						enact_main_region_Operating_Processing_Shunting_State_Processing_Waiting();
@@ -2443,7 +2443,7 @@ namespace mrw
 				}
 				else
 				{
-					if (update_raised)
+					if (extend_raised)
 					{
 						exseq_main_region_Operating_Processing_Tour_State_Processing_Idle();
 						enact_main_region_Operating_Processing_Tour_State_Processing_Waiting();
@@ -2602,7 +2602,7 @@ namespace mrw
 			clear_raised = false;
 			failed_raised = false;
 			enable_raised = false;
-			update_raised = false;
+			extend_raised = false;
 			disable_raised = false;
 			completedMain_raised = false;
 			completedDistant_raised = false;
@@ -2779,7 +2779,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((((((((((start_raised) || (clear_raised)) || (failed_raised)) || (enable_raised)) || (update_raised)) || (disable_raised)) || (completedMain_raised)) || (completedDistant_raised)) || (completedShunt_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4]));
+			while ((((((((((((((start_raised) || (clear_raised)) || (failed_raised)) || (enable_raised)) || (extend_raised)) || (disable_raised)) || (completedMain_raised)) || (completedDistant_raised)) || (completedShunt_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4]));
 			isExecuting = false;
 		}
 

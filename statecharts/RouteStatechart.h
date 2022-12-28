@@ -149,7 +149,7 @@ namespace mrw
 
 				virtual void turnSignals() = 0;
 
-				virtual void updateSignals() = 0;
+				virtual void extendSignals() = 0;
 
 				virtual void deactivateSections() = 0;
 
