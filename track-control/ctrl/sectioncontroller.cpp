@@ -241,6 +241,11 @@ void SectionController::free()
 	emit update();
 }
 
+void mrw::ctrl::SectionController::leftBefore()
+{
+	qWarning().noquote() << bold("Left before next reched:") << *section();
+}
+
 void SectionController::fail()
 {
 	qCritical().noquote() << String::red(" Section failed!") << name();

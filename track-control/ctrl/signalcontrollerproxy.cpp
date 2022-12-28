@@ -213,6 +213,11 @@ bool SignalControllerProxy::isUnlocked() const
 	return lock_state == LockState::UNLOCKED;
 }
 
+bool SignalControllerProxy::isPassed() const
+{
+	return section()->state() == PASSED;
+}
+
 Signal * SignalControllerProxy::mainSignal() const
 {
 	return main_signal;

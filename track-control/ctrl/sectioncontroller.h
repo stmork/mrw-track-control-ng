@@ -79,6 +79,7 @@ namespace mrw::ctrl
 		virtual void request() override;
 		virtual void passed() override;
 		virtual void free() override;
+		virtual void leftBefore() override;
 
 		virtual void fail() override;
 		virtual void pending() override;

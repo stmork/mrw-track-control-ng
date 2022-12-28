@@ -57,6 +57,7 @@ namespace mrw::ctrl
 		virtual ~SignalControllerProxy();
 
 		bool                       isUnlocked() const;
+		bool                       isPassed() const;
 		mrw::model::Signal    *    mainSignal() const;
 		void                       setCurved(const size_t curved_count);
 		void                       setDistantSignal(SignalControllerProxy * signal);

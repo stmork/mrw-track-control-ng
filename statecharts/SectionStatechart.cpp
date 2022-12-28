@@ -529,6 +529,18 @@ namespace mrw
 			emit entered();
 		}
 
+		/* Entry action for state 'Next Reached'. */
+		void SectionStatechart::enact_main_region_Operating_Processing_Locked_Occupation_Next_Reached()
+		{
+			/* Entry action for state 'Next Reached'. */
+			if (!occupied)
+			{
+				local_leaving();
+				emit leaving();
+				ifaceOperationCallback->leftBefore();
+			}
+		}
+
 		/* Entry action for state 'Enabling'. */
 		void SectionStatechart::enact_main_region_Operating_Processing_Enabling()
 		{
@@ -737,6 +749,7 @@ namespace mrw
 		void SectionStatechart::enseq_main_region_Operating_Processing_Locked_Occupation_Next_Reached_default()
 		{
 			/* 'default' enter sequence for state Next Reached */
+			enact_main_region_Operating_Processing_Locked_Occupation_Next_Reached();
 			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Next_Reached;
 			stateConfVectorPosition = 1;
 			stateConfVectorChanged = true;

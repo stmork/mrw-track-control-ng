@@ -98,17 +98,17 @@ namespace mrw::model
 			const QDomElement  &  element);
 		virtual ~Section();
 
+		const QString & name() const override;
+		bool            isUnlockable() const override;
+		QString         toString() const override;
+		virtual QString key() const override;
+
 		/**
 		 * This method validates if all references are configured correctly.
 		 *
 		 * @return True if every configuration is fine.
 		 */
 		bool valid() const;
-
-		const QString & name() const override;
-		bool            isUnlockable() const override;
-		QString         toString() const override;
-		virtual QString key() const override;
 
 		/**
 		 * This method sets the occupation mode of the section. This method

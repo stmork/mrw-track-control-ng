@@ -234,6 +234,8 @@ void WidgetRoute::left()
 
 void WidgetRoute::tryUnblock()
 {
+	__METHOD__;
+
 	SectionController   *   controller  = dynamic_cast<SectionController *>(QObject::sender());
 	Section        *        section     = controller->section();
 	SignalControllerProxy * sig_ctrl    = getSignalController(section);
@@ -453,7 +455,7 @@ void WidgetRoute::collectSignalControllers(
 {
 	collectSignalControllers(controllers, [unlocked](SignalControllerProxy * proxy)
 	{
-		return proxy->isUnlocked() == unlocked;
+		return (proxy->isUnlocked() == unlocked) && (!proxy->isPassed());
 	});
 }
 

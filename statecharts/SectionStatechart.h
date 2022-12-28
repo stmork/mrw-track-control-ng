@@ -185,6 +185,8 @@ namespace mrw
 
 				virtual void free() = 0;
 
+				virtual void leftBefore() = 0;
+
 				virtual void fail() = 0;
 
 				virtual void pending() = 0;
@@ -349,6 +351,7 @@ namespace mrw
 			void enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling();
 			void enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling();
 			void enact_main_region_Operating_Processing_Locked_Occupation_Occupied();
+			void enact_main_region_Operating_Processing_Locked_Occupation_Next_Reached();
 			void enact_main_region_Operating_Processing_Enabling();
 			void enact_main_region_Failed();
 			void exact_main_region_Init();
