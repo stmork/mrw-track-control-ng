@@ -8,12 +8,13 @@
 #include <QDebug>
 #include <QTimer>
 
+#include <util/method.h>
+#include <util/termhandler.h>
 #include <can/mrwmessage.h>
 #include <can/mrwbusservice.h>
-#include <util/termhandler.h>
 
-using namespace mrw::can;
 using namespace mrw::util;
+using namespace mrw::can;
 
 class CanBusProxyService : public MrwBusService
 {
@@ -44,6 +45,9 @@ public:
 int main(int argc, char * argv[])
 {
 	QCoreApplication      app(argc, argv);
+
+	Method::pattern();
+
 	CanBusProxyService    tcp_service("can0", "virtualcan");
 	CanBusProxyService    can_service("can0");
 	TermHandler           term_handler( { SIGTERM, SIGINT } );
