@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2022 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 * */
 
