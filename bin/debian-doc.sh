@@ -37,6 +37,5 @@ sed -i\
 export VERSION=`grep Version ${PREFIX}/DEBIAN/control | cut -d" " -f2`
 
 echo "Packaging..."
-rm -f *.deb
 chmod -R o+rX ${PREFIX}
 fakeroot dpkg -b ${PREFIX} ${PACKAGE}_${VERSION}_${ARCH}.deb
