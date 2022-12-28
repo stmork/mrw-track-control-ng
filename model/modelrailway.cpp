@@ -136,7 +136,7 @@ void ModelRailway::info()
 	}
 }
 
-Controller * mrw::model::ModelRailway::controller(const size_t index) const
+Controller * ModelRailway::controller(const size_t index) const
 {
 	return controllers.at(index);
 }
@@ -274,49 +274,49 @@ Controller * ModelRailway::controllerById(const ControllerId id) const
 }
 
 Device * ModelRailway::deviceById(
-	const mrw::can::ControllerId id,
-	const mrw::can::UnitNo       unit_no) const
+	const ControllerId id,
+	const UnitNo       unit_no) const
 {
 	auto it = device_map.find(DeviceKey(id, unit_no));
 
 	return it != device_map.end() ? it->second : nullptr;
 }
 
-size_t mrw::model::ModelRailway::controllerCount() const
+size_t ModelRailway::controllerCount() const
 {
 	return controllers.size();
 }
 
-Module * mrw::model::ModelRailway::module(const size_t controller_idx, const size_t module_idx) const
+Module * ModelRailway::module(const size_t controller_idx, const size_t module_idx) const
 {
 	return controller(controller_idx)->module(module_idx);
 }
 
-MultiplexConnection * mrw::model::ModelRailway::connection(
+MultiplexConnection * ModelRailway::connection(
 	const size_t controller_idx,
 	const size_t connection_idx) const
 {
 	return controller(controller_idx)->connection(connection_idx);
 }
 
-Region * mrw::model::ModelRailway::region(const size_t index) const
+Region * ModelRailway::region(const size_t index) const
 {
 	return regions.at(index);
 }
 
-size_t mrw::model::ModelRailway::regionCount() const
+size_t ModelRailway::regionCount() const
 {
 	return regions.size();
 }
 
-Section * mrw::model::ModelRailway::section(
+Section * ModelRailway::section(
 	const size_t region_idx,
 	const size_t section_idx) const
 {
 	return region(region_idx)->section(section_idx);
 }
 
-AssemblyPart * mrw::model::ModelRailway::assemblyPart(
+AssemblyPart * ModelRailway::assemblyPart(
 	const size_t region_idx,
 	const size_t section_idx,
 	const size_t part_idx) const
