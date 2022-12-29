@@ -14,6 +14,7 @@ using namespace mrw::ui;
 using namespace mrw::ctrl;
 
 using Bending = Position::Bending;
+using Symbol  = Signal::Symbol;
 
 SignalWidget::SignalWidget(
 	QWidget      *     parent,
@@ -122,11 +123,11 @@ void SignalWidget::paint(QPainter & painter)
 
 	QColor mast_color(RED);
 	QColor main_color    = main_state ==
-		Signal::Symbol::GO ? GREEN : RED;
+		Symbol::GO ? GREEN : RED;
 	QColor distant_color = distant_state ==
-		Signal::Symbol::GO ? GREEN : YELLOW;
+		Symbol::GO ? GREEN : YELLOW;
 	QColor shunt_color   = shunt_state ==
-		Signal::Symbol::GO ? WHITE : RED;
+		Symbol::GO ? WHITE : RED;
 	bool draw_shunt   = false;
 	bool draw_distant = false;
 
@@ -148,8 +149,10 @@ void SignalWidget::paint(QPainter & painter)
 	}
 	else
 	{
-		draw_distant =
-			has_distant && (base_controller->state() != SectionState::SHUNTING);
+		if (!has_shunting || (base_controller->state() != SHUNTING) || (shunt_state != Symbol::GO))
+		{
+			draw_distant = has_distant;
+		}
 
 		if (draw_distant)
 		{
