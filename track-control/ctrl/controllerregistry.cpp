@@ -3,10 +3,11 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
-#include <ctrl/controllerregistry.h>
-#include <ctrl/basecontroller.h>
+#include <QCoreApplication>
 
 #include <util/method.h>
+#include <ctrl/controllerregistry.h>
+#include <ctrl/basecontroller.h>
 
 using namespace mrw::util;
 using namespace mrw::can;
@@ -90,7 +91,7 @@ void ControllerRegistry::decrease(ControllerRegistrand * element)
 	{
 		qDebug().noquote() << "Transaction decreased to" << transaction.size() << "element(s). Removed: " << ctrl->name();
 
-		if (transaction.size() == 0)
+		if (isCompleted())
 		{
 			qDebug("======================= Transaction completed.");
 			emit completed();
@@ -113,9 +114,10 @@ void ControllerRegistry::reset()
 	transaction.clear();
 }
 
-void ControllerRegistry::complete()
+void ControllerRegistry::tryComplete()
 {
-	if (transaction.size() == 0)
+	QCoreApplication::instance()->processEvents();
+	if (isCompleted())
 	{
 		qDebug("======================= Transaction completed (was empty).");
 		emit completed();

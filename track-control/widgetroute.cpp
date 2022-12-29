@@ -395,7 +395,7 @@ void WidgetRoute::tryComplete()
 {
 	__METHOD__;
 
-	ControllerRegistry::instance().complete();
+	ControllerRegistry::instance().tryComplete();
 }
 
 bool WidgetRoute::isCompleted()
@@ -481,18 +481,11 @@ void WidgetRoute::turnSwitches()
 {
 	__METHOD__;
 
-	size_t count = 0;
-
 	for (RailPart * part : track)
 	{
 		Device     *     device     = dynamic_cast<Device *>(part);
 		BaseController * controller =
 			ControllerRegistry::instance().find<BaseController>(device);
-
-		if ((device != nullptr) && (device->lock() != LockState::LOCKED))
-		{
-			count++;
-		}
 
 		BaseController::callback<RegularSwitchControllerProxy>(
 			controller,     &RegularSwitchControllerProxy::turn);
@@ -500,10 +493,7 @@ void WidgetRoute::turnSwitches()
 			controller, &DoubleCrossSwitchControllerProxy::turn);
 	}
 
-	if (count == 0)
-	{
-		ControllerRegistry::instance().complete();
-	}
+	ControllerRegistry::instance().tryComplete();
 }
 
 void WidgetRoute::unlockSwitches()
@@ -528,8 +518,6 @@ void WidgetRoute::activateSections()
 {
 	__METHOD__;
 
-	size_t count   = 0;
-
 	for (
 		auto it = sections.rbegin();
 		it != sections.rend();
@@ -546,13 +534,9 @@ void WidgetRoute::activateSections()
 		{
 			controller->enable(true);
 		}
-		count++;
 	}
 
-	if (count == 0)
-	{
-		ControllerRegistry::instance().complete();
-	}
+	ControllerRegistry::instance().tryComplete();
 }
 
 void WidgetRoute::deactivateSections()
@@ -567,8 +551,6 @@ void WidgetRoute::deactivateSections()
 		controller->disable();
 	}
 }
-
-#define DIVIDED_UPDATE
 
 void WidgetRoute::turnSignals()
 {
@@ -585,10 +567,7 @@ void WidgetRoute::turnSignals()
 		qDebug().noquote() << *controller;
 	}
 
-	if (controllers_unlocked.size() == 0)
-	{
-		ControllerRegistry::instance().complete();
-	}
+	ControllerRegistry::instance().tryComplete();
 }
 
 void WidgetRoute::extendSignals()
@@ -603,10 +582,7 @@ void WidgetRoute::extendSignals()
 		qDebug().noquote() << *controller;
 	}
 
-	if (controllers_locked.size() == 0)
-	{
-		ControllerRegistry::instance().complete();
-	}
+	ControllerRegistry::instance().tryComplete();
 }
 
 void WidgetRoute::unlockSignals()
