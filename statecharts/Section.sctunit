@@ -140,7 +140,8 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 		raise enable : true
 
 		// Then
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Enabling)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Enabling)
 		assert called inc
 		assert called pending
 		assert called on
@@ -156,7 +157,8 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 		raise enable : false
 
 		// Then
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Enabling)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Disabling)
 		assert called inc
 		assert called pending
 		assert called off
@@ -209,7 +211,11 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 		raise enable : true
 
 		// Then
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Enabling)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Enabling)
+		assert called inc
+		assert called pending
+		assert called on
 
 		// When
 		raise relaisResponse
@@ -230,7 +236,11 @@ testclass Section for statechart mrw.^statechart.SectionStatechart
 		raise enable : true
 
 		// Then
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Enabling)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Enabling)
+		assert called inc
+		assert called pending
+		assert called on
 
 		// When
 		raise relaisResponse

@@ -144,7 +144,7 @@ namespace mrw
 
 			case mrw::statechart::SectionStatechart::Event::_te0_main_region_Init_:
 			case mrw::statechart::SectionStatechart::Event::_te1_main_region_Operating_Processing_Locked_Route_active_Waiting_:
-			case mrw::statechart::SectionStatechart::Event::_te2_main_region_Operating_Processing_Enabling_:
+			case mrw::statechart::SectionStatechart::Event::_te2_main_region_Operating_Processing_Pending_:
 				{
 					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::SectionStatechart::Event::_te0_main_region_Init_)] = true;
 					break;
@@ -308,7 +308,7 @@ namespace mrw
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating :
 				{
-					return  (stateConfVector[scvi_main_region_Operating] >= mrw::statechart::SectionStatechart::State::main_region_Operating && stateConfVector[scvi_main_region_Operating] <= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling);
+					return  (stateConfVector[scvi_main_region_Operating] >= mrw::statechart::SectionStatechart::State::main_region_Operating && stateConfVector[scvi_main_region_Operating] <= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Disabling);
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked :
@@ -376,9 +376,19 @@ namespace mrw
 					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Occupation_Next_Reached] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Next_Reached);
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling :
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending :
 				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Enabling] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling);
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Pending] >= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending && stateConfVector[scvi_main_region_Operating_Processing_Pending] <= mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Disabling);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Pending_Relais_processing_Enabling] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Disabling :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Pending_Relais_processing_Disabling] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Disabling);
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Failed :
@@ -518,7 +528,6 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling()
 		{
 			/* Entry action for state 'Enabling'. */
-			ifaceOperationCallback->inc();
 			ifaceOperationCallback->on();
 		}
 
@@ -541,21 +550,27 @@ namespace mrw
 			}
 		}
 
-		/* Entry action for state 'Enabling'. */
-		void SectionStatechart::enact_main_region_Operating_Processing_Enabling()
+		/* Entry action for state 'Pending'. */
+		void SectionStatechart::enact_main_region_Operating_Processing_Pending()
 		{
-			/* Entry action for state 'Enabling'. */
+			/* Entry action for state 'Pending'. */
 			timerService->setTimer(this, 2, timeout, false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
-			if (enable_value)
-			{
-				ifaceOperationCallback->on();
-			}
-			if (!enable_value)
-			{
-				ifaceOperationCallback->off();
-			}
+		}
+
+		/* Entry action for state 'Enabling'. */
+		void SectionStatechart::enact_main_region_Operating_Processing_Pending_Relais_processing_Enabling()
+		{
+			/* Entry action for state 'Enabling'. */
+			ifaceOperationCallback->on();
+		}
+
+		/* Entry action for state 'Disabling'. */
+		void SectionStatechart::enact_main_region_Operating_Processing_Pending_Relais_processing_Disabling()
+		{
+			/* Entry action for state 'Disabling'. */
+			ifaceOperationCallback->off();
 		}
 
 		/* Entry action for state 'Failed'. */
@@ -588,10 +603,10 @@ namespace mrw
 			ifaceOperationCallback->dec();
 		}
 
-		/* Exit action for state 'Enabling'. */
-		void SectionStatechart::exact_main_region_Operating_Processing_Enabling()
+		/* Exit action for state 'Pending'. */
+		void SectionStatechart::exact_main_region_Operating_Processing_Pending()
 		{
-			/* Exit action for state 'Enabling'. */
+			/* Exit action for state 'Pending'. */
 			timerService->unsetTimer(this, 2);
 			ifaceOperationCallback->dec();
 		}
@@ -756,11 +771,21 @@ namespace mrw
 		}
 
 		/* 'default' enter sequence for state Enabling */
-		void SectionStatechart::enseq_main_region_Operating_Processing_Enabling_default()
+		void SectionStatechart::enseq_main_region_Operating_Processing_Pending_Relais_processing_Enabling_default()
 		{
 			/* 'default' enter sequence for state Enabling */
-			enact_main_region_Operating_Processing_Enabling();
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling;
+			enact_main_region_Operating_Processing_Pending_Relais_processing_Enabling();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Disabling */
+		void SectionStatechart::enseq_main_region_Operating_Processing_Pending_Relais_processing_Disabling_default()
+		{
+			/* 'default' enter sequence for state Disabling */
+			enact_main_region_Operating_Processing_Pending_Relais_processing_Disabling();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Disabling;
 			stateConfVectorPosition = 0;
 			stateConfVectorChanged = true;
 		}
@@ -972,13 +997,28 @@ namespace mrw
 			stateConfVectorPosition = 1;
 		}
 
+		/* Default exit sequence for state Pending */
+		void SectionStatechart::exseq_main_region_Operating_Processing_Pending()
+		{
+			/* Default exit sequence for state Pending */
+			exseq_main_region_Operating_Processing_Pending_Relais_processing();
+			exact_main_region_Operating_Processing_Pending();
+		}
+
 		/* Default exit sequence for state Enabling */
-		void SectionStatechart::exseq_main_region_Operating_Processing_Enabling()
+		void SectionStatechart::exseq_main_region_Operating_Processing_Pending_Relais_processing_Enabling()
 		{
 			/* Default exit sequence for state Enabling */
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
 			stateConfVectorPosition = 0;
-			exact_main_region_Operating_Processing_Enabling();
+		}
+
+		/* Default exit sequence for state Disabling */
+		void SectionStatechart::exseq_main_region_Operating_Processing_Pending_Relais_processing_Disabling()
+		{
+			/* Default exit sequence for state Disabling */
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
 		}
 
 		/* Default exit sequence for state Failed */
@@ -1052,9 +1092,16 @@ namespace mrw
 					exseq_main_region_Operating_Processing_Locked_Route_active_Disabled();
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling :
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling :
 				{
-					exseq_main_region_Operating_Processing_Enabling();
+					exseq_main_region_Operating_Processing_Pending_Relais_processing_Enabling();
+					exact_main_region_Operating_Processing_Pending();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Disabling :
+				{
+					exseq_main_region_Operating_Processing_Pending_Relais_processing_Disabling();
+					exact_main_region_Operating_Processing_Pending();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Failed :
@@ -1247,9 +1294,16 @@ namespace mrw
 					exseq_main_region_Operating_Processing_Locked_Route_active_Disabled();
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling :
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling :
 				{
-					exseq_main_region_Operating_Processing_Enabling();
+					exseq_main_region_Operating_Processing_Pending_Relais_processing_Enabling();
+					exact_main_region_Operating_Processing_Pending();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Disabling :
+				{
+					exseq_main_region_Operating_Processing_Pending_Relais_processing_Disabling();
+					exact_main_region_Operating_Processing_Pending();
 					break;
 				}
 			default:
@@ -1388,6 +1442,29 @@ namespace mrw
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Next_Reached :
 				{
 					exseq_main_region_Operating_Processing_Locked_Occupation_Next_Reached();
+					break;
+				}
+			default:
+				/* do nothing */
+				break;
+			}
+		}
+
+		/* Default exit sequence for region Relais processing */
+		void SectionStatechart::exseq_main_region_Operating_Processing_Pending_Relais_processing()
+		{
+			/* Default exit sequence for region Relais processing */
+			/* Handle exit of all possible states (of mrw.statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing) at position 0... */
+			switch (stateConfVector[ 0 ])
+			{
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling :
+				{
+					exseq_main_region_Operating_Processing_Pending_Relais_processing_Enabling();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Disabling :
+				{
+					exseq_main_region_Operating_Processing_Pending_Relais_processing_Disabling();
 					break;
 				}
 			default:
@@ -1645,12 +1722,24 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (enable_raised)
+				if (((enable_raised)) && ((enable_value)))
 				{
 					exseq_main_region_Operating_Processing_Unlocked();
-					enseq_main_region_Operating_Processing_Enabling_default();
+					enact_main_region_Operating_Processing_Pending();
+					enseq_main_region_Operating_Processing_Pending_Relais_processing_Enabling_default();
 					main_region_Operating_react(0);
 					transitioned_after = 0;
+				}
+				else
+				{
+					if (((enable_raised)) && ((!enable_value)))
+					{
+						exseq_main_region_Operating_Processing_Unlocked();
+						enact_main_region_Operating_Processing_Pending();
+						enseq_main_region_Operating_Processing_Pending_Relais_processing_Disabling_default();
+						main_region_Operating_react(0);
+						transitioned_after = 0;
+					}
 				}
 			}
 			/* If no transition was taken then execute local reactions */
@@ -1912,49 +2001,73 @@ namespace mrw
 			return transitioned_after;
 		}
 
-		sc::integer SectionStatechart::main_region_Operating_Processing_Enabling_react(const sc::integer transitioned_before)
+		sc::integer SectionStatechart::main_region_Operating_Processing_Pending_react(const sc::integer transitioned_before)
 		{
-			/* The reactions of state Enabling. */
+			/* The reactions of state Pending. */
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (((relaisResponse_raised)) && ((enable_value)))
+				if (timeEvents[2])
 				{
-					exseq_main_region_Operating_Processing_Enabling();
-					enact_main_region_Operating_Processing_Locked();
-					enseq_main_region_Operating_Processing_Locked_Route_active_Enabled_default();
-					enseq_main_region_Operating_Processing_Locked_Occupation_default();
-					main_region_Operating_react(0);
+					exseq_main_region_Operating();
+					timeEvents[2] = false;
+					enseq_main_region_Failed_default();
+					react(0);
 					transitioned_after = 0;
-				}
-				else
-				{
-					if (timeEvents[2])
-					{
-						exseq_main_region_Operating();
-						timeEvents[2] = false;
-						enseq_main_region_Failed_default();
-						react(0);
-						transitioned_after = 0;
-					}
-					else
-					{
-						if (((relaisResponse_raised)) && ((!enable_value)))
-						{
-							exseq_main_region_Operating_Processing_Enabling();
-							enact_main_region_Operating_Processing_Locked();
-							enseq_main_region_Operating_Processing_Locked_Route_active_Disabled_default();
-							enseq_main_region_Operating_Processing_Locked_Occupation_default();
-							main_region_Operating_react(0);
-							transitioned_after = 0;
-						}
-					}
 				}
 			}
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
 			{
 				transitioned_after = main_region_Operating_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SectionStatechart::main_region_Operating_Processing_Pending_Relais_processing_Enabling_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Enabling. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (relaisResponse_raised)
+				{
+					exseq_main_region_Operating_Processing_Pending();
+					enact_main_region_Operating_Processing_Locked();
+					enseq_main_region_Operating_Processing_Locked_Route_active_Enabled_default();
+					enseq_main_region_Operating_Processing_Locked_Occupation_default();
+					main_region_Operating_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Pending_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SectionStatechart::main_region_Operating_Processing_Pending_Relais_processing_Disabling_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Disabling. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (relaisResponse_raised)
+				{
+					exseq_main_region_Operating_Processing_Pending();
+					enact_main_region_Operating_Processing_Locked();
+					enseq_main_region_Operating_Processing_Locked_Route_active_Disabled_default();
+					enseq_main_region_Operating_Processing_Locked_Occupation_default();
+					main_region_Operating_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Operating_Processing_Pending_react(transitioned_before);
 			}
 			return transitioned_after;
 		}
@@ -2074,9 +2187,14 @@ namespace mrw
 					transitioned = main_region_Operating_Processing_Locked_Route_active_Disabled_react(transitioned);
 					break;
 				}
-			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Enabling :
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling :
 				{
-					transitioned = main_region_Operating_Processing_Enabling_react(transitioned);
+					transitioned = main_region_Operating_Processing_Pending_Relais_processing_Enabling_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Disabling :
+				{
+					transitioned = main_region_Operating_Processing_Pending_Relais_processing_Disabling_react(transitioned);
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Failed :
