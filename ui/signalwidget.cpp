@@ -121,15 +121,15 @@ void SignalWidget::paint(QPainter & painter)
 		}
 	}
 
-	QColor mast_color(RED);
-	QColor main_color    = main_state ==
-		Symbol::GO ? GREEN : RED;
-	QColor distant_color = distant_state ==
-		Symbol::GO ? GREEN : YELLOW;
-	QColor shunt_color   = shunt_state ==
-		Symbol::GO ? WHITE : RED;
-	bool draw_shunt   = false;
-	bool draw_distant = false;
+	// Predefine signal colors.
+	const QColor main_color    = main_state    == Symbol::GO ? GREEN : RED;
+	const QColor distant_color = distant_state == Symbol::GO ? GREEN : YELLOW;
+	const QColor shunt_color   = shunt_state   == Symbol::GO ? WHITE : RED;
+
+	// My change later depending on signal combinations.
+	QColor       mast_color    = RED;
+	bool         draw_shunt    = false;
+	bool         draw_distant  = false;
 
 	if (has_main)
 	{
@@ -149,7 +149,9 @@ void SignalWidget::paint(QPainter & painter)
 	}
 	else
 	{
-		if (!has_shunting || (base_controller->state() != SHUNTING) || (shunt_state != Symbol::GO))
+		if (!has_shunting ||
+			(base_controller->state() != SHUNTING) ||
+			(shunt_state != Symbol::GO))
 		{
 			draw_distant = has_distant;
 		}
