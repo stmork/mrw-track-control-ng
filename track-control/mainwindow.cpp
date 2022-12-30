@@ -224,7 +224,7 @@ void MainWindow::enable()
 	ui->actionLineDown->setEnabled(editing);
 
 	ui->actionOperate->setEnabled(editing);
-	ui->actionEdit->setEnabled(operating || failed);
+	ui->actionEdit->setEnabled((operating && !hasActiveRoutes()) || failed);
 	ui->actionClear->setEnabled(failed);
 	ui->actionInit->setEnabled(operating);
 
@@ -264,6 +264,11 @@ void MainWindow::reset()
 	__METHOD__;
 
 	ControllerRegistry::instance().reset();
+}
+
+bool MainWindow::hasActiveRoutes()
+{
+	return ui->routeListWidget->count() > 0;
 }
 
 void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Position * position)

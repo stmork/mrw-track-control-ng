@@ -650,7 +650,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (edit_raised)
+				if (((edit_raised)) && ((!ifaceOperationCallback->hasActiveRoutes())))
 				{
 					exseq_main_region_Operating();
 					enseq_main_region_Editing_default();

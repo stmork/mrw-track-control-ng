@@ -121,6 +121,7 @@ private:
 	}
 
 	virtual void        reset() override;
+	virtual bool        hasActiveRoutes() override;
 
 	mrw::model::Route * createRoute(
 		const bool                     direction,

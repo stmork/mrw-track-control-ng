@@ -105,6 +105,8 @@ namespace mrw
 
 				virtual void reset() = 0;
 
+				virtual bool hasActiveRoutes() = 0;
+
 
 			};
 
