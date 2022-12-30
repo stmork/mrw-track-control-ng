@@ -769,6 +769,10 @@ void MainWindow::startBeermode(const bool dir)
 			{
 				WidgetRoute * route = new WidgetRoute(dir, SectionState::TOUR, start);
 
+				qDebug("-----");
+				qDebug().noquote() << "Start: " << dump(start);
+				qDebug().noquote() << "Pass:  " << dump(pass_through);
+				qDebug().noquote() << "End:   " << dump(end);
 				if (route->append(pass_through) && route->append(*end->advance(dir).begin()))
 				{
 					beer_route = route;
@@ -778,6 +782,7 @@ void MainWindow::startBeermode(const bool dir)
 				{
 					delete route;
 
+					qWarning("No route possible! Disabling beer mode...");
 					ui->actionBeermodeLeft->setChecked(false);
 					ui->actionBeermodeRight->setChecked(false);
 				}
@@ -963,8 +968,13 @@ void MainWindow::dump(const std::vector<Rail *> & rails)
 {
 	for (Rail * rail : rails)
 	{
-		Section * section = rail->section();
-
-		qDebug().noquote() << ">>>>" << *section->region() << "/" << *section << "/" << *rail;
+		qDebug().noquote() << dump(rail);
 	}
+}
+
+QString MainWindow::dump(const Rail * rail)
+{
+	const Section * section = rail->section();
+
+	return section->region()->name() + "/" + *section + "/" + *rail;
 }

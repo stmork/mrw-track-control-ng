@@ -151,6 +151,7 @@ private:
 	void startBeermode(const bool dir);
 	void dump(
 		const std::vector<mrw::model::Rail *> & rails);
+	QString dump(const mrw::model::Rail * rail);
 
 	Ui::MainWindow          *         ui;
 	mrw::model::ModelRepository   &   repo;
