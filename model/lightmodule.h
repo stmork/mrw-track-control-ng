@@ -5,8 +5,8 @@
 
 #pragma once
 
-#ifndef MRW_MODULE_LIGHTMODEL_H
-#define MRW_MODULE_LIGHTMODEL_H
+#ifndef MRW_MODEL_LIGHTMODEL_H
+#define MRW_MODEL_LIGHTMODEL_H
 
 #include <vector>
 

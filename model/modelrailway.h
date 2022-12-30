@@ -5,8 +5,8 @@
 
 #pragma once
 
-#ifndef MRW_MODULE_MODELRAILWAY_H
-#define MRW_MODULE_MODELRAILWAY_H
+#ifndef MRW_MODEL_MODELRAILWAY_H
+#define MRW_MODEL_MODELRAILWAY_H
 
 #include <QDomDocument>
 #include <QString>
@@ -22,6 +22,7 @@
 namespace mrw::model
 {
 	class AssemblyPart;
+	class Region;
 
 	/**
 	 * This functor class provides a hashing function for Device mapping
@@ -271,11 +272,18 @@ namespace mrw::model
 		 * @param result The result vector collecting the AssembyPart elements
 		 * of type T.
 		 */
-		template <class T> void parts(std::vector<T *> & result)
+		template <class T> void parts(
+			std::vector<T *>          &         result,
+			std::function<bool(const T * part)> guard = [](const T * part)
+		{
+			(void)part;
+
+			return true;
+		})
 		{
 			for (Region * sub : regions)
 			{
-				sub->parts<T>(result);
+				sub->parts<T>(result, guard);
 			}
 		}
 

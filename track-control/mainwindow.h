@@ -9,6 +9,7 @@
 #define MAINWINDOW_H
 
 #include <functional>
+#include <random>
 
 #include <QMainWindow>
 #include <QListWidgetItem>
@@ -29,6 +30,7 @@ namespace Ui
 QT_END_NAMESPACE
 
 class MrwMessageDispatcher;
+class WidgetRoute;
 
 class MainWindow :
 	public QMainWindow,
@@ -73,6 +75,8 @@ private slots:
 	void on_actionTurnSwitchRight_triggered();
 	void on_actionLock_triggered();
 	void on_actionUnlock_triggered();
+	void on_actionBeermodeLeft_triggered();
+	void on_actionBeermodeRight_triggered();
 
 	void onInit();
 	void onOperate(const bool active);
@@ -118,16 +122,42 @@ private:
 
 	virtual void        reset() override;
 
-	mrw::model::Route * create(const bool direction, mrw::model::SectionState state);
+	mrw::model::Route * createRoute(
+		const bool                     direction,
+		const mrw::model::SectionState state);
+	void addRoute(WidgetRoute * route);
 	void                changePage(const int offset);
+
+	void findCandidates(
+		std::vector<mrw::model::Rail *> & candidates,
+		const bool                        dir) const;
+	void findPassthrough(
+		std::vector<mrw::model::Rail *> & candidates,
+		const mrw::model::Region     *    region,
+		const bool                        is_same) const;
+
+	static bool isPassThrough(
+		const mrw::model::Rail * rail);
+	static mrw::model::Rail * isNeighbourOccupied(
+		const mrw::model::Rail * rail,
+		const bool               dir);
+	static bool isNeighbourFree(
+		const mrw::model::Rail * rail,
+		const bool               dir);
+
+	int random(const size_t size) const;
+	mrw::model::Rail * random(const std::vector<mrw::model::Rail *> & rails) const;
+	void startBeermode(const bool dir);
+	void dump(
+		const std::vector<mrw::model::Rail *> & rails);
 
 	Ui::MainWindow          *         ui;
 	mrw::model::ModelRepository   &   repo;
-	mrw::model::Region        *       beer_mode_region;
+	mrw::model::Route        *        beer_route = nullptr;
 	mrw::statechart::OperatingMode    statechart;
 
-	void findCandidates(const bool dir) const;
-	static bool isPassThrough(mrw::model::Rail * rail);
+	mutable std::random_device        rd;
+	mutable std::mt19937              gen;
 };
 
 #endif // MAINWINDOW_H

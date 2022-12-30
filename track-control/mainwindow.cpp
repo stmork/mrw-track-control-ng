@@ -35,7 +35,7 @@ MainWindow::MainWindow(
 	QMainWindow(parent),
 	ui(new Ui::MainWindow),
 	repo(repository),
-	statechart(nullptr)
+	statechart(nullptr), gen(rd())
 {
 	BaseWidget::setVerbose(false);
 
@@ -231,6 +231,8 @@ void MainWindow::enable()
 	ui->actionTurnSwitchLeft->setEnabled(switch_count > 0);
 	ui->actionTurnSwitch->setEnabled(switch_count > 0);
 	ui->actionTurnSwitchRight->setEnabled(switch_count > 0);
+	ui->actionBeermodeLeft->setEnabled(operating && !ui->actionBeermodeRight->isChecked());
+	ui->actionBeermodeRight->setEnabled(operating &&  !ui->actionBeermodeLeft->isChecked());
 
 	ui->clearRoute->setEnabled(ui->routeListWidget->currentItem() != nullptr);
 	ui->clearAllRoutes->setEnabled(ui->routeListWidget->count() > 0);
@@ -349,7 +351,7 @@ bool MainWindow::isSameRegion()
 **                                                                      **
 *************************************************************************/
 
-Route * MainWindow::create(const bool direction, SectionState state)
+Route * MainWindow::createRoute(const bool direction, const SectionState state)
 {
 	__METHOD__;
 
@@ -366,6 +368,12 @@ Route * MainWindow::create(const bool direction, SectionState state)
 		}
 	}
 
+	addRoute(route);
+	return route;
+}
+
+void MainWindow::addRoute(WidgetRoute * route)
+{
 	ui->routeListWidget->addItem(*route);
 	ui->routeListWidget->setCurrentItem(*route);
 	ui->regionTabWidget->currentWidget()->update();
@@ -377,8 +385,6 @@ Route * MainWindow::create(const bool direction, SectionState state)
 		Qt::QueuedConnection);
 
 	route->turn();
-
-	return route;
 }
 
 void MainWindow::routeFinished()
@@ -392,6 +398,20 @@ void MainWindow::routeFinished()
 	ui->routeListWidget->takeItem(row);
 
 	delete route;
+	if (route == beer_route)
+	{
+		beer_route = nullptr;
+
+		if (ui->actionBeermodeLeft->isChecked())
+		{
+			on_actionBeermodeLeft_triggered();
+		}
+		if (ui->actionBeermodeRight->isChecked())
+		{
+			on_actionBeermodeRight_triggered();
+		}
+	}
+
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
 }
@@ -474,12 +494,12 @@ void MainWindow::on_clearAllRoutes_clicked()
 
 void MainWindow::on_tourLeftPushButton_clicked()
 {
-	create(false, SectionState::TOUR);
+	createRoute(false, SectionState::TOUR);
 }
 
 void MainWindow::on_shuntLeftPushButton_clicked()
 {
-	create(false, SectionState::SHUNTING);
+	createRoute(false, SectionState::SHUNTING);
 }
 
 void MainWindow::on_extendPushButton_clicked()
@@ -509,12 +529,12 @@ void MainWindow::on_extendPushButton_clicked()
 
 void MainWindow::on_shuntRightPushButton_clicked()
 {
-	create(true, SectionState::SHUNTING);
+	createRoute(true, SectionState::SHUNTING);
 }
 
 void MainWindow::on_tourRightPushButton_clicked()
 {
-	create(true, SectionState::TOUR);
+	createRoute(true, SectionState::TOUR);
 }
 
 /*************************************************************************
@@ -678,6 +698,26 @@ void MainWindow::on_actionUnlock_triggered()
 	ui->regionTabWidget->currentWidget()->update();
 }
 
+void MainWindow::on_actionBeermodeLeft_triggered()
+{
+	__METHOD__;
+
+	if (ui->actionBeermodeLeft->isChecked())
+	{
+		startBeermode(false);
+	}
+}
+
+void MainWindow::on_actionBeermodeRight_triggered()
+{
+	__METHOD__;
+
+	if (ui->actionBeermodeRight->isChecked())
+	{
+		startBeermode(true);
+	}
+}
+
 /*************************************************************************
 **                                                                      **
 **       Operation modes                                                **
@@ -746,36 +786,155 @@ void MainWindow::changePage(const int offset)
 	ui->regionTabWidget->setCurrentIndex((index + count) % count);
 }
 
-void MainWindow::findCandidates(const bool dir) const
+void MainWindow::findCandidates(
+	std::vector<Rail *> & candidates,
+	const bool            dir) const
 {
 	ModelRailway    *   model = repo;
-	std::vector<Rail *> candidates;
+	std::vector<Rail *> main_rails;
 
-#if 0
-	model->parts<Rail>(candidates, [dir](Rail * rail)
+	model->parts<Rail>(main_rails, [](const Rail * rail)
 	{
-		rail->advance(dir);
 		return rail->isMain();
 	});
-#endif
+
+	for (Rail * rail : main_rails)
+	{
+		Rail * part = isNeighbourOccupied(rail, dir);
+
+		if (part != nullptr)
+		{
+			candidates.push_back(part);
+		}
+	}
 }
 
-bool MainWindow::isPassThrough(Rail * rail)
+void MainWindow::findPassthrough(
+	std::vector<Rail *> & candidates,
+	const Region     *    region,
+	const bool            is_same) const
 {
-	std::vector<RailPart *> neighbours;
+	ModelRailway    *   model = repo;
+	std::vector<Rail *> main_rails;
 
-	for (RailPart * part : rail->advance(false))
+	model->parts<Rail>(main_rails, [](const Rail * rail)
 	{
-		neighbours.push_back(part);
-	}
-	neighbours.push_back(rail);
-	for (RailPart * part : rail->advance(true))
-	{
-		neighbours.push_back(part);
-	}
+		return rail->isMain();
+	});
 
-	return std::all_of(neighbours.begin(), neighbours.end(), [](RailPart * part)
+	for (Rail * rail : main_rails)
 	{
+		const bool same = rail->region() == region;
+
+		if (isPassThrough(rail) && (same == is_same))
+		{
+			candidates.push_back(rail);
+		}
+	}
+}
+
+bool MainWindow::isPassThrough(const Rail * rail)
+{
+	return
+		isNeighbourFree(rail, false) &&
+		!rail->section()->occupation() &&
+		isNeighbourFree(rail, true);
+}
+
+Rail * MainWindow::isNeighbourOccupied(const Rail * rail, const bool dir)
+{
+	const std::set<RailInfo> & neighbours = rail->advance(dir);
+
+	if (neighbours.size() == 1)
+	{
+		RailPart * part = *neighbours.begin();
+
+		if (part->section()->occupation())
+		{
+			return dynamic_cast<Rail *>(part);
+		}
+	}
+	return nullptr;
+}
+
+bool MainWindow::isNeighbourFree(const Rail * rail, const bool dir)
+{
+	const std::set<RailInfo> & neighbours = rail->advance(dir);
+
+	return (neighbours.size() > 0) &&
+		std::all_of(neighbours.begin(), neighbours.end(), [](const RailInfo & info)
+	{
+		const RailPart * part = info;
+
 		return !part->section()->occupation();
 	});
+}
+
+int MainWindow::random(const size_t size) const
+{
+	std::uniform_int_distribution<int> distribution(0, size - 1);
+
+	return distribution(gen);
+}
+
+Rail * MainWindow::random(const std::vector<Rail *> & rails) const
+{
+	const size_t size = rails.size();
+
+	return size > 0 ? rails.at(random(size)) : nullptr;
+}
+
+void MainWindow::startBeermode(const bool dir)
+{
+	if (beer_route == nullptr)
+	{
+		std::vector<Rail *> candidates;
+
+		findCandidates(candidates, dir);
+		Rail * start = random(candidates);
+
+		dump(candidates);
+		if (start != nullptr)
+		{
+			std::vector<Rail *> pass_through_rails;
+			std::vector<Rail *> end_rails;
+
+			findPassthrough(pass_through_rails, start->region(), false);
+			qDebug("-----");
+			dump(pass_through_rails);
+
+			findPassthrough(end_rails, start->region(), true);
+			qDebug("-----");
+			dump(end_rails);
+
+			Rail * pass_through = random(pass_through_rails);
+			Rail * end          = random(end_rails);
+
+			if ((pass_through != nullptr) && (end != nullptr))
+			{
+				WidgetRoute * route = new WidgetRoute(dir, SectionState::TOUR, start);
+
+				if (route->append(pass_through) && route->append(*end->advance(dir).begin()))
+				{
+					beer_route = route;
+					addRoute(route);
+				}
+				else
+				{
+					delete route;
+				}
+				enable();
+			}
+		}
+	}
+}
+
+void MainWindow::dump(const std::vector<Rail *> & rails)
+{
+	for (Rail * rail : rails)
+	{
+		Section * section = rail->section();
+
+		qDebug().noquote() << ">>>>" << *section->region() << "/" << *section << "/" << *rail;
+	}
 }

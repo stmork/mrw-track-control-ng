@@ -249,6 +249,9 @@
     <addaction name="separator"/>
     <addaction name="actionLock"/>
     <addaction name="actionUnlock"/>
+    <addaction name="separator"/>
+    <addaction name="actionBeermodeLeft"/>
+    <addaction name="actionBeermodeRight"/>
    </widget>
    <widget class="QMenu" name="menuAnsicht">
     <property name="title">
@@ -390,15 +393,24 @@
    <property name="text">
     <string>Weiche links</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
   </action>
   <action name="actionTurnSwitchRight">
    <property name="text">
     <string>Weiche rechts</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
   </action>
   <action name="actionTurnSwitch">
    <property name="text">
     <string>Weiche umschalten</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+U</string>
    </property>
   </action>
   <action name="actionLock">
@@ -430,6 +442,22 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+PgDown</string>
+   </property>
+  </action>
+  <action name="actionBeermodeLeft">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Biermodus links</string>
+   </property>
+  </action>
+  <action name="actionBeermodeRight">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Biermodus rechts</string>
    </property>
   </action>
  </widget>

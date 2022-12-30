@@ -5,8 +5,8 @@
 
 #pragma once
 
-#ifndef MRW_MODEL_AREA_H
-#define MRW_MODEL_AREA_H
+#ifndef MRW_MODEL_REGION_H
+#define MRW_MODEL_REGION_H
 
 #include <vector>
 
@@ -108,7 +108,8 @@ namespace mrw::model
 		 * @param guard A labmda to fine select if the type T should added to
 		 * the result vector.
 		 */
-		template <class T> void parts(std::vector<T *> & result,
+		template <class T> void parts(
+			std::vector<T *>          &         result,
 			std::function<bool(const T * part)> guard = [](const T * part)
 		{
 			(void)part;

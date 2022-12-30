@@ -5,8 +5,8 @@
 
 #pragma once
 
-#ifndef MRW_MODULE_MODULE_H
-#define MRW_MODULE_MODULE_H
+#ifndef MRW_MODEL_MODULE_H
+#define MRW_MODEL_MODULE_H
 
 #include <cinttypes>
 

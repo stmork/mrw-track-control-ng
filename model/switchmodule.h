@@ -5,8 +5,8 @@
 
 #pragma once
 
-#ifndef MRW_MODULE_SWITCHMODULE_H
-#define MRW_MODULE_SWITCHMODULE_H
+#ifndef MRW_MODEL_SWITCHMODULE_H
+#define MRW_MODEL_SWITCHMODULE_H
 
 #include <vector>
 

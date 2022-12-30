@@ -62,3 +62,13 @@ AssemblyPart * AssemblyPart::resolve(
 	}
 	return nullptr;
 }
+
+Section * AssemblyPart::section() const
+{
+	return part_section;
+}
+
+Region * AssemblyPart::region() const
+{
+	return part_section->region();
+}
