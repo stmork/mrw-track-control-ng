@@ -48,6 +48,8 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 		setupDoubleCrossSwitches(controller);
 	}
 
+	connect(this, &RegionForm::brightness, ui->brightnessBar, &QProgressBar::setValue);
+
 	setupSize(region);
 }
 

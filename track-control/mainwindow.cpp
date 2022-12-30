@@ -41,7 +41,7 @@ MainWindow::MainWindow(
 
 	ui->setupUi(this);
 	setWindowTitle("Modelbased railway control (next generation) - " + repository.modelName());
-	initRegion();
+	initRegion(dispatcher);
 
 	QList<ControllerWidget *> widgets = findChildren<ControllerWidget *>();
 
@@ -79,7 +79,7 @@ MainWindow::~MainWindow()
 	delete ui;
 }
 
-void MainWindow::initRegion()
+void MainWindow::initRegion(MrwMessageDispatcher & dispatcher)
 {
 	ModelRailway * model = repo;
 
@@ -89,6 +89,10 @@ void MainWindow::initRegion()
 		RegionForm * form = new RegionForm(region);
 
 		ui->regionTabWidget->addTab(form, region->name());
+
+		connect(
+			&dispatcher, &MrwMessageDispatcher::brightness,
+			form,        &RegionForm::brightness);
 	}
 }
 
@@ -740,4 +744,38 @@ void MainWindow::changePage(const int offset)
 	const int count = ui->regionTabWidget->count();
 
 	ui->regionTabWidget->setCurrentIndex((index + count) % count);
+}
+
+void MainWindow::findCandidates(const bool dir) const
+{
+	ModelRailway    *   model = repo;
+	std::vector<Rail *> candidates;
+
+#if 0
+	model->parts<Rail>(candidates, [dir](Rail * rail)
+	{
+		rail->advance(dir);
+		return rail->isMain();
+	});
+#endif
+}
+
+bool MainWindow::isPassThrough(Rail * rail)
+{
+	std::vector<RailPart *> neighbours;
+
+	for (RailPart * part : rail->advance(false))
+	{
+		neighbours.push_back(part);
+	}
+	neighbours.push_back(rail);
+	for (RailPart * part : rail->advance(true))
+	{
+		neighbours.push_back(part);
+	}
+
+	return std::all_of(neighbours.begin(), neighbours.end(), [](RailPart * part)
+	{
+		return !part->section()->occupation();
+	});
 }

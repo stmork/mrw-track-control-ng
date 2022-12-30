@@ -86,7 +86,7 @@ private:
 		mrw::ctrl::BaseController *,
 		mrw::model::Position *)> Callback;
 
-	void initRegion();
+	void initRegion(MrwMessageDispatcher & dispatcher);
 	void connectEditActions();
 	void connectOpModes(MrwMessageDispatcher & dispatcher);
 
@@ -123,7 +123,11 @@ private:
 
 	Ui::MainWindow          *         ui;
 	mrw::model::ModelRepository   &   repo;
+	mrw::model::Region        *       beer_mode_region;
 	mrw::statechart::OperatingMode    statechart;
+
+	void findCandidates(const bool dir) const;
+	static bool isPassThrough(mrw::model::Rail * rail);
 };
 
 #endif // MAINWINDOW_H

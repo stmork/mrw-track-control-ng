@@ -131,6 +131,40 @@
           </spacer>
          </item>
          <item>
+          <widget class="QProgressBar" name="brightnessBar">
+           <property name="maximumSize">
+            <size>
+             <width>300</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QProgressBar
+{
+background-color: transparent;
+border: 2px solid white;
+border-radius: 0;
+text-align: center;
+padding: 2px;
+}
+
+QProgressBar::chunk
+{
+background-color: white;
+}</string>
+           </property>
+           <property name="maximum">
+            <number>255</number>
+           </property>
+           <property name="value">
+            <number>0</number>
+           </property>
+           <property name="format">
+            <string>Helligkeit: %p%</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="mrw::ui::OpModeWidget" name="opModeWidget" native="true">
            <property name="minimumSize">
             <size>

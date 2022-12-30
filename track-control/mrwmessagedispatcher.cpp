@@ -37,26 +37,76 @@ MrwMessageDispatcher::~MrwMessageDispatcher()
 
 void MrwMessageDispatcher::process(const MrwMessage & message)
 {
-	const ControllerId dst     = message.sid();
+	const ControllerId dst = message.sid();
 
-	if (message.isResponse() && (dst == CAN_GATEWAY_ID))
+	if (message.isResponse())
 	{
-		const ControllerId     id         = message.eid();
-		const UnitNo           unit_no    = message.unitNo();
-		Device        *        device     = model->deviceById(id, unit_no);
-		ControllerRegistrand * controller =
-			ControllerRegistry::instance().find<ControllerRegistrand>(device);
-
-		if (controller != nullptr)
+		if (dst == CAN_GATEWAY_ID)
 		{
-			if (controller->process(message))
+			const ControllerId     id         = message.eid();
+			const UnitNo           unit_no    = message.unitNo();
+			Device        *        device     = model->deviceById(id, unit_no);
+			ControllerRegistrand * controller =
+				ControllerRegistry::instance().find<ControllerRegistrand>(device);
+
+			if (controller != nullptr)
 			{
+				if (controller->process(message))
+				{
+					return;
+				}
+			}
+			else
+			{
+				if (filter(message))
+				{
+					return;
+				}
+			}
+		}
+	}
+	else
+	{
+		if (dst == CAN_BROADCAST_ID)
+		{
+			if ((message.command() == SENSOR) && (message[0] == SENSOR_LIGHT))
+			{
+				emit brightness(message[1]);
 				return;
 			}
 		}
 	}
 
 	qDebug().noquote() << message << "---";
+}
+
+bool MrwMessageDispatcher::filter(const MrwMessage & message)
+{
+	Controller * controller = model->controllerById(message.eid());
+	unsigned     major = 0;
+	unsigned     minor = 0;
+
+	if (controller != nullptr)
+	{
+		switch (message.command())
+		{
+		case PING:
+			return false;
+
+		case GETVER:
+			major = message[1];
+			minor = message[2] | (message[3] << 8);
+			qInfo("Controller: %03u V%u.%u", controller->id(), major, minor);
+			return true;
+
+		case SENSOR:
+			return true;
+
+		default:
+			return false;
+		}
+	}
+	return false;
 }
 
 void MrwMessageDispatcher::connectBus()

@@ -41,6 +41,7 @@ public:
 		return form_region;
 	}
 
+
 	void line(std::vector<mrw::model::Position *> & positions, const int y) const;
 
 	static void setOpMode(
@@ -48,6 +49,9 @@ public:
 		const QString & text,
 		const QColor  & color = mrw::ui::BaseWidget::WHITE,
 		const bool      blink = false);
+
+signals:
+	void brightness(int value);
 
 protected:
 	void changeEvent(QEvent * e) override;

@@ -33,8 +33,12 @@ public:
 
 protected:
 	virtual void process(const mrw::can::MrwMessage & message) override;
+	virtual bool filter(const mrw::can::MrwMessage & message);
 	virtual void connectBus() override;
 	virtual bool isConnected() override;
+
+signals:
+	void brightness(unsigned value);
 };
 
 #endif
