@@ -468,6 +468,12 @@ void MainWindow::on_clearRoute_clicked()
 		Route * route = item->data(WidgetRoute::USER_ROLE).value<Route *>();
 
 		delete route;
+		if (route == beer_route)
+		{
+			beer_route == nullptr;
+			ui->actionBeermodeLeft->setChecked(false);
+			ui->actionBeermodeRight->setChecked(false);
+		}
 	}
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
@@ -482,6 +488,10 @@ void MainWindow::on_clearAllRoutes_clicked()
 
 		delete route;
 	}
+
+	beer_route == nullptr;
+	ui->actionBeermodeLeft->setChecked(false);
+	ui->actionBeermodeRight->setChecked(false);
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
 }

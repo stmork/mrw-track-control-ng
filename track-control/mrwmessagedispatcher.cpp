@@ -83,11 +83,12 @@ void MrwMessageDispatcher::process(const MrwMessage & message)
 bool MrwMessageDispatcher::filter(const MrwMessage & message)
 {
 	Controller * controller = model->controllerById(message.eid());
-	unsigned     major = 0;
-	unsigned     minor = 0;
 
 	if (controller != nullptr)
 	{
+		unsigned     major = 0;
+		unsigned     minor = 0;
+
 		switch (message.command())
 		{
 		case PING:
