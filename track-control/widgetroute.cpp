@@ -32,7 +32,7 @@ WidgetRoute::WidgetRoute(
 	Route(dir, wanted_state, first, parent),
 	statechart(nullptr)
 {
-	list_item.setText(first->section()->key());
+	rename();
 	list_item.setData(USER_ROLE, QVariant::fromValue(this));
 
 	connect(
@@ -112,6 +112,7 @@ void WidgetRoute::prepare(
 
 	prepareTrack(last_valid_section, last_valid_part);
 	prepareSignals(last_valid_section, last_valid_part);
+	rename();
 }
 
 void WidgetRoute::prepareTrack(
@@ -206,6 +207,32 @@ void WidgetRoute::prepareSignals(
 	}
 }
 
+bool WidgetRoute::always(SignalControllerProxy * controller)
+{
+	Q_UNUSED(controller);
+
+	return true;
+}
+
+void WidgetRoute::rename()
+{
+	QString name = QString("%1 %2: %3").
+		arg(state == SectionState::TOUR ? "F" : "R").
+		arg(direction ? "re." : "li.");
+
+	if (sections.size() > 0)
+	{
+		name += ": ";
+		name += sections.front()->name();
+		if (sections.front() != sections.back())
+		{
+			name += " => ";
+			name += sections.back()->name();
+		}
+	}
+	list_item.setText(name);
+}
+
 /*************************************************************************
 **                                                                      **
 **       Releasing parts of route                                       **
@@ -261,6 +288,7 @@ void WidgetRoute::tryUnblock()
 	}
 	qDebug().noquote() << "Try unblock:" << countAllocatedSections() << "sections left";
 
+	rename();
 	finalize();
 }
 

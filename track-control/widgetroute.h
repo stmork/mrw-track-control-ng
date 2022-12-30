@@ -77,10 +77,11 @@ private:
 	void collectSectionControllers(
 		std::vector<mrw::ctrl::SectionController *>   &   controllers) const;
 
-	void unregister(mrw::model::Section * section);
-	void unregister(mrw::ctrl::SectionController * controller);
-	void finalize();
+	void   unregister(mrw::model::Section * section);
+	void   unregister(mrw::ctrl::SectionController * controller);
+	void   finalize();
 	size_t countAllocatedSections();
+	void   rename();
 
 	void prepareTrack(
 		mrw::model::Section  * last_valid_section,
@@ -89,12 +90,7 @@ private:
 		mrw::model::Section  * last_valid_section,
 		mrw::model::RailPart * last_valid_part);
 
-	static bool always(mrw::ctrl::SignalControllerProxy * controller)
-	{
-		Q_UNUSED(controller);
-
-		return true;
-	}
+	static bool always(mrw::ctrl::SignalControllerProxy * controller);
 
 	// Implementation of RouteStatemachine::OperationCallback
 	virtual void reset() override;
