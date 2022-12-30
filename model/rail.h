@@ -31,9 +31,9 @@ namespace mrw::model
 			Section       *       model_section,
 			const QDomElement  &  element);
 
-		bool valid() const override;
-		bool isBranch() const override;
-		bool isMain() const;
+		bool        valid() const override;
+		bool        isBranch() const override;
+		static bool isMain(const Rail * rail);
 
 		/**
 		 * This method returns the rail name.

@@ -52,9 +52,9 @@ bool Rail::isBranch() const
 	return is_branch;
 }
 
-bool Rail::isMain() const
+bool Rail::isMain(const Rail * rail)
 {
-	return is_main;
+	return rail->is_main;
 }
 
 const QString & Rail::name() const
