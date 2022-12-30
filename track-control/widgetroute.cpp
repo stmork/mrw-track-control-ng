@@ -216,7 +216,7 @@ bool WidgetRoute::always(SignalControllerProxy * controller)
 
 void WidgetRoute::rename()
 {
-	QString name = QString("%1 %2: %3").
+	QString name = QString("%1 %2").
 		arg(state == SectionState::TOUR ? "F" : "R").
 		arg(direction ? "re." : "li.");
 
