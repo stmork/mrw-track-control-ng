@@ -245,7 +245,7 @@ bool MrwMessage::valid() const
 
 uint8_t MrwMessage::operator[](const size_t index) const
 {
-	if (index >= start())
+	if (index >= max())
 	{
 		throw std::out_of_range("Index out of payload bounds!");
 	}
