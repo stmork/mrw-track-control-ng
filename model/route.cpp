@@ -174,7 +174,6 @@ void Route::prepare(
 {
 	__METHOD__;
 
-	// TODO: Use variables.
 	Q_UNUSED(last_valid_section);
 	Q_UNUSED(last_valid_part);
 

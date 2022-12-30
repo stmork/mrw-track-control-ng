@@ -405,15 +405,23 @@ void MainWindow::routeFinished()
 	delete route;
 	if (route == beer_route)
 	{
+		// Do some variant waiting stuff.
+		std::uniform_int_distribution<int> distribution(250, 750);
+
+		// Wait at least 1000 ms for track occupation simulator.
+		const int wait_time = 1000 + distribution(gen);
+
 		beer_route = nullptr;
 
 		if (ui->actionBeermodeLeft->isChecked())
 		{
-			on_actionBeermodeLeft_triggered();
+			QTimer::singleShot(wait_time,
+				this, &MainWindow::on_actionBeermodeLeft_triggered);
 		}
 		if (ui->actionBeermodeRight->isChecked())
 		{
-			on_actionBeermodeRight_triggered();
+			QTimer::singleShot(wait_time,
+				this, &MainWindow::on_actionBeermodeRight_triggered);
 		}
 	}
 
