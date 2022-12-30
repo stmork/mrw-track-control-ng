@@ -52,6 +52,11 @@ bool Rail::isBranch() const
 	return is_branch;
 }
 
+bool Rail::isMain() const
+{
+	return is_main;
+}
+
 const QString & Rail::name() const
 {
 	return partName();

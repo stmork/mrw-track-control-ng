@@ -33,6 +33,7 @@ namespace mrw::model
 
 		bool valid() const override;
 		bool isBranch() const override;
+		bool isMain() const;
 
 		/**
 		 * This method returns the rail name.
