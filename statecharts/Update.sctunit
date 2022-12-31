@@ -1,0 +1,161 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+//
+
+testclass Update for statechart mrw.^statechart.UpdateStatechart
+{
+	@Test
+	operation doPing()
+	{
+		enter
+		assert is_active
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Ping)
+		assert called ping
+	}
+
+	@Test
+	operation doReset()
+	{
+		// Given
+		doPing()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Reset)
+		assert called reset
+	}
+
+	@Test
+	operation firstFlashRequest()
+	{
+		// Given
+		doReset
+
+		// When
+		proceed delay_reset ms
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Request)
+		assert called flashRequest
+		assert count == 0
+	}
+
+	@Test
+	operation lastFlashRequest()
+	{
+		// Given
+		firstFlashRequest()
+		mock hasPages returns (true)
+
+		// When
+		var i = 0
+		while (i < retry)
+		{
+			assert i == count
+			assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Request)
+
+			proceed delay_flash_request ms
+			i++
+		}
+
+		// Then
+		assert count == retry
+
+	}
+
+	@Test
+	operation noCompletePage()
+	{
+		// Given
+		lastFlashRequest()
+		mock hasPages returns (false)
+
+		// When
+		proceed delay_flash_request ms
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Rest)
+		assert !called flashCompletePage
+		assert  called hasPages
+		assert  called flashRestPage
+	}
+
+	@Test
+	operation firstCompletePage()
+	{
+		// Given
+		lastFlashRequest()
+		mock hasPages returns (true)
+
+		// When
+		proceed delay_flash_request ms
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Complete_Page)
+		assert called hasPages
+		assert called flashCompletePage
+	}
+
+	@Test
+	operation nextCompletePage()
+	{
+		// Given
+		firstCompletePage()
+		mock hasPages returns (true)
+
+		// When
+		proceed delay_flash_page ms
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Complete_Page)
+		assert called hasPages
+		assert called flashCompletePage
+	}
+
+	@Test
+	operation lastCompletePage()
+	{
+		// Given
+		nextCompletePage()
+		mock hasPages returns (false)
+
+		// When
+		proceed delay_flash_page ms
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Rest)
+		assert called hasPages
+		assert called flashRestPage
+	}
+
+	@Test
+	operation doFlashCheck()
+	{
+		// Given
+		lastCompletePage()
+
+		// When
+		proceed delay_flash_page ms
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Check)
+		assert called flashCheck
+	}
+
+	@Test
+	operation doQuit()
+	{
+		// Given
+		doFlashCheck
+
+		// When
+		proceed delay_boot ms
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region._final_)
+		assert called quit
+	}
+}

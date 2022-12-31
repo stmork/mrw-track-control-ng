@@ -11,5 +11,6 @@ testsuite TestSuite
 	SignalController,
 	Section,
 	Route,
-	Tracker
+	Tracker,
+	Update
 }
