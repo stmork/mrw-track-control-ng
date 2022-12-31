@@ -4,6 +4,7 @@
 //
 
 #include <QCoreApplication>
+#include <QFile>
 
 #include <statecharts/timerservice.h>
 
@@ -13,9 +14,9 @@ using namespace mrw::can;
 using namespace mrw::statechart;
 
 UpdateService::UpdateService(
-		const QString & interface,
-		const QString & plugin,
-		QObject *       parent) :
+	const QString & interface,
+	const QString & plugin,
+	QObject    *    parent) :
 	MrwBusService(interface, plugin, parent),
 	statechart(nullptr)
 {
@@ -30,7 +31,7 @@ UpdateService::UpdateService(
 	}
 	else
 	{
-		quit();
+		QCoreApplication::quit();
 	}
 }
 
@@ -46,18 +47,21 @@ UpdateService::~UpdateService()
 
 void UpdateService::read(const char * filename)
 {
-	FILE *    file = fopen(filename, "r");
-	char      line[128];
-	unsigned  i, idx;
+	QFile file(filename);
+	const bool success = file.open(QIODevice::ReadOnly);
 
-	if (file != NULL)
+	if (success)
 	{
-		unsigned count, type;
+		QTextStream in(&file);
+		unsigned    count, type;
+		unsigned    i, idx;
 
-		while (fgets(line, sizeof(line), file) == line)
+		while (!in.atEnd())
 		{
+			const std::string line = in.readLine().toStdString();
+
 			// Adresse extrahieren
-			if (sscanf(line, ":%02x%04x%02x", &count, &address, &type) == 3)
+			if (sscanf(line.c_str(), ":%02x%04x%02x", &count, &address, &type) == 3)
 			{
 				uint8_t * bytes = nullptr;
 				unsigned  line_checksum = type + count + (address >> 8) + (address & 0xff);
@@ -65,12 +69,18 @@ void UpdateService::read(const char * filename)
 				switch (type)
 				{
 				case 0: //data
-					size   = address + count;
-					buffer = (unsigned char *)realloc(buffer, size + 1);
+					size  = address + count;
+					bytes = (uint8_t *)realloc(buffer, size + 1);
+					if (bytes == nullptr)
+					{
+						free(buffer);
+						throw std::bad_alloc();
+					}
+					buffer = bytes;
 					bytes  = &buffer[address];
 					for (i = 0, idx = 9; i <= count; i++)
 					{
-						int byte = 0;
+						unsigned byte = 0;
 
 						sscanf(&line[idx], "%02x", &byte);
 						bytes[i] = byte & 0xff;
@@ -80,7 +90,7 @@ void UpdateService::read(const char * filename)
 					line_checksum &= 0xff;
 					if (line_checksum != 0)
 					{
-						fprintf(stderr, "Checksum error at address 0x%04x: %02x != %02x in file\n",
+						qWarning("Checksum error at address 0x%04x: %02x != %02x in file\n",
 							address, line_checksum, bytes[count]);
 					}
 					break;
@@ -88,17 +98,9 @@ void UpdateService::read(const char * filename)
 				case 1: // EOF
 					break;
 				}
-#if 0
-				printf("%2u %04x %d - %4x\n", count, address, type, checksum);
-				if (bytes != NULL)
-				{
-					printf(" %02x", bytes[count]);
-				}
-				printf("\n");
-#endif
 			}
 		}
-		fclose(file);
+		file.close();
 	}
 }
 

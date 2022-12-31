@@ -12,8 +12,8 @@
 #include <statecharts/UpdateStatechart.h>
 
 class UpdateService :
-		public mrw::can::MrwBusService,
-		public mrw::statechart::UpdateStatechart::OperationCallback
+	public mrw::can::MrwBusService,
+	public mrw::statechart::UpdateStatechart::OperationCallback
 {
 	Q_OBJECT
 
@@ -35,9 +35,9 @@ class UpdateService :
 
 public:
 	explicit UpdateService(
-			const QString & interface = "can0",
-			const QString & plugin    = "socketcan",
-			QObject *       parent    = nullptr);
+		const QString & interface = "can0",
+		const QString & plugin    = "socketcan",
+		QObject    *    parent    = nullptr);
 	virtual ~UpdateService();
 
 private:
