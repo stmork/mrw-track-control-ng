@@ -105,4 +105,18 @@ GeneratorModel for yakindu::images
 			format = "png"
 		}
 	}
+
+	statechart mrw.statechart.UpdateStatechart
+	{
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+		}
+
+		feature Renderer
+		{
+			format = "png"
+		}
+	}
 }

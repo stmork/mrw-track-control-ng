@@ -10,10 +10,14 @@ include(../common.pri)
 CONFIG += console
 
 SOURCES += \
-	main.cpp
+	main.cpp \
+	updateservice.cpp
 
-LIBS            += -lMRW-Model -lMRW-Can -lMRW-Util
+LIBS            += -lMRW-Model -lMRW-Can -lMRW-Statecharts -lMRW-Util
 
 install.files = $$TARGET
 
 INSTALLS        += install
+
+HEADERS += \
+	updateservice.h
