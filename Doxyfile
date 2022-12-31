@@ -961,7 +961,7 @@ EXAMPLE_RECURSIVE      = NO
 IMAGE_PATH            += images
 IMAGE_PATH            += model/images
 IMAGE_PATH            += statecharts/images/
-IMAGE_PATH            += MRW-WidgetStudy/images/
+IMAGE_PATH            += widget-study/images/
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
