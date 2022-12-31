@@ -35,7 +35,7 @@ MainWindow::MainWindow(
 	QMainWindow(parent),
 	ui(new Ui::MainWindow),
 	repo(repository),
-	statechart(nullptr), gen(rd())
+	statechart(nullptr), rng(rd())
 {
 	BaseWidget::setVerbose(false);
 
@@ -409,7 +409,7 @@ void MainWindow::routeFinished()
 		std::uniform_int_distribution<int> distribution(250, 750);
 
 		// Wait at least 1000 ms for track occupation simulator.
-		const int wait_time = 1000 + distribution(gen);
+		const int wait_time = 1000 + distribution(rng);
 
 		beer_route = nullptr;
 
@@ -962,7 +962,7 @@ int MainWindow::random(const size_t size) const
 {
 	std::uniform_int_distribution<int> distribution(0, size - 1);
 
-	return distribution(gen);
+	return distribution(rng);
 }
 
 Rail * MainWindow::random(const std::vector<Rail *> & rails) const

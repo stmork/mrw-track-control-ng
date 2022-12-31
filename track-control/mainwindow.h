@@ -159,7 +159,7 @@ private:
 	mrw::statechart::OperatingMode    statechart;
 
 	mutable std::random_device        rd;
-	mutable std::mt19937              gen;
+	mutable std::mt19937              rng;
 };
 
 #endif // MAINWINDOW_H
