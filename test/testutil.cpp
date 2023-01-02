@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
+#include <iostream>
+
 #include <unistd.h>
 
 #include <QTest>
@@ -84,6 +86,19 @@ void TestUtil::testStringConcat()
 	QString     result = left + right;
 
 	QCOMPARE(result, "ab");
+}
+
+void TestUtil::testStringOut()
+{
+	QString    bold = String::bold("fat!");
+	QString    red  = String::red("red!");
+	TestString out("out!");
+
+	QVERIFY(bold.size() > 4);
+	QVERIFY(red.size() > 4);
+
+	qDebug() << out;
+	std::clog << out;
 }
 
 void TestUtil::testMethod()
