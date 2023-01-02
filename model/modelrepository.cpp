@@ -46,7 +46,7 @@ ModelRepository::ModelRepository(
 	}
 	prepareHost();
 
-	if (use_positions)
+	if ((model != nullptr) && use_positions)
 	{
 		prepareRegions();
 		prepareRailParts();
@@ -55,7 +55,7 @@ ModelRepository::ModelRepository(
 
 ModelRepository::~ModelRepository()
 {
-	if (use_positions)
+	if ((model != nullptr) && use_positions)
 	{
 		save();
 	}
@@ -97,7 +97,7 @@ void ModelRepository::save()
 
 void ModelRepository::info()
 {
-	if (dump_result)
+	if ((dump_result) && (model != nullptr))
 	{
 		model->info();
 	}
@@ -105,7 +105,7 @@ void ModelRepository::info()
 
 void ModelRepository::xml()
 {
-	if (dump_xml)
+	if ((dump_xml) && (model != nullptr))
 	{
 		model->xml();
 	}
@@ -205,6 +205,7 @@ QStringList ModelRepository::lookupProperties(const QString & input)
 	QDir        base = QDir::cleanPath(input);
 	QStringList properties;
 
+	base.cdUp();
 	base.cdUp();
 	base.cdUp();
 	base.cdUp();

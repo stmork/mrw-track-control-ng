@@ -63,6 +63,8 @@ TestUtil::TestUtil(QObject * parent) : QObject(parent)
 	{
 		qInfo("Called");
 	});
+
+	Method::pattern();
 }
 
 void TestUtil::testSettings()

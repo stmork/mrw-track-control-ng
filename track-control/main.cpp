@@ -44,6 +44,10 @@ int main(int argc, char * argv[])
 		repo.xml();
 
 		main_window.show();
+
+		qInfo("==========================================================");
+		qInfo() << "MRW-NG track control using model:" << repo.modelName();
+		qInfo("==========================================================");
 		return app.exec();
 	}
 	else
