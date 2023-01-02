@@ -196,6 +196,15 @@ namespace mrw::can
 		void append(const uint8_t input);
 
 		/**
+		 * This method returns the size of the payload.
+		 *
+		 * @note This is not the CAN frame length!
+		 *
+		 * @return The payload size in sense of this modelrailway.
+		 */
+		size_t size() const;
+
+		/**
 		 * This method returns the clear text QString of the SignalState.
 		 *
 		 * @param state The SignalState enumeration to translate.

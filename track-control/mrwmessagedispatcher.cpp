@@ -95,9 +95,12 @@ bool MrwMessageDispatcher::filter(const MrwMessage & message)
 			return false;
 
 		case GETVER:
-			major = message[1];
-			minor = message[2] | (message[3] << 8);
-			qInfo("Controller: %03u V%u.%u", controller->id(), major, minor);
+			if (message.size() == 4)
+			{
+				major = message[1];
+				minor = message[2] | (message[3] << 8);
+				qInfo("Controller: %03u V%u.%u", controller->id(), major, minor);
+			}
 			return true;
 
 		case SENSOR:

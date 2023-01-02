@@ -184,6 +184,34 @@ void TestCan::testCommand()
 	QCOMPARE(Command(array.at(0)), SETLFT);
 }
 
+void TestCan::testSpecial()
+{
+	MrwMessage msg_signal(SETSGN);
+	MrwMessage msg_getver(TEST_CTRL_ID, TEST_UNIT_NO, GETVER, MSG_OK);
+	MrwMessage msg_qrybuf(TEST_CTRL_ID, TEST_UNIT_NO, QRYBUF, MSG_OK);
+	MrwMessage msg_qryerr(TEST_CTRL_ID, TEST_UNIT_NO, QRYERR, MSG_OK);
+
+	msg_signal.append(SIGNAL_HP0);
+	QVERIFY(msg_signal.toString().contains("SIGNAL_HP0"));
+
+	msg_getver.append(3);
+	msg_getver.append(0x11);
+	msg_getver.append(0x22);
+	msg_getver.append(0x33);
+	QVERIFY(msg_getver.toString().contains("V17.13090"));
+
+	msg_qrybuf.append(2);
+	msg_qrybuf.append(11);
+	msg_qrybuf.append(22);
+	QVERIFY(msg_qrybuf.toString().contains("rx:11 tx:22"));
+
+	msg_qryerr.append(3);
+	msg_qryerr.append(0xab);
+	msg_qryerr.append(0xcd);
+	msg_qryerr.append(0xef);
+	QVERIFY(msg_qryerr.toString().contains("01:ab 02:cd 03:ef"));
+}
+
 void TestCan::testResult()
 {
 	MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, MSG_OK);
@@ -221,6 +249,7 @@ void TestCan::testRequestPayload()
 		byte |= nibble++;
 		bytes[t] = byte;
 
+		QCOMPARE(message.size(), t);
 		QVERIFY_EXCEPTION_THROWN(message[t], std::out_of_range);
 		message.append(byte);
 		for (size_t b = 0; b < t; b++)
@@ -256,6 +285,7 @@ void TestCan::testResponsePayload()
 		byte |= nibble++;
 		bytes[t] = byte;
 
+		QCOMPARE(message.size(), t);
 		QVERIFY_EXCEPTION_THROWN(message[t], std::out_of_range);
 		message.append(byte);
 		for (size_t b = 0; b < t; b++)

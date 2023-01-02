@@ -40,6 +40,7 @@ namespace mrw::test
 		void testReceivedCommand();
 		void testBroadcast();
 		void testCommand();
+		void testSpecial();
 		void testResult();
 		void testRequestPayload();
 		void testResponsePayload();

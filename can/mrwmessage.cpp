@@ -284,6 +284,33 @@ QString MrwMessage::toString() const
 
 	if (is_response)
 	{
+		switch (command() & CMD_MASK)
+		{
+		case GETVER:
+			if (len == 8)
+			{
+				const unsigned major = info[1];
+				const unsigned minor = info[2] | (info[3] << 8);
+
+				appendix = QString::asprintf("V%u.%u", major, minor);
+			}
+			break;
+
+		case QRYBUF:
+			if (len >= 7)
+			{
+				appendix = QString::asprintf("rx:%u tx:%u", info[1], info[2]);
+			}
+			break;
+
+		case QRYERR:
+			if (len >= 8)
+			{
+				appendix = QString::asprintf("01:%02x 02:%02x 03:%02x", info[1], info[2], info[3]);
+			}
+			break;
+		}
+
 		return QString::asprintf("ID: %04x:%04x len=%zu %c%c # %04x > %-11.11s %-22.22s %s",
 				sid(), eid(), len,
 				valid() ? 'V' : '-',
@@ -321,6 +348,11 @@ void MrwMessage::append(const uint8_t input)
 	{
 		throw std::out_of_range("CAN payload exceeded!");
 	}
+}
+
+size_t MrwMessage::size() const
+{
+	return len - start();
 }
 
 QString MrwMessage::get(const SignalState & state)
