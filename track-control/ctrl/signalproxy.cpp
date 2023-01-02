@@ -37,7 +37,7 @@ SignalProxy::~SignalProxy()
 
 void SignalProxy::start(Signal * input)
 {
-	Device * device = dynamic_cast<Device *>(signal);
+	Device * device = dynamic_cast<Device *>(input);
 
 	if ((device != nullptr) && (device->controller() == nullptr))
 	{
