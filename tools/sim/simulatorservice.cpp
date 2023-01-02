@@ -58,6 +58,7 @@ void SimulatorService::broadcast(const MrwMessage & message)
 	{
 		Controller * controller = model->controller(c);
 		MrwMessage   response(controller->id(), NO_UNITNO, cmd, MSG_OK);
+		bool         answer = true;
 
 		switch (cmd)
 		{
@@ -76,12 +77,24 @@ void SimulatorService::broadcast(const MrwMessage & message)
 			append(response, 3);
 			break;
 
+		case FLASH_DATA:
+		case FLASH_REQ:
+			answer = false;
+			break;
+
+		case FLASH_CHECK:
+			response.append(message[3]);
+			break;
+
 		default:
 			// No additional payload needed.
 			break;
 		}
 
-		write(response);
+		if (answer)
+		{
+			write(response);
+		}
 	}
 }
 

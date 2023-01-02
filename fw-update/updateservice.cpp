@@ -11,6 +11,7 @@
 #include <statecharts/timerservice.h>
 
 #include "updateservice.h"
+#include "hexline.h"
 
 using namespace mrw::can;
 using namespace mrw::statechart;
@@ -22,89 +23,52 @@ UpdateService::UpdateService(
 	MrwBusService(interface, plugin, parent),
 	statechart(nullptr)
 {
+	buffer.reserve(65536);
 	read("/lib/firmware/mrw/mrw-firmware-m32.hex");
 
 	statechart.setOperationCallback(this);
 	statechart.setTimerService(&TimerService::instance());
-
-	if (buffer != nullptr)
-	{
-		statechart.enter();
-	}
-	else
-	{
-		QCoreApplication::quit();
-	}
+	statechart.enter();
 }
 
 UpdateService::~UpdateService()
 {
 	statechart.exit();
-
-	if (buffer != nullptr)
-	{
-		free(buffer);
-	}
 }
 
-const std::regex  hexline_regex(R"(^:([\da-fA-F]{2})([\da-fA-F]{4})([\da-fA-F]{2})(([\da-fA-F]{2})+))");
-
-void UpdateService::read(const char * filename)
+void UpdateService::read(const QString & filename)
 {
-	QFile file(filename);
-	const bool success = file.open(QIODevice::ReadOnly);
+	QFile  file(filename);
+	bool   loop = true;
 
-	if (success)
+	if (file.open(QIODevice::ReadOnly))
 	{
 		QTextStream in(&file);
-		unsigned    count, type;
-		unsigned    i, idx;
 
 		while (!in.atEnd())
 		{
-			const std::string line = in.readLine().toStdString();
+			const std::string & line = in.readLine().toStdString();
+			const HexLine       hex_line(line);
 
-			// Adresse extrahieren
-			if (sscanf(line.c_str(), ":%02x%04x%02x", &count, &address, &type) == 3)
+			loop = hex_line;
+			if (loop)
 			{
-				uint8_t * bytes = nullptr;
-				unsigned  line_checksum = type + count + (address >> 8) + (address & 0xff);
-
-				switch (type)
+				if (buffer.size() == hex_line.address)
 				{
-				case 0: //data
-					size  = address + count;
-					bytes = (uint8_t *)realloc(buffer, size + 1);
-					if (bytes == nullptr)
-					{
-						free(buffer);
-						throw std::bad_alloc();
-					}
-					buffer = bytes;
-					bytes  = &buffer[address];
-					for (i = 0, idx = 9; i <= count; i++)
-					{
-						unsigned byte = 0;
-
-						sscanf(&line[idx], "%02x", &byte);
-						bytes[i] = byte & 0xff;
-						line_checksum += byte;
-						idx += 2;
-					}
-					line_checksum &= 0xff;
-					if (line_checksum != 0)
-					{
-						qWarning("Checksum error at address 0x%04x: %02x != %02x in file\n",
-							address, line_checksum, bytes[count]);
-					}
-					break;
-
-				case 1: // EOF
-					break;
+					hex_line.append(buffer);
+				}
+				else
+				{
+					throw std::invalid_argument("Address out of range: " + hex_line.address);
 				}
 			}
 		}
 		file.close();
+		rest = buffer.size();
+	}
+	else
+	{
+		throw std::invalid_argument("File not found: " + filename.toStdString());
 	}
 }
 
@@ -177,7 +141,7 @@ void UpdateService::quit()
 
 bool UpdateService::hasPages()
 {
-	return size >= SPM_PAGESIZE;
+	return rest >= SPM_PAGESIZE;
 }
 
 void UpdateService::flashCompletePage()
@@ -187,15 +151,15 @@ void UpdateService::flashCompletePage()
 		flashData(4);
 	}
 	qDebug("-----");
-	size -= SPM_PAGESIZE;
+	rest -= SPM_PAGESIZE;
 }
 
 void UpdateService::flashRestPage()
 {
-	for (size_t loop = 0; loop < size; loop += 2)
+	for (size_t loop = 0; loop < rest; loop += 2)
 	{
 		flashData(2);
 	}
 	qDebug("---");
-	size = 0;
+	rest = 0;
 }

@@ -8,6 +8,9 @@
 #ifndef UPDATESERVICE_H
 #define UPDATESERVICE_H
 
+#include <cstdint>
+#include <vector>
+
 #include <can/mrwbusservice.h>
 #include <statecharts/UpdateStatechart.h>
 
@@ -28,10 +31,11 @@ class UpdateService :
 
 	mrw::statechart::UpdateStatechart statechart;
 
-	uint8_t * buffer   = nullptr;
-	size_t    size     = 0;
+	size_t    rest     = 0;
 	unsigned  address  = 0;
 	unsigned  checksum = 0;
+
+	std::vector<uint8_t> buffer;
 
 public:
 	explicit UpdateService(
@@ -41,7 +45,7 @@ public:
 	virtual ~UpdateService();
 
 private:
-	void read(const char * filename);
+	void read(const QString & filename);
 	void ping() override;
 	void reset() override;
 	void flashRequest(const uint8_t hid);

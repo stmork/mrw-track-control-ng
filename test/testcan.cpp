@@ -239,19 +239,15 @@ void TestCan::testResult()
 void TestCan::testRequestPayload()
 {
 	MrwMessage   message(PING);
-	uint8_t      nibble = 1;
 	uint8_t      bytes[7];
 
 	for (size_t t = 0; t < sizeof(bytes); t++)
 	{
-		uint8_t byte  = nibble++ << 4;
-
-		byte |= nibble++;
-		bytes[t] = byte;
+		bytes[t] = 0x12 + t + 0x22;
 
 		QCOMPARE(message.size(), t);
 		QVERIFY_EXCEPTION_THROWN(message[t], std::out_of_range);
-		message.append(byte);
+		message.append(bytes[t]);
 		for (size_t b = 0; b < t; b++)
 		{
 			QCOMPARE(message[b], bytes[b]);
@@ -275,19 +271,15 @@ void TestCan::testRequestPayload()
 void TestCan::testResponsePayload()
 {
 	MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, MSG_OK);
-	uint8_t      nibble = 1;
 	uint8_t      bytes[4];
 
 	for (size_t t = 0; t < sizeof(bytes); t++)
 	{
-		uint8_t byte  = nibble++ << 4;
-
-		byte |= nibble++;
-		bytes[t] = byte;
+		bytes[t] = 0x12 + t + 0x22;
 
 		QCOMPARE(message.size(), t);
 		QVERIFY_EXCEPTION_THROWN(message[t], std::out_of_range);
-		message.append(byte);
+		message.append(bytes[t]);
 		for (size_t b = 0; b < t; b++)
 		{
 			QCOMPARE(message[b], bytes[b]);
