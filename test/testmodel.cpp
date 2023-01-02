@@ -21,11 +21,75 @@ using namespace mrw::can;
 using namespace mrw::test;
 using namespace mrw::model;
 
-using Bending = Position::Bending;
+using Bending   = Position::Bending;
+using LockState = Device::LockState;
+
+/*************************************************************************
+**                                                                      **
+**       Test position implementation                                   **
+**                                                                      **
+*************************************************************************/
+
+class TestPosition : public Position
+{
+	const QString text;
+
+	friend class TestModel;
+
+public:
+	static const QString TEST_KEY;
+
+	explicit TestPosition(const QString & input = "") : text(input)
+	{
+	}
+
+	QString key() const override
+	{
+		return text;
+	}
+
+	void testParseValue(const TestPosition & other)
+	{
+		const QString value = other.value();
+
+		parse(value);
+	}
+
+	void testParse(const QString & value)
+	{
+		parse(value);
+	}
+
+	static void reset()
+	{
+		counter = 0;
+	}
+};
+
+const QString TestPosition::TEST_KEY = "test-key";
+
+/*************************************************************************
+**                                                                      **
+**      Model test cases                                                **
+**                                                                      **
+*************************************************************************/
 
 TestModel::TestModel(const char * modelname, QObject * parent) :
 	TestModelBase(modelname, parent)
 {
+}
+
+void TestModel::init()
+{
+	TestPosition::reset();
+
+	std::vector<Device *> devices;
+
+	model->parts<Device>(devices);
+	for (Device * device : devices)
+	{
+		device->setLock(LockState::UNLOCKED);
+	}
 }
 
 void TestModel::testModel()
@@ -237,44 +301,6 @@ void TestModel::testDoubleCrossSwitchStates()
 		}
 	}
 }
-
-class TestPosition : public Position
-{
-	const QString text;
-
-	friend class TestModel;
-
-public:
-	static const QString TEST_KEY;
-
-	explicit TestPosition(const QString & input = "") : text(input)
-	{
-	}
-
-	QString key() const override
-	{
-		return text;
-	}
-
-	void testParseValue(const TestPosition & other)
-	{
-		const QString value = other.value();
-
-		parse(value);
-	}
-
-	void testParse(const QString & value)
-	{
-		parse(value);
-	}
-
-	static void reset()
-	{
-		counter = 0;
-	}
-};
-
-const QString TestPosition::TEST_KEY = "test-key";
 
 void TestModel::testDefaultPosition()
 {
@@ -555,6 +581,7 @@ void TestModel::testAssemblyPart(Section * section, AssemblyPart * part)
 	const std::string   &   name      = part->toString().toStdString();
 
 	QVERIFY2(part->valid(), name.c_str());
+	QCOMPARE(part->region(), section->region());
 
 	if (reference != nullptr)
 	{
@@ -572,6 +599,10 @@ void TestModel::testAssemblyPart(Section * section, AssemblyPart * part)
 		QVERIFY2(signal->connection() != nullptr, name.c_str());
 		QVERIFY2(signal->controller() != nullptr, name.c_str());
 		QVERIFY2(signal->key().contains(signal->partName()), name.c_str());
+
+		QCOMPARE(signal->state(), SignalState::SIGNAL_OFF);
+		signal->setState(SignalState::SIGNAL_TST);
+		QCOMPARE(signal->state(), SignalState::SIGNAL_TST);
 	}
 
 	if (rail != nullptr)
@@ -591,11 +622,18 @@ void TestModel::testAssemblyPart(Section * section, AssemblyPart * part)
 	{
 		QVERIFY2(device->unitNo() != 0, name.c_str());
 		QVERIFY2(device->controller() != nullptr, name.c_str());
-		QCOMPARE(device->lock(), Device::LockState::UNLOCKED);
-	}
-}
+		QCOMPARE(device->lock(), LockState::UNLOCKED);
 
-void TestModel::init()
-{
-	TestPosition::reset();
+		device->setLock(LockState::LOCKED);
+		QCOMPARE(device->lock(), LockState::LOCKED);
+
+		device->setLock(LockState::PENDING);
+		QCOMPARE(device->lock(), LockState::PENDING);
+
+		device->setLock(LockState::FAIL);
+		QCOMPARE(device->lock(), LockState::FAIL);
+
+		device->setLock(LockState::UNLOCKED);
+		QCOMPARE(device->lock(), LockState::UNLOCKED);
+	}
 }

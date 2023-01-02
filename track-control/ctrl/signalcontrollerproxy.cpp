@@ -194,10 +194,10 @@ void SignalControllerProxy::connectShunt()
 
 void SignalControllerProxy::add(Signal * signal)
 {
-	if (signal != nullptr)
-	{
-		Device * device = signal->device();
+	Device * device = dynamic_cast<Device *>(signal);
 
+	if (device != nullptr)
+	{
 		signal_map.emplace(device->unitNo(), signal);
 	}
 }

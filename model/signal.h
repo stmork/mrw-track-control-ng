@@ -158,14 +158,6 @@ namespace mrw::model
 		static bool less(Signal * left, Signal * right);
 
 		/**
-		 * Since Device is not a direct base class this method returns a
-		 * pointer to the Device of this Signal.
-		 *
-		 * @return The Device belonging to this Signal instance.
-		 */
-		virtual Device * device() = 0;
-
-		/**
 		 * This method returns the clear text QString of the Symbol this
 		 * Signal is set to.
 		 *

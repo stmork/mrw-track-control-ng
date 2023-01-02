@@ -23,7 +23,7 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
-		mrw::model::Rail     *     rail      = nullptr;
+		mrw::model::Rail  *  rail = nullptr;
 
 	public:
 		explicit RailControllerProxy(

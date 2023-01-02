@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
+#include <regex>
+
 #include <QCoreApplication>
 #include <QFile>
 
@@ -44,6 +46,8 @@ UpdateService::~UpdateService()
 		free(buffer);
 	}
 }
+
+const std::regex  hexline_regex(R"(^:([\da-fA-F]{2})([\da-fA-F]{4})([\da-fA-F]{2})(([\da-fA-F]{2})+))");
 
 void UpdateService::read(const char * filename)
 {

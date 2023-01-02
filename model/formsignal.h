@@ -43,7 +43,6 @@ namespace mrw::model
 			const SignalType      is_main);
 
 		const QString & name()     const override;
-		Device     *    device()         override;
 		bool            valid()    const override;
 		QString         toString() const override;
 

@@ -37,7 +37,9 @@ SignalProxy::~SignalProxy()
 
 void SignalProxy::start(Signal * input)
 {
-	if ((input != nullptr) && (input->device()->controller() == nullptr))
+	Device * device = dynamic_cast<Device *>(signal);
+
+	if ((device != nullptr) && (device->controller() == nullptr))
 	{
 		// Controller for signal not configured.
 		qWarning().noquote() << "No controller for signal" << *input << "configured!";
@@ -59,9 +61,11 @@ void SignalProxy::send()
 {
 	__METHOD__;
 
-	Q_ASSERT(signal != nullptr);
+	Device * device = dynamic_cast<Device *>(signal);
 
-	MrwMessage  message(signal->device()->command(SETSGN));
+	Q_ASSERT(device != nullptr);
+
+	MrwMessage  message(device->command(SETSGN));
 
 	message.append(signal->state());
 	ControllerRegistry::can()->write(message);

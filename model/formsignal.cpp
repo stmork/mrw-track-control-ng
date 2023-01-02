@@ -41,8 +41,3 @@ QString FormSignal::toString() const
 		arg(Device::get(lock()), -10).
 		arg(MrwMessage::get(signal_state), -10);
 }
-
-Device * FormSignal::device()
-{
-	return this;
-}

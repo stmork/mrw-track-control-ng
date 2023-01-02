@@ -63,10 +63,8 @@ namespace mrw::model
 		MultiplexConnection * connection() const;
 
 		const QString & name()     const override;
-		Device     *    device()         override;
 		bool            valid()    const override;
 		QString         toString() const override;
-
 
 		inline bool isUnlockable() const override
 		{

@@ -208,6 +208,79 @@ void TestCan::testResult()
 	QCOMPARE(UnitNo(  array.at(3) & 0xff), TEST_MSB);
 }
 
+void TestCan::testRequestPayload()
+{
+	MrwMessage   message(PING);
+	uint8_t      nibble = 1;
+	uint8_t      bytes[7];
+
+	for (size_t t = 0; t < sizeof(bytes); t++)
+	{
+		uint8_t byte  = nibble++ << 4;
+
+		byte |= nibble++;
+		bytes[t] = byte;
+
+		QVERIFY_EXCEPTION_THROWN(message[t], std::out_of_range);
+		message.append(byte);
+		for (size_t b = 0; b < t; b++)
+		{
+			QCOMPARE(message[b], bytes[b]);
+		}
+	}
+
+	QVERIFY_EXCEPTION_THROWN(message.append(0xff), std::out_of_range);
+
+	QCanBusFrame frame(message);
+	QByteArray   array(frame.payload());
+	QCOMPARE(array.size(), 8);
+	QCOMPARE(array.at(0), PING);
+	for (size_t t = 0; t < sizeof(bytes); t++)
+	{
+		uint8_t byte = (unsigned)array.at(1 + t) & 0xff;
+
+		QCOMPARE(byte, bytes[t]);
+	}
+}
+
+void TestCan::testResponsePayload()
+{
+	MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, MSG_OK);
+	uint8_t      nibble = 1;
+	uint8_t      bytes[4];
+
+	for (size_t t = 0; t < sizeof(bytes); t++)
+	{
+		uint8_t byte  = nibble++ << 4;
+
+		byte |= nibble++;
+		bytes[t] = byte;
+
+		QVERIFY_EXCEPTION_THROWN(message[t], std::out_of_range);
+		message.append(byte);
+		for (size_t b = 0; b < t; b++)
+		{
+			QCOMPARE(message[b], bytes[b]);
+		}
+	}
+
+	QVERIFY_EXCEPTION_THROWN(message.append(0xff), std::out_of_range);
+
+	QCanBusFrame frame(message);
+	QByteArray   array(frame.payload());
+	uint8_t      command = (unsigned)array.at(0) & 0xff;
+
+	QCOMPARE(array.size(), 8);
+	QCOMPARE(command, SETLFT | CMD_RESPONSE);
+	QCOMPARE(array.at(1), MSG_OK);
+	for (size_t t = 0; t < sizeof(bytes); t++)
+	{
+		uint8_t byte = (unsigned)array.at(4 + t) & 0xff;
+
+		QCOMPARE(byte, bytes[t]);
+	}
+}
+
 void TestCan::testCopyRequest()
 {
 	const size_t start = 1;

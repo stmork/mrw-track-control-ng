@@ -98,8 +98,3 @@ size_t LightSignal::usedPins() const
 {
 	return lights;
 }
-
-Device * LightSignal::device()
-{
-	return this;
-}
