@@ -42,10 +42,7 @@ namespace mrw::util
 		 *
 		 * @see toString()
 		 */
-		inline operator QString() const
-		{
-			return toString();
-		}
+		operator QString() const;
 
 		/**
 		 * This method surrounds a string with a given console format command.
@@ -66,12 +63,9 @@ namespace mrw::util
 		 * @param input The input string to surround with format commands.
 		 * @return The formatted string.
 		 */
-		static inline QString format(
+		static QString format(
 			const QString & code,
-			const QString & input)
-		{
-			return code + input + ALL_OFF;
-		}
+			const QString & input);
 
 		/**
 		 * This method surrounds a string with a console format code to
@@ -81,10 +75,7 @@ namespace mrw::util
 		 * @param input The input string to surround with format commands.
 		 * @return The formatted string.
 		 */
-		static inline QString bold(const QString & input)
-		{
-			return format(BOLD_ON, input);
-		}
+		static QString bold(const QString & input);
 
 		/**
 		 * This method surrounds a string with a console format code to
@@ -94,10 +85,7 @@ namespace mrw::util
 		 * @param input The input string to surround with format commands.
 		 * @return The formatted string.
 		 */
-		static inline QString red(const QString & input)
-		{
-			return format(RED_ON, input);
-		}
+		static QString red(const QString & input);
 
 		static const QString RED_ON;     ///< Turns console output into red.
 		static const QString GREEN_ON;   ///< Turns console output into green.
@@ -113,61 +101,46 @@ namespace mrw::util
 		/** This turns off all of the previously activated console formatting. */
 		static const QString ALL_OFF;
 	};
-
-	/**
-	 * This shift operator writes the contents of a String instance as human
-	 * readable text to the given output stream.
-	 *
-	 * @param os The output stream to write to.
-	 * @param instance The instance containing the binary data.
-	 * @return The given output stream for convenience.
-	 *
-	 * @see toString()
-	 */
-	inline std::ostream & operator<<(std::ostream & os, const String & instance)
-	{
-		os << instance.toString().toStdString();
-
-		return os;
-	}
-
-	/**
-	 * This shift operator writes the contents of a String instance as human
-	 * readable text to the given QDebug instance.
-	 *
-	 * @param debug The output debug instance to write to.
-	 * @param instance The instance containing the binary data.
-	 * @return The given output stream for convenience.
-	 *
-	 * @see toString()
-	 */
-	inline QDebug operator<<(QDebug debug, const String & instance)
-	{
-		QDebugStateSaver saver(debug);
-
-		debug.nospace().noquote() << instance.toString();
-
-		return debug;
-	}
-
-	/**
-	 * This add operator allows convenient concatenation of a const char
-	 * pointer string with a std::string. So you can use a Stringify instance
-	 * without calling the String::toString() method:
-	 * @code
-	String some_data;
-
-	mrw::util::debug("Using: " + some_data);
-	@endcode
-	 *
-	 * @param left The C style const char pointer string.
-	 * @param right The String based data.
-	 * @return a QString instance of the concatenated string.
-	 */
-	inline QString operator+(const QString & left, const String & right)
-	{
-		return left + right.toString();
-	}
 }
+
+/**
+ * This shift operator writes the contents of a String instance as human
+ * readable text to the given output stream.
+ *
+ * @param os The output stream to write to.
+ * @param instance The instance containing the binary data.
+ * @return The given output stream for convenience.
+ *
+ * @see toString()
+ */
+std::ostream & operator<<(std::ostream & os, const mrw::util::String & instance);
+
+/**
+ * This shift operator writes the contents of a String instance as human
+ * readable text to the given QDebug instance.
+ *
+ * @param debug The output debug instance to write to.
+ * @param instance The instance containing the binary data.
+ * @return The given output stream for convenience.
+ *
+ * @see toString()
+ */
+QDebug operator<<(QDebug debug, const mrw::util::String & instance);
+
+/**
+ * This add operator allows convenient concatenation of a const char
+ * pointer string with a std::string. So you can use a Stringify instance
+ * without calling the String::toString() method:
+ * @code
+String some_data;
+
+mrw::util::debug("Using: " + some_data);
+@endcode
+ *
+ * @param left The C style const char pointer string.
+ * @param right The String based data.
+ * @return a QString instance of the concatenated string.
+ */
+QString operator+(const QString & left, const mrw::util::String & right);
 
 #endif

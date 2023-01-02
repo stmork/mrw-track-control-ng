@@ -34,6 +34,6 @@ HEADERS += \
 	testlight.h \
 	testutil.h
 
-LIBS            += -lMRW-Model -lMRW-Util -lMRW-Can
+LIBS            += -lMRW-Model -lMRW-Can -lMRW-Util
 
 QMAKE_CLEAN     += $$TARGET qtest*.xml
