@@ -65,10 +65,13 @@ void SignalProxy::send()
 
 	Q_ASSERT(device != nullptr);
 
-	MrwMessage  message(device->command(SETSGN));
+	if (device->controller() != nullptr)
+	{
+		MrwMessage  message(device->command(SETSGN));
 
-	message.append(signal->state());
-	ControllerRegistry::can()->write(message);
+		message.append(signal->state());
+		ControllerRegistry::can()->write(message);
+	}
 }
 
 void SignalProxy::dump()
