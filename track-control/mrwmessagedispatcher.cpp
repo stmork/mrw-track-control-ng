@@ -86,9 +86,6 @@ bool MrwMessageDispatcher::filter(const MrwMessage & message)
 
 	if (controller != nullptr)
 	{
-		unsigned     major = 0;
-		unsigned     minor = 0;
-
 		switch (message.command())
 		{
 		case PING:
@@ -97,8 +94,9 @@ bool MrwMessageDispatcher::filter(const MrwMessage & message)
 		case GETVER:
 			if (message.size() == 4)
 			{
-				major = message[1];
-				minor = message[2] | (message[3] << 8);
+				const unsigned major = message[1];
+				const unsigned minor = message[2] | (message[3] << 8);
+
 				qInfo("Controller: %03u V%u.%u", controller->id(), major, minor);
 			}
 			return true;
