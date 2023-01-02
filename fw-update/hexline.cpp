@@ -36,8 +36,8 @@ HexLine::HexLine(const std::string & line)
 			if (checksum != 0)
 			{
 				const std::string message = QString::asprintf(
-							"Checksum error at address 0x%04x: %02x != %02x in file\n",
-						 address, checksum, bytes[count]).toStdString();
+						"Checksum error at address 0x%04x: %02x != %02x in file\n",
+						address, checksum, bytes[count]).toStdString();
 
 				throw std::invalid_argument(message);
 			}

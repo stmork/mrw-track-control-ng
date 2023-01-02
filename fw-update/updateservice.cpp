@@ -39,13 +39,13 @@ UpdateService::~UpdateService()
 void UpdateService::read(const QString & filename)
 {
 	QFile  file(filename);
-	bool   loop = true;
 
 	if (file.open(QIODevice::ReadOnly))
 	{
 		QTextStream in(&file);
+		bool        loop = true;
 
-		while (!in.atEnd())
+		while (!in.atEnd() && loop)
 		{
 			const std::string & line = in.readLine().toStdString();
 			const HexLine       hex_line(line);
