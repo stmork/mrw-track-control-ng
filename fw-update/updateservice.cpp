@@ -53,13 +53,13 @@ void UpdateService::read(const QString & filename)
 			loop = hex_line;
 			if (loop)
 			{
-				if (buffer.size() == hex_line.address)
+				if (buffer.size() == hex_line.getAddress())
 				{
 					hex_line.append(buffer);
 				}
 				else
 				{
-					throw std::invalid_argument("Address out of range: " + hex_line.address);
+					throw std::invalid_argument("Address out of range: " + hex_line.getAddress());
 				}
 			}
 		}

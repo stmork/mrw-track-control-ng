@@ -55,6 +55,11 @@ void HexLine::append(std::vector<uint8_t> & buffer) const
 	std::copy(bytes.begin(), bytes.begin() + count, std::back_inserter(buffer));
 }
 
+unsigned HexLine::getAddress() const
+{
+	return address;
+}
+
 HexLine::operator bool() const
 {
 	return !eof;

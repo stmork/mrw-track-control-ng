@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-struct HexLine
+class HexLine
 {
 	unsigned address;
 	unsigned count;
@@ -22,11 +22,14 @@ struct HexLine
 
 	std::vector<uint8_t> bytes;
 
+public:
 	HexLine(const std::string & line);
 
 	void append(std::vector<uint8_t> & buffer) const;
 
 	operator bool() const;
+
+	unsigned getAddress() const;
 };
 
 #endif
