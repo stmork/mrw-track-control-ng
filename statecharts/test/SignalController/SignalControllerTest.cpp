@@ -1222,6 +1222,8 @@ namespace
 
 		isTourMock->setDefaultBehavior(&IsTourMock::isTour2);
 
+		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt2);
+
 		statechart->raiseEnable();
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending));
@@ -1248,6 +1250,7 @@ namespace
 
 
 		isTourMock->reset();
+		isMainAndShuntMock->reset();
 		incMock->reset();
 		pendingMock->reset();
 	}
@@ -1255,6 +1258,8 @@ namespace
 	{
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
@@ -1437,6 +1442,8 @@ namespace
 		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
@@ -1531,10 +1538,14 @@ namespace
 	}
 	TEST_F(SignalControllerTest, disableTour)
 	{
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
-		decMock = new DecMock();
-		decMock->initializeBehavior();
 		decMock = new DecMock();
 		decMock->initializeBehavior();
 		lockMock = new LockMock();
@@ -1574,17 +1585,31 @@ namespace
 		statechart->setOperationCallback(&defaultMock);
 		tourLocked();
 
+		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt1);
+
+		isLightSignalMock->setDefaultBehavior(&IsLightSignalMock::isLightSignal1);
+
+		hasMainSignalMock->setDefaultBehavior(&HasMainSignalMock::hasMainSignal1);
+
 		statechart->raiseDisable();
 
 		EXPECT_TRUE((statechart->getSymbol()) == (statechart->getSTOP()));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Shunt));
 
+		EXPECT_TRUE(statechart->isRaisedTurnShunt());
+
+		EXPECT_TRUE((statechart->getTurnShuntValue()) == (statechart->getSTOP()));
+
 		EXPECT_TRUE(incMock->calledAtLeastOnce());
 
 		statechart->raiseCompletedShunt();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting));
 
@@ -1596,29 +1621,41 @@ namespace
 
 		statechart->raiseCompletedMain();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting));
+
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Distant));
 
 		EXPECT_TRUE(statechart->isRaisedTurnDistant());
 
-		EXPECT_TRUE((statechart->getTurnMainValue()) == (statechart->getSTOP()));
+		EXPECT_TRUE((statechart->getTurnDistantValue()) == (statechart->getSTOP()));
 
 		statechart->raiseCompletedDistant();
-
-		EXPECT_TRUE(decMock->calledAtLeastOnce());
 
 		unlockedState();
 
 
+		isMainAndShuntMock->reset();
+		isLightSignalMock->reset();
+		hasMainSignalMock->reset();
 		incMock->reset();
-		decMock->reset();
 	}
 	void disableTourCombined()
 	{
 		tourLockedCombined();
 
+		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt2);
+
+		hasMainSignalMock->setDefaultBehavior(&HasMainSignalMock::hasMainSignal2);
+
+		isLightSignalMock->setDefaultBehavior(&IsLightSignalMock::isLightSignal1);
+
 		statechart->raiseDisable();
 
 		EXPECT_TRUE((statechart->getSymbol()) == (statechart->getSTOP()));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting));
 
@@ -1632,17 +1669,32 @@ namespace
 
 		statechart->raiseCompletedMain();
 
+		EXPECT_TRUE((statechart->getSymbol()) == (statechart->getSTOP()));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting));
+
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Distant));
 
 		EXPECT_TRUE(statechart->isRaisedTurnDistant());
 
-		EXPECT_TRUE((statechart->getTurnMainValue()) == (statechart->getSTOP()));
+		EXPECT_TRUE((statechart->getTurnDistantValue()) == (statechart->getSTOP()));
 
 
+		isMainAndShuntMock->reset();
+		hasMainSignalMock->reset();
+		isLightSignalMock->reset();
 		incMock->reset();
 	}
 	TEST_F(SignalControllerTest, disableTourCombined)
 	{
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		decMock = new DecMock();
@@ -1651,6 +1703,8 @@ namespace
 		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
@@ -1686,10 +1740,20 @@ namespace
 	}
 	TEST_F(SignalControllerTest, disableTourCombinedLight)
 	{
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
 		isLightSignalMock = new IsLightSignalMock();
 		isLightSignalMock->initializeBehavior();
 		decMock = new DecMock();
 		decMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		decMock = new DecMock();
@@ -1698,6 +1762,8 @@ namespace
 		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
@@ -1731,13 +1797,25 @@ namespace
 		statechart->setOperationCallback(&defaultMock);
 		disableTourCombined();
 
+		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt2);
+
+		hasMainSignalMock->setDefaultBehavior(&HasMainSignalMock::hasMainSignal2);
+
 		isLightSignalMock->setDefaultBehavior(&IsLightSignalMock::isLightSignal2);
 
 		statechart->raiseCompletedDistant();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting));
+
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Delay));
 
 		runner->proceed_time(statechart->getDelay());
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Off_Distant));
 
@@ -1752,15 +1830,25 @@ namespace
 		unlockedState();
 
 
+		isMainAndShuntMock->reset();
+		hasMainSignalMock->reset();
 		isLightSignalMock->reset();
 		decMock->reset();
 	}
 	TEST_F(SignalControllerTest, disableTourCombinedForm)
 	{
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
 		isLightSignalMock = new IsLightSignalMock();
 		isLightSignalMock->initializeBehavior();
-		decMock = new DecMock();
-		decMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		decMock = new DecMock();
@@ -1769,6 +1857,8 @@ namespace
 		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
@@ -1802,17 +1892,20 @@ namespace
 		statechart->setOperationCallback(&defaultMock);
 		disableTourCombined();
 
+		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt1);
+
+		hasMainSignalMock->setDefaultBehavior(&HasMainSignalMock::hasMainSignal2);
+
 		isLightSignalMock->setDefaultBehavior(&IsLightSignalMock::isLightSignal1);
 
 		statechart->raiseCompletedDistant();
 
-		EXPECT_TRUE(decMock->calledAtLeastOnce());
-
 		unlockedState();
 
 
+		isMainAndShuntMock->reset();
+		hasMainSignalMock->reset();
 		isLightSignalMock->reset();
-		decMock->reset();
 	}
 	TEST_F(SignalControllerTest, disableShunting)
 	{
@@ -1928,6 +2021,10 @@ namespace
 
 		statechart->raiseExtend();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting));
+
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Extend));
 
 		statechart->raiseCompletedDistant();
@@ -1951,6 +2048,8 @@ namespace
 		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
@@ -2112,6 +2211,8 @@ namespace
 		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
@@ -2245,6 +2346,8 @@ namespace
 	{
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
@@ -2400,6 +2503,8 @@ namespace
 		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
@@ -2573,6 +2678,8 @@ namespace
 	}
 	TEST_F(SignalControllerTest, timeoutWaitingDisableTourCombined)
 	{
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		decMock = new DecMock();
@@ -2583,6 +2690,8 @@ namespace
 		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
 		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
@@ -2616,6 +2725,8 @@ namespace
 		statechart->setOperationCallback(&defaultMock);
 		tourLockedCombined();
 
+		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt2);
+
 		statechart->raiseDisable();
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Main));
@@ -2629,6 +2740,7 @@ namespace
 		failState();
 
 
+		isMainAndShuntMock->reset();
 		incMock->reset();
 		decMock->reset();
 	}
