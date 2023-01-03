@@ -22,8 +22,8 @@ public:
 	SimulatorService() = delete;
 
 	explicit SimulatorService(
-			mrw::model::ModelRepository & repo,
-			QObject   *                   parent    = nullptr);
+		mrw::model::ModelRepository & repo,
+		QObject           *           parent    = nullptr);
 	virtual ~SimulatorService() = default;
 
 	void info();

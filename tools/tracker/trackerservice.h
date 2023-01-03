@@ -16,14 +16,14 @@
 #include <statecharts/TrackerStatechart.h>
 
 class TrackerService :
-		public mrw::can::MrwBusService,
-		public mrw::statechart::TrackerStatechart::OperationCallback
+	public mrw::can::MrwBusService,
+	public mrw::statechart::TrackerStatechart::OperationCallback
 {
 	Q_OBJECT
 
 	mrw::statechart::TrackerStatechart          statechart;
 
-	mrw::model::ModelRailway *                  model = nullptr;
+	mrw::model::ModelRailway          *         model = nullptr;
 	mrw::model::Route::SectionTrack             track;
 
 	mrw::model::Route::SectionTrack::iterator   position;
@@ -32,8 +32,8 @@ class TrackerService :
 public:
 	TrackerService() = delete;
 	explicit TrackerService(
-			mrw::model::ModelRepository & repo,
-			QObject   *                   parent    = nullptr);
+		mrw::model::ModelRepository & repo,
+		QObject           *           parent    = nullptr);
 	virtual ~TrackerService();
 
 	void info();
@@ -43,9 +43,9 @@ protected:
 
 private:
 	void append(
-			const mrw::can::ControllerId id,
-			const mrw::can::UnitNo       unitNo,
-			const bool                   enable);
+		const mrw::can::ControllerId id,
+		const mrw::can::UnitNo       unitNo,
+		const bool                   enable);
 	void send(mrw::model::Section * section);
 
 	void first() override;
