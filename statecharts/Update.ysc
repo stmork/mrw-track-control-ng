@@ -237,7 +237,7 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_ej1WYYtTEe2CW8Kmugd_xA" fontName="Verdana" fillColor="15720400" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_ej1WYotTEe2CW8Kmugd_xA"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_ej2kgotTEe2CW8Kmugd_xA" name="isHorizontal" booleanValue="true"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_ej1WY4tTEe2CW8Kmugd_xA" x="318" y="1060" width="92" height="53"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_ej1WY4tTEe2CW8Kmugd_xA" x="306" y="1060" width="102" height="53"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_A-l-8IkBEe2fK-OwCcYY0Q"/>
       </children>
@@ -443,12 +443,12 @@
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_f4W5UYtTEe2CW8Kmugd_xA" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_f4W5U4tTEe2CW8Kmugd_xA" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_f4W5UotTEe2CW8Kmugd_xA" points="[19, 27, -23, -89]$[19, 90, -23, -26]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_f4W5UotTEe2CW8Kmugd_xA" points="[19, 27, -16, -89]$[19, 90, -16, -26]"/>
     </edges>
     <edges xmi:id="_hhah0ItTEe2CW8Kmugd_xA" type="Transition" element="_hhZTsItTEe2CW8Kmugd_xA" source="_BZP9cItREe2kxfFr16RaMw" target="__hZrA4tQEe2kxfFr16RaMw">
       <children xsi:type="notation:DecorationNode" xmi:id="_hhah1ItTEe2CW8Kmugd_xA" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_hhah1YtTEe2CW8Kmugd_xA"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_hhah1otTEe2CW8Kmugd_xA" x="-20" y="10"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_hhah1otTEe2CW8Kmugd_xA" x="-36" y="35"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_hhah0YtTEe2CW8Kmugd_xA" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_hhah04tTEe2CW8Kmugd_xA" fontName="Verdana"/>

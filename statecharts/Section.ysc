@@ -966,7 +966,7 @@
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_B_h14XX-Ee21HM-AEZfzIA" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_B_h143X-Ee21HM-AEZfzIA" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_B_h14nX-Ee21HM-AEZfzIA" points="[235, -4, 22, 598]$[235, -574, 22, 28]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_B_h14nX-Ee21HM-AEZfzIA" points="[206, -4, 55, 598]$[206, -574, 55, 28]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_B_ic8HX-Ee21HM-AEZfzIA" id="(0.513986013986014,0.021929824561403508)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_B_ic8XX-Ee21HM-AEZfzIA" id="(0.8260869565217391,0.9305210918114144)"/>
     </edges>
