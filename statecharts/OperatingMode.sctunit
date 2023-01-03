@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
-testclass OperatingMode for statechart mrw.^statechart.OperatingMode
+testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 {
 	@Test
 	operation wait()

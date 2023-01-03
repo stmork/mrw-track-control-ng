@@ -5,12 +5,12 @@
 
 testsuite TestSuite
 {
-	OperatingMode,
-	Switch,
-	Signal,
-	SignalController,
-	Section,
-	Route,
-	Tracker,
-	Update
+	OperatingModeTest,
+	SwitchTest,
+	SignalTest,
+	SignalControllerTest,
+	SectionTest,
+	RouteTest,
+	TrackerTest,
+	UpdateTest
 }

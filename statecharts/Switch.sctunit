@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
-testclass Switch for statechart mrw.^statechart.SwitchStatechart
+testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 {
 	operation turning()
 	{

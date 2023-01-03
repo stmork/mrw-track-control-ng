@@ -1,0 +1,141 @@
+testclass TrackerTest for statechart mrw.^statechart.TrackerStatechart
+{
+	@Test
+	operation idle()
+	{
+		enter
+		assert is_active
+		assert active (mrw.^statechart.TrackerStatechart.main_region.Idle)
+		assert called clear
+	}
+
+	@Test
+	operation receivedFirst()
+	{
+		// Given
+		idle()
+
+		// When
+		raise received
+
+		// Then
+		assert active (mrw.^statechart.TrackerStatechart.main_region.Preparing)
+	}
+
+	@Test
+	operation receivedFurther()
+	{
+		// Given
+		receivedFirst()
+
+		// When
+		raise received
+
+		// Then
+		assert active (mrw.^statechart.TrackerStatechart.main_region.Preparing)
+	}
+
+	@Test
+	operation delayValid()
+	{
+		// Given
+		receivedFurther()
+		mock valid returns (true)
+		mock last returns (false)
+
+		// When
+		proceed start ms
+
+		// Then
+		assert active (mrw.^statechart.TrackerStatechart.main_region.Driving)
+		assert active (mrw.^statechart.TrackerStatechart.main_region.Driving.Tracking.First)
+		assert called first
+	}
+
+	@Test
+	operation delayInvalid()
+	{
+		// Given
+		receivedFurther()
+		mock valid returns (false)
+
+		// When
+		proceed start ms
+
+		// Then
+		assert active (mrw.^statechart.TrackerStatechart.main_region.Idle)
+		assert called clear
+	}
+
+	@Test
+	operation occupyState()
+	{
+		// Given
+		delayValid()
+
+		// When
+		proceed step ms
+
+		// Then
+		assert active (mrw.^statechart.TrackerStatechart.main_region.Driving.Tracking.Occupy)
+		assert called occupy
+	}
+
+	@Test
+	operation freeState()
+	{
+		// Given
+		occupyState()
+
+		// When
+		proceed step ms
+
+		// Then
+		assert active (mrw.^statechart.TrackerStatechart.main_region.Driving.Tracking.Free)
+		assert called occupy
+	}
+
+	@Test
+	operation cascade()
+	{
+		// Given
+		freeState()
+
+		// When
+		proceed step ms
+
+		// Then
+		assert active (mrw.^statechart.TrackerStatechart.main_region.Driving.Tracking.Occupy)
+		assert called occupy
+
+		// When
+		proceed step ms
+
+		// Then
+		assert active (mrw.^statechart.TrackerStatechart.main_region.Driving.Tracking.Free)
+		assert called occupy
+
+		// When
+		proceed step ms
+
+		// Then
+		assert active (mrw.^statechart.TrackerStatechart.main_region.Driving.Tracking.Occupy)
+		assert called occupy
+	}
+	
+	@Test
+	operation completed()
+	{
+		// Given
+		cascade()
+		mock last returns (true)
+
+		// When
+		proceed step ms
+
+		// Then
+		assert active(mrw.^statechart.TrackerStatechart.main_region.Idle)
+		assert called clear
+	}
+}
+

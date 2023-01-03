@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
-testclass Section for statechart mrw.^statechart.SectionStatechart
+testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 {
 	operation failState()
 	{

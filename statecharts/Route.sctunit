@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
-testclass Route for statechart mrw.^statechart.RouteStatechart
+testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 {
 	operation disabled()
 	{

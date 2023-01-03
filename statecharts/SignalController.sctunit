@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
-testclass SignalController for statechart mrw.^statechart.SignalControllerStatechart
+testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerStatechart
 {
 
 	operation failState()
