@@ -1,0 +1,171 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+//
+
+GeneratorModel for yakindu::cpp11
+{
+	const PROJECT : string = "mrw.statecharts"
+	const FOLDER  : string = "test"
+	const COMMON :  string = "test"
+
+	statechart mrw.statechart.OperatingMode
+	{
+		feature GeneralFeatures
+		{
+			timerService = false
+		}
+
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
+			libraryTargetFolder = COMMON
+		}
+	}
+
+	statechart mrw.statechart.SectionStatechart
+	{
+		feature GeneralFeatures
+		{
+			timerService = false
+		}
+
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
+			libraryTargetFolder = COMMON
+		}
+	}
+
+	statechart mrw.statechart.SwitchStatechart
+	{
+		feature GeneralFeatures
+		{
+			timerService = false
+		}
+
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
+			libraryTargetFolder = COMMON
+		}
+	}
+
+	statechart mrw.statechart.SignalStatechart
+	{
+		feature GeneralFeatures
+		{
+			timerService = false
+		}
+
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
+			libraryTargetFolder = COMMON
+		}
+	}
+
+	statechart mrw.statechart.SignalControllerStatechart
+	{
+		feature GeneralFeatures
+		{
+			timerService = false
+		}
+
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
+			libraryTargetFolder = COMMON
+		}
+	}
+
+	statechart mrw.statechart.RouteStatechart
+	{
+		feature GeneralFeatures
+		{
+			timerService = false
+		}
+
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
+			libraryTargetFolder = COMMON
+		}
+	}
+
+	statechart mrw.statechart.TrackerStatechart
+	{
+		feature GeneralFeatures
+		{
+			timerService = false
+		}
+
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
+			libraryTargetFolder = COMMON
+		}
+	}
+
+	statechart mrw.statechart.UpdateStatechart
+	{
+		feature GeneralFeatures
+		{
+			timerService = false
+		}
+
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
+			libraryTargetFolder = COMMON
+		}
+	}
+}

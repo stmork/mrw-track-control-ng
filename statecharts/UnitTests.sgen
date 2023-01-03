@@ -1,0 +1,182 @@
+GeneratorModel for sctunit::cpp11
+{
+	const PROJECT : string = "mrw.statecharts"
+	const FOLDER  : string = "test"
+	const COMMON  : string = "test"
+
+	test OperatingModeTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test RouteTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test SectionTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test SignalTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test SignalControllerTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test SwitchTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test TrackerTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test UpdateTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+}
