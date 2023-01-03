@@ -312,7 +312,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Init'. */
 			timerService->setTimer(this, 1, timeout, false);
-			ifaceOperationCallback->reset();
+			ifaceOperationCallback->resetTransaction();
 			emit start();
 		}
 

@@ -28,7 +28,7 @@ model.file             = model/MRW-Model.pro
 ctrl.file              = ctrl/MRW-Ctrl.pro
 ui.file                = ui/MRW-UI.pro
 test.file              = test/MRW-Test.pro
-# test-sct.file          = statecharts/MRW-Test-Statecharts.pro
+test-sct.file          = statecharts/MRW-Test-Statecharts.pro
 ping.file              = tools/ping/MRW-Ping.pro
 proxy.file             = tools/proxy/MRW-Proxy.pro
 reader.file            = tools/reader/MRW-Reader.pro
@@ -62,8 +62,9 @@ QMAKE_CLEAN           += qtest*.xml
 
 astyle.commands = astyle */*.cpp */*.h\
 	tools/*/*.cpp tools/*/*.h\
-	*/ctrl/*.cpp */ctrl/*.h\
-	*/test/*.cpp
+	*/ctrl/*.cpp */ctrl/*.h
+
+#	*/test/*.cpp */test/*.h
 
 cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--inline-suppr\

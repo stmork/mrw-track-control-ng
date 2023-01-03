@@ -21,11 +21,23 @@ GeneratorModel for yakindu::cpp11
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
 		}
 
+		feature IdentifierSettings
+		{
+			moduleName = "OperatingModeImpl"
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+		}
+
 		feature Outlet
 		{
 			targetProject       = PROJECT
 			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
+		}
+
+		feature OutEventAPI
+		{
+			getters = true
 		}
 	}
 
@@ -41,11 +53,23 @@ GeneratorModel for yakindu::cpp11
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
 		}
 
+		feature IdentifierSettings
+		{
+			moduleName = "SectionStatechartImpl"
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+		}
+
 		feature Outlet
 		{
 			targetProject       = PROJECT
 			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
+		}
+
+		feature OutEventAPI
+		{
+			getters = true
 		}
 	}
 
@@ -61,11 +85,23 @@ GeneratorModel for yakindu::cpp11
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
 		}
 
+		feature IdentifierSettings
+		{
+			moduleName = "SwitchStatechartImpl"
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+		}
+
 		feature Outlet
 		{
 			targetProject       = PROJECT
 			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
+		}
+
+		feature OutEventAPI
+		{
+			getters = true
 		}
 	}
 
@@ -81,11 +117,23 @@ GeneratorModel for yakindu::cpp11
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
 		}
 
+		feature IdentifierSettings
+		{
+			moduleName = "SignalStatechartImpl"
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+		}
+
 		feature Outlet
 		{
 			targetProject       = PROJECT
 			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
+		}
+
+		feature OutEventAPI
+		{
+			getters = true
 		}
 	}
 
@@ -101,11 +149,23 @@ GeneratorModel for yakindu::cpp11
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
 		}
 
+		feature IdentifierSettings
+		{
+			moduleName = "SignalControllerStatechartImpl"
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+		}
+
 		feature Outlet
 		{
 			targetProject       = PROJECT
 			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
+		}
+
+		feature OutEventAPI
+		{
+			getters = true
 		}
 	}
 
@@ -121,11 +181,23 @@ GeneratorModel for yakindu::cpp11
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
 		}
 
+		feature IdentifierSettings
+		{
+			moduleName = "RouteStatechartImpl"
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+		}
+
 		feature Outlet
 		{
 			targetProject       = PROJECT
 			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
+		}
+
+		feature OutEventAPI
+		{
+			getters = true
 		}
 	}
 
@@ -133,7 +205,7 @@ GeneratorModel for yakindu::cpp11
 	{
 		feature GeneralFeatures
 		{
-			timerService = false
+			timerService = true
 		}
 
 		feature LicenseHeader
@@ -141,11 +213,23 @@ GeneratorModel for yakindu::cpp11
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
 		}
 
+		feature IdentifierSettings
+		{
+			moduleName = "TrackerStatechartImpl"
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+		}
+
 		feature Outlet
 		{
 			targetProject       = PROJECT
 			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
+		}
+
+		feature OutEventAPI
+		{
+			getters = true
 		}
 	}
 
@@ -161,11 +245,23 @@ GeneratorModel for yakindu::cpp11
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
 		}
 
+		feature IdentifierSettings
+		{
+			moduleName = "UpdateStatechartImpl"
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+		}
+
 		feature Outlet
 		{
 			targetProject       = PROJECT
 			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
+		}
+
+		feature OutEventAPI
+		{
+			getters = true
 		}
 	}
 }

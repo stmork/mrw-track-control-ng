@@ -407,7 +407,7 @@ void WidgetRoute::dump() const
 	}
 }
 
-void WidgetRoute::reset()
+void WidgetRoute::resetTransaction()
 {
 	ControllerRegistry::instance().reset();
 }

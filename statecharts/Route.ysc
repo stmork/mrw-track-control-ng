@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_L62MwHWAEe2cXugcT2PGGw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var switch_timeout : integer = 2100&#xA;var signal_timeout : integer = 3100&#xA;var section_timeout : integer = 200&#xA;var emergency : integer = 3500&#xA;&#xA;in event completed&#xA;in event failed&#xA;in event disable&#xA;in event extended&#xA;&#xA;out event activated&#xA;out event finished&#xA;&#xA;operation reset()&#xA;operation fail()&#xA;operation tryComplete()&#xA;operation isCompleted() : boolean&#xA;&#xA;operation turnSwitches()&#xA;operation activateSections()&#xA;operation turnSignals()&#xA;operation extendSignals()&#xA;&#xA;operation deactivateSections()&#xA;operation unlockSignals()&#xA;operation unlockSwitches()&#xA;" namespace="mrw.statechart" name="RouteStatechart">
+  <sgraph:Statechart xmi:id="_L62MwHWAEe2cXugcT2PGGw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var switch_timeout : integer = 2100&#xA;var signal_timeout : integer = 3100&#xA;var section_timeout : integer = 200&#xA;var emergency : integer = 3500&#xA;&#xA;in event completed&#xA;in event failed&#xA;in event disable&#xA;in event extended&#xA;&#xA;out event activated&#xA;out event finished&#xA;&#xA;operation resetTransaction()&#xA;operation fail()&#xA;operation tryComplete()&#xA;operation isCompleted() : boolean&#xA;&#xA;operation turnSwitches()&#xA;operation activateSections()&#xA;operation turnSignals()&#xA;operation extendSignals()&#xA;&#xA;operation deactivateSections()&#xA;operation unlockSignals()&#xA;operation unlockSwitches()" namespace="mrw.statechart" name="RouteStatechart">
     <regions xmi:id="_L64B-3WAEe2cXugcT2PGGw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_L64B_HWAEe2cXugcT2PGGw">
         <outgoingTransitions xmi:id="_L64B_XWAEe2cXugcT2PGGw" target="_lSD6YHWFEe2oVZ4yFrzfuw"/>
@@ -10,7 +10,7 @@
         <outgoingTransitions xmi:id="_iuFhwHWFEe2oVZ4yFrzfuw" specification="extended" target="_L64pAHWAEe2cXugcT2PGGw"/>
         <outgoingTransitions xmi:id="_Ibn34IB4Ee2zpZIoL5V4kQ" specification="failed" target="_59hPEHWAEe2oVZ4yFrzfuw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_59hPEHWAEe2oVZ4yFrzfuw" specification="entry / reset&#xA;entry / unlockSignals; unlockSwitches; deactivateSections&#xA;entry / tryComplete" name="Disable" incomingTransitions="_SeMvkHWBEe2oVZ4yFrzfuw _Ibn34IB4Ee2zpZIoL5V4kQ _r6lycICaEe2zpZIoL5V4kQ _ztj_gICaEe2zpZIoL5V4kQ _22ceMICpEe2zpZIoL5V4kQ _9uSbUIYxEe2KYdnsQIjglw">
+      <vertices xsi:type="sgraph:State" xmi:id="_59hPEHWAEe2oVZ4yFrzfuw" specification="entry / resetTransaction&#xA;entry / unlockSignals; unlockSwitches; deactivateSections&#xA;entry / tryComplete" name="Disable" incomingTransitions="_SeMvkHWBEe2oVZ4yFrzfuw _Ibn34IB4Ee2zpZIoL5V4kQ _r6lycICaEe2zpZIoL5V4kQ _ztj_gICaEe2zpZIoL5V4kQ _22ceMICpEe2zpZIoL5V4kQ _9uSbUIYxEe2KYdnsQIjglw">
         <outgoingTransitions xmi:id="_L-BZMHo5Ee2_ZOj2sFqWdg" specification="completed / raise finished" target="_KgRo0Ho5Ee2_ZOj2sFqWdg"/>
         <outgoingTransitions xmi:id="_1fhjAICzEe2zpZIoL5V4kQ" specification="after emergency ms / raise finished" target="_KgRo0Ho5Ee2_ZOj2sFqWdg"/>
       </vertices>
@@ -21,19 +21,19 @@
       <vertices xsi:type="sgraph:State" xmi:id="_df3lsHpBEe2_ZOj2sFqWdg" name="Turning">
         <outgoingTransitions xmi:id="_gljDwHpuEe2_ZOj2sFqWdg" specification="failed" target="_jYU2cICaEe2zpZIoL5V4kQ"/>
         <regions xmi:id="_df4MwnpBEe2_ZOj2sFqWdg" name="Turning process">
-          <vertices xsi:type="sgraph:State" xmi:id="_L64pAHWAEe2cXugcT2PGGw" specification="entry / reset; turnSwitches" name="Switch Turning" incomingTransitions="_iuFhwHWFEe2oVZ4yFrzfuw _oCR_QHWFEe2oVZ4yFrzfuw">
+          <vertices xsi:type="sgraph:State" xmi:id="_L64pAHWAEe2cXugcT2PGGw" specification="entry / resetTransaction; turnSwitches" name="Switch Turning" incomingTransitions="_iuFhwHWFEe2oVZ4yFrzfuw _oCR_QHWFEe2oVZ4yFrzfuw">
             <outgoingTransitions xmi:id="_L64pA3WAEe2cXugcT2PGGw" specification="completed" target="_h0ic4HWAEe2oVZ4yFrzfuw"/>
             <outgoingTransitions xmi:id="_NWaakIaREe2yx5oO4CMMcQ" specification="after switch_timeout ms" target="_yqc6cIYxEe2KYdnsQIjglw"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_h0ic4HWAEe2oVZ4yFrzfuw" specification="entry / reset; turnSignals" name="Signal Turning" incomingTransitions="_L64pA3WAEe2cXugcT2PGGw">
+          <vertices xsi:type="sgraph:State" xmi:id="_h0ic4HWAEe2oVZ4yFrzfuw" specification="entry / resetTransaction; turnSignals" name="Signal Turning" incomingTransitions="_L64pA3WAEe2cXugcT2PGGw">
             <outgoingTransitions xmi:id="_yyE8EHWAEe2oVZ4yFrzfuw" specification="completed" target="_cSXE0IY2Ee2KYdnsQIjglw"/>
             <outgoingTransitions xmi:id="_MujwYIaREe2yx5oO4CMMcQ" specification="after signal_timeout ms" target="_yqc6cIYxEe2KYdnsQIjglw"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_L64pCnWAEe2cXugcT2PGGw" specification="entry / reset; activateSections" name="Section Activation" incomingTransitions="_gt-7kIY2Ee2KYdnsQIjglw">
+          <vertices xsi:type="sgraph:State" xmi:id="_L64pCnWAEe2cXugcT2PGGw" specification="entry / resetTransaction; activateSections" name="Section Activation" incomingTransitions="_gt-7kIY2Ee2KYdnsQIjglw">
             <outgoingTransitions xmi:id="_jxc1gHWAEe2oVZ4yFrzfuw" specification="completed" target="_yYvPAHWAEe2oVZ4yFrzfuw"/>
             <outgoingTransitions xmi:id="_EC0EEHWBEe2oVZ4yFrzfuw" specification="after section_timeout ms" target="_yqc6cIYxEe2KYdnsQIjglw"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_cSXE0IY2Ee2KYdnsQIjglw" specification="entry / reset; extendSignals" name="Signal Updating" incomingTransitions="_yyE8EHWAEe2oVZ4yFrzfuw">
+          <vertices xsi:type="sgraph:State" xmi:id="_cSXE0IY2Ee2KYdnsQIjglw" specification="entry / resetTransaction; extendSignals" name="Signal Updating" incomingTransitions="_yyE8EHWAEe2oVZ4yFrzfuw">
             <outgoingTransitions xmi:id="_gt-7kIY2Ee2KYdnsQIjglw" specification="completed" target="_L64pCnWAEe2cXugcT2PGGw"/>
             <outgoingTransitions xmi:id="_MI8h4IaREe2yx5oO4CMMcQ" specification="after signal_timeout ms" target="_yqc6cIYxEe2KYdnsQIjglw"/>
           </vertices>
@@ -280,7 +280,7 @@
     <edges xmi:id="_L64pVHWAEe2cXugcT2PGGw" type="Transition" element="_L64pA3WAEe2cXugcT2PGGw" source="_L64pKXWAEe2cXugcT2PGGw" target="_h0k5IHWAEe2oVZ4yFrzfuw">
       <children xsi:type="notation:DecorationNode" xmi:id="_L64pVXWAEe2cXugcT2PGGw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_L64pVnWAEe2cXugcT2PGGw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_L64pV3WAEe2cXugcT2PGGw" x="8" y="-13"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_L64pV3WAEe2cXugcT2PGGw" x="9" y="-32"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_L64pWHWAEe2cXugcT2PGGw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_L64pWXWAEe2cXugcT2PGGw" fontName="Verdana"/>
@@ -291,7 +291,7 @@
     <edges xmi:id="_jxeqsHWAEe2oVZ4yFrzfuw" type="Transition" element="_jxc1gHWAEe2oVZ4yFrzfuw" source="_L64pNXWAEe2cXugcT2PGGw" target="_yYwdIHWAEe2oVZ4yFrzfuw">
       <children xsi:type="notation:DecorationNode" xmi:id="_jxfRwXWAEe2oVZ4yFrzfuw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_jxfRwnWAEe2oVZ4yFrzfuw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_jxfRw3WAEe2oVZ4yFrzfuw" x="-59" y="-17"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_jxfRw3WAEe2oVZ4yFrzfuw" x="8" y="-35"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_jxeqsXWAEe2oVZ4yFrzfuw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_jxfRwHWAEe2oVZ4yFrzfuw" fontName="Verdana"/>
@@ -302,7 +302,7 @@
     <edges xmi:id="_yyGKMHWAEe2oVZ4yFrzfuw" type="Transition" element="_yyE8EHWAEe2oVZ4yFrzfuw" source="_h0k5IHWAEe2oVZ4yFrzfuw" target="_cSXr4IY2Ee2KYdnsQIjglw">
       <children xsi:type="notation:DecorationNode" xmi:id="_yyGKNHWAEe2oVZ4yFrzfuw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_yyGKNXWAEe2oVZ4yFrzfuw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_yyGKNnWAEe2oVZ4yFrzfuw" x="-76" y="-18"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_yyGKNnWAEe2oVZ4yFrzfuw" x="-1" y="-35"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_yyGKMXWAEe2oVZ4yFrzfuw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_yyGKM3WAEe2oVZ4yFrzfuw" fontName="Verdana"/>
@@ -445,7 +445,7 @@
     <edges xmi:id="_guAJsIY2Ee2KYdnsQIjglw" type="Transition" element="_gt-7kIY2Ee2KYdnsQIjglw" source="_cSXr4IY2Ee2KYdnsQIjglw" target="_L64pNXWAEe2cXugcT2PGGw">
       <children xsi:type="notation:DecorationNode" xmi:id="_guAJtIY2Ee2KYdnsQIjglw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_guAJtYY2Ee2KYdnsQIjglw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_guAJtoY2Ee2KYdnsQIjglw" x="-27" y="13"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_guAJtoY2Ee2KYdnsQIjglw" x="-2" y="-35"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_guAJsYY2Ee2KYdnsQIjglw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_guAJs4Y2Ee2KYdnsQIjglw" fontName="Verdana"/>

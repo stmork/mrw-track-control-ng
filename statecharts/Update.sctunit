@@ -27,7 +27,7 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		// Then
 		assert active (mrw.^statechart.UpdateStatechart.main_region.Reset)
 		assert called init
-		assert called reset
+		assert called boot
 	}
 
 	@Test

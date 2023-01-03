@@ -120,7 +120,7 @@ private:
 		return count;
 	}
 
-	virtual void        reset() override;
+	virtual void        resetTransaction() override;
 	virtual bool        hasActiveRoutes() override;
 
 	mrw::model::Route * createRoute(

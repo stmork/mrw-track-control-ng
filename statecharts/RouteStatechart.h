@@ -135,7 +135,7 @@ namespace mrw
 			public:
 				virtual ~OperationCallback() = 0;
 
-				virtual void reset() = 0;
+				virtual void resetTransaction() = 0;
 
 				virtual void fail() = 0;
 

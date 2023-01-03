@@ -57,7 +57,7 @@ private:
 
 	void init() override;
 	void ping() override;
-	void reset() override;
+	void boot() override;
 	void flashRequest(const uint8_t hid);
 	void flashRequest() override;
 	void flashData(const size_t bytes);

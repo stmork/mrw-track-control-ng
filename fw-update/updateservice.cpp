@@ -140,7 +140,7 @@ void UpdateService::ping()
 	write(message);
 }
 
-void UpdateService::reset()
+void UpdateService::boot()
 {
 	MrwMessage message(RESET);
 

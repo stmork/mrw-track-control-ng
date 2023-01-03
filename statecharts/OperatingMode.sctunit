@@ -39,7 +39,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 
 		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Init)
-		assert called reset
+		assert called resetTransaction
 		assert start
 	}
 
@@ -84,7 +84,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		// Then
 		assert active (mrw.^statechart.OperatingMode.main_region.Init)
 		assert cleared
-		assert called reset
+		assert called resetTransaction
 		assert start
 	}
 
@@ -159,7 +159,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		assert active (mrw.^statechart.OperatingMode.main_region.Init)
 		assert operating
 		assert valueof(operating) == false
-		assert called reset
+		assert called resetTransaction
 		assert start
 	}
 

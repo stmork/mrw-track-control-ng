@@ -1,3 +1,8 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+//
+
 GeneratorModel for sctunit::cpp11
 {
 	const PROJECT : string = "mrw.statecharts"

@@ -93,7 +93,7 @@ private:
 	static bool always(mrw::ctrl::SignalControllerProxy * controller);
 
 	// Implementation of RouteStatemachine::OperationCallback
-	virtual void reset() override;
+	virtual void resetTransaction() override;
 	virtual void fail() override;
 	virtual void tryComplete() override;
 	virtual bool isCompleted() override;

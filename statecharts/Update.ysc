@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_A-iUYIkBEe2fK-OwCcYY0Q" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var timeout : integer = 250&#xA;var delay_boot : integer = 3000&#xA;var delay_reset : integer = 1200&#xA;var delay_flash_request : integer = 20&#xA;var delay_flash_page : integer = 60&#xA;&#xA;var count : integer&#xA;var error : integer = 0&#xA;const retry : integer = 5&#xA;&#xA;in event complete&#xA;in event failed&#xA;&#xA;operation init()&#xA;operation ping()&#xA;operation reset()&#xA;operation flashRequest()&#xA;operation flashCompletePage()&#xA;operation flashRestPage()&#xA;operation flashCheck()&#xA;operation quit()&#xA;operation fail(code : integer)&#xA;&#xA;operation hasController() : boolean&#xA;operation hasPages() : boolean" namespace="mrw.statechart" name="UpdateStatechart">
+  <sgraph:Statechart xmi:id="_A-iUYIkBEe2fK-OwCcYY0Q" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;var timeout : integer = 250&#xA;var delay_boot : integer = 3000&#xA;var delay_reset : integer = 1200&#xA;var delay_flash_request : integer = 20&#xA;var delay_flash_page : integer = 60&#xA;&#xA;var count : integer&#xA;var error : integer = 0&#xA;const retry : integer = 5&#xA;&#xA;in event complete&#xA;in event failed&#xA;&#xA;operation init()&#xA;operation ping()&#xA;operation boot()&#xA;operation flashRequest()&#xA;operation flashCompletePage()&#xA;operation flashRestPage()&#xA;operation flashCheck()&#xA;operation quit()&#xA;operation fail(code : integer)&#xA;&#xA;operation hasController() : boolean&#xA;operation hasPages() : boolean" namespace="mrw.statechart" name="UpdateStatechart">
     <regions xmi:id="_A-kwqIkBEe2fK-OwCcYY0Q" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_A-kwqYkBEe2fK-OwCcYY0Q">
         <outgoingTransitions xmi:id="_A-kwqokBEe2fK-OwCcYY0Q" specification="" target="_A-kwq4kBEe2fK-OwCcYY0Q"/>
@@ -8,7 +8,7 @@
       <vertices xsi:type="sgraph:State" xmi:id="_A-kwq4kBEe2fK-OwCcYY0Q" specification="entry / ping" name="Ping" incomingTransitions="_A-kwqokBEe2fK-OwCcYY0Q">
         <outgoingTransitions xmi:id="_A-kwrokBEe2fK-OwCcYY0Q" specification="after timeout ms" target="_jYHbMItHEe2kxfFr16RaMw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_A-lXtokBEe2fK-OwCcYY0Q" specification="entry / init; reset" name="Reset" incomingTransitions="_lMaqYItHEe2kxfFr16RaMw">
+      <vertices xsi:type="sgraph:State" xmi:id="_A-lXtokBEe2fK-OwCcYY0Q" specification="entry / init; boot" name="Reset" incomingTransitions="_lMaqYItHEe2kxfFr16RaMw">
         <outgoingTransitions xmi:id="_F0x_sIkDEe2HCuj_5shPiQ" specification="after delay_boot ms / error = 2" target="__hZrAItQEe2kxfFr16RaMw"/>
         <outgoingTransitions xmi:id="_H0Oy8ItIEe2kxfFr16RaMw" specification="complete" target="_rAP_UItJEe2kxfFr16RaMw"/>
       </vertices>

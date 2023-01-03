@@ -315,7 +315,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Disable'. */
 			timerService->setTimer(this, 0, emergency, false);
-			ifaceOperationCallback->reset();
+			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->unlockSignals();
 			ifaceOperationCallback->unlockSwitches();
 			ifaceOperationCallback->deactivateSections();
@@ -327,7 +327,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Switch Turning'. */
 			timerService->setTimer(this, 1, switch_timeout, false);
-			ifaceOperationCallback->reset();
+			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->turnSwitches();
 		}
 
@@ -336,7 +336,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Signal Turning'. */
 			timerService->setTimer(this, 2, signal_timeout, false);
-			ifaceOperationCallback->reset();
+			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->turnSignals();
 		}
 
@@ -345,7 +345,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Section Activation'. */
 			timerService->setTimer(this, 3, section_timeout, false);
-			ifaceOperationCallback->reset();
+			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->activateSections();
 		}
 
@@ -354,7 +354,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Signal Updating'. */
 			timerService->setTimer(this, 4, signal_timeout, false);
-			ifaceOperationCallback->reset();
+			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->extendSignals();
 		}
 

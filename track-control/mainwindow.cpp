@@ -259,7 +259,7 @@ void MainWindow::enable()
 		(rail_count >= 2) && (switch_count == 0));
 }
 
-void MainWindow::reset()
+void MainWindow::resetTransaction()
 {
 	__METHOD__;
 

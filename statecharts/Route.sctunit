@@ -8,10 +8,10 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 	operation disabled()
 	{
 		assert active (mrw.^statechart.RouteStatechart.main_region.Disable)
-		assert called reset()
-		assert called deactivateSections()
-		assert called unlockSignals()
-		assert called unlockSwitches()
+		assert called resetTransaction
+		assert called deactivateSections
+		assert called unlockSignals
+		assert called unlockSwitches
 	}
 
 	@Test
@@ -34,8 +34,8 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Switch_Turning)
-		assert called reset()
-		assert called turnSwitches()
+		assert called resetTransaction
+		assert called turnSwitches
 	}
 
 	@Test
@@ -50,8 +50,8 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Signal_Turning)
-		assert called reset()
-		assert called turnSignals()
+		assert called resetTransaction
+		assert called turnSignals
 	}
 
 	@Test
@@ -66,8 +66,8 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Signal_Updating)
-		assert called reset()
-		assert called turnSignals()
+		assert called resetTransaction
+		assert called turnSignals
 	}
 
 	@Test
@@ -82,8 +82,8 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Section_Activation)
-		assert called reset()
-		assert called activateSections()
+		assert called resetTransaction
+		assert called activateSections
 	}
 
 	@Test
@@ -112,8 +112,8 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Switch_Turning)
-		assert called reset()
-		assert called turnSwitches()
+		assert called resetTransaction
+		assert called turnSwitches
 	}
 
 	@Test

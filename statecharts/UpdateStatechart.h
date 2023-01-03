@@ -157,7 +157,7 @@ namespace mrw
 
 				virtual void ping() = 0;
 
-				virtual void reset() = 0;
+				virtual void boot() = 0;
 
 				virtual void flashRequest() = 0;
 

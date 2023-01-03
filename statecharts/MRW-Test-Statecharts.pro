@@ -3,35 +3,32 @@
 #  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 #
 
-include(../common.pri)
-
-QMAKE_CXXFLAGS  -= -Wsuggest-override
+include (../common.pri)
 
 HEADERS += \
-	test/OperatingMode.h \
-	test/RouteStatechart.h \
-	test/SectionStatechart.h \
-	test/SignalControllerStatechart.h \
-	test/SignalStatechart.h \
-	test/SwitchStatechart.h \
-	test/TrackerStatechart.h \
-	test/UpdateStatechart.h
+	test/OperatingModeImpl.h \
+	test/RouteStatechartImpl.h \
+	test/SectionStatechartImpl.h \
+	test/SignalControllerStatechartImpl.h \
+	test/SignalStatechartImpl.h \
+	test/SwitchStatechartImpl.h \
+	test/TrackerStatechartImpl.h \
+	test/UpdateStatechartImpl.h \
+	test/sc_rxcpp.h \
+	test/sc_statemachine.h \
+	test/sc_timer.h \
+	test/sc_timer_service.h \
+	test/sc_types.h
 
 SOURCES += \
-	test/OperatingMode.cpp \
-	test/OperatingModeTest.cpp \
-	test/RouteStatechart.cpp \
-	test/RouteTest.cpp \
-	test/SectionStatechart.cpp \
-	test/SectionTest.cpp \
-	test/SignalControllerStatechart.cpp \
-	test/SignalControllerTest.cpp \
-	test/SignalStatechart.cpp \
-	test/SignalTest.cpp \
-	test/SwitchStatechart.cpp \
-	test/SwitchTest.cpp \
-	test/TrackerStatechart.cpp \
-	test/TrackerTest.cpp \
-	test/UpdateStatechart.cpp \
-	test/UpdateTest.cpp
+	test/OperatingModeImpl.cpp \
+	test/RouteStatechartImpl.cpp \
+	test/SectionStatechartImpl.cpp \
+	test/SignalControllerStatechartImpl.cpp \
+	test/SignalStatechartImpl.cpp \
+	test/SwitchStatechartImpl.cpp \
+	test/TrackerStatechartImpl.cpp \
+	test/UpdateStatechartImpl.cpp \
+	test/sc_timer_service.cpp
 
+LIBS += -lgtest -lgtest_main

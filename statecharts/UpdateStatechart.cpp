@@ -330,7 +330,7 @@ namespace mrw
 			/* Entry action for state 'Reset'. */
 			timerService->setTimer(this, 1, delay_boot, false);
 			ifaceOperationCallback->init();
-			ifaceOperationCallback->reset();
+			ifaceOperationCallback->boot();
 		}
 
 		/* Entry action for state 'Flash Request'. */
