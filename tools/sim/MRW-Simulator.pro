@@ -22,3 +22,5 @@ LIBS            += -lMRW-Model -lMRW-Can -lMRW-Util
 install.files = $$TARGET
 
 INSTALLS        += install
+
+QMAKE_CLEAN     += $$TARGET

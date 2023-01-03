@@ -7,7 +7,7 @@ GeneratorModel for sctunit::cpp11
 {
 	const PROJECT : string = "mrw.statecharts"
 	const FOLDER  : string = "test"
-	const COMMON  : string = "test"
+	const COMMON  : string = "test/common"
 
 	test OperatingModeTest
 	{
@@ -19,7 +19,7 @@ GeneratorModel for sctunit::cpp11
 		feature Outlet
 		{
 			targetProject = PROJECT
-			targetFolder  = FOLDER
+			targetFolder  = FOLDER + "/OperatingMode"
 			libraryTargetFolder = COMMON
 		}
 
@@ -41,7 +41,7 @@ GeneratorModel for sctunit::cpp11
 		feature Outlet
 		{
 			targetProject = PROJECT
-			targetFolder  = FOLDER
+			targetFolder  = FOLDER + "/Route"
 			libraryTargetFolder = COMMON
 		}
 
@@ -63,7 +63,7 @@ GeneratorModel for sctunit::cpp11
 		feature Outlet
 		{
 			targetProject = PROJECT
-			targetFolder  = FOLDER
+			targetFolder  = FOLDER + "/Section"
 			libraryTargetFolder = COMMON
 		}
 
@@ -85,7 +85,7 @@ GeneratorModel for sctunit::cpp11
 		feature Outlet
 		{
 			targetProject = PROJECT
-			targetFolder  = FOLDER
+			targetFolder  = FOLDER + "/Signal"
 			libraryTargetFolder = COMMON
 		}
 
@@ -107,7 +107,7 @@ GeneratorModel for sctunit::cpp11
 		feature Outlet
 		{
 			targetProject = PROJECT
-			targetFolder  = FOLDER
+			targetFolder  = FOLDER + "/SignalController"
 			libraryTargetFolder = COMMON
 		}
 
@@ -129,7 +129,7 @@ GeneratorModel for sctunit::cpp11
 		feature Outlet
 		{
 			targetProject = PROJECT
-			targetFolder  = FOLDER
+			targetFolder  = FOLDER + "/Switch"
 			libraryTargetFolder = COMMON
 		}
 
@@ -151,7 +151,7 @@ GeneratorModel for sctunit::cpp11
 		feature Outlet
 		{
 			targetProject = PROJECT
-			targetFolder  = FOLDER
+			targetFolder  = FOLDER + "/Tracker"
 			libraryTargetFolder = COMMON
 		}
 
@@ -173,7 +173,7 @@ GeneratorModel for sctunit::cpp11
 		feature Outlet
 		{
 			targetProject = PROJECT
-			targetFolder  = FOLDER
+			targetFolder  = FOLDER + "/Update"
 			libraryTargetFolder = COMMON
 		}
 

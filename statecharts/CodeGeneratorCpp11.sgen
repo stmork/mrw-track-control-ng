@@ -7,7 +7,7 @@ GeneratorModel for yakindu::cpp11
 {
 	const PROJECT : string = "mrw.statecharts"
 	const FOLDER  : string = "test"
-	const COMMON :  string = "test"
+	const COMMON :  string = "test/common"
 
 	statechart mrw.statechart.OperatingMode
 	{
@@ -23,7 +23,6 @@ GeneratorModel for yakindu::cpp11
 
 		feature IdentifierSettings
 		{
-			moduleName = "OperatingModeImpl"
 			headerFilenameExtension = "h"
 			sourceFilenameExtension = "cpp"
 		}
@@ -31,7 +30,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER
+			targetFolder        = FOLDER + "/OperatingMode"
 			libraryTargetFolder = COMMON
 		}
 
@@ -55,7 +54,6 @@ GeneratorModel for yakindu::cpp11
 
 		feature IdentifierSettings
 		{
-			moduleName = "SectionStatechartImpl"
 			headerFilenameExtension = "h"
 			sourceFilenameExtension = "cpp"
 		}
@@ -63,7 +61,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER
+			targetFolder        = FOLDER + "/Section"
 			libraryTargetFolder = COMMON
 		}
 
@@ -87,7 +85,6 @@ GeneratorModel for yakindu::cpp11
 
 		feature IdentifierSettings
 		{
-			moduleName = "SwitchStatechartImpl"
 			headerFilenameExtension = "h"
 			sourceFilenameExtension = "cpp"
 		}
@@ -95,7 +92,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER
+			targetFolder        = FOLDER + "/Switch"
 			libraryTargetFolder = COMMON
 		}
 
@@ -119,7 +116,6 @@ GeneratorModel for yakindu::cpp11
 
 		feature IdentifierSettings
 		{
-			moduleName = "SignalStatechartImpl"
 			headerFilenameExtension = "h"
 			sourceFilenameExtension = "cpp"
 		}
@@ -127,7 +123,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER
+			targetFolder        = FOLDER + "/Signal"
 			libraryTargetFolder = COMMON
 		}
 
@@ -151,7 +147,6 @@ GeneratorModel for yakindu::cpp11
 
 		feature IdentifierSettings
 		{
-			moduleName = "SignalControllerStatechartImpl"
 			headerFilenameExtension = "h"
 			sourceFilenameExtension = "cpp"
 		}
@@ -159,7 +154,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER
+			targetFolder        = FOLDER + "/SignalController"
 			libraryTargetFolder = COMMON
 		}
 
@@ -183,7 +178,6 @@ GeneratorModel for yakindu::cpp11
 
 		feature IdentifierSettings
 		{
-			moduleName = "RouteStatechartImpl"
 			headerFilenameExtension = "h"
 			sourceFilenameExtension = "cpp"
 		}
@@ -191,7 +185,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER
+			targetFolder        = FOLDER + "/Route"
 			libraryTargetFolder = COMMON
 		}
 
@@ -205,7 +199,7 @@ GeneratorModel for yakindu::cpp11
 	{
 		feature GeneralFeatures
 		{
-			timerService = true
+			timerService = false
 		}
 
 		feature LicenseHeader
@@ -215,7 +209,6 @@ GeneratorModel for yakindu::cpp11
 
 		feature IdentifierSettings
 		{
-			moduleName = "TrackerStatechartImpl"
 			headerFilenameExtension = "h"
 			sourceFilenameExtension = "cpp"
 		}
@@ -223,7 +216,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER
+			targetFolder        = FOLDER + "/Tracker"
 			libraryTargetFolder = COMMON
 		}
 
@@ -247,7 +240,6 @@ GeneratorModel for yakindu::cpp11
 
 		feature IdentifierSettings
 		{
-			moduleName = "UpdateStatechartImpl"
 			headerFilenameExtension = "h"
 			sourceFilenameExtension = "cpp"
 		}
@@ -255,7 +247,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER
+			targetFolder        = FOLDER + "/Update"
 			libraryTargetFolder = COMMON
 		}
 
