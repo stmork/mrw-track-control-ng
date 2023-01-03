@@ -34,8 +34,18 @@ namespace
 
 	class FailMock
 	{
+		typedef void (FailMock::*functiontype)();
 	public:
+		void (FailMock::*failBehaviorDefault)();
 		int callCount;
+
+		void fail1()
+		{
+		}
+
+		void failDefault()
+		{
+		}
 
 		bool calledAtLeast(const int times)
 		{
@@ -51,8 +61,25 @@ namespace
 		{
 			++callCount;
 		}
+
+		functiontype getBehavior()
+		{
+			return failBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (FailMock::*defaultBehavior)())
+		{
+			failBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&FailMock::failDefault);
+		}
+
 		void reset()
 		{
+			initializeBehavior();
 			callCount = 0;
 		}
 	};
@@ -60,9 +87,11 @@ namespace
 
 	class LockMock
 	{
+		typedef void (LockMock::*functiontype)();
 		struct parameters
 		{
 			bool do_it;
+			void (LockMock::*behavior)();
 			int callCount;
 			inline bool operator==(const parameters & other)
 			{
@@ -70,8 +99,18 @@ namespace
 			}
 		};
 	public:
+		std::list<LockMock::parameters> mocks;
 		std::list<LockMock::parameters> paramCount;
+		void (LockMock::*lockBehaviorDefault)();
 		int callCount;
+
+		void lock1()
+		{
+		}
+
+		void lockDefault()
+		{
+		}
 
 		bool calledAtLeast(const int times)
 		{
@@ -81,6 +120,20 @@ namespace
 		bool calledAtLeastOnce()
 		{
 			return (callCount > 0);
+		}
+
+		void setLockBehavior(const bool do_it, void (LockMock::*func)())
+		{
+			parameters p;
+			p.do_it = do_it;
+			p.behavior = func;
+
+			std::list<LockMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+			if (i != mocks.end())
+			{
+				mocks.erase(i);
+			}
+			mocks.push_back(p);
 		}
 
 		bool calledAtLeast(const int times, const bool do_it)
@@ -135,18 +188,58 @@ namespace
 			}
 			paramCount.push_back(p);
 		}
+
+		functiontype getBehavior(const bool do_it)
+		{
+			parameters p;
+			p.do_it = do_it;
+
+			std::list<LockMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+			if (i != mocks.end())
+			{
+				return  i->behavior;
+			}
+			else
+			{
+				return lockBehaviorDefault;
+			}
+		}
+
+		void setDefaultBehavior(void (LockMock::*defaultBehavior)())
+		{
+			lockBehaviorDefault = defaultBehavior;
+			mocks.clear();
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&LockMock::lockDefault);
+		}
+
 		void reset()
 		{
+			initializeBehavior();
 			callCount = 0;
 			paramCount.clear();
+			mocks.clear();
 		}
 	};
 	static LockMock * lockMock;
 
 	class IncMock
 	{
+		typedef void (IncMock::*functiontype)();
 	public:
+		void (IncMock::*incBehaviorDefault)();
 		int callCount;
+
+		void inc1()
+		{
+		}
+
+		void incDefault()
+		{
+		}
 
 		bool calledAtLeast(const int times)
 		{
@@ -162,12 +255,135 @@ namespace
 		{
 			++callCount;
 		}
+
+		functiontype getBehavior()
+		{
+			return incBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (IncMock::*defaultBehavior)())
+		{
+			incBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&IncMock::incDefault);
+		}
+
 		void reset()
 		{
+			initializeBehavior();
 			callCount = 0;
 		}
 	};
 	static IncMock * incMock;
+
+	class DecMock
+	{
+		typedef void (DecMock::*functiontype)();
+	public:
+		void (DecMock::*decBehaviorDefault)();
+		int callCount;
+
+		void dec1()
+		{
+		}
+
+		void decDefault()
+		{
+		}
+
+		bool calledAtLeast(const int times)
+		{
+			return (callCount >= times);
+		}
+
+		bool calledAtLeastOnce()
+		{
+			return (callCount > 0);
+		}
+
+		void dec()
+		{
+			++callCount;
+		}
+
+		functiontype getBehavior()
+		{
+			return decBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (DecMock::*defaultBehavior)())
+		{
+			decBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&DecMock::decDefault);
+		}
+
+		void reset()
+		{
+			initializeBehavior();
+			callCount = 0;
+		}
+	};
+	static DecMock * decMock;
+
+	class PendingMock
+	{
+		typedef void (PendingMock::*functiontype)();
+	public:
+		void (PendingMock::*pendingBehaviorDefault)();
+		int callCount;
+
+		void pending1()
+		{
+		}
+
+		void pendingDefault()
+		{
+		}
+
+		bool calledAtLeast(const int times)
+		{
+			return (callCount >= times);
+		}
+
+		bool calledAtLeastOnce()
+		{
+			return (callCount > 0);
+		}
+
+		void pending()
+		{
+			++callCount;
+		}
+
+		functiontype getBehavior()
+		{
+			return pendingBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (PendingMock::*defaultBehavior)())
+		{
+			pendingBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&PendingMock::pendingDefault);
+		}
+
+		void reset()
+		{
+			initializeBehavior();
+			callCount = 0;
+		}
+	};
+	static PendingMock * pendingMock;
 
 	class HasMainSignalMock
 	{
@@ -213,6 +429,50 @@ namespace
 	};
 	static HasMainSignalMock * hasMainSignalMock;
 
+	class IsLightSignalMock
+	{
+		typedef bool (IsLightSignalMock::*functiontype)();
+	public:
+		bool (IsLightSignalMock::*isLightSignalBehaviorDefault)();
+
+		bool isLightSignal1()
+		{
+			return (false);
+		}
+
+		bool isLightSignal2()
+		{
+			return (true);
+		}
+
+		bool isLightSignalDefault()
+		{
+			bool defaultValue = false;
+			return (defaultValue);
+		}
+
+		functiontype getBehavior()
+		{
+			return isLightSignalBehaviorDefault;
+		}
+
+		void setDefaultBehavior(bool (IsLightSignalMock::*defaultBehavior)())
+		{
+			isLightSignalBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&IsLightSignalMock::isLightSignalDefault);
+		}
+
+		void reset()
+		{
+			initializeBehavior();
+		}
+	};
+	static IsLightSignalMock * isLightSignalMock;
+
 	class IsMainAndShuntMock
 	{
 		typedef bool (IsMainAndShuntMock::*functiontype)();
@@ -221,12 +481,12 @@ namespace
 
 		bool isMainAndShunt1()
 		{
-			return (true);
+			return (false);
 		}
 
 		bool isMainAndShunt2()
 		{
-			return (false);
+			return (true);
 		}
 
 		bool isMainAndShuntDefault()
@@ -265,12 +525,12 @@ namespace
 
 		bool isTour1()
 		{
-			return (true);
+			return (false);
 		}
 
 		bool isTour2()
 		{
-			return (false);
+			return (true);
 		}
 
 		bool isTourDefault()
@@ -301,112 +561,18 @@ namespace
 	};
 	static IsTourMock * isTourMock;
 
-	class PendingMock
-	{
-	public:
-		int callCount;
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void pending()
-		{
-			++callCount;
-		}
-		void reset()
-		{
-			callCount = 0;
-		}
-	};
-	static PendingMock * pendingMock;
-
-	class DecMock
-	{
-	public:
-		int callCount;
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void dec()
-		{
-			++callCount;
-		}
-		void reset()
-		{
-			callCount = 0;
-		}
-	};
-	static DecMock * decMock;
-
-	class IsLightSignalMock
-	{
-		typedef bool (IsLightSignalMock::*functiontype)();
-	public:
-		bool (IsLightSignalMock::*isLightSignalBehaviorDefault)();
-
-		bool isLightSignal1()
-		{
-			return (true);
-		}
-
-		bool isLightSignal2()
-		{
-			return (false);
-		}
-
-		bool isLightSignalDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		functiontype getBehavior()
-		{
-			return isLightSignalBehaviorDefault;
-		}
-
-		void setDefaultBehavior(bool (IsLightSignalMock::*defaultBehavior)())
-		{
-			isLightSignalBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&IsLightSignalMock::isLightSignalDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-		}
-	};
-	static IsLightSignalMock * isLightSignalMock;
-
 	class MockDefault : public mrw::statechart::SignalControllerStatechart::OperationCallback
 	{
 	public:
 		void inc()
 		{
 			incMock->inc();
+			return (incMock->*(incMock->getBehavior()))();
 		}
 		void dec()
 		{
 			decMock->dec();
+			return (decMock->*(decMock->getBehavior()))();
 		}
 		bool hasMainSignal()
 		{
@@ -427,14 +593,17 @@ namespace
 		void fail()
 		{
 			failMock->fail();
+			return (failMock->*(failMock->getBehavior()))();
 		}
 		void pending()
 		{
 			pendingMock->pending();
+			return (pendingMock->*(pendingMock->getBehavior()))();
 		}
 		void lock(bool do_it)
 		{
 			lockMock->lock(do_it);
+			return (lockMock->*(lockMock->getBehavior(do_it)))();
 		}
 	};
 
@@ -489,9 +658,49 @@ namespace
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Wait_for_Start));
 
 
+
+
+
+		hasMainSignalMock->setDefaultBehavior(&HasMainSignalMock::hasMainSignal1);
+
+		isLightSignalMock->setDefaultBehavior(&IsLightSignalMock::isLightSignal1);
+
+		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt1);
+
+		isTourMock->setDefaultBehavior(&IsTourMock::isTour1);
+
+
+
+		incMock->reset();
+		decMock->reset();
+		failMock->reset();
+		pendingMock->reset();
+		hasMainSignalMock->reset();
+		isLightSignalMock->reset();
+		isMainAndShuntMock->reset();
+		isTourMock->reset();
+		lockMock->reset();
 	}
 	TEST_F(SignalControllerTest, waitForStart)
 	{
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -527,6 +736,25 @@ namespace
 	TEST_F(SignalControllerTest, initial)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -545,6 +773,25 @@ namespace
 	TEST_F(SignalControllerTest, failAfterStart)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -553,6 +800,25 @@ namespace
 	TEST_F(SignalControllerTest, timeoutAfterStart)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -571,6 +837,25 @@ namespace
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -578,7 +863,7 @@ namespace
 
 		hasMainSignalMock->setDefaultBehavior(&HasMainSignalMock::hasMainSignal1);
 
-		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt1);
+		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt2);
 
 		statechart->raiseCompletedMain();
 
@@ -613,6 +898,25 @@ namespace
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -620,7 +924,7 @@ namespace
 
 		hasMainSignalMock->setDefaultBehavior(&HasMainSignalMock::hasMainSignal2);
 
-		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt2);
+		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt1);
 
 		statechart->raiseCompletedMain();
 
@@ -654,7 +958,7 @@ namespace
 
 		hasMainSignalMock->setDefaultBehavior(&HasMainSignalMock::hasMainSignal1);
 
-		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt2);
+		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt1);
 
 		statechart->raiseCompletedMain();
 
@@ -677,6 +981,25 @@ namespace
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -688,7 +1011,7 @@ namespace
 
 		hasMainSignalMock->setDefaultBehavior(&HasMainSignalMock::hasMainSignal2);
 
-		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt1);
+		isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt2);
 
 		statechart->raiseCompletedMain();
 
@@ -709,6 +1032,25 @@ namespace
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -721,6 +1063,25 @@ namespace
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -735,6 +1096,25 @@ namespace
 	TEST_F(SignalControllerTest, clearing)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -756,7 +1136,7 @@ namespace
 
 		operational();
 
-		isTourMock->setDefaultBehavior(&IsTourMock::isTour1);
+		isTourMock->setDefaultBehavior(&IsTourMock::isTour2);
 
 		statechart->raiseEnable();
 
@@ -802,12 +1182,33 @@ namespace
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -819,7 +1220,7 @@ namespace
 
 		operationalCombined();
 
-		isTourMock->setDefaultBehavior(&IsTourMock::isTour1);
+		isTourMock->setDefaultBehavior(&IsTourMock::isTour2);
 
 		statechart->raiseEnable();
 
@@ -855,12 +1256,33 @@ namespace
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -872,7 +1294,7 @@ namespace
 
 		operational();
 
-		isTourMock->setDefaultBehavior(&IsTourMock::isTour2);
+		isTourMock->setDefaultBehavior(&IsTourMock::isTour1);
 
 		statechart->raiseEnable();
 
@@ -898,12 +1320,33 @@ namespace
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -930,16 +1373,39 @@ namespace
 	TEST_F(SignalControllerTest, tourLocked)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -966,16 +1432,39 @@ namespace
 	TEST_F(SignalControllerTest, tourLockedCombined)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1002,16 +1491,39 @@ namespace
 	TEST_F(SignalControllerTest, shuntingLocked)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1020,18 +1532,43 @@ namespace
 	TEST_F(SignalControllerTest, disableTour)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1107,17 +1644,41 @@ namespace
 	TEST_F(SignalControllerTest, disableTourCombined)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1128,24 +1689,49 @@ namespace
 		isLightSignalMock = new IsLightSignalMock();
 		isLightSignalMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
 		disableTourCombined();
 
-		isLightSignalMock->setDefaultBehavior(&IsLightSignalMock::isLightSignal1);
+		isLightSignalMock->setDefaultBehavior(&IsLightSignalMock::isLightSignal2);
 
 		statechart->raiseCompletedDistant();
 
@@ -1174,24 +1760,49 @@ namespace
 		isLightSignalMock = new IsLightSignalMock();
 		isLightSignalMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
 		disableTourCombined();
 
-		isLightSignalMock->setDefaultBehavior(&IsLightSignalMock::isLightSignal2);
+		isLightSignalMock->setDefaultBehavior(&IsLightSignalMock::isLightSignal1);
 
 		statechart->raiseCompletedDistant();
 
@@ -1206,18 +1817,43 @@ namespace
 	TEST_F(SignalControllerTest, disableShunting)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1250,17 +1886,41 @@ namespace
 	TEST_F(SignalControllerTest, extendTour)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1284,17 +1944,41 @@ namespace
 	TEST_F(SignalControllerTest, extendTourCombined)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1318,17 +2002,41 @@ namespace
 	TEST_F(SignalControllerTest, extendShunting)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1352,16 +2060,39 @@ namespace
 	TEST_F(SignalControllerTest, failedTour)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1376,16 +2107,39 @@ namespace
 	TEST_F(SignalControllerTest, failedTourCombined)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1400,16 +2154,39 @@ namespace
 	TEST_F(SignalControllerTest, failedShunting)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1426,12 +2203,33 @@ namespace
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1448,12 +2246,33 @@ namespace
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1470,12 +2289,33 @@ namespace
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1490,18 +2330,43 @@ namespace
 	TEST_F(SignalControllerTest, timeoutWaitingEnableTour)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1526,18 +2391,43 @@ namespace
 	TEST_F(SignalControllerTest, timeoutWaitingEnableTourCombined)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1562,18 +2452,43 @@ namespace
 	TEST_F(SignalControllerTest, timeoutWaitingEnableShunting)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1598,18 +2513,43 @@ namespace
 	TEST_F(SignalControllerTest, timeoutWaitingDisableTour)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1634,18 +2574,43 @@ namespace
 	TEST_F(SignalControllerTest, timeoutWaitingDisableTourCombined)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1670,18 +2635,43 @@ namespace
 	TEST_F(SignalControllerTest, timeoutWaitingDisableShunting)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		isTourMock = new IsTourMock();
 		isTourMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		hasMainSignalMock = new HasMainSignalMock();
 		hasMainSignalMock->initializeBehavior();
 		isMainAndShuntMock = new IsMainAndShuntMock();
 		isMainAndShuntMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);

@@ -20,6 +20,19 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		enter
 		assert is_active
 		assert active (mrw.^statechart.RouteStatechart.main_region.Start)
+		
+		mock resetTransaction
+		mock fail
+		mock tryComplete
+
+		mock turnSwitches
+		mock activateSections
+		mock turnSignals
+		mock extendSignals
+
+		mock deactivateSections
+		mock unlockSignals
+		mock unlockSwitches
 	}
 
 	@Test
@@ -67,7 +80,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Signal_Updating)
 		assert called resetTransaction
-		assert called turnSignals
+		assert called extendSignals
 	}
 
 	@Test

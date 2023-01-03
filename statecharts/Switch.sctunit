@@ -31,6 +31,17 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		enter
 		assert is_active
 		assert active (mrw.^statechart.SwitchStatechart.main_region.Wait_for_Start)
+
+		mock inc
+		mock dec
+		mock left
+		mock right
+		mock request
+		mock fail
+		mock pending
+		mock lock
+		mock isFree returns (true)
+		mock doTurnLeft returns (true)
 	}
 
 	@Test

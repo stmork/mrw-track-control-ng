@@ -25,6 +25,16 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		enter
 		assert is_active
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Wait_for_Start)
+		
+		mock inc
+		mock dec
+		mock fail
+		mock pending
+		mock hasMainSignal returns (false)
+		mock isLightSignal returns (false)
+		mock isMainAndShunt returns (false)
+		mock isTour returns (false)
+		mock lock
 	}
 
 	@Test

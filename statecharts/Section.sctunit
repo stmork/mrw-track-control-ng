@@ -36,6 +36,18 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		enter
 		assert is_active
 		assert active (mrw.^statechart.SectionStatechart.main_region.Wait_for_Start)
+
+		mock inc
+		mock dec
+		mock off
+		mock on
+		mock request
+		mock passed
+		mock free
+		mock leftBefore
+		mock fail
+		mock pending
+		mock lock
 	}
 
 	@Test
@@ -304,7 +316,6 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		// Then
 		assert called free
 		assert called lock
-		assert called dec
 	}
 
 	@Test

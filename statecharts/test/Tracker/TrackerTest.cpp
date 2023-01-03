@@ -27,8 +27,18 @@ namespace
 
 	class ClearMock
 	{
+		typedef void (ClearMock::*functiontype)();
 	public:
+		void (ClearMock::*clearBehaviorDefault)();
 		int callCount;
+
+		void clear1()
+		{
+		}
+
+		void clearDefault()
+		{
+		}
 
 		bool calledAtLeast(const int times)
 		{
@@ -44,12 +54,188 @@ namespace
 		{
 			++callCount;
 		}
+
+		functiontype getBehavior()
+		{
+			return clearBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (ClearMock::*defaultBehavior)())
+		{
+			clearBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&ClearMock::clearDefault);
+		}
+
 		void reset()
 		{
+			initializeBehavior();
 			callCount = 0;
 		}
 	};
 	static ClearMock * clearMock;
+
+	class FirstMock
+	{
+		typedef void (FirstMock::*functiontype)();
+	public:
+		void (FirstMock::*firstBehaviorDefault)();
+		int callCount;
+
+		void first1()
+		{
+		}
+
+		void firstDefault()
+		{
+		}
+
+		bool calledAtLeast(const int times)
+		{
+			return (callCount >= times);
+		}
+
+		bool calledAtLeastOnce()
+		{
+			return (callCount > 0);
+		}
+
+		void first()
+		{
+			++callCount;
+		}
+
+		functiontype getBehavior()
+		{
+			return firstBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (FirstMock::*defaultBehavior)())
+		{
+			firstBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&FirstMock::firstDefault);
+		}
+
+		void reset()
+		{
+			initializeBehavior();
+			callCount = 0;
+		}
+	};
+	static FirstMock * firstMock;
+
+	class FreeMock
+	{
+		typedef void (FreeMock::*functiontype)();
+	public:
+		void (FreeMock::*freeBehaviorDefault)();
+		int callCount;
+
+		void free1()
+		{
+		}
+
+		void freeDefault()
+		{
+		}
+
+		bool calledAtLeast(const int times)
+		{
+			return (callCount >= times);
+		}
+
+		bool calledAtLeastOnce()
+		{
+			return (callCount > 0);
+		}
+
+		void free()
+		{
+			++callCount;
+		}
+
+		functiontype getBehavior()
+		{
+			return freeBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (FreeMock::*defaultBehavior)())
+		{
+			freeBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&FreeMock::freeDefault);
+		}
+
+		void reset()
+		{
+			initializeBehavior();
+			callCount = 0;
+		}
+	};
+	static FreeMock * freeMock;
+
+	class OccupyMock
+	{
+		typedef void (OccupyMock::*functiontype)();
+	public:
+		void (OccupyMock::*occupyBehaviorDefault)();
+		int callCount;
+
+		void occupy1()
+		{
+		}
+
+		void occupyDefault()
+		{
+		}
+
+		bool calledAtLeast(const int times)
+		{
+			return (callCount >= times);
+		}
+
+		bool calledAtLeastOnce()
+		{
+			return (callCount > 0);
+		}
+
+		void occupy()
+		{
+			++callCount;
+		}
+
+		functiontype getBehavior()
+		{
+			return occupyBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (OccupyMock::*defaultBehavior)())
+		{
+			occupyBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&OccupyMock::occupyDefault);
+		}
+
+		void reset()
+		{
+			initializeBehavior();
+			callCount = 0;
+		}
+	};
+	static OccupyMock * occupyMock;
 
 	class ValidMock
 	{
@@ -139,71 +325,23 @@ namespace
 	};
 	static LastMock * lastMock;
 
-	class FirstMock
-	{
-	public:
-		int callCount;
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void first()
-		{
-			++callCount;
-		}
-		void reset()
-		{
-			callCount = 0;
-		}
-	};
-	static FirstMock * firstMock;
-
-	class OccupyMock
-	{
-	public:
-		int callCount;
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void occupy()
-		{
-			++callCount;
-		}
-		void reset()
-		{
-			callCount = 0;
-		}
-	};
-	static OccupyMock * occupyMock;
-
 	class MockDefault : public mrw::statechart::TrackerStatechart::OperationCallback
 	{
 	public:
 		void first()
 		{
 			firstMock->first();
+			return (firstMock->*(firstMock->getBehavior()))();
 		}
 		void free()
 		{
+			freeMock->free();
+			return (freeMock->*(freeMock->getBehavior()))();
 		}
 		void occupy()
 		{
 			occupyMock->occupy();
+			return (occupyMock->*(occupyMock->getBehavior()))();
 		}
 		bool valid()
 		{
@@ -216,6 +354,7 @@ namespace
 		void clear()
 		{
 			clearMock->clear();
+			return (clearMock->*(clearMock->getBehavior()))();
 		}
 	};
 
@@ -254,11 +393,25 @@ namespace
 		EXPECT_TRUE(clearMock->calledAtLeastOnce());
 
 
+
+
+
+
 		clearMock->reset();
+		firstMock->reset();
+		freeMock->reset();
+		occupyMock->reset();
 	}
 	TEST_F(TrackerTest, idle)
 	{
 		clearMock = new ClearMock();
+		clearMock->initializeBehavior();
+		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -277,6 +430,13 @@ namespace
 	TEST_F(TrackerTest, receivedFirst)
 	{
 		clearMock = new ClearMock();
+		clearMock->initializeBehavior();
+		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -295,6 +455,13 @@ namespace
 	TEST_F(TrackerTest, receivedFurther)
 	{
 		clearMock = new ClearMock();
+		clearMock->initializeBehavior();
+		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -328,7 +495,15 @@ namespace
 		lastMock = new LastMock();
 		lastMock->initializeBehavior();
 		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
 		clearMock = new ClearMock();
+		clearMock->initializeBehavior();
+		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -339,7 +514,15 @@ namespace
 		validMock = new ValidMock();
 		validMock->initializeBehavior();
 		clearMock = new ClearMock();
+		clearMock->initializeBehavior();
 		clearMock = new ClearMock();
+		clearMock->initializeBehavior();
+		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -373,12 +556,21 @@ namespace
 	TEST_F(TrackerTest, occupyState)
 	{
 		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
 		validMock = new ValidMock();
 		validMock->initializeBehavior();
 		lastMock = new LastMock();
 		lastMock->initializeBehavior();
 		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
 		clearMock = new ClearMock();
+		clearMock->initializeBehavior();
+		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -392,21 +584,31 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::TrackerStatechart::State::main_region_Driving_Tracking_Free));
 
-		EXPECT_TRUE(occupyMock->calledAtLeastOnce());
+		EXPECT_TRUE(freeMock->calledAtLeastOnce());
 
 
-		occupyMock->reset();
+		freeMock->reset();
 	}
 	TEST_F(TrackerTest, freeState)
 	{
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
 		occupyMock = new OccupyMock();
-		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
 		validMock = new ValidMock();
 		validMock->initializeBehavior();
 		lastMock = new LastMock();
 		lastMock->initializeBehavior();
 		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
 		clearMock = new ClearMock();
+		clearMock->initializeBehavior();
+		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -440,14 +642,25 @@ namespace
 	TEST_F(TrackerTest, cascade)
 	{
 		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
 		occupyMock = new OccupyMock();
-		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
 		validMock = new ValidMock();
 		validMock->initializeBehavior();
 		lastMock = new LastMock();
 		lastMock->initializeBehavior();
 		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
 		clearMock = new ClearMock();
+		clearMock->initializeBehavior();
+		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -458,15 +671,27 @@ namespace
 		lastMock = new LastMock();
 		lastMock->initializeBehavior();
 		clearMock = new ClearMock();
+		clearMock->initializeBehavior();
 		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
 		occupyMock = new OccupyMock();
-		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
 		validMock = new ValidMock();
 		validMock->initializeBehavior();
 		lastMock = new LastMock();
 		lastMock->initializeBehavior();
 		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
 		clearMock = new ClearMock();
+		clearMock->initializeBehavior();
+		firstMock = new FirstMock();
+		firstMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		occupyMock = new OccupyMock();
+		occupyMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);

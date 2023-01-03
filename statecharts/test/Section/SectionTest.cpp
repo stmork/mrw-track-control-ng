@@ -36,8 +36,18 @@ namespace
 
 	class FailMock
 	{
+		typedef void (FailMock::*functiontype)();
 	public:
+		void (FailMock::*failBehaviorDefault)();
 		int callCount;
+
+		void fail1()
+		{
+		}
+
+		void failDefault()
+		{
+		}
 
 		bool calledAtLeast(const int times)
 		{
@@ -53,8 +63,25 @@ namespace
 		{
 			++callCount;
 		}
+
+		functiontype getBehavior()
+		{
+			return failBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (FailMock::*defaultBehavior)())
+		{
+			failBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&FailMock::failDefault);
+		}
+
 		void reset()
 		{
+			initializeBehavior();
 			callCount = 0;
 		}
 	};
@@ -62,8 +89,18 @@ namespace
 
 	class IncMock
 	{
+		typedef void (IncMock::*functiontype)();
 	public:
+		void (IncMock::*incBehaviorDefault)();
 		int callCount;
+
+		void inc1()
+		{
+		}
+
+		void incDefault()
+		{
+		}
 
 		bool calledAtLeast(const int times)
 		{
@@ -79,8 +116,25 @@ namespace
 		{
 			++callCount;
 		}
+
+		functiontype getBehavior()
+		{
+			return incBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (IncMock::*defaultBehavior)())
+		{
+			incBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&IncMock::incDefault);
+		}
+
 		void reset()
 		{
+			initializeBehavior();
 			callCount = 0;
 		}
 	};
@@ -88,8 +142,18 @@ namespace
 
 	class FreeMock
 	{
+		typedef void (FreeMock::*functiontype)();
 	public:
+		void (FreeMock::*freeBehaviorDefault)();
 		int callCount;
+
+		void free1()
+		{
+		}
+
+		void freeDefault()
+		{
+		}
 
 		bool calledAtLeast(const int times)
 		{
@@ -105,8 +169,25 @@ namespace
 		{
 			++callCount;
 		}
+
+		functiontype getBehavior()
+		{
+			return freeBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (FreeMock::*defaultBehavior)())
+		{
+			freeBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&FreeMock::freeDefault);
+		}
+
 		void reset()
 		{
+			initializeBehavior();
 			callCount = 0;
 		}
 	};
@@ -114,9 +195,11 @@ namespace
 
 	class LockMock
 	{
+		typedef void (LockMock::*functiontype)();
 		struct parameters
 		{
 			bool do_it;
+			void (LockMock::*behavior)();
 			int callCount;
 			inline bool operator==(const parameters & other)
 			{
@@ -124,8 +207,18 @@ namespace
 			}
 		};
 	public:
+		std::list<LockMock::parameters> mocks;
 		std::list<LockMock::parameters> paramCount;
+		void (LockMock::*lockBehaviorDefault)();
 		int callCount;
+
+		void lock1()
+		{
+		}
+
+		void lockDefault()
+		{
+		}
 
 		bool calledAtLeast(const int times)
 		{
@@ -135,6 +228,20 @@ namespace
 		bool calledAtLeastOnce()
 		{
 			return (callCount > 0);
+		}
+
+		void setLockBehavior(const bool do_it, void (LockMock::*func)())
+		{
+			parameters p;
+			p.do_it = do_it;
+			p.behavior = func;
+
+			std::list<LockMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+			if (i != mocks.end())
+			{
+				mocks.erase(i);
+			}
+			mocks.push_back(p);
 		}
 
 		bool calledAtLeast(const int times, const bool do_it)
@@ -189,18 +296,58 @@ namespace
 			}
 			paramCount.push_back(p);
 		}
+
+		functiontype getBehavior(const bool do_it)
+		{
+			parameters p;
+			p.do_it = do_it;
+
+			std::list<LockMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+			if (i != mocks.end())
+			{
+				return  i->behavior;
+			}
+			else
+			{
+				return lockBehaviorDefault;
+			}
+		}
+
+		void setDefaultBehavior(void (LockMock::*defaultBehavior)())
+		{
+			lockBehaviorDefault = defaultBehavior;
+			mocks.clear();
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&LockMock::lockDefault);
+		}
+
 		void reset()
 		{
+			initializeBehavior();
 			callCount = 0;
 			paramCount.clear();
+			mocks.clear();
 		}
 	};
 	static LockMock * lockMock;
 
 	class DecMock
 	{
+		typedef void (DecMock::*functiontype)();
 	public:
+		void (DecMock::*decBehaviorDefault)();
 		int callCount;
+
+		void dec1()
+		{
+		}
+
+		void decDefault()
+		{
+		}
 
 		bool calledAtLeast(const int times)
 		{
@@ -216,69 +363,44 @@ namespace
 		{
 			++callCount;
 		}
+
+		functiontype getBehavior()
+		{
+			return decBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (DecMock::*defaultBehavior)())
+		{
+			decBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&DecMock::decDefault);
+		}
+
 		void reset()
 		{
+			initializeBehavior();
 			callCount = 0;
 		}
 	};
 	static DecMock * decMock;
 
-	class PendingMock
-	{
-	public:
-		int callCount;
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void pending()
-		{
-			++callCount;
-		}
-		void reset()
-		{
-			callCount = 0;
-		}
-	};
-	static PendingMock * pendingMock;
-
-	class OnMock
-	{
-	public:
-		int callCount;
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void on()
-		{
-			++callCount;
-		}
-		void reset()
-		{
-			callCount = 0;
-		}
-	};
-	static OnMock * onMock;
-
 	class OffMock
 	{
+		typedef void (OffMock::*functiontype)();
 	public:
+		void (OffMock::*offBehaviorDefault)();
 		int callCount;
+
+		void off1()
+		{
+		}
+
+		void offDefault()
+		{
+		}
 
 		bool calledAtLeast(const int times)
 		{
@@ -294,17 +416,44 @@ namespace
 		{
 			++callCount;
 		}
+
+		functiontype getBehavior()
+		{
+			return offBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (OffMock::*defaultBehavior)())
+		{
+			offBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&OffMock::offDefault);
+		}
+
 		void reset()
 		{
+			initializeBehavior();
 			callCount = 0;
 		}
 	};
 	static OffMock * offMock;
 
-	class LeftBeforeMock
+	class OnMock
 	{
+		typedef void (OnMock::*functiontype)();
 	public:
+		void (OnMock::*onBehaviorDefault)();
 		int callCount;
+
+		void on1()
+		{
+		}
+
+		void onDefault()
+		{
+		}
 
 		bool calledAtLeast(const int times)
 		{
@@ -316,21 +465,84 @@ namespace
 			return (callCount > 0);
 		}
 
-		void leftBefore()
+		void on()
 		{
 			++callCount;
 		}
+
+		functiontype getBehavior()
+		{
+			return onBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (OnMock::*defaultBehavior)())
+		{
+			onBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&OnMock::onDefault);
+		}
+
 		void reset()
 		{
+			initializeBehavior();
 			callCount = 0;
 		}
 	};
-	static LeftBeforeMock * leftBeforeMock;
+	static OnMock * onMock;
+
+	class RequestMock
+	{
+		typedef void (RequestMock::*functiontype)();
+	public:
+		void (RequestMock::*requestBehaviorDefault)();
+
+		void request1()
+		{
+		}
+
+		void requestDefault()
+		{
+		}
+
+		functiontype getBehavior()
+		{
+			return requestBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (RequestMock::*defaultBehavior)())
+		{
+			requestBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&RequestMock::requestDefault);
+		}
+
+		void reset()
+		{
+			initializeBehavior();
+		}
+	};
+	static RequestMock * requestMock;
 
 	class PassedMock
 	{
+		typedef void (PassedMock::*functiontype)();
 	public:
+		void (PassedMock::*passedBehaviorDefault)();
 		int callCount;
+
+		void passed1()
+		{
+		}
+
+		void passedDefault()
+		{
+		}
 
 		bool calledAtLeast(const int times)
 		{
@@ -346,12 +558,135 @@ namespace
 		{
 			++callCount;
 		}
+
+		functiontype getBehavior()
+		{
+			return passedBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (PassedMock::*defaultBehavior)())
+		{
+			passedBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&PassedMock::passedDefault);
+		}
+
 		void reset()
 		{
+			initializeBehavior();
 			callCount = 0;
 		}
 	};
 	static PassedMock * passedMock;
+
+	class LeftBeforeMock
+	{
+		typedef void (LeftBeforeMock::*functiontype)();
+	public:
+		void (LeftBeforeMock::*leftBeforeBehaviorDefault)();
+		int callCount;
+
+		void leftBefore1()
+		{
+		}
+
+		void leftBeforeDefault()
+		{
+		}
+
+		bool calledAtLeast(const int times)
+		{
+			return (callCount >= times);
+		}
+
+		bool calledAtLeastOnce()
+		{
+			return (callCount > 0);
+		}
+
+		void leftBefore()
+		{
+			++callCount;
+		}
+
+		functiontype getBehavior()
+		{
+			return leftBeforeBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (LeftBeforeMock::*defaultBehavior)())
+		{
+			leftBeforeBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&LeftBeforeMock::leftBeforeDefault);
+		}
+
+		void reset()
+		{
+			initializeBehavior();
+			callCount = 0;
+		}
+	};
+	static LeftBeforeMock * leftBeforeMock;
+
+	class PendingMock
+	{
+		typedef void (PendingMock::*functiontype)();
+	public:
+		void (PendingMock::*pendingBehaviorDefault)();
+		int callCount;
+
+		void pending1()
+		{
+		}
+
+		void pendingDefault()
+		{
+		}
+
+		bool calledAtLeast(const int times)
+		{
+			return (callCount >= times);
+		}
+
+		bool calledAtLeastOnce()
+		{
+			return (callCount > 0);
+		}
+
+		void pending()
+		{
+			++callCount;
+		}
+
+		functiontype getBehavior()
+		{
+			return pendingBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (PendingMock::*defaultBehavior)())
+		{
+			pendingBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&PendingMock::pendingDefault);
+		}
+
+		void reset()
+		{
+			initializeBehavior();
+			callCount = 0;
+		}
+	};
+	static PendingMock * pendingMock;
 
 	class MockDefault : public mrw::statechart::SectionStatechart::OperationCallback
 	{
@@ -359,45 +694,56 @@ namespace
 		void inc()
 		{
 			incMock->inc();
+			return (incMock->*(incMock->getBehavior()))();
 		}
 		void dec()
 		{
 			decMock->dec();
+			return (decMock->*(decMock->getBehavior()))();
 		}
 		void off()
 		{
 			offMock->off();
+			return (offMock->*(offMock->getBehavior()))();
 		}
 		void on()
 		{
 			onMock->on();
+			return (onMock->*(onMock->getBehavior()))();
 		}
 		void request()
 		{
+			return (requestMock->*(requestMock->getBehavior()))();
 		}
 		void passed()
 		{
 			passedMock->passed();
+			return (passedMock->*(passedMock->getBehavior()))();
 		}
 		void free()
 		{
 			freeMock->free();
+			return (freeMock->*(freeMock->getBehavior()))();
 		}
 		void leftBefore()
 		{
 			leftBeforeMock->leftBefore();
+			return (leftBeforeMock->*(leftBeforeMock->getBehavior()))();
 		}
 		void fail()
 		{
 			failMock->fail();
+			return (failMock->*(failMock->getBehavior()))();
 		}
 		void pending()
 		{
 			pendingMock->pending();
+			return (pendingMock->*(pendingMock->getBehavior()))();
 		}
 		void lock(bool do_it)
 		{
 			lockMock->lock(do_it);
+			return (lockMock->*(lockMock->getBehavior(do_it)))();
 		}
 	};
 
@@ -472,9 +818,53 @@ namespace
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Wait_for_Start));
 
 
+
+
+
+
+
+
+
+
+
+
+
+		incMock->reset();
+		decMock->reset();
+		offMock->reset();
+		onMock->reset();
+		requestMock->reset();
+		passedMock->reset();
+		freeMock->reset();
+		leftBeforeMock->reset();
+		failMock->reset();
+		pendingMock->reset();
+		lockMock->reset();
 	}
 	TEST_F(SectionTest, waitForStart)
 	{
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -492,6 +882,28 @@ namespace
 	}
 	TEST_F(SectionTest, initial)
 	{
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -509,6 +921,28 @@ namespace
 	}
 	TEST_F(SectionTest, failAfterStart)
 	{
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -516,6 +950,28 @@ namespace
 	}
 	TEST_F(SectionTest, timeoutAfterStart)
 	{
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -549,6 +1005,29 @@ namespace
 	TEST_F(SectionTest, operational)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -557,6 +1036,29 @@ namespace
 	TEST_F(SectionTest, restart)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -570,6 +1072,28 @@ namespace
 	}
 	TEST_F(SectionTest, clearing)
 	{
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -609,9 +1133,35 @@ namespace
 	TEST_F(SectionTest, enabling)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -641,9 +1191,35 @@ namespace
 	TEST_F(SectionTest, disabling)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -674,11 +1250,39 @@ namespace
 	TEST_F(SectionTest, enabledLocked)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -709,11 +1313,39 @@ namespace
 	TEST_F(SectionTest, disabledLocked)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -751,9 +1383,35 @@ namespace
 	TEST_F(SectionTest, sectionFree)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -762,9 +1420,35 @@ namespace
 	TEST_F(SectionTest, sectionOccupied)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -798,10 +1482,37 @@ namespace
 	TEST_F(SectionTest, failAfterEnable)
 	{
 		failMock = new FailMock();
+		failMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -819,10 +1530,37 @@ namespace
 	TEST_F(SectionTest, timeoutAfterEnable)
 	{
 		failMock = new FailMock();
+		failMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -858,13 +1596,43 @@ namespace
 	TEST_F(SectionTest, disableAfterEnabled)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -873,14 +1641,43 @@ namespace
 	TEST_F(SectionTest, disableAfterDisabled)
 	{
 		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		decMock = new DecMock();
-		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -892,24 +1689,52 @@ namespace
 
 		EXPECT_TRUE(lockMock->calledAtLeastOnce());
 
-		EXPECT_TRUE(decMock->calledAtLeastOnce());
-
 
 		freeMock->reset();
 		lockMock->reset();
-		decMock->reset();
 	}
 	TEST_F(SectionTest, unlock)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -927,13 +1752,43 @@ namespace
 	TEST_F(SectionTest, failAfterDisable)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -948,13 +1803,43 @@ namespace
 	TEST_F(SectionTest, timeAfterDisable)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1007,11 +1892,39 @@ namespace
 	TEST_F(SectionTest, leave)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1020,12 +1933,41 @@ namespace
 	TEST_F(SectionTest, leaveBeforeNext)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1075,11 +2017,39 @@ namespace
 	TEST_F(SectionTest, stay)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1098,12 +2068,41 @@ namespace
 	TEST_F(SectionTest, autoUnlock)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1153,13 +2152,43 @@ namespace
 	TEST_F(SectionTest, passedState)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1168,15 +2197,47 @@ namespace
 	TEST_F(SectionTest, disableAfterPassed)
 	{
 		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1217,13 +2278,43 @@ namespace
 	TEST_F(SectionTest, enablingAfterDisabled)
 	{
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);
@@ -1232,14 +2323,45 @@ namespace
 	TEST_F(SectionTest, enabledAfterDisabled)
 	{
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		onMock = new OnMock();
+		onMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
 		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 		incMock = new IncMock();
+		incMock->initializeBehavior();
 		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
 		offMock = new OffMock();
+		offMock->initializeBehavior();
 		decMock = new DecMock();
+		decMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		offMock = new OffMock();
+		offMock->initializeBehavior();
+		onMock = new OnMock();
+		onMock->initializeBehavior();
+		requestMock = new RequestMock();
+		requestMock->initializeBehavior();
+		passedMock = new PassedMock();
+		passedMock->initializeBehavior();
+		freeMock = new FreeMock();
+		freeMock->initializeBehavior();
+		leftBeforeMock = new LeftBeforeMock();
+		leftBeforeMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
 
 		MockDefault defaultMock;
 		statechart->setOperationCallback(&defaultMock);

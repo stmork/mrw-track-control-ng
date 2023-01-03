@@ -7,6 +7,11 @@ testclass TrackerTest for statechart mrw.^statechart.TrackerStatechart
 		assert is_active
 		assert active (mrw.^statechart.TrackerStatechart.main_region.Idle)
 		assert called clear
+
+		mock clear
+		mock first
+		mock free
+		mock occupy
 	}
 
 	@Test
@@ -92,7 +97,7 @@ testclass TrackerTest for statechart mrw.^statechart.TrackerStatechart
 
 		// Then
 		assert active (mrw.^statechart.TrackerStatechart.main_region.Driving.Tracking.Free)
-		assert called occupy
+		assert called free
 	}
 
 	@Test

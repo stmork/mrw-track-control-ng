@@ -12,6 +12,16 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		assert is_active
 		assert active (mrw.^statechart.UpdateStatechart.main_region.Ping)
 		assert called ping
+
+		mock init
+		mock ping
+		mock boot
+		mock flashRequest
+		mock flashCompletePage
+		mock flashRestPage
+		mock flashCheck
+		mock hasController returns (true)
+		mock hasPages returns (true)
 	}
 
 	@Test
