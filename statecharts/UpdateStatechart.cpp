@@ -28,10 +28,12 @@ namespace mrw
 			delay_flash_request(20),
 			delay_flash_page(60),
 			count(0),
+			error(0),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
-			complete_raised(false)
+			complete_raised(false),
+			failed_raised(false)
 		{
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
 			{
@@ -76,6 +78,11 @@ namespace mrw
 					complete_raised = true;
 					break;
 				}
+			case mrw::statechart::UpdateStatechart::Event::failed:
+				{
+					failed_raised = true;
+					break;
+				}
 
 
 			case mrw::statechart::UpdateStatechart::Event::_te0_main_region_Ping_:
@@ -84,6 +91,8 @@ namespace mrw
 			case mrw::statechart::UpdateStatechart::Event::_te3_main_region_Flash_Complete_Page_:
 			case mrw::statechart::UpdateStatechart::Event::_te4_main_region_Flash_Rest_:
 			case mrw::statechart::UpdateStatechart::Event::_te5_main_region_Flash_Check_:
+			case mrw::statechart::UpdateStatechart::Event::_te6_main_region_Wait_Bootloader_:
+			case mrw::statechart::UpdateStatechart::Event::_te7_main_region_Successful_:
 				{
 					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::UpdateStatechart::Event::_te0_main_region_Ping_)] = true;
 					break;
@@ -103,15 +112,25 @@ namespace mrw
 		}
 
 
+		void mrw::statechart::UpdateStatechart::failed()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::failed));
+			runCycle();
+		}
+
+
 
 		bool UpdateStatechart::isActive() const
 		{
 			return stateConfVector[0] != mrw::statechart::UpdateStatechart::State::NO_STATE;
 		}
 
+		/*
+		 * Always returns 'false' since this state machine can never become final.
+		 */
 		bool UpdateStatechart::isFinal() const
 		{
-			return (stateConfVector[0] == mrw::statechart::UpdateStatechart::State::main_region__final_);
+			return false;
 		}
 
 		bool UpdateStatechart::check() const
@@ -187,9 +206,24 @@ namespace mrw
 					return  (stateConfVector[scvi_main_region_Flash_Check] == mrw::statechart::UpdateStatechart::State::main_region_Flash_Check);
 					break;
 				}
-			case mrw::statechart::UpdateStatechart::State::main_region__final_ :
+			case mrw::statechart::UpdateStatechart::State::main_region_Wait_Bootloader :
 				{
-					return  (stateConfVector[scvi_main_region__final_] == mrw::statechart::UpdateStatechart::State::main_region__final_);
+					return  (stateConfVector[scvi_main_region_Wait_Bootloader] == mrw::statechart::UpdateStatechart::State::main_region_Wait_Bootloader);
+					break;
+				}
+			case mrw::statechart::UpdateStatechart::State::main_region_Failed :
+				{
+					return  (stateConfVector[scvi_main_region_Failed] == mrw::statechart::UpdateStatechart::State::main_region_Failed);
+					break;
+				}
+			case mrw::statechart::UpdateStatechart::State::main_region_Successful :
+				{
+					return  (stateConfVector[scvi_main_region_Successful] == mrw::statechart::UpdateStatechart::State::main_region_Successful);
+					break;
+				}
+			case mrw::statechart::UpdateStatechart::State::main_region_Booted :
+				{
+					return  (stateConfVector[scvi_main_region_Booted] == mrw::statechart::UpdateStatechart::State::main_region_Booted);
 					break;
 				}
 			default:
@@ -261,6 +295,16 @@ namespace mrw
 			this->count = count_;
 		}
 
+		sc::integer UpdateStatechart::getError() const
+		{
+			return error;
+		}
+
+		void UpdateStatechart::setError(sc::integer error_)
+		{
+			this->error = error_;
+		}
+
 		sc::integer UpdateStatechart::getRetry()
 		{
 			return retry;
@@ -284,7 +328,8 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Reset()
 		{
 			/* Entry action for state 'Reset'. */
-			timerService->setTimer(this, 1, delay_reset, false);
+			timerService->setTimer(this, 1, delay_boot, false);
+			ifaceOperationCallback->init();
 			ifaceOperationCallback->reset();
 		}
 
@@ -293,6 +338,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Flash Request'. */
 			timerService->setTimer(this, 2, delay_flash_request, false);
+			ifaceOperationCallback->init();
 			ifaceOperationCallback->flashRequest();
 		}
 
@@ -317,7 +363,38 @@ namespace mrw
 		{
 			/* Entry action for state 'Flash Check'. */
 			timerService->setTimer(this, 5, delay_boot, false);
+			ifaceOperationCallback->init();
 			ifaceOperationCallback->flashCheck();
+		}
+
+		/* Entry action for state 'Wait Bootloader'. */
+		void UpdateStatechart::enact_main_region_Wait_Bootloader()
+		{
+			/* Entry action for state 'Wait Bootloader'. */
+			timerService->setTimer(this, 6, delay_reset, false);
+			count = 0;
+		}
+
+		/* Entry action for state 'Failed'. */
+		void UpdateStatechart::enact_main_region_Failed()
+		{
+			/* Entry action for state 'Failed'. */
+			ifaceOperationCallback->fail(error);
+		}
+
+		/* Entry action for state 'Successful'. */
+		void UpdateStatechart::enact_main_region_Successful()
+		{
+			/* Entry action for state 'Successful'. */
+			timerService->setTimer(this, 7, delay_boot, false);
+			ifaceOperationCallback->init();
+		}
+
+		/* Entry action for state 'Booted'. */
+		void UpdateStatechart::enact_main_region_Booted()
+		{
+			/* Entry action for state 'Booted'. */
+			ifaceOperationCallback->quit();
 		}
 
 		/* Exit action for state 'Ping'. */
@@ -360,6 +437,20 @@ namespace mrw
 		{
 			/* Exit action for state 'Flash Check'. */
 			timerService->unsetTimer(this, 5);
+		}
+
+		/* Exit action for state 'Wait Bootloader'. */
+		void UpdateStatechart::exact_main_region_Wait_Bootloader()
+		{
+			/* Exit action for state 'Wait Bootloader'. */
+			timerService->unsetTimer(this, 6);
+		}
+
+		/* Exit action for state 'Successful'. */
+		void UpdateStatechart::exact_main_region_Successful()
+		{
+			/* Exit action for state 'Successful'. */
+			timerService->unsetTimer(this, 7);
 		}
 
 		/* 'default' enter sequence for state Ping */
@@ -410,11 +501,36 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::main_region_Flash_Check;
 		}
 
-		/* Default enter sequence for final state */
-		void UpdateStatechart::enseq_main_region__final__default()
+		/* 'default' enter sequence for state Wait Bootloader */
+		void UpdateStatechart::enseq_main_region_Wait_Bootloader_default()
 		{
-			/* Default enter sequence for final state */
-			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::main_region__final_;
+			/* 'default' enter sequence for state Wait Bootloader */
+			enact_main_region_Wait_Bootloader();
+			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::main_region_Wait_Bootloader;
+		}
+
+		/* 'default' enter sequence for state Failed */
+		void UpdateStatechart::enseq_main_region_Failed_default()
+		{
+			/* 'default' enter sequence for state Failed */
+			enact_main_region_Failed();
+			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::main_region_Failed;
+		}
+
+		/* 'default' enter sequence for state Successful */
+		void UpdateStatechart::enseq_main_region_Successful_default()
+		{
+			/* 'default' enter sequence for state Successful */
+			enact_main_region_Successful();
+			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::main_region_Successful;
+		}
+
+		/* 'default' enter sequence for state Booted */
+		void UpdateStatechart::enseq_main_region_Booted_default()
+		{
+			/* 'default' enter sequence for state Booted */
+			enact_main_region_Booted();
+			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::main_region_Booted;
 		}
 
 		/* 'default' enter sequence for region main region */
@@ -472,10 +588,33 @@ namespace mrw
 			exact_main_region_Flash_Check();
 		}
 
-		/* Default exit sequence for final state. */
-		void UpdateStatechart::exseq_main_region__final_()
+		/* Default exit sequence for state Wait Bootloader */
+		void UpdateStatechart::exseq_main_region_Wait_Bootloader()
 		{
-			/* Default exit sequence for final state. */
+			/* Default exit sequence for state Wait Bootloader */
+			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::NO_STATE;
+			exact_main_region_Wait_Bootloader();
+		}
+
+		/* Default exit sequence for state Failed */
+		void UpdateStatechart::exseq_main_region_Failed()
+		{
+			/* Default exit sequence for state Failed */
+			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::NO_STATE;
+		}
+
+		/* Default exit sequence for state Successful */
+		void UpdateStatechart::exseq_main_region_Successful()
+		{
+			/* Default exit sequence for state Successful */
+			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::NO_STATE;
+			exact_main_region_Successful();
+		}
+
+		/* Default exit sequence for state Booted */
+		void UpdateStatechart::exseq_main_region_Booted()
+		{
+			/* Default exit sequence for state Booted */
 			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::NO_STATE;
 		}
 
@@ -516,9 +655,24 @@ namespace mrw
 					exseq_main_region_Flash_Check();
 					break;
 				}
-			case mrw::statechart::UpdateStatechart::State::main_region__final_ :
+			case mrw::statechart::UpdateStatechart::State::main_region_Wait_Bootloader :
 				{
-					exseq_main_region__final_();
+					exseq_main_region_Wait_Bootloader();
+					break;
+				}
+			case mrw::statechart::UpdateStatechart::State::main_region_Failed :
+				{
+					exseq_main_region_Failed();
+					break;
+				}
+			case mrw::statechart::UpdateStatechart::State::main_region_Successful :
+				{
+					exseq_main_region_Successful();
+					break;
+				}
+			case mrw::statechart::UpdateStatechart::State::main_region_Booted :
+				{
+					exseq_main_region_Booted();
 					break;
 				}
 			default:
@@ -556,6 +710,21 @@ namespace mrw
 			}
 		}
 
+		/* The reactions of state null. */
+		void UpdateStatechart::react_main_region__choice_2()
+		{
+			/* The reactions of state null. */
+			if (ifaceOperationCallback->hasController())
+			{
+				enseq_main_region_Reset_default();
+			}
+			else
+			{
+				error = 1;
+				enseq_main_region_Failed_default();
+			}
+		}
+
 		/* Default react sequence for initial entry  */
 		void UpdateStatechart::react_main_region__entry_Default()
 		{
@@ -579,8 +748,7 @@ namespace mrw
 				{
 					exseq_main_region_Ping();
 					timeEvents[0] = false;
-					enseq_main_region_Reset_default();
-					react(0);
+					react_main_region__choice_2();
 					transitioned_after = 0;
 				}
 			}
@@ -601,11 +769,21 @@ namespace mrw
 				if (timeEvents[1])
 				{
 					exseq_main_region_Reset();
-					count = 0;
+					error = 2;
 					timeEvents[1] = false;
-					enseq_main_region_Flash_Request_default();
+					enseq_main_region_Failed_default();
 					react(0);
 					transitioned_after = 0;
+				}
+				else
+				{
+					if (complete_raised)
+					{
+						exseq_main_region_Reset();
+						enseq_main_region_Wait_Bootloader_default();
+						react(0);
+						transitioned_after = 0;
+					}
 				}
 			}
 			/* If no transition was taken then execute local reactions */
@@ -628,6 +806,15 @@ namespace mrw
 					timeEvents[2] = false;
 					react_main_region__choice_0();
 					transitioned_after = 0;
+				}
+				else
+				{
+					if (complete_raised)
+					{
+						exseq_main_region_Flash_Request();
+						react_main_region__choice_1();
+						transitioned_after = 0;
+					}
 				}
 			}
 			/* If no transition was taken then execute local reactions */
@@ -689,12 +876,57 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (timeEvents[5])
+				if (complete_raised)
 				{
 					exseq_main_region_Flash_Check();
-					ifaceOperationCallback->quit();
-					timeEvents[5] = false;
-					enseq_main_region__final__default();
+					enseq_main_region_Successful_default();
+					react(0);
+					transitioned_after = 0;
+				}
+				else
+				{
+					if (failed_raised)
+					{
+						exseq_main_region_Flash_Check();
+						error = 3;
+						enseq_main_region_Failed_default();
+						react(0);
+						transitioned_after = 0;
+					}
+					else
+					{
+						if (timeEvents[5])
+						{
+							exseq_main_region_Flash_Check();
+							error = 4;
+							timeEvents[5] = false;
+							enseq_main_region_Failed_default();
+							react(0);
+							transitioned_after = 0;
+						}
+					}
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer UpdateStatechart::main_region_Wait_Bootloader_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Wait Bootloader. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (timeEvents[6])
+				{
+					exseq_main_region_Wait_Bootloader();
+					timeEvents[6] = false;
+					enseq_main_region_Flash_Request_default();
+					react(0);
 					transitioned_after = 0;
 				}
 			}
@@ -706,9 +938,58 @@ namespace mrw
 			return transitioned_after;
 		}
 
-		sc::integer UpdateStatechart::main_region__final__react(const sc::integer transitioned_before)
+		sc::integer UpdateStatechart::main_region_Failed_react(const sc::integer transitioned_before)
 		{
-			/* The reactions of state null. */
+			/* The reactions of state Failed. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer UpdateStatechart::main_region_Successful_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Successful. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (complete_raised)
+				{
+					exseq_main_region_Successful();
+					enseq_main_region_Booted_default();
+					react(0);
+					transitioned_after = 0;
+				}
+				else
+				{
+					if (timeEvents[7])
+					{
+						exseq_main_region_Successful();
+						error = 5;
+						timeEvents[7] = false;
+						enseq_main_region_Failed_default();
+						react(0);
+						transitioned_after = 0;
+					}
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer UpdateStatechart::main_region_Booted_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Booted. */
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
@@ -724,12 +1005,15 @@ namespace mrw
 		void UpdateStatechart::clearInEvents()
 		{
 			complete_raised = false;
+			failed_raised = false;
 			timeEvents[0] = false;
 			timeEvents[1] = false;
 			timeEvents[2] = false;
 			timeEvents[3] = false;
 			timeEvents[4] = false;
 			timeEvents[5] = false;
+			timeEvents[6] = false;
+			timeEvents[7] = false;
 		}
 
 		void UpdateStatechart::microStep()
@@ -766,9 +1050,24 @@ namespace mrw
 					main_region_Flash_Check_react(-1);
 					break;
 				}
-			case mrw::statechart::UpdateStatechart::State::main_region__final_ :
+			case mrw::statechart::UpdateStatechart::State::main_region_Wait_Bootloader :
 				{
-					main_region__final__react(-1);
+					main_region_Wait_Bootloader_react(-1);
+					break;
+				}
+			case mrw::statechart::UpdateStatechart::State::main_region_Failed :
+				{
+					main_region_Failed_react(-1);
+					break;
+				}
+			case mrw::statechart::UpdateStatechart::State::main_region_Successful :
+				{
+					main_region_Successful_react(-1);
+					break;
+				}
+			case mrw::statechart::UpdateStatechart::State::main_region_Booted :
+				{
+					main_region_Booted_react(-1);
 					break;
 				}
 			default:
@@ -792,7 +1091,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((complete_raised) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4])) || (timeEvents[5]));
+			while ((((((((((complete_raised) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4])) || (timeEvents[5])) || (timeEvents[6])) || (timeEvents[7]));
 			isExecuting = false;
 		}
 

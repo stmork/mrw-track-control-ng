@@ -38,7 +38,7 @@ UpdateService::~UpdateService()
 
 void UpdateService::read(const QString & filename)
 {
-	QFile  file(filename);
+	QFile file(filename);
 
 	if (file.open(QIODevice::ReadOnly))
 	{
@@ -47,8 +47,8 @@ void UpdateService::read(const QString & filename)
 
 		while (!in.atEnd() && loop)
 		{
-			const std::string & line = in.readLine().toStdString();
-			const HexLine       hex_line(line);
+			const QString & input = in.readLine();
+			const HexLine   hex_line(input);
 
 			loop = hex_line;
 			if (loop)
@@ -64,12 +64,73 @@ void UpdateService::read(const QString & filename)
 			}
 		}
 		file.close();
-		rest = buffer.size();
 	}
 	else
 	{
 		throw std::invalid_argument("File not found: " + filename.toStdString());
 	}
+}
+
+void UpdateService::process(const MrwMessage & message)
+{
+	MrwBusService::process(message);
+
+	if (message.isResponse())
+	{
+		switch (message.command() & CMD_MASK)
+		{
+		case PING:
+			controller_ids.insert(message.eid());
+			break;
+
+		case RESET:
+			check(message, MSG_RESET_PENDING);
+			break;
+
+		case FLASH_REQ:
+			check(message);
+			break;
+
+		case FLASH_CHECK:
+			if (message.response() == MSG_CHECKSUM_ERROR)
+			{
+				statechart.failed();
+			}
+			else
+			{
+				check(message);
+			}
+			break;
+
+		case GETVER:
+			check(message);
+			break;
+		}
+	}
+}
+
+void UpdateService::init()
+{
+	request_ids.clear();
+	std::copy(
+		controller_ids.begin(), controller_ids.end(),
+		std::inserter(request_ids, request_ids.begin()));
+}
+
+bool UpdateService::check(const MrwMessage & message, const Response response)
+{
+	if (message.response() == response)
+	{
+		const ControllerId id = message.eid();
+
+		request_ids.erase(id);
+		if (request_ids.empty())
+		{
+			statechart.complete();
+			return true;
+		}
+	}
+	return false;
 }
 
 void UpdateService::ping()
@@ -100,7 +161,14 @@ void UpdateService::flashRequest(const uint8_t hid)
 
 void UpdateService::flashRequest()
 {
+	// Init values.
+	rest     = buffer.size();
+	address  = 0;
+	checksum = 0;
+
+	// Request flashing
 	flashRequest(DEFAULT_HARDWARE);
+
 }
 
 void UpdateService::flashData(const size_t bytes)
@@ -137,6 +205,47 @@ void UpdateService::flashCheck()
 void UpdateService::quit()
 {
 	QCoreApplication::quit();
+}
+
+void UpdateService::fail(sc::integer error_code)
+{
+	switch (error_code)
+	{
+	case 0:
+		qInfo("No error occured but reached fail state?");
+		break;
+
+	case 1:
+		qCritical("Timeout calling PING!");
+		break;
+
+	case 2:
+		qCritical("Timeout calling RESET!");
+		break;
+
+	case 3:
+		qCritical("Checksum error after flash!");
+		break;
+
+	case 4:
+		qCritical("Timeout after checksum check!");
+		break;
+
+	case 5:
+		qCritical("Timeout while booting!");
+		break;
+
+	default:
+		qCritical("Unknown error occured!");
+		break;
+	}
+
+	QCoreApplication::exit(error_code);
+}
+
+bool UpdateService::hasController()
+{
+	return controller_ids.size() > 0;
 }
 
 bool UpdateService::hasPages()

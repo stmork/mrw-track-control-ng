@@ -10,6 +10,7 @@
 
 #include <cstdint>
 #include <vector>
+#include <unordered_set>
 
 #include <can/mrwbusservice.h>
 #include <statecharts/UpdateStatechart.h>
@@ -29,13 +30,14 @@ class UpdateService :
 	static const uint8_t   DEFAULT_HARDWARE =    1;
 	static const size_t    SPM_PAGESIZE     =  128;
 
-	mrw::statechart::UpdateStatechart statechart;
+	mrw::statechart::UpdateStatechart          statechart;
+	std::unordered_set<mrw::can::ControllerId> controller_ids;
+	std::unordered_set<mrw::can::ControllerId> request_ids;
+	std::vector<uint8_t>                       buffer;
 
 	size_t    rest     = 0;
 	unsigned  address  = 0;
 	unsigned  checksum = 0;
-
-	std::vector<uint8_t> buffer;
 
 public:
 	explicit UpdateService(
@@ -44,8 +46,16 @@ public:
 		QObject    *    parent    = nullptr);
 	virtual ~UpdateService();
 
+protected:
+	virtual void process(const mrw::can::MrwMessage & message) override;
+
 private:
 	void read(const QString & filename);
+	bool check(
+		const mrw::can::MrwMessage & message,
+		const mrw::can::Response     response = mrw::can::MSG_OK);
+
+	void init() override;
 	void ping() override;
 	void reset() override;
 	void flashRequest(const uint8_t hid);
@@ -56,7 +66,9 @@ private:
 	void flashCompletePage() override;
 	void flashRestPage() override;
 	void quit() override;
+	void fail(sc::integer error_code) override;
 
+	bool hasController() override;
 	bool hasPages() override;
 };
 

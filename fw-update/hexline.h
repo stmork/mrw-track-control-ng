@@ -23,7 +23,7 @@ class HexLine
 	std::vector<uint8_t> bytes;
 
 public:
-	explicit HexLine(const std::string & line);
+	explicit HexLine(const QString & input);
 
 	void append(std::vector<uint8_t> & buffer) const;
 

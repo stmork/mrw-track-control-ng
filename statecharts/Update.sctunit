@@ -19,28 +19,90 @@ testclass Update for statechart mrw.^statechart.UpdateStatechart
 	{
 		// Given
 		doPing()
+		mock hasController returns (true)
 
 		// When
 		proceed timeout ms
 
 		// Then
 		assert active (mrw.^statechart.UpdateStatechart.main_region.Reset)
+		assert called init
 		assert called reset
+	}
+
+	@Test
+	operation failPing()
+	{
+		// Given
+		doPing()
+		mock hasController returns (false)
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert error == 1
+		assert called fail
+	}
+
+	@Test
+	operation doWait()
+	{
+		// Given
+		doReset()
+
+		// When
+		raise complete
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Wait_Bootloader)
+		assert count == 0
+	}
+
+	@Test
+	operation failWait()
+	{
+		// Given
+		doReset()
+
+		// When
+		proceed delay_boot ms
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert error == 2
+		assert called fail
 	}
 
 	@Test
 	operation firstFlashRequest()
 	{
 		// Given
-		doReset
+		doWait
 
 		// When
 		proceed delay_reset ms
 
 		// Then
 		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Request)
+		assert called init
 		assert called flashRequest
 		assert count == 0
+	}
+
+	@Test
+	operation flashRequested()
+	{
+		// Given
+		firstFlashRequest
+		mock hasPages returns (true)
+
+		// When
+		raise complete
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Complete_Page)
 	}
 
 	@Test
@@ -142,11 +204,41 @@ testclass Update for statechart mrw.^statechart.UpdateStatechart
 
 		// Then
 		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Check)
+		assert called init
 		assert called flashCheck
 	}
 
 	@Test
-	operation doQuit()
+	operation okFlashCheck()
+	{
+		// Given
+		doFlashCheck
+
+		// When
+		raise complete
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Successful)
+		assert error == 0
+	}
+
+	@Test
+	operation failFlashCheck()
+	{
+		// Given
+		doFlashCheck
+
+		// When
+		raise failed
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert error == 3
+		assert called fail
+	}
+
+	@Test
+	operation timeoutFlashCheck()
 	{
 		// Given
 		doFlashCheck
@@ -155,7 +247,37 @@ testclass Update for statechart mrw.^statechart.UpdateStatechart
 		proceed delay_boot ms
 
 		// Then
-		assert active (mrw.^statechart.UpdateStatechart.main_region._final_)
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert error == 4
+		assert called fail
+	}
+
+	@Test
+	operation booted()
+	{
+		// Given
+		okFlashCheck()
+
+		// When
+		raise complete
+
+		// Then
+		assert active(mrw.^statechart.UpdateStatechart.main_region.Booted)
 		assert called quit
+	}
+
+	@Test
+	operation notBooted()
+	{
+		// Given
+		okFlashCheck()
+
+		// When
+		proceed delay_boot ms
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert error == 5
+		assert called fail
 	}
 }
