@@ -815,6 +815,8 @@ namespace
 
 		EXPECT_TRUE(statechart->isActive());
 
+		EXPECT_TRUE(!statechart->isFinal());
+
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Wait_for_Start));
 
 

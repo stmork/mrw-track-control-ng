@@ -9,7 +9,8 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 	operation doPing()
 	{
 		enter
-		assert is_active
+		assert  is_active
+		assert !is_final
 		assert active (mrw.^statechart.UpdateStatechart.main_region.Ping)
 		assert called ping
 

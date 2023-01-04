@@ -29,7 +29,8 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	operation waitForStart()
 	{
 		enter
-		assert is_active
+		assert  is_active
+		assert !is_final
 		assert active (mrw.^statechart.SwitchStatechart.main_region.Wait_for_Start)
 
 		mock inc

@@ -480,11 +480,6 @@ namespace mrw
 					return  (stateConfVector[scvi_main_region_Operating_Processing_Pending] >= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending && stateConfVector[scvi_main_region_Operating_Processing_Pending] <= mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Shunt);
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Shunting :
-				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Pending_Pending_Go_Shunting] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Shunting);
-					break;
-				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Main :
 				{
 					return  (stateConfVector[scvi_main_region_Operating_Processing_Pending_Pending_Go_Main] == mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Main);
@@ -738,15 +733,6 @@ namespace mrw
 			timerService->setTimer(this, 4, timeout, false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
-		}
-
-		/* Entry action for state 'Go Shunting'. */
-		void SignalControllerStatechart::enact_main_region_Operating_Processing_Pending_Pending_Go_Shunting()
-		{
-			/* Entry action for state 'Go Shunting'. */
-			turnShunt_value = symbol;
-			turnShunt_observable.next(turnShunt_value);
-			turnShunt_raised = true;
 		}
 
 		/* Entry action for state 'Go Main'. */
@@ -1020,16 +1006,6 @@ namespace mrw
 			stateConfVectorChanged = true;
 		}
 
-		/* 'default' enter sequence for state Go Shunting */
-		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Pending_Pending_Go_Shunting_default()
-		{
-			/* 'default' enter sequence for state Go Shunting */
-			enact_main_region_Operating_Processing_Pending_Pending_Go_Shunting();
-			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Shunting;
-			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
-		}
-
 		/* 'default' enter sequence for state Go Main */
 		void SignalControllerStatechart::enseq_main_region_Operating_Processing_Pending_Pending_Go_Main_default()
 		{
@@ -1298,14 +1274,6 @@ namespace mrw
 			exact_main_region_Operating_Processing_Pending();
 		}
 
-		/* Default exit sequence for state Go Shunting */
-		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Pending_Pending_Go_Shunting()
-		{
-			/* Default exit sequence for state Go Shunting */
-			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::NO_STATE;
-			stateConfVectorPosition = 0;
-		}
-
 		/* Default exit sequence for state Go Main */
 		void SignalControllerStatechart::exseq_main_region_Operating_Processing_Pending_Pending_Go_Main()
 		{
@@ -1422,12 +1390,6 @@ namespace mrw
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Idle :
 				{
 					exseq_main_region_Operating_Processing_Tour_State_Processing_Idle();
-					break;
-				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Shunting :
-				{
-					exseq_main_region_Operating_Processing_Pending_Pending_Go_Shunting();
-					exact_main_region_Operating_Processing_Pending();
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Main :
@@ -1691,12 +1653,6 @@ namespace mrw
 					exseq_main_region_Operating_Processing_Tour_State_Processing_Idle();
 					break;
 				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Shunting :
-				{
-					exseq_main_region_Operating_Processing_Pending_Pending_Go_Shunting();
-					exact_main_region_Operating_Processing_Pending();
-					break;
-				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Main :
 				{
 					exseq_main_region_Operating_Processing_Pending_Pending_Go_Main();
@@ -1878,11 +1834,6 @@ namespace mrw
 			/* Handle exit of all possible states (of mrw.statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending.Pending) at position 0... */
 			switch (stateConfVector[ 0 ])
 			{
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Shunting :
-				{
-					exseq_main_region_Operating_Processing_Pending_Pending_Go_Shunting();
-					break;
-				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Main :
 				{
 					exseq_main_region_Operating_Processing_Pending_Pending_Go_Main();
@@ -1935,32 +1886,33 @@ namespace mrw
 		}
 
 		/* The reactions of state null. */
-		void SignalControllerStatechart::react_main_region_Operating_Processing__choice_0()
-		{
-			/* The reactions of state null. */
-			if (ifaceOperationCallback->isTour())
-			{
-				enact_main_region_Operating_Processing_Pending();
-				react_main_region_Operating_Processing_Pending_Pending__choice_0();
-			}
-			else
-			{
-				enact_main_region_Operating_Processing_Pending();
-				enseq_main_region_Operating_Processing_Pending_Pending_Go_Shunting_default();
-			}
-		}
-
-		/* The reactions of state null. */
 		void SignalControllerStatechart::react_main_region_Operating_Processing_Pending_Pending__choice_0()
 		{
 			/* The reactions of state null. */
-			if (ifaceOperationCallback->isMainAndShunt())
+			if ((ifaceOperationCallback->isMainAndShunt()) && (ifaceOperationCallback->isTour()))
 			{
 				enseq_main_region_Operating_Processing_Pending_Pending_Go_Main_default();
 			}
 			else
 			{
 				enseq_main_region_Operating_Processing_Pending_Pending_Go_Shunt_default();
+			}
+		}
+
+		/* The reactions of state null. */
+		void SignalControllerStatechart::react_main_region_Operating_Processing_Pending_Pending__choice_1()
+		{
+			/* The reactions of state null. */
+			if (ifaceOperationCallback->isTour())
+			{
+				enseq_main_region_Operating_Processing_Pending_Pending_Go_Main_default();
+			}
+			else
+			{
+				exseq_main_region_Operating_Processing_Pending();
+				enact_main_region_Operating_Processing_Shunting_State();
+				enseq_main_region_Operating_Processing_Shunting_State_Processing_Idle_default();
+				main_region_Operating_react(0);
 			}
 		}
 
@@ -2227,7 +2179,9 @@ namespace mrw
 				if (((enable_raised)) && (((symbol) == (SignalControllerStatechart::GO))))
 				{
 					exseq_main_region_Operating_Processing_Unlocked();
-					react_main_region_Operating_Processing__choice_0();
+					enact_main_region_Operating_Processing_Pending();
+					react_main_region_Operating_Processing_Pending_Pending__choice_0();
+					main_region_Operating_react(0);
 					transitioned_after = 0;
 				}
 			}
@@ -2584,29 +2538,6 @@ namespace mrw
 			return transitioned_after;
 		}
 
-		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Pending_Pending_Go_Shunting_react(const sc::integer transitioned_before)
-		{
-			/* The reactions of state Go Shunting. */
-			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-				if (completedShunt_raised)
-				{
-					exseq_main_region_Operating_Processing_Pending();
-					enact_main_region_Operating_Processing_Shunting_State();
-					enseq_main_region_Operating_Processing_Shunting_State_Processing_Idle_default();
-					main_region_Operating_react(0);
-					transitioned_after = 0;
-				}
-			}
-			/* If no transition was taken then execute local reactions */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				transitioned_after = main_region_Operating_Processing_Pending_react(transitioned_before);
-			}
-			return transitioned_after;
-		}
-
 		sc::integer SignalControllerStatechart::main_region_Operating_Processing_Pending_Pending_Go_Main_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Go Main. */
@@ -2661,8 +2592,7 @@ namespace mrw
 				if (completedShunt_raised)
 				{
 					exseq_main_region_Operating_Processing_Pending_Pending_Go_Shunt();
-					enseq_main_region_Operating_Processing_Pending_Pending_Go_Main_default();
-					main_region_Operating_Processing_Pending_react(0);
+					react_main_region_Operating_Processing_Pending_Pending__choice_1();
 					transitioned_after = 0;
 				}
 			}
@@ -2797,11 +2727,6 @@ namespace mrw
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Idle :
 				{
 					transitioned = main_region_Operating_Processing_Tour_State_Processing_Idle_react(transitioned);
-					break;
-				}
-			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Shunting :
-				{
-					transitioned = main_region_Operating_Processing_Pending_Pending_Go_Shunting_react(transitioned);
 					break;
 				}
 			case mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Main :

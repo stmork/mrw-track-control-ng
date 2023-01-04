@@ -18,7 +18,8 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 	operation start()
 	{
 		enter
-		assert is_active
+		assert  is_active
+		assert !is_final
 		assert active (mrw.^statechart.RouteStatechart.main_region.Start)
 		
 		mock resetTransaction

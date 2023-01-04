@@ -50,7 +50,7 @@ reader.depends         = test
 sim.depends            = test
 tracker.depends        = test statecharts
 study.depends          = test ctrl ui
-fw-update.depends      = test
+fw-update.depends      = test statecharts
 track-control.depends  = study statecharts
 
 QMAKE_CLEAN           += qtest*.xml

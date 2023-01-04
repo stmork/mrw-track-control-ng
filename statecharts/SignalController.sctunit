@@ -311,7 +311,7 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 
 		// Then
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending)
-		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending.Pending.Go_Shunting)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending.Pending.Go_Shunt)
 		assert turnShunt
 		assert valueof(turnShunt) == GO
 		assert called inc

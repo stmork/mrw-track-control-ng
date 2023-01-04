@@ -174,6 +174,8 @@ namespace
 
 		EXPECT_TRUE(statechart->isActive());
 
+		EXPECT_TRUE(!statechart->isFinal());
+
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Prepare_Bus));
 
 		EXPECT_TRUE(canConnectBusMock->calledAtLeastOnce());

@@ -18,7 +18,8 @@ testclass SignalTest for statechart mrw.^statechart.SignalStatechart
 	operation idle()
 	{
 		enter
-		assert is_active
+		assert  is_active
+		assert !is_final
 		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
 	}
 

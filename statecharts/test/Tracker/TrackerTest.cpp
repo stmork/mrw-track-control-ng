@@ -388,6 +388,8 @@ namespace
 
 		EXPECT_TRUE(statechart->isActive());
 
+		EXPECT_TRUE(!statechart->isFinal());
+
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::TrackerStatechart::State::main_region_Idle));
 
 		EXPECT_TRUE(clearMock->calledAtLeastOnce());

@@ -34,7 +34,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	operation waitForStart()
 	{
 		enter
-		assert is_active
+		assert  is_active
+		assert !is_final
 		assert active (mrw.^statechart.SectionStatechart.main_region.Wait_for_Start)
 
 		mock inc

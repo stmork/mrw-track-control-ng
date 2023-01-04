@@ -4,7 +4,8 @@ testclass TrackerTest for statechart mrw.^statechart.TrackerStatechart
 	operation idle()
 	{
 		enter
-		assert is_active
+		assert  is_active
+		assert !is_final
 		assert active (mrw.^statechart.TrackerStatechart.main_region.Idle)
 		assert called clear
 

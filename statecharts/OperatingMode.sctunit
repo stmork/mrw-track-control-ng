@@ -9,7 +9,8 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 	operation wait()
 	{
 		enter
-		assert is_active
+		assert  is_active
+		assert !is_final
 		assert active (mrw.^statechart.OperatingMode.main_region.Prepare_Bus)
 		assert called can.connectBus
 	}
