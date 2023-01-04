@@ -127,6 +127,8 @@ LCOV_DIR = $$(PWD)/lcov-out
 
 lcov.commands += lcov -c --no-external -d $$(PWD) -o coverage.info\
 	--exclude \"$$(PWD)/*/moc_*\"\
+	--exclude \"$$(PWD)/statecharts/test/common/*\"\
+	--exclude \"$$(PWD)/statecharts/test/*/*Test.cpp\"\
 	--exclude \"$$(PWD)/test/*\";
 lcov.commands += genhtml coverage.info -s --num-spaces 4 --legend -t \"MRW-NG Test Coverage\" --output-directory $$LCOV_DIR --rc genhtml_med_limit=50
 
