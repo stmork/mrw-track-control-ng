@@ -108,6 +108,17 @@ QMAKE_CLEAN         += valgrind.xml
 
 #####################################################################
 #
+# Extra target sct-unit
+#
+#####################################################################
+
+sct-unit.commands = statecharts/test/sct-unit.sh
+
+QMAKE_EXTRA_TARGETS += sct-unit
+QMAKE_CLEAN         += statecharts/test/gtest-*.xml
+
+#####################################################################
+#
 # Extra target lcov
 #
 #####################################################################

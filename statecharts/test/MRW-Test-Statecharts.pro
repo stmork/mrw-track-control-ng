@@ -22,3 +22,5 @@ Signal.file           = Signal/MRW-Test-Signal.pro
 SignalController.file = SignalController/MRW-Test-SignalController.pro
 Tracker.file          = Tracker/MRW-Test-Tracker.pro
 Update.file           = Update/MRW-Test-Update.pro
+
+QMAKE_CLEAN          += gtest-*.xml
