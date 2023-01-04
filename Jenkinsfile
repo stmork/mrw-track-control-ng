@@ -57,7 +57,7 @@ pipeline
 				sh 'make valgrind sct-unit'
 				xunit checksName: '', thresholds: [failed(unstableThreshold: '0')], tools: [
 					QtTest(excludesPattern: '', pattern: 'qtest-*.xml', stopProcessingIfError: false),
-					GoogleTest(excludesPattern: '', pattern: 'statechart/test/gtest-*.xml', stopProcessingIfError: false),
+					GoogleTest(excludesPattern: '', pattern: 'statecharts/test/gtest-*.xml', stopProcessingIfError: false),
 					Valgrind(excludesPattern: '', pattern: 'valgrind*.xml', stopProcessingIfError: false)]
 			}
 		}
