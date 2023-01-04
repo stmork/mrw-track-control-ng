@@ -12,394 +12,397 @@
 
 #define SC_UNUSED(P) (void)P
 
-namespace
+namespace mrw
 {
-
-	void failState();
-	void idle();
-	void turning();
-	void pending();
-	void failSending();
-	mrw::statechart::SignalStatechart * statechart;
-
-
-	class PrepareMock
+	namespace test
 	{
-	public:
-		int callCount;
 
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
+		void failState();
+		void idle();
+		void turning();
+		void pending();
+		void failSending();
+		mrw::statechart::SignalStatechart * statechart;
 
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
 
-		void prepare()
+		class PrepareMock
 		{
-			++callCount;
-		}
-		void reset()
-		{
-			callCount = 0;
-		}
-	};
-	static PrepareMock * prepareMock;
+		public:
+			int callCount;
 
-	class SendMock
-	{
-	public:
-		int callCount;
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
 
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
 
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
+			void prepare()
+			{
+				++callCount;
+			}
+			void reset()
+			{
+				callCount = 0;
+			}
+		};
+		static PrepareMock * prepareMock;
 
-		void send()
+		class SendMock
 		{
-			++callCount;
-		}
-		void reset()
-		{
-			callCount = 0;
-		}
-	};
-	static SendMock * sendMock;
+		public:
+			int callCount;
 
-	class HasSignalMock
-	{
-		typedef bool (HasSignalMock::*functiontype)();
-	public:
-		bool (HasSignalMock::*hasSignalBehaviorDefault)();
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
 
-		bool hasSignal1()
-		{
-			return (false);
-		}
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
 
-		bool hasSignal2()
-		{
-			return (true);
-		}
+			void send()
+			{
+				++callCount;
+			}
+			void reset()
+			{
+				callCount = 0;
+			}
+		};
+		static SendMock * sendMock;
 
-		bool hasSignalDefault()
+		class HasSignalMock
 		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
+			typedef bool (HasSignalMock::*functiontype)();
+		public:
+			bool (HasSignalMock::*hasSignalBehaviorDefault)();
 
-		functiontype getBehavior()
-		{
-			return hasSignalBehaviorDefault;
-		}
+			bool hasSignal1()
+			{
+				return (false);
+			}
 
-		void setDefaultBehavior(bool (HasSignalMock::*defaultBehavior)())
-		{
-			hasSignalBehaviorDefault = defaultBehavior;
-		}
+			bool hasSignal2()
+			{
+				return (true);
+			}
 
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&HasSignalMock::hasSignalDefault);
-		}
+			bool hasSignalDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
 
-		void reset()
-		{
-			initializeBehavior();
-		}
-	};
-	static HasSignalMock * hasSignalMock;
+			functiontype getBehavior()
+			{
+				return hasSignalBehaviorDefault;
+			}
 
-	class MockDefault : public mrw::statechart::SignalStatechart::OperationCallback
-	{
-	public:
-		bool hasSignal()
+			void setDefaultBehavior(bool (HasSignalMock::*defaultBehavior)())
+			{
+				hasSignalBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&HasSignalMock::hasSignalDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		static HasSignalMock * hasSignalMock;
+
+		class MockDefault : public mrw::statechart::SignalStatechart::OperationCallback
 		{
-			return (hasSignalMock->*(hasSignalMock->getBehavior()))();
-		}
-		void prepare()
-		{
-			prepareMock->prepare();
-		}
-		void send()
-		{
-			sendMock->send();
-		}
-		void dump()
-		{
-		}
-	};
+		public:
+			bool hasSignal()
+			{
+				return (hasSignalMock->*(hasSignalMock->getBehavior()))();
+			}
+			void prepare()
+			{
+				prepareMock->prepare();
+			}
+			void send()
+			{
+				sendMock->send();
+			}
+			void dump()
+			{
+			}
+		};
 
 //! The timers are managed by a timer service. */
-	static TimedSctUnitRunner * runner;
+		static TimedSctUnitRunner * runner;
 
-	class SignalTest : public ::testing::Test
-	{
-	protected:
-		virtual void SetUp()
+		class SignalTest : public ::testing::Test
 		{
-			statechart = new mrw::statechart::SignalStatechart();
-			runner = new TimedSctUnitRunner(
-				statechart,
-				true,
-				200
-			);
-			statechart->setTimerService(runner);
-		}
-		virtual void TearDown()
+		protected:
+			virtual void SetUp()
+			{
+				statechart = new mrw::statechart::SignalStatechart();
+				runner = new TimedSctUnitRunner(
+					statechart,
+					true,
+					200
+				);
+				statechart->setTimerService(runner);
+			}
+			virtual void TearDown()
+			{
+				delete statechart;
+				delete runner;
+			}
+		};
+
+		void failState()
 		{
-			delete statechart;
-			delete runner;
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Fail));
+
+			EXPECT_TRUE((statechart->getSymbol()) == (statechart->getOFF()));
+
+			EXPECT_TRUE(prepareMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(sendMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(statechart->isRaisedFailed());
+
+
 		}
-	};
 
-	void failState()
-	{
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Fail));
+		void idle()
+		{
+			statechart->enter();
 
-		EXPECT_TRUE((statechart->getSymbol()) == (statechart->getOFF()));
+			EXPECT_TRUE(statechart->isActive());
 
-		EXPECT_TRUE(prepareMock->calledAtLeastOnce());
+			EXPECT_TRUE(!statechart->isFinal());
 
-		EXPECT_TRUE(sendMock->calledAtLeastOnce());
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Idle));
 
-		EXPECT_TRUE(statechart->isRaisedFailed());
 
+		}
+		TEST_F(SignalTest, idle)
+		{
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			idle();
+		}
+		TEST_F(SignalTest, turnWithoutSignal)
+		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			idle();
+
+			hasSignalMock->setDefaultBehavior(&HasSignalMock::hasSignal1);
+
+			statechart->raiseTurn(statechart->getGO());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Idle));
+
+			EXPECT_TRUE((statechart->getSymbol()) == (statechart->getSTOP()));
+
+
+			hasSignalMock->reset();
+		}
+		void turning()
+		{
+			idle();
+
+			hasSignalMock->setDefaultBehavior(&HasSignalMock::hasSignal2);
+
+			statechart->raiseTurn(statechart->getGO());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Turning));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Send));
+
+			EXPECT_TRUE((statechart->getSymbol()) == (statechart->getGO()));
+
+			EXPECT_TRUE(prepareMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(sendMock->calledAtLeastOnce());
+
+
+			hasSignalMock->reset();
+			prepareMock->reset();
+			sendMock->reset();
+		}
+		TEST_F(SignalTest, turning)
+		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			sendMock = new SendMock();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			turning();
+		}
+		void pending()
+		{
+			turning();
+
+			statechart->raiseQueued();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Turning));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Pending));
+
+
+		}
+		TEST_F(SignalTest, pending)
+		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			sendMock = new SendMock();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			pending();
+		}
+		TEST_F(SignalTest, turnCompleted)
+		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			sendMock = new SendMock();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			turning();
+
+			statechart->raiseOk();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Idle));
+
+			EXPECT_TRUE(statechart->isRaisedCompleted());
+
+
+		}
+		TEST_F(SignalTest, turnCompletedAfterPending)
+		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			sendMock = new SendMock();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			pending();
+
+			statechart->raiseOk();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Idle));
+
+			EXPECT_TRUE(statechart->isRaisedCompleted());
+
+
+		}
+		void failSending()
+		{
+			turning();
+
+			statechart->raiseFail();
+
+			failState();
+
+
+		}
+		TEST_F(SignalTest, failSending)
+		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			sendMock = new SendMock();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			failSending();
+		}
+		TEST_F(SignalTest, failPending)
+		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			sendMock = new SendMock();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			pending();
+
+			statechart->raiseFail();
+
+			failState();
+
+
+		}
+		TEST_F(SignalTest, timeoutSending)
+		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			sendMock = new SendMock();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			turning();
+
+			runner->proceed_time(statechart->getTimeout());
+
+			failState();
+
+
+		}
+		TEST_F(SignalTest, timeoutPending)
+		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			sendMock = new SendMock();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			pending();
+
+			runner->proceed_time(statechart->getTimeout());
+
+			failState();
+
+
+		}
+		TEST_F(SignalTest, clearing)
+		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			sendMock = new SendMock();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			failSending();
+
+			statechart->raiseClear();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Idle));
+
+
+		}
 
 	}
-
-	void idle()
-	{
-		statechart->enter();
-
-		EXPECT_TRUE(statechart->isActive());
-
-		EXPECT_TRUE(!statechart->isFinal());
-
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Idle));
-
-
-	}
-	TEST_F(SignalTest, idle)
-	{
-
-		MockDefault defaultMock;
-		statechart->setOperationCallback(&defaultMock);
-		idle();
-	}
-	TEST_F(SignalTest, turnWithoutSignal)
-	{
-		hasSignalMock = new HasSignalMock();
-		hasSignalMock->initializeBehavior();
-
-		MockDefault defaultMock;
-		statechart->setOperationCallback(&defaultMock);
-		idle();
-
-		hasSignalMock->setDefaultBehavior(&HasSignalMock::hasSignal1);
-
-		statechart->raiseTurn(statechart->getGO());
-
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Idle));
-
-		EXPECT_TRUE((statechart->getSymbol()) == (statechart->getSTOP()));
-
-
-		hasSignalMock->reset();
-	}
-	void turning()
-	{
-		idle();
-
-		hasSignalMock->setDefaultBehavior(&HasSignalMock::hasSignal2);
-
-		statechart->raiseTurn(statechart->getGO());
-
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Turning));
-
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Send));
-
-		EXPECT_TRUE((statechart->getSymbol()) == (statechart->getGO()));
-
-		EXPECT_TRUE(prepareMock->calledAtLeastOnce());
-
-		EXPECT_TRUE(sendMock->calledAtLeastOnce());
-
-
-		hasSignalMock->reset();
-		prepareMock->reset();
-		sendMock->reset();
-	}
-	TEST_F(SignalTest, turning)
-	{
-		hasSignalMock = new HasSignalMock();
-		hasSignalMock->initializeBehavior();
-		prepareMock = new PrepareMock();
-		sendMock = new SendMock();
-
-		MockDefault defaultMock;
-		statechart->setOperationCallback(&defaultMock);
-		turning();
-	}
-	void pending()
-	{
-		turning();
-
-		statechart->raiseQueued();
-
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Turning));
-
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Pending));
-
-
-	}
-	TEST_F(SignalTest, pending)
-	{
-		hasSignalMock = new HasSignalMock();
-		hasSignalMock->initializeBehavior();
-		prepareMock = new PrepareMock();
-		sendMock = new SendMock();
-
-		MockDefault defaultMock;
-		statechart->setOperationCallback(&defaultMock);
-		pending();
-	}
-	TEST_F(SignalTest, turnCompleted)
-	{
-		hasSignalMock = new HasSignalMock();
-		hasSignalMock->initializeBehavior();
-		prepareMock = new PrepareMock();
-		sendMock = new SendMock();
-
-		MockDefault defaultMock;
-		statechart->setOperationCallback(&defaultMock);
-		turning();
-
-		statechart->raiseOk();
-
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Idle));
-
-		EXPECT_TRUE(statechart->isRaisedCompleted());
-
-
-	}
-	TEST_F(SignalTest, turnCompletedAfterPending)
-	{
-		hasSignalMock = new HasSignalMock();
-		hasSignalMock->initializeBehavior();
-		prepareMock = new PrepareMock();
-		sendMock = new SendMock();
-
-		MockDefault defaultMock;
-		statechart->setOperationCallback(&defaultMock);
-		pending();
-
-		statechart->raiseOk();
-
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Idle));
-
-		EXPECT_TRUE(statechart->isRaisedCompleted());
-
-
-	}
-	void failSending()
-	{
-		turning();
-
-		statechart->raiseFail();
-
-		failState();
-
-
-	}
-	TEST_F(SignalTest, failSending)
-	{
-		hasSignalMock = new HasSignalMock();
-		hasSignalMock->initializeBehavior();
-		prepareMock = new PrepareMock();
-		sendMock = new SendMock();
-
-		MockDefault defaultMock;
-		statechart->setOperationCallback(&defaultMock);
-		failSending();
-	}
-	TEST_F(SignalTest, failPending)
-	{
-		hasSignalMock = new HasSignalMock();
-		hasSignalMock->initializeBehavior();
-		prepareMock = new PrepareMock();
-		sendMock = new SendMock();
-
-		MockDefault defaultMock;
-		statechart->setOperationCallback(&defaultMock);
-		pending();
-
-		statechart->raiseFail();
-
-		failState();
-
-
-	}
-	TEST_F(SignalTest, timeoutSending)
-	{
-		hasSignalMock = new HasSignalMock();
-		hasSignalMock->initializeBehavior();
-		prepareMock = new PrepareMock();
-		sendMock = new SendMock();
-
-		MockDefault defaultMock;
-		statechart->setOperationCallback(&defaultMock);
-		turning();
-
-		runner->proceed_time(statechart->getTimeout());
-
-		failState();
-
-
-	}
-	TEST_F(SignalTest, timeoutPending)
-	{
-		hasSignalMock = new HasSignalMock();
-		hasSignalMock->initializeBehavior();
-		prepareMock = new PrepareMock();
-		sendMock = new SendMock();
-
-		MockDefault defaultMock;
-		statechart->setOperationCallback(&defaultMock);
-		pending();
-
-		runner->proceed_time(statechart->getTimeout());
-
-		failState();
-
-
-	}
-	TEST_F(SignalTest, clearing)
-	{
-		hasSignalMock = new HasSignalMock();
-		hasSignalMock->initializeBehavior();
-		prepareMock = new PrepareMock();
-		sendMock = new SendMock();
-
-		MockDefault defaultMock;
-		statechart->setOperationCallback(&defaultMock);
-		failSending();
-
-		statechart->raiseClear();
-
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Idle));
-
-
-	}
-
 }
 
