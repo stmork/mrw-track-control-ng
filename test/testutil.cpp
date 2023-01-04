@@ -18,6 +18,7 @@
 #include <util/termhandler.h>
 #include <util/stringutil.h>
 #include <util/clockservice.h>
+#include <util/random.h>
 
 #include "testutil.h"
 
@@ -166,4 +167,26 @@ void TestUtil::testClockService()
 	QCOMPARE(spy_2Hz.count(),  4);
 	QCOMPARE(spy_4Hz.count(),  8);
 	QCOMPARE(spy_8Hz.count(), 16);
+}
+
+void TestUtil::testRandom()
+{
+	static const unsigned TEST_RAND_MIN  = 1;
+	static const unsigned TEST_RAND_MAX  = 6;
+	static const unsigned TEST_RAND_LOOP = 100000;
+
+	std::uniform_int_distribution<unsigned> dist(TEST_RAND_MIN, TEST_RAND_MAX);
+	double mt_sum = 0;
+	int    dice   = 0;
+
+	for (unsigned i = 0; i < TEST_RAND_LOOP; i++)
+	{
+		mt_sum += dist(Random::instance().engine());
+		dice   += Random::random(7);
+	}
+
+	const double diff = 0.5 * (TEST_RAND_MIN + TEST_RAND_MAX) - mt_sum / TEST_RAND_LOOP;
+
+	QVERIFY(std::abs(diff) <= 0.02);
+	QCOMPARE(dice / TEST_RAND_LOOP, 3);
 }

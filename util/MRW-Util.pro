@@ -13,6 +13,7 @@ SOURCES += \
 	dumphandler.cpp \
 	method.cpp \
 	properties.cpp \
+	random.cpp \
 	settings.cpp \
 	stringutil.cpp \
 	termhandler.cpp
@@ -24,6 +25,7 @@ HEADERS += \
 	dumphandler.h \
 	method.h \
 	properties.h \
+	random.h \
 	settings.h \
 	singleton.h \
 	stringutil.h \

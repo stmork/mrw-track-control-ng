@@ -9,7 +9,6 @@
 #define MAINWINDOW_H
 
 #include <functional>
-#include <random>
 
 #include <QMainWindow>
 #include <QListWidgetItem>
@@ -146,7 +145,6 @@ private:
 		const mrw::model::Rail * rail,
 		const bool               dir);
 
-	int random(const size_t size) const;
 	mrw::model::Rail * random(const std::vector<mrw::model::Rail *> & rails) const;
 	void startBeermode(const bool dir);
 	void dump(
@@ -157,9 +155,6 @@ private:
 	mrw::model::ModelRepository   &   repo;
 	mrw::model::Route        *        beer_route = nullptr;
 	mrw::statechart::OperatingMode    statechart;
-
-	mutable std::random_device        rd;
-	mutable std::mt19937              rng;
 };
 
 #endif // MAINWINDOW_H

@@ -33,6 +33,7 @@ namespace mrw::test
 		void testSingleton();
 		void testProperties();
 		void testClockService();
+		void testRandom();
 	};
 }
 

@@ -4,6 +4,7 @@
 //
 
 #include <util/method.h>
+#include <util/random.h>
 #include <statecharts/timerservice.h>
 #include <model/modelrailway.h>
 #include <ctrl/controllerregistry.h>
@@ -20,6 +21,7 @@
 #include "mrwmessagedispatcher.h"
 #include "widgetroute.h"
 
+using namespace mrw::util;
 using namespace mrw::statechart;
 using namespace mrw::can;
 using namespace mrw::model;
@@ -35,7 +37,7 @@ MainWindow::MainWindow(
 	QMainWindow(parent),
 	ui(new Ui::MainWindow),
 	repo(repository),
-	statechart(nullptr), rng(rd())
+	statechart(nullptr)
 {
 	BaseWidget::setVerbose(false);
 
@@ -405,11 +407,8 @@ void MainWindow::routeFinished()
 	delete route;
 	if (route == beer_route)
 	{
-		// Do some variant waiting stuff.
-		std::uniform_int_distribution<int> distribution(250, 750);
-
-		// Wait at least 1000 ms for track occupation simulator.
-		const int wait_time = 1000 + distribution(rng);
+		// Wait at least 1250 ms for track occupation simulator.
+		const int wait_time = 1250 + Random::random<int>(500);
 
 		beer_route = nullptr;
 
@@ -958,18 +957,11 @@ void MainWindow::changePage(const int offset)
 **                                                                      **
 *************************************************************************/
 
-int MainWindow::random(const size_t size) const
-{
-	std::uniform_int_distribution<int> distribution(0, size - 1);
-
-	return distribution(rng);
-}
-
 Rail * MainWindow::random(const std::vector<Rail *> & rails) const
 {
 	const size_t size = rails.size();
 
-	return size > 0 ? rails.at(random(size)) : nullptr;
+	return size > 0 ? rails.at(Random::random(size)) : nullptr;
 }
 
 void MainWindow::dump(const std::vector<Rail *> & rails)
