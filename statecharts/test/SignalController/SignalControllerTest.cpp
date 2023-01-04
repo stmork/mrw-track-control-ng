@@ -655,6 +655,8 @@ namespace
 
 		EXPECT_TRUE(statechart->isActive());
 
+		EXPECT_TRUE(!statechart->isFinal());
+
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Wait_for_Start));
 
 
@@ -1130,11 +1132,50 @@ namespace
 
 
 	}
+	TEST_F(SignalControllerTest, enableStop)
+	{
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		incMock = new IncMock();
+		incMock->initializeBehavior();
+		decMock = new DecMock();
+		decMock->initializeBehavior();
+		failMock = new FailMock();
+		failMock->initializeBehavior();
+		pendingMock = new PendingMock();
+		pendingMock->initializeBehavior();
+		hasMainSignalMock = new HasMainSignalMock();
+		hasMainSignalMock->initializeBehavior();
+		isLightSignalMock = new IsLightSignalMock();
+		isLightSignalMock->initializeBehavior();
+		isMainAndShuntMock = new IsMainAndShuntMock();
+		isMainAndShuntMock->initializeBehavior();
+		isTourMock = new IsTourMock();
+		isTourMock->initializeBehavior();
+		lockMock = new LockMock();
+		lockMock->initializeBehavior();
+
+		MockDefault defaultMock;
+		statechart->setOperationCallback(&defaultMock);
+		operational();
+
+		statechart->setSymbol(statechart->getSTOP());
+
+		statechart->raiseEnable();
+
+		unlockedState();
+
+
+	}
 	void pendingTour()
 	{
-		statechart->setSymbol(statechart->getGO());
-
 		operational();
+
+		statechart->setSymbol(statechart->getGO());
 
 		isTourMock->setDefaultBehavior(&IsTourMock::isTour2);
 

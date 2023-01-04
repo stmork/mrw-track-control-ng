@@ -23,7 +23,8 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 	operation waitForStart()
 	{
 		enter
-		assert is_active
+		assert  is_active
+		assert !is_final
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Wait_for_Start)
 
 		mock inc
@@ -216,11 +217,25 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 	}
 
 	@Test
+	operation enableStop()
+	{
+		// Given
+		operational()
+		symbol = STOP
+
+		// When
+		raise enable
+
+		// Then
+		unlockedState()
+	}
+
+	@Test
 	operation pendingTour()
 	{
 		// Given
-		symbol = GO
 		operational()
+		symbol = GO
 		mock isTour returns (true)
 
 		// When
