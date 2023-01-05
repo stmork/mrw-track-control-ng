@@ -817,5 +817,45 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		operational()
 		exit
 		assert !is_active
+
+		pendingShunting()
+		exit
+		assert !is_active
+
+		pendingTour()
+		exit
+		assert !is_active
+
+		pendingTourCombined()
+		exit
+		assert !is_active
+
+		tourLocked()
+		exit
+		assert !is_active
+
+		shuntingLocked()
+		exit
+		assert !is_active
+
+		extendTour()
+		exit
+		assert !is_active
+
+		extendShunting()
+		exit
+		assert !is_active
+
+		disableTour()
+		exit
+		assert !is_active
+
+		disableShunting()
+		exit
+		assert !is_active
+
+		failAfterStart()
+		exit
+		assert !is_active
 	}
 }
