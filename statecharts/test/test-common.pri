@@ -10,7 +10,6 @@ QMAKE_CXXFLAGS  += -Wshadow
 INCLUDEPATH = $$PWD/common
 
 HEADERS += \
-	../common/sc_rxcpp.h \
 	../common/sc_statemachine.h \
 	../common/sc_timer.h \
 	../common/sc_types.h
