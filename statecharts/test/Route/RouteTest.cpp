@@ -29,7 +29,7 @@ namespace mrw
 		void failTurningSwitchesIncomplete();
 		void failTurningSignalsIncomplete();
 		void failTurningSectionsIncomplete();
-		void timeoutTurningSections();
+		void emergencySections();
 		mrw::statechart::RouteStatechart * statechart;
 
 
@@ -2102,7 +2102,7 @@ namespace mrw
 			deactivateSectionsMock->reset();
 			unlockSignalsMock->reset();
 		}
-		void timeoutTurningSections()
+		void emergencySections()
 		{
 			sections();
 
@@ -2114,13 +2114,56 @@ namespace mrw
 
 			EXPECT_TRUE(unlockSignalsMock->calledAtLeastOnce());
 
-			runner->proceed_time(statechart->getEmergency());
-
-			disabled();
-
 
 			deactivateSectionsMock->reset();
 			unlockSignalsMock->reset();
+		}
+		TEST_F(RouteTest, emergencySections)
+		{
+			deactivateSectionsMock = new DeactivateSectionsMock();
+			deactivateSectionsMock->initializeBehavior();
+			unlockSignalsMock = new UnlockSignalsMock();
+			unlockSignalsMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			activateSectionsMock = new ActivateSectionsMock();
+			activateSectionsMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			extendSignalsMock = new ExtendSignalsMock();
+			extendSignalsMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			turnSignalsMock = new TurnSignalsMock();
+			turnSignalsMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			turnSwitchesMock = new TurnSwitchesMock();
+			turnSwitchesMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			turnSwitchesMock = new TurnSwitchesMock();
+			turnSwitchesMock->initializeBehavior();
+			activateSectionsMock = new ActivateSectionsMock();
+			activateSectionsMock->initializeBehavior();
+			turnSignalsMock = new TurnSignalsMock();
+			turnSignalsMock->initializeBehavior();
+			extendSignalsMock = new ExtendSignalsMock();
+			extendSignalsMock->initializeBehavior();
+			deactivateSectionsMock = new DeactivateSectionsMock();
+			deactivateSectionsMock->initializeBehavior();
+			unlockSignalsMock = new UnlockSignalsMock();
+			unlockSignalsMock->initializeBehavior();
+			unlockSwitchesMock = new UnlockSwitchesMock();
+			unlockSwitchesMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			emergencySections();
 		}
 		TEST_F(RouteTest, timeoutTurningSections)
 		{
@@ -2167,7 +2210,13 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			timeoutTurningSections();
+			emergencySections();
+
+			runner->proceed_time(statechart->getEmergency());
+
+			disabled();
+
+
 		}
 		TEST_F(RouteTest, doExit)
 		{
@@ -2250,7 +2299,7 @@ namespace mrw
 
 			EXPECT_TRUE(!statechart->isActive());
 
-			timeoutTurningSections();
+			emergencySections();
 
 			statechart->exit();
 

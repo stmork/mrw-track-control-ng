@@ -442,7 +442,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 	}
 
 	@Test
-	operation timeoutTurningSections()
+	operation emergencySections()
 	{
 		// Given
 		sections()
@@ -454,6 +454,13 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		assert active (mrw.^statechart.RouteStatechart.main_region.Emergency_Shutdown)
 		assert called deactivateSections
 		assert called unlockSignals
+	}
+	@Test
+
+	operation timeoutTurningSections()
+	{
+		// Given
+		emergencySections()
 
 		// When
 		proceed emergency ms
@@ -503,7 +510,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		exit
 		assert !is_active
 
-		timeoutTurningSections()
+		emergencySections()
 		exit
 		assert !is_active
 
