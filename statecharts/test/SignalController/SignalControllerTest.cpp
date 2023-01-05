@@ -2848,6 +2848,57 @@ namespace mrw
 			incMock->reset();
 			decMock->reset();
 		}
+		TEST_F(SignalControllerTest, doExit)
+		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
+			hasMainSignalMock = new HasMainSignalMock();
+			hasMainSignalMock->initializeBehavior();
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
+			isMainAndShuntMock = new IsMainAndShuntMock();
+			isMainAndShuntMock->initializeBehavior();
+			isTourMock = new IsTourMock();
+			isTourMock->initializeBehavior();
+			lockMock = new LockMock();
+			lockMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			statechart->enter();
+
+			EXPECT_TRUE(statechart->isActive());
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			waitForStart();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			initial();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			operational();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+
+		}
 
 	}
 }

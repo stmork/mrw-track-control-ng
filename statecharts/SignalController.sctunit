@@ -796,4 +796,26 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		assert called dec
 		failState()
 	}
+
+	@Test
+	operation doExit()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		waitForStart()
+		exit
+		assert !is_active
+
+		initial()
+		exit
+		assert !is_active
+
+		operational()
+		exit
+		assert !is_active
+	}
 }
