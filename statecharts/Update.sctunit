@@ -291,4 +291,54 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		assert error == 5
 		assert called fail
 	}
+
+	@Test
+	operation doExit()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		doPing()
+		exit
+		assert !is_active
+
+		doReset()
+		exit
+		assert !is_active
+
+		doWait()
+		exit
+		assert !is_active
+
+		firstFlashRequest()
+		exit
+		assert !is_active
+
+		flashRequested()
+		exit
+		assert !is_active
+
+		lastCompletePage()
+		exit
+		assert !is_active
+
+		doFlashCheck()
+		exit
+		assert !is_active
+
+		okFlashCheck()
+		exit
+		assert !is_active
+
+		booted()
+		exit
+		assert !is_active
+
+		failPing()
+		exit
+		assert !is_active
+	}
 }

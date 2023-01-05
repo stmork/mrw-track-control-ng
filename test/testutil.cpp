@@ -91,15 +91,16 @@ void TestUtil::testStringConcat()
 
 void TestUtil::testStringOut()
 {
-	QString    bold = String::bold("fat!");
-	QString    red  = String::red("red!");
-	TestString out("out!");
+	QString     bold = String::bold("fat!");
+	QString     red  = String::red("red!");
+	TestString  out("out!");
 
 	QVERIFY(bold.size() > 4);
 	QVERIFY(red.size() > 4);
 
 	qDebug() << out;
 	std::clog << out;
+	QCOMPARE(out.toString(), "out!");
 }
 
 void TestUtil::testMethod()

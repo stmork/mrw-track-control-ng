@@ -19,6 +19,7 @@ namespace mrw
 
 		void doPing();
 		void doReset();
+		void failPing();
 		void doWait();
 		void firstFlashRequest();
 		void flashRequested();
@@ -28,6 +29,7 @@ namespace mrw
 		void lastCompletePage();
 		void doFlashCheck();
 		void okFlashCheck();
+		void booted();
 		mrw::statechart::UpdateStatechart * statechart;
 
 
@@ -808,6 +810,24 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			doReset();
 		}
+		void failPing()
+		{
+			doPing();
+
+			hasControllerMock->setDefaultBehavior(&HasControllerMock::hasController2);
+
+			runner->proceed_time(statechart->getTimeout());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
+
+			EXPECT_TRUE((statechart->getError()) == (1));
+
+			EXPECT_TRUE(failMock->calledAtLeastOnce());
+
+
+			hasControllerMock->reset();
+			failMock->reset();
+		}
 		TEST_F(UpdateTest, failPing)
 		{
 			hasControllerMock = new HasControllerMock();
@@ -834,21 +854,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			doPing();
-
-			hasControllerMock->setDefaultBehavior(&HasControllerMock::hasController2);
-
-			runner->proceed_time(statechart->getTimeout());
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
-
-			EXPECT_TRUE((statechart->getError()) == (1));
-
-			EXPECT_TRUE(failMock->calledAtLeastOnce());
-
-
-			hasControllerMock->reset();
-			failMock->reset();
+			failPing();
 		}
 		void doWait()
 		{
@@ -1604,6 +1610,19 @@ namespace mrw
 
 			failMock->reset();
 		}
+		void booted()
+		{
+			okFlashCheck();
+
+			statechart->raiseComplete();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Booted));
+
+			EXPECT_TRUE(quitMock->calledAtLeastOnce());
+
+
+			quitMock->reset();
+		}
 		TEST_F(UpdateTest, booted)
 		{
 			quitMock = new QuitMock();
@@ -1656,16 +1675,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			okFlashCheck();
-
-			statechart->raiseComplete();
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Booted));
-
-			EXPECT_TRUE(quitMock->calledAtLeastOnce());
-
-
-			quitMock->reset();
+			booted();
 		}
 		TEST_F(UpdateTest, notBooted)
 		{
@@ -1731,6 +1741,99 @@ namespace mrw
 
 
 			failMock->reset();
+		}
+		TEST_F(UpdateTest, doExit)
+		{
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
+			initMock = new InitMock();
+			initMock->initializeBehavior();
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
+			flashCompletePageMock = new FlashCompletePageMock();
+			flashCompletePageMock->initializeBehavior();
+			flashRestPageMock = new FlashRestPageMock();
+			flashRestPageMock->initializeBehavior();
+			flashCheckMock = new FlashCheckMock();
+			flashCheckMock->initializeBehavior();
+			hasControllerMock = new HasControllerMock();
+			hasControllerMock->initializeBehavior();
+			hasPagesMock = new HasPagesMock();
+			hasPagesMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			statechart->enter();
+
+			EXPECT_TRUE(statechart->isActive());
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			doPing();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			doReset();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			doWait();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			firstFlashRequest();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			flashRequested();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			lastCompletePage();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			doFlashCheck();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			okFlashCheck();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			booted();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			failPing();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+
 		}
 
 	}
