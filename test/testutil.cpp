@@ -101,6 +101,7 @@ void TestUtil::testStringOut()
 	qDebug() << out;
 	std::clog << out;
 	QCOMPARE(out.toString(), "out!");
+	QCOMPARE(out, QString("out!"));
 }
 
 void TestUtil::testMethod()
