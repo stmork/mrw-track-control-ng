@@ -29,7 +29,9 @@ namespace mrw
 		void enabledLocked();
 		void disabledLocked();
 		void sectionFree();
-		void disableAfterEnabled();
+		void sectionOccupied();
+		void disablingAfterEnabled();
+		void nextReached();
 		void leave();
 		void passedState();
 		void enablingAfterDisabled();
@@ -1421,6 +1423,35 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			sectionFree();
 		}
+		void sectionOccupied()
+		{
+			operational();
+
+			statechart->setOccupied(true);
+
+			statechart->raiseEnable(true);
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling));
+
+			EXPECT_TRUE(incMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(onMock->calledAtLeastOnce());
+
+			statechart->raiseRelaisResponse();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Occupied));
+
+
+			incMock->reset();
+			pendingMock->reset();
+			onMock->reset();
+		}
 		TEST_F(SectionTest, sectionOccupied)
 		{
 			incMock = new IncMock();
@@ -1456,32 +1487,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			operational();
-
-			statechart->setOccupied(true);
-
-			statechart->raiseEnable(true);
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending));
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling));
-
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
-
-			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
-
-			EXPECT_TRUE(onMock->calledAtLeastOnce());
-
-			statechart->raiseRelaisResponse();
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked));
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Occupied));
-
-
-			incMock->reset();
-			pendingMock->reset();
-			onMock->reset();
+			sectionOccupied();
 		}
 		TEST_F(SectionTest, failAfterEnable)
 		{
@@ -1579,7 +1585,7 @@ namespace mrw
 
 			failMock->reset();
 		}
-		void disableAfterEnabled()
+		void disablingAfterEnabled()
 		{
 			enabledLocked();
 
@@ -1597,7 +1603,7 @@ namespace mrw
 			incMock->reset();
 			offMock->reset();
 		}
-		TEST_F(SectionTest, disableAfterEnabled)
+		TEST_F(SectionTest, disablingAfterEnabled)
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
@@ -1640,7 +1646,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			disableAfterEnabled();
+			disablingAfterEnabled();
 		}
 		TEST_F(SectionTest, disableAfterDisabled)
 		{
@@ -1742,7 +1748,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			disableAfterEnabled();
+			disablingAfterEnabled();
 
 			statechart->raiseRelaisResponse();
 
@@ -1796,7 +1802,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			disableAfterEnabled();
+			disablingAfterEnabled();
 
 			statechart->raiseFailed();
 
@@ -1847,7 +1853,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			disableAfterEnabled();
+			disablingAfterEnabled();
 
 			runner->proceed_time(statechart->getTimeout());
 
@@ -1855,7 +1861,7 @@ namespace mrw
 
 
 		}
-		void leave()
+		void nextReached()
 		{
 			sectionFree();
 
@@ -1874,6 +1880,49 @@ namespace mrw
 			statechart->raiseNext();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Next_Reached));
+
+
+		}
+		TEST_F(SectionTest, nextReached)
+		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
+			onMock = new OnMock();
+			onMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
+			offMock = new OffMock();
+			offMock->initializeBehavior();
+			onMock = new OnMock();
+			onMock->initializeBehavior();
+			requestMock = new RequestMock();
+			requestMock->initializeBehavior();
+			passedMock = new PassedMock();
+			passedMock->initializeBehavior();
+			freeMock = new FreeMock();
+			freeMock->initializeBehavior();
+			leftBeforeMock = new LeftBeforeMock();
+			leftBeforeMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
+			lockMock = new LockMock();
+			lockMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			nextReached();
+		}
+		void leave()
+		{
+			nextReached();
 
 			statechart->raiseStateResponse(false);
 
@@ -2387,6 +2436,127 @@ namespace mrw
 
 
 			decMock->reset();
+		}
+		TEST_F(SectionTest, doExit)
+		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
+			offMock = new OffMock();
+			offMock->initializeBehavior();
+			onMock = new OnMock();
+			onMock->initializeBehavior();
+			requestMock = new RequestMock();
+			requestMock->initializeBehavior();
+			passedMock = new PassedMock();
+			passedMock->initializeBehavior();
+			freeMock = new FreeMock();
+			freeMock->initializeBehavior();
+			leftBeforeMock = new LeftBeforeMock();
+			leftBeforeMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
+			lockMock = new LockMock();
+			lockMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			statechart->enter();
+
+			EXPECT_TRUE(statechart->isActive());
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			waitForStart();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			initial();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			operational();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			enabling();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			disabling();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			enabledLocked();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			disabledLocked();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			disablingAfterEnabled();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			enablingAfterDisabled();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			leave();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			passedState();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			sectionFree();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			sectionOccupied();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			nextReached();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+
 		}
 
 	}

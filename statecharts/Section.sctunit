@@ -292,7 +292,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	}
 
 	@Test
-	operation disableAfterEnabled()
+	operation disablingAfterEnabled()
 	{
 		// Given
 		enabledLocked()
@@ -325,7 +325,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	operation unlock()
 	{
 		// Given
-		disableAfterEnabled()
+		disablingAfterEnabled()
 
 		// When
 		raise relaisResponse
@@ -339,7 +339,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	operation failAfterDisable()
 	{
 		// Given
-		disableAfterEnabled()
+		disablingAfterEnabled()
 
 		// When
 		raise failed
@@ -350,7 +350,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	operation timeAfterDisable()
 	{
 		// Given
-		disableAfterEnabled()
+		disablingAfterEnabled()
 
 		// When
 		proceed timeout ms
@@ -360,7 +360,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	}
 
 	@Test
-	operation leave()
+	operation nextReached()
 	{
 		// Given
 		sectionFree()
@@ -380,6 +380,13 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 
 		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Next_Reached)
+	}
+
+	@Test
+	operation leave()
+	{
+		// Given
+		nextReached()
 
 		// When
 		raise stateResponse : false
@@ -530,5 +537,71 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
 		assert called dec
+	}
+
+	@Test
+	operation doExit()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		waitForStart()
+		exit
+		assert !is_active
+
+		initial()
+		exit
+		assert !is_active
+
+		operational()
+		exit
+		assert !is_active
+
+		enabling()
+		exit
+		assert !is_active
+
+		disabling()
+		exit
+		assert !is_active
+
+		enabledLocked()
+		exit
+		assert !is_active
+
+		disabledLocked()
+		exit
+		assert !is_active
+
+		disablingAfterEnabled()
+		exit
+		assert !is_active
+
+		enablingAfterDisabled()
+		exit
+		assert !is_active
+
+		leave()
+		exit
+		assert !is_active
+
+		passedState()
+		exit
+		assert !is_active
+
+		sectionFree()
+		exit
+		assert !is_active
+
+		sectionOccupied()
+		exit
+		assert !is_active
+
+		nextReached()
+		exit
+		assert !is_active
 	}
 }
