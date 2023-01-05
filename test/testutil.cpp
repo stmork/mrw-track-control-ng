@@ -195,5 +195,5 @@ void TestUtil::testRandom()
 	const double diff = 0.5 * (TEST_RAND_MIN + TEST_RAND_MAX) - mt_sum / TEST_RAND_LOOP;
 
 	QVERIFY(std::abs(diff) <= 0.02);
-	QCOMPARE(dice / TEST_RAND_LOOP, 3);
+	QCOMPARE(dice / TEST_RAND_LOOP, 3u);
 }
