@@ -489,6 +489,16 @@ namespace mrw
 			return delay;
 		}
 
+		sc::integer SignalControllerStatechart::getSymbol() const
+		{
+			return symbol;
+		}
+
+		void SignalControllerStatechart::setSymbol(sc::integer symbol_)
+		{
+			this->symbol = symbol_;
+		}
+
 		sc::integer SignalControllerStatechart::getOFF()
 		{
 			return OFF;
@@ -502,16 +512,6 @@ namespace mrw
 		sc::integer SignalControllerStatechart::getGO()
 		{
 			return GO;
-		}
-
-		sc::integer SignalControllerStatechart::getSymbol() const
-		{
-			return symbol;
-		}
-
-		void SignalControllerStatechart::setSymbol(sc::integer symbol_)
-		{
-			this->symbol = symbol_;
 		}
 
 		void SignalControllerStatechart::setOperationCallback(OperationCallback * operationCallback)

@@ -16,11 +16,12 @@ namespace mrw
 	namespace statechart
 	{
 
+		const sc::integer SectionStatechart::timeout = 500;
+
 
 
 		SectionStatechart::SectionStatechart(QObject * parent) :
 			QObject(parent),
-			timeout(500),
 			auto_off(true),
 			auto_unlock(true),
 			occupied(false),
@@ -410,14 +411,9 @@ namespace mrw
 			}
 		}
 
-		sc::integer SectionStatechart::getTimeout() const
+		sc::integer SectionStatechart::getTimeout()
 		{
 			return timeout;
-		}
-
-		void SectionStatechart::setTimeout(sc::integer timeout_)
-		{
-			this->timeout = timeout_;
 		}
 
 		bool SectionStatechart::getAuto_off() const
@@ -460,7 +456,7 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(this, 0, timeout, false);
+			timerService->setTimer(this, 0, SectionStatechart::timeout, false);
 			emit entered();
 			ifaceOperationCallback->inc();
 		}
@@ -506,7 +502,7 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Operating_Processing_Locked_Route_active_Waiting()
 		{
 			/* Entry action for state 'Waiting'. */
-			timerService->setTimer(this, 1, timeout, false);
+			timerService->setTimer(this, 1, SectionStatechart::timeout, false);
 			ifaceOperationCallback->inc();
 		}
 
@@ -554,7 +550,7 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Operating_Processing_Pending()
 		{
 			/* Entry action for state 'Pending'. */
-			timerService->setTimer(this, 2, timeout, false);
+			timerService->setTimer(this, 2, SectionStatechart::timeout, false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}

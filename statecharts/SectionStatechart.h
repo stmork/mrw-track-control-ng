@@ -146,10 +146,7 @@ namespace mrw
 			void triggerWithoutEvent();
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
-			sc::integer getTimeout() const;
-
-			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
-			void setTimeout(sc::integer timeout);
+			static sc::integer getTimeout() ;
 
 			/*! Gets the value of the variable 'auto_off' that is defined in the default interface scope. */
 			bool getAuto_off() const;
@@ -317,7 +314,7 @@ namespace mrw
 			SectionStatechart(const SectionStatechart & rhs);
 			SectionStatechart & operator=(const SectionStatechart &);
 
-			sc::integer timeout;
+			static const sc::integer timeout;
 			bool auto_off;
 			bool auto_unlock;
 			bool occupied;

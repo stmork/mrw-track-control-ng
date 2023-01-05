@@ -183,6 +183,12 @@ namespace mrw
 			/*! Gets the value of the variable 'delay' that is defined in the default interface scope. */
 			static sc::integer getDelay() ;
 
+			/*! Gets the value of the variable 'symbol' that is defined in the default interface scope. */
+			sc::integer getSymbol() const;
+
+			/*! Sets the value of the variable 'symbol' that is defined in the default interface scope. */
+			void setSymbol(sc::integer symbol);
+
 			/*! Gets the value of the variable 'OFF' that is defined in the default interface scope. */
 			static sc::integer getOFF() ;
 
@@ -191,12 +197,6 @@ namespace mrw
 
 			/*! Gets the value of the variable 'GO' that is defined in the default interface scope. */
 			static sc::integer getGO() ;
-
-			/*! Gets the value of the variable 'symbol' that is defined in the default interface scope. */
-			sc::integer getSymbol() const;
-
-			/*! Sets the value of the variable 'symbol' that is defined in the default interface scope. */
-			void setSymbol(sc::integer symbol);
 
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
@@ -293,10 +293,10 @@ namespace mrw
 
 			static const sc::integer timeout;
 			static const sc::integer delay;
+			sc::integer symbol;
 			static const sc::integer OFF;
 			static const sc::integer STOP;
 			static const sc::integer GO;
-			sc::integer symbol;
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
