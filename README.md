@@ -42,3 +42,12 @@ After that you can update and install the software:
 sudo apt update
 sudo apt install mrw-ng
 ```
+
+## Running Track Controll
+You can start the track control software by starting:
+```
+MRW-TrackControl <railway-model>
+```
+Note that you don't have to add a file extension! The software lookups the railway model file in your complete home directory. Once it is found it remembers the location and you don't have to add the railway-model as argument.
+
+To create an appropriate railway model consult the pages of https://github.com/stmork/mrw/
