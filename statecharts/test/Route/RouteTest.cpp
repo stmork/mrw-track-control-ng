@@ -29,6 +29,7 @@ namespace mrw
 		void failTurningSwitchesIncomplete();
 		void failTurningSignalsIncomplete();
 		void failTurningSectionsIncomplete();
+		void timeoutTurningSections();
 		mrw::statechart::RouteStatechart * statechart;
 
 
@@ -2101,6 +2102,26 @@ namespace mrw
 			deactivateSectionsMock->reset();
 			unlockSignalsMock->reset();
 		}
+		void timeoutTurningSections()
+		{
+			sections();
+
+			runner->proceed_time(statechart->getSection_timeout());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Emergency_Shutdown));
+
+			EXPECT_TRUE(deactivateSectionsMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(unlockSignalsMock->calledAtLeastOnce());
+
+			runner->proceed_time(statechart->getEmergency());
+
+			disabled();
+
+
+			deactivateSectionsMock->reset();
+			unlockSignalsMock->reset();
+		}
 		TEST_F(RouteTest, timeoutTurningSections)
 		{
 			deactivateSectionsMock = new DeactivateSectionsMock();
@@ -2146,23 +2167,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			sections();
-
-			runner->proceed_time(statechart->getSection_timeout());
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Emergency_Shutdown));
-
-			EXPECT_TRUE(deactivateSectionsMock->calledAtLeastOnce());
-
-			EXPECT_TRUE(unlockSignalsMock->calledAtLeastOnce());
-
-			runner->proceed_time(statechart->getEmergency());
-
-			disabled();
-
-
-			deactivateSectionsMock->reset();
-			unlockSignalsMock->reset();
+			timeoutTurningSections();
 		}
 		TEST_F(RouteTest, doExit)
 		{
@@ -2227,6 +2232,12 @@ namespace mrw
 
 			EXPECT_TRUE(!statechart->isActive());
 
+			activate();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
 			deactivate();
 
 			statechart->exit();
@@ -2238,6 +2249,10 @@ namespace mrw
 			statechart->exit();
 
 			EXPECT_TRUE(!statechart->isActive());
+
+			timeoutTurningSections();
+
+			statechart->exit();
 
 			EXPECT_TRUE(!statechart->isActive());
 
