@@ -226,21 +226,9 @@ namespace mrw
 		}
 
 
-		sc::rx::Observable<void> * mrw::statechart::SectionStatechart::getStarted()
-		{
-			return &(this->started_observable);
-		}
-
-
 		bool mrw::statechart::SectionStatechart::isRaisedStop()
 		{
 			return stop_raised;
-		}
-
-
-		sc::rx::Observable<void> * mrw::statechart::SectionStatechart::getStop()
-		{
-			return &(this->stop_observable);
 		}
 
 
@@ -250,21 +238,9 @@ namespace mrw
 		}
 
 
-		sc::rx::Observable<void> * mrw::statechart::SectionStatechart::getEntered()
-		{
-			return &(this->entered_observable);
-		}
-
-
 		bool mrw::statechart::SectionStatechart::isRaisedLeaving()
 		{
 			return leaving_raised;
-		}
-
-
-		sc::rx::Observable<void> * mrw::statechart::SectionStatechart::getLeaving()
-		{
-			return &(this->leaving_observable);
 		}
 
 
@@ -274,33 +250,15 @@ namespace mrw
 		}
 
 
-		sc::rx::Observable<void> * mrw::statechart::SectionStatechart::getLeft()
-		{
-			return &(this->left_observable);
-		}
-
-
 		bool mrw::statechart::SectionStatechart::isRaisedTryUnblock()
 		{
 			return tryUnblock_raised;
 		}
 
 
-		sc::rx::Observable<void> * mrw::statechart::SectionStatechart::getTryUnblock()
-		{
-			return &(this->tryUnblock_observable);
-		}
-
-
 		bool mrw::statechart::SectionStatechart::isRaisedUnregister()
 		{
 			return unregister_raised;
-		}
-
-
-		sc::rx::Observable<void> * mrw::statechart::SectionStatechart::getUnregister()
-		{
-			return &(this->unregister_observable);
 		}
 
 
@@ -552,7 +510,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Init'. */
 			timerService->setTimer(this, 0, timeout, false);
-			entered_observable.next();
 			entered_raised = true;
 			ifaceOperationCallback->inc();
 		}
@@ -591,7 +548,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Passed'. */
 			ifaceOperationCallback->passed();
-			tryUnblock_observable.next();
 			tryUnblock_raised = true;
 		}
 
@@ -628,7 +584,6 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Operating_Processing_Locked_Occupation_Occupied()
 		{
 			/* Entry action for state 'Occupied'. */
-			entered_observable.next();
 			entered_raised = true;
 		}
 
@@ -638,7 +593,6 @@ namespace mrw
 			/* Entry action for state 'Next Reached'. */
 			if (!occupied)
 			{
-				leaving_observable.next();
 				raiseLocal_leaving();
 				leaving_raised = true;
 				ifaceOperationCallback->leftBefore();
@@ -673,7 +627,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Failed'. */
 			ifaceOperationCallback->fail();
-			stop_observable.next();
 			stop_raised = true;
 		}
 
@@ -688,7 +641,6 @@ namespace mrw
 		void SectionStatechart::exact_main_region_Operating_Processing_Locked()
 		{
 			/* Exit action for state 'Locked'. */
-			unregister_observable.next();
 			unregister_raised = true;
 		}
 
@@ -1634,7 +1586,6 @@ namespace mrw
 			/* The reactions of state null. */
 			exseq_main_region_Init();
 			ifaceOperationCallback->dec();
-			started_observable.next();
 			started_raised = true;
 			enseq_main_region_Operating_default();
 			react(0);
@@ -1934,7 +1885,6 @@ namespace mrw
 				if (relaisResponse_raised)
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting();
-					left_observable.next();
 					left_raised = true;
 					react_main_region_Operating_Processing_Locked_Route_active__choice_0();
 					transitioned_after = 0;
@@ -2086,7 +2036,6 @@ namespace mrw
 				if (((stateResponse_raised)) && ((!stateResponse_value)))
 				{
 					exseq_main_region_Operating_Processing_Locked_Occupation_Next_Reached();
-					leaving_observable.next();
 					raiseLocal_leaving();
 					leaving_raised = true;
 					enseq_main_region_Operating_Processing_Locked_Occupation__final__default();

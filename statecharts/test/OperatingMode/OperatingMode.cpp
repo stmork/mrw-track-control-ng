@@ -184,33 +184,15 @@ namespace mrw
 		}
 
 
-		sc::rx::Observable<void> * mrw::statechart::OperatingMode::getStart()
-		{
-			return &(this->start_observable);
-		}
-
-
 		bool mrw::statechart::OperatingMode::isRaisedCleared()
 		{
 			return cleared_raised;
 		}
 
 
-		sc::rx::Observable<void> * mrw::statechart::OperatingMode::getCleared()
-		{
-			return &(this->cleared_observable);
-		}
-
-
 		bool mrw::statechart::OperatingMode::isRaisedFailing()
 		{
 			return failing_raised;
-		}
-
-
-		sc::rx::Observable<void> * mrw::statechart::OperatingMode::getFailing()
-		{
-			return &(this->failing_observable);
 		}
 
 
@@ -226,12 +208,6 @@ namespace mrw
 		}
 
 
-		sc::rx::Observable<bool> * mrw::statechart::OperatingMode::getOperating()
-		{
-			return &(this->operating_observable);
-		}
-
-
 		bool mrw::statechart::OperatingMode::isRaisedEditing()
 		{
 			return editing_raised;
@@ -241,12 +217,6 @@ namespace mrw
 		bool mrw::statechart::OperatingMode::getEditingValue()
 		{
 			return editing_value;
-		}
-
-
-		sc::rx::Observable<bool> * mrw::statechart::OperatingMode::getEditing()
-		{
-			return &(this->editing_observable);
 		}
 
 
@@ -390,7 +360,6 @@ namespace mrw
 			/* Entry action for state 'Init'. */
 			timerService->setTimer(this, 1, timeout, false);
 			ifaceOperationCallback->resetTransaction();
-			start_observable.next();
 			start_raised = true;
 		}
 
@@ -399,7 +368,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Editing'. */
 			editing_value = true;
-			editing_observable.next(editing_value);
 			editing_raised = true;
 		}
 
@@ -407,7 +375,6 @@ namespace mrw
 		void OperatingMode::enact_main_region_Failed()
 		{
 			/* Entry action for state 'Failed'. */
-			failing_observable.next();
 			failing_raised = true;
 		}
 
@@ -416,7 +383,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Operating'. */
 			operating_value = true;
-			operating_observable.next(operating_value);
 			operating_raised = true;
 		}
 
@@ -439,7 +405,6 @@ namespace mrw
 		{
 			/* Exit action for state 'Editing'. */
 			editing_value = false;
-			editing_observable.next(editing_value);
 			editing_raised = true;
 		}
 
@@ -447,7 +412,6 @@ namespace mrw
 		void OperatingMode::exact_main_region_Failed()
 		{
 			/* Exit action for state 'Failed'. */
-			cleared_observable.next();
 			cleared_raised = true;
 		}
 
@@ -456,7 +420,6 @@ namespace mrw
 		{
 			/* Exit action for state 'Operating'. */
 			operating_value = false;
-			operating_observable.next(operating_value);
 			operating_raised = true;
 		}
 

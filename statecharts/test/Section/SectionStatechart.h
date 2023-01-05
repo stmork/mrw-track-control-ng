@@ -22,7 +22,6 @@ namespace mrw
 
 #include <deque>
 #include "../common/sc_types.h"
-#include "../common/sc_rxcpp.h"
 #include "../common/sc_statemachine.h"
 #include "../common/sc_timer.h"
 
@@ -157,32 +156,18 @@ namespace mrw
 			void raiseNext();
 			/*! Check if event 'started' of default interface scope is raised. */
 			bool isRaisedStarted();
-			/*! Get observable for event 'started' of default interface scope. */
-			sc::rx::Observable<void> * getStarted();
 			/*! Check if event 'stop' of default interface scope is raised. */
 			bool isRaisedStop();
-			/*! Get observable for event 'stop' of default interface scope. */
-			sc::rx::Observable<void> * getStop();
 			/*! Check if event 'entered' of default interface scope is raised. */
 			bool isRaisedEntered();
-			/*! Get observable for event 'entered' of default interface scope. */
-			sc::rx::Observable<void> * getEntered();
 			/*! Check if event 'leaving' of default interface scope is raised. */
 			bool isRaisedLeaving();
-			/*! Get observable for event 'leaving' of default interface scope. */
-			sc::rx::Observable<void> * getLeaving();
 			/*! Check if event 'left' of default interface scope is raised. */
 			bool isRaisedLeft();
-			/*! Get observable for event 'left' of default interface scope. */
-			sc::rx::Observable<void> * getLeft();
 			/*! Check if event 'tryUnblock' of default interface scope is raised. */
 			bool isRaisedTryUnblock();
-			/*! Get observable for event 'tryUnblock' of default interface scope. */
-			sc::rx::Observable<void> * getTryUnblock();
 			/*! Check if event 'unregister' of default interface scope is raised. */
 			bool isRaisedUnregister();
-			/*! Get observable for event 'unregister' of default interface scope. */
-			sc::rx::Observable<void> * getUnregister();
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent();
@@ -492,44 +477,23 @@ namespace mrw
 			/*! Indicates event 'started' of default interface scope is active. */
 			bool started_raised;
 
-			/*! Observable for event 'started' of default interface scope. */
-			sc::rx::Observable<void> started_observable;
-
 			/*! Indicates event 'stop' of default interface scope is active. */
 			bool stop_raised;
-
-			/*! Observable for event 'stop' of default interface scope. */
-			sc::rx::Observable<void> stop_observable;
 
 			/*! Indicates event 'entered' of default interface scope is active. */
 			bool entered_raised;
 
-			/*! Observable for event 'entered' of default interface scope. */
-			sc::rx::Observable<void> entered_observable;
-
 			/*! Indicates event 'leaving' of default interface scope is active. */
 			bool leaving_raised;
-
-			/*! Observable for event 'leaving' of default interface scope. */
-			sc::rx::Observable<void> leaving_observable;
 
 			/*! Indicates event 'left' of default interface scope is active. */
 			bool left_raised;
 
-			/*! Observable for event 'left' of default interface scope. */
-			sc::rx::Observable<void> left_observable;
-
 			/*! Indicates event 'tryUnblock' of default interface scope is active. */
 			bool tryUnblock_raised;
 
-			/*! Observable for event 'tryUnblock' of default interface scope. */
-			sc::rx::Observable<void> tryUnblock_observable;
-
 			/*! Indicates event 'unregister' of default interface scope is active. */
 			bool unregister_raised;
-
-			/*! Observable for event 'unregister' of default interface scope. */
-			sc::rx::Observable<void> unregister_observable;
 
 			/*! Indicates event 'local_leaving' of internal scope is active. */
 			bool local_leaving_raised;

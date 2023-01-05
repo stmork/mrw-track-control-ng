@@ -18,8 +18,8 @@ SUBDIRS  = \
 	reader \
 	sim \
 	tracker \
+	fw-update \
 	study \
-	fw-update\
 	track-control
 
 util.file              = util/MRW-Util.pro
@@ -35,8 +35,8 @@ proxy.file             = tools/proxy/MRW-Proxy.pro
 reader.file            = tools/reader/MRW-Reader.pro
 sim.file               = tools/sim/MRW-Simulator.pro
 tracker.file           = tools/tracker/MRW-Tracker.pro
-study.file             = widget-study/MRW-WidgetStudy.pro
 fw-update.file         = fw-update/MRW-Update.pro
+study.file             = widget-study/MRW-WidgetStudy.pro
 track-control.file     = track-control/MRW-TrackControl.pro
 
 can.depends            = util
@@ -49,8 +49,8 @@ proxy.depends          = test
 reader.depends         = test
 sim.depends            = test
 tracker.depends        = test statecharts
-study.depends          = test ctrl ui
 fw-update.depends      = test statecharts
+study.depends          = test ctrl ui
 track-control.depends  = study statecharts
 
 QMAKE_CLEAN           += qtest*.xml

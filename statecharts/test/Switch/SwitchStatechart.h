@@ -22,7 +22,6 @@ namespace mrw
 
 #include <deque>
 #include "../common/sc_types.h"
-#include "../common/sc_rxcpp.h"
 #include "../common/sc_statemachine.h"
 #include "../common/sc_timer.h"
 
@@ -117,16 +116,10 @@ namespace mrw
 			void raiseTurn();
 			/*! Check if event 'started' of default interface scope is raised. */
 			bool isRaisedStarted();
-			/*! Get observable for event 'started' of default interface scope. */
-			sc::rx::Observable<void> * getStarted();
 			/*! Check if event 'entered' of default interface scope is raised. */
 			bool isRaisedEntered();
-			/*! Get observable for event 'entered' of default interface scope. */
-			sc::rx::Observable<void> * getEntered();
 			/*! Check if event 'stop' of default interface scope is raised. */
 			bool isRaisedStop();
-			/*! Get observable for event 'stop' of default interface scope. */
-			sc::rx::Observable<void> * getStop();
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent();
@@ -339,20 +332,11 @@ namespace mrw
 			/*! Indicates event 'started' of default interface scope is active. */
 			bool started_raised;
 
-			/*! Observable for event 'started' of default interface scope. */
-			sc::rx::Observable<void> started_observable;
-
 			/*! Indicates event 'entered' of default interface scope is active. */
 			bool entered_raised;
 
-			/*! Observable for event 'entered' of default interface scope. */
-			sc::rx::Observable<void> entered_observable;
-
 			/*! Indicates event 'stop' of default interface scope is active. */
 			bool stop_raised;
-
-			/*! Observable for event 'stop' of default interface scope. */
-			sc::rx::Observable<void> stop_observable;
 
 
 

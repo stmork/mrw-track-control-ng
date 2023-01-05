@@ -206,12 +206,6 @@ namespace mrw
 		}
 
 
-		sc::rx::Observable<sc::integer> * mrw::statechart::SignalControllerStatechart::getTurnMain()
-		{
-			return &(this->turnMain_observable);
-		}
-
-
 		bool mrw::statechart::SignalControllerStatechart::isRaisedTurnDistant()
 		{
 			return turnDistant_raised;
@@ -224,12 +218,6 @@ namespace mrw
 		}
 
 
-		sc::rx::Observable<sc::integer> * mrw::statechart::SignalControllerStatechart::getTurnDistant()
-		{
-			return &(this->turnDistant_observable);
-		}
-
-
 		bool mrw::statechart::SignalControllerStatechart::isRaisedTurnShunt()
 		{
 			return turnShunt_raised;
@@ -239,12 +227,6 @@ namespace mrw
 		sc::integer mrw::statechart::SignalControllerStatechart::getTurnShuntValue()
 		{
 			return turnShunt_value;
-		}
-
-
-		sc::rx::Observable<sc::integer> * mrw::statechart::SignalControllerStatechart::getTurnShunt()
-		{
-			return &(this->turnShunt_observable);
 		}
 
 
@@ -275,21 +257,9 @@ namespace mrw
 		}
 
 
-		sc::rx::Observable<void> * mrw::statechart::SignalControllerStatechart::getStarted()
-		{
-			return &(this->started_observable);
-		}
-
-
 		bool mrw::statechart::SignalControllerStatechart::isRaisedCleared()
 		{
 			return cleared_raised;
-		}
-
-
-		sc::rx::Observable<void> * mrw::statechart::SignalControllerStatechart::getCleared()
-		{
-			return &(this->cleared_observable);
 		}
 
 
@@ -573,7 +543,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Turn'. */
 			turnMain_value = SignalControllerStatechart::STOP;
-			turnMain_observable.next(turnMain_value);
 			turnMain_raised = true;
 		}
 
@@ -584,13 +553,11 @@ namespace mrw
 			if (!ifaceOperationCallback->hasMainSignal())
 			{
 				turnDistant_value = SignalControllerStatechart::STOP;
-				turnDistant_observable.next(turnDistant_value);
 				turnDistant_raised = true;
 			}
 			if (ifaceOperationCallback->hasMainSignal())
 			{
 				turnDistant_value = SignalControllerStatechart::OFF;
-				turnDistant_observable.next(turnDistant_value);
 				turnDistant_raised = true;
 			}
 		}
@@ -602,7 +569,6 @@ namespace mrw
 			if (!ifaceOperationCallback->isMainAndShunt())
 			{
 				turnShunt_value = SignalControllerStatechart::STOP;
-				turnShunt_observable.next(turnShunt_value);
 				turnShunt_raised = true;
 			}
 			if (ifaceOperationCallback->isMainAndShunt())
@@ -615,7 +581,6 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating()
 		{
 			/* Entry action for state 'Operating'. */
-			started_observable.next();
 			started_raised = true;
 		}
 
@@ -646,7 +611,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Extend'. */
 			turnShunt_value = symbol;
-			turnShunt_observable.next(turnShunt_value);
 			turnShunt_raised = true;
 		}
 
@@ -655,7 +619,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Stop'. */
 			turnShunt_value = symbol;
-			turnShunt_observable.next(turnShunt_value);
 			turnShunt_raised = true;
 		}
 
@@ -679,7 +642,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Stop Main'. */
 			turnMain_value = symbol;
-			turnMain_observable.next(turnMain_value);
 			turnMain_raised = true;
 		}
 
@@ -688,7 +650,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Stop Distant'. */
 			turnDistant_value = SignalControllerStatechart::STOP;
-			turnDistant_observable.next(turnDistant_value);
 			turnDistant_raised = true;
 		}
 
@@ -697,7 +658,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Off Distant'. */
 			turnDistant_value = SignalControllerStatechart::OFF;
-			turnDistant_observable.next(turnDistant_value);
 			turnDistant_raised = true;
 		}
 
@@ -713,7 +673,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Stop Shunt'. */
 			turnShunt_value = symbol;
-			turnShunt_observable.next(turnShunt_value);
 			turnShunt_raised = true;
 		}
 
@@ -722,7 +681,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Extend'. */
 			turnDistant_value = symbol;
-			turnDistant_observable.next(turnDistant_value);
 			turnDistant_raised = true;
 		}
 
@@ -740,7 +698,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Go Main'. */
 			turnMain_value = symbol;
-			turnMain_observable.next(turnMain_value);
 			turnMain_raised = true;
 		}
 
@@ -749,7 +706,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Go Distant'. */
 			turnDistant_value = symbol;
-			turnDistant_observable.next(turnDistant_value);
 			turnDistant_raised = true;
 		}
 
@@ -758,7 +714,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Go Shunt'. */
 			turnShunt_value = symbol;
-			turnShunt_observable.next(turnShunt_value);
 			turnShunt_raised = true;
 		}
 
@@ -812,7 +767,6 @@ namespace mrw
 		void SignalControllerStatechart::exact_main_region_Failed()
 		{
 			/* Exit action for state 'Failed'. */
-			cleared_observable.next();
 			cleared_raised = true;
 		}
 

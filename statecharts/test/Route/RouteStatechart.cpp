@@ -147,21 +147,9 @@ namespace mrw
 		}
 
 
-		sc::rx::Observable<void> * mrw::statechart::RouteStatechart::getActivated()
-		{
-			return &(this->activated_observable);
-		}
-
-
 		bool mrw::statechart::RouteStatechart::isRaisedFinished()
 		{
 			return finished_raised;
-		}
-
-
-		sc::rx::Observable<void> * mrw::statechart::RouteStatechart::getFinished()
-		{
-			return &(this->finished_observable);
 		}
 
 
@@ -333,7 +321,6 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Active()
 		{
 			/* Entry action for state 'Active'. */
-			activated_observable.next();
 			activated_raised = true;
 		}
 
@@ -795,7 +782,6 @@ namespace mrw
 				if (completed_raised)
 				{
 					exseq_main_region_Disable();
-					finished_observable.next();
 					finished_raised = true;
 					enseq_main_region__final__default();
 					transitioned_after = 0;
@@ -805,7 +791,6 @@ namespace mrw
 					if (timeEvents[0])
 					{
 						exseq_main_region_Disable();
-						finished_observable.next();
 						finished_raised = true;
 						timeEvents[0] = false;
 						enseq_main_region__final__default();

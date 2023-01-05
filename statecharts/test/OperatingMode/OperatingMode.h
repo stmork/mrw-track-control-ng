@@ -22,7 +22,6 @@ namespace mrw
 
 #include <deque>
 #include "../common/sc_types.h"
-#include "../common/sc_rxcpp.h"
 #include "../common/sc_statemachine.h"
 #include "../common/sc_timer.h"
 
@@ -99,28 +98,18 @@ namespace mrw
 			void raiseInit();
 			/*! Check if event 'start' of default interface scope is raised. */
 			bool isRaisedStart();
-			/*! Get observable for event 'start' of default interface scope. */
-			sc::rx::Observable<void> * getStart();
 			/*! Check if event 'cleared' of default interface scope is raised. */
 			bool isRaisedCleared();
-			/*! Get observable for event 'cleared' of default interface scope. */
-			sc::rx::Observable<void> * getCleared();
 			/*! Check if event 'failing' of default interface scope is raised. */
 			bool isRaisedFailing();
-			/*! Get observable for event 'failing' of default interface scope. */
-			sc::rx::Observable<void> * getFailing();
 			/*! Check if event 'operating' of default interface scope is raised. */
 			bool isRaisedOperating();
 			/*! Get value of event 'operating' of default interface scope. */
 			bool getOperatingValue();
-			/*! Get observable for event 'operating' of default interface scope. */
-			sc::rx::Observable<bool> * getOperating();
 			/*! Check if event 'editing' of default interface scope is raised. */
 			bool isRaisedEditing();
 			/*! Get value of event 'editing' of default interface scope. */
 			bool getEditingValue();
-			/*! Get observable for event 'editing' of default interface scope. */
-			sc::rx::Observable<bool> * getEditing();
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent();
@@ -337,20 +326,11 @@ namespace mrw
 			/*! Indicates event 'start' of default interface scope is active. */
 			bool start_raised;
 
-			/*! Observable for event 'start' of default interface scope. */
-			sc::rx::Observable<void> start_observable;
-
 			/*! Indicates event 'cleared' of default interface scope is active. */
 			bool cleared_raised;
 
-			/*! Observable for event 'cleared' of default interface scope. */
-			sc::rx::Observable<void> cleared_observable;
-
 			/*! Indicates event 'failing' of default interface scope is active. */
 			bool failing_raised;
-
-			/*! Observable for event 'failing' of default interface scope. */
-			sc::rx::Observable<void> failing_observable;
 
 			/*! Value of event 'operating' of default interface scope. */
 			bool operating_value;
@@ -358,17 +338,11 @@ namespace mrw
 			/*! Indicates event 'operating' of default interface scope is active. */
 			bool operating_raised;
 
-			/*! Observable for event 'operating' of default interface scope. */
-			sc::rx::Observable<bool> operating_observable;
-
 			/*! Value of event 'editing' of default interface scope. */
 			bool editing_value;
 
 			/*! Indicates event 'editing' of default interface scope is active. */
 			bool editing_raised;
-
-			/*! Observable for event 'editing' of default interface scope. */
-			sc::rx::Observable<bool> editing_observable;
 
 
 

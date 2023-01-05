@@ -22,7 +22,6 @@ namespace mrw
 
 #include <deque>
 #include "../common/sc_types.h"
-#include "../common/sc_rxcpp.h"
 #include "../common/sc_statemachine.h"
 #include "../common/sc_timer.h"
 
@@ -105,12 +104,8 @@ namespace mrw
 			void raiseClear();
 			/*! Check if event 'completed' of default interface scope is raised. */
 			bool isRaisedCompleted();
-			/*! Get observable for event 'completed' of default interface scope. */
-			sc::rx::Observable<void> * getCompleted();
 			/*! Check if event 'failed' of default interface scope is raised. */
 			bool isRaisedFailed();
-			/*! Get observable for event 'failed' of default interface scope. */
-			sc::rx::Observable<void> * getFailed();
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent();
@@ -300,14 +295,8 @@ namespace mrw
 			/*! Indicates event 'completed' of default interface scope is active. */
 			bool completed_raised;
 
-			/*! Observable for event 'completed' of default interface scope. */
-			sc::rx::Observable<void> completed_observable;
-
 			/*! Indicates event 'failed' of default interface scope is active. */
 			bool failed_raised;
-
-			/*! Observable for event 'failed' of default interface scope. */
-			sc::rx::Observable<void> failed_observable;
 
 
 

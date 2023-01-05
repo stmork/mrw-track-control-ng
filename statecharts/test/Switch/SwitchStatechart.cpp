@@ -205,33 +205,15 @@ namespace mrw
 		}
 
 
-		sc::rx::Observable<void> * mrw::statechart::SwitchStatechart::getStarted()
-		{
-			return &(this->started_observable);
-		}
-
-
 		bool mrw::statechart::SwitchStatechart::isRaisedEntered()
 		{
 			return entered_raised;
 		}
 
 
-		sc::rx::Observable<void> * mrw::statechart::SwitchStatechart::getEntered()
-		{
-			return &(this->entered_observable);
-		}
-
-
 		bool mrw::statechart::SwitchStatechart::isRaisedStop()
 		{
 			return stop_raised;
-		}
-
-
-		sc::rx::Observable<void> * mrw::statechart::SwitchStatechart::getStop()
-		{
-			return &(this->stop_observable);
 		}
 
 
@@ -372,7 +354,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Init'. */
 			timerService->setTimer(this, 0, timeout, false);
-			entered_observable.next();
 			entered_raised = true;
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->request();
@@ -420,7 +401,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Failed'. */
 			ifaceOperationCallback->fail();
-			stop_observable.next();
 			stop_raised = true;
 		}
 
@@ -799,7 +779,6 @@ namespace mrw
 				{
 					exseq_main_region_Init();
 					ifaceOperationCallback->dec();
-					started_observable.next();
 					started_raised = true;
 					enseq_main_region_Operating_default();
 					react(0);

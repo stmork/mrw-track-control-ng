@@ -162,21 +162,9 @@ namespace mrw
 		}
 
 
-		sc::rx::Observable<void> * mrw::statechart::SignalStatechart::getCompleted()
-		{
-			return &(this->completed_observable);
-		}
-
-
 		bool mrw::statechart::SignalStatechart::isRaisedFailed()
 		{
 			return failed_raised;
-		}
-
-
-		sc::rx::Observable<void> * mrw::statechart::SignalStatechart::getFailed()
-		{
-			return &(this->failed_observable);
 		}
 
 
@@ -334,7 +322,6 @@ namespace mrw
 			symbol = SignalStatechart::OFF;
 			ifaceOperationCallback->prepare();
 			ifaceOperationCallback->send();
-			failed_observable.next();
 			failed_raised = true;
 		}
 
@@ -502,7 +489,6 @@ namespace mrw
 			}
 			else
 			{
-				completed_observable.next();
 				completed_raised = true;
 				enseq_main_region_Idle_default();
 			}
@@ -558,7 +544,6 @@ namespace mrw
 				if (ok_raised)
 				{
 					exseq_main_region_Turning();
-					completed_observable.next();
 					completed_raised = true;
 					enseq_main_region_Idle_default();
 					react(0);

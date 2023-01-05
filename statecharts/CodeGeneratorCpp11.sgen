@@ -36,7 +36,8 @@ GeneratorModel for yakindu::cpp11
 
 		feature OutEventAPI
 		{
-			getters = true
+			observables = false
+			getters     = true
 		}
 	}
 
@@ -67,7 +68,8 @@ GeneratorModel for yakindu::cpp11
 
 		feature OutEventAPI
 		{
-			getters = true
+			observables = false
+			getters     = true
 		}
 	}
 
@@ -98,7 +100,8 @@ GeneratorModel for yakindu::cpp11
 
 		feature OutEventAPI
 		{
-			getters = true
+			observables = false
+			getters     = true
 		}
 	}
 
@@ -129,7 +132,8 @@ GeneratorModel for yakindu::cpp11
 
 		feature OutEventAPI
 		{
-			getters = true
+			observables = false
+			getters     = true
 		}
 	}
 
@@ -160,7 +164,8 @@ GeneratorModel for yakindu::cpp11
 
 		feature OutEventAPI
 		{
-			getters = true
+			observables = false
+			getters     = true
 		}
 	}
 
@@ -191,7 +196,8 @@ GeneratorModel for yakindu::cpp11
 
 		feature OutEventAPI
 		{
-			getters = true
+			observables = false
+			getters     = true
 		}
 	}
 
@@ -222,7 +228,8 @@ GeneratorModel for yakindu::cpp11
 
 		feature OutEventAPI
 		{
-			getters = true
+			observables = false
+			getters     = true
 		}
 	}
 
@@ -253,7 +260,8 @@ GeneratorModel for yakindu::cpp11
 
 		feature OutEventAPI
 		{
-			getters = true
+			observables = false
+			getters     = true
 		}
 	}
 }

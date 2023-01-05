@@ -22,7 +22,6 @@ namespace mrw
 
 #include <deque>
 #include "../common/sc_types.h"
-#include "../common/sc_rxcpp.h"
 #include "../common/sc_statemachine.h"
 #include "../common/sc_timer.h"
 
@@ -156,20 +155,14 @@ namespace mrw
 			bool isRaisedTurnMain();
 			/*! Get value of event 'turnMain' of default interface scope. */
 			sc::integer getTurnMainValue();
-			/*! Get observable for event 'turnMain' of default interface scope. */
-			sc::rx::Observable<sc::integer> * getTurnMain();
 			/*! Check if event 'turnDistant' of default interface scope is raised. */
 			bool isRaisedTurnDistant();
 			/*! Get value of event 'turnDistant' of default interface scope. */
 			sc::integer getTurnDistantValue();
-			/*! Get observable for event 'turnDistant' of default interface scope. */
-			sc::rx::Observable<sc::integer> * getTurnDistant();
 			/*! Check if event 'turnShunt' of default interface scope is raised. */
 			bool isRaisedTurnShunt();
 			/*! Get value of event 'turnShunt' of default interface scope. */
 			sc::integer getTurnShuntValue();
-			/*! Get observable for event 'turnShunt' of default interface scope. */
-			sc::rx::Observable<sc::integer> * getTurnShunt();
 			/*! Raises the in event 'completedMain' of default interface scope. */
 			void raiseCompletedMain();
 			/*! Raises the in event 'completedDistant' of default interface scope. */
@@ -178,12 +171,8 @@ namespace mrw
 			void raiseCompletedShunt();
 			/*! Check if event 'started' of default interface scope is raised. */
 			bool isRaisedStarted();
-			/*! Get observable for event 'started' of default interface scope. */
-			sc::rx::Observable<void> * getStarted();
 			/*! Check if event 'cleared' of default interface scope is raised. */
 			bool isRaisedCleared();
-			/*! Get observable for event 'cleared' of default interface scope. */
-			sc::rx::Observable<void> * getCleared();
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent();
@@ -505,26 +494,17 @@ namespace mrw
 			/*! Indicates event 'turnMain' of default interface scope is active. */
 			bool turnMain_raised;
 
-			/*! Observable for event 'turnMain' of default interface scope. */
-			sc::rx::Observable<sc::integer> turnMain_observable;
-
 			/*! Value of event 'turnDistant' of default interface scope. */
 			sc::integer turnDistant_value;
 
 			/*! Indicates event 'turnDistant' of default interface scope is active. */
 			bool turnDistant_raised;
 
-			/*! Observable for event 'turnDistant' of default interface scope. */
-			sc::rx::Observable<sc::integer> turnDistant_observable;
-
 			/*! Value of event 'turnShunt' of default interface scope. */
 			sc::integer turnShunt_value;
 
 			/*! Indicates event 'turnShunt' of default interface scope is active. */
 			bool turnShunt_raised;
-
-			/*! Observable for event 'turnShunt' of default interface scope. */
-			sc::rx::Observable<sc::integer> turnShunt_observable;
 
 			/*! Indicates event 'completedMain' of default interface scope is active. */
 			bool completedMain_raised;
@@ -538,14 +518,8 @@ namespace mrw
 			/*! Indicates event 'started' of default interface scope is active. */
 			bool started_raised;
 
-			/*! Observable for event 'started' of default interface scope. */
-			sc::rx::Observable<void> started_observable;
-
 			/*! Indicates event 'cleared' of default interface scope is active. */
 			bool cleared_raised;
-
-			/*! Observable for event 'cleared' of default interface scope. */
-			sc::rx::Observable<void> cleared_observable;
 
 
 
