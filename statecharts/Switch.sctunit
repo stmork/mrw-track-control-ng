@@ -393,4 +393,54 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		// Then
 		failState()
 	}
+
+	@Test
+	operation doExit()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		waitForStart()
+		exit
+		assert !is_active
+
+		waitForStart()
+		exit
+		assert !is_active
+
+		operational()
+		exit
+		assert !is_active
+
+		turnLeft()
+		exit
+		assert !is_active
+
+		turnRight()
+		exit
+		assert !is_active
+
+		queuedLeft()
+		exit
+		assert !is_active
+
+		queuedRight()
+		exit
+		assert !is_active
+
+		okLeft()
+		exit
+		assert !is_active
+
+		okRight()
+		exit
+		assert !is_active
+
+		failAfterStart()
+		exit
+		assert !is_active
+	}
 }

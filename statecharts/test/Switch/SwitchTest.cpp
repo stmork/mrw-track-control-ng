@@ -26,6 +26,8 @@ namespace mrw
 		void operational();
 		void turnLeft();
 		void turnRight();
+		void queuedLeft();
+		void queuedRight();
 		void okLeft();
 		void okRight();
 		mrw::statechart::SwitchStatechart * statechart;
@@ -1209,6 +1211,26 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			turnRight();
 		}
+		void queuedLeft()
+		{
+			turnLeft();
+
+			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
+
+			statechart->raiseQueued();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Pending));
+
+			statechart->raiseLeftResponse();
+
+			EXPECT_TRUE(decMock->calledAtLeastOnce());
+
+			lockedState();
+
+
+			isFreeMock->reset();
+			decMock->reset();
+		}
 		TEST_F(SwitchTest, queuedLeft)
 		{
 			isFreeMock = new IsFreeMock();
@@ -1252,7 +1274,11 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			turnLeft();
+			queuedLeft();
+		}
+		void queuedRight()
+		{
+			turnRight();
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
 
@@ -1260,7 +1286,7 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Pending));
 
-			statechart->raiseLeftResponse();
+			statechart->raiseRightResponse();
 
 			EXPECT_TRUE(decMock->calledAtLeastOnce());
 
@@ -1313,23 +1339,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			turnRight();
-
-			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
-
-			statechart->raiseQueued();
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Pending));
-
-			statechart->raiseRightResponse();
-
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
-
-			lockedState();
-
-
-			isFreeMock->reset();
-			decMock->reset();
+			queuedRight();
 		}
 		TEST_F(SwitchTest, freeLeft)
 		{
@@ -1956,6 +1966,101 @@ namespace mrw
 			statechart->raiseResponse();
 
 			failState();
+
+
+		}
+		TEST_F(SwitchTest, doExit)
+		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
+			leftMock = new LeftMock();
+			leftMock->initializeBehavior();
+			rightMock = new RightMock();
+			rightMock->initializeBehavior();
+			requestMock = new RequestMock();
+			requestMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
+			lockMock = new LockMock();
+			lockMock->initializeBehavior();
+			isFreeMock = new IsFreeMock();
+			isFreeMock->initializeBehavior();
+			doTurnLeftMock = new DoTurnLeftMock();
+			doTurnLeftMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			statechart->enter();
+
+			EXPECT_TRUE(statechart->isActive());
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			waitForStart();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			waitForStart();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			operational();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			turnLeft();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			turnRight();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			queuedLeft();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			queuedRight();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			okLeft();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			okRight();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			failAfterStart();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
 
 
 		}
