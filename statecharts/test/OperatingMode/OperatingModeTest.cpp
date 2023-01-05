@@ -480,6 +480,54 @@ namespace mrw
 
 
 		}
+		TEST_F(OperatingModeTest, doExit)
+		{
+			canConnectBusMock = new CanConnectBusMock();
+
+			MockDefault defaultMock;
+			MockCan canMock;
+			statechart->setOperationCallback(&defaultMock);
+			statechart->can()->setOperationCallback(&canMock);
+			statechart->enter();
+
+			EXPECT_TRUE(statechart->isActive());
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			wait();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			initial();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			doOperating();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			doEdit();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			failAfterStart();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+
+		}
 
 	}
 }

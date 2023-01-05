@@ -164,4 +164,30 @@ testclass SignalTest for statechart mrw.^statechart.SignalStatechart
 		// Then
 		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
 	}
+
+	@Test
+	operation doExit()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		idle()
+		exit
+		assert !is_active
+
+		turning()
+		exit
+		assert !is_active
+
+		pending()
+		exit
+		assert !is_active
+
+		failSending()
+		exit
+		assert !is_active
+	}
 }

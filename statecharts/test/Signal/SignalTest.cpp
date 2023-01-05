@@ -402,6 +402,45 @@ namespace mrw
 
 
 		}
+		TEST_F(SignalTest, doExit)
+		{
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			statechart->enter();
+
+			EXPECT_TRUE(statechart->isActive());
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			idle();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			turning();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			pending();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			failSending();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+
+		}
 
 	}
 }

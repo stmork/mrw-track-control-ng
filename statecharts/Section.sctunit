@@ -386,6 +386,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 
 		// Then
 		assert !occupied
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation._final_)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Left)
 		assert called inc

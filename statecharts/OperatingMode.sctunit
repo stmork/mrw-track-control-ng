@@ -199,4 +199,34 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		assert operating
 		assert valueof(operating) == true
 	}
+
+	@Test
+	operation doExit()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		wait()
+		exit
+		assert !is_active
+
+		initial()
+		exit
+		assert !is_active
+
+		doOperating()
+		exit
+		assert !is_active
+
+		doEdit()
+		exit
+		assert !is_active
+
+		failAfterStart()
+		exit
+		assert !is_active
+	}
 }
