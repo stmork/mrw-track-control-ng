@@ -39,7 +39,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 	}
 
 	@Test
-	operation switches()
+	operation turningSwitches()
 	{
 		// Given
 		start()
@@ -58,7 +58,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 	operation turningSignals()
 	{
 		// Given
-		switches()
+		turningSwitches()
 
 		// When
 		raise completed
@@ -192,7 +192,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 	operation failTurningSwitches()
 	{
 		// Given
-		switches()
+		turningSwitches()
 		mock isCompleted returns (true)
 
 		// When
@@ -248,7 +248,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 	operation failTurningSwitchesIncomplete()
 	{
 		// Given
-		switches()
+		turningSwitches()
 		mock isCompleted returns (false)
 
 		// When
@@ -382,7 +382,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 	operation timeoutTurningSwitches()
 	{
 		// Given
-		switches()
+		turningSwitches()
 
 		// When
 		proceed switch_timeout ms
@@ -460,5 +460,48 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 
 		// Then
 		disabled()
+	}
+
+	@Test
+	operation doExit()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		start()
+		exit
+		assert !is_active
+
+		turningSwitches()
+		exit
+		assert !is_active
+
+		turningSignals()
+		exit
+		assert !is_active
+
+		extendingSignals()
+		exit
+		assert !is_active
+
+		sections()
+		exit
+		assert !is_active
+
+		deactivate()
+		exit
+		assert !is_active
+
+		finish()
+		exit
+		assert !is_active
+		assert !is_active
+
+		failTurningSectionsIncomplete()
+		exit
+		assert !is_active
 	}
 }

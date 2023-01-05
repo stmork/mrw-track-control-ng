@@ -19,12 +19,13 @@ namespace mrw
 
 		void disabled();
 		void start();
-		void switches();
+		void turningSwitches();
 		void turningSignals();
 		void extendingSignals();
 		void sections();
 		void activate();
 		void deactivate();
+		void finish();
 		void failTurningSwitchesIncomplete();
 		void failTurningSignalsIncomplete();
 		void failTurningSectionsIncomplete();
@@ -725,7 +726,7 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			start();
 		}
-		void switches()
+		void turningSwitches()
 		{
 			start();
 
@@ -743,7 +744,7 @@ namespace mrw
 			resetTransactionMock->reset();
 			turnSwitchesMock->reset();
 		}
-		TEST_F(RouteTest, switches)
+		TEST_F(RouteTest, turningSwitches)
 		{
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
@@ -772,11 +773,11 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			switches();
+			turningSwitches();
 		}
 		void turningSignals()
 		{
-			switches();
+			turningSwitches();
 
 			statechart->raiseCompleted();
 
@@ -1114,6 +1115,20 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			deactivate();
 		}
+		void finish()
+		{
+			deactivate();
+
+			statechart->raiseCompleted();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region__final_));
+
+			EXPECT_TRUE(statechart->isRaisedFinished());
+
+			EXPECT_TRUE(statechart->isActive());
+
+
+		}
 		TEST_F(RouteTest, finish)
 		{
 			resetTransactionMock = new ResetTransactionMock();
@@ -1155,17 +1170,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			deactivate();
-
-			statechart->raiseCompleted();
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region__final_));
-
-			EXPECT_TRUE(statechart->isRaisedFinished());
-
-			EXPECT_TRUE(statechart->isActive());
-
-
+			finish();
 		}
 		TEST_F(RouteTest, timeout)
 		{
@@ -1300,7 +1305,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			switches();
+			turningSwitches();
 
 			isCompletedMock->setDefaultBehavior(&IsCompletedMock::isCompleted1);
 
@@ -1463,7 +1468,7 @@ namespace mrw
 		}
 		void failTurningSwitchesIncomplete()
 		{
-			switches();
+			turningSwitches();
 
 			isCompletedMock->setDefaultBehavior(&IsCompletedMock::isCompleted2);
 
@@ -1964,7 +1969,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			switches();
+			turningSwitches();
 
 			runner->proceed_time(statechart->getSwitch_timeout());
 
@@ -2158,6 +2163,91 @@ namespace mrw
 
 			deactivateSectionsMock->reset();
 			unlockSignalsMock->reset();
+		}
+		TEST_F(RouteTest, doExit)
+		{
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			turnSwitchesMock = new TurnSwitchesMock();
+			turnSwitchesMock->initializeBehavior();
+			activateSectionsMock = new ActivateSectionsMock();
+			activateSectionsMock->initializeBehavior();
+			turnSignalsMock = new TurnSignalsMock();
+			turnSignalsMock->initializeBehavior();
+			extendSignalsMock = new ExtendSignalsMock();
+			extendSignalsMock->initializeBehavior();
+			deactivateSectionsMock = new DeactivateSectionsMock();
+			deactivateSectionsMock->initializeBehavior();
+			unlockSignalsMock = new UnlockSignalsMock();
+			unlockSignalsMock->initializeBehavior();
+			unlockSwitchesMock = new UnlockSwitchesMock();
+			unlockSwitchesMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			statechart->enter();
+
+			EXPECT_TRUE(statechart->isActive());
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			start();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			turningSwitches();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			turningSignals();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			extendingSignals();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			sections();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			deactivate();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			finish();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			failTurningSectionsIncomplete();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+
 		}
 
 	}
