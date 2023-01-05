@@ -178,22 +178,10 @@ namespace mrw
 			void triggerWithoutEvent();
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
-			sc::integer getTimeout() const;
-
-			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
-			void setTimeout(sc::integer timeout);
+			static sc::integer getTimeout() ;
 
 			/*! Gets the value of the variable 'delay' that is defined in the default interface scope. */
-			sc::integer getDelay() const;
-
-			/*! Sets the value of the variable 'delay' that is defined in the default interface scope. */
-			void setDelay(sc::integer delay);
-
-			/*! Gets the value of the variable 'symbol' that is defined in the default interface scope. */
-			sc::integer getSymbol() const;
-
-			/*! Sets the value of the variable 'symbol' that is defined in the default interface scope. */
-			void setSymbol(sc::integer symbol);
+			static sc::integer getDelay() ;
 
 			/*! Gets the value of the variable 'OFF' that is defined in the default interface scope. */
 			static sc::integer getOFF() ;
@@ -203,6 +191,12 @@ namespace mrw
 
 			/*! Gets the value of the variable 'GO' that is defined in the default interface scope. */
 			static sc::integer getGO() ;
+
+			/*! Gets the value of the variable 'symbol' that is defined in the default interface scope. */
+			sc::integer getSymbol() const;
+
+			/*! Sets the value of the variable 'symbol' that is defined in the default interface scope. */
+			void setSymbol(sc::integer symbol);
 
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
@@ -297,12 +291,12 @@ namespace mrw
 			SignalControllerStatechart(const SignalControllerStatechart & rhs);
 			SignalControllerStatechart & operator=(const SignalControllerStatechart &);
 
-			sc::integer timeout;
-			sc::integer delay;
-			sc::integer symbol;
+			static const sc::integer timeout;
+			static const sc::integer delay;
 			static const sc::integer OFF;
 			static const sc::integer STOP;
 			static const sc::integer GO;
+			sc::integer symbol;
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.

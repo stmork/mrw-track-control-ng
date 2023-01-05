@@ -16,6 +16,7 @@ namespace mrw
 	namespace statechart
 	{
 
+		const sc::integer SignalStatechart::timeout = 2000;
 		const sc::integer SignalStatechart::OFF = -1;
 		const sc::integer SignalStatechart::STOP = 0;
 		const sc::integer SignalStatechart::GO = 1;
@@ -24,7 +25,6 @@ namespace mrw
 
 		SignalStatechart::SignalStatechart(QObject * parent) :
 			QObject(parent),
-			timeout(2000),
 			symbol(SignalStatechart::STOP),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
@@ -245,24 +245,14 @@ namespace mrw
 			}
 		}
 
-		sc::integer SignalStatechart::getTimeout() const
+		sc::integer SignalStatechart::getTimeout()
 		{
 			return timeout;
-		}
-
-		void SignalStatechart::setTimeout(sc::integer timeout_)
-		{
-			this->timeout = timeout_;
 		}
 
 		sc::integer SignalStatechart::getSymbol() const
 		{
 			return symbol;
-		}
-
-		void SignalStatechart::setSymbol(sc::integer symbol_)
-		{
-			this->symbol = symbol_;
 		}
 
 		sc::integer SignalStatechart::getOFF()
@@ -290,7 +280,7 @@ namespace mrw
 		void SignalStatechart::enact_main_region_Turning()
 		{
 			/* Entry action for state 'Turning'. */
-			timerService->setTimer(this, 0, timeout, false);
+			timerService->setTimer(this, 0, SignalStatechart::timeout, false);
 			ifaceOperationCallback->prepare();
 		}
 

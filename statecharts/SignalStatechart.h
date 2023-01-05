@@ -100,16 +100,10 @@ namespace mrw
 			void triggerWithoutEvent();
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
-			sc::integer getTimeout() const;
-
-			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
-			void setTimeout(sc::integer timeout);
+			static sc::integer getTimeout() ;
 
 			/*! Gets the value of the variable 'symbol' that is defined in the default interface scope. */
 			sc::integer getSymbol() const;
-
-			/*! Sets the value of the variable 'symbol' that is defined in the default interface scope. */
-			void setSymbol(sc::integer symbol);
 
 			/*! Gets the value of the variable 'OFF' that is defined in the default interface scope. */
 			static sc::integer getOFF() ;
@@ -228,7 +222,7 @@ namespace mrw
 			SignalStatechart(const SignalStatechart & rhs);
 			SignalStatechart & operator=(const SignalStatechart &);
 
-			sc::integer timeout;
+			static const sc::integer timeout;
 			sc::integer symbol;
 			static const sc::integer OFF;
 			static const sc::integer STOP;

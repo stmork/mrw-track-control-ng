@@ -106,28 +106,16 @@ namespace mrw
 			void triggerWithoutEvent();
 
 			/*! Gets the value of the variable 'switch_timeout' that is defined in the default interface scope. */
-			sc::integer getSwitch_timeout() const;
-
-			/*! Sets the value of the variable 'switch_timeout' that is defined in the default interface scope. */
-			void setSwitch_timeout(sc::integer switch_timeout);
+			static sc::integer getSwitch_timeout() ;
 
 			/*! Gets the value of the variable 'signal_timeout' that is defined in the default interface scope. */
-			sc::integer getSignal_timeout() const;
-
-			/*! Sets the value of the variable 'signal_timeout' that is defined in the default interface scope. */
-			void setSignal_timeout(sc::integer signal_timeout);
+			static sc::integer getSignal_timeout() ;
 
 			/*! Gets the value of the variable 'section_timeout' that is defined in the default interface scope. */
-			sc::integer getSection_timeout() const;
-
-			/*! Sets the value of the variable 'section_timeout' that is defined in the default interface scope. */
-			void setSection_timeout(sc::integer section_timeout);
+			static sc::integer getSection_timeout() ;
 
 			/*! Gets the value of the variable 'emergency' that is defined in the default interface scope. */
-			sc::integer getEmergency() const;
-
-			/*! Sets the value of the variable 'emergency' that is defined in the default interface scope. */
-			void setEmergency(sc::integer emergency);
+			static sc::integer getEmergency() ;
 
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
@@ -248,10 +236,10 @@ namespace mrw
 			RouteStatechart(const RouteStatechart & rhs);
 			RouteStatechart & operator=(const RouteStatechart &);
 
-			sc::integer switch_timeout;
-			sc::integer signal_timeout;
-			sc::integer section_timeout;
-			sc::integer emergency;
+			static const sc::integer switch_timeout;
+			static const sc::integer signal_timeout;
+			static const sc::integer section_timeout;
+			static const sc::integer emergency;
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.

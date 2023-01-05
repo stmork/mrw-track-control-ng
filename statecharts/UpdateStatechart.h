@@ -103,46 +103,25 @@ namespace mrw
 			void triggerWithoutEvent();
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
-			sc::integer getTimeout() const;
-
-			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
-			void setTimeout(sc::integer timeout);
+			static sc::integer getTimeout() ;
 
 			/*! Gets the value of the variable 'delay_boot' that is defined in the default interface scope. */
-			sc::integer getDelay_boot() const;
-
-			/*! Sets the value of the variable 'delay_boot' that is defined in the default interface scope. */
-			void setDelay_boot(sc::integer delay_boot);
+			static sc::integer getDelay_boot() ;
 
 			/*! Gets the value of the variable 'delay_reset' that is defined in the default interface scope. */
-			sc::integer getDelay_reset() const;
-
-			/*! Sets the value of the variable 'delay_reset' that is defined in the default interface scope. */
-			void setDelay_reset(sc::integer delay_reset);
+			static sc::integer getDelay_reset() ;
 
 			/*! Gets the value of the variable 'delay_flash_request' that is defined in the default interface scope. */
-			sc::integer getDelay_flash_request() const;
-
-			/*! Sets the value of the variable 'delay_flash_request' that is defined in the default interface scope. */
-			void setDelay_flash_request(sc::integer delay_flash_request);
+			static sc::integer getDelay_flash_request() ;
 
 			/*! Gets the value of the variable 'delay_flash_page' that is defined in the default interface scope. */
-			sc::integer getDelay_flash_page() const;
-
-			/*! Sets the value of the variable 'delay_flash_page' that is defined in the default interface scope. */
-			void setDelay_flash_page(sc::integer delay_flash_page);
+			static sc::integer getDelay_flash_page() ;
 
 			/*! Gets the value of the variable 'count' that is defined in the default interface scope. */
 			sc::integer getCount() const;
 
-			/*! Sets the value of the variable 'count' that is defined in the default interface scope. */
-			void setCount(sc::integer count);
-
 			/*! Gets the value of the variable 'error' that is defined in the default interface scope. */
 			sc::integer getError() const;
-
-			/*! Sets the value of the variable 'error' that is defined in the default interface scope. */
-			void setError(sc::integer error);
 
 			/*! Gets the value of the variable 'retry' that is defined in the default interface scope. */
 			static sc::integer getRetry() ;
@@ -252,11 +231,11 @@ namespace mrw
 			UpdateStatechart(const UpdateStatechart & rhs);
 			UpdateStatechart & operator=(const UpdateStatechart &);
 
-			sc::integer timeout;
-			sc::integer delay_boot;
-			sc::integer delay_reset;
-			sc::integer delay_flash_request;
-			sc::integer delay_flash_page;
+			static const sc::integer timeout;
+			static const sc::integer delay_boot;
+			static const sc::integer delay_reset;
+			static const sc::integer delay_flash_request;
+			static const sc::integer delay_flash_page;
 			sc::integer count;
 			sc::integer error;
 			static const sc::integer retry;

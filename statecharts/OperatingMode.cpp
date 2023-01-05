@@ -16,11 +16,12 @@ namespace mrw
 	namespace statechart
 	{
 
+		const sc::integer OperatingMode::timeout = 5000;
+
 
 
 		OperatingMode::OperatingMode(QObject * parent) :
 			QObject(parent),
-			timeout(5000),
 			timerService(nullptr),
 			ifaceCan(nullptr),
 			ifaceOperationCallback(nullptr),
@@ -275,14 +276,9 @@ namespace mrw
 			}
 		}
 
-		sc::integer OperatingMode::getTimeout() const
+		sc::integer OperatingMode::getTimeout()
 		{
 			return timeout;
-		}
-
-		void OperatingMode::setTimeout(sc::integer timeout_)
-		{
-			this->timeout = timeout_;
 		}
 
 		void OperatingMode::setOperationCallback(OperationCallback * operationCallback)
@@ -303,7 +299,7 @@ namespace mrw
 		void OperatingMode::enact_main_region_Prepare_Bus()
 		{
 			/* Entry action for state 'Prepare Bus'. */
-			timerService->setTimer(this, 0, timeout, false);
+			timerService->setTimer(this, 0, OperatingMode::timeout, false);
 			ifaceCan.ifaceCanOperationCallback->connectBus();
 		}
 
@@ -311,7 +307,7 @@ namespace mrw
 		void OperatingMode::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(this, 1, timeout, false);
+			timerService->setTimer(this, 1, OperatingMode::timeout, false);
 			ifaceOperationCallback->resetTransaction();
 			emit start();
 		}

@@ -90,16 +90,10 @@ namespace mrw
 			void triggerWithoutEvent();
 
 			/*! Gets the value of the variable 'start' that is defined in the default interface scope. */
-			sc::integer getStart() const;
-
-			/*! Sets the value of the variable 'start' that is defined in the default interface scope. */
-			void setStart(sc::integer start);
+			static sc::integer getStart() ;
 
 			/*! Gets the value of the variable 'step' that is defined in the default interface scope. */
-			sc::integer getStep() const;
-
-			/*! Sets the value of the variable 'step' that is defined in the default interface scope. */
-			void setStep(sc::integer step);
+			static sc::integer getStep() ;
 
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
@@ -190,8 +184,8 @@ namespace mrw
 			TrackerStatechart(const TrackerStatechart & rhs);
 			TrackerStatechart & operator=(const TrackerStatechart &);
 
-			sc::integer start;
-			sc::integer step;
+			static const sc::integer start;
+			static const sc::integer step;
 
 
 

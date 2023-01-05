@@ -16,16 +16,16 @@ namespace mrw
 	namespace statechart
 	{
 
+		const sc::integer UpdateStatechart::timeout = 250;
+		const sc::integer UpdateStatechart::delay_boot = 3000;
+		const sc::integer UpdateStatechart::delay_reset = 1200;
+		const sc::integer UpdateStatechart::delay_flash_request = 20;
+		const sc::integer UpdateStatechart::delay_flash_page = 60;
 		const sc::integer UpdateStatechart::retry = 5;
 
 
 
 		UpdateStatechart::UpdateStatechart() :
-			timeout(250),
-			delay_boot(3000),
-			delay_reset(1200),
-			delay_flash_request(20),
-			delay_flash_page(60),
 			count(0),
 			error(0),
 			timerService(nullptr),
@@ -234,54 +234,29 @@ namespace mrw
 			}
 		}
 
-		sc::integer UpdateStatechart::getTimeout() const
+		sc::integer UpdateStatechart::getTimeout()
 		{
 			return timeout;
 		}
 
-		void UpdateStatechart::setTimeout(sc::integer timeout_)
-		{
-			this->timeout = timeout_;
-		}
-
-		sc::integer UpdateStatechart::getDelay_boot() const
+		sc::integer UpdateStatechart::getDelay_boot()
 		{
 			return delay_boot;
 		}
 
-		void UpdateStatechart::setDelay_boot(sc::integer delay_boot_)
-		{
-			this->delay_boot = delay_boot_;
-		}
-
-		sc::integer UpdateStatechart::getDelay_reset() const
+		sc::integer UpdateStatechart::getDelay_reset()
 		{
 			return delay_reset;
 		}
 
-		void UpdateStatechart::setDelay_reset(sc::integer delay_reset_)
-		{
-			this->delay_reset = delay_reset_;
-		}
-
-		sc::integer UpdateStatechart::getDelay_flash_request() const
+		sc::integer UpdateStatechart::getDelay_flash_request()
 		{
 			return delay_flash_request;
 		}
 
-		void UpdateStatechart::setDelay_flash_request(sc::integer delay_flash_request_)
-		{
-			this->delay_flash_request = delay_flash_request_;
-		}
-
-		sc::integer UpdateStatechart::getDelay_flash_page() const
+		sc::integer UpdateStatechart::getDelay_flash_page()
 		{
 			return delay_flash_page;
-		}
-
-		void UpdateStatechart::setDelay_flash_page(sc::integer delay_flash_page_)
-		{
-			this->delay_flash_page = delay_flash_page_;
 		}
 
 		sc::integer UpdateStatechart::getCount() const
@@ -289,19 +264,9 @@ namespace mrw
 			return count;
 		}
 
-		void UpdateStatechart::setCount(sc::integer count_)
-		{
-			this->count = count_;
-		}
-
 		sc::integer UpdateStatechart::getError() const
 		{
 			return error;
-		}
-
-		void UpdateStatechart::setError(sc::integer error_)
-		{
-			this->error = error_;
 		}
 
 		sc::integer UpdateStatechart::getRetry()
@@ -319,7 +284,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Ping()
 		{
 			/* Entry action for state 'Ping'. */
-			timerService->setTimer(this, 0, timeout, false);
+			timerService->setTimer(this, 0, UpdateStatechart::timeout, false);
 			ifaceOperationCallback->ping();
 		}
 
@@ -327,7 +292,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Reset()
 		{
 			/* Entry action for state 'Reset'. */
-			timerService->setTimer(this, 1, delay_boot, false);
+			timerService->setTimer(this, 1, UpdateStatechart::delay_boot, false);
 			ifaceOperationCallback->init();
 			ifaceOperationCallback->boot();
 		}
@@ -336,7 +301,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Flash_Request()
 		{
 			/* Entry action for state 'Flash Request'. */
-			timerService->setTimer(this, 2, delay_flash_request, false);
+			timerService->setTimer(this, 2, UpdateStatechart::delay_flash_request, false);
 			ifaceOperationCallback->init();
 			ifaceOperationCallback->flashRequest();
 		}
@@ -345,7 +310,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Flash_Complete_Page()
 		{
 			/* Entry action for state 'Flash Complete Page'. */
-			timerService->setTimer(this, 3, delay_flash_page, false);
+			timerService->setTimer(this, 3, UpdateStatechart::delay_flash_page, false);
 			ifaceOperationCallback->flashCompletePage();
 		}
 
@@ -353,7 +318,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Flash_Rest()
 		{
 			/* Entry action for state 'Flash Rest'. */
-			timerService->setTimer(this, 4, delay_flash_page, false);
+			timerService->setTimer(this, 4, UpdateStatechart::delay_flash_page, false);
 			ifaceOperationCallback->flashRestPage();
 		}
 
@@ -361,7 +326,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Flash_Check()
 		{
 			/* Entry action for state 'Flash Check'. */
-			timerService->setTimer(this, 5, delay_boot, false);
+			timerService->setTimer(this, 5, UpdateStatechart::delay_boot, false);
 			ifaceOperationCallback->init();
 			ifaceOperationCallback->flashCheck();
 		}
@@ -370,7 +335,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Wait_Bootloader()
 		{
 			/* Entry action for state 'Wait Bootloader'. */
-			timerService->setTimer(this, 6, delay_reset, false);
+			timerService->setTimer(this, 6, UpdateStatechart::delay_reset, false);
 			count = 0;
 		}
 
@@ -385,7 +350,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Successful()
 		{
 			/* Entry action for state 'Successful'. */
-			timerService->setTimer(this, 7, delay_boot, false);
+			timerService->setTimer(this, 7, UpdateStatechart::delay_boot, false);
 			ifaceOperationCallback->init();
 		}
 

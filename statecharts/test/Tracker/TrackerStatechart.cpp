@@ -16,11 +16,12 @@ namespace mrw
 	namespace statechart
 	{
 
+		const sc::integer TrackerStatechart::start = 1000;
+		const sc::integer TrackerStatechart::step = 300;
+
 
 
 		TrackerStatechart::TrackerStatechart() :
-			start(1000),
-			step(300),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
@@ -202,24 +203,14 @@ namespace mrw
 			}
 		}
 
-		sc::integer TrackerStatechart::getStart() const
+		sc::integer TrackerStatechart::getStart()
 		{
 			return start;
 		}
 
-		void TrackerStatechart::setStart(sc::integer start_)
-		{
-			this->start = start_;
-		}
-
-		sc::integer TrackerStatechart::getStep() const
+		sc::integer TrackerStatechart::getStep()
 		{
 			return step;
-		}
-
-		void TrackerStatechart::setStep(sc::integer step_)
-		{
-			this->step = step_;
 		}
 
 		void TrackerStatechart::setOperationCallback(OperationCallback * operationCallback)
@@ -232,14 +223,14 @@ namespace mrw
 		void TrackerStatechart::enact_main_region_Preparing()
 		{
 			/* Entry action for state 'Preparing'. */
-			timerService->setTimer(this, 0, start, false);
+			timerService->setTimer(this, 0, TrackerStatechart::start, false);
 		}
 
 		/* Entry action for state 'First'. */
 		void TrackerStatechart::enact_main_region_Driving_Tracking_First()
 		{
 			/* Entry action for state 'First'. */
-			timerService->setTimer(this, 1, step, false);
+			timerService->setTimer(this, 1, TrackerStatechart::step, false);
 			ifaceOperationCallback->first();
 		}
 
@@ -247,7 +238,7 @@ namespace mrw
 		void TrackerStatechart::enact_main_region_Driving_Tracking_Occupy()
 		{
 			/* Entry action for state 'Occupy'. */
-			timerService->setTimer(this, 2, step, false);
+			timerService->setTimer(this, 2, TrackerStatechart::step, false);
 			ifaceOperationCallback->occupy();
 		}
 
@@ -255,7 +246,7 @@ namespace mrw
 		void TrackerStatechart::enact_main_region_Driving_Tracking_Free()
 		{
 			/* Entry action for state 'Free'. */
-			timerService->setTimer(this, 3, step, false);
+			timerService->setTimer(this, 3, TrackerStatechart::step, false);
 			ifaceOperationCallback->free();
 			internalEventQueue.push_back(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::Internal_completed));
 		}

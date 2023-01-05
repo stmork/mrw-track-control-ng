@@ -16,6 +16,8 @@ namespace mrw
 	namespace statechart
 	{
 
+		const sc::integer SignalControllerStatechart::timeout = 5000;
+		const sc::integer SignalControllerStatechart::delay = 350;
 		const sc::integer SignalControllerStatechart::OFF = -1;
 		const sc::integer SignalControllerStatechart::STOP = 0;
 		const sc::integer SignalControllerStatechart::GO = 1;
@@ -24,8 +26,6 @@ namespace mrw
 
 		SignalControllerStatechart::SignalControllerStatechart(QObject * parent) :
 			QObject(parent),
-			timeout(5000),
-			delay(350),
 			symbol(SignalControllerStatechart::STOP),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
@@ -426,34 +426,14 @@ namespace mrw
 			}
 		}
 
-		sc::integer SignalControllerStatechart::getTimeout() const
+		sc::integer SignalControllerStatechart::getTimeout()
 		{
 			return timeout;
 		}
 
-		void SignalControllerStatechart::setTimeout(sc::integer timeout_)
-		{
-			this->timeout = timeout_;
-		}
-
-		sc::integer SignalControllerStatechart::getDelay() const
+		sc::integer SignalControllerStatechart::getDelay()
 		{
 			return delay;
-		}
-
-		void SignalControllerStatechart::setDelay(sc::integer delay_)
-		{
-			this->delay = delay_;
-		}
-
-		sc::integer SignalControllerStatechart::getSymbol() const
-		{
-			return symbol;
-		}
-
-		void SignalControllerStatechart::setSymbol(sc::integer symbol_)
-		{
-			this->symbol = symbol_;
 		}
 
 		sc::integer SignalControllerStatechart::getOFF()
@@ -471,6 +451,16 @@ namespace mrw
 			return GO;
 		}
 
+		sc::integer SignalControllerStatechart::getSymbol() const
+		{
+			return symbol;
+		}
+
+		void SignalControllerStatechart::setSymbol(sc::integer symbol_)
+		{
+			this->symbol = symbol_;
+		}
+
 		void SignalControllerStatechart::setOperationCallback(OperationCallback * operationCallback)
 		{
 			ifaceOperationCallback = operationCallback;
@@ -481,7 +471,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(this, 0, timeout, false);
+			timerService->setTimer(this, 0, SignalControllerStatechart::timeout, false);
 			ifaceOperationCallback->inc();
 		}
 
@@ -549,7 +539,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Shunting_State_Processing_Waiting()
 		{
 			/* Entry action for state 'Waiting'. */
-			timerService->setTimer(this, 1, timeout, false);
+			timerService->setTimer(this, 1, SignalControllerStatechart::timeout, false);
 			ifaceOperationCallback->inc();
 		}
 
@@ -580,7 +570,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Processing_Waiting()
 		{
 			/* Entry action for state 'Waiting'. */
-			timerService->setTimer(this, 2, timeout, false);
+			timerService->setTimer(this, 2, SignalControllerStatechart::timeout, false);
 			ifaceOperationCallback->inc();
 		}
 
@@ -612,7 +602,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Delay()
 		{
 			/* Entry action for state 'Delay'. */
-			timerService->setTimer(this, 3, delay, false);
+			timerService->setTimer(this, 3, SignalControllerStatechart::delay, false);
 		}
 
 		/* Entry action for state 'Stop Shunt'. */
@@ -635,7 +625,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Pending()
 		{
 			/* Entry action for state 'Pending'. */
-			timerService->setTimer(this, 4, timeout, false);
+			timerService->setTimer(this, 4, SignalControllerStatechart::timeout, false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}

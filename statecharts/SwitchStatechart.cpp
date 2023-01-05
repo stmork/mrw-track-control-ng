@@ -16,11 +16,12 @@ namespace mrw
 	namespace statechart
 	{
 
+		const sc::integer SwitchStatechart::timeout = 2000;
+
 
 
 		SwitchStatechart::SwitchStatechart(QObject * parent) :
 			QObject(parent),
-			timeout(2000),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
@@ -312,14 +313,9 @@ namespace mrw
 			}
 		}
 
-		sc::integer SwitchStatechart::getTimeout() const
+		sc::integer SwitchStatechart::getTimeout()
 		{
 			return timeout;
-		}
-
-		void SwitchStatechart::setTimeout(sc::integer timeout_)
-		{
-			this->timeout = timeout_;
 		}
 
 		void SwitchStatechart::setOperationCallback(OperationCallback * operationCallback)
@@ -332,7 +328,7 @@ namespace mrw
 		void SwitchStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(this, 0, timeout, false);
+			timerService->setTimer(this, 0, SwitchStatechart::timeout, false);
 			emit entered();
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->request();
@@ -356,7 +352,7 @@ namespace mrw
 		void SwitchStatechart::enact_main_region_Operating_operating_Turning()
 		{
 			/* Entry action for state 'Turning'. */
-			timerService->setTimer(this, 1, timeout, false);
+			timerService->setTimer(this, 1, SwitchStatechart::timeout, false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}

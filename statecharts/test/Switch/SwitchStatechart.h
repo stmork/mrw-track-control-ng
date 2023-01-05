@@ -125,10 +125,7 @@ namespace mrw
 			void triggerWithoutEvent();
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
-			sc::integer getTimeout() const;
-
-			/*! Sets the value of the variable 'timeout' that is defined in the default interface scope. */
-			void setTimeout(sc::integer timeout);
+			static sc::integer getTimeout() ;
 
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
@@ -225,7 +222,7 @@ namespace mrw
 			SwitchStatechart(const SwitchStatechart & rhs);
 			SwitchStatechart & operator=(const SwitchStatechart &);
 
-			sc::integer timeout;
+			static const sc::integer timeout;
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
