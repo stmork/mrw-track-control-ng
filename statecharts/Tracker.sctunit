@@ -150,5 +150,35 @@ testclass TrackerTest for statechart mrw.^statechart.TrackerStatechart
 		assert active(mrw.^statechart.TrackerStatechart.main_region.Idle)
 		assert called clear
 	}
+
+	@Test
+	operation doExit()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		idle()
+		exit
+		assert !is_active
+
+		receivedFirst()
+		exit
+		assert !is_active
+
+		delayValid()
+		exit
+		assert !is_active
+
+		occupyState()
+		exit
+		assert !is_active
+
+		freeState()
+		exit
+		assert !is_active
+	}
 }
 

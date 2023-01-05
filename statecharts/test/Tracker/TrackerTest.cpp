@@ -713,6 +713,59 @@ namespace mrw
 			lastMock->reset();
 			clearMock->reset();
 		}
+		TEST_F(TrackerTest, doExit)
+		{
+			clearMock = new ClearMock();
+			clearMock->initializeBehavior();
+			firstMock = new FirstMock();
+			firstMock->initializeBehavior();
+			freeMock = new FreeMock();
+			freeMock->initializeBehavior();
+			occupyMock = new OccupyMock();
+			occupyMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			statechart->enter();
+
+			EXPECT_TRUE(statechart->isActive());
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			idle();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			receivedFirst();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			delayValid();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			occupyState();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			freeState();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+
+		}
 
 	}
 }
