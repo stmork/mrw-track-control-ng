@@ -138,7 +138,6 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 
 		// Then
 		assert count == retry
-
 	}
 
 	@Test
@@ -152,21 +151,20 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		proceed delay_flash_request ms
 
 		// Then
-		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Rest)
-		assert !called flashCompletePage
-		assert  called hasPages
-		assert  called flashRestPage
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert error == 6
+		assert called fail
 	}
 
 	@Test
 	operation firstCompletePage()
 	{
 		// Given
-		lastFlashRequest()
+		flashRequested()
 		mock hasPages returns (true)
 
 		// When
-		proceed delay_flash_request ms
+		proceed delay_flash_page ms
 
 		// Then
 		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Complete_Page)

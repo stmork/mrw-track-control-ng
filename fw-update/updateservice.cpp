@@ -216,11 +216,11 @@ void UpdateService::fail(sc::integer error_code)
 		break;
 
 	case 1:
-		qCritical("Timeout calling PING!");
+		qCritical("Timeout after calling PING!");
 		break;
 
 	case 2:
-		qCritical("Timeout calling RESET!");
+		qCritical("Timeout after calling RESET!");
 		break;
 
 	case 3:
@@ -233,6 +233,10 @@ void UpdateService::fail(sc::integer error_code)
 
 	case 5:
 		qCritical("Timeout while booting!");
+		break;
+
+	case 6:
+		qCritical("Retry exceeded requesting flash!");
 		break;
 
 	default:

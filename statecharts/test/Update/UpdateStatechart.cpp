@@ -656,7 +656,8 @@ namespace mrw
 			}
 			else
 			{
-				react_main_region__choice_1();
+				error = 6;
+				enseq_main_region_Failed_default();
 			}
 		}
 

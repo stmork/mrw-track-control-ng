@@ -21,6 +21,7 @@ namespace mrw
 		void doReset();
 		void doWait();
 		void firstFlashRequest();
+		void flashRequested();
 		void lastFlashRequest();
 		void firstCompletePage();
 		void nextCompletePage();
@@ -988,6 +989,19 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			firstFlashRequest();
 		}
+		void flashRequested()
+		{
+			firstFlashRequest();
+
+			hasPagesMock->setDefaultBehavior(&HasPagesMock::hasPages1);
+
+			statechart->raiseComplete();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Flash_Complete_Page));
+
+
+			hasPagesMock->reset();
+		}
 		TEST_F(UpdateTest, flashRequested)
 		{
 			hasPagesMock = new HasPagesMock();
@@ -1023,16 +1037,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			firstFlashRequest();
-
-			hasPagesMock->setDefaultBehavior(&HasPagesMock::hasPages1);
-
-			statechart->raiseComplete();
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Flash_Complete_Page));
-
-
-			hasPagesMock->reset();
+			flashRequested();
 		}
 		void lastFlashRequest()
 		{
@@ -1096,10 +1101,7 @@ namespace mrw
 		{
 			hasPagesMock = new HasPagesMock();
 			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
+			failMock = new FailMock();
 			hasPagesMock = new HasPagesMock();
 			hasPagesMock->initializeBehavior();
 			initMock = new InitMock();
@@ -1139,26 +1141,23 @@ namespace mrw
 
 			runner->proceed_time(statechart->getDelay_flash_request());
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Flash_Rest));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
 
-			EXPECT_FALSE(flashCompletePageMock->calledAtLeastOnce());
+			EXPECT_TRUE((statechart->getError()) == (6));
 
-			EXPECT_TRUE(hasPagesMock->calledAtLeastOnce());
-
-			EXPECT_TRUE(flashRestPageMock->calledAtLeastOnce());
+			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
 
 			hasPagesMock->reset();
-			flashCompletePageMock->reset();
-			flashRestPageMock->reset();
+			failMock->reset();
 		}
 		void firstCompletePage()
 		{
-			lastFlashRequest();
+			flashRequested();
 
 			hasPagesMock->setDefaultBehavior(&HasPagesMock::hasPages1);
 
-			runner->proceed_time(statechart->getDelay_flash_request());
+			runner->proceed_time(statechart->getDelay_flash_page());
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Flash_Complete_Page));
 
