@@ -14,6 +14,7 @@
 #include <vector>
 #include <unordered_map>
 
+#include <util/method.h>
 #include <util/stringutil.h>
 #include <model/controller.h>
 #include <model/region.h>
@@ -271,15 +272,12 @@ namespace mrw::model
 		 *
 		 * @param result The result vector collecting the AssembyPart elements
 		 * of type T.
+		 * @param guard A labmda to fine select if the type T should added to
+		 * the result vector.
 		 */
 		template <class T> void parts(
 			std::vector<T *>          &         result,
-			std::function<bool(const T * part)> guard = [](const T * part)
-		{
-			(void)part;
-
-			return true;
-		})
+			std::function<bool(const T * part)> guard = &mrw::util::Method::always<T>)
 		{
 			for (Region * sub : regions)
 			{

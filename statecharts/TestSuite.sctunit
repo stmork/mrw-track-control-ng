@@ -3,14 +3,16 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
+package mrw.test
+
 testsuite TestSuite
 {
-	OperatingModeTest,
-	SwitchTest,
-	SignalTest,
-	SignalControllerTest,
-	SectionTest,
-	RouteTest,
-	TrackerTest,
-	UpdateTest
+	mrw.test.OperatingModeTest,
+	mrw.test.SwitchTest,
+	mrw.test.SignalTest,
+	mrw.test.SignalControllerTest,
+	mrw.test.SectionTest,
+	mrw.test.RouteTest,
+	mrw.test.TrackerTest,
+	mrw.test.UpdateTest
 }

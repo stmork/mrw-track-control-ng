@@ -105,8 +105,13 @@ void TestUtil::testStringOut()
 void TestUtil::testMethod()
 {
 	__METHOD__;
+	const int value = 123456;
 
-	usleep(123456);
+	usleep(value);
+	QCOMPARE(Method::always<int>(&value),  true);
+	QCOMPARE(Method::never<int>(&value),  false);
+	QCOMPARE(Method::always<int>(nullptr), true);
+	QCOMPARE(Method::never<int>(nullptr), false);
 }
 
 void TestUtil::testConstantEnumerator()

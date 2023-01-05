@@ -70,7 +70,7 @@ namespace mrw::util
 		 * This static template method returns a secure random number of the
 		 * specified type and range [0..max].
 		 *
-		 * @param size The maximum border of the random number range including
+		 * @param max The maximum border of the random number range including
 		 * the maximum.
 		 * @return The secure random number.
 		 */

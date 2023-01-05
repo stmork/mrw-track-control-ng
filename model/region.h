@@ -12,6 +12,7 @@
 
 #include <QDomElement>
 
+#include <util/method.h>
 #include <util/stringutil.h>
 #include <model/section.h>
 
@@ -110,12 +111,7 @@ namespace mrw::model
 		 */
 		template <class T> void parts(
 			std::vector<T *>          &         result,
-			std::function<bool(const T * part)> guard = [](const T * part)
-		{
-			(void)part;
-
-			return true;
-		})
+			std::function<bool(const T * part)> guard = &mrw::util::Method::always<T>)
 		{
 			for (Section * sub : sections)
 			{

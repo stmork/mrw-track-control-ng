@@ -458,6 +458,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
+		assert unregister
 		assert called dec
 		assert left
 	}
@@ -494,6 +495,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
+		assert unregister
 		assert called free
 		assert called lock
 	}

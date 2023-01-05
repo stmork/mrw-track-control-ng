@@ -16,6 +16,7 @@
 #include <QDomElement>
 
 #include <util/constantenumerator.h>
+#include <util/method.h>
 #include <util/stringutil.h>
 #include <model/module.h>
 #include <model/device.h>
@@ -231,12 +232,7 @@ namespace mrw::model
 		 */
 		template <class T> void parts(
 			std::vector<T *> & result,
-			std::function<bool(const T * part)> guard = [](const T * part)
-		{
-			(void)part;
-
-			return true;
-		}) const
+			std::function<bool(const T * part)> guard = &mrw::util::Method::always<T>) const
 		{
 			for (AssemblyPart * part : assembly_parts)
 			{

@@ -47,6 +47,34 @@ namespace mrw::util
 		 * timestamp logging type and of course its message.
 		 */
 		static void pattern();
+
+		/**
+		 * This static template function acts as a default for lambda
+		 * callbacks which always returns true on a specific given type T.
+		 *
+		 * @param ptr Never used.
+		 * @returns Always true regarding to input.
+		 */
+		template<class T> static bool always(const T * ptr)
+		{
+			(void)ptr;
+
+			return true;
+		}
+
+		/**
+		 * This static template function acts as a default for lambda
+		 * callbacks which always returns false on a specific given type T.
+		 *
+		 * @param ptr Never used.
+		 * @returns Always false regarding to input.
+		 */
+		template<class T> static bool never(const T * ptr)
+		{
+			(void)ptr;
+
+			return false;
+		}
 	};
 }
 
