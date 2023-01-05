@@ -55,6 +55,11 @@ void BaseWidget::paintEvent(QPaintEvent * event)
 	paint(painter);
 }
 
+bool BaseWidget::isLockPending() const
+{
+	return false;
+}
+
 QColor BaseWidget::sectionColor(const SectionState state)
 {
 	auto it = color_map.find(state);

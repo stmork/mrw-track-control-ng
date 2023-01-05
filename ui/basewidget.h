@@ -25,21 +25,21 @@ namespace mrw::ui
 		Q_OBJECT
 
 	public:
-		static constexpr int   SIZE        =  36;
-		static constexpr float SCALE       = 100.0f;
-		static constexpr int   FONT_HEIGHT =  55;
-		static constexpr int   FONT_SIZE   = FONT_HEIGHT * 0.8;
-		static constexpr float RAIL_WIDTH  =  20.0f;
-		static constexpr float RAIL_SLOPE  =   2.0f;
-		static constexpr int   LOCK_WIDTH  =  40;
-		static constexpr int   LOCK_HEIGHT =  22;
+		static constexpr int    SIZE        =  36;
+		static constexpr float  SCALE       = 100.0f;
+		static constexpr int    FONT_HEIGHT =  55;
+		static constexpr int    FONT_SIZE   = FONT_HEIGHT * 0.8;
+		static constexpr float  RAIL_WIDTH  =  20.0f;
+		static constexpr float  RAIL_SLOPE  =   2.0f;
+		static constexpr int    LOCK_WIDTH  =  40;
+		static constexpr int    LOCK_HEIGHT =  22;
 
-		static const QColor GREEN;
-		static const QColor WHITE;
-		static const QColor RED;
-		static const QColor YELLOW;
-		static const QColor BLUE;
-		static const QColor RED_LIGHT;
+		static const     QColor GREEN;
+		static const     QColor WHITE;
+		static const     QColor RED;
+		static const     QColor YELLOW;
+		static const     QColor BLUE;
+		static const     QColor RED_LIGHT;
 
 		explicit BaseWidget(QWidget * parent = nullptr);
 
@@ -49,10 +49,7 @@ namespace mrw::ui
 
 		virtual void paintEvent(QPaintEvent * event) override;
 		virtual void paint(QPainter & painter) = 0;
-		virtual bool isLockPending() const
-		{
-			return false;
-		}
+		virtual bool isLockPending() const;
 
 		static QColor sectionColor(const mrw::model::SectionState state);
 
