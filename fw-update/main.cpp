@@ -5,6 +5,7 @@
 
 #include <QCoreApplication>
 
+#include <can/cansettings.h>
 #include <util/method.h>
 #include <util/termhandler.h>
 
@@ -20,7 +21,8 @@ int main(int argc, char * argv[])
 	Method::pattern();
 
 	TermHandler           term_handler( { SIGTERM, SIGINT } );
-	UpdateService         service;
+	CanSettings           settings;
+	UpdateService         service(settings.interface(), settings.plugin());
 
 	return app.exec();
 }

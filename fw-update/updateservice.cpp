@@ -20,15 +20,22 @@ UpdateService::UpdateService(
 	const QString & interface,
 	const QString & plugin,
 	QObject    *    parent) :
-	MrwBusService(interface, plugin, parent),
+	MrwBusService(interface, plugin, parent, false),
 	statechart(nullptr)
 {
 	buffer.reserve(65536);
 	read("/lib/firmware/mrw/mrw-firmware-m32.hex");
 
+	connect(
+		this, &MrwBusService::connected,
+		&statechart, &UpdateStatechart::connected,
+		Qt::QueuedConnection);
+
 	statechart.setOperationCallback(this);
 	statechart.setTimerService(&TimerService::instance());
 	statechart.enter();
+
+	can_device->connectDevice();
 }
 
 UpdateService::~UpdateService()
@@ -237,6 +244,10 @@ void UpdateService::fail(sc::integer error_code)
 
 	case 6:
 		qCritical("Retry exceeded requesting flash!");
+		break;
+
+	case 7:
+		qCritical("Timeout connecting to CAN bus!");
 		break;
 
 	default:

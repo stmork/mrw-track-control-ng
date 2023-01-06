@@ -4,7 +4,6 @@
 //
 
 #include <QCoreApplication>
-#include <QHostInfo>
 #include <QDirIterator>
 #include <QDebug>
 
@@ -76,12 +75,12 @@ ModelRepository::operator ModelRailway * () const
 
 const QString & ModelRepository::plugin() const
 {
-	return can_plugin;
+	return settings_host.plugin();
 }
 
 const QString & ModelRepository::interface() const
 {
-	return can_iface;
+	return settings_host.interface();
 }
 
 void ModelRepository::save()
@@ -232,15 +231,12 @@ void ModelRepository::setFilenames()
 
 void ModelRepository::prepareHost()
 {
-	QString       hostname = QHostInfo::localHostName();
-	SettingsGroup group (&settings_host, hostname);
+	SettingsGroup group (settings_host);
 
-	can_plugin  = settings_host.value("plugin", "socketcan").toString();
-	can_iface   = settings_host.value("interface", "can0").toString();
 	dump_result = settings_host.value("dump", dump_result).toBool();
 	dump_xml    = settings_host.value("xml",  dump_xml).toBool();
 
-	qDebug().noquote().nospace() << "Using CAN: " << can_plugin << "/" << can_iface;
+	qDebug().noquote().nospace() << "Using CAN: " << plugin() << "/" << interface();
 }
 
 void ModelRepository::prepareRegions()

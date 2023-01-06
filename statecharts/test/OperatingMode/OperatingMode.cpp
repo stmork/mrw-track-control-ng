@@ -18,6 +18,8 @@ namespace mrw
 
 		const sc::integer OperatingMode::timeout = 5000;
 
+		const sc::integer OperatingMode::Can::timeout = 250;
+
 
 
 		OperatingMode::OperatingMode() :
@@ -329,6 +331,11 @@ namespace mrw
 		{
 			return &ifaceCan;
 		}
+		sc::integer OperatingMode::Can::getTimeout()
+		{
+			return timeout;
+		}
+
 		void OperatingMode::Can::setOperationCallback(OperationCallback * operationCallback)
 		{
 			ifaceCanOperationCallback = operationCallback;
@@ -346,7 +353,7 @@ namespace mrw
 		void OperatingMode::enact_main_region_Prepare_Bus()
 		{
 			/* Entry action for state 'Prepare Bus'. */
-			timerService->setTimer(this, 0, OperatingMode::timeout, false);
+			timerService->setTimer(this, 0, OperatingMode::Can::timeout, false);
 			ifaceCan.ifaceCanOperationCallback->connectBus();
 		}
 

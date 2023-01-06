@@ -138,6 +138,10 @@ namespace mrw
 			public:
 				Can(OperatingMode * parent);
 
+				/*! Gets the value of the variable 'timeout' that is defined in the interface scope 'can'. */
+				static sc::integer getTimeout() ;
+
+
 
 
 
@@ -164,6 +168,7 @@ namespace mrw
 			private:
 				friend class OperatingMode;
 
+				static const sc::integer timeout;
 				/*! Indicates event 'connected' of interface scope 'can' is active. */
 				bool connected_raised;
 

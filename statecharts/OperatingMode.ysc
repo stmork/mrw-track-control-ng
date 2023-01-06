@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_PiCOkG_dEe2Ds--x8yNBEw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;const timeout : integer = 5000&#xA;&#xA;in event clear&#xA;in event started&#xA;in event failed&#xA;in event edit&#xA;in event operate&#xA;in event init&#xA;&#xA;out event start&#xA;out event cleared&#xA;out event failing&#xA;out event operating : boolean&#xA;out event editing : boolean&#xA;&#xA;operation resetTransaction()&#xA;operation hasActiveRoutes() : boolean&#xA;&#xA;interface can:&#xA;in event connected&#xA;&#xA;operation connectBus() : void&#xA;operation isConnected() : boolean" namespace="mrw.statechart" name="OperatingMode">
+  <sgraph:Statechart xmi:id="_PiCOkG_dEe2Ds--x8yNBEw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;const timeout : integer = 5000&#xA;&#xA;in event clear&#xA;in event started&#xA;in event failed&#xA;in event edit&#xA;in event operate&#xA;in event init&#xA;&#xA;out event start&#xA;out event cleared&#xA;out event failing&#xA;out event operating : boolean&#xA;out event editing : boolean&#xA;&#xA;operation resetTransaction()&#xA;operation hasActiveRoutes() : boolean&#xA;&#xA;interface can:&#xA;&#xA;const timeout : integer = 250&#xA;&#xA;in event connected&#xA;&#xA;operation connectBus() : void&#xA;operation isConnected() : boolean" namespace="mrw.statechart" name="OperatingMode">
     <regions xmi:id="_PiGgA2_dEe2Ds--x8yNBEw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_PiGgBG_dEe2Ds--x8yNBEw">
         <outgoingTransitions xmi:id="_PiGgBW_dEe2Ds--x8yNBEw" target="_PiGgBm_dEe2Ds--x8yNBEw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_PiGgBm_dEe2Ds--x8yNBEw" specification="entry / can.connectBus" name="Prepare Bus" incomingTransitions="_PiGgBW_dEe2Ds--x8yNBEw">
         <outgoingTransitions xmi:id="_PiGgCW_dEe2Ds--x8yNBEw" specification="can.connected" target="_PiHHFm_dEe2Ds--x8yNBEw"/>
-        <outgoingTransitions xmi:id="_PZlfQHF0Ee2peawiS1OZpw" specification="after timeout ms" target="_UPF-IG_eEe2lm7yxWipHjw"/>
+        <outgoingTransitions xmi:id="_PZlfQHF0Ee2peawiS1OZpw" specification="after can.timeout ms" target="_UPF-IG_eEe2lm7yxWipHjw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_PiHHFm_dEe2Ds--x8yNBEw" specification="entry / resetTransaction(); raise start" name="Init" incomingTransitions="_PiGgCW_dEe2Ds--x8yNBEw _1ftGQHFqEe2peawiS1OZpw _dOYH4HpTEe2_ZOj2sFqWdg">
         <outgoingTransitions xmi:id="_j7-GsG_eEe2lm7yxWipHjw" specification="after timeout ms" target="_UPF-IG_eEe2lm7yxWipHjw"/>
@@ -220,7 +220,7 @@
     <edges xmi:id="_PZn7gHF0Ee2peawiS1OZpw" type="Transition" element="_PZlfQHF0Ee2peawiS1OZpw" source="_PiHuO2_dEe2Ds--x8yNBEw" target="_UPJBcG_eEe2lm7yxWipHjw">
       <children xsi:type="notation:DecorationNode" xmi:id="_PZoikXF0Ee2peawiS1OZpw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_PZoiknF0Ee2peawiS1OZpw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_PZoik3F0Ee2peawiS1OZpw" x="-3" y="10"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_PZoik3F0Ee2peawiS1OZpw" x="-33" y="11"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_PZn7gXF0Ee2peawiS1OZpw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_PZoikHF0Ee2peawiS1OZpw" fontName="Verdana"/>

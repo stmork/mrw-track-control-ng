@@ -32,6 +32,7 @@ namespace mrw
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
+			connected_raised(false),
 			complete_raised(false),
 			failed_raised(false)
 		{
@@ -73,6 +74,11 @@ namespace mrw
 
 			switch (event->eventId)
 			{
+			case mrw::statechart::UpdateStatechart::Event::connected:
+				{
+					connected_raised = true;
+					break;
+				}
 			case mrw::statechart::UpdateStatechart::Event::complete:
 				{
 					complete_raised = true;
@@ -93,6 +99,7 @@ namespace mrw
 			case mrw::statechart::UpdateStatechart::Event::_te5_main_region_Flash_Check_:
 			case mrw::statechart::UpdateStatechart::Event::_te6_main_region_Wait_Bootloader_:
 			case mrw::statechart::UpdateStatechart::Event::_te7_main_region_Successful_:
+			case mrw::statechart::UpdateStatechart::Event::_te8_main_region_Wait_for_Connect_:
 				{
 					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::UpdateStatechart::Event::_te0_main_region_Ping_)] = true;
 					break;
@@ -102,6 +109,13 @@ namespace mrw
 				break;
 			}
 			delete event;
+		}
+
+
+		void mrw::statechart::UpdateStatechart::connected()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::connected));
+			runCycle();
 		}
 
 
@@ -224,6 +238,11 @@ namespace mrw
 			case mrw::statechart::UpdateStatechart::State::main_region_Booted :
 				{
 					return  (stateConfVector[scvi_main_region_Booted] == mrw::statechart::UpdateStatechart::State::main_region_Booted);
+					break;
+				}
+			case mrw::statechart::UpdateStatechart::State::main_region_Wait_for_Connect :
+				{
+					return  (stateConfVector[scvi_main_region_Wait_for_Connect] == mrw::statechart::UpdateStatechart::State::main_region_Wait_for_Connect);
 					break;
 				}
 			default:
@@ -362,6 +381,13 @@ namespace mrw
 			ifaceOperationCallback->quit();
 		}
 
+		/* Entry action for state 'Wait for Connect'. */
+		void UpdateStatechart::enact_main_region_Wait_for_Connect()
+		{
+			/* Entry action for state 'Wait for Connect'. */
+			timerService->setTimer(this, 8, UpdateStatechart::timeout, false);
+		}
+
 		/* Exit action for state 'Ping'. */
 		void UpdateStatechart::exact_main_region_Ping()
 		{
@@ -416,6 +442,13 @@ namespace mrw
 		{
 			/* Exit action for state 'Successful'. */
 			timerService->unsetTimer(this, 7);
+		}
+
+		/* Exit action for state 'Wait for Connect'. */
+		void UpdateStatechart::exact_main_region_Wait_for_Connect()
+		{
+			/* Exit action for state 'Wait for Connect'. */
+			timerService->unsetTimer(this, 8);
 		}
 
 		/* 'default' enter sequence for state Ping */
@@ -496,6 +529,14 @@ namespace mrw
 			/* 'default' enter sequence for state Booted */
 			enact_main_region_Booted();
 			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::main_region_Booted;
+		}
+
+		/* 'default' enter sequence for state Wait for Connect */
+		void UpdateStatechart::enseq_main_region_Wait_for_Connect_default()
+		{
+			/* 'default' enter sequence for state Wait for Connect */
+			enact_main_region_Wait_for_Connect();
+			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::main_region_Wait_for_Connect;
 		}
 
 		/* 'default' enter sequence for region main region */
@@ -583,6 +624,14 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::NO_STATE;
 		}
 
+		/* Default exit sequence for state Wait for Connect */
+		void UpdateStatechart::exseq_main_region_Wait_for_Connect()
+		{
+			/* Default exit sequence for state Wait for Connect */
+			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::NO_STATE;
+			exact_main_region_Wait_for_Connect();
+		}
+
 		/* Default exit sequence for region main region */
 		void UpdateStatechart::exseq_main_region()
 		{
@@ -640,6 +689,11 @@ namespace mrw
 					exseq_main_region_Booted();
 					break;
 				}
+			case mrw::statechart::UpdateStatechart::State::main_region_Wait_for_Connect :
+				{
+					exseq_main_region_Wait_for_Connect();
+					break;
+				}
 			default:
 				/* do nothing */
 				break;
@@ -695,7 +749,7 @@ namespace mrw
 		void UpdateStatechart::react_main_region__entry_Default()
 		{
 			/* Default react sequence for initial entry  */
-			enseq_main_region_Ping_default();
+			enseq_main_region_Wait_for_Connect_default();
 		}
 
 		sc::integer UpdateStatechart::react(const sc::integer transitioned_before)
@@ -968,8 +1022,43 @@ namespace mrw
 			return transitioned_after;
 		}
 
+		sc::integer UpdateStatechart::main_region_Wait_for_Connect_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Wait for Connect. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (connected_raised)
+				{
+					exseq_main_region_Wait_for_Connect();
+					enseq_main_region_Ping_default();
+					react(0);
+					transitioned_after = 0;
+				}
+				else
+				{
+					if (timeEvents[8])
+					{
+						exseq_main_region_Wait_for_Connect();
+						error = 7;
+						timeEvents[8] = false;
+						enseq_main_region_Failed_default();
+						react(0);
+						transitioned_after = 0;
+					}
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
 		void UpdateStatechart::clearInEvents()
 		{
+			connected_raised = false;
 			complete_raised = false;
 			failed_raised = false;
 			timeEvents[0] = false;
@@ -980,6 +1069,7 @@ namespace mrw
 			timeEvents[5] = false;
 			timeEvents[6] = false;
 			timeEvents[7] = false;
+			timeEvents[8] = false;
 		}
 
 		void UpdateStatechart::microStep()
@@ -1036,6 +1126,11 @@ namespace mrw
 					main_region_Booted_react(-1);
 					break;
 				}
+			case mrw::statechart::UpdateStatechart::State::main_region_Wait_for_Connect :
+				{
+					main_region_Wait_for_Connect_react(-1);
+					break;
+				}
 			default:
 				/* do nothing */
 				break;
@@ -1057,7 +1152,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((((((complete_raised) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4])) || (timeEvents[5])) || (timeEvents[6])) || (timeEvents[7]));
+			while ((((((((((((connected_raised) || (complete_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4])) || (timeEvents[5])) || (timeEvents[6])) || (timeEvents[7])) || (timeEvents[8]));
 			isExecuting = false;
 		}
 

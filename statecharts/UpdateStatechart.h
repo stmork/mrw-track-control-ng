@@ -59,11 +59,12 @@ namespace mrw
 				main_region_Wait_Bootloader,
 				main_region_Failed,
 				main_region_Successful,
-				main_region_Booted
+				main_region_Booted,
+				main_region_Wait_for_Connect
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 10;
+			static const sc::integer numStates = 11;
 			static const sc::integer scvi_main_region_Ping = 0;
 			static const sc::integer scvi_main_region_Reset = 0;
 			static const sc::integer scvi_main_region_Flash_Request = 0;
@@ -74,11 +75,13 @@ namespace mrw
 			static const sc::integer scvi_main_region_Failed = 0;
 			static const sc::integer scvi_main_region_Successful = 0;
 			static const sc::integer scvi_main_region_Booted = 0;
+			static const sc::integer scvi_main_region_Wait_for_Connect = 0;
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
 			{
 				NO_EVENT,
+				connected,
 				complete,
 				failed,
 				_te0_main_region_Ping_,
@@ -88,7 +91,8 @@ namespace mrw
 				_te4_main_region_Flash_Rest_,
 				_te5_main_region_Flash_Check_,
 				_te6_main_region_Wait_Bootloader_,
-				_te7_main_region_Successful_
+				_te7_main_region_Successful_,
+				_te8_main_region_Wait_for_Connect_
 			};
 
 			class EventInstance
@@ -202,13 +206,16 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 8;
+			static const sc::integer timeEventsCount = 9;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
 
 
 		public slots:
+			/*! Slot for the in event 'connected' that is defined in the default interface scope. */
+			void connected();
+
 			/*! Slot for the in event 'complete' that is defined in the default interface scope. */
 			void complete();
 
@@ -269,6 +276,7 @@ namespace mrw
 			void enact_main_region_Failed();
 			void enact_main_region_Successful();
 			void enact_main_region_Booted();
+			void enact_main_region_Wait_for_Connect();
 			void exact_main_region_Ping();
 			void exact_main_region_Reset();
 			void exact_main_region_Flash_Request();
@@ -277,6 +285,7 @@ namespace mrw
 			void exact_main_region_Flash_Check();
 			void exact_main_region_Wait_Bootloader();
 			void exact_main_region_Successful();
+			void exact_main_region_Wait_for_Connect();
 			void enseq_main_region_Ping_default();
 			void enseq_main_region_Reset_default();
 			void enseq_main_region_Flash_Request_default();
@@ -287,6 +296,7 @@ namespace mrw
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_Successful_default();
 			void enseq_main_region_Booted_default();
+			void enseq_main_region_Wait_for_Connect_default();
 			void enseq_main_region_default();
 			void exseq_main_region_Ping();
 			void exseq_main_region_Reset();
@@ -298,6 +308,7 @@ namespace mrw
 			void exseq_main_region_Failed();
 			void exseq_main_region_Successful();
 			void exseq_main_region_Booted();
+			void exseq_main_region_Wait_for_Connect();
 			void exseq_main_region();
 			void react_main_region__choice_0();
 			void react_main_region__choice_1();
@@ -314,12 +325,16 @@ namespace mrw
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			sc::integer main_region_Successful_react(const sc::integer transitioned_before);
 			sc::integer main_region_Booted_react(const sc::integer transitioned_before);
+			sc::integer main_region_Wait_for_Connect_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
 			void runCycle();
 
 
 
+
+			/*! Indicates event 'connected' of default interface scope is active. */
+			bool connected_raised;
 
 			/*! Indicates event 'complete' of default interface scope is active. */
 			bool complete_raised;

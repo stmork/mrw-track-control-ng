@@ -8,13 +8,12 @@ package mrw.test
 testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 {
 	@Test
-	operation doPing()
+	operation doStart()
 	{
 		enter
 		assert  is_active
 		assert !is_final
-		assert active (mrw.^statechart.UpdateStatechart.main_region.Ping)
-		assert called ping
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Wait_for_Connect)
 
 		mock init
 		mock ping
@@ -25,6 +24,34 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		mock flashCheck
 		mock hasController returns (true)
 		mock hasPages returns (true)
+	}
+
+	@Test
+	operation timeoutConnect()
+	{
+		// Given
+		doStart()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert error == 7
+		assert called fail
+	}
+
+	@Test
+	operation doPing()
+	{
+		doStart()
+
+		// When
+		raise connected
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Ping)
+		assert called ping
 	}
 
 	@Test
@@ -298,6 +325,10 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		enter
 		assert is_active
 
+		exit
+		assert !is_active
+
+		doStart()
 		exit
 		assert !is_active
 

@@ -17,6 +17,7 @@ namespace mrw
 	namespace test
 	{
 
+		void doStart();
 		void doPing();
 		void doReset();
 		void failPing();
@@ -32,59 +33,6 @@ namespace mrw
 		void booted();
 		mrw::statechart::UpdateStatechart * statechart;
 
-
-		class PingMock
-		{
-			typedef void (PingMock::*functiontype)();
-		public:
-			void (PingMock::*pingBehaviorDefault)();
-			int callCount;
-
-			void ping1()
-			{
-			}
-
-			void pingDefault()
-			{
-			}
-
-			bool calledAtLeast(const int times)
-			{
-				return (callCount >= times);
-			}
-
-			bool calledAtLeastOnce()
-			{
-				return (callCount > 0);
-			}
-
-			void ping()
-			{
-				++callCount;
-			}
-
-			functiontype getBehavior()
-			{
-				return pingBehaviorDefault;
-			}
-
-			void setDefaultBehavior(void (PingMock::*defaultBehavior)())
-			{
-				pingBehaviorDefault = defaultBehavior;
-			}
-
-			void initializeBehavior()
-			{
-				setDefaultBehavior(&PingMock::pingDefault);
-			}
-
-			void reset()
-			{
-				initializeBehavior();
-				callCount = 0;
-			}
-		};
-		static PingMock * pingMock;
 
 		class InitMock
 		{
@@ -138,6 +86,59 @@ namespace mrw
 			}
 		};
 		static InitMock * initMock;
+
+		class PingMock
+		{
+			typedef void (PingMock::*functiontype)();
+		public:
+			void (PingMock::*pingBehaviorDefault)();
+			int callCount;
+
+			void ping1()
+			{
+			}
+
+			void pingDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void ping()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return pingBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (PingMock::*defaultBehavior)())
+			{
+				pingBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&PingMock::pingDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		static PingMock * pingMock;
 
 		class BootMock
 		{
@@ -701,7 +702,7 @@ namespace mrw
 		};
 
 
-		void doPing()
+		void doStart()
 		{
 			statechart->enter();
 
@@ -709,9 +710,7 @@ namespace mrw
 
 			EXPECT_TRUE(!statechart->isFinal());
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Ping));
-
-			EXPECT_TRUE(pingMock->calledAtLeastOnce());
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Wait_for_Connect));
 
 
 
@@ -725,8 +724,8 @@ namespace mrw
 			hasPagesMock->setDefaultBehavior(&HasPagesMock::hasPages1);
 
 
-			pingMock->reset();
 			initMock->reset();
+			pingMock->reset();
 			bootMock->reset();
 			flashRequestMock->reset();
 			flashCompletePageMock->reset();
@@ -735,12 +734,89 @@ namespace mrw
 			hasControllerMock->reset();
 			hasPagesMock->reset();
 		}
+		TEST_F(UpdateTest, doStart)
+		{
+			initMock = new InitMock();
+			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
+			flashCompletePageMock = new FlashCompletePageMock();
+			flashCompletePageMock->initializeBehavior();
+			flashRestPageMock = new FlashRestPageMock();
+			flashRestPageMock->initializeBehavior();
+			flashCheckMock = new FlashCheckMock();
+			flashCheckMock->initializeBehavior();
+			hasControllerMock = new HasControllerMock();
+			hasControllerMock->initializeBehavior();
+			hasPagesMock = new HasPagesMock();
+			hasPagesMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			doStart();
+		}
+		TEST_F(UpdateTest, timeoutConnect)
+		{
+			failMock = new FailMock();
+			initMock = new InitMock();
+			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
+			flashCompletePageMock = new FlashCompletePageMock();
+			flashCompletePageMock->initializeBehavior();
+			flashRestPageMock = new FlashRestPageMock();
+			flashRestPageMock->initializeBehavior();
+			flashCheckMock = new FlashCheckMock();
+			flashCheckMock->initializeBehavior();
+			hasControllerMock = new HasControllerMock();
+			hasControllerMock->initializeBehavior();
+			hasPagesMock = new HasPagesMock();
+			hasPagesMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			doStart();
+
+			runner->proceed_time(statechart->getTimeout());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
+
+			EXPECT_TRUE((statechart->getError()) == (7));
+
+			EXPECT_TRUE(failMock->calledAtLeastOnce());
+
+
+			failMock->reset();
+		}
+		void doPing()
+		{
+			doStart();
+
+			statechart->raiseConnected();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Ping));
+
+			EXPECT_TRUE(pingMock->calledAtLeastOnce());
+
+
+			pingMock->reset();
+		}
 		TEST_F(UpdateTest, doPing)
 		{
 			pingMock = new PingMock();
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -791,6 +867,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -837,6 +915,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -880,6 +960,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -912,6 +994,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -976,6 +1060,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1026,6 +1112,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1084,6 +1172,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1124,6 +1214,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1197,6 +1289,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1260,6 +1354,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1327,6 +1423,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1396,6 +1494,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1461,6 +1561,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1515,6 +1617,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1580,6 +1684,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1658,6 +1764,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1712,6 +1820,8 @@ namespace mrw
 			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1744,10 +1854,10 @@ namespace mrw
 		}
 		TEST_F(UpdateTest, doExit)
 		{
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
 			bootMock = new BootMock();
 			bootMock->initializeBehavior();
 			flashRequestMock = new FlashRequestMock();
@@ -1768,6 +1878,12 @@ namespace mrw
 			statechart->enter();
 
 			EXPECT_TRUE(statechart->isActive());
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			doStart();
 
 			statechart->exit();
 

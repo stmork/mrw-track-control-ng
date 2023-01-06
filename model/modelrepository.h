@@ -15,6 +15,7 @@
 
 #include <util/properties.h>
 #include <util/settings.h>
+#include <can/cansettings.h>
 #include <model/modelrailway.h>
 #include <model/region.h>
 
@@ -66,13 +67,11 @@ namespace mrw::model
 		QStringList                  filter;
 
 		mrw::util::Settings          settings_model;
-		mrw::util::Settings          settings_host;
+		mrw::can::CanSettings        settings_host;
 
 		QDir                         home_dir;
 
 		// Per host configuration
-		QString                      can_plugin;
-		QString                      can_iface;
 		bool                         dump_result   = false;
 		bool                         dump_xml      = false;
 		bool                         use_positions = false;
