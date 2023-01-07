@@ -31,8 +31,10 @@ UpdateService::UpdateService(
 		&statechart, &UpdateStatechart::connected,
 		Qt::QueuedConnection);
 
-	statechart.setOperationCallback(this);
 	statechart.setTimerService(&TimerService::instance());
+	statechart.setOperationCallback(this);
+
+	Q_ASSERT(statechart.check());
 	statechart.enter();
 
 	can_device->connectDevice();

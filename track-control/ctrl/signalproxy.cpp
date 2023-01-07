@@ -26,8 +26,10 @@ using Symbol = Signal::Symbol;
 
 SignalProxy::SignalProxy() : SignalStatechart(nullptr)
 {
-	setOperationCallback(this);
 	setTimerService(&TimerService::instance());
+	setOperationCallback(this);
+
+	Q_ASSERT(check());
 }
 
 SignalProxy::~SignalProxy()

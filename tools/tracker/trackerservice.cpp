@@ -23,8 +23,10 @@ TrackerService::TrackerService(
 {
 	model = repo;
 
-	statechart.setOperationCallback(this);
 	statechart.setTimerService(&TimerService::instance());
+	statechart.setOperationCallback(this);
+
+	Q_ASSERT(statechart.check());
 	statechart.enter();
 }
 

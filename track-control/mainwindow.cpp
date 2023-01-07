@@ -68,6 +68,8 @@ MainWindow::MainWindow(
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
 	statechart.can()->setOperationCallback(&dispatcher);
+
+	Q_ASSERT(statechart.check());
 	statechart.enter();
 }
 
