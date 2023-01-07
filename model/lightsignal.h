@@ -52,8 +52,6 @@ namespace mrw::model
 			const SignalType      type,
 			const unsigned        light_count);
 
-		Controller * controller() const override;
-
 		/**
 		 * This method returns the pointer to the controlling
 		 * MultiplexConnection module.
@@ -62,16 +60,6 @@ namespace mrw::model
 		 */
 		MultiplexConnection * connection() const;
 
-		const QString & name()     const override;
-		bool            valid()    const override;
-		QString         toString() const override;
-
-		inline bool isUnlockable() const override
-		{
-			// TODO: Implement!
-			return true;
-		}
-
 		/**
 		 * This method returns how much pins are used by the controlling
 		 * MultiplexConnection module.
@@ -79,6 +67,15 @@ namespace mrw::model
 		 * @return The pin count used to control this LightSignal.
 		 */
 		size_t usedPins() const;
+
+		// Implementations from Device
+		bool            isUnlockable() const override;
+		Controller   *  controller()   const override;
+		const QString & name()         const override;
+
+		// Implementations from AssemblyPart
+		bool            valid()    const override;
+		QString         toString() const override;
 	};
 }
 

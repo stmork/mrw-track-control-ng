@@ -63,9 +63,19 @@ LightSignal::LightSignal(
 	model_railway->add(this);
 }
 
-bool LightSignal::valid() const
+MultiplexConnection * LightSignal::connection() const
 {
-	return (signal_controller != nullptr) && (mux_connection != nullptr);
+	return mux_connection;
+}
+
+size_t LightSignal::usedPins() const
+{
+	return lights;
+}
+
+bool LightSignal::isUnlockable() const
+{
+	return symbol() != Symbol::GO;
 }
 
 Controller * LightSignal::controller() const
@@ -73,14 +83,14 @@ Controller * LightSignal::controller() const
 	return signal_controller;
 }
 
-MultiplexConnection * LightSignal::connection() const
-{
-	return mux_connection;
-}
-
 const QString & LightSignal::name() const
 {
 	return part_name;
+}
+
+bool LightSignal::valid() const
+{
+	return (signal_controller != nullptr) && (mux_connection != nullptr);
 }
 
 QString LightSignal::toString() const
@@ -92,9 +102,4 @@ QString LightSignal::toString() const
 		arg(name(), -10).
 		arg(Device::get(lock()), -10).
 		arg(MrwMessage::get(signal_state), -10);
-}
-
-size_t LightSignal::usedPins() const
-{
-	return lights;
 }
