@@ -191,7 +191,10 @@ void DistantProxy::prepare()
 		break;
 
 	case Symbol::STOP:
-		state = SIGNAL_VR0;
+		if ((main_controller != nullptr) || (combined_signal == nullptr))
+		{
+			state = SIGNAL_VR0;
+		}
 		break;
 
 	case Symbol::OFF:
