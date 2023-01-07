@@ -26,7 +26,8 @@ void WidgetSaver::save()
 {
 	__METHOD__;
 
-	const QString filename = dir.absoluteFilePath(QString(subdir) + "/" + name() + ".jpg");
+	const QString filename = path(name());
+
 	widget()->grab().save(filename);
 }
 
@@ -43,4 +44,9 @@ QChar WidgetSaver::lockState(const Device::LockState & state)
 QChar WidgetSaver::sectionState(const SectionState & state)
 {
 	return Section::get(state).at(0);
+}
+
+QString WidgetSaver::path(const QString & name) const
+{
+	return dir.absoluteFilePath(QString(subdir) + "/" + name + ".jpg");
 }

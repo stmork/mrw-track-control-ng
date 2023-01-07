@@ -43,6 +43,11 @@
         <string>Gleis</string>
        </attribute>
       </widget>
+      <widget class="WidgetStudy" name="widgetTab">
+       <attribute name="title">
+        <string>allgemein</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -139,6 +144,12 @@
    <class>RailStudy</class>
    <extends>QWidget</extends>
    <header location="global">railstudy.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>WidgetStudy</class>
+   <extends>QWidget</extends>
+   <header location="global">widgetstudy.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

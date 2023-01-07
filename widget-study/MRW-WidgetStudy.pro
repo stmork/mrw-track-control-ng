@@ -18,7 +18,8 @@ SOURCES += \
 	ctrl/doublecrossswitchcontrollermock.cpp \
 	ctrl/railcontrollermock.cpp \
 	ctrl/signalcontrollermock.cpp \
-	widgetsaver.cpp
+	widgetsaver.cpp \
+	widgetstudy.cpp
 
 HEADERS += \
 	mainwindow.h \
@@ -30,14 +31,16 @@ HEADERS += \
 	ctrl/doublecrossswitchcontrollermock.h \
 	ctrl/railcontrollermock.h \
 	ctrl/signalcontrollermock.h \
-	widgetsaver.h
+	widgetsaver.h \
+	widgetstudy.h
 
 FORMS += \
 	doublecrossswitchstudy.ui \
 	mainwindow.ui \
 	railstudy.ui \
 	signalstudy.ui \
-	switchstudy.ui
+	switchstudy.ui \
+	widgetstudy.ui
 
 LIBS            += -lMRW-UI -lMRW-Ctrl -lMRW-Model -lMRW-Can -lMRW-Util
 

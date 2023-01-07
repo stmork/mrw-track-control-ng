@@ -25,7 +25,7 @@ class WidgetSaver : public QWidget
 public:
 	explicit WidgetSaver(QWidget * parent = nullptr);
 
-	void save();
+	virtual void save();
 
 	virtual QWidget * widget() const = 0;
 	virtual QString   name() const = 0;
@@ -33,6 +33,9 @@ public:
 	static QChar direction(const bool dir);
 	static QChar lockState(const mrw::model::Device::LockState & state);
 	static QChar sectionState(const mrw::model::SectionState & state);
+
+protected:
+	QString path(const QString & name) const;
 };
 
 #endif // WIDGETSAVER_H

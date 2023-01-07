@@ -100,7 +100,7 @@ SignalStudy::SignalStudy(QWidget * parent) :
 	/********************************************************/
 
 	connect(
-		ui->availableButton_1, &QRadioButton::clicked,
+		ui->availableButton_1, &QCheckBox::clicked,
 		&mock, &SignalControllerMock::setShunting);
 	connect(
 		ui->stopButton_1, &QRadioButton::clicked,
@@ -109,7 +109,7 @@ SignalStudy::SignalStudy(QWidget * parent) :
 		ui->goButton_1, &QRadioButton::clicked,
 		&mock, &SignalControllerMock::setShuntGo);
 	connect(
-		ui->availableButton_2, &QRadioButton::clicked,
+		ui->availableButton_2, &QCheckBox::clicked,
 		&mock, &SignalControllerMock::setDistant);
 	connect(
 		ui->stopButton_2, &QRadioButton::clicked,
@@ -118,7 +118,7 @@ SignalStudy::SignalStudy(QWidget * parent) :
 		ui->goButton_2, &QRadioButton::clicked,
 		&mock, &SignalControllerMock::setDistantGo);
 	connect(
-		ui->availableButton_3, &QRadioButton::clicked,
+		ui->availableButton_3, &QCheckBox::clicked,
 		&mock, &SignalControllerMock::setMain);
 	connect(
 		ui->stopButton_3, &QRadioButton::clicked,
