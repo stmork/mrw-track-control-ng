@@ -14,6 +14,28 @@
 
 namespace mrw::ui
 {
+	/**
+	 * This class intends to draw all states of a mrw::model::DoubleCrossSwitch
+	 * which includes:
+	 * * Four states aligned to route/tour.
+	 * * Branch alignment left or right.
+	 * * Counting direction.
+	 * * mrw::model::Device::LockState including fail.
+	 * * mrw::model::SectionState.
+	 *
+	 * The DoubleCrossSwitchWidget does not have direct access to the model in
+	 * MVC sense. It correspndends with the
+	 * mrw::ctrl::DoubleCrossSwitchController which in turn correspondends with
+	 * the mrw::model::DoubleCrossSwitch instance.
+	 *
+	 * @note The mrw::model::SectionState is taken from the enclosed
+	 * mrw::model::Section instance.
+	 *
+	 * @image html XSwitch_AC_RUF.jpg width=200
+	 *
+	 * @see mrw::ctrl::DoubleCrossSwitchController
+	 * @see mrw::model::DoubleCrossSwitch
+	 */
 	class DoubleCrossSwitchWidget : public ControllerWidget
 	{
 		Q_OBJECT

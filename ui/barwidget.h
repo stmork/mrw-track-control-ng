@@ -12,6 +12,14 @@
 
 namespace mrw::ui
 {
+	/**
+	 * The BarWidget displays all important colors needed to show all
+	 * necessary signal and switch states. If there are missing colors one
+	 * or more color channels of the hardware are broken and so the display
+	 * is not operational safe.
+	 *
+	 * @image html BarWidget.jpg width=160
+	 */
 	class BarWidget : public BaseWidget
 	{
 		Q_OBJECT

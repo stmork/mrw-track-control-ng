@@ -68,7 +68,7 @@ QColor BaseWidget::sectionColor(const SectionState state)
 }
 
 void BaseWidget::rescale(
-	QPainter & painter,
+	QPainter  & painter,
 	const float xSize, const float ySize,
 	const float xPos,  const float yPos)
 {
@@ -81,7 +81,7 @@ void BaseWidget::rescale(
 }
 
 void BaseWidget::rescale(
-	QPainter & painter,
+	QPainter  & painter,
 	const float xSize, const float ySize, const bool center)
 {
 	rescale(painter,

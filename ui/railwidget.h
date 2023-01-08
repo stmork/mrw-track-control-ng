@@ -13,6 +13,29 @@
 
 namespace mrw::ui
 {
+	/**
+	 * The RailWidget displays a simple mrw::model::Rail without any active
+	 * part like switches or signals. It can display extensions in width and
+	 * may span over multiple lines vertically. It can show the following
+	 * states:
+	 * * Counting direction.
+	 * * End point.
+	 * * Horizontal extensions.
+	 * * Multiple vertical lines.
+	 * * mrw::model::Position::Bending rails to left, straight or right.
+	 * * mrw::model::Device::LockState including fail.
+	 * * mrw::model::SectionState.
+	 *
+	 * The RailWidget does not have direct access to the model in MVC sense.
+	 * It correspndends with the mrw::ctrl::RailController which in turn
+	 * correspondends with the mrw::model::Rail instance.
+	 *
+	 * @note The mrw::model::SectionState is taken from the enclosed
+	 * mrw::model::Section instance.
+	 *
+	 * @see mrw::ctrl::RailController
+	 * @see mrw::model::Rail
+	 */
 	class RailWidget : public ControllerWidget
 	{
 		Q_OBJECT

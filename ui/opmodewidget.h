@@ -12,6 +12,13 @@
 
 namespace mrw::ui
 {
+	/**
+	 * The OpModeWidget displays the operational mode consisting of a single
+	 * upper case letter. The operation mode may have a color and the letter
+	 * may blink.
+	 *
+	 * @image html OpModeWidget.jpg width=40
+	 */
 	class OpModeWidget : public BaseWidget
 	{
 		Q_OBJECT
@@ -24,6 +31,13 @@ namespace mrw::ui
 	public:
 		explicit OpModeWidget(QWidget * parent = nullptr);
 
+		/**
+		 * This method sets the internal state of this OpModeWidget.
+		 *
+		 * @param text The letter to display.
+		 * @param color The draw color.
+		 * @param blinking True if the text should blink.
+		 */
 		void setLabel(
 			const QString & text,
 			const QColor  & color = WHITE,

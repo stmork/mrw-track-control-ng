@@ -81,6 +81,11 @@ void ControllerWidget::extend()
 	computeConnectors();
 }
 
+void ControllerWidget::computeConnectors()
+{
+	connector_list.clear();
+}
+
 void ControllerWidget::mousePressEvent(QMouseEvent * event)
 {
 	Q_UNUSED(event);
@@ -106,8 +111,8 @@ void ControllerWidget::drawSheared(
 	const float slope)
 {
 	QPainterPath path;
-	static constexpr float HALF = RAIL_WIDTH * 0.5f;
-	const float distant = height / slope;
+	static constexpr float HALF    = RAIL_WIDTH * 0.5f;
+	const            float distant = height / slope;
 
 	path.moveTo(x - HALF, y);
 	path.lineTo(x + HALF, y);

@@ -10,7 +10,8 @@
 
 #include "widgetsaver.h"
 
-namespace Ui {
+namespace Ui
+{
 	class WidgetStudy;
 }
 
@@ -19,11 +20,11 @@ class WidgetStudy : public WidgetSaver
 	Q_OBJECT
 
 public:
-	explicit WidgetStudy(QWidget *parent = nullptr);
+	explicit WidgetStudy(QWidget * parent = nullptr);
 	~WidgetStudy();
 
 protected:
-	void changeEvent(QEvent *e) override;
+	void changeEvent(QEvent * e) override;
 
 private slots:
 	void on_stationEdit_textChanged(const QString & text);
@@ -36,7 +37,7 @@ private:
 	virtual QWidget * widget() const override;
 	virtual QString   name() const override;
 
-	Ui::WidgetStudy *ui;
+	Ui::WidgetStudy * ui;
 };
 
 #endif

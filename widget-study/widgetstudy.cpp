@@ -8,7 +8,7 @@
 
 using namespace mrw::ui;
 
-WidgetStudy::WidgetStudy(QWidget *parent) :
+WidgetStudy::WidgetStudy(QWidget * parent) :
 	WidgetSaver(parent),
 	ui(new Ui::WidgetStudy)
 {
@@ -30,10 +30,11 @@ WidgetStudy::~WidgetStudy()
 	delete ui;
 }
 
-void WidgetStudy::changeEvent(QEvent *e)
+void WidgetStudy::changeEvent(QEvent * e)
 {
 	QWidget::changeEvent(e);
-	switch (e->type()) {
+	switch (e->type())
+	{
 	case QEvent::LanguageChange:
 		ui->retranslateUi(this);
 		break;

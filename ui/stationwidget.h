@@ -12,6 +12,11 @@
 
 namespace mrw::ui
 {
+	/**
+	 * The StationWidget displays the region title.
+	 *
+	 * @image html StationWidget.jpg width=160
+	 */
 	class StationWidget : public BaseWidget
 	{
 		Q_OBJECT

@@ -13,6 +13,32 @@
 
 namespace mrw::ui
 {
+	/**
+	 * This class intends to draw all states of a mrw::model::RegularSwitch
+	 * which includes:
+	 * * Inclination.
+	 * * Left or right branched.
+	 * * Extension in mrw::model::Position meaning.
+	 * * Switch state left or right.
+	 * * Counting direction.
+	 * * mrw::model::Device::LockState including fail.
+	 * * mrw::model::SectionState.
+	 *
+	 * Additionally like the RailWidget the SignalWidget is able to show
+	 * extension in width.
+	 *
+	 * The RegularSwitchWidget does not have direct access to the model in
+	 * MVC sense. It correspndends with the mrw::ctrl::RegularSwitchController
+	 * which in turn correspondends with the mrw::model::RegularSwitch instance.
+	 *
+	 * @note The mrw::model::SectionState is taken from the enclosed
+	 * mrw::model::Section instance.
+	 *
+	 * @image html RSwitch_AB_nL_RUF.jpg width=200
+	 *
+	 * @see mrw::ctrl::RegularSwitchController
+	 * @see mrw::model::RegularSwitch
+	 */
 	class RegularSwitchWidget : public ControllerWidget
 	{
 		Q_OBJECT

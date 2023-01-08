@@ -14,6 +14,11 @@
 
 namespace mrw::ui
 {
+	/**
+	 * The CircleLiveWidget shows a rotating bar which represents the
+	 * responsiveness of the application. If the bar does not rotate any more
+	 * the event loop got stuck.
+	 */
 	class CircleLiveWidget : public BaseWidget
 	{
 		Q_OBJECT

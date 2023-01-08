@@ -14,6 +14,11 @@
 
 namespace mrw::ui
 {
+	/**
+	 * The ClockWidget displays the actual time.
+	 *
+	 * @image html ClockWidget.jpg width=160
+	 */
 	class ClockWidget : public BaseWidget
 	{
 		Q_OBJECT
