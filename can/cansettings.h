@@ -12,6 +12,16 @@
 
 namespace mrw::can
 {
+	/**
+	 * This class represents the modelrailway settings for a per hostname
+	 * basis. So it is possible to distinguish CAN settings depending on the
+	 * host being used. So it is possible to configure each host with different
+	 * CAN settings.
+	 *
+	 * @note The default is to use plugin "socketcan" with interface "can0".
+	 *
+	 * @see QCanBusDevice
+	 */
 	class CanSettings : public mrw::util::Settings
 	{
 		Q_OBJECT
@@ -44,6 +54,10 @@ namespace mrw::can
 		 */
 		const QString & interface() const;
 
+		/**
+		 * This method returns a mrw::util::SettingsGroup for a per host
+		 * usage.
+		 */
 		operator mrw::util::SettingsGroup();
 	};
 }
