@@ -277,11 +277,11 @@ void Section::free()
 {
 	for (AssemblyPart * part : assembly_parts)
 	{
-		RailPart * rail = dynamic_cast<RailPart *>(part);
+		RailPart * rail_part = dynamic_cast<RailPart *>(part);
 
-		if (rail != nullptr)
+		if (rail_part != nullptr)
 		{
-			rail->reserve(false);
+			rail_part->reserve(false);
 		}
 	}
 	setState(FREE);

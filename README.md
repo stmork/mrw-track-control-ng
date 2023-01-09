@@ -43,7 +43,7 @@ sudo apt update
 sudo apt install mrw-ng
 ```
 
-## Running Track Controll
+## Running Track Control
 You can start the track control software by starting:
 ```
 MRW-TrackControl <railway-model>

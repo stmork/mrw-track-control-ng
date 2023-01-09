@@ -65,31 +65,38 @@ MrwBusService * ControllerRegistry::can()
 	return instance().can_service;
 }
 
+/*************************************************************************
+**                                                                      **
+**       Transaction/Batch handling                                     **
+**                                                                      **
+*************************************************************************/
+
+void ControllerRegistry::reset()
+{
+	qDebug("======================= Transaction left %zu elements.", transaction.size());
+	transaction.clear();
+}
+
 void ControllerRegistry::increase(ControllerRegistrand * element)
 {
-	BaseController * ctrl = dynamic_cast<BaseController *>(element);
-
-	Q_ASSERT(ctrl != nullptr);
 	if (transaction.find(element) == transaction.end())
 	{
 		transaction.emplace(element);
-		qDebug().noquote() << "Transaction increased to" << transaction.size() << "element(s). Added: " << ctrl->name();
+		qDebug().noquote() << "Transaction increased to" << transaction.size() << "element(s). Added: " << *element;
 	}
 	else
 	{
-		qWarning().noquote() << "Transaction already contains element" << ctrl->name();
+		qWarning().noquote() << "Transaction already contains element" << *element;
 	}
 }
 
 void ControllerRegistry::decrease(ControllerRegistrand * element)
 {
-	const BaseController * ctrl  = dynamic_cast<BaseController *>(element);
-	const size_t           count = transaction.erase(element);
+	const size_t count = transaction.erase(element);
 
-	Q_ASSERT(ctrl != nullptr);
 	if (count == 1)
 	{
-		qDebug().noquote() << "Transaction decreased to" << transaction.size() << "element(s). Removed: " << ctrl->name();
+		qDebug().noquote() << "Transaction decreased to" << transaction.size() << "element(s). Removed: " << *element;
 
 		if (isCompleted())
 		{
@@ -99,19 +106,13 @@ void ControllerRegistry::decrease(ControllerRegistrand * element)
 	}
 	else
 	{
-		qWarning().noquote() << "Transaction does not contain element" << ctrl->name();
+		qWarning().noquote() << "Transaction does not contain element" << *element;
 	}
 }
 
 bool ControllerRegistry::contains(ControllerRegistrand * ctrl)
 {
 	return transaction.find(ctrl) != transaction.end();
-}
-
-void ControllerRegistry::reset()
-{
-	qDebug("======================= Transaction left %zu elements.", transaction.size());
-	transaction.clear();
 }
 
 void ControllerRegistry::tryComplete()
