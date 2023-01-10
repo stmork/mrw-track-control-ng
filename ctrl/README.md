@@ -14,12 +14,13 @@ class BaseController
 <<Controller>> BaseController
 QObject <|-- BaseController
 
-class BaseWidget
-<<View>> BaseWidget
+class ControllerWidget
+<<View>> ControllerWidget
 
 QWidget <|-- BaseWidget
-BaseWidget ..> BaseController : uses
-BaseController ..> BaseWidget : signals
+BaseWidget <|-- ControllerWidget
+ControllerWidget ..> BaseController : uses
+BaseController ..> ControllerWidget : signals
 BaseController ..> ModelClass : uses
 
 ```

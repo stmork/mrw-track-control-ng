@@ -34,6 +34,8 @@
  * are in the mrw::ui namespace and the controller classes are in this
  * mrw::ctrl namespace.
  *
+ * <img src="MVC-diagram.png"/>
+ *
  * Actually there are four MVC groups:
  * 1. mrw::model::Rail - mrw::ctrl::RailController - RailWidget
  * 2. mrw::model::RegularSwitch - mrw::ctrl::RegularSwitchController - RegularSwitchWidget

@@ -24,6 +24,8 @@
  * are in the mrw::ui namespace and the controller classes are in this
  * mrw::ctrl namespace.
  *
+ * <img src="MVC-diagram.png"/>
+ *
  * Actually there are four MVC groups:
  * 1. mrw::model::Rail - RailController - mrw::ui::RailWidget
  * 2. mrw::model::RegularSwitch - RegularSwitchController - mrw::ui::RegularSwitchWidget
@@ -32,6 +34,10 @@
  *
  * The MVC for signals is a little bit different because a controller may
  * represent a group of signals like a combined main and distant signal.
+ *
+ * As an example this scenario shows the MVC for a mrw::model::Rail.
+ *
+ * <img src="MVC-rail.png"/>
  *
  * The real life MRW-TrackControl software uses the RailControllerProxy
  * which uses the real railway model data. The RailControllerMock acts as a
