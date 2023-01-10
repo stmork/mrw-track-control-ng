@@ -35,35 +35,35 @@ namespace mrw::model
 		/**
 		 * The Section is in free/available state.
 		 *
-		 * @image html Rail____I_RUF.jpg width=25%
+		 * <img src="Rail____IS_RUF.jpg" width="100"/>
 		 */
 		FREE = 0,
 
 		/**
 		 * The section is reserved for shunting.
 		 *
-		 * @image html Rail____I_RUS.jpg width=25%
+		 * <img src="Rail____IS_RUS.jpg" width="100"/>
 		 */
 		SHUNTING,
 
 		/**
 		 * The section is reserved for a tour.
 		 *
-		 * @image html Rail____I_RUT.jpg width=25%
+		 * <img src="Rail____IS_RUT.jpg" width="100"/>
 		 */
 		TOUR,
 
 		/**
 		 * The section is occupied by a train.
 		 *
-		 * @image html Rail____I_RUO.jpg width=25%
+		 * <img src="Rail____IS_RUO.jpg" width="100"/>
 		 */
 		OCCUPIED,
 
 		/**
 		 * The section has left by a train and is still reserved.
 		 *
-		 * @image html Rail____I_RUP.jpg width=25%
+		 * <img src="Rail____IS_RUP.jpg" width="100"/>
 		 */
 		PASSED
 	};

@@ -10,6 +10,8 @@ using namespace mrw::ctrl;
 using namespace mrw::ui;
 using namespace mrw::model;
 
+using Bending = Position::Bending;
+
 RailStudy::RailStudy(QWidget * parent) :
 	WidgetSaver(parent),
 	ui(new Ui::RailStudy)
@@ -198,8 +200,9 @@ QWidget * RailStudy::widget() const
 
 QString RailStudy::name() const
 {
-	return QString("Rail____%1_%2%3%4").
+	return QString("Rail____%1%2_%3%4%5").
 		arg(code(mock.aEnds(), mock.bEnds())).
+		arg(code(mock.bending())).
 		arg(direction(mock.isDirection())).
 		arg(lockState(mock.lock())).
 		arg(sectionState(mock.state()));
@@ -233,5 +236,18 @@ QString RailStudy::code(const bool a_end, const bool b_end)
 	else
 	{
 		return "I";
+	}
+}
+
+QString RailStudy::code(const Bending bending)
+{
+	switch (bending)
+	{
+	case Bending::LEFT:
+		return "L";
+	case Bending::RIGHT:
+		return "R";
+	default:
+		return "S";
 	}
 }

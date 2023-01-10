@@ -26,24 +26,21 @@ namespace mrw::model
 	 * @note In fact a Section can only have six Signal parts maximum: Every
 	 * SignalType in both directions.
 	 *
-	 * 1. Shunting stop:
-	 * @image html Signal____S_RUF.jpg width=100
-	 * 2. Distant expect stop:
-	 * @image html Signal___S__RUF.jpg width=100
-	 * 3. Main stop:
-	 * @image html Signal__S___RUF.jpg width=100
-	 * 4. Main outgoing stop:
-	 * @image html Signal__S_S_RUF.jpg width=100
-	 * 5. Shunting go:
-	 * @image html Signal____G_RUS.jpg width=100
-	 * 6. Shunting outgoing go:
-	 * @image html Signal__S_G_RUS.jpg width=100
-	 * 7. Tour go:
-	 * @image html Signal__G___RUT.jpg width=100
-	 * 8. Tour go expect stop.
-	 * @image html Signal__GS__RUT.jpg width=100
-	 * 9. Tour go expect go.
-	 * @image html Signal__GG__RUT.jpg width=100
+	 * These symbols appears on the trck control application:
+	 * 1. Shunting Signal:
+	 *   1. Shunting stop:<br/><img src="Signal____S_RUF.jpg" width="100"/>
+	 *   2. Shunting go:<br/><img src="Signal____G_RUS.jpg" width="100"/>
+	 * 2. Distant Signal:
+	 *   1. Distant expect stop:<br/><img src="Signal___S__RUF.jpg" width="100"/>
+	 *   2. Distant expect go:<br/><img src="Signal___G__RUF.jpg" width="100"/>
+	 * 3. Main Signal:
+	 *   1. Main stop:<br/><img src="Signal__S___RUF.jpg" width="100"/>
+	 *   2. Main outgoing stop:<br/><img src="Signal__S_S_RUF.jpg" width="100"/>
+	 *   3. Shunting outgoing go:<br/><img src="Signal__S_G_RUS.jpg" width="100"/>
+	 * 4. Main Signal combined with distant Signal:
+	 *   1. Tour go:<br/><img src="Signal__G___RUT.jpg" width="100"/>
+	 *   2. Tour go expect stop:<br/><img src="Signal__GS__RUT.jpg" width="100"/>
+	 *   3. Tour go expect go:<br/><img src="Signal__GG__RUT.jpg" width="100"/>
 	 */
 	class Signal : public AssemblyPart, public Position
 	{
@@ -71,35 +68,35 @@ namespace mrw::model
 		enum SignalType
 		{
 			/**
-			 * Main Signal.
-			 * @image html Signal__S___RUF.jpg width=100
-			 * @image html Signal__G___RUT.jpg width=100
+			 * Main Signal:
+			 *
+			 * <img src="Signal__S___RUF.jpg" width="100"/> <img src="Signal__G___RUT.jpg" width="100"/>
 			 */
 			MAIN_SIGNAL = 4,
 
 			/**
-			 * Distant Signal displaying position of main signal.
-			 * @image html Signal___S__RUT.jpg width=100
-			 * @image html Signal___G__RUT.jpg width=100
+			 * Distant Signal displaying position of main signal:
+			 *
+			 * <img src="Signal___S__RUT.jpg" width="100"/> <img src="Signal___G__RUT.jpg" width="100"/>
 			 *
 			 * Distant signal displaying expected position of main signal
-			 * combined with a local main signal.
-			 * @image html Signal__GS__RUT.jpg width=100
-			 * @image html Signal__GG__RUT.jpg width=100
+			 * combined with a local main signal displaying go:
+			 *
+			 * <img src="Signal__GS__RUT.jpg" width="100"/> <img src="Signal__GG__RUT.jpg" width="100"/>
 			 */
 			DISTANT_SIGNAL = 2,
 
 			/**
-			 * Signal for shunting.
-			 * @image html Signal____S_RUF.jpg width=100
-			 * @image html Signal____G_RUS.jpg width=100
+			 * Signal for shunting:
+			 *
+			 * <img src="Signal____S_RUF.jpg" width="100"/> <img src="Signal____G_RUS.jpg" width="100"/>
 			 */
 			SHUNT_SIGNAL = 1,
 
 			/**
-			 * Outgoing LightSignal.
-			 * @image html Signal__S_S_RUF.jpg width=100
-			 * @image html Signal__S_G_RUS.jpg width=100
+			 * Outgoing LightSignal:
+			 *
+			 * <img src="Signal__S_S_RUF.jpg" width="100"/> <img src="Signal__S_G_RUS.jpg" width="100"/>
 			 */
 			MAIN_SHUNT_SIGNAL = MAIN_SIGNAL | SHUNT_SIGNAL
 		};

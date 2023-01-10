@@ -175,13 +175,16 @@ namespace mrw::model
 		 * inclined.
 		 *
 		 * Example of a left handed non inclined switch:
-		 * @image html RSwitch_AB_nL_RUF.jpg width=100
+		 *
+		 * <img src="RSwitch_AB_nL_RUF.jpg" width="100"/>
 		 *
 		 * Example of a left handed inclined switch:
-		 * @image html RSwitch_AB_IL_RUF.jpg width=100
+		 *
+		 * <img src="RSwitch_AB_IL_RUF.jpg" width="100"/>
 		 *
 		 * Example of a right handed inclined switch:
-		 * @image html RSwitch_AB_IR_RUF.jpg width=100
+		 *
+		 * <img src="RSwitch_AB_IR_RUF.jpg" width="100"/>
 		 *
 		 * @note Only a RegularSwitch may be inclined.
 		 *

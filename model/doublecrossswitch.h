@@ -40,22 +40,22 @@ namespace mrw::model
 		enum class State : unsigned
 		{
 			/**
-			 * @image html XSwitch_AC_RUF.jpg width=25%
+			 * <img src="XSwitch_AC_RUF.jpg" width="100"/>
 			 */
 			AC = 0,
 
 			/**
-			 * @image html XSwitch_AD_RUF.jpg width=25%
+			 * <img src="XSwitch_AD_RUF.jpg" width="100"/>
 			 */
 			AD = D_MASK,
 
 			/**
-			 * @image html XSwitch_BC_RUF.jpg width=25%
+			 * <img src="XSwitch_BC_RUF.jpg" width="100"/>
 			 */
 			BC = B_MASK,
 
 			/**
-			 * @image html XSwitch_BD_RUF.jpg width=25%
+			 * <img src="XSwitch_BD_RUF.jpg" width="100"/>
 			 */
 			BD = B_MASK | D_MASK
 		};

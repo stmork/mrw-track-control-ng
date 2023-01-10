@@ -40,6 +40,7 @@ private:
 	mrw::ctrl::RailControllerMock    mock;
 
 	static QString code(const bool a_end, const bool b_end);
+	static QString code(const mrw::model::Position::Bending bending);
 };
 
 #endif // SECTIONSTUDY_H

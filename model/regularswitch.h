@@ -40,30 +40,24 @@ namespace mrw::model
 		enum class State : unsigned
 		{
 			/**
-			 * The turned left RegularSwitch.
+			 * The turned left RegularSwitch:
 			 *
-			 * @image html RSwitch_AB_nL_RUF.jpg width=25%
-			 *
-			 * @image html RSwitch_AB_nR_RUF.jpg width=25%
+			 * <img src="RSwitch_AB_nL_RUF.jpg" width="100"/> <img src="RSwitch_AB_nR_RUF.jpg" width="100"/>
 			 *
 			 * In case drawing is inclined:
-			 * @image html RSwitch_AB_IL_RUF.jpg width=25%
 			 *
-			 * @image html RSwitch_AB_IR_RUF.jpg width=25%
+			 * <img src="RSwitch_AB_IL_RUF.jpg" width="100"/> <img src="RSwitch_AB_IR_RUF.jpg" width="100"/>
 			 */
 			AB = 1,
 
 			/**
-			 * The turned right RegularSwitch.
+			 * The turned right RegularSwitch:
 			 *
-			 * @image html RSwitch_AC_nL_RUF.jpg width=25%
-			 *
-			 * @image html RSwitch_AC_nR_RUF.jpg width=25%
+			 * <img src="RSwitch_AC_nL_RUF.jpg" width="100"/> <img src="RSwitch_AC_nR_RUF.jpg" width="100"/>
 			 *
 			 * In case drawing is inclined:
-			 * @image html RSwitch_AC_IL_RUF.jpg width=25%
 			 *
-			 * @image html RSwitch_AC_IR_RUF.jpg width=25%
+			 * <img src="RSwitch_AC_IL_RUF.jpg" width="100"/> <img src="RSwitch_AC_IR_RUF.jpg" width="100"/>
 			 */
 			AC = 2
 		};
