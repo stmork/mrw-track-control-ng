@@ -28,16 +28,16 @@ BaseController ..> ModelClass : uses
 ```
 
 Actually there are four MVC groups:
-1. Section - SectionController - SectionWidget
+1. Rail - RailController - RailWidget
 2. RegularSwitch - RegularSwitchController - RegularSwitchWidget
 3. DoubleCrossSwitch - DoubleCrossSwitchController - DoubleCrossSwitchWidget
 4. Signal - SignalController - SignalWidget
 
 The MVC for signals is a little bit different because a controller may represent a group of signals like a combined main and distant signal.
 
-## SectionWidget
+## RailWidget
 
-As an example this scenario shows the MVC for a rail section.
+As an example this scenario shows the MVC for a rail.
 
 ```mermaid
 classDiagram
@@ -45,11 +45,11 @@ classDiagram
 class BaseController
 <<Abstract>> BaseController
 
-class SectionController
-<<Interface>> SectionController
+class RailController
+<<Interface>> RailController
 
-class SectionControllerProxy
-<<Controller>> SectionControllerProxy
+class RailControllerProxy
+<<Controller>> RailControllerProxy
 
 class BaseWidget
 <<abstract>> BaseWidget
@@ -57,23 +57,23 @@ class BaseWidget
 class ControllerWidget
 <<abstract>> ControllerWidget
 
-class SectionWidget
-<<View>> SectionWidget
+class RailWidget
+<<View>> RailWidget
 
-class Section
-<<Model>> Section
+class Rail
+<<Model>> Rail
 
 QObject <|-- BaseController
-BaseController <|-- SectionController
+BaseController <|-- RailController
 BaseWidget <|-- ControllerWidget
-ControllerWidget <|-- SectionWidget
+ControllerWidget <|-- RailWidget
 
 QWidget <|-- BaseWidget
-SectionWidget ..> SectionController : uses
-SectionControllerProxy ..> Section : uses
-SectionControllerProxy ..> SectionWidget : signals
+RailWidget ..> RailController : uses
+RailControllerProxy ..> Rail : uses
+RailControllerProxy ..> RailWidget : signals
 
-SectionController <|-- SectionControllerMock
-SectionController <|-- SectionControllerProxy
+RailController <|-- RailControllerMock
+RailController <|-- RailControllerProxy
 
 ```

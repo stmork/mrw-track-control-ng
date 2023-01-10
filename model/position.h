@@ -277,7 +277,7 @@ namespace mrw::model
 		 * This returns the actual bending behaviour.
 		 *
 		 * @note This is only implemented for mrw::ui::SignalWidget and
-		 * mrw::ui::SectionWidget.
+		 * mrw::ui::RailWidget.
 		 *
 		 * @return The actual Bending.
 		 */
@@ -287,7 +287,7 @@ namespace mrw::model
 		 * This sets the bending behaviour.
 		 *
 		 * @note This is only implemented for mrw::ui::SignalWidget and
-		 * mrw::ui::SectionWidget.
+		 * mrw::ui::RailWidget.
 		 *
 		 * @param input
 		 */

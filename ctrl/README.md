@@ -32,9 +32,9 @@ Actually there are four MVC groups:
 
 The MVC for signals is a little bit different because a controller may represent a group of signals like a combined main and distant signal.
 
-## SectionController
+## RailController
 
-As an example this scenario shows the MVC for a rail section.
+As an example this scenario shows the MVC for a rail.
 
 ```mermaid
 classDiagram
@@ -42,33 +42,33 @@ classDiagram
 class BaseController
 <<Abstract>> BaseController
 
-class SectionController
-<<Interface>> SectionController
+class RailController
+<<Interface>> RailController
 
 class BaseWidget
 <<abstract>> BaseWidget
 
-class SectionWidget
-<<View>> SectionWidget
+class RailWidget
+<<View>> RailWidget
 
-class Section
-<<Model>> Section
+class Rail
+<<Model>> Rail
 
 QObject <|-- BaseController
-BaseController <|-- SectionController
-BaseWidget <|-- SectionWidget
+BaseController <|-- RailController
+BaseWidget <|-- RailWidget
 
 QWidget <|-- BaseWidget
-SectionWidget ..> SectionController : uses
-SectionControllerProxy ..> Section : uses
-SectionControllerProxy ..> SectionWidget : signals
+RailWidget ..> RailController : uses
+RailControllerProxy ..> Rail : uses
+RailControllerProxy ..> RailWidget : signals
 
-SectionController <|-- SectionControllerMock
-SectionController <|-- SectionControllerProxy
+RailController <|-- RailControllerMock
+RailController <|-- RailControllerProxy
 
 ```
 
-The real life MRW-TrackControl software uses the SectionControllerProxy which uses the real railway model data. The SectionControllerMock acts as a test structure to test the handling of the SectionWidget instead while using the MRW-WidgetStudy app. This app simulates the data acces through a control panel.
+The real life MRW-TrackControl software uses the RailControllerProxy which uses the real railway model data. The RailControllerMock acts as a test structure to test the handling of the RailWidget instead while using the MRW-WidgetStudy app. This app simulates the data acces through a control panel.
 
 The Proxy and Mock classes are used for switches and signals in the same manner. These classes are not included into this library package. You can find the Mock classes in the MRW-WdigetStudy scope but in the same mrw::ctrl namespace. The Proxy classes are included in the MRW-TrackControl scope as well.
 

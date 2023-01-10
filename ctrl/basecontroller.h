@@ -15,7 +15,7 @@
 
 /**
  * The mrw::ctrl namespace contains all controller classes in the meaning of
- * the MVC paradigma (). The model contains simply the data. The view
+ * the MVC paradigma. The model contains simply the data. The view
  * represents simply this data. Both don't talk directly but using an
  * intermediate controller which contains a sort of business logic. Generally
  * speaking the "view" BaseWidget does not see any model class.
@@ -25,17 +25,17 @@
  * mrw::ctrl namespace.
  *
  * Actually there are four MVC groups:
- * 1. Section - SectionController - SectionWidget
- * 2. RegularSwitch - RegularSwitchController - RegularSwitchWidget
- * 3. DoubleCrossSwitch - DoubleCrossSwitchController - DoubleCrossSwitchWidget
- * 4. Signal - SignalController - SignalWidget
+ * 1. mrw::model::Rail - RailController - mrw::ui::RailWidget
+ * 2. mrw::model::RegularSwitch - RegularSwitchController - mrw::ui::RegularSwitchWidget
+ * 3. mrw::model::DoubleCrossSwitch - DoubleCrossSwitchController - mrw::ui::DoubleCrossSwitchWidget
+ * 4. mrw::model::Signal - SignalController - mrw::ui::SignalWidget
  *
  * The MVC for signals is a little bit different because a controller may
  * represent a group of signals like a combined main and distant signal.
  *
- * The real life MRW-TrackControl software uses the SectionControllerProxy
- * which uses the real railway model data. The SectionControllerMock acts as a
- * test structure to test the handling of the SectionWidget instead while using
+ * The real life MRW-TrackControl software uses the RailControllerProxy
+ * which uses the real railway model data. The RailControllerMock acts as a
+ * test structure to test the handling of the RailWidget instead while using
  * the MRW-WidgetStudy app. This app simulates the data acces through a control
  * panel.
  *

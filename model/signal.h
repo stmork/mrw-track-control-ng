@@ -58,7 +58,14 @@ namespace mrw::model
 			/** Will result in SIGNAL_HP0, SIGNAL_SH0 or SIGNAL_VR0 */
 			STOP =  0,
 
-			/** Will result in SIGNAL_HP1, SIGNAL_SH1 or SIGNAL_VR1 */
+			/**
+			 * Will result in SIGNAL_HP1, SIGNAL_SH1 or SIGNAL_VR1. In case
+			 * that at least two curved RailPart elements occur between two
+			 * main signals a SIGNAL_VR2 or SIGNAL_HP2 may occur.
+			 *
+			 * @note The ESTW does not distinguish between SIGNL_VR1 or
+			 * SIGNAL_VR2 and SIGNAL_HP1 or SIGNAL_HP2 respectively.
+			 */
 			GO   =  1
 		};
 

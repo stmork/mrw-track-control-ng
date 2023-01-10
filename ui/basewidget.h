@@ -35,13 +35,15 @@
  * mrw::ctrl namespace.
  *
  * Actually there are four MVC groups:
- * 1. Section - SectionController - SectionWidget
- * 2. RegularSwitch - RegularSwitchController - RegularSwitchWidget
- * 3. DoubleCrossSwitch - DoubleCrossSwitchController - DoubleCrossSwitchWidget
- * 4. Signal - SignalController - SignalWidget
+ * 1. mrw::model::Rail - mrw::ctrl::RailController - RailWidget
+ * 2. mrw::model::RegularSwitch - mrw::ctrl::RegularSwitchController - RegularSwitchWidget
+ * 3. mrw::model::DoubleCrossSwitch - mrw::ctrl::DoubleCrossSwitchController - DoubleCrossSwitchWidget
+ * 4. mrw::model::Signal - mrw::ctrl::SignalController - SignalWidget
  *
  * @note The MVC for signals is a little bit different because a controller
  * may represent a group of signals like a combined main and distant signal.
+ *
+ * @note The Section elements are not represented in a MVC manner.
  *
  * @see https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
  */
