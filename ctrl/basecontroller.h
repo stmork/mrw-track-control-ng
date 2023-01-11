@@ -8,6 +8,8 @@
 #ifndef MRW_CTRL_BASECONTROLLER_H
 #define MRW_CTRL_BASECONTROLLER_H
 
+#include <functional>
+
 #include <QObject>
 
 #include <model/device.h>
