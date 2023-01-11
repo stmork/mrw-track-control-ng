@@ -97,3 +97,34 @@ flowchart LR
 	MRW-Tracker .- vcan
 	end
 ```
+
+## Software packages and namespaces
+
+The software is organized in packages each using its own namespace. Every package result in a static library. There are the following packages:
+* mrw::util, libMRW-Util.a which contains convenience classes.
+* mrw::can, libMRW-Can.a which contains the CAN support.
+* mrw::model, libMRW-Model.a which contains the data model of model railways.
+* mrw::ctrl, libMRW-Ctrl.a which contains logic classes.
+* mrw::ui, libMRW-UI.a which contains widgets for graphical interaction.
+* mrw::statecharts, libMRW-Statecharts.a which contains state machines supporting the controller classes.
+
+The packages have dependencies as shown in the following diagram:
+```mermaid
+flowchart BT
+	model[mrw::model]
+	sc[mrw::statecharts]
+	ui[mrw::ui]
+	util[mrw::util]
+	can[mrw::can]
+	ctrl[mrw::ctrl]
+
+	can -->|depends|util
+	ui -->|depends|util
+	ctrl -->|depends|util
+	ctrl -->|depends|model
+	ctrl -->|depends|can
+	ui -->|depends|ctrl
+	model -->|depends|util
+	model -->|depends|can
+	ctrl -->|depends|sc
+```

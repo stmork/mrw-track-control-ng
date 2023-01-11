@@ -1,0 +1,16 @@
+--style=allman
+-T4
+-n 
+-k2
+-W2
+-j
+-N
+-p
+-xU
+-m1
+-p
+-xg
+-H
+-z2
+-K
+-Z

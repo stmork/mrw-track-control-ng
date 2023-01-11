@@ -61,7 +61,8 @@ QMAKE_CLEAN           += qtest*.xml
 #
 #####################################################################
 
-astyle.commands = astyle */*.cpp */*.h\
+astyle.commands = astyle --options=$$PWD/.astylerc\
+	*/*.cpp */*.h\
 	tools/*/*.cpp tools/*/*.h\
 	*/ctrl/*.cpp */ctrl/*.h\
 	*/test/*/*.cpp */test/*/*.h
