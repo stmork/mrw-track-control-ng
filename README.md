@@ -51,3 +51,49 @@ MRW-TrackControl <railway-model>
 Note that you don't have to add a file extension! The software lookups the railway model file in your complete home directory. Once it is found it remembers the location and you don't have to add the railway-model as argument.
 
 To create an appropriate railway model consult the pages of https://github.com/stmork/mrw/
+
+### Direct usage
+
+So the simplest scenario to start MRW-TrackControl is as follows:
+
+```mermaid
+flowchart LR
+	subgraph Host A
+	MRW-TrackControl-- socketcan ---CAN-Bus
+	end
+```
+
+### Remote usage
+
+If you want to use MRW-TrackControl remotely you can use the MRW-Proxy tool which interconnects a real CAN-Bus (the "socketcan" plugin in Qt meaning) with a virtual CAN-Bus (the "virtualcan" plugin in Qt meaning). Since the virtual CAN-Bus can only connect to a localhost socket you need a SSH tunnel to connect remotely. You can use the command on host B to build a tunnel to host A:
+
+```
+ssh -L 35468:localhost:35468 user@host-a
+```
+Note that you start the MRW-Proxy tool first, since it provides the virtual CAN Server on socket localhost:35468.
+
+```mermaid
+flowchart LR
+	subgraph Host A
+	vcan([Virtual CAN])
+	MRW-Proxy -- socketcan --- CAN-Bus
+	MRW-Proxy -->|provides|vcan
+	end
+	subgraph Host B
+	MRW-TrackControl-- SSH-Tunnel ---vcan
+	end
+```
+
+### Simulation
+
+If you want to simulate a model railway you can use the MRW-Simulator tool. This tool has to be started first, because the tool provides the virtual CAN Server on socket localhost:35468. All following tools detect the virtual CAN-Bus server and connect automatically. The MRW-Tracker ist optional and simulates a train following a track of enabled rail sections during a selected tour/route.
+
+```mermaid
+flowchart LR
+	subgraph Host B
+	vcan([Virtual CAN])
+	MRW-Simulator -->|provides| vcan
+	MRW-TrackControl -- uses --- vcan
+	MRW-Tracker .- vcan
+	end
+```
