@@ -6,11 +6,15 @@ export PACKAGE=mrw-ng
 export PREFIX=$PWD/rootfs/${PACKAGE}
 export COPYRIGHT=${PREFIX}/usr/share/doc/${PACKAGE}/copyright
 export BUILD_NUMBER=${BUILD_NUMBER:=0}
-export ARCH=`dpkg --print-architecture`
+export ARCH=${ARCH:-`dpkg --print-architecture`}
+export QMAKE=${QMAKE:-qmake}
+
+echo "Arch:   $ARCH"
+echo "qmake:  $QMAKE"
 
 rm -rf ${PREFIX}
 test -f Makefile && make clean distclean
-qmake -r
+${QMAKE} -r
 make -j `nproc`
 make install
 
