@@ -13,8 +13,9 @@ using namespace mrw::model;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 
-using Bending = Position::Bending;
-using Symbol  = Signal::Symbol;
+using Bending   = Position::Bending;
+using LockState = Device::LockState;
+using Symbol    = Signal::Symbol;
 
 SignalWidget::SignalWidget(
 	QWidget      *     parent,
@@ -59,8 +60,9 @@ void SignalWidget::paint(QPainter & painter)
 	SignalController * signal_controller = controller<SignalController>();
 	QPainterPath       path;
 	QPen               pen;
-	QFont              font     = painter.font();
-	Bending            bending  = extensions() >= Position::FRACTION ?
+	QFont              font       = painter.font();
+	const LockState    lock_state = base_controller->lock();
+	const Bending      bending    = extensions() >= Position::FRACTION ?
 		base_controller->bending() : Bending::STRAIGHT;
 
 	const float        shift  = SCALE * extensions() / Position::FRACTION;
@@ -74,6 +76,7 @@ void SignalWidget::paint(QPainter & painter)
 	const bool has_main     = signal_controller->hasMain();
 	const bool has_distant  = signal_controller->hasDistant();
 	const bool has_shunting = signal_controller->hasShunting();
+	const bool pending      = lockVisible(lock_state);
 
 	// Unify coordinates
 	rescale(painter, (Position::FRACTION + extensions()) * SCALE / Position::HALF);
@@ -98,12 +101,33 @@ void SignalWidget::paint(QPainter & painter)
 		painter.scale(-1.0f, -1.0f);
 	}
 
+	const QColor section_color = sectionColor(base_controller->state());
+
 	// Draw straight part of rail
 	pen.setCapStyle(Qt::FlatCap);
-	pen.setColor(sectionColor(base_controller->state()));
+	pen.setColor(section_color);
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
-	painter.drawLine( -border, 0.0f, bending == Bending::STRAIGHT ? border : border - SCALE, 0.0f);
+
+	if ((lock_state == LockState::PENDING) || (lock_state == LockState::LOCKED))
+	{
+		painter.drawLine( -border,    0.0f, start - 25.0f, 0.0f);
+		painter.drawLine( start + 25.0f, 0.0f, bending == Bending::STRAIGHT ? border : border - SCALE, 0.0f);
+
+		// Draw point lock
+		if (pending)
+		{
+			drawLock(
+				painter,
+				base_controller->lock() == LockState::LOCKED ?
+				section_color : WHITE,
+				start, 0);
+		}
+	}
+	else
+	{
+		painter.drawLine( -border, 0.0f, bending == Bending::STRAIGHT ? border : border - SCALE, 0.0f);
+	}
 
 	// Rail bending to neighbour.
 	if (bending != Bending::STRAIGHT)
@@ -202,4 +226,9 @@ void SignalWidget::paint(QPainter & painter)
 
 	// Draw connector markers
 	drawConnectors(painter);
+}
+
+bool SignalWidget::isLockPending() const
+{
+	return base_controller->lock() == LockState::PENDING;
 }

@@ -103,8 +103,8 @@ void RegularSwitchWidget::paint(QPainter & painter)
 		painter.scale(-1.0f, -1.0f);
 	}
 
-	QColor section_color = sectionColor(base_controller->state());
-	QColor outside_color = sectionColor(SectionState::FREE);
+	const QColor section_color = sectionColor(base_controller->state());
+	const QColor outside_color = sectionColor(SectionState::FREE);
 
 	// Draw point lock
 	drawLock(

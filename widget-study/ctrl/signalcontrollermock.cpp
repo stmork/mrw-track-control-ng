@@ -125,5 +125,21 @@ bool SignalControllerMock::hasMain() const
 
 QString SignalControllerMock::name() const
 {
-	return isDirection() ? "N3/n203" : "P3/p203";
+	QStringList result;
+
+	if (hasMain())
+	{
+		result += isDirection() ? "N3" : "P3";
+	}
+
+	if (hasDistant())
+	{
+		result += isDirection() ? "n203" : "p203";
+	}
+
+	if (result.isEmpty())
+	{
+		result += "i3";
+	}
+	return result.join('/');
 }

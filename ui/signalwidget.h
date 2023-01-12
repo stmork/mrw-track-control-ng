@@ -62,7 +62,8 @@ namespace mrw::ui
 		virtual void computeConnectors() override;
 
 	protected:
-		void paint(QPainter & painter) override;
+		virtual void paint(QPainter & painter) override;
+		virtual bool isLockPending() const override;
 	};
 }
 
