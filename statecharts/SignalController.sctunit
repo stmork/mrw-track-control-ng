@@ -59,6 +59,7 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		assert turnDistant
 		assert turnShunt
 		assert called inc
+		assert called pending
 	}
 
 	@Test

@@ -335,6 +335,7 @@ namespace mrw
 			// prototypes of all internal functions
 
 			void enact_main_region_Init();
+			void enact_main_region_Init_Init_process_Turning();
 			void enact_main_region_Init_Init_process_Turning_main_Turn();
 			void enact_main_region_Init_Init_process_Turning_distant_Turn();
 			void enact_main_region_Init_Init_process_Turning_shunt_Turn();

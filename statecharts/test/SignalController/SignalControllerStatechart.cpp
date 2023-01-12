@@ -528,6 +528,13 @@ namespace mrw
 			ifaceOperationCallback->inc();
 		}
 
+		/* Entry action for state 'Turning'. */
+		void SignalControllerStatechart::enact_main_region_Init_Init_process_Turning()
+		{
+			/* Entry action for state 'Turning'. */
+			ifaceOperationCallback->pending();
+		}
+
 		/* Entry action for state 'Turn'. */
 		void SignalControllerStatechart::enact_main_region_Init_Init_process_Turning_main_Turn()
 		{
@@ -1885,6 +1892,7 @@ namespace mrw
 		void SignalControllerStatechart::react_main_region_Init_Init_process__sync0()
 		{
 			/* The reactions of state null. */
+			enact_main_region_Init_Init_process_Turning();
 			enseq_main_region_Init_Init_process_Turning_main_Turn_default();
 			enseq_main_region_Init_Init_process_Turning_distant_Turn_default();
 			enseq_main_region_Init_Init_process_Turning_shunt_Turn_default();

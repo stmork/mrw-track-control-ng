@@ -12,7 +12,7 @@
         <outgoingTransitions xmi:id="_T8G0gHbgEe20X8bIRmamkA" specification="failed" target="_BvK_cHbfEe20X8bIRmamkA"/>
         <outgoingTransitions xmi:id="_Vcj6oHbgEe20X8bIRmamkA" specification="after timeout ms" target="_BvK_cHbfEe20X8bIRmamkA"/>
         <regions xmi:id="_6_a_YHbdEe20X8bIRmamkA" name="Init process">
-          <vertices xsi:type="sgraph:State" xmi:id="_9tcr4HbdEe20X8bIRmamkA" name="Turning">
+          <vertices xsi:type="sgraph:State" xmi:id="_9tcr4HbdEe20X8bIRmamkA" specification="entry / pending" name="Turning">
             <regions xmi:id="_9tcr43bdEe20X8bIRmamkA" name="main">
               <vertices xsi:type="sgraph:State" xmi:id="_FxvScHbeEe20X8bIRmamkA" specification="entry / raise turnMain() : STOP" name="Turn" incomingTransitions="_YjHGwHbeEe20X8bIRmamkA">
                 <outgoingTransitions xmi:id="_mLnj0HbeEe20X8bIRmamkA" specification="completedMain" target="_UzAGoHboEe20X8bIRmamkA"/>
