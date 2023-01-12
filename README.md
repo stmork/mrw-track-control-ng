@@ -3,7 +3,7 @@ This is the next generation Qt based track control software based on the MRW
 project. It reads the modelrailway file, which is XML/XMI based and displays
 the GUI to control the model railway.
 
-## Data flow archtecture
+## Data flow architecture
 
 ```mermaid
 flowchart TB
@@ -48,7 +48,10 @@ You can start the track control software by starting:
 ```
 MRW-TrackControl <railway-model>
 ```
-Note that you don't have to add a file extension! The software lookups the railway model file in your complete home directory. Once it is found it remembers the location and you don't have to add the railway-model as argument.
+Note that you don't have to add a file extension! The software lookups the
+railway model file in your complete home directory. Once it is found it
+remembers the location and you don't have to add the railway-model as
+argument.
 
 To create an appropriate railway model consult the pages of https://github.com/stmork/mrw/
 
@@ -65,12 +68,19 @@ flowchart LR
 
 ### Remote usage
 
-If you want to use MRW-TrackControl remotely you can use the MRW-Proxy tool which interconnects a real CAN-Bus (the "socketcan" plugin in Qt meaning) with a virtual CAN-Bus (the "virtualcan" plugin in Qt meaning). Since the virtual CAN-Bus can only connect to a localhost socket you need a SSH tunnel to connect remotely. You can use the command on host B to build a tunnel to host A:
+If you want to use MRW-TrackControl remotely you can use the MRW-Proxy tool
+which interconnects a real CAN-Bus (the "socketcan" plugin in Qt meaning)
+with a virtual CAN-Bus (the "virtualcan" plugin in Qt meaning). Since the
+virtual CAN-Bus can only connect to a localhost socket you need a SSH tunnel
+to connect remotely. You can use the command on host B to build a tunnel to
+host A:
 
 ```
 ssh -L 35468:localhost:35468 user@host-a
-```
-Note that you start the MRW-Proxy tool first, since it provides the virtual CAN Server on socket localhost:35468.
+``` 
+
+Note that you start the MRW-Proxy tool first, since it provides the virtual
+CAN Server on socket localhost:35468.
 
 ```mermaid
 flowchart LR
@@ -86,7 +96,12 @@ flowchart LR
 
 ### Simulation
 
-If you want to simulate a model railway you can use the MRW-Simulator tool. This tool has to be started first, because the tool provides the virtual CAN Server on socket localhost:35468. All following tools detect the virtual CAN-Bus server and connect automatically. The MRW-Tracker ist optional and simulates a train following a track of enabled rail sections during a selected tour/route.
+If you want to simulate a model railway you can use the MRW-Simulator tool.
+This tool has to be started first, because the tool provides the virtual CAN
+Server on socket localhost:35468. All following tools detect the virtual
+CAN-Bus server and connect automatically. The MRW-Tracker ist optional and
+simulates a train following a track of enabled rail sections during a
+selected tour/route.
 
 ```mermaid
 flowchart LR
