@@ -37,46 +37,23 @@ namespace mrw::ctrl
 	public:
 		explicit SignalControllerMock(QObject * parent = nullptr);
 
-		virtual bool isDirection() const override;
-		virtual bool hasShunting() const override;
-		virtual bool hasDistant() const override;
-		virtual bool hasMain() const override;
+		// Implementations from BaseController
 		virtual QString name() const override;
+		virtual float   extensions() const override;
+		virtual bool    isDirection() const override;
 
-		virtual mrw::model::SectionState state() const override
-		{
-			return section_state;
-		}
+		virtual mrw::model::SectionState      state() const override;
+		virtual mrw::model::Device::LockState lock() const override;
+		virtual mrw::model::Position::Bending bending() const override;
 
-		virtual mrw::model::Device::LockState lock() const override
-		{
-			return lock_state;
-		}
+		// Implementations from SignalController
+		virtual bool hasMain()     const override;
+		virtual bool hasDistant()  const override;
+		virtual bool hasShunting() const override;
 
-		virtual float extensions() const override
-		{
-			return extension;
-		}
-
-		inline mrw::model::Signal::Symbol distant() const override
-		{
-			return distant_state;
-		}
-
-		inline mrw::model::Signal::Symbol shunt() const override
-		{
-			return shunt_state;
-		}
-
-		inline mrw::model::Signal::Symbol main() const override
-		{
-			return main_state;
-		}
-
-		virtual mrw::model::Position::Bending bending() const override
-		{
-			return bending_state;
-		}
+		virtual mrw::model::Signal::Symbol main()    const override;
+		virtual mrw::model::Signal::Symbol distant() const override;
+		virtual mrw::model::Signal::Symbol shunt()   const override;
 
 		void setDirection(const bool dir = true);
 		void setSectionState(const mrw::model::SectionState state);

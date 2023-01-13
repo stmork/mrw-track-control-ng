@@ -123,6 +123,41 @@ bool SignalControllerMock::hasMain() const
 	return main_signal;
 }
 
+Signal::Symbol SignalControllerMock::distant() const
+{
+	return distant_state;
+}
+
+Signal::Symbol SignalControllerMock::shunt() const
+{
+	return shunt_state;
+}
+
+Signal::Symbol SignalControllerMock::main() const
+{
+	return main_state;
+}
+
+SectionState SignalControllerMock::state() const
+{
+	return section_state;
+}
+
+Device::LockState SignalControllerMock::lock() const
+{
+	return lock_state;
+}
+
+Position::Bending SignalControllerMock::bending() const
+{
+	return bending_state;
+}
+
+float SignalControllerMock::extensions() const
+{
+	return extension;
+}
+
 QString SignalControllerMock::name() const
 {
 	QStringList result;

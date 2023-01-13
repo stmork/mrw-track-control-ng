@@ -54,6 +54,46 @@ QString RailControllerMock::name() const
 	return "301";
 }
 
+SectionState RailControllerMock::state() const
+{
+	return section_state;
+}
+
+Device::LockState RailControllerMock::lock() const
+{
+	return lock_state;
+}
+
+bool RailControllerMock::isDirection() const
+{
+	return !a_is_dir;
+}
+
+bool RailControllerMock::aEnds() const
+{
+	return a_ends;
+}
+
+bool RailControllerMock::bEnds() const
+{
+	return b_ends;
+}
+
+float RailControllerMock::extensions() const
+{
+	return ext_count;
+}
+
+float RailControllerMock::lines() const
+{
+	return line_count;
+}
+
+Position::Bending RailControllerMock::bending() const
+{
+	return bending_state;
+}
+
 void RailControllerMock::setExtension(const int input)
 {
 	ext_count = input;

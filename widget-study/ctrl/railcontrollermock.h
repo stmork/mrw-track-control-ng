@@ -33,47 +33,19 @@ namespace mrw::ctrl
 	public:
 		explicit RailControllerMock(QObject * parent = nullptr);
 
-		virtual QString name() const override;
+		// Implementations from BaseController
+		virtual QString name()        const override;
+		virtual float   extensions()  const override;
+		virtual float   lines()       const override;
+		virtual bool    isDirection() const override;
 
-		virtual mrw::model::SectionState state() const override
-		{
-			return section_state;
-		}
+		virtual mrw::model::SectionState      state()   const override;
+		virtual mrw::model::Device::LockState lock()    const override;
+		virtual mrw::model::Position::Bending bending() const override;
 
-		virtual mrw::model::Device::LockState lock() const override
-		{
-			return lock_state;
-		}
-
-		virtual bool isDirection() const override
-		{
-			return !a_is_dir;
-		}
-
-		virtual bool aEnds() const override
-		{
-			return a_ends;
-		}
-
-		virtual bool bEnds() const override
-		{
-			return b_ends;
-		}
-
-		virtual float extensions() const override
-		{
-			return ext_count;
-		}
-
-		virtual float lines() const override
-		{
-			return line_count;
-		}
-
-		virtual mrw::model::Position::Bending bending() const override
-		{
-			return bending_state;
-		}
+		// Implementations from RailController
+		virtual bool  aEnds() const override;
+		virtual bool  bEnds() const override;
 
 		void setDirection(const bool dir = true);
 		void setSectionState(const mrw::model::SectionState state);
