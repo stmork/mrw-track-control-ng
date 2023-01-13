@@ -69,9 +69,10 @@ namespace mrw::model
 		size_t usedPins() const;
 
 		// Implementations from Device
-		bool            isUnlockable() const override;
-		Controller   *  controller()   const override;
-		const QString & name()         const override;
+		const QString    &   name()         const override;
+		bool                 isUnlockable() const override;
+		Controller     *     controller()   const override;
+		mrw::can::MrwMessage configMsg()    const override;
 
 		// Implementations from AssemblyPart
 		bool            valid()    const override;
@@ -79,4 +80,4 @@ namespace mrw::model
 	};
 }
 
-#endif // MRW_MODEL_SIGNAL_H
+#endif

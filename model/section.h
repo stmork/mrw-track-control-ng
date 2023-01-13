@@ -99,10 +99,17 @@ namespace mrw::model
 			const QDomElement  &  element);
 		virtual ~Section();
 
-		const QString & name() const override;
-		bool            isUnlockable() const override;
-		QString         toString() const override;
+		// Implementations from Device
+		const QString    &   name()         const override;
+		bool                 isUnlockable() const override;
+		Controller     *     controller()   const override;
+		mrw::can::MrwMessage configMsg()    const override;
+
+		// Implementations from Position
 		virtual QString key() const override;
+
+		// Implementations from mrw::util::String
+		QString         toString() const override;
 
 		/**
 		 * This method validates if all references are configured correctly.
@@ -205,14 +212,6 @@ namespace mrw::model
 		 * @return The controlling SectionModule.
 		 */
 		SectionModule * module() const;
-
-		/**
-		 * This method returns the CAN Controller to which the controlling
-		 * SectionModule is connected to.
-		 *
-		 * @return The CAN Controller of the controlling SectionModule.
-		 */
-		Controller * controller() const override;
 
 		/**
 		 * This method returns the Region to which this Section is belonging to.

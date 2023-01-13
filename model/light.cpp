@@ -3,9 +3,11 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
-#include "model/modelrailway.h"
-#include "model/light.h"
+#include <can/mrwmessage.h>
+#include <model/modelrailway.h>
+#include <model/light.h>
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 Light::Light(
@@ -25,12 +27,19 @@ const QString & Light::name() const
 	return light_name;
 }
 
+bool Light::isUnlockable() const
+{
+	return true;
+}
+
 Controller * Light::controller() const
 {
 	return light_controller;
 }
 
-bool Light::isUnlockable() const
+MrwMessage Light::configMsg() const
 {
-	return true;
+	MrwMessage message = command(CFGLGT);
+
+	return message;
 }

@@ -131,7 +131,7 @@ void TestNumbering::testSignalCount()
 	model->parts<LightSignal>(light_signals);
 
 	QCOMPARE(light_signals.size(), 9u);
-	QCOMPARE(form_signals.size(), 5u);
+	QCOMPARE(form_signals.size(), 6u);
 }
 
 void TestNumbering::testRailCount()

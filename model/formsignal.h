@@ -43,8 +43,9 @@ namespace mrw::model
 			const SignalType      is_main);
 
 		// Implementations from Device
-		bool            isUnlockable() const override;
-		const QString & name()         const override;
+		bool                 isUnlockable() const override;
+		const QString    &   name()         const override;
+		mrw::can::MrwMessage configMsg()    const override;
 
 		// Implementations from AssemblyPart
 		bool            valid()    const override;

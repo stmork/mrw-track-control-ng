@@ -5,16 +5,18 @@
 
 #include <QDebug>
 
-#include "model/modelrailway.h"
-#include "model/section.h"
-#include "model/sectionmodule.h"
-#include "model/rail.h"
-#include "model/regularswitch.h"
-#include "model/doublecrossswitch.h"
-#include "model/lightsignal.h"
-#include "model/formsignal.h"
+#include <can/mrwmessage.h>
+#include <model/modelrailway.h>
+#include <model/section.h>
+#include <model/sectionmodule.h>
+#include <model/rail.h>
+#include <model/regularswitch.h>
+#include <model/doublecrossswitch.h>
+#include <model/lightsignal.h>
+#include <model/formsignal.h>
 
 using namespace mrw::util;
+using namespace mrw::can;
 using namespace mrw::model;
 
 /**
@@ -103,6 +105,10 @@ Section::Section(
 				else if (type == "Ausfahrsignal")
 				{
 					rail_part = new LightSignal(model, this, child, Signal::MAIN_SHUNT_SIGNAL, 5);
+				}
+				else if (type == "Formgleissperrsignal")
+				{
+					rail_part = new FormSignal(model, this, child, Signal::SHUNT_SIGNAL);
 				}
 				else if (type == "Formvorsignal")
 				{
@@ -227,6 +233,11 @@ SectionModule * Section::module() const
 Controller * Section::controller() const
 {
 	return section_controller;
+}
+
+MrwMessage Section::configMsg() const
+{
+	return command(CFGRAI);
 }
 
 Region * Section::region() const

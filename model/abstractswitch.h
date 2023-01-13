@@ -42,10 +42,10 @@ namespace mrw::model
 			Section       *       model_section,
 			const QDomElement  &  element);
 
-		inline const QString & name() const override
-		{
-			return partName();
-		}
+		// Implementations from Device
+		const QString    &   name()         const override;
+		bool                 isUnlockable() const override;
+		mrw::can::MrwMessage configMsg()    const override;
 
 		/**
 		 * This method checks whether a connected AbstractSwitch is a flank
@@ -73,8 +73,6 @@ namespace mrw::model
 		 * @see mrw::can::Command
 		 */
 		mrw::can::Command commandState() const;
-
-		bool isUnlockable() const override;
 
 	protected:
 		/**

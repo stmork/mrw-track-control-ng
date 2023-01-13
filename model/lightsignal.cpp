@@ -73,6 +73,11 @@ size_t LightSignal::usedPins() const
 	return lights;
 }
 
+const QString & LightSignal::name() const
+{
+	return part_name;
+}
+
 bool LightSignal::isUnlockable() const
 {
 	return symbol() != Symbol::GO;
@@ -83,9 +88,52 @@ Controller * LightSignal::controller() const
 	return signal_controller;
 }
 
-const QString & LightSignal::name() const
+MrwMessage LightSignal::configMsg() const
 {
-	return part_name;
+	Command cmd = CMD_ILLEGAL;
+
+	switch (type())
+	{
+	case SignalType::MAIN_SIGNAL:
+	case SignalType::MAIN_SHUNT_SIGNAL:
+		switch (lights)
+		{
+		case 2:
+			cmd = CFGML2;
+			break;
+
+		case 3:
+			cmd = CFGML3;
+			break;
+
+		case 5:
+			cmd = CFGML4;
+			break;
+		}
+		break;
+
+	case SignalType::DISTANT_SIGNAL:
+		switch (lights)
+		{
+		case 2:
+			cmd = CFGPL2;
+			break;
+
+		case 4:
+			cmd = CFGPL3;
+			break;
+		}
+
+		break;
+
+	case SHUNT_SIGNAL:
+		cmd = CFGSL2;
+		break;
+	}
+
+	MrwMessage message = command(cmd);
+
+	return message;
 }
 
 bool LightSignal::valid() const

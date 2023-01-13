@@ -133,6 +133,14 @@ namespace mrw::model
 		mrw::can::MrwMessage command(const mrw::can::Command command) const;
 
 		/**
+		 * This method provides a configuration message which describes the
+		 * connection from the Device to the Module.
+		 *
+		 * @return The configuration MrwMessage ready to send.
+		 */
+		virtual mrw::can::MrwMessage configMsg() const = 0;
+
+		/**
 		 * This method returns the clear text QString of the LockState this
 		 * Device is set to.
 		 *

@@ -9,6 +9,7 @@
 #include "model/switchmodule.h"
 #include "model/switchmodulereference.h"
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 /**

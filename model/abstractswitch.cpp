@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
-#include <can/commands.h>
+#include <can/mrwmessage.h>
 #include <model/modelrailway.h>
 #include <model/regularswitch.h>
 #include <model/rail.h>
@@ -43,6 +43,18 @@ Command AbstractSwitch::commandState() const
 bool AbstractSwitch::isUnlockable() const
 {
 	return !reserved();
+}
+
+MrwMessage AbstractSwitch::configMsg() const
+{
+	MrwMessage message = command(hasCutOff() ? CFGSWN : CFGSWO);
+
+	return message;
+}
+
+const QString & AbstractSwitch::name() const
+{
+	return partName();
 }
 
 RegularSwitch * AbstractSwitch::follow(RailPart * part) const

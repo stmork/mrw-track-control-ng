@@ -69,12 +69,6 @@ namespace mrw::model
 		 */
 		SwitchModule * module() const;
 
-		/**
-		 * This method returns the CAN Controller to which the controlling
-		 * SwitchModule is connected to.
-		 *
-		 * @return The CAN Controller of the controlling SwitchModule.
-		 */
 		Controller * controller() const override;
 	};
 }
