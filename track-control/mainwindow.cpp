@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
+#include <unistd.h>
+
 #include <util/method.h>
 #include <util/random.h>
 #include <statecharts/timerservice.h>
@@ -77,6 +79,13 @@ MainWindow::~MainWindow()
 {
 	on_clearAllRoutes_clicked();
 	on_clearAllSections_clicked();
+
+	ControllerRegistry::instance().tryComplete();
+	if (!ControllerRegistry::instance().isCompleted())
+	{
+		sleep(1);
+		ControllerRegistry::instance().tryComplete();
+	}
 
 	statechart.exit();
 
@@ -479,9 +488,9 @@ void MainWindow::on_clearRoute_clicked()
 
 		ui->routeListWidget->takeItem(row);
 
-		Route * route = item->data(WidgetRoute::USER_ROLE).value<Route *>();
+		WidgetRoute * route = item->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
 
-		delete route;
+		route->disable();
 		if (route == beer_route)
 		{
 			beer_route = nullptr;
@@ -498,9 +507,9 @@ void MainWindow::on_clearAllRoutes_clicked()
 	while (ui->routeListWidget->count() > 0)
 	{
 		QListWidgetItem * item  = ui->routeListWidget->takeItem(0);
-		Route      *      route = item->data(WidgetRoute::USER_ROLE).value<Route *>();
+		WidgetRoute   *   route = item->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
 
-		delete route;
+		route->disable();
 	}
 
 	beer_route = nullptr;

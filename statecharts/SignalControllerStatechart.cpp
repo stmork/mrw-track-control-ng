@@ -1757,22 +1757,6 @@ namespace mrw
 		void SignalControllerStatechart::react_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting__choice_0()
 		{
 			/* The reactions of state null. */
-			if ((ifaceOperationCallback->hasMainSignal()) && (ifaceOperationCallback->isLightSignal()))
-			{
-				enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Delay_default();
-			}
-			else
-			{
-				exseq_main_region_Operating_Processing_Tour_State();
-				enseq_main_region_Operating_Processing_Unlocked_default();
-				main_region_Operating_react(0);
-			}
-		}
-
-		/* The reactions of state null. */
-		void SignalControllerStatechart::react_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting__choice_1()
-		{
-			/* The reactions of state null. */
 			if (ifaceOperationCallback->isMainAndShunt())
 			{
 				enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Main_default();
@@ -1780,6 +1764,23 @@ namespace mrw
 			else
 			{
 				enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Shunt_default();
+			}
+		}
+
+		/* The reactions of state null. */
+		void SignalControllerStatechart::react_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting__choice_1()
+		{
+			/* The reactions of state null. */
+			if ((ifaceOperationCallback->hasMainSignal()) && (ifaceOperationCallback->isLightSignal()))
+			{
+				enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Delay_default();
+			}
+			else
+			{
+				exseq_main_region_Operating_Processing_Tour_State();
+				ifaceOperationCallback->dec();
+				enseq_main_region_Operating_Processing_Unlocked_default();
+				main_region_Operating_react(0);
 			}
 		}
 
@@ -2278,7 +2279,7 @@ namespace mrw
 				if (completedDistant_raised)
 				{
 					exseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Distant();
-					react_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting__choice_0();
+					react_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting__choice_1();
 					transitioned_after = 0;
 				}
 			}
@@ -2390,7 +2391,7 @@ namespace mrw
 					exseq_main_region_Operating_Processing_Tour_State_Processing_Idle();
 					symbol = SignalControllerStatechart::STOP;
 					enact_main_region_Operating_Processing_Tour_State_Processing_Waiting();
-					react_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting__choice_1();
+					react_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting__choice_0();
 					main_region_Operating_Processing_Tour_State_react(0);
 					transitioned_after = 0;
 				}

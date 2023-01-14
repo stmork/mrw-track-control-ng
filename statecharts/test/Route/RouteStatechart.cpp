@@ -367,8 +367,8 @@ namespace mrw
 			/* Entry action for state 'Emergency Shutdown'. */
 			timerService->setTimer(this, 6, RouteStatechart::section_timeout, false);
 			ifaceOperationCallback->fail();
-			ifaceOperationCallback->unlockSignals();
 			ifaceOperationCallback->deactivateSections();
+			ifaceOperationCallback->unlockSignals();
 		}
 
 		/* Exit action for state 'Disable'. */
@@ -772,6 +772,7 @@ namespace mrw
 					if (timeEvents[0])
 					{
 						exseq_main_region_Disable();
+						ifaceOperationCallback->fail();
 						finished_raised = true;
 						timeEvents[0] = false;
 						enseq_main_region__final__default();

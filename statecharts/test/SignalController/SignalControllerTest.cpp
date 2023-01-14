@@ -736,18 +736,23 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedTurnShunt());
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
 
 
 			incMock->reset();
+			decMock->reset();
 			pendingMock->reset();
 		}
 		TEST_F(SignalControllerTest, initial)
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -787,6 +792,8 @@ namespace mrw
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -816,6 +823,8 @@ namespace mrw
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -855,6 +864,8 @@ namespace mrw
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -918,6 +929,8 @@ namespace mrw
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1003,6 +1016,8 @@ namespace mrw
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1056,6 +1071,8 @@ namespace mrw
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1089,6 +1106,8 @@ namespace mrw
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1124,6 +1143,8 @@ namespace mrw
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1167,6 +1188,8 @@ namespace mrw
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1218,9 +1241,11 @@ namespace mrw
 
 			EXPECT_TRUE((statechart->getTurnShuntValue()) == (statechart->getGO()));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(pendingMock->calledAtLeast(1));
 
-			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			statechart->raiseCompletedShunt();
 
@@ -1244,23 +1269,28 @@ namespace mrw
 
 
 			isTourMock->reset();
-			incMock->reset();
 			pendingMock->reset();
+			incMock->reset();
+			decMock->reset();
 		}
 		TEST_F(SignalControllerTest, pendingTour)
 		{
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1306,9 +1336,11 @@ namespace mrw
 
 			EXPECT_TRUE((statechart->getTurnMainValue()) == (statechart->getGO()));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(pendingMock->calledAtLeast(1));
 
-			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			statechart->raiseCompletedMain();
 
@@ -1323,8 +1355,9 @@ namespace mrw
 
 			isTourMock->reset();
 			isMainAndShuntMock->reset();
-			incMock->reset();
 			pendingMock->reset();
+			incMock->reset();
+			decMock->reset();
 		}
 		TEST_F(SignalControllerTest, pendingTourCombined)
 		{
@@ -1332,16 +1365,20 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1385,29 +1422,36 @@ namespace mrw
 
 			EXPECT_TRUE((statechart->getTurnShuntValue()) == (statechart->getGO()));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(pendingMock->calledAtLeast(1));
 
-			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 
 			isTourMock->reset();
-			incMock->reset();
 			pendingMock->reset();
+			incMock->reset();
+			decMock->reset();
 		}
 		TEST_F(SignalControllerTest, pendingShunting)
 		{
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1443,32 +1487,41 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Idle));
 
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(0));
 
-			EXPECT_TRUE(lockMock->calledAtLeastOnce());
+			EXPECT_TRUE(decMock->calledAtLeast(1));
+
+			EXPECT_TRUE(lockMock->calledAtLeast(1));
 
 
+			incMock->reset();
 			decMock->reset();
 			lockMock->reset();
 		}
 		TEST_F(SignalControllerTest, tourLocked)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1504,16 +1557,21 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Idle));
 
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(0));
 
-			EXPECT_TRUE(lockMock->calledAtLeastOnce());
+			EXPECT_TRUE(decMock->calledAtLeast(1));
+
+			EXPECT_TRUE(lockMock->calledAtLeast(1));
 
 
+			incMock->reset();
 			decMock->reset();
 			lockMock->reset();
 		}
 		TEST_F(SignalControllerTest, tourLockedCombined)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
@@ -1522,16 +1580,20 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1567,32 +1629,41 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_State_Processing_Idle));
 
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(0));
 
-			EXPECT_TRUE(lockMock->calledAtLeastOnce());
+			EXPECT_TRUE(decMock->calledAtLeast(1));
+
+			EXPECT_TRUE(lockMock->calledAtLeast(1));
 
 
+			incMock->reset();
 			decMock->reset();
 			lockMock->reset();
 		}
 		TEST_F(SignalControllerTest, shuntingLocked)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1642,7 +1713,9 @@ namespace mrw
 
 			EXPECT_TRUE((statechart->getTurnShuntValue()) == (statechart->getSTOP()));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			statechart->raiseCompletedShunt();
 
@@ -1670,6 +1743,10 @@ namespace mrw
 
 			statechart->raiseCompletedDistant();
 
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(1));
+
 			unlockedState();
 
 
@@ -1677,6 +1754,7 @@ namespace mrw
 			isLightSignalMock->reset();
 			hasMainSignalMock->reset();
 			incMock->reset();
+			decMock->reset();
 		}
 		TEST_F(SignalControllerTest, disableTour)
 		{
@@ -1690,20 +1768,28 @@ namespace mrw
 			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1749,7 +1835,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Main));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			EXPECT_TRUE(statechart->isRaisedTurnMain());
 
@@ -1774,6 +1862,7 @@ namespace mrw
 			hasMainSignalMock->reset();
 			isLightSignalMock->reset();
 			incMock->reset();
+			decMock->reset();
 		}
 		TEST_F(SignalControllerTest, disableTourCombined)
 		{
@@ -1787,22 +1876,30 @@ namespace mrw
 			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1836,6 +1933,8 @@ namespace mrw
 			hasMainSignalMock->initializeBehavior();
 			isLightSignalMock = new IsLightSignalMock();
 			isLightSignalMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
@@ -1848,22 +1947,30 @@ namespace mrw
 			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1917,7 +2024,9 @@ namespace mrw
 
 			statechart->raiseCompletedDistant();
 
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(0));
+
+			EXPECT_TRUE(decMock->calledAtLeast(1));
 
 			unlockedState();
 
@@ -1925,6 +2034,7 @@ namespace mrw
 			isMainAndShuntMock->reset();
 			hasMainSignalMock->reset();
 			isLightSignalMock->reset();
+			incMock->reset();
 			decMock->reset();
 		}
 		TEST_F(SignalControllerTest, disableTourCombinedForm)
@@ -1935,6 +2045,10 @@ namespace mrw
 			hasMainSignalMock->initializeBehavior();
 			isLightSignalMock = new IsLightSignalMock();
 			isLightSignalMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
@@ -1945,22 +2059,30 @@ namespace mrw
 			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1994,12 +2116,18 @@ namespace mrw
 
 			statechart->raiseCompletedDistant();
 
+			EXPECT_TRUE(incMock->calledAtLeast(0));
+
+			EXPECT_TRUE(decMock->calledAtLeast(1));
+
 			unlockedState();
 
 
 			isMainAndShuntMock->reset();
 			hasMainSignalMock->reset();
 			isLightSignalMock->reset();
+			incMock->reset();
+			decMock->reset();
 		}
 		void disableShunting()
 		{
@@ -2013,7 +2141,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Stop));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			EXPECT_TRUE(statechart->isRaisedTurnShunt());
 
@@ -2021,7 +2151,9 @@ namespace mrw
 
 			statechart->raiseCompletedShunt();
 
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(1));
 
 			unlockedState();
 
@@ -2035,22 +2167,28 @@ namespace mrw
 			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2088,37 +2226,52 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Extend));
 
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
+
 			statechart->raiseCompletedDistant();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State));
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Idle));
 
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(1));
 
 
+			incMock->reset();
 			decMock->reset();
 		}
 		TEST_F(SignalControllerTest, extendTour)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2146,8 +2299,12 @@ namespace mrw
 		}
 		TEST_F(SignalControllerTest, extendTourCombined)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
@@ -2156,16 +2313,20 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2193,7 +2354,15 @@ namespace mrw
 
 			statechart->raiseExtend();
 
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting));
+
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Extend));
+
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			statechart->raiseCompletedDistant();
 
@@ -2201,9 +2370,12 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Idle));
 
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(1));
 
 
+			incMock->reset();
 			decMock->reset();
 		}
 		void extendShunting()
@@ -2212,7 +2384,15 @@ namespace mrw
 
 			statechart->raiseExtend();
 
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_State));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_State_Processing_Waiting));
+
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Extend));
+
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			statechart->raiseCompletedShunt();
 
@@ -2220,31 +2400,42 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_State_Processing_Idle));
 
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(1));
 
 
+			incMock->reset();
 			decMock->reset();
 		}
 		TEST_F(SignalControllerTest, extendShunting)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2272,22 +2463,28 @@ namespace mrw
 		}
 		TEST_F(SignalControllerTest, failedTour)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2321,6 +2518,8 @@ namespace mrw
 		}
 		TEST_F(SignalControllerTest, failedTourCombined)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
@@ -2329,16 +2528,20 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2372,22 +2575,28 @@ namespace mrw
 		}
 		TEST_F(SignalControllerTest, failedShunting)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2423,16 +2632,20 @@ namespace mrw
 		{
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2470,16 +2683,20 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2515,16 +2732,20 @@ namespace mrw
 		{
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2562,22 +2783,28 @@ namespace mrw
 			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2625,6 +2852,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
@@ -2633,16 +2862,20 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2690,22 +2923,28 @@ namespace mrw
 			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2753,22 +2992,28 @@ namespace mrw
 			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2818,6 +3063,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
@@ -2826,16 +3073,20 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2886,22 +3137,28 @@ namespace mrw
 			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			hasMainSignalMock = new HasMainSignalMock();
 			hasMainSignalMock->initializeBehavior();
 			isMainAndShuntMock = new IsMainAndShuntMock();
 			isMainAndShuntMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			incMock = new IncMock();

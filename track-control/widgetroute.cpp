@@ -418,6 +418,9 @@ void WidgetRoute::fail()
 {
 	__METHOD__;
 
+	qCritical().noquote() << String::red("Timeout turning route:") << list_item.text();
+	ControllerRegistry::instance().dump();
+
 	dump();
 }
 
