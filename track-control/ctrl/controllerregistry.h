@@ -8,7 +8,6 @@
 #ifndef MRW_CTRL_CONTROLLERREGISTRY_H
 #define MRW_CTRL_CONTROLLERREGISTRY_H
 
-#include <unordered_set>
 #include <unordered_map>
 
 #include <QObject>
@@ -16,6 +15,7 @@
 #include <can/mrwbusservice.h>
 #include <model/device.h>
 #include <ctrl/controllerregistrand.h>
+#include <ctrl/batch.h>
 #include <util/singleton.h>
 
 namespace mrw::ctrl
@@ -24,6 +24,7 @@ namespace mrw::ctrl
 
 	class ControllerRegistry :
 		public QObject,
+		public Batch,
 		public mrw::util::Singleton<ControllerRegistry>
 	{
 		Q_OBJECT
@@ -34,7 +35,6 @@ namespace mrw::ctrl
 
 		friend class Singleton<ControllerRegistry>;
 
-		std::unordered_set<ControllerRegistrand *>                         transaction;
 		std::unordered_map<mrw::model::Device *, ControllerRegistrand * >  registry;
 		mrw::can::MrwBusService                      *                     can_service = nullptr;
 
@@ -54,19 +54,12 @@ namespace mrw::ctrl
 		void registerService(mrw::can::MrwBusService * service);
 		static mrw::can::MrwBusService * can();
 
-		void increase(ControllerRegistrand * ctrl);
-		void decrease(ControllerRegistrand * ctrl);
-		bool contains(ControllerRegistrand * ctrl);
-		void reset();
-		void tryComplete();
-		bool isCompleted();
-		void dump();
-
 	signals:
 		void clear();
 		void start();
-		void completed();
 		void failed();
+
+		virtual void completed() const override;
 	};
 }
 

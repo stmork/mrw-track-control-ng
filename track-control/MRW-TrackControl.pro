@@ -8,6 +8,7 @@ QT += gui widgets network
 include(../common.pri)
 
 SOURCES += \
+	ctrl/batch.cpp \
 	ctrl/railpartinfo.cpp \
 	ctrl/signalproxy.cpp \
 	ctrl/switchcontroller.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 	widgetroute.cpp
 
 HEADERS += \
+	ctrl/batch.h \
 	ctrl/railpartinfo.h \
 	ctrl/signalproxy.h \
 	ctrl/switchcontroller.h \
