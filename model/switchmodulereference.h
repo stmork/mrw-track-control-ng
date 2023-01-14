@@ -70,6 +70,11 @@ namespace mrw::model
 		SwitchModule * module() const;
 
 		Controller * controller() const override;
+
+	protected:
+		mrw::can::MrwMessage configSwitchMsg(
+			const mrw::can::Command cmd,
+			const unsigned          pin) const;
 	};
 }
 

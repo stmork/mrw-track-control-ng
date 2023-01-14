@@ -45,7 +45,7 @@ namespace mrw::model
 		// Implementations from Device
 		const QString    &   name()         const override;
 		bool                 isUnlockable() const override;
-		mrw::can::MrwMessage configMsg()    const override;
+		mrw::can::MrwMessage configMsg(const unsigned pin) const override;
 
 		/**
 		 * This method checks whether a connected AbstractSwitch is a flank

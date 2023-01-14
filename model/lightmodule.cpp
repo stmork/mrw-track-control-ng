@@ -60,18 +60,15 @@ bool LightModule::valid() const
 
 void LightModule::configure(
 	std::vector<mrw::can::MrwMessage> & messages,
-	const size_t                        offset) const
+	const unsigned                      offset) const
 {
-	size_t pin = offset;
+	unsigned pin = offset;
 
 	for (ProfileLight * light : lights)
 	{
-		MrwMessage msg = light->configMsg();
+		const MrwMessage msg = light->configMsg(pin);
 
-		msg.append(pin);
-		msg.append(light->threshold());
-		msg.append(light->profile());
-		messages.push_back(msg);
+		messages.emplace_back(msg);
 		pin++;
 	}
 }

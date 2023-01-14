@@ -99,7 +99,7 @@ namespace mrw::model
 		 */
 		virtual void configure(
 			std::vector<mrw::can::MrwMessage> & messages,
-			const size_t                        offset) const = 0;
+			const unsigned                      offset) const = 0;
 
 	private:
 		virtual void link() = 0;

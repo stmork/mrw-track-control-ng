@@ -47,7 +47,7 @@ namespace mrw::model
 		void link() override;
 		void configure(
 			std::vector<mrw::can::MrwMessage> & messages,
-			const size_t                        offset) const override;
+			const unsigned                      offset) const override;
 	};
 }
 

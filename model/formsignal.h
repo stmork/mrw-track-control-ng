@@ -45,7 +45,7 @@ namespace mrw::model
 		// Implementations from Device
 		bool                 isUnlockable() const override;
 		const QString    &   name()         const override;
-		mrw::can::MrwMessage configMsg()    const override;
+		mrw::can::MrwMessage configMsg(const unsigned pin) const override;
 
 		// Implementations from AssemblyPart
 		bool            valid()    const override;

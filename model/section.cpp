@@ -235,9 +235,14 @@ Controller * Section::controller() const
 	return section_controller;
 }
 
-MrwMessage Section::configMsg() const
+MrwMessage Section::configMsg(const unsigned pin) const
 {
-	return command(CFGRAI);
+	MrwMessage msg = command(CFGRAI);
+
+	msg.append(pin);
+	msg.append(pin ^ 7);
+
+	return msg;
 }
 
 Region * Section::region() const

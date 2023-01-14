@@ -42,9 +42,12 @@ Controller * Light::controller() const
 	return light_controller;
 }
 
-MrwMessage Light::configMsg() const
+MrwMessage Light::configMsg(const unsigned pin) const
 {
-	MrwMessage message = command(CFGLGT);
+	MrwMessage msg = command(CFGLGT);
 
-	return message;
+	msg.append(pin);
+	msg.append(threshold());
+
+	return msg;
 }

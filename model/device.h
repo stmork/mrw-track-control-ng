@@ -138,7 +138,7 @@ namespace mrw::model
 		 *
 		 * @return The configuration MrwMessage ready to send.
 		 */
-		virtual mrw::can::MrwMessage configMsg() const = 0;
+		virtual mrw::can::MrwMessage configMsg(const unsigned pin) const = 0;
 
 		/**
 		 * This method returns the clear text QString of the LockState this

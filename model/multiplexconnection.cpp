@@ -78,29 +78,23 @@ bool MultiplexConnection::valid() const
 
 void MultiplexConnection::configure(
 	std::vector<mrw::can::MrwMessage> & messages,
-	const size_t                        offset) const
+	const unsigned                      offset) const
 {
-	size_t pin = offset;
+	unsigned pin = offset;
 
 	for (LightSignal * light_signal : light_signals)
 	{
-		MrwMessage msg = light_signal->configMsg();
+		const MrwMessage msg = light_signal->configMsg(pin);
 
-		for (size_t p = 0; p < light_signal->usedPins(); p++)
-		{
-			msg.append(p + pin);
-		}
-		messages.push_back(msg);
+		messages.emplace_back(msg);
 		pin += light_signal->usedPins();
 	}
 
 	for (Light * light : lights)
 	{
-		MrwMessage msg = light->configMsg();
+		const MrwMessage msg = light->configMsg(pin);
 
-		msg.append(pin);
-		msg.append(light->threshold());
-		messages.push_back(msg);
+		messages.emplace_back(msg);
 		pin++;
 	}
 }

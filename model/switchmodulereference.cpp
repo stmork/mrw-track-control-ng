@@ -82,3 +82,25 @@ Controller * SwitchModuleReference::controller() const
 {
 	return switch_controller;
 }
+
+MrwMessage SwitchModuleReference::configSwitchMsg(
+	const Command  cmd,
+	const unsigned pin) const
+{
+	MrwMessage msg = command(cmd);
+
+	for (unsigned p = 0; p < inductors(); p++)
+	{
+		msg.append(p + pin);
+	}
+
+	if (hasCutOff())
+	{
+		for (unsigned p = 0; p < inductors(); p++)
+		{
+			msg.append(p + pin + Module::MAX_PINS_PER_PORT);
+		}
+	}
+
+	return msg;
+}

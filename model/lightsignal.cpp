@@ -88,7 +88,7 @@ Controller * LightSignal::controller() const
 	return signal_controller;
 }
 
-MrwMessage LightSignal::configMsg() const
+MrwMessage LightSignal::configMsg(const unsigned pin) const
 {
 	Command cmd = CMD_ILLEGAL;
 
@@ -131,9 +131,14 @@ MrwMessage LightSignal::configMsg() const
 		break;
 	}
 
-	MrwMessage message = command(cmd);
+	MrwMessage msg = command(cmd);
 
-	return message;
+	for (unsigned p = 0; p < usedPins(); p++)
+	{
+		msg.append(p + pin);
+	}
+
+	return msg;
 }
 
 bool LightSignal::valid() const

@@ -3,9 +3,11 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
+#include <can/mrwmessage.h>
 #include <model/modelrailway.h>
 #include "model/profilelight.h"
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 ProfileLight::ProfileLight(
@@ -20,4 +22,15 @@ ProfileLight::ProfileLight(
 uint8_t ProfileLight::profile() const
 {
 	return light_profile;
+}
+
+mrw::can::MrwMessage mrw::model::ProfileLight::configMsg(const unsigned pin) const
+{
+	MrwMessage msg = command(CFGLGT);
+
+	msg.append(pin);
+	msg.append(threshold());
+	msg.append(profile());
+
+	return msg;
 }

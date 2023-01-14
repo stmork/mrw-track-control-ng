@@ -50,17 +50,15 @@ bool SectionModule::valid() const
 
 void SectionModule::configure(
 	std::vector<mrw::can::MrwMessage> & messages,
-	const size_t                        offset) const
+	const unsigned                      offset) const
 {
-	size_t pin = offset;
+	unsigned pin = offset;
 
 	for (Section * section : sections)
 	{
-		MrwMessage msg = section->configMsg();
+		const MrwMessage msg = section->configMsg(pin);
 
-		msg.append(pin);
-		msg.append(pin ^ 7);
-		messages.push_back(msg);
+		messages.emplace_back(msg);
 		pin++;
 	}
 }

@@ -73,7 +73,7 @@ namespace mrw::model
 		bool valid() const;
 		void configure(
 			std::vector<mrw::can::MrwMessage> & messages,
-			const size_t                        offset) const;
+			const unsigned                      offset) const;
 
 	private:
 		void link();

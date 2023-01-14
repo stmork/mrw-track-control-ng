@@ -53,9 +53,9 @@ bool SwitchModule::valid() const
 
 void SwitchModule::configure(
 	std::vector<mrw::can::MrwMessage> & messages,
-	const size_t                        offset) const
+	const unsigned                      offset) const
 {
-	size_t pin = offset;
+	unsigned pin = offset;
 
 	for (const AssemblyPart * part : rail_parts)
 	{
@@ -63,21 +63,9 @@ void SwitchModule::configure(
 
 		if (ref != nullptr)
 		{
-			MrwMessage msg = ref->configMsg();
+			const MrwMessage msg = ref->configMsg(pin);
 
-			for (size_t p = 0; p < ref->inductors(); p++)
-			{
-				msg.append(p + pin);
-			}
-
-			if (ref->hasCutOff())
-			{
-				for (size_t p = 0; p < ref->inductors(); p++)
-				{
-					msg.append(p + pin + Module::MAX_PINS_PER_PORT);
-				}
-			}
-			messages.push_back(msg);
+			messages.emplace_back(msg);
 			pin += ref->inductors();
 		}
 	}

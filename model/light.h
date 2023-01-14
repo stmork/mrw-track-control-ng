@@ -47,7 +47,7 @@ namespace mrw::model
 		const QString    &   name()         const override;
 		bool                 isUnlockable() const override;
 		Controller     *     controller()   const override;
-		mrw::can::MrwMessage configMsg()    const override;
+		virtual mrw::can::MrwMessage configMsg(const unsigned pin) const override;
 	};
 }
 

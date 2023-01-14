@@ -45,11 +45,9 @@ bool AbstractSwitch::isUnlockable() const
 	return !reserved();
 }
 
-MrwMessage AbstractSwitch::configMsg() const
+MrwMessage AbstractSwitch::configMsg(const unsigned pin) const
 {
-	MrwMessage message = command(hasCutOff() ? CFGSWN : CFGSWO);
-
-	return message;
+	return configSwitchMsg(hasCutOff() ? CFGSWN : CFGSWO, pin);
 }
 
 const QString & AbstractSwitch::name() const

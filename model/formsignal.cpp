@@ -26,7 +26,7 @@ const QString & FormSignal::name() const
 	return part_name;
 }
 
-MrwMessage mrw::model::FormSignal::configMsg() const
+MrwMessage FormSignal::configMsg(const unsigned pin) const
 {
 	Command cmd = CMD_ILLEGAL;
 
@@ -67,14 +67,7 @@ MrwMessage mrw::model::FormSignal::configMsg() const
 		break;
 	}
 
-	if (inductors() > 2)
-	{
-//		cmd = cmd + 1;
-	}
-
-	MrwMessage message = command(cmd);
-
-	return message;
+	return configSwitchMsg(cmd, pin);
 }
 
 bool FormSignal::valid() const

@@ -34,6 +34,8 @@ namespace mrw::model
 			const QDomElement  &  element);
 
 		uint8_t profile() const;
+
+		virtual mrw::can::MrwMessage configMsg(const unsigned pin) const override;
 	};
 }
 
