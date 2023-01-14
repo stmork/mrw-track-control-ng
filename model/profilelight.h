@@ -25,13 +25,15 @@ namespace mrw::model
 	 */
 	class ProfileLight : public Light
 	{
-		const unsigned profile;
+		const unsigned light_profile;
 
 	public:
 		explicit ProfileLight(
 			ModelRailway     *    model_railway,
 			Controller      *     controller,
 			const QDomElement  &  element);
+
+		uint8_t profile() const;
 	};
 }
 

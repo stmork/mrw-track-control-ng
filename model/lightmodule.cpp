@@ -7,6 +7,7 @@
 #include "model/lightmodule.h"
 #include "model/profilelight.h"
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 LightModule::LightModule(
@@ -55,6 +56,24 @@ bool LightModule::valid() const
 		return light->controller() != nullptr;
 	}) &&
 	(lights.size() <= MAX_LIGHTS);
+}
+
+void LightModule::configure(
+	std::vector<mrw::can::MrwMessage> & messages,
+	const size_t                        offset) const
+{
+	size_t pin = offset;
+
+	for (ProfileLight * light : lights)
+	{
+		MrwMessage msg = light->configMsg();
+
+		msg.append(pin);
+		msg.append(light->threshold());
+		msg.append(light->profile());
+		messages.push_back(msg);
+		pin++;
+	}
 }
 
 void LightModule::link()

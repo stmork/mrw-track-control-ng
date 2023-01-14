@@ -5,12 +5,14 @@
 
 #include <QTest>
 
+#include <can/mrwmessage.h>
 #include <model/regularswitch.h>
 
 #include "testunknown.h"
 #include "testdef.h"
 
 using namespace mrw::test;
+using namespace mrw::can;
 using namespace mrw::model;
 
 TestUnknown::TestUnknown() : TestModelBase("Test-Unknown")
@@ -28,6 +30,9 @@ void TestUnknown::testController()
 	QVERIFY( model->controller(1)->valid());
 	QVERIFY(!model->controller(2)->valid());
 	QVERIFY(!model->controller(3)->valid());
+
+	std::vector<MrwMessage> messages;
+	QVERIFY_EXCEPTION_THROWN(model->controller(3)->configure(messages);, std::logic_error);
 }
 
 void TestUnknown::testModule()

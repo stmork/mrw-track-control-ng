@@ -5,12 +5,13 @@
 
 #include <QStringList>
 
-#include "util/stringutil.h"
-#include "model/modelrailway.h"
-#include "model/multiplexconnection.h"
-#include "model/light.h"
-#include "model/lightsignal.h"
+#include <util/stringutil.h>
+#include <model/modelrailway.h>
+#include <model/multiplexconnection.h>
+#include <model/light.h>
+#include <model/lightsignal.h>
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 MultiplexConnection::MultiplexConnection(
@@ -73,6 +74,35 @@ bool MultiplexConnection::valid() const
 	}
 
 	return pins <= MAX_PINS;
+}
+
+void MultiplexConnection::configure(
+	std::vector<mrw::can::MrwMessage> & messages,
+	const size_t                        offset) const
+{
+	size_t pin = offset;
+
+	for (LightSignal * light_signal : light_signals)
+	{
+		MrwMessage msg = light_signal->configMsg();
+
+		for (size_t p = 0; p < light_signal->usedPins(); p++)
+		{
+			msg.append(p + pin);
+		}
+		messages.push_back(msg);
+		pin += light_signal->usedPins();
+	}
+
+	for (Light * light : lights)
+	{
+		MrwMessage msg = light->configMsg();
+
+		msg.append(pin);
+		msg.append(light->threshold());
+		messages.push_back(msg);
+		pin++;
+	}
 }
 
 void MultiplexConnection::link()

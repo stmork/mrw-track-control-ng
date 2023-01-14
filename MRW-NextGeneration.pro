@@ -16,6 +16,7 @@ SUBDIRS  = \
 	ping \
 	proxy \
 	reader \
+	config \
 	sim \
 	tracker \
 	fw-update \
@@ -33,6 +34,7 @@ test-sct.file          = statecharts/test/MRW-Test-Statecharts.pro
 ping.file              = tools/ping/MRW-Ping.pro
 proxy.file             = tools/proxy/MRW-Proxy.pro
 reader.file            = tools/reader/MRW-Reader.pro
+config.file            = tools/config/MRW-Configure.pro
 sim.file               = tools/sim/MRW-Simulator.pro
 tracker.file           = tools/tracker/MRW-Tracker.pro
 fw-update.file         = fw-update/MRW-Update.pro
@@ -47,6 +49,7 @@ ui.depends             = ctrl
 ping.depends           = test
 proxy.depends          = test
 reader.depends         = test
+config.depends         = test
 sim.depends            = test
 tracker.depends        = test statecharts
 fw-update.depends      = test statecharts

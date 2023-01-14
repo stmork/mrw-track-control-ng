@@ -6,10 +6,9 @@
 #include <can/mrwmessage.h>
 
 using namespace mrw::can;
-using namespace mrw::model;
 using namespace mrw::util;
 
-const ConstantEnumerator<Command>       MrwMessage::command_map
+const ConstantEnumerator<Command>  MrwMessage::command_map
 {
 	CONSTANT(SETLFT),
 	CONSTANT(SETRGT),

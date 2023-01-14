@@ -9,8 +9,11 @@
 #define MRW_MODEL_MODULE_H
 
 #include <cinttypes>
+#include <vector>
 
 #include <QDomElement>
+
+#include <can/mrwmessage.h>
 
 namespace mrw::model
 {
@@ -48,6 +51,9 @@ namespace mrw::model
 		const QDomElement   reference;
 
 	public:
+		/** The maximum pins per port. */
+		static const size_t MAX_PINS_PER_PORT = 8;
+
 		explicit Module(
 			ModelRailway    *   model_railway,
 			const QDomElement & element);
@@ -79,6 +85,21 @@ namespace mrw::model
 		 * Device elements.
 		 */
 		virtual bool valid() const = 0;
+
+	protected:
+
+		/**
+		 * This method collects all configuration messages which describes
+		 * the connected Device instances.
+		 *
+		 * @param messages The mrw::canMrwMessage vector to collect the
+		 * configuration messages.
+		 * @param offset The offset in pin count.
+		 * @see MAX_PINS_PER_PORT
+		 */
+		virtual void configure(
+			std::vector<mrw::can::MrwMessage> & messages,
+			const size_t                        offset) const = 0;
 
 	private:
 		virtual void link() = 0;

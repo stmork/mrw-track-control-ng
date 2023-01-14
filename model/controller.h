@@ -116,6 +116,18 @@ namespace mrw::model
 		 */
 		bool valid() const;
 
+		/**
+		 * This method collects all configuration messages which describes
+		 * the connected Device instances of this Controller.
+		 *
+		 * @note The vector contains no beginning CFGBGN nor ending CFGEND
+		 * MrwMessage.
+		 *
+		 * @param messages The mrw::can::MrwMessage vector to collect the
+		 * configuration messages.
+		 */
+		void configure(std::vector<mrw::can::MrwMessage> & messages) const;
+
 		virtual QString toString() const override;
 
 	private:

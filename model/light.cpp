@@ -17,9 +17,14 @@ Light::Light(
 	Device(model_railway, element),
 	light_controller(controller),
 	light_name(ModelRailway::string(element, "name")),
-	threshold(ModelRailway::value(element, "schwellwert"))
+	light_threshold(ModelRailway::value(element, "schwellwert"))
 {
 	model_railway->add(this);
+}
+
+uint8_t Light::threshold() const
+{
+	return light_threshold;
 }
 
 const QString & Light::name() const

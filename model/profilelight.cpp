@@ -13,6 +13,11 @@ ProfileLight::ProfileLight(
 	Controller      *     controller,
 	const QDomElement  &  element) :
 	Light(model_railway, controller, element),
-	profile(ModelRailway::value(element, "typ"))
+	light_profile(ModelRailway::value(element, "typ"))
 {
+}
+
+uint8_t ProfileLight::profile() const
+{
+	return light_profile;
 }

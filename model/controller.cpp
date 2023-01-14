@@ -118,6 +118,40 @@ bool Controller::valid() const
 	return ports <= MAX_PORTS;
 }
 
+void Controller::configure(std::vector<MrwMessage> & messages) const
+{
+	size_t offset;
+
+	if (!valid())
+	{
+		throw std::logic_error("Cannot configure invalid controller!");
+	}
+
+	offset = 0;
+	for (const Module * module : modules)
+	{
+		if (module != nullptr)
+		{
+			module->configure(messages, offset);
+			offset += module->ports() * Module::MAX_PINS_PER_PORT;
+		}
+		else
+		{
+			offset += Module::MAX_PINS_PER_PORT;
+		}
+	}
+
+	offset = 48;
+	for (const MultiplexConnection * connector : connections)
+	{
+		if (connector != nullptr)
+		{
+			connector->configure(messages, offset);
+		}
+		offset -= MultiplexConnection::MAX_PINS;
+	}
+}
+
 void Controller::link()
 {
 	for (Module * module : modules)

@@ -11,8 +11,6 @@
 #include <QCanBusFrame>
 
 #include <can/commands.h>
-#include <model/controller.h>
-#include <model/device.h>
 #include <util/stringutil.h>
 #include <util/constantenumerator.h>
 

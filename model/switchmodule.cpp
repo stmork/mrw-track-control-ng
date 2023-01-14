@@ -10,6 +10,7 @@
 #include "model/assemblypart.h"
 #include "model/switchmodulereference.h"
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 SwitchModule::SwitchModule(
@@ -48,6 +49,38 @@ bool SwitchModule::valid() const
 	}
 
 	return inductors <= 8;
+}
+
+void SwitchModule::configure(
+	std::vector<mrw::can::MrwMessage> & messages,
+	const size_t                        offset) const
+{
+	size_t pin = offset;
+
+	for (const AssemblyPart * part : rail_parts)
+	{
+		const SwitchModuleReference * ref = dynamic_cast<const SwitchModuleReference *>(part);
+
+		if (ref != nullptr)
+		{
+			MrwMessage msg = ref->configMsg();
+
+			for (size_t p = 0; p < ref->inductors(); p++)
+			{
+				msg.append(p + pin);
+			}
+
+			if (ref->hasCutOff())
+			{
+				for (size_t p = 0; p < ref->inductors(); p++)
+				{
+					msg.append(p + pin + Module::MAX_PINS_PER_PORT);
+				}
+			}
+			messages.push_back(msg);
+			pin += ref->inductors();
+		}
+	}
 }
 
 void SwitchModule::link()

@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
+#pragma once
+
 #ifndef MRW_CAN_MRWBUSSERVICE_H
 #define MRW_CAN_MRWBUSSERVICE_H
 

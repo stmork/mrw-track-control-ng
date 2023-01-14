@@ -106,11 +106,15 @@ void TestModel::testControllers()
 
 	for (unsigned c = 0; c < count; c++)
 	{
-		Controller * controller = model->controller(c);
+		Controller        *       controller = model->controller(c);
+		std::vector<MrwMessage>   messages;
 
 		QVERIFY(controller != nullptr);
 		QVERIFY(controller->valid());
 		QVERIFY(controller->id() != 0);
+
+		controller->configure(messages);
+		QCOMPARE(messages.size() > 0, controller->valid());
 	}
 
 	QVERIFY_EXCEPTION_THROWN(model->controller(count), std::out_of_range);

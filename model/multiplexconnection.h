@@ -71,6 +71,9 @@ namespace mrw::model
 		 * correct.
 		 */
 		bool valid() const;
+		void configure(
+			std::vector<mrw::can::MrwMessage> & messages,
+			const size_t                        offset) const;
 
 	private:
 		void link();

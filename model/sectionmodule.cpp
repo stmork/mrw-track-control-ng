@@ -10,6 +10,7 @@
 #include "model/section.h"
 #include "model/sectionmodule.h"
 
+using namespace mrw::can;
 using namespace mrw::model;
 
 /**
@@ -45,6 +46,23 @@ SectionModule::SectionModule(
 bool SectionModule::valid() const
 {
 	return sections.size() <= MAX_SECTIONS;
+}
+
+void SectionModule::configure(
+	std::vector<mrw::can::MrwMessage> & messages,
+	const size_t                        offset) const
+{
+	size_t pin = offset;
+
+	for (Section * section : sections)
+	{
+		MrwMessage msg = section->configMsg();
+
+		msg.append(pin);
+		msg.append(pin ^ 7);
+		messages.push_back(msg);
+		pin++;
+	}
 }
 
 void SectionModule::link()

@@ -32,7 +32,7 @@ namespace mrw::model
 
 	protected:
 		const QString  light_name;  ///< The light name.
-		const unsigned threshold;   ///< The lighting sensor threshold.
+		const unsigned light_threshold;   ///< The lighting sensor threshold.
 
 	public:
 		explicit Light(
@@ -40,6 +40,8 @@ namespace mrw::model
 			Controller      *     controller,
 			const QDomElement  &  element);
 		virtual ~Light() = default;
+
+		uint8_t threshold() const;
 
 		// Implementations from Device
 		const QString    &   name()         const override;
