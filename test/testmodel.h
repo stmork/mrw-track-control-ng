@@ -10,6 +10,8 @@
 
 #include "testmodelbase.h"
 
+#include <model/signal.h>
+
 namespace mrw::test
 {
 	class TestModel : public TestModelBase
@@ -25,6 +27,14 @@ namespace mrw::test
 		void testMuxConnection(mrw::model::MultiplexConnection * connection);
 		void testSection(model::Region * region, mrw::model::Section * section);
 		void testAssemblyPart(model::Section * section, mrw::model::AssemblyPart * part);
+		void testLightSignalConfig(
+			const unsigned                       pins,
+			const mrw::model::Signal::SignalType type,
+			const mrw::can::Command              command);
+		void testFormSignalConfig(
+			const unsigned                       inductors,
+			const mrw::model::Signal::SignalType type,
+			const mrw::can::Command              command);
 
 	private slots:
 		void init();
@@ -42,6 +52,12 @@ namespace mrw::test
 		void testPosition();
 		void testDevice();
 		void testEnumerator();
+		void testLightSignalConfig();
+		void testFormSignalConfig();
+		void testSectionConfig();
+		void testSwitchConfig();
+		void testSimpleLight();
+		void testProfileLight();
 	};
 }
 

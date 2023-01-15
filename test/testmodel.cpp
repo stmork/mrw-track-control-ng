@@ -10,10 +10,12 @@
 #include <model/switchmodulereference.h>
 #include <model/controller.h>
 #include <model/lightsignal.h>
+#include <model/formsignal.h>
 #include <model/railpart.h>
 #include <model/regularswitch.h>
 #include <model/doublecrossswitch.h>
 #include <model/switchmodule.h>
+#include <model/profilelight.h>
 
 #include "testmodel.h"
 
@@ -21,8 +23,9 @@ using namespace mrw::can;
 using namespace mrw::test;
 using namespace mrw::model;
 
-using Bending   = Position::Bending;
-using LockState = Device::LockState;
+using Bending    = Position::Bending;
+using LockState  = Device::LockState;
+using SignalType = Signal::SignalType;
 
 /*************************************************************************
 **                                                                      **
@@ -527,6 +530,113 @@ void TestModel::testEnumerator()
 	QCOMPARE(Section::get(SectionState(0xff)), "0xFF");
 }
 
+void TestModel::testLightSignalConfig()
+{
+	testLightSignalConfig(2, SignalType::MAIN_SIGNAL,       CFGML2);
+	testLightSignalConfig(3, SignalType::MAIN_SIGNAL,       CFGML3);
+	testLightSignalConfig(5, SignalType::MAIN_SHUNT_SIGNAL, CFGML4);
+	testLightSignalConfig(2, SignalType::DISTANT_SIGNAL,    CFGPL2);
+	testLightSignalConfig(4, SignalType::DISTANT_SIGNAL,    CFGPL3);
+	testLightSignalConfig(2, SignalType::SHUNT_SIGNAL,      CFGSL2);
+}
+
+void TestModel::testFormSignalConfig()
+{
+	testFormSignalConfig(2, SignalType::DISTANT_SIGNAL,     CFGPF2);
+	testFormSignalConfig(3, SignalType::DISTANT_SIGNAL,     CFGPF3);
+	testFormSignalConfig(2, SignalType::MAIN_SIGNAL,        CFGMF2);
+	testFormSignalConfig(3, SignalType::MAIN_SIGNAL,        CFGMF3);
+	testFormSignalConfig(2, SignalType::SHUNT_SIGNAL,       CMD_ILLEGAL);
+}
+
+void TestModel::testSectionConfig()
+{
+	std::vector<Section *> sections;
+
+	model->parts<Section>(sections);
+
+	for (const Section * section : sections)
+	{
+		for (unsigned pin = 0; pin < 4; pin++)
+		{
+			const MrwMessage msg = section->configMsg(pin);
+
+			QCOMPARE(msg.size(),    2);
+			QCOMPARE(msg.command(), CFGRAI);
+			QCOMPARE(msg[0], pin);
+			QCOMPARE(msg[1], 7 - pin);
+		}
+	}
+}
+
+void TestModel::testSwitchConfig()
+{
+	std::vector<AbstractSwitch *> switches;
+
+	model->parts<AbstractSwitch>(switches, [](const AbstractSwitch * part)
+	{
+		return part->hasCutOff();
+	});
+
+	for (const AbstractSwitch * part : switches)
+	{
+		for (unsigned pin = 0; pin < 4; pin++)
+		{
+			const MrwMessage msg = part->configMsg(pin);
+
+			QCOMPARE(msg.size(),    4);
+			QCOMPARE(msg.command(), CFGSWN);
+			for (unsigned i = 0; i < 2; i++)
+			{
+				QCOMPARE(msg[i], i + pin);
+				QCOMPARE(msg[i + 2], i + 8 + pin);
+			}
+		}
+	}
+}
+
+void TestModel::testSimpleLight()
+{
+	std::vector<Light *> lights;
+
+	model->parts<Light>(lights, [](const Light * light)
+	{
+		// Filter out profile light to get only simple lights.
+		return dynamic_cast<const ProfileLight *>(light) == nullptr;
+	});
+
+	for (const Light * light : lights)
+	{
+		for (unsigned pin = 0; pin < 10; pin++)
+		{
+			const MrwMessage msg = light->configMsg(pin);
+
+			QCOMPARE(msg.size(),    2);
+			QCOMPARE(msg.command(), CFGLGT);
+			QCOMPARE(msg[0], pin);
+		}
+	}
+}
+
+void TestModel::testProfileLight()
+{
+	std::vector<ProfileLight *> lights;
+
+	model->parts<ProfileLight>(lights);
+
+	for (const Light * light : lights)
+	{
+		for (unsigned pin = 0; pin < 8; pin++)
+		{
+			const MrwMessage msg = light->configMsg(pin);
+
+			QCOMPARE(msg.size(),    3);
+			QCOMPARE(msg.command(), CFGLGT);
+			QCOMPARE(msg[0], pin);
+		}
+	}
+}
+
 void TestModel::testSection(Region * region, Section * section)
 {
 	QVERIFY(section != nullptr);
@@ -639,5 +749,61 @@ void TestModel::testAssemblyPart(Section * section, AssemblyPart * part)
 
 		device->setLock(LockState::UNLOCKED);
 		QCOMPARE(device->lock(), LockState::UNLOCKED);
+	}
+}
+
+void TestModel::testLightSignalConfig(
+	const unsigned           pins,
+	const Signal::SignalType type,
+	const Command            command)
+{
+	std::vector<LightSignal *> light_signals;
+
+	model->parts<LightSignal>(light_signals, [&](const LightSignal * signal)
+	{
+		return (signal->usedPins() == pins) && (signal->type() == type);
+	});
+
+	for (const LightSignal * signal : light_signals)
+	{
+		for (unsigned pin = 0; pin < 10; pin++)
+		{
+			const MrwMessage msg = signal->configMsg(pin);
+
+			QCOMPARE(msg.size(),    pins);
+			QCOMPARE(msg.command(), command);
+			for (unsigned p = 0; p < pins; p++)
+			{
+				QCOMPARE(msg[p], p + pin);
+			}
+		}
+	}
+}
+
+void TestModel::testFormSignalConfig(
+	const unsigned           inductors,
+	const Signal::SignalType type,
+	const Command            command)
+{
+	std::vector<FormSignal *> form_signals;
+
+	model->parts<FormSignal>(form_signals, [&](const FormSignal * signal)
+	{
+		return (signal->inductors() == inductors) && (signal->type() == type);
+	});
+
+	for (const FormSignal * signal : form_signals)
+	{
+		for (unsigned pin = 0; pin < 10; pin++)
+		{
+			const MrwMessage msg = signal->configMsg(pin);
+
+			QCOMPARE(msg.size(),    inductors);
+			QCOMPARE(msg.command(), command);
+			for (unsigned i = 0; i < inductors; i++)
+			{
+				QCOMPARE(msg[i], i + pin);
+			}
+		}
 	}
 }
