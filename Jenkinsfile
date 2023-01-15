@@ -84,7 +84,7 @@ pipeline
 		always
 		{
 			chuckNorris()
-			step([$class: 'Mailer', recipients: 'linux-dev@morknet.de'])
+			step([$class: 'Mailer', recipients: 'info@eisenbahnsteuerung.org'])
 		}
 	}
 }
