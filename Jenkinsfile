@@ -65,9 +65,9 @@ pipeline
 					testTimeMargin: '3000',
 					thresholdMode: 0,
 					thresholds: [], tools: [
-						GoogleTest(excludesPattern: '', pattern: 'statecharts/test/gtest-*.xml'),
-						QtTest(excludesPattern: 'qtest-*.xml', pattern: ''),
-						Valgrind(excludesPattern: '', pattern: 'valgrind*.xml')]])
+						GoogleTest(pattern: 'statecharts/test/gtest-*.xml'),
+						QtTest(pattern: 'qtest-*.xml', pattern: ''),
+						Valgrind(pattern: 'valgrind*.xml')]])
 
 			}
 		}
