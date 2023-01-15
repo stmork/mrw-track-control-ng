@@ -59,6 +59,16 @@ pipeline
 //					QtTest(excludesPattern: '', pattern: 'qtest-*.xml', stopProcessingIfError: false),
 //					GoogleTest(excludesPattern: '', pattern: 'statecharts/test/gtest-*.xml', stopProcessingIfError: false),
 //					Valgrind(excludesPattern: '', pattern: 'valgrind*.xml', stopProcessingIfError: false)]
+
+				step([$class: 'XUnitPublisher',
+					checksName: 'Unit Tests',
+					testTimeMargin: '3000',
+					thresholdMode: 0,
+					thresholds: [], tools: [
+						GoogleTest(excludesPattern: '', pattern: 'statecharts/test/gtest-*.xml'),
+						QtTest(excludesPattern: 'qtest-*.xml', pattern: ''),
+						Valgrind(excludesPattern: '', pattern: 'valgrind*.xml')]])
+
 			}
 		}
 
