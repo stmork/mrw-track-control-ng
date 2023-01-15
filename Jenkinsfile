@@ -7,7 +7,7 @@ pipeline
 {
 	agent
 	{
-		label 'QT'
+		label 'master'
 	}
 
 	stages
