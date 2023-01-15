@@ -5,7 +5,7 @@
     <module xsi:type="Modelrailway:Gleismodul" nummer="12" abschnitte="//@gruppe.0/@abschnitt.0 //@gruppe.0/@abschnitt.1 //@gruppe.0/@abschnitt.3 //@gruppe.0/@abschnitt.4"/>
   </controller>
   <controller id="2">
-    <module xsi:type="Modelrailway:Impulsmodul" nummer="21" magnetartikel="//@gruppe.0/@abschnitt.6/@bauelement.2 //@gruppe.0/@abschnitt.5/@bauelement.2 //@gruppe.0/@abschnitt.7/@bauelement.1"/>
+    <module xsi:type="Modelrailway:Impulsmodul" nummer="21" magnetartikel="//@gruppe.0/@abschnitt.6/@bauelement.2 //@gruppe.0/@abschnitt.5/@bauelement.2 //@gruppe.0/@abschnitt.7/@bauelement.1 //@gruppe.0/@abschnitt.0/@bauelement.1"/>
     <module xsi:type="Modelrailway:Gleismodul" nummer="22" abschnitte="//@gruppe.0/@abschnitt.5 //@gruppe.0/@abschnitt.6 //@gruppe.0/@abschnitt.2 //@gruppe.0/@abschnitt.7"/>
   </controller>
   <controller id="3">
@@ -13,12 +13,13 @@
     <module xsi:type="Modelrailway:Gleismodul" nummer="32" abschnitte="//@gruppe.0/@abschnitt.8 //@gruppe.0/@abschnitt.9 //@gruppe.0/@abschnitt.10"/>
   </controller>
   <controller id="4">
-    <module xsi:type="Modelrailway:Impulsmodul" nummer="41"/>
+    <module xsi:type="Modelrailway:Impulsmodul" nummer="41" magnetartikel="//@gruppe.0/@abschnitt.11/@bauelement.1 //@gruppe.0/@abschnitt.11/@bauelement.2 //@gruppe.0/@abschnitt.12/@bauelement.1"/>
     <module xsi:type="Modelrailway:Gleismodul" nummer="42" abschnitte="//@gruppe.0/@abschnitt.11 //@gruppe.0/@abschnitt.12"/>
   </controller>
   <gruppe xsi:type="Modelrailway:Bahnhof" name="Flankenschutz">
     <abschnitt name="11" unit_no="11" modul="//@controller.0/@module.1">
       <bauelement xsi:type="Modelrailway:Gleis" name="11" b="//@gruppe.0/@abschnitt.2/@bauelement.1"/>
+      <bauelement xsi:type="Modelrailway:Formgleissperrsignal" name="i1" modul="//@controller.1/@module.0" unit_no="4111" inZaehlrichtung="true"/>
     </abschnitt>
     <abschnitt name="21" unit_no="21" modul="//@controller.0/@module.1">
       <bauelement xsi:type="Modelrailway:Gleis" name="21" b="//@gruppe.0/@abschnitt.2/@bauelement.0"/>
@@ -60,9 +61,12 @@
     </abschnitt>
     <abschnitt name="15" unit_no="15" modul="//@controller.3/@module.1">
       <bauelement xsi:type="Modelrailway:Gleis" name="15" a="//@gruppe.0/@abschnitt.10/@bauelement.1"/>
+      <bauelement xsi:type="Modelrailway:Formhauptsignal" name="P1" spulen="3" modul="//@controller.3/@module.0" unit_no="2151"/>
+      <bauelement xsi:type="Modelrailway:Formvorsignal" name="g" modul="//@controller.3/@module.0" unit_no="2152"/>
     </abschnitt>
     <abschnitt name="25" unit_no="25" modul="//@controller.3/@module.1">
       <bauelement xsi:type="Modelrailway:Gleis" name="25" a="//@gruppe.0/@abschnitt.10/@bauelement.0"/>
+      <bauelement xsi:type="Modelrailway:Formvorsignal" name="f" spulen="3" modul="//@controller.3/@module.0" unit_no="2251"/>
     </abschnitt>
   </gruppe>
 </Modelrailway:Modell>
