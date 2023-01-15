@@ -176,6 +176,7 @@ void TestModel::testRegions()
 		Region * region = model->region(i);
 		QString  name   = region->name();
 
+		region->direction();
 		QVERIFY(region != nullptr);
 		QVERIFY(region->key().contains(name.replace(" ", "")));
 	}
@@ -318,6 +319,8 @@ void TestModel::testDefaultPosition()
 	QCOMPARE(position.extension(), 0u);
 	QCOMPARE(position.point(), QPoint(0, 0));
 	QCOMPARE(position.key(), TestPosition::TEST_KEY);
+	QCOMPARE(position.width(), 4);
+	QCOMPARE(position.height(), 4);
 }
 
 void TestModel::testParsingPosition()
@@ -333,6 +336,8 @@ void TestModel::testParsingPosition()
 	QCOMPARE(position.extension(), 0u);
 	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.point(), QPoint(0, 0));
+	QCOMPARE(position.width(), 4);
+	QCOMPARE(position.height(), 4);
 
 	position.testParse("x,y,i");
 	copy.testParseValue(position);
@@ -342,6 +347,8 @@ void TestModel::testParsingPosition()
 	QCOMPARE(position.extension(), 0u);
 	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.point(), QPoint(4, 0));
+	QCOMPARE(position.width(), 4);
+	QCOMPARE(position.height(), 4);
 
 	position.testParse("2,3,xxxvvr");
 	copy.testParseValue(position);
@@ -351,6 +358,8 @@ void TestModel::testParsingPosition()
 	QCOMPARE(position.extension(), 3u);
 	QCOMPARE(position.lines(), 2u);
 	QCOMPARE(position.point(), QPoint(8, 12));
+	QCOMPARE(position.width(), 7);
+	QCOMPARE(position.height(), 12);
 
 	position.testParse("4,5,ql");
 	copy.testParseValue(position);
@@ -360,6 +369,8 @@ void TestModel::testParsingPosition()
 	QCOMPARE(position.extension(), 0u);
 	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.point(), QPoint(17, 20));
+	QCOMPARE(position.width(), 4);
+	QCOMPARE(position.height(), 4);
 
 	position.testParse("6,7,hrxyvi");
 	copy.testParseValue(position);
@@ -369,6 +380,8 @@ void TestModel::testParsingPosition()
 	QCOMPARE(position.extension(), 1u);
 	QCOMPARE(position.lines(), 1u);
 	QCOMPARE(position.point(), QPoint(26, 28));
+	QCOMPARE(position.width(), 5);
+	QCOMPARE(position.height(), 8);
 }
 
 void TestModel::testExtension()
@@ -380,6 +393,7 @@ void TestModel::testExtension()
 	QCOMPARE(position.extension(), 0u);
 	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.width(), 4);
+	QCOMPARE(position.height(), 4);
 
 	copy.testParseValue(position);
 	QCOMPARE(copy, position);
@@ -390,6 +404,7 @@ void TestModel::testExtension()
 	QCOMPARE(position.extension(), 1u);
 	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.width(), 5);
+	QCOMPARE(position.height(), 4);
 
 	position.extend(2);
 	copy.testParseValue(position);
@@ -397,6 +412,7 @@ void TestModel::testExtension()
 	QCOMPARE(position.extension(), 3u);
 	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.width(), 7);
+	QCOMPARE(position.height(), 4);
 
 	position.extend(-1);
 	copy.testParseValue(position);
@@ -404,6 +420,7 @@ void TestModel::testExtension()
 	QCOMPARE(position.extension(), 2u);
 	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.width(), 6);
+	QCOMPARE(position.height(), 4);
 
 	position.extend(-4);
 	copy.testParseValue(position);
@@ -411,6 +428,7 @@ void TestModel::testExtension()
 	QCOMPARE(position.extension(), 0u);
 	QCOMPARE(position.lines(), 0u);
 	QCOMPARE(position.width(), 4);
+	QCOMPARE(position.height(), 4);
 }
 
 void TestModel::testPosition()
@@ -607,6 +625,7 @@ void TestModel::testSimpleLight()
 
 	for (const Light * light : lights)
 	{
+		QVERIFY(light->isUnlockable());
 		for (unsigned pin = 0; pin < 10; pin++)
 		{
 			const MrwMessage msg = light->configMsg(pin);
@@ -626,6 +645,7 @@ void TestModel::testProfileLight()
 
 	for (const Light * light : lights)
 	{
+		QVERIFY(light->isUnlockable());
 		for (unsigned pin = 0; pin < 8; pin++)
 		{
 			const MrwMessage msg = light->configMsg(pin);
