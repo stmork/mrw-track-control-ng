@@ -34,6 +34,9 @@ protected:
 private:
 	void    broadcast(const mrw::can::MrwMessage & message);
 	void    append(mrw::can::MrwMessage & response, uint8_t size);
+	void    controller(
+		const mrw::model::Controller * controller,
+		const mrw::can::MrwMessage  &  message);
 	void    device(const mrw::can::MrwMessage & message);
 	void    setSwitchState(mrw::model::Device * device, const mrw::can::SwitchState switch_state);
 	uint8_t getSwitchState(mrw::model::Device * device);

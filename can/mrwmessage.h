@@ -65,11 +65,16 @@ namespace mrw::can
 	public:
 		/**
 		 * This constructor creates a command MrwMessage using a basic frame
-		 * format to address all controllers by broadcast.
+		 * format to address a specific mrw::model::Controller or using the
+		 * broadcast id @c CAN_BROADCAST_ID to address all connected
+		 * mrw::model::Controller.
 		 *
 		 * @param command The Command to send.
+		 * @param id The mrw::model::Controller to address by its ID.
 		 */
-		explicit MrwMessage(const Command command);
+		explicit MrwMessage(
+			const Command      command,
+			const ControllerId id = CAN_BROADCAST_ID);
 
 		/**
 		 * This constructor creates a command MrwMessage using an extended

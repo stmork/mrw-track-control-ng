@@ -25,6 +25,11 @@ public:
 
 	void info();
 	void configure();
+
+private:
+	void sendConfig(
+		const mrw::can::ControllerId              id,
+		const std::vector<mrw::can::MrwMessage> & messages);
 };
 
 #endif

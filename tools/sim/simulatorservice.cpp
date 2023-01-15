@@ -39,9 +39,14 @@ void SimulatorService::process(const MrwMessage & message)
 		{
 			broadcast(message);
 		}
-		else
+		else if (message.unitNo() != NO_UNITNO)
 		{
 			device(message);
+		}
+		else
+		{
+			const Controller * ctrl = model->controllerById(message.sid());
+			controller(ctrl, message);
 		}
 	}
 	else
@@ -52,49 +57,11 @@ void SimulatorService::process(const MrwMessage & message)
 
 void SimulatorService::broadcast(const MrwMessage & message)
 {
-	const Command cmd = message.command();
-
 	for (size_t c = 0; c < model->controllerCount(); c++)
 	{
-		Controller * controller = model->controller(c);
-		MrwMessage   response(controller->id(), NO_UNITNO, cmd, MSG_OK);
-		bool         answer = true;
+		const Controller * ctrl = model->controller(c);
 
-		switch (cmd)
-		{
-		case GETVER:
-			response.append(3);
-			response.append(1);
-			response.append(0x23);
-			response.append(0x45);
-			break;
-
-		case QRYBUF:
-			append(response, 1);
-			break;
-
-		case QRYERR:
-			append(response, 3);
-			break;
-
-		case FLASH_DATA:
-		case FLASH_REQ:
-			answer = false;
-			break;
-
-		case FLASH_CHECK:
-			response.append(message[3]);
-			break;
-
-		default:
-			// No additional payload needed.
-			break;
-		}
-
-		if (answer)
-		{
-			write(response);
-		}
+		controller(ctrl, message);
 	}
 }
 
@@ -104,6 +71,66 @@ void SimulatorService::append(MrwMessage & response, uint8_t size)
 	for (uint8_t b = 0; b < size; b++)
 	{
 		response.append(0);
+	}
+}
+
+void SimulatorService::controller(
+	const Controller * controller,
+	const MrwMessage & message)
+{
+	const Command cmd = message.command();
+
+	MrwMessage   response(controller->id(), NO_UNITNO, cmd, MSG_OK);
+	bool         answer = true;
+
+	switch (cmd)
+	{
+	case GETVER:
+		response.append(3);
+		response.append(1);
+		response.append(0x23);
+		response.append(0x45);
+		break;
+
+	case QRYBUF:
+		append(response, 1);
+		break;
+
+	case QRYERR:
+		append(response, 3);
+		break;
+
+	case FLASH_DATA:
+	case FLASH_REQ:
+		answer = false;
+		break;
+
+	case FLASH_CHECK:
+		response.append(message[3]);
+		break;
+
+	default:
+		// No additional payload needed.
+		break;
+	}
+
+	if (answer)
+	{
+		write(response);
+	}
+
+	switch (cmd)
+	{
+	case RESET:
+	case SET_ID:
+	case CFGEND:
+		response = MrwMessage(controller->id(), NO_UNITNO, cmd, MSG_RESET_PENDING);
+		write(response);
+		break;
+
+	default:
+		// No additional payload needed.
+		break;
 	}
 }
 

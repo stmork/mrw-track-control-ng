@@ -92,9 +92,9 @@ const ConstantEnumerator<SignalState> MrwMessage::signal_map
 	CONSTANT(SIGNAL_TST)
 };
 
-MrwMessage::MrwMessage(const Command command) :
+MrwMessage::MrwMessage(const Command command, const ControllerId id) :
 	src(0),
-	dst(CAN_BROADCAST_ID),
+	dst(id),
 	unit_no(0),
 	msg_command(command),
 	msg_response(MSG_NO_RESPONSE)
