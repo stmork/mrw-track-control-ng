@@ -878,6 +878,14 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		exit
 		assert !is_active
 
+		disableTourCombinedLight()
+		exit
+		assert !is_active
+
+		disableTourCombinedForm()
+		exit
+		assert !is_active
+
 		disableShunting()
 		exit
 		assert !is_active
