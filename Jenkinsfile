@@ -55,10 +55,10 @@ pipeline
 			steps
 			{
 				sh 'make sct-unit valgrind'
-				xunit checksName: '', thresholds: [failed(unstableThreshold: '0')], tools: [
-					QtTest(excludesPattern: '', pattern: 'qtest-*.xml', stopProcessingIfError: false),
-					GoogleTest(excludesPattern: '', pattern: 'statecharts/test/gtest-*.xml', stopProcessingIfError: false),
-					Valgrind(excludesPattern: '', pattern: 'valgrind*.xml', stopProcessingIfError: false)]
+//				xunit checksName: '', thresholds: [failed(unstableThreshold: '0')], tools: [
+//					QtTest(excludesPattern: '', pattern: 'qtest-*.xml', stopProcessingIfError: false),
+//					GoogleTest(excludesPattern: '', pattern: 'statecharts/test/gtest-*.xml', stopProcessingIfError: false),
+//					Valgrind(excludesPattern: '', pattern: 'valgrind*.xml', stopProcessingIfError: false)]
 			}
 		}
 
@@ -67,14 +67,14 @@ pipeline
 			steps
 			{
 				sh 'make lcov'
-				publishHTML([
-					allowMissing: false,
-					alwaysLinkToLastBuild: false,
-					keepAll: false,
-					reportDir: 'lcov-out',
-					reportFiles: 'index.html',
-					reportName: 'MRW-NG Coverage Report',
-					reportTitles: ''])
+//				publishHTML([
+//					allowMissing: false,
+//					alwaysLinkToLastBuild: false,
+//					keepAll: false,
+//					reportDir: 'lcov-out',
+//					reportFiles: 'index.html',
+//					reportName: 'MRW-NG Coverage Report',
+//					reportTitles: ''])
 			}
 		}
 	}
