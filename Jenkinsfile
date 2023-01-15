@@ -55,19 +55,12 @@ pipeline
 			steps
 			{
 				sh 'make sct-unit valgrind'
-//				xunit checksName: '', tools: [
-//					QtTest(excludesPattern: '', pattern: 'qtest-*.xml', stopProcessingIfError: false),
-//					GoogleTest(excludesPattern: '', pattern: 'statecharts/test/gtest-*.xml', stopProcessingIfError: false),
-//					Valgrind(excludesPattern: '', pattern: 'valgrind*.xml', stopProcessingIfError: false)]
+				xunit checksName: 'Unit Tests', tools: [
+					QtTest(excludesPattern: '', pattern: 'qtest-*.xml', stopProcessingIfError: false),
+					GoogleTest(excludesPattern: '', pattern: 'statecharts/test/gtest-*.xml', stopProcessingIfError: false)]
 
-				step([$class: 'XUnitPublisher',
-					checksName: 'Unit Tests',
-					testTimeMargin: '3000',
-					thresholdMode: 0,
-					thresholds: [], tools: [
-						GoogleTest(pattern: 'statecharts/test/gtest-*.xml'),
-						QtTest(pattern: 'qtest-*.xml', pattern: ''),
-						Valgrind(pattern: 'valgrind*.xml')]])
+				xunit checksName: 'Memory Check', tools: [
+					Valgrind(excludesPattern: '', pattern: 'valgrind*.xml', stopProcessingIfError: false)]
 
 			}
 		}
