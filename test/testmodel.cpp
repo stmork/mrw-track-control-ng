@@ -217,11 +217,13 @@ void TestModel::testRegularSwitchStates()
 		QCOMPARE(part->state(), RegularSwitch::State::AB);
 		QCOMPARE(part->switchState(), SwitchState::SWITCH_STATE_LEFT);
 		QCOMPARE(part->commandState(), Command::SETLFT);
+		QCOMPARE(part->isBranch(), !part->isRightHanded());
 
 		part->setState(RegularSwitch::State::AC);
 		QCOMPARE(part->state(), RegularSwitch::State::AC);
 		QCOMPARE(part->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 		QCOMPARE(part->commandState(), Command::SETRGT);
+		QCOMPARE(part->isBranch(), part->isRightHanded());
 
 		part->setState(RegularSwitch::State(0xff));
 		QVERIFY_EXCEPTION_THROWN(part->commandState(), std::invalid_argument);
@@ -307,6 +309,24 @@ void TestModel::testDoubleCrossSwitchStates()
 				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
 			}
 		}
+	}
+}
+
+void TestModel::testSignals()
+{
+	std::vector<Signal *> all_signals;
+
+	model->parts<Signal>(all_signals);
+	for (Signal * signal : all_signals)
+	{
+		Section * section = signal->section();
+
+		QVERIFY(section != nullptr);
+
+		const std::vector<Signal *> & section_signals =
+			section->getSignals(signal->direction());
+
+		QVERIFY(!section_signals.empty());
 	}
 }
 
@@ -613,7 +633,7 @@ void TestModel::testSwitchConfig()
 	}
 }
 
-void TestModel::testSimpleLight()
+void TestModel::testSimpleLightConfig()
 {
 	std::vector<Light *> lights;
 
@@ -637,7 +657,7 @@ void TestModel::testSimpleLight()
 	}
 }
 
-void TestModel::testProfileLight()
+void TestModel::testProfileLightConfig()
 {
 	std::vector<ProfileLight *> lights;
 

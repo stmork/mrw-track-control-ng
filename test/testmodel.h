@@ -46,6 +46,7 @@ namespace mrw::test
 		void testSections();
 		void testRegularSwitchStates();
 		void testDoubleCrossSwitchStates();
+		void testSignals();
 		void testDefaultPosition();
 		void testParsingPosition();
 		void testExtension();
@@ -56,8 +57,8 @@ namespace mrw::test
 		void testFormSignalConfig();
 		void testSectionConfig();
 		void testSwitchConfig();
-		void testSimpleLight();
-		void testProfileLight();
+		void testSimpleLightConfig();
+		void testProfileLightConfig();
 	};
 }
 
