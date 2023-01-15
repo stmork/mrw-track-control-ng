@@ -67,14 +67,14 @@ pipeline
 			steps
 			{
 				sh 'make lcov'
-//				publishHTML([
-//					allowMissing: false,
-//					alwaysLinkToLastBuild: false,
-//					keepAll: false,
-//					reportDir: 'lcov-out',
-//					reportFiles: 'index.html',
-//					reportName: 'MRW-NG Coverage Report',
-//					reportTitles: ''])
+				publishHTML([
+					allowMissing: false,
+					alwaysLinkToLastBuild: false,
+					keepAll: false,
+					reportDir: 'lcov-out',
+					reportFiles: 'index.html',
+					reportName: 'MRW-NG Coverage Report',
+					reportTitles: ''])
 			}
 		}
 	}
