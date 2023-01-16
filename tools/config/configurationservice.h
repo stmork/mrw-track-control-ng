@@ -8,6 +8,8 @@
 #ifndef CONFIGURATIONSERVICE_H
 #define CONFIGURATIONSERVICE_H
 
+#include <unordered_set>
+
 #include <can/mrwbusservice.h>
 #include <model/modelrepository.h>
 
@@ -15,7 +17,8 @@ class ConfigurationService : public mrw::can::MrwBusService
 {
 	Q_OBJECT
 
-	mrw::model::ModelRailway * model = nullptr;
+	mrw::model::ModelRailway *                 model = nullptr;
+	std::unordered_set<mrw::can::ControllerId> controllers;
 
 public:
 	explicit ConfigurationService(
@@ -25,6 +28,9 @@ public:
 
 	void info();
 	void configure();
+
+protected:
+	virtual void process(const mrw::can::MrwMessage & message) override;
 
 private:
 	void sendConfig(

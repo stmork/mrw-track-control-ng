@@ -3,6 +3,9 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
+#include <QCoreApplication>
+#include <QTimer>
+
 #include "configurationservice.h"
 
 using namespace mrw::can;
@@ -34,6 +37,7 @@ void ConfigurationService::configure()
 
 
 		qDebug("---------------------- %u", id);
+		controllers.insert(id);
 		controller->configure(messages);
 
 #if 0
@@ -44,6 +48,23 @@ void ConfigurationService::configure()
 #else
 		sendConfig(id, messages);
 #endif
+	}
+	QTimer::singleShot(5000, QCoreApplication::instance(), &QCoreApplication::quit);
+}
+
+void ConfigurationService::process(const MrwMessage & message)
+{
+	if (message.isResponse())
+	{
+		if (message.command() == GETVER)
+		{
+			const size_t count = controllers.erase(message.eid());
+
+			if ((count > 0) && (controllers.size() == 0))
+			{
+				QCoreApplication::quit();
+			}
+		}
 	}
 }
 
