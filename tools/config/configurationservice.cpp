@@ -49,20 +49,22 @@ void ConfigurationService::configure()
 		sendConfig(id, messages);
 #endif
 	}
-	QTimer::singleShot(5000, QCoreApplication::instance(), &QCoreApplication::quit);
+	QTimer::singleShot(
+		model->controllerCount() * 200 + 3500,
+		this, &ConfigurationService::timeout);
 }
 
 void ConfigurationService::process(const MrwMessage & message)
 {
 	if (message.isResponse())
 	{
-		if (message.command() == GETVER)
+		if ((message.command() == RESET) && (message.response() == MSG_BOOTED))
 		{
 			const size_t count = controllers.erase(message.eid());
 
 			if ((count > 0) && (controllers.size() == 0))
 			{
-				QCoreApplication::quit();
+				completed();
 			}
 		}
 	}
@@ -81,4 +83,16 @@ void ConfigurationService::sendConfig(
 		write(msg);
 	}
 	write(cfg_end);
+}
+
+void ConfigurationService::completed()
+{
+	qInfo("Configuration completed.");
+	QCoreApplication::quit();
+}
+
+void ConfigurationService::timeout()
+{
+	qCritical("Configuration timeout!");
+	QCoreApplication::exit(EXIT_FAILURE);
 }

@@ -17,7 +17,7 @@ class ConfigurationService : public mrw::can::MrwBusService
 {
 	Q_OBJECT
 
-	mrw::model::ModelRailway *                 model = nullptr;
+	mrw::model::ModelRailway         *         model = nullptr;
 	std::unordered_set<mrw::can::ControllerId> controllers;
 
 public:
@@ -36,6 +36,9 @@ private:
 	void sendConfig(
 		const mrw::can::ControllerId              id,
 		const std::vector<mrw::can::MrwMessage> & messages);
+
+	void completed();
+	void timeout();
 };
 
 #endif
