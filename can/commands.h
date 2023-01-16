@@ -99,7 +99,7 @@ namespace mrw::can
 		/** The command has no correct unit number. */
 		MSG_NO_UNITNO_DEFINED   =  7,
 
-		/** The addressed unit number is unknown. */
+		/** The command with this unit number does not match the device. */
 		MSG_UNITTYPE_WRONG      =  8,
 
 		/** The RESET command was issued and the reset is ongoing. */
