@@ -29,6 +29,7 @@ namespace mrw
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
 			connected_raised(false),
+			sent_raised(false),
 			completed_raised(false),
 			failed_raised(false)
 		{
@@ -75,6 +76,11 @@ namespace mrw
 					connected_raised = true;
 					break;
 				}
+			case mrw::statechart::ConfigStatechart::Event::sent:
+				{
+					sent_raised = true;
+					break;
+				}
 			case mrw::statechart::ConfigStatechart::Event::completed:
 				{
 					completed_raised = true;
@@ -104,6 +110,13 @@ namespace mrw
 		void mrw::statechart::ConfigStatechart::connected()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::connected));
+			runCycle();
+		}
+
+
+		void mrw::statechart::ConfigStatechart::sent()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::sent));
 			runCycle();
 		}
 
@@ -259,6 +272,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Wait for Boot'. */
 			timerService->setTimer(this, 1, ((ConfigStatechart::flashtime * idx) + ConfigStatechart::resettime), false);
+			ifaceOperationCallback->booting();
 		}
 
 		/* Entry action for state 'Failed'. */
@@ -423,7 +437,7 @@ namespace mrw
 		void ConfigStatechart::react_main_region__choice_0()
 		{
 			/* The reactions of state null. */
-			if (ifaceOperationCallback->hasMore())
+			if (ifaceOperationCallback->hasMore(idx))
 			{
 				enseq_main_region_Configure_default();
 			}
@@ -485,7 +499,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (completed_raised)
+				if (sent_raised)
 				{
 					exseq_main_region_Configure();
 					react_main_region__choice_0();
@@ -566,6 +580,7 @@ namespace mrw
 		void ConfigStatechart::clearInEvents()
 		{
 			connected_raised = false;
+			sent_raised = false;
 			completed_raised = false;
 			failed_raised = false;
 			timeEvents[0] = false;
@@ -622,7 +637,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((connected_raised) || (completed_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while ((((((connected_raised) || (sent_raised)) || (completed_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1]));
 			isExecuting = false;
 		}
 

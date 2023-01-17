@@ -11,12 +11,16 @@
 #include <unordered_set>
 
 #include <can/mrwbusservice.h>
+#include <statecharts/ConfigStatechart.h>
 #include <model/modelrepository.h>
 
-class ConfigurationService : public mrw::can::MrwBusService
+class ConfigurationService :
+	public mrw::can::MrwBusService,
+	public mrw::statechart::ConfigStatechart::OperationCallback
 {
 	Q_OBJECT
 
+	mrw::statechart::ConfigStatechart          statechart;
 	mrw::model::ModelRailway         *         model = nullptr;
 	std::unordered_set<mrw::can::ControllerId> controllers;
 
@@ -24,10 +28,9 @@ public:
 	explicit ConfigurationService(
 		mrw::model::ModelRepository & repo,
 		QObject           *           parent    = nullptr);
-	virtual ~ConfigurationService() = default;
+	virtual ~ConfigurationService();
 
 	void info();
-	void configure();
 
 protected:
 	virtual void process(const mrw::can::MrwMessage & message) override;
@@ -37,8 +40,12 @@ private:
 		const mrw::can::ControllerId              id,
 		const std::vector<mrw::can::MrwMessage> & messages);
 
-	void completed();
-	void timeout();
+	void configure(sc::integer idx) override;
+	bool hasMore(sc::integer idx) override;
+
+	void booting() override;
+	void quit() override;
+	void fail() override;
 };
 
 #endif

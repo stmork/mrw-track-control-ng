@@ -70,6 +70,7 @@ namespace mrw
 			{
 				NO_EVENT,
 				connected,
+				sent,
 				completed,
 				failed,
 				_te0_main_region_Wait_for_Connect_,
@@ -107,7 +108,9 @@ namespace mrw
 
 				virtual void configure(sc::integer idx) = 0;
 
-				virtual bool hasMore() = 0;
+				virtual bool hasMore(sc::integer idx) = 0;
+
+				virtual void booting() = 0;
 
 				virtual void quit() = 0;
 
@@ -170,6 +173,9 @@ namespace mrw
 		public slots:
 			/*! Slot for the in event 'connected' that is defined in the default interface scope. */
 			void connected();
+
+			/*! Slot for the in event 'sent' that is defined in the default interface scope. */
+			void sent();
 
 			/*! Slot for the in event 'completed' that is defined in the default interface scope. */
 			void completed();
@@ -254,6 +260,9 @@ namespace mrw
 
 			/*! Indicates event 'connected' of default interface scope is active. */
 			bool connected_raised;
+
+			/*! Indicates event 'sent' of default interface scope is active. */
+			bool sent_raised;
 
 			/*! Indicates event 'completed' of default interface scope is active. */
 			bool completed_raised;

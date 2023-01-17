@@ -26,6 +26,59 @@ namespace mrw
 		mrw::statechart::ConfigStatechart * statechart;
 
 
+		class BootingMock
+		{
+			typedef void (BootingMock::*functiontype)();
+		public:
+			void (BootingMock::*bootingBehaviorDefault)();
+			int callCount;
+
+			void booting1()
+			{
+			}
+
+			void bootingDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void booting()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return bootingBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (BootingMock::*defaultBehavior)())
+			{
+				bootingBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&BootingMock::bootingDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		static BootingMock * bootingMock;
+
 		class QuitMock
 		{
 			typedef void (QuitMock::*functiontype)();
@@ -276,7 +329,19 @@ namespace mrw
 		class HasMoreMock
 		{
 			typedef bool (HasMoreMock::*functiontype)();
+			struct parameters
+			{
+				sc::integer idx;
+				bool (HasMoreMock::*behavior)();
+				int callCount;
+				inline bool operator==(const parameters & other)
+				{
+					return (this->idx == other.idx);
+				}
+			};
 		public:
+			std::list<HasMoreMock::parameters> mocks;
+			std::list<HasMoreMock::parameters> paramCount;
 			bool (HasMoreMock::*hasMoreBehaviorDefault)();
 			int callCount;
 
@@ -306,19 +371,93 @@ namespace mrw
 				return (callCount > 0);
 			}
 
-			void hasMore()
+			void setHasMoreBehavior(const sc::integer idx, bool (HasMoreMock::*func)())
 			{
-				++callCount;
+				parameters p;
+				p.idx = idx;
+				p.behavior = func;
+
+				std::list<HasMoreMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					mocks.erase(i);
+				}
+				mocks.push_back(p);
 			}
 
-			functiontype getBehavior()
+			bool calledAtLeast(const int times, const sc::integer idx)
 			{
-				return hasMoreBehaviorDefault;
+				parameters p;
+				p.idx = idx;
+
+				std::list<HasMoreMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount >= times);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			bool calledAtLeastOnce(const sc::integer idx)
+			{
+				parameters p;
+				p.idx = idx;
+
+				std::list<HasMoreMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount > 0);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			void hasMore(const sc::integer idx)
+			{
+				++callCount;
+
+				parameters p;
+				p.idx = idx;
+
+				std::list<HasMoreMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					p.callCount = (++i->callCount);
+					paramCount.erase(i);
+
+				}
+				else
+				{
+					p.callCount = 1;
+				}
+				paramCount.push_back(p);
+			}
+
+			functiontype getBehavior(const sc::integer idx)
+			{
+				parameters p;
+				p.idx = idx;
+
+				std::list<HasMoreMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					return  i->behavior;
+				}
+				else
+				{
+					return hasMoreBehaviorDefault;
+				}
 			}
 
 			void setDefaultBehavior(bool (HasMoreMock::*defaultBehavior)())
 			{
 				hasMoreBehaviorDefault = defaultBehavior;
+				mocks.clear();
 			}
 
 			void initializeBehavior()
@@ -330,6 +469,8 @@ namespace mrw
 			{
 				initializeBehavior();
 				callCount = 0;
+				paramCount.clear();
+				mocks.clear();
 			}
 		};
 		static HasMoreMock * hasMoreMock;
@@ -342,10 +483,15 @@ namespace mrw
 				configureMock->configure(idx);
 				return (configureMock->*(configureMock->getBehavior(idx)))();
 			}
-			bool hasMore()
+			bool hasMore(sc::integer idx)
 			{
-				hasMoreMock->hasMore();
-				return (hasMoreMock->*(hasMoreMock->getBehavior()))();
+				hasMoreMock->hasMore(idx);
+				return (hasMoreMock->*(hasMoreMock->getBehavior(idx)))();
+			}
+			void booting()
+			{
+				bootingMock->booting();
+				return (bootingMock->*(bootingMock->getBehavior()))();
 			}
 			void quit()
 			{
@@ -396,9 +542,11 @@ namespace mrw
 
 
 
-			hasMoreMock->setDefaultBehavior(&HasMoreMock::hasMore1);
+
+			hasMoreMock->setHasMoreBehavior(statechart->getIdx(), &HasMoreMock::hasMore1);
 
 
+			bootingMock->reset();
 			quitMock->reset();
 			failMock->reset();
 			configureMock->reset();
@@ -406,6 +554,8 @@ namespace mrw
 		}
 		TEST_F(ConfigTest, doStart)
 		{
+			bootingMock = new BootingMock();
+			bootingMock->initializeBehavior();
 			quitMock = new QuitMock();
 			quitMock->initializeBehavior();
 			failMock = new FailMock();
@@ -423,6 +573,8 @@ namespace mrw
 		{
 			failMock = new FailMock();
 			failMock->initializeBehavior();
+			bootingMock = new BootingMock();
+			bootingMock->initializeBehavior();
 			quitMock = new QuitMock();
 			quitMock->initializeBehavior();
 			failMock = new FailMock();
@@ -471,6 +623,8 @@ namespace mrw
 			hasMoreMock->initializeBehavior();
 			configureMock = new ConfigureMock();
 			configureMock->initializeBehavior();
+			bootingMock = new BootingMock();
+			bootingMock->initializeBehavior();
 			quitMock = new QuitMock();
 			quitMock->initializeBehavior();
 			failMock = new FailMock();
@@ -490,7 +644,7 @@ namespace mrw
 
 			hasMoreMock->setDefaultBehavior(&HasMoreMock::hasMore1);
 
-			statechart->raiseCompleted();
+			statechart->raiseSent();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::ConfigStatechart::State::main_region_Configure));
 
@@ -514,6 +668,8 @@ namespace mrw
 			hasMoreMock->initializeBehavior();
 			configureMock = new ConfigureMock();
 			configureMock->initializeBehavior();
+			bootingMock = new BootingMock();
+			bootingMock->initializeBehavior();
 			quitMock = new QuitMock();
 			quitMock->initializeBehavior();
 			failMock = new FailMock();
@@ -533,7 +689,7 @@ namespace mrw
 
 			hasMoreMock->setDefaultBehavior(&HasMoreMock::hasMore2);
 
-			statechart->raiseCompleted();
+			statechart->raiseSent();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::ConfigStatechart::State::main_region_Wait_for_Boot));
 
@@ -541,18 +697,18 @@ namespace mrw
 
 			EXPECT_TRUE(hasMoreMock->calledAtLeastOnce());
 
-			EXPECT_FALSE(configureMock->calledAtLeastOnce());
+			EXPECT_TRUE(bootingMock->calledAtLeastOnce());
 
 
 			hasMoreMock->reset();
-			configureMock->reset();
+			bootingMock->reset();
 		}
 		TEST_F(ConfigTest, lastController)
 		{
 			hasMoreMock = new HasMoreMock();
 			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
+			bootingMock = new BootingMock();
+			bootingMock->initializeBehavior();
 			hasMoreMock = new HasMoreMock();
 			hasMoreMock->initializeBehavior();
 			configureMock = new ConfigureMock();
@@ -561,6 +717,8 @@ namespace mrw
 			hasMoreMock->initializeBehavior();
 			configureMock = new ConfigureMock();
 			configureMock->initializeBehavior();
+			bootingMock = new BootingMock();
+			bootingMock->initializeBehavior();
 			quitMock = new QuitMock();
 			quitMock->initializeBehavior();
 			failMock = new FailMock();
@@ -600,8 +758,8 @@ namespace mrw
 			failMock->initializeBehavior();
 			hasMoreMock = new HasMoreMock();
 			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
+			bootingMock = new BootingMock();
+			bootingMock->initializeBehavior();
 			hasMoreMock = new HasMoreMock();
 			hasMoreMock->initializeBehavior();
 			configureMock = new ConfigureMock();
@@ -610,6 +768,8 @@ namespace mrw
 			hasMoreMock->initializeBehavior();
 			configureMock = new ConfigureMock();
 			configureMock->initializeBehavior();
+			bootingMock = new BootingMock();
+			bootingMock->initializeBehavior();
 			quitMock = new QuitMock();
 			quitMock->initializeBehavior();
 			failMock = new FailMock();
@@ -649,8 +809,8 @@ namespace mrw
 			failMock->initializeBehavior();
 			hasMoreMock = new HasMoreMock();
 			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
+			bootingMock = new BootingMock();
+			bootingMock->initializeBehavior();
 			hasMoreMock = new HasMoreMock();
 			hasMoreMock->initializeBehavior();
 			configureMock = new ConfigureMock();
@@ -659,6 +819,8 @@ namespace mrw
 			hasMoreMock->initializeBehavior();
 			configureMock = new ConfigureMock();
 			configureMock->initializeBehavior();
+			bootingMock = new BootingMock();
+			bootingMock->initializeBehavior();
 			quitMock = new QuitMock();
 			quitMock->initializeBehavior();
 			failMock = new FailMock();
@@ -674,6 +836,8 @@ namespace mrw
 		}
 		TEST_F(ConfigTest, doQuit)
 		{
+			bootingMock = new BootingMock();
+			bootingMock->initializeBehavior();
 			quitMock = new QuitMock();
 			quitMock->initializeBehavior();
 			failMock = new FailMock();
@@ -733,8 +897,8 @@ namespace mrw
 			failMock->initializeBehavior();
 			hasMoreMock = new HasMoreMock();
 			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
+			bootingMock = new BootingMock();
+			bootingMock->initializeBehavior();
 			hasMoreMock = new HasMoreMock();
 			hasMoreMock->initializeBehavior();
 			configureMock = new ConfigureMock();
@@ -743,6 +907,8 @@ namespace mrw
 			hasMoreMock->initializeBehavior();
 			configureMock = new ConfigureMock();
 			configureMock->initializeBehavior();
+			bootingMock = new BootingMock();
+			bootingMock->initializeBehavior();
 			quitMock = new QuitMock();
 			quitMock->initializeBehavior();
 			failMock = new FailMock();

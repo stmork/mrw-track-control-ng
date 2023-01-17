@@ -9,6 +9,7 @@ CONFIG   += staticlib
 include(../common.pri)
 
 HEADERS += \
+	ConfigStatechart.h \
 	OperatingMode.h \
 	RouteStatechart.h \
 	SectionStatechart.h \
@@ -23,6 +24,7 @@ HEADERS += \
 	timerservice.h
 
 SOURCES += \
+	ConfigStatechart.cpp \
 	OperatingMode.cpp \
 	RouteStatechart.cpp \
 	SectionStatechart.cpp \
@@ -33,4 +35,4 @@ SOURCES += \
 	UpdateStatechart.cpp \
 	timerservice.cpp
 
-QMAKE_CLEAN         += $$TARGET
+QMAKE_CLEAN += $$TARGET

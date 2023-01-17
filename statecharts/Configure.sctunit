@@ -15,10 +15,11 @@ testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
 		assert !is_final
 		assert active (mrw.^statechart.ConfigStatechart.main_region.Wait_for_Connect)
 
+		mock booting
 		mock quit
 		mock fail
 		mock configure
-		mock hasMore returns (true)
+		mock hasMore(idx) returns (true)
 	}
 
 
@@ -61,7 +62,7 @@ testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
 		mock hasMore returns (true)
 
 		// When
-		raise completed
+		raise sent
 
 		// Then
 		assert active (mrw.^statechart.ConfigStatechart.main_region.Configure)
@@ -78,13 +79,13 @@ testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
 		mock hasMore returns (false)
 
 		// When
-		raise completed
+		raise sent
 
 		// Then
 		assert active (mrw.^statechart.ConfigStatechart.main_region.Wait_for_Boot)
 		assert idx == 2
 		assert called hasMore
-		assert !called configure
+		assert called booting
 	}
 
 	@Test

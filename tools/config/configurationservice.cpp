@@ -6,17 +6,37 @@
 #include <QCoreApplication>
 #include <QTimer>
 
+#include <statecharts/timerservice.h>
+
 #include "configurationservice.h"
 
 using namespace mrw::can;
+using namespace mrw::statechart;
 using namespace mrw::model;
 
 ConfigurationService::ConfigurationService(
 	mrw::model::ModelRepository & repo,
 	QObject           *           parent) :
-	MrwBusService(repo.interface(), repo.plugin(), parent)
+	MrwBusService(repo.interface(), repo.plugin(), parent),
+	statechart(nullptr)
 {
+	connect(
+		this, &MrwBusService::connected,
+		&statechart, &ConfigStatechart::connected,
+		Qt::QueuedConnection);
+
+	statechart.setTimerService(&TimerService::instance());
+	statechart.setOperationCallback(this);
+
+	Q_ASSERT(statechart.check());
+	statechart.enter();
+
 	model = repo;
+}
+
+ConfigurationService::~ConfigurationService()
+{
+	statechart.exit();
 }
 
 void ConfigurationService::info()
@@ -25,33 +45,6 @@ void ConfigurationService::info()
 	{
 		model->info();
 	}
-}
-
-void ConfigurationService::configure()
-{
-	for (size_t c = 0; c < model->controllerCount(); c++)
-	{
-		std::vector<MrwMessage> messages;
-		const Controller    *   controller = model->controller(c);
-		const ControllerId      id = controller->id();
-
-
-		qDebug("---------------------- %u", id);
-		controllers.insert(id);
-		controller->configure(messages);
-
-#if 0
-		for (const MrwMessage & msg : messages)
-		{
-			qDebug().noquote() << msg;
-		}
-#else
-		sendConfig(id, messages);
-#endif
-	}
-	QTimer::singleShot(
-		model->controllerCount() * 200 + 3500,
-		this, &ConfigurationService::timeout);
 }
 
 void ConfigurationService::process(const MrwMessage & message)
@@ -64,7 +57,7 @@ void ConfigurationService::process(const MrwMessage & message)
 
 			if ((count > 0) && (controllers.size() == 0))
 			{
-				completed();
+				statechart.completed();
 			}
 		}
 	}
@@ -85,13 +78,45 @@ void ConfigurationService::sendConfig(
 	write(cfg_end);
 }
 
-void ConfigurationService::completed()
+void ConfigurationService::configure(sc::integer idx)
 {
-	qInfo("Configuration completed.");
+	std::vector<MrwMessage> messages;
+	const Controller    *   controller = model->controller(idx);
+	const ControllerId      id = controller->id();
+
+
+	qDebug("---------------------- %u", id);
+	controllers.insert(id);
+	controller->configure(messages);
+
+#if 0
+	for (const MrwMessage & msg : messages)
+	{
+		qDebug().noquote() << msg;
+	}
+#else
+	sendConfig(id, messages);
+#endif
+	statechart.sent();
+}
+
+bool ConfigurationService::hasMore(sc::integer idx)
+{
+	return idx < (int)model->controllerCount();
+}
+
+void ConfigurationService::booting()
+{
+	qInfo("Configuration completed and booting.");
+}
+
+void ConfigurationService::quit()
+{
+	qInfo("Booted.");
 	QCoreApplication::quit();
 }
 
-void ConfigurationService::timeout()
+void ConfigurationService::fail()
 {
 	qCritical("Configuration timeout!");
 	QCoreApplication::exit(EXIT_FAILURE);

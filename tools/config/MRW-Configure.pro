@@ -14,7 +14,7 @@ SOURCES += \
 	configurationservice.cpp \
 	main.cpp
 
-LIBS            += -lMRW-Model -lMRW-Can -lMRW-Util
+LIBS            += -lMRW-Model -lMRW-Can -lMRW-Statecharts -lMRW-Util
 
 QMAKE_CLEAN     += $$TARGET
 

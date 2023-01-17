@@ -27,10 +27,6 @@ int main(int argc, char * argv[])
 	{
 		service.info();
 	});
-	QObject::connect (&service, &ConfigurationService::connected, [&]()
-	{
-		service.configure();
-	});
 
 	return app.exec();
 }
