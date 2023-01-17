@@ -29,7 +29,6 @@ namespace mrw
 		void nextCompletePage();
 		void lastCompletePage();
 		void doFlashCheck();
-		void okFlashCheck();
 		void booted();
 		mrw::statechart::UpdateStatechart * statechart;
 
@@ -37,7 +36,19 @@ namespace mrw
 		class InitMock
 		{
 			typedef void (InitMock::*functiontype)();
+			struct parameters
+			{
+				sc::integer count;
+				void (InitMock::*behavior)();
+				int callCount;
+				inline bool operator==(const parameters & other)
+				{
+					return (this->count == other.count);
+				}
+			};
 		public:
+			std::list<InitMock::parameters> mocks;
+			std::list<InitMock::parameters> paramCount;
 			void (InitMock::*initBehaviorDefault)();
 			int callCount;
 
@@ -59,19 +70,93 @@ namespace mrw
 				return (callCount > 0);
 			}
 
-			void init()
+			void setInitBehavior(const sc::integer count, void (InitMock::*func)())
 			{
-				++callCount;
+				parameters p;
+				p.count = count;
+				p.behavior = func;
+
+				std::list<InitMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					mocks.erase(i);
+				}
+				mocks.push_back(p);
 			}
 
-			functiontype getBehavior()
+			bool calledAtLeast(const int times, const sc::integer count)
 			{
-				return initBehaviorDefault;
+				parameters p;
+				p.count = count;
+
+				std::list<InitMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount >= times);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			bool calledAtLeastOnce(const sc::integer count)
+			{
+				parameters p;
+				p.count = count;
+
+				std::list<InitMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount > 0);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			void init(const sc::integer count)
+			{
+				++callCount;
+
+				parameters p;
+				p.count = count;
+
+				std::list<InitMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					p.callCount = (++i->callCount);
+					paramCount.erase(i);
+
+				}
+				else
+				{
+					p.callCount = 1;
+				}
+				paramCount.push_back(p);
+			}
+
+			functiontype getBehavior(const sc::integer count)
+			{
+				parameters p;
+				p.count = count;
+
+				std::list<InitMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					return  i->behavior;
+				}
+				else
+				{
+					return initBehaviorDefault;
+				}
 			}
 
 			void setDefaultBehavior(void (InitMock::*defaultBehavior)())
 			{
 				initBehaviorDefault = defaultBehavior;
+				mocks.clear();
 			}
 
 			void initializeBehavior()
@@ -83,6 +168,8 @@ namespace mrw
 			{
 				initializeBehavior();
 				callCount = 0;
+				paramCount.clear();
+				mocks.clear();
 			}
 		};
 		static InitMock * initMock;
@@ -624,10 +711,10 @@ namespace mrw
 		class MockDefault : public mrw::statechart::UpdateStatechart::OperationCallback
 		{
 		public:
-			void init()
+			void init(sc::integer count)
 			{
-				initMock->init();
-				return (initMock->*(initMock->getBehavior()))();
+				initMock->init(count);
+				return (initMock->*(initMock->getBehavior(count)))();
 			}
 			void ping()
 			{
@@ -1515,20 +1602,22 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			doFlashCheck();
 		}
-		void okFlashCheck()
+		void booted()
 		{
 			doFlashCheck();
 
 			statechart->raiseComplete();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Successful));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Booted));
 
-			EXPECT_TRUE((statechart->getError()) == (0));
+			EXPECT_TRUE(quitMock->calledAtLeastOnce());
 
 
+			quitMock->reset();
 		}
-		TEST_F(UpdateTest, okFlashCheck)
+		TEST_F(UpdateTest, booted)
 		{
+			quitMock = new QuitMock();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
 			flashCheckMock = new FlashCheckMock();
@@ -1580,7 +1669,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			okFlashCheck();
+			booted();
 		}
 		TEST_F(UpdateTest, failFlashCheck)
 		{
@@ -1716,142 +1805,6 @@ namespace mrw
 
 			failMock->reset();
 		}
-		void booted()
-		{
-			okFlashCheck();
-
-			statechart->raiseComplete();
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Booted));
-
-			EXPECT_TRUE(quitMock->calledAtLeastOnce());
-
-
-			quitMock->reset();
-		}
-		TEST_F(UpdateTest, booted)
-		{
-			quitMock = new QuitMock();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
-			booted();
-		}
-		TEST_F(UpdateTest, notBooted)
-		{
-			failMock = new FailMock();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
-			okFlashCheck();
-
-			runner->proceed_time(statechart->getDelay_boot());
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
-
-			EXPECT_TRUE((statechart->getError()) == (5));
-
-			EXPECT_TRUE(failMock->calledAtLeastOnce());
-
-
-			failMock->reset();
-		}
 		TEST_F(UpdateTest, doExit)
 		{
 			initMock = new InitMock();
@@ -1926,12 +1879,6 @@ namespace mrw
 			EXPECT_TRUE(!statechart->isActive());
 
 			doFlashCheck();
-
-			statechart->exit();
-
-			EXPECT_TRUE(!statechart->isActive());
-
-			okFlashCheck();
 
 			statechart->exit();
 

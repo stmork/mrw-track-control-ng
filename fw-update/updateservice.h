@@ -30,10 +30,10 @@ class UpdateService :
 	static const uint8_t   DEFAULT_HARDWARE =    1;
 	static const size_t    SPM_PAGESIZE     =  128;
 
-	mrw::statechart::UpdateStatechart          statechart;
-	std::unordered_set<mrw::can::ControllerId> controller_ids;
-	std::unordered_set<mrw::can::ControllerId> request_ids;
-	std::vector<uint8_t>                       buffer;
+	mrw::statechart::UpdateStatechart                statechart;
+	std::unordered_set<mrw::can::ControllerId>       controller_ids;
+	std::unordered_multiset<mrw::can::ControllerId>  request_ids;
+	std::vector<uint8_t>                             buffer;
 
 	size_t    rest     = 0;
 	unsigned  address  = 0;
@@ -55,7 +55,7 @@ private:
 		const mrw::can::MrwMessage & message,
 		const mrw::can::Response     response = mrw::can::MSG_OK);
 
-	void init() override;
+	void init(sc::integer count) override;
 	void ping() override;
 	void boot() override;
 	void flashRequest(const uint8_t hid);

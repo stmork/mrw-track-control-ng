@@ -101,7 +101,6 @@ void SimulatorService::controller(
 		break;
 
 	case FLASH_DATA:
-	case FLASH_REQ:
 		answer = false;
 		break;
 
@@ -125,7 +124,11 @@ void SimulatorService::controller(
 	case SET_ID:
 	case CFGEND:
 		response = MrwMessage(controller->id(), NO_UNITNO, cmd, MSG_RESET_PENDING);
+
 		write(response);
+		[[fallthrough]];
+	case FLASH_CHECK:
+		bootSequence(controller->id());
 		break;
 
 	default:
@@ -195,4 +198,18 @@ uint8_t SimulatorService::occupation(Device * device)
 	Section * section = dynamic_cast<Section *>(device);
 
 	return section->occupation();
+}
+
+void SimulatorService::bootSequence(const ControllerId id)
+{
+	MrwMessage response(id, NO_UNITNO, GETVER, MSG_OK);
+	response.append(3);
+	response.append(1);
+	response.append(0x23);
+	response.append(0x45);
+	write(response);
+
+	response = MrwMessage(id, NO_UNITNO, RESET, MSG_BOOTED);
+	response.append(0);
+	write(response);
 }

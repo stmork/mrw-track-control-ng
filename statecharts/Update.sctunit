@@ -247,17 +247,17 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 	}
 
 	@Test
-	operation okFlashCheck()
+	operation booted()
 	{
 		// Given
-		doFlashCheck
+		doFlashCheck()
 
 		// When
 		raise complete
 
 		// Then
-		assert active (mrw.^statechart.UpdateStatechart.main_region.Successful)
-		assert error == 0
+		assert active(mrw.^statechart.UpdateStatechart.main_region.Booted)
+		assert called quit
 	}
 
 	@Test
@@ -287,35 +287,6 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		// Then
 		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
 		assert error == 4
-		assert called fail
-	}
-
-	@Test
-	operation booted()
-	{
-		// Given
-		okFlashCheck()
-
-		// When
-		raise complete
-
-		// Then
-		assert active(mrw.^statechart.UpdateStatechart.main_region.Booted)
-		assert called quit
-	}
-
-	@Test
-	operation notBooted()
-	{
-		// Given
-		okFlashCheck()
-
-		// When
-		proceed delay_boot ms
-
-		// Then
-		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
-		assert error == 5
 		assert called fail
 	}
 
@@ -357,10 +328,6 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		assert !is_active
 
 		doFlashCheck()
-		exit
-		assert !is_active
-
-		okFlashCheck()
 		exit
 		assert !is_active
 

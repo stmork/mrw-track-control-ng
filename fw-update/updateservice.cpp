@@ -94,6 +94,7 @@ void UpdateService::process(const MrwMessage & message)
 
 		case RESET:
 			check(message, MSG_RESET_PENDING);
+			check(message, MSG_BOOTED);
 			break;
 
 		case FLASH_REQ:
@@ -118,12 +119,16 @@ void UpdateService::process(const MrwMessage & message)
 	}
 }
 
-void UpdateService::init()
+void UpdateService::init(sc::integer count)
 {
 	request_ids.clear();
-	std::copy(
-		controller_ids.begin(), controller_ids.end(),
-		std::inserter(request_ids, request_ids.begin()));
+
+	for (int i = 0; i < count; i++)
+	{
+		std::copy(
+			controller_ids.begin(), controller_ids.end(),
+			std::inserter(request_ids, request_ids.begin()));
+	}
 }
 
 bool UpdateService::check(const MrwMessage & message, const Response response)
@@ -131,12 +136,16 @@ bool UpdateService::check(const MrwMessage & message, const Response response)
 	if (message.response() == response)
 	{
 		const ControllerId id = message.eid();
+		auto               it = request_ids.find(id);
 
-		request_ids.erase(id);
-		if (request_ids.empty())
+		if (it != request_ids.end())
 		{
-			statechart.complete();
-			return true;
+			request_ids.erase(it);
+			if (request_ids.empty())
+			{
+				statechart.complete();
+				return true;
+			}
 		}
 	}
 	return false;

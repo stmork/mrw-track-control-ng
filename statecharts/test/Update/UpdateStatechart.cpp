@@ -19,9 +19,9 @@ namespace mrw
 		const sc::integer UpdateStatechart::timeout = 250;
 		const sc::integer UpdateStatechart::delay_boot = 3000;
 		const sc::integer UpdateStatechart::delay_reset = 1200;
-		const sc::integer UpdateStatechart::delay_flash_request = 20;
+		const sc::integer UpdateStatechart::delay_flash_request = 200;
 		const sc::integer UpdateStatechart::delay_flash_page = 60;
-		const sc::integer UpdateStatechart::retry = 5;
+		const sc::integer UpdateStatechart::retry = 10;
 
 
 
@@ -97,8 +97,7 @@ namespace mrw
 			case mrw::statechart::UpdateStatechart::Event::_te4_main_region_Flash_Rest_:
 			case mrw::statechart::UpdateStatechart::Event::_te5_main_region_Flash_Check_:
 			case mrw::statechart::UpdateStatechart::Event::_te6_main_region_Wait_Bootloader_:
-			case mrw::statechart::UpdateStatechart::Event::_te7_main_region_Successful_:
-			case mrw::statechart::UpdateStatechart::Event::_te8_main_region_Wait_for_Connect_:
+			case mrw::statechart::UpdateStatechart::Event::_te7_main_region_Wait_for_Connect_:
 				{
 					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::UpdateStatechart::Event::_te0_main_region_Ping_)] = true;
 					break;
@@ -229,11 +228,6 @@ namespace mrw
 					return  (stateConfVector[scvi_main_region_Failed] == mrw::statechart::UpdateStatechart::State::main_region_Failed);
 					break;
 				}
-			case mrw::statechart::UpdateStatechart::State::main_region_Successful :
-				{
-					return  (stateConfVector[scvi_main_region_Successful] == mrw::statechart::UpdateStatechart::State::main_region_Successful);
-					break;
-				}
 			case mrw::statechart::UpdateStatechart::State::main_region_Booted :
 				{
 					return  (stateConfVector[scvi_main_region_Booted] == mrw::statechart::UpdateStatechart::State::main_region_Booted);
@@ -312,7 +306,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Reset'. */
 			timerService->setTimer(this, 1, UpdateStatechart::delay_boot, false);
-			ifaceOperationCallback->init();
+			ifaceOperationCallback->init(1);
 			ifaceOperationCallback->boot();
 		}
 
@@ -321,7 +315,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Flash Request'. */
 			timerService->setTimer(this, 2, UpdateStatechart::delay_flash_request, false);
-			ifaceOperationCallback->init();
+			ifaceOperationCallback->init(1);
 			ifaceOperationCallback->flashRequest();
 		}
 
@@ -346,7 +340,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Flash Check'. */
 			timerService->setTimer(this, 5, UpdateStatechart::delay_boot, false);
-			ifaceOperationCallback->init();
+			ifaceOperationCallback->init(3);
 			ifaceOperationCallback->flashCheck();
 		}
 
@@ -365,14 +359,6 @@ namespace mrw
 			ifaceOperationCallback->fail(error);
 		}
 
-		/* Entry action for state 'Successful'. */
-		void UpdateStatechart::enact_main_region_Successful()
-		{
-			/* Entry action for state 'Successful'. */
-			timerService->setTimer(this, 7, UpdateStatechart::delay_boot, false);
-			ifaceOperationCallback->init();
-		}
-
 		/* Entry action for state 'Booted'. */
 		void UpdateStatechart::enact_main_region_Booted()
 		{
@@ -384,7 +370,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Wait_for_Connect()
 		{
 			/* Entry action for state 'Wait for Connect'. */
-			timerService->setTimer(this, 8, UpdateStatechart::timeout, false);
+			timerService->setTimer(this, 7, UpdateStatechart::timeout, false);
 		}
 
 		/* Exit action for state 'Ping'. */
@@ -436,18 +422,11 @@ namespace mrw
 			timerService->unsetTimer(this, 6);
 		}
 
-		/* Exit action for state 'Successful'. */
-		void UpdateStatechart::exact_main_region_Successful()
-		{
-			/* Exit action for state 'Successful'. */
-			timerService->unsetTimer(this, 7);
-		}
-
 		/* Exit action for state 'Wait for Connect'. */
 		void UpdateStatechart::exact_main_region_Wait_for_Connect()
 		{
 			/* Exit action for state 'Wait for Connect'. */
-			timerService->unsetTimer(this, 8);
+			timerService->unsetTimer(this, 7);
 		}
 
 		/* 'default' enter sequence for state Ping */
@@ -512,14 +491,6 @@ namespace mrw
 			/* 'default' enter sequence for state Failed */
 			enact_main_region_Failed();
 			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::main_region_Failed;
-		}
-
-		/* 'default' enter sequence for state Successful */
-		void UpdateStatechart::enseq_main_region_Successful_default()
-		{
-			/* 'default' enter sequence for state Successful */
-			enact_main_region_Successful();
-			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::main_region_Successful;
 		}
 
 		/* 'default' enter sequence for state Booted */
@@ -608,14 +579,6 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::NO_STATE;
 		}
 
-		/* Default exit sequence for state Successful */
-		void UpdateStatechart::exseq_main_region_Successful()
-		{
-			/* Default exit sequence for state Successful */
-			stateConfVector[0] = mrw::statechart::UpdateStatechart::State::NO_STATE;
-			exact_main_region_Successful();
-		}
-
 		/* Default exit sequence for state Booted */
 		void UpdateStatechart::exseq_main_region_Booted()
 		{
@@ -676,11 +639,6 @@ namespace mrw
 			case mrw::statechart::UpdateStatechart::State::main_region_Failed :
 				{
 					exseq_main_region_Failed();
-					break;
-				}
-			case mrw::statechart::UpdateStatechart::State::main_region_Successful :
-				{
-					exseq_main_region_Successful();
 					break;
 				}
 			case mrw::statechart::UpdateStatechart::State::main_region_Booted :
@@ -895,31 +853,31 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (complete_raised)
+				if (failed_raised)
 				{
 					exseq_main_region_Flash_Check();
-					enseq_main_region_Successful_default();
+					error = 3;
+					enseq_main_region_Failed_default();
 					react(0);
 					transitioned_after = 0;
 				}
 				else
 				{
-					if (failed_raised)
+					if (timeEvents[5])
 					{
 						exseq_main_region_Flash_Check();
-						error = 3;
+						error = 4;
+						timeEvents[5] = false;
 						enseq_main_region_Failed_default();
 						react(0);
 						transitioned_after = 0;
 					}
 					else
 					{
-						if (timeEvents[5])
+						if (complete_raised)
 						{
 							exseq_main_region_Flash_Check();
-							error = 4;
-							timeEvents[5] = false;
-							enseq_main_region_Failed_default();
+							enseq_main_region_Booted_default();
 							react(0);
 							transitioned_after = 0;
 						}
@@ -972,40 +930,6 @@ namespace mrw
 			return transitioned_after;
 		}
 
-		sc::integer UpdateStatechart::main_region_Successful_react(const sc::integer transitioned_before)
-		{
-			/* The reactions of state Successful. */
-			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-				if (complete_raised)
-				{
-					exseq_main_region_Successful();
-					enseq_main_region_Booted_default();
-					react(0);
-					transitioned_after = 0;
-				}
-				else
-				{
-					if (timeEvents[7])
-					{
-						exseq_main_region_Successful();
-						error = 5;
-						timeEvents[7] = false;
-						enseq_main_region_Failed_default();
-						react(0);
-						transitioned_after = 0;
-					}
-				}
-			}
-			/* If no transition was taken then execute local reactions */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				transitioned_after = react(transitioned_before);
-			}
-			return transitioned_after;
-		}
-
 		sc::integer UpdateStatechart::main_region_Booted_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Booted. */
@@ -1036,11 +960,11 @@ namespace mrw
 				}
 				else
 				{
-					if (timeEvents[8])
+					if (timeEvents[7])
 					{
 						exseq_main_region_Wait_for_Connect();
 						error = 7;
-						timeEvents[8] = false;
+						timeEvents[7] = false;
 						enseq_main_region_Failed_default();
 						react(0);
 						transitioned_after = 0;
@@ -1068,7 +992,6 @@ namespace mrw
 			timeEvents[5] = false;
 			timeEvents[6] = false;
 			timeEvents[7] = false;
-			timeEvents[8] = false;
 		}
 
 		void UpdateStatechart::microStep()
@@ -1115,11 +1038,6 @@ namespace mrw
 					main_region_Failed_react(-1);
 					break;
 				}
-			case mrw::statechart::UpdateStatechart::State::main_region_Successful :
-				{
-					main_region_Successful_react(-1);
-					break;
-				}
 			case mrw::statechart::UpdateStatechart::State::main_region_Booted :
 				{
 					main_region_Booted_react(-1);
@@ -1151,7 +1069,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((((((((connected_raised) || (complete_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4])) || (timeEvents[5])) || (timeEvents[6])) || (timeEvents[7])) || (timeEvents[8]));
+			while (((((((((((connected_raised) || (complete_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4])) || (timeEvents[5])) || (timeEvents[6])) || (timeEvents[7]));
 			isExecuting = false;
 		}
 

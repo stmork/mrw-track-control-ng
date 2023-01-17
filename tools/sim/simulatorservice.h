@@ -41,6 +41,7 @@ private:
 	void    setSwitchState(mrw::model::Device * device, const mrw::can::SwitchState switch_state);
 	uint8_t getSwitchState(mrw::model::Device * device);
 	uint8_t occupation(mrw::model::Device * device);
+	void    bootSequence(const mrw::can::ControllerId id);
 };
 
 #endif
