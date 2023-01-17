@@ -5,13 +5,14 @@
 
 TEMPLATE = subdirs
 SUBDIRS  = \
-	OperationMode\
+	OperationMode \
 	Route \
-	Section\
-	Switch\
-	Signal\
-	SignalController\
-	Tracker\
+	Section \
+	Switch \
+	Signal \
+	SignalController \
+	Tracker \
+	Config \
 	Update
 
 OperationMode.file    = OperatingMode/MRW-Test-OpMode.pro
@@ -21,6 +22,7 @@ Switch.file           = Switch/MRW-Test-Switch.pro
 Signal.file           = Signal/MRW-Test-Signal.pro
 SignalController.file = SignalController/MRW-Test-SignalController.pro
 Tracker.file          = Tracker/MRW-Test-Tracker.pro
+Config.file           = Config/MRW-Test-Config.pro
 Update.file           = Update/MRW-Test-Update.pro
 
 QMAKE_CLEAN          += gtest-*.xml

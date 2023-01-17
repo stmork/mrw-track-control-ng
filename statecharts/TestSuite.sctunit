@@ -14,5 +14,6 @@ testsuite TestSuite
 	mrw.test.SectionTest,
 	mrw.test.RouteTest,
 	mrw.test.TrackerTest,
+	mrw.test.ConfigTest,
 	mrw.test.UpdateTest
 }

@@ -10,6 +10,7 @@ Signal/MRW-Test-Signal --gtest_output=xml:gtest-signal.xml
 SignalController/MRW-Test-SignalController --gtest_output=xml:gtest-signalcontroller.xml
 Switch/MRW-Test-Switch --gtest_output=xml:gtest-switch.xml
 Tracker/MRW-Test-Tracker --gtest_output=xml:gtest-tracker.xml
+Config/MRW-Test-Config --gtest_output=xml:gtest-config.xml
 Update/MRW-Test-Update --gtest_output=xml:gtest-updater.xml
 
 echo Completed.

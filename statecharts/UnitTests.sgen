@@ -163,6 +163,28 @@ GeneratorModel for sctunit::cpp11
 		}
 	}
 
+	test mrw.test.ConfigTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER + "/Config"
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
 	test mrw.test.UpdateTest
 	{
 		feature LicenseHeader

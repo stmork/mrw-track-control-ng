@@ -1,0 +1,165 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+//
+
+package mrw.test
+
+testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
+{
+	@Test
+	operation doStart()
+	{
+		enter
+		assert  is_active
+		assert !is_final
+		assert active (mrw.^statechart.ConfigStatechart.main_region.Wait_for_Connect)
+
+		mock quit
+		mock fail
+		mock configure
+		mock hasMore returns (true)
+	}
+
+
+	@Test
+	operation timeoutConnect()
+	{
+		// Given
+		doStart()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert active (mrw.^statechart.ConfigStatechart.main_region.Failed)
+		assert called fail
+	}
+
+	@Test
+	operation firstController()
+	{
+		// Given
+		doStart()
+		mock hasMore returns (true)
+
+		// When
+		raise connected
+
+		// Then
+		assert active (mrw.^statechart.ConfigStatechart.main_region.Configure)
+		assert idx == 0
+		assert called hasMore
+		assert called configure
+	}
+
+	@Test
+	operation secondController()
+	{
+		// Given
+		firstController()
+		mock hasMore returns (true)
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.ConfigStatechart.main_region.Configure)
+		assert idx == 1
+		assert called hasMore
+		assert called configure
+	}
+
+	@Test
+	operation lastController()
+	{
+		// Given
+		secondController()
+		mock hasMore returns (false)
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.ConfigStatechart.main_region.Wait_for_Boot)
+		assert idx == 2
+		assert called hasMore
+		assert !called configure
+	}
+
+	@Test
+	operation booted()
+	{
+		// Given
+		lastController()
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.ConfigStatechart.main_region.Booted)
+		assert idx == 2
+		assert  called quit
+		assert !called fail
+	}
+
+	@Test
+	operation timeoutConfig()
+	{
+		// Given
+		lastController()
+
+		// When
+		proceed 4000 ms
+
+		// Then
+		assert active (mrw.^statechart.ConfigStatechart.main_region.Failed)
+		assert idx == 2
+		assert !called quit
+		assert  called fail
+	}
+
+	@Test
+	operation doQuit()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		doStart()
+		exit
+		assert !is_active
+
+		firstController()
+		exit
+		assert !is_active
+
+		secondController()
+		exit
+		assert !is_active
+
+		lastController()
+		exit
+		assert !is_active
+
+		booted()
+		exit
+		assert !is_active
+	}
+
+	@Test
+	operation doFail()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		timeoutConfig()
+		exit
+		assert !is_active
+	}
+}
