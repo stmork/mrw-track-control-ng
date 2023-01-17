@@ -19,6 +19,7 @@ namespace mrw
 		const sc::integer ConfigStatechart::timeout = 1000;
 		const sc::integer ConfigStatechart::flashtime = 200;
 		const sc::integer ConfigStatechart::resettime = 3500;
+		const sc::integer ConfigStatechart::writetime = 50;
 
 
 
@@ -29,7 +30,6 @@ namespace mrw
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
 			connected_raised(false),
-			sent_raised(false),
 			completed_raised(false),
 			failed_raised(false)
 		{
@@ -76,11 +76,6 @@ namespace mrw
 					connected_raised = true;
 					break;
 				}
-			case mrw::statechart::ConfigStatechart::Event::sent:
-				{
-					sent_raised = true;
-					break;
-				}
 			case mrw::statechart::ConfigStatechart::Event::completed:
 				{
 					completed_raised = true;
@@ -94,7 +89,8 @@ namespace mrw
 
 
 			case mrw::statechart::ConfigStatechart::Event::_te0_main_region_Wait_for_Connect_:
-			case mrw::statechart::ConfigStatechart::Event::_te1_main_region_Wait_for_Boot_:
+			case mrw::statechart::ConfigStatechart::Event::_te1_main_region_Configure_:
+			case mrw::statechart::ConfigStatechart::Event::_te2_main_region_Wait_for_Boot_:
 				{
 					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::ConfigStatechart::Event::_te0_main_region_Wait_for_Connect_)] = true;
 					break;
@@ -110,13 +106,6 @@ namespace mrw
 		void mrw::statechart::ConfigStatechart::connected()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::connected));
-			runCycle();
-		}
-
-
-		void mrw::statechart::ConfigStatechart::sent()
-		{
-			incomingEventQueue.push_back(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::sent));
 			runCycle();
 		}
 
@@ -241,6 +230,11 @@ namespace mrw
 			return resettime;
 		}
 
+		sc::integer ConfigStatechart::getWritetime()
+		{
+			return writetime;
+		}
+
 		sc::integer ConfigStatechart::getIdx() const
 		{
 			return idx;
@@ -264,6 +258,7 @@ namespace mrw
 		void ConfigStatechart::enact_main_region_Configure()
 		{
 			/* Entry action for state 'Configure'. */
+			timerService->setTimer(this, 1, ConfigStatechart::writetime, false);
 			ifaceOperationCallback->configure(idx);
 		}
 
@@ -271,7 +266,7 @@ namespace mrw
 		void ConfigStatechart::enact_main_region_Wait_for_Boot()
 		{
 			/* Entry action for state 'Wait for Boot'. */
-			timerService->setTimer(this, 1, ((ConfigStatechart::flashtime * idx) + ConfigStatechart::resettime), false);
+			timerService->setTimer(this, 2, ((ConfigStatechart::flashtime * idx) + ConfigStatechart::resettime), false);
 			ifaceOperationCallback->booting();
 		}
 
@@ -300,6 +295,7 @@ namespace mrw
 		void ConfigStatechart::exact_main_region_Configure()
 		{
 			/* Exit action for state 'Configure'. */
+			timerService->unsetTimer(this, 1);
 			idx++;
 		}
 
@@ -307,7 +303,7 @@ namespace mrw
 		void ConfigStatechart::exact_main_region_Wait_for_Boot()
 		{
 			/* Exit action for state 'Wait for Boot'. */
-			timerService->unsetTimer(this, 1);
+			timerService->unsetTimer(this, 2);
 		}
 
 		/* 'default' enter sequence for state Wait for Connect */
@@ -499,9 +495,10 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (sent_raised)
+				if (timeEvents[1])
 				{
 					exseq_main_region_Configure();
+					timeEvents[1] = false;
 					react_main_region__choice_0();
 					transitioned_after = 0;
 				}
@@ -520,10 +517,10 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (timeEvents[1])
+				if (timeEvents[2])
 				{
 					exseq_main_region_Wait_for_Boot();
-					timeEvents[1] = false;
+					timeEvents[2] = false;
 					enseq_main_region_Failed_default();
 					react(0);
 					transitioned_after = 0;
@@ -580,11 +577,11 @@ namespace mrw
 		void ConfigStatechart::clearInEvents()
 		{
 			connected_raised = false;
-			sent_raised = false;
 			completed_raised = false;
 			failed_raised = false;
 			timeEvents[0] = false;
 			timeEvents[1] = false;
+			timeEvents[2] = false;
 		}
 
 		void ConfigStatechart::microStep()
@@ -637,7 +634,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((connected_raised) || (sent_raised)) || (completed_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while ((((((connected_raised) || (completed_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
 			isExecuting = false;
 		}
 

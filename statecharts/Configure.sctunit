@@ -62,7 +62,7 @@ testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
 		mock hasMore returns (true)
 
 		// When
-		raise sent
+		proceed writetime ms
 
 		// Then
 		assert active (mrw.^statechart.ConfigStatechart.main_region.Configure)
@@ -79,7 +79,7 @@ testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
 		mock hasMore returns (false)
 
 		// When
-		raise sent
+		proceed writetime ms
 
 		// Then
 		assert active (mrw.^statechart.ConfigStatechart.main_region.Wait_for_Boot)
@@ -111,7 +111,7 @@ testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
 		lastController()
 
 		// When
-		proceed 4000 ms
+		proceed 5000 ms
 
 		// Then
 		assert active (mrw.^statechart.ConfigStatechart.main_region.Failed)

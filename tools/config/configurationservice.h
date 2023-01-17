@@ -24,6 +24,9 @@ class ConfigurationService :
 	mrw::model::ModelRailway         *         model = nullptr;
 	std::unordered_set<mrw::can::ControllerId> controllers;
 
+	size_t                                     config_count = 0;
+	size_t                                     device_count = 0;
+
 public:
 	explicit ConfigurationService(
 		mrw::model::ModelRepository & repo,

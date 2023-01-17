@@ -18,6 +18,7 @@
 #include <util/constantenumerator.h>
 #include <util/method.h>
 #include <util/stringutil.h>
+#include <model/assemblypart.h>
 #include <model/module.h>
 #include <model/device.h>
 #include <model/position.h>
@@ -27,7 +28,6 @@ namespace mrw::model
 	class ModelRailway;
 	class Region;
 	class SectionModule;
-	class AssemblyPart;
 	class Signal;
 
 	enum SectionState

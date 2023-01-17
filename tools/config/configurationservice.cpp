@@ -20,6 +20,15 @@ ConfigurationService::ConfigurationService(
 	MrwBusService(repo.interface(), repo.plugin(), parent),
 	statechart(nullptr)
 {
+	std::vector<Device *> devices;
+
+	model = repo;
+	if (model != nullptr)
+	{
+		model->parts<Device>(devices);
+		device_count = devices.size();
+	}
+
 	connect(
 		this, &MrwBusService::connected,
 		&statechart, &ConfigStatechart::connected,
@@ -30,8 +39,6 @@ ConfigurationService::ConfigurationService(
 
 	Q_ASSERT(statechart.check());
 	statechart.enter();
-
-	model = repo;
 }
 
 ConfigurationService::~ConfigurationService()
@@ -51,14 +58,34 @@ void ConfigurationService::process(const MrwMessage & message)
 {
 	if (message.isResponse())
 	{
-		if ((message.command() == RESET) && (message.response() == MSG_BOOTED))
-		{
-			const size_t count = controllers.erase(message.eid());
+		const Command  cmd      = message.command();
+		const Response response = message.response();
 
-			if ((count > 0) && (controllers.size() == 0))
+		switch (cmd)
+		{
+		case RESET:
+			if (response == MSG_BOOTED)
 			{
-				statechart.completed();
+				const size_t count = controllers.erase(message.eid());
+
+				if ((count > 0) && (controllers.size() == 0))
+				{
+					statechart.completed();
+				}
 			}
+			break;
+
+		case CFGEND:
+			if ((response == MSG_OK) && (message.size() >= 1))
+			{
+				const size_t count = message[0];
+
+				config_count += count;
+			}
+			break;
+
+		default:
+			break;
 		}
 	}
 }
@@ -84,7 +111,6 @@ void ConfigurationService::configure(sc::integer idx)
 	const Controller    *   controller = model->controller(idx);
 	const ControllerId      id = controller->id();
 
-
 	qDebug("---------------------- %u", id);
 	controllers.insert(id);
 	controller->configure(messages);
@@ -97,7 +123,6 @@ void ConfigurationService::configure(sc::integer idx)
 #else
 	sendConfig(id, messages);
 #endif
-	statechart.sent();
 }
 
 bool ConfigurationService::hasMore(sc::integer idx)
@@ -112,7 +137,9 @@ void ConfigurationService::booting()
 
 void ConfigurationService::quit()
 {
-	qInfo("Booted.");
+	qInfo("Configured devices: %3zu", config_count);
+	qInfo("Assembly parts:     %3zu", device_count);
+	qInfo("Model railway facility ready.");
 	QCoreApplication::quit();
 }
 

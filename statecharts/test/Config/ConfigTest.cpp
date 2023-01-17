@@ -644,7 +644,7 @@ namespace mrw
 
 			hasMoreMock->setDefaultBehavior(&HasMoreMock::hasMore1);
 
-			statechart->raiseSent();
+			runner->proceed_time(statechart->getWritetime());
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::ConfigStatechart::State::main_region_Configure));
 
@@ -689,7 +689,7 @@ namespace mrw
 
 			hasMoreMock->setDefaultBehavior(&HasMoreMock::hasMore2);
 
-			statechart->raiseSent();
+			runner->proceed_time(statechart->getWritetime());
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::ConfigStatechart::State::main_region_Wait_for_Boot));
 
@@ -787,7 +787,7 @@ namespace mrw
 		{
 			lastController();
 
-			runner->proceed_time(4000);
+			runner->proceed_time(5000);
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::ConfigStatechart::State::main_region_Failed));
 

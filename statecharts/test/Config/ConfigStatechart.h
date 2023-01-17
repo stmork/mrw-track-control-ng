@@ -67,11 +67,11 @@ namespace mrw
 			{
 				NO_EVENT,
 				connected,
-				sent,
 				completed,
 				failed,
 				_te0_main_region_Wait_for_Connect_,
-				_te1_main_region_Wait_for_Boot_
+				_te1_main_region_Configure_,
+				_te2_main_region_Wait_for_Boot_
 			};
 
 			class EventInstance
@@ -83,8 +83,6 @@ namespace mrw
 			};
 			/*! Raises the in event 'connected' of default interface scope. */
 			void raiseConnected();
-			/*! Raises the in event 'sent' of default interface scope. */
-			void raiseSent();
 			/*! Raises the in event 'completed' of default interface scope. */
 			void raiseCompleted();
 			/*! Raises the in event 'failed' of default interface scope. */
@@ -101,6 +99,9 @@ namespace mrw
 
 			/*! Gets the value of the variable 'resettime' that is defined in the default interface scope. */
 			static sc::integer getResettime() ;
+
+			/*! Gets the value of the variable 'writetime' that is defined in the default interface scope. */
+			static sc::integer getWritetime() ;
 
 			/*! Gets the value of the variable 'idx' that is defined in the default interface scope. */
 			sc::integer getIdx() const;
@@ -169,7 +170,7 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 2;
+			static const sc::integer timeEventsCount = 3;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
@@ -193,6 +194,7 @@ namespace mrw
 			static const sc::integer timeout;
 			static const sc::integer flashtime;
 			static const sc::integer resettime;
+			static const sc::integer writetime;
 			sc::integer idx;
 
 
@@ -251,9 +253,6 @@ namespace mrw
 
 			/*! Indicates event 'connected' of default interface scope is active. */
 			bool connected_raised;
-
-			/*! Indicates event 'sent' of default interface scope is active. */
-			bool sent_raised;
 
 			/*! Indicates event 'completed' of default interface scope is active. */
 			bool completed_raised;
