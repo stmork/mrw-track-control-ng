@@ -14,6 +14,7 @@ SUBDIRS  = \
 	test \
 	test-sct \
 	ping \
+	reset \
 	proxy \
 	reader \
 	config \
@@ -32,6 +33,7 @@ ui.file                = ui/MRW-UI.pro
 test.file              = test/MRW-Test.pro
 test-sct.file          = statecharts/test/MRW-Test-Statecharts.pro
 ping.file              = tools/ping/MRW-Ping.pro
+reset.file             = tools/reset/MRW-Reset.pro
 proxy.file             = tools/proxy/MRW-Proxy.pro
 reader.file            = tools/reader/MRW-Reader.pro
 config.file            = tools/config/MRW-Configure.pro
@@ -47,6 +49,7 @@ test.depends           = util can model
 ctrl.depends           = model can util
 ui.depends             = ctrl
 ping.depends           = test
+reset.depends          = test
 proxy.depends          = test
 reader.depends         = test
 config.depends         = test

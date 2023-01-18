@@ -17,7 +17,7 @@ using namespace mrw::model;
 ConfigurationService::ConfigurationService(
 	mrw::model::ModelRepository & repo,
 	QObject           *           parent) :
-	MrwBusService(repo.interface(), repo.plugin(), parent),
+	MrwBusService(repo.interface(), repo.plugin(), parent, false),
 	statechart(nullptr)
 {
 	std::vector<Device *> devices;
