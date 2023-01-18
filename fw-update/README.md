@@ -16,7 +16,7 @@ This diagram shows the following sequence diagram:
 
 ```mermaid
 sequenceDiagram
-	Participant T as Tool
+	Participant T as MRW-Update
 	Participant F as Firmware
 
 	Note right of T: Collect all CAN nodes.

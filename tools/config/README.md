@@ -12,7 +12,7 @@ This diagram shows the following sequence diagram:
 
 ```mermaid
 sequenceDiagram
-	Participant T as Tool
+	Participant T as MRW-Configure
 	Participant F as Firmware
 
 	Note right of T: CAN node collection is not needed because the model knows the amount.
@@ -30,7 +30,7 @@ sequenceDiagram
 	F ->> -T: CFGEND: MSG_OK
 
 	activate F
-	Note right of T: Ressetting occurs.
+	Note right of T: Resetting occurs.
 
 	F ->> +T: GETVER: MSG_OK
 	F ->> -T: RESET: MSG_BOOTED

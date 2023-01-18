@@ -10,7 +10,7 @@ This diagram shows the following sequence diagram:
 
 ```mermaid
 sequenceDiagram
-	Participant T as Tool
+	Participant T as MRW-Reset
 	Participant F as Firmware
 
 	Note right of T: Request reset.
