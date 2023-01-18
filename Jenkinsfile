@@ -50,19 +50,11 @@ pipeline
 			}
 		}
 
-		stage ('Test SCT')
+		stage ('Test')
 		{
 			steps
 			{
-				sh 'make sct-unit'
-			}
-		}
-
-		stage ('Test units')
-		{
-			steps
-			{
-				sh 'make valgrind'
+				sh 'make sct-unit valgrind'
 			}
 		}
 
