@@ -473,7 +473,6 @@ namespace mrw
 					if (timeEvents[0])
 					{
 						exseq_main_region_Wait_for_Connect();
-						ifaceOperationCallback->fail();
 						timeEvents[0] = false;
 						enseq_main_region_Failed_default();
 						react(0);

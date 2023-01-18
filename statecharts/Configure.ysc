@@ -7,7 +7,7 @@
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_1i6wvpZpEe2UoL03hwgeFg" specification="entry / idx = 0" name="Wait for Connect" incomingTransitions="_1i6wvZZpEe2UoL03hwgeFg">
         <outgoingTransitions xmi:id="_1i6wwZZpEe2UoL03hwgeFg" specification="connected" target="_2CkrsJZqEe2UoL03hwgeFg"/>
-        <outgoingTransitions xmi:id="_LVnA8JZqEe2UoL03hwgeFg" specification="after timeout ms / fail" target="_GPzIQJZrEe2UoL03hwgeFg"/>
+        <outgoingTransitions xmi:id="_LVnA8JZqEe2UoL03hwgeFg" specification="after timeout ms" target="_GPzIQJZrEe2UoL03hwgeFg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_1i6wyJZpEe2UoL03hwgeFg" specification="entry / configure(idx)&#xA;exit / idx++" name="Configure" incomingTransitions="_3RXaEJZqEe2UoL03hwgeFg">
         <outgoingTransitions xmi:id="_1i6wy5ZpEe2UoL03hwgeFg" specification="after writetime ms" target="_2CkrsJZqEe2UoL03hwgeFg"/>
