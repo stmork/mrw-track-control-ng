@@ -15,6 +15,14 @@
 #include <can/mrwbusservice.h>
 #include <statecharts/UpdateStatechart.h>
 
+/**
+ * This class provides the behaviour of the firmware update process. It reads
+ * a HEX file containing the firmware and sends it via CAN bus to the CAN
+ * controller for flashing. The main control is achieved by the
+ * mrw::statemachine::UpdateStatechart.
+ *
+ * @img html UpdateStatechart_0.png
+ */
 class UpdateService :
 	public mrw::can::MrwBusService,
 	public mrw::statechart::UpdateStatechart::OperationCallback
