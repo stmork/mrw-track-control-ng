@@ -54,3 +54,6 @@ install.path  = $$(PREFIX)/usr/bin
 install.files = $$TARGET
 
 INSTALLS        += install
+
+RESOURCES += \
+	resources.qrc
