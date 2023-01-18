@@ -28,7 +28,7 @@ static int testUtil()
 	TestUtil    test;
 	QStringList args
 	{
-		"MRW-Test", "-o", "qtest-util.xml", "-xml"
+		"MRW-Test", "-o", "qtest-util.xml", "-xunitxml"
 	};
 
 	return QTest::qExec(&test, args);
@@ -39,7 +39,7 @@ static int testCan()
 	TestCan        test;
 	QStringList    args
 	{
-		"MRW-Test", "-o", "qtest-can.xml", "-xml"
+		"MRW-Test", "-o", "qtest-can.xml", "-xunitxml"
 	};
 
 	return QTest::qExec(&test, args);
@@ -50,7 +50,7 @@ static int testModel()
 	TestModel   test("Test-Railway");
 	QStringList args
 	{
-		"MRW-Test", "-o", "qtest-model.xml", "-xml"
+		"MRW-Test", "-o", "qtest-model.xml", "-xunitxml"
 	};
 
 	return QTest::qExec(&test, args);
@@ -61,7 +61,7 @@ static int testSimpleSwitch()
 	TestSwitch  test;
 	QStringList args
 	{
-		"MRW-Test", "-o", "qtest-switch.xml", "-xml"
+		"MRW-Test", "-o", "qtest-switch.xml", "-xunitxml"
 	};
 
 	return QTest::qExec(&test, args);
@@ -72,7 +72,7 @@ static int testSimpleLight()
 	TestLight   test;
 	QStringList args
 	{
-		"MRW-Test", "-o", "qtest-light.xml", "-xml"
+		"MRW-Test", "-o", "qtest-light.xml", "-xunitxml"
 	};
 
 	return QTest::qExec(&test, args);
@@ -83,7 +83,7 @@ static int testUnknown()
 	TestUnknown    test;
 	QStringList    args
 	{
-		"MRW-Test", "-o", "qtest-unknown.xml", "-xml"
+		"MRW-Test", "-o", "qtest-unknown.xml", "-xunitxml"
 	};
 
 	return QTest::qExec(&test, args);
@@ -94,7 +94,7 @@ static int testNumbering()
 	TestNumbering  test;
 	QStringList    args
 	{
-		"MRW-Test", "-o", "qtest-numbering.xml", "-xml"
+		"MRW-Test", "-o", "qtest-numbering.xml", "-xunitxml"
 	};
 
 	return QTest::qExec(&test, args);
@@ -105,7 +105,7 @@ static int testFlankSwitch()
 	TestFlankSwitch test;
 	QStringList     args
 	{
-		"MRW-Test", "-o", "qtest-flank.xml", "-xml"
+		"MRW-Test", "-o", "qtest-flank.xml", "-xunitxml"
 	};
 
 	return QTest::qExec(&test, args);
@@ -116,7 +116,7 @@ static int testRouting()
 	TestRouting     test;
 	QStringList     args
 	{
-		"MRW-Test", "-o", "qtest-route.xml", "-xml"
+		"MRW-Test", "-o", "qtest-route.xml", "-xunitxml"
 	};
 
 	return QTest::qExec(&test, args);

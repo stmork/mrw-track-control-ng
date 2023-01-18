@@ -55,7 +55,8 @@ pipeline
 			steps
 			{
 				sh 'make sct-unit valgrind'
-				junit 'qtest-*.xml'
+
+				xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: 'qtest-*.xml'), stopProcessingIfError: false]
 
 //				xunit checksName: 'Memory Check', tools: [
 //					Valgrind(excludesPattern: '', pattern: 'valgrind*.xml', stopProcessingIfError: false)]
