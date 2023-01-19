@@ -233,11 +233,6 @@ namespace mrw
 			return max;
 		}
 
-		void ConfigStatechart::setMax(sc::integer max_)
-		{
-			this->max = max_;
-		}
-
 		void ConfigStatechart::setOperationCallback(OperationCallback * operationCallback)
 		{
 			ifaceOperationCallback = operationCallback;

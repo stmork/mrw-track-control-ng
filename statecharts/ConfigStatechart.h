@@ -105,9 +105,6 @@ namespace mrw
 			/*! Gets the value of the variable 'max' that is defined in the default interface scope. */
 			sc::integer getMax() const;
 
-			/*! Sets the value of the variable 'max' that is defined in the default interface scope. */
-			void setMax(sc::integer max);
-
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
 			{
