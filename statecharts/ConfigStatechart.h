@@ -90,17 +90,23 @@ namespace mrw
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
 			static sc::integer getTimeout() ;
 
+			/*! Gets the value of the variable 'writetime' that is defined in the default interface scope. */
+			static sc::integer getWritetime() ;
+
 			/*! Gets the value of the variable 'flashtime' that is defined in the default interface scope. */
 			static sc::integer getFlashtime() ;
 
 			/*! Gets the value of the variable 'resettime' that is defined in the default interface scope. */
 			static sc::integer getResettime() ;
 
-			/*! Gets the value of the variable 'writetime' that is defined in the default interface scope. */
-			static sc::integer getWritetime() ;
-
 			/*! Gets the value of the variable 'idx' that is defined in the default interface scope. */
 			sc::integer getIdx() const;
+
+			/*! Gets the value of the variable 'max' that is defined in the default interface scope. */
+			sc::integer getMax() const;
+
+			/*! Sets the value of the variable 'max' that is defined in the default interface scope. */
+			void setMax(sc::integer max);
 
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
@@ -108,7 +114,7 @@ namespace mrw
 			public:
 				virtual ~OperationCallback() = 0;
 
-				virtual void configure(sc::integer idx) = 0;
+				virtual sc::integer configure(sc::integer idx) = 0;
 
 				virtual bool hasMore(sc::integer idx) = 0;
 
@@ -196,10 +202,13 @@ namespace mrw
 			ConfigStatechart & operator=(const ConfigStatechart &);
 
 			static const sc::integer timeout;
+			static const sc::integer writetime;
 			static const sc::integer flashtime;
 			static const sc::integer resettime;
-			static const sc::integer writetime;
 			sc::integer idx;
+			sc::integer max;
+
+			sc::integer written;
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.

@@ -43,7 +43,7 @@ private:
 		const mrw::can::ControllerId              id,
 		const std::vector<mrw::can::MrwMessage> & messages);
 
-	void configure(sc::integer idx) override;
+	sc::integer configure(sc::integer idx) override;
 	bool hasMore(sc::integer idx) override;
 
 	void booting() override;

@@ -109,7 +109,7 @@ void ConfigurationService::sendConfig(
 	write(cfg_end);
 }
 
-void ConfigurationService::configure(sc::integer idx)
+sc::integer ConfigurationService::configure(sc::integer idx)
 {
 	std::vector<MrwMessage> messages;
 	const Controller    *   controller = model->controller(idx);
@@ -128,6 +128,8 @@ void ConfigurationService::configure(sc::integer idx)
 #else
 	sendConfig(id, messages);
 #endif
+
+	return messages.size();
 }
 
 bool ConfigurationService::hasMore(sc::integer idx)
@@ -146,8 +148,9 @@ void ConfigurationService::booting()
 
 void ConfigurationService::quit()
 {
-	qInfo("Configured devices: %3zu", config_count);
-	qInfo("Assembly parts:     %3zu", device_count);
+	qInfo("Configured devices:   %3zu", config_count);
+	qInfo("Max devices per node: %3d", statechart.getMax());
+	qInfo("Assembly parts:       %3zu", device_count);
 	qInfo("Model railway facility ready.");
 	QCoreApplication::quit();
 }

@@ -17,15 +17,17 @@ namespace mrw
 	{
 
 		const sc::integer ConfigStatechart::timeout = 1000;
+		const sc::integer ConfigStatechart::writetime = 50;
 		const sc::integer ConfigStatechart::flashtime = 200;
 		const sc::integer ConfigStatechart::resettime = 3500;
-		const sc::integer ConfigStatechart::writetime = 50;
 
 
 
 		ConfigStatechart::ConfigStatechart(QObject * parent) :
 			QObject(parent),
 			idx(0),
+			max(0),
+			written(0),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
@@ -207,6 +209,11 @@ namespace mrw
 			return timeout;
 		}
 
+		sc::integer ConfigStatechart::getWritetime()
+		{
+			return writetime;
+		}
+
 		sc::integer ConfigStatechart::getFlashtime()
 		{
 			return flashtime;
@@ -217,14 +224,19 @@ namespace mrw
 			return resettime;
 		}
 
-		sc::integer ConfigStatechart::getWritetime()
-		{
-			return writetime;
-		}
-
 		sc::integer ConfigStatechart::getIdx() const
 		{
 			return idx;
+		}
+
+		sc::integer ConfigStatechart::getMax() const
+		{
+			return max;
+		}
+
+		void ConfigStatechart::setMax(sc::integer max_)
+		{
+			this->max = max_;
 		}
 
 		void ConfigStatechart::setOperationCallback(OperationCallback * operationCallback)
@@ -239,6 +251,7 @@ namespace mrw
 			/* Entry action for state 'Wait for Connect'. */
 			timerService->setTimer(this, 0, ConfigStatechart::timeout, false);
 			idx = 0;
+			max = 0;
 		}
 
 		/* Entry action for state 'Configure'. */
@@ -246,14 +259,15 @@ namespace mrw
 		{
 			/* Entry action for state 'Configure'. */
 			timerService->setTimer(this, 1, ConfigStatechart::writetime, false);
-			ifaceOperationCallback->configure(idx);
+			written = ifaceOperationCallback->configure(idx);
+			max = (written) > (max) ? written : max;
 		}
 
 		/* Entry action for state 'Wait for Boot'. */
 		void ConfigStatechart::enact_main_region_Wait_for_Boot()
 		{
 			/* Entry action for state 'Wait for Boot'. */
-			timerService->setTimer(this, 2, ((ConfigStatechart::flashtime * idx) + ConfigStatechart::resettime), false);
+			timerService->setTimer(this, 2, ((ConfigStatechart::flashtime * max) + ConfigStatechart::resettime), false);
 			ifaceOperationCallback->booting();
 		}
 

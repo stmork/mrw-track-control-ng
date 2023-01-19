@@ -7,6 +7,9 @@ package mrw.test
 
 testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
 {
+	const dvc_count_1 : integer = 22
+	const dvc_count_2 : integer = 11
+
 	@Test
 	operation doStart()
 	{
@@ -18,7 +21,7 @@ testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
 		mock booting
 		mock quit
 		mock fail
-		mock configure
+		mock configure returns (0)
 		mock hasMore(idx) returns (true)
 	}
 
@@ -43,6 +46,7 @@ testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
 		// Given
 		doStart()
 		mock hasMore returns (true)
+		mock configure returns (dvc_count_1)
 
 		// When
 		raise connected
@@ -50,6 +54,7 @@ testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
 		// Then
 		assert active (mrw.^statechart.ConfigStatechart.main_region.Configure)
 		assert idx == 0
+		assert max == dvc_count_1
 		assert called hasMore
 		assert called configure
 	}
@@ -60,6 +65,7 @@ testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
 		// Given
 		firstController()
 		mock hasMore returns (true)
+		mock configure returns (dvc_count_2)
 
 		// When
 		proceed writetime ms
@@ -67,6 +73,7 @@ testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
 		// Then
 		assert active (mrw.^statechart.ConfigStatechart.main_region.Configure)
 		assert idx == 1
+		assert max == dvc_count_1
 		assert called hasMore
 		assert called configure
 	}
@@ -111,7 +118,13 @@ testclass ConfigTest for statechart mrw.^statechart.ConfigStatechart
 		lastController()
 
 		// When
-		proceed 5000 ms
+		proceed resettime ms
+
+		// Then
+		assert active (mrw.^statechart.ConfigStatechart.main_region.Wait_for_Boot)
+
+		// When
+		proceed max * flashtime ms
 
 		// Then
 		assert active (mrw.^statechart.ConfigStatechart.main_region.Failed)
