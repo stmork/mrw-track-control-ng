@@ -39,6 +39,8 @@ ConfigurationService::ConfigurationService(
 
 	Q_ASSERT(statechart.check());
 	statechart.enter();
+
+	can_device->connectDevice();
 }
 
 ConfigurationService::~ConfigurationService()
@@ -68,6 +70,8 @@ void ConfigurationService::process(const MrwMessage & message)
 			{
 				const size_t count = controllers.erase(message.eid());
 
+				qDebug("---------------------- (%zu controllers left)",
+					controllers.size());
 				if ((count > 0) && (controllers.size() == 0))
 				{
 					statechart.completed();
@@ -111,8 +115,9 @@ void ConfigurationService::configure(sc::integer idx)
 	const Controller    *   controller = model->controller(idx);
 	const ControllerId      id = controller->id();
 
-	qDebug("---------------------- %u", id);
 	controllers.insert(id);
+	qDebug("---------------------- %u (%zu unprocessed controllers)",
+		   id, controllers.size());
 	controller->configure(messages);
 
 #if 0
@@ -133,6 +138,10 @@ bool ConfigurationService::hasMore(sc::integer idx)
 void ConfigurationService::booting()
 {
 	qInfo("Configuration completed and booting.");
+	if (controllers.size() == 0)
+	{
+		statechart.completed();
+	}
 }
 
 void ConfigurationService::quit()

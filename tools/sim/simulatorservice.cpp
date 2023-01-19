@@ -100,6 +100,14 @@ void SimulatorService::controller(
 		append(response, 3);
 		break;
 
+	case CFGBGN:
+		device_count = 0;
+		break;
+
+	case CFGEND:
+		response.append(device_count);
+		break;
+
 	case FLASH_DATA:
 		answer = false;
 		break;
@@ -161,6 +169,23 @@ void SimulatorService::device(const MrwMessage & message)
 
 	case GETRBS:
 		response.append(occupation(device));
+		break;
+
+	case CFGLGT:
+	case CFGRAI:
+	case CFGSWN:
+	case CFGSWO:
+	case CFGML2:
+	case CFGML3:
+	case CFGML4:
+	case CFGPL2:
+	case CFGPL3:
+	case CFGSL2:
+	case CFGMF2:
+	case CFGMF3:
+	case CFGPF2:
+	case CFGPF3:
+		device_count++;
 		break;
 
 	default:

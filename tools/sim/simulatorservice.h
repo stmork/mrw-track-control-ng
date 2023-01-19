@@ -17,6 +17,7 @@ class SimulatorService : public mrw::can::MrwBusService
 	Q_OBJECT
 
 	mrw::model::ModelRailway * model = nullptr;
+	unsigned                   device_count = 0;
 
 public:
 	SimulatorService() = delete;
