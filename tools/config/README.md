@@ -24,7 +24,7 @@ sequenceDiagram
 		F ->> -T: CFGxyz: MSG_OK
 	end
 
-	Note right of T: Flashing is complete now validate checksum.
+	Note right of T: Configuration is complete.
 	T ->> +F: CFGEND
 
 	F ->> -T: CFGEND: MSG_OK
