@@ -117,7 +117,7 @@ void ConfigurationService::configure(sc::integer idx)
 
 	controllers.insert(id);
 	qDebug("---------------------- %u (%zu unprocessed controllers)",
-		   id, controllers.size());
+		id, controllers.size());
 	controller->configure(messages);
 
 #if 0
