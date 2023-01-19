@@ -599,7 +599,7 @@ void TestModel::testSectionConfig()
 		{
 			const MrwMessage msg = section->configMsg(pin);
 
-			QCOMPARE(msg.size(),    2);
+			QCOMPARE(msg.size(),    2u);
 			QCOMPARE(msg.command(), CFGRAI);
 			QCOMPARE(msg[0], pin);
 			QCOMPARE(msg[1], 7 - pin);
@@ -622,7 +622,7 @@ void TestModel::testSwitchConfig()
 		{
 			const MrwMessage msg = part->configMsg(pin);
 
-			QCOMPARE(msg.size(),    4);
+			QCOMPARE(msg.size(),    4u);
 			QCOMPARE(msg.command(), CFGSWN);
 			for (unsigned i = 0; i < 2; i++)
 			{
@@ -650,7 +650,7 @@ void TestModel::testSimpleLightConfig()
 		{
 			const MrwMessage msg = light->configMsg(pin);
 
-			QCOMPARE(msg.size(),    2);
+			QCOMPARE(msg.size(),    2u);
 			QCOMPARE(msg.command(), CFGLGT);
 			QCOMPARE(msg[0], pin);
 		}
@@ -670,7 +670,7 @@ void TestModel::testProfileLightConfig()
 		{
 			const MrwMessage msg = light->configMsg(pin);
 
-			QCOMPARE(msg.size(),    3);
+			QCOMPARE(msg.size(),    3u);
 			QCOMPARE(msg.command(), CFGLGT);
 			QCOMPARE(msg[0], pin);
 		}
