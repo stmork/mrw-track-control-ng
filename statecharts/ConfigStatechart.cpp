@@ -30,8 +30,7 @@ namespace mrw
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
 			connected_raised(false),
-			completed_raised(false),
-			failed_raised(false)
+			completed_raised(false)
 		{
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
 			{
@@ -81,11 +80,6 @@ namespace mrw
 					completed_raised = true;
 					break;
 				}
-			case mrw::statechart::ConfigStatechart::Event::failed:
-				{
-					failed_raised = true;
-					break;
-				}
 
 
 			case mrw::statechart::ConfigStatechart::Event::_te0_main_region_Wait_for_Connect_:
@@ -113,13 +107,6 @@ namespace mrw
 		void mrw::statechart::ConfigStatechart::completed()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::completed));
-			runCycle();
-		}
-
-
-		void mrw::statechart::ConfigStatechart::failed()
-		{
-			incomingEventQueue.push_back(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::failed));
 			runCycle();
 		}
 
@@ -577,7 +564,6 @@ namespace mrw
 		{
 			connected_raised = false;
 			completed_raised = false;
-			failed_raised = false;
 			timeEvents[0] = false;
 			timeEvents[1] = false;
 			timeEvents[2] = false;
@@ -633,7 +619,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((connected_raised) || (completed_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
+			while (((((connected_raised) || (completed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
 			isExecuting = false;
 		}
 

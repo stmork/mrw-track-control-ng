@@ -68,7 +68,6 @@ namespace mrw
 				NO_EVENT,
 				connected,
 				completed,
-				failed,
 				_te0_main_region_Wait_for_Connect_,
 				_te1_main_region_Configure_,
 				_te2_main_region_Wait_for_Boot_
@@ -85,8 +84,6 @@ namespace mrw
 			void raiseConnected();
 			/*! Raises the in event 'completed' of default interface scope. */
 			void raiseCompleted();
-			/*! Raises the in event 'failed' of default interface scope. */
-			void raiseFailed();
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent();
@@ -256,9 +253,6 @@ namespace mrw
 
 			/*! Indicates event 'completed' of default interface scope is active. */
 			bool completed_raised;
-
-			/*! Indicates event 'failed' of default interface scope is active. */
-			bool failed_raised;
 
 
 

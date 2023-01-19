@@ -71,7 +71,6 @@ namespace mrw
 				NO_EVENT,
 				connected,
 				completed,
-				failed,
 				_te0_main_region_Wait_for_Connect_,
 				_te1_main_region_Configure_,
 				_te2_main_region_Wait_for_Boot_
@@ -180,9 +179,6 @@ namespace mrw
 			/*! Slot for the in event 'completed' that is defined in the default interface scope. */
 			void completed();
 
-			/*! Slot for the in event 'failed' that is defined in the default interface scope. */
-			void failed();
-
 
 		protected:
 
@@ -264,9 +260,6 @@ namespace mrw
 
 			/*! Indicates event 'completed' of default interface scope is active. */
 			bool completed_raised;
-
-			/*! Indicates event 'failed' of default interface scope is active. */
-			bool failed_raised;
 
 
 
