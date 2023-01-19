@@ -62,7 +62,7 @@ So the simplest scenario to start MRW-TrackControl is as follows:
 ```mermaid
 flowchart LR
 	subgraph Host A
-	MRW-TrackControl-- socketcan ---CAN-Bus
+		MRW-TrackControl-- socketcan ---CAN-Bus
 	end
 ```
 
@@ -77,20 +77,20 @@ host A:
 
 ```
 ssh -L 35468:localhost:35468 user@host-a
-``` 
+```
 
 Note that you start the MRW-Proxy tool first, since it provides the virtual
 CAN Server on socket localhost:35468.
 
 ```mermaid
-flowchart LR
+flowchart BT
 	subgraph Host A
-	vcan([Virtual CAN])
-	MRW-Proxy -- socketcan --- CAN-Bus
-	MRW-Proxy -->|provides|vcan
-	end
-	subgraph Host B
-	MRW-TrackControl-- SSH-Tunnel ---vcan
+		vcan([Virtual CAN])
+		MRW-Proxy -- socketcan --- CAN-Bus
+		MRW-Proxy -->|provides|vcan
+		end
+		subgraph Host B
+		MRW-TrackControl-- SSH-Tunnel ---vcan
 	end
 ```
 
@@ -106,10 +106,10 @@ selected tour/route.
 ```mermaid
 flowchart LR
 	subgraph Host B
-	vcan([Virtual CAN])
-	MRW-Simulator -->|provides| vcan
-	MRW-TrackControl -- uses --- vcan
-	MRW-Tracker .- vcan
+		vcan([Virtual CAN])
+		MRW-Simulator -->|provides| vcan
+		MRW-TrackControl -- uses --- vcan
+		MRW-Tracker .- vcan
 	end
 ```
 
