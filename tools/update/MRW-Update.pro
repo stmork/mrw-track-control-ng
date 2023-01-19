@@ -6,7 +6,7 @@
 QT -= gui
 QT += network
 
-include(../common.pri)
+include(../../common.pri)
 
 CONFIG += console
 
@@ -21,6 +21,8 @@ HEADERS += \
 
 LIBS            += -lMRW-Model -lMRW-Can -lMRW-Statecharts -lMRW-Util
 
-install.files = $$TARGET
+QMAKE_CLEAN     += $$TARGET
+
+install.files    = $$TARGET
 
 INSTALLS        += install

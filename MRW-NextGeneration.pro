@@ -15,12 +15,12 @@ SUBDIRS  = \
 	test-sct \
 	ping \
 	reset \
-	proxy \
 	reader \
-	config \
 	sim \
+	proxy \
 	tracker \
-	fw-update \
+	config \
+	update \
 	study \
 	track-control
 
@@ -34,12 +34,12 @@ test.file              = test/MRW-Test.pro
 test-sct.file          = statecharts/test/MRW-Test-Statecharts.pro
 ping.file              = tools/ping/MRW-Ping.pro
 reset.file             = tools/reset/MRW-Reset.pro
-proxy.file             = tools/proxy/MRW-Proxy.pro
 reader.file            = tools/reader/MRW-Reader.pro
-config.file            = tools/config/MRW-Configure.pro
 sim.file               = tools/sim/MRW-Simulator.pro
+proxy.file             = tools/proxy/MRW-Proxy.pro
 tracker.file           = tools/tracker/MRW-Tracker.pro
-fw-update.file         = fw-update/MRW-Update.pro
+config.file            = tools/config/MRW-Configure.pro
+update.file            = tools/update/MRW-Update.pro
 study.file             = widget-study/MRW-WidgetStudy.pro
 track-control.file     = track-control/MRW-TrackControl.pro
 
@@ -50,12 +50,12 @@ ctrl.depends           = model can util
 ui.depends             = ctrl
 ping.depends           = test
 reset.depends          = test
-proxy.depends          = test
 reader.depends         = test
-config.depends         = test
 sim.depends            = test
+proxy.depends          = test
 tracker.depends        = test statecharts
-fw-update.depends      = test statecharts
+config.depends         = test
+update.depends         = test statecharts
 study.depends          = test ctrl ui
 track-control.depends  = study statecharts
 

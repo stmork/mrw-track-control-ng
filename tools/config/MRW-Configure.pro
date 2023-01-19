@@ -14,6 +14,9 @@ SOURCES += \
 	configurationservice.cpp \
 	main.cpp
 
+HEADERS += \
+	configurationservice.h
+
 LIBS            += -lMRW-Model -lMRW-Can -lMRW-Statecharts -lMRW-Util
 
 QMAKE_CLEAN     += $$TARGET
@@ -21,6 +24,3 @@ QMAKE_CLEAN     += $$TARGET
 install.files    = $$TARGET
 
 INSTALLS        += install
-
-HEADERS += \
-	configurationservice.h

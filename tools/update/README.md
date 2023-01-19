@@ -55,4 +55,4 @@ sequenceDiagram
 
 The internal behaviour is controlled by the following statechart:
 
-<img src="../statecharts/images/UpdateStatechart_0.png"/>
+<img src="../../statecharts/images/UpdateStatechart_0.png"/>
