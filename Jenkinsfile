@@ -55,7 +55,14 @@ pipeline
 			steps
 			{
 				sh 'make sct-unit valgrind'
-			}
+
+				xunit checksName: 'Unit Tests', tools: [
+					QtTest(    excludesPattern: '', pattern: 'qtest-*.xml', stopProcessingIfError: false),
+					GoogleTest(excludesPattern: '', pattern: 'statecharts/test/gtest-*.xml', stopProcessingIfError: false)]
+
+				xunit checksName: 'Memory Check', tools: [
+					Valgrind(  excludesPattern: '', pattern: 'valgrind*.xml', stopProcessingIfError: false)]
+ 			}
 		}
 
 		stage ('Coverage')
