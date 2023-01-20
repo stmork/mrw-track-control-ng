@@ -611,6 +611,13 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Extend)
 		assert called inc 1 times
 		assert called dec 0 times
+	}
+
+	@Test
+	operation extendTourCompleted()
+	{
+		// Given
+		extendTour()
 
 		// When
 		raise completedDistant
@@ -618,7 +625,7 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		// Then
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State)
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Idle)
-		assert called inc 1 times
+		assert called inc 0 times
 		assert called dec 1 times
 	}
 
@@ -637,6 +644,13 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting.Tour_waiting.Extend)
 		assert called inc 1 times
 		assert called dec 0 times
+	}
+
+	@Test
+	operation extendTourCombinedCompleted()
+	{
+		// Given
+		extendTourCombined()
 
 		// When
 		raise completedDistant
@@ -644,7 +658,7 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		// Then
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State)
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Idle)
-		assert called inc 1 times
+		assert called inc 0 times
 		assert called dec 1 times
 	}
 
@@ -663,6 +677,13 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting_State.Processing.Waiting.Shunt_waiting.Extend)
 		assert called inc 1 times
 		assert called dec 0 times
+	}
+
+	@Test
+	operation extendShuntingCompleted()
+	{
+		// Given
+		extendShunting()
 
 		// When
 		raise completedShunt
@@ -670,7 +691,7 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		// Then
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting_State)
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Shunting_State.Processing.Idle)
-		assert called inc 1 times
+		assert called inc 0 times
 		assert called dec 1 times
 	}
 
@@ -932,7 +953,23 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		exit
 		assert !is_active
 
+		extendTourCompleted()
+		exit
+		assert !is_active
+
+		extendTourCombined()
+		exit
+		assert !is_active
+
+		extendTourCombinedCompleted()
+		exit
+		assert !is_active
+
 		extendShunting()
+		exit
+		assert !is_active
+
+		extendShuntingCompleted()
 		exit
 		assert !is_active
 
