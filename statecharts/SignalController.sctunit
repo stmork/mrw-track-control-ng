@@ -64,6 +64,46 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 	}
 
 	@Test
+	operation startVersion1()
+	{
+		// Given
+		waitForStart()
+		mock hasMainSignal returns (false)
+		mock isMainAndShunt returns (true)
+
+		// When
+		raise start
+
+		// Then
+		assert turnMain
+		assert turnDistant
+		assert !turnShunt
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.main.Turn)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.distant.Turn)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.shunt.Completed)
+	}
+
+	@Test
+	operation startVersion2()
+	{
+		// Given
+		waitForStart()
+		mock hasMainSignal returns (true)
+		mock isMainAndShunt returns (false)
+
+		// When
+		raise start
+
+		// Then
+		assert turnMain
+		assert turnDistant
+		assert turnShunt
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.main.Turn)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.distant.Turn)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Init.Init_process.Turning.shunt.Turn)
+	}
+
+	@Test
 	operation failAfterStart()
 	{
 		// Given

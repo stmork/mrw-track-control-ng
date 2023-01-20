@@ -780,6 +780,108 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			initial();
 		}
+		TEST_F(SignalControllerTest, startVersion1)
+		{
+			hasMainSignalMock = new HasMainSignalMock();
+			hasMainSignalMock->initializeBehavior();
+			isMainAndShuntMock = new IsMainAndShuntMock();
+			isMainAndShuntMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
+			hasMainSignalMock = new HasMainSignalMock();
+			hasMainSignalMock->initializeBehavior();
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
+			isMainAndShuntMock = new IsMainAndShuntMock();
+			isMainAndShuntMock->initializeBehavior();
+			isTourMock = new IsTourMock();
+			isTourMock->initializeBehavior();
+			lockMock = new LockMock();
+			lockMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			waitForStart();
+
+			hasMainSignalMock->setDefaultBehavior(&HasMainSignalMock::hasMainSignal1);
+
+			isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt2);
+
+			statechart->raiseStart();
+
+			EXPECT_TRUE(statechart->isRaisedTurnMain());
+
+			EXPECT_TRUE(statechart->isRaisedTurnDistant());
+
+			EXPECT_TRUE(!statechart->isRaisedTurnShunt());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_main_Turn));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_distant_Turn));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_shunt_Completed));
+
+
+			hasMainSignalMock->reset();
+			isMainAndShuntMock->reset();
+		}
+		TEST_F(SignalControllerTest, startVersion2)
+		{
+			hasMainSignalMock = new HasMainSignalMock();
+			hasMainSignalMock->initializeBehavior();
+			isMainAndShuntMock = new IsMainAndShuntMock();
+			isMainAndShuntMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
+			hasMainSignalMock = new HasMainSignalMock();
+			hasMainSignalMock->initializeBehavior();
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
+			isMainAndShuntMock = new IsMainAndShuntMock();
+			isMainAndShuntMock->initializeBehavior();
+			isTourMock = new IsTourMock();
+			isTourMock->initializeBehavior();
+			lockMock = new LockMock();
+			lockMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			waitForStart();
+
+			hasMainSignalMock->setDefaultBehavior(&HasMainSignalMock::hasMainSignal2);
+
+			isMainAndShuntMock->setDefaultBehavior(&IsMainAndShuntMock::isMainAndShunt1);
+
+			statechart->raiseStart();
+
+			EXPECT_TRUE(statechart->isRaisedTurnMain());
+
+			EXPECT_TRUE(statechart->isRaisedTurnDistant());
+
+			EXPECT_TRUE(statechart->isRaisedTurnShunt());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_main_Turn));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_distant_Turn));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_shunt_Turn));
+
+
+			hasMainSignalMock->reset();
+			isMainAndShuntMock->reset();
+		}
 		void failAfterStart()
 		{
 			initial();
