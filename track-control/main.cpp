@@ -45,10 +45,18 @@ int main(int argc, char * argv[])
 
 		main_window.show();
 
-		qInfo("==========================================================");
-		qInfo() << "MRW-NG track control using model:" << repo.modelName();
-		qInfo("==========================================================");
-		return app.exec();
+		try
+		{
+			qInfo("==========================================================");
+			qInfo() << "MRW-NG track control using model:" << repo.modelName();
+			qInfo("==========================================================");
+			return app.exec();
+		}
+		catch (const std::exception & exception)
+		{
+			dispatcher.emergencyStop();
+			qCritical("FATAL: %s", exception.what());
+		}
 	}
 	else
 	{

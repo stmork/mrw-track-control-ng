@@ -145,11 +145,13 @@ private:
 		const mrw::model::Rail * rail,
 		const bool               dir);
 
-	mrw::model::Rail * random(const std::vector<mrw::model::Rail *> & rails) const;
+	mrw::model::Rail * random(
+		const std::vector<mrw::model::Rail *> & rails) const;
 	void startBeermode(const bool dir);
 	void dump(
-		const std::vector<mrw::model::Rail *> & rails);
-	QString dump(const mrw::model::Rail * rail);
+		const std::vector<mrw::model::Rail *> & rails) const;
+	QString dump(
+		const mrw::model::Rail * rail) const;
 
 	Ui::MainWindow          *         ui;
 	mrw::model::ModelRepository   &   repo;

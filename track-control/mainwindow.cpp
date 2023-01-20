@@ -203,8 +203,12 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 		Qt::QueuedConnection);
 	connect(
 		&statechart, &OperatingMode::failing,
+		&dispatcher, &MrwMessageDispatcher::emergencyStop,
+		Qt::DirectConnection);
+	connect(
+		&statechart, &OperatingMode::failing,
 		this, &MainWindow::onFailed,
-		Qt::QueuedConnection);
+		Qt::DirectConnection);
 	connect(
 		&statechart, &OperatingMode::operating,
 		this, &MainWindow::onOperate,
@@ -935,6 +939,7 @@ void MainWindow::onFailed()
 
 	ControllerRegistry::instance().dump();
 	RegionForm::setOpMode(ui->regionTabWidget, "F", BaseWidget::RED, true);
+	on_clearAllRoutes_clicked();
 	enable();
 }
 
@@ -975,15 +980,15 @@ Rail * MainWindow::random(const std::vector<Rail *> & rails) const
 	return size > 0 ? rails.at(Random::random(size)) : nullptr;
 }
 
-void MainWindow::dump(const std::vector<Rail *> & rails)
+void MainWindow::dump(const std::vector<Rail *> & rails) const
 {
-	for (Rail * rail : rails)
+	for (const Rail * rail : rails)
 	{
 		qDebug().noquote() << dump(rail);
 	}
 }
 
-QString MainWindow::dump(const Rail * rail)
+QString MainWindow::dump(const Rail * rail) const
 {
 	const Section * section = rail->section();
 

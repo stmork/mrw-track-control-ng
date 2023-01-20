@@ -35,6 +35,19 @@ MrwMessageDispatcher::~MrwMessageDispatcher()
 	qInfo(" Shutting down MRW message dispatcher.");
 }
 
+void MrwMessageDispatcher::emergencyStop()
+{
+	std::vector<Section *> sections;
+
+	model->parts<Section>(sections);
+	for (Section * section : sections)
+	{
+		const MrwMessage message = section->command(SETROF);
+
+		write(message);
+	}
+}
+
 void MrwMessageDispatcher::process(const MrwMessage & message)
 {
 	const ControllerId dst = message.sid();
