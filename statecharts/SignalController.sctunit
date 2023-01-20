@@ -488,6 +488,13 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		assert called dec 0 times
 		assert turnMain
 		assert valueof(turnMain) == STOP
+	}
+
+	@Test
+	operation disableTourCombinedCompleted()
+	{
+		// Given
+		disableTourCombined()
 
 		// When
 		raise completedMain
@@ -505,7 +512,7 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 	operation disableTourCombinedLight()
 	{
 		// Given
-		disableTourCombined()
+		disableTourCombinedCompleted()
 		mock isMainAndShunt returns (true)
 		mock hasMainSignal returns (true)
 		mock isLightSignal returns (true)
@@ -541,7 +548,7 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 	operation disableTourCombinedForm()
 	{
 		// Given
-		disableTourCombined()
+		disableTourCombinedCompleted()
 		mock isMainAndShunt returns (false)
 		mock hasMainSignal returns (true)
 		mock isLightSignal returns (false)
@@ -572,12 +579,19 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		assert called dec 0 times
 		assert turnShunt
 		assert valueof(turnShunt) == STOP
+	}
+
+	@Test
+	operation disableShuntingCompleted()
+	{
+		// Given
+		disableShunting()
 
 		// When
 		raise completedShunt
 
 		// Then
-		assert called inc 1 times
+		assert called dec 0 times
 		assert called dec 1 times
 		unlockedState
 	}
@@ -878,6 +892,14 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		exit
 		assert !is_active
 
+		startVersion1()
+		exit
+		assert !is_active
+
+		startVersion2()
+		exit
+		assert !is_active
+
 		initial()
 		exit
 		assert !is_active
@@ -918,6 +940,14 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		exit
 		assert !is_active
 
+		disableTourCombined()
+		exit
+		assert !is_active
+
+		disableTourCombinedCompleted()
+		exit
+		assert !is_active
+
 		disableTourCombinedLight()
 		exit
 		assert !is_active
@@ -927,6 +957,10 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		assert !is_active
 
 		disableShunting()
+		exit
+		assert !is_active
+
+		disableShuntingCompleted()
 		exit
 		assert !is_active
 

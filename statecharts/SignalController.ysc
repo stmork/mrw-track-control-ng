@@ -682,7 +682,7 @@
                                   <styles xsi:type="notation:TextStyle" xmi:id="_vgsWIYbfEe25PaND2nD09Q"/>
                                   <styles xsi:type="notation:LineTypeStyle" xmi:id="_vgsWIobfEe25PaND2nD09Q"/>
                                   <element xsi:nil="true"/>
-                                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_vgsWI4bfEe25PaND2nD09Q" x="38" y="78" width="235" height="59"/>
+                                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_vgsWI4bfEe25PaND2nD09Q" x="38" y="78" width="253" height="59"/>
                                 </children>
                                 <children xsi:type="notation:Shape" xmi:id="_KqCWcIIIEe2pKZIV5OcIFQ" type="Choice" element="_KqBvYIIIEe2pKZIV5OcIFQ" fontName="Verdana" lineColor="4210752">
                                   <layoutConstraint xsi:type="notation:Bounds" xmi:id="_KqCWcYIIEe2pKZIV5OcIFQ" x="112" y="456" width="51" height="51"/>
