@@ -9,7 +9,7 @@ Each controller is handled seperately. There occure no broadcast sending.1. To c
 5. After completing the device configuration the normal firmware execution starts resulting in RESET / MSG_BOOTED and GETVER / MSG_OK responses.
 
 ## Sequence diagram
-This diagram shows the following sequence diagram. The green areas are the firmware runtime and the red area is the booltloader runtime.
+This diagram shows the following sequence diagram. The green areas are the firmware runtime, the yellow area is while configuring and the red area is the bootloader runtime.
 
 ```mermaid
 sequenceDiagram
@@ -33,10 +33,14 @@ sequenceDiagram
 		Note right of T: Configuration is complete.
 		T ->> +F: CFGEND
 
-		F ->> -T: CFGEND: MSG_OK
 	end
 
-	Note right of T: Resetting occurs.
+	rect rgb(255,240,240)
+		F ->> -T: CFGEND: MSG_OK
+
+		Note right of T: Resetting occurs.
+
+	end
 
 	rect rgb(240,255,240)
 		activate F
