@@ -25,7 +25,8 @@ off|off|Firmware waits for reset.
 cont.|off|Firmware executing.
 cont.|cont.|Firmware executing, CAN error occured.
 
-This diagram shows the following sequence diagram:
+## Sequence diagram
+This diagram shows the following sequence diagram. The green areas are the firmware runtime and the red area is the booltloader runtime.
 
 ```mermaid
 sequenceDiagram
@@ -63,13 +64,13 @@ sequenceDiagram
 		T ->> +F: FLASH_CHECK
 
 		F ->> -T: FLASH_CHECK: MSG_OK
+		Note left of F: If response is MSG_OK the firmware will start  directly.
 	end
 
 	rect rgb(240,255,240)
 		activate F
 		F ->> LED: all off
 
-		Note left of F: If response is MSG_OK the firmware will start directly.
 		F ->> LED: green up
 		activate F
 
@@ -81,6 +82,7 @@ sequenceDiagram
 	end
 ```
 
-The internal behaviour is controlled by the following statechart:
+## Statechart
+The flashing behaviour of the MRW-Update tool is controlled by the following statechart:
 
 <img src="../../statecharts/images/UpdateStatechart_0.png"/>

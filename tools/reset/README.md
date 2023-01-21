@@ -20,7 +20,7 @@ cont.|off|Firmware executing.
 cont.|cont.|Firmware executing, CAN error occured.
 
 ## Sequence diagram
-This diagram shows the following sequence diagram:
+This diagram shows the following sequence diagram. The green areas are the firmware runtime and the red area is the booltloader runtime.
 
 ```mermaid
 sequenceDiagram
