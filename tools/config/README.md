@@ -32,13 +32,13 @@ sequenceDiagram
 
 		Note right of T: Configuration is complete.
 		T ->> +F: CFGEND
-
+		F ->>  T: CFGEND: MSG_OK
+		F ->> -T: RESET: MSG_RESET_PENDING
 	end
 
 	rect rgb(255,240,240)
-		F ->> -T: CFGEND: MSG_OK
 
-		Note right of T: Resetting occurs.
+		Note left of F: Resetting occurs.
 
 	end
 
