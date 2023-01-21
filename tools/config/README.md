@@ -8,36 +8,48 @@ Each controller is handled seperately. There occure no broadcast sending.1. To c
 3. After writing the device configuration into EEPROM the controller sends a CFGEND / MSG_OK response and additionally the amount of devices configured.
 5. After completing the device configuration the normal firmware execution starts resulting in RESET / MSG_BOOTED and GETVER / MSG_OK responses.
 
-This diagram shows the following sequence diagram:
+## Sequence diagram
+This diagram shows the following sequence diagram. The green areas are the firmware runtime and the red area is the booltloader runtime.
 
 ```mermaid
 sequenceDiagram
 	Participant T as MRW-Configure
 	Participant F as Firmware
 
-	Note right of T: CAN node collection is not needed because the model knows the amount.
-	T ->> +F: CFGBGN
-	F ->> -T: CFGBGN: MSG_OK
+	rect rgb(240,255,240)
+		Note right of T: CAN node collection is not needed because the model knows the amount.
 
-	loop until all devices configured
-		T ->> +F: CFGxyz
-		F ->> -T: CFGxyz: MSG_OK
+		T ->> +F: CFGBGN
 	end
 
-	Note right of T: Configuration is complete.
-	T ->> +F: CFGEND
+	rect rgb(255,255,240)
+		F ->> -T: CFGBGN: MSG_OK
 
-	F ->> -T: CFGEND: MSG_OK
+		loop until all devices configured
+			T ->> +F: CFGxyz
+			F ->> -T: CFGxyz: MSG_OK
+		end
 
-	activate F
+		Note right of T: Configuration is complete.
+		T ->> +F: CFGEND
+
+		F ->> -T: CFGEND: MSG_OK
+	end
+
 	Note right of T: Resetting occurs.
 
-	F ->> +T: GETVER: MSG_OK
-	F ->> -T: RESET: MSG_BOOTED
+	rect rgb(240,255,240)
+		activate F
 
-	Note left of F: Firmware has restarted.
+		F ->> +T: GETVER: MSG_OK
+		F ->> -T: RESET: MSG_BOOTED
+
+		Note left of F: Firmware has restarted.
+end
 ```
 
-The internal behaviour is controlled by the following statechart:
+## Statechart
+
+The configuration behaviour of the MRW-Configure tool is controlled by the following statechart:
 
 <img src="../../statecharts/images/ConfigStatechart_0.png"/>
