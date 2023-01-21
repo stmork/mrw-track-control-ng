@@ -10,7 +10,7 @@ The MRW-Reset simply restarts all connected CAN controllers by sending a broadca
 
 During a boot cycle with or without flashing a new firmware the LEDs indicates the internal operation state:
 
-green|yellow|remakrs
+green|yellow|remarks
 ----|----|---------
 blinking|off|Bootloader waits for flash request.
 off|cont.|Bootloader is flashing new firmware.

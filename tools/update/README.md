@@ -16,7 +16,7 @@ feature.
 
 During a boot cycle with or without flashing a new firmware the LEDs indicates the internal operation state:
 
-green|yellow|remakrs
+green|yellow|remarks
 ----|----|---------
 blinking|off|Bootloader waits for flash request.
 off|cont.|Bootloader is flashing new firmware.
@@ -26,7 +26,7 @@ cont.|off|Firmware executing.
 cont.|cont.|Firmware executing, CAN error occured.
 
 ## Sequence diagram
-This diagram shows the following sequence diagram. The green areas are the firmware runtime and the red area is the booltloader runtime.
+This diagram shows the following sequence diagram. The green areas are the firmware runtime and the red area is the bootloader runtime.
 
 ```mermaid
 sequenceDiagram
