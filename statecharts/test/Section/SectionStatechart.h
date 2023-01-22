@@ -320,6 +320,7 @@ namespace mrw
 			// prototypes of all internal functions
 
 			void enact_main_region_Init();
+			void enact_main_region_Init_Init_Process_Requesting();
 			void enact_main_region_Init_Init_Process_Requesting_relais_Relay();
 			void enact_main_region_Init_Init_Process_Requesting_state_Occupation();
 			void enact_main_region_Operating_Processing_Unlocked();

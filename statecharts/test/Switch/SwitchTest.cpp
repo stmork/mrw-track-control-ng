@@ -813,9 +813,12 @@ namespace mrw
 
 			EXPECT_TRUE(requestMock->calledAtLeastOnce());
 
+			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
+
 
 			incMock->reset();
 			requestMock->reset();
+			pendingMock->reset();
 		}
 		TEST_F(SwitchTest, initial)
 		{
@@ -823,6 +826,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -864,6 +869,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -895,6 +902,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -956,6 +965,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -995,6 +1006,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1044,6 +1057,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1124,6 +1139,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1186,6 +1203,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1251,6 +1270,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1316,6 +1337,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1361,6 +1384,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1422,6 +1447,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1494,6 +1521,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1550,6 +1579,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1593,6 +1624,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1643,6 +1676,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1692,6 +1727,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1742,6 +1779,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1791,6 +1830,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1840,6 +1881,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1889,6 +1932,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();
@@ -1938,6 +1983,8 @@ namespace mrw
 			incMock->initializeBehavior();
 			requestMock = new RequestMock();
 			requestMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			decMock = new DecMock();

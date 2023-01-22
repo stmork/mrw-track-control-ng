@@ -331,6 +331,7 @@ namespace mrw
 			timerService->setTimer(this, 0, SwitchStatechart::timeout, false);
 			emit entered();
 			ifaceOperationCallback->inc();
+			ifaceOperationCallback->pending();
 			ifaceOperationCallback->request();
 		}
 
@@ -384,6 +385,7 @@ namespace mrw
 		{
 			/* Exit action for state 'Init'. */
 			timerService->unsetTimer(this, 0);
+			ifaceOperationCallback->dec();
 		}
 
 		/* Exit action for state 'Turning'. */
@@ -753,7 +755,6 @@ namespace mrw
 				if (response_raised)
 				{
 					exseq_main_region_Init();
-					ifaceOperationCallback->dec();
 					emit started();
 					enseq_main_region_Operating_default();
 					react(0);

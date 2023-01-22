@@ -995,9 +995,13 @@ namespace mrw
 
 			statechart->raiseRelaisResponse();
 
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting));
+
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_relais_Wait));
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_state_Occupation));
+
+			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
 
 			statechart->raiseStateResponse(false);
 
@@ -1005,11 +1009,16 @@ namespace mrw
 
 			EXPECT_TRUE(decMock->calledAtLeastOnce());
 
+			EXPECT_TRUE((statechart->getOccupied()) == (false));
 
+
+			pendingMock->reset();
 			decMock->reset();
 		}
 		TEST_F(SectionTest, operational)
 		{
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1041,6 +1050,8 @@ namespace mrw
 		}
 		TEST_F(SectionTest, restart)
 		{
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1144,6 +1155,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1202,6 +1215,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1265,6 +1280,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1328,6 +1345,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1394,6 +1413,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1460,6 +1481,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1499,6 +1522,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1547,6 +1572,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1619,6 +1646,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1664,6 +1693,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1721,6 +1752,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1775,6 +1808,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1826,6 +1861,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1891,6 +1928,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1956,6 +1995,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -1999,6 +2040,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2081,6 +2124,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2134,6 +2179,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2222,6 +2269,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2271,6 +2320,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2350,6 +2401,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
@@ -2397,6 +2450,8 @@ namespace mrw
 			pendingMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();

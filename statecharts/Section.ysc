@@ -5,7 +5,7 @@
       <vertices xsi:type="sgraph:Entry" xmi:id="_eBBcJG_nEe2NWacukCztjQ">
         <outgoingTransitions xmi:id="_eBBcJW_nEe2NWacukCztjQ" target="_gX9dUG_yEe2YefuTX77gAw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_eBBcJm_nEe2NWacukCztjQ" specification="entry / raise entered&#xA;entry / inc" name="Init" incomingTransitions="_ma86gG_yEe2YefuTX77gAw _nSD94HpUEe2_ZOj2sFqWdg">
+      <vertices xsi:type="sgraph:State" xmi:id="_eBBcJm_nEe2NWacukCztjQ" specification="entry / raise entered&#xA;entry / inc&#xA;exit / dec" name="Init" incomingTransitions="_ma86gG_yEe2YefuTX77gAw _nSD94HpUEe2_ZOj2sFqWdg">
         <outgoingTransitions xmi:id="_yKSQcG_nEe2YefuTX77gAw" specification="after timeout ms" target="_tx568G_nEe2YefuTX77gAw"/>
         <outgoingTransitions xmi:id="_UuQ6gG_rEe2YefuTX77gAw" specification="failed" target="_tx568G_nEe2YefuTX77gAw"/>
         <regions xmi:id="_JiwLsG_oEe2YefuTX77gAw" name="Init Process">
@@ -13,9 +13,9 @@
             <outgoingTransitions xmi:id="_ofBPkG_oEe2YefuTX77gAw" specification="" target="_ncie4G_oEe2YefuTX77gAw"/>
           </vertices>
           <vertices xsi:type="sgraph:Synchronization" xmi:id="_Pm2cIG_oEe2YefuTX77gAw" incomingTransitions="_DeY_0HCIEe2rVLYxSRawxw _PxkosHCIEe2rVLYxSRawxw">
-            <outgoingTransitions xmi:id="_8-hZoG_oEe2YefuTX77gAw" specification=" / dec; raise started" target="_eBBcMG_nEe2NWacukCztjQ"/>
+            <outgoingTransitions xmi:id="_8-hZoG_oEe2YefuTX77gAw" specification=" / raise started" target="_eBBcMG_nEe2NWacukCztjQ"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_SIcPIG_oEe2YefuTX77gAw" specification="" name="Requesting">
+          <vertices xsi:type="sgraph:State" xmi:id="_SIcPIG_oEe2YefuTX77gAw" specification="entry / pending" name="Requesting">
             <regions xmi:id="_SIc2MG_oEe2YefuTX77gAw" name="relais">
               <vertices xsi:type="sgraph:State" xmi:id="_WhTs0G_oEe2YefuTX77gAw" specification="entry / off" name="Relay" incomingTransitions="_qd-PkG_oEe2YefuTX77gAw">
                 <outgoingTransitions xmi:id="_FFA_oG_pEe2YefuTX77gAw" specification="relaisResponse" target="_76UxcHCHEe2rVLYxSRawxw"/>
@@ -784,7 +784,7 @@
     <edges xmi:id="_8-iAsG_oEe2YefuTX77gAw" type="Transition" element="_8-hZoG_oEe2YefuTX77gAw" source="_Pm3DMG_oEe2YefuTX77gAw" target="_eBCDVG_nEe2NWacukCztjQ">
       <children xsi:type="notation:DecorationNode" xmi:id="_8-iAtG_oEe2YefuTX77gAw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_8-iAtW_oEe2YefuTX77gAw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_8-iAtm_oEe2YefuTX77gAw" x="25" y="-69"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_8-iAtm_oEe2YefuTX77gAw" x="7" y="-53"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_8-iAsW_oEe2YefuTX77gAw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_8-iAs2_oEe2YefuTX77gAw" fontName="Verdana"/>

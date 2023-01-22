@@ -8,8 +8,8 @@
       <vertices xsi:type="sgraph:State" xmi:id="_r089cHCUEe2rVLYxSRawxw" name="Wait for Start" incomingTransitions="_r08WbnCUEe2rVLYxSRawxw _fBYu4HCVEe2rVLYxSRawxw">
         <outgoingTransitions xmi:id="_r089c3CUEe2rVLYxSRawxw" specification="start" target="_r089enCUEe2rVLYxSRawxw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_r089enCUEe2rVLYxSRawxw" specification="entry / raise entered&#xA;entry / inc; request" name="Init" incomingTransitions="_r089c3CUEe2rVLYxSRawxw _k40OkHpUEe2_ZOj2sFqWdg">
-        <outgoingTransitions xmi:id="_O0is0HCVEe2rVLYxSRawxw" specification="response /  dec(); raise started" target="_NmiBkHCVEe2rVLYxSRawxw"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_r089enCUEe2rVLYxSRawxw" specification="entry / raise entered&#xA;entry / inc; pending; request&#xA;exit / dec" name="Init" incomingTransitions="_r089c3CUEe2rVLYxSRawxw _k40OkHpUEe2_ZOj2sFqWdg">
+        <outgoingTransitions xmi:id="_O0is0HCVEe2rVLYxSRawxw" specification="response /  raise started" target="_NmiBkHCVEe2rVLYxSRawxw"/>
         <outgoingTransitions xmi:id="_VG_iUHCVEe2rVLYxSRawxw" specification="after timeout ms" target="_T17jEHCVEe2rVLYxSRawxw"/>
         <outgoingTransitions xmi:id="_Z7sAYHCVEe2rVLYxSRawxw" specification="failed" target="_T17jEHCVEe2rVLYxSRawxw"/>
       </vertices>

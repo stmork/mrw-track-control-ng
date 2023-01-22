@@ -61,6 +61,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		assert entered
 		assert called inc
 		assert called request
+		assert called pending
 	}
 
 	@Test

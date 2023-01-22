@@ -102,8 +102,10 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		raise relaisResponse
 
 		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Wait)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
+		assert called pending
 
 		// When
 		raise stateResponse : false
@@ -111,6 +113,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		// Then
 		unlocked()
 		assert called dec
+		assert occupied == false
 	}
 
 	@Test

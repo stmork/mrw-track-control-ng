@@ -510,6 +510,13 @@ namespace mrw
 			ifaceOperationCallback->inc();
 		}
 
+		/* Entry action for state 'Requesting'. */
+		void SectionStatechart::enact_main_region_Init_Init_Process_Requesting()
+		{
+			/* Entry action for state 'Requesting'. */
+			ifaceOperationCallback->pending();
+		}
+
 		/* Entry action for state 'Relay'. */
 		void SectionStatechart::enact_main_region_Init_Init_Process_Requesting_relais_Relay()
 		{
@@ -631,6 +638,7 @@ namespace mrw
 		{
 			/* Exit action for state 'Init'. */
 			timerService->unsetTimer(this, 0);
+			ifaceOperationCallback->dec();
 		}
 
 		/* Exit action for state 'Locked'. */
@@ -1581,7 +1589,6 @@ namespace mrw
 		{
 			/* The reactions of state null. */
 			exseq_main_region_Init();
-			ifaceOperationCallback->dec();
 			started_raised = true;
 			enseq_main_region_Operating_default();
 			react(0);
@@ -1591,6 +1598,7 @@ namespace mrw
 		void SectionStatechart::react_main_region_Init_Init_Process__sync1()
 		{
 			/* The reactions of state null. */
+			enact_main_region_Init_Init_Process_Requesting();
 			enseq_main_region_Init_Init_Process_Requesting_relais_Relay_default();
 			enseq_main_region_Init_Init_Process_Requesting_state_Occupation_default();
 		}
