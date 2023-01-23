@@ -9,7 +9,7 @@ GeneratorModel for yakindu::cpp::qt
 	const FOLDER  : string = "."
 	const COMMON :  string = "common"
 
-	statechart mrw.statechart.OperatingMode
+	statechart mrw.statechart.OperatingModeStatechart
 	{
 		feature GeneralFeatures
 		{

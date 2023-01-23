@@ -8,7 +8,7 @@ GeneratorModel for yakindu::images
 	const PROJECT : string = "mrw.statecharts"
 	const FOLDER  : string = "images"
 
-	statechart mrw.statechart.OperatingMode
+	statechart mrw.statechart.OperatingModeStatechart
 	{
 		feature Outlet
 		{

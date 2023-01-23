@@ -9,7 +9,7 @@ GeneratorModel for yakindu::cpp11
 	const FOLDER  : string = "test"
 	const COMMON :  string = "test/common"
 
-	statechart mrw.statechart.OperatingMode
+	statechart mrw.statechart.OperatingModeStatechart
 	{
 		feature GeneralFeatures
 		{

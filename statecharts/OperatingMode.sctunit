@@ -5,7 +5,7 @@
 
 package mrw.test
 
-testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
+testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatechart
 {
 	@Test
 	operation wait()
@@ -13,7 +13,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		enter
 		assert  is_active
 		assert !is_final
-		assert active (mrw.^statechart.OperatingMode.main_region.Prepare_Bus)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Prepare_Bus)
 		assert called can.connectBus
 	}
 
@@ -27,7 +27,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		proceed timeout ms
 
 		// Then
-		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Failed)
 		assert failing
 	}
 
@@ -41,7 +41,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		raise can.connected
 
 		// Then
-		assert active (mrw.^statechart.OperatingMode.main_region.Init)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Init)
 		assert called resetTransaction
 		assert start
 	}
@@ -56,7 +56,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		raise failed
 
 		// Then
-		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Failed)
 		assert failing
 	}
 
@@ -70,7 +70,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		proceed timeout ms
 
 		// Then
-		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Failed)
 		assert failing
 	}
 
@@ -85,7 +85,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		raise clear
 
 		// Then
-		assert active (mrw.^statechart.OperatingMode.main_region.Init)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Init)
 		assert cleared
 		assert called resetTransaction
 		assert start
@@ -102,7 +102,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		raise clear
 
 		// Then
-		assert active (mrw.^statechart.OperatingMode.main_region.Failed)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Failed)
 	}
 
 	@Test
@@ -115,7 +115,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		raise edit
 
 		// Then
-		assert active (mrw.^statechart.OperatingMode.main_region.Editing)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Editing)
 		assert cleared
 		assert editing
 		assert valueof(editing) == true
@@ -131,7 +131,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		raise started
 
 		// Then
-		assert active (mrw.^statechart.OperatingMode.main_region.Operating)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Operating)
 		assert operating
 		assert valueof(operating) == true
 	}
@@ -146,7 +146,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		raise failed
 
 		// Then
-		assert active (mrw.^statechart.OperatingMode.main_region.Operating)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Operating)
 	}
 
 	@Test
@@ -159,7 +159,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		raise init
 
 		// Then
-		assert active (mrw.^statechart.OperatingMode.main_region.Init)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Init)
 		assert operating
 		assert valueof(operating) == false
 		assert called resetTransaction
@@ -176,7 +176,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		raise edit
 
 		// Then
-		assert active (mrw.^statechart.OperatingMode.main_region.Editing)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Editing)
 		assert operating
 		assert valueof(operating) == false
 		assert editing
@@ -193,7 +193,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingMode
 		raise operate
 
 		// Then
-		assert active (mrw.^statechart.OperatingMode.main_region.Operating)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Operating)
 		assert editing
 		assert valueof(editing) == false
 		assert operating

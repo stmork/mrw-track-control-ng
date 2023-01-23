@@ -10,7 +10,7 @@ include(../common.pri)
 
 HEADERS += \
 	ConfigStatechart.h \
-	OperatingMode.h \
+	OperatingModeStatechart.h \
 	RouteStatechart.h \
 	SectionStatechart.h \
 	SignalControllerStatechart.h \
@@ -25,7 +25,7 @@ HEADERS += \
 
 SOURCES += \
 	ConfigStatechart.cpp \
-	OperatingMode.cpp \
+	OperatingModeStatechart.cpp \
 	RouteStatechart.cpp \
 	SectionStatechart.cpp \
 	SignalControllerStatechart.cpp \

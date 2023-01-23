@@ -5,10 +5,10 @@
 
 include(../test-common.pri)
 
-HEADERS += OperatingMode.h
+HEADERS += OperatingModeStatechart.h
 
 SOURCES += \
-	OperatingMode.cpp \
+	OperatingModeStatechart.cpp \
 	OperatingModeTest.cpp
 
 QMAKE_CLEAN     += $$TARGET

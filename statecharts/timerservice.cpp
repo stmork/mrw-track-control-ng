@@ -46,6 +46,18 @@ void TimerService::setTimer(
 	timer->start();
 }
 
+void TimerService::unsetTimer(
+	TimedInterface * statemachine,
+	sc::eventid      event)
+{
+	SCTimer * timer = this->getTimer(statemachine, event);
+
+	if (timer != nullptr)
+	{
+		timer->stop();
+	}
+}
+
 SCTimer * TimerService::getTimer(
 	TimedInterface * statemachine,
 	sc::eventid      event)
@@ -64,16 +76,4 @@ SCTimer * TimerService::getTimer(
 		chart_map.insert(key, timer);
 	}
 	return timer;
-}
-
-void TimerService::unsetTimer(
-	TimedInterface * statemachine,
-	sc::eventid      event)
-{
-	SCTimer * timer = this->getTimer(statemachine, event);
-
-	if (timer != nullptr)
-	{
-		timer->stop();
-	}
 }

@@ -17,6 +17,12 @@
 
 namespace mrw::statechart
 {
+	/**
+	 * This class represents one single Yakindu SCT timer. It contains
+	 * information about the causing statemachine, its duration and if the
+	 * timer is periodic. Each instance keeps the next time point to wait
+	 * until if the timer is active.
+	 */
 	class SCTimer : public QTimer
 	{
 		Q_OBJECT
@@ -36,6 +42,12 @@ namespace mrw::statechart
 		sc::eventid                 event_id;
 	};
 
+	/**
+	 * This class simply implements an example statemachine for testing the
+	 * C++ timer service. It is implemented as singleton.
+	 *
+	 * @see mrw::util::Singleton
+	 */
 	class TimerService :
 		public QObject,
 		public sc::timer::TimerServiceInterface,
@@ -58,9 +70,28 @@ namespace mrw::statechart
 			sc::timer::TimedInterface * statemachine,
 			sc::eventid                 event) override;
 
-		SCTimer * getTimer(sc::timer::TimedInterface * machine, sc::eventid event);
+	private:
+		/**
+		 * This method lookups a timer for a specified statemachine. If the
+		 * timer does not exists it will will be created automatically.
+		 *
+		 * @param machine The statechart which owns the timer.
+		 * @param event The timer ID of that statechart.
+		 * @return The SCTimer instance.
+		 */
+		SCTimer * getTimer(
+			sc::timer::TimedInterface * machine,
+			sc::eventid                 event);
 
+		/**
+		 * This is the two dimensional key for finding a SCTimer instance.
+		 */
 		typedef std::pair<sc::timer::TimedInterface *, sc::eventid> TimerKey;
+
+		/**
+		 * This defines a map from a two dimensional key to a concrete
+		 * SCTimer instance.
+		 */
 		typedef QMap<TimerKey, SCTimer *>                           TimerMap;
 
 		TimerMap chart_map;

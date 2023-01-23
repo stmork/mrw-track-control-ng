@@ -13,7 +13,7 @@
 #include <QMainWindow>
 #include <QListWidgetItem>
 
-#include <statecharts/OperatingMode.h>
+#include <statecharts/OperatingModeStatechart.h>
 #include <model/modelrepository.h>
 #include <model/rail.h>
 #include <model/route.h>
@@ -33,7 +33,7 @@ class WidgetRoute;
 
 class MainWindow :
 	public QMainWindow,
-	public mrw::statechart::OperatingMode::OperationCallback
+	public mrw::statechart::OperatingModeStatechart::OperationCallback
 {
 	Q_OBJECT
 
@@ -153,10 +153,10 @@ private:
 	QString dump(
 		const mrw::model::Rail * rail) const;
 
-	Ui::MainWindow          *         ui;
-	mrw::model::ModelRepository   &   repo;
-	mrw::model::Route        *        beer_route = nullptr;
-	mrw::statechart::OperatingMode    statechart;
+	Ui::MainWindow          *                   ui;
+	mrw::model::ModelRepository   &             repo;
+	mrw::model::Route        *                  beer_route = nullptr;
+	mrw::statechart::OperatingModeStatechart    statechart;
 };
 
 #endif // MAINWINDOW_H

@@ -819,7 +819,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = util model can ctrl ui README.md
+INPUT                  = util model can ctrl ui statecharts README.md
 USE_MDFILE_AS_MAINPAGE = README.md
 
 # This tag can be used to specify the character encoding of the source files
@@ -923,6 +923,7 @@ EXCLUDE_PATTERNS       = \
                          moc_*.* \
                          qrc_*.* \
                          ui_*.* \
+                         *Statechart.* */test/*
 
 # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names
 # (namespaces, classes, functions, etc.) that should be excluded from the

@@ -160,72 +160,72 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 {
 	connect(
 		&dispatcher, &MrwBusService::connected,
-		&statechart, &OperatingMode::can_connected,
+		&statechart, &OperatingModeStatechart::can_connected,
 		Qt::QueuedConnection);
 	connect(
-		&statechart, &OperatingMode::cleared,
+		&statechart, &OperatingModeStatechart::cleared,
 		&ControllerRegistry::instance(), &ControllerRegistry::clear,
 		Qt::DirectConnection);
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::failed,
-		&statechart, &OperatingMode::failed,
+		&statechart, &OperatingModeStatechart::failed,
 		Qt::QueuedConnection);
 
 	connect(
-		&statechart, &OperatingMode::start,
+		&statechart, &OperatingModeStatechart::start,
 		&ControllerRegistry::instance(), &ControllerRegistry::start,
 		Qt::QueuedConnection);
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::completed,
-		&statechart, &OperatingMode::started,
+		&statechart, &OperatingModeStatechart::started,
 		Qt::QueuedConnection);
 
 	connect(
 		ui->actionOperate, &QAction::triggered,
-		&statechart, &OperatingMode::operate,
+		&statechart, &OperatingModeStatechart::operate,
 		Qt::QueuedConnection);
 	connect(
 		ui->actionEdit, &QAction::triggered,
-		&statechart, &OperatingMode::edit,
+		&statechart, &OperatingModeStatechart::edit,
 		Qt::QueuedConnection);
 	connect(
 		ui->actionInit, &QAction::triggered,
-		&statechart, &OperatingMode::init,
+		&statechart, &OperatingModeStatechart::init,
 		Qt::QueuedConnection);
 	connect(
 		ui->actionClear, &QAction::triggered,
-		&statechart, &OperatingMode::clear,
+		&statechart, &OperatingModeStatechart::clear,
 		Qt::DirectConnection);
 
 	connect(
-		&statechart, &OperatingMode::start,
+		&statechart, &OperatingModeStatechart::start,
 		this, &MainWindow::onInit,
 		Qt::QueuedConnection);
 	connect(
-		&statechart, &OperatingMode::failing,
+		&statechart, &OperatingModeStatechart::failing,
 		&dispatcher, &MrwMessageDispatcher::emergencyStop,
 		Qt::DirectConnection);
 	connect(
-		&statechart, &OperatingMode::failing,
+		&statechart, &OperatingModeStatechart::failing,
 		this, &MainWindow::onFailed,
 		Qt::DirectConnection);
 	connect(
-		&statechart, &OperatingMode::operating,
+		&statechart, &OperatingModeStatechart::operating,
 		this, &MainWindow::onOperate,
 		Qt::QueuedConnection);
 	connect(
-		&statechart, &OperatingMode::editing,
+		&statechart, &OperatingModeStatechart::editing,
 		this, &MainWindow::onEdit,
 		Qt::QueuedConnection);
 }
 
 void MainWindow::enable()
 {
-	const bool operating      = statechart.isStateActive(OperatingMode::State::main_region_Operating);
-	const bool editing        = statechart.isStateActive(OperatingMode::State::main_region_Editing);
-	const bool failed         = statechart.isStateActive(OperatingMode::State::main_region_Failed);
+	const bool   operating    = statechart.isStateActive(OperatingModeStatechart::State::main_region_Operating);
+	const bool   editing      = statechart.isStateActive(OperatingModeStatechart::State::main_region_Editing);
+	const bool   failed       = statechart.isStateActive(OperatingModeStatechart::State::main_region_Failed);
 	const size_t switch_count = count<RegularSwitchController>() + count<DoubleCrossSwitchController>();
-	const size_t rail_count   = count<RailController>() + count<SignalControllerProxy>();
+	const size_t rail_count   = count<RailController>() +          count<SignalControllerProxy>();
 
 	ui->actionUp->setEnabled(editing);
 	ui->actionDown->setEnabled(editing);

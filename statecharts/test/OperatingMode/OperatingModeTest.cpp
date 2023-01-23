@@ -6,7 +6,7 @@
 * */
 #include <string>
 #include "gtest/gtest.h"
-#include "OperatingMode.h"
+#include "OperatingModeStatechart.h"
 #include "sc_runner_timed.h"
 #include "sc_types.h"
 
@@ -22,7 +22,7 @@ namespace mrw
 		void failAfterStart();
 		void doOperating();
 		void doEdit();
-		mrw::statechart::OperatingMode * statechart;
+		mrw::statechart::OperatingModeStatechart * statechart;
 
 
 		class CanConnectBusMock
@@ -121,7 +121,7 @@ namespace mrw
 		};
 		static CanIsConnectedMock * canIsConnectedMock;
 
-		class MockDefault : public mrw::statechart::OperatingMode::OperationCallback
+		class MockDefault : public mrw::statechart::OperatingModeStatechart::OperationCallback
 		{
 		public:
 			void resetTransaction()
@@ -133,7 +133,7 @@ namespace mrw
 				return false;
 			}
 		};
-		class MockCan : public mrw::statechart::OperatingMode::Can::OperationCallback
+		class MockCan : public mrw::statechart::OperatingModeStatechart::Can::OperationCallback
 		{
 		public:
 			void connectBus()
@@ -154,7 +154,7 @@ namespace mrw
 		protected:
 			virtual void SetUp()
 			{
-				statechart = new mrw::statechart::OperatingMode();
+				statechart = new mrw::statechart::OperatingModeStatechart();
 				runner = new TimedSctUnitRunner(
 					statechart,
 					true,
@@ -178,7 +178,7 @@ namespace mrw
 
 			EXPECT_TRUE(!statechart->isFinal());
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Prepare_Bus));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Prepare_Bus));
 
 			EXPECT_TRUE(canConnectBusMock->calledAtLeastOnce());
 
@@ -207,7 +207,7 @@ namespace mrw
 
 			runner->proceed_time(statechart->getTimeout());
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Failed));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Failed));
 
 			EXPECT_TRUE(statechart->isRaisedFailing());
 
@@ -220,7 +220,7 @@ namespace mrw
 			statechart->can
 			()->raiseConnected();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Init));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Init));
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
@@ -246,7 +246,7 @@ namespace mrw
 
 			statechart->raiseFailed();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Failed));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Failed));
 
 			EXPECT_TRUE(statechart->isRaisedFailing());
 
@@ -276,7 +276,7 @@ namespace mrw
 
 			runner->proceed_time(statechart->getTimeout());
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Failed));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Failed));
 
 			EXPECT_TRUE(statechart->isRaisedFailing());
 
@@ -300,7 +300,7 @@ namespace mrw
 
 			statechart->raiseClear();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Init));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Init));
 
 			EXPECT_TRUE(statechart->isRaisedCleared());
 
@@ -329,7 +329,7 @@ namespace mrw
 
 			statechart->raiseClear();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Failed));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Failed));
 
 
 			canIsConnectedMock->reset();
@@ -347,7 +347,7 @@ namespace mrw
 
 			statechart->raiseEdit();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Editing));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Editing));
 
 			EXPECT_TRUE(statechart->isRaisedCleared());
 
@@ -363,7 +363,7 @@ namespace mrw
 
 			statechart->raiseStarted();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Operating));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Operating));
 
 			EXPECT_TRUE(statechart->isRaisedOperating());
 
@@ -395,7 +395,7 @@ namespace mrw
 
 			statechart->raiseFailed();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Operating));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Operating));
 
 
 		}
@@ -413,7 +413,7 @@ namespace mrw
 
 			statechart->raiseInit();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Init));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Init));
 
 			EXPECT_TRUE(statechart->isRaisedOperating());
 
@@ -432,7 +432,7 @@ namespace mrw
 
 			statechart->raiseEdit();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Editing));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Editing));
 
 			EXPECT_TRUE(statechart->isRaisedOperating());
 
@@ -468,7 +468,7 @@ namespace mrw
 
 			statechart->raiseOperate();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingMode::State::main_region_Operating));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Operating));
 
 			EXPECT_TRUE(statechart->isRaisedEditing());
 

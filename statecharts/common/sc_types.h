@@ -5,8 +5,6 @@
 
 #pragma once
 
-#pragma once
-
 #ifndef SC_TYPES_H_
 #define SC_TYPES_H_
 

@@ -5,17 +5,17 @@
 //
 * */
 
-#ifndef OPERATINGMODE_H_
-#define OPERATINGMODE_H_
+#ifndef OPERATINGMODESTATECHART_H_
+#define OPERATINGMODESTATECHART_H_
 
 namespace mrw
 {
 	namespace statechart
 	{
 		/*!
-		Forward declaration for the OperatingMode state machine.
+		Forward declaration for the OperatingModeStatechart state machine.
 		*/
-		class OperatingMode;
+		class OperatingModeStatechart;
 	}
 }
 
@@ -26,7 +26,7 @@ namespace mrw
 #include "../common/sc_timer.h"
 
 /*! \file
-Header of the state machine 'OperatingMode'.
+Header of the state machine 'OperatingModeStatechart'.
 */
 
 namespace mrw
@@ -34,12 +34,12 @@ namespace mrw
 	namespace statechart
 	{
 
-		class OperatingMode : public sc::timer::TimedInterface, public sc::StatemachineInterface
+		class OperatingModeStatechart : public sc::timer::TimedInterface, public sc::StatemachineInterface
 		{
 		public:
-			OperatingMode();
+			OperatingModeStatechart();
 
-			virtual ~OperatingMode();
+			virtual ~OperatingModeStatechart();
 
 
 
@@ -136,7 +136,7 @@ namespace mrw
 			class Can
 			{
 			public:
-				Can(OperatingMode * parent);
+				Can(OperatingModeStatechart * parent);
 
 				/*! Gets the value of the variable 'timeout' that is defined in the interface scope 'can'. */
 				static sc::integer getTimeout() ;
@@ -166,13 +166,13 @@ namespace mrw
 
 
 			private:
-				friend class OperatingMode;
+				friend class OperatingModeStatechart;
 
 				static const sc::integer timeout;
 				/*! Indicates event 'connected' of interface scope 'can' is active. */
 				bool connected_raised;
 
-				OperatingMode * parent;
+				OperatingModeStatechart * parent;
 
 
 
@@ -245,8 +245,8 @@ namespace mrw
 
 
 		private:
-			OperatingMode(const OperatingMode & rhs);
-			OperatingMode & operator=(const OperatingMode &);
+			OperatingModeStatechart(const OperatingModeStatechart & rhs);
+			OperatingModeStatechart & operator=(const OperatingModeStatechart &);
 
 			static const sc::integer timeout;
 
@@ -351,10 +351,10 @@ namespace mrw
 		};
 
 
-		inline OperatingMode::OperationCallback::~OperationCallback() {}
-		inline OperatingMode::Can::OperationCallback::~OperationCallback() {}
+		inline OperatingModeStatechart::OperationCallback::~OperationCallback() {}
+		inline OperatingModeStatechart::Can::OperationCallback::~OperationCallback() {}
 
 	}
 }
 
-#endif /* OPERATINGMODE_H_ */
+#endif /* OPERATINGMODESTATECHART_H_ */
