@@ -1,5 +1,5 @@
 # The MRW-Configure tool
-The MRW-Configure tool configures the model railways devices it should control. Up to 44 devices are allowed. To configure the CAN controllers a model railway needs to be read.
+The <code>MRW-Configure</code> tool configures the model railways devices it should control. Up to 44 devices are allowed. To configure the CAN controllers a model railway needs to be read.
 
 ## Program flow
 Each controller is handled seperately. There occure no broadcast sending.1. To configure a CAN controller it has to enter the configuration by sending an addressed CFGBGN (config begin) command.
@@ -54,6 +54,6 @@ end
 
 ## Statechart
 
-The configuration behaviour of the MRW-Configure tool is controlled by the following statechart:
+The configuration behaviour of the <tool>MRW-Configure</tool> tool is controlled by the following statechart:
 
 <img src="../../statecharts/images/ConfigStatechart_0.png"/>

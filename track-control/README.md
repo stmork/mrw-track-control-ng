@@ -1,5 +1,5 @@
 # Using the MRW track control software
-The MRW-TrackControl is the central tool using a model railway based on the MRW project. To use this tool you must have prepared the following:
+The <code>MRW-TrackControl</code> is the central tool using a model railway based on the MRW project. To use this tool you must have prepared the following:
 1. Qt with a QPA frontend configured.
 2. CAN bus configured
 3. Of course: the *mrw-ng* package installed.
@@ -72,7 +72,7 @@ So the simplest scenario to start <code>MRW-TrackControl</code> is to use a dire
 ```mermaid
 flowchart LR
 	subgraph Host A
-		MRW-TrackControl-- socketcan ---CAN-Bus
+		MRW-TrackControl-- socketcan ---CAN-bus
 	end
 ```
 
@@ -90,7 +90,7 @@ Note that you start the <code>MRW-Proxy</code> tool first, since it provides the
 flowchart BT
 	subgraph Host A
 		vcan([Virtual CAN])
-		MRW-Proxy -- socketcan --- CAN-Bus
+		MRW-Proxy -- socketcan --- CAN-bus
 		MRW-Proxy -->|provides|vcan
 		end
 		subgraph Host B
@@ -100,7 +100,7 @@ flowchart BT
 
 ### Simulation
 
-If you want to simulate a model railway you can use the <code>MRW-Simulator</code> tool. This tool has to be started first, because the tool provides the virtual CAN Server on socket  localhost:35468. All following tools detect the virtual CAN bus server and connect automatically. The <code>MRW-Tracker</code> ist optional and simulates a train following a track of enabled rail sections during a selected tour/route.
+If you want to simulate a model railway you can use the <code>MRW-Simulator</code> tool. This tool has to be started first, because the tool provides the virtual CAN server on socket  localhost:35468. All following tools detect the virtual CAN bus server and connect automatically. The <code>MRW-Tracker</code> ist optional and simulates a train following a track of enabled rail sections during a selected tour/route.
 
 ```mermaid
 flowchart LR

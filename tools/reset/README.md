@@ -1,5 +1,5 @@
 # The MRW-Reset tool
-The MRW-Reset simply restarts all connected CAN controllers by sending a broadcast RESET command.
+The <code>MRW-Reset</code> simply restarts all connected CAN controllers by sending a broadcast RESET command.
 
 ## Program flow
 1. Send a broadcast RESET. Now all CAN controllers are resetting and after that entering the bootloader mode. Ech CAN controller respond twice by sending a RESET / MSG_OK and a RESET / MSG_RESET_PENDING response. These answeres are registered.
