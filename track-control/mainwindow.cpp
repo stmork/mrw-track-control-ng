@@ -717,6 +717,7 @@ void MainWindow::on_actionLock_triggered()
 		BaseController::callback<SignalControllerProxy>(
 			controller,            &SignalControllerProxy::failed);
 	});
+
 	on_clearAllSections_clicked();
 	ui->regionTabWidget->currentWidget()->update();
 }
