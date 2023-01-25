@@ -405,6 +405,7 @@ QString SignalControllerProxy::toString() const
 		arg(grouped_name, -10).
 		arg(Signal::get(symbol), -4).
 		arg(Device::get(lock_state), -8).
+
 		arg(Signal::get(main()),    -4).
 		arg(Signal::get(distant()), -4).
 		arg(Signal::get(shunt()),   -4);

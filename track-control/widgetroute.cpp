@@ -209,13 +209,6 @@ void WidgetRoute::prepareSignals(
 	}
 }
 
-bool WidgetRoute::always(SignalControllerProxy * controller)
-{
-	Q_UNUSED(controller);
-
-	return true;
-}
-
 void WidgetRoute::rename()
 {
 	QString name = QString("%1 %2").
@@ -250,25 +243,25 @@ void WidgetRoute::entered()
 
 void WidgetRoute::left()
 {
-	SectionController   *   controller = dynamic_cast<SectionController *>(QObject::sender());
-	SignalControllerProxy * sig_ctrl   = getSignalController(controller->section());
+	SectionController   *   section_ctrl = dynamic_cast<SectionController *>(QObject::sender());
+	SignalControllerProxy * signal_ctrl  = getSignalController(section_ctrl->section());
 
-	if (sig_ctrl != nullptr)
+	if (signal_ctrl != nullptr)
 	{
-		sig_ctrl->disable();
-		qDebug().noquote() << "Left: dis.  " << *sig_ctrl;
+		signal_ctrl->disable();
+		qDebug().noquote() << "Left: dis.  " << *signal_ctrl;
 	}
-	qDebug().noquote() << "Left:       " << *controller;
+	qDebug().noquote() << "Left:       " << *section_ctrl;
 }
 
 void WidgetRoute::tryUnblock()
 {
 	__METHOD__;
 
-	SectionController   *   controller  = dynamic_cast<SectionController *>(QObject::sender());
-	Section        *        section     = controller->section();
-	SignalControllerProxy * sig_ctrl    = getSignalController(section);
-	Signal         *        main_signal = sig_ctrl != nullptr ? sig_ctrl->mainSignal() : nullptr;
+	SectionController   *   section_ctrl  = dynamic_cast<SectionController *>(QObject::sender());
+	Section        *        section       = section_ctrl->section();
+	SignalControllerProxy * signal_ctrl   = getSignalController(section);
+	Signal         *        main_signal   = signal_ctrl != nullptr ? signal_ctrl->mainSignal() : nullptr;
 
 	if (main_signal != nullptr)
 	{
@@ -296,7 +289,10 @@ void WidgetRoute::tryUnblock()
 
 void WidgetRoute::unregister()
 {
-	unregister(dynamic_cast<SectionController *>(QObject::sender()));
+	SectionController * section_ctrl =
+			dynamic_cast<SectionController *>(QObject::sender());
+
+	unregister(section_ctrl);
 	finalize();
 }
 

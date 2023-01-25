@@ -73,7 +73,7 @@ private:
 	void collectSignalControllers(
 		std::vector<mrw::ctrl::SignalControllerProxy *> & controllers,
 		std::function<bool(mrw::ctrl::SignalControllerProxy * ctrl)> guard =
-			&WidgetRoute::always) const;
+			&mrw::util::Method::always<mrw::ctrl::SignalControllerProxy>) const;
 	void collectSectionControllers(
 		std::vector<mrw::ctrl::SectionController *>   &   controllers) const;
 
@@ -89,8 +89,6 @@ private:
 	void prepareSignals(
 		mrw::model::Section  * last_valid_section,
 		mrw::model::RailPart * last_valid_part);
-
-	static bool always(mrw::ctrl::SignalControllerProxy * controller);
 
 	// Implementation of RouteStatemachine::OperationCallback
 	virtual void resetTransaction() override;
