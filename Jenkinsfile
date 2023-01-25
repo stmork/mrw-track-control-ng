@@ -30,14 +30,6 @@ pipeline
 			steps
 			{
 				sh 'make doxygen'
-				publishHTML([
-					allowMissing: false,
-					alwaysLinkToLastBuild: false,
-					keepAll: false,
-					reportDir: 'doc/html',
-					reportFiles: 'index.html',
-					reportName: 'MRW-NG Doxygen',
-					reportTitles: ''])
 			}
 		}
 
@@ -55,13 +47,6 @@ pipeline
 			steps
 			{
 				sh 'make sct-unit valgrind'
-
-				xunit ([
-					QtTest(    pattern: 'qtest-*.xml', stopProcessingIfError: false),
-					GoogleTest(pattern: 'statecharts/test/gtest-*.xml', stopProcessingIfError: false)])
-
-				xunit ([
-					Valgrind(  pattern: 'valgrind*.xml', stopProcessingIfError: false)])
  			}
 		}
 
@@ -88,6 +73,21 @@ pipeline
 		{
 			chuckNorris()
 			step([$class: 'Mailer', recipients: 'info@eisenbahnsteuerung.org'])
+
+			publishHTML([
+				allowMissing: false,
+				alwaysLinkToLastBuild: false,
+				keepAll: false,
+				reportDir: 'doc/html',
+				reportFiles: 'index.html',
+				reportName: 'MRW-NG Doxygen',
+				reportTitles: ''])
+
+			xunit ([
+				QtTest(    pattern: 'qtest-*.xml', stopProcessingIfError: false),
+				GoogleTest(pattern: 'statecharts/test/gtest-*.xml', stopProcessingIfError: false)])
+			xunit ([
+				Valgrind(  pattern: 'valgrind*.xml', stopProcessingIfError: false)])
 		}
 	}
 }
