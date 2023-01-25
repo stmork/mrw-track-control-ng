@@ -153,9 +153,9 @@ private:
 	QString dump(
 		const mrw::model::Rail * rail) const;
 
-	Ui::MainWindow          *                   ui;
-	mrw::model::ModelRepository   &             repo;
-	mrw::model::Route        *                  beer_route = nullptr;
+	Ui::MainWindow               *              ui;
+	mrw::model::ModelRepository        &        repo;
+	mrw::model::Route             *             beer_route = nullptr;
 	mrw::statechart::OperatingModeStatechart    statechart;
 };
 

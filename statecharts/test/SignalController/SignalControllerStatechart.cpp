@@ -784,6 +784,16 @@ namespace mrw
 			enseq_main_region_Init_Init_process_default();
 		}
 
+		/* 'default' enter sequence for state Turning */
+		void SignalControllerStatechart::enseq_main_region_Init_Init_process_Turning_default()
+		{
+			/* 'default' enter sequence for state Turning */
+			enact_main_region_Init_Init_process_Turning();
+			enseq_main_region_Init_Init_process_Turning_main_default();
+			enseq_main_region_Init_Init_process_Turning_distant_default();
+			enseq_main_region_Init_Init_process_Turning_shunt_default();
+		}
+
 		/* 'default' enter sequence for state Turn */
 		void SignalControllerStatechart::enseq_main_region_Init_Init_process_Turning_main_Turn_default()
 		{
@@ -1009,6 +1019,27 @@ namespace mrw
 		{
 			/* 'default' enter sequence for region Init process */
 			react_main_region_Init_Init_process__entry_Default();
+		}
+
+		/* 'default' enter sequence for region main */
+		void SignalControllerStatechart::enseq_main_region_Init_Init_process_Turning_main_default()
+		{
+			/* 'default' enter sequence for region main */
+			react_main_region_Init_Init_process_Turning_main__entry_Default();
+		}
+
+		/* 'default' enter sequence for region distant */
+		void SignalControllerStatechart::enseq_main_region_Init_Init_process_Turning_distant_default()
+		{
+			/* 'default' enter sequence for region distant */
+			react_main_region_Init_Init_process_Turning_distant__entry_Default();
+		}
+
+		/* 'default' enter sequence for region shunt */
+		void SignalControllerStatechart::enseq_main_region_Init_Init_process_Turning_shunt_default()
+		{
+			/* 'default' enter sequence for region shunt */
+			react_main_region_Init_Init_process_Turning_shunt__entry_Default();
 		}
 
 		/* 'default' enter sequence for region Processing */
@@ -1876,10 +1907,31 @@ namespace mrw
 		}
 
 		/* Default react sequence for initial entry  */
+		void SignalControllerStatechart::react_main_region_Init_Init_process_Turning_main__entry_Default()
+		{
+			/* Default react sequence for initial entry  */
+			enseq_main_region_Init_Init_process_Turning_main_Turn_default();
+		}
+
+		/* Default react sequence for initial entry  */
+		void SignalControllerStatechart::react_main_region_Init_Init_process_Turning_distant__entry_Default()
+		{
+			/* Default react sequence for initial entry  */
+			enseq_main_region_Init_Init_process_Turning_distant_Turn_default();
+		}
+
+		/* Default react sequence for initial entry  */
+		void SignalControllerStatechart::react_main_region_Init_Init_process_Turning_shunt__entry_Default()
+		{
+			/* Default react sequence for initial entry  */
+			enseq_main_region_Init_Init_process_Turning_shunt_Turn_default();
+		}
+
+		/* Default react sequence for initial entry  */
 		void SignalControllerStatechart::react_main_region_Init_Init_process__entry_Default()
 		{
 			/* Default react sequence for initial entry  */
-			react_main_region_Init_Init_process__sync0();
+			enseq_main_region_Init_Init_process_Turning_default();
 		}
 
 		/* Default react sequence for initial entry  */
@@ -1891,16 +1943,6 @@ namespace mrw
 
 		/* The reactions of state null. */
 		void SignalControllerStatechart::react_main_region_Init_Init_process__sync0()
-		{
-			/* The reactions of state null. */
-			enact_main_region_Init_Init_process_Turning();
-			enseq_main_region_Init_Init_process_Turning_main_Turn_default();
-			enseq_main_region_Init_Init_process_Turning_distant_Turn_default();
-			enseq_main_region_Init_Init_process_Turning_shunt_Turn_default();
-		}
-
-		/* The reactions of state null. */
-		void SignalControllerStatechart::react_main_region_Init_Init_process__sync1()
 		{
 			/* The reactions of state null. */
 			exseq_main_region_Init();
@@ -2009,7 +2051,7 @@ namespace mrw
 				if ((isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_distant_Completed)) && (isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_shunt_Completed)))
 				{
 					exseq_main_region_Init_Init_process_Turning();
-					react_main_region_Init_Init_process__sync1();
+					react_main_region_Init_Init_process__sync0();
 					transitioned_after = 0;
 				}
 			}
@@ -2041,7 +2083,7 @@ namespace mrw
 				if ((isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_main_Completed)) && (isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_shunt_Completed)))
 				{
 					exseq_main_region_Init_Init_process_Turning();
-					react_main_region_Init_Init_process__sync1();
+					react_main_region_Init_Init_process__sync0();
 					transitioned_after = 1;
 				}
 			}
@@ -2079,7 +2121,7 @@ namespace mrw
 				if ((isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_main_Completed)) && (isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_distant_Completed)))
 				{
 					exseq_main_region_Init_Init_process_Turning();
-					react_main_region_Init_Init_process__sync1();
+					react_main_region_Init_Init_process__sync0();
 					transitioned_after = 2;
 				}
 			}

@@ -366,6 +366,7 @@ namespace mrw
 			void exact_main_region_Failed();
 			void enseq_main_region_Wait_for_Start_default();
 			void enseq_main_region_Init_default();
+			void enseq_main_region_Init_Init_process_Turning_default();
 			void enseq_main_region_Init_Init_process_Turning_main_Turn_default();
 			void enseq_main_region_Init_Init_process_Turning_main_Completed_default();
 			void enseq_main_region_Init_Init_process_Turning_distant_Turn_default();
@@ -390,6 +391,9 @@ namespace mrw
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_default();
 			void enseq_main_region_Init_Init_process_default();
+			void enseq_main_region_Init_Init_process_Turning_main_default();
+			void enseq_main_region_Init_Init_process_Turning_distant_default();
+			void enseq_main_region_Init_Init_process_Turning_shunt_default();
 			void enseq_main_region_Operating_Processing_default();
 			void exseq_main_region_Wait_for_Start();
 			void exseq_main_region_Init();
@@ -437,10 +441,12 @@ namespace mrw
 			void react_main_region_Operating_Processing_Pending_Pending__choice_0();
 			void react_main_region_Operating_Processing_Pending_Pending__choice_1();
 			void react_main_region__entry_Default();
+			void react_main_region_Init_Init_process_Turning_main__entry_Default();
+			void react_main_region_Init_Init_process_Turning_distant__entry_Default();
+			void react_main_region_Init_Init_process_Turning_shunt__entry_Default();
 			void react_main_region_Init_Init_process__entry_Default();
 			void react_main_region_Operating_Processing__entry_Default();
 			void react_main_region_Init_Init_process__sync0();
-			void react_main_region_Init_Init_process__sync1();
 			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_for_Start_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_react(const sc::integer transitioned_before);
