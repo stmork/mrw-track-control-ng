@@ -156,15 +156,25 @@ void SimulatorService::device(const MrwMessage & message)
 	Device       *       device  = model->deviceById(id, unit_no);
 	Response             code    = device != nullptr ? MSG_OK : MSG_UNIT_NOT_FOUND;
 	std::vector<uint8_t> appendix;
+	auto                 late_ok = [this, id, unit_no, cmd]()
+	{
+		const MrwMessage msg(id, unit_no, cmd, MSG_OK);
+
+		write(msg);
+	};
 
 	switch (cmd)
 	{
 	case SETLFT:
+		code = MSG_QUEUED;
 		setSwitchState(device, SWITCH_STATE_LEFT);
+		QTimer::singleShot(75, late_ok);
 		break;
 
 	case SETRGT:
+		code = MSG_QUEUED;
 		setSwitchState(device, SWITCH_STATE_RIGHT);
+		QTimer::singleShot(75, late_ok);
 		break;
 
 	case GETDIR:
@@ -179,12 +189,7 @@ void SimulatorService::device(const MrwMessage & message)
 		if (isFormSignal(device))
 		{
 			code = MSG_QUEUED;
-			QTimer::singleShot(750, [this, id, unit_no, cmd]()
-			{
-				const MrwMessage msg(id, unit_no, cmd, MSG_OK);
-
-				write(msg);
-			} );
+			QTimer::singleShot(750, late_ok);
 		}
 		break;
 
