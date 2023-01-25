@@ -290,7 +290,7 @@ void WidgetRoute::tryUnblock()
 void WidgetRoute::unregister()
 {
 	SectionController * section_ctrl =
-			dynamic_cast<SectionController *>(QObject::sender());
+		dynamic_cast<SectionController *>(QObject::sender());
 
 	unregister(section_ctrl);
 	finalize();

@@ -43,6 +43,8 @@ private:
 	uint8_t getSwitchState(mrw::model::Device * device);
 	uint8_t occupation(mrw::model::Device * device);
 	void    bootSequence(const mrw::can::ControllerId id);
+
+	static bool isFormSignal(const mrw::model::Device * device);
 };
 
 #endif

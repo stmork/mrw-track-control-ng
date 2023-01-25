@@ -3,9 +3,12 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
+#include <QTimer>
+
 #include <model/section.h>
 #include <model/regularswitch.h>
 #include <model/doublecrossswitch.h>
+#include <model/formsignal.h>
 
 #include "simulatorservice.h"
 
@@ -147,11 +150,12 @@ void SimulatorService::controller(
 
 void SimulatorService::device(const MrwMessage & message)
 {
-	const ControllerId id      = message.sid();
-	const UnitNo       unit_no = message.unitNo();
-	const Command      cmd     = message.command();
-	Device      *      device  = model->deviceById(id, unit_no);
-	MrwMessage         response(id, unit_no, cmd, device != nullptr ? MSG_OK : MSG_UNIT_NOT_FOUND);
+	const ControllerId   id      = message.sid();
+	const UnitNo         unit_no = message.unitNo();
+	const Command        cmd     = message.command();
+	Device       *       device  = model->deviceById(id, unit_no);
+	Response             code    = device != nullptr ? MSG_OK : MSG_UNIT_NOT_FOUND;
+	std::vector<uint8_t> appendix;
 
 	switch (cmd)
 	{
@@ -164,13 +168,30 @@ void SimulatorService::device(const MrwMessage & message)
 		break;
 
 	case GETDIR:
-		response.append(getSwitchState(device));
+		appendix.push_back(getSwitchState(device));
 		break;
 
 	case GETRBS:
-		response.append(occupation(device));
+		appendix.push_back(occupation(device));
 		break;
 
+	case SETSGN:
+		if (isFormSignal(device))
+		{
+			code = MSG_QUEUED;
+			QTimer::singleShot(750, [this, id, unit_no, cmd]()
+			{
+				const MrwMessage msg(id, unit_no, cmd, MSG_OK);
+
+				write(msg);
+			} );
+		}
+		break;
+
+	case CFGMF2:
+	case CFGMF3:
+	case CFGPF2:
+	case CFGPF3:
 	case CFGLGT:
 	case CFGRAI:
 	case CFGSWN:
@@ -181,16 +202,18 @@ void SimulatorService::device(const MrwMessage & message)
 	case CFGPL2:
 	case CFGPL3:
 	case CFGSL2:
-	case CFGMF2:
-	case CFGMF3:
-	case CFGPF2:
-	case CFGPF3:
 		device_count++;
 		break;
 
 	default:
 		// No additional action needed.
 		break;
+	}
+
+	MrwMessage response(id, unit_no, cmd, code);
+	for (const uint8_t b : appendix)
+	{
+		response.append(b);
 	}
 
 	write(response);
@@ -237,4 +260,9 @@ void SimulatorService::bootSequence(const ControllerId id)
 	response = MrwMessage(id, NO_UNITNO, RESET, MSG_BOOTED);
 	response.append(0);
 	write(response);
+}
+
+bool SimulatorService::isFormSignal(const Device * device)
+{
+	return dynamic_cast<const FormSignal *>(device) != nullptr;
 }
