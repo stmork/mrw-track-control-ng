@@ -51,16 +51,20 @@ namespace mrw
 				main_region_Init,
 				main_region_Editing,
 				main_region_Failed,
-				main_region_Operating
+				main_region_Operating,
+				main_region_Exit,
+				main_region__final_
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 5;
+			static const sc::integer numStates = 7;
 			static const sc::integer scvi_main_region_Prepare_Bus = 0;
 			static const sc::integer scvi_main_region_Init = 0;
 			static const sc::integer scvi_main_region_Editing = 0;
 			static const sc::integer scvi_main_region_Failed = 0;
 			static const sc::integer scvi_main_region_Operating = 0;
+			static const sc::integer scvi_main_region_Exit = 0;
+			static const sc::integer scvi_main_region__final_ = 0;
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -72,6 +76,8 @@ namespace mrw
 				edit,
 				operate,
 				init,
+				finalize,
+				completed,
 				Can_connected,
 				_te0_main_region_Prepare_Bus_,
 				_te1_main_region_Init_
@@ -96,6 +102,10 @@ namespace mrw
 			void raiseOperate();
 			/*! Raises the in event 'init' of default interface scope. */
 			void raiseInit();
+			/*! Raises the in event 'finalize' of default interface scope. */
+			void raiseFinalize();
+			/*! Raises the in event 'completed' of default interface scope. */
+			void raiseCompleted();
 			/*! Check if event 'start' of default interface scope is raised. */
 			bool isRaisedStart();
 			/*! Check if event 'cleared' of default interface scope is raised. */
@@ -110,6 +120,8 @@ namespace mrw
 			bool isRaisedEditing();
 			/*! Get value of event 'editing' of default interface scope. */
 			bool getEditingValue();
+			/*! Check if event 'quit' of default interface scope is raised. */
+			bool isRaisedQuit();
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent();
@@ -126,6 +138,8 @@ namespace mrw
 				virtual void resetTransaction() = 0;
 
 				virtual bool hasActiveRoutes() = 0;
+
+				virtual void disableRoutes() = 0;
 
 
 			};
@@ -275,6 +289,7 @@ namespace mrw
 			void enact_main_region_Editing();
 			void enact_main_region_Failed();
 			void enact_main_region_Operating();
+			void enact_main_region_Exit();
 			void exact_main_region_Prepare_Bus();
 			void exact_main_region_Init();
 			void exact_main_region_Editing();
@@ -285,13 +300,18 @@ namespace mrw
 			void enseq_main_region_Editing_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_Operating_default();
+			void enseq_main_region_Exit_default();
+			void enseq_main_region__final__default();
 			void enseq_main_region_default();
 			void exseq_main_region_Prepare_Bus();
 			void exseq_main_region_Init();
 			void exseq_main_region_Editing();
 			void exseq_main_region_Failed();
 			void exseq_main_region_Operating();
+			void exseq_main_region_Exit();
+			void exseq_main_region__final_();
 			void exseq_main_region();
+			void react_main_region__choice_0();
 			void react_main_region__entry_Default();
 			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Prepare_Bus_react(const sc::integer transitioned_before);
@@ -299,6 +319,8 @@ namespace mrw
 			sc::integer main_region_Editing_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
+			sc::integer main_region_Exit_react(const sc::integer transitioned_before);
+			sc::integer main_region__final__react(const sc::integer transitioned_before);
 			void clearOutEvents();
 			void clearInEvents();
 			void microStep();
@@ -325,6 +347,12 @@ namespace mrw
 			/*! Indicates event 'init' of default interface scope is active. */
 			bool init_raised;
 
+			/*! Indicates event 'finalize' of default interface scope is active. */
+			bool finalize_raised;
+
+			/*! Indicates event 'completed' of default interface scope is active. */
+			bool completed_raised;
+
 			/*! Indicates event 'start' of default interface scope is active. */
 			bool start_raised;
 
@@ -345,6 +373,9 @@ namespace mrw
 
 			/*! Indicates event 'editing' of default interface scope is active. */
 			bool editing_raised;
+
+			/*! Indicates event 'quit' of default interface scope is active. */
+			bool quit_raised;
 
 
 

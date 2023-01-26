@@ -21,12 +21,12 @@ void BatchParticipant::increase()
 		if (open_tx == nullptr)
 		{
 			open_tx = batch;
-			batch->increase(this);
 		}
 		else
 		{
 			qWarning("inc: Batch already active!");
 		}
+		batch->increase(this);
 	}
 	else
 	{
@@ -38,11 +38,8 @@ void BatchParticipant::decrease()
 {
 	if (batch != nullptr)
 	{
-		if (open_tx == batch)
-		{
-			batch->decrease(this);
-		}
-		else
+		batch->decrease(this);
+		if (open_tx != batch)
 		{
 			qWarning("dec: Batch different!");
 		}

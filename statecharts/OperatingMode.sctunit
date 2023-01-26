@@ -15,6 +15,10 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		assert !is_final
 		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Prepare_Bus)
 		assert called can.connectBus
+
+		mock hasActiveRoutes returns (false)
+		mock disableRoutes
+		mock resetTransaction
 	}
 
 	@Test
@@ -201,6 +205,51 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 	}
 
 	@Test
+	operation doQuit()
+	{
+		// Given
+		doOperating()
+		mock hasActiveRoutes returns (false)
+
+		// When
+		raise finalize
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region._final_)
+		assert quit
+	}
+
+	@Test
+	operation doQuitWithRoute()
+	{
+		// Given
+		doOperating()
+		mock hasActiveRoutes returns (true)
+
+		// When
+		raise finalize
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Exit)
+		assert called disableRoutes
+	}
+
+	@Test
+	operation doCompleteQuit()
+	{
+		// Given
+		doQuitWithRoute()
+		mock hasActiveRoutes returns (false)
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region._final_)
+		assert quit
+	}
+
+	@Test
 	operation doExit()
 	{
 		enter
@@ -222,6 +271,10 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		assert !is_active
 
 		doEdit()
+		exit
+		assert !is_active
+
+		doQuitWithRoute()
 		exit
 		assert !is_active
 

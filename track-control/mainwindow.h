@@ -44,6 +44,8 @@ public:
 		QWidget             *            parent = nullptr);
 	~MainWindow();
 
+	void finalize();
+
 private slots:
 	void itemClicked(QListWidgetItem * item);
 	void enable();
@@ -121,6 +123,7 @@ private:
 
 	virtual void        resetTransaction() override;
 	virtual bool        hasActiveRoutes() override;
+	virtual void        disableRoutes() override;
 
 	mrw::model::Route * createRoute(
 		const bool                     direction,

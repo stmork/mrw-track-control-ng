@@ -56,7 +56,7 @@ MainWindow::MainWindow(
 
 	connect(
 		ui->actionQuit,        &QAction::triggered,
-		QCoreApplication::instance(), &QCoreApplication::quit);
+		this, &MainWindow::finalize);
 	connect(
 		ui->routeListWidget, &QListWidget::currentItemChanged,
 		this, &MainWindow::enable);
@@ -179,6 +179,9 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 		&ControllerRegistry::instance(), &ControllerRegistry::completed,
 		&statechart, &OperatingModeStatechart::started,
 		Qt::QueuedConnection);
+	connect(
+		&statechart, &OperatingModeStatechart::quit,
+		QCoreApplication::instance(), &QCoreApplication::quit);
 
 	connect(
 		ui->actionOperate, &QAction::triggered,
@@ -276,6 +279,12 @@ void MainWindow::enable()
 		(rail_count >= 2) && (switch_count == 0));
 }
 
+/*************************************************************************
+**                                                                      **
+**       Statechart callbacks                                           **
+**                                                                      **
+*************************************************************************/
+
 void MainWindow::resetTransaction()
 {
 	__METHOD__;
@@ -286,6 +295,16 @@ void MainWindow::resetTransaction()
 bool MainWindow::hasActiveRoutes()
 {
 	return ui->routeListWidget->count() > 0;
+}
+
+void MainWindow::disableRoutes()
+{
+	__METHOD__;
+
+	QListWidgetItem * item  = ui->routeListWidget->takeItem(0);
+	WidgetRoute   *   route = item->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
+
+	route->disable();
 }
 
 void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Position * position)
@@ -367,6 +386,11 @@ bool MainWindow::isSameRegion()
 	return regions.size() == 1;
 }
 
+void MainWindow::finalize()
+{
+	statechart.finalize();
+}
+
 /*************************************************************************
 **                                                                      **
 **       Routing support                                                **
@@ -439,6 +463,7 @@ void MainWindow::routeFinished()
 		}
 	}
 
+	statechart.completed();
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
 }

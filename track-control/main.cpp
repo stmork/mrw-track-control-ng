@@ -11,7 +11,6 @@
 #include <util/method.h>
 #include <util/settings.h>
 #include <util/dumphandler.h>
-#include <util/termhandler.h>
 #include <model/modelrepository.h>
 
 #include "mainwindow.h"
@@ -26,13 +25,16 @@ int main(int argc, char * argv[])
 
 	Method::pattern();
 
-	TermHandler              terminator( { SIGTERM, SIGINT } );
 	ModelRepository          repo(ModelRepository::proposeModelName(), true);
 
 	if (repo)
 	{
 		MrwMessageDispatcher dispatcher(repo, repo.interface(), repo.plugin());
 		MainWindow           main_window(repo, dispatcher);
+		SignalHandler        terminator( { SIGTERM, SIGINT }, [&]()
+		{
+			main_window.finalize();
+		});
 		DumpHandler          dumper([&]()
 		{
 			ModelRailway * model = repo;
