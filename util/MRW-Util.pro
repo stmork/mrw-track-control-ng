@@ -15,6 +15,7 @@ SOURCES += \
 	properties.cpp \
 	random.cpp \
 	settings.cpp \
+	signalhandler.cpp \
 	stringutil.cpp \
 	termhandler.cpp
 
@@ -27,6 +28,7 @@ HEADERS += \
 	properties.h \
 	random.h \
 	settings.h \
+	signalhandler.h \
 	singleton.h \
 	stringutil.h \
 	termhandler.h

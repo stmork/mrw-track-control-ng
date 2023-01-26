@@ -8,8 +8,7 @@
 #ifndef MRW_UTIL_TERMHANDLER_H
 #define MRW_UTIL_TERMHANDLER_H
 
-#include <signal.h>
-#include <initializer_list>
+#include <util/signalhandler.h>
 
 namespace mrw::util
 {
@@ -21,11 +20,11 @@ namespace mrw::util
 	 * @code
 	 killall -SIGQUIT <application>
 	 @endcode
-		 *
-		 * @note The application will terminate gracefully using
-		 * the QCoreApplication::quit() method.
+	 *
+	 * @note The application will terminate gracefully using
+	 * the QCoreApplication::quit() method.
 	 */
-	class TermHandler
+	class TermHandler : public SignalHandler
 	{
 	public:
 		/**
@@ -61,9 +60,6 @@ namespace mrw::util
 		 * @see man 1 kill for further information.
 		 */
 		explicit TermHandler(const std::initializer_list<int> & quit_signals);
-
-	private:
-		static void handler(const int sig);
 	};
 }
 

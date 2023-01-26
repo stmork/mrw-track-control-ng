@@ -8,8 +8,7 @@
 #ifndef MRW_UTIL_DUMPHANDLER_H
 #define MRW_UTIL_DUMPHANDLER_H
 
-#include <signal.h>
-#include <functional>
+#include <util/signalhandler.h>
 
 namespace mrw::util
 {
@@ -23,13 +22,12 @@ namespace mrw::util
 	 *
 	 * @note The application will <em>not</em> terminate and
 	 * continues execution.
+	 *
+	 * @see SignalHandler
 	 */
-	class DumpHandler
+	class DumpHandler : public SignalHandler
 	{
 	public:
-		/** The type definition of the callback. */
-		typedef std::function<void()> Callback;
-
 		/**
 		 * This constructor registers a callback to react on the POSIX SIGQUIT
 		 * signal like the stack dump of a Java process. Pressing CTRL + \\
@@ -44,12 +42,7 @@ namespace mrw::util
 		 * DumpHandler   handler([]() {  printf("Hello\n");  });
 		 * @endcode
 		 */
-		explicit DumpHandler(Callback dump_callback);
-
-	private:
-		static void handler(int sig);
-
-		static Callback callback;
+		explicit DumpHandler(SignalCallback dump_callback);
 	};
 }
 
