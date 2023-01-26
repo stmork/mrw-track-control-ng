@@ -61,12 +61,6 @@ public:
 
 TestUtil::TestUtil(QObject * parent) : QObject(parent)
 {
-	TermHandler      term_handler( { SIGTERM, SIGINT } );
-	DumpHandler      dump_handler( [] ()
-	{
-		qInfo("Called");
-	});
-
 	Method::pattern();
 }
 
@@ -196,4 +190,23 @@ void TestUtil::testRandom()
 
 	QVERIFY(std::abs(diff) <= 0.02);
 	QCOMPARE(dice / TEST_RAND_LOOP, 3u);
+}
+
+void TestUtil::testDumpHandler()
+{
+	size_t       count = 0;
+	TermHandler  term_handler( { SIGTERM, SIGINT } );
+	DumpHandler  dump_handler( [&] ()
+	{
+		count++;
+		qInfo("Called");
+	});
+
+	QCOMPARE(count, 0u);
+
+	raise(SIGQUIT);
+	QCOMPARE(count, 1u);
+
+	raise(SIGQUIT);
+	QCOMPARE(count, 2u);
 }

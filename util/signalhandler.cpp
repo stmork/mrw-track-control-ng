@@ -17,7 +17,7 @@ SignalHandler::SignalHandler(
 	struct sigaction sa;
 
 	sigemptyset(&blocking_mask);
-	for (auto sig : signal_list)
+	for (const int sig : signal_list)
 	{
 		sigaddset(&blocking_mask, sig);
 	}

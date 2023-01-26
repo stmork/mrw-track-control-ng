@@ -34,6 +34,7 @@ namespace mrw::test
 		void testProperties();
 		void testClockService();
 		void testRandom();
+		void testDumpHandler();
 	};
 }
 
