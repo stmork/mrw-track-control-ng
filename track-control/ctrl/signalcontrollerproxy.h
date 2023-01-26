@@ -13,6 +13,7 @@
 #include <model/signal.h>
 #include <ctrl/signalcontroller.h>
 #include <ctrl/controllerregistrand.h>
+#include <ctrl/batchparticipant.h>
 #include <ctrl/railpartinfo.h>
 #include <ctrl/signalproxy.h>
 #include <statecharts/SignalControllerStatechart.h>
@@ -24,6 +25,7 @@ namespace mrw::ctrl
 		public SignalController,
 		public RailPartInfo,
 		public ControllerRegistrand,
+		public BatchParticipant,
 		public mrw::statechart::SignalControllerStatechart::OperationCallback
 	{
 		Q_OBJECT

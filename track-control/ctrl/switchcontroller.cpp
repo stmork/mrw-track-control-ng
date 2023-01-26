@@ -30,10 +30,10 @@ SwitchController::~SwitchController()
 
 void SwitchController::inc()
 {
-	ControllerRegistry::instance().increase(this);
+	increase();
 }
 
 void SwitchController::dec()
 {
-	ControllerRegistry::instance().decrease(this);
+	decrease();
 }

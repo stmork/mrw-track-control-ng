@@ -10,6 +10,7 @@
 
 #include <ctrl/railpartinfo.h>
 #include <ctrl/controllerregistrand.h>
+#include <ctrl/batchparticipant.h>
 #include <statecharts/SwitchStatechart.h>
 
 namespace mrw::ctrl
@@ -17,6 +18,7 @@ namespace mrw::ctrl
 	class SwitchController :
 		public RailPartInfo,
 		public ControllerRegistrand,
+		public BatchParticipant,
 		public mrw::statechart::SwitchStatechart::OperationCallback
 	{
 	protected:

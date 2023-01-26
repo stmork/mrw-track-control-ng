@@ -129,12 +129,12 @@ void SectionController::nextController(SectionController * input)
 
 void SectionController::inc()
 {
-	ControllerRegistry::instance().increase(this);
+	increase();
 }
 
 void SectionController::dec()
 {
-	ControllerRegistry::instance().decrease(this);
+	decrease();
 }
 
 QString SectionController::name() const

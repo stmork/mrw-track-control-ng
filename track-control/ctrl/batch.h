@@ -12,16 +12,16 @@
 
 namespace mrw::ctrl
 {
-	class ControllerRegistrand;
+	class BatchParticipant;
 
 	class Batch
 	{
-		std::unordered_set<ControllerRegistrand *> transaction;
+		std::unordered_set<BatchParticipant *> transaction;
 
 	public:
-		void increase(ControllerRegistrand * ctrl);
-		void decrease(ControllerRegistrand * ctrl);
-		bool contains(ControllerRegistrand * ctrl);
+		void increase(BatchParticipant * ctrl);
+		void decrease(BatchParticipant * ctrl);
+		bool contains(BatchParticipant * ctrl);
 		void reset();
 		void tryComplete();
 		bool isCompleted();

@@ -11,6 +11,7 @@
 #include <model/section.h>
 #include <ctrl/basecontroller.h>
 #include <ctrl/controllerregistrand.h>
+#include <ctrl/batchparticipant.h>
 #include <statecharts/SectionStatechart.h>
 
 namespace mrw::ctrl
@@ -18,6 +19,7 @@ namespace mrw::ctrl
 	class SectionController :
 		public BaseController,
 		public ControllerRegistrand,
+		public BatchParticipant,
 		public mrw::statechart::SectionStatechart::OperationCallback
 	{
 		Q_OBJECT

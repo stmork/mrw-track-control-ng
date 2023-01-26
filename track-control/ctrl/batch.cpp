@@ -7,7 +7,7 @@
 #include <QDebug>
 
 #include <ctrl/batch.h>
-#include <ctrl/controllerregistrand.h>
+#include <ctrl/batchparticipant.h>
 
 using namespace mrw::ctrl;
 
@@ -23,26 +23,26 @@ void Batch::reset()
 	transaction.clear();
 }
 
-void Batch::increase(ControllerRegistrand * element)
+void Batch::increase(BatchParticipant * element)
 {
 	if (transaction.find(element) == transaction.end())
 	{
 		transaction.emplace(element);
-		qDebug().noquote() << "Transaction increased to" << transaction.size() << "element(s). Added: " << *element;
+		qDebug().noquote() << "Transaction increased to" << transaction.size() << "element(s). Added: " << element->name();
 	}
 	else
 	{
-		qWarning().noquote() << "Transaction already contains element" << *element;
+		qWarning().noquote() << "Transaction already contains element" << element->name();
 	}
 }
 
-void Batch::decrease(ControllerRegistrand * element)
+void Batch::decrease(BatchParticipant * element)
 {
 	const size_t count = transaction.erase(element);
 
 	if (count == 1)
 	{
-		qDebug().noquote() << "Transaction decreased to" << transaction.size() << "element(s). Removed: " << *element;
+		qDebug().noquote() << "Transaction decreased to" << transaction.size() << "element(s). Removed: " << element->name();
 
 		if (isCompleted())
 		{
@@ -52,11 +52,11 @@ void Batch::decrease(ControllerRegistrand * element)
 	}
 	else
 	{
-		qWarning().noquote() << "Transaction does not contain element" << *element;
+		qWarning().noquote() << "Transaction does not contain element" << element->name();
 	}
 }
 
-bool Batch::contains(ControllerRegistrand * ctrl)
+bool Batch::contains(BatchParticipant * ctrl)
 {
 	return transaction.find(ctrl) != transaction.end();
 }
@@ -71,7 +71,7 @@ void Batch::tryComplete()
 	}
 	else
 	{
-		qWarning("======================= Transaction left %zu elements.", transaction.size());
+		qDebug("======================= Transaction contains %zu elements.", transaction.size());
 	}
 }
 
@@ -82,8 +82,8 @@ bool Batch::isCompleted()
 
 void Batch::dump()
 {
-	for (ControllerRegistrand * registrand : transaction)
+	for (BatchParticipant * registrand : transaction)
 	{
-		qDebug() << *registrand;
+		qDebug() << registrand->name();
 	}
 }

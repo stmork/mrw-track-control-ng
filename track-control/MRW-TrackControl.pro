@@ -9,6 +9,7 @@ include(../common.pri)
 
 SOURCES += \
 	ctrl/batch.cpp \
+	ctrl/batchparticipant.cpp \
 	ctrl/railpartinfo.cpp \
 	ctrl/signalproxy.cpp \
 	ctrl/switchcontroller.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 
 HEADERS += \
 	ctrl/batch.h \
+	ctrl/batchparticipant.h \
 	ctrl/railpartinfo.h \
 	ctrl/signalproxy.h \
 	ctrl/switchcontroller.h \

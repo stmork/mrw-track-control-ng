@@ -419,12 +419,12 @@ QString SignalControllerProxy::toString() const
 
 void SignalControllerProxy::inc()
 {
-	ControllerRegistry::instance().increase(this);
+	increase();
 }
 
 void SignalControllerProxy::dec()
 {
-	ControllerRegistry::instance().decrease(this);
+	decrease();
 }
 
 bool SignalControllerProxy::hasMainSignal()

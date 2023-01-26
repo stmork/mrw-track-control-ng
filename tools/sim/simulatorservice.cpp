@@ -153,7 +153,7 @@ void SimulatorService::device(const MrwMessage & message)
 	const ControllerId     id      = message.sid();
 	const UnitNo           unit_no = message.unitNo();
 	const Command          cmd     = message.command();
-	Device       *         device  = model->deviceById(id, unit_no);
+	Device        *        device  = model->deviceById(id, unit_no);
 	Response               code    = device != nullptr ? MSG_OK : MSG_UNIT_NOT_FOUND;
 	std::vector<uint8_t>   appendix;
 	std::function<void()>  late_ok = [this, id, unit_no, cmd]()
