@@ -62,6 +62,7 @@ flowchart BT
 	util[mrw::util]
 	can[mrw::can]
 	ctrl[mrw::ctrl]
+	log[mrw::log]
 
 	can -->|depends|util
 	ui -->|depends|util
@@ -72,4 +73,5 @@ flowchart BT
 	model -->|depends|util
 	model -->|depends|can
 	ctrl -->|depends|sc
+	log -->|depends|util
 ```

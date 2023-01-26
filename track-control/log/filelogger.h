@@ -14,6 +14,9 @@
 
 namespace mrw::log
 {
+	/**
+	 * This class writes all logging messages into one single file.
+	 */
 	class FileLogger : public UnifiedLogger
 	{
 		mutable QFile file;
@@ -26,6 +29,11 @@ namespace mrw::log
 		void write(const char * message) const override;
 	};
 
+	/**
+	 * This class writes all logging messages into one single file. The filename
+	 * is built from the date time stamp and a prefix to distinguish different
+	 * applications.
+	 */
 	class TimestampedFileLogger : public FileLogger
 	{
 	public:

@@ -12,6 +12,10 @@
 
 namespace mrw::log
 {
+	/**
+	 * This class implements logging to console. The debug and info messages
+	 * are logged to stdout and the higher log levels are logged to stderr.
+	 */
 	class StdLogger : public LoggerBase
 	{
 	public:
