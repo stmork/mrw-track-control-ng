@@ -12,18 +12,25 @@
 #include <util/settings.h>
 #include <util/dumphandler.h>
 #include <model/modelrepository.h>
+#include <log/stdlogger.h>
+#include <log/filelogger.h>
+#include <log/loggerservice.h>
 
 #include "mainwindow.h"
 #include "mrwmessagedispatcher.h"
 
 using namespace mrw::util;
+using namespace mrw::log;
 using namespace mrw::model;
 
 int main(int argc, char * argv[])
 {
 	QApplication             app(argc, argv);
+	StdLogger                std_logger;
+	TimestampedFileLogger    file_logger("track-control");
 
-	Method::pattern();
+	LoggerService::instance().registerLogger(&std_logger);
+	LoggerService::instance().registerLogger(&file_logger);
 
 	ModelRepository          repo(ModelRepository::proposeModelName(), true);
 

@@ -59,7 +59,7 @@ update.depends         = test statecharts
 study.depends          = test ctrl ui
 track-control.depends  = study statecharts
 
-QMAKE_CLEAN           += qtest*.xml
+QMAKE_CLEAN           += qtest*.xml *.log
 
 #####################################################################
 #
@@ -71,6 +71,7 @@ astyle.commands = astyle --options=$$PWD/.astylerc\
 	*/*.cpp */*.h\
 	tools/*/*.cpp tools/*/*.h\
 	*/ctrl/*.cpp */ctrl/*.h\
+	*/log/*.cpp */log/*.h\
 	*/test/*/*.cpp */test/*/*.h
 
 cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
@@ -82,7 +83,11 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--language=c++ --std=c++14\
 	--library=qt\
 	--xml-version=2 --force -q -j 4\
-	*/*.cpp */*.h tools/*/*.cpp */ctrl/*.cpp */ctrl/*.h 2>cppcheck.xml
+	*/*.cpp */*.h\
+	tools/*/*.cpp tools/*/*.h\
+	*/ctrl/*.cpp */ctrl/*.h\
+	*/log/*.cpp */log/*.h\
+	2>cppcheck.xml
 
 QMAKE_EXTRA_TARGETS += cppcheck astyle
 QMAKE_CLEAN         += cppcheck.xml
