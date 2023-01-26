@@ -77,8 +77,7 @@ MainWindow::MainWindow(
 
 MainWindow::~MainWindow()
 {
-	on_clearAllRoutes_clicked();
-	on_clearAllSections_clicked();
+	Q_ASSERT(!hasActiveRoutes());
 
 	ControllerRegistry::instance().tryComplete();
 	if (!ControllerRegistry::instance().isCompleted())
