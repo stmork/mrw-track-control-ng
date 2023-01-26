@@ -195,7 +195,7 @@ void TestUtil::testRandom()
 void TestUtil::testDumpHandler()
 {
 	size_t       count = 0;
-	TermHandler  term_handler( { SIGTERM, SIGINT } );
+	TermHandler  term_handler;
 	DumpHandler  dump_handler( [&] ()
 	{
 		count++;

@@ -24,7 +24,7 @@ int main(int argc, char * argv[])
 
 	Method::pattern();
 
-	TermHandler      term_handler( { SIGTERM, SIGINT } );
+	TermHandler      term_handler;
 	CanSettings      settings;
 	MrwBusService    service(settings.interface(), settings.plugin());
 

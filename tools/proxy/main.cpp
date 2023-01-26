@@ -50,7 +50,7 @@ int main(int argc, char * argv[])
 
 	CanBusProxyService    tcp_service("can0", "virtualcan");
 	CanBusProxyService    can_service("can0");
-	TermHandler           term_handler( { SIGTERM, SIGINT } );
+	TermHandler           term_handler;
 
 	tcp_service.setProxy(&can_service);
 	can_service.setProxy(&tcp_service);

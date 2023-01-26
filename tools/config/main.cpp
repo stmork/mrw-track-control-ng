@@ -20,7 +20,7 @@ int main(int argc, char * argv[])
 
 	Method::pattern();
 
-	TermHandler           term_handler( { SIGTERM, SIGINT } );
+	TermHandler           term_handler;
 	ModelRepository       repo(ModelRepository::proposeModelName());
 	ConfigurationService  service(repo);
 	DumpHandler           dumper([&]()

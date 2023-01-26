@@ -9,10 +9,7 @@
 
 using namespace mrw::util;
 
-TermHandler::TermHandler(const int quit_signal) : TermHandler(
-{
-	quit_signal
-})
+TermHandler::TermHandler() : TermHandler( { SIGTERM, SIGINT } )
 {
 }
 

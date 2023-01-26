@@ -29,20 +29,17 @@ namespace mrw::util
 	public:
 		/**
 		 * This constructor registers a termination handler which reacts on the
-		 * given signal.
+		 * signals SIGTERM and SIGINT.
 		 *
 		 * Example:
 		 * @code
-		 *  SigTermHandler   handler(SIGTERM);
+		 *  SigTermHandler   handler;
 		 *  Q_UNUSED(handler);
 		 * @endcode
 		 *
-		 * @param quit_signal The signal to use for
-		 * termination, usual SIGTERM.
-		 *
 		 * @see man 1 kill for further information.
 		 */
-		explicit TermHandler(const int quit_signal);
+		explicit TermHandler();
 
 		/**
 		 * This constructor registers a termination handler which reacts on the
