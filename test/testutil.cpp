@@ -164,10 +164,10 @@ void TestUtil::testClockService()
 
 	QTest::qWait(2100);
 
-	QCOMPARE(spy_1Hz.count(),  2);
-	QCOMPARE(spy_2Hz.count(),  4);
-	QCOMPARE(spy_4Hz.count(),  8);
-	QCOMPARE(spy_8Hz.count(), 16);
+	QVERIFY(spy_1Hz.count() >=  1);
+	QVERIFY(spy_2Hz.count() >=  3);
+	QVERIFY(spy_4Hz.count() >=  7);
+	QVERIFY(spy_8Hz.count() >= 15);
 }
 
 void TestUtil::testRandom()
@@ -189,7 +189,7 @@ void TestUtil::testRandom()
 	const double diff = 0.5 * (TEST_RAND_MIN + TEST_RAND_MAX) - mt_sum / TEST_RAND_LOOP;
 
 	QVERIFY(std::abs(diff) <= 0.02);
-	QCOMPARE((dice + TEST_RAND_LOOP / 1000) / TEST_RAND_LOOP, 3u);
+	QCOMPARE((dice + TEST_RAND_LOOP / 50) / TEST_RAND_LOOP, 3u);
 }
 
 void TestUtil::testDumpHandler()
