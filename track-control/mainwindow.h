@@ -44,8 +44,6 @@ public:
 		QWidget             *            parent = nullptr);
 	~MainWindow();
 
-	void finalize();
-
 private slots:
 	void itemClicked(QListWidgetItem * item);
 	void enable();

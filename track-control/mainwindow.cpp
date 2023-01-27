@@ -7,6 +7,7 @@
 
 #include <util/method.h>
 #include <util/random.h>
+#include <util/termhandler.h>
 #include <statecharts/timerservice.h>
 #include <model/modelrailway.h>
 #include <ctrl/controllerregistry.h>
@@ -55,9 +56,6 @@ MainWindow::MainWindow(
 	}
 
 	connect(
-		ui->actionQuit,        &QAction::triggered,
-		this, &MainWindow::finalize);
-	connect(
 		ui->routeListWidget, &QListWidget::currentItemChanged,
 		this, &MainWindow::enable);
 	connect(
@@ -73,6 +71,11 @@ MainWindow::MainWindow(
 
 	Q_ASSERT(statechart.check());
 	statechart.enter();
+
+	static SignalHandler  terminator( { SIGTERM, SIGINT }, [&]()
+	{
+		statechart.finalize();
+	});
 }
 
 MainWindow::~MainWindow()
@@ -198,6 +201,9 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 		ui->actionClear, &QAction::triggered,
 		&statechart, &OperatingModeStatechart::clear,
 		Qt::DirectConnection);
+	connect(
+		ui->actionQuit,  &QAction::triggered,
+		&statechart, &OperatingModeStatechart::finalize);
 
 	connect(
 		&statechart, &OperatingModeStatechart::start,
@@ -300,6 +306,7 @@ void MainWindow::disableRoutes()
 {
 	__METHOD__;
 
+	enable();
 	QListWidgetItem * item  = ui->routeListWidget->takeItem(0);
 	WidgetRoute   *   route = item->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
 
@@ -383,11 +390,6 @@ bool MainWindow::isSameRegion()
 	});
 
 	return regions.size() == 1;
-}
-
-void MainWindow::finalize()
-{
-	statechart.finalize();
 }
 
 /*************************************************************************

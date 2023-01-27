@@ -38,10 +38,6 @@ int main(int argc, char * argv[])
 	{
 		MrwMessageDispatcher dispatcher(repo, repo.interface(), repo.plugin());
 		MainWindow           main_window(repo, dispatcher);
-		SignalHandler        terminator( { SIGTERM, SIGINT }, [&]()
-		{
-			main_window.finalize();
-		});
 		DumpHandler          dumper([&]()
 		{
 			ModelRailway * model = repo;
