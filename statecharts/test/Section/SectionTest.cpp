@@ -32,6 +32,8 @@ namespace mrw
 		void sectionOccupied();
 		void disablingAfterEnabled();
 		void disabledAfterDisabled();
+		void disabledAfterEnabled();
+		void unlockSection();
 		void nextReached();
 		void leave();
 		void passedState();
@@ -1792,6 +1794,22 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			disabledAfterDisabled();
 		}
+		void disabledAfterEnabled()
+		{
+			disablingAfterEnabled();
+
+			statechart->raiseRelaisResponse();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock));
+
+			EXPECT_TRUE(incMock->calledAtLeast(0));
+
+			EXPECT_TRUE(decMock->calledAtLeast(1));
+
+
+			incMock->reset();
+			decMock->reset();
+		}
 		TEST_F(SectionTest, disabledAfterEnabled)
 		{
 			incMock = new IncMock();
@@ -1847,21 +1865,19 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			disablingAfterEnabled();
-
-			statechart->raiseRelaisResponse();
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock));
-
-			EXPECT_TRUE(incMock->calledAtLeast(0));
-
-			EXPECT_TRUE(decMock->calledAtLeast(1));
-
-
-			incMock->reset();
-			decMock->reset();
+			disabledAfterEnabled();
 		}
-		TEST_F(SectionTest, unlock)
+		void unlockSection()
+		{
+			disabledAfterDisabled();
+
+			statechart->raiseUnlock();
+
+			unlocked();
+
+
+		}
+		TEST_F(SectionTest, unlockSection)
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
@@ -1910,13 +1926,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			disabledAfterDisabled();
-
-			statechart->raiseUnlock();
-
-			unlocked();
-
-
+			unlockSection();
 		}
 		TEST_F(SectionTest, failAfterDisable)
 		{
@@ -2778,6 +2788,24 @@ namespace mrw
 			EXPECT_TRUE(!statechart->isActive());
 
 			enablingAfterDisabled();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			disabledAfterEnabled();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			disabledAfterDisabled();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			unlockSection();
 
 			statechart->exit();
 

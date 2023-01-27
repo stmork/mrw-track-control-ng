@@ -348,7 +348,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	}
 
 	@Test
-	operation unlock()
+	operation unlockSection()
 	{
 		// Given
 		disabledAfterDisabled()
@@ -612,6 +612,18 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert !is_active
 
 		enablingAfterDisabled()
+		exit
+		assert !is_active
+
+		disabledAfterEnabled()
+		exit
+		assert !is_active
+
+		disabledAfterDisabled()
+		exit
+		assert !is_active
+
+		unlockSection()
 		exit
 		assert !is_active
 
