@@ -183,13 +183,13 @@ void TestUtil::testRandom()
 	for (unsigned i = 0; i < TEST_RAND_LOOP; i++)
 	{
 		mt_sum += dist(Random::instance().engine());
-		dice   += Random::random(7);
+		dice   += Random::random(size_t(7));
 	}
 
 	const double diff = 0.5 * (TEST_RAND_MIN + TEST_RAND_MAX) - mt_sum / TEST_RAND_LOOP;
 
 	QVERIFY(std::abs(diff) <= 0.02);
-	QCOMPARE(dice / TEST_RAND_LOOP, 3u);
+	QCOMPARE((dice + TEST_RAND_LOOP / 1000) / TEST_RAND_LOOP, 3u);
 }
 
 void TestUtil::testDumpHandler()
