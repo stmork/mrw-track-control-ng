@@ -25,6 +25,7 @@ namespace mrw
 		void sections();
 		void activate();
 		void deactivate();
+		void unlock();
 		void finish();
 		void failTurningSwitchesIncomplete();
 		void failTurningSignalsIncomplete();
@@ -245,6 +246,59 @@ namespace mrw
 		};
 		static UnlockSwitchesMock * unlockSwitchesMock;
 
+		class TryCompleteMock
+		{
+			typedef void (TryCompleteMock::*functiontype)();
+		public:
+			void (TryCompleteMock::*tryCompleteBehaviorDefault)();
+			int callCount;
+
+			void tryComplete1()
+			{
+			}
+
+			void tryCompleteDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void tryComplete()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return tryCompleteBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (TryCompleteMock::*defaultBehavior)())
+			{
+				tryCompleteBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&TryCompleteMock::tryCompleteDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		static TryCompleteMock * tryCompleteMock;
+
 		class FailMock
 		{
 			typedef void (FailMock::*functiontype)();
@@ -280,42 +334,6 @@ namespace mrw
 			}
 		};
 		static FailMock * failMock;
-
-		class TryCompleteMock
-		{
-			typedef void (TryCompleteMock::*functiontype)();
-		public:
-			void (TryCompleteMock::*tryCompleteBehaviorDefault)();
-
-			void tryComplete1()
-			{
-			}
-
-			void tryCompleteDefault()
-			{
-			}
-
-			functiontype getBehavior()
-			{
-				return tryCompleteBehaviorDefault;
-			}
-
-			void setDefaultBehavior(void (TryCompleteMock::*defaultBehavior)())
-			{
-				tryCompleteBehaviorDefault = defaultBehavior;
-			}
-
-			void initializeBehavior()
-			{
-				setDefaultBehavior(&TryCompleteMock::tryCompleteDefault);
-			}
-
-			void reset()
-			{
-				initializeBehavior();
-			}
-		};
-		static TryCompleteMock * tryCompleteMock;
 
 		class TurnSwitchesMock
 		{
@@ -529,6 +547,59 @@ namespace mrw
 		};
 		static ExtendSignalsMock * extendSignalsMock;
 
+		class UnlockSectionsMock
+		{
+			typedef void (UnlockSectionsMock::*functiontype)();
+		public:
+			void (UnlockSectionsMock::*unlockSectionsBehaviorDefault)();
+			int callCount;
+
+			void unlockSections1()
+			{
+			}
+
+			void unlockSectionsDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void unlockSections()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return unlockSectionsBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (UnlockSectionsMock::*defaultBehavior)())
+			{
+				unlockSectionsBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&UnlockSectionsMock::unlockSectionsDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		static UnlockSectionsMock * unlockSectionsMock;
+
 		class IsCompletedMock
 		{
 			typedef bool (IsCompletedMock::*functiontype)();
@@ -587,6 +658,7 @@ namespace mrw
 			}
 			void tryComplete()
 			{
+				tryCompleteMock->tryComplete();
 				return (tryCompleteMock->*(tryCompleteMock->getBehavior()))();
 			}
 			bool isCompleted()
@@ -628,6 +700,11 @@ namespace mrw
 				unlockSwitchesMock->unlockSwitches();
 				return (unlockSwitchesMock->*(unlockSwitchesMock->getBehavior()))();
 			}
+			void unlockSections()
+			{
+				unlockSectionsMock->unlockSections();
+				return (unlockSectionsMock->*(unlockSectionsMock->getBehavior()))();
+			}
 		};
 
 //! The timers are managed by a timer service. */
@@ -665,6 +742,8 @@ namespace mrw
 
 			EXPECT_TRUE(unlockSwitchesMock->calledAtLeastOnce());
 
+			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
+
 
 		}
 
@@ -689,6 +768,7 @@ namespace mrw
 
 
 
+
 			resetTransactionMock->reset();
 			failMock->reset();
 			tryCompleteMock->reset();
@@ -699,6 +779,7 @@ namespace mrw
 			deactivateSectionsMock->reset();
 			unlockSignalsMock->reset();
 			unlockSwitchesMock->reset();
+			unlockSectionsMock->reset();
 		}
 		TEST_F(RouteTest, start)
 		{
@@ -722,6 +803,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -741,9 +824,12 @@ namespace mrw
 
 			EXPECT_TRUE(turnSwitchesMock->calledAtLeastOnce());
 
+			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
+
 
 			resetTransactionMock->reset();
 			turnSwitchesMock->reset();
+			tryCompleteMock->reset();
 		}
 		TEST_F(RouteTest, turningSwitches)
 		{
@@ -751,6 +837,8 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -771,6 +859,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -790,9 +880,12 @@ namespace mrw
 
 			EXPECT_TRUE(turnSignalsMock->calledAtLeastOnce());
 
+			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
+
 
 			resetTransactionMock->reset();
 			turnSignalsMock->reset();
+			tryCompleteMock->reset();
 		}
 		TEST_F(RouteTest, turningSignals)
 		{
@@ -800,10 +893,14 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -824,6 +921,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -841,26 +940,35 @@ namespace mrw
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
+			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
+
 			EXPECT_TRUE(extendSignalsMock->calledAtLeastOnce());
 
 
 			resetTransactionMock->reset();
+			tryCompleteMock->reset();
 			extendSignalsMock->reset();
 		}
 		TEST_F(RouteTest, extendingSignals)
 		{
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -881,6 +989,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -900,9 +1010,12 @@ namespace mrw
 
 			EXPECT_TRUE(activateSectionsMock->calledAtLeastOnce());
 
+			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
+
 
 			resetTransactionMock->reset();
 			activateSectionsMock->reset();
+			tryCompleteMock->reset();
 		}
 		TEST_F(RouteTest, sections)
 		{
@@ -910,18 +1023,26 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			activateSectionsMock = new ActivateSectionsMock();
 			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -942,6 +1063,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -965,18 +1088,26 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			activateSectionsMock = new ActivateSectionsMock();
 			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -997,6 +1128,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1008,22 +1141,32 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			activateSectionsMock = new ActivateSectionsMock();
 			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1044,6 +1187,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1059,9 +1204,12 @@ namespace mrw
 
 			EXPECT_TRUE(turnSwitchesMock->calledAtLeastOnce());
 
+			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
+
 
 			resetTransactionMock->reset();
 			turnSwitchesMock->reset();
+			tryCompleteMock->reset();
 		}
 		void deactivate()
 		{
@@ -1079,18 +1227,26 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			activateSectionsMock = new ActivateSectionsMock();
 			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1111,14 +1267,94 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
 			deactivate();
 		}
-		void finish()
+		void unlock()
 		{
 			deactivate();
+
+			statechart->raiseCompleted();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Unlock));
+
+			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(unlockSectionsMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
+
+
+			resetTransactionMock->reset();
+			unlockSectionsMock->reset();
+			tryCompleteMock->reset();
+		}
+		TEST_F(RouteTest, unlock)
+		{
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			activateSectionsMock = new ActivateSectionsMock();
+			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			extendSignalsMock = new ExtendSignalsMock();
+			extendSignalsMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			turnSignalsMock = new TurnSignalsMock();
+			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			turnSwitchesMock = new TurnSwitchesMock();
+			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			turnSwitchesMock = new TurnSwitchesMock();
+			turnSwitchesMock->initializeBehavior();
+			activateSectionsMock = new ActivateSectionsMock();
+			activateSectionsMock->initializeBehavior();
+			turnSignalsMock = new TurnSignalsMock();
+			turnSignalsMock->initializeBehavior();
+			extendSignalsMock = new ExtendSignalsMock();
+			extendSignalsMock->initializeBehavior();
+			deactivateSectionsMock = new DeactivateSectionsMock();
+			deactivateSectionsMock->initializeBehavior();
+			unlockSignalsMock = new UnlockSignalsMock();
+			unlockSignalsMock->initializeBehavior();
+			unlockSwitchesMock = new UnlockSwitchesMock();
+			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			unlock();
+		}
+		void finish()
+		{
+			unlock();
 
 			statechart->raiseCompleted();
 
@@ -1134,20 +1370,34 @@ namespace mrw
 		{
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			activateSectionsMock = new ActivateSectionsMock();
+			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1168,6 +1418,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1179,18 +1431,26 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			activateSectionsMock = new ActivateSectionsMock();
 			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1211,6 +1471,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1232,18 +1494,26 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			activateSectionsMock = new ActivateSectionsMock();
 			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1264,6 +1534,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1283,6 +1555,8 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1303,6 +1577,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1325,10 +1601,14 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1349,6 +1629,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1369,16 +1651,22 @@ namespace mrw
 			isCompletedMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1399,6 +1687,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1421,18 +1711,26 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			activateSectionsMock = new ActivateSectionsMock();
 			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1453,6 +1751,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1488,6 +1788,8 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1508,6 +1810,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1534,10 +1838,14 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1558,6 +1866,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1569,16 +1879,22 @@ namespace mrw
 			isCompletedMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1599,6 +1915,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1634,18 +1952,26 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			activateSectionsMock = new ActivateSectionsMock();
 			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1666,6 +1992,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1679,6 +2007,8 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1699,6 +2029,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1718,10 +2050,14 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1742,6 +2078,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1761,18 +2099,26 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			activateSectionsMock = new ActivateSectionsMock();
 			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1793,6 +2139,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1812,6 +2160,8 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1832,6 +2182,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1851,10 +2203,14 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1875,6 +2231,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1894,18 +2252,26 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			activateSectionsMock = new ActivateSectionsMock();
 			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1926,6 +2292,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1947,6 +2315,8 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -1967,6 +2337,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -1998,10 +2370,14 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -2022,6 +2398,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -2051,16 +2429,22 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -2081,6 +2465,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -2128,18 +2514,26 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			activateSectionsMock = new ActivateSectionsMock();
 			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -2160,6 +2554,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -2175,18 +2571,26 @@ namespace mrw
 			resetTransactionMock->initializeBehavior();
 			activateSectionsMock = new ActivateSectionsMock();
 			activateSectionsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSignalsMock = new TurnSignalsMock();
 			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
 			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			failMock = new FailMock();
@@ -2207,6 +2611,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -2240,6 +2646,8 @@ namespace mrw
 			unlockSignalsMock->initializeBehavior();
 			unlockSwitchesMock = new UnlockSwitchesMock();
 			unlockSwitchesMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -2288,6 +2696,12 @@ namespace mrw
 			EXPECT_TRUE(!statechart->isActive());
 
 			deactivate();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			unlock();
 
 			statechart->exit();
 

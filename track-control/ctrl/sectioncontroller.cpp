@@ -49,6 +49,10 @@ SectionController::SectionController(
 		&statechart, &SectionStatechart::disable,
 		Qt::DirectConnection);
 	connect(
+		this, &SectionController::unlock,
+		&statechart, &SectionStatechart::unlock,
+		Qt::DirectConnection);
+	connect(
 		this, &SectionController::failed,
 		&statechart, &SectionStatechart::failed,
 		Qt::QueuedConnection);

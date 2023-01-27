@@ -66,6 +66,7 @@ namespace mrw
 				main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling,
 				main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling,
 				main_region_Operating_Processing_Locked_Route_active_Disabled,
+				main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock,
 				main_region_Operating_Processing_Locked_Occupation_Free,
 				main_region_Operating_Processing_Locked_Occupation_Occupied,
 				main_region_Operating_Processing_Locked_Occupation__final_,
@@ -78,7 +79,7 @@ namespace mrw
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 25;
+			static const sc::integer numStates = 26;
 			static const sc::integer scvi_main_region_Init = 0;
 			static const sc::integer scvi_main_region_Init_Init_Process_Requesting = 0;
 			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_relais_Relay = 0;
@@ -95,6 +96,7 @@ namespace mrw
 			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Disabled = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Locked_Occupation_Free = 1;
 			static const sc::integer scvi_main_region_Operating_Processing_Locked_Occupation_Occupied = 1;
 			static const sc::integer scvi_main_region_Operating_Processing_Locked_Occupation__final_ = 1;
@@ -117,6 +119,7 @@ namespace mrw
 				stateResponse,
 				failed,
 				next,
+				unlock,
 				_te0_main_region_Init_,
 				_te1_main_region_Operating_Processing_Locked_Route_active_Waiting_,
 				_te2_main_region_Operating_Processing_Pending_,
@@ -273,6 +276,9 @@ namespace mrw
 			/*! Slot for the in event 'next' that is defined in the default interface scope. */
 			void next();
 
+			/*! Slot for the in event 'unlock' that is defined in the default interface scope. */
+			void unlock();
+
 
 		signals:
 			/*! Signal representing the out event 'started' that is defined in the default interface scope. */
@@ -375,6 +381,7 @@ namespace mrw
 			void enseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling_default();
 			void enseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling_default();
 			void enseq_main_region_Operating_Processing_Locked_Route_active_Disabled_default();
+			void enseq_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock_default();
 			void enseq_main_region_Operating_Processing_Locked_Occupation_Free_default();
 			void enseq_main_region_Operating_Processing_Locked_Occupation_Occupied_default();
 			void enseq_main_region_Operating_Processing_Locked_Occupation__final__default();
@@ -403,6 +410,7 @@ namespace mrw
 			void exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling();
 			void exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling();
 			void exseq_main_region_Operating_Processing_Locked_Route_active_Disabled();
+			void exseq_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock();
 			void exseq_main_region_Operating_Processing_Locked_Occupation_Free();
 			void exseq_main_region_Operating_Processing_Locked_Occupation_Occupied();
 			void exseq_main_region_Operating_Processing_Locked_Occupation__final_();
@@ -446,6 +454,7 @@ namespace mrw
 			sc::integer main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Locked_Route_active_Disabled_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Locked_Occupation_Free_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Locked_Occupation_Occupied_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Locked_Occupation__final__react(const sc::integer transitioned_before);
@@ -492,6 +501,9 @@ namespace mrw
 
 			/*! Indicates event 'next' of default interface scope is active. */
 			bool next_raised;
+
+			/*! Indicates event 'unlock' of default interface scope is active. */
+			bool unlock_raised;
 
 			/*! Indicates event 'local_leaving' of internal scope is active. */
 			bool local_leaving_raised;

@@ -60,11 +60,12 @@ namespace mrw
 				main_region_Turning_Turning_process_Section_Activation,
 				main_region_Turning_Turning_process_Signal_Updating,
 				main_region_Wait,
-				main_region_Emergency_Shutdown
+				main_region_Emergency_Shutdown,
+				main_region_Unlock
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 11;
+			static const sc::integer numStates = 12;
 			static const sc::integer scvi_main_region_Active = 0;
 			static const sc::integer scvi_main_region_Disable = 0;
 			static const sc::integer scvi_main_region_Start = 0;
@@ -76,6 +77,7 @@ namespace mrw
 			static const sc::integer scvi_main_region_Turning_Turning_process_Signal_Updating = 0;
 			static const sc::integer scvi_main_region_Wait = 0;
 			static const sc::integer scvi_main_region_Emergency_Shutdown = 0;
+			static const sc::integer scvi_main_region_Unlock = 0;
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -144,6 +146,8 @@ namespace mrw
 				virtual void unlockSignals() = 0;
 
 				virtual void unlockSwitches() = 0;
+
+				virtual void unlockSections() = 0;
 
 
 			};
@@ -268,6 +272,7 @@ namespace mrw
 			void enact_main_region_Turning_Turning_process_Signal_Updating();
 			void enact_main_region_Wait();
 			void enact_main_region_Emergency_Shutdown();
+			void enact_main_region_Unlock();
 			void exact_main_region_Disable();
 			void exact_main_region_Turning_Turning_process_Switch_Turning();
 			void exact_main_region_Turning_Turning_process_Signal_Turning();
@@ -285,6 +290,7 @@ namespace mrw
 			void enseq_main_region_Turning_Turning_process_Signal_Updating_default();
 			void enseq_main_region_Wait_default();
 			void enseq_main_region_Emergency_Shutdown_default();
+			void enseq_main_region_Unlock_default();
 			void enseq_main_region_default();
 			void exseq_main_region_Active();
 			void exseq_main_region_Disable();
@@ -297,6 +303,7 @@ namespace mrw
 			void exseq_main_region_Turning_Turning_process_Signal_Updating();
 			void exseq_main_region_Wait();
 			void exseq_main_region_Emergency_Shutdown();
+			void exseq_main_region_Unlock();
 			void exseq_main_region();
 			void exseq_main_region_Turning_Turning_process();
 			void react_main_region__choice_0();
@@ -313,6 +320,7 @@ namespace mrw
 			sc::integer main_region_Turning_Turning_process_Signal_Updating_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_react(const sc::integer transitioned_before);
 			sc::integer main_region_Emergency_Shutdown_react(const sc::integer transitioned_before);
+			sc::integer main_region_Unlock_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
 			void runCycle();

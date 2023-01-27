@@ -46,6 +46,7 @@ namespace mrw::ctrl
 	signals:
 		void enable(bool turn_on = true);
 		void disable();
+		void unlock();
 		void failed();
 		void start();
 		void entered();

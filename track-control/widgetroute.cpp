@@ -521,8 +521,6 @@ void WidgetRoute::turnSwitches()
 		BaseController::callback<DoubleCrossSwitchControllerProxy>(
 			controller, &DoubleCrossSwitchControllerProxy::turn);
 	}
-
-	ControllerRegistry::instance().tryComplete();
 }
 
 void WidgetRoute::unlockSwitches()
@@ -564,8 +562,6 @@ void WidgetRoute::activateSections()
 			controller->enable(true);
 		}
 	}
-
-	ControllerRegistry::instance().tryComplete();
 }
 
 void WidgetRoute::deactivateSections()
@@ -578,6 +574,19 @@ void WidgetRoute::deactivateSections()
 	for (SectionController * controller : controllers)
 	{
 		controller->disable();
+	}
+}
+
+void WidgetRoute::unlockSections()
+{
+	__METHOD__;
+
+	std::vector<SectionController *> controllers;
+
+	collectSectionControllers(controllers);
+	for (SectionController * controller : controllers)
+	{
+		controller->unlock();
 	}
 }
 
@@ -595,8 +604,6 @@ void WidgetRoute::turnSignals()
 		controller->enable();
 		qDebug().noquote() << *controller;
 	}
-
-	ControllerRegistry::instance().tryComplete();
 }
 
 void WidgetRoute::extendSignals()
@@ -610,8 +617,6 @@ void WidgetRoute::extendSignals()
 		controller->extend();
 		qDebug().noquote() << *controller;
 	}
-
-	ControllerRegistry::instance().tryComplete();
 }
 
 void WidgetRoute::unlockSignals()

@@ -263,6 +263,11 @@ namespace mrw
 					return  (stateConfVector[scvi_main_region_Emergency_Shutdown] == mrw::statechart::RouteStatechart::State::main_region_Emergency_Shutdown);
 					break;
 				}
+			case mrw::statechart::RouteStatechart::State::main_region_Unlock :
+				{
+					return  (stateConfVector[scvi_main_region_Unlock] == mrw::statechart::RouteStatechart::State::main_region_Unlock);
+					break;
+				}
 			default:
 				{
 					/* State is not active*/
@@ -324,6 +329,7 @@ namespace mrw
 			timerService->setTimer(this, 1, RouteStatechart::switch_timeout, false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->turnSwitches();
+			ifaceOperationCallback->tryComplete();
 		}
 
 		/* Entry action for state 'Signal Turning'. */
@@ -333,6 +339,7 @@ namespace mrw
 			timerService->setTimer(this, 2, RouteStatechart::signal_timeout, false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->turnSignals();
+			ifaceOperationCallback->tryComplete();
 		}
 
 		/* Entry action for state 'Section Activation'. */
@@ -342,6 +349,7 @@ namespace mrw
 			timerService->setTimer(this, 3, RouteStatechart::section_timeout, false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->activateSections();
+			ifaceOperationCallback->tryComplete();
 		}
 
 		/* Entry action for state 'Signal Updating'. */
@@ -351,6 +359,7 @@ namespace mrw
 			timerService->setTimer(this, 4, RouteStatechart::signal_timeout, false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->extendSignals();
+			ifaceOperationCallback->tryComplete();
 		}
 
 		/* Entry action for state 'Wait'. */
@@ -369,6 +378,16 @@ namespace mrw
 			ifaceOperationCallback->fail();
 			ifaceOperationCallback->deactivateSections();
 			ifaceOperationCallback->unlockSignals();
+			ifaceOperationCallback->unlockSections();
+		}
+
+		/* Entry action for state 'Unlock'. */
+		void RouteStatechart::enact_main_region_Unlock()
+		{
+			/* Entry action for state 'Unlock'. */
+			ifaceOperationCallback->resetTransaction();
+			ifaceOperationCallback->unlockSections();
+			ifaceOperationCallback->tryComplete();
 		}
 
 		/* Exit action for state 'Disable'. */
@@ -498,6 +517,14 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Emergency_Shutdown;
 		}
 
+		/* 'default' enter sequence for state Unlock */
+		void RouteStatechart::enseq_main_region_Unlock_default()
+		{
+			/* 'default' enter sequence for state Unlock */
+			enact_main_region_Unlock();
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Unlock;
+		}
+
 		/* 'default' enter sequence for region main region */
 		void RouteStatechart::enseq_main_region_default()
 		{
@@ -589,6 +616,13 @@ namespace mrw
 			exact_main_region_Emergency_Shutdown();
 		}
 
+		/* Default exit sequence for state Unlock */
+		void RouteStatechart::exseq_main_region_Unlock()
+		{
+			/* Default exit sequence for state Unlock */
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
+		}
+
 		/* Default exit sequence for region main region */
 		void RouteStatechart::exseq_main_region()
 		{
@@ -644,6 +678,11 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::State::main_region_Emergency_Shutdown :
 				{
 					exseq_main_region_Emergency_Shutdown();
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Unlock :
+				{
+					exseq_main_region_Unlock();
 					break;
 				}
 			default:
@@ -763,8 +802,8 @@ namespace mrw
 				if (completed_raised)
 				{
 					exseq_main_region_Disable();
-					finished_raised = true;
-					enseq_main_region__final__default();
+					enseq_main_region_Unlock_default();
+					react(0);
 					transitioned_after = 0;
 				}
 				else
@@ -1034,6 +1073,28 @@ namespace mrw
 			return transitioned_after;
 		}
 
+		sc::integer RouteStatechart::main_region_Unlock_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Unlock. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (completed_raised)
+				{
+					exseq_main_region_Unlock();
+					finished_raised = true;
+					enseq_main_region__final__default();
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
 		void RouteStatechart::clearOutEvents()
 		{
 			activated_raised = false;
@@ -1107,6 +1168,11 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::State::main_region_Emergency_Shutdown :
 				{
 					main_region_Emergency_Shutdown_react(-1);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Unlock :
+				{
+					main_region_Unlock_react(-1);
 					break;
 				}
 			default:

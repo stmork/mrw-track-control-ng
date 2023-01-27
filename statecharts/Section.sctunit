@@ -318,7 +318,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	}
 
 	@Test
-	operation disableAfterDisabled()
+	operation disabledAfterDisabled()
 	{
 		// Given
 		disabledLocked()
@@ -327,12 +327,13 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		raise disable
 
 		// Then
-		assert called free
-		assert called lock
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Wait_for_Unlock)
+		assert called inc 0 times
+		assert called dec 0 times
 	}
 
 	@Test
-	operation unlock()
+	operation disabledAfterEnabled()
 	{
 		// Given
 		disablingAfterEnabled()
@@ -341,8 +342,22 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		raise relaisResponse
 
 		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Wait_for_Unlock)
+		assert called inc 0 times
+		assert called dec 1 times
+	}
+
+	@Test
+	operation unlock()
+	{
+		// Given
+		disabledAfterDisabled()
+
+		// When
+		raise unlock
+
+		// Then
 		unlocked()
-		assert called dec
 	}
 
 	@Test

@@ -97,10 +97,11 @@ private:
 	virtual bool isCompleted() override;
 
 	virtual void turnSwitches() override;
-	virtual void activateSections() override;
 	virtual void turnSignals() override;
 	virtual void extendSignals() override;
+	virtual void activateSections() override;
 	virtual void deactivateSections() override;
+	virtual void unlockSections() override;
 	virtual void unlockSignals() override;
 	virtual void unlockSwitches() override;
 };

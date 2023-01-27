@@ -39,6 +39,7 @@ namespace mrw
 			stateResponse_value(false),
 			failed_raised(false),
 			next_raised(false),
+			unlock_raised(false),
 			started_raised(false),
 			stop_raised(false),
 			entered_raised(false),
@@ -143,6 +144,11 @@ namespace mrw
 					next_raised = true;
 					break;
 				}
+			case mrw::statechart::SectionStatechart::Event::unlock:
+				{
+					unlock_raised = true;
+					break;
+				}
 			case mrw::statechart::SectionStatechart::Event::Internal_local_leaving:
 				{
 					local_leaving_raised = true;
@@ -217,6 +223,13 @@ namespace mrw
 		void mrw::statechart::SectionStatechart::raiseNext()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::next));
+			runCycle();
+		}
+
+
+		void mrw::statechart::SectionStatechart::raiseUnlock()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::unlock));
 			runCycle();
 		}
 
@@ -404,6 +417,11 @@ namespace mrw
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Disabled :
 				{
 					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Route_active_Disabled] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Disabled);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock] == mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock);
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Free :
@@ -785,6 +803,15 @@ namespace mrw
 			stateConfVectorChanged = true;
 		}
 
+		/* 'default' enter sequence for state Wait for Unlock */
+		void SectionStatechart::enseq_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock_default()
+		{
+			/* 'default' enter sequence for state Wait for Unlock */
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock;
+			stateConfVectorPosition = 0;
+			stateConfVectorChanged = true;
+		}
+
 		/* 'default' enter sequence for state Free */
 		void SectionStatechart::enseq_main_region_Operating_Processing_Locked_Occupation_Free_default()
 		{
@@ -1018,6 +1045,14 @@ namespace mrw
 			stateConfVectorPosition = 0;
 		}
 
+		/* Default exit sequence for state Wait for Unlock */
+		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock()
+		{
+			/* Default exit sequence for state Wait for Unlock */
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVectorPosition = 0;
+		}
+
 		/* Default exit sequence for state Free */
 		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Occupation_Free()
 		{
@@ -1143,6 +1178,11 @@ namespace mrw
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Disabled :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Disabled();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock :
+				{
+					exseq_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling :
@@ -1347,6 +1387,11 @@ namespace mrw
 					exseq_main_region_Operating_Processing_Locked_Route_active_Disabled();
 					break;
 				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock :
+				{
+					exseq_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock();
+					break;
+				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling :
 				{
 					exseq_main_region_Operating_Processing_Pending_Relais_processing_Enabling();
@@ -1434,6 +1479,11 @@ namespace mrw
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Disabled :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Disabled();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock :
+				{
+					exseq_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock();
 					break;
 				}
 			default:
@@ -1910,9 +1960,8 @@ namespace mrw
 			{
 				if (relaisResponse_raised)
 				{
-					exseq_main_region_Operating_Processing_Locked();
-					enseq_main_region_Operating_Processing_Unlocked_default();
-					main_region_Operating_react(0);
+					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting();
+					enseq_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock_default();
 					transitioned_after = 0;
 				}
 			}
@@ -1962,11 +2011,27 @@ namespace mrw
 				{
 					if (disable_raised)
 					{
-						exseq_main_region_Operating_Processing_Locked();
-						enseq_main_region_Operating_Processing_Unlocked_default();
-						main_region_Operating_react(0);
+						exseq_main_region_Operating_Processing_Locked_Route_active_Disabled();
+						enseq_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock_default();
 						transitioned_after = 0;
 					}
+				}
+			}
+			return transitioned_after;
+		}
+
+		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Wait for Unlock. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (unlock_raised)
+				{
+					exseq_main_region_Operating_Processing_Locked();
+					enseq_main_region_Operating_Processing_Unlocked_default();
+					main_region_Operating_react(0);
+					transitioned_after = 0;
 				}
 			}
 			return transitioned_after;
@@ -2190,6 +2255,7 @@ namespace mrw
 			stateResponse_raised = false;
 			failed_raised = false;
 			next_raised = false;
+			unlock_raised = false;
 			timeEvents[0] = false;
 			timeEvents[1] = false;
 			timeEvents[2] = false;
@@ -2249,6 +2315,11 @@ namespace mrw
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Disabled :
 				{
 					transitioned = main_region_Operating_Processing_Locked_Route_active_Disabled_react(transitioned);
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock :
+				{
+					transitioned = main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock_react(transitioned);
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling :
@@ -2338,7 +2409,7 @@ namespace mrw
 				clearInternalEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((((((((enable_raised) || (disable_raised)) || (clear_raised)) || (start_raised)) || (relaisResponse_raised)) || (stateResponse_raised)) || (failed_raised)) || (next_raised)) || (local_leaving_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
+			while (((((((((((((enable_raised) || (disable_raised)) || (clear_raised)) || (start_raised)) || (relaisResponse_raised)) || (stateResponse_raised)) || (failed_raised)) || (next_raised)) || (unlock_raised)) || (local_leaving_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
 			isExecuting = false;
 		}
 
