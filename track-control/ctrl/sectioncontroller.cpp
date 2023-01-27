@@ -247,7 +247,7 @@ void SectionController::free()
 	emit update();
 }
 
-void mrw::ctrl::SectionController::leftBefore()
+void SectionController::leftBefore()
 {
 	qWarning().noquote() << bold("Left before next reched:") << *section();
 }

@@ -24,7 +24,7 @@ using namespace mrw::ctrl;
 using LockState = Device::LockState;
 using Symbol    = Signal::Symbol;
 
-#define USE_GLOBAL_BATCH
+#define USE_OWN_BATCH
 
 WidgetRoute::WidgetRoute(
 	const bool           dir,
@@ -38,7 +38,11 @@ WidgetRoute::WidgetRoute(
 	list_item.setData(USER_ROLE, QVariant::fromValue(this));
 
 	connect(
+#ifdef USE_OWN_BATCH
+		this, &WidgetRoute::completed,
+#else
 		&ControllerRegistry::instance(), &ControllerRegistry::completed,
+#endif
 		&statechart, &RouteStatechart::completed,
 		Qt::QueuedConnection);
 	connect(
@@ -335,6 +339,10 @@ void WidgetRoute::unregister(SectionController * controller)
 {
 	controller->disable();
 
+#ifdef USE_OWN_BATCH
+	controller->setBatch(nullptr);
+#endif
+
 	disconnect(
 		controller, &SectionController::entered,
 		this, &WidgetRoute::entered);
@@ -355,6 +363,15 @@ void WidgetRoute::unregister(SectionController * controller)
 
 	sections.remove(controller->section());
 	controller->nextController(nullptr);
+
+#ifdef USE_OWN_BATCH
+	SignalControllerProxy * signal_ctrl = getSignalController(controller->section());
+	if (signal_ctrl != nullptr)
+	{
+		signal_ctrl->setBatch(nullptr);
+	}
+#endif
+
 	while ((track.size() > 0) && (track.front()->section() == controller->section()))
 	{
 		RailPart    *    part      = track.front();
@@ -371,6 +388,9 @@ void WidgetRoute::unregister(SectionController * controller)
 		if (rs != nullptr)
 		{
 			rs->unlock();
+#ifdef USE_OWN_BATCH
+			rs->setBatch(nullptr);
+#endif
 			disconnect(
 				rs, &RegularSwitchControllerProxy::stop,
 				&statechart, &RouteStatechart::failed);
@@ -379,6 +399,9 @@ void WidgetRoute::unregister(SectionController * controller)
 		if (dcs != nullptr)
 		{
 			dcs->unlock();
+#ifdef USE_OWN_BATCH
+			dcs->setBatch(nullptr);
+#endif
 			disconnect(
 				dcs, &DoubleCrossSwitchControllerProxy::stop,
 				&statechart, &RouteStatechart::failed);
@@ -436,7 +459,11 @@ void WidgetRoute::dump() const
 
 void WidgetRoute::resetTransaction()
 {
+#ifdef USE_OWN_BATCH
+	Batch::reset();
+#else
 	ControllerRegistry::instance().reset();
+#endif
 }
 
 void WidgetRoute::fail()
@@ -453,12 +480,20 @@ void WidgetRoute::tryComplete()
 {
 	__METHOD__;
 
+#ifdef USE_OWN_BATCH
+	Batch::tryComplete();
+#else
 	ControllerRegistry::instance().tryComplete();
+#endif
 }
 
 bool WidgetRoute::isCompleted()
 {
+#ifdef USE_OWN_BATCH
+	return Batch::isCompleted();
+#else
 	return ControllerRegistry::instance().isCompleted();
+#endif
 }
 
 WidgetRoute::operator QListWidgetItem * ()
