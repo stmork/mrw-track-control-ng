@@ -160,7 +160,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Enabling)
-		assert called inc
+		assert called inc 1 times
+		assert called dec 0 times
 		assert called pending
 		assert called on
 	}
@@ -177,7 +178,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Disabling)
-		assert called inc
+		assert called inc 1 times
+		assert called dec 0 times
 		assert called pending
 		assert called off
 	}
@@ -195,7 +197,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
-		assert called dec
+		assert called inc 0 times
+		assert called dec 1 times
 		assert called lock
 		assert !occupied
 	}
@@ -213,7 +216,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Disabled)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
-		assert called dec
+		assert called inc 0 times
+		assert called dec 1 times
 		assert called lock
 		assert !occupied
 	}
@@ -231,7 +235,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Enabling)
-		assert called inc
+		assert called inc 1 times
+		assert called dec 0 times
 		assert called pending
 		assert called on
 
@@ -256,7 +261,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Enabling)
-		assert called inc
+		assert called inc 1 times
+		assert called dec 0 times
 		assert called pending
 		assert called on
 
@@ -306,7 +312,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Disabling)
-		assert called inc
+		assert called inc 1 times
+		assert called dec 0 times
 		assert called off
 	}
 
@@ -399,7 +406,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation._final_)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Left)
-		assert called inc
+		assert called inc 1 times
+		assert called dec 0 times
 		assert called off
 		assert leaving
 	}
@@ -435,7 +443,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Next_Reached)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Left)
-		assert called inc
+		assert called inc 1 times
+		assert called dec 0 times
 		assert called off
 		assert called leftBefore
 		assert leaving
@@ -470,7 +479,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
 		assert unregister
-		assert called dec
+		assert called inc 0 times
+		assert called dec 1 times
 		assert left
 	}
 
@@ -488,7 +498,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Passed)
-		assert called dec
+		assert called inc 0 times
+		assert called dec 1 times
 		assert called passed
 		assert left
 		assert tryUnblock
@@ -523,7 +534,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Enabling)
-		assert called inc
+		assert called inc 1 times
+		assert called dec 0 times
 		assert called on
 	}
 
@@ -539,7 +551,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
-		assert called dec
+		assert called inc 0 times
+		assert called dec 1 times
 	}
 
 	@Test

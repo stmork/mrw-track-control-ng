@@ -1136,7 +1136,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
 
@@ -1144,6 +1146,7 @@ namespace mrw
 
 
 			incMock->reset();
+			decMock->reset();
 			pendingMock->reset();
 			onMock->reset();
 		}
@@ -1151,6 +1154,8 @@ namespace mrw
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -1196,7 +1201,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Disabling));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
 
@@ -1204,6 +1211,7 @@ namespace mrw
 
 
 			incMock->reset();
+			decMock->reset();
 			pendingMock->reset();
 			offMock->reset();
 		}
@@ -1211,6 +1219,8 @@ namespace mrw
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			offMock = new OffMock();
@@ -1258,24 +1268,31 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Free));
 
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(0));
+
+			EXPECT_TRUE(decMock->calledAtLeast(1));
 
 			EXPECT_TRUE(lockMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(!statechart->getOccupied());
 
 
+			incMock->reset();
 			decMock->reset();
 			lockMock->reset();
 		}
 		TEST_F(SectionTest, enabledLocked)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -1323,24 +1340,31 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Free));
 
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(0));
+
+			EXPECT_TRUE(decMock->calledAtLeast(1));
 
 			EXPECT_TRUE(lockMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(!statechart->getOccupied());
 
 
+			incMock->reset();
 			decMock->reset();
 			lockMock->reset();
 		}
 		TEST_F(SectionTest, disabledLocked)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			offMock = new OffMock();
@@ -1388,7 +1412,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
 
@@ -1402,6 +1428,7 @@ namespace mrw
 
 
 			incMock->reset();
+			decMock->reset();
 			pendingMock->reset();
 			onMock->reset();
 		}
@@ -1409,6 +1436,8 @@ namespace mrw
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -1456,7 +1485,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
 
@@ -1470,6 +1501,7 @@ namespace mrw
 
 
 			incMock->reset();
+			decMock->reset();
 			pendingMock->reset();
 			onMock->reset();
 		}
@@ -1477,6 +1509,8 @@ namespace mrw
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -1518,6 +1552,8 @@ namespace mrw
 			failMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -1568,6 +1604,8 @@ namespace mrw
 			failMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -1622,26 +1660,35 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			EXPECT_TRUE(offMock->calledAtLeastOnce());
 
 
 			incMock->reset();
+			decMock->reset();
 			offMock->reset();
 		}
 		TEST_F(SectionTest, disablingAfterEnabled)
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -1683,12 +1730,16 @@ namespace mrw
 			freeMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			offMock = new OffMock();
@@ -1740,14 +1791,20 @@ namespace mrw
 			decMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -1796,14 +1853,20 @@ namespace mrw
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -1849,14 +1912,20 @@ namespace mrw
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -1924,6 +1993,8 @@ namespace mrw
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -1973,7 +2044,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			EXPECT_TRUE(offMock->calledAtLeastOnce());
 
@@ -1981,16 +2054,21 @@ namespace mrw
 
 
 			incMock->reset();
+			decMock->reset();
 			offMock->reset();
 		}
 		TEST_F(SectionTest, leave)
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -2030,12 +2108,16 @@ namespace mrw
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
 			leftBeforeMock = new LeftBeforeMock();
 			leftBeforeMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -2099,7 +2181,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			EXPECT_TRUE(offMock->calledAtLeastOnce());
 
@@ -2109,17 +2193,22 @@ namespace mrw
 
 
 			incMock->reset();
+			decMock->reset();
 			offMock->reset();
 			leftBeforeMock->reset();
 		}
 		TEST_F(SectionTest, stay)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -2167,14 +2256,20 @@ namespace mrw
 		}
 		TEST_F(SectionTest, autoUnlock)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -2220,11 +2315,14 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedUnregister());
 
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(0));
+
+			EXPECT_TRUE(decMock->calledAtLeast(1));
 
 			EXPECT_TRUE(statechart->isRaisedLeft());
 
 
+			incMock->reset();
 			decMock->reset();
 		}
 		void passedState()
@@ -2241,7 +2339,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Passed));
 
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(0));
+
+			EXPECT_TRUE(decMock->calledAtLeast(1));
 
 			EXPECT_TRUE(passedMock->calledAtLeastOnce());
 
@@ -2250,21 +2350,28 @@ namespace mrw
 			EXPECT_TRUE(statechart->isRaisedTryUnblock());
 
 
+			incMock->reset();
 			decMock->reset();
 			passedMock->reset();
 		}
 		TEST_F(SectionTest, passedState)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			passedMock = new PassedMock();
 			passedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -2306,16 +2413,22 @@ namespace mrw
 			freeMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			passedMock = new PassedMock();
 			passedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			offMock = new OffMock();
 			offMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			onMock = new OnMock();
@@ -2377,26 +2490,35 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling));
 
-			EXPECT_TRUE(incMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(1));
+
+			EXPECT_TRUE(decMock->calledAtLeast(0));
 
 			EXPECT_TRUE(onMock->calledAtLeastOnce());
 
 
 			incMock->reset();
+			decMock->reset();
 			onMock->reset();
 		}
 		TEST_F(SectionTest, enablingAfterDisabled)
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			offMock = new OffMock();
@@ -2434,18 +2556,26 @@ namespace mrw
 		}
 		TEST_F(SectionTest, enabledAfterDisabled)
 		{
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			onMock = new OnMock();
 			onMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
 			pendingMock = new PendingMock();
 			pendingMock->initializeBehavior();
 			offMock = new OffMock();
@@ -2487,9 +2617,12 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Enabled));
 
-			EXPECT_TRUE(decMock->calledAtLeastOnce());
+			EXPECT_TRUE(incMock->calledAtLeast(0));
+
+			EXPECT_TRUE(decMock->calledAtLeast(1));
 
 
+			incMock->reset();
 			decMock->reset();
 		}
 		TEST_F(SectionTest, doExit)
