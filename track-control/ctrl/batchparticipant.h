@@ -23,6 +23,8 @@ namespace mrw::ctrl
 		BatchParticipant();
 		void increase();
 		void decrease();
+		void setBatch(Batch * batch);
+
 		virtual QString name() const = 0;
 	};
 }

@@ -371,9 +371,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Unlock()
 		{
 			/* Entry action for state 'Unlock'. */
-			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->unlockSections();
-			ifaceOperationCallback->tryComplete();
 		}
 
 		/* Exit action for state 'Disable'. */

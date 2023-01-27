@@ -24,6 +24,8 @@ using namespace mrw::ctrl;
 using LockState = Device::LockState;
 using Symbol    = Signal::Symbol;
 
+#define USE_GLOBAL_BATCH
+
 WidgetRoute::WidgetRoute(
 	const bool           dir,
 	const SectionState   wanted_state,
@@ -109,6 +111,10 @@ void WidgetRoute::prepare(
 				controller, &SectionController::stop,
 				&statechart, &RouteStatechart::failed,
 				Qt::DirectConnection);
+
+#ifdef USE_OWN_BATCH
+			controller->setBatch(this);
+#endif
 		}
 	}
 
@@ -141,6 +147,9 @@ void WidgetRoute::prepareTrack(
 				rs, &RegularSwitchControllerProxy::stop,
 				&statechart, &RouteStatechart::failed,
 				Qt::DirectConnection);
+#ifdef USE_OWN_BATCH
+			rs->setBatch(this);
+#endif
 		}
 
 		if (dcs != nullptr)
@@ -149,6 +158,9 @@ void WidgetRoute::prepareTrack(
 				dcs, &DoubleCrossSwitchControllerProxy::stop,
 				&statechart, &RouteStatechart::failed,
 				Qt::DirectConnection);
+#ifdef USE_OWN_BATCH
+			dcs->setBatch(this);
+#endif
 		}
 	}
 }
@@ -200,7 +212,9 @@ void WidgetRoute::prepareSignals(
 			controller->setSymbol(section != this->last_section ?
 				Symbol::GO :
 				Symbol::STOP);
-
+#ifdef USE_OWN_BATCH
+			controller->setBatch(this);
+#endif
 			qDebug().noquote() << *controller;
 		}
 
@@ -234,6 +248,9 @@ void WidgetRoute::rename()
 **                                                                      **
 *************************************************************************/
 
+/**
+ * This slot is only a marker that a train has entered a mrw::model::Section.
+ */
 void WidgetRoute::entered()
 {
 	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
@@ -241,6 +258,9 @@ void WidgetRoute::entered()
 	qDebug().noquote() << "Entered:    " << *controller;
 }
 
+/**
+ * This slot marks a section left. All signals inside has to be turned to STOP.
+ */
 void WidgetRoute::left()
 {
 	SectionController   *   section_ctrl = dynamic_cast<SectionController *>(QObject::sender());
@@ -254,6 +274,13 @@ void WidgetRoute::left()
 	qDebug().noquote() << "Left:       " << *section_ctrl;
 }
 
+/**
+ * This slot method tries to unblock all sections back until the last main
+ * signal. Its a callback from the SectionStatechart when auto_unblock is
+ * disabled causing the left sections marked as PASSED. Since the signals
+ * are already turnd to stop (@see left()) the sections needs only to be
+ * unregistered.
+ */
 void WidgetRoute::tryUnblock()
 {
 	__METHOD__;
@@ -369,12 +396,14 @@ void WidgetRoute::finalize()
 	{
 		if (sections.back() == last_section)
 		{
+			// This marks the complete route reachead.
 			qDebug().noquote() << "Finalize:   " << String::bold("Finished!");
 
 			emit disable();
 		}
 		else
 		{
+			// This marks the next main signal reached.
 			qDebug().noquote() << "Finalize:   " << String::bold("Reached!");
 		}
 	}
@@ -588,6 +617,7 @@ void WidgetRoute::unlockSections()
 	{
 		controller->unlock();
 	}
+	statechart.completed();
 }
 
 void WidgetRoute::turnSignals()

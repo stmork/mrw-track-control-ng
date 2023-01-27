@@ -50,3 +50,15 @@ void BatchParticipant::decrease()
 		qWarning("dec: No batch active!");
 	}
 }
+
+void BatchParticipant::setBatch(Batch * new_batch)
+{
+	if (new_batch != nullptr)
+	{
+		batch = new_batch;
+	}
+	else
+	{
+		batch = &ControllerRegistry::instance();
+	}
+}

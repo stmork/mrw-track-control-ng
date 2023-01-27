@@ -11,15 +11,22 @@
 
 using namespace mrw::ctrl;
 
+std::atomic_uint32_t   Batch::counter;
+
 /*************************************************************************
 **                                                                      **
 **       Transaction/Batch handling                                     **
 **                                                                      **
 *************************************************************************/
 
+Batch::Batch() : id(++counter)
+{
+}
+
 void Batch::reset()
 {
-	qDebug("======================= Transaction left %zu elements.", transaction.size());
+	qDebug("======================= Transaction (ID=%u) left %zu elements.",
+		id, transaction.size());
 	transaction.clear();
 }
 
@@ -28,7 +35,8 @@ void Batch::increase(BatchParticipant * element)
 	if (transaction.find(element) == transaction.end())
 	{
 		transaction.emplace(element);
-		qDebug().noquote() << "Transaction increased to" << transaction.size() << "element(s). Added: " << element->name();
+		qDebug("Transaction (ID=%u) increased to %zu element(s). Added: %s",
+			id, transaction.size(),  element->name().toLatin1().constData());
 	}
 	else
 	{
@@ -42,17 +50,20 @@ void Batch::decrease(BatchParticipant * element)
 
 	if (count == 1)
 	{
-		qDebug().noquote() << "Transaction decreased to" << transaction.size() << "element(s). Removed: " << element->name();
+		qDebug("Transaction (ID=%u) decreased to %zu element(s). Removed: %s",
+			id, transaction.size(), element->name().toLatin1().constData());
 
 		if (isCompleted())
 		{
-			qDebug("======================= Transaction completed.");
+			qDebug("======================= Transaction (ID=%u) completed.",
+				id);
 			emit completed();
 		}
 	}
 	else
 	{
-		qWarning().noquote() << "Transaction does not contain element" << element->name();
+		qWarning("Transaction (ID=%u) does not contain element %s",
+			id,  element->name().toLatin1().constData());
 	}
 }
 
@@ -66,12 +77,14 @@ void Batch::tryComplete()
 	QCoreApplication::instance()->processEvents();
 	if (isCompleted())
 	{
-		qDebug("======================= Transaction completed (was empty).");
+		qDebug("======================= Transaction (ID=%u) completed (was empty).",
+			id);
 		emit completed();
 	}
 	else
 	{
-		qDebug("======================= Transaction contains %zu elements.", transaction.size());
+		qDebug("======================= Transaction (ID=%u) contains %zu elements.",
+			id, transaction.size());
 	}
 }
 

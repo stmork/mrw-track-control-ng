@@ -8,6 +8,7 @@
 #ifndef MRW_CTRL_BATCH_H
 #define MRW_CTRL_BATCH_H
 
+#include <atomic>
 #include <unordered_set>
 
 namespace mrw::ctrl
@@ -16,13 +17,16 @@ namespace mrw::ctrl
 
 	class Batch
 	{
+		static std::atomic_uint32_t            counter;
 		std::unordered_set<BatchParticipant *> transaction;
+		const uint32_t                         id;
 
 	public:
-		void increase(BatchParticipant * ctrl);
-		void decrease(BatchParticipant * ctrl);
-		bool contains(BatchParticipant * ctrl);
+		Batch();
 		void reset();
+		void increase(BatchParticipant * element);
+		void decrease(BatchParticipant * element);
+		bool contains(BatchParticipant * element);
 		void tryComplete();
 		bool isCompleted();
 		void dump();

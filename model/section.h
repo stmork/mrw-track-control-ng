@@ -299,7 +299,6 @@ namespace mrw::model
 	private:
 		void            add(AssemblyPart * rail_part);
 		void            link();
-		void            findSignalPair();
 		SectionModule * resolve(const std::string & path);
 
 	};

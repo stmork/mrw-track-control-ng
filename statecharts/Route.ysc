@@ -50,7 +50,7 @@
       <vertices xsi:type="sgraph:State" xmi:id="_yqc6cIYxEe2KYdnsQIjglw" specification="entry / fail&#xA;entry / deactivateSections; unlockSignals&#xA;entry / unlockSections" name="Emergency Shutdown" incomingTransitions="_EC0EEHWBEe2oVZ4yFrzfuw _MI8h4IaREe2yx5oO4CMMcQ _MujwYIaREe2yx5oO4CMMcQ _NWaakIaREe2yx5oO4CMMcQ">
         <outgoingTransitions xmi:id="_9uSbUIYxEe2KYdnsQIjglw" specification="after section_timeout ms" target="_59hPEHWAEe2oVZ4yFrzfuw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_LRSUcJ4nEe2HBvHaNKBCSA" specification="entry / resetTransaction&#xA;entry / unlockSections&#xA;entry / tryComplete" name="Unlock" incomingTransitions="_L-BZMHo5Ee2_ZOj2sFqWdg">
+      <vertices xsi:type="sgraph:State" xmi:id="_LRSUcJ4nEe2HBvHaNKBCSA" specification="entry / unlockSections" name="Unlock" incomingTransitions="_L-BZMHo5Ee2_ZOj2sFqWdg">
         <outgoingTransitions xmi:id="_SdIQEJ4nEe2HBvHaNKBCSA" specification="completed / raise finished" target="_KgRo0Ho5Ee2_ZOj2sFqWdg"/>
       </vertices>
     </regions>

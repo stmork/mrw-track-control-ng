@@ -15,11 +15,13 @@
 #include <model/section.h>
 #include <model/signal.h>
 #include <model/route.h>
+#include <ctrl/batch.h>
 #include <ctrl/sectioncontroller.h>
 #include <ctrl/signalcontrollerproxy.h>
 
 class WidgetRoute :
 	public mrw::model::Route,
+	public mrw::ctrl::Batch,
 	public mrw::statechart::RouteStatechart::OperationCallback
 {
 	Q_OBJECT
@@ -54,6 +56,9 @@ signals:
 	void turn();
 	void disable();
 	void finished();
+
+	// Implementation of mrw::ctrl::Batch
+	void completed() const override;
 
 public slots:
 	void entered();
