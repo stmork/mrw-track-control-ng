@@ -71,6 +71,18 @@ WidgetRoute::WidgetRoute(
 
 WidgetRoute::~WidgetRoute()
 {
+	std::vector<BatchParticipant *> participants;
+
+	ControllerRegistry::instance().collect<BatchParticipant>(participants);
+	for (BatchParticipant * part : participants)
+	{
+		if (part->batch() == this)
+		{
+			qWarning().noquote() << "Batch participant not dereigstered:" << part->name();
+			part->setBatch(nullptr);
+		}
+	}
+
 	statechart.disable();
 	statechart.exit();
 }
@@ -186,7 +198,7 @@ void WidgetRoute::prepareSignals(
 	{
 		Section        *        section      = *it;
 		SectionController   *   section_ctrl = getSectionController(section);
-		SignalControllerProxy * controller   = getSignalController(section);
+		SignalControllerProxy * signal_ctrl  = getSignalController(section);
 		std::vector<RailPart *> rails;
 
 		section->parts<RailPart>(rails, [](const RailPart * part)
@@ -195,31 +207,31 @@ void WidgetRoute::prepareSignals(
 		});
 		curved += rails.size();
 
-		if (controller != nullptr)
+		if (signal_ctrl != nullptr)
 		{
 			// OK, there is a signal...
-			if (controller->hasDistant())
+			if (signal_ctrl->hasDistant())
 			{
 				// OK, a distant signal has to reflect the main signals state.
-				controller->setDistantSignal(main_controller);
+				signal_ctrl->setDistantSignal(main_controller);
 			}
 
-			if (controller->hasMain())
+			if (signal_ctrl->hasMain())
 			{
 				//  OK, a main signal starts a new block.
-				main_controller = controller;
-				controller->setCurved(curved);
+				main_controller = signal_ctrl;
+				signal_ctrl->setCurved(curved);
 				curved = 0;
 			}
 
-			controller->setState(state);
-			controller->setSymbol(section != this->last_section ?
+			signal_ctrl->setState(state);
+			signal_ctrl->setSymbol(section != this->last_section ?
 				Symbol::GO :
 				Symbol::STOP);
 #ifdef USE_OWN_BATCH
-			controller->setBatch(this);
+			signal_ctrl->setBatch(this);
 #endif
-			qDebug().noquote() << *controller;
+			qDebug().noquote() << *signal_ctrl;
 		}
 
 		section_ctrl->nextController(next_ctrl);
@@ -337,7 +349,7 @@ void WidgetRoute::unregister(Section * section)
 
 void WidgetRoute::unregister(SectionController * controller)
 {
-	controller->disable();
+	controller->unlock();
 
 #ifdef USE_OWN_BATCH
 	controller->setBatch(nullptr);

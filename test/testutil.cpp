@@ -93,7 +93,8 @@ void TestUtil::testStringOut()
 	QVERIFY(red.size() > 4);
 
 	qDebug() << out;
-	std::clog << out;
+	std::cout << out << std::endl;
+
 	QCOMPARE(out.toString(), "out!");
 	QCOMPARE(out, QString("out!"));
 }

@@ -1852,7 +1852,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (disable_raised)
+				if (unlock_raised)
 				{
 					exseq_main_region_Operating_Processing_Locked();
 					enseq_main_region_Operating_Processing_Unlocked_default();

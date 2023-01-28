@@ -51,6 +51,19 @@ namespace mrw::ctrl
 			return dynamic_cast<R *>(find(device));
 		}
 
+		template <class R> void collect(std::vector<R *> & collection)
+		{
+			for (const auto & it : registry)
+			{
+				R * element = dynamic_cast<R *>(it.second);
+
+				if (element != nullptr)
+				{
+					collection.push_back(element);
+				}
+			}
+		}
+
 		void registerService(mrw::can::MrwBusService * service);
 		static mrw::can::MrwBusService * can();
 

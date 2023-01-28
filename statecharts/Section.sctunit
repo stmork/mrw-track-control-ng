@@ -521,13 +521,13 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	}
 
 	@Test
-	operation disableAfterPassed()
+	operation unlockAfterPassed()
 	{
 		// Given
 		passedState()
 
 		// When
-		raise disable
+		raise unlock
 
 		// Then
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
@@ -624,6 +624,10 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert !is_active
 
 		unlockSection()
+		exit
+		assert !is_active
+
+		unlockAfterPassed()
 		exit
 		assert !is_active
 

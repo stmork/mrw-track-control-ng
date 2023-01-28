@@ -111,4 +111,4 @@ private:
 	virtual void unlockSwitches() override;
 };
 
-#endif // WIDGETROUTE_H
+#endif

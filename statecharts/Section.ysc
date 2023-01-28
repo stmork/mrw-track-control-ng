@@ -61,7 +61,7 @@
                 <outgoingTransitions xmi:id="_pPiY8HX7Ee21HM-AEZfzIA" specification="&#x9;" target="_oA-UEHX7Ee21HM-AEZfzIA"/>
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_oA-UEHX7Ee21HM-AEZfzIA" specification="entry / passed; raise tryUnblock" name="Passed" incomingTransitions="_pPiY8HX7Ee21HM-AEZfzIA">
-                <outgoingTransitions xmi:id="_1wWjQHX9Ee21HM-AEZfzIA" specification="disable" target="_nNoBAHX6Ee21HM-AEZfzIA"/>
+                <outgoingTransitions xmi:id="_1wWjQHX9Ee21HM-AEZfzIA" specification="unlock" target="_nNoBAHX6Ee21HM-AEZfzIA"/>
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_0NV5kHYXEe21HM-AEZfzIA" specification="entry / inc&#xA;exit / dec" name="Waiting">
                 <outgoingTransitions xmi:id="_B_gnwHX-Ee21HM-AEZfzIA" specification="after timeout ms" target="_tx568G_nEe2YefuTX77gAw"/>

@@ -11,22 +11,22 @@ using namespace mrw::ctrl;
 
 BatchParticipant::BatchParticipant()
 {
-	batch = &ControllerRegistry::instance();
+	base_tx = &ControllerRegistry::instance();
 }
 
 void BatchParticipant::increase()
 {
-	if (batch != nullptr)
+	if (base_tx != nullptr)
 	{
 		if (open_tx == nullptr)
 		{
-			open_tx = batch;
+			open_tx = base_tx;
 		}
 		else
 		{
 			qWarning("inc: Batch already active!");
 		}
-		batch->increase(this);
+		base_tx->increase(this);
 	}
 	else
 	{
@@ -36,10 +36,10 @@ void BatchParticipant::increase()
 
 void BatchParticipant::decrease()
 {
-	if (batch != nullptr)
+	if (base_tx != nullptr)
 	{
-		batch->decrease(this);
-		if (open_tx != batch)
+		base_tx->decrease(this);
+		if (open_tx != base_tx)
 		{
 			qWarning("dec: Batch different!");
 		}
@@ -51,14 +51,19 @@ void BatchParticipant::decrease()
 	}
 }
 
+Batch * BatchParticipant::batch() const
+{
+	return base_tx;
+}
+
 void BatchParticipant::setBatch(Batch * new_batch)
 {
 	if (new_batch != nullptr)
 	{
-		batch = new_batch;
+		base_tx = new_batch;
 	}
 	else
 	{
-		batch = &ControllerRegistry::instance();
+		base_tx = &ControllerRegistry::instance();
 	}
 }

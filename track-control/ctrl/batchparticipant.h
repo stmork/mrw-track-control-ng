@@ -16,13 +16,15 @@ namespace mrw::ctrl
 
 	class BatchParticipant
 	{
-		Batch * batch = nullptr;
+		Batch * base_tx = nullptr;
 		Batch * open_tx = nullptr;
 
 	public:
 		BatchParticipant();
 		void increase();
 		void decrease();
+
+		Batch * batch() const;
 		void setBatch(Batch * batch);
 
 		virtual QString name() const = 0;
