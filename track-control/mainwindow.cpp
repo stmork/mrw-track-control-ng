@@ -80,14 +80,11 @@ MainWindow::MainWindow(
 
 MainWindow::~MainWindow()
 {
-	Q_ASSERT(!hasActiveRoutes());
+	__METHOD__;
 
-	ControllerRegistry::instance().tryComplete();
-	if (!ControllerRegistry::instance().isCompleted())
-	{
-		sleep(1);
-		ControllerRegistry::instance().tryComplete();
-	}
+	qInfo(" Quitting main window.");
+	Q_ASSERT(!hasActiveRoutes());
+	Q_ASSERT(ControllerRegistry::instance().isCompleted());
 
 	statechart.exit();
 
@@ -299,6 +296,9 @@ void MainWindow::resetTransaction()
 
 bool MainWindow::hasActiveRoutes()
 {
+	__METHOD__;
+
+	qDebug(" %d active routes.", ui->routeListWidget->count());
 	return ui->routeListWidget->count() > 0;
 }
 
@@ -306,11 +306,7 @@ void MainWindow::disableRoutes()
 {
 	__METHOD__;
 
-	enable();
-	QListWidgetItem * item  = ui->routeListWidget->takeItem(0);
-	WidgetRoute   *   route = item->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
-
-	route->disable();
+	on_clearAllRoutes_clicked();
 }
 
 void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Position * position)
@@ -516,7 +512,7 @@ void MainWindow::on_clearRoute_clicked()
 	{
 		const int row = ui->routeListWidget->row(item);
 
-		ui->routeListWidget->takeItem(row);
+		ui->routeListWidget->item(row);
 
 		WidgetRoute * route = item->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
 
@@ -534,11 +530,19 @@ void MainWindow::on_clearRoute_clicked()
 
 void MainWindow::on_clearAllRoutes_clicked()
 {
-	while (ui->routeListWidget->count() > 0)
+	std::vector<WidgetRoute *> routes;
+
+	for (int index = 0; index < ui->routeListWidget->count(); index++)
 	{
-		QListWidgetItem * item  = ui->routeListWidget->takeItem(0);
+		QListWidgetItem * item  = ui->routeListWidget->item(index);
 		WidgetRoute   *   route = item->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
 
+		routes.push_back(route);
+	}
+
+	// Disable collected routes.
+	for (WidgetRoute * route : routes)
+	{
 		route->disable();
 	}
 

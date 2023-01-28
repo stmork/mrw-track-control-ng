@@ -82,6 +82,7 @@ WidgetRoute::~WidgetRoute()
 			part->setBatch(nullptr);
 		}
 	}
+	Batch::dump();
 
 	statechart.disable();
 	statechart.exit();
@@ -483,7 +484,7 @@ void WidgetRoute::fail()
 	__METHOD__;
 
 	qCritical().noquote() << String::red("Timeout turning route:") << list_item.text();
-	ControllerRegistry::instance().dump();
+	Batch::dump();
 
 	dump();
 }

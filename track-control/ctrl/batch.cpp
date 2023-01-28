@@ -95,6 +95,8 @@ bool Batch::isCompleted()
 
 void Batch::dump()
 {
+	qDebug("======================= Transaction (ID=%u) contains %zu elements.",
+		id, transaction.size());
 	for (BatchParticipant * registrand : transaction)
 	{
 		qDebug() << registrand->name();

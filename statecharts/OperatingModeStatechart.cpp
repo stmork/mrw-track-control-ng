@@ -788,7 +788,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (completed_raised)
+				if (((completed_raised)) && ((!ifaceOperationCallback->hasActiveRoutes())))
 				{
 					exseq_main_region_Exit();
 					react_main_region__choice_0();
