@@ -1,11 +1,11 @@
 # Using the MRW track control software
 The <code>MRW-TrackControl</code> is the central tool using a model railway based on the MRW project. To use this tool you must have prepared the following:
-1. Qt with a QPA frontend configured.
+1. Of course: the *mrw-ng* package installed.
 2. CAN bus configured
-3. Of course: the *mrw-ng* package installed.
+3. Qt with a QPA frontend configured.
 
 ## Basic installation on Ubuntu/Debian
-If you use Debian or Ubuntu you have to do simply the steps shown on the main [README](../README.md). All dependencies are included into the *mrw-ng* package.
+If you use Debian or Ubuntu you have to follow the steps described on the main [README](../README.md). All needed dependencies are included into the *mrw-ng* package.
 
 ## CAN bus
 The *mrw-ng* package does not directly install the *mrw-can* package since there is the possibility to use the software remotely. If you have a direct connected CAN bus using the Linux SocketCAN you schould install the *mrw-can* package:
@@ -35,10 +35,10 @@ Also if you simply call <code>ifconfig</code> and no *can0* device is listed the
 If you have another SocketCAN device such as *can1* you can adjust the settings in file */etc/default/mrw-can* and restart the service.
 
 ## Window Manager
-If you have a system with any window manager installed, configured and started the <code>MRW-TrackControl</code> should simply start out of the box. So no more configuration is needed.
+If you have a system with any window manager installed, configured and started, the <code>MRW-TrackControl</code> should simply start out of the box. So no more configuration is needed.
 
 ## EGLFS on Raspberry Pi4
-The MRW-NG software has also an arm64 build ready to install. So you can use it directly as described on Rasberry Pi. To use *eglfs* on Raspberry Pi 4b and later you have to set three additional environment variables:
+The MRW-NG software has also an arm64 package ready to install. So you can use it directly as described for example on a arm64 based Raspberry Pi. To use *eglfs* on Raspberry Pi 4b and later you have to set three additional environment variables:
 ```
 export QT_QPA_PLATFORM=eglfs
 export QT_QPA_EGLFS_INTEGRATION=eglfs_kms
@@ -72,7 +72,8 @@ So the simplest scenario to start <code>MRW-TrackControl</code> is to use a dire
 ```mermaid
 flowchart LR
 	subgraph Host A
-		MRW-TrackControl-- socketcan ---CAN-bus
+		can([CAN bus])
+		MRW-TrackControl-- socketcan ---can
 	end
 ```
 
@@ -81,17 +82,19 @@ flowchart LR
 If you want to use <code>MRW-TrackControl</code> remotely you can use the <code>MRW-Proxy</code> tool which interconnects a real CAN bus (the "socketcan" plugin in Qt meaning) with a virtual CAN bus (the "virtualcan" plugin in Qt meaning). Since the virtual CAN bus can only connect to a localhost socket you need a SSH tunnel to connect remotely. You can use the command on host B to build a tunnel to host A:
 
 ```
-ssh -L 35468:localhost:35468 user@host-a
+user@host-b:~$ ssh -L 35468:localhost:35468 user@host-a
 ```
 
-Note that you start the <code>MRW-Proxy</code> tool first, since it provides the virtual CAN Server on socket localhost:35468.
+Note that you have to start the <code>MRW-Proxy</code> tool first, since it provides the virtual CAN Server on socket localhost:35468.
 
 ```mermaid
 flowchart BT
 	subgraph Host A
 		vcan([Virtual CAN])
-		MRW-Proxy -- socketcan --- CAN-bus
-		MRW-Proxy -->|provides|vcan
+		can([CAN bus])
+
+		MRW-Proxy -- socketcan --- can
+		MRW-Proxy -->|provides virtualcan|vcan
 		end
 		subgraph Host B
 		MRW-TrackControl-- SSH-Tunnel ---vcan
@@ -106,7 +109,7 @@ If you want to simulate a model railway you can use the <code>MRW-Simulator</cod
 flowchart LR
 	subgraph Host B
 		vcan([Virtual CAN])
-		MRW-Simulator -->|provides| vcan
+		MRW-Simulator -->|provides virtualcan| vcan
 		MRW-TrackControl -- uses --- vcan
 		MRW-Tracker .- vcan
 	end
