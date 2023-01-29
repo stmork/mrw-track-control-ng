@@ -43,7 +43,6 @@ void BatchParticipant::decrease()
 		{
 			qWarning("dec: Batch different!");
 		}
-		open_tx = nullptr;
 	}
 	else
 	{
@@ -66,4 +65,5 @@ void BatchParticipant::setBatch(Batch * new_batch)
 	{
 		base_tx = &ControllerRegistry::instance();
 	}
+	open_tx = nullptr;
 }
