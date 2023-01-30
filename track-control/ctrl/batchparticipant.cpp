@@ -22,9 +22,9 @@ void BatchParticipant::increase()
 		{
 			open_tx = base_tx;
 		}
-		else
+		else if (open_tx != base_tx)
 		{
-			qWarning("inc: Batch already active!");
+			qWarning("inc: Another batch is already active!");
 		}
 		base_tx->increase(this);
 	}
