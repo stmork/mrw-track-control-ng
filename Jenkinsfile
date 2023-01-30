@@ -78,7 +78,7 @@ pipeline
 				allowMissing: false,
 				alwaysLinkToLastBuild: false,
 				keepAll: false,
-				reportDir: 'doc/html',
+				reportDir: 'api-doc/html',
 				reportFiles: 'index.html',
 				reportName: 'MRW-NG Doxygen',
 				reportTitles: ''])
