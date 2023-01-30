@@ -17,7 +17,7 @@ mkdir -p ${PREFIX}/usr/share/doc/${PACKAGE}
 mkdir ${PREFIX}/DEBIAN
 cp -a DEBIAN/control-doc  ${PREFIX}/DEBIAN/control
 cp -a *.qch               ${PREFIX}/usr/share/qt5/doc/
-cp -a doc                 ${PREFIX}/usr/share/doc/${PACKAGE}/
+cp -a api-doc             ${PREFIX}/usr/share/doc/${PACKAGE}/doc/
 
 echo "Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/" > $COPYRIGHT
 echo "Upstream-Name: $PACKAGE" >> ${COPYRIGHT}
