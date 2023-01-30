@@ -15,10 +15,16 @@
 using namespace mrw::test;
 using namespace mrw::can;
 
+/*************************************************************************
+**                                                                      **
+**       Test implementation of MrwBusService                           **
+**                                                                      **
+*************************************************************************/
+
 class ManualCanService : public MrwBusService
 {
 public:
-	ManualCanService(const char * iface) :
+	explicit ManualCanService(const char * iface = "can0") :
 		MrwBusService(iface, "socketcan", nullptr, false)
 	{
 	}
@@ -38,6 +44,12 @@ public:
 		can_device->disconnectDevice();
 	}
 };
+
+/*************************************************************************
+**                                                                      **
+**       Test class                                                     **
+**                                                                      **
+*************************************************************************/
 
 TestCan::TestCan(QObject * parent) : QObject(parent)
 {
