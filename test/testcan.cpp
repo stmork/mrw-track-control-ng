@@ -5,6 +5,7 @@
 
 #include <QCanBusFrame>
 #include <QTest>
+#include <QSignalSpy>
 
 #include "can/mrwbusservice.h"
 #include "can/mrwmessage.h"
@@ -13,6 +14,30 @@
 
 using namespace mrw::test;
 using namespace mrw::can;
+
+class ManualCanService : public MrwBusService
+{
+public:
+	ManualCanService(const char * iface) :
+		MrwBusService(iface, "socketcan", nullptr, false)
+	{
+	}
+
+	bool isConnected()
+	{
+		return can_device->state() == QCanBusDevice::ConnectedState;
+	}
+
+	void connect()
+	{
+		can_device->connectDevice();
+	}
+
+	void disconnect()
+	{
+		can_device->disconnectDevice();
+	}
+};
 
 TestCan::TestCan(QObject * parent) : QObject(parent)
 {
@@ -81,6 +106,35 @@ void TestCan::testInvalidService()
 	QVERIFY(!service.valid());
 	QVERIFY(!service.write(message));
 	service.list();
+}
+
+void TestCan::testManualConnectService()
+{
+	ManualCanService service("can0");
+	QSignalSpy spy_connect(&service,    &ManualCanService::connected);
+	QSignalSpy spy_disconnect(&service, &ManualCanService::disconnected);
+
+	connect(&service, &ManualCanService::connected, [&]()
+	{
+		QVERIFY(service.isConnected());
+	});
+
+	connect(&service, &ManualCanService::disconnected, [&]()
+	{
+		QVERIFY(!service.isConnected());
+	});
+
+	QVERIFY(!service.isConnected());
+
+	service.connect();
+	QVERIFY(spy_connect.wait(1000));
+	QCOMPARE(spy_connect.count(), 1);
+	QVERIFY(service.isConnected());
+
+	service.disconnect();
+	QVERIFY(spy_disconnect.wait(1000));
+	QCOMPARE(spy_disconnect.count(), 1);
+	QVERIFY(!service.isConnected());
 }
 
 void TestCan::testReceivedResult()
