@@ -19,7 +19,8 @@ MrwBusService::MrwBusService(
 	const QString & interface,
 	const QString & plugin,
 	QObject    *    parent,
-	const bool      auto_connect) : QObject(parent),
+	const bool      auto_connect) :
+	QObject(parent),
 	can_bus(QCanBus::instance())
 
 {

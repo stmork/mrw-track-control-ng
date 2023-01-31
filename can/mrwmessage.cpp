@@ -205,7 +205,7 @@ uint16_t MrwMessage::eid() const
 	}
 	else
 	{
-		return 0;
+		return NO_UNITNO;
 	}
 }
 

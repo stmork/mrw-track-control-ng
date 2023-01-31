@@ -36,6 +36,7 @@ namespace mrw::test
 		void testTryValidService();
 		void testInvalidService();
 		void testManualConnectService();
+		void testReadWrite();
 		void testReceivedResult();
 		void testReceivedBroadcast();
 		void testReceivedCommand();

@@ -6,6 +6,7 @@
 #include <QCanBusFrame>
 #include <QTest>
 #include <QSignalSpy>
+#include <QList>
 
 #include "can/mrwbusservice.h"
 #include "can/mrwmessage.h"
@@ -23,15 +24,15 @@ using namespace mrw::can;
 
 class ManualCanService : public MrwBusService
 {
-public:
-	explicit ManualCanService(const char * iface = "can0") :
-		MrwBusService(iface, "socketcan", nullptr, false)
-	{
-	}
+	QList<MrwMessage> messages;
 
-	bool isConnected()
+public:
+	explicit ManualCanService(
+		const bool   auto_connect = false,
+		const char * iface        = "vcan0") :
+		MrwBusService(iface, "socketcan", nullptr, auto_connect)
 	{
-		return can_device->state() == QCanBusDevice::ConnectedState;
+		can_device->setConfigurationParameter(QCanBusDevice::ReceiveOwnKey, true);
 	}
 
 	void connect()
@@ -42,6 +43,21 @@ public:
 	void disconnect()
 	{
 		can_device->disconnectDevice();
+	}
+
+	void process(const MrwMessage & message) override
+	{
+		messages.append(message);
+	}
+
+	int counted() const
+	{
+		return messages.size();
+	}
+
+	const QList<MrwMessage> & list() const
+	{
+		return messages;
 	}
 };
 
@@ -92,7 +108,7 @@ void TestCan::testInvalidExtendedCanFrame()
 
 void TestCan::testValidService()
 {
-	MrwBusService service("can0");
+	MrwBusService service("vcan0");
 	MrwMessage    message(PING);
 
 	QVERIFY(service.valid());
@@ -125,15 +141,37 @@ void TestCan::testManualConnectService()
 	ManualCanService service;
 	QSignalSpy       spy(&service, &ManualCanService::connected);
 
-	QVERIFY(!service.isConnected());
+	QVERIFY(!service.valid());
 
 	service.connect();
 	QVERIFY(spy.wait(1000));
 	QCOMPARE(spy.count(), 1);
-	QVERIFY(service.isConnected());
+	QVERIFY(service.valid());
 
 	service.disconnect();
-	QVERIFY(!service.isConnected());
+	QVERIFY(!service.valid());
+}
+
+void TestCan::testReadWrite()
+{
+	ManualCanService service(true);
+
+	QVERIFY(service.valid());
+	QVERIFY(service.write(MrwMessage(PING)));
+
+	QTest::qWait(50);
+	QCOMPARE(service.counted(), 1);
+
+	const MrwMessage & message = service.list().at(0);
+	QVERIFY(message.valid());
+	QVERIFY(!message.isResponse());
+	QCOMPARE(message.command(),  PING);
+	QCOMPARE(message.size(),     0u);
+	QCOMPARE(message.unitNo(),   NO_UNITNO);
+	QCOMPARE(message.response(), MSG_NO_RESPONSE);
+	QCOMPARE(message.id(),       CAN_BROADCAST_ID);
+	QCOMPARE(message.sid(),      CAN_BROADCAST_ID);
+	QCOMPARE(message.eid(),      NO_UNITNO);
 }
 
 void TestCan::testReceivedResult()
