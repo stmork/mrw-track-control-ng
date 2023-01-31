@@ -58,8 +58,6 @@ MrwBusService::MrwBusService(
 
 MrwBusService::~MrwBusService()
 {
-	__METHOD__;
-
 	qInfo(" Shutting down MRW bus service.");
 	if (can_device != nullptr)
 	{
@@ -145,8 +143,6 @@ QString MrwBusService::select(
 
 void MrwBusService::stateChanged(QCanBusDevice::CanBusDeviceState state)
 {
-	__METHOD__;
-
 	switch (state)
 	{
 	case QCanBusDevice::ConnectedState:

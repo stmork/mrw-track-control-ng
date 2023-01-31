@@ -47,6 +47,7 @@ public:
 
 	void process(const MrwMessage & message) override
 	{
+		MrwBusService::process(message);
 		messages.append(message);
 	}
 
