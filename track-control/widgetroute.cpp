@@ -78,7 +78,7 @@ WidgetRoute::~WidgetRoute()
 	{
 		if (part->batch() == this)
 		{
-			qWarning().noquote() << "Batch participant not dereigstered:" << part->name();
+			qWarning().noquote() << "Batch participant not deregistered:" << part->name();
 			part->setBatch(nullptr);
 		}
 	}
