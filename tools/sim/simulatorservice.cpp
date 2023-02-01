@@ -156,25 +156,24 @@ void SimulatorService::device(const MrwMessage & message)
 	Device        *        device  = model->deviceById(id, unit_no);
 	Response               code    = device != nullptr ? MSG_OK : MSG_UNIT_NOT_FOUND;
 	std::vector<uint8_t>   appendix;
-	std::function<void()>  late_ok = [this, id, unit_no, cmd]()
-	{
-		const MrwMessage msg(id, unit_no, cmd, MSG_OK);
-
-		write(msg);
-	};
+	int                    timeout = 0;
 
 	switch (cmd)
 	{
 	case SETLFT:
-		code = MSG_QUEUED;
-		setSwitchState(device, SWITCH_STATE_LEFT);
-		QTimer::singleShot(75, late_ok);
+		if (setSwitchState(device, SWITCH_STATE_LEFT))
+		{
+			code    = MSG_QUEUED;
+			timeout = 120;
+		}
 		break;
 
 	case SETRGT:
-		code = MSG_QUEUED;
-		setSwitchState(device, SWITCH_STATE_RIGHT);
-		QTimer::singleShot(75, late_ok);
+		if (setSwitchState(device, SWITCH_STATE_RIGHT))
+		{
+			code    = MSG_QUEUED;
+			timeout = 120;
+		}
 		break;
 
 	case GETDIR:
@@ -188,8 +187,8 @@ void SimulatorService::device(const MrwMessage & message)
 	case SETSGN:
 		if (isFormSignal(device))
 		{
-			code = MSG_QUEUED;
-			QTimer::singleShot(750, late_ok);
+			code    = MSG_QUEUED;
+			timeout = 750;
 		}
 		break;
 
@@ -222,6 +221,19 @@ void SimulatorService::device(const MrwMessage & message)
 	}
 
 	write(response);
+
+	if ((code == MSG_QUEUED) && (timeout > 0))
+	{
+		std::function<void()>  late_ok = [this, id, unit_no, cmd, timeout]()
+		{
+			MrwMessage ok(id, unit_no, cmd, MSG_OK);
+
+			ok.append(timeout / SLICE);
+			write(ok);
+		};
+
+		QTimer::singleShot(timeout, late_ok);
+	}
 }
 
 uint8_t SimulatorService::getSwitchState(Device * device)
@@ -231,19 +243,26 @@ uint8_t SimulatorService::getSwitchState(Device * device)
 	return rs->switchState();
 }
 
-void SimulatorService::setSwitchState(Device * device, const SwitchState switch_state)
+bool SimulatorService::setSwitchState(Device * device, const SwitchState switch_state)
 {
 	RegularSwitch   *   rs  = dynamic_cast<RegularSwitch *>(device);
 	DoubleCrossSwitch * dcs = dynamic_cast<DoubleCrossSwitch *>(device);
 
 	if (rs != nullptr)
 	{
+		const SwitchState old = rs->switchState();
 		rs->setState(static_cast<RegularSwitch::State>(switch_state));
+
+		return old != switch_state;
 	}
 	if (dcs != nullptr)
 	{
+		const SwitchState old = dcs->switchState();
+
 		dcs->setState(static_cast<DoubleCrossSwitch::State>(switch_state));
+		return old != switch_state;
 	}
+	return false;
 }
 
 uint8_t SimulatorService::occupation(Device * device)

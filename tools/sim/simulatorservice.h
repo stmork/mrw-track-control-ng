@@ -16,6 +16,12 @@ class SimulatorService : public mrw::can::MrwBusService
 {
 	Q_OBJECT
 
+	/** Interrupts per second. */
+	static constexpr double SLICE_COUNT = 16000000.0 / (1024 * 256);
+
+	/** Time between timer interrupts in ms. */
+	static constexpr double SLICE       = 1000.0 / SLICE_COUNT;
+
 	mrw::model::ModelRailway * model = nullptr;
 	unsigned                   device_count = 0;
 
@@ -39,7 +45,7 @@ private:
 		const mrw::model::Controller * controller,
 		const mrw::can::MrwMessage  &  message);
 	void    device(const mrw::can::MrwMessage & message);
-	void    setSwitchState(mrw::model::Device * device, const mrw::can::SwitchState switch_state);
+	bool    setSwitchState(mrw::model::Device * device, const mrw::can::SwitchState switch_state);
 	uint8_t getSwitchState(mrw::model::Device * device);
 	uint8_t occupation(mrw::model::Device * device);
 	void    bootSequence(const mrw::can::ControllerId id);
