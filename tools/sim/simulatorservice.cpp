@@ -164,7 +164,7 @@ void SimulatorService::device(const MrwMessage & message)
 		if (setSwitchState(device, SWITCH_STATE_LEFT))
 		{
 			code    = MSG_QUEUED;
-			timeout = 120;
+			timeout = 100;
 		}
 		break;
 
@@ -172,7 +172,7 @@ void SimulatorService::device(const MrwMessage & message)
 		if (setSwitchState(device, SWITCH_STATE_RIGHT))
 		{
 			code    = MSG_QUEUED;
-			timeout = 120;
+			timeout = 100;
 		}
 		break;
 
