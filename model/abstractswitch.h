@@ -51,6 +51,20 @@ namespace mrw::model
 		 */
 		virtual bool isFlankProtection(const RailPart * other) const = 0;
 
+		/**
+		 * This method collects all indirect connected switches which needs
+		 * flank protection depending on the internal own state. Internally
+		 * all connection which are not involved into the tour route are
+		 * tested.
+		 *
+		 * @param switches The collection of switches selected for flank
+		 * protection.
+		 * @param set_state If true the state of the flank protection switch
+		 * will be set accordingly.
+		 * @see isFlankProtection
+		 * @see follow
+		 * @see linked
+		 */
 		virtual void flank(
 			std::vector<RegularSwitch *> & switches,
 			const bool                     set_state = false) const = 0;
