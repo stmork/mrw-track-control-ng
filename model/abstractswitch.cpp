@@ -21,13 +21,6 @@ AbstractSwitch::AbstractSwitch(
 {
 }
 
-bool AbstractSwitch::isFlankProtection(AbstractSwitch * other) const
-{
-	RegularSwitch * element = dynamic_cast<RegularSwitch *>(other);
-
-	return flank_switches.find(element) != flank_switches.end();
-}
-
 Command AbstractSwitch::commandState() const
 {
 	switch (switchState())

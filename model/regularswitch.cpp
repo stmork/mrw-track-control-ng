@@ -120,23 +120,29 @@ void RegularSwitch::link()
 	advance( aIsDir()).insert(RailInfo(a));
 	advance(!aIsDir()).insert(RailInfo(b, left_prio,  left_branch));
 	advance(!aIsDir()).insert(RailInfo(c, right_prio, right_branch));
-
-	findFlankSwitches();
 }
 
-void RegularSwitch::findFlankSwitches()
+bool RegularSwitch::isFlankProtection(const RailPart * other) const
 {
-	RegularSwitch * b_switch = follow(b);
-	RegularSwitch * c_switch = follow(c);
+	const RegularSwitch * b_switch = follow(b);
+	const RegularSwitch * c_switch = follow(c);
 
-	if ((b_switch != nullptr) && linked(b_switch->b, this))
+	if (other == b_switch)
 	{
-		flank_switches.insert(b_switch);
+		if ((b_switch != nullptr) && linked(b_switch->b, this))
+		{
+			return true;
+		}
 	}
-	if ((c_switch != nullptr) && linked(c_switch->c, this))
+
+	if (other == c_switch)
 	{
-		flank_switches.insert(c_switch);
+		if ((c_switch != nullptr) && linked(c_switch->c, this))
+		{
+			return true;
+		}
 	}
+	return false;
 }
 
 bool RegularSwitch::valid() const
@@ -182,20 +188,13 @@ QString RegularSwitch::get(const RegularSwitch::State & state)
 
 RegularSwitch * RegularSwitch::flank() const
 {
-	RegularSwitch * b_switch = follow(b);
-	RegularSwitch * c_switch = follow(c);
-
-	if ((switch_state == State::AB) &&
-		(c_switch != nullptr) &&
-		(linked(c_switch->c, this)))
+	if ((switch_state == State::AB) && isFlankProtection(c))
 	{
-		return c_switch;
+		return follow(c);
 	}
-	else if ((switch_state == State::AC) &&
-		(b_switch != nullptr) &&
-		(linked(b_switch->b, this)))
+	else if ((switch_state == State::AC) && isFlankProtection(b))
 	{
-		return b_switch;
+		return follow(b);
 	}
 	return nullptr;
 }

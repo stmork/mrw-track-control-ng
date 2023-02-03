@@ -114,7 +114,7 @@ namespace mrw::model
 
 	private:
 		void link() override;
-		void findFlankSwitches() override;
+		bool isFlankProtection(const RailPart * other) const override;
 
 		State                                              switch_state = State::AC;
 		const static mrw::util::ConstantEnumerator<State>  state_map;

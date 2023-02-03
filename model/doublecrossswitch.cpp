@@ -87,29 +87,45 @@ void DoubleCrossSwitch::link()
 	advance(!aIsDir()).insert(RailInfo(d, false, ad_branch));
 }
 
-void DoubleCrossSwitch::findFlankSwitches()
+bool DoubleCrossSwitch::isFlankProtection(const RailPart * other) const
 {
-	RegularSwitch * a_switch = follow(a);
-	RegularSwitch * b_switch = follow(b);
-	RegularSwitch * c_switch = follow(c);
-	RegularSwitch * d_switch = follow(d);
+	const RegularSwitch * a_switch = follow(a);
+	const RegularSwitch * b_switch = follow(b);
+	const RegularSwitch * c_switch = follow(c);
+	const RegularSwitch * d_switch = follow(d);
 
-	if ((a_switch != nullptr) && linked(a_switch->c, this))
+	if (other == a_switch)
 	{
-		flank_switches.insert(a_switch);
+		if ((a_switch != nullptr) && linked(a_switch->c, this))
+		{
+			return true;
+		}
 	}
-	if ((b_switch != nullptr) && linked(b_switch->b, this))
+
+	if (other == b_switch)
 	{
-		flank_switches.insert(b_switch);
+		if ((b_switch != nullptr) && linked(b_switch->b, this))
+		{
+			return true;
+		}
 	}
-	if ((c_switch != nullptr) && linked(c_switch->b, this))
+
+	if (other == c_switch)
 	{
-		flank_switches.insert(c_switch);
+		if ((c_switch != nullptr) && linked(c_switch->b, this))
+		{
+			return true;
+		}
 	}
-	if ((d_switch != nullptr) && linked(d_switch->c, this))
+
+	if (other == d_switch)
 	{
-		flank_switches.insert(d_switch);
+		if ((d_switch != nullptr) && linked(d_switch->c, this))
+		{
+			return true;
+		}
 	}
+	return false;
 }
 
 bool DoubleCrossSwitch::valid() const

@@ -30,12 +30,6 @@ namespace mrw::model
 	{
 		friend class Section;
 
-	protected:
-		/**
-		 * The partner switches which may by flank protection switches.
-		 */
-		std::unordered_set<RegularSwitch *> flank_switches;
-
 	public:
 		explicit AbstractSwitch(
 			ModelRailway     *    model_railway,
@@ -55,7 +49,7 @@ namespace mrw::model
 		 * @return True if the connected AbstractSwitch is a flank protection
 		 * switch.
 		 */
-		bool isFlankProtection(AbstractSwitch * other) const;
+		virtual bool isFlankProtection(const RailPart * other) const = 0;
 
 		/**
 		 * This method converts the internal switch state into the right
@@ -75,16 +69,6 @@ namespace mrw::model
 		mrw::can::Command commandState() const;
 
 	protected:
-		/**
-		 * This method finds partner switches which may occur as flank
-		 * protection switches. For a RegularSwitch the algorithm is quiet
-		 * simple and static whereas the flank protection switch for
-		 * DoubleCrossSwitch depends on their state inside an active track.
-		 * Nevertheless this method computes all candidates and store them
-		 * in dthe flank_switches vector.
-		 */
-		virtual void findFlankSwitches() = 0;
-
 		/**
 		 * This method follows a connection part if it is directly connected
 		 * to a RegularSwitch or indirectly connected using a Rail.

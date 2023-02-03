@@ -264,15 +264,6 @@ void Section::link()
 			part->link();
 		}
 	}
-	for (AssemblyPart * part : assembly_parts)
-	{
-		AbstractSwitch * abstract_switch = dynamic_cast<AbstractSwitch *>(part);
-
-		if (abstract_switch != nullptr)
-		{
-			abstract_switch->findFlankSwitches();
-		}
-	}
 }
 
 QString Section::toString() const
