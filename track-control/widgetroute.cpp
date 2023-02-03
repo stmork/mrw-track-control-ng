@@ -609,25 +609,26 @@ void WidgetRoute::turnFlanks()
 {
 	__METHOD__;
 
+	std::vector<RegularSwitch *> flank_switches;
+
+	// Collect and set new state.
 	for (RailPart * part : track)
 	{
-		RegularSwitch * rs = dynamic_cast<RegularSwitch *>(part);
+		AbstractSwitch * rs = dynamic_cast<AbstractSwitch *>(part);
 
 		if (rs != nullptr)
 		{
-			RegularSwitch * flank_switch = rs->flank();
-
-			if (flank_switch != nullptr)
-			{
-				qDebug().noquote() << *rs;
-				qDebug().noquote() << "    " << *flank_switch;
-				flank_switch->setState(rs->state());
-
-				RegularSwitchControllerProxy * controller =
-					ControllerRegistry::instance().find<RegularSwitchControllerProxy>(flank_switch);
-				controller->turn();
-			}
+			rs->flank(flank_switches, true);
 		}
+	}
+
+	// Now turn
+	for (RegularSwitch * flank_switch : flank_switches)
+	{
+		RegularSwitchControllerProxy * controller =
+			ControllerRegistry::instance().find<RegularSwitchControllerProxy>(flank_switch);
+
+		controller->turn();
 	}
 }
 

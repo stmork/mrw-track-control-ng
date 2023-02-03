@@ -128,6 +128,62 @@ bool DoubleCrossSwitch::isFlankProtection(const RailPart * other) const
 	return false;
 }
 
+void mrw::model::DoubleCrossSwitch::flank(
+	std::vector<RegularSwitch *> & switches,
+	const bool                     set_state) const
+{
+	RegularSwitch * a_switch = follow(a);
+	RegularSwitch * b_switch = follow(b);
+	RegularSwitch * c_switch = follow(c);
+	RegularSwitch * d_switch = follow(d);
+
+	if ((unsigned)state() & B_MASK)
+	{
+		if (isFlankProtection(a_switch))
+		{
+			switches.push_back(a_switch);
+			if (set_state)
+			{
+				a_switch->setState(RegularSwitch::State::AB);
+			}
+		}
+	}
+	else
+	{
+		if (isFlankProtection(b_switch))
+		{
+			switches.push_back(b_switch);
+			if (set_state)
+			{
+				b_switch->setState(RegularSwitch::State::AC);
+			}
+		}
+	}
+
+	if ((unsigned)state() & D_MASK)
+	{
+		if (isFlankProtection(c_switch))
+		{
+			switches.push_back(c_switch);
+			if (set_state)
+			{
+				c_switch->setState(RegularSwitch::State::AC);
+			}
+		}
+	}
+	else
+	{
+		if (isFlankProtection(d_switch))
+		{
+			switches.push_back(d_switch);
+			if (set_state)
+			{
+				d_switch->setState(RegularSwitch::State::AB);
+			}
+		}
+	}
+}
+
 bool DoubleCrossSwitch::valid() const
 {
 	return

@@ -51,6 +51,10 @@ namespace mrw::model
 		 */
 		virtual bool isFlankProtection(const RailPart * other) const = 0;
 
+		virtual void flank(
+			std::vector<RegularSwitch *> & switches,
+			const bool                     set_state = false) const = 0;
+
 		/**
 		 * This method converts the internal switch state into the right
 		 * token for a MrwMessage;
