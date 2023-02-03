@@ -34,7 +34,7 @@ namespace mrw::model
 		/**
 		 * The partner switches which may by flank protection switches.
 		 */
-		std::unordered_set<AbstractSwitch *> flank_switches;
+		std::unordered_set<RegularSwitch *> flank_switches;
 
 	public:
 		explicit AbstractSwitch(
@@ -107,7 +107,9 @@ namespace mrw::model
 		 * flank switches.
 		 * @see follow()
 		 */
-		bool linked(RailPart * candidate, AbstractSwitch * self) const;
+		bool linked(
+			const RailPart    *    candidate,
+			const AbstractSwitch * self) const;
 	};
 }
 

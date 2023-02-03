@@ -109,6 +109,8 @@ namespace mrw::model
 		 */
 		static QString get(const State & state);
 
+		RegularSwitch * flank() const;
+
 	private:
 		void link() override;
 		void findFlankSwitches() override;

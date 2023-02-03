@@ -179,3 +179,23 @@ QString RegularSwitch::get(const RegularSwitch::State & state)
 {
 	return state_map.get(state);
 }
+
+RegularSwitch * RegularSwitch::flank() const
+{
+	RegularSwitch * b_switch = follow(b);
+	RegularSwitch * c_switch = follow(c);
+
+	if ((switch_state == State::AB) &&
+		(c_switch != nullptr) &&
+		(linked(c_switch->c, this)))
+	{
+		return c_switch;
+	}
+	else if ((switch_state == State::AC) &&
+		(b_switch != nullptr) &&
+		(linked(b_switch->b, this)))
+	{
+		return b_switch;
+	}
+	return nullptr;
+}

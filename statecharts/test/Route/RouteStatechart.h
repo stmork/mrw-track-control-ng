@@ -91,8 +91,9 @@ namespace mrw
 				_te2_main_region_Turning_Turning_process_Signal_Turning_,
 				_te3_main_region_Turning_Turning_process_Section_Activation_,
 				_te4_main_region_Turning_Turning_process_Signal_Updating_,
-				_te5_main_region_Wait_,
-				_te6_main_region_Emergency_Shutdown_
+				_te5_main_region_Turning_Turning_process_Flank_Turning_,
+				_te6_main_region_Wait_,
+				_te7_main_region_Emergency_Shutdown_
 			};
 
 			class EventInstance
@@ -212,7 +213,7 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 7;
+			static const sc::integer timeEventsCount = 8;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
@@ -272,6 +273,7 @@ namespace mrw
 			void exact_main_region_Turning_Turning_process_Signal_Turning();
 			void exact_main_region_Turning_Turning_process_Section_Activation();
 			void exact_main_region_Turning_Turning_process_Signal_Updating();
+			void exact_main_region_Turning_Turning_process_Flank_Turning();
 			void exact_main_region_Wait();
 			void exact_main_region_Emergency_Shutdown();
 			void enseq_main_region_Active_default();

@@ -20,6 +20,7 @@ namespace mrw
 		void disabled();
 		void start();
 		void turningSwitches();
+		void turningFlanks();
 		void turningSignals();
 		void extendingSignals();
 		void sections();
@@ -985,6 +986,30 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			turningSwitches();
 		}
+		void turningFlanks()
+		{
+			turningSwitches();
+
+			isTourMock->setDefaultBehavior(&IsTourMock::isTour2);
+
+			statechart->raiseCompleted();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Flank_Turning));
+
+			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(turnFlanksMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
+
+
+			isTourMock->reset();
+			resetTransactionMock->reset();
+			turnFlanksMock->reset();
+			tryCompleteMock->reset();
+		}
 		TEST_F(RouteTest, turningFlanks)
 		{
 			isTourMock = new IsTourMock();
@@ -1030,26 +1055,76 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			turningSwitches();
+			turningFlanks();
+		}
+		TEST_F(RouteTest, turningSignalsTour)
+		{
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			turnSignalsMock = new TurnSignalsMock();
+			turnSignalsMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			isTourMock = new IsTourMock();
+			isTourMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			turnFlanksMock = new TurnFlanksMock();
+			turnFlanksMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			turnSwitchesMock = new TurnSwitchesMock();
+			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			isTourMock = new IsTourMock();
+			isTourMock->initializeBehavior();
+			turnSwitchesMock = new TurnSwitchesMock();
+			turnSwitchesMock->initializeBehavior();
+			turnFlanksMock = new TurnFlanksMock();
+			turnFlanksMock->initializeBehavior();
+			turnSignalsMock = new TurnSignalsMock();
+			turnSignalsMock->initializeBehavior();
+			extendSignalsMock = new ExtendSignalsMock();
+			extendSignalsMock->initializeBehavior();
+			activateSectionsMock = new ActivateSectionsMock();
+			activateSectionsMock->initializeBehavior();
+			unlockSignalsMock = new UnlockSignalsMock();
+			unlockSignalsMock->initializeBehavior();
+			unlockSwitchesMock = new UnlockSwitchesMock();
+			unlockSwitchesMock->initializeBehavior();
+			deactivateSectionsMock = new DeactivateSectionsMock();
+			deactivateSectionsMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 
-			isTourMock->setDefaultBehavior(&IsTourMock::isTour2);
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			turningFlanks();
 
 			statechart->raiseCompleted();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning));
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Flank_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Turning));
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
-			EXPECT_TRUE(turnFlanksMock->calledAtLeastOnce());
+			EXPECT_TRUE(turnSignalsMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
 
 
-			isTourMock->reset();
 			resetTransactionMock->reset();
-			turnFlanksMock->reset();
+			turnSignalsMock->reset();
 			tryCompleteMock->reset();
 		}
 		void turningSignals()
@@ -1836,6 +1911,64 @@ namespace mrw
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
 			turningSwitches();
+
+			isCompletedMock->setDefaultBehavior(&IsCompletedMock::isCompleted1);
+
+			statechart->raiseFailed();
+
+			disabled();
+
+
+			isCompletedMock->reset();
+		}
+		TEST_F(RouteTest, failTurningFlanks)
+		{
+			isCompletedMock = new IsCompletedMock();
+			isCompletedMock->initializeBehavior();
+			isTourMock = new IsTourMock();
+			isTourMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			turnFlanksMock = new TurnFlanksMock();
+			turnFlanksMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			turnSwitchesMock = new TurnSwitchesMock();
+			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			isTourMock = new IsTourMock();
+			isTourMock->initializeBehavior();
+			turnSwitchesMock = new TurnSwitchesMock();
+			turnSwitchesMock->initializeBehavior();
+			turnFlanksMock = new TurnFlanksMock();
+			turnFlanksMock->initializeBehavior();
+			turnSignalsMock = new TurnSignalsMock();
+			turnSignalsMock->initializeBehavior();
+			extendSignalsMock = new ExtendSignalsMock();
+			extendSignalsMock->initializeBehavior();
+			activateSectionsMock = new ActivateSectionsMock();
+			activateSectionsMock->initializeBehavior();
+			unlockSignalsMock = new UnlockSignalsMock();
+			unlockSignalsMock->initializeBehavior();
+			unlockSwitchesMock = new UnlockSwitchesMock();
+			unlockSwitchesMock->initializeBehavior();
+			deactivateSectionsMock = new DeactivateSectionsMock();
+			deactivateSectionsMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			turningFlanks();
 
 			isCompletedMock->setDefaultBehavior(&IsCompletedMock::isCompleted1);
 
@@ -2689,6 +2822,73 @@ namespace mrw
 			deactivateSectionsMock->reset();
 			unlockSignalsMock->reset();
 		}
+		TEST_F(RouteTest, timeoutTurningFlanks)
+		{
+			deactivateSectionsMock = new DeactivateSectionsMock();
+			deactivateSectionsMock->initializeBehavior();
+			unlockSignalsMock = new UnlockSignalsMock();
+			unlockSignalsMock->initializeBehavior();
+			isTourMock = new IsTourMock();
+			isTourMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			turnFlanksMock = new TurnFlanksMock();
+			turnFlanksMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			turnSwitchesMock = new TurnSwitchesMock();
+			turnSwitchesMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock->initializeBehavior();
+			isTourMock = new IsTourMock();
+			isTourMock->initializeBehavior();
+			turnSwitchesMock = new TurnSwitchesMock();
+			turnSwitchesMock->initializeBehavior();
+			turnFlanksMock = new TurnFlanksMock();
+			turnFlanksMock->initializeBehavior();
+			turnSignalsMock = new TurnSignalsMock();
+			turnSignalsMock->initializeBehavior();
+			extendSignalsMock = new ExtendSignalsMock();
+			extendSignalsMock->initializeBehavior();
+			activateSectionsMock = new ActivateSectionsMock();
+			activateSectionsMock->initializeBehavior();
+			unlockSignalsMock = new UnlockSignalsMock();
+			unlockSignalsMock->initializeBehavior();
+			unlockSwitchesMock = new UnlockSwitchesMock();
+			unlockSwitchesMock->initializeBehavior();
+			deactivateSectionsMock = new DeactivateSectionsMock();
+			deactivateSectionsMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			turningFlanks();
+
+			runner->proceed_time(statechart->getSwitch_timeout());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Emergency_Shutdown));
+
+			EXPECT_TRUE(deactivateSectionsMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(unlockSignalsMock->calledAtLeastOnce());
+
+			runner->proceed_time(statechart->getEmergency());
+
+			disabled();
+
+
+			deactivateSectionsMock->reset();
+			unlockSignalsMock->reset();
+		}
 		TEST_F(RouteTest, timeoutTurningSignals)
 		{
 			deactivateSectionsMock = new DeactivateSectionsMock();
@@ -3023,6 +3223,12 @@ namespace mrw
 			EXPECT_TRUE(!statechart->isActive());
 
 			turningSwitches();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			turningFlanks();
 
 			statechart->exit();
 

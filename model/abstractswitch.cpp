@@ -23,7 +23,9 @@ AbstractSwitch::AbstractSwitch(
 
 bool AbstractSwitch::isFlankProtection(AbstractSwitch * other) const
 {
-	return flank_switches.find(other) != flank_switches.end();
+	RegularSwitch * element = dynamic_cast<RegularSwitch *>(other);
+
+	return flank_switches.find(element) != flank_switches.end();
 }
 
 Command AbstractSwitch::commandState() const
@@ -78,9 +80,11 @@ RegularSwitch * AbstractSwitch::follow(RailPart * part) const
 	return dynamic_cast<RegularSwitch *>(part);
 }
 
-bool AbstractSwitch::linked(RailPart * candidate, AbstractSwitch * self) const
+bool AbstractSwitch::linked(
+	const RailPart    *    candidate,
+	const AbstractSwitch * self) const
 {
-	const Rail * rail = dynamic_cast<Rail *>(candidate);
+	const Rail * rail = dynamic_cast<const Rail *>(candidate);
 
 	if (candidate == self)
 	{

@@ -100,8 +100,9 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::Event::_te2_main_region_Turning_Turning_process_Signal_Turning_:
 			case mrw::statechart::RouteStatechart::Event::_te3_main_region_Turning_Turning_process_Section_Activation_:
 			case mrw::statechart::RouteStatechart::Event::_te4_main_region_Turning_Turning_process_Signal_Updating_:
-			case mrw::statechart::RouteStatechart::Event::_te5_main_region_Wait_:
-			case mrw::statechart::RouteStatechart::Event::_te6_main_region_Emergency_Shutdown_:
+			case mrw::statechart::RouteStatechart::Event::_te5_main_region_Turning_Turning_process_Flank_Turning_:
+			case mrw::statechart::RouteStatechart::Event::_te6_main_region_Wait_:
+			case mrw::statechart::RouteStatechart::Event::_te7_main_region_Emergency_Shutdown_:
 				{
 					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::RouteStatechart::Event::_te0_main_region_Disable_)] = true;
 					break;
@@ -371,6 +372,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Turning_Turning_process_Flank_Turning()
 		{
 			/* Entry action for state 'Flank Turning'. */
+			timerService->setTimer(this, 5, RouteStatechart::switch_timeout, false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->turnFlanks();
 			ifaceOperationCallback->tryComplete();
@@ -380,7 +382,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Wait()
 		{
 			/* Entry action for state 'Wait'. */
-			timerService->setTimer(this, 5, RouteStatechart::emergency, false);
+			timerService->setTimer(this, 6, RouteStatechart::emergency, false);
 			ifaceOperationCallback->tryComplete();
 		}
 
@@ -388,7 +390,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Emergency_Shutdown()
 		{
 			/* Entry action for state 'Emergency Shutdown'. */
-			timerService->setTimer(this, 6, RouteStatechart::section_timeout, false);
+			timerService->setTimer(this, 7, RouteStatechart::section_timeout, false);
 			ifaceOperationCallback->fail();
 			ifaceOperationCallback->deactivateSections();
 			ifaceOperationCallback->unlockSignals();
@@ -437,18 +439,25 @@ namespace mrw
 			timerService->unsetTimer(this, 4);
 		}
 
+		/* Exit action for state 'Flank Turning'. */
+		void RouteStatechart::exact_main_region_Turning_Turning_process_Flank_Turning()
+		{
+			/* Exit action for state 'Flank Turning'. */
+			timerService->unsetTimer(this, 5);
+		}
+
 		/* Exit action for state 'Wait'. */
 		void RouteStatechart::exact_main_region_Wait()
 		{
 			/* Exit action for state 'Wait'. */
-			timerService->unsetTimer(this, 5);
+			timerService->unsetTimer(this, 6);
 		}
 
 		/* Exit action for state 'Emergency Shutdown'. */
 		void RouteStatechart::exact_main_region_Emergency_Shutdown()
 		{
 			/* Exit action for state 'Emergency Shutdown'. */
-			timerService->unsetTimer(this, 6);
+			timerService->unsetTimer(this, 7);
 		}
 
 		/* 'default' enter sequence for state Active */
@@ -625,6 +634,7 @@ namespace mrw
 		{
 			/* Default exit sequence for state Flank Turning */
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
+			exact_main_region_Turning_Turning_process_Flank_Turning();
 		}
 
 		/* Default exit sequence for state Wait */
@@ -1080,6 +1090,17 @@ namespace mrw
 					main_region_Turning_react(0);
 					transitioned_after = 0;
 				}
+				else
+				{
+					if (timeEvents[5])
+					{
+						exseq_main_region_Turning();
+						timeEvents[5] = false;
+						enseq_main_region_Emergency_Shutdown_default();
+						react(0);
+						transitioned_after = 0;
+					}
+				}
 			}
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))
@@ -1104,10 +1125,10 @@ namespace mrw
 				}
 				else
 				{
-					if (timeEvents[5])
+					if (timeEvents[6])
 					{
 						exseq_main_region_Wait();
-						timeEvents[5] = false;
+						timeEvents[6] = false;
 						enseq_main_region_Disable_default();
 						react(0);
 						transitioned_after = 0;
@@ -1128,10 +1149,10 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (timeEvents[6])
+				if (timeEvents[7])
 				{
 					exseq_main_region_Emergency_Shutdown();
-					timeEvents[6] = false;
+					timeEvents[7] = false;
 					enseq_main_region_Disable_default();
 					react(0);
 					transitioned_after = 0;
@@ -1186,6 +1207,7 @@ namespace mrw
 			timeEvents[4] = false;
 			timeEvents[5] = false;
 			timeEvents[6] = false;
+			timeEvents[7] = false;
 		}
 
 		void RouteStatechart::microStep()
@@ -1274,7 +1296,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((((((completed_raised) || (failed_raised)) || (disable_raised)) || (extended_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4])) || (timeEvents[5])) || (timeEvents[6]));
+			while ((((((((((((completed_raised) || (failed_raised)) || (disable_raised)) || (extended_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4])) || (timeEvents[5])) || (timeEvents[6])) || (timeEvents[7]));
 			isExecuting = false;
 		}
 

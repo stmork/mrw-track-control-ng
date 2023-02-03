@@ -607,7 +607,28 @@ void WidgetRoute::turnSwitches()
 
 void WidgetRoute::turnFlanks()
 {
+	__METHOD__;
 
+	for (RailPart * part : track)
+	{
+		RegularSwitch * rs = dynamic_cast<RegularSwitch *>(part);
+
+		if (rs != nullptr)
+		{
+			RegularSwitch * flank_switch = rs->flank();
+
+			if (flank_switch != nullptr)
+			{
+				qDebug().noquote() << *rs;
+				qDebug().noquote() << "    " << *flank_switch;
+				flank_switch->setState(rs->state());
+
+				RegularSwitchControllerProxy * controller =
+					ControllerRegistry::instance().find<RegularSwitchControllerProxy>(flank_switch);
+				controller->turn();
+			}
+		}
+	}
 }
 
 void WidgetRoute::unlockSwitches()
