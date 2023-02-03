@@ -28,15 +28,17 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		mock resetTransaction
 		mock fail
 		mock tryComplete
+		mock isTour returns (false)
 
 		mock turnSwitches
-		mock activateSections
+		mock turnFlanks
 		mock turnSignals
 		mock extendSignals
+		mock activateSections
 
-		mock deactivateSections
 		mock unlockSignals
 		mock unlockSwitches
+		mock deactivateSections
 		mock unlockSections
 	}
 
@@ -58,10 +60,29 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 	}
 
 	@Test
+	operation turningFlanks()
+	{
+		// Given
+		turningSwitches()
+		mock isTour returns (true)
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Flank_Turning)
+		assert called resetTransaction
+		assert called turnFlanks
+		assert called tryComplete
+	}
+
+	@Test
 	operation turningSignals()
 	{
 		// Given
 		turningSwitches()
+		mock isTour returns (false)
 
 		// When
 		raise completed

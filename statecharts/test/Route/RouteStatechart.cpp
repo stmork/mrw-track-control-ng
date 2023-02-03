@@ -230,7 +230,7 @@ namespace mrw
 				}
 			case mrw::statechart::RouteStatechart::State::main_region_Turning :
 				{
-					return  (stateConfVector[scvi_main_region_Turning] >= mrw::statechart::RouteStatechart::State::main_region_Turning && stateConfVector[scvi_main_region_Turning] <= mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Updating);
+					return  (stateConfVector[scvi_main_region_Turning] >= mrw::statechart::RouteStatechart::State::main_region_Turning && stateConfVector[scvi_main_region_Turning] <= mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Flank_Turning);
 					break;
 				}
 			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning :
@@ -251,6 +251,11 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Updating :
 				{
 					return  (stateConfVector[scvi_main_region_Turning_Turning_process_Signal_Updating] == mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Updating);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Flank_Turning :
+				{
+					return  (stateConfVector[scvi_main_region_Turning_Turning_process_Flank_Turning] == mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Flank_Turning);
 					break;
 				}
 			case mrw::statechart::RouteStatechart::State::main_region_Wait :
@@ -359,6 +364,15 @@ namespace mrw
 			timerService->setTimer(this, 4, RouteStatechart::signal_timeout, false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->extendSignals();
+			ifaceOperationCallback->tryComplete();
+		}
+
+		/* Entry action for state 'Flank Turning'. */
+		void RouteStatechart::enact_main_region_Turning_Turning_process_Flank_Turning()
+		{
+			/* Entry action for state 'Flank Turning'. */
+			ifaceOperationCallback->resetTransaction();
+			ifaceOperationCallback->turnFlanks();
 			ifaceOperationCallback->tryComplete();
 		}
 
@@ -499,6 +513,14 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Updating;
 		}
 
+		/* 'default' enter sequence for state Flank Turning */
+		void RouteStatechart::enseq_main_region_Turning_Turning_process_Flank_Turning_default()
+		{
+			/* 'default' enter sequence for state Flank Turning */
+			enact_main_region_Turning_Turning_process_Flank_Turning();
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Flank_Turning;
+		}
+
 		/* 'default' enter sequence for state Wait */
 		void RouteStatechart::enseq_main_region_Wait_default()
 		{
@@ -598,6 +620,13 @@ namespace mrw
 			exact_main_region_Turning_Turning_process_Signal_Updating();
 		}
 
+		/* Default exit sequence for state Flank Turning */
+		void RouteStatechart::exseq_main_region_Turning_Turning_process_Flank_Turning()
+		{
+			/* Default exit sequence for state Flank Turning */
+			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
+		}
+
 		/* Default exit sequence for state Wait */
 		void RouteStatechart::exseq_main_region_Wait()
 		{
@@ -668,6 +697,11 @@ namespace mrw
 					exseq_main_region_Turning_Turning_process_Signal_Updating();
 					break;
 				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Flank_Turning :
+				{
+					exseq_main_region_Turning_Turning_process_Flank_Turning();
+					break;
+				}
 			case mrw::statechart::RouteStatechart::State::main_region_Wait :
 				{
 					exseq_main_region_Wait();
@@ -716,9 +750,28 @@ namespace mrw
 					exseq_main_region_Turning_Turning_process_Signal_Updating();
 					break;
 				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Flank_Turning :
+				{
+					exseq_main_region_Turning_Turning_process_Flank_Turning();
+					break;
+				}
 			default:
 				/* do nothing */
 				break;
+			}
+		}
+
+		/* The reactions of state null. */
+		void RouteStatechart::react_main_region_Turning_Turning_process__choice_0()
+		{
+			/* The reactions of state null. */
+			if (ifaceOperationCallback->isTour())
+			{
+				enseq_main_region_Turning_Turning_process_Flank_Turning_default();
+			}
+			else
+			{
+				enseq_main_region_Turning_Turning_process_Signal_Turning_default();
 			}
 		}
 
@@ -892,8 +945,7 @@ namespace mrw
 				if (completed_raised)
 				{
 					exseq_main_region_Turning_Turning_process_Switch_Turning();
-					enseq_main_region_Turning_Turning_process_Signal_Turning_default();
-					main_region_Turning_react(0);
+					react_main_region_Turning_Turning_process__choice_0();
 					transitioned_after = 0;
 				}
 				else
@@ -1005,6 +1057,28 @@ namespace mrw
 						react(0);
 						transitioned_after = 0;
 					}
+				}
+			}
+			/* If no transition was taken then execute local reactions */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				transitioned_after = main_region_Turning_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
+		sc::integer RouteStatechart::main_region_Turning_Turning_process_Flank_Turning_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Flank Turning. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (completed_raised)
+				{
+					exseq_main_region_Turning_Turning_process_Flank_Turning();
+					enseq_main_region_Turning_Turning_process_Signal_Turning_default();
+					main_region_Turning_react(0);
+					transitioned_after = 0;
 				}
 			}
 			/* If no transition was taken then execute local reactions */
@@ -1156,6 +1230,11 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Updating :
 				{
 					main_region_Turning_Turning_process_Signal_Updating_react(-1);
+					break;
+				}
+			case mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Flank_Turning :
+				{
+					main_region_Turning_Turning_process_Flank_Turning_react(-1);
 					break;
 				}
 			case mrw::statechart::RouteStatechart::State::main_region_Wait :

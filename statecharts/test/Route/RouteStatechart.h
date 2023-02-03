@@ -56,13 +56,14 @@ namespace mrw
 				main_region_Turning_Turning_process_Signal_Turning,
 				main_region_Turning_Turning_process_Section_Activation,
 				main_region_Turning_Turning_process_Signal_Updating,
+				main_region_Turning_Turning_process_Flank_Turning,
 				main_region_Wait,
 				main_region_Emergency_Shutdown,
 				main_region_Unlock
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 12;
+			static const sc::integer numStates = 13;
 			static const sc::integer scvi_main_region_Active = 0;
 			static const sc::integer scvi_main_region_Disable = 0;
 			static const sc::integer scvi_main_region_Start = 0;
@@ -72,6 +73,7 @@ namespace mrw
 			static const sc::integer scvi_main_region_Turning_Turning_process_Signal_Turning = 0;
 			static const sc::integer scvi_main_region_Turning_Turning_process_Section_Activation = 0;
 			static const sc::integer scvi_main_region_Turning_Turning_process_Signal_Updating = 0;
+			static const sc::integer scvi_main_region_Turning_Turning_process_Flank_Turning = 0;
 			static const sc::integer scvi_main_region_Wait = 0;
 			static const sc::integer scvi_main_region_Emergency_Shutdown = 0;
 			static const sc::integer scvi_main_region_Unlock = 0;
@@ -134,6 +136,8 @@ namespace mrw
 			public:
 				virtual ~OperationCallback() = 0;
 
+				virtual bool isTour() = 0;
+
 				virtual void resetTransaction() = 0;
 
 				virtual void fail() = 0;
@@ -144,11 +148,13 @@ namespace mrw
 
 				virtual void turnSwitches() = 0;
 
-				virtual void activateSections() = 0;
+				virtual void turnFlanks() = 0;
 
 				virtual void turnSignals() = 0;
 
 				virtual void extendSignals() = 0;
+
+				virtual void activateSections() = 0;
 
 				virtual void deactivateSections() = 0;
 
@@ -257,6 +263,7 @@ namespace mrw
 			void enact_main_region_Turning_Turning_process_Signal_Turning();
 			void enact_main_region_Turning_Turning_process_Section_Activation();
 			void enact_main_region_Turning_Turning_process_Signal_Updating();
+			void enact_main_region_Turning_Turning_process_Flank_Turning();
 			void enact_main_region_Wait();
 			void enact_main_region_Emergency_Shutdown();
 			void enact_main_region_Unlock();
@@ -275,6 +282,7 @@ namespace mrw
 			void enseq_main_region_Turning_Turning_process_Signal_Turning_default();
 			void enseq_main_region_Turning_Turning_process_Section_Activation_default();
 			void enseq_main_region_Turning_Turning_process_Signal_Updating_default();
+			void enseq_main_region_Turning_Turning_process_Flank_Turning_default();
 			void enseq_main_region_Wait_default();
 			void enseq_main_region_Emergency_Shutdown_default();
 			void enseq_main_region_Unlock_default();
@@ -288,11 +296,13 @@ namespace mrw
 			void exseq_main_region_Turning_Turning_process_Signal_Turning();
 			void exseq_main_region_Turning_Turning_process_Section_Activation();
 			void exseq_main_region_Turning_Turning_process_Signal_Updating();
+			void exseq_main_region_Turning_Turning_process_Flank_Turning();
 			void exseq_main_region_Wait();
 			void exseq_main_region_Emergency_Shutdown();
 			void exseq_main_region_Unlock();
 			void exseq_main_region();
 			void exseq_main_region_Turning_Turning_process();
+			void react_main_region_Turning_Turning_process__choice_0();
 			void react_main_region__choice_0();
 			void react_main_region__entry_Default();
 			sc::integer react(const sc::integer transitioned_before);
@@ -305,6 +315,7 @@ namespace mrw
 			sc::integer main_region_Turning_Turning_process_Signal_Turning_react(const sc::integer transitioned_before);
 			sc::integer main_region_Turning_Turning_process_Section_Activation_react(const sc::integer transitioned_before);
 			sc::integer main_region_Turning_Turning_process_Signal_Updating_react(const sc::integer transitioned_before);
+			sc::integer main_region_Turning_Turning_process_Flank_Turning_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_react(const sc::integer transitioned_before);
 			sc::integer main_region_Emergency_Shutdown_react(const sc::integer transitioned_before);
 			sc::integer main_region_Unlock_react(const sc::integer transitioned_before);

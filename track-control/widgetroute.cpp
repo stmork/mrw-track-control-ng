@@ -509,6 +509,11 @@ bool WidgetRoute::isCompleted()
 #endif
 }
 
+bool WidgetRoute::isTour()
+{
+	return state == SectionState::TOUR;
+}
+
 WidgetRoute::operator QListWidgetItem * ()
 {
 	return &list_item;
@@ -598,6 +603,11 @@ void WidgetRoute::turnSwitches()
 		BaseController::callback<DoubleCrossSwitchControllerProxy>(
 			controller, &DoubleCrossSwitchControllerProxy::turn);
 	}
+}
+
+void WidgetRoute::turnFlanks()
+{
+
 }
 
 void WidgetRoute::unlockSwitches()

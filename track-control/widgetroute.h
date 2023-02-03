@@ -100,15 +100,18 @@ private:
 	virtual void fail() override;
 	virtual void tryComplete() override;
 	virtual bool isCompleted() override;
+	virtual bool isTour() override;
 
 	virtual void turnSwitches() override;
+	virtual void turnFlanks() override;
 	virtual void turnSignals() override;
 	virtual void extendSignals() override;
 	virtual void activateSections() override;
-	virtual void deactivateSections() override;
-	virtual void unlockSections() override;
+
 	virtual void unlockSignals() override;
 	virtual void unlockSwitches() override;
+	virtual void deactivateSections() override;
+	virtual void unlockSections() override;
 };
 
 #endif
