@@ -11,7 +11,7 @@
 using namespace mrw::ui;
 using namespace mrw::util;
 
-const QPen CircleLiveWidget::pen(WHITE, 10.0);
+const QPen CircleLiveWidget::pen(WHITE, 15.0);
 
 CircleLiveWidget::CircleLiveWidget(QWidget * parent) : BaseWidget(parent)
 {
