@@ -17,7 +17,7 @@ namespace mrw
 	{
 
 		const sc::integer RouteStatechart::switch_timeout = 2100;
-		const sc::integer RouteStatechart::signal_timeout = 3100;
+		const sc::integer RouteStatechart::signal_timeout = 3300;
 		const sc::integer RouteStatechart::section_timeout = 200;
 		const sc::integer RouteStatechart::emergency = 3500;
 
