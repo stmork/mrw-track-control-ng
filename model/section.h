@@ -269,7 +269,7 @@ namespace mrw::model
 		 *
 		 * @return True if the SectionState is real SectionState::TOUR.
 		 */
-		bool isTour() const;
+		bool isFlankRelevant() const;
 
 		/**
 		 * This method returns true if any of the contained RailPart elements

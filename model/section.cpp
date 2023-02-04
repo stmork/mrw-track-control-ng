@@ -299,9 +299,11 @@ bool Section::isFree() const
 	return section_state == SectionState::FREE;
 }
 
-bool mrw::model::Section::isTour() const
+bool mrw::model::Section::isFlankRelevant() const
 {
-	return section_state == SectionState::TOUR;
+	return
+		(section_state == SectionState::TOUR) ||
+		(section_state == SectionState::PASSED);
 }
 
 QString Section::key() const

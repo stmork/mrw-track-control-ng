@@ -166,7 +166,7 @@ bool RegularSwitchControllerProxy::isRightBended() const
 
 bool RegularSwitchControllerProxy::hasFlankProtection() const
 {
-	if ((lock() == LockState::LOCKED) && (section()->isTour()))
+	if ((lock() == LockState::LOCKED) && (section()->isFlankRelevant()))
 	{
 		std::vector<RegularSwitch *> flank_switches;
 
