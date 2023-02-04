@@ -137,16 +137,15 @@ namespace mrw::ui
 			const float slope = RAIL_SLOPE);
 
 		/**
-		 * This method prepares the text label to signal a failed state or a
-		 * normal state to be drawn. In case of a switch the normal state may
-		 * depend on the flank protection state.
+		 * This method prepares the text label to idicate a failed state, a
+		 * normal state or a flank protection to be drawn.
 		 *
 		 * @param painter The QPainter to draw the text.
-		 * @param flank_protection True if flank protection is provided.
+		 * @param flank_protection True if flank protection is active.
 		 *
 		 * @see mrw::ctrl::BaseController::name()
 		 * @see mrw::ctrl::BaseController::lock()
-		 * @see mrw::ctrl::BaseSwitchWidget::hasFlankProtection()
+		 * @see mrw::ctrl::BaseSwitchController::hasFlankProtection()
 		 * @see mrw::model::SectionState::FAILED
 		 */
 		void prepareTextColor(

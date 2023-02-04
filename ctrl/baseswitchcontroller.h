@@ -42,9 +42,10 @@ namespace mrw::ctrl
 		 * This method computes if any flank protection is active for this
 		 * switch. There are several rules which must all comply:
 		 * 1. The mrw::model::Device::LockState is mrw::model::Device::LockState::LOCKED.
-		 * 2. The mrw::model::Section::SectionState is mrw::model::Section::SectionState::TOUR.
+		 * 2. The mrw::model::SectionState is mrw::model::SectionState::TOUR.
 		 * 3. All flank protection switch canditates are in the
-		 * correct mrw::can::SwitchState using the flank() method.
+		 * correct mrw::can::SwitchState using the
+		 * mrw::model::AbstractSwitch::flank() method.
 		 *
 		 * The central part of the computation is the
 		 * mrw::model::AbstractSwitch::flank() method. This method returns the
