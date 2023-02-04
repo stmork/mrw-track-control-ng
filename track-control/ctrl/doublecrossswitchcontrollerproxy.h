@@ -53,8 +53,11 @@ namespace mrw::ctrl
 		virtual mrw::model::Device::LockState lock() const override;
 		virtual mrw::model::Position::Bending bending() const override;
 
-		// Implementations from DoubleCrossSwitchController
+		// Implementations from BaseSwitchController
 		virtual bool isRightBended() const override;
+		virtual bool hasFlankProtection() const override;
+
+		// Implementations from DoubleCrossSwitchController
 		virtual mrw::model::DoubleCrossSwitch::State switchState() const override;
 
 		// Implementation from RailPartInfo

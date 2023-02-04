@@ -73,6 +73,12 @@ Bending DoubleCrossSwitchControllerMock::bending() const
 	return Bending::STRAIGHT;
 }
 
+bool DoubleCrossSwitchControllerMock::hasFlankProtection() const
+{
+	// TODO: Implement!
+	return false;
+}
+
 bool mrw::ctrl::DoubleCrossSwitchControllerMock::isRightBended() const
 {
 	return !left_handed;

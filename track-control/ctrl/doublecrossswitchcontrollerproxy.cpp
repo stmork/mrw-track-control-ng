@@ -147,6 +147,12 @@ bool DoubleCrossSwitchControllerProxy::isRightBended() const
 	return part->bending() == Position::Bending::RIGHT;
 }
 
+bool DoubleCrossSwitchControllerProxy::hasFlankProtection() const
+{
+	// TODO: Implement!
+	return false;
+}
+
 DoubleCrossSwitch::State DoubleCrossSwitchControllerProxy::switchState() const
 {
 	return part->state();

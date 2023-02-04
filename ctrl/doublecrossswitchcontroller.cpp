@@ -8,7 +8,7 @@
 using namespace mrw::ctrl;
 
 DoubleCrossSwitchController::DoubleCrossSwitchController(QObject * parent) :
-	BaseController(parent)
+	BaseSwitchController(parent)
 {
 }
 

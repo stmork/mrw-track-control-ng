@@ -164,6 +164,12 @@ bool RegularSwitchControllerProxy::isRightBended() const
 	return part->bending() == Position::Bending::RIGHT;
 }
 
+bool RegularSwitchControllerProxy::hasFlankProtection() const
+{
+	// TODO: Implement!
+	return false;
+}
+
 bool RegularSwitchControllerProxy::isInclined() const
 {
 	return part->isInclined();

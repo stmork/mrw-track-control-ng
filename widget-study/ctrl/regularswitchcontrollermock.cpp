@@ -110,6 +110,12 @@ Bending RegularSwitchControllerMock::bending() const
 	return isRightBended() ?  Bending::RIGHT : Bending::LEFT;
 }
 
+bool RegularSwitchControllerMock::hasFlankProtection() const
+{
+	// TODO: Implement!
+	return false;
+}
+
 SectionState RegularSwitchControllerMock::state() const
 {
 	return section_state;

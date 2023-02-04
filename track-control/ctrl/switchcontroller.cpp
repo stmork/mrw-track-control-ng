@@ -5,8 +5,8 @@
 
 #include <util/method.h>
 #include <statecharts/timerservice.h>
-#include <ctrl/controllerregistry.h>
 
+#include "ctrl/controllerregistry.h"
 #include "ctrl/switchcontroller.h"
 
 using namespace mrw::can;

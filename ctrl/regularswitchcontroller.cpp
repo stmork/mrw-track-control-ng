@@ -8,6 +8,6 @@
 using namespace mrw::ctrl;
 
 RegularSwitchController::RegularSwitchController(QObject * parent) :
-	BaseController(parent)
+	BaseSwitchController(parent)
 {
 }

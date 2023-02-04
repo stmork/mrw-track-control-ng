@@ -11,6 +11,7 @@ include(../common.pri)
 
 SOURCES +=  \
 	basecontroller.cpp \
+	baseswitchcontroller.cpp \
 	regularswitchcontroller.cpp \
 	doublecrossswitchcontroller.cpp \
 	railcontroller.cpp \
@@ -18,6 +19,7 @@ SOURCES +=  \
 
 HEADERS +=  \
 	basecontroller.h \
+	baseswitchcontroller.h \
 	regularswitchcontroller.h \
 	doublecrossswitchcontroller.h \
 	railcontroller.h \
