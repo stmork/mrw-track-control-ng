@@ -61,6 +61,9 @@ namespace mrw::model
 		 * protection.
 		 * @param set_state If true the state of the flank protection switch
 		 * will be set accordingly.
+		 * @return The amount if correctly switched switches. The state is
+		 * correct if all members of the collected switches have the correct
+		 * mrw::can::SwitchState active.
 		 * @see isFlankProtection
 		 * @see follow
 		 * @see linked
