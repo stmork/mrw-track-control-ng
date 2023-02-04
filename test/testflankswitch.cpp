@@ -153,7 +153,7 @@ void TestFlankSwitch::testFlankProtectionDcs()
 	QCOMPARE(s7->switchState(), SWITCH_STATE_RIGHT);
 }
 
-void TestFlankSwitch::testFlankProtectionRs()
+void TestFlankSwitch::testFlankProtectionRsLeft()
 {
 	RegularSwitch * s1 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 2, 0));
 	RegularSwitch * s2 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 2, 1));
@@ -167,6 +167,7 @@ void TestFlankSwitch::testFlankProtectionRs()
 	QCOMPARE(s1->flank(flank_switches, true), 0u);
 	QVERIFY(!contains(flank_switches, s2));
 	QCOMPARE(s1->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s2->switchState(), SWITCH_STATE_LEFT);
 
 	flank_switches.clear();
 	s1->setState(RegularSwitch::State::AC);
@@ -174,4 +175,28 @@ void TestFlankSwitch::testFlankProtectionRs()
 	QVERIFY(contains(flank_switches, s2));
 	QCOMPARE(s1->switchState(), SWITCH_STATE_RIGHT);
 	QCOMPARE(s2->switchState(), SWITCH_STATE_RIGHT);
+}
+
+void TestFlankSwitch::testFlankProtectionRsRight()
+{
+	RegularSwitch * s8 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 10, 0));
+	RegularSwitch * s9 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 10, 1));
+	std::vector<RegularSwitch *> flank_switches;
+
+	QVERIFY(s8 != nullptr);
+	QVERIFY(s9 != nullptr);
+
+	flank_switches.clear();
+	s8->setState(RegularSwitch::State::AC);
+	QCOMPARE(s8->flank(flank_switches, true), 0u);
+	QVERIFY(!contains(flank_switches, s9));
+	QCOMPARE(s8->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s9->switchState(), SWITCH_STATE_RIGHT);
+
+	flank_switches.clear();
+	s8->setState(RegularSwitch::State::AB);
+	QCOMPARE(s8->flank(flank_switches, true), 1u);
+	QVERIFY(contains(flank_switches, s9));
+	QCOMPARE(s8->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s9->switchState(), SWITCH_STATE_LEFT);
 }

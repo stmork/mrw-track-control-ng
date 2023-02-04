@@ -26,7 +26,8 @@ namespace mrw::test
 		void testFlankProtectionMid();
 		void testFlankProtectionRight();
 		void testFlankProtectionDcs();
-		void testFlankProtectionRs();
+		void testFlankProtectionRsLeft();
+		void testFlankProtectionRsRight();
 	};
 }
 
