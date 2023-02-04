@@ -99,11 +99,11 @@ bool contains(const std::vector<RegularSwitch *> & switches, RegularSwitch * par
 
 void TestFlankSwitch::testFlankProtectionDcs()
 {
-	RegularSwitch *     s3 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 6, 0));
-	RegularSwitch *     s4 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 5, 0));
+	RegularSwitch   *   s3 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 6, 0));
+	RegularSwitch   *   s4 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 5, 0));
 	DoubleCrossSwitch * s5 = dynamic_cast<DoubleCrossSwitch *>(model->assemblyPart(0, 7, 1));
-	RegularSwitch *     s6 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 6, 2));
-	RegularSwitch *     s7 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 5, 2));
+	RegularSwitch   *   s6 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 6, 2));
+	RegularSwitch   *   s7 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 5, 2));
 	std::vector<RegularSwitch *> flank_switches;
 
 	QVERIFY(s3 != nullptr);
