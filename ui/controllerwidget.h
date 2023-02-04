@@ -138,18 +138,20 @@ namespace mrw::ui
 
 		/**
 		 * This method prepares the text label to signal a failed state or a
-		 * normal state to be drawn.
+		 * normal state to be drawn. In case of a switch the normal state may
+		 * depend on the flank protection state.
 		 *
 		 * @param painter The QPainter to draw the text.
-		 * @param fail True if the failed state should be drawn or the normal
-		 * state.
+		 * @param flank_protection True if flank protection is provided.
 		 *
 		 * @see mrw::ctrl::BaseController::name()
+		 * @see mrw::ctrl::BaseController::lock()
+		 * @see mrw::ctrl::BaseSwitchWidget::hasFlankProtection()
 		 * @see mrw::model::SectionState::FAILED
 		 */
-		void prepareFailed(
+		void prepareTextColor(
 			QPainter  & painter,
-			const bool  fail);
+			const bool  flank_protection = false);
 
 		/**
 		 * This method draws the branching connectors if the verbose flag is

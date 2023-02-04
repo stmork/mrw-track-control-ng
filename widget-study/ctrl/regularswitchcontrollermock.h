@@ -18,10 +18,11 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
-		unsigned              extension    = 0;
-		bool                  inclined     = false;
-		bool                  a_is_dir     = false;
-		bool                  left_handed  = true;
+		unsigned              extension        = 0;
+		bool                  inclined         = false;
+		bool                  a_is_dir         = false;
+		bool                  left_handed      = true;
+		bool                  flank_protection = false;
 
 		mrw::model::Device::LockState     lock_state =
 			mrw::model::Device::LockState::UNLOCKED;
@@ -66,6 +67,7 @@ namespace mrw::ctrl
 		void setRightHanded(const bool right = true);
 		void setInclined(const bool inclined = true);
 		void setExtension(const int extension);
+		void setFlankProtection(const bool flank = false);
 	};
 }
 

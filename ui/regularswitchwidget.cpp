@@ -13,7 +13,8 @@ using namespace mrw::ui;
 using namespace mrw::ctrl;
 using namespace mrw::model;
 
-using LockState = Device::LockState;
+using LockState       = Device::LockState;
+using ValueController = RegularSwitchController;
 
 RegularSwitchWidget::RegularSwitchWidget(
 	QWidget         *         parent,
@@ -61,11 +62,13 @@ void RegularSwitchWidget::paint(QPainter & painter)
 {
 	QFont        font    = painter.font();
 	const bool   pending = lockVisible(base_controller->lock());
-	const bool   is_inclined     =
+	const bool   is_inclined      =
 		controller<RegularSwitchController>()->isInclined();
-	const bool   is_right_bended =
+	const bool   is_right_bended  =
 		controller<RegularSwitchController>()->isRightBended();
-	const bool   is_turn_out     =
+	const bool   flank_protection =
+		controller<BaseSwitchController>()->hasFlankProtection();
+	const bool   is_turn_out      =
 		(controller<RegularSwitchController>()->isLeft() != is_right_bended) != is_inclined;
 
 	Q_ASSERT(base_controller != nullptr);
@@ -84,7 +87,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 		x_pos * width() / x_size, y_pos * height() / y_size);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
-	prepareFailed(painter, base_controller->lock() == LockState::FAIL);
+	prepareTextColor(painter, flank_protection);
 	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
 	painter.drawText(QRectF(

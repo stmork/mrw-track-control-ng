@@ -104,6 +104,9 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 	/*   Lock state                                         */
 	/********************************************************/
 
+	connect(
+		ui->flankProtection, &QCheckBox::clicked,
+		&mock, &RegularSwitchControllerMock::setFlankProtection);
 	connect(ui->errorButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
@@ -152,6 +155,7 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 	ui->leftButton->setChecked(true);
 	ui->openButton->setChecked(true);
 	ui->leftHandedButton->setChecked(true);
+	ui->flankProtection->setChecked(false);
 	ui->freeButton->setChecked(true);
 }
 
@@ -180,13 +184,14 @@ QWidget * SwitchStudy::widget() const
 
 QString SwitchStudy::name() const
 {
-	return QString("RSwitch_%1_%2%3_%4%5%6").
+	return QString("RSwitch_%1_%2%3_%4%5%6%7").
 		arg(state(mock.isLeft())).
 		arg(mock.isInclined() ? 'I' : 'n').
 		arg(mock.isRightBended() ? 'R' : 'L').
 		arg(direction(mock.isDirection())).
 		arg(lockState(mock.lock())).
-		arg(sectionState(mock.state()));
+		arg(sectionState(mock.state())).
+		arg(mock.hasFlankProtection() ? "P" : "");
 }
 
 QString SwitchStudy::state(const bool is_left)

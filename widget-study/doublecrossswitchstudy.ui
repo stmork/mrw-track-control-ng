@@ -167,6 +167,13 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
+         <widget class="QCheckBox" name="flankProtection">
+          <property name="text">
+           <string>Flankenschutz</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QRadioButton" name="errorButton">
           <property name="text">
            <string>Fehler</string>

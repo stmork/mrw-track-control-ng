@@ -39,15 +39,17 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	QColor section_color = sectionColor(base_controller->state());
 	QColor outside_color = sectionColor(SectionState::FREE);
 	const bool   pending = lockVisible(base_controller->lock());
-	const bool   is_direction    = base_controller->isDirection();
-	const bool   is_right_bended =
+	const bool   is_direction     = base_controller->isDirection();
+	const bool   flank_protection =
+		controller<BaseSwitchController>()->hasFlankProtection();
+	const bool   is_right_bended  =
 		controller<DoubleCrossSwitchController>()->isRightBended();
 	QPen   pen;
 
 	rescale(painter);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
-	prepareFailed(painter, base_controller->lock() == Device::LockState::FAIL);
+	prepareTextColor(painter, flank_protection);
 	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
 	painter.drawText(QRectF(

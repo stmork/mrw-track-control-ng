@@ -82,7 +82,7 @@ void SignalWidget::paint(QPainter & painter)
 	rescale(painter, (Position::FRACTION + extensions()) * SCALE / Position::HALF);
 
 	// Draw switch name before rotating to prevent rotated font drawing.
-	prepareFailed(painter, base_controller->lock() == Device::LockState::FAIL);
+	prepareTextColor(painter);
 	font.setPixelSize(FONT_SIZE);
 
 	const QFontMetrics metrics(font);

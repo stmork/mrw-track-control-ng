@@ -14,6 +14,8 @@ using namespace mrw::model;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 
+using LockState = Device::LockState;
+
 ControllerWidget::ControllerWidget(
 	QWidget     *    parent,
 	BaseController * ctrl) :
@@ -122,11 +124,13 @@ void ControllerWidget::drawSheared(
 	painter.fillPath(path, QBrush(color));
 }
 
-void ControllerWidget::prepareFailed(
+void ControllerWidget::prepareTextColor(
 	QPainter  & painter,
-	const bool  fail)
+	const bool  flank_protection)
 {
-	if (fail)
+	const LockState lock_state = base_controller->lock();
+
+	if (lock_state == LockState::FAIL)
 	{
 		painter.setBackgroundMode(Qt::OpaqueMode);
 		painter.setBackground(RED);
@@ -134,7 +138,7 @@ void ControllerWidget::prepareFailed(
 	}
 	else
 	{
-		painter.setPen(YELLOW);
+		painter.setPen(flank_protection && (lock_state == LockState::LOCKED) ? GREEN : YELLOW);
 	}
 }
 

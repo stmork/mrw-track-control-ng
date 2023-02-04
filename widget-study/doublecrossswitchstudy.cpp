@@ -118,6 +118,9 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	/*   Lock state                                         */
 	/********************************************************/
 
+	connect(
+		ui->flankProtection, &QCheckBox::clicked,
+		&mock, &DoubleCrossSwitchControllerMock::setFlankProtection);
 	connect(ui->errorButton, &QRadioButton::clicked,
 		&mock, [&]()
 	{
@@ -163,6 +166,7 @@ DoubleCrossSwitchStudy::DoubleCrossSwitchStudy(QWidget * parent) :
 	ui->acButton->setChecked(true);
 	ui->forwardButton->setChecked(true);
 	ui->freeButton->setChecked(true);
+	ui->flankProtection->setChecked(false);
 	ui->openButton->setChecked(true);
 }
 
@@ -191,11 +195,12 @@ QWidget * DoubleCrossSwitchStudy::widget() const
 
 QString DoubleCrossSwitchStudy::name() const
 {
-	return QString("XSwitch_%1_%2%3%4").
+	return QString("XSwitch_%1_%2%3%4%5").
 		arg(state(mock.switchState())).
 		arg(direction(mock.isDirection())).
 		arg(lockState(mock.lock())).
-		arg(sectionState(mock.state()));
+		arg(sectionState(mock.state())).
+		arg(mock.hasFlankProtection() ? "P" : "");
 }
 
 QString DoubleCrossSwitchStudy::state(const DoubleCrossSwitch::State & state)

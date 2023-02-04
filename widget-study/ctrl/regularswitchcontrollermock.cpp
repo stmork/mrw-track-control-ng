@@ -56,6 +56,12 @@ void RegularSwitchControllerMock::setExtension(const int input)
 	emit update();
 }
 
+void RegularSwitchControllerMock::setFlankProtection(const bool flank)
+{
+	flank_protection = flank;
+	emit update();
+}
+
 void RegularSwitchControllerMock::setDirection(const bool dir)
 {
 	a_is_dir = !dir;
@@ -112,8 +118,7 @@ Bending RegularSwitchControllerMock::bending() const
 
 bool RegularSwitchControllerMock::hasFlankProtection() const
 {
-	// TODO: Implement!
-	return false;
+	return flank_protection;
 }
 
 SectionState RegularSwitchControllerMock::state() const

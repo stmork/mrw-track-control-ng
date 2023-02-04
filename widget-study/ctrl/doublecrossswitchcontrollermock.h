@@ -18,8 +18,9 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
-		bool                                 a_is_dir     = false;
-		bool                                 left_handed  = true;
+		bool                                 a_is_dir         = false;
+		bool                                 left_handed      = true;
+		bool                                 flank_protection = false;
 
 		mrw::model::Device::LockState        lock_state =
 			mrw::model::Device::LockState::UNLOCKED;
@@ -54,6 +55,7 @@ namespace mrw::ctrl
 	public slots:
 		void setLeftHanded(const bool left = true);
 		void setRightHanded(const bool right = true);
+		void setFlankProtection(const bool flank = false);
 
 	signals:
 		void computeConnectors();
