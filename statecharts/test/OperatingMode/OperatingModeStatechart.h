@@ -47,24 +47,26 @@ namespace mrw
 			enum class State
 			{
 				NO_STATE,
-				main_region_Prepare_Bus,
-				main_region_Init,
-				main_region_Editing,
-				main_region_Failed,
-				main_region_Operating,
 				main_region_Exit,
-				main_region__final_
+				main_region__final_,
+				main_region_Running,
+				main_region_Running_operating_Failed,
+				main_region_Running_operating_Prepare_Bus,
+				main_region_Running_operating_Init,
+				main_region_Running_operating_Operating,
+				main_region_Running_operating_Editing
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 7;
-			static const sc::integer scvi_main_region_Prepare_Bus = 0;
-			static const sc::integer scvi_main_region_Init = 0;
-			static const sc::integer scvi_main_region_Editing = 0;
-			static const sc::integer scvi_main_region_Failed = 0;
-			static const sc::integer scvi_main_region_Operating = 0;
+			static const sc::integer numStates = 8;
 			static const sc::integer scvi_main_region_Exit = 0;
 			static const sc::integer scvi_main_region__final_ = 0;
+			static const sc::integer scvi_main_region_Running = 0;
+			static const sc::integer scvi_main_region_Running_operating_Failed = 0;
+			static const sc::integer scvi_main_region_Running_operating_Prepare_Bus = 0;
+			static const sc::integer scvi_main_region_Running_operating_Init = 0;
+			static const sc::integer scvi_main_region_Running_operating_Operating = 0;
+			static const sc::integer scvi_main_region_Running_operating_Editing = 0;
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -79,8 +81,8 @@ namespace mrw
 				finalize,
 				completed,
 				Can_connected,
-				_te0_main_region_Prepare_Bus_,
-				_te1_main_region_Init_
+				_te0_main_region_Running_operating_Prepare_Bus_,
+				_te1_main_region_Running_operating_Init_
 			};
 
 			class EventInstance
@@ -284,43 +286,46 @@ namespace mrw
 
 			// prototypes of all internal functions
 
-			void enact_main_region_Prepare_Bus();
-			void enact_main_region_Init();
-			void enact_main_region_Editing();
-			void enact_main_region_Failed();
-			void enact_main_region_Operating();
 			void enact_main_region_Exit();
-			void exact_main_region_Prepare_Bus();
-			void exact_main_region_Init();
-			void exact_main_region_Editing();
-			void exact_main_region_Failed();
-			void exact_main_region_Operating();
-			void enseq_main_region_Prepare_Bus_default();
-			void enseq_main_region_Init_default();
-			void enseq_main_region_Editing_default();
-			void enseq_main_region_Failed_default();
-			void enseq_main_region_Operating_default();
+			void enact_main_region_Running_operating_Failed();
+			void enact_main_region_Running_operating_Prepare_Bus();
+			void enact_main_region_Running_operating_Init();
+			void enact_main_region_Running_operating_Operating();
+			void enact_main_region_Running_operating_Editing();
+			void exact_main_region_Running_operating_Failed();
+			void exact_main_region_Running_operating_Prepare_Bus();
+			void exact_main_region_Running_operating_Init();
+			void exact_main_region_Running_operating_Operating();
+			void exact_main_region_Running_operating_Editing();
 			void enseq_main_region_Exit_default();
 			void enseq_main_region__final__default();
+			void enseq_main_region_Running_operating_Failed_default();
+			void enseq_main_region_Running_operating_Prepare_Bus_default();
+			void enseq_main_region_Running_operating_Init_default();
+			void enseq_main_region_Running_operating_Operating_default();
+			void enseq_main_region_Running_operating_Editing_default();
 			void enseq_main_region_default();
-			void exseq_main_region_Prepare_Bus();
-			void exseq_main_region_Init();
-			void exseq_main_region_Editing();
-			void exseq_main_region_Failed();
-			void exseq_main_region_Operating();
 			void exseq_main_region_Exit();
 			void exseq_main_region__final_();
+			void exseq_main_region_Running();
+			void exseq_main_region_Running_operating_Failed();
+			void exseq_main_region_Running_operating_Prepare_Bus();
+			void exseq_main_region_Running_operating_Init();
+			void exseq_main_region_Running_operating_Operating();
+			void exseq_main_region_Running_operating_Editing();
 			void exseq_main_region();
+			void exseq_main_region_Running_operating();
 			void react_main_region__choice_0();
 			void react_main_region__entry_Default();
 			sc::integer react(const sc::integer transitioned_before);
-			sc::integer main_region_Prepare_Bus_react(const sc::integer transitioned_before);
-			sc::integer main_region_Init_react(const sc::integer transitioned_before);
-			sc::integer main_region_Editing_react(const sc::integer transitioned_before);
-			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
 			sc::integer main_region_Exit_react(const sc::integer transitioned_before);
 			sc::integer main_region__final__react(const sc::integer transitioned_before);
+			sc::integer main_region_Running_react(const sc::integer transitioned_before);
+			sc::integer main_region_Running_operating_Failed_react(const sc::integer transitioned_before);
+			sc::integer main_region_Running_operating_Prepare_Bus_react(const sc::integer transitioned_before);
+			sc::integer main_region_Running_operating_Init_react(const sc::integer transitioned_before);
+			sc::integer main_region_Running_operating_Operating_react(const sc::integer transitioned_before);
+			sc::integer main_region_Running_operating_Editing_react(const sc::integer transitioned_before);
 			void clearOutEvents();
 			void clearInEvents();
 			void microStep();

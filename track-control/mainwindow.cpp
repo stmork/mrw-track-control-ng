@@ -226,9 +226,9 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 
 void MainWindow::enable()
 {
-	const bool   operating    = statechart.isStateActive(OperatingModeStatechart::State::main_region_Operating);
-	const bool   editing      = statechart.isStateActive(OperatingModeStatechart::State::main_region_Editing);
-	const bool   failed       = statechart.isStateActive(OperatingModeStatechart::State::main_region_Failed);
+	const bool   operating    = statechart.isStateActive(OperatingModeStatechart::State::main_region_Running_operating_Operating);
+	const bool   editing      = statechart.isStateActive(OperatingModeStatechart::State::main_region_Running_operating_Editing);
+	const bool   failed       = statechart.isStateActive(OperatingModeStatechart::State::main_region_Running_operating_Failed);
 	const size_t switch_count = count<RegularSwitchController>() + count<DoubleCrossSwitchController>();
 	const size_t rail_count   = count<RailController>() +          count<SignalControllerProxy>();
 
