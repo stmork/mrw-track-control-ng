@@ -76,6 +76,8 @@ namespace mrw::can
 			const Command      command,
 			const ControllerId id = CAN_BROADCAST_ID);
 
+		virtual ~MrwMessage() = default;
+
 		/**
 		 * This constructor creates a command MrwMessage using an extended
 		 * frame format to address a specific mrw::model::Controller and
