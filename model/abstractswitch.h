@@ -65,7 +65,7 @@ namespace mrw::model
 		 * @see follow
 		 * @see linked
 		 */
-		virtual void flank(
+		virtual size_t flank(
 			std::vector<RegularSwitch *> & switches,
 			const bool                     set_state = false) const = 0;
 

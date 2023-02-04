@@ -263,6 +263,15 @@ namespace mrw::model
 		bool isFree() const;
 
 		/**
+		 * This method returns true if the internal SectionState is
+		 * SectionState::TOUR regardless of the occupied state. This is
+		 * necessary to unlock the Section and allowing relais state turning.
+		 *
+		 * @return True if the SectionState is real SectionState::TOUR.
+		 */
+		bool isTour() const;
+
+		/**
 		 * This method returns true if any of the contained RailPart elements
 		 * are reserved.
 		 *

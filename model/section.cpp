@@ -299,6 +299,11 @@ bool Section::isFree() const
 	return section_state == SectionState::FREE;
 }
 
+bool mrw::model::Section::isTour() const
+{
+	return section_state == SectionState::TOUR;
+}
+
 QString Section::key() const
 {
 	return name();

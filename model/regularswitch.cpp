@@ -187,13 +187,14 @@ bool RegularSwitch::isFlankProtection(const RailPart * other) const
 	return false;
 }
 
-void RegularSwitch::flank(
+size_t RegularSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
 	const bool                     set_state) const
 {
 	RegularSwitch * b_switch = follow(b);
 	RegularSwitch * c_switch = follow(c);
 	RegularSwitch * other    = nullptr;
+	size_t          equal    = 0;
 
 	if ((switch_state == State::AB) && isFlankProtection(c_switch))
 	{
@@ -211,5 +212,10 @@ void RegularSwitch::flank(
 		{
 			other->setState(state());
 		}
+		if (other->switchState() == switchState())
+		{
+			equal++;
+		}
 	}
+	return equal;
 }

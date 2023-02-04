@@ -128,7 +128,7 @@ bool DoubleCrossSwitch::isFlankProtection(const RailPart * other) const
 	return false;
 }
 
-void mrw::model::DoubleCrossSwitch::flank(
+size_t DoubleCrossSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
 	const bool                     set_state) const
 {
@@ -136,6 +136,7 @@ void mrw::model::DoubleCrossSwitch::flank(
 	RegularSwitch * b_switch = follow(b);
 	RegularSwitch * c_switch = follow(c);
 	RegularSwitch * d_switch = follow(d);
+	size_t          equal    = 0;
 
 	if ((unsigned)state() & B_MASK)
 	{
@@ -145,6 +146,10 @@ void mrw::model::DoubleCrossSwitch::flank(
 			if (set_state)
 			{
 				a_switch->setState(RegularSwitch::State::AB);
+			}
+			if (a_switch->switchState() == SWITCH_STATE_LEFT)
+			{
+				equal++;
 			}
 		}
 	}
@@ -156,6 +161,10 @@ void mrw::model::DoubleCrossSwitch::flank(
 			if (set_state)
 			{
 				b_switch->setState(RegularSwitch::State::AC);
+			}
+			if (b_switch->switchState() == SWITCH_STATE_RIGHT)
+			{
+				equal++;
 			}
 		}
 	}
@@ -169,6 +178,10 @@ void mrw::model::DoubleCrossSwitch::flank(
 			{
 				c_switch->setState(RegularSwitch::State::AC);
 			}
+			if (c_switch->switchState() == SWITCH_STATE_RIGHT)
+			{
+				equal++;
+			}
 		}
 	}
 	else
@@ -180,8 +193,13 @@ void mrw::model::DoubleCrossSwitch::flank(
 			{
 				d_switch->setState(RegularSwitch::State::AB);
 			}
+			if (d_switch->switchState() == SWITCH_STATE_LEFT)
+			{
+				equal++;
+			}
 		}
 	}
+	return equal;
 }
 
 bool DoubleCrossSwitch::valid() const
