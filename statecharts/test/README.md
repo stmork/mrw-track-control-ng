@@ -1,1 +1,1 @@
-/home/sm/C-Sources/ReadMrw/test/README.md
+../../test/README.md
