@@ -188,7 +188,7 @@
     <edges xmi:id="_LVoPEJZqEe2UoL03hwgeFg" type="Transition" element="_LVnA8JZqEe2UoL03hwgeFg" source="_1i7X2pZpEe2UoL03hwgeFg" target="_GPzvUJZrEe2UoL03hwgeFg">
       <children xsi:type="notation:DecorationNode" xmi:id="_LVoPFJZqEe2UoL03hwgeFg" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_LVoPFZZqEe2UoL03hwgeFg"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_LVoPFpZqEe2UoL03hwgeFg" x="-54" y="-8"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_LVoPFpZqEe2UoL03hwgeFg" x="-13" y="-11"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_LVoPEZZqEe2UoL03hwgeFg" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_LVoPE5ZqEe2UoL03hwgeFg" fontName="Verdana"/>

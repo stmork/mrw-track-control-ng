@@ -27,8 +27,18 @@ namespace mrw
 
 		class PrepareMock
 		{
+			typedef void (PrepareMock::*functiontype)();
 		public:
+			void (PrepareMock::*prepareBehaviorDefault)();
 			int callCount;
+
+			void prepare1()
+			{
+			}
+
+			void prepareDefault()
+			{
+			}
 
 			bool calledAtLeast(const int times)
 			{
@@ -44,8 +54,25 @@ namespace mrw
 			{
 				++callCount;
 			}
+
+			functiontype getBehavior()
+			{
+				return prepareBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (PrepareMock::*defaultBehavior)())
+			{
+				prepareBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&PrepareMock::prepareDefault);
+			}
+
 			void reset()
 			{
+				initializeBehavior();
 				callCount = 0;
 			}
 		};
@@ -53,8 +80,18 @@ namespace mrw
 
 		class SendMock
 		{
+			typedef void (SendMock::*functiontype)();
 		public:
+			void (SendMock::*sendBehaviorDefault)();
 			int callCount;
+
+			void send1()
+			{
+			}
+
+			void sendDefault()
+			{
+			}
 
 			bool calledAtLeast(const int times)
 			{
@@ -70,8 +107,25 @@ namespace mrw
 			{
 				++callCount;
 			}
+
+			functiontype getBehavior()
+			{
+				return sendBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (SendMock::*defaultBehavior)())
+			{
+				sendBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&SendMock::sendDefault);
+			}
+
 			void reset()
 			{
+				initializeBehavior();
 				callCount = 0;
 			}
 		};
@@ -85,12 +139,12 @@ namespace mrw
 
 			bool hasSignal1()
 			{
-				return (false);
+				return (true);
 			}
 
 			bool hasSignal2()
 			{
-				return (true);
+				return (false);
 			}
 
 			bool hasSignalDefault()
@@ -121,6 +175,42 @@ namespace mrw
 		};
 		static HasSignalMock * hasSignalMock;
 
+		class DumpMock
+		{
+			typedef void (DumpMock::*functiontype)();
+		public:
+			void (DumpMock::*dumpBehaviorDefault)();
+
+			void dump1()
+			{
+			}
+
+			void dumpDefault()
+			{
+			}
+
+			functiontype getBehavior()
+			{
+				return dumpBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (DumpMock::*defaultBehavior)())
+			{
+				dumpBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&DumpMock::dumpDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		static DumpMock * dumpMock;
+
 		class MockDefault : public mrw::statechart::SignalStatechart::OperationCallback
 		{
 		public:
@@ -131,13 +221,16 @@ namespace mrw
 			void prepare()
 			{
 				prepareMock->prepare();
+				return (prepareMock->*(prepareMock->getBehavior()))();
 			}
 			void send()
 			{
 				sendMock->send();
+				return (sendMock->*(sendMock->getBehavior()))();
 			}
 			void dump()
 			{
+				return (dumpMock->*(dumpMock->getBehavior()))();
 			}
 		};
 
@@ -189,25 +282,102 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Idle));
 
+			hasSignalMock->setDefaultBehavior(&HasSignalMock::hasSignal1);
 
+
+
+
+
+			hasSignalMock->reset();
+			prepareMock->reset();
+			sendMock->reset();
+			dumpMock->reset();
 		}
 		TEST_F(SignalTest, idle)
 		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
 			idle();
 		}
-		TEST_F(SignalTest, turnWithoutSignal)
+		TEST_F(SignalTest, failWithSignal)
 		{
 			hasSignalMock = new HasSignalMock();
 			hasSignalMock->initializeBehavior();
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
 			idle();
 
 			hasSignalMock->setDefaultBehavior(&HasSignalMock::hasSignal1);
+
+			statechart->raiseFail();
+
+			failState();
+
+
+			hasSignalMock->reset();
+		}
+		TEST_F(SignalTest, failWithoutSignal)
+		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			idle();
+
+			hasSignalMock->setDefaultBehavior(&HasSignalMock::hasSignal2);
+
+			statechart->raiseFail();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Idle));
+
+
+			hasSignalMock->reset();
+		}
+		TEST_F(SignalTest, turnWithoutSignal)
+		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			idle();
+
+			hasSignalMock->setDefaultBehavior(&HasSignalMock::hasSignal2);
 
 			statechart->raiseTurn(statechart->getGO());
 
@@ -222,7 +392,7 @@ namespace mrw
 		{
 			idle();
 
-			hasSignalMock->setDefaultBehavior(&HasSignalMock::hasSignal2);
+			hasSignalMock->setDefaultBehavior(&HasSignalMock::hasSignal1);
 
 			statechart->raiseTurn(statechart->getGO());
 
@@ -246,7 +416,17 @@ namespace mrw
 			hasSignalMock = new HasSignalMock();
 			hasSignalMock->initializeBehavior();
 			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
 			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -269,7 +449,17 @@ namespace mrw
 			hasSignalMock = new HasSignalMock();
 			hasSignalMock->initializeBehavior();
 			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
 			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -280,7 +470,17 @@ namespace mrw
 			hasSignalMock = new HasSignalMock();
 			hasSignalMock->initializeBehavior();
 			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
 			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -299,7 +499,17 @@ namespace mrw
 			hasSignalMock = new HasSignalMock();
 			hasSignalMock->initializeBehavior();
 			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
 			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -328,7 +538,17 @@ namespace mrw
 			hasSignalMock = new HasSignalMock();
 			hasSignalMock->initializeBehavior();
 			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
 			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -339,7 +559,17 @@ namespace mrw
 			hasSignalMock = new HasSignalMock();
 			hasSignalMock->initializeBehavior();
 			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
 			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -356,7 +586,17 @@ namespace mrw
 			hasSignalMock = new HasSignalMock();
 			hasSignalMock->initializeBehavior();
 			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
 			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -373,7 +613,17 @@ namespace mrw
 			hasSignalMock = new HasSignalMock();
 			hasSignalMock->initializeBehavior();
 			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
 			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -390,7 +640,17 @@ namespace mrw
 			hasSignalMock = new HasSignalMock();
 			hasSignalMock->initializeBehavior();
 			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
 			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
@@ -404,6 +664,14 @@ namespace mrw
 		}
 		TEST_F(SignalTest, doExit)
 		{
+			hasSignalMock = new HasSignalMock();
+			hasSignalMock->initializeBehavior();
+			prepareMock = new PrepareMock();
+			prepareMock->initializeBehavior();
+			sendMock = new SendMock();
+			sendMock->initializeBehavior();
+			dumpMock = new DumpMock();
+			dumpMock->initializeBehavior();
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);

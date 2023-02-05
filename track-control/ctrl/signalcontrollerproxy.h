@@ -87,6 +87,7 @@ namespace mrw::ctrl
 		void connectDistant();
 		void connectShunt();
 		void add(mrw::model::Signal * signal);
+		void setLockState(mrw::model::Device::LockState lock_state);
 
 		// Implementations from BaseController
 		virtual QString name() const override;

@@ -502,6 +502,16 @@ namespace mrw
 					react_main_region__choice_0();
 					transitioned_after = 0;
 				}
+				else
+				{
+					if (((fail_raised)) && ((ifaceOperationCallback->hasSignal())))
+					{
+						exseq_main_region_Idle();
+						enseq_main_region_Fail_default();
+						react(0);
+						transitioned_after = 0;
+					}
+				}
 			}
 			/* If no transition was taken then execute local reactions */
 			if ((transitioned_after) == (transitioned_before))

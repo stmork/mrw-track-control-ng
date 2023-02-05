@@ -614,11 +614,11 @@ void WidgetRoute::turnFlanks()
 	// Collect and set new state.
 	for (RailPart * part : track)
 	{
-		AbstractSwitch * rs = dynamic_cast<AbstractSwitch *>(part);
+		AbstractSwitch * flank_switch = dynamic_cast<AbstractSwitch *>(part);
 
-		if (rs != nullptr)
+		if (flank_switch != nullptr)
 		{
-			rs->flank(flank_switches, true);
+			flank_switch->flank(flank_switches, true);
 		}
 	}
 

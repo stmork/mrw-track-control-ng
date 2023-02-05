@@ -204,6 +204,17 @@ void SignalControllerProxy::add(Signal * signal)
 	}
 }
 
+void SignalControllerProxy::setLockState(LockState state)
+{
+	lock_state = state;
+	for (auto it : signal_map)
+	{
+		Device * device = dynamic_cast<Device *>(it.second);
+
+		device->setLock(state);
+	}
+}
+
 /*************************************************************************
 **                                                                      **
 **       Service methods                                                **
@@ -451,14 +462,18 @@ void SignalControllerProxy::fail()
 {
 	qCritical().noquote() << String::red(" Signal turn failed!") << name();
 
-	lock_state = LockState::FAIL;
+	statechart_main.fail();
+	statechart_distant.fail();
+	statechart_shunt.fail();
+
+	setLockState(LockState::FAIL);
 	ControllerRegistry::instance().failed();
 	emit update();
 }
 
 void SignalControllerProxy::pending()
 {
-	lock_state = LockState::PENDING;
+	setLockState(LockState::PENDING);
 	emit update();
 
 #ifdef VERBOSE
@@ -468,7 +483,7 @@ void SignalControllerProxy::pending()
 
 void SignalControllerProxy::lock(const bool do_it)
 {
-	lock_state = do_it ? LockState::LOCKED : LockState::UNLOCKED;
+	setLockState(do_it ? LockState::LOCKED : LockState::UNLOCKED);
 	emit update();
 
 #ifdef VERBOSE

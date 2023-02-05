@@ -23,6 +23,39 @@ testclass SignalTest for statechart mrw.^statechart.SignalStatechart
 		assert  is_active
 		assert !is_final
 		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
+		
+		mock hasSignal returns (true)
+		mock prepare
+		mock send
+		mock dump
+	}
+
+	@Test
+	operation failWithSignal()
+	{
+		// Given
+		idle()
+		mock hasSignal returns (true)
+
+		// When
+		raise fail
+
+		// Then
+		failState
+	}
+
+	@Test
+	operation failWithoutSignal()
+	{
+		// Given
+		idle()
+		mock hasSignal returns (false)
+
+		// When
+		raise fail
+
+		// Then
+		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
 	}
 
 	@Test
