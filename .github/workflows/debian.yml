@@ -1,0 +1,19 @@
+name: Track control NG for model railways.
+on: [push]
+
+jobs:
+    MRW-NG-Debian:
+      runs-on: debian-latest
+      steps:
+         - uses: actions/checkout@v3
+         - run: sudo apt update -y
+         - name: Install needed components
+           run: sudo apt install -y qtchooser qt5-qmake qtbase5-dev libqt5serialbus5-dev cppcheck libgtest-dev
+         - name: Install Google Test
+           run: sudo bin/install-gtest.sh
+         - name: QMake
+           run: qmake
+         - name: Build
+           run: make
+         - name: CPP-Check
+           run: make cppcheck
