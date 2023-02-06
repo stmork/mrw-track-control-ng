@@ -6,6 +6,7 @@
 TEMPLATE = subdirs
 SUBDIRS  = \
 	util \
+	log \
 	can \
 	statecharts \
 	model \
@@ -25,6 +26,7 @@ SUBDIRS  = \
 	track-control
 
 util.file              = util/MRW-Util.pro
+log.file               = log/MRW-Log.pro
 can.file               = can/MRW-Can.pro
 statecharts.file       = statecharts/MRW-Statecharts.pro
 model.file             = model/MRW-Model.pro
@@ -43,6 +45,7 @@ update.file            = tools/update/MRW-Update.pro
 study.file             = widget-study/MRW-WidgetStudy.pro
 track-control.file     = track-control/MRW-TrackControl.pro
 
+log.depends            = util
 can.depends            = util
 model.depends          = util can
 test.depends           = util can model
@@ -57,7 +60,7 @@ tracker.depends        = test statecharts
 config.depends         = test statecharts
 update.depends         = test statecharts
 study.depends          = test ctrl ui
-track-control.depends  = study statecharts
+track-control.depends  = log study statecharts
 
 QMAKE_CLEAN           += qtest*.xml *.log
 

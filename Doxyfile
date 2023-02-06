@@ -819,8 +819,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                 += util model can ctrl ui statecharts
-INPUT                 += track-control/log
+INPUT                 += util log model can ctrl ui statecharts
 INPUT                 += README.md
 USE_MDFILE_AS_MAINPAGE = README.md
 
