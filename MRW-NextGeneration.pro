@@ -74,7 +74,6 @@ astyle.commands = astyle --options=$$PWD/.astylerc\
 	*/*.cpp */*.h\
 	tools/*/*.cpp tools/*/*.h\
 	*/ctrl/*.cpp */ctrl/*.h\
-	*/log/*.cpp */log/*.h\
 	*/test/*/*.cpp */test/*/*.h
 
 cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
@@ -89,7 +88,6 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	*/*.cpp */*.h\
 	tools/*/*.cpp tools/*/*.h\
 	*/ctrl/*.cpp */ctrl/*.h\
-	*/log/*.cpp */log/*.h\
 	2>cppcheck.xml
 
 QMAKE_EXTRA_TARGETS += cppcheck astyle

@@ -11,7 +11,7 @@ QMAKE_CXXFLAGS  += -Wsuggest-override
 
 INCLUDEPATH      = $$PWD
 
-LIBS            += -L$$PWD/model -L$$PWD/util -L$$PWD/can
+LIBS            += -L$$PWD/model -L$$PWD/util -L$$PWD/log -L$$PWD/can
 LIBS            += -L$$PWD/ctrl  -L$$PWD/ui   -L$$PWD/statecharts
 
 linux:CONFIG(gcov) {
