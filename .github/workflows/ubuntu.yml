@@ -2,7 +2,7 @@ name: Track control NG for model railways.
 on: [push]
 
 jobs:
-    MRW-NG:
+    MRW-NG Ubuntu:
       runs-on: ubuntu-latest
       steps:
          - uses: actions/checkout@v3
