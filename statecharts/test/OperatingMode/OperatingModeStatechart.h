@@ -122,6 +122,10 @@ namespace mrw
 			bool isRaisedEditing();
 			/*! Get value of event 'editing' of default interface scope. */
 			bool getEditingValue();
+			/*! Check if event 'quitting' of default interface scope is raised. */
+			bool isRaisedQuitting();
+			/*! Get value of event 'quitting' of default interface scope. */
+			bool getQuittingValue();
 			/*! Check if event 'quit' of default interface scope is raised. */
 			bool isRaisedQuit();
 
@@ -292,7 +296,7 @@ namespace mrw
 			void enact_main_region_Running_operating_Init();
 			void enact_main_region_Running_operating_Operating();
 			void enact_main_region_Running_operating_Editing();
-			void exact_main_region_Running_operating_Failed();
+			void exact_main_region_Exit();
 			void exact_main_region_Running_operating_Prepare_Bus();
 			void exact_main_region_Running_operating_Init();
 			void exact_main_region_Running_operating_Operating();
@@ -378,6 +382,12 @@ namespace mrw
 
 			/*! Indicates event 'editing' of default interface scope is active. */
 			bool editing_raised;
+
+			/*! Value of event 'quitting' of default interface scope. */
+			bool quitting_value;
+
+			/*! Indicates event 'quitting' of default interface scope is active. */
+			bool quitting_raised;
 
 			/*! Indicates event 'quit' of default interface scope is active. */
 			bool quit_raised;

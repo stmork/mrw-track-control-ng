@@ -5,10 +5,13 @@
 
 #include <unistd.h>
 
+#include <QDesktopWidget>
+
 #include <util/method.h>
 #include <util/random.h>
 #include <util/termhandler.h>
 #include <statecharts/timerservice.h>
+
 #include <model/modelrailway.h>
 #include <ctrl/controllerregistry.h>
 #include <ctrl/basecontroller.h>
@@ -43,6 +46,9 @@ MainWindow::MainWindow(
 	statechart(nullptr)
 {
 	BaseWidget::setVerbose(false);
+auto const rec = QApplication::desktop()->screenGeometry();
+
+	qInfo().noquote() << rec;
 
 	ui->setupUi(this);
 	setWindowTitle("Modelbased railway control (next generation) - " + repository.modelName());
@@ -221,6 +227,10 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 	connect(
 		&statechart, &OperatingModeStatechart::editing,
 		this, &MainWindow::onEdit,
+		Qt::QueuedConnection);
+	connect(
+		&statechart, &OperatingModeStatechart::quitting,
+		this, &MainWindow::onQuit,
 		Qt::QueuedConnection);
 }
 
@@ -960,6 +970,17 @@ void MainWindow::onEdit(const bool active)
 
 	RegionForm::setOpMode(ui->regionTabWidget, "E");
 	BaseWidget::setVerbose(active);
+	enable();
+	ui->regionTabWidget->currentWidget()->update();
+}
+
+void MainWindow::onQuit(const bool active)
+{
+	Q_UNUSED(active);
+	__METHOD__;
+
+	RegionForm::setOpMode(ui->regionTabWidget, "Q", BaseWidget::WHITE, true);
+	BaseWidget::setVerbose(false);
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
 }

@@ -66,7 +66,11 @@ void RegionForm::line(std::vector<Position *> & positions, const int y) const
 	});
 }
 
-void RegionForm::setOpMode(QTabWidget * tab, const QString & text, const QColor & color, const bool blink)
+void RegionForm::setOpMode(
+		QTabWidget *    tab,
+		const QString & text,
+		const QColor &  color,
+		const bool      blink)
 {
 	for (int i = 0; i < tab->count(); i++)
 	{

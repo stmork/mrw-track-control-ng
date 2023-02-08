@@ -80,6 +80,7 @@ private slots:
 	void onInit();
 	void onOperate(const bool active);
 	void onEdit(const bool active);
+	void onQuit(const bool active);
 	void onFailed();
 
 	void routeFinished();

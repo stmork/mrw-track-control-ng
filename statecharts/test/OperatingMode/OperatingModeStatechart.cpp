@@ -42,6 +42,8 @@ namespace mrw
 			operating_raised(false),
 			editing_value(false),
 			editing_raised(false),
+			quitting_value(false),
+			quitting_raised(false),
 			quit_raised(false)
 		{
 			this->ifaceCan.parent = this;
@@ -250,6 +252,18 @@ namespace mrw
 		}
 
 
+		bool mrw::statechart::OperatingModeStatechart::isRaisedQuitting()
+		{
+			return quitting_raised;
+		}
+
+
+		bool mrw::statechart::OperatingModeStatechart::getQuittingValue()
+		{
+			return quitting_value;
+		}
+
+
 		bool mrw::statechart::OperatingModeStatechart::isRaisedQuit()
 		{
 			return quit_raised;
@@ -398,6 +412,8 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Exit()
 		{
 			/* Entry action for state 'Exit'. */
+			quitting_value = true;
+			quitting_raised = true;
 			ifaceOperationCallback->disableRoutes();
 		}
 
@@ -441,11 +457,12 @@ namespace mrw
 			editing_raised = true;
 		}
 
-		/* Exit action for state 'Failed'. */
-		void OperatingModeStatechart::exact_main_region_Running_operating_Failed()
+		/* Exit action for state 'Exit'. */
+		void OperatingModeStatechart::exact_main_region_Exit()
 		{
-			/* Exit action for state 'Failed'. */
-			cleared_raised = true;
+			/* Exit action for state 'Exit'. */
+			quitting_value = false;
+			quitting_raised = true;
 		}
 
 		/* Exit action for state 'Prepare Bus'. */
@@ -545,6 +562,7 @@ namespace mrw
 		{
 			/* Default exit sequence for state Exit */
 			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::NO_STATE;
+			exact_main_region_Exit();
 		}
 
 		/* Default exit sequence for final state. */
@@ -566,7 +584,6 @@ namespace mrw
 		{
 			/* Default exit sequence for state Failed */
 			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::NO_STATE;
-			exact_main_region_Running_operating_Failed();
 		}
 
 		/* Default exit sequence for state Prepare Bus */
@@ -781,6 +798,7 @@ namespace mrw
 				if (((clear_raised)) && ((ifaceCan.ifaceCanOperationCallback->isConnected())))
 				{
 					exseq_main_region_Running_operating_Failed();
+					cleared_raised = true;
 					enseq_main_region_Running_operating_Init_default();
 					main_region_Running_react(0);
 					transitioned_after = 0;
@@ -941,6 +959,7 @@ namespace mrw
 			failing_raised = false;
 			operating_raised = false;
 			editing_raised = false;
+			quitting_raised = false;
 			quit_raised = false;
 		}
 

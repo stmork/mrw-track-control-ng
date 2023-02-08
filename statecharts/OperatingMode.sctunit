@@ -128,7 +128,6 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		// Then
 		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
 		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Editing)
-		assert cleared
 		assert editing
 		assert valueof(editing) == true
 	}
@@ -216,10 +215,44 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 	}
 
 	@Test
-	operation doQuit()
+	operation doQuitOperating()
 	{
 		// Given
 		doOperating()
+		mock hasActiveRoutes returns (false)
+
+		// When
+		raise finalize
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region._final_)
+		assert operating
+		assert valueof(operating) == false
+		assert quit
+	}
+
+	@Test
+	operation doQuitEditing()
+	{
+		// Given
+		doEdit()
+		mock hasActiveRoutes returns (false)
+
+		// When
+		raise finalize
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region._final_)
+		assert editing
+		assert valueof(editing) == false
+		assert quit
+	}
+
+	@Test
+	operation doQuitFailed()
+	{
+		// Given
+		failAfterStart()
 		mock hasActiveRoutes returns (false)
 
 		// When
@@ -243,6 +276,10 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		// Then
 		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Exit)
 		assert called disableRoutes
+		assert operating
+		assert valueof(operating) == false
+		assert quitting
+		assert valueof(quitting) == true
 	}
 
 	@Test
@@ -257,6 +294,8 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 
 		// Then
 		assert active (mrw.^statechart.OperatingModeStatechart.main_region._final_)
+		assert quitting
+		assert valueof(quitting) == false
 		assert quit
 	}
 

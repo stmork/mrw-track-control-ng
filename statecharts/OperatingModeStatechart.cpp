@@ -37,7 +37,8 @@ namespace mrw
 			finalize_raised(false),
 			completed_raised(false),
 			operating_value(false),
-			editing_value(false)
+			editing_value(false),
+			quitting_value(false)
 		{
 			this->ifaceCan.parent = this;
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
@@ -344,6 +345,8 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Exit()
 		{
 			/* Entry action for state 'Exit'. */
+			quitting_value = true;
+			emit quitting(quitting_value);
 			ifaceOperationCallback->disableRoutes();
 		}
 
@@ -387,11 +390,12 @@ namespace mrw
 			emit editing(editing_value);
 		}
 
-		/* Exit action for state 'Failed'. */
-		void OperatingModeStatechart::exact_main_region_Running_operating_Failed()
+		/* Exit action for state 'Exit'. */
+		void OperatingModeStatechart::exact_main_region_Exit()
 		{
-			/* Exit action for state 'Failed'. */
-			emit cleared();
+			/* Exit action for state 'Exit'. */
+			quitting_value = false;
+			emit quitting(quitting_value);
 		}
 
 		/* Exit action for state 'Prepare Bus'. */
@@ -491,6 +495,7 @@ namespace mrw
 		{
 			/* Default exit sequence for state Exit */
 			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::NO_STATE;
+			exact_main_region_Exit();
 		}
 
 		/* Default exit sequence for final state. */
@@ -512,7 +517,6 @@ namespace mrw
 		{
 			/* Default exit sequence for state Failed */
 			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::NO_STATE;
-			exact_main_region_Running_operating_Failed();
 		}
 
 		/* Default exit sequence for state Prepare Bus */
@@ -727,6 +731,7 @@ namespace mrw
 				if (((clear_raised)) && ((ifaceCan.ifaceCanOperationCallback->isConnected())))
 				{
 					exseq_main_region_Running_operating_Failed();
+					emit cleared();
 					enseq_main_region_Running_operating_Init_default();
 					main_region_Running_react(0);
 					transitioned_after = 0;

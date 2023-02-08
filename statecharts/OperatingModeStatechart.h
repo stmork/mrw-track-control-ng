@@ -263,6 +263,9 @@ namespace mrw
 			/*! Signal representing the out event 'editing' that is defined in the default interface scope. */
 			void editing(bool value);
 
+			/*! Signal representing the out event 'quitting' that is defined in the default interface scope. */
+			void quitting(bool value);
+
 			/*! Signal representing the out event 'quit' that is defined in the default interface scope. */
 			void quit();
 
@@ -310,7 +313,7 @@ namespace mrw
 			void enact_main_region_Running_operating_Init();
 			void enact_main_region_Running_operating_Operating();
 			void enact_main_region_Running_operating_Editing();
-			void exact_main_region_Running_operating_Failed();
+			void exact_main_region_Exit();
 			void exact_main_region_Running_operating_Prepare_Bus();
 			void exact_main_region_Running_operating_Init();
 			void exact_main_region_Running_operating_Operating();
@@ -380,6 +383,9 @@ namespace mrw
 
 			/*! Value of event 'editing' of default interface scope. */
 			bool editing_value;
+
+			/*! Value of event 'quitting' of default interface scope. */
+			bool quitting_value;
 
 
 
