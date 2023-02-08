@@ -116,7 +116,7 @@ namespace mrw::model
 		/** The signal type. */
 		const SignalType    signal_type;
 
-		mrw::can::SignalState signal_state = mrw::can::SIGNAL_OFF;
+		mrw::can::SignalAspect signal_state = mrw::can::SIGNAL_OFF;
 
 	public:
 		explicit Signal(
@@ -140,9 +140,9 @@ namespace mrw::model
 		 */
 		SignalType type() const;
 
-		mrw::can::SignalState state() const;
+		mrw::can::SignalAspect state() const;
 
-		void setState(const mrw::can::SignalState new_state);
+		void setState(const mrw::can::SignalAspect new_state);
 
 		QString key() const override;
 
@@ -194,9 +194,9 @@ namespace mrw::model
 	private:
 		void link() override;
 
-		static const mrw::util::ConstantEnumerator<mrw::can::SignalState> signal_constants;
-		static const mrw::util::ConstantEnumerator<SignalType>            type_map;
-		static const mrw::util::ConstantEnumerator<Symbol>                symbol_map;
+		static const mrw::util::ConstantEnumerator<mrw::can::SignalAspect> signal_constants;
+		static const mrw::util::ConstantEnumerator<SignalType>             type_map;
+		static const mrw::util::ConstantEnumerator<Symbol>                 symbol_map;
 	};
 }
 

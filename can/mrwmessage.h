@@ -36,9 +36,9 @@ namespace mrw::can
 	 */
 	class MrwMessage : public mrw::util::String
 	{
-		static const mrw::util::ConstantEnumerator<Command>     command_map;
-		static const mrw::util::ConstantEnumerator<Response>    response_map;
-		static const mrw::util::ConstantEnumerator<SignalState> signal_map;
+		static const mrw::util::ConstantEnumerator<Command>      command_map;
+		static const mrw::util::ConstantEnumerator<Response>     response_map;
+		static const mrw::util::ConstantEnumerator<SignalAspect> signal_map;
 
 		enum InfoIdx
 		{
@@ -215,7 +215,7 @@ namespace mrw::can
 		 * @param state The SignalState enumeration to translate.
 		 * @return The QString clear text of the given SignalState enumeration.
 		 */
-		static QString get(const SignalState & state);
+		static QString get(const SignalAspect state);
 
 		QString toString() const override;
 

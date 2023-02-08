@@ -78,7 +78,7 @@ const ConstantEnumerator<Response> MrwMessage::response_map
 	CONSTANT(MSG_NO_RESPONSE)
 };
 
-const ConstantEnumerator<SignalState> MrwMessage::signal_map
+const ConstantEnumerator<SignalAspect> MrwMessage::signal_map
 {
 	CONSTANT(SIGNAL_OFF),
 	CONSTANT(SIGNAL_HP0),
@@ -323,7 +323,7 @@ QString MrwMessage::toString() const
 	{
 		if (command() == SETSGN)
 		{
-			appendix = signal_map.get((SignalState)info[0]);
+			appendix = signal_map.get((SignalAspect)info[0]);
 		}
 
 		return QString::asprintf("ID: %04x:%04x len=%zu %c%c #      < %-11.11s %-22.22s %s",
@@ -354,7 +354,7 @@ size_t MrwMessage::size() const
 	return len - start();
 }
 
-QString MrwMessage::get(const SignalState & state)
+QString MrwMessage::get(const SignalAspect state)
 {
 	return signal_map.get(state);
 }

@@ -22,9 +22,14 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	protected:
-
+		/**
+		 * This limit defines how many curved parts in a block (the rail
+		 * between two main signals) causes to drive slowly. This limit
+		 * selects Hp2 instead of Hp1 for speed limit.
+		 */
 		static const size_t SLOW_CURVED_LIMIT = 2;
 
+		/** The Signal instance controlled by this controller. */
 		mrw::model::Signal * signal = nullptr;
 
 	public:
@@ -53,8 +58,24 @@ namespace mrw::ctrl
 		size_t curved_count = 0;
 
 	public:
+		/**
+		 * This method translates a given SignalSymbol (STOP, GO or OFF) into
+		 * the correct real life SignalAspect.
+		 *
+		 * @see mrw::model::Signal::Symbol
+		 * @see mrw::can::SignalAspect
+		 */
 		void prepare() override;
 
+		/**
+		 * This method sets the amount of curved or branched rail parts
+		 * embraced of the block starting with this MainSignal. Dependend
+		 * on the amount of curved rail parts the SignbalAspect will be HP2
+		 * instead of HP1.
+		 *
+		 * @param count The real amount of curved or branched rail parts.
+		 * @see SLOW_CURVED_LIMIT
+		 */
 		void setCurved(const size_t count);
 	};
 
@@ -78,6 +99,13 @@ namespace mrw::ctrl
 		SignalControllerProxy * mainController() const;
 		void setMainController(SignalControllerProxy * signal);
 
+		/**
+		 * This method translates a given SignalSymbol (STOP, GO or OFF) into
+		 * the correct real life SignalAspect.
+		 *
+		 * @see mrw::model::Signal::Symbol
+		 * @see mrw::can::SignalAspect
+		 */
 		void prepare() override;
 
 		mrw::model::Signal::Symbol getPreparedSymbol() const;
@@ -101,6 +129,13 @@ namespace mrw::ctrl
 			mrw::model::Signal * combined);
 		bool isCombined();
 
+		/**
+		 * This method translates a given SignalSymbol (STOP, GO or OFF) into
+		 * the correct real life SignalAspect.
+		 *
+		 * @see mrw::model::Signal::Symbol
+		 * @see mrw::can::SignalAspect
+		 */
 		void prepare() override;
 	};
 }

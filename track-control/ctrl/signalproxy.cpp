@@ -138,7 +138,7 @@ void MainProxy::prepare()
 
 	Q_ASSERT(signal != nullptr);
 
-	SignalState state = SIGNAL_OFF;
+	SignalAspect state = SIGNAL_OFF;
 
 	switch (getSymbol())
 	{
@@ -180,15 +180,16 @@ void DistantProxy::prepare()
 
 	Q_ASSERT(signal != nullptr);
 
-	SignalState state      = SIGNAL_OFF;
+	SignalAspect state      = SIGNAL_OFF;
 
 	switch (getSymbol())
 	{
 	case Symbol::GO:
 		if (main_controller != nullptr)
 		{
-			uint8_t main_state = main_controller->mainSignal()->state();
-			state      = static_cast<SignalState>(main_state + SIGNAL_MAIN_DISTANT_OFFSET);
+			const uint8_t main_state = main_controller->mainSignal()->state();
+
+			state = static_cast<SignalAspect>(main_state + SIGNAL_MAIN_DISTANT_OFFSET);
 		}
 		break;
 
@@ -249,7 +250,7 @@ void ShuntProxy::prepare()
 {
 	__METHOD__;
 
-	SignalState state = SIGNAL_OFF;
+	SignalAspect state = SIGNAL_OFF;
 
 	switch (getSymbol())
 	{

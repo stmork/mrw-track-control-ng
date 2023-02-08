@@ -14,7 +14,7 @@ using namespace mrw::can;
 using Symbol     = Signal::Symbol;
 using SignalType = Signal::SignalType;
 
-const ConstantEnumerator<SignalState> Signal::signal_constants
+const ConstantEnumerator<SignalAspect> Signal::signal_constants
 {
 	CONSTANT(SIGNAL_OFF),
 	CONSTANT(SIGNAL_HP0),
@@ -64,12 +64,12 @@ Signal::SignalType Signal::type() const
 	return signal_type;
 }
 
-SignalState Signal::state() const
+SignalAspect Signal::state() const
 {
 	return signal_state;
 }
 
-void Signal::setState(const SignalState new_state)
+void Signal::setState(const SignalAspect new_state)
 {
 	// TODO: Respect locking!
 	signal_state = new_state;

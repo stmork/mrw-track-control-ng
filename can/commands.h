@@ -145,7 +145,7 @@ namespace mrw::can
 		MSG_NO_RESPONSE           = UINT8_MAX // not really sent
 	};
 
-	enum SignalState : uint8_t
+	enum SignalAspect : uint8_t
 	{
 		/** All lights are off. */
 		SIGNAL_OFF = 0,
