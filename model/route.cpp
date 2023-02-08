@@ -5,8 +5,8 @@
 
 #include <util/method.h>
 #include <model/rail.h>
-
-#include "route.h"
+#include <model/abstractswitch.h>
+#include <model/route.h>
 
 using namespace mrw::model;
 
@@ -202,6 +202,18 @@ void Route::prepare(
 		if ((i > 0) && ((i + 1) < vector.size()))
 		{
 			vector[i]->setState(vector[i - 1], vector[i + 1]);
+		}
+	}
+
+	// Collect and set new state.
+	flank_switches.clear();
+	for (RailPart * part : track)
+	{
+		AbstractSwitch * flank_switch = dynamic_cast<AbstractSwitch *>(part);
+
+		if (flank_switch != nullptr)
+		{
+			flank_switch->flank(flank_switches, true);
 		}
 	}
 

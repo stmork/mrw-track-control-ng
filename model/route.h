@@ -18,6 +18,8 @@
 
 namespace mrw::model
 {
+	class RegularSwitch;
+
 	/**
 	 * This class represents a track of interconnected RailPart elements for
 	 * driving a train. It may extended at the back end to prolong the track
@@ -135,6 +137,11 @@ namespace mrw::model
 		 * SectionState::TOUR mode.
 		 */
 		const bool              auto_unblock = false;
+
+		/**
+		 * The collection of flank switches along the route.
+		 */
+		std::vector<mrw::model::RegularSwitch *> flank_switches;
 
 		/**
 		 * This method prepares the RailPart track and initializes the

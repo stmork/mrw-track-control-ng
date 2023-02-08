@@ -609,19 +609,6 @@ void WidgetRoute::turnFlanks()
 {
 	__METHOD__;
 
-	std::vector<RegularSwitch *> flank_switches;
-
-	// Collect and set new state.
-	for (RailPart * part : track)
-	{
-		AbstractSwitch * flank_switch = dynamic_cast<AbstractSwitch *>(part);
-
-		if (flank_switch != nullptr)
-		{
-			flank_switch->flank(flank_switches, true);
-		}
-	}
-
 	// Now turn
 	for (RegularSwitch * flank_switch : flank_switches)
 	{
