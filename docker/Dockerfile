@@ -1,4 +1,5 @@
-FROM ubuntu:latest
+ARG OS=ubuntu
+FROM $OS:latest
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update

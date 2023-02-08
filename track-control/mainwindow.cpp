@@ -5,7 +5,7 @@
 
 #include <unistd.h>
 
-#include <QDesktopWidget>
+#include <QScreen>
 
 #include <util/method.h>
 #include <util/random.h>
@@ -45,10 +45,10 @@ MainWindow::MainWindow(
 	repo(repository),
 	statechart(nullptr)
 {
-	BaseWidget::setVerbose(false);
-auto const rec = QApplication::desktop()->screenGeometry();
+	const QScreen * screen = QGuiApplication::primaryScreen();
+	const QSize     size   = screen->availableSize();
 
-	qInfo().noquote() << rec;
+	BaseWidget::setVerbose(false);
 
 	ui->setupUi(this);
 	setWindowTitle("Modelbased railway control (next generation) - " + repository.modelName());
@@ -70,6 +70,8 @@ auto const rec = QApplication::desktop()->screenGeometry();
 
 	connectEditActions();
 	connectOpModes(dispatcher);
+
+	qInfo().noquote() << "Screen size: " << size;
 
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
