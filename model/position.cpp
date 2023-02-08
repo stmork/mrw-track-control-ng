@@ -55,8 +55,8 @@ void Position::parse(const QString & value)
 
 	if (!(ok1 && ok2))
 	{
-		x = counter % 40;
-		y = counter / 40;
+		x = counter % NEW_LINE;
+		y = counter / NEW_LINE;
 
 		counter++;
 	}

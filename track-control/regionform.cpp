@@ -100,16 +100,18 @@ void RegionForm::changeEvent(QEvent * e)
 void RegionForm::setupSize(Region * region)
 {
 	std::vector<Position *> positions;
-	int xMax = 80;
-	int yMax = 20;
+	int xMax = Position::NEW_LINE * Position::FRACTION;
+	int yMax = 5 *                  Position::FRACTION;
 
 	region->parts<Position>(positions);
 	for (Position * pos : positions)
 	{
-		QRect rect(pos->point(), QSize(pos->width(), pos->height()));
+		const QPoint & point = pos->point();
+		const int      x     = point.x() + pos->width();
+		const int      y     = point.y() + pos->height();
 
-		xMax = std::max(xMax, rect.right());
-		yMax = std::max(yMax, rect.bottom());
+		xMax = std::max(xMax, x);
+		yMax = std::max(yMax, y);
 	}
 
 	ui->controlWidget->setFixedSize(

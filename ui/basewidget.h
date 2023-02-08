@@ -66,7 +66,7 @@ namespace mrw::ui
 
 	public:
 		/** The recommended pixel size for a widget. */
-		static constexpr int    SIZE        =  36;
+		static constexpr int    SIZE        =  40;
 
 		/**
 		 * The transformed half width representing mrw::model::Position::HALF

@@ -80,6 +80,9 @@ namespace mrw::model
 		/** The fractional units of the quarter of controlled widget. */
 		static constexpr unsigned QUARTER  = FRACTION >> 2;
 
+		/** The widgets per line if unknown coordinates. */
+		static constexpr unsigned NEW_LINE = 20;
+
 		Position() = default;
 
 		/**

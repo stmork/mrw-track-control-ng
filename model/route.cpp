@@ -205,15 +205,18 @@ void Route::prepare(
 		}
 	}
 
-	// Collect and set new state.
-	flank_switches.clear();
-	for (RailPart * part : track)
+	if (state == SectionState::TOUR)
 	{
-		AbstractSwitch * flank_switch = dynamic_cast<AbstractSwitch *>(part);
-
-		if (flank_switch != nullptr)
+		// Collect and set new state for flank switches.
+		flank_switches.clear();
+		for (RailPart * part : track)
 		{
-			flank_switch->flank(flank_switches, true);
+			AbstractSwitch * flank_switch = dynamic_cast<AbstractSwitch *>(part);
+
+			if (flank_switch != nullptr)
+			{
+				flank_switch->flank(flank_switches, true);
+			}
 		}
 	}
 
