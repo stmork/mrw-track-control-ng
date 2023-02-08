@@ -1,3 +1,5 @@
 #!/bin/bash
 
-docker run -it mrw bash
+OS=${1:-ubuntu}
+
+docker run -it "mrw-${OS}" bash
