@@ -51,7 +51,7 @@ WidgetRoute::WidgetRoute(
 		Qt::QueuedConnection);
 	connect(
 		this, &WidgetRoute::turn,
-		&statechart, &RouteStatechart::extended,
+		&statechart, &RouteStatechart::turn,
 		Qt::QueuedConnection);
 	connect(
 		&statechart, &RouteStatechart::finished,
@@ -94,13 +94,11 @@ WidgetRoute::~WidgetRoute()
 **                                                                      **
 *************************************************************************/
 
-void WidgetRoute::prepare(
-	Section  * last_valid_section,
-	RailPart * last_valid_part)
+void WidgetRoute::prepare()
 {
 	std::vector<SectionController *> controllers;
 
-	Route::prepare(last_valid_section, last_valid_part);
+	Route::prepare();
 
 	collectSectionControllers(controllers);
 	for (SectionController * controller : controllers)
@@ -135,17 +133,13 @@ void WidgetRoute::prepare(
 		}
 	}
 
-	prepareTrack(last_valid_section, last_valid_part);
-	prepareSignals(last_valid_section, last_valid_part);
+	prepareTrack();
+	prepareSignals();
 	rename();
 }
 
-void WidgetRoute::prepareTrack(
-	Section  * last_valid_section,
-	RailPart * last_valid_part)
+void WidgetRoute::prepareTrack()
 {
-	Q_UNUSED(last_valid_section);
-
 	for (auto it = track.rbegin(); *it != last_valid_part; ++it)
 	{
 		RailPart    *    part      = *it;
@@ -182,14 +176,9 @@ void WidgetRoute::prepareTrack(
 	}
 }
 
-void WidgetRoute::prepareSignals(
-	Section  * last_valid_section,
-	RailPart * last_valid_part)
+void WidgetRoute::prepareSignals()
 {
 	__METHOD__;
-
-	Q_UNUSED(last_valid_section);
-	Q_UNUSED(last_valid_part);
 
 	SignalControllerProxy * main_controller = nullptr;
 	SectionController   *   next_ctrl       = nullptr;
@@ -468,6 +457,26 @@ void WidgetRoute::dump() const
 	{
 		qDebug().noquote() << "     " << *proxy;
 	}
+}
+
+/*************************************************************************
+**                                                                      **
+**       Implementation of RouteStatemachine::OperationCallback         **
+**                                                                      **
+*************************************************************************/
+
+void WidgetRoute::prepareRoute()
+{
+	__METHOD__;
+
+	prepare();
+}
+
+void WidgetRoute::prepareFlank()
+{
+	__METHOD__;
+
+	Route::prepareFlank();
 }
 
 void WidgetRoute::resetTransaction()

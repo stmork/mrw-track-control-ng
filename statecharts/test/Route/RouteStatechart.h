@@ -82,10 +82,10 @@ namespace mrw
 			enum class Event
 			{
 				NO_EVENT,
+				turn,
 				completed,
 				failed,
 				disable,
-				extended,
 				_te0_main_region_Disable_,
 				_te1_main_region_Turning_Turning_process_Switch_Turning_,
 				_te2_main_region_Turning_Turning_process_Signal_Turning_,
@@ -103,14 +103,14 @@ namespace mrw
 				virtual ~EventInstance() = default;
 				const Event eventId;
 			};
+			/*! Raises the in event 'turn' of default interface scope. */
+			void raiseTurn();
 			/*! Raises the in event 'completed' of default interface scope. */
 			void raiseCompleted();
 			/*! Raises the in event 'failed' of default interface scope. */
 			void raiseFailed();
 			/*! Raises the in event 'disable' of default interface scope. */
 			void raiseDisable();
-			/*! Raises the in event 'extended' of default interface scope. */
-			void raiseExtended();
 			/*! Check if event 'activated' of default interface scope is raised. */
 			bool isRaisedActivated();
 			/*! Check if event 'finished' of default interface scope is raised. */
@@ -136,6 +136,10 @@ namespace mrw
 			{
 			public:
 				virtual ~OperationCallback() = 0;
+
+				virtual void prepareRoute() = 0;
+
+				virtual void prepareFlank() = 0;
 
 				virtual bool isTour() = 0;
 
@@ -260,6 +264,7 @@ namespace mrw
 
 			void enact_main_region_Active();
 			void enact_main_region_Disable();
+			void enact_main_region_Turning();
 			void enact_main_region_Turning_Turning_process_Switch_Turning();
 			void enact_main_region_Turning_Turning_process_Signal_Turning();
 			void enact_main_region_Turning_Turning_process_Section_Activation();
@@ -329,6 +334,9 @@ namespace mrw
 
 
 
+			/*! Indicates event 'turn' of default interface scope is active. */
+			bool turn_raised;
+
 			/*! Indicates event 'completed' of default interface scope is active. */
 			bool completed_raised;
 
@@ -337,9 +345,6 @@ namespace mrw
 
 			/*! Indicates event 'disable' of default interface scope is active. */
 			bool disable_raised;
-
-			/*! Indicates event 'extended' of default interface scope is active. */
-			bool extended_raised;
 
 			/*! Indicates event 'activated' of default interface scope is active. */
 			bool activated_raised;

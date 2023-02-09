@@ -24,11 +24,14 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		assert  is_active
 		assert !is_final
 		assert active (mrw.^statechart.RouteStatechart.main_region.Start)
+
+		mock prepareRoute
+		mock prepareFlank
 		
 		mock resetTransaction
 		mock fail
 		mock tryComplete
-		mock isTour returns (false)
+		mock isTour returns (true)
 
 		mock turnSwitches
 		mock turnFlanks
@@ -47,13 +50,36 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 	{
 		// Given
 		start()
+		mock isTour returns (true)
 
 		// When
-		raise extended
+		raise turn
 
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Switch_Turning)
+		assert called prepareRoute 1 times
+		assert called prepareFlank 1 times
+		assert called resetTransaction
+		assert called turnSwitches
+		assert called tryComplete
+	}
+
+	@Test
+	operation turningSwitchesShunt()
+	{
+		// Given
+		start()
+		mock isTour returns (false)
+
+		// When
+		raise turn
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Switch_Turning)
+		assert called prepareRoute 1 times
+		assert called prepareFlank 0 times
 		assert called resetTransaction
 		assert called turnSwitches
 		assert called tryComplete
@@ -165,13 +191,36 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 	{
 		// Given
 		activate()
+		mock isTour returns (true)
 
 		// When
-		raise extended
+		raise turn
 
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Switch_Turning)
+		assert called prepareRoute 1 times
+		assert called prepareFlank 1 times
+		assert called resetTransaction
+		assert called turnSwitches
+		assert called tryComplete
+	}
+
+	@Test
+	operation extendShunt()
+	{
+		// Given
+		activate()
+		mock isTour returns (false)
+
+		// When
+		raise turn
+
+		// Then
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
+		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Switch_Turning)
+		assert called prepareRoute 1 times
+		assert called prepareFlank 0 times
 		assert called resetTransaction
 		assert called turnSwitches
 		assert called tryComplete

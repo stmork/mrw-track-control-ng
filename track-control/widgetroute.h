@@ -48,9 +48,7 @@ public:
 
 	// Implementation of mrw::model::Route
 	virtual void dump() const override;
-	virtual void prepare(
-		mrw::model::Section  * last_valid_section,
-		mrw::model::RailPart * last_valid_part) override;
+	virtual void prepare() override;
 
 signals:
 	void turn();
@@ -88,14 +86,13 @@ private:
 	size_t countAllocatedSections();
 	void   rename();
 
-	void prepareTrack(
-		mrw::model::Section  * last_valid_section,
-		mrw::model::RailPart * last_valid_part);
-	void prepareSignals(
-		mrw::model::Section  * last_valid_section,
-		mrw::model::RailPart * last_valid_part);
+	void prepareTrack();
+	void prepareSignals();
 
 	// Implementation of RouteStatemachine::OperationCallback
+	virtual void prepareRoute() override;
+	virtual void prepareFlank() override;
+
 	virtual void resetTransaction() override;
 	virtual void fail() override;
 	virtual void tryComplete() override;

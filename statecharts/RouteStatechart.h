@@ -85,10 +85,10 @@ namespace mrw
 			enum class Event
 			{
 				NO_EVENT,
+				turn,
 				completed,
 				failed,
 				disable,
-				extended,
 				_te0_main_region_Disable_,
 				_te1_main_region_Turning_Turning_process_Switch_Turning_,
 				_te2_main_region_Turning_Turning_process_Signal_Turning_,
@@ -127,6 +127,10 @@ namespace mrw
 			{
 			public:
 				virtual ~OperationCallback() = 0;
+
+				virtual void prepareRoute() = 0;
+
+				virtual void prepareFlank() = 0;
 
 				virtual bool isTour() = 0;
 
@@ -211,6 +215,9 @@ namespace mrw
 
 
 		public slots:
+			/*! Slot for the in event 'turn' that is defined in the default interface scope. */
+			void turn();
+
 			/*! Slot for the in event 'completed' that is defined in the default interface scope. */
 			void completed();
 
@@ -219,9 +226,6 @@ namespace mrw
 
 			/*! Slot for the in event 'disable' that is defined in the default interface scope. */
 			void disable();
-
-			/*! Slot for the in event 'extended' that is defined in the default interface scope. */
-			void extended();
 
 
 		signals:
@@ -273,6 +277,7 @@ namespace mrw
 
 			void enact_main_region_Active();
 			void enact_main_region_Disable();
+			void enact_main_region_Turning();
 			void enact_main_region_Turning_Turning_process_Switch_Turning();
 			void enact_main_region_Turning_Turning_process_Signal_Turning();
 			void enact_main_region_Turning_Turning_process_Section_Activation();
@@ -341,6 +346,9 @@ namespace mrw
 
 
 
+			/*! Indicates event 'turn' of default interface scope is active. */
+			bool turn_raised;
+
 			/*! Indicates event 'completed' of default interface scope is active. */
 			bool completed_raised;
 
@@ -349,9 +357,6 @@ namespace mrw
 
 			/*! Indicates event 'disable' of default interface scope is active. */
 			bool disable_raised;
-
-			/*! Indicates event 'extended' of default interface scope is active. */
-			bool extended_raised;
 
 
 

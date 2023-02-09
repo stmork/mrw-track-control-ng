@@ -27,10 +27,10 @@ namespace mrw
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
+			turn_raised(false),
 			completed_raised(false),
 			failed_raised(false),
 			disable_raised(false),
-			extended_raised(false),
 			activated_raised(false),
 			finished_raised(false)
 		{
@@ -73,6 +73,11 @@ namespace mrw
 
 			switch (event->eventId)
 			{
+			case mrw::statechart::RouteStatechart::Event::turn:
+				{
+					turn_raised = true;
+					break;
+				}
 			case mrw::statechart::RouteStatechart::Event::completed:
 				{
 					completed_raised = true;
@@ -86,11 +91,6 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::Event::disable:
 				{
 					disable_raised = true;
-					break;
-				}
-			case mrw::statechart::RouteStatechart::Event::extended:
-				{
-					extended_raised = true;
 					break;
 				}
 
@@ -115,6 +115,13 @@ namespace mrw
 		}
 
 
+		void mrw::statechart::RouteStatechart::raiseTurn()
+		{
+			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::turn));
+			runCycle();
+		}
+
+
 		void mrw::statechart::RouteStatechart::raiseCompleted()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::completed));
@@ -132,13 +139,6 @@ namespace mrw
 		void mrw::statechart::RouteStatechart::raiseDisable()
 		{
 			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::disable));
-			runCycle();
-		}
-
-
-		void mrw::statechart::RouteStatechart::raiseExtended()
-		{
-			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::extended));
 			runCycle();
 		}
 
@@ -326,6 +326,17 @@ namespace mrw
 			ifaceOperationCallback->unlockSwitches();
 			ifaceOperationCallback->deactivateSections();
 			ifaceOperationCallback->tryComplete();
+		}
+
+		/* Entry action for state 'Turning'. */
+		void RouteStatechart::enact_main_region_Turning()
+		{
+			/* Entry action for state 'Turning'. */
+			ifaceOperationCallback->prepareRoute();
+			if (ifaceOperationCallback->isTour())
+			{
+				ifaceOperationCallback->prepareFlank();
+			}
 		}
 
 		/* Entry action for state 'Switch Turning'. */
@@ -827,9 +838,10 @@ namespace mrw
 				}
 				else
 				{
-					if (extended_raised)
+					if (turn_raised)
 					{
 						exseq_main_region_Active();
+						enact_main_region_Turning();
 						enseq_main_region_Turning_Turning_process_Switch_Turning_default();
 						react(0);
 						transitioned_after = 0;
@@ -894,9 +906,10 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (extended_raised)
+				if (turn_raised)
 				{
 					exseq_main_region_Start();
+					enact_main_region_Turning();
 					enseq_main_region_Turning_Turning_process_Switch_Turning_default();
 					react(0);
 					transitioned_after = 0;
@@ -1196,10 +1209,10 @@ namespace mrw
 
 		void RouteStatechart::clearInEvents()
 		{
+			turn_raised = false;
 			completed_raised = false;
 			failed_raised = false;
 			disable_raised = false;
-			extended_raised = false;
 			timeEvents[0] = false;
 			timeEvents[1] = false;
 			timeEvents[2] = false;
@@ -1296,7 +1309,7 @@ namespace mrw
 				clearInEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while ((((((((((((completed_raised) || (failed_raised)) || (disable_raised)) || (extended_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4])) || (timeEvents[5])) || (timeEvents[6])) || (timeEvents[7]));
+			while ((((((((((((turn_raised) || (completed_raised)) || (failed_raised)) || (disable_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4])) || (timeEvents[5])) || (timeEvents[6])) || (timeEvents[7]));
 			isExecuting = false;
 		}
 

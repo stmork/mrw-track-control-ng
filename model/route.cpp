@@ -68,18 +68,18 @@ bool Route::append(RailPart * target)
 
 	qDebug().noquote() << "---------->" << *target;
 
-	Section  * last_valid_section = sections.back();
-	RailPart * last_valid_part    = track.back();
-	const bool success            = append(last_valid_part, target, findSearchRegion(last_valid_part, target));
+	last_valid_part    = track.back();
+
+	const bool success = append(last_valid_part, target, findSearchRegion(target));
 
 	if (success)
 	{
-		prepare(last_valid_section, last_valid_part);
+		prepare();
 	}
 	return success;
 }
 
-Region * Route::findSearchRegion(const RailPart * last_valid_part, const RailPart * target) const
+Region * Route::findSearchRegion(const RailPart * target) const
 {
 	if (state == SectionState::SHUNTING)
 	{
@@ -168,14 +168,9 @@ bool Route::qualified(
 	return true;
 }
 
-void Route::prepare(
-	Section  * last_valid_section,
-	RailPart * last_valid_part)
+void Route::prepare()
 {
 	__METHOD__;
-
-	Q_UNUSED(last_valid_section);
-	Q_UNUSED(last_valid_part);
 
 	std::vector<RailPart *> vector(track.begin(), track.end());
 	Section        *        prev = nullptr;
@@ -205,26 +200,26 @@ void Route::prepare(
 		}
 	}
 
-	if (state == SectionState::TOUR)
-	{
-		// Collect and set new state for flank switches.
-		flank_switches.clear();
-		for (RailPart * part : track)
-		{
-			AbstractSwitch * flank_switch = dynamic_cast<AbstractSwitch *>(part);
-
-			if (flank_switch != nullptr)
-			{
-				flank_switch->flank(flank_switches, true);
-			}
-		}
-	}
-
 	const bool last_on = isLastSectionEnded();
 	const auto it      = sections.rbegin();
 
 	last_section = last_on ? nullptr : *it;
 	dump();
+}
+
+void Route::prepareFlank()
+{
+	// Collect and set new state for flank switches.
+	flank_switches.clear();
+	for (RailPart * part : track)
+	{
+		AbstractSwitch * flank_switch = dynamic_cast<AbstractSwitch *>(part);
+
+		if (flank_switch != nullptr)
+		{
+			flank_switch->flank(flank_switches, true);
+		}
+	}
 }
 
 bool Route::isLastSectionEnded() const

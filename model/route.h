@@ -121,10 +121,13 @@ namespace mrw::model
 		SectionTrack            sections;
 
 		/** The front end of the Section track. */
-		Section        *        first_section = nullptr;
+		Section        *        first_section   = nullptr;
 
-		/** The back end of the Section track. */
-		Section        *        last_section  = nullptr;
+		/** The tail of the Section track. */
+		Section        *        last_section    = nullptr;
+
+		/** The tail of the Rail track. */
+		RailPart        *       last_valid_part = nullptr;
 
 		/** The allocation state. */
 		const SectionState      state = FREE;
@@ -154,14 +157,12 @@ namespace mrw::model
 		 * @param last_valid_section The last initialized Section.
 		 * @param last_valid_part The last initialized RailPart.
 		 */
-		virtual void prepare(
-			Section  * last_valid_section,
-			RailPart * last_valid_part);
+		virtual void prepare();
+
+		virtual void prepareFlank();
 
 	private:
-		Region   *   findSearchRegion(
-			const RailPart * last_valid_part,
-			const RailPart * target) const;
+		Region   *   findSearchRegion(const RailPart * target) const;
 		bool         qualified(
 			const RailPart * rail,
 			const Region  *  search_region) const;
