@@ -4,6 +4,7 @@
 //
 
 #include <QMetaMethod>
+#include <QCoreApplication>
 
 #include <util/method.h>
 #include <util/stringutil.h>
@@ -109,23 +110,23 @@ void WidgetRoute::prepare()
 			connect(
 				controller, &SectionController::entered,
 				this, &WidgetRoute::entered,
-				Qt::DirectConnection);
+				Qt::UniqueConnection);
 			connect(
 				controller, &SectionController::left,
 				this, &WidgetRoute::left,
-				Qt::DirectConnection);
+				Qt::UniqueConnection);
 			connect(
 				controller, &SectionController::tryUnblock,
 				this, &WidgetRoute::tryUnblock,
-				Qt::DirectConnection);
+				Qt::UniqueConnection);
 			connect(
 				controller, &SectionController::unregister,
 				this, qOverload<>(&WidgetRoute::unregister),
-				Qt::DirectConnection);
+				Qt::UniqueConnection);
 			connect(
 				controller, &SectionController::stop,
 				&statechart, &RouteStatechart::failed,
-				Qt::DirectConnection);
+				Qt::UniqueConnection);
 
 #ifdef USE_OWN_BATCH
 			controller->setBatch(this);
@@ -269,15 +270,21 @@ void WidgetRoute::entered()
  */
 void WidgetRoute::left()
 {
+	__METHOD__;
+
 	SectionController   *   section_ctrl = dynamic_cast<SectionController *>(QObject::sender());
 	SignalControllerProxy * signal_ctrl  = getSignalController(section_ctrl->section());
 
 	if (signal_ctrl != nullptr)
 	{
+		// BUG: This is not transactional.
 		signal_ctrl->disable();
-		qDebug().noquote() << "Left: dis.  " << *signal_ctrl;
+		qDebug().noquote() << "Left sig.:  " << *signal_ctrl;
 	}
-	qDebug().noquote() << "Left:       " << *section_ctrl;
+	qDebug().noquote() << "Left sec.:  " << *section_ctrl;
+
+	// FIXME: There must be a better elegant way...
+	QCoreApplication::instance()->processEvents();
 }
 
 /**
@@ -322,6 +329,8 @@ void WidgetRoute::tryUnblock()
 
 void WidgetRoute::unregister()
 {
+	__METHOD__;
+
 	SectionController * section_ctrl =
 		dynamic_cast<SectionController *>(QObject::sender());
 

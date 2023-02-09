@@ -59,10 +59,12 @@ void BatchParticipant::setBatch(Batch * new_batch)
 {
 	if (new_batch != nullptr)
 	{
+		qDebug() << "+setBatch()" << name();
 		base_tx = new_batch;
 	}
 	else
 	{
+		qDebug() << "-setBatch()" << name();
 		base_tx = &ControllerRegistry::instance();
 	}
 	open_tx = nullptr;
