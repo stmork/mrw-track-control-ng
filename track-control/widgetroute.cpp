@@ -278,13 +278,11 @@ void WidgetRoute::left()
 	if (signal_ctrl != nullptr)
 	{
 		// BUG: This is not transactional.
+		signal_ctrl->setBatch(nullptr);
 		signal_ctrl->disable();
 		qDebug().noquote() << "Left sig.:  " << *signal_ctrl;
 	}
 	qDebug().noquote() << "Left sec.:  " << *section_ctrl;
-
-	// FIXME: There must be a better elegant way...
-	QCoreApplication::instance()->processEvents();
 }
 
 /**

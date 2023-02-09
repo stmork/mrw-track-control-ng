@@ -41,7 +41,7 @@ void BatchParticipant::decrease()
 		base_tx->decrease(this);
 		if (open_tx != base_tx)
 		{
-			qWarning("dec: Batch different!");
+			qWarning().noquote() << "dec: Batch different!" << name();
 		}
 	}
 	else
@@ -60,12 +60,16 @@ void BatchParticipant::setBatch(Batch * new_batch)
 	if (new_batch != nullptr)
 	{
 		qDebug() << "+setBatch()" << name();
-		base_tx = new_batch;
 	}
 	else
 	{
 		qDebug() << "-setBatch()" << name();
-		base_tx = &ControllerRegistry::instance();
+		new_batch = &ControllerRegistry::instance();
 	}
-	open_tx = nullptr;
+
+	if (base_tx != new_batch)
+	{
+		base_tx = new_batch;
+		open_tx = nullptr;
+	}
 }
