@@ -22,6 +22,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
 		assert entered
 		assert called inc
+		assert called off
+		assert called request
 	}
 
 	operation unlocked()
@@ -93,7 +95,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	}
 
 	@Test
-	operation operational()
+	operation sync1()
 	{
 		// Given
 		initial()
@@ -106,12 +108,52 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Wait)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
 		assert called pending
+	}
+
+	@Test
+	operation sync2()
+	{
+		// Given
+		initial()
+
+		// When
+		raise stateResponse : false
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Relay)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Wait)
+		assert called pending
+	}
+
+	@Test
+	operation operational()
+	{
+		// Given
+		sync1()
 
 		// When
 		raise stateResponse : false
 
 		// Then
 		unlocked()
+		assert started
+		assert called dec
+		assert occupied == false
+	}
+
+	@Test
+	operation operational2()
+	{
+		// Given
+		sync2()
+
+		// When
+		raise relaisResponse
+
+		// Then
+		unlocked()
+		assert started
 		assert called dec
 		assert occupied == false
 	}
@@ -587,7 +629,19 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		exit
 		assert !is_active
 
+		sync1()
+		exit
+		assert !is_active
+
+		sync2()
+		exit
+		assert !is_active
+
 		operational()
+		exit
+		assert !is_active
+
+		operational2()
 		exit
 		assert !is_active
 
