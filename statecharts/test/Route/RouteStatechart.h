@@ -285,6 +285,7 @@ namespace mrw
 			void enseq_main_region_Disable_default();
 			void enseq_main_region_Start_default();
 			void enseq_main_region__final__default();
+			void enseq_main_region_Turning_default();
 			void enseq_main_region_Turning_Turning_process_Switch_Turning_default();
 			void enseq_main_region_Turning_Turning_process_Signal_Turning_default();
 			void enseq_main_region_Turning_Turning_process_Section_Activation_default();
@@ -294,6 +295,7 @@ namespace mrw
 			void enseq_main_region_Emergency_Shutdown_default();
 			void enseq_main_region_Unlock_default();
 			void enseq_main_region_default();
+			void enseq_main_region_Turning_Turning_process_default();
 			void exseq_main_region_Active();
 			void exseq_main_region_Disable();
 			void exseq_main_region_Start();
@@ -312,6 +314,7 @@ namespace mrw
 			void react_main_region_Turning_Turning_process__choice_0();
 			void react_main_region__choice_0();
 			void react_main_region__entry_Default();
+			void react_main_region_Turning_Turning_process__entry_Default();
 			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Active_react(const sc::integer transitioned_before);
 			sc::integer main_region_Disable_react(const sc::integer transitioned_before);

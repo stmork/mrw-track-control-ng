@@ -501,6 +501,14 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::RouteStatechart::State::main_region__final_;
 		}
 
+		/* 'default' enter sequence for state Turning */
+		void RouteStatechart::enseq_main_region_Turning_default()
+		{
+			/* 'default' enter sequence for state Turning */
+			enact_main_region_Turning();
+			enseq_main_region_Turning_Turning_process_default();
+		}
+
 		/* 'default' enter sequence for state Switch Turning */
 		void RouteStatechart::enseq_main_region_Turning_Turning_process_Switch_Turning_default()
 		{
@@ -570,6 +578,13 @@ namespace mrw
 		{
 			/* 'default' enter sequence for region main region */
 			react_main_region__entry_Default();
+		}
+
+		/* 'default' enter sequence for region Turning process */
+		void RouteStatechart::enseq_main_region_Turning_Turning_process_default()
+		{
+			/* 'default' enter sequence for region Turning process */
+			react_main_region_Turning_Turning_process__entry_Default();
 		}
 
 		/* Default exit sequence for state Active */
@@ -817,6 +832,13 @@ namespace mrw
 			enseq_main_region_Start_default();
 		}
 
+		/* Default react sequence for initial entry  */
+		void RouteStatechart::react_main_region_Turning_Turning_process__entry_Default()
+		{
+			/* Default react sequence for initial entry  */
+			enseq_main_region_Turning_Turning_process_Switch_Turning_default();
+		}
+
 		sc::integer RouteStatechart::react(const sc::integer transitioned_before)
 		{
 			/* State machine reactions. */
@@ -841,8 +863,7 @@ namespace mrw
 					if (turn_raised)
 					{
 						exseq_main_region_Active();
-						enact_main_region_Turning();
-						enseq_main_region_Turning_Turning_process_Switch_Turning_default();
+						enseq_main_region_Turning_default();
 						react(0);
 						transitioned_after = 0;
 					}
@@ -909,8 +930,7 @@ namespace mrw
 				if (turn_raised)
 				{
 					exseq_main_region_Start();
-					enact_main_region_Turning();
-					enseq_main_region_Turning_Turning_process_Switch_Turning_default();
+					enseq_main_region_Turning_default();
 					react(0);
 					transitioned_after = 0;
 				}
