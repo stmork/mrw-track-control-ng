@@ -727,7 +727,7 @@
                                 <children xsi:type="notation:Shape" xmi:id="_KqCWcIIIEe2pKZIV5OcIFQ" type="Choice" element="_KqBvYIIIEe2pKZIV5OcIFQ" fontName="Verdana" lineColor="4210752">
                                   <layoutConstraint xsi:type="notation:Bounds" xmi:id="_KqCWcYIIEe2pKZIV5OcIFQ" x="112" y="456" width="51" height="51"/>
                                 </children>
-                                <children xsi:type="notation:Shape" xmi:id="_tdw0MJQIEe20Kq9uYsZAxA" type="Note" fontName="Verdana" description="This is a cosmetical&#xA;Feature for shutting&#xA;down distant light&#xA;signals combined&#xA;with main signals." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+                                <children xsi:type="notation:Shape" xmi:id="_tdw0MJQIEe20Kq9uYsZAxA" type="Note" fontName="Verdana" description="This is a cosmetical&#xA;feature for shutting&#xA;down distant light&#xA;signals combined&#xA;with main signals." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
                                   <children xsi:type="notation:BasicDecorationNode" xmi:id="_tdxbQJQIEe20Kq9uYsZAxA" type="DiagramName">
                                     <element xsi:nil="true"/>
                                   </children>
@@ -1256,11 +1256,11 @@
     <edges xmi:id="_CgBF4IIJEe2pKZIV5OcIFQ" type="Transition" element="_CgAe0IIJEe2pKZIV5OcIFQ" source="_A-nkkIIJEe2pKZIV5OcIFQ" target="_0wIdMIICEe2pKZIV5OcIFQ">
       <children xsi:type="notation:DecorationNode" xmi:id="_CgBF5IIJEe2pKZIV5OcIFQ" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_CgBF5YIJEe2pKZIV5OcIFQ"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_CgBF5oIJEe2pKZIV5OcIFQ" x="1" y="31"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_CgBF5oIJEe2pKZIV5OcIFQ" x="-44" y="6"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_CgBF4YIJEe2pKZIV5OcIFQ" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_CgBF44IJEe2pKZIV5OcIFQ" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_CgBF4oIJEe2pKZIV5OcIFQ" points="[-1, 19, 124, -101]$[-1, 89, 124, -31]$[-82, 89, 43, -31]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_CgBF4oIJEe2pKZIV5OcIFQ" points="[-1, 19, 124, -101]$[-1, 105, 124, -15]$[-82, 105, 43, -15]"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_CgCUAIIJEe2pKZIV5OcIFQ" id="(0.8252427184466019,0.7547169811320755)"/>
     </edges>
     <edges xmi:id="_EIsT4IIJEe2pKZIV5OcIFQ" type="Transition" element="_EIrs0IIJEe2pKZIV5OcIFQ" source="_1r1hIIKqEe2Fisp2xhAv8A" target="_0wIdMIICEe2pKZIV5OcIFQ">
