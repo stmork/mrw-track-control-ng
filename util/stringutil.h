@@ -37,14 +37,14 @@ namespace mrw::util
 	public:
 		/**
 		 * This method returns the contents of this instance in human readable
-		 * form.
+		 * form as QString.
 		 *
 		 * @return The human readable form of this instance.
 		 */
 		virtual QString toString() const = 0;
 
 		/**
-		 * This is a convenience cast operator to std::string.
+		 * This is a convenience cast operator to QString.
 		 *
 		 * @see toString()
 		 */

@@ -67,8 +67,6 @@ namespace mrw::model
 			Section       *       model_section,
 			const QDomElement  &  element);
 
-		bool isRightHanded() const;
-
 		bool isBranch() const override;
 
 		/**

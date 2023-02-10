@@ -217,13 +217,11 @@ void TestModel::testRegularSwitchStates()
 		QCOMPARE(part->state(), RegularSwitch::State::AB);
 		QCOMPARE(part->switchState(), SwitchState::SWITCH_STATE_LEFT);
 		QCOMPARE(part->commandState(), Command::SETLFT);
-		QCOMPARE(part->isBranch(), !part->isRightHanded());
 
 		part->setState(RegularSwitch::State::AC);
 		QCOMPARE(part->state(), RegularSwitch::State::AC);
 		QCOMPARE(part->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 		QCOMPARE(part->commandState(), Command::SETRGT);
-		QCOMPARE(part->isBranch(), part->isRightHanded());
 
 		part->setState(RegularSwitch::State(0xff));
 		QVERIFY_EXCEPTION_THROWN(part->commandState(), std::invalid_argument);
