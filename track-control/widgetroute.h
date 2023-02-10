@@ -87,6 +87,8 @@ private:
 	void collectSectionControllers(
 		std::vector<mrw::ctrl::SectionController *>   &   controllers) const;
 
+	void   tryUnblockCtrl(mrw::ctrl::SectionController * controller);
+
 	void   unregister(mrw::model::Section * section);
 	void   unregister(mrw::ctrl::SectionController * controller);
 	void   finalize();

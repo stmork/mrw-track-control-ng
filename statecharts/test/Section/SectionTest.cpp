@@ -2585,8 +2585,6 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedLeft());
 
-			EXPECT_TRUE(statechart->isRaisedTryUnblock());
-
 
 			incMock->reset();
 			decMock->reset();

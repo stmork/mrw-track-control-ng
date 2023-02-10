@@ -169,8 +169,6 @@ namespace mrw
 			bool isRaisedLeaving();
 			/*! Check if event 'left' of default interface scope is raised. */
 			bool isRaisedLeft();
-			/*! Check if event 'tryUnblock' of default interface scope is raised. */
-			bool isRaisedTryUnblock();
 			/*! Check if event 'unregister' of default interface scope is raised. */
 			bool isRaisedUnregister();
 
@@ -497,9 +495,6 @@ namespace mrw
 
 			/*! Indicates event 'left' of default interface scope is active. */
 			bool left_raised;
-
-			/*! Indicates event 'tryUnblock' of default interface scope is active. */
-			bool tryUnblock_raised;
 
 			/*! Indicates event 'unregister' of default interface scope is active. */
 			bool unregister_raised;

@@ -557,7 +557,6 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert called dec 1 times
 		assert called passed
 		assert left
-		assert tryUnblock
 	}
 
 	@Test

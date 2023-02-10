@@ -69,10 +69,6 @@ SectionController::SectionController(
 		this, &SectionController::left,
 		Qt::DirectConnection);
 	connect(
-		&statechart, &SectionStatechart::tryUnblock,
-		this, &SectionController::tryUnblock,
-		Qt::DirectConnection);
-	connect(
 		&statechart, &SectionStatechart::unregister,
 		this, &SectionController::unregister,
 		Qt::DirectConnection);

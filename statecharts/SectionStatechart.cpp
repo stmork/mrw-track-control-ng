@@ -520,7 +520,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Passed'. */
 			ifaceOperationCallback->passed();
-			emit tryUnblock();
 		}
 
 		/* Entry action for state 'Waiting'. */

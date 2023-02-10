@@ -296,9 +296,6 @@ namespace mrw
 			/*! Signal representing the out event 'left' that is defined in the default interface scope. */
 			void left();
 
-			/*! Signal representing the out event 'tryUnblock' that is defined in the default interface scope. */
-			void tryUnblock();
-
 			/*! Signal representing the out event 'unregister' that is defined in the default interface scope. */
 			void unregister();
 

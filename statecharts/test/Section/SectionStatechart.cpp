@@ -45,7 +45,6 @@ namespace mrw
 			entered_raised(false),
 			leaving_raised(false),
 			left_raised(false),
-			tryUnblock_raised(false),
 			unregister_raised(false),
 			local_leaving_raised(false)
 		{
@@ -261,12 +260,6 @@ namespace mrw
 		bool mrw::statechart::SectionStatechart::isRaisedLeft()
 		{
 			return left_raised;
-		}
-
-
-		bool mrw::statechart::SectionStatechart::isRaisedTryUnblock()
-		{
-			return tryUnblock_raised;
 		}
 
 
@@ -569,7 +562,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Passed'. */
 			ifaceOperationCallback->passed();
-			tryUnblock_raised = true;
 		}
 
 		/* Entry action for state 'Waiting'. */
@@ -2239,7 +2231,6 @@ namespace mrw
 			entered_raised = false;
 			leaving_raised = false;
 			left_raised = false;
-			tryUnblock_raised = false;
 			unregister_raised = false;
 		}
 

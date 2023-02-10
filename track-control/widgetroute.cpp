@@ -287,7 +287,7 @@ void WidgetRoute::left()
 				section_ctrl,  &SectionController::unlock,
 				Qt::QueuedConnection);
 		}
-#ifdef TRY_UNBLOCK
+#ifdef USE_TRY_UNBLOCK
 		else
 		{
 			connect (
@@ -310,12 +310,16 @@ void WidgetRoute::left()
 	{
 		if (auto_unblock)
 		{
-			section_ctrl->unlock();
+			QMetaObject::invokeMethod(
+				section_ctrl, &SectionController::unlock,
+				Qt::QueuedConnection);
 		}
-#ifdef TRY_UNBLOCK
+#ifdef USE_TRY_UNBLOCK
 		else
 		{
-			section_ctrl->tryUnblock();
+			QMetaObject::invokeMethod(
+				section_ctrl, &SectionController::tryUnblock,
+				Qt::QueuedConnection);
 		}
 #endif
 	}
@@ -331,12 +335,16 @@ void WidgetRoute::left()
  */
 void WidgetRoute::tryUnblock()
 {
+	tryUnblockCtrl(dynamic_cast<SectionController *>(QObject::sender()));
+}
+
+void WidgetRoute::tryUnblockCtrl(SectionController * section_ctrl)
+{
 	__METHOD__;
 
-	SectionController   *   section_ctrl  = dynamic_cast<SectionController *>(QObject::sender());
-	Section        *        section       = section_ctrl->section();
-	SignalControllerProxy * signal_ctrl   = getSignalController(section);
-	Signal         *        main_signal   = signal_ctrl != nullptr ? signal_ctrl->mainSignal() : nullptr;
+	Section        *        section     = section_ctrl->section();
+	SignalControllerProxy * signal_ctrl = getSignalController(section);
+	Signal         *        main_signal = signal_ctrl != nullptr ? signal_ctrl->mainSignal() : nullptr;
 
 	if (main_signal != nullptr)
 	{
