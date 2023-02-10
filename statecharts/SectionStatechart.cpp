@@ -1533,9 +1533,7 @@ namespace mrw
 			/* The reactions of state null. */
 			if (auto_unlock)
 			{
-				exseq_main_region_Operating_Processing_Locked();
-				enseq_main_region_Operating_Processing_Unlocked_default();
-				main_region_Operating_react(0);
+				enseq_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock_default();
 			}
 			else
 			{

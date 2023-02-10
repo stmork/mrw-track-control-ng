@@ -277,10 +277,24 @@ void WidgetRoute::left()
 
 	if (signal_ctrl != nullptr)
 	{
-		// BUG: This is not transactional.
-		signal_ctrl->setBatch(nullptr);
+		RouteBatch * disable_batch = new RouteBatch(this);
+
+		connect (
+			disable_batch, &RouteBatch::completed,
+			section_ctrl, &SectionController::unlock,
+			Qt::QueuedConnection);
+		connect (
+			disable_batch, &RouteBatch::completed,
+			disable_batch, &RouteBatch::deleteLater,
+			Qt::QueuedConnection);
+
+		signal_ctrl->setBatch(disable_batch);
 		signal_ctrl->disable();
 		qDebug().noquote() << "Left sig.:  " << *signal_ctrl;
+	}
+	else
+	{
+		section_ctrl->unlock();
 	}
 	qDebug().noquote() << "Left sec.:  " << *section_ctrl;
 }

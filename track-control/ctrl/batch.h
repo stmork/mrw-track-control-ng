@@ -19,6 +19,8 @@ namespace mrw::ctrl
 	{
 		static std::atomic_uint32_t            counter;
 		std::unordered_set<BatchParticipant *> transaction;
+
+	protected:
 		const uint32_t                         id;
 
 	public:

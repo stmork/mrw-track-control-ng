@@ -24,6 +24,7 @@ SOURCES += \
 	ctrl/railcontrollerproxy.cpp \
 	ctrl/signalcontrollerproxy.cpp \
 	ctrl/sectioncontroller.cpp \
+	routebatch.cpp \
 	widgetroute.cpp
 
 HEADERS += \
@@ -42,6 +43,7 @@ HEADERS += \
 	ctrl/railcontrollerproxy.h \
 	ctrl/signalcontrollerproxy.h \
 	ctrl/sectioncontroller.h \
+	routebatch.h \
 	widgetroute.h
 
 FORMS += \

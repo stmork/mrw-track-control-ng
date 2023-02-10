@@ -2551,11 +2551,7 @@ namespace mrw
 
 			statechart->raiseRelaisResponse();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating));
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked));
-
-			EXPECT_TRUE(statechart->isRaisedUnregister());
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock));
 
 			EXPECT_TRUE(incMock->calledAtLeast(0));
 

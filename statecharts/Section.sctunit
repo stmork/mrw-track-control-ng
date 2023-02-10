@@ -533,9 +533,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		raise relaisResponse
 
 		// Then
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
-		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
-		assert unregister
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Wait_for_Unlock)
 		assert called inc 0 times
 		assert called dec 1 times
 		assert left

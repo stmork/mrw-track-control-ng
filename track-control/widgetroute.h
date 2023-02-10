@@ -8,6 +8,9 @@
 #ifndef WIDGETROUTE_H
 #define WIDGETROUTE_H
 
+#include <unordered_set>
+#include <vector>
+
 #include <QObject>
 #include <QListWidgetItem>
 
@@ -18,6 +21,8 @@
 #include <ctrl/batch.h>
 #include <ctrl/sectioncontroller.h>
 #include <ctrl/signalcontrollerproxy.h>
+
+#include "routebatch.h"
 
 class WidgetRoute :
 	public mrw::model::Route,
@@ -33,6 +38,8 @@ private:
 
 	std::vector<mrw::ctrl::SignalControllerProxy *> controllers_unlocked;
 	std::vector<mrw::ctrl::SignalControllerProxy *> controllers_locked;
+
+	std::unordered_set<RouteBatch *, RouteBatch> disable_batches;
 
 public:
 	static const int        USER_ROLE = Qt::UserRole + 1;
