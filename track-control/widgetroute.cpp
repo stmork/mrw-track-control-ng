@@ -26,6 +26,7 @@ using LockState = Device::LockState;
 using Symbol    = Signal::Symbol;
 
 #define USE_OWN_BATCH
+#define USE_TRY_UNBLOCK
 
 WidgetRoute::WidgetRoute(
 	const bool           dir,
@@ -279,10 +280,23 @@ void WidgetRoute::left()
 	{
 		RouteBatch * disable_batch = new RouteBatch(this);
 
-		connect (
-			disable_batch, &RouteBatch::completed,
-			section_ctrl, &SectionController::unlock,
-			Qt::QueuedConnection);
+		if (auto_unblock)
+		{
+			connect (
+				disable_batch, &RouteBatch::completed,
+				section_ctrl,  &SectionController::unlock,
+				Qt::QueuedConnection);
+		}
+#ifdef TRY_UNBLOCK
+		else
+		{
+			connect (
+				disable_batch, &RouteBatch::completed,
+				section_ctrl,  &SectionController::tryUnblock,
+				Qt::QueuedConnection);
+		}
+#endif
+
 		connect (
 			disable_batch, &RouteBatch::completed,
 			disable_batch, &RouteBatch::deleteLater,
@@ -294,7 +308,16 @@ void WidgetRoute::left()
 	}
 	else
 	{
-		section_ctrl->unlock();
+		if (auto_unblock)
+		{
+			section_ctrl->unlock();
+		}
+#ifdef TRY_UNBLOCK
+		else
+		{
+			section_ctrl->tryUnblock();
+		}
+#endif
 	}
 	qDebug().noquote() << "Left sec.:  " << *section_ctrl;
 }

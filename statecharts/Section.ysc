@@ -1157,7 +1157,7 @@
       <styles xsi:type="notation:ArrowStyle" xmi:id="_RB9sMYbGEe25PaND2nD09Q"/>
       <styles xsi:type="notation:LineTypeStyle" xmi:id="_RB9sMobGEe25PaND2nD09Q"/>
       <element xsi:nil="true"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_RB9sM4bGEe25PaND2nD09Q" points="[-1, -61, -167, 3]$[84, -61, -82, 3]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_RB9sM4bGEe25PaND2nD09Q" points="[0, -3, 78, 322]$[-78, -325, 0, 0]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_RB-TQIbGEe25PaND2nD09Q" id="(1.0,1.0)"/>
     </edges>
     <edges xmi:id="_88TQIIdiEe2lxN2RuRdwGg" type="Transition" element="_88SCAIdiEe2lxN2RuRdwGg" source="_nNooEHX6Ee21HM-AEZfzIA" target="_1Qc-w4diEe2lxN2RuRdwGg">
