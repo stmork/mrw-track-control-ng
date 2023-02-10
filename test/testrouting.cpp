@@ -15,6 +15,23 @@
 using namespace mrw::test;
 using namespace mrw::model;
 
+class TestRoute : public Route
+{
+public:
+	explicit TestRoute(
+		const bool           dir,
+		const SectionState   wanted_state,
+		RailPart      *      first) : Route(dir, wanted_state, first)
+	{
+	}
+
+	const std::vector<mrw::model::RegularSwitch *> & doFlank()
+	{
+		prepareFlank();
+		return flank_switches;
+	}
+};
+
 TestRouting::TestRouting() : TestModelBase("Test-Flank")
 {
 }
@@ -158,6 +175,21 @@ void TestRouting::testInverseFail()
 	QVERIFY(verify(route));
 	QCOMPARE(reserved.size(), 0u);
 	QVERIFY(empty());
+}
+
+void TestRouting::testFlank()
+{
+	TestRoute  route(true, SectionState::TOUR, parts[1]);
+
+	QVERIFY(verify(route));
+
+	(route.append(parts[14]));
+	(route.append(parts[19]));
+	QVERIFY(verify(route));
+
+	const std::vector<mrw::model::RegularSwitch *> & flanks = route.doFlank();
+
+	QCOMPARE(flanks.size(), 1u);
 }
 
 bool TestRouting::verify(const Route & route) const

@@ -159,6 +159,12 @@ namespace mrw::model
 		 */
 		virtual void prepare();
 
+		/**
+		 * This method collects all flank protection switches and changes their
+		 * states appropriately.
+		 *
+		 * @see AbstractSwitch::flank()
+		 */
 		virtual void prepareFlank();
 
 	private:
