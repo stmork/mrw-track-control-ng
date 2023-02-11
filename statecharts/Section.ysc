@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_eA-_4G_nEe2NWacukCztjQ" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;const timeout : integer = 500&#xA;var auto_off : boolean = true&#xA;var auto_unlock : boolean = true&#xA;var occupied : boolean = false&#xA;&#xA;in event enable : boolean&#xA;in event disable&#xA;in event clear&#xA;in event start&#xA;in event relaisResponse&#xA;in event stateResponse : boolean&#xA;in event failed&#xA;in event next&#xA;in event unlock&#xA;&#xA;out event started&#xA;out event stop&#xA;&#xA;out event entered&#xA;out event leaving&#xA;out event left&#xA;out event unregister&#xA;&#xA;operation inc() : void&#xA;operation dec() : void&#xA;&#xA;operation off() : void&#xA;operation on() : void&#xA;operation request() : void&#xA;operation passed() : void&#xA;operation free() : void&#xA;operation leftBefore() : void&#xA;&#xA;operation fail() : void&#xA;operation pending() : void&#xA;operation lock(do_it : boolean) : void&#xA;" namespace="mrw.statechart" name="SectionStatechart">
+  <sgraph:Statechart xmi:id="_eA-_4G_nEe2NWacukCztjQ" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(yes)&#xA;&#xA;interface:&#xA;const timeout : integer = 500&#xA;var auto_off : boolean = true&#xA;var auto_unlock : boolean = true&#xA;var occupied : boolean = false&#xA;&#xA;in event enable : boolean&#xA;in event disable&#xA;in event clear&#xA;in event start&#xA;in event relaisResponse&#xA;in event stateResponse : boolean&#xA;in event failed&#xA;in event next&#xA;in event unlock&#xA;&#xA;out event started&#xA;out event stop&#xA;&#xA;out event entered&#xA;out event leave&#xA;out event leaving&#xA;out event left&#xA;out event unregister&#xA;&#xA;operation inc() : void&#xA;operation dec() : void&#xA;&#xA;operation off() : void&#xA;operation on() : void&#xA;operation request() : void&#xA;operation passed() : void&#xA;operation free() : void&#xA;operation leftBefore() : void&#xA;&#xA;operation fail() : void&#xA;operation pending() : void&#xA;operation lock(do_it : boolean) : void&#xA;" namespace="mrw.statechart" name="SectionStatechart">
     <regions xmi:id="_eBBcI2_nEe2NWacukCztjQ" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_eBBcJG_nEe2NWacukCztjQ">
         <outgoingTransitions xmi:id="_eBBcJW_nEe2NWacukCztjQ" target="_gX9dUG_yEe2YefuTX77gAw"/>
@@ -53,7 +53,7 @@
           <vertices xsi:type="sgraph:State" xmi:id="_q05psHX6Ee21HM-AEZfzIA" specification="entry / lock(true)&#xA;exit / raise unregister" name="Locked">
             <regions xmi:id="_wWkigHX6Ee21HM-AEZfzIA" name="Route active">
               <vertices xsi:type="sgraph:State" xmi:id="_DSuqgHX7Ee21HM-AEZfzIA" specification="" name="Enabled" incomingTransitions="_IBmNYHX7Ee21HM-AEZfzIA _C655IHlYEe2mtrNlTXAGRw">
-                <outgoingTransitions xmi:id="_eqqE8HX7Ee21HM-AEZfzIA" specification="leaving [auto_off]" target="_iUFCsHX7Ee21HM-AEZfzIA"/>
+                <outgoingTransitions xmi:id="_eqqE8HX7Ee21HM-AEZfzIA" specification="leave [auto_off] / raise leaving" target="_iUFCsHX7Ee21HM-AEZfzIA"/>
                 <outgoingTransitions xmi:id="_PYMWwHYXEe21HM-AEZfzIA" specification="disable" target="_ciTAkHYXEe21HM-AEZfzIA"/>
               </vertices>
               <vertices xsi:type="sgraph:Choice" xmi:id="_eBa6sHX7Ee21HM-AEZfzIA" incomingTransitions="_Ft6ooHX9Ee21HM-AEZfzIA">
@@ -100,8 +100,8 @@
                 <outgoingTransitions xmi:id="_NWPYgIN9Ee2AMOmg9j3YNA" target="_0NLCUIN8Ee2AMOmg9j3YNA"/>
                 <outgoingTransitions xmi:id="_PPCtMIN9Ee2AMOmg9j3YNA" specification="[occupied]" target="_3Tc2wIN8Ee2AMOmg9j3YNA"/>
               </vertices>
-              <vertices xsi:type="sgraph:State" xmi:id="_azHxEIUBEe27opx7FaY1oA" specification="entry [!occupied] / raise leaving; leftBefore" name="Next Reached" incomingTransitions="_dQWBcIUBEe27opx7FaY1oA">
-                <outgoingTransitions xmi:id="_73ozoIN8Ee2AMOmg9j3YNA" specification="stateResponse [!valueof(stateResponse)] / raise leaving" target="_7PdZUIN8Ee2AMOmg9j3YNA"/>
+              <vertices xsi:type="sgraph:State" xmi:id="_azHxEIUBEe27opx7FaY1oA" specification="entry [!occupied] / raise leave; leftBefore" name="Next Reached" incomingTransitions="_dQWBcIUBEe27opx7FaY1oA">
+                <outgoingTransitions xmi:id="_73ozoIN8Ee2AMOmg9j3YNA" specification="stateResponse [!valueof(stateResponse)] / raise leave" target="_7PdZUIN8Ee2AMOmg9j3YNA"/>
               </vertices>
             </regions>
           </vertices>
@@ -1157,7 +1157,7 @@
       <styles xsi:type="notation:ArrowStyle" xmi:id="_RB9sMYbGEe25PaND2nD09Q"/>
       <styles xsi:type="notation:LineTypeStyle" xmi:id="_RB9sMobGEe25PaND2nD09Q"/>
       <element xsi:nil="true"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_RB9sM4bGEe25PaND2nD09Q" points="[0, -3, 78, 322]$[-78, -325, 0, 0]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_RB9sM4bGEe25PaND2nD09Q" points="[-1, -61, -167, 3]$[84, -61, -82, 3]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_RB-TQIbGEe25PaND2nD09Q" id="(1.0,1.0)"/>
     </edges>
     <edges xmi:id="_88TQIIdiEe2lxN2RuRdwGg" type="Transition" element="_88SCAIdiEe2lxN2RuRdwGg" source="_nNooEHX6Ee21HM-AEZfzIA" target="_1Qc-w4diEe2lxN2RuRdwGg">

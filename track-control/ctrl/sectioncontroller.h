@@ -50,6 +50,7 @@ namespace mrw::ctrl
 		void failed();
 		void start();
 		void entered();
+		void leaving();
 		void left();
 		void tryUnblock();
 		void unregister();

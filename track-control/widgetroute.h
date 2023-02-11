@@ -66,6 +66,7 @@ signals:
 
 public slots:
 	void entered();
+	void leaving();
 	void left();
 	void tryUnblock();
 	void unregister();

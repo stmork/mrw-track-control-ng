@@ -38,7 +38,7 @@ namespace mrw
 		void disabledAfterEnabled();
 		void unlockSection();
 		void nextReached();
-		void leave();
+		void leaveSection();
 		void passedState();
 		void unlockAfterPassed();
 		void enablingAfterDisabled();
@@ -2272,7 +2272,7 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			nextReached();
 		}
-		void leave()
+		void leaveSection()
 		{
 			nextReached();
 
@@ -2292,6 +2292,8 @@ namespace mrw
 
 			EXPECT_TRUE(offMock->calledAtLeastOnce());
 
+			EXPECT_TRUE(statechart->isRaisedLeave());
+
 			EXPECT_TRUE(statechart->isRaisedLeaving());
 
 
@@ -2299,7 +2301,7 @@ namespace mrw
 			decMock->reset();
 			offMock->reset();
 		}
-		TEST_F(SectionTest, leave)
+		TEST_F(SectionTest, leaveSection)
 		{
 			incMock = new IncMock();
 			incMock->initializeBehavior();
@@ -2344,7 +2346,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			leave();
+			leaveSection();
 		}
 		TEST_F(SectionTest, leaveBeforeNext)
 		{
@@ -2430,6 +2432,8 @@ namespace mrw
 			EXPECT_TRUE(offMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(leftBeforeMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(statechart->isRaisedLeave());
 
 			EXPECT_TRUE(statechart->isRaisedLeaving());
 
@@ -2545,7 +2549,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			leave();
+			leaveSection();
 
 			statechart->setAuto_unlock(true);
 
@@ -2565,7 +2569,7 @@ namespace mrw
 		}
 		void passedState()
 		{
-			leave();
+			leaveSection();
 
 			statechart->setAuto_unlock(false);
 
@@ -2996,7 +3000,7 @@ namespace mrw
 
 			EXPECT_TRUE(!statechart->isActive());
 
-			leave();
+			leaveSection();
 
 			statechart->exit();
 

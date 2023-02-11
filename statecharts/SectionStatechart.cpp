@@ -41,7 +41,7 @@ namespace mrw
 			failed_raised(false),
 			next_raised(false),
 			unlock_raised(false),
-			local_leaving_raised(false)
+			local_leave_raised(false)
 		{
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
 			{
@@ -142,9 +142,9 @@ namespace mrw
 					unlock_raised = true;
 					break;
 				}
-			case mrw::statechart::SectionStatechart::Event::Internal_local_leaving:
+			case mrw::statechart::SectionStatechart::Event::Internal_local_leave:
 				{
-					local_leaving_raised = true;
+					local_leave_raised = true;
 					break;
 				}
 
@@ -227,9 +227,9 @@ namespace mrw
 		}
 
 
-		void mrw::statechart::SectionStatechart::local_leaving()
+		void mrw::statechart::SectionStatechart::local_leave()
 		{
-			internalEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::Internal_local_leaving));
+			internalEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::Internal_local_leave));
 		}
 
 
@@ -564,8 +564,8 @@ namespace mrw
 			/* Entry action for state 'Next Reached'. */
 			if (!occupied)
 			{
-				local_leaving();
-				emit leaving();
+				local_leave();
+				emit leave();
 				ifaceOperationCallback->leftBefore();
 			}
 		}
@@ -1822,9 +1822,10 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (((local_leaving_raised)) && ((auto_off)))
+				if (((local_leave_raised)) && ((auto_off)))
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Enabled();
+					emit leaving();
 					enact_main_region_Operating_Processing_Locked_Route_active_Waiting();
 					enseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left_default();
 					transitioned_after = 0;
@@ -2053,8 +2054,8 @@ namespace mrw
 				if (((stateResponse_raised)) && ((!stateResponse_value)))
 				{
 					exseq_main_region_Operating_Processing_Locked_Occupation_Next_Reached();
-					local_leaving();
-					emit leaving();
+					local_leave();
+					emit leave();
 					enseq_main_region_Operating_Processing_Locked_Occupation__final__default();
 					transitioned_after = 1;
 				}
@@ -2200,7 +2201,7 @@ namespace mrw
 
 		void SectionStatechart::clearInternalEvents()
 		{
-			local_leaving_raised = false;
+			local_leave_raised = false;
 		}
 
 		void SectionStatechart::microStep()
@@ -2345,7 +2346,7 @@ namespace mrw
 				clearInternalEvents();
 				dispatchEvent(getNextEvent());
 			}
-			while (((((((((((((enable_raised) || (disable_raised)) || (clear_raised)) || (start_raised)) || (relaisResponse_raised)) || (stateResponse_raised)) || (failed_raised)) || (next_raised)) || (unlock_raised)) || (local_leaving_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
+			while (((((((((((((enable_raised) || (disable_raised)) || (clear_raised)) || (start_raised)) || (relaisResponse_raised)) || (stateResponse_raised)) || (failed_raised)) || (next_raised)) || (unlock_raised)) || (local_leave_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
 			isExecuting = false;
 		}
 

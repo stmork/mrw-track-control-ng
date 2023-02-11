@@ -847,7 +847,7 @@ void MainWindow::startBeermode(const bool dir)
 				{
 					delete route;
 
-					qWarning("No route possible! Disabling beer mode...");
+					qInfo("No route possible! Disabling beer mode...");
 					ui->actionBeermodeLeft->setChecked(false);
 					ui->actionBeermodeRight->setChecked(false);
 				}

@@ -123,7 +123,7 @@ namespace mrw
 				_te0_main_region_Init_,
 				_te1_main_region_Operating_Processing_Locked_Route_active_Waiting_,
 				_te2_main_region_Operating_Processing_Pending_,
-				Internal_local_leaving
+				Internal_local_leave
 			};
 
 			class EventInstance
@@ -289,6 +289,9 @@ namespace mrw
 
 			/*! Signal representing the out event 'entered' that is defined in the default interface scope. */
 			void entered();
+
+			/*! Signal representing the out event 'leave' that is defined in the default interface scope. */
+			void leave();
 
 			/*! Signal representing the out event 'leaving' that is defined in the default interface scope. */
 			void leaving();
@@ -502,11 +505,11 @@ namespace mrw
 			/*! Indicates event 'unlock' of default interface scope is active. */
 			bool unlock_raised;
 
-			/*! Indicates event 'local_leaving' of internal scope is active. */
-			bool local_leaving_raised;
+			/*! Indicates event 'local_leave' of internal scope is active. */
+			bool local_leave_raised;
 
-			/*! Raises the out event 'local_leaving' of internal scope as a local event. */
-			void local_leaving();
+			/*! Raises the out event 'local_leave' of internal scope as a local event. */
+			void local_leave();
 
 
 

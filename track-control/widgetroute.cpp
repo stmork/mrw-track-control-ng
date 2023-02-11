@@ -113,6 +113,10 @@ void WidgetRoute::prepareRoute()
 				this, &WidgetRoute::entered,
 				Qt::UniqueConnection);
 			connect(
+				controller, &SectionController::leaving,
+				this, &WidgetRoute::leaving,
+				Qt::UniqueConnection);
+			connect(
 				controller, &SectionController::left,
 				this, &WidgetRoute::left,
 				Qt::UniqueConnection);
@@ -271,6 +275,11 @@ void WidgetRoute::entered()
 	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
 
 	qDebug().noquote() << "Entered:    " << *controller;
+}
+
+void WidgetRoute::leaving()
+{
+	__METHOD__;
 }
 
 /**

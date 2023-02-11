@@ -65,6 +65,10 @@ SectionController::SectionController(
 		this, &SectionController::entered,
 		Qt::DirectConnection);
 	connect(
+		&statechart, &SectionStatechart::leaving,
+		this, &SectionController::leaving,
+		Qt::DirectConnection);
+	connect(
 		&statechart, &SectionStatechart::left,
 		this, &SectionController::left,
 		Qt::DirectConnection);

@@ -450,7 +450,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	}
 
 	@Test
-	operation leave()
+	operation leaveSection()
 	{
 		// Given
 		nextReached()
@@ -466,6 +466,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert called inc 1 times
 		assert called dec 0 times
 		assert called off
+		assert leave
 		assert leaving
 	}
 
@@ -504,6 +505,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		assert called dec 0 times
 		assert called off
 		assert called leftBefore
+		assert leave
 		assert leaving
 	}
 
@@ -526,7 +528,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	operation autoUnlock()
 	{
 		// Given
-		leave()
+		leaveSection()
 		auto_unlock = true
 
 		// When
@@ -543,7 +545,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	operation passedState()
 	{
 		// Given
-		leave()
+		leaveSection()
 		auto_unlock = false
 
 		// When
@@ -682,7 +684,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		exit
 		assert !is_active
 
-		leave()
+		leaveSection()
 		exit
 		assert !is_active
 
