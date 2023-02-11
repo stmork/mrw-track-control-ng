@@ -42,6 +42,7 @@ void TestRouting::init()
 	{
 		part->reserve(false);
 		part->section()->setState(SectionState::FREE);
+		part->section()->setOccupation(false);
 	}
 }
 
@@ -183,13 +184,13 @@ void TestRouting::testFlank()
 
 	QVERIFY(verify(route));
 
-	(route.append(parts[14]));
-	(route.append(parts[19]));
+	QVERIFY(route.append(parts[14]));
+	QVERIFY(route.append(parts[19]));
 	QVERIFY(verify(route));
 
 	const std::vector<mrw::model::RegularSwitch *> & flanks = route.doFlank();
 
-	QCOMPARE(flanks.size(), 1u);
+	QCOMPARE(flanks.size(), 4u);
 }
 
 bool TestRouting::verify(const Route & route) const
