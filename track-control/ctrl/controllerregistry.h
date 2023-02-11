@@ -73,7 +73,7 @@ namespace mrw::ctrl
 		void failed();
 
 		// Implementation of mrw::ctrl::Batch
-		void completed() const override;
+		void completed() override;
 	};
 }
 

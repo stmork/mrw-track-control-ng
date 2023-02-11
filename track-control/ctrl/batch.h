@@ -33,7 +33,7 @@ namespace mrw::ctrl
 		bool isCompleted();
 		void dump();
 
-		virtual void completed() const = 0;
+		virtual void completed() = 0;
 	};
 }
 

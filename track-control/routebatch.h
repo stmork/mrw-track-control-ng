@@ -17,8 +17,15 @@ class RouteBatch : public QObject, public mrw::ctrl::Batch
 {
 	Q_OBJECT
 
+	size_t count = 0;
+	const size_t limit = 1;
+	bool auto_unblock = false;
+
 public:
-	explicit RouteBatch(QObject * parent = nullptr);
+	explicit RouteBatch(
+		const bool  has_signal,
+		const bool  is_auto_unblock,
+		QObject  *  parent = nullptr);
 
 	virtual ~RouteBatch();
 
@@ -28,7 +35,11 @@ public:
 	}
 
 signals:
-	void completed() const override;
+	void unlock();
+	void tryUnblock();
+
+private:
+	void completed() override;
 };
 
 #endif

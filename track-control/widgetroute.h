@@ -8,7 +8,6 @@
 #ifndef WIDGETROUTE_H
 #define WIDGETROUTE_H
 
-#include <unordered_set>
 #include <vector>
 
 #include <QObject>
@@ -39,8 +38,6 @@ private:
 	std::vector<mrw::ctrl::SignalControllerProxy *> controllers_unlocked;
 	std::vector<mrw::ctrl::SignalControllerProxy *> controllers_locked;
 
-	std::unordered_set<RouteBatch *, RouteBatch> disable_batches;
-
 public:
 	static const int        USER_ROLE = Qt::UserRole + 1;
 
@@ -62,7 +59,7 @@ signals:
 	void finished();
 
 	// Implementation of mrw::ctrl::Batch
-	void completed() const override;
+	void completed() override;
 
 public slots:
 	void entered();

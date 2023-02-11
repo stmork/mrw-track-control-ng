@@ -281,8 +281,24 @@ void WidgetRoute::leaving()
 {
 	__METHOD__;
 
-	SectionController   *   section_ctrl = dynamic_cast<SectionController *>(QObject::sender());
-	SignalControllerProxy * signal_ctrl  = getSignalController(section_ctrl->section());
+	SectionController   *   section_ctrl  = dynamic_cast<SectionController *>(QObject::sender());
+	SignalControllerProxy * signal_ctrl   = getSignalController(section_ctrl->section());
+	RouteBatch       *      disable_batch = new RouteBatch(signal_ctrl != nullptr, auto_unblock, this);
+
+	section_ctrl->setBatch(disable_batch);
+	if (signal_ctrl != nullptr)
+	{
+		signal_ctrl->setBatch(disable_batch);
+	}
+
+	connect (
+		disable_batch, &RouteBatch::unlock,
+		section_ctrl,  &SectionController::unlock,
+		Qt::QueuedConnection);
+	connect (
+		disable_batch, &RouteBatch::tryUnblock,
+		section_ctrl,  &SectionController::tryUnblock,
+		Qt::QueuedConnection);
 }
 
 /**
@@ -297,50 +313,8 @@ void WidgetRoute::left()
 
 	if (signal_ctrl != nullptr)
 	{
-		RouteBatch * disable_batch = new RouteBatch(this);
-
-		if (auto_unblock)
-		{
-			connect (
-				disable_batch, &RouteBatch::completed,
-				section_ctrl,  &SectionController::unlock,
-				Qt::QueuedConnection);
-		}
-#ifdef USE_TRY_UNBLOCK
-		else
-		{
-			connect (
-				disable_batch, &RouteBatch::completed,
-				section_ctrl,  &SectionController::tryUnblock,
-				Qt::QueuedConnection);
-		}
-#endif
-
-		connect (
-			disable_batch, &RouteBatch::completed,
-			disable_batch, &RouteBatch::deleteLater,
-			Qt::QueuedConnection);
-
-		signal_ctrl->setBatch(disable_batch);
 		signal_ctrl->disable();
 		qDebug().noquote() << "Left sig.:  " << *signal_ctrl;
-	}
-	else
-	{
-		if (auto_unblock)
-		{
-			QMetaObject::invokeMethod(
-				section_ctrl, &SectionController::unlock,
-				Qt::QueuedConnection);
-		}
-#ifdef USE_TRY_UNBLOCK
-		else
-		{
-			QMetaObject::invokeMethod(
-				section_ctrl, &SectionController::tryUnblock,
-				Qt::QueuedConnection);
-		}
-#endif
 	}
 	qDebug().noquote() << "Left sec.:  " << *section_ctrl;
 }
