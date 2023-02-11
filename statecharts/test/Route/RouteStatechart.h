@@ -143,29 +143,29 @@ namespace mrw
 
 				virtual bool isTour() = 0;
 
+				virtual bool isCompleted() = 0;
+
 				virtual void resetTransaction() = 0;
 
 				virtual void fail() = 0;
 
 				virtual void tryComplete() = 0;
 
-				virtual bool isCompleted() = 0;
-
 				virtual void turnSwitches() = 0;
 
 				virtual void turnFlanks() = 0;
 
-				virtual void turnSignals() = 0;
+				virtual void enableSignals() = 0;
 
 				virtual void extendSignals() = 0;
 
-				virtual void activateSections() = 0;
+				virtual void enableSections() = 0;
 
-				virtual void deactivateSections() = 0;
+				virtual void disableSections() = 0;
 
-				virtual void unlockSignals() = 0;
+				virtual void disableSignals() = 0;
 
-				virtual void unlockSwitches() = 0;
+				virtual void unlockRailParts() = 0;
 
 				virtual void unlockSections() = 0;
 

@@ -70,7 +70,7 @@ bool Route::append(RailPart * target)
 
 	last_valid_part    = track.back();
 
-	Region *   search_region = findSearchRegion(target);
+	Region  *  search_region = findSearchRegion(target);
 	const bool success       = append(last_valid_part, target, search_region);
 
 	prepare();

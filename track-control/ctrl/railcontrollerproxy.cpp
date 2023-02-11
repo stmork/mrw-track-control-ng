@@ -54,7 +54,7 @@ SectionState RailControllerProxy::state() const
 {
 	if (rail->reserved())
 	{
-		return rail->section()->occupation() ? SectionState::OCCUPIED : section()->state();
+		return section()->occupation() ? SectionState::OCCUPIED : section()->state();
 	}
 	else
 	{
@@ -64,7 +64,7 @@ SectionState RailControllerProxy::state() const
 		}
 		else
 		{
-			return rail->section()->occupation() ? SectionState::OCCUPIED : section()->state();
+			return section()->occupation() ? SectionState::OCCUPIED : section()->state();
 		}
 	}
 }

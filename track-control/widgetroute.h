@@ -101,21 +101,21 @@ private:
 	virtual void prepareRoute() override;
 	virtual void prepareFlank() override;
 
+	virtual bool isTour() override;
+	virtual bool isCompleted() override;
 	virtual void resetTransaction() override;
 	virtual void fail() override;
 	virtual void tryComplete() override;
-	virtual bool isCompleted() override;
-	virtual bool isTour() override;
 
 	virtual void turnSwitches() override;
 	virtual void turnFlanks() override;
-	virtual void turnSignals() override;
+	virtual void enableSignals() override;
 	virtual void extendSignals() override;
-	virtual void activateSections() override;
+	virtual void enableSections() override;
 
-	virtual void unlockSignals() override;
-	virtual void unlockSwitches() override;
-	virtual void deactivateSections() override;
+	virtual void disableSections() override;
+	virtual void disableSignals() override;
+	virtual void unlockRailParts() override;
 	virtual void unlockSections() override;
 };
 

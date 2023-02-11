@@ -322,9 +322,8 @@ namespace mrw
 			/* Entry action for state 'Disable'. */
 			timerService->setTimer(this, 0, RouteStatechart::emergency, false);
 			ifaceOperationCallback->resetTransaction();
-			ifaceOperationCallback->unlockSignals();
-			ifaceOperationCallback->unlockSwitches();
-			ifaceOperationCallback->deactivateSections();
+			ifaceOperationCallback->disableSections();
+			ifaceOperationCallback->disableSignals();
 			ifaceOperationCallback->tryComplete();
 		}
 
@@ -355,7 +354,7 @@ namespace mrw
 			/* Entry action for state 'Signal Turning'. */
 			timerService->setTimer(this, 2, RouteStatechart::signal_timeout, false);
 			ifaceOperationCallback->resetTransaction();
-			ifaceOperationCallback->turnSignals();
+			ifaceOperationCallback->enableSignals();
 			ifaceOperationCallback->tryComplete();
 		}
 
@@ -365,7 +364,7 @@ namespace mrw
 			/* Entry action for state 'Section Activation'. */
 			timerService->setTimer(this, 3, RouteStatechart::section_timeout, false);
 			ifaceOperationCallback->resetTransaction();
-			ifaceOperationCallback->activateSections();
+			ifaceOperationCallback->enableSections();
 			ifaceOperationCallback->tryComplete();
 		}
 
@@ -403,8 +402,8 @@ namespace mrw
 			/* Entry action for state 'Emergency Shutdown'. */
 			timerService->setTimer(this, 7, RouteStatechart::section_timeout, false);
 			ifaceOperationCallback->fail();
-			ifaceOperationCallback->deactivateSections();
-			ifaceOperationCallback->unlockSignals();
+			ifaceOperationCallback->disableSections();
+			ifaceOperationCallback->disableSignals();
 			ifaceOperationCallback->unlockSections();
 		}
 

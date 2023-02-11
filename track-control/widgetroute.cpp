@@ -159,7 +159,7 @@ void WidgetRoute::prepareTrack()
 			connect(
 				rs, &RegularSwitchControllerProxy::stop,
 				&statechart, &RouteStatechart::failed,
-				Qt::DirectConnection);
+				Qt::UniqueConnection);
 #ifdef USE_OWN_BATCH
 			rs->setBatch(this);
 #endif
@@ -170,7 +170,7 @@ void WidgetRoute::prepareTrack()
 			connect(
 				dcs, &DoubleCrossSwitchControllerProxy::stop,
 				&statechart, &RouteStatechart::failed,
-				Qt::DirectConnection);
+				Qt::UniqueConnection);
 #ifdef USE_OWN_BATCH
 			dcs->setBatch(this);
 #endif
@@ -673,75 +673,7 @@ void WidgetRoute::turnFlanks()
 	}
 }
 
-void WidgetRoute::unlockSwitches()
-{
-	__METHOD__;
-
-	for (RailPart * part : track)
-	{
-		Device     *     device     = dynamic_cast<Device *>(part);
-		BaseController * controller =
-			ControllerRegistry::instance().find<BaseController>(device);
-
-		part->reserve(false);
-		BaseController::callback<RegularSwitchControllerProxy>(
-			controller,     &RegularSwitchControllerProxy::unlock);
-		BaseController::callback<DoubleCrossSwitchControllerProxy>(
-			controller, &DoubleCrossSwitchControllerProxy::unlock);
-	}
-}
-
-void WidgetRoute::activateSections()
-{
-	__METHOD__;
-
-	for (
-		auto it = sections.rbegin();
-		it != sections.rend();
-		++it)
-	{
-		SectionController * controller =
-			ControllerRegistry::instance().find<SectionController>(*it);
-
-		if (it == sections.rbegin())
-		{
-			controller->enable(last_section == nullptr);
-		}
-		else
-		{
-			controller->enable(true);
-		}
-	}
-}
-
-void WidgetRoute::deactivateSections()
-{
-	__METHOD__;
-
-	std::vector<SectionController *> controllers;
-
-	collectSectionControllers(controllers);
-	for (SectionController * controller : controllers)
-	{
-		controller->disable();
-	}
-}
-
-void WidgetRoute::unlockSections()
-{
-	__METHOD__;
-
-	std::vector<SectionController *> controllers;
-
-	collectSectionControllers(controllers);
-	for (SectionController * controller : controllers)
-	{
-		controller->unlock();
-	}
-	statechart.completed();
-}
-
-void WidgetRoute::turnSignals()
+void WidgetRoute::enableSignals()
 {
 	__METHOD__;
 
@@ -770,7 +702,43 @@ void WidgetRoute::extendSignals()
 	}
 }
 
-void WidgetRoute::unlockSignals()
+void WidgetRoute::enableSections()
+{
+	__METHOD__;
+
+	for (
+		auto it = sections.rbegin();
+		it != sections.rend();
+		++it)
+	{
+		SectionController * controller =
+			ControllerRegistry::instance().find<SectionController>(*it);
+
+		if (it == sections.rbegin())
+		{
+			controller->enable(last_section == nullptr);
+		}
+		else
+		{
+			controller->enable(true);
+		}
+	}
+}
+
+void WidgetRoute::disableSections()
+{
+	__METHOD__;
+
+	std::vector<SectionController *> controllers;
+
+	collectSectionControllers(controllers);
+	for (SectionController * controller : controllers)
+	{
+		controller->disable();
+	}
+}
+
+void WidgetRoute::disableSignals()
 {
 	__METHOD__;
 
@@ -781,4 +749,37 @@ void WidgetRoute::unlockSignals()
 	{
 		controller->disable();
 	}
+}
+
+void WidgetRoute::unlockRailParts()
+{
+	__METHOD__;
+
+	for (RailPart * part : track)
+	{
+		Device     *     device     = dynamic_cast<Device *>(part);
+		BaseController * controller =
+			ControllerRegistry::instance().find<BaseController>(device);
+
+		part->reserve(false);
+		BaseController::callback<RegularSwitchControllerProxy>(
+			controller,     &RegularSwitchControllerProxy::unlock);
+		BaseController::callback<DoubleCrossSwitchControllerProxy>(
+			controller, &DoubleCrossSwitchControllerProxy::unlock);
+	}
+}
+
+void WidgetRoute::unlockSections()
+{
+	__METHOD__;
+
+	std::vector<SectionController *> controllers;
+
+	collectSectionControllers(controllers);
+	for (SectionController * controller : controllers)
+	{
+		// Unlock will cause unregister which also unlock rail parts
+		controller->unlock();
+	}
+	statechart.completed();
 }

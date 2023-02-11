@@ -88,18 +88,18 @@ namespace mrw
 		};
 		static ResetTransactionMock * resetTransactionMock;
 
-		class DeactivateSectionsMock
+		class DisableSectionsMock
 		{
-			typedef void (DeactivateSectionsMock::*functiontype)();
+			typedef void (DisableSectionsMock::*functiontype)();
 		public:
-			void (DeactivateSectionsMock::*deactivateSectionsBehaviorDefault)();
+			void (DisableSectionsMock::*disableSectionsBehaviorDefault)();
 			int callCount;
 
-			void deactivateSections1()
+			void disableSections1()
 			{
 			}
 
-			void deactivateSectionsDefault()
+			void disableSectionsDefault()
 			{
 			}
 
@@ -113,24 +113,24 @@ namespace mrw
 				return (callCount > 0);
 			}
 
-			void deactivateSections()
+			void disableSections()
 			{
 				++callCount;
 			}
 
 			functiontype getBehavior()
 			{
-				return deactivateSectionsBehaviorDefault;
+				return disableSectionsBehaviorDefault;
 			}
 
-			void setDefaultBehavior(void (DeactivateSectionsMock::*defaultBehavior)())
+			void setDefaultBehavior(void (DisableSectionsMock::*defaultBehavior)())
 			{
-				deactivateSectionsBehaviorDefault = defaultBehavior;
+				disableSectionsBehaviorDefault = defaultBehavior;
 			}
 
 			void initializeBehavior()
 			{
-				setDefaultBehavior(&DeactivateSectionsMock::deactivateSectionsDefault);
+				setDefaultBehavior(&DisableSectionsMock::disableSectionsDefault);
 			}
 
 			void reset()
@@ -139,20 +139,20 @@ namespace mrw
 				callCount = 0;
 			}
 		};
-		static DeactivateSectionsMock * deactivateSectionsMock;
+		static DisableSectionsMock * disableSectionsMock;
 
-		class UnlockSignalsMock
+		class DisableSignalsMock
 		{
-			typedef void (UnlockSignalsMock::*functiontype)();
+			typedef void (DisableSignalsMock::*functiontype)();
 		public:
-			void (UnlockSignalsMock::*unlockSignalsBehaviorDefault)();
+			void (DisableSignalsMock::*disableSignalsBehaviorDefault)();
 			int callCount;
 
-			void unlockSignals1()
+			void disableSignals1()
 			{
 			}
 
-			void unlockSignalsDefault()
+			void disableSignalsDefault()
 			{
 			}
 
@@ -166,24 +166,24 @@ namespace mrw
 				return (callCount > 0);
 			}
 
-			void unlockSignals()
+			void disableSignals()
 			{
 				++callCount;
 			}
 
 			functiontype getBehavior()
 			{
-				return unlockSignalsBehaviorDefault;
+				return disableSignalsBehaviorDefault;
 			}
 
-			void setDefaultBehavior(void (UnlockSignalsMock::*defaultBehavior)())
+			void setDefaultBehavior(void (DisableSignalsMock::*defaultBehavior)())
 			{
-				unlockSignalsBehaviorDefault = defaultBehavior;
+				disableSignalsBehaviorDefault = defaultBehavior;
 			}
 
 			void initializeBehavior()
 			{
-				setDefaultBehavior(&UnlockSignalsMock::unlockSignalsDefault);
+				setDefaultBehavior(&DisableSignalsMock::disableSignalsDefault);
 			}
 
 			void reset()
@@ -192,60 +192,7 @@ namespace mrw
 				callCount = 0;
 			}
 		};
-		static UnlockSignalsMock * unlockSignalsMock;
-
-		class UnlockSwitchesMock
-		{
-			typedef void (UnlockSwitchesMock::*functiontype)();
-		public:
-			void (UnlockSwitchesMock::*unlockSwitchesBehaviorDefault)();
-			int callCount;
-
-			void unlockSwitches1()
-			{
-			}
-
-			void unlockSwitchesDefault()
-			{
-			}
-
-			bool calledAtLeast(const int times)
-			{
-				return (callCount >= times);
-			}
-
-			bool calledAtLeastOnce()
-			{
-				return (callCount > 0);
-			}
-
-			void unlockSwitches()
-			{
-				++callCount;
-			}
-
-			functiontype getBehavior()
-			{
-				return unlockSwitchesBehaviorDefault;
-			}
-
-			void setDefaultBehavior(void (UnlockSwitchesMock::*defaultBehavior)())
-			{
-				unlockSwitchesBehaviorDefault = defaultBehavior;
-			}
-
-			void initializeBehavior()
-			{
-				setDefaultBehavior(&UnlockSwitchesMock::unlockSwitchesDefault);
-			}
-
-			void reset()
-			{
-				initializeBehavior();
-				callCount = 0;
-			}
-		};
-		static UnlockSwitchesMock * unlockSwitchesMock;
+		static DisableSignalsMock * disableSignalsMock;
 
 		class TryCompleteMock
 		{
@@ -592,18 +539,18 @@ namespace mrw
 		};
 		static TurnFlanksMock * turnFlanksMock;
 
-		class TurnSignalsMock
+		class EnableSignalsMock
 		{
-			typedef void (TurnSignalsMock::*functiontype)();
+			typedef void (EnableSignalsMock::*functiontype)();
 		public:
-			void (TurnSignalsMock::*turnSignalsBehaviorDefault)();
+			void (EnableSignalsMock::*enableSignalsBehaviorDefault)();
 			int callCount;
 
-			void turnSignals1()
+			void enableSignals1()
 			{
 			}
 
-			void turnSignalsDefault()
+			void enableSignalsDefault()
 			{
 			}
 
@@ -617,24 +564,24 @@ namespace mrw
 				return (callCount > 0);
 			}
 
-			void turnSignals()
+			void enableSignals()
 			{
 				++callCount;
 			}
 
 			functiontype getBehavior()
 			{
-				return turnSignalsBehaviorDefault;
+				return enableSignalsBehaviorDefault;
 			}
 
-			void setDefaultBehavior(void (TurnSignalsMock::*defaultBehavior)())
+			void setDefaultBehavior(void (EnableSignalsMock::*defaultBehavior)())
 			{
-				turnSignalsBehaviorDefault = defaultBehavior;
+				enableSignalsBehaviorDefault = defaultBehavior;
 			}
 
 			void initializeBehavior()
 			{
-				setDefaultBehavior(&TurnSignalsMock::turnSignalsDefault);
+				setDefaultBehavior(&EnableSignalsMock::enableSignalsDefault);
 			}
 
 			void reset()
@@ -643,7 +590,7 @@ namespace mrw
 				callCount = 0;
 			}
 		};
-		static TurnSignalsMock * turnSignalsMock;
+		static EnableSignalsMock * enableSignalsMock;
 
 		class ExtendSignalsMock
 		{
@@ -698,18 +645,18 @@ namespace mrw
 		};
 		static ExtendSignalsMock * extendSignalsMock;
 
-		class ActivateSectionsMock
+		class EnableSectionsMock
 		{
-			typedef void (ActivateSectionsMock::*functiontype)();
+			typedef void (EnableSectionsMock::*functiontype)();
 		public:
-			void (ActivateSectionsMock::*activateSectionsBehaviorDefault)();
+			void (EnableSectionsMock::*enableSectionsBehaviorDefault)();
 			int callCount;
 
-			void activateSections1()
+			void enableSections1()
 			{
 			}
 
-			void activateSectionsDefault()
+			void enableSectionsDefault()
 			{
 			}
 
@@ -723,24 +670,24 @@ namespace mrw
 				return (callCount > 0);
 			}
 
-			void activateSections()
+			void enableSections()
 			{
 				++callCount;
 			}
 
 			functiontype getBehavior()
 			{
-				return activateSectionsBehaviorDefault;
+				return enableSectionsBehaviorDefault;
 			}
 
-			void setDefaultBehavior(void (ActivateSectionsMock::*defaultBehavior)())
+			void setDefaultBehavior(void (EnableSectionsMock::*defaultBehavior)())
 			{
-				activateSectionsBehaviorDefault = defaultBehavior;
+				enableSectionsBehaviorDefault = defaultBehavior;
 			}
 
 			void initializeBehavior()
 			{
-				setDefaultBehavior(&ActivateSectionsMock::activateSectionsDefault);
+				setDefaultBehavior(&EnableSectionsMock::enableSectionsDefault);
 			}
 
 			void reset()
@@ -749,7 +696,43 @@ namespace mrw
 				callCount = 0;
 			}
 		};
-		static ActivateSectionsMock * activateSectionsMock;
+		static EnableSectionsMock * enableSectionsMock;
+
+		class UnlockRailPartsMock
+		{
+			typedef void (UnlockRailPartsMock::*functiontype)();
+		public:
+			void (UnlockRailPartsMock::*unlockRailPartsBehaviorDefault)();
+
+			void unlockRailParts1()
+			{
+			}
+
+			void unlockRailPartsDefault()
+			{
+			}
+
+			functiontype getBehavior()
+			{
+				return unlockRailPartsBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (UnlockRailPartsMock::*defaultBehavior)())
+			{
+				unlockRailPartsBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&UnlockRailPartsMock::unlockRailPartsDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		static UnlockRailPartsMock * unlockRailPartsMock;
 
 		class UnlockSectionsMock
 		{
@@ -865,6 +848,10 @@ namespace mrw
 			{
 				return (isTourMock->*(isTourMock->getBehavior()))();
 			}
+			bool isCompleted()
+			{
+				return (isCompletedMock->*(isCompletedMock->getBehavior()))();
+			}
 			void resetTransaction()
 			{
 				resetTransactionMock->resetTransaction();
@@ -879,10 +866,6 @@ namespace mrw
 				tryCompleteMock->tryComplete();
 				return (tryCompleteMock->*(tryCompleteMock->getBehavior()))();
 			}
-			bool isCompleted()
-			{
-				return (isCompletedMock->*(isCompletedMock->getBehavior()))();
-			}
 			void turnSwitches()
 			{
 				turnSwitchesMock->turnSwitches();
@@ -893,35 +876,34 @@ namespace mrw
 				turnFlanksMock->turnFlanks();
 				return (turnFlanksMock->*(turnFlanksMock->getBehavior()))();
 			}
-			void turnSignals()
+			void enableSignals()
 			{
-				turnSignalsMock->turnSignals();
-				return (turnSignalsMock->*(turnSignalsMock->getBehavior()))();
+				enableSignalsMock->enableSignals();
+				return (enableSignalsMock->*(enableSignalsMock->getBehavior()))();
 			}
 			void extendSignals()
 			{
 				extendSignalsMock->extendSignals();
 				return (extendSignalsMock->*(extendSignalsMock->getBehavior()))();
 			}
-			void activateSections()
+			void enableSections()
 			{
-				activateSectionsMock->activateSections();
-				return (activateSectionsMock->*(activateSectionsMock->getBehavior()))();
+				enableSectionsMock->enableSections();
+				return (enableSectionsMock->*(enableSectionsMock->getBehavior()))();
 			}
-			void deactivateSections()
+			void disableSections()
 			{
-				deactivateSectionsMock->deactivateSections();
-				return (deactivateSectionsMock->*(deactivateSectionsMock->getBehavior()))();
+				disableSectionsMock->disableSections();
+				return (disableSectionsMock->*(disableSectionsMock->getBehavior()))();
 			}
-			void unlockSignals()
+			void disableSignals()
 			{
-				unlockSignalsMock->unlockSignals();
-				return (unlockSignalsMock->*(unlockSignalsMock->getBehavior()))();
+				disableSignalsMock->disableSignals();
+				return (disableSignalsMock->*(disableSignalsMock->getBehavior()))();
 			}
-			void unlockSwitches()
+			void unlockRailParts()
 			{
-				unlockSwitchesMock->unlockSwitches();
-				return (unlockSwitchesMock->*(unlockSwitchesMock->getBehavior()))();
+				return (unlockRailPartsMock->*(unlockRailPartsMock->getBehavior()))();
 			}
 			void unlockSections()
 			{
@@ -959,11 +941,9 @@ namespace mrw
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
-			EXPECT_TRUE(deactivateSectionsMock->calledAtLeastOnce());
+			EXPECT_TRUE(disableSectionsMock->calledAtLeastOnce());
 
-			EXPECT_TRUE(unlockSignalsMock->calledAtLeastOnce());
-
-			EXPECT_TRUE(unlockSwitchesMock->calledAtLeastOnce());
+			EXPECT_TRUE(disableSignalsMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
 
@@ -1005,12 +985,12 @@ namespace mrw
 			isTourMock->reset();
 			turnSwitchesMock->reset();
 			turnFlanksMock->reset();
-			turnSignalsMock->reset();
+			enableSignalsMock->reset();
 			extendSignalsMock->reset();
-			activateSectionsMock->reset();
-			unlockSignalsMock->reset();
-			unlockSwitchesMock->reset();
-			deactivateSectionsMock->reset();
+			enableSectionsMock->reset();
+			disableSignalsMock->reset();
+			unlockRailPartsMock->reset();
+			disableSectionsMock->reset();
 			unlockSectionsMock->reset();
 		}
 		TEST_F(RouteTest, start)
@@ -1031,18 +1011,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1110,18 +1090,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1159,18 +1139,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1266,18 +1246,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1289,8 +1269,8 @@ namespace mrw
 		{
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -1329,18 +1309,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1356,13 +1336,13 @@ namespace mrw
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
-			EXPECT_TRUE(turnSignalsMock->calledAtLeastOnce());
+			EXPECT_TRUE(enableSignalsMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
 
 
 			resetTransactionMock->reset();
-			turnSignalsMock->reset();
+			enableSignalsMock->reset();
 			tryCompleteMock->reset();
 		}
 		void turningSignals()
@@ -1379,14 +1359,14 @@ namespace mrw
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
-			EXPECT_TRUE(turnSignalsMock->calledAtLeastOnce());
+			EXPECT_TRUE(enableSignalsMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
 
 
 			isTourMock->reset();
 			resetTransactionMock->reset();
-			turnSignalsMock->reset();
+			enableSignalsMock->reset();
 			tryCompleteMock->reset();
 		}
 		TEST_F(RouteTest, turningSignals)
@@ -1395,8 +1375,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -1427,18 +1407,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1479,8 +1459,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -1511,18 +1491,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1542,21 +1522,21 @@ namespace mrw
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
-			EXPECT_TRUE(activateSectionsMock->calledAtLeastOnce());
+			EXPECT_TRUE(enableSectionsMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
 
 
 			resetTransactionMock->reset();
-			activateSectionsMock->reset();
+			enableSectionsMock->reset();
 			tryCompleteMock->reset();
 		}
 		TEST_F(RouteTest, sections)
 		{
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -1569,8 +1549,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -1601,18 +1581,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1636,8 +1616,8 @@ namespace mrw
 		{
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -1650,8 +1630,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -1682,18 +1662,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1717,8 +1697,8 @@ namespace mrw
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -1731,8 +1711,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -1763,18 +1743,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1824,8 +1804,8 @@ namespace mrw
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -1838,8 +1818,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -1870,18 +1850,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1929,8 +1909,8 @@ namespace mrw
 		{
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -1943,8 +1923,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -1975,18 +1955,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2023,8 +2003,8 @@ namespace mrw
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -2037,8 +2017,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -2069,18 +2049,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2112,8 +2092,8 @@ namespace mrw
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -2126,8 +2106,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -2158,18 +2138,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2181,8 +2161,8 @@ namespace mrw
 		{
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -2195,8 +2175,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -2227,18 +2207,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2260,8 +2240,8 @@ namespace mrw
 		{
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -2274,8 +2254,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -2306,18 +2286,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2363,18 +2343,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2431,18 +2411,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2467,8 +2447,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -2499,18 +2479,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2541,8 +2521,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -2573,18 +2553,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2607,8 +2587,8 @@ namespace mrw
 			isCompletedMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -2621,8 +2601,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -2653,18 +2633,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2726,18 +2706,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2766,8 +2746,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -2798,18 +2778,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2831,8 +2811,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -2863,18 +2843,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2910,8 +2890,8 @@ namespace mrw
 			isCompletedMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -2924,8 +2904,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -2956,18 +2936,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3007,18 +2987,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3040,8 +3020,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -3072,18 +3052,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3103,8 +3083,8 @@ namespace mrw
 			isCompletedMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -3117,8 +3097,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -3149,18 +3129,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3206,18 +3186,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3239,8 +3219,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -3271,18 +3251,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3302,8 +3282,8 @@ namespace mrw
 			isCompletedMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -3316,8 +3296,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -3348,18 +3328,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3375,10 +3355,10 @@ namespace mrw
 		}
 		TEST_F(RouteTest, timeoutTurningSwitches)
 		{
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
@@ -3407,18 +3387,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3430,24 +3410,24 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Emergency_Shutdown));
 
-			EXPECT_TRUE(deactivateSectionsMock->calledAtLeastOnce());
+			EXPECT_TRUE(disableSectionsMock->calledAtLeastOnce());
 
-			EXPECT_TRUE(unlockSignalsMock->calledAtLeastOnce());
+			EXPECT_TRUE(disableSignalsMock->calledAtLeastOnce());
 
 			runner->proceed_time(statechart->getEmergency());
 
 			disabled();
 
 
-			deactivateSectionsMock->reset();
-			unlockSignalsMock->reset();
+			disableSectionsMock->reset();
+			disableSignalsMock->reset();
 		}
 		TEST_F(RouteTest, timeoutTurningFlanks)
 		{
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -3484,18 +3464,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3507,30 +3487,30 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Emergency_Shutdown));
 
-			EXPECT_TRUE(deactivateSectionsMock->calledAtLeastOnce());
+			EXPECT_TRUE(disableSectionsMock->calledAtLeastOnce());
 
-			EXPECT_TRUE(unlockSignalsMock->calledAtLeastOnce());
+			EXPECT_TRUE(disableSignalsMock->calledAtLeastOnce());
 
 			runner->proceed_time(statechart->getEmergency());
 
 			disabled();
 
 
-			deactivateSectionsMock->reset();
-			unlockSignalsMock->reset();
+			disableSectionsMock->reset();
+			disableSignalsMock->reset();
 		}
 		TEST_F(RouteTest, timeoutTurningSignals)
 		{
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -3561,18 +3541,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3584,24 +3564,24 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Emergency_Shutdown));
 
-			EXPECT_TRUE(deactivateSectionsMock->calledAtLeastOnce());
+			EXPECT_TRUE(disableSectionsMock->calledAtLeastOnce());
 
-			EXPECT_TRUE(unlockSignalsMock->calledAtLeastOnce());
+			EXPECT_TRUE(disableSignalsMock->calledAtLeastOnce());
 
 			runner->proceed_time(statechart->getEmergency());
 
 			disabled();
 
 
-			deactivateSectionsMock->reset();
-			unlockSignalsMock->reset();
+			disableSectionsMock->reset();
+			disableSignalsMock->reset();
 		}
 		TEST_F(RouteTest, timeoutExtendingSignals)
 		{
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
@@ -3612,8 +3592,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -3644,18 +3624,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3667,17 +3647,17 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Emergency_Shutdown));
 
-			EXPECT_TRUE(deactivateSectionsMock->calledAtLeastOnce());
+			EXPECT_TRUE(disableSectionsMock->calledAtLeastOnce());
 
-			EXPECT_TRUE(unlockSignalsMock->calledAtLeastOnce());
+			EXPECT_TRUE(disableSignalsMock->calledAtLeastOnce());
 
 			runner->proceed_time(statechart->getEmergency());
 
 			disabled();
 
 
-			deactivateSectionsMock->reset();
-			unlockSignalsMock->reset();
+			disableSectionsMock->reset();
+			disableSignalsMock->reset();
 		}
 		void emergencySections()
 		{
@@ -3687,24 +3667,24 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Emergency_Shutdown));
 
-			EXPECT_TRUE(deactivateSectionsMock->calledAtLeastOnce());
+			EXPECT_TRUE(disableSectionsMock->calledAtLeastOnce());
 
-			EXPECT_TRUE(unlockSignalsMock->calledAtLeastOnce());
+			EXPECT_TRUE(disableSignalsMock->calledAtLeastOnce());
 
 
-			deactivateSectionsMock->reset();
-			unlockSignalsMock->reset();
+			disableSectionsMock->reset();
+			disableSignalsMock->reset();
 		}
 		TEST_F(RouteTest, emergencySections)
 		{
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -3717,8 +3697,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -3749,18 +3729,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3770,14 +3750,14 @@ namespace mrw
 		}
 		TEST_F(RouteTest, timeoutTurningSections)
 		{
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -3790,8 +3770,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
 			tryCompleteMock->initializeBehavior();
 			isTourMock = new IsTourMock();
@@ -3822,18 +3802,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3865,18 +3845,18 @@ namespace mrw
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
-			turnSignalsMock = new TurnSignalsMock();
-			turnSignalsMock->initializeBehavior();
+			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock->initializeBehavior();
 			extendSignalsMock = new ExtendSignalsMock();
 			extendSignalsMock->initializeBehavior();
-			activateSectionsMock = new ActivateSectionsMock();
-			activateSectionsMock->initializeBehavior();
-			unlockSignalsMock = new UnlockSignalsMock();
-			unlockSignalsMock->initializeBehavior();
-			unlockSwitchesMock = new UnlockSwitchesMock();
-			unlockSwitchesMock->initializeBehavior();
-			deactivateSectionsMock = new DeactivateSectionsMock();
-			deactivateSectionsMock->initializeBehavior();
+			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock->initializeBehavior();
+			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
