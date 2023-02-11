@@ -961,7 +961,7 @@ void MainWindow::onOperate(const bool active)
 	Q_UNUSED(active);
 	__METHOD__;
 
-	RegionForm::setOpMode(ui->regionTabWidget, "O");
+	RegionForm::setOpMode(ui->regionTabWidget, active ? "O" : "");
 	enable();
 	on_clearAllSections_clicked();
 }
@@ -970,7 +970,7 @@ void MainWindow::onEdit(const bool active)
 {
 	__METHOD__;
 
-	RegionForm::setOpMode(ui->regionTabWidget, "E");
+	RegionForm::setOpMode(ui->regionTabWidget, active ? "E" : "");
 	BaseWidget::setVerbose(active);
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
@@ -981,7 +981,7 @@ void MainWindow::onQuit(const bool active)
 	Q_UNUSED(active);
 	__METHOD__;
 
-	RegionForm::setOpMode(ui->regionTabWidget, "Q", BaseWidget::WHITE, true);
+	RegionForm::setOpMode(ui->regionTabWidget, active ? "Q" : "", BaseWidget::WHITE, true);
 	BaseWidget::setVerbose(false);
 	enable();
 	ui->regionTabWidget->currentWidget()->update();

@@ -21,6 +21,9 @@ namespace mrw
 		void initial();
 		void failAfterStart();
 		void doOperating();
+		void initWhileOperatingWithRoutes();
+		void disableCompletedWithRoutes();
+		void disableCompletedWithoutRoutes();
 		void doEdit();
 		void doQuitWithRoute();
 		mrw::statechart::OperatingModeStatechart * statechart;
@@ -622,8 +625,54 @@ namespace mrw
 
 
 		}
-		TEST_F(OperatingModeTest, resetWhileOperating)
+		void initWhileOperatingWithRoutes()
 		{
+			doOperating();
+
+			hasActiveRoutesMock->setDefaultBehavior(&HasActiveRoutesMock::hasActiveRoutes2);
+
+			statechart->raiseInit();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running_operating_Disable));
+
+			EXPECT_TRUE(statechart->isRaisedOperating());
+
+			EXPECT_TRUE((statechart->getOperatingValue()) == (false));
+
+			EXPECT_TRUE(disableRoutesMock->calledAtLeastOnce());
+
+
+			hasActiveRoutesMock->reset();
+			disableRoutesMock->reset();
+		}
+		TEST_F(OperatingModeTest, initWhileOperatingWithRoutes)
+		{
+			hasActiveRoutesMock = new HasActiveRoutesMock();
+			hasActiveRoutesMock->initializeBehavior();
+			disableRoutesMock = new DisableRoutesMock();
+			disableRoutesMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			canConnectBusMock = new CanConnectBusMock();
+			hasActiveRoutesMock = new HasActiveRoutesMock();
+			hasActiveRoutesMock->initializeBehavior();
+			disableRoutesMock = new DisableRoutesMock();
+			disableRoutesMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			MockCan canMock;
+			statechart->setOperationCallback(&defaultMock);
+			statechart->can()->setOperationCallback(&canMock);
+			initWhileOperatingWithRoutes();
+		}
+		TEST_F(OperatingModeTest, initWhileOperatingWithoutRoutes)
+		{
+			hasActiveRoutesMock = new HasActiveRoutesMock();
+			hasActiveRoutesMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -642,6 +691,8 @@ namespace mrw
 			statechart->can()->setOperationCallback(&canMock);
 			doOperating();
 
+			hasActiveRoutesMock->setDefaultBehavior(&HasActiveRoutesMock::hasActiveRoutes1);
+
 			statechart->raiseInit();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running));
@@ -657,7 +708,93 @@ namespace mrw
 			EXPECT_TRUE(statechart->isRaisedStart());
 
 
+			hasActiveRoutesMock->reset();
 			resetTransactionMock->reset();
+		}
+		void disableCompletedWithRoutes()
+		{
+			initWhileOperatingWithRoutes();
+
+			hasActiveRoutesMock->setDefaultBehavior(&HasActiveRoutesMock::hasActiveRoutes2);
+
+			statechart->raiseCompleted();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running_operating_Disable));
+
+
+			hasActiveRoutesMock->reset();
+		}
+		TEST_F(OperatingModeTest, disableCompletedWithRoutes)
+		{
+			hasActiveRoutesMock = new HasActiveRoutesMock();
+			hasActiveRoutesMock->initializeBehavior();
+			hasActiveRoutesMock = new HasActiveRoutesMock();
+			hasActiveRoutesMock->initializeBehavior();
+			disableRoutesMock = new DisableRoutesMock();
+			disableRoutesMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			canConnectBusMock = new CanConnectBusMock();
+			hasActiveRoutesMock = new HasActiveRoutesMock();
+			hasActiveRoutesMock->initializeBehavior();
+			disableRoutesMock = new DisableRoutesMock();
+			disableRoutesMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			MockCan canMock;
+			statechart->setOperationCallback(&defaultMock);
+			statechart->can()->setOperationCallback(&canMock);
+			disableCompletedWithRoutes();
+		}
+		void disableCompletedWithoutRoutes()
+		{
+			initWhileOperatingWithRoutes();
+
+			hasActiveRoutesMock->setDefaultBehavior(&HasActiveRoutesMock::hasActiveRoutes1);
+
+			statechart->raiseCompleted();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running_operating_Init));
+
+			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(statechart->isRaisedStart());
+
+
+			hasActiveRoutesMock->reset();
+			resetTransactionMock->reset();
+		}
+		TEST_F(OperatingModeTest, disableCompletedWithoutRoutes)
+		{
+			hasActiveRoutesMock = new HasActiveRoutesMock();
+			hasActiveRoutesMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			hasActiveRoutesMock = new HasActiveRoutesMock();
+			hasActiveRoutesMock->initializeBehavior();
+			disableRoutesMock = new DisableRoutesMock();
+			disableRoutesMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+			canConnectBusMock = new CanConnectBusMock();
+			hasActiveRoutesMock = new HasActiveRoutesMock();
+			hasActiveRoutesMock->initializeBehavior();
+			disableRoutesMock = new DisableRoutesMock();
+			disableRoutesMock->initializeBehavior();
+			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			MockCan canMock;
+			statechart->setOperationCallback(&defaultMock);
+			statechart->can()->setOperationCallback(&canMock);
+			disableCompletedWithoutRoutes();
 		}
 		void doEdit()
 		{
@@ -956,6 +1093,24 @@ namespace mrw
 			EXPECT_TRUE(!statechart->isActive());
 
 			doEdit();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			initWhileOperatingWithRoutes();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			disableCompletedWithoutRoutes();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			disableCompletedWithRoutes();
 
 			statechart->exit();
 

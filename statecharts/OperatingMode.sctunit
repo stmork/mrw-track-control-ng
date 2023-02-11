@@ -162,10 +162,29 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 	}
 
 	@Test
-	operation resetWhileOperating()
+	operation initWhileOperatingWithRoutes()
 	{
 		// Given
 		doOperating()
+		mock hasActiveRoutes returns (true)
+
+		// When
+		raise init
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Disable)
+		assert operating
+		assert valueof(operating) == false
+		assert called disableRoutes
+	}
+
+	@Test
+	operation initWhileOperatingWithoutRoutes()
+	{
+		// Given
+		doOperating()
+		mock hasActiveRoutes returns (false)
 
 		// When
 		raise init
@@ -175,6 +194,38 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Init)
 		assert operating
 		assert valueof(operating) == false
+		assert called resetTransaction
+		assert start
+	}
+
+	@Test
+	operation disableCompletedWithRoutes()
+	{
+		// Given
+		initWhileOperatingWithRoutes()
+		mock hasActiveRoutes returns (true)
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Disable)
+	}
+
+	@Test
+	operation disableCompletedWithoutRoutes()
+	{
+		// Given
+		initWhileOperatingWithRoutes()
+		mock hasActiveRoutes returns (false)
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Init)
 		assert called resetTransaction
 		assert start
 	}
@@ -321,6 +372,18 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		assert !is_active
 
 		doEdit()
+		exit
+		assert !is_active
+
+		initWhileOperatingWithRoutes
+		exit
+		assert !is_active
+
+		disableCompletedWithoutRoutes
+		exit
+		assert !is_active
+
+		disableCompletedWithRoutes
 		exit
 		assert !is_active
 
