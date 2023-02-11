@@ -280,6 +280,9 @@ void WidgetRoute::entered()
 void WidgetRoute::leaving()
 {
 	__METHOD__;
+
+	SectionController   *   section_ctrl = dynamic_cast<SectionController *>(QObject::sender());
+	SignalControllerProxy * signal_ctrl  = getSignalController(section_ctrl->section());
 }
 
 /**
