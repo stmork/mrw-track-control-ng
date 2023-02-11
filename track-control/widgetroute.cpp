@@ -96,11 +96,11 @@ WidgetRoute::~WidgetRoute()
 **                                                                      **
 *************************************************************************/
 
-void WidgetRoute::prepare()
+void WidgetRoute::prepareRoute()
 {
-	std::vector<SectionController *> controllers;
+	__METHOD__;
 
-	Route::prepare();
+	std::vector<SectionController *> controllers;
 
 	collectSectionControllers(controllers);
 	for (SectionController * controller : controllers)
@@ -229,6 +229,13 @@ void WidgetRoute::prepareSignals()
 		section_ctrl->nextController(next_ctrl);
 		next_ctrl = section_ctrl;
 	}
+}
+
+void WidgetRoute::prepareFlank()
+{
+	__METHOD__;
+
+	Route::prepareFlank();
 }
 
 void WidgetRoute::rename()
@@ -516,20 +523,6 @@ void WidgetRoute::dump() const
 **       Implementation of RouteStatemachine::OperationCallback         **
 **                                                                      **
 *************************************************************************/
-
-void WidgetRoute::prepareRoute()
-{
-	__METHOD__;
-
-	prepare();
-}
-
-void WidgetRoute::prepareFlank()
-{
-	__METHOD__;
-
-	Route::prepareFlank();
-}
 
 void WidgetRoute::resetTransaction()
 {

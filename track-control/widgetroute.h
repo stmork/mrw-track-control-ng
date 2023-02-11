@@ -55,7 +55,6 @@ public:
 
 	// Implementation of mrw::model::Route
 	virtual void dump() const override;
-	virtual void prepare() override;
 
 signals:
 	void turn();
