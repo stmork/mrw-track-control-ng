@@ -159,7 +159,7 @@ bool Route::qualified(
 
 			const size_t count      = actual_switch->flank(flank_switches_cand);
 			const size_t any_locked = std::count_if(flank_switches_cand.begin(), flank_switches_cand.end(),
-						[this](RegularSwitch * flank_switch)
+					[this](RegularSwitch * flank_switch)
 			{
 				qDebug().noquote() << *flank_switch;
 				return flank_switch->lock() == LockState::UNLOCKED;
