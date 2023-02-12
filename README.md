@@ -47,6 +47,7 @@ To start the track control software refer to the [README](./track-control/README
 
 The software is organized in packages each using its own namespace. Every package result in a static library. There are the following packages:
 * mrw::util, libMRW-Util.a which contains convenience classes.
+* mrw::log, libMRW-Log.a which contains logging classes.
 * mrw::can, libMRW-Can.a which contains the CAN support.
 * mrw::model, libMRW-Model.a which contains the data model of model railways.
 * mrw::ctrl, libMRW-Ctrl.a which contains logic classes.
