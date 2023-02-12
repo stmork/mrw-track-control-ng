@@ -154,5 +154,5 @@ QString LightSignal::toString() const
 		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name(), -10).
 		arg(Device::get(lock()), -10).
-		arg(MrwMessage::get(signal_state), -10);
+		arg(MrwMessage::get(signal_aspect), -10);
 }

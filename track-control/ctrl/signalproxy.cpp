@@ -71,7 +71,7 @@ void SignalProxy::send()
 	{
 		MrwMessage  message(device->command(SETSGN));
 
-		message.append(signal->state());
+		message.append(signal->aspect());
 		ControllerRegistry::can()->write(message);
 	}
 }
@@ -154,7 +154,7 @@ void MainProxy::prepare()
 		state = curved_count < SLOW_CURVED_LIMIT ? SIGNAL_HP1 : SIGNAL_HP2;
 		break;
 	}
-	signal->setState(state);
+	signal->setAspect(state);
 }
 
 void MainProxy::setCurved(const size_t count)
@@ -187,7 +187,7 @@ void DistantProxy::prepare()
 	case Symbol::GO:
 		if (main_controller != nullptr)
 		{
-			const uint8_t main_state = main_controller->mainSignal()->state();
+			const uint8_t main_state = main_controller->mainSignal()->aspect();
 
 			state = static_cast<SignalAspect>(main_state + SIGNAL_MAIN_DISTANT_OFFSET);
 		}
@@ -205,7 +205,7 @@ void DistantProxy::prepare()
 		break;
 	}
 
-	signal->setState(state);
+	signal->setAspect(state);
 }
 
 Symbol mrw::ctrl::DistantProxy::getPreparedSymbol() const
@@ -266,5 +266,5 @@ void ShuntProxy::prepare()
 		state = SIGNAL_SH1;
 		break;
 	}
-	signal->setState(state);
+	signal->setAspect(state);
 }

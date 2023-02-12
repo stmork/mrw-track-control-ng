@@ -64,15 +64,15 @@ Signal::SignalType Signal::type() const
 	return signal_type;
 }
 
-SignalAspect Signal::state() const
+SignalAspect Signal::aspect() const
 {
-	return signal_state;
+	return signal_aspect;
 }
 
-void Signal::setState(const SignalAspect new_state)
+void Signal::setAspect(const SignalAspect new_aspect)
 {
 	// TODO: Respect locking!
-	signal_state = new_state;
+	signal_aspect = new_aspect;
 	qDebug().noquote() << toString();
 }
 

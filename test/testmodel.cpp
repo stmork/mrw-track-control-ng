@@ -752,9 +752,9 @@ void TestModel::testAssemblyPart(Section * section, AssemblyPart * part)
 		QVERIFY2(signal->controller() != nullptr, name.c_str());
 		QVERIFY2(signal->key().contains(signal->partName()), name.c_str());
 
-		QCOMPARE(signal->state(), SignalAspect::SIGNAL_OFF);
-		signal->setState(SignalAspect::SIGNAL_TST);
-		QCOMPARE(signal->state(), SignalAspect::SIGNAL_TST);
+		QCOMPARE(signal->aspect(), SignalAspect::SIGNAL_OFF);
+		signal->setAspect(SignalAspect::SIGNAL_TST);
+		QCOMPARE(signal->aspect(), SignalAspect::SIGNAL_TST);
 	}
 
 	if (rail != nullptr)

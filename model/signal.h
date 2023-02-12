@@ -116,7 +116,7 @@ namespace mrw::model
 		/** The signal type. */
 		const SignalType    signal_type;
 
-		mrw::can::SignalAspect signal_state = mrw::can::SIGNAL_OFF;
+		mrw::can::SignalAspect signal_aspect = mrw::can::SIGNAL_OFF;
 
 	public:
 		explicit Signal(
@@ -140,9 +140,22 @@ namespace mrw::model
 		 */
 		SignalType type() const;
 
-		mrw::can::SignalAspect state() const;
+		/**
+		 * This method returns the real life displayed signal aspect.
+		 *
+		 * @return The configured signal aspect.
+		 */
+		mrw::can::SignalAspect aspect() const;
 
-		void setState(const mrw::can::SignalAspect new_state);
+		/**
+		 * This method sets the real life signal aspect.
+		 *
+		 * @note Setting this aspect does not cause a change via sending a
+		 * CAN message.
+		 *
+		 * @param new_state The new real life signal aspect to be shown.
+		 */
+		void setAspect(const mrw::can::SignalAspect new_state);
 
 		QString key() const override;
 
@@ -200,4 +213,4 @@ namespace mrw::model
 	};
 }
 
-#endif // MRW_MODEL_SIGNAL_H
+#endif
