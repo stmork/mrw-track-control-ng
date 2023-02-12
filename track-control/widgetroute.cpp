@@ -655,7 +655,7 @@ void WidgetRoute::turnFlanks()
 		RegularSwitchControllerProxy * controller =
 			ControllerRegistry::instance().find<RegularSwitchControllerProxy>(flank_switch);
 
-		controller->setBatch(this);
+//		controller->setBatch(this);
 		controller->turn();
 	}
 }
