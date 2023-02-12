@@ -221,7 +221,7 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 	connect(
 		&statechart, &OperatingModeStatechart::failing,
 		this, &MainWindow::onFailed,
-		Qt::DirectConnection);
+		Qt::QueuedConnection);
 	connect(
 		&statechart, &OperatingModeStatechart::operating,
 		this, &MainWindow::onOperate,
