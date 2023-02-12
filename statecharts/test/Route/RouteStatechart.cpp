@@ -1118,6 +1118,7 @@ namespace mrw
 				if (completed_raised)
 				{
 					exseq_main_region_Turning_Turning_process_Flank_Turning();
+					ifaceOperationCallback->unlockFlanks();
 					enseq_main_region_Turning_Turning_process_Signal_Turning_default();
 					main_region_Turning_react(0);
 					transitioned_after = 0;

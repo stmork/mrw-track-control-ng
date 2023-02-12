@@ -165,6 +165,8 @@ namespace mrw
 
 				virtual void disableSignals() = 0;
 
+				virtual void unlockFlanks() = 0;
+
 				virtual void unlockRailParts() = 0;
 
 				virtual void unlockSections() = 0;

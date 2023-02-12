@@ -96,7 +96,24 @@ WidgetRoute::~WidgetRoute()
 **                                                                      **
 *************************************************************************/
 
+
 void WidgetRoute::prepareRoute()
+{
+	__METHOD__;
+
+	rename();
+}
+
+void WidgetRoute::prepare()
+{
+	Route::prepare();
+
+	prepareSections();
+	prepareTrack();
+	prepareSignals();
+}
+
+void WidgetRoute::prepareSections()
 {
 	__METHOD__;
 
@@ -138,14 +155,12 @@ void WidgetRoute::prepareRoute()
 #endif
 		}
 	}
-
-	prepareTrack();
-	prepareSignals();
-	rename();
 }
 
 void WidgetRoute::prepareTrack()
 {
+	__METHOD__;
+
 	for (auto it = track.rbegin(); *it != last_valid_part; ++it)
 	{
 		RailPart    *    part      = *it;
@@ -179,6 +194,7 @@ void WidgetRoute::prepareTrack()
 			dcs->setBatch(this);
 #endif
 		}
+		qDebug().noquote() << *part;
 	}
 }
 
@@ -655,7 +671,7 @@ void WidgetRoute::turnFlanks()
 		RegularSwitchControllerProxy * controller =
 			ControllerRegistry::instance().find<RegularSwitchControllerProxy>(flank_switch);
 
-//		controller->setBatch(this);
+		controller->setBatch(this);
 		controller->turn();
 	}
 }
@@ -735,6 +751,19 @@ void WidgetRoute::disableSignals()
 	for (SignalControllerProxy * controller : controllers)
 	{
 		controller->disable();
+	}
+}
+
+void WidgetRoute::unlockFlanks()
+{
+	__METHOD__;
+
+	for (RegularSwitch * flank_switch : flank_switches)
+	{
+		RegularSwitchControllerProxy * controller =
+			ControllerRegistry::instance().find<RegularSwitchControllerProxy>(flank_switch);
+
+		controller->setBatch(nullptr);
 	}
 }
 

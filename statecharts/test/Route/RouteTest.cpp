@@ -698,6 +698,59 @@ namespace mrw
 		};
 		static EnableSectionsMock * enableSectionsMock;
 
+		class UnlockFlanksMock
+		{
+			typedef void (UnlockFlanksMock::*functiontype)();
+		public:
+			void (UnlockFlanksMock::*unlockFlanksBehaviorDefault)();
+			int callCount;
+
+			void unlockFlanks1()
+			{
+			}
+
+			void unlockFlanksDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void unlockFlanks()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return unlockFlanksBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (UnlockFlanksMock::*defaultBehavior)())
+			{
+				unlockFlanksBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&UnlockFlanksMock::unlockFlanksDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		static UnlockFlanksMock * unlockFlanksMock;
+
 		class UnlockRailPartsMock
 		{
 			typedef void (UnlockRailPartsMock::*functiontype)();
@@ -901,6 +954,11 @@ namespace mrw
 				disableSignalsMock->disableSignals();
 				return (disableSignalsMock->*(disableSignalsMock->getBehavior()))();
 			}
+			void unlockFlanks()
+			{
+				unlockFlanksMock->unlockFlanks();
+				return (unlockFlanksMock->*(unlockFlanksMock->getBehavior()))();
+			}
 			void unlockRailParts()
 			{
 				return (unlockRailPartsMock->*(unlockRailPartsMock->getBehavior()))();
@@ -977,6 +1035,7 @@ namespace mrw
 
 
 
+
 			prepareRouteMock->reset();
 			prepareFlankMock->reset();
 			resetTransactionMock->reset();
@@ -989,8 +1048,9 @@ namespace mrw
 			extendSignalsMock->reset();
 			enableSectionsMock->reset();
 			disableSignalsMock->reset();
-			unlockRailPartsMock->reset();
 			disableSectionsMock->reset();
+			unlockFlanksMock->reset();
+			unlockRailPartsMock->reset();
 			unlockSectionsMock->reset();
 		}
 		TEST_F(RouteTest, start)
@@ -1019,10 +1079,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1098,10 +1160,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1147,10 +1211,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1254,10 +1320,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1267,6 +1335,8 @@ namespace mrw
 		}
 		TEST_F(RouteTest, turningSignalsTour)
 		{
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			enableSignalsMock = new EnableSignalsMock();
@@ -1317,10 +1387,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1334,6 +1406,8 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Turning));
 
+			EXPECT_TRUE(unlockFlanksMock->calledAtLeastOnce());
+
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(enableSignalsMock->calledAtLeastOnce());
@@ -1341,6 +1415,7 @@ namespace mrw
 			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
 
 
+			unlockFlanksMock->reset();
 			resetTransactionMock->reset();
 			enableSignalsMock->reset();
 			tryCompleteMock->reset();
@@ -1415,10 +1490,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1499,10 +1576,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1589,10 +1668,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1670,10 +1751,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1751,10 +1834,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1858,10 +1943,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -1963,10 +2050,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2057,10 +2146,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2146,10 +2237,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2215,10 +2308,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2294,10 +2389,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2351,10 +2448,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2419,10 +2518,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2487,10 +2588,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2561,10 +2664,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2641,10 +2746,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2714,10 +2821,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2786,10 +2895,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2851,10 +2962,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2944,10 +3057,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -2995,10 +3110,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3060,10 +3177,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3137,10 +3256,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3194,10 +3315,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3259,10 +3382,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3336,10 +3461,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3395,10 +3522,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3472,10 +3601,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3549,10 +3680,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3632,10 +3765,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3737,10 +3872,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3810,10 +3947,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 
@@ -3853,10 +3992,12 @@ namespace mrw
 			enableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
-			unlockRailPartsMock->initializeBehavior();
 			disableSectionsMock = new DisableSectionsMock();
 			disableSectionsMock->initializeBehavior();
+			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
 			unlockSectionsMock = new UnlockSectionsMock();
 			unlockSectionsMock->initializeBehavior();
 

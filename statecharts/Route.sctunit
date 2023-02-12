@@ -39,8 +39,9 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		mock enableSections
 
 		mock disableSignals
-		mock unlockRailParts
 		mock disableSections
+		mock unlockFlanks
+		mock unlockRailParts
 		mock unlockSections
 	}
 
@@ -114,6 +115,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning)
 		assert active (mrw.^statechart.RouteStatechart.main_region.Turning.Turning_process.Signal_Turning)
+		assert called unlockFlanks
 		assert called resetTransaction
 		assert called enableSignals
 		assert called tryComplete

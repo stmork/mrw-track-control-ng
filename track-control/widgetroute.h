@@ -92,6 +92,8 @@ private:
 	size_t countAllocatedSections();
 	void   rename();
 
+	void prepare() override;
+	void prepareSections();
 	void prepareTrack();
 	void prepareSignals();
 
@@ -113,6 +115,7 @@ private:
 
 	virtual void disableSections() override;
 	virtual void disableSignals() override;
+	virtual void unlockFlanks() override;
 	virtual void unlockRailParts() override;
 	virtual void unlockSections() override;
 };

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_L62MwHWAEe2cXugcT2PGGw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;const switch_timeout : integer = 2100&#xA;const signal_timeout : integer = 3300&#xA;const section_timeout : integer = 200&#xA;const emergency : integer = 3500&#xA;&#xA;in event turn&#xA;&#xA;in event completed&#xA;in event failed&#xA;in event disable&#xA;&#xA;out event activated&#xA;out event finished&#xA;&#xA;operation prepareRoute() : void&#xA;operation prepareFlank() : void&#xA;&#xA;operation isTour() : boolean&#xA;operation isCompleted() : boolean&#xA;operation resetTransaction() : void&#xA;operation fail() : void&#xA;operation tryComplete() : void&#xA;&#xA;operation turnSwitches() : void&#xA;operation turnFlanks() : void&#xA;operation enableSignals() : void&#xA;operation extendSignals() : void&#xA;operation enableSections() : void&#xA;&#xA;operation disableSections() : void&#xA;operation disableSignals() : void&#xA;operation unlockRailParts() : void&#xA;operation unlockSections() : void&#xA;" namespace="mrw.statechart" name="RouteStatechart">
+  <sgraph:Statechart xmi:id="_L62MwHWAEe2cXugcT2PGGw" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;const switch_timeout : integer = 2100&#xA;const signal_timeout : integer = 3300&#xA;const section_timeout : integer = 200&#xA;const emergency : integer = 3500&#xA;&#xA;in event turn&#xA;&#xA;in event completed&#xA;in event failed&#xA;in event disable&#xA;&#xA;out event activated&#xA;out event finished&#xA;&#xA;operation prepareRoute() : void&#xA;operation prepareFlank() : void&#xA;&#xA;operation isTour() : boolean&#xA;operation isCompleted() : boolean&#xA;operation resetTransaction() : void&#xA;operation fail() : void&#xA;operation tryComplete() : void&#xA;&#xA;operation turnSwitches() : void&#xA;operation turnFlanks() : void&#xA;operation enableSignals() : void&#xA;operation extendSignals() : void&#xA;operation enableSections() : void&#xA;&#xA;operation disableSections() : void&#xA;operation disableSignals() : void&#xA;operation unlockFlanks() : void&#xA;operation unlockRailParts() : void&#xA;operation unlockSections() : void&#xA;" namespace="mrw.statechart" name="RouteStatechart">
     <regions xmi:id="_L64B-3WAEe2cXugcT2PGGw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_L64B_HWAEe2cXugcT2PGGw">
         <outgoingTransitions xmi:id="_L64B_XWAEe2cXugcT2PGGw" target="_lSD6YHWFEe2oVZ4yFrzfuw"/>
@@ -42,7 +42,7 @@
             <outgoingTransitions xmi:id="_JsJlkKOsEe2dU9MDULV9nw" specification="[isTour]" target="_6zZBkKOrEe2dU9MDULV9nw"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_6zZBkKOrEe2dU9MDULV9nw" specification="entry / resetTransaction; turnFlanks; tryComplete" name="Flank Turning" incomingTransitions="_JsJlkKOsEe2dU9MDULV9nw">
-            <outgoingTransitions xmi:id="_9F7r8KOrEe2dU9MDULV9nw" specification="completed" target="_h0ic4HWAEe2oVZ4yFrzfuw"/>
+            <outgoingTransitions xmi:id="_9F7r8KOrEe2dU9MDULV9nw" specification="completed / unlockFlanks" target="_h0ic4HWAEe2oVZ4yFrzfuw"/>
             <outgoingTransitions xmi:id="_ZcUAwKOuEe2dU9MDULV9nw" specification="after switch_timeout ms" target="_yqc6cIYxEe2KYdnsQIjglw"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_1o0eUKiGEe2VotjN7gw2bA">
@@ -562,7 +562,7 @@
     <edges xmi:id="_9F86EKOrEe2dU9MDULV9nw" type="Transition" element="_9F7r8KOrEe2dU9MDULV9nw" source="_6zaPsKOrEe2dU9MDULV9nw" target="_h0k5IHWAEe2oVZ4yFrzfuw">
       <children xsi:type="notation:DecorationNode" xmi:id="_9F9hIaOrEe2dU9MDULV9nw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_9F9hIqOrEe2dU9MDULV9nw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_9F9hI6OrEe2dU9MDULV9nw" x="-10" y="3"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_9F9hI6OrEe2dU9MDULV9nw" x="1" y="-79"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_9F86EaOrEe2dU9MDULV9nw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_9F9hIKOrEe2dU9MDULV9nw" fontName="Verdana"/>
