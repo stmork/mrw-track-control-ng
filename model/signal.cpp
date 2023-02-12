@@ -11,6 +11,7 @@ using namespace mrw::model;
 using namespace mrw::util;
 using namespace mrw::can;
 
+using LockState  = Device::LockState;
 using Symbol     = Signal::Symbol;
 using SignalType = Signal::SignalType;
 
@@ -72,6 +73,14 @@ SignalAspect Signal::aspect() const
 void Signal::setAspect(const SignalAspect new_aspect)
 {
 	// TODO: Respect locking!
+	Device * device = dynamic_cast<Device *>(this);
+
+	Q_ASSERT(device != nullptr);
+
+	if (device->lock() != LockState::UNLOCKED)
+	{
+		qWarning().noquote() << "Signal locked!" << symbol() << device->name();
+	}
 	signal_aspect = new_aspect;
 	qDebug().noquote() << toString();
 }
