@@ -308,9 +308,6 @@ void MainWindow::resetTransaction()
 
 bool MainWindow::hasActiveRoutes()
 {
-	__METHOD__;
-
-	qDebug(" %d active routes.", ui->routeListWidget->count());
 	return ui->routeListWidget->count() > 0;
 }
 
