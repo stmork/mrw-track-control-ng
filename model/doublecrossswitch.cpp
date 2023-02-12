@@ -259,7 +259,7 @@ void DoubleCrossSwitch::setState(const State state, const bool force)
 	}
 	else
 	{
-		qWarning("Switch locked!");
+		qWarning().noquote() << "Switch locked!" << name();
 	}
 }
 
