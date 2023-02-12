@@ -6,9 +6,12 @@
 #include <util/method.h>
 #include <model/rail.h>
 #include <model/abstractswitch.h>
+#include <model/regularswitch.h>
 #include <model/route.h>
 
 using namespace mrw::model;
+
+using LockState = Device::LockState;
 
 Route::Route(
 	const bool         dir,
@@ -135,11 +138,42 @@ bool Route::qualified(
 
 	qDebug().noquote() << indent << rail->toString();
 
-	if ((device != nullptr) && (device->lock() == Device::LockState::FAIL))
+	if ((device != nullptr) && (device->lock() == LockState::FAIL))
 	{
 		qDebug().noquote() << indent << "      Rail in failed state:";
 		return false;
 	}
+
+#if 0
+	if ((device != nullptr) && (state == SectionState::TOUR))
+	{
+		std::vector<RegularSwitch *> flank_switches_cand;
+		const AbstractSwitch    *    actual_switch = dynamic_cast<const AbstractSwitch *>(device);
+
+		if (actual_switch != nullptr)
+		{
+			// FIXME: At this point we can not decide which branch will be selected.
+			// So we cannot check the correct flank protection to verify
+			// locking and correct direction state. Since this will is not a
+			// concerning issue the code is disabled.
+
+			const size_t count      = actual_switch->flank(flank_switches_cand);
+			const size_t any_locked = std::count_if(flank_switches_cand.begin(), flank_switches_cand.end(),
+						[this](RegularSwitch * flank_switch)
+			{
+				qDebug().noquote() << *flank_switch;
+				return flank_switch->lock() == LockState::UNLOCKED;
+			});
+
+			qDebug().noquote() << rail->toString() << count << flank_switches_cand.size() << any_locked;
+			if ((any_locked != flank_switches_cand.size()) && (count != flank_switches_cand.size()))
+			{
+				qDebug().noquote() << indent << "      Flank protection not granted:";
+				return false;
+			}
+		}
+	}
+#endif
 
 	if (rail->reserved())
 	{

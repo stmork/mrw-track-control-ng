@@ -673,6 +673,7 @@ void WidgetRoute::turnFlanks()
 
 		controller->setBatch(this);
 		controller->turn();
+		qDebug().noquote() << *controller;
 	}
 }
 
