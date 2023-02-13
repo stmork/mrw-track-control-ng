@@ -8,6 +8,7 @@
 
 #include <can/mrwmessage.h>
 #include <model/switchmodulereference.h>
+#include <model/lightmodule.h>
 #include <model/controller.h>
 #include <model/lightsignal.h>
 #include <model/formsignal.h>
@@ -551,7 +552,35 @@ void TestModel::testLight()
 {
 	std::vector<Light *> lights;
 
-	model->parts<Light>(lights);
+	for (size_t c = 0; c < model->controllerCount(); c++)
+	{
+		Controller * controller = model->controller(c);
+
+		for (size_t m = 0; m < controller->moduleCount(); m++)
+		{
+			LightModule * module = dynamic_cast<LightModule *>(controller->module(m));
+
+			if (module != nullptr)
+			{
+				QVERIFY(module->valid());
+				QCOMPARE(module->ports(), 1u);
+
+				std::copy(
+					module->lights().begin(), module->lights().end(),
+					std::back_inserter(lights));
+			}
+		}
+
+		for (size_t mx = 0; mx < controller->connectionCount(); mx++)
+		{
+			MultiplexConnection * conn = controller->connection(mx);
+
+			std::copy(
+				conn->lights().begin(), conn->lights().end(),
+				std::back_inserter(lights));
+		}
+	}
+
 	for (Light * light : lights)
 	{
 		QVERIFY(light->isUnlockable());

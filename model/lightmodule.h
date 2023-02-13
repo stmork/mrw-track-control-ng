@@ -30,7 +30,7 @@ namespace mrw::model
 	 */
 	class LightModule : public Module
 	{
-		std::vector<ProfileLight *> lights;
+		std::vector<ProfileLight *> profile_lights;
 
 		static const size_t MAX_LIGHTS = 8;
 
@@ -47,6 +47,8 @@ namespace mrw::model
 		}
 
 		bool valid() const override;
+
+		const std::vector<ProfileLight *> & lights() const;
 
 	private:
 		void link() override;

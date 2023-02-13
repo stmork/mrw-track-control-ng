@@ -37,7 +37,7 @@ MultiplexConnection::MultiplexConnection(
 			{
 				Light * light = new Light(model, controller, child);
 
-				lights.push_back(light);
+				simple_lights.push_back(light);
 			}
 			else
 			{
@@ -49,16 +49,16 @@ MultiplexConnection::MultiplexConnection(
 
 MultiplexConnection::~MultiplexConnection()
 {
-	for (Light * light : lights)
+	for (Light * light : simple_lights)
 	{
 		delete light;
 	}
-	lights.clear();
+	simple_lights.clear();
 }
 
 bool MultiplexConnection::valid() const
 {
-	size_t pins = lights.size();
+	size_t pins = simple_lights.size();
 
 	for (LightSignal * signal : light_signals)
 	{
@@ -76,6 +76,11 @@ bool MultiplexConnection::valid() const
 	return pins <= MAX_PINS;
 }
 
+const std::vector<Light *> & MultiplexConnection::lights() const
+{
+	return simple_lights;
+}
+
 void MultiplexConnection::configure(
 	std::vector<mrw::can::MrwMessage> & messages,
 	const unsigned                      offset) const
@@ -90,7 +95,7 @@ void MultiplexConnection::configure(
 		pin += light_signal->usedPins();
 	}
 
-	for (Light * light : lights)
+	for (Light * light : simple_lights)
 	{
 		const MrwMessage msg = light->configMsg(pin);
 

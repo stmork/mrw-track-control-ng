@@ -40,7 +40,7 @@ namespace mrw::model
 		const ModuleId      connection_id;
 
 		std::vector<LightSignal *> light_signals;
-		std::vector<Light *>       lights;
+		std::vector<Light *>       simple_lights;
 
 	public:
 		/** The maximum light count connected to one module. */
@@ -71,12 +71,14 @@ namespace mrw::model
 		 * correct.
 		 */
 		bool valid() const;
-		void configure(
-			std::vector<mrw::can::MrwMessage> & messages,
-			const unsigned                      offset) const;
+
+		const std::vector<Light *> & lights() const;
 
 	private:
 		void link();
+		void configure(
+			std::vector<mrw::can::MrwMessage> & messages,
+			const unsigned                      offset) const;
 	};
 }
 

@@ -30,7 +30,7 @@ LightModule::LightModule(
 			{
 				ProfileLight * light = new ProfileLight(model, controller, child);
 
-				lights.push_back(light);
+				profile_lights.push_back(light);
 			}
 			else
 			{
@@ -42,20 +42,25 @@ LightModule::LightModule(
 
 LightModule::~LightModule()
 {
-	for (ProfileLight * light : lights)
+	for (ProfileLight * light : profile_lights)
 	{
 		delete light;
 	}
-	lights.clear();
+	profile_lights.clear();
 }
 
 bool LightModule::valid() const
 {
-	return std::all_of(lights.begin(), lights.end(), [] (const Light * light)
+	return std::all_of(profile_lights.begin(), profile_lights.end(),
+			[] (const Light * light)
 	{
 		return light->controller() != nullptr;
-	}) &&
-	(lights.size() <= MAX_LIGHTS);
+	}) && (profile_lights.size() <= MAX_LIGHTS);
+}
+
+const std::vector<ProfileLight *> & LightModule::lights() const
+{
+	return profile_lights;
 }
 
 void LightModule::configure(
@@ -64,7 +69,7 @@ void LightModule::configure(
 {
 	unsigned pin = offset;
 
-	for (ProfileLight * light : lights)
+	for (ProfileLight * light : profile_lights)
 	{
 		const MrwMessage msg = light->configMsg(pin);
 
