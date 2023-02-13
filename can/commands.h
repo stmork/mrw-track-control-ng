@@ -52,6 +52,7 @@ namespace mrw::can
 		CFGML3  = CAT_CONFIG | 0x0c, ///< Configure main incoming LightSignal.
 		CFGML4  = CAT_CONFIG | 0x0d, ///< Configure main outgoing LightSignal.
 		CFGLGT  = CAT_CONFIG | 0x0e, ///< Configure ProfileLight.
+		CFGSF2  = CAT_CONFIG | 0x0f, ///< Configure shunting FormSignal.
 
 		CFGBGN      = CAT_EXT | 0x01, ///< Start configuration mode.
 		CFGEND      = CAT_EXT | 0x02, ///< Finish configuration mode.
