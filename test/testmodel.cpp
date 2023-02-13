@@ -547,6 +547,18 @@ void TestModel::testDevice()
 	}
 }
 
+void TestModel::testLight()
+{
+	std::vector<Light *> lights;
+
+	model->parts<Light>(lights);
+	for (Light * light : lights)
+	{
+		QVERIFY(light->isUnlockable());
+		QVERIFY(light->controller() != nullptr);
+	}
+}
+
 void TestModel::testEnumerator()
 {
 	QCOMPARE(Signal::get(Signal::Symbol::OFF),  "OFF");

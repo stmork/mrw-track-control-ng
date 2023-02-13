@@ -52,6 +52,7 @@ namespace mrw::test
 		void testExtension();
 		void testPosition();
 		void testDevice();
+		void testLight();
 		void testEnumerator();
 		void testLightSignalConfig();
 		void testFormSignalConfig();
