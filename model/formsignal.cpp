@@ -59,7 +59,7 @@ MrwMessage FormSignal::configMsg(const unsigned pin) const
 		break;
 
 	case SHUNT_SIGNAL:
-		// Configuring form shunt signals is not defined.
+		cmd = CFGSF2;
 		break;
 
 	case MAIN_SHUNT_SIGNAL:

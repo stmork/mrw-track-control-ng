@@ -624,7 +624,7 @@ void TestModel::testFormSignalConfig()
 	testFormSignalConfig(3, SignalType::DISTANT_SIGNAL,     CFGPF3);
 	testFormSignalConfig(2, SignalType::MAIN_SIGNAL,        CFGMF2);
 	testFormSignalConfig(3, SignalType::MAIN_SIGNAL,        CFGMF3);
-	testFormSignalConfig(2, SignalType::SHUNT_SIGNAL,       CMD_ILLEGAL);
+	testFormSignalConfig(2, SignalType::SHUNT_SIGNAL,       CFGSF2);
 }
 
 void TestModel::testSectionConfig()
