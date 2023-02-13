@@ -31,6 +31,7 @@ namespace mrw::test
 		void testOccupation();
 		void testInverseFail();
 		void testFlank();
+		void testFlankLocked();
 
 	private:
 		bool verify(const model::Route & route) const;

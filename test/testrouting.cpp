@@ -15,6 +15,8 @@
 using namespace mrw::test;
 using namespace mrw::model;
 
+using LockState = Device::LockState;
+
 class TestRoute : public Route
 {
 public:
@@ -191,6 +193,35 @@ void TestRouting::testFlank()
 	const std::vector<mrw::model::RegularSwitch *> & flanks = route.doFlank();
 
 	QCOMPARE(flanks.size(), 4u);
+}
+
+void TestRouting::testFlankLocked()
+{
+	RegularSwitch * s2 = dynamic_cast<RegularSwitch *>(parts[ 3]);
+	RegularSwitch * s9 = dynamic_cast<RegularSwitch *>(parts[18]);
+	TestRoute       route(true, SectionState::TOUR, parts[1]);
+
+	QVERIFY(s2 != nullptr);
+	QVERIFY(s9 != nullptr);
+
+	s2->setState(RegularSwitch::State::AB);
+	s9->setState(RegularSwitch::State::AC);
+	s2->setLock(LockState::LOCKED);
+	s9->setLock(LockState::LOCKED);
+
+	QVERIFY(verify(route));
+	QVERIFY(!route.append(parts[20]));
+	QVERIFY(verify(route));
+
+	const std::vector<mrw::model::RegularSwitch *> & flanks = route.doFlank();
+
+	QCOMPARE(flanks.size(), 0u);
+
+	s2->setState(RegularSwitch::State::AC, true);
+	s9->setState(RegularSwitch::State::AB, true);
+	QVERIFY(route.append(parts[20]));
+	route.doFlank();
+	QCOMPARE(flanks.size(), 2u);
 }
 
 bool TestRouting::verify(const Route & route) const

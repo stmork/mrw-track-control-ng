@@ -45,7 +45,7 @@ Device::LockState Device::lock() const
 	return lock_state;
 }
 
-void Device::setLock(const Device::LockState input)
+void Device::setLock(const LockState input)
 {
 	if (input == LockState::FAIL)
 	{
