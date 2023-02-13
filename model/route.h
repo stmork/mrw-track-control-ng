@@ -169,9 +169,37 @@ namespace mrw::model
 
 	private:
 		Region   *   findSearchRegion(const RailPart * target) const;
+
+		/**
+		 * Checks if the flank protection ensured for the actual RailPart. If
+		 * no candidates are available everything is fine. Otherwise the flank
+		 * protection switches have to be unlocked. Otherwise the flank switches
+		 * have to be in correct state.
+		 *
+		 * @note The actual RailPart may not be any switch. In this case
+		 * everything is fine.
+		 * @note If the route state is not SectionState::TOUR everything is
+		 * also fine.
+		 *
+		 * @param prev The previous RailPart of the actual RailPart.
+		 * @param actual The actual RailPart to be checked.
+		 * @return True if flank protection is available.
+		 */
+		bool         hasFlankProtection(
+			const RailPart * prev,
+			const RailPart * actual) const;
 		bool         qualified(
 			const RailPart * rail,
 			const Region  *  search_region) const;
+
+		/**
+		 * Unreserve and remove all RailPart elements from the track behind the
+		 * given actual RailPart.
+		 *
+		 * @param actual The RailPart which should be the last RailPart of the
+		 * routing track.
+		 */
+		void         unreserveTail(const RailPart * actual);
 	};
 }
 

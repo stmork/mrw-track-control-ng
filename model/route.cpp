@@ -118,7 +118,14 @@ bool Route::append(RailPart * rail, RailPart * target, Region * search_region)
 			track.push_back(next);
 			if (append(next, target, search_region))
 			{
-				return true;
+				if (hasFlankProtection(rail, next))
+				{
+					return true;
+				}
+				else
+				{
+					unreserveTail(next);
+				}
 			}
 			track.remove(next);
 			next->reserve(false);
@@ -126,6 +133,46 @@ bool Route::append(RailPart * rail, RailPart * target, Region * search_region)
 	}
 
 	return false;
+}
+
+bool mrw::model::Route::hasFlankProtection(
+	const RailPart * prev,
+	const RailPart * rail) const
+{
+	const AbstractSwitch * actual_switch = dynamic_cast<const AbstractSwitch *>(rail);
+
+	if ((state == SectionState::TOUR) && (actual_switch != nullptr))
+	{
+		const QString                indent(track.size(), ' ');
+		auto                         it   = std::find(track.begin(), track.end(), rail);
+		const RailPart       *       succ = *(++it);
+		std::vector<RegularSwitch *> flank_switch_candidates;
+
+		// Collect flank switches depending on wanted switch state. Do not turn
+		// neither this switch nor flank switches. Flank switches not in correct
+		// state will not counted as return parameter. So if return value and
+		// result vector size differ any flank switch has to be turned later.
+		const size_t  count = actual_switch->flankCandidates(flank_switch_candidates, prev, succ);
+
+		// Count unlocked flank switches.
+		const size_t  unlock_count = std::count_if(
+				flank_switch_candidates.begin(), flank_switch_candidates.end(),
+				[this](RegularSwitch * flank_switch)
+		{
+			return flank_switch->lock() == LockState::UNLOCKED;
+		});
+
+		// If all flank switches are unlocked everything is fine. Otherwise the
+		// switch state has to be correct.
+		if ((unlock_count != flank_switch_candidates.size()) &&
+			(count != flank_switch_candidates.size()))
+		{
+			qDebug().noquote() << indent << "      Flank protection not granted:";
+			return false;
+		}
+	}
+
+	return true;
 }
 
 bool Route::qualified(
@@ -143,37 +190,6 @@ bool Route::qualified(
 		qDebug().noquote() << indent << "      Rail in failed state:";
 		return false;
 	}
-
-#if 0
-	if ((device != nullptr) && (state == SectionState::TOUR))
-	{
-		std::vector<RegularSwitch *> flank_switches_cand;
-		const AbstractSwitch    *    actual_switch = dynamic_cast<const AbstractSwitch *>(device);
-
-		if (actual_switch != nullptr)
-		{
-			// FIXME: At this point we can not decide which branch will be selected.
-			// So we cannot check the correct flank protection to verify
-			// locking and correct direction state. Since this will is not a
-			// concerning issue the code is disabled.
-
-			const size_t count      = actual_switch->flank(flank_switches_cand);
-			const size_t any_locked = std::count_if(flank_switches_cand.begin(), flank_switches_cand.end(),
-					[this](RegularSwitch * flank_switch)
-			{
-				qDebug().noquote() << *flank_switch;
-				return flank_switch->lock() == LockState::UNLOCKED;
-			});
-
-			qDebug().noquote() << rail->toString() << count << flank_switches_cand.size() << any_locked;
-			if ((any_locked != flank_switches_cand.size()) && (count != flank_switches_cand.size()))
-			{
-				qDebug().noquote() << indent << "      Flank protection not granted:";
-				return false;
-			}
-		}
-	}
-#endif
 
 	if (rail->reserved())
 	{
@@ -202,6 +218,18 @@ bool Route::qualified(
 	}
 
 	return true;
+}
+
+void Route::unreserveTail(const RailPart * actual)
+{
+	auto                    it = std::find(track.begin(), track.end(), actual);
+	std::vector<RailPart *> removables(++it, track.end());
+
+	for (RailPart * part : removables)
+	{
+		part->reserve(false);
+		track.remove(part);
+	}
 }
 
 void Route::prepare()

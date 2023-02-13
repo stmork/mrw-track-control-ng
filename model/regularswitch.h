@@ -102,6 +102,11 @@ namespace mrw::model
 			std::vector<RegularSwitch *> & switches,
 			const bool                     set_state = false) const override;
 
+		size_t flankCandidates(
+			std::vector<RegularSwitch *> & switches,
+			const RailPart        *        left,
+			const RailPart        *        right) const override;
+
 		/**
 		 * This method returns the clear text QString of the State this
 		 * RegularSwitch is set to.
@@ -112,8 +117,14 @@ namespace mrw::model
 		static QString get(const State & state);
 
 	private:
-		void link() override;
-		bool isFlankProtection(const RailPart * other) const override;
+		void   link() override;
+		bool   isFlankProtection(const RailPart * other) const override;
+		State  computeState(const RailPart * left, const RailPart * right) const;
+
+		size_t flank(
+			std::vector<RegularSwitch *> & switches,
+			const bool                     set_state,
+			const State                    compare) const;
 
 		State switch_state = State::AB;
 		const static mrw::util::ConstantEnumerator<State>  state_map;

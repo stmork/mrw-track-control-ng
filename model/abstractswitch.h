@@ -54,14 +54,18 @@ namespace mrw::model
 		/**
 		 * This method collects all indirect connected switches which needs
 		 * flank protection depending on the internal own state. Internally
-		 * all connection which are not involved into the tour route are
-		 * tested.
+		 * all connections which are not involved into the tour route are
+		 * tested. The resulting count is the amount of correctly switched
+		 * flank switches. If the result vector size differs from this result
+		 * a flank switch has to be turned later. Also if the @c set_state
+		 * parameter is true the result vector size and result count is
+		 * equal.
 		 *
 		 * @param switches The collection of switches selected for flank
 		 * protection.
 		 * @param set_state If true the state of the flank protection switch
 		 * will be set accordingly.
-		 * @return The amount if correctly switched switches. The state is
+		 * @return The amount if correctly switched flank switches. The state is
 		 * correct if all members of the collected switches have the correct
 		 * mrw::can::SwitchState active.
 		 * @see isFlankProtection
@@ -71,6 +75,11 @@ namespace mrw::model
 		virtual size_t flank(
 			std::vector<RegularSwitch *> & switches,
 			const bool                     set_state = false) const = 0;
+
+		virtual size_t flankCandidates(
+			std::vector<RegularSwitch *> & switches,
+			const RailPart        *        left,
+			const RailPart        *        right) const = 0;
 
 		/**
 		 * This method converts the internal switch state into the right

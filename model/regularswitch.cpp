@@ -73,6 +73,13 @@ void RegularSwitch::setState(
 	const RailPart * left,
 	const RailPart * right)
 {
+	switch_state = computeState(left, right);
+}
+
+State RegularSwitch::computeState(
+	const RailPart * left,
+	const RailPart * right) const
+{
 	if ((left == nullptr) || (right == nullptr))
 	{
 		throw std::invalid_argument("Given rail parts are not defined.");
@@ -80,11 +87,11 @@ void RegularSwitch::setState(
 
 	if ((b == left) || (b == right))
 	{
-		switch_state = State::AB;
+		return State::AB;
 	}
 	else if ((c == left) || (c == right))
 	{
-		switch_state = State::AC;
+		return State::AC;
 	}
 	else
 	{
@@ -186,16 +193,34 @@ size_t RegularSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
 	const bool                     set_state) const
 {
+	return flank(switches, set_state, state());
+}
+
+size_t RegularSwitch::flankCandidates(
+	std::vector<RegularSwitch *> & switches,
+	const RailPart        *        left,
+	const RailPart        *        right) const
+{
+	State compare = computeState(left, right);
+
+	return flank(switches, false, compare);
+}
+
+size_t mrw::model::RegularSwitch::flank(
+	std::vector<mrw::model::RegularSwitch *> & switches,
+	const bool                                 set_state,
+	const State                                compare) const
+{
 	RegularSwitch * b_switch = follow(b);
 	RegularSwitch * c_switch = follow(c);
 	RegularSwitch * other    = nullptr;
 	size_t          equal    = 0;
 
-	if ((switch_state == State::AB) && isFlankProtection(c_switch))
+	if ((compare == State::AB) && isFlankProtection(c_switch))
 	{
 		other = c_switch;
 	}
-	else if ((switch_state == State::AC) && isFlankProtection(b_switch))
+	else if ((compare == State::AC) && isFlankProtection(b_switch))
 	{
 		other = b_switch;
 	}
@@ -207,7 +232,7 @@ size_t RegularSwitch::flank(
 		{
 			other->setState(state());
 		}
-		if (other->switchState() == switchState())
+		if (other->state() == compare)
 		{
 			equal++;
 		}

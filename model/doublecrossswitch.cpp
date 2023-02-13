@@ -40,6 +40,13 @@ void DoubleCrossSwitch::setState(
 	const RailPart * left,
 	const RailPart * right)
 {
+	switch_state = computeState(left, right);
+}
+
+State DoubleCrossSwitch::computeState(
+	const RailPart * left,
+	const RailPart * right) const
+{
 	unsigned state = 0;
 
 	if ((left == nullptr) || (right == nullptr))
@@ -57,10 +64,11 @@ void DoubleCrossSwitch::setState(
 		state |= D_MASK;
 	}
 
-	switch_state = static_cast<State>(state);
 #ifdef STATE_VERBOSE
 	qDebug().noquote() << "########## DCS compute state: " << state_map.get(switch_state) << name();
 #endif
+
+	return static_cast<State>(state);
 }
 
 QString DoubleCrossSwitch::get(const DoubleCrossSwitch::State & state)
@@ -132,13 +140,31 @@ size_t DoubleCrossSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
 	const bool                     set_state) const
 {
+	return flank(switches, set_state, state());
+}
+
+size_t DoubleCrossSwitch::flankCandidates(
+	std::vector<RegularSwitch *> & switches,
+	const RailPart        *        left,
+	const RailPart        *        right) const
+{
+	State compare = computeState(left, right);
+
+	return flank(switches, false, compare);
+}
+
+size_t DoubleCrossSwitch::flank(
+	std::vector<RegularSwitch *> & switches,
+	const bool                     set_state,
+	const DoubleCrossSwitch::State compare) const
+{
 	RegularSwitch * a_switch = follow(a);
 	RegularSwitch * b_switch = follow(b);
 	RegularSwitch * c_switch = follow(c);
 	RegularSwitch * d_switch = follow(d);
 	size_t          equal    = 0;
 
-	if ((unsigned)state() & B_MASK)
+	if ((unsigned)compare & B_MASK)
 	{
 		if (isFlankProtection(a_switch))
 		{
@@ -169,7 +195,7 @@ size_t DoubleCrossSwitch::flank(
 		}
 	}
 
-	if ((unsigned)state() & D_MASK)
+	if ((unsigned)compare & D_MASK)
 	{
 		if (isFlankProtection(c_switch))
 		{
