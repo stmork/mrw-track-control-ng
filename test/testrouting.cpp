@@ -200,6 +200,7 @@ void TestRouting::testFlankLocked()
 	RegularSwitch * s2 = dynamic_cast<RegularSwitch *>(parts[ 3]);
 	RegularSwitch * s9 = dynamic_cast<RegularSwitch *>(parts[18]);
 	TestRoute       route(true, SectionState::TOUR, parts[1]);
+	const Route::RailTrack & reserved = route;
 
 	QVERIFY(s2 != nullptr);
 	QVERIFY(s9 != nullptr);
@@ -212,6 +213,7 @@ void TestRouting::testFlankLocked()
 	QVERIFY(verify(route));
 	QVERIFY(!route.append(parts[20]));
 	QVERIFY(verify(route));
+	QCOMPARE(reserved.size(), 1u);
 
 	const std::vector<mrw::model::RegularSwitch *> & flanks = route.doFlank();
 
@@ -220,6 +222,8 @@ void TestRouting::testFlankLocked()
 	s2->setState(RegularSwitch::State::AC, true);
 	s9->setState(RegularSwitch::State::AB, true);
 	QVERIFY(route.append(parts[20]));
+	QVERIFY(verify(route));
+	QVERIFY(reserved.size() > 1u);
 	route.doFlank();
 	QCOMPARE(flanks.size(), 2u);
 }
