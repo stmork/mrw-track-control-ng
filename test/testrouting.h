@@ -30,6 +30,7 @@ namespace mrw::test
 		void testExtension();
 		void testOccupation();
 		void testInverseFail();
+		void testFailedSwitch();
 		void testFlank();
 		void testFlankLocked();
 

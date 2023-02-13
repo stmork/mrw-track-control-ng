@@ -45,6 +45,13 @@ void TestRouting::init()
 		part->reserve(false);
 		part->section()->setState(SectionState::FREE);
 		part->section()->setOccupation(false);
+
+		Device * device = dynamic_cast<Device *>(part);
+
+		if (device != nullptr)
+		{
+			device->setLock(LockState::UNLOCKED);
+		}
 	}
 }
 
@@ -178,6 +185,18 @@ void TestRouting::testInverseFail()
 	QVERIFY(verify(route));
 	QCOMPARE(reserved.size(), 0u);
 	QVERIFY(empty());
+}
+
+void TestRouting::testFailedSwitch()
+{
+	RegularSwitch * s1 = dynamic_cast<RegularSwitch *>(parts[2]);
+	Route           route(true, SectionState::SHUNTING, parts[1]);
+
+	s1->setLock(LockState::FAIL);
+
+	QVERIFY(verify(route));
+	QVERIFY(!route.append(parts[20]));
+	QVERIFY(verify(route));
 }
 
 void TestRouting::testFlank()
