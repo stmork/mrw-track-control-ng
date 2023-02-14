@@ -495,6 +495,12 @@ void WidgetRoute::finalize()
 	}
 }
 
+/*************************************************************************
+**                                                                      **
+**       Convenience methods                                            **
+**                                                                      **
+*************************************************************************/
+
 size_t WidgetRoute::countAllocatedSections()
 {
 	return std::count_if(sections.begin(), sections.end(), [&](Section * section)
@@ -503,6 +509,63 @@ size_t WidgetRoute::countAllocatedSections()
 			(section->isFree() ||
 				(section->state() == SectionState::PASSED));
 	});
+}
+
+SectionController * WidgetRoute::getSectionController(Section * section) const
+{
+	return ControllerRegistry::instance().find<SectionController>(section);
+}
+
+SignalControllerProxy * WidgetRoute::getSignalController(Section * section) const
+{
+	const std::vector<Signal *> & section_signals = section->getSignals(direction);
+	SignalControllerProxy    *    controller      = nullptr;
+
+	if (section_signals.size() > 0)
+	{
+		Device * device = dynamic_cast<Device *>(section_signals.front());
+
+		controller = ControllerRegistry::instance().find<SignalControllerProxy>(device);
+	}
+	return controller;
+}
+
+void WidgetRoute::collectSignalControllers(
+	std::vector<SignalControllerProxy *>       &      controllers,
+	std::function<bool(SignalControllerProxy * ctrl)> guard) const
+{
+	controllers.clear();
+	for (Section * section : sections)
+	{
+		SignalControllerProxy * controller = getSignalController(section);
+
+		if ((controller != nullptr) && guard(controller))
+		{
+			controllers.push_back(controller);
+		}
+	}
+}
+
+void WidgetRoute::collectSignalControllers(
+	std::vector<SignalControllerProxy *> & controllers,
+	const bool                             unlocked) const
+{
+	collectSignalControllers(controllers, [unlocked](SignalControllerProxy * proxy)
+	{
+		return (proxy->isUnlocked() == unlocked) && (!proxy->isPassed());
+	});
+}
+
+void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & controllers) const
+{
+	controllers.clear();
+	for (Section * section : sections)
+	{
+		SectionController * controller =
+			ControllerRegistry::instance().find<SectionController>(section);
+
+		controllers.push_back(controller);
+	}
 }
 
 void WidgetRoute::dump() const
@@ -573,69 +636,6 @@ bool WidgetRoute::isTour()
 WidgetRoute::operator QListWidgetItem * ()
 {
 	return &list_item;
-}
-
-/*************************************************************************
-**                                                                      **
-**       Convenience methods                                            **
-**                                                                      **
-*************************************************************************/
-
-SectionController * WidgetRoute::getSectionController(Section * section) const
-{
-	return ControllerRegistry::instance().find<SectionController>(section);
-}
-
-SignalControllerProxy * WidgetRoute::getSignalController(Section * section) const
-{
-	const std::vector<Signal *> & section_signals = section->getSignals(direction);
-	SignalControllerProxy    *    controller      = nullptr;
-
-	if (section_signals.size() > 0)
-	{
-		Device * device = dynamic_cast<Device *>(section_signals.front());
-
-		controller = ControllerRegistry::instance().find<SignalControllerProxy>(device);
-	}
-	return controller;
-}
-
-void WidgetRoute::collectSignalControllers(
-	std::vector<SignalControllerProxy *>       &      controllers,
-	std::function<bool(SignalControllerProxy * ctrl)> guard) const
-{
-	controllers.clear();
-	for (Section * section : sections)
-	{
-		SignalControllerProxy * controller = getSignalController(section);
-
-		if ((controller != nullptr) && guard(controller))
-		{
-			controllers.push_back(controller);
-		}
-	}
-}
-
-void WidgetRoute::collectSignalControllers(
-	std::vector<SignalControllerProxy *> & controllers,
-	const bool                             unlocked) const
-{
-	collectSignalControllers(controllers, [unlocked](SignalControllerProxy * proxy)
-	{
-		return (proxy->isUnlocked() == unlocked) && (!proxy->isPassed());
-	});
-}
-
-void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & controllers) const
-{
-	controllers.clear();
-	for (Section * section : sections)
-	{
-		SectionController * controller =
-			ControllerRegistry::instance().find<SectionController>(section);
-
-		controllers.push_back(controller);
-	}
 }
 
 /*************************************************************************

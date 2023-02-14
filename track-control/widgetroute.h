@@ -69,6 +69,20 @@ public slots:
 	void unregister();
 
 private:
+	void   tryUnblockCtrl(mrw::ctrl::SectionController * controller);
+
+	void   unregister(mrw::model::Section * section);
+	void   unregister(mrw::ctrl::SectionController * controller);
+	void   finalize();
+	void   rename();
+
+	void   prepare() override;
+	void   prepareSections();
+	void   prepareTrack();
+	void   prepareSignals();
+
+	size_t countAllocatedSections();
+
 	mrw::ctrl::SectionController   *   getSectionController(
 		mrw::model::Section * section) const;
 	mrw::ctrl::SignalControllerProxy * getSignalController(
@@ -83,19 +97,6 @@ private:
 			&mrw::util::Method::always<mrw::ctrl::SignalControllerProxy>) const;
 	void collectSectionControllers(
 		std::vector<mrw::ctrl::SectionController *>   &   controllers) const;
-
-	void   tryUnblockCtrl(mrw::ctrl::SectionController * controller);
-
-	void   unregister(mrw::model::Section * section);
-	void   unregister(mrw::ctrl::SectionController * controller);
-	void   finalize();
-	size_t countAllocatedSections();
-	void   rename();
-
-	void prepare() override;
-	void prepareSections();
-	void prepareTrack();
-	void prepareSignals();
 
 	// Implementation of RouteStatemachine::OperationCallback
 	virtual void prepareRoute() override;
