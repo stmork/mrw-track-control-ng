@@ -45,6 +45,9 @@ namespace mrw
 		void extendTourCombinedCompleted();
 		void extendShunting();
 		void extendShuntingCompleted();
+		void failedTour();
+		void failedTourCombined();
+		void failedShunting();
 		mrw::statechart::SignalControllerStatechart * statechart;
 
 
@@ -1293,6 +1296,8 @@ namespace mrw
 			statechart->raiseClear();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Wait_for_Start));
+
+			EXPECT_TRUE(statechart->isRaisedCleared());
 
 			statechart->raiseStart();
 
@@ -2919,6 +2924,16 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			extendShuntingCompleted();
 		}
+		void failedTour()
+		{
+			tourLocked();
+
+			statechart->raiseFailed();
+
+			failState();
+
+
+		}
 		TEST_F(SignalControllerTest, failedTour)
 		{
 			incMock = new IncMock();
@@ -2966,7 +2981,11 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			tourLocked();
+			failedTour();
+		}
+		void failedTourCombined()
+		{
+			tourLockedCombined();
 
 			statechart->raiseFailed();
 
@@ -3023,7 +3042,11 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			tourLockedCombined();
+			failedTourCombined();
+		}
+		void failedShunting()
+		{
+			shuntingLocked();
 
 			statechart->raiseFailed();
 
@@ -3078,13 +3101,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			shuntingLocked();
-
-			statechart->raiseFailed();
-
-			failState();
-
-
+			failedShunting();
 		}
 		TEST_F(SignalControllerTest, timeoutPendingToTour)
 		{
@@ -3743,6 +3760,12 @@ namespace mrw
 
 			EXPECT_TRUE(!statechart->isActive());
 
+			tourLockedCombined();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
 			shuntingLocked();
 
 			statechart->exit();
@@ -3828,6 +3851,24 @@ namespace mrw
 			EXPECT_TRUE(!statechart->isActive());
 
 			failAfterStart();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			failedTour();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			failedTourCombined();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			failedShunting();
 
 			statechart->exit();
 

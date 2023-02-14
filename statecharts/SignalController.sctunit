@@ -252,6 +252,7 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 
 		// Then
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Wait_for_Start)
+		assert cleared
 
 		// When
 		raise start
@@ -945,6 +946,10 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		exit
 		assert !is_active
 
+		tourLockedCombined()
+		exit
+		assert !is_active
+
 		shuntingLocked()
 		exit
 		assert !is_active
@@ -1002,6 +1007,18 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		assert !is_active
 
 		failAfterStart()
+		exit
+		assert !is_active
+
+		failedTour
+		exit
+		assert !is_active
+
+		failedTourCombined
+		exit
+		assert !is_active
+
+		failedShunting
 		exit
 		assert !is_active
 	}
