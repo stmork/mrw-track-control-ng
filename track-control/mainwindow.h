@@ -127,38 +127,14 @@ private:
 	mrw::model::Route * createRoute(
 		const bool                     direction,
 		const mrw::model::SectionState state);
-	void addRoute(WidgetRoute * route);
+	void                addRoute(WidgetRoute * route);
+	void                startBeermode(const bool dir);
 	void                changePage(const int offset);
-
-	void findCandidates(
-		std::vector<mrw::model::Rail *> & candidates,
-		const bool                        dir) const;
-	void findPassthrough(
-		std::vector<mrw::model::Rail *> & candidates,
-		const mrw::model::Region     *    region,
-		const bool                        is_same) const;
-
-	static bool isPassThrough(
-		const mrw::model::Rail * rail);
-	static mrw::model::Rail * isNeighbourOccupied(
-		const mrw::model::Rail * rail,
-		const bool               dir);
-	static bool isNeighbourFree(
-		const mrw::model::Rail * rail,
-		const bool               dir);
-
-	mrw::model::Rail * random(
-		const std::vector<mrw::model::Rail *> & rails) const;
-	void startBeermode(const bool dir);
-	void dump(
-		const std::vector<mrw::model::Rail *> & rails) const;
-	QString dump(
-		const mrw::model::Rail * rail) const;
 
 	Ui::MainWindow               *              ui;
 	mrw::model::ModelRepository        &        repo;
-	mrw::model::Route             *             beer_route = nullptr;
+	WidgetRoute                *                beer_route = nullptr;
 	mrw::statechart::OperatingModeStatechart    statechart;
 };
 
-#endif // MAINWINDOW_H
+#endif

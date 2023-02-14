@@ -10,39 +10,41 @@ include(../common.pri)
 SOURCES += \
 	ctrl/batch.cpp \
 	ctrl/batchparticipant.cpp \
+	ctrl/controllerregistrand.cpp \
+	ctrl/controllerregistry.cpp \
+	ctrl/doublecrossswitchcontrollerproxy.cpp \
 	ctrl/railpartinfo.cpp \
+	ctrl/railcontrollerproxy.cpp \
+	ctrl/regularswitchcontrollerproxy.cpp \
+	ctrl/sectioncontroller.cpp \
+	ctrl/signalcontrollerproxy.cpp \
 	ctrl/signalproxy.cpp \
 	ctrl/switchcontroller.cpp \
 	main.cpp \
 	mainwindow.cpp \
 	mrwmessagedispatcher.cpp \
+	beermodeservice.cpp \
 	regionform.cpp \
-	ctrl/controllerregistrand.cpp \
-	ctrl/controllerregistry.cpp \
-	ctrl/regularswitchcontrollerproxy.cpp \
-	ctrl/doublecrossswitchcontrollerproxy.cpp \
-	ctrl/railcontrollerproxy.cpp \
-	ctrl/signalcontrollerproxy.cpp \
-	ctrl/sectioncontroller.cpp \
 	routebatch.cpp \
 	widgetroute.cpp
 
 HEADERS += \
+	beermodeservice.h \
 	ctrl/batch.h \
 	ctrl/batchparticipant.h \
+	ctrl/controllerregistrand.h \
+	ctrl/controllerregistry.h \
+	ctrl/doublecrossswitchcontrollerproxy.h \
+	ctrl/railcontrollerproxy.h \
 	ctrl/railpartinfo.h \
+	ctrl/regularswitchcontrollerproxy.h \
+	ctrl/sectioncontroller.h \
+	ctrl/signalcontrollerproxy.h \
 	ctrl/signalproxy.h \
 	ctrl/switchcontroller.h \
 	mainwindow.h \
 	mrwmessagedispatcher.h \
 	regionform.h \
-	ctrl/controllerregistrand.h \
-	ctrl/controllerregistry.h \
-	ctrl/regularswitchcontrollerproxy.h \
-	ctrl/doublecrossswitchcontrollerproxy.h \
-	ctrl/railcontrollerproxy.h \
-	ctrl/signalcontrollerproxy.h \
-	ctrl/sectioncontroller.h \
 	routebatch.h \
 	widgetroute.h
 
