@@ -197,7 +197,7 @@ bool Route::qualified(
 		return false;
 	}
 
-	if (track.size() > 100)
+	if (track.size() > MAX_DEPTH)
 	{
 		qDebug().noquote() << indent << "      Recursion depth reached.";
 		return false;

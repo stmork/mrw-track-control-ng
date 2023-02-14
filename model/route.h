@@ -30,7 +30,30 @@ namespace mrw::model
 	 * Route instances using the RailPart::reserve() method. This class also
 	 * maintains the SectionState states of each involved Section.
 	 *
+	 * To build a route several conditions have to meet. First you need the
+	 * direction to drive and whether you want to shunt or region overlapping
+	 * tour. So the first condition is that shunting don't leave the starting
+	 * region.
+	 *
+	 * The next RailPart is selected by advancing in drive direction. It is
+	 * possible that more than one RailPart is possible at switches. The list
+	 * is sorted by priority. So you have to use the RailPart::advance()
+	 * method to iterate through the possibilities. The selected RailPart has
+	 * to be unreserved. The is the next condition.
+	 *
+	 * All RailPart elements belong to a Section. The third condition is that
+	 * only the first section - the starting section - is allowed to be
+	 * occupied. All other have to be in state SectionState::FREE.
+	 *
+	 * Now recurse through the selected RailPart and redo again. The last
+	 * condition is the recursion depth specified by the Route::MAX_DEPTH
+	 * constant.
+	 *
+	 * When returning successfully from recursion a further condition tests
+	 * the flank protection. This is only required when using a tour route.
+	 *
 	 * @see RailPart::reserve()
+	 * @see RailPart::advance()
 	 * @see SectionState
 	 */
 	class Route : public QObject
@@ -40,6 +63,8 @@ namespace mrw::model
 	public:
 		typedef std::list<RailPart *> RailTrack;
 		typedef std::list<Section *>  SectionTrack;
+
+		static const size_t MAX_DEPTH = 100;
 
 		explicit Route(
 			const bool           dir,
