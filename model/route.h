@@ -154,20 +154,25 @@ namespace mrw::model
 		/** The tail of the Rail track. */
 		RailPart        *       last_valid_part = nullptr;
 
-		/** The allocation state. */
+		/**
+		 * The allocation state. SectionState::SHUNT and SectionState::TOUR
+		 * are the only supported allocation states.
+		 */
 		const SectionState      state = FREE;
 
 		/** The direction to drive. */
 		const bool              direction;
 
 		/**
-		 * State for automatic unblocking. This is necessary for
-		 * SectionState::TOUR mode.
+		 * State for automatic unblocking. In SectionState::TOUR mode this flag
+		 * must be false for blocks between main signals. In this case the
+		 * Section is marked SectionState::PASSED.
 		 */
 		const bool              auto_unblock = false;
 
 		/**
-		 * The collection of flank switches along the route.
+		 * The collection of flank switches along the route. The content
+		 * changes while a train drives through the route.
 		 */
 		std::vector<mrw::model::RegularSwitch *> flank_switches;
 
