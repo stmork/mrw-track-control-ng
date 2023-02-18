@@ -80,6 +80,7 @@ private slots:
 	void onInit();
 	void onOperate(const bool active);
 	void onEdit(const bool active);
+	void onManual(const bool active);
 	void onQuit(const bool active);
 	void onFailed();
 
@@ -120,16 +121,20 @@ private:
 		return count;
 	}
 
-	virtual void        resetTransaction() override;
-	virtual bool        hasActiveRoutes() override;
-	virtual void        disableRoutes() override;
+	void          resetTransaction() override;
+	bool          isManualValid() override;
+	bool          hasActiveRoutes() override;
+	void          disableRoutes() override;
+	void          activateManual(const bool activate) override;
 
-	mrw::model::Route * createRoute(
+	mrw::model::Section * manualSection() const;
+
+	mrw::model::Route  *  createRoute(
 		const bool                     direction,
 		const mrw::model::SectionState state);
-	void                addRoute(WidgetRoute * route);
-	void                startBeermode(const bool dir);
-	void                changePage(const int offset);
+	void                  addRoute(WidgetRoute * route);
+	void                  startBeermode(const bool dir);
+	void                  changePage(const int offset);
 
 	Ui::MainWindow               *              ui;
 	mrw::model::ModelRepository        &        repo;

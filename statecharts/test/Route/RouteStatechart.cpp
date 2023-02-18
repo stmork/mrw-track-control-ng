@@ -871,6 +871,7 @@ namespace mrw
 						if (failed_raised)
 						{
 							exseq_main_region_Active();
+							ifaceOperationCallback->fail();
 							enseq_main_region_Disable_default();
 							react(0);
 							transitioned_after = 0;
@@ -904,7 +905,6 @@ namespace mrw
 					if (timeEvents[0])
 					{
 						exseq_main_region_Disable();
-						ifaceOperationCallback->fail();
 						finished_raised = true;
 						timeEvents[0] = false;
 						enseq_main_region__final__default();
@@ -1161,6 +1161,7 @@ namespace mrw
 					if (timeEvents[6])
 					{
 						exseq_main_region_Wait();
+						ifaceOperationCallback->fail();
 						timeEvents[6] = false;
 						enseq_main_region_Disable_default();
 						react(0);

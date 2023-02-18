@@ -28,6 +28,8 @@ namespace mrw::ctrl
 		SwitchController();
 		virtual ~SwitchController();
 
+		void setManual(const bool manual);
+
 		// Implementations from OperationCallback
 		virtual void inc() override;
 		virtual void dec() override;

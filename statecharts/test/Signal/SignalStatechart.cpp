@@ -16,7 +16,7 @@ namespace mrw
 	namespace statechart
 	{
 
-		const sc::integer SignalStatechart::timeout = 2000;
+		const sc::integer SignalStatechart::timeout = 3500;
 		const sc::integer SignalStatechart::OFF = -1;
 		const sc::integer SignalStatechart::STOP = 0;
 		const sc::integer SignalStatechart::GO = 1;

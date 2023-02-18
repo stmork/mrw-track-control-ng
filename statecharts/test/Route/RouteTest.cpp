@@ -358,6 +358,7 @@ namespace mrw
 			typedef void (FailMock::*functiontype)();
 		public:
 			void (FailMock::*failBehaviorDefault)();
+			int callCount;
 
 			void fail1()
 			{
@@ -365,6 +366,21 @@ namespace mrw
 
 			void failDefault()
 			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void fail()
+			{
+				++callCount;
 			}
 
 			functiontype getBehavior()
@@ -385,6 +401,7 @@ namespace mrw
 			void reset()
 			{
 				initializeBehavior();
+				callCount = 0;
 			}
 		};
 		static FailMock * failMock;
@@ -912,6 +929,7 @@ namespace mrw
 			}
 			void fail()
 			{
+				failMock->fail();
 				return (failMock->*(failMock->getBehavior()))();
 			}
 			void tryComplete()
@@ -2333,6 +2351,8 @@ namespace mrw
 		}
 		TEST_F(RouteTest, failActive)
 		{
+			failMock = new FailMock();
+			failMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			enableSectionsMock = new EnableSectionsMock();
@@ -2404,9 +2424,12 @@ namespace mrw
 
 			statechart->raiseFailed();
 
+			EXPECT_TRUE(failMock->calledAtLeastOnce());
+
 			disabled();
 
 
+			failMock->reset();
 		}
 		TEST_F(RouteTest, failTurningSwitches)
 		{

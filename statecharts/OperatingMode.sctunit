@@ -18,8 +18,10 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		assert called can.connectBus
 
 		mock hasActiveRoutes returns (false)
+		mock isManualValid returns (true)
 		mock disableRoutes
 		mock resetTransaction
+		mock activateManual
 	}
 
 	@Test
@@ -248,6 +250,73 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 	}
 
 	@Test
+	operation doManual()
+	{
+		// Given
+		doOperating()
+		mock isManualValid returns (true)
+
+		// When
+		raise manual : true
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Manual)
+		assert operating
+		assert valueof(operating) == false
+		assert playing
+		assert valueof(playing) == true
+		assert called activateManual(true)
+	}
+
+	@Test
+	operation doLeaveManual()
+	{
+		// Given
+		doManual()
+
+		// When
+		raise manual : false
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Init)
+		assert playing
+		assert valueof(playing) == false
+		assert called resetTransaction
+		assert start
+	}
+
+	@Test
+	operation doQuitManual()
+	{
+		// Given
+		doManual()
+
+		// When
+		raise finalize
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Wait)
+		assert playing
+		assert valueof(playing) == false
+		assert called activateManual(false)
+	}
+
+	@Test
+	operation doWaitManual()
+	{
+		// Given
+		doQuitManual()
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region._final_)
+		assert quit
+	}
+
+	@Test
 	operation operateAfterEdit()
 	{
 		// Given
@@ -372,6 +441,14 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		assert !is_active
 
 		doEdit()
+		exit
+		assert !is_active
+
+		doManual()
+		exit
+		assert !is_active
+
+		doWaitManual()
 		exit
 		assert !is_active
 

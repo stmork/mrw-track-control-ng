@@ -40,6 +40,7 @@ namespace mrw::ctrl
 
 		model::Section * section() const;
 
+		void setAutoOff(const bool auto_off);
 		void setAutoUnlock(const bool auto_unlock);
 		void nextController(SectionController * next);
 

@@ -55,11 +55,13 @@ namespace mrw
 				main_region_Running_operating_Init,
 				main_region_Running_operating_Operating,
 				main_region_Running_operating_Editing,
-				main_region_Running_operating_Disable
+				main_region_Running_operating_Disable,
+				main_region_Manual,
+				main_region_Wait
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 9;
+			static const sc::integer numStates = 11;
 			static const sc::integer scvi_main_region_Exit = 0;
 			static const sc::integer scvi_main_region__final_ = 0;
 			static const sc::integer scvi_main_region_Running = 0;
@@ -69,6 +71,8 @@ namespace mrw
 			static const sc::integer scvi_main_region_Running_operating_Operating = 0;
 			static const sc::integer scvi_main_region_Running_operating_Editing = 0;
 			static const sc::integer scvi_main_region_Running_operating_Disable = 0;
+			static const sc::integer scvi_main_region_Manual = 0;
+			static const sc::integer scvi_main_region_Wait = 0;
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -79,6 +83,7 @@ namespace mrw
 				failed,
 				edit,
 				operate,
+				manual,
 				init,
 				finalize,
 				completed,
@@ -94,6 +99,17 @@ namespace mrw
 				virtual ~EventInstance() = default;
 				const Event eventId;
 			};
+			template <typename T>
+			class EventInstanceWithValue : public EventInstance
+			{
+			public:
+				explicit EventInstanceWithValue(Event id, T val) :
+					EventInstance(id),
+					value(val)
+				{}
+				virtual ~EventInstanceWithValue() = default;
+				const T value;
+			};
 			/*! Raises the in event 'clear' of default interface scope. */
 			void raiseClear();
 			/*! Raises the in event 'started' of default interface scope. */
@@ -104,6 +120,8 @@ namespace mrw
 			void raiseEdit();
 			/*! Raises the in event 'operate' of default interface scope. */
 			void raiseOperate();
+			/*! Raises the in event 'manual' of default interface scope. */
+			void raiseManual(bool manual_);
 			/*! Raises the in event 'init' of default interface scope. */
 			void raiseInit();
 			/*! Raises the in event 'finalize' of default interface scope. */
@@ -128,6 +146,10 @@ namespace mrw
 			bool isRaisedQuitting();
 			/*! Get value of event 'quitting' of default interface scope. */
 			bool getQuittingValue();
+			/*! Check if event 'playing' of default interface scope is raised. */
+			bool isRaisedPlaying();
+			/*! Get value of event 'playing' of default interface scope. */
+			bool getPlayingValue();
 			/*! Check if event 'quit' of default interface scope is raised. */
 			bool isRaisedQuit();
 
@@ -145,9 +167,13 @@ namespace mrw
 
 				virtual void resetTransaction() = 0;
 
+				virtual bool isManualValid() = 0;
+
 				virtual bool hasActiveRoutes() = 0;
 
 				virtual void disableRoutes() = 0;
+
+				virtual void activateManual(bool active) = 0;
 
 
 			};
@@ -299,11 +325,14 @@ namespace mrw
 			void enact_main_region_Running_operating_Operating();
 			void enact_main_region_Running_operating_Editing();
 			void enact_main_region_Running_operating_Disable();
+			void enact_main_region_Manual();
+			void enact_main_region_Wait();
 			void exact_main_region_Exit();
 			void exact_main_region_Running_operating_Prepare_Bus();
 			void exact_main_region_Running_operating_Init();
 			void exact_main_region_Running_operating_Operating();
 			void exact_main_region_Running_operating_Editing();
+			void exact_main_region_Manual();
 			void enseq_main_region_Exit_default();
 			void enseq_main_region__final__default();
 			void enseq_main_region_Running_operating_Failed_default();
@@ -312,6 +341,8 @@ namespace mrw
 			void enseq_main_region_Running_operating_Operating_default();
 			void enseq_main_region_Running_operating_Editing_default();
 			void enseq_main_region_Running_operating_Disable_default();
+			void enseq_main_region_Manual_default();
+			void enseq_main_region_Wait_default();
 			void enseq_main_region_default();
 			void exseq_main_region_Exit();
 			void exseq_main_region__final_();
@@ -322,6 +353,8 @@ namespace mrw
 			void exseq_main_region_Running_operating_Operating();
 			void exseq_main_region_Running_operating_Editing();
 			void exseq_main_region_Running_operating_Disable();
+			void exseq_main_region_Manual();
+			void exseq_main_region_Wait();
 			void exseq_main_region();
 			void exseq_main_region_Running_operating();
 			void react_main_region__choice_0();
@@ -337,6 +370,8 @@ namespace mrw
 			sc::integer main_region_Running_operating_Operating_react(const sc::integer transitioned_before);
 			sc::integer main_region_Running_operating_Editing_react(const sc::integer transitioned_before);
 			sc::integer main_region_Running_operating_Disable_react(const sc::integer transitioned_before);
+			sc::integer main_region_Manual_react(const sc::integer transitioned_before);
+			sc::integer main_region_Wait_react(const sc::integer transitioned_before);
 			void clearOutEvents();
 			void clearInEvents();
 			void microStep();
@@ -359,6 +394,12 @@ namespace mrw
 
 			/*! Indicates event 'operate' of default interface scope is active. */
 			bool operate_raised;
+
+			/*! Indicates event 'manual' of default interface scope is active. */
+			bool manual_raised;
+
+			/*! Value of event 'manual' of default interface scope. */
+			bool manual_value;
 
 			/*! Indicates event 'init' of default interface scope is active. */
 			bool init_raised;
@@ -395,6 +436,12 @@ namespace mrw
 
 			/*! Indicates event 'quitting' of default interface scope is active. */
 			bool quitting_raised;
+
+			/*! Value of event 'playing' of default interface scope. */
+			bool playing_value;
+
+			/*! Indicates event 'playing' of default interface scope is active. */
+			bool playing_raised;
 
 			/*! Indicates event 'quit' of default interface scope is active. */
 			bool quit_raised;

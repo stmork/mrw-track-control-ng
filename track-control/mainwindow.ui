@@ -239,6 +239,7 @@
     </property>
     <addaction name="actionEdit"/>
     <addaction name="actionOperate"/>
+    <addaction name="actionManual"/>
     <addaction name="actionClear"/>
     <addaction name="separator"/>
     <addaction name="actionInit"/>
@@ -462,6 +463,14 @@
    </property>
    <property name="text">
     <string>Biermodus rechts</string>
+   </property>
+  </action>
+  <action name="actionManual">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Manueller Betrieb</string>
    </property>
   </action>
  </widget>

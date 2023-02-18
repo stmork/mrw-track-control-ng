@@ -124,6 +124,12 @@ namespace mrw
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent();
 
+			/*! Gets the value of the variable 'isManual' that is defined in the default interface scope. */
+			bool getIsManual() const;
+
+			/*! Sets the value of the variable 'isManual' that is defined in the default interface scope. */
+			void setIsManual(bool isManual);
+
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
 			static sc::integer getTimeout() ;
 
@@ -222,6 +228,7 @@ namespace mrw
 			SwitchStatechart(const SwitchStatechart & rhs);
 			SwitchStatechart & operator=(const SwitchStatechart &);
 
+			bool isManual;
 			static const sc::integer timeout;
 
 

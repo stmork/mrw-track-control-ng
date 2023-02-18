@@ -28,6 +28,11 @@ SwitchController::~SwitchController()
 	statechart.exit();
 }
 
+void SwitchController::setManual(const bool manual)
+{
+	statechart.setIsManual(manual);
+}
+
 void SwitchController::inc()
 {
 	increase();

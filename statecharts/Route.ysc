@@ -8,11 +8,11 @@
       <vertices xsi:type="sgraph:State" xmi:id="_yYvPAHWAEe2oVZ4yFrzfuw" specification="entry / raise activated" name="Active" incomingTransitions="_jxc1gHWAEe2oVZ4yFrzfuw">
         <outgoingTransitions xmi:id="_SeMvkHWBEe2oVZ4yFrzfuw" specification="disable" target="_59hPEHWAEe2oVZ4yFrzfuw"/>
         <outgoingTransitions xmi:id="_iuFhwHWFEe2oVZ4yFrzfuw" specification="turn" target="_df3lsHpBEe2_ZOj2sFqWdg"/>
-        <outgoingTransitions xmi:id="_Ibn34IB4Ee2zpZIoL5V4kQ" specification="failed" target="_59hPEHWAEe2oVZ4yFrzfuw"/>
+        <outgoingTransitions xmi:id="_Ibn34IB4Ee2zpZIoL5V4kQ" specification="failed / fail" target="_59hPEHWAEe2oVZ4yFrzfuw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_59hPEHWAEe2oVZ4yFrzfuw" specification="entry / resetTransaction&#xA;entry / disableSections; disableSignals&#xA;entry / tryComplete" name="Disable" incomingTransitions="_SeMvkHWBEe2oVZ4yFrzfuw _Ibn34IB4Ee2zpZIoL5V4kQ _r6lycICaEe2zpZIoL5V4kQ _ztj_gICaEe2zpZIoL5V4kQ _22ceMICpEe2zpZIoL5V4kQ _9uSbUIYxEe2KYdnsQIjglw">
         <outgoingTransitions xmi:id="_L-BZMHo5Ee2_ZOj2sFqWdg" specification="completed" target="_LRSUcJ4nEe2HBvHaNKBCSA"/>
-        <outgoingTransitions xmi:id="_1fhjAICzEe2zpZIoL5V4kQ" specification="after emergency ms / fail; raise finished" target="_KgRo0Ho5Ee2_ZOj2sFqWdg"/>
+        <outgoingTransitions xmi:id="_1fhjAICzEe2zpZIoL5V4kQ" specification="after emergency ms / raise finished" target="_KgRo0Ho5Ee2_ZOj2sFqWdg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_lSD6YHWFEe2oVZ4yFrzfuw" name="Start" incomingTransitions="_L64B_XWAEe2cXugcT2PGGw">
         <outgoingTransitions xmi:id="_oCR_QHWFEe2oVZ4yFrzfuw" specification="turn" target="_df3lsHpBEe2_ZOj2sFqWdg"/>
@@ -56,7 +56,7 @@
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_yjEiUICaEe2zpZIoL5V4kQ" specification="entry / tryComplete" name="Wait" incomingTransitions="_05jRgICaEe2zpZIoL5V4kQ">
         <outgoingTransitions xmi:id="_ztj_gICaEe2zpZIoL5V4kQ" specification="completed" target="_59hPEHWAEe2oVZ4yFrzfuw"/>
-        <outgoingTransitions xmi:id="_22ceMICpEe2zpZIoL5V4kQ" specification="after emergency ms" target="_59hPEHWAEe2oVZ4yFrzfuw"/>
+        <outgoingTransitions xmi:id="_22ceMICpEe2zpZIoL5V4kQ" specification="after emergency ms / fail" target="_59hPEHWAEe2oVZ4yFrzfuw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_yqc6cIYxEe2KYdnsQIjglw" specification="entry / fail&#xA;entry / disableSections; disableSignals&#xA;entry / unlockSections" name="Emergency Shutdown" incomingTransitions="_EC0EEHWBEe2oVZ4yFrzfuw _MI8h4IaREe2yx5oO4CMMcQ _MujwYIaREe2yx5oO4CMMcQ _NWaakIaREe2yx5oO4CMMcQ _ZcUAwKOuEe2dU9MDULV9nw">
         <outgoingTransitions xmi:id="_9uSbUIYxEe2KYdnsQIjglw" specification="after section_timeout ms" target="_59hPEHWAEe2oVZ4yFrzfuw"/>
@@ -436,7 +436,7 @@
     <edges xmi:id="_IbptEIB4Ee2zpZIoL5V4kQ" type="Transition" element="_Ibn34IB4Ee2zpZIoL5V4kQ" source="_yYwdIHWAEe2oVZ4yFrzfuw" target="_59idMHWAEe2oVZ4yFrzfuw">
       <children xsi:type="notation:DecorationNode" xmi:id="_IbqUIIB4Ee2zpZIoL5V4kQ" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_IbqUIYB4Ee2zpZIoL5V4kQ"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_IbqUIoB4Ee2zpZIoL5V4kQ" x="-70" y="-22"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_IbqUIoB4Ee2zpZIoL5V4kQ" x="-42" y="-43"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_IbptEYB4Ee2zpZIoL5V4kQ" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_IbptE4B4Ee2zpZIoL5V4kQ" fontName="Verdana"/>

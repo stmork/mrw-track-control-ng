@@ -189,6 +189,10 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 		&statechart, &OperatingModeStatechart::started,
 		Qt::QueuedConnection);
 	connect(
+		&ControllerRegistry::instance(), &ControllerRegistry::completed,
+		&statechart, &OperatingModeStatechart::completed,
+		Qt::QueuedConnection);
+	connect(
 		&statechart, &OperatingModeStatechart::quit,
 		QCoreApplication::instance(), &QCoreApplication::quit);
 
@@ -199,6 +203,10 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 	connect(
 		ui->actionEdit, &QAction::triggered,
 		&statechart, &OperatingModeStatechart::edit,
+		Qt::QueuedConnection);
+	connect(
+		ui->actionManual, &QAction::triggered,
+		&statechart, &OperatingModeStatechart::manual,
 		Qt::QueuedConnection);
 	connect(
 		ui->actionInit, &QAction::triggered,
@@ -229,6 +237,10 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 		this, &MainWindow::onOperate,
 		Qt::QueuedConnection);
 	connect(
+		&statechart, &OperatingModeStatechart::playing,
+		this, &MainWindow::onManual,
+		Qt::QueuedConnection);
+	connect(
 		&statechart, &OperatingModeStatechart::editing,
 		this, &MainWindow::onEdit,
 		Qt::QueuedConnection);
@@ -243,6 +255,7 @@ void MainWindow::enable()
 	const bool   operating    = statechart.isStateActive(OperatingModeStatechart::State::main_region_Running_operating_Operating);
 	const bool   editing      = statechart.isStateActive(OperatingModeStatechart::State::main_region_Running_operating_Editing);
 	const bool   failed       = statechart.isStateActive(OperatingModeStatechart::State::main_region_Running_operating_Failed);
+	const bool   manual       = statechart.isStateActive(OperatingModeStatechart::State::main_region_Manual);
 	const size_t switch_count = count<RegularSwitchController>() + count<DoubleCrossSwitchController>();
 	const size_t rail_count   = count<RailController>() +          count<SignalControllerProxy>();
 
@@ -261,6 +274,7 @@ void MainWindow::enable()
 
 	ui->actionOperate->setEnabled(editing);
 	ui->actionEdit->setEnabled((operating && !hasActiveRoutes()) || failed);
+	ui->actionManual->setEnabled((operating && isManualValid()) || manual);
 	ui->actionClear->setEnabled(failed);
 	ui->actionInit->setEnabled(operating);
 
@@ -318,6 +332,64 @@ void MainWindow::disableRoutes()
 	__METHOD__;
 
 	on_clearAllRoutes_clicked();
+}
+
+void MainWindow::activateManual(const bool activate)
+{
+	std::vector<SectionController *> section_controllers;
+	Section             *            selected = manualSection();
+
+	ControllerRegistry::instance().collect<SectionController>(section_controllers);
+
+	for (SectionController * controller : section_controllers)
+	{
+		Section * section = *controller;
+
+		section->setState(activate ? SectionState::SHUNTING : SectionState::FREE);
+
+		if (activate)
+		{
+			// enable() may turn relais on and locks Section.
+			controller->setAutoOff(false);
+			controller->setAutoUnlock(false);
+			controller->enable(!section->occupation() || (section == selected));
+		}
+		else
+		{
+			// disable() turns relais off but keeps Section locked.
+			controller->disable();
+			controller->unlock();
+		}
+	}
+}
+
+bool MainWindow::isManualValid()
+{
+	return manualSection() != nullptr;
+}
+
+Section * MainWindow::manualSection() const
+{
+	std::unordered_set<Section *> sections;
+
+	for (int i = 0; i < ui->sectionListWidget->count(); i++)
+	{
+		QListWidgetItem * item       = ui->sectionListWidget->item(i);
+		BaseController  * controller = item->data(ControllerWidget::USER_ROLE).value<BaseController *>();
+		RailPartInfo   *  info       = dynamic_cast<RailPartInfo *>(controller);
+
+		if (info != nullptr)
+		{
+			Section * section = info->section();
+
+			if (section->occupation())
+			{
+				sections.insert(section);
+			}
+		}
+	}
+
+	return sections.size() == 1 ? *sections.begin() : nullptr;
 }
 
 void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Position * position)
@@ -854,6 +926,22 @@ void MainWindow::onEdit(const bool active)
 
 	RegionForm::setOpMode(ui->regionTabWidget, active ? "E" : "");
 	BaseWidget::setVerbose(active);
+	enable();
+	ui->regionTabWidget->currentWidget()->update();
+}
+
+void MainWindow::onManual(const bool active)
+{
+	std::vector<SwitchController *>  switch_controllers;
+
+	__METHOD__;
+
+	RegionForm::setOpMode(ui->regionTabWidget, active ? "M" : "");
+	ControllerRegistry::instance().collect<SwitchController>(switch_controllers);
+	for (SwitchController * controller : switch_controllers)
+	{
+		controller->setManual(active);
+	}
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
 }

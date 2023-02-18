@@ -122,6 +122,7 @@ void WidgetRoute::prepareSections()
 	collectSectionControllers(controllers);
 	for (SectionController * controller : controllers)
 	{
+		controller->setAutoOff(true);
 		controller->setAutoUnlock(auto_unblock);
 		if (controller->section()->lock() != LockState::LOCKED)
 		{
@@ -602,7 +603,7 @@ void WidgetRoute::fail()
 {
 	__METHOD__;
 
-	qCritical().noquote() << String::red("Timeout turning route:") << list_item.text();
+	qCritical().noquote() << String::red("Failing route:") << list_item.text();
 	Batch::dump();
 
 	dump();

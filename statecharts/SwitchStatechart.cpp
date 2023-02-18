@@ -22,6 +22,7 @@ namespace mrw
 
 		SwitchStatechart::SwitchStatechart(QObject * parent) :
 			QObject(parent),
+			isManual(false),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
@@ -311,6 +312,16 @@ namespace mrw
 					break;
 				}
 			}
+		}
+
+		bool SwitchStatechart::getIsManual() const
+		{
+			return isManual;
+		}
+
+		void SwitchStatechart::setIsManual(bool isManual_)
+		{
+			this->isManual = isManual_;
 		}
 
 		sc::integer SwitchStatechart::getTimeout()
@@ -680,7 +691,7 @@ namespace mrw
 		void SwitchStatechart::react_main_region_Operating_operating__choice_0()
 		{
 			/* The reactions of state null. */
-			if (ifaceOperationCallback->isFree())
+			if ((ifaceOperationCallback->isFree()) || (isManual))
 			{
 				enseq_main_region_Operating_operating_Unlocked_default();
 			}

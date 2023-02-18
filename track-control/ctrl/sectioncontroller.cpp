@@ -105,6 +105,11 @@ Section * SectionController::section() const
 	return *this;
 }
 
+void SectionController::setAutoOff(const bool auto_off)
+{
+	statechart.setAuto_off(auto_off);
+}
+
 void SectionController::setAutoUnlock(const bool auto_unlock)
 {
 	statechart.setAuto_unlock(auto_unlock);

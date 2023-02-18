@@ -296,6 +296,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		raise failed
 
 		// Then
+		assert called fail
 		disabled()
 	}
 
