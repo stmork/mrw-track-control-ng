@@ -138,6 +138,18 @@ namespace mrw::ctrl
 		}
 
 		/**
+		 * A controlled mrw::model::Device is always in conjunction with a
+		 * surrounding mrw::model::Section. This method returns the
+		 * mrw::model::SectionState of this mrw::model::Section.
+		 *
+		 * @note The controlled mrw::model::Device may be the
+		 * mrw::model::Section itself.
+		 *
+		 * @return The mrw::model::SectionState.
+		 */
+
+		virtual mrw::model::SectionState state() const = 0;
+		/**
 		 * This method returns the modification state of the controlled
 		 * mrw::model::Device.
 		 *
@@ -148,18 +160,6 @@ namespace mrw::ctrl
 		 * @see mrw::model::Device::lock()
 		 */
 		virtual mrw::model::Device::LockState lock() const = 0;
-
-		/**
-		 * A controlled mrw::model::Device is always in conjunction with a
-		 * surrounding mrw::model::Section. This method returns the
-		 * mrw::model::SectionState of this mrw::model::Section.
-		 *
-		 * @note The controlled mrw::model::Device may be the
-		 * mrw::model::Section itself.
-		 *
-		 * @return The mrw::model::SectionState.
-		 */
-		virtual mrw::model::SectionState state() const = 0;
 
 		/**
 		 * This method returns the bending nature of the

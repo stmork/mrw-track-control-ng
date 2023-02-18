@@ -10,5 +10,4 @@ using namespace mrw::ctrl;
 BaseSwitchController::BaseSwitchController(QObject * parent) :
 	BaseController(parent)
 {
-
 }
