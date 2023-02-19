@@ -19,7 +19,7 @@ namespace mrw::ctrl
 	class SectionController :
 		public BaseController,
 		public ControllerRegistrand,
-		public BatchParticipant,
+		public mrw::util::BatchParticipant,
 		public mrw::statechart::SectionStatechart::OperationCallback
 	{
 		Q_OBJECT

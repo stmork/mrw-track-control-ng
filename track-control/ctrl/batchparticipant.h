@@ -5,12 +5,12 @@
 
 #pragma once
 
-#ifndef MRW_CTRL_BATCHPARTICIPANT_H
-#define MRW_CTRL_BATCHPARTICIPANT_H
+#ifndef MRW_UTIL_BATCHPARTICIPANT_H
+#define MRW_UTIL_BATCHPARTICIPANT_H
 
 #include <QString>
 
-namespace mrw::ctrl
+namespace mrw::util
 {
 	class Batch;
 

@@ -9,7 +9,7 @@
 #include <ctrl/batch.h>
 #include <ctrl/batchparticipant.h>
 
-using namespace mrw::ctrl;
+using namespace mrw::util;
 
 std::atomic_uint32_t   Batch::counter;
 

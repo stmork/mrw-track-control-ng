@@ -25,7 +25,7 @@
 
 class WidgetRoute :
 	public mrw::model::Route,
-	public mrw::ctrl::Batch,
+	public mrw::util::Batch,
 	public mrw::statechart::RouteStatechart::OperationCallback
 {
 	Q_OBJECT

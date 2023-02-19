@@ -13,7 +13,7 @@
 
 #include <ctrl/batch.h>
 
-class RouteBatch : public QObject, public mrw::ctrl::Batch
+class RouteBatch : public QObject, public mrw::util::Batch
 {
 	Q_OBJECT
 

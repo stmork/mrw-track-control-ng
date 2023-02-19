@@ -25,7 +25,7 @@ namespace mrw::ctrl
 		public SignalController,
 		public RailPartInfo,
 		public ControllerRegistrand,
-		public BatchParticipant,
+		public mrw::util::BatchParticipant,
 		public mrw::statechart::SignalControllerStatechart::OperationCallback
 	{
 		Q_OBJECT

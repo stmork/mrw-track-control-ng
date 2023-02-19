@@ -5,13 +5,13 @@
 
 #pragma once
 
-#ifndef MRW_CTRL_BATCH_H
-#define MRW_CTRL_BATCH_H
+#ifndef MRW_UTIL_BATCH_H
+#define MRW_UTIL_BATCH_H
 
 #include <atomic>
 #include <unordered_set>
 
-namespace mrw::ctrl
+namespace mrw::util
 {
 	class BatchParticipant;
 

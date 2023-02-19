@@ -18,7 +18,7 @@ namespace mrw::ctrl
 	class SwitchController :
 		public RailPartInfo,
 		public ControllerRegistrand,
-		public BatchParticipant,
+		public mrw::util::BatchParticipant,
 		public mrw::statechart::SwitchStatechart::OperationCallback
 	{
 	protected:

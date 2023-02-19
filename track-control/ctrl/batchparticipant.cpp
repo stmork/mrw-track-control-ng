@@ -8,7 +8,7 @@
 #include <ctrl/controllerregistry.h>
 #include <ctrl/globalbatch.h>
 
-using namespace mrw::ctrl;
+using namespace mrw::util;
 
 BatchParticipant::BatchParticipant()
 {

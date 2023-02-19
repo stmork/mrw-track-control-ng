@@ -5,20 +5,20 @@
 
 #pragma once
 
-#ifndef MRW_CTRL_GLOBALBATCH_H
-#define MRW_CTRL_GLOBALBATCH_H
+#ifndef MRW_UTIL_GLOBALBATCH_H
+#define MRW_UTIL_GLOBALBATCH_H
 
 #include <QObject>
 
 #include <util/singleton.h>
 #include <ctrl/batch.h>
 
-namespace mrw::ctrl
+namespace mrw::util
 {
 	class GlobalBatch :
 		public QObject,
 		public Batch,
-		public mrw::util::Singleton<GlobalBatch>
+		public Singleton<GlobalBatch>
 	{
 		Q_OBJECT
 

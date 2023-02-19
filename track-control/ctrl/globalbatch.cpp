@@ -6,7 +6,7 @@
 #include <util/method.h>
 #include <ctrl/globalbatch.h>
 
-using namespace mrw::ctrl;
+using namespace mrw::util;
 
 GlobalBatch::GlobalBatch()
 {
