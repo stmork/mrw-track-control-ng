@@ -6,8 +6,8 @@
 #include <QCoreApplication>
 #include <QDebug>
 
-#include <ctrl/batch.h>
-#include <ctrl/batchparticipant.h>
+#include <util/batch.h>
+#include <util/batchparticipant.h>
 
 using namespace mrw::util;
 
@@ -23,28 +23,49 @@ Batch::Batch() : id(++counter)
 {
 }
 
+Batch::~Batch()
+{
+	while (!transaction.empty())
+	{
+		BatchParticipant * participant = *transaction.begin();
+
+		qWarning().noquote() << "Transaction participant not resetted:" << participant->name();
+
+		// Since a transaction is also open in BatchParticipant it will
+		// also call this->remove()
+		participant->setBatch(nullptr);
+	}
+}
+
 void Batch::reset()
 {
 	qDebug("======================= Transaction (ID=%u) left %zu elements.",
 		id, transaction.size());
+
+	for (BatchParticipant * participant : transaction)
+	{
+		participant->setBatch(nullptr);
+	}
 	transaction.clear();
 }
 
-void Batch::increase(BatchParticipant * element)
+bool Batch::increase(BatchParticipant * element)
 {
 	if (transaction.find(element) == transaction.end())
 	{
 		transaction.emplace(element);
 		qDebug("Transaction (ID=%u) increased to %zu element(s). Added: %s",
 			id, transaction.size(),  element->name().toLatin1().constData());
+		return true;
 	}
 	else
 	{
 		qWarning().noquote() << "Transaction already contains element" << element->name();
 	}
+	return false;
 }
 
-void Batch::decrease(BatchParticipant * element)
+bool Batch::decrease(BatchParticipant * element)
 {
 	const size_t count = transaction.erase(element);
 
@@ -59,12 +80,14 @@ void Batch::decrease(BatchParticipant * element)
 				id);
 			emit completed();
 		}
+		return true;
 	}
 	else
 	{
 		qWarning("Transaction (ID=%u) does not contain element %s",
 			id,  element->name().toLatin1().constData());
 	}
+	return false;
 }
 
 bool Batch::contains(BatchParticipant * ctrl)
@@ -97,8 +120,13 @@ void Batch::dump()
 {
 	qDebug("======================= Transaction (ID=%u) contains %zu elements.",
 		id, transaction.size());
-	for (BatchParticipant * registrand : transaction)
+	for (BatchParticipant * participant : transaction)
 	{
-		qDebug() << registrand->name();
+		qDebug() << participant->name();
 	}
+}
+
+void Batch::remove(mrw::util::BatchParticipant * element)
+{
+	transaction.erase(element);
 }

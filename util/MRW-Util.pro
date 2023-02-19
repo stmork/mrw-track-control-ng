@@ -9,6 +9,9 @@ CONFIG   += staticlib
 include(../common.pri)
 
 SOURCES += \
+	batch.cpp \
+	batchparticipant.cpp \
+	globalbatch.cpp \
 	clockservice.cpp \
 	dumphandler.cpp \
 	method.cpp \
@@ -20,6 +23,9 @@ SOURCES += \
 	termhandler.cpp
 
 HEADERS += \
+	batch.h \
+	batchparticipant.h \
+	globalbatch.h \
 	clockservice.h \
 	constantenumerator.h \
 	constantenumerator.h \

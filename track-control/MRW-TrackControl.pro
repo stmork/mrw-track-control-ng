@@ -8,12 +8,9 @@ QT += gui widgets network
 include(../common.pri)
 
 SOURCES += \
-	ctrl/batch.cpp \
-	ctrl/batchparticipant.cpp \
 	ctrl/controllerregistrand.cpp \
 	ctrl/controllerregistry.cpp \
 	ctrl/doublecrossswitchcontrollerproxy.cpp \
-	ctrl/globalbatch.cpp \
 	ctrl/railpartinfo.cpp \
 	ctrl/railcontrollerproxy.cpp \
 	ctrl/regularswitchcontrollerproxy.cpp \
@@ -31,12 +28,9 @@ SOURCES += \
 
 HEADERS += \
 	beermodeservice.h \
-	ctrl/batch.h \
-	ctrl/batchparticipant.h \
 	ctrl/controllerregistrand.h \
 	ctrl/controllerregistry.h \
 	ctrl/doublecrossswitchcontrollerproxy.h \
-	ctrl/globalbatch.h \
 	ctrl/railcontrollerproxy.h \
 	ctrl/railpartinfo.h \
 	ctrl/regularswitchcontrollerproxy.h \

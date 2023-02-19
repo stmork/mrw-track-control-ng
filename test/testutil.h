@@ -11,9 +11,25 @@
 #include <QObject>
 
 #include <util/constantenumerator.h>
+#include <util/batch.h>
 
 namespace mrw::test
 {
+	class TestBatch : public QObject, public mrw::util::Batch
+	{
+		Q_OBJECT
+
+	public:
+		TestBatch() : QObject(nullptr), Batch()
+		{
+		}
+
+		virtual ~TestBatch() = default;
+
+	signals:
+		void completed() override;
+	};
+
 	class TestUtil : public QObject
 	{
 		Q_OBJECT
@@ -25,6 +41,8 @@ namespace mrw::test
 		explicit TestUtil(QObject * parent = nullptr);
 
 	private slots:
+		void init();
+
 		void testSettings();
 		void testStringConcat();
 		void testStringOut();
@@ -35,6 +53,14 @@ namespace mrw::test
 		void testClockService();
 		void testRandom();
 		void testDumpHandler();
+		void testEmptyBatch();
+		void testUseBatch();
+		void testResetBatch();
+		void testDoubleUseBatch();
+		void testDumpBatch();
+		void testCustomBatch();
+		void testUnsetCustomBatch();
+		void testDifferentBatch();
 	};
 }
 

@@ -15,7 +15,7 @@
 #include <can/mrwbusservice.h>
 #include <model/device.h>
 #include <ctrl/controllerregistrand.h>
-#include <ctrl/batch.h>
+#include <util/batch.h>
 #include <util/singleton.h>
 
 namespace mrw::ctrl

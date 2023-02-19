@@ -8,9 +8,9 @@
 #ifndef MRW_CTRL_SWITCHCONTROLLER_H
 #define MRW_CTRL_SWITCHCONTROLLER_H
 
+#include <util/batchparticipant.h>
 #include <ctrl/railpartinfo.h>
 #include <ctrl/controllerregistrand.h>
-#include <ctrl/batchparticipant.h>
 #include <statecharts/SwitchStatechart.h>
 
 namespace mrw::ctrl

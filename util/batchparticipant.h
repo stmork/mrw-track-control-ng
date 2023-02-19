@@ -27,22 +27,27 @@ namespace mrw::util
 
 	public:
 		BatchParticipant();
+		virtual ~BatchParticipant();
 
 		/**
 		 * This marks a job start at the previously configured Batch. Until
 		 * calling decrease() a Batch change is not allowed.
 		 *
 		 * @note A batch may be reused in the same transaction.
+		 *
+		 * @return True on success.
 		 */
-		void increase();
+		bool increase();
 
 		/**
 		 * This marks a findished job at the previoulsy configured Batch.
 		 * Changing a batch is now allowed again.
 		 *
 		 * @note A batch may be reused in the same transaction.
+		 *
+		 * @return True on success.
 		 */
-		void decrease();
+		bool decrease();
 
 		/**
 		 * This method returns the actually configured Batch.

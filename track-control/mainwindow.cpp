@@ -7,13 +7,13 @@
 
 #include <QScreen>
 
+#include <util/globalbatch.h>
 #include <util/method.h>
 #include <util/random.h>
 #include <util/termhandler.h>
 #include <statecharts/timerservice.h>
 
 #include <model/modelrailway.h>
-#include <ctrl/globalbatch.h>
 #include <ctrl/controllerregistry.h>
 #include <ctrl/basecontroller.h>
 #include <ctrl/railcontroller.h>
@@ -94,7 +94,7 @@ MainWindow::~MainWindow()
 	__METHOD__;
 
 	qInfo("  Quitting main window.");
-	Q_ASSERT(!hasActiveRoutes());
+	Q_ASSERT(!MainWindow::hasActiveRoutes());
 	Q_ASSERT(GlobalBatch::instance().isCompleted());
 
 	statechart.exit();

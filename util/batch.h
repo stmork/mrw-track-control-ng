@@ -40,7 +40,7 @@ namespace mrw::util
 
 	public:
 		Batch();
-		virtual ~Batch() = default;
+		virtual ~Batch();
 
 		/**
 		 * Clears the transaction set for reusing this transaction.
@@ -52,8 +52,10 @@ namespace mrw::util
 		 * transaction set.
 		 *
 		 * @param element The working BatchParticipant.
+		 *
+		 * @return True on success.
 		 */
-		void increase(BatchParticipant * element);
+		bool increase(BatchParticipant * element);
 
 		/**
 		 * The given BatchParticipant has completed his job and is removed from
@@ -61,8 +63,10 @@ namespace mrw::util
 		 * Batch is completed and the completed() signal is emitted.
 		 *
 		 * @param element The completed BatchParticipant.
+		 *
+		 * @return True on success.
 		 */
-		void decrease(BatchParticipant * element);
+		bool decrease(BatchParticipant * element);
 
 		/**
 		 * This method checks whether a BatchParticipant is active.
@@ -106,6 +110,11 @@ namespace mrw::util
 		 * be a QObject class which preventes double heritage of QObject.
 		 */
 		virtual void completed() = 0;
+
+		friend class BatchParticipant;
+
+	private:
+		void remove(BatchParticipant * element);
 	};
 }
 

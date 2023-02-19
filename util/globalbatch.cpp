@@ -4,7 +4,7 @@
 //
 
 #include <util/method.h>
-#include <ctrl/globalbatch.h>
+#include <util/globalbatch.h>
 
 using namespace mrw::util;
 
@@ -17,13 +17,7 @@ GlobalBatch::~GlobalBatch()
 {
 	__METHOD__;
 
-	if (transaction.empty())
-	{
-		qInfo("  Global transaction (ID=%u) closed.", id);
-	}
-	else
-	{
-		qWarning("======================= Transaction (ID=%u) left %zu elements.",
-			id, transaction.size());
-	}
+	Q_ASSERT(transaction.empty());
+
+	qInfo("  Global transaction (ID=%u) closed.", id);
 }

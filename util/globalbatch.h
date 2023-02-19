@@ -11,7 +11,7 @@
 #include <QObject>
 
 #include <util/singleton.h>
-#include <ctrl/batch.h>
+#include <util/batch.h>
 
 namespace mrw::util
 {

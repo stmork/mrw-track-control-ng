@@ -19,11 +19,25 @@
 #include <util/stringutil.h>
 #include <util/clockservice.h>
 #include <util/random.h>
+#include <util/batchparticipant.h>
+#include <util/globalbatch.h>
 
 #include "testutil.h"
 
 using namespace mrw::test;
 using namespace mrw::util;
+
+const ConstantEnumerator<int> TestUtil::map
+{
+	CONSTANT(EINVAL),
+	CONSTANT(EBUSY)
+};
+
+/*************************************************************************
+**                                                                      **
+**       Test classes derived from abstract classes                     **
+**                                                                      **
+*************************************************************************/
 
 class TestString : public String
 {
@@ -40,11 +54,26 @@ public:
 	}
 };
 
-const ConstantEnumerator<int> TestUtil::map
+class TestParticipant : public BatchParticipant
 {
-	CONSTANT(EINVAL),
-	CONSTANT(EBUSY)
+	const QString label;
+
+public:
+	explicit TestParticipant(const QString & new_name) : label(new_name)
+	{
+	}
+
+	virtual QString name() const override
+	{
+		return label;
+	}
 };
+
+/*************************************************************************
+**                                                                      **
+**       Test case implementation                                       **
+**                                                                      **
+*************************************************************************/
 
 class SingletonImpl : public Singleton<SingletonImpl>
 {
@@ -62,6 +91,11 @@ public:
 TestUtil::TestUtil(QObject * parent) : QObject(parent)
 {
 	Method::pattern();
+}
+
+void TestUtil::init()
+{
+	GlobalBatch::instance().reset();
 }
 
 void TestUtil::testSettings()
@@ -210,4 +244,177 @@ void TestUtil::testDumpHandler()
 
 	raise(SIGQUIT);
 	QCOMPARE(count, 2u);
+}
+
+void TestUtil::testEmptyBatch()
+{
+	QSignalSpy      completed(&GlobalBatch::instance(), &GlobalBatch::completed);
+	TestParticipant part_a("A");
+	TestParticipant part_b("B");
+
+	QVERIFY( GlobalBatch::instance().isCompleted());
+	QVERIFY(!GlobalBatch::instance().contains(&part_a));
+	QVERIFY(!GlobalBatch::instance().contains(&part_b));
+	QCOMPARE(completed.count(), 0);
+
+	GlobalBatch::instance().tryComplete();
+	QCOMPARE(completed.count(), 1);
+	QCOMPARE(part_a.batch(), &GlobalBatch::instance());
+	QCOMPARE(part_b.batch(), &GlobalBatch::instance());
+}
+
+void TestUtil::testUseBatch()
+{
+	QSignalSpy      completed(&GlobalBatch::instance(), &GlobalBatch::completed);
+	TestParticipant part_a("A");
+	TestParticipant part_b("B");
+
+	QVERIFY(part_a.increase());
+	QVERIFY(!GlobalBatch::instance().isCompleted());
+	QVERIFY( GlobalBatch::instance().contains(&part_a));
+	QVERIFY(!GlobalBatch::instance().contains(&part_b));
+	GlobalBatch::instance().tryComplete();
+	QCOMPARE(completed.count(), 0);
+
+	QVERIFY(part_b.increase());
+	QVERIFY(!GlobalBatch::instance().isCompleted());
+	QVERIFY( GlobalBatch::instance().contains(&part_a));
+	QVERIFY( GlobalBatch::instance().contains(&part_b));
+	GlobalBatch::instance().tryComplete();
+	QCOMPARE(completed.count(), 0);
+
+	GlobalBatch::instance().tryComplete();
+	QCOMPARE(completed.count(), 0);
+
+	QVERIFY(part_a.decrease());
+	QVERIFY(!GlobalBatch::instance().isCompleted());
+	QVERIFY(!GlobalBatch::instance().contains(&part_a));
+	QVERIFY( GlobalBatch::instance().contains(&part_b));
+	GlobalBatch::instance().tryComplete();
+	QCOMPARE(completed.count(), 0);
+
+	QVERIFY(part_b.decrease());
+	QVERIFY( GlobalBatch::instance().isCompleted());
+	QVERIFY(!GlobalBatch::instance().contains(&part_a));
+	QVERIFY(!GlobalBatch::instance().contains(&part_b));
+	QCOMPARE(completed.count(), 1);
+
+	GlobalBatch::instance().tryComplete();
+	QCOMPARE(completed.count(), 2);
+}
+
+void TestUtil::testResetBatch()
+{
+	QSignalSpy      completed(&GlobalBatch::instance(), &GlobalBatch::completed);
+	TestParticipant part_a("A");
+	TestParticipant part_b("B");
+
+	QVERIFY( GlobalBatch::instance().isCompleted());
+	QVERIFY(!GlobalBatch::instance().contains(&part_a));
+	QVERIFY(!GlobalBatch::instance().contains(&part_b));
+	QCOMPARE(completed.count(), 0);
+
+	QVERIFY(part_a.increase());
+	QVERIFY(part_b.increase());
+	QVERIFY(!GlobalBatch::instance().isCompleted());
+	QVERIFY( GlobalBatch::instance().contains(&part_a));
+	QVERIFY( GlobalBatch::instance().contains(&part_b));
+
+	GlobalBatch::instance().reset();
+	QVERIFY( GlobalBatch::instance().isCompleted());
+	QVERIFY(!GlobalBatch::instance().contains(&part_a));
+	QVERIFY(!GlobalBatch::instance().contains(&part_b));
+}
+
+void TestUtil::testDoubleUseBatch()
+{
+	TestParticipant part_a("A");
+	TestParticipant part_b("B");
+
+	QVERIFY( part_a.increase());
+	QVERIFY(!GlobalBatch::instance().isCompleted());
+	QVERIFY( GlobalBatch::instance().contains(&part_a));
+	QVERIFY(!GlobalBatch::instance().contains(&part_b));
+
+	QVERIFY(!part_a.increase());
+	QVERIFY(!GlobalBatch::instance().isCompleted());
+	QVERIFY( GlobalBatch::instance().contains(&part_a));
+	QVERIFY(!GlobalBatch::instance().contains(&part_b));
+
+	QVERIFY(!part_b.decrease());
+	QVERIFY(!GlobalBatch::instance().isCompleted());
+	QVERIFY( GlobalBatch::instance().contains(&part_a));
+	QVERIFY(!GlobalBatch::instance().contains(&part_b));
+
+	QVERIFY(part_a.decrease());
+	QVERIFY( GlobalBatch::instance().isCompleted());
+	QVERIFY(!GlobalBatch::instance().contains(&part_a));
+	QVERIFY(!GlobalBatch::instance().contains(&part_b));
+}
+
+void TestUtil::testDumpBatch()
+{
+	TestParticipant part_a("A");
+	TestParticipant part_b("B");
+
+	QVERIFY( part_a.increase());
+	QVERIFY( part_b.increase());
+	GlobalBatch::instance().dump();
+}
+
+void TestUtil::testCustomBatch()
+{
+	TestBatch       batch;
+	TestParticipant part_a("A");
+	TestParticipant part_b("B");
+
+	part_a.setBatch(&batch);
+	part_b.setBatch(&batch);
+
+	QCOMPARE(part_a.batch(), &batch);
+	QCOMPARE(part_b.batch(), &batch);
+
+	part_a.setBatch(nullptr);
+	part_b.setBatch(nullptr);
+	QCOMPARE(part_a.batch(), &GlobalBatch::instance());
+	QCOMPARE(part_b.batch(), &GlobalBatch::instance());
+}
+
+void TestUtil::testUnsetCustomBatch()
+{
+	TestParticipant part_a("A");
+	TestParticipant part_b("B");
+
+	{
+		TestBatch batch;
+
+		part_a.setBatch(&batch);
+		part_b.setBatch(&batch);
+
+		QCOMPARE(part_a.batch(), &batch);
+		QCOMPARE(part_b.batch(), &batch);
+
+		QVERIFY( part_a.increase());
+		QVERIFY( part_b.increase());
+		QVERIFY(!GlobalBatch::instance().contains(&part_a));
+		QVERIFY(!GlobalBatch::instance().contains(&part_b));
+		QVERIFY(batch.contains(&part_a));
+		QVERIFY(batch.contains(&part_b));
+		QVERIFY(true);
+	}
+
+	QVERIFY(!GlobalBatch::instance().contains(&part_a));
+	QVERIFY(!GlobalBatch::instance().contains(&part_b));
+	QCOMPARE(part_a.batch(), &GlobalBatch::instance());
+	QCOMPARE(part_b.batch(), &GlobalBatch::instance());
+}
+
+void TestUtil::testDifferentBatch()
+{
+	TestBatch       batch;
+	TestParticipant part_a("A");
+
+	QVERIFY( part_a.increase());
+	part_a.setBatch(&batch);
+	QVERIFY( part_a.increase());
 }

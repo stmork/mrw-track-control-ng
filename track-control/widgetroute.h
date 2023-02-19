@@ -13,13 +13,13 @@
 #include <QObject>
 #include <QListWidgetItem>
 
-#include <statecharts/RouteStatechart.h>
+#include <util/batch.h>
 #include <model/section.h>
 #include <model/signal.h>
 #include <model/route.h>
-#include <ctrl/batch.h>
 #include <ctrl/sectioncontroller.h>
 #include <ctrl/signalcontrollerproxy.h>
+#include <statecharts/RouteStatechart.h>
 
 #include "routebatch.h"
 

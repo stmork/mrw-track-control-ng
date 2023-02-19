@@ -11,7 +11,7 @@
 #include <QObject>
 #include <QDebug>
 
-#include <ctrl/batch.h>
+#include <util/batch.h>
 
 class RouteBatch : public QObject, public mrw::util::Batch
 {

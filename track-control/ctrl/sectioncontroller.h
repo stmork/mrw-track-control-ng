@@ -8,10 +8,10 @@
 #ifndef MRW_CTRL_SECTIONCONTROLLER_H
 #define MRW_CTRL_SECTIONCONTROLLER_H
 
+#include <util/batchparticipant.h>
 #include <model/section.h>
 #include <ctrl/basecontroller.h>
 #include <ctrl/controllerregistrand.h>
-#include <ctrl/batchparticipant.h>
 #include <statecharts/SectionStatechart.h>
 
 namespace mrw::ctrl

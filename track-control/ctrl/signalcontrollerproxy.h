@@ -8,12 +8,12 @@
 #ifndef MRW_CTRL_SIGNALCONTROLLERPROXY_H
 #define MRW_CTRL_SIGNALCONTROLLERPROXY_H
 
+#include <util/batchparticipant.h>
 #include <model/section.h>
 #include <model/rail.h>
 #include <model/signal.h>
 #include <ctrl/signalcontroller.h>
 #include <ctrl/controllerregistrand.h>
-#include <ctrl/batchparticipant.h>
 #include <ctrl/railpartinfo.h>
 #include <ctrl/signalproxy.h>
 #include <statecharts/SignalControllerStatechart.h>
