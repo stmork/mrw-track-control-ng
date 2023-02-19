@@ -15,6 +15,10 @@
 
 namespace mrw::util
 {
+	/**
+	 * This singleton class provides a global Batch for fallback purposes. This
+	 * may be used for initialization purposes or clean shutdown of systems.
+	 */
 	class GlobalBatch :
 		public QObject,
 		public Batch,
@@ -29,7 +33,7 @@ namespace mrw::util
 		friend class Singleton<GlobalBatch>;
 
 	signals:
-		// Implementation of mrw::ctrl::Batch
+		// Implementation of mrw::util::Batch
 		void completed() override;
 	};
 }

@@ -14,6 +14,12 @@ namespace mrw::util
 {
 	class Batch;
 
+	/**
+	 * This class acts as a job registrand to a Batch processing registry. By
+	 * default the GlobalBatch acts as a Batch. It is also possible to use
+	 * another Batch. It is not allowed to switch a Batch during job processing
+	 * which takes place between the increase() and decrease() call.
+	 */
 	class BatchParticipant
 	{
 		Batch * base_tx = nullptr;
@@ -21,12 +27,46 @@ namespace mrw::util
 
 	public:
 		BatchParticipant();
+
+		/**
+		 * This marks a job start at the previously configured Batch. Until
+		 * calling decrease() a Batch change is not allowed.
+		 *
+		 * @note A batch may be reused in the same transaction.
+		 */
 		void increase();
+
+		/**
+		 * This marks a findished job at the previoulsy configured Batch.
+		 * Changing a batch is now allowed again.
+		 *
+		 * @note A batch may be reused in the same transaction.
+		 */
 		void decrease();
 
+		/**
+		 * This method returns the actually configured Batch.
+		 *
+		 * @return The configured batch.
+		 */
 		Batch * batch() const;
+
+		/**
+		 * This method configures a Batch to be used by the methods increase()
+		 * and decrease(). If the parameter is @c nullptr the GlobalBatch is
+		 * beeing configured.
+		 *
+		 * @param batch The Batch to use.
+		 * @see GlobalBatch
+		 */
 		void setBatch(Batch * batch);
 
+		/**
+		 * This method gives the chance for dumping a clear text for debugging
+		 * purposes.
+		 *
+		 * @return The clear text of this BatchParticipant.
+		 */
 		virtual QString name() const = 0;
 	};
 }
