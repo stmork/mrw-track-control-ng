@@ -13,6 +13,7 @@
 #include <statecharts/timerservice.h>
 
 #include <model/modelrailway.h>
+#include <ctrl/globalbatch.h>
 #include <ctrl/controllerregistry.h>
 #include <ctrl/basecontroller.h>
 #include <ctrl/railcontroller.h>
@@ -92,9 +93,9 @@ MainWindow::~MainWindow()
 {
 	__METHOD__;
 
-	qInfo(" Quitting main window.");
+	qInfo("  Quitting main window.");
 	Q_ASSERT(!hasActiveRoutes());
-	Q_ASSERT(ControllerRegistry::instance().isCompleted());
+	Q_ASSERT(GlobalBatch::instance().isCompleted());
 
 	statechart.exit();
 
@@ -185,11 +186,11 @@ void MainWindow::connectOpModes(MrwMessageDispatcher & dispatcher)
 		&ControllerRegistry::instance(), &ControllerRegistry::start,
 		Qt::QueuedConnection);
 	connect(
-		&ControllerRegistry::instance(), &ControllerRegistry::completed,
+		&GlobalBatch::instance(), &GlobalBatch::completed,
 		&statechart, &OperatingModeStatechart::started,
 		Qt::QueuedConnection);
 	connect(
-		&ControllerRegistry::instance(), &ControllerRegistry::completed,
+		&GlobalBatch::instance(), &GlobalBatch::completed,
 		&statechart, &OperatingModeStatechart::completed,
 		Qt::QueuedConnection);
 	connect(
@@ -319,7 +320,7 @@ void MainWindow::resetTransaction()
 {
 	__METHOD__;
 
-	ControllerRegistry::instance().reset();
+	GlobalBatch::instance().reset();
 }
 
 bool MainWindow::hasActiveRoutes()
@@ -961,7 +962,7 @@ void MainWindow::onFailed()
 {
 	__METHOD__;
 
-	ControllerRegistry::instance().dump();
+	GlobalBatch::instance().dump();
 	RegionForm::setOpMode(ui->regionTabWidget, "F", BaseWidget::RED, true);
 	on_clearAllRoutes_clicked();
 	enable();

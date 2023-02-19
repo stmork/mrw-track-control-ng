@@ -21,7 +21,7 @@ ControllerRegistry::~ControllerRegistry()
 {
 	__METHOD__;
 
-	qInfo(" Shutting down controller registry.");
+	qInfo("  Shutting down controller registry.");
 	Q_ASSERT(registry.empty());
 }
 

@@ -24,7 +24,6 @@ namespace mrw::ctrl
 
 	class ControllerRegistry :
 		public QObject,
-		public Batch,
 		public mrw::util::Singleton<ControllerRegistry>
 	{
 		Q_OBJECT
@@ -71,9 +70,6 @@ namespace mrw::ctrl
 		void clear();
 		void start();
 		void failed();
-
-		// Implementation of mrw::ctrl::Batch
-		void completed() override;
 	};
 }
 

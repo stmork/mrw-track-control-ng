@@ -6,12 +6,13 @@
 #include <ctrl/batch.h>
 #include <ctrl/batchparticipant.h>
 #include <ctrl/controllerregistry.h>
+#include <ctrl/globalbatch.h>
 
 using namespace mrw::ctrl;
 
 BatchParticipant::BatchParticipant()
 {
-	base_tx = &ControllerRegistry::instance();
+	base_tx = &GlobalBatch::instance();
 }
 
 void BatchParticipant::increase()
@@ -64,7 +65,7 @@ void BatchParticipant::setBatch(Batch * new_batch)
 	else
 	{
 		qDebug() << "-setBatch()" << name();
-		new_batch = &ControllerRegistry::instance();
+		new_batch = &GlobalBatch::instance();
 	}
 
 	if (base_tx != new_batch)

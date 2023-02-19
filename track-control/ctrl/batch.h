@@ -18,13 +18,17 @@ namespace mrw::ctrl
 	class Batch
 	{
 		static std::atomic_uint32_t            counter;
+	protected:
+		/** The open participants. */
 		std::unordered_set<BatchParticipant *> transaction;
 
-	protected:
+		/** The transaction ID. */
 		const uint32_t                         id;
 
 	public:
 		Batch();
+		virtual ~Batch() = default;
+
 		void reset();
 		void increase(BatchParticipant * element);
 		void decrease(BatchParticipant * element);

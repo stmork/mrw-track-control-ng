@@ -13,6 +13,7 @@ SOURCES += \
 	ctrl/controllerregistrand.cpp \
 	ctrl/controllerregistry.cpp \
 	ctrl/doublecrossswitchcontrollerproxy.cpp \
+	ctrl/globalbatch.cpp \
 	ctrl/railpartinfo.cpp \
 	ctrl/railcontrollerproxy.cpp \
 	ctrl/regularswitchcontrollerproxy.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
 	ctrl/controllerregistrand.h \
 	ctrl/controllerregistry.h \
 	ctrl/doublecrossswitchcontrollerproxy.h \
+	ctrl/globalbatch.h \
 	ctrl/railcontrollerproxy.h \
 	ctrl/railpartinfo.h \
 	ctrl/regularswitchcontrollerproxy.h \

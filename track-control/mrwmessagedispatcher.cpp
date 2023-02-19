@@ -32,7 +32,7 @@ MrwMessageDispatcher::~MrwMessageDispatcher()
 {
 	__METHOD__;
 
-	qInfo(" Shutting down MRW message dispatcher.");
+	qInfo("  Shutting down MRW message dispatcher.");
 }
 
 void MrwMessageDispatcher::emergencyStop()

@@ -21,7 +21,7 @@ BeerModeService::~BeerModeService()
 {
 	__METHOD__;
 
-	qInfo(" Shutting down beer mode service.");
+	qInfo("  Shutting down beer mode service.");
 }
 
 void BeerModeService::init(ModelRailway * model)
