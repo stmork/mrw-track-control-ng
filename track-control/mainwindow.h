@@ -88,20 +88,41 @@ private slots:
 
 private:
 	typedef std::function<void(
+		mrw::ctrl::BaseController *)> ControllerCallback;
+	typedef std::function<void(
 		mrw::ctrl::BaseController *,
-		mrw::model::Position *)> Callback;
+		mrw::model::Position *)> PositionCallback;
 
 	void initRegion(MrwMessageDispatcher & dispatcher);
 	void connectEditActions();
 	void connectOpModes(MrwMessageDispatcher & dispatcher);
+	bool isSameRegion();
+
+	void traverse(ControllerCallback callback);
+	void traverse(PositionCallback callback);
 
 	void expandBorder(
 		RegionForm         *        form,
 		mrw::ctrl::BaseController * controller,
 		mrw::model::Position    *   position);
+
+	// Implementation for OperationCallback
+	void          resetTransaction() override;
+	bool          isManualValid() override;
+	bool          hasActiveRoutes() override;
+	void          disableRoutes() override;
+	void          activateManual(const bool activate) override;
+
+	mrw::model::Section  * manualSection();
+
+	// Route implementations
 	mrw::model::RailPart * rail(const int idx) const;
-	void traverse(Callback callback);
-	bool isSameRegion();
+	mrw::model::Route   *  createRoute(
+		const bool                     direction,
+		const mrw::model::SectionState state);
+	void                   addRoute(WidgetRoute * route);
+	void                   startBeermode(const bool dir);
+	void                   changePage(const int offset);
 
 	template <class T> size_t count()
 	{
@@ -120,21 +141,6 @@ private:
 		);
 		return count;
 	}
-
-	void          resetTransaction() override;
-	bool          isManualValid() override;
-	bool          hasActiveRoutes() override;
-	void          disableRoutes() override;
-	void          activateManual(const bool activate) override;
-
-	mrw::model::Section * manualSection() const;
-
-	mrw::model::Route  *  createRoute(
-		const bool                     direction,
-		const mrw::model::SectionState state);
-	void                  addRoute(WidgetRoute * route);
-	void                  startBeermode(const bool dir);
-	void                  changePage(const int offset);
 
 	Ui::MainWindow               *              ui;
 	mrw::model::ModelRepository        &        repo;
