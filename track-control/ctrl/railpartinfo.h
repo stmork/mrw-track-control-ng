@@ -16,6 +16,8 @@ namespace mrw::ctrl
 {
 	class RailPartInfo
 	{
+		mrw::model::Section * ctrl_section = nullptr;
+
 	public:
 		virtual mrw::model::RailPart * railPart() const = 0;
 		virtual mrw::model::Section  * section() const;

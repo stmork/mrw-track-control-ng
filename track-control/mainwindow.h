@@ -121,6 +121,7 @@ private:
 		const bool                     direction,
 		const mrw::model::SectionState state);
 	void                   addRoute(WidgetRoute * route);
+	void                   extendRoute(WidgetRoute * route);
 	void                   startBeermode(const bool dir);
 	void                   changePage(const int offset);
 

@@ -367,7 +367,7 @@ void MainWindow::activateManual(const bool activate)
 
 	for (SectionController * controller : section_controllers)
 	{
-		Section * section = *controller;
+		Section * section = controller->section();
 
 		section->setState(activate ? SectionState::SHUNTING : SectionState::FREE);
 
@@ -438,8 +438,15 @@ Route * MainWindow::createRoute(const bool direction, const SectionState state)
 
 	for (int i = 1; i < ui->sectionListWidget->count(); i++)
 	{
-		if (!route->append(rail(i)))
+		RailPart * part = rail(i);
+
+		if (!route->append(part))
 		{
+			QListWidgetItem * route_item   = *route;
+			QListWidgetItem * section_item = ui->sectionListWidget->item(i);
+
+			qWarning().noquote() << "Cannot create route" << route_item->text() << "to" << section_item->text();
+
 			delete route;
 
 			return nullptr;
@@ -448,6 +455,29 @@ Route * MainWindow::createRoute(const bool direction, const SectionState state)
 
 	addRoute(route);
 	return route;
+}
+
+void MainWindow::extendRoute(WidgetRoute * route)
+{
+	for (int i = 0; i < ui->sectionListWidget->count(); i++)
+	{
+		RailPart * part = rail(i);
+
+		if (!route->append(part))
+		{
+			QListWidgetItem * route_item   = *route;
+			QListWidgetItem * section_item = ui->sectionListWidget->item(i);
+
+			qWarning().noquote() << "Cannot extend route" << route_item->text() << "to" << section_item->text();
+			route->dump();
+			return;
+		}
+	}
+
+	ui->regionTabWidget->currentWidget()->update();
+	on_clearAllSections_clicked();
+
+	route->turn();
 }
 
 void MainWindow::addRoute(WidgetRoute * route)
@@ -609,19 +639,7 @@ void MainWindow::on_extendPushButton_clicked()
 	{
 		WidgetRoute * route = item->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
 
-		for (int i = 0; i < ui->sectionListWidget->count(); i++)
-		{
-			if (!route->append(rail(i)))
-			{
-				route->dump();
-				return;
-			}
-		}
-
-		ui->regionTabWidget->currentWidget()->update();
-		on_clearAllSections_clicked();
-
-		route->turn();
+		extendRoute(route);
 	}
 	enable();
 }

@@ -102,7 +102,7 @@ SectionController::~SectionController()
 
 Section * SectionController::section() const
 {
-	return *this;
+	return ctrl_section;
 }
 
 void SectionController::setAutoOff(const bool auto_off)
@@ -294,9 +294,4 @@ void SectionController::off()
 	const MrwMessage command(ctrl_section->command(SETROF));
 
 	ControllerRegistry::can()->write(command);
-}
-
-SectionController::operator Section * () const
-{
-	return ctrl_section;
 }

@@ -36,9 +36,7 @@ namespace mrw::ctrl
 			QObject       *       parent = nullptr);
 		virtual ~SectionController();
 
-		operator mrw::model::Section * () const;
-
-		model::Section * section() const;
+		mrw::model::Section * section() const;
 
 		void setAutoOff(const bool auto_off);
 		void setAutoUnlock(const bool auto_unlock);
