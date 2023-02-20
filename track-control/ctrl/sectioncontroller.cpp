@@ -254,7 +254,7 @@ void SectionController::free()
 
 void SectionController::leftBefore()
 {
-	qWarning().noquote() << bold("Left before next reched:") << *section();
+	qWarning().noquote() << bold("Left before next reached:") << *section();
 }
 
 void SectionController::fail()
