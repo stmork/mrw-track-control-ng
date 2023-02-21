@@ -20,6 +20,7 @@
 #include <ctrl/basecontroller.h>
 
 #include "regionform.h"
+#include "ui/sectionlistwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -87,19 +88,11 @@ private slots:
 	void routeFinished();
 
 private:
-	typedef std::function<void(
-		mrw::ctrl::BaseController *)> ControllerCallback;
-	typedef std::function<void(
-		mrw::ctrl::BaseController *,
-		mrw::model::Position *)> PositionCallback;
 
 	void initRegion(MrwMessageDispatcher & dispatcher);
 	void connectEditActions();
 	void connectOpModes(MrwMessageDispatcher & dispatcher);
 	bool isSameRegion();
-
-	void traverse(ControllerCallback callback);
-	void traverse(PositionCallback callback);
 
 	void expandBorder(
 		RegionForm         *        form,
@@ -116,7 +109,6 @@ private:
 	mrw::model::Section  * manualSection();
 
 	// Route implementations
-	mrw::model::RailPart * rail(const int idx) const;
 	mrw::model::Route   *  createRoute(
 		const bool                     direction,
 		const mrw::model::SectionState state);
@@ -124,24 +116,6 @@ private:
 	void                   extendRoute(WidgetRoute * route);
 	void                   startBeermode(const bool dir);
 	void                   changePage(const int offset);
-
-	template <class T> size_t count()
-	{
-		size_t count = 0;
-
-		traverse([&] (mrw::ctrl::BaseController * ctrl, mrw::model::Position * pos)
-		{
-			Q_UNUSED(pos);
-			const T * ptr = dynamic_cast<T *>(ctrl);
-
-			if (ptr != nullptr)
-			{
-				count++;
-			}
-		}
-		);
-		return count;
-	}
 
 	Ui::MainWindow               *              ui;
 	mrw::model::ModelRepository        &        repo;

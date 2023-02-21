@@ -31,7 +31,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QListWidget" name="routeListWidget">
+         <widget class="mrw::ui::RouteListWidget" name="routeListWidget">
           <property name="maximumSize">
            <size>
             <width>200</width>
@@ -76,7 +76,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QListWidget" name="sectionListWidget">
+         <widget class="mrw::ui::SectionListWidget" name="sectionListWidget">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -474,6 +474,18 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>mrw::ui::SectionListWidget</class>
+   <extends>QListWidget</extends>
+   <header location="global">ui/sectionlistwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>mrw::ui::RouteListWidget</class>
+   <extends>QListWidget</extends>
+   <header location="global">ui/routelistwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources.qrc"/>
  </resources>

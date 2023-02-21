@@ -257,8 +257,12 @@ void MainWindow::enable()
 	const bool   editing      = statechart.isStateActive(OperatingModeStatechart::State::main_region_Running_operating_Editing);
 	const bool   failed       = statechart.isStateActive(OperatingModeStatechart::State::main_region_Running_operating_Failed);
 	const bool   manual       = statechart.isStateActive(OperatingModeStatechart::State::main_region_Manual);
-	const size_t switch_count = count<RegularSwitchController>() + count<DoubleCrossSwitchController>();
-	const size_t rail_count   = count<RailController>() +          count<SignalControllerProxy>();
+	const size_t switch_count =
+		ui->sectionListWidget->countType<RegularSwitchController>() +
+		ui->sectionListWidget->countType<DoubleCrossSwitchController>();
+	const size_t rail_count   =
+		ui->sectionListWidget->countType<RailController>() +
+		ui->sectionListWidget->countType<SignalControllerProxy>();
 
 	ui->actionUp->setEnabled(editing);
 	ui->actionDown->setEnabled(editing);
@@ -313,16 +317,13 @@ void MainWindow::enable()
 bool MainWindow::isSameRegion()
 {
 	std::unordered_set<Region *> regions;
+	std::vector<RailPartInfo *>  infos;
 
-	traverse([&](BaseController * controller)
+	ui->sectionListWidget->collect(infos);
+	for (RailPartInfo * info : infos)
 	{
-		RailPartInfo * info = dynamic_cast<RailPartInfo *>(controller);
-
-		if (info != nullptr)
-		{
-			regions.emplace(info->region());
-		}
-	});
+		regions.emplace(info->region());
+	}
 
 	return regions.size() == 1;
 }
@@ -395,21 +396,18 @@ bool MainWindow::isManualValid()
 Section * MainWindow::manualSection()
 {
 	std::unordered_set<Section *> sections;
+	std::vector<RailPartInfo *>   infos;
 
-	traverse([&](BaseController * controller)
+	ui->sectionListWidget->collect(infos);
+	for (RailPartInfo * info : infos)
 	{
-		RailPartInfo * info = dynamic_cast<RailPartInfo *>(controller);
+		Section * section = info->section();
 
-		if (info != nullptr)
+		if (section->occupation())
 		{
-			Section * section = info->section();
-
-			if (section->occupation())
-			{
-				sections.insert(section);
-			}
+			sections.insert(section);
 		}
-	});
+	}
 
 	return sections.size() == 1 ? *sections.begin() : nullptr;
 }
@@ -420,25 +418,19 @@ Section * MainWindow::manualSection()
 **                                                                      **
 *************************************************************************/
 
-RailPart * MainWindow::rail(const int idx) const
-{
-	QListWidgetItem * item       = ui->sectionListWidget->item(idx);
-	BaseController  * controller = item->data(Qt::UserRole).value<BaseController *>();
-	RailPartInfo   *  info       = dynamic_cast<RailPartInfo *>(controller);
-
-	return info != nullptr ? info->railPart() : nullptr;
-}
-
 Route * MainWindow::createRoute(const bool direction, const SectionState state)
 {
 	__METHOD__;
 
-	RailPart   *  first = rail(0);
-	WidgetRoute * route = new WidgetRoute(direction, state, first);
+	std::vector<RailPartInfo *> infos;
 
-	for (int i = 1; i < ui->sectionListWidget->count(); i++)
+	ui->sectionListWidget->collect(infos);
+
+	WidgetRoute * route = new WidgetRoute(direction, state, infos[0]->railPart());
+
+	for (size_t i = 1; i < infos.size(); i++)
 	{
-		RailPart * part = rail(i);
+		RailPart * part = infos[i]->railPart();
 
 		if (!route->append(part))
 		{
@@ -459,9 +451,12 @@ Route * MainWindow::createRoute(const bool direction, const SectionState state)
 
 void MainWindow::extendRoute(WidgetRoute * route)
 {
-	for (int i = 0; i < ui->sectionListWidget->count(); i++)
+	std::vector<RailPartInfo *> infos;
+
+	ui->sectionListWidget->collect(infos);
+	for (size_t i = 0; i < infos.size(); i++)
 	{
-		RailPart * part = rail(i);
+		RailPart * part = infos[i]->railPart();
 
 		if (!route->append(part))
 		{
@@ -573,10 +568,10 @@ void MainWindow::on_clearAllSections_clicked()
 
 void MainWindow::on_clearRoute_clicked()
 {
-	for (QListWidgetItem * item : ui->routeListWidget->selectedItems())
-	{
-		WidgetRoute * route = item->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
+	WidgetRoute * route = ui->routeListWidget->selected();
 
+	if (route != nullptr)
+	{
 		route->disable();
 		if (route == beer_route)
 		{
@@ -593,16 +588,8 @@ void MainWindow::on_clearAllRoutes_clicked()
 {
 	std::vector<WidgetRoute *> routes;
 
-	// Collect active routes.
-	for (int index = 0; index < ui->routeListWidget->count(); index++)
-	{
-		QListWidgetItem * item  = ui->routeListWidget->item(index);
-		WidgetRoute   *   route = item->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
-
-		routes.push_back(route);
-	}
-
 	// Disable collected routes.
+	ui->routeListWidget->collect(routes);
 	for (WidgetRoute * route : routes)
 	{
 		route->disable();
@@ -635,10 +622,10 @@ void MainWindow::on_extendPushButton_clicked()
 {
 	__METHOD__;
 
-	for (QListWidgetItem * item : ui->routeListWidget->selectedItems())
-	{
-		WidgetRoute * route = item->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
+	WidgetRoute * route = ui->routeListWidget->selected();
 
+	if (route != nullptr)
+	{
 		extendRoute(route);
 	}
 	enable();
@@ -660,33 +647,9 @@ void MainWindow::on_tourRightPushButton_clicked()
 **                                                                      **
 *************************************************************************/
 
-void MainWindow::traverse(ControllerCallback callback)
-{
-	for (int i = 0; i < ui->sectionListWidget->count(); i++)
-	{
-		QListWidgetItem * item       = ui->sectionListWidget->item(i);
-		BaseController  * controller = item->data(ControllerWidget::USER_ROLE).value<BaseController *>();
-
-		callback(controller);
-	}
-}
-
-void MainWindow::traverse(PositionCallback callback)
-{
-	traverse([&](BaseController * controller)
-	{
-		Position * position = controller->position();
-
-		if (position != nullptr)
-		{
-			callback(controller, position);
-		}
-	});
-}
-
 void MainWindow::move(int right, int down)
 {
-	traverse([right, down](BaseController * controller, Position * position)
+	ui->sectionListWidget->traverse([right, down](BaseController * controller, Position * position)
 	{
 		position->move(right, down);
 
@@ -696,7 +659,7 @@ void MainWindow::move(int right, int down)
 
 void MainWindow::extend(int inc)
 {
-	traverse([inc](BaseController * controller, Position * position)
+	ui->sectionListWidget->traverse([inc](BaseController * controller, Position * position)
 	{
 		position->extend(inc);
 
@@ -706,7 +669,7 @@ void MainWindow::extend(int inc)
 
 void MainWindow::lineup(int inc)
 {
-	traverse([inc](BaseController * controller, Position * position)
+	ui->sectionListWidget->traverse([inc](BaseController * controller, Position * position)
 	{
 		position->lineup(inc);
 
@@ -734,7 +697,7 @@ void MainWindow::on_actionExpand_triggered()
 
 void MainWindow::on_actionInclination_triggered()
 {
-	traverse([](BaseController * controller, Position * position)
+	ui->sectionListWidget->traverse([](BaseController * controller, Position * position)
 	{
 		position->toggleInclination();
 		controller->update();
@@ -743,7 +706,7 @@ void MainWindow::on_actionInclination_triggered()
 
 void MainWindow::bend(const Position::Bending bend)
 {
-	traverse([bend](BaseController * controller, Position * position)
+	ui->sectionListWidget->traverse([bend](BaseController * controller, Position * position)
 	{
 		if ((position->bending() != bend) ||
 			(dynamic_cast<RegularSwitchController *>(controller) != nullptr))
@@ -802,7 +765,7 @@ void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Po
 
 void MainWindow::on_actionTurnSwitchLeft_triggered()
 {
-	traverse([](BaseController * controller)
+	ui->sectionListWidget->traverse([](BaseController * controller)
 	{
 		BaseController::callback<RegularSwitchControllerProxy>(
 			controller,     &RegularSwitchControllerProxy::turnLeft);
@@ -814,7 +777,7 @@ void MainWindow::on_actionTurnSwitchLeft_triggered()
 
 void MainWindow::on_actionTurnSwitch_triggered()
 {
-	traverse([](BaseController * controller)
+	ui->sectionListWidget->traverse([](BaseController * controller)
 	{
 		BaseController::callback<RegularSwitchControllerProxy>(
 			controller,     &RegularSwitchControllerProxy::change);
@@ -826,7 +789,7 @@ void MainWindow::on_actionTurnSwitch_triggered()
 
 void MainWindow::on_actionTurnSwitchRight_triggered()
 {
-	traverse([](BaseController * controller)
+	ui->sectionListWidget->traverse([](BaseController * controller)
 	{
 		BaseController::callback<RegularSwitchControllerProxy>(
 			controller,     &RegularSwitchControllerProxy::turnRight);
@@ -838,7 +801,7 @@ void MainWindow::on_actionTurnSwitchRight_triggered()
 
 void MainWindow::on_actionLock_triggered()
 {
-	traverse([](BaseController * controller)
+	ui->sectionListWidget->traverse([](BaseController * controller)
 	{
 		BaseController::callback<SectionController>(
 			controller,                &SectionController::failed);
@@ -856,7 +819,7 @@ void MainWindow::on_actionLock_triggered()
 
 void MainWindow::on_actionUnlock_triggered()
 {
-	traverse([](BaseController * controller)
+	ui->sectionListWidget->traverse([](BaseController * controller)
 	{
 		BaseController::callback<ControllerRegistrand>(
 			controller, &ControllerRegistrand::restart);
