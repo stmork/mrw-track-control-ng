@@ -18,6 +18,8 @@ namespace mrw::ui
 	typedef std::function<void(
 		mrw::ctrl::BaseController *)> ControllerCallback;
 	typedef std::function<void(
+		mrw::ctrl::RailPartInfo *)> RailPartInfoCallback;
+	typedef std::function<void(
 		mrw::ctrl::BaseController *,
 		mrw::model::Position *)> PositionCallback;
 
@@ -27,12 +29,15 @@ namespace mrw::ui
 	public:
 		explicit SectionListWidget(QWidget * parent = nullptr);
 
-		void traverse(ControllerCallback  callback);
-		void traverse(PositionCallback    callback);
-		void collect(std::vector<mrw::ctrl::RailPartInfo *> & rails);
+		void traverse(ControllerCallback  callback) const;
+		void traverse(RailPartInfoCallback  callback) const;
+		void traverse(PositionCallback    callback) const;
+		void collect(std::vector<mrw::ctrl::RailPartInfo *> & rails) const;
 
+		bool isSameRegion() const;
+		mrw::ctrl::BaseController * controller(const int index) const;
 
-		template <class T> size_t countType()
+		template <class T> size_t typedCount() const
 		{
 			size_t count = 0;
 

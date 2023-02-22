@@ -92,7 +92,6 @@ private:
 	void initRegion(MrwMessageDispatcher & dispatcher);
 	void connectEditActions();
 	void connectOpModes(MrwMessageDispatcher & dispatcher);
-	bool isSameRegion();
 
 	void expandBorder(
 		RegionForm         *        form,

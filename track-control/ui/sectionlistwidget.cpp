@@ -3,6 +3,9 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
+#include <unordered_set>
+#include <vector>
+
 #include <QListWidgetItem>
 
 #include <ui/sectionlistwidget.h>
@@ -18,18 +21,31 @@ SectionListWidget::SectionListWidget(QWidget * parent) : QListWidget(parent)
 {
 }
 
-void SectionListWidget::traverse(ControllerCallback callback)
+void SectionListWidget::traverse(ControllerCallback callback) const
 {
 	for (int i = 0; i < count(); i++)
 	{
-		QListWidgetItem * element    = item(i);
-		BaseController  * controller = element->data(ControllerWidget::USER_ROLE).value<BaseController *>();
+		BaseController * base_controller = controller(i);
 
-		callback(controller);
+		callback(base_controller);
 	}
 }
 
-void SectionListWidget::traverse(PositionCallback callback)
+void SectionListWidget::traverse(RailPartInfoCallback callback) const
+{
+	for (int i = 0; i < count(); i++)
+	{
+		BaseController * ctrl = controller(i);
+		RailPartInfo  *  info = dynamic_cast<RailPartInfo *>(ctrl);
+
+		if (info != nullptr)
+		{
+			callback(info);
+		}
+	}
+}
+
+void SectionListWidget::traverse(PositionCallback callback) const
 {
 	traverse([&](BaseController * controller)
 	{
@@ -42,15 +58,31 @@ void SectionListWidget::traverse(PositionCallback callback)
 	});
 }
 
-void mrw::ui::SectionListWidget::collect(std::vector<RailPartInfo *> & rails)
+void SectionListWidget::collect(std::vector<RailPartInfo *> & rails) const
 {
-	traverse([&](BaseController * controller)
+	traverse([&](RailPartInfo * info)
 	{
-		RailPartInfo * info = dynamic_cast<RailPartInfo *>(controller);
-
-		if (info != nullptr)
-		{
-			rails.push_back(info);
-		}
+		rails.emplace_back(info);
 	});
+}
+
+bool SectionListWidget::isSameRegion() const
+{
+	std::unordered_set<Region *> regions;
+	std::vector<RailPartInfo *>  infos;
+
+	collect(infos);
+	for (RailPartInfo * info : infos)
+	{
+		regions.emplace(info->region());
+	}
+
+	return regions.size() == 1;
+}
+
+BaseController * SectionListWidget::controller(const int index) const
+{
+	QListWidgetItem * element = item(index);
+
+	return element->data(ControllerWidget::USER_ROLE).value<BaseController *>();
 }
