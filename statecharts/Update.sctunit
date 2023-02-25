@@ -273,12 +273,16 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		exit
 		assert !is_active
 
+		doReset()
+		exit
+
 		doPing()
 		exit
 		assert !is_active
 
-		doReset()
+		noController()
 		exit
+		assert !is_active
 
 		firstFlashRequest()
 		exit
@@ -297,6 +301,10 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		assert !is_active
 
 		booted()
+		exit
+		assert !is_active
+
+		failFlashCheck()
 		exit
 		assert !is_active
 	}

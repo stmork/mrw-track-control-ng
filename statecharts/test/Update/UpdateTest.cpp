@@ -20,6 +20,7 @@ namespace mrw
 		void doStart();
 		void doReset();
 		void doPing();
+		void noController();
 		void firstFlashRequest();
 		void flashRequested();
 		void lastFlashRequest();
@@ -28,6 +29,7 @@ namespace mrw
 		void lastCompletePage();
 		void doFlashCheck();
 		void booted();
+		void failFlashCheck();
 		mrw::statechart::UpdateStatechart * statechart;
 
 
@@ -963,6 +965,24 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			doPing();
 		}
+		void noController()
+		{
+			doPing();
+
+			hasControllerMock->setDefaultBehavior(&HasControllerMock::hasController2);
+
+			runner->proceed_time(statechart->getTimeout());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
+
+			EXPECT_TRUE((statechart->getError()) == (1));
+
+			EXPECT_TRUE(failMock->calledAtLeastOnce());
+
+
+			hasControllerMock->reset();
+			failMock->reset();
+		}
 		TEST_F(UpdateTest, noController)
 		{
 			hasControllerMock = new HasControllerMock();
@@ -993,21 +1013,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			doPing();
-
-			hasControllerMock->setDefaultBehavior(&HasControllerMock::hasController2);
-
-			runner->proceed_time(statechart->getTimeout());
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
-
-			EXPECT_TRUE((statechart->getError()) == (1));
-
-			EXPECT_TRUE(failMock->calledAtLeastOnce());
-
-
-			hasControllerMock->reset();
-			failMock->reset();
+			noController();
 		}
 		void firstFlashRequest()
 		{
@@ -1552,6 +1558,21 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			booted();
 		}
+		void failFlashCheck()
+		{
+			doFlashCheck();
+
+			statechart->raiseFailed();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
+
+			EXPECT_TRUE((statechart->getError()) == (3));
+
+			EXPECT_TRUE(failMock->calledAtLeastOnce());
+
+
+			failMock->reset();
+		}
 		TEST_F(UpdateTest, failFlashCheck)
 		{
 			failMock = new FailMock();
@@ -1604,18 +1625,7 @@ namespace mrw
 
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
-			doFlashCheck();
-
-			statechart->raiseFailed();
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
-
-			EXPECT_TRUE((statechart->getError()) == (3));
-
-			EXPECT_TRUE(failMock->calledAtLeastOnce());
-
-
-			failMock->reset();
+			failFlashCheck();
 		}
 		TEST_F(UpdateTest, timeoutFlashCheck)
 		{
@@ -1719,15 +1729,21 @@ namespace mrw
 
 			EXPECT_TRUE(!statechart->isActive());
 
+			doReset();
+
+			statechart->exit();
+
 			doPing();
 
 			statechart->exit();
 
 			EXPECT_TRUE(!statechart->isActive());
 
-			doReset();
+			noController();
 
 			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
 
 			firstFlashRequest();
 
@@ -1754,6 +1770,12 @@ namespace mrw
 			EXPECT_TRUE(!statechart->isActive());
 
 			booted();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			failFlashCheck();
 
 			statechart->exit();
 
