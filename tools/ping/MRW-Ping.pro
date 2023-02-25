@@ -15,6 +15,8 @@ SOURCES += \
 
 LIBS            += -lMRW-Model -lMRW-Can -lMRW-Util
 
-install.files = $$TARGET
+QMAKE_CLEAN     += $$TARGET
+
+install.files    = $$TARGET
 
 INSTALLS        += install
