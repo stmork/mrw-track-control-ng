@@ -42,12 +42,26 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 	}
 
 	@Test
-	operation doPing()
+	operation doReset()
 	{
+		// Given
 		doStart()
 
 		// When
 		raise connected
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Reset)
+		assert called boot
+	}
+
+	@Test
+	operation doPing()
+	{
+		doReset()
+
+		// When
+		proceed delay_reset ms
 
 		// Then
 		assert active (mrw.^statechart.UpdateStatechart.main_region.Ping)
@@ -55,23 +69,7 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 	}
 
 	@Test
-	operation doReset()
-	{
-		// Given
-		doPing()
-		mock hasController returns (true)
-
-		// When
-		proceed timeout ms
-
-		// Then
-		assert active (mrw.^statechart.UpdateStatechart.main_region.Reset)
-		assert called init
-		assert called boot
-	}
-
-	@Test
-	operation failPing()
+	operation noController()
 	{
 		// Given
 		doPing()
@@ -87,42 +85,14 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 	}
 
 	@Test
-	operation doWait()
-	{
-		// Given
-		doReset()
-
-		// When
-		raise complete
-
-		// Then
-		assert active (mrw.^statechart.UpdateStatechart.main_region.Wait_Bootloader)
-		assert count == 0
-	}
-
-	@Test
-	operation failWait()
-	{
-		// Given
-		doReset()
-
-		// When
-		proceed delay_boot ms
-
-		// Then
-		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
-		assert error == 2
-		assert called fail
-	}
-
-	@Test
 	operation firstFlashRequest()
 	{
 		// Given
-		doWait
+		doPing()
+		mock hasController returns (true)
 
 		// When
-		proceed delay_reset ms
+		proceed timeout ms
 
 		// Then
 		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Request)
@@ -309,11 +279,6 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 
 		doReset()
 		exit
-		assert !is_active
-
-		doWait()
-		exit
-		assert !is_active
 
 		firstFlashRequest()
 		exit
@@ -332,10 +297,6 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		assert !is_active
 
 		booted()
-		exit
-		assert !is_active
-
-		failPing()
 		exit
 		assert !is_active
 	}

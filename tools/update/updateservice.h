@@ -39,7 +39,7 @@ class UpdateService :
 	static const size_t    SPM_PAGESIZE     =  128;
 
 	mrw::statechart::UpdateStatechart                statechart;
-	std::unordered_set<mrw::can::ControllerId>       controller_ids;
+	std::unordered_multiset<mrw::can::ControllerId>  controller_ids;
 	std::unordered_multiset<mrw::can::ControllerId>  request_ids;
 	std::vector<uint8_t>                             buffer;
 

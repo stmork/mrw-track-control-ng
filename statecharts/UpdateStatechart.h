@@ -56,21 +56,19 @@ namespace mrw
 				main_region_Flash_Complete_Page,
 				main_region_Flash_Rest,
 				main_region_Flash_Check,
-				main_region_Wait_Bootloader,
 				main_region_Failed,
 				main_region_Booted,
 				main_region_Wait_for_Connect
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 10;
+			static const sc::integer numStates = 9;
 			static const sc::integer scvi_main_region_Ping = 0;
 			static const sc::integer scvi_main_region_Reset = 0;
 			static const sc::integer scvi_main_region_Flash_Request = 0;
 			static const sc::integer scvi_main_region_Flash_Complete_Page = 0;
 			static const sc::integer scvi_main_region_Flash_Rest = 0;
 			static const sc::integer scvi_main_region_Flash_Check = 0;
-			static const sc::integer scvi_main_region_Wait_Bootloader = 0;
 			static const sc::integer scvi_main_region_Failed = 0;
 			static const sc::integer scvi_main_region_Booted = 0;
 			static const sc::integer scvi_main_region_Wait_for_Connect = 0;
@@ -88,8 +86,7 @@ namespace mrw
 				_te3_main_region_Flash_Complete_Page_,
 				_te4_main_region_Flash_Rest_,
 				_te5_main_region_Flash_Check_,
-				_te6_main_region_Wait_Bootloader_,
-				_te7_main_region_Wait_for_Connect_
+				_te6_main_region_Wait_for_Connect_
 			};
 
 			class EventInstance
@@ -203,7 +200,7 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 8;
+			static const sc::integer timeEventsCount = 7;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
@@ -269,7 +266,6 @@ namespace mrw
 			void enact_main_region_Flash_Complete_Page();
 			void enact_main_region_Flash_Rest();
 			void enact_main_region_Flash_Check();
-			void enact_main_region_Wait_Bootloader();
 			void enact_main_region_Failed();
 			void enact_main_region_Booted();
 			void enact_main_region_Wait_for_Connect();
@@ -279,7 +275,6 @@ namespace mrw
 			void exact_main_region_Flash_Complete_Page();
 			void exact_main_region_Flash_Rest();
 			void exact_main_region_Flash_Check();
-			void exact_main_region_Wait_Bootloader();
 			void exact_main_region_Wait_for_Connect();
 			void enseq_main_region_Ping_default();
 			void enseq_main_region_Reset_default();
@@ -287,7 +282,6 @@ namespace mrw
 			void enseq_main_region_Flash_Complete_Page_default();
 			void enseq_main_region_Flash_Rest_default();
 			void enseq_main_region_Flash_Check_default();
-			void enseq_main_region_Wait_Bootloader_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_Booted_default();
 			void enseq_main_region_Wait_for_Connect_default();
@@ -298,7 +292,6 @@ namespace mrw
 			void exseq_main_region_Flash_Complete_Page();
 			void exseq_main_region_Flash_Rest();
 			void exseq_main_region_Flash_Check();
-			void exseq_main_region_Wait_Bootloader();
 			void exseq_main_region_Failed();
 			void exseq_main_region_Booted();
 			void exseq_main_region_Wait_for_Connect();
@@ -314,7 +307,6 @@ namespace mrw
 			sc::integer main_region_Flash_Complete_Page_react(const sc::integer transitioned_before);
 			sc::integer main_region_Flash_Rest_react(const sc::integer transitioned_before);
 			sc::integer main_region_Flash_Check_react(const sc::integer transitioned_before);
-			sc::integer main_region_Wait_Bootloader_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			sc::integer main_region_Booted_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_for_Connect_react(const sc::integer transitioned_before);
