@@ -125,11 +125,16 @@ namespace mrw::model
 		void   link() override;
 		State  computeState(const RailPart * left, const RailPart * right) const;
 
-		bool   isFlankProtection(const RailPart * other) const override;
+		bool   isFlankProtection(const AbstractSwitch * other) const override;
 		size_t flank(
 			std::vector<RegularSwitch *> & switches,
 			const bool                     set_state,
 			const State                    compare) const;
+		size_t flank(
+			std::vector<RegularSwitch *> & switches,
+			const bool                     set_state,
+			const bool                     left,
+			RailPart           *           other) const;
 
 		State                                              switch_state = State::AC;
 		const static mrw::util::ConstantEnumerator<State>  state_map;

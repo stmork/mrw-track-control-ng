@@ -95,40 +95,19 @@ void DoubleCrossSwitch::link()
 	advance(!aIsDir()).insert(RailInfo(d, false, ad_branch));
 }
 
-bool DoubleCrossSwitch::isFlankProtection(const RailPart * other) const
+bool DoubleCrossSwitch::isFlankProtection(const AbstractSwitch * other) const
 {
-	const RegularSwitch * a_switch = follow(a);
-	const RegularSwitch * b_switch = follow(b);
-	const RegularSwitch * c_switch = follow(c);
-	const RegularSwitch * d_switch = follow(d);
-
-	if (other == a_switch)
+	const std::vector<RailPart *> candidates
 	{
-		if ((a_switch != nullptr) && linked(a_switch->c, this))
-		{
-			return true;
-		}
-	}
+		a, b, c, d
+	};
 
-	if (other == b_switch)
+	for (unsigned i = 0; i < candidates.size(); i++)
 	{
-		if ((b_switch != nullptr) && linked(b_switch->b, this))
-		{
-			return true;
-		}
-	}
+		const RegularSwitch * o_switch = follow(candidates[i]);
+		const std::bitset<8>  bits(i);
 
-	if (other == c_switch)
-	{
-		if ((c_switch != nullptr) && linked(c_switch->b, this))
-		{
-			return true;
-		}
-	}
-
-	if (other == d_switch)
-	{
-		if ((d_switch != nullptr) && linked(d_switch->c, this))
+		if ((o_switch == other) && isFlankCandidate(o_switch, bits.count() == 1))
 		{
 			return true;
 		}
@@ -158,71 +137,50 @@ size_t DoubleCrossSwitch::flank(
 	const bool                     set_state,
 	const DoubleCrossSwitch::State compare) const
 {
-	RegularSwitch * a_switch = follow(a);
-	RegularSwitch * b_switch = follow(b);
-	RegularSwitch * c_switch = follow(c);
-	RegularSwitch * d_switch = follow(d);
-	size_t          equal    = 0;
+	size_t equal    = 0;
 
 	if ((unsigned)compare & B_MASK)
 	{
-		if (isFlankProtection(a_switch))
-		{
-			switches.push_back(a_switch);
-			if (set_state)
-			{
-				a_switch->setState(RegularSwitch::State::AB);
-			}
-			if (a_switch->switchState() == SWITCH_STATE_LEFT)
-			{
-				equal++;
-			}
-		}
+		equal += flank(switches, set_state, false, a);
 	}
 	else
 	{
-		if (isFlankProtection(b_switch))
-		{
-			switches.push_back(b_switch);
-			if (set_state)
-			{
-				b_switch->setState(RegularSwitch::State::AC);
-			}
-			if (b_switch->switchState() == SWITCH_STATE_RIGHT)
-			{
-				equal++;
-			}
-		}
+		equal += flank(switches, set_state, true, b);
 	}
 
 	if ((unsigned)compare & D_MASK)
 	{
-		if (isFlankProtection(c_switch))
-		{
-			switches.push_back(c_switch);
-			if (set_state)
-			{
-				c_switch->setState(RegularSwitch::State::AC);
-			}
-			if (c_switch->switchState() == SWITCH_STATE_RIGHT)
-			{
-				equal++;
-			}
-		}
+		equal += flank(switches, set_state, true, c);
 	}
 	else
 	{
-		if (isFlankProtection(d_switch))
+		equal += flank(switches, set_state, false, d);
+	}
+	return equal;
+}
+
+size_t DoubleCrossSwitch::flank(
+	std::vector<RegularSwitch *> & switches,
+	const bool                     set_state,
+	const bool                     left,
+	RailPart           *           other) const
+{
+	RegularSwitch  *  o_switch = follow(other);
+	const SwitchState compare  = left ?  SWITCH_STATE_RIGHT : SWITCH_STATE_LEFT;
+	size_t            equal    = 0;
+
+	if (isFlankCandidate(o_switch, left))
+	{
+		switches.push_back(o_switch);
+
+		if (set_state)
 		{
-			switches.push_back(d_switch);
-			if (set_state)
-			{
-				d_switch->setState(RegularSwitch::State::AB);
-			}
-			if (d_switch->switchState() == SWITCH_STATE_LEFT)
-			{
-				equal++;
-			}
+			o_switch->setState(left ? RegularSwitch::State::AC : RegularSwitch::State::AB);
+		}
+
+		if (o_switch->switchState() == compare)
+		{
+			equal++;
 		}
 	}
 	return equal;

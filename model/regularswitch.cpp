@@ -165,14 +165,14 @@ QString RegularSwitch::get(const RegularSwitch::State & state)
 	return state_map.get(state);
 }
 
-bool RegularSwitch::isFlankProtection(const RailPart * other) const
+bool RegularSwitch::isFlankProtection(const AbstractSwitch * other) const
 {
 	const RegularSwitch * b_switch = follow(b);
 	const RegularSwitch * c_switch = follow(c);
 
 	return
-		((b_switch != nullptr) && (other == b_switch) && linked(b_switch->b, this)) ||
-		((c_switch != nullptr) && (other == c_switch) && linked(c_switch->c, this));
+		((b_switch == other) && isFlankCandidate(b_switch, true)) ||
+		((c_switch == other) && isFlankCandidate(c_switch, false));
 }
 
 size_t RegularSwitch::flank(
@@ -192,7 +192,7 @@ size_t RegularSwitch::flankCandidates(
 	return flank(switches, false, compare);
 }
 
-size_t mrw::model::RegularSwitch::flank(
+size_t RegularSwitch::flank(
 	std::vector<mrw::model::RegularSwitch *> & switches,
 	const bool                                 set_state,
 	const State                                compare) const
@@ -202,11 +202,11 @@ size_t mrw::model::RegularSwitch::flank(
 	RegularSwitch * other    = nullptr;
 	size_t          equal    = 0;
 
-	if ((compare == State::AB) && isFlankProtection(c_switch))
+	if ((compare == State::AB) && isFlankCandidate(c_switch, false))
 	{
 		other = c_switch;
 	}
-	else if ((compare == State::AC) && isFlankProtection(b_switch))
+	else if ((compare == State::AC) && isFlankCandidate(b_switch, true))
 	{
 		other = b_switch;
 	}

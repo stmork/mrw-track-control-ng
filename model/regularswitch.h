@@ -26,6 +26,7 @@ namespace mrw::model
 	class RegularSwitch : public AbstractSwitch
 	{
 		friend class DoubleCrossSwitch;
+		friend class AbstractSwitch;
 
 		bool         left_branch;
 		bool         right_branch;
@@ -118,7 +119,7 @@ namespace mrw::model
 
 	private:
 		void   link() override;
-		bool   isFlankProtection(const RailPart * other) const override;
+		bool   isFlankProtection(const AbstractSwitch * other) const override;
 		State  computeState(const RailPart * left, const RailPart * right) const;
 
 		size_t flank(

@@ -49,7 +49,7 @@ namespace mrw::model
 		 * @return True if the connected AbstractSwitch is a flank protection
 		 * switch.
 		 */
-		virtual bool isFlankProtection(const RailPart * other) const = 0;
+		virtual bool isFlankProtection(const AbstractSwitch * other) const = 0;
 
 		/**
 		 * This method collects all indirect connected switches which needs
@@ -109,6 +109,21 @@ namespace mrw::model
 		 * found RegularSwitch is only a candidate for a flank switch.
 		 */
 		RegularSwitch * follow(RailPart * part) const;
+
+		/**
+		 * This method tests a connected neighbour if the neighbour is a
+		 * flank protection switch. This switch may be indirectly connected
+		 * via Rail elements but only Rail elements.
+		 *
+		 * @param other The RailPart candidate to test if it is a flank
+		 * protection switch.
+		 * @param left If true test the left branch of the potential flank
+		 * switch candidate test the right branch otherwise.
+		 * @return True if a flank protection switch is connected.
+		 */
+		bool isFlankCandidate(
+			const RegularSwitch * other,
+			const bool            left) const;
 
 		/**
 		 * This method determines if the given candidate for a paired flank

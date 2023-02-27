@@ -73,6 +73,13 @@ RegularSwitch * AbstractSwitch::follow(RailPart * part) const
 	return dynamic_cast<RegularSwitch *>(part);
 }
 
+bool AbstractSwitch::isFlankCandidate(
+	const RegularSwitch * candidate,
+	const bool            left) const
+{
+	return candidate != nullptr ? linked(left ? candidate->b : candidate->c, this) : false;
+}
+
 bool AbstractSwitch::linked(
 	const RailPart    *    candidate,
 	const AbstractSwitch * self) const
