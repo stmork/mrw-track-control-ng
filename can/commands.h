@@ -32,9 +32,9 @@ namespace mrw::can
 		SETRGT  = CAT_SWITCH | 0x02, ///< Turn switch right.
 		GETDIR  = CAT_SWITCH | 0x03, ///< Request turning state of a switch.
 
-		SETRON  = CAT_RAIL | 0x01,   ///< Enable power to section.
-		SETROF  = CAT_RAIL | 0x02,   ///< Disable power to section.
-		GETRBS  = CAT_RAIL | 0x03,   ///< Request occupation state of a section.
+		SETRON  = CAT_RAIL   | 0x01, ///< Enable power to section.
+		SETROF  = CAT_RAIL   | 0x02, ///< Disable power to section.
+		GETRBS  = CAT_RAIL   | 0x03, ///< Request occupation state of a section.
 
 		SETSGN  = CAT_SIGNAL | 0x01, ///< Set signal to SignalAspect.
 
