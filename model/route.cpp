@@ -190,27 +190,24 @@ bool Route::qualified(
 		qDebug().noquote() << indent << "      Rail in failed state:";
 		return false;
 	}
-
-	if (rail->reserved())
+	else if (rail->reserved())
 	{
 		qDebug().noquote() << indent << "      Rail already reserved:";
 		return false;
 	}
-
-	if (track.size() > MAX_DEPTH)
+	else if (track.size() > MAX_DEPTH)
 	{
 		qDebug().noquote() << indent << "      Recursion depth reached.";
 		return false;
 	}
-
-	if (section != first_section)
+	else if (section != first_section)
 	{
 		if ((search_region != nullptr) && (section->region() != search_region))
 		{
 			qDebug().noquote() << indent << "      Shunting left region.";
 			return false;
 		}
-		if (section->occupation())
+		else if (section->occupation())
 		{
 			qDebug().noquote() << indent << "      Section occupied.";
 			return false;

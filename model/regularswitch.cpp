@@ -170,23 +170,9 @@ bool RegularSwitch::isFlankProtection(const RailPart * other) const
 	const RegularSwitch * b_switch = follow(b);
 	const RegularSwitch * c_switch = follow(c);
 
-	if (other == b_switch)
-	{
-		if ((b_switch != nullptr) && linked(b_switch->b, this))
-		{
-			return true;
-		}
-	}
-
-	if (other == c_switch)
-	{
-		if ((c_switch != nullptr) && linked(c_switch->c, this))
-		{
-			return true;
-		}
-	}
-
-	return false;
+	return
+		((b_switch != nullptr) && (other == b_switch) && linked(b_switch->b, this)) ||
+		((c_switch != nullptr) && (other == c_switch) && linked(c_switch->c, this));
 }
 
 size_t RegularSwitch::flank(
