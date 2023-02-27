@@ -54,8 +54,10 @@ void MrwMessageDispatcher::process(const MrwMessage & message)
 
 	if (message.isResponse())
 	{
+		// A CAN controller sent a response...
 		if (dst == CAN_GATEWAY_ID)
 		{
+			// ...and we are addressed.
 			const ControllerId     id         = message.eid();
 			const UnitNo           unit_no    = message.unitNo();
 			Device        *        device     = model->deviceById(id, unit_no);
@@ -64,15 +66,20 @@ void MrwMessageDispatcher::process(const MrwMessage & message)
 
 			if (controller != nullptr)
 			{
+				// OK, we found a device unit controller which can process.
 				if (controller->process(message))
 				{
+					// OK, the message was processed.
 					return;
 				}
 			}
 			else
 			{
+				// OK, what to do if no controller was found. Mostly as a
+				// non device unit response such as PING.
 				if (filter(message))
 				{
+					// OK, the message was filtered.
 					return;
 				}
 			}
@@ -82,6 +89,7 @@ void MrwMessageDispatcher::process(const MrwMessage & message)
 	{
 		if (dst == CAN_BROADCAST_ID)
 		{
+			// OK, we received a broadcast request.
 			if ((message.command() == SENSOR) && (message[0] == SENSOR_LIGHT))
 			{
 				emit brightness(message[1]);
@@ -99,6 +107,7 @@ bool MrwMessageDispatcher::filter(const MrwMessage & message)
 
 	if (controller != nullptr)
 	{
+		// OK, we found the sending CAN controller.
 		switch (message.command())
 		{
 		case PING:

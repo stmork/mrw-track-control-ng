@@ -177,10 +177,7 @@ void WidgetRoute::prepareSignals()
 		SignalControllerProxy * signal_ctrl  = getSignalController(section);
 		std::vector<RailPart *> rails;
 
-		section->parts<RailPart>(rails, [](const RailPart * part)
-		{
-			return part->reserved() && part->isBranch();
-		});
+		section->parts<RailPart>(rails, &WidgetRoute::isCurve);
 		curved += rails.size();
 
 		if (signal_ctrl != nullptr)
@@ -496,9 +493,7 @@ size_t WidgetRoute::countAllocatedSections()
 {
 	return std::count_if(sections.begin(), sections.end(), [&](Section * section)
 	{
-		return !
-			(section->isFree() ||
-				(section->state() == SectionState::PASSED));
+		return !(section->isFree() || (section->state() == SectionState::PASSED));
 	});
 }
 
@@ -559,6 +554,16 @@ void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & c
 	}
 }
 
+bool WidgetRoute::isCurve(const RailPart * part)
+{
+	return part->reserved() && part->isBranch();
+}
+
+WidgetRoute::operator QListWidgetItem * ()
+{
+	return &list_item;
+}
+
 void WidgetRoute::dump() const
 {
 	__METHOD__;
@@ -610,11 +615,6 @@ bool WidgetRoute::isCompleted()
 bool WidgetRoute::isTour()
 {
 	return state == SectionState::TOUR;
-}
-
-WidgetRoute::operator QListWidgetItem * ()
-{
-	return &list_item;
 }
 
 /*************************************************************************
