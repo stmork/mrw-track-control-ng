@@ -42,6 +42,14 @@ pipeline
 			}
 		}
 
+		stage ('CCCC')
+		{
+			steps
+			{
+				sh 'make cccc'
+			}
+		}
+
 		stage ('Test')
 		{
 			steps
@@ -81,6 +89,15 @@ pipeline
 				reportDir: 'api-doc/html',
 				reportFiles: 'index.html',
 				reportName: 'MRW-NG Doxygen',
+				reportTitles: ''])
+
+			publishHTML([
+				allowMissing: false,
+				alwaysLinkToLastBuild: false,
+				keepAll: false,
+				reportDir: 'cccc',
+				reportFiles: 'cccc.html',
+				reportName: 'MRW-NG Code Complexity',
 				reportTitles: ''])
 
 			xunit ([

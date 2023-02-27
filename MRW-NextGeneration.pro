@@ -92,7 +92,17 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	*/ui/*.cpp */ui/*.h\
 	2>cppcheck.xml
 
-QMAKE_EXTRA_TARGETS += cppcheck astyle
+cccc.commands = cccc --lang=c++ --outdir=cccc\
+	can/*.cpp can/*.h\
+	ctrl/*.cpp ctrl/*.h\
+	model/*.cpp model/*.h\
+	ui/*.cpp ui/*.h\
+	util/*.cpp util/*.h\
+	tools/*/*.cpp tools/*/*.h\
+	track*/*.cpp track*/*.h\
+	track*/*/*.cpp track*/*/*.h
+
+QMAKE_EXTRA_TARGETS += cppcheck astyle cccc
 QMAKE_CLEAN         += cppcheck.xml
 
 #####################################################################
