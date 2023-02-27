@@ -25,9 +25,6 @@ using namespace mrw::ctrl;
 using LockState = Device::LockState;
 using Symbol    = Signal::Symbol;
 
-#define USE_OWN_BATCH
-#define USE_TRY_UNBLOCK
-
 WidgetRoute::WidgetRoute(
 	const bool           dir,
 	const SectionState   wanted_state,
@@ -40,11 +37,7 @@ WidgetRoute::WidgetRoute(
 	list_item.setData(USER_ROLE, QVariant::fromValue(this));
 
 	connect(
-#ifdef USE_OWN_BATCH
 		this, &WidgetRoute::completed,
-#else
-		&ControllerRegistry::instance(), &ControllerRegistry::completed,
-#endif
 		&statechart, &RouteStatechart::completed,
 		Qt::QueuedConnection);
 	connect(
@@ -124,36 +117,10 @@ void WidgetRoute::prepareSections()
 	{
 		controller->setAutoOff(true);
 		controller->setAutoUnlock(auto_unblock);
+
 		if (controller->section()->lock() != LockState::LOCKED)
 		{
-			connect(
-				controller, &SectionController::entered,
-				this, &WidgetRoute::entered,
-				Qt::UniqueConnection);
-			connect(
-				controller, &SectionController::leaving,
-				this, &WidgetRoute::leaving,
-				Qt::UniqueConnection);
-			connect(
-				controller, &SectionController::left,
-				this, &WidgetRoute::left,
-				Qt::UniqueConnection);
-			connect(
-				controller, &SectionController::tryUnblock,
-				this, &WidgetRoute::tryUnblock,
-				Qt::UniqueConnection);
-			connect(
-				controller, &SectionController::unregister,
-				this, qOverload<>(&WidgetRoute::unregister),
-				Qt::UniqueConnection);
-			connect(
-				controller, &SectionController::stop,
-				&statechart, &RouteStatechart::failed,
-				Qt::UniqueConnection);
-
-#ifdef USE_OWN_BATCH
-			controller->setBatch(this);
-#endif
+			connectSectionController(controller);
 		}
 	}
 }
@@ -180,9 +147,7 @@ void WidgetRoute::prepareTrack()
 				rs, &RegularSwitchControllerProxy::stop,
 				&statechart, &RouteStatechart::failed,
 				Qt::UniqueConnection);
-#ifdef USE_OWN_BATCH
 			rs->setBatch(this);
-#endif
 		}
 
 		if (dcs != nullptr)
@@ -191,9 +156,7 @@ void WidgetRoute::prepareTrack()
 				dcs, &DoubleCrossSwitchControllerProxy::stop,
 				&statechart, &RouteStatechart::failed,
 				Qt::UniqueConnection);
-#ifdef USE_OWN_BATCH
 			dcs->setBatch(this);
-#endif
 		}
 		qDebug().noquote() << *part;
 	}
@@ -241,9 +204,7 @@ void WidgetRoute::prepareSignals()
 			signal_ctrl->setSymbol(section != this->last_section ?
 				Symbol::GO :
 				Symbol::STOP);
-#ifdef USE_OWN_BATCH
 			signal_ctrl->setBatch(this);
-#endif
 			qDebug().noquote() << *signal_ctrl;
 		}
 
@@ -257,6 +218,36 @@ void WidgetRoute::prepareFlank()
 	__METHOD__;
 
 	Route::prepareFlank();
+}
+
+void WidgetRoute::connectSectionController(SectionController * controller)
+{
+	connect(
+		controller, &SectionController::entered,
+		this, &WidgetRoute::entered,
+		Qt::UniqueConnection);
+	connect(
+		controller, &SectionController::leaving,
+		this, &WidgetRoute::leaving,
+		Qt::UniqueConnection);
+	connect(
+		controller, &SectionController::left,
+		this, &WidgetRoute::left,
+		Qt::UniqueConnection);
+	connect(
+		controller, &SectionController::tryUnblock,
+		this, &WidgetRoute::tryUnblock,
+		Qt::UniqueConnection);
+	connect(
+		controller, &SectionController::unregister,
+		this, qOverload<>(&WidgetRoute::unregister),
+		Qt::UniqueConnection);
+	connect(
+		controller, &SectionController::stop,
+		&statechart, &RouteStatechart::failed,
+		Qt::UniqueConnection);
+
+	controller->setBatch(this);
 }
 
 void WidgetRoute::rename()
@@ -403,38 +394,18 @@ void WidgetRoute::unregister(SectionController * controller)
 {
 	controller->unlock();
 
-#ifdef USE_OWN_BATCH
-	controller->setBatch(nullptr);
-#endif
-
-	disconnect(
-		controller, &SectionController::entered,
-		this, &WidgetRoute::entered);
-	disconnect(
-		controller, &SectionController::left,
-		this, &WidgetRoute::left);
-	disconnect(
-		controller, &SectionController::tryUnblock,
-		this, &WidgetRoute::tryUnblock);
-	disconnect(
-		controller, &SectionController::unregister,
-		this, qOverload<>(&WidgetRoute::unregister));
-	disconnect(
-		controller, &SectionController::stop,
-		&statechart, &RouteStatechart::failed);
+	disconnectSectionController(controller);
 
 	qDebug().noquote() << "Unregister: " << *controller;
 
 	sections.remove(controller->section());
 	controller->nextController(nullptr);
 
-#ifdef USE_OWN_BATCH
 	SignalControllerProxy * signal_ctrl = getSignalController(controller->section());
 	if (signal_ctrl != nullptr)
 	{
 		signal_ctrl->setBatch(nullptr);
 	}
-#endif
 
 	while ((track.size() > 0) && (track.front()->section() == controller->section()))
 	{
@@ -452,9 +423,8 @@ void WidgetRoute::unregister(SectionController * controller)
 		if (rs != nullptr)
 		{
 			rs->unlock();
-#ifdef USE_OWN_BATCH
 			rs->setBatch(nullptr);
-#endif
+
 			disconnect(
 				rs, &RegularSwitchControllerProxy::stop,
 				&statechart, &RouteStatechart::failed);
@@ -463,9 +433,8 @@ void WidgetRoute::unregister(SectionController * controller)
 		if (dcs != nullptr)
 		{
 			dcs->unlock();
-#ifdef USE_OWN_BATCH
 			dcs->setBatch(nullptr);
-#endif
+
 			disconnect(
 				dcs, &DoubleCrossSwitchControllerProxy::stop,
 				&statechart, &RouteStatechart::failed);
@@ -475,6 +444,27 @@ void WidgetRoute::unregister(SectionController * controller)
 	}
 
 	qDebug().noquote() << "Unregister: " << countAllocatedSections() << "sections left";
+}
+
+void WidgetRoute::disconnectSectionController(SectionController * controller)
+{
+	controller->setBatch(nullptr);
+
+	disconnect(
+		controller, &SectionController::entered,
+		this, &WidgetRoute::entered);
+	disconnect(
+		controller, &SectionController::left,
+		this, &WidgetRoute::left);
+	disconnect(
+		controller, &SectionController::tryUnblock,
+		this, &WidgetRoute::tryUnblock);
+	disconnect(
+		controller, &SectionController::unregister,
+		this, qOverload<>(&WidgetRoute::unregister));
+	disconnect(
+		controller, &SectionController::stop,
+		&statechart, &RouteStatechart::failed);
 }
 
 void WidgetRoute::finalize()
@@ -592,11 +582,7 @@ void WidgetRoute::dump() const
 
 void WidgetRoute::resetTransaction()
 {
-#ifdef USE_OWN_BATCH
 	Batch::reset();
-#else
-	ControllerRegistry::instance().reset();
-#endif
 }
 
 void WidgetRoute::fail()
@@ -613,20 +599,12 @@ void WidgetRoute::tryComplete()
 {
 	__METHOD__;
 
-#ifdef USE_OWN_BATCH
 	Batch::tryComplete();
-#else
-	ControllerRegistry::instance().tryComplete();
-#endif
 }
 
 bool WidgetRoute::isCompleted()
 {
-#ifdef USE_OWN_BATCH
 	return Batch::isCompleted();
-#else
-	return ControllerRegistry::instance().isCompleted();
-#endif
 }
 
 bool WidgetRoute::isTour()

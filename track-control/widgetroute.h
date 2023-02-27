@@ -69,6 +69,9 @@ public slots:
 	void unregister();
 
 private:
+	void   connectSectionController(mrw::ctrl::SectionController * controller);
+	void   disconnectSectionController(mrw::ctrl::SectionController * controller);
+
 	void   tryUnblockCtrl(mrw::ctrl::SectionController * controller);
 
 	void   unregister(mrw::model::Section * section);

@@ -86,6 +86,9 @@ namespace mrw::ctrl
 		void connectMain();
 		void connectDistant();
 		void connectShunt();
+		void connectStatechart();
+		void initStatechart();
+
 		void add(mrw::model::Signal * signal);
 		void setLockState(mrw::model::Device::LockState lock_state);
 

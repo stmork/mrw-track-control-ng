@@ -77,49 +77,12 @@ SignalControllerProxy::SignalControllerProxy(
 	add(distant_signal);
 	add(shunt_signal);
 
-	connect(
-		&ControllerRegistry::instance(), &ControllerRegistry::clear,
-		&statechart, &SignalControllerStatechart::clear,
-		Qt::DirectConnection);
-	connect(
-		&ControllerRegistry::instance(), &ControllerRegistry::start,
-		&statechart, &SignalControllerStatechart::start,
-		Qt::QueuedConnection);
-
-	connect(
-		this, &SignalControllerProxy::enable,
-		&statechart, &SignalControllerStatechart::enable,
-		Qt::DirectConnection);
-	connect(
-		this, &SignalControllerProxy::extend,
-		&statechart, &SignalControllerStatechart::extend,
-		Qt::QueuedConnection);
-	connect(
-		this, &SignalControllerProxy::disable,
-		&statechart, &SignalControllerStatechart::disable,
-		Qt::DirectConnection);
-	connect(
-		this, &SignalControllerProxy::failed,
-		&statechart, &SignalControllerStatechart::failed,
-		Qt::QueuedConnection);
-	connect(
-		this, &SignalControllerProxy::start,
-		&statechart, &SignalControllerStatechart::start,
-		Qt::QueuedConnection);
-
 	connectMain();
 	connectDistant();
 	connectShunt();
+	connectStatechart();
 
-	statechart_main.start(main_signal);
-	statechart_distant.start(distant_signal, main_signal);
-	statechart_shunt.start(shunt_signal, main_signal);
-
-	statechart.setTimerService(&TimerService::instance());
-	statechart.setOperationCallback(this);
-
-	Q_ASSERT(statechart.check());
-	statechart.enter();
+	initStatechart();
 }
 
 SignalControllerProxy::~SignalControllerProxy()
@@ -192,6 +155,52 @@ void SignalControllerProxy::connectShunt()
 		&statechart_shunt, &SignalStatechart::failed,
 		&statechart, &SignalControllerStatechart::failed,
 		Qt::QueuedConnection);
+}
+
+void mrw::ctrl::SignalControllerProxy::connectStatechart()
+{
+	connect(
+		&ControllerRegistry::instance(), &ControllerRegistry::clear,
+		&statechart, &SignalControllerStatechart::clear,
+		Qt::DirectConnection);
+	connect(
+		&ControllerRegistry::instance(), &ControllerRegistry::start,
+		&statechart, &SignalControllerStatechart::start,
+		Qt::QueuedConnection);
+
+	connect(
+		this, &SignalControllerProxy::enable,
+		&statechart, &SignalControllerStatechart::enable,
+		Qt::DirectConnection);
+	connect(
+		this, &SignalControllerProxy::extend,
+		&statechart, &SignalControllerStatechart::extend,
+		Qt::QueuedConnection);
+	connect(
+		this, &SignalControllerProxy::disable,
+		&statechart, &SignalControllerStatechart::disable,
+		Qt::DirectConnection);
+	connect(
+		this, &SignalControllerProxy::failed,
+		&statechart, &SignalControllerStatechart::failed,
+		Qt::QueuedConnection);
+	connect(
+		this, &SignalControllerProxy::start,
+		&statechart, &SignalControllerStatechart::start,
+		Qt::QueuedConnection);
+}
+
+void mrw::ctrl::SignalControllerProxy::initStatechart()
+{
+	statechart_main.start(main_signal);
+	statechart_distant.start(distant_signal, main_signal);
+	statechart_shunt.start(shunt_signal, main_signal);
+
+	statechart.setTimerService(&TimerService::instance());
+	statechart.setOperationCallback(this);
+
+	Q_ASSERT(statechart.check());
+	statechart.enter();
 }
 
 void SignalControllerProxy::add(Signal * signal)
