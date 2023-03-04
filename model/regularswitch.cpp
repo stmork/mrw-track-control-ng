@@ -47,6 +47,33 @@ RegularSwitch::RegularSwitch(
 	}
 }
 
+void RegularSwitch::link()
+{
+	a = resolve("a");
+	b = resolve("b");
+	c = resolve("c");
+
+	if ((a == nullptr) || (b == nullptr) || (c == nullptr))
+	{
+		part_model->error("Switch not completely connected: " + name());
+		return;
+	}
+
+	advance( aIsDir()).insert(RailInfo(a));
+	advance(!aIsDir()).insert(RailInfo(b, left_prio,  left_branch));
+	advance(!aIsDir()).insert(RailInfo(c, right_prio, right_branch));
+}
+
+bool RegularSwitch::valid() const
+{
+	return
+		(inductors() == 2) &&
+		((advance(false).size() + advance(true).size()) == 3) &&
+		(a != nullptr) && a->contains(this,  aIsDir()) &&
+		(b != nullptr) && b->contains(this, !aIsDir()) &&
+		(c != nullptr) && c->contains(this, !aIsDir());
+}
+
 bool RegularSwitch::isBranch() const
 {
 	return right_branch == (switch_state == State::AC);
@@ -198,33 +225,6 @@ size_t RegularSwitch::flank(
 **       Support methods                                                **
 **                                                                      **
 *************************************************************************/
-
-void RegularSwitch::link()
-{
-	a = resolve("a");
-	b = resolve("b");
-	c = resolve("c");
-
-	if ((a == nullptr) || (b == nullptr) || (c == nullptr))
-	{
-		part_model->error("Switch not completely connected: " + name());
-		return;
-	}
-
-	advance( aIsDir()).insert(RailInfo(a));
-	advance(!aIsDir()).insert(RailInfo(b, left_prio,  left_branch));
-	advance(!aIsDir()).insert(RailInfo(c, right_prio, right_branch));
-}
-
-bool RegularSwitch::valid() const
-{
-	return
-		(inductors() == 2) &&
-		((advance(false).size() + advance(true).size()) == 3) &&
-		(a != nullptr) && a->contains(this,  aIsDir()) &&
-		(b != nullptr) && b->contains(this, !aIsDir()) &&
-		(c != nullptr) && c->contains(this, !aIsDir());
-}
 
 QString RegularSwitch::key() const
 {

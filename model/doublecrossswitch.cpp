@@ -36,6 +36,44 @@ DoubleCrossSwitch::DoubleCrossSwitch(
 	}
 }
 
+void DoubleCrossSwitch::link()
+{
+	a = resolve("a");
+	b = resolve("b");
+	c = resolve("c");
+	d = resolve("d");
+
+	if ((a == nullptr) || (b == nullptr) || (c == nullptr) || (d == nullptr))
+	{
+		part_model->error("Cross switch not completely connected: " + name());
+		return;
+	}
+
+	advance( aIsDir()).insert(RailInfo(a, false, ad_branch));
+	advance( aIsDir()).insert(RailInfo(b, false, bc_branch));
+	advance(!aIsDir()).insert(RailInfo(c, false, bc_branch));
+	advance(!aIsDir()).insert(RailInfo(d, false, ad_branch));
+}
+
+bool DoubleCrossSwitch::valid() const
+{
+	return
+		(inductors() == 2) &&
+		((advance(false).size() + advance(true).size()) == 4) &&
+		(a != nullptr) && a->contains(this, aIsDir()) &&
+		(b != nullptr) && b->contains(this, aIsDir()) &&
+		(c != nullptr) && c->contains(this, !aIsDir()) &&
+		(d != nullptr) && d->contains(this, !aIsDir());
+}
+
+bool DoubleCrossSwitch::isBranch() const
+{
+	const bool b_active = unsigned(switch_state) & B_MASK;
+	const bool d_active = unsigned(switch_state) & D_MASK;
+
+	return b_active == d_active;
+}
+
 /*************************************************************************
 **                                                                      **
 **       State methods                                                  **
@@ -211,36 +249,6 @@ size_t DoubleCrossSwitch::flank(
 **                                                                      **
 *************************************************************************/
 
-void DoubleCrossSwitch::link()
-{
-	a = resolve("a");
-	b = resolve("b");
-	c = resolve("c");
-	d = resolve("d");
-
-	if ((a == nullptr) || (b == nullptr) || (c == nullptr) || (d == nullptr))
-	{
-		part_model->error("Cross switch not completely connected: " + name());
-		return;
-	}
-
-	advance( aIsDir()).insert(RailInfo(a, false, ad_branch));
-	advance( aIsDir()).insert(RailInfo(b, false, bc_branch));
-	advance(!aIsDir()).insert(RailInfo(c, false, bc_branch));
-	advance(!aIsDir()).insert(RailInfo(d, false, ad_branch));
-}
-
-bool DoubleCrossSwitch::valid() const
-{
-	return
-		(inductors() == 2) &&
-		((advance(false).size() + advance(true).size()) == 4) &&
-		(a != nullptr) && a->contains(this, aIsDir()) &&
-		(b != nullptr) && b->contains(this, aIsDir()) &&
-		(c != nullptr) && c->contains(this, !aIsDir()) &&
-		(d != nullptr) && d->contains(this, !aIsDir());
-}
-
 QString DoubleCrossSwitch::key() const
 {
 	return "DKW" + name();
@@ -264,12 +272,4 @@ QString DoubleCrossSwitch::toString() const
 		arg(name(), -10).
 		arg(Device::get(lock()), -10).
 		arg(state_map.get(switch_state));
-}
-
-bool DoubleCrossSwitch::isBranch() const
-{
-	const bool b_active = unsigned(switch_state) & B_MASK;
-	const bool d_active = unsigned(switch_state) & D_MASK;
-
-	return b_active == d_active;
 }
