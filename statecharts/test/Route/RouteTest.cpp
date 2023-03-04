@@ -1124,8 +1124,6 @@ namespace mrw
 
 			EXPECT_TRUE(prepareRouteMock->calledAtLeast(1));
 
-			EXPECT_TRUE(prepareFlankMock->calledAtLeast(1));
-
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(turnSwitchesMock->calledAtLeastOnce());
@@ -1135,7 +1133,6 @@ namespace mrw
 
 			isTourMock->reset();
 			prepareRouteMock->reset();
-			prepareFlankMock->reset();
 			resetTransactionMock->reset();
 			turnSwitchesMock->reset();
 			tryCompleteMock->reset();
@@ -1146,8 +1143,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -1197,8 +1192,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -1252,8 +1245,6 @@ namespace mrw
 
 			EXPECT_TRUE(prepareRouteMock->calledAtLeast(1));
 
-			EXPECT_TRUE(prepareFlankMock->calledAtLeast(0));
-
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(turnSwitchesMock->calledAtLeastOnce());
@@ -1263,7 +1254,6 @@ namespace mrw
 
 			isTourMock->reset();
 			prepareRouteMock->reset();
-			prepareFlankMock->reset();
 			resetTransactionMock->reset();
 			turnSwitchesMock->reset();
 			tryCompleteMock->reset();
@@ -1282,6 +1272,8 @@ namespace mrw
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
+			EXPECT_TRUE(prepareFlankMock->calledAtLeastOnce());
+
 			EXPECT_TRUE(turnFlanksMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
@@ -1289,6 +1281,7 @@ namespace mrw
 
 			isTourMock->reset();
 			resetTransactionMock->reset();
+			prepareFlankMock->reset();
 			turnFlanksMock->reset();
 			tryCompleteMock->reset();
 		}
@@ -1298,6 +1291,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			prepareFlankMock = new PrepareFlankMock();
+			prepareFlankMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
@@ -1306,8 +1301,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -1365,6 +1358,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			prepareFlankMock = new PrepareFlankMock();
+			prepareFlankMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
@@ -1373,8 +1368,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -1476,8 +1469,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -1562,8 +1553,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -1654,8 +1643,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -1737,8 +1724,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -1786,10 +1771,6 @@ namespace mrw
 		{
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			prepareRouteMock = new PrepareRouteMock();
-			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -1820,8 +1801,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -1873,10 +1852,6 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning));
 
-			EXPECT_TRUE(prepareRouteMock->calledAtLeast(1));
-
-			EXPECT_TRUE(prepareFlankMock->calledAtLeast(1));
-
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(turnSwitchesMock->calledAtLeastOnce());
@@ -1885,8 +1860,6 @@ namespace mrw
 
 
 			isTourMock->reset();
-			prepareRouteMock->reset();
-			prepareFlankMock->reset();
 			resetTransactionMock->reset();
 			turnSwitchesMock->reset();
 			tryCompleteMock->reset();
@@ -1895,10 +1868,6 @@ namespace mrw
 		{
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
-			prepareRouteMock = new PrepareRouteMock();
-			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -1929,8 +1898,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -1982,10 +1949,6 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning));
 
-			EXPECT_TRUE(prepareRouteMock->calledAtLeast(1));
-
-			EXPECT_TRUE(prepareFlankMock->calledAtLeast(0));
-
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(turnSwitchesMock->calledAtLeastOnce());
@@ -1994,8 +1957,6 @@ namespace mrw
 
 
 			isTourMock->reset();
-			prepareRouteMock->reset();
-			prepareFlankMock->reset();
 			resetTransactionMock->reset();
 			turnSwitchesMock->reset();
 			tryCompleteMock->reset();
@@ -2036,8 +1997,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -2132,8 +2091,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -2223,8 +2180,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -2294,8 +2249,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -2377,8 +2330,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -2439,8 +2390,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -2501,6 +2450,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			prepareFlankMock = new PrepareFlankMock();
+			prepareFlankMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
@@ -2509,8 +2460,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -2579,8 +2528,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -2655,8 +2602,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -2737,8 +2682,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -2812,8 +2755,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -2886,8 +2827,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -2953,8 +2892,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -3048,8 +2985,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -3101,8 +3036,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -3168,8 +3101,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -3247,8 +3178,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -3306,8 +3235,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -3373,8 +3300,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -3452,8 +3377,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -3513,8 +3436,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -3584,6 +3505,8 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
+			prepareFlankMock = new PrepareFlankMock();
+			prepareFlankMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock();
 			turnFlanksMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
@@ -3592,8 +3515,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -3671,8 +3592,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -3756,8 +3675,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -3863,8 +3780,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();
@@ -3938,8 +3853,6 @@ namespace mrw
 			isTourMock->initializeBehavior();
 			prepareRouteMock = new PrepareRouteMock();
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
-			prepareFlankMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock();

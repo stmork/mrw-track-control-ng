@@ -318,10 +318,6 @@ namespace mrw
 		{
 			/* Entry action for state 'Turning'. */
 			ifaceOperationCallback->prepareRoute();
-			if (ifaceOperationCallback->isTour())
-			{
-				ifaceOperationCallback->prepareFlank();
-			}
 		}
 
 		/* Entry action for state 'Switch Turning'. */
@@ -370,6 +366,7 @@ namespace mrw
 			/* Entry action for state 'Flank Turning'. */
 			timerService->setTimer(this, 5, RouteStatechart::switch_timeout, false);
 			ifaceOperationCallback->resetTransaction();
+			ifaceOperationCallback->prepareFlank();
 			ifaceOperationCallback->turnFlanks();
 			ifaceOperationCallback->tryComplete();
 		}
