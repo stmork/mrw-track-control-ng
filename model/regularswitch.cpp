@@ -52,6 +52,12 @@ bool RegularSwitch::isBranch() const
 	return right_branch == (switch_state == State::AC);
 }
 
+/*************************************************************************
+**                                                                      **
+**       State methods                                                  **
+**                                                                      **
+*************************************************************************/
+
 RegularSwitch::State RegularSwitch::state() const
 {
 	return switch_state;
@@ -67,6 +73,10 @@ void RegularSwitch::setState(const State state, const bool force)
 	{
 		qWarning().noquote() << "Switch locked!" << name();
 	}
+
+#ifdef STATE_VERBOSE
+	qDebug().noquote() << "####>" << toString() << switchState();
+#endif
 }
 
 void RegularSwitch::setState(
@@ -74,6 +84,10 @@ void RegularSwitch::setState(
 	const RailPart * right)
 {
 	switch_state = computeState(left, right);
+
+#ifdef STATE_VERBOSE
+	qDebug().noquote() << "####C" << toString() << switchState();
+#endif
 }
 
 State RegularSwitch::computeState(
@@ -107,63 +121,16 @@ State RegularSwitch::computeState(
 	}
 }
 
-void RegularSwitch::link()
-{
-	a = resolve("a");
-	b = resolve("b");
-	c = resolve("c");
-
-	if ((a == nullptr) || (b == nullptr) || (c == nullptr))
-	{
-		part_model->error("Switch not completely connected: " + name());
-		return;
-	}
-
-	advance( aIsDir()).insert(RailInfo(a));
-	advance(!aIsDir()).insert(RailInfo(b, left_prio,  left_branch));
-	advance(!aIsDir()).insert(RailInfo(c, right_prio, right_branch));
-}
-
-bool RegularSwitch::valid() const
-{
-	return
-		(inductors() == 2) &&
-		((advance(false).size() + advance(true).size()) == 3) &&
-		(a != nullptr) && a->contains(this,  aIsDir()) &&
-		(b != nullptr) && b->contains(this, !aIsDir()) &&
-		(c != nullptr) && c->contains(this, !aIsDir());
-}
-
-QString RegularSwitch::toString() const
-{
-	static const QString R = String::format(String::BOLD_ON + String::RED_ON, "R");
-
-	return QString("      %1 %2%3 %4--%5 : [%6] %7 %8 %9").
-		arg(aIsDir() ? ">" : "<").
-		arg(valid()  ? "V" : "-").
-		arg(reserved() ? R : "-").
-		arg(aIsDir() ? "bc" : " a").
-		arg(aIsDir() ? "a " : "bc").
-		arg(unitNo(), 4, 16, QChar('0')).
-		arg(name(), -10).
-		arg(Device::get(lock()), -10).
-		arg(state_map.get(switch_state));
-}
-
-QString RegularSwitch::key() const
-{
-	return "Weiche" + name();
-}
-
 SwitchState RegularSwitch::switchState() const
 {
 	return static_cast<SwitchState>(switch_state);
 }
 
-QString RegularSwitch::get(const RegularSwitch::State & state)
-{
-	return state_map.get(state);
-}
+/*************************************************************************
+**                                                                      **
+**       Flank protection methods                                       **
+**                                                                      **
+*************************************************************************/
 
 bool RegularSwitch::isFlankProtection(const AbstractSwitch * other) const
 {
@@ -224,4 +191,63 @@ size_t RegularSwitch::flank(
 		}
 	}
 	return equal;
+}
+
+/*************************************************************************
+**                                                                      **
+**       Support methods                                                **
+**                                                                      **
+*************************************************************************/
+
+void RegularSwitch::link()
+{
+	a = resolve("a");
+	b = resolve("b");
+	c = resolve("c");
+
+	if ((a == nullptr) || (b == nullptr) || (c == nullptr))
+	{
+		part_model->error("Switch not completely connected: " + name());
+		return;
+	}
+
+	advance( aIsDir()).insert(RailInfo(a));
+	advance(!aIsDir()).insert(RailInfo(b, left_prio,  left_branch));
+	advance(!aIsDir()).insert(RailInfo(c, right_prio, right_branch));
+}
+
+bool RegularSwitch::valid() const
+{
+	return
+		(inductors() == 2) &&
+		((advance(false).size() + advance(true).size()) == 3) &&
+		(a != nullptr) && a->contains(this,  aIsDir()) &&
+		(b != nullptr) && b->contains(this, !aIsDir()) &&
+		(c != nullptr) && c->contains(this, !aIsDir());
+}
+
+QString RegularSwitch::key() const
+{
+	return "Weiche" + name();
+}
+
+QString RegularSwitch::get(const RegularSwitch::State & state)
+{
+	return state_map.get(state);
+}
+
+QString RegularSwitch::toString() const
+{
+	static const QString R = String::format(String::BOLD_ON + String::RED_ON, "R");
+
+	return QString("      %1 %2%3 %4--%5 : [%6] %7 %8 %9").
+		arg(aIsDir() ? ">" : "<").
+		arg(valid()  ? "V" : "-").
+		arg(reserved() ? R : "-").
+		arg(aIsDir() ? "bc" : " a").
+		arg(aIsDir() ? "a " : "bc").
+		arg(unitNo(), 4, 16, QChar('0')).
+		arg(name(), -10).
+		arg(Device::get(lock()), -10).
+		arg(state_map.get(switch_state));
 }

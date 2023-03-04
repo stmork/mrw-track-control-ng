@@ -36,6 +36,36 @@ DoubleCrossSwitch::DoubleCrossSwitch(
 	}
 }
 
+/*************************************************************************
+**                                                                      **
+**       State methods                                                  **
+**                                                                      **
+*************************************************************************/
+
+State DoubleCrossSwitch::state() const
+{
+#ifdef STATE_VERBOSE
+	qDebug().noquote() << "DCS get state: " << state_map.get(switch_state) << name();
+#endif
+
+	return switch_state;
+}
+
+void DoubleCrossSwitch::setState(const State state, const bool force)
+{
+	if ((lock() == LockState::UNLOCKED) || force)
+	{
+#ifdef STATE_VERBOSE
+		qDebug().noquote() << "########## DCS set state: " << state_map.get(switch_state) << " => " << state_map.get(state) << name();
+#endif
+		switch_state = state;
+	}
+	else
+	{
+		qWarning().noquote() << "Switch locked!" << name();
+	}
+}
+
 void DoubleCrossSwitch::setState(
 	const RailPart * left,
 	const RailPart * right)
@@ -71,29 +101,18 @@ State DoubleCrossSwitch::computeState(
 	return static_cast<State>(state);
 }
 
-QString DoubleCrossSwitch::get(const DoubleCrossSwitch::State & state)
+SwitchState DoubleCrossSwitch::switchState() const
 {
-	return state_map.get(state);
+	return isBranch() ?
+		SwitchState::SWITCH_STATE_LEFT :
+		SwitchState::SWITCH_STATE_RIGHT;
 }
 
-void DoubleCrossSwitch::link()
-{
-	a = resolve("a");
-	b = resolve("b");
-	c = resolve("c");
-	d = resolve("d");
-
-	if ((a == nullptr) || (b == nullptr) || (c == nullptr) || (d == nullptr))
-	{
-		part_model->error("Cross switch not completely connected: " + name());
-		return;
-	}
-
-	advance( aIsDir()).insert(RailInfo(a, false, ad_branch));
-	advance( aIsDir()).insert(RailInfo(b, false, bc_branch));
-	advance(!aIsDir()).insert(RailInfo(c, false, bc_branch));
-	advance(!aIsDir()).insert(RailInfo(d, false, ad_branch));
-}
+/*************************************************************************
+**                                                                      **
+**       Flank protection methods                                       **
+**                                                                      **
+*************************************************************************/
 
 bool DoubleCrossSwitch::isFlankProtection(const AbstractSwitch * other) const
 {
@@ -186,6 +205,31 @@ size_t DoubleCrossSwitch::flank(
 	return equal;
 }
 
+/*************************************************************************
+**                                                                      **
+**       Support methods                                                **
+**                                                                      **
+*************************************************************************/
+
+void DoubleCrossSwitch::link()
+{
+	a = resolve("a");
+	b = resolve("b");
+	c = resolve("c");
+	d = resolve("d");
+
+	if ((a == nullptr) || (b == nullptr) || (c == nullptr) || (d == nullptr))
+	{
+		part_model->error("Cross switch not completely connected: " + name());
+		return;
+	}
+
+	advance( aIsDir()).insert(RailInfo(a, false, ad_branch));
+	advance( aIsDir()).insert(RailInfo(b, false, bc_branch));
+	advance(!aIsDir()).insert(RailInfo(c, false, bc_branch));
+	advance(!aIsDir()).insert(RailInfo(d, false, ad_branch));
+}
+
 bool DoubleCrossSwitch::valid() const
 {
 	return
@@ -195,6 +239,16 @@ bool DoubleCrossSwitch::valid() const
 		(b != nullptr) && b->contains(this, aIsDir()) &&
 		(c != nullptr) && c->contains(this, !aIsDir()) &&
 		(d != nullptr) && d->contains(this, !aIsDir());
+}
+
+QString DoubleCrossSwitch::key() const
+{
+	return "DKW" + name();
+}
+
+QString DoubleCrossSwitch::get(const DoubleCrossSwitch::State & state)
+{
+	return state_map.get(state);
 }
 
 QString DoubleCrossSwitch::toString() const
@@ -212,46 +266,10 @@ QString DoubleCrossSwitch::toString() const
 		arg(state_map.get(switch_state));
 }
 
-QString DoubleCrossSwitch::key() const
-{
-	return "DKW" + name();
-}
-
-SwitchState DoubleCrossSwitch::switchState() const
-{
-	return isBranch() ?
-		SwitchState::SWITCH_STATE_LEFT :
-		SwitchState::SWITCH_STATE_RIGHT;
-}
-
 bool DoubleCrossSwitch::isBranch() const
 {
 	const bool b_active = unsigned(switch_state) & B_MASK;
 	const bool d_active = unsigned(switch_state) & D_MASK;
 
 	return b_active == d_active;
-}
-
-void DoubleCrossSwitch::setState(const State state, const bool force)
-{
-	if ((lock() == LockState::UNLOCKED) || force)
-	{
-#ifdef STATE_VERBOSE
-		qDebug().noquote() << "########## DCS set state: " << state_map.get(switch_state) << " => " << state_map.get(state) << name();
-#endif
-		switch_state = state;
-	}
-	else
-	{
-		qWarning().noquote() << "Switch locked!" << name();
-	}
-}
-
-State DoubleCrossSwitch::state() const
-{
-#ifdef STATE_VERBOSE
-	qDebug().noquote() << "DCS get state: " << state_map.get(switch_state) << name();
-#endif
-
-	return switch_state;
 }
