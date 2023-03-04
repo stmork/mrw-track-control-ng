@@ -92,10 +92,12 @@ namespace mrw::model
 		 * on the given neighbour RaiPart pointers. The RailPart pointer are
 		 * independent on the direction a possible Route is using.
 		 *
-		 * @param left The RailPart at one switch end.
-		 * @param right The RailPart at the opposite end of the switch.
+		 * @param prev The previous RailPart in Route order.
+		 * @param succ The successive RailPart in Route order.
 		 */
-		void setState(const RailPart * left, const RailPart * right) override;
+		void setState(
+			const RailPart * prev,
+			const RailPart * succ) override;
 
 		/**
 		 * This method returns the clear text QString of the State this
@@ -118,12 +120,14 @@ namespace mrw::model
 
 		size_t flankCandidates(
 			std::vector<RegularSwitch *> & switches,
-			const RailPart        *        left,
-			const RailPart        *        right) const override;
+			const RailPart        *        prev,
+			const RailPart        *        succ) const override;
 
 	private:
 		void   link() override;
-		State  computeState(const RailPart * left, const RailPart * right) const;
+		State  computeState(
+			const RailPart * prev,
+			const RailPart * succ) const;
 
 		bool   isFlankProtection(const AbstractSwitch * other) const override;
 		size_t flank(

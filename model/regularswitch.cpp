@@ -80,10 +80,10 @@ void RegularSwitch::setState(const State state, const bool force)
 }
 
 void RegularSwitch::setState(
-	const RailPart * left,
-	const RailPart * right)
+	const RailPart * prev,
+	const RailPart * succ)
 {
-	switch_state = computeState(left, right);
+	switch_state = computeState(prev, succ);
 
 #ifdef STATE_VERBOSE
 	qDebug().noquote() << "####C" << toString() << switchState();
@@ -91,19 +91,19 @@ void RegularSwitch::setState(
 }
 
 State RegularSwitch::computeState(
-	const RailPart * left,
-	const RailPart * right) const
+	const RailPart * prev,
+	const RailPart * succ) const
 {
-	if ((left == nullptr) || (right == nullptr))
+	if ((prev == nullptr) || (succ == nullptr))
 	{
 		throw std::invalid_argument("Given rail parts are not defined.");
 	}
 
-	if ((b == left) || (b == right))
+	if ((b == prev) || (b == succ))
 	{
 		return State::AB;
 	}
-	else if ((c == left) || (c == right))
+	else if ((c == prev) || (c == succ))
 	{
 		return State::AC;
 	}
@@ -113,9 +113,9 @@ State RegularSwitch::computeState(
 		qCritical() << "b: " << *b;
 		qCritical() << "c: " << *c;
 
-		qCritical() << "Left: " << (left != nullptr ? QString(*left) : "<null>");
+		qCritical() << "Left: " << (prev != nullptr ? QString(*prev) : "<null>");
 		qCritical() << "This: " << *this;
-		qCritical() << "Right:" << (right != nullptr ? QString(*right) : "<null>");
+		qCritical() << "Right:" << (succ != nullptr ? QString(*succ) : "<null>");
 
 		throw std::invalid_argument("Given rail parts are not neighbours.");
 	}
@@ -151,10 +151,10 @@ size_t RegularSwitch::flank(
 
 size_t RegularSwitch::flankCandidates(
 	std::vector<RegularSwitch *> & switches,
-	const RailPart        *        left,
-	const RailPart        *        right) const
+	const RailPart        *        prev,
+	const RailPart        *        succ) const
 {
-	State compare = computeState(left, right);
+	State compare = computeState(prev, succ);
 
 	return flank(switches, false, compare);
 }

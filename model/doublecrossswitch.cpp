@@ -67,29 +67,29 @@ void DoubleCrossSwitch::setState(const State state, const bool force)
 }
 
 void DoubleCrossSwitch::setState(
-	const RailPart * left,
-	const RailPart * right)
+	const RailPart * prev,
+	const RailPart * succ)
 {
-	switch_state = computeState(left, right);
+	switch_state = computeState(prev, succ);
 }
 
 State DoubleCrossSwitch::computeState(
-	const RailPart * left,
-	const RailPart * right) const
+	const RailPart * prev,
+	const RailPart * succ) const
 {
 	unsigned state = 0;
 
-	if ((left == nullptr) || (right == nullptr))
+	if ((prev == nullptr) || (succ == nullptr))
 	{
 		throw std::invalid_argument("Given rail parts are not defined.");
 	}
 
-	if ((b == left) || (b == right))
+	if ((b == prev) || (b == succ))
 	{
 		state |= B_MASK;
 	}
 
-	if ((d == left) || (d == right))
+	if ((d == prev) || (d == succ))
 	{
 		state |= D_MASK;
 	}
@@ -143,10 +143,10 @@ size_t DoubleCrossSwitch::flank(
 
 size_t DoubleCrossSwitch::flankCandidates(
 	std::vector<RegularSwitch *> & switches,
-	const RailPart        *        left,
-	const RailPart        *        right) const
+	const RailPart        *        prev,
+	const RailPart        *        succ) const
 {
-	State compare = computeState(left, right);
+	State compare = computeState(prev, succ);
 
 	return flank(switches, false, compare);
 }

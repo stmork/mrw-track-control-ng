@@ -92,7 +92,17 @@ namespace mrw::model
 		 */
 		void setState(const State state, const bool force = false);
 
-		void setState(const RailPart * left, const RailPart * right) override;
+		/**
+		 * This method computes the RegularSwitch::State value depending on the
+		 * given neighbour RaiPart pointers. The RailPart pointer are
+		 * independent on the direction a possible Route is using.
+		 *
+		 * @param prev The previous RailPart in Route order.
+		 * @param succ The successive RailPart in Route order.
+		 */
+		void setState(
+			const RailPart * prev,
+			const RailPart * succ) override;
 
 		bool                  valid()       const override;
 		QString               toString()    const override;
@@ -105,8 +115,8 @@ namespace mrw::model
 
 		size_t flankCandidates(
 			std::vector<RegularSwitch *> & switches,
-			const RailPart        *        left,
-			const RailPart        *        right) const override;
+			const RailPart        *        prev,
+			const RailPart        *        succ) const override;
 
 		/**
 		 * This method returns the clear text QString of the State this
@@ -120,7 +130,9 @@ namespace mrw::model
 	private:
 		void   link() override;
 		bool   isFlankProtection(const AbstractSwitch * other) const override;
-		State  computeState(const RailPart * left, const RailPart * right) const;
+		State  computeState(
+			const RailPart * prev,
+			const RailPart * succ) const;
 
 		size_t flank(
 			std::vector<RegularSwitch *> & switches,

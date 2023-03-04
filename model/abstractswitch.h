@@ -76,10 +76,23 @@ namespace mrw::model
 			std::vector<RegularSwitch *> & switches,
 			const bool                     set_state = false) const = 0;
 
+		/**
+		 * This method computes the flank protection switches using the
+		 * setState() and flank() method.
+		 *
+		 * @param switches The collected flank protection switches.
+		 * @param prev The previous RailPart in Route order.
+		 * @param succ The successive RailPart in Route order.
+		 * @return The amount if correctly switched flank switches. The state is
+		 * correct if all members of the collected switches have the correct
+		 * mrw::can::SwitchState active.
+		 * @see follow()
+		 * @see flank()
+		 */
 		virtual size_t flankCandidates(
 			std::vector<RegularSwitch *> & switches,
-			const RailPart        *        left,
-			const RailPart        *        right) const = 0;
+			const RailPart        *        prev,
+			const RailPart        *        succ) const = 0;
 
 		/**
 		 * This method converts the internal switch state into the right

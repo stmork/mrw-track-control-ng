@@ -166,12 +166,12 @@ namespace mrw::model
 		 *
 		 * @note Both pointers need to be non nullptr.
 		 *
-		 * @param left One neighbour.
-		 * @param right The other neighbour.
+		 * @param prev The previous RailPart in Route order.
+		 * @param succ The successive RailPart in Route order.
 		 * @exception std::invalid_argument one of the RailPart pointer is not
 		 * a neighbour.
 		 */
-		virtual void setState(const RailPart * left, const RailPart * right) = 0;
+		virtual void setState(const RailPart * prev, const RailPart * succ) = 0;
 
 		/**
 		 * This method reserves this RailPart for routing information so that
