@@ -49,6 +49,7 @@ void DoubleCrossSwitch::link()
 		return;
 	}
 
+	// Note: There is no priority definition in the model so prio is false.
 	advance( aIsDir()).insert(RailInfo(a, false, ad_branch));
 	advance( aIsDir()).insert(RailInfo(b, false, bc_branch));
 	advance(!aIsDir()).insert(RailInfo(c, false, bc_branch));
