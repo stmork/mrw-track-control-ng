@@ -171,9 +171,10 @@ bool RegularSwitch::isFlankProtection(const AbstractSwitch * other) const
 
 size_t RegularSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
-	const bool                     set_state) const
+	const bool                     set_state,
+	FlankGuard                     guard) const
 {
-	return flank(switches, set_state, state());
+	return flank(switches, set_state, state(), guard);
 }
 
 size_t RegularSwitch::flankCandidates(
@@ -183,13 +184,14 @@ size_t RegularSwitch::flankCandidates(
 {
 	State compare = computeState(prev, succ);
 
-	return flank(switches, false, compare);
+	return flank(switches, false, compare, &Method::always<RegularSwitch>);
 }
 
 size_t RegularSwitch::flank(
-	std::vector<mrw::model::RegularSwitch *> & switches,
-	const bool                                 set_state,
-	const State                                compare) const
+	std::vector<RegularSwitch *> & switches,
+	const bool                     set_state,
+	const State                    compare,
+	FlankGuard                     guard) const
 {
 	RegularSwitch * b_switch = follow(b, !a_in_dir);
 	RegularSwitch * c_switch = follow(c, !a_in_dir);
@@ -205,7 +207,7 @@ size_t RegularSwitch::flank(
 		other = b_switch;
 	}
 
-	if (other != nullptr)
+	if ((other != nullptr) && guard(other))
 	{
 		switches.push_back(other);
 		if (set_state)

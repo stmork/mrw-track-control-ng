@@ -9,14 +9,18 @@
 #define MRW_MODEL_ABSTRACTSWITCH_H
 
 #include <unordered_set>
+#include <functional>
 
 #include <can/commands.h>
+#include <util/method.h>
 #include <model/railpart.h>
 #include <model/switchmodulereference.h>
 
 namespace mrw::model
 {
 	class RegularSwitch;
+
+	typedef std::function<bool(RegularSwitch *)> FlankGuard;
 
 	/**
 	 * This class represents any representation of any switch occuring on a
@@ -80,7 +84,8 @@ namespace mrw::model
 		 */
 		virtual size_t flank(
 			std::vector<RegularSwitch *> & switches,
-			const bool                     set_state = false) const = 0;
+			const bool                     set_state = false,
+			FlankGuard                     guard = &mrw::util::Method::always<RegularSwitch>) const = 0;
 
 		/**
 		 * This method computes the flank protection switches using the

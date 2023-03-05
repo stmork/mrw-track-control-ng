@@ -376,14 +376,15 @@ void TestFlankSwitch::testFlankProtectionRhombusRouteLR()
 	TestRoute  route(true, SectionState::TOUR, r121);
 
 	QVERIFY(route.append(r118));
-	const std::vector<RegularSwitch *> & flanks = route.doFlank();
-	QCOMPARE(flanks.size(), 3u);
+	const std::vector<RegularSwitch *> & flank_switches = route.doFlank();
+	QCOMPARE(flank_switches.size(), 1u);
+	QVERIFY(contains(flank_switches, s11));
 
 	QCOMPARE(s11->switchState(), SWITCH_STATE_LEFT);
 	QCOMPARE(s12->switchState(), SWITCH_STATE_LEFT);
 	QCOMPARE(s13->switchState(), SWITCH_STATE_LEFT);
 	QCOMPARE(s14->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s15->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s15->switchState(), SWITCH_STATE_LEFT);
 }
 
 void TestFlankSwitch::testFlankProtectionRhombusRouteRL()
@@ -407,13 +408,14 @@ void TestFlankSwitch::testFlankProtectionRhombusRouteRL()
 	TestRoute  route(false, SectionState::TOUR, r118);
 
 	QVERIFY(route.append(r111));
-	const std::vector<RegularSwitch *> & flanks = route.doFlank();
-	QCOMPARE(flanks.size(), 3u);
+	const std::vector<RegularSwitch *> & flank_switches = route.doFlank();
+	QCOMPARE(flank_switches.size(), 1u);
+	QVERIFY(contains(flank_switches, s12));
 
 	QCOMPARE(s11->switchState(), SWITCH_STATE_RIGHT);
 	QCOMPARE(s12->switchState(), SWITCH_STATE_RIGHT);
 	QCOMPARE(s13->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s14->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s14->switchState(), SWITCH_STATE_LEFT);
 	QCOMPARE(s15->switchState(), SWITCH_STATE_RIGHT);
 }
 
@@ -423,20 +425,20 @@ void TestFlankSwitch::testFlankProtectionFar()
 	RegularSwitch   *   s22  = dynamic_cast<RegularSwitch *>(    model->assemblyPart(2,  1, 1));
 	RegularSwitch   *   s23  = dynamic_cast<RegularSwitch *>(    model->assemblyPart(2, 10, 0));
 	Rail        *       r211 = dynamic_cast<Rail *>(model->assemblyPart(2,  0, 0));
-	Rail        *       r216 = dynamic_cast<Rail *>(model->assemblyPart(2, 11, 0));
+	Rail        *       r217 = dynamic_cast<Rail *>(model->assemblyPart(2, 11, 0));
 
 	QVERIFY(s21 != nullptr);
 	QVERIFY(s22 != nullptr);
 	QVERIFY(s23 != nullptr);
 	QVERIFY(r211 != nullptr);
-	QVERIFY(r216 != nullptr);
+	QVERIFY(r217 != nullptr);
 
 	s22->setState(RegularSwitch::State::AB);
 	QCOMPARE(s22->switchState(), SWITCH_STATE_LEFT);
 
 	TestRoute  route(true, SectionState::TOUR, r211);
 
-	QVERIFY(route.append(r216));
+	QVERIFY(route.append(r217));
 	const std::vector<RegularSwitch *> & flanks = route.doFlank();
 	QCOMPARE(flanks.size(), 0u);
 

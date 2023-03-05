@@ -278,34 +278,16 @@ void Route::prepareFlank()
 
 		if (flank_switch != nullptr)
 		{
-			flank_switch->flank(flank_switches, true);
-		}
-	}
-
 #if 0
-	// Now find flank protection switch candidates have the same Section as any
-	// part of the route. Those candidates have to be removed.
-	auto it = flank_switches.begin();
-
-	// Since we may delete elements we have to compute iterator increment on
-	// our own.
-	while (it != flank_switches.end())
-	{
-		const RegularSwitch * part = *it;
-
-		if (std::find(sections.begin(), sections.end(), part->section()) != sections.end())
-		{
-			// Section of flank protection switch is contained in the Route so
-			// remove it and do not increment iterator.
-			flank_switches.erase(it);
-		}
-		else
-		{
-			// Increment iterator otherwise.
-			++it;
+			flank_switch->flank(flank_switches, true);
+#else
+			flank_switch->flank(flank_switches, true, [&](const RegularSwitch * ptr)
+			{
+				return std::find(track.begin(), track.end(), ptr) == track.end();
+			});
+#endif
 		}
 	}
-#endif
 }
 
 bool Route::isLastSectionEnded() const

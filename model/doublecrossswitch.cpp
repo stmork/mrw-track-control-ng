@@ -175,9 +175,10 @@ bool DoubleCrossSwitch::isFlankProtection(const AbstractSwitch * other) const
 
 size_t DoubleCrossSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
-	const bool                     set_state) const
+	const bool                     set_state,
+	FlankGuard                     guard) const
 {
-	return flank(switches, set_state, state());
+	return flank(switches, set_state, state(), guard);
 }
 
 size_t DoubleCrossSwitch::flankCandidates(
@@ -187,32 +188,33 @@ size_t DoubleCrossSwitch::flankCandidates(
 {
 	State compare = computeState(prev, succ);
 
-	return flank(switches, false, compare);
+	return flank(switches, false, compare, &Method::always<RegularSwitch>);
 }
 
 size_t DoubleCrossSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
 	const bool                     set_state,
-	const DoubleCrossSwitch::State compare) const
+	const DoubleCrossSwitch::State compare,
+	FlankGuard                     guard) const
 {
 	size_t equal    = 0;
 
 	if ((unsigned)compare & B_MASK)
 	{
-		equal += flank(switches, set_state, false, a_in_dir, a);
+		equal += flank(switches, set_state, false, a_in_dir, a, guard);
 	}
 	else
 	{
-		equal += flank(switches, set_state, true, a_in_dir, b);
+		equal += flank(switches, set_state, true, a_in_dir, b, guard);
 	}
 
 	if ((unsigned)compare & D_MASK)
 	{
-		equal += flank(switches, set_state, true, !a_in_dir, c);
+		equal += flank(switches, set_state, true, !a_in_dir, c, guard);
 	}
 	else
 	{
-		equal += flank(switches, set_state, false, !a_in_dir, d);
+		equal += flank(switches, set_state, false, !a_in_dir, d, guard);
 	}
 	return equal;
 }
@@ -222,13 +224,14 @@ size_t DoubleCrossSwitch::flank(
 	const bool                     set_state,
 	const bool                     left,
 	const bool                     dir,
-	RailPart           *           other) const
+	RailPart           *           other,
+	FlankGuard                     guard) const
 {
 	RegularSwitch  *  o_switch = follow(other, dir);
 	const SwitchState compare  = left ?  SWITCH_STATE_RIGHT : SWITCH_STATE_LEFT;
 	size_t            equal    = 0;
 
-	if (isFlankCandidate(o_switch, left))
+	if (isFlankCandidate(o_switch, left) && guard(o_switch))
 	{
 		switches.push_back(o_switch);
 
