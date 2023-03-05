@@ -29,6 +29,14 @@
     <module xsi:type="Modelrailway:Impulsmodul" nummer="71" magnetartikel="//@gruppe.1/@abschnitt.8/@bauelement.0 //@gruppe.1/@abschnitt.11/@bauelement.0"/>
     <module xsi:type="Modelrailway:Gleismodul" nummer="72" abschnitte="//@gruppe.1/@abschnitt.9 //@gruppe.1/@abschnitt.10 //@gruppe.1/@abschnitt.11 //@gruppe.1/@abschnitt.12"/>
   </controller>
+  <controller id="8">
+    <module xsi:type="Modelrailway:Impulsmodul" nummer="81" magnetartikel="//@gruppe.2/@abschnitt.1/@bauelement.0 //@gruppe.2/@abschnitt.1/@bauelement.1 //@gruppe.2/@abschnitt.10/@bauelement.0"/>
+    <module xsi:type="Modelrailway:Gleismodul" nummer="82" abschnitte="//@gruppe.2/@abschnitt.2 //@gruppe.2/@abschnitt.0 //@gruppe.2/@abschnitt.1 //@gruppe.2/@abschnitt.5"/>
+  </controller>
+  <controller id="9">
+    <module xsi:type="Modelrailway:Gleismodul" nummer="91" abschnitte="//@gruppe.2/@abschnitt.3 //@gruppe.2/@abschnitt.4 //@gruppe.2/@abschnitt.6 //@gruppe.2/@abschnitt.7"/>
+    <module xsi:type="Modelrailway:Gleismodul" nummer="92" abschnitte="//@gruppe.2/@abschnitt.8 //@gruppe.2/@abschnitt.9 //@gruppe.2/@abschnitt.10 //@gruppe.2/@abschnitt.11"/>
+  </controller>
   <gruppe xsi:type="Modelrailway:Bahnhof" name="West">
     <abschnitt name="11" unit_no="11" modul="//@controller.0/@module.1">
       <bauelement xsi:type="Modelrailway:Gleis" name="11" b="//@gruppe.0/@abschnitt.2/@bauelement.1"/>
@@ -85,7 +93,7 @@
       <bauelement xsi:type="Modelrailway:Formvorsignal" name="f" spulen="3" modul="//@controller.3/@module.0" unit_no="2251"/>
     </abschnitt>
   </gruppe>
-  <gruppe xsi:type="Modelrailway:Bahnhof" name="Ost">
+  <gruppe xsi:type="Modelrailway:Bahnhof" name="Mid">
     <abschnitt name="111" unit_no="111" modul="//@controller.4/@module.1">
       <bauelement xsi:type="Modelrailway:Gleis" name="111" b="//@gruppe.1/@abschnitt.2/@bauelement.0"/>
     </abschnitt>
@@ -127,6 +135,45 @@
     </abschnitt>
     <abschnitt name="118" unit_no="118" modul="//@controller.6/@module.1">
       <bauelement xsi:type="Modelrailway:Gleis" name="118" a="//@gruppe.1/@abschnitt.11/@bauelement.0"/>
+    </abschnitt>
+  </gruppe>
+  <gruppe xsi:type="Modelrailway:Bahnhof" name="East">
+    <abschnitt name="211" unit_no="211" modul="//@controller.7/@module.1">
+      <bauelement xsi:type="Modelrailway:Gleis" name="211" b="//@gruppe.2/@abschnitt.1/@bauelement.0"/>
+    </abschnitt>
+    <abschnitt name="212" unit_no="212" modul="//@controller.7/@module.1">
+      <bauelement xsi:type="Modelrailway:DKW" name="21" modul="//@controller.7/@module.0" unit_no="1021" neu="true" adIstAbzweig="true" a="//@gruppe.2/@abschnitt.2/@bauelement.0" c="//@gruppe.2/@abschnitt.3/@bauelement.0" b="//@gruppe.2/@abschnitt.0/@bauelement.0" d="//@gruppe.2/@abschnitt.1/@bauelement.1"/>
+      <bauelement xsi:type="Modelrailway:Weiche" name="22" modul="//@controller.7/@module.0" unit_no="1022" neu="true" bIstAbzweig="true" bIstBevorzugt="true" b="//@gruppe.2/@abschnitt.4/@bauelement.0" c="//@gruppe.2/@abschnitt.5/@bauelement.0" a="//@gruppe.2/@abschnitt.1/@bauelement.0"/>
+    </abschnitt>
+    <abschnitt name="201" unit_no="201" modul="//@controller.7/@module.1">
+      <bauelement xsi:type="Modelrailway:Gleis" name="201" aInZaehlrichtung="true" a="//@gruppe.2/@abschnitt.1/@bauelement.0"/>
+    </abschnitt>
+    <abschnitt name="213" unit_no="213" modul="//@controller.8/@module.0">
+      <bauelement xsi:type="Modelrailway:Gleis" name="213" a="//@gruppe.2/@abschnitt.1/@bauelement.0" b="//@gruppe.2/@abschnitt.6/@bauelement.0"/>
+    </abschnitt>
+    <abschnitt name="223" unit_no="223" modul="//@controller.8/@module.0">
+      <bauelement xsi:type="Modelrailway:Gleis" name="223" a="//@gruppe.2/@abschnitt.1/@bauelement.1" b="//@gruppe.2/@abschnitt.7/@bauelement.0"/>
+    </abschnitt>
+    <abschnitt name="233" unit_no="233" modul="//@controller.7/@module.1">
+      <bauelement xsi:type="Modelrailway:Gleis" name="233" a="//@gruppe.2/@abschnitt.1/@bauelement.1"/>
+    </abschnitt>
+    <abschnitt name="214" unit_no="214" modul="//@controller.8/@module.0">
+      <bauelement xsi:type="Modelrailway:Gleis" name="214" a="//@gruppe.2/@abschnitt.3/@bauelement.0" b="//@gruppe.2/@abschnitt.8/@bauelement.0"/>
+    </abschnitt>
+    <abschnitt name="224" unit_no="224" modul="//@controller.8/@module.0">
+      <bauelement xsi:type="Modelrailway:Gleis" name="224" a="//@gruppe.2/@abschnitt.4/@bauelement.0" b="//@gruppe.2/@abschnitt.9/@bauelement.0"/>
+    </abschnitt>
+    <abschnitt name="215" unit_no="215" modul="//@controller.8/@module.1">
+      <bauelement xsi:type="Modelrailway:Gleis" name="215" a="//@gruppe.2/@abschnitt.6/@bauelement.0" b="//@gruppe.2/@abschnitt.10/@bauelement.0"/>
+    </abschnitt>
+    <abschnitt name="225" unit_no="225" modul="//@controller.8/@module.1">
+      <bauelement xsi:type="Modelrailway:Gleis" name="225" aInZaehlrichtung="true" a="//@gruppe.2/@abschnitt.10/@bauelement.0" b="//@gruppe.2/@abschnitt.7/@bauelement.0"/>
+    </abschnitt>
+    <abschnitt name="216" unit_no="216" modul="//@controller.8/@module.1">
+      <bauelement xsi:type="Modelrailway:Weiche" name="23" aInZaehlrichtung="true" modul="//@controller.7/@module.0" unit_no="1023" neu="true" bIstAbzweig="true" cIstBevorzugt="true" b="//@gruppe.2/@abschnitt.9/@bauelement.0" c="//@gruppe.2/@abschnitt.8/@bauelement.0" a="//@gruppe.2/@abschnitt.11/@bauelement.0"/>
+    </abschnitt>
+    <abschnitt name="217" unit_no="217" modul="//@controller.8/@module.1">
+      <bauelement xsi:type="Modelrailway:Gleis" name="217" a="//@gruppe.2/@abschnitt.10/@bauelement.0"/>
     </abschnitt>
   </gruppe>
 </Modelrailway:Modell>
