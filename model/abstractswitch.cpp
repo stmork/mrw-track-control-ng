@@ -54,12 +54,14 @@ RegularSwitch * AbstractSwitch::follow(
 	RailPart * part,
 	const bool dir)
 {
-	Rail * rail = dynamic_cast<Rail *>(part);
+	Rail * rail  = dynamic_cast<Rail *>(part);
+	size_t count = 0;
 
-	while (rail != nullptr)
+	while ((rail != nullptr) && (count < MAX_FOLLOW_RAIL))
 	{
 		part = *rail->advance(dir).begin();
 		rail = dynamic_cast<Rail *>(part);
+		count++;
 	}
 	return dynamic_cast<RegularSwitch *>(part);
 }
@@ -68,12 +70,14 @@ const AbstractSwitch * AbstractSwitch::follow(
 	const RailPart * part,
 	const bool       dir)
 {
-	const Rail * rail = dynamic_cast<const Rail *>(part);
+	const Rail * rail  = dynamic_cast<const Rail *>(part);
+	size_t       count = 0;
 
-	while (rail != nullptr)
+	while ((rail != nullptr) && (count < MAX_FOLLOW_RAIL))
 	{
 		part = *rail->advance(dir).begin();
 		rail = dynamic_cast<const Rail *>(part);
+		count++;
 	}
 	return dynamic_cast<const AbstractSwitch *>(part);
 }

@@ -282,6 +282,7 @@ void Route::prepareFlank()
 		}
 	}
 
+#if 0
 	// Now find flank protection switch candidates have the same Section as any
 	// part of the route. Those candidates have to be removed.
 	auto it = flank_switches.begin();
@@ -304,6 +305,7 @@ void Route::prepareFlank()
 			++it;
 		}
 	}
+#endif
 }
 
 bool Route::isLastSectionEnded() const

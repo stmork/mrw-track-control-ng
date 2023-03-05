@@ -30,6 +30,12 @@ namespace mrw::model
 	{
 		friend class Section;
 
+		/**
+		 * This is the maximum amount of Rail elements to follow to reach a
+		 * flank protection switch.
+		 */
+		static const size_t MAX_FOLLOW_RAIL = 2;
+
 	public:
 		explicit AbstractSwitch(
 			ModelRailway     *    model_railway,
@@ -115,7 +121,9 @@ namespace mrw::model
 		/**
 		 * This method follows a connection part if it is directly connected
 		 * to a RegularSwitch or indirectly connected using a Rail. The
-		 * algorithm proceeds as long as a Rail is found.
+		 * algorithm proceeds as long as a Rail is found. If there are more
+		 * than MAX_FOLLOW_RAIL Rail elements to follow the method returns
+		 * false.
 		 *
 		 * @note This is the non const version to follow Rail elements.
 		 *
@@ -124,13 +132,16 @@ namespace mrw::model
 		 * @return The paired RegularSwitch if any or @c nullptr.
 		 * @note This method is needed to find a paired flank switch but a
 		 * found RegularSwitch is only a candidate for a flank switch.
+		 * @see MAX_FOLLOW_RAIL
 		 */
 		static RegularSwitch * follow(RailPart * part, const bool dir);
 
 		/**
 		 * This method follows a connection part if it is directly connected
 		 * to a RegularSwitch or indirectly connected using a Rail. The
-		 * algorithm proceeds as long as a Rail is found.
+		 * algorithm proceeds as long as a Rail is found. If there are more
+		 * than MAX_FOLLOW_RAIL Rail elements to follow the method returns
+		 * false.
 		 *
 		 * @note This is the const version to follow Rail elements.
 		 *
@@ -139,6 +150,7 @@ namespace mrw::model
 		 * @return The paired RegularSwitch if any or @c nullptr.
 		 * @note This method is needed to find a paired flank switch but a
 		 * found AbstractSwitch is only a candidate for a flank switch.
+		 * @see MAX_FOLLOW_RAIL
 		 */
 		static const AbstractSwitch * follow(
 			const RailPart * part,
