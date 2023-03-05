@@ -28,6 +28,7 @@ HEADERS += \
 	testmodel.h \
 	testmodelbase.h \
 	testnumbering.h \
+	testroute.h \
 	testrouting.h \
 	testunknown.h \
 	testswitch.h \

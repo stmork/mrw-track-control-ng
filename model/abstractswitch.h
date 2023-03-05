@@ -114,14 +114,35 @@ namespace mrw::model
 	protected:
 		/**
 		 * This method follows a connection part if it is directly connected
-		 * to a RegularSwitch or indirectly connected using a Rail.
+		 * to a RegularSwitch or indirectly connected using a Rail. The
+		 * algorithm proceeds as long as a Rail is found.
+		 *
+		 * @note This is the non const version to follow Rail elements.
 		 *
 		 * @param part The RailPart to follow to a paired switch.
+		 * @param dir The counting direction to proceed the Rail elements.
 		 * @return The paired RegularSwitch if any or @c nullptr.
 		 * @note This method is needed to find a paired flank switch but a
 		 * found RegularSwitch is only a candidate for a flank switch.
 		 */
-		RegularSwitch * follow(RailPart * part) const;
+		static RegularSwitch * follow(RailPart * part, const bool dir);
+
+		/**
+		 * This method follows a connection part if it is directly connected
+		 * to a RegularSwitch or indirectly connected using a Rail. The
+		 * algorithm proceeds as long as a Rail is found.
+		 *
+		 * @note This is the const version to follow Rail elements.
+		 *
+		 * @param part The RailPart to follow to a paired switch.
+		 * @param dir The counting direction to proceed the Rail elements.
+		 * @return The paired RegularSwitch if any or @c nullptr.
+		 * @note This method is needed to find a paired flank switch but a
+		 * found RegularSwitch is only a candidate for a flank switch.
+		 */
+		static const AbstractSwitch * follow(
+			const RailPart * part,
+			const bool       dir);
 
 		/**
 		 * This method tests a connected neighbour if the neighbour is a

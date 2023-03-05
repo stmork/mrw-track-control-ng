@@ -11,6 +11,8 @@
 using namespace mrw::test;
 using namespace mrw::model;
 
+using LockState = Device::LockState;
+
 TestModelBase::TestModelBase(const char * modelname, QObject * parent) :
 	QObject(parent),
 	filename(QString(modelname) + ".modelrailway")
@@ -18,6 +20,23 @@ TestModelBase::TestModelBase(const char * modelname, QObject * parent) :
 	if (!QFile::exists(filename))
 	{
 		filename = "test/" + filename;
+	}
+}
+
+void TestModelBase::clear()
+{
+	for (RailPart * part : parts)
+	{
+		part->reserve(false);
+		part->section()->setState(SectionState::FREE);
+		part->section()->setOccupation(false);
+
+		Device * device = dynamic_cast<Device *>(part);
+
+		if (device != nullptr)
+		{
+			device->setLock(LockState::UNLOCKED);
+		}
 	}
 }
 

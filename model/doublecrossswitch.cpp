@@ -162,7 +162,7 @@ bool DoubleCrossSwitch::isFlankProtection(const AbstractSwitch * other) const
 
 	for (unsigned i = 0; i < candidates.size(); i++)
 	{
-		const RegularSwitch * o_switch = follow(candidates[i]);
+		const RegularSwitch * o_switch = follow(candidates[i], a_in_dir == (i < 2));
 		const std::bitset<8>  bits(i);
 
 		if ((o_switch == other) && isFlankCandidate(o_switch, bits.count() == 1))
@@ -199,20 +199,20 @@ size_t DoubleCrossSwitch::flank(
 
 	if ((unsigned)compare & B_MASK)
 	{
-		equal += flank(switches, set_state, false, a);
+		equal += flank(switches, set_state, false, a_in_dir, a);
 	}
 	else
 	{
-		equal += flank(switches, set_state, true, b);
+		equal += flank(switches, set_state, true, a_in_dir, b);
 	}
 
 	if ((unsigned)compare & D_MASK)
 	{
-		equal += flank(switches, set_state, true, c);
+		equal += flank(switches, set_state, true, !a_in_dir, c);
 	}
 	else
 	{
-		equal += flank(switches, set_state, false, d);
+		equal += flank(switches, set_state, false, !a_in_dir, d);
 	}
 	return equal;
 }
@@ -221,9 +221,10 @@ size_t DoubleCrossSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
 	const bool                     set_state,
 	const bool                     left,
+	const bool                     dir,
 	RailPart           *           other) const
 {
-	RegularSwitch  *  o_switch = follow(other);
+	RegularSwitch  *  o_switch = follow(other, dir);
 	const SwitchState compare  = left ?  SWITCH_STATE_RIGHT : SWITCH_STATE_LEFT;
 	size_t            equal    = 0;
 

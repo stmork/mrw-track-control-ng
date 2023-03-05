@@ -50,27 +50,32 @@ const QString & AbstractSwitch::name() const
 	return partName();
 }
 
-RegularSwitch * AbstractSwitch::follow(RailPart * part) const
+RegularSwitch * AbstractSwitch::follow(
+	RailPart * part,
+	const bool dir)
 {
 	Rail * rail = dynamic_cast<Rail *>(part);
 
-	if (rail != nullptr)
+	while (rail != nullptr)
 	{
-		// If this is backward
-		if (rail->contains(this, false))
-		{
-			// Take forward.
-			part = *rail->advance(false).begin();
-		}
-
-		// If this is forward
-		if (rail->contains(this, true))
-		{
-			// Take backward.
-			part = *rail->advance(true).begin();
-		}
+		part = *rail->advance(dir).begin();
+		rail = dynamic_cast<Rail *>(part);
 	}
 	return dynamic_cast<RegularSwitch *>(part);
+}
+
+const AbstractSwitch * AbstractSwitch::follow(
+	const RailPart * part,
+	const bool       dir)
+{
+	const Rail * rail = dynamic_cast<const Rail *>(part);
+
+	while (rail != nullptr)
+	{
+		part = *rail->advance(dir).begin();
+		rail = dynamic_cast<const Rail *>(part);
+	}
+	return dynamic_cast<const AbstractSwitch *>(part);
 }
 
 bool AbstractSwitch::isFlankCandidate(
@@ -84,6 +89,7 @@ bool AbstractSwitch::linked(
 	const RailPart    *    candidate,
 	const AbstractSwitch * self) const
 {
+#if 0
 	const Rail * rail = dynamic_cast<const Rail *>(candidate);
 
 	if (candidate == self)
@@ -98,4 +104,7 @@ bool AbstractSwitch::linked(
 		return rail->contains(self, true) != rail->contains(self, false);
 	}
 	return false;
+#else
+	return (follow(candidate, true) == self) || (follow(candidate, false) == self);
+#endif
 }

@@ -138,6 +138,7 @@ namespace mrw::model
 			std::vector<RegularSwitch *> & switches,
 			const bool                     set_state,
 			const bool                     left,
+			const bool                     dir,
 			RailPart           *           other) const;
 
 		State                                              switch_state = State::AC;

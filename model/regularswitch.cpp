@@ -161,8 +161,8 @@ SwitchState RegularSwitch::switchState() const
 
 bool RegularSwitch::isFlankProtection(const AbstractSwitch * other) const
 {
-	const RegularSwitch * b_switch = follow(b);
-	const RegularSwitch * c_switch = follow(c);
+	const RegularSwitch * b_switch = follow(b, !a_in_dir);
+	const RegularSwitch * c_switch = follow(c, !a_in_dir);
 
 	return
 		((b_switch == other) && isFlankCandidate(b_switch, true)) ||
@@ -191,8 +191,8 @@ size_t RegularSwitch::flank(
 	const bool                                 set_state,
 	const State                                compare) const
 {
-	RegularSwitch * b_switch = follow(b);
-	RegularSwitch * c_switch = follow(c);
+	RegularSwitch * b_switch = follow(b, !a_in_dir);
+	RegularSwitch * c_switch = follow(c, !a_in_dir);
 	RegularSwitch * other    = nullptr;
 	size_t          equal    = 0;
 

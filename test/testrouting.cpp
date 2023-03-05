@@ -11,28 +11,12 @@
 #include <model/doublecrossswitch.h>
 
 #include "testrouting.h"
+#include "testroute.h"
 
 using namespace mrw::test;
 using namespace mrw::model;
 
 using LockState = Device::LockState;
-
-class TestRoute : public Route
-{
-public:
-	explicit TestRoute(
-		const bool           dir,
-		const SectionState   wanted_state,
-		RailPart      *      first) : Route(dir, wanted_state, first)
-	{
-	}
-
-	const std::vector<mrw::model::RegularSwitch *> & doFlank()
-	{
-		prepareFlank();
-		return flank_switches;
-	}
-};
 
 TestRouting::TestRouting() : TestModelBase("Test-Flank")
 {
@@ -40,19 +24,7 @@ TestRouting::TestRouting() : TestModelBase("Test-Flank")
 
 void TestRouting::init()
 {
-	for (RailPart * part : parts)
-	{
-		part->reserve(false);
-		part->section()->setState(SectionState::FREE);
-		part->section()->setOccupation(false);
-
-		Device * device = dynamic_cast<Device *>(part);
-
-		if (device != nullptr)
-		{
-			device->setLock(LockState::UNLOCKED);
-		}
-	}
+	clear();
 }
 
 void TestRouting::testSimple()
@@ -209,7 +181,7 @@ void TestRouting::testFlank()
 	QVERIFY(route.append(parts[19]));
 	QVERIFY(verify(route));
 
-	const std::vector<mrw::model::RegularSwitch *> & flanks = route.doFlank();
+	const std::vector<RegularSwitch *> & flanks = route.doFlank();
 
 	QCOMPARE(flanks.size(), 4u);
 }
@@ -234,7 +206,7 @@ void TestRouting::testFlankLocked()
 	QVERIFY(verify(route));
 	QCOMPARE(reserved.size(), 1u);
 
-	const std::vector<mrw::model::RegularSwitch *> & flanks = route.doFlank();
+	const std::vector<RegularSwitch *> & flanks = route.doFlank();
 
 	QCOMPARE(flanks.size(), 0u);
 

@@ -8,8 +8,10 @@
 #include <can/commands.h>
 #include <model/regularswitch.h>
 #include <model/doublecrossswitch.h>
+#include <model/rail.h>
 
 #include "testflankswitch.h"
+#include "testroute.h"
 
 using namespace mrw::can;
 using namespace mrw::test;
@@ -17,6 +19,11 @@ using namespace mrw::model;
 
 TestFlankSwitch::TestFlankSwitch() : TestModel("Test-Flank")
 {
+}
+
+void TestFlankSwitch::init()
+{
+	clear();
 }
 
 void TestFlankSwitch::testFlankProtectionLeft()
@@ -199,4 +206,213 @@ void TestFlankSwitch::testFlankProtectionRsRight()
 	QVERIFY(contains(flank_switches, s9));
 	QCOMPARE(s8->switchState(), SWITCH_STATE_LEFT);
 	QCOMPARE(s9->switchState(), SWITCH_STATE_LEFT);
+}
+
+void TestFlankSwitch::testFlankProtectionDoubleU1()
+{
+	RegularSwitch * s11 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 2, 0));
+	RegularSwitch * s12 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 3, 0));
+	RegularSwitch * s13 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 4, 1));
+	std::vector<RegularSwitch *> flank_switches;
+
+	QVERIFY(s11 != nullptr);
+	QVERIFY(s12 != nullptr);
+	QVERIFY(s13 != nullptr);
+
+	flank_switches.clear();
+	s12->setState(RegularSwitch::State::AC);
+	QCOMPARE(s12->flank(flank_switches, true), 1u);
+	QVERIFY(!contains(flank_switches, s11));
+	QVERIFY(contains(flank_switches, s13));
+	QCOMPARE(s12->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s13->switchState(), SWITCH_STATE_RIGHT);
+
+	flank_switches.clear();
+	s12->setState(RegularSwitch::State::AB);
+	QCOMPARE(s12->flank(flank_switches, true), 0u);
+	QVERIFY(!contains(flank_switches, s11));
+	QVERIFY(!contains(flank_switches, s13));
+	QCOMPARE(s12->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s13->switchState(), SWITCH_STATE_RIGHT);
+}
+
+void TestFlankSwitch::testFlankProtectionDoubleU2()
+{
+	RegularSwitch * s11 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 2, 0));
+	RegularSwitch * s12 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 3, 0));
+	RegularSwitch * s13 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 4, 1));
+	std::vector<RegularSwitch *> flank_switches;
+
+	QVERIFY(s11 != nullptr);
+	QVERIFY(s12 != nullptr);
+	QVERIFY(s13 != nullptr);
+
+	flank_switches.clear();
+	s11->setState(RegularSwitch::State::AB);
+	QCOMPARE(s11->flank(flank_switches, true), 1u);
+	QVERIFY(!contains(flank_switches, s12));
+	QVERIFY(contains(flank_switches, s13));
+	QCOMPARE(s12->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s13->switchState(), SWITCH_STATE_LEFT);
+
+	flank_switches.clear();
+	s11->setState(RegularSwitch::State::AC);
+	QCOMPARE(s11->flank(flank_switches, true), 0u);
+	QVERIFY(!contains(flank_switches, s11));
+	QVERIFY(!contains(flank_switches, s13));
+	QCOMPARE(s12->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s13->switchState(), SWITCH_STATE_LEFT);
+}
+
+void TestFlankSwitch::testFlankProtectionDoubleU3()
+{
+	RegularSwitch * s11 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 2, 0));
+	RegularSwitch * s12 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 3, 0));
+	RegularSwitch * s13 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 4, 1));
+	std::vector<RegularSwitch *> flank_switches;
+
+	QVERIFY(s11 != nullptr);
+	QVERIFY(s12 != nullptr);
+	QVERIFY(s13 != nullptr);
+
+	flank_switches.clear();
+	s13->setState(RegularSwitch::State::AB);
+	QCOMPARE(s13->flank(flank_switches, true), 1u);
+	QVERIFY(contains(flank_switches, s11));
+	QVERIFY(!contains(flank_switches, s12));
+	QCOMPARE(s11->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s12->switchState(), SWITCH_STATE_LEFT);
+
+	flank_switches.clear();
+	s13->setState(RegularSwitch::State::AC);
+	QCOMPARE(s13->flank(flank_switches, true), 1u);
+	QVERIFY(!contains(flank_switches, s11));
+	QVERIFY(contains(flank_switches, s12));
+	QCOMPARE(s11->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s12->switchState(), SWITCH_STATE_RIGHT);
+}
+
+void TestFlankSwitch::testFlankProtectionDoubleURoute()
+{
+	RegularSwitch * s11 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 2, 0));
+	RegularSwitch * s12 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 3, 0));
+	RegularSwitch * s13 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 4, 1));
+	Rail      *     r111 = dynamic_cast<Rail *>(model->assemblyPart(1, 0, 0));
+	Rail      *     r121 = dynamic_cast<Rail *>(model->assemblyPart(1, 1, 0));
+	Rail      *     r113 = dynamic_cast<Rail *>(model->assemblyPart(1, 5, 0));
+	Rail      *     r123 = dynamic_cast<Rail *>(model->assemblyPart(1, 6, 0));
+
+	QVERIFY(s11 != nullptr);
+	QVERIFY(s12 != nullptr);
+	QVERIFY(s13 != nullptr);
+	QVERIFY(r111 != nullptr);
+	QVERIFY(r121 != nullptr);
+	QVERIFY(r113 != nullptr);
+	QVERIFY(r123 != nullptr);
+
+	TestRoute  route_top(   true, SectionState::TOUR, r111);
+	TestRoute  route_bottom(true, SectionState::TOUR, r121);
+
+	// First turn bottom route and verify.
+	QVERIFY(route_bottom.append(r123));
+	const std::vector<mrw::model::RegularSwitch *> & flanks_bottom = route_bottom.doFlank();
+	QCOMPARE(flanks_bottom.size(), 1u);
+
+	QCOMPARE(s12->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s13->switchState(), SWITCH_STATE_RIGHT);
+
+	// Now turn top route and verify.
+	QVERIFY(route_top.append(r113));
+	const std::vector<mrw::model::RegularSwitch *> & flanks_top = route_top.doFlank();
+	QCOMPARE(flanks_top.size(), 1u);
+
+	QCOMPARE(s11->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s12->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s13->switchState(), SWITCH_STATE_LEFT);
+}
+
+void TestFlankSwitch::testFlankProtectionRhombus()
+{
+	RegularSwitch * s14 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1,  8, 0));
+	RegularSwitch * s15 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 11, 0));
+	std::vector<RegularSwitch *> flank_switches;
+
+	QVERIFY(s14 != nullptr);
+	QVERIFY(s15 != nullptr);
+
+	flank_switches.clear();
+	s14->setState(RegularSwitch::State::AC);
+	QCOMPARE(s14->flank(flank_switches, true), 1u);
+	QVERIFY(contains(flank_switches, s15));
+	QCOMPARE(s14->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s15->switchState(), SWITCH_STATE_RIGHT);
+
+	flank_switches.clear();
+	s14->setState(RegularSwitch::State::AB);
+	QCOMPARE(s14->flank(flank_switches, true), 1u);
+	QVERIFY(contains(flank_switches, s15));
+	QCOMPARE(s14->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s15->switchState(), SWITCH_STATE_LEFT);
+}
+
+void TestFlankSwitch::testFlankProtectionRhombusRouteLR()
+{
+	RegularSwitch * s11  = dynamic_cast<RegularSwitch *>(model->assemblyPart(1,  2, 0));
+	RegularSwitch * s12  = dynamic_cast<RegularSwitch *>(model->assemblyPart(1,  3, 0));
+	RegularSwitch * s13  = dynamic_cast<RegularSwitch *>(model->assemblyPart(1,  4, 1));
+	RegularSwitch * s14  = dynamic_cast<RegularSwitch *>(model->assemblyPart(1,  8, 0));
+	RegularSwitch * s15  = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 11, 0));
+	Rail      *     r121 = dynamic_cast<Rail *>(model->assemblyPart(1,  1, 0));
+	Rail      *     r118 = dynamic_cast<Rail *>(model->assemblyPart(1, 12, 0));
+
+	QVERIFY(s11 != nullptr);
+	QVERIFY(s12 != nullptr);
+	QVERIFY(s13 != nullptr);
+	QVERIFY(s14 != nullptr);
+	QVERIFY(s15 != nullptr);
+	QVERIFY(r121 != nullptr);
+	QVERIFY(r118 != nullptr);
+
+	TestRoute  route(true, SectionState::TOUR, r121);
+
+	QVERIFY(route.append(r118));
+	const std::vector<mrw::model::RegularSwitch *> & flanks = route.doFlank();
+	QCOMPARE(flanks.size(), 3u);
+
+	QCOMPARE(s11->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s12->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s13->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s14->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s15->switchState(), SWITCH_STATE_RIGHT);
+}
+
+void TestFlankSwitch::testFlankProtectionRhombusRouteRL()
+{
+	RegularSwitch * s11  = dynamic_cast<RegularSwitch *>(model->assemblyPart(1,  2, 0));
+	RegularSwitch * s12  = dynamic_cast<RegularSwitch *>(model->assemblyPart(1,  3, 0));
+	RegularSwitch * s13  = dynamic_cast<RegularSwitch *>(model->assemblyPart(1,  4, 1));
+	RegularSwitch * s14  = dynamic_cast<RegularSwitch *>(model->assemblyPart(1,  8, 0));
+	RegularSwitch * s15  = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 11, 0));
+	Rail      *     r111 = dynamic_cast<Rail *>(model->assemblyPart(1,  0, 0));
+	Rail      *     r118 = dynamic_cast<Rail *>(model->assemblyPart(1, 12, 0));
+
+	QVERIFY(s11 != nullptr);
+	QVERIFY(s12 != nullptr);
+	QVERIFY(s13 != nullptr);
+	QVERIFY(s14 != nullptr);
+	QVERIFY(s15 != nullptr);
+	QVERIFY(r111 != nullptr);
+	QVERIFY(r118 != nullptr);
+
+	TestRoute  route(false, SectionState::TOUR, r118);
+
+	QVERIFY(route.append(r111));
+	const std::vector<mrw::model::RegularSwitch *> & flanks = route.doFlank();
+	QCOMPARE(flanks.size(), 3u);
+
+	QCOMPARE(s11->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s12->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s13->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s14->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s15->switchState(), SWITCH_STATE_RIGHT);
 }

@@ -35,6 +35,9 @@ namespace mrw::test
 		void cleanupTestCase();
 
 		void testInfo();
+
+	protected:
+		void clear();
 	};
 }
 
