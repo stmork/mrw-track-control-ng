@@ -138,7 +138,7 @@ namespace mrw::model
 		 * @param dir The counting direction to proceed the Rail elements.
 		 * @return The paired RegularSwitch if any or @c nullptr.
 		 * @note This method is needed to find a paired flank switch but a
-		 * found RegularSwitch is only a candidate for a flank switch.
+		 * found AbstractSwitch is only a candidate for a flank switch.
 		 */
 		static const AbstractSwitch * follow(
 			const RailPart * part,
@@ -163,7 +163,7 @@ namespace mrw::model
 		 * This method determines if the given candidate for a paired flank
 		 * switch is really linked to the AbstractSwitch to test to.
 		 *
-		 * @param candidate The flank switch candidate to test. This is a non
+		 * @param part The RailPart to follow and test. This is a non
 		 * @c nullptr result from the follow() method.
 		 * @param self The local flank switch pair.
 		 * @return True if the candidate and self parameter are paired
@@ -171,7 +171,7 @@ namespace mrw::model
 		 * @see follow()
 		 */
 		bool linked(
-			const RailPart    *    candidate,
+			const RailPart    *    part,
 			const AbstractSwitch * self) const;
 	};
 }

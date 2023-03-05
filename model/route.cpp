@@ -163,7 +163,7 @@ bool mrw::model::Route::hasFlankProtection(
 		});
 
 		// If all flank switches are unlocked everything is fine. Otherwise the
-		// switch state has to be correct.
+		// switch state has to be corrected.
 		if ((unlock_count != flank_switch_candidates.size()) &&
 			(count != flank_switch_candidates.size()))
 		{
@@ -279,6 +279,29 @@ void Route::prepareFlank()
 		if (flank_switch != nullptr)
 		{
 			flank_switch->flank(flank_switches, true);
+		}
+	}
+
+	// Now find flank protection switch candidates have the same Section as any
+	// part of the route. Those candidates have to be removed.
+	auto it = flank_switches.begin();
+
+	// Since we may delete elements we have to compute iterator increment on
+	// our own.
+	while (it != flank_switches.end())
+	{
+		const RegularSwitch * part = *it;
+
+		if (std::find(sections.begin(), sections.end(), part->section()) != sections.end())
+		{
+			// Section of flank protection switch is contained in the Route so
+			// remove it and do not increment iterator.
+			flank_switches.erase(it);
+		}
+		else
+		{
+			// Increment iterator otherwise.
+			++it;
 		}
 	}
 }

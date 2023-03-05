@@ -86,25 +86,8 @@ bool AbstractSwitch::isFlankCandidate(
 }
 
 bool AbstractSwitch::linked(
-	const RailPart    *    candidate,
+	const RailPart    *    part,
 	const AbstractSwitch * self) const
 {
-#if 0
-	const Rail * rail = dynamic_cast<const Rail *>(candidate);
-
-	if (candidate == self)
-	{
-		// OK, directly connected.
-		return true;
-	}
-
-	if (rail != nullptr)
-	{
-		// Test if indirectly connected using a simple Rail.
-		return rail->contains(self, true) != rail->contains(self, false);
-	}
-	return false;
-#else
-	return (follow(candidate, true) == self) || (follow(candidate, false) == self);
-#endif
+	return (follow(part, true) == self) || (follow(part, false) == self);
 }
