@@ -5,14 +5,17 @@
 
 #include <QCoreApplication>
 
+#include <util/method.h>
 #include <model/modelrailway.h>
 
+using namespace mrw::util;
 using namespace mrw::model;
 
 int main(int argc, char * argv[])
 {
 	QCoreApplication      app(argc, argv);
 
+	Method::pattern();
 	for (int i = 1; i < argc; i++)
 	{
 		ModelRailway model(argv[i]);
