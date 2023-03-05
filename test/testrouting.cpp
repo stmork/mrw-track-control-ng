@@ -7,6 +7,7 @@
 
 #include <QTest>
 
+#include <model/rail.h>
 #include <model/regularswitch.h>
 #include <model/doublecrossswitch.h>
 
@@ -29,13 +30,19 @@ void TestRouting::init()
 
 void TestRouting::testSimple()
 {
-	Route                    route(true, SectionState::SHUNTING, parts[0]);
+	Rail * r11 = dynamic_cast<Rail *>(parts[0]);
+	Rail * r25 = dynamic_cast<Rail *>(parts[20]);
+
+	QVERIFY(r11 != nullptr);
+	QVERIFY(r25 != nullptr);
+
+	Route                    route(true, SectionState::SHUNTING, r11);
 	const Route::RailTrack & reserved = route;
 
 	QVERIFY(verify(route));
 	testIsUnlockable(route, false);
 
-	QVERIFY(route.append(parts[20]));
+	QVERIFY(route.append(r25));
 	QVERIFY(route.isLastSectionEnded());
 	QVERIFY(verify(route));
 
@@ -51,15 +58,25 @@ void TestRouting::testSimple()
 
 void TestRouting::testCounterPart()
 {
-	Route   route_lr(true,  SectionState::SHUNTING, parts[1]);
-	Route   route_rl(false, SectionState::SHUNTING, parts[19]);
+	Rail * r11 = dynamic_cast<Rail *>(parts[0]);
+	Rail * r21 = dynamic_cast<Rail *>(parts[1]);
+	Rail * r15 = dynamic_cast<Rail *>(parts[19]);
+	Rail * r25 = dynamic_cast<Rail *>(parts[20]);
+
+	QVERIFY(r11 != nullptr);
+	QVERIFY(r21 != nullptr);
+	QVERIFY(r15 != nullptr);
+	QVERIFY(r25 != nullptr);
+
+	Route   route_lr(true,  SectionState::SHUNTING, r21);
+	Route   route_rl(false, SectionState::SHUNTING, r15);
 
 	QVERIFY(verify( { &route_lr, &route_rl } ));
 	testIsUnlockable(route_lr, false);
 
-	QVERIFY(route_lr.append(parts[20]));
+	QVERIFY(route_lr.append(r25));
 	testIsUnlockable(route_lr, false);
-	QVERIFY(route_rl.append(parts[0]));
+	QVERIFY(route_rl.append(r11));
 	testIsUnlockable(route_rl, false);
 	QVERIFY(verify( { &route_lr, &route_rl } ));
 
@@ -73,13 +90,23 @@ void TestRouting::testCounterPart()
 
 void TestRouting::testCrossBlocked()
 {
-	Route   route_lr(true,  SectionState::TOUR, parts[1]);
-	Route   route_rl(false, SectionState::TOUR, parts[20]);
+	Rail * r11 = dynamic_cast<Rail *>(parts[0]);
+	Rail * r21 = dynamic_cast<Rail *>(parts[1]);
+	Rail * r15 = dynamic_cast<Rail *>(parts[19]);
+	Rail * r25 = dynamic_cast<Rail *>(parts[20]);
+
+	QVERIFY(r11 != nullptr);
+	QVERIFY(r21 != nullptr);
+	QVERIFY(r15 != nullptr);
+	QVERIFY(r25 != nullptr);
+
+	Route   route_lr(true,  SectionState::TOUR, r21);
+	Route   route_rl(false, SectionState::TOUR, r25);
 
 	QVERIFY(verify( { &route_lr, &route_rl } ));
 
-	QVERIFY(route_lr.append(parts[19]));
-	QVERIFY(!route_rl.append(parts[0]));
+	QVERIFY( route_lr.append(r15));
+	QVERIFY(!route_rl.append(r11));
 	QVERIFY(verify( { &route_lr, &route_rl } ));
 
 	route_lr.clear();
@@ -90,28 +117,49 @@ void TestRouting::testCrossBlocked()
 
 void TestRouting::testExtension()
 {
-	Route                    route(true, SectionState::SHUNTING, parts[1]);
+	RegularSwitch   *   s2  = dynamic_cast<RegularSwitch *>(parts[2]);
+	RegularSwitch   *   s3  = dynamic_cast<RegularSwitch *>(parts[9]);
+	DoubleCrossSwitch * s5  = dynamic_cast<DoubleCrossSwitch *>(parts[13]);
+	RegularSwitch   *   s7  = dynamic_cast<RegularSwitch *>(parts[8]);
+	RegularSwitch   *   s9  = dynamic_cast<RegularSwitch *>(parts[18]);
+	Rail        *       r11 = dynamic_cast<Rail *>(parts[0]);
+	Rail        *       r21 = dynamic_cast<Rail *>(parts[1]);
+	Rail        *       rr3 = dynamic_cast<Rail *>(parts[14]);
+	Rail        *       r15 = dynamic_cast<Rail *>(parts[19]);
+
+	QVERIFY(s2 != nullptr);
+	QVERIFY(s3 != nullptr);
+	QVERIFY(s5 != nullptr);
+	QVERIFY(s7 != nullptr);
+	QVERIFY(s9 != nullptr);
+
+	QVERIFY(r11 != nullptr);
+	QVERIFY(r21 != nullptr);
+	QVERIFY(r15 != nullptr);
+	QVERIFY(rr3 != nullptr);
+
+	Route                    route(true, SectionState::SHUNTING, r21);
 	const Route::RailTrack & reserved = route;
 
 	QVERIFY(verify(route));
 
-	QVERIFY(route.append(parts[14]));
+	QVERIFY(route.append(rr3));
 	QVERIFY(verify(route));
 	QVERIFY(!route.isLastSectionEnded());
 
-	QVERIFY(!route.append(parts[0]));
+	QVERIFY(!route.append(r11));
 	QVERIFY(verify(route));
 	QVERIFY(!route.isLastSectionEnded());
 
-	QVERIFY(route.append(parts[19]));
+	QVERIFY(route.append(r15));
 	QVERIFY(verify(route));
 	QVERIFY(route.isLastSectionEnded());
 
-	QCOMPARE(static_cast<RegularSwitch *>(parts[2])->state(), RegularSwitch::State::AC);
-	QCOMPARE(static_cast<RegularSwitch *>(parts[9])->state(), RegularSwitch::State::AB);
-	QCOMPARE(static_cast<DoubleCrossSwitch *>(parts[13])->state(), DoubleCrossSwitch::State::BC);
-	QCOMPARE(static_cast<RegularSwitch *>(parts[8])->state(),  RegularSwitch::State::AB);
-	QCOMPARE(static_cast<RegularSwitch *>(parts[18])->state(), RegularSwitch::State::AB);
+	QCOMPARE(s2->state(), RegularSwitch::State::AC);
+	QCOMPARE(s3->state(), RegularSwitch::State::AB);
+	QCOMPARE(s5->state(), DoubleCrossSwitch::State::BC);
+	QCOMPARE(s7->state(), RegularSwitch::State::AB);
+	QCOMPARE(s9->state(), RegularSwitch::State::AB);
 
 	route.clear();
 	QVERIFY(verify(route));
@@ -121,21 +169,37 @@ void TestRouting::testExtension()
 
 void TestRouting::testOccupation()
 {
-	Route                    route(true, SectionState::SHUNTING, parts[1]);
+	RegularSwitch   *   s2  = dynamic_cast<RegularSwitch *>(parts[2]);
+	RegularSwitch   *   s1  = dynamic_cast<RegularSwitch *>(parts[3]);
+	RegularSwitch   *   s4  = dynamic_cast<RegularSwitch *>(parts[6]);
+	RegularSwitch   *   s7  = dynamic_cast<RegularSwitch *>(parts[8]);
+	RegularSwitch   *   s9  = dynamic_cast<RegularSwitch *>(parts[18]);
+	Rail        *       r21 = dynamic_cast<Rail *>(parts[1]);
+	Rail        *       r15 = dynamic_cast<Rail *>(parts[19]);
+
+	QVERIFY(s2 != nullptr);
+	QVERIFY(s1 != nullptr);
+	QVERIFY(s4 != nullptr);
+	QVERIFY(s7 != nullptr);
+	QVERIFY(s9 != nullptr);
+	QVERIFY(r21 != nullptr);
+	QVERIFY(r15 != nullptr);
+
+	Route                    route(true, SectionState::SHUNTING, r21);
 	const Route::RailTrack & reserved = route;
 
 	QVERIFY(verify(route));
 
 	parts[14]->section()->setOccupation();
 
-	QVERIFY(route.append(parts[19]));
+	QVERIFY(route.append(r15));
 	QVERIFY(verify(route));
 
-	QCOMPARE(static_cast<RegularSwitch *>(parts[2])->state(),  RegularSwitch::State::AB);
-	QCOMPARE(static_cast<RegularSwitch *>(parts[3])->state(),  RegularSwitch::State::AB);
-	QCOMPARE(static_cast<RegularSwitch *>(parts[6])->state(),  RegularSwitch::State::AB);
-	QCOMPARE(static_cast<RegularSwitch *>(parts[8])->state(),  RegularSwitch::State::AC);
-	QCOMPARE(static_cast<RegularSwitch *>(parts[18])->state(), RegularSwitch::State::AB);
+	QCOMPARE(s2->state(),  RegularSwitch::State::AB);
+	QCOMPARE(s1->state(),  RegularSwitch::State::AB);
+	QCOMPARE(s4->state(),  RegularSwitch::State::AB);
+	QCOMPARE(s7->state(),  RegularSwitch::State::AC);
+	QCOMPARE(s9->state(), RegularSwitch::State::AB);
 
 	route.clear();
 	QVERIFY(verify(route));
@@ -145,12 +209,18 @@ void TestRouting::testOccupation()
 
 void TestRouting::testInverseFail()
 {
-	Route                    route(false, SectionState::SHUNTING, parts[1]);
+	Rail * r21 = dynamic_cast<Rail *>(parts[1]);
+	Rail * r15 = dynamic_cast<Rail *>(parts[19]);
+
+	QVERIFY(r21 != nullptr);
+	QVERIFY(r15 != nullptr);
+
+	Route                    route(false, SectionState::SHUNTING, r21);
 	const Route::RailTrack & reserved = route;
 
 	QVERIFY(verify(route));
 
-	QVERIFY(!route.append(parts[19]));
+	QVERIFY(!route.append(r15));
 	QVERIFY(verify(route));
 
 	route.clear();
@@ -161,24 +231,39 @@ void TestRouting::testInverseFail()
 
 void TestRouting::testFailedSwitch()
 {
-	RegularSwitch * s1 = dynamic_cast<RegularSwitch *>(parts[2]);
-	Route           route(true, SectionState::SHUNTING, parts[1]);
+	RegularSwitch * s1  = dynamic_cast<RegularSwitch *>(parts[2]);
+	Rail      *     r21 = dynamic_cast<Rail *>(parts[1]);
+	Rail      *     r25 = dynamic_cast<Rail *>(parts[20]);
+
+	QVERIFY(s1 != nullptr);
+	QVERIFY(r21 != nullptr);
+	QVERIFY(r25 != nullptr);
+
+	Route           route(true, SectionState::SHUNTING, r21);
 
 	s1->setLock(LockState::FAIL);
 
 	QVERIFY(verify(route));
-	QVERIFY(!route.append(parts[20]));
+	QVERIFY(!route.append(r25));
 	QVERIFY(verify(route));
 }
 
 void TestRouting::testFlank()
 {
-	TestRoute  route(true, SectionState::TOUR, parts[1]);
+	Rail * r21 = dynamic_cast<Rail *>(parts[1]);
+	Rail * rr3 = dynamic_cast<Rail *>(parts[14]);
+	Rail * r15 = dynamic_cast<Rail *>(parts[19]);
+
+	QVERIFY(r21 != nullptr);
+	QVERIFY(rr3 != nullptr);
+	QVERIFY(r15 != nullptr);
+
+	TestRoute  route(true, SectionState::TOUR, r21);
 
 	QVERIFY(verify(route));
 
-	QVERIFY(route.append(parts[14]));
-	QVERIFY(route.append(parts[19]));
+	QVERIFY(route.append(rr3));
+	QVERIFY(route.append(r15));
 	QVERIFY(verify(route));
 
 	const std::vector<RegularSwitch *> & flanks = route.doFlank();
@@ -188,9 +273,17 @@ void TestRouting::testFlank()
 
 void TestRouting::testFlankLocked()
 {
-	RegularSwitch * s2 = dynamic_cast<RegularSwitch *>(parts[ 3]);
-	RegularSwitch * s9 = dynamic_cast<RegularSwitch *>(parts[18]);
-	TestRoute       route(true, SectionState::TOUR, parts[1]);
+	RegularSwitch * s2  = dynamic_cast<RegularSwitch *>(parts[ 3]);
+	RegularSwitch * s9  = dynamic_cast<RegularSwitch *>(parts[18]);
+	Rail      *     r21 = dynamic_cast<Rail *>(parts[1]);
+	Rail      *     r25 = dynamic_cast<Rail *>(parts[20]);
+
+	QVERIFY(s2 != nullptr);
+	QVERIFY(s9 != nullptr);
+	QVERIFY(r21 != nullptr);
+	QVERIFY(r25 != nullptr);
+
+	TestRoute       route(true, SectionState::TOUR, r21);
 	const Route::RailTrack & reserved = route;
 
 	QVERIFY(s2 != nullptr);
@@ -202,7 +295,7 @@ void TestRouting::testFlankLocked()
 	s9->setLock(LockState::LOCKED);
 
 	QVERIFY(verify(route));
-	QVERIFY(!route.append(parts[20]));
+	QVERIFY(!route.append(r25));
 	QVERIFY(verify(route));
 	QCOMPARE(reserved.size(), 1u);
 
@@ -212,7 +305,7 @@ void TestRouting::testFlankLocked()
 
 	s2->setState(RegularSwitch::State::AC, true);
 	s9->setState(RegularSwitch::State::AB, true);
-	QVERIFY(route.append(parts[20]));
+	QVERIFY(route.append(r25));
 	QVERIFY(verify(route));
 	QVERIFY(reserved.size() > 1u);
 	route.doFlank();
