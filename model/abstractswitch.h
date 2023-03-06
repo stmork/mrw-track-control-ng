@@ -34,12 +34,6 @@ namespace mrw::model
 	{
 		friend class Section;
 
-		/**
-		 * This is the maximum amount of Rail elements to follow to reach a
-		 * flank protection switch.
-		 */
-		static const size_t MAX_FOLLOW_RAIL = 2;
-
 	public:
 		explicit AbstractSwitch(
 			ModelRailway     *    model_railway,
