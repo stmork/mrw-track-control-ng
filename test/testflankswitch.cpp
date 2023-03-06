@@ -54,30 +54,35 @@ void TestFlankSwitch::testFlankProtectionMid()
 	QVERIFY(s6 != nullptr);
 	QVERIFY(s7 != nullptr);
 
+	QVERIFY(!s3->isFlankProtection(nullptr));
 	QVERIFY(!s3->isFlankProtection(s3));
 	QVERIFY(!s3->isFlankProtection(s4));
 	QVERIFY(!s3->isFlankProtection(s5));
 	QVERIFY(!s3->isFlankProtection(s6));
 	QVERIFY(!s3->isFlankProtection(s7));
 
+	QVERIFY(!s4->isFlankProtection(nullptr));
 	QVERIFY(!s4->isFlankProtection(s3));
 	QVERIFY(!s4->isFlankProtection(s4));
 	QVERIFY(!s4->isFlankProtection(s5));
 	QVERIFY(!s4->isFlankProtection(s6));
 	QVERIFY(!s4->isFlankProtection(s7));
 
+	QVERIFY(!s5->isFlankProtection(nullptr));
 	QVERIFY( s5->isFlankProtection(s3));
 	QVERIFY( s5->isFlankProtection(s4));
 	QVERIFY(!s5->isFlankProtection(s5));
 	QVERIFY( s5->isFlankProtection(s6));
 	QVERIFY( s5->isFlankProtection(s7));
 
+	QVERIFY(!s6->isFlankProtection(nullptr));
 	QVERIFY(!s6->isFlankProtection(s3));
 	QVERIFY(!s6->isFlankProtection(s4));
 	QVERIFY(!s6->isFlankProtection(s5));
 	QVERIFY(!s6->isFlankProtection(s6));
 	QVERIFY(!s6->isFlankProtection(s7));
 
+	QVERIFY(!s7->isFlankProtection(nullptr));
 	QVERIFY(!s7->isFlankProtection(s3));
 	QVERIFY(!s7->isFlankProtection(s4));
 	QVERIFY(!s7->isFlankProtection(s5));
@@ -315,7 +320,7 @@ void TestFlankSwitch::testFlankProtectionDoubleURoute()
 
 	// First turn bottom route and verify.
 	QVERIFY(route_bottom.append(r123));
-	const std::vector<mrw::model::RegularSwitch *> & flanks_bottom = route_bottom.doFlank();
+	const std::vector<RegularSwitch *> & flanks_bottom = route_bottom.doFlank();
 	QCOMPARE(flanks_bottom.size(), 1u);
 
 	QCOMPARE(s12->switchState(), SWITCH_STATE_RIGHT);
@@ -323,7 +328,7 @@ void TestFlankSwitch::testFlankProtectionDoubleURoute()
 
 	// Now turn top route and verify.
 	QVERIFY(route_top.append(r113));
-	const std::vector<mrw::model::RegularSwitch *> & flanks_top = route_top.doFlank();
+	const std::vector<RegularSwitch *> & flanks_top = route_top.doFlank();
 	QCOMPARE(flanks_top.size(), 1u);
 
 	QCOMPARE(s11->switchState(), SWITCH_STATE_LEFT);

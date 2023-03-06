@@ -135,7 +135,7 @@ bool Route::append(RailPart * rail, RailPart * target, Region * search_region)
 	return false;
 }
 
-bool mrw::model::Route::hasFlankProtection(
+bool Route::hasFlankProtection(
 	const RailPart * prev,
 	const RailPart * rail) const
 {
