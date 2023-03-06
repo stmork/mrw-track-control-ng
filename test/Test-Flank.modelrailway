@@ -67,7 +67,7 @@
     </abschnitt>
     <abschnitt name="33" unit_no="33" modul="//@controller.1/@module.1">
       <bauelement xsi:type="Modelrailway:Gleis" name="l3" a="//@gruppe.0/@abschnitt.4/@bauelement.1" b="//@gruppe.0/@abschnitt.7/@bauelement.1"/>
-      <bauelement xsi:type="Modelrailway:DKW" name="5" modul="//@controller.1/@module.0" unit_no="1005" neu="true" a="//@gruppe.0/@abschnitt.2/@bauelement.1" c="//@gruppe.0/@abschnitt.7/@bauelement.2" b="//@gruppe.0/@abschnitt.7/@bauelement.0" d="//@gruppe.0/@abschnitt.9/@bauelement.0"/>
+      <bauelement xsi:type="Modelrailway:DKW" name="5" modul="//@controller.1/@module.0" unit_no="1005" neu="true" adIstAbzweig="true" a="//@gruppe.0/@abschnitt.2/@bauelement.1" c="//@gruppe.0/@abschnitt.7/@bauelement.2" b="//@gruppe.0/@abschnitt.7/@bauelement.0" d="//@gruppe.0/@abschnitt.9/@bauelement.0"/>
       <bauelement xsi:type="Modelrailway:Gleis" name="r3" aInZaehlrichtung="true" a="//@gruppe.0/@abschnitt.8/@bauelement.0" b="//@gruppe.0/@abschnitt.7/@bauelement.1"/>
     </abschnitt>
     <abschnitt name="14" unit_no="14" modul="//@controller.2/@module.1">
