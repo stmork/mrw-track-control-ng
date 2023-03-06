@@ -60,23 +60,28 @@ void RegularSwitchWidget::computeConnectors()
 
 void RegularSwitchWidget::paint(QPainter & painter)
 {
-	QFont        font    = painter.font();
-	const bool   pending = lockVisible(base_controller->lock());
-	const bool   is_inclined      =
-		controller<RegularSwitchController>()->isInclined();
-	const bool   is_right_bended  =
-		controller<RegularSwitchController>()->isRightBended();
-	const bool   flank_protection =
-		controller<BaseSwitchController>()->hasFlankProtection();
-	const bool   is_turn_out      =
-		(controller<RegularSwitchController>()->isLeft() != is_right_bended) != is_inclined;
-
 	Q_ASSERT(base_controller != nullptr);
+
+	QFont        font              = painter.font();
+	const QColor section_color     = sectionColor(base_controller->state());
+	const QColor outside_color     = sectionColor(SectionState::FREE);
+
+	const LockState    lock_state  = base_controller->lock();
+	const bool         in_dir      = base_controller->isDirection();
+	const bool         pending     = lockVisible(lock_state);
+	const bool         is_inclined =
+		controller<RegularSwitchController>()->isInclined();
+	const bool         is_right_bended  =
+		controller<RegularSwitchController>()->isRightBended();
+	const bool         flank_protection =
+		controller<BaseSwitchController>()->hasFlankProtection();
+	const bool         is_turn_out      =
+		(controller<RegularSwitchController>()->isLeft() != is_right_bended) != is_inclined;
 
 	// Unify coordinates
 	const float x_size = Position::FRACTION + extensions();
 	const float y_size = Position::FRACTION * (1.0 + lines());
-	const float x_pos  = base_controller->isDirection() != is_inclined ?
+	const float x_pos  = in_dir != is_inclined ?
 		x_size - Position::HALF :
 		Position::HALF;
 	const float y_pos  = Position::HALF;
@@ -87,32 +92,31 @@ void RegularSwitchWidget::paint(QPainter & painter)
 		x_pos * width() / x_size, y_pos * height() / y_size);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
+	const QString name = base_controller->name();
+	const QRectF  rect(
+		in_dir == is_inclined ? -SCALE : -20,
+		in_dir == is_right_bended ? -80 : 30, 120, FONT_HEIGHT);
+
 	prepareTextColor(painter, flank_protection);
 	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
-	painter.drawText(QRectF(
-			base_controller->isDirection() == is_inclined ? -SCALE : -20,
-			base_controller->isDirection() == is_right_bended ? -80 : 30, 120, FONT_HEIGHT),
-		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
+	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, name);
 
 	if (is_right_bended != is_inclined)
 	{
 		// Draw always left handed but invert vertically if right handed.
 		painter.scale( 1.0f, -1.0f);
 	}
-	if (!base_controller->isDirection())
+	if (!in_dir)
 	{
 		// Draw from left to right but invert horizontally if counter direction.
 		painter.scale(-1.0f, -1.0f);
 	}
 
-	const QColor section_color = sectionColor(base_controller->state());
-	const QColor outside_color = sectionColor(SectionState::FREE);
-
 	// Draw point lock
 	drawLock(
 		painter,
-		base_controller->lock() == LockState::LOCKED ?
+		lock_state == LockState::LOCKED ?
 		section_color : WHITE,
 		is_inclined ? -5 : -45, 0);
 

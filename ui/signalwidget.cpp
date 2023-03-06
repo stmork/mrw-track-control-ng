@@ -57,26 +57,32 @@ static const QVector<QPointF> points
 
 void SignalWidget::paint(QPainter & painter)
 {
-	SignalController * signal_controller = controller<SignalController>();
-	QPainterPath       path;
-	QPen               pen;
-	QFont              font       = painter.font();
-	const LockState    lock_state = base_controller->lock();
-	const Bending      bending    = extensions() >= Position::FRACTION ?
-		base_controller->bending() : Bending::STRAIGHT;
+	Q_ASSERT(base_controller != nullptr);
 
-	const float        shift  = SCALE * extensions() / Position::FRACTION;
-	const float        border = SCALE + shift;
-	const float        start  = SCALE - border;
+	SignalController  *  signal_controller = controller<SignalController>();
+	QPainterPath         path;
+	QPen                 pen;
+	QFont                font = painter.font();
+
+	const bool           in_dir     = base_controller->isDirection();
+	const LockState      lock_state = base_controller->lock();
+	const SectionState   state      = base_controller->state();
+	const Bending        bending    = base_controller->bending();
+	const Bending        do_bend    =
+		extensions() >= Position::FRACTION ? bending : Bending::STRAIGHT;
+
+	const float          shift      = SCALE * extensions() / Position::FRACTION;
+	const float          border     = SCALE + shift;
+	const float          start      = SCALE - border;
 
 	const Signal::Symbol main_state    = signal_controller->main();
 	const Signal::Symbol distant_state = signal_controller->distant();
 	const Signal::Symbol shunt_state   = signal_controller->shunt();
 
-	const bool has_main     = signal_controller->hasMain();
-	const bool has_distant  = signal_controller->hasDistant();
-	const bool has_shunting = signal_controller->hasShunting();
-	const bool pending      = lockVisible(lock_state);
+	const bool           has_main      = signal_controller->hasMain();
+	const bool           has_distant   = signal_controller->hasDistant();
+	const bool           has_shunting  = signal_controller->hasShunting();
+	const bool           pending       = lockVisible(lock_state);
 
 	// Unify coordinates
 	rescale(painter, (Position::FRACTION + extensions()) * SCALE / Position::HALF);
@@ -86,22 +92,22 @@ void SignalWidget::paint(QPainter & painter)
 	font.setPixelSize(FONT_SIZE);
 
 	const QFontMetrics metrics(font);
-	const QString      name = base_controller->name();
+	const QString      name       = base_controller->name();
 	const float        text_width = metrics.horizontalAdvance(name) + 10;
+	const QRectF       rect(
+		in_dir ? -border : border - text_width,
+		in_dir ? -80 : 30, text_width, FONT_HEIGHT);
 
 	painter.setFont(font);
-	painter.drawText(QRectF(
-			base_controller->isDirection() ? -border : border - text_width,
-			base_controller->isDirection() ? -80 : 30, text_width, FONT_HEIGHT),
-		Qt::AlignCenter | Qt::AlignHCenter, name);
+	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, name);
 
-	if (!base_controller->isDirection())
+	if (!in_dir)
 	{
 		// Draw from left to right but rotate 180° if counter direction.
 		painter.scale(-1.0f, -1.0f);
 	}
 
-	const QColor section_color = sectionColor(base_controller->state());
+	const QColor section_color = sectionColor(state);
 
 	// Draw straight part of rail
 	pen.setCapStyle(Qt::FlatCap);
@@ -112,30 +118,30 @@ void SignalWidget::paint(QPainter & painter)
 	if ((lock_state == LockState::PENDING) || (lock_state == LockState::LOCKED))
 	{
 		painter.drawLine( -border,    0.0f, start - 25.0f, 0.0f);
-		painter.drawLine( start + 25.0f, 0.0f, bending == Bending::STRAIGHT ? border : border - SCALE, 0.0f);
+		painter.drawLine( start + 25.0f, 0.0f, do_bend == Bending::STRAIGHT ? border : border - SCALE, 0.0f);
 
 		// Draw point lock
 		if (pending)
 		{
 			drawLock(
 				painter,
-				base_controller->lock() == LockState::LOCKED ?
+				lock_state == LockState::LOCKED ?
 				section_color : WHITE,
 				start, 0);
 		}
 	}
 	else
 	{
-		painter.drawLine( -border, 0.0f, bending == Bending::STRAIGHT ? border : border - SCALE, 0.0f);
+		painter.drawLine( -border, 0.0f, do_bend == Bending::STRAIGHT ? border : border - SCALE, 0.0f);
 	}
 
 	// Rail bending to neighbour.
-	if (bending != Bending::STRAIGHT)
+	if (do_bend != Bending::STRAIGHT)
 	{
 		const float height = SCALE + RAIL_WIDTH / 2;
 		const float x      = border - SCALE / Position::HALF;
 
-		if (bending == Bending::RIGHT)
+		if (do_bend == Bending::RIGHT)
 		{
 			drawSheared(painter, pen.color(), x,  SCALE, -height, -RAIL_SLOPE);
 		}
@@ -173,9 +179,7 @@ void SignalWidget::paint(QPainter & painter)
 	}
 	else
 	{
-		if (!has_shunting ||
-			(base_controller->state() != SHUNTING) ||
-			(shunt_state != Symbol::GO))
+		if (!has_shunting || (state != SHUNTING) || (shunt_state != Symbol::GO))
 		{
 			draw_distant = has_distant;
 		}

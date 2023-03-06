@@ -47,25 +47,28 @@ void RailWidget::computeConnectors()
 
 void RailWidget::paint(QPainter & painter)
 {
+	Q_ASSERT(base_controller != nullptr);
+
 	QPainterPath path;
 	QPen         pen;
-	QFont        font    = painter.font();
-	Bending      bending = base_controller->bending();
+	QFont        font = painter.font();
 
-	const float  border     = -SCALE - extensions() * SCALE / Position::HALF;
-	const bool   a_ends     = controller<RailController>()->aEnds();
-	const bool   b_ends     = controller<RailController>()->bEnds();
-	const bool   is_dir     = base_controller->isDirection();
-	const float  text_width = extensions() <= 2 ? 120 : 160;
-	const bool   do_bend    = (bending != Bending::STRAIGHT) && (!a_ends);
+	const float        border     = -SCALE - extensions() * SCALE / Position::HALF;
+	const bool         a_ends     = controller<RailController>()->aEnds();
+	const bool         b_ends     = controller<RailController>()->bEnds();
+	const bool         in_dir     = base_controller->isDirection();
+	const SectionState state      = base_controller->state();
+	const Bending      bending    = base_controller->bending();
+	const float        text_width = extensions() <= 2 ? 120 : 160;
+	const bool         do_bend    = (bending != Bending::STRAIGHT) && (!a_ends);
 
 	// Unify coordinates
 	const float x_size = Position::FRACTION + extensions();
 	const float y_size = Position::FRACTION * (1.0 + lines());
-	const float x_pos  = is_dir ?
+	const float x_pos  = in_dir ?
 		x_size - Position::HALF :
 		Position::HALF;
-	const float y_pos  = (bending != Bending::LEFT) == is_dir ?
+	const float y_pos  = (bending != Bending::LEFT) == in_dir ?
 		y_size - Position::HALF :
 		Position::HALF;
 
@@ -75,15 +78,17 @@ void RailWidget::paint(QPainter & painter)
 		x_pos * width() / x_size, y_pos * height() / y_size);
 
 	// Draw rail name before mirroring to prevent mirrored font drawing.
+	const QString name = base_controller->name();
+	const QRectF  rect(
+		(in_dir == (bending != Bending::STRAIGHT)) || a_ends ? SCALE - text_width : -SCALE,
+		in_dir == (bending != Bending::LEFT) ? 30 : -80, text_width, FONT_HEIGHT);
+
 	prepareTextColor(painter);
 	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
-	painter.drawText(QRectF(
-			(is_dir == (bending != Bending::STRAIGHT)) || a_ends ? SCALE - text_width : -SCALE,
-			is_dir == (bending != Bending::LEFT) ? 30 : -80, text_width, FONT_HEIGHT),
-		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
+	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, name);
 
-	if (!is_dir)
+	if (!in_dir)
 	{
 		painter.scale(-1.0f, -1.0f);
 	}
@@ -93,7 +98,7 @@ void RailWidget::paint(QPainter & painter)
 
 	// Straight rail drawing
 	pen.setCapStyle(Qt::FlatCap);
-	pen.setColor(sectionColor(base_controller->state()));
+	pen.setColor(sectionColor(state));
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
 	painter.drawLine(

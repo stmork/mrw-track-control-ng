@@ -35,29 +35,35 @@ void DoubleCrossSwitchWidget::computeConnectors()
 
 void DoubleCrossSwitchWidget::paint(QPainter & painter)
 {
-	QFont  font          = painter.font();
-	QColor section_color = sectionColor(base_controller->state());
-	QColor outside_color = sectionColor(SectionState::FREE);
-	const bool   pending = lockVisible(base_controller->lock());
-	const bool   is_direction     = base_controller->isDirection();
-	const bool   flank_protection =
+	Q_ASSERT(base_controller != nullptr);
+
+	QPen         pen;
+	QFont        font             = painter.font();
+	const QColor section_color    = sectionColor(base_controller->state());
+	const QColor outside_color    = sectionColor(SectionState::FREE);
+
+	const LockState    lock_state = base_controller->lock();
+	const bool         in_dir     = base_controller->isDirection();
+	const bool         pending    = lockVisible(lock_state);
+	const bool         flank_protection =
 		controller<BaseSwitchController>()->hasFlankProtection();
 	const bool   is_right_bended  =
 		controller<DoubleCrossSwitchController>()->isRightBended();
-	QPen   pen;
 
 	rescale(painter);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
+	const QString name = base_controller->name();
+	const QRectF  rect(
+		false ? -SCALE : -20,
+		is_right_bended ? -85 : 35, 120, FONT_HEIGHT);
+
 	prepareTextColor(painter, flank_protection);
 	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
-	painter.drawText(QRectF(
-			false ? -SCALE : -20,
-			is_right_bended ? -85 : 35, 120, FONT_HEIGHT),
-		Qt::AlignCenter | Qt::AlignHCenter, base_controller->name());
+	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, name);
 
-	if (!is_direction)
+	if (!in_dir)
 	{
 		// Draw from left to right but invert horizontally if counter direction.
 		painter.scale(-1.0f, -1.0f);
@@ -72,7 +78,7 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	// Draw point lock
 	drawLock(
 		painter,
-		base_controller->lock() == LockState::LOCKED ?
+		lock_state == LockState::LOCKED ?
 		section_color : WHITE,
 		0, 0);
 
