@@ -230,6 +230,13 @@ namespace mrw::model
 		 * routing track.
 		 */
 		void         unreserveTail(const RailPart * actual);
+
+		template<class T> static bool contains(
+			const std::list<T *> & list,
+			const T        *       ptr)
+		{
+			return std::find(list.begin(), list.end(), ptr) != list.end();
+		}
 	};
 }
 

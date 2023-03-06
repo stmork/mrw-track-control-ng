@@ -30,6 +30,7 @@ namespace mrw::test
 		void testFlankProtectionDcs();
 		void testFlankProtectionRsLeft();
 		void testFlankProtectionRsRight();
+
 		void testFlankProtectionDoubleU1();
 		void testFlankProtectionDoubleU2();
 		void testFlankProtectionDoubleU3();

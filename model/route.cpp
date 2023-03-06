@@ -278,14 +278,13 @@ void Route::prepareFlank()
 
 		if (flank_switch != nullptr)
 		{
-#if 0
-			flank_switch->flank(flank_switches, true);
-#else
 			flank_switch->flank(flank_switches, true, [&](const RegularSwitch * ptr)
 			{
-				return std::find(track.begin(), track.end(), ptr) == track.end();
+				const bool inside_track   = contains<RailPart>(track, ptr);
+				const bool inside_section = contains<Section>(sections, ptr->section());
+
+				return !inside_track && !inside_section;
 			});
-#endif
 		}
 	}
 }
