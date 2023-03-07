@@ -30,6 +30,7 @@ namespace mrw::test
 		void testFlankProtectionDcs();
 		void testFlankProtectionRsLeft();
 		void testFlankProtectionRsRight();
+		void testFlankProtectionFactory();
 
 		void testFlankProtectionDoubleU1();
 		void testFlankProtectionDoubleU2();
@@ -39,6 +40,7 @@ namespace mrw::test
 		void testFlankProtectionRhombusRouteLR();
 		void testFlankProtectionRhombusRouteRL();
 		void testFlankProtectionFar();
+		void testFlankProtectionDifferentRegion();
 	};
 }
 

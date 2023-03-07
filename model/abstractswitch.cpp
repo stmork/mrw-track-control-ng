@@ -58,11 +58,11 @@ const QString & AbstractSwitch::name() const
 
 RegularSwitch * AbstractSwitch::follow(
 	RailPart * part,
-	const bool dir)
+	const bool dir) const
 {
 	Rail * rail = dynamic_cast<Rail *>(part);
 
-	while (rail != nullptr)
+	while ((rail != nullptr) && (rail->region() == region()))
 	{
 		part = *rail->advance(dir).begin();
 		rail = dynamic_cast<Rail *>(part);
