@@ -39,20 +39,20 @@ namespace mrw::model
 	 * So the following rules apply to a tour Route RegularSwitch flank
 	 * protection:
 	 * 1. From the local connection @c b the flank protection (foreign)
-	 * RegularSwitch is interconnected to connection @c b.
-	 * 1. From the local connection @c c the flank protection (foreign)
-	 * RegularSwitch is nterconnected to connection @c c.
+	 * RegularSwitch is interconnected its connection @c b.
+	 * 2. From the local connection @c c the flank protection (foreign)
+	 * RegularSwitch is nterconnected its connection @c c.
 	 *
 	 * DoubleCrossSwitch instances may also have flank protection switches with
 	 * the following rules:
 	 * 1. From the local connection @c a the flank protection (foreign)
-	 * RegularSwitch is interconnected to connection @c c.
-	 * 1. From the local connection @c b the flank protection (foreign)
-	 * RegularSwitch is interconnected to connection @c b.
-	 * 1. From the local connection @c c the flank protection (foreign)
-	 * RegularSwitch is interconnected to connection @c b.
-	 * 1. From the local connection @c d the flank protection (foreign)
-	 * RegularSwitch is interconnected to connection @c c.
+	 * RegularSwitch is interconnected its connection @c c.
+	 * 2. From the local connection @c b the flank protection (foreign)
+	 * RegularSwitch is interconnected its connection @c b.
+	 * 3. From the local connection @c c the flank protection (foreign)
+	 * RegularSwitch is interconnected its connection @c b.
+	 * 4. From the local connection @c d the flank protection (foreign)
+	 * RegularSwitch is interconnected its connection @c c.
 	 *
 	 * Flank protection switches are always RegularSwitch instances and never
 	 * interconnects with connection @c a.
