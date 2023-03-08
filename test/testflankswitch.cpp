@@ -40,7 +40,7 @@ void TestFlankSwitch::testFlankProtectionLeft()
 	QVERIFY(!s2->isFlankProtection(s2));
 }
 
-void TestFlankSwitch::testFlankProtectionMid()
+void TestFlankSwitch::testFlankProtectionCross()
 {
 	AbstractSwitch * s3 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(0, 4, 1));
 	AbstractSwitch * s4 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(0, 2, 1));
@@ -213,14 +213,47 @@ void TestFlankSwitch::testFlankProtectionRsRight()
 	QCOMPARE(s9->switchState(), SWITCH_STATE_LEFT);
 }
 
+void TestFlankSwitch::testFlankProtectionMid()
+{
+	AbstractSwitch * s14 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(1,  8, 0));
+	AbstractSwitch * s15 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(1, 11, 0));
+
+	QVERIFY(s14 != nullptr);
+	QVERIFY(s15 != nullptr);
+
+	QVERIFY(!s14->isFlankProtection(nullptr));
+	QVERIFY(!s14->isFlankProtection(s14));
+	QVERIFY(!s14->isFlankProtection(s15));
+
+	QVERIFY(!s15->isFlankProtection(nullptr));
+	QVERIFY(!s15->isFlankProtection(s14));
+	QVERIFY(!s15->isFlankProtection(s15));
+}
+
+void mrw::test::TestFlankSwitch::testFlankProtectionEast()
+{
+	AbstractSwitch * s15 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(1, 11, 0));
+	AbstractSwitch * s21 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(2,  1, 0));
+	AbstractSwitch * s22 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(2,  1, 1));
+
+	QVERIFY(s15 != nullptr);
+	QVERIFY(s21 != nullptr);
+	QVERIFY(s22 != nullptr);
+
+	QVERIFY(!s21->isFlankProtection(nullptr));
+	QVERIFY(!s21->isFlankProtection(s15));
+	QVERIFY(!s21->isFlankProtection(s22));
+}
+
 void mrw::test::TestFlankSwitch::testFlankProtectionFactory()
 {
-	AbstractSwitch * s24  = dynamic_cast<AbstractSwitch *>(model->assemblyPart(2, 11, 1));
-	AbstractSwitch * s31  = dynamic_cast<AbstractSwitch *>(model->assemblyPart(3,  2, 0));
+	AbstractSwitch * s24 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(2, 11, 1));
+	AbstractSwitch * s31 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(3,  2, 0));
 
 	QVERIFY(s24 != nullptr);
 	QVERIFY(s31 != nullptr);
 
+	QVERIFY(!s24->isFlankProtection(nullptr));
 	QVERIFY(!s24->isFlankProtection(s31));
 }
 
@@ -358,17 +391,20 @@ void TestFlankSwitch::testFlankProtectionRhombus()
 
 	flank_switches.clear();
 	s14->setState(RegularSwitch::State::AC);
-	QCOMPARE(s14->flank(flank_switches, true), 1u);
-	QVERIFY(contains(flank_switches, s15));
+	s15->setState(RegularSwitch::State::AB);
+
+	QCOMPARE(s14->flank(flank_switches, true), 0u);
+	QVERIFY(!contains(flank_switches, s15));
 	QCOMPARE(s14->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s15->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s15->switchState(), SWITCH_STATE_LEFT);
 
 	flank_switches.clear();
 	s14->setState(RegularSwitch::State::AB);
-	QCOMPARE(s14->flank(flank_switches, true), 1u);
-	QVERIFY(contains(flank_switches, s15));
+	s15->setState(RegularSwitch::State::AC);
+	QCOMPARE(s14->flank(flank_switches, true), 0u);
+	QVERIFY(!contains(flank_switches, s15));
 	QCOMPARE(s14->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s15->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s15->switchState(), SWITCH_STATE_RIGHT);
 }
 
 void TestFlankSwitch::testFlankProtectionRhombusRouteLR()

@@ -58,42 +58,24 @@ const QString & AbstractSwitch::name() const
 
 RegularSwitch * AbstractSwitch::follow(
 	RailPart * part,
-	const bool dir) const
+	const bool dir,
+	const bool left) const
 {
 	Rail * rail = dynamic_cast<Rail *>(part);
+	const RailPart * last = this;
 
 	while ((rail != nullptr) && (rail->region() == region()))
 	{
+		last = part;
 		part = *rail->advance(dir).begin();
 		rail = dynamic_cast<Rail *>(part);
 	}
-	return dynamic_cast<RegularSwitch *>(part);
-}
+	RegularSwitch * candidate = dynamic_cast<RegularSwitch *>(part);
 
-const AbstractSwitch * AbstractSwitch::follow(
-	const RailPart * part,
-	const bool       dir)
-{
-	const Rail * rail = dynamic_cast<const Rail *>(part);
-
-	while (rail != nullptr)
+	if ((candidate != nullptr) && (last != (left ? candidate->b : candidate->c)))
 	{
-		part = *rail->advance(dir).begin();
-		rail = dynamic_cast<const Rail *>(part);
+		candidate = nullptr;
 	}
-	return dynamic_cast<const AbstractSwitch *>(part);
-}
 
-bool AbstractSwitch::linked(
-	const RailPart    *    part,
-	const AbstractSwitch * self) const
-{
-	return (follow(part, true) == self) || (follow(part, false) == self);
-}
-
-bool AbstractSwitch::isFlankCandidate(
-	const RegularSwitch * candidate,
-	const bool            left) const
-{
-	return candidate != nullptr ? linked(left ? candidate->b : candidate->c, this) : false;
+	return candidate;
 }

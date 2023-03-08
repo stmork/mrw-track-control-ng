@@ -155,19 +155,22 @@ SwitchState DoubleCrossSwitch::switchState() const
 
 bool DoubleCrossSwitch::isFlankProtection(const AbstractSwitch * other) const
 {
-	const std::vector<RailPart *> candidates
+	if (other != nullptr)
 	{
-		a, b, c, d
-	};
-
-	for (unsigned i = 0; i < candidates.size(); i++)
-	{
-		const RegularSwitch * o_switch = follow(candidates[i], a_in_dir == (i < 2));
-		const std::bitset<8>  bits(i);
-
-		if ((o_switch == other) && isFlankCandidate(o_switch, bits.count() == 1))
+		const std::vector<RailPart *> candidates
 		{
-			return true;
+			a, b, c, d
+		};
+
+		for (unsigned i = 0; i < candidates.size(); i++)
+		{
+			const std::bitset<8>  bits(i);
+			const RegularSwitch * o_switch = follow(candidates[i], a_in_dir == (i < 2), bits.count() == 1);
+
+			if (o_switch == other)
+			{
+				return true;
+			}
 		}
 	}
 	return false;
@@ -227,11 +230,11 @@ size_t DoubleCrossSwitch::flank(
 	RailPart           *           other,
 	FlankGuard                     guard) const
 {
-	RegularSwitch  *  o_switch = follow(other, dir);
+	RegularSwitch  *  o_switch = follow(other, dir, left);
 	const SwitchState compare  = left ?  SWITCH_STATE_RIGHT : SWITCH_STATE_LEFT;
 	size_t            equal    = 0;
 
-	if (isFlankCandidate(o_switch, left) && guard(o_switch))
+	if ((o_switch != nullptr) && guard(o_switch))
 	{
 		switches.push_back(o_switch);
 

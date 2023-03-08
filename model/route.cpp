@@ -275,16 +275,17 @@ void Route::prepareFlank()
 	for (RailPart * part : track)
 	{
 		AbstractSwitch * flank_switch = dynamic_cast<AbstractSwitch *>(part);
+		FlankGuard       guard        = [&](const RegularSwitch * ptr)
+		{
+			const bool inside_track   = contains<RailPart>(track, ptr);
+			const bool inside_section = contains<Section>(sections, ptr->section());
+
+			return !inside_track && !inside_section;
+		};
 
 		if (flank_switch != nullptr)
 		{
-			flank_switch->flank(flank_switches, true, [&](const RegularSwitch * ptr)
-			{
-				const bool inside_track   = contains<RailPart>(track, ptr);
-				const bool inside_section = contains<Section>(sections, ptr->section());
-
-				return !inside_track && !inside_section;
-			});
+			flank_switch->flank(flank_switches, true, guard);
 		}
 	}
 }

@@ -25,11 +25,13 @@ namespace mrw::test
 		void init();
 
 		void testFlankProtectionLeft();
-		void testFlankProtectionMid();
+		void testFlankProtectionCross();
 		void testFlankProtectionRight();
 		void testFlankProtectionDcs();
 		void testFlankProtectionRsLeft();
 		void testFlankProtectionRsRight();
+		void testFlankProtectionMid();
+		void testFlankProtectionEast();
 		void testFlankProtectionFactory();
 
 		void testFlankProtectionDoubleU1();

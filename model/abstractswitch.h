@@ -159,58 +159,16 @@ namespace mrw::model
 		 *
 		 * @param part The RailPart to follow to a paired switch.
 		 * @param dir The counting direction to proceed the Rail elements.
+		 * @param left If true test the left branch of the potential flank
+		 * switch candidate test the right branch otherwise.
 		 * @return The paired RegularSwitch if any or @c nullptr.
 		 * @note This method is needed to find a paired flank switch but a
 		 * found RegularSwitch is only a candidate for a flank switch.
 		 */
-		RegularSwitch * follow(RailPart * part, const bool dir) const;
-
-		/**
-		 * This method follows a connection part if it is directly connected
-		 * to a RegularSwitch or indirectly connected using a Rail. The
-		 * algorithm proceeds as long as a Rail is found.
-		 *
-		 * @note This is the const version to follow Rail elements.
-		 *
-		 * @param part The RailPart to follow to a paired switch.
-		 * @param dir The counting direction to proceed the Rail elements.
-		 * @return The paired RegularSwitch if any or @c nullptr.
-		 * @note This method is needed to find a paired flank switch but a
-		 * found AbstractSwitch is only a candidate for a flank switch.
-		 */
-		static const AbstractSwitch * follow(
-			const RailPart * part,
-			const bool       dir);
-
-		/**
-		 * This method tests a connected neighbour if the neighbour is a
-		 * flank protection switch. This switch may be indirectly connected
-		 * via Rail elements but only Rail elements.
-		 *
-		 * @param other The RailPart candidate to test if it is a flank
-		 * protection switch.
-		 * @param left If true test the left branch of the potential flank
-		 * switch candidate test the right branch otherwise.
-		 * @return True if a flank protection switch is connected.
-		 */
-		bool isFlankCandidate(
-			const RegularSwitch * other,
-			const bool            left) const;
-
-		/**
-		 * This method determines if the given candidate for a paired flank
-		 * switch is really linked to the AbstractSwitch to test to.
-		 *
-		 * @param part The RailPart to follow and test. This is a non
-		 * @c nullptr result from the follow() method.
-		 * @param self The local flank switch pair.
-		 * @return True if the candidate and self parameter are paired
-		 * flank switches.
-		 * @see follow()
-		 */
-		bool linked(
-			const RailPart    *    part,
-			const AbstractSwitch * self) const;
+		RegularSwitch * follow(
+			RailPart * part,
+			const bool dir,
+			const bool left) const;
 	};
 }
 
