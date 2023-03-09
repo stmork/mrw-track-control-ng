@@ -10,6 +10,7 @@
 #include "util/method.h"
 #include "model/modelrailway.h"
 #include "model/assemblypart.h"
+#include "model/abstractswitch.h"
 
 using namespace mrw::can;
 using namespace mrw::model;
@@ -91,6 +92,8 @@ void ModelRailway::create()
 
 void ModelRailway::link()
 {
+	std::vector<AbstractSwitch *> switches;
+
 	for (Controller * controller : controllers)
 	{
 		controller->link();
@@ -98,6 +101,12 @@ void ModelRailway::link()
 	for (Region * region : regions)
 	{
 		region->link();
+	}
+
+	parts<AbstractSwitch>(switches);
+	for (AbstractSwitch * as : switches)
+	{
+		as->collectFlankSwitches();
 	}
 }
 

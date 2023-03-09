@@ -45,6 +45,13 @@ MrwMessage AbstractSwitch::configMsg(const unsigned pin) const
 	return configSwitchMsg(hasCutOff() ? CFGSWN : CFGSWO, pin);
 }
 
+bool mrw::model::AbstractSwitch::isFlankProtection(const mrw::model::AbstractSwitch * other) const
+{
+	return
+		(other != nullptr) &&
+		(std::find(flank_switches.begin(), flank_switches.end(), other) != flank_switches.end());
+}
+
 const QString & AbstractSwitch::name() const
 {
 	return partName();

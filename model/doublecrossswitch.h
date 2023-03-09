@@ -130,7 +130,6 @@ namespace mrw::model
 			const RailPart * prev,
 			const RailPart * succ) const;
 
-		bool   isFlankProtection(const AbstractSwitch * other) const override;
 		size_t flank(
 			std::vector<RegularSwitch *> & switches,
 			const bool                     set_state,
@@ -139,10 +138,10 @@ namespace mrw::model
 		size_t flank(
 			std::vector<RegularSwitch *> & switches,
 			const bool                     set_state,
-			const bool                     left,
-			const bool                     dir,
-			RailPart           *           other,
+			const unsigned                 index,
 			FlankGuard                     guard) const;
+
+		void collectFlankSwitches() override;
 
 		State                                              switch_state = State::AC;
 		const static mrw::util::ConstantEnumerator<State>  state_map;

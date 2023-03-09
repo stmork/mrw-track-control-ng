@@ -153,27 +153,12 @@ SwitchState DoubleCrossSwitch::switchState() const
 **                                                                      **
 *************************************************************************/
 
-bool DoubleCrossSwitch::isFlankProtection(const AbstractSwitch * other) const
+void mrw::model::DoubleCrossSwitch::collectFlankSwitches()
 {
-	if (other != nullptr)
-	{
-		const std::vector<RailPart *> candidates
-		{
-			a, b, c, d
-		};
-
-		for (unsigned i = 0; i < candidates.size(); i++)
-		{
-			const std::bitset<8>  bits(i);
-			const RegularSwitch * o_switch = follow(candidates[i], a_in_dir == (i < 2), bits.count() == 1);
-
-			if (o_switch == other)
-			{
-				return true;
-			}
-		}
-	}
-	return false;
+	flank_switches.push_back(follow(a,  a_in_dir, false));
+	flank_switches.push_back(follow(b,  a_in_dir, true));
+	flank_switches.push_back(follow(c, !a_in_dir, true));
+	flank_switches.push_back(follow(d, !a_in_dir, false));
 }
 
 size_t DoubleCrossSwitch::flank(
@@ -200,50 +185,38 @@ size_t DoubleCrossSwitch::flank(
 	const DoubleCrossSwitch::State compare,
 	FlankGuard                     guard) const
 {
-	size_t equal    = 0;
+	const unsigned left  = ((unsigned)compare & B_MASK) ? 0 : 1;
+	const unsigned right = ((unsigned)compare & D_MASK) ? 2 : 3;
+	size_t         equal = 0;
 
-	if ((unsigned)compare & B_MASK)
-	{
-		equal += flank(switches, set_state, false, a_in_dir, a, guard);
-	}
-	else
-	{
-		equal += flank(switches, set_state, true, a_in_dir, b, guard);
-	}
+	equal += flank(switches, set_state, left, guard);
+	equal += flank(switches, set_state, right, guard);
 
-	if ((unsigned)compare & D_MASK)
-	{
-		equal += flank(switches, set_state, true, !a_in_dir, c, guard);
-	}
-	else
-	{
-		equal += flank(switches, set_state, false, !a_in_dir, d, guard);
-	}
 	return equal;
 }
 
 size_t DoubleCrossSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
 	const bool                     set_state,
-	const bool                     left,
-	const bool                     dir,
-	RailPart           *           other,
+	const unsigned                 index,
 	FlankGuard                     guard) const
 {
-	RegularSwitch  *  o_switch = follow(other, dir, left);
-	const SwitchState compare  = left ?  SWITCH_STATE_RIGHT : SWITCH_STATE_LEFT;
-	size_t            equal    = 0;
+	const std::bitset<8>  bits(index);
+	const bool            left     = bits.count() == 1;
+	const SwitchState     compare  = left ?  SWITCH_STATE_RIGHT : SWITCH_STATE_LEFT;
+	RegularSwitch    *    other    = flank_switches[index];
+	size_t                equal    = 0;
 
-	if ((o_switch != nullptr) && guard(o_switch))
+	if ((other != nullptr) && guard(other))
 	{
-		switches.push_back(o_switch);
+		switches.push_back(other);
 
 		if (set_state)
 		{
-			o_switch->setState(left ? RegularSwitch::State::AC : RegularSwitch::State::AB);
+			other->setState(left ? RegularSwitch::State::AC : RegularSwitch::State::AB);
 		}
 
-		if (o_switch->switchState() == compare)
+		if (other->switchState() == compare)
 		{
 			equal++;
 		}

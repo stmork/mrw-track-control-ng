@@ -130,7 +130,7 @@ namespace mrw::model
 
 	private:
 		void   link() override;
-		bool   isFlankProtection(const AbstractSwitch * other) const override;
+
 		State  computeState(
 			const RailPart * prev,
 			const RailPart * succ) const;
@@ -140,6 +140,8 @@ namespace mrw::model
 			const bool                     set_state,
 			const State                    compare,
 			FlankGuard                     guard) const;
+
+		void collectFlankSwitches() override;
 
 		State switch_state = State::AB;
 		const static mrw::util::ConstantEnumerator<State>  state_map;

@@ -159,12 +159,11 @@ SwitchState RegularSwitch::switchState() const
 **                                                                      **
 *************************************************************************/
 
-bool RegularSwitch::isFlankProtection(const AbstractSwitch * other) const
+void mrw::model::RegularSwitch::collectFlankSwitches()
 {
-	const RegularSwitch * b_switch = follow(b, !a_in_dir, true);
-	const RegularSwitch * c_switch = follow(c, !a_in_dir, false);
-
-	return (other != nullptr) && ((b_switch == other) || (c_switch == other));
+	flank_switches.push_back(nullptr);
+	flank_switches.push_back(follow(b, !a_in_dir, true));
+	flank_switches.push_back(follow(c, !a_in_dir, false));
 }
 
 size_t RegularSwitch::flank(
@@ -196,11 +195,11 @@ size_t RegularSwitch::flank(
 
 	if (compare == State::AB)
 	{
-		other = follow(c, !a_in_dir, false);
+		other = flank_switches[(unsigned)State::AC];
 	}
 	else if (compare == State::AC)
 	{
-		other = follow(b, !a_in_dir, true);
+		other = flank_switches[(unsigned)State::AB];
 	}
 
 	if ((other != nullptr) && guard(other))

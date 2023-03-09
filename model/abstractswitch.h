@@ -65,6 +65,9 @@ namespace mrw::model
 	{
 		friend class Section;
 
+	protected:
+		std::vector<RegularSwitch *> flank_switches;
+
 	public:
 		explicit AbstractSwitch(
 			ModelRailway     *    model_railway,
@@ -76,6 +79,8 @@ namespace mrw::model
 		bool                 isUnlockable() const override;
 		mrw::can::MrwMessage configMsg(const unsigned pin) const override;
 
+		virtual void collectFlankSwitches() = 0;
+
 		/**
 		 * This method checks whether a connected AbstractSwitch is a flank
 		 * protection switch.
@@ -84,7 +89,7 @@ namespace mrw::model
 		 * @return True if the connected AbstractSwitch is a flank protection
 		 * switch.
 		 */
-		virtual bool isFlankProtection(const AbstractSwitch * other) const = 0;
+		bool isFlankProtection(const AbstractSwitch * other) const;
 
 		/**
 		 * This method collects all indirect connected switches which needs
