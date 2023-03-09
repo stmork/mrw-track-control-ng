@@ -153,7 +153,7 @@ SwitchState DoubleCrossSwitch::switchState() const
 **                                                                      **
 *************************************************************************/
 
-void mrw::model::DoubleCrossSwitch::collectFlankSwitches()
+void DoubleCrossSwitch::collectFlankSwitches()
 {
 	flank_switches.push_back(follow(a,  a_in_dir, false));
 	flank_switches.push_back(follow(b,  a_in_dir, true));

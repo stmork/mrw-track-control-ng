@@ -159,7 +159,7 @@ SwitchState RegularSwitch::switchState() const
 **                                                                      **
 *************************************************************************/
 
-void mrw::model::RegularSwitch::collectFlankSwitches()
+void RegularSwitch::collectFlankSwitches()
 {
 	flank_switches.push_back(nullptr);
 	flank_switches.push_back(follow(b, !a_in_dir, true));

@@ -299,7 +299,7 @@ bool Section::isFree() const
 	return section_state == SectionState::FREE;
 }
 
-bool mrw::model::Section::isFlankRelevant() const
+bool Section::isFlankRelevant() const
 {
 	return
 		(section_state == SectionState::TOUR) ||

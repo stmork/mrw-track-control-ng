@@ -83,7 +83,7 @@ MainWindow::MainWindow(
 	Q_ASSERT(statechart.check());
 	statechart.enter();
 
-	static SignalHandler  terminator( { SIGTERM, SIGINT }, [&]()
+	static SignalHandler terminator( { SIGTERM, SIGINT }, [&]()
 	{
 		statechart.finalize();
 	});
