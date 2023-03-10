@@ -68,10 +68,11 @@ RegularSwitch * AbstractSwitch::follow(
 	const bool dir,
 	const bool left) const
 {
-	Rail * rail = dynamic_cast<Rail *>(part);
-	const RailPart * last = this;
+	const RailPart * last  = this;
+	Rail      *      rail  = dynamic_cast<Rail *>(part);
+	size_t           count = 0;
 
-	while ((rail != nullptr) && (rail->region() == region()))
+	while ((rail != nullptr) && (rail->region() == region()) && (count++ < MAX_FOLLOW_RAIL))
 	{
 		last = part;
 		part = *rail->advance(dir).begin();

@@ -168,10 +168,9 @@ void RegularSwitch::collectFlankSwitches()
 
 size_t RegularSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
-	const bool                     set_state,
-	FlankGuard                     guard) const
+	const bool                     set_state) const
 {
-	return flank(switches, set_state, state(), guard);
+	return flank(switches, set_state, state());
 }
 
 size_t RegularSwitch::flankCandidates(
@@ -181,14 +180,13 @@ size_t RegularSwitch::flankCandidates(
 {
 	State compare = computeState(prev, succ);
 
-	return flank(switches, false, compare, &Method::always<RegularSwitch>);
+	return flank(switches, false, compare);
 }
 
 size_t RegularSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
 	const bool                     set_state,
-	const State                    compare,
-	FlankGuard                     guard) const
+	const State                    compare) const
 {
 	RegularSwitch * other = nullptr;
 	size_t          equal = 0;
@@ -202,7 +200,7 @@ size_t RegularSwitch::flank(
 		other = flank_switches[(unsigned)State::AB];
 	}
 
-	if ((other != nullptr) && guard(other))
+	if (other != nullptr)
 	{
 		switches.push_back(other);
 		if (set_state)

@@ -117,7 +117,7 @@ void TestRouting::testCrossBlocked()
 
 void TestRouting::testExtension()
 {
-	RegularSwitch   *   s2  = dynamic_cast<RegularSwitch *>(parts[2]);
+	RegularSwitch   *   s2  = dynamic_cast<RegularSwitch *>(parts[3]);
 	RegularSwitch   *   s3  = dynamic_cast<RegularSwitch *>(parts[7]);
 	DoubleCrossSwitch * s5  = dynamic_cast<DoubleCrossSwitch *>(parts[11]);
 	RegularSwitch   *   s7  = dynamic_cast<RegularSwitch *>(parts[13]);
@@ -169,8 +169,8 @@ void TestRouting::testExtension()
 
 void TestRouting::testOccupation()
 {
-	RegularSwitch   *   s2  = dynamic_cast<RegularSwitch *>(parts[2]);
-	RegularSwitch   *   s1  = dynamic_cast<RegularSwitch *>(parts[3]);
+	RegularSwitch   *   s1  = dynamic_cast<RegularSwitch *>(parts[2]);
+	RegularSwitch   *   s2  = dynamic_cast<RegularSwitch *>(parts[3]);
 	RegularSwitch   *   s4  = dynamic_cast<RegularSwitch *>(parts[4]);
 	RegularSwitch   *   s7  = dynamic_cast<RegularSwitch *>(parts[13]);
 	RegularSwitch   *   s9  = dynamic_cast<RegularSwitch *>(parts[18]);

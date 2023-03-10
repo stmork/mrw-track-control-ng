@@ -20,8 +20,6 @@ namespace mrw::model
 {
 	class RegularSwitch;
 
-	typedef std::function<bool(RegularSwitch *)> FlankGuard;
-
 	/**
 	 * This class represents any representation of any switch occuring on a
 	 * model railway. Actually there are two switches possible:
@@ -64,6 +62,11 @@ namespace mrw::model
 		public SwitchModuleReference
 	{
 		friend class Section;
+		/**
+				 * This is the maximum amount of Rail elements to follow to reach a
+				 * flank protection switch.
+				 */
+		static const size_t MAX_FOLLOW_RAIL = 2;
 
 	protected:
 		std::vector<RegularSwitch *> flank_switches;
@@ -110,12 +113,10 @@ namespace mrw::model
 		 * mrw::can::SwitchState active.
 		 * @see isFlankProtection
 		 * @see follow
-		 * @see linked
 		 */
 		virtual size_t flank(
 			std::vector<RegularSwitch *> & switches,
-			const bool                     set_state = false,
-			FlankGuard                     guard = &mrw::util::Method::always<RegularSwitch>) const = 0;
+			const bool                     set_state = false) const = 0;
 
 		/**
 		 * This method computes the flank protection switches using the
@@ -158,7 +159,8 @@ namespace mrw::model
 		 * to a RegularSwitch or indirectly connected using a Rail. The
 		 * algorithm proceeds along Rail elements until a RegularSwitch is
 		 * found. Note that the algorithm aborts if the RailPart leaves the
-		 * originating Region.
+		 * originating Region. If there are more than MAX_FOLLOW_RAIL Rail
+		 * elements to follow the method returns @c false.
 		 *
 		 * @note This is the non const version to follow Rail elements.
 		 *
@@ -169,6 +171,7 @@ namespace mrw::model
 		 * @return The paired RegularSwitch if any or @c nullptr.
 		 * @note This method is needed to find a paired flank switch but a
 		 * found RegularSwitch is only a candidate for a flank switch.
+		 * @see MAX_FOLLOW_RAIL
 		 */
 		RegularSwitch * follow(
 			RailPart * part,

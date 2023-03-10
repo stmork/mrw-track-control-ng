@@ -29,7 +29,7 @@ void TestFlankSwitch::init()
 void TestFlankSwitch::testFlankProtectionLeft()
 {
 	AbstractSwitch * s1 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(0, 1, 1));
-	AbstractSwitch * s2 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(0, 2, 0));
+	AbstractSwitch * s2 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(0, 1, 2));
 
 	QVERIFY(s1 != nullptr);
 	QVERIFY(s2 != nullptr);
@@ -43,7 +43,7 @@ void TestFlankSwitch::testFlankProtectionLeft()
 void TestFlankSwitch::testFlankProtectionCross()
 {
 	AbstractSwitch * s3 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(0, 4, 1));
-	AbstractSwitch * s4 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(0, 2, 1));
+	AbstractSwitch * s4 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(0, 2, 0));
 	AbstractSwitch * s5 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(0, 7, 1));
 	AbstractSwitch * s6 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(0, 9, 0));
 	AbstractSwitch * s7 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(0, 8, 0));
@@ -112,7 +112,7 @@ bool contains(const std::vector<RegularSwitch *> & switches, RegularSwitch * par
 void TestFlankSwitch::testFlankProtectionDcs()
 {
 	RegularSwitch   *   s3 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 4, 1));
-	RegularSwitch   *   s4 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 2, 1));
+	RegularSwitch   *   s4 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 2, 0));
 	DoubleCrossSwitch * s5 = dynamic_cast<DoubleCrossSwitch *>(model->assemblyPart(0, 7, 1));
 	RegularSwitch   *   s6 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 9, 0));
 	RegularSwitch   *   s7 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 8, 0));
@@ -168,7 +168,7 @@ void TestFlankSwitch::testFlankProtectionDcs()
 void TestFlankSwitch::testFlankProtectionRsLeft()
 {
 	RegularSwitch * s1 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 1, 1));
-	RegularSwitch * s2 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 2, 0));
+	RegularSwitch * s2 = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 1, 2));
 	std::vector<RegularSwitch *> flank_switches;
 
 	QVERIFY(s1 != nullptr);

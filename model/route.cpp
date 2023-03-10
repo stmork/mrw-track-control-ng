@@ -270,14 +270,6 @@ void Route::prepare()
 
 void Route::prepareFlank()
 {
-	FlankGuard guard = [&](const RegularSwitch * ptr)
-	{
-		const bool inside_track   = contains<RailPart>(track, ptr);
-		const bool inside_section = contains<Section>(sections, ptr->section());
-
-		return !inside_track && !inside_section;
-	};
-
 	// Collect and set new state for flank switches.
 	flank_switches.clear();
 	for (RailPart * part : track)
@@ -286,7 +278,7 @@ void Route::prepareFlank()
 
 		if (flank_switch != nullptr)
 		{
-			flank_switch->flank(flank_switches, true, guard);
+			flank_switch->flank(flank_switches, true);
 		}
 	}
 }

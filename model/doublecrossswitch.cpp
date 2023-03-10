@@ -163,10 +163,9 @@ void DoubleCrossSwitch::collectFlankSwitches()
 
 size_t DoubleCrossSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
-	const bool                     set_state,
-	FlankGuard                     guard) const
+	const bool                     set_state) const
 {
-	return flank(switches, set_state, state(), guard);
+	return flank(switches, set_state, state());
 }
 
 size_t DoubleCrossSwitch::flankCandidates(
@@ -176,21 +175,20 @@ size_t DoubleCrossSwitch::flankCandidates(
 {
 	State compare = computeState(prev, succ);
 
-	return flank(switches, false, compare, &Method::always<RegularSwitch>);
+	return flank(switches, false, compare);
 }
 
 size_t DoubleCrossSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
 	const bool                     set_state,
-	const DoubleCrossSwitch::State compare,
-	FlankGuard                     guard) const
+	const DoubleCrossSwitch::State compare) const
 {
 	const unsigned left  = ((unsigned)compare & B_MASK) ? 0 : 1;
 	const unsigned right = ((unsigned)compare & D_MASK) ? 2 : 3;
 	size_t         equal = 0;
 
-	equal += flank(switches, set_state, left, guard);
-	equal += flank(switches, set_state, right, guard);
+	equal += flank(switches, set_state, left);
+	equal += flank(switches, set_state, right);
 
 	return equal;
 }
@@ -198,8 +196,7 @@ size_t DoubleCrossSwitch::flank(
 size_t DoubleCrossSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
 	const bool                     set_state,
-	const unsigned                 index,
-	FlankGuard                     guard) const
+	const unsigned                 index) const
 {
 	const std::bitset<8>  bits(index);
 	const bool            left     = bits.count() == 1;
@@ -207,7 +204,7 @@ size_t DoubleCrossSwitch::flank(
 	RegularSwitch    *    other    = flank_switches[index];
 	size_t                equal    = 0;
 
-	if ((other != nullptr) && guard(other))
+	if (other != nullptr)
 	{
 		switches.push_back(other);
 
