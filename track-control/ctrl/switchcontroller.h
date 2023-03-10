@@ -33,6 +33,10 @@ namespace mrw::ctrl
 		// Implementations from OperationCallback
 		virtual void inc() override;
 		virtual void dec() override;
+		virtual bool isReserved() override;
+
+	protected:
+		bool isFlankRelevantReserved() const;
 	};
 }
 

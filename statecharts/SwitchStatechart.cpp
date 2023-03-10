@@ -691,7 +691,7 @@ namespace mrw
 		void SwitchStatechart::react_main_region_Operating_operating__choice_0()
 		{
 			/* The reactions of state null. */
-			if ((ifaceOperationCallback->isFree()) || (isManual))
+			if (((ifaceOperationCallback->isFree()) || (isManual)) || ((!ifaceOperationCallback->isReserved())))
 			{
 				enseq_main_region_Operating_operating_Unlocked_default();
 			}

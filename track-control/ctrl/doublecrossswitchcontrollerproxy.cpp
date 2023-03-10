@@ -149,7 +149,7 @@ bool DoubleCrossSwitchControllerProxy::isRightBended() const
 
 bool DoubleCrossSwitchControllerProxy::hasFlankProtection() const
 {
-	if ((lock() == LockState::LOCKED) && (section()->isFlankRelevant()))
+	if ((lock() == LockState::LOCKED) && isFlankRelevantReserved())
 	{
 		std::vector<RegularSwitch *> flank_switches;
 

@@ -42,3 +42,13 @@ void SwitchController::dec()
 {
 	decrease();
 }
+
+bool SwitchController::isReserved()
+{
+	return railPart()->reserved();
+}
+
+bool SwitchController::isFlankRelevantReserved() const
+{
+	return section()->isFlankRelevant() && railPart()->reserved();
+}

@@ -132,6 +132,8 @@ namespace mrw
 
 				virtual bool isFree() = 0;
 
+				virtual bool isReserved() = 0;
+
 				virtual void fail() = 0;
 
 				virtual void pending() = 0;

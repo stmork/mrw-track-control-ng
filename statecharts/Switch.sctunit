@@ -44,6 +44,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		mock pending
 		mock lock
 		mock isFree returns (true)
+		mock isReserved returns (true)
 		mock doTurnLeft returns (true)
 	}
 
@@ -149,6 +150,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		// Given
 		operational()
 		mock doTurnLeft returns (true)
+		mock isReserved returns (true)
 
 		// When
 		raise turn
@@ -166,6 +168,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		// Given
 		operational()
 		mock doTurnLeft returns (false)
+		mock isReserved returns (true)
 
 		// When
 		raise turn
@@ -183,6 +186,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		// Given
 		turnLeft()
 		mock isFree returns (false)
+		mock isReserved returns (true)
 
 		// When
 		raise queued
@@ -204,6 +208,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		// Given
 		turnRight()
 		mock isFree returns (false)
+		mock isReserved returns (true)
 
 		// When
 		raise queued
@@ -225,6 +230,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		// Given
 		turnLeft()
 		mock isFree returns (true)
+		mock isReserved returns (true)
 
 		// When
 		raise queued
@@ -246,6 +252,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		// Given
 		turnRight()
 		mock isFree returns (true)
+		mock isReserved returns (true)
 
 		// When
 		raise queued
@@ -267,6 +274,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		// Given
 		turnLeft()
 		mock isFree returns (false)
+		mock isReserved returns (true)
 
 		// When
 		raise leftResponse
@@ -281,6 +289,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		// Given
 		turnRight()
 		mock isFree returns (false)
+		mock isReserved returns (true)
 
 		// When
 		raise rightResponse
@@ -295,6 +304,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		// Given
 		turnLeft()
 		mock isFree returns (false)
+		mock isReserved returns (true)
 
 		// When
 		raise failed
@@ -322,6 +332,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		// Given
 		turnLeft()
 		mock isFree returns (false)
+		mock isReserved returns (true)
 
 		// When
 		proceed timeout ms

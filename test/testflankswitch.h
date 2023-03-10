@@ -34,6 +34,7 @@ namespace mrw::test
 		void testFlankProtectionEast();
 		void testFlankProtectionFactory();
 
+		void testFlankProtectionParallel();
 		void testFlankProtectionDoubleU1();
 		void testFlankProtectionDoubleU2();
 		void testFlankProtectionDoubleU3();

@@ -589,6 +589,45 @@ namespace mrw
 		};
 		static IsFreeMock * isFreeMock;
 
+		class IsReservedMock
+		{
+			typedef bool (IsReservedMock::*functiontype)();
+		public:
+			bool (IsReservedMock::*isReservedBehaviorDefault)();
+
+			bool isReserved1()
+			{
+				return (true);
+			}
+
+			bool isReservedDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			functiontype getBehavior()
+			{
+				return isReservedBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (IsReservedMock::*defaultBehavior)())
+			{
+				isReservedBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&IsReservedMock::isReservedDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		static IsReservedMock * isReservedMock;
+
 		class DoTurnLeftMock
 		{
 			typedef bool (DoTurnLeftMock::*functiontype)();
@@ -668,6 +707,10 @@ namespace mrw
 			bool isFree()
 			{
 				return (isFreeMock->*(isFreeMock->getBehavior()))();
+			}
+			bool isReserved()
+			{
+				return (isReservedMock->*(isReservedMock->getBehavior()))();
 			}
 			void fail()
 			{
@@ -758,6 +801,8 @@ namespace mrw
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree1);
 
+			isReservedMock->setDefaultBehavior(&IsReservedMock::isReserved1);
+
 			doTurnLeftMock->setDefaultBehavior(&DoTurnLeftMock::doTurnLeft1);
 
 
@@ -770,6 +815,7 @@ namespace mrw
 			pendingMock->reset();
 			lockMock->reset();
 			isFreeMock->reset();
+			isReservedMock->reset();
 			doTurnLeftMock->reset();
 		}
 		TEST_F(SwitchTest, waitForStart)
@@ -792,6 +838,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -846,6 +894,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -889,6 +939,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -922,6 +974,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -985,6 +1039,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1026,6 +1082,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1077,6 +1135,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1108,6 +1168,8 @@ namespace mrw
 
 			doTurnLeftMock->setDefaultBehavior(&DoTurnLeftMock::doTurnLeft1);
 
+			isReservedMock->setDefaultBehavior(&IsReservedMock::isReserved1);
+
 			statechart->raiseTurn();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Left));
@@ -1120,6 +1182,7 @@ namespace mrw
 
 
 			doTurnLeftMock->reset();
+			isReservedMock->reset();
 			incMock->reset();
 			leftMock->reset();
 		}
@@ -1127,6 +1190,8 @@ namespace mrw
 		{
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			leftMock = new LeftMock();
@@ -1159,6 +1224,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1172,6 +1239,8 @@ namespace mrw
 
 			doTurnLeftMock->setDefaultBehavior(&DoTurnLeftMock::doTurnLeft2);
 
+			isReservedMock->setDefaultBehavior(&IsReservedMock::isReserved1);
+
 			statechart->raiseTurn();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Right));
@@ -1184,6 +1253,7 @@ namespace mrw
 
 
 			doTurnLeftMock->reset();
+			isReservedMock->reset();
 			incMock->reset();
 			rightMock->reset();
 		}
@@ -1191,6 +1261,8 @@ namespace mrw
 		{
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			rightMock = new RightMock();
@@ -1223,6 +1295,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1236,6 +1310,8 @@ namespace mrw
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
 
+			isReservedMock->setDefaultBehavior(&IsReservedMock::isReserved1);
+
 			statechart->raiseQueued();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Pending));
@@ -1248,16 +1324,21 @@ namespace mrw
 
 
 			isFreeMock->reset();
+			isReservedMock->reset();
 			decMock->reset();
 		}
 		TEST_F(SwitchTest, queuedLeft)
 		{
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			leftMock = new LeftMock();
@@ -1290,6 +1371,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1303,6 +1386,8 @@ namespace mrw
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
 
+			isReservedMock->setDefaultBehavior(&IsReservedMock::isReserved1);
+
 			statechart->raiseQueued();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Pending));
@@ -1315,16 +1400,21 @@ namespace mrw
 
 
 			isFreeMock->reset();
+			isReservedMock->reset();
 			decMock->reset();
 		}
 		TEST_F(SwitchTest, queuedRight)
 		{
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			rightMock = new RightMock();
@@ -1357,6 +1447,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1368,10 +1460,14 @@ namespace mrw
 		{
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			leftMock = new LeftMock();
@@ -1404,6 +1500,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1412,6 +1510,8 @@ namespace mrw
 			turnLeft();
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree1);
+
+			isReservedMock->setDefaultBehavior(&IsReservedMock::isReserved1);
 
 			statechart->raiseQueued();
 
@@ -1425,16 +1525,21 @@ namespace mrw
 
 
 			isFreeMock->reset();
+			isReservedMock->reset();
 			decMock->reset();
 		}
 		TEST_F(SwitchTest, freeRight)
 		{
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			decMock = new DecMock();
 			decMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			rightMock = new RightMock();
@@ -1467,6 +1572,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1476,6 +1583,8 @@ namespace mrw
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree1);
 
+			isReservedMock->setDefaultBehavior(&IsReservedMock::isReserved1);
+
 			statechart->raiseQueued();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Pending));
@@ -1488,6 +1597,7 @@ namespace mrw
 
 
 			isFreeMock->reset();
+			isReservedMock->reset();
 			decMock->reset();
 		}
 		void okLeft()
@@ -1496,19 +1606,26 @@ namespace mrw
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
 
+			isReservedMock->setDefaultBehavior(&IsReservedMock::isReserved1);
+
 			statechart->raiseLeftResponse();
 
 			lockedState();
 
 
 			isFreeMock->reset();
+			isReservedMock->reset();
 		}
 		TEST_F(SwitchTest, okLeft)
 		{
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			leftMock = new LeftMock();
@@ -1541,6 +1658,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1554,19 +1673,26 @@ namespace mrw
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
 
+			isReservedMock->setDefaultBehavior(&IsReservedMock::isReserved1);
+
 			statechart->raiseRightResponse();
 
 			lockedState();
 
 
 			isFreeMock->reset();
+			isReservedMock->reset();
 		}
 		TEST_F(SwitchTest, okRight)
 		{
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			rightMock = new RightMock();
@@ -1599,6 +1725,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1610,8 +1738,12 @@ namespace mrw
 		{
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			leftMock = new LeftMock();
@@ -1644,6 +1776,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1653,17 +1787,22 @@ namespace mrw
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
 
+			isReservedMock->setDefaultBehavior(&IsReservedMock::isReserved1);
+
 			statechart->raiseFailed();
 
 			failState();
 
 
 			isFreeMock->reset();
+			isReservedMock->reset();
 		}
 		TEST_F(SwitchTest, failRight)
 		{
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			rightMock = new RightMock();
@@ -1696,6 +1835,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1713,8 +1854,12 @@ namespace mrw
 		{
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			leftMock = new LeftMock();
@@ -1747,6 +1892,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1756,17 +1903,22 @@ namespace mrw
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
 
+			isReservedMock->setDefaultBehavior(&IsReservedMock::isReserved1);
+
 			runner->proceed_time(statechart->getTimeout());
 
 			failState();
 
 
 			isFreeMock->reset();
+			isReservedMock->reset();
 		}
 		TEST_F(SwitchTest, timeoutRight)
 		{
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			rightMock = new RightMock();
@@ -1799,6 +1951,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1816,8 +1970,12 @@ namespace mrw
 		{
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			leftMock = new LeftMock();
@@ -1850,6 +2008,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1867,8 +2027,12 @@ namespace mrw
 		{
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			rightMock = new RightMock();
@@ -1901,6 +2065,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1918,8 +2084,12 @@ namespace mrw
 		{
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			leftMock = new LeftMock();
@@ -1952,6 +2122,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -1969,8 +2141,12 @@ namespace mrw
 		{
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			incMock = new IncMock();
 			incMock->initializeBehavior();
 			rightMock = new RightMock();
@@ -2003,6 +2179,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 
@@ -2036,6 +2214,8 @@ namespace mrw
 			lockMock->initializeBehavior();
 			isFreeMock = new IsFreeMock();
 			isFreeMock->initializeBehavior();
+			isReservedMock = new IsReservedMock();
+			isReservedMock->initializeBehavior();
 			doTurnLeftMock = new DoTurnLeftMock();
 			doTurnLeftMock->initializeBehavior();
 

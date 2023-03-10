@@ -17,6 +17,8 @@ using namespace mrw::can;
 using namespace mrw::test;
 using namespace mrw::model;
 
+using LockState = Device::LockState;
+
 TestFlankSwitch::TestFlankSwitch() : TestModel("Test-Flank")
 {
 }
@@ -255,6 +257,33 @@ void mrw::test::TestFlankSwitch::testFlankProtectionFactory()
 
 	QVERIFY(!s24->isFlankProtection(nullptr));
 	QVERIFY(!s24->isFlankProtection(s31));
+}
+
+void mrw::test::TestFlankSwitch::testFlankProtectionParallel()
+{
+	RegularSwitch * s1  = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 1, 1));
+	RegularSwitch * s2  = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 1, 2));
+	Rail      *     r11 = dynamic_cast<Rail *>(model->assemblyPart(0,  0, 0));
+	Rail      *     r16 = dynamic_cast<Rail *>(model->assemblyPart(0, 12, 0));
+
+	QVERIFY(s1 != nullptr);
+	QVERIFY(s2 != nullptr);
+	QVERIFY(r11 != nullptr);
+	QVERIFY(r16 != nullptr);
+
+	s1->setState(RegularSwitch::State::AB);
+	s2->setState(RegularSwitch::State::AB);
+
+	TestRoute  route(true, SectionState::TOUR, r11);
+
+	QVERIFY(route.append(r16));
+	const std::vector<RegularSwitch *> & flank_switches = route.doFlank();
+
+	QCOMPARE(flank_switches.size(), 2u);
+	QCOMPARE(s1->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s2->switchState(), SWITCH_STATE_RIGHT);
+	QVERIFY(!s1->reserved());
+	QVERIFY(s2->reserved());
 }
 
 void TestFlankSwitch::testFlankProtectionDoubleU1()
