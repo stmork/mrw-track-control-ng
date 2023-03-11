@@ -67,7 +67,7 @@ bool DoubleCrossSwitch::valid() const
 		(d != nullptr) && d->contains(this, !aIsDir());
 }
 
-bool DoubleCrossSwitch::isBranch() const
+bool DoubleCrossSwitch::isCurved() const
 {
 	const bool b_active = unsigned(switch_state) & B_MASK;
 	const bool d_active = unsigned(switch_state) & D_MASK;
@@ -142,7 +142,7 @@ State DoubleCrossSwitch::computeState(
 
 SwitchState DoubleCrossSwitch::switchState() const
 {
-	return isBranch() ?
+	return isCurved() ?
 		SwitchState::SWITCH_STATE_LEFT :
 		SwitchState::SWITCH_STATE_RIGHT;
 }

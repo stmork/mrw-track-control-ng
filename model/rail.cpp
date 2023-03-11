@@ -14,7 +14,7 @@ Rail::Rail(
 	const QDomElement  &  element) :
 	RailPart(model_railway, model_section, element),
 	is_main(  ModelRailway::boolean(element, "istHauptgleis")),
-	is_branch(ModelRailway::boolean(element, "istAbzweig"))
+	is_curve(ModelRailway::boolean(element, "istAbzweig"))
 {
 }
 
@@ -47,9 +47,9 @@ bool Rail::valid() const
 		);
 }
 
-bool Rail::isBranch() const
+bool Rail::isCurved() const
 {
-	return is_branch;
+	return is_curve;
 }
 
 bool Rail::isMain(const Rail * rail)

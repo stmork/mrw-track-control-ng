@@ -68,7 +68,7 @@ namespace mrw::model
 			Section       *       model_section,
 			const QDomElement  &  element);
 
-		bool isBranch() const override;
+		bool isCurved() const override;
 
 		/**
 		 * This method returns the internal state of this RegularSwitch. As

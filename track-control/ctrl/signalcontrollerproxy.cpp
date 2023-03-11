@@ -245,9 +245,9 @@ Signal * SignalControllerProxy::mainSignal() const
 	return main_signal;
 }
 
-void SignalControllerProxy::setCurved(const size_t curved_count)
+void SignalControllerProxy::setCurvedCount(const size_t curved)
 {
-	statechart_main.setCurved(curved_count);
+	statechart_main.setCurveCount(curved);
 }
 
 void SignalControllerProxy::setDistantSignal(SignalControllerProxy * signal)

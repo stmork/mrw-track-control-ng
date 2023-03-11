@@ -55,7 +55,7 @@ namespace mrw::ctrl
 	{
 		Q_OBJECT
 
-		size_t curved_count = 0;
+		size_t curved = 0;
 
 	public:
 		/**
@@ -68,15 +68,14 @@ namespace mrw::ctrl
 		void prepare() override;
 
 		/**
-		 * This method sets the amount of curved or branched rail parts
-		 * embraced of the block starting with this MainSignal. Dependend
-		 * on the amount of curved rail parts the SignbalAspect will be HP2
-		 * instead of HP1.
+		 * This method sets the amount of branched rail parts embraced of the
+		 * block starting with this MainSignal. Dependend on the amount of
+		 * branched rail parts the SignbalAspect will be HP2 instead of HP1.
 		 *
-		 * @param count The real amount of curved or branched rail parts.
-		 * @see SLOW_CURVED_LIMIT
+		 * @param count The real amount of branched rail parts.
+		 * @see SLOW_BRANCHED_LIMIT
 		 */
-		void setCurved(const size_t count);
+		void setCurveCount(const size_t count);
 	};
 
 	/*************************************************************************

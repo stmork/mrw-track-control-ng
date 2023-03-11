@@ -108,11 +108,11 @@ namespace mrw::model
 		 */
 		static QString get(const State & state);
 
-		bool                  valid() const override;
-		QString               toString() const override;
-		QString               key() const override;
+		bool                  valid()       const override;
+		QString               toString()    const override;
+		QString               key()         const override;
 		mrw::can::SwitchState switchState() const override;
-		bool                  isBranch() const override;
+		bool                  isCurved()    const override;
 
 		size_t flank(
 			std::vector<RegularSwitch *> & switches,

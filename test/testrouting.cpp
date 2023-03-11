@@ -271,6 +271,15 @@ void TestRouting::testFlank()
 	const std::vector<RegularSwitch *> & flanks = route.doFlank();
 
 	QCOMPARE(flanks.size(), 4u);
+
+	const Route::RailTrack & reserved = route;
+	const size_t             curved   = std::count_if(
+			reserved.begin(), reserved.end(),
+			[](const RailPart * part)
+	{
+		return part->isCurved();
+	});
+	QVERIFY(curved > 0);
 }
 
 void TestRouting::testFlankLocked()

@@ -61,7 +61,7 @@ namespace mrw::ctrl
 		bool                       isUnlocked() const;
 		bool                       isPassed() const;
 		mrw::model::Signal    *    mainSignal() const;
-		void                       setCurved(const size_t curved_count);
+		void                       setCurvedCount(const size_t curved);
 		void                       setDistantSignal(SignalControllerProxy * signal);
 		void                       setSymbol(mrw::model::Signal::Symbol symbol);
 		void                       setState(mrw::model::SectionState new_state);

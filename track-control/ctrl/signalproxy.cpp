@@ -151,15 +151,15 @@ void MainProxy::prepare()
 		break;
 
 	case Symbol::GO:
-		state = curved_count < SLOW_CURVED_LIMIT ? SIGNAL_HP1 : SIGNAL_HP2;
+		state = curved < SLOW_CURVED_LIMIT ? SIGNAL_HP1 : SIGNAL_HP2;
 		break;
 	}
 	signal->setAspect(state);
 }
 
-void MainProxy::setCurved(const size_t count)
+void MainProxy::setCurveCount(const size_t count)
 {
-	curved_count = count;
+	curved = count;
 }
 
 /*************************************************************************

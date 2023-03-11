@@ -177,7 +177,7 @@ void WidgetRoute::prepareSignals()
 		SignalControllerProxy * signal_ctrl  = getSignalController(section);
 		std::vector<RailPart *> rails;
 
-		section->parts<RailPart>(rails, &WidgetRoute::isCurve);
+		section->parts<RailPart>(rails, &WidgetRoute::isCurved);
 		curved += rails.size();
 
 		if (signal_ctrl != nullptr)
@@ -193,7 +193,7 @@ void WidgetRoute::prepareSignals()
 			{
 				//  OK, a main signal starts a new block.
 				main_controller = signal_ctrl;
-				signal_ctrl->setCurved(curved);
+				signal_ctrl->setCurvedCount(curved);
 				curved = 0;
 			}
 
@@ -554,9 +554,9 @@ void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & c
 	}
 }
 
-bool WidgetRoute::isCurve(const RailPart * part)
+bool WidgetRoute::isCurved(const RailPart * part)
 {
-	return part->reserved() && part->isBranch();
+	return part->reserved() && part->isCurved();
 }
 
 WidgetRoute::operator QListWidgetItem * ()

@@ -74,7 +74,7 @@ bool RegularSwitch::valid() const
 		(c != nullptr) && c->contains(this, !aIsDir());
 }
 
-bool RegularSwitch::isBranch() const
+bool RegularSwitch::isCurved() const
 {
 	return right_branch == (switch_state == State::AC);
 }

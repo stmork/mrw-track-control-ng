@@ -31,8 +31,8 @@ namespace mrw::model
 	{
 		enum PreferCode
 		{
-			INFERIOR_FLAG = 2,
-			CURVED_FLAG   = 1,
+			INFERIOR_FLAG    = 2,
+			CURVED_FLAG      = 1,
 
 			PREFERRED        = 0,
 			PREFERRED_CURVED = CURVED_FLAG,
@@ -47,7 +47,7 @@ namespace mrw::model
 		explicit RailInfo(
 			RailPart  *  rail_part,
 			const bool   preferred = true,
-			const bool   curved = false);
+			const bool   curved    = false);
 
 		/**
 		 * The less operator is used to sort this information instance by
@@ -190,14 +190,13 @@ namespace mrw::model
 		bool reserved() const;
 
 		/**
-		 * This method returns true if the represented RailPart is curved or
-		 * a turn out branch of a switch. In case of a Rail the result is
-		 * static whereas the result of switches depends on its switching
-		 * state.
+		 * This method returns true if the represented RailPart is curved or a
+		 * turn out branch of a switch. In case of a Rail the result is static
+		 * whereas the result of switches depends on its switching state.
 		 *
 		 * @return True if the RailPart is a curved or branched.
 		 */
-		virtual bool isBranch() const = 0;
+		virtual bool isCurved() const = 0;
 
 	protected:
 		/**

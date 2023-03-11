@@ -101,7 +101,7 @@ private:
 	void collectSectionControllers(
 		std::vector<mrw::ctrl::SectionController *>   &   controllers) const;
 
-	static bool isCurve(const mrw::model::RailPart * part);
+	static bool isCurved(const mrw::model::RailPart * part);
 
 	// Implementation of RouteStatemachine::OperationCallback
 	virtual void prepareRoute() override;

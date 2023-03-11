@@ -30,7 +30,7 @@ namespace mrw::model
 	class Rail : public RailPart
 	{
 		const bool     is_main;
-		const bool     is_branch;
+		const bool     is_curve;
 
 		RailPart   *   a = nullptr;
 		RailPart   *   b = nullptr;
@@ -42,7 +42,7 @@ namespace mrw::model
 			const QDomElement  &  element);
 
 		bool        valid() const override;
-		bool        isBranch() const override;
+		bool        isCurved() const override;
 		static bool isMain(const Rail * rail);
 
 		/**
