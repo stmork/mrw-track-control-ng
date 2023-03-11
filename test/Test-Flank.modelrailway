@@ -165,10 +165,10 @@
       <bauelement xsi:type="Modelrailway:Gleis" name="233" a="//@gruppe.2/@abschnitt.1/@bauelement.1"/>
     </abschnitt>
     <abschnitt name="214" unit_no="214" modul="//@controller.8/@module.0">
-      <bauelement xsi:type="Modelrailway:Gleis" name="214" a="//@gruppe.2/@abschnitt.3/@bauelement.0" b="//@gruppe.2/@abschnitt.8/@bauelement.0"/>
+      <bauelement xsi:type="Modelrailway:Gleis" name="214" istHauptgleis="true" a="//@gruppe.2/@abschnitt.3/@bauelement.0" b="//@gruppe.2/@abschnitt.8/@bauelement.0"/>
     </abschnitt>
     <abschnitt name="224" unit_no="224" modul="//@controller.8/@module.0">
-      <bauelement xsi:type="Modelrailway:Gleis" name="224" a="//@gruppe.2/@abschnitt.4/@bauelement.0" b="//@gruppe.2/@abschnitt.9/@bauelement.0"/>
+      <bauelement xsi:type="Modelrailway:Gleis" name="224" istHauptgleis="true" a="//@gruppe.2/@abschnitt.4/@bauelement.0" b="//@gruppe.2/@abschnitt.9/@bauelement.0"/>
     </abschnitt>
     <abschnitt name="215" unit_no="215" modul="//@controller.8/@module.1">
       <bauelement xsi:type="Modelrailway:Gleis" name="215" a="//@gruppe.2/@abschnitt.6/@bauelement.0" b="//@gruppe.2/@abschnitt.10/@bauelement.0"/>

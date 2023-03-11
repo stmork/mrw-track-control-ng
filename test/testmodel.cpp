@@ -311,6 +311,25 @@ void TestModel::testDoubleCrossSwitchStates()
 	}
 }
 
+void TestModel::testMainRail()
+{
+	std::vector<Rail *> main_rails;
+
+	model->parts<Rail>(main_rails, &Rail::isMain);
+
+	for (const Rail * rail : main_rails)
+	{
+		const std::set<RailInfo> & left  = rail->advance(false);
+		const std::set<RailInfo> & right = rail->advance(true);
+
+		QCOMPARE(left.size(), 1u);
+		QCOMPARE(right.size(), 1u);
+
+		QVERIFY(convert(left.begin()) != nullptr);
+		QVERIFY(convert(right.begin()) != nullptr);
+	}
+}
+
 void TestModel::testSignals()
 {
 	std::vector<Signal *> all_signals;
@@ -651,10 +670,7 @@ void TestModel::testSwitchConfig()
 {
 	std::vector<AbstractSwitch *> switches;
 
-	model->parts<AbstractSwitch>(switches, [](const AbstractSwitch * part)
-	{
-		return part->hasCutOff();
-	});
+	model->parts<AbstractSwitch>(switches, &TestModel::hasCutOff);
 
 	for (const AbstractSwitch * part : switches)
 	{
@@ -677,11 +693,7 @@ void TestModel::testSimpleLightConfig()
 {
 	std::vector<Light *> lights;
 
-	model->parts<Light>(lights, [](const Light * light)
-	{
-		// Filter out profile light to get only simple lights.
-		return dynamic_cast<const ProfileLight *>(light) == nullptr;
-	});
+	model->parts<Light>(lights, &TestModel::isSimpleLight);
 
 	for (const Light * light : lights)
 	{
@@ -886,4 +898,22 @@ void TestModel::testFormSignalConfig(
 			}
 		}
 	}
+}
+
+const Rail * TestModel::convert(const std::set<RailInfo>::iterator & it)
+{
+	const RailInfo & info = *it;
+	const RailPart * part = info;
+
+	return dynamic_cast<const Rail *>(part);
+}
+
+bool TestModel::isSimpleLight(const Light * light)
+{
+	return dynamic_cast<const ProfileLight *>(light) == nullptr;
+}
+
+bool TestModel::hasCutOff(const AbstractSwitch * part)
+{
+	return part->hasCutOff();
 }

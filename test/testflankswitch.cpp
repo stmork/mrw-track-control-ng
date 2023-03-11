@@ -372,9 +372,9 @@ void TestFlankSwitch::testFlankProtectionDoubleU3()
 
 void TestFlankSwitch::testFlankProtectionDoubleURoute()
 {
-	RegularSwitch * s11 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 2, 0));
-	RegularSwitch * s12 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 3, 0));
-	RegularSwitch * s13 = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 4, 1));
+	RegularSwitch * s11  = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 2, 0));
+	RegularSwitch * s12  = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 3, 0));
+	RegularSwitch * s13  = dynamic_cast<RegularSwitch *>(model->assemblyPart(1, 4, 1));
 	Rail      *     r111 = dynamic_cast<Rail *>(model->assemblyPart(1, 0, 0));
 	Rail      *     r121 = dynamic_cast<Rail *>(model->assemblyPart(1, 1, 0));
 	Rail      *     r113 = dynamic_cast<Rail *>(model->assemblyPart(1, 5, 0));

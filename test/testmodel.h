@@ -10,6 +10,8 @@
 
 #include "testmodelbase.h"
 
+#include <model/rail.h>
+#include <model/abstractswitch.h>
 #include <model/signal.h>
 
 namespace mrw::test
@@ -36,6 +38,11 @@ namespace mrw::test
 			const mrw::model::Signal::SignalType type,
 			const mrw::can::Command              command);
 
+		static const mrw::model::Rail * convert(
+			const std::set<mrw::model::RailInfo>::iterator & it);
+		static bool isSimpleLight(const mrw::model::Light * light);
+		static bool hasCutOff(const mrw::model::AbstractSwitch * part);
+
 	private slots:
 		void init();
 
@@ -46,6 +53,7 @@ namespace mrw::test
 		void testSections();
 		void testRegularSwitchStates();
 		void testDoubleCrossSwitchStates();
+		void testMainRail();
 		void testSignals();
 		void testDefaultPosition();
 		void testParsingPosition();
