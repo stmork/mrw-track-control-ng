@@ -30,6 +30,7 @@ echo "Files: *" >> ${COPYRIGHT}
 echo "Copyright: 2007-`date +'%Y'` Steffen A. Mork <linux-dev@morknet.de>" >> ${COPYRIGHT}
 echo "License: MIT" >> ${COPYRIGHT}
 sed -e 's/^$/\./g' -e 's/^/ /g' LICENSE.md >> ${COPYRIGHT}
+export VERSION=`grep VERSION common.pri | fgrep "=" | cut -d"=" -f2 | sed -e "s/ //g" | head -n1`
 
 sed -i\
    -e "s/%ARCH%/${ARCH}/g"\
@@ -37,8 +38,7 @@ sed -i\
    -e "s/%BUILD%/${BUILD_NUMBER}/g"\
    -e "s/%PACKAGE%/${PACKAGE}/g"\
    ${PREFIX}/DEBIAN/control
-export VERSION=`grep Version ${PREFIX}/DEBIAN/control | cut -d" " -f2`
 
 echo "Packaging..."
 chmod -R o+rX ${PREFIX}
-fakeroot dpkg -b ${PREFIX} ${PACKAGE}_${VERSION}_${ARCH}.deb
+fakeroot dpkg -b ${PREFIX} ${PACKAGE}_${VERSION}-${BUILD_NUMBER}_${ARCH}.deb

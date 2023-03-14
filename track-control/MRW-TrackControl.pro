@@ -63,3 +63,6 @@ INSTALLS        += install
 
 RESOURCES += \
 	resources.qrc
+
+message("Version: *** $$VERSION ***")
+message("Build number: $$BUILD_NUMBER")

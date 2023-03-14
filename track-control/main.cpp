@@ -54,6 +54,7 @@ int main(int argc, char * argv[])
 		{
 			qInfo("==========================================================");
 			qInfo() << "MRW-NG track control using model:" << repo.modelName();
+			qInfo() << "Version:   " << VERSION << "Build:" << BUILD_NUMBER;
 			qInfo() << "Qt version:" << qVersion();
 			qInfo() << "CAN plugin:" << repo.plugin();
 			qInfo() << "CAN iface: " << repo.interface();

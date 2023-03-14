@@ -3,6 +3,7 @@
 #  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 #
 
+VERSION          = 2.0
 QT              += core xml serialbus
 CONFIG          += c++17
 QMAKE_CXXFLAGS  += -Wextra -fstack-protector-strong
@@ -26,3 +27,28 @@ linux:CONFIG(gcov) {
 install.path  = $$(PREFIX)/usr/bin
 
 QMAKE_CLEAN += *.gcno *gcda
+
+#####################################################################
+#
+# Define version/build number if available
+#
+#####################################################################
+
+DEFINES += VERSION=\"\\\"$$VERSION\\\"\"
+
+#####################################################################
+#
+# Define build number if available
+#
+#####################################################################
+
+BN_LEN=$$str_size($$getenv(BUILD_NUMBER))
+greaterThan(BN_LEN, 0) {
+	DEFINES += BUILD_NUMBER=$$getenv(BUILD_NUMBER)
+
+	BUILD_NUMBER = $$getenv(BUILD_NUMBER)
+} else {
+	DEFINES += BUILD_NUMBER=0
+
+	BUILD_NUMBER = 0
+}
