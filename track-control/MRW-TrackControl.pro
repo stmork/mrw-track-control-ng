@@ -65,4 +65,6 @@ RESOURCES += \
 	resources.qrc
 
 message("Version: *** $$VERSION ***")
-message("Build number: $$BUILD_NUMBER")
+!isEmpty(BUILD_NUMBER) {
+	message("Build number: $$BUILD_NUMBER")
+}

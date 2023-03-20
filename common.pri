@@ -42,13 +42,8 @@ DEFINES += VERSION=\"\\\"$$VERSION\\\"\"
 #
 #####################################################################
 
-BN_LEN=$$str_size($$getenv(BUILD_NUMBER))
-greaterThan(BN_LEN, 0) {
-	DEFINES += BUILD_NUMBER=$$getenv(BUILD_NUMBER)
+BUILD_NUMBER=$$getenv(BUILD_NUMBER)
 
-	BUILD_NUMBER = $$getenv(BUILD_NUMBER)
-} else {
-	DEFINES += BUILD_NUMBER=0
-
-	BUILD_NUMBER = 0
+!isEmpty(BUILD_NUMBER) {
+	DEFINES += BUILD_NUMBER=$$(BUILD_NUMBER)
 }
