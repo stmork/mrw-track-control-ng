@@ -98,14 +98,14 @@
         <item>
          <widget class="QPushButton" name="clearSection">
           <property name="text">
-           <string>Auflösen</string>
+           <string>Entfernen</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="clearAllSections">
           <property name="text">
-           <string>Alles auflösen</string>
+           <string>Alles entfernen</string>
           </property>
          </widget>
         </item>
