@@ -327,7 +327,7 @@ QString Section::get(const SectionState & state)
 	return state_map.get(state);
 }
 
-const std::vector<Signal *> & Section::getSignals(const bool view)
+const std::vector<Signal *> & Section::getSignals(const bool view) const
 {
 	return view ? forward_signals : backward_signals;
 }

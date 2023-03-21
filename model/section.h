@@ -303,7 +303,7 @@ namespace mrw::model
 		 * @return The sorted Signal vector related to the view direction.
 		 * @see Signal::less()
 		 */
-		const std::vector<Signal *> & getSignals(const bool view);
+		const std::vector<Signal *> & getSignals(const bool view) const;
 
 	private:
 		void            add(AssemblyPart * rail_part);
