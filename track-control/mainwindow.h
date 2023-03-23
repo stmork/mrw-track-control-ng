@@ -12,6 +12,7 @@
 
 #include <QMainWindow>
 #include <QListWidgetItem>
+#include <QLabel>
 
 #include <statecharts/OperatingModeStatechart.h>
 #include <model/modelrepository.h>
@@ -106,6 +107,7 @@ private:
 	void          activateManual(const bool activate) override;
 
 	mrw::model::Section  * manualSection();
+	void                   warn(const QString & message);
 
 	// Route implementations
 	mrw::model::Route   *  createRoute(
@@ -117,6 +119,7 @@ private:
 	void                   changePage(const int offset);
 
 	Ui::MainWindow               *              ui;
+	QLabel                   *                  status_label = nullptr;
 	mrw::model::ModelRepository        &        repo;
 	WidgetRoute                *                beer_route = nullptr;
 	mrw::statechart::OperatingModeStatechart    statechart;

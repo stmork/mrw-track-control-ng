@@ -83,6 +83,9 @@ MainWindow::MainWindow(
 	window_flags |= Qt::WindowSystemMenuHint;
 	setWindowFlags(window_flags);
 
+	status_label = new QLabel(tr("Start."));
+	ui->statusbar->addPermanentWidget(status_label);
+
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
 	statechart.can()->setOperationCallback(&dispatcher);
@@ -403,6 +406,12 @@ Section * MainWindow::manualSection()
 	return sections.size() == 1 ? *sections.begin() : nullptr;
 }
 
+void MainWindow::warn(const QString & message)
+{
+	qWarning().noquote() << message;
+	ui->statusbar->showMessage(message, 10000);
+}
+
 /*************************************************************************
 **                                                                      **
 **       Routing support                                                **
@@ -426,8 +435,10 @@ Route * MainWindow::createRoute(const bool direction, const SectionState state)
 		if (!route->append(part))
 		{
 			QListWidgetItem * route_item = *route;
+			QString           message    =
+				tr("Fahrstraße %1 kann nicht bis %2 angelegt werden!").arg(route_item->text()).arg(part->partName());
 
-			qWarning().noquote() << "Cannot create route" << route_item->text() << "to" << part->partName();
+			warn(message);
 
 			delete route;
 
@@ -441,15 +452,17 @@ Route * MainWindow::createRoute(const bool direction, const SectionState state)
 
 void MainWindow::extendRoute(WidgetRoute * route)
 {
-	RailPartInfoCallback callback = [route](RailPartInfo * info)
+	RailPartInfoCallback callback = [route, this](RailPartInfo * part_info)
 	{
-		RailPart * part = info->railPart();
+		RailPart * part = part_info->railPart();
 
 		if (!route->append(part))
 		{
 			QListWidgetItem * route_item = *route;
+			QString           message    =
+				tr("Fahrstraße %1 kann nicht bis %2 erweitert werden!").arg(route_item->text()).arg(part->partName());
 
-			qWarning().noquote() << "Cannot extend route" << route_item->text() << "to" << part->partName();
+			warn(message);
 			route->dump();
 			return;
 		}
@@ -871,7 +884,7 @@ void MainWindow::startBeermode(const bool dir)
 		}
 		else
 		{
-			qInfo("No route possible! Disabling beer mode...");
+			warn(tr("Diese Fahrstraße ist nicht möglich. Der Biermodus wurde abgeschaltet."));
 			ui->actionBeermodeLeft->setChecked(false);
 			ui->actionBeermodeRight->setChecked(false);
 		}
@@ -892,6 +905,7 @@ void MainWindow::onInit()
 	RegionForm::setOpMode(ui->regionTabWidget, "I");
 	enable();
 	on_clearAllSections_clicked();
+	status_label->setText(tr("Initialisierung"));
 }
 
 void MainWindow::onOperate(const bool active)
@@ -902,6 +916,7 @@ void MainWindow::onOperate(const bool active)
 	RegionForm::setOpMode(ui->regionTabWidget, active ? "O" : "");
 	enable();
 	on_clearAllSections_clicked();
+	status_label->setText(tr("Betriebsbereit."));
 }
 
 void MainWindow::onEdit(const bool active)
@@ -912,6 +927,7 @@ void MainWindow::onEdit(const bool active)
 	BaseWidget::setVerbose(active);
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
+	status_label->setText(tr("Bearbeiten des Spurplans"));
 }
 
 void MainWindow::onManual(const bool active)
@@ -928,6 +944,7 @@ void MainWindow::onManual(const bool active)
 	}
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
+	status_label->setText(tr("Manueller Betriebsmodus"));
 }
 
 void MainWindow::onQuit(const bool active)
@@ -939,6 +956,7 @@ void MainWindow::onQuit(const bool active)
 	BaseWidget::setVerbose(false);
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
+	status_label->setText(tr("Herunterfahren..."));
 }
 
 void MainWindow::onFailed()
@@ -949,6 +967,7 @@ void MainWindow::onFailed()
 	RegionForm::setOpMode(ui->regionTabWidget, "F", BaseWidget::RED, true);
 	on_clearAllRoutes_clicked();
 	enable();
+	status_label->setText(tr("Fehlermodus"));
 }
 
 /*************************************************************************
