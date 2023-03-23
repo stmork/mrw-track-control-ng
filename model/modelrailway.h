@@ -51,6 +51,36 @@ namespace mrw::model
 	class Region;
 
 	/**
+	 * This structure containts statistics about several device counts.
+	 */
+	struct MrwStatistic
+	{
+		/** Complete Region count. */
+		size_t region_count       = 0;
+
+		/** Complete Section count. */
+		size_t section_count      = 0;
+
+		/** Complete Switch count. */
+		size_t switch_count       = 0;
+
+		/** Complete Signal count. */
+		size_t signal_count       = 0;
+
+		/** Complete main signal count. */
+		size_t main_signal_count  = 0;
+
+		/** Complete groups of Signals inside a Section count. */
+		size_t signal_group_count = 0;
+
+		/** Number of warnings during model load. */
+		size_t warnings           = 0;
+
+		/** Number of errors during model load. */
+		size_t errors             = 0;
+	};
+
+	/**
 	 * This functor class provides a hashing function for Device mapping
 	 * usage. A unique identifier for a Device consists on a Controller id
 	 * and a unit number from a Device.
@@ -111,8 +141,7 @@ namespace mrw::model
 		std::vector<Controller *>  controllers;
 		std::vector<Region *>      regions;
 
-		size_t                     warnings = 0;
-		size_t                     errors   = 0;
+		MrwStatistic               model_statistics;
 
 	public:
 		explicit ModelRailway(const QString & filename);
@@ -310,6 +339,13 @@ namespace mrw::model
 			}
 		}
 
+		/**
+		 * This method returns statistics about the loaded model railway.
+		 *
+		 * @return The reference to the statistics.
+		 */
+		const MrwStatistic & statistics() const;
+
 	private:
 		static QString  type(const QDomElement & node);
 		static bool     boolean(const QDomElement & node, const char * attr, const bool default_value = false);
@@ -320,6 +356,7 @@ namespace mrw::model
 		void add(Controller * controller);
 		void add(Device * device);
 		void link();
+		void initStatistics();
 
 		void xml(const QDomNode & node, const QString & indent = "") const;
 	};

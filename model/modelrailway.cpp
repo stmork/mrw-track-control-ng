@@ -11,6 +11,7 @@
 #include "model/modelrailway.h"
 #include "model/assemblypart.h"
 #include "model/abstractswitch.h"
+#include "model/signal.h"
 
 using namespace mrw::can;
 using namespace mrw::model;
@@ -26,6 +27,7 @@ ModelRailway::ModelRailway(const QString & filename)
 
 		create();
 		link();
+		initStatistics();
 	}
 }
 
@@ -110,6 +112,42 @@ void ModelRailway::link()
 	}
 }
 
+void ModelRailway::initStatistics()
+{
+	std::vector<AbstractSwitch *> switches;
+	std::vector<Signal *>         signal_s;
+
+	parts<AbstractSwitch>(switches);
+	parts<Signal>(signal_s);
+
+	model_statistics.region_count      = regions.size();
+	model_statistics.switch_count      = switches.size();
+	model_statistics.signal_count      = signal_s.size();
+	model_statistics.main_signal_count = std::count_if(
+				signal_s.begin(), signal_s.end(),
+				[](const Signal * signal)
+	{
+		return (signal->type() & Signal::MAIN_SIGNAL) != 0;
+	});
+
+	for (const Region * region : regions)
+	{
+		model_statistics.section_count += region->sectionCount();
+
+		for (const Section * section : region->sections)
+		{
+			if (section->getSignals(false).size() > 0)
+			{
+				model_statistics.signal_group_count++;
+			}
+			if (section->getSignals(true).size() > 0)
+			{
+				model_statistics.signal_group_count++;
+			}
+		}
+	}
+}
+
 void ModelRailway::info()
 {
 	qInfo() << *this;
@@ -180,13 +218,13 @@ QString ModelRailway::string(
 
 void ModelRailway::warning(const QString & message)
 {
-	warnings++;
+	model_statistics.warnings++;
 	qWarning().noquote() << message;
 }
 
 void ModelRailway::error(const QString & message)
 {
-	errors++;
+	model_statistics.errors++;
 	qCritical().noquote() << message;
 }
 
@@ -197,7 +235,7 @@ bool ModelRailway::valid() const
 		return controller->valid();
 	});
 
-	return ok && (errors == 0);
+	return ok && (model_statistics.errors == 0);
 }
 
 void ModelRailway::add(Controller * controller)
@@ -238,7 +276,12 @@ QString ModelRailway::toString() const
 {
 	return QString("Modelrailway %1 with %2 controllers and %3 region(s), %4 warnings and %5 errors.").
 		arg(name).arg(controllers.size()).arg(regions.size()).
-		arg(warnings).arg(errors);
+		arg(model_statistics.warnings).arg(model_statistics.errors);
+}
+
+const MrwStatistic & ModelRailway::statistics() const
+{
+	return model_statistics;
 }
 
 bool ModelRailway::boolean(const QDomElement & node, const char * attr, const bool default_value)
