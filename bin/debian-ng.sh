@@ -19,8 +19,10 @@ make -j `nproc`
 make install
 
 mkdir -p ${PREFIX}/usr/share/doc/${PACKAGE}
+mkdir -p ${PREFIX}/usr/share/applications
 mkdir ${PREFIX}/DEBIAN
 cp -a DEBIAN/control-ng  ${PREFIX}/DEBIAN/control
+cp -a *.desktop ${PREFIX}/usr/share/applications/
 
 echo "Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/" > $COPYRIGHT
 echo "Upstream-Name: $PACKAGE" >> ${COPYRIGHT}
