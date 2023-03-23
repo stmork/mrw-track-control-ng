@@ -729,6 +729,17 @@ void TestModel::testProfileLightConfig()
 	}
 }
 
+void TestModel::testStatistics()
+{
+	const MrwStatistic & statistics = model->statistics();
+
+	QCOMPARE(statistics.region_count, model->regionCount());
+	QCOMPARE(statistics.errors, 0);
+	QCOMPARE(statistics.warnings, 0);
+
+	QVERIFY(statistics.section_count > 0);
+}
+
 void TestModel::testSection(Region * region, Section * section)
 {
 	QVERIFY(section != nullptr);

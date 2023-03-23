@@ -68,6 +68,7 @@ namespace mrw::test
 		void testSwitchConfig();
 		void testSimpleLightConfig();
 		void testProfileLightConfig();
+		void testStatistics();
 	};
 }
 
