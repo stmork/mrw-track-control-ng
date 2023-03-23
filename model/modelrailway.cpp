@@ -124,8 +124,8 @@ void ModelRailway::initStatistics()
 	model_statistics.switch_count      = switches.size();
 	model_statistics.signal_count      = signal_s.size();
 	model_statistics.main_signal_count = std::count_if(
-				signal_s.begin(), signal_s.end(),
-				[](const Signal * signal)
+			signal_s.begin(), signal_s.end(),
+			[](const Signal * signal)
 	{
 		return (signal->type() & Signal::MAIN_SIGNAL) != 0;
 	});
