@@ -136,10 +136,13 @@ void ModelRailway::initStatistics()
 
 		for (const Section * section : region->sections)
 		{
+			// Backward direction
 			if (section->getSignals(false).size() > 0)
 			{
 				model_statistics.signal_group_count++;
 			}
+
+			// Forward direction
 			if (section->getSignals(true).size() > 0)
 			{
 				model_statistics.signal_group_count++;
