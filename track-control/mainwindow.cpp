@@ -76,6 +76,13 @@ MainWindow::MainWindow(
 
 	qInfo().noquote() << "Screen size: " << size;
 
+	Qt::WindowFlags window_flags = windowFlags();
+	window_flags |= Qt::WindowMinimizeButtonHint;
+	window_flags |= Qt::WindowMaximizeButtonHint;
+	window_flags |= Qt::WindowFullscreenButtonHint;
+	window_flags |= Qt::WindowSystemMenuHint;
+	setWindowFlags(window_flags);
+
 	statechart.setTimerService(&TimerService::instance());
 	statechart.setOperationCallback(this);
 	statechart.can()->setOperationCallback(&dispatcher);
