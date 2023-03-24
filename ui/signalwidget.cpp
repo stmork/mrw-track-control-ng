@@ -26,23 +26,23 @@ SignalWidget::SignalWidget(
 
 void SignalWidget::computeConnectors()
 {
-	const Bending  bending = base_controller->bending();
-	const unsigned ext     = base_controller->extensions();
+	BaseController::Status status;
 
+	base_controller->status(status);
 	connector_list.clear();
-	if ((bending != Bending::STRAIGHT) && (ext >= Position::FRACTION))
+	if ((status.bending != Bending::STRAIGHT) && (status.extensions >= Position::FRACTION))
 	{
-		if (base_controller->isDirection())
+		if (status.direction)
 		{
 			connector_list.append(QPoint(
-					Position::FRACTION + ext - Position::QUARTER,
-					bending == Bending::RIGHT ? 4 : 0));
+					Position::FRACTION + status.extensions - Position::QUARTER,
+					status.bending == Bending::RIGHT ? 4 : 0));
 		}
 		else
 		{
 			connector_list.append(QPoint(
 					Position::QUARTER,
-					bending == Bending::LEFT ? 4 : 0));
+					status.bending == Bending::LEFT ? 4 : 0));
 		}
 	}
 }
@@ -59,33 +59,24 @@ void SignalWidget::paint(QPainter & painter)
 {
 	Q_ASSERT(base_controller != nullptr);
 
-	SignalController  *  signal_controller = controller<SignalController>();
-	QPainterPath         path;
-	QPen                 pen;
-	QFont                font = painter.font();
+	QPainterPath              path;
+	QPen                      pen;
+	QFont                     font = painter.font();
+	SignalController::Status  status;
 
-	const bool           in_dir     = base_controller->isDirection();
-	const LockState      lock_state = base_controller->lock();
-	const SectionState   state      = base_controller->state();
-	const Bending        bending    = base_controller->bending();
+	controller<SignalController>()->status(status);
+
 	const Bending        do_bend    =
-		extensions() >= Position::FRACTION ? bending : Bending::STRAIGHT;
+		status.extensions >= Position::FRACTION ? status.bending : Bending::STRAIGHT;
 
-	const float          shift      = SCALE * extensions() / Position::FRACTION;
+	const float          shift      = SCALE * status.extensions / Position::FRACTION;
 	const float          border     = SCALE + shift;
 	const float          start      = SCALE - border;
 
-	const Signal::Symbol main_state    = signal_controller->main();
-	const Signal::Symbol distant_state = signal_controller->distant();
-	const Signal::Symbol shunt_state   = signal_controller->shunt();
-
-	const bool           has_main      = signal_controller->hasMain();
-	const bool           has_distant   = signal_controller->hasDistant();
-	const bool           has_shunting  = signal_controller->hasShunting();
-	const bool           pending       = lockVisible(lock_state);
+	const bool           pending       = lockVisible(status.lock_state);
 
 	// Unify coordinates
-	rescale(painter, (Position::FRACTION + extensions()) * SCALE / Position::HALF);
+	rescale(painter, (Position::FRACTION + status.extensions) * SCALE / Position::HALF);
 
 	// Draw switch name before rotating to prevent rotated font drawing.
 	prepareTextColor(painter);
@@ -95,19 +86,19 @@ void SignalWidget::paint(QPainter & painter)
 	const QString      name       = base_controller->name();
 	const float        text_width = metrics.horizontalAdvance(name) + 10;
 	const QRectF       rect(
-		in_dir ? -border : border - text_width,
-		in_dir ? -80 : 30, text_width, FONT_HEIGHT);
+		status.direction ? -border : border - text_width,
+		status.direction ? -80 : 30, text_width, FONT_HEIGHT);
 
 	painter.setFont(font);
 	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, name);
 
-	if (!in_dir)
+	if (!status.direction)
 	{
 		// Draw from left to right but rotate 180° if counter direction.
 		painter.scale(-1.0f, -1.0f);
 	}
 
-	const QColor section_color = sectionColor(state);
+	const QColor section_color = sectionColor(status.section_state);
 
 	// Draw straight part of rail
 	pen.setCapStyle(Qt::FlatCap);
@@ -115,7 +106,7 @@ void SignalWidget::paint(QPainter & painter)
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
 
-	if ((lock_state == LockState::PENDING) || (lock_state == LockState::LOCKED))
+	if ((status.lock_state == LockState::PENDING) || (status.lock_state == LockState::LOCKED))
 	{
 		painter.drawLine( -border,    0.0f, start - 25.0f, 0.0f);
 		painter.drawLine( start + 25.0f, 0.0f, do_bend == Bending::STRAIGHT ? border : border - SCALE, 0.0f);
@@ -125,7 +116,7 @@ void SignalWidget::paint(QPainter & painter)
 		{
 			drawLock(
 				painter,
-				lock_state == LockState::LOCKED ?
+				status.lock_state == LockState::LOCKED ?
 				section_color : WHITE,
 				start, 0);
 		}
@@ -152,21 +143,21 @@ void SignalWidget::paint(QPainter & painter)
 	}
 
 	// Predefine signal colors.
-	const QColor main_color    = main_state    == Symbol::GO ? GREEN : RED;
-	const QColor distant_color = distant_state == Symbol::GO ? GREEN : YELLOW;
-	const QColor shunt_color   = shunt_state   == Symbol::GO ? WHITE : RED;
+	const QColor main_color    = status.main_state    == Symbol::GO ? GREEN : RED;
+	const QColor distant_color = status.distant_state == Symbol::GO ? GREEN : YELLOW;
+	const QColor shunt_color   = status.shunt_state   == Symbol::GO ? WHITE : RED;
 
 	// My change later depending on signal combinations.
 	QColor       mast_color    = RED;
 	bool         draw_shunt    = false;
 	bool         draw_distant  = false;
 
-	if (has_main)
+	if (status.has_main)
 	{
 		mast_color = main_color;
-		if (main_state == Signal::Symbol::GO)
+		if (status.main_state == Signal::Symbol::GO)
 		{
-			draw_distant = has_distant;
+			draw_distant = status.has_distant;
 			if (draw_distant)
 			{
 				mast_color = distant_color;
@@ -174,14 +165,14 @@ void SignalWidget::paint(QPainter & painter)
 		}
 		else
 		{
-			draw_shunt = has_shunting;
+			draw_shunt = status.has_shunting;
 		}
 	}
 	else
 	{
-		if (!has_shunting || (state != SHUNTING) || (shunt_state != Symbol::GO))
+		if (!status.has_shunting || (status.section_state != SHUNTING) || (status.shunt_state != Symbol::GO))
 		{
-			draw_distant = has_distant;
+			draw_distant = status.has_distant;
 		}
 
 		if (draw_distant)
@@ -190,7 +181,7 @@ void SignalWidget::paint(QPainter & painter)
 		}
 		else
 		{
-			draw_shunt = has_shunting;
+			draw_shunt = status.has_shunting;
 		}
 	}
 
@@ -219,7 +210,7 @@ void SignalWidget::paint(QPainter & painter)
 		painter.fillPath(path, QBrush(distant_color));
 	}
 
-	if (has_main)
+	if (status.has_main)
 	{
 		pen.setColor(main_color);
 		pen.setWidth(1);

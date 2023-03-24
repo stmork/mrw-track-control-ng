@@ -76,9 +76,9 @@ void ControllerWidget::reposition()
 
 void ControllerWidget::extend()
 {
-	const float rel_height = height() / (1.0 + lines());
+	const float rel_height = height() / (1.0 + base_controller->lines());
 
-	setFixedWidth(rel_height * (1.0 + extensions() / Position::FRACTION));
+	setFixedWidth(rel_height * (1.0 + base_controller->extensions() / Position::FRACTION));
 
 	computeConnectors();
 }
@@ -150,8 +150,8 @@ void ControllerWidget::drawConnectors(QPainter & painter)
 		for (const QPoint & conn : connector_list)
 		{
 			const QPoint point(
-				conn.x() * width()  / ( extensions() + Position::FRACTION),
-				conn.y() * height() / ((lines() + 1.0) * Position::FRACTION));
+				conn.x() * width()  / ( base_controller->extensions() + Position::FRACTION),
+				conn.y() * height() / ((base_controller->lines() + 1.0) * Position::FRACTION));
 
 			painter.fillRect(point.x() - 2, point.y() - 2, 5, 5, Qt::magenta);
 		}

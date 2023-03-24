@@ -24,6 +24,12 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
+		struct Status : public BaseController::Status
+		{
+			bool a_ends = false;
+			bool b_ends = false;
+		};
+
 		explicit RailController(QObject * parent = nullptr);
 
 		/**
@@ -45,6 +51,8 @@ namespace mrw::ctrl
 		 * @return True if the Rail ends here.
 		 */
 		virtual bool  bEnds() const = 0;
+
+		void status(RailController::Status & status);
 	};
 }
 

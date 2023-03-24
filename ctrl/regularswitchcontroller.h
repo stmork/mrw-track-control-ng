@@ -23,6 +23,13 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
+		struct Status : public BaseSwitchController::Status
+		{
+			bool left     = false;
+			bool right    = false;
+			bool inclined = false;
+		};
+
 		explicit RegularSwitchController(QObject * parent = nullptr);
 
 		/**
@@ -52,6 +59,8 @@ namespace mrw::ctrl
 		 * @image html RSwitch_AB_IR_RUF.jpg width=50
 		 */
 		virtual bool  isInclined() const = 0;
+
+		void status(RegularSwitchController::Status & status);
 	};
 }
 

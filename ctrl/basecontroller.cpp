@@ -10,3 +10,13 @@ using namespace mrw::ctrl;
 BaseController::BaseController(QObject * parent) : QObject(parent)
 {
 }
+
+void BaseController::status(BaseController::Status & status)
+{
+	status.extensions    = extensions();
+	status.lines         = lines();
+	status.section_state = state();
+	status.bending       = bending();
+	status.lock_state    = lock();
+	status.direction     = isDirection();
+}

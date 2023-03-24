@@ -21,7 +21,15 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
+		struct Status : public BaseController::Status
+		{
+			bool right_bended         = false;
+			bool has_flank_protection = false;
+		};
+
 		explicit BaseSwitchController(QObject * parent = nullptr);
+
+		void status(BaseSwitchController::Status & status);
 
 		/**
 		 * This method returns true if the switch should be drawn right handed.

@@ -62,26 +62,21 @@ void RegularSwitchWidget::paint(QPainter & painter)
 {
 	Q_ASSERT(base_controller != nullptr);
 
-	QFont        font              = painter.font();
-	const QColor section_color     = sectionColor(base_controller->state());
-	const QColor outside_color     = sectionColor(SectionState::FREE);
+	QFont                            font = painter.font();
+	RegularSwitchController::Status  status;
 
-	const LockState    lock_state  = base_controller->lock();
-	const bool         in_dir      = base_controller->isDirection();
-	const bool         pending     = lockVisible(lock_state);
-	const bool         is_inclined =
-		controller<RegularSwitchController>()->isInclined();
-	const bool         is_right_bended  =
-		controller<RegularSwitchController>()->isRightBended();
-	const bool         flank_protection =
-		controller<BaseSwitchController>()->hasFlankProtection();
-	const bool         is_turn_out      =
-		(controller<RegularSwitchController>()->isLeft() != is_right_bended) != is_inclined;
+	controller<RegularSwitchController>()->status(status);
+
+	const QColor section_color = sectionColor(status.section_state);
+	const QColor outside_color = sectionColor(SectionState::FREE);
+
+	const bool   pending       = lockVisible(status.lock_state);
+	const bool   is_turn_out   = (status.left != status.right_bended) != status.inclined;
 
 	// Unify coordinates
-	const float x_size = Position::FRACTION + extensions();
-	const float y_size = Position::FRACTION * (1.0 + lines());
-	const float x_pos  = in_dir != is_inclined ?
+	const float x_size = Position::FRACTION + status.extensions;
+	const float y_size = Position::FRACTION * (1.0 + status.lines);
+	const float x_pos  = status.direction != status.inclined ?
 		x_size - Position::HALF :
 		Position::HALF;
 	const float y_pos  = Position::HALF;
@@ -94,20 +89,20 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	// Draw switch name before mirroring to prevent mirrored font drawing.
 	const QString name = base_controller->name();
 	const QRectF  rect(
-		in_dir == is_inclined ? -SCALE : -20,
-		in_dir == is_right_bended ? -80 : 30, 120, FONT_HEIGHT);
+		status.direction == status.inclined ? -SCALE : -20,
+		status.direction == status.right_bended ? -80 : 30, 120, FONT_HEIGHT);
 
-	prepareTextColor(painter, flank_protection);
+	prepareTextColor(painter, status.has_flank_protection);
 	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
 	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, name);
 
-	if (is_right_bended != is_inclined)
+	if (status.right_bended != status.inclined)
 	{
 		// Draw always left handed but invert vertically if right handed.
 		painter.scale( 1.0f, -1.0f);
 	}
-	if (!in_dir)
+	if (!status.direction)
 	{
 		// Draw from left to right but invert horizontally if counter direction.
 		painter.scale(-1.0f, -1.0f);
@@ -116,9 +111,9 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	// Draw point lock
 	drawLock(
 		painter,
-		lock_state == LockState::LOCKED ?
+		status.lock_state == LockState::LOCKED ?
 		section_color : WHITE,
-		is_inclined ? -5 : -45, 0);
+		status.inclined ? -5 : -45, 0);
 
 	QPen pen;
 	pen.setCapStyle(Qt::FlatCap);
@@ -127,27 +122,27 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	// Draw point part of switch
 	pen.setColor(section_color);
 	painter.setPen(pen);
-	if (is_inclined)
+	if (status.inclined)
 	{
 		drawSheared(painter, section_color, -50, 100, -85);
 	}
 	else
 	{
-		painter.drawLine(-SCALE - extensions() * SCALE * 0.5f, 0.0f, -70.0f, 0.0f);
+		painter.drawLine(-SCALE - status.extensions * SCALE * 0.5f, 0.0f, -70.0f, 0.0f);
 	}
 
 	// Draw curved part of switch
 	drawSheared(
 		painter,
 		is_turn_out ? section_color : outside_color,
-		is_inclined ? 50 : 0, -100, is_turn_out && pending ? 70 : 15);
+		status.inclined ? 50 : 0, -100, is_turn_out && pending ? 70 : 15);
 
 	// Draw straight part of switch
 	pen.setColor(!is_turn_out ? section_color : outside_color);
 	painter.setPen(pen);
 	painter.drawLine(
-		!is_turn_out && pending ? (is_inclined ? 20 : -20.0f) : 80.0f, 0.0f,
-		100.0f + extensions() * SCALE, 0.0f);
+		!is_turn_out && pending ? (status.inclined ? 20 : -20.0f) : 80.0f, 0.0f,
+		100.0f + status.extensions * SCALE, 0.0f);
 
 	// Draw connector markers
 	drawConnectors(painter);

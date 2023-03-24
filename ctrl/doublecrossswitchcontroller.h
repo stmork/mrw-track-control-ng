@@ -24,6 +24,14 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
+		struct Status : public BaseSwitchController::Status
+		{
+			mrw::model::DoubleCrossSwitch::State state;
+
+			bool                                 b_masked = false;
+			bool                                 d_masked = false;
+		};
+
 		explicit DoubleCrossSwitchController(QObject * parent = nullptr);
 
 		virtual float extensions() const override;
@@ -34,6 +42,8 @@ namespace mrw::ctrl
 		 * @return The actual mrw::model::DoubleCrossSwitch::State.
 		 */
 		virtual mrw::model::DoubleCrossSwitch::State  switchState() const = 0;
+
+		void status(DoubleCrossSwitchController::Status & status);
 	};
 }
 

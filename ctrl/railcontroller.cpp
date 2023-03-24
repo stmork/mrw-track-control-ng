@@ -11,3 +11,11 @@ RailController::RailController(QObject * parent) :
 	BaseController(parent)
 {
 }
+
+void RailController::status(RailController::Status & status)
+{
+	BaseController::status(status);
+
+	status.a_ends = aEnds();
+	status.b_ends = bEnds();
+}

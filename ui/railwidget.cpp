@@ -23,24 +23,23 @@ RailWidget::RailWidget(
 
 void RailWidget::computeConnectors()
 {
-	const Bending  bending = base_controller->bending();
-	const unsigned ext     = base_controller->extensions();
+	RailController::Status status;
 
+	controller<RailController>()->status(status);
 	connector_list.clear();
-	if ((bending != Bending::STRAIGHT) &&
-		(!controller<RailController>()->aEnds()))
+	if ((status.bending != Bending::STRAIGHT) && (!status.a_ends))
 	{
-		if (base_controller->isDirection())
+		if (status.direction)
 		{
 			connector_list.append(QPoint(
 					Position::QUARTER,
-					bending == Bending::LEFT ? 4 * (1 + lines()) : 0));
+					status.bending == Bending::LEFT ? 4 * (1 + status.lines) : 0));
 		}
 		else
 		{
 			connector_list.append(QPoint(
-					Position::FRACTION + ext - Position::QUARTER,
-					bending == Bending::RIGHT ? 4 * (1 + lines()) : 0));
+					Position::FRACTION + status.extensions - Position::QUARTER,
+					status.bending == Bending::RIGHT ? 4 * (1 + status.lines) : 0));
 		}
 	}
 }
@@ -49,26 +48,24 @@ void RailWidget::paint(QPainter & painter)
 {
 	Q_ASSERT(base_controller != nullptr);
 
-	QPainterPath path;
-	QPen         pen;
-	QFont        font = painter.font();
+	QPainterPath            path;
+	QPen                    pen;
+	QFont                   font = painter.font();
+	RailController::Status  status;
 
-	const float        border     = -SCALE - extensions() * SCALE / Position::HALF;
-	const bool         a_ends     = controller<RailController>()->aEnds();
-	const bool         b_ends     = controller<RailController>()->bEnds();
-	const bool         in_dir     = base_controller->isDirection();
-	const SectionState state      = base_controller->state();
-	const Bending      bending    = base_controller->bending();
-	const float        text_width = extensions() <= 2 ? 120 : 160;
-	const bool         do_bend    = (bending != Bending::STRAIGHT) && (!a_ends);
+	controller<RailController>()->status(status);
+
+	const float        border     = -SCALE - status.extensions * SCALE / Position::HALF;
+	const float        text_width = status.extensions <= 2 ? 120 : 160;
+	const bool         do_bend    = (status.bending != Bending::STRAIGHT) && (!status.a_ends);
 
 	// Unify coordinates
-	const float x_size = Position::FRACTION + extensions();
-	const float y_size = Position::FRACTION * (1.0 + lines());
-	const float x_pos  = in_dir ?
+	const float x_size = Position::FRACTION + status.extensions;
+	const float y_size = Position::FRACTION * (1.0 + status.lines);
+	const float x_pos  = status.direction ?
 		x_size - Position::HALF :
 		Position::HALF;
-	const float y_pos  = (bending != Bending::LEFT) == in_dir ?
+	const float y_pos  = (status.bending != Bending::LEFT) == status.direction ?
 		y_size - Position::HALF :
 		Position::HALF;
 
@@ -80,25 +77,25 @@ void RailWidget::paint(QPainter & painter)
 	// Draw rail name before mirroring to prevent mirrored font drawing.
 	const QString name = base_controller->name();
 	const QRectF  rect(
-		(in_dir == (bending != Bending::STRAIGHT)) || a_ends ? SCALE - text_width : -SCALE,
-		in_dir == (bending != Bending::LEFT) ? 30 : -80, text_width, FONT_HEIGHT);
+		(status.direction == (status.bending != Bending::STRAIGHT)) || status.a_ends ? SCALE - text_width : -SCALE,
+		(status.direction == (status.bending != Bending::LEFT)) ? 30 : -80, text_width, FONT_HEIGHT);
 
 	prepareTextColor(painter);
 	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
 	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, name);
 
-	if (!in_dir)
+	if (!status.direction)
 	{
 		painter.scale(-1.0f, -1.0f);
 	}
 
-	const float y_offset = SCALE * (1.0 + lines() * 2.0);
+	const float y_offset = SCALE * (1.0 + status.lines * 2.0);
 	const float x_offset = y_offset / RAIL_SLOPE + SCALE / Position::HALF;
 
 	// Straight rail drawing
 	pen.setCapStyle(Qt::FlatCap);
-	pen.setColor(sectionColor(state));
+	pen.setColor(sectionColor(status.section_state));
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
 	painter.drawLine(
@@ -110,7 +107,7 @@ void RailWidget::paint(QPainter & painter)
 		const float height = y_offset + RAIL_WIDTH / 2;
 		const float x      = border + SCALE / Position::HALF;
 
-		if (bending == Bending::LEFT)
+		if (status.bending == Bending::LEFT)
 		{
 			drawSheared(painter, pen.color(), x,  y_offset, -height,  RAIL_SLOPE);
 		}
@@ -121,11 +118,11 @@ void RailWidget::paint(QPainter & painter)
 	}
 
 	// Bended end of rail drawing
-	if (a_ends || b_ends)
+	if (status.a_ends || status.b_ends)
 	{
-		const float x = b_ends ? SCALE : -border;
+		const float x = status.b_ends ? SCALE : -border;
 
-		if (a_ends)
+		if (status.a_ends)
 		{
 			// Draw from left to right but invert horizontally if counter direction.
 			painter.scale(-1.0f, 1.0f);

@@ -70,6 +70,16 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
+		struct Status
+		{
+			float                           extensions;
+			float                           lines;
+			mrw::model::SectionState        section_state;
+			mrw::model::Position::Bending   bending;
+			mrw::model::Device::LockState   lock_state;
+			bool                            direction;
+		};
+
 		explicit BaseController(QObject * parent = nullptr);
 
 		/**
@@ -160,6 +170,8 @@ namespace mrw::ctrl
 		 * @see mrw::model::Device::lock()
 		 */
 		virtual mrw::model::Device::LockState lock() const = 0;
+
+		void status(BaseController::Status & status);
 
 		/**
 		 * This method returns the bending nature of the

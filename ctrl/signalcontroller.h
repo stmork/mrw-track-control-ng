@@ -28,6 +28,18 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
+		struct Status : public BaseController::Status
+		{
+			mrw::model::Signal::Symbol main_state    = mrw::model::Signal::Symbol::OFF;
+			mrw::model::Signal::Symbol distant_state = mrw::model::Signal::Symbol::OFF;
+			mrw::model::Signal::Symbol shunt_state   = mrw::model::Signal::Symbol::OFF;
+
+			bool                       has_main      = false;
+			bool                       has_distant   = false;
+			bool                       has_shunting  = false;
+
+		};
+
 		explicit SignalController(QObject * parent = nullptr);
 
 		/**
@@ -89,6 +101,8 @@ namespace mrw::ctrl
 		 * @see mrw::model::Signal::Symbol
 		 */
 		virtual mrw::model::Signal::Symbol main()        const = 0;
+
+		void status(SignalController::Status & status);
 	};
 }
 

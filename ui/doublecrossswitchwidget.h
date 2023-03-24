@@ -52,11 +52,10 @@ namespace mrw::ui
 		virtual bool isLockPending() const override;
 
 	private:
-		bool isA() const;
-		bool isB() const;
-		bool isC() const;
-		bool isD() const;
-		unsigned switchState() const;
+		bool isA(const mrw::ctrl::DoubleCrossSwitchController::Status & status) const;
+		bool isB(const mrw::ctrl::DoubleCrossSwitchController::Status & status) const;
+		bool isC(const mrw::ctrl::DoubleCrossSwitchController::Status & status) const;
+		bool isD(const mrw::ctrl::DoubleCrossSwitchController::Status & status) const;
 	};
 }
 

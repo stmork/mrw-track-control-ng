@@ -11,3 +11,11 @@ BaseSwitchController::BaseSwitchController(QObject * parent) :
 	BaseController(parent)
 {
 }
+
+void BaseSwitchController::status(BaseSwitchController::Status & status)
+{
+	BaseController::status(status);
+
+	status.right_bended         = isRightBended();
+	status.has_flank_protection = hasFlankProtection();
+}

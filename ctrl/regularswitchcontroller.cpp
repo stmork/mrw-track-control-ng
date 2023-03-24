@@ -11,3 +11,12 @@ RegularSwitchController::RegularSwitchController(QObject * parent) :
 	BaseSwitchController(parent)
 {
 }
+
+void RegularSwitchController::status(RegularSwitchController::Status & status)
+{
+	BaseSwitchController::status(status);
+
+	status.left     = isLeft();
+	status.right    = isRight();
+	status.inclined = isInclined();
+}
