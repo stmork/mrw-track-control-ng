@@ -48,9 +48,11 @@ bool DoubleCrossSwitchControllerMock::isDirection() const
 	return !a_is_dir;
 }
 
-QString DoubleCrossSwitchControllerMock::name() const
+const QString & DoubleCrossSwitchControllerMock::name() const
 {
-	return "819";
+	static const QString switch_name("819");
+
+	return switch_name;
 }
 
 SectionState DoubleCrossSwitchControllerMock::state() const

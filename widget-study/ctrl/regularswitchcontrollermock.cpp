@@ -101,9 +101,11 @@ bool RegularSwitchControllerMock::isDirection() const
 	return !a_is_dir;
 }
 
-QString RegularSwitchControllerMock::name() const
+const QString & RegularSwitchControllerMock::name() const
 {
-	return "819";
+	static const QString switch_name("819");
+
+	return switch_name;
 }
 
 float RegularSwitchControllerMock::extensions() const

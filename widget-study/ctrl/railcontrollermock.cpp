@@ -49,9 +49,11 @@ void RailControllerMock::setBending(const Bending bending)
 	emit update();
 }
 
-QString RailControllerMock::name() const
+const QString & RailControllerMock::name() const
 {
-	return "301";
+	static const QString rail_name("301");
+
+	return rail_name;
 }
 
 SectionState RailControllerMock::state() const

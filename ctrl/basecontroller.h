@@ -77,6 +77,13 @@ namespace mrw::ctrl
 		struct Status
 		{
 			/**
+			 * he name of the controlled mrw::model::Device.
+			 *
+			 * @see BaseController::name()
+			 */
+			QString                         name;
+
+			/**
 			 * The extension count of the controlled mrw::model::AssemblyPart.
 			 *
 			 * @see BaseController::extensions()
@@ -129,7 +136,7 @@ namespace mrw::ctrl
 		 *
 		 * @return The name of the controlled mrw::model::Device.
 		 */
-		virtual QString name() const = 0;
+		virtual const QString & name() const = 0;
 
 		/**
 		 * This method returns the extensions of the controlled

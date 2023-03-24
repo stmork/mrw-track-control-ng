@@ -158,7 +158,7 @@ float SignalControllerMock::extensions() const
 	return extension;
 }
 
-QString SignalControllerMock::name() const
+const QString & SignalControllerMock::name() const
 {
 	QStringList result;
 
@@ -176,5 +176,7 @@ QString SignalControllerMock::name() const
 	{
 		result += "i3";
 	}
-	return result.join('/');
+
+	signal_name = result.join('/');
+	return signal_name;
 }

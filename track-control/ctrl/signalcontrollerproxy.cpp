@@ -271,7 +271,7 @@ void SignalControllerProxy::setState(SectionState new_state)
 **                                                                      **
 *************************************************************************/
 
-QString SignalControllerProxy::name() const
+const QString & SignalControllerProxy::name() const
 {
 #ifdef VERBOSE
 	return grouped_name;

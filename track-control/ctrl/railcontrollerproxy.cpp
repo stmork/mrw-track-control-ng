@@ -20,7 +20,7 @@ RailControllerProxy::RailControllerProxy(
 {
 }
 
-QString RailControllerProxy::name() const
+const QString & RailControllerProxy::name() const
 {
 	return rail->partName();
 }

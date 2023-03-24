@@ -98,7 +98,7 @@ void DoubleCrossSwitchControllerProxy::turnRight()
 	emit turn();
 }
 
-QString DoubleCrossSwitchControllerProxy::name() const
+const QString & DoubleCrossSwitchControllerProxy::name() const
 {
 	return part->name();
 }

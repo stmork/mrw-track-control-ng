@@ -146,7 +146,7 @@ void SectionController::dec()
 	decrease();
 }
 
-QString SectionController::name() const
+const QString & SectionController::name() const
 {
 	return ctrl_section->name();
 }

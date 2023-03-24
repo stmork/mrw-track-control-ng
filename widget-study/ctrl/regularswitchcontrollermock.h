@@ -41,12 +41,12 @@ namespace mrw::ctrl
 	private:
 
 		// Implementations from BaseController
-		virtual QString name() const override;
-		virtual bool    isDirection() const override;
-		virtual float   extensions() const override;
+		virtual const QString & name()        const override;
+		virtual bool            isDirection() const override;
+		virtual float           extensions()  const override;
 
-		virtual mrw::model::SectionState      state() const override;
-		virtual mrw::model::Device::LockState lock() const override;
+		virtual mrw::model::SectionState      state()   const override;
+		virtual mrw::model::Device::LockState lock()    const override;
 		virtual mrw::model::Position::Bending bending() const override;
 
 		// Implementations from BaseSwitchController

@@ -72,7 +72,7 @@ namespace mrw::util
 		 *
 		 * @return The clear text of this BatchParticipant.
 		 */
-		virtual QString name() const = 0;
+		virtual const QString & name() const = 0;
 	};
 }
 

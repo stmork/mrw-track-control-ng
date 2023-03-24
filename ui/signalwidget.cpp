@@ -66,14 +66,12 @@ void SignalWidget::paint(QPainter & painter)
 
 	controller<SignalController>()->status(status);
 
-	const Bending        do_bend    =
+	const float   shift   = SCALE * status.extensions / Position::FRACTION;
+	const float   border  = SCALE + shift;
+	const float   start   = SCALE - border;
+	const bool    pending = lockVisible(status.lock_state);
+	const Bending do_bend =
 		status.extensions >= Position::FRACTION ? status.bending : Bending::STRAIGHT;
-
-	const float          shift      = SCALE * status.extensions / Position::FRACTION;
-	const float          border     = SCALE + shift;
-	const float          start      = SCALE - border;
-
-	const bool           pending       = lockVisible(status.lock_state);
 
 	// Unify coordinates
 	rescale(painter, (Position::FRACTION + status.extensions) * SCALE / Position::HALF);
@@ -83,14 +81,13 @@ void SignalWidget::paint(QPainter & painter)
 	font.setPixelSize(FONT_SIZE);
 
 	const QFontMetrics metrics(font);
-	const QString      name       = base_controller->name();
-	const float        text_width = metrics.horizontalAdvance(name) + 10;
+	const float        text_width = metrics.horizontalAdvance(status.name) + 10;
 	const QRectF       rect(
 		status.direction ? -border : border - text_width,
 		status.direction ? -80 : 30, text_width, FONT_HEIGHT);
 
 	painter.setFont(font);
-	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, name);
+	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, status.name);
 
 	if (!status.direction)
 	{

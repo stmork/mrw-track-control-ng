@@ -55,9 +55,9 @@ void RailWidget::paint(QPainter & painter)
 
 	controller<RailController>()->status(status);
 
-	const float        border     = -SCALE - status.extensions * SCALE / Position::HALF;
-	const float        text_width = status.extensions <= 2 ? 120 : 160;
-	const bool         do_bend    = (status.bending != Bending::STRAIGHT) && (!status.a_ends);
+	const float border     = -SCALE - status.extensions * SCALE / Position::HALF;
+	const float text_width = status.extensions <= 2 ? 120 : 160;
+	const bool  do_bend    = (status.bending != Bending::STRAIGHT) && (!status.a_ends);
 
 	// Unify coordinates
 	const float x_size = Position::FRACTION + status.extensions;
@@ -75,7 +75,6 @@ void RailWidget::paint(QPainter & painter)
 		x_pos * width() / x_size, y_pos * height() / y_size);
 
 	// Draw rail name before mirroring to prevent mirrored font drawing.
-	const QString name = base_controller->name();
 	const QRectF  rect(
 		(status.direction == (status.bending != Bending::STRAIGHT)) || status.a_ends ? SCALE - text_width : -SCALE,
 		(status.direction == (status.bending != Bending::LEFT)) ? 30 : -80, text_width, FONT_HEIGHT);
@@ -83,7 +82,7 @@ void RailWidget::paint(QPainter & painter)
 	prepareTextColor(painter);
 	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
-	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, name);
+	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, status.name);
 
 	if (!status.direction)
 	{

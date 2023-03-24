@@ -63,7 +63,7 @@ public:
 	{
 	}
 
-	virtual QString name() const override
+	virtual const QString & name() const override
 	{
 		return label;
 	}

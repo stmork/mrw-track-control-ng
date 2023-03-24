@@ -93,10 +93,10 @@ namespace mrw::ctrl
 		void setLockState(mrw::model::Device::LockState lock_state);
 
 		// Implementations from BaseController
-		virtual QString name() const override;
-		virtual float   extensions() const override;
-		virtual bool    isDirection() const override;
-		virtual bool    isExpandable() const override;
+		virtual const QString & name()         const override;
+		virtual float           extensions()   const override;
+		virtual bool            isDirection()  const override;
+		virtual bool            isExpandable() const override;
 
 		virtual mrw::model::Position     *    position() const override;
 		virtual mrw::model::SectionState      state() const override;

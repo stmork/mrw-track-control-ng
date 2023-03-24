@@ -95,7 +95,7 @@ void RegularSwitchControllerProxy::turnRight()
 	emit turn();
 }
 
-QString RegularSwitchControllerProxy::name() const
+const QString & RegularSwitchControllerProxy::name() const
 {
 	return part->name();
 }

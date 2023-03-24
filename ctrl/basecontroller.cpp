@@ -13,6 +13,7 @@ BaseController::BaseController(QObject * parent) : QObject(parent)
 
 void BaseController::status(BaseController::Status & status) const
 {
+	status.name          = name();
 	status.extensions    = extensions();
 	status.lines         = lines();
 	status.section_state = state();

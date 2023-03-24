@@ -88,7 +88,6 @@ void RegularSwitchWidget::paint(QPainter & painter)
 		x_pos * width() / x_size, y_pos * height() / y_size);
 
 	// Draw switch name before mirroring to prevent mirrored font drawing.
-	const QString name = base_controller->name();
 	const QRectF  rect(
 		status.direction == status.inclined ? -SCALE : -20,
 		status.direction == status.right_bended ? -80 : 30, 120, FONT_HEIGHT);
@@ -96,7 +95,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	prepareTextColor(painter, status.has_flank_protection);
 	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
-	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, name);
+	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, status.name);
 
 	if (status.right_bended != status.inclined)
 	{
