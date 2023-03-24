@@ -213,13 +213,16 @@ QWidget * SignalStudy::widget() const
 
 QString SignalStudy::name() const
 {
+	SignalController::Status status;
+
+	mock.status(status);
 	return QString("Signal__%1%2%3_%4%5%6").
-		arg(code(mock.hasMain(), mock.main())).
-		arg(code(mock.hasDistant(), mock.distant())).
-		arg(code(mock.hasShunting(), mock.shunt())).
-		arg(direction(mock.isDirection())).
-		arg(lockState(mock.lock())).
-		arg(sectionState(mock.state()));
+		arg(code(status.has_main,     status.main_state)).
+		arg(code(status.has_distant,  status.distant_state)).
+		arg(code(status.has_shunting, status.shunt_state)).
+		arg(direction(status.direction)).
+		arg(lockState(status.lock_state)).
+		arg(sectionState(status.section_state));
 }
 
 QString SignalStudy::code(const bool valid, const Signal::Symbol & symbol)

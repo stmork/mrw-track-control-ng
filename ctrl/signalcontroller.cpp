@@ -12,7 +12,7 @@ SignalController::SignalController(QObject * parent) :
 {
 }
 
-void SignalController::status(SignalController::Status & status)
+void SignalController::status(SignalController::Status & status) const
 {
 	BaseController::status(status);
 

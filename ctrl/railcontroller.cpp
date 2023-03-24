@@ -12,7 +12,7 @@ RailController::RailController(QObject * parent) :
 {
 }
 
-void RailController::status(RailController::Status & status)
+void RailController::status(RailController::Status & status) const
 {
 	BaseController::status(status);
 

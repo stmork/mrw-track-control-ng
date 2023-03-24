@@ -28,19 +28,75 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
+		/**
+		 * This struct contains the complete Status of this SignalController
+		 * instance including the BaseController::Status.
+		 */
 		struct Status : public BaseController::Status
 		{
+			/**
+			 * The mrw::model::Signal::Symbol representing this
+			 * main mrw::model::Signal.
+			 *
+			 * @see SignalController::main()
+			 */
 			mrw::model::Signal::Symbol main_state    = mrw::model::Signal::Symbol::OFF;
+
+			/**
+			 * The mrw::model::Signal::Symbol representing this distant
+			 * mrw::model::Signal.
+			 *
+			 * @see SignalController::distant()
+			 */
 			mrw::model::Signal::Symbol distant_state = mrw::model::Signal::Symbol::OFF;
+
+			/**
+			 * The mrw::model::Signal::Symbol representing this shunting
+			 * mrw::model::Signal.
+			 *
+			 * @see SignalController::shunt()
+			 */
 			mrw::model::Signal::Symbol shunt_state   = mrw::model::Signal::Symbol::OFF;
 
+			/**
+			 * True if this mrw::model::Signal group contains a main
+			 * mrw::model::Signal.
+			 *
+			 * @see SignalController::hasMain()
+			 */
 			bool                       has_main      = false;
-			bool                       has_distant   = false;
-			bool                       has_shunting  = false;
 
+			/**
+			 * True if this mrw::model::Signal group contains a distant
+			 * mrw::model::Signal.
+			 *
+			 * @see SignalController::hasDistant()
+			 */
+			bool                       has_distant   = false;
+
+			/**
+			 * True if this mrw::model::Signal group contains a shunting
+			 * mrw::model::Signal.
+			 *
+			 * @see SignalController::hasShunting()
+			 */
+			bool                       has_shunting  = false;
 		};
 
 		explicit SignalController(QObject * parent = nullptr);
+
+		/**
+		 * This method returns the complete Status of this SignalController
+		 * instance.
+		 *
+		 * @note This method calls the base class method
+		 * BaseController::status() method.
+		 *
+		 * @param status The Status struct to fill.
+		 */
+		void status(SignalController::Status & status) const;
+
+	private:
 
 		/**
 		 * This method returns true if this mrw::model::Signal group contains a
@@ -101,8 +157,6 @@ namespace mrw::ctrl
 		 * @see mrw::model::Signal::Symbol
 		 */
 		virtual mrw::model::Signal::Symbol main()        const = 0;
-
-		void status(SignalController::Status & status);
 	};
 }
 

@@ -21,15 +21,28 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
+		/**
+		 * This struct contains the complete Status of this BaseSwitchController
+		 * instance including the BaseController::Status.
+		 */
 		struct Status : public BaseController::Status
 		{
+			/**
+			 * True if the switch should be drawn right <em>bended</em>.
+			 *
+			 * @see BaseSwitchController::isRightBended()
+			 */
 			bool right_bended         = false;
+
+			/**
+			 * True if flank protection is assured.
+			 *
+			 * @see BaseSwitchController::hasFlankProtection()
+			 */
 			bool has_flank_protection = false;
 		};
 
 		explicit BaseSwitchController(QObject * parent = nullptr);
-
-		void status(BaseSwitchController::Status & status);
 
 		/**
 		 * This method returns true if the switch should be drawn right handed.
@@ -45,6 +58,19 @@ namespace mrw::ctrl
 		 * @see mrw::model::Position::setBending()
 		 */
 		virtual bool  isRightBended() const = 0;
+
+		/**
+		 * This method returns the complete Status of this BaseSwitchController
+		 * instance.
+		 *
+		 * @note This method calls the base class method
+		 * BaseController::status() method.
+		 *
+		 * @param status The Status struct to fill.
+		 */
+		void status(BaseSwitchController::Status & status) const;
+
+	private:
 
 		/**
 		 * This method computes if any flank protection is active for this

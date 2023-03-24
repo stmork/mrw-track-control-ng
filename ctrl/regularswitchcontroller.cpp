@@ -12,11 +12,13 @@ RegularSwitchController::RegularSwitchController(QObject * parent) :
 {
 }
 
-void RegularSwitchController::status(RegularSwitchController::Status & status)
+void RegularSwitchController::status(RegularSwitchController::Status & status) const
 {
 	BaseSwitchController::status(status);
 
 	status.left     = isLeft();
 	status.right    = isRight();
 	status.inclined = isInclined();
+
+	Q_ASSERT(status.left != status.right);
 }

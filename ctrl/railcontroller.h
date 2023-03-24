@@ -24,13 +24,41 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
+		/**
+		 * This struct contains the complete Status of this RailController
+		 * instance including the BaseController::Status.
+		 */
 		struct Status : public BaseController::Status
 		{
+			/**
+			 * True if the Rail ends here at the <em>a</em> connection.
+			 *
+			 * @see RailController::aEnds()
+			 */
 			bool a_ends = false;
+
+			/**
+			 * True if the Rail ends here at the <em>b</em> connection.
+			 *
+			 * @see RailController::bEnds()
+			 */
 			bool b_ends = false;
 		};
 
 		explicit RailController(QObject * parent = nullptr);
+
+		/**
+		 * This method returns the complete Status of this RailController
+		 * instance.
+		 *
+		 * @note This method calls the base class method
+		 * BaseController::status() method.
+		 *
+		 * @param status The Status struct to fill.
+		 */
+		void status(RailController::Status & status) const;
+
+	private:
 
 		/**
 		 * The @c a connector does not have any further mrw::model::RailPart
@@ -38,7 +66,7 @@ namespace mrw::ctrl
 		 *
 		 * @note Only one of the methods aEnds() and bEnds() may return true.
 		 *
-		 * @return True if the Rail ends here.
+		 * @return True if the Rail ends here at the <em>a</em> connection.
 		 */
 		virtual bool  aEnds() const = 0;
 
@@ -48,11 +76,9 @@ namespace mrw::ctrl
 		 *
 		 * @note Only one of the methods aEnds() and bEnds() may return true.
 		 *
-		 * @return True if the Rail ends here.
+		 * @return True if the Rail ends here at the <em>b</em> connection.
 		 */
 		virtual bool  bEnds() const = 0;
-
-		void status(RailController::Status & status);
 	};
 }
 

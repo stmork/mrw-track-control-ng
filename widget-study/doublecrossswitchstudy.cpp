@@ -195,12 +195,15 @@ QWidget * DoubleCrossSwitchStudy::widget() const
 
 QString DoubleCrossSwitchStudy::name() const
 {
+	DoubleCrossSwitchController::Status status;
+
+	mock.status(status);
 	return QString("XSwitch_%1_%2%3%4%5").
-		arg(state(mock.switchState())).
-		arg(direction(mock.isDirection())).
-		arg(lockState(mock.lock())).
-		arg(sectionState(mock.state())).
-		arg(mock.hasFlankProtection() ? "P" : "");
+		arg(state(status.state)).
+		arg(direction(status.direction)).
+		arg(lockState(status.lock_state)).
+		arg(sectionState(status.section_state)).
+		arg(status.has_flank_protection ? "P" : "");
 }
 
 QString DoubleCrossSwitchStudy::state(const DoubleCrossSwitch::State & state)

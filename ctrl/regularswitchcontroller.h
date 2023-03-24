@@ -23,14 +23,49 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
+		/**
+		 * This struct contains the complete Status of this
+		 * RegularSwitchController instance including the
+		 * BaseSwitchController::Status.
+		 */
 		struct Status : public BaseSwitchController::Status
 		{
+			/**
+			 * True if the switch has been turned left. False otherwise.
+			 *
+			 * @see RegularSwitchController::isLeft()
+			 */
 			bool left     = false;
+
+			/**
+			 * True if the switch has been turned right. False otherwise.
+			 *
+			 * @see RegularSwitchController::isRight()
+			 */
 			bool right    = false;
+
+			/**
+			 * True if switch has to be drawn inclined.
+			 *
+			 * @see RegularSwitchController::isInclined()
+			 */
 			bool inclined = false;
 		};
 
 		explicit RegularSwitchController(QObject * parent = nullptr);
+
+		/**
+		 * This method returns the complete Status of this
+		 * RegularSwitchController instance.
+		 *
+		 * @note This method calls the base class method
+		 * BaseSwitchController::status() method.
+		 *
+		 * @param status The Status struct to fill.
+		 */
+		void status(RegularSwitchController::Status & status) const;
+
+	private:
 
 		/**
 		 * This method returns true if the switch has been turned left.
@@ -59,8 +94,6 @@ namespace mrw::ctrl
 		 * @image html RSwitch_AB_IR_RUF.jpg width=50
 		 */
 		virtual bool  isInclined() const = 0;
-
-		void status(RegularSwitchController::Status & status);
 	};
 }
 

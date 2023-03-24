@@ -37,6 +37,13 @@ namespace mrw::ctrl
 	public:
 		explicit SignalControllerMock(QObject * parent = nullptr);
 
+		void setDirection(const bool dir = true);
+		void setSectionState(const mrw::model::SectionState state);
+		void setLock(const mrw::model::Device::LockState lock);
+		void setBending(const mrw::model::Position::Bending bending);
+
+	private:
+
 		// Implementations from BaseController
 		virtual QString name() const override;
 		virtual float   extensions() const override;
@@ -54,11 +61,6 @@ namespace mrw::ctrl
 		virtual mrw::model::Signal::Symbol main()    const override;
 		virtual mrw::model::Signal::Symbol distant() const override;
 		virtual mrw::model::Signal::Symbol shunt()   const override;
-
-		void setDirection(const bool dir = true);
-		void setSectionState(const mrw::model::SectionState state);
-		void setLock(const mrw::model::Device::LockState lock);
-		void setBending(const mrw::model::Position::Bending bending);
 
 	signals:
 		void extend();

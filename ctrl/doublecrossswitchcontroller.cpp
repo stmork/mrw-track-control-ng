@@ -18,7 +18,7 @@ float DoubleCrossSwitchController::extensions() const
 	return 0.0;
 }
 
-void DoubleCrossSwitchController::status(DoubleCrossSwitchController::Status & status)
+void DoubleCrossSwitchController::status(DoubleCrossSwitchController::Status & status) const
 {
 	BaseSwitchController::status(status);
 

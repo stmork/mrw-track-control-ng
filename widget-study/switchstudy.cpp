@@ -184,14 +184,17 @@ QWidget * SwitchStudy::widget() const
 
 QString SwitchStudy::name() const
 {
+	RegularSwitchController::Status status;
+
+	mock.status(status);
 	return QString("RSwitch_%1_%2%3_%4%5%6%7").
-		arg(state(mock.isLeft())).
-		arg(mock.isInclined() ? 'I' : 'n').
-		arg(mock.isRightBended() ? 'R' : 'L').
-		arg(direction(mock.isDirection())).
-		arg(lockState(mock.lock())).
-		arg(sectionState(mock.state())).
-		arg(mock.hasFlankProtection() ? "P" : "");
+		arg(state(status.left)).
+		arg(status.inclined ? 'I' : 'n').
+		arg(status.right_bended ? 'R' : 'L').
+		arg(direction(status.direction)).
+		arg(lockState(status.lock_state)).
+		arg(sectionState(status.section_state)).
+		arg(status.has_flank_protection ? "P" : "");
 }
 
 QString SwitchStudy::state(const bool is_left)

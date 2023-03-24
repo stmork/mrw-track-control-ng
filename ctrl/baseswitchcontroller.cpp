@@ -12,7 +12,7 @@ BaseSwitchController::BaseSwitchController(QObject * parent) :
 {
 }
 
-void BaseSwitchController::status(BaseSwitchController::Status & status)
+void BaseSwitchController::status(BaseSwitchController::Status & status) const
 {
 	BaseController::status(status);
 

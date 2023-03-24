@@ -38,6 +38,8 @@ namespace mrw::ctrl
 		void setSectionState(const mrw::model::SectionState state);
 		void setLock(const mrw::model::Device::LockState lock);
 
+	private:
+
 		// Implementations from BaseController
 		virtual QString name() const override;
 		virtual bool    isDirection() const override;

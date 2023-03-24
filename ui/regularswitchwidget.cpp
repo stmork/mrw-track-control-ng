@@ -25,14 +25,15 @@ RegularSwitchWidget::RegularSwitchWidget(
 
 void RegularSwitchWidget::computeConnectors()
 {
-	RegularSwitchController * ctrl = controller<RegularSwitchController>();
+	RegularSwitchController::Status status;
 
+	controller<RegularSwitchController>()->status(status);
 	connector_list.clear();
-	if (ctrl->isInclined())
+	if (status.inclined)
 	{
-		const int ext = ctrl->isDirection() ? 0 : ctrl->extensions();
+		const int ext = status.direction ? 0 : status.extensions;
 
-		if (ctrl->isRightBended())
+		if (status.right_bended)
 		{
 			connector_list.append(QPoint(3 + ext, 0));
 			connector_list.append(QPoint(1 + ext, 4));
@@ -45,9 +46,9 @@ void RegularSwitchWidget::computeConnectors()
 	}
 	else
 	{
-		const int ext = ctrl->isDirection() ? ctrl->extensions() : 0;
+		const int ext = status.direction ? status.extensions : 0;
 
-		if (ctrl->isDirection() != ctrl->isRightBended())
+		if (status.direction != status.right_bended)
 		{
 			connector_list.append(QPoint(2 + ext, 0));
 		}

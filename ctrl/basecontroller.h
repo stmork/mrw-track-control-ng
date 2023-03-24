@@ -70,13 +70,55 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	public:
+		/**
+		 * This struct contains the complete Status of this BaseController
+		 * instance.
+		 */
 		struct Status
 		{
+			/**
+			 * The extension count of the controlled mrw::model::AssemblyPart.
+			 *
+			 * @see BaseController::extensions()
+			 */
 			float                           extensions;
+
+			/**
+			 * The multiple height of the widget.
+			 *
+			 * @see BaseController::lines()
+			 */
 			float                           lines;
+
+			/**
+			 * The corresponding mrw::model::SectionState.
+			 *
+			 * @see BaseController::state()
+			 */
 			mrw::model::SectionState        section_state;
+
+			/**
+			 * The rendering hint concerning the mrw::model::AssemblyPart to be
+			 * rendered.
+			 *
+			 * @see BaseController::bending()
+			 */
 			mrw::model::Position::Bending   bending;
+
+			/**
+			 * The mrw::model::Device::LockState of the controlled
+			 * mrw::model::Device.
+			 *
+			 * @see BaseController::lock()
+			 */
 			mrw::model::Device::LockState   lock_state;
+
+			/**
+			 * True if the mrw::model::AssemblyPart is orientated left to
+			 * right.
+			 *
+			 * @see BaseController::isDirection()
+			 */
 			bool                            direction;
 		};
 
@@ -113,17 +155,6 @@ namespace mrw::ctrl
 		}
 
 		/**
-		 * This method returns true if the mrw::model::AssemblyPart is
-		 * orientated left to right. So mrw::model::Signal instances have
-		 * isDirection == true and mrw::model::RailPart instances have their
-		 * "a" connector on the left side.
-		 *
-		 * @return True if the mrw::model::AssemblyPart is orientated left to
-		 * right.
-		 */
-		virtual bool  isDirection() const = 0;
-
-		/**
 		 * This method returns true if the controlled widget is expandable.
 		 *
 		 * @note The switches are not expandable only simple rail representing
@@ -134,6 +165,18 @@ namespace mrw::ctrl
 		{
 			return false;
 		}
+
+		/**
+		 * This method returns the modification state of the controlled
+		 * mrw::model::Device.
+		 *
+		 * @return The mrw::model::Device::LockState of the controlled
+		 * mrw::model::Device.
+		 *
+		 * @see mrw::model::Device::LockState
+		 * @see mrw::model::Device::lock()
+		 */
+		virtual mrw::model::Device::LockState lock() const = 0;
 
 		/**
 		 * This method returns the view attributes such as position, extension
@@ -148,41 +191,20 @@ namespace mrw::ctrl
 		}
 
 		/**
-		 * A controlled mrw::model::Device is always in conjunction with a
-		 * surrounding mrw::model::Section. This method returns the
-		 * mrw::model::SectionState of this mrw::model::Section.
+		 * This method returns the complete Status of this BaseController
+		 * instance.
 		 *
-		 * @note The controlled mrw::model::Device may be the
-		 * mrw::model::Section itself.
-		 *
-		 * @return The mrw::model::SectionState.
+		 * @param status The Status struct to fill.
 		 */
-
-		virtual mrw::model::SectionState state() const = 0;
-		/**
-		 * This method returns the modification state of the controlled
-		 * mrw::model::Device.
-		 *
-		 * @return The mrw::model::Device::LockState of the controlled
-		 * mrw::model::Device.
-		 *
-		 * @see mrw::model::Device::LockState
-		 * @see mrw::model::Device::lock()
-		 */
-		virtual mrw::model::Device::LockState lock() const = 0;
-
-		void status(BaseController::Status & status);
+		void status(BaseController::Status & status) const;
 
 		/**
-		 * This method returns the bending nature of the
-		 * mrw::model::AssemblyPart for rendering purposes.
+		 * This template method calls a given method of a derived controller.
 		 *
-		 * @return The rendering hint concerning the mrw::model::AssemblyPart
-		 * to be rendered.
-		 * @see mrw::model::Position::Bending
+		 * @param CTRL The derived controller class.
+		 * @param base A BaseController instance.
+		 * @param function The method to call.
 		 */
-		virtual mrw::model::Position::Bending bending() const = 0;
-
 		template <class CTRL> static void callback(
 			BaseController       *      base,
 			std::function<void(CTRL *)> function)
@@ -194,6 +216,41 @@ namespace mrw::ctrl
 				function(controller);
 			}
 		}
+
+	private:
+
+		/**
+		 * This method returns true if the mrw::model::AssemblyPart is
+		 * orientated left to right. So mrw::model::Signal instances have
+		 * isDirection == true and mrw::model::RailPart instances have their
+		 * "a" connector on the left side.
+		 *
+		 * @return True if the mrw::model::AssemblyPart is orientated left to
+		 * right.
+		 */
+		virtual bool  isDirection() const = 0;
+
+		/**
+		 * A controlled mrw::model::Device is always in conjunction with a
+		 * surrounding mrw::model::Section. This method returns the
+		 * mrw::model::SectionState of this mrw::model::Section.
+		 *
+		 * @note The controlled mrw::model::Device may be the
+		 * mrw::model::Section itself.
+		 *
+		 * @return The mrw::model::SectionState.
+		 */
+		virtual mrw::model::SectionState state() const = 0;
+
+		/**
+		 * This method returns the bending nature of the
+		 * mrw::model::AssemblyPart for rendering purposes.
+		 *
+		 * @return The rendering hint concerning the mrw::model::AssemblyPart
+		 * to be rendered.
+		 * @see mrw::model::Position::Bending
+		 */
+		virtual mrw::model::Position::Bending bending() const = 0;
 
 	signals:
 		/**

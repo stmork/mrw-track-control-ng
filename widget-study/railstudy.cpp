@@ -200,17 +200,24 @@ QWidget * RailStudy::widget() const
 
 QString RailStudy::name() const
 {
+	RailController::Status status;
+
+	mock.status(status);
 	return QString("Rail____%1%2_%3%4%5").
-		arg(code(mock.aEnds(), mock.bEnds())).
-		arg(code(mock.bending())).
-		arg(direction(mock.isDirection())).
-		arg(lockState(mock.lock())).
-		arg(sectionState(mock.state()));
+		arg(code(status.a_ends, status.b_ends)).
+		arg(code(status.bending)).
+		arg(direction(status.direction)).
+		arg(lockState(status.lock_state)).
+		arg(sectionState(status.section_state));
 }
 
 void RailStudy::updateLines(const int new_ext_lines)
 {
-	const float rel = (1.0f + new_ext_lines) / (1.0f + mock.lines());
+	RailController::Status status;
+
+	mock.status(status);
+
+	const float rel = (1.0f + new_ext_lines) / (1.0f + status.lines);
 
 	resize(ui->smallRailWidget, rel);
 	resize(ui->bigRailWidget, rel);
