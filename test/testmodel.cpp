@@ -734,8 +734,8 @@ void TestModel::testStatistics()
 	const MrwStatistic & statistics = model->statistics();
 
 	QCOMPARE(statistics.region_count, model->regionCount());
-	QCOMPARE(statistics.errors, 0);
-	QCOMPARE(statistics.warnings, 0);
+	QCOMPARE(statistics.errors,   0u);
+	QCOMPARE(statistics.warnings, 0u);
 
 	QVERIFY(statistics.section_count > 0);
 }
