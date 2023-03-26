@@ -125,8 +125,6 @@ static int testRouting()
 int main(int argc, char * argv[])
 {
 	QCoreApplication  app(argc, argv);
-	Q_UNUSED(argc)
-	Q_UNUSED(argv)
 
 	int status = 0;
 
