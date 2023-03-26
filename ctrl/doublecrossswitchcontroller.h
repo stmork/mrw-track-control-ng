@@ -43,14 +43,14 @@ namespace mrw::ctrl
 			 * DoubleCrossSwitch::State::BC or
 			 * DoubleCrossSwitch::State::BD;
 			 */
-			bool                                 b_masked = false;
+			unsigned                             b_masked = false;
 
 			/**
 			 * True if the DoubleCrossSwitch::State is
 			 * DoubleCrossSwitch::State::AD or
 			 * DoubleCrossSwitch::State::BD;
 			 */
-			bool                                 d_masked = false;
+			unsigned                             d_masked = false;
 		};
 
 		explicit DoubleCrossSwitchController(QObject * parent = nullptr);
