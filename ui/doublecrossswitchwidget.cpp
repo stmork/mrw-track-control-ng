@@ -33,19 +33,24 @@ void DoubleCrossSwitchWidget::computeConnectors()
 	}
 }
 
-void DoubleCrossSwitchWidget::paint(QPainter & painter)
+void mrw::ui::DoubleCrossSwitchWidget::prepare(mrw::ui::DoubleCrossSwitchWidget::Status & status) const
 {
 	Q_ASSERT(base_controller != nullptr);
 
-	QPen                                 pen;
-	QFont                                font = painter.font();
-	DoubleCrossSwitchController::Status  status;
-
 	controller<DoubleCrossSwitchController>()->status(status);
 
-	const QColor section_color = sectionColor(status.section_state);
-	const QColor outside_color = sectionColor(SectionState::FREE);
-	const bool   pending       = lockVisible(status.lock_state);
+	status.section_color = sectionColor(status.section_state);
+	status.outside_color = sectionColor(SectionState::FREE);
+	status.pending       = lockVisible(status.lock_state);
+}
+
+void DoubleCrossSwitchWidget::paint(QPainter & painter)
+{
+	QPen                             pen;
+	QFont                            font = painter.font();
+	DoubleCrossSwitchWidget::Status  status;
+
+	prepare(status);
 
 	rescale(painter);
 
@@ -74,8 +79,7 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	// Draw point lock
 	drawLock(
 		painter,
-		status.lock_state == LockState::LOCKED ?
-		section_color : WHITE,
+		status.lock_state == LockState::LOCKED ? status.section_color : WHITE,
 		0, 0);
 
 	pen.setCapStyle(Qt::FlatCap);
@@ -83,23 +87,23 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 
 	// Draw A segment
 	drawSheared(painter,
-		isA(status) ? section_color : outside_color, -50, -100,
-		isA(status) && pending ?  70.0f :  15.0f, -RAIL_SLOPE);
+		status.is_a ? status.section_color : status.outside_color, -50, -100,
+		status.is_a && status.pending ?  70.0f :  15.0f, -RAIL_SLOPE);
 
 	// Draw D segment
 	drawSheared(painter,
-		isD(status) ? section_color : outside_color,  50,  100,
-		isD(status) && pending  ? -70.0f : -15.0f, -RAIL_SLOPE);
+		status.is_d ? status.section_color : status.outside_color,  50,  100,
+		status.is_d && status.pending  ? -70.0f : -15.0f, -RAIL_SLOPE);
 
 	// Draw B segment
-	pen.setColor(isB(status) ? section_color : outside_color);
+	pen.setColor(status.is_b ? status.section_color : status.outside_color);
 	painter.setPen(pen);
-	painter.drawLine(-100.0f, 0.0f, isB(status) && pending  ? -27.0f : -80.0f, 0.0f);
+	painter.drawLine(-100.0f, 0.0f, status.is_b && status.pending  ? -27.0f : -80.0f, 0.0f);
 
 	// Draw C segment
-	pen.setColor(isC(status) ? section_color : outside_color);
+	pen.setColor(status.is_c ? status.section_color : status.outside_color);
 	painter.setPen(pen);
-	painter.drawLine( 100.0f, 0.0f, isC(status) && pending  ?  27.0f :  80.0f, 0.0f);
+	painter.drawLine( 100.0f, 0.0f, status.is_c && status.pending  ?  27.0f :  80.0f, 0.0f);
 
 	// Draw connector markers
 	drawConnectors(painter);
@@ -108,32 +112,4 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 bool DoubleCrossSwitchWidget::hasLock() const
 {
 	return true;
-}
-
-bool DoubleCrossSwitchWidget::isA(const DoubleCrossSwitchController::Status & status) const
-{
-	const unsigned mask = status.right_bended ? DoubleCrossSwitch::B_MASK : 0;
-
-	return status.b_masked != mask;
-}
-
-bool DoubleCrossSwitchWidget::isB(const DoubleCrossSwitchController::Status & status) const
-{
-	const unsigned mask = status.right_bended ? DoubleCrossSwitch::B_MASK : 0;
-
-	return status.b_masked == mask;
-}
-
-bool DoubleCrossSwitchWidget::isC(const DoubleCrossSwitchController::Status & status) const
-{
-	const unsigned mask = status.right_bended ? DoubleCrossSwitch::D_MASK : 0;
-
-	return status.d_masked != mask;
-}
-
-bool DoubleCrossSwitchWidget::isD(const DoubleCrossSwitchController::Status & status) const
-{
-	const unsigned mask = status.right_bended ? DoubleCrossSwitch::D_MASK : 0;
-
-	return status.d_masked == mask;
 }

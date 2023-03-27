@@ -64,7 +64,7 @@ QColor BaseWidget::sectionColor(const SectionState state)
 {
 	auto it = color_map.find(state);
 
-	return it != color_map.end() ? it->second : Qt::white;
+	return it != color_map.end() ? it->second : YELLOW;
 }
 
 void BaseWidget::rescale(

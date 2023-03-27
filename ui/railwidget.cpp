@@ -44,20 +44,27 @@ void RailWidget::computeConnectors()
 	}
 }
 
-void RailWidget::paint(QPainter & painter)
+void mrw::ui::RailWidget::prepare(mrw::ui::RailWidget::Status & status) const
 {
 	Q_ASSERT(base_controller != nullptr);
 
-	QPainterPath            path;
-	QPen                    pen;
-	QFont                   font = painter.font();
-	RailController::Status  status;
-
 	controller<RailController>()->status(status);
+
+	status.do_bend = (status.bending != Bending::STRAIGHT) && (!status.a_ends);
+	status.any_end = status.a_ends || status.b_ends;
+}
+
+void RailWidget::paint(QPainter & painter)
+{
+	QPainterPath        path;
+	QPen                pen;
+	QFont               font = painter.font();
+	RailWidget::Status  status;
+
+	prepare(status);
 
 	const float border     = -SCALE - status.extensions * SCALE / Position::HALF;
 	const float text_width = status.extensions <= 2 ? 120 : 160;
-	const bool  do_bend    = (status.bending != Bending::STRAIGHT) && (!status.a_ends);
 
 	// Unify coordinates
 	const float x_size = Position::FRACTION + status.extensions;
@@ -97,11 +104,10 @@ void RailWidget::paint(QPainter & painter)
 	pen.setColor(sectionColor(status.section_state));
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
-	painter.drawLine(
-		SCALE, 0, do_bend ? border + x_offset : border, 0);
+	painter.drawLine(SCALE, 0, status.do_bend ? border + x_offset : border, 0);
 
 	// Rail bending to neighbour.
-	if (do_bend)
+	if (status.do_bend)
 	{
 		const float height = y_offset + RAIL_WIDTH / 2;
 		const float x      = border + SCALE / Position::HALF;
@@ -117,7 +123,7 @@ void RailWidget::paint(QPainter & painter)
 	}
 
 	// Bended end of rail drawing
-	if (status.a_ends || status.b_ends)
+	if (status.any_end)
 	{
 		const float x = status.b_ends ? SCALE : -border;
 

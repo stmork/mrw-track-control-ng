@@ -55,11 +55,30 @@ namespace mrw::ui
 		Q_OBJECT
 
 	public:
+		struct Status : public mrw::ctrl::SignalController::Status
+		{
+			QColor section_color = YELLOW;
+
+			// Signal colors.
+			QColor main_color    = RED;
+			QColor distant_color = YELLOW;
+			QColor shunt_color   = RED;
+
+			// Draw priorities.
+			QColor mast_color    = RED;
+			bool   draw_shunt    = false;
+			bool   draw_distant  = false;
+
+			bool   draw_lock     = false;
+		};
+
 		explicit SignalWidget(
 			QWidget           *           parent     = nullptr,
 			mrw::ctrl::SignalController * controller = nullptr);
 
 		virtual void computeConnectors() override;
+
+		void prepare(Status & status) const;
 
 	protected:
 		virtual void paint(QPainter & painter) override;

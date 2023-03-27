@@ -44,11 +44,22 @@ namespace mrw::ui
 		Q_OBJECT
 
 	public:
+		struct Status : public mrw::ctrl::RegularSwitchController::Status
+		{
+			QColor section_color = YELLOW;
+			QColor outside_color = YELLOW;
+
+			bool   pending       = false;
+			bool   is_turn_out   = false;
+		};
+
 		explicit RegularSwitchWidget(
 			QWidget               *              parent     = nullptr,
 			mrw::ctrl::RegularSwitchController * controller = nullptr);
 
 		virtual void computeConnectors() override;
+
+		void prepare(Status & status) const;
 
 	protected:
 		virtual void paint(QPainter & painter) override;

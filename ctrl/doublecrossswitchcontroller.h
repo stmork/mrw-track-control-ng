@@ -39,18 +39,32 @@ namespace mrw::ctrl
 			mrw::model::DoubleCrossSwitch::State state;
 
 			/**
-			 * True if the DoubleCrossSwitch::State is
-			 * DoubleCrossSwitch::State::BC or
-			 * DoubleCrossSwitch::State::BD;
+			 * True if the a connector is involeved into a track so the
+			 * DoubleCrossSwitch::State is DoubleCrossSwitch::State::AC or
+			 * DoubleCrossSwitch::State::AD;
 			 */
-			unsigned                             b_masked = false;
+			unsigned                             is_a = false;
 
 			/**
-			 * True if the DoubleCrossSwitch::State is
-			 * DoubleCrossSwitch::State::AD or
+			 * True if the b connector is involeved into a track so the
+			 * DoubleCrossSwitch::State is DoubleCrossSwitch::State::BC or
 			 * DoubleCrossSwitch::State::BD;
 			 */
-			unsigned                             d_masked = false;
+			unsigned                             is_b = false;
+
+			/**
+			 * True if the c connector is involeved into a track so the
+			 * DoubleCrossSwitch::State is DoubleCrossSwitch::State::AC or
+			 * DoubleCrossSwitch::State::BC;
+			 */
+			unsigned                             is_c = false;
+
+			/**
+			 * True if the d connector is involeved into a track so the
+			 * DoubleCrossSwitch::State is DoubleCrossSwitch::State::AD or
+			 * DoubleCrossSwitch::State::BD;
+			 */
+			unsigned                             is_d = false;
 		};
 
 		explicit DoubleCrossSwitchController(QObject * parent = nullptr);

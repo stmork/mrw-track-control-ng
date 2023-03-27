@@ -23,6 +23,16 @@ void DoubleCrossSwitchController::status(DoubleCrossSwitchController::Status & s
 	BaseSwitchController::status(status);
 
 	status.state    = switchState();
-	status.b_masked = (unsigned)status.state & DoubleCrossSwitch::B_MASK;
-	status.d_masked = (unsigned)status.state & DoubleCrossSwitch::D_MASK;
+
+	const unsigned state = (unsigned)status.state;
+
+	const unsigned b_masked = state & DoubleCrossSwitch::B_MASK;
+	const unsigned d_masked = state & DoubleCrossSwitch::D_MASK;
+	const unsigned b_mask   = status.right_bended ? DoubleCrossSwitch::B_MASK : 0;
+	const unsigned d_mask   = status.right_bended ? DoubleCrossSwitch::D_MASK : 0;
+
+	status.is_a = b_masked != b_mask;
+	status.is_b = b_masked == b_mask;
+	status.is_c = d_masked != d_mask;
+	status.is_d = d_masked == d_mask;
 }

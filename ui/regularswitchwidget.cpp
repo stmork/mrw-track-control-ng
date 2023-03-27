@@ -59,20 +59,25 @@ void RegularSwitchWidget::computeConnectors()
 	}
 }
 
-void RegularSwitchWidget::paint(QPainter & painter)
+void mrw::ui::RegularSwitchWidget::prepare(mrw::ui::RegularSwitchWidget::Status & status) const
 {
 	Q_ASSERT(base_controller != nullptr);
 
-	QFont                            font = painter.font();
-	RegularSwitchController::Status  status;
-
 	controller<RegularSwitchController>()->status(status);
 
-	const QColor section_color = sectionColor(status.section_state);
-	const QColor outside_color = sectionColor(SectionState::FREE);
+	status.section_color = sectionColor(status.section_state);
+	status.outside_color = sectionColor(SectionState::FREE);
 
-	const bool   pending       = lockVisible(status.lock_state);
-	const bool   is_turn_out   = (status.left != status.right_bended) != status.inclined;
+	status.pending       = lockVisible(status.lock_state);
+	status.is_turn_out   = (status.left != status.right_bended) != status.inclined;
+}
+
+void RegularSwitchWidget::paint(QPainter & painter)
+{
+	QFont                        font = painter.font();
+	RegularSwitchWidget::Status  status;
+
+	prepare(status);
 
 	// Unify coordinates
 	const float x_size = Position::FRACTION + status.extensions;
@@ -111,8 +116,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	// Draw point lock
 	drawLock(
 		painter,
-		status.lock_state == LockState::LOCKED ?
-		section_color : WHITE,
+		status.lock_state == LockState::LOCKED ? status.section_color : WHITE,
 		status.inclined ? -5 : -45, 0);
 
 	QPen pen;
@@ -120,11 +124,11 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	pen.setWidth(RAIL_WIDTH);
 
 	// Draw point part of switch
-	pen.setColor(section_color);
+	pen.setColor(status.section_color);
 	painter.setPen(pen);
 	if (status.inclined)
 	{
-		drawSheared(painter, section_color, -50, 100, -85);
+		drawSheared(painter, status.section_color, -50, 100, -85);
 	}
 	else
 	{
@@ -134,14 +138,14 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	// Draw curved part of switch
 	drawSheared(
 		painter,
-		is_turn_out ? section_color : outside_color,
-		status.inclined ? 50 : 0, -100, is_turn_out && pending ? 70 : 15);
+		status.is_turn_out ? status.section_color : status.outside_color,
+		status.inclined ? 50 : 0, -100, status.is_turn_out && status.pending ? 70 : 15);
 
 	// Draw straight part of switch
-	pen.setColor(!is_turn_out ? section_color : outside_color);
+	pen.setColor(!status.is_turn_out ? status.section_color : status.outside_color);
 	painter.setPen(pen);
 	painter.drawLine(
-		!is_turn_out && pending ? (status.inclined ? 20 : -20.0f) : 80.0f, 0.0f,
+		!status.is_turn_out && status.pending ? (status.inclined ? 20 : -20.0f) : 80.0f, 0.0f,
 		100.0f + status.extensions * SCALE, 0.0f);
 
 	// Draw connector markers

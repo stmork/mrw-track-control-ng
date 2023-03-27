@@ -41,11 +41,19 @@ namespace mrw::ui
 		Q_OBJECT
 
 	public:
+		struct Status : public mrw::ctrl::RailController::Status
+		{
+			bool do_bend = false;
+			bool any_end = false;
+		};
+
 		explicit RailWidget(
 			QWidget          *          parent     = nullptr,
 			mrw::ctrl::RailController * controller = nullptr);
 
 		virtual void computeConnectors() override;
+
+		void prepare(Status & status) const;
 
 	protected:
 		void paint(QPainter & painter) override;

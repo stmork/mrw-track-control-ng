@@ -41,21 +41,25 @@ namespace mrw::ui
 		Q_OBJECT
 
 	public:
+		struct Status : public mrw::ctrl::DoubleCrossSwitchController::Status
+		{
+			QColor section_color = YELLOW;
+			QColor outside_color = YELLOW;
+
+			bool   pending       = false;
+		};
+
 		explicit DoubleCrossSwitchWidget(
 			QWidget                 *                parent     = nullptr,
 			mrw::ctrl::DoubleCrossSwitchController * controller = nullptr);
 
 		virtual void computeConnectors() override;
 
+		void prepare(Status & status) const;
+
 	protected:
 		void paint(QPainter & painter) override;
 		virtual bool hasLock() const override;
-
-	private:
-		bool isA(const mrw::ctrl::DoubleCrossSwitchController::Status & status) const;
-		bool isB(const mrw::ctrl::DoubleCrossSwitchController::Status & status) const;
-		bool isC(const mrw::ctrl::DoubleCrossSwitchController::Status & status) const;
-		bool isD(const mrw::ctrl::DoubleCrossSwitchController::Status & status) const;
 	};
 }
 
