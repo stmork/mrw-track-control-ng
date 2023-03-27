@@ -55,7 +55,7 @@ void BaseWidget::paintEvent(QPaintEvent * event)
 	paint(painter);
 }
 
-bool BaseWidget::isLockPending() const
+bool BaseWidget::hasLock() const
 {
 	return false;
 }

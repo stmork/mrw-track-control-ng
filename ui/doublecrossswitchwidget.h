@@ -49,7 +49,7 @@ namespace mrw::ui
 
 	protected:
 		void paint(QPainter & painter) override;
-		virtual bool isLockPending() const override;
+		virtual bool hasLock() const override;
 
 	private:
 		bool isA(const mrw::ctrl::DoubleCrossSwitchController::Status & status) const;

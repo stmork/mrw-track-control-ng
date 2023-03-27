@@ -220,7 +220,7 @@ void SignalWidget::paint(QPainter & painter)
 	drawConnectors(painter);
 }
 
-bool SignalWidget::isLockPending() const
+bool SignalWidget::hasLock() const
 {
-	return base_controller->lock() == LockState::PENDING;
+	return true;
 }

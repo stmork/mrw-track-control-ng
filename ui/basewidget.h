@@ -132,7 +132,7 @@ namespace mrw::ui
 		 *
 		 * @return True if there is a pending state to be drawn.
 		 */
-		virtual bool isLockPending() const;
+		virtual bool hasLock() const;
 
 		/**
 		 * This method returns the color corresponding to a given

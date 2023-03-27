@@ -148,7 +148,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	drawConnectors(painter);
 }
 
-bool RegularSwitchWidget::isLockPending() const
+bool RegularSwitchWidget::hasLock() const
 {
-	return base_controller->lock() == LockState::PENDING;
+	return true;
 }

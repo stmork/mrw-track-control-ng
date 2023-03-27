@@ -105,9 +105,9 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	drawConnectors(painter);
 }
 
-bool DoubleCrossSwitchWidget::isLockPending() const
+bool DoubleCrossSwitchWidget::hasLock() const
 {
-	return base_controller->lock() == LockState::PENDING;
+	return true;
 }
 
 bool DoubleCrossSwitchWidget::isA(const DoubleCrossSwitchController::Status & status) const

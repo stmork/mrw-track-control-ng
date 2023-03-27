@@ -26,7 +26,7 @@ ControllerWidget::ControllerWidget(
 	connect(&ClockService::instance(), &ClockService::Hz8, [this]()
 	{
 		counter++;
-		if (isLockPending())
+		if (hasLock() && (base_controller->lock() == LockState::PENDING))
 		{
 			repaint();
 		}
@@ -108,7 +108,8 @@ void ControllerWidget::drawLock(QPainter & painter, QColor color, const float x,
 void ControllerWidget::drawSheared(
 	QPainter  & painter,
 	QColor      color,
-	const float x, const float y,
+	const float x,
+	const float y,
 	const float height,
 	const float slope)
 {
