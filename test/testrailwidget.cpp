@@ -65,3 +65,8 @@ void TestRailWidget::testPrepare()
 		}
 	}
 }
+
+void TestRailWidget::testHavingLock()
+{
+	QVERIFY(!widget.hasLock());
+}

@@ -70,6 +70,11 @@ void TestRegularSwitchWidget::testPrepare()
 	}
 }
 
+void TestRegularSwitchWidget::testHavingLock()
+{
+	QVERIFY(widget.hasLock());
+}
+
 void TestRegularSwitchWidget::testBending()
 {
 	mock.setLeftHanded();

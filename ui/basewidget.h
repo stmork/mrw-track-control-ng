@@ -103,6 +103,14 @@ namespace mrw::ui
 
 		static void setVerbose(const bool activate = false);
 
+		/**
+		 * This method returns true if a pending state has to be displayed.
+		 * Mostly some bliking elements has to be drawn.
+		 *
+		 * @return True if there is a pending state to be drawn.
+		 */
+		virtual bool hasLock() const;
+
 	protected:
 
 		/**
@@ -125,14 +133,6 @@ namespace mrw::ui
 		 * @param painter The QPainter to draw into.
 		 */
 		virtual void paint(QPainter & painter) = 0;
-
-		/**
-		 * This method returns true if a pending state has to be displayed.
-		 * Mostly some bliking elements has to be drawn.
-		 *
-		 * @return True if there is a pending state to be drawn.
-		 */
-		virtual bool hasLock() const;
 
 		/**
 		 * This method returns the color corresponding to a given

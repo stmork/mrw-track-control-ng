@@ -58,3 +58,8 @@ void TestDoubleCrossSwitchWidget::testPrepare()
 		}
 	}
 }
+
+void TestDoubleCrossSwitchWidget::testHavingLock()
+{
+	QVERIFY(widget.hasLock());
+}

@@ -64,6 +64,11 @@ void TestSignalWidget::testPrepare()
 	}
 }
 
+void TestSignalWidget::testHavingLock()
+{
+	QVERIFY(widget.hasLock());
+}
+
 void TestSignalWidget::testSh0()
 {
 	mock.setMain(false);
