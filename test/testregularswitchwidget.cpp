@@ -69,3 +69,22 @@ void TestRegularSwitchWidget::testPrepare()
 		}
 	}
 }
+
+void TestRegularSwitchWidget::testBending()
+{
+	mock.setLeftHanded();
+	widget.prepare(status);
+	QCOMPARE(status.bending, Bending::LEFT);
+
+	mock.setRightHanded();
+	widget.prepare(status);
+	QCOMPARE(status.bending, Bending::RIGHT);
+
+	mock.setLeftHanded(false);
+	widget.prepare(status);
+	QCOMPARE(status.bending, Bending::RIGHT);
+
+	mock.setRightHanded(false);
+	widget.prepare(status);
+	QCOMPARE(status.bending, Bending::LEFT);
+}

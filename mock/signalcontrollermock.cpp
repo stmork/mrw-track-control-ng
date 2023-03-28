@@ -59,6 +59,24 @@ void SignalControllerMock::setBending(const Bending bending)
 	emit update();
 }
 
+void mrw::ctrl::SignalControllerMock::setMainSymbol(const Signal::Symbol symbol)
+{
+	main_state = symbol;
+	emit update();
+}
+
+void mrw::ctrl::SignalControllerMock::setDistantSymbol(const Signal::Symbol symbol)
+{
+	distant_state = symbol;
+	emit update();
+}
+
+void mrw::ctrl::SignalControllerMock::setShuntSymbol(const Signal::Symbol symbol)
+{
+	shunt_state = symbol;
+	emit update();
+}
+
 void SignalControllerMock::setExtension(const int new_extension)
 {
 	extension = new_extension;
@@ -69,38 +87,32 @@ void SignalControllerMock::setExtension(const int new_extension)
 
 void SignalControllerMock::setShuntStop()
 {
-	shunt_state = Signal::Symbol::STOP;
-	emit update();
+	setShuntSymbol(Signal::Symbol::STOP);
 }
 
 void SignalControllerMock::setShuntGo()
 {
-	shunt_state = Signal::Symbol::GO;
-	emit update();
+	setShuntSymbol(Signal::Symbol::GO);
 }
 
 void SignalControllerMock::setDistantStop()
 {
-	distant_state = Signal::Symbol::STOP;
-	emit update();
+	setDistantSymbol(Signal::Symbol::STOP);
 }
 
 void SignalControllerMock::setDistantGo()
 {
-	distant_state = Signal::Symbol::GO;
-	emit update();
+	setDistantSymbol(Signal::Symbol::GO);
 }
 
 void SignalControllerMock::setMainStop()
 {
-	main_state = Signal::Symbol::STOP;
-	emit update();
+	setMainSymbol(Signal::Symbol::STOP);
 }
 
 void SignalControllerMock::setMainGo()
 {
-	main_state = Signal::Symbol::GO;
-	emit update();
+	setMainSymbol(Signal::Symbol::GO);
 }
 
 bool SignalControllerMock::isDirection() const

@@ -29,6 +29,17 @@ namespace mrw::test
 
 	private slots:
 		void testPrepare();
+		void testSh0();
+		void testSh1();
+		void testVr0();
+		void testVr1();
+		void testHp0();
+		void testHp1();
+		void testHp0WithDistant();
+		void testHp1Vr0();
+		void testHp1Vr1();
+		void testHp00();
+		void testHp0Sh1();
 	};
 }
 

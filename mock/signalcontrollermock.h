@@ -44,6 +44,10 @@ namespace mrw::ctrl
 		void setLock(const mrw::model::Device::LockState lock);
 		void setBending(const mrw::model::Position::Bending bending);
 
+		void setMainSymbol(const mrw::model::Signal::Symbol symbol);
+		void setDistantSymbol(const mrw::model::Signal::Symbol symbol);
+		void setShuntSymbol(const mrw::model::Signal::Symbol symbol);
+
 	private:
 
 		// Implementations from BaseController

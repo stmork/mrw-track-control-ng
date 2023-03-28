@@ -63,7 +63,7 @@ tracker.depends        = util can model statecharts
 config.depends         = util can model statecharts
 update.depends         = util can model statecharts
 study.depends          = test
-track-control.depends  = util can model ctrl ui statecharts log
+track-control.depends  = util can model statecharts ctrl ui log
 
 QMAKE_CLEAN           += qtest*.xml *.log
 

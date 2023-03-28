@@ -29,6 +29,7 @@ namespace mrw::test
 
 	private slots:
 		void testPrepare();
+		void testBending();
 	};
 }
 

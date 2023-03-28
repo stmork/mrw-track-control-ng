@@ -61,16 +61,18 @@ void SignalWidget::prepare(SignalWidget::Status & status) const
 
 	controller<SignalController>()->status(status);
 
+	status.draw_distant  = false;
+	status.draw_shunt    = false;
 	status.draw_lock     = (status.lock_state == LockState::PENDING) || (status.lock_state == LockState::LOCKED);
 	status.section_color = sectionColor(status.section_state);
 
 	// Predefine signal colors.
-	status.main_color    = status.main_state    == Symbol::GO ? GREEN : RED;
 	status.distant_color = status.distant_state == Symbol::GO ? GREEN : YELLOW;
 	status.shunt_color   = status.shunt_state   == Symbol::GO ? WHITE : RED;
 
 	if (status.has_main)
 	{
+		status.main_color = status.main_state    == Symbol::GO ? GREEN : RED;
 		status.mast_color = status.main_color;
 		if (status.main_state == Signal::Symbol::GO)
 		{
@@ -87,6 +89,7 @@ void SignalWidget::prepare(SignalWidget::Status & status) const
 	}
 	else
 	{
+		status.main_color = RED;
 		if (!status.has_shunting || (status.section_state != SHUNTING) || (status.shunt_state != Symbol::GO))
 		{
 			status.draw_distant = status.has_distant;
@@ -100,6 +103,16 @@ void SignalWidget::prepare(SignalWidget::Status & status) const
 		{
 			status.draw_shunt = status.has_shunting;
 		}
+	}
+
+	if (!status.draw_shunt)
+	{
+		status.shunt_color = RED;
+	}
+
+	if (!status.draw_distant)
+	{
+		status.distant_color = YELLOW;
 	}
 }
 
