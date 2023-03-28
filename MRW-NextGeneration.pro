@@ -99,6 +99,7 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 cccc.commands = cccc --lang=c++ --outdir=cccc\
 	can/*.cpp can/*.h\
 	ctrl/*.cpp ctrl/*.h\
+	mock/*.cpp mock/*.h\
 	model/*.cpp model/*.h\
 	ui/*.cpp ui/*.h\
 	util/*.cpp util/*.h\

@@ -88,21 +88,21 @@ namespace mrw::ctrl
 			 *
 			 * @see BaseController::extensions()
 			 */
-			float                           extensions;
+			float                           extensions = 0.0f;
 
 			/**
 			 * The multiple height of the widget.
 			 *
 			 * @see BaseController::lines()
 			 */
-			float                           lines;
+			float                           lines = 0.0f;
 
 			/**
 			 * The corresponding mrw::model::SectionState.
 			 *
 			 * @see BaseController::state()
 			 */
-			mrw::model::SectionState        section_state;
+			mrw::model::SectionState        section_state = mrw::model::FREE;
 
 			/**
 			 * The rendering hint concerning the mrw::model::AssemblyPart to be
@@ -110,7 +110,7 @@ namespace mrw::ctrl
 			 *
 			 * @see BaseController::bending()
 			 */
-			mrw::model::Position::Bending   bending;
+			mrw::model::Position::Bending   bending = mrw::model::Position::Bending::STRAIGHT;
 
 			/**
 			 * The mrw::model::Device::LockState of the controlled
@@ -118,7 +118,7 @@ namespace mrw::ctrl
 			 *
 			 * @see BaseController::lock()
 			 */
-			mrw::model::Device::LockState   lock_state;
+			mrw::model::Device::LockState   lock_state = mrw::model::Device::LockState::UNLOCKED;
 
 			/**
 			 * True if the mrw::model::AssemblyPart is orientated left to
@@ -126,7 +126,7 @@ namespace mrw::ctrl
 			 *
 			 * @see BaseController::isDirection()
 			 */
-			bool                            direction;
+			bool                            direction = true;
 		};
 
 		explicit BaseController(QObject * parent = nullptr);

@@ -20,6 +20,11 @@
 #include "testunknown.h"
 #include "testrouting.h"
 
+#include "testrailwidget.h"
+#include "testsignalwidget.h"
+#include "testdoublecrossswitchwidget.h"
+#include "testregularswitchwidget.h"
+
 using namespace mrw::test;
 using namespace mrw::util;
 
@@ -122,9 +127,53 @@ static int testRouting()
 	return QTest::qExec(&test, args);
 }
 
+static int testRailWidget()
+{
+	TestRailWidget  test;
+	QStringList     args
+	{
+		"MRW-Test", "-o", "qtest-widget-rail.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
+static int testSignalWidget()
+{
+	TestSignalWidget  test;
+	QStringList       args
+	{
+		"MRW-Test", "-o", "qtest-widget-signal.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
+static int testDoubleCrossWidgetWidget()
+{
+	TestDoubleCrossSwitchWidget  test;
+	QStringList                  args
+	{
+		"MRW-Test", "-o", "qtest-widget-dcs.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
+static int testRegularSwitchWidget()
+{
+	TestRegularSwitchWidget  test;
+	QStringList              args
+	{
+		"MRW-Test", "-o", "qtest-widget-rs.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
 int main(int argc, char * argv[])
 {
-	QCoreApplication  app(argc, argv);
+	QApplication  app(argc, argv);
 
 	int status = 0;
 
@@ -137,6 +186,11 @@ int main(int argc, char * argv[])
 	status += testUnknown();
 	status += testFlankSwitch();
 	status += testRouting();
+
+	status += testRailWidget();
+	status += testSignalWidget();
+	status += testDoubleCrossWidgetWidget();
+	status += testRegularSwitchWidget();
 
 	if (status == 0)
 	{
