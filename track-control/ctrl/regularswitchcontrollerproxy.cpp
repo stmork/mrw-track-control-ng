@@ -105,11 +105,6 @@ bool RegularSwitchControllerProxy::isDirection() const
 	return !part->aIsDir() == part->section()->region()->direction();
 }
 
-bool RegularSwitchControllerProxy::isExpandable() const
-{
-	return true;
-}
-
 float RegularSwitchControllerProxy::extensions() const
 {
 	return part->extension();

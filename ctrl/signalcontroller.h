@@ -97,6 +97,7 @@ namespace mrw::ctrl
 		void status(SignalController::Status & status) const;
 
 	private:
+		virtual bool            isExpandable() const override;
 
 		/**
 		 * This method returns true if this mrw::model::Signal group contains a

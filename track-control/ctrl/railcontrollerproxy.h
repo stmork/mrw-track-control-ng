@@ -37,7 +37,6 @@ namespace mrw::ctrl
 		virtual float           extensions()   const override;
 		virtual float           lines()        const override;
 		virtual bool            isDirection()  const override;
-		virtual bool            isExpandable() const override;
 
 		virtual mrw::model::Position     *    position() const override;
 		virtual mrw::model::SectionState      state() const override;

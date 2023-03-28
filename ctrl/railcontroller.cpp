@@ -19,3 +19,8 @@ void RailController::status(RailController::Status & status) const
 	status.a_ends = aEnds();
 	status.b_ends = bEnds();
 }
+
+bool RailController::isExpandable() const
+{
+	return true;
+}

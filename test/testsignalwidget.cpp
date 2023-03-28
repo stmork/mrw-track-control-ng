@@ -20,6 +20,17 @@ TestSignalWidget::TestSignalWidget(QObject * parent) : QObject(parent)
 	widget.setController(&mock);
 }
 
+void TestSignalWidget::init()
+{
+	status = SignalWidget::Status();
+}
+
+void TestSignalWidget::testSimple()
+{
+	widget.prepare(status);
+	QVERIFY(status.expandable);
+}
+
 void TestSignalWidget::testPrepare()
 {
 	for (const LockState lock :

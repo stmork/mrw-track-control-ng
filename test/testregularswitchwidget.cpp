@@ -9,6 +9,7 @@
 
 using namespace mrw::test;
 using namespace mrw::model;
+using namespace mrw::ui;
 
 using LockState = Device::LockState;
 using Bending   = Position::Bending;
@@ -16,6 +17,17 @@ using Bending   = Position::Bending;
 TestRegularSwitchWidget::TestRegularSwitchWidget(QObject * parent) : QObject(parent)
 {
 	widget.setController(&mock);
+}
+
+void TestRegularSwitchWidget::init()
+{
+	status = RegularSwitchWidget::Status();
+}
+
+void TestRegularSwitchWidget::testSimple()
+{
+	widget.prepare(status);
+	QVERIFY(status.expandable);
 }
 
 void TestRegularSwitchWidget::testPrepare()

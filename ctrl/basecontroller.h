@@ -77,11 +77,19 @@ namespace mrw::ctrl
 		struct Status
 		{
 			/**
-			 * he name of the controlled mrw::model::Device.
+			 * The name of the controlled mrw::model::Device.
 			 *
 			 * @see BaseController::name()
 			 */
 			QString                         name;
+
+			/**
+			 * The ponter to the view attributes such as position, extension
+			 * and orientation of the mrw::model::AssemblyPart to be rendered.
+			 *
+			 * @see BaseController::position()
+			 */
+			mrw::model::Position      *     position = nullptr;
 
 			/**
 			 * The extension count of the controlled mrw::model::AssemblyPart.
@@ -127,6 +135,13 @@ namespace mrw::ctrl
 			 * @see BaseController::isDirection()
 			 */
 			bool                            direction = true;
+
+			/**
+			 * True if the controlled widget is expandable.
+			 *
+			 * @see BaseController::isExpandable()
+			 */
+			bool                            expandable = false;
 		};
 
 		explicit BaseController(QObject * parent = nullptr);
@@ -162,7 +177,9 @@ namespace mrw::ctrl
 		}
 
 		/**
-		 * This method returns true if the controlled widget is expandable.
+		 * This method returns true if the controlled widget is expandable
+		 * which means it can expand to the left and right to neighboured
+		 * widget elements on the same line.
 		 *
 		 * @note The switches are not expandable only simple rail representing
 		 * widgets.

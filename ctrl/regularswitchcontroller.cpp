@@ -22,3 +22,8 @@ void RegularSwitchController::status(RegularSwitchController::Status & status) c
 
 	Q_ASSERT(status.left != status.right);
 }
+
+bool RegularSwitchController::isExpandable() const
+{
+	return true;
+}

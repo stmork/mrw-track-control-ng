@@ -96,7 +96,6 @@ namespace mrw::ctrl
 		virtual const QString & name()         const override;
 		virtual float           extensions()   const override;
 		virtual bool            isDirection()  const override;
-		virtual bool            isExpandable() const override;
 
 		virtual mrw::model::Position     *    position() const override;
 		virtual mrw::model::SectionState      state() const override;

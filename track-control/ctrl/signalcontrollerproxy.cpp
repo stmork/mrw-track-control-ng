@@ -290,11 +290,6 @@ bool SignalControllerProxy::isDirection() const
 	return direction == region()->direction();
 }
 
-bool SignalControllerProxy::isExpandable() const
-{
-	return true;
-}
-
 Position * SignalControllerProxy::position() const
 {
 	return base_signal;

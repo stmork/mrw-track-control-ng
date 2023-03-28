@@ -24,3 +24,8 @@ void SignalController::status(SignalController::Status & status) const
 	status.has_distant   = hasDistant();
 	status.has_shunting  = hasShunting();
 }
+
+bool SignalController::isExpandable() const
+{
+	return true;
+}

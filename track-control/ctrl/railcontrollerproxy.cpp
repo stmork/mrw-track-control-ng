@@ -40,11 +40,6 @@ bool RailControllerProxy::isDirection() const
 	return !rail->aIsDir() == region()->direction();
 }
 
-bool RailControllerProxy::isExpandable() const
-{
-	return true;
-}
-
 Position * RailControllerProxy::position() const
 {
 	return rail;

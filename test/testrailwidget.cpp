@@ -9,6 +9,7 @@
 
 using namespace mrw::test;
 using namespace mrw::model;
+using namespace mrw::ui;
 
 using LockState = Device::LockState;
 using Bending   = Position::Bending;
@@ -16,6 +17,17 @@ using Bending   = Position::Bending;
 TestRailWidget::TestRailWidget(QObject * parent) : QObject(parent)
 {
 	widget.setController(&mock);
+}
+
+void TestRailWidget::init()
+{
+	status = RailWidget::Status();
+}
+
+void TestRailWidget::testSimple()
+{
+	widget.prepare(status);
+	QVERIFY(status.expandable);
 }
 
 void TestRailWidget::testPrepare()

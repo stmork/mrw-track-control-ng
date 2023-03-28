@@ -28,6 +28,9 @@ namespace mrw::test
 		explicit TestSignalWidget(QObject * parent = nullptr);
 
 	private slots:
+		void init();
+
+		void testSimple();
 		void testPrepare();
 		void testHavingLock();
 

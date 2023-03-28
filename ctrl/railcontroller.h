@@ -59,6 +59,7 @@ namespace mrw::ctrl
 		void status(RailController::Status & status) const;
 
 	private:
+		virtual bool            isExpandable() const override;
 
 		/**
 		 * The @c a connector does not have any further mrw::model::RailPart
