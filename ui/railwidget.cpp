@@ -44,7 +44,7 @@ void RailWidget::computeConnectors()
 	}
 }
 
-void mrw::ui::RailWidget::prepare(mrw::ui::RailWidget::Status & status) const
+void RailWidget::prepare(RailWidget::Status & status) const
 {
 	Q_ASSERT(base_controller != nullptr);
 

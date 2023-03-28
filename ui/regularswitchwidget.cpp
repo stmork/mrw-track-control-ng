@@ -59,7 +59,7 @@ void RegularSwitchWidget::computeConnectors()
 	}
 }
 
-void mrw::ui::RegularSwitchWidget::prepare(mrw::ui::RegularSwitchWidget::Status & status) const
+void RegularSwitchWidget::prepare(RegularSwitchWidget::Status & status) const
 {
 	Q_ASSERT(base_controller != nullptr);
 

@@ -33,7 +33,7 @@ void DoubleCrossSwitchWidget::computeConnectors()
 	}
 }
 
-void mrw::ui::DoubleCrossSwitchWidget::prepare(mrw::ui::DoubleCrossSwitchWidget::Status & status) const
+void DoubleCrossSwitchWidget::prepare(DoubleCrossSwitchWidget::Status & status) const
 {
 	Q_ASSERT(base_controller != nullptr);
 

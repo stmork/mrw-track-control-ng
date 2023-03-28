@@ -55,7 +55,7 @@ void SignalWidget::computeConnectors()
 	}
 }
 
-void mrw::ui::SignalWidget::prepare(mrw::ui::SignalWidget::Status & status) const
+void SignalWidget::prepare(SignalWidget::Status & status) const
 {
 	Q_ASSERT(base_controller != nullptr);
 
