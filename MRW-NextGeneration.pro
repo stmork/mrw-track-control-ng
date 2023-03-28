@@ -131,7 +131,7 @@ valgrind.commands = valgrind\
 	--tool=memcheck --leak-check=full\
 	--show-reachable=no --undef-value-errors=no --track-origins=no\
 	--child-silent-after-fork=no --trace-children=no --gen-suppressions=no\
-	--xml=yes --xml-file=valgrind.xml test/MRW-Test
+	--xml=yes --xml-file=valgrind.xml test/MRW-Test -platform offscreen
 
 QMAKE_EXTRA_TARGETS += valgrind
 QMAKE_CLEAN         += valgrind.xml
