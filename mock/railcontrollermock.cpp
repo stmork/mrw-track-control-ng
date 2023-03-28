@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
-#include <ctrl/railcontrollermock.h>
+#include <mock/railcontrollermock.h>
 
 using namespace mrw::model;
 using namespace mrw::ctrl;

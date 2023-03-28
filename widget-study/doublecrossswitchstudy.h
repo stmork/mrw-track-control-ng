@@ -8,7 +8,7 @@
 #ifndef DOUBLECROSSSWITCHSTUDY_H
 #define DOUBLECROSSSWITCHSTUDY_H
 
-#include <ctrl/doublecrossswitchcontrollermock.h>
+#include <mock/doublecrossswitchcontrollermock.h>
 
 #include "widgetsaver.h"
 

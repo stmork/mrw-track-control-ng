@@ -8,7 +8,7 @@
 #ifndef SWITCHSTUDY_H
 #define SWITCHSTUDY_H
 
-#include <ctrl/regularswitchcontrollermock.h>
+#include <mock/regularswitchcontrollermock.h>
 
 #include "widgetsaver.h"
 

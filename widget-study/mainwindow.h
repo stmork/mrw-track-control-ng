@@ -11,8 +11,8 @@
 #include <QMainWindow>
 
 #include <can/mrwbusservice.h>
-#include <ctrl/signalcontrollermock.h>
-#include <ctrl/regularswitchcontrollermock.h>
+#include <mock/signalcontrollermock.h>
+#include <mock/regularswitchcontrollermock.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui

@@ -8,7 +8,7 @@
 #ifndef RAILSTUDY_H
 #define RAILSTUDY_H
 
-#include <ctrl/railcontrollermock.h>
+#include <mock/railcontrollermock.h>
 
 #include "widgetsaver.h"
 

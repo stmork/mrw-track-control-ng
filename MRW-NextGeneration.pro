@@ -11,6 +11,7 @@ SUBDIRS  = \
 	statecharts \
 	model \
 	ctrl \
+	mock \
 	ui \
 	test \
 	test-sct \
@@ -31,6 +32,7 @@ can.file               = can/MRW-Can.pro
 statecharts.file       = statecharts/MRW-Statecharts.pro
 model.file             = model/MRW-Model.pro
 ctrl.file              = ctrl/MRW-Ctrl.pro
+mock.file              = mock/MRW-CtrlMock.pro
 ui.file                = ui/MRW-UI.pro
 test.file              = test/MRW-Test.pro
 test-sct.file          = statecharts/test/MRW-Test-Statecharts.pro
@@ -50,6 +52,7 @@ can.depends            = util
 model.depends          = util can
 test.depends           = util can model
 ctrl.depends           = model can util
+mock.depends           = ctrl
 ui.depends             = ctrl
 ping.depends           = test
 reset.depends          = test
@@ -59,7 +62,7 @@ proxy.depends          = test
 tracker.depends        = test statecharts
 config.depends         = test statecharts
 update.depends         = test statecharts
-study.depends          = test ctrl ui
+study.depends          = test ctrl mock ui
 track-control.depends  = log study statecharts
 
 QMAKE_CLEAN           += qtest*.xml *.log

@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
-#include <ctrl/signalcontrollermock.h>
+#include <mock/signalcontrollermock.h>
 
 using namespace mrw::model;
 using namespace mrw::ctrl;

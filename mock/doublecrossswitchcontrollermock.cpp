@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
-#include <ctrl/doublecrossswitchcontrollermock.h>
+#include <mock/doublecrossswitchcontrollermock.h>
 
 using namespace mrw::can;
 using namespace mrw::model;

@@ -8,7 +8,7 @@
 #ifndef SIGNALSTUDY_H
 #define SIGNALSTUDY_H
 
-#include <ctrl/signalcontrollermock.h>
+#include <mock/signalcontrollermock.h>
 
 #include "widgetsaver.h"
 

@@ -14,10 +14,6 @@ SOURCES += \
 	railstudy.cpp \
 	signalstudy.cpp \
 	switchstudy.cpp \
-	ctrl/regularswitchcontrollermock.cpp \
-	ctrl/doublecrossswitchcontrollermock.cpp \
-	ctrl/railcontrollermock.cpp \
-	ctrl/signalcontrollermock.cpp \
 	widgetsaver.cpp \
 	widgetstudy.cpp
 
@@ -27,10 +23,6 @@ HEADERS += \
 	railstudy.h \
 	signalstudy.h \
 	switchstudy.h \
-	ctrl/regularswitchcontrollermock.h \
-	ctrl/doublecrossswitchcontrollermock.h \
-	ctrl/railcontrollermock.h \
-	ctrl/signalcontrollermock.h \
 	widgetsaver.h \
 	widgetstudy.h
 
@@ -42,6 +34,6 @@ FORMS += \
 	switchstudy.ui \
 	widgetstudy.ui
 
-LIBS            += -lMRW-UI -lMRW-Ctrl -lMRW-Model -lMRW-Can -lMRW-Util
+LIBS            += -lMRW-UI -lMRW-Ctrl -lMRW-CtrlMock -lMRW-Model -lMRW-Can -lMRW-Util
 
 QMAKE_CLEAN     += $$TARGET qtest*.xml
