@@ -33,6 +33,8 @@ namespace mrw::test
 		void testSimple();
 		void testPrepare();
 		void testHavingLock();
+
+		void testEnds();
 	};
 }
 

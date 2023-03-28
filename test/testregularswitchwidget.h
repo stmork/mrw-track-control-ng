@@ -34,6 +34,8 @@ namespace mrw::test
 		void testPrepare();
 		void testHavingLock();
 
+		void testLeft();
+		void testRight();
 		void testBending();
 	};
 }

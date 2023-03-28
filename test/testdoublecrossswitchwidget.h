@@ -33,6 +33,13 @@ namespace mrw::test
 		void testSimple();
 		void testPrepare();
 		void testHavingLock();
+
+		void testSwitchStateAC();
+		void testSwitchStateAD();
+		void testSwitchStateBC();
+		void testSwitchStateBD();
+		void testLeftHanded();
+		void testRightHanded();
 	};
 }
 

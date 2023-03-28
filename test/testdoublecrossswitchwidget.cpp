@@ -75,3 +75,93 @@ void TestDoubleCrossSwitchWidget::testHavingLock()
 {
 	QVERIFY(widget.hasLock());
 }
+
+void TestDoubleCrossSwitchWidget::testSwitchStateAC()
+{
+	for (const bool right_bended :
+		{
+			true, false
+		})
+	{
+		mock.setRightHanded(right_bended);
+		mock.setSwitchState(DoubleCrossSwitch::State::AC);
+		widget.prepare(status);
+		QVERIFY(status.is_a == right_bended);
+		QVERIFY(status.is_b != right_bended);
+		QVERIFY(status.is_c == right_bended);
+		QVERIFY(status.is_d != right_bended);
+	}
+}
+
+void TestDoubleCrossSwitchWidget::testSwitchStateAD()
+{
+	for (const bool right_bended :
+		{
+			true, false
+		})
+	{
+		mock.setRightHanded(right_bended);
+		mock.setSwitchState(DoubleCrossSwitch::State::AD);
+		widget.prepare(status);
+		QVERIFY(status.is_a == right_bended);
+		QVERIFY(status.is_b != right_bended);
+		QVERIFY(status.is_c != right_bended);
+		QVERIFY(status.is_d == right_bended);
+	}
+}
+
+void TestDoubleCrossSwitchWidget::testSwitchStateBC()
+{
+	for (const bool right_bended :
+		{
+			true, false
+		})
+	{
+		mock.setRightHanded(right_bended);
+		mock.setSwitchState(DoubleCrossSwitch::State::BC);
+		widget.prepare(status);
+		QVERIFY(status.is_a != right_bended);
+		QVERIFY(status.is_b == right_bended);
+		QVERIFY(status.is_c == right_bended);
+		QVERIFY(status.is_d != right_bended);
+	}
+}
+
+void TestDoubleCrossSwitchWidget::testSwitchStateBD()
+{
+	for (const bool right_bended :
+		{
+			true, false
+		})
+	{
+		mock.setRightHanded(right_bended);
+		mock.setSwitchState(DoubleCrossSwitch::State::BD);
+		widget.prepare(status);
+		QVERIFY(status.is_a != right_bended);
+		QVERIFY(status.is_b == right_bended);
+		QVERIFY(status.is_c != right_bended);
+		QVERIFY(status.is_d == right_bended);
+	}
+}
+
+void TestDoubleCrossSwitchWidget::testLeftHanded()
+{
+	mock.setLeftHanded();
+	widget.prepare(status);
+	QVERIFY(!status.right_bended);
+
+	mock.setRightHanded(false);
+	widget.prepare(status);
+	QVERIFY(!status.right_bended);
+}
+
+void TestDoubleCrossSwitchWidget::testRightHanded()
+{
+	mock.setRightHanded();
+	widget.prepare(status);
+	QVERIFY(status.right_bended);
+
+	mock.setLeftHanded(false);
+	widget.prepare(status);
+	QVERIFY(status.right_bended);
+}

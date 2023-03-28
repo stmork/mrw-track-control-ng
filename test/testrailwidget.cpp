@@ -82,3 +82,30 @@ void TestRailWidget::testHavingLock()
 {
 	QVERIFY(!widget.hasLock());
 }
+
+void TestRailWidget::testEnds()
+{
+	mock.setEnds(false, false);
+	widget.prepare(status);
+	QVERIFY(!status.a_ends);
+	QVERIFY(!status.b_ends);
+	QVERIFY(!status.any_end);
+
+	mock.setEnds(true, false);
+	widget.prepare(status);
+	QVERIFY( status.a_ends);
+	QVERIFY(!status.b_ends);
+	QVERIFY( status.any_end);
+
+	mock.setEnds(false, true);
+	widget.prepare(status);
+	QVERIFY(!status.a_ends);
+	QVERIFY( status.b_ends);
+	QVERIFY( status.any_end);
+
+	mock.setEnds(true, true);
+	widget.prepare(status);
+	QVERIFY(status.a_ends);
+	QVERIFY(status.b_ends);
+	QVERIFY(status.any_end);
+}

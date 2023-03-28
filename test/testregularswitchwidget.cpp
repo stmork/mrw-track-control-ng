@@ -87,6 +87,32 @@ void TestRegularSwitchWidget::testHavingLock()
 	QVERIFY(widget.hasLock());
 }
 
+void TestRegularSwitchWidget::testLeft()
+{
+	mock.setLeft();
+	widget.prepare(status);
+	QVERIFY(status.left);
+	QVERIFY(!status.right);
+
+	mock.setRight(false);
+	widget.prepare(status);
+	QVERIFY(status.left);
+	QVERIFY(!status.right);
+}
+
+void TestRegularSwitchWidget::testRight()
+{
+	mock.setRight();
+	widget.prepare(status);
+	QVERIFY(!status.left);
+	QVERIFY(status.right);
+
+	mock.setLeft(false);
+	widget.prepare(status);
+	QVERIFY(!status.left);
+	QVERIFY(status.right);
+}
+
 void TestRegularSwitchWidget::testBending()
 {
 	mock.setLeftHanded();
