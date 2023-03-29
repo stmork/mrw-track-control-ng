@@ -128,6 +128,7 @@ QMAKE_CLEAN         += *.qch
 #####################################################################
 
 valgrind.commands = valgrind\
+	--suppressions=offscreen.supp\
 	--tool=memcheck --leak-check=full\
 	--show-reachable=no --undef-value-errors=no --track-origins=no\
 	--child-silent-after-fork=no --trace-children=no --gen-suppressions=no\

@@ -22,4 +22,5 @@ namespace mrw::test
 	static const std::vector<mrw::model::SectionState>      section_states;
 	static const std::vector<mrw::model::Signal::Symbol>    signal_symbols;
 }
+
 #endif
