@@ -31,6 +31,12 @@ namespace mrw::test
 			prepare(status);
 			paintEvent(nullptr);
 		}
+
+		const QList<QPoint> & connectors()
+		{
+			computeConnectors();
+			return connector_list;
+		}
 	};
 
 	class TestSignalWidget : public QObject
@@ -63,6 +69,7 @@ namespace mrw::test
 		void testHp1Vr1();
 		void testHp00();
 		void testHp0Sh1();
+		void testConnections();
 	};
 }
 

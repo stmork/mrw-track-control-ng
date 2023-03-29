@@ -93,12 +93,12 @@ void TestRailWidget::testEnds()
 	QVERIFY(!status.a_ends);
 	QVERIFY( status.b_ends);
 	QVERIFY( status.any_end);
-	QCOMPARE(widget.connectors().size(), 0);
+	QCOMPARE(widget.connectors().size(), 0u);
 
 	mock.setEnds(true, true);
 	widget.test(status);
 	QVERIFY(status.a_ends);
 	QVERIFY(status.b_ends);
 	QVERIFY(status.any_end);
-	QCOMPARE(widget.connectors().size(), 0);
+	QCOMPARE(widget.connectors().size(), 0u);
 }

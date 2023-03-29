@@ -54,6 +54,7 @@ void TestDoubleCrossSwitchWidget::testPrepare()
 					QCOMPARE(status.bending, Bending::STRAIGHT);
 					QCOMPARE(status.extensions, 0);
 					QCOMPARE(status.lines, 0);
+					QCOMPARE(widget.connectors().size(), 2u);
 				}
 			}
 		}

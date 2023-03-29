@@ -60,6 +60,7 @@ void TestRegularSwitchWidget::testPrepare()
 							QCOMPARE(status.extensions, ext);
 							QCOMPARE(status.lines, 0);
 							QCOMPARE(status.inclined, inclination);
+							QCOMPARE(widget.connectors().size(), inclination ? 2u : 1u);
 						}
 					}
 				}
