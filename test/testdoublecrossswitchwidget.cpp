@@ -51,9 +51,9 @@ void TestDoubleCrossSwitchWidget::testPrepare()
 					QCOMPARE(status.lock_state, lock);
 					QCOMPARE(status.has_flank_protection, flank);
 					QCOMPARE(status.bending, Bending::STRAIGHT);
-					QCOMPARE(status.extensions, 0);
-					QCOMPARE(status.lines, 0);
-					QCOMPARE(widget.connectors().size(), 2u);
+					QCOMPARE(status.extensions, 0.0f);
+					QCOMPARE(status.lines, 0.0f);
+					QCOMPARE(widget.connectors().size(), 2);
 				}
 			}
 		}

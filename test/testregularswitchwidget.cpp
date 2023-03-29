@@ -57,9 +57,9 @@ void TestRegularSwitchWidget::testPrepare()
 							QCOMPARE(status.lock_state, lock);
 							QCOMPARE(status.has_flank_protection, flank);
 							QCOMPARE(status.extensions, ext);
-							QCOMPARE(status.lines, 0);
+							QCOMPARE(status.lines, 0.0f);
 							QCOMPARE(status.inclined, inclination);
-							QCOMPARE(widget.connectors().size(), inclination ? 2u : 1u);
+							QCOMPARE(widget.connectors().size(), inclination ? 2 : 1);
 						}
 					}
 				}

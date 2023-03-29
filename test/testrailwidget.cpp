@@ -80,7 +80,7 @@ void TestRailWidget::testEnds()
 		mock.setDirection(dir);
 		for (const Bending bending : bendings)
 		{
-			const unsigned connections = bending != Bending::STRAIGHT ? 1u : 0u;
+			const int connections = bending != Bending::STRAIGHT ? 1 : 0;
 			mock.setBending(bending);
 
 			mock.setEnds(false, false);
@@ -95,7 +95,7 @@ void TestRailWidget::testEnds()
 			QVERIFY( status.a_ends);
 			QVERIFY(!status.b_ends);
 			QVERIFY( status.any_end);
-			QCOMPARE(widget.connectors().size(), 0u);
+			QCOMPARE(widget.connectors().size(), 0);
 
 			mock.setEnds(false, true);
 			widget.test(status);
@@ -109,7 +109,7 @@ void TestRailWidget::testEnds()
 			QVERIFY(status.a_ends);
 			QVERIFY(status.b_ends);
 			QVERIFY(status.any_end);
-			QCOMPARE(widget.connectors().size(), 0u);
+			QCOMPARE(widget.connectors().size(), 0);
 		}
 	}
 }

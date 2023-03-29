@@ -29,7 +29,7 @@ void TestSignalWidget::testSimple()
 {
 	widget.test(status);
 	QVERIFY(status.expandable);
-	QCOMPARE(widget.connectors().size(), 0u);
+	QCOMPARE(widget.connectors().size(), 0);
 }
 
 void TestSignalWidget::testPrepare()
@@ -56,7 +56,7 @@ void TestSignalWidget::testPrepare()
 						QCOMPARE(status.lock_state, lock);
 						QCOMPARE(status.bending, bending);
 						QCOMPARE(status.extensions, ext);
-						QCOMPARE(status.lines, 0);
+						QCOMPARE(status.lines, 0.0f);
 					}
 				}
 			}
@@ -475,10 +475,10 @@ void TestSignalWidget::testConnections()
 	{
 		mock.setExtension(0);
 		mock.setBending(bending);
-		QCOMPARE(widget.connectors().size(), 0u);
+		QCOMPARE(widget.connectors().size(), 0);
 
 		mock.setExtension(Position::FRACTION);
 		mock.setBending(bending);
-		QCOMPARE(widget.connectors().size(), bending != Bending::STRAIGHT ? 1u : 0u);
+		QCOMPARE(widget.connectors().size(), bending != Bending::STRAIGHT ? 1 : 0);
 	}
 }
