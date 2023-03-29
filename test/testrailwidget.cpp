@@ -74,31 +74,41 @@ void TestRailWidget::testHavingLock()
 
 void TestRailWidget::testEnds()
 {
-	mock.setEnds(false, false);
-	widget.test(status);
-	QVERIFY(!status.a_ends);
-	QVERIFY(!status.b_ends);
-	QVERIFY(!status.any_end);
-	QCOMPARE(widget.connectors().size(), 0u);
+	for (const bool dir : booleans)
+	{
+		mock.setDirection(dir);
+		for (const Bending bending : bendings)
+		{
+			const unsigned connections = bending != Bending::STRAIGHT ? 1u : 0u;
+			mock.setBending(bending);
 
-	mock.setEnds(true, false);
-	widget.test(status);
-	QVERIFY( status.a_ends);
-	QVERIFY(!status.b_ends);
-	QVERIFY( status.any_end);
-	QCOMPARE(widget.connectors().size(), 0u);
+			mock.setEnds(false, false);
+			widget.test(status);
+			QVERIFY(!status.a_ends);
+			QVERIFY(!status.b_ends);
+			QVERIFY(!status.any_end);
+			QCOMPARE(widget.connectors().size(), 0);
 
-	mock.setEnds(false, true);
-	widget.test(status);
-	QVERIFY(!status.a_ends);
-	QVERIFY( status.b_ends);
-	QVERIFY( status.any_end);
-	QCOMPARE(widget.connectors().size(), 0u);
+			mock.setEnds(true, false);
+			widget.test(status);
+			QVERIFY( status.a_ends);
+			QVERIFY(!status.b_ends);
+			QVERIFY( status.any_end);
+			QCOMPARE(widget.connectors().size(), 0);
 
-	mock.setEnds(true, true);
-	widget.test(status);
-	QVERIFY(status.a_ends);
-	QVERIFY(status.b_ends);
-	QVERIFY(status.any_end);
-	QCOMPARE(widget.connectors().size(), 0u);
+			mock.setEnds(false, true);
+			widget.test(status);
+			QVERIFY(!status.a_ends);
+			QVERIFY( status.b_ends);
+			QVERIFY( status.any_end);
+			QCOMPARE(widget.connectors().size(), connections);
+
+			mock.setEnds(true, true);
+			widget.test(status);
+			QVERIFY(status.a_ends);
+			QVERIFY(status.b_ends);
+			QVERIFY(status.any_end);
+			QCOMPARE(widget.connectors().size(), connections);
+		}
+	}
 }
