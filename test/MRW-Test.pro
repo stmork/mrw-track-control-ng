@@ -9,6 +9,7 @@ CONFIG += testcase no_testcase_installs
 include(../common.pri)
 
 SOURCES += \
+	collections.cpp \
 	main.cpp \
 	testcan.cpp \
 	testdoublecrossswitchwidget.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 	testutil.cpp
 
 HEADERS += \
+	collections.h \
 	testcan.h \
 	testdef.h \
 	testdoublecrossswitchwidget.h \

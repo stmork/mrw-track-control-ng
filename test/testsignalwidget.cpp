@@ -6,6 +6,7 @@
 #include <QTest>
 
 #include "testsignalwidget.h"
+#include "collections.h"
 
 using namespace mrw::test;
 using namespace mrw::model;
@@ -33,28 +34,16 @@ void TestSignalWidget::testSimple()
 
 void TestSignalWidget::testPrepare()
 {
-	for (const LockState lock :
-		{
-			LockState::FAIL, LockState::UNLOCKED, LockState::PENDING, LockState::LOCKED
-		})
+	for (const LockState lock : lock_states)
 	{
 		mock.setLock(lock);
-		for (const SectionState state :
-			{
-				FREE, SHUNTING, TOUR, OCCUPIED, PASSED
-			})
+		for (const SectionState state : section_states)
 		{
 			mock.setSectionState(state);
-			for (const Bending bending :
-				{
-					Bending::LEFT, Bending::STRAIGHT, Bending::RIGHT
-				})
+			for (const Bending bending : bendings)
 			{
 				mock.setBending(bending);
-				for (const bool dir :
-					{
-						true, false
-					})
+				for (const bool dir : booleans)
 				{
 					mock.setDirection(dir);
 					for (int ext = 0; ext < 5; ext++)
@@ -87,17 +76,11 @@ void TestSignalWidget::testSh0()
 	mock.setShunting();
 	mock.setShuntStop();
 
-	for (const Symbol distant :
-		{
-			Symbol::OFF, Symbol::STOP, Symbol::GO
-		})
+	for (const Symbol distant : signal_symbols)
 	{
 		mock.setDistantSymbol(distant);
 
-		for (const Symbol main :
-			{
-				Symbol::OFF, Symbol::STOP, Symbol::GO
-			})
+		for (const Symbol main : signal_symbols)
 		{
 			mock.setMainSymbol(main);
 
@@ -129,17 +112,11 @@ void TestSignalWidget::testSh1()
 	mock.setShunting();
 	mock.setShuntGo();
 
-	for (const Symbol distant :
-		{
-			Symbol::OFF, Symbol::STOP, Symbol::GO
-		})
+	for (const Symbol distant : signal_symbols)
 	{
 		mock.setDistantSymbol(distant);
 
-		for (const Symbol main :
-			{
-				Symbol::OFF, Symbol::STOP, Symbol::GO
-			})
+		for (const Symbol main : signal_symbols)
 		{
 			mock.setMainSymbol(main);
 
@@ -172,17 +149,11 @@ void TestSignalWidget::testVr0()
 	mock.setShunting(false);
 	mock.setDistantStop();
 
-	for (const Symbol shunt :
-		{
-			Symbol::OFF, Symbol::STOP, Symbol::GO
-		})
+	for (const Symbol shunt : signal_symbols)
 	{
 		mock.setShuntSymbol(shunt);
 
-		for (const Symbol main :
-			{
-				Symbol::OFF, Symbol::STOP, Symbol::GO
-			})
+		for (const Symbol main : signal_symbols)
 		{
 			mock.setMainSymbol(main);
 
@@ -215,17 +186,11 @@ void TestSignalWidget::testVr1()
 	mock.setShunting(false);
 	mock.setDistantGo();
 
-	for (const Symbol shunt :
-		{
-			Symbol::OFF, Symbol::STOP, Symbol::GO
-		})
+	for (const Symbol shunt : signal_symbols)
 	{
 		mock.setShuntSymbol(shunt);
 
-		for (const Symbol main :
-			{
-				Symbol::OFF, Symbol::STOP, Symbol::GO
-			})
+		for (const Symbol main : signal_symbols)
 		{
 			mock.setMainSymbol(main);
 
@@ -258,17 +223,11 @@ void TestSignalWidget::testHp0()
 	mock.setShunting(false);
 	mock.setMainStop();
 
-	for (const Symbol shunt :
-		{
-			Symbol::OFF, Symbol::STOP, Symbol::GO
-		})
+	for (const Symbol shunt : signal_symbols)
 	{
 		mock.setShuntSymbol(shunt);
 
-		for (const Symbol distant :
-			{
-				Symbol::OFF, Symbol::STOP, Symbol::GO
-			})
+		for (const Symbol distant : signal_symbols)
 		{
 			mock.setDistantSymbol(distant);
 
@@ -301,17 +260,11 @@ void TestSignalWidget::testHp1()
 	mock.setShunting(false);
 	mock.setMainGo();
 
-	for (const Symbol shunt :
-		{
-			Symbol::OFF, Symbol::STOP, Symbol::GO
-		})
+	for (const Symbol shunt : signal_symbols)
 	{
 		mock.setShuntSymbol(shunt);
 
-		for (const Symbol distant :
-			{
-				Symbol::OFF, Symbol::STOP, Symbol::GO
-			})
+		for (const Symbol distant : signal_symbols)
 		{
 			mock.setDistantSymbol(distant);
 
@@ -344,17 +297,11 @@ void TestSignalWidget::testHp0WithDistant()
 	mock.setMainStop();
 	mock.setShuntStop();
 
-	for (const bool has_shunt :
-		{
-			false, true
-		} )
+	for (const bool has_shunt : booleans)
 	{
 		mock.setShunting(has_shunt);
 
-		for (const Symbol distant :
-			{
-				Symbol::OFF, Symbol::STOP, Symbol::GO
-			})
+		for (const Symbol distant : signal_symbols)
 		{
 			mock.setDistantSymbol(distant);
 
@@ -387,17 +334,11 @@ void TestSignalWidget::testHp1Vr0()
 	mock.setDistantStop();
 	mock.setMainGo();
 
-	for (const bool has_shunt :
-		{
-			false, true
-		} )
+	for (const bool has_shunt : booleans)
 	{
 		mock.setShunting(has_shunt);
 
-		for (const Symbol shunt :
-			{
-				Symbol::OFF, Symbol::STOP, Symbol::GO
-			})
+		for (const Symbol shunt : signal_symbols)
 		{
 			mock.setShuntSymbol(shunt);
 
@@ -430,17 +371,11 @@ void TestSignalWidget::testHp1Vr1()
 	mock.setDistantGo();
 	mock.setMainGo();
 
-	for (const bool has_shunt :
-		{
-			false, true
-		} )
+	for (const bool has_shunt : booleans)
 	{
 		mock.setShunting(has_shunt);
 
-		for (const Symbol shunt :
-			{
-				Symbol::OFF, Symbol::STOP, Symbol::GO
-			})
+		for (const Symbol shunt : signal_symbols)
 		{
 			mock.setShuntSymbol(shunt);
 
@@ -472,17 +407,11 @@ void TestSignalWidget::testHp00()
 	mock.setMainStop();
 	mock.setShuntStop();
 
-	for (const bool has_distant :
-		{
-			false, true
-		} )
+	for (const bool has_distant : booleans)
 	{
 		mock.setDistant(has_distant);
 
-		for (const Symbol distant :
-			{
-				Symbol::OFF, Symbol::STOP, Symbol::GO
-			})
+		for (const Symbol distant : signal_symbols)
 		{
 			mock.setDistantSymbol(distant);
 
@@ -516,10 +445,7 @@ void TestSignalWidget::testHp0Sh1()
 	mock.setMainStop();
 	mock.setShuntGo();
 
-	for (const Symbol distant :
-		{
-			Symbol::OFF, Symbol::STOP, Symbol::GO
-		})
+	for (const Symbol distant : signal_symbols)
 	{
 		mock.setDistantSymbol(distant);
 

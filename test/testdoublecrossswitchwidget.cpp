@@ -6,6 +6,7 @@
 #include <QTest>
 
 #include "testdoublecrossswitchwidget.h"
+#include "collections.h"
 
 using namespace mrw::test;
 using namespace mrw::model;
@@ -32,28 +33,16 @@ void TestDoubleCrossSwitchWidget::testSimple()
 
 void TestDoubleCrossSwitchWidget::testPrepare()
 {
-	for (const LockState lock :
-		{
-			LockState::FAIL, LockState::UNLOCKED, LockState::PENDING, LockState::LOCKED
-		})
+	for (const LockState lock : lock_states)
 	{
 		mock.setLock(lock);
-		for (const SectionState state :
-			{
-				FREE, SHUNTING, TOUR, OCCUPIED, PASSED
-			})
+		for (const SectionState state : section_states)
 		{
 			mock.setSectionState(state);
-			for (const bool dir :
-				{
-					true, false
-				})
+			for (const bool dir : booleans)
 			{
 				mock.setDirection(dir);
-				for (const bool flank :
-					{
-						true, false
-					})
+				for (const bool flank : booleans)
 				{
 					mock.setFlankProtection(flank);
 
@@ -78,10 +67,7 @@ void TestDoubleCrossSwitchWidget::testHavingLock()
 
 void TestDoubleCrossSwitchWidget::testSwitchStateAC()
 {
-	for (const bool right_bended :
-		{
-			true, false
-		})
+	for (const bool right_bended : booleans)
 	{
 		mock.setRightHanded(right_bended);
 		mock.setSwitchState(DoubleCrossSwitch::State::AC);
@@ -95,10 +81,7 @@ void TestDoubleCrossSwitchWidget::testSwitchStateAC()
 
 void TestDoubleCrossSwitchWidget::testSwitchStateAD()
 {
-	for (const bool right_bended :
-		{
-			true, false
-		})
+	for (const bool right_bended : booleans)
 	{
 		mock.setRightHanded(right_bended);
 		mock.setSwitchState(DoubleCrossSwitch::State::AD);
@@ -112,10 +95,7 @@ void TestDoubleCrossSwitchWidget::testSwitchStateAD()
 
 void TestDoubleCrossSwitchWidget::testSwitchStateBC()
 {
-	for (const bool right_bended :
-		{
-			true, false
-		})
+	for (const bool right_bended : booleans)
 	{
 		mock.setRightHanded(right_bended);
 		mock.setSwitchState(DoubleCrossSwitch::State::BC);
@@ -129,10 +109,7 @@ void TestDoubleCrossSwitchWidget::testSwitchStateBC()
 
 void TestDoubleCrossSwitchWidget::testSwitchStateBD()
 {
-	for (const bool right_bended :
-		{
-			true, false
-		})
+	for (const bool right_bended : booleans)
 	{
 		mock.setRightHanded(right_bended);
 		mock.setSwitchState(DoubleCrossSwitch::State::BD);

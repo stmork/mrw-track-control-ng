@@ -31,6 +31,12 @@ namespace mrw::test
 			prepare(status);
 			paintEvent(nullptr);
 		}
+
+		const QList<QPoint> & connectors()
+		{
+			computeConnectors();
+			return connector_list;
+		}
 	};
 
 	class TestRailWidget : public QObject

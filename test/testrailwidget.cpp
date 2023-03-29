@@ -6,6 +6,7 @@
 #include <QTest>
 
 #include "testrailwidget.h"
+#include "collections.h"
 
 using namespace mrw::test;
 using namespace mrw::model;
@@ -32,28 +33,16 @@ void TestRailWidget::testSimple()
 
 void TestRailWidget::testPrepare()
 {
-	for (const LockState lock :
-		{
-			LockState::FAIL, LockState::UNLOCKED, LockState::PENDING, LockState::LOCKED
-		})
+	for (const LockState lock : lock_states)
 	{
 		mock.setLock(lock);
-		for (const SectionState state :
-			{
-				FREE, SHUNTING, TOUR, OCCUPIED, PASSED
-			})
+		for (const SectionState state : section_states)
 		{
 			mock.setSectionState(state);
-			for (const Bending bending :
-				{
-					Bending::LEFT, Bending::STRAIGHT, Bending::RIGHT
-				})
+			for (const Bending bending : bendings)
 			{
 				mock.setBending(bending);
-				for (const bool dir :
-					{
-						true, false
-					})
+				for (const bool dir : booleans)
 				{
 					mock.setDirection(dir);
 					for (int ext = 0; ext < 5; ext++)
@@ -90,22 +79,26 @@ void TestRailWidget::testEnds()
 	QVERIFY(!status.a_ends);
 	QVERIFY(!status.b_ends);
 	QVERIFY(!status.any_end);
+	QCOMPARE(widget.connectors().size(), 0u);
 
 	mock.setEnds(true, false);
 	widget.test(status);
 	QVERIFY( status.a_ends);
 	QVERIFY(!status.b_ends);
 	QVERIFY( status.any_end);
+	QCOMPARE(widget.connectors().size(), 0u);
 
 	mock.setEnds(false, true);
 	widget.test(status);
 	QVERIFY(!status.a_ends);
 	QVERIFY( status.b_ends);
 	QVERIFY( status.any_end);
+	QCOMPARE(widget.connectors().size(), 0);
 
 	mock.setEnds(true, true);
 	widget.test(status);
 	QVERIFY(status.a_ends);
 	QVERIFY(status.b_ends);
 	QVERIFY(status.any_end);
+	QCOMPARE(widget.connectors().size(), 0);
 }
