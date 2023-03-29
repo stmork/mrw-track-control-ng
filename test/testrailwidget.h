@@ -15,13 +15,32 @@
 
 namespace mrw::test
 {
+	class RailWidgetMock : public mrw::ui::RailWidget
+	{
+		Q_OBJECT
+
+	public:
+		explicit RailWidgetMock(mrw::ctrl::RailControllerMock & mock) :
+			RailWidget(nullptr, &mock)
+		{
+		}
+
+		void test(RailWidget::Status & status)
+		{
+			QPainter painter;
+
+			prepare(status);
+			paint(painter);
+		}
+	};
+
 	class TestRailWidget : public QObject
 	{
 		Q_OBJECT
 
 	private:
 		mrw::ctrl::RailControllerMock  mock;
-		mrw::ui::RailWidget            widget;
+		RailWidgetMock                 widget;
 		mrw::ui::RailWidget::Status    status;
 
 	public:

@@ -53,9 +53,8 @@ namespace mrw::ui
 
 		virtual void computeConnectors() override;
 
-		void prepare(Status & status) const;
-
 	protected:
+		void prepare(Status & status) const;
 		void paint(QPainter & painter) override;
 	};
 }

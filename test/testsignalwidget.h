@@ -15,13 +15,32 @@
 
 namespace mrw::test
 {
+	class SignalWidgetMock : public mrw::ui::SignalWidget
+	{
+		Q_OBJECT
+
+	public:
+		explicit SignalWidgetMock(mrw::ctrl::SignalControllerMock & mock) :
+			SignalWidget(nullptr, &mock)
+		{
+		}
+
+		void test(SignalWidget::Status & status)
+		{
+			QPainter painter;
+
+			prepare(status);
+			paint(painter);
+		}
+	};
+
 	class TestSignalWidget : public QObject
 	{
 		Q_OBJECT
 
 	private:
 		mrw::ctrl::SignalControllerMock  mock;
-		mrw::ui::SignalWidget            widget;
+		SignalWidgetMock                 widget;
 		mrw::ui::SignalWidget::Status    status;
 
 	public:

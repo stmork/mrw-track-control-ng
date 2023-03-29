@@ -14,9 +14,9 @@ using namespace mrw::ui;
 using LockState = Device::LockState;
 using Bending   = Position::Bending;
 
-TestRailWidget::TestRailWidget(QObject * parent) : QObject(parent)
+TestRailWidget::TestRailWidget(QObject * parent) :
+	QObject(parent), widget(mock)
 {
-	widget.setController(&mock);
 }
 
 void TestRailWidget::init()
@@ -26,7 +26,7 @@ void TestRailWidget::init()
 
 void TestRailWidget::testSimple()
 {
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(status.expandable);
 }
 
@@ -63,7 +63,7 @@ void TestRailWidget::testPrepare()
 						{
 							mock.setLines(lines);
 
-							widget.prepare(status);
+							widget.test(status);
 							QCOMPARE(status.direction, dir);
 							QCOMPARE(status.section_state, state);
 							QCOMPARE(status.lock_state, lock);
@@ -86,25 +86,25 @@ void TestRailWidget::testHavingLock()
 void TestRailWidget::testEnds()
 {
 	mock.setEnds(false, false);
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(!status.a_ends);
 	QVERIFY(!status.b_ends);
 	QVERIFY(!status.any_end);
 
 	mock.setEnds(true, false);
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY( status.a_ends);
 	QVERIFY(!status.b_ends);
 	QVERIFY( status.any_end);
 
 	mock.setEnds(false, true);
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(!status.a_ends);
 	QVERIFY( status.b_ends);
 	QVERIFY( status.any_end);
 
 	mock.setEnds(true, true);
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(status.a_ends);
 	QVERIFY(status.b_ends);
 	QVERIFY(status.any_end);

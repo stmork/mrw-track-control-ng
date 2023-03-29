@@ -15,9 +15,9 @@ using LockState = Device::LockState;
 using Bending   = Position::Bending;
 using Symbol    = Signal::Symbol;
 
-TestSignalWidget::TestSignalWidget(QObject * parent) : QObject(parent)
+TestSignalWidget::TestSignalWidget(QObject * parent) :
+	QObject(parent), widget(mock)
 {
-	widget.setController(&mock);
 }
 
 void TestSignalWidget::init()
@@ -27,7 +27,7 @@ void TestSignalWidget::init()
 
 void TestSignalWidget::testSimple()
 {
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(status.expandable);
 }
 
@@ -61,7 +61,7 @@ void TestSignalWidget::testPrepare()
 					{
 						mock.setExtension(ext);
 
-						widget.prepare(status);
+						widget.test(status);
 						QCOMPARE(status.direction, dir);
 						QCOMPARE(status.section_state, state);
 						QCOMPARE(status.lock_state, lock);
@@ -101,7 +101,7 @@ void TestSignalWidget::testSh0()
 		{
 			mock.setMainSymbol(main);
 
-			widget.prepare(status);
+			widget.test(status);
 
 			QCOMPARE(status.has_main,     false);
 			QCOMPARE(status.has_distant,  false);
@@ -143,7 +143,7 @@ void TestSignalWidget::testSh1()
 		{
 			mock.setMainSymbol(main);
 
-			widget.prepare(status);
+			widget.test(status);
 
 			QCOMPARE(status.has_main,     false);
 			QCOMPARE(status.has_distant,  false);
@@ -186,7 +186,7 @@ void TestSignalWidget::testVr0()
 		{
 			mock.setMainSymbol(main);
 
-			widget.prepare(status);
+			widget.test(status);
 
 			QCOMPARE(status.has_main,     false);
 			QCOMPARE(status.has_distant,  true);
@@ -229,7 +229,7 @@ void TestSignalWidget::testVr1()
 		{
 			mock.setMainSymbol(main);
 
-			widget.prepare(status);
+			widget.test(status);
 
 			QCOMPARE(status.has_main,     false);
 			QCOMPARE(status.has_distant,  true);
@@ -272,7 +272,7 @@ void TestSignalWidget::testHp0()
 		{
 			mock.setDistantSymbol(distant);
 
-			widget.prepare(status);
+			widget.test(status);
 
 			QCOMPARE(status.has_main,     true);
 			QCOMPARE(status.has_distant,  false);
@@ -315,7 +315,7 @@ void TestSignalWidget::testHp1()
 		{
 			mock.setDistantSymbol(distant);
 
-			widget.prepare(status);
+			widget.test(status);
 
 			QCOMPARE(status.has_main,     true);
 			QCOMPARE(status.has_distant,  false);
@@ -358,7 +358,7 @@ void TestSignalWidget::testHp0WithDistant()
 		{
 			mock.setDistantSymbol(distant);
 
-			widget.prepare(status);
+			widget.test(status);
 
 			QCOMPARE(status.has_main,     true);
 			QCOMPARE(status.has_distant,  true);
@@ -401,7 +401,7 @@ void TestSignalWidget::testHp1Vr0()
 		{
 			mock.setShuntSymbol(shunt);
 
-			widget.prepare(status);
+			widget.test(status);
 
 			QCOMPARE(status.has_main,     true);
 			QCOMPARE(status.has_distant,  true);
@@ -444,7 +444,7 @@ void TestSignalWidget::testHp1Vr1()
 		{
 			mock.setShuntSymbol(shunt);
 
-			widget.prepare(status);
+			widget.test(status);
 
 			QCOMPARE(status.has_main,     true);
 			QCOMPARE(status.has_distant,  true);
@@ -486,7 +486,7 @@ void TestSignalWidget::testHp00()
 		{
 			mock.setDistantSymbol(distant);
 
-			widget.prepare(status);
+			widget.test(status);
 
 			QCOMPARE(status.has_main,     true);
 			QCOMPARE(status.has_distant,  has_distant);
@@ -523,7 +523,7 @@ void TestSignalWidget::testHp0Sh1()
 	{
 		mock.setDistantSymbol(distant);
 
-		widget.prepare(status);
+		widget.test(status);
 
 		QCOMPARE(status.has_main,     true);
 		QCOMPARE(status.has_distant,  false);
