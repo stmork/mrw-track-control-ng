@@ -20,6 +20,8 @@ DoubleCrossSwitchWidget::DoubleCrossSwitchWidget(
 
 void DoubleCrossSwitchWidget::computeConnectors()
 {
+	Q_ASSERT(base_controller != nullptr);
+
 	connector_list.clear();
 	if (controller<BaseSwitchController>()->isRightBended())
 	{

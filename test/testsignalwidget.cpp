@@ -473,12 +473,15 @@ void TestSignalWidget::testConnections()
 {
 	for (const Bending bending : bendings)
 	{
-		mock.setExtension(0);
 		mock.setBending(bending);
-		QCOMPARE(widget.connectors().size(), 0);
+		for (const bool dir : booleans)
+		{
+			mock.setDirection(dir);
+			mock.setExtension(0);
+			QCOMPARE(widget.connectors().size(), 0);
 
-		mock.setExtension(Position::FRACTION);
-		mock.setBending(bending);
-		QCOMPARE(widget.connectors().size(), bending != Bending::STRAIGHT ? 1 : 0);
+			mock.setExtension(Position::FRACTION);
+			QCOMPARE(widget.connectors().size(), bending != Bending::STRAIGHT ? 1 : 0);
+		}
 	}
 }

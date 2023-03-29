@@ -80,7 +80,7 @@ bool DoubleCrossSwitchControllerMock::hasFlankProtection() const
 	return flank_protection;
 }
 
-bool mrw::ctrl::DoubleCrossSwitchControllerMock::isRightBended() const
+bool DoubleCrossSwitchControllerMock::isRightBended() const
 {
 	return !left_handed;
 }

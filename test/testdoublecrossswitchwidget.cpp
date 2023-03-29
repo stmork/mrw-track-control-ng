@@ -76,6 +76,8 @@ void TestDoubleCrossSwitchWidget::testSwitchStateAC()
 		QVERIFY(status.is_b != right_bended);
 		QVERIFY(status.is_c == right_bended);
 		QVERIFY(status.is_d != right_bended);
+		QCOMPARE(status.right_bended, right_bended);
+		QCOMPARE(widget.connectors().size(), 2);
 	}
 }
 
@@ -90,6 +92,8 @@ void TestDoubleCrossSwitchWidget::testSwitchStateAD()
 		QVERIFY(status.is_b != right_bended);
 		QVERIFY(status.is_c != right_bended);
 		QVERIFY(status.is_d == right_bended);
+		QCOMPARE(status.right_bended, right_bended);
+		QCOMPARE(widget.connectors().size(), 2);
 	}
 }
 
@@ -104,6 +108,8 @@ void TestDoubleCrossSwitchWidget::testSwitchStateBC()
 		QVERIFY(status.is_b == right_bended);
 		QVERIFY(status.is_c == right_bended);
 		QVERIFY(status.is_d != right_bended);
+		QCOMPARE(status.right_bended, right_bended);
+		QCOMPARE(widget.connectors().size(), 2);
 	}
 }
 
@@ -118,6 +124,8 @@ void TestDoubleCrossSwitchWidget::testSwitchStateBD()
 		QVERIFY(status.is_b == right_bended);
 		QVERIFY(status.is_c != right_bended);
 		QVERIFY(status.is_d == right_bended);
+		QCOMPARE(status.right_bended, right_bended);
+		QCOMPARE(widget.connectors().size(), 2);
 	}
 }
 
@@ -126,10 +134,12 @@ void TestDoubleCrossSwitchWidget::testLeftHanded()
 	mock.setLeftHanded();
 	widget.test(status);
 	QVERIFY(!status.right_bended);
+	QCOMPARE(widget.connectors().size(), 2);
 
 	mock.setRightHanded(false);
 	widget.test(status);
 	QVERIFY(!status.right_bended);
+	QCOMPARE(widget.connectors().size(), 2);
 }
 
 void TestDoubleCrossSwitchWidget::testRightHanded()
@@ -137,8 +147,10 @@ void TestDoubleCrossSwitchWidget::testRightHanded()
 	mock.setRightHanded();
 	widget.test(status);
 	QVERIFY(status.right_bended);
+	QCOMPARE(widget.connectors().size(), 2);
 
 	mock.setLeftHanded(false);
 	widget.test(status);
 	QVERIFY(status.right_bended);
+	QCOMPARE(widget.connectors().size(), 2);
 }

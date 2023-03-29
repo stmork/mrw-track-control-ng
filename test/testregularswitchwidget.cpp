@@ -75,45 +75,71 @@ void TestRegularSwitchWidget::testHavingLock()
 
 void TestRegularSwitchWidget::testLeft()
 {
-	mock.setLeft();
-	widget.test(status);
-	QVERIFY(status.left);
-	QVERIFY(!status.right);
+	for (const bool inclination : booleans)
+	{
+		const int connections = inclination ? 2 : 1;
 
-	mock.setRight(false);
-	widget.test(status);
-	QVERIFY(status.left);
-	QVERIFY(!status.right);
+		mock.setInclined(inclination);
+		mock.setLeft();
+		widget.test(status);
+		QVERIFY(status.left);
+		QVERIFY(!status.right);
+		QCOMPARE(widget.connectors().size(), connections);
+
+		mock.setRight(false);
+		widget.test(status);
+		QVERIFY(status.left);
+		QVERIFY(!status.right);
+		QCOMPARE(widget.connectors().size(), connections);
+	}
 }
 
 void TestRegularSwitchWidget::testRight()
 {
-	mock.setRight();
-	widget.test(status);
-	QVERIFY(!status.left);
-	QVERIFY(status.right);
+	for (const bool inclination : booleans)
+	{
+		const int connections = inclination ? 2 : 1;
 
-	mock.setLeft(false);
-	widget.test(status);
-	QVERIFY(!status.left);
-	QVERIFY(status.right);
+		mock.setInclined(inclination);
+		mock.setRight();
+		widget.test(status);
+		QVERIFY(!status.left);
+		QVERIFY(status.right);
+		QCOMPARE(widget.connectors().size(), connections);
+
+		mock.setLeft(false);
+		widget.test(status);
+		QVERIFY(!status.left);
+		QVERIFY(status.right);
+		QCOMPARE(widget.connectors().size(), connections);
+	}
 }
 
 void TestRegularSwitchWidget::testBending()
 {
-	mock.setLeftHanded();
-	widget.test(status);
-	QCOMPARE(status.bending, Bending::LEFT);
+	for (const bool inclination : booleans)
+	{
+		const int connections = inclination ? 2 : 1;
 
-	mock.setRightHanded();
-	widget.test(status);
-	QCOMPARE(status.bending, Bending::RIGHT);
+		mock.setInclined(inclination);
+		mock.setLeftHanded();
+		widget.test(status);
+		QCOMPARE(status.bending, Bending::LEFT);
+		QCOMPARE(widget.connectors().size(), connections);
 
-	mock.setLeftHanded(false);
-	widget.test(status);
-	QCOMPARE(status.bending, Bending::RIGHT);
+		mock.setRightHanded();
+		widget.test(status);
+		QCOMPARE(status.bending, Bending::RIGHT);
+		QCOMPARE(widget.connectors().size(), connections);
 
-	mock.setRightHanded(false);
-	widget.test(status);
-	QCOMPARE(status.bending, Bending::LEFT);
+		mock.setLeftHanded(false);
+		widget.test(status);
+		QCOMPARE(status.bending, Bending::RIGHT);
+		QCOMPARE(widget.connectors().size(), connections);
+
+		mock.setRightHanded(false);
+		widget.test(status);
+		QCOMPARE(status.bending, Bending::LEFT);
+		QCOMPARE(widget.connectors().size(), connections);
+	}
 }
