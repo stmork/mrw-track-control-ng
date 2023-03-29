@@ -14,9 +14,9 @@ using namespace mrw::ui;
 using LockState = Device::LockState;
 using Bending   = Position::Bending;
 
-TestDoubleCrossSwitchWidget::TestDoubleCrossSwitchWidget(QObject * parent) : QObject(parent)
+TestDoubleCrossSwitchWidget::TestDoubleCrossSwitchWidget(QObject * parent) :
+	QObject(parent), widget(mock)
 {
-	widget.setController(&mock);
 }
 
 void TestDoubleCrossSwitchWidget::init()
@@ -26,7 +26,7 @@ void TestDoubleCrossSwitchWidget::init()
 
 void TestDoubleCrossSwitchWidget::testSimple()
 {
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(!status.expandable);
 }
 
@@ -57,7 +57,7 @@ void TestDoubleCrossSwitchWidget::testPrepare()
 				{
 					mock.setFlankProtection(flank);
 
-					widget.prepare(status);
+					widget.test(status);
 					QCOMPARE(status.direction, dir);
 					QCOMPARE(status.section_state, state);
 					QCOMPARE(status.lock_state, lock);
@@ -85,7 +85,7 @@ void TestDoubleCrossSwitchWidget::testSwitchStateAC()
 	{
 		mock.setRightHanded(right_bended);
 		mock.setSwitchState(DoubleCrossSwitch::State::AC);
-		widget.prepare(status);
+		widget.test(status);
 		QVERIFY(status.is_a == right_bended);
 		QVERIFY(status.is_b != right_bended);
 		QVERIFY(status.is_c == right_bended);
@@ -102,7 +102,7 @@ void TestDoubleCrossSwitchWidget::testSwitchStateAD()
 	{
 		mock.setRightHanded(right_bended);
 		mock.setSwitchState(DoubleCrossSwitch::State::AD);
-		widget.prepare(status);
+		widget.test(status);
 		QVERIFY(status.is_a == right_bended);
 		QVERIFY(status.is_b != right_bended);
 		QVERIFY(status.is_c != right_bended);
@@ -119,7 +119,7 @@ void TestDoubleCrossSwitchWidget::testSwitchStateBC()
 	{
 		mock.setRightHanded(right_bended);
 		mock.setSwitchState(DoubleCrossSwitch::State::BC);
-		widget.prepare(status);
+		widget.test(status);
 		QVERIFY(status.is_a != right_bended);
 		QVERIFY(status.is_b == right_bended);
 		QVERIFY(status.is_c == right_bended);
@@ -136,7 +136,7 @@ void TestDoubleCrossSwitchWidget::testSwitchStateBD()
 	{
 		mock.setRightHanded(right_bended);
 		mock.setSwitchState(DoubleCrossSwitch::State::BD);
-		widget.prepare(status);
+		widget.test(status);
 		QVERIFY(status.is_a != right_bended);
 		QVERIFY(status.is_b == right_bended);
 		QVERIFY(status.is_c != right_bended);
@@ -147,21 +147,21 @@ void TestDoubleCrossSwitchWidget::testSwitchStateBD()
 void TestDoubleCrossSwitchWidget::testLeftHanded()
 {
 	mock.setLeftHanded();
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(!status.right_bended);
 
 	mock.setRightHanded(false);
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(!status.right_bended);
 }
 
 void TestDoubleCrossSwitchWidget::testRightHanded()
 {
 	mock.setRightHanded();
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(status.right_bended);
 
 	mock.setLeftHanded(false);
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(status.right_bended);
 }

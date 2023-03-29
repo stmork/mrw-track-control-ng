@@ -15,13 +15,32 @@
 
 namespace mrw::test
 {
+	class RegularSwitchWidgetMock : public mrw::ui::RegularSwitchWidget
+	{
+		Q_OBJECT
+
+	public:
+		explicit RegularSwitchWidgetMock(mrw::ctrl::RegularSwitchControllerMock & mock) :
+			RegularSwitchWidget(nullptr, &mock)
+		{
+		}
+
+		void test(RegularSwitchWidget::Status & status)
+		{
+			QPainter painter;
+
+			prepare(status);
+			paint(painter);
+		}
+	};
+
 	class TestRegularSwitchWidget : public QObject
 	{
 		Q_OBJECT
 
 	private:
 		mrw::ctrl::RegularSwitchControllerMock  mock;
-		mrw::ui::RegularSwitchWidget            widget;
+		RegularSwitchWidgetMock                 widget;
 		mrw::ui::RegularSwitchWidget::Status    status;
 
 	public:

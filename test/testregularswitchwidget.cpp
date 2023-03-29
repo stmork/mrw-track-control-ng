@@ -14,9 +14,9 @@ using namespace mrw::ui;
 using LockState = Device::LockState;
 using Bending   = Position::Bending;
 
-TestRegularSwitchWidget::TestRegularSwitchWidget(QObject * parent) : QObject(parent)
+TestRegularSwitchWidget::TestRegularSwitchWidget(QObject * parent) :
+	QObject(parent), widget(mock)
 {
-	widget.setController(&mock);
 }
 
 void TestRegularSwitchWidget::init()
@@ -26,7 +26,7 @@ void TestRegularSwitchWidget::init()
 
 void TestRegularSwitchWidget::testSimple()
 {
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(status.expandable);
 }
 
@@ -66,7 +66,7 @@ void TestRegularSwitchWidget::testPrepare()
 						{
 							mock.setExtension(ext);
 
-							widget.prepare(status);
+							widget.test(status);
 							QCOMPARE(status.direction, dir);
 							QCOMPARE(status.section_state, state);
 							QCOMPARE(status.lock_state, lock);
@@ -90,12 +90,12 @@ void TestRegularSwitchWidget::testHavingLock()
 void TestRegularSwitchWidget::testLeft()
 {
 	mock.setLeft();
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(status.left);
 	QVERIFY(!status.right);
 
 	mock.setRight(false);
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(status.left);
 	QVERIFY(!status.right);
 }
@@ -103,12 +103,12 @@ void TestRegularSwitchWidget::testLeft()
 void TestRegularSwitchWidget::testRight()
 {
 	mock.setRight();
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(!status.left);
 	QVERIFY(status.right);
 
 	mock.setLeft(false);
-	widget.prepare(status);
+	widget.test(status);
 	QVERIFY(!status.left);
 	QVERIFY(status.right);
 }
@@ -116,18 +116,18 @@ void TestRegularSwitchWidget::testRight()
 void TestRegularSwitchWidget::testBending()
 {
 	mock.setLeftHanded();
-	widget.prepare(status);
+	widget.test(status);
 	QCOMPARE(status.bending, Bending::LEFT);
 
 	mock.setRightHanded();
-	widget.prepare(status);
+	widget.test(status);
 	QCOMPARE(status.bending, Bending::RIGHT);
 
 	mock.setLeftHanded(false);
-	widget.prepare(status);
+	widget.test(status);
 	QCOMPARE(status.bending, Bending::RIGHT);
 
 	mock.setRightHanded(false);
-	widget.prepare(status);
+	widget.test(status);
 	QCOMPARE(status.bending, Bending::LEFT);
 }

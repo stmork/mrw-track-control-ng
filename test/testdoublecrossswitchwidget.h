@@ -15,13 +15,32 @@
 
 namespace mrw::test
 {
+	class DoubleCrossSwitchWidgetMock : public mrw::ui::DoubleCrossSwitchWidget
+	{
+		Q_OBJECT
+
+	public:
+		explicit DoubleCrossSwitchWidgetMock(mrw::ctrl::DoubleCrossSwitchControllerMock & mock) :
+			DoubleCrossSwitchWidget(nullptr, &mock)
+		{
+		}
+
+		void test(DoubleCrossSwitchWidget::Status & status)
+		{
+			QPainter painter;
+
+			prepare(status);
+			paint(painter);
+		}
+	};
+
 	class TestDoubleCrossSwitchWidget : public QObject
 	{
 		Q_OBJECT
 
 	private:
 		mrw::ctrl::DoubleCrossSwitchControllerMock  mock;
-		mrw::ui::DoubleCrossSwitchWidget            widget;
+		DoubleCrossSwitchWidgetMock                 widget;
 		mrw::ui::DoubleCrossSwitchWidget::Status    status;
 
 	public:

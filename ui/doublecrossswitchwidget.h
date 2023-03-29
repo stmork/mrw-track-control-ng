@@ -55,10 +55,10 @@ namespace mrw::ui
 
 		virtual void computeConnectors() override;
 
-		void prepare(Status & status) const;
 		virtual bool hasLock() const override;
 
 	protected:
+		void prepare(Status & status) const;
 		void paint(QPainter & painter) override;
 	};
 }
