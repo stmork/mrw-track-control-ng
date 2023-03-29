@@ -23,14 +23,13 @@ namespace mrw::test
 		explicit DoubleCrossSwitchWidgetMock(mrw::ctrl::DoubleCrossSwitchControllerMock & mock) :
 			DoubleCrossSwitchWidget(nullptr, &mock)
 		{
+			setVerbose(true);
 		}
 
 		void test(DoubleCrossSwitchWidget::Status & status)
 		{
-			QPainter painter;
-
 			prepare(status);
-			paint(painter);
+			paintEvent(nullptr);
 		}
 	};
 

@@ -23,14 +23,13 @@ namespace mrw::test
 		explicit RailWidgetMock(mrw::ctrl::RailControllerMock & mock) :
 			RailWidget(nullptr, &mock)
 		{
+			setVerbose(true);
 		}
 
 		void test(RailWidget::Status & status)
 		{
-			QPainter painter;
-
 			prepare(status);
-			paint(painter);
+			paintEvent(nullptr);
 		}
 	};
 

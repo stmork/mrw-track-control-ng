@@ -23,14 +23,13 @@ namespace mrw::test
 		explicit RegularSwitchWidgetMock(mrw::ctrl::RegularSwitchControllerMock & mock) :
 			RegularSwitchWidget(nullptr, &mock)
 		{
+			setVerbose(true);
 		}
 
 		void test(RegularSwitchWidget::Status & status)
 		{
-			QPainter painter;
-
 			prepare(status);
-			paint(painter);
+			paintEvent(nullptr);
 		}
 	};
 

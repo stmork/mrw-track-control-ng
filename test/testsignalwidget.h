@@ -23,14 +23,13 @@ namespace mrw::test
 		explicit SignalWidgetMock(mrw::ctrl::SignalControllerMock & mock) :
 			SignalWidget(nullptr, &mock)
 		{
+			setVerbose(true);
 		}
 
 		void test(SignalWidget::Status & status)
 		{
-			QPainter painter;
-
 			prepare(status);
-			paint(painter);
+			paintEvent(nullptr);
 		}
 	};
 
