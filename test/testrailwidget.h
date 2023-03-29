@@ -13,6 +13,8 @@
 #include <mock/railcontrollermock.h>
 #include <ui/railwidget.h>
 
+#include "collections.h"
+
 namespace mrw::test
 {
 	class RailWidgetMock : public mrw::ui::RailWidget
@@ -39,7 +41,7 @@ namespace mrw::test
 		}
 	};
 
-	class TestRailWidget : public QObject
+	class TestRailWidget : public QObject, protected Collections
 	{
 		Q_OBJECT
 

@@ -6,7 +6,6 @@
 #include <QTest>
 
 #include "testregularswitchwidget.h"
-#include "collections.h"
 
 using namespace mrw::test;
 using namespace mrw::model;

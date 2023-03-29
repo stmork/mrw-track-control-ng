@@ -13,6 +13,8 @@
 #include <mock/signalcontrollermock.h>
 #include <ui/signalwidget.h>
 
+#include "collections.h"
+
 namespace mrw::test
 {
 	class SignalWidgetMock : public mrw::ui::SignalWidget
@@ -39,7 +41,7 @@ namespace mrw::test
 		}
 	};
 
-	class TestSignalWidget : public QObject
+	class TestSignalWidget : public QObject, protected Collections
 	{
 		Q_OBJECT
 

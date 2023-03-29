@@ -6,7 +6,6 @@
 #include <QTest>
 
 #include "testrailwidget.h"
-#include "collections.h"
 
 using namespace mrw::test;
 using namespace mrw::model;
@@ -74,6 +73,8 @@ void TestRailWidget::testHavingLock()
 
 void TestRailWidget::testEnds()
 {
+	mock.setLines(0);
+	mock.setExtension(Position::FRACTION);
 	for (const bool dir : booleans)
 	{
 		mock.setDirection(dir);
@@ -87,14 +88,14 @@ void TestRailWidget::testEnds()
 			QVERIFY(!status.a_ends);
 			QVERIFY(!status.b_ends);
 			QVERIFY(!status.any_end);
-			QCOMPARE(widget.connectors().size(), 0);
+			QCOMPARE(widget.connectors().size(), connections);
 
 			mock.setEnds(true, false);
 			widget.test(status);
 			QVERIFY( status.a_ends);
 			QVERIFY(!status.b_ends);
 			QVERIFY( status.any_end);
-			QCOMPARE(widget.connectors().size(), 0);
+			QCOMPARE(widget.connectors().size(), 0u);
 
 			mock.setEnds(false, true);
 			widget.test(status);
@@ -108,7 +109,7 @@ void TestRailWidget::testEnds()
 			QVERIFY(status.a_ends);
 			QVERIFY(status.b_ends);
 			QVERIFY(status.any_end);
-			QCOMPARE(widget.connectors().size(), connections);
+			QCOMPARE(widget.connectors().size(), 0u);
 		}
 	}
 }

@@ -13,6 +13,8 @@
 #include <mock/regularswitchcontrollermock.h>
 #include <ui/regularswitchwidget.h>
 
+#include "collections.h"
+
 namespace mrw::test
 {
 	class RegularSwitchWidgetMock : public mrw::ui::RegularSwitchWidget
@@ -39,7 +41,7 @@ namespace mrw::test
 		}
 	};
 
-	class TestRegularSwitchWidget : public QObject
+	class TestRegularSwitchWidget : public QObject, protected Collections
 	{
 		Q_OBJECT
 

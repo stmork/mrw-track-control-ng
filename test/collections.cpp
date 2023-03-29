@@ -12,27 +12,27 @@ using Bending   = Position::Bending;
 using LockState = Device::LockState;
 using Symbol    = Signal::Symbol;
 
-const std::vector<bool> booleans
+const std::vector<bool> Collections::booleans
 {
 	true, false
 };
 
-const std::vector<Bending> bendings
+const std::vector<Bending> Collections::bendings
 {
 	Bending::LEFT, Bending::STRAIGHT, Bending::RIGHT
 };
 
-const std::vector<mrw::model::SectionState> section_states
+const std::vector<mrw::model::SectionState> Collections::section_states
 {
 	FREE, SHUNTING, TOUR, OCCUPIED, PASSED
 };
 
-const std::vector<LockState> lock_states
+const std::vector<LockState> Collections::lock_states
 {
 	LockState::FAIL, LockState::UNLOCKED, LockState::PENDING, LockState::LOCKED
 };
 
-const std::vector<mrw::model::Signal::Symbol> signal_symbols
+const std::vector<mrw::model::Signal::Symbol> Collections::signal_symbols
 {
 	Symbol::OFF, Symbol::STOP, Symbol::GO
 };

@@ -6,7 +6,6 @@
 #include <QTest>
 
 #include "testsignalwidget.h"
-#include "collections.h"
 
 using namespace mrw::test;
 using namespace mrw::model;

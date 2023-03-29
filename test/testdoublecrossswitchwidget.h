@@ -13,6 +13,8 @@
 #include <mock/doublecrossswitchcontrollermock.h>
 #include <ui/doublecrossswitchwidget.h>
 
+#include "collections.h"
+
 namespace mrw::test
 {
 	class DoubleCrossSwitchWidgetMock : public mrw::ui::DoubleCrossSwitchWidget
@@ -39,7 +41,7 @@ namespace mrw::test
 		}
 	};
 
-	class TestDoubleCrossSwitchWidget : public QObject
+	class TestDoubleCrossSwitchWidget : public QObject, protected Collections
 	{
 		Q_OBJECT
 
