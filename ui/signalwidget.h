@@ -10,6 +10,7 @@
 
 #include <ui/controllerwidget.h>
 #include <ctrl/signalcontroller.h>
+#include <model/position.h>
 
 namespace mrw::ui
 {
@@ -70,6 +71,9 @@ namespace mrw::ui
 			bool   draw_distant  = false;
 
 			bool   draw_lock     = false;
+
+			mrw::model::Position::Bending do_bend =
+				mrw::model::Position::Bending::STRAIGHT;
 		};
 
 		explicit SignalWidget(

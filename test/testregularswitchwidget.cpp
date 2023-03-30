@@ -22,6 +22,11 @@ TestRegularSwitchWidget::TestRegularSwitchWidget(QObject * parent) :
 void TestRegularSwitchWidget::init()
 {
 	status = RegularSwitchWidget::Status();
+	mock.setExtension(0);
+	mock.setSectionState(FREE);
+	mock.setLock(LockState::UNLOCKED);
+	mock.setFlankProtection(false);
+	mock.setInclined(false);
 }
 
 void TestRegularSwitchWidget::testSimple()

@@ -6,15 +6,13 @@
 #include <QPainter>
 
 #include <ui/regularswitchwidget.h>
-#include <ctrl/doublecrossswitchcontroller.h>
 
 using namespace mrw::can;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 using namespace mrw::model;
 
-using LockState       = Device::LockState;
-using ValueController = RegularSwitchController;
+using LockState = Device::LockState;
 
 RegularSwitchWidget::RegularSwitchWidget(
 	QWidget         *         parent,

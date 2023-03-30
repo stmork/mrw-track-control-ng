@@ -9,7 +9,6 @@
 #define MRW_UI_DOUBLECROSSSWITCHWIDGET_H
 
 #include <ui/controllerwidget.h>
-#include <model/doublecrossswitch.h>
 #include <ctrl/doublecrossswitchcontroller.h>
 
 namespace mrw::ui

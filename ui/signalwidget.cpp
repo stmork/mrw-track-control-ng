@@ -7,7 +7,6 @@
 #include <QPainterPath>
 
 #include <ui/signalwidget.h>
-#include <model/position.h>
 
 using namespace mrw::model;
 using namespace mrw::ui;
@@ -61,9 +60,14 @@ void SignalWidget::prepare(SignalWidget::Status & status) const
 
 	controller<SignalController>()->status(status);
 
+	status.draw_lock     =
+		(status.lock_state == LockState::PENDING) ||
+		(status.lock_state == LockState::LOCKED);
+	status.do_bend       = status.extensions >= Position::FRACTION ?
+		status.bending : Bending::STRAIGHT;
+
 	status.draw_distant  = false;
 	status.draw_shunt    = false;
-	status.draw_lock     = (status.lock_state == LockState::PENDING) || (status.lock_state == LockState::LOCKED);
 	status.section_color = sectionColor(status.section_state);
 
 	// Predefine signal colors.
@@ -128,8 +132,6 @@ void SignalWidget::paint(QPainter & painter)
 	const float   shift   = SCALE * status.extensions / Position::FRACTION;
 	const float   border  = SCALE + shift;
 	const float   start   = SCALE - border;
-	const Bending do_bend =
-		status.extensions >= Position::FRACTION ? status.bending : Bending::STRAIGHT;
 
 	// Unify coordinates
 	rescale(painter, (Position::FRACTION + status.extensions) * SCALE / Position::HALF);
@@ -162,7 +164,9 @@ void SignalWidget::paint(QPainter & painter)
 	if (status.draw_lock)
 	{
 		painter.drawLine( -border,    0.0f, start - 25.0f, 0.0f);
-		painter.drawLine( start + 25.0f, 0.0f, do_bend == Bending::STRAIGHT ? border : border - SCALE, 0.0f);
+		painter.drawLine(
+			start + 25.0f, 0.0f,
+			status.do_bend == Bending::STRAIGHT ? border : border - SCALE, 0.0f);
 
 		// Draw point lock
 		if (lockVisible(status.lock_state))
@@ -175,16 +179,18 @@ void SignalWidget::paint(QPainter & painter)
 	}
 	else
 	{
-		painter.drawLine( -border, 0.0f, do_bend == Bending::STRAIGHT ? border : border - SCALE, 0.0f);
+		painter.drawLine(
+			-border, 0.0f,
+			status.do_bend == Bending::STRAIGHT ? border : border - SCALE, 0.0f);
 	}
 
 	// Rail bending to neighbour.
-	if (do_bend != Bending::STRAIGHT)
+	if (status.do_bend != Bending::STRAIGHT)
 	{
 		const float height = SCALE + RAIL_WIDTH / 2;
 		const float x      = border - SCALE / Position::HALF;
 
-		if (do_bend == Bending::RIGHT)
+		if (status.do_bend == Bending::RIGHT)
 		{
 			drawSheared(painter, pen.color(), x,  SCALE, -height, -RAIL_SLOPE);
 		}

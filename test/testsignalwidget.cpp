@@ -23,6 +23,10 @@ TestSignalWidget::TestSignalWidget(QObject * parent) :
 void TestSignalWidget::init()
 {
 	status = SignalWidget::Status();
+	mock.setExtension(0);
+	mock.setSectionState(FREE);
+	mock.setLock(LockState::UNLOCKED);
+	mock.setBending(Bending::STRAIGHT);
 }
 
 void TestSignalWidget::testSimple()
@@ -482,6 +486,21 @@ void TestSignalWidget::testConnections()
 
 			mock.setExtension(Position::FRACTION);
 			QCOMPARE(widget.connectors().size(), bending != Bending::STRAIGHT ? 1 : 0);
+		}
+	}
+}
+
+void TestSignalWidget::testBending()
+{
+	for (unsigned ext = 0; ext <= Position::FRACTION; ext++)
+	{
+		mock.setExtension(ext);
+		for (const Bending bending : bendings)
+		{
+			mock.setBending(bending);
+			widget.test(status);
+			QCOMPARE(status.bending, bending);
+			QCOMPARE(status.do_bend, ext < Position::FRACTION ? Bending::STRAIGHT : bending);
 		}
 	}
 }

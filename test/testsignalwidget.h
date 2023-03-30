@@ -72,6 +72,7 @@ namespace mrw::test
 		void testHp00();
 		void testHp0Sh1();
 		void testConnections();
+		void testBending();
 	};
 }
 
