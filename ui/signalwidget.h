@@ -64,12 +64,11 @@ namespace mrw::ui
 			QColor main_color    = RED;
 			QColor distant_color = YELLOW;
 			QColor shunt_color   = RED;
+			QColor mast_color    = RED;
 
 			// Draw priorities.
-			QColor mast_color    = RED;
 			bool   draw_shunt    = false;
 			bool   draw_distant  = false;
-
 			bool   draw_lock     = false;
 
 			mrw::model::Position::Bending do_bend =

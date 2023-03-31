@@ -501,3 +501,22 @@ void TestSignalWidget::testBending()
 		}
 	}
 }
+
+void TestSignalWidget::testDrawLock()
+{
+	mock.setLock(LockState::FAIL);
+	widget.test(status);
+	QVERIFY(!status.draw_lock);
+
+	mock.setLock(LockState::UNLOCKED);
+	widget.test(status);
+	QVERIFY(!status.draw_lock);
+
+	mock.setLock(LockState::PENDING);
+	widget.test(status);
+	QVERIFY(status.draw_lock);
+
+	mock.setLock(LockState::LOCKED);
+	widget.test(status);
+	QVERIFY(status.draw_lock);
+}

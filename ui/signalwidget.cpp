@@ -129,9 +129,9 @@ void SignalWidget::paint(QPainter & painter)
 
 	prepare(status);
 
-	const float   shift   = SCALE * status.extensions / Position::FRACTION;
-	const float   border  = SCALE + shift;
-	const float   start   = SCALE - border;
+	const float shift  = SCALE * status.extensions / Position::FRACTION;
+	const float border = SCALE + shift;
+	const float start  = SCALE - border;
 
 	// Unify coordinates
 	rescale(painter, (Position::FRACTION + status.extensions) * SCALE / Position::HALF);

@@ -73,6 +73,7 @@ namespace mrw::test
 		void testHp0Sh1();
 		void testConnections();
 		void testBending();
+		void testDrawLock();
 	};
 }
 
