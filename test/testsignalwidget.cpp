@@ -23,10 +23,19 @@ TestSignalWidget::TestSignalWidget(QObject * parent) :
 void TestSignalWidget::init()
 {
 	status = SignalWidget::Status();
+	mock.setDirection();
 	mock.setExtension(0);
 	mock.setSectionState(FREE);
 	mock.setLock(LockState::UNLOCKED);
 	mock.setBending(Bending::STRAIGHT);
+
+	mock.setShunting(false);
+	mock.setDistant(false);
+	mock.setMain(false);
+
+	mock.setShuntStop();
+	mock.setDistantStop();
+	mock.setMainStop();
 }
 
 void TestSignalWidget::testSimple()

@@ -22,11 +22,13 @@ TestRailWidget::TestRailWidget(QObject * parent) :
 void TestRailWidget::init()
 {
 	status = RailWidget::Status();
+	mock.setDirection();
 	mock.setExtension(0);
 	mock.setLines(0);
 	mock.setSectionState(FREE);
 	mock.setLock(LockState::UNLOCKED);
 	mock.setBending(Bending::STRAIGHT);
+	mock.setEnds(false, false);
 }
 
 void TestRailWidget::testSimple()

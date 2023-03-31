@@ -22,8 +22,11 @@ TestDoubleCrossSwitchWidget::TestDoubleCrossSwitchWidget(QObject * parent) :
 void TestDoubleCrossSwitchWidget::init()
 {
 	status = DoubleCrossSwitchWidget::Status();
+	mock.setDirection();
 	mock.setSectionState(FREE);
 	mock.setLock(LockState::UNLOCKED);
+	mock.setSwitchState(DoubleCrossSwitch::State::BC);
+	mock.setRightHanded();
 	mock.setFlankProtection(false);
 }
 
