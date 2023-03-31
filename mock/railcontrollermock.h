@@ -33,6 +33,8 @@ namespace mrw::ctrl
 	public:
 		explicit RailControllerMock(QObject * parent = nullptr);
 
+		void reset();
+
 		void setDirection(const bool dir = true);
 		void setSectionState(const mrw::model::SectionState state);
 		void setLock(const mrw::model::Device::LockState lock);

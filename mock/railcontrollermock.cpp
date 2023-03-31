@@ -8,11 +8,23 @@
 using namespace mrw::model;
 using namespace mrw::ctrl;
 
-using Bending = Position::Bending;
+using Bending   = Position::Bending;
+using LockState = Device::LockState;
 
 RailControllerMock::RailControllerMock(QObject * parent) :
 	RailController(parent)
 {
+}
+
+void RailControllerMock::reset()
+{
+	setDirection();
+	setExtension(0);
+	setLines(0);
+	setSectionState(FREE);
+	setLock(LockState::UNLOCKED);
+	setBending(Bending::STRAIGHT);
+	setEnds(false, false);
 }
 
 void RailControllerMock::setSectionState(const SectionState state)

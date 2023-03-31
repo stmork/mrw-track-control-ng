@@ -11,8 +11,8 @@ using namespace mrw::test;
 using namespace mrw::model;
 using namespace mrw::ui;
 
-using LockState = Device::LockState;
 using Bending   = Position::Bending;
+using LockState = Device::LockState;
 
 TestRailWidget::TestRailWidget(QObject * parent) :
 	QObject(parent), widget(mock)
@@ -22,13 +22,7 @@ TestRailWidget::TestRailWidget(QObject * parent) :
 void TestRailWidget::init()
 {
 	status = RailWidget::Status();
-	mock.setDirection();
-	mock.setExtension(0);
-	mock.setLines(0);
-	mock.setSectionState(FREE);
-	mock.setLock(LockState::UNLOCKED);
-	mock.setBending(Bending::STRAIGHT);
-	mock.setEnds(false, false);
+	mock.reset();
 }
 
 void TestRailWidget::testSimple()

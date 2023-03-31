@@ -8,11 +8,29 @@
 using namespace mrw::model;
 using namespace mrw::ctrl;
 
-using Bending = Position::Bending;
+using Bending   = Position::Bending;
+using LockState = Device::LockState;
 
 SignalControllerMock::SignalControllerMock(QObject * parent) :
 	SignalController(parent)
 {
+}
+
+void mrw::ctrl::SignalControllerMock::reset()
+{
+	setDirection();
+	setExtension(0);
+	setSectionState(FREE);
+	setLock(LockState::UNLOCKED);
+	setBending(Bending::STRAIGHT);
+
+	setShunting(false);
+	setDistant(false);
+	setMain(true);
+
+	setShuntStop();
+	setDistantStop();
+	setMainStop();
 }
 
 void SignalControllerMock::setShunting(const bool shunt)

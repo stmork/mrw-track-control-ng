@@ -8,11 +8,24 @@
 using namespace mrw::model;
 using namespace mrw::ctrl;
 
-using Bending = Position::Bending;
+using Bending   = Position::Bending;
+using LockState = Device::LockState;
 
 RegularSwitchControllerMock::RegularSwitchControllerMock(QObject * parent) :
 	RegularSwitchController(parent)
 {
+}
+
+void RegularSwitchControllerMock::reset()
+{
+	setDirection();
+	setExtension(0);
+	setSectionState(FREE);
+	setLock(LockState::UNLOCKED);
+	setFlankProtection(false);
+	setInclined(false);
+	setLeftHanded();
+	setRight();
 }
 
 void RegularSwitchControllerMock::setLeft(const bool left)

@@ -32,6 +32,8 @@ namespace mrw::ctrl
 	public:
 		DoubleCrossSwitchControllerMock(QObject * parent = nullptr);
 
+		void reset();
+
 		void setSectionState(const mrw::model::SectionState state);
 		void setSwitchState(const mrw::model::DoubleCrossSwitch::State state);
 		void setDirection(const bool dir = true);

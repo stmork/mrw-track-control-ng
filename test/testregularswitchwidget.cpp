@@ -11,8 +11,8 @@ using namespace mrw::test;
 using namespace mrw::model;
 using namespace mrw::ui;
 
-using LockState = Device::LockState;
 using Bending   = Position::Bending;
+using LockState = Device::LockState;
 
 TestRegularSwitchWidget::TestRegularSwitchWidget(QObject * parent) :
 	QObject(parent), widget(mock)
@@ -22,14 +22,7 @@ TestRegularSwitchWidget::TestRegularSwitchWidget(QObject * parent) :
 void TestRegularSwitchWidget::init()
 {
 	status = RegularSwitchWidget::Status();
-	mock.setDirection();
-	mock.setExtension(0);
-	mock.setSectionState(FREE);
-	mock.setLock(LockState::UNLOCKED);
-	mock.setFlankProtection(false);
-	mock.setInclined(false);
-	mock.setLeftHanded();
-	mock.setRight();
+	mock.reset();
 }
 
 void TestRegularSwitchWidget::testSimple()

@@ -18,6 +18,16 @@ DoubleCrossSwitchControllerMock::DoubleCrossSwitchControllerMock(QObject * paren
 {
 }
 
+void mrw::ctrl::DoubleCrossSwitchControllerMock::reset()
+{
+	setDirection();
+	setSectionState(FREE);
+	setLock(LockState::UNLOCKED);
+	setSwitchState(DoubleCrossSwitch::State::AC);
+	setLeftHanded();
+	setFlankProtection(false);
+}
+
 void DoubleCrossSwitchControllerMock::setDirection(const bool dir)
 {
 	a_is_dir = !dir;
