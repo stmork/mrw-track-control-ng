@@ -55,6 +55,7 @@ Route::Route(
 
 	first->reserve();
 	track.push_back(first);
+	qInfo().noquote() << "First way point:" << first->toString();
 }
 
 Route::~Route()
@@ -69,7 +70,7 @@ bool Route::append(RailPart * target)
 {
 	__METHOD__;
 
-	qDebug().noquote() << "---------->" << *target;
+	qInfo().noquote() << "---------->" << target->toString();
 
 	last_valid_part    = track.back();
 

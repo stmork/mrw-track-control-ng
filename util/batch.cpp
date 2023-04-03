@@ -42,8 +42,11 @@ void Batch::reset()
 	qDebug("======================= Transaction (ID=%u) left %zu elements.",
 		id, transaction.size());
 
-	for (BatchParticipant * participant : transaction)
+	auto it = transaction.begin();
+	while (it != transaction.end())
 	{
+		BatchParticipant * participant = *it++;
+
 		participant->setBatch(nullptr);
 	}
 	transaction.clear();
@@ -122,11 +125,11 @@ void Batch::dump()
 		id, transaction.size());
 	for (BatchParticipant * participant : transaction)
 	{
-		qDebug() << participant->name();
+		qDebug().noquote() << participant->name();
 	}
 }
 
-void Batch::remove(mrw::util::BatchParticipant * element)
+void Batch::remove(BatchParticipant * element)
 {
 	transaction.erase(element);
 }
