@@ -93,7 +93,7 @@ bool Batch::decrease(BatchParticipant * element)
 	return false;
 }
 
-bool Batch::contains(BatchParticipant * ctrl)
+bool Batch::contains(BatchParticipant * ctrl) const
 {
 	return transaction.find(ctrl) != transaction.end();
 }
@@ -114,12 +114,12 @@ void Batch::tryComplete()
 	}
 }
 
-bool Batch::isCompleted()
+bool Batch::isCompleted() const
 {
 	return transaction.size() == 0;
 }
 
-void Batch::dump()
+void Batch::dump() const
 {
 	qDebug("======================= Transaction (ID=%u) contains %zu elements.",
 		id, transaction.size());

@@ -59,7 +59,7 @@ namespace mrw::util
 		/**
 		 * This method configures a Batch to be used by the methods increase()
 		 * and decrease(). If the parameter is @c nullptr the GlobalBatch is
-		 * beeing configured.
+		 * being configured.
 		 *
 		 * @param batch The Batch to use.
 		 * @see GlobalBatch

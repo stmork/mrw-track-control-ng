@@ -77,7 +77,7 @@ namespace mrw::util
 		 * @param element The BatchParticipant to ask for an active job.
 		 * @return True if the BatchParticipant is active.
 		 */
-		bool contains(BatchParticipant * element);
+		bool contains(BatchParticipant * element) const;
 
 		/**
 		 * This method checks whether the transaction set is empty. This may
@@ -95,13 +95,13 @@ namespace mrw::util
 		 *
 		 * @return True if everything is done.
 		 */
-		bool isCompleted();
+		bool isCompleted() const;
 
 		/**
 		 * This method dumps all BatchParticipant elements collected in the
 		 * transaction set.
 		 */
-		void dump();
+		void dump() const;
 
 		/**
 		 * This is the signal which is emitted on job completion.
