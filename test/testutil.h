@@ -60,6 +60,7 @@ namespace mrw::test
 		void testDumpBatch();
 		void testCustomBatch();
 		void testUnsetCustomBatch();
+		void testResetCustomBatch();
 		void testDifferentBatch();
 	};
 }

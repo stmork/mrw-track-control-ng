@@ -306,24 +306,38 @@ void TestUtil::testUseBatch()
 void TestUtil::testResetBatch()
 {
 	QSignalSpy      completed(&GlobalBatch::instance(), &GlobalBatch::completed);
-	TestParticipant part_a("A");
-	TestParticipant part_b("B");
+	std::vector<TestParticipant> participants;
+
+	const size_t max = 100;
+	participants.reserve(max);
+	for (size_t i = 0; i < max; i++)
+	{
+		participants.emplace_back(TestParticipant(QString::asprintf("%04zu", i)));
+	}
 
 	QVERIFY( GlobalBatch::instance().isCompleted());
-	QVERIFY(!GlobalBatch::instance().contains(&part_a));
-	QVERIFY(!GlobalBatch::instance().contains(&part_b));
+	for (TestParticipant & participant : participants)
+	{
+		QVERIFY(!GlobalBatch::instance().contains(&participant));
+	}
 	QCOMPARE(completed.count(), 0);
 
-	QVERIFY(part_a.increase());
-	QVERIFY(part_b.increase());
+	for (TestParticipant & participant : participants)
+	{
+		QVERIFY(participant.increase());
+	}
 	QVERIFY(!GlobalBatch::instance().isCompleted());
-	QVERIFY( GlobalBatch::instance().contains(&part_a));
-	QVERIFY( GlobalBatch::instance().contains(&part_b));
+	for (TestParticipant & participant : participants)
+	{
+		QVERIFY( GlobalBatch::instance().contains(&participant));
+	}
 
 	GlobalBatch::instance().reset();
 	QVERIFY( GlobalBatch::instance().isCompleted());
-	QVERIFY(!GlobalBatch::instance().contains(&part_a));
-	QVERIFY(!GlobalBatch::instance().contains(&part_b));
+	for (TestParticipant & participant : participants)
+	{
+		QVERIFY(!GlobalBatch::instance().contains(&participant));
+	}
 }
 
 void TestUtil::testDoubleUseBatch()
@@ -382,31 +396,75 @@ void TestUtil::testCustomBatch()
 
 void TestUtil::testUnsetCustomBatch()
 {
-	TestParticipant part_a("A");
-	TestParticipant part_b("B");
+	std::vector<TestParticipant> participants;
+
+	const size_t max = 100;
+	participants.reserve(max);
+	for (size_t i = 0; i < max; i++)
+	{
+		participants.emplace_back(TestParticipant(QString::asprintf("%04zu", i)));
+	}
 
 	{
 		TestBatch batch;
 
-		part_a.setBatch(&batch);
-		part_b.setBatch(&batch);
-
-		QCOMPARE(part_a.batch(), &batch);
-		QCOMPARE(part_b.batch(), &batch);
-
-		QVERIFY( part_a.increase());
-		QVERIFY( part_b.increase());
-		QVERIFY(!GlobalBatch::instance().contains(&part_a));
-		QVERIFY(!GlobalBatch::instance().contains(&part_b));
-		QVERIFY(batch.contains(&part_a));
-		QVERIFY(batch.contains(&part_b));
-		QVERIFY(true);
+		for (TestParticipant & participant : participants)
+		{
+			participant.setBatch(&batch);
+			QCOMPARE(participant.batch(), &batch);
+			QVERIFY( participant.increase());
+			QVERIFY(!GlobalBatch::instance().contains(&participant));
+			QVERIFY(batch.contains(&participant));
+		}
 	}
 
-	QVERIFY(!GlobalBatch::instance().contains(&part_a));
-	QVERIFY(!GlobalBatch::instance().contains(&part_b));
-	QCOMPARE(part_a.batch(), &GlobalBatch::instance());
-	QCOMPARE(part_b.batch(), &GlobalBatch::instance());
+	for (TestParticipant & participant : participants)
+	{
+		QVERIFY(!GlobalBatch::instance().contains(&participant));
+		QCOMPARE(participant.batch(), &GlobalBatch::instance());
+	}
+}
+
+void TestUtil::testResetCustomBatch()
+{
+	TestBatch                    batch;
+	QSignalSpy                   completed(&batch, &TestBatch::completed);
+	std::vector<TestParticipant> participants;
+
+	const size_t max = 100;
+	participants.reserve(max);
+	for (size_t i = 0; i < max; i++)
+	{
+		participants.emplace_back(TestParticipant(QString::asprintf("%04zu", i)));
+	}
+
+	QVERIFY(batch.isCompleted());
+	for (TestParticipant & participant : participants)
+	{
+		QVERIFY(!batch.contains(&participant));
+		participant.setBatch(&batch);
+		QVERIFY(!GlobalBatch::instance().contains(&participant));
+		QVERIFY(!batch.contains(&participant));
+	}
+	QCOMPARE(completed.count(), 0);
+
+	for (TestParticipant & participant : participants)
+	{
+		QVERIFY(participant.increase());
+		QVERIFY(!GlobalBatch::instance().contains(&participant));
+		QVERIFY(batch.contains(&participant));
+	}
+	QVERIFY(GlobalBatch::instance().isCompleted());
+	QVERIFY(!batch.isCompleted());
+
+	batch.reset();
+	QVERIFY(GlobalBatch::instance().isCompleted());
+	QVERIFY(batch.isCompleted());
+	for (TestParticipant & participant : participants)
+	{
+		QVERIFY(!GlobalBatch::instance().contains(&participant));
+		QVERIFY(!batch.contains(&participant));
+	}
 }
 
 void TestUtil::testDifferentBatch()
