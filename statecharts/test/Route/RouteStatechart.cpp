@@ -324,6 +324,8 @@ namespace mrw
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->disableSections();
 			ifaceOperationCallback->disableSignals();
+			ifaceOperationCallback->unlockRailParts();
+			ifaceOperationCallback->unlockSections();
 			ifaceOperationCallback->tryComplete();
 		}
 
@@ -401,6 +403,7 @@ namespace mrw
 			ifaceOperationCallback->fail();
 			ifaceOperationCallback->disableSections();
 			ifaceOperationCallback->disableSignals();
+			ifaceOperationCallback->unlockRailParts();
 			ifaceOperationCallback->unlockSections();
 		}
 

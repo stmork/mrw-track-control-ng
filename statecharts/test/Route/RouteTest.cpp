@@ -194,6 +194,112 @@ namespace mrw
 		};
 		static DisableSignalsMock * disableSignalsMock;
 
+		class UnlockRailPartsMock
+		{
+			typedef void (UnlockRailPartsMock::*functiontype)();
+		public:
+			void (UnlockRailPartsMock::*unlockRailPartsBehaviorDefault)();
+			int callCount;
+
+			void unlockRailParts1()
+			{
+			}
+
+			void unlockRailPartsDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void unlockRailParts()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return unlockRailPartsBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (UnlockRailPartsMock::*defaultBehavior)())
+			{
+				unlockRailPartsBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&UnlockRailPartsMock::unlockRailPartsDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		static UnlockRailPartsMock * unlockRailPartsMock;
+
+		class UnlockSectionsMock
+		{
+			typedef void (UnlockSectionsMock::*functiontype)();
+		public:
+			void (UnlockSectionsMock::*unlockSectionsBehaviorDefault)();
+			int callCount;
+
+			void unlockSections1()
+			{
+			}
+
+			void unlockSectionsDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void unlockSections()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return unlockSectionsBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (UnlockSectionsMock::*defaultBehavior)())
+			{
+				unlockSectionsBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&UnlockSectionsMock::unlockSectionsDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		static UnlockSectionsMock * unlockSectionsMock;
+
 		class TryCompleteMock
 		{
 			typedef void (TryCompleteMock::*functiontype)();
@@ -768,95 +874,6 @@ namespace mrw
 		};
 		static UnlockFlanksMock * unlockFlanksMock;
 
-		class UnlockRailPartsMock
-		{
-			typedef void (UnlockRailPartsMock::*functiontype)();
-		public:
-			void (UnlockRailPartsMock::*unlockRailPartsBehaviorDefault)();
-
-			void unlockRailParts1()
-			{
-			}
-
-			void unlockRailPartsDefault()
-			{
-			}
-
-			functiontype getBehavior()
-			{
-				return unlockRailPartsBehaviorDefault;
-			}
-
-			void setDefaultBehavior(void (UnlockRailPartsMock::*defaultBehavior)())
-			{
-				unlockRailPartsBehaviorDefault = defaultBehavior;
-			}
-
-			void initializeBehavior()
-			{
-				setDefaultBehavior(&UnlockRailPartsMock::unlockRailPartsDefault);
-			}
-
-			void reset()
-			{
-				initializeBehavior();
-			}
-		};
-		static UnlockRailPartsMock * unlockRailPartsMock;
-
-		class UnlockSectionsMock
-		{
-			typedef void (UnlockSectionsMock::*functiontype)();
-		public:
-			void (UnlockSectionsMock::*unlockSectionsBehaviorDefault)();
-			int callCount;
-
-			void unlockSections1()
-			{
-			}
-
-			void unlockSectionsDefault()
-			{
-			}
-
-			bool calledAtLeast(const int times)
-			{
-				return (callCount >= times);
-			}
-
-			bool calledAtLeastOnce()
-			{
-				return (callCount > 0);
-			}
-
-			void unlockSections()
-			{
-				++callCount;
-			}
-
-			functiontype getBehavior()
-			{
-				return unlockSectionsBehaviorDefault;
-			}
-
-			void setDefaultBehavior(void (UnlockSectionsMock::*defaultBehavior)())
-			{
-				unlockSectionsBehaviorDefault = defaultBehavior;
-			}
-
-			void initializeBehavior()
-			{
-				setDefaultBehavior(&UnlockSectionsMock::unlockSectionsDefault);
-			}
-
-			void reset()
-			{
-				initializeBehavior();
-				callCount = 0;
-			}
-		};
-		static UnlockSectionsMock * unlockSectionsMock;
-
 		class IsCompletedMock
 		{
 			typedef bool (IsCompletedMock::*functiontype)();
@@ -979,6 +996,7 @@ namespace mrw
 			}
 			void unlockRailParts()
 			{
+				unlockRailPartsMock->unlockRailParts();
 				return (unlockRailPartsMock->*(unlockRailPartsMock->getBehavior()))();
 			}
 			void unlockSections()
@@ -1020,6 +1038,10 @@ namespace mrw
 			EXPECT_TRUE(disableSectionsMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(disableSignalsMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(unlockRailPartsMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(unlockSectionsMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
 
@@ -3501,6 +3523,10 @@ namespace mrw
 			disableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -3566,6 +3592,10 @@ namespace mrw
 
 			EXPECT_TRUE(disableSignalsMock->calledAtLeastOnce());
 
+			EXPECT_TRUE(unlockRailPartsMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(unlockSectionsMock->calledAtLeastOnce());
+
 			runner->proceed_time(statechart->getEmergency());
 
 			disabled();
@@ -3573,6 +3603,8 @@ namespace mrw
 
 			disableSectionsMock->reset();
 			disableSignalsMock->reset();
+			unlockRailPartsMock->reset();
+			unlockSectionsMock->reset();
 		}
 		TEST_F(RouteTest, timeoutTurningSignals)
 		{
@@ -3580,6 +3612,10 @@ namespace mrw
 			disableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
@@ -3643,6 +3679,10 @@ namespace mrw
 
 			EXPECT_TRUE(disableSignalsMock->calledAtLeastOnce());
 
+			EXPECT_TRUE(unlockRailPartsMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(unlockSectionsMock->calledAtLeastOnce());
+
 			runner->proceed_time(statechart->getEmergency());
 
 			disabled();
@@ -3650,6 +3690,8 @@ namespace mrw
 
 			disableSectionsMock->reset();
 			disableSignalsMock->reset();
+			unlockRailPartsMock->reset();
+			unlockSectionsMock->reset();
 		}
 		TEST_F(RouteTest, timeoutExtendingSignals)
 		{
@@ -3657,6 +3699,10 @@ namespace mrw
 			disableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			tryCompleteMock = new TryCompleteMock();
@@ -3726,6 +3772,10 @@ namespace mrw
 
 			EXPECT_TRUE(disableSignalsMock->calledAtLeastOnce());
 
+			EXPECT_TRUE(unlockRailPartsMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(unlockSectionsMock->calledAtLeastOnce());
+
 			runner->proceed_time(statechart->getEmergency());
 
 			disabled();
@@ -3733,6 +3783,8 @@ namespace mrw
 
 			disableSectionsMock->reset();
 			disableSignalsMock->reset();
+			unlockRailPartsMock->reset();
+			unlockSectionsMock->reset();
 		}
 		void emergencySections()
 		{
@@ -3746,9 +3798,15 @@ namespace mrw
 
 			EXPECT_TRUE(disableSignalsMock->calledAtLeastOnce());
 
+			EXPECT_TRUE(unlockRailPartsMock->calledAtLeastOnce());
+
+			EXPECT_TRUE(unlockSectionsMock->calledAtLeastOnce());
+
 
 			disableSectionsMock->reset();
 			disableSignalsMock->reset();
+			unlockRailPartsMock->reset();
+			unlockSectionsMock->reset();
 		}
 		TEST_F(RouteTest, emergencySections)
 		{
@@ -3756,6 +3814,10 @@ namespace mrw
 			disableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			enableSectionsMock = new EnableSectionsMock();
@@ -3829,6 +3891,10 @@ namespace mrw
 			disableSectionsMock->initializeBehavior();
 			disableSignalsMock = new DisableSignalsMock();
 			disableSignalsMock->initializeBehavior();
+			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock->initializeBehavior();
+			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			enableSectionsMock = new EnableSectionsMock();
