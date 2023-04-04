@@ -4,8 +4,8 @@ Section: embedded
 Priority: optional
 Architecture: %ARCH%
 Suggests: mrw-can
-Depends: libqt5widgets5, libqt5serialbus5, libqt5xml5, libqt5network5,
- libqt5gui5, libqt5core5a
+Depends: libqt5widgets5, libqt5serialbus5-plugins,
+ libqt5xml5, libqt5network5, libqt5gui5, libqt5core5a
 Maintainer: Steffen A. Mork <info@eisenbahnsteuerung.org>
 Homepage: http://eisenbahnsteuerung.org/
 Description: Next generation modelbased railway control.
