@@ -16,7 +16,7 @@ SignalControllerMock::SignalControllerMock(QObject * parent) :
 {
 }
 
-void mrw::ctrl::SignalControllerMock::reset()
+void SignalControllerMock::reset()
 {
 	setDirection();
 	setExtension(0);
@@ -77,19 +77,19 @@ void SignalControllerMock::setBending(const Bending bending)
 	emit update();
 }
 
-void mrw::ctrl::SignalControllerMock::setMainSymbol(const Signal::Symbol symbol)
+void SignalControllerMock::setMainSymbol(const Signal::Symbol symbol)
 {
 	main_state = symbol;
 	emit update();
 }
 
-void mrw::ctrl::SignalControllerMock::setDistantSymbol(const Signal::Symbol symbol)
+void SignalControllerMock::setDistantSymbol(const Signal::Symbol symbol)
 {
 	distant_state = symbol;
 	emit update();
 }
 
-void mrw::ctrl::SignalControllerMock::setShuntSymbol(const Signal::Symbol symbol)
+void SignalControllerMock::setShuntSymbol(const Signal::Symbol symbol)
 {
 	shunt_state = symbol;
 	emit update();

@@ -82,8 +82,8 @@ const std::vector<Light *> & MultiplexConnection::lights() const
 }
 
 void MultiplexConnection::configure(
-	std::vector<mrw::can::MrwMessage> & messages,
-	const unsigned                      offset) const
+	std::vector<MrwMessage> & messages,
+	const unsigned            offset) const
 {
 	unsigned pin = offset;
 

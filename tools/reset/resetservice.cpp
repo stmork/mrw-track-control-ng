@@ -24,7 +24,7 @@ ResetService::ResetService(
 	can_device->connectDevice();
 }
 
-void ResetService::process(const mrw::can::MrwMessage & message)
+void ResetService::process(const MrwMessage & message)
 {
 	qDebug().noquote() << message;
 

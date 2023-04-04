@@ -86,7 +86,7 @@ QString FormSignal::toString() const
 		arg(MrwMessage::get(signal_aspect), -10);
 }
 
-bool mrw::model::FormSignal::isUnlockable() const
+bool FormSignal::isUnlockable() const
 {
 	return symbol() != Symbol::GO;
 }

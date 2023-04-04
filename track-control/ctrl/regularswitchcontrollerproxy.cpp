@@ -234,7 +234,7 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 	return false;
 }
 
-void mrw::ctrl::RegularSwitchControllerProxy::restart()
+void RegularSwitchControllerProxy::restart()
 {
 	statechart.clear();
 	emit start();

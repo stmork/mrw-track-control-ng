@@ -52,8 +52,8 @@ bool SwitchModule::valid() const
 }
 
 void SwitchModule::configure(
-	std::vector<mrw::can::MrwMessage> & messages,
-	const unsigned                      offset) const
+	std::vector<MrwMessage> & messages,
+	const unsigned            offset) const
 {
 	unsigned pin = offset;
 

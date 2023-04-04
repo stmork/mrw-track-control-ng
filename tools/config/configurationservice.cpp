@@ -15,8 +15,8 @@ using namespace mrw::statechart;
 using namespace mrw::model;
 
 ConfigurationService::ConfigurationService(
-	mrw::model::ModelRepository & repo,
-	QObject           *           parent) :
+	ModelRepository & repo,
+	QObject     *     parent) :
 	MrwBusService(repo.interface(), repo.plugin(), parent, false),
 	statechart(nullptr)
 {

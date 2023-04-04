@@ -64,8 +64,8 @@ const std::vector<ProfileLight *> & LightModule::lights() const
 }
 
 void LightModule::configure(
-	std::vector<mrw::can::MrwMessage> & messages,
-	const unsigned                      offset) const
+	std::vector<MrwMessage> & messages,
+	const unsigned            offset) const
 {
 	unsigned pin = offset;
 

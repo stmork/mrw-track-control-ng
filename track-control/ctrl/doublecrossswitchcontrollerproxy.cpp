@@ -222,7 +222,7 @@ bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 	return false;
 }
 
-void mrw::ctrl::DoubleCrossSwitchControllerProxy::restart()
+void DoubleCrossSwitchControllerProxy::restart()
 {
 	statechart.clear();
 	emit start();

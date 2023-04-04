@@ -157,7 +157,7 @@ void SignalControllerProxy::connectShunt()
 		Qt::QueuedConnection);
 }
 
-void mrw::ctrl::SignalControllerProxy::connectStatechart()
+void SignalControllerProxy::connectStatechart()
 {
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::clear,
@@ -190,7 +190,7 @@ void mrw::ctrl::SignalControllerProxy::connectStatechart()
 		Qt::QueuedConnection);
 }
 
-void mrw::ctrl::SignalControllerProxy::initStatechart()
+void SignalControllerProxy::initStatechart()
 {
 	statechart_main.start(main_signal);
 	statechart_distant.start(distant_signal, main_signal);
@@ -402,7 +402,7 @@ bool SignalControllerProxy::process(const MrwMessage & message)
 	return processed;
 }
 
-void mrw::ctrl::SignalControllerProxy::restart()
+void SignalControllerProxy::restart()
 {
 	statechart.clear();
 	emit start();

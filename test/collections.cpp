@@ -22,7 +22,7 @@ const std::vector<Bending> Collections::bendings
 	Bending::LEFT, Bending::STRAIGHT, Bending::RIGHT
 };
 
-const std::vector<mrw::model::SectionState> Collections::section_states
+const std::vector<SectionState> Collections::section_states
 {
 	FREE, SHUNTING, TOUR, OCCUPIED, PASSED
 };
@@ -32,7 +32,7 @@ const std::vector<LockState> Collections::lock_states
 	LockState::FAIL, LockState::UNLOCKED, LockState::PENDING, LockState::LOCKED
 };
 
-const std::vector<mrw::model::Signal::Symbol> Collections::signal_symbols
+const std::vector<Symbol> Collections::signal_symbols
 {
 	Symbol::OFF, Symbol::STOP, Symbol::GO
 };

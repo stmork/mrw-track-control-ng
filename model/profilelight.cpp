@@ -24,7 +24,7 @@ uint8_t ProfileLight::profile() const
 	return light_profile;
 }
 
-mrw::can::MrwMessage mrw::model::ProfileLight::configMsg(const unsigned pin) const
+MrwMessage ProfileLight::configMsg(const unsigned pin) const
 {
 	MrwMessage msg = command(CFGLGT);
 

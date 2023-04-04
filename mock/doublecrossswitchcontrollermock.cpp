@@ -18,7 +18,7 @@ DoubleCrossSwitchControllerMock::DoubleCrossSwitchControllerMock(QObject * paren
 {
 }
 
-void mrw::ctrl::DoubleCrossSwitchControllerMock::reset()
+void DoubleCrossSwitchControllerMock::reset()
 {
 	setDirection();
 	setSectionState(FREE);

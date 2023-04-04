@@ -49,8 +49,8 @@ bool SectionModule::valid() const
 }
 
 void SectionModule::configure(
-	std::vector<mrw::can::MrwMessage> & messages,
-	const unsigned                      offset) const
+	std::vector<MrwMessage> & messages,
+	const unsigned            offset) const
 {
 	unsigned pin = offset;
 

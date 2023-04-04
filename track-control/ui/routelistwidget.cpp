@@ -11,7 +11,7 @@ RouteListWidget::RouteListWidget(QWidget * parent) : QListWidget(parent)
 {
 }
 
-void mrw::ui::RouteListWidget::collect(std::vector<WidgetRoute *> & routes) const
+void RouteListWidget::collect(std::vector<WidgetRoute *> & routes) const
 {
 	// Collect active routes.
 	for (int index = 0; index < count(); index++)
@@ -23,7 +23,7 @@ void mrw::ui::RouteListWidget::collect(std::vector<WidgetRoute *> & routes) cons
 	}
 }
 
-WidgetRoute * mrw::ui::RouteListWidget::selected() const
+WidgetRoute * RouteListWidget::selected() const
 {
 	for (QListWidgetItem * item : selectedItems())
 	{

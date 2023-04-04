@@ -232,7 +232,7 @@ void TestFlankSwitch::testFlankProtectionMid()
 	QVERIFY(!s15->isFlankProtection(s15));
 }
 
-void mrw::test::TestFlankSwitch::testFlankProtectionEast()
+void TestFlankSwitch::testFlankProtectionEast()
 {
 	AbstractSwitch * s15 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(1, 11, 0));
 	AbstractSwitch * s21 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(2,  1, 0));
@@ -247,7 +247,7 @@ void mrw::test::TestFlankSwitch::testFlankProtectionEast()
 	QVERIFY(!s21->isFlankProtection(s22));
 }
 
-void mrw::test::TestFlankSwitch::testFlankProtectionFactory()
+void TestFlankSwitch::testFlankProtectionFactory()
 {
 	AbstractSwitch * s24 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(2, 11, 1));
 	AbstractSwitch * s31 = dynamic_cast<AbstractSwitch *>(model->assemblyPart(3,  2, 0));
@@ -259,7 +259,7 @@ void mrw::test::TestFlankSwitch::testFlankProtectionFactory()
 	QVERIFY(!s24->isFlankProtection(s31));
 }
 
-void mrw::test::TestFlankSwitch::testFlankProtectionParallel()
+void TestFlankSwitch::testFlankProtectionParallel()
 {
 	RegularSwitch * s1  = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 1, 1));
 	RegularSwitch * s2  = dynamic_cast<RegularSwitch *>(model->assemblyPart(0, 1, 2));
@@ -528,7 +528,7 @@ void TestFlankSwitch::testFlankProtectionFar()
 	QCOMPARE(s23->switchState(), SWITCH_STATE_RIGHT);
 }
 
-void mrw::test::TestFlankSwitch::testFlankProtectionDifferentRegion()
+void TestFlankSwitch::testFlankProtectionDifferentRegion()
 {
 	RegularSwitch * s24  = dynamic_cast<RegularSwitch *>(model->assemblyPart(2, 11, 1));
 	RegularSwitch * s31  = dynamic_cast<RegularSwitch *>(model->assemblyPart(3,  2, 0));

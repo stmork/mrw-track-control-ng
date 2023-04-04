@@ -28,7 +28,7 @@ const QString & CanSettings::interface() const
 	return can_iface;
 }
 
-mrw::can::CanSettings::operator mrw::util::SettingsGroup()
+CanSettings::operator SettingsGroup()
 {
 	return SettingsGroup(this, hostname);
 }

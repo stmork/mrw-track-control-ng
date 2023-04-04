@@ -208,7 +208,7 @@ void DistantProxy::prepare()
 	signal->setAspect(state);
 }
 
-Symbol mrw::ctrl::DistantProxy::getPreparedSymbol() const
+Symbol DistantProxy::getPreparedSymbol() const
 {
 	Symbol result = (Symbol)getSymbol();
 
