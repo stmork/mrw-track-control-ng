@@ -90,27 +90,42 @@ RegularSwitch::State RegularSwitch::state() const
 	return switch_state;
 }
 
-void RegularSwitch::setState(const State state, const bool force)
+bool RegularSwitch::setState(const State state, const bool force)
 {
+	bool success = true;
+
 	if ((lock() == LockState::UNLOCKED) || force)
 	{
 		switch_state = state;
 	}
-	else
+	else if (switch_state != state)
 	{
 		qWarning().noquote() << "Switch locked!" << name();
+		success = false;
 	}
 
 #ifdef STATE_VERBOSE
 	qDebug().noquote() << "####>" << toString() << switchState();
 #endif
+	return success;
 }
 
-void RegularSwitch::setState(
+bool RegularSwitch::isSwitchable(
+	const RailPart * prev,
+	const RailPart * succ) const
+{
+	const State state = computeState(prev, succ);
+
+	return (lock() == LockState::UNLOCKED) || (state == switch_state);
+}
+
+bool RegularSwitch::setState(
 	const RailPart * prev,
 	const RailPart * succ)
 {
-	switch_state = computeState(prev, succ);
+	const State state = computeState(prev, succ);
+
+	return setState(state);
 
 #ifdef STATE_VERBOSE
 	qDebug().noquote() << "####C" << toString() << switchState();

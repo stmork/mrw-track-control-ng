@@ -55,7 +55,7 @@ Route::Route(
 
 	first->reserve();
 	track.push_back(first);
-	qInfo().noquote() << "First way point:" << first->toString();
+	qInfo().noquote() << "## First way point:" << first->toString();
 }
 
 Route::~Route()
@@ -70,16 +70,20 @@ bool Route::append(RailPart * target)
 {
 	__METHOD__;
 
-	qInfo().noquote() << "---------->" << target->toString();
+	qInfo().noquote() << "## Next way point: " << target->toString();
 
 	last_valid_part    = track.back();
 
-	Region  *  search_region = findSearchRegion(target);
-	const bool success       = append(last_valid_part, target, search_region);
+	Region * search_region = findSearchRegion(target);
+	bool     success       = append(last_valid_part, target, search_region);
 
 	if (success)
 	{
-		prepare();
+		success = prepare();
+		if (!success)
+		{
+			unreserveTail(last_valid_part);
+		}
 	}
 
 	return success;
@@ -188,12 +192,12 @@ bool Route::qualified(
 
 	if ((device != nullptr) && (device->lock() == LockState::FAIL))
 	{
-		qDebug().noquote() << indent << "      Rail in failed state:";
+		qDebug().noquote() << indent << "      Rail in failed state.";
 		return false;
 	}
 	else if (rail->reserved())
 	{
-		qDebug().noquote() << indent << "      Rail already reserved:";
+		qDebug().noquote() << indent << "      Rail already reserved.";
 		return false;
 	}
 	else if (track.size() > MAX_DEPTH)
@@ -230,12 +234,23 @@ void Route::unreserveTail(const RailPart * actual)
 	}
 }
 
-void Route::prepare()
+bool Route::prepare()
 {
 	__METHOD__;
 
 	std::vector<RailPart *> vector(track.begin(), track.end());
 	Section        *        prev = nullptr;
+
+	for (size_t i = 1; i < vector.size() - 1; i++)
+	{
+		AbstractSwitch * device = dynamic_cast<AbstractSwitch *>(vector[i]);
+
+		if ((device != nullptr) &&
+			(!device->isSwitchable(vector[i - 1], vector[i + 1])))
+		{
+			return false;
+		}
+	}
 
 	sections.clear();
 	for (size_t i = 0; i < vector.size(); i++)
@@ -267,6 +282,7 @@ void Route::prepare()
 
 	last_section = last_on ? nullptr : *it;
 	dump();
+	return true;
 }
 
 void Route::prepareFlank()

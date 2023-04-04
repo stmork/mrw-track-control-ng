@@ -69,10 +69,7 @@ bool DoubleCrossSwitch::valid() const
 
 bool DoubleCrossSwitch::isCurved() const
 {
-	const bool b_active = unsigned(switch_state) & B_MASK;
-	const bool d_active = unsigned(switch_state) & D_MASK;
-
-	return b_active == d_active;
+	return isCurved(switch_state);
 }
 
 /*************************************************************************
@@ -90,8 +87,10 @@ State DoubleCrossSwitch::state() const
 	return switch_state;
 }
 
-void DoubleCrossSwitch::setState(const State state, const bool force)
+bool DoubleCrossSwitch::setState(const State state, const bool force)
 {
+	bool success = true;
+
 	if ((lock() == LockState::UNLOCKED) || force)
 	{
 #ifdef STATE_VERBOSE
@@ -99,17 +98,30 @@ void DoubleCrossSwitch::setState(const State state, const bool force)
 #endif
 		switch_state = state;
 	}
-	else
+	else if (isCurved(switch_state) != isCurved(state))
 	{
 		qWarning().noquote() << "Switch locked!" << name();
+		success = false;
 	}
+	return success;
 }
 
-void DoubleCrossSwitch::setState(
+bool DoubleCrossSwitch::setState(
 	const RailPart * prev,
 	const RailPart * succ)
 {
-	switch_state = computeState(prev, succ);
+	const State state = computeState(prev, succ);
+
+	return setState(state);
+}
+
+bool DoubleCrossSwitch::isSwitchable(
+	const RailPart * prev,
+	const RailPart * succ) const
+{
+	const State state = computeState(prev, succ);
+
+	return (lock() == LockState::UNLOCKED) || (isCurved(state) == isCurved(switch_state));
 }
 
 State DoubleCrossSwitch::computeState(
@@ -219,6 +231,14 @@ size_t DoubleCrossSwitch::flank(
 		}
 	}
 	return equal;
+}
+
+bool DoubleCrossSwitch::isCurved(const DoubleCrossSwitch::State state)
+{
+	const bool b_active = unsigned(state) & B_MASK;
+	const bool d_active = unsigned(state) & D_MASK;
+
+	return b_active == d_active;
 }
 
 /*************************************************************************

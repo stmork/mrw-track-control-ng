@@ -79,7 +79,9 @@ private:
 	void   finalize();
 	void   rename();
 
-	void   prepare() override;
+	[[nodiscard]]
+	bool   prepare() override;
+
 	void   prepareSections();
 	void   prepareTrack();
 	void   prepareSignals();

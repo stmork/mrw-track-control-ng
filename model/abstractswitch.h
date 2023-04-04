@@ -142,7 +142,27 @@ namespace mrw::model
 		 *
 		 * @return The turn command for a MrwMessage.
 		 */
+		[[nodiscard]]
 		virtual mrw::can::SwitchState switchState() const = 0;
+
+		/**
+		 * This method checks the internal switch state according to the given
+		 * connected neighbours and returns true if switching is possible. This
+		 * is useful while computing the track route.
+		 *
+		 * @note Both pointers need to be non @c nullptr.
+		 *
+		 * @param prev The previous RailPart in Route order.
+		 * @param succ The successive RailPart in Route order.
+		 * @return True if the state may be changed depending on a set
+		 * LockState::LOCKED.
+		 * @exception std::invalid_argument one of the RailPart pointer is not
+		 * a neighbour.
+		 */
+		[[nodiscard]]
+		virtual bool isSwitchable(
+			const RailPart * prev,
+			const RailPart * succ) const = 0;
 
 		/**
 		 * This method returns the CAN command corresponding to the internal

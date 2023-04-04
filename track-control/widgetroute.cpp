@@ -89,7 +89,6 @@ WidgetRoute::~WidgetRoute()
 **                                                                      **
 *************************************************************************/
 
-
 void WidgetRoute::prepareRoute()
 {
 	__METHOD__;
@@ -97,13 +96,17 @@ void WidgetRoute::prepareRoute()
 	rename();
 }
 
-void WidgetRoute::prepare()
+bool WidgetRoute::prepare()
 {
-	Route::prepare();
+	const bool success = Route::prepare();
 
-	prepareSections();
-	prepareTrack();
-	prepareSignals();
+	if (success)
+	{
+		prepareSections();
+		prepareTrack();
+		prepareSignals();
+	}
+	return success;
 }
 
 void WidgetRoute::prepareSections()

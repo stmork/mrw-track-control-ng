@@ -55,6 +55,7 @@ namespace mrw::util
 		 *
 		 * @return True on success.
 		 */
+		[[nodiscard]]
 		bool increase(BatchParticipant * element);
 
 		/**
@@ -66,6 +67,7 @@ namespace mrw::util
 		 *
 		 * @return True on success.
 		 */
+		[[nodiscard]]
 		bool decrease(BatchParticipant * element);
 
 		/**
@@ -77,6 +79,7 @@ namespace mrw::util
 		 * @param element The BatchParticipant to ask for an active job.
 		 * @return True if the BatchParticipant is active.
 		 */
+		[[nodiscard]]
 		bool contains(BatchParticipant * element) const;
 
 		/**
@@ -95,6 +98,7 @@ namespace mrw::util
 		 *
 		 * @return True if everything is done.
 		 */
+		[[nodiscard]]
 		bool isCompleted() const;
 
 		/**

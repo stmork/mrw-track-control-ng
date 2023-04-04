@@ -187,7 +187,8 @@ namespace mrw::model
 		 * @param last_valid_section The last initialized Section.
 		 * @param last_valid_part The last initialized RailPart.
 		 */
-		virtual void prepare();
+		[[nodiscard]]
+		virtual bool prepare();
 
 		/**
 		 * This method collects all flank protection switches and changes their

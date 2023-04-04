@@ -82,10 +82,12 @@ namespace mrw::model
 		 *
 		 * @param state The new state related to an active track.
 		 * @param force Force setting the state. This is used to force
+		 * @return True if the state may be changed depending on a set
+		 * LockState::LOCKED.
 		 * update on CAN MrwMessage response.
 		 * @see commandState()
 		 */
-		void setState(const State state, const bool force = false);
+		bool setState(const State state, const bool force = false);
 
 		/**
 		 * This method computes the DoubleCrossSwitch::State value depending
@@ -94,10 +96,18 @@ namespace mrw::model
 		 *
 		 * @param prev The previous RailPart in Route order.
 		 * @param succ The successive RailPart in Route order.
+		 * @return True if the state may be changed depending on a set
+		 * LockState::LOCKED.
 		 */
-		void setState(
+		[[nodiscard]]
+		bool setState(
 			const RailPart * prev,
 			const RailPart * succ) override;
+
+		[[nodiscard]]
+		bool isSwitchable(
+			const RailPart * prev,
+			const RailPart * succ) const override;
 
 		/**
 		 * This method returns the clear text QString of the State this
@@ -138,6 +148,8 @@ namespace mrw::model
 		(std::vector<RegularSwitch *> & switches,
 			const bool                     set_state,
 			const unsigned                 index) const;
+
+		static bool isCurved(const State state);
 
 		void collectFlankSwitches() override;
 

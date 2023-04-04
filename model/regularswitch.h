@@ -88,9 +88,16 @@ namespace mrw::model
 		 * @param state The new internal state.
 		 * @param force Force setting the state. This is used to force
 		 * update on CAN MrwMessage response.
+		 * @return True if the state may be changed depending on a set
+		 * LockState::LOCKED.
 		 * @see commandState()
 		 */
-		void setState(const State state, const bool force = false);
+		bool setState(const State state, const bool force = false);
+
+		[[nodiscard]]
+		bool isSwitchable(
+			const RailPart * prev,
+			const RailPart * succ) const override;
 
 		/**
 		 * This method computes the RegularSwitch::State value depending on the
@@ -99,8 +106,11 @@ namespace mrw::model
 		 *
 		 * @param prev The previous RailPart in Route order.
 		 * @param succ The successive RailPart in Route order.
+		 * @return True if the state may be changed depending on a set
+		 * LockState::LOCKED.
 		 */
-		void setState(
+		[[nodiscard]]
+		bool setState(
 			const RailPart * prev,
 			const RailPart * succ) override;
 

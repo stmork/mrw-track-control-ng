@@ -241,13 +241,103 @@ void TestRouting::testFailedSwitch()
 	QVERIFY(r21 != nullptr);
 	QVERIFY(r26 != nullptr);
 
-	Route           route(true, SectionState::SHUNTING, r21);
+	Route                    route(true, SectionState::SHUNTING, r21);
+	const Route::RailTrack & reserved = route;
 
 	s1->setLock(LockState::FAIL);
 
+	QCOMPARE(reserved.size(), 1u);
 	QVERIFY(verify(route));
+
 	QVERIFY(!route.append(r26));
+	QCOMPARE(reserved.size(), 1u);
 	QVERIFY(verify(route));
+}
+
+void TestRouting::testLockedRegularSwitch()
+{
+	RegularSwitch * s1  = dynamic_cast<RegularSwitch *>(parts[2]);
+	RegularSwitch * s2  = dynamic_cast<RegularSwitch *>(parts[3]);
+	Rail      *     r21 = dynamic_cast<Rail *>(parts[1]);
+	Rail      *     r22 = dynamic_cast<Rail *>(parts[6]);
+	Rail      *     r26 = dynamic_cast<Rail *>(parts[20]);
+
+	QVERIFY(s1 != nullptr);
+	QVERIFY(s2 != nullptr);
+	QVERIFY(r21 != nullptr);
+	QVERIFY(r22 != nullptr);
+	QVERIFY(r26 != nullptr);
+
+	Route                    route(true, SectionState::SHUNTING, r21);
+	const Route::RailTrack & reserved = route;
+
+	QVERIFY(s1->setState(RegularSwitch::State::AB));
+	QVERIFY(s1->isSwitchable(r21, s2));
+	QVERIFY(s1->isSwitchable(r21, r22));
+
+	s1->setLock(LockState::LOCKED);
+	QVERIFY( s1->setState(RegularSwitch::State::AB));
+	QVERIFY(!s1->setState(RegularSwitch::State::AC));
+	QVERIFY( s1->setState(r21, s2));
+	QVERIFY(!s1->setState(r21, r22));
+	QVERIFY( s1->isSwitchable(r21, s2));
+	QVERIFY(!s1->isSwitchable(r21, r22));
+
+	QCOMPARE(reserved.size(), 1u);
+	QVERIFY(verify(route, false));
+
+	QVERIFY(!route.append(r26));
+	QCOMPARE(reserved.size(), 1u);
+	QVERIFY(verify(route, false));
+}
+
+void TestRouting::testLockedDoubleCrossSwitch()
+{
+	DoubleCrossSwitch * s5  = dynamic_cast<DoubleCrossSwitch *>(parts[11]);
+	RegularSwitch   *   s4  = dynamic_cast<RegularSwitch *>(parts[4]);
+	RegularSwitch   *   s6  = dynamic_cast<RegularSwitch *>(parts[15]);
+	Rail        *       r22 = dynamic_cast<Rail *>(parts[6]);
+	Rail        *       r16 = dynamic_cast<Rail *>(parts[19]);
+	Rail        *       rl3 = dynamic_cast<Rail *>(parts[10]);
+	Rail        *       rr3 = dynamic_cast<Rail *>(parts[12]);
+
+	QVERIFY(s4 != nullptr);
+	QVERIFY(s5 != nullptr);
+	QVERIFY(s6 != nullptr);
+	QVERIFY(r22 != nullptr);
+	QVERIFY(r16 != nullptr);
+	QVERIFY(rl3 != nullptr);
+	QVERIFY(rr3 != nullptr);
+
+	Route                    route(true, SectionState::SHUNTING, r22);
+	const Route::RailTrack & reserved = route;
+
+	QVERIFY(s5->setState(DoubleCrossSwitch::State::AC));
+	QVERIFY(s5->isSwitchable(s4,  s6));
+	QVERIFY(s5->isSwitchable(s4,  rr3));
+	QVERIFY(s5->isSwitchable(rl3, s6));
+	QVERIFY(s5->isSwitchable(rl3, rr3));
+
+	s5->setLock(LockState::LOCKED);
+	QVERIFY( s5->setState(DoubleCrossSwitch::State::AC));
+	QVERIFY(!s5->setState(DoubleCrossSwitch::State::BC));
+	QVERIFY(!s5->setState(DoubleCrossSwitch::State::AD));
+	QVERIFY( s5->setState(DoubleCrossSwitch::State::BD));
+	QVERIFY( s5->setState(s4,  rr3));
+	QVERIFY(!s5->setState(s4,  s6));
+	QVERIFY(!s5->setState(rl3, rr3));
+	QVERIFY( s5->setState(rl3, s6));
+	QVERIFY( s5->isSwitchable(s4,  rr3));
+	QVERIFY(!s5->isSwitchable(s4,  s6));
+	QVERIFY(!s5->isSwitchable(rl3, rr3));
+	QVERIFY( s5->isSwitchable(rl3, s6));
+
+	QCOMPARE(reserved.size(), 1u);
+	QVERIFY(verify(route, false));
+
+	QVERIFY(!route.append(r16));
+	QCOMPARE(reserved.size(), 1u);
+	QVERIFY(verify(route, false));
 }
 
 void TestRouting::testFlank()
@@ -300,14 +390,17 @@ void TestRouting::testFlankLocked()
 	QVERIFY(s2 != nullptr);
 	QVERIFY(s9 != nullptr);
 
+	// Since we excplicitely set unreserved locks we do not need to
+	// verify locking while route checking.
+
 	s2->setState(RegularSwitch::State::AB);
 	s9->setState(RegularSwitch::State::AC);
 	s2->setLock(LockState::LOCKED);
 	s9->setLock(LockState::LOCKED);
 
-	QVERIFY(verify(route));
+	QVERIFY(verify(route, false));
 	QVERIFY(!route.append(r26));
-	QVERIFY(verify(route));
+	QVERIFY(verify(route, false));
 	QCOMPARE(reserved.size(), 1u);
 
 	const std::vector<RegularSwitch *> & flanks = route.doFlank();
@@ -317,18 +410,18 @@ void TestRouting::testFlankLocked()
 	s2->setState(RegularSwitch::State::AC, true);
 	s9->setState(RegularSwitch::State::AB, true);
 	QVERIFY(route.append(r26));
-	QVERIFY(verify(route));
+	QVERIFY(verify(route, false));
 	QVERIFY(reserved.size() > 1u);
 	route.doFlank();
 	QCOMPARE(flanks.size(), 2u);
 }
 
-bool TestRouting::verify(const Route & route) const
+bool TestRouting::verify(const Route & route, const bool verify_lock) const
 {
-	return verify( { & route } );
+	return verify( { & route }, verify_lock);
 }
 
-bool TestRouting::verify(std::initializer_list<const Route *> routes) const
+bool TestRouting::verify(std::initializer_list<const Route *> routes, const bool verify_lock) const
 {
 	std::unordered_set<RailPart *> unreserved(parts.begin(), parts.end());
 	std::unordered_set<RailPart *> reserved;
@@ -356,9 +449,18 @@ bool TestRouting::verify(std::initializer_list<const Route *> routes) const
 	{
 		return !part->reserved();
 	});
+	const bool is_unlocked = std::all_of(unreserved.begin(), unreserved.end(), [&](RailPart * part)
+	{
+		Device * device = dynamic_cast<Device *>(part);
+
+		// Non reserved devices should not be locked.
+		return
+			(!part->reserved()) &&
+			((device == nullptr) || (device->lock() != LockState::LOCKED));
+	}) || (!verify_lock);
 
 	return
-		is_reserved && is_unreserved &&
+		is_reserved && is_unreserved && is_unlocked &&
 		((unreserved.size() + reserved.size()) == parts.size());
 }
 

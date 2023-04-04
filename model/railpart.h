@@ -124,6 +124,7 @@ namespace mrw::model
 		 *
 		 * @return True if this RailPart uses inverted connectors.
 		 */
+		[[nodiscard]]
 		inline bool aIsDir() const
 		{
 			return a_in_dir;
@@ -138,6 +139,7 @@ namespace mrw::model
 		 * @return True if the other RailPart is correctly linked.
 		 * @see advance()
 		 */
+		[[nodiscard]]
 		virtual bool contains(const RailPart * rail, const bool dir) const;
 
 		/**
@@ -168,10 +170,15 @@ namespace mrw::model
 		 *
 		 * @param prev The previous RailPart in Route order.
 		 * @param succ The successive RailPart in Route order.
+		 * @return True if the state may be changed depending on a set
+		 * LockState::LOCKED.
 		 * @exception std::invalid_argument one of the RailPart pointer is not
 		 * a neighbour.
 		 */
-		virtual void setState(const RailPart * prev, const RailPart * succ) = 0;
+		[[nodiscard]]
+		virtual bool setState(
+			const RailPart * prev,
+			const RailPart * succ) = 0;
 
 		/**
 		 * This method reserves this RailPart for routing information so that
@@ -187,6 +194,7 @@ namespace mrw::model
 		 *
 		 * @return The reserveration state of this instance.
 		 */
+		[[nodiscard]]
 		bool reserved() const;
 
 		/**
@@ -196,6 +204,7 @@ namespace mrw::model
 		 *
 		 * @return True if the RailPart is a curved or branched.
 		 */
+		[[nodiscard]]
 		virtual bool isCurved() const = 0;
 
 	protected:

@@ -31,12 +31,14 @@ namespace mrw::test
 		void testOccupation();
 		void testInverseFail();
 		void testFailedSwitch();
+		void testLockedRegularSwitch();
+		void testLockedDoubleCrossSwitch();
 		void testFlank();
 		void testFlankLocked();
 
 	private:
-		bool verify(const model::Route & route) const;
-		bool verify(std::initializer_list<const model::Route *> routes) const;
+		bool verify(const model::Route & route, const bool verify_lock = true) const;
+		bool verify(std::initializer_list<const model::Route *> routes, const bool verify_lock = true) const;
 		bool empty() const;
 		void testIsUnlockable(
 			const model::Route::RailTrack & track,
