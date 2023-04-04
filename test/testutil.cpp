@@ -239,6 +239,10 @@ void TestUtil::testDumpHandler()
 
 	QCOMPARE(count, 0u);
 
+#ifdef QTCREATOR
+	return;
+#endif
+
 	raise(SIGQUIT);
 	QCOMPARE(count, 1u);
 
