@@ -8,7 +8,7 @@ jobs:
          - uses: actions/checkout@v3
          - run: sudo apt update -y
          - name: Install needed components
-           run: sudo apt install -y qtchooser qt5-qmake qtbase5-dev libqt5serialbus5-dev cppcheck libgtest-dev
+           run: sudo apt install -y qtchooser qt5-qmake libqt5serialbus5-dev cppcheck libgtest-dev
          - name: Install Google Test
            run: sudo bin/install-gtest.sh
          - name: QMake
