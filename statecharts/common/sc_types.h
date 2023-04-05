@@ -20,4 +20,4 @@ namespace sc
 	typedef unsigned   eventid;
 }
 
-#endif /* SC_TYPES_H_ */
+#endif

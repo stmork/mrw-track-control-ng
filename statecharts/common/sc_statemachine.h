@@ -45,6 +45,6 @@ namespace sc
 
 	inline StatemachineInterface::~StatemachineInterface() {}
 
-} /* namespace sc */
+}
 
-#endif /* SC_STATEMACHINE_H_ */
+#endif

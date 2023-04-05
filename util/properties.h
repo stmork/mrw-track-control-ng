@@ -47,4 +47,4 @@ namespace mrw::util
 	};
 }
 
-#endif // MRW_UTIL_PROPERTIES_H
+#endif

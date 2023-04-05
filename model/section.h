@@ -313,4 +313,4 @@ namespace mrw::model
 	};
 }
 
-#endif // MRW_MODEL_SECTION_H
+#endif

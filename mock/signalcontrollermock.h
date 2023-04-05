@@ -90,4 +90,4 @@ namespace mrw::ctrl
 	};
 }
 
-#endif // MRW_CTRL_SIGNALCONTROLLERMOCK_H
+#endif

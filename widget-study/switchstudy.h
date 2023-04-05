@@ -38,4 +38,4 @@ private:
 	static QString state(const bool is_left);
 };
 
-#endif // SWITCHSTUDY_H
+#endif

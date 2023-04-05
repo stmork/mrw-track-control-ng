@@ -31,4 +31,4 @@ namespace mrw::ui
 	};
 }
 
-#endif // MRW_UI_CLOCKWIDGET_H
+#endif

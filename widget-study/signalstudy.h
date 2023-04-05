@@ -38,4 +38,4 @@ private:
 	static QString code(const bool valid, const mrw::model::Signal::Symbol & symbol);
 };
 
-#endif // SIGNALSTUDY_H
+#endif

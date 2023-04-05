@@ -38,4 +38,4 @@ protected:
 	QString path(const QString & name) const;
 };
 
-#endif // WIDGETSAVER_H
+#endif

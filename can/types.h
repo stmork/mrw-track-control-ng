@@ -54,4 +54,4 @@ namespace mrw::can
 	typedef std::pair<ControllerId, UnitNo> DeviceKey;
 }
 
-#endif // TYPES_H
+#endif

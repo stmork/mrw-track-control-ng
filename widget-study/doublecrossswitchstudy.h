@@ -38,4 +38,4 @@ private:
 	static QString state(const mrw::model::DoubleCrossSwitch::State & state);
 };
 
-#endif // DOUBLECROSSSWITCHSTUDY_H
+#endif

@@ -67,4 +67,4 @@ private:
 	static const QPalette    background_color;
 };
 
-#endif // REGIONFORM_H
+#endif

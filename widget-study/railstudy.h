@@ -43,4 +43,4 @@ private:
 	static QString code(const mrw::model::Position::Bending bending);
 };
 
-#endif // SECTIONSTUDY_H
+#endif
