@@ -29,7 +29,7 @@ echo "Upstream-Name: $PACKAGE" >> ${COPYRIGHT}
 echo "Source: https://github.com/stmork/mrw-track-control-ng" >> ${COPYRIGHT}
 echo "" >> ${COPYRIGHT}
 echo "Files: *" >> ${COPYRIGHT}
-echo "Copyright: 2007-`date +'%Y'` Steffen A. Mork <linux-dev@morknet.de>" >> ${COPYRIGHT}
+echo "Copyright: 2007-`date +'%Y'` Steffen A. Mork <info@eisenbahnsteuerung.org>" >> ${COPYRIGHT}
 echo "License: MIT" >> ${COPYRIGHT}
 sed -e 's/^$/\./g' -e 's/^/ /g' LICENSE.md >> ${COPYRIGHT}
 export VERSION=`grep VERSION common.pri | fgrep "=" | cut -d"=" -f2 | sed -e "s/ //g" | head -n1`
