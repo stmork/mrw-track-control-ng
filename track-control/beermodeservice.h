@@ -12,7 +12,7 @@
 #include <model/rail.h>
 #include <model/modelrepository.h>
 
-class WidgetRoute;
+class ControlledRoute;
 
 class BeerModeService :
 	public mrw::util::Singleton<BeerModeService>
@@ -30,7 +30,7 @@ class BeerModeService :
 
 public:
 	void init(mrw::model::ModelRailway * model);
-	WidgetRoute * startBeerMode(const bool dir);
+	ControlledRoute * startBeerMode(const bool dir);
 
 private:
 	void findCandidates(

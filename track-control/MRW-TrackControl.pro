@@ -8,6 +8,7 @@ QT += gui widgets network
 include(../common.pri)
 
 SOURCES += \
+	controlledroute.cpp \
 	ctrl/controllerregistrand.cpp \
 	ctrl/controllerregistry.cpp \
 	ctrl/doublecrossswitchcontrollerproxy.cpp \
@@ -25,11 +26,11 @@ SOURCES += \
 	regionform.cpp \
 	routebatch.cpp \
 	ui/routelistwidget.cpp \
-	ui/sectionlistwidget.cpp \
-	widgetroute.cpp
+	ui/sectionlistwidget.cpp
 
 HEADERS += \
 	beermodeservice.h \
+	controlledroute.h \
 	ctrl/controllerregistrand.h \
 	ctrl/controllerregistry.h \
 	ctrl/doublecrossswitchcontrollerproxy.h \
@@ -45,8 +46,7 @@ HEADERS += \
 	regionform.h \
 	routebatch.h \
 	ui/routelistwidget.h \
-	ui/sectionlistwidget.h \
-	widgetroute.h
+	ui/sectionlistwidget.h
 
 FORMS += \
 	mainwindow.ui \

@@ -10,7 +10,7 @@
 
 #include <QListWidget>
 
-#include "widgetroute.h"
+#include "controlledroute.h"
 
 namespace mrw::ui
 {
@@ -20,8 +20,8 @@ namespace mrw::ui
 	public:
 		explicit RouteListWidget(QWidget * parent = nullptr);
 
-		void collect(std::vector<WidgetRoute *> & routes) const;
-		WidgetRoute * selected() const;
+		void collect(std::vector<ControlledRoute *> & routes) const;
+		ControlledRoute * selected() const;
 	};
 }
 

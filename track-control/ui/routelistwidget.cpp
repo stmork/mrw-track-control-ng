@@ -11,23 +11,23 @@ RouteListWidget::RouteListWidget(QWidget * parent) : QListWidget(parent)
 {
 }
 
-void RouteListWidget::collect(std::vector<WidgetRoute *> & routes) const
+void RouteListWidget::collect(std::vector<ControlledRoute *> & routes) const
 {
 	// Collect active routes.
 	for (int index = 0; index < count(); index++)
 	{
 		QListWidgetItem * element = item(index);
-		WidgetRoute   *   route   = element->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
+		ControlledRoute   *   route   = element->data(ControlledRoute::USER_ROLE).value<ControlledRoute *>();
 
 		routes.push_back(route);
 	}
 }
 
-WidgetRoute * RouteListWidget::selected() const
+ControlledRoute * RouteListWidget::selected() const
 {
 	for (QListWidgetItem * item : selectedItems())
 	{
-		return item->data(WidgetRoute::USER_ROLE).value<WidgetRoute *>();
+		return item->data(ControlledRoute::USER_ROLE).value<ControlledRoute *>();
 	}
 	return nullptr;
 }

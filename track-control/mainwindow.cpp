@@ -26,7 +26,7 @@
 #include "ui_mainwindow.h"
 #include "regionform.h"
 #include "mrwmessagedispatcher.h"
-#include "widgetroute.h"
+#include "controlledroute.h"
 #include "beermodeservice.h"
 
 using namespace mrw::util;
@@ -426,7 +426,7 @@ Route * MainWindow::createRoute(const bool direction, const SectionState state)
 
 	ui->sectionListWidget->collect(infos);
 
-	WidgetRoute * route = new WidgetRoute(direction, state, infos[0]->railPart());
+	ControlledRoute * route = new ControlledRoute(direction, state, infos[0]->railPart());
 
 	for (size_t i = 1; i < infos.size(); i++)
 	{
@@ -450,7 +450,7 @@ Route * MainWindow::createRoute(const bool direction, const SectionState state)
 	return route;
 }
 
-void MainWindow::extendRoute(WidgetRoute * route)
+void MainWindow::extendRoute(ControlledRoute * route)
 {
 	RailPartInfoCallback callback = [route, this](RailPartInfo * part_info)
 	{
@@ -475,7 +475,7 @@ void MainWindow::extendRoute(WidgetRoute * route)
 	route->turn();
 }
 
-void MainWindow::addRoute(WidgetRoute * route)
+void MainWindow::addRoute(ControlledRoute * route)
 {
 	ui->routeListWidget->addItem(*route);
 	ui->routeListWidget->setCurrentItem(*route);
@@ -483,7 +483,7 @@ void MainWindow::addRoute(WidgetRoute * route)
 	on_clearAllSections_clicked();
 
 	connect(
-		route, &WidgetRoute::finished,
+		route, &ControlledRoute::finished,
 		this,  &MainWindow::routeFinished,
 		Qt::QueuedConnection);
 
@@ -494,7 +494,7 @@ void MainWindow::routeFinished()
 {
 	__METHOD__;
 
-	WidgetRoute   *   route = dynamic_cast<WidgetRoute *>(QObject::sender());
+	ControlledRoute   *   route = dynamic_cast<ControlledRoute *>(QObject::sender());
 	QListWidgetItem * item  = *route;
 	const int         row   = ui->routeListWidget->row(item);
 
@@ -568,7 +568,7 @@ void MainWindow::on_clearAllSections_clicked()
 
 void MainWindow::on_clearRoute_clicked()
 {
-	WidgetRoute * route = ui->routeListWidget->selected();
+	ControlledRoute * route = ui->routeListWidget->selected();
 
 	if (route != nullptr)
 	{
@@ -586,11 +586,11 @@ void MainWindow::on_clearRoute_clicked()
 
 void MainWindow::on_clearAllRoutes_clicked()
 {
-	std::vector<WidgetRoute *> routes;
+	std::vector<ControlledRoute *> routes;
 
 	// Disable collected routes.
 	ui->routeListWidget->collect(routes);
-	for (WidgetRoute * route : routes)
+	for (ControlledRoute * route : routes)
 	{
 		route->disable();
 	}
@@ -622,7 +622,7 @@ void MainWindow::on_extendPushButton_clicked()
 {
 	__METHOD__;
 
-	WidgetRoute * route = ui->routeListWidget->selected();
+	ControlledRoute * route = ui->routeListWidget->selected();
 
 	if (route != nullptr)
 	{

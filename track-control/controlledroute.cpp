@@ -15,7 +15,7 @@
 #include <ctrl/sectioncontroller.h>
 #include <ctrl/signalcontrollerproxy.h>
 
-#include "widgetroute.h"
+#include "controlledroute.h"
 
 using namespace mrw::util;
 using namespace mrw::statechart;
@@ -25,7 +25,7 @@ using namespace mrw::ctrl;
 using LockState = Device::LockState;
 using Symbol    = Signal::Symbol;
 
-WidgetRoute::WidgetRoute(
+ControlledRoute::ControlledRoute(
 	const bool           dir,
 	const SectionState   wanted_state,
 	RailPart      *      first,
@@ -37,24 +37,24 @@ WidgetRoute::WidgetRoute(
 	list_item.setData(USER_ROLE, QVariant::fromValue(this));
 
 	connect(
-		this, &WidgetRoute::completed,
+		this, &ControlledRoute::completed,
 		&statechart, &RouteStatechart::completed,
 		Qt::QueuedConnection);
 	connect(
-		this, &WidgetRoute::disable,
+		this, &ControlledRoute::disable,
 		&statechart, &RouteStatechart::disable,
 		Qt::QueuedConnection);
 	connect(
-		this, &WidgetRoute::turn,
+		this, &ControlledRoute::turn,
 		&statechart, &RouteStatechart::turn,
 		Qt::QueuedConnection);
 	connect(
 		&statechart, &RouteStatechart::finished,
-		this, &WidgetRoute::finished,
+		this, &ControlledRoute::finished,
 		Qt::QueuedConnection);
 	connect(
 		&statechart, &RouteStatechart::activated,
-		this, &WidgetRoute::dump,
+		this, &ControlledRoute::dump,
 		Qt::QueuedConnection);
 
 	statechart.setTimerService(&TimerService::instance());
@@ -64,7 +64,7 @@ WidgetRoute::WidgetRoute(
 	statechart.enter();
 }
 
-WidgetRoute::~WidgetRoute()
+ControlledRoute::~ControlledRoute()
 {
 	std::vector<BatchParticipant *> participants;
 
@@ -89,14 +89,14 @@ WidgetRoute::~WidgetRoute()
 **                                                                      **
 *************************************************************************/
 
-void WidgetRoute::prepareRoute()
+void ControlledRoute::prepareRoute()
 {
 	__METHOD__;
 
 	rename();
 }
 
-bool WidgetRoute::prepare()
+bool ControlledRoute::prepare()
 {
 	const bool success = Route::prepare();
 
@@ -109,7 +109,7 @@ bool WidgetRoute::prepare()
 	return success;
 }
 
-void WidgetRoute::prepareSections()
+void ControlledRoute::prepareSections()
 {
 	__METHOD__;
 
@@ -128,7 +128,7 @@ void WidgetRoute::prepareSections()
 	}
 }
 
-void WidgetRoute::prepareTrack()
+void ControlledRoute::prepareTrack()
 {
 	__METHOD__;
 
@@ -165,7 +165,7 @@ void WidgetRoute::prepareTrack()
 	}
 }
 
-void WidgetRoute::prepareSignals()
+void ControlledRoute::prepareSignals()
 {
 	__METHOD__;
 
@@ -180,7 +180,7 @@ void WidgetRoute::prepareSignals()
 		SignalControllerProxy * signal_ctrl  = getSignalController(section);
 		std::vector<RailPart *> rails;
 
-		section->parts<RailPart>(rails, &WidgetRoute::isCurved);
+		section->parts<RailPart>(rails, &ControlledRoute::isCurved);
 		curved += rails.size();
 
 		if (signal_ctrl != nullptr)
@@ -213,34 +213,34 @@ void WidgetRoute::prepareSignals()
 	}
 }
 
-void WidgetRoute::prepareFlank()
+void ControlledRoute::prepareFlank()
 {
 	__METHOD__;
 
 	Route::prepareFlank();
 }
 
-void WidgetRoute::connectSectionController(SectionController * controller)
+void ControlledRoute::connectSectionController(SectionController * controller)
 {
 	connect(
 		controller, &SectionController::entered,
-		this, &WidgetRoute::entered,
+		this, &ControlledRoute::entered,
 		Qt::UniqueConnection);
 	connect(
 		controller, &SectionController::leaving,
-		this, &WidgetRoute::leaving,
+		this, &ControlledRoute::leaving,
 		Qt::UniqueConnection);
 	connect(
 		controller, &SectionController::left,
-		this, &WidgetRoute::left,
+		this, &ControlledRoute::left,
 		Qt::UniqueConnection);
 	connect(
 		controller, &SectionController::tryUnblock,
-		this, &WidgetRoute::tryUnblock,
+		this, &ControlledRoute::tryUnblock,
 		Qt::UniqueConnection);
 	connect(
 		controller, &SectionController::unregister,
-		this, qOverload<>(&WidgetRoute::unregister),
+		this, qOverload<>(&ControlledRoute::unregister),
 		Qt::UniqueConnection);
 	connect(
 		controller, &SectionController::stop,
@@ -250,7 +250,7 @@ void WidgetRoute::connectSectionController(SectionController * controller)
 	controller->setBatch(this);
 }
 
-void WidgetRoute::rename()
+void ControlledRoute::rename()
 {
 	QString name = QString("%1 %2").
 		arg(state == SectionState::TOUR ? "F" : "R").
@@ -278,14 +278,14 @@ void WidgetRoute::rename()
 /**
  * This slot is only a marker that a train has entered a mrw::model::Section.
  */
-void WidgetRoute::entered()
+void ControlledRoute::entered()
 {
 	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
 
 	qDebug().noquote() << "Entered:    " << *controller;
 }
 
-void WidgetRoute::leaving()
+void ControlledRoute::leaving()
 {
 	__METHOD__;
 
@@ -312,7 +312,7 @@ void WidgetRoute::leaving()
 /**
  * This slot marks a section left. All signals inside has to be turned to STOP.
  */
-void WidgetRoute::left()
+void ControlledRoute::left()
 {
 	__METHOD__;
 
@@ -334,12 +334,12 @@ void WidgetRoute::left()
  * are already turnd to stop (@see left()) the sections needs only to be
  * unregistered.
  */
-void WidgetRoute::tryUnblock()
+void ControlledRoute::tryUnblock()
 {
 	tryUnblockCtrl(dynamic_cast<SectionController *>(QObject::sender()));
 }
 
-void WidgetRoute::tryUnblockCtrl(SectionController * section_ctrl)
+void ControlledRoute::tryUnblockCtrl(SectionController * section_ctrl)
 {
 	__METHOD__;
 
@@ -371,7 +371,7 @@ void WidgetRoute::tryUnblockCtrl(SectionController * section_ctrl)
 	finalize();
 }
 
-void WidgetRoute::unregister()
+void ControlledRoute::unregister()
 {
 	__METHOD__;
 
@@ -382,7 +382,7 @@ void WidgetRoute::unregister()
 	finalize();
 }
 
-void WidgetRoute::unregister(Section * section)
+void ControlledRoute::unregister(Section * section)
 {
 	SectionController * controller =
 		ControllerRegistry::instance().find<SectionController>(section);
@@ -390,7 +390,7 @@ void WidgetRoute::unregister(Section * section)
 	unregister(controller);
 }
 
-void WidgetRoute::unregister(SectionController * controller)
+void ControlledRoute::unregister(SectionController * controller)
 {
 	controller->unlock();
 
@@ -446,28 +446,28 @@ void WidgetRoute::unregister(SectionController * controller)
 	qDebug().noquote() << "Unregister: " << countAllocatedSections() << "sections left";
 }
 
-void WidgetRoute::disconnectSectionController(SectionController * controller)
+void ControlledRoute::disconnectSectionController(SectionController * controller)
 {
 	controller->setBatch(nullptr);
 
 	disconnect(
 		controller, &SectionController::entered,
-		this, &WidgetRoute::entered);
+		this, &ControlledRoute::entered);
 	disconnect(
 		controller, &SectionController::left,
-		this, &WidgetRoute::left);
+		this, &ControlledRoute::left);
 	disconnect(
 		controller, &SectionController::tryUnblock,
-		this, &WidgetRoute::tryUnblock);
+		this, &ControlledRoute::tryUnblock);
 	disconnect(
 		controller, &SectionController::unregister,
-		this, qOverload<>(&WidgetRoute::unregister));
+		this, qOverload<>(&ControlledRoute::unregister));
 	disconnect(
 		controller, &SectionController::stop,
 		&statechart, &RouteStatechart::failed);
 }
 
-void WidgetRoute::finalize()
+void ControlledRoute::finalize()
 {
 	if (countAllocatedSections() == 1)
 	{
@@ -492,7 +492,7 @@ void WidgetRoute::finalize()
 **                                                                      **
 *************************************************************************/
 
-size_t WidgetRoute::countAllocatedSections()
+size_t ControlledRoute::countAllocatedSections()
 {
 	return std::count_if(sections.begin(), sections.end(), [&](Section * section)
 	{
@@ -500,12 +500,12 @@ size_t WidgetRoute::countAllocatedSections()
 	});
 }
 
-SectionController * WidgetRoute::getSectionController(Section * section) const
+SectionController * ControlledRoute::getSectionController(Section * section) const
 {
 	return ControllerRegistry::instance().find<SectionController>(section);
 }
 
-SignalControllerProxy * WidgetRoute::getSignalController(Section * section) const
+SignalControllerProxy * ControlledRoute::getSignalController(Section * section) const
 {
 	const std::vector<Signal *> & section_signals = section->getSignals(direction);
 	SignalControllerProxy    *    controller      = nullptr;
@@ -519,7 +519,7 @@ SignalControllerProxy * WidgetRoute::getSignalController(Section * section) cons
 	return controller;
 }
 
-void WidgetRoute::collectSignalControllers(
+void ControlledRoute::collectSignalControllers(
 	std::vector<SignalControllerProxy *>       &      controllers,
 	std::function<bool(SignalControllerProxy * ctrl)> guard) const
 {
@@ -535,7 +535,7 @@ void WidgetRoute::collectSignalControllers(
 	}
 }
 
-void WidgetRoute::collectSignalControllers(
+void ControlledRoute::collectSignalControllers(
 	std::vector<SignalControllerProxy *> & controllers,
 	const bool                             unlocked) const
 {
@@ -545,7 +545,7 @@ void WidgetRoute::collectSignalControllers(
 	});
 }
 
-void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & controllers) const
+void ControlledRoute::collectSectionControllers(std::vector<SectionController *> & controllers) const
 {
 	controllers.clear();
 	for (Section * section : sections)
@@ -557,17 +557,17 @@ void WidgetRoute::collectSectionControllers(std::vector<SectionController *> & c
 	}
 }
 
-bool WidgetRoute::isCurved(const RailPart * part)
+bool ControlledRoute::isCurved(const RailPart * part)
 {
 	return part->reserved() && part->isCurved();
 }
 
-WidgetRoute::operator QListWidgetItem * ()
+ControlledRoute::operator QListWidgetItem * ()
 {
 	return &list_item;
 }
 
-void WidgetRoute::dump() const
+void ControlledRoute::dump() const
 {
 	__METHOD__;
 
@@ -588,12 +588,12 @@ void WidgetRoute::dump() const
 **                                                                      **
 *************************************************************************/
 
-void WidgetRoute::resetTransaction()
+void ControlledRoute::resetTransaction()
 {
 	Batch::reset();
 }
 
-void WidgetRoute::fail()
+void ControlledRoute::fail()
 {
 	__METHOD__;
 
@@ -603,19 +603,19 @@ void WidgetRoute::fail()
 	dump();
 }
 
-void WidgetRoute::tryComplete()
+void ControlledRoute::tryComplete()
 {
 	__METHOD__;
 
 	Batch::tryComplete();
 }
 
-bool WidgetRoute::isCompleted()
+bool ControlledRoute::isCompleted()
 {
 	return Batch::isCompleted();
 }
 
-bool WidgetRoute::isTour()
+bool ControlledRoute::isTour()
 {
 	return state == SectionState::TOUR;
 }
@@ -626,7 +626,7 @@ bool WidgetRoute::isTour()
 **                                                                      **
 *************************************************************************/
 
-void WidgetRoute::turnSwitches()
+void ControlledRoute::turnSwitches()
 {
 	__METHOD__;
 
@@ -643,7 +643,7 @@ void WidgetRoute::turnSwitches()
 	}
 }
 
-void WidgetRoute::turnFlanks()
+void ControlledRoute::turnFlanks()
 {
 	__METHOD__;
 
@@ -659,7 +659,7 @@ void WidgetRoute::turnFlanks()
 	}
 }
 
-void WidgetRoute::enableSignals()
+void ControlledRoute::enableSignals()
 {
 	__METHOD__;
 
@@ -675,7 +675,7 @@ void WidgetRoute::enableSignals()
 	}
 }
 
-void WidgetRoute::extendSignals()
+void ControlledRoute::extendSignals()
 {
 	__METHOD__;
 
@@ -688,7 +688,7 @@ void WidgetRoute::extendSignals()
 	}
 }
 
-void WidgetRoute::enableSections()
+void ControlledRoute::enableSections()
 {
 	__METHOD__;
 
@@ -711,7 +711,7 @@ void WidgetRoute::enableSections()
 	}
 }
 
-void WidgetRoute::disableSections()
+void ControlledRoute::disableSections()
 {
 	__METHOD__;
 
@@ -724,7 +724,7 @@ void WidgetRoute::disableSections()
 	}
 }
 
-void WidgetRoute::disableSignals()
+void ControlledRoute::disableSignals()
 {
 	__METHOD__;
 
@@ -737,7 +737,7 @@ void WidgetRoute::disableSignals()
 	}
 }
 
-void WidgetRoute::unlockFlanks()
+void ControlledRoute::unlockFlanks()
 {
 	__METHOD__;
 
@@ -750,7 +750,7 @@ void WidgetRoute::unlockFlanks()
 	}
 }
 
-void WidgetRoute::unlockRailParts()
+void ControlledRoute::unlockRailParts()
 {
 	__METHOD__;
 
@@ -768,7 +768,7 @@ void WidgetRoute::unlockRailParts()
 	}
 }
 
-void WidgetRoute::unlockSections()
+void ControlledRoute::unlockSections()
 {
 	__METHOD__;
 

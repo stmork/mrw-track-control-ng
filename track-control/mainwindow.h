@@ -31,7 +31,7 @@ namespace Ui
 QT_END_NAMESPACE
 
 class MrwMessageDispatcher;
-class WidgetRoute;
+class ControlledRoute;
 
 class MainWindow :
 	public QMainWindow,
@@ -113,15 +113,15 @@ private:
 	mrw::model::Route   *  createRoute(
 		const bool                     direction,
 		const mrw::model::SectionState state);
-	void                   addRoute(WidgetRoute * route);
-	void                   extendRoute(WidgetRoute * route);
+	void                   addRoute(ControlledRoute * route);
+	void                   extendRoute(ControlledRoute * route);
 	void                   startBeermode(const bool dir);
 	void                   changePage(const int offset);
 
 	Ui::MainWindow               *              ui;
 	QLabel                   *                  status_label = nullptr;
 	mrw::model::ModelRepository        &        repo;
-	WidgetRoute                *                beer_route = nullptr;
+	ControlledRoute                *                beer_route = nullptr;
 	mrw::statechart::OperatingModeStatechart    statechart;
 };
 

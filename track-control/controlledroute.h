@@ -5,8 +5,8 @@
 
 #pragma once
 
-#ifndef WIDGETROUTE_H
-#define WIDGETROUTE_H
+#ifndef CONTROLLEDROUTE_H
+#define CONTROLLEDROUTE_H
 
 #include <vector>
 
@@ -23,7 +23,7 @@
 
 #include "routebatch.h"
 
-class WidgetRoute :
+class ControlledRoute :
 	public mrw::model::Route,
 	public mrw::util::Batch,
 	public mrw::statechart::RouteStatechart::OperationCallback
@@ -41,12 +41,12 @@ private:
 public:
 	static const int        USER_ROLE = Qt::UserRole + 1;
 
-	explicit WidgetRoute(
+	explicit ControlledRoute(
 		const bool                       dir,
 		const mrw::model::SectionState   wanted_state,
 		mrw::model::RailPart      *      first,
 		QObject             *            parent = nullptr);
-	virtual ~WidgetRoute();
+	virtual ~ControlledRoute();
 
 	operator QListWidgetItem * ();
 

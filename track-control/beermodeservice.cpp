@@ -7,7 +7,7 @@
 #include <model/section.h>
 
 #include "beermodeservice.h"
-#include "widgetroute.h"
+#include "controlledroute.h"
 
 using namespace mrw::util;
 using namespace mrw::model;
@@ -31,7 +31,7 @@ void BeerModeService::init(ModelRailway * model)
 	model->parts<Rail>(main_rails, &Rail::isMain);
 }
 
-WidgetRoute * BeerModeService::startBeerMode(const bool dir)
+ControlledRoute * BeerModeService::startBeerMode(const bool dir)
 {
 	std::vector<Rail *> candidates;
 
@@ -57,7 +57,7 @@ WidgetRoute * BeerModeService::startBeerMode(const bool dir)
 
 		if ((pass_through != nullptr) && (end != nullptr))
 		{
-			WidgetRoute * route = new WidgetRoute(dir, SectionState::TOUR, start);
+			ControlledRoute * route = new ControlledRoute(dir, SectionState::TOUR, start);
 
 			qDebug("-----");
 			qDebug().noquote() << "Start: " << dump(start);
