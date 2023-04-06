@@ -121,7 +121,7 @@ private:
 	Ui::MainWindow               *              ui;
 	QLabel                   *                  status_label = nullptr;
 	mrw::model::ModelRepository        &        repo;
-	ControlledRoute                *                beer_route = nullptr;
+	ControlledRoute              *              beer_route   = nullptr;
 	mrw::statechart::OperatingModeStatechart    statechart;
 };
 

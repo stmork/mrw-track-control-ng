@@ -494,7 +494,7 @@ void MainWindow::routeFinished()
 {
 	__METHOD__;
 
-	ControlledRoute   *   route = dynamic_cast<ControlledRoute *>(QObject::sender());
+	ControlledRoute * route = dynamic_cast<ControlledRoute *>(QObject::sender());
 	QListWidgetItem * item  = *route;
 	const int         row   = ui->routeListWidget->row(item);
 

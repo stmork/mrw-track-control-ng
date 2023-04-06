@@ -17,7 +17,7 @@ void RouteListWidget::collect(std::vector<ControlledRoute *> & routes) const
 	for (int index = 0; index < count(); index++)
 	{
 		QListWidgetItem * element = item(index);
-		ControlledRoute   *   route   = element->data(ControlledRoute::USER_ROLE).value<ControlledRoute *>();
+		ControlledRoute * route   = element->data(ControlledRoute::USER_ROLE).value<ControlledRoute *>();
 
 		routes.push_back(route);
 	}
