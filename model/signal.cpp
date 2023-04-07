@@ -72,8 +72,11 @@ SignalAspect Signal::aspect() const
 
 void Signal::setAspect(const SignalAspect new_aspect)
 {
+	const bool modified = signal_aspect != new_aspect;
+
 	signal_aspect = new_aspect;
-	qDebug().noquote() << toString();
+
+	qDebug().noquote() << toString() << "modified:" << modified;
 }
 
 void Signal::link()

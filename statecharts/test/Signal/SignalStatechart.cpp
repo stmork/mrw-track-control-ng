@@ -25,6 +25,7 @@ namespace mrw
 
 		SignalStatechart::SignalStatechart() :
 			symbol(SignalStatechart::STOP),
+			modified(false),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
 			isExecuting(false),
@@ -295,7 +296,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Turning'. */
 			timerService->setTimer(this, 0, SignalStatechart::timeout, false);
-			ifaceOperationCallback->prepare();
+			modified = ifaceOperationCallback->prepare();
 		}
 
 		/* Entry action for state 'Send'. */
@@ -469,6 +470,23 @@ namespace mrw
 		}
 
 		/* The reactions of state null. */
+		void SignalStatechart::react_main_region_Turning_Turn_processing__choice_0()
+		{
+			/* The reactions of state null. */
+			if (modified)
+			{
+				enseq_main_region_Turning_Turn_processing_Send_default();
+			}
+			else
+			{
+				exseq_main_region_Turning();
+				completed_raised = true;
+				enseq_main_region_Idle_default();
+				react(0);
+			}
+		}
+
+		/* The reactions of state null. */
 		void SignalStatechart::react_main_region__choice_0()
 		{
 			/* The reactions of state null. */
@@ -488,6 +506,7 @@ namespace mrw
 		void SignalStatechart::react_main_region__entry_Default()
 		{
 			/* Default react sequence for initial entry  */
+			symbol = SignalStatechart::STOP;
 			enseq_main_region_Idle_default();
 		}
 
@@ -495,7 +514,7 @@ namespace mrw
 		void SignalStatechart::react_main_region_Turning_Turn_processing__entry_Default()
 		{
 			/* Default react sequence for initial entry  */
-			enseq_main_region_Turning_Turn_processing_Send_default();
+			react_main_region_Turning_Turn_processing__choice_0();
 		}
 
 		sc::integer SignalStatechart::react(const sc::integer transitioned_before)

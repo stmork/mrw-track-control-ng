@@ -32,6 +32,8 @@ namespace mrw::ctrl
 		/** The Signal instance controlled by this controller. */
 		mrw::model::Signal * signal = nullptr;
 
+		bool modified = false;
+
 	public:
 		explicit SignalProxy();
 		virtual ~SignalProxy();
@@ -43,6 +45,9 @@ namespace mrw::ctrl
 		virtual void dump() override;
 
 		bool process(model::Signal * device, const can::MrwMessage & message);
+
+	protected:
+		bool setAspect(const mrw::can::SignalAspect aspect);
 	};
 
 	/*************************************************************************
@@ -65,7 +70,7 @@ namespace mrw::ctrl
 		 * @see mrw::model::Signal::Symbol
 		 * @see mrw::can::SignalAspect
 		 */
-		void prepare() override;
+		bool prepare() override;
 
 		/**
 		 * This method sets the amount of branched rail parts embraced of the
@@ -105,7 +110,7 @@ namespace mrw::ctrl
 		 * @see mrw::model::Signal::Symbol
 		 * @see mrw::can::SignalAspect
 		 */
-		void prepare() override;
+		bool prepare() override;
 
 		mrw::model::Signal::Symbol getPreparedSymbol() const;
 	};
@@ -135,7 +140,7 @@ namespace mrw::ctrl
 		 * @see mrw::model::Signal::Symbol
 		 * @see mrw::can::SignalAspect
 		 */
-		void prepare() override;
+		bool prepare() override;
 	};
 }
 

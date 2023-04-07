@@ -122,7 +122,7 @@ namespace mrw
 
 				virtual bool hasSignal() = 0;
 
-				virtual void prepare() = 0;
+				virtual bool prepare() = 0;
 
 				virtual void send() = 0;
 
@@ -228,6 +228,8 @@ namespace mrw
 			static const sc::integer STOP;
 			static const sc::integer GO;
 
+			bool modified;
+
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 			static const sc::ushort maxOrthogonalStates = 1;
@@ -265,6 +267,7 @@ namespace mrw
 			void exseq_main_region_Fail();
 			void exseq_main_region();
 			void exseq_main_region_Turning_Turn_processing();
+			void react_main_region_Turning_Turn_processing__choice_0();
 			void react_main_region__choice_0();
 			void react_main_region__entry_Default();
 			void react_main_region_Turning_Turn_processing__entry_Default();

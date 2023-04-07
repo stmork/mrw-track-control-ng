@@ -126,13 +126,23 @@ bool SignalProxy::process(Signal * device, const MrwMessage & message)
 	return false;
 }
 
+bool SignalProxy::setAspect(const SignalAspect aspect)
+{
+	Q_ASSERT(signal != nullptr);
+
+	modified = signal->aspect() != aspect;
+	signal->setAspect(aspect);
+
+	return modified;
+}
+
 /*************************************************************************
 **                                                                      **
 **       Signal proxy for main signals                                  **
 **                                                                      **
 *************************************************************************/
 
-void MainProxy::prepare()
+bool MainProxy::prepare()
 {
 	__METHOD__;
 
@@ -154,7 +164,8 @@ void MainProxy::prepare()
 		state = curved < SLOW_CURVED_LIMIT ? SIGNAL_HP1 : SIGNAL_HP2;
 		break;
 	}
-	signal->setAspect(state);
+
+	return setAspect(state);
 }
 
 void MainProxy::setCurveCount(const size_t count)
@@ -174,7 +185,7 @@ void DistantProxy::start(Signal * input, Signal * combined)
 	SignalProxy::start(input);
 }
 
-void DistantProxy::prepare()
+bool DistantProxy::prepare()
 {
 	__METHOD__;
 
@@ -205,7 +216,7 @@ void DistantProxy::prepare()
 		break;
 	}
 
-	signal->setAspect(state);
+	return setAspect(state);
 }
 
 Symbol DistantProxy::getPreparedSymbol() const
@@ -246,7 +257,7 @@ bool ShuntProxy::isCombined()
 	return hasSignal() && (signal == main_signal);
 }
 
-void ShuntProxy::prepare()
+bool ShuntProxy::prepare()
 {
 	__METHOD__;
 
@@ -266,5 +277,6 @@ void ShuntProxy::prepare()
 		state = SIGNAL_SH1;
 		break;
 	}
-	signal->setAspect(state);
+
+	return setAspect(state);
 }

@@ -23,9 +23,10 @@ testclass SignalTest for statechart mrw.^statechart.SignalStatechart
 		assert  is_active
 		assert !is_final
 		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
-		
+		assert symbol == STOP
+
 		mock hasSignal returns (true)
-		mock prepare
+		mock prepare returns (true)
 		mock send
 		mock dump
 	}
@@ -71,6 +72,7 @@ testclass SignalTest for statechart mrw.^statechart.SignalStatechart
 		// Then
 		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
 		assert symbol == STOP
+		assert !called prepare
 	}
 
 	@Test
@@ -79,6 +81,7 @@ testclass SignalTest for statechart mrw.^statechart.SignalStatechart
 		// Given
 		idle()
 		mock hasSignal returns (true)
+		mock prepare returns (true)
 
 		// When
 		raise turn : GO
@@ -89,6 +92,21 @@ testclass SignalTest for statechart mrw.^statechart.SignalStatechart
 		assert symbol == GO
 		assert called prepare
 		assert called send
+	}
+
+	@Test
+	operation turningNoChange()
+	{
+		// Given
+		idle()
+		mock prepare returns (false)
+
+		// When
+		raise turn : STOP
+
+		// Then
+		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
+		assert symbol == STOP
 	}
 
 	@Test
@@ -117,6 +135,21 @@ testclass SignalTest for statechart mrw.^statechart.SignalStatechart
 		// Then
 		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
 		assert completed
+	}
+
+	@Test
+	operation turningNoExtend()
+	{
+		// Given
+		turnCompleted()
+		mock prepare returns (false)
+
+		// When
+		raise turn : GO
+
+		// Then
+		assert active (mrw.^statechart.SignalStatechart.main_region.Idle)
+		assert symbol == GO
 	}
 
 	@Test
