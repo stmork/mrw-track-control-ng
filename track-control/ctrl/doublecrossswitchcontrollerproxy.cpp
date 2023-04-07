@@ -203,8 +203,14 @@ bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 			return true;
 
 		case GETDIR:
-			part->setState(DoubleCrossSwitch::State(message[0] - 1u), true);
-			statechart.response();
+			if (part->setState(message[0] != 3 ? DoubleCrossSwitch::State(message[0] - 1u) : DoubleCrossSwitch::State::FAIL, true))
+			{
+				statechart.response();
+			}
+			else
+			{
+				statechart.failed();
+			}
 			emit update();
 			return true;
 

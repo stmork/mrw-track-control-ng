@@ -254,6 +254,18 @@ void TestModel::testRegularSwitchStates()
 	}
 }
 
+void TestModel::testRegularSwitchFail()
+{
+	std::vector<RegularSwitch *> switches;
+
+	model->parts<RegularSwitch>(switches);
+	for (RegularSwitch * part : switches)
+	{
+		part->setState(RegularSwitch::State::FAIL);
+		QCOMPARE(part->lock(), LockState::FAIL);
+	}
+}
+
 void TestModel::testDoubleCrossSwitchStates()
 {
 	std::vector<DoubleCrossSwitch *> switches;
@@ -308,6 +320,18 @@ void TestModel::testDoubleCrossSwitchStates()
 				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
 			}
 		}
+	}
+}
+
+void TestModel::testDoubleCrossSwitchFail()
+{
+	std::vector<DoubleCrossSwitch *> switches;
+
+	model->parts<DoubleCrossSwitch>(switches);
+	for (DoubleCrossSwitch * part : switches)
+	{
+		part->setState(DoubleCrossSwitch::State::FAIL);
+		QCOMPARE(part->lock(), LockState::FAIL);
 	}
 }
 

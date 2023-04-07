@@ -60,7 +60,13 @@ namespace mrw::model
 			 *
 			 * <img src="RSwitch_AC_IL_RUF.jpg" width="100"/> <img src="RSwitch_AC_IR_RUF.jpg" width="100"/>
 			 */
-			AC = 2
+			AC = 2,
+
+			/**
+			 * This state occurs if a switch is not in defined final location
+			 * due to a hardware failure.
+			 */
+			FAIL
 		};
 
 		explicit RegularSwitch(

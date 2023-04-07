@@ -57,7 +57,13 @@ namespace mrw::model
 			/**
 			 * <img src="XSwitch_BD_RUF.jpg" width="100"/>
 			 */
-			BD = B_MASK | D_MASK
+			BD = B_MASK | D_MASK,
+
+			/**
+			 * This state occurs if a switch is not in defined final location
+			 * due to a hardware failure.
+			 */
+			FAIL
 		};
 
 		explicit DoubleCrossSwitch(

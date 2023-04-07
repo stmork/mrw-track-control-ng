@@ -94,7 +94,12 @@ bool RegularSwitch::setState(const State state, const bool force)
 {
 	bool success = true;
 
-	if ((lock() == LockState::UNLOCKED) || force)
+	if (state == State::FAIL)
+	{
+		setLock(LockState::FAIL);
+		success = false;
+	}
+	else if ((lock() == LockState::UNLOCKED) || force)
 	{
 		switch_state = state;
 	}

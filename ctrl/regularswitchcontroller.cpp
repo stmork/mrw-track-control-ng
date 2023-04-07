@@ -20,7 +20,7 @@ void RegularSwitchController::status(RegularSwitchController::Status & status) c
 	status.right    = isRight();
 	status.inclined = isInclined();
 
-	Q_ASSERT(status.left != status.right);
+	Q_ASSERT((status.lock_state == model::Device::LockState::FAIL) || (status.left != status.right));
 }
 
 bool RegularSwitchController::isExpandable() const

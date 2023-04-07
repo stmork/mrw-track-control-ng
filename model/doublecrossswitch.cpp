@@ -91,7 +91,12 @@ bool DoubleCrossSwitch::setState(const State state, const bool force)
 {
 	bool success = true;
 
-	if ((lock() == LockState::UNLOCKED) || force)
+	if (state == State::FAIL)
+	{
+		setLock(LockState::FAIL);
+		success = false;
+	}
+	else if ((lock() == LockState::UNLOCKED) || force)
 	{
 #ifdef STATE_VERBOSE
 		qDebug().noquote() << "########## DCS set state: " << state_map.get(switch_state) << " => " << state_map.get(state) << name();

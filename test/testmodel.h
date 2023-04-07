@@ -52,7 +52,9 @@ namespace mrw::test
 		void testRegions();
 		void testSections();
 		void testRegularSwitchStates();
+		void testRegularSwitchFail();
 		void testDoubleCrossSwitchStates();
+		void testDoubleCrossSwitchFail();
 		void testMainRail();
 		void testSignals();
 		void testDefaultPosition();

@@ -98,13 +98,13 @@ namespace mrw::ctrl
 		virtual bool            isDirection()  const override;
 
 		virtual mrw::model::Position     *    position() const override;
-		virtual mrw::model::SectionState      state() const override;
-		virtual mrw::model::Device::LockState lock() const override;
-		virtual mrw::model::Position::Bending bending() const override;
+		virtual mrw::model::SectionState      state()    const override;
+		virtual mrw::model::Device::LockState lock()     const override;
+		virtual mrw::model::Position::Bending bending()  const override;
 
 		// Implementation from RailPartInfo
 		virtual mrw::model::RailPart * railPart() const override;
-		virtual mrw::model::Section  * section() const override;
+		virtual mrw::model::Section  * section()  const override;
 
 		// Implementations from ControllerRegistrand
 		virtual bool    process(const can::MrwMessage & message) override;
