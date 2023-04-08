@@ -310,8 +310,6 @@ namespace mrw
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->disableSections();
 			ifaceOperationCallback->disableSignals();
-			ifaceOperationCallback->unlockRailParts();
-			ifaceOperationCallback->unlockSections();
 			ifaceOperationCallback->tryComplete();
 		}
 
@@ -397,6 +395,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Unlock()
 		{
 			/* Entry action for state 'Unlock'. */
+			ifaceOperationCallback->unlockRailParts();
 			ifaceOperationCallback->unlockSections();
 		}
 

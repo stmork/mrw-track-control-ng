@@ -13,8 +13,6 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		assert called resetTransaction
 		assert called disableSections
 		assert called disableSignals
-		assert called unlockRailParts
-		assert called unlockSections
 		assert called tryComplete
 	}
 
@@ -249,6 +247,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		// Then
 		assert active (mrw.^statechart.RouteStatechart.main_region.Unlock)
 		assert called resetTransaction
+		assert called unlockRailParts
 		assert called unlockSections
 		assert called tryComplete
 	}

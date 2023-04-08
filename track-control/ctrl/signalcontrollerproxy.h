@@ -68,12 +68,12 @@ namespace mrw::ctrl
 
 		// Implementations from SignalController
 		virtual bool               hasShunting() const override;
-		virtual bool               hasDistant() const override;
-		virtual bool               hasMain() const override;
+		virtual bool               hasDistant()  const override;
+		virtual bool               hasMain()     const override;
 
 		mrw::model::Signal::Symbol distant() const override;
-		mrw::model::Signal::Symbol shunt() const override;
-		mrw::model::Signal::Symbol main() const override;
+		mrw::model::Signal::Symbol shunt()   const override;
+		mrw::model::Signal::Symbol main()    const override;
 
 	signals:
 		void enable();
