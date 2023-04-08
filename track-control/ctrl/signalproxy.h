@@ -32,8 +32,6 @@ namespace mrw::ctrl
 		/** The Signal instance controlled by this controller. */
 		mrw::model::Signal * signal = nullptr;
 
-		bool modified = false;
-
 	public:
 		explicit SignalProxy();
 		virtual ~SignalProxy();

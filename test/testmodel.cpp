@@ -841,8 +841,16 @@ void TestModel::testAssemblyPart(Section * section, AssemblyPart * part)
 		QVERIFY2(signal->controller() != nullptr, name.c_str());
 		QVERIFY2(signal->key().contains(signal->partName()), name.c_str());
 
+		device->setLock(LockState::LOCKED);
 		QCOMPARE(signal->aspect(), SignalAspect::SIGNAL_OFF);
-		signal->setAspect(SignalAspect::SIGNAL_TST);
+		QVERIFY(signal->setAspect(SignalAspect::SIGNAL_TST));
+		QCOMPARE(signal->aspect(), SignalAspect::SIGNAL_TST);
+
+		QVERIFY(!signal->setAspect(SignalAspect::SIGNAL_TST));
+		QCOMPARE(signal->aspect(), SignalAspect::SIGNAL_TST);
+
+		device->setLock(LockState::UNLOCKED);
+		QVERIFY(signal->setAspect(SignalAspect::SIGNAL_TST));
 		QCOMPARE(signal->aspect(), SignalAspect::SIGNAL_TST);
 	}
 

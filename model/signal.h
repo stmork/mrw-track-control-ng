@@ -151,11 +151,13 @@ namespace mrw::model
 		 * This method sets the real life signal aspect.
 		 *
 		 * @note Setting this aspect does not cause a change via sending a
-		 * CAN message.
+		 * CAN message but hints of sending it.
 		 *
 		 * @param new_state The new real life signal aspect to be shown.
+		 * @return True if this aspect update should cause sending of
+		 * CAN messages.
 		 */
-		void setAspect(const mrw::can::SignalAspect new_state);
+		bool setAspect(const mrw::can::SignalAspect new_state);
 
 		QString key() const override;
 

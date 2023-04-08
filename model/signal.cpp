@@ -70,13 +70,15 @@ SignalAspect Signal::aspect() const
 	return signal_aspect;
 }
 
-void Signal::setAspect(const SignalAspect new_aspect)
+bool Signal::setAspect(const SignalAspect new_aspect)
 {
-	const bool modified = signal_aspect != new_aspect;
+	const Device * device   = dynamic_cast<const Device *>(this);
+	const bool     modified = (signal_aspect != new_aspect) || (device->lock() != Device::LockState::LOCKED);
 
 	signal_aspect = new_aspect;
 
 	qDebug().noquote() << toString() << "modified:" << modified;
+	return modified;
 }
 
 void Signal::link()

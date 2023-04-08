@@ -130,10 +130,7 @@ bool SignalProxy::setAspect(const SignalAspect aspect)
 {
 	Q_ASSERT(signal != nullptr);
 
-	modified = signal->aspect() != aspect;
-	signal->setAspect(aspect);
-
-	return modified;
+	return signal->setAspect(aspect);
 }
 
 /*************************************************************************
