@@ -70,6 +70,9 @@ MainWindow::MainWindow(
 	connect(
 		ui->sectionListWidget, &QListWidget::currentItemChanged,
 		this, &MainWindow::enable);
+	connect(
+		&BeerModeService::instance(), &BeerModeService::disabledBeerMode,
+		this, &MainWindow::disableBeerMode);
 
 	connectEditActions();
 	connectOpModes(dispatcher);
@@ -110,6 +113,12 @@ MainWindow::~MainWindow()
 	statechart.exit();
 
 	delete ui;
+}
+
+void MainWindow::disableBeerMode()
+{
+	ui->actionBeermodeLeft->setChecked(false);
+	ui->actionBeermodeRight->setChecked(false);
 }
 
 void MainWindow::initRegion(MrwMessageDispatcher & dispatcher)
@@ -501,12 +510,12 @@ void MainWindow::routeFinished()
 	ui->routeListWidget->takeItem(row);
 
 	delete route;
-	if (route == beer_route)
+	if (route == BeerModeService::instance())
 	{
 		// Wait at least 1250 ms for track occupation simulator.
 		const int wait_time = 1250 + Random::random<int>(500);
 
-		beer_route = nullptr;
+		BeerModeService::instance().clearBeerRoute();
 
 		if (ui->actionBeermodeLeft->isChecked())
 		{
@@ -573,11 +582,9 @@ void MainWindow::on_clearRoute_clicked()
 	if (route != nullptr)
 	{
 		route->disable();
-		if (route == beer_route)
+		if (route == BeerModeService::instance())
 		{
-			beer_route = nullptr;
-			ui->actionBeermodeLeft->setChecked(false);
-			ui->actionBeermodeRight->setChecked(false);
+			disableBeerMode();
 		}
 	}
 	enable();
@@ -595,9 +602,7 @@ void MainWindow::on_clearAllRoutes_clicked()
 		route->disable();
 	}
 
-	beer_route = nullptr;
-	ui->actionBeermodeLeft->setChecked(false);
-	ui->actionBeermodeRight->setChecked(false);
+	disableBeerMode();
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
 }
@@ -874,6 +879,8 @@ void MainWindow::on_actionBeermodeRight_triggered()
 
 void MainWindow::startBeermode(const bool dir)
 {
+	ControlledRoute * beer_route = BeerModeService::instance();
+
 	if (beer_route == nullptr)
 	{
 		beer_route = BeerModeService::instance().startBeerMode(dir);
@@ -885,8 +892,7 @@ void MainWindow::startBeermode(const bool dir)
 		else
 		{
 			warn(tr("Diese Fahrstraße ist nicht möglich. Der Biermodus wurde abgeschaltet."));
-			ui->actionBeermodeLeft->setChecked(false);
-			ui->actionBeermodeRight->setChecked(false);
+			disableBeerMode();
 		}
 		enable();
 	}

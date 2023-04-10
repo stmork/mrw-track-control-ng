@@ -46,6 +46,9 @@ public:
 		QWidget             *            parent = nullptr);
 	~MainWindow();
 
+public slots:
+	void disableBeerMode();
+
 private slots:
 	void itemClicked(QListWidgetItem * item);
 	void enable();
@@ -121,7 +124,6 @@ private:
 	Ui::MainWindow               *              ui;
 	QLabel                   *                  status_label = nullptr;
 	mrw::model::ModelRepository        &        repo;
-	ControlledRoute              *              beer_route   = nullptr;
 	mrw::statechart::OperatingModeStatechart    statechart;
 };
 

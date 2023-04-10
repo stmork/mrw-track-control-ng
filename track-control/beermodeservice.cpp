@@ -65,15 +65,38 @@ ControlledRoute * BeerModeService::startBeerMode(const bool dir)
 			qDebug().noquote() << "End:   " << dump(end);
 			if (route->append(pass_through) && route->append(*end->advance(dir).begin()))
 			{
+				beer_route = route;
 				return route;
 			}
 			else
 			{
 				delete route;
+				emit disabledBeerMode();
 			}
 		}
 	}
 	return nullptr;
+}
+
+void BeerModeService::clearBeerRoute()
+{
+	beer_route = nullptr;
+}
+
+void BeerModeService::disableBeerMode(ControlledRoute * route)
+{
+	if (route == beer_route)
+	{
+		qInfo("Disabling beer mode");
+
+		beer_route = nullptr;
+		emit disabledBeerMode();
+	}
+}
+
+BeerModeService::operator ControlledRoute * () const
+{
+	return beer_route;
 }
 
 void BeerModeService::findCandidates(

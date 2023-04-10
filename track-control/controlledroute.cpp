@@ -16,6 +16,7 @@
 #include <ctrl/signalcontrollerproxy.h>
 
 #include "controlledroute.h"
+#include "beermodeservice.h"
 
 using namespace mrw::util;
 using namespace mrw::statechart;
@@ -601,6 +602,7 @@ void ControlledRoute::fail()
 	Batch::dump();
 
 	dump();
+	BeerModeService::instance().disableBeerMode(this);
 }
 
 void ControlledRoute::tryComplete()
