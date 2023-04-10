@@ -782,5 +782,4 @@ void ControlledRoute::unlockSections()
 		// Unlock will cause unregister which also unlock rail parts
 		controller->unlock();
 	}
-	statechart.completed();
 }

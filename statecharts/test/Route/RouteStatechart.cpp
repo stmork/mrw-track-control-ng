@@ -401,16 +401,16 @@ namespace mrw
 			ifaceOperationCallback->fail();
 			ifaceOperationCallback->disableSections();
 			ifaceOperationCallback->disableSignals();
-			ifaceOperationCallback->unlockRailParts();
-			ifaceOperationCallback->unlockSections();
 		}
 
 		/* Entry action for state 'Unlock'. */
 		void RouteStatechart::enact_main_region_Unlock()
 		{
 			/* Entry action for state 'Unlock'. */
+			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->unlockRailParts();
 			ifaceOperationCallback->unlockSections();
+			ifaceOperationCallback->tryComplete();
 		}
 
 		/* Exit action for state 'Disable'. */
@@ -871,8 +871,7 @@ namespace mrw
 						{
 							exseq_main_region_Active();
 							ifaceOperationCallback->fail();
-							enseq_main_region_Disable_default();
-							react(0);
+							react_main_region__choice_0();
 							transitioned_after = 0;
 						}
 					}
@@ -904,9 +903,9 @@ namespace mrw
 					if (timeEvents[0])
 					{
 						exseq_main_region_Disable();
-						finished_raised = true;
 						timeEvents[0] = false;
-						enseq_main_region__final__default();
+						enseq_main_region_Unlock_default();
+						react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -965,6 +964,7 @@ namespace mrw
 				if (failed_raised)
 				{
 					exseq_main_region_Turning();
+					ifaceOperationCallback->fail();
 					react_main_region__choice_0();
 					transitioned_after = 0;
 				}
@@ -1160,7 +1160,6 @@ namespace mrw
 					if (timeEvents[6])
 					{
 						exseq_main_region_Wait();
-						ifaceOperationCallback->fail();
 						timeEvents[6] = false;
 						enseq_main_region_Disable_default();
 						react(0);
@@ -1186,7 +1185,7 @@ namespace mrw
 				{
 					exseq_main_region_Emergency_Shutdown();
 					timeEvents[7] = false;
-					enseq_main_region_Disable_default();
+					enseq_main_region_Unlock_default();
 					react(0);
 					transitioned_after = 0;
 				}
