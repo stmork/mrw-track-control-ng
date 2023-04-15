@@ -1156,9 +1156,9 @@ namespace mrw
 
 			statechart->raiseTurn();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active));
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active_processing_Switch_Turning));
 
 			EXPECT_TRUE(prepareRouteMock->calledAtLeast(1));
 
@@ -1281,9 +1281,9 @@ namespace mrw
 
 			statechart->raiseTurn();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active));
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active_processing_Switch_Turning));
 
 			EXPECT_TRUE(prepareRouteMock->calledAtLeast(1));
 
@@ -1308,9 +1308,9 @@ namespace mrw
 
 			statechart->raiseCompleted();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active));
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Flank_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active_processing_Flank_Turning));
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
@@ -1459,9 +1459,9 @@ namespace mrw
 
 			statechart->raiseCompleted();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active));
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active_processing_Signal_Turning));
 
 			EXPECT_TRUE(unlockFlanksMock->calledAtLeastOnce());
 
@@ -1485,9 +1485,9 @@ namespace mrw
 
 			statechart->raiseCompleted();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active));
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active_processing_Signal_Turning));
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
@@ -1566,9 +1566,9 @@ namespace mrw
 
 			statechart->raiseCompleted();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active));
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Signal_Updating));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active_processing_Signal_Updating));
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
@@ -1652,9 +1652,9 @@ namespace mrw
 
 			statechart->raiseCompleted();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active));
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Section_Activation));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active_processing_Section_Activation));
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
@@ -1744,7 +1744,7 @@ namespace mrw
 
 			statechart->raiseCompleted();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active_processing_Completed));
 
 			EXPECT_TRUE(statechart->isRaisedActivated());
 
@@ -1904,9 +1904,9 @@ namespace mrw
 
 			statechart->raiseTurn();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active));
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active_processing_Switch_Turning));
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
@@ -2003,9 +2003,9 @@ namespace mrw
 
 			statechart->raiseTurn();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active));
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Turning_Turning_process_Switch_Turning));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Active_processing_Switch_Turning));
 
 			EXPECT_TRUE(resetTransactionMock->calledAtLeastOnce());
 
@@ -2023,14 +2023,19 @@ namespace mrw
 		{
 			activate();
 
+			isCompletedMock->setDefaultBehavior(&IsCompletedMock::isCompleted1);
+
 			statechart->raiseDisable();
 
 			disabled();
 
 
+			isCompletedMock->reset();
 		}
 		TEST_F(RouteTest, deactivate)
 		{
+			isCompletedMock = new IsCompletedMock();
+			isCompletedMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			enableSectionsMock = new EnableSectionsMock();
@@ -2112,6 +2117,8 @@ namespace mrw
 		}
 		TEST_F(RouteTest, unlock)
 		{
+			isCompletedMock = new IsCompletedMock();
+			isCompletedMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			enableSectionsMock = new EnableSectionsMock();
@@ -2197,6 +2204,8 @@ namespace mrw
 		}
 		TEST_F(RouteTest, finish)
 		{
+			isCompletedMock = new IsCompletedMock();
+			isCompletedMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			enableSectionsMock = new EnableSectionsMock();
@@ -2268,6 +2277,8 @@ namespace mrw
 		}
 		TEST_F(RouteTest, timeout)
 		{
+			isCompletedMock = new IsCompletedMock();
+			isCompletedMock->initializeBehavior();
 			resetTransactionMock = new ResetTransactionMock();
 			resetTransactionMock->initializeBehavior();
 			enableSectionsMock = new EnableSectionsMock();
