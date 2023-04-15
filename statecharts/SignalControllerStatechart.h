@@ -79,11 +79,12 @@ namespace mrw
 				main_region_Operating_Processing_Pending_Pending_Go_Main,
 				main_region_Operating_Processing_Pending_Pending_Go_Distant,
 				main_region_Operating_Processing_Pending_Pending_Go_Shunt,
+				main_region_Operating_Processing_Pending_Pending_Delay,
 				main_region_Failed
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 30;
+			static const sc::integer numStates = 31;
 			static const sc::integer scvi_main_region_Wait_for_Start = 0;
 			static const sc::integer scvi_main_region_Init = 0;
 			static const sc::integer scvi_main_region_Init_Init_process_Turning = 0;
@@ -113,6 +114,7 @@ namespace mrw
 			static const sc::integer scvi_main_region_Operating_Processing_Pending_Pending_Go_Main = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Pending_Pending_Go_Distant = 0;
 			static const sc::integer scvi_main_region_Operating_Processing_Pending_Pending_Go_Shunt = 0;
+			static const sc::integer scvi_main_region_Operating_Processing_Pending_Pending_Delay = 0;
 			static const sc::integer scvi_main_region_Failed = 0;
 
 			/*! Enumeration of all events which are consumed. */
@@ -132,7 +134,8 @@ namespace mrw
 				_te1_main_region_Operating_Processing_Shunting_State_Processing_Waiting_,
 				_te2_main_region_Operating_Processing_Tour_State_Processing_Waiting_,
 				_te3_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Delay_,
-				_te4_main_region_Operating_Processing_Pending_
+				_te4_main_region_Operating_Processing_Pending_,
+				_te5_main_region_Operating_Processing_Pending_Pending_Delay_
 			};
 
 			class EventInstance
@@ -239,7 +242,7 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 5;
+			static const sc::integer timeEventsCount = 6;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 2;
@@ -357,12 +360,14 @@ namespace mrw
 			void enact_main_region_Operating_Processing_Pending_Pending_Go_Main();
 			void enact_main_region_Operating_Processing_Pending_Pending_Go_Distant();
 			void enact_main_region_Operating_Processing_Pending_Pending_Go_Shunt();
+			void enact_main_region_Operating_Processing_Pending_Pending_Delay();
 			void enact_main_region_Failed();
 			void exact_main_region_Init();
 			void exact_main_region_Operating_Processing_Shunting_State_Processing_Waiting();
 			void exact_main_region_Operating_Processing_Tour_State_Processing_Waiting();
 			void exact_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Delay();
 			void exact_main_region_Operating_Processing_Pending();
+			void exact_main_region_Operating_Processing_Pending_Pending_Delay();
 			void exact_main_region_Failed();
 			void enseq_main_region_Wait_for_Start_default();
 			void enseq_main_region_Init_default();
@@ -388,6 +393,7 @@ namespace mrw
 			void enseq_main_region_Operating_Processing_Pending_Pending_Go_Main_default();
 			void enseq_main_region_Operating_Processing_Pending_Pending_Go_Distant_default();
 			void enseq_main_region_Operating_Processing_Pending_Pending_Go_Shunt_default();
+			void enseq_main_region_Operating_Processing_Pending_Pending_Delay_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_default();
 			void enseq_main_region_Init_Init_process_default();
@@ -424,6 +430,7 @@ namespace mrw
 			void exseq_main_region_Operating_Processing_Pending_Pending_Go_Main();
 			void exseq_main_region_Operating_Processing_Pending_Pending_Go_Distant();
 			void exseq_main_region_Operating_Processing_Pending_Pending_Go_Shunt();
+			void exseq_main_region_Operating_Processing_Pending_Pending_Delay();
 			void exseq_main_region_Failed();
 			void exseq_main_region();
 			void exseq_main_region_Init_Init_process();
@@ -440,6 +447,7 @@ namespace mrw
 			void react_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting__choice_1();
 			void react_main_region_Operating_Processing_Pending_Pending__choice_0();
 			void react_main_region_Operating_Processing_Pending_Pending__choice_1();
+			void react_main_region_Operating_Processing_Pending_Pending__choice_2();
 			void react_main_region__entry_Default();
 			void react_main_region_Init_Init_process_Turning_main__entry_Default();
 			void react_main_region_Init_Init_process_Turning_distant__entry_Default();
@@ -477,6 +485,7 @@ namespace mrw
 			sc::integer main_region_Operating_Processing_Pending_Pending_Go_Main_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Pending_Pending_Go_Distant_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Pending_Pending_Go_Shunt_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Pending_Pending_Delay_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();

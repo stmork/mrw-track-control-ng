@@ -35,7 +35,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 
 		mock prepareRoute
 		mock prepareFlank
-		
+
 		mock resetTransaction
 		mock fail
 		mock tryComplete

@@ -27,6 +27,8 @@ namespace mrw
 		void operational();
 		void operationalCombined();
 		void pendingTour();
+		void pendingTourLight();
+		void pendingTourForm();
 		void pendingTourCombined();
 		void pendingShunting();
 		void tourLocked();
@@ -1382,16 +1384,6 @@ namespace mrw
 
 			EXPECT_TRUE((statechart->getTurnMainValue()) == (statechart->getGO()));
 
-			statechart->raiseCompletedMain();
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending));
-
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Distant));
-
-			EXPECT_TRUE(statechart->isRaisedTurnDistant());
-
-			EXPECT_TRUE((statechart->getTurnDistantValue()) == (statechart->getGO()));
-
 
 			isTourMock->reset();
 			pendingMock->reset();
@@ -1440,6 +1432,138 @@ namespace mrw
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
 			pendingTour();
+		}
+		void pendingTourLight()
+		{
+			pendingTour();
+
+			isLightSignalMock->setDefaultBehavior(&IsLightSignalMock::isLightSignal2);
+
+			statechart->raiseCompletedMain();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Delay));
+
+			runner->proceed_time(statechart->getDelay());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Distant));
+
+			EXPECT_TRUE(statechart->isRaisedTurnDistant());
+
+			EXPECT_TRUE((statechart->getTurnDistantValue()) == (statechart->getGO()));
+
+
+			isLightSignalMock->reset();
+		}
+		TEST_F(SignalControllerTest, pendingTourLight)
+		{
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
+			isTourMock = new IsTourMock();
+			isTourMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
+			hasMainSignalMock = new HasMainSignalMock();
+			hasMainSignalMock->initializeBehavior();
+			isMainAndShuntMock = new IsMainAndShuntMock();
+			isMainAndShuntMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
+			hasMainSignalMock = new HasMainSignalMock();
+			hasMainSignalMock->initializeBehavior();
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
+			isMainAndShuntMock = new IsMainAndShuntMock();
+			isMainAndShuntMock->initializeBehavior();
+			isTourMock = new IsTourMock();
+			isTourMock->initializeBehavior();
+			lockMock = new LockMock();
+			lockMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			pendingTourLight();
+		}
+		void pendingTourForm()
+		{
+			pendingTour();
+
+			isLightSignalMock->setDefaultBehavior(&IsLightSignalMock::isLightSignal1);
+
+			statechart->raiseCompletedMain();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending));
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Distant));
+
+			EXPECT_TRUE(statechart->isRaisedTurnDistant());
+
+			EXPECT_TRUE((statechart->getTurnDistantValue()) == (statechart->getGO()));
+
+
+			isLightSignalMock->reset();
+		}
+		TEST_F(SignalControllerTest, pendingTourForm)
+		{
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
+			isTourMock = new IsTourMock();
+			isTourMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
+			hasMainSignalMock = new HasMainSignalMock();
+			hasMainSignalMock->initializeBehavior();
+			isMainAndShuntMock = new IsMainAndShuntMock();
+			isMainAndShuntMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
+			incMock = new IncMock();
+			incMock->initializeBehavior();
+			decMock = new DecMock();
+			decMock->initializeBehavior();
+			failMock = new FailMock();
+			failMock->initializeBehavior();
+			pendingMock = new PendingMock();
+			pendingMock->initializeBehavior();
+			hasMainSignalMock = new HasMainSignalMock();
+			hasMainSignalMock->initializeBehavior();
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
+			isMainAndShuntMock = new IsMainAndShuntMock();
+			isMainAndShuntMock->initializeBehavior();
+			isTourMock = new IsTourMock();
+			isTourMock->initializeBehavior();
+			lockMock = new LockMock();
+			lockMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			pendingTourForm();
 		}
 		void pendingTourCombined()
 		{
@@ -1604,7 +1728,7 @@ namespace mrw
 		}
 		void tourLocked()
 		{
-			pendingTour();
+			pendingTourLight();
 
 			statechart->raiseCompletedDistant();
 
@@ -1631,6 +1755,8 @@ namespace mrw
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			pendingMock = new PendingMock();
@@ -1899,6 +2025,8 @@ namespace mrw
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			pendingMock = new PendingMock();
@@ -2508,6 +2636,8 @@ namespace mrw
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			pendingMock = new PendingMock();
@@ -2583,6 +2713,8 @@ namespace mrw
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			pendingMock = new PendingMock();
@@ -2942,6 +3074,8 @@ namespace mrw
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			pendingMock = new PendingMock();
@@ -3264,6 +3398,8 @@ namespace mrw
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			pendingMock = new PendingMock();
@@ -3473,6 +3609,8 @@ namespace mrw
 			decMock->initializeBehavior();
 			lockMock = new LockMock();
 			lockMock->initializeBehavior();
+			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock->initializeBehavior();
 			isTourMock = new IsTourMock();
 			isTourMock->initializeBehavior();
 			pendingMock = new PendingMock();
@@ -3742,7 +3880,13 @@ namespace mrw
 
 			EXPECT_TRUE(!statechart->isActive());
 
-			pendingTour();
+			pendingTourLight();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			pendingTourForm();
 
 			statechart->exit();
 

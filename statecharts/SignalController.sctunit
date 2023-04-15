@@ -303,6 +303,37 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending.Pending.Go_Main)
 		assert turnMain
 		assert valueof(turnMain) == GO
+	}
+
+	@Test
+	operation pendingTourLight()
+	{
+		// Given
+		pendingTour
+		mock isLightSignal returns (true)
+
+		// When
+		raise completedMain
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending.Pending.Delay)
+
+		// When
+		proceed delay ms
+
+		// Then
+		assert active (mrw.^statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending.Pending.Go_Distant)
+		assert turnDistant
+		assert valueof(turnDistant) == GO
+	}
+
+	@Test
+	operation pendingTourForm()
+	{
+		// Given
+		pendingTour
+		mock isLightSignal returns (false)
 
 		// When
 		raise completedMain
@@ -370,7 +401,7 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 	operation tourLocked()
 	{
 		// Given
-		pendingTour()
+		pendingTourLight()
 
 		// When
 		raise completedDistant
@@ -934,7 +965,11 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		exit
 		assert !is_active
 
-		pendingTour()
+		pendingTourLight()
+		exit
+		assert !is_active
+
+		pendingTourForm()
 		exit
 		assert !is_active
 
