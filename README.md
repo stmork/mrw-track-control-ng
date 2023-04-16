@@ -40,8 +40,9 @@ After that you can update and install the software:
 sudo apt update
 sudo apt install mrw-ng
 ```
-## Starting the application
-To start the track control software refer to the [README](./track-control/README.md) of the MRW-TrackControl application.
+
+### Starting the application
+To start the track control software refer to the [README](./track-control/README.md) of the MRW-TrackControl application. It additionally contains information about configuring the CAN bus and prepare the EGL on Raspberry Pi mini computers.
 
 ## Software packages and namespaces
 

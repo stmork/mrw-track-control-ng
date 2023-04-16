@@ -23,7 +23,7 @@ QWidget <|-- BaseWidget
 BaseWidget <|-- ControllerWidget
 ControllerWidget ..> BaseController : uses
 BaseController ..> ControllerWidget : signals
-BaseController ..> ModelClass : uses
+BaseController o.. ModelClass : uses
 
 ```
 
@@ -70,10 +70,73 @@ ControllerWidget <|-- RailWidget
 
 QWidget <|-- BaseWidget
 RailWidget ..> RailController : uses
-RailControllerProxy ..> Rail : uses
+RailControllerProxy o.. Rail : uses
 RailControllerProxy ..> RailWidget : signals
 
 RailController <|-- RailControllerMock
 RailController <|-- RailControllerProxy
+
+```
+
+## RegularSwitchWidget
+
+The regular switch widget works like the widget for the double cross widget. So we describe only the regulur switch architecture. In opposite to a simple rail a switch acts as a device. So the controller proxy class inherits the ControllerRegistrand class which registers the controller to a central registry - the ControllerRegistry service. The MrwBusService uses the ControllerRegistry to map an incoming CAN message containing CAN node id and device unit number to the corresponding Controller which handles the CAN message.
+
+```mermaid
+classDiagram
+
+class BaseController
+<<Abstract>> BaseController
+
+class SwitchController
+<<Interface>> SwitchController
+
+class ControllerRegistry
+<<Service>> ControllerRegistry
+
+class MrwMessageDispatcher
+<<Service>> MrwMessageDispatcher
+
+class ControllerRegistrand
+<<Interface>> ControllerRegistrand
+
+class SwitchControllerProxy
+<<Controller>> SwitchControllerProxy
+
+class BaseWidget
+<<abstract>> BaseWidget
+
+class ControllerWidget
+<<abstract>> ControllerWidget
+
+class SwitchWidget
+<<View>> SwitchWidget
+
+class Switch
+<<Model>> Switch
+
+QObject <|-- BaseController
+BaseController <|-- SwitchController
+
+QWidget <|-- BaseWidget
+BaseWidget <|-- ControllerWidget
+ControllerWidget <|-- SwitchWidget
+
+QObject <|-- MrwBusService
+MrwBusService o-- QCanBus
+MrwBusService *-- QCanBusDevice
+MrwBusService <|-- MrwMessageDispatcher
+
+MrwMessageDispatcher ..> ControllerRegistry : uses
+MrwMessageDispatcher ..> SwitchControllerProxy : messages
+
+SwitchWidget ..> SwitchController : uses
+SwitchControllerProxy o.. Switch : uses
+SwitchControllerProxy ..> SwitchWidget : signals
+ControllerRegistrand ..> ControllerRegistry : register
+
+SwitchController <|-- SwitchControllerMock
+SwitchController <|-- SwitchControllerProxy
+ControllerRegistrand <|-- SwitchControllerProxy
 
 ```
