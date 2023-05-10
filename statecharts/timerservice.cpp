@@ -26,7 +26,9 @@ void SCTimer::trigger()
 	machine->raiseTimeEvent(event_id);
 }
 
-TimerService::TimerService() : QObject(nullptr)
+TimerService::TimerService() :
+	QObject(nullptr),
+	self(this, &noop)
 {
 }
 
@@ -76,4 +78,9 @@ SCTimer * TimerService::getTimer(
 		chart_map.insert(key, timer);
 	}
 	return timer;
+}
+
+void TimerService::noop(TimerService * service)
+{
+	(void)service;
 }

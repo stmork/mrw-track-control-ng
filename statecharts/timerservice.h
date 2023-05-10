@@ -8,6 +8,8 @@
 #ifndef MRW_STATECHART_TIMERSERVICE_H
 #define MRW_STATECHART_TIMERSERVICE_H
 
+#include <memory>
+
 #include <QTimer>
 #include <QMap>
 
@@ -58,6 +60,11 @@ namespace mrw::statechart
 	public:
 		friend class mrw::util::Singleton<TimerService>;
 
+		inline operator std::shared_ptr<TimerService> & ()
+		{
+			return self;
+		}
+
 	private:
 		TimerService();
 
@@ -84,6 +91,14 @@ namespace mrw::statechart
 			sc::eventid                 event);
 
 		/**
+		 * The delete method for a shared pointer which simply do nothing since
+		 * this is a singleton.
+		 *
+		 * @param service The service not to be deleted from heap.
+		 */
+		static void noop(TimerService * service);
+
+		/**
 		 * This is the two dimensional key for finding a SCTimer instance.
 		 */
 		typedef std::pair<sc::timer::TimedInterface *, sc::eventid> TimerKey;
@@ -94,7 +109,13 @@ namespace mrw::statechart
 		 */
 		typedef QMap<TimerKey, SCTimer *>                           TimerMap;
 
-		TimerMap chart_map;
+		/**
+		 * The map from all statemachines and their IDs to all existing timers.
+		 */
+		TimerMap                       chart_map;
+
+		/** This instance as shared pointer. */
+		std::shared_ptr<TimerService>  self;
 	};
 }
 
