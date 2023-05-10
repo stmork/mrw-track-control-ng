@@ -4,8 +4,10 @@
 //
 
 #include <statecharts/timerservice.h>
+#include <util/method.h>
 
 using namespace mrw::statechart;
+using namespace mrw::util;
 using namespace sc::timer;
 
 using Qt::TimerType::PreciseTimer;
@@ -28,7 +30,7 @@ void SCTimer::trigger()
 
 TimerService::TimerService() :
 	QObject(nullptr),
-	self(this, &noop)
+	self(this, &Method::noop<TimerService>)
 {
 }
 
@@ -78,9 +80,4 @@ SCTimer * TimerService::getTimer(
 		chart_map.insert(key, timer);
 	}
 	return timer;
-}
-
-void TimerService::noop(TimerService * service)
-{
-	(void)service;
 }

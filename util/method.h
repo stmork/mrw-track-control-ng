@@ -75,6 +75,18 @@ namespace mrw::util
 
 			return false;
 		}
+
+		/**
+		 * The static template function acts as a default for lambda or
+		 * singleton callbacks which simply does nothing on a specific given
+		 * type T.
+		 *
+		 * @param ptr The pointer which is not used.
+		 */
+		template<class T> static void noop(const T * ptr)
+		{
+			(void)ptr;
+		}
 	};
 }
 

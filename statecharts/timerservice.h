@@ -91,14 +91,6 @@ namespace mrw::statechart
 			sc::eventid                 event);
 
 		/**
-		 * The delete method for a shared pointer which simply do nothing since
-		 * this is a singleton.
-		 *
-		 * @param service The service not to be deleted from heap.
-		 */
-		static void noop(TimerService * service);
-
-		/**
 		 * This is the two dimensional key for finding a SCTimer instance.
 		 */
 		typedef std::pair<sc::timer::TimedInterface *, sc::eventid> TimerKey;
