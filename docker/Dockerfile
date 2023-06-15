@@ -2,11 +2,12 @@ ARG OS=ubuntu
 FROM $OS:latest
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update
-RUN apt-get dist-upgrade -y
-RUN apt-get install -y joe lsb-release apt-transport-https ca-certificates
-RUN apt-get install -y libqt5serialbus5-dev
-RUN apt-get install -y git make g++ cppcheck libgtest-dev cccc fakeroot
+RUN apt update
+RUN apt dist-upgrade -y
+RUN apt install -y apt-utils apt-transport-https
+RUN apt install -y joe lsb-release ca-certificates
+RUN apt install -y libqt5serialbus5-dev
+RUN apt install -y git make g++ cppcheck libgtest-dev cccc fakeroot
 
 RUN addgroup dev
 RUN adduser --ingroup dev --home /home/dev --gecos "Development user" --disabled-password dev
