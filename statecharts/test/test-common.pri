@@ -3,6 +3,8 @@
 #  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 #
 
+QT              -= gui core
+
 CONFIG          += c++17
 QMAKE_CXXFLAGS  += -Wextra -fstack-protector-strong
 QMAKE_CXXFLAGS  += -Wshadow
