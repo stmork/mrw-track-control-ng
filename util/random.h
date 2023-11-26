@@ -57,16 +57,6 @@ namespace mrw::util
 		}
 
 		/**
-		 * This convenience method returns a secure random number in the
-		 * range [0..size[.
-		 *
-		 * @param size The maximum border of the random number range excluding
-		 * the maximum.
-		 * @return The secure random number.
-		 */
-		static int random(const size_t size);
-
-		/**
 		 * This static template method returns a secure random number of the
 		 * specified type and range [0..max].
 		 *

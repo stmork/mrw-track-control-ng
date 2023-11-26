@@ -10,8 +10,3 @@ using namespace mrw::util;
 Random::Random() : random_number_generator(random_device())
 {
 }
-
-int Random::random(const size_t size)
-{
-	return random<int>(size - 1);
-}

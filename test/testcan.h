@@ -19,6 +19,9 @@ namespace mrw::test
 	{
 		Q_OBJECT
 
+		static constexpr uint8_t                PING_RESPONSE   = mrw::can::PING   | mrw::can::CMD_RESPONSE;
+		static constexpr uint8_t                GETRBS_RESPONSE = mrw::can::GETRBS | mrw::can::CMD_RESPONSE;
+
 		static constexpr mrw::can::ControllerId TEST_CTRL_ID = 0x1234 >> 2;
 		static constexpr mrw::can::UnitNo       TEST_UNIT_NO = 0xa596;
 		static constexpr mrw::can::UnitNo       TEST_LSB     =   0x96;

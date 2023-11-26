@@ -85,7 +85,7 @@ void TestCan::testInvalidStandardCanFrame()
 {
 	QByteArray array;
 
-	array.append(PING | CMD_RESPONSE);
+	array.append(PING_RESPONSE);
 
 	const QCanBusFrame frame(CAN_BROADCAST_ID, array);
 	const MrwMessage   message(frame);
@@ -98,7 +98,7 @@ void TestCan::testInvalidExtendedCanFrame()
 {
 	QByteArray array;
 
-	array.append(PING | CMD_RESPONSE);
+	array.append(PING_RESPONSE);
 
 	const QCanBusFrame frame(TEST_ID, array);
 	const MrwMessage   message(frame);
@@ -180,10 +180,10 @@ void TestCan::testReceivedResult()
 	QByteArray   array;
 	QCanBusFrame frame;
 
-	array.append(GETRBS | CMD_RESPONSE);
+	array.append(GETRBS_RESPONSE);
 	array.append(MSG_QUEUED);
-	array.append(TEST_LSB);
-	array.append(TEST_MSB);
+	array.append((uint8_t)TEST_LSB);
+	array.append((uint8_t)TEST_MSB);
 	frame.setFrameId(TEST_ID);
 	frame.setPayload(array);
 	MrwMessage message(frame);

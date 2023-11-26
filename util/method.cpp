@@ -16,9 +16,7 @@ Method::Method(const char * method) : method_name(method)
 
 Method::~Method()
 {
-	unsigned elapsed = timer.elapsed();
-
-	qDebug("<%s() took %u ms.", method_name, elapsed);
+	qDebug("<%s() took %lld ms.", method_name, timer.elapsed());
 }
 
 void Method::pattern()

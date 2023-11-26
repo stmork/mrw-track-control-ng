@@ -6,7 +6,8 @@
 VERSION          = 2.0
 QT              += core xml serialbus
 CONFIG          += c++17
-QMAKE_CXXFLAGS  += -Wextra -fstack-protector-strong
+QMAKE_CXXFLAGS  += -Wextra -pedantic -Wno-deprecated-copy -Werror
+QMAKE_CXXFLAGS  += -fstack-protector-strong
 QMAKE_CXXFLAGS  += -Wshadow
 QMAKE_CXXFLAGS  += -Wsuggest-override
 
