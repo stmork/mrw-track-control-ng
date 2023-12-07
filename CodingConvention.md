@@ -132,3 +132,4 @@ Activate the following options:
 - -Wshadow
 - -Wsuggest-override
 - -fstack-protector-strong
+- -pedantic -Wno-deprecated-copy -Werror
