@@ -1,0 +1,5 @@
+<map id="mrw::util::Random" name="mrw::util::Random">
+<area shape="rect" id="Node000001" title="This singleton class provides secure random generation needed for crypto key generation." alt="" coords="8,94,132,120"/>
+<area shape="rect" id="Node000002" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="5,5,135,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,62,73,93,67,93,67,62"/>
+</map>

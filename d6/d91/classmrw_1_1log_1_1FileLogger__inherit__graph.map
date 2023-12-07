@@ -1,0 +1,9 @@
+<map id="mrw::log::FileLogger" name="mrw::log::FileLogger">
+<area shape="rect" id="Node000001" title="This class writes all logging messages into one single file." alt="" coords="25,153,161,178"/>
+<area shape="rect" id="Node000004" href="$d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html" title="This class writes all logging messages into one single file." alt="" coords="5,226,181,267"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="96,194,96,226,90,226,90,194"/>
+<area shape="rect" id="Node000002" href="$dc/d69/classmrw_1_1log_1_1UnifiedLogger.html" title="This method unifies all log messages into one single callback." alt="" coords="15,79,171,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,120,96,152,90,152,90,120"/>
+<area shape="rect" id="Node000003" href="$d1/d28/classmrw_1_1log_1_1LoggerBase.html" title="This class provides an interface for logging messages into different drains." alt="" coords="20,5,166,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="96,46,96,79,90,79,90,46"/>
+</map>

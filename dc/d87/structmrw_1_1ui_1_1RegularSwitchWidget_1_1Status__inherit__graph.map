@@ -1,0 +1,9 @@
+<map id="mrw::ui::RegularSwitchWidget::Status" name="mrw::ui::RegularSwitchWidget::Status">
+<area shape="rect" id="Node000001" title=" " alt="" coords="10,271,202,312"/>
+<area shape="rect" id="Node000002" href="$d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html" title="This struct contains the complete Status of this RegularSwitchController instance including the BaseS..." alt="" coords="26,183,186,223"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,239,109,271,103,271,103,239"/>
+<area shape="rect" id="Node000003" href="$dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html" title="This struct contains the complete Status of this BaseSwitchController instance including the BaseCont..." alt="" coords="5,94,207,135"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="109,150,109,182,103,182,103,150"/>
+<area shape="rect" id="Node000004" href="$d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html" title="This struct contains the complete Status of this BaseController instance." alt="" coords="25,5,187,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="109,62,109,94,103,94,103,62"/>
+</map>

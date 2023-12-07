@@ -1,0 +1,9 @@
+<map id="mrw::ui::SignalWidget" name="mrw::ui::SignalWidget">
+<area shape="rect" id="Node000001" title="This class intends to draw all states of a combination of mrw::model::Signal instances." alt="" coords="15,226,159,252"/>
+<area shape="rect" id="Node000002" href="$db/d76/classmrw_1_1ui_1_1ControllerWidget.html" title="This is the base class for all derived widget classes which follow the MVC paradigma." alt="" coords="5,153,169,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,194,90,226,84,226,84,194"/>
+<area shape="rect" id="Node000003" href="$df/db9/classmrw_1_1ui_1_1BaseWidget.html" title="The BaseWidget gives basic funtionallity to all derived Widget classes." alt="" coords="18,79,156,105"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="90,120,90,152,84,152,84,120"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="51,5,123,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="90,46,90,79,84,79,84,46"/>
+</map>

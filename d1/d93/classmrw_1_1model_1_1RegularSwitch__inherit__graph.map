@@ -1,0 +1,17 @@
+<map id="mrw::model::RegularSwitch" name="mrw::model::RegularSwitch">
+<area shape="rect" id="Node000001" title="This class represents a simple switch which divides a rail into two rails." alt="" coords="265,315,443,341"/>
+<area shape="rect" id="Node000002" href="$df/db7/classmrw_1_1model_1_1AbstractSwitch.html" title="This class represents any representation of any switch occuring on a model railway." alt="" coords="263,241,445,267"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="357,282,357,315,351,315,351,282"/>
+<area shape="rect" id="Node000003" href="$d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:" alt="" coords="194,160,333,186"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="290,194,342,239,338,243,286,198"/>
+<area shape="rect" id="Node000004" href="$d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section." alt="" coords="5,79,180,105"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="134,109,238,157,236,162,132,114"/>
+<area shape="rect" id="Node000005" href="$d0/d55/classmrw_1_1util_1_1String.html" title="This class is a unique way to create a std::string from any binary data representation." alt="" coords="38,5,147,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="95,46,95,79,90,79,90,46"/>
+<area shape="rect" id="Node000006" href="$db/d4f/classmrw_1_1model_1_1Position.html" title="This class stores the position of the controlling widget onto the GUI." alt="" coords="204,79,344,105"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="273,120,267,160,262,159,268,120"/>
+<area shape="rect" id="Node000007" href="$d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html" title="This base class represents the connection of an inductive actuator Device to the corresponding Switch..." alt="" coords="357,153,532,193"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="412,206,370,243,366,239,409,202"/>
+<area shape="rect" id="Node000008" href="$d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing." alt="" coords="378,79,511,105"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="447,120,447,152,442,152,442,120"/>
+</map>

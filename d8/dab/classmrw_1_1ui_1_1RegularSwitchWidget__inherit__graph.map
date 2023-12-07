@@ -1,0 +1,9 @@
+<map id="mrw::ui::RegularSwitchWidget" name="mrw::ui::RegularSwitchWidget">
+<area shape="rect" id="Node000001" title="This class intends to draw all states of a mrw::model::RegularSwitch which includes:" alt="" coords="5,226,198,252"/>
+<area shape="rect" id="Node000002" href="$db/d76/classmrw_1_1ui_1_1ControllerWidget.html" title="This is the base class for all derived widget classes which follow the MVC paradigma." alt="" coords="20,153,183,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,194,104,226,99,226,99,194"/>
+<area shape="rect" id="Node000003" href="$df/db9/classmrw_1_1ui_1_1BaseWidget.html" title="The BaseWidget gives basic funtionallity to all derived Widget classes." alt="" coords="32,79,171,105"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="104,120,104,152,99,152,99,120"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="66,5,137,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="104,46,104,79,99,79,99,46"/>
+</map>

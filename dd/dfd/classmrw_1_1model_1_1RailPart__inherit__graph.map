@@ -1,0 +1,17 @@
+<map id="mrw::model::RailPart" name="mrw::model::RailPart">
+<area shape="rect" id="Node000001" title="This base class represents any kind of rail elements which can be:" alt="" coords="234,153,373,178"/>
+<area shape="rect" id="Node000005" href="$df/db7/classmrw_1_1model_1_1AbstractSwitch.html" title="This class represents any representation of any switch occuring on a model railway." alt="" coords="126,226,308,252"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="279,191,233,228,230,224,276,186"/>
+<area shape="rect" id="Node000008" href="$db/d26/classmrw_1_1model_1_1Rail.html" title="This class represents a simple rail with two connectors to other RailParts." alt="" coords="333,226,448,252"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="332,186,378,224,374,228,328,191"/>
+<area shape="rect" id="Node000002" href="$d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section." alt="" coords="126,79,300,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,112,290,150,287,154,238,117"/>
+<area shape="rect" id="Node000003" href="$d0/d55/classmrw_1_1util_1_1String.html" title="This class is a unique way to create a std::string from any binary data representation." alt="" coords="158,5,268,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="216,46,216,79,210,79,210,46"/>
+<area shape="rect" id="Node000004" href="$db/d4f/classmrw_1_1model_1_1Position.html" title="This class stores the position of the controlling widget onto the GUI." alt="" coords="324,79,465,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="369,117,320,154,317,150,366,112"/>
+<area shape="rect" id="Node000006" href="$df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html" title="This RailPart represents a double cross switch with four connectors." alt="" coords="5,300,213,326"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="187,263,129,302,126,297,184,259"/>
+<area shape="rect" id="Node000007" href="$d5/d3b/classmrw_1_1model_1_1RegularSwitch.html" title="This class represents a simple switch which divides a rail into two rails." alt="" coords="236,300,414,326"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="250,259,308,297,305,302,247,263"/>
+</map>

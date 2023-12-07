@@ -1,0 +1,5 @@
+<map id="mrw::log::StdLogger" name="mrw::log::StdLogger">
+<area shape="rect" id="Node000001" title="This class implements logging to console." alt="" coords="10,79,146,105"/>
+<area shape="rect" id="Node000002" href="$d1/d28/classmrw_1_1log_1_1LoggerBase.html" title="This class provides an interface for logging messages into different drains." alt="" coords="5,5,151,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,46,81,79,75,79,75,46"/>
+</map>

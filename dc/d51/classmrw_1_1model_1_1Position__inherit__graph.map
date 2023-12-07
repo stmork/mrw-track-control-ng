@@ -1,0 +1,21 @@
+<map id="mrw::model::Position" name="mrw::model::Position">
+<area shape="rect" id="Node000001" title="This class stores the position of the controlling widget onto the GUI." alt="" coords="5,116,146,142"/>
+<area shape="rect" id="Node000002" href="$d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:" alt="" coords="194,67,333,92"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,109,211,90,212,96,143,114"/>
+<area shape="rect" id="Node000007" href="$de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection." alt="" coords="195,116,332,142"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="161,126,195,126,195,132,161,132"/>
+<area shape="rect" id="Node000008" href="$db/d9c/classmrw_1_1model_1_1Signal.html" title="This class represents all Signal variants." alt="" coords="199,165,328,191"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="143,144,212,162,211,167,141,149"/>
+<area shape="rect" id="Node000003" href="$df/db7/classmrw_1_1model_1_1AbstractSwitch.html" title="This class represents any representation of any switch occuring on a model railway." alt="" coords="381,29,563,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="348,62,396,53,397,58,349,67"/>
+<area shape="rect" id="Node000006" href="$db/d26/classmrw_1_1model_1_1Rail.html" title="This class represents a simple rail with two connectors to other RailParts." alt="" coords="415,79,530,104"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="349,82,414,86,414,91,348,87"/>
+<area shape="rect" id="Node000004" href="$df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html" title="This RailPart represents a double cross switch with four connectors." alt="" coords="611,5,819,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="579,29,611,26,611,31,579,34"/>
+<area shape="rect" id="Node000005" href="$d5/d3b/classmrw_1_1model_1_1RegularSwitch.html" title="This class represents a simple switch which divides a rail into two rails." alt="" coords="626,55,804,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="579,51,626,56,625,61,579,56"/>
+<area shape="rect" id="Node000009" href="$d4/d8a/classmrw_1_1model_1_1FormSignal.html" title="This class represents the handling of several form signals." alt="" coords="393,140,552,166"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="343,166,392,160,392,165,344,171"/>
+<area shape="rect" id="Node000010" href="$d6/d71/classmrw_1_1model_1_1LightSignal.html" title="This class represents the handling of several light signals." alt="" coords="393,189,551,215"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="344,185,393,190,392,196,343,190"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="mrw::ui::CircleLiveWidget" name="mrw::ui::CircleLiveWidget">
+<area shape="rect" id="Node000001" title="The CircleLiveWidget shows a rotating bar which represents the responsiveness of the application." alt="" coords="5,153,172,178"/>
+<area shape="rect" id="Node000002" href="$df/db9/classmrw_1_1ui_1_1BaseWidget.html" title="The BaseWidget gives basic funtionallity to all derived Widget classes." alt="" coords="19,79,158,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,120,91,152,86,152,86,120"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="53,5,124,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="91,46,91,79,86,79,86,46"/>
+</map>

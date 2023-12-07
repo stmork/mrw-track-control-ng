@@ -1,0 +1,7 @@
+<map id="mrw::util::Settings" name="mrw::util::Settings">
+<area shape="rect" id="Node000001" title="This class extends the QSettings class by some convenience methods." alt="" coords="19,79,142,105"/>
+<area shape="rect" id="Node000003" href="$dd/dea/classmrw_1_1can_1_1CanSettings.html" title="This class represents the modelrailway settings for a per hostname basis." alt="" coords="5,153,156,178"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="83,120,83,152,78,152,78,120"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="41,5,120,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,46,83,79,78,79,78,46"/>
+</map>

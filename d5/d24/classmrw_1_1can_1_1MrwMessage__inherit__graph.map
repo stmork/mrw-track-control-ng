@@ -1,0 +1,5 @@
+<map id="mrw::can::MrwMessage" name="mrw::can::MrwMessage">
+<area shape="rect" id="Node000001" title="This class represents a CAN bus frame in model railway manner." alt="" coords="5,79,163,105"/>
+<area shape="rect" id="Node000002" href="$d0/d55/classmrw_1_1util_1_1String.html" title="This class is a unique way to create a std::string from any binary data representation." alt="" coords="29,5,139,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,46,87,79,81,79,81,46"/>
+</map>

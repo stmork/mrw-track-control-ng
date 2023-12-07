@@ -1,0 +1,5 @@
+<map id="mrw::model::LightModule" name="mrw::model::LightModule">
+<area shape="rect" id="Node000001" title="This module connects light sources such as LEDs or light bulbs." alt="" coords="5,79,170,105"/>
+<area shape="rect" id="Node000002" href="$d3/de7/classmrw_1_1model_1_1Module.html" title="This base class represents all modules which are connected to the CAN Controller using the 16&#45;pin con..." alt="" coords="20,5,155,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,46,90,79,85,79,85,46"/>
+</map>

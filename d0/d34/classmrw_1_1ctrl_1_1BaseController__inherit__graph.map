@@ -1,0 +1,15 @@
+<map id="mrw::ctrl::BaseController" name="mrw::ctrl::BaseController">
+<area shape="rect" id="Node000001" title="This controller base class unifies the interface for all widget controller classes." alt="" coords="123,94,284,120"/>
+<area shape="rect" id="Node000003" href="$df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html" title="This class provides virtual pure methods which are common to the RegularSwitchController and the Doub..." alt="" coords="332,45,533,71"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="281,88,369,69,370,74,282,93"/>
+<area shape="rect" id="Node000006" href="$d3/d59/classmrw_1_1ctrl_1_1RailController.html" title="This class provides the logic for a simple rail." alt="" coords="356,94,509,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="299,104,356,104,356,110,299,110"/>
+<area shape="rect" id="Node000007" href="$dd/dfc/classmrw_1_1ctrl_1_1SignalController.html" title="This class provides the logic for a group of signals inside a Section orientated in the same counting..." alt="" coords="349,144,516,169"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="282,121,370,140,369,145,281,126"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,75,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,104,122,104,122,110,90,110"/>
+<area shape="rect" id="Node000004" href="$d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html" title="This class provides the logic for a double cross switch." alt="" coords="581,5,772,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="549,40,580,36,581,41,549,45"/>
+<area shape="rect" id="Node000005" href="$de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html" title="This class provides the logic for a simple regular switch." alt="" coords="596,71,757,111"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="547,71,596,77,596,83,546,76"/>
+</map>

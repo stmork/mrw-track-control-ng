@@ -1,0 +1,5 @@
+<map id="mrw::util::DumpHandler" name="mrw::util::DumpHandler">
+<area shape="rect" id="Node000001" title="This class registeres a callback which can be used to dump information during runtime execution." alt="" coords="6,79,161,105"/>
+<area shape="rect" id="Node000002" href="$de/def/classmrw_1_1util_1_1SignalHandler.html" title="This class installs a posix signal callback handler." alt="" coords="5,5,162,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,46,86,79,81,79,81,46"/>
+</map>

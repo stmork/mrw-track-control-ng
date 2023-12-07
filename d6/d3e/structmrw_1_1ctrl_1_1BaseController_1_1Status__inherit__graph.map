@@ -1,0 +1,21 @@
+<map id="mrw::ctrl::BaseController::Status" name="mrw::ctrl::BaseController::Status">
+<area shape="rect" id="Node000001" title="This struct contains the complete Status of this BaseController instance." alt="" coords="5,136,167,177"/>
+<area shape="rect" id="Node000002" href="$dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html" title="This struct contains the complete Status of this BaseSwitchController instance including the BaseCont..." alt="" coords="215,71,416,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,129,240,109,242,115,175,134"/>
+<area shape="rect" id="Node000007" href="$db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html" title="This struct contains the complete Status of this RailController instance including the BaseController..." alt="" coords="239,136,392,177"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="182,154,238,154,238,159,182,159"/>
+<area shape="rect" id="Node000009" href="$d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html" title="This struct contains the complete Status of this SignalController instance including the BaseControll..." alt="" coords="232,201,399,242"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="175,179,242,198,240,203,173,184"/>
+<area shape="rect" id="Node000003" href="$d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html" title="This struct contains the complete Status of this DoubleCrossSwitchController instance including the B..." alt="" coords="464,5,654,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="408,64,480,44,481,49,409,69"/>
+<area shape="rect" id="Node000005" href="$d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html" title="This struct contains the complete Status of this RegularSwitchController instance including the BaseS..." alt="" coords="479,71,639,111"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="432,88,479,88,479,94,432,94"/>
+<area shape="rect" id="Node000004" href="$d2/d06/structmrw_1_1ui_1_1DoubleCrossSwitchWidget_1_1Status.html" title=" " alt="" coords="707,5,890,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="670,23,707,23,707,28,670,28"/>
+<area shape="rect" id="Node000006" href="$d5/d9b/structmrw_1_1ui_1_1RegularSwitchWidget_1_1Status.html" title=" " alt="" coords="702,71,895,111"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="655,88,702,88,702,94,655,94"/>
+<area shape="rect" id="Node000008" href="$de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html" title=" " alt="" coords="494,136,624,177"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="407,154,493,154,493,159,407,159"/>
+<area shape="rect" id="Node000010" href="$d7/dc3/structmrw_1_1ui_1_1SignalWidget_1_1Status.html" title=" " alt="" coords="487,201,631,242"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="415,219,486,219,486,224,415,224"/>
+</map>

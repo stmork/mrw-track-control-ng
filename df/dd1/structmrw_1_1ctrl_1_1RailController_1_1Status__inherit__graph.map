@@ -1,0 +1,7 @@
+<map id="mrw::ctrl::RailController::Status" name="mrw::ctrl::RailController::Status">
+<area shape="rect" id="Node000001" title="This struct contains the complete Status of this RailController instance including the BaseController..." alt="" coords="9,94,163,135"/>
+<area shape="rect" id="Node000003" href="$de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html" title=" " alt="" coords="21,183,151,223"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="89,150,89,182,83,182,83,150"/>
+<area shape="rect" id="Node000002" href="$d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html" title="This struct contains the complete Status of this BaseController instance." alt="" coords="5,5,167,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,62,89,94,83,94,83,62"/>
+</map>

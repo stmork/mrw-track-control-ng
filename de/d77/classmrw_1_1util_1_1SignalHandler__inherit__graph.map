@@ -1,0 +1,7 @@
+<map id="mrw::util::SignalHandler" name="mrw::util::SignalHandler">
+<area shape="rect" id="Node000001" title="This class installs a posix signal callback handler." alt="" coords="92,5,249,31"/>
+<area shape="rect" id="Node000002" href="$d7/dc8/classmrw_1_1util_1_1DumpHandler.html" title="This class registeres a callback which can be used to dump information during runtime execution." alt="" coords="5,79,160,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,43,99,81,96,77,142,39"/>
+<area shape="rect" id="Node000003" href="$df/d75/classmrw_1_1util_1_1TermHandler.html" title="This class registeres a handler for terminating the application." alt="" coords="183,79,334,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,39,245,77,242,81,196,43"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="mrw::model::SwitchModuleReference" name="mrw::model::SwitchModuleReference">
+<area shape="rect" id="Node000001" title="This base class represents the connection of an inductive actuator Device to the corresponding Switch..." alt="" coords="227,79,402,120"/>
+<area shape="rect" id="Node000003" href="$df/db7/classmrw_1_1model_1_1AbstractSwitch.html" title="This class represents any representation of any switch occuring on a model railway." alt="" coords="126,168,308,193"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="280,132,234,169,230,165,277,127"/>
+<area shape="rect" id="Node000006" href="$d4/d8a/classmrw_1_1model_1_1FormSignal.html" title="This class represents the handling of several form signals." alt="" coords="332,168,491,193"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="352,127,398,165,395,169,348,132"/>
+<area shape="rect" id="Node000002" href="$d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing." alt="" coords="248,5,381,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="317,46,317,79,312,79,312,46"/>
+<area shape="rect" id="Node000004" href="$df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html" title="This RailPart represents a double cross switch with four connectors." alt="" coords="5,241,213,267"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="187,205,129,243,126,239,184,200"/>
+<area shape="rect" id="Node000005" href="$d5/d3b/classmrw_1_1model_1_1RegularSwitch.html" title="This class represents a simple switch which divides a rail into two rails." alt="" coords="236,241,414,267"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="250,200,308,239,305,243,247,205"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="mrw::util::GlobalBatch" name="mrw::util::GlobalBatch">
+<area shape="rect" id="Node000001" title="This singleton class provides a global Batch for fallback purposes." alt="" coords="80,94,227,120"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,13,75,39"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,45,137,91,134,96,68,50"/>
+<area shape="rect" id="Node000003" href="$d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion." alt="" coords="99,13,208,39"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="156,54,156,93,151,93,151,54"/>
+<area shape="rect" id="Node000004" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="233,5,362,46"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="249,56,177,96,174,91,247,51"/>
+</map>

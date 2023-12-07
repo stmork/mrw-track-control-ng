@@ -1,0 +1,5 @@
+<map id="mrw::model::Controller" name="mrw::model::Controller">
+<area shape="rect" id="Node000001" title="This class represents a CAN&#45;Node named as Controller here." alt="" coords="5,79,154,105"/>
+<area shape="rect" id="Node000002" href="$d0/d55/classmrw_1_1util_1_1String.html" title="This class is a unique way to create a std::string from any binary data representation." alt="" coords="25,5,134,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,46,82,79,77,79,77,46"/>
+</map>
