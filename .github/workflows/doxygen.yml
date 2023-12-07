@@ -5,7 +5,7 @@ jobs:
   MRW-NG-Doxygen:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Doxygen Action
         uses: mattnotmitt/doxygen-action@v1.1.0
         with:

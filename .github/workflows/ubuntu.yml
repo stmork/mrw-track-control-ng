@@ -5,7 +5,7 @@ jobs:
     MRW-NG-Ubuntu:
       runs-on: ubuntu-latest
       steps:
-         - uses: actions/checkout@v3
+         - uses: actions/checkout@v4
          - run: sudo apt update -y
          - name: Install needed components
            run: sudo apt install -y libqt5serialbus5-dev cppcheck libgtest-dev
