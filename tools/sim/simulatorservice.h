@@ -12,10 +12,14 @@
 #include <model/modelrepository.h>
 #include <model/device.h>
 
+/**
+ * This service class simulates the behaviour of a modelrailway.
+ */
 class SimulatorService : public mrw::can::MrwBusService
 {
 	Q_OBJECT
 
+private:
 	/** Interrupts per second. */
 	static constexpr double SLICE_COUNT = 16000000.0 / (1024 * 256);
 
@@ -26,11 +30,10 @@ class SimulatorService : public mrw::can::MrwBusService
 	unsigned                   device_count = 0;
 
 public:
-	SimulatorService() = delete;
-
 	explicit SimulatorService(
 		mrw::model::ModelRepository & repo,
 		QObject           *           parent    = nullptr);
+	SimulatorService() = delete;
 	virtual ~SimulatorService() = default;
 
 	void info();

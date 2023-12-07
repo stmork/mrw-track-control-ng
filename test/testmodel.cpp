@@ -225,7 +225,7 @@ void TestModel::testRegularSwitchStates()
 		QCOMPARE(part->commandState(), Command::SETRGT);
 
 		part->setState(RegularSwitch::State(0xff));
-		QVERIFY_EXCEPTION_THROWN(part->commandState(), std::invalid_argument);
+		QVERIFY_EXCEPTION_THROWN((void)part->commandState(), std::invalid_argument);
 
 		for (RailPart * left : part->advance(true))
 		{

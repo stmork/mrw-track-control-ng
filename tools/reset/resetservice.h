@@ -12,10 +12,14 @@
 
 #include <can/mrwbusservice.h>
 
+/**
+ * This service class lets reset a modelrailway.
+ */
 class ResetService : public mrw::can::MrwBusService
 {
 	Q_OBJECT
 
+private:
 	std::unordered_multiset<mrw::can::ControllerId> controllers;
 
 public:
@@ -23,6 +27,7 @@ public:
 		const QString & interface,
 		const QString & plugin,
 		QObject    *    parent = nullptr);
+	ResetService() = delete;
 
 protected:
 	virtual void process(const mrw::can::MrwMessage & message) override;

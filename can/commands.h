@@ -14,6 +14,10 @@
 
 namespace mrw::can
 {
+	/**
+	 * This enumeration lists all MrwMessage command categories. They are used
+	 * in conjunction with the Command enumaration.
+	 */
 	enum CommandCategory : uint8_t
 	{
 		CAT_SWITCH      = 0x00,
@@ -26,6 +30,9 @@ namespace mrw::can
 		CMD_NEED_UNITNO = 0x40
 	};
 
+	/**
+	 * This enumeration lists all supported MrwMessage commands.
+	 */
 	enum Command : uint8_t
 	{
 		SETLFT  = CAT_SWITCH | 0x01, ///< Turn switch left.
@@ -74,6 +81,9 @@ namespace mrw::can
 		CMD_ILLEGAL   =    0                   ///< This is not a command.
 	};
 
+	/**
+	 * This enumeration lists all response codes for a MrwMessage request.
+	 */
 	enum Response : uint8_t
 	{
 		/** The command succeeded successfully.*/
@@ -146,12 +156,22 @@ namespace mrw::can
 		MSG_NO_RESPONSE           = UINT8_MAX // not really sent
 	};
 
+	/**
+	 * This enumeration lists all aspects visible for H/V signals. Note that
+	 * the aspects are per screen and there exists masts with multiple
+	 * screens. E.g. a main signal combined with a distant signal.
+	 */
 	enum SignalAspect : uint8_t
 	{
-		/** All lights are off. */
+		/**
+		 * All lights are off. This occurs for a distant signal if
+		 * combined with a main signal which shows SIGNAL_HP0 (stop aspect).
+		 */
 		SIGNAL_OFF = 0,
 
 		/**
+		 * This marks a main signal stop aspect.
+		 *
 		 * @image html Form_Hp0.gif height=75
 		 * @image html Light_Hp0.gif height=50
 		 * @image html Light_Hp00.gif height=50
@@ -159,42 +179,56 @@ namespace mrw::can
 		SIGNAL_HP0,
 
 		/**
+		 * This marks a main signal go aspect.
+		 *
 		 * @image html Form_Hp1.gif height=75
 		 * @image html Light_Hp1.gif height=50
 		 */
 		SIGNAL_HP1,
 
 		/**
+		 * This marks a main signal slow go aspect up to 40 km/h.
+		 *
 		 * @image html Form_Hp2.gif height=75
 		 * @image html Light_Hp2.gif height=50
 		 */
 		SIGNAL_HP2,
 
 		/**
+		 * This marks a distant signal expecting stop aspect.
+		 *
 		 * @image html Form_Vr0.gif height=75
 		 * @image html Light_Vr0.gif height=50
 		 */
 		SIGNAL_VR0,
 
 		/**
+		 * This marks a distant signal expecting go aspect.
+		 *
 		 * @image html Form_Vr1.gif height=75
 		 * @image html Light_Vr1.gif height=50
 		 */
 		SIGNAL_VR1,
 
 		/**
+		 * This marks a distant signal expecting slow go aspect up to 40 km/h.
+		 *
 		 * @image html Form_Vr2.gif height=75
 		 * @image html Light_Vr2.gif height=50
 		 */
 		SIGNAL_VR2,
 
 		/**
+		 * This marks a shunting stop.
+		 *
 		 * @image html Light_Sh0.gif height=50
 		 * @image html Light_Hp00.gif height=50
 		 */
 		SIGNAL_SH0,
 
 		/**
+		 * This marks a shunting allowed signal.
+		 *
 		 * @image html Light_Sh1.gif height=50
 		 * @image html Light_Hp0Sh1.gif height=50
 		 */
@@ -206,12 +240,21 @@ namespace mrw::can
 
 	static constexpr uint8_t SIGNAL_MAIN_DISTANT_OFFSET = SIGNAL_VR0 - SIGNAL_HP0;
 
+	/**
+	 * This enumeration lists the switches state if they are turned left or
+	 * right.
+	 */
 	enum SwitchState : uint8_t
 	{
 		SWITCH_STATE_LEFT  = 1,
 		SWITCH_STATE_RIGHT = 2
 	};
 
+	/**
+	 * This enumeration lists all supported sensor types.
+	 *
+	 * @note The sensors do not influence the track control system.
+	 */
 	enum SensorType : uint8_t
 	{
 		SENSOR_LIGHT = 1,

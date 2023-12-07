@@ -183,9 +183,6 @@ namespace mrw::model
 		 * logic.
 		 *
 		 * @note Do not forget to call this base method in case of overloading!
-		 *
-		 * @param last_valid_section The last initialized Section.
-		 * @param last_valid_part The last initialized RailPart.
 		 */
 		[[nodiscard]]
 		virtual bool prepare();

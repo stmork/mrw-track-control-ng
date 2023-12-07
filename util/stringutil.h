@@ -48,6 +48,7 @@ namespace mrw::util
 		 *
 		 * @see toString()
 		 */
+		[[nodiscard]]
 		operator QString() const;
 
 		/**
@@ -69,6 +70,7 @@ namespace mrw::util
 		 * @param input The input string to surround with format commands.
 		 * @return The formatted string.
 		 */
+		[[nodiscard]]
 		static QString format(
 			const QString & code,
 			const QString & input);
@@ -81,6 +83,7 @@ namespace mrw::util
 		 * @param input The input string to surround with format commands.
 		 * @return The formatted string.
 		 */
+		[[nodiscard]]
 		static QString bold(const QString & input);
 
 		/**
@@ -91,6 +94,7 @@ namespace mrw::util
 		 * @param input The input string to surround with format commands.
 		 * @return The formatted string.
 		 */
+		[[nodiscard]]
 		static QString red(const QString & input);
 
 		static const QString RED_ON;     ///< Turns console output into red.

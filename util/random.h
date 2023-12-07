@@ -51,6 +51,7 @@ namespace mrw::util
 		 *
 		 * @return The random generator engine needed for distributions.
 		 */
+		[[nodiscard]]
 		inline std::mt19937 & engine()
 		{
 			return random_number_generator;
@@ -64,7 +65,9 @@ namespace mrw::util
 		 * the maximum.
 		 * @return The secure random number.
 		 */
-		template<typename T> inline static T random(const T max)
+		template<typename T>
+		[[nodiscard]]
+		inline static T random(const T max)
 		{
 			std::uniform_int_distribution<T> distribution(0, max);
 

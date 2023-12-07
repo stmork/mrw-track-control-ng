@@ -54,6 +54,7 @@ namespace mrw::util
 		 *
 		 * @return The configured batch.
 		 */
+		[[nodiscard]]
 		Batch * batch() const;
 
 		/**

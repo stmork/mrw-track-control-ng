@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
+#include <cassert>
+
 #include <QCoreApplication>
 #include <QTimer>
 

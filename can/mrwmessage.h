@@ -23,8 +23,8 @@ namespace mrw::can
 	/**
 	 * This class represents a CAN bus frame in model railway manner. It may
 	 * have two message types:
-	 * 1. As a command to be sent.
-	 * 2. As a response from a previous command.
+	 * 1. As a command request to be sent. This may be a broadcast.
+	 * 2. As a response from a previous command request.
 	 *
 	 * A command may address all mrw::model::Controller instances using the
 	 * broadcast ID CAN_BROADCAST_ID. In case a mrw::model::Device is addressed

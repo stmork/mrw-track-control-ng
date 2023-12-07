@@ -225,7 +225,6 @@ namespace mrw::ctrl
 		/**
 		 * This template method calls a given method of a derived controller.
 		 *
-		 * @param CTRL The derived controller class.
 		 * @param base A BaseController instance.
 		 * @param function The method to call.
 		 */

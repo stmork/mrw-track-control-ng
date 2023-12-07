@@ -41,8 +41,8 @@ namespace mrw::can
 		Q_OBJECT
 
 	protected:
-		QCanBus     *    can_bus;
-		QCanBusDevice  * can_device;
+		QCanBus     *    can_bus    = nullptr;
+		QCanBusDevice  * can_device = nullptr;
 
 	public:
 		explicit MrwBusService(
@@ -50,6 +50,7 @@ namespace mrw::can
 			const QString & plugin       = "socketcan",
 			QObject    *    parent       = nullptr,
 			const bool      auto_connect = true);
+		MrwBusService() = delete;
 		~MrwBusService();
 
 		/**

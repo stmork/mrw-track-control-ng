@@ -43,6 +43,7 @@ namespace mrw::util
 		 */
 		bool read(const QString & filename);
 
+		[[nodiscard]]
 		const std::string & lookup(const std::string & key) const;
 	};
 }

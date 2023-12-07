@@ -92,6 +92,7 @@ namespace mrw::model
 		 * @return True if the connected AbstractSwitch is a flank protection
 		 * switch.
 		 */
+		[[nodiscard]]
 		bool isFlankProtection(const AbstractSwitch * other) const;
 
 		/**
@@ -171,6 +172,7 @@ namespace mrw::model
 		 * @return The corresponing CAN mrw::can::Command to reach the state.
 		 * @see mrw::can::Command
 		 */
+		[[nodiscard]]
 		mrw::can::Command commandState() const;
 
 	protected:
@@ -193,6 +195,7 @@ namespace mrw::model
 		 * found RegularSwitch is only a candidate for a flank switch.
 		 * @see MAX_FOLLOW_RAIL
 		 */
+		[[nodiscard]]
 		RegularSwitch * follow(
 			RailPart * part,
 			const bool dir,

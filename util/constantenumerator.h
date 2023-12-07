@@ -77,6 +77,7 @@ namespace mrw::util
 		 * @param key The symbolic value.
 		 * @return The QString representation of the symbolic value.
 		 */
+		[[nodiscard]]
 		inline QString get(const T key) const
 		{
 			ConstantMapConstIterator it = std::unordered_map<T, QString>::find(key);
@@ -105,6 +106,7 @@ namespace mrw::util
 		 * @return A ConstantMapPair const_iterator which may contain the key
 		 * when the const_iterator is not equal to the end() iterator.
 		 */
+		[[nodiscard]]
 		inline ConstantMapConstIterator findKey(const QString & value) const
 		{
 			ConstantMapConstIterator it;
