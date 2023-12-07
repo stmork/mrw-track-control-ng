@@ -6,6 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: sudo apt update -y
+      - name: Install needed components
+        run: sudo apt install -y qhelpgenerator-qt5 graphviz
       - name: Doxygen Action
         uses: mattnotmitt/doxygen-action@v1.1.0
         with:
