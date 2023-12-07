@@ -1,0 +1,8 @@
+Package: %PACKAGE%
+Version: 2.0-%BUILD%
+Section: embedded
+Priority: optional
+Architecture: %ARCH%
+Maintainer: Steffen A. Mork <info@eisenbahnsteuerung.org>
+Homepage: http://eisenbahnsteuerung.org/
+Description: API documentation of modelbased railway control (NG).

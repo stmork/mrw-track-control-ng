@@ -1,0 +1,475 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+//
+
+package mrw.test
+
+testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatechart
+{
+	@Test
+	operation wait()
+	{
+		enter
+		assert  is_active
+		assert !is_final
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Prepare_Bus)
+		assert called can.connectBus
+
+		mock hasActiveRoutes returns (false)
+		mock isManualValid returns (true)
+		mock disableRoutes
+		mock resetTransaction
+		mock activateManual
+	}
+
+	@Test
+	operation timeoutAfterWait()
+	{
+		// Given
+		wait()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Failed)
+		assert failing
+	}
+
+	@Test
+	operation initial()
+	{
+		// Given
+		wait()
+
+		// When
+		raise can.connected
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Init)
+		assert called resetTransaction
+		assert start
+	}
+
+	@Test
+	operation failAfterStart()
+	{
+		// Given
+		initial()
+
+		// When
+		raise failed
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Failed)
+		assert failing
+	}
+
+	@Test
+	operation timeoutAfterStart()
+	{
+		// Given
+		initial()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Failed)
+		assert failing
+	}
+
+	@Test
+	operation clearFailState()
+	{
+		// Given
+		failAfterStart()
+		mock can.isConnected returns(true)
+
+		// When
+		raise clear
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Init)
+		assert cleared
+		assert called resetTransaction
+		assert start
+	}
+
+	@Test
+	operation stayFailState()
+	{
+		// Given
+		failAfterStart()
+		mock can.isConnected returns(false)
+
+		// When
+		raise clear
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Failed)
+	}
+
+	@Test
+	operation editFailed()
+	{
+		// Given
+		failAfterStart()
+
+		// When
+		raise edit
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Editing)
+		assert editing
+		assert valueof(editing) == true
+	}
+
+	@Test
+	operation doOperating()
+	{
+		// Given
+		initial()
+
+		// When
+		raise started
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Operating)
+		assert operating
+		assert valueof(operating) == true
+	}
+
+	@Test
+	operation failWhileOperating()
+	{
+		// Given
+		doOperating()
+
+		// When
+		raise failed
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Operating)
+	}
+
+	@Test
+	operation initWhileOperatingWithRoutes()
+	{
+		// Given
+		doOperating()
+		mock hasActiveRoutes returns (true)
+
+		// When
+		raise init
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Disable)
+		assert operating
+		assert valueof(operating) == false
+		assert called disableRoutes
+	}
+
+	@Test
+	operation initWhileOperatingWithoutRoutes()
+	{
+		// Given
+		doOperating()
+		mock hasActiveRoutes returns (false)
+
+		// When
+		raise init
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Init)
+		assert operating
+		assert valueof(operating) == false
+		assert called resetTransaction
+		assert start
+	}
+
+	@Test
+	operation disableCompletedWithRoutes()
+	{
+		// Given
+		initWhileOperatingWithRoutes()
+		mock hasActiveRoutes returns (true)
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Disable)
+	}
+
+	@Test
+	operation disableCompletedWithoutRoutes()
+	{
+		// Given
+		initWhileOperatingWithRoutes()
+		mock hasActiveRoutes returns (false)
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Init)
+		assert called resetTransaction
+		assert start
+	}
+
+	@Test
+	operation doEdit()
+	{
+		// Given
+		doOperating()
+
+		// When
+		raise edit
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Editing)
+		assert operating
+		assert valueof(operating) == false
+		assert editing
+		assert valueof(editing) == true
+	}
+
+	@Test
+	operation doManual()
+	{
+		// Given
+		doOperating()
+		mock isManualValid returns (true)
+
+		// When
+		raise manual : true
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Manual)
+		assert operating
+		assert valueof(operating) == false
+		assert playing
+		assert valueof(playing) == true
+		assert called activateManual(true)
+	}
+
+	@Test
+	operation doLeaveManual()
+	{
+		// Given
+		doManual()
+
+		// When
+		raise manual : false
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Init)
+		assert playing
+		assert valueof(playing) == false
+		assert called resetTransaction
+		assert start
+	}
+
+	@Test
+	operation doQuitManual()
+	{
+		// Given
+		doManual()
+
+		// When
+		raise finalize
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Wait)
+		assert playing
+		assert valueof(playing) == false
+		assert called activateManual(false)
+	}
+
+	@Test
+	operation doWaitManual()
+	{
+		// Given
+		doQuitManual()
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region._final_)
+		assert quit
+	}
+
+	@Test
+	operation operateAfterEdit()
+	{
+		// Given
+		doEdit()
+
+		// When
+		raise operate
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Operating)
+		assert editing
+		assert valueof(editing) == false
+		assert operating
+		assert valueof(operating) == true
+	}
+
+	@Test
+	operation doQuitOperating()
+	{
+		// Given
+		doOperating()
+		mock hasActiveRoutes returns (false)
+
+		// When
+		raise finalize
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region._final_)
+		assert operating
+		assert valueof(operating) == false
+		assert quit
+	}
+
+	@Test
+	operation doQuitEditing()
+	{
+		// Given
+		doEdit()
+		mock hasActiveRoutes returns (false)
+
+		// When
+		raise finalize
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region._final_)
+		assert editing
+		assert valueof(editing) == false
+		assert quit
+	}
+
+	@Test
+	operation doQuitFailed()
+	{
+		// Given
+		failAfterStart()
+		mock hasActiveRoutes returns (false)
+
+		// When
+		raise finalize
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region._final_)
+		assert quit
+	}
+
+	@Test
+	operation doQuitWithRoute()
+	{
+		// Given
+		doOperating()
+		mock hasActiveRoutes returns (true)
+
+		// When
+		raise finalize
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Exit)
+		assert called disableRoutes
+		assert operating
+		assert valueof(operating) == false
+		assert quitting
+		assert valueof(quitting) == true
+	}
+
+	@Test
+	operation doCompleteQuit()
+	{
+		// Given
+		doQuitWithRoute()
+		mock hasActiveRoutes returns (false)
+
+		// When
+		raise completed
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region._final_)
+		assert quitting
+		assert valueof(quitting) == false
+		assert quit
+	}
+
+	@Test
+	operation doExit()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		wait()
+		exit
+		assert !is_active
+
+		initial()
+		exit
+		assert !is_active
+
+		doOperating()
+		exit
+		assert !is_active
+
+		doEdit()
+		exit
+		assert !is_active
+
+		doManual()
+		exit
+		assert !is_active
+
+		doWaitManual()
+		exit
+		assert !is_active
+
+		initWhileOperatingWithRoutes
+		exit
+		assert !is_active
+
+		disableCompletedWithoutRoutes
+		exit
+		assert !is_active
+
+		disableCompletedWithRoutes
+		exit
+		assert !is_active
+
+		doQuitWithRoute()
+		exit
+		assert !is_active
+
+		failAfterStart()
+		exit
+		assert !is_active
+	}
+}

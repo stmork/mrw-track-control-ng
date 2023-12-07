@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Modelrailway:Modell xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Modelrailway="http://www.morknet.de/Modelrailway">
+  <controller>
+    <anschluesse>
+      <lichter name="1" unit_no="201" schwellwert="15"/>
+      <lichter name="2" unit_no="202" schwellwert="20"/>
+      <lichter name="3" unit_no="203" schwellwert="25"/>
+      <lichter name="4" unit_no="204" schwellwert="30"/>
+      <lichter name="5" unit_no="205" schwellwert="35"/>
+      <lichter name="6" unit_no="206" schwellwert="40"/>
+      <lichter name="7" unit_no="207" schwellwert="45"/>
+      <lichter name="8" unit_no="208" schwellwert="50"/>
+      <lichter name="9" unit_no="209" schwellwert="55"/>
+      <lichter name="10" unit_no="210" schwellwert="60"/>
+      <lichter name="11" unit_no="211" schwellwert="65"/>
+      <lichter name="12" unit_no="212" schwellwert="70"/>
+      <lichter name="13" unit_no="213" schwellwert="75"/>
+      <lichter name="14" unit_no="214" schwellwert="80"/>
+      <lichter name="15" unit_no="215" schwellwert="85"/>
+      <lichter name="16" unit_no="216" schwellwert="90"/>
+      <lichter name="17" unit_no="217" schwellwert="95"/>
+    </anschluesse>
+    <module xsi:type="Modelrailway:Beleuchtungsmodul">
+      <lampen name="201" unit_no="201" schwellwert="10" typ="1"/>
+      <lampen name="202" unit_no="202" schwellwert="20" typ="2"/>
+      <lampen name="203" unit_no="203" schwellwert="30" typ="3"/>
+      <lampen name="204" unit_no="204" schwellwert="40" typ="4"/>
+      <lampen name="205" unit_no="205" schwellwert="50" typ="5"/>
+      <lampen name="206" unit_no="206" schwellwert="60" typ="6"/>
+      <lampen name="207" unit_no="207" schwellwert="70" typ="7"/>
+      <lampen name="208" unit_no="208" schwellwert="80" typ="8"/>
+      <lampen name="209" unit_no="209" schwellwert="90" typ="9"/>
+    </module>
+    <module xsi:type="Modelrailway:Impulsmodul" magnetartikel="//@gruppe.0/@abschnitt.0/@bauelement.4 //@gruppe.0/@abschnitt.0/@bauelement.5 //@gruppe.0/@abschnitt.0/@bauelement.6"/>
+    <module xsi:type="Modelrailway:Gleismodul"/>
+  </controller>
+  <controller id="1">
+    <module xsi:type="Modelrailway:Gleismodul"/>
+    <module xsi:type="Modelrailway:Beleuchtungsmodul"/>
+    <module xsi:type="Modelrailway:Impulsmodul"/>
+  </controller>
+  <controller id="1">
+    <module xsi:type="Modelrailway:Impulsmodul" nummer="2" magnetartikel="//@gruppe.0/@abschnitt.1/@bauelement.0"/>
+  </controller>
+  <gruppe xsi:type="Modelrailway:Bahnhof">
+    <abschnitt>
+      <bauelement xsi:type="Modelrailway:Gleis" name="left end" b="//@gruppe.0/@abschnitt.0/@bauelement.1"/>
+      <bauelement xsi:type="Modelrailway:Weiche" name="left" unit_no="3" b="//@gruppe.0/@abschnitt.0/@bauelement.2" c="//@gruppe.0/@abschnitt.0/@bauelement.2" a="//@gruppe.0/@abschnitt.0/@bauelement.0"/>
+      <bauelement xsi:type="Modelrailway:Weiche" name="right" b="//@gruppe.0/@abschnitt.0/@bauelement.1" c="//@gruppe.0/@abschnitt.0/@bauelement.0" a="//@gruppe.0/@abschnitt.0/@bauelement.3"/>
+      <bauelement xsi:type="Modelrailway:Gleis" name="right end" a="//@gruppe.0/@abschnitt.0/@bauelement.2"/>
+      <bauelement xsi:type="Modelrailway:Formhauptsignal" spulen="3" modul="//@controller.0/@module.1"/>
+      <bauelement xsi:type="Modelrailway:Formhauptsignal" spulen="3" modul="//@controller.0/@module.1"/>
+      <bauelement xsi:type="Modelrailway:Formhauptsignal" spulen="3" modul="//@controller.0/@module.1"/>
+    </abschnitt>
+    <abschnitt>
+      <bauelement xsi:type="Modelrailway:Weiche" modul="//@controller.2/@module.0" neu="true"/>
+      <bauelement xsi:type="Modelrailway:DKW"/>
+      <bauelement xsi:type="Modelrailway:Gleis"/>
+      <bauelement xsi:type="Modelrailway:Ausfahrsignal"/>
+      <bauelement xsi:type="Modelrailway:Einfahrsignal"/>
+      <bauelement xsi:type="Modelrailway:Blocksignal"/>
+      <bauelement xsi:type="Modelrailway:Vorsignal"/>
+      <bauelement xsi:type="Modelrailway:Formhauptsignal" inZaehlrichtung="true"/>
+      <bauelement xsi:type="Modelrailway:Formvorsignal" inZaehlrichtung="true"/>
+      <bauelement xsi:type="Modelrailway:Formgleissperrsignal" inZaehlrichtung="true"/>
+    </abschnitt>
+    <abschnitt>
+      <bauelement xsi:type="Modelrailway:Ausfahrsignal"/>
+      <bauelement xsi:type="Modelrailway:Vorsignal"/>
+      <bauelement xsi:type="Modelrailway:Einfahrsignal" inZaehlrichtung="true"/>
+      <bauelement xsi:type="Modelrailway:Vorsignal" inZaehlrichtung="true"/>
+      <bauelement xsi:type="Modelrailway:Gleissperrsignal" inZaehlrichtung="true"/>
+    </abschnitt>
+  </gruppe>
+</Modelrailway:Modell>

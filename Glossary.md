@@ -1,0 +1,20 @@
+# Translations en/de
+- actuator / Antrieb
+- automatic endpoint cutoff / Endabschaltung
+- counting direction / Zählrichtung
+- cross switch / einfache Kreuzungsweiche
+- distant signal / Vorsignal
+- double cross switch / doppelte Kreuzungsweiche
+- form signal, mechanical signal, semaphore / Formsignal
+- flank protection / Flankenschutz
+- frog / Herzstück
+- light signal / Lichtsignal
+- main signal / Hauptsignal
+- point / Zunge
+- point lock / Weichenverschluss
+- rail / Gleis
+- section / Gleisabschnitt
+- signal aspect / Signalbild
+- switch / Weiche
+- track / Spur, Fahrstraße
+- region / Bereich

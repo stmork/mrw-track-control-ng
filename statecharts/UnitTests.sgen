@@ -1,0 +1,209 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+//
+
+GeneratorModel for sctunit::cpp11
+{
+	const PROJECT : string = "mrw.statecharts"
+	const FOLDER  : string = "test"
+	const COMMON  : string = "test/common"
+
+	test mrw.test.OperatingModeTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER + "/OperatingMode"
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test mrw.test.RouteTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER + "/Route"
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test mrw.test.SectionTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER + "/Section"
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test mrw.test.SignalTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER + "/Signal"
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test mrw.test.SignalControllerTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER + "/SignalController"
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test mrw.test.SwitchTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER + "/Switch"
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test mrw.test.TrackerTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER + "/Tracker"
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test mrw.test.ConfigTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER + "/Config"
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+
+	test mrw.test.UpdateTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER + "/Update"
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
+}

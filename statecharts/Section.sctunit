@@ -1,0 +1,707 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+//
+
+package mrw.test
+
+testclass SectionTest for statechart mrw.^statechart.SectionStatechart
+{
+	operation failState()
+	{
+		assert active (mrw.^statechart.SectionStatechart.main_region.Failed)
+		assert called fail
+		assert stop
+	}
+
+	operation initing()
+	{
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Relay)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
+		assert entered
+		assert called inc
+		assert called off
+		assert called request
+	}
+
+	operation unlocked()
+	{
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
+		assert called free
+		assert called lock
+	}
+
+	@Test
+	operation waitForStart()
+	{
+		enter
+		assert  is_active
+		assert !is_final
+		assert active (mrw.^statechart.SectionStatechart.main_region.Wait_for_Start)
+
+		mock inc
+		mock dec
+		mock off
+		mock on
+		mock request
+		mock passed
+		mock free
+		mock leftBefore
+		mock fail
+		mock pending
+		mock lock
+	}
+
+	@Test
+	operation initial()
+	{
+		// Given
+		waitForStart()
+
+		// When
+		raise start
+
+		// Then
+		initing()
+	}
+
+	@Test
+	operation failAfterStart()
+	{
+		// Given
+		initial()
+
+		// When
+		raise failed
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation timeoutAfterStart()
+	{
+		// Given
+		initial()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation sync1()
+	{
+		// Given
+		initial()
+
+		// When
+		raise relaisResponse
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Wait)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
+		assert called pending
+	}
+
+	@Test
+	operation sync2()
+	{
+		// Given
+		initial()
+
+		// When
+		raise stateResponse : false
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Relay)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Wait)
+		assert called pending
+	}
+
+	@Test
+	operation operational()
+	{
+		// Given
+		sync1()
+
+		// When
+		raise stateResponse : false
+
+		// Then
+		unlocked()
+		assert started
+		assert called dec
+		assert occupied == false
+	}
+
+	@Test
+	operation operational2()
+	{
+		// Given
+		sync2()
+
+		// When
+		raise relaisResponse
+
+		// Then
+		unlocked()
+		assert started
+		assert called dec
+		assert occupied == false
+	}
+
+	@Test
+	operation restart()
+	{
+		// Given
+		operational()
+
+		// When
+		raise start
+
+		// Then
+		initing()
+	}
+
+	@Test
+	operation clearing()
+	{
+		// Given
+		failAfterStart()
+
+		// When
+		raise clear
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Wait_for_Start)
+
+		// When
+		raise start
+
+		// Then
+		initing()
+	}
+
+	@Test
+	operation enabling()
+	{
+		// Given
+		operational()
+
+		// When
+		raise enable : true
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Enabling)
+		assert called inc 1 times
+		assert called dec 0 times
+		assert called pending
+		assert called on
+	}
+
+	@Test
+	operation disabling()
+	{
+		// Given
+		operational()
+
+		// When
+		raise enable : false
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Disabling)
+		assert called inc 1 times
+		assert called dec 0 times
+		assert called pending
+		assert called off
+	}
+
+	@Test
+	operation enabledLocked()
+	{
+		// Given
+		enabling()
+
+		// When
+		raise relaisResponse
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
+		assert called inc 0 times
+		assert called dec 1 times
+		assert called lock
+		assert !occupied
+	}
+
+	@Test
+	operation disabledLocked()
+	{
+		// Given
+		disabling()
+
+		// When
+		raise relaisResponse
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Disabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
+		assert called inc 0 times
+		assert called dec 1 times
+		assert called lock
+		assert !occupied
+	}
+
+	@Test
+	operation sectionFree()
+	{
+		// Given
+		operational()
+		occupied = false
+
+		// When
+		raise enable : true
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Enabling)
+		assert called inc 1 times
+		assert called dec 0 times
+		assert called pending
+		assert called on
+
+		// When
+		raise relaisResponse
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
+	}
+
+	@Test
+	operation sectionOccupied()
+	{
+		// Given
+		operational()
+		occupied = true
+
+		// When
+		raise enable : true
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Enabling)
+		assert called inc 1 times
+		assert called dec 0 times
+		assert called pending
+		assert called on
+
+		// When
+		raise relaisResponse
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Occupied)
+	}
+
+	@Test
+	operation failAfterEnable()
+	{
+		// Given
+		enabling()
+
+		// When
+		raise failed
+		assert active (mrw.^statechart.SectionStatechart.main_region.Failed)
+		assert called fail
+	}
+
+	@Test
+	operation timeoutAfterEnable()
+	{
+		// Given
+		enabling()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Failed)
+		assert called fail
+	}
+
+	@Test
+	operation disablingAfterEnabled()
+	{
+		// Given
+		enabledLocked()
+
+		// When
+		raise disable
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Disabling)
+		assert called inc 1 times
+		assert called dec 0 times
+		assert called off
+	}
+
+	@Test
+	operation disabledAfterDisabled()
+	{
+		// Given
+		disabledLocked()
+
+		// When
+		raise disable
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Wait_for_Unlock)
+		assert called inc 0 times
+		assert called dec 0 times
+	}
+
+	@Test
+	operation disabledAfterEnabled()
+	{
+		// Given
+		disablingAfterEnabled()
+
+		// When
+		raise relaisResponse
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Wait_for_Unlock)
+		assert called inc 0 times
+		assert called dec 1 times
+	}
+
+	@Test
+	operation unlockSection()
+	{
+		// Given
+		disabledAfterDisabled()
+
+		// When
+		raise unlock
+
+		// Then
+		unlocked()
+	}
+
+	@Test
+	operation failAfterDisable()
+	{
+		// Given
+		disablingAfterEnabled()
+
+		// When
+		raise failed
+		failState()
+	}
+
+	@Test
+	operation timeAfterDisable()
+	{
+		// Given
+		disablingAfterEnabled()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation nextReached()
+	{
+		// Given
+		sectionFree()
+		auto_off = true
+
+		// When
+		raise stateResponse : true
+
+		// Then
+		assert occupied
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Occupied)
+		assert entered
+
+		// When
+		raise next
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Next_Reached)
+	}
+
+	@Test
+	operation leaveSection()
+	{
+		// Given
+		nextReached()
+
+		// When
+		raise stateResponse : false
+
+		// Then
+		assert !occupied
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation._final_)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Left)
+		assert called inc 1 times
+		assert called dec 0 times
+		assert called off
+		assert leave
+		assert leaving
+	}
+
+	@Test
+	operation leaveBeforeNext()
+	{
+		// Given
+		sectionFree()
+		auto_off = true
+
+		// When
+		raise stateResponse : true
+
+		// Then
+		assert occupied
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Occupied)
+		assert entered
+
+		// When (Note: This may occur on dirty rails!)
+		raise stateResponse : false
+
+		// Then
+		assert !occupied
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Occupied)
+
+		// When
+		raise next
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Next_Reached)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Left)
+		assert called inc 1 times
+		assert called dec 0 times
+		assert called off
+		assert called leftBefore
+		assert leave
+		assert leaving
+	}
+
+	@Test
+	operation stay()
+	{
+		// Given
+		enabledLocked()
+		auto_off = false
+
+		// When
+		raise stateResponse : false
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
+	}
+
+	@Test
+	operation autoUnlock()
+	{
+		// Given
+		leaveSection()
+		auto_unlock = true
+
+		// When
+		raise relaisResponse
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Wait_for_Unlock)
+		assert called inc 0 times
+		assert called dec 1 times
+		assert left
+	}
+
+	@Test
+	operation passedState()
+	{
+		// Given
+		leaveSection()
+		auto_unlock = false
+
+		// When
+		raise relaisResponse
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Passed)
+		assert called inc 0 times
+		assert called dec 1 times
+		assert called passed
+		assert left
+	}
+
+	@Test
+	operation unlockAfterPassed()
+	{
+		// Given
+		passedState()
+
+		// When
+		raise unlock
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
+		assert unregister
+		assert called free
+		assert called lock
+	}
+
+	@Test
+	operation enablingAfterDisabled()
+	{
+		// Given
+		disabledLocked
+
+		// When
+		raise enable : true
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Enabling)
+		assert called inc 1 times
+		assert called dec 0 times
+		assert called on
+	}
+
+	@Test
+	operation enabledAfterDisabled()
+	{
+		// Given
+		enablingAfterDisabled
+
+		// When
+		raise relaisResponse
+
+		// Then
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
+		assert called inc 0 times
+		assert called dec 1 times
+	}
+
+	@Test
+	operation doExit()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		waitForStart()
+		exit
+		assert !is_active
+
+		initial()
+		exit
+		assert !is_active
+
+		sync1()
+		exit
+		assert !is_active
+
+		sync2()
+		exit
+		assert !is_active
+
+		operational()
+		exit
+		assert !is_active
+
+		operational2()
+		exit
+		assert !is_active
+
+		enabling()
+		exit
+		assert !is_active
+
+		disabling()
+		exit
+		assert !is_active
+
+		enabledLocked()
+		exit
+		assert !is_active
+
+		disabledLocked()
+		exit
+		assert !is_active
+
+		disablingAfterEnabled()
+		exit
+		assert !is_active
+
+		enablingAfterDisabled()
+		exit
+		assert !is_active
+
+		disabledAfterEnabled()
+		exit
+		assert !is_active
+
+		disabledAfterDisabled()
+		exit
+		assert !is_active
+
+		unlockSection()
+		exit
+		assert !is_active
+
+		unlockAfterPassed()
+		exit
+		assert !is_active
+
+		leaveSection()
+		exit
+		assert !is_active
+
+		passedState()
+		exit
+		assert !is_active
+
+		sectionFree()
+		exit
+		assert !is_active
+
+		sectionOccupied()
+		exit
+		assert !is_active
+
+		nextReached()
+		exit
+		assert !is_active
+	}
+}

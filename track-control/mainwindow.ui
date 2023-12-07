@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1243</width>
+    <height>601</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/images/MRW-TrackControl.ico</normaloff>:/images/MRW-TrackControl.ico</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QLabel" name="routeLabel">
+          <property name="text">
+           <string>Fahrstraßen:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="mrw::ui::RouteListWidget" name="routeListWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>1</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="routeButtonLayout">
+        <item>
+         <widget class="QPushButton" name="clearRoute">
+          <property name="text">
+           <string>Auflösen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearAllRoutes">
+          <property name="text">
+           <string>Alles auflösen</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="sectionLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Gleisabschnitte:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="mrw::ui::SectionListWidget" name="sectionListWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>1</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="sectionButtonLayout">
+        <item>
+         <widget class="QPushButton" name="clearSection">
+          <property name="text">
+           <string>Entfernen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearAllSections">
+          <property name="text">
+           <string>Alles entfernen</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="rightLayout">
+      <item>
+       <widget class="QTabWidget" name="regionTabWidget">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="actionLayout">
+        <item>
+         <widget class="QPushButton" name="tourLeftPushButton">
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Fahrstraße links</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="shuntLeftPushButton">
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Rangieren links</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="extendPushButton">
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Erweitern</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="shuntRightPushButton">
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Rangieren rechts</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="tourRightPushButton">
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Fahrstraße rechts</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1243</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDaten">
+    <property name="title">
+     <string>Daten</string>
+    </property>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuEditieren">
+    <property name="title">
+     <string>Editieren</string>
+    </property>
+    <addaction name="actionRight"/>
+    <addaction name="actionLeft"/>
+    <addaction name="actionUp"/>
+    <addaction name="actionDown"/>
+    <addaction name="separator"/>
+    <addaction name="actionInclination"/>
+    <addaction name="actionExpand"/>
+    <addaction name="actionExtend"/>
+    <addaction name="actionReduce"/>
+    <addaction name="separator"/>
+    <addaction name="actionLineUp"/>
+    <addaction name="actionLineDown"/>
+    <addaction name="separator"/>
+    <addaction name="actionBendLeft"/>
+    <addaction name="actionBendRight"/>
+   </widget>
+   <widget class="QMenu" name="menuModus">
+    <property name="title">
+     <string>Modus</string>
+    </property>
+    <addaction name="actionEdit"/>
+    <addaction name="actionOperate"/>
+    <addaction name="actionManual"/>
+    <addaction name="actionClear"/>
+    <addaction name="separator"/>
+    <addaction name="actionInit"/>
+   </widget>
+   <widget class="QMenu" name="menuBetrieb">
+    <property name="title">
+     <string>Betrieb</string>
+    </property>
+    <addaction name="actionTurnSwitchLeft"/>
+    <addaction name="actionTurnSwitch"/>
+    <addaction name="actionTurnSwitchRight"/>
+    <addaction name="separator"/>
+    <addaction name="actionLock"/>
+    <addaction name="actionUnlock"/>
+    <addaction name="separator"/>
+    <addaction name="actionBeermodeLeft"/>
+    <addaction name="actionBeermodeRight"/>
+   </widget>
+   <widget class="QMenu" name="menuAnsicht">
+    <property name="title">
+     <string>Ansicht</string>
+    </property>
+    <addaction name="actionTabLeft"/>
+    <addaction name="actionTabRight"/>
+   </widget>
+   <addaction name="menuDaten"/>
+   <addaction name="menuAnsicht"/>
+   <addaction name="menuModus"/>
+   <addaction name="menuBetrieb"/>
+   <addaction name="menuEditieren"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Beenden</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionRight">
+   <property name="text">
+    <string>Rechts</string>
+   </property>
+   <property name="shortcut">
+    <string>Right</string>
+   </property>
+  </action>
+  <action name="actionLeft">
+   <property name="text">
+    <string>Links</string>
+   </property>
+   <property name="shortcut">
+    <string>Left</string>
+   </property>
+  </action>
+  <action name="actionUp">
+   <property name="text">
+    <string>Hoch</string>
+   </property>
+   <property name="shortcut">
+    <string>Up</string>
+   </property>
+  </action>
+  <action name="actionDown">
+   <property name="text">
+    <string>Runter</string>
+   </property>
+   <property name="shortcut">
+    <string>Down</string>
+   </property>
+  </action>
+  <action name="actionInclination">
+   <property name="text">
+    <string>Neigung</string>
+   </property>
+   <property name="shortcut">
+    <string>I</string>
+   </property>
+  </action>
+  <action name="actionExpand">
+   <property name="text">
+    <string>Auffüllen</string>
+   </property>
+   <property name="shortcut">
+    <string>X</string>
+   </property>
+  </action>
+  <action name="actionExtend">
+   <property name="text">
+    <string>Vergrößern</string>
+   </property>
+   <property name="toolTip">
+    <string>Vergrößern</string>
+   </property>
+   <property name="shortcut">
+    <string>+</string>
+   </property>
+  </action>
+  <action name="actionReduce">
+   <property name="text">
+    <string>Verkleinern</string>
+   </property>
+   <property name="shortcut">
+    <string>-</string>
+   </property>
+  </action>
+  <action name="actionBendLeft">
+   <property name="text">
+    <string>Linksknick</string>
+   </property>
+   <property name="shortcut">
+    <string>L</string>
+   </property>
+  </action>
+  <action name="actionBendRight">
+   <property name="text">
+    <string>Rechtsknick</string>
+   </property>
+   <property name="shortcut">
+    <string>R</string>
+   </property>
+  </action>
+  <action name="actionLineUp">
+   <property name="text">
+    <string>Zeile ergänzen</string>
+   </property>
+   <property name="shortcut">
+    <string>V</string>
+   </property>
+  </action>
+  <action name="actionLineDown">
+   <property name="text">
+    <string>Zeile entfernen</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+V</string>
+   </property>
+  </action>
+  <action name="actionEdit">
+   <property name="text">
+    <string>Editieren</string>
+   </property>
+  </action>
+  <action name="actionOperate">
+   <property name="text">
+    <string>Fahrdienst</string>
+   </property>
+  </action>
+  <action name="actionClear">
+   <property name="text">
+    <string>Fehler auflösen</string>
+   </property>
+  </action>
+  <action name="actionTurnSwitchLeft">
+   <property name="text">
+    <string>Weiche links</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionTurnSwitchRight">
+   <property name="text">
+    <string>Weiche rechts</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionTurnSwitch">
+   <property name="text">
+    <string>Weiche umschalten</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+U</string>
+   </property>
+  </action>
+  <action name="actionLock">
+   <property name="text">
+    <string>Sperren</string>
+   </property>
+  </action>
+  <action name="actionUnlock">
+   <property name="text">
+    <string>Freigeben</string>
+   </property>
+  </action>
+  <action name="actionInit">
+   <property name="text">
+    <string>Reset</string>
+   </property>
+  </action>
+  <action name="actionTabLeft">
+   <property name="text">
+    <string>Tab nach links</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+PgUp</string>
+   </property>
+  </action>
+  <action name="actionTabRight">
+   <property name="text">
+    <string>Tab nach rechts</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+PgDown</string>
+   </property>
+  </action>
+  <action name="actionBeermodeLeft">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Biermodus links</string>
+   </property>
+  </action>
+  <action name="actionBeermodeRight">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Biermodus rechts</string>
+   </property>
+  </action>
+  <action name="actionManual">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Manueller Betrieb</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>mrw::ui::SectionListWidget</class>
+   <extends>QListWidget</extends>
+   <header location="global">ui/sectionlistwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>mrw::ui::RouteListWidget</class>
+   <extends>QListWidget</extends>
+   <header location="global">ui/routelistwidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
