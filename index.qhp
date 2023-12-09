@@ -25,6 +25,7 @@
 </section>
 <section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html">
 <section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ab3258243639f9a5410e76195fedb01c9"/>
+<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a837eea6320f30f3df1f99f0d3c67bf93"/>
 <section title="~MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a73ae1d0363d32fbea5b866180a7c21f2"/>
 <section title="connected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0862edc4130e6b3563f7e23d5ffb3916"/>
 <section title="disconnected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0c930e0da610c26edefcf10b4cd80b31"/>
@@ -2224,6 +2225,7 @@
 </section>
 <section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html">
 <section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ab3258243639f9a5410e76195fedb01c9"/>
+<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a837eea6320f30f3df1f99f0d3c67bf93"/>
 <section title="~MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a73ae1d0363d32fbea5b866180a7c21f2"/>
 <section title="connected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0862edc4130e6b3563f7e23d5ffb3916"/>
 <section title="disconnected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0c930e0da610c26edefcf10b4cd80b31"/>
@@ -5012,6 +5014,7 @@
 <keyword name="move(const int right, const int down)" id="mrw::model::Position::move_abc70305593d7606befc1423b8adad4a1" ref="db/d4f/classmrw_1_1model_1_1Position.html#abc70305593d7606befc1423b8adad4a1"/>
 <keyword name="mrw::util::Singleton&lt; TimerService &gt;" id="mrw::statechart::TimerService::mrw::util::Singleton&lt; TimerService &gt;_a02d511ee2ea2f228f23719a5eb143915" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a02d511ee2ea2f228f23719a5eb143915"/>
 <keyword name="MrwBusService(const QString &amp;interface=&quot;can0&quot;, const QString &amp;plugin=&quot;socketcan&quot;, QObject *parent=nullptr, const bool auto_connect=true)" id="mrw::can::MrwBusService::MrwBusService_ab3258243639f9a5410e76195fedb01c9" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ab3258243639f9a5410e76195fedb01c9"/>
+<keyword name="MrwBusService()=delete" id="mrw::can::MrwBusService::MrwBusService_a837eea6320f30f3df1f99f0d3c67bf93" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a837eea6320f30f3df1f99f0d3c67bf93"/>
 <keyword name="MrwMessage(const Command command, const ControllerId id=CAN_BROADCAST_ID)" id="mrw::can::MrwMessage::MrwMessage_a60e9a220fb6bc3b615943401084d6be8" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a60e9a220fb6bc3b615943401084d6be8"/>
 <keyword name="MrwMessage(const Command command, const ControllerId id, const UnitNo no)" id="mrw::can::MrwMessage::MrwMessage_a3adf124f0faccc84019a52525e3bc8dd" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a3adf124f0faccc84019a52525e3bc8dd"/>
 <keyword name="MrwMessage(const ControllerId id, const UnitNo no, const Command command, const Response code)" id="mrw::can::MrwMessage::MrwMessage_aadd7638b3c8eb8eb4575580c5394edf2" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aadd7638b3c8eb8eb4575580c5394edf2"/>

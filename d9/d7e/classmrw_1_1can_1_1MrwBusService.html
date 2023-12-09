@@ -110,6 +110,8 @@ Signals</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab3258243639f9a5410e76195fedb01c9" id="r_ab3258243639f9a5410e76195fedb01c9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ab3258243639f9a5410e76195fedb01c9">MrwBusService</a> (const QString &amp;interface=&quot;can0&quot;, const QString &amp;plugin=&quot;socketcan&quot;, QObject *parent=nullptr, const bool auto_connect=true)</td></tr>
 <tr class="separator:ab3258243639f9a5410e76195fedb01c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a837eea6320f30f3df1f99f0d3c67bf93" id="r_a837eea6320f30f3df1f99f0d3c67bf93"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a837eea6320f30f3df1f99f0d3c67bf93">MrwBusService</a> ()=delete</td></tr>
+<tr class="separator:a837eea6320f30f3df1f99f0d3c67bf93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73ae1d0363d32fbea5b866180a7c21f2" id="r_a73ae1d0363d32fbea5b866180a7c21f2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a73ae1d0363d32fbea5b866180a7c21f2">~MrwBusService</a> ()</td></tr>
 <tr class="separator:a73ae1d0363d32fbea5b866180a7c21f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fdfdc43f69aa0670254c4e646112967" id="r_a3fdfdc43f69aa0670254c4e646112967"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a3fdfdc43f69aa0670254c4e646112967">valid</a> ()</td></tr>
@@ -127,9 +129,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ae9add44a66b3c41000569347d5eb8e68" id="r_ae9add44a66b3c41000569347d5eb8e68"><td class="memItemLeft" align="right" valign="top">QCanBus *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ae9add44a66b3c41000569347d5eb8e68">can_bus</a></td></tr>
+<tr class="memitem:ae9add44a66b3c41000569347d5eb8e68" id="r_ae9add44a66b3c41000569347d5eb8e68"><td class="memItemLeft" align="right" valign="top">QCanBus *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ae9add44a66b3c41000569347d5eb8e68">can_bus</a> = nullptr</td></tr>
 <tr class="separator:ae9add44a66b3c41000569347d5eb8e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84bd068ea88e51a45bac0b3838d66b02" id="r_a84bd068ea88e51a45bac0b3838d66b02"><td class="memItemLeft" align="right" valign="top">QCanBusDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a84bd068ea88e51a45bac0b3838d66b02">can_device</a></td></tr>
+<tr class="memitem:a84bd068ea88e51a45bac0b3838d66b02" id="r_a84bd068ea88e51a45bac0b3838d66b02"><td class="memItemLeft" align="right" valign="top">QCanBusDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a84bd068ea88e51a45bac0b3838d66b02">can_device</a> = nullptr</td></tr>
 <tr class="separator:a84bd068ea88e51a45bac0b3838d66b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -139,7 +141,7 @@ Protected Attributes</h2></td></tr>
 <p>The <a class="el" href="../../d9/d7e/classmrw_1_1can_1_1MrwBusService.html" title="This class connects to the CAN bus for input and output processing.">MrwBusService</a> allows to connect to the CAN bus manually. So you have to set the <code>auto_connect</code> parameter to false and call the QCanBusService::connectDevice() method manually. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab3258243639f9a5410e76195fedb01c9" name="ab3258243639f9a5410e76195fedb01c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3258243639f9a5410e76195fedb01c9">&#9670;&#160;</a></span>MrwBusService()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3258243639f9a5410e76195fedb01c9">&#9670;&#160;</a></span>MrwBusService() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -180,6 +182,31 @@ Protected Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a837eea6320f30f3df1f99f0d3c67bf93" name="a837eea6320f30f3df1f99f0d3c67bf93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a837eea6320f30f3df1f99f0d3c67bf93">&#9670;&#160;</a></span>MrwBusService() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">mrw::can::MrwBusService::MrwBusService </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -369,7 +396,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">QCanBus* mrw::can::MrwBusService::can_bus</td>
+          <td class="memname">QCanBus* mrw::can::MrwBusService::can_bus = nullptr</td>
         </tr>
       </table>
   </td>
@@ -391,7 +418,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">QCanBusDevice* mrw::can::MrwBusService::can_device</td>
+          <td class="memname">QCanBusDevice* mrw::can::MrwBusService::can_device = nullptr</td>
         </tr>
       </table>
   </td>
@@ -406,7 +433,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 7 2023 11:44:08 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+Generated on Sat Dec 9 2023 13:37:57 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
 </small></address>
 </body>
 </html>
