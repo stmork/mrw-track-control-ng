@@ -219,6 +219,7 @@ namespace mrw::model
 		bool         qualified(
 			const RailPart * rail,
 			const Region  *  search_region) const;
+		bool         isSwitchable(const std::vector<RailPart *> & vector) const;
 
 		/**
 		 * Unreserve and remove all RailPart elements from the track behind the

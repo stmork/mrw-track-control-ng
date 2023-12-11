@@ -195,17 +195,17 @@ bool Route::qualified(
 		qDebug().noquote() << indent << "      Rail in failed state.";
 		return false;
 	}
-	else if (rail->reserved())
+	if (rail->reserved())
 	{
 		qDebug().noquote() << indent << "      Rail already reserved.";
 		return false;
 	}
-	else if (track.size() > MAX_DEPTH)
+	if (track.size() > MAX_DEPTH)
 	{
 		qDebug().noquote() << indent << "      Recursion depth reached.";
 		return false;
 	}
-	else if (section != first_section)
+	if (section != first_section)
 	{
 		if ((search_region != nullptr) && (section->region() != search_region))
 		{
@@ -241,15 +241,9 @@ bool Route::prepare()
 	std::vector<RailPart *> vector(track.begin(), track.end());
 	Section        *        prev = nullptr;
 
-	for (size_t i = 1; i < vector.size() - 1; i++)
+	if (!isSwitchable(vector))
 	{
-		AbstractSwitch * device = dynamic_cast<AbstractSwitch *>(vector[i]);
-
-		if ((device != nullptr) &&
-			(!device->isSwitchable(vector[i - 1], vector[i + 1])))
-		{
-			return false;
-		}
+		return false;
 	}
 
 	sections.clear();
@@ -282,6 +276,21 @@ bool Route::prepare()
 
 	last_section = last_on ? nullptr : *it;
 	dump();
+	return true;
+}
+
+bool mrw::model::Route::isSwitchable(const std::vector<RailPart *> & vector) const
+{
+	for (size_t i = 1; i < vector.size() - 1; i++)
+	{
+		AbstractSwitch * device = dynamic_cast<AbstractSwitch *>(vector[i]);
+
+		if ((device != nullptr) &&
+			(!device->isSwitchable(vector[i - 1], vector[i + 1])))
+		{
+			return false;
+		}
+	}
 	return true;
 }
 
