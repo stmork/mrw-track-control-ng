@@ -22,7 +22,9 @@ int main(int argc, char * argv[])
 
 	TermHandler           term_handler;
 	CanSettings           settings;
-	UpdateService         service(settings.interface(), settings.plugin());
+	UpdateService         service(
+		argc > 1 ? argv[1] : "/lib/firmware/mrw/mrw-firmware-m32.hex",
+		settings.interface(), settings.plugin());
 
 	return app.exec();
 }

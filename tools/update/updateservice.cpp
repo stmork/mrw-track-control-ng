@@ -17,6 +17,7 @@ using namespace mrw::can;
 using namespace mrw::statechart;
 
 UpdateService::UpdateService(
+	const QString & filename,
 	const QString & interface,
 	const QString & plugin,
 	QObject    *    parent) :
@@ -24,7 +25,7 @@ UpdateService::UpdateService(
 	statechart(nullptr)
 {
 	buffer.reserve(65536);
-	read("/lib/firmware/mrw/mrw-firmware-m32.hex");
+	read(filename);
 
 	connect(
 		this, &MrwBusService::connected,
@@ -98,7 +99,14 @@ void UpdateService::process(const MrwMessage & message)
 			break;
 
 		case FLASH_REQ:
-			check(message);
+			if (message.response() == MSG_HARDWARE_MISMATCH)
+			{
+				statechart.mismatch();
+			}
+			else
+			{
+				check(message);
+			}
 			break;
 
 		case FLASH_CHECK:
@@ -169,6 +177,9 @@ void UpdateService::flashRequest(const uint8_t hid)
 {
 	MrwMessage message(FLASH_REQ);
 
+	// NOTE: There is a bug in the bootloader which sends always MSG_OK and
+	// prevents from comparing the hardware IDs. So sending different hid
+	// values cause always flashing the new firmware.
 	message.append(hid & 0xff);
 	message.append(SIGNATURE_BYTE_1);
 	message.append(SIGNATURE_BYTE_2);
@@ -186,7 +197,6 @@ void UpdateService::flashRequest()
 
 	// Request flashing
 	flashRequest(DEFAULT_HARDWARE);
-
 }
 
 void UpdateService::flashData(const size_t bytes)
@@ -259,6 +269,10 @@ void UpdateService::fail(sc::integer error_code)
 
 	case 7:
 		qCritical("Timeout connecting to CAN bus!");
+		break;
+
+	case 8:
+		qCritical("Hardware ID mismatch!");
 		break;
 
 	default:

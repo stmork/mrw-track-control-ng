@@ -49,6 +49,7 @@ class UpdateService :
 
 public:
 	explicit UpdateService(
+		const QString & filename,
 		const QString & interface = "can0",
 		const QString & plugin    = "socketcan",
 		QObject    *    parent    = nullptr);

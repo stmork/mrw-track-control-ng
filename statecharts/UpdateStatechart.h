@@ -56,22 +56,26 @@ namespace mrw
 				main_region_Flash_Complete_Page,
 				main_region_Flash_Rest,
 				main_region_Flash_Check,
-				main_region_Failed,
+				main_region_Leave_Bootloader,
 				main_region_Booted,
-				main_region_Wait_for_Connect
+				main_region_Wait_for_Connect,
+				main_region_Test_Hardware_Mismatch,
+				main_region_Failed
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 9;
+			static const sc::integer numStates = 11;
 			static const sc::integer scvi_main_region_Ping = 0;
 			static const sc::integer scvi_main_region_Reset = 0;
 			static const sc::integer scvi_main_region_Flash_Request = 0;
 			static const sc::integer scvi_main_region_Flash_Complete_Page = 0;
 			static const sc::integer scvi_main_region_Flash_Rest = 0;
 			static const sc::integer scvi_main_region_Flash_Check = 0;
-			static const sc::integer scvi_main_region_Failed = 0;
+			static const sc::integer scvi_main_region_Leave_Bootloader = 0;
 			static const sc::integer scvi_main_region_Booted = 0;
 			static const sc::integer scvi_main_region_Wait_for_Connect = 0;
+			static const sc::integer scvi_main_region_Test_Hardware_Mismatch = 0;
+			static const sc::integer scvi_main_region_Failed = 0;
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -79,6 +83,7 @@ namespace mrw
 				NO_EVENT,
 				connected,
 				complete,
+				mismatch,
 				failed,
 				_te0_main_region_Ping_,
 				_te1_main_region_Reset_,
@@ -86,7 +91,9 @@ namespace mrw
 				_te3_main_region_Flash_Complete_Page_,
 				_te4_main_region_Flash_Rest_,
 				_te5_main_region_Flash_Check_,
-				_te6_main_region_Wait_for_Connect_
+				_te6_main_region_Leave_Bootloader_,
+				_te7_main_region_Wait_for_Connect_,
+				_te8_main_region_Test_Hardware_Mismatch_
 			};
 
 			class EventInstance
@@ -200,7 +207,7 @@ namespace mrw
 			bool isStateActive(State state) const;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 7;
+			static const sc::integer timeEventsCount = 9;
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount = 1;
@@ -212,6 +219,9 @@ namespace mrw
 
 			/*! Slot for the in event 'complete' that is defined in the default interface scope. */
 			void complete();
+
+			/*! Slot for the in event 'mismatch' that is defined in the default interface scope. */
+			void mismatch();
 
 			/*! Slot for the in event 'failed' that is defined in the default interface scope. */
 			void failed();
@@ -266,25 +276,31 @@ namespace mrw
 			void enact_main_region_Flash_Complete_Page();
 			void enact_main_region_Flash_Rest();
 			void enact_main_region_Flash_Check();
-			void enact_main_region_Failed();
+			void enact_main_region_Leave_Bootloader();
 			void enact_main_region_Booted();
 			void enact_main_region_Wait_for_Connect();
+			void enact_main_region_Test_Hardware_Mismatch();
+			void enact_main_region_Failed();
 			void exact_main_region_Ping();
 			void exact_main_region_Reset();
 			void exact_main_region_Flash_Request();
 			void exact_main_region_Flash_Complete_Page();
 			void exact_main_region_Flash_Rest();
 			void exact_main_region_Flash_Check();
+			void exact_main_region_Leave_Bootloader();
 			void exact_main_region_Wait_for_Connect();
+			void exact_main_region_Test_Hardware_Mismatch();
 			void enseq_main_region_Ping_default();
 			void enseq_main_region_Reset_default();
 			void enseq_main_region_Flash_Request_default();
 			void enseq_main_region_Flash_Complete_Page_default();
 			void enseq_main_region_Flash_Rest_default();
 			void enseq_main_region_Flash_Check_default();
-			void enseq_main_region_Failed_default();
+			void enseq_main_region_Leave_Bootloader_default();
 			void enseq_main_region_Booted_default();
 			void enseq_main_region_Wait_for_Connect_default();
+			void enseq_main_region_Test_Hardware_Mismatch_default();
+			void enseq_main_region_Failed_default();
 			void enseq_main_region_default();
 			void exseq_main_region_Ping();
 			void exseq_main_region_Reset();
@@ -292,9 +308,11 @@ namespace mrw
 			void exseq_main_region_Flash_Complete_Page();
 			void exseq_main_region_Flash_Rest();
 			void exseq_main_region_Flash_Check();
-			void exseq_main_region_Failed();
+			void exseq_main_region_Leave_Bootloader();
 			void exseq_main_region_Booted();
 			void exseq_main_region_Wait_for_Connect();
+			void exseq_main_region_Test_Hardware_Mismatch();
+			void exseq_main_region_Failed();
 			void exseq_main_region();
 			void react_main_region__choice_0();
 			void react_main_region__choice_1();
@@ -307,9 +325,11 @@ namespace mrw
 			sc::integer main_region_Flash_Complete_Page_react(const sc::integer transitioned_before);
 			sc::integer main_region_Flash_Rest_react(const sc::integer transitioned_before);
 			sc::integer main_region_Flash_Check_react(const sc::integer transitioned_before);
-			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
+			sc::integer main_region_Leave_Bootloader_react(const sc::integer transitioned_before);
 			sc::integer main_region_Booted_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_for_Connect_react(const sc::integer transitioned_before);
+			sc::integer main_region_Test_Hardware_Mismatch_react(const sc::integer transitioned_before);
+			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			void clearInEvents();
 			void microStep();
 			void runCycle();
@@ -322,6 +342,9 @@ namespace mrw
 
 			/*! Indicates event 'complete' of default interface scope is active. */
 			bool complete_raised;
+
+			/*! Indicates event 'mismatch' of default interface scope is active. */
+			bool mismatch_raised;
 
 			/*! Indicates event 'failed' of default interface scope is active. */
 			bool failed_raised;

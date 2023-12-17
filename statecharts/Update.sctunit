@@ -36,9 +36,16 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		proceed timeout ms
 
 		// Then
-		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Leave_Bootloader)
 		assert error == 7
-		assert called fail
+		assert called boot
+
+		// When
+		proceed delay_boot ms
+
+		// Finally Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert called fail 
 	}
 
 	@Test
@@ -79,9 +86,16 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		proceed timeout ms
 
 		// Then
-		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Leave_Bootloader)
 		assert error == 1
-		assert called fail
+		assert called boot
+
+		// When
+		proceed delay_boot ms
+
+		// Finally Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert called fail 
 	}
 
 	@Test
@@ -102,6 +116,29 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 	}
 
 	@Test
+	operation firstFlashRequestMismatch()
+	{
+		// Given
+		firstFlashRequest
+		mock hasPages returns (true)
+
+		// When
+		raise mismatch
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Leave_Bootloader)
+		assert error == 8
+		assert called boot
+
+		// When
+		proceed delay_boot ms
+
+		// Finally Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert called fail
+	}
+
+	@Test
 	operation flashRequested()
 	{
 		// Given
@@ -112,7 +149,30 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		raise complete
 
 		// Then
-		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Complete_Page)
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Test_Hardware_Mismatch)
+		assert called flashRequest
+	}
+
+	@Test
+	operation hardwareMismatch()
+	{
+		// Given
+		flashRequested
+
+		// When
+		raise mismatch
+
+		// Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Leave_Bootloader)
+		assert error == 8
+		assert called boot
+
+		// When
+		proceed delay_boot ms
+
+		// Finally Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert called fail
 	}
 
 	@Test
@@ -148,8 +208,15 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		proceed delay_flash_request ms
 
 		// Then
-		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Leave_Bootloader)
 		assert error == 6
+		assert called boot
+
+		// When
+		proceed delay_boot ms
+
+		// Finally Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
 		assert called fail
 	}
 
@@ -161,7 +228,7 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		mock hasPages returns (true)
 
 		// When
-		proceed delay_flash_page ms
+		proceed delay_flash_request ms
 
 		// Then
 		assert active (mrw.^statechart.UpdateStatechart.main_region.Flash_Complete_Page)
@@ -240,8 +307,15 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		raise failed
 
 		// Then
-		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Leave_Bootloader)
 		assert error == 3
+		assert called boot
+
+		// When
+		proceed delay_boot ms
+
+		// Finally Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
 		assert called fail
 	}
 
@@ -255,8 +329,15 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		proceed delay_boot ms
 
 		// Then
-		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Leave_Bootloader)
 		assert error == 4
+		assert called boot
+
+		// When
+		proceed delay_boot ms
+
+		// Finally Then
+		assert active (mrw.^statechart.UpdateStatechart.main_region.Failed)
 		assert called fail
 	}
 
@@ -288,7 +369,15 @@ testclass UpdateTest for statechart mrw.^statechart.UpdateStatechart
 		exit
 		assert !is_active
 
+		firstFlashRequestMismatch()
+		exit
+		assert !is_active
+
 		flashRequested()
+		exit
+		assert !is_active
+
+		hardwareMismatch()
 		exit
 		assert !is_active
 

@@ -22,7 +22,9 @@ namespace mrw
 		void doPing();
 		void noController();
 		void firstFlashRequest();
+		void firstFlashRequestMismatch();
 		void flashRequested();
+		void hardwareMismatch();
 		void lastFlashRequest();
 		void firstCompletePage();
 		void nextCompletePage();
@@ -848,6 +850,8 @@ namespace mrw
 		}
 		TEST_F(UpdateTest, timeoutConnect)
 		{
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
 			failMock = new FailMock();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
@@ -874,13 +878,20 @@ namespace mrw
 
 			runner->proceed_time(statechart->getTimeout());
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Leave_Bootloader));
 
 			EXPECT_TRUE((statechart->getError()) == (7));
+
+			EXPECT_TRUE(bootMock->calledAtLeastOnce());
+
+			runner->proceed_time(statechart->getDelay_boot());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
 
+			bootMock->reset();
 			failMock->reset();
 		}
 		void doReset()
@@ -973,20 +984,29 @@ namespace mrw
 
 			runner->proceed_time(statechart->getTimeout());
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Leave_Bootloader));
 
 			EXPECT_TRUE((statechart->getError()) == (1));
+
+			EXPECT_TRUE(bootMock->calledAtLeastOnce());
+
+			runner->proceed_time(statechart->getDelay_boot());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
 
 			hasControllerMock->reset();
+			bootMock->reset();
 			failMock->reset();
 		}
 		TEST_F(UpdateTest, noController)
 		{
 			hasControllerMock = new HasControllerMock();
 			hasControllerMock->initializeBehavior();
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
 			failMock = new FailMock();
 			pingMock = new PingMock();
 			pingMock->initializeBehavior();
@@ -1071,6 +1091,71 @@ namespace mrw
 			statechart->setOperationCallback(&defaultMock);
 			firstFlashRequest();
 		}
+		void firstFlashRequestMismatch()
+		{
+			firstFlashRequest();
+
+			hasPagesMock->setDefaultBehavior(&HasPagesMock::hasPages1);
+
+			statechart->raiseMismatch();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Leave_Bootloader));
+
+			EXPECT_TRUE((statechart->getError()) == (8));
+
+			EXPECT_TRUE(bootMock->calledAtLeastOnce());
+
+			runner->proceed_time(statechart->getDelay_boot());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
+
+			EXPECT_TRUE(failMock->calledAtLeastOnce());
+
+
+			hasPagesMock->reset();
+			bootMock->reset();
+			failMock->reset();
+		}
+		TEST_F(UpdateTest, firstFlashRequestMismatch)
+		{
+			hasPagesMock = new HasPagesMock();
+			hasPagesMock->initializeBehavior();
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
+			failMock = new FailMock();
+			hasControllerMock = new HasControllerMock();
+			hasControllerMock->initializeBehavior();
+			initMock = new InitMock();
+			initMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
+			initMock = new InitMock();
+			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
+			flashCompletePageMock = new FlashCompletePageMock();
+			flashCompletePageMock->initializeBehavior();
+			flashRestPageMock = new FlashRestPageMock();
+			flashRestPageMock->initializeBehavior();
+			flashCheckMock = new FlashCheckMock();
+			flashCheckMock->initializeBehavior();
+			hasControllerMock = new HasControllerMock();
+			hasControllerMock->initializeBehavior();
+			hasPagesMock = new HasPagesMock();
+			hasPagesMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			firstFlashRequestMismatch();
+		}
 		void flashRequested()
 		{
 			firstFlashRequest();
@@ -1079,15 +1164,20 @@ namespace mrw
 
 			statechart->raiseComplete();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Flash_Complete_Page));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Test_Hardware_Mismatch));
+
+			EXPECT_TRUE(flashRequestMock->calledAtLeastOnce());
 
 
 			hasPagesMock->reset();
+			flashRequestMock->reset();
 		}
 		TEST_F(UpdateTest, flashRequested)
 		{
 			hasPagesMock = new HasPagesMock();
 			hasPagesMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
 			hasControllerMock = new HasControllerMock();
 			hasControllerMock->initializeBehavior();
 			initMock = new InitMock();
@@ -1120,6 +1210,70 @@ namespace mrw
 			MockDefault defaultMock;
 			statechart->setOperationCallback(&defaultMock);
 			flashRequested();
+		}
+		void hardwareMismatch()
+		{
+			flashRequested();
+
+			statechart->raiseMismatch();
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Leave_Bootloader));
+
+			EXPECT_TRUE((statechart->getError()) == (8));
+
+			EXPECT_TRUE(bootMock->calledAtLeastOnce());
+
+			runner->proceed_time(statechart->getDelay_boot());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
+
+			EXPECT_TRUE(failMock->calledAtLeastOnce());
+
+
+			bootMock->reset();
+			failMock->reset();
+		}
+		TEST_F(UpdateTest, hardwareMismatch)
+		{
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
+			failMock = new FailMock();
+			hasPagesMock = new HasPagesMock();
+			hasPagesMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
+			hasControllerMock = new HasControllerMock();
+			hasControllerMock->initializeBehavior();
+			initMock = new InitMock();
+			initMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
+			initMock = new InitMock();
+			initMock->initializeBehavior();
+			pingMock = new PingMock();
+			pingMock->initializeBehavior();
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
+			flashCompletePageMock = new FlashCompletePageMock();
+			flashCompletePageMock->initializeBehavior();
+			flashRestPageMock = new FlashRestPageMock();
+			flashRestPageMock->initializeBehavior();
+			flashCheckMock = new FlashCheckMock();
+			flashCheckMock->initializeBehavior();
+			hasControllerMock = new HasControllerMock();
+			hasControllerMock->initializeBehavior();
+			hasPagesMock = new HasPagesMock();
+			hasPagesMock->initializeBehavior();
+
+			MockDefault defaultMock;
+			statechart->setOperationCallback(&defaultMock);
+			hardwareMismatch();
 		}
 		void lastFlashRequest()
 		{
@@ -1183,6 +1337,8 @@ namespace mrw
 		{
 			hasPagesMock = new HasPagesMock();
 			hasPagesMock->initializeBehavior();
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
 			failMock = new FailMock();
 			hasPagesMock = new HasPagesMock();
 			hasPagesMock->initializeBehavior();
@@ -1223,14 +1379,21 @@ namespace mrw
 
 			runner->proceed_time(statechart->getDelay_flash_request());
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Leave_Bootloader));
 
 			EXPECT_TRUE((statechart->getError()) == (6));
+
+			EXPECT_TRUE(bootMock->calledAtLeastOnce());
+
+			runner->proceed_time(statechart->getDelay_boot());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
 
 			hasPagesMock->reset();
+			bootMock->reset();
 			failMock->reset();
 		}
 		void firstCompletePage()
@@ -1239,7 +1402,7 @@ namespace mrw
 
 			hasPagesMock->setDefaultBehavior(&HasPagesMock::hasPages1);
 
-			runner->proceed_time(statechart->getDelay_flash_page());
+			runner->proceed_time(statechart->getDelay_flash_request());
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Flash_Complete_Page));
 
@@ -1259,6 +1422,8 @@ namespace mrw
 			flashCompletePageMock->initializeBehavior();
 			hasPagesMock = new HasPagesMock();
 			hasPagesMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
 			hasControllerMock = new HasControllerMock();
 			hasControllerMock->initializeBehavior();
 			initMock = new InitMock();
@@ -1322,6 +1487,8 @@ namespace mrw
 			flashCompletePageMock->initializeBehavior();
 			hasPagesMock = new HasPagesMock();
 			hasPagesMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
 			hasControllerMock = new HasControllerMock();
 			hasControllerMock->initializeBehavior();
 			initMock = new InitMock();
@@ -1389,6 +1556,8 @@ namespace mrw
 			flashCompletePageMock->initializeBehavior();
 			hasPagesMock = new HasPagesMock();
 			hasPagesMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
 			hasControllerMock = new HasControllerMock();
 			hasControllerMock->initializeBehavior();
 			initMock = new InitMock();
@@ -1458,6 +1627,8 @@ namespace mrw
 			flashCompletePageMock->initializeBehavior();
 			hasPagesMock = new HasPagesMock();
 			hasPagesMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
 			hasControllerMock = new HasControllerMock();
 			hasControllerMock->initializeBehavior();
 			initMock = new InitMock();
@@ -1525,6 +1696,8 @@ namespace mrw
 			flashCompletePageMock->initializeBehavior();
 			hasPagesMock = new HasPagesMock();
 			hasPagesMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
 			hasControllerMock = new HasControllerMock();
 			hasControllerMock->initializeBehavior();
 			initMock = new InitMock();
@@ -1564,17 +1737,26 @@ namespace mrw
 
 			statechart->raiseFailed();
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Leave_Bootloader));
 
 			EXPECT_TRUE((statechart->getError()) == (3));
+
+			EXPECT_TRUE(bootMock->calledAtLeastOnce());
+
+			runner->proceed_time(statechart->getDelay_boot());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
 
+			bootMock->reset();
 			failMock->reset();
 		}
 		TEST_F(UpdateTest, failFlashCheck)
 		{
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
 			failMock = new FailMock();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
@@ -1594,6 +1776,8 @@ namespace mrw
 			flashCompletePageMock->initializeBehavior();
 			hasPagesMock = new HasPagesMock();
 			hasPagesMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
 			hasControllerMock = new HasControllerMock();
 			hasControllerMock->initializeBehavior();
 			initMock = new InitMock();
@@ -1629,6 +1813,8 @@ namespace mrw
 		}
 		TEST_F(UpdateTest, timeoutFlashCheck)
 		{
+			bootMock = new BootMock();
+			bootMock->initializeBehavior();
 			failMock = new FailMock();
 			initMock = new InitMock();
 			initMock->initializeBehavior();
@@ -1648,6 +1834,8 @@ namespace mrw
 			flashCompletePageMock->initializeBehavior();
 			hasPagesMock = new HasPagesMock();
 			hasPagesMock->initializeBehavior();
+			flashRequestMock = new FlashRequestMock();
+			flashRequestMock->initializeBehavior();
 			hasControllerMock = new HasControllerMock();
 			hasControllerMock->initializeBehavior();
 			initMock = new InitMock();
@@ -1683,13 +1871,20 @@ namespace mrw
 
 			runner->proceed_time(statechart->getDelay_boot());
 
-			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Leave_Bootloader));
 
 			EXPECT_TRUE((statechart->getError()) == (4));
+
+			EXPECT_TRUE(bootMock->calledAtLeastOnce());
+
+			runner->proceed_time(statechart->getDelay_boot());
+
+			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::UpdateStatechart::State::main_region_Failed));
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
 
+			bootMock->reset();
 			failMock->reset();
 		}
 		TEST_F(UpdateTest, doExit)
@@ -1751,7 +1946,19 @@ namespace mrw
 
 			EXPECT_TRUE(!statechart->isActive());
 
+			firstFlashRequestMismatch();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
 			flashRequested();
+
+			statechart->exit();
+
+			EXPECT_TRUE(!statechart->isActive());
+
+			hardwareMismatch();
 
 			statechart->exit();
 
