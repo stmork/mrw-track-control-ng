@@ -5,7 +5,7 @@
 
 GeneratorModel for sctunit::cpp11
 {
-	const PROJECT : string = "mrw.statecharts"
+	const PROJECT : string = "statecharts"
 	const FOLDER  : string = "test"
 	const COMMON  : string = "test/common"
 

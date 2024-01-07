@@ -1,11 +1,11 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
 GeneratorModel for yakindu::cpp11
 {
-	const PROJECT : string = "mrw.statecharts"
+	const PROJECT : string = "statecharts"
 	const FOLDER  : string = "test"
 	const COMMON :  string = "test/common"
 
@@ -18,7 +18,7 @@ GeneratorModel for yakindu::cpp11
 
 		feature LicenseHeader
 		{
-			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
 		feature IdentifierSettings
@@ -50,7 +50,7 @@ GeneratorModel for yakindu::cpp11
 
 		feature LicenseHeader
 		{
-			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
 		feature IdentifierSettings
@@ -82,7 +82,7 @@ GeneratorModel for yakindu::cpp11
 
 		feature LicenseHeader
 		{
-			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
 		feature IdentifierSettings
@@ -114,7 +114,7 @@ GeneratorModel for yakindu::cpp11
 
 		feature LicenseHeader
 		{
-			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
 		feature IdentifierSettings
@@ -146,7 +146,7 @@ GeneratorModel for yakindu::cpp11
 
 		feature LicenseHeader
 		{
-			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
 		feature IdentifierSettings
@@ -178,7 +178,7 @@ GeneratorModel for yakindu::cpp11
 
 		feature LicenseHeader
 		{
-			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
 		feature IdentifierSettings
@@ -210,7 +210,7 @@ GeneratorModel for yakindu::cpp11
 
 		feature LicenseHeader
 		{
-			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
 		feature IdentifierSettings
@@ -242,7 +242,7 @@ GeneratorModel for yakindu::cpp11
 
 		feature LicenseHeader
 		{
-			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
 		feature IdentifierSettings
@@ -274,7 +274,7 @@ GeneratorModel for yakindu::cpp11
 
 		feature LicenseHeader
 		{
-			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork\n//\n*"
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
 		feature IdentifierSettings
