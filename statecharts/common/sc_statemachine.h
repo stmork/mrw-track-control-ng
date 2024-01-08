@@ -1,9 +1,9 @@
+/* *
 //
-//  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
-
-#pragma once
+* */
 
 #ifndef SC_STATEMACHINE_H_
 #define SC_STATEMACHINE_H_
@@ -45,6 +45,6 @@ namespace sc
 
 	inline StatemachineInterface::~StatemachineInterface() {}
 
-}
+} /* namespace sc */
 
-#endif
+#endif /* SC_STATEMACHINE_H_ */

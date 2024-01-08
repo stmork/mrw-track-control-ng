@@ -108,7 +108,7 @@ namespace sc
 						return;
 					}
 				}
-				virtual ~TaskData() {}
+				virtual ~TaskData() {};
 			};
 
 			TaskData data;

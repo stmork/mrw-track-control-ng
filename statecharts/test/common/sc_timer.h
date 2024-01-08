@@ -61,7 +61,7 @@ namespace sc
 		{
 		public:
 
-			virtual ~TimerServiceInterface();
+			virtual ~TimerServiceInterface() = 0;
 
 			/*!
 			Starts the timing for a time event.
