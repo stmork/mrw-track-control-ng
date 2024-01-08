@@ -1,8 +1,27 @@
 var searchData=
 [
-  ['termhandler_0',['TermHandler',['../df/d75/classmrw_1_1util_1_1TermHandler.html',1,'mrw::util']]],
-  ['timedinterface_1',['TimedInterface',['../d7/d75/classsc_1_1timer_1_1TimedInterface.html',1,'sc::timer']]],
-  ['timerservice_2',['TimerService',['../dd/dbf/classmrw_1_1statechart_1_1TimerService.html',1,'mrw::statechart']]],
-  ['timerserviceinterface_3',['TimerServiceInterface',['../df/d18/classsc_1_1timer_1_1TimerServiceInterface.html',1,'sc::timer']]],
-  ['timestampedfilelogger_4',['TimestampedFileLogger',['../d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html',1,'mrw::log']]]
+  ['sctimer_0',['SCTimer',['../d2/d97/classmrw_1_1statechart_1_1SCTimer.html',1,'mrw::statechart']]],
+  ['section_1',['Section',['../de/de1/classmrw_1_1model_1_1Section.html',1,'mrw::model']]],
+  ['sectionmodule_2',['SectionModule',['../d8/d13/classmrw_1_1model_1_1SectionModule.html',1,'mrw::model']]],
+  ['self_3',['Self',['../d6/dd2/classmrw_1_1util_1_1Self.html',1,'mrw::util']]],
+  ['selfpointer_4',['SelfPointer',['../db/d5c/classmrw_1_1util_1_1SelfPointer.html',1,'mrw::util']]],
+  ['settings_5',['Settings',['../d6/db2/classmrw_1_1util_1_1Settings.html',1,'mrw::util']]],
+  ['settingsgroup_6',['SettingsGroup',['../de/d0d/classmrw_1_1util_1_1SettingsGroup.html',1,'mrw::util']]],
+  ['signal_7',['Signal',['../db/d9c/classmrw_1_1model_1_1Signal.html',1,'mrw::model']]],
+  ['signalcontroller_8',['SignalController',['../dd/dfc/classmrw_1_1ctrl_1_1SignalController.html',1,'mrw::ctrl']]],
+  ['signalhandler_9',['SignalHandler',['../de/def/classmrw_1_1util_1_1SignalHandler.html',1,'mrw::util']]],
+  ['signalwidget_10',['SignalWidget',['../d8/df9/classmrw_1_1ui_1_1SignalWidget.html',1,'mrw::ui']]],
+  ['singleton_11',['Singleton',['../d0/d4d/classmrw_1_1util_1_1Singleton.html',1,'mrw::util']]],
+  ['singleton_3c_20clockservice_20_3e_12',['Singleton&lt; ClockService &gt;',['../d0/d4d/classmrw_1_1util_1_1Singleton.html',1,'mrw::util']]],
+  ['singleton_3c_20globalbatch_20_3e_13',['Singleton&lt; GlobalBatch &gt;',['../d0/d4d/classmrw_1_1util_1_1Singleton.html',1,'mrw::util']]],
+  ['singleton_3c_20loggerservice_20_3e_14',['Singleton&lt; LoggerService &gt;',['../d0/d4d/classmrw_1_1util_1_1Singleton.html',1,'mrw::util']]],
+  ['singleton_3c_20random_20_3e_15',['Singleton&lt; Random &gt;',['../d0/d4d/classmrw_1_1util_1_1Singleton.html',1,'mrw::util']]],
+  ['singleton_3c_20timerservice_20_3e_16',['Singleton&lt; TimerService &gt;',['../d0/d4d/classmrw_1_1util_1_1Singleton.html',1,'mrw::util']]],
+  ['statemachineinterface_17',['StatemachineInterface',['../de/d2a/classsc_1_1StatemachineInterface.html',1,'sc']]],
+  ['stationwidget_18',['StationWidget',['../d6/da1/classmrw_1_1ui_1_1StationWidget.html',1,'mrw::ui']]],
+  ['status_19',['Status',['../d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html',1,'mrw::ctrl::BaseController::Status'],['../dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html',1,'mrw::ctrl::BaseSwitchController::Status'],['../d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html',1,'mrw::ctrl::DoubleCrossSwitchController::Status'],['../db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html',1,'mrw::ctrl::RailController::Status'],['../d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html',1,'mrw::ctrl::RegularSwitchController::Status'],['../d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html',1,'mrw::ctrl::SignalController::Status'],['../d2/d06/structmrw_1_1ui_1_1DoubleCrossSwitchWidget_1_1Status.html',1,'mrw::ui::DoubleCrossSwitchWidget::Status'],['../de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html',1,'mrw::ui::RailWidget::Status'],['../d5/d9b/structmrw_1_1ui_1_1RegularSwitchWidget_1_1Status.html',1,'mrw::ui::RegularSwitchWidget::Status'],['../d7/dc3/structmrw_1_1ui_1_1SignalWidget_1_1Status.html',1,'mrw::ui::SignalWidget::Status']]],
+  ['stdlogger_20',['StdLogger',['../d1/d17/classmrw_1_1log_1_1StdLogger.html',1,'mrw::log']]],
+  ['string_21',['String',['../d0/d55/classmrw_1_1util_1_1String.html',1,'mrw::util']]],
+  ['switchmodule_22',['SwitchModule',['../dc/d1a/classmrw_1_1model_1_1SwitchModule.html',1,'mrw::model']]],
+  ['switchmodulereference_23',['SwitchModuleReference',['../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html',1,'mrw::model']]]
 ];

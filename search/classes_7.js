@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['method_0',['Method',['../d0/def/classmrw_1_1util_1_1Method.html',1,'mrw::util']]],
-  ['modelrailway_1',['ModelRailway',['../d3/dab/classmrw_1_1model_1_1ModelRailway.html',1,'mrw::model']]],
-  ['modelrepository_2',['ModelRepository',['../dd/d6e/classmrw_1_1model_1_1ModelRepository.html',1,'mrw::model']]],
-  ['module_3',['Module',['../d3/de7/classmrw_1_1model_1_1Module.html',1,'mrw::model']]],
-  ['mrwbusservice_4',['MrwBusService',['../d9/d7e/classmrw_1_1can_1_1MrwBusService.html',1,'mrw::can']]],
-  ['mrwmessage_5',['MrwMessage',['../d1/d80/classmrw_1_1can_1_1MrwMessage.html',1,'mrw::can']]],
-  ['mrwstatistic_6',['MrwStatistic',['../dc/df4/structmrw_1_1model_1_1MrwStatistic.html',1,'mrw::model']]],
-  ['multiplexconnection_7',['MultiplexConnection',['../dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html',1,'mrw::model']]]
+  ['light_0',['Light',['../d0/d3c/classmrw_1_1model_1_1Light.html',1,'mrw::model']]],
+  ['lightmodule_1',['LightModule',['../d2/d9d/classmrw_1_1model_1_1LightModule.html',1,'mrw::model']]],
+  ['lightsignal_2',['LightSignal',['../d6/d71/classmrw_1_1model_1_1LightSignal.html',1,'mrw::model']]],
+  ['loggerbase_3',['LoggerBase',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html',1,'mrw::log']]],
+  ['loggerservice_4',['LoggerService',['../d4/dc7/classmrw_1_1log_1_1LoggerService.html',1,'mrw::log']]]
 ];
