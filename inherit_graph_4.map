@@ -1,3 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$dd/d6e/classmrw_1_1model_1_1ModelRepository.html" title="The model repository class maintain the several files surrounding the modelrailway file which contain..." alt="" coords="5,5,195,31"/>
+<area shape="rect" id="Node000000" href="$d3/de7/classmrw_1_1model_1_1Module.html" title="This base class represents all modules which are connected to the CAN Controller using the 16&#45;pin con..." alt="" coords="5,55,141,80"/>
+<area shape="rect" id="Node000001" href="$d2/d9d/classmrw_1_1model_1_1LightModule.html" title="This module connects light sources such as LEDs or light bulbs." alt="" coords="196,5,361,31"/>
+<area shape="poly" id="edge38_Node000000_Node000001" title=" " alt="" coords="144,48,221,29,222,34,145,53"/>
+<area shape="rect" id="Node000002" href="$d8/d13/classmrw_1_1model_1_1SectionModule.html" title="This class represents a section module which is connected to a CAN controller using the 16&#45;pin connec..." alt="" coords="189,55,368,80"/>
+<area shape="poly" id="edge39_Node000000_Node000002" title=" " alt="" coords="156,65,188,65,188,70,156,70"/>
+<area shape="rect" id="Node000003" href="$dc/d1a/classmrw_1_1model_1_1SwitchModule.html" title="This class represents a switch module which is connected to a CAN controller using one or two 16&#45;pin ..." alt="" coords="191,104,366,130"/>
+<area shape="poly" id="edge40_Node000000_Node000003" title=" " alt="" coords="145,82,222,101,221,106,144,87"/>
 </map>

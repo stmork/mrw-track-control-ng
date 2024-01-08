@@ -1,0 +1,5 @@
+<map id="mrw::util::SelfPointer&lt; T &gt;" name="mrw::util::SelfPointer&lt; T &gt;">
+<area shape="rect" id="Node000001" title="This template class encapsulates an already existing instance into a std::shared_ptr." alt="" coords="31,5,200,31"/>
+<area shape="rect" id="Node000002" href="$d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html" title="This template class encapsulates a QObject based statechart and a mrw::util::SelfPointer class for co..." alt="" coords="5,79,226,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,46,118,79,113,79,113,46"/>
+</map>

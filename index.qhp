@@ -1600,13 +1600,17 @@
 </section>
 </section>
 <section title="statechart" ref="d7/d94/namespacemrw_1_1statechart.html">
+<section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html">
+<section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#a3e7ef6e2d57177d1e45464548789f87b"/>
+<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#af8ee89d20fdacc9461d84355e3efab43"/>
+</section>
 <section title="SCTimer" ref="d2/d97/classmrw_1_1statechart_1_1SCTimer.html">
 <section title="SCTimer" ref="d2/d97/classmrw_1_1statechart_1_1SCTimer.html#ab1f607ecc377673bb5d358ca6e886d74"/>
 <section title="SCTimer" ref="d2/d97/classmrw_1_1statechart_1_1SCTimer.html#a83178438369075295ce5562f1b3cfd67"/>
 </section>
 <section title="TimerService" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html">
 <section title="instance" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#afbb00071a878a4720fa91933a389ec52"/>
-<section title="operator std::shared_ptr&lt; TimerService &gt; &amp;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a048efcf42e438378cf3d7245ec599bb7"/>
+<section title="operator std::shared_ptr&lt; TimerServiceInterface &gt; &amp;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#aafe10010a416f26eb31b84896193af72"/>
 <section title="mrw::util::Singleton&lt; TimerService &gt;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a02d511ee2ea2f228f23719a5eb143915"/>
 </section>
 </section>
@@ -2135,6 +2139,11 @@
 <section title="random" ref="d5/d62/classmrw_1_1util_1_1Random.html#ad389b625c08bf61e145029c170ba1430"/>
 <section title="Singleton&lt; Random &gt;" ref="d5/d62/classmrw_1_1util_1_1Random.html#ad4ba9c502cc704e19f4c21eca8f8ab58"/>
 </section>
+<section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html">
+<section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a353ec5114e50161f65bdbc4bd5b79d16"/>
+<section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a663ee8e40c18e002f80e2e937f279ecf"/>
+<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#af8ee89d20fdacc9461d84355e3efab43"/>
+</section>
 <section title="Settings" ref="d6/db2/classmrw_1_1util_1_1Settings.html">
 <section title="Settings" ref="d6/db2/classmrw_1_1util_1_1Settings.html#a05676ec48e2b4c57c8b3cfea56ccac8e"/>
 </section>
@@ -2181,14 +2190,14 @@
 <section title="TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html">
 <section title="~TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#abde323c163127b4797dea71adcf1f35d"/>
 <section title="getNumberOfParallelTimeEvents" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#ad96876d6b84af8366141209a2930a313"/>
-<section title="getTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a45c8c63a653c247bead8aa1f65f34e70"/>
+<section title="getTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a0569ca1dfc217b99feb88a3f65db2f3c"/>
 <section title="raiseTimeEvent" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#aeb2a340a1252b36828b5d2dc069e9c57"/>
-<section title="setTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a470dc6b4b9c760fb77cca3331d131639"/>
+<section title="setTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a4b30aa5a7a42a697e0dc114691f5f01f"/>
 </section>
 <section title="TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html">
 <section title="~TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac964f1c8dd62c8c30ff369ce66455b77"/>
-<section title="setTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a2f433af39cfa97ccc6d8022a7bc047a5"/>
-<section title="unsetTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#aa4d9cdfc29d987c826d10285706605fc"/>
+<section title="setTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a3b6967b2bbc5a6cfc31b20ed0a180c28"/>
+<section title="unsetTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a43f25c75a536b85d7f0d0b2196c7d1b6"/>
 </section>
 </section>
 <section title="StatemachineInterface" ref="de/d2a/classsc_1_1StatemachineInterface.html">
@@ -2202,6 +2211,7 @@
 <section title="eventid" ref="db/d03/namespacesc.html#a778684feb57033c6828435b8b1c5fb6b"/>
 <section title="integer" ref="db/d03/namespacesc.html#ab81e58bda4a1d0525955223d98ccb3df"/>
 <section title="real" ref="db/d03/namespacesc.html#addc5a438cd4d2e5bf27c64edbabad7ce"/>
+<section title="time" ref="db/d03/namespacesc.html#a1bc542877409477b96abd9b10ac01a4c"/>
 <section title="ushort" ref="db/d03/namespacesc.html#a6fd8c6bf037ef38d61541e1d27ddf532"/>
 </section>
 </section>
@@ -3688,13 +3698,17 @@
 </section>
 </section>
 <section title="statechart" ref="d7/d94/namespacemrw_1_1statechart.html">
+<section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html">
+<section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#a3e7ef6e2d57177d1e45464548789f87b"/>
+<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#af8ee89d20fdacc9461d84355e3efab43"/>
+</section>
 <section title="SCTimer" ref="d2/d97/classmrw_1_1statechart_1_1SCTimer.html">
 <section title="SCTimer" ref="d2/d97/classmrw_1_1statechart_1_1SCTimer.html#ab1f607ecc377673bb5d358ca6e886d74"/>
 <section title="SCTimer" ref="d2/d97/classmrw_1_1statechart_1_1SCTimer.html#a83178438369075295ce5562f1b3cfd67"/>
 </section>
 <section title="TimerService" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html">
 <section title="instance" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#afbb00071a878a4720fa91933a389ec52"/>
-<section title="operator std::shared_ptr&lt; TimerService &gt; &amp;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a048efcf42e438378cf3d7245ec599bb7"/>
+<section title="operator std::shared_ptr&lt; TimerServiceInterface &gt; &amp;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#aafe10010a416f26eb31b84896193af72"/>
 <section title="mrw::util::Singleton&lt; TimerService &gt;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a02d511ee2ea2f228f23719a5eb143915"/>
 </section>
 </section>
@@ -4223,6 +4237,11 @@
 <section title="random" ref="d5/d62/classmrw_1_1util_1_1Random.html#ad389b625c08bf61e145029c170ba1430"/>
 <section title="Singleton&lt; Random &gt;" ref="d5/d62/classmrw_1_1util_1_1Random.html#ad4ba9c502cc704e19f4c21eca8f8ab58"/>
 </section>
+<section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html">
+<section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a353ec5114e50161f65bdbc4bd5b79d16"/>
+<section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a663ee8e40c18e002f80e2e937f279ecf"/>
+<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#af8ee89d20fdacc9461d84355e3efab43"/>
+</section>
 <section title="Settings" ref="d6/db2/classmrw_1_1util_1_1Settings.html">
 <section title="Settings" ref="d6/db2/classmrw_1_1util_1_1Settings.html#a05676ec48e2b4c57c8b3cfea56ccac8e"/>
 </section>
@@ -4269,14 +4288,14 @@
 <section title="TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html">
 <section title="~TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#abde323c163127b4797dea71adcf1f35d"/>
 <section title="getNumberOfParallelTimeEvents" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#ad96876d6b84af8366141209a2930a313"/>
-<section title="getTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a45c8c63a653c247bead8aa1f65f34e70"/>
+<section title="getTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a0569ca1dfc217b99feb88a3f65db2f3c"/>
 <section title="raiseTimeEvent" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#aeb2a340a1252b36828b5d2dc069e9c57"/>
-<section title="setTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a470dc6b4b9c760fb77cca3331d131639"/>
+<section title="setTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a4b30aa5a7a42a697e0dc114691f5f01f"/>
 </section>
 <section title="TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html">
 <section title="~TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac964f1c8dd62c8c30ff369ce66455b77"/>
-<section title="setTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a2f433af39cfa97ccc6d8022a7bc047a5"/>
-<section title="unsetTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#aa4d9cdfc29d987c826d10285706605fc"/>
+<section title="setTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a3b6967b2bbc5a6cfc31b20ed0a180c28"/>
+<section title="unsetTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a43f25c75a536b85d7f0d0b2196c7d1b6"/>
 </section>
 </section>
 <section title="StatemachineInterface" ref="de/d2a/classsc_1_1StatemachineInterface.html">
@@ -4308,9 +4327,6 @@
 <section title="mrw::model::FormSignal" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html"/>
 </section>
 </section>
-<section title="mrw::can::DeviceKey" ref="">
-<section title="mrw::model::DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html"/>
-</section>
 <section title="mrw::log::LoggerBase" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html">
 <section title="mrw::log::StdLogger" ref="d1/d17/classmrw_1_1log_1_1StdLogger.html"/>
 <section title="mrw::log::UnifiedLogger" ref="dc/d69/classmrw_1_1log_1_1UnifiedLogger.html">
@@ -4328,6 +4344,9 @@
 </section>
 <section title="mrw::model::MrwStatistic" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html"/>
 <section title="mrw::model::MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html"/>
+<section title="std::pair&lt; T1, T2 &gt;" ref="">
+<section title="mrw::model::DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html"/>
+</section>
 <section title="mrw::model::Position" ref="db/d4f/classmrw_1_1model_1_1Position.html">
 <section title="mrw::model::RailPart" ref="d1/d16/classmrw_1_1model_1_1RailPart.html">
 <section title="mrw::model::AbstractSwitch" ref="df/db7/classmrw_1_1model_1_1AbstractSwitch.html"/>
@@ -4378,6 +4397,9 @@
 </section>
 </section>
 <section title="mrw::model::RailInfo" ref="d2/db9/classmrw_1_1model_1_1RailInfo.html"/>
+<section title="mrw::util::SelfPointer&lt; T &gt;" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html">
+<section title="mrw::statechart::QtStatechart&lt; T &gt;" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html"/>
+</section>
 <section title="mrw::util::SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html"/>
 <section title="mrw::util::SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html">
 <section title="mrw::util::DumpHandler" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html"/>
@@ -4426,6 +4448,9 @@
 <section title="mrw::model::ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html"/>
 <section title="mrw::model::Region" ref="d4/d3e/classmrw_1_1model_1_1Region.html"/>
 <section title="mrw::model::Section" ref="de/de1/classmrw_1_1model_1_1Section.html"/>
+</section>
+<section title="T" ref="">
+<section title="mrw::statechart::QtStatechart&lt; T &gt;" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html"/>
 </section>
 <section title="sc::timer::TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html"/>
 <section title="sc::timer::TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html">
@@ -4489,6 +4514,7 @@
 <section title="n" ref="functions_func_n.html"/>
 <section title="o" ref="functions_func_o.html"/>
 <section title="p" ref="functions_func_p.html"/>
+<section title="q" ref="functions_func_q.html"/>
 <section title="r" ref="functions_func_r.html"/>
 <section title="s" ref="functions_func_s.html"/>
 <section title="t" ref="functions_func_t.html"/>
@@ -4558,6 +4584,7 @@
 <keyword name="mrw::model::Position" id="mrw::model::Position_" ref="db/d4f/classmrw_1_1model_1_1Position.html"/>
 <keyword name="mrw::model::ProfileLight" id="mrw::model::ProfileLight_" ref="dd/d28/classmrw_1_1model_1_1ProfileLight.html"/>
 <keyword name="mrw::util::Properties" id="mrw::util::Properties_" ref="d5/d5d/classmrw_1_1util_1_1Properties.html"/>
+<keyword name="mrw::statechart::QtStatechart" id="mrw::statechart::QtStatechart_" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html"/>
 <keyword name="mrw::model::Rail" id="mrw::model::Rail_" ref="db/d26/classmrw_1_1model_1_1Rail.html"/>
 <keyword name="mrw::ctrl::RailController" id="mrw::ctrl::RailController_" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html"/>
 <keyword name="mrw::model::RailInfo" id="mrw::model::RailInfo_" ref="d2/db9/classmrw_1_1model_1_1RailInfo.html"/>
@@ -4572,6 +4599,7 @@
 <keyword name="mrw::statechart::SCTimer" id="mrw::statechart::SCTimer_" ref="d2/d97/classmrw_1_1statechart_1_1SCTimer.html"/>
 <keyword name="mrw::model::Section" id="mrw::model::Section_" ref="de/de1/classmrw_1_1model_1_1Section.html"/>
 <keyword name="mrw::model::SectionModule" id="mrw::model::SectionModule_" ref="d8/d13/classmrw_1_1model_1_1SectionModule.html"/>
+<keyword name="mrw::util::SelfPointer" id="mrw::util::SelfPointer_" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html"/>
 <keyword name="mrw::util::Settings" id="mrw::util::Settings_" ref="d6/db2/classmrw_1_1util_1_1Settings.html"/>
 <keyword name="mrw::util::SettingsGroup" id="mrw::util::SettingsGroup_" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html"/>
 <keyword name="mrw::model::Signal" id="mrw::model::Signal_" ref="db/d9c/classmrw_1_1model_1_1Signal.html"/>
@@ -4656,18 +4684,18 @@
 <keyword name="BaseController(QObject *parent=nullptr)" id="mrw::ctrl::BaseController::BaseController_ae47bfe51040bb5674d54e9a9ae00c1ce" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ae47bfe51040bb5674d54e9a9ae00c1ce"/>
 <keyword name="BaseSwitchController(QObject *parent=nullptr)" id="mrw::ctrl::BaseSwitchController::BaseSwitchController_a6898669ecedd594a9a396e8b72684f48" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a6898669ecedd594a9a396e8b72684f48"/>
 <keyword name="BaseWidget(QWidget *parent=nullptr)" id="mrw::ui::BaseWidget::BaseWidget_a91754f7f90922093a34e4a60d601bf99" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a91754f7f90922093a34e4a60d601bf99"/>
-<keyword name="Batch()" id="mrw::util::Batch::Batch_ac91261f634b1f89c51941e9d188b06a5" ref="d8/dde/classmrw_1_1util_1_1Batch.html#ac91261f634b1f89c51941e9d188b06a5"/>
 <keyword name="batch() const" id="mrw::util::BatchParticipant::batch_a07eab40ac9a15b2289e7830e68b7a327" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a07eab40ac9a15b2289e7830e68b7a327"/>
+<keyword name="Batch()" id="mrw::util::Batch::Batch_ac91261f634b1f89c51941e9d188b06a5" ref="d8/dde/classmrw_1_1util_1_1Batch.html#ac91261f634b1f89c51941e9d188b06a5"/>
 <keyword name="BatchParticipant" id="mrw::util::Batch::BatchParticipant_a15aae440c6bc60ad50578730d6e9b3c4" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a15aae440c6bc60ad50578730d6e9b3c4"/>
 <keyword name="BatchParticipant()" id="mrw::util::BatchParticipant::BatchParticipant_a2f056ac6f0f14b943f345b4f9d629927" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a2f056ac6f0f14b943f345b4f9d629927"/>
 <keyword name="BC" id="mrw::model::DoubleCrossSwitch::BC_a1a462292eecb5d40e19aec3af07c93e1af85b7b377112c272bc87f3e73f10508d" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1af85b7b377112c272bc87f3e73f10508d"/>
 <keyword name="BD" id="mrw::model::DoubleCrossSwitch::BD_a1a462292eecb5d40e19aec3af07c93e1a87a47565be4714701a8bc2354cbaea36" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1a87a47565be4714701a8bc2354cbaea36"/>
-<keyword name="bending" id="mrw::ctrl::BaseController::Status::bending_ae9cfb02e5f31146d4dd540ee40882104" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<keyword name="bending() const" id="mrw::model::Position::bending_aa63c2660da7d2b0a33db8bbc81d98b48" ref="db/d4f/classmrw_1_1model_1_1Position.html#aa63c2660da7d2b0a33db8bbc81d98b48"/>
 <keyword name="Bending" id="mrw::model::Position::Bending_a380b5a8ca4ca1e92ca0a75a4a392caea" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caea"/>
 <keyword name="LEFT" id="mrw::model::Position::LEFT_a380b5a8ca4ca1e92ca0a75a4a392caeaa684d325a7303f52e64011467ff5c5758" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa684d325a7303f52e64011467ff5c5758"/>
 <keyword name="STRAIGHT" id="mrw::model::Position::STRAIGHT_a380b5a8ca4ca1e92ca0a75a4a392caeaa8c5e50fab3748e9c53a6863b3dce1401" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa8c5e50fab3748e9c53a6863b3dce1401"/>
 <keyword name="RIGHT" id="mrw::model::Position::RIGHT_a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403"/>
+<keyword name="bending" id="mrw::ctrl::BaseController::Status::bending_ae9cfb02e5f31146d4dd540ee40882104" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<keyword name="bending() const" id="mrw::model::Position::bending_aa63c2660da7d2b0a33db8bbc81d98b48" ref="db/d4f/classmrw_1_1model_1_1Position.html#aa63c2660da7d2b0a33db8bbc81d98b48"/>
 <keyword name="BLUE" id="mrw::ui::BaseWidget::BLUE_a2ab2e86ed30d31f026d41c76886c00aa" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <keyword name="BLUE_ON" id="mrw::util::String::BLUE_ON_a99bdb92fafd1dfab6f5d46112f4f6365" ref="d0/d55/classmrw_1_1util_1_1String.html#a99bdb92fafd1dfab6f5d46112f4f6365"/>
 <keyword name="bold(const QString &amp;input)" id="mrw::util::String::bold_a17e93c589eee4042aa536612fc6a7665" ref="d0/d55/classmrw_1_1util_1_1String.html#a17e93c589eee4042aa536612fc6a7665"/>
@@ -4749,10 +4777,6 @@
 <keyword name="ConstantMapPair" id="ConstantEnumerator&lt; Symbol &gt;::ConstantMapPair_a2fb8988f103ebc51fe1395b9d553182a" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#a2fb8988f103ebc51fe1395b9d553182a"/>
 <keyword name="contains(BatchParticipant *element) const" id="mrw::util::Batch::contains_a6c3600a941dc1f5eed9afcc1707e18ec" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a6c3600a941dc1f5eed9afcc1707e18ec"/>
 <keyword name="contains(const RailPart *rail, const bool dir) const" id="mrw::model::RailPart::contains_a1d212fb80b349121b8de97ecef880552" ref="d1/d16/classmrw_1_1model_1_1RailPart.html#a1d212fb80b349121b8de97ecef880552"/>
-<keyword name="Controller" id="mrw::model::ModelRailway::Controller_ac3456fd331a58b288082abca310c7a99" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#ac3456fd331a58b288082abca310c7a99"/>
-<keyword name="Controller" id="mrw::model::Module::Controller_ac3456fd331a58b288082abca310c7a99" ref="d3/de7/classmrw_1_1model_1_1Module.html#ac3456fd331a58b288082abca310c7a99"/>
-<keyword name="Controller" id="mrw::model::MultiplexConnection::Controller_ac3456fd331a58b288082abca310c7a99" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#ac3456fd331a58b288082abca310c7a99"/>
-<keyword name="Controller(ModelRailway *model_railway, const QDomElement &amp;element)" id="mrw::model::Controller::Controller_a71757259f8562622a82e059461dd69b7" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a71757259f8562622a82e059461dd69b7"/>
 <keyword name="controller() const =0" id="mrw::model::Device::controller_aa6d3a8c0db676ee2289441e37e2165fa" ref="d8/d2c/classmrw_1_1model_1_1Device.html#aa6d3a8c0db676ee2289441e37e2165fa"/>
 <keyword name="controller() const override" id="mrw::model::Light::controller_a72f213bce64a1e21ffaf36444e2703fb" ref="d0/d3c/classmrw_1_1model_1_1Light.html#a72f213bce64a1e21ffaf36444e2703fb"/>
 <keyword name="controller() const override" id="mrw::model::LightSignal::controller_a5ed999ba765e68054a738000f966723b" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a5ed999ba765e68054a738000f966723b"/>
@@ -4760,6 +4784,10 @@
 <keyword name="controller() const override" id="mrw::model::Section::controller_a8ac93f7a934990cdf9e8553e2d9464a2" ref="de/de1/classmrw_1_1model_1_1Section.html#a8ac93f7a934990cdf9e8553e2d9464a2"/>
 <keyword name="controller() const override" id="mrw::model::SwitchModuleReference::controller_a7e9460873197cacbc5c7583892f29958" ref="d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#a7e9460873197cacbc5c7583892f29958"/>
 <keyword name="controller() const" id="mrw::ui::ControllerWidget::controller_a7181f177f258cc23c90efc0bae993f2a" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a7181f177f258cc23c90efc0bae993f2a"/>
+<keyword name="Controller" id="mrw::model::ModelRailway::Controller_ac3456fd331a58b288082abca310c7a99" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#ac3456fd331a58b288082abca310c7a99"/>
+<keyword name="Controller" id="mrw::model::Module::Controller_ac3456fd331a58b288082abca310c7a99" ref="d3/de7/classmrw_1_1model_1_1Module.html#ac3456fd331a58b288082abca310c7a99"/>
+<keyword name="Controller" id="mrw::model::MultiplexConnection::Controller_ac3456fd331a58b288082abca310c7a99" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#ac3456fd331a58b288082abca310c7a99"/>
+<keyword name="Controller(ModelRailway *model_railway, const QDomElement &amp;element)" id="mrw::model::Controller::Controller_a71757259f8562622a82e059461dd69b7" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a71757259f8562622a82e059461dd69b7"/>
 <keyword name="controllerById(const mrw::can::ControllerId id) const" id="mrw::model::ModelRailway::controllerById_a0a6871b80b317734ddac83a53905de6d" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a0a6871b80b317734ddac83a53905de6d"/>
 <keyword name="controllerCount() const" id="mrw::model::ModelRailway::controllerCount_a87a775318874814bebfbce6528535915" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a87a775318874814bebfbce6528535915"/>
 <keyword name="ControllerWidget(QWidget *parent=nullptr, mrw::ctrl::BaseController *ctrl=nullptr)" id="mrw::ui::ControllerWidget::ControllerWidget_a557f85ea485ae2390dfbae1fd257179d" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a557f85ea485ae2390dfbae1fd257179d"/>
@@ -4869,7 +4897,7 @@
 <keyword name="get(const Symbol key) const" id="ConstantEnumerator&lt; Symbol &gt;::get_a87907312e02015a246f9925e38ff82f9" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#a87907312e02015a246f9925e38ff82f9"/>
 <keyword name="getNumberOfParallelTimeEvents()=0" id="sc::timer::TimedInterface::getNumberOfParallelTimeEvents_ad96876d6b84af8366141209a2930a313" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#ad96876d6b84af8366141209a2930a313"/>
 <keyword name="getSignals(const bool view) const" id="mrw::model::Section::getSignals_af205b1dac6ae854b8c115f158133a84b" ref="de/de1/classmrw_1_1model_1_1Section.html#af205b1dac6ae854b8c115f158133a84b"/>
-<keyword name="getTimerService()=0" id="sc::timer::TimedInterface::getTimerService_a45c8c63a653c247bead8aa1f65f34e70" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a45c8c63a653c247bead8aa1f65f34e70"/>
+<keyword name="getTimerService()=0" id="sc::timer::TimedInterface::getTimerService_a0569ca1dfc217b99feb88a3f65db2f3c" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a0569ca1dfc217b99feb88a3f65db2f3c"/>
 <keyword name="GO" id="mrw::model::Signal::GO_a6d51b86199063962daedf9c4b861bc85a446b70412175df5ccdeb216bad09f66b" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85a446b70412175df5ccdeb216bad09f66b"/>
 <keyword name="GREEN" id="mrw::ui::BaseWidget::GREEN_aa54d6d78623865a1e29e8ef7afb2df22" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#aa54d6d78623865a1e29e8ef7afb2df22"/>
 <keyword name="GREEN_ON" id="mrw::util::String::GREEN_ON_a97deee27c031921c641a624fb74f8a0e" ref="d0/d55/classmrw_1_1util_1_1String.html#a97deee27c031921c641a624fb74f8a0e"/>
@@ -5003,12 +5031,12 @@
 <keyword name="ModelRailway(const ModelRailway &amp;other)=delete" id="mrw::model::ModelRailway::ModelRailway_a62fc2b320e1915b3d3dd7ba9d7a77010" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a62fc2b320e1915b3d3dd7ba9d7a77010"/>
 <keyword name="ModelRepository(const QString &amp;modelname, const bool use_positions=false)" id="mrw::model::ModelRepository::ModelRepository_a676acd0bca439eacf794648d039cc6c1" ref="dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a676acd0bca439eacf794648d039cc6c1"/>
 <keyword name="ModelRepository()=delete" id="mrw::model::ModelRepository::ModelRepository_a660bcfdbfa1529dd61459ba3b64333fb" ref="dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a660bcfdbfa1529dd61459ba3b64333fb"/>
-<keyword name="Module" id="mrw::model::ModelRailway::Module_a21f639900c480510650969df9c74d17d" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a21f639900c480510650969df9c74d17d"/>
-<keyword name="Module(ModelRailway *model_railway, const QDomElement &amp;element)" id="mrw::model::Module::Module_a4ca53a325e4e08e11e3657fad2e8b18b" ref="d3/de7/classmrw_1_1model_1_1Module.html#a4ca53a325e4e08e11e3657fad2e8b18b"/>
 <keyword name="module(const int index) const" id="mrw::model::Controller::module_a62c4add568ef635f942f4a92f2276791" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a62c4add568ef635f942f4a92f2276791"/>
 <keyword name="module(const size_t controller_idx, const size_t module_idx) const" id="mrw::model::ModelRailway::module_a3df01a0e7a51524bed0d33e49952c2b1" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a3df01a0e7a51524bed0d33e49952c2b1"/>
 <keyword name="module() const" id="mrw::model::Section::module_abb70fb642303b01a3f1c91d6be818600" ref="de/de1/classmrw_1_1model_1_1Section.html#abb70fb642303b01a3f1c91d6be818600"/>
 <keyword name="module() const" id="mrw::model::SwitchModuleReference::module_ac0c36ca0d39461b18679cf03f42bcf80" ref="d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#ac0c36ca0d39461b18679cf03f42bcf80"/>
+<keyword name="Module" id="mrw::model::ModelRailway::Module_a21f639900c480510650969df9c74d17d" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a21f639900c480510650969df9c74d17d"/>
+<keyword name="Module(ModelRailway *model_railway, const QDomElement &amp;element)" id="mrw::model::Module::Module_a4ca53a325e4e08e11e3657fad2e8b18b" ref="d3/de7/classmrw_1_1model_1_1Module.html#a4ca53a325e4e08e11e3657fad2e8b18b"/>
 <keyword name="moduleCount() const" id="mrw::model::Controller::moduleCount_ab7377ad65bafe7f3adcdec1b5d9ab09b" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#ab7377ad65bafe7f3adcdec1b5d9ab09b"/>
 <keyword name="mousePressEvent(QMouseEvent *event) override" id="mrw::ui::ControllerWidget::mousePressEvent_a59cf4307c0600aeb72c0a8c827cce776" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a59cf4307c0600aeb72c0a8c827cce776"/>
 <keyword name="move(const int right, const int down)" id="mrw::model::Position::move_abc70305593d7606befc1423b8adad4a1" ref="db/d4f/classmrw_1_1model_1_1Position.html#abc70305593d7606befc1423b8adad4a1"/>
@@ -5045,7 +5073,8 @@
 <keyword name="operator QCanBusFrame() const" id="mrw::can::MrwMessage::operator QCanBusFrame_ad27f826f5f065c0ccf295481990f02ef" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ad27f826f5f065c0ccf295481990f02ef"/>
 <keyword name="operator QString() const" id="mrw::util::String::operator QString_acde95787bd85524f6f1f232e3ac0c93f" ref="d0/d55/classmrw_1_1util_1_1String.html#acde95787bd85524f6f1f232e3ac0c93f"/>
 <keyword name="operator RailPart *() const" id="mrw::model::RailInfo::operator RailPart *_a9a170c751c6b9e9559738ab3362e9624" ref="d2/db9/classmrw_1_1model_1_1RailInfo.html#a9a170c751c6b9e9559738ab3362e9624"/>
-<keyword name="operator std::shared_ptr&lt; TimerService &gt; &amp;()" id="mrw::statechart::TimerService::operator std::shared_ptr&lt; TimerService &gt; &amp;_a048efcf42e438378cf3d7245ec599bb7" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a048efcf42e438378cf3d7245ec599bb7"/>
+<keyword name="operator std::shared_ptr&lt; T &gt; &amp;()" id="mrw::util::SelfPointer::operator std::shared_ptr&lt; T &gt; &amp;_af8ee89d20fdacc9461d84355e3efab43" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#af8ee89d20fdacc9461d84355e3efab43"/>
+<keyword name="operator std::shared_ptr&lt; TimerServiceInterface &gt; &amp;()" id="mrw::statechart::TimerService::operator std::shared_ptr&lt; TimerServiceInterface &gt; &amp;_aafe10010a416f26eb31b84896193af72" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#aafe10010a416f26eb31b84896193af72"/>
 <keyword name="operator!=(const Position &amp;other) const" id="mrw::model::Position::operator!=_ae4d491be71bc11896f864835187e860d" ref="db/d4f/classmrw_1_1model_1_1Position.html#ae4d491be71bc11896f864835187e860d"/>
 <keyword name="operator()(const mrw::can::DeviceKey &amp;id) const" id="mrw::model::DeviceId::operator()_a8a07c84acd38a3d6d7bd261b271cfd32" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a8a07c84acd38a3d6d7bd261b271cfd32"/>
 <keyword name="operator&lt;(const Position &amp;other) const" id="mrw::model::Position::operator&lt;_a9ec6b49c2f17c87eaf17c0b57e5bbb1a" ref="db/d4f/classmrw_1_1model_1_1Position.html#a9ec6b49c2f17c87eaf17c0b57e5bbb1a"/>
@@ -5094,9 +5123,9 @@
 <keyword name="ports() const =0" id="mrw::model::Module::ports_a5179cd0aa18febffce5c385d79a8887e" ref="d3/de7/classmrw_1_1model_1_1Module.html#a5179cd0aa18febffce5c385d79a8887e"/>
 <keyword name="ports() const override" id="mrw::model::SectionModule::ports_a847a14a53e9335109717bc413de12c94" ref="d8/d13/classmrw_1_1model_1_1SectionModule.html#a847a14a53e9335109717bc413de12c94"/>
 <keyword name="ports() const override" id="mrw::model::SwitchModule::ports_ae9ef36939a0cc281d640b1d3e728ae25" ref="dc/d1a/classmrw_1_1model_1_1SwitchModule.html#ae9ef36939a0cc281d640b1d3e728ae25"/>
-<keyword name="Position()=default" id="mrw::model::Position::Position_a51d40a523ec11adb71f3e5ba3dbd54f8" ref="db/d4f/classmrw_1_1model_1_1Position.html#a51d40a523ec11adb71f3e5ba3dbd54f8"/>
 <keyword name="position" id="mrw::ctrl::BaseController::Status::position_a9db6b8209cc5cfed8ca359a73ed75f6c" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
 <keyword name="position() const" id="mrw::ctrl::BaseController::position_a79df27b63eb3e63d10f8fae3555b8560" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
+<keyword name="Position()=default" id="mrw::model::Position::Position_a51d40a523ec11adb71f3e5ba3dbd54f8" ref="db/d4f/classmrw_1_1model_1_1Position.html#a51d40a523ec11adb71f3e5ba3dbd54f8"/>
 <keyword name="prepare()" id="mrw::model::Route::prepare_ac535b34101a3af5294031f4d646ef9a5" ref="d7/dfb/classmrw_1_1model_1_1Route.html#ac535b34101a3af5294031f4d646ef9a5"/>
 <keyword name="prepare(Status &amp;status) const" id="mrw::ui::DoubleCrossSwitchWidget::prepare_a120ba7b8d70820ef90d95328a6adb4f4" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a120ba7b8d70820ef90d95328a6adb4f4"/>
 <keyword name="prepare(Status &amp;status) const" id="mrw::ui::RailWidget::prepare_a2a611732f2fd44ed2b29504e55ea63a4" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a2a611732f2fd44ed2b29504e55ea63a4"/>
@@ -5111,6 +5140,7 @@
 <keyword name="Properties()=default" id="mrw::util::Properties::Properties_acc6d280ed1e3d16f27815ef981fb4dac" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#acc6d280ed1e3d16f27815ef981fb4dac"/>
 <keyword name="Properties(const QString &amp;filename)" id="mrw::util::Properties::Properties_ac4b43aabd1c5fe5b4068d1ff452ebe55" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#ac4b43aabd1c5fe5b4068d1ff452ebe55"/>
 <keyword name="proposeModelName(const int index=1)" id="mrw::model::ModelRepository::proposeModelName_a1885774666b635bdbd47e24695759e04" ref="dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a1885774666b635bdbd47e24695759e04"/>
+<keyword name="QtStatechart()" id="mrw::statechart::QtStatechart::QtStatechart_a3e7ef6e2d57177d1e45464548789f87b" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#a3e7ef6e2d57177d1e45464548789f87b"/>
 <keyword name="QUARTER" id="mrw::model::Position::QUARTER_af838864426b2ae5e3f53e29298d3bdcc" ref="db/d4f/classmrw_1_1model_1_1Position.html#af838864426b2ae5e3f53e29298d3bdcc"/>
 <keyword name="Rail" id="mrw::model::ModelRailway::Rail_a3570c0109cb1ea5b06d3854e85b78b47" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a3570c0109cb1ea5b06d3854e85b78b47"/>
 <keyword name="Rail(ModelRailway *model_railway, Section *model_section, const QDomElement &amp;element)" id="mrw::model::Rail::Rail_a4c8401939decc23ef0e1fb8bab10869c" ref="db/d26/classmrw_1_1model_1_1Rail.html#a4c8401939decc23ef0e1fb8bab10869c"/>
@@ -5134,11 +5164,11 @@
 <keyword name="RED_ON" id="mrw::util::String::RED_ON_ad34b779827292c895aad2ee463a031bc" ref="d0/d55/classmrw_1_1util_1_1String.html#ad34b779827292c895aad2ee463a031bc"/>
 <keyword name="reference" id="mrw::model::AssemblyPart::reference_a90ba2b8cc644546925fa3b49bd467d98" ref="d5/d26/classmrw_1_1model_1_1AssemblyPart.html#a90ba2b8cc644546925fa3b49bd467d98"/>
 <keyword name="reference" id="mrw::model::Module::reference_a75fdcc7651e2f3174e75589035930287" ref="d3/de7/classmrw_1_1model_1_1Module.html#a75fdcc7651e2f3174e75589035930287"/>
+<keyword name="Region" id="mrw::model::Section::Region_aae6f9325706131f3b6fb8accb1508d76" ref="de/de1/classmrw_1_1model_1_1Section.html#aae6f9325706131f3b6fb8accb1508d76"/>
+<keyword name="Region(ModelRailway *model_railway, const QDomElement &amp;element, const bool station)" id="mrw::model::Region::Region_a156a26d099a8238e2c30e514080b3363" ref="d4/d3e/classmrw_1_1model_1_1Region.html#a156a26d099a8238e2c30e514080b3363"/>
 <keyword name="region() const" id="mrw::model::AssemblyPart::region_a0654195d9f48bf7ce890fe43032ecc5f" ref="d5/d26/classmrw_1_1model_1_1AssemblyPart.html#a0654195d9f48bf7ce890fe43032ecc5f"/>
 <keyword name="region(const size_t index) const" id="mrw::model::ModelRailway::region_ae26b8f9ddf66abfaa8dc931947f718ce" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#ae26b8f9ddf66abfaa8dc931947f718ce"/>
 <keyword name="region() const" id="mrw::model::Section::region_a7eb02df295d225953ba842c3993eb0ab" ref="de/de1/classmrw_1_1model_1_1Section.html#a7eb02df295d225953ba842c3993eb0ab"/>
-<keyword name="Region" id="mrw::model::Section::Region_aae6f9325706131f3b6fb8accb1508d76" ref="de/de1/classmrw_1_1model_1_1Section.html#aae6f9325706131f3b6fb8accb1508d76"/>
-<keyword name="Region(ModelRailway *model_railway, const QDomElement &amp;element, const bool station)" id="mrw::model::Region::Region_a156a26d099a8238e2c30e514080b3363" ref="d4/d3e/classmrw_1_1model_1_1Region.html#a156a26d099a8238e2c30e514080b3363"/>
 <keyword name="region_count" id="mrw::model::MrwStatistic::region_count_aa3736702fa76a650c37ee3ec960125af" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aa3736702fa76a650c37ee3ec960125af"/>
 <keyword name="regionCount() const" id="mrw::model::ModelRailway::regionCount_a2f4f6df47e41fda0b414273bba507ff7" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a2f4f6df47e41fda0b414273bba507ff7"/>
 <keyword name="registerLogger(LoggerBase *logger)" id="mrw::log::LoggerService::registerLogger_ae5fe19778a7bd2b573701bc787664bc7" ref="d4/dc7/classmrw_1_1log_1_1LoggerService.html#ae5fe19778a7bd2b573701bc787664bc7"/>
@@ -5155,22 +5185,22 @@
 <keyword name="reset()" id="mrw::util::Batch::reset_a60ac05642f1f86ced915f28b98f7fc93" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a60ac05642f1f86ced915f28b98f7fc93"/>
 <keyword name="resolve(const char *attr) const" id="mrw::model::RailPart::resolve_a022a68964d9e433062f252407dd8dfc6" ref="d1/d16/classmrw_1_1model_1_1RailPart.html#a022a68964d9e433062f252407dd8dfc6"/>
 <keyword name="response() const" id="mrw::can::MrwMessage::response_a1c32660504ab9bd5b464d71795e26eee" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a1c32660504ab9bd5b464d71795e26eee"/>
-<keyword name="right" id="mrw::ctrl::RegularSwitchController::Status::right_abf63160eedfa663a3331e1939f83838c" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abf63160eedfa663a3331e1939f83838c"/>
 <keyword name="RIGHT" id="mrw::model::Position::RIGHT_a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403"/>
+<keyword name="right" id="mrw::ctrl::RegularSwitchController::Status::right_abf63160eedfa663a3331e1939f83838c" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abf63160eedfa663a3331e1939f83838c"/>
 <keyword name="right_bended" id="mrw::ctrl::BaseSwitchController::Status::right_bended_a935a90253d7b2348f3f952dfb87a1692" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
 <keyword name="Route(const bool dir, const SectionState wanted_state, RailPart *first, QObject *parent=nullptr)" id="mrw::model::Route::Route_a6e0998fdf14d28e379f0fc512584b79a" ref="d7/dfb/classmrw_1_1model_1_1Route.html#a6e0998fdf14d28e379f0fc512584b79a"/>
 <keyword name="save()" id="mrw::model::ModelRepository::save_a3a9e5cc0e4191375f6e40ac963dc2a76" ref="dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a3a9e5cc0e4191375f6e40ac963dc2a76"/>
 <keyword name="SCALE" id="mrw::ui::BaseWidget::SCALE_acce76f98bcbb4ffe507dd16fb0cbcee2" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
 <keyword name="SCTimer(QObject *parent, sc::timer::TimedInterface *statemachine, const sc::eventid id)" id="mrw::statechart::SCTimer::SCTimer_ab1f607ecc377673bb5d358ca6e886d74" ref="d2/d97/classmrw_1_1statechart_1_1SCTimer.html#ab1f607ecc377673bb5d358ca6e886d74"/>
 <keyword name="SCTimer()=delete" id="mrw::statechart::SCTimer::SCTimer_a83178438369075295ce5562f1b3cfd67" ref="d2/d97/classmrw_1_1statechart_1_1SCTimer.html#a83178438369075295ce5562f1b3cfd67"/>
+<keyword name="section() const" id="mrw::model::AssemblyPart::section_a34d97dfce124fedb32235ffede0b4ecc" ref="d5/d26/classmrw_1_1model_1_1AssemblyPart.html#a34d97dfce124fedb32235ffede0b4ecc"/>
+<keyword name="section(const size_t region_idx, const size_t section_idx) const" id="mrw::model::ModelRailway::section_abcf1f0f3d79ec0a26bd6131be21513bd" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#abcf1f0f3d79ec0a26bd6131be21513bd"/>
+<keyword name="section(const size_t index) const" id="mrw::model::Region::section_a7c4842505252d2ae314fa4d656f130aa" ref="d4/d3e/classmrw_1_1model_1_1Region.html#a7c4842505252d2ae314fa4d656f130aa"/>
 <keyword name="Section" id="mrw::model::AbstractSwitch::Section_a0bd6fc422149e1c8416770631b28d40c" ref="df/db7/classmrw_1_1model_1_1AbstractSwitch.html#a0bd6fc422149e1c8416770631b28d40c"/>
 <keyword name="Section" id="mrw::model::AssemblyPart::Section_a0bd6fc422149e1c8416770631b28d40c" ref="d5/d26/classmrw_1_1model_1_1AssemblyPart.html#a0bd6fc422149e1c8416770631b28d40c"/>
 <keyword name="Section" id="mrw::model::LightSignal::Section_a0bd6fc422149e1c8416770631b28d40c" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a0bd6fc422149e1c8416770631b28d40c"/>
 <keyword name="Section" id="mrw::model::ModelRailway::Section_a0bd6fc422149e1c8416770631b28d40c" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a0bd6fc422149e1c8416770631b28d40c"/>
 <keyword name="Section(ModelRailway *model_railway, Region *region, const QDomElement &amp;element)" id="mrw::model::Section::Section_af39e5409a3199793119896b8bf971378" ref="de/de1/classmrw_1_1model_1_1Section.html#af39e5409a3199793119896b8bf971378"/>
-<keyword name="section() const" id="mrw::model::AssemblyPart::section_a34d97dfce124fedb32235ffede0b4ecc" ref="d5/d26/classmrw_1_1model_1_1AssemblyPart.html#a34d97dfce124fedb32235ffede0b4ecc"/>
-<keyword name="section(const size_t region_idx, const size_t section_idx) const" id="mrw::model::ModelRailway::section_abcf1f0f3d79ec0a26bd6131be21513bd" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#abcf1f0f3d79ec0a26bd6131be21513bd"/>
-<keyword name="section(const size_t index) const" id="mrw::model::Region::section_a7c4842505252d2ae314fa4d656f130aa" ref="d4/d3e/classmrw_1_1model_1_1Region.html#a7c4842505252d2ae314fa4d656f130aa"/>
 <keyword name="section_color" id="mrw::ui::DoubleCrossSwitchWidget::Status::section_color_aec23017cfc1ab4b38b0295f1e2d40304" ref="d2/d06/structmrw_1_1ui_1_1DoubleCrossSwitchWidget_1_1Status.html#aec23017cfc1ab4b38b0295f1e2d40304"/>
 <keyword name="section_color" id="mrw::ui::RegularSwitchWidget::Status::section_color_aad3317dcb9f73e6e197dfd26ad872567" ref="d5/d9b/structmrw_1_1ui_1_1RegularSwitchWidget_1_1Status.html#aad3317dcb9f73e6e197dfd26ad872567"/>
 <keyword name="section_color" id="mrw::ui::SignalWidget::Status::section_color_a979ddbbf33dd62632193fae639ad27ed" ref="d7/dc3/structmrw_1_1ui_1_1SignalWidget_1_1Status.html#a979ddbbf33dd62632193fae639ad27ed"/>
@@ -5181,6 +5211,8 @@
 <keyword name="SectionModule(ModelRailway *model_railway, const QDomElement &amp;element)" id="mrw::model::SectionModule::SectionModule_a0ff73261aa8dd87fd244053788039fa9" ref="d8/d13/classmrw_1_1model_1_1SectionModule.html#a0ff73261aa8dd87fd244053788039fa9"/>
 <keyword name="sections" id="mrw::model::Route::sections_a1b5f39cea13bba7cb4f0775b1c04c614" ref="d7/dfb/classmrw_1_1model_1_1Route.html#a1b5f39cea13bba7cb4f0775b1c04c614"/>
 <keyword name="SectionTrack" id="mrw::model::Route::SectionTrack_ae9e39e628c39a8d8f2691b65719ff288" ref="d7/dfb/classmrw_1_1model_1_1Route.html#ae9e39e628c39a8d8f2691b65719ff288"/>
+<keyword name="SelfPointer()=delete" id="mrw::util::SelfPointer::SelfPointer_a353ec5114e50161f65bdbc4bd5b79d16" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a353ec5114e50161f65bdbc4bd5b79d16"/>
+<keyword name="SelfPointer(T *instance)" id="mrw::util::SelfPointer::SelfPointer_a663ee8e40c18e002f80e2e937f279ecf" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a663ee8e40c18e002f80e2e937f279ecf"/>
 <keyword name="setAspect(const mrw::can::SignalAspect new_state)" id="mrw::model::Signal::setAspect_a608d4840e692a6ecc2c85e1f9010cd7f" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a608d4840e692a6ecc2c85e1f9010cd7f"/>
 <keyword name="setBatch(Batch *batch)" id="mrw::util::BatchParticipant::setBatch_a82b3ffd5c32c505ea74adfcb19011694" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a82b3ffd5c32c505ea74adfcb19011694"/>
 <keyword name="setBending(const Bending input)" id="mrw::model::Position::setBending_a9ab4a9e0b04bbde0c2063ce0ff106474" ref="db/d4f/classmrw_1_1model_1_1Position.html#a9ab4a9e0b04bbde0c2063ce0ff106474"/>
@@ -5196,8 +5228,8 @@
 <keyword name="setState(const RailPart *prev, const RailPart *succ) override" id="mrw::model::RegularSwitch::setState_a2508e6096a072be0b0cb853f17d87595" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a2508e6096a072be0b0cb853f17d87595"/>
 <keyword name="setState(const SectionState input)" id="mrw::model::Section::setState_af2eda12a4b684adc9fbfa36440898019" ref="de/de1/classmrw_1_1model_1_1Section.html#af2eda12a4b684adc9fbfa36440898019"/>
 <keyword name="setStationLabel(const QString &amp;label)" id="mrw::ui::StationWidget::setStationLabel_a43ed5e88f4feb27f6ae49099c9c354ee" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a43ed5e88f4feb27f6ae49099c9c354ee"/>
-<keyword name="setTimer(TimedInterface *statemachine, sc::eventid event, sc::integer time_ms, bool isPeriodic)=0" id="sc::timer::TimerServiceInterface::setTimer_a2f433af39cfa97ccc6d8022a7bc047a5" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a2f433af39cfa97ccc6d8022a7bc047a5"/>
-<keyword name="setTimerService(sc::timer::TimerServiceInterface *timerService)=0" id="sc::timer::TimedInterface::setTimerService_a470dc6b4b9c760fb77cca3331d131639" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a470dc6b4b9c760fb77cca3331d131639"/>
+<keyword name="setTimer(std::shared_ptr&lt; TimedInterface &gt; statemachine, sc::eventid event, sc::time time_ms, bool isPeriodic)=0" id="sc::timer::TimerServiceInterface::setTimer_a3b6967b2bbc5a6cfc31b20ed0a180c28" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a3b6967b2bbc5a6cfc31b20ed0a180c28"/>
+<keyword name="setTimerService(std::shared_ptr&lt; sc::timer::TimerServiceInterface &gt; timerService)=0" id="sc::timer::TimedInterface::setTimerService_a4b30aa5a7a42a697e0dc114691f5f01f" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a4b30aa5a7a42a697e0dc114691f5f01f"/>
 <keyword name="Settings(const QString &amp;app_name=&quot;model&quot;, QObject *parent=nullptr)" id="mrw::util::Settings::Settings_a05676ec48e2b4c57c8b3cfea56ccac8e" ref="d6/db2/classmrw_1_1util_1_1Settings.html#a05676ec48e2b4c57c8b3cfea56ccac8e"/>
 <keyword name="SettingsGroup(QSettings *settings, const QString &amp;prefix)" id="mrw::util::SettingsGroup::SettingsGroup_aac49a4a0d15d663378b95d539c464a3d" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#aac49a4a0d15d663378b95d539c464a3d"/>
 <keyword name="setVerbose(const bool activate=false)" id="mrw::ui::BaseWidget::setVerbose_aa85c616e7a66cc8a21f52ff82eb058e0" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
@@ -5240,6 +5272,11 @@
 <keyword name="Singleton&lt; Random &gt;" id="mrw::util::Random::Singleton&lt; Random &gt;_ad4ba9c502cc704e19f4c21eca8f8ab58" ref="d5/d62/classmrw_1_1util_1_1Random.html#ad4ba9c502cc704e19f4c21eca8f8ab58"/>
 <keyword name="SIZE" id="mrw::ui::BaseWidget::SIZE_a2793c577d78bc459d7e251b933545286" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <keyword name="size() const" id="mrw::can::MrwMessage::size_a35c538215c2c2f6282c212013e94082b" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a35c538215c2c2f6282c212013e94082b"/>
+<keyword name="state" id="mrw::model::Route::state_aff5c38cf3fe671e6d38b9358849f79fb" ref="d7/dfb/classmrw_1_1model_1_1Route.html#aff5c38cf3fe671e6d38b9358849f79fb"/>
+<keyword name="state" id="mrw::ctrl::DoubleCrossSwitchController::Status::state_a17352d772aee9749100511405c2f81c3" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a17352d772aee9749100511405c2f81c3"/>
+<keyword name="state() const" id="mrw::model::DoubleCrossSwitch::state_a2eb5417b0f738a3b58a0d4fdda2b6af0" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a2eb5417b0f738a3b58a0d4fdda2b6af0"/>
+<keyword name="state() const" id="mrw::model::RegularSwitch::state_a189a371e0b760a5e0ee5ee0521dc868c" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a189a371e0b760a5e0ee5ee0521dc868c"/>
+<keyword name="state() const" id="mrw::model::Section::state_a4a9045cd2a143e267e4e6947ee1afb2a" ref="de/de1/classmrw_1_1model_1_1Section.html#a4a9045cd2a143e267e4e6947ee1afb2a"/>
 <keyword name="State" id="mrw::model::DoubleCrossSwitch::State_a1a462292eecb5d40e19aec3af07c93e1" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1"/>
 <keyword name="AC" id="mrw::model::DoubleCrossSwitch::AC_a1a462292eecb5d40e19aec3af07c93e1a4144e097d2fa7a491cec2a7a4322f2bc" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1a4144e097d2fa7a491cec2a7a4322f2bc"/>
 <keyword name="AD" id="mrw::model::DoubleCrossSwitch::AD_a1a462292eecb5d40e19aec3af07c93e1ae182ebbc166d73366e7986813a7fc5f1" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1ae182ebbc166d73366e7986813a7fc5f1"/>
@@ -5250,11 +5287,6 @@
 <keyword name="AB" id="mrw::model::RegularSwitch::AB_a340b068f7e7d7340ecf8a8c8c9e89dd2ab86fc6b051f63d73de262d4c34e3a0a9" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a340b068f7e7d7340ecf8a8c8c9e89dd2ab86fc6b051f63d73de262d4c34e3a0a9"/>
 <keyword name="AC" id="mrw::model::RegularSwitch::AC_a340b068f7e7d7340ecf8a8c8c9e89dd2a4144e097d2fa7a491cec2a7a4322f2bc" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a340b068f7e7d7340ecf8a8c8c9e89dd2a4144e097d2fa7a491cec2a7a4322f2bc"/>
 <keyword name="FAIL" id="mrw::model::RegularSwitch::FAIL_a340b068f7e7d7340ecf8a8c8c9e89dd2ac2759effffc94bb9acc71d69fe3e8a1f" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a340b068f7e7d7340ecf8a8c8c9e89dd2ac2759effffc94bb9acc71d69fe3e8a1f"/>
-<keyword name="state" id="mrw::model::Route::state_aff5c38cf3fe671e6d38b9358849f79fb" ref="d7/dfb/classmrw_1_1model_1_1Route.html#aff5c38cf3fe671e6d38b9358849f79fb"/>
-<keyword name="state" id="mrw::ctrl::DoubleCrossSwitchController::Status::state_a17352d772aee9749100511405c2f81c3" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a17352d772aee9749100511405c2f81c3"/>
-<keyword name="state() const" id="mrw::model::DoubleCrossSwitch::state_a2eb5417b0f738a3b58a0d4fdda2b6af0" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a2eb5417b0f738a3b58a0d4fdda2b6af0"/>
-<keyword name="state() const" id="mrw::model::RegularSwitch::state_a189a371e0b760a5e0ee5ee0521dc868c" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a189a371e0b760a5e0ee5ee0521dc868c"/>
-<keyword name="state() const" id="mrw::model::Section::state_a4a9045cd2a143e267e4e6947ee1afb2a" ref="de/de1/classmrw_1_1model_1_1Section.html#a4a9045cd2a143e267e4e6947ee1afb2a"/>
 <keyword name="StationWidget(QWidget *parent=nullptr)" id="mrw::ui::StationWidget::StationWidget_aa721680eda8feca45a1a3bbe7d83b86a" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#aa721680eda8feca45a1a3bbe7d83b86a"/>
 <keyword name="statistics() const" id="mrw::model::ModelRailway::statistics_aca7ca49e4af55c3a0f68a236e440f11d" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#aca7ca49e4af55c3a0f68a236e440f11d"/>
 <keyword name="status(BaseController::Status &amp;status) const" id="mrw::ctrl::BaseController::status_a856c0a9289054c71f6d0212bc3007efe" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a856c0a9289054c71f6d0212bc3007efe"/>
@@ -5273,11 +5305,11 @@
 <keyword name="switchState() const =0" id="mrw::model::AbstractSwitch::switchState_a6a8e0c47f55c2b0c0c50cde6180fa3ca" ref="df/db7/classmrw_1_1model_1_1AbstractSwitch.html#a6a8e0c47f55c2b0c0c50cde6180fa3ca"/>
 <keyword name="switchState() const override" id="mrw::model::DoubleCrossSwitch::switchState_ac642a29f2aa8d6c67089991e74f6d4c7" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#ac642a29f2aa8d6c67089991e74f6d4c7"/>
 <keyword name="switchState() const override" id="mrw::model::RegularSwitch::switchState_af9ca23ee3308ef389b6f261f178d3a61" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#af9ca23ee3308ef389b6f261f178d3a61"/>
+<keyword name="symbol() const" id="mrw::model::Signal::symbol_a7875d1b1b53600b1b2de9609f80a0b91" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a7875d1b1b53600b1b2de9609f80a0b91"/>
 <keyword name="Symbol" id="mrw::model::Signal::Symbol_a6d51b86199063962daedf9c4b861bc85" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85"/>
 <keyword name="OFF" id="mrw::model::Signal::OFF_a6d51b86199063962daedf9c4b861bc85a8dfa9d2f93f739bac113fffcce280ffc" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85a8dfa9d2f93f739bac113fffcce280ffc"/>
 <keyword name="STOP" id="mrw::model::Signal::STOP_a6d51b86199063962daedf9c4b861bc85af77fb740fdc98f4e45c09f3330be9785" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85af77fb740fdc98f4e45c09f3330be9785"/>
 <keyword name="GO" id="mrw::model::Signal::GO_a6d51b86199063962daedf9c4b861bc85a446b70412175df5ccdeb216bad09f66b" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85a446b70412175df5ccdeb216bad09f66b"/>
-<keyword name="symbol() const" id="mrw::model::Signal::symbol_a7875d1b1b53600b1b2de9609f80a0b91" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a7875d1b1b53600b1b2de9609f80a0b91"/>
 <keyword name="TermHandler()" id="mrw::util::TermHandler::TermHandler_afcf13d27620bb60da2447f77fe52b632" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#afcf13d27620bb60da2447f77fe52b632"/>
 <keyword name="TermHandler(const std::initializer_list&lt; int &gt; &amp;quit_signals)" id="mrw::util::TermHandler::TermHandler_a2616c0436b27b5e414c92d5603e72fc5" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a2616c0436b27b5e414c92d5603e72fc5"/>
 <keyword name="threshold() const" id="mrw::model::Light::threshold_af3ab18d306698af87c9d18ac614998c5" ref="d0/d3c/classmrw_1_1model_1_1Light.html#af3ab18d306698af87c9d18ac614998c5"/>
@@ -5303,7 +5335,7 @@
 <keyword name="unitNo() const" id="mrw::can::MrwMessage::unitNo_a88446dfe8e762681477a9b3a32926b9c" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a88446dfe8e762681477a9b3a32926b9c"/>
 <keyword name="UNLOCKED" id="mrw::model::Device::UNLOCKED_a5aeac6a51c26164ebb6964d807d5c3a4a298a2da567ae581f8886ef8d533107f4" ref="d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4a298a2da567ae581f8886ef8d533107f4"/>
 <keyword name="unregisterLogger(LoggerBase *logger)" id="mrw::log::LoggerService::unregisterLogger_a54b982f05b8b31b9c19dbb7852465f41" ref="d4/dc7/classmrw_1_1log_1_1LoggerService.html#a54b982f05b8b31b9c19dbb7852465f41"/>
-<keyword name="unsetTimer(TimedInterface *statemachine, sc::eventid event)=0" id="sc::timer::TimerServiceInterface::unsetTimer_aa4d9cdfc29d987c826d10285706605fc" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#aa4d9cdfc29d987c826d10285706605fc"/>
+<keyword name="unsetTimer(std::shared_ptr&lt; TimedInterface &gt; statemachine, sc::eventid event)=0" id="sc::timer::TimerServiceInterface::unsetTimer_a43f25c75a536b85d7f0d0b2196c7d1b6" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a43f25c75a536b85d7f0d0b2196c7d1b6"/>
 <keyword name="update()" id="mrw::ctrl::BaseController::update_ab260bbe7258e2143720d0e6f04901d5b" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
 <keyword name="usedPins() const" id="mrw::model::LightSignal::usedPins_a1f156d07a79de8046523dc679995f512" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a1f156d07a79de8046523dc679995f512"/>
 <keyword name="USER_ROLE" id="mrw::ui::ControllerWidget::USER_ROLE_a2225f20d29211ac557126720ce707dbb" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a2225f20d29211ac557126720ce707dbb"/>
@@ -5558,6 +5590,7 @@
 <keyword name="SwitchState" id="mrw::can::SwitchState_a6adb46251a933e34bb0c92abfbf60c5a" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5a"/>
 <keyword name="SWITCH_STATE_LEFT" id="mrw::can::SWITCH_STATE_LEFT_a6adb46251a933e34bb0c92abfbf60c5aac9df9830a850f61d973986d34283d129" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aac9df9830a850f61d973986d34283d129"/>
 <keyword name="SWITCH_STATE_RIGHT" id="mrw::can::SWITCH_STATE_RIGHT_a6adb46251a933e34bb0c92abfbf60c5aae4237e0ef4b0e22d41a9477916c5e288" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aae4237e0ef4b0e22d41a9477916c5e288"/>
+<keyword name="time" id="sc::time_a1bc542877409477b96abd9b10ac01a4c" ref="db/d03/namespacesc.html#a1bc542877409477b96abd9b10ac01a4c"/>
 <keyword name="TOUR" id="mrw::model::TOUR_a4721e870d828545c980b38205c304c8ea05d6ec96f71ecfb8bf49a17335774525" ref="d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8ea05d6ec96f71ecfb8bf49a17335774525"/>
 <keyword name="UnitNo" id="mrw::can::UnitNo_aadc3657d376a3c081b9b0c05feafbce7" ref="d9/d9b/namespacemrw_1_1can.html#aadc3657d376a3c081b9b0c05feafbce7"/>
 <keyword name="ushort" id="sc::ushort_a6fd8c6bf037ef38d61541e1d27ddf532" ref="db/d03/namespacesc.html#a6fd8c6bf037ef38d61541e1d27ddf532"/>
@@ -5704,6 +5737,7 @@
 <file>d4/de7/classmrw_1_1model_1_1AbstractSwitch-members.html</file>
 <file>d4/df2/classmrw_1_1util_1_1Random-members.html</file>
 <file>d4/dfa/classmrw_1_1model_1_1Section-members.html</file>
+<file>d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html</file>
 <file>d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html</file>
 <file>d5/d19/classmrw_1_1model_1_1Section__inherit__graph.png</file>
 <file>d5/d22/classmrw_1_1model_1_1MultiplexConnection-members.html</file>
@@ -5711,6 +5745,7 @@
 <file>d5/d26/classmrw_1_1model_1_1AssemblyPart.html</file>
 <file>d5/d3b/classmrw_1_1model_1_1RegularSwitch.html</file>
 <file>d5/d3e/classsc_1_1timer_1_1TimedInterface-members.html</file>
+<file>d5/d57/classmrw_1_1statechart_1_1QtStatechart__inherit__graph.png</file>
 <file>d5/d5d/classmrw_1_1util_1_1Properties.html</file>
 <file>d5/d62/classmrw_1_1util_1_1Random.html</file>
 <file>d5/d7d/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status-members.html</file>
@@ -5756,6 +5791,7 @@
 <file>d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html</file>
 <file>d8/d2c/classmrw_1_1model_1_1Device.html</file>
 <file>d8/d34/classmrw_1_1model_1_1Light__inherit__graph.png</file>
+<file>d8/d46/classmrw_1_1util_1_1SelfPointer-members.html</file>
 <file>d8/d73/classmrw_1_1ui_1_1ClockWidget.html</file>
 <file>d8/d91/namespacemrw_1_1log.html</file>
 <file>d8/da9/classmrw_1_1ui_1_1OpModeWidget__inherit__graph.png</file>
@@ -5804,6 +5840,7 @@
 <file>db/d4b/classmrw_1_1log_1_1LoggerService__inherit__graph.png</file>
 <file>db/d4f/classmrw_1_1model_1_1Position.html</file>
 <file>db/d54/classmrw_1_1statechart_1_1TimerService__inherit__graph.png</file>
+<file>db/d5c/classmrw_1_1util_1_1SelfPointer.html</file>
 <file>db/d62/classmrw_1_1model_1_1SectionModule__inherit__graph.png</file>
 <file>db/d6a/classmrw_1_1ui_1_1DoubleCrossSwitchWidget__inherit__graph.png</file>
 <file>db/d6f/classmrw_1_1model_1_1Position-members.html</file>
@@ -5814,6 +5851,7 @@
 <file>db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html</file>
 <file>db/d9c/classmrw_1_1model_1_1Signal.html</file>
 <file>db/db5/classmrw_1_1log_1_1UnifiedLogger-members.html</file>
+<file>db/dc7/classmrw_1_1util_1_1SelfPointer__inherit__graph.png</file>
 <file>db/dd3/classmrw_1_1model_1_1Rail-members.html</file>
 <file>db/df2/classsc_1_1timer_1_1TimerServiceInterface-members.html</file>
 <file>dc/d1a/classmrw_1_1model_1_1SwitchModule.html</file>
@@ -5836,6 +5874,7 @@
 <file>dc/de7/classmrw_1_1model_1_1RailInfo-members.html</file>
 <file>dc/df4/structmrw_1_1model_1_1MrwStatistic.html</file>
 <file>dd/d0c/classmrw_1_1model_1_1Signal__inherit__graph.png</file>
+<file>dd/d11/classmrw_1_1statechart_1_1QtStatechart-members.html</file>
 <file>dd/d18/classmrw_1_1model_1_1Module__inherit__graph.png</file>
 <file>dd/d28/classmrw_1_1model_1_1ProfileLight.html</file>
 <file>dd/d34/classmrw_1_1log_1_1UnifiedLogger__inherit__graph.png</file>
@@ -5892,6 +5931,7 @@
 <file>dir_9381a7bbd03577d6d8720c7f35c94ffa.html</file>
 <file>doxygen.css</file>
 <file>doxygen.svg</file>
+<file>doxygen_crawl.html</file>
 <file>dynsections.js</file>
 <file>functions.html</file>
 <file>functions_b.html</file>
@@ -5916,6 +5956,7 @@
 <file>functions_func_n.html</file>
 <file>functions_func_o.html</file>
 <file>functions_func_p.html</file>
+<file>functions_func_q.html</file>
 <file>functions_func_r.html</file>
 <file>functions_func_s.html</file>
 <file>functions_func_t.html</file>
@@ -5966,6 +6007,7 @@
 <file>inherit_graph_20.png</file>
 <file>inherit_graph_21.png</file>
 <file>inherit_graph_22.png</file>
+<file>inherit_graph_23.png</file>
 <file>inherit_graph_3.png</file>
 <file>inherit_graph_4.png</file>
 <file>inherit_graph_5.png</file>
@@ -6032,6 +6074,7 @@
 <file>search/classes_b.js</file>
 <file>search/classes_c.js</file>
 <file>search/classes_d.js</file>
+<file>search/classes_e.js</file>
 <file>search/close.svg</file>
 <file>search/enums_0.js</file>
 <file>search/enums_1.js</file>
@@ -6062,6 +6105,7 @@
 <file>search/functions_14.js</file>
 <file>search/functions_15.js</file>
 <file>search/functions_16.js</file>
+<file>search/functions_17.js</file>
 <file>search/functions_2.js</file>
 <file>search/functions_3.js</file>
 <file>search/functions_4.js</file>
@@ -6106,6 +6150,7 @@
 <file>search/typedefs_5.js</file>
 <file>search/typedefs_6.js</file>
 <file>search/typedefs_7.js</file>
+<file>search/typedefs_8.js</file>
 <file>search/variables_0.js</file>
 <file>search/variables_1.js</file>
 <file>search/variables_10.js</file>

@@ -1,35 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion." alt="" coords="53,5,162,31"/>
-<area shape="rect" id="Node000001" href="$d6/d8d/classmrw_1_1util_1_1GlobalBatch.html" title="This singleton class provides a global Batch for fallback purposes." alt="" coords="281,41,428,67"/>
-<area shape="poly" id="edge42_Node000000_Node000001" title=" " alt="" coords="178,26,281,41,280,46,177,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="73,140,142,166"/>
-<area shape="poly" id="edge53_Node000002_Node000001" title=" " alt="" coords="154,131,208,105,232,90,257,76,288,65,289,70,259,81,235,94,211,110,157,136"/>
-<area shape="rect" id="Node000003" href="$d9/d7e/classmrw_1_1can_1_1MrwBusService.html" title="This class connects to the CAN bus for input and output processing." alt="" coords="269,91,440,116"/>
-<area shape="poly" id="edge43_Node000002_Node000003" title=" " alt="" coords="157,140,286,114,287,120,158,146"/>
-<area shape="rect" id="Node000004" href="$d8/db5/classmrw_1_1ctrl_1_1BaseController.html" title="This controller base class unifies the interface for all widget controller classes." alt="" coords="274,140,435,166"/>
-<area shape="poly" id="edge44_Node000002_Node000004" title=" " alt="" coords="158,150,273,150,273,156,158,156"/>
-<area shape="rect" id="Node000010" href="$d7/dfb/classmrw_1_1model_1_1Route.html" title="This class represents a track of interconnected RailPart elements for driving a train." alt="" coords="291,189,418,215"/>
-<area shape="poly" id="edge50_Node000002_Node000010" title=" " alt="" coords="158,160,291,187,290,192,157,165"/>
-<area shape="rect" id="Node000011" href="$dd/dbf/classmrw_1_1statechart_1_1TimerService.html" title="This class simply implements an example statemachine for testing the C++ timer service." alt="" coords="258,239,451,264"/>
-<area shape="poly" id="edge51_Node000002_Node000011" title=" " alt="" coords="158,157,185,164,211,176,227,188,236,201,245,214,259,225,283,236,280,241,256,230,241,217,231,204,223,192,208,180,183,169,157,162"/>
-<area shape="rect" id="Node000014" href="$db/d8f/classmrw_1_1util_1_1ClockService.html" title="This singleton class provides a regular clock service at the clocks of 1 Hz, 2 Hz,..." alt="" coords="278,300,431,326"/>
-<area shape="poly" id="edge52_Node000002_Node000014" title=" " alt="" coords="158,154,186,162,211,176,223,188,231,201,237,226,243,251,249,263,259,275,277,288,298,297,295,302,275,292,256,279,245,266,238,253,232,227,226,203,219,191,208,180,184,166,156,159"/>
-<area shape="rect" id="Node000005" href="$df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html" title="This class provides virtual pure methods which are common to the RegularSwitchController and the Doub..." alt="" coords="499,91,700,116"/>
-<area shape="poly" id="edge45_Node000004_Node000005" title=" " alt="" coords="436,134,532,114,533,120,437,139"/>
-<area shape="rect" id="Node000008" href="$d3/d59/classmrw_1_1ctrl_1_1RailController.html" title="This class provides the logic for a simple rail." alt="" coords="523,140,676,166"/>
-<area shape="poly" id="edge48_Node000004_Node000008" title=" " alt="" coords="451,150,523,150,523,156,451,156"/>
-<area shape="rect" id="Node000009" href="$dd/dfc/classmrw_1_1ctrl_1_1SignalController.html" title="This class provides the logic for a group of signals inside a Section orientated in the same counting..." alt="" coords="516,189,683,215"/>
-<area shape="poly" id="edge49_Node000004_Node000009" title=" " alt="" coords="437,167,533,186,532,191,436,172"/>
-<area shape="rect" id="Node000006" href="$d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html" title="This class provides the logic for a double cross switch." alt="" coords="748,51,939,92"/>
-<area shape="poly" id="edge46_Node000005_Node000006" title=" " alt="" coords="716,86,747,81,748,87,716,91"/>
-<area shape="rect" id="Node000007" href="$de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html" title="This class provides the logic for a simple regular switch." alt="" coords="763,117,924,157"/>
-<area shape="poly" id="edge47_Node000005_Node000007" title=" " alt="" coords="714,116,763,123,763,129,713,122"/>
-<area shape="rect" id="Node000015" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="43,305,172,345"/>
-<area shape="poly" id="edge54_Node000015_Node000014" title=" " alt="" coords="187,318,278,314,278,319,188,324"/>
-<area shape="rect" id="Node000016" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="43,55,172,96"/>
-<area shape="poly" id="edge55_Node000016_Node000001" title=" " alt="" coords="187,66,281,58,281,63,188,71"/>
-<area shape="rect" id="Node000012" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="43,190,172,231"/>
-<area shape="poly" id="edge56_Node000012_Node000011" title=" " alt="" coords="188,221,274,235,273,241,187,226"/>
-<area shape="rect" id="Node000013" href="$df/d18/classsc_1_1timer_1_1TimerServiceInterface.html" title=" " alt="" coords="5,255,210,280"/>
-<area shape="poly" id="edge57_Node000013_Node000011" title=" " alt="" coords="225,257,257,255,258,260,226,263"/>
+<area shape="rect" id="Node000000" href="$d9/d4f/classmrw_1_1util_1_1BatchParticipant.html" title="This class acts as a job registrand to a Batch processing registry." alt="" coords="5,5,177,31"/>
 </map>
