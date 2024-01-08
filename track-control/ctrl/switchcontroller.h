@@ -9,8 +9,10 @@
 #define MRW_CTRL_SWITCHCONTROLLER_H
 
 #include <util/batchparticipant.h>
+#include <util/self.h>
 #include <ctrl/railpartinfo.h>
 #include <ctrl/controllerregistrand.h>
+#include <statecharts/timerservice.h>
 #include <statecharts/SwitchStatechart.h>
 
 namespace mrw::ctrl
@@ -19,10 +21,11 @@ namespace mrw::ctrl
 		public RailPartInfo,
 		public ControllerRegistrand,
 		public mrw::util::BatchParticipant,
+		public mrw::util::SelfPointer<mrw::statechart::SwitchStatechart::OperationCallback>,
 		public mrw::statechart::SwitchStatechart::OperationCallback
 	{
 	protected:
-		mrw::statechart::SwitchStatechart   statechart;
+		mrw::statechart::QtStatechart<mrw::statechart::SwitchStatechart>  statechart;
 
 	public:
 		SwitchController();

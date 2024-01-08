@@ -14,11 +14,13 @@
 #include <QListWidgetItem>
 #include <QLabel>
 
-#include <statecharts/OperatingModeStatechart.h>
+#include <util/self.h>
 #include <model/modelrepository.h>
 #include <model/rail.h>
 #include <model/route.h>
 #include <ctrl/basecontroller.h>
+#include <statecharts/timerservice.h>
+#include <statecharts/OperatingModeStatechart.h>
 
 #include "regionform.h"
 #include "ui/sectionlistwidget.h"
@@ -35,6 +37,7 @@ class ControlledRoute;
 
 class MainWindow :
 	public QMainWindow,
+	public mrw::util::SelfPointer<mrw::statechart::OperatingModeStatechart::OperationCallback>,
 	public mrw::statechart::OperatingModeStatechart::OperationCallback
 {
 	Q_OBJECT
@@ -124,7 +127,8 @@ private:
 	Ui::MainWindow               *              ui;
 	QLabel                   *                  status_label = nullptr;
 	mrw::model::ModelRepository        &        repo;
-	mrw::statechart::OperatingModeStatechart    statechart;
+
+	mrw::statechart::QtStatechart<mrw::statechart::OperatingModeStatechart>    statechart;
 };
 
 #endif

@@ -11,6 +11,7 @@
 #include "ctrl/signalproxy.h"
 #include "ctrl/signalcontrollerproxy.h"
 
+using namespace mrw::util;
 using namespace mrw::statechart;
 using namespace mrw::can;
 using namespace mrw::model;
@@ -24,10 +25,12 @@ using Symbol = Signal::Symbol;
 **                                                                      **
 *************************************************************************/
 
-SignalProxy::SignalProxy() : SignalStatechart(nullptr)
+SignalProxy::SignalProxy() :
+	SignalStatechart(nullptr),
+	SelfPointer<SignalStatechart::OperationCallback>(this)
 {
-	setTimerService(&TimerService::instance());
-	setOperationCallback(this);
+	setTimerService(TimerService::instance());
+	setOperationCallback(*this);
 
 	Q_ASSERT(check());
 }
@@ -139,6 +142,10 @@ bool SignalProxy::setAspect(const SignalAspect aspect)
 **                                                                      **
 *************************************************************************/
 
+MainProxy::MainProxy() : SelfPointer<MainProxy>(this)
+{
+}
+
 bool MainProxy::prepare()
 {
 	__METHOD__;
@@ -175,6 +182,10 @@ void MainProxy::setCurveCount(const size_t count)
 **       Signal proxy for distant                                       **
 **                                                                      **
 *************************************************************************/
+
+DistantProxy::DistantProxy() : SelfPointer<DistantProxy>(this)
+{
+}
 
 void DistantProxy::start(Signal * input, Signal * combined)
 {
@@ -242,6 +253,10 @@ void DistantProxy::setMainController(SignalControllerProxy * proxy)
 **       Signal proxy for shunting                                      **
 **                                                                      **
 *************************************************************************/
+
+ShuntProxy::ShuntProxy() : SelfPointer<ShuntProxy>(this)
+{
+}
 
 void ShuntProxy::start(Signal * input, Signal * combined)
 {

@@ -12,6 +12,7 @@
 #include <vector>
 #include <unordered_set>
 
+#include <util/self.h>
 #include <can/mrwbusservice.h>
 #include <statecharts/UpdateStatechart.h>
 
@@ -25,6 +26,7 @@
  */
 class UpdateService :
 	public mrw::can::MrwBusService,
+	public mrw::util::SelfPointer<mrw::statechart::UpdateStatechart::OperationCallback>,
 	public mrw::statechart::UpdateStatechart::OperationCallback
 {
 	Q_OBJECT

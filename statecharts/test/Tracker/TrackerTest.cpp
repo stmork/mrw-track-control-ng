@@ -1,10 +1,12 @@
 /** *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 * */
 #include <string>
+#include <list>
+#include <algorithm>
 #include "gtest/gtest.h"
 #include "TrackerStatechart.h"
 #include "sc_runner_timed.h"
@@ -366,18 +368,37 @@ namespace mrw
 		class TrackerTest : public ::testing::Test
 		{
 		protected:
+			MockDefault defaultMock;
 			virtual void SetUp()
 			{
 				statechart = new mrw::statechart::TrackerStatechart();
+				size_t maximalParallelTimeEvents = (size_t)statechart->getNumberOfParallelTimeEvents();
 				runner = new TimedSctUnitRunner(
-					statechart,
-					true,
-					200
+					maximalParallelTimeEvents
 				);
 				statechart->setTimerService(runner);
+				clearMock = new ClearMock();
+				clearMock->initializeBehavior();
+				firstMock = new FirstMock();
+				firstMock->initializeBehavior();
+				freeMock = new FreeMock();
+				freeMock->initializeBehavior();
+				occupyMock = new OccupyMock();
+				occupyMock->initializeBehavior();
+				validMock = new ValidMock();
+				validMock->initializeBehavior();
+				lastMock = new LastMock();
+				lastMock->initializeBehavior();
+				statechart->setOperationCallback(&defaultMock);
 			}
 			virtual void TearDown()
 			{
+				delete lastMock;
+				delete validMock;
+				delete occupyMock;
+				delete freeMock;
+				delete firstMock;
+				delete clearMock;
 				delete statechart;
 				delete runner;
 			}
@@ -400,25 +421,9 @@ namespace mrw
 
 
 
-
-			clearMock->reset();
-			firstMock->reset();
-			freeMock->reset();
-			occupyMock->reset();
 		}
 		TEST_F(TrackerTest, idle)
 		{
-			clearMock = new ClearMock();
-			clearMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			freeMock = new FreeMock();
-			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			idle();
 		}
 		void receivedFirst()
@@ -429,21 +434,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::TrackerStatechart::State::main_region_Preparing));
 
-
 		}
 		TEST_F(TrackerTest, receivedFirst)
 		{
-			clearMock = new ClearMock();
-			clearMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			freeMock = new FreeMock();
-			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			receivedFirst();
 		}
 		void receivedFurther()
@@ -454,21 +447,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::TrackerStatechart::State::main_region_Preparing));
 
-
 		}
 		TEST_F(TrackerTest, receivedFurther)
 		{
-			clearMock = new ClearMock();
-			clearMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			freeMock = new FreeMock();
-			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			receivedFurther();
 		}
 		void delayValid()
@@ -487,49 +468,13 @@ namespace mrw
 
 			EXPECT_TRUE(firstMock->calledAtLeastOnce());
 
-
-			validMock->reset();
-			lastMock->reset();
-			firstMock->reset();
 		}
 		TEST_F(TrackerTest, delayValid)
 		{
-			validMock = new ValidMock();
-			validMock->initializeBehavior();
-			lastMock = new LastMock();
-			lastMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			clearMock = new ClearMock();
-			clearMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			freeMock = new FreeMock();
-			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			delayValid();
 		}
 		TEST_F(TrackerTest, delayInvalid)
 		{
-			validMock = new ValidMock();
-			validMock->initializeBehavior();
-			clearMock = new ClearMock();
-			clearMock->initializeBehavior();
-			clearMock = new ClearMock();
-			clearMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			freeMock = new FreeMock();
-			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			receivedFurther();
 
 			validMock->setDefaultBehavior(&ValidMock::valid2);
@@ -540,9 +485,6 @@ namespace mrw
 
 			EXPECT_TRUE(clearMock->calledAtLeastOnce());
 
-
-			validMock->reset();
-			clearMock->reset();
 		}
 		void occupyState()
 		{
@@ -554,30 +496,9 @@ namespace mrw
 
 			EXPECT_TRUE(occupyMock->calledAtLeastOnce());
 
-
-			occupyMock->reset();
 		}
 		TEST_F(TrackerTest, occupyState)
 		{
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-			validMock = new ValidMock();
-			validMock->initializeBehavior();
-			lastMock = new LastMock();
-			lastMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			clearMock = new ClearMock();
-			clearMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			freeMock = new FreeMock();
-			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			occupyState();
 		}
 		void freeState()
@@ -590,32 +511,9 @@ namespace mrw
 
 			EXPECT_TRUE(freeMock->calledAtLeastOnce());
 
-
-			freeMock->reset();
 		}
 		TEST_F(TrackerTest, freeState)
 		{
-			freeMock = new FreeMock();
-			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-			validMock = new ValidMock();
-			validMock->initializeBehavior();
-			lastMock = new LastMock();
-			lastMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			clearMock = new ClearMock();
-			clearMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			freeMock = new FreeMock();
-			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			freeState();
 		}
 		void cascade()
@@ -640,65 +538,13 @@ namespace mrw
 
 			EXPECT_TRUE(occupyMock->calledAtLeastOnce());
 
-
-			occupyMock->reset();
 		}
 		TEST_F(TrackerTest, cascade)
 		{
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-			freeMock = new FreeMock();
-			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-			validMock = new ValidMock();
-			validMock->initializeBehavior();
-			lastMock = new LastMock();
-			lastMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			clearMock = new ClearMock();
-			clearMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			freeMock = new FreeMock();
-			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			cascade();
 		}
 		TEST_F(TrackerTest, completed)
 		{
-			lastMock = new LastMock();
-			lastMock->initializeBehavior();
-			clearMock = new ClearMock();
-			clearMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-			freeMock = new FreeMock();
-			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-			validMock = new ValidMock();
-			validMock->initializeBehavior();
-			lastMock = new LastMock();
-			lastMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			clearMock = new ClearMock();
-			clearMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			freeMock = new FreeMock();
-			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			cascade();
 
 			lastMock->setDefaultBehavior(&LastMock::last2);
@@ -709,23 +555,9 @@ namespace mrw
 
 			EXPECT_TRUE(clearMock->calledAtLeastOnce());
 
-
-			lastMock->reset();
-			clearMock->reset();
 		}
 		TEST_F(TrackerTest, doExit)
 		{
-			clearMock = new ClearMock();
-			clearMock->initializeBehavior();
-			firstMock = new FirstMock();
-			firstMock->initializeBehavior();
-			freeMock = new FreeMock();
-			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
-			occupyMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			statechart->enter();
 
 			EXPECT_TRUE(statechart->isActive());
@@ -763,7 +595,6 @@ namespace mrw
 			statechart->exit();
 
 			EXPECT_TRUE(!statechart->isActive());
-
 
 		}
 

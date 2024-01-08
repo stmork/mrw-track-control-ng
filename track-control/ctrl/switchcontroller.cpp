@@ -9,15 +9,15 @@
 #include "ctrl/controllerregistry.h"
 #include "ctrl/switchcontroller.h"
 
+using namespace mrw::util;
 using namespace mrw::can;
 using namespace mrw::statechart;
 using namespace mrw::ctrl;
 
-SwitchController::SwitchController() :
-	statechart(nullptr)
+SwitchController::SwitchController() : SelfPointer<OperationCallback>(this)
 {
-	statechart.setTimerService(&TimerService::instance());
-	statechart.setOperationCallback(this);
+	statechart.setTimerService(TimerService::instance());
+	statechart.setOperationCallback(*this);
 
 	Q_ASSERT(statechart.check());
 	statechart.enter();

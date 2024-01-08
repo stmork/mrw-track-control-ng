@@ -23,7 +23,10 @@ namespace mrw
 #include <deque>
 #include "common/sc_types.h"
 #include "common/sc_statemachine.h"
+#include "common/sc_eventdriven.h"
 #include "common/sc_timer.h"
+#include <memory>
+#include <string.h>
 #include <QObject>
 
 /*! \file
@@ -35,12 +38,12 @@ namespace mrw
 	namespace statechart
 	{
 
-		class OperatingModeStatechart : public QObject, public sc::timer::TimedInterface, public sc::StatemachineInterface
+		class OperatingModeStatechart : public QObject, public sc::timer::TimedInterface, public std::enable_shared_from_this<sc::timer::TimedInterface>, public sc::EventDrivenInterface
 		{
 			Q_OBJECT
 
 		public:
-			OperatingModeStatechart(QObject * parent);
+			explicit OperatingModeStatechart(QObject * parent) noexcept;
 
 			virtual ~OperatingModeStatechart();
 
@@ -64,18 +67,18 @@ namespace mrw
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 11;
-			static const sc::integer scvi_main_region_Exit = 0;
-			static const sc::integer scvi_main_region__final_ = 0;
-			static const sc::integer scvi_main_region_Running = 0;
-			static const sc::integer scvi_main_region_Running_operating_Failed = 0;
-			static const sc::integer scvi_main_region_Running_operating_Prepare_Bus = 0;
-			static const sc::integer scvi_main_region_Running_operating_Init = 0;
-			static const sc::integer scvi_main_region_Running_operating_Operating = 0;
-			static const sc::integer scvi_main_region_Running_operating_Editing = 0;
-			static const sc::integer scvi_main_region_Running_operating_Disable = 0;
-			static const sc::integer scvi_main_region_Manual = 0;
-			static const sc::integer scvi_main_region_Wait = 0;
+			static constexpr const sc::integer numStates {11};
+			static constexpr const sc::integer scvi_main_region_Exit {0};
+			static constexpr const sc::integer scvi_main_region__final_ {0};
+			static constexpr const sc::integer scvi_main_region_Running {0};
+			static constexpr const sc::integer scvi_main_region_Running_operating_Failed {0};
+			static constexpr const sc::integer scvi_main_region_Running_operating_Prepare_Bus {0};
+			static constexpr const sc::integer scvi_main_region_Running_operating_Init {0};
+			static constexpr const sc::integer scvi_main_region_Running_operating_Operating {0};
+			static constexpr const sc::integer scvi_main_region_Running_operating_Editing {0};
+			static constexpr const sc::integer scvi_main_region_Running_operating_Disable {0};
+			static constexpr const sc::integer scvi_main_region_Manual {0};
+			static constexpr const sc::integer scvi_main_region_Wait {0};
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -98,7 +101,7 @@ namespace mrw
 			class EventInstance
 			{
 			public:
-				explicit EventInstance(Event id) : eventId(id) {}
+				explicit  EventInstance(Event id) noexcept : eventId(id) {}
 				virtual ~EventInstance() = default;
 				const Event eventId;
 			};
@@ -106,7 +109,7 @@ namespace mrw
 			class EventInstanceWithValue : public EventInstance
 			{
 			public:
-				explicit EventInstanceWithValue(Event id, T val) :
+				explicit  EventInstanceWithValue(Event id, T val) noexcept :
 					EventInstance(id),
 					value(val)
 				{}
@@ -114,12 +117,9 @@ namespace mrw
 				const T value;
 			};
 
-			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
-			void triggerWithoutEvent();
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
-			static sc::integer getTimeout() ;
-
+			static sc::integer getTimeout()  noexcept;
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
 			{
@@ -140,19 +140,19 @@ namespace mrw
 			};
 
 			/*! Set the working instance of the operation callback interface 'OperationCallback'. */
-			void setOperationCallback(OperationCallback * operationCallback);
+			void setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept;
 			//! Inner class for can interface scope.
 			class Can
 			{
 			public:
-				Can(OperatingModeStatechart * parent);
+				explicit Can(OperatingModeStatechart * parent) noexcept;
+
+
+
+
 
 				/*! Gets the value of the variable 'timeout' that is defined in the interface scope 'can'. */
-				static sc::integer getTimeout() ;
-
-
-
-
+				static sc::integer getTimeout()  noexcept;
 
 
 				//! Inner class for can interface scope operation callbacks.
@@ -169,29 +169,32 @@ namespace mrw
 				};
 
 				/*! Set the working instance of the operation callback interface 'OperationCallback'. */
-				void setOperationCallback(OperationCallback * operationCallback);
+				void setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept;
 
 
 			private:
 				friend class OperatingModeStatechart;
 
-				static const sc::integer timeout;
+				static constexpr const sc::integer timeout {250};
+
 				/*! Indicates event 'connected' of interface scope 'can' is active. */
-				bool connected_raised;
+				bool connected_raised {false};
 
 				OperatingModeStatechart * parent;
 
 
 
-				OperationCallback * ifaceCanOperationCallback;
+				std::shared_ptr<OperationCallback> ifaceCanOperationCallback;
 
 
 			};
 
 			/*! Returns an instance of the interface class 'Can'. */
-			Can * can();
+			Can & can() noexcept;
 
 
+			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
+			void triggerWithoutEvent() override;
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -203,41 +206,41 @@ namespace mrw
 			 * Checks if the state machine is active (until 2.4.1 this method was used for states).
 			 * A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
 			 */
-			bool isActive() const override;
+			bool isActive() const noexcept override;
 
 
 			/*!
 			* Checks if all active states are final.
 			* If there are no active states then the state machine is considered being inactive. In this case this method returns false.
 			*/
-			bool isFinal() const override;
+			bool isFinal() const noexcept override;
 
 			/*!
 			 * Checks if member of the state machine must be set. For example an operation callback.
 			 */
-			bool check() const;
+			bool check() const noexcept;
 
 			/*
 			 * Functions inherited from TimedStatemachineInterface
 			 */
-			void setTimerService(sc::timer::TimerServiceInterface * timerService_) override;
+			void setTimerService(std::shared_ptr<sc::timer::TimerServiceInterface> timerService_) noexcept override;
 
-			sc::timer::TimerServiceInterface * getTimerService() override;
+			std::shared_ptr<sc::timer::TimerServiceInterface> getTimerService() noexcept override;
 
 			void raiseTimeEvent(sc::eventid event) override;
 
-			sc::integer getNumberOfParallelTimeEvents() override;
+			sc::integer getNumberOfParallelTimeEvents() noexcept override;
 
 
 
 			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-			bool isStateActive(State state) const;
+			bool isStateActive(State state) const noexcept;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 2;
+			static const sc::integer timeEventsCount {2};
 
 			//! number of time events that can be active at once.
-			static const sc::integer parallelTimeEventsCount = 1;
+			static const sc::integer parallelTimeEventsCount {1};
 
 
 		public slots:
@@ -301,11 +304,11 @@ namespace mrw
 		protected:
 
 
-			std::deque<EventInstance *> incomingEventQueue;
+			std::deque<std::unique_ptr<EventInstance>> incomingEventQueue;
 
-			EventInstance * getNextEvent();
+			std::unique_ptr<EventInstance> getNextEvent() noexcept;
 
-			void dispatchEvent(EventInstance * event);
+			bool dispatchEvent(std::unique_ptr<EventInstance> event) noexcept;
 
 
 
@@ -313,24 +316,26 @@ namespace mrw
 			OperatingModeStatechart(const OperatingModeStatechart & rhs);
 			OperatingModeStatechart & operator=(const OperatingModeStatechart &);
 
-			static const sc::integer timeout;
+			static constexpr const sc::integer timeout {5000};
+
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-			static const sc::ushort maxOrthogonalStates = 1;
+			static const sc::ushort maxOrthogonalStates {1};
 
-			sc::timer::TimerServiceInterface * timerService;
+			std::shared_ptr<sc::timer::TimerServiceInterface> timerService;
 			bool timeEvents[timeEventsCount];
 
 
 			State stateConfVector[maxOrthogonalStates];
 
 
-			Can ifaceCan;
-			OperationCallback * ifaceOperationCallback;
+			Can ifaceCan {Can{nullptr}};
 
+			std::shared_ptr<OperationCallback> ifaceOperationCallback {nullptr};
 
-			bool isExecuting;
+			bool isExecuting {false};
+
 
 
 			// prototypes of all internal functions
@@ -389,54 +394,41 @@ namespace mrw
 			sc::integer main_region_Running_operating_Disable_react(const sc::integer transitioned_before);
 			sc::integer main_region_Manual_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_react(const sc::integer transitioned_before);
-			void clearInEvents();
+			void clearInEvents() noexcept;
 			void microStep();
 			void runCycle();
 
 
 
-
 			/*! Indicates event 'clear' of default interface scope is active. */
-			bool clear_raised;
+			bool clear_raised {false};
 
 			/*! Indicates event 'started' of default interface scope is active. */
-			bool started_raised;
+			bool started_raised {false};
 
 			/*! Indicates event 'failed' of default interface scope is active. */
-			bool failed_raised;
+			bool failed_raised {false};
 
 			/*! Indicates event 'edit' of default interface scope is active. */
-			bool edit_raised;
+			bool edit_raised {false};
 
 			/*! Indicates event 'operate' of default interface scope is active. */
-			bool operate_raised;
+			bool operate_raised {false};
 
 			/*! Indicates event 'manual' of default interface scope is active. */
-			bool manual_raised;
+			bool manual_raised {false};
 
 			/*! Value of event 'manual' of default interface scope. */
-			bool manual_value;
+			bool manual_value {false};
 
 			/*! Indicates event 'init' of default interface scope is active. */
-			bool init_raised;
+			bool init_raised {false};
 
 			/*! Indicates event 'finalize' of default interface scope is active. */
-			bool finalize_raised;
+			bool finalize_raised {false};
 
 			/*! Indicates event 'completed' of default interface scope is active. */
-			bool completed_raised;
-
-			/*! Value of event 'operating' of default interface scope. */
-			bool operating_value;
-
-			/*! Value of event 'editing' of default interface scope. */
-			bool editing_value;
-
-			/*! Value of event 'quitting' of default interface scope. */
-			bool quitting_value;
-
-			/*! Value of event 'playing' of default interface scope. */
-			bool playing_value;
+			bool completed_raised {false};
 
 
 

@@ -1,10 +1,12 @@
 /** *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 * */
 #include <string>
+#include <list>
+#include <algorithm>
 #include "gtest/gtest.h"
 #include "ConfigStatechart.h"
 #include "sc_runner_timed.h"
@@ -526,18 +528,34 @@ namespace mrw
 		class ConfigTest : public ::testing::Test
 		{
 		protected:
+			MockDefault defaultMock;
 			virtual void SetUp()
 			{
 				statechart = new mrw::statechart::ConfigStatechart();
+				size_t maximalParallelTimeEvents = (size_t)statechart->getNumberOfParallelTimeEvents();
 				runner = new TimedSctUnitRunner(
-					statechart,
-					true,
-					200
+					maximalParallelTimeEvents
 				);
 				statechart->setTimerService(runner);
+				bootingMock = new BootingMock();
+				bootingMock->initializeBehavior();
+				quitMock = new QuitMock();
+				quitMock->initializeBehavior();
+				failMock = new FailMock();
+				failMock->initializeBehavior();
+				configureMock = new ConfigureMock();
+				configureMock->initializeBehavior();
+				hasMoreMock = new HasMoreMock();
+				hasMoreMock->initializeBehavior();
+				statechart->setOperationCallback(&defaultMock);
 			}
 			virtual void TearDown()
 			{
+				delete hasMoreMock;
+				delete configureMock;
+				delete failMock;
+				delete quitMock;
+				delete bootingMock;
 				delete statechart;
 				delete runner;
 			}
@@ -561,47 +579,13 @@ namespace mrw
 
 			hasMoreMock->setHasMoreBehavior(statechart->getIdx(), &HasMoreMock::hasMore1);
 
-
-			bootingMock->reset();
-			quitMock->reset();
-			failMock->reset();
-			configureMock->reset();
-			hasMoreMock->reset();
 		}
 		TEST_F(ConfigTest, doStart)
 		{
-			bootingMock = new BootingMock();
-			bootingMock->initializeBehavior();
-			quitMock = new QuitMock();
-			quitMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			doStart();
 		}
 		TEST_F(ConfigTest, timeoutConnect)
 		{
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			bootingMock = new BootingMock();
-			bootingMock->initializeBehavior();
-			quitMock = new QuitMock();
-			quitMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			doStart();
 
 			runner->proceed_time(statechart->getTimeout());
@@ -610,8 +594,6 @@ namespace mrw
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
-
-			failMock->reset();
 		}
 		void firstController()
 		{
@@ -633,29 +615,9 @@ namespace mrw
 
 			EXPECT_TRUE(configureMock->calledAtLeastOnce());
 
-
-			hasMoreMock->reset();
-			configureMock->reset();
 		}
 		TEST_F(ConfigTest, firstController)
 		{
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			bootingMock = new BootingMock();
-			bootingMock->initializeBehavior();
-			quitMock = new QuitMock();
-			quitMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			firstController();
 		}
 		void secondController()
@@ -678,33 +640,9 @@ namespace mrw
 
 			EXPECT_TRUE(configureMock->calledAtLeastOnce());
 
-
-			hasMoreMock->reset();
-			configureMock->reset();
 		}
 		TEST_F(ConfigTest, secondController)
 		{
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			bootingMock = new BootingMock();
-			bootingMock->initializeBehavior();
-			quitMock = new QuitMock();
-			quitMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			secondController();
 		}
 		void lastController()
@@ -723,37 +661,9 @@ namespace mrw
 
 			EXPECT_TRUE(bootingMock->calledAtLeastOnce());
 
-
-			hasMoreMock->reset();
-			bootingMock->reset();
 		}
 		TEST_F(ConfigTest, lastController)
 		{
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			bootingMock = new BootingMock();
-			bootingMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			bootingMock = new BootingMock();
-			bootingMock->initializeBehavior();
-			quitMock = new QuitMock();
-			quitMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			lastController();
 		}
 		void booted()
@@ -770,41 +680,9 @@ namespace mrw
 
 			EXPECT_FALSE(failMock->calledAtLeastOnce());
 
-
-			quitMock->reset();
-			failMock->reset();
 		}
 		TEST_F(ConfigTest, booted)
 		{
-			quitMock = new QuitMock();
-			quitMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			bootingMock = new BootingMock();
-			bootingMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			bootingMock = new BootingMock();
-			bootingMock->initializeBehavior();
-			quitMock = new QuitMock();
-			quitMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			booted();
 		}
 		void timeoutConfig()
@@ -825,58 +703,13 @@ namespace mrw
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
-
-			quitMock->reset();
-			failMock->reset();
 		}
 		TEST_F(ConfigTest, timeoutConfig)
 		{
-			quitMock = new QuitMock();
-			quitMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			bootingMock = new BootingMock();
-			bootingMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			bootingMock = new BootingMock();
-			bootingMock->initializeBehavior();
-			quitMock = new QuitMock();
-			quitMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			timeoutConfig();
 		}
 		TEST_F(ConfigTest, doQuit)
 		{
-			bootingMock = new BootingMock();
-			bootingMock->initializeBehavior();
-			quitMock = new QuitMock();
-			quitMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			statechart->enter();
 
 			EXPECT_TRUE(statechart->isActive());
@@ -915,39 +748,9 @@ namespace mrw
 
 			EXPECT_TRUE(!statechart->isActive());
 
-
 		}
 		TEST_F(ConfigTest, doFail)
 		{
-			quitMock = new QuitMock();
-			quitMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			bootingMock = new BootingMock();
-			bootingMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			bootingMock = new BootingMock();
-			bootingMock->initializeBehavior();
-			quitMock = new QuitMock();
-			quitMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			configureMock = new ConfigureMock();
-			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
-			hasMoreMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			statechart->enter();
 
 			EXPECT_TRUE(statechart->isActive());
@@ -961,7 +764,6 @@ namespace mrw
 			statechart->exit();
 
 			EXPECT_TRUE(!statechart->isActive());
-
 
 		}
 

@@ -32,7 +32,7 @@ ControlledRoute::ControlledRoute(
 	RailPart      *      first,
 	QObject       *      parent) :
 	Route(dir, wanted_state, first, parent),
-	statechart(nullptr)
+	SelfPointer<OperationCallback>(this)
 {
 	rename();
 	list_item.setData(USER_ROLE, QVariant::fromValue(this));
@@ -58,8 +58,8 @@ ControlledRoute::ControlledRoute(
 		this, &ControlledRoute::dump,
 		Qt::QueuedConnection);
 
-	statechart.setTimerService(&TimerService::instance());
-	statechart.setOperationCallback(this);
+	statechart.setTimerService(TimerService::instance());
+	statechart.setOperationCallback(*this);
 
 	Q_ASSERT(statechart.check());
 	statechart.enter();

@@ -8,6 +8,7 @@
 #ifndef MRW_CTRL_SIGNALPROXY_H
 #define MRW_CTRL_SIGNALPROXY_H
 
+#include <util/self.h>
 #include <model/signal.h>
 #include <statecharts/SignalStatechart.h>
 
@@ -17,6 +18,7 @@ namespace mrw::ctrl
 
 	class SignalProxy :
 		public mrw::statechart::SignalStatechart,
+		public mrw::util::SelfPointer<mrw::statechart::SignalStatechart::OperationCallback>,
 		public mrw::statechart::SignalStatechart::OperationCallback
 	{
 		Q_OBJECT
@@ -54,13 +56,17 @@ namespace mrw::ctrl
 	**                                                                      **
 	*************************************************************************/
 
-	class MainProxy: public SignalProxy
+	class MainProxy :
+		public SignalProxy,
+		public mrw::util::SelfPointer<MainProxy>
 	{
 		Q_OBJECT
 
 		size_t curved = 0;
 
 	public:
+		MainProxy();
+
 		/**
 		 * This method translates a given SignalSymbol (STOP, GO or OFF) into
 		 * the correct real life SignalAspect.
@@ -87,7 +93,9 @@ namespace mrw::ctrl
 	**                                                                      **
 	*************************************************************************/
 
-	class DistantProxy: public SignalProxy
+	class DistantProxy :
+		public SignalProxy,
+		public mrw::util::SelfPointer<DistantProxy>
 	{
 		Q_OBJECT
 
@@ -95,6 +103,8 @@ namespace mrw::ctrl
 		SignalControllerProxy * main_controller = nullptr;
 
 	public:
+		DistantProxy();
+
 		void start(
 			mrw::model::Signal * input,
 			mrw::model::Signal * combined);
@@ -119,13 +129,17 @@ namespace mrw::ctrl
 	**                                                                      **
 	*************************************************************************/
 
-	class ShuntProxy: public SignalProxy
+	class ShuntProxy :
+		public SignalProxy,
+		public mrw::util::SelfPointer<ShuntProxy>
 	{
 		Q_OBJECT
 
 		mrw::model::Signal * main_signal = nullptr;
 
 	public:
+		ShuntProxy();
+
 		void start(
 			mrw::model::Signal * input,
 			mrw::model::Signal * combined);

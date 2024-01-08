@@ -16,27 +16,9 @@ namespace mrw
 	namespace statechart
 	{
 
-		const sc::integer SignalStatechart::timeout = 3500;
-		const sc::integer SignalStatechart::OFF = -1;
-		const sc::integer SignalStatechart::STOP = 0;
-		const sc::integer SignalStatechart::GO = 1;
 
 
-
-		SignalStatechart::SignalStatechart() :
-			symbol(SignalStatechart::STOP),
-			modified(false),
-			timerService(nullptr),
-			ifaceOperationCallback(nullptr),
-			isExecuting(false),
-			turn_raised(false),
-			turn_value(0),
-			queued_raised(false),
-			ok_raised(false),
-			fail_raised(false),
-			clear_raised(false),
-			completed_raised(false),
-			failed_raised(false)
+		SignalStatechart::SignalStatechart() noexcept
 		{
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
 			{
@@ -49,11 +31,17 @@ namespace mrw
 
 		SignalStatechart::~SignalStatechart()
 		{
+			while (!incomingEventQueue.empty())
+			{
+				auto nextEvent{incomingEventQueue.front()};
+				incomingEventQueue.pop_front();
+				delete nextEvent;
+			}
 		}
 
 
 
-		mrw::statechart::SignalStatechart::EventInstance * SignalStatechart::getNextEvent()
+		mrw::statechart::SignalStatechart::EventInstance * SignalStatechart::getNextEvent() noexcept
 		{
 			mrw::statechart::SignalStatechart::EventInstance * nextEvent = 0;
 
@@ -68,21 +56,24 @@ namespace mrw
 		}
 
 
-		void SignalStatechart::dispatchEvent(mrw::statechart::SignalStatechart::EventInstance * event)
+
+		bool SignalStatechart::dispatchEvent(mrw::statechart::SignalStatechart::EventInstance * event) noexcept
 		{
 			if (event == nullptr)
 			{
-				return;
+				return false;
 			}
 
 			switch (event->eventId)
 			{
 			case mrw::statechart::SignalStatechart::Event::turn:
 				{
-					mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer> * e = static_cast<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>*>(event);
+					mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer> * e = static_cast<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer> *>(event);
+
 					if (e != 0)
 					{
-						turn_value = e->value;
+						turn_value
+							= e->value;
 						turn_raised = true;
 					}
 					break;
@@ -115,62 +106,75 @@ namespace mrw
 					break;
 				}
 			default:
-				/* do nothing */
-				break;
+				//pointer got out of scope
+				delete event;
+				return false;
 			}
+			//pointer got out of scope
 			delete event;
+			return true;
 		}
 
 
+		/*! Raises the in event 'turn' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseTurn(sc::integer turn_)
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>(mrw::statechart::SignalStatechart::Event::turn, turn_));
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>(mrw::statechart::SignalStatechart::Event::turn, turn_))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'queued' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseQueued()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::queued));
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::queued))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'ok' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseOk()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::ok));
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::ok))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'fail' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseFail()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::fail));
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::fail))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'clear' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseClear()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::clear));
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::clear))
+			;
 			runCycle();
 		}
 
 
-		bool mrw::statechart::SignalStatechart::isRaisedCompleted()
+		bool mrw::statechart::SignalStatechart::isRaisedCompleted() noexcept
 		{
 			return completed_raised;
 		}
 
 
-		bool mrw::statechart::SignalStatechart::isRaisedFailed()
+		bool mrw::statechart::SignalStatechart::isRaisedFailed() noexcept
 		{
 			return failed_raised;
 		}
 
 
 
-		bool SignalStatechart::isActive() const
+		bool SignalStatechart::isActive() const noexcept
 		{
 			return stateConfVector[0] != mrw::statechart::SignalStatechart::State::NO_STATE;
 		}
@@ -178,12 +182,12 @@ namespace mrw
 		/*
 		 * Always returns 'false' since this state machine can never become final.
 		 */
-		bool SignalStatechart::isFinal() const
+		bool SignalStatechart::isFinal() const noexcept
 		{
 			return false;
 		}
 
-		bool SignalStatechart::check() const
+		bool SignalStatechart::check() const noexcept
 		{
 			if (timerService == nullptr)
 			{
@@ -197,17 +201,17 @@ namespace mrw
 		}
 
 
-		void SignalStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_)
+		void SignalStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_) noexcept
 		{
 			this->timerService = timerService_;
 		}
 
-		sc::timer::TimerServiceInterface * SignalStatechart::getTimerService()
+		sc::timer::TimerServiceInterface * SignalStatechart::getTimerService() noexcept
 		{
 			return timerService;
 		}
 
-		sc::integer SignalStatechart::getNumberOfParallelTimeEvents()
+		sc::integer SignalStatechart::getNumberOfParallelTimeEvents() noexcept
 		{
 			return parallelTimeEventsCount;
 		}
@@ -222,7 +226,7 @@ namespace mrw
 		}
 
 
-		bool SignalStatechart::isStateActive(State state) const
+		bool SignalStatechart::isStateActive(State state) const noexcept
 		{
 			switch (state)
 			{
@@ -260,34 +264,47 @@ namespace mrw
 			}
 		}
 
-		sc::integer SignalStatechart::getTimeout()
+		sc::integer SignalStatechart::getTimeout() noexcept
 		{
-			return timeout;
+			return timeout
+				;
 		}
 
-		sc::integer SignalStatechart::getSymbol() const
+		sc::integer SignalStatechart::getSymbol() const noexcept
 		{
-			return symbol;
+			return symbol
+				;
 		}
 
-		sc::integer SignalStatechart::getOFF()
+		void SignalStatechart::setSymbol(sc::integer symbol_) noexcept
 		{
-			return OFF;
+			this->symbol = symbol_;
+		}
+		sc::integer SignalStatechart::getOFF() noexcept
+		{
+			return OFF
+				;
 		}
 
-		sc::integer SignalStatechart::getSTOP()
+		sc::integer SignalStatechart::getSTOP() noexcept
 		{
-			return STOP;
+			return STOP
+				;
 		}
 
-		sc::integer SignalStatechart::getGO()
+		sc::integer SignalStatechart::getGO() noexcept
 		{
-			return GO;
+			return GO
+				;
 		}
 
-		void SignalStatechart::setOperationCallback(OperationCallback * operationCallback)
+		void SignalStatechart::setOperationCallback(OperationCallback * operationCallback) noexcept
 		{
 			ifaceOperationCallback = operationCallback;
+		}
+		void SignalStatechart::setModified(bool modified_) noexcept
+		{
+			this->modified = modified_;
 		}
 
 // implementations of all internal functions
@@ -295,8 +312,8 @@ namespace mrw
 		void SignalStatechart::enact_main_region_Turning()
 		{
 			/* Entry action for state 'Turning'. */
-			timerService->setTimer(this, 0, SignalStatechart::timeout, false);
-			modified = ifaceOperationCallback->prepare();
+			timerService->setTimer(this, 0, ((sc::time) SignalStatechart::timeout), false);
+			setModified(ifaceOperationCallback->prepare());
 		}
 
 		/* Entry action for state 'Send'. */
@@ -310,7 +327,7 @@ namespace mrw
 		void SignalStatechart::enact_main_region_Fail()
 		{
 			/* Entry action for state 'Fail'. */
-			symbol = SignalStatechart::OFF;
+			setSymbol(SignalStatechart::OFF);
 			ifaceOperationCallback->prepare();
 			ifaceOperationCallback->send();
 			failed_raised = true;
@@ -492,7 +509,7 @@ namespace mrw
 			/* The reactions of state null. */
 			if (ifaceOperationCallback->hasSignal())
 			{
-				symbol = turn_value;
+				setSymbol(turn_value);
 				enseq_main_region_Turning_default();
 			}
 			else
@@ -506,7 +523,7 @@ namespace mrw
 		void SignalStatechart::react_main_region__entry_Default()
 		{
 			/* Default react sequence for initial entry  */
-			symbol = SignalStatechart::STOP;
+			setSymbol(SignalStatechart::STOP);
 			enseq_main_region_Idle_default();
 		}
 
@@ -546,9 +563,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -590,9 +608,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -602,12 +621,10 @@ namespace mrw
 		{
 			/* The reactions of state Pending. */
 			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Turning_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -627,9 +644,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Turning_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -649,21 +667,22 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		void SignalStatechart::clearOutEvents()
+		void SignalStatechart::clearOutEvents() noexcept
 		{
 			completed_raised = false;
 			failed_raised = false;
 		}
 
-		void SignalStatechart::clearInEvents()
+		void SignalStatechart::clearInEvents() noexcept
 		{
 			turn_raised = false;
 			queued_raised = false;
@@ -717,9 +736,8 @@ namespace mrw
 			{
 				microStep();
 				clearInEvents();
-				dispatchEvent(getNextEvent());
 			}
-			while ((((((turn_raised) || (queued_raised)) || (ok_raised)) || (fail_raised)) || (clear_raised)) || (timeEvents[0]));
+			while (dispatchEvent(getNextEvent()));
 			isExecuting = false;
 		}
 

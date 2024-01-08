@@ -16,32 +16,31 @@ namespace mrw
 	namespace statechart
 	{
 
-		const sc::integer SectionStatechart::timeout = 500;
 
 
-
-		SectionStatechart::SectionStatechart(QObject * parent) :
-			QObject(parent),
+		SectionStatechart::SectionStatechart(QObject * parent) noexcept :
 			auto_off(true),
 			auto_unlock(true),
 			occupied(false),
-			timerService(nullptr),
-			ifaceOperationCallback(nullptr),
-			isExecuting(false),
-			stateConfVectorPosition(0),
-			stateConfVectorChanged(false),
 			enable_raised(false),
-			enable_value(false),
+			enable_value
+			(false),
 			disable_raised(false),
 			clear_raised(false),
 			start_raised(false),
 			relaisResponse_raised(false),
 			stateResponse_raised(false),
-			stateResponse_value(false),
+			stateResponse_value
+			(false),
 			failed_raised(false),
 			next_raised(false),
 			unlock_raised(false),
-			local_leave_raised(false)
+			local_leave_raised(false),
+			timerService(nullptr),
+			ifaceOperationCallback(nullptr),
+			isExecuting(false),
+			stateConfVectorPosition(0),
+			stateConfVectorChanged(false)
 		{
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
 			{
@@ -58,18 +57,18 @@ namespace mrw
 
 
 
-		mrw::statechart::SectionStatechart::EventInstance * SectionStatechart::getNextEvent()
+		std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance> SectionStatechart::getNextEvent() noexcept
 		{
-			mrw::statechart::SectionStatechart::EventInstance * nextEvent = 0;
+			std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance> nextEvent = 0;
 
 			if (!internalEventQueue.empty())
 			{
-				nextEvent = internalEventQueue.front();
+				nextEvent = std::move(internalEventQueue.front());
 				internalEventQueue.pop_front();
 			}
 			else if (!incomingEventQueue.empty())
 			{
-				nextEvent = incomingEventQueue.front();
+				nextEvent = std::move(incomingEventQueue.front());
 				incomingEventQueue.pop_front();
 			}
 
@@ -78,21 +77,29 @@ namespace mrw
 		}
 
 
-		void SectionStatechart::dispatchEvent(mrw::statechart::SectionStatechart::EventInstance * event)
+		template<typename EWV, typename EV>
+		std::unique_ptr<EWV> cast_event_pointer_type (std::unique_ptr<EV> && event)
+		{
+			return std::unique_ptr<EWV> {static_cast<EWV *>(event.release())};
+		}
+
+		bool SectionStatechart::dispatchEvent(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance> event) noexcept
 		{
 			if (event == nullptr)
 			{
-				return;
+				return false;
 			}
 
 			switch (event->eventId)
 			{
 			case mrw::statechart::SectionStatechart::Event::enable:
 				{
-					mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> * e = static_cast<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>*>(event);
+					std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> >(std::move(event));
+
 					if (e != 0)
 					{
-						enable_value = e->value;
+						enable_value
+							= e->value;
 						enable_raised = true;
 					}
 					break;
@@ -119,10 +126,12 @@ namespace mrw
 				}
 			case mrw::statechart::SectionStatechart::Event::stateResponse:
 				{
-					mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> * e = static_cast<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>*>(event);
+					std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> >(std::move(event));
+
 					if (e != 0)
 					{
-						stateResponse_value = e->value;
+						stateResponse_value
+							= e->value;
 						stateResponse_raised = true;
 					}
 					break;
@@ -157,84 +166,104 @@ namespace mrw
 					break;
 				}
 			default:
-				/* do nothing */
-				break;
+				//pointer got out of scope
+				return false;
 			}
-			delete event;
+			//pointer got out of scope
+			return true;
 		}
 
 
+		/*! Slot for the in event 'enable' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::enable(bool enable_)
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::enable, enable_));
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>>( new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::enable, enable_)))
+			;
 			runCycle();
 		}
 
 
+		/*! Slot for the in event 'disable' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::disable()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::disable));
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::disable)))
+			;
 			runCycle();
 		}
 
 
+		/*! Slot for the in event 'clear' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::clear()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::clear));
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::clear)))
+			;
 			runCycle();
 		}
 
 
+		/*! Slot for the in event 'start' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::start()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::start));
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::start)))
+			;
 			runCycle();
 		}
 
 
+		/*! Slot for the in event 'relaisResponse' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::relaisResponse()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::relaisResponse));
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::relaisResponse)))
+			;
 			runCycle();
 		}
 
 
+		/*! Slot for the in event 'stateResponse' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::stateResponse(bool stateResponse_)
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::stateResponse, stateResponse_));
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>>( new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::stateResponse, stateResponse_)))
+			;
 			runCycle();
 		}
 
 
+		/*! Slot for the in event 'failed' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::failed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::failed));
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::failed)))
+			;
 			runCycle();
 		}
 
 
+		/*! Slot for the in event 'next' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::next()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::next));
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::next)))
+			;
 			runCycle();
 		}
 
 
+		/*! Slot for the in event 'unlock' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::unlock()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::unlock));
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::unlock)))
+			;
 			runCycle();
 		}
 
 
 		void mrw::statechart::SectionStatechart::local_leave()
 		{
-			internalEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::Internal_local_leave));
+			internalEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::Internal_local_leave)))
+			;
 		}
 
 
 
-		bool SectionStatechart::isActive() const
+		bool SectionStatechart::isActive() const noexcept
 		{
 			return stateConfVector[0] != mrw::statechart::SectionStatechart::State::NO_STATE || stateConfVector[1] != mrw::statechart::SectionStatechart::State::NO_STATE;
 		}
@@ -242,12 +271,12 @@ namespace mrw
 		/*
 		 * Always returns 'false' since this state machine can never become final.
 		 */
-		bool SectionStatechart::isFinal() const
+		bool SectionStatechart::isFinal() const noexcept
 		{
 			return false;
 		}
 
-		bool SectionStatechart::check() const
+		bool SectionStatechart::check() const noexcept
 		{
 			if (timerService == nullptr)
 			{
@@ -261,17 +290,17 @@ namespace mrw
 		}
 
 
-		void SectionStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_)
+		void SectionStatechart::setTimerService(std::shared_ptr<sc::timer::TimerServiceInterface> timerService_) noexcept
 		{
 			this->timerService = timerService_;
 		}
 
-		sc::timer::TimerServiceInterface * SectionStatechart::getTimerService()
+		std::shared_ptr<sc::timer::TimerServiceInterface> SectionStatechart::getTimerService() noexcept
 		{
 			return timerService;
 		}
 
-		sc::integer SectionStatechart::getNumberOfParallelTimeEvents()
+		sc::integer SectionStatechart::getNumberOfParallelTimeEvents() noexcept
 		{
 			return parallelTimeEventsCount;
 		}
@@ -280,13 +309,13 @@ namespace mrw
 		{
 			if (evid < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::SectionStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::SectionStatechart::Event::_te0_main_region_Init_))));
+				incomingEventQueue.push_back(std::unique_ptr< EventInstance>(new EventInstance(static_cast<mrw::statechart::SectionStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::SectionStatechart::Event::_te0_main_region_Init_)))));
 				runCycle();
 			}
 		}
 
 
-		bool SectionStatechart::isStateActive(State state) const
+		bool SectionStatechart::isStateActive(State state) const noexcept
 		{
 			switch (state)
 			{
@@ -429,42 +458,43 @@ namespace mrw
 			}
 		}
 
-		sc::integer SectionStatechart::getTimeout()
+		sc::integer SectionStatechart::getTimeout() noexcept
 		{
-			return timeout;
+			return timeout
+				;
 		}
 
-		bool SectionStatechart::getAuto_off() const
+		bool SectionStatechart::getAuto_off() const noexcept
 		{
-			return auto_off;
+			return auto_off
+				;
 		}
 
-		void SectionStatechart::setAuto_off(bool auto_off_)
+		void SectionStatechart::setAuto_off(bool auto_off_) noexcept
 		{
 			this->auto_off = auto_off_;
 		}
-
-		bool SectionStatechart::getAuto_unlock() const
+		bool SectionStatechart::getAuto_unlock() const noexcept
 		{
-			return auto_unlock;
+			return auto_unlock
+				;
 		}
 
-		void SectionStatechart::setAuto_unlock(bool auto_unlock_)
+		void SectionStatechart::setAuto_unlock(bool auto_unlock_) noexcept
 		{
 			this->auto_unlock = auto_unlock_;
 		}
-
-		bool SectionStatechart::getOccupied() const
+		bool SectionStatechart::getOccupied() const noexcept
 		{
-			return occupied;
+			return occupied
+				;
 		}
 
-		void SectionStatechart::setOccupied(bool occupied_)
+		void SectionStatechart::setOccupied(bool occupied_) noexcept
 		{
 			this->occupied = occupied_;
 		}
-
-		void SectionStatechart::setOperationCallback(OperationCallback * operationCallback)
+		void SectionStatechart::setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept
 		{
 			ifaceOperationCallback = operationCallback;
 		}
@@ -474,7 +504,7 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(this, 0, SectionStatechart::timeout, false);
+			timerService->setTimer(shared_from_this(), 0, ((sc::time) SectionStatechart::timeout), false);
 			emit entered();
 			ifaceOperationCallback->inc();
 		}
@@ -526,7 +556,7 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Operating_Processing_Locked_Route_active_Waiting()
 		{
 			/* Entry action for state 'Waiting'. */
-			timerService->setTimer(this, 1, SectionStatechart::timeout, false);
+			timerService->setTimer(shared_from_this(), 1, ((sc::time) SectionStatechart::timeout), false);
 			ifaceOperationCallback->inc();
 		}
 
@@ -562,7 +592,7 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Operating_Processing_Locked_Occupation_Next_Reached()
 		{
 			/* Entry action for state 'Next Reached'. */
-			if (!occupied)
+			if (!(occupied))
 			{
 				local_leave();
 				emit leave();
@@ -574,7 +604,7 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Operating_Processing_Pending()
 		{
 			/* Entry action for state 'Pending'. */
-			timerService->setTimer(this, 2, SectionStatechart::timeout, false);
+			timerService->setTimer(shared_from_this(), 2, ((sc::time) SectionStatechart::timeout), false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}
@@ -605,7 +635,7 @@ namespace mrw
 		void SectionStatechart::exact_main_region_Init()
 		{
 			/* Exit action for state 'Init'. */
-			timerService->unsetTimer(this, 0);
+			timerService->unsetTimer(shared_from_this(), 0);
 			ifaceOperationCallback->dec();
 		}
 
@@ -620,7 +650,7 @@ namespace mrw
 		void SectionStatechart::exact_main_region_Operating_Processing_Locked_Route_active_Waiting()
 		{
 			/* Exit action for state 'Waiting'. */
-			timerService->unsetTimer(this, 1);
+			timerService->unsetTimer(shared_from_this(), 1);
 			ifaceOperationCallback->dec();
 		}
 
@@ -628,7 +658,7 @@ namespace mrw
 		void SectionStatechart::exact_main_region_Operating_Processing_Pending()
 		{
 			/* Exit action for state 'Pending'. */
-			timerService->unsetTimer(this, 2);
+			timerService->unsetTimer(shared_from_this(), 2);
 			ifaceOperationCallback->dec();
 		}
 
@@ -1632,9 +1662,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1644,12 +1675,10 @@ namespace mrw
 		{
 			/* The reactions of state Requesting. */
 			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Init_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1696,15 +1725,16 @@ namespace mrw
 				if (stateResponse_raised)
 				{
 					exseq_main_region_Init_Init_Process_Requesting_state_Occupation();
-					occupied = stateResponse_value;
+					setOccupied(stateResponse_value);
 					enseq_main_region_Init_Init_Process_Requesting_state_Wait_default();
 					main_region_Init_Init_Process_Requesting_react(0);
 					transitioned_after = 1;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Init_Init_Process_Requesting_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1723,9 +1753,10 @@ namespace mrw
 					transitioned_after = 1;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Init_Init_Process_Requesting_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1755,12 +1786,13 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				if (stateResponse_raised)
 				{
-					occupied = stateResponse_value;
+					setOccupied(stateResponse_value);
 				}
 				transitioned_after = react(transitioned_before);
 			}
@@ -1783,7 +1815,7 @@ namespace mrw
 				}
 				else
 				{
-					if (((enable_raised)) && ((!enable_value)))
+					if (((enable_raised)) && ((!(enable_value))))
 					{
 						exseq_main_region_Operating_Processing_Unlocked();
 						enact_main_region_Operating_Processing_Pending();
@@ -1793,9 +1825,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1805,12 +1838,10 @@ namespace mrw
 		{
 			/* The reactions of state Locked. */
 			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1893,9 +1924,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_Processing_Locked_Route_active_Waiting_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1914,9 +1946,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_Processing_Locked_Route_active_Waiting_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1935,9 +1968,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_Processing_Locked_Route_active_Waiting_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -2000,9 +2034,10 @@ namespace mrw
 					transitioned_after = 1;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -2022,9 +2057,10 @@ namespace mrw
 					transitioned_after = 1;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -2033,16 +2069,7 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Occupation__final__react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state null. */
-			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (1))
-			{
-			}
-			/* If no transition was taken then execute local reactions */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
-			}
-			return transitioned_after;
+			return main_region_Operating_Processing_Locked_react(transitioned_before);
 		}
 
 		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Occupation_Next_Reached_react(const sc::integer transitioned_before)
@@ -2051,7 +2078,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (1))
 			{
-				if (((stateResponse_raised)) && ((!stateResponse_value)))
+				if (((stateResponse_raised)) && ((!(stateResponse_value))))
 				{
 					exseq_main_region_Operating_Processing_Locked_Occupation_Next_Reached();
 					local_leave();
@@ -2060,9 +2087,10 @@ namespace mrw
 					transitioned_after = 1;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -2083,9 +2111,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -2107,9 +2136,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_Processing_Pending_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -2131,9 +2161,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_Processing_Pending_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -2153,9 +2184,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -2175,15 +2207,16 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		void SectionStatechart::clearInEvents()
+		void SectionStatechart::clearInEvents() noexcept
 		{
 			enable_raised = false;
 			disable_raised = false;
@@ -2199,7 +2232,7 @@ namespace mrw
 			timeEvents[2] = false;
 		}
 
-		void SectionStatechart::clearInternalEvents()
+		void SectionStatechart::clearInternalEvents() noexcept
 		{
 			local_leave_raised = false;
 		}
@@ -2344,9 +2377,8 @@ namespace mrw
 				while (stateConfVectorChanged);
 				clearInEvents();
 				clearInternalEvents();
-				dispatchEvent(getNextEvent());
 			}
-			while (((((((((((((enable_raised) || (disable_raised)) || (clear_raised)) || (start_raised)) || (relaisResponse_raised)) || (stateResponse_raised)) || (failed_raised)) || (next_raised)) || (unlock_raised)) || (local_leave_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
+			while (dispatchEvent(getNextEvent()));
 			isExecuting = false;
 		}
 

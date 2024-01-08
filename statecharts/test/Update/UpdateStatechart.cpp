@@ -16,25 +16,9 @@ namespace mrw
 	namespace statechart
 	{
 
-		const sc::integer UpdateStatechart::timeout = 250;
-		const sc::integer UpdateStatechart::delay_boot = 3000;
-		const sc::integer UpdateStatechart::delay_reset = 1200;
-		const sc::integer UpdateStatechart::delay_flash_request = 200;
-		const sc::integer UpdateStatechart::delay_flash_page = 60;
-		const sc::integer UpdateStatechart::retry = 10;
 
 
-
-		UpdateStatechart::UpdateStatechart() :
-			count(0),
-			error(0),
-			timerService(nullptr),
-			ifaceOperationCallback(nullptr),
-			isExecuting(false),
-			connected_raised(false),
-			complete_raised(false),
-			mismatch_raised(false),
-			failed_raised(false)
+		UpdateStatechart::UpdateStatechart() noexcept
 		{
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
 			{
@@ -46,11 +30,17 @@ namespace mrw
 
 		UpdateStatechart::~UpdateStatechart()
 		{
+			while (!incomingEventQueue.empty())
+			{
+				auto nextEvent{incomingEventQueue.front()};
+				incomingEventQueue.pop_front();
+				delete nextEvent;
+			}
 		}
 
 
 
-		mrw::statechart::UpdateStatechart::EventInstance * UpdateStatechart::getNextEvent()
+		mrw::statechart::UpdateStatechart::EventInstance * UpdateStatechart::getNextEvent() noexcept
 		{
 			mrw::statechart::UpdateStatechart::EventInstance * nextEvent = 0;
 
@@ -65,11 +55,12 @@ namespace mrw
 		}
 
 
-		void UpdateStatechart::dispatchEvent(mrw::statechart::UpdateStatechart::EventInstance * event)
+
+		bool UpdateStatechart::dispatchEvent(mrw::statechart::UpdateStatechart::EventInstance * event) noexcept
 		{
 			if (event == nullptr)
 			{
-				return;
+				return false;
 			}
 
 			switch (event->eventId)
@@ -110,43 +101,54 @@ namespace mrw
 					break;
 				}
 			default:
-				/* do nothing */
-				break;
+				//pointer got out of scope
+				delete event;
+				return false;
 			}
+			//pointer got out of scope
 			delete event;
+			return true;
 		}
 
 
+		/*! Raises the in event 'connected' of default interface scope. */
 		void mrw::statechart::UpdateStatechart::raiseConnected()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::connected));
+			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::connected))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'complete' of default interface scope. */
 		void mrw::statechart::UpdateStatechart::raiseComplete()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::complete));
+			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::complete))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'mismatch' of default interface scope. */
 		void mrw::statechart::UpdateStatechart::raiseMismatch()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::mismatch));
+			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::mismatch))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'failed' of default interface scope. */
 		void mrw::statechart::UpdateStatechart::raiseFailed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::failed));
+			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::failed))
+			;
 			runCycle();
 		}
 
 
 
-		bool UpdateStatechart::isActive() const
+		bool UpdateStatechart::isActive() const noexcept
 		{
 			return stateConfVector[0] != mrw::statechart::UpdateStatechart::State::NO_STATE;
 		}
@@ -154,12 +156,12 @@ namespace mrw
 		/*
 		 * Always returns 'false' since this state machine can never become final.
 		 */
-		bool UpdateStatechart::isFinal() const
+		bool UpdateStatechart::isFinal() const noexcept
 		{
 			return false;
 		}
 
-		bool UpdateStatechart::check() const
+		bool UpdateStatechart::check() const noexcept
 		{
 			if (timerService == nullptr)
 			{
@@ -173,17 +175,17 @@ namespace mrw
 		}
 
 
-		void UpdateStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_)
+		void UpdateStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_) noexcept
 		{
 			this->timerService = timerService_;
 		}
 
-		sc::timer::TimerServiceInterface * UpdateStatechart::getTimerService()
+		sc::timer::TimerServiceInterface * UpdateStatechart::getTimerService() noexcept
 		{
 			return timerService;
 		}
 
-		sc::integer UpdateStatechart::getNumberOfParallelTimeEvents()
+		sc::integer UpdateStatechart::getNumberOfParallelTimeEvents() noexcept
 		{
 			return parallelTimeEventsCount;
 		}
@@ -198,7 +200,7 @@ namespace mrw
 		}
 
 
-		bool UpdateStatechart::isStateActive(State state) const
+		bool UpdateStatechart::isStateActive(State state) const noexcept
 		{
 			switch (state)
 			{
@@ -266,47 +268,63 @@ namespace mrw
 			}
 		}
 
-		sc::integer UpdateStatechart::getTimeout()
+		sc::integer UpdateStatechart::getTimeout() noexcept
 		{
-			return timeout;
+			return timeout
+				;
 		}
 
-		sc::integer UpdateStatechart::getDelay_boot()
+		sc::integer UpdateStatechart::getDelay_boot() noexcept
 		{
-			return delay_boot;
+			return delay_boot
+				;
 		}
 
-		sc::integer UpdateStatechart::getDelay_reset()
+		sc::integer UpdateStatechart::getDelay_reset() noexcept
 		{
-			return delay_reset;
+			return delay_reset
+				;
 		}
 
-		sc::integer UpdateStatechart::getDelay_flash_request()
+		sc::integer UpdateStatechart::getDelay_flash_request() noexcept
 		{
-			return delay_flash_request;
+			return delay_flash_request
+				;
 		}
 
-		sc::integer UpdateStatechart::getDelay_flash_page()
+		sc::integer UpdateStatechart::getDelay_flash_page() noexcept
 		{
-			return delay_flash_page;
+			return delay_flash_page
+				;
 		}
 
-		sc::integer UpdateStatechart::getCount() const
+		sc::integer UpdateStatechart::getCount() const noexcept
 		{
-			return count;
+			return count
+				;
 		}
 
-		sc::integer UpdateStatechart::getError() const
+		void UpdateStatechart::setCount(sc::integer count_) noexcept
 		{
-			return error;
+			this->count = count_;
+		}
+		sc::integer UpdateStatechart::getError() const noexcept
+		{
+			return error
+				;
 		}
 
-		sc::integer UpdateStatechart::getRetry()
+		void UpdateStatechart::setError(sc::integer error_) noexcept
 		{
-			return retry;
+			this->error = error_;
+		}
+		sc::integer UpdateStatechart::getRetry() noexcept
+		{
+			return retry
+				;
 		}
 
-		void UpdateStatechart::setOperationCallback(OperationCallback * operationCallback)
+		void UpdateStatechart::setOperationCallback(OperationCallback * operationCallback) noexcept
 		{
 			ifaceOperationCallback = operationCallback;
 		}
@@ -316,7 +334,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Ping()
 		{
 			/* Entry action for state 'Ping'. */
-			timerService->setTimer(this, 0, UpdateStatechart::timeout, false);
+			timerService->setTimer(this, 0, ((sc::time) UpdateStatechart::timeout), false);
 			ifaceOperationCallback->ping();
 		}
 
@@ -324,7 +342,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Reset()
 		{
 			/* Entry action for state 'Reset'. */
-			timerService->setTimer(this, 1, UpdateStatechart::delay_reset, false);
+			timerService->setTimer(this, 1, ((sc::time) UpdateStatechart::delay_reset), false);
 			ifaceOperationCallback->boot();
 		}
 
@@ -332,7 +350,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Flash_Request()
 		{
 			/* Entry action for state 'Flash Request'. */
-			timerService->setTimer(this, 2, UpdateStatechart::delay_flash_request, false);
+			timerService->setTimer(this, 2, ((sc::time) UpdateStatechart::delay_flash_request), false);
 			ifaceOperationCallback->init(1);
 			ifaceOperationCallback->flashRequest();
 		}
@@ -341,7 +359,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Flash_Complete_Page()
 		{
 			/* Entry action for state 'Flash Complete Page'. */
-			timerService->setTimer(this, 3, UpdateStatechart::delay_flash_page, false);
+			timerService->setTimer(this, 3, ((sc::time) UpdateStatechart::delay_flash_page), false);
 			ifaceOperationCallback->flashCompletePage();
 		}
 
@@ -349,7 +367,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Flash_Rest()
 		{
 			/* Entry action for state 'Flash Rest'. */
-			timerService->setTimer(this, 4, UpdateStatechart::delay_flash_page, false);
+			timerService->setTimer(this, 4, ((sc::time) UpdateStatechart::delay_flash_page), false);
 			ifaceOperationCallback->flashRestPage();
 		}
 
@@ -357,7 +375,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Flash_Check()
 		{
 			/* Entry action for state 'Flash Check'. */
-			timerService->setTimer(this, 5, UpdateStatechart::delay_boot, false);
+			timerService->setTimer(this, 5, ((sc::time) UpdateStatechart::delay_boot), false);
 			ifaceOperationCallback->init(3);
 			ifaceOperationCallback->flashCheck();
 		}
@@ -366,7 +384,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Leave_Bootloader()
 		{
 			/* Entry action for state 'Leave Bootloader'. */
-			timerService->setTimer(this, 6, UpdateStatechart::delay_boot, false);
+			timerService->setTimer(this, 6, ((sc::time) UpdateStatechart::delay_boot), false);
 			ifaceOperationCallback->boot();
 		}
 
@@ -381,14 +399,14 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Wait_for_Connect()
 		{
 			/* Entry action for state 'Wait for Connect'. */
-			timerService->setTimer(this, 7, UpdateStatechart::timeout, false);
+			timerService->setTimer(this, 7, ((sc::time) UpdateStatechart::timeout), false);
 		}
 
 		/* Entry action for state 'Test Hardware Mismatch'. */
 		void UpdateStatechart::enact_main_region_Test_Hardware_Mismatch()
 		{
 			/* Entry action for state 'Test Hardware Mismatch'. */
-			timerService->setTimer(this, 8, UpdateStatechart::delay_flash_request, false);
+			timerService->setTimer(this, 8, ((sc::time) UpdateStatechart::delay_flash_request), false);
 			ifaceOperationCallback->flashRequest();
 		}
 
@@ -722,7 +740,7 @@ namespace mrw
 			}
 			else
 			{
-				error = 6;
+				setError(6);
 				enseq_main_region_Leave_Bootloader_default();
 			}
 		}
@@ -747,12 +765,12 @@ namespace mrw
 			/* The reactions of state null. */
 			if (ifaceOperationCallback->hasController())
 			{
-				count = 0;
+				setCount(0);
 				enseq_main_region_Flash_Request_default();
 			}
 			else
 			{
-				error = 1;
+				setError(1);
 				enseq_main_region_Leave_Bootloader_default();
 			}
 		}
@@ -784,9 +802,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -807,9 +826,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -842,7 +862,7 @@ namespace mrw
 						if (mismatch_raised)
 						{
 							exseq_main_region_Flash_Request();
-							error = 8;
+							setError(8);
 							enseq_main_region_Leave_Bootloader_default();
 							react(0);
 							transitioned_after = 0;
@@ -850,9 +870,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -872,9 +893,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -895,9 +917,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -912,7 +935,7 @@ namespace mrw
 				if (failed_raised)
 				{
 					exseq_main_region_Flash_Check();
-					error = 3;
+					setError(3);
 					enseq_main_region_Leave_Bootloader_default();
 					react(0);
 					transitioned_after = 0;
@@ -922,7 +945,7 @@ namespace mrw
 					if (timeEvents[5])
 					{
 						exseq_main_region_Flash_Check();
-						error = 4;
+						setError(4);
 						timeEvents[5] = false;
 						enseq_main_region_Leave_Bootloader_default();
 						react(0);
@@ -940,9 +963,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -963,9 +987,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -975,14 +1000,8 @@ namespace mrw
 		{
 			/* The reactions of state Booted. */
 			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-			}
-			/* If no transition was taken then execute local reactions */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				transitioned_after = react(transitioned_before);
-			}
+			/* Always execute local reactions. */
+			transitioned_after = react(transitioned_before);
 			return transitioned_after;
 		}
 
@@ -1004,7 +1023,7 @@ namespace mrw
 					if (timeEvents[7])
 					{
 						exseq_main_region_Wait_for_Connect();
-						error = 7;
+						setError(7);
 						timeEvents[7] = false;
 						enseq_main_region_Leave_Bootloader_default();
 						react(0);
@@ -1012,9 +1031,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1029,7 +1049,7 @@ namespace mrw
 				if (mismatch_raised)
 				{
 					exseq_main_region_Test_Hardware_Mismatch();
-					error = 8;
+					setError(8);
 					enseq_main_region_Leave_Bootloader_default();
 					react(0);
 					transitioned_after = 0;
@@ -1045,9 +1065,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1057,18 +1078,12 @@ namespace mrw
 		{
 			/* The reactions of state Failed. */
 			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-			}
-			/* If no transition was taken then execute local reactions */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				transitioned_after = react(transitioned_before);
-			}
+			/* Always execute local reactions. */
+			transitioned_after = react(transitioned_before);
 			return transitioned_after;
 		}
 
-		void UpdateStatechart::clearInEvents()
+		void UpdateStatechart::clearInEvents() noexcept
 		{
 			connected_raised = false;
 			complete_raised = false;
@@ -1163,9 +1178,8 @@ namespace mrw
 			{
 				microStep();
 				clearInEvents();
-				dispatchEvent(getNextEvent());
 			}
-			while (((((((((((((connected_raised) || (complete_raised)) || (mismatch_raised)) || (failed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4])) || (timeEvents[5])) || (timeEvents[6])) || (timeEvents[7])) || (timeEvents[8]));
+			while (dispatchEvent(getNextEvent()));
 			isExecuting = false;
 		}
 

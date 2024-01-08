@@ -23,7 +23,9 @@ namespace mrw
 #include <deque>
 #include "../common/sc_types.h"
 #include "../common/sc_statemachine.h"
+#include "../common/sc_eventdriven.h"
 #include "../common/sc_timer.h"
+#include <string.h>
 
 /*! \file
 Header of the state machine 'SectionStatechart'.
@@ -34,10 +36,10 @@ namespace mrw
 	namespace statechart
 	{
 
-		class SectionStatechart : public sc::timer::TimedInterface, public sc::StatemachineInterface
+		class SectionStatechart : public sc::timer::TimedInterface, public sc::EventDrivenInterface
 		{
 		public:
-			SectionStatechart();
+			SectionStatechart() noexcept;
 
 			virtual ~SectionStatechart();
 
@@ -76,33 +78,33 @@ namespace mrw
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 26;
-			static const sc::integer scvi_main_region_Init = 0;
-			static const sc::integer scvi_main_region_Init_Init_Process_Requesting = 0;
-			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_relais_Relay = 0;
-			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_relais_Wait = 0;
-			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_state_Occupation = 1;
-			static const sc::integer scvi_main_region_Init_Init_Process_Requesting_state_Wait = 1;
-			static const sc::integer scvi_main_region_Operating = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Unlocked = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Enabled = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Passed = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Disabled = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Occupation_Free = 1;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Occupation_Occupied = 1;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Occupation__final_ = 1;
-			static const sc::integer scvi_main_region_Operating_Processing_Locked_Occupation_Next_Reached = 1;
-			static const sc::integer scvi_main_region_Operating_Processing_Pending = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Pending_Relais_processing_Enabling = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Pending_Relais_processing_Disabling = 0;
-			static const sc::integer scvi_main_region_Failed = 0;
-			static const sc::integer scvi_main_region_Wait_for_Start = 0;
+			static constexpr const sc::integer numStates {26};
+			static constexpr const sc::integer scvi_main_region_Init {0};
+			static constexpr const sc::integer scvi_main_region_Init_Init_Process_Requesting {0};
+			static constexpr const sc::integer scvi_main_region_Init_Init_Process_Requesting_relais_Relay {0};
+			static constexpr const sc::integer scvi_main_region_Init_Init_Process_Requesting_relais_Wait {0};
+			static constexpr const sc::integer scvi_main_region_Init_Init_Process_Requesting_state_Occupation {1};
+			static constexpr const sc::integer scvi_main_region_Init_Init_Process_Requesting_state_Wait {1};
+			static constexpr const sc::integer scvi_main_region_Operating {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Unlocked {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Locked {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Enabled {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Passed {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Disabled {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Locked_Occupation_Free {1};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Locked_Occupation_Occupied {1};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Locked_Occupation__final_ {1};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Locked_Occupation_Next_Reached {1};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Pending {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Pending_Relais_processing_Enabling {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Pending_Relais_processing_Disabling {0};
+			static constexpr const sc::integer scvi_main_region_Failed {0};
+			static constexpr const sc::integer scvi_main_region_Wait_for_Start {0};
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -126,7 +128,7 @@ namespace mrw
 			class EventInstance
 			{
 			public:
-				explicit EventInstance(Event id) : eventId(id) {}
+				explicit  EventInstance(Event id) noexcept : eventId(id) {}
 				virtual ~EventInstance() = default;
 				const Event eventId;
 			};
@@ -134,7 +136,7 @@ namespace mrw
 			class EventInstanceWithValue : public EventInstance
 			{
 			public:
-				explicit EventInstanceWithValue(Event id, T val) :
+				explicit  EventInstanceWithValue(Event id, T val) noexcept :
 					EventInstance(id),
 					value(val)
 				{}
@@ -160,44 +162,35 @@ namespace mrw
 			/*! Raises the in event 'unlock' of default interface scope. */
 			void raiseUnlock();
 			/*! Check if event 'started' of default interface scope is raised. */
-			bool isRaisedStarted();
+			bool isRaisedStarted() noexcept;
 			/*! Check if event 'stop' of default interface scope is raised. */
-			bool isRaisedStop();
+			bool isRaisedStop() noexcept;
 			/*! Check if event 'entered' of default interface scope is raised. */
-			bool isRaisedEntered();
+			bool isRaisedEntered() noexcept;
 			/*! Check if event 'leave' of default interface scope is raised. */
-			bool isRaisedLeave();
+			bool isRaisedLeave() noexcept;
 			/*! Check if event 'leaving' of default interface scope is raised. */
-			bool isRaisedLeaving();
+			bool isRaisedLeaving() noexcept;
 			/*! Check if event 'left' of default interface scope is raised. */
-			bool isRaisedLeft();
+			bool isRaisedLeft() noexcept;
 			/*! Check if event 'unregister' of default interface scope is raised. */
-			bool isRaisedUnregister();
+			bool isRaisedUnregister() noexcept;
 
-			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
-			void triggerWithoutEvent();
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
-			static sc::integer getTimeout() ;
-
+			static sc::integer getTimeout()  noexcept;
 			/*! Gets the value of the variable 'auto_off' that is defined in the default interface scope. */
-			bool getAuto_off() const;
-
+			bool getAuto_off() const noexcept;
 			/*! Sets the value of the variable 'auto_off' that is defined in the default interface scope. */
-			void setAuto_off(bool auto_off);
-
+			void setAuto_off(bool auto_off) noexcept;
 			/*! Gets the value of the variable 'auto_unlock' that is defined in the default interface scope. */
-			bool getAuto_unlock() const;
-
+			bool getAuto_unlock() const noexcept;
 			/*! Sets the value of the variable 'auto_unlock' that is defined in the default interface scope. */
-			void setAuto_unlock(bool auto_unlock);
-
+			void setAuto_unlock(bool auto_unlock) noexcept;
 			/*! Gets the value of the variable 'occupied' that is defined in the default interface scope. */
-			bool getOccupied() const;
-
+			bool getOccupied() const noexcept;
 			/*! Sets the value of the variable 'occupied' that is defined in the default interface scope. */
-			void setOccupied(bool occupied);
-
+			void setOccupied(bool occupied) noexcept;
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
 			{
@@ -230,8 +223,10 @@ namespace mrw
 			};
 
 			/*! Set the working instance of the operation callback interface 'OperationCallback'. */
-			void setOperationCallback(OperationCallback * operationCallback);
+			void setOperationCallback(OperationCallback * operationCallback) noexcept;
 
+			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
+			void triggerWithoutEvent() override;
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -243,41 +238,41 @@ namespace mrw
 			 * Checks if the state machine is active (until 2.4.1 this method was used for states).
 			 * A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
 			 */
-			bool isActive() const override;
+			bool isActive() const noexcept override;
 
 
 			/*!
 			* Checks if all active states are final.
 			* If there are no active states then the state machine is considered being inactive. In this case this method returns false.
 			*/
-			bool isFinal() const override;
+			bool isFinal() const noexcept override;
 
 			/*!
 			 * Checks if member of the state machine must be set. For example an operation callback.
 			 */
-			bool check() const;
+			bool check() const noexcept;
 
 			/*
 			 * Functions inherited from TimedStatemachineInterface
 			 */
-			void setTimerService(sc::timer::TimerServiceInterface * timerService_) override;
+			void setTimerService(sc::timer::TimerServiceInterface * timerService_) noexcept override;
 
-			sc::timer::TimerServiceInterface * getTimerService() override;
+			sc::timer::TimerServiceInterface * getTimerService() noexcept override;
 
 			void raiseTimeEvent(sc::eventid event) override;
 
-			sc::integer getNumberOfParallelTimeEvents() override;
+			sc::integer getNumberOfParallelTimeEvents() noexcept override;
 
 
 
 			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-			bool isStateActive(State state) const;
+			bool isStateActive(State state) const noexcept;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 3;
+			static const sc::integer timeEventsCount {3};
 
 			//! number of time events that can be active at once.
-			static const sc::integer parallelTimeEventsCount = 1;
+			static const sc::integer parallelTimeEventsCount {1};
 
 
 		protected:
@@ -287,9 +282,9 @@ namespace mrw
 
 			std::deque<EventInstance *> internalEventQueue;
 
-			EventInstance * getNextEvent();
+			EventInstance * getNextEvent() noexcept;
 
-			void dispatchEvent(EventInstance * event);
+			bool dispatchEvent(EventInstance * event) noexcept;
 
 
 
@@ -297,15 +292,17 @@ namespace mrw
 			SectionStatechart(const SectionStatechart & rhs);
 			SectionStatechart & operator=(const SectionStatechart &);
 
-			static const sc::integer timeout;
-			bool auto_off;
-			bool auto_unlock;
-			bool occupied;
+			static constexpr const sc::integer timeout {500};
+			bool auto_off {true};
+			bool auto_unlock {true};
+			bool occupied {false};
+
+
 
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-			static const sc::ushort maxOrthogonalStates = 2;
+			static const sc::ushort maxOrthogonalStates {2};
 
 			sc::timer::TimerServiceInterface * timerService;
 			bool timeEvents[timeEventsCount];
@@ -314,12 +311,13 @@ namespace mrw
 			State stateConfVector[maxOrthogonalStates];
 
 
+
 			OperationCallback * ifaceOperationCallback;
 
+			bool isExecuting {false};
+			sc::integer stateConfVectorPosition {0};
+			bool stateConfVectorChanged {false};
 
-			bool isExecuting;
-			sc::integer stateConfVectorPosition;
-			bool stateConfVectorChanged;
 
 
 			// prototypes of all internal functions
@@ -441,71 +439,70 @@ namespace mrw
 			sc::integer main_region_Operating_Processing_Pending_Relais_processing_Disabling_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_for_Start_react(const sc::integer transitioned_before);
-			void clearOutEvents();
-			void clearInEvents();
-			void clearInternalEvents();
+			void clearOutEvents() noexcept;
+			void clearInEvents() noexcept;
+			void clearInternalEvents() noexcept;
 			void microStep();
 			void runCycle();
 
 
 
-
 			/*! Indicates event 'enable' of default interface scope is active. */
-			bool enable_raised;
+			bool enable_raised {false};
 
 			/*! Value of event 'enable' of default interface scope. */
-			bool enable_value;
+			bool enable_value {false};
 
 			/*! Indicates event 'disable' of default interface scope is active. */
-			bool disable_raised;
+			bool disable_raised {false};
 
 			/*! Indicates event 'clear' of default interface scope is active. */
-			bool clear_raised;
+			bool clear_raised {false};
 
 			/*! Indicates event 'start' of default interface scope is active. */
-			bool start_raised;
+			bool start_raised {false};
 
 			/*! Indicates event 'relaisResponse' of default interface scope is active. */
-			bool relaisResponse_raised;
+			bool relaisResponse_raised {false};
 
 			/*! Indicates event 'stateResponse' of default interface scope is active. */
-			bool stateResponse_raised;
+			bool stateResponse_raised {false};
 
 			/*! Value of event 'stateResponse' of default interface scope. */
-			bool stateResponse_value;
+			bool stateResponse_value {false};
 
 			/*! Indicates event 'failed' of default interface scope is active. */
-			bool failed_raised;
+			bool failed_raised {false};
 
 			/*! Indicates event 'next' of default interface scope is active. */
-			bool next_raised;
+			bool next_raised {false};
 
 			/*! Indicates event 'unlock' of default interface scope is active. */
-			bool unlock_raised;
+			bool unlock_raised {false};
 
 			/*! Indicates event 'started' of default interface scope is active. */
-			bool started_raised;
+			bool started_raised {false};
 
 			/*! Indicates event 'stop' of default interface scope is active. */
-			bool stop_raised;
+			bool stop_raised {false};
 
 			/*! Indicates event 'entered' of default interface scope is active. */
-			bool entered_raised;
+			bool entered_raised {false};
 
 			/*! Indicates event 'leave' of default interface scope is active. */
-			bool leave_raised;
+			bool leave_raised {false};
 
 			/*! Indicates event 'leaving' of default interface scope is active. */
-			bool leaving_raised;
+			bool leaving_raised {false};
 
 			/*! Indicates event 'left' of default interface scope is active. */
-			bool left_raised;
+			bool left_raised {false};
 
 			/*! Indicates event 'unregister' of default interface scope is active. */
-			bool unregister_raised;
+			bool unregister_raised {false};
 
 			/*! Indicates event 'local_leave' of internal scope is active. */
-			bool local_leave_raised;
+			bool local_leave_raised {false};
 
 			/*! Raises the out event 'local_leave' of internal scope as a local event. */
 			void raiseLocal_leave();

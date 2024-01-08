@@ -43,9 +43,9 @@ MainWindow::MainWindow(
 	MrwMessageDispatcher & dispatcher,
 	QWidget        *       parent) :
 	QMainWindow(parent),
+	SelfPointer<OperationCallback>(this),
 	ui(new Ui::MainWindow),
-	repo(repository),
-	statechart(nullptr)
+	repo(repository)
 {
 	const QScreen * screen = QGuiApplication::primaryScreen();
 	const QSize     size   = screen->availableSize();
@@ -89,9 +89,9 @@ MainWindow::MainWindow(
 	status_label = new QLabel(tr("Start."));
 	ui->statusbar->addPermanentWidget(status_label);
 
-	statechart.setTimerService(&TimerService::instance());
-	statechart.setOperationCallback(this);
-	statechart.can()->setOperationCallback(&dispatcher);
+	statechart.setTimerService(TimerService::instance());
+	statechart.setOperationCallback(*this);
+	statechart.can().setOperationCallback(dispatcher);
 
 	Q_ASSERT(statechart.check());
 	statechart.enter();

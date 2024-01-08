@@ -8,11 +8,13 @@
 #ifndef MRW_STATECHART_TIMERSERVICE_H
 #define MRW_STATECHART_TIMERSERVICE_H
 
+#include <cassert>
 #include <memory>
 
 #include <QTimer>
 #include <QMap>
 
+#include <util/self.h>
 #include <util/singleton.h>
 
 #include <statecharts/common/sc_timer.h>
@@ -60,8 +62,10 @@ namespace mrw::statechart
 	public:
 		friend class mrw::util::Singleton<TimerService>;
 
-		inline operator std::shared_ptr<TimerService> & ()
+		inline operator std::shared_ptr<TimerServiceInterface> & ()
 		{
+			Q_ASSERT(self.get() == this);
+
 			return self;
 		}
 
@@ -69,13 +73,13 @@ namespace mrw::statechart
 		TimerService();
 
 		virtual void setTimer(
-			sc::timer::TimedInterface * statemachine,
-			sc::eventid                 event,
-			sc::integer                 time_ms,
-			bool                        is_periodic) override;
+			std::shared_ptr<sc::timer::TimedInterface> statemachine,
+			sc::eventid                                event,
+			sc::time                                   time_ms,
+			bool                                       is_periodic) override;
 		virtual void unsetTimer(
-			sc::timer::TimedInterface * statemachine,
-			sc::eventid                 event) override;
+			std::shared_ptr<sc::timer::TimedInterface> statemachine,
+			sc::eventid                                event) override;
 
 	private:
 		/**
@@ -87,8 +91,8 @@ namespace mrw::statechart
 		 * @return The SCTimer instance.
 		 */
 		SCTimer * getTimer(
-			sc::timer::TimedInterface * machine,
-			sc::eventid                 event);
+			std::shared_ptr<sc::timer::TimedInterface> & statemachine,
+			sc::eventid                                  event);
 
 		/**
 		 * This is the two dimensional key for finding a SCTimer instance.
@@ -104,10 +108,24 @@ namespace mrw::statechart
 		/**
 		 * The map from all statemachines and their IDs to all existing timers.
 		 */
-		TimerMap                       chart_map;
+		TimerMap                                                    chart_map;
 
 		/** This instance as shared pointer. */
-		std::shared_ptr<TimerService>  self;
+		std::shared_ptr<TimerServiceInterface>                      self;
+	};
+
+	/**
+	 * This template class encapsulates a QObject based statechart and
+	 * a mrw::util::SelfPointer class for convenience purposes.
+	 */
+	template<class T> class QtStatechart :
+		public T,
+		public mrw::util::SelfPointer<T>
+	{
+	public:
+		QtStatechart() : T(nullptr), mrw::util::SelfPointer<T>(this)
+		{
+		}
 	};
 }
 

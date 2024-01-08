@@ -62,6 +62,7 @@ namespace mrw::test
 		void testUnsetCustomBatch();
 		void testResetCustomBatch();
 		void testDifferentBatch();
+		void testSelfPointer();
 	};
 }
 

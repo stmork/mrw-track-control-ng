@@ -23,7 +23,7 @@ SectionController::SectionController(
 	Section * input,
 	QObject * parent) :
 	BaseController(parent),
-	statechart(nullptr),
+	SelfPointer<OperationCallback>(this),
 	ctrl_section(input)
 {
 	ControllerRegistry::instance().registerController(ctrl_section, this);
@@ -87,8 +87,8 @@ SectionController::SectionController(
 		qDebug().noquote() << ctrl_section->toString() << "Inquiry completed.";
 	});
 
-	statechart.setTimerService(&TimerService::instance());
-	statechart.setOperationCallback(this);
+	statechart.setTimerService(TimerService::instance());
+	statechart.setOperationCallback(*this);
 
 	Q_ASSERT(statechart.check());
 	statechart.enter();

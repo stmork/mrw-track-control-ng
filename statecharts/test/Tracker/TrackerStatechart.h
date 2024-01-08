@@ -23,7 +23,9 @@ namespace mrw
 #include <deque>
 #include "../common/sc_types.h"
 #include "../common/sc_statemachine.h"
+#include "../common/sc_eventdriven.h"
 #include "../common/sc_timer.h"
+#include <string.h>
 
 /*! \file
 Header of the state machine 'TrackerStatechart'.
@@ -34,10 +36,10 @@ namespace mrw
 	namespace statechart
 	{
 
-		class TrackerStatechart : public sc::timer::TimedInterface, public sc::StatemachineInterface
+		class TrackerStatechart : public sc::timer::TimedInterface, public sc::EventDrivenInterface
 		{
 		public:
-			TrackerStatechart();
+			TrackerStatechart() noexcept;
 
 			virtual ~TrackerStatechart();
 
@@ -56,13 +58,13 @@ namespace mrw
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 6;
-			static const sc::integer scvi_main_region_Preparing = 0;
-			static const sc::integer scvi_main_region_Driving = 0;
-			static const sc::integer scvi_main_region_Driving_Tracking_First = 0;
-			static const sc::integer scvi_main_region_Driving_Tracking_Occupy = 0;
-			static const sc::integer scvi_main_region_Driving_Tracking_Free = 0;
-			static const sc::integer scvi_main_region_Idle = 0;
+			static constexpr const sc::integer numStates {6};
+			static constexpr const sc::integer scvi_main_region_Preparing {0};
+			static constexpr const sc::integer scvi_main_region_Driving {0};
+			static constexpr const sc::integer scvi_main_region_Driving_Tracking_First {0};
+			static constexpr const sc::integer scvi_main_region_Driving_Tracking_Occupy {0};
+			static constexpr const sc::integer scvi_main_region_Driving_Tracking_Free {0};
+			static constexpr const sc::integer scvi_main_region_Idle {0};
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -79,22 +81,18 @@ namespace mrw
 			class EventInstance
 			{
 			public:
-				explicit EventInstance(Event id) : eventId(id) {}
+				explicit  EventInstance(Event id) noexcept : eventId(id) {}
 				virtual ~EventInstance() = default;
 				const Event eventId;
 			};
 			/*! Raises the in event 'received' of default interface scope. */
 			void raiseReceived();
 
-			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
-			void triggerWithoutEvent();
 
 			/*! Gets the value of the variable 'start' that is defined in the default interface scope. */
-			static sc::integer getStart() ;
-
+			static sc::integer getStart()  noexcept;
 			/*! Gets the value of the variable 'step' that is defined in the default interface scope. */
-			static sc::integer getStep() ;
-
+			static sc::integer getStep()  noexcept;
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
 			{
@@ -117,8 +115,10 @@ namespace mrw
 			};
 
 			/*! Set the working instance of the operation callback interface 'OperationCallback'. */
-			void setOperationCallback(OperationCallback * operationCallback);
+			void setOperationCallback(OperationCallback * operationCallback) noexcept;
 
+			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
+			void triggerWithoutEvent() override;
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -130,41 +130,41 @@ namespace mrw
 			 * Checks if the state machine is active (until 2.4.1 this method was used for states).
 			 * A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
 			 */
-			bool isActive() const override;
+			bool isActive() const noexcept override;
 
 
 			/*!
 			* Checks if all active states are final.
 			* If there are no active states then the state machine is considered being inactive. In this case this method returns false.
 			*/
-			bool isFinal() const override;
+			bool isFinal() const noexcept override;
 
 			/*!
 			 * Checks if member of the state machine must be set. For example an operation callback.
 			 */
-			bool check() const;
+			bool check() const noexcept;
 
 			/*
 			 * Functions inherited from TimedStatemachineInterface
 			 */
-			void setTimerService(sc::timer::TimerServiceInterface * timerService_) override;
+			void setTimerService(sc::timer::TimerServiceInterface * timerService_) noexcept override;
 
-			sc::timer::TimerServiceInterface * getTimerService() override;
+			sc::timer::TimerServiceInterface * getTimerService() noexcept override;
 
 			void raiseTimeEvent(sc::eventid event) override;
 
-			sc::integer getNumberOfParallelTimeEvents() override;
+			sc::integer getNumberOfParallelTimeEvents() noexcept override;
 
 
 
 			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-			bool isStateActive(State state) const;
+			bool isStateActive(State state) const noexcept;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 4;
+			static const sc::integer timeEventsCount {4};
 
 			//! number of time events that can be active at once.
-			static const sc::integer parallelTimeEventsCount = 1;
+			static const sc::integer parallelTimeEventsCount {1};
 
 
 		protected:
@@ -174,9 +174,9 @@ namespace mrw
 
 			std::deque<EventInstance *> internalEventQueue;
 
-			EventInstance * getNextEvent();
+			EventInstance * getNextEvent() noexcept;
 
-			void dispatchEvent(EventInstance * event);
+			bool dispatchEvent(EventInstance * event) noexcept;
 
 
 
@@ -184,13 +184,15 @@ namespace mrw
 			TrackerStatechart(const TrackerStatechart & rhs);
 			TrackerStatechart & operator=(const TrackerStatechart &);
 
-			static const sc::integer start;
-			static const sc::integer step;
+			static constexpr const sc::integer start {1000};
+			static constexpr const sc::integer step {300};
+
+
 
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-			static const sc::ushort maxOrthogonalStates = 1;
+			static const sc::ushort maxOrthogonalStates {1};
 
 			sc::timer::TimerServiceInterface * timerService;
 			bool timeEvents[timeEventsCount];
@@ -199,10 +201,11 @@ namespace mrw
 			State stateConfVector[maxOrthogonalStates];
 
 
+
 			OperationCallback * ifaceOperationCallback;
 
+			bool isExecuting {false};
 
-			bool isExecuting;
 
 
 			// prototypes of all internal functions
@@ -242,19 +245,18 @@ namespace mrw
 			sc::integer main_region_Driving_Tracking_Occupy_react(const sc::integer transitioned_before);
 			sc::integer main_region_Driving_Tracking_Free_react(const sc::integer transitioned_before);
 			sc::integer main_region_Idle_react(const sc::integer transitioned_before);
-			void clearInEvents();
-			void clearInternalEvents();
+			void clearInEvents() noexcept;
+			void clearInternalEvents() noexcept;
 			void microStep();
 			void runCycle();
 
 
 
-
 			/*! Indicates event 'received' of default interface scope is active. */
-			bool received_raised;
+			bool received_raised {false};
 
 			/*! Indicates event 'completed' of internal scope is active. */
-			bool completed_raised;
+			bool completed_raised {false};
 
 
 

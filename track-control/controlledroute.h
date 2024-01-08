@@ -14,11 +14,13 @@
 #include <QListWidgetItem>
 
 #include <util/batch.h>
+#include <util/self.h>
 #include <model/section.h>
 #include <model/signal.h>
 #include <model/route.h>
 #include <ctrl/sectioncontroller.h>
 #include <ctrl/signalcontrollerproxy.h>
+#include <statecharts/timerservice.h>
 #include <statecharts/RouteStatechart.h>
 
 #include "routebatch.h"
@@ -26,6 +28,7 @@
 class ControlledRoute :
 	public mrw::model::Route,
 	public mrw::util::Batch,
+	public mrw::util::SelfPointer<mrw::statechart::RouteStatechart::OperationCallback>,
 	public mrw::statechart::RouteStatechart::OperationCallback
 {
 	Q_OBJECT
@@ -33,7 +36,7 @@ class ControlledRoute :
 private:
 	QListWidgetItem list_item;
 
-	mrw::statechart::RouteStatechart   statechart;
+	mrw::statechart::QtStatechart<mrw::statechart::RouteStatechart>  statechart;
 
 	std::vector<mrw::ctrl::SignalControllerProxy *> controllers_unlocked;
 	std::vector<mrw::ctrl::SignalControllerProxy *> controllers_locked;

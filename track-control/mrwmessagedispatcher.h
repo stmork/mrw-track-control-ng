@@ -8,12 +8,14 @@
 #ifndef MRWMESSAGEDISPATCHER_H
 #define MRWMESSAGEDISPATCHER_H
 
+#include <util/self.h>
 #include <statecharts/OperatingModeStatechart.h>
 #include <can/mrwbusservice.h>
 #include <model/modelrailway.h>
 
 class MrwMessageDispatcher :
 	public mrw::can::MrwBusService,
+	public mrw::util::SelfPointer<mrw::statechart::OperatingModeStatechart::Can::OperationCallback>,
 	public mrw::statechart::OperatingModeStatechart::Can::OperationCallback
 {
 	Q_OBJECT

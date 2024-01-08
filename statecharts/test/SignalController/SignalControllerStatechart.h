@@ -23,7 +23,9 @@ namespace mrw
 #include <deque>
 #include "../common/sc_types.h"
 #include "../common/sc_statemachine.h"
+#include "../common/sc_eventdriven.h"
 #include "../common/sc_timer.h"
+#include <string.h>
 
 /*! \file
 Header of the state machine 'SignalControllerStatechart'.
@@ -34,10 +36,10 @@ namespace mrw
 	namespace statechart
 	{
 
-		class SignalControllerStatechart : public sc::timer::TimedInterface, public sc::StatemachineInterface
+		class SignalControllerStatechart : public sc::timer::TimedInterface, public sc::EventDrivenInterface
 		{
 		public:
-			SignalControllerStatechart();
+			SignalControllerStatechart() noexcept;
 
 			virtual ~SignalControllerStatechart();
 
@@ -81,38 +83,38 @@ namespace mrw
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 31;
-			static const sc::integer scvi_main_region_Wait_for_Start = 0;
-			static const sc::integer scvi_main_region_Init = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Turning = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Turning_main_Turn = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Turning_main_Completed = 0;
-			static const sc::integer scvi_main_region_Init_Init_process_Turning_distant_Turn = 1;
-			static const sc::integer scvi_main_region_Init_Init_process_Turning_distant_Completed = 1;
-			static const sc::integer scvi_main_region_Init_Init_process_Turning_shunt_Turn = 2;
-			static const sc::integer scvi_main_region_Init_Init_process_Turning_shunt_Completed = 2;
-			static const sc::integer scvi_main_region_Operating = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Unlocked = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Shunting_State = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Idle = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Waiting = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Extend = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Stop = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Tour_State = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Main = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Distant = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Off_Distant = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Delay = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Shunt = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Extend = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Idle = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Pending = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Pending_Pending_Go_Main = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Pending_Pending_Go_Distant = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Pending_Pending_Go_Shunt = 0;
-			static const sc::integer scvi_main_region_Operating_Processing_Pending_Pending_Delay = 0;
-			static const sc::integer scvi_main_region_Failed = 0;
+			static constexpr const sc::integer numStates {31};
+			static constexpr const sc::integer scvi_main_region_Wait_for_Start {0};
+			static constexpr const sc::integer scvi_main_region_Init {0};
+			static constexpr const sc::integer scvi_main_region_Init_Init_process_Turning {0};
+			static constexpr const sc::integer scvi_main_region_Init_Init_process_Turning_main_Turn {0};
+			static constexpr const sc::integer scvi_main_region_Init_Init_process_Turning_main_Completed {0};
+			static constexpr const sc::integer scvi_main_region_Init_Init_process_Turning_distant_Turn {1};
+			static constexpr const sc::integer scvi_main_region_Init_Init_process_Turning_distant_Completed {1};
+			static constexpr const sc::integer scvi_main_region_Init_Init_process_Turning_shunt_Turn {2};
+			static constexpr const sc::integer scvi_main_region_Init_Init_process_Turning_shunt_Completed {2};
+			static constexpr const sc::integer scvi_main_region_Operating {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Unlocked {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Shunting_State {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Idle {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Waiting {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Extend {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Stop {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Tour_State {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Main {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Distant {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Off_Distant {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Delay {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Shunt {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Extend {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Tour_State_Processing_Idle {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Pending {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Pending_Pending_Go_Main {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Pending_Pending_Go_Distant {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Pending_Pending_Go_Shunt {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Pending_Pending_Delay {0};
+			static constexpr const sc::integer scvi_main_region_Failed {0};
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -138,7 +140,7 @@ namespace mrw
 			class EventInstance
 			{
 			public:
-				explicit EventInstance(Event id) : eventId(id) {}
+				explicit  EventInstance(Event id) noexcept : eventId(id) {}
 				virtual ~EventInstance() = default;
 				const Event eventId;
 			};
@@ -155,17 +157,17 @@ namespace mrw
 			/*! Raises the in event 'disable' of default interface scope. */
 			void raiseDisable();
 			/*! Check if event 'turnMain' of default interface scope is raised. */
-			bool isRaisedTurnMain();
+			bool isRaisedTurnMain() noexcept;
 			/*! Get value of event 'turnMain' of default interface scope. */
-			sc::integer getTurnMainValue();
+			sc::integer getTurnMainValue() noexcept;
 			/*! Check if event 'turnDistant' of default interface scope is raised. */
-			bool isRaisedTurnDistant();
+			bool isRaisedTurnDistant() noexcept;
 			/*! Get value of event 'turnDistant' of default interface scope. */
-			sc::integer getTurnDistantValue();
+			sc::integer getTurnDistantValue() noexcept;
 			/*! Check if event 'turnShunt' of default interface scope is raised. */
-			bool isRaisedTurnShunt();
+			bool isRaisedTurnShunt() noexcept;
 			/*! Get value of event 'turnShunt' of default interface scope. */
-			sc::integer getTurnShuntValue();
+			sc::integer getTurnShuntValue() noexcept;
 			/*! Raises the in event 'completedMain' of default interface scope. */
 			void raiseCompletedMain();
 			/*! Raises the in event 'completedDistant' of default interface scope. */
@@ -173,34 +175,25 @@ namespace mrw
 			/*! Raises the in event 'completedShunt' of default interface scope. */
 			void raiseCompletedShunt();
 			/*! Check if event 'started' of default interface scope is raised. */
-			bool isRaisedStarted();
+			bool isRaisedStarted() noexcept;
 			/*! Check if event 'cleared' of default interface scope is raised. */
-			bool isRaisedCleared();
+			bool isRaisedCleared() noexcept;
 
-			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
-			void triggerWithoutEvent();
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
-			static sc::integer getTimeout() ;
-
+			static sc::integer getTimeout()  noexcept;
 			/*! Gets the value of the variable 'delay' that is defined in the default interface scope. */
-			static sc::integer getDelay() ;
-
+			static sc::integer getDelay()  noexcept;
 			/*! Gets the value of the variable 'symbol' that is defined in the default interface scope. */
-			sc::integer getSymbol() const;
-
+			sc::integer getSymbol() const noexcept;
 			/*! Sets the value of the variable 'symbol' that is defined in the default interface scope. */
-			void setSymbol(sc::integer symbol);
-
+			void setSymbol(sc::integer symbol) noexcept;
 			/*! Gets the value of the variable 'OFF' that is defined in the default interface scope. */
-			static sc::integer getOFF() ;
-
+			static sc::integer getOFF()  noexcept;
 			/*! Gets the value of the variable 'STOP' that is defined in the default interface scope. */
-			static sc::integer getSTOP() ;
-
+			static sc::integer getSTOP()  noexcept;
 			/*! Gets the value of the variable 'GO' that is defined in the default interface scope. */
-			static sc::integer getGO() ;
-
+			static sc::integer getGO()  noexcept;
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
 			{
@@ -229,8 +222,10 @@ namespace mrw
 			};
 
 			/*! Set the working instance of the operation callback interface 'OperationCallback'. */
-			void setOperationCallback(OperationCallback * operationCallback);
+			void setOperationCallback(OperationCallback * operationCallback) noexcept;
 
+			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
+			void triggerWithoutEvent() override;
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -242,41 +237,41 @@ namespace mrw
 			 * Checks if the state machine is active (until 2.4.1 this method was used for states).
 			 * A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
 			 */
-			bool isActive() const override;
+			bool isActive() const noexcept override;
 
 
 			/*!
 			* Checks if all active states are final.
 			* If there are no active states then the state machine is considered being inactive. In this case this method returns false.
 			*/
-			bool isFinal() const override;
+			bool isFinal() const noexcept override;
 
 			/*!
 			 * Checks if member of the state machine must be set. For example an operation callback.
 			 */
-			bool check() const;
+			bool check() const noexcept;
 
 			/*
 			 * Functions inherited from TimedStatemachineInterface
 			 */
-			void setTimerService(sc::timer::TimerServiceInterface * timerService_) override;
+			void setTimerService(sc::timer::TimerServiceInterface * timerService_) noexcept override;
 
-			sc::timer::TimerServiceInterface * getTimerService() override;
+			sc::timer::TimerServiceInterface * getTimerService() noexcept override;
 
 			void raiseTimeEvent(sc::eventid event) override;
 
-			sc::integer getNumberOfParallelTimeEvents() override;
+			sc::integer getNumberOfParallelTimeEvents() noexcept override;
 
 
 
 			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-			bool isStateActive(State state) const;
+			bool isStateActive(State state) const noexcept;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 6;
+			static const sc::integer timeEventsCount {6};
 
 			//! number of time events that can be active at once.
-			static const sc::integer parallelTimeEventsCount = 2;
+			static const sc::integer parallelTimeEventsCount {2};
 
 
 		protected:
@@ -284,9 +279,9 @@ namespace mrw
 
 			std::deque<EventInstance *> incomingEventQueue;
 
-			EventInstance * getNextEvent();
+			EventInstance * getNextEvent() noexcept;
 
-			void dispatchEvent(EventInstance * event);
+			bool dispatchEvent(EventInstance * event) noexcept;
 
 
 
@@ -294,16 +289,17 @@ namespace mrw
 			SignalControllerStatechart(const SignalControllerStatechart & rhs);
 			SignalControllerStatechart & operator=(const SignalControllerStatechart &);
 
-			static const sc::integer timeout;
-			static const sc::integer delay;
-			sc::integer symbol;
-			static const sc::integer OFF;
-			static const sc::integer STOP;
-			static const sc::integer GO;
+			static constexpr const sc::integer timeout {5000};
+			static constexpr const sc::integer delay {350};
+			sc::integer symbol {SignalControllerStatechart::STOP};
+			static constexpr const sc::integer OFF {-(1)};
+			static constexpr const sc::integer STOP {0};
+			static constexpr const sc::integer GO {1};
+
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-			static const sc::ushort maxOrthogonalStates = 3;
+			static const sc::ushort maxOrthogonalStates {3};
 
 			sc::timer::TimerServiceInterface * timerService;
 			bool timeEvents[timeEventsCount];
@@ -312,12 +308,13 @@ namespace mrw
 			State stateConfVector[maxOrthogonalStates];
 
 
+
 			OperationCallback * ifaceOperationCallback;
 
+			bool isExecuting {false};
+			sc::integer stateConfVectorPosition {0};
+			bool stateConfVectorChanged {false};
 
-			bool isExecuting;
-			sc::integer stateConfVectorPosition;
-			bool stateConfVectorChanged;
 
 
 			// prototypes of all internal functions
@@ -472,64 +469,63 @@ namespace mrw
 			sc::integer main_region_Operating_Processing_Pending_Pending_Go_Shunt_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Pending_Pending_Delay_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
-			void clearOutEvents();
-			void clearInEvents();
+			void clearOutEvents() noexcept;
+			void clearInEvents() noexcept;
 			void microStep();
 			void runCycle();
 
 
 
-
 			/*! Indicates event 'start' of default interface scope is active. */
-			bool start_raised;
+			bool start_raised {false};
 
 			/*! Indicates event 'clear' of default interface scope is active. */
-			bool clear_raised;
+			bool clear_raised {false};
 
 			/*! Indicates event 'failed' of default interface scope is active. */
-			bool failed_raised;
+			bool failed_raised {false};
 
 			/*! Indicates event 'enable' of default interface scope is active. */
-			bool enable_raised;
+			bool enable_raised {false};
 
 			/*! Indicates event 'extend' of default interface scope is active. */
-			bool extend_raised;
+			bool extend_raised {false};
 
 			/*! Indicates event 'disable' of default interface scope is active. */
-			bool disable_raised;
-
-			/*! Value of event 'turnMain' of default interface scope. */
-			sc::integer turnMain_value;
+			bool disable_raised {false};
 
 			/*! Indicates event 'turnMain' of default interface scope is active. */
-			bool turnMain_raised;
+			bool turnMain_raised {false};
 
-			/*! Value of event 'turnDistant' of default interface scope. */
-			sc::integer turnDistant_value;
+			/*! Value of event 'turnMain' of default interface scope. */
+			sc::integer turnMain_value {0};
 
 			/*! Indicates event 'turnDistant' of default interface scope is active. */
-			bool turnDistant_raised;
+			bool turnDistant_raised {false};
 
-			/*! Value of event 'turnShunt' of default interface scope. */
-			sc::integer turnShunt_value;
+			/*! Value of event 'turnDistant' of default interface scope. */
+			sc::integer turnDistant_value {0};
 
 			/*! Indicates event 'turnShunt' of default interface scope is active. */
-			bool turnShunt_raised;
+			bool turnShunt_raised {false};
+
+			/*! Value of event 'turnShunt' of default interface scope. */
+			sc::integer turnShunt_value {0};
 
 			/*! Indicates event 'completedMain' of default interface scope is active. */
-			bool completedMain_raised;
+			bool completedMain_raised {false};
 
 			/*! Indicates event 'completedDistant' of default interface scope is active. */
-			bool completedDistant_raised;
+			bool completedDistant_raised {false};
 
 			/*! Indicates event 'completedShunt' of default interface scope is active. */
-			bool completedShunt_raised;
+			bool completedShunt_raised {false};
 
 			/*! Indicates event 'started' of default interface scope is active. */
-			bool started_raised;
+			bool started_raised {false};
 
 			/*! Indicates event 'cleared' of default interface scope is active. */
-			bool cleared_raised;
+			bool cleared_raised {false};
 
 
 

@@ -19,12 +19,13 @@ TrackerService::TrackerService(
 	ModelRepository & repo,
 	QObject           *           parent) :
 	MrwBusService(repo.interface(), repo.plugin(), parent),
+	SelfPointer<OperationCallback>(this),
 	statechart(nullptr)
 {
 	model = repo;
 
-	statechart.setTimerService(&TimerService::instance());
-	statechart.setOperationCallback(this);
+	statechart.setTimerService(TimerService::instance());
+	statechart.setOperationCallback(*this);
 
 	Q_ASSERT(statechart.check());
 	statechart.enter();

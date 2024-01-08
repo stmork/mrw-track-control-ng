@@ -29,7 +29,7 @@ SignalControllerProxy::SignalControllerProxy(
 	const bool  dir,
 	QObject  *  parent) :
 	SignalController(parent),
-	statechart(nullptr),
+	SelfPointer<OperationCallback>(this),
 	direction(dir),
 	signal_section(parent_section)
 {
@@ -196,8 +196,8 @@ void SignalControllerProxy::initStatechart()
 	statechart_distant.start(distant_signal, main_signal);
 	statechart_shunt.start(shunt_signal, main_signal);
 
-	statechart.setTimerService(&TimerService::instance());
-	statechart.setOperationCallback(this);
+	statechart.setTimerService(TimerService::instance());
+	statechart.setOperationCallback(*this);
 
 	Q_ASSERT(statechart.check());
 	statechart.enter();

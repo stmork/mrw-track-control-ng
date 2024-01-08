@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 * */
 
@@ -9,70 +9,74 @@
 #define SC_TIMER_H_
 
 #include "sc_types.h"
+#include <cstddef>
 
-namespace sc::timer
+namespace sc
 {
-
-	class TimedInterface;
-	class TimerServiceInterface;
-
-	/*! \file
-	Interface for state machines which use timed event triggers.
-	*/
-	class TimedInterface
+	namespace timer
 	{
-	public:
 
-		virtual ~TimedInterface() = 0;
+		class TimedInterface;
+		class TimerServiceInterface;
 
-		/*!
-		Set the timer service for the state machine. It must be set
-		externally on a timed state machine before a run cycle can be executed.
+		/*! \file
+		Interface for state machines which use timed event triggers.
 		*/
-		virtual void setTimerService(sc::timer::TimerServiceInterface * timerService) = 0;
+		class TimedInterface
+		{
+		public:
 
-		/*!
-		Returns the currently used timer service.
+			virtual ~TimedInterface() = 0;
+
+			/*!
+			Set the timer service for the state machine. It must be set
+			externally on a timed state machine before a run cycle can be executed.
+			*/
+			virtual void setTimerService(sc::timer::TimerServiceInterface * timerService) = 0;
+
+			/*!
+			Return the currently used timer service.
+			*/
+			virtual sc::timer::TimerServiceInterface * getTimerService() = 0;
+
+			/*!
+			Callback method if a time event occurred.
+			*/
+			virtual void raiseTimeEvent(sc::eventid event) = 0;
+
+			/*!
+			Retrieve the number of time events that can be active at once in this state machine.
+			*/
+			virtual sc::integer getNumberOfParallelTimeEvents() = 0;
+
+		};
+
+		inline TimedInterface::~TimedInterface() {}
+
+
+		/*! \file
+		Timer service interface.
 		*/
-		virtual sc::timer::TimerServiceInterface * getTimerService() = 0;
+		class TimerServiceInterface
+		{
+		public:
 
-		/*!
-		Callback method if a time event occurred.
-		*/
-		virtual void raiseTimeEvent(sc::eventid event) = 0;
+			virtual ~TimerServiceInterface();
 
-		/*!
-		Method to retrieve the number of time events that can be
-		active at once in this state machine.
-		*/
-		virtual sc::integer getNumberOfParallelTimeEvents() = 0;
-	};
+			/*!
+			Starts the timing for a time event.
+			*/
+			virtual void setTimer(TimedInterface * statemachine, sc::eventid event, sc::time time_ms, bool isPeriodic) = 0;
 
-	inline TimedInterface::~TimedInterface() {}
+			/*!
+			Unsets the given time event.
+			*/
+			virtual void unsetTimer(TimedInterface * statemachine, sc::eventid event) = 0;
+		};
 
+		inline TimerServiceInterface::~TimerServiceInterface() {}
 
-	/*! \file
-	Timer service interface.
-	*/
-	class TimerServiceInterface
-	{
-	public:
+	} /* namespace sc::timer */
+} /* namespace sc */
 
-		virtual ~TimerServiceInterface() = 0;
-
-		/*!
-		Starts the timing for a time event.
-		*/
-		virtual void setTimer(TimedInterface * statemachine, sc::eventid event, sc::integer time_ms, bool isPeriodic) = 0;
-
-		/*!
-		Unsets the given time event.
-		*/
-		virtual void unsetTimer(TimedInterface * statemachine, sc::eventid event) = 0;
-	};
-
-	inline TimerServiceInterface::~TimerServiceInterface() {}
-
-}
-
-#endif
+#endif /* SC_TIMER_H_ */

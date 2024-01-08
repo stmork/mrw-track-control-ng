@@ -16,27 +16,9 @@ namespace mrw
 	namespace statechart
 	{
 
-		const sc::integer SwitchStatechart::timeout = 2000;
 
 
-
-		SwitchStatechart::SwitchStatechart() :
-			isManual(false),
-			timerService(nullptr),
-			ifaceOperationCallback(nullptr),
-			isExecuting(false),
-			clear_raised(false),
-			start_raised(false),
-			leftResponse_raised(false),
-			rightResponse_raised(false),
-			response_raised(false),
-			queued_raised(false),
-			failed_raised(false),
-			unlock_raised(false),
-			turn_raised(false),
-			started_raised(false),
-			entered_raised(false),
-			stop_raised(false)
+		SwitchStatechart::SwitchStatechart() noexcept
 		{
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
 			{
@@ -49,11 +31,17 @@ namespace mrw
 
 		SwitchStatechart::~SwitchStatechart()
 		{
+			while (!incomingEventQueue.empty())
+			{
+				auto nextEvent{incomingEventQueue.front()};
+				incomingEventQueue.pop_front();
+				delete nextEvent;
+			}
 		}
 
 
 
-		mrw::statechart::SwitchStatechart::EventInstance * SwitchStatechart::getNextEvent()
+		mrw::statechart::SwitchStatechart::EventInstance * SwitchStatechart::getNextEvent() noexcept
 		{
 			mrw::statechart::SwitchStatechart::EventInstance * nextEvent = 0;
 
@@ -68,11 +56,12 @@ namespace mrw
 		}
 
 
-		void SwitchStatechart::dispatchEvent(mrw::statechart::SwitchStatechart::EventInstance * event)
+
+		bool SwitchStatechart::dispatchEvent(mrw::statechart::SwitchStatechart::EventInstance * event) noexcept
 		{
 			if (event == nullptr)
 			{
-				return;
+				return false;
 			}
 
 			switch (event->eventId)
@@ -131,96 +120,117 @@ namespace mrw
 					break;
 				}
 			default:
-				/* do nothing */
-				break;
+				//pointer got out of scope
+				delete event;
+				return false;
 			}
+			//pointer got out of scope
 			delete event;
+			return true;
 		}
 
 
+		/*! Raises the in event 'clear' of default interface scope. */
 		void mrw::statechart::SwitchStatechart::raiseClear()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::clear));
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::clear))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'start' of default interface scope. */
 		void mrw::statechart::SwitchStatechart::raiseStart()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::start));
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::start))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'leftResponse' of default interface scope. */
 		void mrw::statechart::SwitchStatechart::raiseLeftResponse()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::leftResponse));
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::leftResponse))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'rightResponse' of default interface scope. */
 		void mrw::statechart::SwitchStatechart::raiseRightResponse()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::rightResponse));
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::rightResponse))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'response' of default interface scope. */
 		void mrw::statechart::SwitchStatechart::raiseResponse()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::response));
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::response))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'queued' of default interface scope. */
 		void mrw::statechart::SwitchStatechart::raiseQueued()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::queued));
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::queued))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'failed' of default interface scope. */
 		void mrw::statechart::SwitchStatechart::raiseFailed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::failed));
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::failed))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'unlock' of default interface scope. */
 		void mrw::statechart::SwitchStatechart::raiseUnlock()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::unlock));
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::unlock))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'turn' of default interface scope. */
 		void mrw::statechart::SwitchStatechart::raiseTurn()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::turn));
+			incomingEventQueue.push_back(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::turn))
+			;
 			runCycle();
 		}
 
 
-		bool mrw::statechart::SwitchStatechart::isRaisedStarted()
+		bool mrw::statechart::SwitchStatechart::isRaisedStarted() noexcept
 		{
 			return started_raised;
 		}
 
 
-		bool mrw::statechart::SwitchStatechart::isRaisedEntered()
+		bool mrw::statechart::SwitchStatechart::isRaisedEntered() noexcept
 		{
 			return entered_raised;
 		}
 
 
-		bool mrw::statechart::SwitchStatechart::isRaisedStop()
+		bool mrw::statechart::SwitchStatechart::isRaisedStop() noexcept
 		{
 			return stop_raised;
 		}
 
 
 
-		bool SwitchStatechart::isActive() const
+		bool SwitchStatechart::isActive() const noexcept
 		{
 			return stateConfVector[0] != mrw::statechart::SwitchStatechart::State::NO_STATE;
 		}
@@ -228,12 +238,12 @@ namespace mrw
 		/*
 		 * Always returns 'false' since this state machine can never become final.
 		 */
-		bool SwitchStatechart::isFinal() const
+		bool SwitchStatechart::isFinal() const noexcept
 		{
 			return false;
 		}
 
-		bool SwitchStatechart::check() const
+		bool SwitchStatechart::check() const noexcept
 		{
 			if (timerService == nullptr)
 			{
@@ -247,17 +257,17 @@ namespace mrw
 		}
 
 
-		void SwitchStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_)
+		void SwitchStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_) noexcept
 		{
 			this->timerService = timerService_;
 		}
 
-		sc::timer::TimerServiceInterface * SwitchStatechart::getTimerService()
+		sc::timer::TimerServiceInterface * SwitchStatechart::getTimerService() noexcept
 		{
 			return timerService;
 		}
 
-		sc::integer SwitchStatechart::getNumberOfParallelTimeEvents()
+		sc::integer SwitchStatechart::getNumberOfParallelTimeEvents() noexcept
 		{
 			return parallelTimeEventsCount;
 		}
@@ -272,7 +282,7 @@ namespace mrw
 		}
 
 
-		bool SwitchStatechart::isStateActive(State state) const
+		bool SwitchStatechart::isStateActive(State state) const noexcept
 		{
 			switch (state)
 			{
@@ -335,22 +345,23 @@ namespace mrw
 			}
 		}
 
-		bool SwitchStatechart::getIsManual() const
+		bool SwitchStatechart::getIsManual() const noexcept
 		{
-			return isManual;
+			return isManual
+				;
 		}
 
-		void SwitchStatechart::setIsManual(bool isManual_)
+		void SwitchStatechart::setIsManual(bool isManual_) noexcept
 		{
 			this->isManual = isManual_;
 		}
-
-		sc::integer SwitchStatechart::getTimeout()
+		sc::integer SwitchStatechart::getTimeout() noexcept
 		{
-			return timeout;
+			return timeout
+				;
 		}
 
-		void SwitchStatechart::setOperationCallback(OperationCallback * operationCallback)
+		void SwitchStatechart::setOperationCallback(OperationCallback * operationCallback) noexcept
 		{
 			ifaceOperationCallback = operationCallback;
 		}
@@ -360,7 +371,7 @@ namespace mrw
 		void SwitchStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(this, 0, SwitchStatechart::timeout, false);
+			timerService->setTimer(this, 0, ((sc::time) SwitchStatechart::timeout), false);
 			entered_raised = true;
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
@@ -385,7 +396,7 @@ namespace mrw
 		void SwitchStatechart::enact_main_region_Operating_operating_Turning()
 		{
 			/* Entry action for state 'Turning'. */
-			timerService->setTimer(this, 1, SwitchStatechart::timeout, false);
+			timerService->setTimer(this, 1, ((sc::time) SwitchStatechart::timeout), false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}
@@ -712,7 +723,7 @@ namespace mrw
 		void SwitchStatechart::react_main_region_Operating_operating__choice_0()
 		{
 			/* The reactions of state null. */
-			if (((ifaceOperationCallback->isFree()) || (isManual)) || ((!ifaceOperationCallback->isReserved())))
+			if (((ifaceOperationCallback->isFree()) || (isManual)) || ((!(ifaceOperationCallback->isReserved()))))
 			{
 				enseq_main_region_Operating_operating_Unlocked_default();
 			}
@@ -770,9 +781,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -814,9 +826,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -846,9 +859,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -869,9 +883,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -901,9 +916,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -942,9 +958,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -964,9 +981,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_operating_Turning_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -986,9 +1004,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_operating_Turning_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -998,12 +1017,10 @@ namespace mrw
 		{
 			/* The reactions of state Pending. */
 			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Operating_operating_Turning_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1023,22 +1040,23 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		void SwitchStatechart::clearOutEvents()
+		void SwitchStatechart::clearOutEvents() noexcept
 		{
 			started_raised = false;
 			entered_raised = false;
 			stop_raised = false;
 		}
 
-		void SwitchStatechart::clearInEvents()
+		void SwitchStatechart::clearInEvents() noexcept
 		{
 			clear_raised = false;
 			start_raised = false;
@@ -1117,9 +1135,8 @@ namespace mrw
 			{
 				microStep();
 				clearInEvents();
-				dispatchEvent(getNextEvent());
 			}
-			while (((((((((((clear_raised) || (start_raised)) || (leftResponse_raised)) || (rightResponse_raised)) || (response_raised)) || (queued_raised)) || (failed_raised)) || (unlock_raised)) || (turn_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while (dispatchEvent(getNextEvent()));
 			isExecuting = false;
 		}
 

@@ -16,23 +16,17 @@ namespace mrw
 	namespace statechart
 	{
 
-		const sc::integer ConfigStatechart::timeout = 1000;
-		const sc::integer ConfigStatechart::writetime = 50;
-		const sc::integer ConfigStatechart::flashtime = 200;
-		const sc::integer ConfigStatechart::resettime = 3500;
 
 
-
-		ConfigStatechart::ConfigStatechart(QObject * parent) :
-			QObject(parent),
+		ConfigStatechart::ConfigStatechart(QObject * parent) noexcept :
 			idx(0),
 			max(0),
+			connected_raised(false),
+			completed_raised(false),
 			written(0),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
-			isExecuting(false),
-			connected_raised(false),
-			completed_raised(false)
+			isExecuting(false)
 		{
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
 			{
@@ -48,13 +42,13 @@ namespace mrw
 
 
 
-		mrw::statechart::ConfigStatechart::EventInstance * ConfigStatechart::getNextEvent()
+		std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance> ConfigStatechart::getNextEvent() noexcept
 		{
-			mrw::statechart::ConfigStatechart::EventInstance * nextEvent = 0;
+			std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance> nextEvent = 0;
 
 			if (!incomingEventQueue.empty())
 			{
-				nextEvent = incomingEventQueue.front();
+				nextEvent = std::move(incomingEventQueue.front());
 				incomingEventQueue.pop_front();
 			}
 
@@ -63,11 +57,17 @@ namespace mrw
 		}
 
 
-		void ConfigStatechart::dispatchEvent(mrw::statechart::ConfigStatechart::EventInstance * event)
+		template<typename EWV, typename EV>
+		std::unique_ptr<EWV> cast_event_pointer_type (std::unique_ptr<EV> && event)
+		{
+			return std::unique_ptr<EWV> {static_cast<EWV *>(event.release())};
+		}
+
+		bool ConfigStatechart::dispatchEvent(std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance> event) noexcept
 		{
 			if (event == nullptr)
 			{
-				return;
+				return false;
 			}
 
 			switch (event->eventId)
@@ -92,29 +92,34 @@ namespace mrw
 					break;
 				}
 			default:
-				/* do nothing */
-				break;
+				//pointer got out of scope
+				return false;
 			}
-			delete event;
+			//pointer got out of scope
+			return true;
 		}
 
 
+		/*! Slot for the in event 'connected' that is defined in the default interface scope. */
 		void mrw::statechart::ConfigStatechart::connected()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::connected));
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance>(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::connected)))
+			;
 			runCycle();
 		}
 
 
+		/*! Slot for the in event 'completed' that is defined in the default interface scope. */
 		void mrw::statechart::ConfigStatechart::completed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::completed));
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance>(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::completed)))
+			;
 			runCycle();
 		}
 
 
 
-		bool ConfigStatechart::isActive() const
+		bool ConfigStatechart::isActive() const noexcept
 		{
 			return stateConfVector[0] != mrw::statechart::ConfigStatechart::State::NO_STATE;
 		}
@@ -122,12 +127,12 @@ namespace mrw
 		/*
 		 * Always returns 'false' since this state machine can never become final.
 		 */
-		bool ConfigStatechart::isFinal() const
+		bool ConfigStatechart::isFinal() const noexcept
 		{
 			return false;
 		}
 
-		bool ConfigStatechart::check() const
+		bool ConfigStatechart::check() const noexcept
 		{
 			if (timerService == nullptr)
 			{
@@ -141,17 +146,17 @@ namespace mrw
 		}
 
 
-		void ConfigStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_)
+		void ConfigStatechart::setTimerService(std::shared_ptr<sc::timer::TimerServiceInterface> timerService_) noexcept
 		{
 			this->timerService = timerService_;
 		}
 
-		sc::timer::TimerServiceInterface * ConfigStatechart::getTimerService()
+		std::shared_ptr<sc::timer::TimerServiceInterface> ConfigStatechart::getTimerService() noexcept
 		{
 			return timerService;
 		}
 
-		sc::integer ConfigStatechart::getNumberOfParallelTimeEvents()
+		sc::integer ConfigStatechart::getNumberOfParallelTimeEvents() noexcept
 		{
 			return parallelTimeEventsCount;
 		}
@@ -160,13 +165,13 @@ namespace mrw
 		{
 			if (evid < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::ConfigStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::ConfigStatechart::Event::_te0_main_region_Wait_for_Connect_))));
+				incomingEventQueue.push_back(std::unique_ptr< EventInstance>(new EventInstance(static_cast<mrw::statechart::ConfigStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::ConfigStatechart::Event::_te0_main_region_Wait_for_Connect_)))));
 				runCycle();
 			}
 		}
 
 
-		bool ConfigStatechart::isStateActive(State state) const
+		bool ConfigStatechart::isStateActive(State state) const noexcept
 		{
 			switch (state)
 			{
@@ -204,39 +209,57 @@ namespace mrw
 			}
 		}
 
-		sc::integer ConfigStatechart::getTimeout()
+		sc::integer ConfigStatechart::getTimeout() noexcept
 		{
-			return timeout;
+			return timeout
+				;
 		}
 
-		sc::integer ConfigStatechart::getWritetime()
+		sc::integer ConfigStatechart::getWritetime() noexcept
 		{
-			return writetime;
+			return writetime
+				;
 		}
 
-		sc::integer ConfigStatechart::getFlashtime()
+		sc::integer ConfigStatechart::getFlashtime() noexcept
 		{
-			return flashtime;
+			return flashtime
+				;
 		}
 
-		sc::integer ConfigStatechart::getResettime()
+		sc::integer ConfigStatechart::getResettime() noexcept
 		{
-			return resettime;
+			return resettime
+				;
 		}
 
-		sc::integer ConfigStatechart::getIdx() const
+		sc::integer ConfigStatechart::getIdx() const noexcept
 		{
-			return idx;
+			return idx
+				;
 		}
 
-		sc::integer ConfigStatechart::getMax() const
+		void ConfigStatechart::setIdx(sc::integer idx_) noexcept
 		{
-			return max;
+			this->idx = idx_;
+		}
+		sc::integer ConfigStatechart::getMax() const noexcept
+		{
+			return max
+				;
 		}
 
-		void ConfigStatechart::setOperationCallback(OperationCallback * operationCallback)
+		void ConfigStatechart::setMax(sc::integer max_) noexcept
+		{
+			this->max = max_;
+		}
+		void ConfigStatechart::setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept
 		{
 			ifaceOperationCallback = operationCallback;
+		}
+		void ConfigStatechart::setWritten(sc::integer written_) noexcept
+		{
+			this->written = written_;
 		}
 
 // implementations of all internal functions
@@ -244,25 +267,25 @@ namespace mrw
 		void ConfigStatechart::enact_main_region_Wait_for_Connect()
 		{
 			/* Entry action for state 'Wait for Connect'. */
-			timerService->setTimer(this, 0, ConfigStatechart::timeout, false);
-			idx = 0;
-			max = 0;
+			timerService->setTimer(shared_from_this(), 0, ((sc::time) ConfigStatechart::timeout), false);
+			setIdx(0);
+			setMax(0);
 		}
 
 		/* Entry action for state 'Configure'. */
 		void ConfigStatechart::enact_main_region_Configure()
 		{
 			/* Entry action for state 'Configure'. */
-			timerService->setTimer(this, 1, ConfigStatechart::writetime, false);
-			written = ifaceOperationCallback->configure(idx);
-			max = (written) > (max) ? written : max;
+			timerService->setTimer(shared_from_this(), 1, ((sc::time) ConfigStatechart::writetime), false);
+			setWritten(ifaceOperationCallback->configure(idx));
+			setMax((written) > (max) ? written : max);
 		}
 
 		/* Entry action for state 'Wait for Boot'. */
 		void ConfigStatechart::enact_main_region_Wait_for_Boot()
 		{
 			/* Entry action for state 'Wait for Boot'. */
-			timerService->setTimer(this, 2, ((ConfigStatechart::flashtime * max) + ConfigStatechart::resettime), false);
+			timerService->setTimer(shared_from_this(), 2, ((((sc::time) ConfigStatechart::flashtime) * max) + ConfigStatechart::resettime), false);
 			ifaceOperationCallback->booting();
 		}
 
@@ -284,14 +307,14 @@ namespace mrw
 		void ConfigStatechart::exact_main_region_Wait_for_Connect()
 		{
 			/* Exit action for state 'Wait for Connect'. */
-			timerService->unsetTimer(this, 0);
+			timerService->unsetTimer(shared_from_this(), 0);
 		}
 
 		/* Exit action for state 'Configure'. */
 		void ConfigStatechart::exact_main_region_Configure()
 		{
 			/* Exit action for state 'Configure'. */
-			timerService->unsetTimer(this, 1);
+			timerService->unsetTimer(shared_from_this(), 1);
 			idx++;
 		}
 
@@ -299,7 +322,7 @@ namespace mrw
 		void ConfigStatechart::exact_main_region_Wait_for_Boot()
 		{
 			/* Exit action for state 'Wait for Boot'. */
-			timerService->unsetTimer(this, 2);
+			timerService->unsetTimer(shared_from_this(), 2);
 		}
 
 		/* 'default' enter sequence for state Wait for Connect */
@@ -476,9 +499,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -498,9 +522,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -531,9 +556,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -543,14 +569,8 @@ namespace mrw
 		{
 			/* The reactions of state Failed. */
 			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-			}
-			/* If no transition was taken then execute local reactions */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				transitioned_after = react(transitioned_before);
-			}
+			/* Always execute local reactions. */
+			transitioned_after = react(transitioned_before);
 			return transitioned_after;
 		}
 
@@ -558,18 +578,12 @@ namespace mrw
 		{
 			/* The reactions of state Booted. */
 			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-			}
-			/* If no transition was taken then execute local reactions */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				transitioned_after = react(transitioned_before);
-			}
+			/* Always execute local reactions. */
+			transitioned_after = react(transitioned_before);
 			return transitioned_after;
 		}
 
-		void ConfigStatechart::clearInEvents()
+		void ConfigStatechart::clearInEvents() noexcept
 		{
 			connected_raised = false;
 			completed_raised = false;
@@ -626,9 +640,8 @@ namespace mrw
 			{
 				microStep();
 				clearInEvents();
-				dispatchEvent(getNextEvent());
 			}
-			while (((((connected_raised) || (completed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2]));
+			while (dispatchEvent(getNextEvent()));
 			isExecuting = false;
 		}
 

@@ -16,17 +16,9 @@ namespace mrw
 	namespace statechart
 	{
 
-		const sc::integer TrackerStatechart::start = 1000;
-		const sc::integer TrackerStatechart::step = 300;
 
 
-
-		TrackerStatechart::TrackerStatechart() :
-			timerService(nullptr),
-			ifaceOperationCallback(nullptr),
-			isExecuting(false),
-			received_raised(false),
-			completed_raised(false)
+		TrackerStatechart::TrackerStatechart() noexcept
 		{
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
 			{
@@ -39,11 +31,23 @@ namespace mrw
 
 		TrackerStatechart::~TrackerStatechart()
 		{
+			while (!internalEventQueue.empty())
+			{
+				auto nextEvent{internalEventQueue.front()};
+				internalEventQueue.pop_front();
+				delete nextEvent;
+			}
+			while (!incomingEventQueue.empty())
+			{
+				auto nextEvent{incomingEventQueue.front()};
+				incomingEventQueue.pop_front();
+				delete nextEvent;
+			}
 		}
 
 
 
-		mrw::statechart::TrackerStatechart::EventInstance * TrackerStatechart::getNextEvent()
+		mrw::statechart::TrackerStatechart::EventInstance * TrackerStatechart::getNextEvent() noexcept
 		{
 			mrw::statechart::TrackerStatechart::EventInstance * nextEvent = 0;
 
@@ -63,11 +67,12 @@ namespace mrw
 		}
 
 
-		void TrackerStatechart::dispatchEvent(mrw::statechart::TrackerStatechart::EventInstance * event)
+
+		bool TrackerStatechart::dispatchEvent(mrw::statechart::TrackerStatechart::EventInstance * event) noexcept
 		{
 			if (event == nullptr)
 			{
-				return;
+				return false;
 			}
 
 			switch (event->eventId)
@@ -93,22 +98,27 @@ namespace mrw
 					break;
 				}
 			default:
-				/* do nothing */
-				break;
+				//pointer got out of scope
+				delete event;
+				return false;
 			}
+			//pointer got out of scope
 			delete event;
+			return true;
 		}
 
 
+		/*! Raises the in event 'received' of default interface scope. */
 		void mrw::statechart::TrackerStatechart::raiseReceived()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::received));
+			incomingEventQueue.push_back(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::received))
+			;
 			runCycle();
 		}
 
 
 
-		bool TrackerStatechart::isActive() const
+		bool TrackerStatechart::isActive() const noexcept
 		{
 			return stateConfVector[0] != mrw::statechart::TrackerStatechart::State::NO_STATE;
 		}
@@ -116,12 +126,12 @@ namespace mrw
 		/*
 		 * Always returns 'false' since this state machine can never become final.
 		 */
-		bool TrackerStatechart::isFinal() const
+		bool TrackerStatechart::isFinal() const noexcept
 		{
 			return false;
 		}
 
-		bool TrackerStatechart::check() const
+		bool TrackerStatechart::check() const noexcept
 		{
 			if (timerService == nullptr)
 			{
@@ -135,17 +145,17 @@ namespace mrw
 		}
 
 
-		void TrackerStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_)
+		void TrackerStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_) noexcept
 		{
 			this->timerService = timerService_;
 		}
 
-		sc::timer::TimerServiceInterface * TrackerStatechart::getTimerService()
+		sc::timer::TimerServiceInterface * TrackerStatechart::getTimerService() noexcept
 		{
 			return timerService;
 		}
 
-		sc::integer TrackerStatechart::getNumberOfParallelTimeEvents()
+		sc::integer TrackerStatechart::getNumberOfParallelTimeEvents() noexcept
 		{
 			return parallelTimeEventsCount;
 		}
@@ -160,7 +170,7 @@ namespace mrw
 		}
 
 
-		bool TrackerStatechart::isStateActive(State state) const
+		bool TrackerStatechart::isStateActive(State state) const noexcept
 		{
 			switch (state)
 			{
@@ -203,17 +213,19 @@ namespace mrw
 			}
 		}
 
-		sc::integer TrackerStatechart::getStart()
+		sc::integer TrackerStatechart::getStart() noexcept
 		{
-			return start;
+			return start
+				;
 		}
 
-		sc::integer TrackerStatechart::getStep()
+		sc::integer TrackerStatechart::getStep() noexcept
 		{
-			return step;
+			return step
+				;
 		}
 
-		void TrackerStatechart::setOperationCallback(OperationCallback * operationCallback)
+		void TrackerStatechart::setOperationCallback(OperationCallback * operationCallback) noexcept
 		{
 			ifaceOperationCallback = operationCallback;
 		}
@@ -223,14 +235,14 @@ namespace mrw
 		void TrackerStatechart::enact_main_region_Preparing()
 		{
 			/* Entry action for state 'Preparing'. */
-			timerService->setTimer(this, 0, TrackerStatechart::start, false);
+			timerService->setTimer(this, 0, ((sc::time) TrackerStatechart::start), false);
 		}
 
 		/* Entry action for state 'First'. */
 		void TrackerStatechart::enact_main_region_Driving_Tracking_First()
 		{
 			/* Entry action for state 'First'. */
-			timerService->setTimer(this, 1, TrackerStatechart::step, false);
+			timerService->setTimer(this, 1, ((sc::time) TrackerStatechart::step), false);
 			ifaceOperationCallback->first();
 		}
 
@@ -238,7 +250,7 @@ namespace mrw
 		void TrackerStatechart::enact_main_region_Driving_Tracking_Occupy()
 		{
 			/* Entry action for state 'Occupy'. */
-			timerService->setTimer(this, 2, TrackerStatechart::step, false);
+			timerService->setTimer(this, 2, ((sc::time) TrackerStatechart::step), false);
 			ifaceOperationCallback->occupy();
 		}
 
@@ -246,9 +258,10 @@ namespace mrw
 		void TrackerStatechart::enact_main_region_Driving_Tracking_Free()
 		{
 			/* Entry action for state 'Free'. */
-			timerService->setTimer(this, 3, TrackerStatechart::step, false);
+			timerService->setTimer(this, 3, ((sc::time) TrackerStatechart::step), false);
 			ifaceOperationCallback->free();
-			internalEventQueue.push_back(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::Internal_completed));
+			internalEventQueue.push_back(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::Internal_completed))
+			;
 		}
 
 		/* Entry action for state 'Idle'. */
@@ -517,9 +530,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -539,9 +553,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -562,9 +577,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Driving_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -585,9 +601,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Driving_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -608,9 +625,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Driving_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -630,15 +648,16 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		void TrackerStatechart::clearInEvents()
+		void TrackerStatechart::clearInEvents() noexcept
 		{
 			received_raised = false;
 			timeEvents[0] = false;
@@ -647,7 +666,7 @@ namespace mrw
 			timeEvents[3] = false;
 		}
 
-		void TrackerStatechart::clearInternalEvents()
+		void TrackerStatechart::clearInternalEvents() noexcept
 		{
 			completed_raised = false;
 		}
@@ -701,9 +720,8 @@ namespace mrw
 				microStep();
 				clearInEvents();
 				clearInternalEvents();
-				dispatchEvent(getNextEvent());
 			}
-			while ((((((received_raised) || (completed_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3]));
+			while (dispatchEvent(getNextEvent()));
 			isExecuting = false;
 		}
 

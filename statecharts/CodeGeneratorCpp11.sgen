@@ -21,6 +21,11 @@ GeneratorModel for yakindu::cpp11
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
+		feature GeneratorOptions
+		{
+			smartPointers = false
+		}
+
 		feature IdentifierSettings
 		{
 			headerFilenameExtension = "h"
@@ -51,6 +56,11 @@ GeneratorModel for yakindu::cpp11
 		feature LicenseHeader
 		{
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
+		}
+
+		feature GeneratorOptions
+		{
+			smartPointers = false
 		}
 
 		feature IdentifierSettings
@@ -85,6 +95,11 @@ GeneratorModel for yakindu::cpp11
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
+		feature GeneratorOptions
+		{
+			smartPointers = false
+		}
+
 		feature IdentifierSettings
 		{
 			headerFilenameExtension = "h"
@@ -115,6 +130,11 @@ GeneratorModel for yakindu::cpp11
 		feature LicenseHeader
 		{
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
+		}
+
+		feature GeneratorOptions
+		{
+			smartPointers = false
 		}
 
 		feature IdentifierSettings
@@ -149,6 +169,11 @@ GeneratorModel for yakindu::cpp11
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
+		feature GeneratorOptions
+		{
+			smartPointers = false
+		}
+
 		feature IdentifierSettings
 		{
 			headerFilenameExtension = "h"
@@ -179,6 +204,11 @@ GeneratorModel for yakindu::cpp11
 		feature LicenseHeader
 		{
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
+		}
+
+		feature GeneratorOptions
+		{
+			smartPointers = false
 		}
 
 		feature IdentifierSettings
@@ -213,6 +243,11 @@ GeneratorModel for yakindu::cpp11
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
+		feature GeneratorOptions
+		{
+			smartPointers = false
+		}
+
 		feature IdentifierSettings
 		{
 			headerFilenameExtension = "h"
@@ -245,6 +280,11 @@ GeneratorModel for yakindu::cpp11
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
 		}
 
+		feature GeneratorOptions
+		{
+			smartPointers = false
+		}
+
 		feature IdentifierSettings
 		{
 			headerFilenameExtension = "h"
@@ -275,6 +315,11 @@ GeneratorModel for yakindu::cpp11
 		feature LicenseHeader
 		{
 			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork\n//\n*"
+		}
+
+		feature GeneratorOptions
+		{
+			smartPointers = false
 		}
 
 		feature IdentifierSettings

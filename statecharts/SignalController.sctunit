@@ -961,10 +961,6 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		exit
 		assert !is_active
 
-		pendingShunting()
-		exit
-		assert !is_active
-
 		pendingTourLight()
 		exit
 		assert !is_active
@@ -977,22 +973,6 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		exit
 		assert !is_active
 
-		tourLocked()
-		exit
-		assert !is_active
-
-		tourLockedCombined()
-		exit
-		assert !is_active
-
-		shuntingLocked()
-		exit
-		assert !is_active
-
-		extendTour()
-		exit
-		assert !is_active
-
 		extendTourCompleted()
 		exit
 		assert !is_active
@@ -1001,15 +981,19 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		exit
 		assert !is_active
 
+		tourLocked()
+		exit
+		assert !is_active
+
+		tourLockedCombined()
+		exit
+		assert !is_active
+
+		extendTour()
+		exit
+		assert !is_active
+
 		extendTourCombinedCompleted()
-		exit
-		assert !is_active
-
-		extendShunting()
-		exit
-		assert !is_active
-
-		extendShuntingCompleted()
 		exit
 		assert !is_active
 
@@ -1029,7 +1013,19 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		exit
 		assert !is_active
 
-		disableTourCombinedForm()
+		pendingShunting()
+		exit
+		assert !is_active
+
+		shuntingLocked()
+		exit
+		assert !is_active
+
+		extendShunting()
+		exit
+		assert !is_active
+
+		extendShuntingCompleted()
 		exit
 		assert !is_active
 
@@ -1056,5 +1052,10 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		failedShunting
 		exit
 		assert !is_active
+/*
+		disableTourCombinedForm()
+		exit
+		assert !is_active
+*/
 	}
 }

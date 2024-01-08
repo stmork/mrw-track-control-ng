@@ -21,6 +21,7 @@
 #include <util/random.h>
 #include <util/batchparticipant.h>
 #include <util/globalbatch.h>
+#include <util/self.h>
 
 #include "testutil.h"
 
@@ -476,7 +477,17 @@ void TestUtil::testDifferentBatch()
 	TestBatch       batch;
 	TestParticipant part_a("A");
 
-	QVERIFY( part_a.increase());
+	QVERIFY(part_a.increase());
 	part_a.setBatch(&batch);
-	QVERIFY( part_a.increase());
+	QVERIFY(part_a.increase());
+}
+
+void TestUtil::testSelfPointer()
+{
+	TestBatch                    batch;
+	SelfPointer<TestBatch>       self(&batch);
+	std::shared_ptr<TestBatch> & shared_pointer = self;
+
+	QVERIFY(shared_pointer);
+	QCOMPARE(shared_pointer.use_count(), 1);
 }

@@ -9,9 +9,11 @@
 #define MRW_CTRL_SECTIONCONTROLLER_H
 
 #include <util/batchparticipant.h>
+#include <util/self.h>
 #include <model/section.h>
 #include <ctrl/basecontroller.h>
 #include <ctrl/controllerregistrand.h>
+#include <statecharts/timerservice.h>
 #include <statecharts/SectionStatechart.h>
 
 namespace mrw::ctrl
@@ -20,15 +22,15 @@ namespace mrw::ctrl
 		public BaseController,
 		public ControllerRegistrand,
 		public mrw::util::BatchParticipant,
+		public mrw::util::SelfPointer<mrw::statechart::SectionStatechart::OperationCallback>,
 		public mrw::statechart::SectionStatechart::OperationCallback
 	{
 		Q_OBJECT
 
 	private:
-		mrw::statechart::SectionStatechart  statechart;
-		mrw::model::Section        *        ctrl_section;
-
-		SectionController         *         next = nullptr;
+		mrw::statechart::QtStatechart<mrw::statechart::SectionStatechart>  statechart;
+		mrw::model::Section                        *                       ctrl_section;
+		SectionController                         *                        next = nullptr;
 
 	public:
 		explicit SectionController(

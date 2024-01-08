@@ -1,12 +1,14 @@
 #
 #  SPDX-License-Identifier: MIT
-#  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+#  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 #
 
 TEMPLATE  = lib
 CONFIG   += staticlib
 
 include(../common.pri)
+
+QMAKE_CXXFLAGS  += -Wno-reorder -Wno-unused-parameter
 
 HEADERS += \
 	ConfigStatechart.h \

@@ -18,6 +18,7 @@ namespace sc
 	typedef int        errorCode;
 	typedef double     real;
 	typedef unsigned   eventid;
+	typedef time_t     time;
 }
 
 #endif

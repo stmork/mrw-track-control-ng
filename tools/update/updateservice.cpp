@@ -22,6 +22,7 @@ UpdateService::UpdateService(
 	const QString & plugin,
 	QObject    *    parent) :
 	MrwBusService(interface, plugin, parent, false),
+	SelfPointer<OperationCallback>(this),
 	statechart(nullptr)
 {
 	buffer.reserve(65536);
@@ -32,8 +33,8 @@ UpdateService::UpdateService(
 		&statechart, &UpdateStatechart::connected,
 		Qt::QueuedConnection);
 
-	statechart.setTimerService(&TimerService::instance());
-	statechart.setOperationCallback(this);
+	statechart.setTimerService(TimerService::instance());
+	statechart.setOperationCallback(*this);
 
 	Q_ASSERT(statechart.check());
 	statechart.enter();

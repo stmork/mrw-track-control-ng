@@ -2,55 +2,31 @@
  * Timer Service for SCTUnit
  */
 
-#ifndef SC_TIMER_SERVICE_H_
-#define SC_TIMER_SERVICE_H_
+#ifndef SC_UNIT_TIMER_SERVICE_H_
+#define SC_UNIT_TIMER_SERVICE_H_
 
-#include <list>
 
 #include "sc_types.h"
-#include "sc_statemachine.h"
+#include "sc_eventdriven.h"
 #include "sc_timer.h"
+#include "sc_timer_service.h"
 
 class TimedSctUnitRunner : public sc::timer::TimerServiceInterface
 {
 public:
-	TimedSctUnitRunner(sc::StatemachineInterface * statemachine_, bool event_driven_, sc::integer cycle_period_);
-	virtual ~TimedSctUnitRunner() {};
-	void proceed_time(sc::integer time_ms);
+	TimedSctUnitRunner(size_t maximal_parallel_time_events_);
+	virtual ~TimedSctUnitRunner()
+	{
+		delete [] tasks;
+	};
+	void proceed_time(sc::time time_ms);
 	void proceed_cycles(sc::integer cycles);
-	virtual void setTimer(sc::timer::TimedInterface * statemachine_, sc::eventid event, sc::integer time_ms, bool isPeriodic) override;
-	virtual void unsetTimer(sc::timer::TimedInterface * statemachine_, sc::eventid event) override;
-	virtual void cancel();
+	virtual void setTimer(sc::timer::TimedInterface * statemachine_, sc::eventid event, sc::time time_ms, bool isPeriodic) override;
+	virtual void unsetTimer(sc::timer::TimedInterface * statemachine_, sc::eventid event) noexcept override;
+	virtual void cancel() noexcept;
 private:
-	class SctTimer;
-	sc::StatemachineInterface * statemachine;
-
-	bool event_driven;
-	sc::integer cycle_period;
-	sc::integer current_time_ms;
-
-	std::list<SctTimer> timer_queue;
-	void insert_timer(SctTimer timer);
+	sc::timer::TimerTask * tasks;
+	sc::timer::TimerService timerServiceImplementation;
 };
-
-class TimedSctUnitRunner::SctTimer
-{
-	friend class TimedSctUnitRunner;
-public:
-	SctTimer(sc::timer::TimedInterface * tsi_, sc::integer time_ms, bool periodic_, sc::eventid evid, sc::integer priority_, bool is_runcycle_);
-	~SctTimer() {}
-
-	sc::integer compare(SctTimer * other);
-
-private:
-	sc::timer::TimedInterface * tsi;
-	sc::integer rel_time_ms;
-	sc::integer abs_time_ms;
-	bool periodic;
-	sc::eventid pt_evid;
-	sc::integer priority;
-	bool is_runcycle;
-};
-
-#endif /* SC_TIMER_SERVICE_H_ */
+#endif /* SC_UNIT_TIMER_SERVICE_H_ */
 

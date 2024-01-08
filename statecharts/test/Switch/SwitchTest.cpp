@@ -1,10 +1,12 @@
 /** *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 * */
 #include <string>
+#include <list>
+#include <algorithm>
 #include "gtest/gtest.h"
 #include "SwitchStatechart.h"
 #include "sc_runner_timed.h"
@@ -735,18 +737,52 @@ namespace mrw
 		class SwitchTest : public ::testing::Test
 		{
 		protected:
+			MockDefault defaultMock;
 			virtual void SetUp()
 			{
 				statechart = new mrw::statechart::SwitchStatechart();
+				size_t maximalParallelTimeEvents = (size_t)statechart->getNumberOfParallelTimeEvents();
 				runner = new TimedSctUnitRunner(
-					statechart,
-					true,
-					200
+					maximalParallelTimeEvents
 				);
 				statechart->setTimerService(runner);
+				incMock = new IncMock();
+				incMock->initializeBehavior();
+				pendingMock = new PendingMock();
+				pendingMock->initializeBehavior();
+				lockMock = new LockMock();
+				lockMock->initializeBehavior();
+				failMock = new FailMock();
+				failMock->initializeBehavior();
+				decMock = new DecMock();
+				decMock->initializeBehavior();
+				leftMock = new LeftMock();
+				leftMock->initializeBehavior();
+				rightMock = new RightMock();
+				rightMock->initializeBehavior();
+				requestMock = new RequestMock();
+				requestMock->initializeBehavior();
+				isFreeMock = new IsFreeMock();
+				isFreeMock->initializeBehavior();
+				isReservedMock = new IsReservedMock();
+				isReservedMock->initializeBehavior();
+				doTurnLeftMock = new DoTurnLeftMock();
+				doTurnLeftMock->initializeBehavior();
+				statechart->setOperationCallback(&defaultMock);
 			}
 			virtual void TearDown()
 			{
+				delete doTurnLeftMock;
+				delete isReservedMock;
+				delete isFreeMock;
+				delete requestMock;
+				delete rightMock;
+				delete leftMock;
+				delete decMock;
+				delete failMock;
+				delete lockMock;
+				delete pendingMock;
+				delete incMock;
 				delete statechart;
 				delete runner;
 			}
@@ -760,14 +796,12 @@ namespace mrw
 
 			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
 
-
 		}
 		void lockedState()
 		{
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Locked));
 
 			EXPECT_TRUE(lockMock->calledAtLeastOnce());
-
 
 		}
 		void failState()
@@ -777,7 +811,6 @@ namespace mrw
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
 			EXPECT_TRUE(statechart->isRaisedStop());
-
 
 		}
 
@@ -805,46 +838,9 @@ namespace mrw
 
 			doTurnLeftMock->setDefaultBehavior(&DoTurnLeftMock::doTurnLeft1);
 
-
-			incMock->reset();
-			decMock->reset();
-			leftMock->reset();
-			rightMock->reset();
-			requestMock->reset();
-			failMock->reset();
-			pendingMock->reset();
-			lockMock->reset();
-			isFreeMock->reset();
-			isReservedMock->reset();
-			doTurnLeftMock->reset();
 		}
 		TEST_F(SwitchTest, waitForStart)
 		{
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			waitForStart();
 		}
 		void initial()
@@ -863,44 +859,9 @@ namespace mrw
 
 			EXPECT_TRUE(pendingMock->calledAtLeastOnce());
 
-
-			incMock->reset();
-			requestMock->reset();
-			pendingMock->reset();
 		}
 		TEST_F(SwitchTest, initial)
 		{
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			initial();
 		}
 		void failAfterStart()
@@ -911,82 +872,18 @@ namespace mrw
 
 			failState();
 
-
 		}
 		TEST_F(SwitchTest, failAfterStart)
 		{
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			failAfterStart();
 		}
 		TEST_F(SwitchTest, timeoutAfterStart)
 		{
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			initial();
 
 			runner->proceed_time(statechart->getTimeout());
 
 			failState();
-
 
 		}
 		void operational()
@@ -1005,90 +902,13 @@ namespace mrw
 
 			EXPECT_TRUE(lockMock->calledAtLeastOnce());
 
-
-			decMock->reset();
-			lockMock->reset();
 		}
 		TEST_F(SwitchTest, operational)
 		{
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			operational();
 		}
 		TEST_F(SwitchTest, restart)
 		{
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			operational();
 
 			statechart->raiseStart();
@@ -1101,47 +921,9 @@ namespace mrw
 
 			EXPECT_TRUE(requestMock->calledAtLeastOnce());
 
-
-			incMock->reset();
-			requestMock->reset();
 		}
 		TEST_F(SwitchTest, clearing)
 		{
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			failAfterStart();
 
 			statechart->raiseClear();
@@ -1158,9 +940,6 @@ namespace mrw
 
 			EXPECT_TRUE(requestMock->calledAtLeastOnce());
 
-
-			incMock->reset();
-			requestMock->reset();
 		}
 		void turnLeft()
 		{
@@ -1180,57 +959,9 @@ namespace mrw
 
 			turning();
 
-
-			doTurnLeftMock->reset();
-			isReservedMock->reset();
-			incMock->reset();
-			leftMock->reset();
 		}
 		TEST_F(SwitchTest, turnLeft)
 		{
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			turnLeft();
 		}
 		void turnRight()
@@ -1251,57 +982,9 @@ namespace mrw
 
 			turning();
 
-
-			doTurnLeftMock->reset();
-			isReservedMock->reset();
-			incMock->reset();
-			rightMock->reset();
 		}
 		TEST_F(SwitchTest, turnRight)
 		{
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			turnRight();
 		}
 		void queuedLeft()
@@ -1322,62 +1005,9 @@ namespace mrw
 
 			lockedState();
 
-
-			isFreeMock->reset();
-			isReservedMock->reset();
-			decMock->reset();
 		}
 		TEST_F(SwitchTest, queuedLeft)
 		{
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			queuedLeft();
 		}
 		void queuedRight()
@@ -1398,115 +1028,13 @@ namespace mrw
 
 			lockedState();
 
-
-			isFreeMock->reset();
-			isReservedMock->reset();
-			decMock->reset();
 		}
 		TEST_F(SwitchTest, queuedRight)
 		{
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			queuedRight();
 		}
 		TEST_F(SwitchTest, freeLeft)
 		{
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			turnLeft();
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree1);
@@ -1523,62 +1051,9 @@ namespace mrw
 
 			EXPECT_TRUE(decMock->calledAtLeastOnce());
 
-
-			isFreeMock->reset();
-			isReservedMock->reset();
-			decMock->reset();
 		}
 		TEST_F(SwitchTest, freeRight)
 		{
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			turnRight();
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree1);
@@ -1595,10 +1070,6 @@ namespace mrw
 
 			EXPECT_TRUE(decMock->calledAtLeastOnce());
 
-
-			isFreeMock->reset();
-			isReservedMock->reset();
-			decMock->reset();
 		}
 		void okLeft()
 		{
@@ -1612,59 +1083,9 @@ namespace mrw
 
 			lockedState();
 
-
-			isFreeMock->reset();
-			isReservedMock->reset();
 		}
 		TEST_F(SwitchTest, okLeft)
 		{
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			okLeft();
 		}
 		void okRight()
@@ -1679,110 +1100,13 @@ namespace mrw
 
 			lockedState();
 
-
-			isFreeMock->reset();
-			isReservedMock->reset();
 		}
 		TEST_F(SwitchTest, okRight)
 		{
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			okRight();
 		}
 		TEST_F(SwitchTest, failLeft)
 		{
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			turnLeft();
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
@@ -1793,112 +1117,18 @@ namespace mrw
 
 			failState();
 
-
-			isFreeMock->reset();
-			isReservedMock->reset();
 		}
 		TEST_F(SwitchTest, failRight)
 		{
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			turnRight();
 
 			statechart->raiseFailed();
 
 			failState();
-
 
 		}
 		TEST_F(SwitchTest, timeoutLeft)
 		{
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			turnLeft();
 
 			isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
@@ -1909,318 +1139,54 @@ namespace mrw
 
 			failState();
 
-
-			isFreeMock->reset();
-			isReservedMock->reset();
 		}
 		TEST_F(SwitchTest, timeoutRight)
 		{
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			turnRight();
 
 			runner->proceed_time(statechart->getTimeout());
 
 			failState();
 
-
 		}
 		TEST_F(SwitchTest, unlockLeft)
 		{
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			okLeft();
 
 			statechart->raiseUnlock();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Unlocked));
-
 
 		}
 		TEST_F(SwitchTest, unlockRight)
 		{
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			okRight();
 
 			statechart->raiseUnlock();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Unlocked));
 
-
 		}
 		TEST_F(SwitchTest, failTurnRight)
 		{
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			okLeft();
 
 			statechart->raiseResponse();
 
 			failState();
 
-
 		}
 		TEST_F(SwitchTest, failTurnLeft)
 		{
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			okRight();
 
 			statechart->raiseResponse();
 
 			failState();
 
-
 		}
 		TEST_F(SwitchTest, doExit)
 		{
-			incMock = new IncMock();
-			incMock->initializeBehavior();
-			decMock = new DecMock();
-			decMock->initializeBehavior();
-			leftMock = new LeftMock();
-			leftMock->initializeBehavior();
-			rightMock = new RightMock();
-			rightMock->initializeBehavior();
-			requestMock = new RequestMock();
-			requestMock->initializeBehavior();
-			failMock = new FailMock();
-			failMock->initializeBehavior();
-			pendingMock = new PendingMock();
-			pendingMock->initializeBehavior();
-			lockMock = new LockMock();
-			lockMock->initializeBehavior();
-			isFreeMock = new IsFreeMock();
-			isFreeMock->initializeBehavior();
-			isReservedMock = new IsReservedMock();
-			isReservedMock->initializeBehavior();
-			doTurnLeftMock = new DoTurnLeftMock();
-			doTurnLeftMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			statechart->enter();
 
 			EXPECT_TRUE(statechart->isActive());
@@ -2288,7 +1254,6 @@ namespace mrw
 			statechart->exit();
 
 			EXPECT_TRUE(!statechart->isActive());
-
 
 		}
 

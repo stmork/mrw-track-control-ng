@@ -1,10 +1,12 @@
 /** *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 * */
 #include <string>
+#include <list>
+#include <algorithm>
 #include "gtest/gtest.h"
 #include "OperatingModeStatechart.h"
 #include "sc_runner_timed.h"
@@ -478,18 +480,41 @@ namespace mrw
 		class OperatingModeTest : public ::testing::Test
 		{
 		protected:
+			MockDefault defaultMock;
+			MockCan canMock;
 			virtual void SetUp()
 			{
 				statechart = new mrw::statechart::OperatingModeStatechart();
+				size_t maximalParallelTimeEvents = (size_t)statechart->getNumberOfParallelTimeEvents();
 				runner = new TimedSctUnitRunner(
-					statechart,
-					true,
-					200
+					maximalParallelTimeEvents
 				);
 				statechart->setTimerService(runner);
+				canConnectBusMock = new CanConnectBusMock();
+				hasActiveRoutesMock = new HasActiveRoutesMock();
+				hasActiveRoutesMock->initializeBehavior();
+				isManualValidMock = new IsManualValidMock();
+				isManualValidMock->initializeBehavior();
+				disableRoutesMock = new DisableRoutesMock();
+				disableRoutesMock->initializeBehavior();
+				resetTransactionMock = new ResetTransactionMock();
+				resetTransactionMock->initializeBehavior();
+				activateManualMock = new ActivateManualMock();
+				activateManualMock->initializeBehavior();
+				canIsConnectedMock = new CanIsConnectedMock();
+				canIsConnectedMock->initializeBehavior();
+				statechart->setOperationCallback(&defaultMock);
+				statechart->can().setOperationCallback(&canMock);
 			}
 			virtual void TearDown()
 			{
+				delete canIsConnectedMock;
+				delete activateManualMock;
+				delete resetTransactionMock;
+				delete disableRoutesMock;
+				delete isManualValidMock;
+				delete hasActiveRoutesMock;
+				delete canConnectBusMock;
 				delete statechart;
 				delete runner;
 			}
@@ -517,52 +542,13 @@ namespace mrw
 
 
 
-
-			canConnectBusMock->reset();
-			hasActiveRoutesMock->reset();
-			isManualValidMock->reset();
-			disableRoutesMock->reset();
-			resetTransactionMock->reset();
-			activateManualMock->reset();
 		}
 		TEST_F(OperatingModeTest, wait)
 		{
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			wait();
 		}
 		TEST_F(OperatingModeTest, timeoutAfterWait)
 		{
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			wait();
 
 			runner->proceed_time(statechart->getTimeout());
@@ -573,14 +559,13 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedFailing());
 
-
 		}
 		void initial()
 		{
 			wait();
 
 			statechart->can
-			()->raiseConnected();
+			().raiseConnected();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running));
 
@@ -590,29 +575,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedStart());
 
-
-			resetTransactionMock->reset();
 		}
 		TEST_F(OperatingModeTest, initial)
 		{
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			initial();
 		}
 		void failAfterStart()
@@ -627,50 +592,13 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedFailing());
 
-
 		}
 		TEST_F(OperatingModeTest, failAfterStart)
 		{
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			failAfterStart();
 		}
 		TEST_F(OperatingModeTest, timeoutAfterStart)
 		{
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			initial();
 
 			runner->proceed_time(statechart->getTimeout());
@@ -681,32 +609,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedFailing());
 
-
 		}
 		TEST_F(OperatingModeTest, clearFailState)
 		{
-			canIsConnectedMock = new CanIsConnectedMock();
-			canIsConnectedMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			failAfterStart();
 
 			canIsConnectedMock->setDefaultBehavior(&CanIsConnectedMock::isConnected1);
@@ -723,32 +628,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedStart());
 
-
-			canIsConnectedMock->reset();
-			resetTransactionMock->reset();
 		}
 		TEST_F(OperatingModeTest, stayFailState)
 		{
-			canIsConnectedMock = new CanIsConnectedMock();
-			canIsConnectedMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			failAfterStart();
 
 			canIsConnectedMock->setDefaultBehavior(&CanIsConnectedMock::isConnected2);
@@ -759,29 +641,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running_operating_Failed));
 
-
-			canIsConnectedMock->reset();
 		}
 		TEST_F(OperatingModeTest, editFailed)
 		{
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			failAfterStart();
 
 			statechart->raiseEdit();
@@ -793,7 +655,6 @@ namespace mrw
 			EXPECT_TRUE(statechart->isRaisedEditing());
 
 			EXPECT_TRUE((statechart->getEditingValue()) == (true));
-
 
 		}
 		void doOperating()
@@ -810,56 +671,18 @@ namespace mrw
 
 			EXPECT_TRUE((statechart->getOperatingValue()) == (true));
 
-
 		}
 		TEST_F(OperatingModeTest, doOperating)
 		{
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			doOperating();
 		}
 		TEST_F(OperatingModeTest, failWhileOperating)
 		{
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			doOperating();
 
 			statechart->raiseFailed();
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running_operating_Operating));
-
 
 		}
 		void initWhileOperatingWithRoutes()
@@ -880,60 +703,13 @@ namespace mrw
 
 			EXPECT_TRUE(disableRoutesMock->calledAtLeastOnce());
 
-
-			hasActiveRoutesMock->reset();
-			disableRoutesMock->reset();
 		}
 		TEST_F(OperatingModeTest, initWhileOperatingWithRoutes)
 		{
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			initWhileOperatingWithRoutes();
 		}
 		TEST_F(OperatingModeTest, initWhileOperatingWithoutRoutes)
 		{
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			doOperating();
 
 			hasActiveRoutesMock->setDefaultBehavior(&HasActiveRoutesMock::hasActiveRoutes1);
@@ -952,9 +728,6 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedStart());
 
-
-			hasActiveRoutesMock->reset();
-			resetTransactionMock->reset();
 		}
 		void disableCompletedWithRoutes()
 		{
@@ -968,35 +741,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running_operating_Disable));
 
-
-			hasActiveRoutesMock->reset();
 		}
 		TEST_F(OperatingModeTest, disableCompletedWithRoutes)
 		{
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			disableCompletedWithRoutes();
 		}
 		void disableCompletedWithoutRoutes()
@@ -1015,38 +762,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedStart());
 
-
-			hasActiveRoutesMock->reset();
-			resetTransactionMock->reset();
 		}
 		TEST_F(OperatingModeTest, disableCompletedWithoutRoutes)
 		{
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			disableCompletedWithoutRoutes();
 		}
 		void doEdit()
@@ -1065,28 +783,9 @@ namespace mrw
 
 			EXPECT_TRUE((statechart->getEditingValue()) == (true));
 
-
 		}
 		TEST_F(OperatingModeTest, doEdit)
 		{
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			doEdit();
 		}
 		void doManual()
@@ -1109,62 +808,13 @@ namespace mrw
 
 			EXPECT_TRUE(activateManualMock->calledAtLeastOnce(true));
 
-
-			isManualValidMock->reset();
-			activateManualMock->reset();
 		}
 		TEST_F(OperatingModeTest, doManual)
 		{
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			doManual();
 		}
 		TEST_F(OperatingModeTest, doLeaveManual)
 		{
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			doManual();
 
 			statechart->raiseManual(false);
@@ -1181,8 +831,6 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedStart());
 
-
-			resetTransactionMock->reset();
 		}
 		void doQuitManual()
 		{
@@ -1198,35 +846,9 @@ namespace mrw
 
 			EXPECT_TRUE(activateManualMock->calledAtLeastOnce(false));
 
-
-			activateManualMock->reset();
 		}
 		TEST_F(OperatingModeTest, doQuitManual)
 		{
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			doQuitManual();
 		}
 		void doWaitManual()
@@ -1239,56 +861,13 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedQuit());
 
-
 		}
 		TEST_F(OperatingModeTest, doWaitManual)
 		{
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			doWaitManual();
 		}
 		TEST_F(OperatingModeTest, operateAfterEdit)
 		{
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			doEdit();
 
 			statechart->raiseOperate();
@@ -1305,30 +884,9 @@ namespace mrw
 
 			EXPECT_TRUE((statechart->getOperatingValue()) == (true));
 
-
 		}
 		TEST_F(OperatingModeTest, doQuitOperating)
 		{
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			doOperating();
 
 			hasActiveRoutesMock->setDefaultBehavior(&HasActiveRoutesMock::hasActiveRoutes1);
@@ -1343,31 +901,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedQuit());
 
-
-			hasActiveRoutesMock->reset();
 		}
 		TEST_F(OperatingModeTest, doQuitEditing)
 		{
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			doEdit();
 
 			hasActiveRoutesMock->setDefaultBehavior(&HasActiveRoutesMock::hasActiveRoutes1);
@@ -1382,31 +918,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedQuit());
 
-
-			hasActiveRoutesMock->reset();
 		}
 		TEST_F(OperatingModeTest, doQuitFailed)
 		{
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			failAfterStart();
 
 			hasActiveRoutesMock->setDefaultBehavior(&HasActiveRoutesMock::hasActiveRoutes1);
@@ -1417,8 +931,6 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedQuit());
 
-
-			hasActiveRoutesMock->reset();
 		}
 		void doQuitWithRoute()
 		{
@@ -1440,62 +952,13 @@ namespace mrw
 
 			EXPECT_TRUE((statechart->getQuittingValue()) == (true));
 
-
-			hasActiveRoutesMock->reset();
-			disableRoutesMock->reset();
 		}
 		TEST_F(OperatingModeTest, doQuitWithRoute)
 		{
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			doQuitWithRoute();
 		}
 		TEST_F(OperatingModeTest, doCompleteQuit)
 		{
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			doQuitWithRoute();
 
 			hasActiveRoutesMock->setDefaultBehavior(&HasActiveRoutesMock::hasActiveRoutes1);
@@ -1510,27 +973,9 @@ namespace mrw
 
 			EXPECT_TRUE(statechart->isRaisedQuit());
 
-
-			hasActiveRoutesMock->reset();
 		}
 		TEST_F(OperatingModeTest, doExit)
 		{
-			canConnectBusMock = new CanConnectBusMock();
-			hasActiveRoutesMock = new HasActiveRoutesMock();
-			hasActiveRoutesMock->initializeBehavior();
-			isManualValidMock = new IsManualValidMock();
-			isManualValidMock->initializeBehavior();
-			disableRoutesMock = new DisableRoutesMock();
-			disableRoutesMock->initializeBehavior();
-			resetTransactionMock = new ResetTransactionMock();
-			resetTransactionMock->initializeBehavior();
-			activateManualMock = new ActivateManualMock();
-			activateManualMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			MockCan canMock;
-			statechart->setOperationCallback(&defaultMock);
-			statechart->can()->setOperationCallback(&canMock);
 			statechart->enter();
 
 			EXPECT_TRUE(statechart->isActive());
@@ -1604,7 +1049,6 @@ namespace mrw
 			statechart->exit();
 
 			EXPECT_TRUE(!statechart->isActive());
-
 
 		}
 

@@ -1,6 +1,6 @@
 #
 #  SPDX-License-Identifier: MIT
-#  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+#  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 #
 
 TEMPLATE = subdirs
@@ -84,6 +84,7 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--inline-suppr\
 	--suppress=unusedStructMember\
 	--suppress=noExplicitConstructor:statecharts/*.h\
+	--suppress=redundantInitialization:statecharts/*.cpp\
 	--suppress=duplicateBreak:statecharts/*.cpp\
 	--suppress=redundantAssignment:statecharts/*.cpp\
 	--enable=style,warning,performance,portability\

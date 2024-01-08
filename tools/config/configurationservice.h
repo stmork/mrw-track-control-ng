@@ -11,7 +11,9 @@
 #include <memory>
 #include <unordered_set>
 
+#include <util/self.h>
 #include <can/mrwbusservice.h>
+#include <statecharts/timerservice.h>
 #include <statecharts/ConfigStatechart.h>
 #include <model/modelrepository.h>
 
@@ -20,12 +22,13 @@
  */
 class ConfigurationService :
 	public mrw::can::MrwBusService,
+	public mrw::util::SelfPointer<mrw::statechart::ConfigStatechart::OperationCallback>,
 	public mrw::statechart::ConfigStatechart::OperationCallback
 {
 	Q_OBJECT
 
 private:
-	mrw::statechart::ConfigStatechart          statechart;
+	mrw::statechart::QtStatechart<mrw::statechart::ConfigStatechart>   statechart;
 
 	/** The model of this modelrailway. */
 	mrw::model::ModelRailway         *         model = nullptr;

@@ -9,6 +9,7 @@
 #define MRW_CTRL_SIGNALCONTROLLERPROXY_H
 
 #include <util/batchparticipant.h>
+#include <util/self.h>
 #include <model/section.h>
 #include <model/rail.h>
 #include <model/signal.h>
@@ -16,6 +17,7 @@
 #include <ctrl/controllerregistrand.h>
 #include <ctrl/railpartinfo.h>
 #include <ctrl/signalproxy.h>
+#include <statecharts/timerservice.h>
 #include <statecharts/SignalControllerStatechart.h>
 #include <statecharts/SignalStatechart.h>
 
@@ -26,12 +28,14 @@ namespace mrw::ctrl
 		public RailPartInfo,
 		public ControllerRegistrand,
 		public mrw::util::BatchParticipant,
+		public mrw::util::SelfPointer<mrw::statechart::SignalControllerStatechart::OperationCallback>,
 		public mrw::statechart::SignalControllerStatechart::OperationCallback
 	{
 		Q_OBJECT
 
 	private:
-		mrw::statechart::SignalControllerStatechart  statechart;
+		mrw::statechart::QtStatechart<mrw::statechart::SignalControllerStatechart>   statechart;
+
 		MainProxy                                    statechart_main;
 		DistantProxy                                 statechart_distant;
 		ShuntProxy                                   statechart_shunt;

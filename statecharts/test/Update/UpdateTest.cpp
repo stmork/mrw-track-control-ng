@@ -1,10 +1,12 @@
 /** *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 * */
 #include <string>
+#include <list>
+#include <algorithm>
 #include "gtest/gtest.h"
 #include "UpdateStatechart.h"
 #include "sc_runner_timed.h"
@@ -773,18 +775,50 @@ namespace mrw
 		class UpdateTest : public ::testing::Test
 		{
 		protected:
+			MockDefault defaultMock;
 			virtual void SetUp()
 			{
 				statechart = new mrw::statechart::UpdateStatechart();
+				size_t maximalParallelTimeEvents = (size_t)statechart->getNumberOfParallelTimeEvents();
 				runner = new TimedSctUnitRunner(
-					statechart,
-					true,
-					200
+					maximalParallelTimeEvents
 				);
 				statechart->setTimerService(runner);
+				initMock = new InitMock();
+				initMock->initializeBehavior();
+				pingMock = new PingMock();
+				pingMock->initializeBehavior();
+				bootMock = new BootMock();
+				bootMock->initializeBehavior();
+				flashRequestMock = new FlashRequestMock();
+				flashRequestMock->initializeBehavior();
+				flashCompletePageMock = new FlashCompletePageMock();
+				flashCompletePageMock->initializeBehavior();
+				flashRestPageMock = new FlashRestPageMock();
+				flashRestPageMock->initializeBehavior();
+				flashCheckMock = new FlashCheckMock();
+				flashCheckMock->initializeBehavior();
+				hasControllerMock = new HasControllerMock();
+				hasControllerMock->initializeBehavior();
+				hasPagesMock = new HasPagesMock();
+				hasPagesMock->initializeBehavior();
+				failMock = new FailMock();
+				quitMock = new QuitMock();
+				statechart->setOperationCallback(&defaultMock);
 			}
 			virtual void TearDown()
 			{
+				delete quitMock;
+				delete failMock;
+				delete hasPagesMock;
+				delete hasControllerMock;
+				delete flashCheckMock;
+				delete flashRestPageMock;
+				delete flashCompletePageMock;
+				delete flashRequestMock;
+				delete bootMock;
+				delete pingMock;
+				delete initMock;
 				delete statechart;
 				delete runner;
 			}
@@ -812,68 +846,13 @@ namespace mrw
 
 			hasPagesMock->setDefaultBehavior(&HasPagesMock::hasPages1);
 
-
-			initMock->reset();
-			pingMock->reset();
-			bootMock->reset();
-			flashRequestMock->reset();
-			flashCompletePageMock->reset();
-			flashRestPageMock->reset();
-			flashCheckMock->reset();
-			hasControllerMock->reset();
-			hasPagesMock->reset();
 		}
 		TEST_F(UpdateTest, doStart)
 		{
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			doStart();
 		}
 		TEST_F(UpdateTest, timeoutConnect)
 		{
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			failMock = new FailMock();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			doStart();
 
 			runner->proceed_time(statechart->getTimeout());
@@ -890,9 +869,6 @@ namespace mrw
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
-
-			bootMock->reset();
-			failMock->reset();
 		}
 		void doReset()
 		{
@@ -904,34 +880,9 @@ namespace mrw
 
 			EXPECT_TRUE(bootMock->calledAtLeastOnce());
 
-
-			bootMock->reset();
 		}
 		TEST_F(UpdateTest, doReset)
 		{
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			doReset();
 		}
 		void doPing()
@@ -944,36 +895,9 @@ namespace mrw
 
 			EXPECT_TRUE(pingMock->calledAtLeastOnce());
 
-
-			pingMock->reset();
 		}
 		TEST_F(UpdateTest, doPing)
 		{
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			doPing();
 		}
 		void noController()
@@ -996,43 +920,9 @@ namespace mrw
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
-
-			hasControllerMock->reset();
-			bootMock->reset();
-			failMock->reset();
 		}
 		TEST_F(UpdateTest, noController)
 		{
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			failMock = new FailMock();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			noController();
 		}
 		void firstFlashRequest()
@@ -1051,44 +941,9 @@ namespace mrw
 
 			EXPECT_TRUE((statechart->getCount()) == (0));
 
-
-			hasControllerMock->reset();
-			initMock->reset();
-			flashRequestMock->reset();
 		}
 		TEST_F(UpdateTest, firstFlashRequest)
 		{
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			firstFlashRequest();
 		}
 		void firstFlashRequestMismatch()
@@ -1111,49 +966,9 @@ namespace mrw
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
-
-			hasPagesMock->reset();
-			bootMock->reset();
-			failMock->reset();
 		}
 		TEST_F(UpdateTest, firstFlashRequestMismatch)
 		{
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			failMock = new FailMock();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			firstFlashRequestMismatch();
 		}
 		void flashRequested()
@@ -1168,47 +983,9 @@ namespace mrw
 
 			EXPECT_TRUE(flashRequestMock->calledAtLeastOnce());
 
-
-			hasPagesMock->reset();
-			flashRequestMock->reset();
 		}
 		TEST_F(UpdateTest, flashRequested)
 		{
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			flashRequested();
 		}
 		void hardwareMismatch()
@@ -1229,50 +1006,9 @@ namespace mrw
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
-
-			bootMock->reset();
-			failMock->reset();
 		}
 		TEST_F(UpdateTest, hardwareMismatch)
 		{
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			failMock = new FailMock();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			hardwareMismatch();
 		}
 		void lastFlashRequest()
@@ -1293,86 +1029,13 @@ namespace mrw
 
 			EXPECT_TRUE((statechart->getCount()) == (statechart->getRetry()));
 
-
-			hasPagesMock->reset();
 		}
 		TEST_F(UpdateTest, lastFlashRequest)
 		{
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			lastFlashRequest();
 		}
 		TEST_F(UpdateTest, noCompletePage)
 		{
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			failMock = new FailMock();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			lastFlashRequest();
 
 			hasPagesMock->setDefaultBehavior(&HasPagesMock::hasPages2);
@@ -1391,10 +1054,6 @@ namespace mrw
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
-
-			hasPagesMock->reset();
-			bootMock->reset();
-			failMock->reset();
 		}
 		void firstCompletePage()
 		{
@@ -1410,51 +1069,9 @@ namespace mrw
 
 			EXPECT_TRUE(flashCompletePageMock->calledAtLeastOnce());
 
-
-			hasPagesMock->reset();
-			flashCompletePageMock->reset();
 		}
 		TEST_F(UpdateTest, firstCompletePage)
 		{
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			firstCompletePage();
 		}
 		void nextCompletePage()
@@ -1471,55 +1088,9 @@ namespace mrw
 
 			EXPECT_TRUE(flashCompletePageMock->calledAtLeastOnce());
 
-
-			hasPagesMock->reset();
-			flashCompletePageMock->reset();
 		}
 		TEST_F(UpdateTest, nextCompletePage)
 		{
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			nextCompletePage();
 		}
 		void lastCompletePage()
@@ -1536,59 +1107,9 @@ namespace mrw
 
 			EXPECT_TRUE(flashRestPageMock->calledAtLeastOnce());
 
-
-			hasPagesMock->reset();
-			flashRestPageMock->reset();
 		}
 		TEST_F(UpdateTest, lastCompletePage)
 		{
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			lastCompletePage();
 		}
 		void doFlashCheck()
@@ -1603,63 +1124,9 @@ namespace mrw
 
 			EXPECT_TRUE(flashCheckMock->calledAtLeastOnce());
 
-
-			initMock->reset();
-			flashCheckMock->reset();
 		}
 		TEST_F(UpdateTest, doFlashCheck)
 		{
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			doFlashCheck();
 		}
 		void booted()
@@ -1672,63 +1139,9 @@ namespace mrw
 
 			EXPECT_TRUE(quitMock->calledAtLeastOnce());
 
-
-			quitMock->reset();
 		}
 		TEST_F(UpdateTest, booted)
 		{
-			quitMock = new QuitMock();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			booted();
 		}
 		void failFlashCheck()
@@ -1749,124 +1162,13 @@ namespace mrw
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
-
-			bootMock->reset();
-			failMock->reset();
 		}
 		TEST_F(UpdateTest, failFlashCheck)
 		{
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			failMock = new FailMock();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			failFlashCheck();
 		}
 		TEST_F(UpdateTest, timeoutFlashCheck)
 		{
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			failMock = new FailMock();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			doFlashCheck();
 
 			runner->proceed_time(statechart->getDelay_boot());
@@ -1883,33 +1185,9 @@ namespace mrw
 
 			EXPECT_TRUE(failMock->calledAtLeastOnce());
 
-
-			bootMock->reset();
-			failMock->reset();
 		}
 		TEST_F(UpdateTest, doExit)
 		{
-			initMock = new InitMock();
-			initMock->initializeBehavior();
-			pingMock = new PingMock();
-			pingMock->initializeBehavior();
-			bootMock = new BootMock();
-			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
-			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
-			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
-			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
-			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
-			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
-			hasPagesMock->initializeBehavior();
-
-			MockDefault defaultMock;
-			statechart->setOperationCallback(&defaultMock);
 			statechart->enter();
 
 			EXPECT_TRUE(statechart->isActive());
@@ -1987,7 +1265,6 @@ namespace mrw
 			statechart->exit();
 
 			EXPECT_TRUE(!statechart->isActive());
-
 
 		}
 

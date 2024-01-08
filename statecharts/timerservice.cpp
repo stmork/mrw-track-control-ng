@@ -35,10 +35,10 @@ TimerService::TimerService() :
 }
 
 void TimerService::setTimer(
-	TimedInterface * statemachine,
-	sc::eventid      event,
-	sc::integer      time_ms,
-	bool             is_periodic)
+	std::shared_ptr<TimedInterface> statemachine,
+	sc::eventid                     event,
+	sc::time                        time_ms,
+	bool                            is_periodic)
 {
 	SCTimer  * timer          = getTimer(statemachine, event);
 	const bool high_precision = (time_ms % 1000) != 0;
@@ -51,8 +51,8 @@ void TimerService::setTimer(
 }
 
 void TimerService::unsetTimer(
-	TimedInterface * statemachine,
-	sc::eventid      event)
+	std::shared_ptr<sc::timer::TimedInterface> statemachine,
+	sc::eventid                                event)
 {
 	SCTimer * timer = this->getTimer(statemachine, event);
 
@@ -63,10 +63,10 @@ void TimerService::unsetTimer(
 }
 
 SCTimer * TimerService::getTimer(
-	TimedInterface * statemachine,
-	sc::eventid      event)
+	std::shared_ptr<sc::timer::TimedInterface> & statemachine,
+	sc::eventid                                  event)
 {
-	TimerKey  key(statemachine, event);
+	TimerKey  key(statemachine.get(), event);
 	SCTimer * timer;
 
 	if (chart_map.contains(key))
@@ -75,7 +75,7 @@ SCTimer * TimerService::getTimer(
 	}
 	else
 	{
-		timer = new SCTimer(this, statemachine, event);
+		timer = new SCTimer(this, statemachine.get(), event);
 
 		chart_map.insert(key, timer);
 	}

@@ -16,23 +16,9 @@ namespace mrw
 	namespace statechart
 	{
 
-		const sc::integer RouteStatechart::switch_timeout = 2100;
-		const sc::integer RouteStatechart::signal_timeout = 3300;
-		const sc::integer RouteStatechart::section_timeout = 400;
-		const sc::integer RouteStatechart::emergency = 3500;
 
 
-
-		RouteStatechart::RouteStatechart() :
-			timerService(nullptr),
-			ifaceOperationCallback(nullptr),
-			isExecuting(false),
-			turn_raised(false),
-			completed_raised(false),
-			failed_raised(false),
-			disable_raised(false),
-			activated_raised(false),
-			finished_raised(false)
+		RouteStatechart::RouteStatechart() noexcept
 		{
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
 			{
@@ -45,11 +31,17 @@ namespace mrw
 
 		RouteStatechart::~RouteStatechart()
 		{
+			while (!incomingEventQueue.empty())
+			{
+				auto nextEvent{incomingEventQueue.front()};
+				incomingEventQueue.pop_front();
+				delete nextEvent;
+			}
 		}
 
 
 
-		mrw::statechart::RouteStatechart::EventInstance * RouteStatechart::getNextEvent()
+		mrw::statechart::RouteStatechart::EventInstance * RouteStatechart::getNextEvent() noexcept
 		{
 			mrw::statechart::RouteStatechart::EventInstance * nextEvent = 0;
 
@@ -64,11 +56,12 @@ namespace mrw
 		}
 
 
-		void RouteStatechart::dispatchEvent(mrw::statechart::RouteStatechart::EventInstance * event)
+
+		bool RouteStatechart::dispatchEvent(mrw::statechart::RouteStatechart::EventInstance * event) noexcept
 		{
 			if (event == nullptr)
 			{
-				return;
+				return false;
 			}
 
 			switch (event->eventId)
@@ -108,65 +101,76 @@ namespace mrw
 					break;
 				}
 			default:
-				/* do nothing */
-				break;
+				//pointer got out of scope
+				delete event;
+				return false;
 			}
+			//pointer got out of scope
 			delete event;
+			return true;
 		}
 
 
+		/*! Raises the in event 'turn' of default interface scope. */
 		void mrw::statechart::RouteStatechart::raiseTurn()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::turn));
+			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::turn))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'completed' of default interface scope. */
 		void mrw::statechart::RouteStatechart::raiseCompleted()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::completed));
+			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::completed))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'failed' of default interface scope. */
 		void mrw::statechart::RouteStatechart::raiseFailed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::failed));
+			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::failed))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'disable' of default interface scope. */
 		void mrw::statechart::RouteStatechart::raiseDisable()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::disable));
+			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::disable))
+			;
 			runCycle();
 		}
 
 
-		bool mrw::statechart::RouteStatechart::isRaisedActivated()
+		bool mrw::statechart::RouteStatechart::isRaisedActivated() noexcept
 		{
 			return activated_raised;
 		}
 
 
-		bool mrw::statechart::RouteStatechart::isRaisedFinished()
+		bool mrw::statechart::RouteStatechart::isRaisedFinished() noexcept
 		{
 			return finished_raised;
 		}
 
 
 
-		bool RouteStatechart::isActive() const
+		bool RouteStatechart::isActive() const noexcept
 		{
 			return stateConfVector[0] != mrw::statechart::RouteStatechart::State::NO_STATE;
 		}
 
-		bool RouteStatechart::isFinal() const
+		bool RouteStatechart::isFinal() const noexcept
 		{
 			return (stateConfVector[0] == mrw::statechart::RouteStatechart::State::main_region__final_);
 		}
 
-		bool RouteStatechart::check() const
+		bool RouteStatechart::check() const noexcept
 		{
 			if (timerService == nullptr)
 			{
@@ -180,17 +184,17 @@ namespace mrw
 		}
 
 
-		void RouteStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_)
+		void RouteStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_) noexcept
 		{
 			this->timerService = timerService_;
 		}
 
-		sc::timer::TimerServiceInterface * RouteStatechart::getTimerService()
+		sc::timer::TimerServiceInterface * RouteStatechart::getTimerService() noexcept
 		{
 			return timerService;
 		}
 
-		sc::integer RouteStatechart::getNumberOfParallelTimeEvents()
+		sc::integer RouteStatechart::getNumberOfParallelTimeEvents() noexcept
 		{
 			return parallelTimeEventsCount;
 		}
@@ -205,7 +209,7 @@ namespace mrw
 		}
 
 
-		bool RouteStatechart::isStateActive(State state) const
+		bool RouteStatechart::isStateActive(State state) const noexcept
 		{
 			switch (state)
 			{
@@ -283,27 +287,31 @@ namespace mrw
 			}
 		}
 
-		sc::integer RouteStatechart::getSwitch_timeout()
+		sc::integer RouteStatechart::getSwitch_timeout() noexcept
 		{
-			return switch_timeout;
+			return switch_timeout
+				;
 		}
 
-		sc::integer RouteStatechart::getSignal_timeout()
+		sc::integer RouteStatechart::getSignal_timeout() noexcept
 		{
-			return signal_timeout;
+			return signal_timeout
+				;
 		}
 
-		sc::integer RouteStatechart::getSection_timeout()
+		sc::integer RouteStatechart::getSection_timeout() noexcept
 		{
-			return section_timeout;
+			return section_timeout
+				;
 		}
 
-		sc::integer RouteStatechart::getEmergency()
+		sc::integer RouteStatechart::getEmergency() noexcept
 		{
-			return emergency;
+			return emergency
+				;
 		}
 
-		void RouteStatechart::setOperationCallback(OperationCallback * operationCallback)
+		void RouteStatechart::setOperationCallback(OperationCallback * operationCallback) noexcept
 		{
 			ifaceOperationCallback = operationCallback;
 		}
@@ -313,7 +321,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Disable()
 		{
 			/* Entry action for state 'Disable'. */
-			timerService->setTimer(this, 0, RouteStatechart::emergency, false);
+			timerService->setTimer(this, 0, ((sc::time) RouteStatechart::emergency), false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->disableSections();
 			ifaceOperationCallback->disableSignals();
@@ -324,7 +332,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Active_processing_Switch_Turning()
 		{
 			/* Entry action for state 'Switch Turning'. */
-			timerService->setTimer(this, 1, RouteStatechart::switch_timeout, false);
+			timerService->setTimer(this, 1, ((sc::time) RouteStatechart::switch_timeout), false);
 			ifaceOperationCallback->prepareRoute();
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->turnSwitches();
@@ -335,7 +343,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Active_processing_Signal_Turning()
 		{
 			/* Entry action for state 'Signal Turning'. */
-			timerService->setTimer(this, 2, RouteStatechart::signal_timeout, false);
+			timerService->setTimer(this, 2, ((sc::time) RouteStatechart::signal_timeout), false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->enableSignals();
 			ifaceOperationCallback->tryComplete();
@@ -345,7 +353,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Active_processing_Section_Activation()
 		{
 			/* Entry action for state 'Section Activation'. */
-			timerService->setTimer(this, 3, RouteStatechart::section_timeout, false);
+			timerService->setTimer(this, 3, ((sc::time) RouteStatechart::section_timeout), false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->enableSections();
 			ifaceOperationCallback->tryComplete();
@@ -355,7 +363,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Active_processing_Signal_Updating()
 		{
 			/* Entry action for state 'Signal Updating'. */
-			timerService->setTimer(this, 4, RouteStatechart::signal_timeout, false);
+			timerService->setTimer(this, 4, ((sc::time) RouteStatechart::signal_timeout), false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->extendSignals();
 			ifaceOperationCallback->tryComplete();
@@ -365,7 +373,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Active_processing_Flank_Turning()
 		{
 			/* Entry action for state 'Flank Turning'. */
-			timerService->setTimer(this, 5, RouteStatechart::switch_timeout, false);
+			timerService->setTimer(this, 5, ((sc::time) RouteStatechart::switch_timeout), false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->prepareFlank();
 			ifaceOperationCallback->turnFlanks();
@@ -383,7 +391,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Wait()
 		{
 			/* Entry action for state 'Wait'. */
-			timerService->setTimer(this, 6, RouteStatechart::emergency, false);
+			timerService->setTimer(this, 6, ((sc::time) RouteStatechart::emergency), false);
 			ifaceOperationCallback->tryComplete();
 		}
 
@@ -391,7 +399,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Emergency_Shutdown()
 		{
 			/* Entry action for state 'Emergency Shutdown'. */
-			timerService->setTimer(this, 7, RouteStatechart::section_timeout, false);
+			timerService->setTimer(this, 7, ((sc::time) RouteStatechart::section_timeout), false);
 			ifaceOperationCallback->fail();
 			ifaceOperationCallback->disableSections();
 			ifaceOperationCallback->disableSignals();
@@ -845,9 +853,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -867,9 +876,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -878,16 +888,7 @@ namespace mrw
 		sc::integer RouteStatechart::main_region__final__react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state null. */
-			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-			}
-			/* If no transition was taken then execute local reactions */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				transitioned_after = react(transitioned_before);
-			}
-			return transitioned_after;
+			return react(transitioned_before);
 		}
 
 		sc::integer RouteStatechart::main_region_Active_react(const sc::integer transitioned_before)
@@ -913,9 +914,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -945,9 +947,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Active_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -978,9 +981,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Active_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1011,9 +1015,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Active_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1044,9 +1049,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Active_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1078,9 +1084,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Active_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1100,9 +1107,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Active_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1133,9 +1141,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1156,9 +1165,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1178,21 +1188,22 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		void RouteStatechart::clearOutEvents()
+		void RouteStatechart::clearOutEvents() noexcept
 		{
 			activated_raised = false;
 			finished_raised = false;
 		}
 
-		void RouteStatechart::clearInEvents()
+		void RouteStatechart::clearInEvents() noexcept
 		{
 			turn_raised = false;
 			completed_raised = false;
@@ -1292,9 +1303,8 @@ namespace mrw
 			{
 				microStep();
 				clearInEvents();
-				dispatchEvent(getNextEvent());
 			}
-			while ((((((((((((turn_raised) || (completed_raised)) || (failed_raised)) || (disable_raised)) || (timeEvents[0])) || (timeEvents[1])) || (timeEvents[2])) || (timeEvents[3])) || (timeEvents[4])) || (timeEvents[5])) || (timeEvents[6])) || (timeEvents[7]));
+			while (dispatchEvent(getNextEvent()));
 			isExecuting = false;
 		}
 

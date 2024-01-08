@@ -23,7 +23,9 @@ namespace mrw
 #include <deque>
 #include "../common/sc_types.h"
 #include "../common/sc_statemachine.h"
+#include "../common/sc_eventdriven.h"
 #include "../common/sc_timer.h"
+#include <string.h>
 
 /*! \file
 Header of the state machine 'ConfigStatechart'.
@@ -34,10 +36,10 @@ namespace mrw
 	namespace statechart
 	{
 
-		class ConfigStatechart : public sc::timer::TimedInterface, public sc::StatemachineInterface
+		class ConfigStatechart : public sc::timer::TimedInterface, public sc::EventDrivenInterface
 		{
 		public:
-			ConfigStatechart();
+			ConfigStatechart() noexcept;
 
 			virtual ~ConfigStatechart();
 
@@ -55,12 +57,12 @@ namespace mrw
 			};
 
 			/*! The number of states. */
-			static const sc::integer numStates = 5;
-			static const sc::integer scvi_main_region_Wait_for_Connect = 0;
-			static const sc::integer scvi_main_region_Configure = 0;
-			static const sc::integer scvi_main_region_Wait_for_Boot = 0;
-			static const sc::integer scvi_main_region_Failed = 0;
-			static const sc::integer scvi_main_region_Booted = 0;
+			static constexpr const sc::integer numStates {5};
+			static constexpr const sc::integer scvi_main_region_Wait_for_Connect {0};
+			static constexpr const sc::integer scvi_main_region_Configure {0};
+			static constexpr const sc::integer scvi_main_region_Wait_for_Boot {0};
+			static constexpr const sc::integer scvi_main_region_Failed {0};
+			static constexpr const sc::integer scvi_main_region_Booted {0};
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -76,7 +78,7 @@ namespace mrw
 			class EventInstance
 			{
 			public:
-				explicit EventInstance(Event id) : eventId(id) {}
+				explicit  EventInstance(Event id) noexcept : eventId(id) {}
 				virtual ~EventInstance() = default;
 				const Event eventId;
 			};
@@ -85,27 +87,19 @@ namespace mrw
 			/*! Raises the in event 'completed' of default interface scope. */
 			void raiseCompleted();
 
-			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
-			void triggerWithoutEvent();
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
-			static sc::integer getTimeout() ;
-
+			static sc::integer getTimeout()  noexcept;
 			/*! Gets the value of the variable 'writetime' that is defined in the default interface scope. */
-			static sc::integer getWritetime() ;
-
+			static sc::integer getWritetime()  noexcept;
 			/*! Gets the value of the variable 'flashtime' that is defined in the default interface scope. */
-			static sc::integer getFlashtime() ;
-
+			static sc::integer getFlashtime()  noexcept;
 			/*! Gets the value of the variable 'resettime' that is defined in the default interface scope. */
-			static sc::integer getResettime() ;
-
+			static sc::integer getResettime()  noexcept;
 			/*! Gets the value of the variable 'idx' that is defined in the default interface scope. */
-			sc::integer getIdx() const;
-
+			sc::integer getIdx() const noexcept;
 			/*! Gets the value of the variable 'max' that is defined in the default interface scope. */
-			sc::integer getMax() const;
-
+			sc::integer getMax() const noexcept;
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
 			{
@@ -126,8 +120,10 @@ namespace mrw
 			};
 
 			/*! Set the working instance of the operation callback interface 'OperationCallback'. */
-			void setOperationCallback(OperationCallback * operationCallback);
+			void setOperationCallback(OperationCallback * operationCallback) noexcept;
 
+			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
+			void triggerWithoutEvent() override;
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -139,41 +135,41 @@ namespace mrw
 			 * Checks if the state machine is active (until 2.4.1 this method was used for states).
 			 * A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
 			 */
-			bool isActive() const override;
+			bool isActive() const noexcept override;
 
 
 			/*!
 			* Checks if all active states are final.
 			* If there are no active states then the state machine is considered being inactive. In this case this method returns false.
 			*/
-			bool isFinal() const override;
+			bool isFinal() const noexcept override;
 
 			/*!
 			 * Checks if member of the state machine must be set. For example an operation callback.
 			 */
-			bool check() const;
+			bool check() const noexcept;
 
 			/*
 			 * Functions inherited from TimedStatemachineInterface
 			 */
-			void setTimerService(sc::timer::TimerServiceInterface * timerService_) override;
+			void setTimerService(sc::timer::TimerServiceInterface * timerService_) noexcept override;
 
-			sc::timer::TimerServiceInterface * getTimerService() override;
+			sc::timer::TimerServiceInterface * getTimerService() noexcept override;
 
 			void raiseTimeEvent(sc::eventid event) override;
 
-			sc::integer getNumberOfParallelTimeEvents() override;
+			sc::integer getNumberOfParallelTimeEvents() noexcept override;
 
 
 
 			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-			bool isStateActive(State state) const;
+			bool isStateActive(State state) const noexcept;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount = 3;
+			static const sc::integer timeEventsCount {3};
 
 			//! number of time events that can be active at once.
-			static const sc::integer parallelTimeEventsCount = 1;
+			static const sc::integer parallelTimeEventsCount {1};
 
 
 		protected:
@@ -181,9 +177,9 @@ namespace mrw
 
 			std::deque<EventInstance *> incomingEventQueue;
 
-			EventInstance * getNextEvent();
+			EventInstance * getNextEvent() noexcept;
 
-			void dispatchEvent(EventInstance * event);
+			bool dispatchEvent(EventInstance * event) noexcept;
 
 
 
@@ -191,18 +187,20 @@ namespace mrw
 			ConfigStatechart(const ConfigStatechart & rhs);
 			ConfigStatechart & operator=(const ConfigStatechart &);
 
-			static const sc::integer timeout;
-			static const sc::integer writetime;
-			static const sc::integer flashtime;
-			static const sc::integer resettime;
-			sc::integer idx;
-			sc::integer max;
+			static constexpr const sc::integer timeout {1000};
+			static constexpr const sc::integer writetime {50};
+			static constexpr const sc::integer flashtime {200};
+			static constexpr const sc::integer resettime {3500};
+			sc::integer idx {0};
+			sc::integer max {0};
 
-			sc::integer written;
+
+			sc::integer written {0};
+
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-			static const sc::ushort maxOrthogonalStates = 1;
+			static const sc::ushort maxOrthogonalStates {1};
 
 			sc::timer::TimerServiceInterface * timerService;
 			bool timeEvents[timeEventsCount];
@@ -211,10 +209,11 @@ namespace mrw
 			State stateConfVector[maxOrthogonalStates];
 
 
+
 			OperationCallback * ifaceOperationCallback;
 
+			bool isExecuting {false};
 
-			bool isExecuting;
 
 
 			// prototypes of all internal functions
@@ -247,18 +246,23 @@ namespace mrw
 			sc::integer main_region_Wait_for_Boot_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			sc::integer main_region_Booted_react(const sc::integer transitioned_before);
-			void clearInEvents();
+			void clearInEvents() noexcept;
 			void microStep();
 			void runCycle();
 
 
-
+			/*! Sets the value of the variable 'idx' that is defined in the default interface scope. */
+			void setIdx(sc::integer idx) noexcept;
+			/*! Sets the value of the variable 'max' that is defined in the default interface scope. */
+			void setMax(sc::integer max) noexcept;
+			/*! Sets the value of the variable 'written' that is defined in the internal scope. */
+			void setWritten(sc::integer written) noexcept;
 
 			/*! Indicates event 'connected' of default interface scope is active. */
-			bool connected_raised;
+			bool connected_raised {false};
 
 			/*! Indicates event 'completed' of default interface scope is active. */
-			bool completed_raised;
+			bool completed_raised {false};
 
 
 

@@ -10,6 +10,7 @@
 
 #include <QTimer>
 
+#include <util/self.h>
 #include <can/mrwbusservice.h>
 #include <model/modelrepository.h>
 #include <model/route.h>
@@ -17,6 +18,7 @@
 
 class TrackerService :
 	public mrw::can::MrwBusService,
+	public mrw::util::SelfPointer<mrw::statechart::TrackerStatechart::OperationCallback>,
 	public mrw::statechart::TrackerStatechart::OperationCallback
 {
 	Q_OBJECT

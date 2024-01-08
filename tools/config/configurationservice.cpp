@@ -12,6 +12,7 @@
 
 #include "configurationservice.h"
 
+using namespace mrw::util;
 using namespace mrw::can;
 using namespace mrw::statechart;
 using namespace mrw::model;
@@ -20,7 +21,7 @@ ConfigurationService::ConfigurationService(
 	ModelRepository & repo,
 	QObject     *     parent) :
 	MrwBusService(repo.interface(), repo.plugin(), parent, false),
-	statechart(nullptr)
+	SelfPointer<OperationCallback>(this)
 {
 	std::vector<Device *> devices;
 
@@ -36,8 +37,8 @@ ConfigurationService::ConfigurationService(
 		&statechart, &ConfigStatechart::connected,
 		Qt::QueuedConnection);
 
-	statechart.setTimerService(&TimerService::instance());
-	statechart.setOperationCallback(this);
+	statechart.setTimerService(TimerService::instance());
+	statechart.setOperationCallback(*this);
 
 	Q_ASSERT(statechart.check());
 	statechart.enter();

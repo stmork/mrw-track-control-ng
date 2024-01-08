@@ -16,39 +16,9 @@ namespace mrw
 	namespace statechart
 	{
 
-		const sc::integer OperatingModeStatechart::timeout = 5000;
-
-		const sc::integer OperatingModeStatechart::Can::timeout = 250;
 
 
-
-		OperatingModeStatechart::OperatingModeStatechart() :
-			timerService(nullptr),
-			ifaceCan(nullptr),
-			ifaceOperationCallback(nullptr),
-			isExecuting(false),
-			clear_raised(false),
-			started_raised(false),
-			failed_raised(false),
-			edit_raised(false),
-			operate_raised(false),
-			manual_raised(false),
-			manual_value(false),
-			init_raised(false),
-			finalize_raised(false),
-			completed_raised(false),
-			start_raised(false),
-			cleared_raised(false),
-			failing_raised(false),
-			operating_value(false),
-			operating_raised(false),
-			editing_value(false),
-			editing_raised(false),
-			quitting_value(false),
-			quitting_raised(false),
-			playing_value(false),
-			playing_raised(false),
-			quit_raised(false)
+		OperatingModeStatechart::OperatingModeStatechart() noexcept
 		{
 			this->ifaceCan.parent = this;
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
@@ -62,10 +32,15 @@ namespace mrw
 
 		OperatingModeStatechart::~OperatingModeStatechart()
 		{
+			while (!incomingEventQueue.empty())
+			{
+				auto nextEvent{incomingEventQueue.front()};
+				incomingEventQueue.pop_front();
+				delete nextEvent;
+			}
 		}
 
-		OperatingModeStatechart::Can::Can(OperatingModeStatechart * parent_) :
-			connected_raised(false),
+		OperatingModeStatechart::Can::Can(OperatingModeStatechart * parent_) noexcept :
 			parent(parent_),
 			ifaceCanOperationCallback(nullptr)
 		{
@@ -73,7 +48,7 @@ namespace mrw
 
 
 
-		mrw::statechart::OperatingModeStatechart::EventInstance * OperatingModeStatechart::getNextEvent()
+		mrw::statechart::OperatingModeStatechart::EventInstance * OperatingModeStatechart::getNextEvent() noexcept
 		{
 			mrw::statechart::OperatingModeStatechart::EventInstance * nextEvent = 0;
 
@@ -88,11 +63,12 @@ namespace mrw
 		}
 
 
-		void OperatingModeStatechart::dispatchEvent(mrw::statechart::OperatingModeStatechart::EventInstance * event)
+
+		bool OperatingModeStatechart::dispatchEvent(mrw::statechart::OperatingModeStatechart::EventInstance * event) noexcept
 		{
 			if (event == nullptr)
 			{
-				return;
+				return false;
 			}
 
 			switch (event->eventId)
@@ -124,10 +100,12 @@ namespace mrw
 				}
 			case mrw::statechart::OperatingModeStatechart::Event::manual:
 				{
-					mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool> * e = static_cast<mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool>*>(event);
+					mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool> * e = static_cast<mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool> *>(event);
+
 					if (e != 0)
 					{
-						manual_value = e->value;
+						manual_value
+							= e->value;
 						manual_raised = true;
 					}
 					break;
@@ -161,160 +139,181 @@ namespace mrw
 					break;
 				}
 			default:
-				/* do nothing */
-				break;
+				//pointer got out of scope
+				delete event;
+				return false;
 			}
+			//pointer got out of scope
 			delete event;
+			return true;
 		}
 
 
+		/*! Raises the in event 'clear' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseClear()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::clear));
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::clear))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'started' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseStarted()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::started));
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::started))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'failed' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseFailed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::failed));
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::failed))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'edit' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseEdit()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::edit));
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::edit))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'operate' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseOperate()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::operate));
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::operate))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'manual' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseManual(bool manual_)
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool>(mrw::statechart::OperatingModeStatechart::Event::manual, manual_));
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool>(mrw::statechart::OperatingModeStatechart::Event::manual, manual_))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'init' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseInit()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::init));
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::init))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'finalize' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseFinalize()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::finalize));
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::finalize))
+			;
 			runCycle();
 		}
 
 
+		/*! Raises the in event 'completed' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseCompleted()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::completed));
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::completed))
+			;
 			runCycle();
 		}
 
 
-		bool mrw::statechart::OperatingModeStatechart::isRaisedStart()
+		bool mrw::statechart::OperatingModeStatechart::isRaisedStart() noexcept
 		{
 			return start_raised;
 		}
 
 
-		bool mrw::statechart::OperatingModeStatechart::isRaisedCleared()
+		bool mrw::statechart::OperatingModeStatechart::isRaisedCleared() noexcept
 		{
 			return cleared_raised;
 		}
 
 
-		bool mrw::statechart::OperatingModeStatechart::isRaisedFailing()
+		bool mrw::statechart::OperatingModeStatechart::isRaisedFailing() noexcept
 		{
 			return failing_raised;
 		}
 
 
-		bool mrw::statechart::OperatingModeStatechart::isRaisedOperating()
+		bool mrw::statechart::OperatingModeStatechart::isRaisedOperating() noexcept
 		{
 			return operating_raised;
 		}
 
 
-		bool mrw::statechart::OperatingModeStatechart::getOperatingValue()
+		bool mrw::statechart::OperatingModeStatechart::getOperatingValue() noexcept
 		{
 			return operating_value;
 		}
 
 
-		bool mrw::statechart::OperatingModeStatechart::isRaisedEditing()
+		bool mrw::statechart::OperatingModeStatechart::isRaisedEditing() noexcept
 		{
 			return editing_raised;
 		}
 
 
-		bool mrw::statechart::OperatingModeStatechart::getEditingValue()
+		bool mrw::statechart::OperatingModeStatechart::getEditingValue() noexcept
 		{
 			return editing_value;
 		}
 
 
-		bool mrw::statechart::OperatingModeStatechart::isRaisedQuitting()
+		bool mrw::statechart::OperatingModeStatechart::isRaisedQuitting() noexcept
 		{
 			return quitting_raised;
 		}
 
 
-		bool mrw::statechart::OperatingModeStatechart::getQuittingValue()
+		bool mrw::statechart::OperatingModeStatechart::getQuittingValue() noexcept
 		{
 			return quitting_value;
 		}
 
 
-		bool mrw::statechart::OperatingModeStatechart::isRaisedPlaying()
+		bool mrw::statechart::OperatingModeStatechart::isRaisedPlaying() noexcept
 		{
 			return playing_raised;
 		}
 
 
-		bool mrw::statechart::OperatingModeStatechart::getPlayingValue()
+		bool mrw::statechart::OperatingModeStatechart::getPlayingValue() noexcept
 		{
 			return playing_value;
 		}
 
 
-		bool mrw::statechart::OperatingModeStatechart::isRaisedQuit()
+		bool mrw::statechart::OperatingModeStatechart::isRaisedQuit() noexcept
 		{
 			return quit_raised;
 		}
 
 
 
-		bool OperatingModeStatechart::isActive() const
+		bool OperatingModeStatechart::isActive() const noexcept
 		{
 			return stateConfVector[0] != mrw::statechart::OperatingModeStatechart::State::NO_STATE;
 		}
 
-		bool OperatingModeStatechart::isFinal() const
+		bool OperatingModeStatechart::isFinal() const noexcept
 		{
 			return (stateConfVector[0] == mrw::statechart::OperatingModeStatechart::State::main_region__final_);
 		}
 
-		bool OperatingModeStatechart::check() const
+		bool OperatingModeStatechart::check() const noexcept
 		{
 			if (timerService == nullptr)
 			{
@@ -332,17 +331,17 @@ namespace mrw
 		}
 
 
-		void OperatingModeStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_)
+		void OperatingModeStatechart::setTimerService(sc::timer::TimerServiceInterface * timerService_) noexcept
 		{
 			this->timerService = timerService_;
 		}
 
-		sc::timer::TimerServiceInterface * OperatingModeStatechart::getTimerService()
+		sc::timer::TimerServiceInterface * OperatingModeStatechart::getTimerService() noexcept
 		{
 			return timerService;
 		}
 
-		sc::integer OperatingModeStatechart::getNumberOfParallelTimeEvents()
+		sc::integer OperatingModeStatechart::getNumberOfParallelTimeEvents() noexcept
 		{
 			return parallelTimeEventsCount;
 		}
@@ -357,7 +356,7 @@ namespace mrw
 		}
 
 
-		bool OperatingModeStatechart::isStateActive(State state) const
+		bool OperatingModeStatechart::isStateActive(State state) const noexcept
 		{
 			switch (state)
 			{
@@ -425,32 +424,36 @@ namespace mrw
 			}
 		}
 
-		sc::integer OperatingModeStatechart::getTimeout()
+		sc::integer OperatingModeStatechart::getTimeout() noexcept
 		{
-			return timeout;
+			return timeout
+				;
 		}
 
-		void OperatingModeStatechart::setOperationCallback(OperationCallback * operationCallback)
+		void OperatingModeStatechart::setOperationCallback(OperationCallback * operationCallback) noexcept
 		{
 			ifaceOperationCallback = operationCallback;
 		}
-		OperatingModeStatechart::Can * OperatingModeStatechart::can()
+		OperatingModeStatechart::Can & OperatingModeStatechart::can() noexcept
 		{
-			return &ifaceCan;
+			return ifaceCan;
 		}
-		sc::integer OperatingModeStatechart::Can::getTimeout()
+		sc::integer OperatingModeStatechart::Can::getTimeout() noexcept
 		{
-			return timeout;
+			return timeout
+				;
 		}
 
-		void OperatingModeStatechart::Can::setOperationCallback(OperationCallback * operationCallback)
+		void OperatingModeStatechart::Can::setOperationCallback(OperationCallback * operationCallback) noexcept
 		{
 			ifaceCanOperationCallback = operationCallback;
 		}
 
+		/*! Raises the in event 'connected' of interface scope 'can'. */
 		void mrw::statechart::OperatingModeStatechart::Can::raiseConnected()
 		{
-			parent->incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::Can_connected));
+			parent->incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::Can_connected))
+			;
 			parent->runCycle();
 		}
 
@@ -460,8 +463,8 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Exit()
 		{
 			/* Entry action for state 'Exit'. */
-			quitting_value = true;
 			quitting_raised = true;
+			quitting_value = true;
 			ifaceOperationCallback->disableRoutes();
 		}
 
@@ -476,7 +479,7 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Running_operating_Prepare_Bus()
 		{
 			/* Entry action for state 'Prepare Bus'. */
-			timerService->setTimer(this, 0, OperatingModeStatechart::Can::timeout, false);
+			timerService->setTimer(this, 0, ((sc::time) OperatingModeStatechart::Can::timeout), false);
 			ifaceCan.ifaceCanOperationCallback->connectBus();
 		}
 
@@ -484,7 +487,7 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Running_operating_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(this, 1, OperatingModeStatechart::timeout, false);
+			timerService->setTimer(this, 1, ((sc::time) OperatingModeStatechart::timeout), false);
 			ifaceOperationCallback->resetTransaction();
 			start_raised = true;
 		}
@@ -493,16 +496,16 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Running_operating_Operating()
 		{
 			/* Entry action for state 'Operating'. */
-			operating_value = true;
 			operating_raised = true;
+			operating_value = true;
 		}
 
 		/* Entry action for state 'Editing'. */
 		void OperatingModeStatechart::enact_main_region_Running_operating_Editing()
 		{
 			/* Entry action for state 'Editing'. */
-			editing_value = true;
 			editing_raised = true;
+			editing_value = true;
 		}
 
 		/* Entry action for state 'Disable'. */
@@ -516,8 +519,8 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Manual()
 		{
 			/* Entry action for state 'Manual'. */
-			playing_value = true;
 			playing_raised = true;
+			playing_value = true;
 			ifaceOperationCallback->activateManual(true);
 		}
 
@@ -532,8 +535,8 @@ namespace mrw
 		void OperatingModeStatechart::exact_main_region_Exit()
 		{
 			/* Exit action for state 'Exit'. */
-			quitting_value = false;
 			quitting_raised = true;
+			quitting_value = false;
 		}
 
 		/* Exit action for state 'Prepare Bus'. */
@@ -554,24 +557,24 @@ namespace mrw
 		void OperatingModeStatechart::exact_main_region_Running_operating_Operating()
 		{
 			/* Exit action for state 'Operating'. */
-			operating_value = false;
 			operating_raised = true;
+			operating_value = false;
 		}
 
 		/* Exit action for state 'Editing'. */
 		void OperatingModeStatechart::exact_main_region_Running_operating_Editing()
 		{
 			/* Exit action for state 'Editing'. */
-			editing_value = false;
 			editing_raised = true;
+			editing_value = false;
 		}
 
 		/* Exit action for state 'Manual'. */
 		void OperatingModeStatechart::exact_main_region_Manual()
 		{
 			/* Exit action for state 'Manual'. */
-			playing_value = false;
 			playing_raised = true;
+			playing_value = false;
 		}
 
 		/* 'default' enter sequence for state Exit */
@@ -897,16 +900,17 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (((completed_raised)) && ((!ifaceOperationCallback->hasActiveRoutes())))
+				if (((completed_raised)) && ((!(ifaceOperationCallback->hasActiveRoutes()))))
 				{
 					exseq_main_region_Exit();
 					react_main_region__choice_0();
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -915,16 +919,7 @@ namespace mrw
 		sc::integer OperatingModeStatechart::main_region__final__react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state null. */
-			sc::integer transitioned_after = transitioned_before;
-			if ((transitioned_after) < (0))
-			{
-			}
-			/* If no transition was taken then execute local reactions */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				transitioned_after = react(transitioned_before);
-			}
-			return transitioned_after;
+			return react(transitioned_before);
 		}
 
 		sc::integer OperatingModeStatechart::main_region_Running_react(const sc::integer transitioned_before)
@@ -940,9 +935,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -973,9 +969,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Running_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1006,9 +1003,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Running_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1049,9 +1047,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Running_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1063,7 +1062,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (((edit_raised)) && ((!ifaceOperationCallback->hasActiveRoutes())))
+				if (((edit_raised)) && ((!(ifaceOperationCallback->hasActiveRoutes()))))
 				{
 					exseq_main_region_Running_operating_Operating();
 					enseq_main_region_Running_operating_Editing_default();
@@ -1090,9 +1089,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Running_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1112,9 +1112,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Running_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1126,7 +1127,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (((completed_raised)) && ((!ifaceOperationCallback->hasActiveRoutes())))
+				if (((completed_raised)) && ((!(ifaceOperationCallback->hasActiveRoutes()))))
 				{
 					exseq_main_region_Running_operating_Disable();
 					enseq_main_region_Running_operating_Init_default();
@@ -1134,9 +1135,10 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = main_region_Running_react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1148,7 +1150,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (((manual_raised)) && ((!manual_value)))
+				if (((manual_raised)) && ((!(manual_value))))
 				{
 					exseq_main_region_Manual();
 					enseq_main_region_Running_operating_Init_default();
@@ -1166,9 +1168,10 @@ namespace mrw
 					}
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
@@ -1188,15 +1191,16 @@ namespace mrw
 					transitioned_after = 0;
 				}
 			}
-			/* If no transition was taken then execute local reactions */
+			/* If no transition was taken */
 			if ((transitioned_after) == (transitioned_before))
 			{
+				/* then execute local reactions. */
 				transitioned_after = react(transitioned_before);
 			}
 			return transitioned_after;
 		}
 
-		void OperatingModeStatechart::clearOutEvents()
+		void OperatingModeStatechart::clearOutEvents() noexcept
 		{
 			start_raised = false;
 			cleared_raised = false;
@@ -1208,7 +1212,7 @@ namespace mrw
 			quit_raised = false;
 		}
 
-		void OperatingModeStatechart::clearInEvents()
+		void OperatingModeStatechart::clearInEvents() noexcept
 		{
 			clear_raised = false;
 			started_raised = false;
@@ -1298,9 +1302,8 @@ namespace mrw
 			{
 				microStep();
 				clearInEvents();
-				dispatchEvent(getNextEvent());
 			}
-			while ((((((((((((clear_raised) || (started_raised)) || (failed_raised)) || (edit_raised)) || (operate_raised)) || (manual_raised)) || (init_raised)) || (finalize_raised)) || (completed_raised)) || (ifaceCan.connected_raised)) || (timeEvents[0])) || (timeEvents[1]));
+			while (dispatchEvent(getNextEvent()));
 			isExecuting = false;
 		}
 
