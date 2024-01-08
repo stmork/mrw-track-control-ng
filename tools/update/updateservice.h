@@ -14,6 +14,7 @@
 
 #include <util/self.h>
 #include <can/mrwbusservice.h>
+#include <statecharts/timerservice.h>
 #include <statecharts/UpdateStatechart.h>
 
 /**
@@ -39,7 +40,8 @@ class UpdateService :
 	static const uint8_t   DEFAULT_HARDWARE =    1;
 	static const size_t    SPM_PAGESIZE     =  128;
 
-	mrw::statechart::UpdateStatechart                statechart;
+	mrw::statechart::QtStatechart<mrw::statechart::UpdateStatechart> statechart;
+
 	std::unordered_multiset<mrw::can::ControllerId>  controller_ids;
 	std::unordered_multiset<mrw::can::ControllerId>  request_ids;
 	std::vector<uint8_t>                             buffer;

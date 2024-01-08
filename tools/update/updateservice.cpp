@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
 #include <regex>
@@ -21,8 +21,7 @@ UpdateService::UpdateService(
 	const QString & interface,
 	const QString & plugin,
 	QObject    *    parent) :
-	MrwBusService(interface, plugin, parent, false),
-	statechart(nullptr)
+	MrwBusService(interface, plugin, parent, false)
 {
 	buffer.reserve(65536);
 	read(filename);
