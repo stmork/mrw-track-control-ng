@@ -484,8 +484,7 @@ void TestUtil::testDifferentBatch()
 
 void TestUtil::testSelfPointer()
 {
-	TestBatch                    batch;
-	SelfPointer<TestBatch>       self(&batch);
+	Self<TestBatch>              self;
 	std::shared_ptr<TestBatch> & shared_pointer = self;
 
 	QVERIFY(shared_pointer);

@@ -18,8 +18,7 @@
 
 class TrackerService :
 	public mrw::can::MrwBusService,
-	public mrw::util::SelfPointer<mrw::statechart::TrackerStatechart::OperationCallback>,
-	public mrw::statechart::TrackerStatechart::OperationCallback
+	public mrw::util::Self<mrw::statechart::TrackerStatechart::OperationCallback>
 {
 	Q_OBJECT
 

@@ -15,8 +15,7 @@
 
 class MrwMessageDispatcher :
 	public mrw::can::MrwBusService,
-	public mrw::util::SelfPointer<mrw::statechart::OperatingModeStatechart::Can::OperationCallback>,
-	public mrw::statechart::OperatingModeStatechart::Can::OperationCallback
+	public mrw::util::Self<mrw::statechart::OperatingModeStatechart::Can::OperationCallback>
 {
 	Q_OBJECT
 

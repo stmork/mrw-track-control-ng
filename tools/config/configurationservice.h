@@ -22,8 +22,7 @@
  */
 class ConfigurationService :
 	public mrw::can::MrwBusService,
-	public mrw::util::SelfPointer<mrw::statechart::ConfigStatechart::OperationCallback>,
-	public mrw::statechart::ConfigStatechart::OperationCallback
+	public mrw::util::Self<mrw::statechart::ConfigStatechart::OperationCallback>
 {
 	Q_OBJECT
 

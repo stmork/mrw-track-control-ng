@@ -21,8 +21,7 @@ namespace mrw::ctrl
 		public RailPartInfo,
 		public ControllerRegistrand,
 		public mrw::util::BatchParticipant,
-		public mrw::util::SelfPointer<mrw::statechart::SwitchStatechart::OperationCallback>,
-		public mrw::statechart::SwitchStatechart::OperationCallback
+		public mrw::util::Self<mrw::statechart::SwitchStatechart::OperationCallback>
 	{
 	protected:
 		mrw::statechart::QtStatechart<mrw::statechart::SwitchStatechart>  statechart;

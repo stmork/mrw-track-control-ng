@@ -22,7 +22,6 @@ UpdateService::UpdateService(
 	const QString & plugin,
 	QObject    *    parent) :
 	MrwBusService(interface, plugin, parent, false),
-	SelfPointer<OperationCallback>(this),
 	statechart(nullptr)
 {
 	buffer.reserve(65536);

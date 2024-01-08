@@ -37,8 +37,7 @@ class ControlledRoute;
 
 class MainWindow :
 	public QMainWindow,
-	public mrw::util::SelfPointer<mrw::statechart::OperatingModeStatechart::OperationCallback>,
-	public mrw::statechart::OperatingModeStatechart::OperationCallback
+	public mrw::util::Self<mrw::statechart::OperatingModeStatechart::OperationCallback>
 {
 	Q_OBJECT
 

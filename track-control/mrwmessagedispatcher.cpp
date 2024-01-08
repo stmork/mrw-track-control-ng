@@ -21,7 +21,6 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 	const QString  &  plugin,
 	QObject     *     parent) :
 	MrwBusService(interface, plugin, parent, false),
-	SelfPointer<OperationCallback>(this),
 	model(model_railway)
 {
 	__METHOD__;

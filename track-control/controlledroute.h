@@ -28,8 +28,7 @@
 class ControlledRoute :
 	public mrw::model::Route,
 	public mrw::util::Batch,
-	public mrw::util::SelfPointer<mrw::statechart::RouteStatechart::OperationCallback>,
-	public mrw::statechart::RouteStatechart::OperationCallback
+	public mrw::util::Self<mrw::statechart::RouteStatechart::OperationCallback>
 {
 	Q_OBJECT
 

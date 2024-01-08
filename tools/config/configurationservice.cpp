@@ -20,8 +20,7 @@ using namespace mrw::model;
 ConfigurationService::ConfigurationService(
 	ModelRepository & repo,
 	QObject     *     parent) :
-	MrwBusService(repo.interface(), repo.plugin(), parent, false),
-	SelfPointer<OperationCallback>(this)
+	MrwBusService(repo.interface(), repo.plugin(), parent, false)
 {
 	std::vector<Device *> devices;
 

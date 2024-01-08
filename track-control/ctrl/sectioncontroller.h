@@ -22,8 +22,7 @@ namespace mrw::ctrl
 		public BaseController,
 		public ControllerRegistrand,
 		public mrw::util::BatchParticipant,
-		public mrw::util::SelfPointer<mrw::statechart::SectionStatechart::OperationCallback>,
-		public mrw::statechart::SectionStatechart::OperationCallback
+		public mrw::util::Self<mrw::statechart::SectionStatechart::OperationCallback>
 	{
 		Q_OBJECT
 

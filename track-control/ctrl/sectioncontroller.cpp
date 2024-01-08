@@ -23,7 +23,6 @@ SectionController::SectionController(
 	Section * input,
 	QObject * parent) :
 	BaseController(parent),
-	SelfPointer<OperationCallback>(this),
 	ctrl_section(input)
 {
 	ControllerRegistry::instance().registerController(ctrl_section, this);

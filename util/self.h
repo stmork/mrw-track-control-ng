@@ -42,6 +42,14 @@ namespace mrw::util
 			(void)ptr;
 		}
 	};
+
+	template<class T> class Self : public T, public SelfPointer<T>
+	{
+	public:
+		inline Self() : SelfPointer<T>(this)
+		{
+		}
+	};
 }
 
 #endif

@@ -29,7 +29,6 @@ SignalControllerProxy::SignalControllerProxy(
 	const bool  dir,
 	QObject  *  parent) :
 	SignalController(parent),
-	SelfPointer<OperationCallback>(this),
 	direction(dir),
 	signal_section(parent_section)
 {

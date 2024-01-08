@@ -26,8 +26,7 @@
  */
 class UpdateService :
 	public mrw::can::MrwBusService,
-	public mrw::util::SelfPointer<mrw::statechart::UpdateStatechart::OperationCallback>,
-	public mrw::statechart::UpdateStatechart::OperationCallback
+	public mrw::util::Self<mrw::statechart::UpdateStatechart::OperationCallback>
 {
 	Q_OBJECT
 

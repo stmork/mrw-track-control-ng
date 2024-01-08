@@ -43,7 +43,6 @@ MainWindow::MainWindow(
 	MrwMessageDispatcher & dispatcher,
 	QWidget        *       parent) :
 	QMainWindow(parent),
-	SelfPointer<OperationCallback>(this),
 	ui(new Ui::MainWindow),
 	repo(repository)
 {

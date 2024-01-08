@@ -14,7 +14,7 @@ using namespace mrw::can;
 using namespace mrw::statechart;
 using namespace mrw::ctrl;
 
-SwitchController::SwitchController() : SelfPointer<OperationCallback>(this)
+SwitchController::SwitchController()
 {
 	statechart.setTimerService(TimerService::instance());
 	statechart.setOperationCallback(*this);

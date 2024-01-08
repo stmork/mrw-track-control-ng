@@ -31,8 +31,7 @@ ControlledRoute::ControlledRoute(
 	const SectionState   wanted_state,
 	RailPart      *      first,
 	QObject       *      parent) :
-	Route(dir, wanted_state, first, parent),
-	SelfPointer<OperationCallback>(this)
+	Route(dir, wanted_state, first, parent)
 {
 	rename();
 	list_item.setData(USER_ROLE, QVariant::fromValue(this));

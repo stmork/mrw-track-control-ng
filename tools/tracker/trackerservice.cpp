@@ -19,7 +19,6 @@ TrackerService::TrackerService(
 	ModelRepository & repo,
 	QObject           *           parent) :
 	MrwBusService(repo.interface(), repo.plugin(), parent),
-	SelfPointer<OperationCallback>(this),
 	statechart(nullptr)
 {
 	model = repo;

@@ -18,8 +18,7 @@ namespace mrw::ctrl
 
 	class SignalProxy :
 		public mrw::statechart::SignalStatechart,
-		public mrw::util::SelfPointer<mrw::statechart::SignalStatechart::OperationCallback>,
-		public mrw::statechart::SignalStatechart::OperationCallback
+		public mrw::util::Self<mrw::statechart::SignalStatechart::OperationCallback>
 	{
 		Q_OBJECT
 

@@ -25,9 +25,7 @@ using Symbol = Signal::Symbol;
 **                                                                      **
 *************************************************************************/
 
-SignalProxy::SignalProxy() :
-	SignalStatechart(nullptr),
-	SelfPointer<SignalStatechart::OperationCallback>(this)
+SignalProxy::SignalProxy() : SignalStatechart(nullptr)
 {
 	setTimerService(TimerService::instance());
 	setOperationCallback(*this);
