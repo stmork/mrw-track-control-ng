@@ -182,7 +182,7 @@ Rail * BeerModeService::random(const std::vector<Rail *> & rails) const
 {
 	const size_t size = rails.size();
 
-	return size > 0 ? rails.at(Random::random(size)) : nullptr;
+	return size > 0 ? rails.at(Random::random(size - 1)) : nullptr;
 }
 
 void BeerModeService::dump(const std::vector<Rail *> & rails) const
