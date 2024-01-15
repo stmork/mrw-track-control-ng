@@ -95,25 +95,25 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2f056ac6f0f14b943f345b4f9d629927"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84ea031a5b0d9c71c278169374a50665" id="r_a84ea031a5b0d9c71c278169374a50665"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84ea031a5b0d9c71c278169374a50665">~BatchParticipant</a> ()</td></tr>
 <tr class="separator:a84ea031a5b0d9c71c278169374a50665"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a210c19b83f690d820c430aec238d61d0" id="r_a210c19b83f690d820c430aec238d61d0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a210c19b83f690d820c430aec238d61d0">increase</a> ()</td></tr>
-<tr class="memdesc:a210c19b83f690d820c430aec238d61d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This marks a job start at the previously configured <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a>.  <br /></td></tr>
-<tr class="separator:a210c19b83f690d820c430aec238d61d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc6d59d7caecd5413095c372397f0c8f" id="r_afc6d59d7caecd5413095c372397f0c8f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc6d59d7caecd5413095c372397f0c8f">decrease</a> ()</td></tr>
-<tr class="memdesc:afc6d59d7caecd5413095c372397f0c8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This marks a findished job at the previoulsy configured <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a>.  <br /></td></tr>
-<tr class="separator:afc6d59d7caecd5413095c372397f0c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07eab40ac9a15b2289e7830e68b7a327" id="r_a07eab40ac9a15b2289e7830e68b7a327"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html">Batch</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a07eab40ac9a15b2289e7830e68b7a327">batch</a> () const</td></tr>
-<tr class="memdesc:a07eab40ac9a15b2289e7830e68b7a327"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the actually configured <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a>.  <br /></td></tr>
-<tr class="separator:a07eab40ac9a15b2289e7830e68b7a327"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82b3ffd5c32c505ea74adfcb19011694" id="r_a82b3ffd5c32c505ea74adfcb19011694"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82b3ffd5c32c505ea74adfcb19011694">setBatch</a> (<a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html">Batch</a> *<a class="el" href="#a07eab40ac9a15b2289e7830e68b7a327">batch</a>)</td></tr>
-<tr class="memdesc:a82b3ffd5c32c505ea74adfcb19011694"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method configures a <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a> to be used by the methods <a class="el" href="#a210c19b83f690d820c430aec238d61d0" title="This marks a job start at the previously configured Batch.">increase()</a> and <a class="el" href="#afc6d59d7caecd5413095c372397f0c8f" title="This marks a findished job at the previoulsy configured Batch.">decrease()</a>.  <br /></td></tr>
-<tr class="separator:a82b3ffd5c32c505ea74adfcb19011694"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2c54c179641751d593d86486439e525" id="r_ab2c54c179641751d593d86486439e525"><td class="memItemLeft" align="right" valign="top">virtual const QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2c54c179641751d593d86486439e525">name</a> () const =0</td></tr>
-<tr class="memdesc:ab2c54c179641751d593d86486439e525"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method gives the chance for dumping a clear text for debugging purposes.  <br /></td></tr>
-<tr class="separator:ab2c54c179641751d593d86486439e525"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b24656692501ab35330ffedbaea1a25" id="r_a8b24656692501ab35330ffedbaea1a25"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b24656692501ab35330ffedbaea1a25">increase</a> () noexcept</td></tr>
+<tr class="memdesc:a8b24656692501ab35330ffedbaea1a25"><td class="mdescLeft">&#160;</td><td class="mdescRight">This marks a job start at the previously configured <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a>.  <br /></td></tr>
+<tr class="separator:a8b24656692501ab35330ffedbaea1a25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3df2d32cce94717af8c388718bf4c108" id="r_a3df2d32cce94717af8c388718bf4c108"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3df2d32cce94717af8c388718bf4c108">decrease</a> () noexcept</td></tr>
+<tr class="memdesc:a3df2d32cce94717af8c388718bf4c108"><td class="mdescLeft">&#160;</td><td class="mdescRight">This marks a findished job at the previoulsy configured <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a>.  <br /></td></tr>
+<tr class="separator:a3df2d32cce94717af8c388718bf4c108"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0c771f2df98cdb2eee447eed5bd9480" id="r_af0c771f2df98cdb2eee447eed5bd9480"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html">Batch</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0c771f2df98cdb2eee447eed5bd9480">batch</a> () const noexcept</td></tr>
+<tr class="memdesc:af0c771f2df98cdb2eee447eed5bd9480"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the actually configured <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a>.  <br /></td></tr>
+<tr class="separator:af0c771f2df98cdb2eee447eed5bd9480"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f8480b69816d7080102c506790f6842" id="r_a9f8480b69816d7080102c506790f6842"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f8480b69816d7080102c506790f6842">setBatch</a> (<a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html">Batch</a> *<a class="el" href="#af0c771f2df98cdb2eee447eed5bd9480">batch</a>) noexcept</td></tr>
+<tr class="memdesc:a9f8480b69816d7080102c506790f6842"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method configures a <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a> to be used by the methods <a class="el" href="#a8b24656692501ab35330ffedbaea1a25" title="This marks a job start at the previously configured Batch.">increase()</a> and <a class="el" href="#a3df2d32cce94717af8c388718bf4c108" title="This marks a findished job at the previoulsy configured Batch.">decrease()</a>.  <br /></td></tr>
+<tr class="separator:a9f8480b69816d7080102c506790f6842"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae034c20e8970a700b23f6183cdc35a27" id="r_ae034c20e8970a700b23f6183cdc35a27"><td class="memItemLeft" align="right" valign="top">virtual const QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae034c20e8970a700b23f6183cdc35a27">name</a> () const noexcept=0</td></tr>
+<tr class="memdesc:ae034c20e8970a700b23f6183cdc35a27"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method gives the chance for dumping a clear text for debugging purposes.  <br /></td></tr>
+<tr class="separator:ae034c20e8970a700b23f6183cdc35a27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class acts as a job registrand to a <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a> processing registry. </p>
-<p>By default the <a class="el" href="../../d6/d8d/classmrw_1_1util_1_1GlobalBatch.html" title="This singleton class provides a global Batch for fallback purposes.">GlobalBatch</a> acts as a <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a>. It is also possible to use another <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a>. It is not allowed to switch a <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a> during job processing which takes place between the <a class="el" href="#a210c19b83f690d820c430aec238d61d0" title="This marks a job start at the previously configured Batch.">increase()</a> and <a class="el" href="#afc6d59d7caecd5413095c372397f0c8f" title="This marks a findished job at the previoulsy configured Batch.">decrease()</a> call. </p>
+<p>By default the <a class="el" href="../../d6/d8d/classmrw_1_1util_1_1GlobalBatch.html" title="This singleton class provides a global Batch for fallback purposes.">GlobalBatch</a> acts as a <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a>. It is also possible to use another <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a>. It is not allowed to switch a <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a> during job processing which takes place between the <a class="el" href="#a8b24656692501ab35330ffedbaea1a25" title="This marks a job start at the previously configured Batch.">increase()</a> and <a class="el" href="#a3df2d32cce94717af8c388718bf4c108" title="This marks a findished job at the previoulsy configured Batch.">decrease()</a> call. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2f056ac6f0f14b943f345b4f9d629927" name="a2f056ac6f0f14b943f345b4f9d629927"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2f056ac6f0f14b943f345b4f9d629927">&#9670;&#160;</a></span>BatchParticipant()</h2>
@@ -158,11 +158,14 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a07eab40ac9a15b2289e7830e68b7a327" name="a07eab40ac9a15b2289e7830e68b7a327"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a07eab40ac9a15b2289e7830e68b7a327">&#9670;&#160;</a></span>batch()</h2>
+<a id="af0c771f2df98cdb2eee447eed5bd9480" name="af0c771f2df98cdb2eee447eed5bd9480"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0c771f2df98cdb2eee447eed5bd9480">&#9670;&#160;</a></span>batch()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html">Batch</a> * BatchParticipant::batch </td>
@@ -171,6 +174,11 @@ Public Member Functions</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This method returns the actually configured <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a>. </p>
@@ -178,11 +186,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="afc6d59d7caecd5413095c372397f0c8f" name="afc6d59d7caecd5413095c372397f0c8f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc6d59d7caecd5413095c372397f0c8f">&#9670;&#160;</a></span>decrease()</h2>
+<a id="a3df2d32cce94717af8c388718bf4c108" name="a3df2d32cce94717af8c388718bf4c108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3df2d32cce94717af8c388718bf4c108">&#9670;&#160;</a></span>decrease()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool BatchParticipant::decrease </td>
@@ -191,6 +202,11 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This marks a findished job at the previoulsy configured <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a>. </p>
@@ -200,11 +216,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a210c19b83f690d820c430aec238d61d0" name="a210c19b83f690d820c430aec238d61d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a210c19b83f690d820c430aec238d61d0">&#9670;&#160;</a></span>increase()</h2>
+<a id="a8b24656692501ab35330ffedbaea1a25" name="a8b24656692501ab35330ffedbaea1a25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b24656692501ab35330ffedbaea1a25">&#9670;&#160;</a></span>increase()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool BatchParticipant::increase </td>
@@ -213,17 +232,22 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This marks a job start at the previously configured <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a>. </p>
-<p>Until calling <a class="el" href="#afc6d59d7caecd5413095c372397f0c8f" title="This marks a findished job at the previoulsy configured Batch.">decrease()</a> a <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a> change is not allowed.</p>
+<p>Until calling <a class="el" href="#a3df2d32cce94717af8c388718bf4c108" title="This marks a findished job at the previoulsy configured Batch.">decrease()</a> a <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a> change is not allowed.</p>
 <dl class="section note"><dt>Note</dt><dd>A batch may be reused in the same transaction.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True on success. </dd></dl>
 
 </div>
 </div>
-<a id="ab2c54c179641751d593d86486439e525" name="ab2c54c179641751d593d86486439e525"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2c54c179641751d593d86486439e525">&#9670;&#160;</a></span>name()</h2>
+<a id="ae034c20e8970a700b23f6183cdc35a27" name="ae034c20e8970a700b23f6183cdc35a27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae034c20e8970a700b23f6183cdc35a27">&#9670;&#160;</a></span>name()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -240,7 +264,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -250,11 +274,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a82b3ffd5c32c505ea74adfcb19011694" name="a82b3ffd5c32c505ea74adfcb19011694"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82b3ffd5c32c505ea74adfcb19011694">&#9670;&#160;</a></span>setBatch()</h2>
+<a id="a9f8480b69816d7080102c506790f6842" name="a9f8480b69816d7080102c506790f6842"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f8480b69816d7080102c506790f6842">&#9670;&#160;</a></span>setBatch()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void BatchParticipant::setBatch </td>
@@ -263,9 +290,14 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>This method configures a <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a> to be used by the methods <a class="el" href="#a210c19b83f690d820c430aec238d61d0" title="This marks a job start at the previously configured Batch.">increase()</a> and <a class="el" href="#afc6d59d7caecd5413095c372397f0c8f" title="This marks a findished job at the previoulsy configured Batch.">decrease()</a>. </p>
+<p>This method configures a <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a> to be used by the methods <a class="el" href="#a8b24656692501ab35330ffedbaea1a25" title="This marks a job start at the previously configured Batch.">increase()</a> and <a class="el" href="#a3df2d32cce94717af8c388718bf4c108" title="This marks a findished job at the previoulsy configured Batch.">decrease()</a>. </p>
 <p>If the parameter is <code>nullptr</code> the <a class="el" href="../../d6/d8d/classmrw_1_1util_1_1GlobalBatch.html" title="This singleton class provides a global Batch for fallback purposes.">GlobalBatch</a> is being configured.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -280,7 +312,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 15 2024 09:50:50 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Jan 15 2024 12:43:04 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

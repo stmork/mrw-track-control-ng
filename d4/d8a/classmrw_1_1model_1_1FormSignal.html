@@ -148,21 +148,21 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a299f4f928e530af0ca4226a50e9ee8b2" id="r_a299f4f928e530af0ca4226a50e9ee8b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a299f4f928e530af0ca4226a50e9ee8b2">FormSignal</a> (<a class="el" href="../../d3/dab/classmrw_1_1model_1_1ModelRailway.html">ModelRailway</a> *model_railway, <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html">Section</a> *model_section, const QDomElement &amp;element, const <a class="el" href="../../db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244">SignalType</a> is_main)</td></tr>
 <tr class="separator:a299f4f928e530af0ca4226a50e9ee8b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5d1dff403f074d1eb847f6f0009eaa4" id="r_af5d1dff403f074d1eb847f6f0009eaa4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5d1dff403f074d1eb847f6f0009eaa4">isUnlockable</a> () const override</td></tr>
-<tr class="memdesc:af5d1dff403f074d1eb847f6f0009eaa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if it is possible to <em>unlock</em> this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a>.  <br /></td></tr>
-<tr class="separator:af5d1dff403f074d1eb847f6f0009eaa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa09ed5dd9ba69f77b66a85803805c11b" id="r_aa09ed5dd9ba69f77b66a85803805c11b"><td class="memItemLeft" align="right" valign="top">const QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa09ed5dd9ba69f77b66a85803805c11b">name</a> () const override</td></tr>
-<tr class="memdesc:aa09ed5dd9ba69f77b66a85803805c11b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the name modelled inside the EMF/XMI model file.  <br /></td></tr>
-<tr class="separator:aa09ed5dd9ba69f77b66a85803805c11b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e561075698843761e8f9acc1e1bbf22" id="r_a8e561075698843761e8f9acc1e1bbf22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html">mrw::can::MrwMessage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e561075698843761e8f9acc1e1bbf22">configMsg</a> (const unsigned pin) const override</td></tr>
-<tr class="memdesc:a8e561075698843761e8f9acc1e1bbf22"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method provides a configuration message which describes the connection from the <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> to the <a class="el" href="../../d3/de7/classmrw_1_1model_1_1Module.html" title="This base class represents all modules which are connected to the CAN Controller using the 16-pin con...">Module</a>.  <br /></td></tr>
-<tr class="separator:a8e561075698843761e8f9acc1e1bbf22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa24986521ebec3bc7677d183d3d52c79" id="r_aa24986521ebec3bc7677d183d3d52c79"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa24986521ebec3bc7677d183d3d52c79">valid</a> () const override</td></tr>
-<tr class="memdesc:aa24986521ebec3bc7677d183d3d52c79"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method verifies if all connectors of this rail part are correctly connected which their counter parts.  <br /></td></tr>
-<tr class="separator:aa24986521ebec3bc7677d183d3d52c79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae146e360fa54b18ff5d1e62c12ca05b5" id="r_ae146e360fa54b18ff5d1e62c12ca05b5"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae146e360fa54b18ff5d1e62c12ca05b5">toString</a> () const override</td></tr>
-<tr class="memdesc:ae146e360fa54b18ff5d1e62c12ca05b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the contents of this instance in human readable form as QString.  <br /></td></tr>
-<tr class="separator:ae146e360fa54b18ff5d1e62c12ca05b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb98203a32a581be7da0b4208d948313" id="r_adb98203a32a581be7da0b4208d948313"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb98203a32a581be7da0b4208d948313">isUnlockable</a> () const noexcept override</td></tr>
+<tr class="memdesc:adb98203a32a581be7da0b4208d948313"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if it is possible to <em>unlock</em> this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a>.  <br /></td></tr>
+<tr class="separator:adb98203a32a581be7da0b4208d948313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6feca96c763b42bb37f928ab925083d4" id="r_a6feca96c763b42bb37f928ab925083d4"><td class="memItemLeft" align="right" valign="top">const QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6feca96c763b42bb37f928ab925083d4">name</a> () const noexcept override</td></tr>
+<tr class="memdesc:a6feca96c763b42bb37f928ab925083d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the name modelled inside the EMF/XMI model file.  <br /></td></tr>
+<tr class="separator:a6feca96c763b42bb37f928ab925083d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a820cd7628e2ff99e070c7f207e410249" id="r_a820cd7628e2ff99e070c7f207e410249"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html">mrw::can::MrwMessage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a820cd7628e2ff99e070c7f207e410249">configMsg</a> (const unsigned pin) const noexcept override</td></tr>
+<tr class="memdesc:a820cd7628e2ff99e070c7f207e410249"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method provides a configuration message which describes the connection from the <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> to the <a class="el" href="../../d3/de7/classmrw_1_1model_1_1Module.html" title="This base class represents all modules which are connected to the CAN Controller using the 16-pin con...">Module</a>.  <br /></td></tr>
+<tr class="separator:a820cd7628e2ff99e070c7f207e410249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d44cfceeb25ea54dd716f28624b6fb0" id="r_a6d44cfceeb25ea54dd716f28624b6fb0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6d44cfceeb25ea54dd716f28624b6fb0">valid</a> () const noexcept override</td></tr>
+<tr class="memdesc:a6d44cfceeb25ea54dd716f28624b6fb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method verifies if all connectors of this rail part are correctly connected which their counter parts.  <br /></td></tr>
+<tr class="separator:a6d44cfceeb25ea54dd716f28624b6fb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a551c4fa2312fca51ed5b63ae34f9adca" id="r_a551c4fa2312fca51ed5b63ae34f9adca"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a551c4fa2312fca51ed5b63ae34f9adca">toString</a> () const noexcept override</td></tr>
+<tr class="memdesc:a551c4fa2312fca51ed5b63ae34f9adca"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the contents of this instance in human readable form as QString.  <br /></td></tr>
+<tr class="separator:a551c4fa2312fca51ed5b63ae34f9adca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6db2bbbf5d96ddd7762ecbd46616800c" id="r_a6db2bbbf5d96ddd7762ecbd46616800c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d9c/classmrw_1_1model_1_1Signal.html#a6db2bbbf5d96ddd7762ecbd46616800c">direction</a> () const</td></tr>
 <tr class="memdesc:a6db2bbbf5d96ddd7762ecbd46616800c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns <code>true</code> if the <a class="el" href="../../db/d9c/classmrw_1_1model_1_1Signal.html" title="This class represents all Signal variants.">Signal</a> is aligned counting direction and <code>false</code> otherwise.  <br /></td></tr>
 <tr class="separator:a6db2bbbf5d96ddd7762ecbd46616800c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -187,9 +187,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0654195d9f48bf7ce890fe43032ecc5f" id="r_a0654195d9f48bf7ce890fe43032ecc5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/d3e/classmrw_1_1model_1_1Region.html">Region</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d26/classmrw_1_1model_1_1AssemblyPart.html#a0654195d9f48bf7ce890fe43032ecc5f">region</a> () const</td></tr>
 <tr class="memdesc:a0654195d9f48bf7ce890fe43032ecc5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection.">Section</a> this <a class="el" href="../../d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section.">AssemblyPart</a> belongs to.  <br /></td></tr>
 <tr class="separator:a0654195d9f48bf7ce890fe43032ecc5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acde95787bd85524f6f1f232e3ac0c93f" id="r_acde95787bd85524f6f1f232e3ac0c93f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#acde95787bd85524f6f1f232e3ac0c93f">operator QString</a> () const</td></tr>
-<tr class="memdesc:acde95787bd85524f6f1f232e3ac0c93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a convenience cast operator to QString.  <br /></td></tr>
-<tr class="separator:acde95787bd85524f6f1f232e3ac0c93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52d7f4538b30867ad6e37ccd3d2e7aaf" id="r_a52d7f4538b30867ad6e37ccd3d2e7aaf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#a52d7f4538b30867ad6e37ccd3d2e7aaf">operator QString</a> () const noexcept</td></tr>
+<tr class="memdesc:a52d7f4538b30867ad6e37ccd3d2e7aaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a convenience cast operator to QString.  <br /></td></tr>
+<tr class="separator:a52d7f4538b30867ad6e37ccd3d2e7aaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae20d3fcd3fef4848e09aeb853f338701" id="r_ae20d3fcd3fef4848e09aeb853f338701"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d4f/classmrw_1_1model_1_1Position.html#ae20d3fcd3fef4848e09aeb853f338701">parse</a> (QSettings &amp;settings, const QString &amp;default_value)</td></tr>
 <tr class="memdesc:ae20d3fcd3fef4848e09aeb853f338701"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method reads a value from the given <a class="el" href="../../d6/db2/classmrw_1_1util_1_1Settings.html" title="This class extends the QSettings class by some convenience methods.">mrw::util::Settings</a> using the <a class="el" href="../../db/d4f/classmrw_1_1model_1_1Position.html#a70894d7430b21311c29a688bb18798dc" title="This method returns a key to determine the logical coordinates from the description file.">key()</a> method as key and in case the value is not available it uses the default_value parameter instead.  <br /></td></tr>
 <tr class="separator:ae20d3fcd3fef4848e09aeb853f338701"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -244,27 +244,27 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9ab4a9e0b04bbde0c2063ce0ff106474" id="r_a9ab4a9e0b04bbde0c2063ce0ff106474"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d4f/classmrw_1_1model_1_1Position.html#a9ab4a9e0b04bbde0c2063ce0ff106474">setBending</a> (const <a class="el" href="../../db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caea">Bending</a> input)</td></tr>
 <tr class="memdesc:a9ab4a9e0b04bbde0c2063ce0ff106474"><td class="mdescLeft">&#160;</td><td class="mdescRight">This sets the bending behaviour.  <br /></td></tr>
 <tr class="separator:a9ab4a9e0b04bbde0c2063ce0ff106474"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af55f9071e5478b3e66c767d3a4fbf30f" id="r_af55f9071e5478b3e66c767d3a4fbf30f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#af55f9071e5478b3e66c767d3a4fbf30f">inductors</a> () const</td></tr>
-<tr class="memdesc:af55f9071e5478b3e66c767d3a4fbf30f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns how many inductive actuators this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> contain.  <br /></td></tr>
-<tr class="separator:af55f9071e5478b3e66c767d3a4fbf30f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4ac6f0a0fba9fd96e92d9d65d6ae311" id="r_af4ac6f0a0fba9fd96e92d9d65d6ae311"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#af4ac6f0a0fba9fd96e92d9d65d6ae311">hasCutOff</a> () const</td></tr>
-<tr class="memdesc:af4ac6f0a0fba9fd96e92d9d65d6ae311"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the inductive actuators have automatic cutoff at end position.  <br /></td></tr>
-<tr class="separator:af4ac6f0a0fba9fd96e92d9d65d6ae311"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0c36ca0d39461b18679cf03f42bcf80" id="r_ac0c36ca0d39461b18679cf03f42bcf80"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d1a/classmrw_1_1model_1_1SwitchModule.html">SwitchModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#ac0c36ca0d39461b18679cf03f42bcf80">module</a> () const</td></tr>
-<tr class="memdesc:ac0c36ca0d39461b18679cf03f42bcf80"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the controlling <a class="el" href="../../dc/d1a/classmrw_1_1model_1_1SwitchModule.html" title="This class represents a switch module which is connected to a CAN controller using one or two 16-pin ...">SwitchModule</a>.  <br /></td></tr>
-<tr class="separator:ac0c36ca0d39461b18679cf03f42bcf80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e9460873197cacbc5c7583892f29958" id="r_a7e9460873197cacbc5c7583892f29958"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html">Controller</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#a7e9460873197cacbc5c7583892f29958">controller</a> () const override</td></tr>
-<tr class="memdesc:a7e9460873197cacbc5c7583892f29958"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the pointer to the managing controller.  <br /></td></tr>
-<tr class="separator:a7e9460873197cacbc5c7583892f29958"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e77e7c779247c42f8dbf3b07be21d93" id="r_a8e77e7c779247c42f8dbf3b07be21d93"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#aadc3657d376a3c081b9b0c05feafbce7">mrw::can::UnitNo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a8e77e7c779247c42f8dbf3b07be21d93">unitNo</a> () const</td></tr>
-<tr class="memdesc:a8e77e7c779247c42f8dbf3b07be21d93"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the unit number which is part of the CAN identifier sent to the controller with a CAN command.  <br /></td></tr>
-<tr class="separator:a8e77e7c779247c42f8dbf3b07be21d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5063e07db58c00996fbe0e0219e97df0" id="r_a5063e07db58c00996fbe0e0219e97df0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4">LockState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5063e07db58c00996fbe0e0219e97df0">lock</a> () const</td></tr>
-<tr class="memdesc:a5063e07db58c00996fbe0e0219e97df0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the actual LockState of this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a>.  <br /></td></tr>
-<tr class="separator:a5063e07db58c00996fbe0e0219e97df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8a91c7a003e6b807fb0984c4eb0c5e9" id="r_ad8a91c7a003e6b807fb0984c4eb0c5e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#ad8a91c7a003e6b807fb0984c4eb0c5e9">setLock</a> (const <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4">LockState</a> input)</td></tr>
-<tr class="memdesc:ad8a91c7a003e6b807fb0984c4eb0c5e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method sets a new LockState.  <br /></td></tr>
-<tr class="separator:ad8a91c7a003e6b807fb0984c4eb0c5e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34d73d08a3900c433d97563701f89be8" id="r_a34d73d08a3900c433d97563701f89be8"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#a34d73d08a3900c433d97563701f89be8">inductors</a> () const noexcept</td></tr>
+<tr class="memdesc:a34d73d08a3900c433d97563701f89be8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns how many inductive actuators this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> contain.  <br /></td></tr>
+<tr class="separator:a34d73d08a3900c433d97563701f89be8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c8e5c0e6dfdf1ec795ab52d23753448" id="r_a2c8e5c0e6dfdf1ec795ab52d23753448"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#a2c8e5c0e6dfdf1ec795ab52d23753448">hasCutOff</a> () const noexcept</td></tr>
+<tr class="memdesc:a2c8e5c0e6dfdf1ec795ab52d23753448"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the inductive actuators have automatic cutoff at end position.  <br /></td></tr>
+<tr class="separator:a2c8e5c0e6dfdf1ec795ab52d23753448"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a272766efdacbd22282b2316fab129381" id="r_a272766efdacbd22282b2316fab129381"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d1a/classmrw_1_1model_1_1SwitchModule.html">SwitchModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#a272766efdacbd22282b2316fab129381">module</a> () const noexcept</td></tr>
+<tr class="memdesc:a272766efdacbd22282b2316fab129381"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the controlling <a class="el" href="../../dc/d1a/classmrw_1_1model_1_1SwitchModule.html" title="This class represents a switch module which is connected to a CAN controller using one or two 16-pin ...">SwitchModule</a>.  <br /></td></tr>
+<tr class="separator:a272766efdacbd22282b2316fab129381"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2420562f00468fa8a31d13fdbf2fa195" id="r_a2420562f00468fa8a31d13fdbf2fa195"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html">Controller</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#a2420562f00468fa8a31d13fdbf2fa195">controller</a> () const noexcept override</td></tr>
+<tr class="memdesc:a2420562f00468fa8a31d13fdbf2fa195"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the pointer to the managing controller.  <br /></td></tr>
+<tr class="separator:a2420562f00468fa8a31d13fdbf2fa195"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a262cee73971200e5c6cd308a7621682f" id="r_a262cee73971200e5c6cd308a7621682f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#aadc3657d376a3c081b9b0c05feafbce7">mrw::can::UnitNo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a262cee73971200e5c6cd308a7621682f">unitNo</a> () const noexcept</td></tr>
+<tr class="memdesc:a262cee73971200e5c6cd308a7621682f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the unit number which is part of the CAN identifier sent to the controller with a CAN command.  <br /></td></tr>
+<tr class="separator:a262cee73971200e5c6cd308a7621682f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa615a4a6a56336b6ae6b62951e03ea04" id="r_aa615a4a6a56336b6ae6b62951e03ea04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4">LockState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#aa615a4a6a56336b6ae6b62951e03ea04">lock</a> () const noexcept</td></tr>
+<tr class="memdesc:aa615a4a6a56336b6ae6b62951e03ea04"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the actual LockState of this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a>.  <br /></td></tr>
+<tr class="separator:aa615a4a6a56336b6ae6b62951e03ea04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d1f2095bc54b7f57caebc39b3f486a2" id="r_a0d1f2095bc54b7f57caebc39b3f486a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a0d1f2095bc54b7f57caebc39b3f486a2">setLock</a> (const <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4">LockState</a> input) noexcept</td></tr>
+<tr class="memdesc:a0d1f2095bc54b7f57caebc39b3f486a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method sets a new LockState.  <br /></td></tr>
+<tr class="separator:a0d1f2095bc54b7f57caebc39b3f486a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6251eef9b1c9bb8cab9ad4427f56b92" id="r_ac6251eef9b1c9bb8cab9ad4427f56b92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html">mrw::can::MrwMessage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#ac6251eef9b1c9bb8cab9ad4427f56b92">command</a> (const <a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808a">mrw::can::Command</a> command) const</td></tr>
 <tr class="memdesc:ac6251eef9b1c9bb8cab9ad4427f56b92"><td class="mdescLeft">&#160;</td><td class="mdescRight">This convenience method creates a command <a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html" title="This class represents a CAN bus frame in model railway manner.">mrw::can::MrwMessage</a> and adds the <a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808a" title="This enumeration lists all supported MrwMessage commands.">mrw::can::Command</a>.  <br /></td></tr>
 <tr class="separator:ac6251eef9b1c9bb8cab9ad4427f56b92"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -283,18 +283,18 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a94e4b339753c6c98ccb2add758ee6483" id="r_a94e4b339753c6c98ccb2add758ee6483"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d9c/classmrw_1_1model_1_1Signal.html#a94e4b339753c6c98ccb2add758ee6483">get</a> (const <a class="el" href="../../db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244">SignalType</a> &amp;<a class="el" href="../../db/d9c/classmrw_1_1model_1_1Signal.html#a146927a07fe74196ecf8c34b6f45821f">type</a>)</td></tr>
 <tr class="memdesc:a94e4b339753c6c98ccb2add758ee6483"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the clear text QString of the SignalType this <a class="el" href="../../db/d9c/classmrw_1_1model_1_1Signal.html" title="This class represents all Signal variants.">Signal</a> is set to.  <br /></td></tr>
 <tr class="separator:a94e4b339753c6c98ccb2add758ee6483"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc20944dcdec0f5d35980a72eec75b7d" id="r_afc20944dcdec0f5d35980a72eec75b7d"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#afc20944dcdec0f5d35980a72eec75b7d">format</a> (const QString &amp;code, const QString &amp;input)</td></tr>
-<tr class="memdesc:afc20944dcdec0f5d35980a72eec75b7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method surrounds a string with a given console format command.  <br /></td></tr>
-<tr class="separator:afc20944dcdec0f5d35980a72eec75b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17e93c589eee4042aa536612fc6a7665" id="r_a17e93c589eee4042aa536612fc6a7665"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#a17e93c589eee4042aa536612fc6a7665">bold</a> (const QString &amp;input)</td></tr>
-<tr class="memdesc:a17e93c589eee4042aa536612fc6a7665"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method surrounds a string with a console format code to print the input string as bold.  <br /></td></tr>
-<tr class="separator:a17e93c589eee4042aa536612fc6a7665"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca4a5f0e39b594816fa04182c8329aee" id="r_aca4a5f0e39b594816fa04182c8329aee"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#aca4a5f0e39b594816fa04182c8329aee">red</a> (const QString &amp;input)</td></tr>
-<tr class="memdesc:aca4a5f0e39b594816fa04182c8329aee"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method surrounds a string with a console format code to print the input string in red.  <br /></td></tr>
-<tr class="separator:aca4a5f0e39b594816fa04182c8329aee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf1529aec090d1eadf747b79c9994cfd" id="r_acf1529aec090d1eadf747b79c9994cfd"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#acf1529aec090d1eadf747b79c9994cfd">get</a> (const <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4">LockState</a> &amp;state)</td></tr>
-<tr class="memdesc:acf1529aec090d1eadf747b79c9994cfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the clear text QString of the LockState this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> is set to.  <br /></td></tr>
-<tr class="separator:acf1529aec090d1eadf747b79c9994cfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbf185289d3c6a133f3d5150d2fb08c3" id="r_adbf185289d3c6a133f3d5150d2fb08c3"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#adbf185289d3c6a133f3d5150d2fb08c3">format</a> (const QString &amp;code, const QString &amp;input) noexcept</td></tr>
+<tr class="memdesc:adbf185289d3c6a133f3d5150d2fb08c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method surrounds a string with a given console format command.  <br /></td></tr>
+<tr class="separator:adbf185289d3c6a133f3d5150d2fb08c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee674c3216f7e1a4f50db31dc6dda7a6" id="r_aee674c3216f7e1a4f50db31dc6dda7a6"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#aee674c3216f7e1a4f50db31dc6dda7a6">bold</a> (const QString &amp;input) noexcept</td></tr>
+<tr class="memdesc:aee674c3216f7e1a4f50db31dc6dda7a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method surrounds a string with a console format code to print the input string as bold.  <br /></td></tr>
+<tr class="separator:aee674c3216f7e1a4f50db31dc6dda7a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35b509dcf26d9f00cff8c6dd18a6a5cf" id="r_a35b509dcf26d9f00cff8c6dd18a6a5cf"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#a35b509dcf26d9f00cff8c6dd18a6a5cf">red</a> (const QString &amp;input) noexcept</td></tr>
+<tr class="memdesc:a35b509dcf26d9f00cff8c6dd18a6a5cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method surrounds a string with a console format code to print the input string in red.  <br /></td></tr>
+<tr class="separator:a35b509dcf26d9f00cff8c6dd18a6a5cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae13d306d9ae0cc37ef69861f44fb58da" id="r_ae13d306d9ae0cc37ef69861f44fb58da"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#ae13d306d9ae0cc37ef69861f44fb58da">get</a> (const <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4">LockState</a> &amp;state) noexcept</td></tr>
+<tr class="memdesc:ae13d306d9ae0cc37ef69861f44fb58da"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the clear text QString of the LockState this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> is set to.  <br /></td></tr>
+<tr class="separator:ae13d306d9ae0cc37ef69861f44fb58da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -355,8 +355,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:acc6ebb418d45590a891cb9278ac6cf69" id="r_acc6ebb418d45590a891cb9278ac6cf69"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d4f/classmrw_1_1model_1_1Position.html#acc6ebb418d45590a891cb9278ac6cf69">value</a> () const</td></tr>
 <tr class="memdesc:acc6ebb418d45590a891cb9278ac6cf69"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts the position and appearance information into a QString which can be stored using QSettings.  <br /></td></tr>
 <tr class="separator:acc6ebb418d45590a891cb9278ac6cf69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76d7402d9f3f154f7d2fad96690ed7b9" id="r_a76d7402d9f3f154f7d2fad96690ed7b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html">mrw::can::MrwMessage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#a76d7402d9f3f154f7d2fad96690ed7b9">configSwitchMsg</a> (const <a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808a">mrw::can::Command</a> cmd, const unsigned pin) const</td></tr>
-<tr class="separator:a76d7402d9f3f154f7d2fad96690ed7b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad12be0a793e8f34a3800d6d96a4676e0" id="r_ad12be0a793e8f34a3800d6d96a4676e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html">mrw::can::MrwMessage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#ad12be0a793e8f34a3800d6d96a4676e0">configSwitchMsg</a> (const <a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808a">mrw::can::Command</a> cmd, const unsigned pin) const noexcept</td></tr>
+<tr class="separator:ad12be0a793e8f34a3800d6d96a4676e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -640,8 +640,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a17e93c589eee4042aa536612fc6a7665" name="a17e93c589eee4042aa536612fc6a7665"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17e93c589eee4042aa536612fc6a7665">&#9670;&#160;</a></span>bold()</h2>
+<a id="aee674c3216f7e1a4f50db31dc6dda7a6" name="aee674c3216f7e1a4f50db31dc6dda7a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee674c3216f7e1a4f50db31dc6dda7a6">&#9670;&#160;</a></span>bold()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -658,7 +658,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -713,14 +713,14 @@ Static Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html#a99524585ac52632288a82d0e4901a296" title="This method returns the controller ID which is part of the CAN ID.">Controller::id()</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html#a76f15c1eaa4e29986363b8eb4c6dfcad" title="This method returns the controller ID which is part of the CAN ID.">Controller::id()</a> </dd>
 <dd>
 <a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html" title="This class represents a CAN bus frame in model railway manner.">mrw::can::MrwMessage</a> </dd></dl>
 
 </div>
 </div>
-<a id="a8e561075698843761e8f9acc1e1bbf22" name="a8e561075698843761e8f9acc1e1bbf22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e561075698843761e8f9acc1e1bbf22">&#9670;&#160;</a></span>configMsg()</h2>
+<a id="a820cd7628e2ff99e070c7f207e410249" name="a820cd7628e2ff99e070c7f207e410249"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a820cd7628e2ff99e070c7f207e410249">&#9670;&#160;</a></span>configMsg()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -737,7 +737,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -749,8 +749,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a76d7402d9f3f154f7d2fad96690ed7b9" name="a76d7402d9f3f154f7d2fad96690ed7b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76d7402d9f3f154f7d2fad96690ed7b9">&#9670;&#160;</a></span>configSwitchMsg()</h2>
+<a id="ad12be0a793e8f34a3800d6d96a4676e0" name="ad12be0a793e8f34a3800d6d96a4676e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad12be0a793e8f34a3800d6d96a4676e0">&#9670;&#160;</a></span>configSwitchMsg()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -771,15 +771,15 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a7e9460873197cacbc5c7583892f29958" name="a7e9460873197cacbc5c7583892f29958"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e9460873197cacbc5c7583892f29958">&#9670;&#160;</a></span>controller()</h2>
+<a id="a2420562f00468fa8a31d13fdbf2fa195" name="a2420562f00468fa8a31d13fdbf2fa195"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2420562f00468fa8a31d13fdbf2fa195">&#9670;&#160;</a></span>controller()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -796,7 +796,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -804,7 +804,7 @@ Static Protected Attributes</h2></td></tr>
 <p>This method returns the pointer to the managing controller. </p>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
-<p>Implements <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#aa6d3a8c0db676ee2289441e37e2165fa">mrw::model::Device</a>.</p>
+<p>Implements <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a11c60e4241ddcc3df82af9e594df8846">mrw::model::Device</a>.</p>
 
 </div>
 </div>
@@ -898,8 +898,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="afc20944dcdec0f5d35980a72eec75b7d" name="afc20944dcdec0f5d35980a72eec75b7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc20944dcdec0f5d35980a72eec75b7d">&#9670;&#160;</a></span>format()</h2>
+<a id="adbf185289d3c6a133f3d5150d2fb08c3" name="adbf185289d3c6a133f3d5150d2fb08c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbf185289d3c6a133f3d5150d2fb08c3">&#9670;&#160;</a></span>format()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -920,7 +920,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -944,8 +944,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="acf1529aec090d1eadf747b79c9994cfd" name="acf1529aec090d1eadf747b79c9994cfd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf1529aec090d1eadf747b79c9994cfd">&#9670;&#160;</a></span>get() <span class="overload">[1/3]</span></h2>
+<a id="ae13d306d9ae0cc37ef69861f44fb58da" name="ae13d306d9ae0cc37ef69861f44fb58da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae13d306d9ae0cc37ef69861f44fb58da">&#9670;&#160;</a></span>get() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -962,7 +962,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1046,8 +1046,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af4ac6f0a0fba9fd96e92d9d65d6ae311" name="af4ac6f0a0fba9fd96e92d9d65d6ae311"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4ac6f0a0fba9fd96e92d9d65d6ae311">&#9670;&#160;</a></span>hasCutOff()</h2>
+<a id="a2c8e5c0e6dfdf1ec795ab52d23753448" name="a2c8e5c0e6dfdf1ec795ab52d23753448"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c8e5c0e6dfdf1ec795ab52d23753448">&#9670;&#160;</a></span>hasCutOff()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1064,7 +1064,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1102,8 +1102,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af55f9071e5478b3e66c767d3a4fbf30f" name="af55f9071e5478b3e66c767d3a4fbf30f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af55f9071e5478b3e66c767d3a4fbf30f">&#9670;&#160;</a></span>inductors()</h2>
+<a id="a34d73d08a3900c433d97563701f89be8" name="a34d73d08a3900c433d97563701f89be8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34d73d08a3900c433d97563701f89be8">&#9670;&#160;</a></span>inductors()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1120,7 +1120,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1166,8 +1166,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af5d1dff403f074d1eb847f6f0009eaa4" name="af5d1dff403f074d1eb847f6f0009eaa4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5d1dff403f074d1eb847f6f0009eaa4">&#9670;&#160;</a></span>isUnlockable()</h2>
+<a id="adb98203a32a581be7da0b4208d948313" name="adb98203a32a581be7da0b4208d948313"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb98203a32a581be7da0b4208d948313">&#9670;&#160;</a></span>isUnlockable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1184,18 +1184,18 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>This method returns true if it is possible to <em>unlock</em> this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a>. </p>
-<p>There are some conditions to be met to ensure a safe unlock. This method is called during <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5063e07db58c00996fbe0e0219e97df0" title="This method returns the actual LockState of this Device.">lock()</a> method with a given parameter of LockState::UNLOCKED.</p>
+<p>There are some conditions to be met to ensure a safe unlock. This method is called during <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#aa615a4a6a56336b6ae6b62951e03ea04" title="This method returns the actual LockState of this Device.">lock()</a> method with a given parameter of LockState::UNLOCKED.</p>
 <dl class="section note"><dt>Note</dt><dd>This test method is meant that a locked <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> is <u>un</u>lockable. It is not meant that if this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> is unlocked and not lockable!</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> is safely possible to unlock.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5063e07db58c00996fbe0e0219e97df0" title="This method returns the actual LockState of this Device.">lock()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#aa615a4a6a56336b6ae6b62951e03ea04" title="This method returns the actual LockState of this Device.">lock()</a> </dd></dl>
 
-<p>Implements <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#af6fdeee9a3792d19829cc7296a5ac98d">mrw::model::Device</a>.</p>
+<p>Implements <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a584e08ad3904466863ecc97af837f7f4">mrw::model::Device</a>.</p>
 
 </div>
 </div>
@@ -1378,8 +1378,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5063e07db58c00996fbe0e0219e97df0" name="a5063e07db58c00996fbe0e0219e97df0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5063e07db58c00996fbe0e0219e97df0">&#9670;&#160;</a></span>lock()</h2>
+<a id="aa615a4a6a56336b6ae6b62951e03ea04" name="aa615a4a6a56336b6ae6b62951e03ea04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa615a4a6a56336b6ae6b62951e03ea04">&#9670;&#160;</a></span>lock()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1396,7 +1396,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1406,8 +1406,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac0c36ca0d39461b18679cf03f42bcf80" name="ac0c36ca0d39461b18679cf03f42bcf80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0c36ca0d39461b18679cf03f42bcf80">&#9670;&#160;</a></span>module()</h2>
+<a id="a272766efdacbd22282b2316fab129381" name="a272766efdacbd22282b2316fab129381"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a272766efdacbd22282b2316fab129381">&#9670;&#160;</a></span>module()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1424,7 +1424,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1473,8 +1473,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa09ed5dd9ba69f77b66a85803805c11b" name="aa09ed5dd9ba69f77b66a85803805c11b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa09ed5dd9ba69f77b66a85803805c11b">&#9670;&#160;</a></span>name()</h2>
+<a id="a6feca96c763b42bb37f928ab925083d4" name="a6feca96c763b42bb37f928ab925083d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6feca96c763b42bb37f928ab925083d4">&#9670;&#160;</a></span>name()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1491,7 +1491,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1499,12 +1499,12 @@ Static Protected Attributes</h2></td></tr>
 <p>This method returns the name modelled inside the EMF/XMI model file. </p>
 <dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> name modelled inside the EMF/XMI model. </dd></dl>
 
-<p>Implements <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a697e9cf85d3bb4f6e00bd2b1da6d6f34">mrw::model::Device</a>.</p>
+<p>Implements <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a096acffad825581a99fbf267ae2c9870">mrw::model::Device</a>.</p>
 
 </div>
 </div>
-<a id="acde95787bd85524f6f1f232e3ac0c93f" name="acde95787bd85524f6f1f232e3ac0c93f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acde95787bd85524f6f1f232e3ac0c93f">&#9670;&#160;</a></span>operator QString()</h2>
+<a id="a52d7f4538b30867ad6e37ccd3d2e7aaf" name="a52d7f4538b30867ad6e37ccd3d2e7aaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52d7f4538b30867ad6e37ccd3d2e7aaf">&#9670;&#160;</a></span>operator QString()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1521,13 +1521,13 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>This is a convenience cast operator to QString. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#ae146e360fa54b18ff5d1e62c12ca05b5" title="This method returns the contents of this instance in human readable form as QString.">toString()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a551c4fa2312fca51ed5b63ae34f9adca" title="This method returns the contents of this instance in human readable form as QString.">toString()</a> </dd></dl>
 
 </div>
 </div>
@@ -1765,8 +1765,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aca4a5f0e39b594816fa04182c8329aee" name="aca4a5f0e39b594816fa04182c8329aee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca4a5f0e39b594816fa04182c8329aee">&#9670;&#160;</a></span>red()</h2>
+<a id="a35b509dcf26d9f00cff8c6dd18a6a5cf" name="a35b509dcf26d9f00cff8c6dd18a6a5cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35b509dcf26d9f00cff8c6dd18a6a5cf">&#9670;&#160;</a></span>red()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1783,7 +1783,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1925,8 +1925,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ad8a91c7a003e6b807fb0984c4eb0c5e9" name="ad8a91c7a003e6b807fb0984c4eb0c5e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8a91c7a003e6b807fb0984c4eb0c5e9">&#9670;&#160;</a></span>setLock()</h2>
+<a id="a0d1f2095bc54b7f57caebc39b3f486a2" name="a0d1f2095bc54b7f57caebc39b3f486a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d1f2095bc54b7f57caebc39b3f486a2">&#9670;&#160;</a></span>setLock()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1943,7 +1943,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2054,8 +2054,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae146e360fa54b18ff5d1e62c12ca05b5" name="ae146e360fa54b18ff5d1e62c12ca05b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae146e360fa54b18ff5d1e62c12ca05b5">&#9670;&#160;</a></span>toString()</h2>
+<a id="a551c4fa2312fca51ed5b63ae34f9adca" name="a551c4fa2312fca51ed5b63ae34f9adca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a551c4fa2312fca51ed5b63ae34f9adca">&#9670;&#160;</a></span>toString()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2072,7 +2072,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2112,8 +2112,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a8e77e7c779247c42f8dbf3b07be21d93" name="a8e77e7c779247c42f8dbf3b07be21d93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e77e7c779247c42f8dbf3b07be21d93">&#9670;&#160;</a></span>unitNo()</h2>
+<a id="a262cee73971200e5c6cd308a7621682f" name="a262cee73971200e5c6cd308a7621682f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a262cee73971200e5c6cd308a7621682f">&#9670;&#160;</a></span>unitNo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2130,7 +2130,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2139,12 +2139,12 @@ Static Protected Attributes</h2></td></tr>
 <p>It is directly used inside the CAN extended frame format ID.</p>
 <dl class="section note"><dt>Note</dt><dd>Even the extended frame format ID is 18 bits wide only 16 bits are used from this unit number.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The unit number of this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a>. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html#a99524585ac52632288a82d0e4901a296" title="This method returns the controller ID which is part of the CAN ID.">Controller::id()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html#a76f15c1eaa4e29986363b8eb4c6dfcad" title="This method returns the controller ID which is part of the CAN ID.">Controller::id()</a> </dd></dl>
 
 </div>
 </div>
-<a id="aa24986521ebec3bc7677d183d3d52c79" name="aa24986521ebec3bc7677d183d3d52c79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa24986521ebec3bc7677d183d3d52c79">&#9670;&#160;</a></span>valid()</h2>
+<a id="a6d44cfceeb25ea54dd716f28624b6fb0" name="a6d44cfceeb25ea54dd716f28624b6fb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d44cfceeb25ea54dd716f28624b6fb0">&#9670;&#160;</a></span>valid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2161,7 +2161,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2810,7 +2810,7 @@ Static Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 15 2024 09:50:50 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Jan 15 2024 12:43:04 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

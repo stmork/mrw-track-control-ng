@@ -132,30 +132,30 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac3d5fd482c2f1f7fe0c17948c52a38a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96a96c7756b6a8bca4f1647f79f91e25" id="r_a96a96c7756b6a8bca4f1647f79f91e25"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a96a96c7756b6a8bca4f1647f79f91e25">~RailPart</a> ()=default</td></tr>
 <tr class="separator:a96a96c7756b6a8bca4f1647f79f91e25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aded7161082b221c65a8325f1259042fd" id="r_aded7161082b221c65a8325f1259042fd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aded7161082b221c65a8325f1259042fd">aIsDir</a> () const</td></tr>
-<tr class="memdesc:aded7161082b221c65a8325f1259042fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the counting direction is inverted for the connectors.  <br /></td></tr>
-<tr class="separator:aded7161082b221c65a8325f1259042fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d212fb80b349121b8de97ecef880552" id="r_a1d212fb80b349121b8de97ecef880552"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d212fb80b349121b8de97ecef880552">contains</a> (const <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html">RailPart</a> *rail, const bool dir) const</td></tr>
-<tr class="memdesc:a1d212fb80b349121b8de97ecef880552"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method verifies if the given rail part is inside the corresponding connector set of the given counting direction.  <br /></td></tr>
-<tr class="separator:a1d212fb80b349121b8de97ecef880552"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d6f8943e386307603e48296b1ffa5c3" id="r_a8d6f8943e386307603e48296b1ffa5c3"><td class="memItemLeft" align="right" valign="top">std::set&lt; <a class="el" href="../../d2/db9/classmrw_1_1model_1_1RailInfo.html">RailInfo</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8d6f8943e386307603e48296b1ffa5c3">advance</a> (const bool dir)</td></tr>
-<tr class="memdesc:a8d6f8943e386307603e48296b1ffa5c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns all connectors in the given counting direction.  <br /></td></tr>
-<tr class="separator:a8d6f8943e386307603e48296b1ffa5c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22e68abfdd25a7edbbd7f94895d2b970" id="r_a22e68abfdd25a7edbbd7f94895d2b970"><td class="memItemLeft" align="right" valign="top">const std::set&lt; <a class="el" href="../../d2/db9/classmrw_1_1model_1_1RailInfo.html">RailInfo</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22e68abfdd25a7edbbd7f94895d2b970">advance</a> (const bool dir) const</td></tr>
-<tr class="memdesc:a22e68abfdd25a7edbbd7f94895d2b970"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns all connectors in the given counting direction.  <br /></td></tr>
-<tr class="separator:a22e68abfdd25a7edbbd7f94895d2b970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f0e525139328495fe6f96d5d78fd2e2" id="r_a8f0e525139328495fe6f96d5d78fd2e2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f0e525139328495fe6f96d5d78fd2e2">aIsDir</a> () const noexcept</td></tr>
+<tr class="memdesc:a8f0e525139328495fe6f96d5d78fd2e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the counting direction is inverted for the connectors.  <br /></td></tr>
+<tr class="separator:a8f0e525139328495fe6f96d5d78fd2e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dc87d20707ac5301d489732d40c74f1" id="r_a2dc87d20707ac5301d489732d40c74f1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2dc87d20707ac5301d489732d40c74f1">contains</a> (const <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html">RailPart</a> *rail, const bool dir) const noexcept</td></tr>
+<tr class="memdesc:a2dc87d20707ac5301d489732d40c74f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method verifies if the given rail part is inside the corresponding connector set of the given counting direction.  <br /></td></tr>
+<tr class="separator:a2dc87d20707ac5301d489732d40c74f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9766acf0536c000da1d28a399e7bad59" id="r_a9766acf0536c000da1d28a399e7bad59"><td class="memItemLeft" align="right" valign="top">std::set&lt; <a class="el" href="../../d2/db9/classmrw_1_1model_1_1RailInfo.html">RailInfo</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9766acf0536c000da1d28a399e7bad59">advance</a> (const bool dir) noexcept</td></tr>
+<tr class="memdesc:a9766acf0536c000da1d28a399e7bad59"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns all connectors in the given counting direction.  <br /></td></tr>
+<tr class="separator:a9766acf0536c000da1d28a399e7bad59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77f112dd0dbcb739893301de6c18ea02" id="r_a77f112dd0dbcb739893301de6c18ea02"><td class="memItemLeft" align="right" valign="top">const std::set&lt; <a class="el" href="../../d2/db9/classmrw_1_1model_1_1RailInfo.html">RailInfo</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a77f112dd0dbcb739893301de6c18ea02">advance</a> (const bool dir) const noexcept</td></tr>
+<tr class="memdesc:a77f112dd0dbcb739893301de6c18ea02"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns all connectors in the given counting direction.  <br /></td></tr>
+<tr class="separator:a77f112dd0dbcb739893301de6c18ea02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6c59bc54584e849ed6ab7dc2625448b" id="r_aa6c59bc54584e849ed6ab7dc2625448b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6c59bc54584e849ed6ab7dc2625448b">setState</a> (const <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html">RailPart</a> *prev, const <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html">RailPart</a> *succ)=0</td></tr>
 <tr class="memdesc:aa6c59bc54584e849ed6ab7dc2625448b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method sets the internal switch state according to the given connected neighbours.  <br /></td></tr>
 <tr class="separator:aa6c59bc54584e849ed6ab7dc2625448b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01660734e0067cf80024bb6738fddb44" id="r_a01660734e0067cf80024bb6738fddb44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01660734e0067cf80024bb6738fddb44">reserve</a> (const bool input=true)</td></tr>
-<tr class="memdesc:a01660734e0067cf80024bb6738fddb44"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method reserves this <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> for routing information so that no other router can allocate this <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a>.  <br /></td></tr>
-<tr class="separator:a01660734e0067cf80024bb6738fddb44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a752cb0e83daba8d27383f80c25f7544b" id="r_a752cb0e83daba8d27383f80c25f7544b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a752cb0e83daba8d27383f80c25f7544b">reserved</a> () const</td></tr>
-<tr class="memdesc:a752cb0e83daba8d27383f80c25f7544b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the reservation state of this <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> instance.  <br /></td></tr>
-<tr class="separator:a752cb0e83daba8d27383f80c25f7544b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3b52d7b06ade81d327eeb3e8a1b2842" id="r_ae3b52d7b06ade81d327eeb3e8a1b2842"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3b52d7b06ade81d327eeb3e8a1b2842">isCurved</a> () const =0</td></tr>
-<tr class="memdesc:ae3b52d7b06ade81d327eeb3e8a1b2842"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the represented <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> is curved or a turn out branch of a switch.  <br /></td></tr>
-<tr class="separator:ae3b52d7b06ade81d327eeb3e8a1b2842"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac72c8ab09ed8c4c1189e372ff6d20116" id="r_ac72c8ab09ed8c4c1189e372ff6d20116"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac72c8ab09ed8c4c1189e372ff6d20116">reserve</a> (const bool input=true) noexcept</td></tr>
+<tr class="memdesc:ac72c8ab09ed8c4c1189e372ff6d20116"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method reserves this <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> for routing information so that no other router can allocate this <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a>.  <br /></td></tr>
+<tr class="separator:ac72c8ab09ed8c4c1189e372ff6d20116"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3211419fa88cda19a55af33ad60d80d" id="r_aa3211419fa88cda19a55af33ad60d80d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3211419fa88cda19a55af33ad60d80d">reserved</a> () const noexcept</td></tr>
+<tr class="memdesc:aa3211419fa88cda19a55af33ad60d80d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the reservation state of this <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> instance.  <br /></td></tr>
+<tr class="separator:aa3211419fa88cda19a55af33ad60d80d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f492691d03276a9d7a36e5aca1a3b13" id="r_a8f492691d03276a9d7a36e5aca1a3b13"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f492691d03276a9d7a36e5aca1a3b13">isCurved</a> () const noexcept=0</td></tr>
+<tr class="memdesc:a8f492691d03276a9d7a36e5aca1a3b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the represented <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> is curved or a turn out branch of a switch.  <br /></td></tr>
+<tr class="separator:a8f492691d03276a9d7a36e5aca1a3b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1a0554860b2d9bacfff846742b619b3" id="r_aa1a0554860b2d9bacfff846742b619b3"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d26/classmrw_1_1model_1_1AssemblyPart.html#aa1a0554860b2d9bacfff846742b619b3">valid</a> () const =0</td></tr>
 <tr class="memdesc:aa1a0554860b2d9bacfff846742b619b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method verifies if all connectors of this rail part are correctly connected which their counter parts.  <br /></td></tr>
 <tr class="separator:aa1a0554860b2d9bacfff846742b619b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,9 +171,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a939a5e4e560f858b3869fc6bec10274e" id="r_a939a5e4e560f858b3869fc6bec10274e"><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#a939a5e4e560f858b3869fc6bec10274e">toString</a> () const =0</td></tr>
 <tr class="memdesc:a939a5e4e560f858b3869fc6bec10274e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the contents of this instance in human readable form as QString.  <br /></td></tr>
 <tr class="separator:a939a5e4e560f858b3869fc6bec10274e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acde95787bd85524f6f1f232e3ac0c93f" id="r_acde95787bd85524f6f1f232e3ac0c93f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#acde95787bd85524f6f1f232e3ac0c93f">operator QString</a> () const</td></tr>
-<tr class="memdesc:acde95787bd85524f6f1f232e3ac0c93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a convenience cast operator to QString.  <br /></td></tr>
-<tr class="separator:acde95787bd85524f6f1f232e3ac0c93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52d7f4538b30867ad6e37ccd3d2e7aaf" id="r_a52d7f4538b30867ad6e37ccd3d2e7aaf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#a52d7f4538b30867ad6e37ccd3d2e7aaf">operator QString</a> () const noexcept</td></tr>
+<tr class="memdesc:a52d7f4538b30867ad6e37ccd3d2e7aaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a convenience cast operator to QString.  <br /></td></tr>
+<tr class="separator:a52d7f4538b30867ad6e37ccd3d2e7aaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae20d3fcd3fef4848e09aeb853f338701" id="r_ae20d3fcd3fef4848e09aeb853f338701"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d4f/classmrw_1_1model_1_1Position.html#ae20d3fcd3fef4848e09aeb853f338701">parse</a> (QSettings &amp;settings, const QString &amp;default_value)</td></tr>
 <tr class="memdesc:ae20d3fcd3fef4848e09aeb853f338701"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method reads a value from the given <a class="el" href="../../d6/db2/classmrw_1_1util_1_1Settings.html" title="This class extends the QSettings class by some convenience methods.">mrw::util::Settings</a> using the <a class="el" href="../../db/d4f/classmrw_1_1model_1_1Position.html#a70894d7430b21311c29a688bb18798dc" title="This method returns a key to determine the logical coordinates from the description file.">key()</a> method as key and in case the value is not available it uses the default_value parameter instead.  <br /></td></tr>
 <tr class="separator:ae20d3fcd3fef4848e09aeb853f338701"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -234,15 +234,15 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:afc20944dcdec0f5d35980a72eec75b7d" id="r_afc20944dcdec0f5d35980a72eec75b7d"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#afc20944dcdec0f5d35980a72eec75b7d">format</a> (const QString &amp;code, const QString &amp;input)</td></tr>
-<tr class="memdesc:afc20944dcdec0f5d35980a72eec75b7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method surrounds a string with a given console format command.  <br /></td></tr>
-<tr class="separator:afc20944dcdec0f5d35980a72eec75b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17e93c589eee4042aa536612fc6a7665" id="r_a17e93c589eee4042aa536612fc6a7665"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#a17e93c589eee4042aa536612fc6a7665">bold</a> (const QString &amp;input)</td></tr>
-<tr class="memdesc:a17e93c589eee4042aa536612fc6a7665"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method surrounds a string with a console format code to print the input string as bold.  <br /></td></tr>
-<tr class="separator:a17e93c589eee4042aa536612fc6a7665"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca4a5f0e39b594816fa04182c8329aee" id="r_aca4a5f0e39b594816fa04182c8329aee"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#aca4a5f0e39b594816fa04182c8329aee">red</a> (const QString &amp;input)</td></tr>
-<tr class="memdesc:aca4a5f0e39b594816fa04182c8329aee"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method surrounds a string with a console format code to print the input string in red.  <br /></td></tr>
-<tr class="separator:aca4a5f0e39b594816fa04182c8329aee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbf185289d3c6a133f3d5150d2fb08c3" id="r_adbf185289d3c6a133f3d5150d2fb08c3"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#adbf185289d3c6a133f3d5150d2fb08c3">format</a> (const QString &amp;code, const QString &amp;input) noexcept</td></tr>
+<tr class="memdesc:adbf185289d3c6a133f3d5150d2fb08c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method surrounds a string with a given console format command.  <br /></td></tr>
+<tr class="separator:adbf185289d3c6a133f3d5150d2fb08c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee674c3216f7e1a4f50db31dc6dda7a6" id="r_aee674c3216f7e1a4f50db31dc6dda7a6"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#aee674c3216f7e1a4f50db31dc6dda7a6">bold</a> (const QString &amp;input) noexcept</td></tr>
+<tr class="memdesc:aee674c3216f7e1a4f50db31dc6dda7a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method surrounds a string with a console format code to print the input string as bold.  <br /></td></tr>
+<tr class="separator:aee674c3216f7e1a4f50db31dc6dda7a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35b509dcf26d9f00cff8c6dd18a6a5cf" id="r_a35b509dcf26d9f00cff8c6dd18a6a5cf"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#a35b509dcf26d9f00cff8c6dd18a6a5cf">red</a> (const QString &amp;input) noexcept</td></tr>
+<tr class="memdesc:a35b509dcf26d9f00cff8c6dd18a6a5cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method surrounds a string with a console format code to print the input string in red.  <br /></td></tr>
+<tr class="separator:a35b509dcf26d9f00cff8c6dd18a6a5cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af18df98c219a3a3ad56e48256456150a" id="r_af18df98c219a3a3ad56e48256456150a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d4f/classmrw_1_1model_1_1Position.html#af18df98c219a3a3ad56e48256456150a">less</a> (const <a class="el" href="../../db/d4f/classmrw_1_1model_1_1Position.html">Position</a> *left, const <a class="el" href="../../db/d4f/classmrw_1_1model_1_1Position.html">Position</a> *right)</td></tr>
 <tr class="memdesc:af18df98c219a3a3ad56e48256456150a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method compares two positions according to their coordinates.  <br /></td></tr>
 <tr class="separator:af18df98c219a3a3ad56e48256456150a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -297,9 +297,9 @@ Static Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a022a68964d9e433062f252407dd8dfc6" id="r_a022a68964d9e433062f252407dd8dfc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html">RailPart</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a022a68964d9e433062f252407dd8dfc6">resolve</a> (const char *attr) const</td></tr>
-<tr class="memdesc:a022a68964d9e433062f252407dd8dfc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method resolves a connected <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> from the EMF model.  <br /></td></tr>
-<tr class="separator:a022a68964d9e433062f252407dd8dfc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace536977a9bc46395d516092ce1bf09c" id="r_ace536977a9bc46395d516092ce1bf09c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html">RailPart</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace536977a9bc46395d516092ce1bf09c">resolve</a> (const char *attr) const noexcept</td></tr>
+<tr class="memdesc:ace536977a9bc46395d516092ce1bf09c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method resolves a connected <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> from the EMF model.  <br /></td></tr>
+<tr class="separator:ace536977a9bc46395d516092ce1bf09c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37bdb807ab7ab769f9dfbadafdb998f6" id="r_a37bdb807ab7ab769f9dfbadafdb998f6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d26/classmrw_1_1model_1_1AssemblyPart.html#a37bdb807ab7ab769f9dfbadafdb998f6">link</a> ()=0</td></tr>
 <tr class="memdesc:a37bdb807ab7ab769f9dfbadafdb998f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method links all elements needed for the implementation.  <br /></td></tr>
 <tr class="separator:a37bdb807ab7ab769f9dfbadafdb998f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -344,8 +344,8 @@ Static Protected Attributes</h2></td></tr>
 <li>double cross switch. (<a class="el" href="../../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html" title="This RailPart represents a double cross switch with four connectors.">DoubleCrossSwitch</a>)</li>
 </ul>
 <p>The rail parts are connected by connectors which in fact are doubly linked lists. So when a rail part is connected to another rail part it is also back linked. Use the <a class="el" href="../../d5/d26/classmrw_1_1model_1_1AssemblyPart.html#aa1a0554860b2d9bacfff846742b619b3" title="This method verifies if all connectors of this rail part are correctly connected which their counter ...">valid()</a> method to verify that the linkage is valid.</p>
-<p>All rail parts follow a counting direction which is normally read from left to right. You can invert the counting direction which is normally necessary for switches (</p><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html" title="This class represents a simple switch which divides a rail into two rails.">RegularSwitch</a>). If the <a class="el" href="#aded7161082b221c65a8325f1259042fd" title="This method returns true if the counting direction is inverted for the connectors.">aIsDir()</a> method returns true the counting direction is internally inverted.</dd></dl>
-<p>Depeding on the rail part there are multiple connectors in forward and backward counting direction. For creating a track route you can follow in counting direction an against the counting direction. To get a list of appropiate connectors use the <a class="el" href="#a8d6f8943e386307603e48296b1ffa5c3" title="This method returns all connectors in the given counting direction.">advance()</a> method. </p>
+<p>All rail parts follow a counting direction which is normally read from left to right. You can invert the counting direction which is normally necessary for switches (</p><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html" title="This class represents a simple switch which divides a rail into two rails.">RegularSwitch</a>). If the <a class="el" href="#a8f0e525139328495fe6f96d5d78fd2e2" title="This method returns true if the counting direction is inverted for the connectors.">aIsDir()</a> method returns true the counting direction is internally inverted.</dd></dl>
+<p>Depeding on the rail part there are multiple connectors in forward and backward counting direction. For creating a track route you can follow in counting direction an against the counting direction. To get a list of appropiate connectors use the <a class="el" href="#a9766acf0536c000da1d28a399e7bad59" title="This method returns all connectors in the given counting direction.">advance()</a> method. </p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a380b5a8ca4ca1e92ca0a75a4a392caea" name="a380b5a8ca4ca1e92ca0a75a4a392caea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a380b5a8ca4ca1e92ca0a75a4a392caea">&#9670;&#160;</a></span>Bending</h2>
@@ -441,37 +441,14 @@ Static Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a8d6f8943e386307603e48296b1ffa5c3" name="a8d6f8943e386307603e48296b1ffa5c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d6f8943e386307603e48296b1ffa5c3">&#9670;&#160;</a></span>advance() <span class="overload">[1/2]</span></h2>
+<a id="a77f112dd0dbcb739893301de6c18ea02" name="a77f112dd0dbcb739893301de6c18ea02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77f112dd0dbcb739893301de6c18ea02">&#9670;&#160;</a></span>advance() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::set&lt; <a class="el" href="../../d2/db9/classmrw_1_1model_1_1RailInfo.html">RailInfo</a> &gt; &amp; RailPart::advance </td>
-          <td>(</td>
-          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>dir</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This method returns all connectors in the given counting direction. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">dir</td><td>The counting direction to follow. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The collection of connected rail parts. The collection may be empty in case of an end rail. </dd></dl>
-
-</div>
-</div>
-<a id="a22e68abfdd25a7edbbd7f94895d2b970" name="a22e68abfdd25a7edbbd7f94895d2b970"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22e68abfdd25a7edbbd7f94895d2b970">&#9670;&#160;</a></span>advance() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">const std::set&lt; <a class="el" href="../../d2/db9/classmrw_1_1model_1_1RailInfo.html">RailInfo</a> &gt; &amp; RailPart::advance </td>
@@ -480,6 +457,11 @@ Static Protected Attributes</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This method returns all connectors in the given counting direction. </p>
@@ -493,8 +475,42 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aded7161082b221c65a8325f1259042fd" name="aded7161082b221c65a8325f1259042fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aded7161082b221c65a8325f1259042fd">&#9670;&#160;</a></span>aIsDir()</h2>
+<a id="a9766acf0536c000da1d28a399e7bad59" name="a9766acf0536c000da1d28a399e7bad59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9766acf0536c000da1d28a399e7bad59">&#9670;&#160;</a></span>advance() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::set&lt; <a class="el" href="../../d2/db9/classmrw_1_1model_1_1RailInfo.html">RailInfo</a> &gt; &amp; RailPart::advance </td>
+          <td>(</td>
+          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>dir</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method returns all connectors in the given counting direction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dir</td><td>The counting direction to follow. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The collection of connected rail parts. The collection may be empty in case of an end rail. </dd></dl>
+
+</div>
+</div>
+<a id="a8f0e525139328495fe6f96d5d78fd2e2" name="a8f0e525139328495fe6f96d5d78fd2e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f0e525139328495fe6f96d5d78fd2e2">&#9670;&#160;</a></span>aIsDir()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -511,7 +527,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -550,8 +566,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a17e93c589eee4042aa536612fc6a7665" name="a17e93c589eee4042aa536612fc6a7665"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17e93c589eee4042aa536612fc6a7665">&#9670;&#160;</a></span>bold()</h2>
+<a id="aee674c3216f7e1a4f50db31dc6dda7a6" name="aee674c3216f7e1a4f50db31dc6dda7a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee674c3216f7e1a4f50db31dc6dda7a6">&#9670;&#160;</a></span>bold()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -568,7 +584,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -585,8 +601,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1d212fb80b349121b8de97ecef880552" name="a1d212fb80b349121b8de97ecef880552"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d212fb80b349121b8de97ecef880552">&#9670;&#160;</a></span>contains()</h2>
+<a id="a2dc87d20707ac5301d489732d40c74f1" name="a2dc87d20707ac5301d489732d40c74f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dc87d20707ac5301d489732d40c74f1">&#9670;&#160;</a></span>contains()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -607,7 +623,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -621,7 +637,7 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the other <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> is correctly linked. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a8d6f8943e386307603e48296b1ffa5c3" title="This method returns all connectors in the given counting direction.">advance()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a9766acf0536c000da1d28a399e7bad59" title="This method returns all connectors in the given counting direction.">advance()</a> </dd></dl>
 
 </div>
 </div>
@@ -687,8 +703,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="afc20944dcdec0f5d35980a72eec75b7d" name="afc20944dcdec0f5d35980a72eec75b7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc20944dcdec0f5d35980a72eec75b7d">&#9670;&#160;</a></span>format()</h2>
+<a id="adbf185289d3c6a133f3d5150d2fb08c3" name="adbf185289d3c6a133f3d5150d2fb08c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbf185289d3c6a133f3d5150d2fb08c3">&#9670;&#160;</a></span>format()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -709,7 +725,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -761,8 +777,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae3b52d7b06ade81d327eeb3e8a1b2842" name="ae3b52d7b06ade81d327eeb3e8a1b2842"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3b52d7b06ade81d327eeb3e8a1b2842">&#9670;&#160;</a></span>isCurved()</h2>
+<a id="a8f492691d03276a9d7a36e5aca1a3b13" name="a8f492691d03276a9d7a36e5aca1a3b13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f492691d03276a9d7a36e5aca1a3b13">&#9670;&#160;</a></span>isCurved()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -779,7 +795,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -788,7 +804,7 @@ Static Protected Attributes</h2></td></tr>
 <p>In case of a <a class="el" href="../../db/d26/classmrw_1_1model_1_1Rail.html" title="This class represents a simple rail with two connectors to other RailParts.">Rail</a> the result is static whereas the result of switches depends on its switching state.</p>
 <dl class="section return"><dt>Returns</dt><dd>True if the <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> is a curved or branched. </dd></dl>
 
-<p>Implemented in <a class="el" href="../../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#ac79d4a92979da15c441bd4744cee4a99">mrw::model::DoubleCrossSwitch</a>, <a class="el" href="../../db/d26/classmrw_1_1model_1_1Rail.html#aa2cf526d2edef2d9a8fc5502abb4d73c">mrw::model::Rail</a>, and <a class="el" href="../../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a19eca9035c7cb9e287fee86a07ce0117">mrw::model::RegularSwitch</a>.</p>
+<p>Implemented in <a class="el" href="../../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a93fda229b0410b58571a12108a680fc5">mrw::model::DoubleCrossSwitch</a>, <a class="el" href="../../db/d26/classmrw_1_1model_1_1Rail.html#accb24f80b3b20e37dd0f70992bff9a24">mrw::model::Rail</a>, and <a class="el" href="../../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a122247accc573b6a3f020888afecef98">mrw::model::RegularSwitch</a>.</p>
 
 </div>
 </div>
@@ -853,7 +869,7 @@ Static Protected Attributes</h2></td></tr>
 <p>This method returns a key to determine the logical coordinates from the description file. </p>
 <dl class="section return"><dt>Returns</dt><dd>The key for looking up the logical coordinates </dd></dl>
 
-<p>Implemented in <a class="el" href="../../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a17d8edb891d3e6598605fa772839fd2e">mrw::model::DoubleCrossSwitch</a>, <a class="el" href="../../db/d26/classmrw_1_1model_1_1Rail.html#a79ab0688d0bb99549fa8d2645e8fa258">mrw::model::Rail</a>, <a class="el" href="../../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a451a4641dd6cc9cdd3ce24f7741d85a5">mrw::model::RegularSwitch</a>, <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html#a255ffd82fcf4fd690284c85ae233243d">mrw::model::Section</a>, and <a class="el" href="../../db/d9c/classmrw_1_1model_1_1Signal.html#acca12e24ce23e49313276ba983cba2bb">mrw::model::Signal</a>.</p>
+<p>Implemented in <a class="el" href="../../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#aa7e009b77c07186e0b0bf95979cbee70">mrw::model::DoubleCrossSwitch</a>, <a class="el" href="../../db/d26/classmrw_1_1model_1_1Rail.html#a62d228ce1a1e32b34465ccbcf41e436a">mrw::model::Rail</a>, <a class="el" href="../../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#accbdbc86d4247e51ce24836e48da8524">mrw::model::RegularSwitch</a>, <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html#acb7da1bc06b5e0b110fbf265ae51a0a6">mrw::model::Section</a>, and <a class="el" href="../../db/d9c/classmrw_1_1model_1_1Signal.html#acca12e24ce23e49313276ba983cba2bb">mrw::model::Signal</a>.</p>
 
 </div>
 </div>
@@ -1029,8 +1045,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="acde95787bd85524f6f1f232e3ac0c93f" name="acde95787bd85524f6f1f232e3ac0c93f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acde95787bd85524f6f1f232e3ac0c93f">&#9670;&#160;</a></span>operator QString()</h2>
+<a id="a52d7f4538b30867ad6e37ccd3d2e7aaf" name="a52d7f4538b30867ad6e37ccd3d2e7aaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52d7f4538b30867ad6e37ccd3d2e7aaf">&#9670;&#160;</a></span>operator QString()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1047,7 +1063,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1291,8 +1307,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aca4a5f0e39b594816fa04182c8329aee" name="aca4a5f0e39b594816fa04182c8329aee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca4a5f0e39b594816fa04182c8329aee">&#9670;&#160;</a></span>red()</h2>
+<a id="a35b509dcf26d9f00cff8c6dd18a6a5cf" name="a35b509dcf26d9f00cff8c6dd18a6a5cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35b509dcf26d9f00cff8c6dd18a6a5cf">&#9670;&#160;</a></span>red()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1309,7 +1325,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1354,11 +1370,14 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a01660734e0067cf80024bb6738fddb44" name="a01660734e0067cf80024bb6738fddb44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01660734e0067cf80024bb6738fddb44">&#9670;&#160;</a></span>reserve()</h2>
+<a id="ac72c8ab09ed8c4c1189e372ff6d20116" name="ac72c8ab09ed8c4c1189e372ff6d20116"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac72c8ab09ed8c4c1189e372ff6d20116">&#9670;&#160;</a></span>reserve()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void RailPart::reserve </td>
@@ -1367,6 +1386,11 @@ Static Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This method reserves this <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> for routing information so that no other router can allocate this <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a>. </p>
@@ -1379,11 +1403,14 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a752cb0e83daba8d27383f80c25f7544b" name="a752cb0e83daba8d27383f80c25f7544b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a752cb0e83daba8d27383f80c25f7544b">&#9670;&#160;</a></span>reserved()</h2>
+<a id="aa3211419fa88cda19a55af33ad60d80d" name="aa3211419fa88cda19a55af33ad60d80d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3211419fa88cda19a55af33ad60d80d">&#9670;&#160;</a></span>reserved()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool RailPart::reserved </td>
@@ -1392,6 +1419,11 @@ Static Protected Attributes</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This method returns the reservation state of this <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> instance. </p>
@@ -1399,8 +1431,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a022a68964d9e433062f252407dd8dfc6" name="a022a68964d9e433062f252407dd8dfc6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a022a68964d9e433062f252407dd8dfc6">&#9670;&#160;</a></span>resolve()</h2>
+<a id="ace536977a9bc46395d516092ce1bf09c" name="ace536977a9bc46395d516092ce1bf09c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace536977a9bc46395d516092ce1bf09c">&#9670;&#160;</a></span>resolve()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1417,7 +1449,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1540,7 +1572,7 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="../../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a40a308290dab7f8d907f840e8f4bfabe">mrw::model::DoubleCrossSwitch</a>, <a class="el" href="../../db/d26/classmrw_1_1model_1_1Rail.html#a6f8d5cab16e2c3668bd7468c790d3e2f">mrw::model::Rail</a>, and <a class="el" href="../../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a2508e6096a072be0b0cb853f17d87595">mrw::model::RegularSwitch</a>.</p>
+<p>Implemented in <a class="el" href="../../db/d26/classmrw_1_1model_1_1Rail.html#a7e2fb2b136bc5e7ee82dee6fa14413b2">mrw::model::Rail</a>, <a class="el" href="../../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a40a308290dab7f8d907f840e8f4bfabe">mrw::model::DoubleCrossSwitch</a>, and <a class="el" href="../../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a2508e6096a072be0b0cb853f17d87595">mrw::model::RegularSwitch</a>.</p>
 
 </div>
 </div>
@@ -1631,7 +1663,7 @@ Static Protected Attributes</h2></td></tr>
 <p>This method returns the contents of this instance in human readable form as QString. </p>
 <dl class="section return"><dt>Returns</dt><dd>The human readable form of this instance. </dd></dl>
 
-<p>Implemented in <a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html#a59c3d036eec2a12d7c91c787824b2695">mrw::can::MrwMessage</a>, <a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html#a6827f1784551add0812d783475d857db">mrw::model::Controller</a>, <a class="el" href="../../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#af1f4564f3139a16522f843a1c60d3d50">mrw::model::DoubleCrossSwitch</a>, <a class="el" href="../../d4/d8a/classmrw_1_1model_1_1FormSignal.html#ae146e360fa54b18ff5d1e62c12ca05b5">mrw::model::FormSignal</a>, <a class="el" href="../../d6/d71/classmrw_1_1model_1_1LightSignal.html#ae583fa446159886257fbb5f753d95b0f">mrw::model::LightSignal</a>, <a class="el" href="../../d3/dab/classmrw_1_1model_1_1ModelRailway.html#a9fa8442f4eac6a14fa91ee10a69c5772">mrw::model::ModelRailway</a>, <a class="el" href="../../db/d26/classmrw_1_1model_1_1Rail.html#a1ce34749a5e2c1fcceb4caf9bcb434bb">mrw::model::Rail</a>, <a class="el" href="../../d4/d3e/classmrw_1_1model_1_1Region.html#a64e3c87eafa102fc9fd9786087b8b90a">mrw::model::Region</a>, <a class="el" href="../../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#ac3b60bfbbc4833f36d31354893f005f5">mrw::model::RegularSwitch</a>, and <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html#a71663734926599b880e747579b149274">mrw::model::Section</a>.</p>
+<p>Implemented in <a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html#a76e903a76b1f572d7e4a0c3863b53cfe">mrw::can::MrwMessage</a>, <a class="el" href="../../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#aa288fb2f102329ac9f833437a22e9df9">mrw::model::DoubleCrossSwitch</a>, <a class="el" href="../../d4/d8a/classmrw_1_1model_1_1FormSignal.html#a551c4fa2312fca51ed5b63ae34f9adca">mrw::model::FormSignal</a>, <a class="el" href="../../d6/d71/classmrw_1_1model_1_1LightSignal.html#a7931b963b884ee5e353684ccaeb152a1">mrw::model::LightSignal</a>, <a class="el" href="../../db/d26/classmrw_1_1model_1_1Rail.html#a38a2977fdd49d5d7db61280830acb530">mrw::model::Rail</a>, <a class="el" href="../../d4/d3e/classmrw_1_1model_1_1Region.html#ab1797c931d7c71ea637d9f97bd370a94">mrw::model::Region</a>, <a class="el" href="../../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a50351083255e29e586658024fde15d41">mrw::model::RegularSwitch</a>, <a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html#a6827f1784551add0812d783475d857db">mrw::model::Controller</a>, <a class="el" href="../../d3/dab/classmrw_1_1model_1_1ModelRailway.html#a9fa8442f4eac6a14fa91ee10a69c5772">mrw::model::ModelRailway</a>, and <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html#a71663734926599b880e747579b149274">mrw::model::Section</a>.</p>
 
 </div>
 </div>
@@ -1660,9 +1692,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>This method verifies if all connectors of this rail part are correctly connected which their counter parts. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if the connectors are correctly linked. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a1d212fb80b349121b8de97ecef880552" title="This method verifies if the given rail part is inside the corresponding connector set of the given co...">contains()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a2dc87d20707ac5301d489732d40c74f1" title="This method verifies if the given rail part is inside the corresponding connector set of the given co...">contains()</a> </dd></dl>
 
-<p>Implemented in <a class="el" href="../../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#af3759d526f6c80b75720b2f4719e99a5">mrw::model::DoubleCrossSwitch</a>, <a class="el" href="../../d4/d8a/classmrw_1_1model_1_1FormSignal.html#aa24986521ebec3bc7677d183d3d52c79">mrw::model::FormSignal</a>, <a class="el" href="../../d6/d71/classmrw_1_1model_1_1LightSignal.html#a3e4fa1e5fb3b24b7436086928c26bd56">mrw::model::LightSignal</a>, <a class="el" href="../../db/d26/classmrw_1_1model_1_1Rail.html#a6513331a580cbcbfdde0d4d9973466b0">mrw::model::Rail</a>, and <a class="el" href="../../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#aebbbc4e6aee328ee49e62cc38b8ef323">mrw::model::RegularSwitch</a>.</p>
+<p>Implemented in <a class="el" href="../../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a98a11e4d5e3b7c6e67733469b621a4b0">mrw::model::DoubleCrossSwitch</a>, <a class="el" href="../../d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6d44cfceeb25ea54dd716f28624b6fb0">mrw::model::FormSignal</a>, <a class="el" href="../../d6/d71/classmrw_1_1model_1_1LightSignal.html#a459269cb3a81b89a945e764d49fa3f1b">mrw::model::LightSignal</a>, <a class="el" href="../../db/d26/classmrw_1_1model_1_1Rail.html#a21079f11a9d14860064d6cb200502cc5">mrw::model::Rail</a>, and <a class="el" href="../../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a69fd6e96fad233b36878337aaf0bfeac">mrw::model::RegularSwitch</a>.</p>
 
 </div>
 </div>
@@ -2305,7 +2337,7 @@ Static Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 15 2024 09:50:50 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Jan 15 2024 12:43:04 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

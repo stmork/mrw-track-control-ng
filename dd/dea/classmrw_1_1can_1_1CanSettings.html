@@ -105,12 +105,12 @@ Inheritance diagram for mrw::can::CanSettings:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a924c0b34f81df37444cd61dfac01f57c" id="r_a924c0b34f81df37444cd61dfac01f57c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a924c0b34f81df37444cd61dfac01f57c">CanSettings</a> ()</td></tr>
 <tr class="separator:a924c0b34f81df37444cd61dfac01f57c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a070bb0e07c333f39a0676aba5c503b14" id="r_a070bb0e07c333f39a0676aba5c503b14"><td class="memItemLeft" align="right" valign="top">const QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a070bb0e07c333f39a0676aba5c503b14">plugin</a> () const</td></tr>
-<tr class="memdesc:a070bb0e07c333f39a0676aba5c503b14"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the CAN bus plugin name used by the QCanBusDevice driver.  <br /></td></tr>
-<tr class="separator:a070bb0e07c333f39a0676aba5c503b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb81ddaa7ba7421f2e57acb13a05e4eb" id="r_acb81ddaa7ba7421f2e57acb13a05e4eb"><td class="memItemLeft" align="right" valign="top">const QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb81ddaa7ba7421f2e57acb13a05e4eb">interface</a> () const</td></tr>
-<tr class="memdesc:acb81ddaa7ba7421f2e57acb13a05e4eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the interface of a specific CAN bus plugin.  <br /></td></tr>
-<tr class="separator:acb81ddaa7ba7421f2e57acb13a05e4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24a08d487e35eae9a2b7754f898bddc0" id="r_a24a08d487e35eae9a2b7754f898bddc0"><td class="memItemLeft" align="right" valign="top">const QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a24a08d487e35eae9a2b7754f898bddc0">plugin</a> () const noexcept</td></tr>
+<tr class="memdesc:a24a08d487e35eae9a2b7754f898bddc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the CAN bus plugin name used by the QCanBusDevice driver.  <br /></td></tr>
+<tr class="separator:a24a08d487e35eae9a2b7754f898bddc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af96bb342cc0413d092d4428ff408af99" id="r_af96bb342cc0413d092d4428ff408af99"><td class="memItemLeft" align="right" valign="top">const QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af96bb342cc0413d092d4428ff408af99">interface</a> () const noexcept</td></tr>
+<tr class="memdesc:af96bb342cc0413d092d4428ff408af99"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the interface of a specific CAN bus plugin.  <br /></td></tr>
+<tr class="separator:af96bb342cc0413d092d4428ff408af99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62f446da8ebdf141affcaa9eac663a8b" id="r_a62f446da8ebdf141affcaa9eac663a8b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62f446da8ebdf141affcaa9eac663a8b">operator mrw::util::SettingsGroup</a> ()</td></tr>
 <tr class="memdesc:a62f446da8ebdf141affcaa9eac663a8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a <a class="el" href="../../de/d0d/classmrw_1_1util_1_1SettingsGroup.html" title="This class surrounds some QSettings staff with the beginGroup()/endGroup() method calls automatically...">mrw::util::SettingsGroup</a> for a per host usage.  <br /></td></tr>
 <tr class="separator:a62f446da8ebdf141affcaa9eac663a8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,11 +139,14 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="acb81ddaa7ba7421f2e57acb13a05e4eb" name="acb81ddaa7ba7421f2e57acb13a05e4eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb81ddaa7ba7421f2e57acb13a05e4eb">&#9670;&#160;</a></span>interface()</h2>
+<a id="af96bb342cc0413d092d4428ff408af99" name="af96bb342cc0413d092d4428ff408af99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af96bb342cc0413d092d4428ff408af99">&#9670;&#160;</a></span>interface()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">const QString &amp; CanSettings::interface </td>
@@ -152,6 +155,11 @@ Public Member Functions</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This method returns the interface of a specific CAN bus plugin. </p>
@@ -180,11 +188,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a070bb0e07c333f39a0676aba5c503b14" name="a070bb0e07c333f39a0676aba5c503b14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a070bb0e07c333f39a0676aba5c503b14">&#9670;&#160;</a></span>plugin()</h2>
+<a id="a24a08d487e35eae9a2b7754f898bddc0" name="a24a08d487e35eae9a2b7754f898bddc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24a08d487e35eae9a2b7754f898bddc0">&#9670;&#160;</a></span>plugin()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">const QString &amp; CanSettings::plugin </td>
@@ -193,6 +204,11 @@ Public Member Functions</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This method returns the CAN bus plugin name used by the QCanBusDevice driver. </p>
@@ -205,7 +221,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 15 2024 09:50:50 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Jan 15 2024 12:43:03 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

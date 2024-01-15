@@ -108,11 +108,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac4b43aabd1c5fe5b4068d1ff452ebe55" id="r_ac4b43aabd1c5fe5b4068d1ff452ebe55"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4b43aabd1c5fe5b4068d1ff452ebe55">Properties</a> (const QString &amp;filename)</td></tr>
 <tr class="memdesc:ac4b43aabd1c5fe5b4068d1ff452ebe55"><td class="mdescLeft">&#160;</td><td class="mdescRight">This constructor reads in a Java style properties file.  <br /></td></tr>
 <tr class="separator:ac4b43aabd1c5fe5b4068d1ff452ebe55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a063482b1d1d860291d658777c80ac305" id="r_a063482b1d1d860291d658777c80ac305"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a063482b1d1d860291d658777c80ac305">read</a> (const QString &amp;filename)</td></tr>
-<tr class="memdesc:a063482b1d1d860291d658777c80ac305"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method reads in a Java style properties file.  <br /></td></tr>
-<tr class="separator:a063482b1d1d860291d658777c80ac305"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a314581fbb647e79f8dc5dbcf10ccce0a" id="r_a314581fbb647e79f8dc5dbcf10ccce0a"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a314581fbb647e79f8dc5dbcf10ccce0a">lookup</a> (const std::string &amp;key) const</td></tr>
-<tr class="separator:a314581fbb647e79f8dc5dbcf10ccce0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0114da8844b82cbce0860dd1ddf67ff7" id="r_a0114da8844b82cbce0860dd1ddf67ff7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0114da8844b82cbce0860dd1ddf67ff7">read</a> (const QString &amp;filename) noexcept</td></tr>
+<tr class="memdesc:a0114da8844b82cbce0860dd1ddf67ff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method reads in a Java style properties file.  <br /></td></tr>
+<tr class="separator:a0114da8844b82cbce0860dd1ddf67ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6f0a73d0b76f90a1931c467cc0fd42f" id="r_ad6f0a73d0b76f90a1931c467cc0fd42f"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6f0a73d0b76f90a1931c467cc0fd42f">lookup</a> (const std::string &amp;key) const noexcept</td></tr>
+<tr class="separator:ad6f0a73d0b76f90a1931c467cc0fd42f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -187,16 +187,19 @@ Static Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a063482b1d1d860291d658777c80ac305" title="This method reads in a Java style properties file.">read()</a>; </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a0114da8844b82cbce0860dd1ddf67ff7" title="This method reads in a Java style properties file.">read()</a>; </dd></dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a314581fbb647e79f8dc5dbcf10ccce0a" name="a314581fbb647e79f8dc5dbcf10ccce0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a314581fbb647e79f8dc5dbcf10ccce0a">&#9670;&#160;</a></span>lookup()</h2>
+<a id="ad6f0a73d0b76f90a1931c467cc0fd42f" name="ad6f0a73d0b76f90a1931c467cc0fd42f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6f0a73d0b76f90a1931c467cc0fd42f">&#9670;&#160;</a></span>lookup()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">const std::string &amp; Properties::lookup </td>
@@ -205,15 +208,23 @@ Static Public Attributes</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a063482b1d1d860291d658777c80ac305" name="a063482b1d1d860291d658777c80ac305"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a063482b1d1d860291d658777c80ac305">&#9670;&#160;</a></span>read()</h2>
+<a id="a0114da8844b82cbce0860dd1ddf67ff7" name="a0114da8844b82cbce0860dd1ddf67ff7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0114da8844b82cbce0860dd1ddf67ff7">&#9670;&#160;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool Properties::read </td>
@@ -222,6 +233,11 @@ Static Public Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This method reads in a Java style properties file. </p>
@@ -309,7 +325,7 @@ Static Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 15 2024 09:50:50 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Jan 15 2024 12:43:04 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
