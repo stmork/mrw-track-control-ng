@@ -95,27 +95,27 @@ void RegularSwitchControllerProxy::turnRight()
 	emit turn();
 }
 
-const QString & RegularSwitchControllerProxy::name() const
+const QString & RegularSwitchControllerProxy::name() const noexcept
 {
 	return part->name();
 }
 
-bool RegularSwitchControllerProxy::isDirection() const
+bool RegularSwitchControllerProxy::isDirection() const noexcept
 {
 	return !part->aIsDir() == part->section()->region()->direction();
 }
 
-float RegularSwitchControllerProxy::extensions() const
+float RegularSwitchControllerProxy::extensions() const noexcept
 {
 	return part->extension();
 }
 
-Position * RegularSwitchControllerProxy::position() const
+Position * RegularSwitchControllerProxy::position() const noexcept
 {
 	return part;
 }
 
-SectionState RegularSwitchControllerProxy::state() const
+SectionState RegularSwitchControllerProxy::state() const noexcept
 {
 	if (part->reserved())
 	{
@@ -134,12 +134,12 @@ SectionState RegularSwitchControllerProxy::state() const
 	}
 }
 
-Device::LockState RegularSwitchControllerProxy::lock() const
+Device::LockState RegularSwitchControllerProxy::lock() const noexcept
 {
 	return part->lock();
 }
 
-Position::Bending RegularSwitchControllerProxy::bending() const
+Position::Bending RegularSwitchControllerProxy::bending() const noexcept
 {
 	return part->bending();
 }

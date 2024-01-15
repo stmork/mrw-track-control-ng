@@ -64,7 +64,7 @@ public:
 	{
 	}
 
-	virtual const QString & name() const override
+	virtual const QString & name() const noexcept override
 	{
 		return label;
 	}

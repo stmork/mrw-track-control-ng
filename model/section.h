@@ -100,13 +100,13 @@ namespace mrw::model
 		virtual ~Section();
 
 		// Implementations from Device
-		const QString    &   name()         const override;
-		bool                 isUnlockable() const override;
-		Controller     *     controller()   const override;
+		const QString    &   name()         const noexcept override;
+		bool                 isUnlockable() const noexcept override;
+		Controller     *     controller()   const noexcept override;
 		mrw::can::MrwMessage configMsg(const unsigned pin) const override;
 
 		// Implementations from Position
-		virtual QString key() const override;
+		virtual QString key() const noexcept override;
 
 		// Implementations from mrw::util::String
 		QString         toString() const override;
@@ -116,7 +116,7 @@ namespace mrw::model
 		 *
 		 * @return True if every configuration is fine.
 		 */
-		bool valid() const;
+		bool valid() const noexcept;
 
 		/**
 		 * This method sets the occupation mode of the section. This method
@@ -124,14 +124,14 @@ namespace mrw::model
 		 *
 		 * @param input True if the section is occupied.
 		 */
-		void setOccupation(const bool input = true);
+		void setOccupation(const bool input = true) noexcept;
 
 		/**
 		 * This method returns the occupation state of this Section.
 		 *
 		 * @return True if this Section is occupied by a train.
 		 */
-		bool occupation() const;
+		bool occupation() const noexcept;
 
 		/**
 		 * This method marks this Section as enabled.
@@ -142,7 +142,7 @@ namespace mrw::model
 		 * @param enable The enable flag.
 		 * @see mrw::can::Command::SETRON
 		 */
-		void enable(const bool enable = true);
+		void enable(const bool enable = true) noexcept;
 
 		/**
 		 * This method marks this Section as disabled.
@@ -153,7 +153,7 @@ namespace mrw::model
 		 * @param disable The disable flag.
 		 * @see mrw::can::Command::SETROF
 		 */
-		void disable(const bool disable = true);
+		void disable(const bool disable = true) noexcept;
 
 		/**
 		 * This method returns the enabled state of this Section.
@@ -165,7 +165,7 @@ namespace mrw::model
 		 * @see mrw::can::Command::SETROF
 		 * @see mrw::can::Command::SETRON
 		 */
-		bool enabled() const;
+		bool enabled() const noexcept;
 
 		/**
 		 * This method returns the SectionState of this Section.
@@ -175,7 +175,7 @@ namespace mrw::model
 		 *
 		 * @return The SectionState of this Section.
 		 */
-		SectionState state() const;
+		SectionState state() const noexcept;
 
 		/**
 		 * This method sets a new SectionState to this Section. This occurs
@@ -186,7 +186,7 @@ namespace mrw::model
 		 *
 		 * @param input The new SectionState to set.
 		 */
-		void setState(const SectionState input);
+		void setState(const SectionState input) noexcept;
 
 		/**
 		 * This method returns the nth RailPart. It is not ID-based but index
@@ -204,21 +204,21 @@ namespace mrw::model
 		 *
 		 * @return The contained AssemblyPart count.
 		 */
-		size_t assemblyPartCount() const;
+		size_t assemblyPartCount() const noexcept;
 
 		/**
 		 * This method returns the controlling SectionModule.
 		 *
 		 * @return The controlling SectionModule.
 		 */
-		SectionModule * module() const;
+		SectionModule * module() const noexcept;
 
 		/**
 		 * This method returns the Region to which this Section is belonging to.
 		 *
 		 * @return The Region of this Section.
 		 */
-		Region * region() const;
+		Region * region() const noexcept;
 
 		/**
 		 * This template class returns all AssemblyPart elements of the given
@@ -231,7 +231,7 @@ namespace mrw::model
 		 */
 		template <class T> void parts(
 			std::vector<T *> & result,
-			std::function<bool(const T * part)> guard = &mrw::util::Method::always<T>) const
+			std::function<bool(const T * part)> guard = &mrw::util::Method::always<T>) const noexcept
 		{
 			for (AssemblyPart * part : assembly_parts)
 			{
@@ -251,7 +251,7 @@ namespace mrw::model
 		 * @see RailPart
 		 * @see SectionState
 		 */
-		void free();
+		void free() noexcept;
 
 		/**
 		 * This method returns true if the internal SectionState is
@@ -260,7 +260,7 @@ namespace mrw::model
 		 *
 		 * @return True if the SectionState is real SectionState::FREE.
 		 */
-		bool isFree() const;
+		bool isFree() const noexcept;
 
 		/**
 		 * This method returns true if the internal SectionState is
@@ -269,7 +269,7 @@ namespace mrw::model
 		 *
 		 * @return True if the SectionState is real SectionState::TOUR.
 		 */
-		bool isFlankRelevant() const;
+		bool isFlankRelevant() const noexcept;
 
 		/**
 		 * This method returns true if any of the contained RailPart elements
@@ -282,7 +282,7 @@ namespace mrw::model
 		 *
 		 * @return True if any containing RailPart is reserved.
 		 */
-		bool anyReserved() const;
+		bool anyReserved() const noexcept;
 
 		/**
 		 * This method returns the clear text QString of the SectionState this
@@ -291,7 +291,7 @@ namespace mrw::model
 		 * @param state The SectionState enumeration to translate.
 		 * @return The QString clear text of the given SectionState enumeration.
 		 */
-		static QString get(const SectionState & state);
+		static QString get(const SectionState & state) noexcept;
 
 		/**
 		 * This method returns all signals in this Section in a given view
@@ -303,12 +303,12 @@ namespace mrw::model
 		 * @return The sorted Signal vector related to the view direction.
 		 * @see Signal::less()
 		 */
-		const std::vector<Signal *> & getSignals(const bool view) const;
+		const std::vector<Signal *> & getSignals(const bool view) const noexcept;
 
 	private:
-		void            add(AssemblyPart * rail_part);
-		void            link();
-		SectionModule * resolve(const std::string & path);
+		void            add(AssemblyPart * rail_part) noexcept;
+		void            link() noexcept;
+		SectionModule * resolve(const std::string & path) noexcept;
 
 	};
 }

@@ -19,7 +19,7 @@ Method::~Method()
 	qDebug("<%s() took %lld ms.", method_name, timer.elapsed());
 }
 
-void Method::pattern()
+void Method::pattern() noexcept
 {
 	qSetMessagePattern(
 		"%{time yyyy/MM/dd h:mm:ss.zzz} "

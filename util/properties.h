@@ -41,10 +41,10 @@ namespace mrw::util
 		 * @param filename The properties file to read.
 		 * @return True on success.
 		 */
-		bool read(const QString & filename);
+		bool read(const QString & filename) noexcept;
 
 		[[nodiscard]]
-		const std::string & lookup(const std::string & key) const;
+		const std::string & lookup(const std::string & key) const noexcept;
 	};
 }
 

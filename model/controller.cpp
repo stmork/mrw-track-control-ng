@@ -90,7 +90,7 @@ Controller::~Controller()
 	connections.clear();
 }
 
-bool Controller::valid() const
+bool Controller::valid() const noexcept
 {
 	size_t ports = 0;
 
@@ -193,7 +193,7 @@ QString Controller::toString() const
 			controller_id);
 }
 
-ControllerId Controller::id() const
+ControllerId Controller::id() const noexcept
 {
 	return controller_id;
 }
@@ -203,7 +203,7 @@ Module * Controller::module(const int index) const
 	return modules.at(index);
 }
 
-size_t Controller::moduleCount() const
+size_t Controller::moduleCount() const noexcept
 {
 	return modules.size();
 }
@@ -213,7 +213,7 @@ MultiplexConnection * Controller::connection(const ModuleId index) const
 	return connections.at(index);
 }
 
-size_t Controller::connectionCount() const
+size_t Controller::connectionCount() const noexcept
 {
 	return connections.size();
 }

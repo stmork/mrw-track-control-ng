@@ -29,7 +29,7 @@ namespace mrw::util
 		 * This cast operator returns a reference to the std::shared_ptr
 		 * of this instance.
 		 */
-		inline operator std::shared_ptr<T> & ()
+		inline operator std::shared_ptr<T> & () noexcept
 		{
 			return self;
 		}
@@ -37,7 +37,7 @@ namespace mrw::util
 	private:
 		std::shared_ptr<T> self;
 
-		static void null_deleter(T * ptr)
+		static void null_deleter(T * ptr) noexcept
 		{
 			(void)ptr;
 		}

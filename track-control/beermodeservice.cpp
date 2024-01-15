@@ -78,12 +78,12 @@ ControlledRoute * BeerModeService::startBeerMode(const bool dir)
 	return nullptr;
 }
 
-void BeerModeService::clearBeerRoute()
+void BeerModeService::clearBeerRoute() noexcept
 {
 	beer_route = nullptr;
 }
 
-void BeerModeService::disableBeerMode(ControlledRoute * route)
+void BeerModeService::disableBeerMode(ControlledRoute * route) noexcept
 {
 	if (route == beer_route)
 	{
@@ -94,14 +94,14 @@ void BeerModeService::disableBeerMode(ControlledRoute * route)
 	}
 }
 
-BeerModeService::operator ControlledRoute * () const
+BeerModeService::operator ControlledRoute * () const noexcept
 {
 	return beer_route;
 }
 
 void BeerModeService::findCandidates(
 	std::vector<Rail *> & candidates,
-	const bool            dir) const
+	const bool            dir) const noexcept
 {
 
 	// Second: Select all occupied neighbours in wanted direction.
@@ -119,7 +119,7 @@ void BeerModeService::findCandidates(
 void BeerModeService::findPassthrough(
 	std::vector<Rail *> & candidates,
 	const Region     *    region,
-	const bool            is_same) const
+	const bool            is_same) const noexcept
 {
 	// Second: Select all free neighbours in both directions.
 	for (Rail * rail : main_rails)
@@ -135,7 +135,7 @@ void BeerModeService::findPassthrough(
 	}
 }
 
-bool BeerModeService::isPassThrough(const Rail * rail)
+bool BeerModeService::isPassThrough(const Rail * rail) noexcept
 {
 	return
 		isNeighbourFree(rail, false) &&
@@ -143,7 +143,7 @@ bool BeerModeService::isPassThrough(const Rail * rail)
 		isNeighbourFree(rail, true);
 }
 
-Rail * BeerModeService::isNeighbourOccupied(const Rail * rail, const bool dir)
+Rail * BeerModeService::isNeighbourOccupied(const Rail * rail, const bool dir) noexcept
 {
 	const std::set<RailInfo> & neighbours = rail->advance(dir);
 
@@ -159,7 +159,7 @@ Rail * BeerModeService::isNeighbourOccupied(const Rail * rail, const bool dir)
 	return nullptr;
 }
 
-bool BeerModeService::isNeighbourFree(const Rail * rail, const bool dir)
+bool BeerModeService::isNeighbourFree(const Rail * rail, const bool dir) noexcept
 {
 	const std::set<RailInfo> & neighbours = rail->advance(dir);
 
@@ -185,7 +185,7 @@ Rail * BeerModeService::random(const std::vector<Rail *> & rails) const
 	return size > 0 ? rails.at(Random::random(size - 1)) : nullptr;
 }
 
-void BeerModeService::dump(const std::vector<Rail *> & rails) const
+void BeerModeService::dump(const std::vector<Rail *> & rails) const noexcept
 {
 	for (const Rail * rail : rails)
 	{
@@ -193,7 +193,7 @@ void BeerModeService::dump(const std::vector<Rail *> & rails) const
 	}
 }
 
-QString BeerModeService::dump(const Rail * rail) const
+QString BeerModeService::dump(const Rail * rail) const noexcept
 {
 	const Section * section = rail->section();
 

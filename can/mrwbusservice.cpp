@@ -66,14 +66,14 @@ MrwBusService::~MrwBusService()
 	}
 }
 
-bool MrwBusService::valid()
+bool MrwBusService::valid() noexcept
 {
 	return
 		(can_device != nullptr) &&
 		(can_device->state() == QCanBusDevice::ConnectedState);
 }
 
-bool MrwBusService::list()
+bool MrwBusService::list() noexcept
 {
 	bool success = true;
 
@@ -101,7 +101,7 @@ bool MrwBusService::list()
 	return success;
 }
 
-bool MrwBusService::write(const MrwMessage & message)
+bool MrwBusService::write(const MrwMessage & message) noexcept
 {
 	qDebug().noquote() << message;
 
@@ -115,7 +115,7 @@ void MrwBusService::process(const MrwMessage & message)
 
 QString MrwBusService::select(
 	const QString & interface,
-	const QString & plugin)
+	const QString & plugin) noexcept
 {
 	QString error;
 	const QList<QCanBusDeviceInfo> & infos = can_bus->availableDevices(plugin, &error);
@@ -141,7 +141,7 @@ QString MrwBusService::select(
 	return "";
 }
 
-void MrwBusService::stateChanged(QCanBusDevice::CanBusDeviceState state)
+void MrwBusService::stateChanged(QCanBusDevice::CanBusDeviceState state) noexcept
 {
 	switch (state)
 	{
@@ -159,7 +159,7 @@ void MrwBusService::stateChanged(QCanBusDevice::CanBusDeviceState state)
 	}
 }
 
-void MrwBusService::receive()
+void MrwBusService::receive() noexcept
 {
 	for (const QCanBusFrame & frame : can_device->readAllFrames())
 	{

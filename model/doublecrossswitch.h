@@ -113,7 +113,7 @@ namespace mrw::model
 		[[nodiscard]]
 		bool isSwitchable(
 			const RailPart * prev,
-			const RailPart * succ) const override;
+			const RailPart * succ) const noexcept override;
 
 		/**
 		 * This method returns the clear text QString of the State this
@@ -122,22 +122,22 @@ namespace mrw::model
 		 * @param state The State enumeration to translate.
 		 * @return The QString clear text of the given State enumeration.
 		 */
-		static QString get(const State & state);
+		static QString get(const State & state) noexcept;
 
-		bool                  valid()       const override;
-		QString               toString()    const override;
-		QString               key()         const override;
-		mrw::can::SwitchState switchState() const override;
-		bool                  isCurved()    const override;
+		bool                  valid()       const noexcept override;
+		QString               toString()    const noexcept override;
+		QString               key()         const noexcept override;
+		mrw::can::SwitchState switchState() const noexcept override;
+		bool                  isCurved()    const noexcept override;
 
 		size_t flank(
 			std::vector<RegularSwitch *> & switches,
-			const bool                     set_state = false) const override;
+			const bool                     set_state = false) const noexcept override;
 
 		size_t flankCandidates(
 			std::vector<RegularSwitch *> & switches,
 			const RailPart        *        prev,
-			const RailPart        *        succ) const override;
+			const RailPart        *        succ) const noexcept override;
 
 	private:
 		void   link() override;
@@ -148,16 +148,16 @@ namespace mrw::model
 		size_t flank(
 			std::vector<RegularSwitch *> & switches,
 			const bool                     set_state,
-			const State                    compare) const;
+			const State                    compare) const noexcept;
 
 		size_t flank
 		(std::vector<RegularSwitch *> & switches,
 			const bool                     set_state,
-			const unsigned                 index) const;
+			const unsigned                 index) const noexcept;
 
 		static bool isCurved(const State state);
 
-		void collectFlankSwitches() override;
+		void collectFlankSwitches() noexcept override;
 
 		State                                              switch_state = State::AC;
 		const static mrw::util::ConstantEnumerator<State>  state_map;

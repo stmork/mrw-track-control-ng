@@ -35,17 +35,17 @@ Device::Device(
 	}
 }
 
-UnitNo Device::unitNo() const
+UnitNo Device::unitNo() const noexcept
 {
 	return unit_no;
 }
 
-Device::LockState Device::lock() const
+Device::LockState Device::lock() const noexcept
 {
 	return lock_state;
 }
 
-void Device::setLock(const LockState input)
+void Device::setLock(const LockState input) noexcept
 {
 	if (input == LockState::FAIL)
 	{
@@ -73,7 +73,7 @@ MrwMessage Device::command(const Command command) const
 	return MrwMessage(command, controller()->id(), unitNo());
 }
 
-QString Device::get(const Device::LockState & state)
+QString Device::get(const Device::LockState & state) noexcept
 {
 	return lock_map.get(state);
 }

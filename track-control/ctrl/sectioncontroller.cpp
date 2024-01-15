@@ -145,49 +145,49 @@ void SectionController::dec()
 	decrease();
 }
 
-const QString & SectionController::name() const
+const QString & SectionController::name() const noexcept
 {
 	return ctrl_section->name();
 }
 
-float SectionController::extensions() const
+float SectionController::extensions() const noexcept
 {
 	return position()->extension();
 }
 
-bool SectionController::isDirection() const
+bool SectionController::isDirection() const noexcept
 {
 	// A section does not have any direction.
 	return false;
 }
 
-bool SectionController::isExpandable() const
+bool SectionController::isExpandable() const noexcept
 {
 	// A section itself is not editable.
 	return false;
 }
 
-Position * SectionController::position() const
+Position * SectionController::position() const noexcept
 {
 	return ctrl_section;
 }
 
-SectionState SectionController::state() const
+SectionState SectionController::state() const noexcept
 {
 	return ctrl_section->occupation() ? SectionState::OCCUPIED : SectionState::FREE;
 }
 
-Device::LockState SectionController::lock() const
+Device::LockState SectionController::lock() const noexcept
 {
 	return ctrl_section->lock();
 }
 
-Position::Bending SectionController::bending() const
+Position::Bending SectionController::bending() const noexcept
 {
 	return position()->bending();
 }
 
-bool SectionController::process(const MrwMessage & message)
+bool SectionController::process(const MrwMessage & message) noexcept
 {
 	qDebug().noquote() << message << "(Section)";
 

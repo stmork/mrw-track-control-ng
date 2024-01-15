@@ -117,9 +117,9 @@ namespace mrw::can
 		 */
 		explicit MrwMessage(const QCanBusFrame & frame);
 
-		uint16_t eid() const;
-		uint16_t sid() const;
-		quint32  id() const;
+		uint16_t eid() const noexcept;
+		uint16_t sid() const noexcept;
+		quint32  id()  const noexcept;
 
 		/**
 		 * This method returns the mrw::model::Device unit number. In case of a
@@ -127,7 +127,7 @@ namespace mrw::can
 		 *
 		 * @return The used mrw::model::Device unit number.
 		 */
-		inline UnitNo unitNo() const
+		inline UnitNo unitNo() const noexcept
 		{
 			return unit_no;
 		}
@@ -140,7 +140,7 @@ namespace mrw::can
 		 * @return The command inside this MrwMessage
 		 * @see Command
 		 */
-		inline Command command() const
+		inline Command command() const noexcept
 		{
 			return msg_command;
 		}
@@ -153,7 +153,7 @@ namespace mrw::can
 		 * @return The MrwMessage response code
 		 * @see Response
 		 */
-		inline Response response() const
+		inline Response response() const noexcept
 		{
 			return msg_response;
 		}
@@ -164,7 +164,7 @@ namespace mrw::can
 		 *
 		 * @return True if this is a valid MrwMessage.
 		 */
-		bool valid() const;
+		bool valid() const noexcept;
 
 		/**
 		 * This cast operator converts this MrwMessage into a CAN bus frame
@@ -172,9 +172,9 @@ namespace mrw::can
 		 *
 		 * @return The converted CAN bus frame.
 		 */
-		operator QCanBusFrame() const;
+		operator QCanBusFrame() const noexcept;
 
-		inline bool isResponse() const
+		inline bool isResponse() const noexcept
 		{
 			return is_response;
 		}
@@ -207,7 +207,7 @@ namespace mrw::can
 		 *
 		 * @return The payload size in sense of this modelrailway.
 		 */
-		size_t size() const;
+		size_t size() const noexcept;
 
 		/**
 		 * This method returns the clear text QString of the SignalState.
@@ -215,14 +215,14 @@ namespace mrw::can
 		 * @param state The SignalState enumeration to translate.
 		 * @return The QString clear text of the given SignalState enumeration.
 		 */
-		static QString get(const SignalAspect state);
+		static QString get(const SignalAspect state) noexcept;
 
-		QString toString() const override;
+		QString toString() const noexcept override;
 
 	private:
-		size_t max() const;
-		size_t start() const;
-		void   copy(QByteArray & array) const;
+		size_t max() const noexcept;
+		size_t start() const noexcept;
+		void   copy(QByteArray & array) const noexcept;
 	};
 }
 

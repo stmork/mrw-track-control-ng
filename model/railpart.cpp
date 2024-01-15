@@ -19,7 +19,7 @@ RailPart::RailPart(
 {
 }
 
-bool RailPart::contains(const RailPart * rail, const bool dir) const
+bool RailPart::contains(const RailPart * rail, const bool dir) const noexcept
 {
 	const std::set<RailInfo> & rails = advance(!dir);
 
@@ -29,29 +29,29 @@ bool RailPart::contains(const RailPart * rail, const bool dir) const
 	});
 }
 
-RailPart * RailPart::resolve(const char * attr) const
+RailPart * RailPart::resolve(const char * attr) const noexcept
 {
 	const QString & value = reference.attribute(attr, "");
 
 	return dynamic_cast<RailPart *>(AssemblyPart::resolve(part_model, value));
 }
 
-std::set<RailInfo> & RailPart::advance(const bool dir)
+std::set<RailInfo> & RailPart::advance(const bool dir) noexcept
 {
 	return dir ? rail_forward : rail_backward;
 }
 
-const std::set<RailInfo> & RailPart::advance(const bool dir) const
+const std::set<RailInfo> & RailPart::advance(const bool dir) const noexcept
 {
 	return dir ? rail_forward : rail_backward;
 }
 
-void RailPart::reserve(const bool input)
+void RailPart::reserve(const bool input) noexcept
 {
 	is_reserved = input;
 }
 
-bool RailPart::reserved() const
+bool RailPart::reserved() const noexcept
 {
 	return is_reserved;
 }

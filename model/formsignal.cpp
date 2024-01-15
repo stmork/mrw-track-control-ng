@@ -21,12 +21,12 @@ FormSignal::FormSignal(
 {
 }
 
-const QString & FormSignal::name() const
+const QString & FormSignal::name() const noexcept
 {
 	return part_name;
 }
 
-MrwMessage FormSignal::configMsg(const unsigned pin) const
+MrwMessage FormSignal::configMsg(const unsigned pin) const noexcept
 {
 	Command cmd = CMD_ILLEGAL;
 
@@ -70,12 +70,12 @@ MrwMessage FormSignal::configMsg(const unsigned pin) const
 	return configSwitchMsg(cmd, pin);
 }
 
-bool FormSignal::valid() const
+bool FormSignal::valid() const noexcept
 {
 	return (controller() != nullptr) && (module() != nullptr);
 }
 
-QString FormSignal::toString() const
+QString FormSignal::toString() const noexcept
 {
 	return QString("      F %1  %2   : [%3] %4 %5 %6").
 		arg(valid()  ? "V" : "-").
@@ -86,7 +86,7 @@ QString FormSignal::toString() const
 		arg(MrwMessage::get(signal_aspect), -10);
 }
 
-bool FormSignal::isUnlockable() const
+bool FormSignal::isUnlockable() const noexcept
 {
 	return symbol() != Symbol::GO;
 }

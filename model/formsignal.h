@@ -43,13 +43,13 @@ namespace mrw::model
 			const SignalType      is_main);
 
 		// Implementations from Device
-		bool                 isUnlockable() const override;
-		const QString    &   name()         const override;
-		mrw::can::MrwMessage configMsg(const unsigned pin) const override;
+		bool                 isUnlockable() const noexcept override;
+		const QString    &   name()         const noexcept override;
+		mrw::can::MrwMessage configMsg(const unsigned pin) const noexcept override;
 
 		// Implementations from AssemblyPart
-		bool            valid()    const override;
-		QString         toString() const override;
+		bool            valid()    const noexcept override;
+		QString         toString() const noexcept override;
 	};
 }
 

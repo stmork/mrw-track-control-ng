@@ -41,23 +41,23 @@ namespace mrw::model
 			Section       *       model_section,
 			const QDomElement  &  element);
 
-		bool        valid() const override;
-		bool        isCurved() const override;
-		static bool isMain(const Rail * rail);
+		bool        valid()    const noexcept override;
+		bool        isCurved() const noexcept override;
+		static bool isMain(const Rail * rail) noexcept;
 
 		/**
 		 * This method returns the rail name.
 		 *
 		 * @return The rail name.
 		 */
-		const QString & name() const;
+		const QString & name() const noexcept;
 
-		QString toString() const override;
-		QString key() const override;
-		bool    setState(const RailPart * prev, const RailPart * succ) override;
+		QString toString() const noexcept override;
+		QString key()      const noexcept override;
+		bool    setState(const RailPart * prev, const RailPart * succ) noexcept override;
 
 	private:
-		void link() override;
+		void link() noexcept override;
 	};
 }
 

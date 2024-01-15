@@ -270,7 +270,7 @@ void SignalControllerProxy::setState(SectionState new_state)
 **                                                                      **
 *************************************************************************/
 
-const QString & SignalControllerProxy::name() const
+const QString & SignalControllerProxy::name() const noexcept
 {
 #ifdef VERBOSE
 	return grouped_name;
@@ -279,22 +279,22 @@ const QString & SignalControllerProxy::name() const
 #endif
 }
 
-float SignalControllerProxy::extensions() const
+float SignalControllerProxy::extensions() const noexcept
 {
 	return base_signal->extension();
 }
 
-bool SignalControllerProxy::isDirection() const
+bool SignalControllerProxy::isDirection() const noexcept
 {
 	return direction == region()->direction();
 }
 
-Position * SignalControllerProxy::position() const
+Position * SignalControllerProxy::position() const noexcept
 {
 	return base_signal;
 }
 
-SectionState SignalControllerProxy::state() const
+SectionState SignalControllerProxy::state() const noexcept
 {
 	if (railPart()->reserved())
 	{
@@ -317,12 +317,12 @@ SectionState SignalControllerProxy::state() const
 	}
 }
 
-LockState SignalControllerProxy::lock() const
+LockState SignalControllerProxy::lock() const noexcept
 {
 	return lock_state;
 }
 
-Bending SignalControllerProxy::bending() const
+Bending SignalControllerProxy::bending() const noexcept
 {
 	return base_signal->bending();
 }
@@ -369,12 +369,12 @@ Symbol SignalControllerProxy::shunt() const
 **                                                                      **
 *************************************************************************/
 
-RailPart * SignalControllerProxy::railPart() const
+RailPart * SignalControllerProxy::railPart() const noexcept
 {
 	return signal_rail;
 }
 
-Section * SignalControllerProxy::section() const
+Section * SignalControllerProxy::section() const noexcept
 {
 	return signal_section;
 }

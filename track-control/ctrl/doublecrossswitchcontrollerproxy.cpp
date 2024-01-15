@@ -98,22 +98,22 @@ void DoubleCrossSwitchControllerProxy::turnRight()
 	emit turn();
 }
 
-const QString & DoubleCrossSwitchControllerProxy::name() const
+const QString & DoubleCrossSwitchControllerProxy::name() const noexcept
 {
 	return part->name();
 }
 
-bool DoubleCrossSwitchControllerProxy::isDirection() const
+bool DoubleCrossSwitchControllerProxy::isDirection() const noexcept
 {
 	return !part->aIsDir() == part->section()->region()->direction();
 }
 
-Position * DoubleCrossSwitchControllerProxy::position() const
+Position * DoubleCrossSwitchControllerProxy::position() const noexcept
 {
 	return part;
 }
 
-SectionState DoubleCrossSwitchControllerProxy::state() const
+SectionState DoubleCrossSwitchControllerProxy::state() const noexcept
 {
 	if (part->reserved())
 	{
@@ -132,12 +132,12 @@ SectionState DoubleCrossSwitchControllerProxy::state() const
 	}
 }
 
-Device::LockState DoubleCrossSwitchControllerProxy::lock() const
+Device::LockState DoubleCrossSwitchControllerProxy::lock() const noexcept
 {
 	return part->lock();
 }
 
-Position::Bending DoubleCrossSwitchControllerProxy::bending() const
+Position::Bending DoubleCrossSwitchControllerProxy::bending() const noexcept
 {
 	return part->bending();
 }

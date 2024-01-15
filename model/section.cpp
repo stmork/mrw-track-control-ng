@@ -156,42 +156,42 @@ Section::~Section()
 	assembly_parts.clear();
 }
 
-bool Section::valid() const
+bool Section::valid() const noexcept
 {
 	return (section_controller != nullptr) && (section_module != nullptr);
 }
 
-const QString & Section::name() const
+const QString & Section::name() const noexcept
 {
 	return section_name;
 }
 
-void Section::setOccupation(const bool input)
+void Section::setOccupation(const bool input) noexcept
 {
 	section_occupied = input;
 }
 
-bool Section::occupation() const
+bool Section::occupation() const noexcept
 {
 	return section_occupied;
 }
 
-void Section::enable(const bool enable)
+void Section::enable(const bool enable) noexcept
 {
 	section_enabled = enable;
 }
 
-void Section::disable(const bool disable)
+void Section::disable(const bool disable) noexcept
 {
 	section_enabled = !disable;
 }
 
-bool Section::enabled() const
+bool Section::enabled() const noexcept
 {
 	return section_enabled;
 }
 
-bool Section::isUnlockable() const
+bool Section::isUnlockable() const noexcept
 {
 	std::vector<RailPart *> reserved_parts;
 
@@ -205,12 +205,12 @@ bool Section::isUnlockable() const
 		(section_state == FREE);
 }
 
-SectionState Section::state() const
+SectionState Section::state() const noexcept
 {
 	return section_occupied ? OCCUPIED : section_state;
 }
 
-void Section::setState(const SectionState input)
+void Section::setState(const SectionState input) noexcept
 {
 	section_state = input;
 }
@@ -220,17 +220,17 @@ AssemblyPart * Section::assemblyPart(const int index) const
 	return assembly_parts.at(index);
 }
 
-size_t Section::assemblyPartCount() const
+size_t Section::assemblyPartCount() const noexcept
 {
 	return assembly_parts.size();
 }
 
-SectionModule * Section::module() const
+SectionModule * Section::module() const noexcept
 {
 	return section_module;
 }
 
-Controller * Section::controller() const
+Controller * Section::controller() const noexcept
 {
 	return section_controller;
 }
@@ -245,17 +245,17 @@ MrwMessage Section::configMsg(const unsigned pin) const
 	return msg;
 }
 
-Region * Section::region() const
+Region * Section::region() const noexcept
 {
 	return section_region;
 }
 
-void Section::add(AssemblyPart * part)
+void Section::add(AssemblyPart * part) noexcept
 {
 	assembly_parts.push_back(part);
 }
 
-void Section::link()
+void Section::link() noexcept
 {
 	for (AssemblyPart * part : assembly_parts)
 	{
@@ -280,7 +280,7 @@ QString Section::toString() const
 		arg(state_map.get(section_state));
 }
 
-void Section::free()
+void Section::free() noexcept
 {
 	for (AssemblyPart * part : assembly_parts)
 	{
@@ -294,24 +294,24 @@ void Section::free()
 	setState(FREE);
 }
 
-bool Section::isFree() const
+bool Section::isFree() const noexcept
 {
 	return section_state == SectionState::FREE;
 }
 
-bool Section::isFlankRelevant() const
+bool Section::isFlankRelevant() const noexcept
 {
 	return
 		(section_state == SectionState::TOUR) ||
 		(section_state == SectionState::PASSED);
 }
 
-QString Section::key() const
+QString Section::key() const noexcept
 {
 	return name();
 }
 
-bool Section::anyReserved() const
+bool Section::anyReserved() const noexcept
 {
 	std::vector<RailPart *> rails;
 
@@ -322,17 +322,17 @@ bool Section::anyReserved() const
 	return rails.size() > 0;
 }
 
-QString Section::get(const SectionState & state)
+QString Section::get(const SectionState & state) noexcept
 {
 	return state_map.get(state);
 }
 
-const std::vector<Signal *> & Section::getSignals(const bool view) const
+const std::vector<Signal *> & Section::getSignals(const bool view) const noexcept
 {
 	return view ? forward_signals : backward_signals;
 }
 
-SectionModule * Section::resolve(const std::string & path)
+SectionModule * Section::resolve(const std::string & path) noexcept
 {
 	std::smatch matcher;
 

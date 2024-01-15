@@ -58,7 +58,7 @@ namespace mrw::can
 		 *
 		 * @return True on succesful CAN bus connection.
 		 */
-		bool valid();
+		bool valid() noexcept;
 
 		/**
 		 * This is a convenience method which shows all CAN plugins and their
@@ -66,7 +66,7 @@ namespace mrw::can
 		 *
 		 * @return True on success.
 		 */
-		bool list();
+		bool list() noexcept;
 
 		/**
 		 * This method writes a MrwMessage as a CAN frame onto the CAN bus.
@@ -74,7 +74,7 @@ namespace mrw::can
 		 * @param message The MrwMessage to write.
 		 * @return True on successful writing.
 		 */
-		bool write(const MrwMessage & message);
+		bool write(const MrwMessage & message) noexcept;
 
 		/**
 		 * This method processes a single MrwMessage. It is intended to
@@ -94,11 +94,11 @@ namespace mrw::can
 		void disconnected();
 
 	private:
-		QString select(const QString & interface, const QString & plugin);
+		QString select(const QString & interface, const QString & plugin) noexcept;
 
 	private slots:
-		void stateChanged(QCanBusDevice::CanBusDeviceState state);
-		void receive();
+		void stateChanged(QCanBusDevice::CanBusDeviceState state) noexcept;
+		void receive() noexcept;
 	};
 }
 

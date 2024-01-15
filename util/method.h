@@ -46,7 +46,7 @@ namespace mrw::util
 		 * This method sets the logging information to a unique pattern with
 		 * timestamp logging type and of course its message.
 		 */
-		static void pattern();
+		static void pattern() noexcept;
 
 		/**
 		 * This static template function acts as a default for lambda
@@ -55,7 +55,7 @@ namespace mrw::util
 		 * @param ptr Never used.
 		 * @returns Always true regarding to input.
 		 */
-		template<class T> static bool always(const T * ptr)
+		template<class T> static bool always(const T * ptr) noexcept
 		{
 			(void)ptr;
 
@@ -69,7 +69,7 @@ namespace mrw::util
 		 * @param ptr Never used.
 		 * @returns Always false regarding to input.
 		 */
-		template<class T> static bool never(const T * ptr)
+		template<class T> static bool never(const T * ptr) noexcept
 		{
 			(void)ptr;
 

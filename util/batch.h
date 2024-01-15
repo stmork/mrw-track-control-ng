@@ -56,7 +56,7 @@ namespace mrw::util
 		 * @return True on success.
 		 */
 		[[nodiscard]]
-		bool increase(BatchParticipant * element);
+		bool increase(BatchParticipant * element) noexcept;
 
 		/**
 		 * The given BatchParticipant has completed his job and is removed from
@@ -68,7 +68,7 @@ namespace mrw::util
 		 * @return True on success.
 		 */
 		[[nodiscard]]
-		bool decrease(BatchParticipant * element);
+		bool decrease(BatchParticipant * element) noexcept;
 
 		/**
 		 * This method checks whether a BatchParticipant is active.
@@ -80,7 +80,7 @@ namespace mrw::util
 		 * @return True if the BatchParticipant is active.
 		 */
 		[[nodiscard]]
-		bool contains(BatchParticipant * element) const;
+		bool contains(BatchParticipant * element) const noexcept;
 
 		/**
 		 * This method checks whether the transaction set is empty. This may
@@ -99,7 +99,7 @@ namespace mrw::util
 		 * @return True if everything is done.
 		 */
 		[[nodiscard]]
-		bool isCompleted() const;
+		bool isCompleted() const noexcept;
 
 		/**
 		 * This method dumps all BatchParticipant elements collected in the
@@ -118,7 +118,7 @@ namespace mrw::util
 		friend class BatchParticipant;
 
 	private:
-		void remove(BatchParticipant * element);
+		void remove(BatchParticipant * element) noexcept;
 	};
 }
 

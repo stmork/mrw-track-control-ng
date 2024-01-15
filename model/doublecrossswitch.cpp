@@ -56,7 +56,7 @@ void DoubleCrossSwitch::link()
 	advance(!aIsDir()).insert(RailInfo(d, false, ad_branch));
 }
 
-bool DoubleCrossSwitch::valid() const
+bool DoubleCrossSwitch::valid() const noexcept
 {
 	return
 		(inductors() == 2) &&
@@ -67,7 +67,7 @@ bool DoubleCrossSwitch::valid() const
 		(d != nullptr) && d->contains(this, !aIsDir());
 }
 
-bool DoubleCrossSwitch::isCurved() const
+bool DoubleCrossSwitch::isCurved() const noexcept
 {
 	return isCurved(switch_state);
 }
@@ -122,7 +122,7 @@ bool DoubleCrossSwitch::setState(
 
 bool DoubleCrossSwitch::isSwitchable(
 	const RailPart * prev,
-	const RailPart * succ) const
+	const RailPart * succ) const noexcept
 {
 	const State state = computeState(prev, succ);
 
@@ -157,7 +157,7 @@ State DoubleCrossSwitch::computeState(
 	return static_cast<State>(state);
 }
 
-SwitchState DoubleCrossSwitch::switchState() const
+SwitchState DoubleCrossSwitch::switchState() const noexcept
 {
 	return isCurved() ?
 		SwitchState::SWITCH_STATE_LEFT :
@@ -170,7 +170,7 @@ SwitchState DoubleCrossSwitch::switchState() const
 **                                                                      **
 *************************************************************************/
 
-void DoubleCrossSwitch::collectFlankSwitches()
+void DoubleCrossSwitch::collectFlankSwitches() noexcept
 {
 	flank_switches.push_back(follow(a,  a_in_dir, false));
 	flank_switches.push_back(follow(b,  a_in_dir, true));
@@ -180,7 +180,7 @@ void DoubleCrossSwitch::collectFlankSwitches()
 
 size_t DoubleCrossSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
-	const bool                     set_state) const
+	const bool                     set_state) const noexcept
 {
 	return flank(switches, set_state, state());
 }
@@ -188,7 +188,7 @@ size_t DoubleCrossSwitch::flank(
 size_t DoubleCrossSwitch::flankCandidates(
 	std::vector<RegularSwitch *> & switches,
 	const RailPart        *        prev,
-	const RailPart        *        succ) const
+	const RailPart        *        succ) const noexcept
 {
 	State compare = computeState(prev, succ);
 
@@ -198,7 +198,7 @@ size_t DoubleCrossSwitch::flankCandidates(
 size_t DoubleCrossSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
 	const bool                     set_state,
-	const DoubleCrossSwitch::State compare) const
+	const DoubleCrossSwitch::State compare) const noexcept
 {
 	const unsigned left  = ((unsigned)compare & B_MASK) ? 0 : 1;
 	const unsigned right = ((unsigned)compare & D_MASK) ? 2 : 3;
@@ -213,7 +213,7 @@ size_t DoubleCrossSwitch::flank(
 size_t DoubleCrossSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
 	const bool                     set_state,
-	const unsigned                 index) const
+	const unsigned                 index) const noexcept
 {
 	const std::bitset<8>  bits(index);
 	const bool            left     = bits.count() == 1;
@@ -252,17 +252,17 @@ bool DoubleCrossSwitch::isCurved(const DoubleCrossSwitch::State state)
 **                                                                      **
 *************************************************************************/
 
-QString DoubleCrossSwitch::key() const
+QString DoubleCrossSwitch::key() const noexcept
 {
 	return "DKW" + name();
 }
 
-QString DoubleCrossSwitch::get(const DoubleCrossSwitch::State & state)
+QString DoubleCrossSwitch::get(const DoubleCrossSwitch::State & state) noexcept
 {
 	return state_map.get(state);
 }
 
-QString DoubleCrossSwitch::toString() const
+QString DoubleCrossSwitch::toString() const noexcept
 {
 	static const QString R = String::format(String::BOLD_ON + String::RED_ON, "R");
 

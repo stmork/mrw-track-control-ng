@@ -27,17 +27,17 @@ uint8_t Light::threshold() const
 	return light_threshold;
 }
 
-const QString & Light::name() const
+const QString & Light::name() const noexcept
 {
 	return light_name;
 }
 
-bool Light::isUnlockable() const
+bool Light::isUnlockable() const noexcept
 {
 	return true;
 }
 
-Controller * Light::controller() const
+Controller * Light::controller() const noexcept
 {
 	return light_controller;
 }

@@ -52,7 +52,7 @@ void Batch::reset()
 	transaction.clear();
 }
 
-bool Batch::increase(BatchParticipant * element)
+bool Batch::increase(BatchParticipant * element) noexcept
 {
 	if (transaction.find(element) == transaction.end())
 	{
@@ -68,7 +68,7 @@ bool Batch::increase(BatchParticipant * element)
 	return false;
 }
 
-bool Batch::decrease(BatchParticipant * element)
+bool Batch::decrease(BatchParticipant * element) noexcept
 {
 	const size_t count = transaction.erase(element);
 
@@ -93,7 +93,7 @@ bool Batch::decrease(BatchParticipant * element)
 	return false;
 }
 
-bool Batch::contains(BatchParticipant * ctrl) const
+bool Batch::contains(BatchParticipant * ctrl) const noexcept
 {
 	return transaction.find(ctrl) != transaction.end();
 }
@@ -114,7 +114,7 @@ void Batch::tryComplete()
 	}
 }
 
-bool Batch::isCompleted() const
+bool Batch::isCompleted() const noexcept
 {
 	return transaction.size() == 0;
 }
@@ -129,7 +129,7 @@ void Batch::dump() const
 	}
 }
 
-void Batch::remove(BatchParticipant * element)
+void Batch::remove(BatchParticipant * element) noexcept
 {
 	transaction.erase(element);
 }

@@ -35,24 +35,24 @@ Command AbstractSwitch::commandState() const
 	throw std::invalid_argument("Command state not allowed!");
 }
 
-bool AbstractSwitch::isUnlockable() const
+bool AbstractSwitch::isUnlockable() const noexcept
 {
 	return !reserved();
 }
 
-MrwMessage AbstractSwitch::configMsg(const unsigned pin) const
+MrwMessage AbstractSwitch::configMsg(const unsigned pin) const noexcept
 {
 	return configSwitchMsg(hasCutOff() ? CFGSWN : CFGSWO, pin);
 }
 
-bool AbstractSwitch::isFlankProtection(const AbstractSwitch * other) const
+bool AbstractSwitch::isFlankProtection(const AbstractSwitch * other) const noexcept
 {
 	return
 		(other != nullptr) &&
 		(std::find(flank_switches.begin(), flank_switches.end(), other) != flank_switches.end());
 }
 
-const QString & AbstractSwitch::name() const
+const QString & AbstractSwitch::name() const noexcept
 {
 	return partName();
 }
@@ -66,7 +66,7 @@ const QString & AbstractSwitch::name() const
 RegularSwitch * AbstractSwitch::follow(
 	RailPart * part,
 	const bool dir,
-	const bool left) const
+	const bool left) const noexcept
 {
 	const RailPart * last  = this;
 	Rail      *      rail  = dynamic_cast<Rail *>(part);

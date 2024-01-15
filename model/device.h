@@ -66,14 +66,14 @@ namespace mrw::model
 		 * @return The unit number of this Device.
 		 * @see Controller::id()
 		 */
-		mrw::can::UnitNo unitNo() const;
+		mrw::can::UnitNo unitNo() const noexcept;
 
 		/**
 		 * This method returns the actual LockState of this Device.
 		 *
 		 * @return The actual LockState.
 		 */
-		LockState lock() const;
+		LockState lock() const noexcept;
 
 		/**
 		 * This method sets a new LockState.
@@ -85,7 +85,7 @@ namespace mrw::model
 		 * @param input The new LockState to set.
 		 * @see unlockable()
 		 */
-		void setLock(const LockState input);
+		void setLock(const LockState input) noexcept;
 
 		/**
 		 * This method returns true if it is possible to <em>unlock</em> this
@@ -101,14 +101,14 @@ namespace mrw::model
 		 *
 		 * @see lock()
 		 */
-		virtual bool isUnlockable() const = 0;
+		virtual bool isUnlockable() const noexcept = 0;
 
 		/**
 		 * This method returns the pointer to the managing controller.
 		 *
 		 * @return
 		 */
-		virtual Controller * controller() const = 0;
+		virtual Controller * controller() const noexcept = 0;
 
 		/**
 		 * This method returns the name modelled inside the EMF/XMI model
@@ -116,7 +116,7 @@ namespace mrw::model
 		 *
 		 * @return The Device name modelled inside the EMF/XMI model.
 		 */
-		virtual const QString & name() const = 0;
+		virtual const QString & name() const noexcept = 0;
 
 		/**
 		 * This convenience method creates a command mrw::can::MrwMessage and
@@ -147,7 +147,7 @@ namespace mrw::model
 		 * @param state The LockState enumeration to translate.
 		 * @return The QString clear text of the given LockState enumeration.
 		 */
-		static QString get(const LockState & state);
+		static QString get(const LockState & state) noexcept;
 
 	private:
 		LockState                lock_state = LockState::UNLOCKED;

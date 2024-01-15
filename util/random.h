@@ -52,7 +52,7 @@ namespace mrw::util
 		 * @return The random generator engine needed for distributions.
 		 */
 		[[nodiscard]]
-		inline std::mt19937 & engine()
+		inline std::mt19937 & engine() noexcept
 		{
 			return random_number_generator;
 		}
@@ -67,7 +67,7 @@ namespace mrw::util
 		 */
 		template<typename T>
 		[[nodiscard]]
-		inline static T random(const T max)
+		inline static T random(const T max) noexcept
 		{
 			std::uniform_int_distribution<T> distribution(0, max);
 

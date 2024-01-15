@@ -49,7 +49,7 @@ namespace mrw::util
 		 * @see toString()
 		 */
 		[[nodiscard]]
-		operator QString() const;
+		operator QString() const noexcept;
 
 		/**
 		 * This method surrounds a string with a given console format command.
@@ -73,7 +73,7 @@ namespace mrw::util
 		[[nodiscard]]
 		static QString format(
 			const QString & code,
-			const QString & input);
+			const QString & input) noexcept;
 
 		/**
 		 * This method surrounds a string with a console format code to
@@ -84,7 +84,7 @@ namespace mrw::util
 		 * @return The formatted string.
 		 */
 		[[nodiscard]]
-		static QString bold(const QString & input);
+		static QString bold(const QString & input) noexcept;
 
 		/**
 		 * This method surrounds a string with a console format code to
@@ -95,7 +95,7 @@ namespace mrw::util
 		 * @return The formatted string.
 		 */
 		[[nodiscard]]
-		static QString red(const QString & input);
+		static QString red(const QString & input) noexcept;
 
 		static const QString RED_ON;     ///< Turns console output into red.
 		static const QString GREEN_ON;   ///< Turns console output into green.
@@ -123,7 +123,7 @@ namespace mrw::util
  *
  * @see toString()
  */
-std::ostream & operator<<(std::ostream & os, const mrw::util::String & instance);
+std::ostream & operator<<(std::ostream & os, const mrw::util::String & instance) noexcept;
 
 /**
  * This shift operator writes the contents of a String instance as human
@@ -135,7 +135,7 @@ std::ostream & operator<<(std::ostream & os, const mrw::util::String & instance)
  *
  * @see toString()
  */
-QDebug operator<<(QDebug debug, const mrw::util::String & instance);
+QDebug operator<<(QDebug debug, const mrw::util::String & instance) noexcept;
 
 /**
  * This add operator allows convenient concatenation of a const char
@@ -151,6 +151,6 @@ mrw::util::debug("Using: " + some_data);
  * @param right The String based data.
  * @return a QString instance of the concatenated string.
  */
-QString operator+(const QString & left, const mrw::util::String & right);
+QString operator+(const QString & left, const mrw::util::String & right) noexcept;
 
 #endif

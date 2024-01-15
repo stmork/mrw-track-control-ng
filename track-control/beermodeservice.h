@@ -35,9 +35,9 @@ public:
 	void init(mrw::model::ModelRailway * model);
 	ControlledRoute * startBeerMode(const bool dir);
 
-	void clearBeerRoute();
-	void disableBeerMode(ControlledRoute * route);
-	operator ControlledRoute * () const;
+	void clearBeerRoute() noexcept;
+	void disableBeerMode(ControlledRoute * route) noexcept;
+	operator ControlledRoute * () const noexcept;
 
 signals:
 	void disabledBeerMode();
@@ -45,27 +45,34 @@ signals:
 private:
 	void findCandidates(
 		std::vector<mrw::model::Rail *> & candidates,
-		const bool                        dir) const;
+		const bool                        dir) const noexcept;
 
 	void findPassthrough(
 		std::vector<mrw::model::Rail *> & candidates,
 		const mrw::model::Region     *    region,
-		const bool                        is_same) const;
+		const bool                        is_same) const noexcept;
 
+	[[nodiscard]]
 	static bool isNeighbourFree(
 		const mrw::model::Rail * rail,
-		const bool               dir);
+		const bool               dir) noexcept;
 
+	[[nodiscard]]
 	static bool isPassThrough(
-		const mrw::model::Rail * rail);
+		const mrw::model::Rail * rail) noexcept;
 
+	[[nodiscard]]
 	static mrw::model::Rail * isNeighbourOccupied(
 		const mrw::model::Rail * rail,
-		const bool               dir);
+		const bool               dir) noexcept;
 
+	[[nodiscard]]
 	mrw::model::Rail * random(const std::vector<mrw::model::Rail *> & rails) const;
-	void               dump(const std::vector<mrw::model::Rail *> & rails) const;
-	QString            dump(const mrw::model::Rail * rail) const;
+
+	void               dump(const std::vector<mrw::model::Rail *> & rails) const noexcept;
+
+	[[nodiscard]]
+	QString            dump(const mrw::model::Rail * rail) const noexcept;
 };
 
 #endif

@@ -18,12 +18,12 @@ CanSettings::CanSettings() : hostname(QHostInfo::localHostName())
 	can_iface   = value("interface", "can0").toString();
 }
 
-const QString & CanSettings::plugin() const
+const QString & CanSettings::plugin() const noexcept
 {
 	return can_plugin;
 }
 
-const QString & CanSettings::interface() const
+const QString & CanSettings::interface() const noexcept
 {
 	return can_iface;
 }

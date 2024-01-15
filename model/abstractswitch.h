@@ -78,11 +78,11 @@ namespace mrw::model
 			const QDomElement  &  element);
 
 		// Implementations from Device
-		const QString    &   name()         const override;
-		bool                 isUnlockable() const override;
-		mrw::can::MrwMessage configMsg(const unsigned pin) const override;
+		const QString    &   name()         const noexcept override;
+		bool                 isUnlockable() const noexcept override;
+		mrw::can::MrwMessage configMsg(const unsigned pin) const noexcept override;
 
-		virtual void collectFlankSwitches() = 0;
+		virtual void collectFlankSwitches() noexcept = 0;
 
 		/**
 		 * This method checks whether a connected AbstractSwitch is a flank
@@ -93,7 +93,7 @@ namespace mrw::model
 		 * switch.
 		 */
 		[[nodiscard]]
-		bool isFlankProtection(const AbstractSwitch * other) const;
+		bool isFlankProtection(const AbstractSwitch * other) const noexcept;
 
 		/**
 		 * This method collects all indirect connected switches which needs
@@ -117,7 +117,7 @@ namespace mrw::model
 		 */
 		virtual size_t flank(
 			std::vector<RegularSwitch *> & switches,
-			const bool                     set_state = false) const = 0;
+			const bool                     set_state = false) const noexcept = 0;
 
 		/**
 		 * This method computes the flank protection switches using the
@@ -135,7 +135,7 @@ namespace mrw::model
 		virtual size_t flankCandidates(
 			std::vector<RegularSwitch *> & switches,
 			const RailPart        *        prev,
-			const RailPart        *        succ) const = 0;
+			const RailPart        *        succ) const noexcept = 0;
 
 		/**
 		 * This method converts the internal switch state into the right
@@ -144,7 +144,7 @@ namespace mrw::model
 		 * @return The turn command for a MrwMessage.
 		 */
 		[[nodiscard]]
-		virtual mrw::can::SwitchState switchState() const = 0;
+		virtual mrw::can::SwitchState switchState() const noexcept = 0;
 
 		/**
 		 * This method checks the internal switch state according to the given
@@ -163,7 +163,7 @@ namespace mrw::model
 		[[nodiscard]]
 		virtual bool isSwitchable(
 			const RailPart * prev,
-			const RailPart * succ) const = 0;
+			const RailPart * succ) const noexcept = 0;
 
 		/**
 		 * This method returns the CAN command corresponding to the internal
@@ -199,7 +199,7 @@ namespace mrw::model
 		RegularSwitch * follow(
 			RailPart * part,
 			const bool dir,
-			const bool left) const;
+			const bool left) const noexcept;
 	};
 }
 

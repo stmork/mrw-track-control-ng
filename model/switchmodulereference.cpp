@@ -63,29 +63,29 @@ SwitchModuleReference::SwitchModuleReference(
 	model_railway->add(this);
 }
 
-size_t SwitchModuleReference::inductors() const
+size_t SwitchModuleReference::inductors() const noexcept
 {
 	return inductor_count;
 }
 
-bool SwitchModuleReference::hasCutOff() const
+bool SwitchModuleReference::hasCutOff() const noexcept
 {
 	return has_cut_off;
 }
 
-SwitchModule * SwitchModuleReference::module() const
+SwitchModule * SwitchModuleReference::module() const noexcept
 {
 	return switch_module;
 }
 
-Controller * SwitchModuleReference::controller() const
+Controller * SwitchModuleReference::controller() const noexcept
 {
 	return switch_controller;
 }
 
 MrwMessage SwitchModuleReference::configSwitchMsg(
 	const Command  cmd,
-	const unsigned pin) const
+	const unsigned pin) const noexcept
 {
 	MrwMessage msg = command(cmd);
 

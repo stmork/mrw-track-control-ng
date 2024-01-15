@@ -125,7 +125,7 @@ namespace mrw::model
 		 * @return True if this RailPart uses inverted connectors.
 		 */
 		[[nodiscard]]
-		inline bool aIsDir() const
+		inline bool aIsDir() const noexcept
 		{
 			return a_in_dir;
 		}
@@ -140,7 +140,7 @@ namespace mrw::model
 		 * @see advance()
 		 */
 		[[nodiscard]]
-		virtual bool contains(const RailPart * rail, const bool dir) const;
+		virtual bool contains(const RailPart * rail, const bool dir) const noexcept;
 
 		/**
 		 * This method returns all connectors in the given counting
@@ -150,7 +150,7 @@ namespace mrw::model
 		 * @return The collection of connected rail parts. The collection
 		 * may be empty in case of an end rail.
 		 */
-		std::set<RailInfo> & advance(const bool dir);
+		std::set<RailInfo> & advance(const bool dir) noexcept;
 
 		/**
 		 * This method returns all connectors in the given counting
@@ -160,7 +160,7 @@ namespace mrw::model
 		 * @return The collection of connected rail parts. The collection
 		 * may be empty in case of an end rail.
 		 */
-		const std::set<RailInfo> & advance(const bool dir) const;
+		const std::set<RailInfo> & advance(const bool dir) const noexcept;
 
 		/**
 		 * This method sets the internal switch state according to the given
@@ -187,7 +187,7 @@ namespace mrw::model
 		 * @param input True if this RailPart instance should be reserved,
 		 * false if it should be freed.
 		 */
-		void reserve(const bool input = true);
+		void reserve(const bool input = true) noexcept;
 
 		/**
 		 * This method returns the reservation state of this RailPart instance.
@@ -195,7 +195,7 @@ namespace mrw::model
 		 * @return The reserveration state of this instance.
 		 */
 		[[nodiscard]]
-		bool reserved() const;
+		bool reserved() const noexcept;
 
 		/**
 		 * This method returns true if the represented RailPart is curved or a
@@ -205,7 +205,7 @@ namespace mrw::model
 		 * @return True if the RailPart is a curved or branched.
 		 */
 		[[nodiscard]]
-		virtual bool isCurved() const = 0;
+		virtual bool isCurved() const noexcept = 0;
 
 	protected:
 		/**
@@ -216,7 +216,7 @@ namespace mrw::model
 		 *
 		 * @return The connected RailPart.
 		 */
-		RailPart * resolve(const char * attr) const;
+		RailPart * resolve(const char * attr) const noexcept;
 	};
 }
 

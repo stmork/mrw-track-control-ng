@@ -63,27 +63,27 @@ LightSignal::LightSignal(
 	model_railway->add(this);
 }
 
-MultiplexConnection * LightSignal::connection() const
+MultiplexConnection * LightSignal::connection() const noexcept
 {
 	return mux_connection;
 }
 
-size_t LightSignal::usedPins() const
+size_t LightSignal::usedPins() const noexcept
 {
 	return lights;
 }
 
-const QString & LightSignal::name() const
+const QString & LightSignal::name() const noexcept
 {
 	return part_name;
 }
 
-bool LightSignal::isUnlockable() const
+bool LightSignal::isUnlockable() const noexcept
 {
 	return symbol() != Symbol::GO;
 }
 
-Controller * LightSignal::controller() const
+Controller * LightSignal::controller() const noexcept
 {
 	return signal_controller;
 }
@@ -141,12 +141,12 @@ MrwMessage LightSignal::configMsg(const unsigned pin) const
 	return msg;
 }
 
-bool LightSignal::valid() const
+bool LightSignal::valid() const noexcept
 {
 	return (signal_controller != nullptr) && (mux_connection != nullptr);
 }
 
-QString LightSignal::toString() const
+QString LightSignal::toString() const noexcept
 {
 	return QString("      L %1  %2   : [%3] %4 %5 %6").
 		arg(valid()  ? "V" : "-").

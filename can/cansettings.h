@@ -42,7 +42,7 @@ namespace mrw::can
 		 * @return The CAN plugin name of the QCanBusDevice.
 		 * @see QCanBusDevice
 		 */
-		const QString & plugin() const;
+		const QString & plugin() const noexcept;
 
 		/**
 		 * This method returns the interface of a specific CAN bus plugin. The
@@ -52,7 +52,7 @@ namespace mrw::can
 		 * @return The interface name of the CAN plugin.
 		 * @see QCanBusDevice
 		 */
-		const QString & interface() const;
+		const QString & interface() const noexcept;
 
 		/**
 		 * This method returns a mrw::util::SettingsGroup for a per host

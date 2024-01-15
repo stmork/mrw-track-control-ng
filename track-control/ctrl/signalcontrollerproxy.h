@@ -96,18 +96,18 @@ namespace mrw::ctrl
 		void setLockState(mrw::model::Device::LockState lock_state);
 
 		// Implementations from BaseController
-		virtual const QString & name()         const override;
-		virtual float           extensions()   const override;
-		virtual bool            isDirection()  const override;
+		virtual const QString & name()         const noexcept override;
+		virtual float           extensions()   const noexcept override;
+		virtual bool            isDirection()  const noexcept override;
 
-		virtual mrw::model::Position     *    position() const override;
-		virtual mrw::model::SectionState      state()    const override;
-		virtual mrw::model::Device::LockState lock()     const override;
-		virtual mrw::model::Position::Bending bending()  const override;
+		virtual mrw::model::Position     *    position() const noexcept override;
+		virtual mrw::model::SectionState      state()    const noexcept override;
+		virtual mrw::model::Device::LockState lock()     const noexcept override;
+		virtual mrw::model::Position::Bending bending()  const noexcept override;
 
 		// Implementation from RailPartInfo
-		virtual mrw::model::RailPart * railPart() const override;
-		virtual mrw::model::Section  * section()  const override;
+		virtual mrw::model::RailPart * railPart() const noexcept override;
+		virtual mrw::model::Section  * section()  const noexcept override;
 
 		// Implementations from ControllerRegistrand
 		virtual bool    process(const can::MrwMessage & message) override;

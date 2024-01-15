@@ -68,7 +68,7 @@ namespace mrw::model
 		 *
 		 * @return The controllers CAN ID.
 		 */
-		mrw::can::ControllerId id() const;
+		mrw::can::ControllerId id() const noexcept;
 
 		/**
 		 * This method returns the nth Module element. It is not ID-based
@@ -85,7 +85,7 @@ namespace mrw::model
 		 *
 		 * @return The connected Module count.
 		 */
-		size_t moduleCount() const;
+		size_t moduleCount() const noexcept;
 
 		/**
 		 * This method returns the nth MultiplexConnection. It is not ID-based
@@ -104,7 +104,7 @@ namespace mrw::model
 		 *
 		 * @return The connected MultiplexConnection count.
 		 */
-		size_t connectionCount() const;
+		size_t connectionCount() const noexcept;
 
 		/**
 		 * This method validates if all underlying modules and connections
@@ -114,7 +114,7 @@ namespace mrw::model
 		 * @see Module::valid()
 		 * @see MultiplexConnection::valid()
 		 */
-		bool valid() const;
+		bool valid() const noexcept;
 
 		/**
 		 * This method collects all configuration messages which describes

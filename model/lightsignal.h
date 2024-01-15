@@ -58,7 +58,7 @@ namespace mrw::model
 		 *
 		 * @return The controlling MultiplexConnection module.
 		 */
-		MultiplexConnection * connection() const;
+		MultiplexConnection * connection() const noexcept;
 
 		/**
 		 * This method returns how much pins are used by the controlling
@@ -66,17 +66,17 @@ namespace mrw::model
 		 *
 		 * @return The pin count used to control this LightSignal.
 		 */
-		size_t usedPins() const;
+		size_t usedPins() const noexcept;
 
 		// Implementations from Device
-		const QString    &   name()         const override;
-		bool                 isUnlockable() const override;
-		Controller     *     controller()   const override;
+		const QString    &   name()         const noexcept override;
+		bool                 isUnlockable() const noexcept override;
+		Controller     *     controller()   const noexcept override;
 		mrw::can::MrwMessage configMsg(const unsigned pin) const override;
 
 		// Implementations from AssemblyPart
-		bool            valid()    const override;
-		QString         toString() const override;
+		bool            valid()    const noexcept override;
+		QString         toString() const noexcept override;
 	};
 }
 

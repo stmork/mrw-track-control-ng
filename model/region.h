@@ -62,14 +62,14 @@ namespace mrw::model
 		 *
 		 * @return The Section count.
 		 */
-		size_t sectionCount() const;
+		size_t sectionCount() const noexcept;
 
 		/**
 		 * This method returns the name of this Region.
 		 *
 		 * @return  The name of this Region.
 		 */
-		const QString & name() const;
+		const QString & name() const noexcept;
 
 		/**
 		 * This method returns the projected counting direction used on the
@@ -79,7 +79,7 @@ namespace mrw::model
 		 * @return The projection direction of the counting direction for the
 		 * GUI.
 		 */
-		bool direction() const;
+		bool direction() const noexcept;
 
 		/**
 		 * This method sets the the projected counting direction used on the
@@ -90,7 +90,7 @@ namespace mrw::model
 		 * @param dir The projection direction of the counting direction for
 		 * the GUI.
 		 */
-		void parse(QSettings & settings, const bool dir);
+		void parse(QSettings & settings, const bool dir) noexcept;
 
 		/**
 		 * This method returns a key to determine the logical coordinates from
@@ -98,7 +98,7 @@ namespace mrw::model
 		 *
 		 * @return The key for looking up the logical coordinates
 		 */
-		QString key() const;
+		QString key() const noexcept;
 
 		/**
 		 * This template class returns all AssemblyPart elements of the given
@@ -111,7 +111,7 @@ namespace mrw::model
 		 */
 		template <class T> void parts(
 			std::vector<T *>          &         result,
-			std::function<bool(const T * part)> guard = &mrw::util::Method::always<T>)
+			std::function<bool(const T * part)> guard = &mrw::util::Method::always<T>) noexcept
 		{
 			for (Section * sub : sections)
 			{
@@ -125,13 +125,13 @@ namespace mrw::model
 		 *
 		 * @param settings The QSettings to write the configuration to.
 		 */
-		void write(QSettings & settings) const;
+		void write(QSettings & settings) const noexcept;
 
-		QString toString() const override;
+		QString toString() const noexcept override;
 
 	private:
-		void add(Section * section);
-		void link();
+		void add(Section * section) noexcept;
+		void link() noexcept;
 	};
 }
 

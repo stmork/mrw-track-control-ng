@@ -64,7 +64,7 @@ void RegularSwitch::link()
 	advance(!aIsDir()).insert(RailInfo(c, right_prio, right_branch));
 }
 
-bool RegularSwitch::valid() const
+bool RegularSwitch::valid() const noexcept
 {
 	return
 		(inductors() == 2) &&
@@ -74,7 +74,7 @@ bool RegularSwitch::valid() const
 		(c != nullptr) && c->contains(this, !aIsDir());
 }
 
-bool RegularSwitch::isCurved() const
+bool RegularSwitch::isCurved() const noexcept
 {
 	return right_branch == (switch_state == State::AC);
 }
@@ -85,12 +85,12 @@ bool RegularSwitch::isCurved() const
 **                                                                      **
 *************************************************************************/
 
-RegularSwitch::State RegularSwitch::state() const
+RegularSwitch::State RegularSwitch::state() const noexcept
 {
 	return switch_state;
 }
 
-bool RegularSwitch::setState(const State state, const bool force)
+bool RegularSwitch::setState(const State state, const bool force) noexcept
 {
 	bool success = true;
 
@@ -117,7 +117,7 @@ bool RegularSwitch::setState(const State state, const bool force)
 
 bool RegularSwitch::isSwitchable(
 	const RailPart * prev,
-	const RailPart * succ) const
+	const RailPart * succ) const noexcept
 {
 	const State state = computeState(prev, succ);
 
@@ -168,7 +168,7 @@ State RegularSwitch::computeState(
 	}
 }
 
-SwitchState RegularSwitch::switchState() const
+SwitchState RegularSwitch::switchState() const noexcept
 {
 	return static_cast<SwitchState>(switch_state);
 }
@@ -179,7 +179,7 @@ SwitchState RegularSwitch::switchState() const
 **                                                                      **
 *************************************************************************/
 
-void RegularSwitch::collectFlankSwitches()
+void RegularSwitch::collectFlankSwitches() noexcept
 {
 	flank_switches.push_back(nullptr);
 	flank_switches.push_back(follow(b, !a_in_dir, true));
@@ -188,7 +188,7 @@ void RegularSwitch::collectFlankSwitches()
 
 size_t RegularSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
-	const bool                     set_state) const
+	const bool                     set_state) const noexcept
 {
 	return flank(switches, set_state, state());
 }
@@ -196,7 +196,7 @@ size_t RegularSwitch::flank(
 size_t RegularSwitch::flankCandidates(
 	std::vector<RegularSwitch *> & switches,
 	const RailPart        *        prev,
-	const RailPart        *        succ) const
+	const RailPart        *        succ) const noexcept
 {
 	State compare = computeState(prev, succ);
 
@@ -206,7 +206,7 @@ size_t RegularSwitch::flankCandidates(
 size_t RegularSwitch::flank(
 	std::vector<RegularSwitch *> & switches,
 	const bool                     set_state,
-	const State                    compare) const
+	const State                    compare) const noexcept
 {
 	RegularSwitch * other = nullptr;
 	size_t          equal = 0;
@@ -241,7 +241,7 @@ size_t RegularSwitch::flank(
 **                                                                      **
 *************************************************************************/
 
-QString RegularSwitch::key() const
+QString RegularSwitch::key() const noexcept
 {
 	return "Weiche" + name();
 }
@@ -251,7 +251,7 @@ QString RegularSwitch::get(const RegularSwitch::State & state)
 	return state_map.get(state);
 }
 
-QString RegularSwitch::toString() const
+QString RegularSwitch::toString() const noexcept
 {
 	static const QString R = String::format(String::BOLD_ON + String::RED_ON, "R");
 

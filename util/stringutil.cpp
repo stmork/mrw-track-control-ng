@@ -19,34 +19,34 @@ const QString String::ITALIC_ON     = "\033[3m";
 const QString String::UNDERLINE_ON  = "\033[4m";
 const QString String::ALL_OFF       = "\033[0m";
 
-String::operator QString() const
+String::operator QString() const noexcept
 {
 	return toString();
 }
 
-QString String::format(const QString & code, const QString & input)
+QString String::format(const QString & code, const QString & input) noexcept
 {
 	return code + input + ALL_OFF;
 }
 
-QString String::bold(const QString & input)
+QString String::bold(const QString & input) noexcept
 {
 	return format(BOLD_ON, input);
 }
 
-QString String::red(const QString & input)
+QString String::red(const QString & input) noexcept
 {
 	return format(RED_ON, input);
 }
 
-std::ostream & operator<<(std::ostream & os, const String & instance)
+std::ostream & operator<<(std::ostream & os, const String & instance) noexcept
 {
 	os << instance.toString().toStdString();
 
 	return os;
 }
 
-QDebug operator<<(QDebug debug, const String & instance)
+QDebug operator<<(QDebug debug, const String & instance) noexcept
 {
 	QDebugStateSaver saver(debug);
 
@@ -55,7 +55,7 @@ QDebug operator<<(QDebug debug, const String & instance)
 	return debug;
 }
 
-QString operator+(const QString & left, const String & right)
+QString operator+(const QString & left, const String & right) noexcept
 {
 	return left + right.toString();
 }

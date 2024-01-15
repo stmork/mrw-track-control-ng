@@ -44,7 +44,7 @@ Properties::Properties(const QString & filename)
 	read(filename);
 }
 
-bool Properties::read(const QString & filename)
+bool Properties::read(const QString & filename) noexcept
 {
 	QFile file(filename);
 	const bool success = file.open(QIODevice::ReadOnly);
@@ -74,7 +74,7 @@ bool Properties::read(const QString & filename)
 	return success;
 }
 
-const std::string & Properties::lookup(const std::string & key) const
+const std::string & Properties::lookup(const std::string & key) const noexcept
 {
 	return find(key) != end() ? at(key) : EMPTY;
 }

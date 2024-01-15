@@ -74,7 +74,7 @@ namespace mrw::model
 			Section       *       model_section,
 			const QDomElement  &  element);
 
-		bool isCurved() const override;
+		bool isCurved() const noexcept override;
 
 		/**
 		 * This method returns the internal state of this RegularSwitch. As
@@ -84,7 +84,7 @@ namespace mrw::model
 		 * @return The internal state.
 		 * @see commandState()
 		 */
-		State state() const;
+		State state() const noexcept;
 
 		/**
 		 * This method sets the internal state of this RegularSwitch. As
@@ -98,12 +98,12 @@ namespace mrw::model
 		 * LockState::LOCKED.
 		 * @see commandState()
 		 */
-		bool setState(const State state, const bool force = false);
+		bool setState(const State state, const bool force = false) noexcept;
 
 		[[nodiscard]]
 		bool isSwitchable(
 			const RailPart * prev,
-			const RailPart * succ) const override;
+			const RailPart * succ) const noexcept override;
 
 		/**
 		 * This method computes the RegularSwitch::State value depending on the
@@ -120,19 +120,19 @@ namespace mrw::model
 			const RailPart * prev,
 			const RailPart * succ) override;
 
-		bool                  valid()       const override;
-		QString               toString()    const override;
-		QString               key()         const override;
-		mrw::can::SwitchState switchState() const override;
+		bool                  valid()       const noexcept override;
+		QString               toString()    const noexcept override;
+		QString               key()         const noexcept override;
+		mrw::can::SwitchState switchState() const noexcept override;
 
 		size_t flank(
 			std::vector<RegularSwitch *> & switches,
-			const bool                     set_state = false) const override;
+			const bool                     set_state = false) const noexcept override;
 
 		size_t flankCandidates(
 			std::vector<RegularSwitch *> & switches,
 			const RailPart        *        prev,
-			const RailPart        *        succ) const override;
+			const RailPart        *        succ) const noexcept override;
 
 		/**
 		 * This method returns the clear text QString of the State this
@@ -153,9 +153,9 @@ namespace mrw::model
 		size_t flank(
 			std::vector<RegularSwitch *> & switches,
 			const bool                     set_state,
-			const State                    compare) const;
+			const State                    compare) const noexcept;
 
-		void collectFlankSwitches() override;
+		void collectFlankSwitches() noexcept override;
 
 		State switch_state = State::AB;
 		const static mrw::util::ConstantEnumerator<State>  state_map;

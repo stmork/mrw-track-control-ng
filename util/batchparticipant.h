@@ -37,7 +37,7 @@ namespace mrw::util
 		 *
 		 * @return True on success.
 		 */
-		bool increase();
+		bool increase() noexcept;
 
 		/**
 		 * This marks a findished job at the previoulsy configured Batch.
@@ -47,7 +47,7 @@ namespace mrw::util
 		 *
 		 * @return True on success.
 		 */
-		bool decrease();
+		bool decrease() noexcept;
 
 		/**
 		 * This method returns the actually configured Batch.
@@ -55,7 +55,7 @@ namespace mrw::util
 		 * @return The configured batch.
 		 */
 		[[nodiscard]]
-		Batch * batch() const;
+		Batch * batch() const noexcept;
 
 		/**
 		 * This method configures a Batch to be used by the methods increase()
@@ -65,7 +65,7 @@ namespace mrw::util
 		 * @param batch The Batch to use.
 		 * @see GlobalBatch
 		 */
-		void setBatch(Batch * batch);
+		void setBatch(Batch * batch) noexcept;
 
 		/**
 		 * This method gives the chance for dumping a clear text for debugging
@@ -73,7 +73,7 @@ namespace mrw::util
 		 *
 		 * @return The clear text of this BatchParticipant.
 		 */
-		virtual const QString & name() const = 0;
+		virtual const QString & name() const noexcept = 0;
 	};
 }
 

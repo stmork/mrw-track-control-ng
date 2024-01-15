@@ -52,7 +52,7 @@ namespace mrw::model
 		 *
 		 * @return The number of inductive actuators needed by this Device.
 		 */
-		size_t inductors() const;
+		size_t inductors() const noexcept;
 
 		/**
 		 * This method returns true if the inductive actuators have automatic
@@ -60,21 +60,21 @@ namespace mrw::model
 		 *
 		 * @return True on automatic end position cutoff.
 		 */
-		bool hasCutOff() const;
+		bool hasCutOff() const noexcept;
 
 		/**
 		 * This method returns the controlling SwitchModule.
 		 *
 		 * @return The controlling SwitchModule.
 		 */
-		SwitchModule * module() const;
+		SwitchModule * module() const noexcept;
 
-		Controller * controller() const override;
+		Controller * controller() const noexcept override;
 
 	protected:
 		mrw::can::MrwMessage configSwitchMsg(
 			const mrw::can::Command cmd,
-			const unsigned          pin) const;
+			const unsigned          pin) const noexcept;
 	};
 }
 

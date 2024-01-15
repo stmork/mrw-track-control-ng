@@ -18,7 +18,7 @@ Rail::Rail(
 {
 }
 
-void Rail::link()
+void Rail::link() noexcept
 {
 	a = resolve("a");
 	b = resolve("b");
@@ -39,7 +39,7 @@ void Rail::link()
 	}
 }
 
-bool Rail::valid() const
+bool Rail::valid() const noexcept
 {
 	return (
 			((a != nullptr) && a->contains(this,  aIsDir())) ||
@@ -47,22 +47,22 @@ bool Rail::valid() const
 		);
 }
 
-bool Rail::isCurved() const
+bool Rail::isCurved() const noexcept
 {
 	return is_curve;
 }
 
-bool Rail::isMain(const Rail * rail)
+bool Rail::isMain(const Rail * rail) noexcept
 {
 	return rail->is_main;
 }
 
-const QString & Rail::name() const
+const QString & Rail::name() const noexcept
 {
 	return partName();
 }
 
-QString Rail::toString() const
+QString Rail::toString() const noexcept
 {
 	static const QString R = String::format(String::BOLD_ON + String::RED_ON, "R");
 
@@ -78,12 +78,12 @@ QString Rail::toString() const
 		arg(name());
 }
 
-QString Rail::key() const
+QString Rail::key() const noexcept
 {
 	return "Gleis" + name();
 }
 
-bool Rail::setState(const RailPart * prev, const RailPart * succ)
+bool Rail::setState(const RailPart * prev, const RailPart * succ) noexcept
 {
 	Q_UNUSED(prev);
 	Q_UNUSED(succ);

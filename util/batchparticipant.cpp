@@ -25,7 +25,7 @@ BatchParticipant::~BatchParticipant()
 	}
 }
 
-bool BatchParticipant::increase()
+bool BatchParticipant::increase() noexcept
 {
 	Q_ASSERT(base_tx != nullptr);
 
@@ -41,7 +41,7 @@ bool BatchParticipant::increase()
 	return base_tx->increase(this);
 }
 
-bool BatchParticipant::decrease()
+bool BatchParticipant::decrease() noexcept
 {
 	Q_ASSERT(base_tx != nullptr);
 
@@ -53,12 +53,12 @@ bool BatchParticipant::decrease()
 	return base_tx->decrease(this);
 }
 
-Batch * BatchParticipant::batch() const
+Batch * BatchParticipant::batch() const noexcept
 {
 	return base_tx;
 }
 
-void BatchParticipant::setBatch(Batch * new_batch)
+void BatchParticipant::setBatch(Batch * new_batch) noexcept
 {
 	if (new_batch != nullptr)
 	{

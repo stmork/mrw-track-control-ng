@@ -44,9 +44,9 @@ namespace mrw::model
 		uint8_t threshold() const;
 
 		// Implementations from Device
-		const QString    &   name()         const override;
-		bool                 isUnlockable() const override;
-		Controller     *     controller()   const override;
+		const QString    &   name()         const noexcept override;
+		bool                 isUnlockable() const noexcept override;
+		Controller     *     controller()   const noexcept override;
 		virtual mrw::can::MrwMessage configMsg(const unsigned pin) const override;
 	};
 }

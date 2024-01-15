@@ -54,7 +54,7 @@ namespace mrw::util
 		 * @return The singleton class instance.
 		 */
 		[[nodiscard]]
-		static T & instance()
+		static T & instance() noexcept
 		{
 			static_assert(std::is_base_of<Singleton, T>(), "Template class is not a singleton!");
 
