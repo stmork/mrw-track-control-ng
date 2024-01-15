@@ -208,9 +208,10 @@ void TestUtil::testClockService()
 
 void TestUtil::testRandom()
 {
-	static const unsigned TEST_RAND_MIN  = 1;
-	static const unsigned TEST_RAND_MAX  = 6;
-	static const unsigned TEST_RAND_LOOP = 100000;
+	static const unsigned TEST_RAND_MIN      =      1;
+	static const unsigned TEST_RAND_MAX      =      6;
+	static const int      TEST_RAND_DICE_MAX =      7;
+	static const unsigned TEST_RAND_LOOP     = 100000;
 
 	std::uniform_int_distribution<unsigned> dist(TEST_RAND_MIN, TEST_RAND_MAX);
 	double mt_sum = 0;
@@ -218,14 +219,19 @@ void TestUtil::testRandom()
 
 	for (unsigned i = 0; i < TEST_RAND_LOOP; i++)
 	{
+		const int r = Random::random<int>(TEST_RAND_DICE_MAX);
+
+		QVERIFY(r >= 0);
+		QVERIFY(r <= TEST_RAND_DICE_MAX);
 		mt_sum += dist(Random::instance().engine());
-		dice   += Random::random(size_t(7));
+		dice   += r;
 	}
 
-	const double diff = 0.5 * (TEST_RAND_MIN + TEST_RAND_MAX) - mt_sum / TEST_RAND_LOOP;
+	const double avrg1 = 0.5 * (TEST_RAND_MIN + TEST_RAND_MAX) - mt_sum / TEST_RAND_LOOP;
+	const int    avrg2 = dice / TEST_RAND_LOOP;
 
-	QVERIFY(std::abs(diff) <= 0.02);
-	QCOMPARE((dice + TEST_RAND_LOOP / 50) / TEST_RAND_LOOP, 3u);
+	QVERIFY(std::abs(avrg1) <= 0.02);
+	QCOMPARE(avrg2, TEST_RAND_DICE_MAX / 2);
 }
 
 void TestUtil::testDumpHandler()
