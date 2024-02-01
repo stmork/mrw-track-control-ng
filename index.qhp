@@ -994,6 +994,7 @@
 <section title="reference" ref="d3/de7/classmrw_1_1model_1_1Module.html#a75fdcc7651e2f3174e75589035930287"/>
 </section>
 <section title="MrwStatistic" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html">
+<section title="device_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#afc04c97249244e67e8362bdcb869069c"/>
 <section title="errors" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#a446b2d242df918530d1b49335dd3bb34"/>
 <section title="main_signal_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ab90956fed9672a9201523c80cf8116cd"/>
 <section title="region_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aa3736702fa76a650c37ee3ec960125af"/>
@@ -3112,6 +3113,7 @@
 <section title="reference" ref="d3/de7/classmrw_1_1model_1_1Module.html#a75fdcc7651e2f3174e75589035930287"/>
 </section>
 <section title="MrwStatistic" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html">
+<section title="device_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#afc04c97249244e67e8362bdcb869069c"/>
 <section title="errors" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#a446b2d242df918530d1b49335dd3bb34"/>
 <section title="main_signal_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ab90956fed9672a9201523c80cf8116cd"/>
 <section title="region_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aa3736702fa76a650c37ee3ec960125af"/>
@@ -4701,10 +4703,10 @@
 <keyword name="append(RailPart *rail, RailPart *target, Region *search_region)" id="mrw::model::Route::append_ad695ee4b8aec5e07cfaa5c9d316f0490" ref="d7/dfb/classmrw_1_1model_1_1Route.html#ad695ee4b8aec5e07cfaa5c9d316f0490"/>
 <keyword name="append(const uint8_t input)" id="mrw::can::MrwMessage::append_ad9c105a29f210259dbda59c4d39c566d" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ad9c105a29f210259dbda59c4d39c566d"/>
 <keyword name="aspect() const" id="mrw::model::Signal::aspect_a50b61b43ed4add4b0d5830e6a36fc33a" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a50b61b43ed4add4b0d5830e6a36fc33a"/>
-<keyword name="AssemblyPart" id="mrw::model::ModelRailway::AssemblyPart_a552c3ac63ec5fbf07aa7453934fdbc6a" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a552c3ac63ec5fbf07aa7453934fdbc6a"/>
-<keyword name="AssemblyPart(ModelRailway *model_railway, Section *model_section, const QDomElement &amp;element)" id="mrw::model::AssemblyPart::AssemblyPart_aeea148c78eef27fb6796633ebb614b1e" ref="d5/d26/classmrw_1_1model_1_1AssemblyPart.html#aeea148c78eef27fb6796633ebb614b1e"/>
 <keyword name="assemblyPart(const size_t region_idx, const size_t section_idx, const size_t part_idx) const" id="mrw::model::ModelRailway::assemblyPart_a61f7327cf274b5a1eafeee57ec2cfd02" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a61f7327cf274b5a1eafeee57ec2cfd02"/>
 <keyword name="assemblyPart(const int index) const" id="mrw::model::Section::assemblyPart_aeebcb08ee6d8edd93a84e583a208d8ae" ref="de/de1/classmrw_1_1model_1_1Section.html#aeebcb08ee6d8edd93a84e583a208d8ae"/>
+<keyword name="AssemblyPart" id="mrw::model::ModelRailway::AssemblyPart_a552c3ac63ec5fbf07aa7453934fdbc6a" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a552c3ac63ec5fbf07aa7453934fdbc6a"/>
+<keyword name="AssemblyPart(ModelRailway *model_railway, Section *model_section, const QDomElement &amp;element)" id="mrw::model::AssemblyPart::AssemblyPart_aeea148c78eef27fb6796633ebb614b1e" ref="d5/d26/classmrw_1_1model_1_1AssemblyPart.html#aeea148c78eef27fb6796633ebb614b1e"/>
 <keyword name="assemblyPartCount() const noexcept" id="mrw::model::Section::assemblyPartCount_a0bbc58e75c51d835292db89fcf5b06cf" ref="de/de1/classmrw_1_1model_1_1Section.html#a0bbc58e75c51d835292db89fcf5b06cf"/>
 <keyword name="auto_unblock" id="mrw::model::Route::auto_unblock_a09555291574584d2148369f3f92935be" ref="d7/dfb/classmrw_1_1model_1_1Route.html#a09555291574584d2148369f3f92935be"/>
 <keyword name="b_ends" id="mrw::ctrl::RailController::Status::b_ends_af5f774bc7dfd19358fde7a941e9e4e27" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#af5f774bc7dfd19358fde7a941e9e4e27"/>
@@ -4714,8 +4716,8 @@
 <keyword name="BaseController(QObject *parent=nullptr)" id="mrw::ctrl::BaseController::BaseController_ae47bfe51040bb5674d54e9a9ae00c1ce" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ae47bfe51040bb5674d54e9a9ae00c1ce"/>
 <keyword name="BaseSwitchController(QObject *parent=nullptr)" id="mrw::ctrl::BaseSwitchController::BaseSwitchController_a6898669ecedd594a9a396e8b72684f48" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a6898669ecedd594a9a396e8b72684f48"/>
 <keyword name="BaseWidget(QWidget *parent=nullptr)" id="mrw::ui::BaseWidget::BaseWidget_a91754f7f90922093a34e4a60d601bf99" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a91754f7f90922093a34e4a60d601bf99"/>
-<keyword name="Batch()" id="mrw::util::Batch::Batch_ac91261f634b1f89c51941e9d188b06a5" ref="d8/dde/classmrw_1_1util_1_1Batch.html#ac91261f634b1f89c51941e9d188b06a5"/>
 <keyword name="batch() const noexcept" id="mrw::util::BatchParticipant::batch_af0c771f2df98cdb2eee447eed5bd9480" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#af0c771f2df98cdb2eee447eed5bd9480"/>
+<keyword name="Batch()" id="mrw::util::Batch::Batch_ac91261f634b1f89c51941e9d188b06a5" ref="d8/dde/classmrw_1_1util_1_1Batch.html#ac91261f634b1f89c51941e9d188b06a5"/>
 <keyword name="BatchParticipant" id="mrw::util::Batch::BatchParticipant_a15aae440c6bc60ad50578730d6e9b3c4" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a15aae440c6bc60ad50578730d6e9b3c4"/>
 <keyword name="BatchParticipant()" id="mrw::util::BatchParticipant::BatchParticipant_a2f056ac6f0f14b943f345b4f9d629927" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a2f056ac6f0f14b943f345b4f9d629927"/>
 <keyword name="BC" id="mrw::model::DoubleCrossSwitch::BC_a1a462292eecb5d40e19aec3af07c93e1af85b7b377112c272bc87f3e73f10508d" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1af85b7b377112c272bc87f3e73f10508d"/>
@@ -4832,6 +4834,7 @@
 <keyword name="decrease() noexcept" id="mrw::util::BatchParticipant::decrease_a3df2d32cce94717af8c388718bf4c108" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a3df2d32cce94717af8c388718bf4c108"/>
 <keyword name="Device" id="mrw::model::ModelRailway::Device_a520fa05e0bf58785da428f7a0241eee2" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a520fa05e0bf58785da428f7a0241eee2"/>
 <keyword name="Device(ModelRailway *model_railway, const QDomElement &amp;element)" id="mrw::model::Device::Device_a0de026e1f11662155aa02ec4a7eb4835" ref="d8/d2c/classmrw_1_1model_1_1Device.html#a0de026e1f11662155aa02ec4a7eb4835"/>
+<keyword name="device_count" id="mrw::model::MrwStatistic::device_count_afc04c97249244e67e8362bdcb869069c" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#afc04c97249244e67e8362bdcb869069c"/>
 <keyword name="deviceById(const mrw::can::ControllerId id, const mrw::can::UnitNo unit_no) const" id="mrw::model::ModelRailway::deviceById_a2b815f10eb083f088262d871b5a5956b" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a2b815f10eb083f088262d871b5a5956b"/>
 <keyword name="deviceById(const DeviceId id) const" id="mrw::model::ModelRailway::deviceById_a9e52d28001f2aadb574243aa9d726a9e" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a9e52d28001f2aadb574243aa9d726a9e"/>
 <keyword name="DeviceId()=default" id="mrw::model::DeviceId::DeviceId_a631870f95778416f1992bfcbf453c450" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a631870f95778416f1992bfcbf453c450"/>
