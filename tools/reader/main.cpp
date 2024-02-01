@@ -25,6 +25,7 @@ int main(int argc, char * argv[])
 
 		qInfo("===== Modelrailway: %s", argv[i]);
 		qInfo("Regions:       %3zu", statistics.region_count);
+		qInfo("Devices:       %3zu", statistics.device_count);
 		qInfo("Sections:      %3zu", statistics.section_count);
 		qInfo("Switches:      %3zu", statistics.switch_count);
 		qInfo("Signals:       %3zu", statistics.signal_count);

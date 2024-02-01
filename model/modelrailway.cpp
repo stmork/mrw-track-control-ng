@@ -149,6 +149,11 @@ void ModelRailway::initStatistics()
 			}
 		}
 	}
+
+	model_statistics.device_count =
+		model_statistics.switch_count +
+		model_statistics.section_count +
+		model_statistics.signal_count;
 }
 
 void ModelRailway::info()

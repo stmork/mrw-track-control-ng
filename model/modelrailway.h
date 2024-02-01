@@ -59,6 +59,9 @@ namespace mrw::model
 		size_t region_count       = 0;
 
 		/** Complete Section count. */
+		size_t device_count       = 0;
+
+		/** Complete Section count. */
 		size_t section_count      = 0;
 
 		/** Complete Switch count. */
