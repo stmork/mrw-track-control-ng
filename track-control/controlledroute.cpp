@@ -576,7 +576,8 @@ void ControlledRoute::dump() const
 	Route::dump();
 	qDebug() << "---";
 	collectSignalControllers(controllers);
-	for (SignalControllerProxy * proxy : controllers)
+
+	for (const SignalControllerProxy * proxy : controllers)
 	{
 		qDebug().noquote() << "     " << *proxy;
 	}

@@ -251,9 +251,11 @@ void TestUtil::testDumpHandler()
 #endif
 
 	raise(SIGQUIT);
+	// cppcheck-suppress "unreachableCode"
 	QCOMPARE(count, 1u);
 
 	raise(SIGQUIT);
+	// cppcheck-suppress "unreachableCode"
 	QCOMPARE(count, 2u);
 }
 

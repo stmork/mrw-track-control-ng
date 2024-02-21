@@ -32,7 +32,7 @@ void TestUnknown::testController()
 	QVERIFY(!model->controller(3)->valid());
 
 	std::vector<MrwMessage> messages;
-	QVERIFY_EXCEPTION_THROWN(model->controller(3)->configure(messages);, std::logic_error);
+	QVERIFY_EXCEPTION_THROWN(model->controller(3)->configure(messages), std::logic_error);
 }
 
 void TestUnknown::testModule()
