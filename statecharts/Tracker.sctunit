@@ -3,8 +3,6 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
 //
 
-package mrw.test
-
 testclass TrackerTest for statechart mrw.^statechart.TrackerStatechart
 {
 	@Test

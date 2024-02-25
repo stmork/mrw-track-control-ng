@@ -9,7 +9,7 @@ GeneratorModel for sctunit::cpp11
 	const FOLDER  : string = "test"
 	const COMMON  : string = "test/common"
 
-	test mrw.test.OperatingModeTest
+	test OperatingModeTest
 	{
 		feature LicenseHeader
 		{
@@ -31,7 +31,7 @@ GeneratorModel for sctunit::cpp11
 		}
 	}
 
-	test mrw.test.RouteTest
+	test RouteTest
 	{
 		feature LicenseHeader
 		{
@@ -53,7 +53,7 @@ GeneratorModel for sctunit::cpp11
 		}
 	}
 
-	test mrw.test.SectionTest
+	test SectionTest
 	{
 		feature LicenseHeader
 		{
@@ -75,7 +75,7 @@ GeneratorModel for sctunit::cpp11
 		}
 	}
 
-	test mrw.test.SignalTest
+	test SignalTest
 	{
 		feature LicenseHeader
 		{
@@ -97,7 +97,7 @@ GeneratorModel for sctunit::cpp11
 		}
 	}
 
-	test mrw.test.SignalControllerTest
+	test SignalControllerTest
 	{
 		feature LicenseHeader
 		{
@@ -119,7 +119,7 @@ GeneratorModel for sctunit::cpp11
 		}
 	}
 
-	test mrw.test.SwitchTest
+	test SwitchTest
 	{
 		feature LicenseHeader
 		{
@@ -141,7 +141,7 @@ GeneratorModel for sctunit::cpp11
 		}
 	}
 
-	test mrw.test.TrackerTest
+	test TrackerTest
 	{
 		feature LicenseHeader
 		{
@@ -163,7 +163,7 @@ GeneratorModel for sctunit::cpp11
 		}
 	}
 
-	test mrw.test.ConfigTest
+	test ConfigTest
 	{
 		feature LicenseHeader
 		{
@@ -185,7 +185,7 @@ GeneratorModel for sctunit::cpp11
 		}
 	}
 
-	test mrw.test.UpdateTest
+	test UpdateTest
 	{
 		feature LicenseHeader
 		{

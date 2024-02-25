@@ -7,13 +7,13 @@ package mrw.test
 
 testsuite TestSuite
 {
-	mrw.test.OperatingModeTest,
-	mrw.test.SwitchTest,
-	mrw.test.SignalTest,
-	mrw.test.SignalControllerTest,
-	mrw.test.SectionTest,
-	mrw.test.RouteTest,
-	mrw.test.TrackerTest,
-	mrw.test.ConfigTest,
-	mrw.test.UpdateTest
+	OperatingModeTest,
+	SwitchTest,
+	SignalTest,
+	SignalControllerTest,
+	SectionTest,
+	RouteTest,
+	TrackerTest,
+	ConfigTest,
+	UpdateTest
 }
