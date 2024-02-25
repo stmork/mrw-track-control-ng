@@ -673,7 +673,7 @@
                   <styles xsi:type="notation:TextStyle" xmi:id="_FEvhwYOQEe2AMOmg9j3YNA"/>
                   <styles xsi:type="notation:LineTypeStyle" xmi:id="_FEvhwoOQEe2AMOmg9j3YNA"/>
                   <element xsi:nil="true"/>
-                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_FEvhw4OQEe2AMOmg9j3YNA" x="191" y="714" width="218" height="74"/>
+                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_FEvhw4OQEe2AMOmg9j3YNA" x="191" y="714" width="218" height="89"/>
                 </children>
                 <children xsi:type="notation:Shape" xmi:id="_IbZUgIOQEe2AMOmg9j3YNA" type="Note" fontName="Verdana" description="This is for the last&#xA;section of a route&#xA;which is usually&#xA;turned off" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
                   <children xsi:type="notation:BasicDecorationNode" xmi:id="_IbaioIOQEe2AMOmg9j3YNA" type="DiagramName">
@@ -1132,7 +1132,7 @@
       <styles xsi:type="notation:ArrowStyle" xmi:id="_IbcX0YOQEe2AMOmg9j3YNA"/>
       <styles xsi:type="notation:LineTypeStyle" xmi:id="_IbcX0oOQEe2AMOmg9j3YNA"/>
       <element xsi:nil="true"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_IbcX04OQEe2AMOmg9j3YNA" points="[0, 0, 20, 57]$[0, -6, 20, 51]$[-5, -6, 15, 51]$[-5, -12, 15, 45]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_IbcX04OQEe2AMOmg9j3YNA" points="[-13, 0, 9, 63]$[-13, -18, 9, 45]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_Ibc-4IOQEe2AMOmg9j3YNA" id="(0.46697038724373574,0.7232142857142857)"/>
     </edges>
     <edges xmi:id="_xpBVYIQ-Ee2mDvXw65BbVQ" type="Transition" element="_xo-5IIQ-Ee2mDvXw65BbVQ" source="_1Qc-w4diEe2lxN2RuRdwGg" target="_160uAHlXEe2mtrNlTXAGRw">

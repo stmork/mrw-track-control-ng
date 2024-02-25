@@ -137,7 +137,7 @@
           <styles xsi:type="notation:TextStyle" xmi:id="_1yuysZaHEe2BeMLFaNgocQ"/>
           <styles xsi:type="notation:LineTypeStyle" xmi:id="_1yuyspaHEe2BeMLFaNgocQ"/>
           <element xsi:nil="true"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_1yuys5aHEe2BeMLFaNgocQ" x="232" y="257" width="105" height="59"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_1yuys5aHEe2BeMLFaNgocQ" x="234" y="252" width="105" height="71"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_1i7X8pZpEe2UoL03hwgeFg"/>
       </children>

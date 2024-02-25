@@ -271,7 +271,7 @@
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_dCMFC5zlEe6jk9uYCJG3Rw" name="isHorizontal" booleanValue="true"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_dCMFA5zlEe6jk9uYCJG3Rw" x="149" y="1281" width="131" height="53"/>
         </children>
-        <children xsi:type="notation:Shape" xmi:id="_VR3b8JzoEe6jk9uYCJG3Rw" type="Note" fontName="Verdana" description="Now every node inside the&#xA;bootloader flash loop even&#xA;on hardware ID mismatch.&#xA;Sending a further FLASH_REQ will result in a hardware&#xA;mismatch message or a timeout since the firmware&#xA;does not respond to the flash&#xA;request (bug)." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+        <children xsi:type="notation:Shape" xmi:id="_VR3b8JzoEe6jk9uYCJG3Rw" type="Note" fontName="Verdana" description="Now every node inside the&#xA;bootloader flash loop even&#xA;on hardware ID mismatch.&#xA;Sending a further FLASH_REQ&#xA;will result in a hardware&#xA;mismatch message or a&#xA;timeout since the firmware&#xA;does not respond to the flash&#xA;request (bug)." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
           <children xsi:type="notation:BasicDecorationNode" xmi:id="_VR4qEJzoEe6jk9uYCJG3Rw" type="DiagramName">
             <element xsi:nil="true"/>
           </children>
@@ -281,7 +281,7 @@
           <styles xsi:type="notation:TextStyle" xmi:id="_VR3b8ZzoEe6jk9uYCJG3Rw"/>
           <styles xsi:type="notation:LineTypeStyle" xmi:id="_VR3b8pzoEe6jk9uYCJG3Rw"/>
           <element xsi:nil="true"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_VR3b85zoEe6jk9uYCJG3Rw" x="62" y="665" width="212" height="149"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_VR3b85zoEe6jk9uYCJG3Rw" x="80" y="665" width="204" height="176"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_A-l-8IkBEe2fK-OwCcYY0Q"/>
       </children>
