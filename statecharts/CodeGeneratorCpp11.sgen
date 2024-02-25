@@ -6,7 +6,7 @@
 GeneratorModel for yakindu::cpp11
 {
 	const PROJECT : string = "statecharts"
-	const FOLDER  : string = "test"
+	const FOLDER  : string = "test/src-gen"
 	const COMMON :  string = "test/common"
 
 	statechart mrw.statechart.OperatingModeStatechart
@@ -35,7 +35,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER + "/OperatingMode"
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -72,7 +72,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER + "/Section"
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -109,7 +109,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER + "/Switch"
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -146,7 +146,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER + "/Signal"
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -183,7 +183,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER + "/SignalController"
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -220,7 +220,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER + "/Route"
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -257,7 +257,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER + "/Tracker"
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -294,7 +294,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER + "/Config"
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -331,7 +331,7 @@ GeneratorModel for yakindu::cpp11
 		feature Outlet
 		{
 			targetProject       = PROJECT
-			targetFolder        = FOLDER + "/Update"
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 

@@ -64,9 +64,8 @@ config.depends         = util can model statecharts
 update.depends         = util can model statecharts
 study.depends          = test
 track-control.depends  = util can model statecharts ctrl ui log
-test-sct.depends       = test
 
-QMAKE_CLEAN           += qtest*.xml *.log
+QMAKE_CLEAN           += qtest*.xml gtest*.xml *.log
 
 #####################################################################
 #
@@ -136,6 +135,9 @@ valgrind.commands = valgrind\
 	--child-silent-after-fork=no --trace-children=no --gen-suppressions=no\
 	--xml=yes --xml-file=valgrind.xml test/MRW-Test -platform offscreen
 
+# NOTE: If you want to create suppression reports, you have to change the
+# --xml and --gen-suppressions.
+
 QMAKE_EXTRA_TARGETS += valgrind
 QMAKE_CLEAN         += valgrind.xml
 
@@ -161,7 +163,7 @@ LCOV_DIR = $$(PWD)/lcov-out
 lcov.commands += lcov -c --no-external -d $$(PWD) -o coverage.info\
 	--exclude \"$$(PWD)/*/moc_*\"\
 	--exclude \"$$(PWD)/statecharts/test/common/*\"\
-	--exclude \"$$(PWD)/statecharts/test/*/*Test.cpp\"\
+	--exclude \"$$(PWD)/statecharts/test/src-gen/*Test.cpp\"\
 	--exclude \"$$(PWD)/test/*\";
 lcov.commands += genhtml coverage.info -s --num-spaces 4 --legend -t \"MRW-NG Test Coverage\" --output-directory $$LCOV_DIR --rc genhtml_med_limit=50
 

@@ -4,13 +4,7 @@
    match-leak-kinds: definite
    fun:_Znwm
    obj:/usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqoffscreen.so
-   obj:/usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqoffscreen.so
-   fun:_ZN27QPlatformIntegrationFactory6createERK7QStringRK11QStringListRiPPcS2_
-   fun:_ZN22QGuiApplicationPrivate25createPlatformIntegrationEv
-   fun:_ZN22QGuiApplicationPrivate21createEventDispatcherEv
-   fun:_ZN23QCoreApplicationPrivate4initEv
-   fun:_ZN22QGuiApplicationPrivate4initEv
-   fun:_ZN19QApplicationPrivate4initEv
+   ...
    fun:main
 }
 {
@@ -18,15 +12,26 @@
    Memcheck:Leak
    match-leak-kinds: definite
    fun:malloc
-   obj:/usr/lib/x86_64-linux-gnu/libfontconfig.so.1.12.0
-   obj:/usr/lib/x86_64-linux-gnu/libfontconfig.so.1.12.0
-   obj:/usr/lib/x86_64-linux-gnu/libfontconfig.so.1.12.0
-   obj:/usr/lib/x86_64-linux-gnu/libfontconfig.so.1.12.0
-   obj:/lib/x86_64-linux-gnu/libexpat.so.1.6.11
-   obj:/lib/x86_64-linux-gnu/libexpat.so.1.6.11
-   obj:/lib/x86_64-linux-gnu/libexpat.so.1.6.11
-   obj:/lib/x86_64-linux-gnu/libexpat.so.1.6.11
+   ...
    fun:XML_ParseBuffer
-   obj:/usr/lib/x86_64-linux-gnu/libfontconfig.so.1.12.0
-   obj:/usr/lib/x86_64-linux-gnu/libfontconfig.so.1.12.0
+}
+{
+   qt5_ibus
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+   fun:_ZN7QThread5startENS_8PriorityE
+   fun:_ZN15QDBusConnection12connectToBusERK7QStringS2_
+   obj:/usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+   obj:/usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+   obj:/usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+   obj:/usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+   fun:_ZN28QPlatformInputContextFactory6createERK7QString
+   fun:_ZN28QPlatformInputContextFactory6createEv
+   obj:/usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqoffscreen.so
 }

@@ -5,11 +5,8 @@
 
 VERSION          = 2.1
 QT              += core xml serialbus
-CONFIG          += c++17
-QMAKE_CXXFLAGS  += -Wextra -pedantic -Wno-deprecated-copy -Werror
-QMAKE_CXXFLAGS  += -fstack-protector-strong
-QMAKE_CXXFLAGS  += -Wshadow
-QMAKE_CXXFLAGS  += -Wsuggest-override
+
+include (flags.pri)
 
 INCLUDEPATH      = $$PWD
 

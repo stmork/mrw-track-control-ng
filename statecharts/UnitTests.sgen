@@ -6,7 +6,7 @@
 GeneratorModel for sctunit::cpp11
 {
 	const PROJECT : string = "statecharts"
-	const FOLDER  : string = "test"
+	const FOLDER  : string = "test/src-gen"
 	const COMMON  : string = "test/common"
 
 	test OperatingModeTest
@@ -18,8 +18,8 @@ GeneratorModel for sctunit::cpp11
 
 		feature Outlet
 		{
-			targetProject = PROJECT
-			targetFolder  = FOLDER + "/OperatingMode"
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -40,8 +40,8 @@ GeneratorModel for sctunit::cpp11
 
 		feature Outlet
 		{
-			targetProject = PROJECT
-			targetFolder  = FOLDER + "/Route"
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -62,8 +62,8 @@ GeneratorModel for sctunit::cpp11
 
 		feature Outlet
 		{
-			targetProject = PROJECT
-			targetFolder  = FOLDER + "/Section"
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -84,8 +84,8 @@ GeneratorModel for sctunit::cpp11
 
 		feature Outlet
 		{
-			targetProject = PROJECT
-			targetFolder  = FOLDER + "/Signal"
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -106,8 +106,8 @@ GeneratorModel for sctunit::cpp11
 
 		feature Outlet
 		{
-			targetProject = PROJECT
-			targetFolder  = FOLDER + "/SignalController"
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -128,8 +128,8 @@ GeneratorModel for sctunit::cpp11
 
 		feature Outlet
 		{
-			targetProject = PROJECT
-			targetFolder  = FOLDER + "/Switch"
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -150,8 +150,8 @@ GeneratorModel for sctunit::cpp11
 
 		feature Outlet
 		{
-			targetProject = PROJECT
-			targetFolder  = FOLDER + "/Tracker"
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -172,8 +172,8 @@ GeneratorModel for sctunit::cpp11
 
 		feature Outlet
 		{
-			targetProject = PROJECT
-			targetFolder  = FOLDER + "/Config"
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
@@ -194,8 +194,8 @@ GeneratorModel for sctunit::cpp11
 
 		feature Outlet
 		{
-			targetProject = PROJECT
-			targetFolder  = FOLDER + "/Update"
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
 			libraryTargetFolder = COMMON
 		}
 
