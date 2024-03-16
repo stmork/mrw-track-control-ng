@@ -1,25 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,129,77,155"/>
-<area shape="rect" id="Node000001" href="$df/db9/classmrw_1_1ui_1_1BaseWidget.html" title="The BaseWidget gives basic funtionallity to all derived Widget classes." alt="" coords="125,129,263,155"/>
-<area shape="poly" id="edge68_Node000000_Node000001" title=" " alt="" coords="92,140,124,140,124,145,92,145"/>
-<area shape="rect" id="Node000002" href="$de/d98/classmrw_1_1ui_1_1BarWidget.html" title="The BarWidget displays all important colors needed to show all necessary signal and switch states." alt="" coords="330,5,458,31"/>
-<area shape="poly" id="edge69_Node000001_Node000002" title=" " alt="" coords="215,116,257,77,310,40,334,29,336,34,312,44,260,81,219,120"/>
-<area shape="rect" id="Node000003" href="$d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html" title="The CircleLiveWidget shows a rotating bar which represents the responsiveness of the application." alt="" coords="311,55,477,80"/>
-<area shape="poly" id="edge70_Node000001_Node000003" title=" " alt="" coords="235,120,310,89,342,78,344,83,312,94,237,125"/>
-<area shape="rect" id="Node000004" href="$d8/d73/classmrw_1_1ui_1_1ClockWidget.html" title="The ClockWidget displays the actual time." alt="" coords="324,104,465,130"/>
-<area shape="poly" id="edge71_Node000001_Node000004" title=" " alt="" coords="278,129,323,123,323,128,278,134"/>
-<area shape="rect" id="Node000005" href="$db/d76/classmrw_1_1ui_1_1ControllerWidget.html" title="This is the base class for all derived widget classes which follow the MVC paradigma." alt="" coords="313,153,476,179"/>
-<area shape="poly" id="edge72_Node000001_Node000005" title=" " alt="" coords="279,150,312,154,312,159,278,155"/>
-<area shape="rect" id="Node000010" href="$dc/d55/classmrw_1_1ui_1_1OpModeWidget.html" title="The OpModeWidget displays the operational mode consisting of a single upper case letter." alt="" coords="316,203,473,228"/>
-<area shape="poly" id="edge77_Node000001_Node000010" title=" " alt="" coords="238,159,312,189,344,200,343,205,310,194,236,164"/>
-<area shape="rect" id="Node000011" href="$d6/da1/classmrw_1_1ui_1_1StationWidget.html" title="The StationWidget displays the region title." alt="" coords="320,252,469,278"/>
-<area shape="poly" id="edge78_Node000001_Node000011" title=" " alt="" coords="219,164,260,202,312,239,337,249,335,254,310,243,257,206,215,168"/>
-<area shape="rect" id="Node000006" href="$d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html" title="This class intends to draw all states of a mrw::model::DoubleCrossSwitch which includes:" alt="" coords="530,63,713,104"/>
-<area shape="poly" id="edge73_Node000005_Node000006" title=" " alt="" coords="461,146,476,140,500,127,524,113,552,102,554,107,526,118,503,131,478,145,463,151"/>
-<area shape="rect" id="Node000007" href="$dc/d9b/classmrw_1_1ui_1_1RailWidget.html" title="The RailWidget displays a simple mrw::model::Rail without any active part like switches or signals." alt="" coords="556,128,687,154"/>
-<area shape="poly" id="edge74_Node000005_Node000007" title=" " alt="" coords="491,153,555,145,556,151,491,158"/>
-<area shape="rect" id="Node000008" href="$d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html" title="This class intends to draw all states of a mrw::model::RegularSwitch which includes:" alt="" coords="525,177,718,203"/>
-<area shape="poly" id="edge75_Node000005_Node000008" title=" " alt="" coords="491,174,525,177,525,183,491,179"/>
-<area shape="rect" id="Node000009" href="$d8/df9/classmrw_1_1ui_1_1SignalWidget.html" title="This class intends to draw all states of a combination of mrw::model::Signal instances." alt="" coords="549,227,694,252"/>
-<area shape="poly" id="edge76_Node000005_Node000009" title=" " alt="" coords="462,182,478,188,503,201,526,213,559,224,557,229,524,218,500,205,476,193,461,187"/>
+<area shape="rect" id="Node000000" href="$de/d2a/classsc_1_1StatemachineInterface.html" title=" " alt="" coords="5,5,178,31"/>
+<area shape="rect" id="Node000001" href="$d8/dd2/classsc_1_1EventDrivenInterface.html" title=" " alt="" coords="226,5,388,31"/>
+<area shape="poly" id="edge78_Node000000_Node000001" title=" " alt="" coords="193,16,225,16,225,21,193,21"/>
 </map>

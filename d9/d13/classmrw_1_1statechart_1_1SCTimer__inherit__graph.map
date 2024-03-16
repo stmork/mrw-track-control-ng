@@ -1,5 +1,0 @@
-<map id="mrw::statechart::SCTimer" name="mrw::statechart::SCTimer">
-<area shape="rect" id="Node000001" title="This class represents one single Yakindu SCT timer." alt="" coords="5,79,173,105"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="57,5,121,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,46,92,79,86,79,86,46"/>
-</map>
