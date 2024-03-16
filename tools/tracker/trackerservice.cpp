@@ -17,9 +17,8 @@ using namespace mrw::statechart;
 
 TrackerService::TrackerService(
 	ModelRepository & repo,
-	QObject           *           parent) :
-	MrwBusService(repo.interface(), repo.plugin(), parent),
-	statechart(nullptr)
+	QObject     *     parent) :
+	MrwBusService(repo.interface(), repo.plugin(), parent)
 {
 	model = repo;
 

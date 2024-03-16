@@ -14,6 +14,7 @@
 #include <can/mrwbusservice.h>
 #include <model/modelrepository.h>
 #include <model/route.h>
+#include <statecharts/timerservice.h>
 #include <statecharts/TrackerStatechart.h>
 
 class TrackerService :
@@ -22,7 +23,7 @@ class TrackerService :
 {
 	Q_OBJECT
 
-	mrw::statechart::TrackerStatechart          statechart;
+	mrw::statechart::QtStatechart<mrw::statechart::TrackerStatechart> statechart;
 
 	mrw::model::ModelRailway          *         model = nullptr;
 	mrw::model::Route::SectionTrack             track;
