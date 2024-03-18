@@ -9,11 +9,11 @@ jobs:
          - run: sudo apt update -y
          - name: Install needed components
            run: sudo apt install -y libqt5serialbus5-dev cppcheck libgtest-dev
-         - name: Install Google Test
-           run: sudo bin/install-gtest.sh
          - name: QMake
-           run: qmake
+           run: qmake -r
          - name: Build
-           run: make
+           run: make -j `nproc`
          - name: CPP-Check
            run: make cppcheck
+         - name: SCT Unit Tests
+           run: make sct-unit
