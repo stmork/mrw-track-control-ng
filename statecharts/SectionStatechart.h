@@ -20,7 +20,7 @@ namespace mrw
 }
 
 
-#include <deque>
+#include <queue>
 #include "common/sc_types.h"
 #include "common/sc_statemachine.h"
 #include "common/sc_eventdriven.h"
@@ -110,42 +110,23 @@ namespace mrw
 			static constexpr const sc::integer scvi_main_region_Failed {0};
 			static constexpr const sc::integer scvi_main_region_Wait_for_Start {0};
 
-			/*! Enumeration of all events which are consumed. */
-			enum class Event
+			class Event
 			{
-				NO_EVENT,
-				enable,
-				disable,
-				clear,
-				start,
-				relaisResponse,
-				stateResponse,
-				failed,
-				next,
-				unlock,
-				_te0_main_region_Init_,
-				_te1_main_region_Operating_Processing_Locked_Route_active_Waiting_,
-				_te2_main_region_Operating_Processing_Pending_,
-				Internal_local_leave
-			};
+				std::function<void(void)> event_callback;
 
-			class EventInstance
-			{
 			public:
-				explicit  EventInstance(Event id) noexcept : eventId(id) {}
-				virtual ~EventInstance() = default;
-				const Event eventId;
-			};
-			template <typename T>
-			class EventInstanceWithValue : public EventInstance
-			{
-			public:
-				explicit  EventInstanceWithValue(Event id, T val) noexcept :
-					EventInstance(id),
-					value(val)
-				{}
-				virtual ~EventInstanceWithValue() = default;
-				const T value;
+				Event() = delete;
+				explicit  Event(std::function<void(void)> && func) noexcept :
+					event_callback(func)
+				{
+				}
+
+				virtual ~Event() = default;
+
+				inline void operator()() const
+				{
+					event_callback();
+				}
 			};
 
 
@@ -302,13 +283,11 @@ namespace mrw
 		protected:
 
 
-			std::deque<std::unique_ptr<EventInstance>> incomingEventQueue;
+			std::queue<Event> incomingEventQueue;
 
-			std::deque<std::unique_ptr<EventInstance>> internalEventQueue;
+			std::queue<Event> internalEventQueue;
 
-			std::unique_ptr<EventInstance> getNextEvent() noexcept;
-
-			bool dispatchEvent(std::unique_ptr<EventInstance> event) noexcept;
+			bool dispatchEvent() noexcept;
 
 
 
