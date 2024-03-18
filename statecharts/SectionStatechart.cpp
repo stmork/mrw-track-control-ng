@@ -57,208 +57,134 @@ namespace mrw
 
 
 
-		std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance> SectionStatechart::getNextEvent() noexcept
+		bool SectionStatechart::dispatchEvent() noexcept
 		{
-			std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance> nextEvent = 0;
-
 			if (!internalEventQueue.empty())
 			{
-				nextEvent = std::move(internalEventQueue.front());
-				internalEventQueue.pop_front();
+				const Event & event = internalEventQueue.front();
+
+				event();
+				internalEventQueue.pop();
+				return true;
 			}
 			else if (!incomingEventQueue.empty())
 			{
-				nextEvent = std::move(incomingEventQueue.front());
-				incomingEventQueue.pop_front();
+				const Event & event = incomingEventQueue.front();
+
+				event();
+				incomingEventQueue.pop();
+				return true;
 			}
-
-			return nextEvent;
-
+			return false;
 		}
-
-
-		template<typename EWV, typename EV>
-		std::unique_ptr<EWV> cast_event_pointer_type (std::unique_ptr<EV> && event)
-		{
-			return std::unique_ptr<EWV> {static_cast<EWV *>(event.release())};
-		}
-
-		bool SectionStatechart::dispatchEvent(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance> event) noexcept
-		{
-			if (event == nullptr)
-			{
-				return false;
-			}
-
-			switch (event->eventId)
-			{
-			case mrw::statechart::SectionStatechart::Event::enable:
-				{
-					std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> >(std::move(event));
-
-					if (e != 0)
-					{
-						enable_value
-							= e->value;
-						enable_raised = true;
-					}
-					break;
-				}
-			case mrw::statechart::SectionStatechart::Event::disable:
-				{
-					disable_raised = true;
-					break;
-				}
-			case mrw::statechart::SectionStatechart::Event::clear:
-				{
-					clear_raised = true;
-					break;
-				}
-			case mrw::statechart::SectionStatechart::Event::start:
-				{
-					start_raised = true;
-					break;
-				}
-			case mrw::statechart::SectionStatechart::Event::relaisResponse:
-				{
-					relaisResponse_raised = true;
-					break;
-				}
-			case mrw::statechart::SectionStatechart::Event::stateResponse:
-				{
-					std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> >(std::move(event));
-
-					if (e != 0)
-					{
-						stateResponse_value
-							= e->value;
-						stateResponse_raised = true;
-					}
-					break;
-				}
-			case mrw::statechart::SectionStatechart::Event::failed:
-				{
-					failed_raised = true;
-					break;
-				}
-			case mrw::statechart::SectionStatechart::Event::next:
-				{
-					next_raised = true;
-					break;
-				}
-			case mrw::statechart::SectionStatechart::Event::unlock:
-				{
-					unlock_raised = true;
-					break;
-				}
-			case mrw::statechart::SectionStatechart::Event::Internal_local_leave:
-				{
-					local_leave_raised = true;
-					break;
-				}
-
-
-			case mrw::statechart::SectionStatechart::Event::_te0_main_region_Init_:
-			case mrw::statechart::SectionStatechart::Event::_te1_main_region_Operating_Processing_Locked_Route_active_Waiting_:
-			case mrw::statechart::SectionStatechart::Event::_te2_main_region_Operating_Processing_Pending_:
-				{
-					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::SectionStatechart::Event::_te0_main_region_Init_)] = true;
-					break;
-				}
-			default:
-				//pointer got out of scope
-				return false;
-			}
-			//pointer got out of scope
-			return true;
-		}
-
 
 		/*! Slot for the in event 'enable' that is defined in the default interface scope. */
-		void mrw::statechart::SectionStatechart::enable(bool enable_)
+		void SectionStatechart::enable(bool enable_)
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>>( new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::enable, enable_)))
-			;
+			incomingEventQueue.emplace([this, enable_]()
+			{
+				enable_value  = enable_;
+				enable_raised = true;
+			});
 			runCycle();
 		}
 
 
 		/*! Slot for the in event 'disable' that is defined in the default interface scope. */
-		void mrw::statechart::SectionStatechart::disable()
+		void SectionStatechart::disable()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::disable)))
-			;
+			incomingEventQueue.emplace([this]()
+			{
+				disable_raised = true;
+			});
 			runCycle();
 		}
 
 
 		/*! Slot for the in event 'clear' that is defined in the default interface scope. */
-		void mrw::statechart::SectionStatechart::clear()
+		void SectionStatechart::clear()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::clear)))
-			;
+			incomingEventQueue.emplace([this]()
+			{
+				clear_raised = true;
+			});
 			runCycle();
 		}
 
 
 		/*! Slot for the in event 'start' that is defined in the default interface scope. */
-		void mrw::statechart::SectionStatechart::start()
+		void SectionStatechart::start()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::start)))
-			;
+			incomingEventQueue.emplace([this]()
+			{
+				start_raised = true;
+			});
 			runCycle();
 		}
 
 
 		/*! Slot for the in event 'relaisResponse' that is defined in the default interface scope. */
-		void mrw::statechart::SectionStatechart::relaisResponse()
+		void SectionStatechart::relaisResponse()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::relaisResponse)))
-			;
+			incomingEventQueue.emplace([this]()
+			{
+				relaisResponse_raised = true;
+			});
 			runCycle();
 		}
 
 
 		/*! Slot for the in event 'stateResponse' that is defined in the default interface scope. */
-		void mrw::statechart::SectionStatechart::stateResponse(bool stateResponse_)
+		void SectionStatechart::stateResponse(bool stateResponse_)
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>>( new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::stateResponse, stateResponse_)))
-			;
+			incomingEventQueue.emplace([this, stateResponse_]()
+			{
+				stateResponse_value  = stateResponse_;
+				stateResponse_raised = true;
+			});
 			runCycle();
 		}
 
 
 		/*! Slot for the in event 'failed' that is defined in the default interface scope. */
-		void mrw::statechart::SectionStatechart::failed()
+		void SectionStatechart::failed()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::failed)))
-			;
+			incomingEventQueue.emplace([this]()
+			{
+				failed_raised = true;
+			});
 			runCycle();
 		}
 
 
 		/*! Slot for the in event 'next' that is defined in the default interface scope. */
-		void mrw::statechart::SectionStatechart::next()
+		void SectionStatechart::next()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::next)))
-			;
+			incomingEventQueue.emplace([this]()
+			{
+				next_raised = true;
+			});
 			runCycle();
 		}
 
 
 		/*! Slot for the in event 'unlock' that is defined in the default interface scope. */
-		void mrw::statechart::SectionStatechart::unlock()
+		void SectionStatechart::unlock()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::unlock)))
-			;
+			incomingEventQueue.emplace([this]()
+			{
+				unlock_raised = true;
+			});
 			runCycle();
 		}
 
 
-		void mrw::statechart::SectionStatechart::local_leave()
+		void SectionStatechart::local_leave()
 		{
-			internalEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::Internal_local_leave)))
-			;
+			internalEventQueue.emplace([this]()
+			{
+				local_leave_raised = true;
+			});
 		}
 
 
@@ -309,11 +235,13 @@ namespace mrw
 		{
 			if (evid < timeEventsCount)
 			{
-				incomingEventQueue.push_back(std::unique_ptr< EventInstance>(new EventInstance(static_cast<mrw::statechart::SectionStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::SectionStatechart::Event::_te0_main_region_Init_)))));
+				incomingEventQueue.emplace([this, evid]()
+				{
+					timeEvents[evid] = true;
+				});
 				runCycle();
 			}
 		}
-
 
 		bool SectionStatechart::isStateActive(State state) const noexcept
 		{
@@ -2366,7 +2294,7 @@ namespace mrw
 				return;
 			}
 			isExecuting = true;
-			dispatchEvent(getNextEvent());
+			dispatchEvent();
 			do
 			{
 				do
@@ -2378,7 +2306,7 @@ namespace mrw
 				clearInEvents();
 				clearInternalEvents();
 			}
-			while (dispatchEvent(getNextEvent()));
+			while (dispatchEvent());
 			isExecuting = false;
 		}
 

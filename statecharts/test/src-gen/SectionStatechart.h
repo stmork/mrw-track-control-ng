@@ -20,7 +20,8 @@ namespace mrw
 }
 
 
-#include <deque>
+#include <queue>
+#include <functional>
 #include "../common/sc_types.h"
 #include "../common/sc_statemachine.h"
 #include "../common/sc_eventdriven.h"
@@ -42,9 +43,6 @@ namespace mrw
 			SectionStatechart() noexcept;
 
 			virtual ~SectionStatechart();
-
-
-
 			/*! Enumeration of all states. */
 			enum class State
 			{
@@ -106,43 +104,26 @@ namespace mrw
 			static constexpr const sc::integer scvi_main_region_Failed {0};
 			static constexpr const sc::integer scvi_main_region_Wait_for_Start {0};
 
-			/*! Enumeration of all events which are consumed. */
-			enum class Event
+			class Event
 			{
-				NO_EVENT,
-				enable,
-				disable,
-				clear,
-				start,
-				relaisResponse,
-				stateResponse,
-				failed,
-				next,
-				unlock,
-				_te0_main_region_Init_,
-				_te1_main_region_Operating_Processing_Locked_Route_active_Waiting_,
-				_te2_main_region_Operating_Processing_Pending_,
-				Internal_local_leave
+				std::function<void(void)> event_callback;
+
+			public:
+				Event() = delete;
+				explicit  Event(std::function<void(void)> && func) noexcept :
+					event_callback(func)
+				{
+				}
+
+				virtual ~Event() = default;
+
+				inline void operator()() const
+				{
+					event_callback();
+				}
 			};
 
-			class EventInstance
-			{
-			public:
-				explicit  EventInstance(Event id) noexcept : eventId(id) {}
-				virtual ~EventInstance() = default;
-				const Event eventId;
-			};
-			template <typename T>
-			class EventInstanceWithValue : public EventInstance
-			{
-			public:
-				explicit  EventInstanceWithValue(Event id, T val) noexcept :
-					EventInstance(id),
-					value(val)
-				{}
-				virtual ~EventInstanceWithValue() = default;
-				const T value;
-			};
+
 			/*! Raises the in event 'enable' of default interface scope. */
 			void raiseEnable(bool enable_);
 			/*! Raises the in event 'disable' of default interface scope. */
@@ -278,13 +259,11 @@ namespace mrw
 		protected:
 
 
-			std::deque<EventInstance *> incomingEventQueue;
+			std::queue<Event> incomingEventQueue;
 
-			std::deque<EventInstance *> internalEventQueue;
+			std::queue<Event> internalEventQueue;
 
-			EventInstance * getNextEvent() noexcept;
-
-			bool dispatchEvent(EventInstance * event) noexcept;
+			bool dispatchEvent() noexcept;
 
 
 
