@@ -12,13 +12,14 @@ HEADERS += \
 	filelogger.h \
 	loggerbase.h \
 	loggerservice.h \
-	stdlogger.h
+	stdlogger.h \
+	syslogger.h
 
 SOURCES += \
 	filelogger.cpp \
 	loggerbase.cpp \
 	loggerservice.cpp \
-	stdlogger.cpp
+	stdlogger.cpp \
+	syslogger.cpp
 
 QMAKE_CLEAN  += $$TARGET
-#

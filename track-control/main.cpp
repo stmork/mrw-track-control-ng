@@ -14,6 +14,7 @@
 #include <model/modelrepository.h>
 #include <log/stdlogger.h>
 #include <log/filelogger.h>
+#include <log/syslogger.h>
 #include <log/loggerservice.h>
 
 #include "mainwindow.h"
@@ -28,9 +29,11 @@ int main(int argc, char * argv[])
 	QApplication             app(argc, argv);
 	StdLogger                std_logger;
 	TimestampedFileLogger    file_logger("track-control");
+	SysLogger                sys_logger("track-control");
 
 	LoggerService::instance().registerLogger(&std_logger);
 	LoggerService::instance().registerLogger(&file_logger);
+//	LoggerService::instance().registerLogger(&sys_logger);
 
 	ModelRepository          repo(ModelRepository::proposeModelName(), true);
 
