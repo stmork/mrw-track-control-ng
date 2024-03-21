@@ -1,46 +1,46 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="Node000000" href="$d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing." alt="" coords="183,63,317,88"/>
 <area shape="rect" id="Node000001" href="$d0/d3c/classmrw_1_1model_1_1Light.html" title="This class represents a LED or bulb light source which can only simply turn on or off the light." alt="" coords="412,5,534,31"/>
-<area shape="poly" id="edge14_Node000000_Node000001" title=" " alt="" coords="317,56,419,29,420,34,318,61"/>
+<area shape="poly" id="edge15_Node000000_Node000001" title=" " alt="" coords="317,56,419,29,420,34,318,61"/>
 <area shape="rect" id="Node000003" href="$d6/d71/classmrw_1_1model_1_1LightSignal.html" title="This class represents the handling of several light signals." alt="" coords="620,73,779,99"/>
-<area shape="poly" id="edge16_Node000000_Node000003" title=" " alt="" coords="332,75,620,82,620,87,332,80"/>
+<area shape="poly" id="edge17_Node000000_Node000003" title=" " alt="" coords="332,75,620,82,620,87,332,80"/>
 <area shape="rect" id="Node000013" href="$de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection." alt="" coords="404,171,541,196"/>
-<area shape="poly" id="edge17_Node000000_Node000013" title=" " alt="" coords="283,96,331,126,386,156,418,168,416,173,384,161,328,131,280,100"/>
+<area shape="poly" id="edge18_Node000000_Node000013" title=" " alt="" coords="283,96,331,126,386,156,418,168,416,173,384,161,328,131,280,100"/>
 <area shape="rect" id="Node000006" href="$d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html" title="This base class represents the connection of an inductive actuator Device to the corresponding Switch..." alt="" coords="385,106,560,147"/>
-<area shape="poly" id="edge18_Node000000_Node000006" title=" " alt="" coords="325,90,385,104,384,109,323,95"/>
+<area shape="poly" id="edge19_Node000000_Node000006" title=" " alt="" coords="325,90,385,104,384,109,323,95"/>
 <area shape="rect" id="Node000002" href="$dd/d28/classmrw_1_1model_1_1ProfileLight.html" title="This class represents a LED or bulb light source which can light up using different light up profiles..." alt="" coords="620,5,779,31"/>
-<area shape="poly" id="edge15_Node000001_Node000002" title=" " alt="" coords="549,16,620,16,620,21,549,21"/>
+<area shape="poly" id="edge16_Node000001_Node000002" title=" " alt="" coords="549,16,620,16,620,21,549,21"/>
 <area shape="rect" id="Node000007" href="$df/db7/classmrw_1_1model_1_1AbstractSwitch.html" title="This class represents any representation of any switch occuring on a model railway." alt="" coords="608,205,791,231"/>
-<area shape="poly" id="edge19_Node000006_Node000007" title=" " alt="" coords="547,150,561,156,609,177,668,202,666,207,607,182,559,161,545,155"/>
+<area shape="poly" id="edge20_Node000006_Node000007" title=" " alt="" coords="547,150,561,156,609,177,668,202,666,207,607,182,559,161,545,155"/>
 <area shape="rect" id="Node000005" href="$d4/d8a/classmrw_1_1model_1_1FormSignal.html" title="This class represents the handling of several form signals." alt="" coords="620,141,779,167"/>
-<area shape="poly" id="edge22_Node000006_Node000005" title=" " alt="" coords="576,136,620,142,619,147,575,142"/>
+<area shape="poly" id="edge23_Node000006_Node000005" title=" " alt="" coords="576,136,620,142,619,147,575,142"/>
 <area shape="rect" id="Node000008" href="$df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html" title="This RailPart represents a double cross switch with four connectors." alt="" coords="839,181,1046,207"/>
-<area shape="poly" id="edge20_Node000007_Node000008" title=" " alt="" coords="806,205,838,202,838,207,807,210"/>
+<area shape="poly" id="edge21_Node000007_Node000008" title=" " alt="" coords="806,205,838,202,838,207,807,210"/>
 <area shape="rect" id="Node000009" href="$d5/d3b/classmrw_1_1model_1_1RegularSwitch.html" title="This class represents a simple switch which divides a rail into two rails." alt="" coords="854,231,1031,256"/>
-<area shape="poly" id="edge21_Node000007_Node000009" title=" " alt="" coords="806,227,853,232,853,237,806,232"/>
+<area shape="poly" id="edge22_Node000007_Node000009" title=" " alt="" coords="806,227,853,232,853,237,806,232"/>
 <area shape="rect" id="Node000012" href="$db/d4f/classmrw_1_1model_1_1Position.html" title="This class stores the position of the controlling widget onto the GUI." alt="" coords="180,195,320,220"/>
-<area shape="poly" id="edge26_Node000012_Node000013" title=" " alt="" coords="335,196,403,188,404,194,335,201"/>
+<area shape="poly" id="edge27_Node000012_Node000013" title=" " alt="" coords="335,196,403,188,404,194,335,201"/>
 <area shape="rect" id="Node000010" href="$d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:" alt="" coords="403,269,542,295"/>
-<area shape="poly" id="edge23_Node000012_Node000010" title=" " alt="" coords="322,223,338,229,362,243,386,256,416,266,415,271,384,261,360,247,336,234,320,228"/>
+<area shape="poly" id="edge24_Node000012_Node000010" title=" " alt="" coords="322,223,338,229,362,243,386,256,416,266,415,271,384,261,360,247,336,234,320,228"/>
 <area shape="rect" id="Node000004" href="$db/d9c/classmrw_1_1model_1_1Signal.html" title="This class represents all Signal variants." alt="" coords="408,220,537,246"/>
-<area shape="poly" id="edge27_Node000012_Node000004" title=" " alt="" coords="336,215,408,223,407,228,335,220"/>
-<area shape="poly" id="edge24_Node000010_Node000007" title=" " alt="" coords="537,262,560,256,652,229,653,234,561,261,538,267"/>
+<area shape="poly" id="edge28_Node000012_Node000004" title=" " alt="" coords="336,215,408,223,407,228,335,220"/>
+<area shape="poly" id="edge25_Node000010_Node000007" title=" " alt="" coords="537,262,560,256,652,229,653,234,561,261,538,267"/>
 <area shape="rect" id="Node000011" href="$db/d26/classmrw_1_1model_1_1Rail.html" title="This class represents a simple rail with two connectors to other RailParts." alt="" coords="642,269,757,295"/>
-<area shape="poly" id="edge25_Node000010_Node000011" title=" " alt="" coords="558,280,641,280,641,285,558,285"/>
-<area shape="poly" id="edge29_Node000004_Node000003" title=" " alt="" coords="550,212,559,207,575,188,583,169,590,148,606,127,631,110,656,97,659,102,633,114,610,131,595,151,588,171,580,191,562,211,553,217"/>
-<area shape="poly" id="edge28_Node000004_Node000005" title=" " alt="" coords="540,213,559,206,666,165,668,170,561,211,541,218"/>
+<area shape="poly" id="edge26_Node000010_Node000011" title=" " alt="" coords="558,280,641,280,641,285,558,285"/>
+<area shape="poly" id="edge30_Node000004_Node000003" title=" " alt="" coords="550,212,559,207,575,188,583,169,590,148,606,127,631,110,656,97,659,102,633,114,610,131,595,151,588,171,580,191,562,211,553,217"/>
+<area shape="poly" id="edge29_Node000004_Node000005" title=" " alt="" coords="540,213,559,206,666,165,668,170,561,211,541,218"/>
 <area shape="rect" id="Node000014" href="$d0/d55/classmrw_1_1util_1_1String.html" title="This class is a unique way to create a std::string from any binary data representation." alt="" coords="5,319,115,344"/>
-<area shape="poly" id="edge37_Node000014_Node000013" title=" " alt="" coords="68,303,82,272,102,238,128,205,161,180,194,166,229,157,300,151,368,157,424,168,423,173,367,162,300,157,230,162,196,171,164,184,132,209,106,241,87,275,73,305"/>
+<area shape="poly" id="edge38_Node000014_Node000013" title=" " alt="" coords="68,303,82,272,102,238,128,205,161,180,194,166,229,157,300,151,368,157,424,168,423,173,367,162,300,157,230,162,196,171,164,184,132,209,106,241,87,275,73,305"/>
 <area shape="rect" id="Node000015" href="$d1/d80/classmrw_1_1can_1_1MrwMessage.html" title="This class represents a CAN bus frame in model railway manner." alt="" coords="171,244,329,270"/>
-<area shape="poly" id="edge30_Node000014_Node000015" title=" " alt="" coords="97,308,162,278,194,268,195,273,164,283,99,313"/>
+<area shape="poly" id="edge31_Node000014_Node000015" title=" " alt="" coords="97,308,162,278,194,268,195,273,164,283,99,313"/>
 <area shape="rect" id="Node000016" href="$d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section." alt="" coords="163,293,337,319"/>
-<area shape="poly" id="edge31_Node000014_Node000016" title=" " alt="" coords="130,320,162,315,163,320,130,325"/>
+<area shape="poly" id="edge32_Node000014_Node000016" title=" " alt="" coords="130,320,162,315,163,320,130,325"/>
 <area shape="rect" id="Node000017" href="$d1/d0d/classmrw_1_1model_1_1Controller.html" title="This class represents a CAN&#45;Node named as Controller here." alt="" coords="176,343,324,368"/>
-<area shape="poly" id="edge34_Node000014_Node000017" title=" " alt="" coords="130,338,176,343,175,349,130,343"/>
+<area shape="poly" id="edge35_Node000014_Node000017" title=" " alt="" coords="130,338,176,343,175,349,130,343"/>
 <area shape="rect" id="Node000018" href="$d3/dab/classmrw_1_1model_1_1ModelRailway.html" title="This class contains the complete data structure referring to a model railway." alt="" coords="163,392,337,418"/>
-<area shape="poly" id="edge35_Node000014_Node000018" title=" " alt="" coords="100,349,164,378,196,389,194,394,162,383,98,354"/>
+<area shape="poly" id="edge36_Node000014_Node000018" title=" " alt="" coords="100,349,164,378,196,389,194,394,162,383,98,354"/>
 <area shape="rect" id="Node000019" href="$d4/d3e/classmrw_1_1model_1_1Region.html" title="The control region is a structural division into overviewable parts of the model railway." alt="" coords="183,441,317,467"/>
-<area shape="poly" id="edge36_Node000014_Node000019" title=" " alt="" coords="83,355,118,393,164,428,187,438,185,443,161,432,115,397,79,359"/>
-<area shape="poly" id="edge32_Node000016_Node000010" title=" " alt="" coords="352,292,402,287,403,292,353,298"/>
-<area shape="poly" id="edge33_Node000016_Node000004" title=" " alt="" coords="319,286,336,280,384,254,415,244,417,249,386,259,338,285,321,291"/>
+<area shape="poly" id="edge37_Node000014_Node000019" title=" " alt="" coords="83,355,118,393,164,428,187,438,185,443,161,432,115,397,79,359"/>
+<area shape="poly" id="edge33_Node000016_Node000010" title=" " alt="" coords="352,292,402,287,403,292,353,298"/>
+<area shape="poly" id="edge34_Node000016_Node000004" title=" " alt="" coords="319,286,336,280,384,254,415,244,417,249,386,259,338,285,321,291"/>
 </map>

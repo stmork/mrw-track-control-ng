@@ -22,5 +22,6 @@ var searchData=
   ['stdlogger_19',['StdLogger',['../d1/d17/classmrw_1_1log_1_1StdLogger.html',1,'mrw::log']]],
   ['string_20',['String',['../d0/d55/classmrw_1_1util_1_1String.html',1,'mrw::util']]],
   ['switchmodule_21',['SwitchModule',['../dc/d1a/classmrw_1_1model_1_1SwitchModule.html',1,'mrw::model']]],
-  ['switchmodulereference_22',['SwitchModuleReference',['../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html',1,'mrw::model']]]
+  ['switchmodulereference_22',['SwitchModuleReference',['../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html',1,'mrw::model']]],
+  ['syslogger_23',['SysLogger',['../d5/d0d/classmrw_1_1log_1_1SysLogger.html',1,'mrw::log']]]
 ];

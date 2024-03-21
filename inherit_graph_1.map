@@ -1,11 +1,13 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$d1/d28/classmrw_1_1log_1_1LoggerBase.html" title="This class provides an interface for logging messages into different drains." alt="" coords="5,31,151,56"/>
+<area shape="rect" id="Node000000" href="$d1/d28/classmrw_1_1log_1_1LoggerBase.html" title="This class provides an interface for logging messages into different drains." alt="" coords="5,55,151,80"/>
 <area shape="rect" id="Node000001" href="$d1/d17/classmrw_1_1log_1_1StdLogger.html" title="This class implements logging to console." alt="" coords="209,5,344,31"/>
-<area shape="poly" id="edge10_Node000000_Node000001" title=" " alt="" coords="166,30,208,24,209,29,167,35"/>
-<area shape="rect" id="Node000002" href="$dc/d69/classmrw_1_1log_1_1UnifiedLogger.html" title="This method unifies all log messages into one single callback." alt="" coords="199,55,354,80"/>
-<area shape="poly" id="edge11_Node000000_Node000002" title=" " alt="" coords="167,52,199,55,198,61,166,57"/>
-<area shape="rect" id="Node000003" href="$d8/ded/classmrw_1_1log_1_1FileLogger.html" title="This class writes all logging messages into one single file." alt="" coords="402,55,538,80"/>
-<area shape="poly" id="edge12_Node000002_Node000003" title=" " alt="" coords="369,65,401,65,401,70,369,70"/>
-<area shape="rect" id="Node000004" href="$d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html" title="This class writes all logging messages into one single file." alt="" coords="586,47,762,88"/>
-<area shape="poly" id="edge13_Node000003_Node000004" title=" " alt="" coords="554,65,586,65,586,70,554,70"/>
+<area shape="poly" id="edge10_Node000000_Node000001" title=" " alt="" coords="147,48,221,29,222,34,148,53"/>
+<area shape="rect" id="Node000002" href="$d5/d0d/classmrw_1_1log_1_1SysLogger.html" title=" " alt="" coords="208,55,345,80"/>
+<area shape="poly" id="edge11_Node000000_Node000002" title=" " alt="" coords="166,65,207,65,207,70,166,70"/>
+<area shape="rect" id="Node000003" href="$dc/d69/classmrw_1_1log_1_1UnifiedLogger.html" title="This method unifies all log messages into one single callback." alt="" coords="199,104,354,130"/>
+<area shape="poly" id="edge12_Node000000_Node000003" title=" " alt="" coords="148,82,222,101,221,106,147,87"/>
+<area shape="rect" id="Node000004" href="$d8/ded/classmrw_1_1log_1_1FileLogger.html" title="This class writes all logging messages into one single file." alt="" coords="402,104,538,130"/>
+<area shape="poly" id="edge13_Node000003_Node000004" title=" " alt="" coords="369,114,401,114,401,120,369,120"/>
+<area shape="rect" id="Node000005" href="$d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html" title="This class writes all logging messages into one single file." alt="" coords="586,97,762,137"/>
+<area shape="poly" id="edge14_Node000004_Node000005" title=" " alt="" coords="554,114,586,114,586,120,554,120"/>
 </map>

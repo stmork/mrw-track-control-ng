@@ -1,8 +1,8 @@
 var searchData=
 [
   ['save_0',['save',['../dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a3a9e5cc0e4191375f6e40ac963dc2a76',1,'mrw::model::ModelRepository']]],
-  ['section_1',['Section',['../de/de1/classmrw_1_1model_1_1Section.html#af39e5409a3199793119896b8bf971378',1,'mrw::model::Section']]],
-  ['section_2',['section',['../d5/d26/classmrw_1_1model_1_1AssemblyPart.html#a34d97dfce124fedb32235ffede0b4ecc',1,'mrw::model::AssemblyPart::section()'],['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#abcf1f0f3d79ec0a26bd6131be21513bd',1,'mrw::model::ModelRailway::section()'],['../d4/d3e/classmrw_1_1model_1_1Region.html#a7c4842505252d2ae314fa4d656f130aa',1,'mrw::model::Region::section()']]],
+  ['section_1',['section',['../d5/d26/classmrw_1_1model_1_1AssemblyPart.html#a34d97dfce124fedb32235ffede0b4ecc',1,'mrw::model::AssemblyPart::section()'],['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#abcf1f0f3d79ec0a26bd6131be21513bd',1,'mrw::model::ModelRailway::section()'],['../d4/d3e/classmrw_1_1model_1_1Region.html#a7c4842505252d2ae314fa4d656f130aa',1,'mrw::model::Region::section()']]],
+  ['section_2',['Section',['../de/de1/classmrw_1_1model_1_1Section.html#af39e5409a3199793119896b8bf971378',1,'mrw::model::Section']]],
   ['sectioncolor_3',['sectionColor',['../df/db9/classmrw_1_1ui_1_1BaseWidget.html#ae7a45cecae7ea77538b9c873804ca323',1,'mrw::ui::BaseWidget']]],
   ['sectioncount_4',['sectionCount',['../d4/d3e/classmrw_1_1model_1_1Region.html#a627613f91af37c720e920df43eabde71',1,'mrw::model::Region']]],
   ['sectionmodule_5',['SectionModule',['../d8/d13/classmrw_1_1model_1_1SectionModule.html#a0ff73261aa8dd87fd244053788039fa9',1,'mrw::model::SectionModule']]],
@@ -37,5 +37,6 @@ var searchData=
   ['switchmodule_34',['SwitchModule',['../dc/d1a/classmrw_1_1model_1_1SwitchModule.html#aa47063a945b5f085c2a14f6f7a2c642d',1,'mrw::model::SwitchModule']]],
   ['switchmodulereference_35',['SwitchModuleReference',['../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#ac1a5f6a56ca2a70584c4ed6fab33cbb7',1,'mrw::model::SwitchModuleReference']]],
   ['switchstate_36',['switchState',['../df/db7/classmrw_1_1model_1_1AbstractSwitch.html#a961868dc45cc6cd7591bc56a8b823f5b',1,'mrw::model::AbstractSwitch::switchState()'],['../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1ebe5feb13b83d00b8ab19675c20c44d',1,'mrw::model::DoubleCrossSwitch::switchState()'],['../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a3268d5419954cdefe6d211c0556d0968',1,'mrw::model::RegularSwitch::switchState()']]],
-  ['symbol_37',['symbol',['../db/d9c/classmrw_1_1model_1_1Signal.html#a7875d1b1b53600b1b2de9609f80a0b91',1,'mrw::model::Signal']]]
+  ['symbol_37',['symbol',['../db/d9c/classmrw_1_1model_1_1Signal.html#a7875d1b1b53600b1b2de9609f80a0b91',1,'mrw::model::Signal']]],
+  ['syslogger_38',['SysLogger',['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a8b2e6b2ba28b29fd779f0d71b80124c4',1,'mrw::log::SysLogger::SysLogger()=delete'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a85fb0e0603943ccf11a0ded07690bd51',1,'mrw::log::SysLogger::SysLogger(const char *application)']]]
 ];

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['fail_0',['FAIL',['../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4ac2759effffc94bb9acc71d69fe3e8a1f',1,'mrw::model::Device::FAIL'],['../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1ac2759effffc94bb9acc71d69fe3e8a1f',1,'mrw::model::DoubleCrossSwitch::FAIL'],['../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a340b068f7e7d7340ecf8a8c8c9e89dd2ac2759effffc94bb9acc71d69fe3e8a1f',1,'mrw::model::RegularSwitch::FAIL']]],
-  ['fatal_1',['fatal',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html#ab8c1ce6e79b2e507846dbe0a18733ae8',1,'mrw::log::LoggerBase::fatal()'],['../d1/d17/classmrw_1_1log_1_1StdLogger.html#a933218cb3ab2e3efd6227acc4468e1d0',1,'mrw::log::StdLogger::fatal()']]],
+  ['fatal_1',['fatal',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html#ab8c1ce6e79b2e507846dbe0a18733ae8',1,'mrw::log::LoggerBase::fatal()'],['../d1/d17/classmrw_1_1log_1_1StdLogger.html#a933218cb3ab2e3efd6227acc4468e1d0',1,'mrw::log::StdLogger::fatal()'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a620a812d2a5826ffa5093e454e185a80',1,'mrw::log::SysLogger::fatal()']]],
   ['filelogger_2',['FileLogger',['../d8/ded/classmrw_1_1log_1_1FileLogger.html',1,'mrw::log::FileLogger'],['../d8/ded/classmrw_1_1log_1_1FileLogger.html#acf55310eb7aff654d9d888a92f083a1b',1,'mrw::log::FileLogger::FileLogger()']]],
   ['findkey_3',['findKey',['../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#abfb2114436a9ba927599c9a365df761f',1,'mrw::util::ConstantEnumerator']]],
   ['first_5fsection_4',['first_section',['../d7/dfb/classmrw_1_1model_1_1Route.html#a5e637991616050f6ccd472a76a2ab92e',1,'mrw::model::Route']]],

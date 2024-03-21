@@ -23,6 +23,7 @@ var searchData=
   ['_7esection_20',['~Section',['../de/de1/classmrw_1_1model_1_1Section.html#ae2582a77c7ecb8cbd4a1b58e7ad3296e',1,'mrw::model::Section']]],
   ['_7esettingsgroup_21',['~SettingsGroup',['../de/d0d/classmrw_1_1util_1_1SettingsGroup.html#a56bb81c0462df5edb443a8d9cc5c2622',1,'mrw::util::SettingsGroup']]],
   ['_7estatemachineinterface_22',['~StatemachineInterface',['../de/d2a/classsc_1_1StatemachineInterface.html#aa887dba1e9f2fd1b16fc227132375135',1,'sc::StatemachineInterface']]],
-  ['_7etimedinterface_23',['~TimedInterface',['../d7/d75/classsc_1_1timer_1_1TimedInterface.html#abde323c163127b4797dea71adcf1f35d',1,'sc::timer::TimedInterface']]],
-  ['_7etimerserviceinterface_24',['~TimerServiceInterface',['../df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac964f1c8dd62c8c30ff369ce66455b77',1,'sc::timer::TimerServiceInterface']]]
+  ['_7esyslogger_23',['~SysLogger',['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a167a8ad9d642b5d5e01f647bd22d0ad5',1,'mrw::log::SysLogger']]],
+  ['_7etimedinterface_24',['~TimedInterface',['../d7/d75/classsc_1_1timer_1_1TimedInterface.html#abde323c163127b4797dea71adcf1f35d',1,'sc::timer::TimedInterface']]],
+  ['_7etimerserviceinterface_25',['~TimerServiceInterface',['../df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac964f1c8dd62c8c30ff369ce66455b77',1,'sc::timer::TimerServiceInterface']]]
 ];

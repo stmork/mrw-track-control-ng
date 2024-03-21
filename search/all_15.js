@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['warn_0',['warn',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html#a9ca1abea0dbfdd5fa32ed474cf3985ff',1,'mrw::log::LoggerBase::warn()'],['../d1/d17/classmrw_1_1log_1_1StdLogger.html#a6996b5fc0926a8e197e910934d9c69ad',1,'mrw::log::StdLogger::warn()']]],
+  ['warn_0',['warn',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html#a9ca1abea0dbfdd5fa32ed474cf3985ff',1,'mrw::log::LoggerBase::warn()'],['../d1/d17/classmrw_1_1log_1_1StdLogger.html#a6996b5fc0926a8e197e910934d9c69ad',1,'mrw::log::StdLogger::warn()'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a2d7caa9f0399d727ef3aeb82b69340f5',1,'mrw::log::SysLogger::warn()']]],
   ['warning_1',['warning',['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#a4005473ff24b928d3f048c55e42e8563',1,'mrw::model::ModelRailway']]],
   ['warnings_2',['warnings',['../dc/df4/structmrw_1_1model_1_1MrwStatistic.html#add0f80348edc3c628522f7765f1aad3f',1,'mrw::model::MrwStatistic']]],
   ['white_3',['WHITE',['../df/db9/classmrw_1_1ui_1_1BaseWidget.html#ab38be0dcde4d168129a830332ee9f65d',1,'mrw::ui::BaseWidget']]],
