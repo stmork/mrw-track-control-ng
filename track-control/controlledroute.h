@@ -41,7 +41,7 @@ private:
 	std::vector<mrw::ctrl::SignalControllerProxy *> controllers_locked;
 
 public:
-	static const int        USER_ROLE = Qt::UserRole + 1;
+	static constexpr int    USER_ROLE = Qt::UserRole + 1;
 
 	explicit ControlledRoute(
 		const bool                       dir,

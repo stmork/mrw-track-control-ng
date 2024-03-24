@@ -49,8 +49,8 @@ namespace mrw::model
 
 		friend class ModelRailway;
 
-		static const size_t MAX_PORTS      = 3;
-		static const size_t MAX_CONNECTORS = 4;
+		static constexpr size_t MAX_PORTS      = 3;
+		static constexpr size_t MAX_CONNECTORS = 4;
 
 	public:
 		explicit Controller(

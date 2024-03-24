@@ -64,7 +64,7 @@ namespace mrw::model
 		typedef std::list<RailPart *> RailTrack;
 		typedef std::list<Section *>  SectionTrack;
 
-		static const size_t MAX_DEPTH = 100;
+		static constexpr size_t MAX_DEPTH = 100;
 
 		explicit Route(
 			const bool           dir,

@@ -34,8 +34,8 @@ namespace mrw::model
 		RailPart  *  d = nullptr;
 
 	public:
-		static const unsigned B_MASK = 2;
-		static const unsigned D_MASK = 1;
+		static constexpr unsigned B_MASK = 2;
+		static constexpr unsigned D_MASK = 1;
 
 		enum class State : unsigned
 		{

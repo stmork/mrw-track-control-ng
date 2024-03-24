@@ -66,7 +66,7 @@ namespace mrw::model
 				 * This is the maximum amount of Rail elements to follow to reach a
 				 * flank protection switch.
 				 */
-		static const size_t MAX_FOLLOW_RAIL = 2;
+		static constexpr size_t MAX_FOLLOW_RAIL = 2;
 
 	protected:
 		std::vector<RegularSwitch *> flank_switches;

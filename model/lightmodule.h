@@ -32,7 +32,7 @@ namespace mrw::model
 	{
 		std::vector<ProfileLight *> profile_lights;
 
-		static const size_t MAX_LIGHTS = 8;
+		static constexpr size_t MAX_LIGHTS = 8;
 
 	public:
 		explicit LightModule(

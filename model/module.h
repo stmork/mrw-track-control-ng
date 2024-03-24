@@ -52,7 +52,7 @@ namespace mrw::model
 
 	public:
 		/** The maximum pins per port. */
-		static const size_t MAX_PINS_PER_PORT = 8;
+		static constexpr size_t MAX_PINS_PER_PORT = 8;
 
 		explicit Module(
 			ModelRailway    *   model_railway,

@@ -27,7 +27,7 @@ namespace mrw::ui
 		Q_OBJECT
 
 	public:
-		static const int   USER_ROLE = Qt::UserRole + 0;
+		static constexpr int   USER_ROLE = Qt::UserRole + 0;
 
 		explicit ControllerWidget(
 			QWidget          *          parent = nullptr,

@@ -44,7 +44,7 @@ namespace mrw::model
 
 	public:
 		/** The maximum light count connected to one module. */
-		static const size_t MAX_PINS = 16;
+		static constexpr size_t MAX_PINS = 16;
 
 		explicit MultiplexConnection(
 			ModelRailway     *    model_railway,
