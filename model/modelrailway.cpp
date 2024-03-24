@@ -386,7 +386,7 @@ AssemblyPart * ModelRailway::assemblyPart(
 
 DeviceId::DeviceId(const Device * device)
 {
-	Controller * controller = device->controller();
+	const Controller * controller = device->controller();
 
 	first  = controller != nullptr ? controller->id() : 0;
 	second = device->unitNo();

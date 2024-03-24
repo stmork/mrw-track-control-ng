@@ -316,7 +316,7 @@ namespace mrw
 			SectionStatechart(const SectionStatechart & rhs);
 			SectionStatechart & operator=(const SectionStatechart &);
 
-			static constexpr const sc::integer timeout {500};
+			static constexpr const sc::integer timeout {600};
 			bool auto_off {true};
 			bool auto_unlock {true};
 			bool occupied {false};
