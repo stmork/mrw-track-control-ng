@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['d_5fmask_0',['D_MASK',['../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#ac077853913da95d19057f3a01e020c96',1,'mrw::model::DoubleCrossSwitch']]],
+  ['d_5fmask_0',['D_MASK',['../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#abb541997a95b31327f21ed06850adf10',1,'mrw::model::DoubleCrossSwitch']]],
   ['device_5fcount_1',['device_count',['../dc/df4/structmrw_1_1model_1_1MrwStatistic.html#afc04c97249244e67e8362bdcb869069c',1,'mrw::model::MrwStatistic']]],
   ['direction_2',['direction',['../d7/dfb/classmrw_1_1model_1_1Route.html#a0e0d5d86d610ece3088134f7cdd6a212',1,'mrw::model::Route::direction'],['../d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d',1,'mrw::ctrl::BaseController::Status::direction']]],
   ['distant_5fcolor_3',['distant_color',['../d7/dc3/structmrw_1_1ui_1_1SignalWidget_1_1Status.html#a31fcdb6253653185b6d7c7c72a45f95f',1,'mrw::ui::SignalWidget::Status']]],

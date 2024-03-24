@@ -1,7 +1,7 @@
 var searchData=
 [
   ['b_5fends_0',['b_ends',['../db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#af5f774bc7dfd19358fde7a941e9e4e27',1,'mrw::ctrl::RailController::Status']]],
-  ['b_5fmask_1',['B_MASK',['../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a88729141a3bcb354dd6ba3acc43c4ebd',1,'mrw::model::DoubleCrossSwitch']]],
+  ['b_5fmask_1',['B_MASK',['../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#af7b610e6da4228d4e65a0cef2c3cdb85',1,'mrw::model::DoubleCrossSwitch']]],
   ['barwidget_2',['BarWidget',['../de/d98/classmrw_1_1ui_1_1BarWidget.html',1,'mrw::ui::BarWidget'],['../de/d98/classmrw_1_1ui_1_1BarWidget.html#a7c7a9fbc5266d658e43ffada1abc3c0c',1,'mrw::ui::BarWidget::BarWidget()']]],
   ['base_5fcontroller_3',['base_controller',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a20f6e80d5a2ed7859465de3f4826dd80',1,'mrw::ui::ControllerWidget']]],
   ['basecontroller_4',['BaseController',['../d8/db5/classmrw_1_1ctrl_1_1BaseController.html',1,'mrw::ctrl::BaseController'],['../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ae47bfe51040bb5674d54e9a9ae00c1ce',1,'mrw::ctrl::BaseController::BaseController()']]],
