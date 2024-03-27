@@ -104,18 +104,16 @@ namespace mrw
 			static constexpr const sc::integer scvi_main_region_Failed {0};
 			static constexpr const sc::integer scvi_main_region_Wait_for_Start {0};
 
-			class Event
+			class Event final
 			{
 				std::function<void(void)> event_callback;
 
 			public:
 				Event() = delete;
 				explicit  Event(std::function<void(void)> && func) noexcept :
-					event_callback(func)
+					event_callback(std::move(func))
 				{
 				}
-
-				virtual ~Event() = default;
 
 				inline void operator()() const
 				{
