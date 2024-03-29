@@ -38,23 +38,15 @@ namespace mrw::util
 	 * @note The operator[] may throw a std::out_of_range exception. It
 	 * is a safe way to map using the get() method instead.
 	 */
-	template<class T> class ConstantEnumerator : public std::unordered_map<T, QString>
+	template<class T>
+	class ConstantEnumerator :
+		public std::unordered_map<T, QString>
 	{
 	public:
 		/**
 		 * This alias is a short cut to the containing key/value pairs.
 		 */
-		using ConstantMapPair          = std::pair<const T, QString>;
-
-		/**
-		 * This alias is a short cut to the containing iterator.
-		 */
-		using ConstantMapIterator      = typename std::unordered_map<T, QString>::iterator;
-
-		/**
-		 * This alias is a short cut to the containing const iterator.
-		 */
-		using ConstantMapConstIterator = typename std::unordered_map<T, QString>::const_iterator;
+		using ConstantMapPair = std::pair<const T, QString>;
 
 		/**
 		 * This constructor makes it possible to initialize this mapper
@@ -63,7 +55,7 @@ namespace mrw::util
 		 * @param list The initializier list which may be provided by
 		 * the compiler.
 		 */
-		explicit ConstantEnumerator(
+		explicit constexpr ConstantEnumerator(
 			const std::initializer_list<ConstantMapPair> & list) :
 			std::unordered_map<T, QString>(list)
 		{
@@ -80,7 +72,7 @@ namespace mrw::util
 		[[nodiscard]]
 		inline QString get(const T key) const noexcept
 		{
-			ConstantMapConstIterator it = std::unordered_map<T, QString>::find(key);
+			auto it = std::unordered_map<T, QString>::find(key);
 
 			return it != std::unordered_map<T, QString>::end() ?
 				it->second :
@@ -107,18 +99,17 @@ namespace mrw::util
 		 * when the const_iterator is not equal to the end() iterator.
 		 */
 		[[nodiscard]]
-		inline ConstantMapConstIterator findKey(const QString & value) const noexcept
+		inline decltype(auto) findKey(const QString & value) const noexcept
 		{
-			ConstantMapConstIterator it;
+			auto it = std::unordered_map<T, QString>::cbegin();
 
-			for (it = std::unordered_map<T, QString>::cbegin();
-				it != std::unordered_map<T, QString>::cend();
-				++it)
+			while (it != std::unordered_map<T, QString>::cend())
 			{
 				if (it->second == value)
 				{
 					break;
 				}
+				++it;
 			}
 			return it;
 		}
