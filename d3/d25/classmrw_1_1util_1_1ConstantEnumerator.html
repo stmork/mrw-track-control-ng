@@ -106,24 +106,18 @@ Public Types</h2></td></tr>
 <tr class="memitem:a2fb8988f103ebc51fe1395b9d553182a" id="r_a2fb8988f103ebc51fe1395b9d553182a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fb8988f103ebc51fe1395b9d553182a">ConstantMapPair</a> = std::pair&lt;const T, QString&gt;</td></tr>
 <tr class="memdesc:a2fb8988f103ebc51fe1395b9d553182a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This alias is a short cut to the containing key/value pairs.  <br /></td></tr>
 <tr class="separator:a2fb8988f103ebc51fe1395b9d553182a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61182473fea81fec01240ff009c5b644" id="r_a61182473fea81fec01240ff009c5b644"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61182473fea81fec01240ff009c5b644">ConstantMapIterator</a> = typename std::unordered_map&lt;T, QString&gt;::iterator</td></tr>
-<tr class="memdesc:a61182473fea81fec01240ff009c5b644"><td class="mdescLeft">&#160;</td><td class="mdescRight">This alias is a short cut to the containing iterator.  <br /></td></tr>
-<tr class="separator:a61182473fea81fec01240ff009c5b644"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0969a0f94f3b7a3f740dad6ac8be3dd" id="r_ae0969a0f94f3b7a3f740dad6ac8be3dd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0969a0f94f3b7a3f740dad6ac8be3dd">ConstantMapConstIterator</a> = typename std::unordered_map&lt;T, QString&gt;::const_iterator</td></tr>
-<tr class="memdesc:ae0969a0f94f3b7a3f740dad6ac8be3dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This alias is a short cut to the containing const iterator.  <br /></td></tr>
-<tr class="separator:ae0969a0f94f3b7a3f740dad6ac8be3dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2ff30fbbcc8d31cc9d90a548fdbd891b" id="r_a2ff30fbbcc8d31cc9d90a548fdbd891b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ff30fbbcc8d31cc9d90a548fdbd891b">ConstantEnumerator</a> (const std::initializer_list&lt; <a class="el" href="#a2fb8988f103ebc51fe1395b9d553182a">ConstantMapPair</a> &gt; &amp;list)</td></tr>
-<tr class="memdesc:a2ff30fbbcc8d31cc9d90a548fdbd891b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This constructor makes it possible to initialize this mapper with a static initializer list.  <br /></td></tr>
-<tr class="separator:a2ff30fbbcc8d31cc9d90a548fdbd891b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2a8f1f9a5e3887f0e1199d66a0e6066" id="r_aa2a8f1f9a5e3887f0e1199d66a0e6066"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa2a8f1f9a5e3887f0e1199d66a0e6066">ConstantEnumerator</a> (const std::initializer_list&lt; <a class="el" href="#a2fb8988f103ebc51fe1395b9d553182a">ConstantMapPair</a> &gt; &amp;list)</td></tr>
+<tr class="memdesc:aa2a8f1f9a5e3887f0e1199d66a0e6066"><td class="mdescLeft">&#160;</td><td class="mdescRight">This constructor makes it possible to initialize this mapper with a static initializer list.  <br /></td></tr>
+<tr class="separator:aa2a8f1f9a5e3887f0e1199d66a0e6066"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9461ba5fca963e92a476e711808f10db" id="r_a9461ba5fca963e92a476e711808f10db"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9461ba5fca963e92a476e711808f10db">get</a> (const T key) const noexcept</td></tr>
 <tr class="memdesc:a9461ba5fca963e92a476e711808f10db"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method provides a safe way to represent a symbolic value as a QString.  <br /></td></tr>
 <tr class="separator:a9461ba5fca963e92a476e711808f10db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfb2114436a9ba927599c9a365df761f" id="r_abfb2114436a9ba927599c9a365df761f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ae0969a0f94f3b7a3f740dad6ac8be3dd">ConstantMapConstIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abfb2114436a9ba927599c9a365df761f">findKey</a> (const QString &amp;value) const noexcept</td></tr>
-<tr class="memdesc:abfb2114436a9ba927599c9a365df761f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is a reverse lookup to find a key from its value.  <br /></td></tr>
-<tr class="separator:abfb2114436a9ba927599c9a365df761f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dde31196397c049682773ce45b013d2" id="r_a9dde31196397c049682773ce45b013d2"><td class="memItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9dde31196397c049682773ce45b013d2">findKey</a> (const QString &amp;value) const noexcept</td></tr>
+<tr class="memdesc:a9dde31196397c049682773ce45b013d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is a reverse lookup to find a key from its value.  <br /></td></tr>
+<tr class="separator:a9dde31196397c049682773ce45b013d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -148,42 +142,6 @@ class mrw::util::ConstantEnumerator&lt; T &gt;</div><p>This convenience class pr
 </div><!-- fragment --><p>You may access the mapper like every std::unordered_map.</p>
 <dl class="section note"><dt>Note</dt><dd>The operator[] may throw a std::out_of_range exception. It is a safe way to map using the <a class="el" href="#a9461ba5fca963e92a476e711808f10db" title="This method provides a safe way to represent a symbolic value as a QString.">get()</a> method instead. </dd></dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="ae0969a0f94f3b7a3f740dad6ac8be3dd" name="ae0969a0f94f3b7a3f740dad6ac8be3dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0969a0f94f3b7a3f740dad6ac8be3dd">&#9670;&#160;</a></span>ConstantMapConstIterator</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="../../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html">mrw::util::ConstantEnumerator</a>&lt; T &gt;::ConstantMapConstIterator = typename std::unordered_map&lt;T, QString&gt;::const_iterator</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This alias is a short cut to the containing const iterator. </p>
-
-</div>
-</div>
-<a id="a61182473fea81fec01240ff009c5b644" name="a61182473fea81fec01240ff009c5b644"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61182473fea81fec01240ff009c5b644">&#9670;&#160;</a></span>ConstantMapIterator</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="../../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html">mrw::util::ConstantEnumerator</a>&lt; T &gt;::ConstantMapIterator = typename std::unordered_map&lt;T, QString&gt;::iterator</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This alias is a short cut to the containing iterator. </p>
-
-</div>
-</div>
 <a id="a2fb8988f103ebc51fe1395b9d553182a" name="a2fb8988f103ebc51fe1395b9d553182a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2fb8988f103ebc51fe1395b9d553182a">&#9670;&#160;</a></span>ConstantMapPair</h2>
 
@@ -203,8 +161,8 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a2ff30fbbcc8d31cc9d90a548fdbd891b" name="a2ff30fbbcc8d31cc9d90a548fdbd891b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ff30fbbcc8d31cc9d90a548fdbd891b">&#9670;&#160;</a></span>ConstantEnumerator()</h2>
+<a id="aa2a8f1f9a5e3887f0e1199d66a0e6066" name="aa2a8f1f9a5e3887f0e1199d66a0e6066"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2a8f1f9a5e3887f0e1199d66a0e6066">&#9670;&#160;</a></span>ConstantEnumerator()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -215,7 +173,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html">mrw::util::ConstantEnumerator</a>&lt; T &gt;::ConstantEnumerator </td>
+          <td class="memname">constexpr <a class="el" href="../../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html">mrw::util::ConstantEnumerator</a>&lt; T &gt;::ConstantEnumerator </td>
           <td>(</td>
           <td class="paramtype">const std::initializer_list&lt; <a class="el" href="#a2fb8988f103ebc51fe1395b9d553182a">ConstantMapPair</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>list</em></span></td><td>)</td>
           <td></td>
@@ -223,7 +181,7 @@ template&lt;class T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -239,8 +197,8 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="abfb2114436a9ba927599c9a365df761f" name="abfb2114436a9ba927599c9a365df761f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfb2114436a9ba927599c9a365df761f">&#9670;&#160;</a></span>findKey()</h2>
+<a id="a9dde31196397c049682773ce45b013d2" name="a9dde31196397c049682773ce45b013d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dde31196397c049682773ce45b013d2">&#9670;&#160;</a></span>findKey()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -251,7 +209,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#ae0969a0f94f3b7a3f740dad6ac8be3dd">ConstantMapConstIterator</a> <a class="el" href="../../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html">mrw::util::ConstantEnumerator</a>&lt; T &gt;::findKey </td>
+          <td class="memname">decltype(auto) <a class="el" href="../../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html">mrw::util::ConstantEnumerator</a>&lt; T &gt;::findKey </td>
           <td>(</td>
           <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td> const</td>
@@ -371,7 +329,7 @@ template&lt;class T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 29 2024 12:48:12 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 29 2024 14:47:18 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
