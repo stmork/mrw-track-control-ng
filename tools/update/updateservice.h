@@ -65,7 +65,7 @@ private:
 	void read(const QString & filename);
 	bool check(
 		const mrw::can::MrwMessage & message,
-		const mrw::can::Response     response = mrw::can::MSG_OK);
+		const mrw::can::Response     response = mrw::can::Response::MSG_OK);
 
 	void init(sc::integer count) override;
 	void ping() override;

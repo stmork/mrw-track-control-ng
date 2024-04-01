@@ -68,7 +68,7 @@ void ConfigurationService::process(const MrwMessage & message)
 		switch (cmd)
 		{
 		case RESET:
-			if (response == MSG_BOOTED)
+			if (response == Response::MSG_BOOTED)
 			{
 				const size_t count = controllers.erase(message.eid());
 
@@ -82,7 +82,7 @@ void ConfigurationService::process(const MrwMessage & message)
 			break;
 
 		case CFGEND:
-			if ((response == MSG_OK) && (message.size() >= 1))
+			if ((response == Response::MSG_OK) && (message.size() >= 1))
 			{
 				const size_t count = message[0];
 

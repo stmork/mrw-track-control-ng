@@ -66,7 +66,7 @@ namespace mrw::ctrl
 		mrw::model::Signal    *    mainSignal() const;
 		void                       setCurvedCount(const size_t curved);
 		void                       setDistantSignal(SignalControllerProxy * signal);
-		void                       setSymbol(mrw::model::Signal::Symbol symbol);
+		void                       setSymbol(const mrw::model::Signal::Symbol symbol);
 		void                       setState(mrw::model::SectionState new_state);
 
 		// Implementations from SignalController

@@ -10,6 +10,7 @@ using namespace mrw::ctrl;
 
 using Bending   = Position::Bending;
 using LockState = Device::LockState;
+using Symbol    = Signal::Symbol;
 
 SignalControllerMock::SignalControllerMock(QObject * parent) :
 	SignalController(parent)
@@ -77,19 +78,19 @@ void SignalControllerMock::setBending(const Bending bending)
 	emit update();
 }
 
-void SignalControllerMock::setMainSymbol(const Signal::Symbol symbol)
+void SignalControllerMock::setMainSymbol(const Symbol symbol)
 {
 	main_state = symbol;
 	emit update();
 }
 
-void SignalControllerMock::setDistantSymbol(const Signal::Symbol symbol)
+void SignalControllerMock::setDistantSymbol(const Symbol symbol)
 {
 	distant_state = symbol;
 	emit update();
 }
 
-void SignalControllerMock::setShuntSymbol(const Signal::Symbol symbol)
+void SignalControllerMock::setShuntSymbol(const Symbol symbol)
 {
 	shunt_state = symbol;
 	emit update();
@@ -105,32 +106,32 @@ void SignalControllerMock::setExtension(const int new_extension)
 
 void SignalControllerMock::setShuntStop()
 {
-	setShuntSymbol(Signal::Symbol::STOP);
+	setShuntSymbol(Symbol::STOP);
 }
 
 void SignalControllerMock::setShuntGo()
 {
-	setShuntSymbol(Signal::Symbol::GO);
+	setShuntSymbol(Symbol::GO);
 }
 
 void SignalControllerMock::setDistantStop()
 {
-	setDistantSymbol(Signal::Symbol::STOP);
+	setDistantSymbol(Symbol::STOP);
 }
 
 void SignalControllerMock::setDistantGo()
 {
-	setDistantSymbol(Signal::Symbol::GO);
+	setDistantSymbol(Symbol::GO);
 }
 
 void SignalControllerMock::setMainStop()
 {
-	setMainSymbol(Signal::Symbol::STOP);
+	setMainSymbol(Symbol::STOP);
 }
 
 void SignalControllerMock::setMainGo()
 {
-	setMainSymbol(Signal::Symbol::GO);
+	setMainSymbol(Symbol::GO);
 }
 
 bool SignalControllerMock::isDirection() const
@@ -153,17 +154,17 @@ bool SignalControllerMock::hasMain() const
 	return main_signal;
 }
 
-Signal::Symbol SignalControllerMock::distant() const
+Symbol SignalControllerMock::distant() const
 {
 	return distant_state;
 }
 
-Signal::Symbol SignalControllerMock::shunt() const
+Symbol SignalControllerMock::shunt() const
 {
 	return shunt_state;
 }
 
-Signal::Symbol SignalControllerMock::main() const
+Symbol SignalControllerMock::main() const
 {
 	return main_state;
 }

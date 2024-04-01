@@ -32,7 +32,7 @@ MrwMessage FormSignal::configMsg(const unsigned pin) const noexcept
 
 	switch (type())
 	{
-	case MAIN_SIGNAL:
+	case SignalType::MAIN_SIGNAL:
 		switch (inductors())
 		{
 		case 2:
@@ -45,7 +45,7 @@ MrwMessage FormSignal::configMsg(const unsigned pin) const noexcept
 		}
 		break;
 
-	case DISTANT_SIGNAL:
+	case SignalType::DISTANT_SIGNAL:
 		switch (inductors())
 		{
 		case 2:
@@ -58,11 +58,11 @@ MrwMessage FormSignal::configMsg(const unsigned pin) const noexcept
 		}
 		break;
 
-	case SHUNT_SIGNAL:
+	case SignalType::SHUNT_SIGNAL:
 		cmd = CFGSF2;
 		break;
 
-	case MAIN_SHUNT_SIGNAL:
+	case SignalType::MAIN_SHUNT_SIGNAL:
 		// This is not possible for form signals.
 		break;
 	}
@@ -79,7 +79,7 @@ QString FormSignal::toString() const noexcept
 {
 	return QString("      F %1  %2   : [%3] %4 %5 %6").
 		arg(valid()  ? "V" : "-").
-		arg(symbol()).
+		arg(typeDescr()).
 		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name(), -10).
 		arg(Device::get(lock()), -10).

@@ -90,7 +90,8 @@ void MrwMessageDispatcher::process(const MrwMessage & message)
 		if (dst == CAN_BROADCAST_ID)
 		{
 			// OK, we received a broadcast request.
-			if ((message.command() == SENSOR) && (message[0] == SENSOR_LIGHT))
+			if ((message.command() == SENSOR) &&
+				(message[0] == std::underlying_type_t<SensorType>(SensorType::SENSOR_LIGHT)))
 			{
 				emit brightness(message[1]);
 				return;

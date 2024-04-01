@@ -169,7 +169,7 @@ void TestCan::testReadWrite()
 	QCOMPARE(message.command(),  PING);
 	QCOMPARE(message.size(),     0u);
 	QCOMPARE(message.unitNo(),   NO_UNITNO);
-	QCOMPARE(message.response(), MSG_NO_RESPONSE);
+	QCOMPARE(message.response(), Response::MSG_NO_RESPONSE);
 	QCOMPARE(message.id(),       CAN_BROADCAST_ID);
 	QCOMPARE(message.sid(),      CAN_BROADCAST_ID);
 	QCOMPARE(message.eid(),      NO_UNITNO);
@@ -181,7 +181,7 @@ void TestCan::testReceivedResult()
 	QCanBusFrame frame;
 
 	array.append(GETRBS_RESPONSE);
-	array.append(MSG_QUEUED);
+	array.append(std::underlying_type_t<Response>(Response::MSG_QUEUED));
 	array.append((uint8_t)TEST_LSB);
 	array.append((uint8_t)TEST_MSB);
 	frame.setFrameId(TEST_ID);
@@ -192,7 +192,7 @@ void TestCan::testReceivedResult()
 	QCOMPARE(message.eid(),      TEST_UNIT_NO);
 	QCOMPARE(message.sid(),      TEST_CTRL_ID);
 	QCOMPARE(message.command(),  GETRBS);
-	QCOMPARE(message.response(), MSG_QUEUED);
+	QCOMPARE(message.response(), Response::MSG_QUEUED);
 	QCOMPARE(message.unitNo(),   TEST_UNIT_NO);
 	QVERIFY(message.toString().size() > 0);
 }
@@ -211,7 +211,7 @@ void TestCan::testReceivedBroadcast()
 	QCOMPARE(message.eid(),       0);
 	QCOMPARE(message.sid(),       CAN_BROADCAST_ID);
 	QCOMPARE(message.command(),   SENSOR);
-	QCOMPARE(message.response(),  MSG_NO_RESPONSE);
+	QCOMPARE(message.response(),  Response::MSG_NO_RESPONSE);
 	QCOMPARE(message.unitNo(),    0);
 	QVERIFY(message.toString().size() > 0);
 }
@@ -230,7 +230,7 @@ void TestCan::testReceivedCommand()
 	QCOMPARE(message.eid(),      TEST_UNIT_NO);
 	QCOMPARE(message.sid(),      TEST_CTRL_ID);
 	QCOMPARE(message.command(),  GETRBS);
-	QCOMPARE(message.response(), MSG_NO_RESPONSE);
+	QCOMPARE(message.response(), Response::MSG_NO_RESPONSE);
 	QCOMPARE(message.unitNo(),   TEST_UNIT_NO);
 	QVERIFY(message.toString().size() > 0);
 }
@@ -245,7 +245,7 @@ void TestCan::testBroadcast()
 	QCOMPARE(message.eid(),      0);
 	QCOMPARE(message.sid(),      CAN_BROADCAST_ID);
 	QCOMPARE(message.command(),  PING);
-	QCOMPARE(message.response(), MSG_NO_RESPONSE);
+	QCOMPARE(message.response(), Response::MSG_NO_RESPONSE);
 	QCOMPARE(message.unitNo(),   0);
 	QVERIFY(message.toString().size() > 0);
 
@@ -266,7 +266,7 @@ void TestCan::testCommand()
 	QCOMPARE(message.sid(),      TEST_CTRL_ID);
 	QCOMPARE(message.id(),       TEST_ID);
 	QCOMPARE(message.command(),  SETLFT);
-	QCOMPARE(message.response(), MSG_NO_RESPONSE);
+	QCOMPARE(message.response(), Response::MSG_NO_RESPONSE);
 	QCOMPARE(message.unitNo(),   TEST_UNIT_NO);
 	QVERIFY(message.toString().size() > 0);
 
@@ -279,11 +279,11 @@ void TestCan::testCommand()
 void TestCan::testSpecial()
 {
 	MrwMessage msg_signal(SETSGN);
-	MrwMessage msg_getver(TEST_CTRL_ID, TEST_UNIT_NO, GETVER, MSG_OK);
-	MrwMessage msg_qrybuf(TEST_CTRL_ID, TEST_UNIT_NO, QRYBUF, MSG_OK);
-	MrwMessage msg_qryerr(TEST_CTRL_ID, TEST_UNIT_NO, QRYERR, MSG_OK);
+	MrwMessage msg_getver(TEST_CTRL_ID, TEST_UNIT_NO, GETVER, Response::MSG_OK);
+	MrwMessage msg_qrybuf(TEST_CTRL_ID, TEST_UNIT_NO, QRYBUF, Response::MSG_OK);
+	MrwMessage msg_qryerr(TEST_CTRL_ID, TEST_UNIT_NO, QRYERR, Response::MSG_OK);
 
-	msg_signal.append(SIGNAL_HP0);
+	msg_signal.append(std::underlying_type_t<SignalAspect>(SignalAspect::SIGNAL_HP0));
 	QVERIFY(msg_signal.toString().contains("SIGNAL_HP0"));
 
 	msg_getver.append(3);
@@ -306,7 +306,7 @@ void TestCan::testSpecial()
 
 void TestCan::testResult()
 {
-	MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, MSG_OK);
+	MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, Response::MSG_OK);
 	QCanBusFrame frame(message);
 	QByteArray   array(frame.payload());
 
@@ -315,7 +315,7 @@ void TestCan::testResult()
 	QCOMPARE(message.sid(),      CAN_GATEWAY_ID);
 	QCOMPARE(message.id(),       TEST_CTRL_ID);
 	QCOMPARE(message.command(),  SETLFT);
-	QCOMPARE(message.response(), MSG_OK);
+	QCOMPARE(message.response(), Response::MSG_OK);
 	QCOMPARE(message.unitNo(),   TEST_UNIT_NO);
 	QVERIFY(message.toString().size() > 0);
 
@@ -323,7 +323,7 @@ void TestCan::testResult()
 	QCOMPARE(frame.frameId(), TEST_CTRL_ID);
 	QCOMPARE(array.size(), 4);
 	QCOMPARE(Command( array.at(0)), SETLFT | CMD_RESPONSE);
-	QCOMPARE(Response(array.at(1)), MSG_OK);
+	QCOMPARE(Response(array.at(1)), Response::MSG_OK);
 	QCOMPARE(UnitNo(  array.at(2) & 0xff), TEST_LSB);
 	QCOMPARE(UnitNo(  array.at(3) & 0xff), TEST_MSB);
 }
@@ -362,7 +362,7 @@ void TestCan::testRequestPayload()
 
 void TestCan::testResponsePayload()
 {
-	MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, MSG_OK);
+	MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, Response::MSG_OK);
 	uint8_t      bytes[4];
 
 	for (size_t t = 0; t < sizeof(bytes); t++)
@@ -386,7 +386,7 @@ void TestCan::testResponsePayload()
 
 	QCOMPARE(array.size(), 8);
 	QCOMPARE(command, SETLFT | CMD_RESPONSE);
-	QCOMPARE(array.at(1), MSG_OK);
+	QCOMPARE(Response(array.at(1)), Response::MSG_OK);
 	for (size_t t = 0; t < sizeof(bytes); t++)
 	{
 		uint8_t byte = (unsigned)array.at(4 + t) & 0xff;
@@ -415,7 +415,7 @@ void TestCan::testCopyRequest()
 		QCOMPARE(message.eid(),      0);
 		QCOMPARE(message.sid(),      CAN_BROADCAST_ID);
 		QCOMPARE(message.command(),  PING);
-		QCOMPARE(message.response(), MSG_NO_RESPONSE);
+		QCOMPARE(message.response(), Response::MSG_NO_RESPONSE);
 		QCOMPARE(message.unitNo(),   0);
 		QVERIFY(message.toString().size() > 0);
 
@@ -437,7 +437,7 @@ void TestCan::testCopyResponse()
 
 	for (size_t i = start; i < 8; i++)
 	{
-		MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, MSG_QUEUED);
+		MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, Response::MSG_QUEUED);
 
 		for (unsigned v = start; v <= i; v++)
 		{
@@ -451,7 +451,7 @@ void TestCan::testCopyResponse()
 		QCOMPARE(message.eid(),      TEST_CTRL_ID);
 		QCOMPARE(message.sid(),      CAN_GATEWAY_ID);
 		QCOMPARE(message.command(),  SETLFT);
-		QCOMPARE(message.response(), MSG_QUEUED);
+		QCOMPARE(message.response(), Response::MSG_QUEUED);
 		QCOMPARE(message.unitNo(),   TEST_UNIT_NO);
 		QVERIFY(message.toString().size() > 0);
 
@@ -459,7 +459,7 @@ void TestCan::testCopyResponse()
 		QCOMPARE(frame.frameId(), TEST_CTRL_ID);
 		QCOMPARE((size_t)array.size(), i + 1);
 		QCOMPARE(Command( array.at(0)), SETLFT | CMD_RESPONSE);
-		QCOMPARE(Response(array.at(1)), MSG_QUEUED);
+		QCOMPARE(Response(array.at(1)), Response::MSG_QUEUED);
 
 		for (size_t v = start; v <= i; v++)
 		{

@@ -18,9 +18,10 @@ using namespace mrw::model;
 using namespace mrw::ctrl;
 using namespace mrw::statechart;
 
-using Bending   = Position::Bending;
-using LockState = Device::LockState;
-using Symbol    = Signal::Symbol;
+using Bending    = Position::Bending;
+using LockState  = Device::LockState;
+using Symbol     = Signal::Symbol;
+using SignalType = Signal::SignalType;
 
 #define not_VERBOSE
 
@@ -52,21 +53,25 @@ SignalControllerProxy::SignalControllerProxy(
 		list << signal->partName();
 		switch (signal->type())
 		{
-		case Signal::SHUNT_SIGNAL:
+		case SignalType::SHUNT_SIGNAL:
 			shunt_signal   = signal;
+			shunt_signal->setSymbolCallback(std::bind(&SignalControllerProxy::shunt, this));
 			break;
 
-		case Signal::DISTANT_SIGNAL:
+		case SignalType::DISTANT_SIGNAL:
 			distant_signal = signal;
+			distant_signal->setSymbolCallback(std::bind(&SignalControllerProxy::distant, this));
 			break;
 
-		case Signal::MAIN_SIGNAL:
+		case SignalType::MAIN_SIGNAL:
 			main_signal    = signal;
+			main_signal->setSymbolCallback(std::bind(&SignalControllerProxy::main, this));
 			break;
 
-		case Signal::MAIN_SHUNT_SIGNAL:
+		case SignalType::MAIN_SHUNT_SIGNAL:
 			main_signal    = signal;
 			shunt_signal   = signal;
+			main_signal->setSymbolCallback(std::bind(&SignalControllerProxy::main, this));
 			break;
 		}
 	}
@@ -254,9 +259,9 @@ void SignalControllerProxy::setDistantSignal(SignalControllerProxy * signal)
 	statechart_distant.setMainController(signal);
 }
 
-void SignalControllerProxy::setSymbol(Signal::Symbol new_symbol)
+void SignalControllerProxy::setSymbol(const Symbol new_symbol)
 {
-	statechart.setSymbol(new_symbol);
+	statechart.setSymbol(sc::integer(new_symbol));
 }
 
 void SignalControllerProxy::setState(SectionState new_state)

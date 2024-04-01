@@ -83,7 +83,7 @@ void SimulatorService::controller(
 {
 	const Command cmd = message.command();
 
-	MrwMessage   response(controller->id(), NO_UNITNO, cmd, MSG_OK);
+	MrwMessage   response(controller->id(), NO_UNITNO, cmd, Response::MSG_OK);
 	bool         answer = true;
 
 	switch (cmd)
@@ -134,7 +134,7 @@ void SimulatorService::controller(
 	case RESET:
 	case SET_ID:
 	case CFGEND:
-		response = MrwMessage(controller->id(), NO_UNITNO, cmd, MSG_RESET_PENDING);
+		response = MrwMessage(controller->id(), NO_UNITNO, cmd, Response::MSG_RESET_PENDING);
 
 		write(response);
 		[[fallthrough]];
@@ -154,24 +154,24 @@ void SimulatorService::device(const MrwMessage & message)
 	const UnitNo           unit_no = message.unitNo();
 	const Command          cmd     = message.command();
 	Device        *        device  = model->deviceById(id, unit_no);
-	Response               code    = device != nullptr ? MSG_OK : MSG_UNIT_NOT_FOUND;
+	Response               code    = device != nullptr ? Response::MSG_OK : Response::MSG_UNIT_NOT_FOUND;
 	std::vector<uint8_t>   appendix;
 	int                    timeout = 0;
 
 	switch (cmd)
 	{
 	case SETLFT:
-		if (setSwitchState(device, SWITCH_STATE_LEFT))
+		if (setSwitchState(device, SwitchState::SWITCH_STATE_LEFT))
 		{
-			code    = MSG_QUEUED;
+			code    = Response::MSG_QUEUED;
 			timeout = 100;
 		}
 		break;
 
 	case SETRGT:
-		if (setSwitchState(device, SWITCH_STATE_RIGHT))
+		if (setSwitchState(device, SwitchState::SWITCH_STATE_RIGHT))
 		{
-			code    = MSG_QUEUED;
+			code    = Response::MSG_QUEUED;
 			timeout = 100;
 		}
 		break;
@@ -187,7 +187,7 @@ void SimulatorService::device(const MrwMessage & message)
 	case SETSGN:
 		if (isFormSignal(device))
 		{
-			code    = MSG_QUEUED;
+			code    = Response::MSG_QUEUED;
 			timeout = 750;
 		}
 		break;
@@ -222,11 +222,11 @@ void SimulatorService::device(const MrwMessage & message)
 
 	write(response);
 
-	if ((code == MSG_QUEUED) && (timeout > 0))
+	if ((code == Response::MSG_QUEUED) && (timeout > 0))
 	{
 		std::function<void()>  late_ok = [this, id, unit_no, cmd, timeout]()
 		{
-			MrwMessage ok(id, unit_no, cmd, MSG_OK);
+			MrwMessage ok(id, unit_no, cmd, Response::MSG_OK);
 
 			ok.append(timeout / SLICE);
 			write(ok);
@@ -236,11 +236,11 @@ void SimulatorService::device(const MrwMessage & message)
 	}
 }
 
-uint8_t SimulatorService::getSwitchState(Device * device)
+std::underlying_type_t<SwitchState> SimulatorService::getSwitchState(Device * device)
 {
 	AbstractSwitch * rs = dynamic_cast<AbstractSwitch *>(device);
 
-	return rs->switchState();
+	return static_cast<std::underlying_type_t<SwitchState>>(rs->switchState());
 }
 
 bool SimulatorService::setSwitchState(Device * device, const SwitchState switch_state)
@@ -274,14 +274,14 @@ uint8_t SimulatorService::occupation(Device * device)
 
 void SimulatorService::bootSequence(const ControllerId id)
 {
-	MrwMessage response(id, NO_UNITNO, GETVER, MSG_OK);
+	MrwMessage response(id, NO_UNITNO, GETVER, Response::MSG_OK);
 	response.append(3);
 	response.append(1);
 	response.append(0x23);
 	response.append(0x45);
 	write(response);
 
-	response = MrwMessage(id, NO_UNITNO, RESET, MSG_BOOTED);
+	response = MrwMessage(id, NO_UNITNO, RESET, Response::MSG_BOOTED);
 	response.append(0);
 	write(response);
 }

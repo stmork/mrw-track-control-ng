@@ -70,9 +70,9 @@ namespace mrw::util
 		 * @return The QString representation of the symbolic value.
 		 */
 		[[nodiscard]]
-		inline QString get(const T key) const noexcept
+		constexpr QString get(const T key) const noexcept
 		{
-			auto it = std::unordered_map<T, QString>::find(key);
+			const auto it = std::unordered_map<T, QString>::find(key);
 
 			return it != std::unordered_map<T, QString>::end() ?
 				it->second :
@@ -99,7 +99,7 @@ namespace mrw::util
 		 * when the const_iterator is not equal to the end() iterator.
 		 */
 		[[nodiscard]]
-		inline decltype(auto) findKey(const QString & value) const noexcept
+		constexpr decltype(auto) findKey(const QString & value) const noexcept
 		{
 			auto it = std::unordered_map<T, QString>::cbegin();
 

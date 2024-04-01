@@ -9,6 +9,7 @@
 #define MRW_CAN_COMMANDS_H
 
 #include <cinttypes>
+#include <type_traits>
 
 #include <can/types.h>
 
@@ -33,7 +34,7 @@ namespace mrw::can
 	/**
 	 * This enumeration lists all supported MrwMessage commands.
 	 */
-	enum Command : uint8_t
+	enum Command : std::underlying_type_t<CommandCategory>
 	{
 		SETLFT  = CAT_SWITCH | 0x01, ///< Turn switch left.
 		SETRGT  = CAT_SWITCH | 0x02, ///< Turn switch right.
@@ -84,7 +85,7 @@ namespace mrw::can
 	/**
 	 * This enumeration lists all response codes for a MrwMessage request.
 	 */
-	enum Response : uint8_t
+	enum class Response : uint8_t
 	{
 		/** The command succeeded successfully.*/
 		MSG_OK                  =  0,
@@ -161,7 +162,7 @@ namespace mrw::can
 	 * the aspects are per screen and there exists masts with multiple
 	 * screens. E.g. a main signal combined with a distant signal.
 	 */
-	enum SignalAspect : uint8_t
+	enum class SignalAspect : uint8_t
 	{
 		/**
 		 * All lights are off. This occurs for a distant signal if
@@ -236,15 +237,15 @@ namespace mrw::can
 
 		/** All lights up for testing purposes. */
 		SIGNAL_TST,
-	};
 
-	static constexpr uint8_t SIGNAL_MAIN_DISTANT_OFFSET = SIGNAL_VR0 - SIGNAL_HP0;
+		SIGNAL_MAIN_DISTANT_OFFSET = SIGNAL_VR0 - SIGNAL_HP0
+	};
 
 	/**
 	 * This enumeration lists the switches state if they are turned left or
 	 * right.
 	 */
-	enum SwitchState : uint8_t
+	enum class SwitchState : uint8_t
 	{
 		SWITCH_STATE_LEFT  = 1,
 		SWITCH_STATE_RIGHT = 2
@@ -255,7 +256,7 @@ namespace mrw::can
 	 *
 	 * @note The sensors do not influence the track control system.
 	 */
-	enum SensorType : uint8_t
+	enum class SensorType : uint8_t
 	{
 		SENSOR_LIGHT = 1,
 		SENSOR_TEMP  = 2

@@ -133,8 +133,8 @@ void TestFlankSwitch::testFlankProtectionDcs()
 	QVERIFY(!contains(flank_switches, s4));
 	QVERIFY( contains(flank_switches, s6));
 	QVERIFY(!contains(flank_switches, s7));
-	QCOMPARE(s3->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s6->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s3->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s6->switchState(), SwitchState::SWITCH_STATE_LEFT);
 
 	flank_switches.clear();
 	s5->setState(DoubleCrossSwitch::State::AD);
@@ -143,8 +143,8 @@ void TestFlankSwitch::testFlankProtectionDcs()
 	QVERIFY(!contains(flank_switches, s4));
 	QVERIFY(!contains(flank_switches, s6));
 	QVERIFY( contains(flank_switches, s7));
-	QCOMPARE(s3->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s7->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s3->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s7->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 
 	flank_switches.clear();
 	s5->setState(DoubleCrossSwitch::State::BC);
@@ -153,8 +153,8 @@ void TestFlankSwitch::testFlankProtectionDcs()
 	QVERIFY( contains(flank_switches, s4));
 	QVERIFY( contains(flank_switches, s6));
 	QVERIFY(!contains(flank_switches, s7));
-	QCOMPARE(s4->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s6->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s4->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s6->switchState(), SwitchState::SWITCH_STATE_LEFT);
 
 	flank_switches.clear();
 	s5->setState(DoubleCrossSwitch::State::BD);
@@ -163,8 +163,8 @@ void TestFlankSwitch::testFlankProtectionDcs()
 	QVERIFY( contains(flank_switches, s4));
 	QVERIFY(!contains(flank_switches, s6));
 	QVERIFY( contains(flank_switches, s7));
-	QCOMPARE(s4->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s7->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s4->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s7->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 }
 
 void TestFlankSwitch::testFlankProtectionRsLeft()
@@ -180,15 +180,15 @@ void TestFlankSwitch::testFlankProtectionRsLeft()
 	s1->setState(RegularSwitch::State::AB);
 	QCOMPARE(s1->flank(flank_switches, true), 0u);
 	QVERIFY(!contains(flank_switches, s2));
-	QCOMPARE(s1->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s2->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s1->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s2->switchState(), SwitchState::SWITCH_STATE_LEFT);
 
 	flank_switches.clear();
 	s1->setState(RegularSwitch::State::AC);
 	QCOMPARE(s1->flank(flank_switches, true), 1u);
 	QVERIFY(contains(flank_switches, s2));
-	QCOMPARE(s1->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s2->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s1->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s2->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 }
 
 void TestFlankSwitch::testFlankProtectionRsRight()
@@ -204,15 +204,15 @@ void TestFlankSwitch::testFlankProtectionRsRight()
 	s8->setState(RegularSwitch::State::AC);
 	QCOMPARE(s8->flank(flank_switches, true), 0u);
 	QVERIFY(!contains(flank_switches, s9));
-	QCOMPARE(s8->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s9->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s8->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s9->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 
 	flank_switches.clear();
 	s8->setState(RegularSwitch::State::AB);
 	QCOMPARE(s8->flank(flank_switches, true), 1u);
 	QVERIFY(contains(flank_switches, s9));
-	QCOMPARE(s8->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s9->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s8->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s9->switchState(), SwitchState::SWITCH_STATE_LEFT);
 }
 
 void TestFlankSwitch::testFlankProtectionMid()
@@ -280,8 +280,8 @@ void TestFlankSwitch::testFlankProtectionParallel()
 	const std::vector<RegularSwitch *> & flank_switches = route.doFlank();
 
 	QCOMPARE(flank_switches.size(), 2u);
-	QCOMPARE(s1->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s2->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s1->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s2->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 	QVERIFY(!s1->reserved());
 	QVERIFY(s2->reserved());
 }
@@ -302,16 +302,16 @@ void TestFlankSwitch::testFlankProtectionDoubleU1()
 	QCOMPARE(s12->flank(flank_switches, true), 1u);
 	QVERIFY(!contains(flank_switches, s11));
 	QVERIFY(contains(flank_switches, s13));
-	QCOMPARE(s12->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s13->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s12->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s13->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 
 	flank_switches.clear();
 	s12->setState(RegularSwitch::State::AB);
 	QCOMPARE(s12->flank(flank_switches, true), 0u);
 	QVERIFY(!contains(flank_switches, s11));
 	QVERIFY(!contains(flank_switches, s13));
-	QCOMPARE(s12->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s13->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s12->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s13->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 }
 
 void TestFlankSwitch::testFlankProtectionDoubleU2()
@@ -330,16 +330,16 @@ void TestFlankSwitch::testFlankProtectionDoubleU2()
 	QCOMPARE(s11->flank(flank_switches, true), 1u);
 	QVERIFY(!contains(flank_switches, s12));
 	QVERIFY(contains(flank_switches, s13));
-	QCOMPARE(s12->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s13->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s12->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s13->switchState(), SwitchState::SWITCH_STATE_LEFT);
 
 	flank_switches.clear();
 	s11->setState(RegularSwitch::State::AC);
 	QCOMPARE(s11->flank(flank_switches, true), 0u);
 	QVERIFY(!contains(flank_switches, s11));
 	QVERIFY(!contains(flank_switches, s13));
-	QCOMPARE(s12->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s13->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s12->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s13->switchState(), SwitchState::SWITCH_STATE_LEFT);
 }
 
 void TestFlankSwitch::testFlankProtectionDoubleU3()
@@ -358,16 +358,16 @@ void TestFlankSwitch::testFlankProtectionDoubleU3()
 	QCOMPARE(s13->flank(flank_switches, true), 1u);
 	QVERIFY(contains(flank_switches, s11));
 	QVERIFY(!contains(flank_switches, s12));
-	QCOMPARE(s11->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s12->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s11->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s12->switchState(), SwitchState::SWITCH_STATE_LEFT);
 
 	flank_switches.clear();
 	s13->setState(RegularSwitch::State::AC);
 	QCOMPARE(s13->flank(flank_switches, true), 1u);
 	QVERIFY(!contains(flank_switches, s11));
 	QVERIFY(contains(flank_switches, s12));
-	QCOMPARE(s11->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s12->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s11->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s12->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 }
 
 void TestFlankSwitch::testFlankProtectionDoubleURoute()
@@ -396,17 +396,17 @@ void TestFlankSwitch::testFlankProtectionDoubleURoute()
 	const std::vector<RegularSwitch *> & flanks_bottom = route_bottom.doFlank();
 	QCOMPARE(flanks_bottom.size(), 1u);
 
-	QCOMPARE(s12->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s13->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s12->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s13->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 
 	// Now turn top route and verify.
 	QVERIFY(route_top.append(r113));
 	const std::vector<RegularSwitch *> & flanks_top = route_top.doFlank();
 	QCOMPARE(flanks_top.size(), 1u);
 
-	QCOMPARE(s11->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s12->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s13->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s11->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s12->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s13->switchState(), SwitchState::SWITCH_STATE_LEFT);
 }
 
 void TestFlankSwitch::testFlankProtectionRhombus()
@@ -424,16 +424,16 @@ void TestFlankSwitch::testFlankProtectionRhombus()
 
 	QCOMPARE(s14->flank(flank_switches, true), 0u);
 	QVERIFY(!contains(flank_switches, s15));
-	QCOMPARE(s14->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s15->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s14->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s15->switchState(), SwitchState::SWITCH_STATE_LEFT);
 
 	flank_switches.clear();
 	s14->setState(RegularSwitch::State::AB);
 	s15->setState(RegularSwitch::State::AC);
 	QCOMPARE(s14->flank(flank_switches, true), 0u);
 	QVERIFY(!contains(flank_switches, s15));
-	QCOMPARE(s14->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s15->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s14->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s15->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 }
 
 void TestFlankSwitch::testFlankProtectionRhombusRouteLR()
@@ -461,11 +461,11 @@ void TestFlankSwitch::testFlankProtectionRhombusRouteLR()
 	QCOMPARE(flank_switches.size(), 1u);
 	QVERIFY(contains(flank_switches, s11));
 
-	QCOMPARE(s11->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s12->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s13->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s14->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s15->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s11->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s12->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s13->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s14->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s15->switchState(), SwitchState::SWITCH_STATE_LEFT);
 }
 
 void TestFlankSwitch::testFlankProtectionRhombusRouteRL()
@@ -493,11 +493,11 @@ void TestFlankSwitch::testFlankProtectionRhombusRouteRL()
 	QCOMPARE(flank_switches.size(), 1u);
 	QVERIFY(contains(flank_switches, s12));
 
-	QCOMPARE(s11->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s12->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s13->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s14->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s15->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s11->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s12->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s13->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s14->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s15->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 }
 
 void TestFlankSwitch::testFlankProtectionFar()
@@ -515,7 +515,7 @@ void TestFlankSwitch::testFlankProtectionFar()
 	QVERIFY(r217 != nullptr);
 
 	s22->setState(RegularSwitch::State::AB);
-	QCOMPARE(s22->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s22->switchState(), SwitchState::SWITCH_STATE_LEFT);
 
 	TestRoute  route(true, SectionState::TOUR, r211);
 
@@ -523,9 +523,9 @@ void TestFlankSwitch::testFlankProtectionFar()
 	const std::vector<RegularSwitch *> & flanks = route.doFlank();
 	QCOMPARE(flanks.size(), 0u);
 
-	QCOMPARE(s21->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s22->switchState(), SWITCH_STATE_LEFT);
-	QCOMPARE(s23->switchState(), SWITCH_STATE_RIGHT);
+	QCOMPARE(s21->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s22->switchState(), SwitchState::SWITCH_STATE_LEFT);
+	QCOMPARE(s23->switchState(), SwitchState::SWITCH_STATE_RIGHT);
 }
 
 void TestFlankSwitch::testFlankProtectionDifferentRegion()
@@ -541,13 +541,13 @@ void TestFlankSwitch::testFlankProtectionDifferentRegion()
 	QVERIFY(r228 != nullptr);
 
 	s31->setState(RegularSwitch::State::AB);
-	QCOMPARE(s31->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s31->switchState(), SwitchState::SWITCH_STATE_LEFT);
 	TestRoute  route(true, SectionState::TOUR, r211);
 
 	QVERIFY(route.append(r228));
 	const std::vector<RegularSwitch *> & flanks = route.doFlank();
 	QCOMPARE(flanks.size(), 0u);
 
-	QCOMPARE(s24->switchState(), SWITCH_STATE_RIGHT);
-	QCOMPARE(s31->switchState(), SWITCH_STATE_LEFT);
+	QCOMPARE(s24->switchState(), SwitchState::SWITCH_STATE_RIGHT);
+	QCOMPARE(s31->switchState(), SwitchState::SWITCH_STATE_LEFT);
 }

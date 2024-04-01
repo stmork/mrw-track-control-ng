@@ -17,6 +17,8 @@
 using namespace mrw::test;
 using namespace mrw::model;
 
+using SignalType = Signal::SignalType;
+
 TestNumbering::TestNumbering() : TestModelBase("Test-Numbering")
 {
 }
@@ -164,9 +166,9 @@ void TestNumbering::testSignalSort()
 	QCOMPARE(segment_signals[3]->direction(), false);
 	QCOMPARE(segment_signals[4]->direction(), false);
 
-	QCOMPARE(segment_signals[0]->type(), Signal::MAIN_SIGNAL);
-	QCOMPARE(segment_signals[1]->type(), Signal::DISTANT_SIGNAL);
-	QCOMPARE(segment_signals[2]->type(), Signal::SHUNT_SIGNAL);
-	QCOMPARE(segment_signals[3]->type(), Signal::MAIN_SHUNT_SIGNAL);
-	QCOMPARE(segment_signals[4]->type(), Signal::DISTANT_SIGNAL);
+	QCOMPARE(segment_signals[0]->type(), SignalType::MAIN_SIGNAL);
+	QCOMPARE(segment_signals[1]->type(), SignalType::DISTANT_SIGNAL);
+	QCOMPARE(segment_signals[2]->type(), SignalType::SHUNT_SIGNAL);
+	QCOMPARE(segment_signals[3]->type(), SignalType::MAIN_SHUNT_SIGNAL);
+	QCOMPARE(segment_signals[4]->type(), SignalType::DISTANT_SIGNAL);
 }

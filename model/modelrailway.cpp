@@ -16,6 +16,8 @@
 using namespace mrw::can;
 using namespace mrw::model;
 
+using SignalType = Signal::SignalType;
+
 ModelRailway::ModelRailway(const QString & filename)
 {
 	QFile file(filename);
@@ -127,7 +129,11 @@ void ModelRailway::initStatistics()
 			signal_s.begin(), signal_s.end(),
 			[](const Signal * signal)
 	{
-		return (signal->type() & Signal::MAIN_SIGNAL) != 0;
+		const SignalType type = signal->type();
+
+		return
+			(type == SignalType::MAIN_SIGNAL) ||
+			(type == SignalType::MAIN_SHUNT_SIGNAL);
 	});
 
 	for (const Region * region : regions)

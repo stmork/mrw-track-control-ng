@@ -217,7 +217,7 @@ size_t DoubleCrossSwitch::flank(
 {
 	const std::bitset<8>  bits(index);
 	const bool            left     = bits.count() == 1;
-	const SwitchState     compare  = left ?  SWITCH_STATE_RIGHT : SWITCH_STATE_LEFT;
+	const SwitchState     compare  = left ?  SwitchState::SWITCH_STATE_RIGHT : SwitchState::SWITCH_STATE_LEFT;
 	RegularSwitch    *    other    = flank_switches[index];
 	size_t                equal    = 0;
 

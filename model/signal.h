@@ -50,7 +50,7 @@ namespace mrw::model
 		 * will be computed into a mrw::can::SignalState later depending on
 		 * the SignalType.
 		 */
-		enum Symbol : int
+		enum class Symbol : int
 		{
 			/** Will always result in SIGNAL_OFF */
 			OFF  = -1,
@@ -72,7 +72,7 @@ namespace mrw::model
 		/**
 		 * This enumeration represents which basic type of the Signal.
 		 */
-		enum SignalType
+		enum class SignalType : unsigned
 		{
 			/**
 			 * Main Signal:
@@ -116,7 +116,22 @@ namespace mrw::model
 		/** The signal type. */
 		const SignalType    signal_type;
 
-		mrw::can::SignalAspect signal_aspect = mrw::can::SIGNAL_OFF;
+		mrw::can::SignalAspect signal_aspect = mrw::can::SignalAspect::SIGNAL_OFF;
+
+		/**
+		 * This callback retrieves the Signal::Symbol state from another
+		 * controling state instance.
+		 *
+		 * @note This might be useless since some signals may be grouped
+		 * together so this state can only be completed correctly by its
+		 * controlling group.
+		 *
+		 * @return The Signal::Symbol state.
+		 */
+		std::function<Symbol(void)> symbol = []()
+		{
+			return Symbol::OFF;
+		};
 
 	public:
 		explicit Signal(
@@ -124,6 +139,20 @@ namespace mrw::model
 			Section       *       model_section,
 			const QDomElement  &  element,
 			const SignalType      type);
+
+		/**
+		 * This method adds a callback for retrieving the Symbol state. This
+		 * is necessary because its state is somewhere else inside another
+		 * controlling class.
+		 *
+		 * @note This might be useless since some signals may be grouped
+		 * together so this state can only be completed correctly by its
+		 * controlling group.
+		 *
+		 * @param callback The callback stored inside the symbol function.
+		 * @see symbol.
+		 */
+		void setSymbolCallback(std::function<Symbol(void)> callback);
 
 		/**
 		 * This method returns @c true if the Signal is aligned counting
@@ -204,14 +233,13 @@ namespace mrw::model
 		 *
 		 * @return The brief symbol of what signal is configured.
 		 */
-		QString symbol() const;
+		QString typeDescr() const;
 
 	private:
 		void link() override;
 
-		static const mrw::util::ConstantEnumerator<mrw::can::SignalAspect> signal_constants;
-		static const mrw::util::ConstantEnumerator<SignalType>             type_map;
-		static const mrw::util::ConstantEnumerator<Symbol>                 symbol_map;
+		static const mrw::util::ConstantEnumerator<SignalType>    type_map;
+		static const mrw::util::ConstantEnumerator<Symbol>        symbol_map;
 	};
 }
 

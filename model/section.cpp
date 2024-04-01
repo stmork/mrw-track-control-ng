@@ -19,6 +19,8 @@ using namespace mrw::util;
 using namespace mrw::can;
 using namespace mrw::model;
 
+using SignalType = Signal::SignalType;
+
 /**
  * Regular expression prolog:
  * \d matches one digit.
@@ -88,35 +90,35 @@ Section::Section(
 				}
 				else if (type == "Gleissperrsignal")
 				{
-					rail_part = new LightSignal(model, this, child, Signal::SHUNT_SIGNAL, 2);
+					rail_part = new LightSignal(model, this, child, SignalType::SHUNT_SIGNAL, 2);
 				}
 				else if (type == "Vorsignal")
 				{
-					rail_part = new LightSignal(model, this, child, Signal::DISTANT_SIGNAL, 4);
+					rail_part = new LightSignal(model, this, child, SignalType::DISTANT_SIGNAL, 4);
 				}
 				else if (type == "Blocksignal")
 				{
-					rail_part = new LightSignal(model, this, child, Signal::MAIN_SIGNAL, 2);
+					rail_part = new LightSignal(model, this, child, SignalType::MAIN_SIGNAL, 2);
 				}
 				else if (type == "Einfahrsignal")
 				{
-					rail_part = new LightSignal(model, this, child, Signal::MAIN_SIGNAL, 3);
+					rail_part = new LightSignal(model, this, child, SignalType::MAIN_SIGNAL, 3);
 				}
 				else if (type == "Ausfahrsignal")
 				{
-					rail_part = new LightSignal(model, this, child, Signal::MAIN_SHUNT_SIGNAL, 5);
+					rail_part = new LightSignal(model, this, child, SignalType::MAIN_SHUNT_SIGNAL, 5);
 				}
 				else if (type == "Formgleissperrsignal")
 				{
-					rail_part = new FormSignal(model, this, child, Signal::SHUNT_SIGNAL);
+					rail_part = new FormSignal(model, this, child, SignalType::SHUNT_SIGNAL);
 				}
 				else if (type == "Formvorsignal")
 				{
-					rail_part = new FormSignal(model, this, child, Signal::DISTANT_SIGNAL);
+					rail_part = new FormSignal(model, this, child, SignalType::DISTANT_SIGNAL);
 				}
 				else if (type == "Formhauptsignal")
 				{
-					rail_part = new FormSignal(model, this, child, Signal::MAIN_SIGNAL);
+					rail_part = new FormSignal(model, this, child, SignalType::MAIN_SIGNAL);
 				}
 				else
 				{

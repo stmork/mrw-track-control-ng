@@ -44,7 +44,7 @@ void TrackerService::info()
 
 void TrackerService::process(const MrwMessage & message)
 {
-	if (message.isResponse() && (message.response() == MSG_OK))
+	if (message.isResponse() && (message.response() == Response::MSG_OK))
 	{
 		const Command cmd = message.command();
 
@@ -92,7 +92,7 @@ void TrackerService::append(
 
 void TrackerService::send(Section * section)
 {
-	MrwMessage message(section->controller()->id(), section->unitNo(), GETRBS, MSG_OK);
+	MrwMessage message(section->controller()->id(), section->unitNo(), GETRBS, Response::MSG_OK);
 	message.append(section->occupation());
 	write(message);
 }

@@ -39,10 +39,10 @@ namespace mrw::model
 
 		static const std::regex path_regex;
 
-		const size_t          lights;
+		const size_t            lights;
 
-		Controller      *     signal_controller = nullptr;
-		MultiplexConnection * mux_connection    = nullptr;
+		Controller       *      signal_controller = nullptr;
+		MultiplexConnection  *  mux_connection    = nullptr;
 
 	public:
 		explicit LightSignal(

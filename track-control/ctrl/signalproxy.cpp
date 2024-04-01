@@ -72,7 +72,7 @@ void SignalProxy::send()
 	{
 		MrwMessage  message(device->command(SETSGN));
 
-		message.append(signal->aspect());
+		message.append(std::underlying_type_t<SignalAspect>(signal->aspect()));
 		ControllerRegistry::can()->write(message);
 	}
 }
@@ -101,11 +101,11 @@ bool SignalProxy::process(Signal * device, const MrwMessage & message)
 
 		switch (message.response())
 		{
-		case MSG_QUEUED:
+		case Response::MSG_QUEUED:
 			QMetaObject::invokeMethod(this, &SignalStatechart::queued, Qt::QueuedConnection);
 			return true;
 
-		case MSG_OK:
+		case Response::MSG_OK:
 			switch (message.command())
 			{
 			case SETSGN:
@@ -150,20 +150,20 @@ bool MainProxy::prepare()
 
 	Q_ASSERT(signal != nullptr);
 
-	SignalAspect state = SIGNAL_OFF;
+	SignalAspect state = SignalAspect::SIGNAL_OFF;
 
-	switch (getSymbol())
+	switch (Symbol(getSymbol()))
 	{
 	default:
-		state = SIGNAL_OFF;
+		state = SignalAspect::SIGNAL_OFF;
 		break;
 
 	case Symbol::STOP:
-		state = SIGNAL_HP0;
+		state = SignalAspect::SIGNAL_HP0;
 		break;
 
 	case Symbol::GO:
-		state = curved < SLOW_CURVED_LIMIT ? SIGNAL_HP1 : SIGNAL_HP2;
+		state = curved < SLOW_CURVED_LIMIT ? SignalAspect::SIGNAL_HP1 : SignalAspect::SIGNAL_HP2;
 		break;
 	}
 
@@ -197,28 +197,30 @@ bool DistantProxy::prepare()
 
 	Q_ASSERT(signal != nullptr);
 
-	SignalAspect state      = SIGNAL_OFF;
+	SignalAspect state = SignalAspect::SIGNAL_OFF;
 
-	switch (getSymbol())
+	switch (Symbol(getSymbol()))
 	{
 	case Symbol::GO:
 		if (main_controller != nullptr)
 		{
-			const uint8_t main_state = main_controller->mainSignal()->aspect();
+			const auto distant_aspect =
+				std::underlying_type_t<SignalAspect>(main_controller->mainSignal()->aspect()) +
+				std::underlying_type_t<SignalAspect>(SignalAspect::SIGNAL_MAIN_DISTANT_OFFSET);
 
-			state = static_cast<SignalAspect>(main_state + SIGNAL_MAIN_DISTANT_OFFSET);
+			state = SignalAspect(distant_aspect);
 		}
 		break;
 
 	case Symbol::STOP:
 		if ((main_controller != nullptr) || (combined_signal == nullptr))
 		{
-			state = SIGNAL_VR0;
+			state = SignalAspect::SIGNAL_VR0;
 		}
 		break;
 
 	case Symbol::OFF:
-		state = SIGNAL_OFF;
+		state = SignalAspect::SIGNAL_OFF;
 		break;
 	}
 
@@ -271,20 +273,20 @@ bool ShuntProxy::prepare()
 {
 	__METHOD__;
 
-	SignalAspect state = SIGNAL_OFF;
+	SignalAspect state = SignalAspect::SIGNAL_OFF;
 
-	switch (getSymbol())
+	switch (Symbol(getSymbol()))
 	{
 	default:
-		state = SIGNAL_OFF;
+		state = SignalAspect::SIGNAL_OFF;
 		break;
 
 	case Symbol::STOP:
-		state = isCombined() ? SIGNAL_HP0 : SIGNAL_SH0;
+		state = isCombined() ? SignalAspect::SIGNAL_HP0 : SignalAspect::SIGNAL_SH0;
 		break;
 
 	case Symbol::GO:
-		state = SIGNAL_SH1;
+		state = SignalAspect::SIGNAL_SH1;
 		break;
 	}
 

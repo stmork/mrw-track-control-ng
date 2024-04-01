@@ -39,12 +39,12 @@ void ResetService::process(const MrwMessage & message)
 		case RESET:
 			switch (response)
 			{
-			case MSG_OK:
-			case MSG_RESET_PENDING:
+			case Response::MSG_OK:
+			case Response::MSG_RESET_PENDING:
 				insert(id);
 				break;
 
-			case MSG_BOOTED:
+			case Response::MSG_BOOTED:
 				remove(id);
 				return;
 
@@ -55,7 +55,7 @@ void ResetService::process(const MrwMessage & message)
 			break;
 
 		case GETVER:
-			if (response == MSG_OK)
+			if (response == Response::MSG_OK)
 			{
 				remove(id);
 			}

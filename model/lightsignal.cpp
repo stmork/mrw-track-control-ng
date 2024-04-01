@@ -80,7 +80,7 @@ const QString & LightSignal::name() const noexcept
 
 bool LightSignal::isUnlockable() const noexcept
 {
-	return symbol() != Signal::Symbol::GO;
+	return symbol() != Symbol::GO;
 }
 
 Controller * LightSignal::controller() const noexcept
@@ -94,8 +94,8 @@ MrwMessage LightSignal::configMsg(const unsigned pin) const
 
 	switch (type())
 	{
-	case MAIN_SIGNAL:
-	case MAIN_SHUNT_SIGNAL:
+	case SignalType::MAIN_SIGNAL:
+	case SignalType::MAIN_SHUNT_SIGNAL:
 		switch (lights)
 		{
 		case 2:
@@ -112,7 +112,7 @@ MrwMessage LightSignal::configMsg(const unsigned pin) const
 		}
 		break;
 
-	case DISTANT_SIGNAL:
+	case SignalType::DISTANT_SIGNAL:
 		switch (lights)
 		{
 		case 2:
@@ -126,7 +126,7 @@ MrwMessage LightSignal::configMsg(const unsigned pin) const
 
 		break;
 
-	case SHUNT_SIGNAL:
+	case SignalType::SHUNT_SIGNAL:
 		cmd = CFGSL2;
 		break;
 	}
@@ -150,7 +150,7 @@ QString LightSignal::toString() const noexcept
 {
 	return QString("      L %1  %2   : [%3] %4 %5 %6").
 		arg(valid()  ? "V" : "-").
-		arg(symbol()).
+		arg(typeDescr()).
 		arg(unitNo(), 4, 16, QChar('0')).
 		arg(name(), -10).
 		arg(Device::get(lock()), -10).

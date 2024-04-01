@@ -90,7 +90,7 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--enable=style,warning,performance,portability\
 	--language=c++ --std=c++14\
 	--library=qt\
-	--xml-version=2 --force -q -j 4\
+	--xml-version=2 --force -q -j `nproc`\
 	*/*.cpp */*.h\
 	tools/*/*.cpp tools/*/*.h\
 	*/ctrl/*.cpp */ctrl/*.h\

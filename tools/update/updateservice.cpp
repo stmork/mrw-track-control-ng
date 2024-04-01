@@ -93,12 +93,12 @@ void UpdateService::process(const MrwMessage & message)
 			break;
 
 		case RESET:
-			check(message, MSG_RESET_PENDING);
-			check(message, MSG_BOOTED);
+			check(message, Response::MSG_RESET_PENDING);
+			check(message, Response::MSG_BOOTED);
 			break;
 
 		case FLASH_REQ:
-			if (message.response() == MSG_HARDWARE_MISMATCH)
+			if (message.response() == Response::MSG_HARDWARE_MISMATCH)
 			{
 				statechart.mismatch();
 			}
@@ -109,7 +109,7 @@ void UpdateService::process(const MrwMessage & message)
 			break;
 
 		case FLASH_CHECK:
-			if (message.response() == MSG_CHECKSUM_ERROR)
+			if (message.response() == Response::MSG_CHECKSUM_ERROR)
 			{
 				statechart.failed();
 			}

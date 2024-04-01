@@ -177,11 +177,11 @@ bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 
 	switch (message.response())
 	{
-	case MSG_QUEUED:
+	case Response::MSG_QUEUED:
 		statechart.queued();
 		return true;
 
-	case MSG_OK:
+	case Response::MSG_OK:
 		switch (message.command())
 		{
 		case SETLFT:

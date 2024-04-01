@@ -15,26 +15,12 @@ using LockState  = Device::LockState;
 using Symbol     = Signal::Symbol;
 using SignalType = Signal::SignalType;
 
-const ConstantEnumerator<SignalAspect> Signal::signal_constants
-{
-	CONSTANT(SIGNAL_OFF),
-	CONSTANT(SIGNAL_HP0),
-	CONSTANT(SIGNAL_HP1),
-	CONSTANT(SIGNAL_HP2),
-	CONSTANT(SIGNAL_VR0),
-	CONSTANT(SIGNAL_VR1),
-	CONSTANT(SIGNAL_VR2),
-	CONSTANT(SIGNAL_SH0),
-	CONSTANT(SIGNAL_SH1),
-	CONSTANT(SIGNAL_TST)
-};
-
 const ConstantEnumerator<SignalType>  Signal::type_map
 {
-	CONSTANT(MAIN_SIGNAL),
-	CONSTANT(DISTANT_SIGNAL),
-	CONSTANT(SHUNT_SIGNAL),
-	CONSTANT(MAIN_SHUNT_SIGNAL)
+	{ SignalType::MAIN_SIGNAL,       "MAIN_SIGNAL"},
+	{ SignalType::DISTANT_SIGNAL,    "DISTANT_SIGNAL"},
+	{ SignalType::SHUNT_SIGNAL,      "SHUNT_SIGNAL"},
+	{ SignalType::MAIN_SHUNT_SIGNAL, "MAIN_SHUNT_SIGNAL"}
 };
 
 const ConstantEnumerator<Symbol>  Signal::symbol_map
@@ -60,7 +46,7 @@ bool Signal::direction() const
 	return signal_direction;
 }
 
-Signal::SignalType Signal::type() const
+SignalType Signal::type() const
 {
 	return signal_type;
 }
@@ -85,25 +71,25 @@ void Signal::link()
 {
 }
 
-QString Signal::symbol() const
+QString Signal::typeDescr() const
 {
 	QString type_descr;
 
 	switch (signal_type)
 	{
-	case MAIN_SIGNAL:
+	case SignalType::MAIN_SIGNAL:
 		type_descr = signal_direction ? " --O" : "O-- ";
 		break;
 
-	case MAIN_SIGNAL | SHUNT_SIGNAL:
+	case SignalType::MAIN_SHUNT_SIGNAL:
 		type_descr = signal_direction ? " -\\O" : "O\\- ";
 		break;
 
-	case DISTANT_SIGNAL:
+	case SignalType::DISTANT_SIGNAL:
 		type_descr = signal_direction ? " -o " : " o- ";
 		break;
 
-	case SHUNT_SIGNAL:
+	case SignalType::SHUNT_SIGNAL:
 		type_descr = signal_direction ? " ]  " : "  [ ";
 		break;
 	}
@@ -124,7 +110,7 @@ bool Signal::less(Signal * left, Signal * right)
 	return left->direction() > right->direction();
 }
 
-QString Signal::get(const Signal::Symbol symbol)
+QString Signal::get(const Symbol symbol)
 {
 	return symbol_map.get(symbol);
 }
@@ -132,4 +118,9 @@ QString Signal::get(const Signal::Symbol symbol)
 QString Signal::get(const Signal::SignalType type)
 {
 	return type_map.get(type);
+}
+
+void mrw::model::Signal::setSymbolCallback(std::function<Symbol ()> callback)
+{
+	symbol = callback;
 }

@@ -53,43 +53,43 @@ const ConstantEnumerator<Command>  MrwMessage::command_map
 
 const ConstantEnumerator<Response> MrwMessage::response_map
 {
-	CONSTANT(MSG_OK),
-	CONSTANT(MSG_QUEUE_FULL),
-	CONSTANT(MSG_UNKNOWN_CMD),
-	CONSTANT(MSG_PENDING),
-	CONSTANT(MSG_IGNORED),
-	CONSTANT(MSG_QUEUED),
-	CONSTANT(MSG_NOT_CONFIGURED_YET),
-	CONSTANT(MSG_NO_UNITNO_DEFINED),
-	CONSTANT(MSG_UNITTYPE_WRONG),
-	CONSTANT(MSG_RESET_PENDING),
-	CONSTANT(MSG_UNITNO_MISSING),
-	CONSTANT(MSG_UNIT_NOT_FOUND),
-	CONSTANT(MSG_NOT_IN_CONFIG_MODE),
-	CONSTANT(MSG_BOOTED),
-	CONSTANT(MSG_ID_NOT_CHANGED),
-	CONSTANT(MSG_CHECKSUM_ERROR),
-	CONSTANT(MSG_INFO),
-	CONSTANT(MSG_ID_CHANGE_DISABLED),
-	CONSTANT(MSG_HARDWARE_MISMATCH),
-	CONSTANT(MSG_SWITCH_FAILED),
-	CONSTANT(MSG_CONFIG_BUFFER_FULL),
+	CONSTANT(Response::MSG_OK),
+	CONSTANT(Response::MSG_QUEUE_FULL),
+	CONSTANT(Response::MSG_UNKNOWN_CMD),
+	CONSTANT(Response::MSG_PENDING),
+	CONSTANT(Response::MSG_IGNORED),
+	CONSTANT(Response::MSG_QUEUED),
+	CONSTANT(Response::MSG_NOT_CONFIGURED_YET),
+	CONSTANT(Response::MSG_NO_UNITNO_DEFINED),
+	CONSTANT(Response::MSG_UNITTYPE_WRONG),
+	CONSTANT(Response::MSG_RESET_PENDING),
+	CONSTANT(Response::MSG_UNITNO_MISSING),
+	CONSTANT(Response::MSG_UNIT_NOT_FOUND),
+	CONSTANT(Response::MSG_NOT_IN_CONFIG_MODE),
+	CONSTANT(Response::MSG_BOOTED),
+	CONSTANT(Response::MSG_ID_NOT_CHANGED),
+	CONSTANT(Response::MSG_CHECKSUM_ERROR),
+	CONSTANT(Response::MSG_INFO),
+	CONSTANT(Response::MSG_ID_CHANGE_DISABLED),
+	CONSTANT(Response::MSG_HARDWARE_MISMATCH),
+	CONSTANT(Response::MSG_SWITCH_FAILED),
+	CONSTANT(Response::MSG_CONFIG_BUFFER_FULL),
 
-	CONSTANT(MSG_NO_RESPONSE)
+	CONSTANT(Response::MSG_NO_RESPONSE)
 };
 
 const ConstantEnumerator<SignalAspect> MrwMessage::signal_map
 {
-	CONSTANT(SIGNAL_OFF),
-	CONSTANT(SIGNAL_HP0),
-	CONSTANT(SIGNAL_HP1),
-	CONSTANT(SIGNAL_HP2),
-	CONSTANT(SIGNAL_VR0),
-	CONSTANT(SIGNAL_VR1),
-	CONSTANT(SIGNAL_VR2),
-	CONSTANT(SIGNAL_SH0),
-	CONSTANT(SIGNAL_SH1),
-	CONSTANT(SIGNAL_TST)
+	{ SignalAspect::SIGNAL_OFF, "Off" },
+	{ SignalAspect::SIGNAL_HP0, "Hp0" },
+	{ SignalAspect::SIGNAL_HP1, "Hp1" },
+	{ SignalAspect::SIGNAL_HP2, "Hp2" },
+	{ SignalAspect::SIGNAL_VR0, "Vr0" },
+	{ SignalAspect::SIGNAL_VR1, "Vr1" },
+	{ SignalAspect::SIGNAL_VR2, "Vr2" },
+	{ SignalAspect::SIGNAL_SH0, "Sh0" },
+	{ SignalAspect::SIGNAL_SH1, "Sh1" },
+	CONSTANT(SignalAspect::SIGNAL_TST)
 };
 
 MrwMessage::MrwMessage(const Command command, const ControllerId id) :
@@ -97,7 +97,7 @@ MrwMessage::MrwMessage(const Command command, const ControllerId id) :
 	dst(id),
 	unit_no(0),
 	msg_command(command),
-	msg_response(MSG_NO_RESPONSE),
+	msg_response(Response::MSG_NO_RESPONSE),
 	info{}
 {
 	is_extended = false;
@@ -113,7 +113,7 @@ MrwMessage::MrwMessage(
 	dst(id),
 	unit_no(no),
 	msg_command(command),
-	msg_response(MSG_NO_RESPONSE),
+	msg_response(Response::MSG_NO_RESPONSE),
 	info{}
 {
 	len         = 1;
@@ -168,7 +168,7 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 			else
 			{
 				// Invalid! message response needs at least four bytes.
-				msg_response = MSG_NO_RESPONSE;
+				msg_response = Response::MSG_NO_RESPONSE;
 				unit_no      = NO_UNITNO;
 			}
 		}
@@ -176,7 +176,7 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 		{
 			dst           = is_extended ? id >> CAN_SID_SHIFT : id & CAN_SID_MASK;
 			src           = 0;
-			msg_response  = MSG_NO_RESPONSE;
+			msg_response  = Response::MSG_NO_RESPONSE;
 			unit_no       = is_extended ? id & CAN_EID_UNITNO_MASK : NO_UNITNO;
 
 			std::copy(payload.begin() + IDX_COMMAND_SIZE, payload.end(), info);
@@ -189,7 +189,7 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 		unit_no      = NO_UNITNO;
 		is_response  = false;
 		msg_command  = CMD_ILLEGAL;
-		msg_response = MSG_NO_RESPONSE;
+		msg_response = Response::MSG_NO_RESPONSE;
 	}
 }
 
@@ -258,7 +258,7 @@ MrwMessage::operator QCanBusFrame() const noexcept
 	if (is_response)
 	{
 		array.append(msg_command | CMD_RESPONSE);
-		array.append(msg_response);
+		array.append(std::underlying_type_t<Response>(msg_response));
 		array.append(unit_no & 0xff);
 		array.append(unit_no >> 8);
 		copy(array);
