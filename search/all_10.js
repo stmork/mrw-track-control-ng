@@ -37,8 +37,8 @@ var searchData=
   ['resolve_34',['resolve',['../d1/d16/classmrw_1_1model_1_1RailPart.html#ace536977a9bc46395d516092ce1bf09c',1,'mrw::model::RailPart']]],
   ['response_35',['response',['../d1/d80/classmrw_1_1can_1_1MrwMessage.html#aa7afbc78a2e8a8a6b7be6fd0d60f64d5',1,'mrw::can::MrwMessage']]],
   ['response_36',['Response',['../d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0',1,'mrw::can']]],
-  ['right_37',['right',['../d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abf63160eedfa663a3331e1939f83838c',1,'mrw::ctrl::RegularSwitchController::Status']]],
-  ['right_38',['RIGHT',['../db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403',1,'mrw::model::Position']]],
+  ['right_37',['RIGHT',['../db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403',1,'mrw::model::Position']]],
+  ['right_38',['right',['../d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abf63160eedfa663a3331e1939f83838c',1,'mrw::ctrl::RegularSwitchController::Status']]],
   ['right_5fbended_39',['right_bended',['../dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692',1,'mrw::ctrl::BaseSwitchController::Status']]],
   ['route_40',['Route',['../d7/dfb/classmrw_1_1model_1_1Route.html',1,'mrw::model::Route'],['../d7/dfb/classmrw_1_1model_1_1Route.html#a6e0998fdf14d28e379f0fc512584b79a',1,'mrw::model::Route::Route()']]]
 ];

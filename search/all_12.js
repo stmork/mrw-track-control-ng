@@ -21,5 +21,6 @@ var searchData=
   ['transaction_18',['transaction',['../d8/dde/classmrw_1_1util_1_1Batch.html#a2dd1abb1b487ad2531c3c98f24544e67',1,'mrw::util::Batch']]],
   ['triggerwithoutevent_19',['triggerWithoutEvent',['../d8/dd2/classsc_1_1EventDrivenInterface.html#a68a8f25dc0d37f7864eef4161de0e64b',1,'sc::EventDrivenInterface']]],
   ['trycomplete_20',['tryComplete',['../d8/dde/classmrw_1_1util_1_1Batch.html#a6a172e9045658340078aa3401297cccb',1,'mrw::util::Batch']]],
-  ['type_21',['type',['../db/d9c/classmrw_1_1model_1_1Signal.html#a146927a07fe74196ecf8c34b6f45821f',1,'mrw::model::Signal']]]
+  ['type_21',['type',['../db/d9c/classmrw_1_1model_1_1Signal.html#a146927a07fe74196ecf8c34b6f45821f',1,'mrw::model::Signal']]],
+  ['typedescr_22',['typeDescr',['../db/d9c/classmrw_1_1model_1_1Signal.html#abd6a8ec12de20dc91619533ff2d1f7bc',1,'mrw::model::Signal']]]
 ];
