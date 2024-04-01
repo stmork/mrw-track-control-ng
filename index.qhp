@@ -702,11 +702,11 @@
 <section title="PENDING" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a5aeac6a51c26164ebb6964d807d5c3a4ac69f06e1a9b016d133907b4e5f5864d2"/>
 <section title="LOCKED" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a5aeac6a51c26164ebb6964d807d5c3a4aaeff3f3f2731681b2ed6a27786a56203"/>
 </section>
-<section title="SignalType" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6430595d0ad20e57df38cb1a97cd7244">
-<section title="MAIN_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6430595d0ad20e57df38cb1a97cd7244a1df6a18151f3fad67725df4079260146"/>
-<section title="DISTANT_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6430595d0ad20e57df38cb1a97cd7244a8fd27e0db8da8ec53327b207f96e0749"/>
-<section title="SHUNT_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6430595d0ad20e57df38cb1a97cd7244a6145b0ad5feb4375abf71270c892eb48"/>
-<section title="MAIN_SHUNT_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6430595d0ad20e57df38cb1a97cd7244ab4cee0af487f2f882d99862267dcc590"/>
+<section title="SignalType" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a748bbdafc044064000a816907f3e4bb3">
+<section title="MAIN_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a748bbdafc044064000a816907f3e4bb3a42d23c88fc6ab52b7cd28797245e8717"/>
+<section title="DISTANT_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a748bbdafc044064000a816907f3e4bb3ada2432e6391e617a88ec60d5f3203219"/>
+<section title="SHUNT_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44"/>
+<section title="MAIN_SHUNT_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a748bbdafc044064000a816907f3e4bb3a2a6da779d8b0ad678a603dff36eb5098"/>
 </section>
 <section title="Symbol" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6d51b86199063962daedf9c4b861bc85">
 <section title="OFF" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6d51b86199063962daedf9c4b861bc85a88559a0cfd8250c9d65970cc145c92d4"/>
@@ -760,7 +760,7 @@
 <section title="setX" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a3b661be82e6cd6cd09cfaacbc3486916"/>
 <section title="toggleInclination" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#af2c14bc687444881e56428cc3a046984"/>
 <section title="toString" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a551c4fa2312fca51ed5b63ae34f9adca"/>
-<section title="type" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a146927a07fe74196ecf8c34b6f45821f"/>
+<section title="type" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a4c54025251f2e6d75cfdd76e191c34ae"/>
 <section title="typeDescr" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#abd6a8ec12de20dc91619533ff2d1f7bc"/>
 <section title="unitNo" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a262cee73971200e5c6cd308a7621682f"/>
 <section title="valid" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6d44cfceeb25ea54dd716f28624b6fb0"/>
@@ -837,11 +837,11 @@
 <section title="PENDING" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a5aeac6a51c26164ebb6964d807d5c3a4ac69f06e1a9b016d133907b4e5f5864d2"/>
 <section title="LOCKED" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a5aeac6a51c26164ebb6964d807d5c3a4aaeff3f3f2731681b2ed6a27786a56203"/>
 </section>
-<section title="SignalType" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6430595d0ad20e57df38cb1a97cd7244">
-<section title="MAIN_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6430595d0ad20e57df38cb1a97cd7244a1df6a18151f3fad67725df4079260146"/>
-<section title="DISTANT_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6430595d0ad20e57df38cb1a97cd7244a8fd27e0db8da8ec53327b207f96e0749"/>
-<section title="SHUNT_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6430595d0ad20e57df38cb1a97cd7244a6145b0ad5feb4375abf71270c892eb48"/>
-<section title="MAIN_SHUNT_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6430595d0ad20e57df38cb1a97cd7244ab4cee0af487f2f882d99862267dcc590"/>
+<section title="SignalType" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a748bbdafc044064000a816907f3e4bb3">
+<section title="MAIN_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a748bbdafc044064000a816907f3e4bb3a42d23c88fc6ab52b7cd28797245e8717"/>
+<section title="DISTANT_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a748bbdafc044064000a816907f3e4bb3ada2432e6391e617a88ec60d5f3203219"/>
+<section title="SHUNT_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44"/>
+<section title="MAIN_SHUNT_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a748bbdafc044064000a816907f3e4bb3a2a6da779d8b0ad678a603dff36eb5098"/>
 </section>
 <section title="Symbol" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6d51b86199063962daedf9c4b861bc85">
 <section title="OFF" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6d51b86199063962daedf9c4b861bc85a88559a0cfd8250c9d65970cc145c92d4"/>
@@ -892,7 +892,7 @@
 <section title="setX" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a3b661be82e6cd6cd09cfaacbc3486916"/>
 <section title="toggleInclination" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#af2c14bc687444881e56428cc3a046984"/>
 <section title="toString" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a7931b963b884ee5e353684ccaeb152a1"/>
-<section title="type" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a146927a07fe74196ecf8c34b6f45821f"/>
+<section title="type" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a4c54025251f2e6d75cfdd76e191c34ae"/>
 <section title="typeDescr" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#abd6a8ec12de20dc91619533ff2d1f7bc"/>
 <section title="unitNo" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a262cee73971200e5c6cd308a7621682f"/>
 <section title="usedPins" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#ab0ede4577a1723fae75b43891617ff32"/>
@@ -1499,11 +1499,11 @@
 <section title="STRAIGHT" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa8c5e50fab3748e9c53a6863b3dce1401"/>
 <section title="RIGHT" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403"/>
 </section>
-<section title="SignalType" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244">
-<section title="MAIN_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244a1df6a18151f3fad67725df4079260146"/>
-<section title="DISTANT_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244a8fd27e0db8da8ec53327b207f96e0749"/>
-<section title="SHUNT_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244a6145b0ad5feb4375abf71270c892eb48"/>
-<section title="MAIN_SHUNT_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244ab4cee0af487f2f882d99862267dcc590"/>
+<section title="SignalType" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3">
+<section title="MAIN_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a42d23c88fc6ab52b7cd28797245e8717"/>
+<section title="DISTANT_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3ada2432e6391e617a88ec60d5f3203219"/>
+<section title="SHUNT_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44"/>
+<section title="MAIN_SHUNT_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a2a6da779d8b0ad678a603dff36eb5098"/>
 </section>
 <section title="Symbol" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85">
 <section title="OFF" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85a88559a0cfd8250c9d65970cc145c92d4"/>
@@ -1545,7 +1545,7 @@
 <section title="setX" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a3b661be82e6cd6cd09cfaacbc3486916"/>
 <section title="toggleInclination" ref="db/d9c/classmrw_1_1model_1_1Signal.html#af2c14bc687444881e56428cc3a046984"/>
 <section title="toString" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a939a5e4e560f858b3869fc6bec10274e"/>
-<section title="type" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a146927a07fe74196ecf8c34b6f45821f"/>
+<section title="type" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a4c54025251f2e6d75cfdd76e191c34ae"/>
 <section title="typeDescr" ref="db/d9c/classmrw_1_1model_1_1Signal.html#abd6a8ec12de20dc91619533ff2d1f7bc"/>
 <section title="valid" ref="db/d9c/classmrw_1_1model_1_1Signal.html#aa1a0554860b2d9bacfff846742b619b3"/>
 <section title="value" ref="db/d9c/classmrw_1_1model_1_1Signal.html#acc6ebb418d45590a891cb9278ac6cf69"/>
@@ -2831,11 +2831,11 @@
 <section title="PENDING" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a5aeac6a51c26164ebb6964d807d5c3a4ac69f06e1a9b016d133907b4e5f5864d2"/>
 <section title="LOCKED" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a5aeac6a51c26164ebb6964d807d5c3a4aaeff3f3f2731681b2ed6a27786a56203"/>
 </section>
-<section title="SignalType" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6430595d0ad20e57df38cb1a97cd7244">
-<section title="MAIN_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6430595d0ad20e57df38cb1a97cd7244a1df6a18151f3fad67725df4079260146"/>
-<section title="DISTANT_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6430595d0ad20e57df38cb1a97cd7244a8fd27e0db8da8ec53327b207f96e0749"/>
-<section title="SHUNT_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6430595d0ad20e57df38cb1a97cd7244a6145b0ad5feb4375abf71270c892eb48"/>
-<section title="MAIN_SHUNT_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6430595d0ad20e57df38cb1a97cd7244ab4cee0af487f2f882d99862267dcc590"/>
+<section title="SignalType" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a748bbdafc044064000a816907f3e4bb3">
+<section title="MAIN_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a748bbdafc044064000a816907f3e4bb3a42d23c88fc6ab52b7cd28797245e8717"/>
+<section title="DISTANT_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a748bbdafc044064000a816907f3e4bb3ada2432e6391e617a88ec60d5f3203219"/>
+<section title="SHUNT_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44"/>
+<section title="MAIN_SHUNT_SIGNAL" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a748bbdafc044064000a816907f3e4bb3a2a6da779d8b0ad678a603dff36eb5098"/>
 </section>
 <section title="Symbol" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6d51b86199063962daedf9c4b861bc85">
 <section title="OFF" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6d51b86199063962daedf9c4b861bc85a88559a0cfd8250c9d65970cc145c92d4"/>
@@ -2889,7 +2889,7 @@
 <section title="setX" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a3b661be82e6cd6cd09cfaacbc3486916"/>
 <section title="toggleInclination" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#af2c14bc687444881e56428cc3a046984"/>
 <section title="toString" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a551c4fa2312fca51ed5b63ae34f9adca"/>
-<section title="type" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a146927a07fe74196ecf8c34b6f45821f"/>
+<section title="type" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a4c54025251f2e6d75cfdd76e191c34ae"/>
 <section title="typeDescr" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#abd6a8ec12de20dc91619533ff2d1f7bc"/>
 <section title="unitNo" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a262cee73971200e5c6cd308a7621682f"/>
 <section title="valid" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6d44cfceeb25ea54dd716f28624b6fb0"/>
@@ -2966,11 +2966,11 @@
 <section title="PENDING" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a5aeac6a51c26164ebb6964d807d5c3a4ac69f06e1a9b016d133907b4e5f5864d2"/>
 <section title="LOCKED" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a5aeac6a51c26164ebb6964d807d5c3a4aaeff3f3f2731681b2ed6a27786a56203"/>
 </section>
-<section title="SignalType" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6430595d0ad20e57df38cb1a97cd7244">
-<section title="MAIN_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6430595d0ad20e57df38cb1a97cd7244a1df6a18151f3fad67725df4079260146"/>
-<section title="DISTANT_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6430595d0ad20e57df38cb1a97cd7244a8fd27e0db8da8ec53327b207f96e0749"/>
-<section title="SHUNT_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6430595d0ad20e57df38cb1a97cd7244a6145b0ad5feb4375abf71270c892eb48"/>
-<section title="MAIN_SHUNT_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6430595d0ad20e57df38cb1a97cd7244ab4cee0af487f2f882d99862267dcc590"/>
+<section title="SignalType" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a748bbdafc044064000a816907f3e4bb3">
+<section title="MAIN_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a748bbdafc044064000a816907f3e4bb3a42d23c88fc6ab52b7cd28797245e8717"/>
+<section title="DISTANT_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a748bbdafc044064000a816907f3e4bb3ada2432e6391e617a88ec60d5f3203219"/>
+<section title="SHUNT_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44"/>
+<section title="MAIN_SHUNT_SIGNAL" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a748bbdafc044064000a816907f3e4bb3a2a6da779d8b0ad678a603dff36eb5098"/>
 </section>
 <section title="Symbol" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6d51b86199063962daedf9c4b861bc85">
 <section title="OFF" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a6d51b86199063962daedf9c4b861bc85a88559a0cfd8250c9d65970cc145c92d4"/>
@@ -3021,7 +3021,7 @@
 <section title="setX" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a3b661be82e6cd6cd09cfaacbc3486916"/>
 <section title="toggleInclination" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#af2c14bc687444881e56428cc3a046984"/>
 <section title="toString" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a7931b963b884ee5e353684ccaeb152a1"/>
-<section title="type" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a146927a07fe74196ecf8c34b6f45821f"/>
+<section title="type" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a4c54025251f2e6d75cfdd76e191c34ae"/>
 <section title="typeDescr" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#abd6a8ec12de20dc91619533ff2d1f7bc"/>
 <section title="unitNo" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a262cee73971200e5c6cd308a7621682f"/>
 <section title="usedPins" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#ab0ede4577a1723fae75b43891617ff32"/>
@@ -3628,11 +3628,11 @@
 <section title="STRAIGHT" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa8c5e50fab3748e9c53a6863b3dce1401"/>
 <section title="RIGHT" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403"/>
 </section>
-<section title="SignalType" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244">
-<section title="MAIN_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244a1df6a18151f3fad67725df4079260146"/>
-<section title="DISTANT_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244a8fd27e0db8da8ec53327b207f96e0749"/>
-<section title="SHUNT_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244a6145b0ad5feb4375abf71270c892eb48"/>
-<section title="MAIN_SHUNT_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244ab4cee0af487f2f882d99862267dcc590"/>
+<section title="SignalType" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3">
+<section title="MAIN_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a42d23c88fc6ab52b7cd28797245e8717"/>
+<section title="DISTANT_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3ada2432e6391e617a88ec60d5f3203219"/>
+<section title="SHUNT_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44"/>
+<section title="MAIN_SHUNT_SIGNAL" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a2a6da779d8b0ad678a603dff36eb5098"/>
 </section>
 <section title="Symbol" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85">
 <section title="OFF" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85a88559a0cfd8250c9d65970cc145c92d4"/>
@@ -3674,7 +3674,7 @@
 <section title="setX" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a3b661be82e6cd6cd09cfaacbc3486916"/>
 <section title="toggleInclination" ref="db/d9c/classmrw_1_1model_1_1Signal.html#af2c14bc687444881e56428cc3a046984"/>
 <section title="toString" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a939a5e4e560f858b3869fc6bec10274e"/>
-<section title="type" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a146927a07fe74196ecf8c34b6f45821f"/>
+<section title="type" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a4c54025251f2e6d75cfdd76e191c34ae"/>
 <section title="typeDescr" ref="db/d9c/classmrw_1_1model_1_1Signal.html#abd6a8ec12de20dc91619533ff2d1f7bc"/>
 <section title="valid" ref="db/d9c/classmrw_1_1model_1_1Signal.html#aa1a0554860b2d9bacfff846742b619b3"/>
 <section title="value" ref="db/d9c/classmrw_1_1model_1_1Signal.html#acc6ebb418d45590a891cb9278ac6cf69"/>
@@ -4575,7 +4575,6 @@
 <section title="Variables" ref="functions_vars.html"/>
 <section title="Typedefs" ref="functions_type.html"/>
 <section title="Enumerations" ref="functions_enum.html"/>
-<section title="Enumerator" ref="functions_eval.html"/>
 <section title="Related Symbols" ref="functions_rela.html"/>
 </section>
 </section>
@@ -4721,10 +4720,10 @@
 <keyword name="append(RailPart *rail, RailPart *target, Region *search_region)" id="mrw::model::Route::append_ad695ee4b8aec5e07cfaa5c9d316f0490" ref="d7/dfb/classmrw_1_1model_1_1Route.html#ad695ee4b8aec5e07cfaa5c9d316f0490"/>
 <keyword name="append(const uint8_t input)" id="mrw::can::MrwMessage::append_ad9c105a29f210259dbda59c4d39c566d" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ad9c105a29f210259dbda59c4d39c566d"/>
 <keyword name="aspect() const" id="mrw::model::Signal::aspect_a50b61b43ed4add4b0d5830e6a36fc33a" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a50b61b43ed4add4b0d5830e6a36fc33a"/>
-<keyword name="AssemblyPart" id="mrw::model::ModelRailway::AssemblyPart_a552c3ac63ec5fbf07aa7453934fdbc6a" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a552c3ac63ec5fbf07aa7453934fdbc6a"/>
-<keyword name="AssemblyPart(ModelRailway *model_railway, Section *model_section, const QDomElement &amp;element)" id="mrw::model::AssemblyPart::AssemblyPart_aeea148c78eef27fb6796633ebb614b1e" ref="d5/d26/classmrw_1_1model_1_1AssemblyPart.html#aeea148c78eef27fb6796633ebb614b1e"/>
 <keyword name="assemblyPart(const size_t region_idx, const size_t section_idx, const size_t part_idx) const" id="mrw::model::ModelRailway::assemblyPart_a61f7327cf274b5a1eafeee57ec2cfd02" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a61f7327cf274b5a1eafeee57ec2cfd02"/>
 <keyword name="assemblyPart(const int index) const" id="mrw::model::Section::assemblyPart_aeebcb08ee6d8edd93a84e583a208d8ae" ref="de/de1/classmrw_1_1model_1_1Section.html#aeebcb08ee6d8edd93a84e583a208d8ae"/>
+<keyword name="AssemblyPart" id="mrw::model::ModelRailway::AssemblyPart_a552c3ac63ec5fbf07aa7453934fdbc6a" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a552c3ac63ec5fbf07aa7453934fdbc6a"/>
+<keyword name="AssemblyPart(ModelRailway *model_railway, Section *model_section, const QDomElement &amp;element)" id="mrw::model::AssemblyPart::AssemblyPart_aeea148c78eef27fb6796633ebb614b1e" ref="d5/d26/classmrw_1_1model_1_1AssemblyPart.html#aeea148c78eef27fb6796633ebb614b1e"/>
 <keyword name="assemblyPartCount() const noexcept" id="mrw::model::Section::assemblyPartCount_a0bbc58e75c51d835292db89fcf5b06cf" ref="de/de1/classmrw_1_1model_1_1Section.html#a0bbc58e75c51d835292db89fcf5b06cf"/>
 <keyword name="auto_unblock" id="mrw::model::Route::auto_unblock_a09555291574584d2148369f3f92935be" ref="d7/dfb/classmrw_1_1model_1_1Route.html#a09555291574584d2148369f3f92935be"/>
 <keyword name="b_ends" id="mrw::ctrl::RailController::Status::b_ends_af5f774bc7dfd19358fde7a941e9e4e27" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#af5f774bc7dfd19358fde7a941e9e4e27"/>
@@ -4734,18 +4733,18 @@
 <keyword name="BaseController(QObject *parent=nullptr)" id="mrw::ctrl::BaseController::BaseController_ae47bfe51040bb5674d54e9a9ae00c1ce" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ae47bfe51040bb5674d54e9a9ae00c1ce"/>
 <keyword name="BaseSwitchController(QObject *parent=nullptr)" id="mrw::ctrl::BaseSwitchController::BaseSwitchController_a6898669ecedd594a9a396e8b72684f48" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a6898669ecedd594a9a396e8b72684f48"/>
 <keyword name="BaseWidget(QWidget *parent=nullptr)" id="mrw::ui::BaseWidget::BaseWidget_a91754f7f90922093a34e4a60d601bf99" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a91754f7f90922093a34e4a60d601bf99"/>
-<keyword name="Batch()" id="mrw::util::Batch::Batch_ac91261f634b1f89c51941e9d188b06a5" ref="d8/dde/classmrw_1_1util_1_1Batch.html#ac91261f634b1f89c51941e9d188b06a5"/>
 <keyword name="batch() const noexcept" id="mrw::util::BatchParticipant::batch_af0c771f2df98cdb2eee447eed5bd9480" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#af0c771f2df98cdb2eee447eed5bd9480"/>
+<keyword name="Batch()" id="mrw::util::Batch::Batch_ac91261f634b1f89c51941e9d188b06a5" ref="d8/dde/classmrw_1_1util_1_1Batch.html#ac91261f634b1f89c51941e9d188b06a5"/>
 <keyword name="BatchParticipant" id="mrw::util::Batch::BatchParticipant_a15aae440c6bc60ad50578730d6e9b3c4" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a15aae440c6bc60ad50578730d6e9b3c4"/>
 <keyword name="BatchParticipant()" id="mrw::util::BatchParticipant::BatchParticipant_a2f056ac6f0f14b943f345b4f9d629927" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a2f056ac6f0f14b943f345b4f9d629927"/>
 <keyword name="BC" id="mrw::model::DoubleCrossSwitch::BC_a1a462292eecb5d40e19aec3af07c93e1af85b7b377112c272bc87f3e73f10508d" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1af85b7b377112c272bc87f3e73f10508d"/>
 <keyword name="BD" id="mrw::model::DoubleCrossSwitch::BD_a1a462292eecb5d40e19aec3af07c93e1a87a47565be4714701a8bc2354cbaea36" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1a87a47565be4714701a8bc2354cbaea36"/>
-<keyword name="bending" id="mrw::ctrl::BaseController::Status::bending_ae9cfb02e5f31146d4dd540ee40882104" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<keyword name="bending() const" id="mrw::model::Position::bending_aa63c2660da7d2b0a33db8bbc81d98b48" ref="db/d4f/classmrw_1_1model_1_1Position.html#aa63c2660da7d2b0a33db8bbc81d98b48"/>
 <keyword name="Bending" id="mrw::model::Position::Bending_a380b5a8ca4ca1e92ca0a75a4a392caea" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caea"/>
 <keyword name="LEFT" id="mrw::model::Position::LEFT_a380b5a8ca4ca1e92ca0a75a4a392caeaa684d325a7303f52e64011467ff5c5758" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa684d325a7303f52e64011467ff5c5758"/>
 <keyword name="STRAIGHT" id="mrw::model::Position::STRAIGHT_a380b5a8ca4ca1e92ca0a75a4a392caeaa8c5e50fab3748e9c53a6863b3dce1401" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa8c5e50fab3748e9c53a6863b3dce1401"/>
 <keyword name="RIGHT" id="mrw::model::Position::RIGHT_a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403"/>
+<keyword name="bending" id="mrw::ctrl::BaseController::Status::bending_ae9cfb02e5f31146d4dd540ee40882104" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<keyword name="bending() const" id="mrw::model::Position::bending_aa63c2660da7d2b0a33db8bbc81d98b48" ref="db/d4f/classmrw_1_1model_1_1Position.html#aa63c2660da7d2b0a33db8bbc81d98b48"/>
 <keyword name="BLUE" id="mrw::ui::BaseWidget::BLUE_a2ab2e86ed30d31f026d41c76886c00aa" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <keyword name="BLUE_ON" id="mrw::util::String::BLUE_ON_a99bdb92fafd1dfab6f5d46112f4f6365" ref="d0/d55/classmrw_1_1util_1_1String.html#a99bdb92fafd1dfab6f5d46112f4f6365"/>
 <keyword name="bold(const QString &amp;input) noexcept" id="mrw::util::String::bold_aee674c3216f7e1a4f50db31dc6dda7a6" ref="d0/d55/classmrw_1_1util_1_1String.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
@@ -4846,7 +4845,7 @@
 <keyword name="disable(const bool disable=true) noexcept" id="mrw::model::Section::disable_a02555b3328227c64c4661b7b7beeb414" ref="de/de1/classmrw_1_1model_1_1Section.html#a02555b3328227c64c4661b7b7beeb414"/>
 <keyword name="disconnected()" id="mrw::can::MrwBusService::disconnected_a0c930e0da610c26edefcf10b4cd80b31" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0c930e0da610c26edefcf10b4cd80b31"/>
 <keyword name="distant_color" id="mrw::ui::SignalWidget::Status::distant_color_a31fcdb6253653185b6d7c7c72a45f95f" ref="d7/dc3/structmrw_1_1ui_1_1SignalWidget_1_1Status.html#a31fcdb6253653185b6d7c7c72a45f95f"/>
-<keyword name="DISTANT_SIGNAL" id="mrw::model::Signal::DISTANT_SIGNAL_a6430595d0ad20e57df38cb1a97cd7244a8fd27e0db8da8ec53327b207f96e0749" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244a8fd27e0db8da8ec53327b207f96e0749"/>
+<keyword name="DISTANT_SIGNAL" id="mrw::model::Signal::DISTANT_SIGNAL_a748bbdafc044064000a816907f3e4bb3ada2432e6391e617a88ec60d5f3203219" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3ada2432e6391e617a88ec60d5f3203219"/>
 <keyword name="distant_state" id="mrw::ctrl::SignalController::Status::distant_state_a380bd08548dca28214fdda37f9dcfc41" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a380bd08548dca28214fdda37f9dcfc41"/>
 <keyword name="do_bend" id="mrw::ui::RailWidget::Status::do_bend_a2ab1a9d884bd787abb7181109cb64966" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#a2ab1a9d884bd787abb7181109cb64966"/>
 <keyword name="do_bend" id="mrw::ui::SignalWidget::Status::do_bend_a1746bb8334c16c3534680d565356a976" ref="d7/dc3/structmrw_1_1ui_1_1SignalWidget_1_1Status.html#a1746bb8334c16c3534680d565356a976"/>
@@ -5014,8 +5013,8 @@
 <keyword name="key() const override" id="mrw::model::Signal::key_acca12e24ce23e49313276ba983cba2bb" ref="db/d9c/classmrw_1_1model_1_1Signal.html#acca12e24ce23e49313276ba983cba2bb"/>
 <keyword name="last_section" id="mrw::model::Route::last_section_aa4a1b4c70f2f415ee570adc26cb99094" ref="d7/dfb/classmrw_1_1model_1_1Route.html#aa4a1b4c70f2f415ee570adc26cb99094"/>
 <keyword name="last_valid_part" id="mrw::model::Route::last_valid_part_a3342a7562ea32204f532b2c2a7c064bc" ref="d7/dfb/classmrw_1_1model_1_1Route.html#a3342a7562ea32204f532b2c2a7c064bc"/>
-<keyword name="LEFT" id="mrw::model::Position::LEFT_a380b5a8ca4ca1e92ca0a75a4a392caeaa684d325a7303f52e64011467ff5c5758" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa684d325a7303f52e64011467ff5c5758"/>
 <keyword name="left" id="mrw::ctrl::RegularSwitchController::Status::left_a2b5d09af6ff2f670d28dfd897bb5220f" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a2b5d09af6ff2f670d28dfd897bb5220f"/>
+<keyword name="LEFT" id="mrw::model::Position::LEFT_a380b5a8ca4ca1e92ca0a75a4a392caeaa684d325a7303f52e64011467ff5c5758" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa684d325a7303f52e64011467ff5c5758"/>
 <keyword name="less(const Position *left, const Position *right)" id="mrw::model::Position::less_af18df98c219a3a3ad56e48256456150a" ref="db/d4f/classmrw_1_1model_1_1Position.html#af18df98c219a3a3ad56e48256456150a"/>
 <keyword name="less(Signal *left, Signal *right)" id="mrw::model::Signal::less_ad5c8dc3fdbed7c6839679a69cbea5580" ref="db/d9c/classmrw_1_1model_1_1Signal.html#ad5c8dc3fdbed7c6839679a69cbea5580"/>
 <keyword name="Light" id="mrw::model::ModelRailway::Light_a27862a9fe512b352f98ec1c054680edd" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a27862a9fe512b352f98ec1c054680edd"/>
@@ -5048,8 +5047,8 @@
 <keyword name="lookup(const std::string &amp;key) const noexcept" id="mrw::util::Properties::lookup_ad6f0a73d0b76f90a1931c467cc0fd42f" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#ad6f0a73d0b76f90a1931c467cc0fd42f"/>
 <keyword name="MAGENTA_ON" id="mrw::util::String::MAGENTA_ON_a1025ed62ec25b78007d53e0760f21ecf" ref="d0/d55/classmrw_1_1util_1_1String.html#a1025ed62ec25b78007d53e0760f21ecf"/>
 <keyword name="main_color" id="mrw::ui::SignalWidget::Status::main_color_a19ba591225ca0bb4bf189d5d8898afaa" ref="d7/dc3/structmrw_1_1ui_1_1SignalWidget_1_1Status.html#a19ba591225ca0bb4bf189d5d8898afaa"/>
-<keyword name="MAIN_SHUNT_SIGNAL" id="mrw::model::Signal::MAIN_SHUNT_SIGNAL_a6430595d0ad20e57df38cb1a97cd7244ab4cee0af487f2f882d99862267dcc590" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244ab4cee0af487f2f882d99862267dcc590"/>
-<keyword name="MAIN_SIGNAL" id="mrw::model::Signal::MAIN_SIGNAL_a6430595d0ad20e57df38cb1a97cd7244a1df6a18151f3fad67725df4079260146" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244a1df6a18151f3fad67725df4079260146"/>
+<keyword name="MAIN_SHUNT_SIGNAL" id="mrw::model::Signal::MAIN_SHUNT_SIGNAL_a748bbdafc044064000a816907f3e4bb3a2a6da779d8b0ad678a603dff36eb5098" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a2a6da779d8b0ad678a603dff36eb5098"/>
+<keyword name="MAIN_SIGNAL" id="mrw::model::Signal::MAIN_SIGNAL_a748bbdafc044064000a816907f3e4bb3a42d23c88fc6ab52b7cd28797245e8717" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a42d23c88fc6ab52b7cd28797245e8717"/>
 <keyword name="main_signal_count" id="mrw::model::MrwStatistic::main_signal_count_ab90956fed9672a9201523c80cf8116cd" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ab90956fed9672a9201523c80cf8116cd"/>
 <keyword name="main_state" id="mrw::ctrl::SignalController::Status::main_state_ad9a851116bd0fdcf30686f8033b77f61" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ad9a851116bd0fdcf30686f8033b77f61"/>
 <keyword name="MASK" id="mrw::model::Position::MASK_ae14d3b1bc1f8dd2c6179bfdf5c8c2be0" ref="db/d4f/classmrw_1_1model_1_1Position.html#ae14d3b1bc1f8dd2c6179bfdf5c8c2be0"/>
@@ -5066,12 +5065,12 @@
 <keyword name="ModelRailway(const ModelRailway &amp;other)=delete" id="mrw::model::ModelRailway::ModelRailway_a62fc2b320e1915b3d3dd7ba9d7a77010" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a62fc2b320e1915b3d3dd7ba9d7a77010"/>
 <keyword name="ModelRepository(const QString &amp;modelname, const bool use_positions=false)" id="mrw::model::ModelRepository::ModelRepository_a676acd0bca439eacf794648d039cc6c1" ref="dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a676acd0bca439eacf794648d039cc6c1"/>
 <keyword name="ModelRepository()=delete" id="mrw::model::ModelRepository::ModelRepository_a660bcfdbfa1529dd61459ba3b64333fb" ref="dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a660bcfdbfa1529dd61459ba3b64333fb"/>
+<keyword name="Module" id="mrw::model::ModelRailway::Module_a21f639900c480510650969df9c74d17d" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a21f639900c480510650969df9c74d17d"/>
+<keyword name="Module(ModelRailway *model_railway, const QDomElement &amp;element)" id="mrw::model::Module::Module_a4ca53a325e4e08e11e3657fad2e8b18b" ref="d3/de7/classmrw_1_1model_1_1Module.html#a4ca53a325e4e08e11e3657fad2e8b18b"/>
 <keyword name="module(const int index) const" id="mrw::model::Controller::module_a62c4add568ef635f942f4a92f2276791" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a62c4add568ef635f942f4a92f2276791"/>
 <keyword name="module(const size_t controller_idx, const size_t module_idx) const" id="mrw::model::ModelRailway::module_a3df01a0e7a51524bed0d33e49952c2b1" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a3df01a0e7a51524bed0d33e49952c2b1"/>
 <keyword name="module() const noexcept" id="mrw::model::Section::module_a12d5f5b649c090933194304605b5e6a2" ref="de/de1/classmrw_1_1model_1_1Section.html#a12d5f5b649c090933194304605b5e6a2"/>
 <keyword name="module() const noexcept" id="mrw::model::SwitchModuleReference::module_a272766efdacbd22282b2316fab129381" ref="d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#a272766efdacbd22282b2316fab129381"/>
-<keyword name="Module" id="mrw::model::ModelRailway::Module_a21f639900c480510650969df9c74d17d" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a21f639900c480510650969df9c74d17d"/>
-<keyword name="Module(ModelRailway *model_railway, const QDomElement &amp;element)" id="mrw::model::Module::Module_a4ca53a325e4e08e11e3657fad2e8b18b" ref="d3/de7/classmrw_1_1model_1_1Module.html#a4ca53a325e4e08e11e3657fad2e8b18b"/>
 <keyword name="moduleCount() const noexcept" id="mrw::model::Controller::moduleCount_aa360b5aa7977d1116749db13e90a667f" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#aa360b5aa7977d1116749db13e90a667f"/>
 <keyword name="mousePressEvent(QMouseEvent *event) override" id="mrw::ui::ControllerWidget::mousePressEvent_a59cf4307c0600aeb72c0a8c827cce776" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a59cf4307c0600aeb72c0a8c827cce776"/>
 <keyword name="move(const int right, const int down)" id="mrw::model::Position::move_abc70305593d7606befc1423b8adad4a1" ref="db/d4f/classmrw_1_1model_1_1Position.html#abc70305593d7606befc1423b8adad4a1"/>
@@ -5193,8 +5192,8 @@
 <keyword name="raiseTimeEvent(sc::eventid event)=0" id="sc::timer::TimedInterface::raiseTimeEvent_aeb2a340a1252b36828b5d2dc069e9c57" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#aeb2a340a1252b36828b5d2dc069e9c57"/>
 <keyword name="random(const T max) noexcept" id="mrw::util::Random::random_ab5ba696d5bca80f807bfa71fc061ab42" ref="d5/d62/classmrw_1_1util_1_1Random.html#ab5ba696d5bca80f807bfa71fc061ab42"/>
 <keyword name="read(const QString &amp;filename) noexcept" id="mrw::util::Properties::read_a0114da8844b82cbce0860dd1ddf67ff7" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#a0114da8844b82cbce0860dd1ddf67ff7"/>
-<keyword name="red(const QString &amp;input) noexcept" id="mrw::util::String::red_a35b509dcf26d9f00cff8c6dd18a6a5cf" ref="d0/d55/classmrw_1_1util_1_1String.html#a35b509dcf26d9f00cff8c6dd18a6a5cf"/>
 <keyword name="RED" id="mrw::ui::BaseWidget::RED_a74aff62e3db3f755a0a1fb973404a961" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
+<keyword name="red(const QString &amp;input) noexcept" id="mrw::util::String::red_a35b509dcf26d9f00cff8c6dd18a6a5cf" ref="d0/d55/classmrw_1_1util_1_1String.html#a35b509dcf26d9f00cff8c6dd18a6a5cf"/>
 <keyword name="RED_LIGHT" id="mrw::ui::BaseWidget::RED_LIGHT_a00e9c9b3f1414b166664bb450f49b05c" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <keyword name="RED_ON" id="mrw::util::String::RED_ON_ad34b779827292c895aad2ee463a031bc" ref="d0/d55/classmrw_1_1util_1_1String.html#ad34b779827292c895aad2ee463a031bc"/>
 <keyword name="reference" id="mrw::model::AssemblyPart::reference_a90ba2b8cc644546925fa3b49bd467d98" ref="d5/d26/classmrw_1_1model_1_1AssemblyPart.html#a90ba2b8cc644546925fa3b49bd467d98"/>
@@ -5220,8 +5219,8 @@
 <keyword name="reset()" id="mrw::util::Batch::reset_a60ac05642f1f86ced915f28b98f7fc93" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a60ac05642f1f86ced915f28b98f7fc93"/>
 <keyword name="resolve(const char *attr) const noexcept" id="mrw::model::RailPart::resolve_ace536977a9bc46395d516092ce1bf09c" ref="d1/d16/classmrw_1_1model_1_1RailPart.html#ace536977a9bc46395d516092ce1bf09c"/>
 <keyword name="response() const noexcept" id="mrw::can::MrwMessage::response_aa7afbc78a2e8a8a6b7be6fd0d60f64d5" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aa7afbc78a2e8a8a6b7be6fd0d60f64d5"/>
-<keyword name="right" id="mrw::ctrl::RegularSwitchController::Status::right_abf63160eedfa663a3331e1939f83838c" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abf63160eedfa663a3331e1939f83838c"/>
 <keyword name="RIGHT" id="mrw::model::Position::RIGHT_a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403"/>
+<keyword name="right" id="mrw::ctrl::RegularSwitchController::Status::right_abf63160eedfa663a3331e1939f83838c" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abf63160eedfa663a3331e1939f83838c"/>
 <keyword name="right_bended" id="mrw::ctrl::BaseSwitchController::Status::right_bended_a935a90253d7b2348f3f952dfb87a1692" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
 <keyword name="Route(const bool dir, const SectionState wanted_state, RailPart *first, QObject *parent=nullptr)" id="mrw::model::Route::Route_a6e0998fdf14d28e379f0fc512584b79a" ref="d7/dfb/classmrw_1_1model_1_1Route.html#a6e0998fdf14d28e379f0fc512584b79a"/>
 <keyword name="save()" id="mrw::model::ModelRepository::save_a3a9e5cc0e4191375f6e40ac963dc2a76" ref="dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a3a9e5cc0e4191375f6e40ac963dc2a76"/>
@@ -5270,7 +5269,7 @@
 <keyword name="setVerbose(const bool activate=false)" id="mrw::ui::BaseWidget::setVerbose_aa85c616e7a66cc8a21f52ff82eb058e0" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
 <keyword name="setX(const int x)" id="mrw::model::Position::setX_a3b661be82e6cd6cd09cfaacbc3486916" ref="db/d4f/classmrw_1_1model_1_1Position.html#a3b661be82e6cd6cd09cfaacbc3486916"/>
 <keyword name="shunt_color" id="mrw::ui::SignalWidget::Status::shunt_color_ae25958a31697d096f9045b1c9a2fc382" ref="d7/dc3/structmrw_1_1ui_1_1SignalWidget_1_1Status.html#ae25958a31697d096f9045b1c9a2fc382"/>
-<keyword name="SHUNT_SIGNAL" id="mrw::model::Signal::SHUNT_SIGNAL_a6430595d0ad20e57df38cb1a97cd7244a6145b0ad5feb4375abf71270c892eb48" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244a6145b0ad5feb4375abf71270c892eb48"/>
+<keyword name="SHUNT_SIGNAL" id="mrw::model::Signal::SHUNT_SIGNAL_a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44"/>
 <keyword name="shunt_state" id="mrw::ctrl::SignalController::Status::shunt_state_a70855367f51e4a6e0d8e13b1e4e54cda" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a70855367f51e4a6e0d8e13b1e4e54cda"/>
 <keyword name="sid() const noexcept" id="mrw::can::MrwMessage::sid_ab87d09e803430aa877df53387b169de1" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ab87d09e803430aa877df53387b169de1"/>
 <keyword name="Signal" id="mrw::model::ModelRailway::Signal_ac5526429c5a50ac492f6e8113c59b18a" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#ac5526429c5a50ac492f6e8113c59b18a"/>
@@ -5283,11 +5282,11 @@
 <keyword name="SignalCallback" id="mrw::util::SignalHandler::SignalCallback_a9f1c95ae9412c793753a6bd5f64a0ac7" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a9f1c95ae9412c793753a6bd5f64a0ac7"/>
 <keyword name="SignalController(QObject *parent=nullptr)" id="mrw::ctrl::SignalController::SignalController_af1969b23b733ab0a5a0e41ff82190eed" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#af1969b23b733ab0a5a0e41ff82190eed"/>
 <keyword name="SignalHandler(const std::initializer_list&lt; int &gt; &amp;signal_list, SignalCallback signal_callback)" id="mrw::util::SignalHandler::SignalHandler_a6856f2f1cf9a41be78a6fdcc467a4c71" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a6856f2f1cf9a41be78a6fdcc467a4c71"/>
-<keyword name="SignalType" id="mrw::model::Signal::SignalType_a6430595d0ad20e57df38cb1a97cd7244" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244"/>
-<keyword name="MAIN_SIGNAL" id="mrw::model::Signal::MAIN_SIGNAL_a6430595d0ad20e57df38cb1a97cd7244a1df6a18151f3fad67725df4079260146" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244a1df6a18151f3fad67725df4079260146"/>
-<keyword name="DISTANT_SIGNAL" id="mrw::model::Signal::DISTANT_SIGNAL_a6430595d0ad20e57df38cb1a97cd7244a8fd27e0db8da8ec53327b207f96e0749" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244a8fd27e0db8da8ec53327b207f96e0749"/>
-<keyword name="SHUNT_SIGNAL" id="mrw::model::Signal::SHUNT_SIGNAL_a6430595d0ad20e57df38cb1a97cd7244a6145b0ad5feb4375abf71270c892eb48" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244a6145b0ad5feb4375abf71270c892eb48"/>
-<keyword name="MAIN_SHUNT_SIGNAL" id="mrw::model::Signal::MAIN_SHUNT_SIGNAL_a6430595d0ad20e57df38cb1a97cd7244ab4cee0af487f2f882d99862267dcc590" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244ab4cee0af487f2f882d99862267dcc590"/>
+<keyword name="SignalType" id="mrw::model::Signal::SignalType_a748bbdafc044064000a816907f3e4bb3" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3"/>
+<keyword name="MAIN_SIGNAL" id="mrw::model::Signal::MAIN_SIGNAL_a748bbdafc044064000a816907f3e4bb3a42d23c88fc6ab52b7cd28797245e8717" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a42d23c88fc6ab52b7cd28797245e8717"/>
+<keyword name="DISTANT_SIGNAL" id="mrw::model::Signal::DISTANT_SIGNAL_a748bbdafc044064000a816907f3e4bb3ada2432e6391e617a88ec60d5f3203219" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3ada2432e6391e617a88ec60d5f3203219"/>
+<keyword name="SHUNT_SIGNAL" id="mrw::model::Signal::SHUNT_SIGNAL_a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44"/>
+<keyword name="MAIN_SHUNT_SIGNAL" id="mrw::model::Signal::MAIN_SHUNT_SIGNAL_a748bbdafc044064000a816907f3e4bb3a2a6da779d8b0ad678a603dff36eb5098" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a2a6da779d8b0ad678a603dff36eb5098"/>
 <keyword name="SignalWidget(QWidget *parent=nullptr, mrw::ctrl::SignalController *controller=nullptr)" id="mrw::ui::SignalWidget::SignalWidget_abf3b56483257283db0ee9c80bea862e7" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#abf3b56483257283db0ee9c80bea862e7"/>
 <keyword name="Singleton()=default" id="mrw::util::Singleton::Singleton_ae6f8366470705cd0f158e8b4aed5d2bc" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ae6f8366470705cd0f158e8b4aed5d2bc"/>
 <keyword name="Singleton(const Singleton &amp;other)=delete" id="mrw::util::Singleton::Singleton_a9973007ac4e1f0c0709d6f893a10763d" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9973007ac4e1f0c0709d6f893a10763d"/>
@@ -5307,11 +5306,6 @@
 <keyword name="Singleton&lt; Random &gt;" id="mrw::util::Random::Singleton&lt; Random &gt;_ad4ba9c502cc704e19f4c21eca8f8ab58" ref="d5/d62/classmrw_1_1util_1_1Random.html#ad4ba9c502cc704e19f4c21eca8f8ab58"/>
 <keyword name="SIZE" id="mrw::ui::BaseWidget::SIZE_a2793c577d78bc459d7e251b933545286" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <keyword name="size() const noexcept" id="mrw::can::MrwMessage::size_a0021b4ca7d4936a10520582db11351e5" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0021b4ca7d4936a10520582db11351e5"/>
-<keyword name="state" id="mrw::model::Route::state_aff5c38cf3fe671e6d38b9358849f79fb" ref="d7/dfb/classmrw_1_1model_1_1Route.html#aff5c38cf3fe671e6d38b9358849f79fb"/>
-<keyword name="state" id="mrw::ctrl::DoubleCrossSwitchController::Status::state_a17352d772aee9749100511405c2f81c3" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a17352d772aee9749100511405c2f81c3"/>
-<keyword name="state() const" id="mrw::model::DoubleCrossSwitch::state_a2eb5417b0f738a3b58a0d4fdda2b6af0" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a2eb5417b0f738a3b58a0d4fdda2b6af0"/>
-<keyword name="state() const noexcept" id="mrw::model::RegularSwitch::state_a2140d1f8561072f651baea7e278497b8" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a2140d1f8561072f651baea7e278497b8"/>
-<keyword name="state() const noexcept" id="mrw::model::Section::state_a0bd6f172b7d2cab26f2de6d5a2ed017c" ref="de/de1/classmrw_1_1model_1_1Section.html#a0bd6f172b7d2cab26f2de6d5a2ed017c"/>
 <keyword name="State" id="mrw::model::DoubleCrossSwitch::State_a1a462292eecb5d40e19aec3af07c93e1" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1"/>
 <keyword name="AC" id="mrw::model::DoubleCrossSwitch::AC_a1a462292eecb5d40e19aec3af07c93e1a4144e097d2fa7a491cec2a7a4322f2bc" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1a4144e097d2fa7a491cec2a7a4322f2bc"/>
 <keyword name="AD" id="mrw::model::DoubleCrossSwitch::AD_a1a462292eecb5d40e19aec3af07c93e1ae182ebbc166d73366e7986813a7fc5f1" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1ae182ebbc166d73366e7986813a7fc5f1"/>
@@ -5322,6 +5316,11 @@
 <keyword name="AB" id="mrw::model::RegularSwitch::AB_a340b068f7e7d7340ecf8a8c8c9e89dd2ab86fc6b051f63d73de262d4c34e3a0a9" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a340b068f7e7d7340ecf8a8c8c9e89dd2ab86fc6b051f63d73de262d4c34e3a0a9"/>
 <keyword name="AC" id="mrw::model::RegularSwitch::AC_a340b068f7e7d7340ecf8a8c8c9e89dd2a4144e097d2fa7a491cec2a7a4322f2bc" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a340b068f7e7d7340ecf8a8c8c9e89dd2a4144e097d2fa7a491cec2a7a4322f2bc"/>
 <keyword name="FAIL" id="mrw::model::RegularSwitch::FAIL_a340b068f7e7d7340ecf8a8c8c9e89dd2ac2759effffc94bb9acc71d69fe3e8a1f" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a340b068f7e7d7340ecf8a8c8c9e89dd2ac2759effffc94bb9acc71d69fe3e8a1f"/>
+<keyword name="state" id="mrw::model::Route::state_aff5c38cf3fe671e6d38b9358849f79fb" ref="d7/dfb/classmrw_1_1model_1_1Route.html#aff5c38cf3fe671e6d38b9358849f79fb"/>
+<keyword name="state" id="mrw::ctrl::DoubleCrossSwitchController::Status::state_a17352d772aee9749100511405c2f81c3" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a17352d772aee9749100511405c2f81c3"/>
+<keyword name="state() const" id="mrw::model::DoubleCrossSwitch::state_a2eb5417b0f738a3b58a0d4fdda2b6af0" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a2eb5417b0f738a3b58a0d4fdda2b6af0"/>
+<keyword name="state() const noexcept" id="mrw::model::RegularSwitch::state_a2140d1f8561072f651baea7e278497b8" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a2140d1f8561072f651baea7e278497b8"/>
+<keyword name="state() const noexcept" id="mrw::model::Section::state_a0bd6f172b7d2cab26f2de6d5a2ed017c" ref="de/de1/classmrw_1_1model_1_1Section.html#a0bd6f172b7d2cab26f2de6d5a2ed017c"/>
 <keyword name="StationWidget(QWidget *parent=nullptr)" id="mrw::ui::StationWidget::StationWidget_aa721680eda8feca45a1a3bbe7d83b86a" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#aa721680eda8feca45a1a3bbe7d83b86a"/>
 <keyword name="statistics() const" id="mrw::model::ModelRailway::statistics_aca7ca49e4af55c3a0f68a236e440f11d" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#aca7ca49e4af55c3a0f68a236e440f11d"/>
 <keyword name="status(BaseController::Status &amp;status) const" id="mrw::ctrl::BaseController::status_a856c0a9289054c71f6d0212bc3007efe" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a856c0a9289054c71f6d0212bc3007efe"/>
@@ -5367,7 +5366,7 @@
 <keyword name="transaction" id="mrw::util::Batch::transaction_a2dd1abb1b487ad2531c3c98f24544e67" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a2dd1abb1b487ad2531c3c98f24544e67"/>
 <keyword name="triggerWithoutEvent()=0" id="sc::EventDrivenInterface::triggerWithoutEvent_a68a8f25dc0d37f7864eef4161de0e64b" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a68a8f25dc0d37f7864eef4161de0e64b"/>
 <keyword name="tryComplete()" id="mrw::util::Batch::tryComplete_a6a172e9045658340078aa3401297cccb" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a6a172e9045658340078aa3401297cccb"/>
-<keyword name="type() const" id="mrw::model::Signal::type_a146927a07fe74196ecf8c34b6f45821f" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a146927a07fe74196ecf8c34b6f45821f"/>
+<keyword name="type() const" id="mrw::model::Signal::type_a4c54025251f2e6d75cfdd76e191c34ae" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a4c54025251f2e6d75cfdd76e191c34ae"/>
 <keyword name="typeDescr() const" id="mrw::model::Signal::typeDescr_abd6a8ec12de20dc91619533ff2d1f7bc" ref="db/d9c/classmrw_1_1model_1_1Signal.html#abd6a8ec12de20dc91619533ff2d1f7bc"/>
 <keyword name="UNDERLINE_ON" id="mrw::util::String::UNDERLINE_ON_a32a8c1059545a2141bc5ddf45203f920" ref="d0/d55/classmrw_1_1util_1_1String.html#a32a8c1059545a2141bc5ddf45203f920"/>
 <keyword name="unitNo() const noexcept" id="mrw::model::Device::unitNo_a262cee73971200e5c6cd308a7621682f" ref="d8/d2c/classmrw_1_1model_1_1Device.html#a262cee73971200e5c6cd308a7621682f"/>
@@ -5988,7 +5987,6 @@
 <file>functions_d.html</file>
 <file>functions_e.html</file>
 <file>functions_enum.html</file>
-<file>functions_eval.html</file>
 <file>functions_f.html</file>
 <file>functions_func.html</file>
 <file>functions_func_b.html</file>

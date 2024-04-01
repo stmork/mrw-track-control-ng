@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['main_5fshunt_5fsignal_0',['MAIN_SHUNT_SIGNAL',['../db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244ab4cee0af487f2f882d99862267dcc590',1,'mrw::model::Signal']]],
-  ['main_5fsignal_1',['MAIN_SIGNAL',['../db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244a1df6a18151f3fad67725df4079260146',1,'mrw::model::Signal']]],
+  ['main_5fshunt_5fsignal_0',['MAIN_SHUNT_SIGNAL',['../db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a2a6da779d8b0ad678a603dff36eb5098',1,'mrw::model::Signal']]],
+  ['main_5fsignal_1',['MAIN_SIGNAL',['../db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a42d23c88fc6ab52b7cd28797245e8717',1,'mrw::model::Signal']]],
   ['msg_5fbooted_2',['MSG_BOOTED',['../d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a38d4920bdc0d31bca5e5c40d098270a7',1,'mrw::can']]],
   ['msg_5fchecksum_5ferror_3',['MSG_CHECKSUM_ERROR',['../d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a36c9b0c4044eef6160872063d6a709cd',1,'mrw::can']]],
   ['msg_5fconfig_5fbuffer_5ffull_4',['MSG_CONFIG_BUFFER_FULL',['../d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a886c5bf7594833d80cb1c3a426549786',1,'mrw::can']]],
