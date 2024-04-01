@@ -119,7 +119,7 @@ Public Slots</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6e0998fdf14d28e379f0fc512584b79a" id="r_a6e0998fdf14d28e379f0fc512584b79a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e0998fdf14d28e379f0fc512584b79a">Route</a> (const bool dir, const <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8e">SectionState</a> wanted_state, <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html">RailPart</a> *first, QObject *parent=nullptr)</td></tr>
+<tr class="memitem:a6e0998fdf14d28e379f0fc512584b79a" id="r_a6e0998fdf14d28e379f0fc512584b79a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e0998fdf14d28e379f0fc512584b79a">Route</a> (const bool dir, const <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4ede">SectionState</a> wanted_state, <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html">RailPart</a> *first, QObject *parent=nullptr)</td></tr>
 <tr class="separator:a6e0998fdf14d28e379f0fc512584b79a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41212532f2bce3298d8f9468f82c62ab" id="r_a41212532f2bce3298d8f9468f82c62ab"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a41212532f2bce3298d8f9468f82c62ab">~Route</a> ()</td></tr>
 <tr class="separator:a41212532f2bce3298d8f9468f82c62ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,7 +176,7 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a3342a7562ea32204f532b2c2a7c064bc" id="r_a3342a7562ea32204f532b2c2a7c064bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html">RailPart</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3342a7562ea32204f532b2c2a7c064bc">last_valid_part</a> = nullptr</td></tr>
 <tr class="memdesc:a3342a7562ea32204f532b2c2a7c064bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The tail of the <a class="el" href="../../db/d26/classmrw_1_1model_1_1Rail.html" title="This class represents a simple rail with two connectors to other RailParts.">Rail</a> track.  <br /></td></tr>
 <tr class="separator:a3342a7562ea32204f532b2c2a7c064bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff5c38cf3fe671e6d38b9358849f79fb" id="r_aff5c38cf3fe671e6d38b9358849f79fb"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8e">SectionState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff5c38cf3fe671e6d38b9358849f79fb">state</a> = <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8ea799a012d8be53d880220bf7ca57344ae">FREE</a></td></tr>
+<tr class="memitem:aff5c38cf3fe671e6d38b9358849f79fb" id="r_aff5c38cf3fe671e6d38b9358849f79fb"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4ede">SectionState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff5c38cf3fe671e6d38b9358849f79fb">state</a> = <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea88c189a42c87aa49d667fc8ab76bc323">SectionState::FREE</a></td></tr>
 <tr class="memdesc:aff5c38cf3fe671e6d38b9358849f79fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The allocation state.  <br /></td></tr>
 <tr class="separator:aff5c38cf3fe671e6d38b9358849f79fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e0d5d86d610ece3088134f7cdd6a212" id="r_a0e0d5d86d610ece3088134f7cdd6a212"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e0d5d86d610ece3088134f7cdd6a212">direction</a></td></tr>
@@ -194,14 +194,14 @@ Protected Attributes</h2></td></tr>
 <p>It may extended at the back end to prolong the track and shortened if the train as passed or left the <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> elements. It also computes the <a class="el" href="../../db/d9c/classmrw_1_1model_1_1Signal.html" title="This class represents all Signal variants.">Signal</a> symbol elements. The SignalControllerProxy computes the definitive SignalState to show. The <a class="el" href="../../d7/dfb/classmrw_1_1model_1_1Route.html" title="This class represents a track of interconnected RailPart elements for driving a train.">Route</a> class ensures that the containing <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> elements could not allocated by other <a class="el" href="../../d7/dfb/classmrw_1_1model_1_1Route.html" title="This class represents a track of interconnected RailPart elements for driving a train.">Route</a> instances using the <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html#ac72c8ab09ed8c4c1189e372ff6d20116" title="This method reserves this RailPart for routing information so that no other router can allocate this ...">RailPart::reserve()</a> method. This class also maintains the SectionState states of each involved <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection.">Section</a>.</p>
 <p>To build a route several conditions have to meet. First you need the direction to drive and whether you want to shunt or region overlapping tour. So the first condition is that shunting don't leave the starting region.</p>
 <p>The next <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> is selected by advancing in drive direction. It is possible that more than one <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> is possible at switches. The list is sorted by priority. So you have to use the <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html#a9766acf0536c000da1d28a399e7bad59" title="This method returns all connectors in the given counting direction.">RailPart::advance()</a> method to iterate through the possibilities. The selected <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> has to be unreserved. The is the next condition.</p>
-<p>All <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> elements belong to a <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection.">Section</a>. The third condition is that only the first section - the starting section - is allowed to be occupied. All other have to be in state <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8ea799a012d8be53d880220bf7ca57344ae" title="The Section is in free/available state.">SectionState::FREE</a>.</p>
+<p>All <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> elements belong to a <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection.">Section</a>. The third condition is that only the first section - the starting section - is allowed to be occupied. All other have to be in state <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea88c189a42c87aa49d667fc8ab76bc323" title="The Section is in free/available state.">SectionState::FREE</a>.</p>
 <p>Now recurse through the selected <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:">RailPart</a> and redo again. The last condition is the recursion depth specified by the <a class="el" href="#a02bed3cf8eed1f97b27823021af940dc">Route::MAX_DEPTH</a> constant.</p>
 <p>When returning successfully from recursion a further condition tests the flank protection. This is only required when using a tour route.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html#ac72c8ab09ed8c4c1189e372ff6d20116" title="This method reserves this RailPart for routing information so that no other router can allocate this ...">RailPart::reserve()</a> </dd>
 <dd>
 <a class="el" href="../../d1/d16/classmrw_1_1model_1_1RailPart.html#a9766acf0536c000da1d28a399e7bad59" title="This method returns all connectors in the given counting direction.">RailPart::advance()</a> </dd>
 <dd>
-<a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8e">SectionState</a> </dd></dl>
+<a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4ede">SectionState</a> </dd></dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="abb6c8bed11a174227a1f18363e1620a9" name="abb6c8bed11a174227a1f18363e1620a9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abb6c8bed11a174227a1f18363e1620a9">&#9670;&#160;</a></span>RailTrack</h2>
@@ -249,7 +249,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8e">SectionState</a></td>          <td class="paramname"><span class="paramname"><em>wanted_state</em>, </span></td>
+          <td class="paramtype">const <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4ede">SectionState</a></td>          <td class="paramname"><span class="paramname"><em>wanted_state</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -577,7 +577,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>State for automatic unblocking. </p>
-<p>In <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8ea05d6ec96f71ecfb8bf49a17335774525" title="The section is reserved for a tour.">SectionState::TOUR</a> mode this flag must be false for blocks between main signals. In this case the <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection.">Section</a> is marked <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8ea9296e185039a0b6581842a78bd1b8469" title="The section has left by a train and is still reserved.">SectionState::PASSED</a>. </p>
+<p>In <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea65c1e32f71230d0c0312b9364dbbb66b" title="The section is reserved for a tour.">SectionState::TOUR</a> mode this flag must be false for blocks between main signals. In this case the <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection.">Section</a> is marked <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea269f3d1562cbd15624e7d2c4b10122e3" title="The section has left by a train and is still reserved.">SectionState::PASSED</a>. </p>
 
 </div>
 </div>
@@ -758,7 +758,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8e">SectionState</a> mrw::model::Route::state = <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8ea799a012d8be53d880220bf7ca57344ae">FREE</a></td>
+          <td class="memname">const <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4ede">SectionState</a> mrw::model::Route::state = <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea88c189a42c87aa49d667fc8ab76bc323">SectionState::FREE</a></td>
         </tr>
       </table>
   </td>
@@ -769,7 +769,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The allocation state. </p>
-<p>SectionState::SHUNT and <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8ea05d6ec96f71ecfb8bf49a17335774525" title="The section is reserved for a tour.">SectionState::TOUR</a> are the only supported allocation states. </p>
+<p>SectionState::SHUNT and <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea65c1e32f71230d0c0312b9364dbbb66b" title="The section is reserved for a tour.">SectionState::TOUR</a> are the only supported allocation states. </p>
 
 </div>
 </div>
@@ -800,7 +800,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 29 2024 14:47:38 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Apr 1 2024 10:09:52 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

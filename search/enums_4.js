@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['sectionstate_0',['SectionState',['../d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8e',1,'mrw::model']]],
+  ['sectionstate_0',['SectionState',['../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4ede',1,'mrw::model']]],
   ['sensortype_1',['SensorType',['../d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0a',1,'mrw::can']]],
   ['signalaspect_2',['SignalAspect',['../d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0',1,'mrw::can']]],
   ['signaltype_3',['SignalType',['../db/d9c/classmrw_1_1model_1_1Signal.html#a6430595d0ad20e57df38cb1a97cd7244',1,'mrw::model::Signal']]],

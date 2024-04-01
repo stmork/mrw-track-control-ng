@@ -18,5 +18,5 @@ var searchData=
   ['formsignal_15',['FormSignal',['../d4/d8a/classmrw_1_1model_1_1FormSignal.html',1,'mrw::model::FormSignal'],['../d4/d8a/classmrw_1_1model_1_1FormSignal.html#a299f4f928e530af0ca4226a50e9ee8b2',1,'mrw::model::FormSignal::FormSignal()']]],
   ['fraction_16',['FRACTION',['../db/d4f/classmrw_1_1model_1_1Position.html#a6630bd39d1f8d47f1e894c5d4d6b3735',1,'mrw::model::Position']]],
   ['free_17',['free',['../de/de1/classmrw_1_1model_1_1Section.html#aca0237aa56ce93a027a63c5a29e41a68',1,'mrw::model::Section']]],
-  ['free_18',['FREE',['../d9/dbc/namespacemrw_1_1model.html#a4721e870d828545c980b38205c304c8ea799a012d8be53d880220bf7ca57344ae',1,'mrw::model']]]
+  ['free_18',['FREE',['../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea88c189a42c87aa49d667fc8ab76bc323',1,'mrw::model']]]
 ];
