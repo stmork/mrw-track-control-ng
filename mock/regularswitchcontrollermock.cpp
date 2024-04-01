@@ -20,7 +20,7 @@ void RegularSwitchControllerMock::reset()
 {
 	setDirection();
 	setExtension(0);
-	setSectionState(FREE);
+	setSectionState(SectionState::FREE);
 	setLock(LockState::UNLOCKED);
 	setFlankProtection(false);
 	setInclined(false);

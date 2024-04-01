@@ -158,7 +158,7 @@ namespace mrw::model
 		 * The allocation state. SectionState::SHUNT and SectionState::TOUR
 		 * are the only supported allocation states.
 		 */
-		const SectionState      state = FREE;
+		const SectionState      state = SectionState::FREE;
 
 		/** The direction to drive. */
 		const bool              direction;

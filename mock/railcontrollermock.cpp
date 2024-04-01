@@ -21,7 +21,7 @@ void RailControllerMock::reset()
 	setDirection();
 	setExtension(0);
 	setLines(0);
-	setSectionState(FREE);
+	setSectionState(SectionState::FREE);
 	setLock(LockState::UNLOCKED);
 	setBending(Bending::STRAIGHT);
 	setEnds(false, false);

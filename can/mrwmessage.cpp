@@ -97,12 +97,12 @@ MrwMessage::MrwMessage(const Command command, const ControllerId id) :
 	dst(id),
 	unit_no(0),
 	msg_command(command),
-	msg_response(MSG_NO_RESPONSE)
+	msg_response(MSG_NO_RESPONSE),
+	info{}
 {
 	is_extended = false;
 	is_response = false;
 	len         = 1;
-	bzero(info, sizeof(info));
 }
 
 MrwMessage::MrwMessage(
@@ -113,29 +113,29 @@ MrwMessage::MrwMessage(
 	dst(id),
 	unit_no(no),
 	msg_command(command),
-	msg_response(MSG_NO_RESPONSE)
+	msg_response(MSG_NO_RESPONSE),
+	info{}
 {
 	len         = 1;
 	is_extended = true;
 	is_response = false;
-	bzero(info, sizeof(info));
 }
 
 MrwMessage::MrwMessage(
 	const ControllerId  id,
 	const UnitNo        no,
 	const Command       command,
-	const Response code) :
+	const Response      code) :
 	src(id),
 	dst(CAN_GATEWAY_ID),
 	unit_no(no),
 	msg_command(command),
-	msg_response(code)
+	msg_response(code),
+	info{}
 {
 	is_extended = true;
 	is_response = true;
 	len         = 4;
-	bzero(info, sizeof(info));
 }
 
 MrwMessage::MrwMessage(const QCanBusFrame & frame)
@@ -158,7 +158,7 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 
 			if (len >= IDX_RESPONSE_SIZE)
 			{
-				msg_response  = (Response)payload[1];
+				msg_response  = Response(payload[1]);
 				unit_no       =
 					(UnitNo(payload[2]) & 0xff) |
 					(UnitNo(payload[3]) << 8);
@@ -361,7 +361,7 @@ QString MrwMessage::get(const SignalAspect state) noexcept
 
 void MrwMessage::copy(QByteArray & array) const noexcept
 {
-	size_t s = start();
+	const size_t s = start();
 
 	for (size_t i = s; i < len; i++)
 	{

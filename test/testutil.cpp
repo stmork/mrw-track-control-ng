@@ -208,10 +208,10 @@ void TestUtil::testClockService()
 
 void TestUtil::testRandom()
 {
-	static const unsigned TEST_RAND_MIN      =      1;
-	static const unsigned TEST_RAND_MAX      =      6;
-	static const int      TEST_RAND_DICE_MAX =      7;
-	static const unsigned TEST_RAND_LOOP     = 100000;
+	static constexpr unsigned TEST_RAND_MIN      =      1;
+	static constexpr unsigned TEST_RAND_MAX      =      6;
+	static constexpr int      TEST_RAND_DICE_MAX =      7;
+	static constexpr unsigned TEST_RAND_LOOP     = 100000;
 
 	std::uniform_int_distribution<unsigned> dist(TEST_RAND_MIN, TEST_RAND_MAX);
 	double mt_sum = 0;

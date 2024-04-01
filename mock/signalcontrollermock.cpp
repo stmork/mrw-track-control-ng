@@ -20,7 +20,7 @@ void SignalControllerMock::reset()
 {
 	setDirection();
 	setExtension(0);
-	setSectionState(FREE);
+	setSectionState(SectionState::FREE);
 	setLock(LockState::UNLOCKED);
 	setBending(Bending::STRAIGHT);
 

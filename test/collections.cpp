@@ -24,12 +24,19 @@ const std::vector<Bending> Collections::bendings
 
 const std::vector<SectionState> Collections::section_states
 {
-	FREE, SHUNTING, TOUR, OCCUPIED, PASSED
+	SectionState::FREE,
+	SectionState::SHUNTING,
+	SectionState::TOUR,
+	SectionState::OCCUPIED,
+	SectionState::PASSED
 };
 
 const std::vector<LockState> Collections::lock_states
 {
-	LockState::FAIL, LockState::UNLOCKED, LockState::PENDING, LockState::LOCKED
+	LockState::FAIL,
+	LockState::UNLOCKED,
+	LockState::PENDING,
+	LockState::LOCKED
 };
 
 const std::vector<Symbol> Collections::signal_symbols

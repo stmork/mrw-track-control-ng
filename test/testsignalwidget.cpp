@@ -144,7 +144,7 @@ void TestSignalWidget::testSh1()
 
 void TestSignalWidget::testVr0()
 {
-	mock.setSectionState(TOUR);
+	mock.setSectionState(SectionState::TOUR);
 	mock.setMain(false);
 	mock.setDistant();
 	mock.setShunting(false);
@@ -181,7 +181,7 @@ void TestSignalWidget::testVr0()
 
 void TestSignalWidget::testVr1()
 {
-	mock.setSectionState(TOUR);
+	mock.setSectionState(SectionState::TOUR);
 	mock.setMain(false);
 	mock.setDistant();
 	mock.setShunting(false);
@@ -218,7 +218,7 @@ void TestSignalWidget::testVr1()
 
 void TestSignalWidget::testHp0()
 {
-	mock.setSectionState(TOUR);
+	mock.setSectionState(SectionState::TOUR);
 	mock.setMain();
 	mock.setDistant(false);
 	mock.setShunting(false);
@@ -255,7 +255,7 @@ void TestSignalWidget::testHp0()
 
 void TestSignalWidget::testHp1()
 {
-	mock.setSectionState(TOUR);
+	mock.setSectionState(SectionState::TOUR);
 	mock.setMain();
 	mock.setDistant(false);
 	mock.setShunting(false);
@@ -292,7 +292,7 @@ void TestSignalWidget::testHp1()
 
 void TestSignalWidget::testHp0WithDistant()
 {
-	mock.setSectionState(TOUR);
+	mock.setSectionState(SectionState::TOUR);
 	mock.setMain();
 	mock.setDistant();
 	mock.setMainStop();
@@ -329,7 +329,7 @@ void TestSignalWidget::testHp0WithDistant()
 
 void TestSignalWidget::testHp1Vr0()
 {
-	mock.setSectionState(TOUR);
+	mock.setSectionState(SectionState::TOUR);
 	mock.setMain();
 	mock.setDistant();
 	mock.setDistantStop();
@@ -366,7 +366,7 @@ void TestSignalWidget::testHp1Vr0()
 
 void TestSignalWidget::testHp1Vr1()
 {
-	mock.setSectionState(TOUR);
+	mock.setSectionState(SectionState::TOUR);
 	mock.setMain();
 	mock.setDistant();
 	mock.setDistantGo();
@@ -439,7 +439,7 @@ void TestSignalWidget::testHp00()
 
 void TestSignalWidget::testHp0Sh1()
 {
-	mock.setSectionState(SHUNTING);
+	mock.setSectionState(SectionState::SHUNTING);
 	mock.setMain();
 	mock.setDistant(false);
 	mock.setShunting();

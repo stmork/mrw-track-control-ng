@@ -29,7 +29,7 @@ namespace mrw::model
 	 */
 	class RailInfo
 	{
-		enum PreferCode
+		enum class PreferCode : unsigned
 		{
 			INFERIOR_FLAG    = 2,
 			CURVED_FLAG      = 1,
@@ -41,7 +41,7 @@ namespace mrw::model
 		};
 
 		RailPart   *   rail = nullptr;
-		PreferCode     code = PREFERRED;
+		PreferCode     code = PreferCode::PREFERRED;
 
 	public:
 		explicit RailInfo(

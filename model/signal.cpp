@@ -39,9 +39,9 @@ const ConstantEnumerator<SignalType>  Signal::type_map
 
 const ConstantEnumerator<Symbol>  Signal::symbol_map
 {
-	CONSTANT(OFF),
-	CONSTANT(STOP),
-	CONSTANT(GO)
+	{ Symbol::OFF,  "OFF" },
+	{ Symbol::STOP, "STOP" },
+	{ Symbol::GO,   "GO" }
 };
 
 Signal::Signal(
@@ -124,12 +124,12 @@ bool Signal::less(Signal * left, Signal * right)
 	return left->direction() > right->direction();
 }
 
-QString Signal::get(const Signal::Symbol & symbol)
+QString Signal::get(const Signal::Symbol symbol)
 {
 	return symbol_map.get(symbol);
 }
 
-QString Signal::get(const Signal::SignalType & type)
+QString Signal::get(const Signal::SignalType type)
 {
 	return type_map.get(type);
 }

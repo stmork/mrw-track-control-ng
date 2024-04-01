@@ -183,7 +183,7 @@ namespace mrw::model
 		 * @param symbol The Symbol enumeration to translate.
 		 * @return The QString clear text of the given Symbol enumeration.
 		 */
-		static QString get(const Symbol & symbol);
+		static QString get(const Symbol symbol);
 
 		/**
 		 * This method returns the clear text QString of the SignalType this
@@ -192,7 +192,7 @@ namespace mrw::model
 		 * @param type The SignalType enumeration to translate.
 		 * @return The QString clear text of the given SignalType enumeration.
 		 */
-		static QString get(const SignalType & type);
+		static QString get(const SignalType type);
 
 	protected:
 		/**

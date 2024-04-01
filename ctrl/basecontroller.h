@@ -110,7 +110,7 @@ namespace mrw::ctrl
 			 *
 			 * @see BaseController::state()
 			 */
-			mrw::model::SectionState        section_state = mrw::model::FREE;
+			mrw::model::SectionState        section_state = mrw::model::SectionState::FREE;
 
 			/**
 			 * The rendering hint concerning the mrw::model::AssemblyPart to be

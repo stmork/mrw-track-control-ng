@@ -21,7 +21,7 @@ DoubleCrossSwitchControllerMock::DoubleCrossSwitchControllerMock(QObject * paren
 void DoubleCrossSwitchControllerMock::reset()
 {
 	setDirection();
-	setSectionState(FREE);
+	setSectionState(SectionState::FREE);
 	setLock(LockState::UNLOCKED);
 	setSwitchState(DoubleCrossSwitch::State::AC);
 	setLeftHanded();

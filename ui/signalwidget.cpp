@@ -94,7 +94,9 @@ void SignalWidget::prepare(SignalWidget::Status & status) const
 	else
 	{
 		status.main_color = RED;
-		if (!status.has_shunting || (status.section_state != SHUNTING) || (status.shunt_state != Symbol::GO))
+		if (!status.has_shunting ||
+			(status.section_state != SectionState::SHUNTING) ||
+			(status.shunt_state != Symbol::GO))
 		{
 			status.draw_distant = status.has_distant;
 		}

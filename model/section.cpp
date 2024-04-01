@@ -43,11 +43,11 @@ const std::regex  Section::path_regex(R"(^\/\/@controller\.(\d+)\/@module\.(\d+)
 
 const ConstantEnumerator<SectionState>  Section::state_map
 {
-	CONSTANT(FREE),
-	CONSTANT(SHUNTING),
-	CONSTANT(TOUR),
-	CONSTANT(OCCUPIED),
-	CONSTANT(PASSED)
+	{ SectionState::FREE,     "FREE"},
+	{ SectionState::SHUNTING, "SHUNTING"},
+	{ SectionState::TOUR,     "TOUR"},
+	{ SectionState::OCCUPIED, "OCCUPIED"},
+	{ SectionState::PASSED,   "PASSED"}
 };
 
 Section::Section(
@@ -202,12 +202,12 @@ bool Section::isUnlockable() const noexcept
 
 	return
 		(reserved_parts.size() == 0) &&
-		(section_state == FREE);
+		(section_state == SectionState::FREE);
 }
 
 SectionState Section::state() const noexcept
 {
-	return section_occupied ? OCCUPIED : section_state;
+	return section_occupied ? SectionState::OCCUPIED : section_state;
 }
 
 void Section::setState(const SectionState input) noexcept
@@ -291,7 +291,7 @@ void Section::free() noexcept
 			rail_part->reserve(false);
 		}
 	}
-	setState(FREE);
+	setState(SectionState::FREE);
 }
 
 bool Section::isFree() const noexcept

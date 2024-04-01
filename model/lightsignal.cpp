@@ -80,7 +80,7 @@ const QString & LightSignal::name() const noexcept
 
 bool LightSignal::isUnlockable() const noexcept
 {
-	return symbol() != Symbol::GO;
+	return symbol() != Signal::Symbol::GO;
 }
 
 Controller * LightSignal::controller() const noexcept
@@ -94,8 +94,8 @@ MrwMessage LightSignal::configMsg(const unsigned pin) const
 
 	switch (type())
 	{
-	case SignalType::MAIN_SIGNAL:
-	case SignalType::MAIN_SHUNT_SIGNAL:
+	case MAIN_SIGNAL:
+	case MAIN_SHUNT_SIGNAL:
 		switch (lights)
 		{
 		case 2:
@@ -112,7 +112,7 @@ MrwMessage LightSignal::configMsg(const unsigned pin) const
 		}
 		break;
 
-	case SignalType::DISTANT_SIGNAL:
+	case DISTANT_SIGNAL:
 		switch (lights)
 		{
 		case 2:

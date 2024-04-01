@@ -61,15 +61,15 @@ RailInfo::RailInfo(
 	const bool preferred,
 	const bool curved) : rail(rail_part)
 {
-	unsigned flags = 0;
+	std::underlying_type_t<PreferCode> flags = 0;
 
 	if (!preferred)
 	{
-		flags |= INFERIOR_FLAG;
+		flags |= std::underlying_type_t<PreferCode>(PreferCode::INFERIOR_FLAG);
 	}
 	if (curved)
 	{
-		flags |= CURVED_FLAG;
+		flags |= std::underlying_type_t<PreferCode>(PreferCode::CURVED_FLAG);
 	}
 	code = static_cast<PreferCode>(flags);
 }

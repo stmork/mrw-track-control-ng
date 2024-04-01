@@ -30,7 +30,7 @@ namespace mrw::model
 	class SectionModule;
 	class Signal;
 
-	enum SectionState
+	enum class SectionState : int
 	{
 		/**
 		 * The Section is in free/available state.
@@ -85,7 +85,7 @@ namespace mrw::model
 		Region           *           section_region     = nullptr;
 		Controller         *         section_controller = nullptr;
 		SectionModule        *       section_module     = nullptr;
-		SectionState                 section_state      = FREE;
+		SectionState                 section_state      = SectionState::FREE;
 		bool                         section_enabled    = false;
 		bool                         section_occupied   = false;
 		std::vector<AssemblyPart *>  assembly_parts;
