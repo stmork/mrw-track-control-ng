@@ -262,7 +262,7 @@ namespace mrw
 		void ConfigStatechart::enact_main_region_Wait_for_Connect()
 		{
 			/* Entry action for state 'Wait for Connect'. */
-			timerService->setTimer(this, 0, ((sc::time) ConfigStatechart::timeout), false);
+			timerService->setTimer(this, 0, (static_cast<sc::time> (ConfigStatechart::timeout)), false);
 			setIdx(0);
 			setMax(0);
 		}
@@ -271,7 +271,7 @@ namespace mrw
 		void ConfigStatechart::enact_main_region_Configure()
 		{
 			/* Entry action for state 'Configure'. */
-			timerService->setTimer(this, 1, ((sc::time) ConfigStatechart::writetime), false);
+			timerService->setTimer(this, 1, (static_cast<sc::time> (ConfigStatechart::writetime)), false);
 			setWritten(ifaceOperationCallback->configure(idx));
 			setMax((written) > (max) ? written : max);
 		}
@@ -280,7 +280,7 @@ namespace mrw
 		void ConfigStatechart::enact_main_region_Wait_for_Boot()
 		{
 			/* Entry action for state 'Wait for Boot'. */
-			timerService->setTimer(this, 2, ((((sc::time) ConfigStatechart::flashtime) * max) + ConfigStatechart::resettime), false);
+			timerService->setTimer(this, 2, (((static_cast<sc::time> (ConfigStatechart::flashtime)) * max) + ConfigStatechart::resettime), false);
 			ifaceOperationCallback->booting();
 		}
 

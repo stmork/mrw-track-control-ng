@@ -308,7 +308,7 @@ namespace mrw
 		void SignalStatechart::enact_main_region_Turning()
 		{
 			/* Entry action for state 'Turning'. */
-			timerService->setTimer(shared_from_this(), 0, ((sc::time) SignalStatechart::timeout), false);
+			timerService->setTimer(shared_from_this(), 0, (static_cast<sc::time> (SignalStatechart::timeout)), false);
 			setModified(ifaceOperationCallback->prepare());
 		}
 

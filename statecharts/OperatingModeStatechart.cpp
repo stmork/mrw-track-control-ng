@@ -417,7 +417,7 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Running_operating_Prepare_Bus()
 		{
 			/* Entry action for state 'Prepare Bus'. */
-			timerService->setTimer(shared_from_this(), 0, ((sc::time) OperatingModeStatechart::Can::timeout), false);
+			timerService->setTimer(shared_from_this(), 0, (static_cast<sc::time> (OperatingModeStatechart::Can::timeout)), false);
 			ifaceCan.ifaceCanOperationCallback->connectBus();
 		}
 
@@ -425,7 +425,7 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Running_operating_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(shared_from_this(), 1, ((sc::time) OperatingModeStatechart::timeout), false);
+			timerService->setTimer(shared_from_this(), 1, (static_cast<sc::time> (OperatingModeStatechart::timeout)), false);
 			ifaceOperationCallback->resetTransaction();
 			emit start();
 		}

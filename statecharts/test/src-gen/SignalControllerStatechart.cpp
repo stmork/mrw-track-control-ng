@@ -534,7 +534,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(this, 0, ((sc::time) SignalControllerStatechart::timeout), false);
+			timerService->setTimer(this, 0, (static_cast<sc::time> (SignalControllerStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 		}
 
@@ -610,7 +610,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Shunting_State_Processing_Waiting()
 		{
 			/* Entry action for state 'Waiting'. */
-			timerService->setTimer(this, 1, ((sc::time) SignalControllerStatechart::timeout), false);
+			timerService->setTimer(this, 1, (static_cast<sc::time> (SignalControllerStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 		}
 
@@ -641,7 +641,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Processing_Waiting()
 		{
 			/* Entry action for state 'Waiting'. */
-			timerService->setTimer(this, 2, ((sc::time) SignalControllerStatechart::timeout), false);
+			timerService->setTimer(this, 2, (static_cast<sc::time> (SignalControllerStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 		}
 
@@ -673,7 +673,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Delay()
 		{
 			/* Entry action for state 'Delay'. */
-			timerService->setTimer(this, 3, ((sc::time) SignalControllerStatechart::delay), false);
+			timerService->setTimer(this, 3, (static_cast<sc::time> (SignalControllerStatechart::delay)), false);
 		}
 
 		/* Entry action for state 'Stop Shunt'. */
@@ -696,7 +696,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Pending()
 		{
 			/* Entry action for state 'Pending'. */
-			timerService->setTimer(this, 4, ((sc::time) SignalControllerStatechart::timeout), false);
+			timerService->setTimer(this, 4, (static_cast<sc::time> (SignalControllerStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}
@@ -734,7 +734,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Pending_Pending_Delay()
 		{
 			/* Entry action for state 'Delay'. */
-			timerService->setTimer(this, 5, ((sc::time) SignalControllerStatechart::delay), false);
+			timerService->setTimer(this, 5, (static_cast<sc::time> (SignalControllerStatechart::delay)), false);
 		}
 
 		/* Entry action for state 'Failed'. */

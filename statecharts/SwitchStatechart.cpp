@@ -362,7 +362,7 @@ namespace mrw
 		void SwitchStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(shared_from_this(), 0, ((sc::time) SwitchStatechart::timeout), false);
+			timerService->setTimer(shared_from_this(), 0, (static_cast<sc::time> (SwitchStatechart::timeout)), false);
 			emit entered();
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
@@ -387,7 +387,7 @@ namespace mrw
 		void SwitchStatechart::enact_main_region_Operating_operating_Turning()
 		{
 			/* Entry action for state 'Turning'. */
-			timerService->setTimer(shared_from_this(), 1, ((sc::time) SwitchStatechart::timeout), false);
+			timerService->setTimer(shared_from_this(), 1, (static_cast<sc::time> (SwitchStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}

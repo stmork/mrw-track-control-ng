@@ -334,7 +334,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Ping()
 		{
 			/* Entry action for state 'Ping'. */
-			timerService->setTimer(this, 0, ((sc::time) UpdateStatechart::timeout), false);
+			timerService->setTimer(this, 0, (static_cast<sc::time> (UpdateStatechart::timeout)), false);
 			ifaceOperationCallback->ping();
 		}
 
@@ -342,7 +342,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Reset()
 		{
 			/* Entry action for state 'Reset'. */
-			timerService->setTimer(this, 1, ((sc::time) UpdateStatechart::delay_reset), false);
+			timerService->setTimer(this, 1, (static_cast<sc::time> (UpdateStatechart::delay_reset)), false);
 			ifaceOperationCallback->boot();
 		}
 
@@ -350,7 +350,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Flash_Request()
 		{
 			/* Entry action for state 'Flash Request'. */
-			timerService->setTimer(this, 2, ((sc::time) UpdateStatechart::delay_flash_request), false);
+			timerService->setTimer(this, 2, (static_cast<sc::time> (UpdateStatechart::delay_flash_request)), false);
 			ifaceOperationCallback->init(1);
 			ifaceOperationCallback->flashRequest();
 		}
@@ -359,7 +359,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Flash_Complete_Page()
 		{
 			/* Entry action for state 'Flash Complete Page'. */
-			timerService->setTimer(this, 3, ((sc::time) UpdateStatechart::delay_flash_page), false);
+			timerService->setTimer(this, 3, (static_cast<sc::time> (UpdateStatechart::delay_flash_page)), false);
 			ifaceOperationCallback->flashCompletePage();
 		}
 
@@ -367,7 +367,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Flash_Rest()
 		{
 			/* Entry action for state 'Flash Rest'. */
-			timerService->setTimer(this, 4, ((sc::time) UpdateStatechart::delay_flash_page), false);
+			timerService->setTimer(this, 4, (static_cast<sc::time> (UpdateStatechart::delay_flash_page)), false);
 			ifaceOperationCallback->flashRestPage();
 		}
 
@@ -375,7 +375,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Flash_Check()
 		{
 			/* Entry action for state 'Flash Check'. */
-			timerService->setTimer(this, 5, ((sc::time) UpdateStatechart::delay_boot), false);
+			timerService->setTimer(this, 5, (static_cast<sc::time> (UpdateStatechart::delay_boot)), false);
 			ifaceOperationCallback->init(3);
 			ifaceOperationCallback->flashCheck();
 		}
@@ -384,7 +384,7 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Leave_Bootloader()
 		{
 			/* Entry action for state 'Leave Bootloader'. */
-			timerService->setTimer(this, 6, ((sc::time) UpdateStatechart::delay_boot), false);
+			timerService->setTimer(this, 6, (static_cast<sc::time> (UpdateStatechart::delay_boot)), false);
 			ifaceOperationCallback->boot();
 		}
 
@@ -399,14 +399,14 @@ namespace mrw
 		void UpdateStatechart::enact_main_region_Wait_for_Connect()
 		{
 			/* Entry action for state 'Wait for Connect'. */
-			timerService->setTimer(this, 7, ((sc::time) UpdateStatechart::timeout), false);
+			timerService->setTimer(this, 7, (static_cast<sc::time> (UpdateStatechart::timeout)), false);
 		}
 
 		/* Entry action for state 'Test Hardware Mismatch'. */
 		void UpdateStatechart::enact_main_region_Test_Hardware_Mismatch()
 		{
 			/* Entry action for state 'Test Hardware Mismatch'. */
-			timerService->setTimer(this, 8, ((sc::time) UpdateStatechart::delay_flash_request), false);
+			timerService->setTimer(this, 8, (static_cast<sc::time> (UpdateStatechart::delay_flash_request)), false);
 			ifaceOperationCallback->flashRequest();
 		}
 
