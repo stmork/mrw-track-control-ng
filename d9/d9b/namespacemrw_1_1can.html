@@ -128,59 +128,59 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:aac851f8e69988e7e7f023fd4888c9319"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enumeration lists all MrwMessage command categories.  <a href="#aac851f8e69988e7e7f023fd4888c9319">More...</a><br /></td></tr>
 <tr class="separator:aac851f8e69988e7e7f023fd4888c9319"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f8de2173be25941f46a03163612808a" id="r_a7f8de2173be25941f46a03163612808a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f8de2173be25941f46a03163612808a">Command</a> : uint8_t { <br />
-&#160;&#160;<a class="el" href="#a7f8de2173be25941f46a03163612808aabca680de579ea58136cd90154e24b7d3">SETLFT</a> = CAT_SWITCH | 0x01
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa0ed96af8e19ac15fa34de519ccaff478">SETRGT</a> = CAT_SWITCH | 0x02
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa3afc6486a2a238d5b9c6f0cec2e5d6fe">GETDIR</a> = CAT_SWITCH | 0x03
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa4f0d9b54aec9270440070bee2b8b9434">SETRON</a> = CAT_RAIL | 0x01
+<tr class="memitem:ae9a2e6e9bc528c9c7f38b7d26457d4fb" id="r_ae9a2e6e9bc528c9c7f38b7d26457d4fb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fb">Command</a> : std::underlying_type_t&lt; CommandCategory &gt; { <br />
+&#160;&#160;<a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fbabca680de579ea58136cd90154e24b7d3">SETLFT</a> = CAT_SWITCH | 0x01
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba0ed96af8e19ac15fa34de519ccaff478">SETRGT</a> = CAT_SWITCH | 0x02
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba3afc6486a2a238d5b9c6f0cec2e5d6fe">GETDIR</a> = CAT_SWITCH | 0x03
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba4f0d9b54aec9270440070bee2b8b9434">SETRON</a> = CAT_RAIL | 0x01
 , <br />
-&#160;&#160;<a class="el" href="#a7f8de2173be25941f46a03163612808aa6cf39187f40d9908f55bafc2288a5eb2">SETROF</a> = CAT_RAIL | 0x02
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aab16256ad009d9fa8a99ddc328d56376f">GETRBS</a> = CAT_RAIL | 0x03
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa877b8510202d0a89047c3531854c6bbd">SETSGN</a> = CAT_SIGNAL | 0x01
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aaa587c43942ce005e535b0e9346ef0bb7">CFGSWN</a> = CAT_CONFIG | 0x01
+&#160;&#160;<a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2">SETROF</a> = CAT_RAIL | 0x02
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f">GETRBS</a> = CAT_RAIL | 0x03
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd">SETSGN</a> = CAT_SIGNAL | 0x01
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fbaa587c43942ce005e535b0e9346ef0bb7">CFGSWN</a> = CAT_CONFIG | 0x01
 , <br />
-&#160;&#160;<a class="el" href="#a7f8de2173be25941f46a03163612808aab0cf691463a572e065a978ef836ec510">CFGSWO</a> = CAT_CONFIG | 0x02
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa4dc929300cab8cfe100efdf301ac43ff">CFGRAI</a> = CAT_CONFIG | 0x03
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa1301f6a6fa52730e25b8e93453bcfa81">CFGPF2</a> = CAT_CONFIG | 0x04
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa003a8725f7e1edde0361e49f27e121a9">CFGPF3</a> = CAT_CONFIG | 0x05
+&#160;&#160;<a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fbab0cf691463a572e065a978ef836ec510">CFGSWO</a> = CAT_CONFIG | 0x02
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba4dc929300cab8cfe100efdf301ac43ff">CFGRAI</a> = CAT_CONFIG | 0x03
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba1301f6a6fa52730e25b8e93453bcfa81">CFGPF2</a> = CAT_CONFIG | 0x04
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba003a8725f7e1edde0361e49f27e121a9">CFGPF3</a> = CAT_CONFIG | 0x05
 , <br />
-&#160;&#160;<a class="el" href="#a7f8de2173be25941f46a03163612808aa85005546e8544c48cb9e4cd2c84714da">CFGMF2</a> = CAT_CONFIG | 0x06
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa6d16ab40748962f96ecc92444b2a03df">CFGMF3</a> = CAT_CONFIG | 0x07
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa9ab40ea1a9127c249c1ab4d658584030">CFGPL2</a> = CAT_CONFIG | 0x08
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aad2251faa181a73b9e964fb79c2829143">CFGPL3</a> = CAT_CONFIG | 0x09
+&#160;&#160;<a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba85005546e8544c48cb9e4cd2c84714da">CFGMF2</a> = CAT_CONFIG | 0x06
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba6d16ab40748962f96ecc92444b2a03df">CFGMF3</a> = CAT_CONFIG | 0x07
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba9ab40ea1a9127c249c1ab4d658584030">CFGPL2</a> = CAT_CONFIG | 0x08
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fbad2251faa181a73b9e964fb79c2829143">CFGPL3</a> = CAT_CONFIG | 0x09
 , <br />
-&#160;&#160;<a class="el" href="#a7f8de2173be25941f46a03163612808aaaec6d999d4ccd7498847a153153940b8">CFGSL2</a> = CAT_CONFIG | 0x0a
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa708452d023dca3039b7532baa63660b3">CFGML2</a> = CAT_CONFIG | 0x0b
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa91f946824ba8bde964f05ad5209ebbd4">CFGML3</a> = CAT_CONFIG | 0x0c
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa62d97dbd0db8813be0ccfe13c75379f5">CFGML4</a> = CAT_CONFIG | 0x0d
+&#160;&#160;<a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fbaaec6d999d4ccd7498847a153153940b8">CFGSL2</a> = CAT_CONFIG | 0x0a
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba708452d023dca3039b7532baa63660b3">CFGML2</a> = CAT_CONFIG | 0x0b
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba91f946824ba8bde964f05ad5209ebbd4">CFGML3</a> = CAT_CONFIG | 0x0c
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba62d97dbd0db8813be0ccfe13c75379f5">CFGML4</a> = CAT_CONFIG | 0x0d
 , <br />
-&#160;&#160;<a class="el" href="#a7f8de2173be25941f46a03163612808aa1bc181b6f4addad45d82c194ff3351c6">CFGLGT</a> = CAT_CONFIG | 0x0e
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa5cb81a24bc72c80e2b928df446af6274">CFGSF2</a> = CAT_CONFIG | 0x0f
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa409d8baf4dce3d4f16af8637badb4af7">CFGBGN</a> = CAT_EXT | 0x01
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa96616934e88cb12c9d9a5a6d05c1fd18">CFGEND</a> = CAT_EXT | 0x02
+&#160;&#160;<a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba1bc181b6f4addad45d82c194ff3351c6">CFGLGT</a> = CAT_CONFIG | 0x0e
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba5cb81a24bc72c80e2b928df446af6274">CFGSF2</a> = CAT_CONFIG | 0x0f
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba409d8baf4dce3d4f16af8637badb4af7">CFGBGN</a> = CAT_EXT | 0x01
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba96616934e88cb12c9d9a5a6d05c1fd18">CFGEND</a> = CAT_EXT | 0x02
 , <br />
-&#160;&#160;<a class="el" href="#a7f8de2173be25941f46a03163612808aa31af7e415cd369c18a237b42cdaf5243">SET_ID</a> = CAT_EXT | 0x03
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa0f22ae2cbd26e058017d712e4c0db1e5">PING</a> = CAT_EXT | 0x04
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa76de9290d1d3c15587d40a524abb2618">RESET</a> = CAT_EXT | 0x05
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aad58243bb22f8cda288831c272fe020f5">GETCFG</a> = CAT_EXT | 0x06
+&#160;&#160;<a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba31af7e415cd369c18a237b42cdaf5243">SET_ID</a> = CAT_EXT | 0x03
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5">PING</a> = CAT_EXT | 0x04
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba76de9290d1d3c15587d40a524abb2618">RESET</a> = CAT_EXT | 0x05
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fbad58243bb22f8cda288831c272fe020f5">GETCFG</a> = CAT_EXT | 0x06
 , <br />
-&#160;&#160;<a class="el" href="#a7f8de2173be25941f46a03163612808aa18921f49887e1f48f001f7edb4264624">GETDVC</a> = CAT_EXT | 0x07
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aaad780ff47d31dc4e0325cd317285c9e7">FLASH_REQ</a> = CAT_EXT | 0x08
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa62037965b4d2cd72b52e1833e5e65705">FLASH_DATA</a> = CAT_EXT | 0x09
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa0de250a739db22a7ff532bfacd08ee83">FLASH_CHECK</a> = CAT_EXT | 0x0a
+&#160;&#160;<a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba18921f49887e1f48f001f7edb4264624">GETDVC</a> = CAT_EXT | 0x07
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fbaad780ff47d31dc4e0325cd317285c9e7">FLASH_REQ</a> = CAT_EXT | 0x08
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba62037965b4d2cd72b52e1833e5e65705">FLASH_DATA</a> = CAT_EXT | 0x09
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba0de250a739db22a7ff532bfacd08ee83">FLASH_CHECK</a> = CAT_EXT | 0x0a
 , <br />
-&#160;&#160;<a class="el" href="#a7f8de2173be25941f46a03163612808aa0dcb905c0156a8196e593254fc94725e">QRYBUF</a> = CAT_EXT | 0x0b
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa005637f307ae952ebb0b21d23d237ccd">QRYERR</a> = CAT_EXT | 0x0c
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aae8589d134690ded7397b0320d14e977f">GETVER</a> = CAT_EXT | 0x0d
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa3158dceb42b0a097b1ec8953b90cf3e8">SENSOR</a> = CAT_EXT | 0x0e
+&#160;&#160;<a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e">QRYBUF</a> = CAT_EXT | 0x0b
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd">QRYERR</a> = CAT_EXT | 0x0c
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fbae8589d134690ded7397b0320d14e977f">GETVER</a> = CAT_EXT | 0x0d
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba3158dceb42b0a097b1ec8953b90cf3e8">SENSOR</a> = CAT_EXT | 0x0e
 , <br />
-&#160;&#160;<a class="el" href="#a7f8de2173be25941f46a03163612808aa76d9e364b83d8153dfa8dd5185f18a65">CMD_MASK</a> = 0x7f
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aa296c8008f99820ac0131a2ae544f831a">CMD_RESPONSE</a> = UINT8_MAX - CMD_MASK
-, <a class="el" href="#a7f8de2173be25941f46a03163612808aab9e59edc6df376023a00ef5ce466c6ae">CMD_ILLEGAL</a> = 0
+&#160;&#160;<a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba76d9e364b83d8153dfa8dd5185f18a65">CMD_MASK</a> = 0x7f
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fba296c8008f99820ac0131a2ae544f831a">CMD_RESPONSE</a> = UINT8_MAX - CMD_MASK
+, <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fbab9e59edc6df376023a00ef5ce466c6ae">CMD_ILLEGAL</a> = 0
 <br />
  }</td></tr>
-<tr class="memdesc:a7f8de2173be25941f46a03163612808a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enumeration lists all supported MrwMessage commands.  <a href="#a7f8de2173be25941f46a03163612808a">More...</a><br /></td></tr>
-<tr class="separator:a7f8de2173be25941f46a03163612808a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ae9a2e6e9bc528c9c7f38b7d26457d4fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enumeration lists all supported MrwMessage commands.  <a href="#ae9a2e6e9bc528c9c7f38b7d26457d4fb">More...</a><br /></td></tr>
+<tr class="separator:ae9a2e6e9bc528c9c7f38b7d26457d4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fd10e57deed19ffd98acb57774082f0" id="r_a5fd10e57deed19ffd98acb57774082f0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5fd10e57deed19ffd98acb57774082f0">Response</a> : uint8_t { <br />
 &#160;&#160;<a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a59d707b0162fe174488886c07e67f806">MSG_OK</a> = 0
 , <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a48107c85a22d1680a2d19fa0378e8eca">MSG_QUEUE_FULL</a> = 1
@@ -230,13 +230,13 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a0d1e86af238eb817727748135b4a70d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enumeration lists all aspects visible for H/V signals.  <a href="#a0d1e86af238eb817727748135b4a70d0">More...</a><br /></td></tr>
 <tr class="separator:a0d1e86af238eb817727748135b4a70d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6adb46251a933e34bb0c92abfbf60c5a" id="r_a6adb46251a933e34bb0c92abfbf60c5a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6adb46251a933e34bb0c92abfbf60c5a">SwitchState</a> : uint8_t { <a class="el" href="#a6adb46251a933e34bb0c92abfbf60c5aac9df9830a850f61d973986d34283d129">SWITCH_STATE_LEFT</a> = 1
-, <a class="el" href="#a6adb46251a933e34bb0c92abfbf60c5aae4237e0ef4b0e22d41a9477916c5e288">SWITCH_STATE_RIGHT</a> = 2
+<tr class="memitem:a6adb46251a933e34bb0c92abfbf60c5a" id="r_a6adb46251a933e34bb0c92abfbf60c5a"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6adb46251a933e34bb0c92abfbf60c5a">SwitchState</a> : uint8_t { <a class="el" href="#a6adb46251a933e34bb0c92abfbf60c5aabd971af2ede13a28b76b640b4e85907d">SWITCH_STATE_LEFT</a> = 1
+, <a class="el" href="#a6adb46251a933e34bb0c92abfbf60c5aae8bf215c336133fe02e0b0bda61004a2">SWITCH_STATE_RIGHT</a> = 2
  }</td></tr>
 <tr class="memdesc:a6adb46251a933e34bb0c92abfbf60c5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enumeration lists the switches state if they are turned left or right.  <a href="#a6adb46251a933e34bb0c92abfbf60c5a">More...</a><br /></td></tr>
 <tr class="separator:a6adb46251a933e34bb0c92abfbf60c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7e15397b2e2b200856a7f837278ad0a" id="r_aa7e15397b2e2b200856a7f837278ad0a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7e15397b2e2b200856a7f837278ad0a">SensorType</a> : uint8_t { <a class="el" href="#aa7e15397b2e2b200856a7f837278ad0aaeb35a9bda85949a51bd71b593a0ec2f0">SENSOR_LIGHT</a> = 1
-, <a class="el" href="#aa7e15397b2e2b200856a7f837278ad0aa7d32c3b321f10b827553d6ab2e0f2b37">SENSOR_TEMP</a> = 2
+<tr class="memitem:aa7e15397b2e2b200856a7f837278ad0a" id="r_aa7e15397b2e2b200856a7f837278ad0a"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7e15397b2e2b200856a7f837278ad0a">SensorType</a> : uint8_t { <a class="el" href="#aa7e15397b2e2b200856a7f837278ad0aaa7865aec2f076513d662d58cc2b210a6">SENSOR_LIGHT</a> = 1
+, <a class="el" href="#aa7e15397b2e2b200856a7f837278ad0aa6cd28db86422557c7b789a7888e74a4a">SENSOR_TEMP</a> = 2
  }</td></tr>
 <tr class="memdesc:aa7e15397b2e2b200856a7f837278ad0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enumeration lists all supported sensor types.  <a href="#aa7e15397b2e2b200856a7f837278ad0a">More...</a><br /></td></tr>
 <tr class="separator:aa7e15397b2e2b200856a7f837278ad0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -317,97 +317,97 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a7f8de2173be25941f46a03163612808a" name="a7f8de2173be25941f46a03163612808a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f8de2173be25941f46a03163612808a">&#9670;&#160;</a></span>Command</h2>
+<a id="ae9a2e6e9bc528c9c7f38b7d26457d4fb" name="ae9a2e6e9bc528c9c7f38b7d26457d4fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9a2e6e9bc528c9c7f38b7d26457d4fb">&#9670;&#160;</a></span>Command</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="#a7f8de2173be25941f46a03163612808a">mrw::can::Command</a> : uint8_t</td>
+          <td class="memname">enum <a class="el" href="#ae9a2e6e9bc528c9c7f38b7d26457d4fb">mrw::can::Command</a> : std::underlying_type_t&lt; <a class="el" href="#aac851f8e69988e7e7f023fd4888c9319">CommandCategory</a> &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>This enumeration lists all supported <a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html" title="This class represents a CAN bus frame in model railway manner.">MrwMessage</a> commands. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aabca680de579ea58136cd90154e24b7d3" name="a7f8de2173be25941f46a03163612808aabca680de579ea58136cd90154e24b7d3"></a>SETLFT&#160;</td><td class="fielddoc"><p>Turn switch left. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fbabca680de579ea58136cd90154e24b7d3" name="ae9a2e6e9bc528c9c7f38b7d26457d4fbabca680de579ea58136cd90154e24b7d3"></a>SETLFT&#160;</td><td class="fielddoc"><p>Turn switch left. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa0ed96af8e19ac15fa34de519ccaff478" name="a7f8de2173be25941f46a03163612808aa0ed96af8e19ac15fa34de519ccaff478"></a>SETRGT&#160;</td><td class="fielddoc"><p>Turn switch right. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba0ed96af8e19ac15fa34de519ccaff478" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba0ed96af8e19ac15fa34de519ccaff478"></a>SETRGT&#160;</td><td class="fielddoc"><p>Turn switch right. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa3afc6486a2a238d5b9c6f0cec2e5d6fe" name="a7f8de2173be25941f46a03163612808aa3afc6486a2a238d5b9c6f0cec2e5d6fe"></a>GETDIR&#160;</td><td class="fielddoc"><p>Request turning state of a switch. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba3afc6486a2a238d5b9c6f0cec2e5d6fe" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba3afc6486a2a238d5b9c6f0cec2e5d6fe"></a>GETDIR&#160;</td><td class="fielddoc"><p>Request turning state of a switch. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa4f0d9b54aec9270440070bee2b8b9434" name="a7f8de2173be25941f46a03163612808aa4f0d9b54aec9270440070bee2b8b9434"></a>SETRON&#160;</td><td class="fielddoc"><p>Enable power to section. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba4f0d9b54aec9270440070bee2b8b9434" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba4f0d9b54aec9270440070bee2b8b9434"></a>SETRON&#160;</td><td class="fielddoc"><p>Enable power to section. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa6cf39187f40d9908f55bafc2288a5eb2" name="a7f8de2173be25941f46a03163612808aa6cf39187f40d9908f55bafc2288a5eb2"></a>SETROF&#160;</td><td class="fielddoc"><p>Disable power to section. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2"></a>SETROF&#160;</td><td class="fielddoc"><p>Disable power to section. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aab16256ad009d9fa8a99ddc328d56376f" name="a7f8de2173be25941f46a03163612808aab16256ad009d9fa8a99ddc328d56376f"></a>GETRBS&#160;</td><td class="fielddoc"><p>Request occupation state of a section. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f" name="ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f"></a>GETRBS&#160;</td><td class="fielddoc"><p>Request occupation state of a section. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa877b8510202d0a89047c3531854c6bbd" name="a7f8de2173be25941f46a03163612808aa877b8510202d0a89047c3531854c6bbd"></a>SETSGN&#160;</td><td class="fielddoc"><p>Set signal to SignalAspect. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd"></a>SETSGN&#160;</td><td class="fielddoc"><p>Set signal to SignalAspect. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aaa587c43942ce005e535b0e9346ef0bb7" name="a7f8de2173be25941f46a03163612808aaa587c43942ce005e535b0e9346ef0bb7"></a>CFGSWN&#160;</td><td class="fielddoc"><p>Configure switch with automatic cutoff. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fbaa587c43942ce005e535b0e9346ef0bb7" name="ae9a2e6e9bc528c9c7f38b7d26457d4fbaa587c43942ce005e535b0e9346ef0bb7"></a>CFGSWN&#160;</td><td class="fielddoc"><p>Configure switch with automatic cutoff. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aab0cf691463a572e065a978ef836ec510" name="a7f8de2173be25941f46a03163612808aab0cf691463a572e065a978ef836ec510"></a>CFGSWO&#160;</td><td class="fielddoc"><p>Configure switch without automatic cutoff. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fbab0cf691463a572e065a978ef836ec510" name="ae9a2e6e9bc528c9c7f38b7d26457d4fbab0cf691463a572e065a978ef836ec510"></a>CFGSWO&#160;</td><td class="fielddoc"><p>Configure switch without automatic cutoff. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa4dc929300cab8cfe100efdf301ac43ff" name="a7f8de2173be25941f46a03163612808aa4dc929300cab8cfe100efdf301ac43ff"></a>CFGRAI&#160;</td><td class="fielddoc"><p>Configure section. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba4dc929300cab8cfe100efdf301ac43ff" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba4dc929300cab8cfe100efdf301ac43ff"></a>CFGRAI&#160;</td><td class="fielddoc"><p>Configure section. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa1301f6a6fa52730e25b8e93453bcfa81" name="a7f8de2173be25941f46a03163612808aa1301f6a6fa52730e25b8e93453bcfa81"></a>CFGPF2&#160;</td><td class="fielddoc"><p>Configure distant FormSignal with two actuators. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba1301f6a6fa52730e25b8e93453bcfa81" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba1301f6a6fa52730e25b8e93453bcfa81"></a>CFGPF2&#160;</td><td class="fielddoc"><p>Configure distant FormSignal with two actuators. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa003a8725f7e1edde0361e49f27e121a9" name="a7f8de2173be25941f46a03163612808aa003a8725f7e1edde0361e49f27e121a9"></a>CFGPF3&#160;</td><td class="fielddoc"><p>Configure distant FormSignal three two actuators. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba003a8725f7e1edde0361e49f27e121a9" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba003a8725f7e1edde0361e49f27e121a9"></a>CFGPF3&#160;</td><td class="fielddoc"><p>Configure distant FormSignal three two actuators. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa85005546e8544c48cb9e4cd2c84714da" name="a7f8de2173be25941f46a03163612808aa85005546e8544c48cb9e4cd2c84714da"></a>CFGMF2&#160;</td><td class="fielddoc"><p>Configure main FormSignal with two actuators. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba85005546e8544c48cb9e4cd2c84714da" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba85005546e8544c48cb9e4cd2c84714da"></a>CFGMF2&#160;</td><td class="fielddoc"><p>Configure main FormSignal with two actuators. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa6d16ab40748962f96ecc92444b2a03df" name="a7f8de2173be25941f46a03163612808aa6d16ab40748962f96ecc92444b2a03df"></a>CFGMF3&#160;</td><td class="fielddoc"><p>Configure main FormSignal with three actuators. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba6d16ab40748962f96ecc92444b2a03df" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba6d16ab40748962f96ecc92444b2a03df"></a>CFGMF3&#160;</td><td class="fielddoc"><p>Configure main FormSignal with three actuators. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa9ab40ea1a9127c249c1ab4d658584030" name="a7f8de2173be25941f46a03163612808aa9ab40ea1a9127c249c1ab4d658584030"></a>CFGPL2&#160;</td><td class="fielddoc"><p>Configure distant LightSignal with two SignalAspect variants. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba9ab40ea1a9127c249c1ab4d658584030" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba9ab40ea1a9127c249c1ab4d658584030"></a>CFGPL2&#160;</td><td class="fielddoc"><p>Configure distant LightSignal with two SignalAspect variants. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aad2251faa181a73b9e964fb79c2829143" name="a7f8de2173be25941f46a03163612808aad2251faa181a73b9e964fb79c2829143"></a>CFGPL3&#160;</td><td class="fielddoc"><p>Configure distant LightSignal with three SignalAspect variants. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fbad2251faa181a73b9e964fb79c2829143" name="ae9a2e6e9bc528c9c7f38b7d26457d4fbad2251faa181a73b9e964fb79c2829143"></a>CFGPL3&#160;</td><td class="fielddoc"><p>Configure distant LightSignal with three SignalAspect variants. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aaaec6d999d4ccd7498847a153153940b8" name="a7f8de2173be25941f46a03163612808aaaec6d999d4ccd7498847a153153940b8"></a>CFGSL2&#160;</td><td class="fielddoc"><p>Configure shunting LightSignal. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fbaaec6d999d4ccd7498847a153153940b8" name="ae9a2e6e9bc528c9c7f38b7d26457d4fbaaec6d999d4ccd7498847a153153940b8"></a>CFGSL2&#160;</td><td class="fielddoc"><p>Configure shunting LightSignal. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa708452d023dca3039b7532baa63660b3" name="a7f8de2173be25941f46a03163612808aa708452d023dca3039b7532baa63660b3"></a>CFGML2&#160;</td><td class="fielddoc"><p>Configure main block LightSignal. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba708452d023dca3039b7532baa63660b3" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba708452d023dca3039b7532baa63660b3"></a>CFGML2&#160;</td><td class="fielddoc"><p>Configure main block LightSignal. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa91f946824ba8bde964f05ad5209ebbd4" name="a7f8de2173be25941f46a03163612808aa91f946824ba8bde964f05ad5209ebbd4"></a>CFGML3&#160;</td><td class="fielddoc"><p>Configure main incoming LightSignal. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba91f946824ba8bde964f05ad5209ebbd4" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba91f946824ba8bde964f05ad5209ebbd4"></a>CFGML3&#160;</td><td class="fielddoc"><p>Configure main incoming LightSignal. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa62d97dbd0db8813be0ccfe13c75379f5" name="a7f8de2173be25941f46a03163612808aa62d97dbd0db8813be0ccfe13c75379f5"></a>CFGML4&#160;</td><td class="fielddoc"><p>Configure main outgoing LightSignal. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba62d97dbd0db8813be0ccfe13c75379f5" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba62d97dbd0db8813be0ccfe13c75379f5"></a>CFGML4&#160;</td><td class="fielddoc"><p>Configure main outgoing LightSignal. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa1bc181b6f4addad45d82c194ff3351c6" name="a7f8de2173be25941f46a03163612808aa1bc181b6f4addad45d82c194ff3351c6"></a>CFGLGT&#160;</td><td class="fielddoc"><p>Configure ProfileLight. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba1bc181b6f4addad45d82c194ff3351c6" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba1bc181b6f4addad45d82c194ff3351c6"></a>CFGLGT&#160;</td><td class="fielddoc"><p>Configure ProfileLight. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa5cb81a24bc72c80e2b928df446af6274" name="a7f8de2173be25941f46a03163612808aa5cb81a24bc72c80e2b928df446af6274"></a>CFGSF2&#160;</td><td class="fielddoc"><p>Configure shunting FormSignal. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba5cb81a24bc72c80e2b928df446af6274" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba5cb81a24bc72c80e2b928df446af6274"></a>CFGSF2&#160;</td><td class="fielddoc"><p>Configure shunting FormSignal. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa409d8baf4dce3d4f16af8637badb4af7" name="a7f8de2173be25941f46a03163612808aa409d8baf4dce3d4f16af8637badb4af7"></a>CFGBGN&#160;</td><td class="fielddoc"><p>Start configuration mode. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba409d8baf4dce3d4f16af8637badb4af7" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba409d8baf4dce3d4f16af8637badb4af7"></a>CFGBGN&#160;</td><td class="fielddoc"><p>Start configuration mode. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa96616934e88cb12c9d9a5a6d05c1fd18" name="a7f8de2173be25941f46a03163612808aa96616934e88cb12c9d9a5a6d05c1fd18"></a>CFGEND&#160;</td><td class="fielddoc"><p>Finish configuration mode. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba96616934e88cb12c9d9a5a6d05c1fd18" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba96616934e88cb12c9d9a5a6d05c1fd18"></a>CFGEND&#160;</td><td class="fielddoc"><p>Finish configuration mode. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa31af7e415cd369c18a237b42cdaf5243" name="a7f8de2173be25941f46a03163612808aa31af7e415cd369c18a237b42cdaf5243"></a>SET_ID&#160;</td><td class="fielddoc"><p>Set ID and clear configuration space. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba31af7e415cd369c18a237b42cdaf5243" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba31af7e415cd369c18a237b42cdaf5243"></a>SET_ID&#160;</td><td class="fielddoc"><p>Set ID and clear configuration space. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa0f22ae2cbd26e058017d712e4c0db1e5" name="a7f8de2173be25941f46a03163612808aa0f22ae2cbd26e058017d712e4c0db1e5"></a>PING&#160;</td><td class="fielddoc"><p>Request response. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5"></a>PING&#160;</td><td class="fielddoc"><p>Request response. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa76de9290d1d3c15587d40a524abb2618" name="a7f8de2173be25941f46a03163612808aa76de9290d1d3c15587d40a524abb2618"></a>RESET&#160;</td><td class="fielddoc"><p>Request resetting of the controller. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba76de9290d1d3c15587d40a524abb2618" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba76de9290d1d3c15587d40a524abb2618"></a>RESET&#160;</td><td class="fielddoc"><p>Request resetting of the controller. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aad58243bb22f8cda288831c272fe020f5" name="a7f8de2173be25941f46a03163612808aad58243bb22f8cda288831c272fe020f5"></a>GETCFG&#160;</td><td class="fielddoc"><p>Get amount of configured devices. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fbad58243bb22f8cda288831c272fe020f5" name="ae9a2e6e9bc528c9c7f38b7d26457d4fbad58243bb22f8cda288831c272fe020f5"></a>GETCFG&#160;</td><td class="fielddoc"><p>Get amount of configured devices. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa18921f49887e1f48f001f7edb4264624" name="a7f8de2173be25941f46a03163612808aa18921f49887e1f48f001f7edb4264624"></a>GETDVC&#160;</td><td class="fielddoc"><p>Get device configuration. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba18921f49887e1f48f001f7edb4264624" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba18921f49887e1f48f001f7edb4264624"></a>GETDVC&#160;</td><td class="fielddoc"><p>Get device configuration. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aaad780ff47d31dc4e0325cd317285c9e7" name="a7f8de2173be25941f46a03163612808aaad780ff47d31dc4e0325cd317285c9e7"></a>FLASH_REQ&#160;</td><td class="fielddoc"><p>Request firmware update in CAN bootloader. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fbaad780ff47d31dc4e0325cd317285c9e7" name="ae9a2e6e9bc528c9c7f38b7d26457d4fbaad780ff47d31dc4e0325cd317285c9e7"></a>FLASH_REQ&#160;</td><td class="fielddoc"><p>Request firmware update in CAN bootloader. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa62037965b4d2cd72b52e1833e5e65705" name="a7f8de2173be25941f46a03163612808aa62037965b4d2cd72b52e1833e5e65705"></a>FLASH_DATA&#160;</td><td class="fielddoc"><p>Send firmware data. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba62037965b4d2cd72b52e1833e5e65705" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba62037965b4d2cd72b52e1833e5e65705"></a>FLASH_DATA&#160;</td><td class="fielddoc"><p>Send firmware data. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa0de250a739db22a7ff532bfacd08ee83" name="a7f8de2173be25941f46a03163612808aa0de250a739db22a7ff532bfacd08ee83"></a>FLASH_CHECK&#160;</td><td class="fielddoc"><p>Verify firmware update checksum. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba0de250a739db22a7ff532bfacd08ee83" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba0de250a739db22a7ff532bfacd08ee83"></a>FLASH_CHECK&#160;</td><td class="fielddoc"><p>Verify firmware update checksum. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa0dcb905c0156a8196e593254fc94725e" name="a7f8de2173be25941f46a03163612808aa0dcb905c0156a8196e593254fc94725e"></a>QRYBUF&#160;</td><td class="fielddoc"><p>Request buffer state. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e"></a>QRYBUF&#160;</td><td class="fielddoc"><p>Request buffer state. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa005637f307ae952ebb0b21d23d237ccd" name="a7f8de2173be25941f46a03163612808aa005637f307ae952ebb0b21d23d237ccd"></a>QRYERR&#160;</td><td class="fielddoc"><p>Request error state. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd"></a>QRYERR&#160;</td><td class="fielddoc"><p>Request error state. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aae8589d134690ded7397b0320d14e977f" name="a7f8de2173be25941f46a03163612808aae8589d134690ded7397b0320d14e977f"></a>GETVER&#160;</td><td class="fielddoc"><p>Request firmware version. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fbae8589d134690ded7397b0320d14e977f" name="ae9a2e6e9bc528c9c7f38b7d26457d4fbae8589d134690ded7397b0320d14e977f"></a>GETVER&#160;</td><td class="fielddoc"><p>Request firmware version. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa3158dceb42b0a097b1ec8953b90cf3e8" name="a7f8de2173be25941f46a03163612808aa3158dceb42b0a097b1ec8953b90cf3e8"></a>SENSOR&#160;</td><td class="fielddoc"><p>Transmit sensor data. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba3158dceb42b0a097b1ec8953b90cf3e8" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba3158dceb42b0a097b1ec8953b90cf3e8"></a>SENSOR&#160;</td><td class="fielddoc"><p>Transmit sensor data. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa76d9e364b83d8153dfa8dd5185f18a65" name="a7f8de2173be25941f46a03163612808aa76d9e364b83d8153dfa8dd5185f18a65"></a>CMD_MASK&#160;</td><td class="fielddoc"><p>The command mask. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba76d9e364b83d8153dfa8dd5185f18a65" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba76d9e364b83d8153dfa8dd5185f18a65"></a>CMD_MASK&#160;</td><td class="fielddoc"><p>The command mask. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aa296c8008f99820ac0131a2ae544f831a" name="a7f8de2173be25941f46a03163612808aa296c8008f99820ac0131a2ae544f831a"></a>CMD_RESPONSE&#160;</td><td class="fielddoc"><p>The command response flag. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fba296c8008f99820ac0131a2ae544f831a" name="ae9a2e6e9bc528c9c7f38b7d26457d4fba296c8008f99820ac0131a2ae544f831a"></a>CMD_RESPONSE&#160;</td><td class="fielddoc"><p>The command response flag. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a7f8de2173be25941f46a03163612808aab9e59edc6df376023a00ef5ce466c6ae" name="a7f8de2173be25941f46a03163612808aab9e59edc6df376023a00ef5ce466c6ae"></a>CMD_ILLEGAL&#160;</td><td class="fielddoc"><p>This is not a command. </p>
+<tr><td class="fieldname"><a id="ae9a2e6e9bc528c9c7f38b7d26457d4fbab9e59edc6df376023a00ef5ce466c6ae" name="ae9a2e6e9bc528c9c7f38b7d26457d4fbab9e59edc6df376023a00ef5ce466c6ae"></a>CMD_ILLEGAL&#160;</td><td class="fielddoc"><p>This is not a command. </p>
 </td></tr>
 </table>
 
@@ -506,18 +506,26 @@ Variables</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="#aa7e15397b2e2b200856a7f837278ad0a">mrw::can::SensorType</a> : uint8_t</td>
+          <td class="memname">enum class <a class="el" href="#aa7e15397b2e2b200856a7f837278ad0a">mrw::can::SensorType</a> : uint8_t</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This enumeration lists all supported sensor types. </p>
 <dl class="section note"><dt>Note</dt><dd>The sensors do not influence the track control system. </dd></dl>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa7e15397b2e2b200856a7f837278ad0aaeb35a9bda85949a51bd71b593a0ec2f0" name="aa7e15397b2e2b200856a7f837278ad0aaeb35a9bda85949a51bd71b593a0ec2f0"></a>SENSOR_LIGHT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa7e15397b2e2b200856a7f837278ad0aa7d32c3b321f10b827553d6ab2e0f2b37" name="aa7e15397b2e2b200856a7f837278ad0aa7d32c3b321f10b827553d6ab2e0f2b37"></a>SENSOR_TEMP&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa7e15397b2e2b200856a7f837278ad0aaa7865aec2f076513d662d58cc2b210a6" name="aa7e15397b2e2b200856a7f837278ad0aaa7865aec2f076513d662d58cc2b210a6"></a>SENSOR_LIGHT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa7e15397b2e2b200856a7f837278ad0aa6cd28db86422557c7b789a7888e74a4a" name="aa7e15397b2e2b200856a7f837278ad0aa6cd28db86422557c7b789a7888e74a4a"></a>SENSOR_TEMP&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -618,17 +626,25 @@ Variables</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="#a6adb46251a933e34bb0c92abfbf60c5a">mrw::can::SwitchState</a> : uint8_t</td>
+          <td class="memname">enum class <a class="el" href="#a6adb46251a933e34bb0c92abfbf60c5a">mrw::can::SwitchState</a> : uint8_t</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This enumeration lists the switches state if they are turned left or right. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6adb46251a933e34bb0c92abfbf60c5aac9df9830a850f61d973986d34283d129" name="a6adb46251a933e34bb0c92abfbf60c5aac9df9830a850f61d973986d34283d129"></a>SWITCH_STATE_LEFT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a6adb46251a933e34bb0c92abfbf60c5aae4237e0ef4b0e22d41a9477916c5e288" name="a6adb46251a933e34bb0c92abfbf60c5aae4237e0ef4b0e22d41a9477916c5e288"></a>SWITCH_STATE_RIGHT&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6adb46251a933e34bb0c92abfbf60c5aabd971af2ede13a28b76b640b4e85907d" name="a6adb46251a933e34bb0c92abfbf60c5aabd971af2ede13a28b76b640b4e85907d"></a>SWITCH_STATE_LEFT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6adb46251a933e34bb0c92abfbf60c5aae8bf215c336133fe02e0b0bda61004a2" name="a6adb46251a933e34bb0c92abfbf60c5aae8bf215c336133fe02e0b0bda61004a2"></a>SWITCH_STATE_RIGHT&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -797,7 +813,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 12 2024 07:20:29 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Apr 12 2024 13:00:55 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

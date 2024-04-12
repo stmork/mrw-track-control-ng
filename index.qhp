@@ -74,46 +74,46 @@
 <section title="ControllerId" ref="d9/d9b/namespacemrw_1_1can.html#ad3397ba650ef1dbb629a49e0d5f78ba8"/>
 <section title="DeviceKey" ref="d9/d9b/namespacemrw_1_1can.html#ace76a1ef7c615650aaa309b027d1eae2"/>
 <section title="UnitNo" ref="d9/d9b/namespacemrw_1_1can.html#aadc3657d376a3c081b9b0c05feafbce7"/>
-<section title="Command" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808a">
-<section title="SETLFT" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aabca680de579ea58136cd90154e24b7d3"/>
-<section title="SETRGT" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa0ed96af8e19ac15fa34de519ccaff478"/>
-<section title="GETDIR" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa3afc6486a2a238d5b9c6f0cec2e5d6fe"/>
-<section title="SETRON" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa4f0d9b54aec9270440070bee2b8b9434"/>
-<section title="SETROF" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa6cf39187f40d9908f55bafc2288a5eb2"/>
-<section title="GETRBS" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aab16256ad009d9fa8a99ddc328d56376f"/>
-<section title="SETSGN" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa877b8510202d0a89047c3531854c6bbd"/>
-<section title="CFGSWN" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aaa587c43942ce005e535b0e9346ef0bb7"/>
-<section title="CFGSWO" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aab0cf691463a572e065a978ef836ec510"/>
-<section title="CFGRAI" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa4dc929300cab8cfe100efdf301ac43ff"/>
-<section title="CFGPF2" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa1301f6a6fa52730e25b8e93453bcfa81"/>
-<section title="CFGPF3" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa003a8725f7e1edde0361e49f27e121a9"/>
-<section title="CFGMF2" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa85005546e8544c48cb9e4cd2c84714da"/>
-<section title="CFGMF3" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa6d16ab40748962f96ecc92444b2a03df"/>
-<section title="CFGPL2" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa9ab40ea1a9127c249c1ab4d658584030"/>
-<section title="CFGPL3" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aad2251faa181a73b9e964fb79c2829143"/>
-<section title="CFGSL2" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aaaec6d999d4ccd7498847a153153940b8"/>
-<section title="CFGML2" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa708452d023dca3039b7532baa63660b3"/>
-<section title="CFGML3" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa91f946824ba8bde964f05ad5209ebbd4"/>
-<section title="CFGML4" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa62d97dbd0db8813be0ccfe13c75379f5"/>
-<section title="CFGLGT" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa1bc181b6f4addad45d82c194ff3351c6"/>
-<section title="CFGSF2" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa5cb81a24bc72c80e2b928df446af6274"/>
-<section title="CFGBGN" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa409d8baf4dce3d4f16af8637badb4af7"/>
-<section title="CFGEND" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa96616934e88cb12c9d9a5a6d05c1fd18"/>
-<section title="SET_ID" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa31af7e415cd369c18a237b42cdaf5243"/>
-<section title="PING" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa0f22ae2cbd26e058017d712e4c0db1e5"/>
-<section title="RESET" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa76de9290d1d3c15587d40a524abb2618"/>
-<section title="GETCFG" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aad58243bb22f8cda288831c272fe020f5"/>
-<section title="GETDVC" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa18921f49887e1f48f001f7edb4264624"/>
-<section title="FLASH_REQ" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aaad780ff47d31dc4e0325cd317285c9e7"/>
-<section title="FLASH_DATA" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa62037965b4d2cd72b52e1833e5e65705"/>
-<section title="FLASH_CHECK" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa0de250a739db22a7ff532bfacd08ee83"/>
-<section title="QRYBUF" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa0dcb905c0156a8196e593254fc94725e"/>
-<section title="QRYERR" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa005637f307ae952ebb0b21d23d237ccd"/>
-<section title="GETVER" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aae8589d134690ded7397b0320d14e977f"/>
-<section title="SENSOR" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa3158dceb42b0a097b1ec8953b90cf3e8"/>
-<section title="CMD_MASK" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa76d9e364b83d8153dfa8dd5185f18a65"/>
-<section title="CMD_RESPONSE" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa296c8008f99820ac0131a2ae544f831a"/>
-<section title="CMD_ILLEGAL" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aab9e59edc6df376023a00ef5ce466c6ae"/>
+<section title="Command" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fb">
+<section title="SETLFT" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbabca680de579ea58136cd90154e24b7d3"/>
+<section title="SETRGT" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0ed96af8e19ac15fa34de519ccaff478"/>
+<section title="GETDIR" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba3afc6486a2a238d5b9c6f0cec2e5d6fe"/>
+<section title="SETRON" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4f0d9b54aec9270440070bee2b8b9434"/>
+<section title="SETROF" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2"/>
+<section title="GETRBS" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f"/>
+<section title="SETSGN" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd"/>
+<section title="CFGSWN" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaa587c43942ce005e535b0e9346ef0bb7"/>
+<section title="CFGSWO" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab0cf691463a572e065a978ef836ec510"/>
+<section title="CFGRAI" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4dc929300cab8cfe100efdf301ac43ff"/>
+<section title="CFGPF2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba1301f6a6fa52730e25b8e93453bcfa81"/>
+<section title="CFGPF3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba003a8725f7e1edde0361e49f27e121a9"/>
+<section title="CFGMF2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba85005546e8544c48cb9e4cd2c84714da"/>
+<section title="CFGMF3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba6d16ab40748962f96ecc92444b2a03df"/>
+<section title="CFGPL2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba9ab40ea1a9127c249c1ab4d658584030"/>
+<section title="CFGPL3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbad2251faa181a73b9e964fb79c2829143"/>
+<section title="CFGSL2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaaec6d999d4ccd7498847a153153940b8"/>
+<section title="CFGML2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba708452d023dca3039b7532baa63660b3"/>
+<section title="CFGML3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba91f946824ba8bde964f05ad5209ebbd4"/>
+<section title="CFGML4" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba62d97dbd0db8813be0ccfe13c75379f5"/>
+<section title="CFGLGT" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba1bc181b6f4addad45d82c194ff3351c6"/>
+<section title="CFGSF2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba5cb81a24bc72c80e2b928df446af6274"/>
+<section title="CFGBGN" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba409d8baf4dce3d4f16af8637badb4af7"/>
+<section title="CFGEND" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba96616934e88cb12c9d9a5a6d05c1fd18"/>
+<section title="SET_ID" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba31af7e415cd369c18a237b42cdaf5243"/>
+<section title="PING" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5"/>
+<section title="RESET" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba76de9290d1d3c15587d40a524abb2618"/>
+<section title="GETCFG" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbad58243bb22f8cda288831c272fe020f5"/>
+<section title="GETDVC" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba18921f49887e1f48f001f7edb4264624"/>
+<section title="FLASH_REQ" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaad780ff47d31dc4e0325cd317285c9e7"/>
+<section title="FLASH_DATA" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba62037965b4d2cd72b52e1833e5e65705"/>
+<section title="FLASH_CHECK" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0de250a739db22a7ff532bfacd08ee83"/>
+<section title="QRYBUF" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e"/>
+<section title="QRYERR" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd"/>
+<section title="GETVER" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbae8589d134690ded7397b0320d14e977f"/>
+<section title="SENSOR" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba3158dceb42b0a097b1ec8953b90cf3e8"/>
+<section title="CMD_MASK" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba76d9e364b83d8153dfa8dd5185f18a65"/>
+<section title="CMD_RESPONSE" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba296c8008f99820ac0131a2ae544f831a"/>
+<section title="CMD_ILLEGAL" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab9e59edc6df376023a00ef5ce466c6ae"/>
 </section>
 <section title="CommandCategory" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319">
 <section title="CAT_SWITCH" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319aa176ddda94e77820e5786334516c9bfc"/>
@@ -149,8 +149,8 @@
 <section title="MSG_NO_RESPONSE" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0aed772d31fc770e80823c32f780253104"/>
 </section>
 <section title="SensorType" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0a">
-<section title="SENSOR_LIGHT" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aaeb35a9bda85949a51bd71b593a0ec2f0"/>
-<section title="SENSOR_TEMP" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aa7d32c3b321f10b827553d6ab2e0f2b37"/>
+<section title="SENSOR_LIGHT" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aaa7865aec2f076513d662d58cc2b210a6"/>
+<section title="SENSOR_TEMP" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aa6cd28db86422557c7b789a7888e74a4a"/>
 </section>
 <section title="SignalAspect" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0">
 <section title="SIGNAL_OFF" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a90a52e3c2a3c017a3b386d7516b087d0"/>
@@ -165,8 +165,8 @@
 <section title="SIGNAL_TST" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a9d22492e78c05850305782f5062fc39e"/>
 </section>
 <section title="SwitchState" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5a">
-<section title="SWITCH_STATE_LEFT" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aac9df9830a850f61d973986d34283d129"/>
-<section title="SWITCH_STATE_RIGHT" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aae4237e0ef4b0e22d41a9477916c5e288"/>
+<section title="SWITCH_STATE_LEFT" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aabd971af2ede13a28b76b640b4e85907d"/>
+<section title="SWITCH_STATE_RIGHT" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aae8bf215c336133fe02e0b0bda61004a2"/>
 </section>
 <section title="CAN_BROADCAST_ID" ref="d9/d9b/namespacemrw_1_1can.html#af60507dceb3716970cdf6fa5df53ca27"/>
 <section title="CAN_EID_UNITNO_MASK" ref="d9/d9b/namespacemrw_1_1can.html#a4bf4fa5a47b007939c26cc751241ffa0"/>
@@ -5448,67 +5448,67 @@
 <keyword name="CAT_RAIL" id="mrw::can::CAT_RAIL_aac851f8e69988e7e7f023fd4888c9319a0a027c46afd5167b4571d722a5218a0d" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a0a027c46afd5167b4571d722a5218a0d"/>
 <keyword name="CAT_SIGNAL" id="mrw::can::CAT_SIGNAL_aac851f8e69988e7e7f023fd4888c9319a002fe1fa4a7063cc8c2fcb400f1b67ab" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a002fe1fa4a7063cc8c2fcb400f1b67ab"/>
 <keyword name="CAT_SWITCH" id="mrw::can::CAT_SWITCH_aac851f8e69988e7e7f023fd4888c9319aa176ddda94e77820e5786334516c9bfc" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319aa176ddda94e77820e5786334516c9bfc"/>
-<keyword name="CFGBGN" id="mrw::can::CFGBGN_a7f8de2173be25941f46a03163612808aa409d8baf4dce3d4f16af8637badb4af7" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa409d8baf4dce3d4f16af8637badb4af7"/>
-<keyword name="CFGEND" id="mrw::can::CFGEND_a7f8de2173be25941f46a03163612808aa96616934e88cb12c9d9a5a6d05c1fd18" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa96616934e88cb12c9d9a5a6d05c1fd18"/>
-<keyword name="CFGLGT" id="mrw::can::CFGLGT_a7f8de2173be25941f46a03163612808aa1bc181b6f4addad45d82c194ff3351c6" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa1bc181b6f4addad45d82c194ff3351c6"/>
-<keyword name="CFGMF2" id="mrw::can::CFGMF2_a7f8de2173be25941f46a03163612808aa85005546e8544c48cb9e4cd2c84714da" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa85005546e8544c48cb9e4cd2c84714da"/>
-<keyword name="CFGMF3" id="mrw::can::CFGMF3_a7f8de2173be25941f46a03163612808aa6d16ab40748962f96ecc92444b2a03df" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa6d16ab40748962f96ecc92444b2a03df"/>
-<keyword name="CFGML2" id="mrw::can::CFGML2_a7f8de2173be25941f46a03163612808aa708452d023dca3039b7532baa63660b3" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa708452d023dca3039b7532baa63660b3"/>
-<keyword name="CFGML3" id="mrw::can::CFGML3_a7f8de2173be25941f46a03163612808aa91f946824ba8bde964f05ad5209ebbd4" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa91f946824ba8bde964f05ad5209ebbd4"/>
-<keyword name="CFGML4" id="mrw::can::CFGML4_a7f8de2173be25941f46a03163612808aa62d97dbd0db8813be0ccfe13c75379f5" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa62d97dbd0db8813be0ccfe13c75379f5"/>
-<keyword name="CFGPF2" id="mrw::can::CFGPF2_a7f8de2173be25941f46a03163612808aa1301f6a6fa52730e25b8e93453bcfa81" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa1301f6a6fa52730e25b8e93453bcfa81"/>
-<keyword name="CFGPF3" id="mrw::can::CFGPF3_a7f8de2173be25941f46a03163612808aa003a8725f7e1edde0361e49f27e121a9" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa003a8725f7e1edde0361e49f27e121a9"/>
-<keyword name="CFGPL2" id="mrw::can::CFGPL2_a7f8de2173be25941f46a03163612808aa9ab40ea1a9127c249c1ab4d658584030" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa9ab40ea1a9127c249c1ab4d658584030"/>
-<keyword name="CFGPL3" id="mrw::can::CFGPL3_a7f8de2173be25941f46a03163612808aad2251faa181a73b9e964fb79c2829143" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aad2251faa181a73b9e964fb79c2829143"/>
-<keyword name="CFGRAI" id="mrw::can::CFGRAI_a7f8de2173be25941f46a03163612808aa4dc929300cab8cfe100efdf301ac43ff" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa4dc929300cab8cfe100efdf301ac43ff"/>
-<keyword name="CFGSF2" id="mrw::can::CFGSF2_a7f8de2173be25941f46a03163612808aa5cb81a24bc72c80e2b928df446af6274" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa5cb81a24bc72c80e2b928df446af6274"/>
-<keyword name="CFGSL2" id="mrw::can::CFGSL2_a7f8de2173be25941f46a03163612808aaaec6d999d4ccd7498847a153153940b8" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aaaec6d999d4ccd7498847a153153940b8"/>
-<keyword name="CFGSWN" id="mrw::can::CFGSWN_a7f8de2173be25941f46a03163612808aaa587c43942ce005e535b0e9346ef0bb7" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aaa587c43942ce005e535b0e9346ef0bb7"/>
-<keyword name="CFGSWO" id="mrw::can::CFGSWO_a7f8de2173be25941f46a03163612808aab0cf691463a572e065a978ef836ec510" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aab0cf691463a572e065a978ef836ec510"/>
-<keyword name="CMD_ILLEGAL" id="mrw::can::CMD_ILLEGAL_a7f8de2173be25941f46a03163612808aab9e59edc6df376023a00ef5ce466c6ae" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aab9e59edc6df376023a00ef5ce466c6ae"/>
-<keyword name="CMD_MASK" id="mrw::can::CMD_MASK_a7f8de2173be25941f46a03163612808aa76d9e364b83d8153dfa8dd5185f18a65" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa76d9e364b83d8153dfa8dd5185f18a65"/>
+<keyword name="CFGBGN" id="mrw::can::CFGBGN_ae9a2e6e9bc528c9c7f38b7d26457d4fba409d8baf4dce3d4f16af8637badb4af7" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba409d8baf4dce3d4f16af8637badb4af7"/>
+<keyword name="CFGEND" id="mrw::can::CFGEND_ae9a2e6e9bc528c9c7f38b7d26457d4fba96616934e88cb12c9d9a5a6d05c1fd18" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba96616934e88cb12c9d9a5a6d05c1fd18"/>
+<keyword name="CFGLGT" id="mrw::can::CFGLGT_ae9a2e6e9bc528c9c7f38b7d26457d4fba1bc181b6f4addad45d82c194ff3351c6" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba1bc181b6f4addad45d82c194ff3351c6"/>
+<keyword name="CFGMF2" id="mrw::can::CFGMF2_ae9a2e6e9bc528c9c7f38b7d26457d4fba85005546e8544c48cb9e4cd2c84714da" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba85005546e8544c48cb9e4cd2c84714da"/>
+<keyword name="CFGMF3" id="mrw::can::CFGMF3_ae9a2e6e9bc528c9c7f38b7d26457d4fba6d16ab40748962f96ecc92444b2a03df" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba6d16ab40748962f96ecc92444b2a03df"/>
+<keyword name="CFGML2" id="mrw::can::CFGML2_ae9a2e6e9bc528c9c7f38b7d26457d4fba708452d023dca3039b7532baa63660b3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba708452d023dca3039b7532baa63660b3"/>
+<keyword name="CFGML3" id="mrw::can::CFGML3_ae9a2e6e9bc528c9c7f38b7d26457d4fba91f946824ba8bde964f05ad5209ebbd4" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba91f946824ba8bde964f05ad5209ebbd4"/>
+<keyword name="CFGML4" id="mrw::can::CFGML4_ae9a2e6e9bc528c9c7f38b7d26457d4fba62d97dbd0db8813be0ccfe13c75379f5" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba62d97dbd0db8813be0ccfe13c75379f5"/>
+<keyword name="CFGPF2" id="mrw::can::CFGPF2_ae9a2e6e9bc528c9c7f38b7d26457d4fba1301f6a6fa52730e25b8e93453bcfa81" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba1301f6a6fa52730e25b8e93453bcfa81"/>
+<keyword name="CFGPF3" id="mrw::can::CFGPF3_ae9a2e6e9bc528c9c7f38b7d26457d4fba003a8725f7e1edde0361e49f27e121a9" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba003a8725f7e1edde0361e49f27e121a9"/>
+<keyword name="CFGPL2" id="mrw::can::CFGPL2_ae9a2e6e9bc528c9c7f38b7d26457d4fba9ab40ea1a9127c249c1ab4d658584030" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba9ab40ea1a9127c249c1ab4d658584030"/>
+<keyword name="CFGPL3" id="mrw::can::CFGPL3_ae9a2e6e9bc528c9c7f38b7d26457d4fbad2251faa181a73b9e964fb79c2829143" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbad2251faa181a73b9e964fb79c2829143"/>
+<keyword name="CFGRAI" id="mrw::can::CFGRAI_ae9a2e6e9bc528c9c7f38b7d26457d4fba4dc929300cab8cfe100efdf301ac43ff" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4dc929300cab8cfe100efdf301ac43ff"/>
+<keyword name="CFGSF2" id="mrw::can::CFGSF2_ae9a2e6e9bc528c9c7f38b7d26457d4fba5cb81a24bc72c80e2b928df446af6274" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba5cb81a24bc72c80e2b928df446af6274"/>
+<keyword name="CFGSL2" id="mrw::can::CFGSL2_ae9a2e6e9bc528c9c7f38b7d26457d4fbaaec6d999d4ccd7498847a153153940b8" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaaec6d999d4ccd7498847a153153940b8"/>
+<keyword name="CFGSWN" id="mrw::can::CFGSWN_ae9a2e6e9bc528c9c7f38b7d26457d4fbaa587c43942ce005e535b0e9346ef0bb7" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaa587c43942ce005e535b0e9346ef0bb7"/>
+<keyword name="CFGSWO" id="mrw::can::CFGSWO_ae9a2e6e9bc528c9c7f38b7d26457d4fbab0cf691463a572e065a978ef836ec510" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab0cf691463a572e065a978ef836ec510"/>
+<keyword name="CMD_ILLEGAL" id="mrw::can::CMD_ILLEGAL_ae9a2e6e9bc528c9c7f38b7d26457d4fbab9e59edc6df376023a00ef5ce466c6ae" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab9e59edc6df376023a00ef5ce466c6ae"/>
+<keyword name="CMD_MASK" id="mrw::can::CMD_MASK_ae9a2e6e9bc528c9c7f38b7d26457d4fba76d9e364b83d8153dfa8dd5185f18a65" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba76d9e364b83d8153dfa8dd5185f18a65"/>
 <keyword name="CMD_NEED_UNITNO" id="mrw::can::CMD_NEED_UNITNO_aac851f8e69988e7e7f023fd4888c9319a9af3a157bea71a1e3f14b060ed6d62df" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a9af3a157bea71a1e3f14b060ed6d62df"/>
-<keyword name="CMD_RESPONSE" id="mrw::can::CMD_RESPONSE_a7f8de2173be25941f46a03163612808aa296c8008f99820ac0131a2ae544f831a" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa296c8008f99820ac0131a2ae544f831a"/>
-<keyword name="Command" id="mrw::can::Command_a7f8de2173be25941f46a03163612808a" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808a"/>
-<keyword name="SETLFT" id="mrw::can::SETLFT_a7f8de2173be25941f46a03163612808aabca680de579ea58136cd90154e24b7d3" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aabca680de579ea58136cd90154e24b7d3"/>
-<keyword name="SETRGT" id="mrw::can::SETRGT_a7f8de2173be25941f46a03163612808aa0ed96af8e19ac15fa34de519ccaff478" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa0ed96af8e19ac15fa34de519ccaff478"/>
-<keyword name="GETDIR" id="mrw::can::GETDIR_a7f8de2173be25941f46a03163612808aa3afc6486a2a238d5b9c6f0cec2e5d6fe" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa3afc6486a2a238d5b9c6f0cec2e5d6fe"/>
-<keyword name="SETRON" id="mrw::can::SETRON_a7f8de2173be25941f46a03163612808aa4f0d9b54aec9270440070bee2b8b9434" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa4f0d9b54aec9270440070bee2b8b9434"/>
-<keyword name="SETROF" id="mrw::can::SETROF_a7f8de2173be25941f46a03163612808aa6cf39187f40d9908f55bafc2288a5eb2" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa6cf39187f40d9908f55bafc2288a5eb2"/>
-<keyword name="GETRBS" id="mrw::can::GETRBS_a7f8de2173be25941f46a03163612808aab16256ad009d9fa8a99ddc328d56376f" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aab16256ad009d9fa8a99ddc328d56376f"/>
-<keyword name="SETSGN" id="mrw::can::SETSGN_a7f8de2173be25941f46a03163612808aa877b8510202d0a89047c3531854c6bbd" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa877b8510202d0a89047c3531854c6bbd"/>
-<keyword name="CFGSWN" id="mrw::can::CFGSWN_a7f8de2173be25941f46a03163612808aaa587c43942ce005e535b0e9346ef0bb7" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aaa587c43942ce005e535b0e9346ef0bb7"/>
-<keyword name="CFGSWO" id="mrw::can::CFGSWO_a7f8de2173be25941f46a03163612808aab0cf691463a572e065a978ef836ec510" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aab0cf691463a572e065a978ef836ec510"/>
-<keyword name="CFGRAI" id="mrw::can::CFGRAI_a7f8de2173be25941f46a03163612808aa4dc929300cab8cfe100efdf301ac43ff" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa4dc929300cab8cfe100efdf301ac43ff"/>
-<keyword name="CFGPF2" id="mrw::can::CFGPF2_a7f8de2173be25941f46a03163612808aa1301f6a6fa52730e25b8e93453bcfa81" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa1301f6a6fa52730e25b8e93453bcfa81"/>
-<keyword name="CFGPF3" id="mrw::can::CFGPF3_a7f8de2173be25941f46a03163612808aa003a8725f7e1edde0361e49f27e121a9" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa003a8725f7e1edde0361e49f27e121a9"/>
-<keyword name="CFGMF2" id="mrw::can::CFGMF2_a7f8de2173be25941f46a03163612808aa85005546e8544c48cb9e4cd2c84714da" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa85005546e8544c48cb9e4cd2c84714da"/>
-<keyword name="CFGMF3" id="mrw::can::CFGMF3_a7f8de2173be25941f46a03163612808aa6d16ab40748962f96ecc92444b2a03df" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa6d16ab40748962f96ecc92444b2a03df"/>
-<keyword name="CFGPL2" id="mrw::can::CFGPL2_a7f8de2173be25941f46a03163612808aa9ab40ea1a9127c249c1ab4d658584030" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa9ab40ea1a9127c249c1ab4d658584030"/>
-<keyword name="CFGPL3" id="mrw::can::CFGPL3_a7f8de2173be25941f46a03163612808aad2251faa181a73b9e964fb79c2829143" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aad2251faa181a73b9e964fb79c2829143"/>
-<keyword name="CFGSL2" id="mrw::can::CFGSL2_a7f8de2173be25941f46a03163612808aaaec6d999d4ccd7498847a153153940b8" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aaaec6d999d4ccd7498847a153153940b8"/>
-<keyword name="CFGML2" id="mrw::can::CFGML2_a7f8de2173be25941f46a03163612808aa708452d023dca3039b7532baa63660b3" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa708452d023dca3039b7532baa63660b3"/>
-<keyword name="CFGML3" id="mrw::can::CFGML3_a7f8de2173be25941f46a03163612808aa91f946824ba8bde964f05ad5209ebbd4" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa91f946824ba8bde964f05ad5209ebbd4"/>
-<keyword name="CFGML4" id="mrw::can::CFGML4_a7f8de2173be25941f46a03163612808aa62d97dbd0db8813be0ccfe13c75379f5" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa62d97dbd0db8813be0ccfe13c75379f5"/>
-<keyword name="CFGLGT" id="mrw::can::CFGLGT_a7f8de2173be25941f46a03163612808aa1bc181b6f4addad45d82c194ff3351c6" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa1bc181b6f4addad45d82c194ff3351c6"/>
-<keyword name="CFGSF2" id="mrw::can::CFGSF2_a7f8de2173be25941f46a03163612808aa5cb81a24bc72c80e2b928df446af6274" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa5cb81a24bc72c80e2b928df446af6274"/>
-<keyword name="CFGBGN" id="mrw::can::CFGBGN_a7f8de2173be25941f46a03163612808aa409d8baf4dce3d4f16af8637badb4af7" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa409d8baf4dce3d4f16af8637badb4af7"/>
-<keyword name="CFGEND" id="mrw::can::CFGEND_a7f8de2173be25941f46a03163612808aa96616934e88cb12c9d9a5a6d05c1fd18" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa96616934e88cb12c9d9a5a6d05c1fd18"/>
-<keyword name="SET_ID" id="mrw::can::SET_ID_a7f8de2173be25941f46a03163612808aa31af7e415cd369c18a237b42cdaf5243" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa31af7e415cd369c18a237b42cdaf5243"/>
-<keyword name="PING" id="mrw::can::PING_a7f8de2173be25941f46a03163612808aa0f22ae2cbd26e058017d712e4c0db1e5" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa0f22ae2cbd26e058017d712e4c0db1e5"/>
-<keyword name="RESET" id="mrw::can::RESET_a7f8de2173be25941f46a03163612808aa76de9290d1d3c15587d40a524abb2618" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa76de9290d1d3c15587d40a524abb2618"/>
-<keyword name="GETCFG" id="mrw::can::GETCFG_a7f8de2173be25941f46a03163612808aad58243bb22f8cda288831c272fe020f5" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aad58243bb22f8cda288831c272fe020f5"/>
-<keyword name="GETDVC" id="mrw::can::GETDVC_a7f8de2173be25941f46a03163612808aa18921f49887e1f48f001f7edb4264624" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa18921f49887e1f48f001f7edb4264624"/>
-<keyword name="FLASH_REQ" id="mrw::can::FLASH_REQ_a7f8de2173be25941f46a03163612808aaad780ff47d31dc4e0325cd317285c9e7" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aaad780ff47d31dc4e0325cd317285c9e7"/>
-<keyword name="FLASH_DATA" id="mrw::can::FLASH_DATA_a7f8de2173be25941f46a03163612808aa62037965b4d2cd72b52e1833e5e65705" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa62037965b4d2cd72b52e1833e5e65705"/>
-<keyword name="FLASH_CHECK" id="mrw::can::FLASH_CHECK_a7f8de2173be25941f46a03163612808aa0de250a739db22a7ff532bfacd08ee83" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa0de250a739db22a7ff532bfacd08ee83"/>
-<keyword name="QRYBUF" id="mrw::can::QRYBUF_a7f8de2173be25941f46a03163612808aa0dcb905c0156a8196e593254fc94725e" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa0dcb905c0156a8196e593254fc94725e"/>
-<keyword name="QRYERR" id="mrw::can::QRYERR_a7f8de2173be25941f46a03163612808aa005637f307ae952ebb0b21d23d237ccd" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa005637f307ae952ebb0b21d23d237ccd"/>
-<keyword name="GETVER" id="mrw::can::GETVER_a7f8de2173be25941f46a03163612808aae8589d134690ded7397b0320d14e977f" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aae8589d134690ded7397b0320d14e977f"/>
-<keyword name="SENSOR" id="mrw::can::SENSOR_a7f8de2173be25941f46a03163612808aa3158dceb42b0a097b1ec8953b90cf3e8" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa3158dceb42b0a097b1ec8953b90cf3e8"/>
-<keyword name="CMD_MASK" id="mrw::can::CMD_MASK_a7f8de2173be25941f46a03163612808aa76d9e364b83d8153dfa8dd5185f18a65" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa76d9e364b83d8153dfa8dd5185f18a65"/>
-<keyword name="CMD_RESPONSE" id="mrw::can::CMD_RESPONSE_a7f8de2173be25941f46a03163612808aa296c8008f99820ac0131a2ae544f831a" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa296c8008f99820ac0131a2ae544f831a"/>
-<keyword name="CMD_ILLEGAL" id="mrw::can::CMD_ILLEGAL_a7f8de2173be25941f46a03163612808aab9e59edc6df376023a00ef5ce466c6ae" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aab9e59edc6df376023a00ef5ce466c6ae"/>
+<keyword name="CMD_RESPONSE" id="mrw::can::CMD_RESPONSE_ae9a2e6e9bc528c9c7f38b7d26457d4fba296c8008f99820ac0131a2ae544f831a" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba296c8008f99820ac0131a2ae544f831a"/>
+<keyword name="Command" id="mrw::can::Command_ae9a2e6e9bc528c9c7f38b7d26457d4fb" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fb"/>
+<keyword name="SETLFT" id="mrw::can::SETLFT_ae9a2e6e9bc528c9c7f38b7d26457d4fbabca680de579ea58136cd90154e24b7d3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbabca680de579ea58136cd90154e24b7d3"/>
+<keyword name="SETRGT" id="mrw::can::SETRGT_ae9a2e6e9bc528c9c7f38b7d26457d4fba0ed96af8e19ac15fa34de519ccaff478" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0ed96af8e19ac15fa34de519ccaff478"/>
+<keyword name="GETDIR" id="mrw::can::GETDIR_ae9a2e6e9bc528c9c7f38b7d26457d4fba3afc6486a2a238d5b9c6f0cec2e5d6fe" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba3afc6486a2a238d5b9c6f0cec2e5d6fe"/>
+<keyword name="SETRON" id="mrw::can::SETRON_ae9a2e6e9bc528c9c7f38b7d26457d4fba4f0d9b54aec9270440070bee2b8b9434" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4f0d9b54aec9270440070bee2b8b9434"/>
+<keyword name="SETROF" id="mrw::can::SETROF_ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2"/>
+<keyword name="GETRBS" id="mrw::can::GETRBS_ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f"/>
+<keyword name="SETSGN" id="mrw::can::SETSGN_ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd"/>
+<keyword name="CFGSWN" id="mrw::can::CFGSWN_ae9a2e6e9bc528c9c7f38b7d26457d4fbaa587c43942ce005e535b0e9346ef0bb7" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaa587c43942ce005e535b0e9346ef0bb7"/>
+<keyword name="CFGSWO" id="mrw::can::CFGSWO_ae9a2e6e9bc528c9c7f38b7d26457d4fbab0cf691463a572e065a978ef836ec510" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab0cf691463a572e065a978ef836ec510"/>
+<keyword name="CFGRAI" id="mrw::can::CFGRAI_ae9a2e6e9bc528c9c7f38b7d26457d4fba4dc929300cab8cfe100efdf301ac43ff" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4dc929300cab8cfe100efdf301ac43ff"/>
+<keyword name="CFGPF2" id="mrw::can::CFGPF2_ae9a2e6e9bc528c9c7f38b7d26457d4fba1301f6a6fa52730e25b8e93453bcfa81" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba1301f6a6fa52730e25b8e93453bcfa81"/>
+<keyword name="CFGPF3" id="mrw::can::CFGPF3_ae9a2e6e9bc528c9c7f38b7d26457d4fba003a8725f7e1edde0361e49f27e121a9" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba003a8725f7e1edde0361e49f27e121a9"/>
+<keyword name="CFGMF2" id="mrw::can::CFGMF2_ae9a2e6e9bc528c9c7f38b7d26457d4fba85005546e8544c48cb9e4cd2c84714da" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba85005546e8544c48cb9e4cd2c84714da"/>
+<keyword name="CFGMF3" id="mrw::can::CFGMF3_ae9a2e6e9bc528c9c7f38b7d26457d4fba6d16ab40748962f96ecc92444b2a03df" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba6d16ab40748962f96ecc92444b2a03df"/>
+<keyword name="CFGPL2" id="mrw::can::CFGPL2_ae9a2e6e9bc528c9c7f38b7d26457d4fba9ab40ea1a9127c249c1ab4d658584030" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba9ab40ea1a9127c249c1ab4d658584030"/>
+<keyword name="CFGPL3" id="mrw::can::CFGPL3_ae9a2e6e9bc528c9c7f38b7d26457d4fbad2251faa181a73b9e964fb79c2829143" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbad2251faa181a73b9e964fb79c2829143"/>
+<keyword name="CFGSL2" id="mrw::can::CFGSL2_ae9a2e6e9bc528c9c7f38b7d26457d4fbaaec6d999d4ccd7498847a153153940b8" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaaec6d999d4ccd7498847a153153940b8"/>
+<keyword name="CFGML2" id="mrw::can::CFGML2_ae9a2e6e9bc528c9c7f38b7d26457d4fba708452d023dca3039b7532baa63660b3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba708452d023dca3039b7532baa63660b3"/>
+<keyword name="CFGML3" id="mrw::can::CFGML3_ae9a2e6e9bc528c9c7f38b7d26457d4fba91f946824ba8bde964f05ad5209ebbd4" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba91f946824ba8bde964f05ad5209ebbd4"/>
+<keyword name="CFGML4" id="mrw::can::CFGML4_ae9a2e6e9bc528c9c7f38b7d26457d4fba62d97dbd0db8813be0ccfe13c75379f5" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba62d97dbd0db8813be0ccfe13c75379f5"/>
+<keyword name="CFGLGT" id="mrw::can::CFGLGT_ae9a2e6e9bc528c9c7f38b7d26457d4fba1bc181b6f4addad45d82c194ff3351c6" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba1bc181b6f4addad45d82c194ff3351c6"/>
+<keyword name="CFGSF2" id="mrw::can::CFGSF2_ae9a2e6e9bc528c9c7f38b7d26457d4fba5cb81a24bc72c80e2b928df446af6274" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba5cb81a24bc72c80e2b928df446af6274"/>
+<keyword name="CFGBGN" id="mrw::can::CFGBGN_ae9a2e6e9bc528c9c7f38b7d26457d4fba409d8baf4dce3d4f16af8637badb4af7" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba409d8baf4dce3d4f16af8637badb4af7"/>
+<keyword name="CFGEND" id="mrw::can::CFGEND_ae9a2e6e9bc528c9c7f38b7d26457d4fba96616934e88cb12c9d9a5a6d05c1fd18" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba96616934e88cb12c9d9a5a6d05c1fd18"/>
+<keyword name="SET_ID" id="mrw::can::SET_ID_ae9a2e6e9bc528c9c7f38b7d26457d4fba31af7e415cd369c18a237b42cdaf5243" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba31af7e415cd369c18a237b42cdaf5243"/>
+<keyword name="PING" id="mrw::can::PING_ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5"/>
+<keyword name="RESET" id="mrw::can::RESET_ae9a2e6e9bc528c9c7f38b7d26457d4fba76de9290d1d3c15587d40a524abb2618" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba76de9290d1d3c15587d40a524abb2618"/>
+<keyword name="GETCFG" id="mrw::can::GETCFG_ae9a2e6e9bc528c9c7f38b7d26457d4fbad58243bb22f8cda288831c272fe020f5" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbad58243bb22f8cda288831c272fe020f5"/>
+<keyword name="GETDVC" id="mrw::can::GETDVC_ae9a2e6e9bc528c9c7f38b7d26457d4fba18921f49887e1f48f001f7edb4264624" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba18921f49887e1f48f001f7edb4264624"/>
+<keyword name="FLASH_REQ" id="mrw::can::FLASH_REQ_ae9a2e6e9bc528c9c7f38b7d26457d4fbaad780ff47d31dc4e0325cd317285c9e7" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaad780ff47d31dc4e0325cd317285c9e7"/>
+<keyword name="FLASH_DATA" id="mrw::can::FLASH_DATA_ae9a2e6e9bc528c9c7f38b7d26457d4fba62037965b4d2cd72b52e1833e5e65705" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba62037965b4d2cd72b52e1833e5e65705"/>
+<keyword name="FLASH_CHECK" id="mrw::can::FLASH_CHECK_ae9a2e6e9bc528c9c7f38b7d26457d4fba0de250a739db22a7ff532bfacd08ee83" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0de250a739db22a7ff532bfacd08ee83"/>
+<keyword name="QRYBUF" id="mrw::can::QRYBUF_ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e"/>
+<keyword name="QRYERR" id="mrw::can::QRYERR_ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd"/>
+<keyword name="GETVER" id="mrw::can::GETVER_ae9a2e6e9bc528c9c7f38b7d26457d4fbae8589d134690ded7397b0320d14e977f" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbae8589d134690ded7397b0320d14e977f"/>
+<keyword name="SENSOR" id="mrw::can::SENSOR_ae9a2e6e9bc528c9c7f38b7d26457d4fba3158dceb42b0a097b1ec8953b90cf3e8" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba3158dceb42b0a097b1ec8953b90cf3e8"/>
+<keyword name="CMD_MASK" id="mrw::can::CMD_MASK_ae9a2e6e9bc528c9c7f38b7d26457d4fba76d9e364b83d8153dfa8dd5185f18a65" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba76d9e364b83d8153dfa8dd5185f18a65"/>
+<keyword name="CMD_RESPONSE" id="mrw::can::CMD_RESPONSE_ae9a2e6e9bc528c9c7f38b7d26457d4fba296c8008f99820ac0131a2ae544f831a" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba296c8008f99820ac0131a2ae544f831a"/>
+<keyword name="CMD_ILLEGAL" id="mrw::can::CMD_ILLEGAL_ae9a2e6e9bc528c9c7f38b7d26457d4fbab9e59edc6df376023a00ef5ce466c6ae" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab9e59edc6df376023a00ef5ce466c6ae"/>
 <keyword name="CommandCategory" id="mrw::can::CommandCategory_aac851f8e69988e7e7f023fd4888c9319" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319"/>
 <keyword name="CAT_SWITCH" id="mrw::can::CAT_SWITCH_aac851f8e69988e7e7f023fd4888c9319aa176ddda94e77820e5786334516c9bfc" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319aa176ddda94e77820e5786334516c9bfc"/>
 <keyword name="CAT_RAIL" id="mrw::can::CAT_RAIL_aac851f8e69988e7e7f023fd4888c9319a0a027c46afd5167b4571d722a5218a0d" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a0a027c46afd5167b4571d722a5218a0d"/>
@@ -5521,15 +5521,15 @@
 <keyword name="DeviceKey" id="mrw::can::DeviceKey_ace76a1ef7c615650aaa309b027d1eae2" ref="d9/d9b/namespacemrw_1_1can.html#ace76a1ef7c615650aaa309b027d1eae2"/>
 <keyword name="errorCode" id="sc::errorCode_a096327e50db1de10f7c44ec93ef08812" ref="db/d03/namespacesc.html#a096327e50db1de10f7c44ec93ef08812"/>
 <keyword name="eventid" id="sc::eventid_a778684feb57033c6828435b8b1c5fb6b" ref="db/d03/namespacesc.html#a778684feb57033c6828435b8b1c5fb6b"/>
-<keyword name="FLASH_CHECK" id="mrw::can::FLASH_CHECK_a7f8de2173be25941f46a03163612808aa0de250a739db22a7ff532bfacd08ee83" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa0de250a739db22a7ff532bfacd08ee83"/>
-<keyword name="FLASH_DATA" id="mrw::can::FLASH_DATA_a7f8de2173be25941f46a03163612808aa62037965b4d2cd72b52e1833e5e65705" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa62037965b4d2cd72b52e1833e5e65705"/>
-<keyword name="FLASH_REQ" id="mrw::can::FLASH_REQ_a7f8de2173be25941f46a03163612808aaad780ff47d31dc4e0325cd317285c9e7" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aaad780ff47d31dc4e0325cd317285c9e7"/>
+<keyword name="FLASH_CHECK" id="mrw::can::FLASH_CHECK_ae9a2e6e9bc528c9c7f38b7d26457d4fba0de250a739db22a7ff532bfacd08ee83" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0de250a739db22a7ff532bfacd08ee83"/>
+<keyword name="FLASH_DATA" id="mrw::can::FLASH_DATA_ae9a2e6e9bc528c9c7f38b7d26457d4fba62037965b4d2cd72b52e1833e5e65705" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba62037965b4d2cd72b52e1833e5e65705"/>
+<keyword name="FLASH_REQ" id="mrw::can::FLASH_REQ_ae9a2e6e9bc528c9c7f38b7d26457d4fbaad780ff47d31dc4e0325cd317285c9e7" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaad780ff47d31dc4e0325cd317285c9e7"/>
 <keyword name="FREE" id="mrw::model::FREE_a5c0de0ceba8c321d726fb3cc699b4edea88c189a42c87aa49d667fc8ab76bc323" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea88c189a42c87aa49d667fc8ab76bc323"/>
-<keyword name="GETCFG" id="mrw::can::GETCFG_a7f8de2173be25941f46a03163612808aad58243bb22f8cda288831c272fe020f5" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aad58243bb22f8cda288831c272fe020f5"/>
-<keyword name="GETDIR" id="mrw::can::GETDIR_a7f8de2173be25941f46a03163612808aa3afc6486a2a238d5b9c6f0cec2e5d6fe" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa3afc6486a2a238d5b9c6f0cec2e5d6fe"/>
-<keyword name="GETDVC" id="mrw::can::GETDVC_a7f8de2173be25941f46a03163612808aa18921f49887e1f48f001f7edb4264624" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa18921f49887e1f48f001f7edb4264624"/>
-<keyword name="GETRBS" id="mrw::can::GETRBS_a7f8de2173be25941f46a03163612808aab16256ad009d9fa8a99ddc328d56376f" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aab16256ad009d9fa8a99ddc328d56376f"/>
-<keyword name="GETVER" id="mrw::can::GETVER_a7f8de2173be25941f46a03163612808aae8589d134690ded7397b0320d14e977f" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aae8589d134690ded7397b0320d14e977f"/>
+<keyword name="GETCFG" id="mrw::can::GETCFG_ae9a2e6e9bc528c9c7f38b7d26457d4fbad58243bb22f8cda288831c272fe020f5" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbad58243bb22f8cda288831c272fe020f5"/>
+<keyword name="GETDIR" id="mrw::can::GETDIR_ae9a2e6e9bc528c9c7f38b7d26457d4fba3afc6486a2a238d5b9c6f0cec2e5d6fe" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba3afc6486a2a238d5b9c6f0cec2e5d6fe"/>
+<keyword name="GETDVC" id="mrw::can::GETDVC_ae9a2e6e9bc528c9c7f38b7d26457d4fba18921f49887e1f48f001f7edb4264624" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba18921f49887e1f48f001f7edb4264624"/>
+<keyword name="GETRBS" id="mrw::can::GETRBS_ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f"/>
+<keyword name="GETVER" id="mrw::can::GETVER_ae9a2e6e9bc528c9c7f38b7d26457d4fbae8589d134690ded7397b0320d14e977f" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbae8589d134690ded7397b0320d14e977f"/>
 <keyword name="integer" id="sc::integer_ab81e58bda4a1d0525955223d98ccb3df" ref="db/d03/namespacesc.html#ab81e58bda4a1d0525955223d98ccb3df"/>
 <keyword name="ModuleId" id="mrw::model::ModuleId_a9dfe38af1c8e25aebb1eaf5ff98944d5" ref="d9/dbc/namespacemrw_1_1model.html#a9dfe38af1c8e25aebb1eaf5ff98944d5"/>
 <keyword name="MSG_BOOTED" id="mrw::can::MSG_BOOTED_a5fd10e57deed19ffd98acb57774082f0a38d4920bdc0d31bca5e5c40d098270a7" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a38d4920bdc0d31bca5e5c40d098270a7"/>
@@ -5557,11 +5557,11 @@
 <keyword name="NO_UNITNO" id="mrw::can::NO_UNITNO_aa9e5a8167acba11155bc8eacd145763a" ref="d9/d9b/namespacemrw_1_1can.html#aa9e5a8167acba11155bc8eacd145763a"/>
 <keyword name="OCCUPIED" id="mrw::model::OCCUPIED_a5c0de0ceba8c321d726fb3cc699b4edea95bb06a35b7ae1afcf75777bb28ea62c" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea95bb06a35b7ae1afcf75777bb28ea62c"/>
 <keyword name="PASSED" id="mrw::model::PASSED_a5c0de0ceba8c321d726fb3cc699b4edea269f3d1562cbd15624e7d2c4b10122e3" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea269f3d1562cbd15624e7d2c4b10122e3"/>
-<keyword name="PING" id="mrw::can::PING_a7f8de2173be25941f46a03163612808aa0f22ae2cbd26e058017d712e4c0db1e5" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa0f22ae2cbd26e058017d712e4c0db1e5"/>
-<keyword name="QRYBUF" id="mrw::can::QRYBUF_a7f8de2173be25941f46a03163612808aa0dcb905c0156a8196e593254fc94725e" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa0dcb905c0156a8196e593254fc94725e"/>
-<keyword name="QRYERR" id="mrw::can::QRYERR_a7f8de2173be25941f46a03163612808aa005637f307ae952ebb0b21d23d237ccd" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa005637f307ae952ebb0b21d23d237ccd"/>
+<keyword name="PING" id="mrw::can::PING_ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5"/>
+<keyword name="QRYBUF" id="mrw::can::QRYBUF_ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e"/>
+<keyword name="QRYERR" id="mrw::can::QRYERR_ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd"/>
 <keyword name="real" id="sc::real_addc5a438cd4d2e5bf27c64edbabad7ce" ref="db/d03/namespacesc.html#addc5a438cd4d2e5bf27c64edbabad7ce"/>
-<keyword name="RESET" id="mrw::can::RESET_a7f8de2173be25941f46a03163612808aa76de9290d1d3c15587d40a524abb2618" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa76de9290d1d3c15587d40a524abb2618"/>
+<keyword name="RESET" id="mrw::can::RESET_ae9a2e6e9bc528c9c7f38b7d26457d4fba76de9290d1d3c15587d40a524abb2618" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba76de9290d1d3c15587d40a524abb2618"/>
 <keyword name="Response" id="mrw::can::Response_a5fd10e57deed19ffd98acb57774082f0" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0"/>
 <keyword name="MSG_OK" id="mrw::can::MSG_OK_a5fd10e57deed19ffd98acb57774082f0a59d707b0162fe174488886c07e67f806" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a59d707b0162fe174488886c07e67f806"/>
 <keyword name="MSG_QUEUE_FULL" id="mrw::can::MSG_QUEUE_FULL_a5fd10e57deed19ffd98acb57774082f0a48107c85a22d1680a2d19fa0378e8eca" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a48107c85a22d1680a2d19fa0378e8eca"/>
@@ -5591,18 +5591,18 @@
 <keyword name="TOUR" id="mrw::model::TOUR_a5c0de0ceba8c321d726fb3cc699b4edea65c1e32f71230d0c0312b9364dbbb66b" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea65c1e32f71230d0c0312b9364dbbb66b"/>
 <keyword name="OCCUPIED" id="mrw::model::OCCUPIED_a5c0de0ceba8c321d726fb3cc699b4edea95bb06a35b7ae1afcf75777bb28ea62c" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea95bb06a35b7ae1afcf75777bb28ea62c"/>
 <keyword name="PASSED" id="mrw::model::PASSED_a5c0de0ceba8c321d726fb3cc699b4edea269f3d1562cbd15624e7d2c4b10122e3" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea269f3d1562cbd15624e7d2c4b10122e3"/>
-<keyword name="SENSOR" id="mrw::can::SENSOR_a7f8de2173be25941f46a03163612808aa3158dceb42b0a097b1ec8953b90cf3e8" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa3158dceb42b0a097b1ec8953b90cf3e8"/>
-<keyword name="SENSOR_LIGHT" id="mrw::can::SENSOR_LIGHT_aa7e15397b2e2b200856a7f837278ad0aaeb35a9bda85949a51bd71b593a0ec2f0" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aaeb35a9bda85949a51bd71b593a0ec2f0"/>
-<keyword name="SENSOR_TEMP" id="mrw::can::SENSOR_TEMP_aa7e15397b2e2b200856a7f837278ad0aa7d32c3b321f10b827553d6ab2e0f2b37" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aa7d32c3b321f10b827553d6ab2e0f2b37"/>
+<keyword name="SENSOR" id="mrw::can::SENSOR_ae9a2e6e9bc528c9c7f38b7d26457d4fba3158dceb42b0a097b1ec8953b90cf3e8" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba3158dceb42b0a097b1ec8953b90cf3e8"/>
+<keyword name="SENSOR_LIGHT" id="mrw::can::SENSOR_LIGHT_aa7e15397b2e2b200856a7f837278ad0aaa7865aec2f076513d662d58cc2b210a6" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aaa7865aec2f076513d662d58cc2b210a6"/>
+<keyword name="SENSOR_TEMP" id="mrw::can::SENSOR_TEMP_aa7e15397b2e2b200856a7f837278ad0aa6cd28db86422557c7b789a7888e74a4a" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aa6cd28db86422557c7b789a7888e74a4a"/>
 <keyword name="SensorType" id="mrw::can::SensorType_aa7e15397b2e2b200856a7f837278ad0a" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0a"/>
-<keyword name="SENSOR_LIGHT" id="mrw::can::SENSOR_LIGHT_aa7e15397b2e2b200856a7f837278ad0aaeb35a9bda85949a51bd71b593a0ec2f0" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aaeb35a9bda85949a51bd71b593a0ec2f0"/>
-<keyword name="SENSOR_TEMP" id="mrw::can::SENSOR_TEMP_aa7e15397b2e2b200856a7f837278ad0aa7d32c3b321f10b827553d6ab2e0f2b37" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aa7d32c3b321f10b827553d6ab2e0f2b37"/>
-<keyword name="SET_ID" id="mrw::can::SET_ID_a7f8de2173be25941f46a03163612808aa31af7e415cd369c18a237b42cdaf5243" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa31af7e415cd369c18a237b42cdaf5243"/>
-<keyword name="SETLFT" id="mrw::can::SETLFT_a7f8de2173be25941f46a03163612808aabca680de579ea58136cd90154e24b7d3" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aabca680de579ea58136cd90154e24b7d3"/>
-<keyword name="SETRGT" id="mrw::can::SETRGT_a7f8de2173be25941f46a03163612808aa0ed96af8e19ac15fa34de519ccaff478" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa0ed96af8e19ac15fa34de519ccaff478"/>
-<keyword name="SETROF" id="mrw::can::SETROF_a7f8de2173be25941f46a03163612808aa6cf39187f40d9908f55bafc2288a5eb2" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa6cf39187f40d9908f55bafc2288a5eb2"/>
-<keyword name="SETRON" id="mrw::can::SETRON_a7f8de2173be25941f46a03163612808aa4f0d9b54aec9270440070bee2b8b9434" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa4f0d9b54aec9270440070bee2b8b9434"/>
-<keyword name="SETSGN" id="mrw::can::SETSGN_a7f8de2173be25941f46a03163612808aa877b8510202d0a89047c3531854c6bbd" ref="d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa877b8510202d0a89047c3531854c6bbd"/>
+<keyword name="SENSOR_LIGHT" id="mrw::can::SENSOR_LIGHT_aa7e15397b2e2b200856a7f837278ad0aaa7865aec2f076513d662d58cc2b210a6" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aaa7865aec2f076513d662d58cc2b210a6"/>
+<keyword name="SENSOR_TEMP" id="mrw::can::SENSOR_TEMP_aa7e15397b2e2b200856a7f837278ad0aa6cd28db86422557c7b789a7888e74a4a" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aa6cd28db86422557c7b789a7888e74a4a"/>
+<keyword name="SET_ID" id="mrw::can::SET_ID_ae9a2e6e9bc528c9c7f38b7d26457d4fba31af7e415cd369c18a237b42cdaf5243" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba31af7e415cd369c18a237b42cdaf5243"/>
+<keyword name="SETLFT" id="mrw::can::SETLFT_ae9a2e6e9bc528c9c7f38b7d26457d4fbabca680de579ea58136cd90154e24b7d3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbabca680de579ea58136cd90154e24b7d3"/>
+<keyword name="SETRGT" id="mrw::can::SETRGT_ae9a2e6e9bc528c9c7f38b7d26457d4fba0ed96af8e19ac15fa34de519ccaff478" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0ed96af8e19ac15fa34de519ccaff478"/>
+<keyword name="SETROF" id="mrw::can::SETROF_ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2"/>
+<keyword name="SETRON" id="mrw::can::SETRON_ae9a2e6e9bc528c9c7f38b7d26457d4fba4f0d9b54aec9270440070bee2b8b9434" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4f0d9b54aec9270440070bee2b8b9434"/>
+<keyword name="SETSGN" id="mrw::can::SETSGN_ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd"/>
 <keyword name="SHUNTING" id="mrw::model::SHUNTING_a5c0de0ceba8c321d726fb3cc699b4edead7752bf4616dc787a0dc5ebfd4496b83" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edead7752bf4616dc787a0dc5ebfd4496b83"/>
 <keyword name="SIGNAL_HP0" id="mrw::can::SIGNAL_HP0_a0d1e86af238eb817727748135b4a70d0a19397f678d8fde71db42ebe0692ac1fa" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a19397f678d8fde71db42ebe0692ac1fa"/>
 <keyword name="SIGNAL_HP1" id="mrw::can::SIGNAL_HP1_a0d1e86af238eb817727748135b4a70d0ab2471a784947534f6940ed000ae5f648" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0ab2471a784947534f6940ed000ae5f648"/>
@@ -5626,11 +5626,11 @@
 <keyword name="SIGNAL_SH0" id="mrw::can::SIGNAL_SH0_a0d1e86af238eb817727748135b4a70d0a70f7c22dc2e260204e0d7934bf66aa15" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a70f7c22dc2e260204e0d7934bf66aa15"/>
 <keyword name="SIGNAL_SH1" id="mrw::can::SIGNAL_SH1_a0d1e86af238eb817727748135b4a70d0a9608781444aee36787db560ab519d3a5" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a9608781444aee36787db560ab519d3a5"/>
 <keyword name="SIGNAL_TST" id="mrw::can::SIGNAL_TST_a0d1e86af238eb817727748135b4a70d0a9d22492e78c05850305782f5062fc39e" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a9d22492e78c05850305782f5062fc39e"/>
-<keyword name="SWITCH_STATE_LEFT" id="mrw::can::SWITCH_STATE_LEFT_a6adb46251a933e34bb0c92abfbf60c5aac9df9830a850f61d973986d34283d129" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aac9df9830a850f61d973986d34283d129"/>
-<keyword name="SWITCH_STATE_RIGHT" id="mrw::can::SWITCH_STATE_RIGHT_a6adb46251a933e34bb0c92abfbf60c5aae4237e0ef4b0e22d41a9477916c5e288" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aae4237e0ef4b0e22d41a9477916c5e288"/>
+<keyword name="SWITCH_STATE_LEFT" id="mrw::can::SWITCH_STATE_LEFT_a6adb46251a933e34bb0c92abfbf60c5aabd971af2ede13a28b76b640b4e85907d" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aabd971af2ede13a28b76b640b4e85907d"/>
+<keyword name="SWITCH_STATE_RIGHT" id="mrw::can::SWITCH_STATE_RIGHT_a6adb46251a933e34bb0c92abfbf60c5aae8bf215c336133fe02e0b0bda61004a2" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aae8bf215c336133fe02e0b0bda61004a2"/>
 <keyword name="SwitchState" id="mrw::can::SwitchState_a6adb46251a933e34bb0c92abfbf60c5a" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5a"/>
-<keyword name="SWITCH_STATE_LEFT" id="mrw::can::SWITCH_STATE_LEFT_a6adb46251a933e34bb0c92abfbf60c5aac9df9830a850f61d973986d34283d129" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aac9df9830a850f61d973986d34283d129"/>
-<keyword name="SWITCH_STATE_RIGHT" id="mrw::can::SWITCH_STATE_RIGHT_a6adb46251a933e34bb0c92abfbf60c5aae4237e0ef4b0e22d41a9477916c5e288" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aae4237e0ef4b0e22d41a9477916c5e288"/>
+<keyword name="SWITCH_STATE_LEFT" id="mrw::can::SWITCH_STATE_LEFT_a6adb46251a933e34bb0c92abfbf60c5aabd971af2ede13a28b76b640b4e85907d" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aabd971af2ede13a28b76b640b4e85907d"/>
+<keyword name="SWITCH_STATE_RIGHT" id="mrw::can::SWITCH_STATE_RIGHT_a6adb46251a933e34bb0c92abfbf60c5aae8bf215c336133fe02e0b0bda61004a2" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aae8bf215c336133fe02e0b0bda61004a2"/>
 <keyword name="time" id="sc::time_a1bc542877409477b96abd9b10ac01a4c" ref="db/d03/namespacesc.html#a1bc542877409477b96abd9b10ac01a4c"/>
 <keyword name="TOUR" id="mrw::model::TOUR_a5c0de0ceba8c321d726fb3cc699b4edea65c1e32f71230d0c0312b9364dbbb66b" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea65c1e32f71230d0c0312b9364dbbb66b"/>
 <keyword name="UnitNo" id="mrw::can::UnitNo_aadc3657d376a3c081b9b0c05feafbce7" ref="d9/d9b/namespacemrw_1_1can.html#aadc3657d376a3c081b9b0c05feafbce7"/>

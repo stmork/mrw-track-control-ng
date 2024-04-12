@@ -1,14 +1,14 @@
 var searchData=
 [
-  ['sensor_0',['SENSOR',['../d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa3158dceb42b0a097b1ec8953b90cf3e8',1,'mrw::can']]],
-  ['sensor_5flight_1',['SENSOR_LIGHT',['../d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aaeb35a9bda85949a51bd71b593a0ec2f0',1,'mrw::can']]],
-  ['sensor_5ftemp_2',['SENSOR_TEMP',['../d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aa7d32c3b321f10b827553d6ab2e0f2b37',1,'mrw::can']]],
-  ['set_5fid_3',['SET_ID',['../d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa31af7e415cd369c18a237b42cdaf5243',1,'mrw::can']]],
-  ['setlft_4',['SETLFT',['../d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aabca680de579ea58136cd90154e24b7d3',1,'mrw::can']]],
-  ['setrgt_5',['SETRGT',['../d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa0ed96af8e19ac15fa34de519ccaff478',1,'mrw::can']]],
-  ['setrof_6',['SETROF',['../d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa6cf39187f40d9908f55bafc2288a5eb2',1,'mrw::can']]],
-  ['setron_7',['SETRON',['../d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa4f0d9b54aec9270440070bee2b8b9434',1,'mrw::can']]],
-  ['setsgn_8',['SETSGN',['../d9/d9b/namespacemrw_1_1can.html#a7f8de2173be25941f46a03163612808aa877b8510202d0a89047c3531854c6bbd',1,'mrw::can']]],
+  ['sensor_0',['SENSOR',['../d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba3158dceb42b0a097b1ec8953b90cf3e8',1,'mrw::can']]],
+  ['sensor_5flight_1',['SENSOR_LIGHT',['../d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aaa7865aec2f076513d662d58cc2b210a6',1,'mrw::can']]],
+  ['sensor_5ftemp_2',['SENSOR_TEMP',['../d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aa6cd28db86422557c7b789a7888e74a4a',1,'mrw::can']]],
+  ['set_5fid_3',['SET_ID',['../d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba31af7e415cd369c18a237b42cdaf5243',1,'mrw::can']]],
+  ['setlft_4',['SETLFT',['../d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbabca680de579ea58136cd90154e24b7d3',1,'mrw::can']]],
+  ['setrgt_5',['SETRGT',['../d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0ed96af8e19ac15fa34de519ccaff478',1,'mrw::can']]],
+  ['setrof_6',['SETROF',['../d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2',1,'mrw::can']]],
+  ['setron_7',['SETRON',['../d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4f0d9b54aec9270440070bee2b8b9434',1,'mrw::can']]],
+  ['setsgn_8',['SETSGN',['../d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd',1,'mrw::can']]],
   ['shunt_5fsignal_9',['SHUNT_SIGNAL',['../db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44',1,'mrw::model::Signal']]],
   ['shunting_10',['SHUNTING',['../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edead7752bf4616dc787a0dc5ebfd4496b83',1,'mrw::model']]],
   ['signal_5fhp0_11',['SIGNAL_HP0',['../d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a19397f678d8fde71db42ebe0692ac1fa',1,'mrw::can']]],
@@ -23,6 +23,6 @@ var searchData=
   ['signal_5fvr2_20',['SIGNAL_VR2',['../d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0aa6eef5841a4b1dcac69738dbb027ea43',1,'mrw::can']]],
   ['stop_21',['STOP',['../db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85a615a46af313786fc4e349f34118be111',1,'mrw::model::Signal']]],
   ['straight_22',['STRAIGHT',['../db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa8c5e50fab3748e9c53a6863b3dce1401',1,'mrw::model::Position']]],
-  ['switch_5fstate_5fleft_23',['SWITCH_STATE_LEFT',['../d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aac9df9830a850f61d973986d34283d129',1,'mrw::can']]],
-  ['switch_5fstate_5fright_24',['SWITCH_STATE_RIGHT',['../d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aae4237e0ef4b0e22d41a9477916c5e288',1,'mrw::can']]]
+  ['switch_5fstate_5fleft_23',['SWITCH_STATE_LEFT',['../d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aabd971af2ede13a28b76b640b4e85907d',1,'mrw::can']]],
+  ['switch_5fstate_5fright_24',['SWITCH_STATE_RIGHT',['../d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aae8bf215c336133fe02e0b0bda61004a2',1,'mrw::can']]]
 ];
