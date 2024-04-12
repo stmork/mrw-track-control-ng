@@ -6,7 +6,7 @@
 CONFIG          += c++17
 CONFIG          += link_pkgconfig
 
-QMAKE_CXXFLAGS  += -Wextra -pedantic -Wno-deprecated-copy -Werror
+QMAKE_CXXFLAGS  += -Wextra -pedantic -Werror
 QMAKE_CXXFLAGS  += -fstack-protector-strong
 QMAKE_CXXFLAGS  += -Wshadow
 QMAKE_CXXFLAGS  += -Wsuggest-override
