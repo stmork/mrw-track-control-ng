@@ -15,5 +15,5 @@ var searchData=
   ['size_12',['SIZE',['../df/db9/classmrw_1_1ui_1_1BaseWidget.html#a2793c577d78bc459d7e251b933545286',1,'mrw::ui::BaseWidget']]],
   ['state_13',['state',['../d7/dfb/classmrw_1_1model_1_1Route.html#aff5c38cf3fe671e6d38b9358849f79fb',1,'mrw::model::Route::state'],['../d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a17352d772aee9749100511405c2f81c3',1,'mrw::ctrl::DoubleCrossSwitchController::Status::state']]],
   ['switch_5fcount_14',['switch_count',['../dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ad80e89ab509758691329c043c06445db',1,'mrw::model::MrwStatistic']]],
-  ['symbol_15',['symbol',['../db/d9c/classmrw_1_1model_1_1Signal.html#ab8141535df399e79b947b362e43ba64c',1,'mrw::model::Signal']]]
+  ['symbol_15',['symbol',['../db/d9c/classmrw_1_1model_1_1Signal.html#a59be634c6a68219c135f52231cbdd1dc',1,'mrw::model::Signal']]]
 ];
