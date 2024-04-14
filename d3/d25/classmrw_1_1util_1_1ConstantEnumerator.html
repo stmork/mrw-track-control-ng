@@ -112,12 +112,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa2a8f1f9a5e3887f0e1199d66a0e6066" id="r_aa2a8f1f9a5e3887f0e1199d66a0e6066"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa2a8f1f9a5e3887f0e1199d66a0e6066">ConstantEnumerator</a> (const std::initializer_list&lt; <a class="el" href="#a2fb8988f103ebc51fe1395b9d553182a">ConstantMapPair</a> &gt; &amp;list)</td></tr>
 <tr class="memdesc:aa2a8f1f9a5e3887f0e1199d66a0e6066"><td class="mdescLeft">&#160;</td><td class="mdescRight">This constructor makes it possible to initialize this mapper with a static initializer list.  <br /></td></tr>
 <tr class="separator:aa2a8f1f9a5e3887f0e1199d66a0e6066"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9461ba5fca963e92a476e711808f10db" id="r_a9461ba5fca963e92a476e711808f10db"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9461ba5fca963e92a476e711808f10db">get</a> (const T key) const noexcept</td></tr>
-<tr class="memdesc:a9461ba5fca963e92a476e711808f10db"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method provides a safe way to represent a symbolic value as a QString.  <br /></td></tr>
-<tr class="separator:a9461ba5fca963e92a476e711808f10db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dde31196397c049682773ce45b013d2" id="r_a9dde31196397c049682773ce45b013d2"><td class="memItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9dde31196397c049682773ce45b013d2">findKey</a> (const QString &amp;value) const noexcept</td></tr>
-<tr class="memdesc:a9dde31196397c049682773ce45b013d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is a reverse lookup to find a key from its value.  <br /></td></tr>
-<tr class="separator:a9dde31196397c049682773ce45b013d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a790a1667fb478db3d75c34c8a5296d7a" id="r_a790a1667fb478db3d75c34c8a5296d7a"><td class="memItemLeft" align="right" valign="top">constexpr QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a790a1667fb478db3d75c34c8a5296d7a">get</a> (const T key) const noexcept</td></tr>
+<tr class="memdesc:a790a1667fb478db3d75c34c8a5296d7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method provides a safe way to represent a symbolic value as a QString.  <br /></td></tr>
+<tr class="separator:a790a1667fb478db3d75c34c8a5296d7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8370f9272613af9f8a340d2d49f8fc8" id="r_ae8370f9272613af9f8a340d2d49f8fc8"><td class="memItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8370f9272613af9f8a340d2d49f8fc8">findKey</a> (const QString &amp;value) const noexcept</td></tr>
+<tr class="memdesc:ae8370f9272613af9f8a340d2d49f8fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is a reverse lookup to find a key from its value.  <br /></td></tr>
+<tr class="separator:ae8370f9272613af9f8a340d2d49f8fc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -140,7 +140,7 @@ class mrw::util::ConstantEnumerator&lt; T &gt;</div><p>This convenience class pr
 <div class="line">    CONSTANT(EBUSY)</div>
 <div class="line">};</div>
 </div><!-- fragment --><p>You may access the mapper like every std::unordered_map.</p>
-<dl class="section note"><dt>Note</dt><dd>The operator[] may throw a std::out_of_range exception. It is a safe way to map using the <a class="el" href="#a9461ba5fca963e92a476e711808f10db" title="This method provides a safe way to represent a symbolic value as a QString.">get()</a> method instead. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The operator[] may throw a std::out_of_range exception. It is a safe way to map using the <a class="el" href="#a790a1667fb478db3d75c34c8a5296d7a" title="This method provides a safe way to represent a symbolic value as a QString.">get()</a> method instead. </dd></dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a2fb8988f103ebc51fe1395b9d553182a" name="a2fb8988f103ebc51fe1395b9d553182a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2fb8988f103ebc51fe1395b9d553182a">&#9670;&#160;</a></span>ConstantMapPair</h2>
@@ -197,8 +197,8 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9dde31196397c049682773ce45b013d2" name="a9dde31196397c049682773ce45b013d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9dde31196397c049682773ce45b013d2">&#9670;&#160;</a></span>findKey()</h2>
+<a id="ae8370f9272613af9f8a340d2d49f8fc8" name="ae8370f9272613af9f8a340d2d49f8fc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8370f9272613af9f8a340d2d49f8fc8">&#9670;&#160;</a></span>findKey()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -209,7 +209,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">decltype(auto) <a class="el" href="../../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html">mrw::util::ConstantEnumerator</a>&lt; T &gt;::findKey </td>
+          <td class="memname">constexpr decltype(auto) <a class="el" href="../../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html">mrw::util::ConstantEnumerator</a>&lt; T &gt;::findKey </td>
           <td>(</td>
           <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td> const</td>
@@ -217,7 +217,7 @@ template&lt;class T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -240,8 +240,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a9461ba5fca963e92a476e711808f10db" name="a9461ba5fca963e92a476e711808f10db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9461ba5fca963e92a476e711808f10db">&#9670;&#160;</a></span>get()</h2>
+<a id="a790a1667fb478db3d75c34c8a5296d7a" name="a790a1667fb478db3d75c34c8a5296d7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a790a1667fb478db3d75c34c8a5296d7a">&#9670;&#160;</a></span>get()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -252,7 +252,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">QString <a class="el" href="../../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html">mrw::util::ConstantEnumerator</a>&lt; T &gt;::get </td>
+          <td class="memname">constexpr QString <a class="el" href="../../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html">mrw::util::ConstantEnumerator</a>&lt; T &gt;::get </td>
           <td>(</td>
           <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
           <td> const</td>
@@ -260,7 +260,7 @@ template&lt;class T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -329,7 +329,7 @@ template&lt;class T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 12 2024 13:34:30 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Apr 14 2024 10:58:38 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -50,7 +50,6 @@ var menudata={children:[
 {text:"c",url:"namespacemembers_eval.html#index_c"},
 {text:"f",url:"namespacemembers_eval.html#index_f"},
 {text:"g",url:"namespacemembers_eval.html#index_g"},
-{text:"m",url:"namespacemembers_eval.html#index_m"},
 {text:"p",url:"namespacemembers_eval.html#index_p"},
 {text:"q",url:"namespacemembers_eval.html#index_q"},
 {text:"r",url:"namespacemembers_eval.html#index_r"},

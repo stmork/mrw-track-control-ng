@@ -181,51 +181,52 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ae9a2e6e9bc528c9c7f38b7d26457d4fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enumeration lists all supported MrwMessage commands.  <a href="#ae9a2e6e9bc528c9c7f38b7d26457d4fb">More...</a><br /></td></tr>
 <tr class="separator:ae9a2e6e9bc528c9c7f38b7d26457d4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fd10e57deed19ffd98acb57774082f0" id="r_a5fd10e57deed19ffd98acb57774082f0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5fd10e57deed19ffd98acb57774082f0">Response</a> : uint8_t { <br />
-&#160;&#160;<a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a59d707b0162fe174488886c07e67f806">MSG_OK</a> = 0
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a48107c85a22d1680a2d19fa0378e8eca">MSG_QUEUE_FULL</a> = 1
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a31ef508d7c48afec92dd5dd5d491614f">MSG_UNKNOWN_CMD</a> = 2
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0af0a2b2ecdc0500aa625ddf59f022c0a7">MSG_PENDING</a> = 3
+<tr class="memitem:a5fd10e57deed19ffd98acb57774082f0" id="r_a5fd10e57deed19ffd98acb57774082f0"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5fd10e57deed19ffd98acb57774082f0">Response</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="#a5fd10e57deed19ffd98acb57774082f0aefd1f02de4771e98d840a4d53a1489e8">MSG_OK</a> = 0
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a236e6fe1d193046cb9ae19365d55736c">MSG_QUEUE_FULL</a> = 1
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a6b035e6fb33265603548d38a868f3a8f">MSG_UNKNOWN_CMD</a> = 2
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a682aa7e0fbfea53a9334001795465cf5">MSG_PENDING</a> = 3
 , <br />
-&#160;&#160;<a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a5b78104b90dc2d93f646bedce78182cf">MSG_IGNORED</a> = 4
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0aaf89cb4c4c65a9ef90566e8af895fb4f">MSG_QUEUED</a> = 5
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a2c426b5f1571df1a1b67d689b9742ec8">MSG_NOT_CONFIGURED_YET</a> = 6
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0abb8514d3863c61b7408102705bec8307">MSG_NO_UNITNO_DEFINED</a> = 7
+&#160;&#160;<a class="el" href="#a5fd10e57deed19ffd98acb57774082f0ae8cadf55a103717293adab48b1491303">MSG_IGNORED</a> = 4
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a930c83c472854788f3941d2711b2af02">MSG_QUEUED</a> = 5
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a024cefe156ec0392b7cf2444bf63090f">MSG_NOT_CONFIGURED_YET</a> = 6
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a995dd26acc99ec6af581eb2acc587270">MSG_NO_UNITNO_DEFINED</a> = 7
 , <br />
-&#160;&#160;<a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a041c7c273885a4906fdd0bf3e1a0a91b">MSG_UNITTYPE_WRONG</a> = 8
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a9ba66695d6c4ab2b80bf8d651900b2b1">MSG_RESET_PENDING</a> = 9
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a255664197788238f68ec68eb424ba2b4">MSG_UNITNO_MISSING</a> = 10
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0abffda1b5878bc651de998c4193833f6f">MSG_UNIT_NOT_FOUND</a> = 11
+&#160;&#160;<a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a4d3f288b79ed00d2e1f3ab5db9b817ca">MSG_UNITTYPE_WRONG</a> = 8
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a78b19866ba83620ab9bd61927c65f67c">MSG_RESET_PENDING</a> = 9
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0aa494b56e42a1cb04980989554f761791">MSG_UNITNO_MISSING</a> = 10
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0ad9a39e0a75362d9edc55cd532709c61b">MSG_UNIT_NOT_FOUND</a> = 11
 , <br />
-&#160;&#160;<a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a8c2bb00008c1f6799bbad90edd528053">MSG_NOT_IN_CONFIG_MODE</a> = 12
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a38d4920bdc0d31bca5e5c40d098270a7">MSG_BOOTED</a> = 13
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0afb06ad400eacfc43f2fbdc72e2129f4d">MSG_ID_NOT_CHANGED</a> = 14
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a36c9b0c4044eef6160872063d6a709cd">MSG_CHECKSUM_ERROR</a> = 15
+&#160;&#160;<a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a106d5a4a02b41ee73161b82dd67ed70f">MSG_NOT_IN_CONFIG_MODE</a> = 12
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a558a4e7afb7a90a9847909f0a81f6efb">MSG_BOOTED</a> = 13
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a06ea4ef47152ddf071a1dec742931993">MSG_ID_NOT_CHANGED</a> = 14
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a7b023d9bb8f523ee4bf3ff22ff7bea1a">MSG_CHECKSUM_ERROR</a> = 15
 , <br />
-&#160;&#160;<a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a28bbaab144fd596fc96b1beb56d0e7b9">MSG_INFO</a> = 16
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a9a132af8f589a39352761c2da6345b30">MSG_ID_CHANGE_DISABLED</a> = 17
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a9c7d19ec271378b345c80e8ec1d2be18">MSG_HARDWARE_MISMATCH</a> = 18
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0ab99b6e922c1a22cfd8ed67e82f829ab0">MSG_SWITCH_FAILED</a> = 19
+&#160;&#160;<a class="el" href="#a5fd10e57deed19ffd98acb57774082f0ad5150815f57a5219a42da2f42f90861e">MSG_INFO</a> = 16
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0ab5133efec8e455a768655911de9e5517">MSG_ID_CHANGE_DISABLED</a> = 17
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a084c5fbd7fc55eccd3c26c9a55140edd">MSG_HARDWARE_MISMATCH</a> = 18
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0ac5fd124fa5005d5fb06987f7ef56ddb4">MSG_SWITCH_FAILED</a> = 19
 , <br />
-&#160;&#160;<a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a886c5bf7594833d80cb1c3a426549786">MSG_CONFIG_BUFFER_FULL</a> = 20
-, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0aed772d31fc770e80823c32f780253104">MSG_NO_RESPONSE</a> = UINT8_MAX
+&#160;&#160;<a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a4b25f68d70e218928d6dec22a2997509">MSG_CONFIG_BUFFER_FULL</a> = 20
+, <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0a6041ce8a8e9b9fd43287aed4e130d020">MSG_NO_RESPONSE</a> = UINT8_MAX
 <br />
  }</td></tr>
 <tr class="memdesc:a5fd10e57deed19ffd98acb57774082f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enumeration lists all response codes for a MrwMessage request.  <a href="#a5fd10e57deed19ffd98acb57774082f0">More...</a><br /></td></tr>
 <tr class="separator:a5fd10e57deed19ffd98acb57774082f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d1e86af238eb817727748135b4a70d0" id="r_a0d1e86af238eb817727748135b4a70d0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d1e86af238eb817727748135b4a70d0">SignalAspect</a> : uint8_t { <br />
-&#160;&#160;<a class="el" href="#a0d1e86af238eb817727748135b4a70d0a90a52e3c2a3c017a3b386d7516b087d0">SIGNAL_OFF</a> = 0
-, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a19397f678d8fde71db42ebe0692ac1fa">SIGNAL_HP0</a>
-, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0ab2471a784947534f6940ed000ae5f648">SIGNAL_HP1</a>
-, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0aa732fb1c3f4e1ce1968f93d60a8d5a86">SIGNAL_HP2</a>
+<tr class="memitem:a0d1e86af238eb817727748135b4a70d0" id="r_a0d1e86af238eb817727748135b4a70d0"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d1e86af238eb817727748135b4a70d0">SignalAspect</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="#a0d1e86af238eb817727748135b4a70d0ac5b227b654dbdc355024c97f0050b9df">SIGNAL_OFF</a> = 0
+, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a841ea08c7d66bef6d9497ca81c803970">SIGNAL_HP0</a>
+, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a9d751b15c140ef565825d51ea2b69e1e">SIGNAL_HP1</a>
+, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a3dbf257139d68a6661a4f87860ff6ae4">SIGNAL_HP2</a>
 , <br />
-&#160;&#160;<a class="el" href="#a0d1e86af238eb817727748135b4a70d0a58ab2fccae6ac36776ab614a387bef18">SIGNAL_VR0</a>
-, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a499c2e5b40207547f6efb34d2f91208c">SIGNAL_VR1</a>
-, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0aa6eef5841a4b1dcac69738dbb027ea43">SIGNAL_VR2</a>
-, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a70f7c22dc2e260204e0d7934bf66aa15">SIGNAL_SH0</a>
+&#160;&#160;<a class="el" href="#a0d1e86af238eb817727748135b4a70d0ab176463e80a895da6bf23b503ba4247b">SIGNAL_VR0</a>
+, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a43daa05f873a9bd8bf7d14e363f63ba1">SIGNAL_VR1</a>
+, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a7682ef45608866696e0fe3914126ab59">SIGNAL_VR2</a>
+, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a719d06545707b583f58455ebc29c38e1">SIGNAL_SH0</a>
 , <br />
-&#160;&#160;<a class="el" href="#a0d1e86af238eb817727748135b4a70d0a9608781444aee36787db560ab519d3a5">SIGNAL_SH1</a>
-, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a9d22492e78c05850305782f5062fc39e">SIGNAL_TST</a>
+&#160;&#160;<a class="el" href="#a0d1e86af238eb817727748135b4a70d0a2d7bd6c8a055925ea28e988620378e00">SIGNAL_SH1</a>
+, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a81dcf23e74c0deedaca1426b19438047">SIGNAL_TST</a>
+, <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a986a1c6d90ab9d6a757efc7032fa868b">SIGNAL_MAIN_DISTANT_OFFSET</a> = SIGNAL_VR0 - SIGNAL_HP0
 <br />
  }</td></tr>
 <tr class="memdesc:a0d1e86af238eb817727748135b4a70d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enumeration lists all aspects visible for H/V signals.  <a href="#a0d1e86af238eb817727748135b4a70d0">More...</a><br /></td></tr>
@@ -243,8 +244,6 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a9b7ff762bd5f8e3519e3c84743bf53b4" id="r_a9b7ff762bd5f8e3519e3c84743bf53b4"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b7ff762bd5f8e3519e3c84743bf53b4">SIGNAL_MAIN_DISTANT_OFFSET</a> = <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a58ab2fccae6ac36776ab614a387bef18">SIGNAL_VR0</a> - <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a19397f678d8fde71db42ebe0692ac1fa">SIGNAL_HP0</a></td></tr>
-<tr class="separator:a9b7ff762bd5f8e3519e3c84743bf53b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9ac1a064f4ec36e4a148c3661c08272" id="r_ae9ac1a064f4ec36e4a148c3661c08272"><td class="memItemLeft" align="right" valign="top">static constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae9ac1a064f4ec36e4a148c3661c08272">CAN_SID_MASK</a> = 0x07ff</td></tr>
 <tr class="separator:ae9ac1a064f4ec36e4a148c3661c08272"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bf4fa5a47b007939c26cc751241ffa0" id="r_a4bf4fa5a47b007939c26cc751241ffa0"><td class="memItemLeft" align="right" valign="top">static constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4bf4fa5a47b007939c26cc751241ffa0">CAN_EID_UNITNO_MASK</a> = 0xffff</td></tr>
@@ -444,58 +443,66 @@ Variables</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0">mrw::can::Response</a> : uint8_t</td>
+          <td class="memname">enum class <a class="el" href="#a5fd10e57deed19ffd98acb57774082f0">mrw::can::Response</a> : uint8_t</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This enumeration lists all response codes for a <a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html" title="This class represents a CAN bus frame in model railway manner.">MrwMessage</a> request. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a59d707b0162fe174488886c07e67f806" name="a5fd10e57deed19ffd98acb57774082f0a59d707b0162fe174488886c07e67f806"></a>MSG_OK&#160;</td><td class="fielddoc"><p>The command succeeded successfully. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0aefd1f02de4771e98d840a4d53a1489e8" name="a5fd10e57deed19ffd98acb57774082f0aefd1f02de4771e98d840a4d53a1489e8"></a>MSG_OK&#160;</td><td class="fielddoc"><p>The command succeeded successfully. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a48107c85a22d1680a2d19fa0378e8eca" name="a5fd10e57deed19ffd98acb57774082f0a48107c85a22d1680a2d19fa0378e8eca"></a>MSG_QUEUE_FULL&#160;</td><td class="fielddoc"><p>The message queue is full. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a236e6fe1d193046cb9ae19365d55736c" name="a5fd10e57deed19ffd98acb57774082f0a236e6fe1d193046cb9ae19365d55736c"></a>MSG_QUEUE_FULL&#160;</td><td class="fielddoc"><p>The message queue is full. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a31ef508d7c48afec92dd5dd5d491614f" name="a5fd10e57deed19ffd98acb57774082f0a31ef508d7c48afec92dd5dd5d491614f"></a>MSG_UNKNOWN_CMD&#160;</td><td class="fielddoc"><p>The controller does not know the command. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a6b035e6fb33265603548d38a868f3a8f" name="a5fd10e57deed19ffd98acb57774082f0a6b035e6fb33265603548d38a868f3a8f"></a>MSG_UNKNOWN_CMD&#160;</td><td class="fielddoc"><p>The controller does not know the command. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0af0a2b2ecdc0500aa625ddf59f022c0a7" name="a5fd10e57deed19ffd98acb57774082f0af0a2b2ecdc0500aa625ddf59f022c0a7"></a>MSG_PENDING&#160;</td><td class="fielddoc"><p>The processing of a command needs some time. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a682aa7e0fbfea53a9334001795465cf5" name="a5fd10e57deed19ffd98acb57774082f0a682aa7e0fbfea53a9334001795465cf5"></a>MSG_PENDING&#160;</td><td class="fielddoc"><p>The processing of a command needs some time. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a5b78104b90dc2d93f646bedce78182cf" name="a5fd10e57deed19ffd98acb57774082f0a5b78104b90dc2d93f646bedce78182cf"></a>MSG_IGNORED&#160;</td><td class="fielddoc"><p>The command was ignored. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0ae8cadf55a103717293adab48b1491303" name="a5fd10e57deed19ffd98acb57774082f0ae8cadf55a103717293adab48b1491303"></a>MSG_IGNORED&#160;</td><td class="fielddoc"><p>The command was ignored. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0aaf89cb4c4c65a9ef90566e8af895fb4f" name="a5fd10e57deed19ffd98acb57774082f0aaf89cb4c4c65a9ef90566e8af895fb4f"></a>MSG_QUEUED&#160;</td><td class="fielddoc"><p>The command processing is queued. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a930c83c472854788f3941d2711b2af02" name="a5fd10e57deed19ffd98acb57774082f0a930c83c472854788f3941d2711b2af02"></a>MSG_QUEUED&#160;</td><td class="fielddoc"><p>The command processing is queued. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a2c426b5f1571df1a1b67d689b9742ec8" name="a5fd10e57deed19ffd98acb57774082f0a2c426b5f1571df1a1b67d689b9742ec8"></a>MSG_NOT_CONFIGURED_YET&#160;</td><td class="fielddoc"><p>The controller has no configuration. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a024cefe156ec0392b7cf2444bf63090f" name="a5fd10e57deed19ffd98acb57774082f0a024cefe156ec0392b7cf2444bf63090f"></a>MSG_NOT_CONFIGURED_YET&#160;</td><td class="fielddoc"><p>The controller has no configuration. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0abb8514d3863c61b7408102705bec8307" name="a5fd10e57deed19ffd98acb57774082f0abb8514d3863c61b7408102705bec8307"></a>MSG_NO_UNITNO_DEFINED&#160;</td><td class="fielddoc"><p>The command has no correct unit number. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a995dd26acc99ec6af581eb2acc587270" name="a5fd10e57deed19ffd98acb57774082f0a995dd26acc99ec6af581eb2acc587270"></a>MSG_NO_UNITNO_DEFINED&#160;</td><td class="fielddoc"><p>The command has no correct unit number. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a041c7c273885a4906fdd0bf3e1a0a91b" name="a5fd10e57deed19ffd98acb57774082f0a041c7c273885a4906fdd0bf3e1a0a91b"></a>MSG_UNITTYPE_WRONG&#160;</td><td class="fielddoc"><p>The command with this unit number does not match the device. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a4d3f288b79ed00d2e1f3ab5db9b817ca" name="a5fd10e57deed19ffd98acb57774082f0a4d3f288b79ed00d2e1f3ab5db9b817ca"></a>MSG_UNITTYPE_WRONG&#160;</td><td class="fielddoc"><p>The command with this unit number does not match the device. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a9ba66695d6c4ab2b80bf8d651900b2b1" name="a5fd10e57deed19ffd98acb57774082f0a9ba66695d6c4ab2b80bf8d651900b2b1"></a>MSG_RESET_PENDING&#160;</td><td class="fielddoc"><p>The RESET command was issued and the reset is ongoing. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a78b19866ba83620ab9bd61927c65f67c" name="a5fd10e57deed19ffd98acb57774082f0a78b19866ba83620ab9bd61927c65f67c"></a>MSG_RESET_PENDING&#160;</td><td class="fielddoc"><p>The RESET command was issued and the reset is ongoing. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a255664197788238f68ec68eb424ba2b4" name="a5fd10e57deed19ffd98acb57774082f0a255664197788238f68ec68eb424ba2b4"></a>MSG_UNITNO_MISSING&#160;</td><td class="fielddoc"><p>The command addressed a controller but no device because of a used basic frame format. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0aa494b56e42a1cb04980989554f761791" name="a5fd10e57deed19ffd98acb57774082f0aa494b56e42a1cb04980989554f761791"></a>MSG_UNITNO_MISSING&#160;</td><td class="fielddoc"><p>The command addressed a controller but no device because of a used basic frame format. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0abffda1b5878bc651de998c4193833f6f" name="a5fd10e57deed19ffd98acb57774082f0abffda1b5878bc651de998c4193833f6f"></a>MSG_UNIT_NOT_FOUND&#160;</td><td class="fielddoc"><p>The given unit number was not configured inside this controller. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0ad9a39e0a75362d9edc55cd532709c61b" name="a5fd10e57deed19ffd98acb57774082f0ad9a39e0a75362d9edc55cd532709c61b"></a>MSG_UNIT_NOT_FOUND&#160;</td><td class="fielddoc"><p>The given unit number was not configured inside this controller. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a8c2bb00008c1f6799bbad90edd528053" name="a5fd10e57deed19ffd98acb57774082f0a8c2bb00008c1f6799bbad90edd528053"></a>MSG_NOT_IN_CONFIG_MODE&#160;</td><td class="fielddoc"><p>A config command was received outside configuration mode. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a106d5a4a02b41ee73161b82dd67ed70f" name="a5fd10e57deed19ffd98acb57774082f0a106d5a4a02b41ee73161b82dd67ed70f"></a>MSG_NOT_IN_CONFIG_MODE&#160;</td><td class="fielddoc"><p>A config command was received outside configuration mode. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a38d4920bdc0d31bca5e5c40d098270a7" name="a5fd10e57deed19ffd98acb57774082f0a38d4920bdc0d31bca5e5c40d098270a7"></a>MSG_BOOTED&#160;</td><td class="fielddoc"><p>The controller has booted successfully. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a558a4e7afb7a90a9847909f0a81f6efb" name="a5fd10e57deed19ffd98acb57774082f0a558a4e7afb7a90a9847909f0a81f6efb"></a>MSG_BOOTED&#160;</td><td class="fielddoc"><p>The controller has booted successfully. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0afb06ad400eacfc43f2fbdc72e2129f4d" name="a5fd10e57deed19ffd98acb57774082f0afb06ad400eacfc43f2fbdc72e2129f4d"></a>MSG_ID_NOT_CHANGED&#160;</td><td class="fielddoc"><p>Requested ID change leads to same ID. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a06ea4ef47152ddf071a1dec742931993" name="a5fd10e57deed19ffd98acb57774082f0a06ea4ef47152ddf071a1dec742931993"></a>MSG_ID_NOT_CHANGED&#160;</td><td class="fielddoc"><p>Requested ID change leads to same ID. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a36c9b0c4044eef6160872063d6a709cd" name="a5fd10e57deed19ffd98acb57774082f0a36c9b0c4044eef6160872063d6a709cd"></a>MSG_CHECKSUM_ERROR&#160;</td><td class="fielddoc"><p>The firmware update failed with a wrong checksum. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a7b023d9bb8f523ee4bf3ff22ff7bea1a" name="a5fd10e57deed19ffd98acb57774082f0a7b023d9bb8f523ee4bf3ff22ff7bea1a"></a>MSG_CHECKSUM_ERROR&#160;</td><td class="fielddoc"><p>The firmware update failed with a wrong checksum. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a28bbaab144fd596fc96b1beb56d0e7b9" name="a5fd10e57deed19ffd98acb57774082f0a28bbaab144fd596fc96b1beb56d0e7b9"></a>MSG_INFO&#160;</td><td class="fielddoc"><p>The result contains only some information. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0ad5150815f57a5219a42da2f42f90861e" name="a5fd10e57deed19ffd98acb57774082f0ad5150815f57a5219a42da2f42f90861e"></a>MSG_INFO&#160;</td><td class="fielddoc"><p>The result contains only some information. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a9a132af8f589a39352761c2da6345b30" name="a5fd10e57deed19ffd98acb57774082f0a9a132af8f589a39352761c2da6345b30"></a>MSG_ID_CHANGE_DISABLED&#160;</td><td class="fielddoc"><p>The controller ID was not changed after a SET_ID command. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0ab5133efec8e455a768655911de9e5517" name="a5fd10e57deed19ffd98acb57774082f0ab5133efec8e455a768655911de9e5517"></a>MSG_ID_CHANGE_DISABLED&#160;</td><td class="fielddoc"><p>The controller ID was not changed after a SET_ID command. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a9c7d19ec271378b345c80e8ec1d2be18" name="a5fd10e57deed19ffd98acb57774082f0a9c7d19ec271378b345c80e8ec1d2be18"></a>MSG_HARDWARE_MISMATCH&#160;</td><td class="fielddoc"><p>The firmware update has a wrong hardware ID. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a084c5fbd7fc55eccd3c26c9a55140edd" name="a5fd10e57deed19ffd98acb57774082f0a084c5fbd7fc55eccd3c26c9a55140edd"></a>MSG_HARDWARE_MISMATCH&#160;</td><td class="fielddoc"><p>The firmware update has a wrong hardware ID. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0ab99b6e922c1a22cfd8ed67e82f829ab0" name="a5fd10e57deed19ffd98acb57774082f0ab99b6e922c1a22cfd8ed67e82f829ab0"></a>MSG_SWITCH_FAILED&#160;</td><td class="fielddoc"><p>The switch turning failed. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0ac5fd124fa5005d5fb06987f7ef56ddb4" name="a5fd10e57deed19ffd98acb57774082f0ac5fd124fa5005d5fb06987f7ef56ddb4"></a>MSG_SWITCH_FAILED&#160;</td><td class="fielddoc"><p>The switch turning failed. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a886c5bf7594833d80cb1c3a426549786" name="a5fd10e57deed19ffd98acb57774082f0a886c5bf7594833d80cb1c3a426549786"></a>MSG_CONFIG_BUFFER_FULL&#160;</td><td class="fielddoc"><p>No space left in configuration memory. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a4b25f68d70e218928d6dec22a2997509" name="a5fd10e57deed19ffd98acb57774082f0a4b25f68d70e218928d6dec22a2997509"></a>MSG_CONFIG_BUFFER_FULL&#160;</td><td class="fielddoc"><p>No space left in configuration memory. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0aed772d31fc770e80823c32f780253104" name="a5fd10e57deed19ffd98acb57774082f0aed772d31fc770e80823c32f780253104"></a>MSG_NO_RESPONSE&#160;</td><td class="fielddoc"><p>Illegal response code. </p>
+<tr><td class="fieldname"><a id="a5fd10e57deed19ffd98acb57774082f0a6041ce8a8e9b9fd43287aed4e130d020" name="a5fd10e57deed19ffd98acb57774082f0a6041ce8a8e9b9fd43287aed4e130d020"></a>MSG_NO_RESPONSE&#160;</td><td class="fielddoc"><p>Illegal response code. </p>
 </td></tr>
 </table>
 
@@ -535,20 +542,28 @@ Variables</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="#a0d1e86af238eb817727748135b4a70d0">mrw::can::SignalAspect</a> : uint8_t</td>
+          <td class="memname">enum class <a class="el" href="#a0d1e86af238eb817727748135b4a70d0">mrw::can::SignalAspect</a> : uint8_t</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This enumeration lists all aspects visible for H/V signals. </p>
 <p>Note that the aspects are per screen and there exists masts with multiple screens. E.g. a main signal combined with a distant signal. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a90a52e3c2a3c017a3b386d7516b087d0" name="a0d1e86af238eb817727748135b4a70d0a90a52e3c2a3c017a3b386d7516b087d0"></a>SIGNAL_OFF&#160;</td><td class="fielddoc"><p>All lights are off. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0ac5b227b654dbdc355024c97f0050b9df" name="a0d1e86af238eb817727748135b4a70d0ac5b227b654dbdc355024c97f0050b9df"></a>SIGNAL_OFF&#160;</td><td class="fielddoc"><p>All lights are off. </p>
 <p>This occurs for a distant signal if combined with a main signal which shows SIGNAL_HP0 (stop aspect). </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a19397f678d8fde71db42ebe0692ac1fa" name="a0d1e86af238eb817727748135b4a70d0a19397f678d8fde71db42ebe0692ac1fa"></a>SIGNAL_HP0&#160;</td><td class="fielddoc"><p>This marks a main signal stop aspect. </p>
+<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a841ea08c7d66bef6d9497ca81c803970" name="a0d1e86af238eb817727748135b4a70d0a841ea08c7d66bef6d9497ca81c803970"></a>SIGNAL_HP0&#160;</td><td class="fielddoc"><p>This marks a main signal stop aspect. </p>
 <div class="image">
 <img src="../../Form_Hp0.gif" alt="" height="75"/>
 </div>
@@ -559,7 +574,7 @@ Variables</h2></td></tr>
 <img src="../../Light_Hp00.gif" alt="" height="50"/>
 </div>
  </td></tr>
-<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0ab2471a784947534f6940ed000ae5f648" name="a0d1e86af238eb817727748135b4a70d0ab2471a784947534f6940ed000ae5f648"></a>SIGNAL_HP1&#160;</td><td class="fielddoc"><p>This marks a main signal go aspect. </p>
+<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a9d751b15c140ef565825d51ea2b69e1e" name="a0d1e86af238eb817727748135b4a70d0a9d751b15c140ef565825d51ea2b69e1e"></a>SIGNAL_HP1&#160;</td><td class="fielddoc"><p>This marks a main signal go aspect. </p>
 <div class="image">
 <img src="../../Form_Hp1.gif" alt="" height="75"/>
 </div>
@@ -567,7 +582,7 @@ Variables</h2></td></tr>
 <img src="../../Light_Hp1.gif" alt="" height="50"/>
 </div>
  </td></tr>
-<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0aa732fb1c3f4e1ce1968f93d60a8d5a86" name="a0d1e86af238eb817727748135b4a70d0aa732fb1c3f4e1ce1968f93d60a8d5a86"></a>SIGNAL_HP2&#160;</td><td class="fielddoc"><p>This marks a main signal slow go aspect up to 40 km/h. </p>
+<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a3dbf257139d68a6661a4f87860ff6ae4" name="a0d1e86af238eb817727748135b4a70d0a3dbf257139d68a6661a4f87860ff6ae4"></a>SIGNAL_HP2&#160;</td><td class="fielddoc"><p>This marks a main signal slow go aspect up to 40 km/h. </p>
 <div class="image">
 <img src="../../Form_Hp2.gif" alt="" height="75"/>
 </div>
@@ -575,7 +590,7 @@ Variables</h2></td></tr>
 <img src="../../Light_Hp2.gif" alt="" height="50"/>
 </div>
  </td></tr>
-<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a58ab2fccae6ac36776ab614a387bef18" name="a0d1e86af238eb817727748135b4a70d0a58ab2fccae6ac36776ab614a387bef18"></a>SIGNAL_VR0&#160;</td><td class="fielddoc"><p>This marks a distant signal expecting stop aspect. </p>
+<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0ab176463e80a895da6bf23b503ba4247b" name="a0d1e86af238eb817727748135b4a70d0ab176463e80a895da6bf23b503ba4247b"></a>SIGNAL_VR0&#160;</td><td class="fielddoc"><p>This marks a distant signal expecting stop aspect. </p>
 <div class="image">
 <img src="../../Form_Vr0.gif" alt="" height="75"/>
 </div>
@@ -583,7 +598,7 @@ Variables</h2></td></tr>
 <img src="../../Light_Vr0.gif" alt="" height="50"/>
 </div>
  </td></tr>
-<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a499c2e5b40207547f6efb34d2f91208c" name="a0d1e86af238eb817727748135b4a70d0a499c2e5b40207547f6efb34d2f91208c"></a>SIGNAL_VR1&#160;</td><td class="fielddoc"><p>This marks a distant signal expecting go aspect. </p>
+<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a43daa05f873a9bd8bf7d14e363f63ba1" name="a0d1e86af238eb817727748135b4a70d0a43daa05f873a9bd8bf7d14e363f63ba1"></a>SIGNAL_VR1&#160;</td><td class="fielddoc"><p>This marks a distant signal expecting go aspect. </p>
 <div class="image">
 <img src="../../Form_Vr1.gif" alt="" height="75"/>
 </div>
@@ -591,7 +606,7 @@ Variables</h2></td></tr>
 <img src="../../Light_Vr1.gif" alt="" height="50"/>
 </div>
  </td></tr>
-<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0aa6eef5841a4b1dcac69738dbb027ea43" name="a0d1e86af238eb817727748135b4a70d0aa6eef5841a4b1dcac69738dbb027ea43"></a>SIGNAL_VR2&#160;</td><td class="fielddoc"><p>This marks a distant signal expecting slow go aspect up to 40 km/h. </p>
+<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a7682ef45608866696e0fe3914126ab59" name="a0d1e86af238eb817727748135b4a70d0a7682ef45608866696e0fe3914126ab59"></a>SIGNAL_VR2&#160;</td><td class="fielddoc"><p>This marks a distant signal expecting slow go aspect up to 40 km/h. </p>
 <div class="image">
 <img src="../../Form_Vr2.gif" alt="" height="75"/>
 </div>
@@ -599,7 +614,7 @@ Variables</h2></td></tr>
 <img src="../../Light_Vr2.gif" alt="" height="50"/>
 </div>
  </td></tr>
-<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a70f7c22dc2e260204e0d7934bf66aa15" name="a0d1e86af238eb817727748135b4a70d0a70f7c22dc2e260204e0d7934bf66aa15"></a>SIGNAL_SH0&#160;</td><td class="fielddoc"><p>This marks a shunting stop. </p>
+<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a719d06545707b583f58455ebc29c38e1" name="a0d1e86af238eb817727748135b4a70d0a719d06545707b583f58455ebc29c38e1"></a>SIGNAL_SH0&#160;</td><td class="fielddoc"><p>This marks a shunting stop. </p>
 <div class="image">
 <img src="../../Light_Sh0.gif" alt="" height="50"/>
 </div>
@@ -607,7 +622,7 @@ Variables</h2></td></tr>
 <img src="../../Light_Hp00.gif" alt="" height="50"/>
 </div>
  </td></tr>
-<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a9608781444aee36787db560ab519d3a5" name="a0d1e86af238eb817727748135b4a70d0a9608781444aee36787db560ab519d3a5"></a>SIGNAL_SH1&#160;</td><td class="fielddoc"><p>This marks a shunting allowed signal. </p>
+<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a2d7bd6c8a055925ea28e988620378e00" name="a0d1e86af238eb817727748135b4a70d0a2d7bd6c8a055925ea28e988620378e00"></a>SIGNAL_SH1&#160;</td><td class="fielddoc"><p>This marks a shunting allowed signal. </p>
 <div class="image">
 <img src="../../Light_Sh1.gif" alt="" height="50"/>
 </div>
@@ -615,8 +630,9 @@ Variables</h2></td></tr>
 <img src="../../Light_Hp0Sh1.gif" alt="" height="50"/>
 </div>
  </td></tr>
-<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a9d22492e78c05850305782f5062fc39e" name="a0d1e86af238eb817727748135b4a70d0a9d22492e78c05850305782f5062fc39e"></a>SIGNAL_TST&#160;</td><td class="fielddoc"><p>All lights up for testing purposes. </p>
+<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a81dcf23e74c0deedaca1426b19438047" name="a0d1e86af238eb817727748135b4a70d0a81dcf23e74c0deedaca1426b19438047"></a>SIGNAL_TST&#160;</td><td class="fielddoc"><p>All lights up for testing purposes. </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a0d1e86af238eb817727748135b4a70d0a986a1c6d90ab9d6a757efc7032fa868b" name="a0d1e86af238eb817727748135b4a70d0a986a1c6d90ab9d6a757efc7032fa868b"></a>SIGNAL_MAIN_DISTANT_OFFSET&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -788,32 +804,10 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a9b7ff762bd5f8e3519e3c84743bf53b4" name="a9b7ff762bd5f8e3519e3c84743bf53b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b7ff762bd5f8e3519e3c84743bf53b4">&#9670;&#160;</a></span>SIGNAL_MAIN_DISTANT_OFFSET</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t mrw::can::SIGNAL_MAIN_DISTANT_OFFSET = <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a58ab2fccae6ac36776ab614a387bef18">SIGNAL_VR0</a> - <a class="el" href="#a0d1e86af238eb817727748135b4a70d0a19397f678d8fde71db42ebe0692ac1fa">SIGNAL_HP0</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 12 2024 13:34:30 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Apr 14 2024 10:58:37 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
