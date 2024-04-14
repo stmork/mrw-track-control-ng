@@ -28,10 +28,16 @@
 using namespace mrw::test;
 using namespace mrw::util;
 
-const ConstantEnumerator<int> TestUtil::map
+const ConstantEnumerator<int> TestUtil::int_map
 {
 	CONSTANT(EINVAL),
 	CONSTANT(EBUSY)
+};
+
+const ConstantEnumerator<EnumTest> TestUtil::enum_map
+{
+	CONSTANT(EnumTest::ENUM1),
+	CONSTANT(EnumTest::ENUM2)
 };
 
 /*************************************************************************
@@ -148,16 +154,22 @@ void TestUtil::testMethod()
 
 void TestUtil::testConstantEnumerator()
 {
-	QCOMPARE(map.at(EBUSY),   "EBUSY");
-	QCOMPARE(map.get(EBUSY),  "EBUSY");
-	QCOMPARE(map.at(EINVAL),  "EINVAL");
-	QCOMPARE(map.get(EINVAL), "EINVAL");
-	QCOMPARE(map.get(EAGAIN), "0x0B");
+	QCOMPARE(int_map.at(EBUSY),   "EBUSY");
+	QCOMPARE(int_map.get(EBUSY),  "EBUSY");
+	QCOMPARE(int_map.at(EINVAL),  "EINVAL");
+	QCOMPARE(int_map.get(EINVAL), "EINVAL");
+	QCOMPARE(int_map.get(EAGAIN), "0x0B");
 
-	QCOMPARE(map.findKey("EINVAL")->first, EINVAL);
-	QCOMPARE(map.findKey("XYZ"), map.end());
+	QCOMPARE(int_map.findKey("EINVAL")->first, EINVAL);
+	QCOMPARE(int_map.findKey("XYZ"), int_map.end());
 
-	QVERIFY_EXCEPTION_THROWN(map.at(EAGAIN), std::out_of_range);
+	QVERIFY_EXCEPTION_THROWN(int_map.at(EAGAIN), std::out_of_range);
+
+	QCOMPARE(enum_map.at(EnumTest::ENUM1), "EnumTest::ENUM1");
+	QCOMPARE(enum_map.get(EnumTest::ENUM1), "ENUM1");
+	QCOMPARE(enum_map.at(EnumTest::ENUM2), "EnumTest::ENUM2");
+	QCOMPARE(enum_map.get(EnumTest::ENUM2), "ENUM2");
+	QCOMPARE(enum_map.findKey("XYZ"), enum_map.end());
 }
 
 void TestUtil::testSingleton()

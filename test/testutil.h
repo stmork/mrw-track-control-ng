@@ -15,6 +15,12 @@
 
 namespace mrw::test
 {
+	enum class EnumTest
+	{
+		ENUM1,
+		ENUM2
+	};
+
 	class TestBatch : public QObject, public mrw::util::Batch
 	{
 		Q_OBJECT
@@ -35,7 +41,8 @@ namespace mrw::test
 		Q_OBJECT
 
 	private:
-		static const mrw::util::ConstantEnumerator<int> map;
+		static const mrw::util::ConstantEnumerator<int>      int_map;
+		static const mrw::util::ConstantEnumerator<EnumTest> enum_map;
 
 	public:
 		explicit TestUtil(QObject * parent = nullptr);

@@ -18,10 +18,10 @@ using LockState = Device::LockState;
 
 const ConstantEnumerator<LockState>  Device::lock_map
 {
-	{ LockState::FAIL,     "FAIL" },
-	{ LockState::UNLOCKED, "UNLOCKED" },
-	{ LockState::PENDING,  "PENDING" },
-	{ LockState::LOCKED,   "LOCKED" }
+	CONSTANT(LockState::FAIL),
+	CONSTANT(LockState::UNLOCKED),
+	CONSTANT(LockState::PENDING),
+	CONSTANT(LockState::LOCKED)
 };
 
 Device::Device(

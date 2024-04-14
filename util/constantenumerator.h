@@ -75,7 +75,7 @@ namespace mrw::util
 			const auto it = std::unordered_map<T, QString>::find(key);
 
 			return it != std::unordered_map<T, QString>::end() ?
-				it->second :
+				cutScope(it->second) :
 				QString::asprintf("0x%02X", (unsigned)key);
 		}
 
@@ -105,13 +105,21 @@ namespace mrw::util
 
 			while (it != std::unordered_map<T, QString>::cend())
 			{
-				if (it->second == value)
+				if (cutScope(it->second) == value)
 				{
 					break;
 				}
 				++it;
 			}
 			return it;
+		}
+
+	private:
+		static constexpr QString cutScope(const QString & input)
+		{
+			const auto pos = input.lastIndexOf("::");
+
+			return pos < 0 ? input : QString(input).remove(0, pos + 2);
 		}
 	};
 }

@@ -17,17 +17,17 @@ using SignalType = Signal::SignalType;
 
 const ConstantEnumerator<SignalType>  Signal::type_map
 {
-	{ SignalType::MAIN_SIGNAL,       "MAIN_SIGNAL"},
-	{ SignalType::DISTANT_SIGNAL,    "DISTANT_SIGNAL"},
-	{ SignalType::SHUNT_SIGNAL,      "SHUNT_SIGNAL"},
-	{ SignalType::MAIN_SHUNT_SIGNAL, "MAIN_SHUNT_SIGNAL"}
+	CONSTANT(SignalType::MAIN_SIGNAL),
+	CONSTANT(SignalType::DISTANT_SIGNAL),
+	CONSTANT(SignalType::SHUNT_SIGNAL),
+	CONSTANT(SignalType::MAIN_SHUNT_SIGNAL)
 };
 
 const ConstantEnumerator<Symbol>  Signal::symbol_map
 {
-	{ Symbol::OFF,  "OFF" },
-	{ Symbol::STOP, "STOP" },
-	{ Symbol::GO,   "GO" }
+	CONSTANT(Symbol::OFF),
+	CONSTANT(Symbol::STOP),
+	CONSTANT(Symbol::GO)
 };
 
 Signal::Signal(

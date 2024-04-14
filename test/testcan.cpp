@@ -284,7 +284,7 @@ void TestCan::testSpecial()
 	MrwMessage msg_qryerr(TEST_CTRL_ID, TEST_UNIT_NO, QRYERR, Response::MSG_OK);
 
 	msg_signal.append(std::underlying_type_t<SignalAspect>(SignalAspect::SIGNAL_HP0));
-	QVERIFY(msg_signal.toString().contains("SIGNAL_HP0"));
+	QVERIFY(msg_signal.toString().contains("Hp0"));
 
 	msg_getver.append(3);
 	msg_getver.append(0x11);

@@ -639,12 +639,12 @@ void TestModel::testEnumerator()
 	QCOMPARE(Signal::get(Signal::SignalType::MAIN_SIGNAL), "MAIN_SIGNAL");
 	QCOMPARE(Signal::get(Signal::SignalType(0xff)),        "0xFF");
 
-	QCOMPARE(RegularSwitch::get(RegularSwitch::State::AB),   "State::AB");
-	QCOMPARE(RegularSwitch::get(RegularSwitch::State::AC),   "State::AC");
+	QCOMPARE(RegularSwitch::get(RegularSwitch::State::AB),   "AB");
+	QCOMPARE(RegularSwitch::get(RegularSwitch::State::AC),   "AC");
 	QCOMPARE(RegularSwitch::get(RegularSwitch::State(0xff)), "0xFF");
 
-	QCOMPARE(DoubleCrossSwitch::get(DoubleCrossSwitch::State::AC), "State::AC");
-	QCOMPARE(DoubleCrossSwitch::get(DoubleCrossSwitch::State::BD), "State::BD");
+	QCOMPARE(DoubleCrossSwitch::get(DoubleCrossSwitch::State::AC), "AC");
+	QCOMPARE(DoubleCrossSwitch::get(DoubleCrossSwitch::State::BD), "BD");
 	QCOMPARE(DoubleCrossSwitch::get(DoubleCrossSwitch::State(0xff)), "0xFF");
 
 	QCOMPARE(Section::get(SectionState::FREE), "FREE");
