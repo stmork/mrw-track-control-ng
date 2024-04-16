@@ -279,7 +279,7 @@ bool Route::prepare()
 	return true;
 }
 
-bool mrw::model::Route::isSwitchable(const std::vector<RailPart *> & vector) const
+bool Route::isSwitchable(const std::vector<RailPart *> & vector) const
 {
 	for (size_t i = 1; i < vector.size() - 1; i++)
 	{

@@ -88,6 +88,7 @@ namespace mrw::model
 		 * @param target The target RailPart to prolong this Route.
 		 * @return True if a track was successfully prolonged.
 		 */
+		[[nodiscard]]
 		bool append(RailPart * target);
 
 		/**
@@ -102,6 +103,7 @@ namespace mrw::model
 		 * @c nullptr.
 		 * @return True if a track was successfully prolonged.
 		 */
+		[[nodiscard]]
 		bool append(
 			RailPart * rail,
 			RailPart * target,
@@ -120,6 +122,7 @@ namespace mrw::model
 		 *
 		 * @return True if the last Rail is ended.
 		 */
+		[[nodiscard]]
 		bool isLastSectionEnded() const;
 
 		/**
@@ -196,6 +199,7 @@ namespace mrw::model
 		virtual void prepareFlank();
 
 	private:
+		[[nodiscard]]
 		Region   *   findSearchRegion(const RailPart * target) const;
 
 		/**
@@ -213,12 +217,26 @@ namespace mrw::model
 		 * @param actual The actual RailPart to be checked.
 		 * @return True if flank protection is available.
 		 */
+		[[nodiscard]]
 		bool         hasFlankProtection(
 			const RailPart * prev,
 			const RailPart * actual) const;
+
+		/**
+		 * This method checks if a given RailPart is qualified to be used in
+		 * a RailTrack of a Route.
+		 *
+		 * @param rail The RailPart to be checked.
+		 * @param search_region The actual Region.
+		 * @return True if the RailPart is qualified to be used in a RailTrack
+		 * of a Route.
+		 */
+		[[nodiscard]]
 		bool         qualified(
 			const RailPart * rail,
 			const Region  *  search_region) const;
+
+		[[nodiscard]]
 		bool         isSwitchable(const std::vector<RailPart *> & vector) const;
 
 		/**

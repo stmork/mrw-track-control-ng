@@ -186,6 +186,7 @@ namespace mrw::model
 		 * @return True if this aspect update should cause sending of
 		 * CAN messages.
 		 */
+		[[nodiscard]]
 		bool setAspect(const mrw::can::SignalAspect new_state);
 
 		QString key() const override;
@@ -203,6 +204,7 @@ namespace mrw::model
 		 * @param right The right of "<" Signal.
 		 * @return True if left has higher priority than right.
 		 */
+		[[nodiscard]]
 		static bool less(Signal * left, Signal * right);
 
 		/**
@@ -212,6 +214,7 @@ namespace mrw::model
 		 * @param symbol The Symbol enumeration to translate.
 		 * @return The QString clear text of the given Symbol enumeration.
 		 */
+		[[nodiscard]]
 		static QString get(const Symbol symbol);
 
 		/**
@@ -221,6 +224,7 @@ namespace mrw::model
 		 * @param type The SignalType enumeration to translate.
 		 * @return The QString clear text of the given SignalType enumeration.
 		 */
+		[[nodiscard]]
 		static QString get(const SignalType type);
 
 	protected:

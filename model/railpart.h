@@ -150,6 +150,7 @@ namespace mrw::model
 		 * @return The collection of connected rail parts. The collection
 		 * may be empty in case of an end rail.
 		 */
+		[[nodiscard]]
 		std::set<RailInfo> & advance(const bool dir) noexcept;
 
 		/**
@@ -160,6 +161,7 @@ namespace mrw::model
 		 * @return The collection of connected rail parts. The collection
 		 * may be empty in case of an end rail.
 		 */
+		[[nodiscard]]
 		const std::set<RailInfo> & advance(const bool dir) const noexcept;
 
 		/**
@@ -216,6 +218,7 @@ namespace mrw::model
 		 *
 		 * @return The connected RailPart.
 		 */
+		[[nodiscard]]
 		RailPart * resolve(const char * attr) const noexcept;
 	};
 }
