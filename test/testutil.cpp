@@ -165,9 +165,9 @@ void TestUtil::testConstantEnumerator()
 
 	QVERIFY_EXCEPTION_THROWN(int_map.at(EAGAIN), std::out_of_range);
 
-	QCOMPARE(enum_map.at(EnumTest::ENUM1), "EnumTest::ENUM1");
+	QCOMPARE(enum_map.at(EnumTest::ENUM1), "ENUM1");
 	QCOMPARE(enum_map.get(EnumTest::ENUM1), "ENUM1");
-	QCOMPARE(enum_map.at(EnumTest::ENUM2), "EnumTest::ENUM2");
+	QCOMPARE(enum_map.at(EnumTest::ENUM2), "ENUM2");
 	QCOMPARE(enum_map.get(EnumTest::ENUM2), "ENUM2");
 	QCOMPARE(enum_map.findKey("XYZ"), enum_map.end());
 }

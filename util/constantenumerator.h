@@ -12,10 +12,17 @@
 
 #include <QString>
 
-#define CONSTANT(f) { f, #f }
+#define CONSTANT(f) { f, mrw::util::cutScope(#f) }
 
 namespace mrw::util
 {
+	static inline QString cutScope(const QString & input)
+	{
+		const auto pos = input.lastIndexOf("::");
+
+		return pos < 0 ? input : QString(input).remove(0, pos + 2);
+	}
+
 	/**
 	 * This convenience class provides a mapping from a symbolic
 	 * value to its string representation. It is used for printing
@@ -34,6 +41,16 @@ namespace mrw::util
 	 * @endcode
 	 *
 	 * You may access the mapper like every std::unordered_map.
+	 *
+	 * @note Using a scoped enumeration removes the namespace/scope part of
+	 * the clear text part. The Scope::ENUM1 will be reduced to a ENUM1 string.
+	 *
+	 * @code
+	 *  flag_map TestUtil::map
+	 *  {
+	 *      CONSTANT(Scope::ENUM1)
+	 *  };
+	 * @endcode
 	 *
 	 * @note The operator[] may throw a std::out_of_range exception. It
 	 * is a safe way to map using the get() method instead.
@@ -75,7 +92,7 @@ namespace mrw::util
 			const auto it = std::unordered_map<T, QString>::find(key);
 
 			return it != std::unordered_map<T, QString>::end() ?
-				cutScope(it->second) :
+				it->second :
 				QString::asprintf("0x%02X", (unsigned)key);
 		}
 
@@ -105,21 +122,13 @@ namespace mrw::util
 
 			while (it != std::unordered_map<T, QString>::cend())
 			{
-				if (cutScope(it->second) == value)
+				if (it->second == value)
 				{
 					break;
 				}
 				++it;
 			}
 			return it;
-		}
-
-	private:
-		static constexpr QString cutScope(const QString & input)
-		{
-			const auto pos = input.lastIndexOf("::");
-
-			return pos < 0 ? input : QString(input).remove(0, pos + 2);
 		}
 	};
 }
