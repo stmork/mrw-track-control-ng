@@ -24,5 +24,6 @@ var searchData=
   ['controllerbyid_21',['controllerById',['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#a0a6871b80b317734ddac83a53905de6d',1,'mrw::model::ModelRailway']]],
   ['controllercount_22',['controllerCount',['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#a87a775318874814bebfbce6528535915',1,'mrw::model::ModelRailway']]],
   ['controllerwidget_23',['ControllerWidget',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a557f85ea485ae2390dfbae1fd257179d',1,'mrw::ui::ControllerWidget']]],
-  ['critical_24',['critical',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html#aba5378f886d45227cb61798c38d00d3f',1,'mrw::log::LoggerBase::critical()'],['../d1/d17/classmrw_1_1log_1_1StdLogger.html#ad4244fd80304223ea8d6e0d0370cef7d',1,'mrw::log::StdLogger::critical()'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#ab7e451110d5d1c63b0b8acb4ff71e2bf',1,'mrw::log::SysLogger::critical()']]]
+  ['critical_24',['critical',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html#aba5378f886d45227cb61798c38d00d3f',1,'mrw::log::LoggerBase::critical()'],['../d1/d17/classmrw_1_1log_1_1StdLogger.html#ad4244fd80304223ea8d6e0d0370cef7d',1,'mrw::log::StdLogger::critical()'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#ab7e451110d5d1c63b0b8acb4ff71e2bf',1,'mrw::log::SysLogger::critical()']]],
+  ['cutscope_25',['cutScope',['../d9/d2b/namespacemrw_1_1util.html#aecdce54a6519bb96fd87579c6ce38f8f',1,'mrw::util']]]
 ];

@@ -140,7 +140,12 @@ class mrw::util::ConstantEnumerator&lt; T &gt;</div><p>This convenience class pr
 <div class="line">    CONSTANT(EBUSY)</div>
 <div class="line">};</div>
 </div><!-- fragment --><p>You may access the mapper like every std::unordered_map.</p>
-<dl class="section note"><dt>Note</dt><dd>The operator[] may throw a std::out_of_range exception. It is a safe way to map using the <a class="el" href="#a790a1667fb478db3d75c34c8a5296d7a" title="This method provides a safe way to represent a symbolic value as a QString.">get()</a> method instead. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Using a scoped enumeration removes the namespace/scope part of the clear text part. The Scope::ENUM1 will be reduced to a ENUM1 string.</dd></dl>
+<div class="fragment"><div class="line">flag_map TestUtil::map</div>
+<div class="line">{</div>
+<div class="line">    CONSTANT(Scope::ENUM1)</div>
+<div class="line">};</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The operator[] may throw a std::out_of_range exception. It is a safe way to map using the <a class="el" href="#a790a1667fb478db3d75c34c8a5296d7a" title="This method provides a safe way to represent a symbolic value as a QString.">get()</a> method instead. </dd></dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a2fb8988f103ebc51fe1395b9d553182a" name="a2fb8988f103ebc51fe1395b9d553182a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2fb8988f103ebc51fe1395b9d553182a">&#9670;&#160;</a></span>ConstantMapPair</h2>
@@ -329,7 +334,7 @@ template&lt;class T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 14 2024 12:11:26 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Apr 16 2024 19:16:49 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

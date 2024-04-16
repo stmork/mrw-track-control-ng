@@ -76,5 +76,6 @@ var searchData=
   ['controllerwidget_73',['ControllerWidget',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html',1,'mrw::ui::ControllerWidget'],['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a557f85ea485ae2390dfbae1fd257179d',1,'mrw::ui::ControllerWidget::ControllerWidget()']]],
   ['counter_74',['counter',['../db/d4f/classmrw_1_1model_1_1Position.html#a4d7793ec6944ee1f89dec89cc0ea8a12',1,'mrw::model::Position']]],
   ['critical_75',['critical',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html#aba5378f886d45227cb61798c38d00d3f',1,'mrw::log::LoggerBase::critical()'],['../d1/d17/classmrw_1_1log_1_1StdLogger.html#ad4244fd80304223ea8d6e0d0370cef7d',1,'mrw::log::StdLogger::critical()'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#ab7e451110d5d1c63b0b8acb4ff71e2bf',1,'mrw::log::SysLogger::critical()']]],
-  ['cyan_5fon_76',['CYAN_ON',['../d0/d55/classmrw_1_1util_1_1String.html#a8026cc002373c31b4dc8193a2a1eb599',1,'mrw::util::String']]]
+  ['cutscope_76',['cutScope',['../d9/d2b/namespacemrw_1_1util.html#aecdce54a6519bb96fd87579c6ce38f8f',1,'mrw::util']]],
+  ['cyan_5fon_77',['CYAN_ON',['../d0/d55/classmrw_1_1util_1_1String.html#a8026cc002373c31b4dc8193a2a1eb599',1,'mrw::util::String']]]
 ];
