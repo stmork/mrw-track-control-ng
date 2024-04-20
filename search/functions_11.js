@@ -1,8 +1,8 @@
 var searchData=
 [
   ['save_0',['save',['../dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a3a9e5cc0e4191375f6e40ac963dc2a76',1,'mrw::model::ModelRepository']]],
-  ['section_1',['section',['../d5/d26/classmrw_1_1model_1_1AssemblyPart.html#a34d97dfce124fedb32235ffede0b4ecc',1,'mrw::model::AssemblyPart::section()'],['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#abcf1f0f3d79ec0a26bd6131be21513bd',1,'mrw::model::ModelRailway::section()'],['../d4/d3e/classmrw_1_1model_1_1Region.html#a7c4842505252d2ae314fa4d656f130aa',1,'mrw::model::Region::section()']]],
-  ['section_2',['Section',['../de/de1/classmrw_1_1model_1_1Section.html#af39e5409a3199793119896b8bf971378',1,'mrw::model::Section']]],
+  ['section_1',['Section',['../de/de1/classmrw_1_1model_1_1Section.html#af39e5409a3199793119896b8bf971378',1,'mrw::model::Section']]],
+  ['section_2',['section',['../d5/d26/classmrw_1_1model_1_1AssemblyPart.html#a34d97dfce124fedb32235ffede0b4ecc',1,'mrw::model::AssemblyPart::section()'],['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#abcf1f0f3d79ec0a26bd6131be21513bd',1,'mrw::model::ModelRailway::section()'],['../d4/d3e/classmrw_1_1model_1_1Region.html#a7c4842505252d2ae314fa4d656f130aa',1,'mrw::model::Region::section()']]],
   ['sectioncolor_3',['sectionColor',['../df/db9/classmrw_1_1ui_1_1BaseWidget.html#ae7a45cecae7ea77538b9c873804ca323',1,'mrw::ui::BaseWidget']]],
   ['sectioncount_4',['sectionCount',['../d4/d3e/classmrw_1_1model_1_1Region.html#a627613f91af37c720e920df43eabde71',1,'mrw::model::Region']]],
   ['sectionmodule_5',['SectionModule',['../d8/d13/classmrw_1_1model_1_1SectionModule.html#a0ff73261aa8dd87fd244053788039fa9',1,'mrw::model::SectionModule']]],

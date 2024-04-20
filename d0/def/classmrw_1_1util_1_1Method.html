@@ -80,6 +80,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="../../d1/d1a/classmrw_1_1util_1_1Method-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">mrw::util::Method Class Reference</div></div>
 </div><!--header-->
@@ -101,9 +102,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a0d7c6db2939207694b1c1ec68466d456" id="r_a0d7c6db2939207694b1c1ec68466d456"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d7c6db2939207694b1c1ec68466d456">pattern</a> () noexcept</td></tr>
-<tr class="memdesc:a0d7c6db2939207694b1c1ec68466d456"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method sets the logging information to a unique pattern with timestamp logging type and of course its message.  <br /></td></tr>
-<tr class="separator:a0d7c6db2939207694b1c1ec68466d456"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfc11bd781cd080bac56846fad0ca840" id="r_adfc11bd781cd080bac56846fad0ca840"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adfc11bd781cd080bac56846fad0ca840">pattern</a> (const bool use_time_stamp=true) noexcept</td></tr>
+<tr class="memdesc:adfc11bd781cd080bac56846fad0ca840"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method sets the logging information to a unique pattern with timestamp logging type and of course its message.  <br /></td></tr>
+<tr class="separator:adfc11bd781cd080bac56846fad0ca840"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88d49b2e97fd25afb5753645d6ff9911" id="r_a88d49b2e97fd25afb5753645d6ff9911"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:a88d49b2e97fd25afb5753645d6ff9911"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a88d49b2e97fd25afb5753645d6ff9911">always</a> (const T *ptr) noexcept</td></tr>
 <tr class="memdesc:a88d49b2e97fd25afb5753645d6ff9911"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static template function acts as a default for lambda callbacks which always returns true on a specific given type T.  <br /></td></tr>
@@ -116,6 +117,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a10695e1cd1c103f67fa551eb7d7ef54b"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a10695e1cd1c103f67fa551eb7d7ef54b">noop</a> (const T *ptr)</td></tr>
 <tr class="memdesc:a10695e1cd1c103f67fa551eb7d7ef54b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The static template function acts as a default for lambda or singleton callbacks which simply does nothing on a specific given type T.  <br /></td></tr>
 <tr class="separator:a10695e1cd1c103f67fa551eb7d7ef54b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a98f7df97a38f20bbec3473051cd6411f" id="r_a98f7df97a38f20bbec3473051cd6411f"><td class="memItemLeft" align="right" valign="top">static const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a98f7df97a38f20bbec3473051cd6411f">TIME_STAMP_FORMAT</a></td></tr>
+<tr class="separator:a98f7df97a38f20bbec3473051cd6411f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This convenience class may be used for logging the entry, exit and time spent of a method. </p>
@@ -289,8 +295,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a0d7c6db2939207694b1c1ec68466d456" name="a0d7c6db2939207694b1c1ec68466d456"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d7c6db2939207694b1c1ec68466d456">&#9670;&#160;</a></span>pattern()</h2>
+<a id="adfc11bd781cd080bac56846fad0ca840" name="adfc11bd781cd080bac56846fad0ca840"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfc11bd781cd080bac56846fad0ca840">&#9670;&#160;</a></span>pattern()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -301,7 +307,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="memname">void Method::pattern </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>use_time_stamp</em><span class="paramdefsep"> = </span><span class="paramdefval">true</span></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -313,13 +319,42 @@ template&lt;class T &gt; </div>
 </div><div class="memdoc">
 
 <p>This method sets the logging information to a unique pattern with timestamp logging type and of course its message. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">use_time_stamp</td><td>If true add a time stamp placeholder. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a98f7df97a38f20bbec3473051cd6411f" name="a98f7df97a38f20bbec3473051cd6411f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98f7df97a38f20bbec3473051cd6411f">&#9670;&#160;</a></span>TIME_STAMP_FORMAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const QString Method::TIME_STAMP_FORMAT</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 16 2024 19:16:49 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Apr 20 2024 13:16:47 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -79,6 +79,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="../../db/d17/classmrw_1_1log_1_1StdLogger-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">mrw::log::StdLogger Class Reference</div></div>
 </div><!--header-->
@@ -116,6 +117,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a933218cb3ab2e3efd6227acc4468e1d0" id="r_a933218cb3ab2e3efd6227acc4468e1d0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a933218cb3ab2e3efd6227acc4468e1d0">fatal</a> (const char *message) const override</td></tr>
 <tr class="memdesc:a933218cb3ab2e3efd6227acc4468e1d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called on logging if the QtMsgType is QtFatalMsg.  <br /></td></tr>
 <tr class="separator:a933218cb3ab2e3efd6227acc4468e1d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a723aaaa76daafb65970da196f360b507" id="r_a723aaaa76daafb65970da196f360b507"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a723aaaa76daafb65970da196f360b507">write</a> (FILE *file, const char *message)</td></tr>
+<tr class="memdesc:a723aaaa76daafb65970da196f360b507"><td class="mdescLeft">&#160;</td><td class="mdescRight">The callback method for all other logging methods of <a class="el" href="../../d1/d17/classmrw_1_1log_1_1StdLogger.html" title="This class implements logging to console.">StdLogger</a> classes.  <br /></td></tr>
+<tr class="separator:a723aaaa76daafb65970da196f360b507"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ecff9f11574c33d083c55da29decdb1" id="r_a2ecff9f11574c33d083c55da29decdb1"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d28/classmrw_1_1log_1_1LoggerBase.html#a2ecff9f11574c33d083c55da29decdb1">timeStamp</a> () noexcept</td></tr>
+<tr class="memdesc:a2ecff9f11574c33d083c55da29decdb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method creates a time stamp of the actual date time for logging.  <br /></td></tr>
+<tr class="separator:a2ecff9f11574c33d083c55da29decdb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class implements logging to console. </p>
@@ -265,6 +275,34 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a2ecff9f11574c33d083c55da29decdb1" name="a2ecff9f11574c33d083c55da29decdb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ecff9f11574c33d083c55da29decdb1">&#9670;&#160;</a></span>timeStamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString LoggerBase::timeStamp </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method creates a time stamp of the actual date time for logging. </p>
+<dl class="section return"><dt>Returns</dt><dd>The actual date time as QString. </dd></dl>
+
+</div>
+</div>
 <a id="a6996b5fc0926a8e197e910934d9c69ad" name="a6996b5fc0926a8e197e910934d9c69ad"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6996b5fc0926a8e197e910934d9c69ad">&#9670;&#160;</a></span>warn()</h2>
 
@@ -301,10 +339,50 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a723aaaa76daafb65970da196f360b507" name="a723aaaa76daafb65970da196f360b507"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a723aaaa76daafb65970da196f360b507">&#9670;&#160;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StdLogger::write </td>
+          <td>(</td>
+          <td class="paramtype">FILE *</td>          <td class="paramname"><span class="paramname"><em>file</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The callback method for all other logging methods of <a class="el" href="../../d1/d17/classmrw_1_1log_1_1StdLogger.html" title="This class implements logging to console.">StdLogger</a> classes. </p>
+<p>This is useful to write all messages into different file handles.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>The FILE pointer to log into. </td></tr>
+    <tr><td class="paramname">message</td><td>The message to log. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d8/ded/classmrw_1_1log_1_1FileLogger.html" title="This class writes all logging messages into one single file.">FileLogger</a> </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 16 2024 19:16:49 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Apr 20 2024 13:16:47 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

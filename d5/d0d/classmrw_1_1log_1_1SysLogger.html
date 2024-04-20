@@ -79,6 +79,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="../../dc/dbc/classmrw_1_1log_1_1SysLogger-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">mrw::log::SysLogger Class Reference</div></div>
 </div><!--header-->
@@ -102,23 +103,29 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8b2e6b2ba28b29fd779f0d71b80124c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85fb0e0603943ccf11a0ded07690bd51" id="r_a85fb0e0603943ccf11a0ded07690bd51"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85fb0e0603943ccf11a0ded07690bd51">SysLogger</a> (const char *application)</td></tr>
 <tr class="separator:a85fb0e0603943ccf11a0ded07690bd51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a167a8ad9d642b5d5e01f647bd22d0ad5" id="r_a167a8ad9d642b5d5e01f647bd22d0ad5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a167a8ad9d642b5d5e01f647bd22d0ad5">~SysLogger</a> ()</td></tr>
-<tr class="separator:a167a8ad9d642b5d5e01f647bd22d0ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8acc80016081b44d3e81cb1cbd01e972" id="r_a8acc80016081b44d3e81cb1cbd01e972"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8acc80016081b44d3e81cb1cbd01e972">debug</a> (const char *message) const override</td></tr>
-<tr class="memdesc:a8acc80016081b44d3e81cb1cbd01e972"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called on logging if the QtMsgType is QtDebugMsg.  <br /></td></tr>
-<tr class="separator:a8acc80016081b44d3e81cb1cbd01e972"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a360af7950e468725b38ff220d3aba121" id="r_a360af7950e468725b38ff220d3aba121"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a360af7950e468725b38ff220d3aba121">info</a> (const char *message) const override</td></tr>
-<tr class="memdesc:a360af7950e468725b38ff220d3aba121"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called on logging if the QtMsgType is QtInfoMsg.  <br /></td></tr>
-<tr class="separator:a360af7950e468725b38ff220d3aba121"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d7caa9f0399d727ef3aeb82b69340f5" id="r_a2d7caa9f0399d727ef3aeb82b69340f5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d7caa9f0399d727ef3aeb82b69340f5">warn</a> (const char *message) const override</td></tr>
-<tr class="memdesc:a2d7caa9f0399d727ef3aeb82b69340f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called on logging if the QtMsgType is QtWarningMsg.  <br /></td></tr>
-<tr class="separator:a2d7caa9f0399d727ef3aeb82b69340f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7e451110d5d1c63b0b8acb4ff71e2bf" id="r_ab7e451110d5d1c63b0b8acb4ff71e2bf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7e451110d5d1c63b0b8acb4ff71e2bf">critical</a> (const char *message) const override</td></tr>
-<tr class="memdesc:ab7e451110d5d1c63b0b8acb4ff71e2bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called on logging if the QtMsgType is QtCriticalMsg.  <br /></td></tr>
-<tr class="separator:ab7e451110d5d1c63b0b8acb4ff71e2bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a620a812d2a5826ffa5093e454e185a80" id="r_a620a812d2a5826ffa5093e454e185a80"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a620a812d2a5826ffa5093e454e185a80">fatal</a> (const char *message) const override</td></tr>
-<tr class="memdesc:a620a812d2a5826ffa5093e454e185a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called on logging if the QtMsgType is QtFatalMsg.  <br /></td></tr>
-<tr class="separator:a620a812d2a5826ffa5093e454e185a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0121ecb4f50cf05cf240bf5bb077333" id="r_af0121ecb4f50cf05cf240bf5bb077333"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0121ecb4f50cf05cf240bf5bb077333">~SysLogger</a> ()</td></tr>
+<tr class="separator:af0121ecb4f50cf05cf240bf5bb077333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a682af1b337fc0a7c2ff53bd560ca0834" id="r_a682af1b337fc0a7c2ff53bd560ca0834"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a682af1b337fc0a7c2ff53bd560ca0834">debug</a> (const char *message) const override</td></tr>
+<tr class="memdesc:a682af1b337fc0a7c2ff53bd560ca0834"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called on logging if the QtMsgType is QtDebugMsg.  <br /></td></tr>
+<tr class="separator:a682af1b337fc0a7c2ff53bd560ca0834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9877a0b8e736fbd2dbaa6fbe96ae3ba3" id="r_a9877a0b8e736fbd2dbaa6fbe96ae3ba3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9877a0b8e736fbd2dbaa6fbe96ae3ba3">info</a> (const char *message) const override</td></tr>
+<tr class="memdesc:a9877a0b8e736fbd2dbaa6fbe96ae3ba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called on logging if the QtMsgType is QtInfoMsg.  <br /></td></tr>
+<tr class="separator:a9877a0b8e736fbd2dbaa6fbe96ae3ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a052b258c91729190bb104f1b41f9b598" id="r_a052b258c91729190bb104f1b41f9b598"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a052b258c91729190bb104f1b41f9b598">warn</a> (const char *message) const override</td></tr>
+<tr class="memdesc:a052b258c91729190bb104f1b41f9b598"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called on logging if the QtMsgType is QtWarningMsg.  <br /></td></tr>
+<tr class="separator:a052b258c91729190bb104f1b41f9b598"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81d324a2f378dd1ebf56878d604def4b" id="r_a81d324a2f378dd1ebf56878d604def4b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81d324a2f378dd1ebf56878d604def4b">critical</a> (const char *message) const override</td></tr>
+<tr class="memdesc:a81d324a2f378dd1ebf56878d604def4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called on logging if the QtMsgType is QtCriticalMsg.  <br /></td></tr>
+<tr class="separator:a81d324a2f378dd1ebf56878d604def4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85b55e62280b3986297709c44dd23d3c" id="r_a85b55e62280b3986297709c44dd23d3c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85b55e62280b3986297709c44dd23d3c">fatal</a> (const char *message) const override</td></tr>
+<tr class="memdesc:a85b55e62280b3986297709c44dd23d3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called on logging if the QtMsgType is QtFatalMsg.  <br /></td></tr>
+<tr class="separator:a85b55e62280b3986297709c44dd23d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a2ecff9f11574c33d083c55da29decdb1" id="r_a2ecff9f11574c33d083c55da29decdb1"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d28/classmrw_1_1log_1_1LoggerBase.html#a2ecff9f11574c33d083c55da29decdb1">timeStamp</a> () noexcept</td></tr>
+<tr class="memdesc:a2ecff9f11574c33d083c55da29decdb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method creates a time stamp of the actual date time for logging.  <br /></td></tr>
+<tr class="separator:a2ecff9f11574c33d083c55da29decdb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8b2e6b2ba28b29fd779f0d71b80124c4" name="a8b2e6b2ba28b29fd779f0d71b80124c4"></a>
@@ -171,8 +178,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a167a8ad9d642b5d5e01f647bd22d0ad5" name="a167a8ad9d642b5d5e01f647bd22d0ad5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a167a8ad9d642b5d5e01f647bd22d0ad5">&#9670;&#160;</a></span>~SysLogger()</h2>
+<a id="af0121ecb4f50cf05cf240bf5bb077333" name="af0121ecb4f50cf05cf240bf5bb077333"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0121ecb4f50cf05cf240bf5bb077333">&#9670;&#160;</a></span>~SysLogger()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -181,7 +188,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">mrw::log::SysLogger::~SysLogger </td>
+          <td class="memname">SysLogger::~SysLogger </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -197,8 +204,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab7e451110d5d1c63b0b8acb4ff71e2bf" name="ab7e451110d5d1c63b0b8acb4ff71e2bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7e451110d5d1c63b0b8acb4ff71e2bf">&#9670;&#160;</a></span>critical()</h2>
+<a id="a81d324a2f378dd1ebf56878d604def4b" name="a81d324a2f378dd1ebf56878d604def4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81d324a2f378dd1ebf56878d604def4b">&#9670;&#160;</a></span>critical()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,7 +214,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void mrw::log::SysLogger::critical </td>
+          <td class="memname">void SysLogger::critical </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
           <td> const</td>
@@ -233,8 +240,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8acc80016081b44d3e81cb1cbd01e972" name="a8acc80016081b44d3e81cb1cbd01e972"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8acc80016081b44d3e81cb1cbd01e972">&#9670;&#160;</a></span>debug()</h2>
+<a id="a682af1b337fc0a7c2ff53bd560ca0834" name="a682af1b337fc0a7c2ff53bd560ca0834"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a682af1b337fc0a7c2ff53bd560ca0834">&#9670;&#160;</a></span>debug()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -243,7 +250,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void mrw::log::SysLogger::debug </td>
+          <td class="memname">void SysLogger::debug </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
           <td> const</td>
@@ -269,8 +276,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a620a812d2a5826ffa5093e454e185a80" name="a620a812d2a5826ffa5093e454e185a80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a620a812d2a5826ffa5093e454e185a80">&#9670;&#160;</a></span>fatal()</h2>
+<a id="a85b55e62280b3986297709c44dd23d3c" name="a85b55e62280b3986297709c44dd23d3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85b55e62280b3986297709c44dd23d3c">&#9670;&#160;</a></span>fatal()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,7 +286,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void mrw::log::SysLogger::fatal </td>
+          <td class="memname">void SysLogger::fatal </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
           <td> const</td>
@@ -305,8 +312,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a360af7950e468725b38ff220d3aba121" name="a360af7950e468725b38ff220d3aba121"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a360af7950e468725b38ff220d3aba121">&#9670;&#160;</a></span>info()</h2>
+<a id="a9877a0b8e736fbd2dbaa6fbe96ae3ba3" name="a9877a0b8e736fbd2dbaa6fbe96ae3ba3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9877a0b8e736fbd2dbaa6fbe96ae3ba3">&#9670;&#160;</a></span>info()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -315,7 +322,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void mrw::log::SysLogger::info </td>
+          <td class="memname">void SysLogger::info </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
           <td> const</td>
@@ -341,8 +348,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2d7caa9f0399d727ef3aeb82b69340f5" name="a2d7caa9f0399d727ef3aeb82b69340f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d7caa9f0399d727ef3aeb82b69340f5">&#9670;&#160;</a></span>warn()</h2>
+<a id="a2ecff9f11574c33d083c55da29decdb1" name="a2ecff9f11574c33d083c55da29decdb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ecff9f11574c33d083c55da29decdb1">&#9670;&#160;</a></span>timeStamp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -351,7 +358,35 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void mrw::log::SysLogger::warn </td>
+          <td class="memname">QString LoggerBase::timeStamp </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method creates a time stamp of the actual date time for logging. </p>
+<dl class="section return"><dt>Returns</dt><dd>The actual date time as QString. </dd></dl>
+
+</div>
+</div>
+<a id="a052b258c91729190bb104f1b41f9b598" name="a052b258c91729190bb104f1b41f9b598"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a052b258c91729190bb104f1b41f9b598">&#9670;&#160;</a></span>warn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SysLogger::warn </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
           <td> const</td>
@@ -380,7 +415,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 16 2024 19:16:49 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Apr 20 2024 13:16:47 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

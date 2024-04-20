@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['debug_0',['debug',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html#a4fb36b4629c3840ea769f188914ac422',1,'mrw::log::LoggerBase::debug()'],['../d1/d17/classmrw_1_1log_1_1StdLogger.html#a8ed6294e21bd30e623ee039b1cd1554e',1,'mrw::log::StdLogger::debug()'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a8acc80016081b44d3e81cb1cbd01e972',1,'mrw::log::SysLogger::debug()']]],
+  ['debug_0',['debug',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html#a4fb36b4629c3840ea769f188914ac422',1,'mrw::log::LoggerBase::debug()'],['../d1/d17/classmrw_1_1log_1_1StdLogger.html#a8ed6294e21bd30e623ee039b1cd1554e',1,'mrw::log::StdLogger::debug()'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a682af1b337fc0a7c2ff53bd560ca0834',1,'mrw::log::SysLogger::debug()']]],
   ['decrease_1',['decrease',['../d8/dde/classmrw_1_1util_1_1Batch.html#ab6d3b508f66581271f23cff702b7d623',1,'mrw::util::Batch::decrease()'],['../d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a3df2d32cce94717af8c388718bf4c108',1,'mrw::util::BatchParticipant::decrease()']]],
   ['device_2',['Device',['../d8/d2c/classmrw_1_1model_1_1Device.html#a0de026e1f11662155aa02ec4a7eb4835',1,'mrw::model::Device']]],
   ['devicebyid_3',['deviceById',['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#a2b815f10eb083f088262d871b5a5956b',1,'mrw::model::ModelRailway::deviceById(const mrw::can::ControllerId id, const mrw::can::UnitNo unit_no) const'],['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#a9e52d28001f2aadb574243aa9d726a9e',1,'mrw::model::ModelRailway::deviceById(const DeviceId id) const']]],

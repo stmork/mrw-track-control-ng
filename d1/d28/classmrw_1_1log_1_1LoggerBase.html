@@ -79,6 +79,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="../../d8/de7/classmrw_1_1log_1_1LoggerBase-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">mrw::log::LoggerBase Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
@@ -126,6 +127,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab8c1ce6e79b2e507846dbe0a18733ae8" id="r_ab8c1ce6e79b2e507846dbe0a18733ae8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8c1ce6e79b2e507846dbe0a18733ae8">fatal</a> (const char *message) const =0</td></tr>
 <tr class="memdesc:ab8c1ce6e79b2e507846dbe0a18733ae8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called on logging if the QtMsgType is QtFatalMsg.  <br /></td></tr>
 <tr class="separator:ab8c1ce6e79b2e507846dbe0a18733ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a2ecff9f11574c33d083c55da29decdb1" id="r_a2ecff9f11574c33d083c55da29decdb1"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ecff9f11574c33d083c55da29decdb1">timeStamp</a> () noexcept</td></tr>
+<tr class="memdesc:a2ecff9f11574c33d083c55da29decdb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method creates a time stamp of the actual date time for logging.  <br /></td></tr>
+<tr class="separator:a2ecff9f11574c33d083c55da29decdb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class provides an interface for logging messages into different drains. </p>
@@ -189,7 +196,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="../../d1/d17/classmrw_1_1log_1_1StdLogger.html#ad4244fd80304223ea8d6e0d0370cef7d">mrw::log::StdLogger</a>, and <a class="el" href="../../d5/d0d/classmrw_1_1log_1_1SysLogger.html#ab7e451110d5d1c63b0b8acb4ff71e2bf">mrw::log::SysLogger</a>.</p>
+<p>Implemented in <a class="el" href="../../d1/d17/classmrw_1_1log_1_1StdLogger.html#ad4244fd80304223ea8d6e0d0370cef7d">mrw::log::StdLogger</a>, and <a class="el" href="../../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a81d324a2f378dd1ebf56878d604def4b">mrw::log::SysLogger</a>.</p>
 
 </div>
 </div>
@@ -225,7 +232,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="../../d1/d17/classmrw_1_1log_1_1StdLogger.html#a8ed6294e21bd30e623ee039b1cd1554e">mrw::log::StdLogger</a>, and <a class="el" href="../../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a8acc80016081b44d3e81cb1cbd01e972">mrw::log::SysLogger</a>.</p>
+<p>Implemented in <a class="el" href="../../d1/d17/classmrw_1_1log_1_1StdLogger.html#a8ed6294e21bd30e623ee039b1cd1554e">mrw::log::StdLogger</a>, and <a class="el" href="../../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a682af1b337fc0a7c2ff53bd560ca0834">mrw::log::SysLogger</a>.</p>
 
 </div>
 </div>
@@ -261,7 +268,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="../../d1/d17/classmrw_1_1log_1_1StdLogger.html#a933218cb3ab2e3efd6227acc4468e1d0">mrw::log::StdLogger</a>, and <a class="el" href="../../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a620a812d2a5826ffa5093e454e185a80">mrw::log::SysLogger</a>.</p>
+<p>Implemented in <a class="el" href="../../d1/d17/classmrw_1_1log_1_1StdLogger.html#a933218cb3ab2e3efd6227acc4468e1d0">mrw::log::StdLogger</a>, and <a class="el" href="../../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a85b55e62280b3986297709c44dd23d3c">mrw::log::SysLogger</a>.</p>
 
 </div>
 </div>
@@ -297,7 +304,35 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="../../d1/d17/classmrw_1_1log_1_1StdLogger.html#a8ea9ab40827701cb70e96b2d2fca6257">mrw::log::StdLogger</a>, and <a class="el" href="../../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a360af7950e468725b38ff220d3aba121">mrw::log::SysLogger</a>.</p>
+<p>Implemented in <a class="el" href="../../d1/d17/classmrw_1_1log_1_1StdLogger.html#a8ea9ab40827701cb70e96b2d2fca6257">mrw::log::StdLogger</a>, and <a class="el" href="../../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a9877a0b8e736fbd2dbaa6fbe96ae3ba3">mrw::log::SysLogger</a>.</p>
+
+</div>
+</div>
+<a id="a2ecff9f11574c33d083c55da29decdb1" name="a2ecff9f11574c33d083c55da29decdb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ecff9f11574c33d083c55da29decdb1">&#9670;&#160;</a></span>timeStamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString LoggerBase::timeStamp </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method creates a time stamp of the actual date time for logging. </p>
+<dl class="section return"><dt>Returns</dt><dd>The actual date time as QString. </dd></dl>
 
 </div>
 </div>
@@ -333,14 +368,14 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="../../d1/d17/classmrw_1_1log_1_1StdLogger.html#a6996b5fc0926a8e197e910934d9c69ad">mrw::log::StdLogger</a>, and <a class="el" href="../../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a2d7caa9f0399d727ef3aeb82b69340f5">mrw::log::SysLogger</a>.</p>
+<p>Implemented in <a class="el" href="../../d1/d17/classmrw_1_1log_1_1StdLogger.html#a6996b5fc0926a8e197e910934d9c69ad">mrw::log::StdLogger</a>, and <a class="el" href="../../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a052b258c91729190bb104f1b41f9b598">mrw::log::SysLogger</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 16 2024 19:16:49 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Apr 20 2024 13:16:47 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
