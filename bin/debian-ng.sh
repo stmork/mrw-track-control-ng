@@ -20,9 +20,11 @@ make install
 
 mkdir -p ${PREFIX}/usr/share/doc/${PACKAGE}
 mkdir -p ${PREFIX}/usr/share/applications
-mkdir ${PREFIX}/DEBIAN
+mkdir -p ${PREFIX}/DEBIAN
+mkdir -p ${PREFIX}/etc/rsyslog.d
 cp -a DEBIAN/control-ng  ${PREFIX}/DEBIAN/control
 cp -a *.desktop ${PREFIX}/usr/share/applications/
+cp -a 10-mrw.conf ${PREFIX}/etc/rsyslog.d/
 
 echo "Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/" > $COPYRIGHT
 echo "Upstream-Name: $PACKAGE" >> ${COPYRIGHT}

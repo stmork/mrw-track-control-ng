@@ -33,7 +33,7 @@ int main(int argc, char * argv[])
 
 	LoggerService::instance().registerLogger(&std_logger);
 	LoggerService::instance().registerLogger(&file_logger);
-//	LoggerService::instance().registerLogger(&sys_logger);
+	LoggerService::instance().registerLogger(&sys_logger);
 
 	ModelRepository          repo(ModelRepository::proposeModelName(), true);
 
