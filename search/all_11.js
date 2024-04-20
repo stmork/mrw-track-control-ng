@@ -98,6 +98,6 @@ var searchData=
   ['switchstate_95',['switchState',['../df/db7/classmrw_1_1model_1_1AbstractSwitch.html#a961868dc45cc6cd7591bc56a8b823f5b',1,'mrw::model::AbstractSwitch::switchState()'],['../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1ebe5feb13b83d00b8ab19675c20c44d',1,'mrw::model::DoubleCrossSwitch::switchState()'],['../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a3268d5419954cdefe6d211c0556d0968',1,'mrw::model::RegularSwitch::switchState()']]],
   ['switchstate_96',['SwitchState',['../d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5a',1,'mrw::can']]],
   ['symbol_97',['Symbol',['../db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85',1,'mrw::model::Signal']]],
-  ['symbol_98',['symbol',['../db/d9c/classmrw_1_1model_1_1Signal.html#a59be634c6a68219c135f52231cbdd1dc',1,'mrw::model::Signal']]],
+  ['symbol_98',['symbol',['../db/d9c/classmrw_1_1model_1_1Signal.html#ab8141535df399e79b947b362e43ba64c',1,'mrw::model::Signal']]],
   ['syslogger_99',['SysLogger',['../d5/d0d/classmrw_1_1log_1_1SysLogger.html',1,'mrw::log::SysLogger'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a8b2e6b2ba28b29fd779f0d71b80124c4',1,'mrw::log::SysLogger::SysLogger()=delete'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a85fb0e0603943ccf11a0ded07690bd51',1,'mrw::log::SysLogger::SysLogger(const char *application)']]]
 ];
