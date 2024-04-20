@@ -11,7 +11,7 @@ using namespace mrw::log;
 
 LoggerService::LoggerService()
 {
-	Method::pattern();
+	Method::pattern(false);
 	default_handler = qInstallMessageHandler(log);
 }
 
@@ -38,8 +38,8 @@ void LoggerService::log(
 		return;
 	}
 
-	QByteArray   bytes = qFormatLogMessage(type, context, input).toLocal8Bit();
-	const char * msg   = bytes.constData();
+	const std::string & formatted = qFormatLogMessage(type, context, input).toStdString();
+	const char     *     msg      = formatted.c_str();
 
 	switch (type)
 	{

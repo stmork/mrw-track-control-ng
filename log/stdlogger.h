@@ -8,6 +8,8 @@
 #ifndef MRW_LOG_STDLOGGER_H
 #define MRW_LOG_STDLOGGER_H
 
+#include <cstdio>
+
 #include <log/loggerbase.h>
 
 namespace mrw::log
@@ -24,6 +26,18 @@ namespace mrw::log
 		virtual void warn(const char * message) const override;
 		virtual void critical(const char * message) const override;
 		virtual void fatal(const char * message) const override;
+
+	protected:
+		/**
+		 * The callback method for all other logging methods of StdLogger
+		 * classes. This is useful to write all messages into different
+		 * file handles.
+		 *
+		 * @param fd The FILE pointer to log into.
+		 * @param message The message to log.
+		 * @see FileLogger
+		 */
+		static void write(FILE * file, const char * message);
 	};
 }
 

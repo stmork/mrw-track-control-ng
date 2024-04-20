@@ -29,6 +29,8 @@ namespace mrw::util
 		const char  * method_name;
 
 	public:
+		static const QString TIME_STAMP_FORMAT;
+
 		/**
 		 * The constructor logs the entry of a method.
 		 *
@@ -45,8 +47,10 @@ namespace mrw::util
 		/**
 		 * This method sets the logging information to a unique pattern with
 		 * timestamp logging type and of course its message.
+		 *
+		 * @param use_time_stamp If true add a time stamp placeholder.
 		 */
-		static void pattern() noexcept;
+		static void pattern(const bool use_time_stamp = true) noexcept;
 
 		/**
 		 * This static template function acts as a default for lambda

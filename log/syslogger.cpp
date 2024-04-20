@@ -14,37 +14,37 @@ SysLogger::SysLogger(const char * application)
 	openlog(application, LOG_NDELAY, LOG_USER);
 }
 
-mrw::log::SysLogger::~SysLogger()
+SysLogger::~SysLogger()
 {
 	closelog();
 }
 
-void mrw::log::SysLogger::debug(const char * message) const
+void SysLogger::debug(const char * message) const
 {
 	write(LOG_DEBUG, message);
 }
 
-void mrw::log::SysLogger::info(const char * message) const
+void SysLogger::info(const char * message) const
 {
 	write(LOG_INFO, message);
 }
 
-void mrw::log::SysLogger::warn(const char * message) const
+void SysLogger::warn(const char * message) const
 {
 	write(LOG_WARNING, message);
 }
 
-void mrw::log::SysLogger::critical(const char * message) const
+void SysLogger::critical(const char * message) const
 {
 	write(LOG_ERR, message);
 }
 
-void mrw::log::SysLogger::fatal(const char * message) const
+void SysLogger::fatal(const char * message) const
 {
 	write(LOG_CRIT, message);
 }
 
-void mrw::log::SysLogger::write(
+void SysLogger::write(
 	const int    priority,
 	const char * message) const
 {

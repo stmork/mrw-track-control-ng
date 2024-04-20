@@ -21,6 +21,10 @@ FileLogger::~FileLogger()
 
 void FileLogger::write(const char * message) const
 {
+	const std::string & now = timeStamp().toStdString();
+
+	file.write(now.c_str());
+	file.write(" ");
 	file.write(message);
 	file.write("\n");
 	file.flush();

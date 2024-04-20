@@ -8,6 +8,8 @@
 #ifndef MRW_LOG_LOGGERBASE_H
 #define MRW_LOG_LOGGERBASE_H
 
+#include <QString>
+
 namespace mrw::log
 {
 	/**
@@ -58,6 +60,14 @@ namespace mrw::log
 		 * @param message The message to log.
 		 */
 		virtual void fatal(const char * message) const = 0;
+
+	protected:
+		/**
+		 * This method creates a time stamp of the actual date time for logging.
+		 *
+		 * @return The actual date time as QString.
+		 */
+		static QString timeStamp() noexcept;
 	};
 
 	/**

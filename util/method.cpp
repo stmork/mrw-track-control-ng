@@ -8,6 +8,8 @@
 
 using namespace mrw::util;
 
+const QString Method::TIME_STAMP_FORMAT("yyyy/MM/dd h:mm:ss.zzz");
+
 Method::Method(const char * method) : method_name(method)
 {
 	qDebug(">%s()", method_name);
@@ -19,13 +21,20 @@ Method::~Method()
 	qDebug("<%s() took %lld ms.", method_name, timer.elapsed());
 }
 
-void Method::pattern() noexcept
+void Method::pattern(const bool use_time_stamp) noexcept
 {
-	qSetMessagePattern(
-		"%{time yyyy/MM/dd h:mm:ss.zzz} "
+	QString format;
+
+	if (use_time_stamp)
+	{
+		format = "%{time " + TIME_STAMP_FORMAT + "} ";
+	}
+
+	format +=
 		"%{if-debug}D%{endif}"
 		"%{if-info}I%{endif}"
 		"%{if-warning}W%{endif}"
 		"%{if-critical}C%{endif}"
-		"%{if-fatal}F%{endif} - %{message}");
+		"%{if-fatal}F%{endif} - %{message}";
+	qSetMessagePattern(format);
 }
