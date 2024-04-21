@@ -25,5 +25,6 @@ var searchData=
   ['drawlock_22',['drawLock',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a0d0ce3c3da9295dbc9e4f6af9b698d2c',1,'mrw::ui::ControllerWidget']]],
   ['drawsheared_23',['drawSheared',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5ca6a93f56876076ff82e84d05266311',1,'mrw::ui::ControllerWidget']]],
   ['dump_24',['dump',['../d8/dde/classmrw_1_1util_1_1Batch.html#a80716793d4a9a190b33feea735f6c672',1,'mrw::util::Batch::dump()'],['../d7/dfb/classmrw_1_1model_1_1Route.html#a6520dd98269b079b43f9d94dd45fe469',1,'mrw::model::Route::dump()']]],
-  ['dumphandler_25',['DumpHandler',['../d7/dc8/classmrw_1_1util_1_1DumpHandler.html',1,'mrw::util::DumpHandler'],['../d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a9d787765518a5f04aaef46e86e9eee64',1,'mrw::util::DumpHandler::DumpHandler()']]]
+  ['dumphandler_25',['DumpHandler',['../d7/dc8/classmrw_1_1util_1_1DumpHandler.html',1,'mrw::util::DumpHandler'],['../d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a9d787765518a5f04aaef46e86e9eee64',1,'mrw::util::DumpHandler::DumpHandler()']]],
+  ['duration_26',['Duration',['../d2/d87/classmrw_1_1util_1_1Duration.html',1,'mrw::util::Duration'],['../d2/d87/classmrw_1_1util_1_1Duration.html#a409b732a06037bbefe417100f43467e3',1,'mrw::util::Duration::Duration()']]]
 ];

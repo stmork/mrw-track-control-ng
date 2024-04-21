@@ -9,7 +9,7 @@ var searchData=
   ['the_20mrw_3a_3autil_20namespace_6',['The mrw::util namespace',['../df/db2/md_util_2README.html',1,'']]],
   ['threshold_7',['threshold',['../d0/d3c/classmrw_1_1model_1_1Light.html#af3ab18d306698af87c9d18ac614998c5',1,'mrw::model::Light']]],
   ['time_8',['time',['../db/d03/namespacesc.html#a1bc542877409477b96abd9b10ac01a4c',1,'sc']]],
-  ['time_5fstamp_5fformat_9',['TIME_STAMP_FORMAT',['../d0/def/classmrw_1_1util_1_1Method.html#a98f7df97a38f20bbec3473051cd6411f',1,'mrw::util::Method']]],
+  ['time_5fstamp_5fformat_9',['TIME_STAMP_FORMAT',['../d2/d87/classmrw_1_1util_1_1Duration.html#a5d7d85ca337156a12663496c60ea7cdf',1,'mrw::util::Duration']]],
   ['timedinterface_10',['TimedInterface',['../d7/d75/classsc_1_1timer_1_1TimedInterface.html',1,'sc::timer']]],
   ['timerservice_11',['TimerService',['../dd/dbf/classmrw_1_1statechart_1_1TimerService.html',1,'mrw::statechart']]],
   ['timerserviceinterface_12',['TimerServiceInterface',['../df/d18/classsc_1_1timer_1_1TimerServiceInterface.html',1,'sc::timer']]],

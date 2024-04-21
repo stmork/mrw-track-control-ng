@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title="This template class implements the singleton pattern as a base class for real implementations." alt="" coords="5,5,165,31"/>
+<area shape="rect" id="Node000000" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="5,5,135,46"/>
+<area shape="rect" id="Node000001" href="$d5/d62/classmrw_1_1util_1_1Random.html" title="This singleton class provides secure random generation needed for crypto key generation." alt="" coords="183,13,306,39"/>
+<area shape="poly" id="edge65_Node000000_Node000001" title=" " alt="" coords="150,23,182,23,182,28,150,28"/>
 </map>
