@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
+#include <QDebug>
+
 #include <util/method.h>
 #include <util/stringutil.h>
 #include <can/commands.h>

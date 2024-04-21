@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
+#include <QDebug>
+
 #include "model/modelrailway.h"
 #include "model/signal.h"
 #include "model/switchmodulereference.h"

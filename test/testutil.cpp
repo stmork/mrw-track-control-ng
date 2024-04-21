@@ -97,7 +97,7 @@ public:
 
 TestUtil::TestUtil(QObject * parent) : QObject(parent)
 {
-	Method::pattern();
+	Duration::pattern();
 }
 
 void TestUtil::init()

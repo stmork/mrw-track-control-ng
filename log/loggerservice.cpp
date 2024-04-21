@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
-#include <util/method.h>
+#include <util/duration.h>
 #include <log/loggerservice.h>
 
 using namespace mrw::util;
@@ -11,7 +11,7 @@ using namespace mrw::log;
 
 LoggerService::LoggerService()
 {
-	Method::pattern(false);
+	Duration::pattern(false);
 	default_handler = qInstallMessageHandler(log);
 }
 

@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
+#include <QDebug>
+
 #include <can/mrwmessage.h>
 #include <util/method.h>
 #include <statecharts/timerservice.h>

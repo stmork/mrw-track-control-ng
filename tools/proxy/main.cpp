@@ -8,7 +8,7 @@
 #include <QDebug>
 #include <QTimer>
 
-#include <util/method.h>
+#include <util/duration.h>
 #include <util/termhandler.h>
 #include <can/mrwmessage.h>
 #include <can/mrwbusservice.h>
@@ -46,7 +46,7 @@ int main(int argc, char * argv[])
 {
 	QCoreApplication      app(argc, argv);
 
-	Method::pattern();
+	Duration::pattern();
 
 	CanBusProxyService    tcp_service("can0", "virtualcan");
 	CanBusProxyService    can_service("can0");

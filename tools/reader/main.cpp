@@ -5,7 +5,7 @@
 
 #include <QCoreApplication>
 
-#include <util/method.h>
+#include <util/duration.h>
 #include <model/modelrailway.h>
 #include <model/abstractswitch.h>
 #include <model/signal.h>
@@ -17,7 +17,7 @@ int main(int argc, char * argv[])
 {
 	QCoreApplication app(argc, argv);
 
-	Method::pattern();
+	Duration::pattern();
 	for (int i = 1; i < argc; i++)
 	{
 		ModelRailway model(argv[i]);

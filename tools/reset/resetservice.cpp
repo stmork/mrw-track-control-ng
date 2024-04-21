@@ -4,6 +4,7 @@
 //
 
 #include <QCoreApplication>
+#include <QDebug>
 
 #include "resetservice.h"
 

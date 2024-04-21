@@ -11,7 +11,6 @@
 #include <ostream>
 
 #include <QString>
-#include <QDebug>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 #	define SKIP_EMPTY_PARTS Qt::SkipEmptyParts

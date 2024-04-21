@@ -5,7 +5,7 @@
 
 #include <QCoreApplication>
 
-#include <util/method.h>
+#include <util/duration.h>
 #include <util/dumphandler.h>
 #include <util/termhandler.h>
 
@@ -18,7 +18,7 @@ int main(int argc, char * argv[])
 {
 	QCoreApplication      app(argc, argv);
 
-	Method::pattern();
+	Duration::pattern();
 
 	TermHandler           term_handler;
 	ModelRepository       repo(ModelRepository::proposeModelName());

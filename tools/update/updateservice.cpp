@@ -7,6 +7,7 @@
 
 #include <QCoreApplication>
 #include <QFile>
+#include <QTextStream>
 
 #include <statecharts/timerservice.h>
 

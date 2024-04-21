@@ -5,6 +5,8 @@
 
 #include <stdexcept>
 
+#include <QDebug>
+
 #include <model/modelrailway.h>
 #include <model/regularswitch.h>
 

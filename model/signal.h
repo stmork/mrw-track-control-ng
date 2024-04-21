@@ -8,8 +8,6 @@
 #ifndef MRW_MODEL_SIGNAL_H
 #define MRW_MODEL_SIGNAL_H
 
-#include <QPoint>
-
 #include <can/commands.h>
 #include <util/constantenumerator.h>
 #include <model/module.h>

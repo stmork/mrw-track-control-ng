@@ -8,7 +8,6 @@
 #ifndef MRW_UTIL_CLOCKSERVICE_H
 #define MRW_UTIL_CLOCKSERVICE_H
 
-#include <QObject>
 #include <QTimer>
 
 #include <util/singleton.h>

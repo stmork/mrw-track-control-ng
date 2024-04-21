@@ -3,25 +3,15 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
-#include <cinttypes>
-#include "util/method.h"
+#include <QDebug>
+
+#include "util/duration.h"
 
 using namespace mrw::util;
 
-const QString Method::TIME_STAMP_FORMAT("yyyy/MM/dd h:mm:ss.zzz");
+const QString Duration::TIME_STAMP_FORMAT("yyyy/MM/dd h:mm:ss.zzz");
 
-Method::Method(const char * method) : method_name(method)
-{
-	qDebug(">%s()", method_name);
-	timer.start();
-}
-
-Method::~Method()
-{
-	qDebug("<%s() took %lld ms.", method_name, timer.elapsed());
-}
-
-void Method::pattern(const bool use_time_stamp) noexcept
+void Duration::pattern(const bool use_time_stamp) noexcept
 {
 	QString format;
 
@@ -37,4 +27,15 @@ void Method::pattern(const bool use_time_stamp) noexcept
 		"%{if-critical}C%{endif}"
 		"%{if-fatal}F%{endif} - %{message}";
 	qSetMessagePattern(format);
+}
+
+Duration::Duration(const char * naming) : name(naming)
+{
+	qDebug(">%s()", name);
+	timer.start();
+}
+
+Duration::~Duration()
+{
+	qDebug("<%s() took %lld ms.", name, timer.elapsed());
 }

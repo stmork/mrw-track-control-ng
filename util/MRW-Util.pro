@@ -11,10 +11,10 @@ include(../common.pri)
 SOURCES += \
 	batch.cpp \
 	batchparticipant.cpp \
+	duration.cpp \
 	globalbatch.cpp \
 	clockservice.cpp \
 	dumphandler.cpp \
-	method.cpp \
 	properties.cpp \
 	random.cpp \
 	settings.cpp \
@@ -25,6 +25,7 @@ SOURCES += \
 HEADERS += \
 	batch.h \
 	batchparticipant.h \
+	duration.h \
 	globalbatch.h \
 	clockservice.h \
 	constantenumerator.h \

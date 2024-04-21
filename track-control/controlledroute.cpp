@@ -694,10 +694,7 @@ void ControlledRoute::enableSections()
 {
 	__METHOD__;
 
-	for (
-		auto it = sections.rbegin();
-		it != sections.rend();
-		++it)
+	for (auto it = sections.rbegin(); it != sections.rend(); ++it)
 	{
 		SectionController * controller =
 			ControllerRegistry::instance().find<SectionController>(*it);

@@ -11,7 +11,7 @@
 #include <unistd.h>
 
 #include <can/cansettings.h>
-#include <util/method.h>
+#include <util/duration.h>
 #include <util/termhandler.h>
 
 #include "resetservice.h"
@@ -23,7 +23,7 @@ int main(int argc, char * argv[])
 {
 	QCoreApplication app(argc, argv);
 
-	Method::pattern();
+	Duration::pattern();
 
 	TermHandler      term_handler;
 	CanSettings      settings;

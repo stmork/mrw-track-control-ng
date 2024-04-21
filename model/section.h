@@ -229,7 +229,7 @@ namespace mrw::model
 		 * @param guard A labmda to fine select if the type T should added to
 		 * the result vector.
 		 */
-		template <class T> void parts(
+		template <class T> constexpr void parts(
 			std::vector<T *> & result,
 			std::function<bool(const T * part)> guard = &mrw::util::Method::always<T>) const noexcept
 		{

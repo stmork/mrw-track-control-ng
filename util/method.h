@@ -8,13 +8,12 @@
 #ifndef MRW_UTIL_METHOD_H
 #define MRW_UTIL_METHOD_H
 
-#include <QDebug>
-#include <QElapsedTimer>
+#include <util/duration.h>
 
 namespace mrw::util
 {
 
-#define __METHOD__ mrw::util::Method __method__(__FUNCTION__)
+#	define __METHOD__ mrw::util::Duration __method__(__FUNCTION__)
 
 	/**
 	 * This convenience class may be used for logging the entry, exit and
@@ -25,33 +24,7 @@ namespace mrw::util
 	 */
 	class Method
 	{
-		QElapsedTimer timer;
-		const char  * method_name;
-
 	public:
-		static const QString TIME_STAMP_FORMAT;
-
-		/**
-		 * The constructor logs the entry of a method.
-		 *
-		 * @param method_name The methods name. Use the \c __FUNCTION__ macro here.
-		 */
-		explicit Method(const char * method_name);
-
-		/**
-		 * The destructor logs the exit of a method and the time spent inside
-		 * the method.
-		 */
-		virtual ~Method();
-
-		/**
-		 * This method sets the logging information to a unique pattern with
-		 * timestamp logging type and of course its message.
-		 *
-		 * @param use_time_stamp If true add a time stamp placeholder.
-		 */
-		static void pattern(const bool use_time_stamp = true) noexcept;
-
 		/**
 		 * This static template function acts as a default for lambda
 		 * callbacks which always returns true on a specific given type T.
@@ -59,7 +32,9 @@ namespace mrw::util
 		 * @param ptr Never used.
 		 * @returns Always true regarding to input.
 		 */
-		template<class T> static bool always(const T * ptr) noexcept
+		template<class T>
+		[[nodiscard]]
+		static constexpr bool always(const T * ptr) noexcept
 		{
 			(void)ptr;
 
@@ -73,7 +48,9 @@ namespace mrw::util
 		 * @param ptr Never used.
 		 * @returns Always false regarding to input.
 		 */
-		template<class T> static bool never(const T * ptr) noexcept
+		template<class T>
+		[[nodiscard]]
+		static constexpr bool never(const T * ptr) noexcept
 		{
 			(void)ptr;
 
@@ -87,7 +64,7 @@ namespace mrw::util
 		 *
 		 * @param ptr The pointer which is not used.
 		 */
-		template<class T> static void noop(const T * ptr)
+		template<class T> static constexpr void noop(const T * ptr)
 		{
 			(void)ptr;
 		}

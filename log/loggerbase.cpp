@@ -5,7 +5,7 @@
 
 #include <QDateTime>
 
-#include <util/method.h>
+#include <util/duration.h>
 #include <log/loggerservice.h>
 #include <log/loggerbase.h>
 
@@ -21,7 +21,7 @@ QString LoggerBase::timeStamp() noexcept
 {
 	QDateTime now = QDateTime::currentDateTime();
 
-	return now.toString(Method::TIME_STAMP_FORMAT);
+	return now.toString(Duration::TIME_STAMP_FORMAT);
 }
 
 void UnifiedLogger::debug(const char * message) const
