@@ -5,6 +5,7 @@
 
 VERSION          = 2.1
 QT              += core xml serialbus
+DEFINES         += QT_DISABLE_DEPRECATED_UP_TO=0x050f00
 
 include (flags.pri)
 
