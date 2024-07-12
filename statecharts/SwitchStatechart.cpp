@@ -468,6 +468,13 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Locked;
 		}
 
+		/* 'mrw.statechart.SwitchStatechart.main_region.Operating.operating.Turning' enter sequence for state Turning */
+		void SwitchStatechart::enseq_main_region_Operating_operating_Turning_mrw_statechart_SwitchStatechart_main_region_Operating_operating_Turning()
+		{
+			/* 'mrw.statechart.SwitchStatechart.main_region.Operating.operating.Turning' enter sequence for state Turning */
+			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning;
+		}
+
 		/* 'default' enter sequence for state Turn Right */
 		void SwitchStatechart::enseq_main_region_Operating_operating_Turning_Turning_process_Turn_Right_default()
 		{
@@ -533,20 +540,21 @@ namespace mrw
 		{
 			/* Default exit sequence for state Operating */
 			exseq_main_region_Operating_operating();
+			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::NO_STATE;
 		}
 
 		/* Default exit sequence for state Unlocked */
 		void SwitchStatechart::exseq_main_region_Operating_operating_Unlocked()
 		{
 			/* Default exit sequence for state Unlocked */
-			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating;
 		}
 
 		/* Default exit sequence for state Locked */
 		void SwitchStatechart::exseq_main_region_Operating_operating_Locked()
 		{
 			/* Default exit sequence for state Locked */
-			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating;
 		}
 
 		/* Default exit sequence for state Turning */
@@ -554,6 +562,7 @@ namespace mrw
 		{
 			/* Default exit sequence for state Turning */
 			exseq_main_region_Operating_operating_Turning_Turning_process();
+			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating;
 			exact_main_region_Operating_operating_Turning();
 		}
 
@@ -561,21 +570,21 @@ namespace mrw
 		void SwitchStatechart::exseq_main_region_Operating_operating_Turning_Turning_process_Turn_Right()
 		{
 			/* Default exit sequence for state Turn Right */
-			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning;
 		}
 
 		/* Default exit sequence for state Turn Left */
 		void SwitchStatechart::exseq_main_region_Operating_operating_Turning_Turning_process_Turn_Left()
 		{
 			/* Default exit sequence for state Turn Left */
-			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning;
 		}
 
 		/* Default exit sequence for state Pending */
 		void SwitchStatechart::exseq_main_region_Operating_operating_Turning_Turning_process_Pending()
 		{
 			/* Default exit sequence for state Pending */
-			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning;
 		}
 
 		/* Default exit sequence for state Failed */
@@ -602,6 +611,11 @@ namespace mrw
 					exseq_main_region_Init();
 					break;
 				}
+			case mrw::statechart::SwitchStatechart::State::main_region_Operating :
+				{
+					exseq_main_region_Operating();
+					break;
+				}
 			case mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Unlocked :
 				{
 					exseq_main_region_Operating_operating_Unlocked();
@@ -610,6 +624,11 @@ namespace mrw
 			case mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Locked :
 				{
 					exseq_main_region_Operating_operating_Locked();
+					break;
+				}
+			case mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning :
+				{
+					exseq_main_region_Operating_operating_Turning();
 					break;
 				}
 			case mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Right :
@@ -656,6 +675,11 @@ namespace mrw
 			case mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Locked :
 				{
 					exseq_main_region_Operating_operating_Locked();
+					break;
+				}
+			case mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning :
+				{
+					exseq_main_region_Operating_operating_Turning();
 					break;
 				}
 			case mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Right :
@@ -868,6 +892,7 @@ namespace mrw
 				if (turn_raised)
 				{
 					exseq_main_region_Operating_operating_Unlocked();
+					enseq_main_region_Operating_operating_Turning_mrw_statechart_SwitchStatechart_main_region_Operating_operating_Turning();
 					enact_main_region_Operating_operating_Turning();
 					react_main_region_Operating_operating_Turning_Turning_process__choice_0();
 					main_region_Operating_react(0);
@@ -1146,6 +1171,7 @@ namespace mrw
 			isExecuting = true;
 			/* Default exit sequence for statechart SwitchStatechart */
 			exseq_main_region();
+			stateConfVector[0] = mrw::statechart::SwitchStatechart::State::NO_STATE;
 			isExecuting = false;
 		}
 
@@ -1154,6 +1180,7 @@ namespace mrw
 		{
 			runCycle();
 		}
+
 
 	}
 }

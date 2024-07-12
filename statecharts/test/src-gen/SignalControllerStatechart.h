@@ -226,6 +226,7 @@ namespace mrw
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent() override;
+
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -365,6 +366,7 @@ namespace mrw
 			void enseq_main_region_Operating_Processing_Shunting_State_Processing_Idle_default();
 			void enseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Extend_default();
 			void enseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Stop_default();
+			void enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_mrw_statechart_SignalControllerStatechart_main_region_Operating_Processing_Tour_State_Processing_Waiting();
 			void enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Main_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Distant_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Off_Distant_default();
@@ -372,6 +374,7 @@ namespace mrw
 			void enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Shunt_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Extend_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Processing_Idle_default();
+			void enseq_main_region_Operating_Processing_Pending_mrw_statechart_SignalControllerStatechart_main_region_Operating_Processing_Pending();
 			void enseq_main_region_Operating_Processing_Pending_Pending_Go_Main_default();
 			void enseq_main_region_Operating_Processing_Pending_Pending_Go_Distant_default();
 			void enseq_main_region_Operating_Processing_Pending_Pending_Go_Shunt_default();

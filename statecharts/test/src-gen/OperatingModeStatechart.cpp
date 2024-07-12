@@ -683,20 +683,21 @@ namespace mrw
 		{
 			/* Default exit sequence for state Running */
 			exseq_main_region_Running_operating();
+			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::NO_STATE;
 		}
 
 		/* Default exit sequence for state Failed */
 		void OperatingModeStatechart::exseq_main_region_Running_operating_Failed()
 		{
 			/* Default exit sequence for state Failed */
-			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::main_region_Running;
 		}
 
 		/* Default exit sequence for state Prepare Bus */
 		void OperatingModeStatechart::exseq_main_region_Running_operating_Prepare_Bus()
 		{
 			/* Default exit sequence for state Prepare Bus */
-			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::main_region_Running;
 			exact_main_region_Running_operating_Prepare_Bus();
 		}
 
@@ -704,7 +705,7 @@ namespace mrw
 		void OperatingModeStatechart::exseq_main_region_Running_operating_Init()
 		{
 			/* Default exit sequence for state Init */
-			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::main_region_Running;
 			exact_main_region_Running_operating_Init();
 		}
 
@@ -712,7 +713,7 @@ namespace mrw
 		void OperatingModeStatechart::exseq_main_region_Running_operating_Operating()
 		{
 			/* Default exit sequence for state Operating */
-			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::main_region_Running;
 			exact_main_region_Running_operating_Operating();
 		}
 
@@ -720,7 +721,7 @@ namespace mrw
 		void OperatingModeStatechart::exseq_main_region_Running_operating_Editing()
 		{
 			/* Default exit sequence for state Editing */
-			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::main_region_Running;
 			exact_main_region_Running_operating_Editing();
 		}
 
@@ -728,7 +729,7 @@ namespace mrw
 		void OperatingModeStatechart::exseq_main_region_Running_operating_Disable()
 		{
 			/* Default exit sequence for state Disable */
-			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::main_region_Running;
 		}
 
 		/* Default exit sequence for state Manual */
@@ -761,6 +762,11 @@ namespace mrw
 			case mrw::statechart::OperatingModeStatechart::State::main_region__final_ :
 				{
 					exseq_main_region__final_();
+					break;
+				}
+			case mrw::statechart::OperatingModeStatechart::State::main_region_Running :
+				{
+					exseq_main_region_Running();
 					break;
 				}
 			case mrw::statechart::OperatingModeStatechart::State::main_region_Running_operating_Failed :
@@ -1330,6 +1336,7 @@ namespace mrw
 			isExecuting = true;
 			/* Default exit sequence for statechart OperatingModeStatechart */
 			exseq_main_region();
+			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::NO_STATE;
 			isExecuting = false;
 		}
 
@@ -1338,6 +1345,7 @@ namespace mrw
 		{
 			runCycle();
 		}
+
 
 	}
 }

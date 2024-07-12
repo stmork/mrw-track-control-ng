@@ -932,6 +932,9 @@ namespace mrw
 		{
 			/* Default exit sequence for state Init */
 			exseq_main_region_Init_Init_Process();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[1] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVectorPosition = 1;
 			exact_main_region_Init();
 		}
 
@@ -941,13 +944,16 @@ namespace mrw
 			/* Default exit sequence for state Requesting */
 			exseq_main_region_Init_Init_Process_Requesting_relais();
 			exseq_main_region_Init_Init_Process_Requesting_state();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Init;
+			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Init;
+			stateConfVectorPosition = 1;
 		}
 
 		/* Default exit sequence for state Relay */
 		void SectionStatechart::exseq_main_region_Init_Init_Process_Requesting_relais_Relay()
 		{
 			/* Default exit sequence for state Relay */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting;
 			stateConfVectorPosition = 0;
 		}
 
@@ -955,7 +961,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Init_Init_Process_Requesting_relais_Wait()
 		{
 			/* Default exit sequence for state Wait */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting;
 			stateConfVectorPosition = 0;
 		}
 
@@ -963,7 +969,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Init_Init_Process_Requesting_state_Occupation()
 		{
 			/* Default exit sequence for state Occupation */
-			stateConfVector[1] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting;
 			stateConfVectorPosition = 1;
 		}
 
@@ -971,7 +977,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Init_Init_Process_Requesting_state_Wait()
 		{
 			/* Default exit sequence for state Wait */
-			stateConfVector[1] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting;
 			stateConfVectorPosition = 1;
 		}
 
@@ -980,13 +986,16 @@ namespace mrw
 		{
 			/* Default exit sequence for state Operating */
 			exseq_main_region_Operating_Processing();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[1] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVectorPosition = 1;
 		}
 
 		/* Default exit sequence for state Unlocked */
 		void SectionStatechart::exseq_main_region_Operating_Processing_Unlocked()
 		{
 			/* Default exit sequence for state Unlocked */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating;
 			stateConfVectorPosition = 0;
 		}
 
@@ -996,6 +1005,9 @@ namespace mrw
 			/* Default exit sequence for state Locked */
 			exseq_main_region_Operating_Processing_Locked_Route_active();
 			exseq_main_region_Operating_Processing_Locked_Occupation();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating;
+			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Operating;
+			stateConfVectorPosition = 1;
 			exact_main_region_Operating_Processing_Locked();
 		}
 
@@ -1003,7 +1015,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Route_active_Enabled()
 		{
 			/* Default exit sequence for state Enabled */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked;
 			stateConfVectorPosition = 0;
 		}
 
@@ -1011,7 +1023,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Route_active_Passed()
 		{
 			/* Default exit sequence for state Passed */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked;
 			stateConfVectorPosition = 0;
 		}
 
@@ -1020,6 +1032,8 @@ namespace mrw
 		{
 			/* Default exit sequence for state Waiting */
 			exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked;
+			stateConfVectorPosition = 0;
 			exact_main_region_Operating_Processing_Locked_Route_active_Waiting();
 		}
 
@@ -1027,7 +1041,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left()
 		{
 			/* Default exit sequence for state Left */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting;
 			stateConfVectorPosition = 0;
 		}
 
@@ -1035,7 +1049,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling()
 		{
 			/* Default exit sequence for state Disabling */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting;
 			stateConfVectorPosition = 0;
 		}
 
@@ -1043,7 +1057,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling()
 		{
 			/* Default exit sequence for state Enabling */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting;
 			stateConfVectorPosition = 0;
 		}
 
@@ -1051,7 +1065,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Route_active_Disabled()
 		{
 			/* Default exit sequence for state Disabled */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked;
 			stateConfVectorPosition = 0;
 		}
 
@@ -1059,7 +1073,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock()
 		{
 			/* Default exit sequence for state Wait for Unlock */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked;
 			stateConfVectorPosition = 0;
 		}
 
@@ -1067,7 +1081,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Occupation_Free()
 		{
 			/* Default exit sequence for state Free */
-			stateConfVector[1] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked;
 			stateConfVectorPosition = 1;
 		}
 
@@ -1075,7 +1089,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Occupation_Occupied()
 		{
 			/* Default exit sequence for state Occupied */
-			stateConfVector[1] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked;
 			stateConfVectorPosition = 1;
 		}
 
@@ -1083,7 +1097,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Occupation__final_()
 		{
 			/* Default exit sequence for final state. */
-			stateConfVector[1] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked;
 			stateConfVectorPosition = 1;
 		}
 
@@ -1091,7 +1105,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating_Processing_Locked_Occupation_Next_Reached()
 		{
 			/* Default exit sequence for state Next Reached */
-			stateConfVector[1] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked;
 			stateConfVectorPosition = 1;
 		}
 
@@ -1100,6 +1114,8 @@ namespace mrw
 		{
 			/* Default exit sequence for state Pending */
 			exseq_main_region_Operating_Processing_Pending_Relais_processing();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating;
+			stateConfVectorPosition = 0;
 			exact_main_region_Operating_Processing_Pending();
 		}
 
@@ -1107,7 +1123,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating_Processing_Pending_Relais_processing_Enabling()
 		{
 			/* Default exit sequence for state Enabling */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending;
 			stateConfVectorPosition = 0;
 		}
 
@@ -1115,7 +1131,7 @@ namespace mrw
 		void SectionStatechart::exseq_main_region_Operating_Processing_Pending_Relais_processing_Disabling()
 		{
 			/* Default exit sequence for state Disabling */
-			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending;
 			stateConfVectorPosition = 0;
 		}
 
@@ -1167,6 +1183,11 @@ namespace mrw
 					exseq_main_region_Operating_Processing_Locked_Route_active_Passed();
 					break;
 				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting :
+				{
+					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting();
+					break;
+				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left();
@@ -1193,6 +1214,11 @@ namespace mrw
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending :
+				{
+					exseq_main_region_Operating_Processing_Pending();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling :
@@ -1374,6 +1400,11 @@ namespace mrw
 					exseq_main_region_Operating_Processing_Locked_Route_active_Passed();
 					break;
 				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting :
+				{
+					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting();
+					break;
+				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left();
@@ -1400,6 +1431,11 @@ namespace mrw
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending :
+				{
+					exseq_main_region_Operating_Processing_Pending();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling :
@@ -1466,6 +1502,11 @@ namespace mrw
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Passed :
 				{
 					exseq_main_region_Operating_Processing_Locked_Route_active_Passed();
+					break;
+				}
+			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting :
+				{
+					exseq_main_region_Operating_Processing_Locked_Route_active_Waiting();
 					break;
 				}
 			case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left :
@@ -2453,6 +2494,9 @@ namespace mrw
 			isExecuting = true;
 			/* Default exit sequence for statechart SectionStatechart */
 			exseq_main_region();
+			stateConfVector[0] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVector[1] = mrw::statechart::SectionStatechart::State::NO_STATE;
+			stateConfVectorPosition = 1;
 			isExecuting = false;
 		}
 
@@ -2461,6 +2505,7 @@ namespace mrw
 		{
 			runCycle();
 		}
+
 
 	}
 }

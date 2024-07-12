@@ -943,15 +943,24 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		exit
 		assert !is_active
 
+ 		initial()
+ 		raise completedDistant
+ 		raise completedMain
+ 		raise completedShunt
+		exit
+		assert !is_active
+
 		startVersion1()
+ 		raise completedDistant
+ 		raise completedMain
+ 		raise completedShunt
 		exit
 		assert !is_active
 
 		startVersion2()
-		exit
-		assert !is_active
-
-		initial()
+ 		raise completedDistant
+ 		raise completedMain
+ 		raise completedShunt
 		exit
 		assert !is_active
 
@@ -1050,10 +1059,9 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		failedShunting
 		exit
 		assert !is_active
-/*
+
 		disableTourCombinedForm()
 		exit
 		assert !is_active
-*/
 	}
 }

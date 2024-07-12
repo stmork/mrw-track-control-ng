@@ -38,6 +38,7 @@ namespace
 	void disableTourCombined();
 	void disableTourCombinedCompleted();
 	void disableTourCombinedLight();
+	void disableTourCombinedForm();
 	void disableShunting();
 	void disableShuntingCompleted();
 	void extendTour();
@@ -1355,7 +1356,7 @@ namespace
 	{
 		disableTourCombinedLight();
 	}
-	TEST_F(SignalControllerTest, disableTourCombinedForm)
+	void disableTourCombinedForm()
 	{
 		disableTourCombinedCompleted();
 
@@ -1373,6 +1374,10 @@ namespace
 
 		unlockedState();
 
+	}
+	TEST_F(SignalControllerTest, disableTourCombinedForm)
+	{
+		disableTourCombinedForm();
 	}
 	void disableShunting()
 	{
@@ -1722,7 +1727,25 @@ namespace
 
 		EXPECT_TRUE(!statechart->isActive());
 
+		initial();
+
+		statechart->raiseCompletedDistant();
+
+		statechart->raiseCompletedMain();
+
+		statechart->raiseCompletedShunt();
+
+		statechart->exit();
+
+		EXPECT_TRUE(!statechart->isActive());
+
 		startVersion1();
+
+		statechart->raiseCompletedDistant();
+
+		statechart->raiseCompletedMain();
+
+		statechart->raiseCompletedShunt();
 
 		statechart->exit();
 
@@ -1730,11 +1753,11 @@ namespace
 
 		startVersion2();
 
-		statechart->exit();
+		statechart->raiseCompletedDistant();
 
-		EXPECT_TRUE(!statechart->isActive());
+		statechart->raiseCompletedMain();
 
-		initial();
+		statechart->raiseCompletedShunt();
 
 		statechart->exit();
 
@@ -1879,6 +1902,12 @@ namespace
 		EXPECT_TRUE(!statechart->isActive());
 
 		failedShunting();
+
+		statechart->exit();
+
+		EXPECT_TRUE(!statechart->isActive());
+
+		disableTourCombinedForm();
 
 		statechart->exit();
 

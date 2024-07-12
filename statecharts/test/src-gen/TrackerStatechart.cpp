@@ -373,13 +373,14 @@ namespace mrw
 		{
 			/* Default exit sequence for state Driving */
 			exseq_main_region_Driving_Tracking();
+			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::NO_STATE;
 		}
 
 		/* Default exit sequence for state First */
 		void TrackerStatechart::exseq_main_region_Driving_Tracking_First()
 		{
 			/* Default exit sequence for state First */
-			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::main_region_Driving;
 			exact_main_region_Driving_Tracking_First();
 		}
 
@@ -387,7 +388,7 @@ namespace mrw
 		void TrackerStatechart::exseq_main_region_Driving_Tracking_Occupy()
 		{
 			/* Default exit sequence for state Occupy */
-			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::main_region_Driving;
 			exact_main_region_Driving_Tracking_Occupy();
 		}
 
@@ -395,7 +396,7 @@ namespace mrw
 		void TrackerStatechart::exseq_main_region_Driving_Tracking_Free()
 		{
 			/* Default exit sequence for state Free */
-			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::main_region_Driving;
 			exact_main_region_Driving_Tracking_Free();
 		}
 
@@ -416,6 +417,11 @@ namespace mrw
 			case mrw::statechart::TrackerStatechart::State::main_region_Preparing :
 				{
 					exseq_main_region_Preparing();
+					break;
+				}
+			case mrw::statechart::TrackerStatechart::State::main_region_Driving :
+				{
+					exseq_main_region_Driving();
 					break;
 				}
 			case mrw::statechart::TrackerStatechart::State::main_region_Driving_Tracking_First :
@@ -748,6 +754,7 @@ namespace mrw
 			isExecuting = true;
 			/* Default exit sequence for statechart TrackerStatechart */
 			exseq_main_region();
+			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::NO_STATE;
 			isExecuting = false;
 		}
 
@@ -756,6 +763,7 @@ namespace mrw
 		{
 			runCycle();
 		}
+
 
 	}
 }

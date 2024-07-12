@@ -404,6 +404,7 @@ namespace mrw
 		{
 			/* Default exit sequence for state Turning */
 			exseq_main_region_Turning_Turn_processing();
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
 			exact_main_region_Turning();
 		}
 
@@ -411,14 +412,14 @@ namespace mrw
 		void SignalStatechart::exseq_main_region_Turning_Turn_processing_Pending()
 		{
 			/* Default exit sequence for state Pending */
-			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Turning;
 		}
 
 		/* Default exit sequence for state Send */
 		void SignalStatechart::exseq_main_region_Turning_Turn_processing_Send()
 		{
 			/* Default exit sequence for state Send */
-			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Turning;
 		}
 
 		/* Default exit sequence for state Fail */
@@ -438,6 +439,11 @@ namespace mrw
 			case mrw::statechart::SignalStatechart::State::main_region_Idle :
 				{
 					exseq_main_region_Idle();
+					break;
+				}
+			case mrw::statechart::SignalStatechart::State::main_region_Turning :
+				{
+					exseq_main_region_Turning();
 					break;
 				}
 			case mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Pending :
@@ -764,6 +770,7 @@ namespace mrw
 			isExecuting = true;
 			/* Default exit sequence for statechart SignalStatechart */
 			exseq_main_region();
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
 			isExecuting = false;
 		}
 
@@ -772,6 +779,7 @@ namespace mrw
 		{
 			runCycle();
 		}
+
 
 	}
 }

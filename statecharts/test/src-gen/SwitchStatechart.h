@@ -166,6 +166,7 @@ namespace mrw
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent() override;
+
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -267,6 +268,7 @@ namespace mrw
 			void enseq_main_region_Operating_default();
 			void enseq_main_region_Operating_operating_Unlocked_default();
 			void enseq_main_region_Operating_operating_Locked_default();
+			void enseq_main_region_Operating_operating_Turning_mrw_statechart_SwitchStatechart_main_region_Operating_operating_Turning();
 			void enseq_main_region_Operating_operating_Turning_Turning_process_Turn_Right_default();
 			void enseq_main_region_Operating_operating_Turning_Turning_process_Turn_Left_default();
 			void enseq_main_region_Operating_operating_Turning_Turning_process_Pending_default();

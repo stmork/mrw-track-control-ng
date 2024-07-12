@@ -663,6 +663,7 @@ namespace mrw
 			isExecuting = true;
 			/* Default exit sequence for statechart ConfigStatechart */
 			exseq_main_region();
+			stateConfVector[0] = mrw::statechart::ConfigStatechart::State::NO_STATE;
 			isExecuting = false;
 		}
 
@@ -671,6 +672,7 @@ namespace mrw
 		{
 			runCycle();
 		}
+
 
 	}
 }
