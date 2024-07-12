@@ -14,12 +14,12 @@
 <area shape="poly" id="edge77_Node000001_Node000010" title=" " alt="" coords="238,159,312,189,344,200,343,205,310,194,236,164"/>
 <area shape="rect" id="Node000011" href="$d6/da1/classmrw_1_1ui_1_1StationWidget.html" title="The StationWidget displays the region title." alt="" coords="320,252,469,278"/>
 <area shape="poly" id="edge78_Node000001_Node000011" title=" " alt="" coords="219,164,260,202,312,239,337,249,335,254,310,243,257,206,215,168"/>
-<area shape="rect" id="Node000006" href="$d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html" title="This class intends to draw all states of a mrw::model::DoubleCrossSwitch which includes:" alt="" coords="530,63,713,104"/>
-<area shape="poly" id="edge73_Node000005_Node000006" title=" " alt="" coords="461,146,476,140,500,127,524,113,552,102,554,107,526,118,503,131,478,145,463,151"/>
-<area shape="rect" id="Node000007" href="$dc/d9b/classmrw_1_1ui_1_1RailWidget.html" title="The RailWidget displays a simple mrw::model::Rail without any active part like switches or signals." alt="" coords="556,128,687,154"/>
-<area shape="poly" id="edge74_Node000005_Node000007" title=" " alt="" coords="491,153,555,145,556,151,491,158"/>
-<area shape="rect" id="Node000008" href="$d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html" title="This class intends to draw all states of a mrw::model::RegularSwitch which includes:" alt="" coords="525,177,718,203"/>
-<area shape="poly" id="edge75_Node000005_Node000008" title=" " alt="" coords="491,174,525,177,525,183,491,179"/>
-<area shape="rect" id="Node000009" href="$d8/df9/classmrw_1_1ui_1_1SignalWidget.html" title="This class intends to draw all states of a combination of mrw::model::Signal instances." alt="" coords="549,227,694,252"/>
-<area shape="poly" id="edge76_Node000005_Node000009" title=" " alt="" coords="462,182,478,188,503,201,526,213,559,224,557,229,524,218,500,205,476,193,461,187"/>
+<area shape="rect" id="Node000006" href="$d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html" title="This class intends to draw all states of a mrw::model::DoubleCrossSwitch which includes:" alt="" coords="530,65,713,105"/>
+<area shape="poly" id="edge73_Node000005_Node000006" title=" " alt="" coords="461,146,476,140,524,114,553,103,555,108,526,119,478,145,462,151"/>
+<area shape="rect" id="Node000007" href="$dc/d9b/classmrw_1_1ui_1_1RailWidget.html" title="The RailWidget displays a simple mrw::model::Rail without any active part like switches or signals." alt="" coords="556,129,687,155"/>
+<area shape="poly" id="edge74_Node000005_Node000007" title=" " alt="" coords="491,153,555,146,556,152,491,159"/>
+<area shape="rect" id="Node000008" href="$d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html" title="This class intends to draw all states of a mrw::model::RegularSwitch which includes:" alt="" coords="525,179,718,204"/>
+<area shape="poly" id="edge75_Node000005_Node000008" title=" " alt="" coords="491,174,525,178,525,183,491,180"/>
+<area shape="rect" id="Node000009" href="$d8/df9/classmrw_1_1ui_1_1SignalWidget.html" title="This class intends to draw all states of a combination of mrw::model::Signal instances." alt="" coords="549,228,694,254"/>
+<area shape="poly" id="edge76_Node000005_Node000009" title=" " alt="" coords="463,182,478,188,503,201,526,214,558,225,556,230,524,219,500,206,476,193,461,187"/>
 </map>

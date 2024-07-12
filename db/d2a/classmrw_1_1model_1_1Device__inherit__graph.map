@@ -14,8 +14,8 @@
 <area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="377,160,409,156,410,162,378,165"/>
 <area shape="rect" id="Node000010" href="$d4/d8a/classmrw_1_1model_1_1FormSignal.html" title="This class represents the handling of several form signals." alt="" coords="422,185,581,211"/>
 <area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="378,182,421,187,421,192,377,188"/>
-<area shape="rect" id="Node000008" href="$df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html" title="This RailPart represents a double cross switch with four connectors." alt="" coords="640,111,848,136"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="608,135,640,132,640,137,608,140"/>
-<area shape="rect" id="Node000009" href="$d5/d3b/classmrw_1_1model_1_1RegularSwitch.html" title="This class represents a simple switch which divides a rail into two rails." alt="" coords="655,160,833,186"/>
-<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="608,157,655,161,654,167,608,162"/>
+<area shape="rect" id="Node000008" href="$df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html" title="This RailPart represents a double cross switch with four connectors." alt="" coords="640,112,848,138"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="608,136,640,132,640,138,608,141"/>
+<area shape="rect" id="Node000009" href="$d5/d3b/classmrw_1_1model_1_1RegularSwitch.html" title="This class represents a simple switch which divides a rail into two rails." alt="" coords="655,161,833,187"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="608,157,655,162,654,168,608,163"/>
 </map>
