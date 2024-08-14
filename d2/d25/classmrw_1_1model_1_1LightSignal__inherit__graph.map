@@ -1,6 +1,6 @@
 <map id="mrw::model::LightSignal" name="mrw::model::LightSignal">
 <area shape="rect" id="Node000001" title="This class represents the handling of several light signals." alt="" coords="181,226,340,252"/>
-<area shape="rect" id="Node000002" href="$db/d9c/classmrw_1_1model_1_1Signal.html" title="This class represents all Signal variants." alt="" coords="119,153,248,178"/>
+<area shape="rect" id="Node000002" href="$db/d9c/classmrw_1_1model_1_1Signal.html" title="This class represents all Signal variants." alt="" coords="118,153,248,178"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,187,249,224,246,228,206,191"/>
 <area shape="rect" id="Node000003" href="$d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section." alt="" coords="5,79,180,105"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,112,170,150,166,154,118,117"/>
@@ -8,6 +8,6 @@
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="95,46,95,79,90,79,90,46"/>
 <area shape="rect" id="Node000005" href="$db/d4f/classmrw_1_1model_1_1Position.html" title="This class stores the position of the controlling widget onto the GUI." alt="" coords="204,79,344,105"/>
 <area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="248,117,200,154,197,150,245,112"/>
-<area shape="rect" id="Node000006" href="$d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing." alt="" coords="273,153,406,178"/>
+<area shape="rect" id="Node000006" href="$d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing." alt="" coords="272,153,406,178"/>
 <area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="317,191,275,228,272,224,313,187"/>
 </map>

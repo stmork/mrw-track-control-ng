@@ -4,6 +4,6 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="237,39,122,81,120,76,235,34"/>
 <area shape="rect" id="Node000003" href="$d8/d13/classmrw_1_1model_1_1SectionModule.html" title="This class represents a section module which is connected to a CAN controller using the 16&#45;pin connec..." alt="" coords="194,79,373,105"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="286,46,286,79,281,79,281,46"/>
-<area shape="rect" id="Node000004" href="$dc/d1a/classmrw_1_1model_1_1SwitchModule.html" title="This class represents a switch module which is connected to a CAN controller using one or two 16&#45;pin ..." alt="" coords="397,79,573,105"/>
+<area shape="rect" id="Node000004" href="$dc/d1a/classmrw_1_1model_1_1SwitchModule.html" title="This class represents a switch module which is connected to a CAN controller using one or two 16&#45;pin ..." alt="" coords="397,79,572,105"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="333,34,451,76,450,81,331,39"/>
 </map>

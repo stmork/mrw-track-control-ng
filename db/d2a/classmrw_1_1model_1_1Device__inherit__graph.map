@@ -6,7 +6,7 @@
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="154,80,194,75,195,80,154,85"/>
 <area shape="rect" id="Node000005" href="$de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection." alt="" coords="206,104,343,130"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="155,100,205,106,205,111,154,105"/>
-<area shape="rect" id="Node000006" href="$d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html" title="This base class represents the connection of an inductive actuator Device to the corresponding Switch..." alt="" coords="187,154,362,195"/>
+<area shape="rect" id="Node000006" href="$d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html" title="This base class represents the connection of an inductive actuator Device to the corresponding Switch..." alt="" coords="187,154,362,194"/>
 <area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="118,110,188,140,216,151,214,156,186,145,116,115"/>
 <area shape="rect" id="Node000003" href="$dd/d28/classmrw_1_1model_1_1ProfileLight.html" title="This class represents a LED or bulb light source which can light up using different light up profiles..." alt="" coords="422,5,580,31"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="351,16,421,16,421,21,351,21"/>

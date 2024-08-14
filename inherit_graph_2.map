@@ -1,12 +1,12 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing." alt="" coords="183,63,317,88"/>
+<area shape="rect" id="Node000000" href="$d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing." alt="" coords="183,63,316,88"/>
 <area shape="rect" id="Node000001" href="$d0/d3c/classmrw_1_1model_1_1Light.html" title="This class represents a LED or bulb light source which can only simply turn on or off the light." alt="" coords="412,5,534,31"/>
 <area shape="poly" id="edge15_Node000000_Node000001" title=" " alt="" coords="317,56,419,29,420,34,318,61"/>
 <area shape="rect" id="Node000003" href="$d6/d71/classmrw_1_1model_1_1LightSignal.html" title="This class represents the handling of several light signals." alt="" coords="620,73,779,99"/>
 <area shape="poly" id="edge17_Node000000_Node000003" title=" " alt="" coords="332,75,620,82,620,87,332,80"/>
 <area shape="rect" id="Node000013" href="$de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection." alt="" coords="404,171,541,196"/>
 <area shape="poly" id="edge18_Node000000_Node000013" title=" " alt="" coords="283,96,331,126,386,156,418,168,416,173,384,161,328,131,280,100"/>
-<area shape="rect" id="Node000006" href="$d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html" title="This base class represents the connection of an inductive actuator Device to the corresponding Switch..." alt="" coords="385,106,560,147"/>
+<area shape="rect" id="Node000006" href="$d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html" title="This base class represents the connection of an inductive actuator Device to the corresponding Switch..." alt="" coords="385,106,560,146"/>
 <area shape="poly" id="edge19_Node000000_Node000006" title=" " alt="" coords="325,90,385,104,384,109,323,95"/>
 <area shape="rect" id="Node000002" href="$dd/d28/classmrw_1_1model_1_1ProfileLight.html" title="This class represents a LED or bulb light source which can light up using different light up profiles..." alt="" coords="620,5,779,31"/>
 <area shape="poly" id="edge16_Node000001_Node000002" title=" " alt="" coords="549,16,620,16,620,21,549,21"/>
@@ -31,15 +31,15 @@
 <area shape="poly" id="edge29_Node000004_Node000005" title=" " alt="" coords="540,213,559,206,666,165,668,170,561,211,541,218"/>
 <area shape="rect" id="Node000014" href="$d0/d55/classmrw_1_1util_1_1String.html" title="This class is a unique way to create a std::string from any binary data representation." alt="" coords="5,319,115,344"/>
 <area shape="poly" id="edge38_Node000014_Node000013" title=" " alt="" coords="68,303,82,272,102,238,128,205,161,180,194,166,229,157,300,151,368,157,424,168,423,173,367,162,300,157,230,162,196,171,164,184,132,209,106,241,87,275,73,305"/>
-<area shape="rect" id="Node000015" href="$d1/d80/classmrw_1_1can_1_1MrwMessage.html" title="This class represents a CAN bus frame in model railway manner." alt="" coords="171,244,329,270"/>
+<area shape="rect" id="Node000015" href="$d1/d80/classmrw_1_1can_1_1MrwMessage.html" title="This class represents a CAN bus frame in model railway manner." alt="" coords="171,244,328,270"/>
 <area shape="poly" id="edge31_Node000014_Node000015" title=" " alt="" coords="97,308,162,278,194,268,195,273,164,283,99,313"/>
 <area shape="rect" id="Node000016" href="$d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section." alt="" coords="163,293,337,319"/>
 <area shape="poly" id="edge32_Node000014_Node000016" title=" " alt="" coords="130,320,162,315,163,320,130,325"/>
 <area shape="rect" id="Node000017" href="$d1/d0d/classmrw_1_1model_1_1Controller.html" title="This class represents a CAN&#45;Node named as Controller here." alt="" coords="176,343,324,368"/>
 <area shape="poly" id="edge35_Node000014_Node000017" title=" " alt="" coords="130,338,176,343,175,349,130,343"/>
-<area shape="rect" id="Node000018" href="$d3/dab/classmrw_1_1model_1_1ModelRailway.html" title="This class contains the complete data structure referring to a model railway." alt="" coords="163,392,337,418"/>
+<area shape="rect" id="Node000018" href="$d3/dab/classmrw_1_1model_1_1ModelRailway.html" title="This class contains the complete data structure referring to a model railway." alt="" coords="163,392,336,418"/>
 <area shape="poly" id="edge36_Node000014_Node000018" title=" " alt="" coords="100,349,164,378,196,389,194,394,162,383,98,354"/>
-<area shape="rect" id="Node000019" href="$d4/d3e/classmrw_1_1model_1_1Region.html" title="The control region is a structural division into overviewable parts of the model railway." alt="" coords="183,441,317,467"/>
+<area shape="rect" id="Node000019" href="$d4/d3e/classmrw_1_1model_1_1Region.html" title="The control region is a structural division into overviewable parts of the model railway." alt="" coords="183,441,316,467"/>
 <area shape="poly" id="edge37_Node000014_Node000019" title=" " alt="" coords="83,355,118,393,164,428,187,438,185,443,161,432,115,397,79,359"/>
 <area shape="poly" id="edge33_Node000016_Node000010" title=" " alt="" coords="352,292,402,287,403,292,353,298"/>
 <area shape="poly" id="edge34_Node000016_Node000004" title=" " alt="" coords="319,286,336,280,384,254,415,244,417,249,386,259,338,285,321,291"/>

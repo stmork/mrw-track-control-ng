@@ -8,13 +8,13 @@
 <area shape="poly" id="edge70_Node000001_Node000003" title=" " alt="" coords="235,120,310,89,342,78,344,83,312,94,237,125"/>
 <area shape="rect" id="Node000004" href="$d8/d73/classmrw_1_1ui_1_1ClockWidget.html" title="The ClockWidget displays the actual time." alt="" coords="324,104,465,130"/>
 <area shape="poly" id="edge71_Node000001_Node000004" title=" " alt="" coords="278,129,323,123,323,128,278,134"/>
-<area shape="rect" id="Node000005" href="$db/d76/classmrw_1_1ui_1_1ControllerWidget.html" title="This is the base class for all derived widget classes which follow the MVC paradigma." alt="" coords="313,153,476,179"/>
+<area shape="rect" id="Node000005" href="$db/d76/classmrw_1_1ui_1_1ControllerWidget.html" title="This is the base class for all derived widget classes which follow the MVC paradigma." alt="" coords="312,153,476,179"/>
 <area shape="poly" id="edge72_Node000001_Node000005" title=" " alt="" coords="279,150,312,154,312,159,278,155"/>
 <area shape="rect" id="Node000010" href="$dc/d55/classmrw_1_1ui_1_1OpModeWidget.html" title="The OpModeWidget displays the operational mode consisting of a single upper case letter." alt="" coords="316,203,473,228"/>
 <area shape="poly" id="edge77_Node000001_Node000010" title=" " alt="" coords="238,159,312,189,344,200,343,205,310,194,236,164"/>
 <area shape="rect" id="Node000011" href="$d6/da1/classmrw_1_1ui_1_1StationWidget.html" title="The StationWidget displays the region title." alt="" coords="320,252,469,278"/>
 <area shape="poly" id="edge78_Node000001_Node000011" title=" " alt="" coords="219,164,260,202,312,239,337,249,335,254,310,243,257,206,215,168"/>
-<area shape="rect" id="Node000006" href="$d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html" title="This class intends to draw all states of a mrw::model::DoubleCrossSwitch which includes:" alt="" coords="530,65,713,105"/>
+<area shape="rect" id="Node000006" href="$d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html" title="This class intends to draw all states of a mrw::model::DoubleCrossSwitch which includes:" alt="" coords="530,64,713,105"/>
 <area shape="poly" id="edge73_Node000005_Node000006" title=" " alt="" coords="461,146,476,140,524,114,553,103,555,108,526,119,478,145,462,151"/>
 <area shape="rect" id="Node000007" href="$dc/d9b/classmrw_1_1ui_1_1RailWidget.html" title="The RailWidget displays a simple mrw::model::Rail without any active part like switches or signals." alt="" coords="556,129,687,155"/>
 <area shape="poly" id="edge74_Node000005_Node000007" title=" " alt="" coords="491,153,555,146,556,152,491,159"/>

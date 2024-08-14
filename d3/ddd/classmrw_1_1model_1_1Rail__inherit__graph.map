@@ -1,7 +1,7 @@
 <map id="mrw::model::Rail" name="mrw::model::Rail">
 <area shape="rect" id="Node000001" title="This class represents a simple rail with two connectors to other RailParts." alt="" coords="126,226,241,252"/>
 <area shape="rect" id="Node000002" href="$d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:" alt="" coords="114,153,253,178"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,194,186,226,181,226,181,194"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,194,186,226,180,226,180,194"/>
 <area shape="rect" id="Node000003" href="$d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section." alt="" coords="5,79,180,105"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,112,170,150,166,154,118,117"/>
 <area shape="rect" id="Node000004" href="$d0/d55/classmrw_1_1util_1_1String.html" title="This class is a unique way to create a std::string from any binary data representation." alt="" coords="38,5,147,31"/>

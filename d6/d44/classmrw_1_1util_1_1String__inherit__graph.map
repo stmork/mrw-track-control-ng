@@ -1,16 +1,16 @@
 <map id="mrw::util::String" name="mrw::util::String">
 <area shape="rect" id="Node000001" title="This class is a unique way to create a std::string from any binary data representation." alt="" coords="5,177,115,203"/>
-<area shape="rect" id="Node000002" href="$d1/d80/classmrw_1_1can_1_1MrwMessage.html" title="This class represents a CAN bus frame in model railway manner." alt="" coords="171,53,329,79"/>
+<area shape="rect" id="Node000002" href="$d1/d80/classmrw_1_1can_1_1MrwMessage.html" title="This class represents a CAN bus frame in model railway manner." alt="" coords="171,53,328,79"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,164,114,125,161,88,185,77,187,82,164,92,118,129,82,167"/>
 <area shape="rect" id="Node000003" href="$d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section." alt="" coords="163,103,337,128"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="97,167,162,137,194,126,195,131,164,142,99,172"/>
 <area shape="rect" id="Node000012" href="$d1/d0d/classmrw_1_1model_1_1Controller.html" title="This class represents a CAN&#45;Node named as Controller here." alt="" coords="176,152,324,178"/>
 <area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="130,178,175,172,176,177,130,184"/>
-<area shape="rect" id="Node000013" href="$d3/dab/classmrw_1_1model_1_1ModelRailway.html" title="This class contains the complete data structure referring to a model railway." alt="" coords="163,201,337,227"/>
+<area shape="rect" id="Node000013" href="$d3/dab/classmrw_1_1model_1_1ModelRailway.html" title="This class contains the complete data structure referring to a model railway." alt="" coords="163,201,336,227"/>
 <area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="130,196,163,201,162,206,130,202"/>
-<area shape="rect" id="Node000014" href="$d4/d3e/classmrw_1_1model_1_1Region.html" title="The control region is a structural division into overviewable parts of the model railway." alt="" coords="183,251,317,276"/>
+<area shape="rect" id="Node000014" href="$d4/d3e/classmrw_1_1model_1_1Region.html" title="The control region is a structural division into overviewable parts of the model railway." alt="" coords="183,251,316,276"/>
 <area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="100,208,164,237,196,248,194,253,162,242,98,213"/>
-<area shape="rect" id="Node000015" href="$de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection." alt="" coords="181,300,319,326"/>
+<area shape="rect" id="Node000015" href="$de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection." alt="" coords="181,300,318,326"/>
 <area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="83,214,118,251,164,287,187,297,185,302,161,291,115,255,79,217"/>
 <area shape="rect" id="Node000004" href="$d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:" alt="" coords="385,79,524,104"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="352,101,384,97,385,102,353,106"/>

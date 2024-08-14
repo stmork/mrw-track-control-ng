@@ -1,7 +1,7 @@
 <map id="mrw::model::DoubleCrossSwitch" name="mrw::model::DoubleCrossSwitch">
 <area shape="rect" id="Node000001" title="This RailPart represents a double cross switch with four connectors." alt="" coords="250,315,458,341"/>
 <area shape="rect" id="Node000002" href="$df/db7/classmrw_1_1model_1_1AbstractSwitch.html" title="This class represents any representation of any switch occuring on a model railway." alt="" coords="263,241,445,267"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="357,282,357,315,351,315,351,282"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="356,282,356,315,351,315,351,282"/>
 <area shape="rect" id="Node000003" href="$d1/d16/classmrw_1_1model_1_1RailPart.html" title="This base class represents any kind of rail elements which can be:" alt="" coords="194,160,333,186"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="290,194,342,239,338,243,286,198"/>
 <area shape="rect" id="Node000004" href="$d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section." alt="" coords="5,79,180,105"/>

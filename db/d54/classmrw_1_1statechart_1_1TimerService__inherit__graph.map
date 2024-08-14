@@ -1,8 +1,8 @@
 <map id="mrw::statechart::TimerService" name="mrw::statechart::TimerService">
 <area shape="rect" id="Node000001" title="This class simply implements an example statemachine for testing the C++ timer service." alt="" coords="105,94,298,120"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,13,75,39"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,13,75,38"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,43,178,91,176,96,77,48"/>
-<area shape="rect" id="Node000003" href="$df/d18/classsc_1_1timer_1_1TimerServiceInterface.html" title=" " alt="" coords="99,13,304,39"/>
+<area shape="rect" id="Node000003" href="$df/d18/classsc_1_1timer_1_1TimerServiceInterface.html" title=" " alt="" coords="99,13,304,38"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="204,54,204,93,199,93,199,54"/>
 <area shape="rect" id="Node000004" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="327,5,457,46"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="331,55,232,96,230,91,329,50"/>

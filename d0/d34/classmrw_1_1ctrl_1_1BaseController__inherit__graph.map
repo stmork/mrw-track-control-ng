@@ -1,6 +1,6 @@
 <map id="mrw::ctrl::BaseController" name="mrw::ctrl::BaseController">
 <area shape="rect" id="Node000001" title="This controller base class unifies the interface for all widget controller classes." alt="" coords="123,94,284,120"/>
-<area shape="rect" id="Node000003" href="$df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html" title="This class provides virtual pure methods which are common to the RegularSwitchController and the Doub..." alt="" coords="332,45,533,71"/>
+<area shape="rect" id="Node000003" href="$df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html" title="This class provides virtual pure methods which are common to the RegularSwitchController and the Doub..." alt="" coords="332,45,533,70"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="281,88,369,69,370,74,282,93"/>
 <area shape="rect" id="Node000006" href="$d3/d59/classmrw_1_1ctrl_1_1RailController.html" title="This class provides the logic for a simple rail." alt="" coords="356,94,509,120"/>
 <area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="299,104,356,104,356,110,299,110"/>
