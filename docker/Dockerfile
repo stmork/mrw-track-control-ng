@@ -1,7 +1,7 @@
 ARG OS=ubuntu
 FROM $OS:latest
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update
 RUN apt dist-upgrade -y
 RUN apt install -y apt-utils apt-transport-https
