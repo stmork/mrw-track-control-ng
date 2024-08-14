@@ -28,7 +28,7 @@ void TimerService::setTimer(
 	QTimer  *  timer          = getTimer(statemachine, event);
 	const bool high_precision = (time_ms % 1000) != 0;
 
-	// amor the timer
+	// armor the timer
 	timer->setTimerType(high_precision ? PreciseTimer : CoarseTimer);
 	timer->setInterval(time_ms);
 	timer->setSingleShot(!is_periodic);
@@ -49,7 +49,7 @@ QTimer * TimerService::getTimer(
 	sc::eventid                                  event)
 {
 	TimerKey   key{ statemachine.get(), event };
-	QTimer  *  timer;
+	QTimer  *  timer = nullptr;
 
 	Q_ASSERT(statemachine);
 	if (chart_map.contains(key))

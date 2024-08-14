@@ -66,7 +66,7 @@ namespace mrw::ctrl
 		void status(RegularSwitchController::Status & status) const;
 
 	private:
-		virtual bool            isExpandable() const override;
+		virtual bool  isExpandable() const override;
 
 		/**
 		 * This method returns true if the switch has been turned left.

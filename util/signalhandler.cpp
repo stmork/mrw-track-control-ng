@@ -13,16 +13,14 @@ SignalHandler::SignalHandler(
 	const std::initializer_list<int> & signal_list,
 	SignalCallback                     signal_callback)
 {
-	sigset_t         blocking_mask;
-	struct sigaction sa;
+	struct sigaction sa {};
 
-	sigemptyset(&blocking_mask);
+	sigemptyset(&sa.sa_mask);
 	for (const int sig : signal_list)
 	{
-		sigaddset(&blocking_mask, sig);
+		sigaddset(&sa.sa_mask, sig);
 	}
 	sa.sa_handler = handler;
-	sa.sa_mask    = blocking_mask;
 	sa.sa_flags   = 0;
 
 	for (const int sig : signal_list)
