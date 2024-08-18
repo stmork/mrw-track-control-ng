@@ -116,16 +116,16 @@ Inheritance diagram for mrw::util::Random:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9bb8ecf81c2c9b04d759befbac04d233" id="r_a9bb8ecf81c2c9b04d759befbac04d233"><td class="memItemLeft" align="right" valign="top">std::mt19937 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9bb8ecf81c2c9b04d759befbac04d233">engine</a> () noexcept</td></tr>
-<tr class="memdesc:a9bb8ecf81c2c9b04d759befbac04d233"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static access method returns the random generator engine.  <br /></td></tr>
-<tr class="separator:a9bb8ecf81c2c9b04d759befbac04d233"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a452416dbffd21b6c74e799813ef49da7" id="r_a452416dbffd21b6c74e799813ef49da7"><td class="memItemLeft" align="right" valign="top">constexpr std::mt19937 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a452416dbffd21b6c74e799813ef49da7">engine</a> () noexcept</td></tr>
+<tr class="memdesc:a452416dbffd21b6c74e799813ef49da7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static access method returns the random generator engine.  <br /></td></tr>
+<tr class="separator:a452416dbffd21b6c74e799813ef49da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ab5ba696d5bca80f807bfa71fc061ab42" id="r_ab5ba696d5bca80f807bfa71fc061ab42"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ab5ba696d5bca80f807bfa71fc061ab42"><td class="memTemplItemLeft" align="right" valign="top">static T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ab5ba696d5bca80f807bfa71fc061ab42">random</a> (const T max) noexcept</td></tr>
-<tr class="memdesc:ab5ba696d5bca80f807bfa71fc061ab42"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static template method returns a secure random number of the specified type and range [0..max].  <br /></td></tr>
-<tr class="separator:ab5ba696d5bca80f807bfa71fc061ab42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07f6800fb4eb9228c223dcc4ee4d0dd4" id="r_a07f6800fb4eb9228c223dcc4ee4d0dd4"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a07f6800fb4eb9228c223dcc4ee4d0dd4"><td class="memTemplItemLeft" align="right" valign="top">static constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a07f6800fb4eb9228c223dcc4ee4d0dd4">random</a> (const T max) noexcept</td></tr>
+<tr class="memdesc:a07f6800fb4eb9228c223dcc4ee4d0dd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static template method returns a secure random number of the specified type and range [0..max].  <br /></td></tr>
+<tr class="separator:a07f6800fb4eb9228c223dcc4ee4d0dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9390b21f440faca7e75d1b8363e1dc7b" id="r_a9390b21f440faca7e75d1b8363e1dc7b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../d5/d62/classmrw_1_1util_1_1Random.html">Random</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d4d/classmrw_1_1util_1_1Singleton.html#a9390b21f440faca7e75d1b8363e1dc7b">instance</a> () noexcept</td></tr>
 <tr class="memdesc:a9390b21f440faca7e75d1b8363e1dc7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static method returns the singleton class instance.  <br /></td></tr>
 <tr class="separator:a9390b21f440faca7e75d1b8363e1dc7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,15 +141,15 @@ Friends</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>Read more about random number generation in C++ standard documention.</dd></dl>
 <p>Usage Example: </p><div class="fragment"><div class="line">std::uniform_int_distribution&lt;uint32_t&gt; dist_ssrc;</div>
 <div class="line">...</div>
-<div class="line">uint32_t ssrc = dist_ssrc(<a class="code hl_function" href="../../d0/d4d/classmrw_1_1util_1_1Singleton.html#a9390b21f440faca7e75d1b8363e1dc7b">Random::instance</a>().<a class="code hl_function" href="#a9bb8ecf81c2c9b04d759befbac04d233">engine</a>());</div>
-<div class="ttc" id="aclassmrw_1_1util_1_1Random_html_a9bb8ecf81c2c9b04d759befbac04d233"><div class="ttname"><a href="#a9bb8ecf81c2c9b04d759befbac04d233">mrw::util::Random::engine</a></div><div class="ttdeci">std::mt19937 &amp; engine() noexcept</div><div class="ttdoc">This static access method returns the random generator engine.</div><div class="ttdef"><b>Definition</b> random.h:55</div></div>
+<div class="line">uint32_t ssrc = dist_ssrc(<a class="code hl_function" href="../../d0/d4d/classmrw_1_1util_1_1Singleton.html#a9390b21f440faca7e75d1b8363e1dc7b">Random::instance</a>().<a class="code hl_function" href="#a452416dbffd21b6c74e799813ef49da7">engine</a>());</div>
+<div class="ttc" id="aclassmrw_1_1util_1_1Random_html_a452416dbffd21b6c74e799813ef49da7"><div class="ttname"><a href="#a452416dbffd21b6c74e799813ef49da7">mrw::util::Random::engine</a></div><div class="ttdeci">constexpr std::mt19937 &amp; engine() noexcept</div><div class="ttdoc">This static access method returns the random generator engine.</div><div class="ttdef"><b>Definition</b> random.h:55</div></div>
 <div class="ttc" id="aclassmrw_1_1util_1_1Singleton_html_a9390b21f440faca7e75d1b8363e1dc7b"><div class="ttname"><a href="../../d0/d4d/classmrw_1_1util_1_1Singleton.html#a9390b21f440faca7e75d1b8363e1dc7b">mrw::util::Singleton&lt; Random &gt;::instance</a></div><div class="ttdeci">static Random &amp; instance() noexcept</div><div class="ttdef"><b>Definition</b> singleton.h:57</div></div>
 </div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a href="https://en.cppreference.com/w/cpp/numeric/random">https://en.cppreference.com/w/cpp/numeric/random</a> </dd>
 <dd>
 <a href="http://www.cplusplus.com/reference/random/">http://www.cplusplus.com/reference/random/</a> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9bb8ecf81c2c9b04d759befbac04d233" name="a9bb8ecf81c2c9b04d759befbac04d233"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9bb8ecf81c2c9b04d759befbac04d233">&#9670;&#160;</a></span>engine()</h2>
+<a id="a452416dbffd21b6c74e799813ef49da7" name="a452416dbffd21b6c74e799813ef49da7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a452416dbffd21b6c74e799813ef49da7">&#9670;&#160;</a></span>engine()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +166,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">nodiscard</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">nodiscard</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -204,8 +204,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="ab5ba696d5bca80f807bfa71fc061ab42" name="ab5ba696d5bca80f807bfa71fc061ab42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5ba696d5bca80f807bfa71fc061ab42">&#9670;&#160;</a></span>random()</h2>
+<a id="a07f6800fb4eb9228c223dcc4ee4d0dd4" name="a07f6800fb4eb9228c223dcc4ee4d0dd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07f6800fb4eb9228c223dcc4ee4d0dd4">&#9670;&#160;</a></span>random()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -216,7 +216,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static T mrw::util::Random::random </td>
+          <td class="memname">static constexpr T mrw::util::Random::random </td>
           <td>(</td>
           <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>max</em></span></td><td>)</td>
           <td></td>
@@ -224,7 +224,7 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">nodiscard</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">nodiscard</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -266,7 +266,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 14 2024 14:37:35 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
+Generated on Sun Aug 18 2024 12:28:06 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
 </small></address>
 </div><!-- doc-content -->
 </body>

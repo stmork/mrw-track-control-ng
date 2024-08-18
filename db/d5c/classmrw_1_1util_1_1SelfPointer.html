@@ -118,11 +118,11 @@ Inheritance diagram for mrw::util::SelfPointer&lt; T &gt;:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a353ec5114e50161f65bdbc4bd5b79d16" id="r_a353ec5114e50161f65bdbc4bd5b79d16"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a353ec5114e50161f65bdbc4bd5b79d16">SelfPointer</a> ()=delete</td></tr>
 <tr class="separator:a353ec5114e50161f65bdbc4bd5b79d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a663ee8e40c18e002f80e2e937f279ecf" id="r_a663ee8e40c18e002f80e2e937f279ecf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a663ee8e40c18e002f80e2e937f279ecf">SelfPointer</a> (T *instance)</td></tr>
-<tr class="separator:a663ee8e40c18e002f80e2e937f279ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacb8f9843c70c3ef02994e4c76f6f80b" id="r_aacb8f9843c70c3ef02994e4c76f6f80b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aacb8f9843c70c3ef02994e4c76f6f80b">operator std::shared_ptr&lt; T &gt; &amp;</a> () noexcept</td></tr>
-<tr class="memdesc:aacb8f9843c70c3ef02994e4c76f6f80b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This cast operator returns a reference to the std::shared_ptr of this instance.  <br /></td></tr>
-<tr class="separator:aacb8f9843c70c3ef02994e4c76f6f80b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4339bd86cb111f01b2533f39fd15c4fc" id="r_a4339bd86cb111f01b2533f39fd15c4fc"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4339bd86cb111f01b2533f39fd15c4fc">SelfPointer</a> (T *instance)</td></tr>
+<tr class="separator:a4339bd86cb111f01b2533f39fd15c4fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47e80c93862b9445fa6364b5fa1bc96a" id="r_a47e80c93862b9445fa6364b5fa1bc96a"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47e80c93862b9445fa6364b5fa1bc96a">operator std::shared_ptr&lt; T &gt; &amp;</a> () noexcept</td></tr>
+<tr class="memdesc:a47e80c93862b9445fa6364b5fa1bc96a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This cast operator returns a reference to the std::shared_ptr of this instance.  <br /></td></tr>
+<tr class="separator:a47e80c93862b9445fa6364b5fa1bc96a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class T&gt;<br />
@@ -156,8 +156,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a663ee8e40c18e002f80e2e937f279ecf" name="a663ee8e40c18e002f80e2e937f279ecf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a663ee8e40c18e002f80e2e937f279ecf">&#9670;&#160;</a></span>SelfPointer() <span class="overload">[2/2]</span></h2>
+<a id="a4339bd86cb111f01b2533f39fd15c4fc" name="a4339bd86cb111f01b2533f39fd15c4fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4339bd86cb111f01b2533f39fd15c4fc">&#9670;&#160;</a></span>SelfPointer() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,7 +176,7 @@ template&lt;class T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -184,8 +184,8 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aacb8f9843c70c3ef02994e4c76f6f80b" name="aacb8f9843c70c3ef02994e4c76f6f80b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aacb8f9843c70c3ef02994e4c76f6f80b">&#9670;&#160;</a></span>operator std::shared_ptr&lt; T &gt; &amp;()</h2>
+<a id="a47e80c93862b9445fa6364b5fa1bc96a" name="a47e80c93862b9445fa6364b5fa1bc96a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47e80c93862b9445fa6364b5fa1bc96a">&#9670;&#160;</a></span>operator std::shared_ptr&lt; T &gt; &amp;()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -204,7 +204,7 @@ template&lt;class T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -216,7 +216,7 @@ template&lt;class T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 14 2024 14:37:35 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
+Generated on Sun Aug 18 2024 12:28:06 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
 </small></address>
 </div><!-- doc-content -->
 </body>
