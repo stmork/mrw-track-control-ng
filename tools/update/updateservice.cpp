@@ -10,12 +10,13 @@
 #include <QTextStream>
 
 #include <statecharts/timerservice.h>
+#include <util/hexline.h>
 
 #include "updateservice.h"
-#include "hexline.h"
 
 using namespace mrw::can;
 using namespace mrw::statechart;
+using namespace mrw::util;
 
 UpdateService::UpdateService(
 	const QString & filename,

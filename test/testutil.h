@@ -70,6 +70,7 @@ namespace mrw::test
 		void testResetCustomBatch();
 		void testDifferentBatch();
 		void testSelfPointer();
+		void testHexLine();
 	};
 }
 

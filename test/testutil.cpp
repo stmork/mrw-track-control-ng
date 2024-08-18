@@ -22,6 +22,7 @@
 #include <util/batchparticipant.h>
 #include <util/globalbatch.h>
 #include <util/self.h>
+#include <util/hexline.h>
 
 #include "testutil.h"
 
@@ -509,4 +510,37 @@ void TestUtil::testSelfPointer()
 
 	QVERIFY(shared_pointer);
 	QCOMPARE(shared_pointer.use_count(), 1);
+}
+
+void TestUtil::testHexLine()
+{
+	std::vector<uint8_t> buffer;
+
+	// Header parse error
+	QVERIFY_EXCEPTION_THROWN(HexLine(""), std::invalid_argument);
+	QVERIFY_EXCEPTION_THROWN(HexLine(":xxxx"), std::invalid_argument);
+	QVERIFY_EXCEPTION_THROWN(HexLine(":0000000g"), std::invalid_argument);
+
+	// Length format error.
+	QVERIFY_EXCEPTION_THROWN(HexLine(":01000000"), std::invalid_argument);
+
+	// Data format error.
+	QVERIFY_EXCEPTION_THROWN(HexLine(":02123400xx00aa"), std::invalid_argument);
+
+	// Checksum error.
+	QVERIFY_EXCEPTION_THROWN(HexLine(":02123400ff00aa"), std::invalid_argument);
+
+	// Data line
+	HexLine line(":02123400ff00b9");
+	QCOMPARE(line.getAddress(), unsigned(0x1234));
+	QVERIFY(line);
+	line.append(buffer);
+	QCOMPARE(buffer.size(), size_t(2));
+	QCOMPARE(buffer[0], 0xff);
+	QCOMPARE(buffer[1], 0x00);
+
+	// EOF
+	HexLine eof(":005678010e");
+	QCOMPARE(eof.getAddress(), unsigned(0x5678));
+	QVERIFY(!eof);
 }

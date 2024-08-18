@@ -21,7 +21,7 @@ namespace mrw::util
 	{
 	public:
 		SelfPointer() = delete;
-		explicit SelfPointer(T * instance) : self(instance, &null_deleter)
+		explicit constexpr SelfPointer(T * instance) : self(instance, &null_deleter)
 		{
 		}
 
@@ -29,7 +29,7 @@ namespace mrw::util
 		 * This cast operator returns a reference to the std::shared_ptr
 		 * of this instance.
 		 */
-		inline operator std::shared_ptr<T> & () noexcept
+		constexpr operator std::shared_ptr<T> & () noexcept
 		{
 			return self;
 		}
@@ -37,7 +37,7 @@ namespace mrw::util
 	private:
 		std::shared_ptr<T> self;
 
-		static void null_deleter(T * ptr) noexcept
+		static constexpr void null_deleter(T * ptr) noexcept
 		{
 			(void)ptr;
 		}
@@ -46,7 +46,7 @@ namespace mrw::util
 	template<class T> class Self : public T, public SelfPointer<T>
 	{
 	public:
-		inline Self() : SelfPointer<T>(this)
+		constexpr Self() : SelfPointer<T>(this)
 		{
 		}
 	};

@@ -7,13 +7,15 @@
 
 #include <QString>
 
-#include "hexline.h"
+#include <util/hexline.h>
+
+using namespace mrw::util;
 
 HexLine::HexLine(const QString & input)
 {
 	const std::string line = input.toStdString();
 
-	// Adresse extrahieren
+	// Extract address.
 	if (sscanf(line.c_str(), ":%02x%04x%02x", &count, &address, &type) == 3)
 	{
 		checksum = type + count + (address >> 8) + (address & 0xff);
@@ -56,6 +58,10 @@ HexLine::HexLine(const QString & input)
 			break;
 		}
 	}
+	else
+	{
+		throw std::invalid_argument("Syntax error in header!");
+	}
 }
 
 void HexLine::append(std::vector<uint8_t> & buffer) const
@@ -63,12 +69,12 @@ void HexLine::append(std::vector<uint8_t> & buffer) const
 	std::copy(bytes.begin(), bytes.begin() + count, std::back_inserter(buffer));
 }
 
-unsigned HexLine::getAddress() const
+unsigned HexLine::getAddress() const noexcept
 {
 	return address;
 }
 
-HexLine::operator bool() const
+HexLine::operator bool() const noexcept
 {
 	return !eof;
 }

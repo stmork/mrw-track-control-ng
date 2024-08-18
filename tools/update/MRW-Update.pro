@@ -11,12 +11,10 @@ include(../../common.pri)
 CONFIG += console
 
 SOURCES += \
-	hexline.cpp \
 	main.cpp \
 	updateservice.cpp
 
 HEADERS += \
-	hexline.h \
 	updateservice.h
 
 LIBS            += -lMRW-Model -lMRW-Can -lMRW-Statecharts -lMRW-Util
