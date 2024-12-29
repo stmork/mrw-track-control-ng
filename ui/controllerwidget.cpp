@@ -52,8 +52,8 @@ void ControllerWidget::setController(BaseController * ctrl)
 bool ControllerWidget::isConnector(const QPoint & point) const
 {
 	const QPoint base(
-		x() * Position::FRACTION / SIZE,
-		y() * Position::FRACTION / SIZE);
+		x() * Position::FRACTION / gridSize(),
+		y() * Position::FRACTION / gridSize());
 
 	for (const QPoint & local : connector_list)
 	{
@@ -69,9 +69,9 @@ bool ControllerWidget::isConnector(const QPoint & point) const
 
 void ControllerWidget::reposition()
 {
-	setFixedHeight(BaseWidget::SIZE * (1.0 + base_controller->lines()));
+	setFixedHeight(gridSize() * (1.0 + base_controller->lines()));
 	extend();
-	move(base_controller->position()->point() * BaseWidget::SIZE / Position::FRACTION);
+	move(base_controller->position()->point() * gridSize() / Position::FRACTION);
 }
 
 void ControllerWidget::extend()

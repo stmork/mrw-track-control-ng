@@ -55,6 +55,8 @@ int main(int argc, char * argv[])
 
 		try
 		{
+			qInfo().noquote() << "Window size: " << main_window.size();
+
 			qInfo("==========================================================");
 			qInfo() << "MRW-NG track control using model:" << repo.modelName();
 #ifdef VERSION

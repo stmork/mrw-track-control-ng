@@ -47,7 +47,12 @@ MainWindow::MainWindow(
 	repo(repository)
 {
 	const QScreen * screen = QGuiApplication::primaryScreen();
-	const QSize     size   = screen->availableSize();
+
+	if (screen != nullptr)
+	{
+		const QSize     size   = screen->availableSize();
+		qInfo().noquote() << "Screen size: " << size;
+	}
 
 	BaseWidget::setVerbose(false);
 
@@ -75,8 +80,6 @@ MainWindow::MainWindow(
 
 	connectEditActions();
 	connectOpModes(dispatcher);
-
-	qInfo().noquote() << "Screen size: " << size;
 
 	Qt::WindowFlags window_flags = windowFlags();
 	window_flags |= Qt::WindowMinimizeButtonHint;

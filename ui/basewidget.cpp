@@ -3,6 +3,9 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
+#include <QGuiApplication>
+#include <QScreen>
+
 #include "ctrl/basecontroller.h"
 #include <ui/basewidget.h>
 
@@ -88,4 +91,13 @@ void BaseWidget::rescale(
 		xSize, ySize,
 		center ? width()  * 0.5f : 0.0f,
 		center ? height() * 0.5f : 0.0f);
+}
+
+int BaseWidget::gridSize()
+{
+	static const QScreen * screen = QGuiApplication::primaryScreen();
+	static const int       xMax   = screen != nullptr ? screen->availableSize().width() : 1680;
+	static const int       width  = SIZE * xMax / 1680 / 4 * 4;
+
+	return width;
 }
