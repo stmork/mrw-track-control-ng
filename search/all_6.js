@@ -13,5 +13,6 @@ var searchData=
   ['globalbatch_10',['GlobalBatch',['../d6/d8d/classmrw_1_1util_1_1GlobalBatch.html',1,'mrw::util']]],
   ['go_11',['GO',['../db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85a3d6954dd72e53b9015d2a6e6546058f8',1,'mrw::model::Signal']]],
   ['green_12',['GREEN',['../df/db9/classmrw_1_1ui_1_1BaseWidget.html#aa54d6d78623865a1e29e8ef7afb2df22',1,'mrw::ui::BaseWidget']]],
-  ['green_5fon_13',['GREEN_ON',['../d0/d55/classmrw_1_1util_1_1String.html#a97deee27c031921c641a624fb74f8a0e',1,'mrw::util::String']]]
+  ['green_5fon_13',['GREEN_ON',['../d0/d55/classmrw_1_1util_1_1String.html#a97deee27c031921c641a624fb74f8a0e',1,'mrw::util::String']]],
+  ['gridsize_14',['gridSize',['../df/db9/classmrw_1_1ui_1_1BaseWidget.html#a93824b7de7c161fe1c5865e95976364f',1,'mrw::ui::BaseWidget']]]
 ];

@@ -1637,6 +1637,7 @@
 <section title="ui" ref="d1/de6/namespacemrw_1_1ui.html">
 <section title="BarWidget" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html">
 <section title="BarWidget" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a7c7a9fbc5266d658e43ffada1abc3c0c"/>
+<section title="gridSize" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="paint" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#afb56b4b17d41d76c1ae9f4521be382e2"/>
 <section title="paintEvent" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a99b593e96e7211cf2c50da5f27e4739f"/>
@@ -1655,13 +1656,13 @@
 <section title="RED" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="verbose" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
 <section title="YELLOW" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
 </section>
 <section title="BaseWidget" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html">
 <section title="BaseWidget" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a91754f7f90922093a34e4a60d601bf99"/>
+<section title="gridSize" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="paint" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a0342b47698665935b4dec3aba469c752"/>
 <section title="paintEvent" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a99b593e96e7211cf2c50da5f27e4739f"/>
@@ -1680,13 +1681,13 @@
 <section title="RED" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="verbose" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
 <section title="YELLOW" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
 </section>
 <section title="CircleLiveWidget" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html">
 <section title="CircleLiveWidget" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a8c34ba8aeaa63cd2538bc9fed736104f"/>
+<section title="gridSize" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="paint" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a6e27aa8a0f801f49f39ec63702ed6aaa"/>
 <section title="paintEvent" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a99b593e96e7211cf2c50da5f27e4739f"/>
@@ -1705,13 +1706,13 @@
 <section title="RED" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="verbose" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
 <section title="YELLOW" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
 </section>
 <section title="ClockWidget" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html">
 <section title="ClockWidget" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a7c2e05ac629b9ea8cdadade65917cb9f"/>
+<section title="gridSize" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="paint" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a5172abed47df2ae07b3f88b74a7c555c"/>
 <section title="paintEvent" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a99b593e96e7211cf2c50da5f27e4739f"/>
@@ -1730,7 +1731,6 @@
 <section title="RED" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="verbose" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
 <section title="YELLOW" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
@@ -1744,6 +1744,7 @@
 <section title="drawLock" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a0d0ce3c3da9295dbc9e4f6af9b698d2c"/>
 <section title="drawSheared" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5ca6a93f56876076ff82e84d05266311"/>
 <section title="extend" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a8bb3d9f6d2249583f9e83d3637018895"/>
+<section title="gridSize" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="isConnector" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a0aee43a24eb6e9d33b4bf15ad3b06259"/>
 <section title="lockVisible" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#ad4ee397c4e0a49be00776bebd2473505"/>
@@ -1770,7 +1771,6 @@
 <section title="RED" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="USER_ROLE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a14ccbb61b1637fa8740662f1cec226b5"/>
 <section title="verbose" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
@@ -1806,6 +1806,7 @@
 <section title="drawLock" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a0d0ce3c3da9295dbc9e4f6af9b698d2c"/>
 <section title="drawSheared" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a5ca6a93f56876076ff82e84d05266311"/>
 <section title="extend" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a8bb3d9f6d2249583f9e83d3637018895"/>
+<section title="gridSize" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#ab9e59f5cfda7ceab33b437eedd1502c9"/>
 <section title="isConnector" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a0aee43a24eb6e9d33b4bf15ad3b06259"/>
 <section title="lockVisible" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#ad4ee397c4e0a49be00776bebd2473505"/>
@@ -1833,7 +1834,6 @@
 <section title="RED" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="USER_ROLE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a14ccbb61b1637fa8740662f1cec226b5"/>
 <section title="verbose" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
@@ -1841,6 +1841,7 @@
 </section>
 <section title="OpModeWidget" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html">
 <section title="OpModeWidget" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a28b8c25d1fff55d6d54751a020eae674"/>
+<section title="gridSize" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="paint" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a945fd6676d0182faad06adafae0e9c07"/>
 <section title="paintEvent" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a99b593e96e7211cf2c50da5f27e4739f"/>
@@ -1860,7 +1861,6 @@
 <section title="RED" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="verbose" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
 <section title="YELLOW" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
@@ -1889,6 +1889,7 @@
 <section title="drawLock" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a0d0ce3c3da9295dbc9e4f6af9b698d2c"/>
 <section title="drawSheared" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a5ca6a93f56876076ff82e84d05266311"/>
 <section title="extend" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a8bb3d9f6d2249583f9e83d3637018895"/>
+<section title="gridSize" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="isConnector" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a0aee43a24eb6e9d33b4bf15ad3b06259"/>
 <section title="lockVisible" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#ad4ee397c4e0a49be00776bebd2473505"/>
@@ -1916,7 +1917,6 @@
 <section title="RED" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="USER_ROLE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a14ccbb61b1637fa8740662f1cec226b5"/>
 <section title="verbose" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
@@ -1951,6 +1951,7 @@
 <section title="drawLock" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a0d0ce3c3da9295dbc9e4f6af9b698d2c"/>
 <section title="drawSheared" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a5ca6a93f56876076ff82e84d05266311"/>
 <section title="extend" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a8bb3d9f6d2249583f9e83d3637018895"/>
+<section title="gridSize" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a164d22f7d6244f4fc7ce7b490558543b"/>
 <section title="isConnector" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a0aee43a24eb6e9d33b4bf15ad3b06259"/>
 <section title="lockVisible" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#ad4ee397c4e0a49be00776bebd2473505"/>
@@ -1978,7 +1979,6 @@
 <section title="RED" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="USER_ROLE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a14ccbb61b1637fa8740662f1cec226b5"/>
 <section title="verbose" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
@@ -2019,6 +2019,7 @@
 <section title="drawLock" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a0d0ce3c3da9295dbc9e4f6af9b698d2c"/>
 <section title="drawSheared" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a5ca6a93f56876076ff82e84d05266311"/>
 <section title="extend" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a8bb3d9f6d2249583f9e83d3637018895"/>
+<section title="gridSize" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a7b749d27e73b6f8a2c3b8683840d8f8f"/>
 <section title="isConnector" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a0aee43a24eb6e9d33b4bf15ad3b06259"/>
 <section title="lockVisible" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#ad4ee397c4e0a49be00776bebd2473505"/>
@@ -2046,7 +2047,6 @@
 <section title="RED" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="USER_ROLE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a14ccbb61b1637fa8740662f1cec226b5"/>
 <section title="verbose" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
@@ -2054,6 +2054,7 @@
 </section>
 <section title="StationWidget" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html">
 <section title="StationWidget" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#aa721680eda8feca45a1a3bbe7d83b86a"/>
+<section title="gridSize" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="paint" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a221b4148fd06510a00c706514a26e2ff"/>
 <section title="paintEvent" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a99b593e96e7211cf2c50da5f27e4739f"/>
@@ -2073,7 +2074,6 @@
 <section title="RED" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="verbose" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
 <section title="YELLOW" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
@@ -3777,6 +3777,7 @@
 <section title="ui" ref="d1/de6/namespacemrw_1_1ui.html">
 <section title="BarWidget" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html">
 <section title="BarWidget" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a7c7a9fbc5266d658e43ffada1abc3c0c"/>
+<section title="gridSize" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="paint" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#afb56b4b17d41d76c1ae9f4521be382e2"/>
 <section title="paintEvent" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a99b593e96e7211cf2c50da5f27e4739f"/>
@@ -3795,13 +3796,13 @@
 <section title="RED" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="verbose" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
 <section title="YELLOW" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
 </section>
 <section title="BaseWidget" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html">
 <section title="BaseWidget" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a91754f7f90922093a34e4a60d601bf99"/>
+<section title="gridSize" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="paint" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a0342b47698665935b4dec3aba469c752"/>
 <section title="paintEvent" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a99b593e96e7211cf2c50da5f27e4739f"/>
@@ -3820,13 +3821,13 @@
 <section title="RED" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="verbose" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
 <section title="YELLOW" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
 </section>
 <section title="CircleLiveWidget" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html">
 <section title="CircleLiveWidget" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a8c34ba8aeaa63cd2538bc9fed736104f"/>
+<section title="gridSize" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="paint" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a6e27aa8a0f801f49f39ec63702ed6aaa"/>
 <section title="paintEvent" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a99b593e96e7211cf2c50da5f27e4739f"/>
@@ -3845,13 +3846,13 @@
 <section title="RED" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="verbose" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
 <section title="YELLOW" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
 </section>
 <section title="ClockWidget" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html">
 <section title="ClockWidget" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a7c2e05ac629b9ea8cdadade65917cb9f"/>
+<section title="gridSize" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="paint" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a5172abed47df2ae07b3f88b74a7c555c"/>
 <section title="paintEvent" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a99b593e96e7211cf2c50da5f27e4739f"/>
@@ -3870,7 +3871,6 @@
 <section title="RED" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="verbose" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
 <section title="YELLOW" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
@@ -3884,6 +3884,7 @@
 <section title="drawLock" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a0d0ce3c3da9295dbc9e4f6af9b698d2c"/>
 <section title="drawSheared" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5ca6a93f56876076ff82e84d05266311"/>
 <section title="extend" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a8bb3d9f6d2249583f9e83d3637018895"/>
+<section title="gridSize" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="isConnector" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a0aee43a24eb6e9d33b4bf15ad3b06259"/>
 <section title="lockVisible" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#ad4ee397c4e0a49be00776bebd2473505"/>
@@ -3910,7 +3911,6 @@
 <section title="RED" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="USER_ROLE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a14ccbb61b1637fa8740662f1cec226b5"/>
 <section title="verbose" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
@@ -3946,6 +3946,7 @@
 <section title="drawLock" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a0d0ce3c3da9295dbc9e4f6af9b698d2c"/>
 <section title="drawSheared" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a5ca6a93f56876076ff82e84d05266311"/>
 <section title="extend" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a8bb3d9f6d2249583f9e83d3637018895"/>
+<section title="gridSize" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#ab9e59f5cfda7ceab33b437eedd1502c9"/>
 <section title="isConnector" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a0aee43a24eb6e9d33b4bf15ad3b06259"/>
 <section title="lockVisible" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#ad4ee397c4e0a49be00776bebd2473505"/>
@@ -3973,7 +3974,6 @@
 <section title="RED" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="USER_ROLE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a14ccbb61b1637fa8740662f1cec226b5"/>
 <section title="verbose" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
@@ -3981,6 +3981,7 @@
 </section>
 <section title="OpModeWidget" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html">
 <section title="OpModeWidget" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a28b8c25d1fff55d6d54751a020eae674"/>
+<section title="gridSize" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="paint" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a945fd6676d0182faad06adafae0e9c07"/>
 <section title="paintEvent" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a99b593e96e7211cf2c50da5f27e4739f"/>
@@ -4000,7 +4001,6 @@
 <section title="RED" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="verbose" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
 <section title="YELLOW" ref="dc/d55/classmrw_1_1ui_1_1OpModeWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
@@ -4029,6 +4029,7 @@
 <section title="drawLock" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a0d0ce3c3da9295dbc9e4f6af9b698d2c"/>
 <section title="drawSheared" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a5ca6a93f56876076ff82e84d05266311"/>
 <section title="extend" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a8bb3d9f6d2249583f9e83d3637018895"/>
+<section title="gridSize" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="isConnector" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a0aee43a24eb6e9d33b4bf15ad3b06259"/>
 <section title="lockVisible" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#ad4ee397c4e0a49be00776bebd2473505"/>
@@ -4056,7 +4057,6 @@
 <section title="RED" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="USER_ROLE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a14ccbb61b1637fa8740662f1cec226b5"/>
 <section title="verbose" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
@@ -4091,6 +4091,7 @@
 <section title="drawLock" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a0d0ce3c3da9295dbc9e4f6af9b698d2c"/>
 <section title="drawSheared" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a5ca6a93f56876076ff82e84d05266311"/>
 <section title="extend" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a8bb3d9f6d2249583f9e83d3637018895"/>
+<section title="gridSize" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a164d22f7d6244f4fc7ce7b490558543b"/>
 <section title="isConnector" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a0aee43a24eb6e9d33b4bf15ad3b06259"/>
 <section title="lockVisible" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#ad4ee397c4e0a49be00776bebd2473505"/>
@@ -4118,7 +4119,6 @@
 <section title="RED" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="USER_ROLE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a14ccbb61b1637fa8740662f1cec226b5"/>
 <section title="verbose" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
@@ -4159,6 +4159,7 @@
 <section title="drawLock" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a0d0ce3c3da9295dbc9e4f6af9b698d2c"/>
 <section title="drawSheared" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a5ca6a93f56876076ff82e84d05266311"/>
 <section title="extend" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a8bb3d9f6d2249583f9e83d3637018895"/>
+<section title="gridSize" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a7b749d27e73b6f8a2c3b8683840d8f8f"/>
 <section title="isConnector" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a0aee43a24eb6e9d33b4bf15ad3b06259"/>
 <section title="lockVisible" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#ad4ee397c4e0a49be00776bebd2473505"/>
@@ -4186,7 +4187,6 @@
 <section title="RED" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="USER_ROLE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a14ccbb61b1637fa8740662f1cec226b5"/>
 <section title="verbose" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
@@ -4194,6 +4194,7 @@
 </section>
 <section title="StationWidget" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html">
 <section title="StationWidget" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#aa721680eda8feca45a1a3bbe7d83b86a"/>
+<section title="gridSize" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <section title="hasLock" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <section title="paint" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a221b4148fd06510a00c706514a26e2ff"/>
 <section title="paintEvent" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a99b593e96e7211cf2c50da5f27e4739f"/>
@@ -4213,7 +4214,6 @@
 <section title="RED" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <section title="RED_LIGHT" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
 <section title="SCALE" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#acce76f98bcbb4ffe507dd16fb0cbcee2"/>
-<section title="SIZE" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <section title="verbose" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a5dff0362adacafe887e77a863a49c22d"/>
 <section title="WHITE" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#ab38be0dcde4d168129a830332ee9f65d"/>
 <section title="YELLOW" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
@@ -4971,6 +4971,7 @@
 <keyword name="GO" id="mrw::model::Signal::GO_a6d51b86199063962daedf9c4b861bc85a3d6954dd72e53b9015d2a6e6546058f8" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85a3d6954dd72e53b9015d2a6e6546058f8"/>
 <keyword name="GREEN" id="mrw::ui::BaseWidget::GREEN_aa54d6d78623865a1e29e8ef7afb2df22" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#aa54d6d78623865a1e29e8ef7afb2df22"/>
 <keyword name="GREEN_ON" id="mrw::util::String::GREEN_ON_a97deee27c031921c641a624fb74f8a0e" ref="d0/d55/classmrw_1_1util_1_1String.html#a97deee27c031921c641a624fb74f8a0e"/>
+<keyword name="gridSize()" id="mrw::ui::BaseWidget::gridSize_a93824b7de7c161fe1c5865e95976364f" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
 <keyword name="HALF" id="mrw::model::Position::HALF_adc06dce2c59482cd16412ea864892b00" ref="db/d4f/classmrw_1_1model_1_1Position.html#adc06dce2c59482cd16412ea864892b00"/>
 <keyword name="has_distant" id="mrw::ctrl::SignalController::Status::has_distant_a1f5b1bb1f6439c832ef2ab1ebd81e468" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a1f5b1bb1f6439c832ef2ab1ebd81e468"/>
 <keyword name="has_flank_protection" id="mrw::ctrl::BaseSwitchController::Status::has_flank_protection_a33dc8379c42890008405241119aa2562" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a33dc8379c42890008405241119aa2562"/>
@@ -5343,7 +5344,6 @@
 <keyword name="Singleton&lt; GlobalBatch &gt;" id="mrw::util::GlobalBatch::Singleton&lt; GlobalBatch &gt;_a829e37c010521603ab72a94bec0b71cc" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a829e37c010521603ab72a94bec0b71cc"/>
 <keyword name="Singleton&lt; LoggerService &gt;" id="mrw::log::LoggerService::Singleton&lt; LoggerService &gt;_abd686063a3d41841f0602cf4e274265d" ref="d4/dc7/classmrw_1_1log_1_1LoggerService.html#abd686063a3d41841f0602cf4e274265d"/>
 <keyword name="Singleton&lt; Random &gt;" id="mrw::util::Random::Singleton&lt; Random &gt;_ad4ba9c502cc704e19f4c21eca8f8ab58" ref="d5/d62/classmrw_1_1util_1_1Random.html#ad4ba9c502cc704e19f4c21eca8f8ab58"/>
-<keyword name="SIZE" id="mrw::ui::BaseWidget::SIZE_a2793c577d78bc459d7e251b933545286" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a2793c577d78bc459d7e251b933545286"/>
 <keyword name="size() const noexcept" id="mrw::can::MrwMessage::size_a0021b4ca7d4936a10520582db11351e5" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0021b4ca7d4936a10520582db11351e5"/>
 <keyword name="State" id="mrw::model::DoubleCrossSwitch::State_a1a462292eecb5d40e19aec3af07c93e1" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1"/>
 <keyword name="AC" id="mrw::model::DoubleCrossSwitch::AC_a1a462292eecb5d40e19aec3af07c93e1a4144e097d2fa7a491cec2a7a4322f2bc" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1a4144e097d2fa7a491cec2a7a4322f2bc"/>

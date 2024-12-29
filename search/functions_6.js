@@ -4,5 +4,6 @@ var searchData=
   ['getaddress_1',['getAddress',['../d0/d55/classmrw_1_1util_1_1HexLine.html#a4daff801875b2ec92e754c9f2ad3782c',1,'mrw::util::HexLine']]],
   ['getnumberofparalleltimeevents_2',['getNumberOfParallelTimeEvents',['../d7/d75/classsc_1_1timer_1_1TimedInterface.html#ad96876d6b84af8366141209a2930a313',1,'sc::timer::TimedInterface']]],
   ['getsignals_3',['getSignals',['../de/de1/classmrw_1_1model_1_1Section.html#ace2667a691c780478c1d107827b37cb3',1,'mrw::model::Section']]],
-  ['gettimerservice_4',['getTimerService',['../d7/d75/classsc_1_1timer_1_1TimedInterface.html#a0569ca1dfc217b99feb88a3f65db2f3c',1,'sc::timer::TimedInterface']]]
+  ['gettimerservice_4',['getTimerService',['../d7/d75/classsc_1_1timer_1_1TimedInterface.html#a0569ca1dfc217b99feb88a3f65db2f3c',1,'sc::timer::TimedInterface']]],
+  ['gridsize_5',['gridSize',['../df/db9/classmrw_1_1ui_1_1BaseWidget.html#a93824b7de7c161fe1c5865e95976364f',1,'mrw::ui::BaseWidget']]]
 ];
