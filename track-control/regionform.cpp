@@ -115,8 +115,8 @@ void RegionForm::setupSize(Region * region)
 	}
 
 	ui->controlWidget->setFixedSize(
-		xMax * BaseWidget::SIZE / Position::FRACTION + BaseWidget::SIZE,
-		yMax * BaseWidget::SIZE / Position::FRACTION + BaseWidget::SIZE);
+		xMax * BaseWidget::gridSize() / Position::FRACTION + BaseWidget::gridSize(),
+		yMax * BaseWidget::gridSize() / Position::FRACTION + BaseWidget::gridSize());
 }
 
 void RegionForm::setupRails(SectionController * controller)
