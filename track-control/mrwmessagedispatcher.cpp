@@ -136,8 +136,9 @@ bool MrwMessageDispatcher::filter(const MrwMessage & message)
 
 void MrwMessageDispatcher::connectBus()
 {
-	if (can_device->state() != QCanBusDevice::ConnectedState)
+	if (!isConnected())
 	{
+		qDebug("Connecting CAN device...");
 		can_device->connectDevice();
 	}
 	else

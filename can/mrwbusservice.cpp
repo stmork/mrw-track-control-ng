@@ -25,7 +25,7 @@ MrwBusService::MrwBusService(
 
 {
 	QString error;
-	QString selected = select(interface, plugin);
+	const QString selected = select(interface, plugin);
 
 	can_device = can_bus->createDevice(plugin, selected, &error);
 	if (can_device != nullptr)
@@ -42,17 +42,20 @@ MrwBusService::MrwBusService(
 		connect(
 			can_device, &QCanBusDevice::errorOccurred, [] (auto reason)
 		{
-			qCritical() << reason;
+			qCritical().noquote() << "CAN bus error occured: " << reason;
 		});
 
 		if (auto_connect)
 		{
-			can_device->connectDevice();
+			if (!can_device->connectDevice())
+			{
+				qCritical().noquote() << "Cannot connect to CAN device!";
+			}
 		}
 	}
 	else
 	{
-		qCritical().noquote() << error;
+		qCritical().noquote() << "Cannot create CAN device:" << error;
 	}
 }
 
@@ -110,7 +113,7 @@ bool MrwBusService::write(const MrwMessage & message) noexcept
 
 void MrwBusService::process(const MrwMessage & message)
 {
-	qDebug() << message;
+	qDebug().noquote() << message;
 }
 
 QString MrwBusService::select(
@@ -137,6 +140,10 @@ QString MrwBusService::select(
 			return infos.first().name();
 		}
 	}
+	else
+	{
+		qCritical().noquote() << "Cannot list available CAN devices: " << error;
+	}
 
 	return "";
 }
@@ -146,15 +153,18 @@ void MrwBusService::stateChanged(QCanBusDevice::CanBusDeviceState state) noexcep
 	switch (state)
 	{
 	case QCanBusDevice::ConnectedState:
+		qInfo("CAN bus connected.");
 		emit connected();
 		break;
 
 	case QCanBusDevice::UnconnectedState:
+		qInfo("CAN bus disconnected.");
 		emit disconnected();
 		break;
 
 	default:
-		// States intenionally ignored.
+		// States intentionally ignored.
+		qDebug().noquote() << "CAN bus state change: " << state;
 		break;
 	}
 }
