@@ -30,6 +30,7 @@ MrwBusService::MrwBusService(
 	can_device = can_bus->createDevice(plugin, selected, &error);
 	if (can_device != nullptr)
 	{
+		can_device->setConfigurationParameter(QCanBusDevice::BitRateKey, QVariant());
 		connect(
 			can_device, &QCanBusDevice::framesReceived,
 			this, &MrwBusService::receive,
