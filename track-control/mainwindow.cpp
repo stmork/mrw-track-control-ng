@@ -96,12 +96,15 @@ MainWindow::MainWindow(
 	statechart.can().setOperationCallback(dispatcher);
 
 	Q_ASSERT(statechart.check());
-	statechart.enter();
 
 	static SignalHandler terminator( { SIGTERM, SIGINT }, [&]()
 	{
 		statechart.finalize();
 	});
+
+	// And startup!
+	qDebug("Starting up...");
+	statechart.enter();
 }
 
 MainWindow::~MainWindow()
