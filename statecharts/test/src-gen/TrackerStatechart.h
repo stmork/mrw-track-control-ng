@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 * */
 
@@ -239,7 +239,6 @@ namespace mrw
 			void react_main_region__choice_0();
 			void react_main_region__entry_Default();
 			void react_main_region_Driving_Tracking__entry_Default();
-			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Preparing_react(const sc::integer transitioned_before);
 			sc::integer main_region_Driving_react(const sc::integer transitioned_before);
 			sc::integer main_region_Driving_Tracking_First_react(const sc::integer transitioned_before);

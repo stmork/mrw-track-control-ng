@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 * */
 
@@ -306,7 +306,6 @@ namespace mrw
 			void react_main_region__choice_1();
 			void react_main_region__choice_2();
 			void react_main_region__entry_Default();
-			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Ping_react(const sc::integer transitioned_before);
 			sc::integer main_region_Reset_react(const sc::integer transitioned_before);
 			sc::integer main_region_Flash_Request_react(const sc::integer transitioned_before);
@@ -314,10 +313,8 @@ namespace mrw
 			sc::integer main_region_Flash_Rest_react(const sc::integer transitioned_before);
 			sc::integer main_region_Flash_Check_react(const sc::integer transitioned_before);
 			sc::integer main_region_Leave_Bootloader_react(const sc::integer transitioned_before);
-			sc::integer main_region_Booted_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_for_Connect_react(const sc::integer transitioned_before);
 			sc::integer main_region_Test_Hardware_Mismatch_react(const sc::integer transitioned_before);
-			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			void clearInEvents() noexcept;
 			void microStep();
 			void runCycle();

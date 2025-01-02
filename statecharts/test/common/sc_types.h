@@ -1,9 +1,9 @@
-/* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
-* */
+
+#pragma once
 
 #ifndef SC_TYPES_H_
 #define SC_TYPES_H_
@@ -21,4 +21,4 @@ namespace sc
 	typedef time_t     time;
 }
 
-#endif /* SC_TYPES_H_ */
+#endif

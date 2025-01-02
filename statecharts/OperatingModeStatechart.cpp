@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 * */
 
@@ -671,13 +671,6 @@ namespace mrw
 			exact_main_region_Manual();
 		}
 
-		/* Default exit sequence for state Wait */
-		void OperatingModeStatechart::exseq_main_region_Wait()
-		{
-			/* Default exit sequence for state Wait */
-			stateConfVector[0] = mrw::statechart::OperatingModeStatechart::State::NO_STATE;
-		}
-
 		/* Default exit sequence for region main region */
 		void OperatingModeStatechart::exseq_main_region()
 		{
@@ -733,11 +726,6 @@ namespace mrw
 			case mrw::statechart::OperatingModeStatechart::State::main_region_Manual :
 				{
 					exseq_main_region_Manual();
-					break;
-				}
-			case mrw::statechart::OperatingModeStatechart::State::main_region_Wait :
-				{
-					exseq_main_region_Wait();
 					break;
 				}
 			default:
@@ -825,12 +813,6 @@ namespace mrw
 			enseq_main_region_Running_operating_Prepare_Bus_default();
 		}
 
-		sc::integer OperatingModeStatechart::react(const sc::integer transitioned_before)
-		{
-			/* State machine reactions. */
-			return transitioned_before;
-		}
-
 		sc::integer OperatingModeStatechart::main_region_Exit_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Exit. */
@@ -848,15 +830,9 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
-		}
-
-		sc::integer OperatingModeStatechart::main_region__final__react(const sc::integer transitioned_before)
-		{
-			/* The reactions of state null. */
-			return react(transitioned_before);
 		}
 
 		sc::integer OperatingModeStatechart::main_region_Running_react(const sc::integer transitioned_before)
@@ -876,7 +852,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -1020,7 +996,6 @@ namespace mrw
 						{
 							exseq_main_region_Running();
 							enseq_main_region_Manual_default();
-							react(0);
 							transitioned_after = 0;
 						}
 					}
@@ -1091,7 +1066,6 @@ namespace mrw
 				{
 					exseq_main_region_Manual();
 					enseq_main_region_Running_operating_Init_default();
-					react(0);
 					transitioned_after = 0;
 				}
 				else
@@ -1100,7 +1074,6 @@ namespace mrw
 					{
 						exseq_main_region_Manual();
 						enseq_main_region_Wait_default();
-						react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -1109,7 +1082,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -1122,7 +1095,6 @@ namespace mrw
 			{
 				if (completed_raised)
 				{
-					exseq_main_region_Wait();
 					emit quit();
 					enseq_main_region__final__default();
 					transitioned_after = 0;
@@ -1132,7 +1104,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -1164,7 +1136,6 @@ namespace mrw
 				}
 			case mrw::statechart::OperatingModeStatechart::State::main_region__final_ :
 				{
-					main_region__final__react(-1);
 					break;
 				}
 			case mrw::statechart::OperatingModeStatechart::State::main_region_Running_operating_Failed :

@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 * */
 
@@ -308,16 +308,13 @@ namespace mrw
 			void exseq_main_region_Active_processing_Completed();
 			void exseq_main_region_Wait();
 			void exseq_main_region_Emergency_Shutdown();
-			void exseq_main_region_Unlock();
 			void exseq_main_region();
 			void exseq_main_region_Active_processing();
 			void react_main_region_Active_processing__choice_0();
 			void react_main_region__choice_0();
 			void react_main_region__entry_Default();
-			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Disable_react(const sc::integer transitioned_before);
 			sc::integer main_region_Start_react(const sc::integer transitioned_before);
-			sc::integer main_region__final__react(const sc::integer transitioned_before);
 			sc::integer main_region_Active_react(const sc::integer transitioned_before);
 			sc::integer main_region_Active_processing_Switch_Turning_react(const sc::integer transitioned_before);
 			sc::integer main_region_Active_processing_Signal_Turning_react(const sc::integer transitioned_before);
