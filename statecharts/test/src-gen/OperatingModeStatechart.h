@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 * */
 
@@ -215,7 +215,7 @@ namespace mrw
 			private:
 				friend class OperatingModeStatechart;
 
-				static constexpr const sc::integer timeout {250};
+				static constexpr const sc::integer timeout {2500};
 
 				/*! Indicates event 'connected' of interface scope 'can' is active. */
 				bool connected_raised {false};
@@ -359,15 +359,12 @@ namespace mrw
 			void exseq_main_region_Running_operating_Editing();
 			void exseq_main_region_Running_operating_Disable();
 			void exseq_main_region_Manual();
-			void exseq_main_region_Wait();
 			void exseq_main_region();
 			void exseq_main_region_Running_operating();
 			void react_main_region__choice_0();
 			void react_main_region_Running_operating__choice_0();
 			void react_main_region__entry_Default();
-			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Exit_react(const sc::integer transitioned_before);
-			sc::integer main_region__final__react(const sc::integer transitioned_before);
 			sc::integer main_region_Running_react(const sc::integer transitioned_before);
 			sc::integer main_region_Running_operating_Failed_react(const sc::integer transitioned_before);
 			sc::integer main_region_Running_operating_Prepare_Bus_react(const sc::integer transitioned_before);

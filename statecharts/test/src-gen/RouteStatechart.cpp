@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 * */
 
@@ -665,13 +665,6 @@ namespace mrw
 			exact_main_region_Emergency_Shutdown();
 		}
 
-		/* Default exit sequence for state Unlock */
-		void RouteStatechart::exseq_main_region_Unlock()
-		{
-			/* Default exit sequence for state Unlock */
-			stateConfVector[0] = mrw::statechart::RouteStatechart::State::NO_STATE;
-		}
-
 		/* Default exit sequence for region main region */
 		void RouteStatechart::exseq_main_region()
 		{
@@ -737,11 +730,6 @@ namespace mrw
 			case mrw::statechart::RouteStatechart::State::main_region_Emergency_Shutdown :
 				{
 					exseq_main_region_Emergency_Shutdown();
-					break;
-				}
-			case mrw::statechart::RouteStatechart::State::main_region_Unlock :
-				{
-					exseq_main_region_Unlock();
 					break;
 				}
 			default:
@@ -828,12 +816,6 @@ namespace mrw
 			enseq_main_region_Start_default();
 		}
 
-		sc::integer RouteStatechart::react(const sc::integer transitioned_before)
-		{
-			/* State machine reactions. */
-			return transitioned_before;
-		}
-
 		sc::integer RouteStatechart::main_region_Disable_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Disable. */
@@ -844,7 +826,6 @@ namespace mrw
 				{
 					exseq_main_region_Disable();
 					enseq_main_region_Unlock_default();
-					react(0);
 					transitioned_after = 0;
 				}
 				else
@@ -854,7 +835,6 @@ namespace mrw
 						exseq_main_region_Disable();
 						timeEvents[0] = false;
 						enseq_main_region_Unlock_default();
-						react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -863,7 +843,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -878,7 +858,6 @@ namespace mrw
 				{
 					exseq_main_region_Start();
 					enseq_main_region_Active_processing_Switch_Turning_default();
-					react(0);
 					transitioned_after = 0;
 				}
 			}
@@ -886,15 +865,9 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
-		}
-
-		sc::integer RouteStatechart::main_region__final__react(const sc::integer transitioned_before)
-		{
-			/* The reactions of state null. */
-			return react(transitioned_before);
 		}
 
 		sc::integer RouteStatechart::main_region_Active_react(const sc::integer transitioned_before)
@@ -924,7 +897,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -948,7 +921,6 @@ namespace mrw
 						exseq_main_region_Active();
 						timeEvents[1] = false;
 						enseq_main_region_Emergency_Shutdown_default();
-						react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -982,7 +954,6 @@ namespace mrw
 						exseq_main_region_Active();
 						timeEvents[2] = false;
 						enseq_main_region_Emergency_Shutdown_default();
-						react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -1016,7 +987,6 @@ namespace mrw
 						exseq_main_region_Active();
 						timeEvents[3] = false;
 						enseq_main_region_Emergency_Shutdown_default();
-						react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -1050,7 +1020,6 @@ namespace mrw
 						exseq_main_region_Active();
 						timeEvents[4] = false;
 						enseq_main_region_Emergency_Shutdown_default();
-						react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -1085,7 +1054,6 @@ namespace mrw
 						exseq_main_region_Active();
 						timeEvents[5] = false;
 						enseq_main_region_Emergency_Shutdown_default();
-						react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -1132,7 +1100,6 @@ namespace mrw
 				{
 					exseq_main_region_Wait();
 					enseq_main_region_Disable_default();
-					react(0);
 					transitioned_after = 0;
 				}
 				else
@@ -1142,7 +1109,6 @@ namespace mrw
 						exseq_main_region_Wait();
 						timeEvents[6] = false;
 						enseq_main_region_Disable_default();
-						react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -1151,7 +1117,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -1167,7 +1133,6 @@ namespace mrw
 					exseq_main_region_Emergency_Shutdown();
 					timeEvents[7] = false;
 					enseq_main_region_Unlock_default();
-					react(0);
 					transitioned_after = 0;
 				}
 			}
@@ -1175,7 +1140,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -1188,7 +1153,6 @@ namespace mrw
 			{
 				if (completed_raised)
 				{
-					exseq_main_region_Unlock();
 					finished_raised = true;
 					enseq_main_region__final__default();
 					transitioned_after = 0;
@@ -1198,7 +1162,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -1241,7 +1205,6 @@ namespace mrw
 				}
 			case mrw::statechart::RouteStatechart::State::main_region__final_ :
 				{
-					main_region__final__react(-1);
 					break;
 				}
 			case mrw::statechart::RouteStatechart::State::main_region_Active_processing_Switch_Turning :
