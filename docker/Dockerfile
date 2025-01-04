@@ -2,12 +2,11 @@ ARG OS=ubuntu
 FROM $OS:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt update
-RUN apt dist-upgrade -y
-RUN apt install -y apt-utils apt-transport-https
-RUN apt install -y joe lsb-release ca-certificates
-RUN apt install -y libqt5serialbus5-dev qhelpgenerator-qt5 graphviz pkg-config
-RUN apt install -y git make g++ cppcheck libgtest-dev cccc fakeroot doxygen
+RUN apt update && apt dist-upgrade -y && apt install -y \
+   apt-utils apt-transport-https \
+   joe lsb-release ca-certificates \
+   libqt5serialbus5-dev qhelpgenerator-qt5 graphviz pkg-config \
+   git make g++ cppcheck libgtest-dev cccc fakeroot doxygen
 
 RUN addgroup dev
 RUN adduser --ingroup dev --home /home/dev --gecos "Development user" --disabled-password dev
