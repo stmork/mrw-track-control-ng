@@ -1,10 +1,9 @@
 var searchData=
 [
   ['name_0',['name',['../d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e',1,'mrw::ctrl::BaseController::Status::name'],['../d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#ae034c20e8970a700b23f6183cdc35a27',1,'mrw::util::BatchParticipant::name()'],['../df/db7/classmrw_1_1model_1_1AbstractSwitch.html#ad85b4b8cb457b8485dcb2ceafb83bcf4',1,'mrw::model::AbstractSwitch::name()'],['../d8/d2c/classmrw_1_1model_1_1Device.html#a096acffad825581a99fbf267ae2c9870',1,'mrw::model::Device::name()'],['../d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6feca96c763b42bb37f928ab925083d4',1,'mrw::model::FormSignal::name()'],['../d0/d3c/classmrw_1_1model_1_1Light.html#a7e9f7c784e00895461bd48204d955b42',1,'mrw::model::Light::name()'],['../d6/d71/classmrw_1_1model_1_1LightSignal.html#a0831d682aabdb2ad65cd08337557b3c9',1,'mrw::model::LightSignal::name()'],['../db/d26/classmrw_1_1model_1_1Rail.html#ade10d93dfffd2de26541b3734c468a7a',1,'mrw::model::Rail::name()'],['../d4/d3e/classmrw_1_1model_1_1Region.html#a2e264d95ea94c72d6e09c3bd0f8636ac',1,'mrw::model::Region::name()'],['../de/de1/classmrw_1_1model_1_1Section.html#a406de552480023ba2234540b49c668f6',1,'mrw::model::Section::name()'],['../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38',1,'mrw::ctrl::BaseController::name()']]],
-  ['namespace_1',['namespace',['../d4/d9b/md_can_2README.html',1,'The mrw::can namespace'],['../d0/d47/md_ctrl_2README.html',1,'The mrw::ctrl namespace'],['../d8/deb/md_log_2README.html',1,'The mrw::log namespace'],['../dc/d32/md_model_2README.html',1,'The mrw::model namespace'],['../df/d9d/md_ui_2README.html',1,'The mrw::ui namespace'],['../df/db2/md_util_2README.html',1,'The mrw::util namespace']]],
-  ['never_2',['never',['../d0/def/classmrw_1_1util_1_1Method.html#a0b6bad7ed10e28f13a0ca211e3e929d3',1,'mrw::util::Method']]],
-  ['new_5fline_3',['NEW_LINE',['../db/d4f/classmrw_1_1model_1_1Position.html#aab6e72059cc7d5fde0aa7ee1c198f1c2',1,'mrw::model::Position']]],
-  ['ng_4',['MRW Track Control NG',['../d0/d30/md_README.html',1,'']]],
-  ['no_5funitno_5',['NO_UNITNO',['../d9/d9b/namespacemrw_1_1can.html#aa9e5a8167acba11155bc8eacd145763a',1,'mrw::can']]],
-  ['noop_6',['noop',['../d0/def/classmrw_1_1util_1_1Method.html#aaca8663dc7d7fa6057733d32ac9ed272',1,'mrw::util::Method']]]
+  ['never_1',['never',['../d0/def/classmrw_1_1util_1_1Method.html#a0b6bad7ed10e28f13a0ca211e3e929d3',1,'mrw::util::Method']]],
+  ['new_5fline_2',['NEW_LINE',['../db/d4f/classmrw_1_1model_1_1Position.html#aab6e72059cc7d5fde0aa7ee1c198f1c2',1,'mrw::model::Position']]],
+  ['ng_3',['MRW Track Control NG',['../d0/d30/md_README.html',1,'']]],
+  ['no_5funitno_4',['NO_UNITNO',['../d9/d9b/namespacemrw_1_1can.html#aa9e5a8167acba11155bc8eacd145763a',1,'mrw::can']]],
+  ['noop_5',['noop',['../d0/def/classmrw_1_1util_1_1Method.html#aaca8663dc7d7fa6057733d32ac9ed272',1,'mrw::util::Method']]]
 ];
