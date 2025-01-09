@@ -32,7 +32,7 @@ namespace mrw::ctrl
 			mrw::model::RegularSwitch::State::AB;
 
 	public:
-		RegularSwitchControllerMock(QObject * parent = nullptr);
+		explicit RegularSwitchControllerMock(QObject * parent = nullptr);
 
 		void reset();
 

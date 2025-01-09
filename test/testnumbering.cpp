@@ -70,9 +70,9 @@ void TestNumbering::testPorts()
 
 void TestNumbering::testPairSignalSection1()
 {
-	LightSignal * lr1 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 0, 4));
-	LightSignal * lr2 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 0, 5));
-	LightSignal * lr3 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 0, 6));
+	const LightSignal * lr1 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 0, 4));
+	const LightSignal * lr2 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 0, 5));
+	const LightSignal * lr3 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 0, 6));
 
 	QVERIFY(lr1 == nullptr);
 	QVERIFY(lr2 == nullptr);
@@ -81,18 +81,19 @@ void TestNumbering::testPairSignalSection1()
 
 void TestNumbering::testPairSignalSection2()
 {
-	LightSignal * lr1 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 3));
-	LightSignal * lr2 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 4));
-	LightSignal * lr3 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 5));
-	LightSignal * lr4 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 6));
-	LightSignal * lr5 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 7));
-	LightSignal * lr6 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 8));
-	FormSignal  * fr1 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 3));
-	FormSignal  * fr2 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 4));
-	FormSignal  * fr3 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 5));
-	FormSignal  * fr4 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 6));
-	FormSignal  * fr5 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 7));
-	FormSignal  * fr6 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 8));
+	const LightSignal * lr1 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 3));
+	const LightSignal * lr2 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 4));
+	const LightSignal * lr3 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 5));
+	const LightSignal * lr4 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 6));
+	const LightSignal * lr5 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 7));
+	const LightSignal * lr6 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 1, 8));
+
+	const FormSignal  * fr1 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 3));
+	const FormSignal  * fr2 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 4));
+	const FormSignal  * fr3 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 5));
+	const FormSignal  * fr4 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 6));
+	const FormSignal  * fr5 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 7));
+	const FormSignal  * fr6 = dynamic_cast<FormSignal *>(model->assemblyPart(0, 1, 8));
 
 	QVERIFY(lr1 != nullptr);
 	QVERIFY(lr2 != nullptr);
@@ -111,11 +112,11 @@ void TestNumbering::testPairSignalSection2()
 
 void TestNumbering::testPairSignalSection3()
 {
-	LightSignal * ll1 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 0));
-	LightSignal * ll2 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 1));
-	LightSignal * lr1 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 2));
-	LightSignal * lr2 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 3));
-	LightSignal * lr3 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 4));
+	const LightSignal * ll1 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 0));
+	const LightSignal * ll2 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 1));
+	const LightSignal * lr1 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 2));
+	const LightSignal * lr2 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 3));
+	const LightSignal * lr3 = dynamic_cast<LightSignal *>(model->assemblyPart(0, 2, 4));
 
 	QVERIFY(ll1 != nullptr);
 	QVERIFY(ll2 != nullptr);

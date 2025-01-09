@@ -55,16 +55,15 @@ bool ControllerWidget::isConnector(const QPoint & point) const
 		x() * Position::FRACTION / gridSize(),
 		y() * Position::FRACTION / gridSize());
 
-	for (const QPoint & local : connector_list)
+	return std::any_of(
+			connector_list.begin(),
+			connector_list.end(),
+			[&] (const QPoint & local)
 	{
 		const QPoint compare = local + base;
 
-		if (compare == point)
-		{
-			return true;
-		}
-	}
-	return false;
+		return compare == point;
+	});
 }
 
 void ControllerWidget::reposition()

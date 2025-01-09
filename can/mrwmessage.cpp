@@ -279,7 +279,7 @@ MrwMessage::operator QCanBusFrame() const noexcept
 
 QString MrwMessage::toString() const noexcept
 {
-	QString appendix = QByteArray((const char *)info, max()).toHex(' ');
+	QString appendix = QByteArray(reinterpret_cast<const char *>(info), max()).toHex(' ');
 
 	if (is_response)
 	{

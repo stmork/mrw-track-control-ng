@@ -19,7 +19,7 @@ LoggerBase::~LoggerBase()
 
 QString LoggerBase::timeStamp() noexcept
 {
-	QDateTime now = QDateTime::currentDateTime();
+	const QDateTime now = QDateTime::currentDateTime();
 
 	return now.toString(Duration::TIME_STAMP_FORMAT);
 }

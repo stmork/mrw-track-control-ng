@@ -21,7 +21,7 @@ class CanBusProxyService : public MrwBusService
 	MrwBusService * proxy = nullptr;
 
 public:
-	CanBusProxyService(
+	explicit CanBusProxyService(
 		const char * interface = "can0",
 		const char * plugin    = "socketcan",
 		QObject   *  parent    = nullptr) :

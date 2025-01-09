@@ -103,9 +103,8 @@ void BeerModeService::findCandidates(
 	std::vector<Rail *> & candidates,
 	const bool            dir) const noexcept
 {
-
 	// Second: Select all occupied neighbours in wanted direction.
-	for (Rail * rail : main_rails)
+	for (const Rail * rail : main_rails)
 	{
 		Rail * part = BeerModeService::isNeighbourOccupied(rail, dir);
 

@@ -37,7 +37,7 @@ TimestampedFileLogger::TimestampedFileLogger(const QString & prefix) :
 
 QString TimestampedFileLogger::filename(const QString & prefix)
 {
-	QDateTime now = QDateTime::currentDateTime();
+	const QDateTime now = QDateTime::currentDateTime();
 
 	return prefix + "_" + now.toString("yyyyMMdd_HHmmss") + ".log";
 }

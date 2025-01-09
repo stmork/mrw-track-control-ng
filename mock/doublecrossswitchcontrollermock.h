@@ -30,7 +30,7 @@ namespace mrw::ctrl
 			mrw::model::DoubleCrossSwitch::State::AC;
 
 	public:
-		DoubleCrossSwitchControllerMock(QObject * parent = nullptr);
+		explicit DoubleCrossSwitchControllerMock(QObject * parent = nullptr);
 
 		void reset();
 

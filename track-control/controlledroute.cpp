@@ -280,7 +280,7 @@ void ControlledRoute::rename()
  */
 void ControlledRoute::entered()
 {
-	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
+	const SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
 
 	qDebug().noquote() << "Entered:    " << *controller;
 }
@@ -345,7 +345,7 @@ void ControlledRoute::tryUnblockCtrl(SectionController * section_ctrl)
 
 	Section        *        section     = section_ctrl->section();
 	SignalControllerProxy * signal_ctrl = getSignalController(section);
-	Signal         *        main_signal = signal_ctrl != nullptr ? signal_ctrl->mainSignal() : nullptr;
+	const Signal      *     main_signal = signal_ctrl != nullptr ? signal_ctrl->mainSignal() : nullptr;
 
 	if (main_signal != nullptr)
 	{
