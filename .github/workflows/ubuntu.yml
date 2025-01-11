@@ -9,7 +9,7 @@ jobs:
       - name: Update package info
         run: sudo apt update -y
       - name: Install needed components
-        run: sudo apt install -y libqt5serialbus5-dev cppcheck libgtest-dev
+        run: sudo apt install -y libqt5serialbus5-dev libsystemd-dev libgtest-dev cppcheck
       - name: QMake
         run: qmake -r
       - name: Build

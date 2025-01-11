@@ -8,6 +8,8 @@
 #include <QSettings>
 #include <QDebug>
 
+#include <systemd/sd-daemon.h>
+
 #include <util/method.h>
 #include <util/settings.h>
 #include <util/dumphandler.h>
@@ -69,6 +71,7 @@ int main(int argc, char * argv[])
 			qInfo() << "CAN plugin:" << repo.plugin();
 			qInfo() << "CAN iface: " << repo.interface();
 			qInfo("==========================================================");
+			sd_notify(0, "READY=1");
 			return app.exec();
 		}
 		catch (const std::exception & exception)

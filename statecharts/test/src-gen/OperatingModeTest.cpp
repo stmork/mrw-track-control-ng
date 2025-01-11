@@ -388,6 +388,59 @@ namespace
 	};
 	static ActivateManualMock * activateManualMock;
 
+	class KeepAliveMock
+	{
+		typedef void (KeepAliveMock::*functiontype)();
+	public:
+		void (KeepAliveMock::*keepAliveBehaviorDefault)();
+		int callCount;
+
+		void keepAlive1()
+		{
+		}
+
+		void keepAliveDefault()
+		{
+		}
+
+		bool calledAtLeast(const int times)
+		{
+			return (callCount >= times);
+		}
+
+		bool calledAtLeastOnce()
+		{
+			return (callCount > 0);
+		}
+
+		void keepAlive()
+		{
+			++callCount;
+		}
+
+		functiontype getBehavior()
+		{
+			return keepAliveBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (KeepAliveMock::*defaultBehavior)())
+		{
+			keepAliveBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&KeepAliveMock::keepAliveDefault);
+		}
+
+		void reset()
+		{
+			initializeBehavior();
+			callCount = 0;
+		}
+	};
+	static KeepAliveMock * keepAliveMock;
+
 	class CanIsConnectedMock
 	{
 		typedef bool (CanIsConnectedMock::*functiontype)();
@@ -435,6 +488,11 @@ namespace
 	class MockDefault : public mrw::statechart::OperatingModeStatechart::OperationCallback
 	{
 	public:
+		void keepAlive()
+		{
+			keepAliveMock->keepAlive();
+			return (keepAliveMock->*(keepAliveMock->getBehavior()))();
+		}
 		void resetTransaction()
 		{
 			resetTransactionMock->resetTransaction();
@@ -499,6 +557,8 @@ namespace
 			resetTransactionMock->initializeBehavior();
 			activateManualMock = new ActivateManualMock();
 			activateManualMock->initializeBehavior();
+			keepAliveMock = new KeepAliveMock();
+			keepAliveMock->initializeBehavior();
 			canIsConnectedMock = new CanIsConnectedMock();
 			canIsConnectedMock->initializeBehavior();
 			statechart->setOperationCallback(&defaultMock);
@@ -507,6 +567,7 @@ namespace
 		virtual void TearDown()
 		{
 			delete canIsConnectedMock;
+			delete keepAliveMock;
 			delete activateManualMock;
 			delete resetTransactionMock;
 			delete disableRoutesMock;
@@ -540,16 +601,27 @@ namespace
 
 
 
+
 	}
 	TEST_F(OperatingModeTest, wait)
 	{
 		wait();
 	}
+	TEST_F(OperatingModeTest, keepAliveTest)
+	{
+		wait();
+
+		runner->proceed_time(statechart->getWd_timeout() * 1000);
+
+		EXPECT_TRUE(keepAliveMock->calledAtLeastOnce());
+
+	}
 	TEST_F(OperatingModeTest, timeoutAfterWait)
 	{
 		wait();
 
-		runner->proceed_time(statechart->getTimeout());
+		runner->proceed_time(statechart->can
+			().getTimeout());
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running));
 

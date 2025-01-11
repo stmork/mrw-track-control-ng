@@ -20,6 +20,20 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		mock disableRoutes
 		mock resetTransaction
 		mock activateManual
+		mock keepAlive
+	}
+
+	@Test
+	operation keepAliveTest()
+	{
+		// Given
+		wait()
+
+		// When
+		proceed wd_timeout s
+
+		// Then
+		assert called keepAlive
 	}
 
 	@Test
@@ -29,7 +43,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		wait()
 
 		// When
-		proceed timeout ms
+		proceed can.timeout ms
 
 		// Then
 		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)

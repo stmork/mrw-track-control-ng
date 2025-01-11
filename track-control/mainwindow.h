@@ -105,6 +105,7 @@ private:
 		mrw::model::Position    *   position);
 
 	// Implementation for OperationCallback
+	void          keepAlive() override;
 	void          resetTransaction() override;
 	bool          isManualValid() override;
 	bool          hasActiveRoutes() override;

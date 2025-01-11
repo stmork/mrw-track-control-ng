@@ -90,8 +90,9 @@ namespace mrw
 				finalize,
 				completed,
 				Can_connected,
-				_te0_main_region_Running_operating_Prepare_Bus_,
-				_te1_main_region_Running_operating_Init_
+				_te0_main_region_Running_,
+				_te1_main_region_Running_operating_Prepare_Bus_,
+				_te2_main_region_Running_operating_Init_
 			};
 
 			class EventInstance
@@ -156,6 +157,8 @@ namespace mrw
 			bool isRaisedQuit() noexcept;
 
 
+			/*! Gets the value of the variable 'wd_timeout' that is defined in the default interface scope. */
+			static sc::integer getWd_timeout()  noexcept;
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
 			static sc::integer getTimeout()  noexcept;
 			//! Inner class for default interface scope operation callbacks.
@@ -163,6 +166,8 @@ namespace mrw
 			{
 			public:
 				virtual ~OperationCallback() = 0;
+
+				virtual void keepAlive() = 0;
 
 				virtual void resetTransaction() = 0;
 
@@ -278,10 +283,10 @@ namespace mrw
 			bool isStateActive(State state) const noexcept;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount {2};
+			static const sc::integer timeEventsCount {3};
 
 			//! number of time events that can be active at once.
-			static const sc::integer parallelTimeEventsCount {1};
+			static const sc::integer parallelTimeEventsCount {2};
 
 
 		protected:
@@ -299,6 +304,7 @@ namespace mrw
 			OperatingModeStatechart(const OperatingModeStatechart & rhs);
 			OperatingModeStatechart & operator=(const OperatingModeStatechart &);
 
+			static constexpr const sc::integer wd_timeout {2};
 			static constexpr const sc::integer timeout {5000};
 
 
@@ -324,6 +330,7 @@ namespace mrw
 			// prototypes of all internal functions
 
 			void enact_main_region_Exit();
+			void enact_main_region_Running();
 			void enact_main_region_Running_operating_Failed();
 			void enact_main_region_Running_operating_Prepare_Bus();
 			void enact_main_region_Running_operating_Init();
@@ -333,6 +340,7 @@ namespace mrw
 			void enact_main_region_Manual();
 			void enact_main_region_Wait();
 			void exact_main_region_Exit();
+			void exact_main_region_Running();
 			void exact_main_region_Running_operating_Prepare_Bus();
 			void exact_main_region_Running_operating_Init();
 			void exact_main_region_Running_operating_Operating();

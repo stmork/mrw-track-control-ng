@@ -4,6 +4,7 @@
 //
 
 #include <unistd.h>
+#include <systemd/sd-daemon.h>
 
 #include <QScreen>
 
@@ -48,11 +49,13 @@ MainWindow::MainWindow(
 {
 	const QScreen * screen = QGuiApplication::primaryScreen();
 
-	if (screen != nullptr)
+	if (screen == nullptr)
 	{
-		const QSize     size   = screen->availableSize();
-		qInfo().noquote() << "Screen size: " << size;
+		throw std::runtime_error("No primary screen available!");
 	}
+
+	const QSize     size   = screen->availableSize();
+	qInfo().noquote() << "Screen size: " << size;
 
 	BaseWidget::setVerbose(false);
 
@@ -774,6 +777,11 @@ void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Po
 			return;
 		}
 	}
+}
+
+void MainWindow::keepAlive()
+{
+	sd_notify (0, "WATCHDOG=1");
 }
 
 /*************************************************************************
