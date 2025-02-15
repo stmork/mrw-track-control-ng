@@ -124,6 +124,8 @@ namespace mrw::util
 			{
 				if (it->second == value)
 				{
+					[[unlikely]];
+
 					break;
 				}
 				++it;
