@@ -3,6 +3,8 @@
 /.metadata/
 *.pro.user
 *.o
+*.gcno
+*.log
 moc_*
 ui_*.h
 .qmake.stash

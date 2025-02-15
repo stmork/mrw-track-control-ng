@@ -20,6 +20,7 @@ HEADERS += \
 	SwitchStatechart.h \
 	TrackerStatechart.h \
 	UpdateStatechart.h \
+	common/sc_eventdriven.h \
 	common/sc_statemachine.h \
 	common/sc_timer.h \
 	common/sc_types.h \

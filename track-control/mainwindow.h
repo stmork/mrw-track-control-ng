@@ -37,7 +37,8 @@ class ControlledRoute;
 
 class MainWindow :
 	public QMainWindow,
-	public mrw::util::Self<mrw::statechart::OperatingModeStatechart::OperationCallback>
+	public mrw::util::Self<mrw::statechart::OperatingModeStatechart::OperationCallback>,
+	public mrw::util::Self<mrw::statechart::OperatingModeStatechart::Screen::OperationCallback>
 {
 	Q_OBJECT
 
@@ -47,6 +48,9 @@ public:
 		MrwMessageDispatcher      &      dispatcher,
 		QWidget             *            parent = nullptr);
 	~MainWindow();
+
+protected:
+	virtual bool eventFilter(QObject * object, QEvent * event) override;
 
 public slots:
 	void disableBeerMode();
@@ -111,6 +115,11 @@ private:
 	bool          hasActiveRoutes() override;
 	void          disableRoutes() override;
 	void          activateManual(const bool activate) override;
+
+	// Implementation for Screen::OperationCallback
+	void          resetBlank() override;
+	void          blank(bool active) override;
+	void          autoBlank(bool active) override;
 
 	mrw::model::Section  * manualSection();
 	void                   warn(const QString & message);

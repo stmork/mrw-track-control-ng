@@ -58,12 +58,14 @@ namespace mrw
 				main_region_Running_operating_Operating,
 				main_region_Running_operating_Editing,
 				main_region_Running_operating_Disable,
+				main_region_Running_blanking_On,
+				main_region_Running_blanking_Off,
 				main_region_Manual,
 				main_region_Wait
 			};
 
 			/*! The number of states. */
-			static constexpr const sc::integer numStates {11};
+			static constexpr const sc::integer numStates {13};
 			static constexpr const sc::integer scvi_main_region_Exit {0};
 			static constexpr const sc::integer scvi_main_region__final_ {0};
 			static constexpr const sc::integer scvi_main_region_Running {0};
@@ -73,6 +75,8 @@ namespace mrw
 			static constexpr const sc::integer scvi_main_region_Running_operating_Operating {0};
 			static constexpr const sc::integer scvi_main_region_Running_operating_Editing {0};
 			static constexpr const sc::integer scvi_main_region_Running_operating_Disable {0};
+			static constexpr const sc::integer scvi_main_region_Running_blanking_On {1};
+			static constexpr const sc::integer scvi_main_region_Running_blanking_Off {1};
 			static constexpr const sc::integer scvi_main_region_Manual {0};
 			static constexpr const sc::integer scvi_main_region_Wait {0};
 
@@ -89,10 +93,14 @@ namespace mrw
 				init,
 				finalize,
 				completed,
+				routesChanged,
 				Can_connected,
+				Screen_userInput,
 				_te0_main_region_Running_,
-				_te1_main_region_Running_operating_Prepare_Bus_,
-				_te2_main_region_Running_operating_Init_
+				_te1_main_region_Running_,
+				_te2_main_region_Running_operating_Prepare_Bus_,
+				_te3_main_region_Running_operating_Init_,
+				_te4_main_region_Running_blanking_On_
 			};
 
 			class EventInstance
@@ -131,6 +139,8 @@ namespace mrw
 			void raiseFinalize();
 			/*! Raises the in event 'completed' of default interface scope. */
 			void raiseCompleted();
+			/*! Raises the in event 'routesChanged' of default interface scope. */
+			void raiseRoutesChanged();
 			/*! Check if event 'start' of default interface scope is raised. */
 			bool isRaisedStart() noexcept;
 			/*! Check if event 'cleared' of default interface scope is raised. */
@@ -237,6 +247,65 @@ namespace mrw
 			/*! Returns an instance of the interface class 'Can'. */
 			Can & can() noexcept;
 
+			//! Inner class for screen interface scope.
+			class Screen
+			{
+			public:
+				explicit Screen(OperatingModeStatechart * parent) noexcept;
+
+
+
+
+
+
+				/*! Gets the value of the variable 'timeout' that is defined in the interface scope 'screen'. */
+				sc::integer getTimeout() const noexcept;
+
+				/*! Sets the value of the variable 'timeout' that is defined in the interface scope 'screen'. */
+				void setTimeout(sc::integer timeout) noexcept;
+
+				/*! Raises the in event 'userInput' of interface scope 'screen'. */
+				void raiseUserInput();
+
+				//! Inner class for screen interface scope operation callbacks.
+				class OperationCallback
+				{
+				public:
+					virtual ~OperationCallback() = 0;
+
+					virtual void resetBlank() = 0;
+
+					virtual void blank(bool active) = 0;
+
+					virtual void autoBlank(bool enable) = 0;
+
+
+				};
+
+				/*! Set the working instance of the operation callback interface 'OperationCallback'. */
+				void setOperationCallback(OperationCallback * operationCallback) noexcept;
+
+
+			private:
+				friend class OperatingModeStatechart;
+
+				sc::integer timeout {600};
+
+				/*! Indicates event 'userInput' of interface scope 'screen' is active. */
+				bool userInput_raised {false};
+
+				OperatingModeStatechart * parent;
+
+
+
+				OperationCallback * ifaceScreenOperationCallback;
+
+
+			};
+
+			/*! Returns an instance of the interface class 'Screen'. */
+			Screen & screen() noexcept;
+
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent() override;
@@ -283,10 +352,10 @@ namespace mrw
 			bool isStateActive(State state) const noexcept;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount {3};
+			static const sc::integer timeEventsCount {5};
 
 			//! number of time events that can be active at once.
-			static const sc::integer parallelTimeEventsCount {2};
+			static const sc::integer parallelTimeEventsCount {4};
 
 
 		protected:
@@ -310,7 +379,7 @@ namespace mrw
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-			static const sc::ushort maxOrthogonalStates {1};
+			static const sc::ushort maxOrthogonalStates {2};
 
 			sc::timer::TimerServiceInterface * timerService;
 			bool timeEvents[timeEventsCount];
@@ -320,10 +389,12 @@ namespace mrw
 
 
 			Can ifaceCan {Can{nullptr}};
+			Screen ifaceScreen {Screen{nullptr}};
 
 			OperationCallback * ifaceOperationCallback;
 
 			bool isExecuting {false};
+			sc::integer stateConfVectorPosition {0};
 
 
 
@@ -337,6 +408,8 @@ namespace mrw
 			void enact_main_region_Running_operating_Operating();
 			void enact_main_region_Running_operating_Editing();
 			void enact_main_region_Running_operating_Disable();
+			void enact_main_region_Running_blanking_On();
+			void enact_main_region_Running_blanking_Off();
 			void enact_main_region_Manual();
 			void enact_main_region_Wait();
 			void exact_main_region_Exit();
@@ -345,18 +418,25 @@ namespace mrw
 			void exact_main_region_Running_operating_Init();
 			void exact_main_region_Running_operating_Operating();
 			void exact_main_region_Running_operating_Editing();
+			void exact_main_region_Running_blanking_On();
+			void exact_main_region_Running_blanking_Off();
 			void exact_main_region_Manual();
 			void enseq_main_region_Exit_default();
 			void enseq_main_region__final__default();
+			void enseq_main_region_Running_default();
 			void enseq_main_region_Running_operating_Failed_default();
 			void enseq_main_region_Running_operating_Prepare_Bus_default();
 			void enseq_main_region_Running_operating_Init_default();
 			void enseq_main_region_Running_operating_Operating_default();
 			void enseq_main_region_Running_operating_Editing_default();
 			void enseq_main_region_Running_operating_Disable_default();
+			void enseq_main_region_Running_blanking_On_default();
+			void enseq_main_region_Running_blanking_Off_default();
 			void enseq_main_region_Manual_default();
 			void enseq_main_region_Wait_default();
 			void enseq_main_region_default();
+			void enseq_main_region_Running_operating_default();
+			void enseq_main_region_Running_blanking_default();
 			void exseq_main_region_Exit();
 			void exseq_main_region__final_();
 			void exseq_main_region_Running();
@@ -366,11 +446,16 @@ namespace mrw
 			void exseq_main_region_Running_operating_Operating();
 			void exseq_main_region_Running_operating_Editing();
 			void exseq_main_region_Running_operating_Disable();
+			void exseq_main_region_Running_blanking_On();
+			void exseq_main_region_Running_blanking_Off();
 			void exseq_main_region_Manual();
 			void exseq_main_region();
 			void exseq_main_region_Running_operating();
+			void exseq_main_region_Running_blanking();
 			void react_main_region__choice_0();
 			void react_main_region_Running_operating__choice_0();
+			void react_main_region_Running_operating__entry_Default();
+			void react_main_region_Running_blanking__entry_Default();
 			void react_main_region__entry_Default();
 			sc::integer main_region_Exit_react(const sc::integer transitioned_before);
 			sc::integer main_region_Running_react(const sc::integer transitioned_before);
@@ -380,6 +465,8 @@ namespace mrw
 			sc::integer main_region_Running_operating_Operating_react(const sc::integer transitioned_before);
 			sc::integer main_region_Running_operating_Editing_react(const sc::integer transitioned_before);
 			sc::integer main_region_Running_operating_Disable_react(const sc::integer transitioned_before);
+			sc::integer main_region_Running_blanking_On_react(const sc::integer transitioned_before);
+			sc::integer main_region_Running_blanking_Off_react(const sc::integer transitioned_before);
 			sc::integer main_region_Manual_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_react(const sc::integer transitioned_before);
 			void clearOutEvents() noexcept;
@@ -418,6 +505,9 @@ namespace mrw
 
 			/*! Indicates event 'completed' of default interface scope is active. */
 			bool completed_raised {false};
+
+			/*! Indicates event 'routesChanged' of default interface scope is active. */
+			bool routesChanged_raised {false};
 
 			/*! Indicates event 'start' of default interface scope is active. */
 			bool start_raised {false};
@@ -462,6 +552,7 @@ namespace mrw
 
 		inline OperatingModeStatechart::OperationCallback::~OperationCallback() {}
 		inline OperatingModeStatechart::Can::OperationCallback::~OperationCallback() {}
+		inline OperatingModeStatechart::Screen::OperationCallback::~OperationCallback() {}
 
 	}
 }

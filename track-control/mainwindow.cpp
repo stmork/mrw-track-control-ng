@@ -7,6 +7,9 @@
 #include <systemd/sd-daemon.h>
 
 #include <QScreen>
+#include <QMouseEvent>
+#include <QTouchEvent>
+#include <QKeyEvent>
 
 #include <util/globalbatch.h>
 #include <util/method.h>
@@ -29,6 +32,11 @@
 #include "mrwmessagedispatcher.h"
 #include "controlledroute.h"
 #include "beermodeservice.h"
+
+#ifdef X11_SCREEN_SAVER
+#include <X11/Xlib.h>
+#include <X11/extensions/scrnsaver.h>
+#endif
 
 using namespace mrw::util;
 using namespace mrw::statechart;
@@ -55,7 +63,7 @@ MainWindow::MainWindow(
 	}
 
 	const QSize     size   = screen->availableSize();
-	qInfo().noquote() << "Screen size: " << size;
+	qInfo().noquote() << "Screen size:" << size << "depth:" << screen->depth();
 
 	BaseWidget::setVerbose(false);
 
@@ -91,11 +99,15 @@ MainWindow::MainWindow(
 	window_flags |= Qt::WindowSystemMenuHint;
 	setWindowFlags(window_flags);
 
+	setMouseTracking(true);
+	QApplication::instance()->installEventFilter(this);
+
 	status_label = new QLabel(tr("Start."));
 	ui->statusbar->addPermanentWidget(status_label);
 
 	statechart.setTimerService(TimerService::instance());
 	statechart.setOperationCallback(*this);
+	statechart.screen().setOperationCallback(*this);
 	statechart.can().setOperationCallback(dispatcher);
 
 	Q_ASSERT(statechart.check());
@@ -121,6 +133,21 @@ MainWindow::~MainWindow()
 	statechart.exit();
 
 	delete ui;
+}
+
+bool MainWindow::eventFilter(QObject * object, QEvent * event)
+{
+	if ((dynamic_cast<QMouseEvent *>(event) != nullptr) ||
+		(dynamic_cast<QKeyEvent *>(event)   != nullptr) ||
+		(dynamic_cast<QTouchEvent *>(event) != nullptr))
+	{
+#if 0
+		qDebug() << "Filter:" << object << this << event;
+#endif
+
+		statechart.screen_userInput();
+	}
+	return QMainWindow::eventFilter(object, event);
 }
 
 void MainWindow::disableBeerMode()
@@ -366,6 +393,54 @@ void MainWindow::disableRoutes()
 	on_clearAllRoutes_clicked();
 }
 
+void MainWindow::blank(bool blank_active)
+{
+	const QScreen * screen = QGuiApplication::primaryScreen();
+
+	qDebug().noquote() << "DPMS blank:" << blank_active;
+	if (screen != nullptr)
+	{
+		QPlatformScreen * handle = screen->handle();
+
+		if (handle != nullptr)
+		{
+#if 0
+			handle->setPowerState(blank_active ? QPlatformScreen::PowerOff : QPlatformScreen::PowerOn);
+#endif
+		}
+	}
+}
+
+void MainWindow::autoBlank(bool auto_blank_active)
+{
+	qDebug().noquote() << "Auto blank:" << auto_blank_active;
+
+#ifdef X11_SCREEN_SAVER
+	Display * display = XOpenDisplay(nullptr);
+
+	if (display != nullptr)
+	{
+		XScreenSaverSuspend(display, auto_blank_active ? False : True);
+		XCloseDisplay(display);
+	}
+#endif
+}
+
+void MainWindow::resetBlank()
+{
+#ifdef X11_SCREEN_SAVER
+	Display * display = XOpenDisplay(nullptr);
+
+	if (display != nullptr)
+	{
+		qDebug().noquote() << "Resetting screen saver...";
+
+		XResetScreenSaver(display);
+		XCloseDisplay(display);
+	}
+#endif
+}
+
 /*************************************************************************
 **                                                                      **
 **       Manual mode methods                                            **
@@ -490,6 +565,7 @@ void MainWindow::extendRoute(ControlledRoute * route)
 	on_clearAllSections_clicked();
 
 	route->turn();
+	statechart.routesChanged();
 }
 
 void MainWindow::addRoute(ControlledRoute * route)
@@ -505,6 +581,7 @@ void MainWindow::addRoute(ControlledRoute * route)
 		Qt::QueuedConnection);
 
 	route->turn();
+	statechart.routesChanged();
 }
 
 void MainWindow::routeFinished()
@@ -540,6 +617,7 @@ void MainWindow::routeFinished()
 	statechart.completed();
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
+	statechart.routesChanged();
 }
 
 /*************************************************************************

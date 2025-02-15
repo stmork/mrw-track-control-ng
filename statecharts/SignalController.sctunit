@@ -61,6 +61,21 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		assert called pending
 	}
 
+// NOTE: This should work but the generated exit function has an error.
+//	@Test
+//	operation exitInitial()
+//	{
+//		// Given
+//		initial()
+//
+//		// When
+//		exit
+//
+//		// Then
+//		assert !is_active
+//		assert is_final
+//	}
+
 	@Test
 	operation startVersion1()
 	{

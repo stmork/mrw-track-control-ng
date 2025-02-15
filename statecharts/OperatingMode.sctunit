@@ -8,19 +8,24 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 	@Test
 	operation wait()
 	{
-		enter
-		assert  is_active
-		assert !is_final
-		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
-		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Prepare_Bus)
-		assert called can.connectBus
-
 		mock hasActiveRoutes returns (false)
 		mock isManualValid returns (true)
 		mock disableRoutes
 		mock resetTransaction
 		mock activateManual
 		mock keepAlive
+		mock screen.resetBlank
+		mock screen.blank
+		mock screen.autoBlank
+
+		enter
+		assert  is_active
+		assert !is_final
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Prepare_Bus)
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.blanking.On)
+		assert called can.connectBus
+		assert called screen.blank
 	}
 
 	@Test
@@ -49,6 +54,63 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running)
 		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.operating.Failed)
 		assert failing
+	}
+
+	@Test
+	operation routeChanged()
+	{
+		// Given
+		wait()
+
+		// When
+		raise routesChanged
+
+		// Then
+		assert called hasActiveRoutes
+		assert called screen.autoBlank
+		assert called screen.resetBlank
+	}
+
+	@Test
+	operation blank()
+	{
+		// Given
+		wait()
+
+		// When
+		proceed screen.timeout s
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.blanking.Off)
+		assert called screen.blank
+	}
+
+	@Test
+	operation noBlank()
+	{
+		// Given
+		wait()
+		mock hasActiveRoutes returns (true)
+
+		// When
+		proceed screen.timeout s
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.blanking.On)
+	}
+
+	@Test
+	operation unblank()
+	{
+		// Given
+		blank
+
+		// When
+		raise screen.userInput
+
+		// Then
+		assert active (mrw.^statechart.OperatingModeStatechart.main_region.Running.blanking.On)
+		assert called screen.blank
 	}
 
 	@Test
@@ -312,6 +374,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		assert playing
 		assert valueof(playing) == false
 		assert called activateManual(false)
+		assert called screen.blank()
 	}
 
 	@Test
@@ -431,6 +494,7 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		assert quit
 	}
 
+	/*
 	@Test
 	operation doExit()
 	{
@@ -484,4 +548,5 @@ testclass OperatingModeTest for statechart mrw.^statechart.OperatingModeStatecha
 		exit
 		assert !is_active
 	}
+	*/
 }

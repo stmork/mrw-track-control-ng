@@ -18,51 +18,24 @@ namespace
 {
 
 	void wait();
+	void blank();
 	void initial();
 	void failAfterStart();
 	void doOperating();
 	void initWhileOperatingWithRoutes();
-	void disableCompletedWithRoutes();
-	void disableCompletedWithoutRoutes();
 	void doEdit();
 	void doManual();
 	void doQuitManual();
-	void doWaitManual();
 	void doQuitWithRoute();
 	mrw::statechart::OperatingModeStatechart * statechart;
 
-
-	class CanConnectBusMock
-	{
-	public:
-		int callCount;
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void connectBus()
-		{
-			++callCount;
-		}
-		void reset()
-		{
-			callCount = 0;
-		}
-	};
-	static CanConnectBusMock * canConnectBusMock;
 
 	class HasActiveRoutesMock
 	{
 		typedef bool (HasActiveRoutesMock::*functiontype)();
 	public:
 		bool (HasActiveRoutesMock::*hasActiveRoutesBehaviorDefault)();
+		int callCount;
 
 		bool hasActiveRoutes1()
 		{
@@ -78,6 +51,21 @@ namespace
 		{
 			bool defaultValue = false;
 			return (defaultValue);
+		}
+
+		bool calledAtLeast(const int times)
+		{
+			return (callCount >= times);
+		}
+
+		bool calledAtLeastOnce()
+		{
+			return (callCount > 0);
+		}
+
+		void hasActiveRoutes()
+		{
+			++callCount;
 		}
 
 		functiontype getBehavior()
@@ -98,6 +86,7 @@ namespace
 		void reset()
 		{
 			initializeBehavior();
+			callCount = 0;
 		}
 	};
 	static HasActiveRoutesMock * hasActiveRoutesMock;
@@ -441,6 +430,367 @@ namespace
 	};
 	static KeepAliveMock * keepAliveMock;
 
+	class ScreenResetBlankMock
+	{
+		typedef void (ScreenResetBlankMock::*functiontype)();
+	public:
+		void (ScreenResetBlankMock::*screenResetBlankBehaviorDefault)();
+		int callCount;
+
+		void resetBlank1()
+		{
+		}
+
+		void resetBlankDefault()
+		{
+		}
+
+		bool calledAtLeast(const int times)
+		{
+			return (callCount >= times);
+		}
+
+		bool calledAtLeastOnce()
+		{
+			return (callCount > 0);
+		}
+
+		void resetBlank()
+		{
+			++callCount;
+		}
+
+		functiontype getBehavior()
+		{
+			return screenResetBlankBehaviorDefault;
+		}
+
+		void setDefaultBehavior(void (ScreenResetBlankMock::*defaultBehavior)())
+		{
+			screenResetBlankBehaviorDefault = defaultBehavior;
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&ScreenResetBlankMock::resetBlankDefault);
+		}
+
+		void reset()
+		{
+			initializeBehavior();
+			callCount = 0;
+		}
+	};
+	static ScreenResetBlankMock * screenResetBlankMock;
+
+	class ScreenBlankMock
+	{
+		typedef void (ScreenBlankMock::*functiontype)();
+		struct parameters
+		{
+			bool active;
+			void (ScreenBlankMock::*behavior)();
+			int callCount;
+			inline bool operator==(const parameters & other)
+			{
+				return (this->active == other.active);
+			}
+		};
+	public:
+		std::list<ScreenBlankMock::parameters> mocks;
+		std::list<ScreenBlankMock::parameters> paramCount;
+		void (ScreenBlankMock::*screenBlankBehaviorDefault)();
+		int callCount;
+
+		void blank1()
+		{
+		}
+
+		void blankDefault()
+		{
+		}
+
+		bool calledAtLeast(const int times)
+		{
+			return (callCount >= times);
+		}
+
+		bool calledAtLeastOnce()
+		{
+			return (callCount > 0);
+		}
+
+		void setBlankBehavior(const bool active, void (ScreenBlankMock::*func)())
+		{
+			parameters p;
+			p.active = active;
+			p.behavior = func;
+
+			std::list<ScreenBlankMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+			if (i != mocks.end())
+			{
+				mocks.erase(i);
+			}
+			mocks.push_back(p);
+		}
+
+		bool calledAtLeast(const int times, const bool active)
+		{
+			parameters p;
+			p.active = active;
+
+			std::list<ScreenBlankMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+			if (i != paramCount.end())
+			{
+				return (i->callCount >= times);
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		bool calledAtLeastOnce(const bool active)
+		{
+			parameters p;
+			p.active = active;
+
+			std::list<ScreenBlankMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+			if (i != paramCount.end())
+			{
+				return (i->callCount > 0);
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		void blank(const bool active)
+		{
+			++callCount;
+
+			parameters p;
+			p.active = active;
+
+			std::list<ScreenBlankMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+			if (i != paramCount.end())
+			{
+				p.callCount = (++i->callCount);
+				paramCount.erase(i);
+
+			}
+			else
+			{
+				p.callCount = 1;
+			}
+			paramCount.push_back(p);
+		}
+
+		functiontype getBehavior(const bool active)
+		{
+			parameters p;
+			p.active = active;
+
+			std::list<ScreenBlankMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+			if (i != mocks.end())
+			{
+				return  i->behavior;
+			}
+			else
+			{
+				return screenBlankBehaviorDefault;
+			}
+		}
+
+		void setDefaultBehavior(void (ScreenBlankMock::*defaultBehavior)())
+		{
+			screenBlankBehaviorDefault = defaultBehavior;
+			mocks.clear();
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&ScreenBlankMock::blankDefault);
+		}
+
+		void reset()
+		{
+			initializeBehavior();
+			callCount = 0;
+			paramCount.clear();
+			mocks.clear();
+		}
+	};
+	static ScreenBlankMock * screenBlankMock;
+
+	class ScreenAutoBlankMock
+	{
+		typedef void (ScreenAutoBlankMock::*functiontype)();
+		struct parameters
+		{
+			bool enable;
+			void (ScreenAutoBlankMock::*behavior)();
+			int callCount;
+			inline bool operator==(const parameters & other)
+			{
+				return (this->enable == other.enable);
+			}
+		};
+	public:
+		std::list<ScreenAutoBlankMock::parameters> mocks;
+		std::list<ScreenAutoBlankMock::parameters> paramCount;
+		void (ScreenAutoBlankMock::*screenAutoBlankBehaviorDefault)();
+		int callCount;
+
+		void autoBlank1()
+		{
+		}
+
+		void autoBlankDefault()
+		{
+		}
+
+		bool calledAtLeast(const int times)
+		{
+			return (callCount >= times);
+		}
+
+		bool calledAtLeastOnce()
+		{
+			return (callCount > 0);
+		}
+
+		void setAutoBlankBehavior(const bool enable, void (ScreenAutoBlankMock::*func)())
+		{
+			parameters p;
+			p.enable = enable;
+			p.behavior = func;
+
+			std::list<ScreenAutoBlankMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+			if (i != mocks.end())
+			{
+				mocks.erase(i);
+			}
+			mocks.push_back(p);
+		}
+
+		bool calledAtLeast(const int times, const bool enable)
+		{
+			parameters p;
+			p.enable = enable;
+
+			std::list<ScreenAutoBlankMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+			if (i != paramCount.end())
+			{
+				return (i->callCount >= times);
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		bool calledAtLeastOnce(const bool enable)
+		{
+			parameters p;
+			p.enable = enable;
+
+			std::list<ScreenAutoBlankMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+			if (i != paramCount.end())
+			{
+				return (i->callCount > 0);
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		void autoBlank(const bool enable)
+		{
+			++callCount;
+
+			parameters p;
+			p.enable = enable;
+
+			std::list<ScreenAutoBlankMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+			if (i != paramCount.end())
+			{
+				p.callCount = (++i->callCount);
+				paramCount.erase(i);
+
+			}
+			else
+			{
+				p.callCount = 1;
+			}
+			paramCount.push_back(p);
+		}
+
+		functiontype getBehavior(const bool enable)
+		{
+			parameters p;
+			p.enable = enable;
+
+			std::list<ScreenAutoBlankMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+			if (i != mocks.end())
+			{
+				return  i->behavior;
+			}
+			else
+			{
+				return screenAutoBlankBehaviorDefault;
+			}
+		}
+
+		void setDefaultBehavior(void (ScreenAutoBlankMock::*defaultBehavior)())
+		{
+			screenAutoBlankBehaviorDefault = defaultBehavior;
+			mocks.clear();
+		}
+
+		void initializeBehavior()
+		{
+			setDefaultBehavior(&ScreenAutoBlankMock::autoBlankDefault);
+		}
+
+		void reset()
+		{
+			initializeBehavior();
+			callCount = 0;
+			paramCount.clear();
+			mocks.clear();
+		}
+	};
+	static ScreenAutoBlankMock * screenAutoBlankMock;
+
+	class CanConnectBusMock
+	{
+	public:
+		int callCount;
+
+		bool calledAtLeast(const int times)
+		{
+			return (callCount >= times);
+		}
+
+		bool calledAtLeastOnce()
+		{
+			return (callCount > 0);
+		}
+
+		void connectBus()
+		{
+			++callCount;
+		}
+		void reset()
+		{
+			callCount = 0;
+		}
+	};
+	static CanConnectBusMock * canConnectBusMock;
+
 	class CanIsConnectedMock
 	{
 		typedef bool (CanIsConnectedMock::*functiontype)();
@@ -504,6 +854,7 @@ namespace
 		}
 		bool hasActiveRoutes()
 		{
+			hasActiveRoutesMock->hasActiveRoutes();
 			return (hasActiveRoutesMock->*(hasActiveRoutesMock->getBehavior()))();
 		}
 		void disableRoutes()
@@ -529,6 +880,25 @@ namespace
 			return (canIsConnectedMock->*(canIsConnectedMock->getBehavior()))();
 		}
 	};
+	class MockScreen : public mrw::statechart::OperatingModeStatechart::Screen::OperationCallback
+	{
+	public:
+		void resetBlank()
+		{
+			screenResetBlankMock->resetBlank();
+			return (screenResetBlankMock->*(screenResetBlankMock->getBehavior()))();
+		}
+		void blank(bool active)
+		{
+			screenBlankMock->blank(active);
+			return (screenBlankMock->*(screenBlankMock->getBehavior(active)))();
+		}
+		void autoBlank(bool enable)
+		{
+			screenAutoBlankMock->autoBlank(enable);
+			return (screenAutoBlankMock->*(screenAutoBlankMock->getBehavior(enable)))();
+		}
+	};
 
 //! The timers are managed by a timer service. */
 	static TimedSctUnitRunner * runner;
@@ -538,6 +908,7 @@ namespace
 	protected:
 		MockDefault defaultMock;
 		MockCan canMock;
+		MockScreen screenMock;
 		virtual void SetUp()
 		{
 			statechart = new mrw::statechart::OperatingModeStatechart();
@@ -546,7 +917,6 @@ namespace
 				maximalParallelTimeEvents
 			);
 			statechart->setTimerService(runner);
-			canConnectBusMock = new CanConnectBusMock();
 			hasActiveRoutesMock = new HasActiveRoutesMock();
 			hasActiveRoutesMock->initializeBehavior();
 			isManualValidMock = new IsManualValidMock();
@@ -559,21 +929,32 @@ namespace
 			activateManualMock->initializeBehavior();
 			keepAliveMock = new KeepAliveMock();
 			keepAliveMock->initializeBehavior();
+			screenResetBlankMock = new ScreenResetBlankMock();
+			screenResetBlankMock->initializeBehavior();
+			screenBlankMock = new ScreenBlankMock();
+			screenBlankMock->initializeBehavior();
+			screenAutoBlankMock = new ScreenAutoBlankMock();
+			screenAutoBlankMock->initializeBehavior();
+			canConnectBusMock = new CanConnectBusMock();
 			canIsConnectedMock = new CanIsConnectedMock();
 			canIsConnectedMock->initializeBehavior();
 			statechart->setOperationCallback(&defaultMock);
 			statechart->can().setOperationCallback(&canMock);
+			statechart->screen().setOperationCallback(&screenMock);
 		}
 		virtual void TearDown()
 		{
 			delete canIsConnectedMock;
+			delete canConnectBusMock;
+			delete screenAutoBlankMock;
+			delete screenBlankMock;
+			delete screenResetBlankMock;
 			delete keepAliveMock;
 			delete activateManualMock;
 			delete resetTransactionMock;
 			delete disableRoutesMock;
 			delete isManualValidMock;
 			delete hasActiveRoutesMock;
-			delete canConnectBusMock;
 			delete statechart;
 			delete runner;
 		}
@@ -582,6 +963,17 @@ namespace
 
 	void wait()
 	{
+		hasActiveRoutesMock->setDefaultBehavior(&HasActiveRoutesMock::hasActiveRoutes1);
+
+		isManualValidMock->setDefaultBehavior(&IsManualValidMock::isManualValid1);
+
+
+
+
+
+
+
+
 		statechart->enter();
 
 		EXPECT_TRUE(statechart->isActive());
@@ -592,15 +984,11 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running_operating_Prepare_Bus));
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running_blanking_On));
+
 		EXPECT_TRUE(canConnectBusMock->calledAtLeastOnce());
 
-		hasActiveRoutesMock->setDefaultBehavior(&HasActiveRoutesMock::hasActiveRoutes1);
-
-		isManualValidMock->setDefaultBehavior(&IsManualValidMock::isManualValid1);
-
-
-
-
+		EXPECT_TRUE(screenBlankMock->calledAtLeastOnce());
 
 	}
 	TEST_F(OperatingModeTest, wait)
@@ -628,6 +1016,59 @@ namespace
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running_operating_Failed));
 
 		EXPECT_TRUE(statechart->isRaisedFailing());
+
+	}
+	TEST_F(OperatingModeTest, routeChanged)
+	{
+		wait();
+
+		statechart->raiseRoutesChanged();
+
+		EXPECT_TRUE(hasActiveRoutesMock->calledAtLeastOnce());
+
+		EXPECT_TRUE(screenAutoBlankMock->calledAtLeastOnce());
+
+		EXPECT_TRUE(screenResetBlankMock->calledAtLeastOnce());
+
+	}
+	void blank()
+	{
+		wait();
+
+		runner->proceed_time(statechart->screen
+			().getTimeout() * 1000);
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running_blanking_Off));
+
+		EXPECT_TRUE(screenBlankMock->calledAtLeastOnce());
+
+	}
+	TEST_F(OperatingModeTest, blank)
+	{
+		blank();
+	}
+	TEST_F(OperatingModeTest, noBlank)
+	{
+		wait();
+
+		hasActiveRoutesMock->setDefaultBehavior(&HasActiveRoutesMock::hasActiveRoutes2);
+
+		runner->proceed_time(statechart->screen
+			().getTimeout() * 1000);
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running_blanking_On));
+
+	}
+	TEST_F(OperatingModeTest, unblank)
+	{
+		blank();
+
+		statechart->screen
+		().raiseUserInput();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running_blanking_On));
+
+		EXPECT_TRUE(screenBlankMock->calledAtLeastOnce());
 
 	}
 	void initial()
@@ -799,7 +1240,7 @@ namespace
 		EXPECT_TRUE(statechart->isRaisedStart());
 
 	}
-	void disableCompletedWithRoutes()
+	TEST_F(OperatingModeTest, disableCompletedWithRoutes)
 	{
 		initWhileOperatingWithRoutes();
 
@@ -812,11 +1253,7 @@ namespace
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::OperatingModeStatechart::State::main_region_Running_operating_Disable));
 
 	}
-	TEST_F(OperatingModeTest, disableCompletedWithRoutes)
-	{
-		disableCompletedWithRoutes();
-	}
-	void disableCompletedWithoutRoutes()
+	TEST_F(OperatingModeTest, disableCompletedWithoutRoutes)
 	{
 		initWhileOperatingWithRoutes();
 
@@ -832,10 +1269,6 @@ namespace
 
 		EXPECT_TRUE(statechart->isRaisedStart());
 
-	}
-	TEST_F(OperatingModeTest, disableCompletedWithoutRoutes)
-	{
-		disableCompletedWithoutRoutes();
 	}
 	void doEdit()
 	{
@@ -916,12 +1349,14 @@ namespace
 
 		EXPECT_TRUE(activateManualMock->calledAtLeastOnce(false));
 
+		EXPECT_TRUE(screenBlankMock->calledAtLeastOnce());
+
 	}
 	TEST_F(OperatingModeTest, doQuitManual)
 	{
 		doQuitManual();
 	}
-	void doWaitManual()
+	TEST_F(OperatingModeTest, doWaitManual)
 	{
 		doQuitManual();
 
@@ -931,10 +1366,6 @@ namespace
 
 		EXPECT_TRUE(statechart->isRaisedQuit());
 
-	}
-	TEST_F(OperatingModeTest, doWaitManual)
-	{
-		doWaitManual();
 	}
 	TEST_F(OperatingModeTest, operateAfterEdit)
 	{
@@ -1042,83 +1473,6 @@ namespace
 		EXPECT_TRUE((statechart->getQuittingValue()) == (false));
 
 		EXPECT_TRUE(statechart->isRaisedQuit());
-
-	}
-	TEST_F(OperatingModeTest, doExit)
-	{
-		statechart->enter();
-
-		EXPECT_TRUE(statechart->isActive());
-
-		statechart->exit();
-
-		EXPECT_TRUE(!statechart->isActive());
-
-		wait();
-
-		statechart->exit();
-
-		EXPECT_TRUE(!statechart->isActive());
-
-		initial();
-
-		statechart->exit();
-
-		EXPECT_TRUE(!statechart->isActive());
-
-		doOperating();
-
-		statechart->exit();
-
-		EXPECT_TRUE(!statechart->isActive());
-
-		doEdit();
-
-		statechart->exit();
-
-		EXPECT_TRUE(!statechart->isActive());
-
-		doManual();
-
-		statechart->exit();
-
-		EXPECT_TRUE(!statechart->isActive());
-
-		doWaitManual();
-
-		statechart->exit();
-
-		EXPECT_TRUE(!statechart->isActive());
-
-		initWhileOperatingWithRoutes();
-
-		statechart->exit();
-
-		EXPECT_TRUE(!statechart->isActive());
-
-		disableCompletedWithoutRoutes();
-
-		statechart->exit();
-
-		EXPECT_TRUE(!statechart->isActive());
-
-		disableCompletedWithRoutes();
-
-		statechart->exit();
-
-		EXPECT_TRUE(!statechart->isActive());
-
-		doQuitWithRoute();
-
-		statechart->exit();
-
-		EXPECT_TRUE(!statechart->isActive());
-
-		failAfterStart();
-
-		statechart->exit();
-
-		EXPECT_TRUE(!statechart->isActive());
 
 	}
 

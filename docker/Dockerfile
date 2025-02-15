@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt dist-upgrade -y && apt install -y \
    apt-utils apt-transport-https joe lsb-release ca-certificates \
    libqt5serialbus5-dev libsystemd-dev libgtest-dev qhelpgenerator-qt5 \
+   libx11-dev libxss-dev \
    graphviz pkg-config git make g++ cppcheck cccc fakeroot doxygen
 
 RUN addgroup dev

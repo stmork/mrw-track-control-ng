@@ -54,6 +54,11 @@ FORMS += \
 
 LIBS            += -lsystemd -lMRW-UI -lMRW-Ctrl -lMRW-Model -lMRW-Can -lMRW-Statecharts -lMRW-Log -lMRW-Util
 
+linux {
+	DEFINES     += X11_SCREEN_SAVER
+	LIBS        += -lX11 -lXss
+}
+
 QMAKE_CLEAN     += $$TARGET
 
 install.path  = $$(PREFIX)/usr/bin
