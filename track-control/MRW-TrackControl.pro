@@ -25,6 +25,7 @@ SOURCES += \
 	beermodeservice.cpp \
 	regionform.cpp \
 	routebatch.cpp \
+	screenblankhandler.cpp \
 	ui/routelistwidget.cpp \
 	ui/sectionlistwidget.cpp
 
@@ -45,6 +46,7 @@ HEADERS += \
 	mrwmessagedispatcher.h \
 	regionform.h \
 	routebatch.h \
+	screenblankhandler.h \
 	ui/routelistwidget.h \
 	ui/sectionlistwidget.h
 

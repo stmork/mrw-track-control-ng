@@ -23,6 +23,7 @@
 #include <statecharts/OperatingModeStatechart.h>
 
 #include "regionform.h"
+#include "screenblankhandler.h"
 #include "ui/sectionlistwidget.h"
 
 QT_BEGIN_NAMESPACE
@@ -34,11 +35,11 @@ QT_END_NAMESPACE
 
 class MrwMessageDispatcher;
 class ControlledRoute;
+class ScreenBlankHandler;
 
 class MainWindow :
 	public QMainWindow,
-	public mrw::util::Self<mrw::statechart::OperatingModeStatechart::OperationCallback>,
-	public mrw::util::Self<mrw::statechart::OperatingModeStatechart::Screen::OperationCallback>
+	public mrw::util::Self<mrw::statechart::OperatingModeStatechart::OperationCallback>
 {
 	Q_OBJECT
 
@@ -116,11 +117,6 @@ private:
 	void          disableRoutes() override;
 	void          activateManual(const bool activate) override;
 
-	// Implementation for Screen::OperationCallback
-	void          resetBlank() override;
-	void          blank(bool active) override;
-	void          autoBlank(bool active) override;
-
 	mrw::model::Section  * manualSection();
 	void                   warn(const QString & message);
 
@@ -137,6 +133,7 @@ private:
 	QLabel                   *                  status_label = nullptr;
 	mrw::model::ModelRepository        &        repo;
 
+	ScreenBlankHandler                                                         blanker;
 	mrw::statechart::QtStatechart<mrw::statechart::OperatingModeStatechart>    statechart;
 };
 

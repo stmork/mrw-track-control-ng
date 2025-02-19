@@ -33,11 +33,6 @@
 #include "controlledroute.h"
 #include "beermodeservice.h"
 
-#ifdef X11_SCREEN_SAVER
-#include <X11/Xlib.h>
-#include <X11/extensions/scrnsaver.h>
-#endif
-
 using namespace mrw::util;
 using namespace mrw::statechart;
 using namespace mrw::can;
@@ -55,7 +50,7 @@ MainWindow::MainWindow(
 	ui(new Ui::MainWindow),
 	repo(repository)
 {
-	const QScreen * screen = QGuiApplication::primaryScreen();
+	const QScreen * screen = blanker;
 
 	if (screen == nullptr)
 	{
@@ -107,7 +102,7 @@ MainWindow::MainWindow(
 
 	statechart.setTimerService(TimerService::instance());
 	statechart.setOperationCallback(*this);
-	statechart.screen().setOperationCallback(*this);
+	statechart.screen().setOperationCallback(blanker);
 	statechart.can().setOperationCallback(dispatcher);
 
 	Q_ASSERT(statechart.check());
@@ -391,54 +386,6 @@ void MainWindow::disableRoutes()
 	__METHOD__;
 
 	on_clearAllRoutes_clicked();
-}
-
-void MainWindow::blank(bool blank_active)
-{
-	const QScreen * screen = QGuiApplication::primaryScreen();
-
-	qDebug().noquote() << "DPMS blank:" << blank_active;
-	if (screen != nullptr)
-	{
-		QPlatformScreen * handle = screen->handle();
-
-		if (handle != nullptr)
-		{
-#if 0
-			handle->setPowerState(blank_active ? QPlatformScreen::PowerOff : QPlatformScreen::PowerOn);
-#endif
-		}
-	}
-}
-
-void MainWindow::autoBlank(bool auto_blank_active)
-{
-	qDebug().noquote() << "Auto blank:" << auto_blank_active;
-
-#ifdef X11_SCREEN_SAVER
-	Display * display = XOpenDisplay(nullptr);
-
-	if (display != nullptr)
-	{
-		XScreenSaverSuspend(display, auto_blank_active ? False : True);
-		XCloseDisplay(display);
-	}
-#endif
-}
-
-void MainWindow::resetBlank()
-{
-#ifdef X11_SCREEN_SAVER
-	Display * display = XOpenDisplay(nullptr);
-
-	if (display != nullptr)
-	{
-		qDebug().noquote() << "Resetting screen saver...";
-
-		XResetScreenSaver(display);
-		XCloseDisplay(display);
-	}
-#endif
 }
 
 /*************************************************************************
