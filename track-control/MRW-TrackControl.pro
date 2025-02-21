@@ -4,6 +4,9 @@
 #
 
 QT += gui widgets network
+CONFIG += link_pkgconfig
+
+PKGCONFIG += libdrm
 
 include(../common.pri)
 

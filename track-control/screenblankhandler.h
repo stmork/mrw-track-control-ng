@@ -17,7 +17,11 @@ class QScreen;
 class ScreenBlankHandler :
 	public mrw::util::Self<mrw::statechart::OperatingModeStatechart::Screen::OperationCallback>
 {
-	QScreen * screen  = nullptr;
+	QScreen * screen       = nullptr;
+	int       drm_fd       = 0;
+	uint32_t  connector_id = 0;
+	uint32_t  dpms_id      = 0;
+	bool      dpms_active  = false;
 
 public:
 	ScreenBlankHandler();
@@ -27,9 +31,12 @@ public:
 
 protected:
 	// Implementation for Screen::OperationCallback
+	virtual void          autoBlank(bool active) override;
 	virtual void          resetBlank() override;
 	virtual void          blank(bool active) override;
-	virtual void          autoBlank(bool active) override;
+
+private:
+	void find(const char * dri_device);
 };
 
 #endif
