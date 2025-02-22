@@ -999,7 +999,8 @@ namespace
 	{
 		wait();
 
-		runner->proceed_time(statechart->getWd_timeout() * 1000);
+		runner->proceed_time(statechart->watchdog
+			().getTimeout() * 1000);
 
 		EXPECT_TRUE(keepAliveMock->calledAtLeastOnce());
 

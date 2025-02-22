@@ -167,8 +167,6 @@ namespace mrw
 			bool isRaisedQuit() noexcept;
 
 
-			/*! Gets the value of the variable 'wd_timeout' that is defined in the default interface scope. */
-			static sc::integer getWd_timeout()  noexcept;
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
 			static sc::integer getTimeout()  noexcept;
 			//! Inner class for default interface scope operation callbacks.
@@ -194,6 +192,36 @@ namespace mrw
 
 			/*! Set the working instance of the operation callback interface 'OperationCallback'. */
 			void setOperationCallback(OperationCallback * operationCallback) noexcept;
+			//! Inner class for watchdog interface scope.
+			class Watchdog
+			{
+			public:
+				explicit Watchdog(OperatingModeStatechart * parent) noexcept;
+
+
+				/*! Gets the value of the variable 'timeout' that is defined in the interface scope 'watchdog'. */
+				static sc::integer getTimeout()  noexcept;
+
+
+
+
+			private:
+				friend class OperatingModeStatechart;
+
+				static constexpr const sc::integer timeout {2};
+
+
+				OperatingModeStatechart * parent;
+
+
+
+
+
+			};
+
+			/*! Returns an instance of the interface class 'Watchdog'. */
+			Watchdog & watchdog() noexcept;
+
 			//! Inner class for can interface scope.
 			class Can
 			{
@@ -373,7 +401,6 @@ namespace mrw
 			OperatingModeStatechart(const OperatingModeStatechart & rhs);
 			OperatingModeStatechart & operator=(const OperatingModeStatechart &);
 
-			static constexpr const sc::integer wd_timeout {2};
 			static constexpr const sc::integer timeout {5000};
 
 
@@ -388,6 +415,7 @@ namespace mrw
 			State stateConfVector[maxOrthogonalStates];
 
 
+			Watchdog ifaceWatchdog {Watchdog{nullptr}};
 			Can ifaceCan {Can{nullptr}};
 			Screen ifaceScreen {Screen{nullptr}};
 

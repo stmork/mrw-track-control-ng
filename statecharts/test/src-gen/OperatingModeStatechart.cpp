@@ -20,6 +20,7 @@ namespace mrw
 
 		OperatingModeStatechart::OperatingModeStatechart() noexcept
 		{
+			this->ifaceWatchdog.parent = this;
 			this->ifaceCan.parent = this;
 			this->ifaceScreen.parent = this;
 			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
@@ -39,6 +40,11 @@ namespace mrw
 				incomingEventQueue.pop_front();
 				delete nextEvent;
 			}
+		}
+
+		OperatingModeStatechart::Watchdog::Watchdog(OperatingModeStatechart * parent_) noexcept :
+			parent(parent_)
+		{
 		}
 
 		OperatingModeStatechart::Can::Can(OperatingModeStatechart * parent_) noexcept :
@@ -467,12 +473,6 @@ namespace mrw
 			}
 		}
 
-		sc::integer OperatingModeStatechart::getWd_timeout() noexcept
-		{
-			return wd_timeout
-				;
-		}
-
 		sc::integer OperatingModeStatechart::getTimeout() noexcept
 		{
 			return timeout
@@ -483,6 +483,16 @@ namespace mrw
 		{
 			ifaceOperationCallback = operationCallback;
 		}
+		OperatingModeStatechart::Watchdog & OperatingModeStatechart::watchdog() noexcept
+		{
+			return ifaceWatchdog;
+		}
+		sc::integer OperatingModeStatechart::Watchdog::getTimeout() noexcept
+		{
+			return timeout
+				;
+		}
+
 		OperatingModeStatechart::Can & OperatingModeStatechart::can() noexcept
 		{
 			return ifaceCan;
@@ -548,7 +558,7 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Running()
 		{
 			/* Entry action for state 'Running'. */
-			timerService->setTimer(this, 0, ((static_cast<sc::time> (OperatingModeStatechart::wd_timeout)) * 1000), true);
+			timerService->setTimer(this, 0, ((static_cast<sc::time> (OperatingModeStatechart::Watchdog::timeout)) * 1000), true);
 			timerService->setTimer(this, 1, ((static_cast<sc::time> (30)) * 1000), true);
 			ifaceScreen.ifaceScreenOperationCallback->blank(false);
 		}
