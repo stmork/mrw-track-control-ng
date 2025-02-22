@@ -61,7 +61,7 @@ LIBS            += -lsystemd -lMRW-UI -lMRW-Ctrl -lMRW-Model -lMRW-Can -lMRW-Sta
 
 linux {
 	DEFINES     += X11_SCREEN_SAVER
-	LIBS        += -lX11 -lXss
+	LIBS        += -lX11 -lXext
 }
 
 QMAKE_CLEAN     += $$TARGET

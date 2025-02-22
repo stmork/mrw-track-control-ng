@@ -25,7 +25,7 @@ class ScreenBlankHandler :
 
 public:
 	ScreenBlankHandler();
-	virtual ~ScreenBlankHandler() = default;
+	virtual ~ScreenBlankHandler();
 
 	operator QScreen * () const;
 

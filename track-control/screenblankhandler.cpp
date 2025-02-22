@@ -17,7 +17,7 @@
 
 #ifdef X11_SCREEN_SAVER
 #include <X11/Xlib.h>
-#include <X11/extensions/scrnsaver.h>
+#include <X11/extensions/dpms.h>
 #endif
 
 ScreenBlankHandler::ScreenBlankHandler()
@@ -29,12 +29,24 @@ ScreenBlankHandler::ScreenBlankHandler()
 	if (display != nullptr)
 	{
 		qDebug().noquote() << "Init display:" << display;
+		qDebug().noquote() << "Has DPMS:"  << DPMSCapable(display);
 
 		XCloseDisplay(display);
+		display = nullptr;
 	}
+	else
 #endif
+	{
+		find("/dev/dri/card0");
+	}
+}
 
-	find("/dev/dri/card0");
+ScreenBlankHandler::~ScreenBlankHandler()
+{
+	if (drm_fd >= 0)
+	{
+		close(drm_fd);
+	}
 }
 
 ScreenBlankHandler::operator QScreen * () const
@@ -49,27 +61,29 @@ void ScreenBlankHandler::autoBlank(bool auto_blank_active)
 
 	if (display != nullptr)
 	{
-		qDebug().noquote() << "Auto blank:" << auto_blank_active << display;
+		int result;
 
-		XScreenSaverSuspend(display, auto_blank_active ? False : True);
+		if (auto_blank_active)
+		{
+			result = DPMSEnable(display);
+		}
+		else
+		{
+			result = DPMSDisable(display);
+		}
+		qDebug().noquote() << "Auto blank:" << auto_blank_active << display << result;
+
 		XCloseDisplay(display);
+	}
+	else
+	{
+		qDebug("No X11 screen saver!");
 	}
 #endif
 }
 
 void ScreenBlankHandler::resetBlank()
 {
-#ifdef X11_SCREEN_SAVER
-	Display * display = XOpenDisplay(nullptr);
-
-	if (display != nullptr)
-	{
-		qDebug().noquote() << "Resetting screen saver..." << display;
-
-		XResetScreenSaver(static_cast<Display *>(display));
-		XCloseDisplay(display);
-	}
-#endif
 }
 
 void ScreenBlankHandler::blank(bool blank_active)
@@ -171,6 +185,10 @@ void ScreenBlankHandler::find(const char * dri_device)
 		{
 			qDebug("No resources found.");
 		}
-		close(fd);
+
+		if (drm_fd < 0)
+		{
+			close(fd);
+		}
 	}
 }
