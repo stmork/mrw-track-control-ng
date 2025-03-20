@@ -96,6 +96,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 		status.direction == status.right_bended ? -80 : 30, 120, FONT_HEIGHT);
 
 	prepareTextColor(painter, status.has_flank_protection);
+	font.setBold(true);
 	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
 	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, status.name);

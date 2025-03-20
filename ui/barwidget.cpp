@@ -25,6 +25,7 @@ void BarWidget::paint(QPainter & painter)
 	const int ySize = size().height();
 
 	// Define fonts for color labels.
+	font.setBold(true);
 	font.setPixelSize(ySize / 3);
 	painter.setPen(Qt::white);
 	painter.setFont(font);

@@ -88,6 +88,7 @@ void RailWidget::paint(QPainter & painter)
 
 	prepareTextColor(painter);
 	font.setPixelSize(FONT_SIZE);
+	font.setBold(true);
 	painter.setFont(font);
 	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, status.name);
 

@@ -140,6 +140,7 @@ void SignalWidget::paint(QPainter & painter)
 
 	// Draw switch name before rotating to prevent rotated font drawing.
 	prepareTextColor(painter);
+	font.setBold(true);
 	font.setPixelSize(FONT_SIZE);
 
 	const QFontMetrics metrics(font);
