@@ -5,6 +5,7 @@
 
 #include <unistd.h>
 
+#include <QCoreApplication>
 #include <QCanBus>
 #include <QCanBusDeviceInfo>
 #include <QDebug>
@@ -13,7 +14,10 @@
 #include <util/method.h>
 #include <can/mrwbusservice.h>
 
+using namespace std::chrono_literals;
 using namespace mrw::can;
+
+const std::chrono::microseconds MrwBusService::retry = 20ms;
 
 MrwBusService::MrwBusService(
 	const QString & interface,
@@ -41,9 +45,10 @@ MrwBusService::MrwBusService(
 			Qt::QueuedConnection);
 
 		connect(
-			can_device, &QCanBusDevice::errorOccurred, [] (auto reason)
+			can_device, &QCanBusDevice::errorOccurred, [this] (auto reason)
 		{
-			qCritical().noquote() << "CAN bus error occured: " << reason;
+			qCritical().noquote() << "CAN bus error occured:" << reason;
+			qCritical().noquote() << "CAN bus status:       " << can_device->busStatus();
 		});
 
 		if (auto_connect)
@@ -109,7 +114,26 @@ bool MrwBusService::write(const MrwMessage & message) noexcept
 {
 	qDebug().noquote() << message;
 
-	return (can_device != nullptr) && (can_device->writeFrame(message));
+	if (can_device != nullptr)
+	{
+		if (can_device->framesAvailable() > 0)
+		{
+			QCoreApplication::processEvents();
+		}
+
+		if (can_device->writeFrame(message))
+		{
+			can_device->waitForFramesWritten(10);
+			return true;
+		}
+		else if (can_device->busStatus() == QCanBusDevice::CanBusStatus::Good)
+		{
+			usleep(retry.count());
+			qWarning("Retrying...");
+			return can_device->writeFrame(message);
+		}
+	}
+	return false;
 }
 
 void MrwBusService::process(const MrwMessage & message)
