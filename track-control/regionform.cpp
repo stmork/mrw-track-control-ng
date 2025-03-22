@@ -87,6 +87,7 @@ void RegionForm::setOpMode(
 void RegionForm::changeEvent(QEvent * e)
 {
 	QWidget::changeEvent(e);
+
 	switch (e->type())
 	{
 	case QEvent::LanguageChange:
