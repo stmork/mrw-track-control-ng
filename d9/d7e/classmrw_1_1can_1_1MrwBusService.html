@@ -94,6 +94,7 @@ $(function(){ initResizable(false); });
 <a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="../../d3/dc9/classmrw_1_1can_1_1MrwBusService-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">mrw::can::MrwBusService Class Reference</div></div>
 </div><!--header-->
@@ -148,6 +149,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ae9add44a66b3c41000569347d5eb8e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84bd068ea88e51a45bac0b3838d66b02" id="r_a84bd068ea88e51a45bac0b3838d66b02"><td class="memItemLeft" align="right" valign="top">QCanBusDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84bd068ea88e51a45bac0b3838d66b02">can_device</a> = nullptr</td></tr>
 <tr class="separator:a84bd068ea88e51a45bac0b3838d66b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a06ce5b7e3299947ad77e96fe0b6fdf81" id="r_a06ce5b7e3299947ad77e96fe0b6fdf81"><td class="memItemLeft" align="right" valign="top">static const std::chrono::microseconds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06ce5b7e3299947ad77e96fe0b6fdf81">retry</a> = 20ms</td></tr>
+<tr class="memdesc:a06ce5b7e3299947ad77e96fe0b6fdf81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retry timeout if write fails once.  <br /></td></tr>
+<tr class="separator:a06ce5b7e3299947ad77e96fe0b6fdf81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class connects to the CAN bus for input and output processing. </p>
@@ -458,10 +465,34 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a06ce5b7e3299947ad77e96fe0b6fdf81" name="a06ce5b7e3299947ad77e96fe0b6fdf81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06ce5b7e3299947ad77e96fe0b6fdf81">&#9670;&#160;</a></span>retry</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::chrono::microseconds MrwBusService::retry = 20ms</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retry timeout if write fails once. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 22 2025 08:27:26 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Sat Mar 22 2025 10:34:03 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>
