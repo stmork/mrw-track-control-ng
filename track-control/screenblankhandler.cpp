@@ -3,6 +3,9 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
+#include <filesystem>
+#include <regex>
+
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -10,15 +13,14 @@
 #include <QScreen>
 #include <QDebug>
 
-#include <xf86drm.h>
-#include <xf86drmMode.h>
-
 #include "screenblankhandler.h"
 
 #ifdef X11_SCREEN_SAVER
 #include <X11/Xlib.h>
 #include <X11/extensions/dpms.h>
 #endif
+
+namespace fs = std::filesystem;
 
 ScreenBlankHandler::ScreenBlankHandler()
 {
@@ -37,7 +39,11 @@ ScreenBlankHandler::ScreenBlankHandler()
 	else
 #endif
 	{
-		find("/dev/dri/card0");
+#if 1
+		findDevice();
+#else
+		initDevice(5);
+#endif
 	}
 }
 
@@ -45,6 +51,10 @@ ScreenBlankHandler::~ScreenBlankHandler()
 {
 	if (drm_fd >= 0)
 	{
+		if (lease_id != 0)
+		{
+			drmModeRevokeLease(drm_fd, lease_id);
+		}
 		close(drm_fd);
 	}
 }
@@ -104,7 +114,7 @@ void ScreenBlankHandler::blank(bool blank_active)
 #else
 	if (dpms_active)
 	{
-		const int res = drmModeConnectorSetProperty(drm_fd, connector_id,
+		const int res = drmModeConnectorSetProperty(lease_fd, connector_id,
 				dpms_id, blank_active ? DRM_MODE_DPMS_OFF : DRM_MODE_DPMS_ON);
 
 		if (res == 0)
@@ -119,76 +129,149 @@ void ScreenBlankHandler::blank(bool blank_active)
 #endif
 }
 
-void ScreenBlankHandler::find(const char * dri_device)
+
+void ScreenBlankHandler::findDevice()
 {
-	int fd = open(dri_device, O_RDWR);
-	if (fd >= 0)
+	static const std::regex     pattern(R"(card\d+$)");
+	std::smatch    match;
+
+	for (auto const & dir_entry : fs::directory_iterator{"/dev/dri"})
 	{
-		drmModeRes * mode_res = drmModeGetResources(fd);
+		const std::string filename = dir_entry.path().filename().string();
 
-		const bool is_master = drmAuthMagic(fd, 0) != -EACCES;
-		qDebug().noquote() << "Is master:" << is_master << fd;
-
-		if (mode_res != nullptr)
+		if (std::regex_search(filename, match, pattern))
 		{
-			for (int i = 0; i < mode_res->count_connectors; ++i)
+			const char * device_name = dir_entry.path().c_str();
+
+			qDebug().noquote() << "DRM opening:  " << device_name;
+			int fd = open(device_name, O_RDWR);
+
+			if (fd >= 0)
 			{
-				drmModeConnector * conn = drmModeGetConnector(fd, mode_res->connectors[i]);
-
-				if (conn != nullptr)
+				if (initDevice(fd))
 				{
-					if (conn->connection == DRM_MODE_CONNECTED)
-					{
-						drmModeObjectProperties * properties;
-
-						properties = drmModeObjectGetProperties(fd, conn->connector_id, DRM_MODE_OBJECT_CONNECTOR);
-						if (properties != nullptr)
-						{
-							for (unsigned p = 0; p < properties->count_props; p++)
-							{
-								drmModePropertyRes * property_res = drmModeGetProperty(fd, properties->props[p]);
-
-								if (property_res != nullptr)
-								{
-									if (strcmp(property_res->name, "DPMS") == 0)
-									{
-										drm_fd       = fd;
-										connector_id = conn->connector_id;
-										dpms_id      = property_res->prop_id;
-										dpms_active  = is_master;
-										qDebug().noquote() << "DPMS found:" << dpms_active;
-									}
-									drmModeFreeProperty(property_res);
-								}
-								else
-								{
-									qDebug() << "No property found for ID:" << properties->props[p];
-								}
-							}
-							drmModeFreeObjectProperties(properties);
-						}
-						else
-						{
-							qDebug().noquote() << "No properties found for connector ID:" << conn->connector_id;
-						}
-					}
-					drmModeFreeConnector(conn);
+					return;
 				}
 				else
 				{
-					qDebug("No connector found.");
+					close(fd);
 				}
 			}
-			drmModeFreeResources(mode_res);
+			else
+			{
+				qCritical().noquote() << "Cannot open DRI device" << device_name << "Error:" << strerror(errno);
+			}
+		}
+	}
+}
+
+bool ScreenBlankHandler::initDevice(int fd)
+{
+	drmModeRes * mode_res = drmModeGetResources(fd);
+
+	if (mode_res == nullptr)
+	{
+		qWarning("No DRM resources found.");
+	}
+	else
+	{
+		initDevice(fd, mode_res);
+	}
+	return mode_res != nullptr;
+}
+
+void ScreenBlankHandler::initDevice(int fd, drmModeRes * mode_res)
+{
+	assert(mode_res != nullptr);
+
+	for (int i = 0; i < mode_res->count_connectors; ++i)
+	{
+		drmModeConnector * conn = drmModeGetConnector(fd, mode_res->connectors[i]);
+
+		if (conn != nullptr)
+		{
+			if (conn->connection == DRM_MODE_CONNECTED)
+			{
+				findDpmsProperty(fd, conn);
+			}
+			drmModeFreeConnector(conn);
 		}
 		else
 		{
-			qDebug("No resources found.");
-		}
-
-		if (drm_fd < 0)
-		{
-			close(fd);
+			qWarning("No connector found.");
 		}
 	}
+	drmModeFreeResources(mode_res);
+}
+
+void ScreenBlankHandler::findDpmsProperty(int fd, drmModeConnector * conn)
+{
+	drmModeObjectProperties * properties;
+	drm_magic_t               magic{};
+
+	qDebug().noquote() << "DRM Magic:    " << drmGetMagic(fd, &magic);
+	qDebug().noquote() << "DRM is master:" << drmIsMaster(fd);
+
+	const bool is_master = drmAuthMagic(fd, magic) != -EACCES;
+	qDebug().noquote() << "DRM is auth:  " << is_master << fd << drmSetMaster(fd);
+
+	assert(conn != nullptr);
+	properties = drmModeObjectGetProperties(fd, conn->connector_id, DRM_MODE_OBJECT_CONNECTOR);
+	if (properties != nullptr)
+	{
+		for (unsigned p = 0; p < properties->count_props; p++)
+		{
+			drmModePropertyRes * property_res = drmModeGetProperty(fd, properties->props[p]);
+
+			if (property_res != nullptr)
+			{
+				if (strcmp(property_res->name, "DPMS") == 0)
+				{
+					drm_fd       = fd;
+					connector_id = conn->connector_id;
+					dpms_id      = property_res->prop_id;
+					dpms_active  = is_master;
+
+					initDPMS();
+				}
+				drmModeFreeProperty(property_res);
+			}
+			else
+			{
+				qWarning() << "No property found for ID:" << properties->props[p];
+			}
+		}
+		drmModeFreeObjectProperties(properties);
+	}
+	else
+	{
+		qWarning().noquote() << "No properties found for connector ID:" << conn->connector_id;
+	}
+}
+
+void ScreenBlankHandler::initDPMS()
+{
+	if (!dpms_active)
+	{
+		std::vector<uint32_t> objects;
+
+		objects.emplace_back(connector_id);
+		objects.emplace_back(dpms_id);
+
+		lease_fd = drmModeCreateLease(drm_fd, objects.data(), objects.size(), O_CREAT, &lease_id);
+		if (lease_fd >= 0)
+		{
+			dpms_active = true;
+			qDebug().noquote() << "DRM lease:" << lease_fd << lease_id;
+		}
+		else
+		{
+			qCritical().noquote() << "No DRM lease available!" << strerror(errno);
+		}
+	}
+	else
+	{
+		lease_fd = drm_fd;
+	}
+	qDebug().noquote() << "DPMS found:   " << dpms_active;
 }
