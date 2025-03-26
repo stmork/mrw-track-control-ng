@@ -62,14 +62,14 @@ int main(int argc, char * argv[])
 			qInfo("==========================================================");
 			qInfo() << "MRW-NG track control using model:" << repo.modelName();
 #ifdef VERSION
-			qInfo() << "Version:   " << VERSION;
+			qInfo()           << "Version:   " << VERSION;
 #endif
 #ifdef BUILD_NUMBER
-			qInfo() << "Build:     " << BUILD_NUMBER;
+			qInfo()           << "Build:     " << BUILD_NUMBER;
 #endif
-			qInfo() << "Qt version:" << qVersion();
-			qInfo() << "CAN plugin:" << repo.plugin();
-			qInfo() << "CAN iface: " << repo.interface();
+			qInfo()           << "Qt version:" << qVersion();
+			qInfo().noquote() << "CAN plugin:" << repo.plugin();
+			qInfo().noquote() << "CAN iface: " << repo.interface();
 			qInfo("==========================================================");
 			sd_notify(0, "READY=1");
 			return app.exec();
