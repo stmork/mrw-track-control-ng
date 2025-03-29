@@ -205,7 +205,7 @@ const QString & SignalControllerMock::name() const
 
 	if (result.isEmpty())
 	{
-		result += "i3";
+		result += "i3_II";
 	}
 
 	signal_name = result.join('/');
