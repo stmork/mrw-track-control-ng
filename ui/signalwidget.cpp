@@ -144,12 +144,16 @@ void SignalWidget::paint(QPainter & painter)
 	font.setPixelSize(FONT_SIZE);
 
 	const QFontMetrics metrics(font);
-	const float        text_width = metrics.horizontalAdvance(status.name) + 10;
+	const float        text_width = metrics.horizontalAdvance(status.name) + 14;
 	const QRectF       rect(
 		status.direction ? -border : border - text_width,
 		status.direction ? -80 : 30, text_width, FONT_HEIGHT);
 
 	painter.setFont(font);
+	if (base_controller->lock() == LockState::FAIL)
+	{
+		painter.fillRect(rect, RED);
+	}
 	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, status.name);
 
 	if (!status.direction)

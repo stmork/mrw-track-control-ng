@@ -72,10 +72,10 @@ namespace mrw::ui
 		static constexpr float  SCALE       = 100.0f;
 
 		/** The font height inclusive descender. */
-		static constexpr int    FONT_HEIGHT =  55;
+		static constexpr int    FONT_HEIGHT =  65;
 
 		/** The font size used for QFont::setSize(). */
-		static constexpr int    FONT_SIZE   = FONT_HEIGHT * 0.8;
+		static constexpr int    FONT_SIZE   = 45;
 
 		/** The width of a drawn rail. */
 		static constexpr float  RAIL_WIDTH  =  20.0f;

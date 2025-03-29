@@ -12,7 +12,8 @@ using namespace mrw::model;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 
-using Bending = Position::Bending;
+using Bending   = Position::Bending;
+using LockState = Device::LockState;
 
 RailWidget::RailWidget(
 	QWidget     *    parent,
@@ -64,7 +65,7 @@ void RailWidget::paint(QPainter & painter)
 	prepare(status);
 
 	const float border     = -SCALE - status.extensions * SCALE / Position::HALF;
-	const float text_width = status.extensions <= 2 ? 120 : 160;
+	const float text_width = status.extensions <= 2 ? 124 : 164;
 
 	// Unify coordinates
 	const float x_size = Position::FRACTION + status.extensions;
@@ -90,6 +91,10 @@ void RailWidget::paint(QPainter & painter)
 	font.setPixelSize(FONT_SIZE);
 	font.setBold(true);
 	painter.setFont(font);
+	if (base_controller->lock() == LockState::FAIL)
+	{
+		painter.fillRect(rect, RED);
+	}
 	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, status.name);
 
 	if (!status.direction)
