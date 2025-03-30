@@ -28,6 +28,12 @@ using Bending    = Position::Bending;
 using LockState  = Device::LockState;
 using SignalType = Signal::SignalType;
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 3, 0))
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_EXCEPTION_THROWN(condition, exception);
+#else
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_THROWS_EXCEPTION(exception, condition);
+#endif
+
 /*************************************************************************
 **                                                                      **
 **       Test position implementation                                   **
@@ -121,7 +127,7 @@ void TestModel::testControllers()
 		QCOMPARE(messages.size() > 0, controller->valid());
 	}
 
-	QVERIFY_EXCEPTION_THROWN(model->controller(count), std::out_of_range);
+	MRW_THROWS_EXCEPTION(model->controller(count), std::out_of_range);
 }
 
 void TestModel::testModules()
@@ -141,7 +147,7 @@ void TestModel::testModules()
 
 			testModule(module);
 		}
-		QVERIFY_EXCEPTION_THROWN(controller->module(module_count), std::out_of_range);
+		MRW_THROWS_EXCEPTION(controller->module(module_count), std::out_of_range);
 
 		const size_t mux_count = controller->connectionCount();
 		for (unsigned m = 0; m < mux_count; m++)
@@ -150,7 +156,7 @@ void TestModel::testModules()
 
 			testMuxConnection(module);
 		}
-		QVERIFY_EXCEPTION_THROWN(controller->connection(mux_count), std::out_of_range);
+		MRW_THROWS_EXCEPTION(controller->connection(mux_count), std::out_of_range);
 	}
 }
 
@@ -182,7 +188,7 @@ void TestModel::testRegions()
 		QVERIFY(region->key().contains(name.replace(" ", "")));
 	}
 
-	QVERIFY_EXCEPTION_THROWN(model->region(count), std::out_of_range);
+	MRW_THROWS_EXCEPTION(model->region(count), std::out_of_range);
 }
 
 void TestModel::testSections()
@@ -203,7 +209,7 @@ void TestModel::testSections()
 			testSection(region, section);
 		}
 
-		QVERIFY_EXCEPTION_THROWN(region->section(section_count), std::out_of_range);
+		MRW_THROWS_EXCEPTION(region->section(section_count), std::out_of_range);
 	}
 }
 
@@ -225,7 +231,7 @@ void TestModel::testRegularSwitchStates()
 		QCOMPARE(part->commandState(), Command::SETRGT);
 
 		part->setState(RegularSwitch::State(0xff));
-		QVERIFY_EXCEPTION_THROWN((void)part->commandState(), std::invalid_argument);
+		MRW_THROWS_EXCEPTION((void)part->commandState(), std::invalid_argument);
 
 		for (RailPart * left : part->advance(true))
 		{
@@ -241,14 +247,14 @@ void TestModel::testRegularSwitchStates()
 					(part->state() == RegularSwitch::State::AB) ||
 					(part->state() == RegularSwitch::State::AC));
 
-				QVERIFY_EXCEPTION_THROWN(part->setState(right, nullptr), std::invalid_argument);
-				QVERIFY_EXCEPTION_THROWN(part->setState(left, nullptr),  std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(right, nullptr), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(left, nullptr),  std::invalid_argument);
 
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, right), std::invalid_argument);
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, left),  std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, right), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, left),  std::invalid_argument);
 
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, nullptr), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, nullptr), std::invalid_argument);
 			}
 		}
 	}
@@ -310,14 +316,14 @@ void TestModel::testDoubleCrossSwitchStates()
 					(part->state() == DoubleCrossSwitch::State::BC) ||
 					(part->state() == DoubleCrossSwitch::State::BD));
 
-				QVERIFY_EXCEPTION_THROWN(part->setState(right, nullptr), std::invalid_argument);
-				QVERIFY_EXCEPTION_THROWN(part->setState(left, nullptr),  std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(right, nullptr), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(left, nullptr),  std::invalid_argument);
 
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, right), std::invalid_argument);
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, left),  std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, right), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, left),  std::invalid_argument);
 
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, nullptr), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, nullptr), std::invalid_argument);
 			}
 		}
 	}
@@ -807,7 +813,7 @@ void TestModel::testSection(Region * region, Section * section)
 	QVERIFY(section->isUnlockable());
 	QVERIFY(section->isFree());
 
-	QVERIFY_EXCEPTION_THROWN(section->assemblyPart(rail_count), std::out_of_range);
+	MRW_THROWS_EXCEPTION(section->assemblyPart(rail_count), std::out_of_range);
 }
 
 void TestModel::testAssemblyPart(Section * section, AssemblyPart * part)

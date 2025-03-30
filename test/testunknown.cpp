@@ -15,6 +15,12 @@ using namespace mrw::test;
 using namespace mrw::can;
 using namespace mrw::model;
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 3, 0))
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_EXCEPTION_THROWN(condition, exception);
+#else
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_THROWS_EXCEPTION(exception, condition);
+#endif
+
 TestUnknown::TestUnknown() : TestModelBase("Test-Unknown")
 {
 }
@@ -32,7 +38,7 @@ void TestUnknown::testController()
 	QVERIFY(!model->controller(3)->valid());
 
 	std::vector<MrwMessage> messages;
-	QVERIFY_EXCEPTION_THROWN(model->controller(3)->configure(messages), std::logic_error);
+	MRW_THROWS_EXCEPTION(model->controller(3)->configure(messages), std::logic_error);
 }
 
 void TestUnknown::testModule()

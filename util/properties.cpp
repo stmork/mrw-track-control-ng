@@ -53,7 +53,11 @@ bool Properties::read(const QString & filename) noexcept
 	{
 		QTextStream in(&file);
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 		in.setCodec("ISO 8859-15");
+#else
+		in.setEncoding(QStringConverter::Latin1);
+#endif
 		while (!in.atEnd())
 		{
 			std::string line = in.readLine().toStdString();

@@ -29,6 +29,12 @@
 using namespace mrw::test;
 using namespace mrw::util;
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 3, 0))
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_EXCEPTION_THROWN(condition, exception);
+#else
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_THROWS_EXCEPTION(exception, condition);
+#endif
+
 const ConstantEnumerator<int> TestUtil::int_map
 {
 	CONSTANT(EINVAL),
@@ -164,7 +170,7 @@ void TestUtil::testConstantEnumerator()
 	QCOMPARE(int_map.findKey("EINVAL")->first, EINVAL);
 	QCOMPARE(int_map.findKey("XYZ"), int_map.end());
 
-	QVERIFY_EXCEPTION_THROWN(int_map.at(EAGAIN), std::out_of_range);
+	MRW_THROWS_EXCEPTION(int_map.at(EAGAIN), std::out_of_range);
 
 	QCOMPARE(enum_map.at(EnumTest::ENUM1), "ENUM1");
 	QCOMPARE(enum_map.get(EnumTest::ENUM1), "ENUM1");
@@ -192,8 +198,9 @@ void TestUtil::testProperties()
 	QCOMPARE(props.at("Special"), "a.-_,");
 	QCOMPARE(props.at("ss1"), "2");
 	QCOMPARE(props.at("empty"), "");
-	QVERIFY_EXCEPTION_THROWN(props.at("11ss"), std::out_of_range);
-	QVERIFY_EXCEPTION_THROWN(props.at("1"),    std::out_of_range);
+
+	MRW_THROWS_EXCEPTION(props.at("11ss"), std::out_of_range);
+	MRW_THROWS_EXCEPTION(props.at("1"),    std::out_of_range);
 
 	QCOMPARE(props.lookup("AvalidProp"), "xyvc_,");
 	QCOMPARE(props.lookup("Another11Prop"), "ccc");
@@ -517,18 +524,18 @@ void TestUtil::testHexLine()
 	std::vector<uint8_t> buffer;
 
 	// Header parse error
-	QVERIFY_EXCEPTION_THROWN(HexLine(""), std::invalid_argument);
-	QVERIFY_EXCEPTION_THROWN(HexLine(":xxxx"), std::invalid_argument);
-	QVERIFY_EXCEPTION_THROWN(HexLine(":0000000g"), std::invalid_argument);
+	MRW_THROWS_EXCEPTION(HexLine(""), std::invalid_argument);
+	MRW_THROWS_EXCEPTION(HexLine(":xxxx"), std::invalid_argument);
+	MRW_THROWS_EXCEPTION(HexLine(":0000000g"), std::invalid_argument);
 
 	// Length format error.
-	QVERIFY_EXCEPTION_THROWN(HexLine(":01000000"), std::invalid_argument);
+	MRW_THROWS_EXCEPTION(HexLine(":01000000"), std::invalid_argument);
 
 	// Data format error.
-	QVERIFY_EXCEPTION_THROWN(HexLine(":02123400xx00aa"), std::invalid_argument);
+	MRW_THROWS_EXCEPTION(HexLine(":02123400xx00aa"), std::invalid_argument);
 
 	// Checksum error.
-	QVERIFY_EXCEPTION_THROWN(HexLine(":02123400ff00aa"), std::invalid_argument);
+	MRW_THROWS_EXCEPTION(HexLine(":02123400ff00aa"), std::invalid_argument);
 
 	// Data line
 	HexLine line(":02123400ff00b9");

@@ -1,4 +1,4 @@
-name: Track control NG for model railways
+name: Track control NG Ubuntu Qt6
 on: [push]
 
 jobs:
@@ -9,9 +9,9 @@ jobs:
       - name: Update package info
         run: sudo apt update -y
       - name: Install needed components
-        run: sudo apt install -y libqt5serialbus5-dev libsystemd-dev libgtest-dev libx11-dev libxext-dev libdrm-dev cppcheck
+        run: sudo apt install -y qmake6 qt6-serialbus-dev libsystemd-dev libgtest-dev libx11-dev libxext-dev libdrm-dev cppcheck
       - name: QMake
-        run: qmake -r
+        run: qmake6 -r
       - name: Build
         run: make -j `nproc`
       - name: CPP-Check

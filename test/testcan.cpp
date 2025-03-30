@@ -16,6 +16,12 @@
 using namespace mrw::test;
 using namespace mrw::can;
 
+#if (QT_VERSION < QT_VERSION_CHECK(6, 3, 0))
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_EXCEPTION_THROWN(condition, exception);
+#else
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_THROWS_EXCEPTION(exception, condition);
+#endif
+
 /*************************************************************************
 **                                                                      **
 **       Test implementation of MrwBusService                           **
@@ -338,7 +344,7 @@ void TestCan::testRequestPayload()
 		bytes[t] = 0x12 + t + 0x22;
 
 		QCOMPARE(message.size(), t);
-		QVERIFY_EXCEPTION_THROWN(message[t], std::out_of_range);
+		MRW_THROWS_EXCEPTION(message[t], std::out_of_range);
 		message.append(bytes[t]);
 		for (size_t b = 0; b < t; b++)
 		{
@@ -346,7 +352,7 @@ void TestCan::testRequestPayload()
 		}
 	}
 
-	QVERIFY_EXCEPTION_THROWN(message.append(0xff), std::out_of_range);
+	MRW_THROWS_EXCEPTION(message.append(0xff), std::out_of_range);
 
 	QCanBusFrame frame(message);
 	QByteArray   array(frame.payload());
@@ -370,7 +376,7 @@ void TestCan::testResponsePayload()
 		bytes[t] = 0x12 + t + 0x22;
 
 		QCOMPARE(message.size(), t);
-		QVERIFY_EXCEPTION_THROWN(message[t], std::out_of_range);
+		MRW_THROWS_EXCEPTION(message[t], std::out_of_range);
 		message.append(bytes[t]);
 		for (size_t b = 0; b < t; b++)
 		{
@@ -378,7 +384,7 @@ void TestCan::testResponsePayload()
 		}
 	}
 
-	QVERIFY_EXCEPTION_THROWN(message.append(0xff), std::out_of_range);
+	MRW_THROWS_EXCEPTION(message.append(0xff), std::out_of_range);
 
 	QCanBusFrame frame(message);
 	QByteArray   array(frame.payload());

@@ -10,6 +10,7 @@
 #include <QCanBusDeviceInfo>
 #include <QDebug>
 #include <QTimer>
+#include <QVariant>
 
 #include <util/method.h>
 #include <can/mrwbusservice.h>

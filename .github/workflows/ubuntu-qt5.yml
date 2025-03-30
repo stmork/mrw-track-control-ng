@@ -1,0 +1,20 @@
+name: Track control NG Ubuntu Qt5
+on: [push]
+
+jobs:
+  MRW-NG-Ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update package info
+        run: sudo apt update -y
+      - name: Install needed components
+        run: sudo apt install -y libqt5serialbus5-dev libsystemd-dev libgtest-dev libx11-dev libxext-dev libdrm-dev cppcheck
+      - name: QMake
+        run: qmake -r
+      - name: Build
+        run: make -j `nproc`
+      - name: CPP-Check
+        run: make cppcheck
+      - name: SCT Unit Tests
+        run: make sct-unit
