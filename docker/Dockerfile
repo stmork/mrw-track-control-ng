@@ -7,7 +7,7 @@ RUN apt update && apt dist-upgrade -y && apt install -y \
    libqt5serialbus5-dev libsystemd-dev libgtest-dev qhelpgenerator-qt5 \
    qmake6 qt6-serialbus-dev \
    libx11-dev libxext-dev libdrm-dev \
-   graphviz pkg-config git make g++ cppcheck cccc fakeroot doxygen
+   graphviz pkg-config git make g++ cppcheck cccc fakeroot doxygen valgrind
 
 RUN addgroup dev
 RUN adduser --ingroup dev --home /home/dev --gecos "Development user" --disabled-password dev
