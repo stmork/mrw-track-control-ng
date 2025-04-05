@@ -32,6 +32,7 @@ ScreenBlankHandler::ScreenBlankHandler()
 #ifdef X11_SCREEN_SAVER
 	Display * display = XOpenDisplay(nullptr);
 
+	qCDebug(log, "Using X11 screen saver.");
 	if (display != nullptr)
 	{
 		qDebug().noquote() << "Init display:" << display;
@@ -44,6 +45,7 @@ ScreenBlankHandler::ScreenBlankHandler()
 #endif
 	{
 #ifdef DRM_SCREEN_SAVER
+		qCDebug(log, "Using DRM screen saver.");
 #if 1
 		findDevice();
 #else
@@ -51,6 +53,9 @@ ScreenBlankHandler::ScreenBlankHandler()
 #endif
 #endif
 	}
+#ifdef QT_SCREEN_SAVER
+	qCDebug(log, "Using Qt private API screen saver.");
+#endif
 }
 
 ScreenBlankHandler::~ScreenBlankHandler()
