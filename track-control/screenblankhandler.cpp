@@ -15,6 +15,10 @@
 
 #include "screenblankhandler.h"
 
+#ifdef QT_SCREEN_SAVER
+#include <qpa/qplatformscreen.h>
+#endif
+
 #ifdef X11_SCREEN_SAVER
 #include <X11/Xlib.h>
 #include <X11/extensions/dpms.h>
@@ -39,16 +43,19 @@ ScreenBlankHandler::ScreenBlankHandler()
 	else
 #endif
 	{
+#ifdef DRM_SCREEN_SAVER
 #if 1
 		findDevice();
 #else
 		initDevice(5);
+#endif
 #endif
 	}
 }
 
 ScreenBlankHandler::~ScreenBlankHandler()
 {
+#ifdef DRM_SCREEN_SAVER
 	if (drm_fd >= 0)
 	{
 		if (lease_id != 0)
@@ -57,6 +64,7 @@ ScreenBlankHandler::~ScreenBlankHandler()
 		}
 		close(drm_fd);
 	}
+#endif
 }
 
 ScreenBlankHandler::operator QScreen * () const
@@ -98,20 +106,23 @@ void ScreenBlankHandler::resetBlank()
 
 void ScreenBlankHandler::blank(bool blank_active)
 {
-#if 0
 	qDebug().noquote() << "DPMS blank:" << blank_active;
+#ifdef QT_SCREEN_SAVER
 	if (screen != nullptr)
 	{
 		QPlatformScreen * handle = screen->handle();
 
 		if (handle != nullptr)
 		{
-#if 0
-			handle->setPowerState(blank_active ? QPlatformScreen::PowerOff : QPlatformScreen::PowerOn);
+#if 1
+			handle->setPowerState(blank_active ? QPlatformScreen::PowerStateOff : QPlatformScreen::PowerStateOn);
+			return;
 #endif
 		}
 	}
-#else
+#endif
+
+#ifdef DRM_SCREEN_SAVER
 	if (dpms_active)
 	{
 		const int res = drmModeConnectorSetProperty(lease_fd, connector_id,
@@ -129,7 +140,7 @@ void ScreenBlankHandler::blank(bool blank_active)
 #endif
 }
 
-
+#ifdef DRM_SCREEN_SAVER
 void ScreenBlankHandler::findDevice()
 {
 	static const std::regex     pattern(R"(card\d+$)");
@@ -275,3 +286,4 @@ void ScreenBlankHandler::initDPMS()
 	}
 	qDebug().noquote() << "DPMS found:   " << dpms_active;
 }
+#endif

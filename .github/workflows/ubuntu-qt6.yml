@@ -9,9 +9,9 @@ jobs:
       - name: Update package info
         run: sudo apt update -y
       - name: Install needed components
-        run: sudo apt install -y qmake6 qt6-serialbus-dev libsystemd-dev libgtest-dev libx11-dev libxext-dev libdrm-dev cppcheck
+        run: sudo apt install -y qmake6 qt6-serialbus-dev qt6-base-private-dev libsystemd-dev libgtest-dev libx11-dev libxext-dev libdrm-dev cppcheck
       - name: QMake
-        run: qmake6 -r
+        run: qmake6 CONFIG+=drm-ss CONFIG+=qt-ss -r
       - name: Build
         run: make -j `nproc`
       - name: CPP-Check

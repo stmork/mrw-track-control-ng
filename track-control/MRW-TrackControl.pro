@@ -4,9 +4,26 @@
 #
 
 QT += gui widgets network
-CONFIG += link_pkgconfig
 
-PKGCONFIG += libdrm
+linux {
+	DEFINES     += X11_SCREEN_SAVER
+	LIBS        += -lX11 -lXext
+	message("Using X11 screen saver.")
+}
+
+linux:CONFIG(drm-ss) {
+	PKGCONFIG   += libdrm
+	DEFINES     += DRM_SCREEN_SAVER
+	message("Using DRM screen saver.")
+}
+
+linux:CONFIG(qt-ss) {
+	QT          += gui-private
+	DEFINES     += QT_SCREEN_SAVER
+	message("Using Qt based screen saver.")
+}
+
+CONFIG += link_pkgconfig
 
 include(../common.pri)
 
@@ -58,11 +75,6 @@ FORMS += \
 	regionform.ui
 
 LIBS            += -lsystemd -lMRW-UI -lMRW-Ctrl -lMRW-Model -lMRW-Can -lMRW-Statecharts -lMRW-Log -lMRW-Util
-
-linux {
-	DEFINES     += X11_SCREEN_SAVER
-	LIBS        += -lX11 -lXext
-}
 
 QMAKE_CLEAN     += $$TARGET
 

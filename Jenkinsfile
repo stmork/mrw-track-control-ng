@@ -19,7 +19,7 @@ pipeline
 				sh """
 				rm -rf doc lcov-out cccc */moc_* */ui_* */*.o
 				test -f Makefile && make clean distclean
-				qmake -r CONFIG+=gcov
+				qmake -r CONFIG+=gcov CONFIG+=drm-ss CONFIG+=qt-ss
 				make -j `nproc`
 				"""
 			}

@@ -14,7 +14,7 @@ echo "qmake:  $QMAKE"
 
 rm -rf ${PREFIX}
 test -f Makefile && make clean distclean
-${QMAKE} -r
+${QMAKE} CONFIG+=qt-ss -r
 make -j `nproc`
 make install
 
