@@ -3,6 +3,9 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
+#include <fstream>
+#include <chrono>
+
 #include <unistd.h>
 #include <systemd/sd-daemon.h>
 
@@ -10,6 +13,7 @@
 #include <QMouseEvent>
 #include <QTouchEvent>
 #include <QKeyEvent>
+#include <QHostInfo>
 
 #include <util/globalbatch.h>
 #include <util/method.h>
@@ -32,6 +36,8 @@
 #include "mrwmessagedispatcher.h"
 #include "controlledroute.h"
 #include "beermodeservice.h"
+
+using namespace std::chrono_literals;
 
 using namespace mrw::util;
 using namespace mrw::statechart;
@@ -104,6 +110,7 @@ MainWindow::MainWindow(
 	statechart.setOperationCallback(*this);
 	statechart.screen().setOperationCallback(blanker);
 	statechart.can().setOperationCallback(dispatcher);
+	setScreenBlankTimeout();
 
 	Q_ASSERT(statechart.check());
 
@@ -565,6 +572,24 @@ void MainWindow::routeFinished()
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
 	statechart.routesChanged();
+}
+
+void MainWindow::setScreenBlankTimeout()
+{
+	static constexpr std::chrono::milliseconds  min_blank_time(std::chrono::minutes(5));
+
+	std::fstream             blank_file("/sys/module/kernel/parameters/consoleblank", std::ios_base::in);
+	int                      blank_time = std::chrono::duration_cast<std::chrono::seconds>(min_blank_time).count();
+	mrw::util::Settings      settings;
+	mrw::util::SettingsGroup group(&settings, QHostInfo::localHostName());
+
+	blank_file >> blank_time;
+
+	const std::chrono::milliseconds ms      = std::chrono::seconds(blank_time);
+	const sc::integer               clamped = std::max(ms.count(), min_blank_time.count());
+	const sc::integer               timeout = settings.value("blank", clamped).toInt();
+
+	statechart.screen().setTimeout(timeout);
 }
 
 /*************************************************************************
