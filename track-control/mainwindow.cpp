@@ -116,9 +116,13 @@ MainWindow::MainWindow(
 
 	Q_ASSERT(statechart.check());
 
-	static SignalHandler terminator( { SIGTERM, SIGINT }, [&]()
+	static SignalHandler terminator( { SIGTERM, SIGINT }, [this]()
 	{
 		statechart.finalize();
+	});
+	static SignalHandler stopper( { SIGHUP }, [this]()
+	{
+		on_clearAllRoutes_clicked();
 	});
 
 	// And startup!
