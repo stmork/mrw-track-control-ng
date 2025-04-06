@@ -21,6 +21,7 @@
 
 #include "mainwindow.h"
 #include "mrwmessagedispatcher.h"
+#include "log.h"
 
 using namespace mrw::util;
 using namespace mrw::log;
@@ -57,32 +58,32 @@ int main(int argc, char * argv[])
 
 		try
 		{
-			qInfo().noquote() << "Window size: " << main_window.size();
+			qCInfo(mrw::tools::log).noquote() << "Window size: " << main_window.size();
 
-			qInfo("==========================================================");
-			qInfo() << "MRW-NG track control using model:" << repo.modelName();
+			qCInfo(mrw::tools::log, "==========================================================");
+			qCInfo(mrw::tools::log) << "MRW-NG track control using model:" << repo.modelName();
 #ifdef VERSION
-			qInfo()           << "Version:   " << VERSION;
+			qCInfo(mrw::tools::log)           << "Version:   " << VERSION;
 #endif
 #ifdef BUILD_NUMBER
-			qInfo()           << "Build:     " << BUILD_NUMBER;
+			qCInfo(mrw::tools::log)           << "Build:     " << BUILD_NUMBER;
 #endif
-			qInfo()           << "Qt version:" << qVersion();
-			qInfo().noquote() << "CAN plugin:" << repo.plugin();
-			qInfo().noquote() << "CAN iface: " << repo.interface();
-			qInfo("==========================================================");
+			qCInfo(mrw::tools::log)           << "Qt version:" << qVersion();
+			qCInfo(mrw::tools::log).noquote() << "CAN plugin:" << repo.plugin();
+			qCInfo(mrw::tools::log).noquote() << "CAN iface: " << repo.interface();
+			qCInfo(mrw::tools::log, "==========================================================");
 			sd_notify(0, "READY=1");
 			return app.exec();
 		}
 		catch (const std::exception & exception)
 		{
 			dispatcher.emergencyStop();
-			qCritical("FATAL: %s", exception.what());
+			qCCritical(mrw::tools::log, "FATAL: %s", exception.what());
 		}
 	}
 	else
 	{
-		qCritical().noquote() << "No model available:" << repo.modelName();
+		qCCritical(mrw::tools::log).noquote() << "No model available:" << repo.modelName();
 
 		return EXIT_FAILURE;
 	}

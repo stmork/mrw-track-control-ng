@@ -39,6 +39,7 @@ SOURCES += \
 	ctrl/signalcontrollerproxy.cpp \
 	ctrl/signalproxy.cpp \
 	ctrl/switchcontroller.cpp \
+	log.cpp \
 	main.cpp \
 	mainwindow.cpp \
 	mrwmessagedispatcher.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
 	ctrl/signalcontrollerproxy.h \
 	ctrl/signalproxy.h \
 	ctrl/switchcontroller.h \
+	log.h \
 	mainwindow.h \
 	mrwmessagedispatcher.h \
 	regionform.h \

@@ -3,8 +3,6 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
-#include <QDebug>
-
 #include <model/region.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
 #include <ctrl/controllerregistry.h>
@@ -64,12 +62,12 @@ DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(
 	connect(
 		&statechart, &SwitchStatechart::entered, [&]()
 	{
-		qDebug().noquote() << part->toString() << "Inquiry started.";
+		qCDebug(log).noquote() << part->toString() << "Inquiry started.";
 	});
 	connect(
 		&statechart, &SwitchStatechart::started, [&]()
 	{
-		qDebug().noquote() << part->toString() << "Inquiry completed.";
+		qCDebug(log).noquote() << part->toString() << "Inquiry completed.";
 	});
 }
 
@@ -173,7 +171,7 @@ RailPart * DoubleCrossSwitchControllerProxy::railPart() const
 
 bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 {
-	qDebug().noquote() << message << "(double cross switch)";
+	qCDebug(log).noquote() << message << "(double cross switch)";
 
 	switch (message.response())
 	{
@@ -221,7 +219,7 @@ bool DoubleCrossSwitchControllerProxy::process(const MrwMessage & message)
 		break;
 
 	default:
-		qCritical().noquote() << "Error switching" << part->toString();
+		qCCritical(log).noquote() << "Error switching" << part->toString();
 		statechart.failed();
 		break;
 	}
@@ -276,7 +274,7 @@ bool DoubleCrossSwitchControllerProxy::isFree()
 
 void DoubleCrossSwitchControllerProxy::fail()
 {
-	qCritical().noquote() << String::red(" Switch turn failed!") << name();
+	qCCritical(log).noquote() << String::red(" Switch turn failed!") << name();
 
 	part->setLock(LockState::FAIL);
 	ControllerRegistry::instance().failed();

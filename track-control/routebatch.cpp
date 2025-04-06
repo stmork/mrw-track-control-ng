@@ -4,6 +4,7 @@
 //
 
 #include "routebatch.h"
+#include "log.h"
 
 RouteBatch::RouteBatch(
 	const bool  has_signal,
@@ -17,7 +18,7 @@ RouteBatch::RouteBatch(
 
 RouteBatch::~RouteBatch()
 {
-	qDebug("======================= Disable transaction (ID=%u) deleted.", id);
+	qCDebug(mrw::tools::log, "======================= Disable transaction (ID=%u) deleted.", id);
 }
 
 void RouteBatch::completed()

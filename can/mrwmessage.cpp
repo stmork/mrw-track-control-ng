@@ -8,6 +8,8 @@
 using namespace mrw::can;
 using namespace mrw::util;
 
+Q_LOGGING_CATEGORY(mrw::can::log, "mrw.can")
+
 const ConstantEnumerator<Command>  MrwMessage::command_map
 {
 	CONSTANT(SETLFT),

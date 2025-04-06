@@ -5,7 +5,6 @@
 
 #include <QCoreApplication>
 #include <QDirIterator>
-#include <QDebug>
 
 #include <model/signal.h>
 #include <model/railpart.h>
@@ -59,7 +58,7 @@ ModelRepository::~ModelRepository()
 		save();
 	}
 
-	qInfo("Shutting down model.");
+	qCInfo(log, "Shutting down model.");
 	delete model;
 }
 
@@ -85,10 +84,10 @@ const QString & ModelRepository::interface() const
 
 void ModelRepository::save()
 {
-	qInfo("Saving positions.");
+	qCInfo(log, "Saving positions.");
 	storePositions();
 
-	qInfo("Saving regions.");
+	qCInfo(log, "Saving regions.");
 	storeRegions();
 
 	settings_model.sync();
@@ -125,7 +124,7 @@ bool ModelRepository::prepareModel()
 {
 	SettingsGroup group(&settings_model, FILE_GROUP);
 
-	qDebug().noquote() << "Preparing model" << modelname;
+	qCDebug(log).noquote() << "Preparing model" << modelname;
 
 	// First try: Read directly from config by default filename."
 	model_filename = settings_model.value("filename", home_dir.absolutePath() + "/mrw/" + filename).toString();
@@ -147,7 +146,7 @@ bool ModelRepository::prepareModel()
 
 void ModelRepository::readMaps()
 {
-	qDebug("Reading position maps...");
+	qCDebug(log, "Reading position maps...");
 
 	region_map.read(region_filename);
 	signal_map.read(signal_filename);
@@ -163,7 +162,7 @@ QString ModelRepository::lookup()
 {
 	QDirIterator dir_it(QDir::homePath(), filter, QDir::Files, QDirIterator::Subdirectories);
 
-	qDebug().noquote() << "Looking up model file " << model_filename;
+	qCDebug(log).noquote() << "Looking up model file " << model_filename;
 	while (dir_it.hasNext())
 	{
 		QString file = dir_it.next();
@@ -221,7 +220,7 @@ QStringList ModelRepository::lookupProperties(const QString & input)
 
 void ModelRepository::setFilenames()
 {
-	qDebug("Setting filenames...");
+	qCDebug(log, "Setting filenames...");
 	settings_model.setValue("filename",  model_filename);
 	settings_model.setValue("signals",   signal_filename);
 	settings_model.setValue("regions",   region_filename);
@@ -236,7 +235,7 @@ void ModelRepository::prepareHost()
 	dump_result = settings_host.value("dump", dump_result).toBool();
 	dump_xml    = settings_host.value("xml",  dump_xml).toBool();
 
-	qDebug().noquote().nospace() << "Using CAN: " << plugin() << "/" << interface();
+	qCDebug(log).noquote().nospace() << "Using CAN: " << plugin() << "/" << interface();
 }
 
 void ModelRepository::prepareRegions()
@@ -257,7 +256,7 @@ void ModelRepository::prepareRegions()
 		}
 		catch (std::out_of_range & e)
 		{
-			qWarning() << "No direction found for " << *region << e.what();
+			qCWarning(log).noquote() << "No direction found for " << *region << e.what();
 		}
 		prepareSignals(region);
 	}
@@ -281,7 +280,7 @@ void ModelRepository::prepareRailParts()
 		}
 		catch (std::out_of_range & e)
 		{
-			qWarning() << "No coordinate found for " << *part;
+			qCWarning(log) << "No coordinate found for " << *part;
 		}
 	}
 }
@@ -306,7 +305,7 @@ void ModelRepository::prepareSignals(Region * region)
 		}
 		catch (std::out_of_range & e)
 		{
-			qWarning() << "No coordinate found for " << *signal;
+			qCWarning(log) << "No coordinate found for " << *signal;
 		}
 	}
 }

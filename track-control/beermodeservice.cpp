@@ -8,6 +8,7 @@
 
 #include "beermodeservice.h"
 #include "controlledroute.h"
+#include "log.h"
 
 using namespace mrw::util;
 using namespace mrw::model;
@@ -21,7 +22,7 @@ BeerModeService::~BeerModeService()
 {
 	__METHOD__;
 
-	qInfo("  Shutting down beer mode service.");
+	qCInfo(mrw::tools::log, "  Shutting down beer mode service.");
 }
 
 void BeerModeService::init(ModelRailway * model)
@@ -45,11 +46,11 @@ ControlledRoute * BeerModeService::startBeerMode(const bool dir)
 		std::vector<Rail *> end_rails;
 
 		findPassthrough(pass_through_rails, start->region(), false);
-		qDebug("-----");
+		qCDebug(mrw::tools::log, "-----");
 		dump(pass_through_rails);
 
 		findPassthrough(end_rails, start->region(), true);
-		qDebug("-----");
+		qCDebug(mrw::tools::log, "-----");
 		dump(end_rails);
 
 		Rail * pass_through = random(pass_through_rails);
@@ -59,10 +60,10 @@ ControlledRoute * BeerModeService::startBeerMode(const bool dir)
 		{
 			ControlledRoute * route = new ControlledRoute(dir, SectionState::TOUR, start);
 
-			qDebug("-----");
-			qDebug().noquote() << "Start: " << dump(start);
-			qDebug().noquote() << "Pass:  " << dump(pass_through);
-			qDebug().noquote() << "End:   " << dump(end);
+			qCDebug(mrw::tools::log, "-----");
+			qCDebug(mrw::tools::log).noquote() << "Start: " << dump(start);
+			qCDebug(mrw::tools::log).noquote() << "Pass:  " << dump(pass_through);
+			qCDebug(mrw::tools::log).noquote() << "End:   " << dump(end);
 			if (route->append(pass_through) && route->append(*end->advance(dir).begin()))
 			{
 				beer_route = route;
@@ -87,7 +88,7 @@ void BeerModeService::disableBeerMode(ControlledRoute * route) noexcept
 {
 	if (route == beer_route)
 	{
-		qInfo("Disabling beer mode");
+		qCInfo(mrw::tools::log, "Disabling beer mode");
 
 		beer_route = nullptr;
 		emit disabledBeerMode();
@@ -188,7 +189,7 @@ void BeerModeService::dump(const std::vector<Rail *> & rails) const noexcept
 {
 	for (const Rail * rail : rails)
 	{
-		qDebug().noquote() << dump(rail);
+		qCDebug(mrw::tools::log).noquote() << dump(rail);
 	}
 }
 

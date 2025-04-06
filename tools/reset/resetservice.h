@@ -10,6 +10,8 @@
 
 #include <unordered_set>
 
+#include <QLoggingCategory>
+
 #include <can/mrwbusservice.h>
 
 /**
@@ -20,6 +22,8 @@ class ResetService : public mrw::can::MrwBusService
 	Q_OBJECT
 
 private:
+	QLoggingCategory                                log;
+
 	std::unordered_multiset<mrw::can::ControllerId> controllers;
 
 public:

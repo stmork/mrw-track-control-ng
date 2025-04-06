@@ -3,8 +3,6 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
-#include <QDebug>
-
 #include <util/method.h>
 #include <can/mrwmessage.h>
 #include <model/section.h>
@@ -20,7 +18,8 @@ using namespace mrw::statechart;
 TrackerService::TrackerService(
 	ModelRepository & repo,
 	QObject     *     parent) :
-	MrwBusService(repo.interface(), repo.plugin(), parent)
+	MrwBusService(repo.interface(), repo.plugin(), parent),
+	log("mrw.tools.tracker")
 {
 	model = repo;
 
@@ -84,7 +83,7 @@ void TrackerService::append(
 		}
 		section->enable(enable);
 		track.push_front(section);
-		qDebug().noquote() << *section;
+		qCDebug(log).noquote() << *section;
 
 		position = track.end();
 		previous = position;
@@ -153,8 +152,8 @@ bool TrackerService::valid()
 
 	if (is_invalid)
 	{
-		qWarning().noquote() << "Sections on:  " << on;
-		qWarning().noquote() << "Sections off: " << off;
+		qCWarning(log).noquote() << "Sections on:  " << on;
+		qCWarning(log).noquote() << "Sections off: " << off;
 	}
 	return !is_invalid;
 }
@@ -166,6 +165,6 @@ bool TrackerService::last()
 
 void TrackerService::clear()
 {
-	qDebug("End of track reached!");
+	qCDebug(log, "End of track reached!");
 	track.clear();
 }

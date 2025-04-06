@@ -23,7 +23,8 @@ UpdateService::UpdateService(
 	const QString & interface,
 	const QString & plugin,
 	QObject    *    parent) :
-	MrwBusService(interface, plugin, parent, false)
+	MrwBusService(interface, plugin, parent, false),
+	log("mrw.tools.update")
 {
 	buffer.reserve(65536);
 	read(filename);
@@ -241,43 +242,43 @@ void UpdateService::fail(sc::integer error_code)
 	switch (error_code)
 	{
 	case 0:
-		qInfo("No error occured but reached fail state?");
+		qCInfo(log, "No error occured but reached fail state?");
 		break;
 
 	case 1:
-		qCritical("Timeout after calling PING!");
+		qCCritical(log, "Timeout after calling PING!");
 		break;
 
 	case 2:
-		qCritical("Timeout after calling RESET!");
+		qCCritical(log, "Timeout after calling RESET!");
 		break;
 
 	case 3:
-		qCritical("Checksum error after flash!");
+		qCCritical(log, "Checksum error after flash!");
 		break;
 
 	case 4:
-		qCritical("Timeout after checksum check!");
+		qCCritical(log, "Timeout after checksum check!");
 		break;
 
 	case 5:
-		qCritical("Timeout while booting!");
+		qCCritical(log, "Timeout while booting!");
 		break;
 
 	case 6:
-		qCritical("Retry exceeded requesting flash!");
+		qCCritical(log, "Retry exceeded requesting flash!");
 		break;
 
 	case 7:
-		qCritical("Timeout connecting to CAN bus!");
+		qCCritical(log, "Timeout connecting to CAN bus!");
 		break;
 
 	case 8:
-		qCritical("Hardware ID mismatch!");
+		qCCritical(log, "Hardware ID mismatch!");
 		break;
 
 	default:
-		qCritical("Unknown error occured!");
+		qCCritical(log, "Unknown error occured!");
 		break;
 	}
 
@@ -300,7 +301,7 @@ void UpdateService::flashCompletePage()
 	{
 		flashData(4);
 	}
-	qDebug("-----");
+	qCDebug(log, "-----");
 	rest -= SPM_PAGESIZE;
 }
 
@@ -310,6 +311,6 @@ void UpdateService::flashRestPage()
 	{
 		flashData(2);
 	}
-	qDebug("---");
+	qCDebug(log, "---");
 	rest = 0;
 }

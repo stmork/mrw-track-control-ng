@@ -3,11 +3,10 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
-#include <QDebug>
-
 #include <util/batch.h>
 #include <util/batchparticipant.h>
 #include <util/globalbatch.h>
+#include <util/log.h>
 
 using namespace mrw::util;
 
@@ -20,7 +19,7 @@ BatchParticipant::~BatchParticipant()
 {
 	if (open_tx != nullptr)
 	{
-		qWarning("Forced decrease while destroying");
+		qCWarning(log, "Forced decrease while destroying");
 		open_tx->remove(this);
 	}
 }
@@ -47,7 +46,7 @@ bool BatchParticipant::decrease() noexcept
 
 	if (open_tx != base_tx)
 	{
-		qWarning().noquote() << "dec: Batch different!" << name();
+		qCWarning(log).noquote() << "dec: Batch different!" << name();
 	}
 	open_tx = nullptr;
 	return base_tx->decrease(this);
@@ -62,11 +61,11 @@ void BatchParticipant::setBatch(Batch * new_batch) noexcept
 {
 	if (new_batch != nullptr)
 	{
-		qDebug() << "+setBatch()" << name();
+		qCDebug(log) << "+setBatch()" << name();
 	}
 	else
 	{
-		qDebug() << "-setBatch()" << name();
+		qCDebug(log) << "-setBatch()" << name();
 		new_batch = &GlobalBatch::instance();
 	}
 

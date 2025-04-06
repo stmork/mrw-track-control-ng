@@ -4,10 +4,10 @@
 //
 
 #include <QCoreApplication>
-#include <QDebug>
 
 #include <util/batch.h>
 #include <util/batchparticipant.h>
+#include <util/log.h>
 
 using namespace mrw::util;
 
@@ -29,7 +29,7 @@ Batch::~Batch()
 	{
 		BatchParticipant * participant = *transaction.begin();
 
-		qWarning().noquote() << "Transaction participant not resetted:" << participant->name();
+		qCWarning(log).noquote() << "Transaction participant not resetted:" << participant->name();
 
 		// Since a transaction is also open in BatchParticipant it will
 		// also call this->remove()
@@ -39,7 +39,7 @@ Batch::~Batch()
 
 void Batch::reset()
 {
-	qDebug("======================= Transaction (ID=%u) left %zu elements.",
+	qCDebug(log, "======================= Transaction (ID=%u) left %zu elements.",
 		id, transaction.size());
 
 	auto it = transaction.begin();
@@ -57,13 +57,13 @@ bool Batch::increase(BatchParticipant * element) noexcept
 	if (transaction.find(element) == transaction.end())
 	{
 		transaction.emplace(element);
-		qDebug("Transaction (ID=%u) increased to %zu element(s). Added: %s",
+		qCDebug(log, "Transaction (ID=%u) increased to %zu element(s). Added: %s",
 			id, transaction.size(),  element->name().toLatin1().constData());
 		return true;
 	}
 	else
 	{
-		qWarning().noquote() << "Transaction already contains element" << element->name();
+		qCWarning(log).noquote() << "Transaction already contains element" << element->name();
 	}
 	return false;
 }
@@ -74,12 +74,12 @@ bool Batch::decrease(BatchParticipant * element) noexcept
 
 	if (count == 1)
 	{
-		qDebug("Transaction (ID=%u) decreased to %zu element(s). Removed: %s",
+		qCDebug(log, "Transaction (ID=%u) decreased to %zu element(s). Removed: %s",
 			id, transaction.size(), element->name().toLatin1().constData());
 
 		if (isCompleted())
 		{
-			qDebug("======================= Transaction (ID=%u) completed.",
+			qCDebug(log, "======================= Transaction (ID=%u) completed.",
 				id);
 			emit completed();
 		}
@@ -87,7 +87,7 @@ bool Batch::decrease(BatchParticipant * element) noexcept
 	}
 	else
 	{
-		qWarning("Transaction (ID=%u) does not contain element %s",
+		qCWarning(log, "Transaction (ID=%u) does not contain element %s",
 			id,  element->name().toLatin1().constData());
 	}
 	return false;
@@ -103,13 +103,13 @@ void Batch::tryComplete()
 	QCoreApplication::instance()->processEvents();
 	if (isCompleted())
 	{
-		qDebug("======================= Transaction (ID=%u) completed (was empty).",
+		qCDebug(log, "======================= Transaction (ID=%u) completed (was empty).",
 			id);
 		emit completed();
 	}
 	else
 	{
-		qDebug("======================= Transaction (ID=%u) contains %zu elements.",
+		qCDebug(log, "======================= Transaction (ID=%u) contains %zu elements.",
 			id, transaction.size());
 	}
 }
@@ -121,11 +121,11 @@ bool Batch::isCompleted() const noexcept
 
 void Batch::dump() const
 {
-	qDebug("======================= Transaction (ID=%u) contains %zu elements.",
+	qCDebug(log, "======================= Transaction (ID=%u) contains %zu elements.",
 		id, transaction.size());
 	for (BatchParticipant * participant : transaction)
 	{
-		qDebug().noquote() << participant->name();
+		qCDebug(log).noquote() << participant->name();
 	}
 }
 

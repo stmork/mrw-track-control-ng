@@ -16,7 +16,7 @@ ControllerRegistrand::ControllerRegistrand()
 
 bool ControllerRegistrand::process(const MrwMessage & message)
 {
-	qInfo().noquote() << "Unprocessed message:" << message;
+	qCInfo(log).noquote() << "Unprocessed message:" << message;
 
 	return false;
 }

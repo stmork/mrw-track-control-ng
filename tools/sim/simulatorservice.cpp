@@ -3,7 +3,6 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
-#include <QDebug>
 #include <QTimer>
 
 #include <model/section.h>
@@ -19,7 +18,8 @@ using namespace mrw::model;
 SimulatorService::SimulatorService(
 	ModelRepository & repo,
 	QObject     *     parent) :
-	MrwBusService(repo.interface(), repo.plugin(), parent)
+	MrwBusService(repo.interface(), repo.plugin(), parent),
+	log("mrw.tools.sim")
 {
 	model = repo;
 }
@@ -34,7 +34,7 @@ void SimulatorService::info()
 
 void SimulatorService::process(const MrwMessage & message)
 {
-	qInfo() << message;
+	qCInfo(log) << message;
 
 	if (!message.isResponse())
 	{

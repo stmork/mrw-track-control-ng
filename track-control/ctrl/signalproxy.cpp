@@ -3,8 +3,6 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
-#include <QDebug>
-
 #include <can/mrwmessage.h>
 #include <util/method.h>
 #include <statecharts/timerservice.h>
@@ -47,7 +45,7 @@ void SignalProxy::start(Signal * input)
 	if ((device != nullptr) && (device->controller() == nullptr))
 	{
 		// Controller for signal not configured.
-		qWarning().noquote() << "No controller for signal" << *input << "configured!";
+		qCWarning(log).noquote() << "No controller for signal" << *input << "configured!";
 		signal = nullptr;
 	}
 	else
@@ -85,7 +83,7 @@ void SignalProxy::dump()
 
 	if (signal != nullptr)
 	{
-		qDebug().noquote() << *signal;
+		qCDebug(log).noquote() << *signal;
 	}
 }
 
@@ -96,9 +94,9 @@ bool SignalProxy::process(Signal * device, const MrwMessage & message)
 	if (device == signal)
 	{
 #if 0
-		qDebug().noquote() << message << "  (signal)" << signal->toString() << (ControllerRegistry::instance().contains(this) ? "yes" : "no");
+		qCDebug(log).noquote() << message << "  (signal)" << signal->toString() << (ControllerRegistry::instance().contains(this) ? "yes" : "no");
 #else
-		qDebug().noquote() << message << "  (signal)" << device->toString();
+		qCDebug(log).noquote() << message << "  (signal)" << device->toString();
 #endif
 
 		switch (message.response())
@@ -121,7 +119,7 @@ bool SignalProxy::process(Signal * device, const MrwMessage & message)
 			break;
 
 		default:
-			qCritical().noquote() << "Error turning" << signal->toString();
+			qCCritical(log).noquote() << "Error turning" << signal->toString();
 			QMetaObject::invokeMethod(this, &SignalStatechart::failed, Qt::QueuedConnection);
 			return true;
 		}

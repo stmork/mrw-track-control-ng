@@ -83,7 +83,7 @@ bool DoubleCrossSwitch::isCurved() const noexcept
 State DoubleCrossSwitch::state() const
 {
 #ifdef STATE_VERBOSE
-	qDebug().noquote() << "DCS get state: " << state_map.get(switch_state) << name();
+	qCDebug(log_model).noquote() << "DCS get state: " << state_map.get(switch_state) << name();
 #endif
 
 	return switch_state;
@@ -101,13 +101,13 @@ bool DoubleCrossSwitch::setState(const State state, const bool force)
 	else if ((lock() == LockState::UNLOCKED) || force)
 	{
 #ifdef STATE_VERBOSE
-		qDebug().noquote() << "########## DCS set state: " << state_map.get(switch_state) << " => " << state_map.get(state) << name();
+		qCDebug(log_model).noquote() << "########## DCS set state: " << state_map.get(switch_state) << " => " << state_map.get(state) << name();
 #endif
 		switch_state = state;
 	}
 	else if (isCurved(switch_state) != isCurved(state))
 	{
-		qWarning().noquote() << "Switch locked!" << name();
+		qCWarning(log).noquote() << "Switch locked!" << name();
 		success = false;
 	}
 	return success;
@@ -153,7 +153,7 @@ State DoubleCrossSwitch::computeState(
 	}
 
 #ifdef STATE_VERBOSE
-	qDebug().noquote() << "########## DCS compute state: " << state_map.get(switch_state) << name();
+	qCDebug(log_model).noquote() << "########## DCS compute state: " << state_map.get(switch_state) << name();
 #endif
 
 	return static_cast<State>(state);

@@ -16,6 +16,7 @@ SOURCES += \
 	duration.cpp \
 	globalbatch.cpp \
 	hexline.cpp \
+	log.cpp \
 	properties.cpp \
 	random.cpp \
 	settings.cpp \
@@ -32,6 +33,7 @@ HEADERS += \
 	duration.h \
 	globalbatch.h \
 	hexline.h \
+	log.h \
 	method.h \
 	properties.h \
 	random.h \

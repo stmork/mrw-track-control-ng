@@ -8,6 +8,7 @@
 #ifndef TRACKERSERVICE_H
 #define TRACKERSERVICE_H
 
+#include <QLoggingCategory>
 #include <QTimer>
 
 #include <util/self.h>
@@ -22,6 +23,9 @@ class TrackerService :
 	public mrw::util::Self<mrw::statechart::TrackerStatechart::OperationCallback>
 {
 	Q_OBJECT
+
+private:
+	QLoggingCategory                            log;
 
 	mrw::statechart::QtStatechart<mrw::statechart::TrackerStatechart> statechart;
 

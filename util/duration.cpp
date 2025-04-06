@@ -3,9 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
-#include <QDebug>
-
-#include "util/duration.h"
+#include <util/duration.h>
+#include <util/log.h>
 
 using namespace mrw::util;
 
@@ -31,11 +30,11 @@ void Duration::pattern(const bool use_time_stamp) noexcept
 
 Duration::Duration(const char * naming) : name(naming)
 {
-	qDebug(">%s()", name);
+	qCDebug(log, ">%s()", name);
 	timer.start();
 }
 
 Duration::~Duration()
 {
-	qDebug("<%s() took %lld ms.", name, timer.elapsed());
+	qCDebug(log, "<%s() took %lld ms.", name, timer.elapsed());
 }

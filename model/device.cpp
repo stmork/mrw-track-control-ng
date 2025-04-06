@@ -3,8 +3,6 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
-#include <QDebug>
-
 #include <util/stringutil.h>
 #include <can/mrwmessage.h>
 #include "model/modelrailway.h"
@@ -49,13 +47,13 @@ void Device::setLock(const LockState input) noexcept
 {
 	if (input == LockState::FAIL)
 	{
-		qCritical().noquote() << String::red(" Locking to FAIL!") << name();
+		qCCritical(log).noquote() << String::red(" Locking to FAIL!") << name();
 	}
 	if (lock_state != input)
 	{
 		if ((input == LockState::UNLOCKED) && !isUnlockable())
 		{
-			qWarning().noquote() << String::red("Not unlockable!") << name();
+			qCWarning(log).noquote() << String::red("Not unlockable!") << name();
 		}
 		else
 		{

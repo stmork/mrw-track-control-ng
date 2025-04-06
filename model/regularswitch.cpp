@@ -5,8 +5,6 @@
 
 #include <stdexcept>
 
-#include <QDebug>
-
 #include <model/modelrailway.h>
 #include <model/regularswitch.h>
 
@@ -107,12 +105,12 @@ bool RegularSwitch::setState(const State state, const bool force) noexcept
 	}
 	else if (switch_state != state)
 	{
-		qWarning().noquote() << "Switch locked!" << name();
+		qCWarning(log).noquote() << "Switch locked!" << name();
 		success = false;
 	}
 
 #ifdef STATE_VERBOSE
-	qDebug().noquote() << "####>" << toString() << switchState();
+	qCDebug(log_model).noquote() << "####>" << toString() << switchState();
 #endif
 	return success;
 }
@@ -135,7 +133,7 @@ bool RegularSwitch::setState(
 	return setState(state);
 
 #ifdef STATE_VERBOSE
-	qDebug().noquote() << "####C" << toString() << switchState();
+	qCDebug(log_model).noquote() << "####C" << toString() << switchState();
 #endif
 }
 
@@ -158,13 +156,13 @@ State RegularSwitch::computeState(
 	}
 	else
 	{
-		qCritical() << "a: " << *a;
-		qCritical() << "b: " << *b;
-		qCritical() << "c: " << *c;
+		qCCritical(log) << "a: " << *a;
+		qCCritical(log) << "b: " << *b;
+		qCCritical(log) << "c: " << *c;
 
-		qCritical() << "Left: " << (prev != nullptr ? QString(*prev) : "<null>");
-		qCritical() << "This: " << *this;
-		qCritical() << "Right:" << (succ != nullptr ? QString(*succ) : "<null>");
+		qCCritical(log) << "Left: " << (prev != nullptr ? QString(*prev) : "<null>");
+		qCCritical(log) << "This: " << *this;
+		qCCritical(log) << "Right:" << (succ != nullptr ? QString(*succ) : "<null>");
 
 		throw std::invalid_argument("Given rail parts are not neighbours.");
 	}

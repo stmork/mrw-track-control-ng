@@ -18,6 +18,8 @@
 
 namespace mrw::model
 {
+	Q_DECLARE_LOGGING_CATEGORY(log);
+
 	class RegularSwitch;
 
 	/**

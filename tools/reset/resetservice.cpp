@@ -4,7 +4,6 @@
 //
 
 #include <QCoreApplication>
-#include <QDebug>
 
 #include "resetservice.h"
 
@@ -13,7 +12,9 @@ using namespace mrw::can;
 ResetService::ResetService(
 	const QString & interface,
 	const QString & plugin,
-	QObject    *    parent) : MrwBusService(interface, plugin, parent, false)
+	QObject    *    parent) :
+	MrwBusService(interface, plugin, parent, false),
+	log("mrw.tools.reset")
 {
 	QObject::connect(this, &MrwBusService::connected, [&]()
 	{
@@ -27,7 +28,7 @@ ResetService::ResetService(
 
 void ResetService::process(const MrwMessage & message)
 {
-	qDebug().noquote() << message;
+	qCDebug(log).noquote() << message;
 
 	if (message.isResponse())
 	{

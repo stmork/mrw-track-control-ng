@@ -20,7 +20,8 @@ using namespace mrw::model;
 ConfigurationService::ConfigurationService(
 	ModelRepository & repo,
 	QObject     *     parent) :
-	MrwBusService(repo.interface(), repo.plugin(), parent, false)
+	MrwBusService(repo.interface(), repo.plugin(), parent, false),
+	log("mrw.tools.config")
 {
 	std::vector<Device *> devices;
 
@@ -72,7 +73,7 @@ void ConfigurationService::process(const MrwMessage & message)
 			{
 				const size_t count = controllers.erase(message.eid());
 
-				qDebug("---------------------- (%zu controllers left)",
+				qCDebug(log, "---------------------- (%zu controllers left)",
 					controllers.size());
 				if ((count > 0) && (controllers.size() == 0))
 				{
@@ -118,14 +119,14 @@ sc::integer ConfigurationService::configure(sc::integer idx)
 	const ControllerId      id = controller->id();
 
 	controllers.insert(id);
-	qDebug("---------------------- %u (%zu unprocessed controllers)",
+	qCDebug(log, "---------------------- %u (%zu unprocessed controllers)",
 		id, controllers.size());
 	controller->configure(messages);
 
 #if 0
 	for (const MrwMessage & msg : messages)
 	{
-		qDebug().noquote() << msg;
+		qCDebug(log).noquote() << msg;
 	}
 #else
 	sendConfig(id, messages);
@@ -141,7 +142,7 @@ bool ConfigurationService::hasMore(sc::integer idx)
 
 void ConfigurationService::booting()
 {
-	qInfo("Configuration completed and booting.");
+	qCInfo(log, "Configuration completed and booting.");
 	if (controllers.size() == 0)
 	{
 		statechart.completed();
@@ -150,15 +151,15 @@ void ConfigurationService::booting()
 
 void ConfigurationService::quit()
 {
-	qInfo("Configured devices:   %3zu", config_count);
-	qInfo("Max devices per node: %3d", statechart.getMax());
-	qInfo("Assembly parts:       %3zu", device_count);
-	qInfo("Model railway facility ready.");
+	qCInfo(log, "Configured devices:   %3zu", config_count);
+	qCInfo(log, "Max devices per node: %3d", statechart.getMax());
+	qCInfo(log, "Assembly parts:       %3zu", device_count);
+	qCInfo(log, "Model railway facility ready.");
 	QCoreApplication::quit();
 }
 
 void ConfigurationService::fail()
 {
-	qCritical("Configuration timeout!");
+	qCCritical(log, "Configuration timeout!");
 	QCoreApplication::exit(EXIT_FAILURE);
 }

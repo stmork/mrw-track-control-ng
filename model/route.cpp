@@ -3,8 +3,6 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
-#include <QDebug>
-
 #include <util/method.h>
 #include <model/rail.h>
 #include <model/abstractswitch.h>
@@ -57,7 +55,7 @@ Route::Route(
 
 	first->reserve();
 	track.push_back(first);
-	qInfo().noquote() << "## First way point:" << first->toString();
+	qCInfo(log).noquote() << "## First way point:" << first->toString();
 }
 
 Route::~Route()
@@ -72,7 +70,7 @@ bool Route::append(RailPart * target)
 {
 	__METHOD__;
 
-	qInfo().noquote() << "## Next way point: " << target->toString();
+	qCInfo(log).noquote() << "## Next way point: " << target->toString();
 
 	last_valid_part    = track.back();
 
@@ -174,7 +172,7 @@ bool Route::hasFlankProtection(
 		if ((unlock_count != flank_switch_candidates.size()) &&
 			(count != flank_switch_candidates.size()))
 		{
-			qDebug().noquote() << indent << "      Flank protection not granted:";
+			qCDebug(log).noquote() << indent << "      Flank protection not granted:";
 			return false;
 		}
 	}
@@ -190,33 +188,33 @@ bool Route::qualified(
 	const Section * section = rail->section();
 	const Device  * device  = dynamic_cast<const Device *>(rail);
 
-	qDebug().noquote() << indent << rail->toString();
+	qCDebug(log).noquote() << indent << rail->toString();
 
 	if ((device != nullptr) && (device->lock() == LockState::FAIL))
 	{
-		qDebug().noquote() << indent << "      Rail in failed state.";
+		qCDebug(log).noquote() << indent << "      Rail in failed state.";
 		return false;
 	}
 	if (rail->reserved())
 	{
-		qDebug().noquote() << indent << "      Rail already reserved.";
+		qCDebug(log).noquote() << indent << "      Rail already reserved.";
 		return false;
 	}
 	if (track.size() > MAX_DEPTH)
 	{
-		qDebug().noquote() << indent << "      Recursion depth reached.";
+		qCDebug(log).noquote() << indent << "      Recursion depth reached.";
 		return false;
 	}
 	if (section != first_section)
 	{
 		if ((search_region != nullptr) && (section->region() != search_region))
 		{
-			qDebug().noquote() << indent << "      Shunting left region.";
+			qCDebug(log).noquote() << indent << "      Shunting left region.";
 			return false;
 		}
 		else if (section->occupation())
 		{
-			qDebug().noquote() << indent << "      Section occupied.";
+			qCDebug(log).noquote() << indent << "      Section occupied.";
 			return false;
 		}
 	}
@@ -356,11 +354,11 @@ void Route::dump() const
 {
 	for (RailPart * part : track)
 	{
-		qDebug().noquote() << "     " << part->toString();
+		qCDebug(log).noquote() << "     " << part->toString();
 	}
-	qDebug() << "---";
+	qCDebug(log) << "---";
 	for (Section * section : sections)
 	{
-		qDebug().noquote() << "     " << section->toString();
+		qCDebug(log).noquote() << "     " << section->toString();
 	}
 }

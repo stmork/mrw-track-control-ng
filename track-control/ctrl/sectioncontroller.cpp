@@ -3,8 +3,6 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
-#include <QDebug>
-
 #include <util/method.h>
 #include <can/mrwmessage.h>
 #include <model/railpart.h>
@@ -78,12 +76,12 @@ SectionController::SectionController(
 	connect(
 		&statechart, &SectionStatechart::entered, [&]()
 	{
-		qDebug().noquote() << ctrl_section->toString() << "Inquiry started.";
+		qCDebug(log).noquote() << ctrl_section->toString() << "Inquiry started.";
 	});
 	connect(
 		&statechart, &SectionStatechart::started, [&]()
 	{
-		qDebug().noquote() << ctrl_section->toString() << "Inquiry completed.";
+		qCDebug(log).noquote() << ctrl_section->toString() << "Inquiry completed.";
 	});
 
 	statechart.setTimerService(TimerService::instance());
@@ -189,7 +187,7 @@ Position::Bending SectionController::bending() const noexcept
 
 bool SectionController::process(const MrwMessage & message) noexcept
 {
-	qDebug().noquote() << message << "(Section)";
+	qCDebug(log).noquote() << message << "(Section)";
 
 	if (message.response() != Response::MSG_OK)
 	{
@@ -253,12 +251,12 @@ void SectionController::free()
 
 void SectionController::leftBefore()
 {
-	qWarning().noquote() << bold("Left before next reached:") << *section();
+	qCWarning(log).noquote() << bold("Left before next reached:") << *section();
 }
 
 void SectionController::fail()
 {
-	qCritical().noquote() << String::red(" Section failed!") << name();
+	qCCritical(log).noquote() << String::red(" Section failed!") << name();
 
 	section()->setLock(LockState::FAIL);
 	ControllerRegistry::instance().failed();

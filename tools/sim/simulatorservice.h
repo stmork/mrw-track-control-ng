@@ -10,6 +10,8 @@
 
 #include <type_traits>
 
+#include <QLoggingCategory>
+
 #include <can/mrwbusservice.h>
 #include <model/modelrepository.h>
 #include <model/device.h>
@@ -22,11 +24,13 @@ class SimulatorService : public mrw::can::MrwBusService
 	Q_OBJECT
 
 private:
+	QLoggingCategory           log;
+
 	/** Interrupts per second. */
-	static constexpr double SLICE_COUNT = 16000000.0 / (1024 * 256);
+	static constexpr double    SLICE_COUNT = 16000000.0 / (1024 * 256);
 
 	/** Time between timer interrupts in ms. */
-	static constexpr double SLICE       = 1000.0 / SLICE_COUNT;
+	static constexpr double    SLICE       = 1000.0 / SLICE_COUNT;
 
 	mrw::model::ModelRailway * model = nullptr;
 	unsigned                   device_count = 0;

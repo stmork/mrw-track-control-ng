@@ -36,6 +36,7 @@
 #include "mrwmessagedispatcher.h"
 #include "controlledroute.h"
 #include "beermodeservice.h"
+#include "log.h"
 
 using namespace std::chrono;
 using namespace std::chrono_literals;
@@ -65,7 +66,7 @@ MainWindow::MainWindow(
 	}
 
 	const QSize     size   = screen->availableSize();
-	qInfo().noquote() << "Screen size:" << size << "depth:" << screen->depth();
+	qCInfo(mrw::tools::log).noquote() << "Screen size:" << size << "depth:" << screen->depth();
 
 	BaseWidget::setVerbose(false);
 
@@ -121,7 +122,7 @@ MainWindow::MainWindow(
 	});
 
 	// And startup!
-	qDebug("Starting up...");
+	qCDebug(mrw::tools::log, "Starting up...");
 	statechart.enter();
 }
 
@@ -129,7 +130,7 @@ MainWindow::~MainWindow()
 {
 	__METHOD__;
 
-	qInfo("  Quitting main window.");
+	qCInfo(mrw::tools::log, "  Quitting main window.");
 	Q_ASSERT(!MainWindow::hasActiveRoutes());
 	Q_ASSERT(GlobalBatch::instance().isCompleted());
 
@@ -145,7 +146,7 @@ bool MainWindow::eventFilter(QObject * object, QEvent * event)
 		(dynamic_cast<QTouchEvent *>(event) != nullptr))
 	{
 #if 0
-		qDebug() << "Filter:" << object << this << event;
+		qCDebug(mrw::tools::log) << "Filter:" << object << this << event;
 #endif
 
 		statechart.screen_userInput();
@@ -455,7 +456,7 @@ Section * MainWindow::manualSection()
 
 void MainWindow::warn(const QString & message)
 {
-	qWarning().noquote() << message;
+	qCWarning(mrw::tools::log()).noquote() << message;
 	ui->statusbar->showMessage(message, 10000);
 }
 
@@ -589,7 +590,7 @@ void MainWindow::setScreenBlankTimeout()
 	const sc::integer          clamped = std::max(blank_time, (int)min_blank_time.count());
 	const sc::integer          timeout = std::max(settings.value("blank", clamped).toInt(), (int)min_blank_time.count());
 
-	qInfo().noquote() << "Setting screen blank timeout to" << timeout << "seconds.";
+	qCInfo(mrw::tools::log).noquote() << "Setting screen blank timeout to" << timeout << "seconds.";
 	statechart.screen().setTimeout(timeout);
 }
 

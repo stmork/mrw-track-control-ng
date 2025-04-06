@@ -8,7 +8,6 @@
 #include <QCoreApplication>
 #include <QCanBus>
 #include <QCanBusDeviceInfo>
-#include <QDebug>
 #include <QTimer>
 #include <QVariant>
 
@@ -48,27 +47,27 @@ MrwBusService::MrwBusService(
 		connect(
 			can_device, &QCanBusDevice::errorOccurred, [this] (auto reason)
 		{
-			qCritical().noquote() << "CAN bus error occured:" << reason;
-			qCritical().noquote() << "CAN bus status:       " << can_device->busStatus();
+			qCCritical(log).noquote() << "CAN bus error occured:" << reason;
+			qCCritical(log).noquote() << "CAN bus status:       " << can_device->busStatus();
 		});
 
 		if (auto_connect)
 		{
 			if (!can_device->connectDevice())
 			{
-				qCritical().noquote() << "Cannot connect to CAN device!";
+				qCCritical(log).noquote() << "Cannot connect to CAN device!";
 			}
 		}
 	}
 	else
 	{
-		qCritical().noquote() << "Cannot create CAN device:" << error;
+		qCCritical(log).noquote() << "Cannot create CAN device:" << error;
 	}
 }
 
 MrwBusService::~MrwBusService()
 {
-	qInfo(" Shutting down MRW bus service.");
+	qCInfo(log, " Shutting down MRW bus service.");
 	if (can_device != nullptr)
 	{
 		can_device->disconnectDevice();
@@ -91,12 +90,12 @@ bool MrwBusService::list() noexcept
 	{
 		QString error;
 
-		qInfo().noquote() << plugin;
+		qCInfo(log).noquote() << plugin;
 		const QList<QCanBusDeviceInfo> & infos = can_bus->availableDevices(plugin, &error);
 
 		if (!error.isEmpty())
 		{
-			qCritical().noquote() << error;
+			qCCritical(log).noquote() << error;
 			success = false;
 		}
 		else
@@ -104,7 +103,7 @@ bool MrwBusService::list() noexcept
 			for (const QCanBusDeviceInfo & info : infos)
 			{
 
-				qInfo().noquote().nospace() << "  " << info.name() << ": " << info.description();
+				qCInfo(log).noquote().nospace() << "  " << info.name() << ": " << info.description();
 			}
 		}
 	}
@@ -113,7 +112,7 @@ bool MrwBusService::list() noexcept
 
 bool MrwBusService::write(const MrwMessage & message) noexcept
 {
-	qDebug().noquote() << message;
+	qCDebug(log).noquote() << message;
 
 	if (can_device != nullptr)
 	{
@@ -130,7 +129,7 @@ bool MrwBusService::write(const MrwMessage & message) noexcept
 		else if (can_device->busStatus() == QCanBusDevice::CanBusStatus::Good)
 		{
 			usleep(retry.count());
-			qWarning("Retrying...");
+			qCWarning(log, "Retrying...");
 			return can_device->writeFrame(message);
 		}
 	}
@@ -139,7 +138,7 @@ bool MrwBusService::write(const MrwMessage & message) noexcept
 
 void MrwBusService::process(const MrwMessage & message)
 {
-	qDebug().noquote() << message;
+	qCDebug(log).noquote() << message;
 }
 
 QString MrwBusService::select(
@@ -168,7 +167,7 @@ QString MrwBusService::select(
 	}
 	else
 	{
-		qCritical().noquote() << "Cannot list available CAN devices: " << error;
+		qCCritical(log).noquote() << "Cannot list available CAN devices: " << error;
 	}
 
 	return "";
@@ -179,18 +178,18 @@ void MrwBusService::stateChanged(QCanBusDevice::CanBusDeviceState state) noexcep
 	switch (state)
 	{
 	case QCanBusDevice::ConnectedState:
-		qInfo("CAN bus connected.");
+		qCInfo(log, "CAN bus connected.");
 		emit connected();
 		break;
 
 	case QCanBusDevice::UnconnectedState:
-		qInfo("CAN bus disconnected.");
+		qCInfo(log, "CAN bus disconnected.");
 		emit disconnected();
 		break;
 
 	default:
 		// States intentionally ignored.
-		qDebug().noquote() << "CAN bus state change: " << state;
+		qCDebug(log).noquote() << "CAN bus state change: " << state;
 		break;
 	}
 }

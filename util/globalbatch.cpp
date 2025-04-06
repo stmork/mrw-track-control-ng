@@ -5,6 +5,7 @@
 
 #include <util/method.h>
 #include <util/globalbatch.h>
+#include <util/log.h>
 
 using namespace mrw::util;
 
@@ -19,5 +20,5 @@ GlobalBatch::~GlobalBatch()
 
 	Q_ASSERT(transaction.empty());
 
-	qInfo("  Global transaction (ID=%u) closed.", id);
+	qCInfo(log, "  Global transaction (ID=%u) closed.", id);
 }

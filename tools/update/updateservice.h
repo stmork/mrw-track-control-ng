@@ -12,6 +12,8 @@
 #include <vector>
 #include <unordered_set>
 
+#include <QLoggingCategory>
+
 #include <util/self.h>
 #include <can/mrwbusservice.h>
 #include <statecharts/timerservice.h>
@@ -30,6 +32,8 @@ class UpdateService :
 	public mrw::util::Self<mrw::statechart::UpdateStatechart::OperationCallback>
 {
 	Q_OBJECT
+
+	QLoggingCategory       log;
 
 	// ATmega32 signature
 	static const uint8_t   SIGNATURE_BYTE_1 = 0x1E;

@@ -7,6 +7,8 @@
 
 using namespace mrw::ctrl;
 
+Q_LOGGING_CATEGORY(mrw::ctrl::log, "mrw.ctrl")
+
 BaseController::BaseController(QObject * parent) : QObject(parent)
 {
 }

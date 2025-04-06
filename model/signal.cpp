@@ -65,7 +65,7 @@ bool Signal::setAspect(const SignalAspect new_aspect)
 
 	signal_aspect = new_aspect;
 
-	qDebug().noquote() << toString() << "modified:" << modified;
+	qCDebug(log).noquote() << toString() << "modified:" << modified;
 	return modified;
 }
 

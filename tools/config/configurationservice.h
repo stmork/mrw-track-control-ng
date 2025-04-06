@@ -11,6 +11,8 @@
 #include <memory>
 #include <unordered_set>
 
+#include <QLoggingCategory>
+
 #include <util/self.h>
 #include <can/mrwbusservice.h>
 #include <statecharts/timerservice.h>
@@ -27,6 +29,8 @@ class ConfigurationService :
 	Q_OBJECT
 
 private:
+	QLoggingCategory                           log;
+
 	mrw::statechart::QtStatechart<mrw::statechart::ConfigStatechart>   statechart;
 
 	/** The model of this modelrailway. */

@@ -470,7 +470,7 @@ bool SignalControllerProxy::isTour()
 
 void SignalControllerProxy::fail()
 {
-	qCritical().noquote() << String::red(" Signal turn failed!") << name();
+	qCCritical(log).noquote() << String::red(" Signal turn failed!") << name();
 
 	statechart_main.fail();
 	statechart_distant.fail();
@@ -487,7 +487,7 @@ void SignalControllerProxy::pending()
 	emit update();
 
 #ifdef VERBOSE
-	qDebug().noquote() << String::bold("Pend:") << *this;
+	qCDebug(log).noquote() << String::bold("Pend:") << *this;
 #endif
 }
 
@@ -497,6 +497,6 @@ void SignalControllerProxy::lock(const bool do_it)
 	emit update();
 
 #ifdef VERBOSE
-	qDebug().noquote() << String::bold("Lock:") << *this;
+	qCDebug(log).noquote() << String::bold("Lock:") << *this;
 #endif
 }

@@ -8,6 +8,7 @@
 #ifndef MRW_CAN_MRWMESSAGE_H
 #define MRW_CAN_MRWMESSAGE_H
 
+#include <QLoggingCategory>
 #include <QCanBusFrame>
 
 #include <can/commands.h>
@@ -16,6 +17,8 @@
 
 namespace mrw::can
 {
+	Q_DECLARE_LOGGING_CATEGORY(log)
+
 	static constexpr uint16_t CAN_SID_MASK         = 0x07ff;
 	static constexpr uint16_t CAN_EID_UNITNO_MASK  = 0xffff;
 	static constexpr size_t   CAN_SID_SHIFT        = 18;

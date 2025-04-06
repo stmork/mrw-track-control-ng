@@ -9,6 +9,7 @@
 #define MRW_MODEL_MODELRAILWAY_H
 
 #include <QDomDocument>
+#include <QLoggingCategory>
 #include <QString>
 
 #include <vector>
@@ -47,6 +48,8 @@
  */
 namespace mrw::model
 {
+	Q_DECLARE_LOGGING_CATEGORY(log);
+
 	class AssemblyPart;
 	class Region;
 

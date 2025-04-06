@@ -11,9 +11,9 @@
 
 #include <QGuiApplication>
 #include <QScreen>
-#include <QDebug>
 
 #include "screenblankhandler.h"
+#include "log.h"
 
 #ifdef QT_SCREEN_SAVER
 #include <qpa/qplatformscreen.h>
@@ -23,6 +23,8 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/dpms.h>
 #endif
+
+using namespace mrw::tools;
 
 namespace fs = std::filesystem;
 
@@ -35,8 +37,8 @@ ScreenBlankHandler::ScreenBlankHandler()
 	qCDebug(log, "Using X11 screen saver.");
 	if (display != nullptr)
 	{
-		qDebug().noquote() << "Init display:" << display;
-		qDebug().noquote() << "Has DPMS:"  << DPMSCapable(display);
+		qCDebug(log).noquote() << "Init display:" << display;
+		qCDebug(log).noquote() << "Has DPMS:"  << DPMSCapable(display);
 
 		XCloseDisplay(display);
 		display = nullptr;
@@ -94,13 +96,13 @@ void ScreenBlankHandler::autoBlank(bool auto_blank_active)
 		{
 			result = DPMSDisable(display);
 		}
-		qDebug().noquote() << "Auto blank:" << auto_blank_active << display << result;
+		qCDebug(log).noquote() << "Auto blank:" << auto_blank_active << display << result;
 
 		XCloseDisplay(display);
 	}
 	else
 	{
-		qDebug("No X11 screen saver!");
+		qCDebug(log, "No X11 screen saver!");
 	}
 #endif
 }
@@ -111,7 +113,7 @@ void ScreenBlankHandler::resetBlank()
 
 void ScreenBlankHandler::blank(bool blank_active)
 {
-	qDebug().noquote() << "DPMS blank:" << blank_active;
+	qCDebug(log).noquote() << "DPMS blank:" << blank_active;
 #ifdef QT_SCREEN_SAVER
 	if (screen != nullptr)
 	{
@@ -135,11 +137,11 @@ void ScreenBlankHandler::blank(bool blank_active)
 
 		if (res == 0)
 		{
-			qDebug().noquote() << "Auto blank:" << blank_active;
+			qCDebug(log).noquote() << "Auto blank:" << blank_active;
 		}
 		else
 		{
-			qCritical() << connector_id << dpms_id << strerror(errno) << res;
+			qCCritical(log) << connector_id << dpms_id << strerror(errno) << res;
 		}
 	}
 #endif
@@ -159,7 +161,7 @@ void ScreenBlankHandler::findDevice()
 		{
 			const char * device_name = dir_entry.path().c_str();
 
-			qDebug().noquote() << "DRM opening:  " << device_name;
+			qCDebug(log).noquote() << "DRM opening:  " << device_name;
 			int fd = open(device_name, O_RDWR);
 
 			if (fd >= 0)
@@ -175,7 +177,7 @@ void ScreenBlankHandler::findDevice()
 			}
 			else
 			{
-				qCritical().noquote() << "Cannot open DRI device" << device_name << "Error:" << strerror(errno);
+				qCCritical(log).noquote() << "Cannot open DRI device" << device_name << "Error:" << strerror(errno);
 			}
 		}
 	}
@@ -187,7 +189,7 @@ bool ScreenBlankHandler::initDevice(int fd)
 
 	if (mode_res == nullptr)
 	{
-		qWarning("No DRM resources found.");
+		qCWarning(log, "No DRM resources found.");
 	}
 	else
 	{
@@ -214,7 +216,7 @@ void ScreenBlankHandler::initDevice(int fd, drmModeRes * mode_res)
 		}
 		else
 		{
-			qWarning("No connector found.");
+			qCWarning(log, "No connector found.");
 		}
 	}
 	drmModeFreeResources(mode_res);
@@ -225,11 +227,11 @@ void ScreenBlankHandler::findDpmsProperty(int fd, drmModeConnector * conn)
 	drmModeObjectProperties * properties;
 	drm_magic_t               magic{};
 
-	qDebug().noquote() << "DRM Magic:    " << drmGetMagic(fd, &magic);
-	qDebug().noquote() << "DRM is master:" << drmIsMaster(fd);
+	qCDebug(log).noquote() << "DRM Magic:    " << drmGetMagic(fd, &magic);
+	qCDebug(log).noquote() << "DRM is master:" << drmIsMaster(fd);
 
 	const bool is_master = drmAuthMagic(fd, magic) != -EACCES;
-	qDebug().noquote() << "DRM is auth:  " << is_master << fd << drmSetMaster(fd);
+	qCDebug(log).noquote() << "DRM is auth:  " << is_master << fd << drmSetMaster(fd);
 
 	assert(conn != nullptr);
 	properties = drmModeObjectGetProperties(fd, conn->connector_id, DRM_MODE_OBJECT_CONNECTOR);
@@ -254,14 +256,14 @@ void ScreenBlankHandler::findDpmsProperty(int fd, drmModeConnector * conn)
 			}
 			else
 			{
-				qWarning() << "No property found for ID:" << properties->props[p];
+				qCWarning(log) << "No property found for ID:" << properties->props[p];
 			}
 		}
 		drmModeFreeObjectProperties(properties);
 	}
 	else
 	{
-		qWarning().noquote() << "No properties found for connector ID:" << conn->connector_id;
+		qCWarning(log).noquote() << "No properties found for connector ID:" << conn->connector_id;
 	}
 }
 
@@ -278,17 +280,17 @@ void ScreenBlankHandler::initDPMS()
 		if (lease_fd >= 0)
 		{
 			dpms_active = true;
-			qDebug().noquote() << "DRM lease:" << lease_fd << lease_id;
+			qCDebug(log).noquote() << "DRM lease:" << lease_fd << lease_id;
 		}
 		else
 		{
-			qCritical().noquote() << "No DRM lease available!" << strerror(errno);
+			qCCritical(log).noquote() << "No DRM lease available!" << strerror(errno);
 		}
 	}
 	else
 	{
 		lease_fd = drm_fd;
 	}
-	qDebug().noquote() << "DPMS found:   " << dpms_active;
+	qCDebug(log).noquote() << "DPMS found:   " << dpms_active;
 }
 #endif
