@@ -1617,6 +1617,7 @@
 <section title="OCCUPIED" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea95bb06a35b7ae1afcf75777bb28ea62c"/>
 <section title="PASSED" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea269f3d1562cbd15624e7d2c4b10122e3"/>
 </section>
+<section title="Q_DECLARE_LOGGING_CATEGORY" ref="d9/dbc/namespacemrw_1_1model.html#ac548114cf581332986747fa11a3ad3b8"/>
 </section>
 <section title="statechart" ref="d7/d94/namespacemrw_1_1statechart.html">
 <section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html">
@@ -5592,6 +5593,7 @@
 <keyword name="OCCUPIED" id="mrw::model::OCCUPIED_a5c0de0ceba8c321d726fb3cc699b4edea95bb06a35b7ae1afcf75777bb28ea62c" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea95bb06a35b7ae1afcf75777bb28ea62c"/>
 <keyword name="PASSED" id="mrw::model::PASSED_a5c0de0ceba8c321d726fb3cc699b4edea269f3d1562cbd15624e7d2c4b10122e3" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea269f3d1562cbd15624e7d2c4b10122e3"/>
 <keyword name="PING" id="mrw::can::PING_ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5"/>
+<keyword name="Q_DECLARE_LOGGING_CATEGORY(log)" id="mrw::model::Q_DECLARE_LOGGING_CATEGORY_ac548114cf581332986747fa11a3ad3b8" ref="d9/dbc/namespacemrw_1_1model.html#ac548114cf581332986747fa11a3ad3b8"/>
 <keyword name="QRYBUF" id="mrw::can::QRYBUF_ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e"/>
 <keyword name="QRYERR" id="mrw::can::QRYERR_ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd"/>
 <keyword name="real" id="sc::real_addc5a438cd4d2e5bf27c64edbabad7ce" ref="db/d03/namespacesc.html#addc5a438cd4d2e5bf27c64edbabad7ce"/>
