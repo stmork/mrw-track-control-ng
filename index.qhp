@@ -29,7 +29,6 @@
 <section title="write" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a5c5f0523ed079f7c1679b6d2870fc22d"/>
 <section title="can_bus" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ae9add44a66b3c41000569347d5eb8e68"/>
 <section title="can_device" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a84bd068ea88e51a45bac0b3838d66b02"/>
-<section title="retry" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a06ce5b7e3299947ad77e96fe0b6fdf81"/>
 </section>
 <section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html">
 <section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a60e9a220fb6bc3b615943401084d6be8"/>
@@ -2283,7 +2282,6 @@
 <section title="write" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a5c5f0523ed079f7c1679b6d2870fc22d"/>
 <section title="can_bus" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ae9add44a66b3c41000569347d5eb8e68"/>
 <section title="can_device" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a84bd068ea88e51a45bac0b3838d66b02"/>
-<section title="retry" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a06ce5b7e3299947ad77e96fe0b6fdf81"/>
 </section>
 <section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html">
 <section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a60e9a220fb6bc3b615943401084d6be8"/>
@@ -5250,7 +5248,6 @@
 <keyword name="reset()" id="mrw::util::Batch::reset_a60ac05642f1f86ced915f28b98f7fc93" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a60ac05642f1f86ced915f28b98f7fc93"/>
 <keyword name="resolve(const char *attr) const noexcept" id="mrw::model::RailPart::resolve_ace536977a9bc46395d516092ce1bf09c" ref="d1/d16/classmrw_1_1model_1_1RailPart.html#ace536977a9bc46395d516092ce1bf09c"/>
 <keyword name="response() const noexcept" id="mrw::can::MrwMessage::response_aa7afbc78a2e8a8a6b7be6fd0d60f64d5" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aa7afbc78a2e8a8a6b7be6fd0d60f64d5"/>
-<keyword name="retry" id="mrw::can::MrwBusService::retry_a06ce5b7e3299947ad77e96fe0b6fdf81" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a06ce5b7e3299947ad77e96fe0b6fdf81"/>
 <keyword name="RIGHT" id="mrw::model::Position::RIGHT_a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403"/>
 <keyword name="right" id="mrw::ctrl::RegularSwitchController::Status::right_abf63160eedfa663a3331e1939f83838c" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abf63160eedfa663a3331e1939f83838c"/>
 <keyword name="right_bended" id="mrw::ctrl::BaseSwitchController::Status::right_bended_a935a90253d7b2348f3f952dfb87a1692" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
