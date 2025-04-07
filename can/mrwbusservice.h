@@ -8,8 +8,6 @@
 #ifndef MRW_CAN_MRWBUSSERVICE_H
 #define MRW_CAN_MRWBUSSERVICE_H
 
-#include <chrono>
-
 #include <QCanBus>
 #include <QCanBusDevice>
 
@@ -45,9 +43,6 @@ namespace mrw::can
 	protected:
 		QCanBus     *    can_bus    = nullptr;
 		QCanBusDevice  * can_device = nullptr;
-
-		/** Retry timeout if write fails once. */
-		static const std::chrono::microseconds retry;
 
 	public:
 		explicit MrwBusService(

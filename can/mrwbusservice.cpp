@@ -3,21 +3,21 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
-#include <unistd.h>
+#include <chrono>
 
 #include <QCoreApplication>
 #include <QCanBus>
 #include <QCanBusDeviceInfo>
+#include <QThread>
 #include <QTimer>
 #include <QVariant>
 
 #include <util/method.h>
 #include <can/mrwbusservice.h>
 
+using namespace std::chrono;
 using namespace std::chrono_literals;
 using namespace mrw::can;
-
-const std::chrono::microseconds MrwBusService::retry = 20ms;
 
 MrwBusService::MrwBusService(
 	const QString & interface,
@@ -116,20 +116,26 @@ bool MrwBusService::write(const MrwMessage & message) noexcept
 
 	if (can_device != nullptr)
 	{
-		if (can_device->framesAvailable() > 0)
+		if ((can_device->framesAvailable() > 0) ||
+			(can_device->framesToWrite() > 0))
 		{
 			QCoreApplication::processEvents();
 		}
 
 		if (can_device->writeFrame(message))
 		{
-			can_device->waitForFramesWritten(10);
+			static constexpr microseconds wait = 1ms;
+
+			QThread::usleep(wait.count());
 			return true;
 		}
 		else if (can_device->busStatus() == QCanBusDevice::CanBusStatus::Good)
 		{
-			usleep(retry.count());
+			static constexpr microseconds retry = 20ms;
+
 			qCWarning(log, "Retrying...");
+
+			QThread::usleep(retry.count());
 			return can_device->writeFrame(message);
 		}
 	}
