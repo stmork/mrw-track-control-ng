@@ -1,0 +1,9 @@
+{
+   "recommendations": [
+      "theqtcompany.qt-cpp-pack",
+      "ms-vscode.cpptools-extension-pack",
+      "bierner.markdown-mermaid",
+      "bpruitt-goddard.mermaid-markdown-syntax-highlighting",
+      "ms-azuretools.vscode-docker",
+   ]
+}
