@@ -8,18 +8,18 @@ CONFIG   += staticlib
 
 include(../common.pri)
 
-HEADERS += \
-	filelogger.h \
-	loggerbase.h \
-	loggerservice.h \
-	stdlogger.h \
-	syslogger.h
-
 SOURCES += \
 	filelogger.cpp \
 	loggerbase.cpp \
 	loggerservice.cpp \
 	stdlogger.cpp \
 	syslogger.cpp
+
+HEADERS += \
+	filelogger.h \
+	loggerbase.h \
+	loggerservice.h \
+	stdlogger.h \
+	syslogger.h
 
 QMAKE_CLEAN  += $$TARGET

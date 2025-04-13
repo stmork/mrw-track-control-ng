@@ -10,6 +10,18 @@ include(../common.pri)
 
 QMAKE_CXXFLAGS  += -Wno-reorder -Wno-unused-parameter
 
+SOURCES += \
+	ConfigStatechart.cpp \
+	OperatingModeStatechart.cpp \
+	RouteStatechart.cpp \
+	SectionStatechart.cpp \
+	SignalControllerStatechart.cpp \
+	SignalStatechart.cpp \
+	SwitchStatechart.cpp \
+	TrackerStatechart.cpp \
+	UpdateStatechart.cpp \
+	timerservice.cpp
+
 HEADERS += \
 	ConfigStatechart.h \
 	OperatingModeStatechart.h \
@@ -25,17 +37,5 @@ HEADERS += \
 	common/sc_timer.h \
 	common/sc_types.h \
 	timerservice.h
-
-SOURCES += \
-	ConfigStatechart.cpp \
-	OperatingModeStatechart.cpp \
-	RouteStatechart.cpp \
-	SectionStatechart.cpp \
-	SignalControllerStatechart.cpp \
-	SignalStatechart.cpp \
-	SwitchStatechart.cpp \
-	TrackerStatechart.cpp \
-	UpdateStatechart.cpp \
-	timerservice.cpp
 
 QMAKE_CLEAN += $$TARGET
