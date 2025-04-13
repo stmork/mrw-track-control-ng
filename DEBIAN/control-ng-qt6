@@ -1,0 +1,11 @@
+Package: %PACKAGE%
+Version: %VERSION%-%BUILD%
+Section: embedded
+Priority: optional
+Architecture: %ARCH%
+Suggests: mrw-can
+Depends: libqt6core6, libqt6gui6, libqt6widgets6, libqt6network6,
+ libqt6xml6, libqt6serialbus6, libsocketcan2, libsystemd0
+Maintainer: Steffen A. Mork <info@eisenbahnsteuerung.org>
+Homepage: http://eisenbahnsteuerung.org/
+Description: Next generation modelbased railway control (Qt6 based).

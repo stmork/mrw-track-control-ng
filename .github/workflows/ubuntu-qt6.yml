@@ -9,12 +9,12 @@ jobs:
       - name: Update package info
         run: sudo apt update -y
       - name: Install needed components
-        run: sudo apt install -y qmake6 qt6-serialbus-dev qt6-base-private-dev libsystemd-dev libgtest-dev libx11-dev libxext-dev libdrm-dev cppcheck
-      - name: QMake
-        run: qmake6 CONFIG+=drm-ss CONFIG+=qt-ss -r
+        run: sudo apt install -y qmake6 qt6-serialbus-dev libqt6serialbus6-bin qt6-base-private-dev libsystemd-dev libgtest-dev libx11-dev libxext-dev libdrm-dev cppcheck doxygen graphviz
+      - name: CMake
+        run: cmake -B build
       - name: Build
-        run: make -j `nproc`
+        run: make -C build -j `nproc`
       - name: CPP-Check
-        run: make cppcheck
+        run: make -C build cppcheck
       - name: SCT Unit Tests
-        run: make sct-unit
+        run: make -C build sct-unit
