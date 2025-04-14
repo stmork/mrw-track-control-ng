@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-project(MRW-Model VERSION 2.1
+project(MRW-Model VERSION 2.2
     DESCRIPTION "MRW component model library"
     LANGUAGES CXX)
 
