@@ -113,6 +113,22 @@ sudo wget -O /etc/apt/trusted.gpg.d/mrw.gpg <a href="http://eisenbahnsteuerung.o
 deb [signed-by=/etc/apt/trusted.gpg.d/mrw.gpg] <a href="http://eisenbahnsteuerung.org/apt/">http://eisenbahnsteuerung.org/apt/</a> mrw common firmware
 </pre><p>After that you can update and install the software: </p><div class="fragment"><div class="line">sudo apt update</div>
 <div class="line">sudo apt install mrw-ng</div>
+</div><!-- fragment --><h1>Building the project</h1>
+<p>You have two choices building the complete project <em>qmake</em>/*qmake6* or <em>cmake</em>. Except with <em>qmake6</em> you can also cross compile the project for different target architectures.</p>
+<h2>qmake</h2>
+<p>For a host build you can simply build the project using the following command sequence: </p><div class="fragment"><div class="line">qmake</div>
+<div class="line">build -j `nproc`</div>
+</div><!-- fragment --><p> Instead of using <em>qmake</em> for Qt5 you can use <em>qmake6</em> which selects Qt6. Both Qt versions can coexist on the host development machine.</p>
+<p>For cross builds using Qt5 you need a custom target development build of Qt. This build contains host binaries for preparing the build such as <em>qmake</em>, <em>moc</em> or <em>uic</em> and target headers and libraries for compiling and linking. So the sysroot does not need any Qt package installation. See the Qt Wiki for more details for creating such a cross built Qt. You can cross build this project using the following sequence: </p><div class="fragment"><div class="line">&lt;path-to-dev-qt&gt;/bin/qmake</div>
+<div class="line">build -j `nproc`</div>
+</div><!-- fragment --><p> Note that the target architecture and their paths is encoded into the cross built Qt.</p>
+<h2>cmake</h2>
+<p>Since Qt6 will end support for <em>qmake</em> in the future there is also a <em>cmake</em> build possibility. This <em>cmake</em> build does not support Qt5 anymore. There is also a simple way to cross compile this project. To build this project simply use the usual command sequence: </p><div class="fragment"><div class="line">cmake -B build</div>
+<div class="line">cmake --build --parallel</div>
+</div><!-- fragment --><p> For cross builds the sysroot needs the installation of the Qt6 development packages. The build needs three more variables. One for defining the toolchain file which describes the cross compiler and the sysroot as usual. </p><div class="fragment"><div class="line">cmake -B build -DQT_HOST_PATH=/ \</div>
+<div class="line">    -DQT_HOST_PATH_CMAKE_DIR=/usr/lib/x86_64-linux-gnu/cmake \</div>
+<div class="line">    -DCMAKE_TOOLCHAIN_FILE=&lt;fq-path-to-toolchain-file&gt; </div>
+<div class="line">cmake --build --parallel</div>
 </div><!-- fragment --><h2>Starting the application</h2>
 <p>To start the track control software refer to the README of the MRW-TrackControl application. It additionally contains information about configuring the CAN bus and prepare the EGL on Raspberry Pi mini computers.</p>
 <h1>Software packages and namespaces</h1>
@@ -148,7 +164,7 @@ deb [signed-by=/etc/apt/trusted.gpg.d/mrw.gpg] <a href="http://eisenbahnsteuerun
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 14 2025 11:25:24 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Mon Apr 14 2025 13:57:40 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>
