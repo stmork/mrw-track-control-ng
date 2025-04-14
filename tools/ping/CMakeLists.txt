@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-project(MRW-Ping VERSION 2.1
+project(MRW-Ping VERSION 2.2
     DESCRIPTION "MRW ping tool"
     LANGUAGES CXX)
 
