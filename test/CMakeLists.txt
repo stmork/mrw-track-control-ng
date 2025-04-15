@@ -6,8 +6,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(MRW-Test VERSION 2.2
-    DESCRIPTION "MRW unit tests"
-    LANGUAGES CXX)
+	DESCRIPTION "MRW unit tests"
+	LANGUAGES CXX)
 
 add_compile_options(-Wsuggest-override)
 
@@ -55,6 +55,12 @@ add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_include_directories(${PROJECT_NAME} PRIVATE ..)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-   MRW-UI MRW-Ctrl MRW-CtrlMock MRW-Model MRW-Can MRW-Util
-   Qt6::Core Qt6::Widgets Qt6::Network Qt6::SerialBus Qt6::Xml Qt6::Test
+	MRW-UI MRW-Ctrl MRW-CtrlMock MRW-Model MRW-Can MRW-Util
+	Qt6::Core Qt6::Widgets Qt6::Network Qt6::SerialBus Qt6::Xml Qt6::Test
+)
+
+add_test(
+	NAME unittest
+	COMMAND ${PROJECT_BINARY_DIR}/${PROJECT_NAME} -platform offscreen
+	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
