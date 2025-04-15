@@ -83,6 +83,7 @@ astyle.commands = astyle --options=$$PWD/.astylerc\
 cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--inline-suppr\
 	--suppress=unusedStructMember\
+	--suppress=preprocessorErrorDirective\
 	--suppress=duplicateConditionalAssign:statecharts/*.cpp\
 	--suppress=noExplicitConstructor:statecharts/*.h\
 	--suppress=redundantInitialization:statecharts/*.cpp\
