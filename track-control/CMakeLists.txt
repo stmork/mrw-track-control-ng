@@ -23,7 +23,7 @@ add_compile_options(-Wsuggest-override)
 
 option(X11_SCREEN_SAVER "Use X11 screen blanking." ON)
 option(DRM_SCREEN_SAVER "Use DRM screen blanking." OFF)
-option(QT_SCREEN_SAVER "Use Qt screen blanking." ON)
+option(QT_SCREEN_SAVER "Use Qt screen blanking." OFF)
 
 if (X11_SCREEN_SAVER AND X11_FOUND)
 	message (STATUS "Using X11 screen saver.")
