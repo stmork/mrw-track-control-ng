@@ -4,19 +4,22 @@ set -e
 
 export PACKAGE=mrw-doc
 export PREFIX=$PWD/rootfs/${PACKAGE}
+export QMAKE=${QMAKE:-qmake6}
+
 export COPYRIGHT=${PREFIX}/usr/share/doc/${PACKAGE}/copyright
 export BUILD_NUMBER=${BUILD_NUMBER:=0}
 export ARCH=all
+export QT_INSTALL_DOCS=`${QMAKE} -query QT_INSTALL_DOCS`
 
 rm -rf ${PREFIX}
-test -f Makefile || qmake
+test -f Makefile || ${QMAKE}
 make doxygen
 
-mkdir -p ${PREFIX}/usr/share/qt5/doc/
+mkdir -p ${PREFIX}/${QT_INSTALL_DOCS}
 mkdir -p ${PREFIX}/usr/share/doc/${PACKAGE}
 mkdir ${PREFIX}/DEBIAN
 cp -a DEBIAN/control-doc  ${PREFIX}/DEBIAN/control
-cp -a *.qch               ${PREFIX}/usr/share/qt5/doc/
+cp -a *.qch               ${PREFIX}/${QT_INSTALL_DOCS}
 cp -a api-doc             ${PREFIX}/usr/share/doc/${PACKAGE}/doc/
 
 echo "Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/" > $COPYRIGHT

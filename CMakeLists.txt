@@ -55,8 +55,10 @@ add_custom_target(astyle
 
 add_custom_target(cppcheck
 	WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-	COMMAND cppcheck 	--inline-suppr
+	COMMAND cppcheck
+	--inline-suppr
 	--suppress=unusedStructMember
+	--suppress=preprocessorErrorDirective
 	--suppress=duplicateConditionalAssign:statecharts/*.cpp
 	--suppress=noExplicitConstructor:statecharts/*.h
 	--suppress=redundantInitialization:statecharts/*.cpp

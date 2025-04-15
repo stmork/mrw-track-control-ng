@@ -4,7 +4,7 @@ set -e
 
 export PACKAGE=mrw-ng
 export PREFIX=$PWD/rootfs/${PACKAGE}
-export QMAKE=${QMAKE:-qmake}
+export QMAKE=${QMAKE:-qmake6}
 
 echo "Arch:   $ARCH"
 echo "qmake:  $QMAKE"
