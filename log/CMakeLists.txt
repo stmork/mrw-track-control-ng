@@ -6,8 +6,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(MRW-Log VERSION 2.2
-    DESCRIPTION "MRW logging library"
-    LANGUAGES CXX)
+	DESCRIPTION "MRW logging library"
+	LANGUAGES CXX)
 
 add_compile_options(-Wsuggest-override)
 

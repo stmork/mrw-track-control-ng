@@ -6,8 +6,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(MRW-Statecharts VERSION 2.2
-    DESCRIPTION "MRW statechart library"
-    LANGUAGES CXX)
+	DESCRIPTION "MRW statechart library"
+	LANGUAGES CXX)
 
 add_subdirectory(test)
 
