@@ -6,8 +6,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(MRW-TrackControl VERSION 2.2
-    DESCRIPTION "MRW track control application"
-    LANGUAGES CXX)
+	DESCRIPTION "MRW track control application"
+	LANGUAGES CXX)
 
 find_package(X11 OPTIONAL_COMPONENTS X11 Xext)
 pkg_check_modules(libdrm IMPORTED_TARGET libdrm)
@@ -25,7 +25,7 @@ option(X11_SCREEN_SAVER "Use X11 screen blanking." ON)
 option(DRM_SCREEN_SAVER "Use DRM screen blanking." OFF)
 option(QT_SCREEN_SAVER "Use Qt screen blanking." OFF)
 
-if (X11_SCREEN_SAVER AND X11_FOUND)
+if (X11_SCREEN_SAVER AND X11_FOUND AND XEXT_FOUND)
 	message (STATUS "Using X11 screen saver.")
 	add_compile_definitions(X11_SCREEN_SAVER)
 endif()
@@ -106,7 +106,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 	systemd
 )
 
-if (X11_SCREEN_SAVER AND X11_FOUND)
+if (X11_SCREEN_SAVER AND X11_FOUND AND XEXT_FOUND)
 	target_link_libraries(${PROJECT_NAME} PRIVATE X11 Xext)
 endif()
 

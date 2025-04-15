@@ -30,6 +30,8 @@ add_compile_options(-Wextra -Wpedantic -Werror)
 add_compile_options(-fstack-protector-strong)
 add_compile_options(-Wshadow)
 
+enable_testing()
+
 add_subdirectory(util)
 add_subdirectory(log)
 add_subdirectory(can)
@@ -134,6 +136,6 @@ set_property(
 )
 
 add_custom_target(doxygen
-    COMMAND doxygen
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+	COMMAND doxygen
+	WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
 )

@@ -6,8 +6,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(MRW-Configure VERSION 2.2
-    DESCRIPTION "MRW configuration tool"
-    LANGUAGES CXX)
+	DESCRIPTION "MRW configuration tool"
+	LANGUAGES CXX)
 
 set(SOURCES
 	configurationservice.cpp
@@ -23,7 +23,7 @@ add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_include_directories(${PROJECT_NAME} PRIVATE ../..)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-   MRW-Model MRW-Can MRW-Statecharts MRW-Util
-   Qt6::Core Qt6::Network Qt6::SerialBus Qt6::Xml)
+	MRW-Model MRW-Can MRW-Statecharts MRW-Util
+	Qt6::Core Qt6::Network Qt6::SerialBus Qt6::Xml)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION "${tool_dest}")

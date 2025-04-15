@@ -6,8 +6,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(MRW-Test-Statecharts VERSION 2.2
-    DESCRIPTION "MRW statechart tests"
-    LANGUAGES CXX)
+	DESCRIPTION "MRW statechart tests"
+	LANGUAGES CXX)
 
 find_package(GTest REQUIRED)
 
@@ -58,3 +58,9 @@ add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_include_directories(${PROJECT_NAME} PRIVATE common)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE GTest::gtest_main)
+
+add_test(
+	NAME sct-unit
+	COMMAND ${PROJECT_BINARY_DIR}/${PROJECT_NAME} --gtest_output=xml:gtest-mrw.xml
+	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)

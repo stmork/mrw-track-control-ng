@@ -6,8 +6,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(MRW-Util VERSION 2.2
-    DESCRIPTION "MRW utility library"
-    LANGUAGES CXX)
+	DESCRIPTION "MRW utility library"
+	LANGUAGES CXX)
 
 add_compile_options(-Wsuggest-override)
 

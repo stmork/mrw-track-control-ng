@@ -6,8 +6,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(MRW-Can VERSION 2.2
-    DESCRIPTION "MRW CAN bus library"
-    LANGUAGES CXX)
+	DESCRIPTION "MRW CAN bus library"
+	LANGUAGES CXX)
 
 add_compile_options(-Wsuggest-override)
 
