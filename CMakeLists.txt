@@ -14,9 +14,9 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Network SerialBus Xml Test
 find_package(PkgConfig REQUIRED)
 find_package(Doxygen REQUIRED COMPONENTS dot)
 
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOMOC ON)
@@ -47,7 +47,7 @@ add_subdirectory(track-control)
 
 add_custom_target(astyle
 	WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-	COMMAND astyle --options=$$PWD/.astylerc
+	COMMAND astyle --options=${PROJECT_SOURCE_DIR}/.astylerc
 	*/*.cpp */*.h
 	tools/*/*.cpp tools/*/*.h
 	*/ctrl/*.cpp */ctrl/*.h
