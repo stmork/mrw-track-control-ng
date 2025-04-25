@@ -77,7 +77,7 @@ MainWindow::MainWindow(
 
 	QList<ControllerWidget *> widgets = findChildren<ControllerWidget *>();
 
-	for (ControllerWidget * w : widgets)
+	for (const ControllerWidget * w : widgets)
 	{
 		connect(w, &ControllerWidget::clicked, this, &MainWindow::itemClicked);
 	}
@@ -164,7 +164,7 @@ void MainWindow::disableBeerMode()
 	ui->actionBeermodeRight->setChecked(false);
 }
 
-void MainWindow::initRegion(MrwMessageDispatcher & dispatcher)
+void MainWindow::initRegion(const MrwMessageDispatcher & dispatcher)
 {
 	ModelRailway * model = repo;
 
