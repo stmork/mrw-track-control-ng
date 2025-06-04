@@ -39,22 +39,19 @@ namespace mrw::util
 	class Random : public Singleton<Random>
 	{
 		std::random_device  random_device;
-		std::mt19937        random_number_generator;
 
 		friend class Singleton<Random>;
 
-		Random();
-
 	public:
 		/**
-		 * This static access method returns the random generator engine.
+		 * This access method returns the random device.
 		 *
-		 * @return The random generator engine needed for distributions.
+		 * @return The random device needed for distributions.
 		 */
 		[[nodiscard]]
-		constexpr std::mt19937 & engine() noexcept
+		constexpr std::random_device & engine() noexcept
 		{
-			return random_number_generator;
+			return random_device;
 		}
 
 		/**

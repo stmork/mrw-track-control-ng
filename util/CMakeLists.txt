@@ -25,7 +25,6 @@ set(SOURCES
 	hexline.cpp
 	log.cpp
 	properties.cpp
-	random.cpp
 	settings.cpp
 	signalhandler.cpp
 	stringutil.cpp
