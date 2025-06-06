@@ -119,14 +119,13 @@ bool MrwBusService::write(const MrwMessage & message) noexcept
 		if ((can_device->framesAvailable() > 0) ||
 			(can_device->framesToWrite() > 0))
 		{
+			qCDebug(log, "Process events...");
+
 			QCoreApplication::processEvents();
 		}
 
 		if (can_device->writeFrame(message))
 		{
-			static constexpr microseconds wait = 1ms;
-
-			QThread::usleep(wait.count());
 			return true;
 		}
 		else if (can_device->busStatus() == QCanBusDevice::CanBusStatus::Good)

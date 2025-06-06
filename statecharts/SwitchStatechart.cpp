@@ -336,6 +336,12 @@ namespace mrw
 			}
 		}
 
+		sc::integer SwitchStatechart::getTimeout() noexcept
+		{
+			return timeout
+				;
+		}
+
 		bool SwitchStatechart::getIsManual() const noexcept
 		{
 			return isManual
@@ -346,12 +352,6 @@ namespace mrw
 		{
 			this->isManual = isManual_;
 		}
-		sc::integer SwitchStatechart::getTimeout() noexcept
-		{
-			return timeout
-				;
-		}
-
 		void SwitchStatechart::setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept
 		{
 			ifaceOperationCallback = operationCallback;

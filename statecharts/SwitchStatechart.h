@@ -104,12 +104,12 @@ namespace mrw
 			};
 
 
+			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
+			static sc::integer getTimeout()  noexcept;
 			/*! Gets the value of the variable 'isManual' that is defined in the default interface scope. */
 			bool getIsManual() const noexcept;
 			/*! Sets the value of the variable 'isManual' that is defined in the default interface scope. */
 			void setIsManual(bool isManual) noexcept;
-			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
-			static sc::integer getTimeout()  noexcept;
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
 			{
@@ -250,8 +250,8 @@ namespace mrw
 			SwitchStatechart(const SwitchStatechart & rhs);
 			SwitchStatechart & operator=(const SwitchStatechart &);
 
+			static constexpr const sc::integer timeout {2500};
 			bool isManual {false};
-			static constexpr const sc::integer timeout {2000};
 
 
 

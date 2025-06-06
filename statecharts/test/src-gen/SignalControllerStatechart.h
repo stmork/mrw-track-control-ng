@@ -290,7 +290,7 @@ namespace mrw
 			SignalControllerStatechart(const SignalControllerStatechart & rhs);
 			SignalControllerStatechart & operator=(const SignalControllerStatechart &);
 
-			static constexpr const sc::integer timeout {5000};
+			static constexpr const sc::integer timeout {2500};
 			static constexpr const sc::integer delay {350};
 			sc::integer symbol {SignalControllerStatechart::STOP};
 			static constexpr const sc::integer OFF {-(1)};
