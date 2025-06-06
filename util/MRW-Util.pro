@@ -26,6 +26,7 @@ SOURCES += \
 HEADERS += \
 	batch.h \
 	batchparticipant.h \
+	cleanvector.h \
 	clockservice.h \
 	constantenumerator.h \
 	dumphandler.h \

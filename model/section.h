@@ -8,20 +8,20 @@
 #ifndef MRW_MODEL_SECTION_H
 #define MRW_MODEL_SECTION_H
 
-#include <vector>
 #include <regex>
 #include <functional>
 #include <type_traits>
 
 #include <QDomElement>
 
-#include <util/constantenumerator.h>
-#include <util/method.h>
-#include <util/stringutil.h>
 #include <model/assemblypart.h>
 #include <model/module.h>
 #include <model/device.h>
 #include <model/position.h>
+#include <util/cleanvector.h>
+#include <util/constantenumerator.h>
+#include <util/method.h>
+#include <util/stringutil.h>
 
 namespace mrw::model
 {
@@ -80,24 +80,24 @@ namespace mrw::model
 		static const std::regex                                   path_regex;
 		static const mrw::util::ConstantEnumerator<SectionState>  state_map;
 
-		const QString                section_name;
-		ModelRailway        *        model              = nullptr;
-		Region           *           section_region     = nullptr;
-		Controller         *         section_controller = nullptr;
-		SectionModule        *       section_module     = nullptr;
-		SectionState                 section_state      = SectionState::FREE;
-		bool                         section_enabled    = false;
-		bool                         section_occupied   = false;
-		std::vector<AssemblyPart *>  assembly_parts;
-		std::vector<Signal *>        forward_signals;
-		std::vector<Signal *>        backward_signals;
+		const QString                         section_name;
+		ModelRailway             *            model              = nullptr;
+		Region                *               section_region     = nullptr;
+		Controller              *             section_controller = nullptr;
+		SectionModule            *            section_module     = nullptr;
+		SectionState                          section_state      = SectionState::FREE;
+		bool                                  section_enabled    = false;
+		bool                                  section_occupied   = false;
+		mrw::util::CleanVector<AssemblyPart>  assembly_parts;
+		std::vector<Signal *>                 forward_signals;
+		std::vector<Signal *>                 backward_signals;
 
 	public:
 		explicit Section(
 			ModelRailway     *    model_railway,
 			Region        *       region,
 			const QDomElement  &  element);
-		virtual ~Section();
+		virtual ~Section() = default;
 
 		// Implementations from Device
 		const QString    &   name()         const noexcept override;

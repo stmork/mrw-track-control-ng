@@ -47,15 +47,6 @@ MultiplexConnection::MultiplexConnection(
 	}
 }
 
-MultiplexConnection::~MultiplexConnection()
-{
-	for (Light * light : simple_lights)
-	{
-		delete light;
-	}
-	simple_lights.clear();
-}
-
 bool MultiplexConnection::valid() const
 {
 	size_t pins = simple_lights.size();

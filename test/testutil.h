@@ -71,6 +71,8 @@ namespace mrw::test
 		void testDifferentBatch();
 		void testSelfPointer();
 		void testHexLine();
+		void testCleanVector();
+		void testSharedVector();
 	};
 }
 

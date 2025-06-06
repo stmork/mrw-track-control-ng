@@ -17,4 +17,5 @@
 - signal aspect / Signalbild
 - switch / Weiche
 - track / Spur, Fahrstraße
+- turnout / Weiche
 - region / Bereich

@@ -74,22 +74,6 @@ Controller::Controller(
 	}
 }
 
-Controller::~Controller()
-{
-	for (Module * module : modules)
-	{
-		delete module;
-	}
-
-	for (MultiplexConnection * connection : connections)
-	{
-		delete connection;
-	}
-
-	modules.clear();
-	connections.clear();
-}
-
 bool Controller::valid() const noexcept
 {
 	size_t ports = 0;

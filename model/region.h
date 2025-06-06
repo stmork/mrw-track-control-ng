@@ -8,13 +8,12 @@
 #ifndef MRW_MODEL_REGION_H
 #define MRW_MODEL_REGION_H
 
-#include <vector>
-
 #include <QDomElement>
 
+#include <model/section.h>
+#include <util/cleanvector.h>
 #include <util/method.h>
 #include <util/stringutil.h>
-#include <model/section.h>
 
 namespace mrw::model
 {
@@ -31,11 +30,11 @@ namespace mrw::model
 	{
 		friend class ModelRailway;
 
-		const QString           region_name;
-		const bool              is_station;
-		ModelRailway      *     model = nullptr;
-		std::vector<Section *>  sections;
-		bool                    direction_view = true;
+		const QString                    region_name;
+		const bool                       is_station;
+		ModelRailway          *          model = nullptr;
+		mrw::util::CleanVector<Section>  sections;
+		bool                             direction_view = true;
 
 
 	public:
@@ -43,7 +42,7 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			const QDomElement  &  element,
 			const bool            station);
-		virtual ~Region();
+		virtual ~Region() = default;
 
 		/**
 		 * This method returns the nth Section element. It is not ID-based

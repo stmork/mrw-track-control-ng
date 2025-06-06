@@ -23,6 +23,7 @@
 #include <util/globalbatch.h>
 #include <util/self.h>
 #include <util/hexline.h>
+#include <util/cleanvector.h>
 
 #include "testutil.h"
 
@@ -550,4 +551,50 @@ void TestUtil::testHexLine()
 	HexLine eof(":005678010e");
 	QCOMPARE(eof.getAddress(), unsigned(0x5678));
 	QVERIFY(!eof);
+}
+
+struct Container
+{
+	float a = 0.f;
+};
+
+void TestUtil::testCleanVector()
+{
+	Container * a = new Container();
+	Container * b = new Container();
+	CleanVector<Container> container;
+
+	container.push_back(a);
+	container.push_back(b);
+	QCOMPARE(container.size(), size_t(2));
+}
+
+void TestUtil::testSharedVector()
+{
+	std::shared_ptr<Container> a = std::make_shared<Container>();
+	std::shared_ptr<Container> b = std::make_shared<Container>();
+	std::shared_ptr<Container> c(new Container());
+
+	QCOMPARE(a.use_count(), 1);
+	QCOMPARE(b.use_count(), 1);
+	QCOMPARE(c.use_count(), 1);
+
+	{
+		SharedVector<Container> container;
+
+		QCOMPARE(a.use_count(), 1);
+		QCOMPARE(b.use_count(), 1);
+		QCOMPARE(c.use_count(), 1);
+
+		container.push_back(a);
+		container.push_back(b);
+		container.push_back(c);
+
+		QCOMPARE(a.use_count(), 2);
+		QCOMPARE(b.use_count(), 2);
+		QCOMPARE(c.use_count(), 2);
+	}
+	QCOMPARE(a.use_count(), 1);
+	QCOMPARE(b.use_count(), 1);
+	QCOMPARE(c.use_count(), 1);
 }

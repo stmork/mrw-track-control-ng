@@ -40,15 +40,6 @@ LightModule::LightModule(
 	}
 }
 
-LightModule::~LightModule()
-{
-	for (ProfileLight * light : profile_lights)
-	{
-		delete light;
-	}
-	profile_lights.clear();
-}
-
 bool LightModule::valid() const
 {
 	return std::all_of(profile_lights.begin(), profile_lights.end(),

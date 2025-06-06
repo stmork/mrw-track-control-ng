@@ -149,15 +149,6 @@ Section::Section(
 	std::sort(backward_signals.begin(), backward_signals.end(), Signal::less);
 }
 
-Section::~Section()
-{
-	for (AssemblyPart * rail_part : assembly_parts)
-	{
-		delete rail_part;
-	}
-	assembly_parts.clear();
-}
-
 bool Section::valid() const noexcept
 {
 	return (section_controller != nullptr) && (section_module != nullptr);

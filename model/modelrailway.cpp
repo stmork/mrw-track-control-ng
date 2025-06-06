@@ -34,21 +34,6 @@ ModelRailway::ModelRailway(const QString & filename)
 	}
 }
 
-ModelRailway::~ModelRailway()
-{
-	for (Controller * controller : controllers)
-	{
-		delete controller;
-	}
-	for (Region * region : regions)
-	{
-		delete region;
-	}
-
-	controllers.clear();
-	regions.clear();
-}
-
 void ModelRailway::xml() const
 {
 	xml(xml_doc.documentElement());

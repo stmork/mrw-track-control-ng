@@ -43,15 +43,6 @@ Region::Region(
 	}
 }
 
-Region::~Region()
-{
-	for (Section * section : sections)
-	{
-		delete section;
-	}
-	sections.clear();
-}
-
 Section * Region::section(const size_t index) const
 {
 	return sections.at(index);

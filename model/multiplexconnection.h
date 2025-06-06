@@ -8,13 +8,12 @@
 #ifndef MRW_MODEL_MULTIPLEXCONNECTION_H
 #define MRW_MODEL_MULTIPLEXCONNECTION_H
 
-#include <vector>
-
+#include <model/light.h>
 #include <model/module.h>
+#include <util/cleanvector.h>
 
 namespace mrw::model
 {
-	class Light;
 	class LightSignal;
 	class Controller;
 
@@ -34,13 +33,13 @@ namespace mrw::model
 	{
 		friend class Controller;
 
-		ModelRailway    *   model = nullptr;
+		ModelRailway         *         model = nullptr;
 
-		const QDomElement   reference;
-		const ModuleId      connection_id;
+		const QDomElement              reference;
+		const ModuleId                 connection_id;
 
-		std::vector<LightSignal *> light_signals;
-		std::vector<Light *>       simple_lights;
+		std::vector<LightSignal *>     light_signals;
+		mrw::util::CleanVector<Light>  simple_lights;
 
 	public:
 		/** The maximum light count connected to one module. */
@@ -50,7 +49,7 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			Controller      *     controller,
 			const QDomElement  &  element);
-		virtual ~MultiplexConnection();
+		virtual ~MultiplexConnection() = default;
 
 		/**
 		 * This method returns the module ID. This ID is not used to by

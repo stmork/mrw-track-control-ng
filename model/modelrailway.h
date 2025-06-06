@@ -12,14 +12,14 @@
 #include <QLoggingCategory>
 #include <QString>
 
-#include <vector>
 #include <unordered_map>
 
-#include <util/method.h>
-#include <util/stringutil.h>
 #include <model/controller.h>
 #include <model/region.h>
 #include <model/section.h>
+#include <util/cleanvector.h>
+#include <util/method.h>
+#include <util/stringutil.h>
 
 /**
  * The mrw::model namespace contains all data/model classes for describing a
@@ -142,12 +142,12 @@ namespace mrw::model
 		std::unordered_map<mrw::can::ControllerId, Controller *>     controller_map;
 		std::unordered_map<mrw::can::DeviceKey, Device *, DeviceId>  device_map;
 
-		QDomDocument               xml_doc;
-		QString                    name;
-		std::vector<Controller *>  controllers;
-		std::vector<Region *>      regions;
+		QDomDocument                        xml_doc;
+		QString                             name;
+		mrw::util::CleanVector<Controller>  controllers;
+		mrw::util::CleanVector<Region>      regions;
 
-		MrwStatistic               model_statistics;
+		MrwStatistic                        model_statistics;
 
 	public:
 		explicit ModelRailway(const QString & filename);
@@ -156,7 +156,7 @@ namespace mrw::model
 		ModelRailway(const ModelRailway & other) = delete;
 		ModelRailway & operator=(const ModelRailway & other) = delete;
 
-		virtual ~ModelRailway();
+		virtual ~ModelRailway() = default;
 
 		/**
 		 * This method dumps the parsed EMF/XMI nodes and attributes.
