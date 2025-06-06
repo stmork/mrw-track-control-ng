@@ -1,0 +1,5 @@
+<map id="mrw::util::CleanVector&lt; TYPE &gt;" name="mrw::util::CleanVector&lt; TYPE &gt;">
+<area shape="rect" id="Node000001" title="This class is derived from std::vector and provides an auto delete functionality of the contained poi..." alt="" coords="5,79,152,120"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="23,5,134,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,46,81,79,76,79,76,46"/>
+</map>

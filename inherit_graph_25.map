@@ -1,0 +1,23 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,308,117,333"/>
+<area shape="rect" id="Node000001" href="$d7/d99/classmrw_1_1util_1_1CleanVector.html" title=" " alt="" coords="202,5,359,46"/>
+<area shape="poly" id="edge91_Node000000_Node000001" title=" " alt="" coords="63,292,71,242,89,179,119,113,139,83,163,57,181,44,200,35,202,40,183,49,166,61,143,87,123,116,94,180,77,243,68,293"/>
+<area shape="rect" id="Node000002" href="$d7/d99/classmrw_1_1util_1_1CleanVector.html" title=" " alt="" coords="165,71,396,111"/>
+<area shape="poly" id="edge92_Node000000_Node000002" title=" " alt="" coords="67,291,79,253,99,208,126,162,163,122,183,110,186,114,166,126,131,165,104,210,84,255,72,293"/>
+<area shape="rect" id="Node000003" href="$d7/d99/classmrw_1_1util_1_1CleanVector.html" title=" " alt="" coords="190,136,370,177"/>
+<area shape="poly" id="edge93_Node000000_Node000003" title=" " alt="" coords="74,292,110,239,135,211,163,187,188,174,191,179,166,192,138,215,114,242,79,295"/>
+<area shape="rect" id="Node000004" href="$d7/d99/classmrw_1_1util_1_1CleanVector.html" title=" " alt="" coords="195,201,366,242"/>
+<area shape="poly" id="edge94_Node000000_Node000004" title=" " alt="" coords="91,296,125,273,164,253,196,240,198,245,166,257,128,278,94,300"/>
+<area shape="rect" id="Node000005" href="$d7/d99/classmrw_1_1util_1_1CleanVector.html" title=" " alt="" coords="203,267,358,307"/>
+<area shape="poly" id="edge95_Node000000_Node000005" title=" " alt="" coords="132,307,202,296,203,301,132,312"/>
+<area shape="rect" id="Node000006" href="$d7/d99/classmrw_1_1util_1_1CleanVector.html" title=" " alt="" coords="207,332,354,373"/>
+<area shape="poly" id="edge96_Node000000_Node000006" title=" " alt="" coords="132,328,207,339,206,344,131,333"/>
+<area shape="rect" id="Node000007" href="$d7/d99/classmrw_1_1util_1_1CleanVector.html" title=" " alt="" coords="201,397,360,438"/>
+<area shape="poly" id="edge97_Node000000_Node000007" title=" " alt="" coords="94,340,128,362,166,382,201,395,200,400,164,387,125,367,91,345"/>
+<area shape="rect" id="Node000008" href="$d7/d99/classmrw_1_1util_1_1CleanVector.html" title=" " alt="" coords="182,463,378,503"/>
+<area shape="poly" id="edge98_Node000000_Node000008" title=" " alt="" coords="79,345,114,398,138,425,166,447,189,460,187,465,163,452,135,428,110,401,74,348"/>
+<area shape="rect" id="Node000009" href="$d7/d99/classmrw_1_1util_1_1CleanVector.html" title="This class is derived from std::vector and provides an auto delete functionality of the contained poi..." alt="" coords="207,528,354,569"/>
+<area shape="poly" id="edge99_Node000000_Node000009" title=" " alt="" coords="72,347,84,385,104,430,131,475,166,513,186,525,208,534,206,539,183,530,163,517,127,478,99,432,79,387,67,349"/>
+<area shape="rect" id="Node000010" href="$d6/d7d/classmrw_1_1util_1_1SharedVector.html" title="This template class wraps a type into a shared pointer used for a std::vector." alt="" coords="203,593,358,634"/>
+<area shape="poly" id="edge100_Node000000_Node000010" title=" " alt="" coords="68,348,77,398,94,460,123,524,143,553,166,578,184,591,204,599,201,604,181,595,163,582,139,556,119,526,89,462,72,399,63,349"/>
+</map>

@@ -25,5 +25,6 @@ var searchData=
   ['profile_22',['profile',['../dd/d28/classmrw_1_1model_1_1ProfileLight.html#ad097f2344d6193470503e463d9979210',1,'mrw::model::ProfileLight']]],
   ['profilelight_23',['ProfileLight',['../dd/d28/classmrw_1_1model_1_1ProfileLight.html',1,'mrw::model::ProfileLight'],['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#a203fce3e8fb4dcbe8c412e82a88bbdd4',1,'mrw::model::ModelRailway::ProfileLight()'],['../dd/d28/classmrw_1_1model_1_1ProfileLight.html#a4ef856bd7237281732a1ffd0a2104678',1,'mrw::model::ProfileLight::ProfileLight()']]],
   ['properties_24',['Properties',['../d5/d5d/classmrw_1_1util_1_1Properties.html',1,'mrw::util::Properties'],['../d5/d5d/classmrw_1_1util_1_1Properties.html#acc6d280ed1e3d16f27815ef981fb4dac',1,'mrw::util::Properties::Properties()=default'],['../d5/d5d/classmrw_1_1util_1_1Properties.html#ac4b43aabd1c5fe5b4068d1ff452ebe55',1,'mrw::util::Properties::Properties(const QString &amp;filename)']]],
-  ['proposemodelname_25',['proposeModelName',['../dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a1885774666b635bdbd47e24695759e04',1,'mrw::model::ModelRepository']]]
+  ['proposemodelname_25',['proposeModelName',['../dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a1885774666b635bdbd47e24695759e04',1,'mrw::model::ModelRepository']]],
+  ['ptrtype_26',['PtrType',['../d6/d7d/classmrw_1_1util_1_1SharedVector.html#a037386313d3ff137788cc75be30c215e',1,'mrw::util::SharedVector']]]
 ];

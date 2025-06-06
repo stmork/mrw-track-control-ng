@@ -532,7 +532,7 @@
 </section>
 <section title="Controller" ref="d1/d0d/classmrw_1_1model_1_1Controller.html">
 <section title="Controller" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a71757259f8562622a82e059461dd69b7"/>
-<section title="~Controller" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a0ab87934c4f7a266cfdb86e0f36bc1b5"/>
+<section title="~Controller" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a040910945acb5e3303e94f3b13c1b3c1"/>
 <section title="bold" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
 <section title="configure" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a64c7511baee95bde4d1f24a3a7bd694c"/>
 <section title="connection" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a2fa16f9465326b56f97a1d3abf453aa8"/>
@@ -817,7 +817,7 @@
 </section>
 <section title="LightModule" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html">
 <section title="LightModule" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#a5c28a05ca2cfa9386a7606b6cdfad351"/>
-<section title="~LightModule" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#a170d5d14c6f2375d7ecb1cfc8b86a467"/>
+<section title="~LightModule" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#ae51d974c5a1515af87f6779f1b9b1c67"/>
 <section title="id" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#aea4113b254bbb8366c72d75a7a474508"/>
 <section title="lights" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#a26992168245383d7eda8db35c08eb1aa"/>
 <section title="ports" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#ab57d2b81cecc326d4d6a4e11ddbabd01"/>
@@ -930,7 +930,7 @@
 <section title="ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html">
 <section title="ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a0cee0b2b7f7fcc1699d8b6c793b56f24"/>
 <section title="ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a62fc2b320e1915b3d3dd7ba9d7a77010"/>
-<section title="~ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#ae596b06e3ee7172e7d50091502da8e06"/>
+<section title="~ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a67436d3dc05940161ecd8d49a5706a69"/>
 <section title="assemblyPart" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a61f7327cf274b5a1eafeee57ec2cfd02"/>
 <section title="bold" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
 <section title="connection" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a03ab8534876b16a87b1bc3181498ab62"/>
@@ -1021,7 +1021,7 @@
 </section>
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html">
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a88f58c06e4ec956db5123e6ceeb35fa2"/>
-<section title="~MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a1747b7d05e448cd3f2d598ad5780f7f2"/>
+<section title="~MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2deae3c6f04ed50ac88701baaf597d29"/>
 <section title="id" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a5c3fb4470d613a75fb2ad35d0c20a16a"/>
 <section title="lights" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#aad1e820a26d295704a7ace00175d7880"/>
 <section title="valid" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a98e014de6cf97041fbbc56890279452c"/>
@@ -1239,7 +1239,7 @@
 </section>
 <section title="Region" ref="d4/d3e/classmrw_1_1model_1_1Region.html">
 <section title="Region" ref="d4/d3e/classmrw_1_1model_1_1Region.html#a156a26d099a8238e2c30e514080b3363"/>
-<section title="~Region" ref="d4/d3e/classmrw_1_1model_1_1Region.html#a3c3670fff78f7511d156e3b2f0bc6266"/>
+<section title="~Region" ref="d4/d3e/classmrw_1_1model_1_1Region.html#a49907399e3f336ae7bc99e33f0ffd2f1"/>
 <section title="bold" ref="d4/d3e/classmrw_1_1model_1_1Region.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
 <section title="direction" ref="d4/d3e/classmrw_1_1model_1_1Region.html#adc7117522b7b9649b42cecf07d1113c6"/>
 <section title="format" ref="d4/d3e/classmrw_1_1model_1_1Region.html#adbf185289d3c6a133f3d5150d2fb08c3"/>
@@ -1411,7 +1411,7 @@
 <section title="LOCKED" ref="de/de1/classmrw_1_1model_1_1Section.html#a5aeac6a51c26164ebb6964d807d5c3a4aaeff3f3f2731681b2ed6a27786a56203"/>
 </section>
 <section title="Section" ref="de/de1/classmrw_1_1model_1_1Section.html#af39e5409a3199793119896b8bf971378"/>
-<section title="~Section" ref="de/de1/classmrw_1_1model_1_1Section.html#ae2582a77c7ecb8cbd4a1b58e7ad3296e"/>
+<section title="~Section" ref="de/de1/classmrw_1_1model_1_1Section.html#aeb22813e156ba7fb2bbcc857fa5ad006"/>
 <section title="anyReserved" ref="de/de1/classmrw_1_1model_1_1Section.html#a758e21543e2a18a0a4e3a46b7d3be26c"/>
 <section title="assemblyPart" ref="de/de1/classmrw_1_1model_1_1Section.html#aeebcb08ee6d8edd93a84e583a208d8ae"/>
 <section title="assemblyPartCount" ref="de/de1/classmrw_1_1model_1_1Section.html#a0bbc58e75c51d835292db89fcf5b06cf"/>
@@ -2099,6 +2099,9 @@
 <section title="name" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#ae034c20e8970a700b23f6183cdc35a27"/>
 <section title="setBatch" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a9f8480b69816d7080102c506790f6842"/>
 </section>
+<section title="CleanVector" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html">
+<section title="~CleanVector" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
+</section>
 <section title="ClockService" ref="db/d8f/classmrw_1_1util_1_1ClockService.html">
 <section title="Hz1" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#aa097bc71ce6a1a2af55ac34af02d377b"/>
 <section title="Hz2" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#aff9d02e4d105be76c2f683213037b87e"/>
@@ -2177,6 +2180,9 @@
 <section title="SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html">
 <section title="SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#aac49a4a0d15d663378b95d539c464a3d"/>
 <section title="~SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#a56bb81c0462df5edb443a8d9cc5c2622"/>
+</section>
+<section title="SharedVector" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html">
+<section title="PtrType" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html#a037386313d3ff137788cc75be30c215e"/>
 </section>
 <section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html">
 <section title="SignalCallback" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a9f1c95ae9412c793753a6bd5f64a0ac7"/>
@@ -2681,7 +2687,7 @@
 </section>
 <section title="Controller" ref="d1/d0d/classmrw_1_1model_1_1Controller.html">
 <section title="Controller" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a71757259f8562622a82e059461dd69b7"/>
-<section title="~Controller" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a0ab87934c4f7a266cfdb86e0f36bc1b5"/>
+<section title="~Controller" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a040910945acb5e3303e94f3b13c1b3c1"/>
 <section title="bold" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
 <section title="configure" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a64c7511baee95bde4d1f24a3a7bd694c"/>
 <section title="connection" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a2fa16f9465326b56f97a1d3abf453aa8"/>
@@ -2966,7 +2972,7 @@
 </section>
 <section title="LightModule" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html">
 <section title="LightModule" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#a5c28a05ca2cfa9386a7606b6cdfad351"/>
-<section title="~LightModule" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#a170d5d14c6f2375d7ecb1cfc8b86a467"/>
+<section title="~LightModule" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#ae51d974c5a1515af87f6779f1b9b1c67"/>
 <section title="id" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#aea4113b254bbb8366c72d75a7a474508"/>
 <section title="lights" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#a26992168245383d7eda8db35c08eb1aa"/>
 <section title="ports" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#ab57d2b81cecc326d4d6a4e11ddbabd01"/>
@@ -3079,7 +3085,7 @@
 <section title="ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html">
 <section title="ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a0cee0b2b7f7fcc1699d8b6c793b56f24"/>
 <section title="ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a62fc2b320e1915b3d3dd7ba9d7a77010"/>
-<section title="~ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#ae596b06e3ee7172e7d50091502da8e06"/>
+<section title="~ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a67436d3dc05940161ecd8d49a5706a69"/>
 <section title="assemblyPart" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a61f7327cf274b5a1eafeee57ec2cfd02"/>
 <section title="bold" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
 <section title="connection" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a03ab8534876b16a87b1bc3181498ab62"/>
@@ -3170,7 +3176,7 @@
 </section>
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html">
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a88f58c06e4ec956db5123e6ceeb35fa2"/>
-<section title="~MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a1747b7d05e448cd3f2d598ad5780f7f2"/>
+<section title="~MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2deae3c6f04ed50ac88701baaf597d29"/>
 <section title="id" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a5c3fb4470d613a75fb2ad35d0c20a16a"/>
 <section title="lights" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#aad1e820a26d295704a7ace00175d7880"/>
 <section title="valid" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a98e014de6cf97041fbbc56890279452c"/>
@@ -3388,7 +3394,7 @@
 </section>
 <section title="Region" ref="d4/d3e/classmrw_1_1model_1_1Region.html">
 <section title="Region" ref="d4/d3e/classmrw_1_1model_1_1Region.html#a156a26d099a8238e2c30e514080b3363"/>
-<section title="~Region" ref="d4/d3e/classmrw_1_1model_1_1Region.html#a3c3670fff78f7511d156e3b2f0bc6266"/>
+<section title="~Region" ref="d4/d3e/classmrw_1_1model_1_1Region.html#a49907399e3f336ae7bc99e33f0ffd2f1"/>
 <section title="bold" ref="d4/d3e/classmrw_1_1model_1_1Region.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
 <section title="direction" ref="d4/d3e/classmrw_1_1model_1_1Region.html#adc7117522b7b9649b42cecf07d1113c6"/>
 <section title="format" ref="d4/d3e/classmrw_1_1model_1_1Region.html#adbf185289d3c6a133f3d5150d2fb08c3"/>
@@ -3560,7 +3566,7 @@
 <section title="LOCKED" ref="de/de1/classmrw_1_1model_1_1Section.html#a5aeac6a51c26164ebb6964d807d5c3a4aaeff3f3f2731681b2ed6a27786a56203"/>
 </section>
 <section title="Section" ref="de/de1/classmrw_1_1model_1_1Section.html#af39e5409a3199793119896b8bf971378"/>
-<section title="~Section" ref="de/de1/classmrw_1_1model_1_1Section.html#ae2582a77c7ecb8cbd4a1b58e7ad3296e"/>
+<section title="~Section" ref="de/de1/classmrw_1_1model_1_1Section.html#aeb22813e156ba7fb2bbcc857fa5ad006"/>
 <section title="anyReserved" ref="de/de1/classmrw_1_1model_1_1Section.html#a758e21543e2a18a0a4e3a46b7d3be26c"/>
 <section title="assemblyPart" ref="de/de1/classmrw_1_1model_1_1Section.html#aeebcb08ee6d8edd93a84e583a208d8ae"/>
 <section title="assemblyPartCount" ref="de/de1/classmrw_1_1model_1_1Section.html#a0bbc58e75c51d835292db89fcf5b06cf"/>
@@ -4239,6 +4245,9 @@
 <section title="name" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#ae034c20e8970a700b23f6183cdc35a27"/>
 <section title="setBatch" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a9f8480b69816d7080102c506790f6842"/>
 </section>
+<section title="CleanVector" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html">
+<section title="~CleanVector" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
+</section>
 <section title="ClockService" ref="db/d8f/classmrw_1_1util_1_1ClockService.html">
 <section title="Hz1" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#aa097bc71ce6a1a2af55ac34af02d377b"/>
 <section title="Hz2" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#aff9d02e4d105be76c2f683213037b87e"/>
@@ -4317,6 +4326,9 @@
 <section title="SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html">
 <section title="SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#aac49a4a0d15d663378b95d539c464a3d"/>
 <section title="~SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#a56bb81c0462df5edb443a8d9cc5c2622"/>
+</section>
+<section title="SharedVector" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html">
+<section title="PtrType" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html#a037386313d3ff137788cc75be30c215e"/>
 </section>
 <section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html">
 <section title="SignalCallback" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a9f1c95ae9412c793753a6bd5f64a0ac7"/>
@@ -4549,6 +4561,18 @@
 <section title="mrw::util::ConstantEnumerator&lt; T &gt;" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html"/>
 <section title="mrw::util::Properties" ref="d5/d5d/classmrw_1_1util_1_1Properties.html"/>
 </section>
+<section title="std::vector&lt; T &gt;" ref="doxygen_blank.html">
+<section title="mrw::util::CleanVector&lt; mrw::model::Module &gt;" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<section title="mrw::util::CleanVector&lt; mrw::model::MultiplexConnection &gt;" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<section title="mrw::util::CleanVector&lt; mrw::model::ProfileLight &gt;" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<section title="mrw::util::CleanVector&lt; mrw::model::Controller &gt;" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<section title="mrw::util::CleanVector&lt; mrw::model::Region &gt;" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<section title="mrw::util::CleanVector&lt; mrw::model::Light &gt;" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<section title="mrw::util::CleanVector&lt; mrw::model::Section &gt;" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<section title="mrw::util::CleanVector&lt; mrw::model::AssemblyPart &gt;" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<section title="mrw::util::CleanVector&lt; TYPE &gt;" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<section title="mrw::util::SharedVector&lt; TYPE &gt;" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html"/>
+</section>
 </section>
 <section title="Class Members" ref="functions.html">
 <section title="All" ref="functions.html">
@@ -4623,6 +4647,15 @@
 <keyword name="mrw::util::BatchParticipant" id="mrw::util::BatchParticipant_" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html"/>
 <keyword name="mrw::can::CanSettings" id="mrw::can::CanSettings_" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html"/>
 <keyword name="mrw::ui::CircleLiveWidget" id="mrw::ui::CircleLiveWidget_" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html"/>
+<keyword name="mrw::util::CleanVector" id="mrw::util::CleanVector_" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<keyword name="mrw::util::CleanVector&lt; mrw::model::AssemblyPart &gt;" id="mrw::util::CleanVector&lt; mrw::model::AssemblyPart &gt;_" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<keyword name="mrw::util::CleanVector&lt; mrw::model::Controller &gt;" id="mrw::util::CleanVector&lt; mrw::model::Controller &gt;_" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<keyword name="mrw::util::CleanVector&lt; mrw::model::Light &gt;" id="mrw::util::CleanVector&lt; mrw::model::Light &gt;_" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<keyword name="mrw::util::CleanVector&lt; mrw::model::Module &gt;" id="mrw::util::CleanVector&lt; mrw::model::Module &gt;_" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<keyword name="mrw::util::CleanVector&lt; mrw::model::MultiplexConnection &gt;" id="mrw::util::CleanVector&lt; mrw::model::MultiplexConnection &gt;_" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<keyword name="mrw::util::CleanVector&lt; mrw::model::ProfileLight &gt;" id="mrw::util::CleanVector&lt; mrw::model::ProfileLight &gt;_" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<keyword name="mrw::util::CleanVector&lt; mrw::model::Region &gt;" id="mrw::util::CleanVector&lt; mrw::model::Region &gt;_" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
+<keyword name="mrw::util::CleanVector&lt; mrw::model::Section &gt;" id="mrw::util::CleanVector&lt; mrw::model::Section &gt;_" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html"/>
 <keyword name="mrw::util::ClockService" id="mrw::util::ClockService_" ref="db/d8f/classmrw_1_1util_1_1ClockService.html"/>
 <keyword name="mrw::ui::ClockWidget" id="mrw::ui::ClockWidget_" ref="d8/d73/classmrw_1_1ui_1_1ClockWidget.html"/>
 <keyword name="mrw::util::ConstantEnumerator" id="mrw::util::ConstantEnumerator_" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html"/>
@@ -4683,6 +4716,7 @@
 <keyword name="mrw::util::SelfPointer" id="mrw::util::SelfPointer_" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html"/>
 <keyword name="mrw::util::Settings" id="mrw::util::Settings_" ref="d6/db2/classmrw_1_1util_1_1Settings.html"/>
 <keyword name="mrw::util::SettingsGroup" id="mrw::util::SettingsGroup_" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html"/>
+<keyword name="mrw::util::SharedVector" id="mrw::util::SharedVector_" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html"/>
 <keyword name="mrw::model::Signal" id="mrw::model::Signal_" ref="db/d9c/classmrw_1_1model_1_1Signal.html"/>
 <keyword name="mrw::ctrl::SignalController" id="mrw::ctrl::SignalController_" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html"/>
 <keyword name="mrw::util::SignalHandler" id="mrw::util::SignalHandler_" ref="de/def/classmrw_1_1util_1_1SignalHandler.html"/>
@@ -5203,6 +5237,7 @@
 <keyword name="Properties()=default" id="mrw::util::Properties::Properties_acc6d280ed1e3d16f27815ef981fb4dac" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#acc6d280ed1e3d16f27815ef981fb4dac"/>
 <keyword name="Properties(const QString &amp;filename)" id="mrw::util::Properties::Properties_ac4b43aabd1c5fe5b4068d1ff452ebe55" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#ac4b43aabd1c5fe5b4068d1ff452ebe55"/>
 <keyword name="proposeModelName(const int index=1)" id="mrw::model::ModelRepository::proposeModelName_a1885774666b635bdbd47e24695759e04" ref="dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a1885774666b635bdbd47e24695759e04"/>
+<keyword name="PtrType" id="mrw::util::SharedVector::PtrType_a037386313d3ff137788cc75be30c215e" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html#a037386313d3ff137788cc75be30c215e"/>
 <keyword name="QtStatechart()" id="mrw::statechart::QtStatechart::QtStatechart_a3e7ef6e2d57177d1e45464548789f87b" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#a3e7ef6e2d57177d1e45464548789f87b"/>
 <keyword name="QUARTER" id="mrw::model::Position::QUARTER_af838864426b2ae5e3f53e29298d3bdcc" ref="db/d4f/classmrw_1_1model_1_1Position.html#af838864426b2ae5e3f53e29298d3bdcc"/>
 <keyword name="Rail" id="mrw::model::ModelRailway::Rail_a3570c0109cb1ea5b06d3854e85b78b47" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a3570c0109cb1ea5b06d3854e85b78b47"/>
@@ -5445,24 +5480,33 @@
 <keyword name="~AssemblyPart()=default" id="mrw::model::AssemblyPart::~AssemblyPart_a4150233cf11d12dc6e52311efb54c014" ref="d5/d26/classmrw_1_1model_1_1AssemblyPart.html#a4150233cf11d12dc6e52311efb54c014"/>
 <keyword name="~Batch()" id="mrw::util::Batch::~Batch_a87506571dedb476e0de679401a03637e" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a87506571dedb476e0de679401a03637e"/>
 <keyword name="~BatchParticipant()" id="mrw::util::BatchParticipant::~BatchParticipant_a84ea031a5b0d9c71c278169374a50665" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a84ea031a5b0d9c71c278169374a50665"/>
-<keyword name="~Controller()" id="mrw::model::Controller::~Controller_a0ab87934c4f7a266cfdb86e0f36bc1b5" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a0ab87934c4f7a266cfdb86e0f36bc1b5"/>
+<keyword name="~CleanVector()" id="mrw::util::CleanVector::~CleanVector_a4667df9d9a32bb67fe91f2a73ba45224" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
+<keyword name="~CleanVector()" id="mrw::util::CleanVector&lt; mrw::model::Module &gt;::~CleanVector_a4667df9d9a32bb67fe91f2a73ba45224" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
+<keyword name="~CleanVector()" id="mrw::util::CleanVector&lt; mrw::model::MultiplexConnection &gt;::~CleanVector_a4667df9d9a32bb67fe91f2a73ba45224" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
+<keyword name="~CleanVector()" id="mrw::util::CleanVector&lt; mrw::model::ProfileLight &gt;::~CleanVector_a4667df9d9a32bb67fe91f2a73ba45224" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
+<keyword name="~CleanVector()" id="mrw::util::CleanVector&lt; mrw::model::Controller &gt;::~CleanVector_a4667df9d9a32bb67fe91f2a73ba45224" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
+<keyword name="~CleanVector()" id="mrw::util::CleanVector&lt; mrw::model::Region &gt;::~CleanVector_a4667df9d9a32bb67fe91f2a73ba45224" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
+<keyword name="~CleanVector()" id="mrw::util::CleanVector&lt; mrw::model::Light &gt;::~CleanVector_a4667df9d9a32bb67fe91f2a73ba45224" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
+<keyword name="~CleanVector()" id="mrw::util::CleanVector&lt; mrw::model::Section &gt;::~CleanVector_a4667df9d9a32bb67fe91f2a73ba45224" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
+<keyword name="~CleanVector()" id="mrw::util::CleanVector&lt; mrw::model::AssemblyPart &gt;::~CleanVector_a4667df9d9a32bb67fe91f2a73ba45224" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
+<keyword name="~Controller()=default" id="mrw::model::Controller::~Controller_a040910945acb5e3303e94f3b13c1b3c1" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a040910945acb5e3303e94f3b13c1b3c1"/>
 <keyword name="~DeviceId()=default" id="mrw::model::DeviceId::~DeviceId_a71173849da88347e35acc9b26e63cf87" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a71173849da88347e35acc9b26e63cf87"/>
 <keyword name="~Duration()" id="mrw::util::Duration::~Duration_a32b4f7a84922729de9fd5d2cd6762c42" ref="d2/d87/classmrw_1_1util_1_1Duration.html#a32b4f7a84922729de9fd5d2cd6762c42"/>
 <keyword name="~EventDrivenInterface()=0" id="sc::EventDrivenInterface::~EventDrivenInterface_a44f6fe709e586da9c19be13e93c14d09" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a44f6fe709e586da9c19be13e93c14d09"/>
 <keyword name="~FileLogger()" id="mrw::log::FileLogger::~FileLogger_ab08af44f2de3fe1b51158132f9a399dd" ref="d8/ded/classmrw_1_1log_1_1FileLogger.html#ab08af44f2de3fe1b51158132f9a399dd"/>
 <keyword name="~Light()=default" id="mrw::model::Light::~Light_a6ebd93b4230cc648bcfa602d004da06f" ref="d0/d3c/classmrw_1_1model_1_1Light.html#a6ebd93b4230cc648bcfa602d004da06f"/>
-<keyword name="~LightModule()" id="mrw::model::LightModule::~LightModule_a170d5d14c6f2375d7ecb1cfc8b86a467" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#a170d5d14c6f2375d7ecb1cfc8b86a467"/>
+<keyword name="~LightModule()=default" id="mrw::model::LightModule::~LightModule_ae51d974c5a1515af87f6779f1b9b1c67" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#ae51d974c5a1515af87f6779f1b9b1c67"/>
 <keyword name="~LoggerBase()" id="mrw::log::LoggerBase::~LoggerBase_a1c6d7880ada1aae670c7b8c41389ee91" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html#a1c6d7880ada1aae670c7b8c41389ee91"/>
-<keyword name="~ModelRailway()" id="mrw::model::ModelRailway::~ModelRailway_ae596b06e3ee7172e7d50091502da8e06" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#ae596b06e3ee7172e7d50091502da8e06"/>
+<keyword name="~ModelRailway()=default" id="mrw::model::ModelRailway::~ModelRailway_a67436d3dc05940161ecd8d49a5706a69" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a67436d3dc05940161ecd8d49a5706a69"/>
 <keyword name="~ModelRepository()" id="mrw::model::ModelRepository::~ModelRepository_a125d787a3a00c6b44219f5879e5df28a" ref="dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a125d787a3a00c6b44219f5879e5df28a"/>
 <keyword name="~Module()=default" id="mrw::model::Module::~Module_af0cb5ee261c5cb230a42ff633c5d35c5" ref="d3/de7/classmrw_1_1model_1_1Module.html#af0cb5ee261c5cb230a42ff633c5d35c5"/>
 <keyword name="~MrwBusService()" id="mrw::can::MrwBusService::~MrwBusService_a73ae1d0363d32fbea5b866180a7c21f2" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a73ae1d0363d32fbea5b866180a7c21f2"/>
 <keyword name="~MrwMessage()=default" id="mrw::can::MrwMessage::~MrwMessage_a6ef72a8ee16eb914494052bf27f76869" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6ef72a8ee16eb914494052bf27f76869"/>
-<keyword name="~MultiplexConnection()" id="mrw::model::MultiplexConnection::~MultiplexConnection_a1747b7d05e448cd3f2d598ad5780f7f2" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a1747b7d05e448cd3f2d598ad5780f7f2"/>
+<keyword name="~MultiplexConnection()=default" id="mrw::model::MultiplexConnection::~MultiplexConnection_a2deae3c6f04ed50ac88701baaf597d29" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2deae3c6f04ed50ac88701baaf597d29"/>
 <keyword name="~RailPart()=default" id="mrw::model::RailPart::~RailPart_a96a96c7756b6a8bca4f1647f79f91e25" ref="d1/d16/classmrw_1_1model_1_1RailPart.html#a96a96c7756b6a8bca4f1647f79f91e25"/>
-<keyword name="~Region()" id="mrw::model::Region::~Region_a3c3670fff78f7511d156e3b2f0bc6266" ref="d4/d3e/classmrw_1_1model_1_1Region.html#a3c3670fff78f7511d156e3b2f0bc6266"/>
+<keyword name="~Region()=default" id="mrw::model::Region::~Region_a49907399e3f336ae7bc99e33f0ffd2f1" ref="d4/d3e/classmrw_1_1model_1_1Region.html#a49907399e3f336ae7bc99e33f0ffd2f1"/>
 <keyword name="~Route()" id="mrw::model::Route::~Route_a41212532f2bce3298d8f9468f82c62ab" ref="d7/dfb/classmrw_1_1model_1_1Route.html#a41212532f2bce3298d8f9468f82c62ab"/>
-<keyword name="~Section()" id="mrw::model::Section::~Section_ae2582a77c7ecb8cbd4a1b58e7ad3296e" ref="de/de1/classmrw_1_1model_1_1Section.html#ae2582a77c7ecb8cbd4a1b58e7ad3296e"/>
+<keyword name="~Section()=default" id="mrw::model::Section::~Section_aeb22813e156ba7fb2bbcc857fa5ad006" ref="de/de1/classmrw_1_1model_1_1Section.html#aeb22813e156ba7fb2bbcc857fa5ad006"/>
 <keyword name="~SettingsGroup()" id="mrw::util::SettingsGroup::~SettingsGroup_a56bb81c0462df5edb443a8d9cc5c2622" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#a56bb81c0462df5edb443a8d9cc5c2622"/>
 <keyword name="~StatemachineInterface()=0" id="sc::StatemachineInterface::~StatemachineInterface_aa887dba1e9f2fd1b16fc227132375135" ref="de/d2a/classsc_1_1StatemachineInterface.html#aa887dba1e9f2fd1b16fc227132375135"/>
 <keyword name="~SysLogger()" id="mrw::log::SysLogger::~SysLogger_af0121ecb4f50cf05cf240bf5bb077333" ref="d5/d0d/classmrw_1_1log_1_1SysLogger.html#af0121ecb4f50cf05cf240bf5bb077333"/>
@@ -5758,6 +5802,7 @@
 <file>d1/d1a/classmrw_1_1util_1_1Method-members.html</file>
 <file>d1/d28/classmrw_1_1log_1_1LoggerBase.html</file>
 <file>d1/d2b/classmrw_1_1ctrl_1_1BaseController-members.html</file>
+<file>d1/d48/classmrw_1_1util_1_1SharedVector__inherit__graph.png</file>
 <file>d1/d79/classmrw_1_1ctrl_1_1DoubleCrossSwitchController__inherit__graph.png</file>
 <file>d1/d7f/structmrw_1_1ui_1_1RailWidget_1_1Status-members.html</file>
 <file>d1/d80/classmrw_1_1can_1_1MrwMessage.html</file>
@@ -5771,6 +5816,8 @@
 <file>d2/d06/structmrw_1_1ui_1_1DoubleCrossSwitchWidget_1_1Status.html</file>
 <file>d2/d1b/classmrw_1_1can_1_1MrwMessage-members.html</file>
 <file>d2/d25/classmrw_1_1model_1_1LightSignal__inherit__graph.png</file>
+<file>d2/d39/classmrw_1_1util_1_1CleanVector__inherit__graph.png</file>
+<file>d2/d52/classmrw_1_1util_1_1CleanVector-members.html</file>
 <file>d2/d63/classmrw_1_1model_1_1SectionModule-members.html</file>
 <file>d2/d72/classmrw_1_1util_1_1DumpHandler-members.html</file>
 <file>d2/d73/classmrw_1_1util_1_1SettingsGroup-members.html</file>
@@ -5841,6 +5888,7 @@
 <file>d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html</file>
 <file>d6/d71/classmrw_1_1model_1_1LightSignal.html</file>
 <file>d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html</file>
+<file>d6/d7d/classmrw_1_1util_1_1SharedVector.html</file>
 <file>d6/d8d/classmrw_1_1util_1_1GlobalBatch.html</file>
 <file>d6/d91/classmrw_1_1log_1_1FileLogger__inherit__graph.png</file>
 <file>d6/d93/classmrw_1_1model_1_1AbstractSwitch__inherit__graph.png</file>
@@ -5855,6 +5903,7 @@
 <file>d7/d8e/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status__inherit__graph.png</file>
 <file>d7/d93/classmrw_1_1ui_1_1CircleLiveWidget__inherit__graph.png</file>
 <file>d7/d94/namespacemrw_1_1statechart.html</file>
+<file>d7/d99/classmrw_1_1util_1_1CleanVector.html</file>
 <file>d7/da7/classmrw_1_1ui_1_1BaseWidget__inherit__graph.png</file>
 <file>d7/daf/classmrw_1_1ui_1_1CircleLiveWidget-members.html</file>
 <file>d7/dc3/structmrw_1_1ui_1_1SignalWidget_1_1Status.html</file>
@@ -5912,6 +5961,7 @@
 <file>da/dc4/classmrw_1_1ui_1_1SignalWidget__inherit__graph.png</file>
 <file>da/dcf/classmrw_1_1model_1_1AssemblyPart-members.html</file>
 <file>da/dd1/classmrw_1_1ui_1_1ClockWidget__inherit__graph.png</file>
+<file>db/d02/classmrw_1_1util_1_1SharedVector-members.html</file>
 <file>db/d03/namespacesc.html</file>
 <file>db/d17/classmrw_1_1log_1_1StdLogger-members.html</file>
 <file>db/d21/classmrw_1_1ctrl_1_1BaseSwitchController__inherit__graph.png</file>
@@ -6089,6 +6139,7 @@
 <file>inherit_graph_22.png</file>
 <file>inherit_graph_23.png</file>
 <file>inherit_graph_24.png</file>
+<file>inherit_graph_25.png</file>
 <file>inherit_graph_3.png</file>
 <file>inherit_graph_4.png</file>
 <file>inherit_graph_5.png</file>
@@ -6241,6 +6292,7 @@
 <file>search/typedefs_6.js</file>
 <file>search/typedefs_7.js</file>
 <file>search/typedefs_8.js</file>
+<file>search/typedefs_9.js</file>
 <file>search/variables_0.js</file>
 <file>search/variables_1.js</file>
 <file>search/variables_10.js</file>
