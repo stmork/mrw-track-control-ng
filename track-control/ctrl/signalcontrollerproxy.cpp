@@ -3,6 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
+#include <QCoreApplication>
 #include <QDebug>
 
 #include <util/method.h>
@@ -194,6 +195,18 @@ void SignalControllerProxy::connectStatechart()
 		this, &SignalControllerProxy::start,
 		&statechart, &SignalControllerStatechart::start,
 		Qt::QueuedConnection);
+	connect(
+		&statechart, &SignalControllerStatechart::entered, [&]()
+	{
+//		QCoreApplication::processEvents();
+
+		qCDebug(log).noquote() << toString() << "Inquiry started.";
+	});
+	connect(
+		&statechart, &SignalControllerStatechart::started, [&]()
+	{
+		qCDebug(log).noquote() << toString() << "Inquiry completed.";
+	});
 }
 
 void SignalControllerProxy::initStatechart()

@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
+#include <QCoreApplication>
+
 #include <util/method.h>
 #include <can/mrwmessage.h>
 #include <model/railpart.h>
@@ -76,6 +78,8 @@ SectionController::SectionController(
 	connect(
 		&statechart, &SectionStatechart::entered, [&]()
 	{
+		QCoreApplication::processEvents();
+
 		qCDebug(log).noquote() << ctrl_section->toString() << "Inquiry started.";
 	});
 	connect(

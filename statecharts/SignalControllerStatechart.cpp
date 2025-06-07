@@ -498,6 +498,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Init'. */
 			timerService->setTimer(shared_from_this(), 0, (static_cast<sc::time> (SignalControllerStatechart::timeout)), false);
+			emit entered();
 			ifaceOperationCallback->inc();
 		}
 

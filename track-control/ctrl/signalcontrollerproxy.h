@@ -35,9 +35,9 @@ namespace mrw::ctrl
 	private:
 		mrw::statechart::QtStatechart<mrw::statechart::SignalControllerStatechart>   statechart;
 
-		MainProxy                                    statechart_main;
-		DistantProxy                                 statechart_distant;
-		ShuntProxy                                   statechart_shunt;
+		MainProxy                      statechart_main;
+		DistantProxy                   statechart_distant;
+		ShuntProxy                     statechart_shunt;
 
 		const bool                     direction  = true;
 		bool                           is_tour    = false;

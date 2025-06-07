@@ -251,6 +251,12 @@ namespace mrw
 		}
 
 
+		bool mrw::statechart::SignalControllerStatechart::isRaisedEntered() noexcept
+		{
+			return entered_raised;
+		}
+
+
 		bool mrw::statechart::SignalControllerStatechart::isRaisedStarted() noexcept
 		{
 			return started_raised;
@@ -535,6 +541,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Init'. */
 			timerService->setTimer(this, 0, (static_cast<sc::time> (SignalControllerStatechart::timeout)), false);
+			entered_raised = true;
 			ifaceOperationCallback->inc();
 		}
 
@@ -2822,6 +2829,7 @@ namespace mrw
 			turnMain_raised = false;
 			turnDistant_raised = false;
 			turnShunt_raised = false;
+			entered_raised = false;
 			started_raised = false;
 			cleared_raised = false;
 		}

@@ -30,7 +30,7 @@ class RegionForm : public QWidget
 	Q_OBJECT
 
 private:
-	mrw::model::Region             *             form_region;
+	mrw::model::Region * form_region;
 
 public:
 	explicit RegionForm(mrw::model::Region * region, QWidget * parent = nullptr);

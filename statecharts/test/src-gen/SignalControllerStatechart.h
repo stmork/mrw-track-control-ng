@@ -174,6 +174,8 @@ namespace mrw
 			void raiseCompletedDistant();
 			/*! Raises the in event 'completedShunt' of default interface scope. */
 			void raiseCompletedShunt();
+			/*! Check if event 'entered' of default interface scope is raised. */
+			bool isRaisedEntered() noexcept;
 			/*! Check if event 'started' of default interface scope is raised. */
 			bool isRaisedStarted() noexcept;
 			/*! Check if event 'cleared' of default interface scope is raised. */
@@ -522,6 +524,9 @@ namespace mrw
 
 			/*! Indicates event 'completedShunt' of default interface scope is active. */
 			bool completedShunt_raised {false};
+
+			/*! Indicates event 'entered' of default interface scope is active. */
+			bool entered_raised {false};
 
 			/*! Indicates event 'started' of default interface scope is active. */
 			bool started_raised {false};

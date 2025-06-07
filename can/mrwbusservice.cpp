@@ -5,7 +5,6 @@
 
 #include <chrono>
 
-#include <QCoreApplication>
 #include <QCanBus>
 #include <QCanBusDeviceInfo>
 #include <QThread>
@@ -116,14 +115,6 @@ bool MrwBusService::write(const MrwMessage & message) noexcept
 
 	if (can_device != nullptr)
 	{
-		if ((can_device->framesAvailable() > 0) ||
-			(can_device->framesToWrite() > 0))
-		{
-			qCDebug(log, "Process events...");
-
-			QCoreApplication::processEvents();
-		}
-
 		if (can_device->writeFrame(message))
 		{
 			return true;

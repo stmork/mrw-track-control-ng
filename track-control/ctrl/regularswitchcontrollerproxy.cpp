@@ -3,6 +3,9 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
+#include <QCoreApplication>
+#include <QThread>
+
 #include <model/region.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/controllerregistry.h>
@@ -61,6 +64,8 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 	connect(
 		&statechart, &SwitchStatechart::entered, [&]()
 	{
+		QCoreApplication::processEvents();
+
 		qCDebug(log).noquote() << part->toString() << "Inquiry started.";
 	});
 	connect(

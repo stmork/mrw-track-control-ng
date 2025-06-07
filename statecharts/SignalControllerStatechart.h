@@ -284,6 +284,9 @@ namespace mrw
 			/*! Signal representing the out event 'turnShunt' that is defined in the default interface scope. */
 			void turnShunt(sc::integer value);
 
+			/*! Signal representing the out event 'entered' that is defined in the default interface scope. */
+			void entered();
+
 			/*! Signal representing the out event 'started' that is defined in the default interface scope. */
 			void started();
 

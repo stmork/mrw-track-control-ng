@@ -3,6 +3,9 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
 //
 
+#include <QCoreApplication>
+#include <QThread>
+
 #include <model/region.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
 #include <ctrl/controllerregistry.h>
@@ -62,6 +65,8 @@ DoubleCrossSwitchControllerProxy::DoubleCrossSwitchControllerProxy(
 	connect(
 		&statechart, &SwitchStatechart::entered, [&]()
 	{
+		QCoreApplication::processEvents();
+
 		qCDebug(log).noquote() << part->toString() << "Inquiry started.";
 	});
 	connect(
