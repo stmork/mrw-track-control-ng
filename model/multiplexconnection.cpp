@@ -24,6 +24,7 @@ MultiplexConnection::MultiplexConnection(
 {
 	const QDomNodeList & child_nodes = element.childNodes();
 
+	simple_lights.reserve(child_nodes.count());
 	for (int n = 0; n < child_nodes.count(); ++n)
 	{
 		const QDomNode & node = child_nodes.at(n);

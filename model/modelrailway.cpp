@@ -47,6 +47,9 @@ void ModelRailway::create()
 	const QDomNodeList & child_nodes = model.childNodes();
 
 	name = model.attribute("name");
+
+	controllers.reserve(child_nodes.count());
+	regions.reserve(child_nodes.count());
 	for (int n = 0; n < child_nodes.count(); ++n)
 	{
 		const QDomNode & node = child_nodes.at(n);

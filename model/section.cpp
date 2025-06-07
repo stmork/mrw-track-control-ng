@@ -63,6 +63,7 @@ Section::Section(
 {
 	const QDomNodeList & child_nodes = element.childNodes();
 
+	assembly_parts.reserve(child_nodes.count());
 	for (int n = 0; n < child_nodes.count(); ++n)
 	{
 		const QDomNode & node = child_nodes.at(n);
@@ -136,10 +137,13 @@ Section::Section(
 	section_module = resolve(ModelRailway::string(element, "modul").toStdString());
 	model->add(this);
 
+	forward_signals.reserve(3);
 	parts<Signal>(forward_signals, [&](const Signal * signal)
 	{
 		return signal->direction();
 	});
+
+	backward_signals.reserve(3);
 	parts<Signal>(backward_signals, [&](const Signal * signal)
 	{
 		return !signal->direction();
