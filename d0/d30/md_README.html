@@ -129,7 +129,18 @@ deb [signed-by=/etc/apt/trusted.gpg.d/mrw.gpg] <a href="http://eisenbahnsteuerun
 <div class="line">    -DQT_HOST_PATH_CMAKE_DIR=/usr/lib/x86_64-linux-gnu/cmake \</div>
 <div class="line">    -DCMAKE_TOOLCHAIN_FILE=&lt;fq-path-to-toolchain-file&gt; </div>
 <div class="line">cmake --build --parallel</div>
-</div><!-- fragment --><h2>Starting the application</h2>
+</div><!-- fragment --><h2>macOS</h2>
+<p>If you want to compile on Apple macOS you have to install MacPorts and Qt for macOS.</p>
+<h3>Qt for macOS</h3>
+<p>Qt provides a net installer for the community edition. You must have a valid Qt account to download and install the Qt components. Do not forget to install the additional libraries for</p><ul>
+<li>Serial buas</li>
+<li>Serial ports</li>
+</ul>
+<h3>MacPorts</h3>
+<p>Since there are some more components to use I recommend to install them using the MacPorts framework. After installing MacPorts you can install the necessary packages using the following commands: </p><div class="fragment"><div class="line">sudo port install cmake doxygen dot astyle</div>
+</div><!-- fragment --><h3>Build for macOS</h3>
+<p>After setting the environment variable <em>Qt6_DIR</em> you can compile using the <em>cmake</em> option above.</p>
+<h2>Starting the application</h2>
 <p>To start the track control software refer to the README of the MRW-TrackControl application. It additionally contains information about configuring the CAN bus and prepare the EGL on Raspberry Pi mini computers.</p>
 <h1>Software packages and namespaces</h1>
 <p>The software is organized in packages each using its own namespace. Every package result in a static library. There are the following packages:</p><ul>
@@ -164,7 +175,7 @@ deb [signed-by=/etc/apt/trusted.gpg.d/mrw.gpg] <a href="http://eisenbahnsteuerun
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 27 2025 14:19:06 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Fri Jun 27 2025 14:28:23 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>
