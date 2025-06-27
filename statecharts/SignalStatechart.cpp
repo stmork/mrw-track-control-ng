@@ -78,7 +78,7 @@ namespace mrw
 			{
 			case mrw::statechart::SignalStatechart::Event::turn:
 				{
-					std::unique_ptr<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>> e = cast_event_pointer_type<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer> >(std::move(event));
+					std::unique_ptr<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>> e = cast_event_pointer_type<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer> > (std::move(event));
 
 					if (e != 0)
 					{

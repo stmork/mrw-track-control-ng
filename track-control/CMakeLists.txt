@@ -25,6 +25,10 @@ option(X11_SCREEN_SAVER "Use X11 screen blanking." ON)
 option(DRM_SCREEN_SAVER "Use DRM screen blanking." OFF)
 option(QT_SCREEN_SAVER "Use Qt screen blanking." OFF)
 
+if (LINUX)
+	add_compile_definitions(USE_SYSTEMD)
+endif()
+
 if (X11_SCREEN_SAVER AND X11_FOUND AND XEXT_FOUND)
 	message (STATUS "Using X11 screen saver.")
 	add_compile_definitions(X11_SCREEN_SAVER)
@@ -103,8 +107,11 @@ target_include_directories(${PROJECT_NAME} PRIVATE ..)
 target_link_libraries(${PROJECT_NAME} PRIVATE
 	MRW-UI MRW-Ctrl MRW-Model MRW-Can MRW-Statecharts MRW-Log MRW-Util
 	Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Network Qt6::SerialBus Qt6::Xml
-	systemd
 )
+
+if (LINUX)
+	target_link_libraries(${PROJECT_NAME} PRIVATE systemd)
+endif()
 
 if (X11_SCREEN_SAVER AND X11_FOUND AND XEXT_FOUND)
 	target_link_libraries(${PROJECT_NAME} PRIVATE X11 Xext)

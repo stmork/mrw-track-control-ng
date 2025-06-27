@@ -4,12 +4,14 @@
 //
 
 #include "settings.h"
+#include "log.h"
 
 using namespace mrw::util;
 
 Settings::Settings(const QString & app_name, QObject * parent) :
-	QSettings("mrw", app_name, parent)
+	QSettings(QSettings::IniFormat, QSettings::UserScope, "mrw", app_name, parent)
 {
+	qCDebug(log) << fileName() << defaultFormat() << format();
 }
 
 SettingsGroup::SettingsGroup(QSettings * settings, const QString & prefix) :

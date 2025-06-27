@@ -8,7 +8,9 @@
 #include <QSettings>
 #include <QDebug>
 
+#ifdef USE_SYSTEMD
 #include <systemd/sd-daemon.h>
+#endif
 
 #include <util/method.h>
 #include <util/settings.h>
@@ -72,7 +74,9 @@ int main(int argc, char * argv[])
 			qCInfo(mrw::tools::log).noquote() << "CAN plugin:" << repo.plugin();
 			qCInfo(mrw::tools::log).noquote() << "CAN iface: " << repo.interface();
 			qCInfo(mrw::tools::log, "==========================================================");
+#ifdef USE_SYSTEMD
 			sd_notify(0, "READY=1");
+#endif
 			return app.exec();
 		}
 		catch (const std::exception & exception)

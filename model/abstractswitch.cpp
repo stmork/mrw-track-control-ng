@@ -74,8 +74,10 @@ RegularSwitch * AbstractSwitch::follow(
 
 	while ((rail != nullptr) && (rail->region() == region()) && (count++ < MAX_FOLLOW_RAIL))
 	{
+		const std::set<RailInfo> & neighbours = rail->advance(dir);
+
 		last = part;
-		part = *rail->advance(dir).begin();
+		part = neighbours.empty() ? (RailPart *)nullptr : *neighbours.begin();
 		rail = dynamic_cast<Rail *>(part);
 	}
 	RegularSwitch * candidate = dynamic_cast<RegularSwitch *>(part);

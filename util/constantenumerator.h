@@ -87,7 +87,7 @@ namespace mrw::util
 		 * @return The QString representation of the symbolic value.
 		 */
 		[[nodiscard]]
-		constexpr QString get(const T key) const noexcept
+		QString get(const T key) const noexcept
 		{
 			const auto it = std::unordered_map<T, QString>::find(key);
 

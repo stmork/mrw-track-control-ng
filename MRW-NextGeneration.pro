@@ -90,7 +90,7 @@ cppcheck.commands = cppcheck -I$$[QT_INSTALL_HEADERS]\
 	--suppress=duplicateBreak:statecharts/*.cpp\
 	--suppress=redundantAssignment:statecharts/*.cpp\
 	--enable=style,warning,performance,portability\
-	--language=c++ --std=c++14\
+	--language=c++ --std=c++20\
 	--library=qt\
 	--xml-version=2 --force -q -j `nproc`\
 	*/*.cpp */*.h\

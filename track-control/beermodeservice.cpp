@@ -196,6 +196,8 @@ void BeerModeService::dump(const std::vector<Rail *> & rails) const noexcept
 QString BeerModeService::dump(const Rail * rail) const noexcept
 {
 	const Section * section = rail->section();
+	const QString & section_descr(*section);
+	const QString & rail_descr(*rail);
 
-	return section->region()->name() + "/" + *section + "/" + *rail;
+	return section->region()->name() + "/" + section_descr + "/" + rail_descr;
 }

@@ -7,7 +7,10 @@
 #include <chrono>
 
 #include <unistd.h>
+
+#ifdef USE_SYSTEMD
 #include <systemd/sd-daemon.h>
+#endif
 
 #include <QScreen>
 #include <QMouseEvent>
@@ -837,7 +840,9 @@ void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Po
 
 void MainWindow::keepAlive()
 {
+#ifdef USE_SYSTEMD
 	sd_notify (0, "WATCHDOG=1");
+#endif
 }
 
 /*************************************************************************

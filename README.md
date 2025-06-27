@@ -87,6 +87,37 @@ cmake -B build -DQT_HOST_PATH=/ \
 cmake --build --parallel
 ```
 
+### macOS
+If you want to compile on Apple macOS you have to install Xcode, MacPorts
+and Qt for macOS.
+
+#### Xcode
+Simply install Xcode using the macOS preinstalled App Store.
+
+#### MacPorts
+Since there are some more components to use I recommend to
+[install](https://www.macports.org/install.php) them using the MacPorts
+framework. After installing MacPorts you can install the necessary packages
+using the following commands:
+```
+sudo port install cmake gtest doxygen dot astyle
+```
+
+#### Qt for macOS
+Qt provides a net installer for the community edition. You must have a valid
+Qt account to download and
+[install](https://doc.qt.io/qt-6/de/qt-online-installation.html) the Qt
+components. Do not forget to install the additional libraries (hidden under
+the Qt version to install) for
+- Qt Serial Bus
+- Qt Serial Port
+
+#### Build for macOS
+By Default Qt ist installed into a subdirectory of your home directory. Then
+set the *Qt6_DIR* Variable to o$HOME/Qt/<Qt-Version>/macos. After setting
+the environment variable *Qt6_DIR* you can compile using the *cmake* option
+above.
+
 ### Starting the application
 To start the track control software refer to the
 [README](./track-control/README.md) of the MRW-TrackControl application. It

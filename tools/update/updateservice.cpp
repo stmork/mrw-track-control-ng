@@ -71,7 +71,10 @@ void UpdateService::read(const QString & filename)
 				}
 				else
 				{
-					throw std::invalid_argument("Address out of range: " + hex_line.getAddress());
+					std::string msg("Address out of range: ");
+
+					msg += hex_line.getAddress();
+					throw std::invalid_argument(msg);
 				}
 			}
 		}
