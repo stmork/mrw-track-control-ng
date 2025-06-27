@@ -115,7 +115,6 @@ namespace mrw::model
 		 * @return True if the state may be changed depending on a set
 		 * LockState::LOCKED.
 		 */
-		[[nodiscard]]
 		bool setState(
 			const RailPart * prev,
 			const RailPart * succ) override;

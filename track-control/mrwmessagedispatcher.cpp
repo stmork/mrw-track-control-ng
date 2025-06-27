@@ -3,6 +3,8 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
+#include <QCoreApplication>
+
 #include <util/method.h>
 #include <ctrl/controllerregistry.h>
 
@@ -23,6 +25,11 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 	model(model_railway)
 {
 	__METHOD__;
+
+	if (can_device == nullptr)
+	{
+		QCoreApplication::exit(EXIT_FAILURE);
+	}
 
 	ControllerRegistry::instance().registerService(this);
 }

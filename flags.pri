@@ -3,7 +3,7 @@
 #  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 #
 
-CONFIG          += c++17
+CONFIG          += c++20
 CONFIG          += link_pkgconfig
 
 QMAKE_CXXFLAGS  += -Wextra -pedantic -Werror

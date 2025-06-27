@@ -94,7 +94,7 @@ namespace mrw
 			{
 			case mrw::statechart::SectionStatechart::Event::enable:
 				{
-					std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> >(std::move(event));
+					std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> > (std::move(event));
 
 					if (e != 0)
 					{
@@ -126,7 +126,7 @@ namespace mrw
 				}
 			case mrw::statechart::SectionStatechart::Event::stateResponse:
 				{
-					std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> >(std::move(event));
+					std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> > (std::move(event));
 
 					if (e != 0)
 					{

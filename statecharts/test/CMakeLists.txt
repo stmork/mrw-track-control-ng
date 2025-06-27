@@ -9,6 +9,8 @@ project(MRW-Test-Statecharts VERSION 2.2
 	DESCRIPTION "MRW statechart tests"
 	LANGUAGES CXX)
 
+add_compile_options(-Wno-unused-parameter)
+
 find_package(GTest REQUIRED)
 
 set(SOURCES

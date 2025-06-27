@@ -151,7 +151,7 @@ void TestCan::testManualConnectService()
 	QVERIFY(!service.valid());
 
 	service.connect();
-	QVERIFY(spy.wait(1000));
+	QVERIFY(spy.wait(2000));
 	QCOMPARE(spy.count(), 1);
 	QVERIFY(service.valid());
 

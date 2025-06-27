@@ -9,6 +9,8 @@ project(MRW-Statecharts VERSION 2.2
 	DESCRIPTION "MRW statechart library"
 	LANGUAGES CXX)
 
+add_compile_options(-Wno-unused-parameter)
+
 add_subdirectory(test)
 
 add_library(${PROJECT_NAME} STATIC)

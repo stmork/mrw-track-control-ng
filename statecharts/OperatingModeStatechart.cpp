@@ -130,7 +130,7 @@ namespace mrw
 				}
 			case mrw::statechart::OperatingModeStatechart::Event::manual:
 				{
-					std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool> >(std::move(event));
+					std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool> > (std::move(event));
 
 					if (e != 0)
 					{

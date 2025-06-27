@@ -104,6 +104,8 @@ void ScreenBlankHandler::autoBlank(bool auto_blank_active)
 	{
 		qCDebug(log, "No X11 screen saver!");
 	}
+#else
+	(void)auto_blank_active;
 #endif
 }
 
