@@ -93,15 +93,17 @@ bool Controller::valid() const noexcept
 		ports += module->ports();
 	}
 
-	if (!std::all_of(connections.begin(), connections.end(), [](MultiplexConnection * conn)
-{
-	return (conn != nullptr) && conn->valid();
-	}))
+	if (!std::all_of(connections.begin(), connections.end(), &MultiplexConnection::isValid))
 	{
 		return false;
 	}
 
 	return ports <= MAX_PORTS;
+}
+
+bool Controller::isValid(const Controller * controller) noexcept
+{
+	return (controller != nullptr) && (controller->valid());
 }
 
 void Controller::configure(std::vector<MrwMessage> & messages) const

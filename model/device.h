@@ -149,6 +149,16 @@ namespace mrw::model
 		 */
 		static QString get(const LockState & state) noexcept;
 
+		/**
+		 * This static method checks whether a given Device is connected to a
+		 * Controller instance. The method checks if the input is a valid
+		 * pointer.
+		 *
+		 * @param device The non nullptr Device instance
+		 * @return True if the Device is connected to a Controller.
+		 */
+		static bool hasController(const Device * device) noexcept;
+
 	private:
 		LockState                lock_state = LockState::UNLOCKED;
 

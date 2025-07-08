@@ -34,7 +34,7 @@ Route::Route(
 
 		if (back.size() == 1)
 		{
-			RailPart * part = *back.begin();
+			RailPart * part = *back.begin(); // always valid since size == 1
 			Rail   *   rail = dynamic_cast<Rail *>(part);
 
 			if ((rail == nullptr) || (part->section() != first_section))
@@ -274,6 +274,7 @@ bool Route::prepare()
 	const bool last_on = isLastSectionEnded();
 	const auto it      = sections.rbegin();
 
+	assert (!sections.empty());
 	last_section = last_on ? nullptr : *it;
 	dump();
 	return true;

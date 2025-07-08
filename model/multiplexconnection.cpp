@@ -68,6 +68,11 @@ bool MultiplexConnection::valid() const
 	return pins <= MAX_PINS;
 }
 
+bool MultiplexConnection::isValid(const MultiplexConnection * conn) noexcept
+{
+	return (conn != nullptr) && (conn->valid());
+}
+
 const std::vector<Light *> & MultiplexConnection::lights() const
 {
 	return simple_lights;

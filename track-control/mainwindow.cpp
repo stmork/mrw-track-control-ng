@@ -458,7 +458,7 @@ Section * MainWindow::manualSection()
 		}
 	});
 
-	return sections.size() == 1 ? *sections.begin() : nullptr;
+	return sections.size() == 1 ? *sections.begin() : nullptr; // always valid since size == 1
 }
 
 void MainWindow::warn(const QString & message)

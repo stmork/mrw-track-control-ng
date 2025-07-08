@@ -71,6 +71,15 @@ namespace mrw::model
 		 */
 		bool valid() const;
 
+		/**
+		 * This static method checks whether a given MultiplexConnection is a
+		 * valid instance. The method checks if the input is a valid pointer.
+		 *
+		 * @param conn The non nullptr MultiplexConnection instance
+		 * @return True if the MultiplexConnection is valid.
+		 */
+		static bool isValid(const MultiplexConnection * conn) noexcept;
+
 		const std::vector<Light *> & lights() const;
 
 	private:

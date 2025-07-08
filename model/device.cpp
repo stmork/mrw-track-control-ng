@@ -75,3 +75,8 @@ QString Device::get(const Device::LockState & state) noexcept
 {
 	return lock_map.get(state);
 }
+
+bool Device::hasController(const Device * device) noexcept
+{
+	return (device != nullptr) && (device->controller() != nullptr);
+}

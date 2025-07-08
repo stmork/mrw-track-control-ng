@@ -149,7 +149,7 @@ Rail * BeerModeService::isNeighbourOccupied(const Rail * rail, const bool dir) n
 
 	if (neighbours.size() == 1)
 	{
-		RailPart * part = *neighbours.begin();
+		RailPart * part = *neighbours.begin(); // always valid since size == 1
 
 		if (part->section()->occupation())
 		{

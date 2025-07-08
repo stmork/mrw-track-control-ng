@@ -117,6 +117,15 @@ namespace mrw::model
 		bool valid() const noexcept;
 
 		/**
+		 * This static method checks whether a given Controller is a valid
+		 * instance. The method checks if the input is a valid pointer.
+		 *
+		 * @param controller The non nullptr Controller instance
+		 * @return True if the Controller is valid.
+		 */
+		static bool isValid(const Controller * controller) noexcept;
+
+		/**
 		 * This method collects all configuration messages which describes
 		 * the connected Device instances of this Controller.
 		 *
