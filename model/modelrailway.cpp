@@ -233,10 +233,12 @@ void ModelRailway::error(const QString & message)
 
 bool ModelRailway::valid() const
 {
-	const bool ok = std::all_of(controllers.begin(), controllers.end(), [] (Controller * controller)
+	auto is_valid = [] (Controller * controller) -> bool
 	{
 		return controller->valid();
-	});
+	};
+
+	const bool ok = std::all_of(controllers.begin(), controllers.end(), is_valid);
 
 	return ok && (model_statistics.errors == 0);
 }

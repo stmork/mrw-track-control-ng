@@ -93,10 +93,12 @@ bool Controller::valid() const noexcept
 		ports += module->ports();
 	}
 
-	if (!std::all_of(connections.begin(), connections.end(), [](MultiplexConnection * conn)
-{
-	return (conn != nullptr) && conn->valid();
-	}))
+	auto is_valid = [] (MultiplexConnection * conn) -> bool
+	{
+		return (conn != nullptr) && conn->valid();
+	};
+
+	if (!std::all_of(connections.begin(), connections.end(), is_valid))
 	{
 		return false;
 	}

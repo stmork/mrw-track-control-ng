@@ -43,11 +43,14 @@ LightModule::LightModule(
 
 bool LightModule::valid() const
 {
-	return std::all_of(profile_lights.begin(), profile_lights.end(),
-			[] (const Light * light)
+	auto has_controller = [] (const Light * light) -> bool
 	{
 		return light->controller() != nullptr;
-	}) && (profile_lights.size() <= MAX_LIGHTS);
+	};
+
+	return std::all_of(
+			profile_lights.begin(), profile_lights.end(),
+			has_controller) && (profile_lights.size() <= MAX_LIGHTS);
 }
 
 const std::vector<ProfileLight *> & LightModule::lights() const
