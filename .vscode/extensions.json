@@ -4,6 +4,8 @@
       "ms-vscode.cpptools-extension-pack",
       "bierner.markdown-mermaid",
       "bpruitt-goddard.mermaid-markdown-syntax-highlighting",
+      "mhutchie.git-graph",
+      "eamodio.gitlens",
       "ms-azuretools.vscode-docker",
       "ms-vscode.cmake-tools",
       "ivory-lab.jenkinsfile-support",

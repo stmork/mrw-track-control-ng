@@ -10,7 +10,7 @@ project(MRW-NextGeneration VERSION 2.2
     LANGUAGES CXX)
 
 find_package(QT NAMES Qt6)
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Network SerialBus Xml Test)
+find_package(Qt6 REQUIRED COMPONENTS Core SerialBus)
 find_package(PkgConfig REQUIRED)
 find_package(Doxygen REQUIRED COMPONENTS dot)
 

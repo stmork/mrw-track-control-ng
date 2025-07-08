@@ -9,6 +9,8 @@ project(MRW-Model VERSION 2.2
 	DESCRIPTION "MRW component model library"
 	LANGUAGES CXX)
 
+find_package(Qt6 REQUIRED COMPONENTS Xml)
+
 add_compile_options(-Wsuggest-override)
 
 add_library(${PROJECT_NAME} STATIC)
@@ -73,4 +75,4 @@ set(HEADERS
 
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES} ${HEADERS})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Core Qt6::Xml Qt6::SerialBus)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::SerialBus Qt6::Xml)
