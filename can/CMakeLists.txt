@@ -31,4 +31,4 @@ set(HEADERS
 
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES} ${HEADERS})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Network Qt6::SerialBus)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::SerialBus)

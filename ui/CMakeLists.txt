@@ -9,6 +9,8 @@ project(MRW-UI VERSION 2.2
 	DESCRIPTION "MRW MVC user interface library"
 	LANGUAGES CXX)
 
+find_package(Qt6 REQUIRED COMPONENTS Widgets Xml)
+
 add_compile_options(-Wsuggest-override)
 
 add_library(${PROJECT_NAME} STATIC)
@@ -45,4 +47,4 @@ set(HEADERS
 
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES} ${HEADERS})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Core Qt6::Widgets Qt6::SerialBus Qt6::Xml)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets Qt6::SerialBus Qt6::Xml)

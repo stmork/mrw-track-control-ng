@@ -9,6 +9,8 @@ project(MRW-WidgetStudy VERSION 2.2
 	DESCRIPTION "MRW widget study application"
 	LANGUAGES CXX)
 
+find_package(Qt6 REQUIRED COMPONENTS Gui Widgets Xml)
+
 add_compile_options(-Wsuggest-override)
 
 set(SOURCES
@@ -47,5 +49,5 @@ target_include_directories(${PROJECT_NAME} PRIVATE ..)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
    MRW-UI MRW-Ctrl MRW-CtrlMock MRW-Model MRW-Can MRW-Util
-   Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Network Qt6::SerialBus Qt6::Xml
+   Qt6::Widgets Qt6::SerialBus Qt6::Xml
 )

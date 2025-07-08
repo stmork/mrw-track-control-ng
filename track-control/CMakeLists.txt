@@ -10,6 +10,7 @@ project(MRW-TrackControl VERSION 2.2
 	LANGUAGES CXX)
 
 find_package(X11 OPTIONAL_COMPONENTS X11 Xext)
+find_package(Qt6 REQUIRED COMPONENTS Gui Widgets Xml)
 pkg_check_modules(libdrm IMPORTED_TARGET libdrm)
 
 foreach(INC_DIR IN LISTS Qt6Gui_PRIVATE_INCLUDE_DIRS)
@@ -106,7 +107,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ..)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
 	MRW-UI MRW-Ctrl MRW-Model MRW-Can MRW-Statecharts MRW-Log MRW-Util
-	Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Network Qt6::SerialBus Qt6::Xml
+	Qt6::Widgets Qt6::SerialBus Qt6::Xml
 )
 
 if (LINUX)
