@@ -258,6 +258,8 @@ bool Route::prepare()
 			prev = act;
 		}
 
+		assert (act != nullptr);
+
 		// Set track mode.
 		if (act->isFree())
 		{
