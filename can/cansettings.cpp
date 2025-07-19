@@ -10,7 +10,8 @@
 using namespace mrw::util;
 using namespace mrw::can;
 
-CanSettings::CanSettings() : hostname(QHostInfo::localHostName())
+CanSettings::CanSettings() :
+	hostname(QHostInfo::localHostName().split(".").at(0).toLower())
 {
 	SettingsGroup group (this, hostname);
 
