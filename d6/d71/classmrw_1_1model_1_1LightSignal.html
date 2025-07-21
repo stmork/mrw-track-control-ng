@@ -307,6 +307,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ae13d306d9ae0cc37ef69861f44fb58da" id="r_ae13d306d9ae0cc37ef69861f44fb58da"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#ae13d306d9ae0cc37ef69861f44fb58da">get</a> (const <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4">LockState</a> &amp;state) noexcept</td></tr>
 <tr class="memdesc:ae13d306d9ae0cc37ef69861f44fb58da"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the clear text QString of the <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4" title="This enumeration represents the processing state of this Device.">LockState</a> this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> is set to.  <br /></td></tr>
 <tr class="separator:ae13d306d9ae0cc37ef69861f44fb58da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1571a81a0f14ce06a49e24cdc85e42f8" id="r_a1571a81a0f14ce06a49e24cdc85e42f8"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a1571a81a0f14ce06a49e24cdc85e42f8">hasController</a> (const <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html">Device</a> *device) noexcept</td></tr>
+<tr class="memdesc:a1571a81a0f14ce06a49e24cdc85e42f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static method checks whether a given <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> is connected to a <a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html" title="This class represents a CAN-Node named as Controller here.">Controller</a> instance.  <br /></td></tr>
+<tr class="separator:a1571a81a0f14ce06a49e24cdc85e42f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -1063,6 +1066,41 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The QString clear text of the given <a class="el" href="../../db/d9c/classmrw_1_1model_1_1Signal.html#a6d51b86199063962daedf9c4b861bc85" title="The strategic Symbol of that Signal instance to display/show.">Symbol</a> enumeration. </dd></dl>
+
+</div>
+</div>
+<a id="a1571a81a0f14ce06a49e24cdc85e42f8" name="a1571a81a0f14ce06a49e24cdc85e42f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1571a81a0f14ce06a49e24cdc85e42f8">&#9670;&#160;</a></span>hasController()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Device::hasController </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html">Device</a> *</td>          <td class="paramname"><span class="paramname"><em>device</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span><span class="mlabel inherited">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This static method checks whether a given <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> is connected to a <a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html" title="This class represents a CAN-Node named as Controller here.">Controller</a> instance. </p>
+<p>The method checks if the input is a valid pointer.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">device</td><td>The non nullptr <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> instance </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> is connected to a <a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html" title="This class represents a CAN-Node named as Controller here.">Controller</a>. </dd></dl>
 
 </div>
 </div>
@@ -2862,7 +2900,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 21 2025 11:55:37 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Mon Jul 21 2025 13:45:02 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>

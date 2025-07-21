@@ -92,6 +92,7 @@ $(function(){ initResizable(false); });
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="../../d5/d22/classmrw_1_1model_1_1MultiplexConnection-members.html">List of all members</a>  </div>
@@ -118,6 +119,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a98e014de6cf97041fbbc56890279452c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad1e820a26d295704a7ace00175d7880" id="r_aad1e820a26d295704a7ace00175d7880"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="../../d0/d3c/classmrw_1_1model_1_1Light.html">Light</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad1e820a26d295704a7ace00175d7880">lights</a> () const</td></tr>
 <tr class="separator:aad1e820a26d295704a7ace00175d7880"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a6999a3698c6d99002397e68aa2e5cb17" id="r_a6999a3698c6d99002397e68aa2e5cb17"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6999a3698c6d99002397e68aa2e5cb17">isValid</a> (const <a class="el" href="../../dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html">MultiplexConnection</a> *conn) noexcept</td></tr>
+<tr class="memdesc:a6999a3698c6d99002397e68aa2e5cb17"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static method checks whether a given <a class="el" href="../../dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html" title="This class represents a serial multiplex connection module.">MultiplexConnection</a> is a valid instance.  <br /></td></tr>
+<tr class="separator:a6999a3698c6d99002397e68aa2e5cb17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -229,6 +236,41 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a6999a3698c6d99002397e68aa2e5cb17" name="a6999a3698c6d99002397e68aa2e5cb17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6999a3698c6d99002397e68aa2e5cb17">&#9670;&#160;</a></span>isValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MultiplexConnection::isValid </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html">MultiplexConnection</a> *</td>          <td class="paramname"><span class="paramname"><em>conn</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This static method checks whether a given <a class="el" href="../../dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html" title="This class represents a serial multiplex connection module.">MultiplexConnection</a> is a valid instance. </p>
+<p>The method checks if the input is a valid pointer.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">conn</td><td>The non nullptr <a class="el" href="../../dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html" title="This class represents a serial multiplex connection module.">MultiplexConnection</a> instance </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the <a class="el" href="../../dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html" title="This class represents a serial multiplex connection module.">MultiplexConnection</a> is valid. </dd></dl>
+
+</div>
+</div>
 <a id="aad1e820a26d295704a7ace00175d7880" name="aad1e820a26d295704a7ace00175d7880"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aad1e820a26d295704a7ace00175d7880">&#9670;&#160;</a></span>lights()</h2>
 
@@ -318,7 +360,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 21 2025 11:55:37 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Mon Jul 21 2025 13:45:02 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>
