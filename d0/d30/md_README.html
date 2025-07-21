@@ -130,16 +130,18 @@ deb [signed-by=/etc/apt/trusted.gpg.d/mrw.gpg] <a href="http://eisenbahnsteuerun
 <div class="line">    -DCMAKE_TOOLCHAIN_FILE=&lt;fq-path-to-toolchain-file&gt; </div>
 <div class="line">cmake --build --parallel</div>
 </div><!-- fragment --><h2>macOS</h2>
-<p>If you want to compile on Apple macOS you have to install MacPorts and Qt for macOS.</p>
-<h3>Qt for macOS</h3>
-<p>Qt provides a net installer for the community edition. You must have a valid Qt account to download and install the Qt components. Do not forget to install the additional libraries (hidden under the Qt version to install) for</p><ul>
+<p>If you want to compile on Apple macOS you have to install Xcode, MacPorts and Qt for macOS.</p>
+<h3>Xcode</h3>
+<p>Simply install Xcode using the macOS preinstalled App Store.</p>
+<h3>MacPorts</h3>
+<p>Since there are some more components to use I recommend to <a href="https://www.macports.org/install.php">install</a> them using the MacPorts framework. After installing MacPorts you can install the necessary packages using the following commands: </p><div class="fragment"><div class="line">sudo port install cmake gtest doxygen dot astyle</div>
+</div><!-- fragment --><h3>Qt for macOS</h3>
+<p>Qt provides a net installer for the community edition. You must have a valid Qt account to download and <a href="https://doc.qt.io/qt-6/de/qt-online-installation.html">install</a> the Qt components. Do not forget to install the additional libraries (hidden under the Qt version to install) for</p><ul>
 <li>Qt Serial Bus</li>
 <li>Qt Serial Port</li>
 </ul>
-<h3>MacPorts</h3>
-<p>Since there are some more components to use I recommend to install them using the MacPorts framework. After installing MacPorts you can install the necessary packages using the following commands: </p><div class="fragment"><div class="line">sudo port install cmake gtest doxygen dot astyle</div>
-</div><!-- fragment --><h3>Build for macOS</h3>
-<p>After setting the environment variable <em>Qt6_DIR</em> you can compile using the <em>cmake</em> option above.</p>
+<h3>Build for macOS</h3>
+<p>By Default Qt ist installed into a subdirectory of your home directory. Then set the <em>Qt6_DIR</em> Variable to o$HOME/Qt/&lt;Qt-Version&gt;/macos. After setting the environment variable <em>Qt6_DIR</em> you can compile using the <em>cmake</em> option above.</p>
 <h2>Starting the application</h2>
 <p>To start the track control software refer to the README of the MRW-TrackControl application. It additionally contains information about configuring the CAN bus and prepare the EGL on Raspberry Pi mini computers.</p>
 <h1>Software packages and namespaces</h1>
@@ -175,7 +177,7 @@ deb [signed-by=/etc/apt/trusted.gpg.d/mrw.gpg] <a href="http://eisenbahnsteuerun
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jul 19 2025 17:34:14 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Mon Jul 21 2025 11:55:36 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>
