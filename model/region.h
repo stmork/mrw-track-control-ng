@@ -105,7 +105,7 @@ namespace mrw::model
 		 *
 		 * @param result The result vector collecting the AssembyPart elements
 		 * of type T.
-		 * @param guard A labmda to fine select if the type T should added to
+		 * @param guard A lamda to fine select if the type T should added to
 		 * the result vector.
 		 */
 		template <class T> constexpr void parts(

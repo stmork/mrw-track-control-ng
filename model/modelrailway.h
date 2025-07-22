@@ -24,17 +24,17 @@
 /**
  * The mrw::model namespace contains all data/model classes for describing a
  * complete model railway. It describes all model elements such as rails,
- * switches and signals as well as the micro controller infrastructure.
+ * switches and signals as well as the microcontroller infrastructure.
  * Additionally it describes how the model railway elements are connected to
- * the micro controller infrastructure.
+ * the microcontroller infrastructure.
  *
  * The main tasks of these namespace classes are to read the description from
  * a .modelrailway file which is in fact a XMI/XML file and then to hold the
- * state during live time.
+ * state during runtime.
  *
  * The root element of the model/data is the ModelRailway class. All sub
- * classes are more or less accessible in a direct manner. A main sub tree
- * are the Controller classes which describe the micro controller
+ * classes are more or less accessible in a direct manner. A main subtree
+ * are the Controller classes which describe the microcontroller
  * infrastructure. The Region class contains all model railway elements. The
  * first layer under the Region class is the Section class which contain all
  * AssemblyPart elements such as RailPart or Signal elements.
@@ -42,7 +42,7 @@
  * In detail the class hierarchy is more complex to describe the behaviour of
  * each element.
  *
- * Some classes are part of the MVC paradigma to to show the state onto the
+ * Some classes are part of the MVC paradigma to show the state onto the
  * track control screen. See the mrw::ctrl and mrw::ui namespaces for more
  * information.
  */
@@ -54,7 +54,7 @@ namespace mrw::model
 	class Region;
 
 	/**
-	 * This structure containts statistics about several device counts.
+	 * This structure contains statistics about various device counts.
 	 */
 	struct MrwStatistic
 	{
@@ -88,7 +88,7 @@ namespace mrw::model
 
 	/**
 	 * This functor class provides a hashing function for Device mapping
-	 * usage. A unique identifier for a Device consists on a Controller id
+	 * usage. A unique identifier for a Device consists of a Controller id
 	 * and a unit number from a Device.
 	 */
 	struct DeviceId : public mrw::can::DeviceKey
@@ -97,7 +97,7 @@ namespace mrw::model
 		virtual ~DeviceId() = default;
 
 		/**
-		 * This contructor is for conveniance to initialize the
+		 * This constructor is for convenience to initialize the
 		 * mrw::can::DeviceKey type. It extracts from the given Device the
 		 * Controller id and the unit number.
 		 *
@@ -163,8 +163,10 @@ namespace mrw::model
 		 */
 		void xml() const;
 
+
 		/**
-		 * This method dumps the parsed information about the model railway.
+		 * This method outputs all information about the parsed model railway
+		 * including controllers, regions, sections, and all assembly parts.
 		 */
 		void info();
 
@@ -211,9 +213,9 @@ namespace mrw::model
 		Device * deviceById(const DeviceId id) const;
 
 		/**
-		 * This method return the amount of containing Controller elements.
+		 * This method return the number of containing Controller elements.
 		 *
-		 * @return The amount of containing Controller elements.
+		 * @return The number of containing Controller elements.
 		 */
 		size_t controllerCount() const;
 
@@ -222,8 +224,8 @@ namespace mrw::model
 		 * but index based and is used for linking the modules after the
 		 * model has loaded into memory.
 		 *
-		 * @param controller_idx The zero based index of the Controller.
-		 * @param module_idx The zero based index of connected Module boards.
+		 * @param controller_idx The zero-based index of the Controller.
+		 * @param module_idx The zero-based index of connected Module boards.
 		 * @return The found Module instance.
 		 *
 		 * @see controller()
@@ -237,8 +239,8 @@ namespace mrw::model
 		 * but index based and is used for linking the connections after the
 		 * model is loaded into memory.
 		 *
-		 * @param controller_idx The zero based index of the Controller.
-		 * @param connection_idx The zero based index of connected
+		 * @param controller_idx The zero-based index of the Controller.
+		 * @param connection_idx The zero-based index of connected
 		 * MultiplexConnection boards.
 		 * @return The found MultiplexConnection instance.
 		 *
@@ -253,15 +255,15 @@ namespace mrw::model
 		 * but index based and is used for linking the Region after the
 		 * model has loaded into memory.
 		 *
-		 * @param index The zero based index of the Region.
+		 * @param index The zero-based index of the Region.
 		 * @return The found Region instance.
 		 */
 		Region * region(const size_t index) const;
 
 		/**
-		 * This method return the amount of containing Region elements.
+		 * This method return the number of containing Region elements.
 		 *
-		 * @return The amount of containing Region elements.
+		 * @return The number of containing Region elements.
 		 */
 		size_t regionCount() const;
 
@@ -270,8 +272,8 @@ namespace mrw::model
 		 * but index based and is used for linking the Section after the
 		 * model has loaded into memory.
 		 *
-		 * @param region_idx The zero based index of the Region.
-		 * @param section_idx The zero based index of the Section.
+		 * @param region_idx The zero-based index of the Region.
+		 * @param section_idx The zero-based index of the Section.
 		 * @return The found Section instance.
 		 *
 		 * @see region()
@@ -285,9 +287,9 @@ namespace mrw::model
 		 * but index based and is used for linking the AssemblyPart after the
 		 * model has loaded into memory.
 		 *
-		 * @param region_idx The zero based index of the Region.
-		 * @param section_idx The zero based index of the Section.
-		 * @param part_idx The zero based index of the AssemblyPart.
+		 * @param region_idx The zero-based index of the Region.
+		 * @param section_idx The zero-based index of the Section.
+		 * @param part_idx The zero-based index of the AssemblyPart.
 		 * @return The found AssemblyPart instance.
 		 *
 		 * @see section()
@@ -328,11 +330,11 @@ namespace mrw::model
 
 		/**
 		 * This template class returns all AssemblyPart elements of the given
-		 * type T. The found elements are stored into the given std::vector.
+		 * type T. The found elements are stored in the provided std::vector.
 		 *
 		 * @param result The result vector collecting the AssembyPart elements
 		 * of type T.
-		 * @param guard A labmda to fine select if the type T should added to
+		 * @param guard A lamda to fine-select if the type T should added to
 		 * the result vector.
 		 */
 		template <class T> void parts(
@@ -358,12 +360,45 @@ namespace mrw::model
 		static unsigned value(const QDomElement & node, const char * attr, const unsigned default_value = 0);
 		static QString  string(const QDomElement & node, const char * attr);
 
+		/**
+		* This method initializes the model structure from the XML document by
+		* parsing all top-level nodes and instantiating Controller and Region
+		* objects.
+		*/
 		void create();
+
+		/**
+		* Adds the given Controller to the internal model structure.
+		* If a Controller with the same ID already exists, an error is logged.
+		*
+		* @param controller The Controller to add.
+		*/
 		void add(Controller * controller);
+
+		/**
+		* Adds the given Device to the internal model structure.
+		* If a Device with the same ID already exists, an error is logged.
+		*
+		* @param device The Device to add.
+		*/
 		void add(Device * device);
+
+		/**
+		* This method links the internal object structure after creation,
+		* especially to resolve cross-references like flank switches.
+		*/
 		void link();
+
+		/**
+		* This method calculates statistical data (counts of regions, switches,
+		* signals, and signal groups) and stores it in the MrwStatistic struct.
+		*/
 		void initStatistics();
 
+		/**
+		* This method dumps the entire parsed XML DOM tree including all attributes.
+		* It is called recursively.
+		*/
 		void xml(const QDomNode & node, const QString & indent = "") const;
 	};
 }
