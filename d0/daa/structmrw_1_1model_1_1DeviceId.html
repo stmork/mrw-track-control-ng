@@ -120,7 +120,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a71173849da88347e35acc9b26e63cf87" id="r_a71173849da88347e35acc9b26e63cf87"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71173849da88347e35acc9b26e63cf87">~DeviceId</a> ()=default</td></tr>
 <tr class="separator:a71173849da88347e35acc9b26e63cf87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d7468ec02577ad399eb473a3e86f7ac" id="r_a1d7468ec02577ad399eb473a3e86f7ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d7468ec02577ad399eb473a3e86f7ac">DeviceId</a> (const <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html">Device</a> *device)</td></tr>
-<tr class="memdesc:a1d7468ec02577ad399eb473a3e86f7ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">This contructor is for conveniance to initialize the <a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#ace76a1ef7c615650aaa309b027d1eae2" title="This is the unique identification of a Device inside a complete ModelRailway.">mrw::can::DeviceKey</a> type.  <br /></td></tr>
+<tr class="memdesc:a1d7468ec02577ad399eb473a3e86f7ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">This constructor is for convenience to initialize the <a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#ace76a1ef7c615650aaa309b027d1eae2" title="This is the unique identification of a Device inside a complete ModelRailway.">mrw::can::DeviceKey</a> type.  <br /></td></tr>
 <tr class="separator:a1d7468ec02577ad399eb473a3e86f7ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a07c84acd38a3d6d7bd261b271cfd32" id="r_a8a07c84acd38a3d6d7bd261b271cfd32"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a07c84acd38a3d6d7bd261b271cfd32">operator()</a> (const <a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#ace76a1ef7c615650aaa309b027d1eae2">mrw::can::DeviceKey</a> &amp;id) const</td></tr>
 <tr class="memdesc:a8a07c84acd38a3d6d7bd261b271cfd32"><td class="mdescLeft">&#160;</td><td class="mdescRight">This call operator overload computes the hash of the containing <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> id.  <br /></td></tr>
@@ -143,7 +143,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This functor class provides a hashing function for <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> mapping usage. </p>
-<p>A unique identifier for a <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> consists on a <a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html" title="This class represents a CAN-Node named as Controller here.">Controller</a> id and a unit number from a <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a>. </p>
+<p>A unique identifier for a <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> consists of a <a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html" title="This class represents a CAN-Node named as Controller here.">Controller</a> id and a unit number from a <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a631870f95778416f1992bfcbf453c450" name="a631870f95778416f1992bfcbf453c450"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a631870f95778416f1992bfcbf453c450">&#9670;&#160;</a></span>DeviceId() <span class="overload">[1/2]</span></h2>
@@ -218,7 +218,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>This contructor is for conveniance to initialize the <a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#ace76a1ef7c615650aaa309b027d1eae2" title="This is the unique identification of a Device inside a complete ModelRailway.">mrw::can::DeviceKey</a> type. </p>
+<p>This constructor is for convenience to initialize the <a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#ace76a1ef7c615650aaa309b027d1eae2" title="This is the unique identification of a Device inside a complete ModelRailway.">mrw::can::DeviceKey</a> type. </p>
 <p>It extracts from the given <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> the <a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html" title="This class represents a CAN-Node named as Controller here.">Controller</a> id and the unit number.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -356,7 +356,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 21 2025 13:55:51 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Tue Jul 22 2025 09:57:16 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>
