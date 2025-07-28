@@ -16,6 +16,7 @@ add_library(${PROJECT_NAME} STATIC)
 target_include_directories(${PROJECT_NAME} PRIVATE ..)
 
 set(SOURCES
+	appsupport.cpp
 	batch.cpp
 	batchparticipant.cpp
 	clockservice.cpp
@@ -32,6 +33,7 @@ set(SOURCES
 )
 
 set(HEADERS
+	appsupport.h
 	batch.h
 	batchparticipant.h
 	cleanvector.h
@@ -55,4 +57,4 @@ set(HEADERS
 
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES} ${HEADERS})
 
-target_link_libraries(${PROJECT_NAME} PUBLIC Qt6::Core)
+target_link_libraries(${PROJECT_NAME} PUBLIC Qt6::Core Qt6::Network)

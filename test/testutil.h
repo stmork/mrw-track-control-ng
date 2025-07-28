@@ -73,6 +73,8 @@ namespace mrw::test
 		void testHexLine();
 		void testCleanVector();
 		void testSharedVector();
+		void testBlanktime();
+		void testHostname();
 	};
 }
 

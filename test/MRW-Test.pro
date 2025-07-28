@@ -3,7 +3,7 @@
 #  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 #
 
-QT     += testlib widgets
+QT     += testlib widgets network
 CONFIG += testcase no_testcase_installs
 
 include(../common.pri)

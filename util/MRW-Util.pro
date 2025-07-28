@@ -3,12 +3,14 @@
 #  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 #
 
+QT       += network
 TEMPLATE  = lib
 CONFIG   += staticlib
 
 include(../common.pri)
 
 SOURCES += \
+	appsupport.cpp \
 	batch.cpp \
 	batchparticipant.cpp \
 	clockservice.cpp \
@@ -24,6 +26,7 @@ SOURCES += \
 	termhandler.cpp
 
 HEADERS += \
+	appsupport.h \
 	batch.h \
 	batchparticipant.h \
 	cleanvector.h \

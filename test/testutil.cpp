@@ -10,6 +10,7 @@
 #include <QTest>
 #include <QSignalSpy>
 
+#include <util/appsupport.h>
 #include <util/method.h>
 #include <util/properties.h>
 #include <util/settings.h>
@@ -597,4 +598,20 @@ void TestUtil::testSharedVector()
 	QCOMPARE(a.use_count(), 1);
 	QCOMPARE(b.use_count(), 1);
 	QCOMPARE(c.use_count(), 1);
+}
+
+void TestUtil::testBlanktime()
+{
+	const auto blanktime = AppSupport::instance().blanktime();
+
+	QVERIFY(blanktime >= 300); // 5 minutes
+	QVERIFY(blanktime <= 21600); // 6 hours
+}
+
+void TestUtil::testHostname()
+{
+	const auto hostname = AppSupport::instance().hostname();
+
+	QVERIFY(!hostname.isEmpty());
+	QVERIFY(!hostname.contains("."));
 }

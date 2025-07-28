@@ -3,7 +3,6 @@
 #  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 #
 
-QT       += network
 TEMPLATE  = lib
 CONFIG   += staticlib
 

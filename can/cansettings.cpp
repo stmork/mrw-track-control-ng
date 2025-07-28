@@ -3,15 +3,14 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
-#include <QHostInfo>
-
 #include <can/cansettings.h>
+#include <util/appsupport.h>
 
 using namespace mrw::util;
 using namespace mrw::can;
 
 CanSettings::CanSettings() :
-	hostname(QHostInfo::localHostName().split(".").at(0).toLower())
+	hostname(AppSupport::instance().hostname())
 {
 	SettingsGroup group (this, hostname);
 

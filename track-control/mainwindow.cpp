@@ -3,9 +3,6 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
-#include <fstream>
-#include <chrono>
-
 #include <unistd.h>
 
 #ifdef USE_SYSTEMD
@@ -16,8 +13,8 @@
 #include <QMouseEvent>
 #include <QTouchEvent>
 #include <QKeyEvent>
-#include <QHostInfo>
 
+#include <util/appsupport.h>
 #include <util/globalbatch.h>
 #include <util/method.h>
 #include <util/random.h>
@@ -585,17 +582,10 @@ void MainWindow::routeFinished()
 
 void MainWindow::setScreenBlankTimeout()
 {
-	static constexpr seconds   min_blank_time = 5min;
-
-	std::fstream               blank_file("/sys/module/kernel/parameters/consoleblank", std::ios_base::in);
-	sc::integer                blank_time = min_blank_time.count();
-	mrw::util::Settings        settings;
-	mrw::util::SettingsGroup   group(&settings, QHostInfo::localHostName());
-
-	blank_file >> blank_time;
-
-	const sc::integer          clamped = std::max(blank_time, (int)min_blank_time.count());
-	const sc::integer          timeout = std::max(settings.value("blank", clamped).toInt(), (int)min_blank_time.count());
+	mrw::util::Settings      settings;
+	mrw::util::SettingsGroup group(&settings, AppSupport::instance().hostname());
+	const unsigned           blank_time = AppSupport::instance().blanktime();
+	const sc::integer        timeout    = std::max(settings.value("blank", blank_time).toInt(), (int)blank_time);
 
 	qCInfo(mrw::tools::log).noquote() << "Setting screen blank timeout to" << timeout << "seconds.";
 	statechart.screen().setTimeout(timeout);
