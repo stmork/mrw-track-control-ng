@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="Node000000" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="5,5,135,46"/>
-<area shape="rect" id="Node000001" href="$d4/dc7/classmrw_1_1log_1_1LoggerService.html" title="This singleton provides the handling of multiple LoggerBase instances." alt="" coords="183,13,342,38"/>
+<area shape="rect" id="Node000001" href="$d9/d33/classmrw_1_1util_1_1AppSupport.html" title=" " alt="" coords="183,13,326,38"/>
 <area shape="poly" id="edge64_Node000000_Node000001" title=" " alt="" coords="150,23,182,23,182,28,150,28"/>
 </map>

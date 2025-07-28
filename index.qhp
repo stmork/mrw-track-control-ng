@@ -2087,6 +2087,12 @@
 </section>
 </section>
 <section title="util" ref="d9/d2b/namespacemrw_1_1util.html">
+<section title="AppSupport" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html">
+<section title="blanktime" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#ad339e381dc3cb9f9ca1ba41d759e8bc1"/>
+<section title="hostname" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#af19bde96d35a484b351274db8a1bebbf"/>
+<section title="instance" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#ace9bf992b5af5b66e853eb6f5362f954"/>
+<section title="Singleton&lt; AppSupport &gt;" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#a427a1f075055d61090e7df6f9e4f8eab"/>
+</section>
 <section title="Batch" ref="d8/dde/classmrw_1_1util_1_1Batch.html">
 <section title="Batch" ref="d8/dde/classmrw_1_1util_1_1Batch.html#ac91261f634b1f89c51941e9d188b06a5"/>
 <section title="~Batch" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a87506571dedb476e0de679401a03637e"/>
@@ -4245,6 +4251,12 @@
 </section>
 </section>
 <section title="util" ref="d9/d2b/namespacemrw_1_1util.html">
+<section title="AppSupport" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html">
+<section title="blanktime" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#ad339e381dc3cb9f9ca1ba41d759e8bc1"/>
+<section title="hostname" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#af19bde96d35a484b351274db8a1bebbf"/>
+<section title="instance" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#ace9bf992b5af5b66e853eb6f5362f954"/>
+<section title="Singleton&lt; AppSupport &gt;" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#a427a1f075055d61090e7df6f9e4f8eab"/>
+</section>
 <section title="Batch" ref="d8/dde/classmrw_1_1util_1_1Batch.html">
 <section title="Batch" ref="d8/dde/classmrw_1_1util_1_1Batch.html#ac91261f634b1f89c51941e9d188b06a5"/>
 <section title="~Batch" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a87506571dedb476e0de679401a03637e"/>
@@ -4520,6 +4532,9 @@
 <section title="mrw::util::TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html"/>
 </section>
 <section title="mrw::util::Singleton&lt; T &gt;" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html"/>
+<section title="mrw::util::Singleton&lt; AppSupport &gt;" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html">
+<section title="mrw::util::AppSupport" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html"/>
+</section>
 <section title="mrw::util::Singleton&lt; ClockService &gt;" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html">
 <section title="mrw::util::ClockService" ref="db/d8f/classmrw_1_1util_1_1ClockService.html"/>
 </section>
@@ -4662,6 +4677,7 @@
 </toc>
 <keywords>
 <keyword name="mrw::model::AbstractSwitch" id="mrw::model::AbstractSwitch_" ref="df/db7/classmrw_1_1model_1_1AbstractSwitch.html"/>
+<keyword name="mrw::util::AppSupport" id="mrw::util::AppSupport_" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html"/>
 <keyword name="mrw::model::AssemblyPart" id="mrw::model::AssemblyPart_" ref="d5/d26/classmrw_1_1model_1_1AssemblyPart.html"/>
 <keyword name="mrw::ui::BarWidget" id="mrw::ui::BarWidget_" ref="de/d98/classmrw_1_1ui_1_1BarWidget.html"/>
 <keyword name="mrw::ctrl::BaseController" id="mrw::ctrl::BaseController_" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html"/>
@@ -4746,6 +4762,7 @@
 <keyword name="mrw::util::SignalHandler" id="mrw::util::SignalHandler_" ref="de/def/classmrw_1_1util_1_1SignalHandler.html"/>
 <keyword name="mrw::ui::SignalWidget" id="mrw::ui::SignalWidget_" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html"/>
 <keyword name="mrw::util::Singleton" id="mrw::util::Singleton_" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html"/>
+<keyword name="mrw::util::Singleton&lt; AppSupport &gt;" id="mrw::util::Singleton&lt; AppSupport &gt;_" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html"/>
 <keyword name="mrw::util::Singleton&lt; ClockService &gt;" id="mrw::util::Singleton&lt; ClockService &gt;_" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html"/>
 <keyword name="mrw::util::Singleton&lt; GlobalBatch &gt;" id="mrw::util::Singleton&lt; GlobalBatch &gt;_" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html"/>
 <keyword name="mrw::util::Singleton&lt; LoggerService &gt;" id="mrw::util::Singleton&lt; LoggerService &gt;_" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html"/>
@@ -4831,6 +4848,7 @@
 <keyword name="RIGHT" id="mrw::model::Position::RIGHT_a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403" ref="db/d4f/classmrw_1_1model_1_1Position.html#a380b5a8ca4ca1e92ca0a75a4a392caeaa21507b40c80068eda19865706fdc2403"/>
 <keyword name="bending" id="mrw::ctrl::BaseController::Status::bending_ae9cfb02e5f31146d4dd540ee40882104" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
 <keyword name="bending() const" id="mrw::model::Position::bending_aa63c2660da7d2b0a33db8bbc81d98b48" ref="db/d4f/classmrw_1_1model_1_1Position.html#aa63c2660da7d2b0a33db8bbc81d98b48"/>
+<keyword name="blanktime() const noexcept" id="mrw::util::AppSupport::blanktime_ad339e381dc3cb9f9ca1ba41d759e8bc1" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#ad339e381dc3cb9f9ca1ba41d759e8bc1"/>
 <keyword name="BLUE" id="mrw::ui::BaseWidget::BLUE_a2ab2e86ed30d31f026d41c76886c00aa" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <keyword name="BLUE_ON" id="mrw::util::String::BLUE_ON_a99bdb92fafd1dfab6f5d46112f4f6365" ref="d0/d55/classmrw_1_1util_1_1String.html#a99bdb92fafd1dfab6f5d46112f4f6365"/>
 <keyword name="bold(const QString &amp;input) noexcept" id="mrw::util::String::bold_aee674c3216f7e1a4f50db31dc6dda7a6" ref="d0/d55/classmrw_1_1util_1_1String.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
@@ -5033,6 +5051,7 @@
 <keyword name="height() const" id="mrw::model::Position::height_a323e205493b37dae99dc97939f096c8a" ref="db/d4f/classmrw_1_1model_1_1Position.html#a323e205493b37dae99dc97939f096c8a"/>
 <keyword name="HexLine()=delete" id="mrw::util::HexLine::HexLine_a855c36b3062227265b35790c3e722f78" ref="d0/d55/classmrw_1_1util_1_1HexLine.html#a855c36b3062227265b35790c3e722f78"/>
 <keyword name="HexLine(const QString &amp;input)" id="mrw::util::HexLine::HexLine_ade53720a08e5caf79458ecf6f0e14f79" ref="d0/d55/classmrw_1_1util_1_1HexLine.html#ade53720a08e5caf79458ecf6f0e14f79"/>
+<keyword name="hostname() const noexcept" id="mrw::util::AppSupport::hostname_af19bde96d35a484b351274db8a1bebbf" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#af19bde96d35a484b351274db8a1bebbf"/>
 <keyword name="Hz1()" id="mrw::util::ClockService::Hz1_aa097bc71ce6a1a2af55ac34af02d377b" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#aa097bc71ce6a1a2af55ac34af02d377b"/>
 <keyword name="Hz2()" id="mrw::util::ClockService::Hz2_aff9d02e4d105be76c2f683213037b87e" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#aff9d02e4d105be76c2f683213037b87e"/>
 <keyword name="Hz4()" id="mrw::util::ClockService::Hz4_ab987466889f56f4be79d75761e36a019" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#ab987466889f56f4be79d75761e36a019"/>
@@ -5051,9 +5070,11 @@
 <keyword name="info(const char *message) const override" id="mrw::log::SysLogger::info_a9877a0b8e736fbd2dbaa6fbe96ae3ba3" ref="d5/d0d/classmrw_1_1log_1_1SysLogger.html#a9877a0b8e736fbd2dbaa6fbe96ae3ba3"/>
 <keyword name="info()" id="mrw::model::ModelRailway::info_ae242d48b10b0e6431e6b429609714a0f" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#ae242d48b10b0e6431e6b429609714a0f"/>
 <keyword name="info()" id="mrw::model::ModelRepository::info_a54ffb698e9124e5455350fd4cc0902e0" ref="dd/d6e/classmrw_1_1model_1_1ModelRepository.html#a54ffb698e9124e5455350fd4cc0902e0"/>
+<keyword name="instance() noexcept" id="mrw::util::AppSupport::instance_ace9bf992b5af5b66e853eb6f5362f954" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#ace9bf992b5af5b66e853eb6f5362f954"/>
 <keyword name="instance() noexcept" id="mrw::util::Singleton::instance_a9390b21f440faca7e75d1b8363e1dc7b" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
 <keyword name="instance() noexcept" id="mrw::util::Singleton&lt; LoggerService &gt;::instance_a9390b21f440faca7e75d1b8363e1dc7b" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
 <keyword name="instance() noexcept" id="mrw::util::Singleton&lt; TimerService &gt;::instance_a9390b21f440faca7e75d1b8363e1dc7b" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
+<keyword name="instance() noexcept" id="mrw::util::Singleton&lt; AppSupport &gt;::instance_a9390b21f440faca7e75d1b8363e1dc7b" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
 <keyword name="instance() noexcept" id="mrw::util::Singleton&lt; ClockService &gt;::instance_a9390b21f440faca7e75d1b8363e1dc7b" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
 <keyword name="instance() noexcept" id="mrw::util::Singleton&lt; GlobalBatch &gt;::instance_a9390b21f440faca7e75d1b8363e1dc7b" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
 <keyword name="instance() noexcept" id="mrw::util::Singleton&lt; Random &gt;::instance_a9390b21f440faca7e75d1b8363e1dc7b" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
@@ -5207,6 +5228,7 @@
 <keyword name="operator=(const ModelRailway &amp;other)=delete" id="mrw::model::ModelRailway::operator=_aa5e42dc137373f973b757d58b70c287a" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#aa5e42dc137373f973b757d58b70c287a"/>
 <keyword name="operator=(const Singleton &amp;other)=delete" id="mrw::util::Singleton&lt; LoggerService &gt;::operator=_ab74b15e4bc2a057127f18f8cd7ae6345" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ab74b15e4bc2a057127f18f8cd7ae6345"/>
 <keyword name="operator=(const Singleton &amp;other)=delete" id="mrw::util::Singleton&lt; TimerService &gt;::operator=_ab74b15e4bc2a057127f18f8cd7ae6345" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ab74b15e4bc2a057127f18f8cd7ae6345"/>
+<keyword name="operator=(const Singleton &amp;other)=delete" id="mrw::util::Singleton&lt; AppSupport &gt;::operator=_ab74b15e4bc2a057127f18f8cd7ae6345" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ab74b15e4bc2a057127f18f8cd7ae6345"/>
 <keyword name="operator=(const Singleton &amp;other)=delete" id="mrw::util::Singleton&lt; ClockService &gt;::operator=_ab74b15e4bc2a057127f18f8cd7ae6345" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ab74b15e4bc2a057127f18f8cd7ae6345"/>
 <keyword name="operator=(const Singleton &amp;other)=delete" id="mrw::util::Singleton&lt; GlobalBatch &gt;::operator=_ab74b15e4bc2a057127f18f8cd7ae6345" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ab74b15e4bc2a057127f18f8cd7ae6345"/>
 <keyword name="operator=(const Singleton &amp;other)=delete" id="mrw::util::Singleton&lt; Random &gt;::operator=_ab74b15e4bc2a057127f18f8cd7ae6345" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ab74b15e4bc2a057127f18f8cd7ae6345"/>
@@ -5385,12 +5407,15 @@
 <keyword name="Singleton(const Singleton &amp;other)=delete" id="mrw::util::Singleton&lt; LoggerService &gt;::Singleton_a9973007ac4e1f0c0709d6f893a10763d" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9973007ac4e1f0c0709d6f893a10763d"/>
 <keyword name="Singleton()=default" id="mrw::util::Singleton&lt; TimerService &gt;::Singleton_ae6f8366470705cd0f158e8b4aed5d2bc" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ae6f8366470705cd0f158e8b4aed5d2bc"/>
 <keyword name="Singleton(const Singleton &amp;other)=delete" id="mrw::util::Singleton&lt; TimerService &gt;::Singleton_a9973007ac4e1f0c0709d6f893a10763d" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9973007ac4e1f0c0709d6f893a10763d"/>
+<keyword name="Singleton()=default" id="mrw::util::Singleton&lt; AppSupport &gt;::Singleton_ae6f8366470705cd0f158e8b4aed5d2bc" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ae6f8366470705cd0f158e8b4aed5d2bc"/>
+<keyword name="Singleton(const Singleton &amp;other)=delete" id="mrw::util::Singleton&lt; AppSupport &gt;::Singleton_a9973007ac4e1f0c0709d6f893a10763d" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9973007ac4e1f0c0709d6f893a10763d"/>
 <keyword name="Singleton()=default" id="mrw::util::Singleton&lt; ClockService &gt;::Singleton_ae6f8366470705cd0f158e8b4aed5d2bc" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ae6f8366470705cd0f158e8b4aed5d2bc"/>
 <keyword name="Singleton(const Singleton &amp;other)=delete" id="mrw::util::Singleton&lt; ClockService &gt;::Singleton_a9973007ac4e1f0c0709d6f893a10763d" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9973007ac4e1f0c0709d6f893a10763d"/>
 <keyword name="Singleton()=default" id="mrw::util::Singleton&lt; GlobalBatch &gt;::Singleton_ae6f8366470705cd0f158e8b4aed5d2bc" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ae6f8366470705cd0f158e8b4aed5d2bc"/>
 <keyword name="Singleton(const Singleton &amp;other)=delete" id="mrw::util::Singleton&lt; GlobalBatch &gt;::Singleton_a9973007ac4e1f0c0709d6f893a10763d" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9973007ac4e1f0c0709d6f893a10763d"/>
 <keyword name="Singleton()=default" id="mrw::util::Singleton&lt; Random &gt;::Singleton_ae6f8366470705cd0f158e8b4aed5d2bc" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ae6f8366470705cd0f158e8b4aed5d2bc"/>
 <keyword name="Singleton(const Singleton &amp;other)=delete" id="mrw::util::Singleton&lt; Random &gt;::Singleton_a9973007ac4e1f0c0709d6f893a10763d" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9973007ac4e1f0c0709d6f893a10763d"/>
+<keyword name="Singleton&lt; AppSupport &gt;" id="mrw::util::AppSupport::Singleton&lt; AppSupport &gt;_a427a1f075055d61090e7df6f9e4f8eab" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#a427a1f075055d61090e7df6f9e4f8eab"/>
 <keyword name="Singleton&lt; ClockService &gt;" id="mrw::util::ClockService::Singleton&lt; ClockService &gt;_ad1de93cfc5c22e4b1d91f8cf7b9798ff" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#ad1de93cfc5c22e4b1d91f8cf7b9798ff"/>
 <keyword name="Singleton&lt; GlobalBatch &gt;" id="mrw::util::GlobalBatch::Singleton&lt; GlobalBatch &gt;_a829e37c010521603ab72a94bec0b71cc" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a829e37c010521603ab72a94bec0b71cc"/>
 <keyword name="Singleton&lt; LoggerService &gt;" id="mrw::log::LoggerService::Singleton&lt; LoggerService &gt;_abd686063a3d41841f0602cf4e274265d" ref="d4/dc7/classmrw_1_1log_1_1LoggerService.html#abd686063a3d41841f0602cf4e274265d"/>
@@ -5966,6 +5991,7 @@
 <file>d9/d0a/classmrw_1_1ui_1_1StationWidget__inherit__graph.png</file>
 <file>d9/d29/classmrw_1_1ctrl_1_1SignalController__inherit__graph.png</file>
 <file>d9/d2b/namespacemrw_1_1util.html</file>
+<file>d9/d33/classmrw_1_1util_1_1AppSupport.html</file>
 <file>d9/d41/classmrw_1_1util_1_1Singleton-members.html</file>
 <file>d9/d4f/classmrw_1_1util_1_1BatchParticipant.html</file>
 <file>d9/d4f/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status-members.html</file>
@@ -5983,6 +6009,7 @@
 <file>da/d34/classmrw_1_1ui_1_1OpModeWidget-members.html</file>
 <file>da/d7d/classmrw_1_1ui_1_1BarWidget-members.html</file>
 <file>da/d83/structmrw_1_1ui_1_1RailWidget_1_1Status__inherit__graph.png</file>
+<file>da/d91/classmrw_1_1util_1_1AppSupport__inherit__graph.png</file>
 <file>da/d95/classmrw_1_1ctrl_1_1RegularSwitchController__inherit__graph.png</file>
 <file>da/dc4/classmrw_1_1model_1_1Light-members.html</file>
 <file>da/dc4/classmrw_1_1ui_1_1SignalWidget__inherit__graph.png</file>
@@ -6017,6 +6044,7 @@
 <file>dc/d52/classmrw_1_1model_1_1LightModule-members.html</file>
 <file>dc/d54/classmrw_1_1ui_1_1BarWidget__inherit__graph.png</file>
 <file>dc/d55/classmrw_1_1ui_1_1OpModeWidget.html</file>
+<file>dc/d5c/classmrw_1_1util_1_1AppSupport-members.html</file>
 <file>dc/d69/classmrw_1_1log_1_1UnifiedLogger.html</file>
 <file>dc/d70/structmrw_1_1ctrl_1_1BaseController_1_1Status-members.html</file>
 <file>dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html</file>
@@ -6167,6 +6195,7 @@
 <file>inherit_graph_23.png</file>
 <file>inherit_graph_24.png</file>
 <file>inherit_graph_25.png</file>
+<file>inherit_graph_26.png</file>
 <file>inherit_graph_3.png</file>
 <file>inherit_graph_4.png</file>
 <file>inherit_graph_5.png</file>

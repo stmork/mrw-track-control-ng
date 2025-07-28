@@ -10,8 +10,9 @@ var searchData=
   ['haslock_7',['hasLock',['../df/db9/classmrw_1_1ui_1_1BaseWidget.html#a10e237ea1c94df68165b97e2509fecab',1,'mrw::ui::BaseWidget::hasLock()'],['../d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#ab9e59f5cfda7ceab33b437eedd1502c9',1,'mrw::ui::DoubleCrossSwitchWidget::hasLock()'],['../d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a164d22f7d6244f4fc7ce7b490558543b',1,'mrw::ui::RegularSwitchWidget::hasLock()'],['../d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a7b749d27e73b6f8a2c3b8683840d8f8f',1,'mrw::ui::SignalWidget::hasLock()']]],
   ['height_8',['height',['../db/d4f/classmrw_1_1model_1_1Position.html#a323e205493b37dae99dc97939f096c8a',1,'mrw::model::Position']]],
   ['hexline_9',['HexLine',['../d0/d55/classmrw_1_1util_1_1HexLine.html',1,'mrw::util::HexLine'],['../d0/d55/classmrw_1_1util_1_1HexLine.html#a855c36b3062227265b35790c3e722f78',1,'mrw::util::HexLine::HexLine()=delete'],['../d0/d55/classmrw_1_1util_1_1HexLine.html#ade53720a08e5caf79458ecf6f0e14f79',1,'mrw::util::HexLine::HexLine(const QString &amp;input)']]],
-  ['hz1_10',['Hz1',['../db/d8f/classmrw_1_1util_1_1ClockService.html#aa097bc71ce6a1a2af55ac34af02d377b',1,'mrw::util::ClockService']]],
-  ['hz2_11',['Hz2',['../db/d8f/classmrw_1_1util_1_1ClockService.html#aff9d02e4d105be76c2f683213037b87e',1,'mrw::util::ClockService']]],
-  ['hz4_12',['Hz4',['../db/d8f/classmrw_1_1util_1_1ClockService.html#ab987466889f56f4be79d75761e36a019',1,'mrw::util::ClockService']]],
-  ['hz8_13',['Hz8',['../db/d8f/classmrw_1_1util_1_1ClockService.html#a46b81845210ba4150aec594ce3bd9606',1,'mrw::util::ClockService']]]
+  ['hostname_10',['hostname',['../d9/d33/classmrw_1_1util_1_1AppSupport.html#af19bde96d35a484b351274db8a1bebbf',1,'mrw::util::AppSupport']]],
+  ['hz1_11',['Hz1',['../db/d8f/classmrw_1_1util_1_1ClockService.html#aa097bc71ce6a1a2af55ac34af02d377b',1,'mrw::util::ClockService']]],
+  ['hz2_12',['Hz2',['../db/d8f/classmrw_1_1util_1_1ClockService.html#aff9d02e4d105be76c2f683213037b87e',1,'mrw::util::ClockService']]],
+  ['hz4_13',['Hz4',['../db/d8f/classmrw_1_1util_1_1ClockService.html#ab987466889f56f4be79d75761e36a019',1,'mrw::util::ClockService']]],
+  ['hz8_14',['Hz8',['../db/d8f/classmrw_1_1util_1_1ClockService.html#a46b81845210ba4150aec594ce3bd9606',1,'mrw::util::ClockService']]]
 ];

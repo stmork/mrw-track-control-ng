@@ -8,5 +8,6 @@ var searchData=
   ['batch_5',['batch',['../d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#af0c771f2df98cdb2eee447eed5bd9480',1,'mrw::util::BatchParticipant']]],
   ['batchparticipant_6',['BatchParticipant',['../d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a2f056ac6f0f14b943f345b4f9d629927',1,'mrw::util::BatchParticipant']]],
   ['bending_7',['bending',['../db/d4f/classmrw_1_1model_1_1Position.html#aa63c2660da7d2b0a33db8bbc81d98b48',1,'mrw::model::Position']]],
-  ['bold_8',['bold',['../d0/d55/classmrw_1_1util_1_1String.html#aee674c3216f7e1a4f50db31dc6dda7a6',1,'mrw::util::String']]]
+  ['blanktime_8',['blanktime',['../d9/d33/classmrw_1_1util_1_1AppSupport.html#ad339e381dc3cb9f9ca1ba41d759e8bc1',1,'mrw::util::AppSupport']]],
+  ['bold_9',['bold',['../d0/d55/classmrw_1_1util_1_1String.html#aee674c3216f7e1a4f50db31dc6dda7a6',1,'mrw::util::String']]]
 ];
