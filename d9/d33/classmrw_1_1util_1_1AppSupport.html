@@ -99,13 +99,16 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
+<p>This class returns some values that are useful for the application.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;util/appsupport.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for mrw::util::AppSupport:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../da/d91/classmrw_1_1util_1_1AppSupport__inherit__graph.png" border="0" usemap="#amrw_1_1util_1_1AppSupport_inherit__map" alt="Inheritance graph"/></div>
 <map name="amrw_1_1util_1_1AppSupport_inherit__map" id="amrw_1_1util_1_1AppSupport_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,94,149,120"/>
+<area shape="rect" title="This class returns some values that are useful for the application." alt="" coords="5,94,149,120"/>
 <area shape="rect" href="../../d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="12,5,142,46"/>
 <area shape="poly" title=" " alt="" coords="80,62,80,93,74,93,74,62"/>
 </map>
@@ -114,8 +117,10 @@ Inheritance diagram for mrw::util::AppSupport:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af19bde96d35a484b351274db8a1bebbf" id="r_af19bde96d35a484b351274db8a1bebbf"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af19bde96d35a484b351274db8a1bebbf">hostname</a> () const noexcept</td></tr>
+<tr class="memdesc:af19bde96d35a484b351274db8a1bebbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a unified form of the local hostname.  <br /></td></tr>
 <tr class="separator:af19bde96d35a484b351274db8a1bebbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad339e381dc3cb9f9ca1ba41d759e8bc1" id="r_ad339e381dc3cb9f9ca1ba41d759e8bc1"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad339e381dc3cb9f9ca1ba41d759e8bc1">blanktime</a> () const noexcept</td></tr>
+<tr class="memdesc:ad339e381dc3cb9f9ca1ba41d759e8bc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the blanktime specified in the kernel boot parameter <code>consoleblank</code>.  <br /></td></tr>
 <tr class="separator:ad339e381dc3cb9f9ca1ba41d759e8bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -128,7 +133,9 @@ Friends</h2></td></tr>
 <tr class="memitem:a427a1f075055d61090e7df6f9e4f8eab" id="r_a427a1f075055d61090e7df6f9e4f8eab"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a427a1f075055d61090e7df6f9e4f8eab">Singleton&lt; AppSupport &gt;</a></td></tr>
 <tr class="separator:a427a1f075055d61090e7df6f9e4f8eab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class returns some values that are useful for the application. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad339e381dc3cb9f9ca1ba41d759e8bc1" name="ad339e381dc3cb9f9ca1ba41d759e8bc1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad339e381dc3cb9f9ca1ba41d759e8bc1">&#9670;&#160;</a></span>blanktime()</h2>
 
@@ -151,6 +158,10 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>This method returns the blanktime specified in the kernel boot parameter <code>consoleblank</code>. </p>
+<p>The value is clamped to return any valid blanktime greater than zero.</p>
+<dl class="section return"><dt>Returns</dt><dd>The blank time configured for the kernel. </dd></dl>
 
 </div>
 </div>
@@ -176,6 +187,10 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>This method returns a unified form of the local hostname. </p>
+<p>This hostname contains only the first part of the hostname without any domain information. The hostname is always lower case.</p>
+<dl class="section return"><dt>Returns</dt><dd>The hostname of the local system. </dd></dl>
 
 </div>
 </div>
@@ -230,7 +245,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 28 2025 11:43:30 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Mon Jul 28 2025 11:47:41 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>
