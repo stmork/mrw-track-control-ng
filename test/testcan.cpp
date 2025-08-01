@@ -10,11 +10,14 @@
 
 #include "can/mrwbusservice.h"
 #include "can/mrwmessage.h"
+#include "util/appsupport.h"
+#include "util/settings.h"
 
 #include "testcan.h"
 
 using namespace mrw::test;
 using namespace mrw::can;
+using namespace mrw::util;
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 3, 0))
 #	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_EXCEPTION_THROWN(condition, exception);
@@ -34,9 +37,10 @@ class ManualCanService : public MrwBusService
 
 public:
 	explicit ManualCanService(
-		const bool   auto_connect = false,
-		const char * iface        = "vcan0") :
-		MrwBusService(iface, "socketcan", nullptr, auto_connect)
+		const bool      auto_connect,
+		const QString & iface,
+		const QString & plugin) :
+		MrwBusService(iface, plugin, nullptr, auto_connect)
 	{
 		can_device->setConfigurationParameter(QCanBusDevice::ReceiveOwnKey, true);
 	}
@@ -76,6 +80,11 @@ public:
 
 TestCan::TestCan(QObject * parent) : QObject(parent)
 {
+	Settings      settings("test");
+	SettingsGroup group (&settings, AppSupport::instance().hostname());
+
+	can_iface  = settings.value("interface", "vcan0").toString();
+	can_plugin = settings.value("plugin",	"socketcan").toString();
 }
 
 void TestCan::testEmptyCanFrame()
@@ -115,7 +124,7 @@ void TestCan::testInvalidExtendedCanFrame()
 
 void TestCan::testValidService()
 {
-	MrwBusService service("vcan0");
+	MrwBusService service(can_iface, can_plugin);
 	MrwMessage    message(PING);
 
 	QVERIFY(service.valid());
@@ -145,7 +154,7 @@ void TestCan::testInvalidService()
 
 void TestCan::testManualConnectService()
 {
-	ManualCanService service;
+	ManualCanService service(false, can_iface, can_plugin);
 	QSignalSpy       spy(&service, &ManualCanService::connected);
 
 	QVERIFY(!service.valid());
@@ -161,7 +170,7 @@ void TestCan::testManualConnectService()
 
 void TestCan::testReadWrite()
 {
-	ManualCanService service(true);
+	ManualCanService service(true, can_iface, can_plugin);
 
 	QVERIFY(service.valid());
 	QVERIFY(service.write(MrwMessage(PING)));

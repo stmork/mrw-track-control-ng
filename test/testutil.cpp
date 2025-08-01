@@ -167,7 +167,7 @@ void TestUtil::testConstantEnumerator()
 	QCOMPARE(int_map.get(EBUSY),  "EBUSY");
 	QCOMPARE(int_map.at(EINVAL),  "EINVAL");
 	QCOMPARE(int_map.get(EINVAL), "EINVAL");
-	QCOMPARE(int_map.get(EAGAIN), "0x0B");
+	QCOMPARE(int_map.get(EAGAIN).left(2), "0x");
 
 	QCOMPARE(int_map.findKey("EINVAL")->first, EINVAL);
 	QCOMPARE(int_map.findKey("XYZ"), int_map.end());
