@@ -17,6 +17,7 @@ set(SOURCES
 	collections.cpp
 	main.cpp
 	testcan.cpp
+	testcanservice.cpp
 	testdoublecrossswitchwidget.cpp
 	testflankswitch.cpp
 	testmodel.cpp
@@ -35,6 +36,7 @@ set(SOURCES
 set(HEADERS
 	collections.h
 	testcan.h
+	testcanservice.h
 	testdef.h
 	testdoublecrossswitchwidget.h
 	testflankswitch.h

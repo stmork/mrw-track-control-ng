@@ -5,19 +5,14 @@
 
 #include <QCanBusFrame>
 #include <QTest>
-#include <QSignalSpy>
 #include <QList>
 
-#include "can/mrwbusservice.h"
 #include "can/mrwmessage.h"
-#include "util/appsupport.h"
-#include "util/settings.h"
 
 #include "testcan.h"
 
 using namespace mrw::test;
 using namespace mrw::can;
-using namespace mrw::util;
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 3, 0))
 #	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_EXCEPTION_THROWN(condition, exception);
@@ -27,64 +22,12 @@ using namespace mrw::util;
 
 /*************************************************************************
 **                                                                      **
-**       Test implementation of MrwBusService                           **
-**                                                                      **
-*************************************************************************/
-
-class ManualCanService : public MrwBusService
-{
-	QList<MrwMessage> messages;
-
-public:
-	explicit ManualCanService(
-		const bool      auto_connect,
-		const QString & iface,
-		const QString & plugin) :
-		MrwBusService(iface, plugin, nullptr, auto_connect)
-	{
-		can_device->setConfigurationParameter(QCanBusDevice::ReceiveOwnKey, true);
-	}
-
-	void connect()
-	{
-		can_device->connectDevice();
-	}
-
-	void disconnect()
-	{
-		can_device->disconnectDevice();
-	}
-
-	void process(const MrwMessage & message) override
-	{
-		MrwBusService::process(message);
-		messages.append(message);
-	}
-
-	int counted() const
-	{
-		return messages.size();
-	}
-
-	const QList<MrwMessage> & list() const
-	{
-		return messages;
-	}
-};
-
-/*************************************************************************
-**                                                                      **
 **       Test class                                                     **
 **                                                                      **
 *************************************************************************/
 
 TestCan::TestCan(QObject * parent) : QObject(parent)
 {
-	Settings      settings("test");
-	SettingsGroup group (&settings, AppSupport::instance().hostname());
-
-	can_iface  = settings.value("interface", "vcan0").toString();
-	can_plugin = settings.value("plugin",	"socketcan").toString();
 }
 
 void TestCan::testEmptyCanFrame()
@@ -120,74 +63,6 @@ void TestCan::testInvalidExtendedCanFrame()
 
 	QVERIFY(!message.valid());
 	QVERIFY(message.toString().size() > 0);
-}
-
-void TestCan::testValidService()
-{
-	MrwBusService service(can_iface, can_plugin);
-	MrwMessage    message(PING);
-
-	QVERIFY(service.valid());
-	QVERIFY(service.write(message));
-	service.list();
-}
-
-void TestCan::testTryValidService()
-{
-	MrwBusService service("eth0");
-	MrwMessage    message(PING);
-
-	QVERIFY(service.valid());
-	QVERIFY(service.write(message));
-	service.list();
-}
-
-void TestCan::testInvalidService()
-{
-	MrwBusService service("no-interface", "no-plugin");
-	MrwMessage    message(PING);
-
-	QVERIFY(!service.valid());
-	QVERIFY(!service.write(message));
-	service.list();
-}
-
-void TestCan::testManualConnectService()
-{
-	ManualCanService service(false, can_iface, can_plugin);
-	QSignalSpy       spy(&service, &ManualCanService::connected);
-
-	QVERIFY(!service.valid());
-
-	service.connect();
-	QVERIFY(spy.wait(2000));
-	QCOMPARE(spy.count(), 1);
-	QVERIFY(service.valid());
-
-	service.disconnect();
-	QVERIFY(!service.valid());
-}
-
-void TestCan::testReadWrite()
-{
-	ManualCanService service(true, can_iface, can_plugin);
-
-	QVERIFY(service.valid());
-	QVERIFY(service.write(MrwMessage(PING)));
-
-	QTest::qWait(50);
-	QCOMPARE(service.counted(), 1);
-
-	const MrwMessage & message = service.list().at(0);
-	QVERIFY(message.valid());
-	QVERIFY(!message.isResponse());
-	QCOMPARE(message.command(),  PING);
-	QCOMPARE(message.size(),     0u);
-	QCOMPARE(message.unitNo(),   NO_UNITNO);
-	QCOMPARE(message.response(), Response::MSG_NO_RESPONSE);
-	QCOMPARE(message.id(),       CAN_BROADCAST_ID);
-	QCOMPARE(message.sid(),      CAN_BROADCAST_ID);
-	QCOMPARE(message.eid(),      NO_UNITNO);
 }
 
 void TestCan::testReceivedResult()

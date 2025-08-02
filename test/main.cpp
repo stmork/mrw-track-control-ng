@@ -12,6 +12,7 @@
 
 #include "testutil.h"
 #include "testcan.h"
+#include "testcanservice.h"
 #include "testmodel.h"
 #include "testswitch.h"
 #include "testlight.h"
@@ -45,6 +46,17 @@ static int testCan()
 	QStringList    args
 	{
 		"MRW-Test", "-o", "qtest-can.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
+static int testCanService()
+{
+	TestCanService test;
+	QStringList    args
+	{
+		"MRW-Test", "-o", "qtest-canservice.xml", "-xml"
 	};
 
 	return QTest::qExec(&test, args);
@@ -179,6 +191,7 @@ int main(int argc, char * argv[])
 
 	status += testUtil();
 	status += testCan();
+	status += testCanService();
 	status += testModel();
 	status += testSimpleSwitch();
 	status += testSimpleLight();

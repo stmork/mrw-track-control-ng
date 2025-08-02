@@ -28,9 +28,6 @@ namespace mrw::test
 		static constexpr mrw::can::UnitNo       TEST_MSB     = 0xa5;
 		static constexpr quint32                TEST_ID      = 0x1234a596;
 
-		QString can_iface;
-		QString can_plugin;
-
 	public:
 		explicit TestCan(QObject * parent = nullptr);
 
@@ -38,11 +35,6 @@ namespace mrw::test
 		void testEmptyCanFrame();
 		void testInvalidStandardCanFrame();
 		void testInvalidExtendedCanFrame();
-		void testValidService();
-		void testTryValidService();
-		void testInvalidService();
-		void testManualConnectService();
-		void testReadWrite();
 		void testReceivedResult();
 		void testReceivedBroadcast();
 		void testReceivedCommand();
