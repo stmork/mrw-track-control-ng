@@ -11,6 +11,7 @@ PKGCONFIG       += gtest
 PKGCONFIG       += gtest_main
 
 QMAKE_CXXFLAGS  -= -Wsuggest-override
+QMAKE_CXXFLAGS  -= -Wshadow
 
 INCLUDEPATH      = $$PWD/common
 

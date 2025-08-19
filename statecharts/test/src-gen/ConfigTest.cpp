@@ -17,516 +17,562 @@
 namespace
 {
 
-	void doStart();
-	void firstController();
-	void secondController();
-	void lastController();
-	void booted();
-	void timeoutConfig();
-	mrw::statechart::ConfigStatechart * statechart;
-
-	sc::integer dvc_count_1 = 22;
-	sc::integer dvc_count_2 = 11;
-
-	class BootingMock
-	{
-		typedef void (BootingMock::*functiontype)();
-	public:
-		void (BootingMock::*bootingBehaviorDefault)();
-		int callCount;
-
-		void booting1()
-		{
-		}
-
-		void bootingDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void booting()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return bootingBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (BootingMock::*defaultBehavior)())
-		{
-			bootingBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&BootingMock::bootingDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static BootingMock * bootingMock;
-
-	class QuitMock
-	{
-		typedef void (QuitMock::*functiontype)();
-	public:
-		void (QuitMock::*quitBehaviorDefault)();
-		int callCount;
-
-		void quit1()
-		{
-		}
-
-		void quitDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void quit()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return quitBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (QuitMock::*defaultBehavior)())
-		{
-			quitBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&QuitMock::quitDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static QuitMock * quitMock;
-
-	class FailMock
-	{
-		typedef void (FailMock::*functiontype)();
-	public:
-		void (FailMock::*failBehaviorDefault)();
-		int callCount;
-
-		void fail1()
-		{
-		}
-
-		void failDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void fail()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return failBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (FailMock::*defaultBehavior)())
-		{
-			failBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&FailMock::failDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static FailMock * failMock;
-
-	class ConfigureMock
-	{
-		typedef sc::integer (ConfigureMock::*functiontype)();
-		struct parameters
-		{
-			sc::integer idx;
-			sc::integer (ConfigureMock::*behavior)();
-			int callCount;
-			inline bool operator==(const parameters & other)
-			{
-				return (this->idx == other.idx);
-			}
-		};
-	public:
-		std::list<ConfigureMock::parameters> mocks;
-		std::list<ConfigureMock::parameters> paramCount;
-		sc::integer (ConfigureMock::*configureBehaviorDefault)();
-		int callCount;
-
-		sc::integer configure1()
-		{
-			return (0);
-		}
-
-		sc::integer configure2()
-		{
-			return (dvc_count_1);
-		}
-
-		sc::integer configure3()
-		{
-			return (dvc_count_2);
-		}
-
-		sc::integer configureDefault()
-		{
-			sc::integer defaultValue = 0;
-			return (defaultValue);
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void setConfigureBehavior(const sc::integer idx, sc::integer (ConfigureMock::*func)())
-		{
-			parameters p;
-			p.idx = idx;
-			p.behavior = func;
-
-			std::list<ConfigureMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
-			if (i != mocks.end())
-			{
-				mocks.erase(i);
-			}
-			mocks.push_back(p);
-		}
-
-		bool calledAtLeast(const int times, const sc::integer idx)
-		{
-			parameters p;
-			p.idx = idx;
-
-			std::list<ConfigureMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				return (i->callCount >= times);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		bool calledAtLeastOnce(const sc::integer idx)
-		{
-			parameters p;
-			p.idx = idx;
-
-			std::list<ConfigureMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				return (i->callCount > 0);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		void configure(const sc::integer idx)
-		{
-			++callCount;
-
-			parameters p;
-			p.idx = idx;
-
-			std::list<ConfigureMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				p.callCount = (++i->callCount);
-				paramCount.erase(i);
-
-			}
-			else
-			{
-				p.callCount = 1;
-			}
-			paramCount.push_back(p);
-		}
-
-		functiontype getBehavior(const sc::integer idx)
-		{
-			parameters p;
-			p.idx = idx;
-
-			std::list<ConfigureMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
-			if (i != mocks.end())
-			{
-				return  i->behavior;
-			}
-			else
-			{
-				return configureBehaviorDefault;
-			}
-		}
-
-		void setDefaultBehavior(sc::integer (ConfigureMock::*defaultBehavior)())
-		{
-			configureBehaviorDefault = defaultBehavior;
-			mocks.clear();
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&ConfigureMock::configureDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-			paramCount.clear();
-			mocks.clear();
-		}
-	};
-	static ConfigureMock * configureMock;
-
-	class HasMoreMock
-	{
-		typedef bool (HasMoreMock::*functiontype)();
-		struct parameters
-		{
-			sc::integer idx;
-			bool (HasMoreMock::*behavior)();
-			int callCount;
-			inline bool operator==(const parameters & other)
-			{
-				return (this->idx == other.idx);
-			}
-		};
-	public:
-		std::list<HasMoreMock::parameters> mocks;
-		std::list<HasMoreMock::parameters> paramCount;
-		bool (HasMoreMock::*hasMoreBehaviorDefault)();
-		int callCount;
-
-		bool hasMore1()
-		{
-			return (true);
-		}
-
-		bool hasMore2()
-		{
-			return (false);
-		}
-
-		bool hasMoreDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void setHasMoreBehavior(const sc::integer idx, bool (HasMoreMock::*func)())
-		{
-			parameters p;
-			p.idx = idx;
-			p.behavior = func;
-
-			std::list<HasMoreMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
-			if (i != mocks.end())
-			{
-				mocks.erase(i);
-			}
-			mocks.push_back(p);
-		}
-
-		bool calledAtLeast(const int times, const sc::integer idx)
-		{
-			parameters p;
-			p.idx = idx;
-
-			std::list<HasMoreMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				return (i->callCount >= times);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		bool calledAtLeastOnce(const sc::integer idx)
-		{
-			parameters p;
-			p.idx = idx;
-
-			std::list<HasMoreMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				return (i->callCount > 0);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		void hasMore(const sc::integer idx)
-		{
-			++callCount;
-
-			parameters p;
-			p.idx = idx;
-
-			std::list<HasMoreMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				p.callCount = (++i->callCount);
-				paramCount.erase(i);
-
-			}
-			else
-			{
-				p.callCount = 1;
-			}
-			paramCount.push_back(p);
-		}
-
-		functiontype getBehavior(const sc::integer idx)
-		{
-			parameters p;
-			p.idx = idx;
-
-			std::list<HasMoreMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
-			if (i != mocks.end())
-			{
-				return  i->behavior;
-			}
-			else
-			{
-				return hasMoreBehaviorDefault;
-			}
-		}
-
-		void setDefaultBehavior(bool (HasMoreMock::*defaultBehavior)())
-		{
-			hasMoreBehaviorDefault = defaultBehavior;
-			mocks.clear();
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&HasMoreMock::hasMoreDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-			paramCount.clear();
-			mocks.clear();
-		}
-	};
-	static HasMoreMock * hasMoreMock;
-
-	class MockDefault : public mrw::statechart::ConfigStatechart::OperationCallback
-	{
-	public:
-		sc::integer configure(sc::integer idx)
-		{
-			configureMock->configure(idx);
-			return (configureMock->*(configureMock->getBehavior(idx)))();
-		}
-		bool hasMore(sc::integer idx)
-		{
-			hasMoreMock->hasMore(idx);
-			return (hasMoreMock->*(hasMoreMock->getBehavior(idx)))();
-		}
-		void booting()
-		{
-			bootingMock->booting();
-			return (bootingMock->*(bootingMock->getBehavior()))();
-		}
-		void quit()
-		{
-			quitMock->quit();
-			return (quitMock->*(quitMock->getBehavior()))();
-		}
-		void fail()
-		{
-			failMock->fail();
-			return (failMock->*(failMock->getBehavior()))();
-		}
-	};
-
-//! The timers are managed by a timer service. */
-	static TimedSctUnitRunner * runner;
-
 	class ConfigTest : public ::testing::Test
 	{
+	public:
+		void doStart();
+		void firstController();
+		void secondController();
+		void lastController();
+		void booted();
+		void timeoutConfig();
+
 	protected:
-		MockDefault defaultMock;
+		mrw::statechart::ConfigStatechart * statechart;
+
+		sc::integer dvc_count_1 = 22;
+		sc::integer dvc_count_2 = 11;
+
+	public:
+		class BootingMock
+		{
+			typedef void (BootingMock::*functiontype)();
+		public:
+			ConfigTest * owner;
+			void (BootingMock::*bootingBehaviorDefault)();
+			int callCount;
+
+			BootingMock(ConfigTest * owner) :
+				owner(owner),
+				bootingBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void booting1()
+			{
+			}
+
+			void bootingDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void booting()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return bootingBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (BootingMock::*defaultBehavior)())
+			{
+				bootingBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&BootingMock::bootingDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		BootingMock * bootingMock;
+
+		class QuitMock
+		{
+			typedef void (QuitMock::*functiontype)();
+		public:
+			ConfigTest * owner;
+			void (QuitMock::*quitBehaviorDefault)();
+			int callCount;
+
+			QuitMock(ConfigTest * owner) :
+				owner(owner),
+				quitBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void quit1()
+			{
+			}
+
+			void quitDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void quit()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return quitBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (QuitMock::*defaultBehavior)())
+			{
+				quitBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&QuitMock::quitDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		QuitMock * quitMock;
+
+		class FailMock
+		{
+			typedef void (FailMock::*functiontype)();
+		public:
+			ConfigTest * owner;
+			void (FailMock::*failBehaviorDefault)();
+			int callCount;
+
+			FailMock(ConfigTest * owner) :
+				owner(owner),
+				failBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void fail1()
+			{
+			}
+
+			void failDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void fail()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return failBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (FailMock::*defaultBehavior)())
+			{
+				failBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&FailMock::failDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		FailMock * failMock;
+
+		class ConfigureMock
+		{
+			typedef sc::integer (ConfigureMock::*functiontype)();
+			struct parameters
+			{
+				sc::integer idx;
+				sc::integer (ConfigureMock::*behavior)();
+				int callCount;
+				inline bool operator==(const parameters & other)
+				{
+					return (this->idx == other.idx);
+				}
+			};
+		public:
+			ConfigTest * owner;
+			std::list<ConfigureMock::parameters> mocks;
+			std::list<ConfigureMock::parameters> paramCount;
+			sc::integer (ConfigureMock::*configureBehaviorDefault)();
+			int callCount;
+
+			ConfigureMock(ConfigTest * owner) :
+				owner(owner),
+				configureBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			sc::integer configure1()
+			{
+				return (0);
+			}
+
+			sc::integer configure2()
+			{
+				return (owner->dvc_count_1);
+			}
+
+			sc::integer configure3()
+			{
+				return (owner->dvc_count_2);
+			}
+
+			sc::integer configureDefault()
+			{
+				sc::integer defaultValue = 0;
+				return (defaultValue);
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void setConfigureBehavior(const sc::integer idx, sc::integer (ConfigureMock::*func)())
+			{
+				parameters p;
+				p.idx = idx;
+				p.behavior = func;
+
+				std::list<ConfigureMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					mocks.erase(i);
+				}
+				mocks.push_back(p);
+			}
+
+			bool calledAtLeast(const int times, const sc::integer idx)
+			{
+				parameters p;
+				p.idx = idx;
+
+				std::list<ConfigureMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount >= times);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			bool calledAtLeastOnce(const sc::integer idx)
+			{
+				parameters p;
+				p.idx = idx;
+
+				std::list<ConfigureMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount > 0);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			void configure(const sc::integer idx)
+			{
+				++callCount;
+
+				parameters p;
+				p.idx = idx;
+
+				std::list<ConfigureMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					p.callCount = (++i->callCount);
+					paramCount.erase(i);
+
+				}
+				else
+				{
+					p.callCount = 1;
+				}
+				paramCount.push_back(p);
+			}
+
+			functiontype getBehavior(const sc::integer idx)
+			{
+				parameters p;
+				p.idx = idx;
+
+				std::list<ConfigureMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					return  i->behavior;
+				}
+				else
+				{
+					return configureBehaviorDefault;
+				}
+			}
+
+			void setDefaultBehavior(sc::integer (ConfigureMock::*defaultBehavior)())
+			{
+				configureBehaviorDefault = defaultBehavior;
+				mocks.clear();
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&ConfigureMock::configureDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+				paramCount.clear();
+				mocks.clear();
+			}
+		};
+		ConfigureMock * configureMock;
+
+		class HasMoreMock
+		{
+			typedef bool (HasMoreMock::*functiontype)();
+			struct parameters
+			{
+				sc::integer idx;
+				bool (HasMoreMock::*behavior)();
+				int callCount;
+				inline bool operator==(const parameters & other)
+				{
+					return (this->idx == other.idx);
+				}
+			};
+		public:
+			ConfigTest * owner;
+			std::list<HasMoreMock::parameters> mocks;
+			std::list<HasMoreMock::parameters> paramCount;
+			bool (HasMoreMock::*hasMoreBehaviorDefault)();
+			int callCount;
+
+			HasMoreMock(ConfigTest * owner) :
+				owner(owner),
+				hasMoreBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			bool hasMore1()
+			{
+				return (true);
+			}
+
+			bool hasMore2()
+			{
+				return (false);
+			}
+
+			bool hasMoreDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void setHasMoreBehavior(const sc::integer idx, bool (HasMoreMock::*func)())
+			{
+				parameters p;
+				p.idx = idx;
+				p.behavior = func;
+
+				std::list<HasMoreMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					mocks.erase(i);
+				}
+				mocks.push_back(p);
+			}
+
+			bool calledAtLeast(const int times, const sc::integer idx)
+			{
+				parameters p;
+				p.idx = idx;
+
+				std::list<HasMoreMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount >= times);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			bool calledAtLeastOnce(const sc::integer idx)
+			{
+				parameters p;
+				p.idx = idx;
+
+				std::list<HasMoreMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount > 0);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			void hasMore(const sc::integer idx)
+			{
+				++callCount;
+
+				parameters p;
+				p.idx = idx;
+
+				std::list<HasMoreMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					p.callCount = (++i->callCount);
+					paramCount.erase(i);
+
+				}
+				else
+				{
+					p.callCount = 1;
+				}
+				paramCount.push_back(p);
+			}
+
+			functiontype getBehavior(const sc::integer idx)
+			{
+				parameters p;
+				p.idx = idx;
+
+				std::list<HasMoreMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					return  i->behavior;
+				}
+				else
+				{
+					return hasMoreBehaviorDefault;
+				}
+			}
+
+			void setDefaultBehavior(bool (HasMoreMock::*defaultBehavior)())
+			{
+				hasMoreBehaviorDefault = defaultBehavior;
+				mocks.clear();
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&HasMoreMock::hasMoreDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+				paramCount.clear();
+				mocks.clear();
+			}
+		};
+		HasMoreMock * hasMoreMock;
+
+		class MockDefault : public mrw::statechart::ConfigStatechart::OperationCallback
+		{
+		public:
+			ConfigTest * owner;
+			MockDefault(ConfigTest * owner) : owner(owner) {}
+			sc::integer configure(sc::integer idx)
+			{
+				owner->configureMock->configure(idx);
+				return (owner->configureMock->*(owner->configureMock->getBehavior(idx)))();
+			}
+			bool hasMore(sc::integer idx)
+			{
+				owner->hasMoreMock->hasMore(idx);
+				return (owner->hasMoreMock->*(owner->hasMoreMock->getBehavior(idx)))();
+			}
+			void booting()
+			{
+				owner->bootingMock->booting();
+				return (owner->bootingMock->*(owner->bootingMock->getBehavior()))();
+			}
+			void quit()
+			{
+				owner->quitMock->quit();
+				return (owner->quitMock->*(owner->quitMock->getBehavior()))();
+			}
+			void fail()
+			{
+				owner->failMock->fail();
+				return (owner->failMock->*(owner->failMock->getBehavior()))();
+			}
+		};
+
+		//! The timers are managed by a timer service. */
+		TimedSctUnitRunner * runner;
+
+		MockDefault * defaultMock;
+
 		virtual void SetUp()
 		{
 			statechart = new mrw::statechart::ConfigStatechart();
@@ -535,17 +581,18 @@ namespace
 				maximalParallelTimeEvents
 			);
 			statechart->setTimerService(runner);
-			bootingMock = new BootingMock();
+			bootingMock = new BootingMock(this);
 			bootingMock->initializeBehavior();
-			quitMock = new QuitMock();
+			quitMock = new QuitMock(this);
 			quitMock->initializeBehavior();
-			failMock = new FailMock();
+			failMock = new FailMock(this);
 			failMock->initializeBehavior();
-			configureMock = new ConfigureMock();
+			configureMock = new ConfigureMock(this);
 			configureMock->initializeBehavior();
-			hasMoreMock = new HasMoreMock();
+			hasMoreMock = new HasMoreMock(this);
 			hasMoreMock->initializeBehavior();
-			statechart->setOperationCallback(&defaultMock);
+			defaultMock = new MockDefault(this);
+			statechart->setOperationCallback(defaultMock);
 		}
 		virtual void TearDown()
 		{
@@ -555,12 +602,15 @@ namespace
 			delete quitMock;
 			delete bootingMock;
 			delete statechart;
+			delete defaultMock;
+			defaultMock = 0;
 			delete runner;
 		}
 	};
 
 
-	void doStart()
+
+	void ConfigTest::doStart()
 	{
 		statechart->enter();
 
@@ -593,7 +643,7 @@ namespace
 		EXPECT_TRUE(failMock->calledAtLeastOnce());
 
 	}
-	void firstController()
+	void ConfigTest::firstController()
 	{
 		doStart();
 
@@ -618,7 +668,7 @@ namespace
 	{
 		firstController();
 	}
-	void secondController()
+	void ConfigTest::secondController()
 	{
 		firstController();
 
@@ -643,7 +693,7 @@ namespace
 	{
 		secondController();
 	}
-	void lastController()
+	void ConfigTest::lastController()
 	{
 		secondController();
 
@@ -664,7 +714,7 @@ namespace
 	{
 		lastController();
 	}
-	void booted()
+	void ConfigTest::booted()
 	{
 		lastController();
 
@@ -683,7 +733,7 @@ namespace
 	{
 		booted();
 	}
-	void timeoutConfig()
+	void ConfigTest::timeoutConfig()
 	{
 		lastController();
 

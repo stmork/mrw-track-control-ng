@@ -21,8 +21,7 @@ namespace mrw
 		SignalStatechart::SignalStatechart(QObject * parent) noexcept :
 			symbol(SignalStatechart::STOP),
 			turn_raised(false),
-			turn_value
-			(0),
+			turn_value(0),
 			queued_raised(false),
 			ok_raised(false),
 			fail_raised(false),
@@ -48,7 +47,7 @@ namespace mrw
 
 		std::unique_ptr<mrw::statechart::SignalStatechart::EventInstance> SignalStatechart::getNextEvent() noexcept
 		{
-			std::unique_ptr<mrw::statechart::SignalStatechart::EventInstance> nextEvent = 0;
+			std::unique_ptr<mrw::statechart::SignalStatechart::EventInstance> nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -78,12 +77,11 @@ namespace mrw
 			{
 			case mrw::statechart::SignalStatechart::Event::turn:
 				{
-					std::unique_ptr<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>> e = cast_event_pointer_type<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer> > (std::move(event));
+					std::unique_ptr<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>> e = cast_event_pointer_type<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer> >(std::move(event));
 
-					if (e != 0)
+					if (e != nullptr)
 					{
-						turn_value
-							= e->value;
+						turn_value = e->value;
 						turn_raised = true;
 					}
 					break;
@@ -127,8 +125,7 @@ namespace mrw
 		/*! Slot for the in event 'turn' that is defined in the default interface scope. */
 		void mrw::statechart::SignalStatechart::turn(sc::integer turn_)
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>>( new mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>(mrw::statechart::SignalStatechart::Event::turn, turn_)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>>( new mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>(mrw::statechart::SignalStatechart::Event::turn, turn_)));
 			runCycle();
 		}
 
@@ -136,8 +133,7 @@ namespace mrw
 		/*! Slot for the in event 'queued' that is defined in the default interface scope. */
 		void mrw::statechart::SignalStatechart::queued()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SignalStatechart::EventInstance>(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::queued)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SignalStatechart::EventInstance>(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::queued)));
 			runCycle();
 		}
 
@@ -145,8 +141,7 @@ namespace mrw
 		/*! Slot for the in event 'ok' that is defined in the default interface scope. */
 		void mrw::statechart::SignalStatechart::ok()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SignalStatechart::EventInstance>(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::ok)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SignalStatechart::EventInstance>(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::ok)));
 			runCycle();
 		}
 
@@ -154,8 +149,7 @@ namespace mrw
 		/*! Slot for the in event 'fail' that is defined in the default interface scope. */
 		void mrw::statechart::SignalStatechart::fail()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SignalStatechart::EventInstance>(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::fail)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SignalStatechart::EventInstance>(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::fail)));
 			runCycle();
 		}
 
@@ -163,8 +157,7 @@ namespace mrw
 		/*! Slot for the in event 'clear' that is defined in the default interface scope. */
 		void mrw::statechart::SignalStatechart::clear()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SignalStatechart::EventInstance>(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::clear)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SignalStatechart::EventInstance>(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::clear)));
 			runCycle();
 		}
 

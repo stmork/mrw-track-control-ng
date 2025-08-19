@@ -17,763 +17,854 @@
 namespace
 {
 
-	void doStart();
-	void doReset();
-	void doPing();
-	void noController();
-	void firstFlashRequest();
-	void firstFlashRequestMismatch();
-	void flashRequested();
-	void hardwareMismatch();
-	void lastFlashRequest();
-	void firstCompletePage();
-	void nextCompletePage();
-	void lastCompletePage();
-	void doFlashCheck();
-	void booted();
-	void failFlashCheck();
-	mrw::statechart::UpdateStatechart * statechart;
-
-
-	class InitMock
-	{
-		typedef void (InitMock::*functiontype)();
-		struct parameters
-		{
-			sc::integer count;
-			void (InitMock::*behavior)();
-			int callCount;
-			inline bool operator==(const parameters & other)
-			{
-				return (this->count == other.count);
-			}
-		};
-	public:
-		std::list<InitMock::parameters> mocks;
-		std::list<InitMock::parameters> paramCount;
-		void (InitMock::*initBehaviorDefault)();
-		int callCount;
-
-		void init1()
-		{
-		}
-
-		void initDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void setInitBehavior(const sc::integer count, void (InitMock::*func)())
-		{
-			parameters p;
-			p.count = count;
-			p.behavior = func;
-
-			std::list<InitMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
-			if (i != mocks.end())
-			{
-				mocks.erase(i);
-			}
-			mocks.push_back(p);
-		}
-
-		bool calledAtLeast(const int times, const sc::integer count)
-		{
-			parameters p;
-			p.count = count;
-
-			std::list<InitMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				return (i->callCount >= times);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		bool calledAtLeastOnce(const sc::integer count)
-		{
-			parameters p;
-			p.count = count;
-
-			std::list<InitMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				return (i->callCount > 0);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		void init(const sc::integer count)
-		{
-			++callCount;
-
-			parameters p;
-			p.count = count;
-
-			std::list<InitMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				p.callCount = (++i->callCount);
-				paramCount.erase(i);
-
-			}
-			else
-			{
-				p.callCount = 1;
-			}
-			paramCount.push_back(p);
-		}
-
-		functiontype getBehavior(const sc::integer count)
-		{
-			parameters p;
-			p.count = count;
-
-			std::list<InitMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
-			if (i != mocks.end())
-			{
-				return  i->behavior;
-			}
-			else
-			{
-				return initBehaviorDefault;
-			}
-		}
-
-		void setDefaultBehavior(void (InitMock::*defaultBehavior)())
-		{
-			initBehaviorDefault = defaultBehavior;
-			mocks.clear();
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&InitMock::initDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-			paramCount.clear();
-			mocks.clear();
-		}
-	};
-	static InitMock * initMock;
-
-	class PingMock
-	{
-		typedef void (PingMock::*functiontype)();
-	public:
-		void (PingMock::*pingBehaviorDefault)();
-		int callCount;
-
-		void ping1()
-		{
-		}
-
-		void pingDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void ping()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return pingBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (PingMock::*defaultBehavior)())
-		{
-			pingBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&PingMock::pingDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static PingMock * pingMock;
-
-	class BootMock
-	{
-		typedef void (BootMock::*functiontype)();
-	public:
-		void (BootMock::*bootBehaviorDefault)();
-		int callCount;
-
-		void boot1()
-		{
-		}
-
-		void bootDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void boot()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return bootBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (BootMock::*defaultBehavior)())
-		{
-			bootBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&BootMock::bootDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static BootMock * bootMock;
-
-	class FlashRequestMock
-	{
-		typedef void (FlashRequestMock::*functiontype)();
-	public:
-		void (FlashRequestMock::*flashRequestBehaviorDefault)();
-		int callCount;
-
-		void flashRequest1()
-		{
-		}
-
-		void flashRequestDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void flashRequest()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return flashRequestBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (FlashRequestMock::*defaultBehavior)())
-		{
-			flashRequestBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&FlashRequestMock::flashRequestDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static FlashRequestMock * flashRequestMock;
-
-	class FlashCompletePageMock
-	{
-		typedef void (FlashCompletePageMock::*functiontype)();
-	public:
-		void (FlashCompletePageMock::*flashCompletePageBehaviorDefault)();
-		int callCount;
-
-		void flashCompletePage1()
-		{
-		}
-
-		void flashCompletePageDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void flashCompletePage()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return flashCompletePageBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (FlashCompletePageMock::*defaultBehavior)())
-		{
-			flashCompletePageBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&FlashCompletePageMock::flashCompletePageDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static FlashCompletePageMock * flashCompletePageMock;
-
-	class FlashRestPageMock
-	{
-		typedef void (FlashRestPageMock::*functiontype)();
-	public:
-		void (FlashRestPageMock::*flashRestPageBehaviorDefault)();
-		int callCount;
-
-		void flashRestPage1()
-		{
-		}
-
-		void flashRestPageDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void flashRestPage()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return flashRestPageBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (FlashRestPageMock::*defaultBehavior)())
-		{
-			flashRestPageBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&FlashRestPageMock::flashRestPageDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static FlashRestPageMock * flashRestPageMock;
-
-	class FlashCheckMock
-	{
-		typedef void (FlashCheckMock::*functiontype)();
-	public:
-		void (FlashCheckMock::*flashCheckBehaviorDefault)();
-		int callCount;
-
-		void flashCheck1()
-		{
-		}
-
-		void flashCheckDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void flashCheck()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return flashCheckBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (FlashCheckMock::*defaultBehavior)())
-		{
-			flashCheckBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&FlashCheckMock::flashCheckDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static FlashCheckMock * flashCheckMock;
-
-	class HasControllerMock
-	{
-		typedef bool (HasControllerMock::*functiontype)();
-	public:
-		bool (HasControllerMock::*hasControllerBehaviorDefault)();
-
-		bool hasController1()
-		{
-			return (true);
-		}
-
-		bool hasController2()
-		{
-			return (false);
-		}
-
-		bool hasControllerDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		functiontype getBehavior()
-		{
-			return hasControllerBehaviorDefault;
-		}
-
-		void setDefaultBehavior(bool (HasControllerMock::*defaultBehavior)())
-		{
-			hasControllerBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&HasControllerMock::hasControllerDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-		}
-	};
-	static HasControllerMock * hasControllerMock;
-
-	class HasPagesMock
-	{
-		typedef bool (HasPagesMock::*functiontype)();
-	public:
-		bool (HasPagesMock::*hasPagesBehaviorDefault)();
-		int callCount;
-
-		bool hasPages1()
-		{
-			return (true);
-		}
-
-		bool hasPages2()
-		{
-			return (false);
-		}
-
-		bool hasPagesDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void hasPages()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return hasPagesBehaviorDefault;
-		}
-
-		void setDefaultBehavior(bool (HasPagesMock::*defaultBehavior)())
-		{
-			hasPagesBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&HasPagesMock::hasPagesDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static HasPagesMock * hasPagesMock;
-
-	class FailMock
-	{
-		struct parameters
-		{
-			sc::integer code;
-			int callCount;
-			inline bool operator==(const parameters & other)
-			{
-				return (this->code == other.code);
-			}
-		};
-	public:
-		std::list<FailMock::parameters> paramCount;
-		int callCount;
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		bool calledAtLeast(const int times, const sc::integer code)
-		{
-			parameters p;
-			p.code = code;
-
-			std::list<FailMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				return (i->callCount >= times);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		bool calledAtLeastOnce(const sc::integer code)
-		{
-			parameters p;
-			p.code = code;
-
-			std::list<FailMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				return (i->callCount > 0);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		void fail(const sc::integer code)
-		{
-			++callCount;
-
-			parameters p;
-			p.code = code;
-
-			std::list<FailMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				p.callCount = (++i->callCount);
-				paramCount.erase(i);
-
-			}
-			else
-			{
-				p.callCount = 1;
-			}
-			paramCount.push_back(p);
-		}
-		void reset()
-		{
-			callCount = 0;
-			paramCount.clear();
-		}
-	};
-	static FailMock * failMock;
-
-	class QuitMock
-	{
-	public:
-		int callCount;
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void quit()
-		{
-			++callCount;
-		}
-		void reset()
-		{
-			callCount = 0;
-		}
-	};
-	static QuitMock * quitMock;
-
-	class MockDefault : public mrw::statechart::UpdateStatechart::OperationCallback
-	{
-	public:
-		void init(sc::integer count)
-		{
-			initMock->init(count);
-			return (initMock->*(initMock->getBehavior(count)))();
-		}
-		void ping()
-		{
-			pingMock->ping();
-			return (pingMock->*(pingMock->getBehavior()))();
-		}
-		void boot()
-		{
-			bootMock->boot();
-			return (bootMock->*(bootMock->getBehavior()))();
-		}
-		void flashRequest()
-		{
-			flashRequestMock->flashRequest();
-			return (flashRequestMock->*(flashRequestMock->getBehavior()))();
-		}
-		void flashCompletePage()
-		{
-			flashCompletePageMock->flashCompletePage();
-			return (flashCompletePageMock->*(flashCompletePageMock->getBehavior()))();
-		}
-		void flashRestPage()
-		{
-			flashRestPageMock->flashRestPage();
-			return (flashRestPageMock->*(flashRestPageMock->getBehavior()))();
-		}
-		void flashCheck()
-		{
-			flashCheckMock->flashCheck();
-			return (flashCheckMock->*(flashCheckMock->getBehavior()))();
-		}
-		void quit()
-		{
-			quitMock->quit();
-		}
-		void fail(sc::integer code)
-		{
-			failMock->fail(code);
-		}
-		bool hasController()
-		{
-			return (hasControllerMock->*(hasControllerMock->getBehavior()))();
-		}
-		bool hasPages()
-		{
-			hasPagesMock->hasPages();
-			return (hasPagesMock->*(hasPagesMock->getBehavior()))();
-		}
-	};
-
-//! The timers are managed by a timer service. */
-	static TimedSctUnitRunner * runner;
-
 	class UpdateTest : public ::testing::Test
 	{
+	public:
+		void doStart();
+		void doReset();
+		void doPing();
+		void noController();
+		void firstFlashRequest();
+		void firstFlashRequestMismatch();
+		void flashRequested();
+		void hardwareMismatch();
+		void lastFlashRequest();
+		void firstCompletePage();
+		void nextCompletePage();
+		void lastCompletePage();
+		void doFlashCheck();
+		void booted();
+		void failFlashCheck();
+
 	protected:
-		MockDefault defaultMock;
+		mrw::statechart::UpdateStatechart * statechart;
+
+
+	public:
+		class InitMock
+		{
+			typedef void (InitMock::*functiontype)();
+			struct parameters
+			{
+				sc::integer count;
+				void (InitMock::*behavior)();
+				int callCount;
+				inline bool operator==(const parameters & other)
+				{
+					return (this->count == other.count);
+				}
+			};
+		public:
+			UpdateTest * owner;
+			std::list<InitMock::parameters> mocks;
+			std::list<InitMock::parameters> paramCount;
+			void (InitMock::*initBehaviorDefault)();
+			int callCount;
+
+			InitMock(UpdateTest * owner) :
+				owner(owner),
+				initBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void init1()
+			{
+			}
+
+			void initDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void setInitBehavior(const sc::integer count, void (InitMock::*func)())
+			{
+				parameters p;
+				p.count = count;
+				p.behavior = func;
+
+				std::list<InitMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					mocks.erase(i);
+				}
+				mocks.push_back(p);
+			}
+
+			bool calledAtLeast(const int times, const sc::integer count)
+			{
+				parameters p;
+				p.count = count;
+
+				std::list<InitMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount >= times);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			bool calledAtLeastOnce(const sc::integer count)
+			{
+				parameters p;
+				p.count = count;
+
+				std::list<InitMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount > 0);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			void init(const sc::integer count)
+			{
+				++callCount;
+
+				parameters p;
+				p.count = count;
+
+				std::list<InitMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					p.callCount = (++i->callCount);
+					paramCount.erase(i);
+
+				}
+				else
+				{
+					p.callCount = 1;
+				}
+				paramCount.push_back(p);
+			}
+
+			functiontype getBehavior(const sc::integer count)
+			{
+				parameters p;
+				p.count = count;
+
+				std::list<InitMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					return  i->behavior;
+				}
+				else
+				{
+					return initBehaviorDefault;
+				}
+			}
+
+			void setDefaultBehavior(void (InitMock::*defaultBehavior)())
+			{
+				initBehaviorDefault = defaultBehavior;
+				mocks.clear();
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&InitMock::initDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+				paramCount.clear();
+				mocks.clear();
+			}
+		};
+		InitMock * initMock;
+
+		class PingMock
+		{
+			typedef void (PingMock::*functiontype)();
+		public:
+			UpdateTest * owner;
+			void (PingMock::*pingBehaviorDefault)();
+			int callCount;
+
+			PingMock(UpdateTest * owner) :
+				owner(owner),
+				pingBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void ping1()
+			{
+			}
+
+			void pingDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void ping()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return pingBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (PingMock::*defaultBehavior)())
+			{
+				pingBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&PingMock::pingDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		PingMock * pingMock;
+
+		class BootMock
+		{
+			typedef void (BootMock::*functiontype)();
+		public:
+			UpdateTest * owner;
+			void (BootMock::*bootBehaviorDefault)();
+			int callCount;
+
+			BootMock(UpdateTest * owner) :
+				owner(owner),
+				bootBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void boot1()
+			{
+			}
+
+			void bootDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void boot()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return bootBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (BootMock::*defaultBehavior)())
+			{
+				bootBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&BootMock::bootDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		BootMock * bootMock;
+
+		class FlashRequestMock
+		{
+			typedef void (FlashRequestMock::*functiontype)();
+		public:
+			UpdateTest * owner;
+			void (FlashRequestMock::*flashRequestBehaviorDefault)();
+			int callCount;
+
+			FlashRequestMock(UpdateTest * owner) :
+				owner(owner),
+				flashRequestBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void flashRequest1()
+			{
+			}
+
+			void flashRequestDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void flashRequest()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return flashRequestBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (FlashRequestMock::*defaultBehavior)())
+			{
+				flashRequestBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&FlashRequestMock::flashRequestDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		FlashRequestMock * flashRequestMock;
+
+		class FlashCompletePageMock
+		{
+			typedef void (FlashCompletePageMock::*functiontype)();
+		public:
+			UpdateTest * owner;
+			void (FlashCompletePageMock::*flashCompletePageBehaviorDefault)();
+			int callCount;
+
+			FlashCompletePageMock(UpdateTest * owner) :
+				owner(owner),
+				flashCompletePageBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void flashCompletePage1()
+			{
+			}
+
+			void flashCompletePageDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void flashCompletePage()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return flashCompletePageBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (FlashCompletePageMock::*defaultBehavior)())
+			{
+				flashCompletePageBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&FlashCompletePageMock::flashCompletePageDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		FlashCompletePageMock * flashCompletePageMock;
+
+		class FlashRestPageMock
+		{
+			typedef void (FlashRestPageMock::*functiontype)();
+		public:
+			UpdateTest * owner;
+			void (FlashRestPageMock::*flashRestPageBehaviorDefault)();
+			int callCount;
+
+			FlashRestPageMock(UpdateTest * owner) :
+				owner(owner),
+				flashRestPageBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void flashRestPage1()
+			{
+			}
+
+			void flashRestPageDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void flashRestPage()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return flashRestPageBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (FlashRestPageMock::*defaultBehavior)())
+			{
+				flashRestPageBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&FlashRestPageMock::flashRestPageDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		FlashRestPageMock * flashRestPageMock;
+
+		class FlashCheckMock
+		{
+			typedef void (FlashCheckMock::*functiontype)();
+		public:
+			UpdateTest * owner;
+			void (FlashCheckMock::*flashCheckBehaviorDefault)();
+			int callCount;
+
+			FlashCheckMock(UpdateTest * owner) :
+				owner(owner),
+				flashCheckBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void flashCheck1()
+			{
+			}
+
+			void flashCheckDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void flashCheck()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return flashCheckBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (FlashCheckMock::*defaultBehavior)())
+			{
+				flashCheckBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&FlashCheckMock::flashCheckDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		FlashCheckMock * flashCheckMock;
+
+		class HasControllerMock
+		{
+			typedef bool (HasControllerMock::*functiontype)();
+		public:
+			UpdateTest * owner;
+			bool (HasControllerMock::*hasControllerBehaviorDefault)();
+
+			HasControllerMock(UpdateTest * owner) :
+				owner(owner),
+				hasControllerBehaviorDefault(0)
+			{}
+
+
+			bool hasController1()
+			{
+				return (true);
+			}
+
+			bool hasController2()
+			{
+				return (false);
+			}
+
+			bool hasControllerDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			functiontype getBehavior()
+			{
+				return hasControllerBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (HasControllerMock::*defaultBehavior)())
+			{
+				hasControllerBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&HasControllerMock::hasControllerDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		HasControllerMock * hasControllerMock;
+
+		class HasPagesMock
+		{
+			typedef bool (HasPagesMock::*functiontype)();
+		public:
+			UpdateTest * owner;
+			bool (HasPagesMock::*hasPagesBehaviorDefault)();
+			int callCount;
+
+			HasPagesMock(UpdateTest * owner) :
+				owner(owner),
+				hasPagesBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			bool hasPages1()
+			{
+				return (true);
+			}
+
+			bool hasPages2()
+			{
+				return (false);
+			}
+
+			bool hasPagesDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void hasPages()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return hasPagesBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (HasPagesMock::*defaultBehavior)())
+			{
+				hasPagesBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&HasPagesMock::hasPagesDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		HasPagesMock * hasPagesMock;
+
+		class FailMock
+		{
+			struct parameters
+			{
+				sc::integer code;
+				int callCount;
+				inline bool operator==(const parameters & other)
+				{
+					return (this->code == other.code);
+				}
+			};
+		public:
+			UpdateTest * owner;
+			std::list<FailMock::parameters> paramCount;
+			int callCount;
+
+			FailMock(UpdateTest * owner) :
+				owner(owner),
+				callCount(0)
+			{}
+
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			bool calledAtLeast(const int times, const sc::integer code)
+			{
+				parameters p;
+				p.code = code;
+
+				std::list<FailMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount >= times);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			bool calledAtLeastOnce(const sc::integer code)
+			{
+				parameters p;
+				p.code = code;
+
+				std::list<FailMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount > 0);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			void fail(const sc::integer code)
+			{
+				++callCount;
+
+				parameters p;
+				p.code = code;
+
+				std::list<FailMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					p.callCount = (++i->callCount);
+					paramCount.erase(i);
+
+				}
+				else
+				{
+					p.callCount = 1;
+				}
+				paramCount.push_back(p);
+			}
+			void reset()
+			{
+				callCount = 0;
+				paramCount.clear();
+			}
+		};
+		FailMock * failMock;
+
+		class QuitMock
+		{
+		public:
+			UpdateTest * owner;
+			int callCount;
+
+			QuitMock(UpdateTest * owner) :
+				owner(owner),
+				callCount(0)
+			{}
+
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void quit()
+			{
+				++callCount;
+			}
+			void reset()
+			{
+				callCount = 0;
+			}
+		};
+		QuitMock * quitMock;
+
+		class MockDefault : public mrw::statechart::UpdateStatechart::OperationCallback
+		{
+		public:
+			UpdateTest * owner;
+			MockDefault(UpdateTest * owner) : owner(owner) {}
+			void init(sc::integer count)
+			{
+				owner->initMock->init(count);
+				return (owner->initMock->*(owner->initMock->getBehavior(count)))();
+			}
+			void ping()
+			{
+				owner->pingMock->ping();
+				return (owner->pingMock->*(owner->pingMock->getBehavior()))();
+			}
+			void boot()
+			{
+				owner->bootMock->boot();
+				return (owner->bootMock->*(owner->bootMock->getBehavior()))();
+			}
+			void flashRequest()
+			{
+				owner->flashRequestMock->flashRequest();
+				return (owner->flashRequestMock->*(owner->flashRequestMock->getBehavior()))();
+			}
+			void flashCompletePage()
+			{
+				owner->flashCompletePageMock->flashCompletePage();
+				return (owner->flashCompletePageMock->*(owner->flashCompletePageMock->getBehavior()))();
+			}
+			void flashRestPage()
+			{
+				owner->flashRestPageMock->flashRestPage();
+				return (owner->flashRestPageMock->*(owner->flashRestPageMock->getBehavior()))();
+			}
+			void flashCheck()
+			{
+				owner->flashCheckMock->flashCheck();
+				return (owner->flashCheckMock->*(owner->flashCheckMock->getBehavior()))();
+			}
+			void quit()
+			{
+				owner->quitMock->quit();
+			}
+			void fail(sc::integer code)
+			{
+				owner->failMock->fail(code);
+			}
+			bool hasController()
+			{
+				return (owner->hasControllerMock->*(owner->hasControllerMock->getBehavior()))();
+			}
+			bool hasPages()
+			{
+				owner->hasPagesMock->hasPages();
+				return (owner->hasPagesMock->*(owner->hasPagesMock->getBehavior()))();
+			}
+		};
+
+		//! The timers are managed by a timer service. */
+		TimedSctUnitRunner * runner;
+
+		MockDefault * defaultMock;
+
 		virtual void SetUp()
 		{
 			statechart = new mrw::statechart::UpdateStatechart();
@@ -782,27 +873,28 @@ namespace
 				maximalParallelTimeEvents
 			);
 			statechart->setTimerService(runner);
-			initMock = new InitMock();
+			initMock = new InitMock(this);
 			initMock->initializeBehavior();
-			pingMock = new PingMock();
+			pingMock = new PingMock(this);
 			pingMock->initializeBehavior();
-			bootMock = new BootMock();
+			bootMock = new BootMock(this);
 			bootMock->initializeBehavior();
-			flashRequestMock = new FlashRequestMock();
+			flashRequestMock = new FlashRequestMock(this);
 			flashRequestMock->initializeBehavior();
-			flashCompletePageMock = new FlashCompletePageMock();
+			flashCompletePageMock = new FlashCompletePageMock(this);
 			flashCompletePageMock->initializeBehavior();
-			flashRestPageMock = new FlashRestPageMock();
+			flashRestPageMock = new FlashRestPageMock(this);
 			flashRestPageMock->initializeBehavior();
-			flashCheckMock = new FlashCheckMock();
+			flashCheckMock = new FlashCheckMock(this);
 			flashCheckMock->initializeBehavior();
-			hasControllerMock = new HasControllerMock();
+			hasControllerMock = new HasControllerMock(this);
 			hasControllerMock->initializeBehavior();
-			hasPagesMock = new HasPagesMock();
+			hasPagesMock = new HasPagesMock(this);
 			hasPagesMock->initializeBehavior();
-			failMock = new FailMock();
-			quitMock = new QuitMock();
-			statechart->setOperationCallback(&defaultMock);
+			failMock = new FailMock(this);
+			quitMock = new QuitMock(this);
+			defaultMock = new MockDefault(this);
+			statechart->setOperationCallback(defaultMock);
 		}
 		virtual void TearDown()
 		{
@@ -818,12 +910,15 @@ namespace
 			delete pingMock;
 			delete initMock;
 			delete statechart;
+			delete defaultMock;
+			defaultMock = 0;
 			delete runner;
 		}
 	};
 
 
-	void doStart()
+
+	void UpdateTest::doStart()
 	{
 		statechart->enter();
 
@@ -868,7 +963,7 @@ namespace
 		EXPECT_TRUE(failMock->calledAtLeastOnce());
 
 	}
-	void doReset()
+	void UpdateTest::doReset()
 	{
 		doStart();
 
@@ -883,7 +978,7 @@ namespace
 	{
 		doReset();
 	}
-	void doPing()
+	void UpdateTest::doPing()
 	{
 		doReset();
 
@@ -898,7 +993,7 @@ namespace
 	{
 		doPing();
 	}
-	void noController()
+	void UpdateTest::noController()
 	{
 		doPing();
 
@@ -923,7 +1018,7 @@ namespace
 	{
 		noController();
 	}
-	void firstFlashRequest()
+	void UpdateTest::firstFlashRequest()
 	{
 		doPing();
 
@@ -944,7 +1039,7 @@ namespace
 	{
 		firstFlashRequest();
 	}
-	void firstFlashRequestMismatch()
+	void UpdateTest::firstFlashRequestMismatch()
 	{
 		firstFlashRequest();
 
@@ -969,7 +1064,7 @@ namespace
 	{
 		firstFlashRequestMismatch();
 	}
-	void flashRequested()
+	void UpdateTest::flashRequested()
 	{
 		firstFlashRequest();
 
@@ -986,7 +1081,7 @@ namespace
 	{
 		flashRequested();
 	}
-	void hardwareMismatch()
+	void UpdateTest::hardwareMismatch()
 	{
 		flashRequested();
 
@@ -1009,7 +1104,7 @@ namespace
 	{
 		hardwareMismatch();
 	}
-	void lastFlashRequest()
+	void UpdateTest::lastFlashRequest()
 	{
 		firstFlashRequest();
 
@@ -1053,7 +1148,7 @@ namespace
 		EXPECT_TRUE(failMock->calledAtLeastOnce());
 
 	}
-	void firstCompletePage()
+	void UpdateTest::firstCompletePage()
 	{
 		flashRequested();
 
@@ -1072,7 +1167,7 @@ namespace
 	{
 		firstCompletePage();
 	}
-	void nextCompletePage()
+	void UpdateTest::nextCompletePage()
 	{
 		firstCompletePage();
 
@@ -1091,7 +1186,7 @@ namespace
 	{
 		nextCompletePage();
 	}
-	void lastCompletePage()
+	void UpdateTest::lastCompletePage()
 	{
 		nextCompletePage();
 
@@ -1110,7 +1205,7 @@ namespace
 	{
 		lastCompletePage();
 	}
-	void doFlashCheck()
+	void UpdateTest::doFlashCheck()
 	{
 		lastCompletePage();
 
@@ -1127,7 +1222,7 @@ namespace
 	{
 		doFlashCheck();
 	}
-	void booted()
+	void UpdateTest::booted()
 	{
 		doFlashCheck();
 
@@ -1142,7 +1237,7 @@ namespace
 	{
 		booted();
 	}
-	void failFlashCheck()
+	void UpdateTest::failFlashCheck()
 	{
 		doFlashCheck();
 

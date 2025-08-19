@@ -43,7 +43,7 @@ namespace mrw
 
 		mrw::statechart::SignalControllerStatechart::EventInstance * SignalControllerStatechart::getNextEvent() noexcept
 		{
-			mrw::statechart::SignalControllerStatechart::EventInstance * nextEvent = 0;
+			mrw::statechart::SignalControllerStatechart::EventInstance * nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -137,8 +137,7 @@ namespace mrw
 		/*! Raises the in event 'start' of default interface scope. */
 		void mrw::statechart::SignalControllerStatechart::raiseStart()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::start))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::start));
 			runCycle();
 		}
 
@@ -146,8 +145,7 @@ namespace mrw
 		/*! Raises the in event 'clear' of default interface scope. */
 		void mrw::statechart::SignalControllerStatechart::raiseClear()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::clear))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::clear));
 			runCycle();
 		}
 
@@ -155,8 +153,7 @@ namespace mrw
 		/*! Raises the in event 'failed' of default interface scope. */
 		void mrw::statechart::SignalControllerStatechart::raiseFailed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::failed))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::failed));
 			runCycle();
 		}
 
@@ -164,8 +161,7 @@ namespace mrw
 		/*! Raises the in event 'enable' of default interface scope. */
 		void mrw::statechart::SignalControllerStatechart::raiseEnable()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::enable))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::enable));
 			runCycle();
 		}
 
@@ -173,8 +169,7 @@ namespace mrw
 		/*! Raises the in event 'extend' of default interface scope. */
 		void mrw::statechart::SignalControllerStatechart::raiseExtend()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::extend))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::extend));
 			runCycle();
 		}
 
@@ -182,8 +177,7 @@ namespace mrw
 		/*! Raises the in event 'disable' of default interface scope. */
 		void mrw::statechart::SignalControllerStatechart::raiseDisable()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::disable))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::disable));
 			runCycle();
 		}
 
@@ -227,8 +221,7 @@ namespace mrw
 		/*! Raises the in event 'completedMain' of default interface scope. */
 		void mrw::statechart::SignalControllerStatechart::raiseCompletedMain()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::completedMain))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::completedMain));
 			runCycle();
 		}
 
@@ -236,8 +229,7 @@ namespace mrw
 		/*! Raises the in event 'completedDistant' of default interface scope. */
 		void mrw::statechart::SignalControllerStatechart::raiseCompletedDistant()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::completedDistant))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::completedDistant));
 			runCycle();
 		}
 
@@ -245,8 +237,7 @@ namespace mrw
 		/*! Raises the in event 'completedShunt' of default interface scope. */
 		void mrw::statechart::SignalControllerStatechart::raiseCompletedShunt()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::completedShunt))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::completedShunt));
 			runCycle();
 		}
 
@@ -587,8 +578,7 @@ namespace mrw
 			}
 			if (ifaceOperationCallback->isMainAndShunt())
 			{
-				incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::completedShunt))
-				;
+				incomingEventQueue.push_back(new mrw::statechart::SignalControllerStatechart::EventInstance(mrw::statechart::SignalControllerStatechart::Event::completedShunt));
 			}
 		}
 

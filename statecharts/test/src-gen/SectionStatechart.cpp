@@ -50,7 +50,7 @@ namespace mrw
 
 		mrw::statechart::SectionStatechart::EventInstance * SectionStatechart::getNextEvent() noexcept
 		{
-			mrw::statechart::SectionStatechart::EventInstance * nextEvent = 0;
+			mrw::statechart::SectionStatechart::EventInstance * nextEvent = nullptr;
 
 			if (!internalEventQueue.empty())
 			{
@@ -82,10 +82,9 @@ namespace mrw
 				{
 					mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> * e = static_cast<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> *>(event);
 
-					if (e != 0)
+					if (e != nullptr)
 					{
-						enable_value
-							= e->value;
+						enable_value = e->value;
 						enable_raised = true;
 					}
 					break;
@@ -114,10 +113,9 @@ namespace mrw
 				{
 					mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> * e = static_cast<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> *>(event);
 
-					if (e != 0)
+					if (e != nullptr)
 					{
-						stateResponse_value
-							= e->value;
+						stateResponse_value = e->value;
 						stateResponse_raised = true;
 					}
 					break;
@@ -165,8 +163,7 @@ namespace mrw
 		/*! Raises the in event 'enable' of default interface scope. */
 		void mrw::statechart::SectionStatechart::raiseEnable(bool enable_)
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::enable, enable_))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::enable, enable_));
 			runCycle();
 		}
 
@@ -174,8 +171,7 @@ namespace mrw
 		/*! Raises the in event 'disable' of default interface scope. */
 		void mrw::statechart::SectionStatechart::raiseDisable()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::disable))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::disable));
 			runCycle();
 		}
 
@@ -183,8 +179,7 @@ namespace mrw
 		/*! Raises the in event 'clear' of default interface scope. */
 		void mrw::statechart::SectionStatechart::raiseClear()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::clear))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::clear));
 			runCycle();
 		}
 
@@ -192,8 +187,7 @@ namespace mrw
 		/*! Raises the in event 'start' of default interface scope. */
 		void mrw::statechart::SectionStatechart::raiseStart()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::start))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::start));
 			runCycle();
 		}
 
@@ -201,8 +195,7 @@ namespace mrw
 		/*! Raises the in event 'relaisResponse' of default interface scope. */
 		void mrw::statechart::SectionStatechart::raiseRelaisResponse()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::relaisResponse))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::relaisResponse));
 			runCycle();
 		}
 
@@ -210,8 +203,7 @@ namespace mrw
 		/*! Raises the in event 'stateResponse' of default interface scope. */
 		void mrw::statechart::SectionStatechart::raiseStateResponse(bool stateResponse_)
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::stateResponse, stateResponse_))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::stateResponse, stateResponse_));
 			runCycle();
 		}
 
@@ -219,8 +211,7 @@ namespace mrw
 		/*! Raises the in event 'failed' of default interface scope. */
 		void mrw::statechart::SectionStatechart::raiseFailed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::failed))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::failed));
 			runCycle();
 		}
 
@@ -228,8 +219,7 @@ namespace mrw
 		/*! Raises the in event 'next' of default interface scope. */
 		void mrw::statechart::SectionStatechart::raiseNext()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::next))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::next));
 			runCycle();
 		}
 
@@ -237,8 +227,7 @@ namespace mrw
 		/*! Raises the in event 'unlock' of default interface scope. */
 		void mrw::statechart::SectionStatechart::raiseUnlock()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::unlock))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::unlock));
 			runCycle();
 		}
 
@@ -287,8 +276,7 @@ namespace mrw
 
 		void mrw::statechart::SectionStatechart::raiseLocal_leave()
 		{
-			internalEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::Internal_local_leave))
-			;
+			internalEventQueue.push_back(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::Internal_local_leave));
 		}
 
 

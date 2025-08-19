@@ -49,7 +49,7 @@ namespace mrw
 
 		mrw::statechart::TrackerStatechart::EventInstance * TrackerStatechart::getNextEvent() noexcept
 		{
-			mrw::statechart::TrackerStatechart::EventInstance * nextEvent = 0;
+			mrw::statechart::TrackerStatechart::EventInstance * nextEvent = nullptr;
 
 			if (!internalEventQueue.empty())
 			{
@@ -111,8 +111,7 @@ namespace mrw
 		/*! Raises the in event 'received' of default interface scope. */
 		void mrw::statechart::TrackerStatechart::raiseReceived()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::received))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::received));
 			runCycle();
 		}
 
@@ -260,8 +259,7 @@ namespace mrw
 			/* Entry action for state 'Free'. */
 			timerService->setTimer(this, 3, (static_cast<sc::time> (TrackerStatechart::step)), false);
 			ifaceOperationCallback->free();
-			internalEventQueue.push_back(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::Internal_completed))
-			;
+			internalEventQueue.push_back(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::Internal_completed));
 		}
 
 		/* Entry action for state 'Idle'. */

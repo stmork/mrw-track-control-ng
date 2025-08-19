@@ -25,8 +25,7 @@ namespace mrw
 			edit_raised(false),
 			operate_raised(false),
 			manual_raised(false),
-			manual_value
-			(false),
+			manual_value(false),
 			init_raised(false),
 			finalize_raised(false),
 			completed_raised(false),
@@ -75,7 +74,7 @@ namespace mrw
 
 		std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance> OperatingModeStatechart::getNextEvent() noexcept
 		{
-			std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance> nextEvent = 0;
+			std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance> nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -130,12 +129,11 @@ namespace mrw
 				}
 			case mrw::statechart::OperatingModeStatechart::Event::manual:
 				{
-					std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool> > (std::move(event));
+					std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool> >(std::move(event));
 
-					if (e != 0)
+					if (e != nullptr)
 					{
-						manual_value
-							= e->value;
+						manual_value = e->value;
 						manual_raised = true;
 					}
 					break;
@@ -193,8 +191,7 @@ namespace mrw
 		/*! Slot for the in event 'clear' that is defined in the default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::clear()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::clear)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::clear)));
 			runCycle();
 		}
 
@@ -202,8 +199,7 @@ namespace mrw
 		/*! Slot for the in event 'started' that is defined in the default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::started()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::started)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::started)));
 			runCycle();
 		}
 
@@ -211,8 +207,7 @@ namespace mrw
 		/*! Slot for the in event 'failed' that is defined in the default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::failed()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::failed)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::failed)));
 			runCycle();
 		}
 
@@ -220,8 +215,7 @@ namespace mrw
 		/*! Slot for the in event 'edit' that is defined in the default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::edit()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::edit)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::edit)));
 			runCycle();
 		}
 
@@ -229,8 +223,7 @@ namespace mrw
 		/*! Slot for the in event 'operate' that is defined in the default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::operate()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::operate)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::operate)));
 			runCycle();
 		}
 
@@ -238,8 +231,7 @@ namespace mrw
 		/*! Slot for the in event 'manual' that is defined in the default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::manual(bool manual_)
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool>>( new mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool>(mrw::statechart::OperatingModeStatechart::Event::manual, manual_)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool>>( new mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool>(mrw::statechart::OperatingModeStatechart::Event::manual, manual_)));
 			runCycle();
 		}
 
@@ -247,8 +239,7 @@ namespace mrw
 		/*! Slot for the in event 'init' that is defined in the default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::init()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::init)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::init)));
 			runCycle();
 		}
 
@@ -256,8 +247,7 @@ namespace mrw
 		/*! Slot for the in event 'finalize' that is defined in the default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::finalize()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::finalize)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::finalize)));
 			runCycle();
 		}
 
@@ -265,8 +255,7 @@ namespace mrw
 		/*! Slot for the in event 'completed' that is defined in the default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::completed()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::completed)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::completed)));
 			runCycle();
 		}
 
@@ -274,8 +263,7 @@ namespace mrw
 		/*! Slot for the in event 'routesChanged' that is defined in the default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::routesChanged()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::routesChanged)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::routesChanged)));
 			runCycle();
 		}
 
@@ -283,8 +271,7 @@ namespace mrw
 		/*! Slot for the in event 'connected' that is defined in the interface scope 'can'. */
 		void mrw::statechart::OperatingModeStatechart::can_connected()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::Can_connected)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::Can_connected)));
 			runCycle();
 		}
 
@@ -292,8 +279,7 @@ namespace mrw
 		/*! Slot for the in event 'userInput' that is defined in the interface scope 'screen'. */
 		void mrw::statechart::OperatingModeStatechart::screen_userInput()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::Screen_userInput)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::OperatingModeStatechart::EventInstance>(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::Screen_userInput)));
 			runCycle();
 		}
 

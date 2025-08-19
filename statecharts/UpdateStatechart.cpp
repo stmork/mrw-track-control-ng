@@ -45,7 +45,7 @@ namespace mrw
 
 		std::unique_ptr<mrw::statechart::UpdateStatechart::EventInstance> UpdateStatechart::getNextEvent() noexcept
 		{
-			std::unique_ptr<mrw::statechart::UpdateStatechart::EventInstance> nextEvent = 0;
+			std::unique_ptr<mrw::statechart::UpdateStatechart::EventInstance> nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -120,8 +120,7 @@ namespace mrw
 		/*! Slot for the in event 'connected' that is defined in the default interface scope. */
 		void mrw::statechart::UpdateStatechart::connected()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::UpdateStatechart::EventInstance>(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::connected)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::UpdateStatechart::EventInstance>(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::connected)));
 			runCycle();
 		}
 
@@ -129,8 +128,7 @@ namespace mrw
 		/*! Slot for the in event 'complete' that is defined in the default interface scope. */
 		void mrw::statechart::UpdateStatechart::complete()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::UpdateStatechart::EventInstance>(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::complete)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::UpdateStatechart::EventInstance>(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::complete)));
 			runCycle();
 		}
 
@@ -138,8 +136,7 @@ namespace mrw
 		/*! Slot for the in event 'mismatch' that is defined in the default interface scope. */
 		void mrw::statechart::UpdateStatechart::mismatch()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::UpdateStatechart::EventInstance>(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::mismatch)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::UpdateStatechart::EventInstance>(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::mismatch)));
 			runCycle();
 		}
 
@@ -147,8 +144,7 @@ namespace mrw
 		/*! Slot for the in event 'failed' that is defined in the default interface scope. */
 		void mrw::statechart::UpdateStatechart::failed()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::UpdateStatechart::EventInstance>(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::failed)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::UpdateStatechart::EventInstance>(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::failed)));
 			runCycle();
 		}
 

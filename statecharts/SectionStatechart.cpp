@@ -23,15 +23,13 @@ namespace mrw
 			auto_unlock(true),
 			occupied(false),
 			enable_raised(false),
-			enable_value
-			(false),
+			enable_value(false),
 			disable_raised(false),
 			clear_raised(false),
 			start_raised(false),
 			relaisResponse_raised(false),
 			stateResponse_raised(false),
-			stateResponse_value
-			(false),
+			stateResponse_value(false),
 			failed_raised(false),
 			next_raised(false),
 			unlock_raised(false),
@@ -59,7 +57,7 @@ namespace mrw
 
 		std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance> SectionStatechart::getNextEvent() noexcept
 		{
-			std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance> nextEvent = 0;
+			std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance> nextEvent = nullptr;
 
 			if (!internalEventQueue.empty())
 			{
@@ -94,12 +92,11 @@ namespace mrw
 			{
 			case mrw::statechart::SectionStatechart::Event::enable:
 				{
-					std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> > (std::move(event));
+					std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> >(std::move(event));
 
-					if (e != 0)
+					if (e != nullptr)
 					{
-						enable_value
-							= e->value;
+						enable_value = e->value;
 						enable_raised = true;
 					}
 					break;
@@ -126,12 +123,11 @@ namespace mrw
 				}
 			case mrw::statechart::SectionStatechart::Event::stateResponse:
 				{
-					std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> > (std::move(event));
+					std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>> e = cast_event_pointer_type<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool> >(std::move(event));
 
-					if (e != 0)
+					if (e != nullptr)
 					{
-						stateResponse_value
-							= e->value;
+						stateResponse_value = e->value;
 						stateResponse_raised = true;
 					}
 					break;
@@ -177,8 +173,7 @@ namespace mrw
 		/*! Slot for the in event 'enable' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::enable(bool enable_)
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>>( new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::enable, enable_)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>>( new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::enable, enable_)));
 			runCycle();
 		}
 
@@ -186,8 +181,7 @@ namespace mrw
 		/*! Slot for the in event 'disable' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::disable()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::disable)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::disable)));
 			runCycle();
 		}
 
@@ -195,8 +189,7 @@ namespace mrw
 		/*! Slot for the in event 'clear' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::clear()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::clear)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::clear)));
 			runCycle();
 		}
 
@@ -204,8 +197,7 @@ namespace mrw
 		/*! Slot for the in event 'start' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::start()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::start)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::start)));
 			runCycle();
 		}
 
@@ -213,8 +205,7 @@ namespace mrw
 		/*! Slot for the in event 'relaisResponse' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::relaisResponse()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::relaisResponse)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::relaisResponse)));
 			runCycle();
 		}
 
@@ -222,8 +213,7 @@ namespace mrw
 		/*! Slot for the in event 'stateResponse' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::stateResponse(bool stateResponse_)
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>>( new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::stateResponse, stateResponse_)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>>( new mrw::statechart::SectionStatechart::EventInstanceWithValue<bool>(mrw::statechart::SectionStatechart::Event::stateResponse, stateResponse_)));
 			runCycle();
 		}
 
@@ -231,8 +221,7 @@ namespace mrw
 		/*! Slot for the in event 'failed' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::failed()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::failed)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::failed)));
 			runCycle();
 		}
 
@@ -240,8 +229,7 @@ namespace mrw
 		/*! Slot for the in event 'next' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::next()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::next)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::next)));
 			runCycle();
 		}
 
@@ -249,16 +237,14 @@ namespace mrw
 		/*! Slot for the in event 'unlock' that is defined in the default interface scope. */
 		void mrw::statechart::SectionStatechart::unlock()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::unlock)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::unlock)));
 			runCycle();
 		}
 
 
 		void mrw::statechart::SectionStatechart::local_leave()
 		{
-			internalEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::Internal_local_leave)))
-			;
+			internalEventQueue.push_back(std::unique_ptr<mrw::statechart::SectionStatechart::EventInstance>(new mrw::statechart::SectionStatechart::EventInstance(mrw::statechart::SectionStatechart::Event::Internal_local_leave)));
 		}
 
 

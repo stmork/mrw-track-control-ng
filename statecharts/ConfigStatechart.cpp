@@ -44,7 +44,7 @@ namespace mrw
 
 		std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance> ConfigStatechart::getNextEvent() noexcept
 		{
-			std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance> nextEvent = 0;
+			std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance> nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -103,8 +103,7 @@ namespace mrw
 		/*! Slot for the in event 'connected' that is defined in the default interface scope. */
 		void mrw::statechart::ConfigStatechart::connected()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance>(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::connected)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance>(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::connected)));
 			runCycle();
 		}
 
@@ -112,8 +111,7 @@ namespace mrw
 		/*! Slot for the in event 'completed' that is defined in the default interface scope. */
 		void mrw::statechart::ConfigStatechart::completed()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance>(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::completed)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance>(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::completed)));
 			runCycle();
 		}
 

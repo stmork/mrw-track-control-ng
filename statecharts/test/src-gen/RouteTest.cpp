@@ -17,1003 +17,1143 @@
 namespace
 {
 
-	void disabled();
-	void unlocked();
-	void start();
-	void turningSwitches();
-	void turningFlanks();
-	void turningSignals();
-	void extendingSignals();
-	void sections();
-	void activate();
-	void deactivate();
-	void unlock();
-	void finish();
-	void failTurningSwitchesIncomplete();
-	void failTurningSignalsIncomplete();
-	void failTurningSectionsIncomplete();
-	void emergencySections();
-	mrw::statechart::RouteStatechart * statechart;
-
-
-	class ResetTransactionMock
-	{
-		typedef void (ResetTransactionMock::*functiontype)();
-	public:
-		void (ResetTransactionMock::*resetTransactionBehaviorDefault)();
-		int callCount;
-
-		void resetTransaction1()
-		{
-		}
-
-		void resetTransactionDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void resetTransaction()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return resetTransactionBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (ResetTransactionMock::*defaultBehavior)())
-		{
-			resetTransactionBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&ResetTransactionMock::resetTransactionDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static ResetTransactionMock * resetTransactionMock;
-
-	class DisableSectionsMock
-	{
-		typedef void (DisableSectionsMock::*functiontype)();
-	public:
-		void (DisableSectionsMock::*disableSectionsBehaviorDefault)();
-		int callCount;
-
-		void disableSections1()
-		{
-		}
-
-		void disableSectionsDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void disableSections()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return disableSectionsBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (DisableSectionsMock::*defaultBehavior)())
-		{
-			disableSectionsBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&DisableSectionsMock::disableSectionsDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static DisableSectionsMock * disableSectionsMock;
-
-	class DisableSignalsMock
-	{
-		typedef void (DisableSignalsMock::*functiontype)();
-	public:
-		void (DisableSignalsMock::*disableSignalsBehaviorDefault)();
-		int callCount;
-
-		void disableSignals1()
-		{
-		}
-
-		void disableSignalsDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void disableSignals()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return disableSignalsBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (DisableSignalsMock::*defaultBehavior)())
-		{
-			disableSignalsBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&DisableSignalsMock::disableSignalsDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static DisableSignalsMock * disableSignalsMock;
-
-	class TryCompleteMock
-	{
-		typedef void (TryCompleteMock::*functiontype)();
-	public:
-		void (TryCompleteMock::*tryCompleteBehaviorDefault)();
-		int callCount;
-
-		void tryComplete1()
-		{
-		}
-
-		void tryCompleteDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void tryComplete()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return tryCompleteBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (TryCompleteMock::*defaultBehavior)())
-		{
-			tryCompleteBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&TryCompleteMock::tryCompleteDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static TryCompleteMock * tryCompleteMock;
-
-	class UnlockRailPartsMock
-	{
-		typedef void (UnlockRailPartsMock::*functiontype)();
-	public:
-		void (UnlockRailPartsMock::*unlockRailPartsBehaviorDefault)();
-		int callCount;
-
-		void unlockRailParts1()
-		{
-		}
-
-		void unlockRailPartsDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void unlockRailParts()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return unlockRailPartsBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (UnlockRailPartsMock::*defaultBehavior)())
-		{
-			unlockRailPartsBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&UnlockRailPartsMock::unlockRailPartsDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static UnlockRailPartsMock * unlockRailPartsMock;
-
-	class UnlockSectionsMock
-	{
-		typedef void (UnlockSectionsMock::*functiontype)();
-	public:
-		void (UnlockSectionsMock::*unlockSectionsBehaviorDefault)();
-		int callCount;
-
-		void unlockSections1()
-		{
-		}
-
-		void unlockSectionsDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void unlockSections()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return unlockSectionsBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (UnlockSectionsMock::*defaultBehavior)())
-		{
-			unlockSectionsBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&UnlockSectionsMock::unlockSectionsDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static UnlockSectionsMock * unlockSectionsMock;
-
-	class PrepareRouteMock
-	{
-		typedef void (PrepareRouteMock::*functiontype)();
-	public:
-		void (PrepareRouteMock::*prepareRouteBehaviorDefault)();
-		int callCount;
-
-		void prepareRoute1()
-		{
-		}
-
-		void prepareRouteDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void prepareRoute()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return prepareRouteBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (PrepareRouteMock::*defaultBehavior)())
-		{
-			prepareRouteBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&PrepareRouteMock::prepareRouteDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static PrepareRouteMock * prepareRouteMock;
-
-	class PrepareFlankMock
-	{
-		typedef void (PrepareFlankMock::*functiontype)();
-	public:
-		void (PrepareFlankMock::*prepareFlankBehaviorDefault)();
-		int callCount;
-
-		void prepareFlank1()
-		{
-		}
-
-		void prepareFlankDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void prepareFlank()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return prepareFlankBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (PrepareFlankMock::*defaultBehavior)())
-		{
-			prepareFlankBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&PrepareFlankMock::prepareFlankDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static PrepareFlankMock * prepareFlankMock;
-
-	class FailMock
-	{
-		typedef void (FailMock::*functiontype)();
-	public:
-		void (FailMock::*failBehaviorDefault)();
-		int callCount;
-
-		void fail1()
-		{
-		}
-
-		void failDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void fail()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return failBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (FailMock::*defaultBehavior)())
-		{
-			failBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&FailMock::failDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static FailMock * failMock;
-
-	class IsTourMock
-	{
-		typedef bool (IsTourMock::*functiontype)();
-	public:
-		bool (IsTourMock::*isTourBehaviorDefault)();
-
-		bool isTour1()
-		{
-			return (true);
-		}
-
-		bool isTour2()
-		{
-			return (false);
-		}
-
-		bool isTourDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		functiontype getBehavior()
-		{
-			return isTourBehaviorDefault;
-		}
-
-		void setDefaultBehavior(bool (IsTourMock::*defaultBehavior)())
-		{
-			isTourBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&IsTourMock::isTourDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-		}
-	};
-	static IsTourMock * isTourMock;
-
-	class IsCompletedMock
-	{
-		typedef bool (IsCompletedMock::*functiontype)();
-	public:
-		bool (IsCompletedMock::*isCompletedBehaviorDefault)();
-
-		bool isCompleted1()
-		{
-			return (true);
-		}
-
-		bool isCompleted2()
-		{
-			return (false);
-		}
-
-		bool isCompletedDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		functiontype getBehavior()
-		{
-			return isCompletedBehaviorDefault;
-		}
-
-		void setDefaultBehavior(bool (IsCompletedMock::*defaultBehavior)())
-		{
-			isCompletedBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&IsCompletedMock::isCompletedDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-		}
-	};
-	static IsCompletedMock * isCompletedMock;
-
-	class TurnSwitchesMock
-	{
-		typedef void (TurnSwitchesMock::*functiontype)();
-	public:
-		void (TurnSwitchesMock::*turnSwitchesBehaviorDefault)();
-		int callCount;
-
-		void turnSwitches1()
-		{
-		}
-
-		void turnSwitchesDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void turnSwitches()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return turnSwitchesBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (TurnSwitchesMock::*defaultBehavior)())
-		{
-			turnSwitchesBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&TurnSwitchesMock::turnSwitchesDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static TurnSwitchesMock * turnSwitchesMock;
-
-	class TurnFlanksMock
-	{
-		typedef void (TurnFlanksMock::*functiontype)();
-	public:
-		void (TurnFlanksMock::*turnFlanksBehaviorDefault)();
-		int callCount;
-
-		void turnFlanks1()
-		{
-		}
-
-		void turnFlanksDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void turnFlanks()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return turnFlanksBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (TurnFlanksMock::*defaultBehavior)())
-		{
-			turnFlanksBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&TurnFlanksMock::turnFlanksDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static TurnFlanksMock * turnFlanksMock;
-
-	class EnableSignalsMock
-	{
-		typedef void (EnableSignalsMock::*functiontype)();
-	public:
-		void (EnableSignalsMock::*enableSignalsBehaviorDefault)();
-		int callCount;
-
-		void enableSignals1()
-		{
-		}
-
-		void enableSignalsDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void enableSignals()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return enableSignalsBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (EnableSignalsMock::*defaultBehavior)())
-		{
-			enableSignalsBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&EnableSignalsMock::enableSignalsDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static EnableSignalsMock * enableSignalsMock;
-
-	class ExtendSignalsMock
-	{
-		typedef void (ExtendSignalsMock::*functiontype)();
-	public:
-		void (ExtendSignalsMock::*extendSignalsBehaviorDefault)();
-		int callCount;
-
-		void extendSignals1()
-		{
-		}
-
-		void extendSignalsDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void extendSignals()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return extendSignalsBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (ExtendSignalsMock::*defaultBehavior)())
-		{
-			extendSignalsBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&ExtendSignalsMock::extendSignalsDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static ExtendSignalsMock * extendSignalsMock;
-
-	class EnableSectionsMock
-	{
-		typedef void (EnableSectionsMock::*functiontype)();
-	public:
-		void (EnableSectionsMock::*enableSectionsBehaviorDefault)();
-		int callCount;
-
-		void enableSections1()
-		{
-		}
-
-		void enableSectionsDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void enableSections()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return enableSectionsBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (EnableSectionsMock::*defaultBehavior)())
-		{
-			enableSectionsBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&EnableSectionsMock::enableSectionsDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static EnableSectionsMock * enableSectionsMock;
-
-	class UnlockFlanksMock
-	{
-		typedef void (UnlockFlanksMock::*functiontype)();
-	public:
-		void (UnlockFlanksMock::*unlockFlanksBehaviorDefault)();
-		int callCount;
-
-		void unlockFlanks1()
-		{
-		}
-
-		void unlockFlanksDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void unlockFlanks()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return unlockFlanksBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (UnlockFlanksMock::*defaultBehavior)())
-		{
-			unlockFlanksBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&UnlockFlanksMock::unlockFlanksDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static UnlockFlanksMock * unlockFlanksMock;
-
-	class MockDefault : public mrw::statechart::RouteStatechart::OperationCallback
-	{
-	public:
-		void prepareRoute()
-		{
-			prepareRouteMock->prepareRoute();
-			return (prepareRouteMock->*(prepareRouteMock->getBehavior()))();
-		}
-		void prepareFlank()
-		{
-			prepareFlankMock->prepareFlank();
-			return (prepareFlankMock->*(prepareFlankMock->getBehavior()))();
-		}
-		bool isTour()
-		{
-			return (isTourMock->*(isTourMock->getBehavior()))();
-		}
-		bool isCompleted()
-		{
-			return (isCompletedMock->*(isCompletedMock->getBehavior()))();
-		}
-		void resetTransaction()
-		{
-			resetTransactionMock->resetTransaction();
-			return (resetTransactionMock->*(resetTransactionMock->getBehavior()))();
-		}
-		void fail()
-		{
-			failMock->fail();
-			return (failMock->*(failMock->getBehavior()))();
-		}
-		void tryComplete()
-		{
-			tryCompleteMock->tryComplete();
-			return (tryCompleteMock->*(tryCompleteMock->getBehavior()))();
-		}
-		void turnSwitches()
-		{
-			turnSwitchesMock->turnSwitches();
-			return (turnSwitchesMock->*(turnSwitchesMock->getBehavior()))();
-		}
-		void turnFlanks()
-		{
-			turnFlanksMock->turnFlanks();
-			return (turnFlanksMock->*(turnFlanksMock->getBehavior()))();
-		}
-		void enableSignals()
-		{
-			enableSignalsMock->enableSignals();
-			return (enableSignalsMock->*(enableSignalsMock->getBehavior()))();
-		}
-		void extendSignals()
-		{
-			extendSignalsMock->extendSignals();
-			return (extendSignalsMock->*(extendSignalsMock->getBehavior()))();
-		}
-		void enableSections()
-		{
-			enableSectionsMock->enableSections();
-			return (enableSectionsMock->*(enableSectionsMock->getBehavior()))();
-		}
-		void disableSections()
-		{
-			disableSectionsMock->disableSections();
-			return (disableSectionsMock->*(disableSectionsMock->getBehavior()))();
-		}
-		void disableSignals()
-		{
-			disableSignalsMock->disableSignals();
-			return (disableSignalsMock->*(disableSignalsMock->getBehavior()))();
-		}
-		void unlockFlanks()
-		{
-			unlockFlanksMock->unlockFlanks();
-			return (unlockFlanksMock->*(unlockFlanksMock->getBehavior()))();
-		}
-		void unlockRailParts()
-		{
-			unlockRailPartsMock->unlockRailParts();
-			return (unlockRailPartsMock->*(unlockRailPartsMock->getBehavior()))();
-		}
-		void unlockSections()
-		{
-			unlockSectionsMock->unlockSections();
-			return (unlockSectionsMock->*(unlockSectionsMock->getBehavior()))();
-		}
-	};
-
-//! The timers are managed by a timer service. */
-	static TimedSctUnitRunner * runner;
-
 	class RouteTest : public ::testing::Test
 	{
+	public:
+		void disabled();
+		void unlocked();
+		void start();
+		void turningSwitches();
+		void turningFlanks();
+		void turningSignals();
+		void extendingSignals();
+		void sections();
+		void activate();
+		void deactivate();
+		void unlock();
+		void finish();
+		void failTurningSwitchesIncomplete();
+		void failTurningSignalsIncomplete();
+		void failTurningSectionsIncomplete();
+		void emergencySections();
+
 	protected:
-		MockDefault defaultMock;
+		mrw::statechart::RouteStatechart * statechart;
+
+
+	public:
+		class ResetTransactionMock
+		{
+			typedef void (ResetTransactionMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (ResetTransactionMock::*resetTransactionBehaviorDefault)();
+			int callCount;
+
+			ResetTransactionMock(RouteTest * owner) :
+				owner(owner),
+				resetTransactionBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void resetTransaction1()
+			{
+			}
+
+			void resetTransactionDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void resetTransaction()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return resetTransactionBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (ResetTransactionMock::*defaultBehavior)())
+			{
+				resetTransactionBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&ResetTransactionMock::resetTransactionDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		ResetTransactionMock * resetTransactionMock;
+
+		class DisableSectionsMock
+		{
+			typedef void (DisableSectionsMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (DisableSectionsMock::*disableSectionsBehaviorDefault)();
+			int callCount;
+
+			DisableSectionsMock(RouteTest * owner) :
+				owner(owner),
+				disableSectionsBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void disableSections1()
+			{
+			}
+
+			void disableSectionsDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void disableSections()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return disableSectionsBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (DisableSectionsMock::*defaultBehavior)())
+			{
+				disableSectionsBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&DisableSectionsMock::disableSectionsDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		DisableSectionsMock * disableSectionsMock;
+
+		class DisableSignalsMock
+		{
+			typedef void (DisableSignalsMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (DisableSignalsMock::*disableSignalsBehaviorDefault)();
+			int callCount;
+
+			DisableSignalsMock(RouteTest * owner) :
+				owner(owner),
+				disableSignalsBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void disableSignals1()
+			{
+			}
+
+			void disableSignalsDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void disableSignals()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return disableSignalsBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (DisableSignalsMock::*defaultBehavior)())
+			{
+				disableSignalsBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&DisableSignalsMock::disableSignalsDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		DisableSignalsMock * disableSignalsMock;
+
+		class TryCompleteMock
+		{
+			typedef void (TryCompleteMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (TryCompleteMock::*tryCompleteBehaviorDefault)();
+			int callCount;
+
+			TryCompleteMock(RouteTest * owner) :
+				owner(owner),
+				tryCompleteBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void tryComplete1()
+			{
+			}
+
+			void tryCompleteDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void tryComplete()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return tryCompleteBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (TryCompleteMock::*defaultBehavior)())
+			{
+				tryCompleteBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&TryCompleteMock::tryCompleteDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		TryCompleteMock * tryCompleteMock;
+
+		class UnlockRailPartsMock
+		{
+			typedef void (UnlockRailPartsMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (UnlockRailPartsMock::*unlockRailPartsBehaviorDefault)();
+			int callCount;
+
+			UnlockRailPartsMock(RouteTest * owner) :
+				owner(owner),
+				unlockRailPartsBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void unlockRailParts1()
+			{
+			}
+
+			void unlockRailPartsDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void unlockRailParts()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return unlockRailPartsBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (UnlockRailPartsMock::*defaultBehavior)())
+			{
+				unlockRailPartsBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&UnlockRailPartsMock::unlockRailPartsDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		UnlockRailPartsMock * unlockRailPartsMock;
+
+		class UnlockSectionsMock
+		{
+			typedef void (UnlockSectionsMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (UnlockSectionsMock::*unlockSectionsBehaviorDefault)();
+			int callCount;
+
+			UnlockSectionsMock(RouteTest * owner) :
+				owner(owner),
+				unlockSectionsBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void unlockSections1()
+			{
+			}
+
+			void unlockSectionsDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void unlockSections()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return unlockSectionsBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (UnlockSectionsMock::*defaultBehavior)())
+			{
+				unlockSectionsBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&UnlockSectionsMock::unlockSectionsDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		UnlockSectionsMock * unlockSectionsMock;
+
+		class PrepareRouteMock
+		{
+			typedef void (PrepareRouteMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (PrepareRouteMock::*prepareRouteBehaviorDefault)();
+			int callCount;
+
+			PrepareRouteMock(RouteTest * owner) :
+				owner(owner),
+				prepareRouteBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void prepareRoute1()
+			{
+			}
+
+			void prepareRouteDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void prepareRoute()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return prepareRouteBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (PrepareRouteMock::*defaultBehavior)())
+			{
+				prepareRouteBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&PrepareRouteMock::prepareRouteDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		PrepareRouteMock * prepareRouteMock;
+
+		class PrepareFlankMock
+		{
+			typedef void (PrepareFlankMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (PrepareFlankMock::*prepareFlankBehaviorDefault)();
+			int callCount;
+
+			PrepareFlankMock(RouteTest * owner) :
+				owner(owner),
+				prepareFlankBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void prepareFlank1()
+			{
+			}
+
+			void prepareFlankDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void prepareFlank()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return prepareFlankBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (PrepareFlankMock::*defaultBehavior)())
+			{
+				prepareFlankBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&PrepareFlankMock::prepareFlankDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		PrepareFlankMock * prepareFlankMock;
+
+		class FailMock
+		{
+			typedef void (FailMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (FailMock::*failBehaviorDefault)();
+			int callCount;
+
+			FailMock(RouteTest * owner) :
+				owner(owner),
+				failBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void fail1()
+			{
+			}
+
+			void failDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void fail()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return failBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (FailMock::*defaultBehavior)())
+			{
+				failBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&FailMock::failDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		FailMock * failMock;
+
+		class IsTourMock
+		{
+			typedef bool (IsTourMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			bool (IsTourMock::*isTourBehaviorDefault)();
+
+			IsTourMock(RouteTest * owner) :
+				owner(owner),
+				isTourBehaviorDefault(0)
+			{}
+
+
+			bool isTour1()
+			{
+				return (true);
+			}
+
+			bool isTour2()
+			{
+				return (false);
+			}
+
+			bool isTourDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			functiontype getBehavior()
+			{
+				return isTourBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (IsTourMock::*defaultBehavior)())
+			{
+				isTourBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&IsTourMock::isTourDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		IsTourMock * isTourMock;
+
+		class IsCompletedMock
+		{
+			typedef bool (IsCompletedMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			bool (IsCompletedMock::*isCompletedBehaviorDefault)();
+
+			IsCompletedMock(RouteTest * owner) :
+				owner(owner),
+				isCompletedBehaviorDefault(0)
+			{}
+
+
+			bool isCompleted1()
+			{
+				return (true);
+			}
+
+			bool isCompleted2()
+			{
+				return (false);
+			}
+
+			bool isCompletedDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			functiontype getBehavior()
+			{
+				return isCompletedBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (IsCompletedMock::*defaultBehavior)())
+			{
+				isCompletedBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&IsCompletedMock::isCompletedDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		IsCompletedMock * isCompletedMock;
+
+		class TurnSwitchesMock
+		{
+			typedef void (TurnSwitchesMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (TurnSwitchesMock::*turnSwitchesBehaviorDefault)();
+			int callCount;
+
+			TurnSwitchesMock(RouteTest * owner) :
+				owner(owner),
+				turnSwitchesBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void turnSwitches1()
+			{
+			}
+
+			void turnSwitchesDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void turnSwitches()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return turnSwitchesBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (TurnSwitchesMock::*defaultBehavior)())
+			{
+				turnSwitchesBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&TurnSwitchesMock::turnSwitchesDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		TurnSwitchesMock * turnSwitchesMock;
+
+		class TurnFlanksMock
+		{
+			typedef void (TurnFlanksMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (TurnFlanksMock::*turnFlanksBehaviorDefault)();
+			int callCount;
+
+			TurnFlanksMock(RouteTest * owner) :
+				owner(owner),
+				turnFlanksBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void turnFlanks1()
+			{
+			}
+
+			void turnFlanksDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void turnFlanks()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return turnFlanksBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (TurnFlanksMock::*defaultBehavior)())
+			{
+				turnFlanksBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&TurnFlanksMock::turnFlanksDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		TurnFlanksMock * turnFlanksMock;
+
+		class EnableSignalsMock
+		{
+			typedef void (EnableSignalsMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (EnableSignalsMock::*enableSignalsBehaviorDefault)();
+			int callCount;
+
+			EnableSignalsMock(RouteTest * owner) :
+				owner(owner),
+				enableSignalsBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void enableSignals1()
+			{
+			}
+
+			void enableSignalsDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void enableSignals()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return enableSignalsBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (EnableSignalsMock::*defaultBehavior)())
+			{
+				enableSignalsBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&EnableSignalsMock::enableSignalsDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		EnableSignalsMock * enableSignalsMock;
+
+		class ExtendSignalsMock
+		{
+			typedef void (ExtendSignalsMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (ExtendSignalsMock::*extendSignalsBehaviorDefault)();
+			int callCount;
+
+			ExtendSignalsMock(RouteTest * owner) :
+				owner(owner),
+				extendSignalsBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void extendSignals1()
+			{
+			}
+
+			void extendSignalsDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void extendSignals()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return extendSignalsBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (ExtendSignalsMock::*defaultBehavior)())
+			{
+				extendSignalsBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&ExtendSignalsMock::extendSignalsDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		ExtendSignalsMock * extendSignalsMock;
+
+		class EnableSectionsMock
+		{
+			typedef void (EnableSectionsMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (EnableSectionsMock::*enableSectionsBehaviorDefault)();
+			int callCount;
+
+			EnableSectionsMock(RouteTest * owner) :
+				owner(owner),
+				enableSectionsBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void enableSections1()
+			{
+			}
+
+			void enableSectionsDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void enableSections()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return enableSectionsBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (EnableSectionsMock::*defaultBehavior)())
+			{
+				enableSectionsBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&EnableSectionsMock::enableSectionsDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		EnableSectionsMock * enableSectionsMock;
+
+		class UnlockFlanksMock
+		{
+			typedef void (UnlockFlanksMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (UnlockFlanksMock::*unlockFlanksBehaviorDefault)();
+			int callCount;
+
+			UnlockFlanksMock(RouteTest * owner) :
+				owner(owner),
+				unlockFlanksBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void unlockFlanks1()
+			{
+			}
+
+			void unlockFlanksDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void unlockFlanks()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return unlockFlanksBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (UnlockFlanksMock::*defaultBehavior)())
+			{
+				unlockFlanksBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&UnlockFlanksMock::unlockFlanksDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		UnlockFlanksMock * unlockFlanksMock;
+
+		class MockDefault : public mrw::statechart::RouteStatechart::OperationCallback
+		{
+		public:
+			RouteTest * owner;
+			MockDefault(RouteTest * owner) : owner(owner) {}
+			void prepareRoute()
+			{
+				owner->prepareRouteMock->prepareRoute();
+				return (owner->prepareRouteMock->*(owner->prepareRouteMock->getBehavior()))();
+			}
+			void prepareFlank()
+			{
+				owner->prepareFlankMock->prepareFlank();
+				return (owner->prepareFlankMock->*(owner->prepareFlankMock->getBehavior()))();
+			}
+			bool isTour()
+			{
+				return (owner->isTourMock->*(owner->isTourMock->getBehavior()))();
+			}
+			bool isCompleted()
+			{
+				return (owner->isCompletedMock->*(owner->isCompletedMock->getBehavior()))();
+			}
+			void resetTransaction()
+			{
+				owner->resetTransactionMock->resetTransaction();
+				return (owner->resetTransactionMock->*(owner->resetTransactionMock->getBehavior()))();
+			}
+			void fail()
+			{
+				owner->failMock->fail();
+				return (owner->failMock->*(owner->failMock->getBehavior()))();
+			}
+			void tryComplete()
+			{
+				owner->tryCompleteMock->tryComplete();
+				return (owner->tryCompleteMock->*(owner->tryCompleteMock->getBehavior()))();
+			}
+			void turnSwitches()
+			{
+				owner->turnSwitchesMock->turnSwitches();
+				return (owner->turnSwitchesMock->*(owner->turnSwitchesMock->getBehavior()))();
+			}
+			void turnFlanks()
+			{
+				owner->turnFlanksMock->turnFlanks();
+				return (owner->turnFlanksMock->*(owner->turnFlanksMock->getBehavior()))();
+			}
+			void enableSignals()
+			{
+				owner->enableSignalsMock->enableSignals();
+				return (owner->enableSignalsMock->*(owner->enableSignalsMock->getBehavior()))();
+			}
+			void extendSignals()
+			{
+				owner->extendSignalsMock->extendSignals();
+				return (owner->extendSignalsMock->*(owner->extendSignalsMock->getBehavior()))();
+			}
+			void enableSections()
+			{
+				owner->enableSectionsMock->enableSections();
+				return (owner->enableSectionsMock->*(owner->enableSectionsMock->getBehavior()))();
+			}
+			void disableSections()
+			{
+				owner->disableSectionsMock->disableSections();
+				return (owner->disableSectionsMock->*(owner->disableSectionsMock->getBehavior()))();
+			}
+			void disableSignals()
+			{
+				owner->disableSignalsMock->disableSignals();
+				return (owner->disableSignalsMock->*(owner->disableSignalsMock->getBehavior()))();
+			}
+			void unlockFlanks()
+			{
+				owner->unlockFlanksMock->unlockFlanks();
+				return (owner->unlockFlanksMock->*(owner->unlockFlanksMock->getBehavior()))();
+			}
+			void unlockRailParts()
+			{
+				owner->unlockRailPartsMock->unlockRailParts();
+				return (owner->unlockRailPartsMock->*(owner->unlockRailPartsMock->getBehavior()))();
+			}
+			void unlockSections()
+			{
+				owner->unlockSectionsMock->unlockSections();
+				return (owner->unlockSectionsMock->*(owner->unlockSectionsMock->getBehavior()))();
+			}
+		};
+
+		//! The timers are managed by a timer service. */
+		TimedSctUnitRunner * runner;
+
+		MockDefault * defaultMock;
+
 		virtual void SetUp()
 		{
 			statechart = new mrw::statechart::RouteStatechart();
@@ -1022,41 +1162,42 @@ namespace
 				maximalParallelTimeEvents
 			);
 			statechart->setTimerService(runner);
-			resetTransactionMock = new ResetTransactionMock();
+			resetTransactionMock = new ResetTransactionMock(this);
 			resetTransactionMock->initializeBehavior();
-			disableSectionsMock = new DisableSectionsMock();
+			disableSectionsMock = new DisableSectionsMock(this);
 			disableSectionsMock->initializeBehavior();
-			disableSignalsMock = new DisableSignalsMock();
+			disableSignalsMock = new DisableSignalsMock(this);
 			disableSignalsMock->initializeBehavior();
-			tryCompleteMock = new TryCompleteMock();
+			tryCompleteMock = new TryCompleteMock(this);
 			tryCompleteMock->initializeBehavior();
-			unlockRailPartsMock = new UnlockRailPartsMock();
+			unlockRailPartsMock = new UnlockRailPartsMock(this);
 			unlockRailPartsMock->initializeBehavior();
-			unlockSectionsMock = new UnlockSectionsMock();
+			unlockSectionsMock = new UnlockSectionsMock(this);
 			unlockSectionsMock->initializeBehavior();
-			prepareRouteMock = new PrepareRouteMock();
+			prepareRouteMock = new PrepareRouteMock(this);
 			prepareRouteMock->initializeBehavior();
-			prepareFlankMock = new PrepareFlankMock();
+			prepareFlankMock = new PrepareFlankMock(this);
 			prepareFlankMock->initializeBehavior();
-			failMock = new FailMock();
+			failMock = new FailMock(this);
 			failMock->initializeBehavior();
-			isTourMock = new IsTourMock();
+			isTourMock = new IsTourMock(this);
 			isTourMock->initializeBehavior();
-			isCompletedMock = new IsCompletedMock();
+			isCompletedMock = new IsCompletedMock(this);
 			isCompletedMock->initializeBehavior();
-			turnSwitchesMock = new TurnSwitchesMock();
+			turnSwitchesMock = new TurnSwitchesMock(this);
 			turnSwitchesMock->initializeBehavior();
-			turnFlanksMock = new TurnFlanksMock();
+			turnFlanksMock = new TurnFlanksMock(this);
 			turnFlanksMock->initializeBehavior();
-			enableSignalsMock = new EnableSignalsMock();
+			enableSignalsMock = new EnableSignalsMock(this);
 			enableSignalsMock->initializeBehavior();
-			extendSignalsMock = new ExtendSignalsMock();
+			extendSignalsMock = new ExtendSignalsMock(this);
 			extendSignalsMock->initializeBehavior();
-			enableSectionsMock = new EnableSectionsMock();
+			enableSectionsMock = new EnableSectionsMock(this);
 			enableSectionsMock->initializeBehavior();
-			unlockFlanksMock = new UnlockFlanksMock();
+			unlockFlanksMock = new UnlockFlanksMock(this);
 			unlockFlanksMock->initializeBehavior();
-			statechart->setOperationCallback(&defaultMock);
+			defaultMock = new MockDefault(this);
+			statechart->setOperationCallback(defaultMock);
 		}
 		virtual void TearDown()
 		{
@@ -1078,11 +1219,14 @@ namespace
 			delete disableSectionsMock;
 			delete resetTransactionMock;
 			delete statechart;
+			delete defaultMock;
+			defaultMock = 0;
 			delete runner;
 		}
 	};
 
-	void disabled()
+
+	void RouteTest::disabled()
 	{
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Disable));
 
@@ -1095,7 +1239,7 @@ namespace
 		EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
 
 	}
-	void unlocked()
+	void RouteTest::unlocked()
 	{
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Unlock));
 
@@ -1109,7 +1253,7 @@ namespace
 
 	}
 
-	void start()
+	void RouteTest::start()
 	{
 		statechart->enter();
 
@@ -1143,7 +1287,7 @@ namespace
 	{
 		start();
 	}
-	void turningSwitches()
+	void RouteTest::turningSwitches()
 	{
 		start();
 
@@ -1189,7 +1333,7 @@ namespace
 		EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
 
 	}
-	void turningFlanks()
+	void RouteTest::turningFlanks()
 	{
 		turningSwitches();
 
@@ -1233,7 +1377,7 @@ namespace
 		EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
 
 	}
-	void turningSignals()
+	void RouteTest::turningSignals()
 	{
 		turningSwitches();
 
@@ -1256,7 +1400,7 @@ namespace
 	{
 		turningSignals();
 	}
-	void extendingSignals()
+	void RouteTest::extendingSignals()
 	{
 		turningSignals();
 
@@ -1277,7 +1421,7 @@ namespace
 	{
 		extendingSignals();
 	}
-	void sections()
+	void RouteTest::sections()
 	{
 		extendingSignals();
 
@@ -1298,7 +1442,7 @@ namespace
 	{
 		sections();
 	}
-	void activate()
+	void RouteTest::activate()
 	{
 		sections();
 
@@ -1351,7 +1495,7 @@ namespace
 		EXPECT_TRUE(tryCompleteMock->calledAtLeastOnce());
 
 	}
-	void deactivate()
+	void RouteTest::deactivate()
 	{
 		activate();
 
@@ -1366,7 +1510,7 @@ namespace
 	{
 		deactivate();
 	}
-	void unlock()
+	void RouteTest::unlock()
 	{
 		deactivate();
 
@@ -1379,7 +1523,7 @@ namespace
 	{
 		unlock();
 	}
-	void finish()
+	void RouteTest::finish()
 	{
 		unlock();
 
@@ -1473,7 +1617,7 @@ namespace
 		disabled();
 
 	}
-	void failTurningSwitchesIncomplete()
+	void RouteTest::failTurningSwitchesIncomplete()
 	{
 		turningSwitches();
 
@@ -1488,7 +1632,7 @@ namespace
 	{
 		failTurningSwitchesIncomplete();
 	}
-	void failTurningSignalsIncomplete()
+	void RouteTest::failTurningSignalsIncomplete()
 	{
 		turningSignals();
 
@@ -1514,7 +1658,7 @@ namespace
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::RouteStatechart::State::main_region_Wait));
 
 	}
-	void failTurningSectionsIncomplete()
+	void RouteTest::failTurningSectionsIncomplete()
 	{
 		sections();
 
@@ -1651,7 +1795,7 @@ namespace
 		unlocked();
 
 	}
-	void emergencySections()
+	void RouteTest::emergencySections()
 	{
 		sections();
 

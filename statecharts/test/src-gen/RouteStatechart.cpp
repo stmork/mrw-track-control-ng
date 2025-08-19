@@ -43,7 +43,7 @@ namespace mrw
 
 		mrw::statechart::RouteStatechart::EventInstance * RouteStatechart::getNextEvent() noexcept
 		{
-			mrw::statechart::RouteStatechart::EventInstance * nextEvent = 0;
+			mrw::statechart::RouteStatechart::EventInstance * nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -114,8 +114,7 @@ namespace mrw
 		/*! Raises the in event 'turn' of default interface scope. */
 		void mrw::statechart::RouteStatechart::raiseTurn()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::turn))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::turn));
 			runCycle();
 		}
 
@@ -123,8 +122,7 @@ namespace mrw
 		/*! Raises the in event 'completed' of default interface scope. */
 		void mrw::statechart::RouteStatechart::raiseCompleted()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::completed))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::completed));
 			runCycle();
 		}
 
@@ -132,8 +130,7 @@ namespace mrw
 		/*! Raises the in event 'failed' of default interface scope. */
 		void mrw::statechart::RouteStatechart::raiseFailed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::failed))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::failed));
 			runCycle();
 		}
 
@@ -141,8 +138,7 @@ namespace mrw
 		/*! Raises the in event 'disable' of default interface scope. */
 		void mrw::statechart::RouteStatechart::raiseDisable()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::disable))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::disable));
 			runCycle();
 		}
 

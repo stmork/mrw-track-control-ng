@@ -43,7 +43,7 @@ namespace mrw
 
 		mrw::statechart::SignalStatechart::EventInstance * SignalStatechart::getNextEvent() noexcept
 		{
-			mrw::statechart::SignalStatechart::EventInstance * nextEvent = 0;
+			mrw::statechart::SignalStatechart::EventInstance * nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -70,10 +70,9 @@ namespace mrw
 				{
 					mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer> * e = static_cast<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer> *>(event);
 
-					if (e != 0)
+					if (e != nullptr)
 					{
-						turn_value
-							= e->value;
+						turn_value = e->value;
 						turn_raised = true;
 					}
 					break;
@@ -119,8 +118,7 @@ namespace mrw
 		/*! Raises the in event 'turn' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseTurn(sc::integer turn_)
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>(mrw::statechart::SignalStatechart::Event::turn, turn_))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>(mrw::statechart::SignalStatechart::Event::turn, turn_));
 			runCycle();
 		}
 
@@ -128,8 +126,7 @@ namespace mrw
 		/*! Raises the in event 'queued' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseQueued()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::queued))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::queued));
 			runCycle();
 		}
 
@@ -137,8 +134,7 @@ namespace mrw
 		/*! Raises the in event 'ok' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseOk()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::ok))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::ok));
 			runCycle();
 		}
 
@@ -146,8 +142,7 @@ namespace mrw
 		/*! Raises the in event 'fail' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseFail()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::fail))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::fail));
 			runCycle();
 		}
 
@@ -155,8 +150,7 @@ namespace mrw
 		/*! Raises the in event 'clear' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseClear()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::clear))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::clear));
 			runCycle();
 		}
 

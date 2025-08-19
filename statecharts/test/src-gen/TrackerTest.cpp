@@ -17,356 +17,408 @@
 namespace
 {
 
-	void idle();
-	void receivedFirst();
-	void receivedFurther();
-	void delayValid();
-	void occupyState();
-	void freeState();
-	void cascade();
-	mrw::statechart::TrackerStatechart * statechart;
-
-
-	class ClearMock
-	{
-		typedef void (ClearMock::*functiontype)();
-	public:
-		void (ClearMock::*clearBehaviorDefault)();
-		int callCount;
-
-		void clear1()
-		{
-		}
-
-		void clearDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void clear()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return clearBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (ClearMock::*defaultBehavior)())
-		{
-			clearBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&ClearMock::clearDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static ClearMock * clearMock;
-
-	class FirstMock
-	{
-		typedef void (FirstMock::*functiontype)();
-	public:
-		void (FirstMock::*firstBehaviorDefault)();
-		int callCount;
-
-		void first1()
-		{
-		}
-
-		void firstDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void first()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return firstBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (FirstMock::*defaultBehavior)())
-		{
-			firstBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&FirstMock::firstDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static FirstMock * firstMock;
-
-	class FreeMock
-	{
-		typedef void (FreeMock::*functiontype)();
-	public:
-		void (FreeMock::*freeBehaviorDefault)();
-		int callCount;
-
-		void free1()
-		{
-		}
-
-		void freeDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void free()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return freeBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (FreeMock::*defaultBehavior)())
-		{
-			freeBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&FreeMock::freeDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static FreeMock * freeMock;
-
-	class OccupyMock
-	{
-		typedef void (OccupyMock::*functiontype)();
-	public:
-		void (OccupyMock::*occupyBehaviorDefault)();
-		int callCount;
-
-		void occupy1()
-		{
-		}
-
-		void occupyDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void occupy()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return occupyBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (OccupyMock::*defaultBehavior)())
-		{
-			occupyBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&OccupyMock::occupyDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static OccupyMock * occupyMock;
-
-	class ValidMock
-	{
-		typedef bool (ValidMock::*functiontype)();
-	public:
-		bool (ValidMock::*validBehaviorDefault)();
-
-		bool valid1()
-		{
-			return (true);
-		}
-
-		bool valid2()
-		{
-			return (false);
-		}
-
-		bool validDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		functiontype getBehavior()
-		{
-			return validBehaviorDefault;
-		}
-
-		void setDefaultBehavior(bool (ValidMock::*defaultBehavior)())
-		{
-			validBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&ValidMock::validDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-		}
-	};
-	static ValidMock * validMock;
-
-	class LastMock
-	{
-		typedef bool (LastMock::*functiontype)();
-	public:
-		bool (LastMock::*lastBehaviorDefault)();
-
-		bool last1()
-		{
-			return (false);
-		}
-
-		bool last2()
-		{
-			return (true);
-		}
-
-		bool lastDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		functiontype getBehavior()
-		{
-			return lastBehaviorDefault;
-		}
-
-		void setDefaultBehavior(bool (LastMock::*defaultBehavior)())
-		{
-			lastBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&LastMock::lastDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-		}
-	};
-	static LastMock * lastMock;
-
-	class MockDefault : public mrw::statechart::TrackerStatechart::OperationCallback
-	{
-	public:
-		void first()
-		{
-			firstMock->first();
-			return (firstMock->*(firstMock->getBehavior()))();
-		}
-		void free()
-		{
-			freeMock->free();
-			return (freeMock->*(freeMock->getBehavior()))();
-		}
-		void occupy()
-		{
-			occupyMock->occupy();
-			return (occupyMock->*(occupyMock->getBehavior()))();
-		}
-		bool valid()
-		{
-			return (validMock->*(validMock->getBehavior()))();
-		}
-		bool last()
-		{
-			return (lastMock->*(lastMock->getBehavior()))();
-		}
-		void clear()
-		{
-			clearMock->clear();
-			return (clearMock->*(clearMock->getBehavior()))();
-		}
-	};
-
-//! The timers are managed by a timer service. */
-	static TimedSctUnitRunner * runner;
-
 	class TrackerTest : public ::testing::Test
 	{
+	public:
+		void idle();
+		void receivedFirst();
+		void receivedFurther();
+		void delayValid();
+		void occupyState();
+		void freeState();
+		void cascade();
+
 	protected:
-		MockDefault defaultMock;
+		mrw::statechart::TrackerStatechart * statechart;
+
+
+	public:
+		class ClearMock
+		{
+			typedef void (ClearMock::*functiontype)();
+		public:
+			TrackerTest * owner;
+			void (ClearMock::*clearBehaviorDefault)();
+			int callCount;
+
+			ClearMock(TrackerTest * owner) :
+				owner(owner),
+				clearBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void clear1()
+			{
+			}
+
+			void clearDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void clear()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return clearBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (ClearMock::*defaultBehavior)())
+			{
+				clearBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&ClearMock::clearDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		ClearMock * clearMock;
+
+		class FirstMock
+		{
+			typedef void (FirstMock::*functiontype)();
+		public:
+			TrackerTest * owner;
+			void (FirstMock::*firstBehaviorDefault)();
+			int callCount;
+
+			FirstMock(TrackerTest * owner) :
+				owner(owner),
+				firstBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void first1()
+			{
+			}
+
+			void firstDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void first()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return firstBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (FirstMock::*defaultBehavior)())
+			{
+				firstBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&FirstMock::firstDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		FirstMock * firstMock;
+
+		class FreeMock
+		{
+			typedef void (FreeMock::*functiontype)();
+		public:
+			TrackerTest * owner;
+			void (FreeMock::*freeBehaviorDefault)();
+			int callCount;
+
+			FreeMock(TrackerTest * owner) :
+				owner(owner),
+				freeBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void free1()
+			{
+			}
+
+			void freeDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void free()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return freeBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (FreeMock::*defaultBehavior)())
+			{
+				freeBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&FreeMock::freeDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		FreeMock * freeMock;
+
+		class OccupyMock
+		{
+			typedef void (OccupyMock::*functiontype)();
+		public:
+			TrackerTest * owner;
+			void (OccupyMock::*occupyBehaviorDefault)();
+			int callCount;
+
+			OccupyMock(TrackerTest * owner) :
+				owner(owner),
+				occupyBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void occupy1()
+			{
+			}
+
+			void occupyDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void occupy()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return occupyBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (OccupyMock::*defaultBehavior)())
+			{
+				occupyBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&OccupyMock::occupyDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		OccupyMock * occupyMock;
+
+		class ValidMock
+		{
+			typedef bool (ValidMock::*functiontype)();
+		public:
+			TrackerTest * owner;
+			bool (ValidMock::*validBehaviorDefault)();
+
+			ValidMock(TrackerTest * owner) :
+				owner(owner),
+				validBehaviorDefault(0)
+			{}
+
+
+			bool valid1()
+			{
+				return (true);
+			}
+
+			bool valid2()
+			{
+				return (false);
+			}
+
+			bool validDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			functiontype getBehavior()
+			{
+				return validBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (ValidMock::*defaultBehavior)())
+			{
+				validBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&ValidMock::validDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		ValidMock * validMock;
+
+		class LastMock
+		{
+			typedef bool (LastMock::*functiontype)();
+		public:
+			TrackerTest * owner;
+			bool (LastMock::*lastBehaviorDefault)();
+
+			LastMock(TrackerTest * owner) :
+				owner(owner),
+				lastBehaviorDefault(0)
+			{}
+
+
+			bool last1()
+			{
+				return (false);
+			}
+
+			bool last2()
+			{
+				return (true);
+			}
+
+			bool lastDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			functiontype getBehavior()
+			{
+				return lastBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (LastMock::*defaultBehavior)())
+			{
+				lastBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&LastMock::lastDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		LastMock * lastMock;
+
+		class MockDefault : public mrw::statechart::TrackerStatechart::OperationCallback
+		{
+		public:
+			TrackerTest * owner;
+			MockDefault(TrackerTest * owner) : owner(owner) {}
+			void first()
+			{
+				owner->firstMock->first();
+				return (owner->firstMock->*(owner->firstMock->getBehavior()))();
+			}
+			void free()
+			{
+				owner->freeMock->free();
+				return (owner->freeMock->*(owner->freeMock->getBehavior()))();
+			}
+			void occupy()
+			{
+				owner->occupyMock->occupy();
+				return (owner->occupyMock->*(owner->occupyMock->getBehavior()))();
+			}
+			bool valid()
+			{
+				return (owner->validMock->*(owner->validMock->getBehavior()))();
+			}
+			bool last()
+			{
+				return (owner->lastMock->*(owner->lastMock->getBehavior()))();
+			}
+			void clear()
+			{
+				owner->clearMock->clear();
+				return (owner->clearMock->*(owner->clearMock->getBehavior()))();
+			}
+		};
+
+		//! The timers are managed by a timer service. */
+		TimedSctUnitRunner * runner;
+
+		MockDefault * defaultMock;
+
 		virtual void SetUp()
 		{
 			statechart = new mrw::statechart::TrackerStatechart();
@@ -375,19 +427,20 @@ namespace
 				maximalParallelTimeEvents
 			);
 			statechart->setTimerService(runner);
-			clearMock = new ClearMock();
+			clearMock = new ClearMock(this);
 			clearMock->initializeBehavior();
-			firstMock = new FirstMock();
+			firstMock = new FirstMock(this);
 			firstMock->initializeBehavior();
-			freeMock = new FreeMock();
+			freeMock = new FreeMock(this);
 			freeMock->initializeBehavior();
-			occupyMock = new OccupyMock();
+			occupyMock = new OccupyMock(this);
 			occupyMock->initializeBehavior();
-			validMock = new ValidMock();
+			validMock = new ValidMock(this);
 			validMock->initializeBehavior();
-			lastMock = new LastMock();
+			lastMock = new LastMock(this);
 			lastMock->initializeBehavior();
-			statechart->setOperationCallback(&defaultMock);
+			defaultMock = new MockDefault(this);
+			statechart->setOperationCallback(defaultMock);
 		}
 		virtual void TearDown()
 		{
@@ -398,12 +451,15 @@ namespace
 			delete firstMock;
 			delete clearMock;
 			delete statechart;
+			delete defaultMock;
+			defaultMock = 0;
 			delete runner;
 		}
 	};
 
 
-	void idle()
+
+	void TrackerTest::idle()
 	{
 		statechart->enter();
 
@@ -424,7 +480,7 @@ namespace
 	{
 		idle();
 	}
-	void receivedFirst()
+	void TrackerTest::receivedFirst()
 	{
 		idle();
 
@@ -437,7 +493,7 @@ namespace
 	{
 		receivedFirst();
 	}
-	void receivedFurther()
+	void TrackerTest::receivedFurther()
 	{
 		receivedFirst();
 
@@ -450,7 +506,7 @@ namespace
 	{
 		receivedFurther();
 	}
-	void delayValid()
+	void TrackerTest::delayValid()
 	{
 		receivedFurther();
 
@@ -484,7 +540,7 @@ namespace
 		EXPECT_TRUE(clearMock->calledAtLeastOnce());
 
 	}
-	void occupyState()
+	void TrackerTest::occupyState()
 	{
 		delayValid();
 
@@ -499,7 +555,7 @@ namespace
 	{
 		occupyState();
 	}
-	void freeState()
+	void TrackerTest::freeState()
 	{
 		occupyState();
 
@@ -514,7 +570,7 @@ namespace
 	{
 		freeState();
 	}
-	void cascade()
+	void TrackerTest::cascade()
 	{
 		freeState();
 

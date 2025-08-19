@@ -49,7 +49,7 @@ namespace mrw
 
 		std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance> SwitchStatechart::getNextEvent() noexcept
 		{
-			std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance> nextEvent = 0;
+			std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance> nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -142,8 +142,7 @@ namespace mrw
 		/*! Slot for the in event 'clear' that is defined in the default interface scope. */
 		void mrw::statechart::SwitchStatechart::clear()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::clear)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::clear)));
 			runCycle();
 		}
 
@@ -151,8 +150,7 @@ namespace mrw
 		/*! Slot for the in event 'start' that is defined in the default interface scope. */
 		void mrw::statechart::SwitchStatechart::start()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::start)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::start)));
 			runCycle();
 		}
 
@@ -160,8 +158,7 @@ namespace mrw
 		/*! Slot for the in event 'leftResponse' that is defined in the default interface scope. */
 		void mrw::statechart::SwitchStatechart::leftResponse()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::leftResponse)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::leftResponse)));
 			runCycle();
 		}
 
@@ -169,8 +166,7 @@ namespace mrw
 		/*! Slot for the in event 'rightResponse' that is defined in the default interface scope. */
 		void mrw::statechart::SwitchStatechart::rightResponse()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::rightResponse)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::rightResponse)));
 			runCycle();
 		}
 
@@ -178,8 +174,7 @@ namespace mrw
 		/*! Slot for the in event 'response' that is defined in the default interface scope. */
 		void mrw::statechart::SwitchStatechart::response()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::response)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::response)));
 			runCycle();
 		}
 
@@ -187,8 +182,7 @@ namespace mrw
 		/*! Slot for the in event 'queued' that is defined in the default interface scope. */
 		void mrw::statechart::SwitchStatechart::queued()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::queued)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::queued)));
 			runCycle();
 		}
 
@@ -196,8 +190,7 @@ namespace mrw
 		/*! Slot for the in event 'failed' that is defined in the default interface scope. */
 		void mrw::statechart::SwitchStatechart::failed()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::failed)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::failed)));
 			runCycle();
 		}
 
@@ -205,8 +198,7 @@ namespace mrw
 		/*! Slot for the in event 'unlock' that is defined in the default interface scope. */
 		void mrw::statechart::SwitchStatechart::unlock()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::unlock)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::unlock)));
 			runCycle();
 		}
 
@@ -214,8 +206,7 @@ namespace mrw
 		/*! Slot for the in event 'turn' that is defined in the default interface scope. */
 		void mrw::statechart::SwitchStatechart::turn()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::turn)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::SwitchStatechart::EventInstance>(new mrw::statechart::SwitchStatechart::EventInstance(mrw::statechart::SwitchStatechart::Event::turn)));
 			runCycle();
 		}
 

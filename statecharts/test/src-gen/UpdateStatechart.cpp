@@ -42,7 +42,7 @@ namespace mrw
 
 		mrw::statechart::UpdateStatechart::EventInstance * UpdateStatechart::getNextEvent() noexcept
 		{
-			mrw::statechart::UpdateStatechart::EventInstance * nextEvent = 0;
+			mrw::statechart::UpdateStatechart::EventInstance * nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -114,8 +114,7 @@ namespace mrw
 		/*! Raises the in event 'connected' of default interface scope. */
 		void mrw::statechart::UpdateStatechart::raiseConnected()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::connected))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::connected));
 			runCycle();
 		}
 
@@ -123,8 +122,7 @@ namespace mrw
 		/*! Raises the in event 'complete' of default interface scope. */
 		void mrw::statechart::UpdateStatechart::raiseComplete()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::complete))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::complete));
 			runCycle();
 		}
 
@@ -132,8 +130,7 @@ namespace mrw
 		/*! Raises the in event 'mismatch' of default interface scope. */
 		void mrw::statechart::UpdateStatechart::raiseMismatch()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::mismatch))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::mismatch));
 			runCycle();
 		}
 
@@ -141,8 +138,7 @@ namespace mrw
 		/*! Raises the in event 'failed' of default interface scope. */
 		void mrw::statechart::UpdateStatechart::raiseFailed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::failed))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::UpdateStatechart::EventInstance(mrw::statechart::UpdateStatechart::Event::failed));
 			runCycle();
 		}
 

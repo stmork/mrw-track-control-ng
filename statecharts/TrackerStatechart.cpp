@@ -42,7 +42,7 @@ namespace mrw
 
 		std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance> TrackerStatechart::getNextEvent() noexcept
 		{
-			std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance> nextEvent = 0;
+			std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance> nextEvent = nullptr;
 
 			if (!internalEventQueue.empty())
 			{
@@ -107,8 +107,7 @@ namespace mrw
 		/*! Slot for the in event 'received' that is defined in the default interface scope. */
 		void mrw::statechart::TrackerStatechart::received()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance>(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::received)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance>(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::received)));
 			runCycle();
 		}
 
@@ -256,8 +255,7 @@ namespace mrw
 			/* Entry action for state 'Free'. */
 			timerService->setTimer(shared_from_this(), 3, (static_cast<sc::time> (TrackerStatechart::step)), false);
 			ifaceOperationCallback->free();
-			internalEventQueue.push_back(std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance>(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::Internal_completed)))
-			;
+			internalEventQueue.push_back(std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance>(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::Internal_completed)));
 		}
 
 		/* Entry action for state 'Idle'. */

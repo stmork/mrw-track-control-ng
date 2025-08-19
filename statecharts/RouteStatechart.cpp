@@ -43,7 +43,7 @@ namespace mrw
 
 		std::unique_ptr<mrw::statechart::RouteStatechart::EventInstance> RouteStatechart::getNextEvent() noexcept
 		{
-			std::unique_ptr<mrw::statechart::RouteStatechart::EventInstance> nextEvent = 0;
+			std::unique_ptr<mrw::statechart::RouteStatechart::EventInstance> nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -117,8 +117,7 @@ namespace mrw
 		/*! Slot for the in event 'turn' that is defined in the default interface scope. */
 		void mrw::statechart::RouteStatechart::turn()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::RouteStatechart::EventInstance>(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::turn)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::RouteStatechart::EventInstance>(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::turn)));
 			runCycle();
 		}
 
@@ -126,8 +125,7 @@ namespace mrw
 		/*! Slot for the in event 'completed' that is defined in the default interface scope. */
 		void mrw::statechart::RouteStatechart::completed()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::RouteStatechart::EventInstance>(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::completed)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::RouteStatechart::EventInstance>(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::completed)));
 			runCycle();
 		}
 
@@ -135,8 +133,7 @@ namespace mrw
 		/*! Slot for the in event 'failed' that is defined in the default interface scope. */
 		void mrw::statechart::RouteStatechart::failed()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::RouteStatechart::EventInstance>(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::failed)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::RouteStatechart::EventInstance>(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::failed)));
 			runCycle();
 		}
 
@@ -144,8 +141,7 @@ namespace mrw
 		/*! Slot for the in event 'disable' that is defined in the default interface scope. */
 		void mrw::statechart::RouteStatechart::disable()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::RouteStatechart::EventInstance>(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::disable)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::RouteStatechart::EventInstance>(new mrw::statechart::RouteStatechart::EventInstance(mrw::statechart::RouteStatechart::Event::disable)));
 			runCycle();
 		}
 

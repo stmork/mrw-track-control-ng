@@ -17,624 +17,698 @@
 namespace
 {
 
-	void failState();
-	void unlockedState();
-	void waitForStart();
-	void initial();
-	void startVersion1();
-	void startVersion2();
-	void failAfterStart();
-	void operational();
-	void operationalCombined();
-	void pendingTour();
-	void pendingTourLight();
-	void pendingTourForm();
-	void pendingTourCombined();
-	void pendingShunting();
-	void tourLocked();
-	void tourLockedCombined();
-	void shuntingLocked();
-	void disableTour();
-	void disableTourCombined();
-	void disableTourCombinedCompleted();
-	void disableTourCombinedLight();
-	void disableTourCombinedForm();
-	void disableShunting();
-	void disableShuntingCompleted();
-	void extendTour();
-	void extendTourCompleted();
-	void extendTourCombined();
-	void extendTourCombinedCompleted();
-	void extendShunting();
-	void extendShuntingCompleted();
-	void failedTour();
-	void failedTourCombined();
-	void failedShunting();
-	mrw::statechart::SignalControllerStatechart * statechart;
-
-
-	class FailMock
-	{
-		typedef void (FailMock::*functiontype)();
-	public:
-		void (FailMock::*failBehaviorDefault)();
-		int callCount;
-
-		void fail1()
-		{
-		}
-
-		void failDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void fail()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return failBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (FailMock::*defaultBehavior)())
-		{
-			failBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&FailMock::failDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static FailMock * failMock;
-
-	class LockMock
-	{
-		typedef void (LockMock::*functiontype)();
-		struct parameters
-		{
-			bool do_it;
-			void (LockMock::*behavior)();
-			int callCount;
-			inline bool operator==(const parameters & other)
-			{
-				return (this->do_it == other.do_it);
-			}
-		};
-	public:
-		std::list<LockMock::parameters> mocks;
-		std::list<LockMock::parameters> paramCount;
-		void (LockMock::*lockBehaviorDefault)();
-		int callCount;
-
-		void lock1()
-		{
-		}
-
-		void lockDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void setLockBehavior(const bool do_it, void (LockMock::*func)())
-		{
-			parameters p;
-			p.do_it = do_it;
-			p.behavior = func;
-
-			std::list<LockMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
-			if (i != mocks.end())
-			{
-				mocks.erase(i);
-			}
-			mocks.push_back(p);
-		}
-
-		bool calledAtLeast(const int times, const bool do_it)
-		{
-			parameters p;
-			p.do_it = do_it;
-
-			std::list<LockMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				return (i->callCount >= times);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		bool calledAtLeastOnce(const bool do_it)
-		{
-			parameters p;
-			p.do_it = do_it;
-
-			std::list<LockMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				return (i->callCount > 0);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		void lock(const bool do_it)
-		{
-			++callCount;
-
-			parameters p;
-			p.do_it = do_it;
-
-			std::list<LockMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
-			if (i != paramCount.end())
-			{
-				p.callCount = (++i->callCount);
-				paramCount.erase(i);
-
-			}
-			else
-			{
-				p.callCount = 1;
-			}
-			paramCount.push_back(p);
-		}
-
-		functiontype getBehavior(const bool do_it)
-		{
-			parameters p;
-			p.do_it = do_it;
-
-			std::list<LockMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
-			if (i != mocks.end())
-			{
-				return  i->behavior;
-			}
-			else
-			{
-				return lockBehaviorDefault;
-			}
-		}
-
-		void setDefaultBehavior(void (LockMock::*defaultBehavior)())
-		{
-			lockBehaviorDefault = defaultBehavior;
-			mocks.clear();
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&LockMock::lockDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-			paramCount.clear();
-			mocks.clear();
-		}
-	};
-	static LockMock * lockMock;
-
-	class IncMock
-	{
-		typedef void (IncMock::*functiontype)();
-	public:
-		void (IncMock::*incBehaviorDefault)();
-		int callCount;
-
-		void inc1()
-		{
-		}
-
-		void incDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void inc()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return incBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (IncMock::*defaultBehavior)())
-		{
-			incBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&IncMock::incDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static IncMock * incMock;
-
-	class DecMock
-	{
-		typedef void (DecMock::*functiontype)();
-	public:
-		void (DecMock::*decBehaviorDefault)();
-		int callCount;
-
-		void dec1()
-		{
-		}
-
-		void decDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void dec()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return decBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (DecMock::*defaultBehavior)())
-		{
-			decBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&DecMock::decDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static DecMock * decMock;
-
-	class PendingMock
-	{
-		typedef void (PendingMock::*functiontype)();
-	public:
-		void (PendingMock::*pendingBehaviorDefault)();
-		int callCount;
-
-		void pending1()
-		{
-		}
-
-		void pendingDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void pending()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return pendingBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (PendingMock::*defaultBehavior)())
-		{
-			pendingBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&PendingMock::pendingDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static PendingMock * pendingMock;
-
-	class HasMainSignalMock
-	{
-		typedef bool (HasMainSignalMock::*functiontype)();
-	public:
-		bool (HasMainSignalMock::*hasMainSignalBehaviorDefault)();
-
-		bool hasMainSignal1()
-		{
-			return (false);
-		}
-
-		bool hasMainSignal2()
-		{
-			return (true);
-		}
-
-		bool hasMainSignalDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		functiontype getBehavior()
-		{
-			return hasMainSignalBehaviorDefault;
-		}
-
-		void setDefaultBehavior(bool (HasMainSignalMock::*defaultBehavior)())
-		{
-			hasMainSignalBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&HasMainSignalMock::hasMainSignalDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-		}
-	};
-	static HasMainSignalMock * hasMainSignalMock;
-
-	class IsLightSignalMock
-	{
-		typedef bool (IsLightSignalMock::*functiontype)();
-	public:
-		bool (IsLightSignalMock::*isLightSignalBehaviorDefault)();
-
-		bool isLightSignal1()
-		{
-			return (false);
-		}
-
-		bool isLightSignal2()
-		{
-			return (true);
-		}
-
-		bool isLightSignalDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		functiontype getBehavior()
-		{
-			return isLightSignalBehaviorDefault;
-		}
-
-		void setDefaultBehavior(bool (IsLightSignalMock::*defaultBehavior)())
-		{
-			isLightSignalBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&IsLightSignalMock::isLightSignalDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-		}
-	};
-	static IsLightSignalMock * isLightSignalMock;
-
-	class IsMainAndShuntMock
-	{
-		typedef bool (IsMainAndShuntMock::*functiontype)();
-	public:
-		bool (IsMainAndShuntMock::*isMainAndShuntBehaviorDefault)();
-
-		bool isMainAndShunt1()
-		{
-			return (false);
-		}
-
-		bool isMainAndShunt2()
-		{
-			return (true);
-		}
-
-		bool isMainAndShuntDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		functiontype getBehavior()
-		{
-			return isMainAndShuntBehaviorDefault;
-		}
-
-		void setDefaultBehavior(bool (IsMainAndShuntMock::*defaultBehavior)())
-		{
-			isMainAndShuntBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&IsMainAndShuntMock::isMainAndShuntDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-		}
-	};
-	static IsMainAndShuntMock * isMainAndShuntMock;
-
-	class IsTourMock
-	{
-		typedef bool (IsTourMock::*functiontype)();
-	public:
-		bool (IsTourMock::*isTourBehaviorDefault)();
-
-		bool isTour1()
-		{
-			return (false);
-		}
-
-		bool isTour2()
-		{
-			return (true);
-		}
-
-		bool isTourDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		functiontype getBehavior()
-		{
-			return isTourBehaviorDefault;
-		}
-
-		void setDefaultBehavior(bool (IsTourMock::*defaultBehavior)())
-		{
-			isTourBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&IsTourMock::isTourDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-		}
-	};
-	static IsTourMock * isTourMock;
-
-	class MockDefault : public mrw::statechart::SignalControllerStatechart::OperationCallback
-	{
-	public:
-		void inc()
-		{
-			incMock->inc();
-			return (incMock->*(incMock->getBehavior()))();
-		}
-		void dec()
-		{
-			decMock->dec();
-			return (decMock->*(decMock->getBehavior()))();
-		}
-		bool hasMainSignal()
-		{
-			return (hasMainSignalMock->*(hasMainSignalMock->getBehavior()))();
-		}
-		bool isMainAndShunt()
-		{
-			return (isMainAndShuntMock->*(isMainAndShuntMock->getBehavior()))();
-		}
-		bool isLightSignal()
-		{
-			return (isLightSignalMock->*(isLightSignalMock->getBehavior()))();
-		}
-		bool isTour()
-		{
-			return (isTourMock->*(isTourMock->getBehavior()))();
-		}
-		void fail()
-		{
-			failMock->fail();
-			return (failMock->*(failMock->getBehavior()))();
-		}
-		void pending()
-		{
-			pendingMock->pending();
-			return (pendingMock->*(pendingMock->getBehavior()))();
-		}
-		void lock(bool do_it)
-		{
-			lockMock->lock(do_it);
-			return (lockMock->*(lockMock->getBehavior(do_it)))();
-		}
-	};
-
-//! The timers are managed by a timer service. */
-	static TimedSctUnitRunner * runner;
-
 	class SignalControllerTest : public ::testing::Test
 	{
+	public:
+		void failState();
+		void unlockedState();
+		void waitForStart();
+		void initial();
+		void startVersion1();
+		void startVersion2();
+		void failAfterStart();
+		void operational();
+		void operationalCombined();
+		void pendingTour();
+		void pendingTourLight();
+		void pendingTourForm();
+		void pendingTourCombined();
+		void pendingShunting();
+		void tourLocked();
+		void tourLockedCombined();
+		void shuntingLocked();
+		void disableTour();
+		void disableTourCombined();
+		void disableTourCombinedCompleted();
+		void disableTourCombinedLight();
+		void disableTourCombinedForm();
+		void disableShunting();
+		void disableShuntingCompleted();
+		void extendTour();
+		void extendTourCompleted();
+		void extendTourCombined();
+		void extendTourCombinedCompleted();
+		void extendShunting();
+		void extendShuntingCompleted();
+		void failedTour();
+		void failedTourCombined();
+		void failedShunting();
+
 	protected:
-		MockDefault defaultMock;
+		mrw::statechart::SignalControllerStatechart * statechart;
+
+
+	public:
+		class FailMock
+		{
+			typedef void (FailMock::*functiontype)();
+		public:
+			SignalControllerTest * owner;
+			void (FailMock::*failBehaviorDefault)();
+			int callCount;
+
+			FailMock(SignalControllerTest * owner) :
+				owner(owner),
+				failBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void fail1()
+			{
+			}
+
+			void failDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void fail()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return failBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (FailMock::*defaultBehavior)())
+			{
+				failBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&FailMock::failDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		FailMock * failMock;
+
+		class LockMock
+		{
+			typedef void (LockMock::*functiontype)();
+			struct parameters
+			{
+				bool do_it;
+				void (LockMock::*behavior)();
+				int callCount;
+				inline bool operator==(const parameters & other)
+				{
+					return (this->do_it == other.do_it);
+				}
+			};
+		public:
+			SignalControllerTest * owner;
+			std::list<LockMock::parameters> mocks;
+			std::list<LockMock::parameters> paramCount;
+			void (LockMock::*lockBehaviorDefault)();
+			int callCount;
+
+			LockMock(SignalControllerTest * owner) :
+				owner(owner),
+				lockBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void lock1()
+			{
+			}
+
+			void lockDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void setLockBehavior(const bool do_it, void (LockMock::*func)())
+			{
+				parameters p;
+				p.do_it = do_it;
+				p.behavior = func;
+
+				std::list<LockMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					mocks.erase(i);
+				}
+				mocks.push_back(p);
+			}
+
+			bool calledAtLeast(const int times, const bool do_it)
+			{
+				parameters p;
+				p.do_it = do_it;
+
+				std::list<LockMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount >= times);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			bool calledAtLeastOnce(const bool do_it)
+			{
+				parameters p;
+				p.do_it = do_it;
+
+				std::list<LockMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					return (i->callCount > 0);
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			void lock(const bool do_it)
+			{
+				++callCount;
+
+				parameters p;
+				p.do_it = do_it;
+
+				std::list<LockMock::parameters>::iterator i = std::find(paramCount.begin(), paramCount.end(), p);
+				if (i != paramCount.end())
+				{
+					p.callCount = (++i->callCount);
+					paramCount.erase(i);
+
+				}
+				else
+				{
+					p.callCount = 1;
+				}
+				paramCount.push_back(p);
+			}
+
+			functiontype getBehavior(const bool do_it)
+			{
+				parameters p;
+				p.do_it = do_it;
+
+				std::list<LockMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					return  i->behavior;
+				}
+				else
+				{
+					return lockBehaviorDefault;
+				}
+			}
+
+			void setDefaultBehavior(void (LockMock::*defaultBehavior)())
+			{
+				lockBehaviorDefault = defaultBehavior;
+				mocks.clear();
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&LockMock::lockDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+				paramCount.clear();
+				mocks.clear();
+			}
+		};
+		LockMock * lockMock;
+
+		class IncMock
+		{
+			typedef void (IncMock::*functiontype)();
+		public:
+			SignalControllerTest * owner;
+			void (IncMock::*incBehaviorDefault)();
+			int callCount;
+
+			IncMock(SignalControllerTest * owner) :
+				owner(owner),
+				incBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void inc1()
+			{
+			}
+
+			void incDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void inc()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return incBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (IncMock::*defaultBehavior)())
+			{
+				incBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&IncMock::incDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		IncMock * incMock;
+
+		class DecMock
+		{
+			typedef void (DecMock::*functiontype)();
+		public:
+			SignalControllerTest * owner;
+			void (DecMock::*decBehaviorDefault)();
+			int callCount;
+
+			DecMock(SignalControllerTest * owner) :
+				owner(owner),
+				decBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void dec1()
+			{
+			}
+
+			void decDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void dec()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return decBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (DecMock::*defaultBehavior)())
+			{
+				decBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&DecMock::decDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		DecMock * decMock;
+
+		class PendingMock
+		{
+			typedef void (PendingMock::*functiontype)();
+		public:
+			SignalControllerTest * owner;
+			void (PendingMock::*pendingBehaviorDefault)();
+			int callCount;
+
+			PendingMock(SignalControllerTest * owner) :
+				owner(owner),
+				pendingBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void pending1()
+			{
+			}
+
+			void pendingDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void pending()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return pendingBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (PendingMock::*defaultBehavior)())
+			{
+				pendingBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&PendingMock::pendingDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		PendingMock * pendingMock;
+
+		class HasMainSignalMock
+		{
+			typedef bool (HasMainSignalMock::*functiontype)();
+		public:
+			SignalControllerTest * owner;
+			bool (HasMainSignalMock::*hasMainSignalBehaviorDefault)();
+
+			HasMainSignalMock(SignalControllerTest * owner) :
+				owner(owner),
+				hasMainSignalBehaviorDefault(0)
+			{}
+
+
+			bool hasMainSignal1()
+			{
+				return (false);
+			}
+
+			bool hasMainSignal2()
+			{
+				return (true);
+			}
+
+			bool hasMainSignalDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			functiontype getBehavior()
+			{
+				return hasMainSignalBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (HasMainSignalMock::*defaultBehavior)())
+			{
+				hasMainSignalBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&HasMainSignalMock::hasMainSignalDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		HasMainSignalMock * hasMainSignalMock;
+
+		class IsLightSignalMock
+		{
+			typedef bool (IsLightSignalMock::*functiontype)();
+		public:
+			SignalControllerTest * owner;
+			bool (IsLightSignalMock::*isLightSignalBehaviorDefault)();
+
+			IsLightSignalMock(SignalControllerTest * owner) :
+				owner(owner),
+				isLightSignalBehaviorDefault(0)
+			{}
+
+
+			bool isLightSignal1()
+			{
+				return (false);
+			}
+
+			bool isLightSignal2()
+			{
+				return (true);
+			}
+
+			bool isLightSignalDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			functiontype getBehavior()
+			{
+				return isLightSignalBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (IsLightSignalMock::*defaultBehavior)())
+			{
+				isLightSignalBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&IsLightSignalMock::isLightSignalDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		IsLightSignalMock * isLightSignalMock;
+
+		class IsMainAndShuntMock
+		{
+			typedef bool (IsMainAndShuntMock::*functiontype)();
+		public:
+			SignalControllerTest * owner;
+			bool (IsMainAndShuntMock::*isMainAndShuntBehaviorDefault)();
+
+			IsMainAndShuntMock(SignalControllerTest * owner) :
+				owner(owner),
+				isMainAndShuntBehaviorDefault(0)
+			{}
+
+
+			bool isMainAndShunt1()
+			{
+				return (false);
+			}
+
+			bool isMainAndShunt2()
+			{
+				return (true);
+			}
+
+			bool isMainAndShuntDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			functiontype getBehavior()
+			{
+				return isMainAndShuntBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (IsMainAndShuntMock::*defaultBehavior)())
+			{
+				isMainAndShuntBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&IsMainAndShuntMock::isMainAndShuntDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		IsMainAndShuntMock * isMainAndShuntMock;
+
+		class IsTourMock
+		{
+			typedef bool (IsTourMock::*functiontype)();
+		public:
+			SignalControllerTest * owner;
+			bool (IsTourMock::*isTourBehaviorDefault)();
+
+			IsTourMock(SignalControllerTest * owner) :
+				owner(owner),
+				isTourBehaviorDefault(0)
+			{}
+
+
+			bool isTour1()
+			{
+				return (false);
+			}
+
+			bool isTour2()
+			{
+				return (true);
+			}
+
+			bool isTourDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			functiontype getBehavior()
+			{
+				return isTourBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (IsTourMock::*defaultBehavior)())
+			{
+				isTourBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&IsTourMock::isTourDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		IsTourMock * isTourMock;
+
+		class MockDefault : public mrw::statechart::SignalControllerStatechart::OperationCallback
+		{
+		public:
+			SignalControllerTest * owner;
+			MockDefault(SignalControllerTest * owner) : owner(owner) {}
+			void inc()
+			{
+				owner->incMock->inc();
+				return (owner->incMock->*(owner->incMock->getBehavior()))();
+			}
+			void dec()
+			{
+				owner->decMock->dec();
+				return (owner->decMock->*(owner->decMock->getBehavior()))();
+			}
+			bool hasMainSignal()
+			{
+				return (owner->hasMainSignalMock->*(owner->hasMainSignalMock->getBehavior()))();
+			}
+			bool isMainAndShunt()
+			{
+				return (owner->isMainAndShuntMock->*(owner->isMainAndShuntMock->getBehavior()))();
+			}
+			bool isLightSignal()
+			{
+				return (owner->isLightSignalMock->*(owner->isLightSignalMock->getBehavior()))();
+			}
+			bool isTour()
+			{
+				return (owner->isTourMock->*(owner->isTourMock->getBehavior()))();
+			}
+			void fail()
+			{
+				owner->failMock->fail();
+				return (owner->failMock->*(owner->failMock->getBehavior()))();
+			}
+			void pending()
+			{
+				owner->pendingMock->pending();
+				return (owner->pendingMock->*(owner->pendingMock->getBehavior()))();
+			}
+			void lock(bool do_it)
+			{
+				owner->lockMock->lock(do_it);
+				return (owner->lockMock->*(owner->lockMock->getBehavior(do_it)))();
+			}
+		};
+
+		//! The timers are managed by a timer service. */
+		TimedSctUnitRunner * runner;
+
+		MockDefault * defaultMock;
+
 		virtual void SetUp()
 		{
 			statechart = new mrw::statechart::SignalControllerStatechart();
@@ -643,25 +717,26 @@ namespace
 				maximalParallelTimeEvents
 			);
 			statechart->setTimerService(runner);
-			failMock = new FailMock();
+			failMock = new FailMock(this);
 			failMock->initializeBehavior();
-			lockMock = new LockMock();
+			lockMock = new LockMock(this);
 			lockMock->initializeBehavior();
-			incMock = new IncMock();
+			incMock = new IncMock(this);
 			incMock->initializeBehavior();
-			decMock = new DecMock();
+			decMock = new DecMock(this);
 			decMock->initializeBehavior();
-			pendingMock = new PendingMock();
+			pendingMock = new PendingMock(this);
 			pendingMock->initializeBehavior();
-			hasMainSignalMock = new HasMainSignalMock();
+			hasMainSignalMock = new HasMainSignalMock(this);
 			hasMainSignalMock->initializeBehavior();
-			isLightSignalMock = new IsLightSignalMock();
+			isLightSignalMock = new IsLightSignalMock(this);
 			isLightSignalMock->initializeBehavior();
-			isMainAndShuntMock = new IsMainAndShuntMock();
+			isMainAndShuntMock = new IsMainAndShuntMock(this);
 			isMainAndShuntMock->initializeBehavior();
-			isTourMock = new IsTourMock();
+			isTourMock = new IsTourMock(this);
 			isTourMock->initializeBehavior();
-			statechart->setOperationCallback(&defaultMock);
+			defaultMock = new MockDefault(this);
+			statechart->setOperationCallback(defaultMock);
 		}
 		virtual void TearDown()
 		{
@@ -675,18 +750,21 @@ namespace
 			delete lockMock;
 			delete failMock;
 			delete statechart;
+			delete defaultMock;
+			defaultMock = 0;
 			delete runner;
 		}
 	};
 
-	void failState()
+
+	void SignalControllerTest::failState()
 	{
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Failed));
 
 		EXPECT_TRUE(failMock->calledAtLeastOnce());
 
 	}
-	void unlockedState()
+	void SignalControllerTest::unlockedState()
 	{
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalControllerStatechart::State::main_region_Operating));
 
@@ -696,7 +774,7 @@ namespace
 
 	}
 
-	void waitForStart()
+	void SignalControllerTest::waitForStart()
 	{
 		statechart->enter();
 
@@ -724,7 +802,7 @@ namespace
 	{
 		waitForStart();
 	}
-	void initial()
+	void SignalControllerTest::initial()
 	{
 		waitForStart();
 
@@ -757,7 +835,7 @@ namespace
 	{
 		initial();
 	}
-	void startVersion1()
+	void SignalControllerTest::startVersion1()
 	{
 		waitForStart();
 
@@ -784,7 +862,7 @@ namespace
 	{
 		startVersion1();
 	}
-	void startVersion2()
+	void SignalControllerTest::startVersion2()
 	{
 		waitForStart();
 
@@ -811,7 +889,7 @@ namespace
 	{
 		startVersion2();
 	}
-	void failAfterStart()
+	void SignalControllerTest::failAfterStart()
 	{
 		initial();
 
@@ -895,7 +973,7 @@ namespace
 		unlockedState();
 
 	}
-	void operational()
+	void SignalControllerTest::operational()
 	{
 		initial();
 
@@ -918,7 +996,7 @@ namespace
 	{
 		operational();
 	}
-	void operationalCombined()
+	void SignalControllerTest::operationalCombined()
 	{
 		initial();
 
@@ -974,7 +1052,7 @@ namespace
 		unlockedState();
 
 	}
-	void pendingTour()
+	void SignalControllerTest::pendingTour()
 	{
 		operational();
 
@@ -1013,7 +1091,7 @@ namespace
 	{
 		pendingTour();
 	}
-	void pendingTourLight()
+	void SignalControllerTest::pendingTourLight()
 	{
 		pendingTour();
 
@@ -1038,7 +1116,7 @@ namespace
 	{
 		pendingTourLight();
 	}
-	void pendingTourForm()
+	void SignalControllerTest::pendingTourForm()
 	{
 		pendingTour();
 
@@ -1059,7 +1137,7 @@ namespace
 	{
 		pendingTourForm();
 	}
-	void pendingTourCombined()
+	void SignalControllerTest::pendingTourCombined()
 	{
 		statechart->setSymbol(statechart->getGO());
 
@@ -1100,7 +1178,7 @@ namespace
 	{
 		pendingTourCombined();
 	}
-	void pendingShunting()
+	void SignalControllerTest::pendingShunting()
 	{
 		statechart->setSymbol(statechart->getGO());
 
@@ -1129,7 +1207,7 @@ namespace
 	{
 		pendingShunting();
 	}
-	void tourLocked()
+	void SignalControllerTest::tourLocked()
 	{
 		pendingTourLight();
 
@@ -1150,7 +1228,7 @@ namespace
 	{
 		tourLocked();
 	}
-	void tourLockedCombined()
+	void SignalControllerTest::tourLockedCombined()
 	{
 		pendingTourCombined();
 
@@ -1171,7 +1249,7 @@ namespace
 	{
 		tourLockedCombined();
 	}
-	void shuntingLocked()
+	void SignalControllerTest::shuntingLocked()
 	{
 		pendingShunting();
 
@@ -1192,7 +1270,7 @@ namespace
 	{
 		shuntingLocked();
 	}
-	void disableTour()
+	void SignalControllerTest::disableTour()
 	{
 		tourLocked();
 
@@ -1257,7 +1335,7 @@ namespace
 	{
 		disableTour();
 	}
-	void disableTourCombined()
+	void SignalControllerTest::disableTourCombined()
 	{
 		tourLockedCombined();
 
@@ -1290,7 +1368,7 @@ namespace
 	{
 		disableTourCombined();
 	}
-	void disableTourCombinedCompleted()
+	void SignalControllerTest::disableTourCombinedCompleted()
 	{
 		disableTourCombined();
 
@@ -1313,7 +1391,7 @@ namespace
 	{
 		disableTourCombinedCompleted();
 	}
-	void disableTourCombinedLight()
+	void SignalControllerTest::disableTourCombinedLight()
 	{
 		disableTourCombinedCompleted();
 
@@ -1356,7 +1434,7 @@ namespace
 	{
 		disableTourCombinedLight();
 	}
-	void disableTourCombinedForm()
+	void SignalControllerTest::disableTourCombinedForm()
 	{
 		disableTourCombinedCompleted();
 
@@ -1379,7 +1457,7 @@ namespace
 	{
 		disableTourCombinedForm();
 	}
-	void disableShunting()
+	void SignalControllerTest::disableShunting()
 	{
 		shuntingLocked();
 
@@ -1404,7 +1482,7 @@ namespace
 	{
 		disableShunting();
 	}
-	void disableShuntingCompleted()
+	void SignalControllerTest::disableShuntingCompleted()
 	{
 		disableShunting();
 
@@ -1421,7 +1499,7 @@ namespace
 	{
 		disableShuntingCompleted();
 	}
-	void extendTour()
+	void SignalControllerTest::extendTour()
 	{
 		tourLocked();
 
@@ -1442,7 +1520,7 @@ namespace
 	{
 		extendTour();
 	}
-	void extendTourCompleted()
+	void SignalControllerTest::extendTourCompleted()
 	{
 		extendTour();
 
@@ -1461,7 +1539,7 @@ namespace
 	{
 		extendTourCompleted();
 	}
-	void extendTourCombined()
+	void SignalControllerTest::extendTourCombined()
 	{
 		tourLockedCombined();
 
@@ -1482,7 +1560,7 @@ namespace
 	{
 		extendTourCombined();
 	}
-	void extendTourCombinedCompleted()
+	void SignalControllerTest::extendTourCombinedCompleted()
 	{
 		extendTourCombined();
 
@@ -1501,7 +1579,7 @@ namespace
 	{
 		extendTourCombinedCompleted();
 	}
-	void extendShunting()
+	void SignalControllerTest::extendShunting()
 	{
 		shuntingLocked();
 
@@ -1522,7 +1600,7 @@ namespace
 	{
 		extendShunting();
 	}
-	void extendShuntingCompleted()
+	void SignalControllerTest::extendShuntingCompleted()
 	{
 		extendShunting();
 
@@ -1541,7 +1619,7 @@ namespace
 	{
 		extendShuntingCompleted();
 	}
-	void failedTour()
+	void SignalControllerTest::failedTour()
 	{
 		tourLocked();
 
@@ -1554,7 +1632,7 @@ namespace
 	{
 		failedTour();
 	}
-	void failedTourCombined()
+	void SignalControllerTest::failedTourCombined()
 	{
 		tourLockedCombined();
 
@@ -1567,7 +1645,7 @@ namespace
 	{
 		failedTourCombined();
 	}
-	void failedShunting()
+	void SignalControllerTest::failedShunting()
 	{
 		shuntingLocked();
 

@@ -42,7 +42,7 @@ namespace mrw
 
 		mrw::statechart::ConfigStatechart::EventInstance * ConfigStatechart::getNextEvent() noexcept
 		{
-			mrw::statechart::ConfigStatechart::EventInstance * nextEvent = 0;
+			mrw::statechart::ConfigStatechart::EventInstance * nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -98,8 +98,7 @@ namespace mrw
 		/*! Raises the in event 'connected' of default interface scope. */
 		void mrw::statechart::ConfigStatechart::raiseConnected()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::connected))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::connected));
 			runCycle();
 		}
 
@@ -107,8 +106,7 @@ namespace mrw
 		/*! Raises the in event 'completed' of default interface scope. */
 		void mrw::statechart::ConfigStatechart::raiseCompleted()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::completed))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::completed));
 			runCycle();
 		}
 

@@ -10,6 +10,7 @@ project(MRW-Test-Statecharts VERSION 2.2
 	LANGUAGES CXX)
 
 add_compile_options(-Wno-unused-parameter)
+add_compile_options(-Wno-shadow)
 
 find_package(GTest REQUIRED)
 

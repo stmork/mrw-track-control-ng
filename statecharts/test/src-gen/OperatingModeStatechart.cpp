@@ -63,7 +63,7 @@ namespace mrw
 
 		mrw::statechart::OperatingModeStatechart::EventInstance * OperatingModeStatechart::getNextEvent() noexcept
 		{
-			mrw::statechart::OperatingModeStatechart::EventInstance * nextEvent = 0;
+			mrw::statechart::OperatingModeStatechart::EventInstance * nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -115,10 +115,9 @@ namespace mrw
 				{
 					mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool> * e = static_cast<mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool> *>(event);
 
-					if (e != 0)
+					if (e != nullptr)
 					{
-						manual_value
-							= e->value;
+						manual_value = e->value;
 						manual_raised = true;
 					}
 					break;
@@ -178,8 +177,7 @@ namespace mrw
 		/*! Raises the in event 'clear' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseClear()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::clear))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::clear));
 			runCycle();
 		}
 
@@ -187,8 +185,7 @@ namespace mrw
 		/*! Raises the in event 'started' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseStarted()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::started))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::started));
 			runCycle();
 		}
 
@@ -196,8 +193,7 @@ namespace mrw
 		/*! Raises the in event 'failed' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseFailed()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::failed))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::failed));
 			runCycle();
 		}
 
@@ -205,8 +201,7 @@ namespace mrw
 		/*! Raises the in event 'edit' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseEdit()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::edit))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::edit));
 			runCycle();
 		}
 
@@ -214,8 +209,7 @@ namespace mrw
 		/*! Raises the in event 'operate' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseOperate()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::operate))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::operate));
 			runCycle();
 		}
 
@@ -223,8 +217,7 @@ namespace mrw
 		/*! Raises the in event 'manual' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseManual(bool manual_)
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool>(mrw::statechart::OperatingModeStatechart::Event::manual, manual_))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstanceWithValue<bool>(mrw::statechart::OperatingModeStatechart::Event::manual, manual_));
 			runCycle();
 		}
 
@@ -232,8 +225,7 @@ namespace mrw
 		/*! Raises the in event 'init' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseInit()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::init))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::init));
 			runCycle();
 		}
 
@@ -241,8 +233,7 @@ namespace mrw
 		/*! Raises the in event 'finalize' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseFinalize()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::finalize))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::finalize));
 			runCycle();
 		}
 
@@ -250,8 +241,7 @@ namespace mrw
 		/*! Raises the in event 'completed' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseCompleted()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::completed))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::completed));
 			runCycle();
 		}
 
@@ -259,8 +249,7 @@ namespace mrw
 		/*! Raises the in event 'routesChanged' of default interface scope. */
 		void mrw::statechart::OperatingModeStatechart::raiseRoutesChanged()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::routesChanged))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::routesChanged));
 			runCycle();
 		}
 
@@ -511,8 +500,7 @@ namespace mrw
 		/*! Raises the in event 'connected' of interface scope 'can'. */
 		void mrw::statechart::OperatingModeStatechart::Can::raiseConnected()
 		{
-			parent->incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::Can_connected))
-			;
+			parent->incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::Can_connected));
 			parent->runCycle();
 		}
 
@@ -538,8 +526,7 @@ namespace mrw
 		/*! Raises the in event 'userInput' of interface scope 'screen'. */
 		void mrw::statechart::OperatingModeStatechart::Screen::raiseUserInput()
 		{
-			parent->incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::Screen_userInput))
-			;
+			parent->incomingEventQueue.push_back(new mrw::statechart::OperatingModeStatechart::EventInstance(mrw::statechart::OperatingModeStatechart::Event::Screen_userInput));
 			parent->runCycle();
 		}
 

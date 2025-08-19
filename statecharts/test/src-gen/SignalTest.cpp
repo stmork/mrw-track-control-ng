@@ -17,239 +17,275 @@
 namespace
 {
 
-	void failState();
-	void idle();
-	void turning();
-	void pending();
-	void turnCompleted();
-	void failSending();
-	mrw::statechart::SignalStatechart * statechart;
-
-
-	class PrepareMock
-	{
-		typedef bool (PrepareMock::*functiontype)();
-	public:
-		bool (PrepareMock::*prepareBehaviorDefault)();
-		int callCount;
-
-		bool prepare1()
-		{
-			return (true);
-		}
-
-		bool prepare2()
-		{
-			return (false);
-		}
-
-		bool prepareDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void prepare()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return prepareBehaviorDefault;
-		}
-
-		void setDefaultBehavior(bool (PrepareMock::*defaultBehavior)())
-		{
-			prepareBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&PrepareMock::prepareDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static PrepareMock * prepareMock;
-
-	class SendMock
-	{
-		typedef void (SendMock::*functiontype)();
-	public:
-		void (SendMock::*sendBehaviorDefault)();
-		int callCount;
-
-		void send1()
-		{
-		}
-
-		void sendDefault()
-		{
-		}
-
-		bool calledAtLeast(const int times)
-		{
-			return (callCount >= times);
-		}
-
-		bool calledAtLeastOnce()
-		{
-			return (callCount > 0);
-		}
-
-		void send()
-		{
-			++callCount;
-		}
-
-		functiontype getBehavior()
-		{
-			return sendBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (SendMock::*defaultBehavior)())
-		{
-			sendBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&SendMock::sendDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-			callCount = 0;
-		}
-	};
-	static SendMock * sendMock;
-
-	class HasSignalMock
-	{
-		typedef bool (HasSignalMock::*functiontype)();
-	public:
-		bool (HasSignalMock::*hasSignalBehaviorDefault)();
-
-		bool hasSignal1()
-		{
-			return (true);
-		}
-
-		bool hasSignal2()
-		{
-			return (false);
-		}
-
-		bool hasSignalDefault()
-		{
-			bool defaultValue = false;
-			return (defaultValue);
-		}
-
-		functiontype getBehavior()
-		{
-			return hasSignalBehaviorDefault;
-		}
-
-		void setDefaultBehavior(bool (HasSignalMock::*defaultBehavior)())
-		{
-			hasSignalBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&HasSignalMock::hasSignalDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-		}
-	};
-	static HasSignalMock * hasSignalMock;
-
-	class DumpMock
-	{
-		typedef void (DumpMock::*functiontype)();
-	public:
-		void (DumpMock::*dumpBehaviorDefault)();
-
-		void dump1()
-		{
-		}
-
-		void dumpDefault()
-		{
-		}
-
-		functiontype getBehavior()
-		{
-			return dumpBehaviorDefault;
-		}
-
-		void setDefaultBehavior(void (DumpMock::*defaultBehavior)())
-		{
-			dumpBehaviorDefault = defaultBehavior;
-		}
-
-		void initializeBehavior()
-		{
-			setDefaultBehavior(&DumpMock::dumpDefault);
-		}
-
-		void reset()
-		{
-			initializeBehavior();
-		}
-	};
-	static DumpMock * dumpMock;
-
-	class MockDefault : public mrw::statechart::SignalStatechart::OperationCallback
-	{
-	public:
-		bool hasSignal()
-		{
-			return (hasSignalMock->*(hasSignalMock->getBehavior()))();
-		}
-		bool prepare()
-		{
-			prepareMock->prepare();
-			return (prepareMock->*(prepareMock->getBehavior()))();
-		}
-		void send()
-		{
-			sendMock->send();
-			return (sendMock->*(sendMock->getBehavior()))();
-		}
-		void dump()
-		{
-			return (dumpMock->*(dumpMock->getBehavior()))();
-		}
-	};
-
-//! The timers are managed by a timer service. */
-	static TimedSctUnitRunner * runner;
-
 	class SignalTest : public ::testing::Test
 	{
+	public:
+		void failState();
+		void idle();
+		void turning();
+		void pending();
+		void turnCompleted();
+		void failSending();
+
 	protected:
-		MockDefault defaultMock;
+		mrw::statechart::SignalStatechart * statechart;
+
+
+	public:
+		class PrepareMock
+		{
+			typedef bool (PrepareMock::*functiontype)();
+		public:
+			SignalTest * owner;
+			bool (PrepareMock::*prepareBehaviorDefault)();
+			int callCount;
+
+			PrepareMock(SignalTest * owner) :
+				owner(owner),
+				prepareBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			bool prepare1()
+			{
+				return (true);
+			}
+
+			bool prepare2()
+			{
+				return (false);
+			}
+
+			bool prepareDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void prepare()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return prepareBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (PrepareMock::*defaultBehavior)())
+			{
+				prepareBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&PrepareMock::prepareDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		PrepareMock * prepareMock;
+
+		class SendMock
+		{
+			typedef void (SendMock::*functiontype)();
+		public:
+			SignalTest * owner;
+			void (SendMock::*sendBehaviorDefault)();
+			int callCount;
+
+			SendMock(SignalTest * owner) :
+				owner(owner),
+				sendBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void send1()
+			{
+			}
+
+			void sendDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void send()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return sendBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (SendMock::*defaultBehavior)())
+			{
+				sendBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&SendMock::sendDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		SendMock * sendMock;
+
+		class HasSignalMock
+		{
+			typedef bool (HasSignalMock::*functiontype)();
+		public:
+			SignalTest * owner;
+			bool (HasSignalMock::*hasSignalBehaviorDefault)();
+
+			HasSignalMock(SignalTest * owner) :
+				owner(owner),
+				hasSignalBehaviorDefault(0)
+			{}
+
+
+			bool hasSignal1()
+			{
+				return (true);
+			}
+
+			bool hasSignal2()
+			{
+				return (false);
+			}
+
+			bool hasSignalDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			functiontype getBehavior()
+			{
+				return hasSignalBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (HasSignalMock::*defaultBehavior)())
+			{
+				hasSignalBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&HasSignalMock::hasSignalDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		HasSignalMock * hasSignalMock;
+
+		class DumpMock
+		{
+			typedef void (DumpMock::*functiontype)();
+		public:
+			SignalTest * owner;
+			void (DumpMock::*dumpBehaviorDefault)();
+
+			DumpMock(SignalTest * owner) :
+				owner(owner),
+				dumpBehaviorDefault(0)
+			{}
+
+
+			void dump1()
+			{
+			}
+
+			void dumpDefault()
+			{
+			}
+
+			functiontype getBehavior()
+			{
+				return dumpBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (DumpMock::*defaultBehavior)())
+			{
+				dumpBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&DumpMock::dumpDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		DumpMock * dumpMock;
+
+		class MockDefault : public mrw::statechart::SignalStatechart::OperationCallback
+		{
+		public:
+			SignalTest * owner;
+			MockDefault(SignalTest * owner) : owner(owner) {}
+			bool hasSignal()
+			{
+				return (owner->hasSignalMock->*(owner->hasSignalMock->getBehavior()))();
+			}
+			bool prepare()
+			{
+				owner->prepareMock->prepare();
+				return (owner->prepareMock->*(owner->prepareMock->getBehavior()))();
+			}
+			void send()
+			{
+				owner->sendMock->send();
+				return (owner->sendMock->*(owner->sendMock->getBehavior()))();
+			}
+			void dump()
+			{
+				return (owner->dumpMock->*(owner->dumpMock->getBehavior()))();
+			}
+		};
+
+		//! The timers are managed by a timer service. */
+		TimedSctUnitRunner * runner;
+
+		MockDefault * defaultMock;
+
 		virtual void SetUp()
 		{
 			statechart = new mrw::statechart::SignalStatechart();
@@ -258,15 +294,16 @@ namespace
 				maximalParallelTimeEvents
 			);
 			statechart->setTimerService(runner);
-			prepareMock = new PrepareMock();
+			prepareMock = new PrepareMock(this);
 			prepareMock->initializeBehavior();
-			sendMock = new SendMock();
+			sendMock = new SendMock(this);
 			sendMock->initializeBehavior();
-			hasSignalMock = new HasSignalMock();
+			hasSignalMock = new HasSignalMock(this);
 			hasSignalMock->initializeBehavior();
-			dumpMock = new DumpMock();
+			dumpMock = new DumpMock(this);
 			dumpMock->initializeBehavior();
-			statechart->setOperationCallback(&defaultMock);
+			defaultMock = new MockDefault(this);
+			statechart->setOperationCallback(defaultMock);
 		}
 		virtual void TearDown()
 		{
@@ -275,11 +312,14 @@ namespace
 			delete sendMock;
 			delete prepareMock;
 			delete statechart;
+			delete defaultMock;
+			defaultMock = 0;
 			delete runner;
 		}
 	};
 
-	void failState()
+
+	void SignalTest::failState()
 	{
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SignalStatechart::State::main_region_Fail));
 
@@ -293,7 +333,7 @@ namespace
 
 	}
 
-	void idle()
+	void SignalTest::idle()
 	{
 		statechart->enter();
 
@@ -353,7 +393,7 @@ namespace
 		EXPECT_FALSE(prepareMock->calledAtLeastOnce());
 
 	}
-	void turning()
+	void SignalTest::turning()
 	{
 		idle();
 
@@ -391,7 +431,7 @@ namespace
 		EXPECT_TRUE((statechart->getSymbol()) == (statechart->getSTOP()));
 
 	}
-	void pending()
+	void SignalTest::pending()
 	{
 		turning();
 
@@ -406,7 +446,7 @@ namespace
 	{
 		pending();
 	}
-	void turnCompleted()
+	void SignalTest::turnCompleted()
 	{
 		turning();
 
@@ -445,7 +485,7 @@ namespace
 		EXPECT_TRUE(statechart->isRaisedCompleted());
 
 	}
-	void failSending()
+	void SignalTest::failSending()
 	{
 		turning();
 
