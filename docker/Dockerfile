@@ -4,9 +4,8 @@ FROM $OS:latest
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt dist-upgrade -y && apt install -y \
    apt-utils apt-transport-https joe lsb-release ca-certificates cmake \
-   libqt5serialbus5-dev libsystemd-dev libgtest-dev qhelpgenerator-qt5 qtbase5-private-dev \
    qmake6 libqt6serialbus6-bin qt6-serialbus-dev qt6-base-private-dev \
-   libx11-dev libxext-dev libdrm-dev \
+   libgtest-dev libx11-dev libxext-dev libdrm-dev libsystemd-dev \
    graphviz pkg-config git make g++ cppcheck cccc fakeroot doxygen valgrind
 
 RUN addgroup dev
