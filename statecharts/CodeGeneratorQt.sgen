@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
-GeneratorModel for yakindu::cpp::qt
+GeneratorModel for create::cpp::qt
 {
 	const PROJECT : string = "statecharts"
 	const FOLDER  : string = "."

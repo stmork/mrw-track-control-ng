@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
-GeneratorModel for yakindu::images
+GeneratorModel for create::images
 {
 	const PROJECT : string = "statecharts"
 	const FOLDER  : string = "images"

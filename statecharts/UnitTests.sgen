@@ -3,7 +3,7 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
-GeneratorModel for sctunit::cpp11
+GeneratorModel for create::sctunit::cpp
 {
 	const PROJECT : string = "statecharts"
 	const FOLDER  : string = "test/src-gen"
