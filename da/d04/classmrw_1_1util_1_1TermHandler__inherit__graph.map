@@ -1,5 +1,9 @@
 <map id="mrw::util::TermHandler" name="mrw::util::TermHandler">
-<area shape="rect" id="Node000001" title="This class registeres a handler for terminating the application." alt="" coords="8,79,159,105"/>
-<area shape="rect" id="Node000002" href="$de/def/classmrw_1_1util_1_1SignalHandler.html" title="This class installs a posix signal callback handler." alt="" coords="5,5,162,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,46,86,79,81,79,81,46"/>
+<area shape="rect" id="Node000001" title="This class registeres a handler for terminating the application." alt="" coords="13,226,163,252"/>
+<area shape="rect" id="Node000002" href="$df/d24/classmrw_1_1util_1_1SigPipeHandler.html" title="This class implements a signal handler which is thread safe against any event loop using a POSIX pipe..." alt="" coords="5,153,171,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,194,91,226,85,226,85,194"/>
+<area shape="rect" id="Node000003" href="$de/def/classmrw_1_1util_1_1SignalHandler.html" title="This class installs a posix signal callback handler." alt="" coords="10,79,166,105"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="91,120,91,152,85,152,85,120"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="53,5,123,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="91,46,91,79,85,79,85,46"/>
 </map>

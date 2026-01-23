@@ -7,12 +7,13 @@ var searchData=
   ['sections_4',['sections',['../d7/dfb/classmrw_1_1model_1_1Route.html#a1b5f39cea13bba7cb4f0775b1c04c614',1,'mrw::model::Route']]],
   ['shunt_5fcolor_5',['shunt_color',['../d7/dc3/structmrw_1_1ui_1_1SignalWidget_1_1Status.html#ae25958a31697d096f9045b1c9a2fc382',1,'mrw::ui::SignalWidget::Status']]],
   ['shunt_5fstate_6',['shunt_state',['../d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a70855367f51e4a6e0d8e13b1e4e54cda',1,'mrw::ctrl::SignalController::Status']]],
-  ['signal_5faspect_7',['signal_aspect',['../db/d9c/classmrw_1_1model_1_1Signal.html#ad3a330c22cf052fe7421b11d9e087b50',1,'mrw::model::Signal']]],
-  ['signal_5fcount_8',['signal_count',['../dc/df4/structmrw_1_1model_1_1MrwStatistic.html#a058a011745e7c922bee44d1250fb07dd',1,'mrw::model::MrwStatistic']]],
-  ['signal_5fdirection_9',['signal_direction',['../db/d9c/classmrw_1_1model_1_1Signal.html#a5828cc436e050dbf16ecb1064d8e4b58',1,'mrw::model::Signal']]],
-  ['signal_5fgroup_5fcount_10',['signal_group_count',['../dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aee23e91a5ba44702c352575927d05538',1,'mrw::model::MrwStatistic']]],
-  ['signal_5ftype_11',['signal_type',['../db/d9c/classmrw_1_1model_1_1Signal.html#a494e9735a5a322d6ec1678ba4dfcb321',1,'mrw::model::Signal']]],
-  ['state_12',['state',['../d7/dfb/classmrw_1_1model_1_1Route.html#aff5c38cf3fe671e6d38b9358849f79fb',1,'mrw::model::Route::state'],['../d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a17352d772aee9749100511405c2f81c3',1,'mrw::ctrl::DoubleCrossSwitchController::Status::state']]],
-  ['switch_5fcount_13',['switch_count',['../dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ad80e89ab509758691329c043c06445db',1,'mrw::model::MrwStatistic']]],
-  ['symbol_14',['symbol',['../db/d9c/classmrw_1_1model_1_1Signal.html#ab8141535df399e79b947b362e43ba64c',1,'mrw::model::Signal']]]
+  ['sig_5fpipe_7',['sig_pipe',['../df/d24/classmrw_1_1util_1_1SigPipeHandler.html#ab27fa977d77273a270f53365a056a364',1,'mrw::util::SigPipeHandler']]],
+  ['signal_5faspect_8',['signal_aspect',['../db/d9c/classmrw_1_1model_1_1Signal.html#ad3a330c22cf052fe7421b11d9e087b50',1,'mrw::model::Signal']]],
+  ['signal_5fcount_9',['signal_count',['../dc/df4/structmrw_1_1model_1_1MrwStatistic.html#a058a011745e7c922bee44d1250fb07dd',1,'mrw::model::MrwStatistic']]],
+  ['signal_5fdirection_10',['signal_direction',['../db/d9c/classmrw_1_1model_1_1Signal.html#a5828cc436e050dbf16ecb1064d8e4b58',1,'mrw::model::Signal']]],
+  ['signal_5fgroup_5fcount_11',['signal_group_count',['../dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aee23e91a5ba44702c352575927d05538',1,'mrw::model::MrwStatistic']]],
+  ['signal_5ftype_12',['signal_type',['../db/d9c/classmrw_1_1model_1_1Signal.html#a494e9735a5a322d6ec1678ba4dfcb321',1,'mrw::model::Signal']]],
+  ['state_13',['state',['../d7/dfb/classmrw_1_1model_1_1Route.html#aff5c38cf3fe671e6d38b9358849f79fb',1,'mrw::model::Route::state'],['../d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a17352d772aee9749100511405c2f81c3',1,'mrw::ctrl::DoubleCrossSwitchController::Status::state']]],
+  ['switch_5fcount_14',['switch_count',['../dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ad80e89ab509758691329c043c06445db',1,'mrw::model::MrwStatistic']]],
+  ['symbol_15',['symbol',['../db/d9c/classmrw_1_1model_1_1Signal.html#ab8141535df399e79b947b362e43ba64c',1,'mrw::model::Signal']]]
 ];

@@ -91,8 +91,9 @@ $(function(){ initResizable(false); });
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
+<a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="../../d6/dc0/classmrw_1_1util_1_1TermHandler-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">mrw::util::TermHandler Class Reference</div></div>
 </div><!--header-->
@@ -107,17 +108,20 @@ Inheritance diagram for mrw::util::TermHandler:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../da/d04/classmrw_1_1util_1_1TermHandler__inherit__graph.png" border="0" usemap="#amrw_1_1util_1_1TermHandler_inherit__map" alt="Inheritance graph"/></div>
 <map name="amrw_1_1util_1_1TermHandler_inherit__map" id="amrw_1_1util_1_1TermHandler_inherit__map">
-<area shape="rect" title="This class registeres a handler for terminating the application." alt="" coords="8,79,159,105"/>
-<area shape="rect" href="../../de/def/classmrw_1_1util_1_1SignalHandler.html" title="This class installs a posix signal callback handler." alt="" coords="5,5,162,31"/>
-<area shape="poly" title=" " alt="" coords="86,46,86,79,81,79,81,46"/>
+<area shape="rect" title="This class registeres a handler for terminating the application." alt="" coords="13,226,163,252"/>
+<area shape="rect" href="../../df/d24/classmrw_1_1util_1_1SigPipeHandler.html" title="This class implements a signal handler which is thread safe against any event loop using a POSIX pipe..." alt="" coords="5,153,171,178"/>
+<area shape="poly" title=" " alt="" coords="91,194,91,226,85,226,85,194"/>
+<area shape="rect" href="../../de/def/classmrw_1_1util_1_1SignalHandler.html" title="This class installs a posix signal callback handler." alt="" coords="10,79,166,105"/>
+<area shape="poly" title=" " alt="" coords="91,120,91,152,85,152,85,120"/>
+<area shape="rect" title=" " alt="" coords="53,5,123,31"/>
+<area shape="poly" title=" " alt="" coords="91,46,91,79,85,79,85,46"/>
 </map>
 <center><span class="legend">[<a href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a9f1c95ae9412c793753a6bd5f64a0ac7" id="r_a9f1c95ae9412c793753a6bd5f64a0ac7"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/def/classmrw_1_1util_1_1SignalHandler.html#a9f1c95ae9412c793753a6bd5f64a0ac7">SignalCallback</a></td></tr>
-<tr class="memdesc:a9f1c95ae9412c793753a6bd5f64a0ac7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type definition of the callback.  <br /></td></tr>
-<tr class="separator:a9f1c95ae9412c793753a6bd5f64a0ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="signals" name="signals"></a>
+Signals</h2></td></tr>
+<tr class="memitem:a3ccadc74fd476d0b22c4889866f50e76" id="r_a3ccadc74fd476d0b22c4889866f50e76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d24/classmrw_1_1util_1_1SigPipeHandler.html#a3ccadc74fd476d0b22c4889866f50e76">signal</a> (const int sig)</td></tr>
+<tr class="separator:a3ccadc74fd476d0b22c4889866f50e76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -127,38 +131,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2616c0436b27b5e414c92d5603e72fc5" id="r_a2616c0436b27b5e414c92d5603e72fc5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2616c0436b27b5e414c92d5603e72fc5">TermHandler</a> (const std::initializer_list&lt; int &gt; &amp;quit_signals)</td></tr>
 <tr class="memdesc:a2616c0436b27b5e414c92d5603e72fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">This constructor registers a termination handler which reacts on the given list of signals.  <br /></td></tr>
 <tr class="separator:a2616c0436b27b5e414c92d5603e72fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ab27fa977d77273a270f53365a056a364" id="r_ab27fa977d77273a270f53365a056a364"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d24/classmrw_1_1util_1_1SigPipeHandler.html#ab27fa977d77273a270f53365a056a364">sig_pipe</a> [2] { -1, -1}</td></tr>
+<tr class="separator:ab27fa977d77273a270f53365a056a364"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class registeres a handler for terminating the application. </p>
 <p>The termination may be caused by pressing the CTRL+C keyboard sequence or following console command:</p>
 <div class="fragment"><div class="line">killall -SIGQUIT &lt;application&gt;</div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The application will terminate gracefully using the QCoreApplication::quit() method. </dd></dl>
-</div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a9f1c95ae9412c793753a6bd5f64a0ac7" name="a9f1c95ae9412c793753a6bd5f64a0ac7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f1c95ae9412c793753a6bd5f64a0ac7">&#9670;&#160;</a></span>SignalCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef std::function&lt;void()&gt; <a class="el" href="../../de/def/classmrw_1_1util_1_1SignalHandler.html#a9f1c95ae9412c793753a6bd5f64a0ac7">mrw::util::SignalHandler::SignalCallback</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inherited">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The type definition of the callback. </p>
-
-</div>
-</div>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afcf13d27620bb60da2447f77fe52b632" name="afcf13d27620bb60da2447f77fe52b632"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afcf13d27620bb60da2447f77fe52b632">&#9670;&#160;</a></span>TermHandler() <span class="overload">[1/2]</span></h2>
 
@@ -226,10 +210,59 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3ccadc74fd476d0b22c4889866f50e76" name="a3ccadc74fd476d0b22c4889866f50e76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ccadc74fd476d0b22c4889866f50e76">&#9670;&#160;</a></span>signal</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mrw::util::SigPipeHandler::signal </td>
+          <td>(</td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>sig</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel signal">signal</span><span class="mlabel inherited">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab27fa977d77273a270f53365a056a364" name="ab27fa977d77273a270f53365a056a364"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab27fa977d77273a270f53365a056a364">&#9670;&#160;</a></span>sig_pipe</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int mrw::util::SigPipeHandler::sig_pipe[2] { -1, -1}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel inherited">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 29 2025 09:20:46 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Fri Jan 23 2026 13:58:53 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>

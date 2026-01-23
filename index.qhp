@@ -2135,8 +2135,10 @@
 <section title="get" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#a9461ba5fca963e92a476e711808f10db"/>
 </section>
 <section title="DumpHandler" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html">
-<section title="SignalCallback" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a9f1c95ae9412c793753a6bd5f64a0ac7"/>
+<section title="SignalCallback" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a18a7855c6ab74fe326f34ae48eaac3a5"/>
 <section title="DumpHandler" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a9d787765518a5f04aaef46e86e9eee64"/>
+<section title="signal" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
+<section title="sig_pipe" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#ab27fa977d77273a270f53365a056a364"/>
 </section>
 <section title="Duration" ref="d2/d87/classmrw_1_1util_1_1Duration.html">
 <section title="Duration" ref="d2/d87/classmrw_1_1util_1_1Duration.html#a409b732a06037bbefe417100f43467e3"/>
@@ -2202,9 +2204,20 @@
 <section title="SharedVector" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html">
 <section title="PtrType" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html#a037386313d3ff137788cc75be30c215e"/>
 </section>
+<section title="SigCallbackHandler" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html">
+<section title="SignalCallback" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#a18a7855c6ab74fe326f34ae48eaac3a5"/>
+<section title="SigCallbackHandler" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#ae90e1d133428083349033397aa9847ae"/>
+<section title="signal" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
+<section title="sig_pipe" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#ab27fa977d77273a270f53365a056a364"/>
+</section>
 <section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html">
-<section title="SignalCallback" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a9f1c95ae9412c793753a6bd5f64a0ac7"/>
-<section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a6856f2f1cf9a41be78a6fdcc467a4c71"/>
+<section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a3d3e37b31249af3c2216361efaeeeaee"/>
+<section title="callback" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#ad9eeb273d8fa6e3c4526149c1e46cc7b"/>
+</section>
+<section title="SigPipeHandler" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html">
+<section title="SigPipeHandler" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#a86c8aa2e1e25e2616be72cf44e2d1ab4"/>
+<section title="signal" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
+<section title="sig_pipe" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#ab27fa977d77273a270f53365a056a364"/>
 </section>
 <section title="Singleton" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html">
 <section title="Singleton" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ae6f8366470705cd0f158e8b4aed5d2bc"/>
@@ -2230,9 +2243,10 @@
 <section title="WHITE_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a2efce8f49ed761f31c28d513f782ead6"/>
 </section>
 <section title="TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html">
-<section title="SignalCallback" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a9f1c95ae9412c793753a6bd5f64a0ac7"/>
 <section title="TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#afcf13d27620bb60da2447f77fe52b632"/>
 <section title="TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a2616c0436b27b5e414c92d5603e72fc5"/>
+<section title="signal" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
+<section title="sig_pipe" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#ab27fa977d77273a270f53365a056a364"/>
 </section>
 <section title="cutScope" ref="d9/d2b/namespacemrw_1_1util.html#aecdce54a6519bb96fd87579c6ce38f8f"/>
 </section>
@@ -4299,8 +4313,10 @@
 <section title="get" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#a9461ba5fca963e92a476e711808f10db"/>
 </section>
 <section title="DumpHandler" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html">
-<section title="SignalCallback" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a9f1c95ae9412c793753a6bd5f64a0ac7"/>
+<section title="SignalCallback" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a18a7855c6ab74fe326f34ae48eaac3a5"/>
 <section title="DumpHandler" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a9d787765518a5f04aaef46e86e9eee64"/>
+<section title="signal" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
+<section title="sig_pipe" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#ab27fa977d77273a270f53365a056a364"/>
 </section>
 <section title="Duration" ref="d2/d87/classmrw_1_1util_1_1Duration.html">
 <section title="Duration" ref="d2/d87/classmrw_1_1util_1_1Duration.html#a409b732a06037bbefe417100f43467e3"/>
@@ -4366,9 +4382,20 @@
 <section title="SharedVector" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html">
 <section title="PtrType" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html#a037386313d3ff137788cc75be30c215e"/>
 </section>
+<section title="SigCallbackHandler" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html">
+<section title="SignalCallback" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#a18a7855c6ab74fe326f34ae48eaac3a5"/>
+<section title="SigCallbackHandler" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#ae90e1d133428083349033397aa9847ae"/>
+<section title="signal" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
+<section title="sig_pipe" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#ab27fa977d77273a270f53365a056a364"/>
+</section>
 <section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html">
-<section title="SignalCallback" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a9f1c95ae9412c793753a6bd5f64a0ac7"/>
-<section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a6856f2f1cf9a41be78a6fdcc467a4c71"/>
+<section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a3d3e37b31249af3c2216361efaeeeaee"/>
+<section title="callback" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#ad9eeb273d8fa6e3c4526149c1e46cc7b"/>
+</section>
+<section title="SigPipeHandler" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html">
+<section title="SigPipeHandler" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#a86c8aa2e1e25e2616be72cf44e2d1ab4"/>
+<section title="signal" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
+<section title="sig_pipe" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#ab27fa977d77273a270f53365a056a364"/>
 </section>
 <section title="Singleton" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html">
 <section title="Singleton" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ae6f8366470705cd0f158e8b4aed5d2bc"/>
@@ -4394,9 +4421,10 @@
 <section title="WHITE_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a2efce8f49ed761f31c28d513f782ead6"/>
 </section>
 <section title="TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html">
-<section title="SignalCallback" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a9f1c95ae9412c793753a6bd5f64a0ac7"/>
 <section title="TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#afcf13d27620bb60da2447f77fe52b632"/>
 <section title="TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a2616c0436b27b5e414c92d5603e72fc5"/>
+<section title="signal" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
+<section title="sig_pipe" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#ab27fa977d77273a270f53365a056a364"/>
 </section>
 </section>
 </section>
@@ -4500,6 +4528,14 @@
 <section title="mrw::statechart::TimerService" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html"/>
 <section title="mrw::util::ClockService" ref="db/d8f/classmrw_1_1util_1_1ClockService.html"/>
 <section title="mrw::util::GlobalBatch" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html"/>
+<section title="mrw::util::SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html">
+<section title="mrw::util::SigPipeHandler" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html">
+<section title="mrw::util::SigCallbackHandler" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html">
+<section title="mrw::util::DumpHandler" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html"/>
+</section>
+<section title="mrw::util::TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html"/>
+</section>
+</section>
 </section>
 <section title="QSettings" ref="doxygen_blank.html">
 <section title="mrw::util::Settings" ref="d6/db2/classmrw_1_1util_1_1Settings.html">
@@ -4527,10 +4563,6 @@
 <section title="mrw::util::Self&lt; T &gt;" ref="d6/dd2/classmrw_1_1util_1_1Self.html"/>
 </section>
 <section title="mrw::util::SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html"/>
-<section title="mrw::util::SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html">
-<section title="mrw::util::DumpHandler" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html"/>
-<section title="mrw::util::TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html"/>
-</section>
 <section title="mrw::util::Singleton&lt; T &gt;" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html"/>
 <section title="mrw::util::Singleton&lt; AppSupport &gt;" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html">
 <section title="mrw::util::AppSupport" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html"/>
@@ -4757,10 +4789,12 @@
 <keyword name="mrw::util::Settings" id="mrw::util::Settings_" ref="d6/db2/classmrw_1_1util_1_1Settings.html"/>
 <keyword name="mrw::util::SettingsGroup" id="mrw::util::SettingsGroup_" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html"/>
 <keyword name="mrw::util::SharedVector" id="mrw::util::SharedVector_" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html"/>
+<keyword name="mrw::util::SigCallbackHandler" id="mrw::util::SigCallbackHandler_" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html"/>
 <keyword name="mrw::model::Signal" id="mrw::model::Signal_" ref="db/d9c/classmrw_1_1model_1_1Signal.html"/>
 <keyword name="mrw::ctrl::SignalController" id="mrw::ctrl::SignalController_" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html"/>
 <keyword name="mrw::util::SignalHandler" id="mrw::util::SignalHandler_" ref="de/def/classmrw_1_1util_1_1SignalHandler.html"/>
 <keyword name="mrw::ui::SignalWidget" id="mrw::ui::SignalWidget_" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html"/>
+<keyword name="mrw::util::SigPipeHandler" id="mrw::util::SigPipeHandler_" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html"/>
 <keyword name="mrw::util::Singleton" id="mrw::util::Singleton_" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html"/>
 <keyword name="mrw::util::Singleton&lt; AppSupport &gt;" id="mrw::util::Singleton&lt; AppSupport &gt;_" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html"/>
 <keyword name="mrw::util::Singleton&lt; ClockService &gt;" id="mrw::util::Singleton&lt; ClockService &gt;_" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html"/>
@@ -4853,6 +4887,7 @@
 <keyword name="BLUE_ON" id="mrw::util::String::BLUE_ON_a99bdb92fafd1dfab6f5d46112f4f6365" ref="d0/d55/classmrw_1_1util_1_1String.html#a99bdb92fafd1dfab6f5d46112f4f6365"/>
 <keyword name="bold(const QString &amp;input) noexcept" id="mrw::util::String::bold_aee674c3216f7e1a4f50db31dc6dda7a6" ref="d0/d55/classmrw_1_1util_1_1String.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
 <keyword name="BOLD_ON" id="mrw::util::String::BOLD_ON_a40fdb0231da6c6ee8bd39d125031fefe" ref="d0/d55/classmrw_1_1util_1_1String.html#a40fdb0231da6c6ee8bd39d125031fefe"/>
+<keyword name="callback(const int sig)=0" id="mrw::util::SignalHandler::callback_ad9eeb273d8fa6e3c4526149c1e46cc7b" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#ad9eeb273d8fa6e3c4526149c1e46cc7b"/>
 <keyword name="callback(BaseController *base, std::function&lt; void(CTRL *)&gt; function)" id="mrw::ctrl::BaseController::callback_a9aad6ef99289fda8911e051ecb6c06a0" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
 <keyword name="can_bus" id="mrw::can::MrwBusService::can_bus_ae9add44a66b3c41000569347d5eb8e68" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ae9add44a66b3c41000569347d5eb8e68"/>
 <keyword name="can_device" id="mrw::can::MrwBusService::can_device_a84bd068ea88e51a45bac0b3838d66b02" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a84bd068ea88e51a45bac0b3838d66b02"/>
@@ -5385,22 +5420,26 @@
 <keyword name="SHUNT_SIGNAL" id="mrw::model::Signal::SHUNT_SIGNAL_a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44"/>
 <keyword name="shunt_state" id="mrw::ctrl::SignalController::Status::shunt_state_a70855367f51e4a6e0d8e13b1e4e54cda" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a70855367f51e4a6e0d8e13b1e4e54cda"/>
 <keyword name="sid() const noexcept" id="mrw::can::MrwMessage::sid_ab87d09e803430aa877df53387b169de1" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ab87d09e803430aa877df53387b169de1"/>
+<keyword name="sig_pipe[2]" id="mrw::util::SigPipeHandler::sig_pipe_ab27fa977d77273a270f53365a056a364" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#ab27fa977d77273a270f53365a056a364"/>
+<keyword name="SigCallbackHandler(const std::initializer_list&lt; int &gt; &amp;signal_list, SignalCallback signal_callback)" id="mrw::util::SigCallbackHandler::SigCallbackHandler_ae90e1d133428083349033397aa9847ae" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#ae90e1d133428083349033397aa9847ae"/>
 <keyword name="Signal" id="mrw::model::ModelRailway::Signal_ac5526429c5a50ac492f6e8113c59b18a" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#ac5526429c5a50ac492f6e8113c59b18a"/>
 <keyword name="Signal(ModelRailway *model_railway, Section *model_section, const QDomElement &amp;element, const SignalType type)" id="mrw::model::Signal::Signal_a888231e138e68fdbde046b27d15a2310" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a888231e138e68fdbde046b27d15a2310"/>
+<keyword name="signal(const int sig)" id="mrw::util::SigPipeHandler::signal_a3ccadc74fd476d0b22c4889866f50e76" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
 <keyword name="signal_aspect" id="mrw::model::Signal::signal_aspect_ad3a330c22cf052fe7421b11d9e087b50" ref="db/d9c/classmrw_1_1model_1_1Signal.html#ad3a330c22cf052fe7421b11d9e087b50"/>
 <keyword name="signal_count" id="mrw::model::MrwStatistic::signal_count_a058a011745e7c922bee44d1250fb07dd" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#a058a011745e7c922bee44d1250fb07dd"/>
 <keyword name="signal_direction" id="mrw::model::Signal::signal_direction_a5828cc436e050dbf16ecb1064d8e4b58" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a5828cc436e050dbf16ecb1064d8e4b58"/>
 <keyword name="signal_group_count" id="mrw::model::MrwStatistic::signal_group_count_aee23e91a5ba44702c352575927d05538" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aee23e91a5ba44702c352575927d05538"/>
 <keyword name="signal_type" id="mrw::model::Signal::signal_type_a494e9735a5a322d6ec1678ba4dfcb321" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a494e9735a5a322d6ec1678ba4dfcb321"/>
-<keyword name="SignalCallback" id="mrw::util::SignalHandler::SignalCallback_a9f1c95ae9412c793753a6bd5f64a0ac7" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a9f1c95ae9412c793753a6bd5f64a0ac7"/>
+<keyword name="SignalCallback" id="mrw::util::SigCallbackHandler::SignalCallback_a18a7855c6ab74fe326f34ae48eaac3a5" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#a18a7855c6ab74fe326f34ae48eaac3a5"/>
 <keyword name="SignalController(QObject *parent=nullptr)" id="mrw::ctrl::SignalController::SignalController_af1969b23b733ab0a5a0e41ff82190eed" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#af1969b23b733ab0a5a0e41ff82190eed"/>
-<keyword name="SignalHandler(const std::initializer_list&lt; int &gt; &amp;signal_list, SignalCallback signal_callback)" id="mrw::util::SignalHandler::SignalHandler_a6856f2f1cf9a41be78a6fdcc467a4c71" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a6856f2f1cf9a41be78a6fdcc467a4c71"/>
+<keyword name="SignalHandler(const std::initializer_list&lt; int &gt; &amp;signal_list)" id="mrw::util::SignalHandler::SignalHandler_a3d3e37b31249af3c2216361efaeeeaee" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a3d3e37b31249af3c2216361efaeeeaee"/>
 <keyword name="SignalType" id="mrw::model::Signal::SignalType_a748bbdafc044064000a816907f3e4bb3" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3"/>
 <keyword name="MAIN_SIGNAL" id="mrw::model::Signal::MAIN_SIGNAL_a748bbdafc044064000a816907f3e4bb3a42d23c88fc6ab52b7cd28797245e8717" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a42d23c88fc6ab52b7cd28797245e8717"/>
 <keyword name="DISTANT_SIGNAL" id="mrw::model::Signal::DISTANT_SIGNAL_a748bbdafc044064000a816907f3e4bb3ada2432e6391e617a88ec60d5f3203219" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3ada2432e6391e617a88ec60d5f3203219"/>
 <keyword name="SHUNT_SIGNAL" id="mrw::model::Signal::SHUNT_SIGNAL_a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a7851d36ac5880497558fdfb2af5a1c44"/>
 <keyword name="MAIN_SHUNT_SIGNAL" id="mrw::model::Signal::MAIN_SHUNT_SIGNAL_a748bbdafc044064000a816907f3e4bb3a2a6da779d8b0ad678a603dff36eb5098" ref="db/d9c/classmrw_1_1model_1_1Signal.html#a748bbdafc044064000a816907f3e4bb3a2a6da779d8b0ad678a603dff36eb5098"/>
 <keyword name="SignalWidget(QWidget *parent=nullptr, mrw::ctrl::SignalController *controller=nullptr)" id="mrw::ui::SignalWidget::SignalWidget_abf3b56483257283db0ee9c80bea862e7" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#abf3b56483257283db0ee9c80bea862e7"/>
+<keyword name="SigPipeHandler(const std::initializer_list&lt; int &gt; &amp;signal_list)" id="mrw::util::SigPipeHandler::SigPipeHandler_a86c8aa2e1e25e2616be72cf44e2d1ab4" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#a86c8aa2e1e25e2616be72cf44e2d1ab4"/>
 <keyword name="Singleton()=default" id="mrw::util::Singleton::Singleton_ae6f8366470705cd0f158e8b4aed5d2bc" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ae6f8366470705cd0f158e8b4aed5d2bc"/>
 <keyword name="Singleton(const Singleton &amp;other)=delete" id="mrw::util::Singleton::Singleton_a9973007ac4e1f0c0709d6f893a10763d" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9973007ac4e1f0c0709d6f893a10763d"/>
 <keyword name="Singleton()=default" id="mrw::util::Singleton&lt; LoggerService &gt;::Singleton_ae6f8366470705cd0f158e8b4aed5d2bc" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ae6f8366470705cd0f158e8b4aed5d2bc"/>
@@ -5938,6 +5977,7 @@
 <file>d6/d3e/structmrw_1_1ctrl_1_1BaseController_1_1Status__inherit__graph.png</file>
 <file>d6/d44/classmrw_1_1util_1_1String__inherit__graph.png</file>
 <file>d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html</file>
+<file>d6/d70/classmrw_1_1util_1_1SigCallbackHandler-members.html</file>
 <file>d6/d71/classmrw_1_1model_1_1LightSignal.html</file>
 <file>d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html</file>
 <file>d6/d7d/classmrw_1_1util_1_1SharedVector.html</file>
@@ -5946,6 +5986,7 @@
 <file>d6/d93/classmrw_1_1model_1_1AbstractSwitch__inherit__graph.png</file>
 <file>d6/da1/classmrw_1_1ui_1_1StationWidget.html</file>
 <file>d6/db2/classmrw_1_1util_1_1Settings.html</file>
+<file>d6/db6/classmrw_1_1util_1_1SigPipeHandler-members.html</file>
 <file>d6/dc0/classmrw_1_1util_1_1TermHandler-members.html</file>
 <file>d6/dd2/classmrw_1_1util_1_1Self.html</file>
 <file>d6/dfa/classmrw_1_1util_1_1Self-members.html</file>
@@ -6052,6 +6093,7 @@
 <file>dc/d87/structmrw_1_1ui_1_1RegularSwitchWidget_1_1Status__inherit__graph.png</file>
 <file>dc/d96/classmrw_1_1ctrl_1_1RailController-members.html</file>
 <file>dc/d9b/classmrw_1_1ui_1_1RailWidget.html</file>
+<file>dc/d9d/classmrw_1_1util_1_1SigPipeHandler__inherit__graph.png</file>
 <file>dc/da8/classsc_1_1StatemachineInterface-members.html</file>
 <file>dc/db9/classmrw_1_1model_1_1ProfileLight__inherit__graph.png</file>
 <file>dc/dbc/classmrw_1_1log_1_1SysLogger-members.html</file>
@@ -6067,6 +6109,7 @@
 <file>dd/da0/classmrw_1_1model_1_1SwitchModule__inherit__graph.png</file>
 <file>dd/dbd/classmrw_1_1can_1_1MrwBusService__inherit__graph.png</file>
 <file>dd/dbf/classmrw_1_1statechart_1_1TimerService.html</file>
+<file>dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html</file>
 <file>dd/dd3/classmrw_1_1model_1_1LightModule__inherit__graph.png</file>
 <file>dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html</file>
 <file>dd/de8/classmrw_1_1util_1_1Settings-members.html</file>
@@ -6093,6 +6136,7 @@
 <file>df/d18/classsc_1_1timer_1_1TimerServiceInterface.html</file>
 <file>df/d19/classmrw_1_1model_1_1SwitchModule-members.html</file>
 <file>df/d23/classmrw_1_1util_1_1Properties-members.html</file>
+<file>df/d24/classmrw_1_1util_1_1SigPipeHandler.html</file>
 <file>df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html</file>
 <file>df/d75/classmrw_1_1util_1_1TermHandler.html</file>
 <file>df/d7e/classmrw_1_1ui_1_1RailWidget__inherit__graph.png</file>
@@ -6105,6 +6149,7 @@
 <file>df/dd7/classmrw_1_1util_1_1Settings__inherit__graph.png</file>
 <file>df/deb/structmrw_1_1ui_1_1SignalWidget_1_1Status__inherit__graph.png</file>
 <file>df/df4/classmrw_1_1ctrl_1_1RegularSwitchController-members.html</file>
+<file>df/dfd/classmrw_1_1util_1_1SigCallbackHandler__inherit__graph.png</file>
 <file>dir_1788f8309b1a812dcb800a185471cf6c.html</file>
 <file>dir_23ec12649285f9fabf3a6b7380226c28.html</file>
 <file>dir_263426dc267c7f7b8bc816493cda4bef.html</file>
@@ -6195,7 +6240,6 @@
 <file>inherit_graph_23.png</file>
 <file>inherit_graph_24.png</file>
 <file>inherit_graph_25.png</file>
-<file>inherit_graph_26.png</file>
 <file>inherit_graph_3.png</file>
 <file>inherit_graph_4.png</file>
 <file>inherit_graph_5.png</file>
