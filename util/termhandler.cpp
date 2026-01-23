@@ -14,9 +14,10 @@ TermHandler::TermHandler() : TermHandler( { SIGTERM, SIGINT } )
 }
 
 TermHandler::TermHandler(const std::initializer_list<int> & quit_signals) :
-	SignalHandler(quit_signals, []()
+	SigPipeHandler(quit_signals)
 {
-	QCoreApplication::quit();
-})
-{
+	connect(
+		this, &SigPipeHandler::signal,
+		QCoreApplication::instance(), &QCoreApplication::quit,
+		Qt::QueuedConnection);
 }

@@ -25,8 +25,10 @@ namespace mrw::util
 	 *
 	 * @see SignalHandler
 	 */
-	class DumpHandler : public SignalHandler
+	class DumpHandler : public SigCallbackHandler
 	{
+		Q_OBJECT
+
 	public:
 		/**
 		 * This constructor registers a callback to react on the POSIX SIGQUIT

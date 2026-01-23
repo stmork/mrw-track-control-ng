@@ -5,13 +5,16 @@
 
 #include <util/signalhandler.h>
 
+#include <unistd.h>
+#include <fcntl.h>
+
+#include <QSocketNotifier>
+
 using namespace mrw::util;
 
-std::unordered_map<int, SignalHandler *> SignalHandler::map;
+std::unordered_multimap<int, SignalHandler *> SignalHandler::handler_map;
 
-SignalHandler::SignalHandler(
-	const std::initializer_list<int> & signal_list,
-	SignalCallback                     signal_callback)
+SignalHandler::SignalHandler(const std::initializer_list<int> & signal_list)
 {
 	struct sigaction sa {};
 
@@ -27,19 +30,79 @@ SignalHandler::SignalHandler(
 	{
 		if (sigaction(sig, &sa, nullptr) == 0)
 		{
-			map.emplace(sig, this);
+			handler_map.emplace(sig, this);
 		}
 	}
-
-	callback = signal_callback;
 }
 
 void SignalHandler::handler(int sig)
 {
-	auto it = map.find(sig);
+	auto range = handler_map.equal_range(sig);
 
-	if (it != map.end())
+	for (auto it = range.first; it != range.second; ++it)
 	{
-		it->second->callback();
+		SignalHandler * sig_handler = it->second;
+
+		sig_handler->callback(sig);
 	}
+}
+
+/*****************************************************************************/
+
+SigPipeHandler::SigPipeHandler(const std::initializer_list<int> & signal_list) :
+	SignalHandler(signal_list)
+{
+	if (pipe(sig_pipe) < 0)
+	{
+		const char * error_text = strerror(errno);
+
+		qCritical("Pipe init error: %s", error_text);
+		throw std::runtime_error(error_text);
+	}
+	if (fcntl(sig_pipe[0], F_SETFL, O_NONBLOCK) < 0)
+	{
+		const char * error_text = strerror(errno);
+
+		qCritical("Pipe config error: %s", error_text);
+		throw std::runtime_error(error_text);
+	}
+
+	auto notifier = new QSocketNotifier(sig_pipe[0], QSocketNotifier::Read, this);
+
+	QObject::connect(notifier, &QSocketNotifier::activated, [this]
+	{
+		int sig;
+		if (read(sig_pipe[0], &sig, sizeof(sig)) == sizeof(sig))
+		{
+			emit signal(sig);
+		}
+		else
+		{
+			qCritical("Pipe read error: %s", strerror(errno));
+		}
+	});
+}
+
+void SigPipeHandler::callback(const int sig)
+{
+	if (write(sig_pipe[1], &sig, sizeof(sig)) != sizeof(sig))
+	{
+		qCritical("Pipe write error: %s", strerror(errno));
+	}
+}
+
+/*****************************************************************************/
+
+SigCallbackHandler::SigCallbackHandler(
+	const std::initializer_list<int> & signal_list,
+	SignalCallback                     signal_callback) :
+	SigPipeHandler(signal_list)
+{
+	connect(
+		this, &SigPipeHandler::signal,
+		this, [signal_callback](int)
+	{
+		signal_callback();
+	},
+	Qt::QueuedConnection);
 }

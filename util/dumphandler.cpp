@@ -8,6 +8,6 @@
 using namespace mrw::util;
 
 DumpHandler::DumpHandler(SignalCallback dump_callback) :
-	SignalHandler( { SIGQUIT }, dump_callback)
+	SigCallbackHandler( { SIGQUIT }, dump_callback )
 {
 }

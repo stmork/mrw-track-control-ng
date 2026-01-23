@@ -24,8 +24,10 @@ namespace mrw::util
 	 * @note The application will terminate gracefully using
 	 * the QCoreApplication::quit() method.
 	 */
-	class TermHandler : public SignalHandler
+	class TermHandler : public SigPipeHandler
 	{
+		Q_OBJECT
+
 	public:
 		/**
 		 * This constructor registers a termination handler which reacts on the

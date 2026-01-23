@@ -6,8 +6,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(MRW-NextGeneration VERSION 2.2
-    DESCRIPTION "MRW next generation track control"
-    LANGUAGES CXX)
+	DESCRIPTION "MRW next generation track control"
+	LANGUAGES CXX)
 
 find_package(QT NAMES Qt6)
 find_package(Qt6 REQUIRED COMPONENTS Core SerialBus)
