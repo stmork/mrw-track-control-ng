@@ -199,6 +199,7 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This callback method is called whenever a registered signal occurs. </p>
+<dl class="section note"><dt>Note</dt><dd>This method is called in the context of a POSIX signal handler and therefore only async-signal-safe functions are allowed to be used.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sig</td><td>The signal number which occurred. </td></tr>
@@ -211,7 +212,7 @@ Protected Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 23 2026 14:12:45 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Fri Jan 23 2026 17:23:07 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>
