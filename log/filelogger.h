@@ -20,6 +20,7 @@ namespace mrw::log
 	class FileLogger : public UnifiedLogger
 	{
 		mutable QFile file;
+		bool          is_open = false;
 
 	public:
 		explicit FileLogger(const QString & filename = "application.log");
