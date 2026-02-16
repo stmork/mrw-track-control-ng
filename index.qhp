@@ -2264,6 +2264,7 @@
 <section title="~TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac964f1c8dd62c8c30ff369ce66455b77"/>
 <section title="setTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a3b6967b2bbc5a6cfc31b20ed0a180c28"/>
 <section title="unsetTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a43f25c75a536b85d7f0d0b2196c7d1b6"/>
+<section title="unsetTimerRaw" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a912f63105c142bd8c57deb3b320e0dcf"/>
 </section>
 </section>
 <section title="EventDrivenInterface" ref="d8/dd2/classsc_1_1EventDrivenInterface.html">
@@ -4441,6 +4442,7 @@
 <section title="~TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac964f1c8dd62c8c30ff369ce66455b77"/>
 <section title="setTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a3b6967b2bbc5a6cfc31b20ed0a180c28"/>
 <section title="unsetTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a43f25c75a536b85d7f0d0b2196c7d1b6"/>
+<section title="unsetTimerRaw" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a912f63105c142bd8c57deb3b320e0dcf"/>
 </section>
 </section>
 <section title="EventDrivenInterface" ref="d8/dd2/classsc_1_1EventDrivenInterface.html">
@@ -5530,6 +5532,7 @@
 <keyword name="UNLOCKED" id="mrw::model::Device::UNLOCKED_a5aeac6a51c26164ebb6964d807d5c3a4a298a2da567ae581f8886ef8d533107f4" ref="d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4a298a2da567ae581f8886ef8d533107f4"/>
 <keyword name="unregisterLogger(LoggerBase *logger)" id="mrw::log::LoggerService::unregisterLogger_a54b982f05b8b31b9c19dbb7852465f41" ref="d4/dc7/classmrw_1_1log_1_1LoggerService.html#a54b982f05b8b31b9c19dbb7852465f41"/>
 <keyword name="unsetTimer(std::shared_ptr&lt; TimedInterface &gt; statemachine, sc::eventid event)=0" id="sc::timer::TimerServiceInterface::unsetTimer_a43f25c75a536b85d7f0d0b2196c7d1b6" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a43f25c75a536b85d7f0d0b2196c7d1b6"/>
+<keyword name="unsetTimerRaw(TimedInterface *statemachine, sc::eventid event)=0" id="sc::timer::TimerServiceInterface::unsetTimerRaw_a912f63105c142bd8c57deb3b320e0dcf" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a912f63105c142bd8c57deb3b320e0dcf"/>
 <keyword name="update()" id="mrw::ctrl::BaseController::update_ab260bbe7258e2143720d0e6f04901d5b" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
 <keyword name="usedPins() const noexcept" id="mrw::model::LightSignal::usedPins_ab0ede4577a1723fae75b43891617ff32" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#ab0ede4577a1723fae75b43891617ff32"/>
 <keyword name="USER_ROLE" id="mrw::ui::ControllerWidget::USER_ROLE_a14ccbb61b1637fa8740662f1cec226b5" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a14ccbb61b1637fa8740662f1cec226b5"/>
