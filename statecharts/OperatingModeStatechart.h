@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -125,6 +125,8 @@ namespace mrw
 				virtual ~EventInstanceWithValue() = default;
 				const T value;
 			};
+
+
 
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
@@ -416,7 +418,6 @@ namespace mrw
 			bool dispatchEvent(std::unique_ptr<EventInstance> event) noexcept;
 
 
-
 		private:
 			OperatingModeStatechart(const OperatingModeStatechart & rhs);
 			OperatingModeStatechart & operator=(const OperatingModeStatechart &);
@@ -555,7 +556,6 @@ namespace mrw
 
 			/*! Indicates event 'routesChanged' of default interface scope is active. */
 			bool routesChanged_raised {false};
-
 
 
 		};

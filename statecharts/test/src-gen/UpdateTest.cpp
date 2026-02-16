@@ -1,7 +1,7 @@
 /** *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 #include <string>
@@ -12,7 +12,9 @@
 #include "sc_runner_timed.h"
 #include "sc_types.h"
 
+#ifndef SC_UNUSED
 #define SC_UNUSED(P) (void)P
+#endif
 
 namespace
 {

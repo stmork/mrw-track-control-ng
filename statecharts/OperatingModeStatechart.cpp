@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -51,6 +51,15 @@ namespace mrw
 
 		OperatingModeStatechart::~OperatingModeStatechart()
 		{
+			if (!timerService)
+			{
+				return;
+			}
+			timerService->unsetTimerRaw(this, 0);
+			timerService->unsetTimerRaw(this, 1);
+			timerService->unsetTimerRaw(this, 2);
+			timerService->unsetTimerRaw(this, 3);
+			timerService->unsetTimerRaw(this, 4);
 		}
 
 		OperatingModeStatechart::Watchdog::Watchdog(OperatingModeStatechart * parent_) noexcept :
@@ -169,7 +178,6 @@ namespace mrw
 					ifaceScreen.userInput_raised = true;
 					break;
 				}
-
 			case mrw::statechart::OperatingModeStatechart::Event::_te0_main_region_Running_:
 			case mrw::statechart::OperatingModeStatechart::Event::_te1_main_region_Running_:
 			case mrw::statechart::OperatingModeStatechart::Event::_te2_main_region_Running_operating_Prepare_Bus_:
@@ -422,8 +430,7 @@ namespace mrw
 
 		sc::integer OperatingModeStatechart::getTimeout() noexcept
 		{
-			return timeout
-				;
+			return timeout;
 		}
 
 		void OperatingModeStatechart::setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept
@@ -436,8 +443,7 @@ namespace mrw
 		}
 		sc::integer OperatingModeStatechart::Watchdog::getTimeout() noexcept
 		{
-			return timeout
-				;
+			return timeout;
 		}
 
 		OperatingModeStatechart::Can & OperatingModeStatechart::can() noexcept
@@ -446,8 +452,7 @@ namespace mrw
 		}
 		sc::integer OperatingModeStatechart::Can::getTimeout() noexcept
 		{
-			return timeout
-				;
+			return timeout;
 		}
 
 		void OperatingModeStatechart::Can::setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept
@@ -460,8 +465,7 @@ namespace mrw
 		}
 		sc::integer OperatingModeStatechart::Screen::getTimeout() const noexcept
 		{
-			return timeout
-				;
+			return timeout;
 		}
 
 		void OperatingModeStatechart::Screen::setTimeout(sc::integer timeout_) noexcept
@@ -1512,6 +1516,8 @@ namespace mrw
 		void OperatingModeStatechart::enter()
 		{
 			/* Activates the state machine. */
+			{
+			};
 			if (isExecuting)
 			{
 				return;

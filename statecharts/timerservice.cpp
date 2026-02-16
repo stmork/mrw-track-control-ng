@@ -36,22 +36,40 @@ void TimerService::setTimer(
 }
 
 void TimerService::unsetTimer(
-	std::shared_ptr<sc::timer::TimedInterface> statemachine,
-	sc::eventid                                event)
+	std::shared_ptr<TimedInterface> statemachine,
+	sc::eventid                     event)
 {
 	QTimer * timer = this->getTimer(statemachine, event);
 
 	timer->stop();
 }
 
-QTimer * TimerService::getTimer(
-	std::shared_ptr<sc::timer::TimedInterface> & statemachine,
-	sc::eventid                                  event)
+void TimerService::unsetTimerRaw(
+	TimedInterface * statemachine,
+	sc::eventid      event)
 {
+	TimerKey key{ statemachine, event };
+
+	if (chart_map.contains(key))
+	{
+		QTimer * timer = chart_map[key];
+
+		Q_ASSERT(timer != nullptr);
+		timer->stop();
+		chart_map.remove(key);
+		delete timer;
+	}
+}
+
+QTimer * TimerService::getTimer(
+	std::shared_ptr<TimedInterface> & statemachine,
+	sc::eventid                       event)
+{
+	Q_ASSERT(statemachine);
+
 	TimerKey   key{ statemachine.get(), event };
 	QTimer  *  timer = nullptr;
 
-	Q_ASSERT(statemachine);
 	if (chart_map.contains(key))
 	{
 		timer = chart_map[key];

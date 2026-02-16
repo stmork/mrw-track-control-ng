@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -119,6 +119,8 @@ namespace mrw
 			bool isRaisedFinished() noexcept;
 
 
+
+
 			/*! Gets the value of the variable 'switch_timeout' that is defined in the default interface scope. */
 			static sc::integer getSwitch_timeout()  noexcept;
 			/*! Gets the value of the variable 'signal_timeout' that is defined in the default interface scope. */
@@ -232,7 +234,6 @@ namespace mrw
 			EventInstance * getNextEvent() noexcept;
 
 			bool dispatchEvent(EventInstance * event) noexcept;
-
 
 
 		private:
@@ -349,7 +350,6 @@ namespace mrw
 
 			/*! Indicates event 'finished' of default interface scope is active. */
 			bool finished_raised {false};
-
 
 
 		};

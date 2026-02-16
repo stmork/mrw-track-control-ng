@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -102,6 +102,8 @@ namespace mrw
 				virtual ~EventInstance() = default;
 				const Event eventId;
 			};
+
+
 
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
@@ -245,7 +247,6 @@ namespace mrw
 			bool dispatchEvent(std::unique_ptr<EventInstance> event) noexcept;
 
 
-
 		private:
 			SwitchStatechart(const SwitchStatechart & rhs);
 			SwitchStatechart & operator=(const SwitchStatechart &);
@@ -354,7 +355,6 @@ namespace mrw
 
 			/*! Indicates event 'turn' of default interface scope is active. */
 			bool turn_raised {false};
-
 
 
 		};

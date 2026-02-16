@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -39,6 +39,19 @@ namespace mrw
 
 		UpdateStatechart::~UpdateStatechart()
 		{
+			if (!timerService)
+			{
+				return;
+			}
+			timerService->unsetTimerRaw(this, 0);
+			timerService->unsetTimerRaw(this, 1);
+			timerService->unsetTimerRaw(this, 2);
+			timerService->unsetTimerRaw(this, 3);
+			timerService->unsetTimerRaw(this, 4);
+			timerService->unsetTimerRaw(this, 5);
+			timerService->unsetTimerRaw(this, 6);
+			timerService->unsetTimerRaw(this, 7);
+			timerService->unsetTimerRaw(this, 8);
 		}
 
 
@@ -93,7 +106,6 @@ namespace mrw
 					failed_raised = true;
 					break;
 				}
-
 
 			case mrw::statechart::UpdateStatechart::Event::_te0_main_region_Ping_:
 			case mrw::statechart::UpdateStatechart::Event::_te1_main_region_Reset_:
@@ -272,38 +284,32 @@ namespace mrw
 
 		sc::integer UpdateStatechart::getTimeout() noexcept
 		{
-			return timeout
-				;
+			return timeout;
 		}
 
 		sc::integer UpdateStatechart::getDelay_boot() noexcept
 		{
-			return delay_boot
-				;
+			return delay_boot;
 		}
 
 		sc::integer UpdateStatechart::getDelay_reset() noexcept
 		{
-			return delay_reset
-				;
+			return delay_reset;
 		}
 
 		sc::integer UpdateStatechart::getDelay_flash_request() noexcept
 		{
-			return delay_flash_request
-				;
+			return delay_flash_request;
 		}
 
 		sc::integer UpdateStatechart::getDelay_flash_page() noexcept
 		{
-			return delay_flash_page
-				;
+			return delay_flash_page;
 		}
 
 		sc::integer UpdateStatechart::getCount() const noexcept
 		{
-			return count
-				;
+			return count;
 		}
 
 		void UpdateStatechart::setCount(sc::integer count_) noexcept
@@ -312,8 +318,7 @@ namespace mrw
 		}
 		sc::integer UpdateStatechart::getError() const noexcept
 		{
-			return error
-				;
+			return error;
 		}
 
 		void UpdateStatechart::setError(sc::integer error_) noexcept
@@ -322,8 +327,7 @@ namespace mrw
 		}
 		sc::integer UpdateStatechart::getRetry() noexcept
 		{
-			return retry
-				;
+			return retry;
 		}
 
 		void UpdateStatechart::setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept
@@ -1151,6 +1155,8 @@ namespace mrw
 		void UpdateStatechart::enter()
 		{
 			/* Activates the state machine. */
+			{
+			};
 			if (isExecuting)
 			{
 				return;

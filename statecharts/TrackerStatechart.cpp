@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -36,6 +36,14 @@ namespace mrw
 
 		TrackerStatechart::~TrackerStatechart()
 		{
+			if (!timerService)
+			{
+				return;
+			}
+			timerService->unsetTimerRaw(this, 0);
+			timerService->unsetTimerRaw(this, 1);
+			timerService->unsetTimerRaw(this, 2);
+			timerService->unsetTimerRaw(this, 3);
 		}
 
 
@@ -85,7 +93,6 @@ namespace mrw
 					completed_raised = true;
 					break;
 				}
-
 
 			case mrw::statechart::TrackerStatechart::Event::_te0_main_region_Preparing_:
 			case mrw::statechart::TrackerStatechart::Event::_te1_main_region_Driving_Tracking_First_:
@@ -210,14 +217,12 @@ namespace mrw
 
 		sc::integer TrackerStatechart::getStart() noexcept
 		{
-			return start
-				;
+			return start;
 		}
 
 		sc::integer TrackerStatechart::getStep() noexcept
 		{
-			return step
-				;
+			return step;
 		}
 
 		void TrackerStatechart::setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept
@@ -719,6 +724,8 @@ namespace mrw
 		void TrackerStatechart::enter()
 		{
 			/* Activates the state machine. */
+			{
+			};
 			if (isExecuting)
 			{
 				return;

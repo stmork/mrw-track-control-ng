@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -43,6 +43,12 @@ namespace mrw
 
 		SwitchStatechart::~SwitchStatechart()
 		{
+			if (!timerService)
+			{
+				return;
+			}
+			timerService->unsetTimerRaw(this, 0);
+			timerService->unsetTimerRaw(this, 1);
 		}
 
 
@@ -122,7 +128,6 @@ namespace mrw
 					turn_raised = true;
 					break;
 				}
-
 
 			case mrw::statechart::SwitchStatechart::Event::_te0_main_region_Init_:
 			case mrw::statechart::SwitchStatechart::Event::_te1_main_region_Operating_operating_Turning_:
@@ -329,14 +334,12 @@ namespace mrw
 
 		sc::integer SwitchStatechart::getTimeout() noexcept
 		{
-			return timeout
-				;
+			return timeout;
 		}
 
 		bool SwitchStatechart::getIsManual() const noexcept
 		{
-			return isManual
-				;
+			return isManual;
 		}
 
 		void SwitchStatechart::setIsManual(bool isManual_) noexcept
@@ -1123,6 +1126,8 @@ namespace mrw
 		void SwitchStatechart::enter()
 		{
 			/* Activates the state machine. */
+			{
+			};
 			if (isExecuting)
 			{
 				return;

@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -165,6 +165,8 @@ namespace mrw
 			bool getPlayingValue() noexcept;
 			/*! Check if event 'quit' of default interface scope is raised. */
 			bool isRaisedQuit() noexcept;
+
+
 
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
@@ -396,7 +398,6 @@ namespace mrw
 			bool dispatchEvent(EventInstance * event) noexcept;
 
 
-
 		private:
 			OperatingModeStatechart(const OperatingModeStatechart & rhs);
 			OperatingModeStatechart & operator=(const OperatingModeStatechart &);
@@ -572,7 +573,6 @@ namespace mrw
 
 			/*! Indicates event 'quit' of default interface scope is active. */
 			bool quit_raised {false};
-
 
 
 		};

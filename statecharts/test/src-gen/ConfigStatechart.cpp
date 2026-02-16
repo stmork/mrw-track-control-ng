@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -36,6 +36,13 @@ namespace mrw
 				incomingEventQueue.pop_front();
 				delete nextEvent;
 			}
+			if (!timerService)
+			{
+				return;
+			}
+			timerService->unsetTimer(this, 0);
+			timerService->unsetTimer(this, 1);
+			timerService->unsetTimer(this, 2);
 		}
 
 
@@ -75,7 +82,6 @@ namespace mrw
 					completed_raised = true;
 					break;
 				}
-
 
 			case mrw::statechart::ConfigStatechart::Event::_te0_main_region_Wait_for_Connect_:
 			case mrw::statechart::ConfigStatechart::Event::_te1_main_region_Configure_:
@@ -204,32 +210,27 @@ namespace mrw
 
 		sc::integer ConfigStatechart::getTimeout() noexcept
 		{
-			return timeout
-				;
+			return timeout;
 		}
 
 		sc::integer ConfigStatechart::getWritetime() noexcept
 		{
-			return writetime
-				;
+			return writetime;
 		}
 
 		sc::integer ConfigStatechart::getFlashtime() noexcept
 		{
-			return flashtime
-				;
+			return flashtime;
 		}
 
 		sc::integer ConfigStatechart::getResettime() noexcept
 		{
-			return resettime
-				;
+			return resettime;
 		}
 
 		sc::integer ConfigStatechart::getIdx() const noexcept
 		{
-			return idx
-				;
+			return idx;
 		}
 
 		void ConfigStatechart::setIdx(sc::integer idx_) noexcept
@@ -238,8 +239,7 @@ namespace mrw
 		}
 		sc::integer ConfigStatechart::getMax() const noexcept
 		{
-			return max
-				;
+			return max;
 		}
 
 		void ConfigStatechart::setMax(sc::integer max_) noexcept
@@ -612,6 +612,8 @@ namespace mrw
 		void ConfigStatechart::enter()
 		{
 			/* Activates the state machine. */
+			{
+			};
 			if (isExecuting)
 			{
 				return;

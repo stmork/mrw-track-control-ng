@@ -55,6 +55,9 @@ namespace mrw::statechart
 		virtual void unsetTimer(
 			std::shared_ptr<sc::timer::TimedInterface> statemachine,
 			sc::eventid                                event) override;
+		virtual void unsetTimerRaw(
+			sc::timer::TimedInterface * statemachine,
+			sc::eventid                 event) override;
 
 	private:
 		/**

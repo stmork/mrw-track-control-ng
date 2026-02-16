@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -41,6 +41,11 @@ namespace mrw
 
 		SignalStatechart::~SignalStatechart()
 		{
+			if (!timerService)
+			{
+				return;
+			}
+			timerService->unsetTimerRaw(this, 0);
 		}
 
 
@@ -106,7 +111,6 @@ namespace mrw
 					clear_raised = true;
 					break;
 				}
-
 
 			case mrw::statechart::SignalStatechart::Event::_te0_main_region_Turning_:
 				{
@@ -255,14 +259,12 @@ namespace mrw
 
 		sc::integer SignalStatechart::getTimeout() noexcept
 		{
-			return timeout
-				;
+			return timeout;
 		}
 
 		sc::integer SignalStatechart::getSymbol() const noexcept
 		{
-			return symbol
-				;
+			return symbol;
 		}
 
 		void SignalStatechart::setSymbol(sc::integer symbol_) noexcept
@@ -271,20 +273,17 @@ namespace mrw
 		}
 		sc::integer SignalStatechart::getOFF() noexcept
 		{
-			return OFF
-				;
+			return OFF;
 		}
 
 		sc::integer SignalStatechart::getSTOP() noexcept
 		{
-			return STOP
-				;
+			return STOP;
 		}
 
 		sc::integer SignalStatechart::getGO() noexcept
 		{
-			return GO
-				;
+			return GO;
 		}
 
 		void SignalStatechart::setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept
@@ -716,6 +715,8 @@ namespace mrw
 		void SignalStatechart::enter()
 		{
 			/* Activates the state machine. */
+			{
+			};
 			if (isExecuting)
 			{
 				return;

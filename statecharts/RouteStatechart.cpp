@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -37,6 +37,18 @@ namespace mrw
 
 		RouteStatechart::~RouteStatechart()
 		{
+			if (!timerService)
+			{
+				return;
+			}
+			timerService->unsetTimerRaw(this, 0);
+			timerService->unsetTimerRaw(this, 1);
+			timerService->unsetTimerRaw(this, 2);
+			timerService->unsetTimerRaw(this, 3);
+			timerService->unsetTimerRaw(this, 4);
+			timerService->unsetTimerRaw(this, 5);
+			timerService->unsetTimerRaw(this, 6);
+			timerService->unsetTimerRaw(this, 7);
 		}
 
 
@@ -91,7 +103,6 @@ namespace mrw
 					disable_raised = true;
 					break;
 				}
-
 
 			case mrw::statechart::RouteStatechart::Event::_te0_main_region_Disable_:
 			case mrw::statechart::RouteStatechart::Event::_te1_main_region_Active_processing_Switch_Turning_:
@@ -276,26 +287,22 @@ namespace mrw
 
 		sc::integer RouteStatechart::getSwitch_timeout() noexcept
 		{
-			return switch_timeout
-				;
+			return switch_timeout;
 		}
 
 		sc::integer RouteStatechart::getSignal_timeout() noexcept
 		{
-			return signal_timeout
-				;
+			return signal_timeout;
 		}
 
 		sc::integer RouteStatechart::getSection_timeout() noexcept
 		{
-			return section_timeout
-				;
+			return section_timeout;
 		}
 
 		sc::integer RouteStatechart::getEmergency() noexcept
 		{
-			return emergency
-				;
+			return emergency;
 		}
 
 		void RouteStatechart::setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept
@@ -1260,6 +1267,8 @@ namespace mrw
 		void RouteStatechart::enter()
 		{
 			/* Activates the state machine. */
+			{
+			};
 			if (isExecuting)
 			{
 				return;

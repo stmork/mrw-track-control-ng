@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -177,6 +177,8 @@ namespace mrw
 			bool isRaisedUnregister() noexcept;
 
 
+
+
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
 			static sc::integer getTimeout()  noexcept;
 			/*! Gets the value of the variable 'auto_off' that is defined in the default interface scope. */
@@ -288,7 +290,6 @@ namespace mrw
 			bool dispatchEvent(EventInstance * event) noexcept;
 
 
-
 		private:
 			SectionStatechart(const SectionStatechart & rhs);
 			SectionStatechart & operator=(const SectionStatechart &);
@@ -315,6 +316,8 @@ namespace mrw
 
 			OperationCallback * ifaceOperationCallback;
 
+			bool completed {false};
+			bool doCompletion {false};
 			bool isExecuting {false};
 			sc::integer stateConfVectorPosition {0};
 			bool stateConfVectorChanged {false};
@@ -326,7 +329,9 @@ namespace mrw
 			void enact_main_region_Init();
 			void enact_main_region_Init_Init_Process_Requesting();
 			void enact_main_region_Init_Init_Process_Requesting_relais_Relay();
+			void enact_main_region_Init_Init_Process_Requesting_relais_Wait();
 			void enact_main_region_Init_Init_Process_Requesting_state_Occupation();
+			void enact_main_region_Init_Init_Process_Requesting_state_Wait();
 			void enact_main_region_Operating_Processing_Unlocked();
 			void enact_main_region_Operating_Processing_Locked();
 			void enact_main_region_Operating_Processing_Locked_Route_active_Passed();
@@ -371,7 +376,6 @@ namespace mrw
 			void enseq_main_region_Operating_Processing_default();
 			void enseq_main_region_Operating_Processing_Locked_Occupation_default();
 			void exseq_main_region_Init();
-			void exseq_main_region_Init_Init_Process_Requesting();
 			void exseq_main_region_Init_Init_Process_Requesting_relais_Relay();
 			void exseq_main_region_Init_Init_Process_Requesting_relais_Wait();
 			void exseq_main_region_Init_Init_Process_Requesting_state_Occupation();
@@ -410,7 +414,6 @@ namespace mrw
 			void react_main_region_Init_Init_Process__entry_Default();
 			void react_main_region_Operating_Processing__entry_Default();
 			void react_main_region_Operating_Processing_Locked_Occupation__entry_Default();
-			void react_main_region_Init_Init_Process__sync0();
 			void react_main_region_Init_Init_Process__sync1();
 			sc::integer main_region_Init_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_Init_Process_Requesting_react(const sc::integer transitioned_before);
@@ -505,7 +508,6 @@ namespace mrw
 
 			/*! Raises the out event 'local_leave' of internal scope as a local event. */
 			void raiseLocal_leave();
-
 
 
 		};

@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -98,6 +98,8 @@ namespace mrw
 				virtual ~EventInstanceWithValue() = default;
 				const T value;
 			};
+
+
 
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
@@ -216,7 +218,6 @@ namespace mrw
 			bool dispatchEvent(std::unique_ptr<EventInstance> event) noexcept;
 
 
-
 		private:
 			SignalStatechart(const SignalStatechart & rhs);
 			SignalStatechart & operator=(const SignalStatechart &);
@@ -305,7 +306,6 @@ namespace mrw
 
 			/*! Indicates event 'clear' of default interface scope is active. */
 			bool clear_raised {false};
-
 
 
 		};
