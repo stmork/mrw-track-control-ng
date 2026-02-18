@@ -30,7 +30,8 @@ namespace fs = std::filesystem;
 
 ScreenBlankHandler::ScreenBlankHandler()
 {
-	screen  = QGuiApplication::primaryScreen();
+	screen = QGuiApplication::primaryScreen();
+
 #ifdef X11_SCREEN_SAVER
 	Display * display = XOpenDisplay(nullptr);
 

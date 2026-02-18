@@ -45,7 +45,6 @@ int main(int argc, char * argv[])
 	if (repo)
 	{
 		MrwMessageDispatcher dispatcher(repo, repo.interface(), repo.plugin());
-		MainWindow           main_window(repo, dispatcher);
 		DumpHandler          dumper([&]()
 		{
 			ModelRailway * model = repo;
@@ -53,13 +52,14 @@ int main(int argc, char * argv[])
 			model->info();
 		});
 
-		repo.info();
-		repo.xml();
-
-		main_window.show();
-
 		try
 		{
+			MainWindow main_window(repo, dispatcher);
+
+			repo.info();
+			repo.xml();
+			main_window.show();
+
 			qCInfo(mrw::tools::log).noquote() << "Window size: " << main_window.size();
 
 			qCInfo(mrw::tools::log, "==========================================================");
