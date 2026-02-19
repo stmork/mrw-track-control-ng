@@ -9,18 +9,16 @@ export QMAKE=${QMAKE:-qmake6}
 export COPYRIGHT=${PREFIX}/usr/share/doc/${PACKAGE}/copyright
 export BUILD_NUMBER=${BUILD_NUMBER:=0}
 export ARCH=all
-export QT_INSTALL_DOCS=`${QMAKE} -query QT_INSTALL_DOCS`
 
 rm -rf ${PREFIX}
 test -f Makefile || ${QMAKE}
 make doxygen
 
-mkdir -p ${PREFIX}/${QT_INSTALL_DOCS}
 mkdir -p ${PREFIX}/usr/share/doc/${PACKAGE}
 mkdir ${PREFIX}/DEBIAN
 cp -a DEBIAN/control-doc  ${PREFIX}/DEBIAN/control
-cp -a *.qch               ${PREFIX}/${QT_INSTALL_DOCS}
-cp -a api-doc             ${PREFIX}/usr/share/doc/${PACKAGE}/doc/
+cp -a *.qch               ${PREFIX}/usr/share/doc/${PACKAGE}/
+cp -a api-doc/            ${PREFIX}/usr/share/doc/${PACKAGE}/doc/
 
 echo "Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/" > $COPYRIGHT
 echo "Upstream-Name: $PACKAGE" >> ${COPYRIGHT}
@@ -32,6 +30,10 @@ echo "License: MIT" >> ${COPYRIGHT}
 sed -e 's/^$/\./g' -e 's/^/ /g' LICENSE.md >> ${COPYRIGHT}
 export VERSION=`grep VERSION common.pri | fgrep "=" | cut -d"=" -f2 | sed -e "s/ //g" | head -n1`
 
+#echo "#!/bin/bash" > ${PREFIX}/DEBIAN/postinst
+#echo "/usr/lib/qt6/bin/assistant -register /usr/share/doc/${PACKAGE}/mrw-ng.qch" >> ${PREFIX}/DEBIAN/postinst
+#chmod 755 ${PREFIX}/DEBIAN/postinst
+
 sed -i\
    -e "s/%ARCH%/${ARCH}/g"\
    -e "s/%VERSION%/${VERSION}/g"\
@@ -41,4 +43,4 @@ sed -i\
 
 echo "Packaging..."
 chmod -R o+rX ${PREFIX}
-fakeroot dpkg -b ${PREFIX} ${PACKAGE}_${VERSION}_${ARCH}.deb
+fakeroot dpkg -b ${PREFIX} ${PACKAGE}_${VERSION}-${BUILD_NUMBER}_${ARCH}.deb
