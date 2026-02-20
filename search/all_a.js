@@ -22,7 +22,8 @@ var searchData=
   ['locked_19',['LOCKED',['../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4aaeff3f3f2731681b2ed6a27786a56203',1,'mrw::model::Device']]],
   ['lockstate_20',['LockState',['../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4',1,'mrw::model::Device']]],
   ['lockvisible_21',['lockVisible',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#ad4ee397c4e0a49be00776bebd2473505',1,'mrw::ui::ControllerWidget']]],
-  ['loggerbase_22',['LoggerBase',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html',1,'mrw::log']]],
-  ['loggerservice_23',['LoggerService',['../d4/dc7/classmrw_1_1log_1_1LoggerService.html',1,'mrw::log']]],
-  ['lookup_24',['lookup',['../d5/d5d/classmrw_1_1util_1_1Properties.html#ad6f0a73d0b76f90a1931c467cc0fd42f',1,'mrw::util::Properties']]]
+  ['log_22',['log',['../d9/dbc/namespacemrw_1_1model.html#a54293b6364cff162663caeb26d86b587',1,'mrw::model']]],
+  ['loggerbase_23',['LoggerBase',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html',1,'mrw::log']]],
+  ['loggerservice_24',['LoggerService',['../d4/dc7/classmrw_1_1log_1_1LoggerService.html',1,'mrw::log']]],
+  ['lookup_25',['lookup',['../d5/d5d/classmrw_1_1util_1_1Properties.html#ad6f0a73d0b76f90a1931c467cc0fd42f',1,'mrw::util::Properties']]]
 ];

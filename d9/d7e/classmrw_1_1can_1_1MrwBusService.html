@@ -91,8 +91,8 @@ $(function(){ initResizable(false); });
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="../../d3/dc9/classmrw_1_1can_1_1MrwBusService-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">mrw::can::MrwBusService Class Reference</div></div>
@@ -114,13 +114,6 @@ Inheritance diagram for mrw::can::MrwBusService:</div>
 </map>
 <center><span class="legend">[<a href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="signals" name="signals"></a>
-Signals</h2></td></tr>
-<tr class="memitem:a0862edc4130e6b3563f7e23d5ffb3916" id="r_a0862edc4130e6b3563f7e23d5ffb3916"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0862edc4130e6b3563f7e23d5ffb3916">connected</a> ()</td></tr>
-<tr class="separator:a0862edc4130e6b3563f7e23d5ffb3916"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c930e0da610c26edefcf10b4cd80b31" id="r_a0c930e0da610c26edefcf10b4cd80b31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c930e0da610c26edefcf10b4cd80b31">disconnected</a> ()</td></tr>
-<tr class="separator:a0c930e0da610c26edefcf10b4cd80b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab3258243639f9a5410e76195fedb01c9" id="r_ab3258243639f9a5410e76195fedb01c9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3258243639f9a5410e76195fedb01c9">MrwBusService</a> (const QString &amp;interface=&quot;can0&quot;, const QString &amp;plugin=&quot;socketcan&quot;, QObject *parent=nullptr, const bool auto_connect=true)</td></tr>
@@ -141,6 +134,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a18b3f3b41d839efbc4fe3163b1d65645" id="r_a18b3f3b41d839efbc4fe3163b1d65645"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18b3f3b41d839efbc4fe3163b1d65645">process</a> (const <a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html">MrwMessage</a> &amp;message)</td></tr>
 <tr class="memdesc:a18b3f3b41d839efbc4fe3163b1d65645"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method processes a single <a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html" title="This class represents a CAN bus frame in model railway manner.">MrwMessage</a>.  <br /></td></tr>
 <tr class="separator:a18b3f3b41d839efbc4fe3163b1d65645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a0862edc4130e6b3563f7e23d5ffb3916" id="r_a0862edc4130e6b3563f7e23d5ffb3916"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0862edc4130e6b3563f7e23d5ffb3916">connected</a> ()</td></tr>
+<tr class="separator:a0862edc4130e6b3563f7e23d5ffb3916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c930e0da610c26edefcf10b4cd80b31" id="r_a0c930e0da610c26edefcf10b4cd80b31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c930e0da610c26edefcf10b4cd80b31">disconnected</a> ()</td></tr>
+<tr class="separator:a0c930e0da610c26edefcf10b4cd80b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7461096e1f4038279302ee46d4aeb6d5" id="r_a7461096e1f4038279302ee46d4aeb6d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7461096e1f4038279302ee46d4aeb6d5">stateChanged</a> (QCanBusDevice::CanBusDeviceState state) noexcept</td></tr>
+<tr class="separator:a7461096e1f4038279302ee46d4aeb6d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e3897a65e13d57bee40fa41829bb050" id="r_a3e3897a65e13d57bee40fa41829bb050"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e3897a65e13d57bee40fa41829bb050">receive</a> () noexcept</td></tr>
+<tr class="separator:a3e3897a65e13d57bee40fa41829bb050"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -238,7 +242,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a0862edc4130e6b3563f7e23d5ffb3916" name="a0862edc4130e6b3563f7e23d5ffb3916"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0862edc4130e6b3563f7e23d5ffb3916">&#9670;&#160;</a></span>connected</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0862edc4130e6b3563f7e23d5ffb3916">&#9670;&#160;</a></span>connected()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -255,7 +259,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel signal">signal</span></span>  </td>
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -263,7 +267,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a0c930e0da610c26edefcf10b4cd80b31" name="a0c930e0da610c26edefcf10b4cd80b31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c930e0da610c26edefcf10b4cd80b31">&#9670;&#160;</a></span>disconnected</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c930e0da610c26edefcf10b4cd80b31">&#9670;&#160;</a></span>disconnected()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,7 +284,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel signal">signal</span></span>  </td>
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -348,6 +352,56 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6d6b488c9ebb160a85e243ddc409063f" title="This method returns true if the underlying CAN frame is a valid MrwMessage.">MrwMessage::valid()</a> </dd></dl>
+
+</div>
+</div>
+<a id="a3e3897a65e13d57bee40fa41829bb050" name="a3e3897a65e13d57bee40fa41829bb050"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e3897a65e13d57bee40fa41829bb050">&#9670;&#160;</a></span>receive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MrwBusService::receive </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7461096e1f4038279302ee46d4aeb6d5" name="a7461096e1f4038279302ee46d4aeb6d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7461096e1f4038279302ee46d4aeb6d5">&#9670;&#160;</a></span>stateChanged()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MrwBusService::stateChanged </td>
+          <td>(</td>
+          <td class="paramtype">QCanBusDevice::CanBusDeviceState</td>          <td class="paramname"><span class="paramname"><em>state</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -461,7 +515,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 19 2026 18:14:53 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Fri Feb 20 2026 09:09:02 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>

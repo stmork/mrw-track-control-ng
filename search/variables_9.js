@@ -8,5 +8,6 @@ var searchData=
   ['lines_5',['lines',['../d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a',1,'mrw::ctrl::BaseController::Status']]],
   ['lock_5fheight_6',['LOCK_HEIGHT',['../df/db9/classmrw_1_1ui_1_1BaseWidget.html#a568ad954cae30a5215ebd4b4356b85ac',1,'mrw::ui::BaseWidget']]],
   ['lock_5fstate_7',['lock_state',['../d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6',1,'mrw::ctrl::BaseController::Status']]],
-  ['lock_5fwidth_8',['LOCK_WIDTH',['../df/db9/classmrw_1_1ui_1_1BaseWidget.html#a08838851a77c71a3da18c3990eab6045',1,'mrw::ui::BaseWidget']]]
+  ['lock_5fwidth_8',['LOCK_WIDTH',['../df/db9/classmrw_1_1ui_1_1BaseWidget.html#a08838851a77c71a3da18c3990eab6045',1,'mrw::ui::BaseWidget']]],
+  ['log_9',['log',['../d9/dbc/namespacemrw_1_1model.html#a54293b6364cff162663caeb26d86b587',1,'mrw::model']]]
 ];

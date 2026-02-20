@@ -92,9 +92,9 @@ $(function(){ initResizable(false); });
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="../../d8/daa/classmrw_1_1ctrl_1_1DoubleCrossSwitchController-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">mrw::ctrl::DoubleCrossSwitchController Class Reference<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
 </div><!--header-->
@@ -124,15 +124,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html">Status</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This struct contains the complete <a class="el" href="../../d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html" title="This struct contains the complete Status of this DoubleCrossSwitchController instance including the B...">Status</a> of this <a class="el" href="../../d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html" title="This class provides the logic for a double cross switch.">DoubleCrossSwitchController</a> instance including the <a class="el" href="../../dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html" title="This struct contains the complete Status of this BaseSwitchController instance including the BaseCont...">BaseSwitchController::Status</a>.  <a href="../../d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="signals" name="signals"></a>
-Signals</h2></td></tr>
-<tr class="memitem:ab260bbe7258e2143720d0e6f04901d5b" id="r_ab260bbe7258e2143720d0e6f04901d5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ab260bbe7258e2143720d0e6f04901d5b">update</a> ()</td></tr>
-<tr class="memdesc:ab260bbe7258e2143720d0e6f04901d5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal causes the refresh of the paired widget class.  <br /></td></tr>
-<tr class="separator:ab260bbe7258e2143720d0e6f04901d5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adae113964b68eccca459674db927f17a" id="r_adae113964b68eccca459674db927f17a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#adae113964b68eccca459674db927f17a">reposition</a> ()</td></tr>
-<tr class="memdesc:adae113964b68eccca459674db927f17a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal causes a recomputation of the paired widget class.  <br /></td></tr>
-<tr class="separator:adae113964b68eccca459674db927f17a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -172,6 +163,15 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a9aad6ef99289fda8911e051ecb6c06a0"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a9aad6ef99289fda8911e051ecb6c06a0">callback</a> (<a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html">BaseController</a> *base, std::function&lt; void(CTRL *)&gt; function)</td></tr>
 <tr class="memdesc:a9aad6ef99289fda8911e051ecb6c06a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This template method calls a given method of a derived controller.  <br /></td></tr>
 <tr class="separator:a9aad6ef99289fda8911e051ecb6c06a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ab260bbe7258e2143720d0e6f04901d5b" id="r_ab260bbe7258e2143720d0e6f04901d5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ab260bbe7258e2143720d0e6f04901d5b">update</a> ()</td></tr>
+<tr class="memdesc:ab260bbe7258e2143720d0e6f04901d5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal causes the refresh of the paired widget class.  <br /></td></tr>
+<tr class="separator:ab260bbe7258e2143720d0e6f04901d5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adae113964b68eccca459674db927f17a" id="r_adae113964b68eccca459674db927f17a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#adae113964b68eccca459674db927f17a">reposition</a> ()</td></tr>
+<tr class="memdesc:adae113964b68eccca459674db927f17a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal causes a recomputation of the paired widget class.  <br /></td></tr>
+<tr class="separator:adae113964b68eccca459674db927f17a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class provides the logic for a double cross switch. </p>
@@ -427,7 +427,7 @@ There is no isLeftBended() method which is the opposite of this method.</dd></dl
 </div>
 </div>
 <a id="adae113964b68eccca459674db927f17a" name="adae113964b68eccca459674db927f17a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adae113964b68eccca459674db927f17a">&#9670;&#160;</a></span>reposition</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#adae113964b68eccca459674db927f17a">&#9670;&#160;</a></span>reposition()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -444,7 +444,7 @@ There is no isLeftBended() method which is the opposite of this method.</dd></dl
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel signal">signal</span><span class="mlabel inherited">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel inherited">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -547,7 +547,7 @@ There is no isLeftBended() method which is the opposite of this method.</dd></dl
 </div>
 </div>
 <a id="ab260bbe7258e2143720d0e6f04901d5b" name="ab260bbe7258e2143720d0e6f04901d5b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab260bbe7258e2143720d0e6f04901d5b">&#9670;&#160;</a></span>update</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab260bbe7258e2143720d0e6f04901d5b">&#9670;&#160;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -564,7 +564,7 @@ There is no isLeftBended() method which is the opposite of this method.</dd></dl
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel signal">signal</span><span class="mlabel inherited">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel inherited">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -577,7 +577,7 @@ There is no isLeftBended() method which is the opposite of this method.</dd></dl
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 19 2026 18:14:53 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Fri Feb 20 2026 09:09:02 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>

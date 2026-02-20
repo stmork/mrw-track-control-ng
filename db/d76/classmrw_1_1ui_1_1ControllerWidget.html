@@ -91,8 +91,6 @@ $(function(){ initResizable(false); });
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#pub-slots">Public Slots</a> &#124;
-<a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
@@ -130,24 +128,6 @@ Inheritance diagram for mrw::ui::ControllerWidget:</div>
 </map>
 <center><span class="legend">[<a href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-slots" name="pub-slots"></a>
-Public Slots</h2></td></tr>
-<tr class="memitem:af3567e1b0d4a6abd15072d5c69cda1f2" id="r_af3567e1b0d4a6abd15072d5c69cda1f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3567e1b0d4a6abd15072d5c69cda1f2">reposition</a> ()</td></tr>
-<tr class="memdesc:af3567e1b0d4a6abd15072d5c69cda1f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The position in the model has changed and need to be redrawn.  <br /></td></tr>
-<tr class="separator:af3567e1b0d4a6abd15072d5c69cda1f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8bb3d9f6d2249583f9e83d3637018895" id="r_a8bb3d9f6d2249583f9e83d3637018895"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8bb3d9f6d2249583f9e83d3637018895">extend</a> ()</td></tr>
-<tr class="memdesc:a8bb3d9f6d2249583f9e83d3637018895"><td class="mdescLeft">&#160;</td><td class="mdescRight">The extension in the model has changed and need to be redrawn.  <br /></td></tr>
-<tr class="separator:a8bb3d9f6d2249583f9e83d3637018895"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33b1df8bf3ebd26fbfabd57f1c0e908f" id="r_a33b1df8bf3ebd26fbfabd57f1c0e908f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a33b1df8bf3ebd26fbfabd57f1c0e908f">computeConnectors</a> ()</td></tr>
-<tr class="memdesc:a33b1df8bf3ebd26fbfabd57f1c0e908f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The orientation of branches has changed and need to be recomputed and redrawn.  <br /></td></tr>
-<tr class="separator:a33b1df8bf3ebd26fbfabd57f1c0e908f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="signals" name="signals"></a>
-Signals</h2></td></tr>
-<tr class="memitem:a2d2e44d6b1526c00db306c154b0def06" id="r_a2d2e44d6b1526c00db306c154b0def06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d2e44d6b1526c00db306c154b0def06">clicked</a> (QListWidgetItem *item)</td></tr>
-<tr class="memdesc:a2d2e44d6b1526c00db306c154b0def06"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal is emitted if a mouse button was pressed down for selection.  <br /></td></tr>
-<tr class="separator:a2d2e44d6b1526c00db306c154b0def06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a557f85ea485ae2390dfbae1fd257179d" id="r_a557f85ea485ae2390dfbae1fd257179d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a557f85ea485ae2390dfbae1fd257179d">ControllerWidget</a> (QWidget *parent=nullptr, <a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html">mrw::ctrl::BaseController</a> *ctrl=nullptr)</td></tr>
@@ -188,6 +168,18 @@ Static Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a2d2e44d6b1526c00db306c154b0def06" id="r_a2d2e44d6b1526c00db306c154b0def06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d2e44d6b1526c00db306c154b0def06">clicked</a> (QListWidgetItem *item)</td></tr>
+<tr class="memdesc:a2d2e44d6b1526c00db306c154b0def06"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal is emitted if a mouse button was pressed down for selection.  <br /></td></tr>
+<tr class="separator:a2d2e44d6b1526c00db306c154b0def06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3567e1b0d4a6abd15072d5c69cda1f2" id="r_af3567e1b0d4a6abd15072d5c69cda1f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3567e1b0d4a6abd15072d5c69cda1f2">reposition</a> ()</td></tr>
+<tr class="memdesc:af3567e1b0d4a6abd15072d5c69cda1f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The position in the model has changed and need to be redrawn.  <br /></td></tr>
+<tr class="separator:af3567e1b0d4a6abd15072d5c69cda1f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bb3d9f6d2249583f9e83d3637018895" id="r_a8bb3d9f6d2249583f9e83d3637018895"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8bb3d9f6d2249583f9e83d3637018895">extend</a> ()</td></tr>
+<tr class="memdesc:a8bb3d9f6d2249583f9e83d3637018895"><td class="mdescLeft">&#160;</td><td class="mdescRight">The extension in the model has changed and need to be redrawn.  <br /></td></tr>
+<tr class="separator:a8bb3d9f6d2249583f9e83d3637018895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33b1df8bf3ebd26fbfabd57f1c0e908f" id="r_a33b1df8bf3ebd26fbfabd57f1c0e908f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a33b1df8bf3ebd26fbfabd57f1c0e908f">computeConnectors</a> ()</td></tr>
+<tr class="memdesc:a33b1df8bf3ebd26fbfabd57f1c0e908f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The orientation of branches has changed and need to be recomputed and redrawn.  <br /></td></tr>
+<tr class="separator:a33b1df8bf3ebd26fbfabd57f1c0e908f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59cf4307c0600aeb72c0a8c827cce776" id="r_a59cf4307c0600aeb72c0a8c827cce776"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59cf4307c0600aeb72c0a8c827cce776">mousePressEvent</a> (QMouseEvent *event) override</td></tr>
 <tr class="separator:a59cf4307c0600aeb72c0a8c827cce776"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4ee397c4e0a49be00776bebd2473505" id="r_ad4ee397c4e0a49be00776bebd2473505"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4ee397c4e0a49be00776bebd2473505">lockVisible</a> (const <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4">mrw::model::Device::LockState</a> state) const</td></tr>
@@ -300,7 +292,7 @@ Static Protected Attributes</h2></td></tr>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2d2e44d6b1526c00db306c154b0def06" name="a2d2e44d6b1526c00db306c154b0def06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d2e44d6b1526c00db306c154b0def06">&#9670;&#160;</a></span>clicked</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d2e44d6b1526c00db306c154b0def06">&#9670;&#160;</a></span>clicked()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -317,7 +309,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel signal">signal</span></span>  </td>
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -333,7 +325,7 @@ Static Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a33b1df8bf3ebd26fbfabd57f1c0e908f" name="a33b1df8bf3ebd26fbfabd57f1c0e908f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33b1df8bf3ebd26fbfabd57f1c0e908f">&#9670;&#160;</a></span>computeConnectors</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a33b1df8bf3ebd26fbfabd57f1c0e908f">&#9670;&#160;</a></span>computeConnectors()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -350,7 +342,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel virtual">virtual</span><span class="mlabel slot">slot</span></span>  </td>
+<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel virtual">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -538,7 +530,7 @@ template&lt;class C&gt; </div>
 </div>
 </div>
 <a id="a8bb3d9f6d2249583f9e83d3637018895" name="a8bb3d9f6d2249583f9e83d3637018895"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8bb3d9f6d2249583f9e83d3637018895">&#9670;&#160;</a></span>extend</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bb3d9f6d2249583f9e83d3637018895">&#9670;&#160;</a></span>extend()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -555,7 +547,7 @@ template&lt;class C&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel slot">slot</span></span>  </td>
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -823,7 +815,7 @@ mrw::model::SectionState::FAILED </dd></dl>
 </div>
 </div>
 <a id="af3567e1b0d4a6abd15072d5c69cda1f2" name="af3567e1b0d4a6abd15072d5c69cda1f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3567e1b0d4a6abd15072d5c69cda1f2">&#9670;&#160;</a></span>reposition</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af3567e1b0d4a6abd15072d5c69cda1f2">&#9670;&#160;</a></span>reposition()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -840,7 +832,7 @@ mrw::model::SectionState::FAILED </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel slot">slot</span></span>  </td>
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1444,7 +1436,7 @@ mrw::model::SectionState::FAILED </dd></dl>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 19 2026 18:14:53 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Fri Feb 20 2026 09:09:03 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>

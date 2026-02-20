@@ -25,6 +25,8 @@
 <section title="disconnected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0c930e0da610c26edefcf10b4cd80b31"/>
 <section title="list" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#aee34c1e95d971992f8090c5f1250f092"/>
 <section title="process" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a18b3f3b41d839efbc4fe3163b1d65645"/>
+<section title="receive" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a3e3897a65e13d57bee40fa41829bb050"/>
+<section title="stateChanged" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a7461096e1f4038279302ee46d4aeb6d5"/>
 <section title="valid" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a7bb5f821bb3fe4491d0bddc343b8b8c9"/>
 <section title="write" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a5c5f0523ed079f7c1679b6d2870fc22d"/>
 <section title="can_bus" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ae9add44a66b3c41000569347d5eb8e68"/>
@@ -166,7 +168,7 @@
 <section title="CAN_BROADCAST_ID" ref="d9/d9b/namespacemrw_1_1can.html#af60507dceb3716970cdf6fa5df53ca27"/>
 <section title="CAN_EID_UNITNO_MASK" ref="d9/d9b/namespacemrw_1_1can.html#a4bf4fa5a47b007939c26cc751241ffa0"/>
 <section title="CAN_GATEWAY_ID" ref="d9/d9b/namespacemrw_1_1can.html#acdbc536a60e49126061acb3a25c30737"/>
-<section title="CAN_SID_MASK" ref="d9/d9b/namespacemrw_1_1can.html#ae9ac1a064f4ec36e4a148c3661c08272"/>
+<section title="CAN_SID_MASK" ref="d9/d9b/namespacemrw_1_1can.html#a5bc2dc75cc9bbe49df30ba7ecde4ff7b"/>
 <section title="CAN_SID_SHIFT" ref="d9/d9b/namespacemrw_1_1can.html#a09d78d50b144919ce41199f02a0cc9d4"/>
 <section title="NO_UNITNO" ref="d9/d9b/namespacemrw_1_1can.html#aa9e5a8167acba11155bc8eacd145763a"/>
 </section>
@@ -1628,7 +1630,7 @@
 <section title="OCCUPIED" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea95bb06a35b7ae1afcf75777bb28ea62c"/>
 <section title="PASSED" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea269f3d1562cbd15624e7d2c4b10122e3"/>
 </section>
-<section title="Q_DECLARE_LOGGING_CATEGORY" ref="d9/dbc/namespacemrw_1_1model.html#ac548114cf581332986747fa11a3ad3b8"/>
+<section title="log" ref="d9/dbc/namespacemrw_1_1model.html#a54293b6364cff162663caeb26d86b587"/>
 </section>
 <section title="statechart" ref="d7/d94/namespacemrw_1_1statechart.html">
 <section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html">
@@ -2317,6 +2319,8 @@
 <section title="disconnected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0c930e0da610c26edefcf10b4cd80b31"/>
 <section title="list" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#aee34c1e95d971992f8090c5f1250f092"/>
 <section title="process" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a18b3f3b41d839efbc4fe3163b1d65645"/>
+<section title="receive" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a3e3897a65e13d57bee40fa41829bb050"/>
+<section title="stateChanged" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a7461096e1f4038279302ee46d4aeb6d5"/>
 <section title="valid" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a7bb5f821bb3fe4491d0bddc343b8b8c9"/>
 <section title="write" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a5c5f0523ed079f7c1679b6d2870fc22d"/>
 <section title="can_bus" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ae9add44a66b3c41000569347d5eb8e68"/>
@@ -5342,6 +5346,7 @@
 <keyword name="raiseTimeEvent(sc::eventid event)=0" id="sc::timer::TimedInterface::raiseTimeEvent_aeb2a340a1252b36828b5d2dc069e9c57" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#aeb2a340a1252b36828b5d2dc069e9c57"/>
 <keyword name="random(const T max) noexcept" id="mrw::util::Random::random_a07f6800fb4eb9228c223dcc4ee4d0dd4" ref="d5/d62/classmrw_1_1util_1_1Random.html#a07f6800fb4eb9228c223dcc4ee4d0dd4"/>
 <keyword name="read(const QString &amp;filename) noexcept" id="mrw::util::Properties::read_a0114da8844b82cbce0860dd1ddf67ff7" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#a0114da8844b82cbce0860dd1ddf67ff7"/>
+<keyword name="receive() noexcept" id="mrw::can::MrwBusService::receive_a3e3897a65e13d57bee40fa41829bb050" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a3e3897a65e13d57bee40fa41829bb050"/>
 <keyword name="RED" id="mrw::ui::BaseWidget::RED_a74aff62e3db3f755a0a1fb973404a961" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a74aff62e3db3f755a0a1fb973404a961"/>
 <keyword name="red(const QString &amp;input) noexcept" id="mrw::util::String::red_a35b509dcf26d9f00cff8c6dd18a6a5cf" ref="d0/d55/classmrw_1_1util_1_1String.html#a35b509dcf26d9f00cff8c6dd18a6a5cf"/>
 <keyword name="RED_LIGHT" id="mrw::ui::BaseWidget::RED_LIGHT_a00e9c9b3f1414b166664bb450f49b05c" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a00e9c9b3f1414b166664bb450f49b05c"/>
@@ -5477,6 +5482,7 @@
 <keyword name="state() const" id="mrw::model::DoubleCrossSwitch::state_a2eb5417b0f738a3b58a0d4fdda2b6af0" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a2eb5417b0f738a3b58a0d4fdda2b6af0"/>
 <keyword name="state() const noexcept" id="mrw::model::RegularSwitch::state_a2140d1f8561072f651baea7e278497b8" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a2140d1f8561072f651baea7e278497b8"/>
 <keyword name="state() const noexcept" id="mrw::model::Section::state_a0bd6f172b7d2cab26f2de6d5a2ed017c" ref="de/de1/classmrw_1_1model_1_1Section.html#a0bd6f172b7d2cab26f2de6d5a2ed017c"/>
+<keyword name="stateChanged(QCanBusDevice::CanBusDeviceState state) noexcept" id="mrw::can::MrwBusService::stateChanged_a7461096e1f4038279302ee46d4aeb6d5" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a7461096e1f4038279302ee46d4aeb6d5"/>
 <keyword name="StationWidget(QWidget *parent=nullptr)" id="mrw::ui::StationWidget::StationWidget_aa721680eda8feca45a1a3bbe7d83b86a" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#aa721680eda8feca45a1a3bbe7d83b86a"/>
 <keyword name="statistics() const" id="mrw::model::ModelRailway::statistics_aca7ca49e4af55c3a0f68a236e440f11d" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#aca7ca49e4af55c3a0f68a236e440f11d"/>
 <keyword name="status(BaseController::Status &amp;status) const" id="mrw::ctrl::BaseController::status_a856c0a9289054c71f6d0212bc3007efe" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a856c0a9289054c71f6d0212bc3007efe"/>
@@ -5609,7 +5615,7 @@
 <keyword name="CAN_BROADCAST_ID" id="mrw::can::CAN_BROADCAST_ID_af60507dceb3716970cdf6fa5df53ca27" ref="d9/d9b/namespacemrw_1_1can.html#af60507dceb3716970cdf6fa5df53ca27"/>
 <keyword name="CAN_EID_UNITNO_MASK" id="mrw::can::CAN_EID_UNITNO_MASK_a4bf4fa5a47b007939c26cc751241ffa0" ref="d9/d9b/namespacemrw_1_1can.html#a4bf4fa5a47b007939c26cc751241ffa0"/>
 <keyword name="CAN_GATEWAY_ID" id="mrw::can::CAN_GATEWAY_ID_acdbc536a60e49126061acb3a25c30737" ref="d9/d9b/namespacemrw_1_1can.html#acdbc536a60e49126061acb3a25c30737"/>
-<keyword name="CAN_SID_MASK" id="mrw::can::CAN_SID_MASK_ae9ac1a064f4ec36e4a148c3661c08272" ref="d9/d9b/namespacemrw_1_1can.html#ae9ac1a064f4ec36e4a148c3661c08272"/>
+<keyword name="CAN_SID_MASK" id="mrw::can::CAN_SID_MASK_a5bc2dc75cc9bbe49df30ba7ecde4ff7b" ref="d9/d9b/namespacemrw_1_1can.html#a5bc2dc75cc9bbe49df30ba7ecde4ff7b"/>
 <keyword name="CAN_SID_SHIFT" id="mrw::can::CAN_SID_SHIFT_a09d78d50b144919ce41199f02a0cc9d4" ref="d9/d9b/namespacemrw_1_1can.html#a09d78d50b144919ce41199f02a0cc9d4"/>
 <keyword name="CAT_CONFIG" id="mrw::can::CAT_CONFIG_aac851f8e69988e7e7f023fd4888c9319a559bb957de195743eb4dc6a514746191" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a559bb957de195743eb4dc6a514746191"/>
 <keyword name="CAT_EXT" id="mrw::can::CAT_EXT_aac851f8e69988e7e7f023fd4888c9319afaa634b656e8d08c93f2a55a4dd35998" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319afaa634b656e8d08c93f2a55a4dd35998"/>
@@ -5701,6 +5707,7 @@
 <keyword name="GETRBS" id="mrw::can::GETRBS_ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f"/>
 <keyword name="GETVER" id="mrw::can::GETVER_ae9a2e6e9bc528c9c7f38b7d26457d4fbae8589d134690ded7397b0320d14e977f" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbae8589d134690ded7397b0320d14e977f"/>
 <keyword name="integer" id="sc::integer_ab81e58bda4a1d0525955223d98ccb3df" ref="db/d03/namespacesc.html#ab81e58bda4a1d0525955223d98ccb3df"/>
+<keyword name="log" id="mrw::model::log_a54293b6364cff162663caeb26d86b587" ref="d9/dbc/namespacemrw_1_1model.html#a54293b6364cff162663caeb26d86b587"/>
 <keyword name="ModuleId" id="mrw::model::ModuleId_a9dfe38af1c8e25aebb1eaf5ff98944d5" ref="d9/dbc/namespacemrw_1_1model.html#a9dfe38af1c8e25aebb1eaf5ff98944d5"/>
 <keyword name="MSG_BOOTED" id="mrw::can::MSG_BOOTED_a5fd10e57deed19ffd98acb57774082f0a558a4e7afb7a90a9847909f0a81f6efb" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a558a4e7afb7a90a9847909f0a81f6efb"/>
 <keyword name="MSG_CHECKSUM_ERROR" id="mrw::can::MSG_CHECKSUM_ERROR_a5fd10e57deed19ffd98acb57774082f0a7b023d9bb8f523ee4bf3ff22ff7bea1a" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a7b023d9bb8f523ee4bf3ff22ff7bea1a"/>
@@ -5728,7 +5735,6 @@
 <keyword name="OCCUPIED" id="mrw::model::OCCUPIED_a5c0de0ceba8c321d726fb3cc699b4edea95bb06a35b7ae1afcf75777bb28ea62c" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea95bb06a35b7ae1afcf75777bb28ea62c"/>
 <keyword name="PASSED" id="mrw::model::PASSED_a5c0de0ceba8c321d726fb3cc699b4edea269f3d1562cbd15624e7d2c4b10122e3" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea269f3d1562cbd15624e7d2c4b10122e3"/>
 <keyword name="PING" id="mrw::can::PING_ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5"/>
-<keyword name="Q_DECLARE_LOGGING_CATEGORY(log)" id="mrw::model::Q_DECLARE_LOGGING_CATEGORY_ac548114cf581332986747fa11a3ad3b8" ref="d9/dbc/namespacemrw_1_1model.html#ac548114cf581332986747fa11a3ad3b8"/>
 <keyword name="QRYBUF" id="mrw::can::QRYBUF_ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e"/>
 <keyword name="QRYERR" id="mrw::can::QRYERR_ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd"/>
 <keyword name="real" id="sc::real_addc5a438cd4d2e5bf27c64edbabad7ce" ref="db/d03/namespacesc.html#addc5a438cd4d2e5bf27c64edbabad7ce"/>

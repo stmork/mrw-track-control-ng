@@ -91,9 +91,9 @@ $(function(){ initResizable(false); });
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="../../d3/de9/classmrw_1_1util_1_1GlobalBatch-members.html">List of all members</a>  </div>
@@ -120,11 +120,6 @@ Inheritance diagram for mrw::util::GlobalBatch:</div>
 </map>
 <center><span class="legend">[<a href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="signals" name="signals"></a>
-Signals</h2></td></tr>
-<tr class="memitem:ad5782ea3eb0ec5b81054d0fe2bbd0832" id="r_ad5782ea3eb0ec5b81054d0fe2bbd0832"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5782ea3eb0ec5b81054d0fe2bbd0832">completed</a> () override</td></tr>
-<tr class="separator:ad5782ea3eb0ec5b81054d0fe2bbd0832"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a60ac05642f1f86ced915f28b98f7fc93" id="r_a60ac05642f1f86ced915f28b98f7fc93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html#a60ac05642f1f86ced915f28b98f7fc93">reset</a> ()</td></tr>
@@ -155,6 +150,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a9390b21f440faca7e75d1b8363e1dc7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static method returns the singleton class instance.  <br /></td></tr>
 <tr class="separator:a9390b21f440faca7e75d1b8363e1dc7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ad5782ea3eb0ec5b81054d0fe2bbd0832" id="r_ad5782ea3eb0ec5b81054d0fe2bbd0832"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5782ea3eb0ec5b81054d0fe2bbd0832">completed</a> () override</td></tr>
+<tr class="memdesc:ad5782ea3eb0ec5b81054d0fe2bbd0832"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the signal which is emitted on job completion.  <br /></td></tr>
+<tr class="separator:ad5782ea3eb0ec5b81054d0fe2bbd0832"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a2dd1abb1b487ad2531c3c98f24544e67" id="r_a2dd1abb1b487ad2531c3c98f24544e67"><td class="memItemLeft" align="right" valign="top">std::unordered_set&lt; <a class="el" href="../../d9/d4f/classmrw_1_1util_1_1BatchParticipant.html">BatchParticipant</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html#a2dd1abb1b487ad2531c3c98f24544e67">transaction</a></td></tr>
@@ -174,7 +175,7 @@ Friends</h2></td></tr>
 <p>This may be used for initialization purposes or clean shutdown of systems. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad5782ea3eb0ec5b81054d0fe2bbd0832" name="ad5782ea3eb0ec5b81054d0fe2bbd0832"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5782ea3eb0ec5b81054d0fe2bbd0832">&#9670;&#160;</a></span>completed</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5782ea3eb0ec5b81054d0fe2bbd0832">&#9670;&#160;</a></span>completed()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,10 +192,15 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel signal">signal</span></span>  </td>
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel protected">protected</span><span class="mlabel virtual">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>This is the signal which is emitted on job completion. </p>
+<dl class="section note"><dt>Note</dt><dd>This is not marked as a signal since a derived class may also be a QObject class which preventes double heritage of QObject. </dd></dl>
+
+<p>Implements <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html#af06d7235eaafe9e86b171d3f37e64908">mrw::util::Batch</a>.</p>
 
 </div>
 </div>
@@ -257,7 +263,7 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The given <a class="el" href="../../d9/d4f/classmrw_1_1util_1_1BatchParticipant.html" title="This class acts as a job registrand to a Batch processing registry.">BatchParticipant</a> has completed his job and is removed from the transaction set. </p>
-<p>If the transaction set is empty the complete <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a> is completed and the <a class="el" href="#ad5782ea3eb0ec5b81054d0fe2bbd0832">completed()</a> signal is emitted.</p>
+<p>If the transaction set is empty the complete <a class="el" href="../../d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion.">Batch</a> is completed and the <a class="el" href="#ad5782ea3eb0ec5b81054d0fe2bbd0832" title="This is the signal which is emitted on job completion.">completed()</a> signal is emitted.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">element</td><td>The completed <a class="el" href="../../d9/d4f/classmrw_1_1util_1_1BatchParticipant.html" title="This class acts as a job registrand to a Batch processing registry.">BatchParticipant</a>.</td></tr>
@@ -515,7 +521,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 19 2026 18:14:53 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
+Generated on Fri Feb 20 2026 09:09:03 for MRW track control (next generation) by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
 </small></address>
 </div><!-- doc-content -->
 </body>
