@@ -31,7 +31,7 @@ namespace mrw::util
 		/**
 		 * The constructor logs the entry of a method.
 		 *
-		 * @param method_name The methods name. Use the \c __FUNCTION__ macro here.
+		 * @param naming The methods name. Use the \c __FUNCTION__ macro here.
 		 */
 		explicit Duration(const char * naming);
 

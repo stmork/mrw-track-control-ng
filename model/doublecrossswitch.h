@@ -18,8 +18,8 @@ namespace mrw::model
 	 * The naming is as follows:
 	 * <pre>
 	 *     A_   _C
-	 *       \_/
-	 *      _/ \_
+	 *       \\_/
+	 *      _/ \\_
 	 *     B     D
 	 * </pre>
 	 */

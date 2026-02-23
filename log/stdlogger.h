@@ -33,7 +33,7 @@ namespace mrw::log
 		 * classes. This is useful to write all messages into different
 		 * file handles.
 		 *
-		 * @param fd The FILE pointer to log into.
+		 * @param file The FILE pointer to log into.
 		 * @param message The message to log.
 		 * @see FileLogger
 		 */

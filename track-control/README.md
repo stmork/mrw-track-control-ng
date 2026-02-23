@@ -42,9 +42,18 @@ The MRW-NG software has also an arm64 package ready to install. So you can use i
 ```
 export QT_QPA_PLATFORM=eglfs
 export QT_QPA_EGLFS_INTEGRATION=eglfs_kms
-export QT_QPA_EGLFS_ALWAYS_SET_MODE="1"
+export QT_QPA_EGLFS_KMS_CONFIG=/etc/default/eglfs-kms.json
+export QT_QPA_EGLFS_KMS_CONNECTOR=HDMI-A-2
 ```
-For convenience put these calls into your *~/.profile* file.
+For convenience put these calls into your *~/.profile* file. Additionally you have
+to create the file */etc/default/eglfs-kms.json* referenced by the environment
+variables which contains the following video port specification:
+```
+{
+    "device": "/dev/dri/card1",
+    "outputs": [{ "name": "HDMI-A-2" }]
+}
+```
 
 ## Starting MRW NG Track Control
 You can start the track control software by executing:
@@ -116,4 +125,31 @@ flowchart LR
 ```
 
 ## Running as a service
-It is planned to run the MRW Track Control as a systemd service autostarted when booting.
+If you like to automatically start as a service you have to add the following
+service file into the */usr/lib/systemd/system/* directory:
+```
+[Unit]
+Description      = My modelrailway
+After            = mrw-can.service network.target
+Requires         = mrw-can.service
+
+[Service]
+WorkingDirectory = /home/mrw
+EnvironmentFile  = /etc/default/qt-eglfs-kms
+User             = mrw
+Group            = mrw
+Type             = notify
+ExecStart        = MRW-TrackControl
+TimeoutStartSec  = 30
+StandardOutput   = null
+StandardError    = null
+SyslogIdentifier = mrw-ng
+Restart          = on-failure
+
+[Install]
+WantedBy         = graphical.target
+```
+
+The EnvironmentFile contains the environment variables mentioned earlier if
+you plan to use the service on an Raspberry Pi.
+
