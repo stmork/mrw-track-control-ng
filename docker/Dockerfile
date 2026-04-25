@@ -2,6 +2,7 @@ ARG OS=ubuntu
 FROM $OS:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV LC_ALL=C.UTF-8
 RUN apt update && apt dist-upgrade -y && apt install -y \
    apt-utils apt-transport-https joe lsb-release ca-certificates cmake \
    qmake6 libqt6serialbus6-bin qt6-serialbus-dev qt6-base-private-dev \
