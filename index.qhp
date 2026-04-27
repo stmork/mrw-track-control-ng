@@ -1528,6 +1528,7 @@
 <section title="SETROF" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2"/>
 <section title="GETRBS" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f"/>
 <section title="SETSGN" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd"/>
+<section title="CFGCRX" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0fe39d867d068a8db7e6cb19a542ca3b"/>
 <section title="CFGSWN" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaa587c43942ce005e535b0e9346ef0bb7"/>
 <section title="CFGSWO" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab0cf691463a572e065a978ef836ec510"/>
 <section title="CFGRAI" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4dc929300cab8cfe100efdf301ac43ff"/>
@@ -1609,6 +1610,7 @@
 <section title="SIGNAL_SH0" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a719d06545707b583f58455ebc29c38e1"/>
 <section title="SIGNAL_SH1" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a2d7bd6c8a055925ea28e988620378e00"/>
 <section title="SIGNAL_TST" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a81dcf23e74c0deedaca1426b19438047"/>
+<section title="SIGNAL_CRX" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a8065d200f5a26511459c637b3158d984"/>
 <section title="SIGNAL_MAIN_DISTANT_OFFSET" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a986a1c6d90ab9d6a757efc7032fa868b"/>
 </section>
 <section title="SwitchState" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5a">
@@ -5618,6 +5620,7 @@
 <keyword name="CAT_SIGNAL" id="mrw::can::CAT_SIGNAL_aac851f8e69988e7e7f023fd4888c9319a002fe1fa4a7063cc8c2fcb400f1b67ab" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a002fe1fa4a7063cc8c2fcb400f1b67ab"/>
 <keyword name="CAT_SWITCH" id="mrw::can::CAT_SWITCH_aac851f8e69988e7e7f023fd4888c9319aa176ddda94e77820e5786334516c9bfc" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319aa176ddda94e77820e5786334516c9bfc"/>
 <keyword name="CFGBGN" id="mrw::can::CFGBGN_ae9a2e6e9bc528c9c7f38b7d26457d4fba409d8baf4dce3d4f16af8637badb4af7" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba409d8baf4dce3d4f16af8637badb4af7"/>
+<keyword name="CFGCRX" id="mrw::can::CFGCRX_ae9a2e6e9bc528c9c7f38b7d26457d4fba0fe39d867d068a8db7e6cb19a542ca3b" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0fe39d867d068a8db7e6cb19a542ca3b"/>
 <keyword name="CFGEND" id="mrw::can::CFGEND_ae9a2e6e9bc528c9c7f38b7d26457d4fba96616934e88cb12c9d9a5a6d05c1fd18" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba96616934e88cb12c9d9a5a6d05c1fd18"/>
 <keyword name="CFGLGT" id="mrw::can::CFGLGT_ae9a2e6e9bc528c9c7f38b7d26457d4fba1bc181b6f4addad45d82c194ff3351c6" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba1bc181b6f4addad45d82c194ff3351c6"/>
 <keyword name="CFGMF2" id="mrw::can::CFGMF2_ae9a2e6e9bc528c9c7f38b7d26457d4fba85005546e8544c48cb9e4cd2c84714da" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba85005546e8544c48cb9e4cd2c84714da"/>
@@ -5646,6 +5649,7 @@
 <keyword name="SETROF" id="mrw::can::SETROF_ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2"/>
 <keyword name="GETRBS" id="mrw::can::GETRBS_ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f"/>
 <keyword name="SETSGN" id="mrw::can::SETSGN_ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd"/>
+<keyword name="CFGCRX" id="mrw::can::CFGCRX_ae9a2e6e9bc528c9c7f38b7d26457d4fba0fe39d867d068a8db7e6cb19a542ca3b" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0fe39d867d068a8db7e6cb19a542ca3b"/>
 <keyword name="CFGSWN" id="mrw::can::CFGSWN_ae9a2e6e9bc528c9c7f38b7d26457d4fbaa587c43942ce005e535b0e9346ef0bb7" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaa587c43942ce005e535b0e9346ef0bb7"/>
 <keyword name="CFGSWO" id="mrw::can::CFGSWO_ae9a2e6e9bc528c9c7f38b7d26457d4fbab0cf691463a572e065a978ef836ec510" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab0cf691463a572e065a978ef836ec510"/>
 <keyword name="CFGRAI" id="mrw::can::CFGRAI_ae9a2e6e9bc528c9c7f38b7d26457d4fba4dc929300cab8cfe100efdf301ac43ff" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4dc929300cab8cfe100efdf301ac43ff"/>
@@ -5775,6 +5779,7 @@
 <keyword name="SETRON" id="mrw::can::SETRON_ae9a2e6e9bc528c9c7f38b7d26457d4fba4f0d9b54aec9270440070bee2b8b9434" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4f0d9b54aec9270440070bee2b8b9434"/>
 <keyword name="SETSGN" id="mrw::can::SETSGN_ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd"/>
 <keyword name="SHUNTING" id="mrw::model::SHUNTING_a5c0de0ceba8c321d726fb3cc699b4edead7752bf4616dc787a0dc5ebfd4496b83" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edead7752bf4616dc787a0dc5ebfd4496b83"/>
+<keyword name="SIGNAL_CRX" id="mrw::can::SIGNAL_CRX_a0d1e86af238eb817727748135b4a70d0a8065d200f5a26511459c637b3158d984" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a8065d200f5a26511459c637b3158d984"/>
 <keyword name="SIGNAL_HP0" id="mrw::can::SIGNAL_HP0_a0d1e86af238eb817727748135b4a70d0a841ea08c7d66bef6d9497ca81c803970" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a841ea08c7d66bef6d9497ca81c803970"/>
 <keyword name="SIGNAL_HP1" id="mrw::can::SIGNAL_HP1_a0d1e86af238eb817727748135b4a70d0a9d751b15c140ef565825d51ea2b69e1e" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a9d751b15c140ef565825d51ea2b69e1e"/>
 <keyword name="SIGNAL_HP2" id="mrw::can::SIGNAL_HP2_a0d1e86af238eb817727748135b4a70d0a3dbf257139d68a6661a4f87860ff6ae4" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a3dbf257139d68a6661a4f87860ff6ae4"/>
@@ -5797,6 +5802,7 @@
 <keyword name="SIGNAL_SH0" id="mrw::can::SIGNAL_SH0_a0d1e86af238eb817727748135b4a70d0a719d06545707b583f58455ebc29c38e1" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a719d06545707b583f58455ebc29c38e1"/>
 <keyword name="SIGNAL_SH1" id="mrw::can::SIGNAL_SH1_a0d1e86af238eb817727748135b4a70d0a2d7bd6c8a055925ea28e988620378e00" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a2d7bd6c8a055925ea28e988620378e00"/>
 <keyword name="SIGNAL_TST" id="mrw::can::SIGNAL_TST_a0d1e86af238eb817727748135b4a70d0a81dcf23e74c0deedaca1426b19438047" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a81dcf23e74c0deedaca1426b19438047"/>
+<keyword name="SIGNAL_CRX" id="mrw::can::SIGNAL_CRX_a0d1e86af238eb817727748135b4a70d0a8065d200f5a26511459c637b3158d984" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a8065d200f5a26511459c637b3158d984"/>
 <keyword name="SIGNAL_MAIN_DISTANT_OFFSET" id="mrw::can::SIGNAL_MAIN_DISTANT_OFFSET_a0d1e86af238eb817727748135b4a70d0a986a1c6d90ab9d6a757efc7032fa868b" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a986a1c6d90ab9d6a757efc7032fa868b"/>
 <keyword name="SWITCH_STATE_LEFT" id="mrw::can::SWITCH_STATE_LEFT_a6adb46251a933e34bb0c92abfbf60c5aabd971af2ede13a28b76b640b4e85907d" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aabd971af2ede13a28b76b640b4e85907d"/>
 <keyword name="SWITCH_STATE_RIGHT" id="mrw::can::SWITCH_STATE_RIGHT_a6adb46251a933e34bb0c92abfbf60c5aae8bf215c336133fe02e0b0bda61004a2" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aae8bf215c336133fe02e0b0bda61004a2"/>
