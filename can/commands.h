@@ -46,6 +46,7 @@ namespace mrw::can
 
 		SETSGN  = CAT_SIGNAL | 0x01, ///< Set signal to SignalAspect.
 
+		CFGCRX  = CAT_CONFIG,        ///< Configure railroad crossing.
 		CFGSWN  = CAT_CONFIG | 0x01, ///< Configure switch with automatic cutoff.
 		CFGSWO  = CAT_CONFIG | 0x02, ///< Configure switch without automatic cutoff.
 		CFGRAI  = CAT_CONFIG | 0x03, ///< Configure section
@@ -237,6 +238,9 @@ namespace mrw::can
 
 		/** All lights up for testing purposes. */
 		SIGNAL_TST,
+
+		/** Activate railroad crossing lights. */
+		SIGNAL_CRX,
 
 		SIGNAL_MAIN_DISTANT_OFFSET = SIGNAL_VR0 - SIGNAL_HP0
 	};
