@@ -138,6 +138,7 @@ namespace mrw::model
 		friend class LightSignal;
 		friend class ProfileLight;
 		friend class Signal;
+		friend class Crossing;
 
 		std::unordered_map<mrw::can::ControllerId, Controller *>     controller_map;
 		std::unordered_map<mrw::can::DeviceKey, Device *, DeviceId>  device_map;

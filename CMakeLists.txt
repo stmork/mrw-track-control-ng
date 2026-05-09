@@ -77,7 +77,7 @@ add_custom_target(cppcheck
 	--enable=style,warning,performance,portability
 	--language=c++ --std=c++14
 	--library=qt
-	--xml-version=2 --force -q -j `nproc`
+	--xml-version=2 --force -q -j 2
 	*/*.cpp */*.h
 	tools/*/*.cpp tools/*/*.h
 	*/ctrl/*.cpp */ctrl/*.h

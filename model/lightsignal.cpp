@@ -19,10 +19,11 @@ using namespace mrw::model;
  * \d+ matches a number with at least one digit
  * (\d+) marks a matching group
  *
- * Since we use C++11 raw string literals we do not need to escape the '\' char to "\\".
+ * Since we use C++11 raw string literals we do not need to escape the '\' char
+ * to "\\".
  *
- * There is a nice regular expression test site where you can build a regular expression and test it agai
- * multiple test patterns: https://regex101.com/
+ * There is a nice regular expression test site where you can build a regular
+ * expression and test it against multiple test patterns: https://regex101.com/
  *
  * The following test patterns may be used:
  * @verbatim
