@@ -23,5 +23,6 @@ var searchData=
   ['constantenumerator_3c_20state_20_3e_20',['ConstantEnumerator&lt; State &gt;',['../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html',1,'mrw::util']]],
   ['constantenumerator_3c_20symbol_20_3e_21',['ConstantEnumerator&lt; Symbol &gt;',['../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html',1,'mrw::util']]],
   ['controller_22',['Controller',['../d1/d0d/classmrw_1_1model_1_1Controller.html',1,'mrw::model']]],
-  ['controllerwidget_23',['ControllerWidget',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html',1,'mrw::ui']]]
+  ['controllerwidget_23',['ControllerWidget',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html',1,'mrw::ui']]],
+  ['crossing_24',['Crossing',['../d6/d5c/classmrw_1_1model_1_1Crossing.html',1,'mrw::model']]]
 ];

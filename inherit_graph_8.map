@@ -1,45 +1,45 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="Node000000" href="$d8/dde/classmrw_1_1util_1_1Batch.html" title="This class collects participants doing a job with later completion." alt="" coords="53,5,162,31"/>
 <area shape="rect" id="Node000001" href="$d6/d8d/classmrw_1_1util_1_1GlobalBatch.html" title="This singleton class provides a global Batch for fallback purposes." alt="" coords="281,33,428,59"/>
-<area shape="poly" id="edge42_Node000000_Node000001" title=" " alt="" coords="178,23,281,35,280,41,177,29"/>
+<area shape="poly" id="edge44_Node000000_Node000001" title=" " alt="" coords="178,23,281,35,280,41,177,29"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="73,173,142,199"/>
-<area shape="poly" id="edge53_Node000002_Node000001" title=" " alt="" coords="136,162,256,68,284,57,286,62,259,72,139,166"/>
+<area shape="poly" id="edge55_Node000002_Node000001" title=" " alt="" coords="136,162,256,68,284,57,286,62,259,72,139,166"/>
 <area shape="rect" id="Node000003" href="$d9/d7e/classmrw_1_1can_1_1MrwBusService.html" title="This class connects to the CAN bus for input and output processing." alt="" coords="269,132,440,158"/>
-<area shape="poly" id="edge43_Node000002_Node000003" title=" " alt="" coords="157,175,273,156,274,161,158,181"/>
+<area shape="poly" id="edge45_Node000002_Node000003" title=" " alt="" coords="157,175,273,156,274,161,158,181"/>
 <area shape="rect" id="Node000004" href="$d8/db5/classmrw_1_1ctrl_1_1BaseController.html" title="This controller base class unifies the interface for all widget controller classes." alt="" coords="274,181,435,207"/>
-<area shape="poly" id="edge44_Node000002_Node000004" title=" " alt="" coords="158,185,273,189,273,194,158,190"/>
+<area shape="poly" id="edge46_Node000002_Node000004" title=" " alt="" coords="158,185,273,189,273,194,158,190"/>
 <area shape="rect" id="Node000010" href="$d7/dfb/classmrw_1_1model_1_1Route.html" title="This class represents a track of interconnected RailPart elements for driving a train." alt="" coords="291,231,418,256"/>
-<area shape="poly" id="edge50_Node000002_Node000010" title=" " alt="" coords="158,195,296,227,295,233,157,200"/>
+<area shape="poly" id="edge52_Node000002_Node000010" title=" " alt="" coords="158,195,296,227,295,233,157,200"/>
 <area shape="rect" id="Node000011" href="$dd/dbf/classmrw_1_1statechart_1_1TimerService.html" title="This class simply implements an example statemachine for testing the C++ timer service." alt="" coords="258,280,451,306"/>
-<area shape="poly" id="edge51_Node000002_Node000011" title=" " alt="" coords="158,189,185,197,211,209,227,224,236,239,244,253,259,267,281,277,279,282,256,271,240,257,231,242,223,227,208,214,183,202,157,195"/>
+<area shape="poly" id="edge53_Node000002_Node000011" title=" " alt="" coords="158,189,185,197,211,209,227,224,236,239,244,253,259,267,281,277,279,282,256,271,240,257,231,242,223,227,208,214,183,202,157,195"/>
 <area shape="rect" id="Node000014" href="$db/d8f/classmrw_1_1util_1_1ClockService.html" title="This singleton class provides a regular clock service at the clocks of 1 Hz, 2 Hz,..." alt="" coords="278,333,430,359"/>
-<area shape="poly" id="edge52_Node000002_Node000014" title=" " alt="" coords="158,187,186,195,211,209,224,223,231,237,237,264,242,291,248,304,259,316,283,331,280,335,256,320,244,307,237,293,231,265,226,238,219,226,208,214,184,200,157,192"/>
+<area shape="poly" id="edge54_Node000002_Node000014" title=" " alt="" coords="158,187,186,195,211,209,224,223,231,237,237,264,242,291,248,304,259,316,283,331,280,335,256,320,244,307,237,293,231,265,226,238,219,226,208,214,184,200,157,192"/>
 <area shape="rect" id="Node000016" href="$de/def/classmrw_1_1util_1_1SignalHandler.html" title="This class installs a posix signal callback handler." alt="" coords="276,83,432,108"/>
-<area shape="poly" id="edge54_Node000002_Node000016" title=" " alt="" coords="148,164,199,140,257,117,292,106,294,111,259,122,201,145,150,168"/>
+<area shape="poly" id="edge56_Node000002_Node000016" title=" " alt="" coords="148,164,199,140,257,117,292,106,294,111,259,122,201,145,150,168"/>
 <area shape="rect" id="Node000005" href="$df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html" title="This class provides virtual pure methods which are common to the RegularSwitchController and the Doub..." alt="" coords="499,231,700,256"/>
-<area shape="poly" id="edge45_Node000004_Node000005" title=" " alt="" coords="437,208,533,227,532,233,436,213"/>
+<area shape="poly" id="edge47_Node000004_Node000005" title=" " alt="" coords="437,208,533,227,532,233,436,213"/>
 <area shape="rect" id="Node000008" href="$d3/d59/classmrw_1_1ctrl_1_1RailController.html" title="This class provides the logic for a simple rail." alt="" coords="523,132,676,158"/>
-<area shape="poly" id="edge48_Node000004_Node000008" title=" " alt="" coords="436,175,532,156,533,161,437,180"/>
+<area shape="poly" id="edge50_Node000004_Node000008" title=" " alt="" coords="436,175,532,156,533,161,437,180"/>
 <area shape="rect" id="Node000009" href="$dd/dfc/classmrw_1_1ctrl_1_1SignalController.html" title="This class provides the logic for a group of signals inside a Section orientated in the same counting..." alt="" coords="516,181,683,207"/>
-<area shape="poly" id="edge49_Node000004_Node000009" title=" " alt="" coords="451,192,516,192,516,197,451,197"/>
+<area shape="poly" id="edge51_Node000004_Node000009" title=" " alt="" coords="451,192,516,192,516,197,451,197"/>
 <area shape="rect" id="Node000006" href="$d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html" title="This class provides the logic for a double cross switch." alt="" coords="748,170,939,210"/>
-<area shape="poly" id="edge46_Node000005_Node000006" title=" " alt="" coords="676,224,747,208,749,214,677,229"/>
+<area shape="poly" id="edge48_Node000005_Node000006" title=" " alt="" coords="676,224,747,208,749,214,677,229"/>
 <area shape="rect" id="Node000007" href="$de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html" title="This class provides the logic for a simple regular switch." alt="" coords="763,235,924,276"/>
-<area shape="poly" id="edge47_Node000005_Node000007" title=" " alt="" coords="716,247,763,249,763,254,716,252"/>
+<area shape="poly" id="edge49_Node000005_Node000007" title=" " alt="" coords="716,247,763,249,763,254,716,252"/>
 <area shape="rect" id="Node000017" href="$df/d24/classmrw_1_1util_1_1SigPipeHandler.html" title="This class implements a signal handler which is thread safe against any event loop using a POSIX pipe..." alt="" coords="517,83,682,108"/>
-<area shape="poly" id="edge55_Node000016_Node000017" title=" " alt="" coords="448,93,517,93,517,98,448,98"/>
+<area shape="poly" id="edge57_Node000016_Node000017" title=" " alt="" coords="448,93,517,93,517,98,448,98"/>
 <area shape="rect" id="Node000018" href="$dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html" title="This class implements a signal handler which calls a given callback without the need to connect this ..." alt="" coords="749,52,938,78"/>
-<area shape="poly" id="edge56_Node000017_Node000018" title=" " alt="" coords="698,81,748,74,749,79,698,86"/>
+<area shape="poly" id="edge58_Node000017_Node000018" title=" " alt="" coords="698,81,748,74,749,79,698,86"/>
 <area shape="rect" id="Node000020" href="$df/d75/classmrw_1_1util_1_1TermHandler.html" title="This class registeres a handler for terminating the application." alt="" coords="768,101,919,127"/>
-<area shape="poly" id="edge58_Node000017_Node000020" title=" " alt="" coords="698,100,768,106,767,111,698,106"/>
+<area shape="poly" id="edge60_Node000017_Node000020" title=" " alt="" coords="698,100,768,106,767,111,698,106"/>
 <area shape="rect" id="Node000019" href="$d7/dc8/classmrw_1_1util_1_1DumpHandler.html" title="This class registeres a callback which can be used to dump information during runtime execution." alt="" coords="987,52,1141,78"/>
-<area shape="poly" id="edge57_Node000018_Node000019" title=" " alt="" coords="953,62,986,62,986,68,953,68"/>
+<area shape="poly" id="edge59_Node000018_Node000019" title=" " alt="" coords="953,62,986,62,986,68,953,68"/>
 <area shape="rect" id="Node000015" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="43,338,172,378"/>
-<area shape="poly" id="edge59_Node000015_Node000014" title=" " alt="" coords="187,352,278,347,278,353,188,357"/>
+<area shape="poly" id="edge61_Node000015_Node000014" title=" " alt="" coords="187,352,278,347,278,353,188,357"/>
 <area shape="rect" id="Node000021" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="43,55,172,96"/>
-<area shape="poly" id="edge60_Node000021_Node000001" title=" " alt="" coords="187,63,280,52,281,57,187,69"/>
+<area shape="poly" id="edge62_Node000021_Node000001" title=" " alt="" coords="187,63,280,52,281,57,187,69"/>
 <area shape="rect" id="Node000012" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="43,223,172,264"/>
-<area shape="poly" id="edge61_Node000012_Node000011" title=" " alt="" coords="188,257,287,277,286,282,187,262"/>
+<area shape="poly" id="edge63_Node000012_Node000011" title=" " alt="" coords="188,257,287,277,286,282,187,262"/>
 <area shape="rect" id="Node000013" href="$df/d18/classsc_1_1timer_1_1TimerServiceInterface.html" title=" " alt="" coords="5,288,210,314"/>
-<area shape="poly" id="edge62_Node000013_Node000011" title=" " alt="" coords="225,294,257,293,257,299,225,300"/>
+<area shape="poly" id="edge64_Node000013_Node000011" title=" " alt="" coords="225,294,257,293,257,299,225,300"/>
 </map>

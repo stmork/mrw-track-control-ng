@@ -85,6 +85,7 @@ var searchData=
   ['controllerwidget_82',['ControllerWidget',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html',1,'mrw::ui::ControllerWidget'],['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a557f85ea485ae2390dfbae1fd257179d',1,'mrw::ui::ControllerWidget::ControllerWidget()']]],
   ['counter_83',['counter',['../db/d4f/classmrw_1_1model_1_1Position.html#a4d7793ec6944ee1f89dec89cc0ea8a12',1,'mrw::model::Position']]],
   ['critical_84',['critical',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html#aba5378f886d45227cb61798c38d00d3f',1,'mrw::log::LoggerBase::critical()'],['../d1/d17/classmrw_1_1log_1_1StdLogger.html#ad4244fd80304223ea8d6e0d0370cef7d',1,'mrw::log::StdLogger::critical()'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a81d324a2f378dd1ebf56878d604def4b',1,'mrw::log::SysLogger::critical()']]],
-  ['cutscope_85',['cutScope',['../d9/d2b/namespacemrw_1_1util.html#aecdce54a6519bb96fd87579c6ce38f8f',1,'mrw::util']]],
-  ['cyan_5fon_86',['CYAN_ON',['../d0/d55/classmrw_1_1util_1_1String.html#a8026cc002373c31b4dc8193a2a1eb599',1,'mrw::util::String']]]
+  ['crossing_85',['Crossing',['../d6/d5c/classmrw_1_1model_1_1Crossing.html',1,'mrw::model::Crossing'],['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#ac274231929dceb8342d34aff23b2a608',1,'mrw::model::ModelRailway::Crossing()'],['../d6/d5c/classmrw_1_1model_1_1Crossing.html#a98e5ed4789eb27a13a6b6860eb54fa92',1,'mrw::model::Crossing::Crossing()']]],
+  ['cutscope_86',['cutScope',['../d9/d2b/namespacemrw_1_1util.html#aecdce54a6519bb96fd87579c6ce38f8f',1,'mrw::util']]],
+  ['cyan_5fon_87',['CYAN_ON',['../d0/d55/classmrw_1_1util_1_1String.html#a8026cc002373c31b4dc8193a2a1eb599',1,'mrw::util::String']]]
 ];

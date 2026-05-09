@@ -25,5 +25,6 @@ var searchData=
   ['controllercount_22',['controllerCount',['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#a87a775318874814bebfbce6528535915',1,'mrw::model::ModelRailway']]],
   ['controllerwidget_23',['ControllerWidget',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a557f85ea485ae2390dfbae1fd257179d',1,'mrw::ui::ControllerWidget']]],
   ['critical_24',['critical',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html#aba5378f886d45227cb61798c38d00d3f',1,'mrw::log::LoggerBase::critical()'],['../d1/d17/classmrw_1_1log_1_1StdLogger.html#ad4244fd80304223ea8d6e0d0370cef7d',1,'mrw::log::StdLogger::critical()'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a81d324a2f378dd1ebf56878d604def4b',1,'mrw::log::SysLogger::critical()']]],
-  ['cutscope_25',['cutScope',['../d9/d2b/namespacemrw_1_1util.html#aecdce54a6519bb96fd87579c6ce38f8f',1,'mrw::util']]]
+  ['crossing_25',['Crossing',['../d6/d5c/classmrw_1_1model_1_1Crossing.html#a98e5ed4789eb27a13a6b6860eb54fa92',1,'mrw::model::Crossing']]],
+  ['cutscope_26',['cutScope',['../d9/d2b/namespacemrw_1_1util.html#aecdce54a6519bb96fd87579c6ce38f8f',1,'mrw::util']]]
 ];
