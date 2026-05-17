@@ -49,6 +49,8 @@ RailStudy::RailStudy(QWidget * parent) :
 	connect(
 		ui->lineBox, qOverload<int>(&QSpinBox::valueChanged),
 		this, &RailStudy::updateLines);
+	connect(ui->crossingButton, &QCheckBox::clicked,
+		&mock, &RailControllerMock::setCrossing);
 
 	/********************************************************/
 	/*   End rail state                                     */

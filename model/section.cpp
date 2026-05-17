@@ -247,6 +247,12 @@ Region * Section::region() const noexcept
 	return section_region;
 }
 
+Crossing * Section::crossing() const noexcept
+{
+	// TODO: Implement
+	return nullptr;
+}
+
 void Section::add(AssemblyPart * part) noexcept
 {
 	assembly_parts.push_back(part);

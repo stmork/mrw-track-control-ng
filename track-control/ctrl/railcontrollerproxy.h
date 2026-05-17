@@ -46,6 +46,7 @@ namespace mrw::ctrl
 		// Implementations from RailController
 		virtual bool    aEnds() const override;
 		virtual bool    bEnds() const override;
+		virtual bool    hasCrossing() const override;
 
 		// Implementation from RailPartInfo
 		virtual mrw::model::RailPart * railPart() const override;

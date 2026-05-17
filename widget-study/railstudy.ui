@@ -50,6 +50,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QCheckBox" name="crossingButton">
+          <property name="text">
+           <string>Bahnübergang</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </item>

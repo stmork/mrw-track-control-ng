@@ -43,6 +43,11 @@ namespace mrw::ctrl
 			 * @see RailController::bEnds()
 			 */
 			bool b_ends = false;
+
+			/**
+			 * True if Rail contains a road crossing.
+			 */
+			bool has_crossing = false;
 		};
 
 		explicit RailController(QObject * parent = nullptr);
@@ -80,6 +85,13 @@ namespace mrw::ctrl
 		 * @return True if the Rail ends here at the <em>b</em> connection.
 		 */
 		virtual bool  bEnds() const = 0;
+
+		/**
+		 * This returns the existance of a road crossing on this rail.
+		 *
+		 * @return True if the rail contains a road crossing.
+		 */
+		virtual bool hasCrossing() const = 0;
 	};
 }
 

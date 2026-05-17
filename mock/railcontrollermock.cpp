@@ -93,6 +93,11 @@ bool RailControllerMock::bEnds() const
 	return b_ends;
 }
 
+bool RailControllerMock::hasCrossing() const
+{
+	return crossing;
+}
+
 float RailControllerMock::extensions() const
 {
 	return ext_count;
@@ -121,5 +126,11 @@ void RailControllerMock::setLines(const int input)
 	line_count = input;
 	emit extend();
 	emit computeConnectors();
+	emit update();
+}
+
+void RailControllerMock::setCrossing(const bool new_crossing)
+{
+	crossing = new_crossing;
 	emit update();
 }

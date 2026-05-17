@@ -15,9 +15,9 @@ namespace mrw::model
 {
 	class MultiplexConnection;
 
-	class Crossing : public AssemblyPart, public Device
+	class Crossing : public Device
 	{
-		Controller       *      signal_controller = nullptr;
+		Controller       *      crx_controller = nullptr;
 		std::vector<Section *>  sections;
 
 	public:
@@ -25,6 +25,8 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			Section       *       model_section,
 			const QDomElement  &  element);
+		virtual ~Crossing() = default;
+		virtual mrw::can::MrwMessage configMsg(const unsigned pin) const override;
 	};
 }
 

@@ -84,6 +84,11 @@ bool RailControllerProxy::bEnds() const
 	return rail->advance(!rail->aIsDir()).empty();
 }
 
+bool RailControllerProxy::hasCrossing() const
+{
+	return section()->crossing() != nullptr;
+}
+
 RailPart * RailControllerProxy::railPart() const
 {
 	return rail;

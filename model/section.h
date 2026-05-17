@@ -29,6 +29,7 @@ namespace mrw::model
 	class Region;
 	class SectionModule;
 	class Signal;
+	class Crossing;
 
 	enum class SectionState : int
 	{
@@ -219,6 +220,8 @@ namespace mrw::model
 		 * @return The Region of this Section.
 		 */
 		Region * region() const noexcept;
+
+		Crossing * crossing() const noexcept;
 
 		/**
 		 * This template class returns all AssemblyPart elements of the given

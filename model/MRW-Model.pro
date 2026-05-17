@@ -12,6 +12,7 @@ SOURCES += \
 	abstractswitch.cpp \
 	assemblypart.cpp \
 	controller.cpp \
+	crossing.cpp \
 	device.cpp \
 	doublecrossswitch.cpp \
 	formsignal.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
 	abstractswitch.h \
 	assemblypart.h \
 	controller.h \
+	crossing.h \
 	device.h \
 	doublecrossswitch.h \
 	formsignal.h \
