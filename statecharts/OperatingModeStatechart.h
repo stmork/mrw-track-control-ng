@@ -429,7 +429,7 @@ namespace mrw
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 			static const sc::ushort maxOrthogonalStates {2};
 
-			std::shared_ptr<sc::timer::TimerServiceInterface> timerService;
+			std::shared_ptr<sc::timer::TimerServiceInterface> timerService = {};
 			bool timeEvents[timeEventsCount];
 
 

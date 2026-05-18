@@ -20,11 +20,7 @@ namespace mrw
 
 		SectionStatechart::SectionStatechart() noexcept
 		{
-			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
-			{
-				stateConfVector[state_vec_pos] = mrw::statechart::SectionStatechart::State::NO_STATE;
-			}
-
+			std::fill(std::begin(stateConfVector), std::end(stateConfVector), mrw::statechart::SectionStatechart::State::NO_STATE);
 			clearInEvents();
 			clearInternalEvents();
 			clearOutEvents();
