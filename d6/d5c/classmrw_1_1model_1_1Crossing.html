@@ -81,8 +81,9 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="../../d9/d52/classmrw_1_1model_1_1Crossing-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">mrw::model::Crossing Class Reference<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+  <div class="headertitle"><div class="title">mrw::model::Crossing Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -109,8 +110,14 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a98e5ed4789eb27a13a6b6860eb54fa92" id="r_a98e5ed4789eb27a13a6b6860eb54fa92"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a98e5ed4789eb27a13a6b6860eb54fa92">Crossing</a> (<a class="el" href="../../d3/dab/classmrw_1_1model_1_1ModelRailway.html">ModelRailway</a> *model_railway, <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html">Section</a> *model_section, const QDomElement &amp;element)</td></tr>
+<tr class="memitem:aa0b3680f59d2137f8bc3f8d93125a992" id="r_aa0b3680f59d2137f8bc3f8d93125a992"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa0b3680f59d2137f8bc3f8d93125a992">Crossing</a> (<a class="el" href="../../d3/dab/classmrw_1_1model_1_1ModelRailway.html">ModelRailway</a> *model_railway, <a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html">Controller</a> *<a class="el" href="#a88ba0e1099514cea52b970e599ecaa94">controller</a>, const QDomElement &amp;element)</td></tr>
 <tr class="memitem:a924c05c223abae2579ec66fd9bdcb827" id="r_a924c05c223abae2579ec66fd9bdcb827"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#a924c05c223abae2579ec66fd9bdcb827">~Crossing</a> ()=default</td></tr>
+<tr class="memitem:a11a085023feefec8f67d3d0960fd614c" id="r_a11a085023feefec8f67d3d0960fd614c"><td class="memItemLeft">const QString &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a11a085023feefec8f67d3d0960fd614c">name</a> () const noexcept override</td></tr>
+<tr class="memdesc:a11a085023feefec8f67d3d0960fd614c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the name modelled inside the EMF/XMI model file.  <br /></td></tr>
+<tr class="memitem:a76c38c21712f8518208058e14fbecd67" id="r_a76c38c21712f8518208058e14fbecd67"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a76c38c21712f8518208058e14fbecd67">isUnlockable</a> () const noexcept override</td></tr>
+<tr class="memdesc:a76c38c21712f8518208058e14fbecd67"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if it is possible to <em>unlock</em> this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a>.  <br /></td></tr>
+<tr class="memitem:a88ba0e1099514cea52b970e599ecaa94" id="r_a88ba0e1099514cea52b970e599ecaa94"><td class="memItemLeft"><a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html">Controller</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a88ba0e1099514cea52b970e599ecaa94">controller</a> () const noexcept override</td></tr>
+<tr class="memdesc:a88ba0e1099514cea52b970e599ecaa94"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the pointer to the managing controller.  <br /></td></tr>
 <tr class="memitem:a083fd1a5f5a357d4205fba7ac028e201" id="r_a083fd1a5f5a357d4205fba7ac028e201"><td class="memItemLeft">virtual <a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html">mrw::can::MrwMessage</a>&#160;</td><td class="memItemRight"><a class="el" href="#a083fd1a5f5a357d4205fba7ac028e201">configMsg</a> (const unsigned pin) const override</td></tr>
 <tr class="memdesc:a083fd1a5f5a357d4205fba7ac028e201"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method provides a configuration message which describes the connection from the <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> to the <a class="el" href="../../d3/de7/classmrw_1_1model_1_1Module.html" title="This base class represents all modules which are connected to the CAN Controller using the 16-pin con...">Module</a>.  <br /></td></tr>
 <tr class="memitem:a262cee73971200e5c6cd308a7621682f" id="r_a262cee73971200e5c6cd308a7621682f"><td class="memItemLeft"><a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#aadc3657d376a3c081b9b0c05feafbce7">mrw::can::UnitNo</a>&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a262cee73971200e5c6cd308a7621682f">unitNo</a> () const noexcept</td></tr>
@@ -119,12 +126,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa615a4a6a56336b6ae6b62951e03ea04"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the actual <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4" title="This enumeration represents the processing state of this Device.">LockState</a> of this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a>.  <br /></td></tr>
 <tr class="memitem:a0d1f2095bc54b7f57caebc39b3f486a2" id="r_a0d1f2095bc54b7f57caebc39b3f486a2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a0d1f2095bc54b7f57caebc39b3f486a2">setLock</a> (const <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4">LockState</a> input) noexcept</td></tr>
 <tr class="memdesc:a0d1f2095bc54b7f57caebc39b3f486a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method sets a new <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4" title="This enumeration represents the processing state of this Device.">LockState</a>.  <br /></td></tr>
-<tr class="memitem:a584e08ad3904466863ecc97af837f7f4" id="r_a584e08ad3904466863ecc97af837f7f4"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a584e08ad3904466863ecc97af837f7f4">isUnlockable</a> () const noexcept=0</td></tr>
-<tr class="memdesc:a584e08ad3904466863ecc97af837f7f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if it is possible to <em>unlock</em> this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a>.  <br /></td></tr>
-<tr class="memitem:a11c60e4241ddcc3df82af9e594df8846" id="r_a11c60e4241ddcc3df82af9e594df8846"><td class="memItemLeft">virtual <a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html">Controller</a> *&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a11c60e4241ddcc3df82af9e594df8846">controller</a> () const noexcept=0</td></tr>
-<tr class="memdesc:a11c60e4241ddcc3df82af9e594df8846"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the pointer to the managing controller.  <br /></td></tr>
-<tr class="memitem:a096acffad825581a99fbf267ae2c9870" id="r_a096acffad825581a99fbf267ae2c9870"><td class="memItemLeft">virtual const QString &amp;&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a096acffad825581a99fbf267ae2c9870">name</a> () const noexcept=0</td></tr>
-<tr class="memdesc:a096acffad825581a99fbf267ae2c9870"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the name modelled inside the EMF/XMI model file.  <br /></td></tr>
 <tr class="memitem:ac6251eef9b1c9bb8cab9ad4427f56b92" id="r_ac6251eef9b1c9bb8cab9ad4427f56b92"><td class="memItemLeft"><a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html">mrw::can::MrwMessage</a>&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#ac6251eef9b1c9bb8cab9ad4427f56b92">command</a> (const <a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fb">mrw::can::Command</a> command) const</td></tr>
 <tr class="memdesc:ac6251eef9b1c9bb8cab9ad4427f56b92"><td class="mdescLeft">&#160;</td><td class="mdescRight">This convenience method creates a command <a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html" title="This class represents a CAN bus frame in model railway manner.">mrw::can::MrwMessage</a> and adds the <a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fb" title="This enumeration lists all supported MrwMessage commands.">mrw::can::Command</a>.  <br /></td></tr>
 </table><table class="memberdecls">
@@ -134,6 +135,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae13d306d9ae0cc37ef69861f44fb58da"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the clear text QString of the <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4" title="This enumeration represents the processing state of this Device.">LockState</a> this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> is set to.  <br /></td></tr>
 <tr class="memitem:a1571a81a0f14ce06a49e24cdc85e42f8" id="r_a1571a81a0f14ce06a49e24cdc85e42f8"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a1571a81a0f14ce06a49e24cdc85e42f8">hasController</a> (const <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a0de026e1f11662155aa02ec4a7eb4835">Device</a> *device) noexcept</td></tr>
 <tr class="memdesc:a1571a81a0f14ce06a49e24cdc85e42f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static method checks whether a given <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> is connected to a <a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html" title="This class represents a CAN-Node named as Controller here.">Controller</a> instance.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a1ac759ca4b27a392d3630bc0d81ac57e" id="r_a1ac759ca4b27a392d3630bc0d81ac57e"><td class="memItemLeft">const QString&#160;</td><td class="memItemRight"><a class="el" href="#a1ac759ca4b27a392d3630bc0d81ac57e">crx_name</a></td></tr>
+<tr class="memdesc:a1ac759ca4b27a392d3630bc0d81ac57e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The light name.  <br /></td></tr>
 </table>
 <a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
 <a id="a5aeac6a51c26164ebb6964d807d5c3a4" name="a5aeac6a51c26164ebb6964d807d5c3a4"></a>
@@ -171,8 +177,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a98e5ed4789eb27a13a6b6860eb54fa92" name="a98e5ed4789eb27a13a6b6860eb54fa92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98e5ed4789eb27a13a6b6860eb54fa92">&#9670;&#160;</a></span>Crossing()</h2>
+<a id="aa0b3680f59d2137f8bc3f8d93125a992" name="aa0b3680f59d2137f8bc3f8d93125a992"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0b3680f59d2137f8bc3f8d93125a992">&#9670;&#160;</a></span>Crossing()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -188,7 +194,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html">Section</a> *</td>          <td class="paramname"><span class="paramname"><em>model_section</em></span>, </td>
+          <td class="paramtype"><a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html">Controller</a> *</td>          <td class="paramname"><span class="paramname"><em>controller</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -305,8 +311,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a11c60e4241ddcc3df82af9e594df8846" name="a11c60e4241ddcc3df82af9e594df8846"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11c60e4241ddcc3df82af9e594df8846">&#9670;&#160;</a></span>controller()</h2>
+<a id="a88ba0e1099514cea52b970e599ecaa94" name="a88ba0e1099514cea52b970e599ecaa94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88ba0e1099514cea52b970e599ecaa94">&#9670;&#160;</a></span>controller()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -315,7 +321,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html">Controller</a> * mrw::model::Device::controller </td>
+          <td class="memname"><a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html">Controller</a> * Crossing::controller </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -323,7 +329,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span><span class="mlabel inherited">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -331,7 +337,7 @@ Static Public Member Functions</h2></td></tr>
 <p>This method returns the pointer to the managing controller. </p>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
-<p>Implemented in <a class="el" href="../../d0/d3c/classmrw_1_1model_1_1Light.html#aad986218b6618c6556102cf683a0b6f9">mrw::model::Light</a>, <a class="el" href="../../d6/d71/classmrw_1_1model_1_1LightSignal.html#aaa5c8526e5535b0d462751075918b976">mrw::model::LightSignal</a>, <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html#a6e58f3e7cad8d66af091599acf310b6c">mrw::model::Section</a>, and <a class="el" href="../../d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#a2420562f00468fa8a31d13fdbf2fa195">mrw::model::SwitchModuleReference</a>.</p>
+<p>Implements <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a11c60e4241ddcc3df82af9e594df8846">mrw::model::Device</a>.</p>
 
 </div>
 </div>
@@ -404,8 +410,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a584e08ad3904466863ecc97af837f7f4" name="a584e08ad3904466863ecc97af837f7f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a584e08ad3904466863ecc97af837f7f4">&#9670;&#160;</a></span>isUnlockable()</h2>
+<a id="a76c38c21712f8518208058e14fbecd67" name="a76c38c21712f8518208058e14fbecd67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76c38c21712f8518208058e14fbecd67">&#9670;&#160;</a></span>isUnlockable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -414,7 +420,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool mrw::model::Device::isUnlockable </td>
+          <td class="memname">bool Crossing::isUnlockable </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -422,7 +428,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span><span class="mlabel inherited">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -433,7 +439,7 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>True if this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> is safely possible to unlock.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#aa615a4a6a56336b6ae6b62951e03ea04" title="This method returns the actual LockState of this Device.">lock()</a> </dd></dl>
 
-<p>Implemented in <a class="el" href="../../df/db7/classmrw_1_1model_1_1AbstractSwitch.html#a2dba2aa7c4bced05187698d648b7299e">mrw::model::AbstractSwitch</a>, <a class="el" href="../../d4/d8a/classmrw_1_1model_1_1FormSignal.html#adb98203a32a581be7da0b4208d948313">mrw::model::FormSignal</a>, <a class="el" href="../../d0/d3c/classmrw_1_1model_1_1Light.html#a24aa9c07fc5a14c52b4f93fc52be8c22">mrw::model::Light</a>, <a class="el" href="../../d6/d71/classmrw_1_1model_1_1LightSignal.html#ab9a09565c6a924b128419f60eda64c75">mrw::model::LightSignal</a>, and <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html#ac93a1767323983cd5c55e8671fc87a81">mrw::model::Section</a>.</p>
+<p>Implements <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a584e08ad3904466863ecc97af837f7f4">mrw::model::Device</a>.</p>
 
 </div>
 </div>
@@ -465,8 +471,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a096acffad825581a99fbf267ae2c9870" name="a096acffad825581a99fbf267ae2c9870"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a096acffad825581a99fbf267ae2c9870">&#9670;&#160;</a></span>name()</h2>
+<a id="a11a085023feefec8f67d3d0960fd614c" name="a11a085023feefec8f67d3d0960fd614c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11a085023feefec8f67d3d0960fd614c">&#9670;&#160;</a></span>name()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -475,7 +481,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual const QString &amp; mrw::model::Device::name </td>
+          <td class="memname">const QString &amp; Crossing::name </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -483,7 +489,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span><span class="mlabel inherited">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -491,7 +497,7 @@ Static Public Member Functions</h2></td></tr>
 <p>This method returns the name modelled inside the EMF/XMI model file. </p>
 <dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a> name modelled inside the EMF/XMI model. </dd></dl>
 
-<p>Implemented in <a class="el" href="../../df/db7/classmrw_1_1model_1_1AbstractSwitch.html#ad85b4b8cb457b8485dcb2ceafb83bcf4">mrw::model::AbstractSwitch</a>, <a class="el" href="../../d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6feca96c763b42bb37f928ab925083d4">mrw::model::FormSignal</a>, <a class="el" href="../../d0/d3c/classmrw_1_1model_1_1Light.html#a7e9f7c784e00895461bd48204d955b42">mrw::model::Light</a>, <a class="el" href="../../d6/d71/classmrw_1_1model_1_1LightSignal.html#a0831d682aabdb2ad65cd08337557b3c9">mrw::model::LightSignal</a>, and <a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html#a406de552480023ba2234540b49c668f6">mrw::model::Section</a>.</p>
+<p>Implements <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a096acffad825581a99fbf267ae2c9870">mrw::model::Device</a>.</p>
 
 </div>
 </div>
@@ -558,6 +564,31 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>Even the extended frame format ID is 18 bits wide only 16 bits are used from this unit number.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The unit number of this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a>. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html#a76f15c1eaa4e29986363b8eb4c6dfcad" title="This method returns the controller ID which is part of the CAN ID.">Controller::id()</a> </dd></dl>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a1ac759ca4b27a392d3630bc0d81ac57e" name="a1ac759ca4b27a392d3630bc0d81ac57e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ac759ca4b27a392d3630bc0d81ac57e">&#9670;&#160;</a></span>crx_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const QString mrw::model::Crossing::crx_name</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The light name. </p>
 
 </div>
 </div>
