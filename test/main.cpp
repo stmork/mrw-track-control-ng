@@ -20,6 +20,7 @@
 #include "testnumbering.h"
 #include "testunknown.h"
 #include "testrouting.h"
+#include "testcrossing.h"
 
 #include "testrailwidget.h"
 #include "testsignalwidget.h"
@@ -139,6 +140,17 @@ static int testRouting()
 	return QTest::qExec(&test, args);
 }
 
+static int testCrossing()
+{
+	TestCrossing    test;
+	QStringList     args
+	{
+		"MRW-Test", "-o", "qtest-crossing.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
 static int testRailWidget()
 {
 	TestRailWidget  test;
@@ -199,6 +211,7 @@ int main(int argc, char * argv[])
 	status += testUnknown();
 	status += testFlankSwitch();
 	status += testRouting();
+	status += testCrossing();
 
 	status += testRailWidget();
 	status += testSignalWidget();

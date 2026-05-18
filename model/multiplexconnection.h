@@ -8,6 +8,7 @@
 #ifndef MRW_MODEL_MULTIPLEXCONNECTION_H
 #define MRW_MODEL_MULTIPLEXCONNECTION_H
 
+#include <model/crossing.h>
 #include <model/light.h>
 #include <model/module.h>
 #include <util/cleanvector.h>
@@ -40,6 +41,7 @@ namespace mrw::model
 
 		std::vector<LightSignal *>     light_signals;
 		mrw::util::CleanVector<Light>  simple_lights;
+		mrw::util::CleanVector<Crossing>  crossings;
 
 	public:
 		/** The maximum light count connected to one module. */

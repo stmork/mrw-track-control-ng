@@ -40,9 +40,15 @@ MultiplexConnection::MultiplexConnection(
 
 				simple_lights.push_back(light);
 			}
+			else if (node_name == "crossing")
+			{
+				Crossing * crossing = new Crossing(model, controller, child);
+
+				crossings.push_back(crossing);
+			}
 			else
 			{
-				model->error("Unknown controller element: " + node_name);
+				model->error("Unknown multiplex element: " + node_name);
 			}
 		}
 	}

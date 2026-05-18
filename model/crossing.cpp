@@ -12,12 +12,28 @@ using namespace mrw::model;
 
 Crossing::Crossing(
 	ModelRailway     *    model_railway,
-	Section       *       model_section,
+	Controller      *     controller,
 	const QDomElement  &  element) :
-	Device(model_railway, element)
+	Device(model_railway, element),
+	crx_controller(controller),
+	crx_name(ModelRailway::string(element, "name"))
 {
-	sections.emplace_back(model_section);
 	model_railway->add(this);
+}
+
+const QString & Crossing::name() const noexcept
+{
+	return crx_name;
+}
+
+bool Crossing::isUnlockable() const noexcept
+{
+	return true;
+}
+
+Controller * Crossing::controller() const noexcept
+{
+	return crx_controller;
 }
 
 MrwMessage Crossing::configMsg(const unsigned int pin) const

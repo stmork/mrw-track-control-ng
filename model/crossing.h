@@ -20,12 +20,20 @@ namespace mrw::model
 		Controller       *      crx_controller = nullptr;
 		std::vector<Section *>  sections;
 
+	protected:
+		const QString           crx_name;  ///< The light name.
+
 	public:
 		explicit Crossing(
 			ModelRailway     *    model_railway,
-			Section       *       model_section,
+			Controller      *     controller,
 			const QDomElement  &  element);
 		virtual ~Crossing() = default;
+
+		// Implementations from Device
+		const QString    &   name()         const noexcept override;
+		bool                 isUnlockable() const noexcept override;
+		Controller     *     controller()   const noexcept override;
 		virtual mrw::can::MrwMessage configMsg(const unsigned pin) const override;
 	};
 }
