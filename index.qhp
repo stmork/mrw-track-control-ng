@@ -885,6 +885,7 @@
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a88f58c06e4ec956db5123e6ceeb35fa2"/>
 <section title="~MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2deae3c6f04ed50ac88701baaf597d29"/>
 <section title="crossing" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2a1a664fa1e2a5842dc9b1dc2948f996"/>
+<section title="crossingCount" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a0a3bb2a85c84537395038f2fa9dde1fa"/>
 <section title="id" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a5c3fb4470d613a75fb2ad35d0c20a16a"/>
 <section title="isValid" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a6999a3698c6d99002397e68aa2e5cb17"/>
 <section title="lights" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#aad1e820a26d295704a7ace00175d7880"/>
@@ -3210,6 +3211,7 @@
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a88f58c06e4ec956db5123e6ceeb35fa2"/>
 <section title="~MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2deae3c6f04ed50ac88701baaf597d29"/>
 <section title="crossing" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2a1a664fa1e2a5842dc9b1dc2948f996"/>
+<section title="crossingCount" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a0a3bb2a85c84537395038f2fa9dde1fa"/>
 <section title="id" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a5c3fb4470d613a75fb2ad35d0c20a16a"/>
 <section title="isValid" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a6999a3698c6d99002397e68aa2e5cb17"/>
 <section title="lights" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#aad1e820a26d295704a7ace00175d7880"/>
@@ -5039,6 +5041,7 @@
 <keyword name="Crossing(ModelRailway *model_railway, Controller *controller, const QDomElement &amp;element)" id="mrw::model::Crossing::Crossing_aa0b3680f59d2137f8bc3f8d93125a992" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#aa0b3680f59d2137f8bc3f8d93125a992"/>
 <keyword name="crossing(const CrossingId index) const" id="mrw::model::MultiplexConnection::crossing_a2a1a664fa1e2a5842dc9b1dc2948f996" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2a1a664fa1e2a5842dc9b1dc2948f996"/>
 <keyword name="crossing() const noexcept" id="mrw::model::Section::crossing_ad46a71912f7b3de1e7ad4791e1ec4a79" ref="de/de1/classmrw_1_1model_1_1Section.html#ad46a71912f7b3de1e7ad4791e1ec4a79"/>
+<keyword name="crossingCount() const" id="mrw::model::MultiplexConnection::crossingCount_a0a3bb2a85c84537395038f2fa9dde1fa" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a0a3bb2a85c84537395038f2fa9dde1fa"/>
 <keyword name="crx_name" id="mrw::model::Crossing::crx_name_a1ac759ca4b27a392d3630bc0d81ac57e" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a1ac759ca4b27a392d3630bc0d81ac57e"/>
 <keyword name="CYAN_ON" id="mrw::util::String::CYAN_ON_a8026cc002373c31b4dc8193a2a1eb599" ref="d0/d55/classmrw_1_1util_1_1String.html#a8026cc002373c31b4dc8193a2a1eb599"/>
 <keyword name="D_MASK" id="mrw::model::DoubleCrossSwitch::D_MASK_abb541997a95b31327f21ed06850adf10" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#abb541997a95b31327f21ed06850adf10"/>
