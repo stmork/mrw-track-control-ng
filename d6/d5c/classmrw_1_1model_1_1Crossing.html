@@ -112,6 +112,11 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa0b3680f59d2137f8bc3f8d93125a992" id="r_aa0b3680f59d2137f8bc3f8d93125a992"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa0b3680f59d2137f8bc3f8d93125a992">Crossing</a> (<a class="el" href="../../d3/dab/classmrw_1_1model_1_1ModelRailway.html">ModelRailway</a> *model_railway, <a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html">Controller</a> *<a class="el" href="#a88ba0e1099514cea52b970e599ecaa94">controller</a>, const QDomElement &amp;element)</td></tr>
 <tr class="memitem:a924c05c223abae2579ec66fd9bdcb827" id="r_a924c05c223abae2579ec66fd9bdcb827"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#a924c05c223abae2579ec66fd9bdcb827">~Crossing</a> ()=default</td></tr>
+<tr class="memitem:afb7a6f22d3c60512be85283cb5c6f506" id="r_afb7a6f22d3c60512be85283cb5c6f506"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afb7a6f22d3c60512be85283cb5c6f506">add</a> (<a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html">Section</a> *section)</td></tr>
+<tr class="memitem:aaafef7c9f58c81bc76af08c87897e761" id="r_aaafef7c9f58c81bc76af08c87897e761"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aaafef7c9f58c81bc76af08c87897e761">valid</a> () const</td></tr>
+<tr class="memdesc:aaafef7c9f58c81bc76af08c87897e761"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method verifies if the amount of connected sections are correctly.  <br /></td></tr>
+<tr class="memitem:a604030aee145ab9e6794b6d89c89e05c" id="r_a604030aee145ab9e6794b6d89c89e05c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a604030aee145ab9e6794b6d89c89e05c">isUsed</a> () const</td></tr>
+<tr class="memdesc:a604030aee145ab9e6794b6d89c89e05c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method return true if at least one of the connected sections is not in free state.  <br /></td></tr>
 <tr class="memitem:a11a085023feefec8f67d3d0960fd614c" id="r_a11a085023feefec8f67d3d0960fd614c"><td class="memItemLeft">const QString &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a11a085023feefec8f67d3d0960fd614c">name</a> () const noexcept override</td></tr>
 <tr class="memdesc:a11a085023feefec8f67d3d0960fd614c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the name modelled inside the EMF/XMI model file.  <br /></td></tr>
 <tr class="memitem:a76c38c21712f8518208058e14fbecd67" id="r_a76c38c21712f8518208058e14fbecd67"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a76c38c21712f8518208058e14fbecd67">isUnlockable</a> () const noexcept override</td></tr>
@@ -237,6 +242,23 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="afb7a6f22d3c60512be85283cb5c6f506" name="afb7a6f22d3c60512be85283cb5c6f506"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb7a6f22d3c60512be85283cb5c6f506">&#9670;&#160;</a></span>add()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Crossing::add </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/de1/classmrw_1_1model_1_1Section.html">Section</a> *</td>          <td class="paramname"><span class="paramname"><em>section</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ac6251eef9b1c9bb8cab9ad4427f56b92" name="ac6251eef9b1c9bb8cab9ad4427f56b92"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac6251eef9b1c9bb8cab9ad4427f56b92">&#9670;&#160;</a></span>command()</h2>
 
@@ -443,6 +465,27 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a604030aee145ab9e6794b6d89c89e05c" name="a604030aee145ab9e6794b6d89c89e05c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a604030aee145ab9e6794b6d89c89e05c">&#9670;&#160;</a></span>isUsed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Crossing::isUsed </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method return true if at least one of the connected sections is not in free state. </p>
+<p>This may include occupation in case no route is related to this section.</p>
+<dl class="section return"><dt>Returns</dt><dd>True if any of the connected sections is not in <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea88c189a42c87aa49d667fc8ab76bc323" title="The Section is in free/available state.">SectionState::FREE</a>. </dd></dl>
+
+</div>
+</div>
 <a id="aa615a4a6a56336b6ae6b62951e03ea04" name="aa615a4a6a56336b6ae6b62951e03ea04"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa615a4a6a56336b6ae6b62951e03ea04">&#9670;&#160;</a></span>lock()</h2>
 
@@ -564,6 +607,26 @@ Protected Attributes</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>Even the extended frame format ID is 18 bits wide only 16 bits are used from this unit number.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The unit number of this <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">Device</a>. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d1/d0d/classmrw_1_1model_1_1Controller.html#a76f15c1eaa4e29986363b8eb4c6dfcad" title="This method returns the controller ID which is part of the CAN ID.">Controller::id()</a> </dd></dl>
+
+</div>
+</div>
+<a id="aaafef7c9f58c81bc76af08c87897e761" name="aaafef7c9f58c81bc76af08c87897e761"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaafef7c9f58c81bc76af08c87897e761">&#9670;&#160;</a></span>valid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Crossing::valid </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method verifies if the amount of connected sections are correctly. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the configuration of this <a class="el" href="../../d6/d5c/classmrw_1_1model_1_1Crossing.html">Crossing</a> is correct. </dd></dl>
 
 </div>
 </div>

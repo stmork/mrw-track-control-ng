@@ -398,16 +398,19 @@
 </section>
 <section title="Crossing" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#aa0b3680f59d2137f8bc3f8d93125a992"/>
 <section title="~Crossing" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a924c05c223abae2579ec66fd9bdcb827"/>
+<section title="add" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#afb7a6f22d3c60512be85283cb5c6f506"/>
 <section title="command" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#ac6251eef9b1c9bb8cab9ad4427f56b92"/>
 <section title="configMsg" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a083fd1a5f5a357d4205fba7ac028e201"/>
 <section title="controller" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a88ba0e1099514cea52b970e599ecaa94"/>
 <section title="get" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#ae13d306d9ae0cc37ef69861f44fb58da"/>
 <section title="hasController" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a1571a81a0f14ce06a49e24cdc85e42f8"/>
 <section title="isUnlockable" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a76c38c21712f8518208058e14fbecd67"/>
+<section title="isUsed" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a604030aee145ab9e6794b6d89c89e05c"/>
 <section title="lock" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#aa615a4a6a56336b6ae6b62951e03ea04"/>
 <section title="name" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a11a085023feefec8f67d3d0960fd614c"/>
 <section title="setLock" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a0d1f2095bc54b7f57caebc39b3f486a2"/>
 <section title="unitNo" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a262cee73971200e5c6cd308a7621682f"/>
+<section title="valid" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#aaafef7c9f58c81bc76af08c87897e761"/>
 <section title="crx_name" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a1ac759ca4b27a392d3630bc0d81ac57e"/>
 </section>
 <section title="Device" ref="d8/d2c/classmrw_1_1model_1_1Device.html">
@@ -881,6 +884,7 @@
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html">
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a88f58c06e4ec956db5123e6ceeb35fa2"/>
 <section title="~MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2deae3c6f04ed50ac88701baaf597d29"/>
+<section title="crossing" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2a1a664fa1e2a5842dc9b1dc2948f996"/>
 <section title="id" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a5c3fb4470d613a75fb2ad35d0c20a16a"/>
 <section title="isValid" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a6999a3698c6d99002397e68aa2e5cb17"/>
 <section title="lights" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#aad1e820a26d295704a7ace00175d7880"/>
@@ -1473,6 +1477,7 @@
 <section title="setLock" ref="d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#a0d1f2095bc54b7f57caebc39b3f486a2"/>
 <section title="unitNo" ref="d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#a262cee73971200e5c6cd308a7621682f"/>
 </section>
+<section title="CrossingId" ref="d9/dbc/namespacemrw_1_1model.html#a5eac39705c21623d157d175879fd9c60"/>
 <section title="ModuleId" ref="d9/dbc/namespacemrw_1_1model.html#a9dfe38af1c8e25aebb1eaf5ff98944d5"/>
 <section title="SectionState" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4ede">
 <section title="FREE" ref="d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea88c189a42c87aa49d667fc8ab76bc323"/>
@@ -2718,16 +2723,19 @@
 </section>
 <section title="Crossing" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#aa0b3680f59d2137f8bc3f8d93125a992"/>
 <section title="~Crossing" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a924c05c223abae2579ec66fd9bdcb827"/>
+<section title="add" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#afb7a6f22d3c60512be85283cb5c6f506"/>
 <section title="command" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#ac6251eef9b1c9bb8cab9ad4427f56b92"/>
 <section title="configMsg" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a083fd1a5f5a357d4205fba7ac028e201"/>
 <section title="controller" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a88ba0e1099514cea52b970e599ecaa94"/>
 <section title="get" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#ae13d306d9ae0cc37ef69861f44fb58da"/>
 <section title="hasController" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a1571a81a0f14ce06a49e24cdc85e42f8"/>
 <section title="isUnlockable" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a76c38c21712f8518208058e14fbecd67"/>
+<section title="isUsed" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a604030aee145ab9e6794b6d89c89e05c"/>
 <section title="lock" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#aa615a4a6a56336b6ae6b62951e03ea04"/>
 <section title="name" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a11a085023feefec8f67d3d0960fd614c"/>
 <section title="setLock" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a0d1f2095bc54b7f57caebc39b3f486a2"/>
 <section title="unitNo" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a262cee73971200e5c6cd308a7621682f"/>
+<section title="valid" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#aaafef7c9f58c81bc76af08c87897e761"/>
 <section title="crx_name" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a1ac759ca4b27a392d3630bc0d81ac57e"/>
 </section>
 <section title="Device" ref="d8/d2c/classmrw_1_1model_1_1Device.html">
@@ -3201,6 +3209,7 @@
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html">
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a88f58c06e4ec956db5123e6ceeb35fa2"/>
 <section title="~MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2deae3c6f04ed50ac88701baaf597d29"/>
+<section title="crossing" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2a1a664fa1e2a5842dc9b1dc2948f996"/>
 <section title="id" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a5c3fb4470d613a75fb2ad35d0c20a16a"/>
 <section title="isValid" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a6999a3698c6d99002397e68aa2e5cb17"/>
 <section title="lights" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#aad1e820a26d295704a7ace00175d7880"/>
@@ -4907,6 +4916,7 @@
 <keyword name="AC" id="mrw::model::DoubleCrossSwitch::AC_a1a462292eecb5d40e19aec3af07c93e1a4144e097d2fa7a491cec2a7a4322f2bc" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1a4144e097d2fa7a491cec2a7a4322f2bc"/>
 <keyword name="AC" id="mrw::model::RegularSwitch::AC_a340b068f7e7d7340ecf8a8c8c9e89dd2a4144e097d2fa7a491cec2a7a4322f2bc" ref="d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a340b068f7e7d7340ecf8a8c8c9e89dd2a4144e097d2fa7a491cec2a7a4322f2bc"/>
 <keyword name="AD" id="mrw::model::DoubleCrossSwitch::AD_a1a462292eecb5d40e19aec3af07c93e1ae182ebbc166d73366e7986813a7fc5f1" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1ae182ebbc166d73366e7986813a7fc5f1"/>
+<keyword name="add(Section *section)" id="mrw::model::Crossing::add_afb7a6f22d3c60512be85283cb5c6f506" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#afb7a6f22d3c60512be85283cb5c6f506"/>
 <keyword name="advance(const bool dir) noexcept" id="mrw::model::RailPart::advance_a9766acf0536c000da1d28a399e7bad59" ref="d1/d16/classmrw_1_1model_1_1RailPart.html#a9766acf0536c000da1d28a399e7bad59"/>
 <keyword name="advance(const bool dir) const noexcept" id="mrw::model::RailPart::advance_a77f112dd0dbcb739893301de6c18ea02" ref="d1/d16/classmrw_1_1model_1_1RailPart.html#a77f112dd0dbcb739893301de6c18ea02"/>
 <keyword name="aIsDir() const noexcept" id="mrw::model::RailPart::aIsDir_a8f0e525139328495fe6f96d5d78fd2e2" ref="d1/d16/classmrw_1_1model_1_1RailPart.html#a8f0e525139328495fe6f96d5d78fd2e2"/>
@@ -5027,6 +5037,7 @@
 <keyword name="critical(const char *message) const override" id="mrw::log::SysLogger::critical_a81d324a2f378dd1ebf56878d604def4b" ref="d5/d0d/classmrw_1_1log_1_1SysLogger.html#a81d324a2f378dd1ebf56878d604def4b"/>
 <keyword name="Crossing" id="mrw::model::ModelRailway::Crossing_ac274231929dceb8342d34aff23b2a608" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#ac274231929dceb8342d34aff23b2a608"/>
 <keyword name="Crossing(ModelRailway *model_railway, Controller *controller, const QDomElement &amp;element)" id="mrw::model::Crossing::Crossing_aa0b3680f59d2137f8bc3f8d93125a992" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#aa0b3680f59d2137f8bc3f8d93125a992"/>
+<keyword name="crossing(const CrossingId index) const" id="mrw::model::MultiplexConnection::crossing_a2a1a664fa1e2a5842dc9b1dc2948f996" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2a1a664fa1e2a5842dc9b1dc2948f996"/>
 <keyword name="crossing() const noexcept" id="mrw::model::Section::crossing_ad46a71912f7b3de1e7ad4791e1ec4a79" ref="de/de1/classmrw_1_1model_1_1Section.html#ad46a71912f7b3de1e7ad4791e1ec4a79"/>
 <keyword name="crx_name" id="mrw::model::Crossing::crx_name_a1ac759ca4b27a392d3630bc0d81ac57e" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a1ac759ca4b27a392d3630bc0d81ac57e"/>
 <keyword name="CYAN_ON" id="mrw::util::String::CYAN_ON_a8026cc002373c31b4dc8193a2a1eb599" ref="d0/d55/classmrw_1_1util_1_1String.html#a8026cc002373c31b4dc8193a2a1eb599"/>
@@ -5217,6 +5228,7 @@
 <keyword name="isUnlockable() const noexcept override" id="mrw::model::Light::isUnlockable_a24aa9c07fc5a14c52b4f93fc52be8c22" ref="d0/d3c/classmrw_1_1model_1_1Light.html#a24aa9c07fc5a14c52b4f93fc52be8c22"/>
 <keyword name="isUnlockable() const noexcept override" id="mrw::model::LightSignal::isUnlockable_ab9a09565c6a924b128419f60eda64c75" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#ab9a09565c6a924b128419f60eda64c75"/>
 <keyword name="isUnlockable() const noexcept override" id="mrw::model::Section::isUnlockable_ac93a1767323983cd5c55e8671fc87a81" ref="de/de1/classmrw_1_1model_1_1Section.html#ac93a1767323983cd5c55e8671fc87a81"/>
+<keyword name="isUsed() const" id="mrw::model::Crossing::isUsed_a604030aee145ab9e6794b6d89c89e05c" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a604030aee145ab9e6794b6d89c89e05c"/>
 <keyword name="isValid(const Controller *controller) noexcept" id="mrw::model::Controller::isValid_a7af511b423cf9a856d325be90dead936" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a7af511b423cf9a856d325be90dead936"/>
 <keyword name="isValid(const MultiplexConnection *conn) noexcept" id="mrw::model::MultiplexConnection::isValid_a6999a3698c6d99002397e68aa2e5cb17" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a6999a3698c6d99002397e68aa2e5cb17"/>
 <keyword name="ITALIC_ON" id="mrw::util::String::ITALIC_ON_a16c7225aa46a8feb9f485f6b0764abfb" ref="d0/d55/classmrw_1_1util_1_1String.html#a16c7225aa46a8feb9f485f6b0764abfb"/>
@@ -5603,6 +5615,7 @@
 <keyword name="USER_ROLE" id="mrw::ui::ControllerWidget::USER_ROLE_a14ccbb61b1637fa8740662f1cec226b5" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a14ccbb61b1637fa8740662f1cec226b5"/>
 <keyword name="valid() const =0" id="mrw::model::AssemblyPart::valid_aa1a0554860b2d9bacfff846742b619b3" ref="d5/d26/classmrw_1_1model_1_1AssemblyPart.html#aa1a0554860b2d9bacfff846742b619b3"/>
 <keyword name="valid() const noexcept" id="mrw::model::Controller::valid_a6dfe1d38ff7f4b55c72857b0d165ec09" ref="d1/d0d/classmrw_1_1model_1_1Controller.html#a6dfe1d38ff7f4b55c72857b0d165ec09"/>
+<keyword name="valid() const" id="mrw::model::Crossing::valid_aaafef7c9f58c81bc76af08c87897e761" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#aaafef7c9f58c81bc76af08c87897e761"/>
 <keyword name="valid() const noexcept override" id="mrw::model::DoubleCrossSwitch::valid_a98a11e4d5e3b7c6e67733469b621a4b0" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a98a11e4d5e3b7c6e67733469b621a4b0"/>
 <keyword name="valid() const noexcept override" id="mrw::model::FormSignal::valid_a6d44cfceeb25ea54dd716f28624b6fb0" ref="d4/d8a/classmrw_1_1model_1_1FormSignal.html#a6d44cfceeb25ea54dd716f28624b6fb0"/>
 <keyword name="valid() const override" id="mrw::model::LightModule::valid_ac4a5aafe15162aa497a333443cd29f61" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#ac4a5aafe15162aa497a333443cd29f61"/>
@@ -5756,6 +5769,7 @@
 <keyword name="CAT_MASK" id="mrw::can::CAT_MASK_aac851f8e69988e7e7f023fd4888c9319af9dc7fc2724e6be9914637ec023a1739" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319af9dc7fc2724e6be9914637ec023a1739"/>
 <keyword name="CMD_NEED_UNITNO" id="mrw::can::CMD_NEED_UNITNO_aac851f8e69988e7e7f023fd4888c9319a9af3a157bea71a1e3f14b060ed6d62df" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a9af3a157bea71a1e3f14b060ed6d62df"/>
 <keyword name="ControllerId" id="mrw::can::ControllerId_ad3397ba650ef1dbb629a49e0d5f78ba8" ref="d9/d9b/namespacemrw_1_1can.html#ad3397ba650ef1dbb629a49e0d5f78ba8"/>
+<keyword name="CrossingId" id="mrw::model::CrossingId_a5eac39705c21623d157d175879fd9c60" ref="d9/dbc/namespacemrw_1_1model.html#a5eac39705c21623d157d175879fd9c60"/>
 <keyword name="cutScope(const QString &amp;input)" id="mrw::util::cutScope_aecdce54a6519bb96fd87579c6ce38f8f" ref="d9/d2b/namespacemrw_1_1util.html#aecdce54a6519bb96fd87579c6ce38f8f"/>
 <keyword name="DeviceKey" id="mrw::can::DeviceKey_ace76a1ef7c615650aaa309b027d1eae2" ref="d9/d9b/namespacemrw_1_1can.html#ace76a1ef7c615650aaa309b027d1eae2"/>
 <keyword name="errorCode" id="sc::errorCode_a096327e50db1de10f7c44ec93ef08812" ref="db/d03/namespacesc.html#a096327e50db1de10f7c44ec93ef08812"/>

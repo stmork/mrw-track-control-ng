@@ -98,9 +98,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2deae3c6f04ed50ac88701baaf597d29" id="r_a2deae3c6f04ed50ac88701baaf597d29"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#a2deae3c6f04ed50ac88701baaf597d29">~MultiplexConnection</a> ()=default</td></tr>
 <tr class="memitem:a5c3fb4470d613a75fb2ad35d0c20a16a" id="r_a5c3fb4470d613a75fb2ad35d0c20a16a"><td class="memItemLeft"><a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a9dfe38af1c8e25aebb1eaf5ff98944d5">ModuleId</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5c3fb4470d613a75fb2ad35d0c20a16a">id</a> () const</td></tr>
 <tr class="memdesc:a5c3fb4470d613a75fb2ad35d0c20a16a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the module ID.  <br /></td></tr>
+<tr class="memitem:a2a1a664fa1e2a5842dc9b1dc2948f996" id="r_a2a1a664fa1e2a5842dc9b1dc2948f996"><td class="memItemLeft"><a class="el" href="../../d6/d5c/classmrw_1_1model_1_1Crossing.html">Crossing</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a2a1a664fa1e2a5842dc9b1dc2948f996">crossing</a> (const <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5eac39705c21623d157d175879fd9c60">CrossingId</a> index) const</td></tr>
+<tr class="memdesc:a2a1a664fa1e2a5842dc9b1dc2948f996"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the nth <a class="el" href="../../d6/d5c/classmrw_1_1model_1_1Crossing.html">Crossing</a>.  <br /></td></tr>
 <tr class="memitem:a98e014de6cf97041fbbc56890279452c" id="r_a98e014de6cf97041fbbc56890279452c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a98e014de6cf97041fbbc56890279452c">valid</a> () const</td></tr>
 <tr class="memdesc:a98e014de6cf97041fbbc56890279452c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method verifies if the amount of connected pins is modelled correctly.  <br /></td></tr>
 <tr class="memitem:aad1e820a26d295704a7ace00175d7880" id="r_aad1e820a26d295704a7ace00175d7880"><td class="memItemLeft">const std::vector&lt; <a class="el" href="../../d0/d3c/classmrw_1_1model_1_1Light.html">Light</a> * &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aad1e820a26d295704a7ace00175d7880">lights</a> () const</td></tr>
+<tr class="memdesc:aad1e820a26d295704a7ace00175d7880"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the vector of connected <a class="el" href="../../d0/d3c/classmrw_1_1model_1_1Light.html" title="This class represents a LED or bulb light source which can only simply turn on or off the light.">Light</a> instances.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -186,6 +189,32 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a2a1a664fa1e2a5842dc9b1dc2948f996" name="a2a1a664fa1e2a5842dc9b1dc2948f996"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a1a664fa1e2a5842dc9b1dc2948f996">&#9670;&#160;</a></span>crossing()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d6/d5c/classmrw_1_1model_1_1Crossing.html">Crossing</a> * MultiplexConnection::crossing </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5eac39705c21623d157d175879fd9c60">CrossingId</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method returns the nth <a class="el" href="../../d6/d5c/classmrw_1_1model_1_1Crossing.html">Crossing</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The zero based index of connected <a class="el" href="../../dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html" title="This class represents a serial multiplex connection module.">MultiplexConnection</a> boards. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The found <a class="el" href="../../d6/d5c/classmrw_1_1model_1_1Crossing.html">Crossing</a> instance. </dd></dl>
+
+</div>
+</div>
 <a id="a5c3fb4470d613a75fb2ad35d0c20a16a" name="a5c3fb4470d613a75fb2ad35d0c20a16a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5c3fb4470d613a75fb2ad35d0c20a16a">&#9670;&#160;</a></span>id()</h2>
 
@@ -264,6 +293,9 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This method returns the vector of connected <a class="el" href="../../d0/d3c/classmrw_1_1model_1_1Light.html" title="This class represents a LED or bulb light source which can only simply turn on or off the light.">Light</a> instances. </p>
+<dl class="section return"><dt>Returns</dt><dd>The vector of connected <a class="el" href="../../d0/d3c/classmrw_1_1model_1_1Light.html" title="This class represents a LED or bulb light source which can only simply turn on or off the light.">Light</a> instances. </dd></dl>
 
 </div>
 </div>
