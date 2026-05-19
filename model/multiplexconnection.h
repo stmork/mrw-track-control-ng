@@ -63,6 +63,7 @@ namespace mrw::model
 		{
 			return connection_id;
 		}
+
 		/**
 		 * This method returns the nth Crossing.
 		 *
@@ -71,6 +72,8 @@ namespace mrw::model
 		 * @return The found Crossing instance.
 		 */
 		Crossing * crossing(const CrossingId index) const;
+
+		size_t crossingCount() const;
 
 		/**
 		 * This method verifies if the amount of connected pins is modelled

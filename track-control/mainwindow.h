@@ -101,6 +101,7 @@ private slots:
 private:
 
 	void setScreenBlankTimeout();
+	void initCrossings();
 	void initRegion(const MrwMessageDispatcher & dispatcher);
 	void connectEditActions();
 	void connectOpModes(MrwMessageDispatcher & dispatcher);

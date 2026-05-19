@@ -93,34 +93,3 @@ RailPart * RailControllerProxy::railPart() const
 {
 	return rail;
 }
-
-bool RailControllerProxy::process(const MrwMessage & message) noexcept
-{
-	qCDebug(log).noquote() << message << "(Crossing)";
-
-	switch (message.response())
-	{
-	case Response::MSG_QUEUED:
-		return true;
-
-	case Response::MSG_OK:
-		if (message.command() == SETSGN)
-		{
-			return true;
-		}
-		break;
-
-	default:
-		break;
-	}
-	return false;
-}
-
-void RailControllerProxy::restart()
-{
-}
-
-QString RailControllerProxy::toString() const
-{
-	return *section();
-}

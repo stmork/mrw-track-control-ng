@@ -49,6 +49,7 @@ set(SOURCES
 	controlledroute.cpp
 	ctrl/controllerregistrand.cpp
 	ctrl/controllerregistry.cpp
+	ctrl/crossingcontroller.cpp
 	ctrl/doublecrossswitchcontrollerproxy.cpp
 	ctrl/railpartinfo.cpp
 	ctrl/railcontrollerproxy.cpp
@@ -74,6 +75,7 @@ set(HEADERS
 	controlledroute.h
 	ctrl/controllerregistrand.h
 	ctrl/controllerregistry.h
+	ctrl/crossingcontroller.h
 	ctrl/doublecrossswitchcontrollerproxy.h
 	ctrl/railcontrollerproxy.h
 	ctrl/railpartinfo.h

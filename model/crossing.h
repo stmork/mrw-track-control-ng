@@ -22,7 +22,7 @@ namespace mrw::model
 	class Crossing : public Device
 	{
 		Controller       *      crx_controller = nullptr;
-		std::vector<Section *>  sections;
+		std::vector<Section *>  crx_sections;
 
 	protected:
 		const QString           crx_name;  ///< The light name.

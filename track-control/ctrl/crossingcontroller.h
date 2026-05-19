@@ -5,60 +5,42 @@
 
 #pragma once
 
-#ifndef MRW_CTRL_SECTIONCONTROLLER_H
-#define MRW_CTRL_SECTIONCONTROLLER_H
+#ifndef MRW_CTRL_CROSSINGCONTROLLER_H
+#define MRW_CTRL_CROSSINGCONTROLLER_H
 
 #include <util/batchparticipant.h>
 #include <util/self.h>
-#include <model/section.h>
+#include <model/crossing.h>
 #include <ctrl/basecontroller.h>
 #include <ctrl/controllerregistrand.h>
 #include <statecharts/timerservice.h>
-#include <statecharts/SectionStatechart.h>
+#include <statecharts/CrossingStatechart.h>
 
 namespace mrw::ctrl
 {
-	class SectionController :
+	class CrossingController :
 		public BaseController,
 		public ControllerRegistrand,
 		public mrw::util::BatchParticipant,
-		public mrw::util::Self<mrw::statechart::SectionStatechart::OperationCallback>
+		public mrw::util::Self<mrw::statechart::CrossingStatechart::OperationCallback>
 	{
 		Q_OBJECT
-
 	private:
-		mrw::statechart::QtStatechart<mrw::statechart::SectionStatechart>  statechart;
-		mrw::model::Section                        *                       ctrl_section = nullptr;
-		SectionController                         *                        next         = nullptr;
+		mrw::statechart::QtStatechart<mrw::statechart::CrossingStatechart>  statechart;
+		mrw::model::Crossing                        *                       ctrl_crossing = nullptr;
 
 	public:
-		SectionController() = delete;
-		explicit SectionController(
-			mrw::model::Section * input,
-			QObject       *       parent = nullptr);
-		virtual ~SectionController();
-
-		mrw::model::Section * section() const;
-
-		void setAutoOff(const bool auto_off);
-		void setAutoUnlock(const bool auto_unlock);
-		void nextController(SectionController * next);
+		CrossingController() = delete;
+		explicit CrossingController(
+			mrw::model::Crossing * input,
+			QObject        *       parent = nullptr);
+		virtual ~CrossingController();
 
 	signals:
-		void enable(bool turn_on = true);
-		void disable();
-		void unlock();
-		void failed();
 		void start();
-		void entered();
-		void leaving();
-		void left();
-		void tryUnblock();
-		void unregister();
-		void stop();
+		void update();
 
 	private:
-
 		// Implementations from BaseController
 		virtual const QString & name()         const noexcept override;
 		virtual float           extensions()   const noexcept override;
@@ -78,17 +60,13 @@ namespace mrw::ctrl
 		// Implementations from OperationCallback
 		virtual void inc() override;
 		virtual void dec() override;
-
-		virtual void off() override;
-		virtual void on() override;
-		virtual void request() override;
-		virtual void passed() override;
-		virtual void free() override;
-		virtual void leftBefore() override;
-
+		virtual sc::integer used() override;
+		virtual void close() override;
+		virtual void open() override;
 		virtual void fail() override;
 		virtual void pending() override;
 		virtual void lock(const bool do_it) override;
+
 	};
 }
 

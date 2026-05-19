@@ -21,8 +21,7 @@ namespace mrw::ctrl
 {
 	class RailControllerProxy :
 		public RailController,
-		public RailPartInfo,
-		public ControllerRegistrand
+		public RailPartInfo
 	{
 		Q_OBJECT
 
@@ -54,11 +53,6 @@ namespace mrw::ctrl
 
 		// Implementation from RailPartInfo
 		virtual mrw::model::RailPart * railPart() const override;
-
-		// Implementations from ControllerRegistrand
-		virtual bool    process(const can::MrwMessage & message) noexcept override;
-		virtual void    restart() override;
-		virtual QString toString() const override;
 	};
 }
 

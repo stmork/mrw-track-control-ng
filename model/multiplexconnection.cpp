@@ -59,6 +59,11 @@ Crossing * MultiplexConnection::crossing(const CrossingId index) const
 	return crossings.at(index);
 }
 
+size_t mrw::model::MultiplexConnection::crossingCount() const
+{
+	return crossings.size();
+}
+
 bool MultiplexConnection::valid() const
 {
 	size_t pins = simple_lights.size();

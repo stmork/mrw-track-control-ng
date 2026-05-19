@@ -23,12 +23,14 @@ Crossing::Crossing(
 
 bool Crossing::valid() const
 {
-	return sections.size() > 0;
+	return crx_sections.size() > 0;
 }
 
 bool Crossing::isUsed() const
 {
-	return std::any_of(sections.begin(), sections.end(), [] (const Section * section)
+	return std::any_of(
+			crx_sections.begin(), crx_sections.end(),
+			[] (const Section * section)
 	{
 		return section->state() != SectionState::FREE;
 	});
@@ -60,5 +62,5 @@ MrwMessage Crossing::configMsg(const unsigned int pin) const
 
 void Crossing::add(Section * section)
 {
-	sections.emplace_back(section);
+	crx_sections.emplace_back(section);
 }

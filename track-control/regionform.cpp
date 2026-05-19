@@ -136,8 +136,8 @@ void RegionForm::setupRails(SectionController * controller)
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
 		connect(
-			controller, &BaseController::update, ctrl,
-			&BaseController::update);
+			controller, &BaseController::update,
+			ctrl,       &BaseController::update);
 	}
 }
 
@@ -161,8 +161,8 @@ void RegionForm::setupSignals(SectionController * controller, const bool directi
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
 		connect(
-			controller, &BaseController::update, ctrl,
-			&BaseController::update);
+			controller, &BaseController::update,
+			ctrl,       &BaseController::update);
 	}
 }
 
@@ -182,8 +182,8 @@ void RegionForm::setupRegularSwitches(SectionController * controller)
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
 		connect(
-			controller, &BaseController::update, ctrl,
-			&BaseController::update);
+			controller, &BaseController::update,
+			ctrl,       &BaseController::update);
 	}
 }
 
