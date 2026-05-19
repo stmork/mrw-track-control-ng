@@ -34,13 +34,13 @@ namespace mrw::model
 	{
 		friend class Controller;
 
-		ModelRailway         *         model = nullptr;
+		ModelRailway           *          model = nullptr;
 
-		const QDomElement              reference;
-		const ModuleId                 connection_id;
+		const QDomElement                 reference;
+		const ModuleId                    connection_id;
 
-		std::vector<LightSignal *>     light_signals;
-		mrw::util::CleanVector<Light>  simple_lights;
+		std::vector<LightSignal *>        light_signals;
+		mrw::util::CleanVector<Light>     simple_lights;
 		mrw::util::CleanVector<Crossing>  crossings;
 
 	public:
@@ -63,6 +63,14 @@ namespace mrw::model
 		{
 			return connection_id;
 		}
+		/**
+		 * This method returns the nth Crossing.
+		 *
+		 * @param index The zero based index of connected MultiplexConnection
+		 * boards.
+		 * @return The found Crossing instance.
+		 */
+		Crossing * crossing(const CrossingId index) const;
 
 		/**
 		 * This method verifies if the amount of connected pins is modelled
@@ -82,6 +90,11 @@ namespace mrw::model
 		 */
 		static bool isValid(const MultiplexConnection * conn) noexcept;
 
+		/**
+		 * This method returns the vector of connected Light instances.
+		 *
+		 * @return The vector of connected Light instances.
+		 */
 		const std::vector<Light *> & lights() const;
 
 	private:

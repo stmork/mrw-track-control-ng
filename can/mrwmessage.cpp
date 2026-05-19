@@ -22,6 +22,7 @@ const ConstantEnumerator<Command>  MrwMessage::command_map
 
 	CONSTANT(SETSGN),
 
+	CONSTANT(CFGCRX),
 	CONSTANT(CFGSWN),
 	CONSTANT(CFGSWO),
 	CONSTANT(CFGRAI),
@@ -91,7 +92,8 @@ const ConstantEnumerator<SignalAspect> MrwMessage::signal_map
 	{ SignalAspect::SIGNAL_VR2, "Vr2" },
 	{ SignalAspect::SIGNAL_SH0, "Sh0" },
 	{ SignalAspect::SIGNAL_SH1, "Sh1" },
-	CONSTANT(SignalAspect::SIGNAL_TST)
+	CONSTANT(SignalAspect::SIGNAL_TST),
+	CONSTANT(SignalAspect::SIGNAL_CRX)
 };
 
 MrwMessage::MrwMessage(const Command command, const ControllerId id) :

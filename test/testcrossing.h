@@ -21,6 +21,10 @@ namespace mrw::test
 
 	private slots:
 		void testSimple();
+		void testDown();
+		void testUpper();
+		void testLower();
+		void testBoth();
 	};
 }
 

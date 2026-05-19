@@ -54,6 +54,11 @@ MultiplexConnection::MultiplexConnection(
 	}
 }
 
+Crossing * MultiplexConnection::crossing(const CrossingId index) const
+{
+	return crossings.at(index);
+}
+
 bool MultiplexConnection::valid() const
 {
 	size_t pins = simple_lights.size();
@@ -69,6 +74,15 @@ bool MultiplexConnection::valid() const
 			return false;
 		}
 		pins += signal->usedPins();
+	}
+
+	for (Crossing * crossing : crossings)
+	{
+		if (!crossing->valid())
+		{
+			return false;
+		}
+		pins++;
 	}
 
 	return pins <= MAX_PINS;
@@ -90,7 +104,7 @@ void MultiplexConnection::configure(
 {
 	unsigned pin = offset;
 
-	for (LightSignal * light_signal : light_signals)
+	for (const LightSignal * light_signal : light_signals)
 	{
 		const MrwMessage msg = light_signal->configMsg(pin);
 
@@ -98,9 +112,17 @@ void MultiplexConnection::configure(
 		pin += light_signal->usedPins();
 	}
 
-	for (Light * light : simple_lights)
+	for (const Light * light : simple_lights)
 	{
 		const MrwMessage msg = light->configMsg(pin);
+
+		messages.emplace_back(msg);
+		pin++;
+	}
+
+	for (const Crossing * crossing : crossings)
+	{
+		const MrwMessage msg = crossing->configMsg(pin);
 
 		messages.emplace_back(msg);
 		pin++;

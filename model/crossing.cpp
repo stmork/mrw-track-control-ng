@@ -21,6 +21,19 @@ Crossing::Crossing(
 	model_railway->add(this);
 }
 
+bool Crossing::valid() const
+{
+	return sections.size() > 0;
+}
+
+bool Crossing::isUsed() const
+{
+	return std::any_of(sections.begin(), sections.end(), [] (const Section * section)
+	{
+		return section->state() != SectionState::FREE;
+	});
+}
+
 const QString & Crossing::name() const noexcept
 {
 	return crx_name;
@@ -43,4 +56,9 @@ MrwMessage Crossing::configMsg(const unsigned int pin) const
 	msg.append(pin);
 
 	return msg;
+}
+
+void Crossing::add(Section * section)
+{
+	sections.emplace_back(section);
 }

@@ -78,7 +78,8 @@ namespace mrw::model
 	{
 		friend class Region;
 
-		static const std::regex                                   path_regex;
+		static const std::regex                                   module_path_regex;
+		static const std::regex                                   crossing_path_regex;
 		static const mrw::util::ConstantEnumerator<SectionState>  state_map;
 
 		const QString                         section_name;
@@ -86,6 +87,7 @@ namespace mrw::model
 		Region                *               section_region     = nullptr;
 		Controller              *             section_controller = nullptr;
 		SectionModule            *            section_module     = nullptr;
+		Crossing               *              section_crossing   = nullptr;
 		SectionState                          section_state      = SectionState::FREE;
 		bool                                  section_enabled    = false;
 		bool                                  section_occupied   = false;
@@ -221,6 +223,11 @@ namespace mrw::model
 		 */
 		Region * region() const noexcept;
 
+		/**
+		 * This method returns the Crossing if any is related to.
+		 *
+		 * @return The related Crossing.
+		 */
 		Crossing * crossing() const noexcept;
 
 		/**
@@ -311,8 +318,8 @@ namespace mrw::model
 	private:
 		void            add(AssemblyPart * rail_part) noexcept;
 		void            link() noexcept;
-		SectionModule * resolve(const std::string & path) noexcept;
-
+		SectionModule * resolveModule(const std::string & path) noexcept;
+		Crossing    *   resolveCrossing(const std::string & path) noexcept;
 	};
 }
 
