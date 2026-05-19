@@ -742,7 +742,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (((action_raised)) && (((ifaceOperationCallback->used()) > (0))))
+				if (((action_raised)) && ((ifaceOperationCallback->used())))
 				{
 					exseq_main_region_Operating_Processing_Unlocked();
 					enact_main_region_Operating_Processing_Pending();
@@ -766,7 +766,7 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (((action_raised)) && (((ifaceOperationCallback->used()) == (0))))
+				if (((action_raised)) && ((!(ifaceOperationCallback->used()))))
 				{
 					exseq_main_region_Operating_Processing_Locked();
 					enact_main_region_Operating_Processing_Pending();

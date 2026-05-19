@@ -37,6 +37,7 @@ namespace mrw::ctrl
 		virtual ~CrossingController();
 
 	signals:
+		void action();
 		void start();
 		void update();
 
@@ -60,7 +61,7 @@ namespace mrw::ctrl
 		// Implementations from OperationCallback
 		virtual void inc() override;
 		virtual void dec() override;
-		virtual sc::integer used() override;
+		virtual bool used() override;
 		virtual void close() override;
 		virtual void open() override;
 		virtual void fail() override;

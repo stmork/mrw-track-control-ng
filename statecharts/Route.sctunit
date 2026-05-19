@@ -40,6 +40,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		mock isTour returns (true)
 		mock isCompleted returns (true)
 
+		mock turnCrossings
 		mock turnSwitches
 		mock turnFlanks
 		mock enableSignals

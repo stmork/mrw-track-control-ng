@@ -315,6 +315,7 @@ namespace mrw
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->disableSections();
 			ifaceOperationCallback->disableSignals();
+			ifaceOperationCallback->turnCrossings();
 			ifaceOperationCallback->tryComplete();
 		}
 
@@ -325,6 +326,7 @@ namespace mrw
 			timerService->setTimer(shared_from_this(), 1, (static_cast<sc::time> (RouteStatechart::switch_timeout)), false);
 			ifaceOperationCallback->prepareRoute();
 			ifaceOperationCallback->resetTransaction();
+			ifaceOperationCallback->turnCrossings();
 			ifaceOperationCallback->turnSwitches();
 			ifaceOperationCallback->tryComplete();
 		}
@@ -393,6 +395,7 @@ namespace mrw
 			ifaceOperationCallback->fail();
 			ifaceOperationCallback->disableSections();
 			ifaceOperationCallback->disableSignals();
+			ifaceOperationCallback->turnCrossings();
 		}
 
 		/* Entry action for state 'Unlock'. */

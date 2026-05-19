@@ -149,6 +149,8 @@ namespace mrw
 
 				virtual void tryComplete() = 0;
 
+				virtual void turnCrossings() = 0;
+
 				virtual void turnSwitches() = 0;
 
 				virtual void turnFlanks() = 0;

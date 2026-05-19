@@ -117,6 +117,7 @@ private:
 	virtual void fail() override;
 	virtual void tryComplete() override;
 
+	virtual void turnCrossings() override;
 	virtual void turnSwitches() override;
 	virtual void turnFlanks() override;
 	virtual void enableSignals() override;

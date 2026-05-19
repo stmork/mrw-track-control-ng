@@ -117,7 +117,7 @@ namespace mrw
 
 				virtual void dec() = 0;
 
-				virtual sc::integer used() = 0;
+				virtual bool used() = 0;
 
 				virtual void close() = 0;
 

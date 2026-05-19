@@ -10,6 +10,7 @@
 #include <util/stringutil.h>
 #include <statecharts/timerservice.h>
 #include <ctrl/controllerregistry.h>
+#include <ctrl/crossingcontroller.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
 #include <ctrl/sectioncontroller.h>
@@ -628,6 +629,25 @@ bool ControlledRoute::isTour()
 **       Propose actions to controller proxy instances                  **
 **                                                                      **
 *************************************************************************/
+
+void ControlledRoute::turnCrossings()
+{
+	__METHOD__;
+
+	for (Section * section : sections)
+	{
+		Device       *       device     = section->crossing();
+		CrossingController * controller =
+			ControllerRegistry::instance().find<CrossingController>(device);
+
+		if (controller != nullptr)
+		{
+			qCDebug(mrw::tools::log).noquote() << "Turn crossing: " << *controller;
+		}
+		BaseController::callback<CrossingController>(
+			controller, &CrossingController::action);
+	}
+}
 
 void ControlledRoute::turnSwitches()
 {

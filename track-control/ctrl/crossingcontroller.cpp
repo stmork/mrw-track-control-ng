@@ -32,6 +32,11 @@ CrossingController::CrossingController(
 		&statechart, &CrossingStatechart::start,
 		Qt::QueuedConnection);
 
+	connect(
+		this, &CrossingController::action,
+		&statechart, &CrossingStatechart::action,
+		Qt::QueuedConnection);
+
 	statechart.setTimerService(TimerService::instance());
 	statechart.setOperationCallback(*this);
 
@@ -116,7 +121,7 @@ void CrossingController::restart()
 
 QString CrossingController::toString() const
 {
-	return "";
+	return ctrl_crossing->name();
 }
 
 void CrossingController::inc()
@@ -129,9 +134,9 @@ void CrossingController::dec()
 	decrease();
 }
 
-sc::integer CrossingController::used()
+bool CrossingController::used()
 {
-	return 0;
+	return ctrl_crossing->isUsed();
 }
 
 void CrossingController::close()

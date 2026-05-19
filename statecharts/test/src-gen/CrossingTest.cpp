@@ -497,10 +497,10 @@ namespace
 
 		class UsedMock
 		{
-			typedef sc::integer (UsedMock::*functiontype)();
+			typedef bool (UsedMock::*functiontype)();
 		public:
 			CrossingTest * owner;
-			sc::integer (UsedMock::*usedBehaviorDefault)();
+			bool (UsedMock::*usedBehaviorDefault)();
 
 			UsedMock(CrossingTest * owner) :
 				owner(owner),
@@ -508,19 +508,19 @@ namespace
 			{}
 
 
-			sc::integer used1()
+			bool used1()
 			{
-				return (0);
+				return (false);
 			}
 
-			sc::integer used2()
+			bool used2()
 			{
-				return (1);
+				return (true);
 			}
 
-			sc::integer usedDefault()
+			bool usedDefault()
 			{
-				sc::integer defaultValue = 0;
+				bool defaultValue = false;
 				return (defaultValue);
 			}
 
@@ -529,7 +529,7 @@ namespace
 				return usedBehaviorDefault;
 			}
 
-			void setDefaultBehavior(sc::integer (UsedMock::*defaultBehavior)())
+			void setDefaultBehavior(bool (UsedMock::*defaultBehavior)())
 			{
 				usedBehaviorDefault = defaultBehavior;
 			}
@@ -561,7 +561,7 @@ namespace
 				owner->decMock->dec();
 				return (owner->decMock->*(owner->decMock->getBehavior()))();
 			}
-			sc::integer used()
+			bool used()
 			{
 				return (owner->usedMock->*(owner->usedMock->getBehavior()))();
 			}

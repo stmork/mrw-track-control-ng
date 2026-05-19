@@ -30,7 +30,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 		assert !is_final
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Wait_For_Start)
 
-		mock used returns (0)
+		mock used returns (false)
 		mock inc
 		mock dec
 		mock close
@@ -122,7 +122,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		operational()
-		mock used returns (0)
+		mock used returns (false)
 
 		// When
 		raise action
@@ -141,7 +141,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		operational()
-		mock used returns (1)
+		mock used returns (true)
 
 		// When
 		raise action
@@ -179,7 +179,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		lockUsed()
-		mock used returns (0)
+		mock used returns (false)
 
 		// When
 		raise action
@@ -199,7 +199,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		lockUsed()
-		mock used returns (1)
+		mock used returns (true)
 
 		// When
 		raise action

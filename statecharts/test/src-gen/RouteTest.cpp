@@ -695,6 +695,49 @@ namespace
 		};
 		IsCompletedMock * isCompletedMock;
 
+		class TurnCrossingsMock
+		{
+			typedef void (TurnCrossingsMock::*functiontype)();
+		public:
+			RouteTest * owner;
+			void (TurnCrossingsMock::*turnCrossingsBehaviorDefault)();
+
+			TurnCrossingsMock(RouteTest * owner) :
+				owner(owner),
+				turnCrossingsBehaviorDefault(0)
+			{}
+
+
+			void turnCrossings1()
+			{
+			}
+
+			void turnCrossingsDefault()
+			{
+			}
+
+			functiontype getBehavior()
+			{
+				return turnCrossingsBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (TurnCrossingsMock::*defaultBehavior)())
+			{
+				turnCrossingsBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&TurnCrossingsMock::turnCrossingsDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		TurnCrossingsMock * turnCrossingsMock;
+
 		class TurnSwitchesMock
 		{
 			typedef void (TurnSwitchesMock::*functiontype)();
@@ -1099,6 +1142,10 @@ namespace
 				owner->tryCompleteMock->tryComplete();
 				return (owner->tryCompleteMock->*(owner->tryCompleteMock->getBehavior()))();
 			}
+			void turnCrossings()
+			{
+				return (owner->turnCrossingsMock->*(owner->turnCrossingsMock->getBehavior()))();
+			}
 			void turnSwitches()
 			{
 				owner->turnSwitchesMock->turnSwitches();
@@ -1186,6 +1233,8 @@ namespace
 			isTourMock->initializeBehavior();
 			isCompletedMock = new IsCompletedMock(this);
 			isCompletedMock->initializeBehavior();
+			turnCrossingsMock = new TurnCrossingsMock(this);
+			turnCrossingsMock->initializeBehavior();
 			turnSwitchesMock = new TurnSwitchesMock(this);
 			turnSwitchesMock->initializeBehavior();
 			turnFlanksMock = new TurnFlanksMock(this);
@@ -1209,6 +1258,7 @@ namespace
 			delete enableSignalsMock;
 			delete turnFlanksMock;
 			delete turnSwitchesMock;
+			delete turnCrossingsMock;
 			delete isCompletedMock;
 			delete isTourMock;
 			delete failMock;
@@ -1273,6 +1323,7 @@ namespace
 		isTourMock->setDefaultBehavior(&IsTourMock::isTour1);
 
 		isCompletedMock->setDefaultBehavior(&IsCompletedMock::isCompleted1);
+
 
 
 
