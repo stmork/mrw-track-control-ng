@@ -16,8 +16,9 @@ void RailController::status(RailController::Status & status) const
 {
 	BaseController::status(status);
 
-	status.a_ends = aEnds();
-	status.b_ends = bEnds();
+	status.a_ends       = aEnds();
+	status.b_ends       = bEnds();
+	status.has_crossing = hasCrossing();
 }
 
 bool RailController::isExpandable() const

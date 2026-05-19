@@ -112,6 +112,26 @@ void RailWidget::paint(QPainter & painter)
 	painter.setPen(pen);
 	painter.drawLine(SCALE, 0, status.do_bend ? border + x_offset : border, 0);
 
+	if ((status.has_crossing) && (status.extensions >= 4))
+	{
+		pen.setWidth(60.0f);
+		painter.setPen(pen);
+		painter.drawLine(border + 50, 100, border + 50, -100);
+
+		pen.setWidth(50.0f);
+		pen.setColor(Qt::black);
+		painter.setPen(pen);
+		painter.drawLine(border + 50, 100, border + 50, -100);
+
+		pen.setWidth(5.0f);
+		pen.setColor(sectionColor(status.section_state));
+		painter.setPen(pen);
+		painter.drawLine(border + 50,  100, border + 50,  85);
+		painter.drawLine(border + 50,   48, border + 50,  18);
+		painter.drawLine(border + 50,  -48, border + 50, -18);
+		painter.drawLine(border + 50, -100, border + 50, -85);
+	}
+
 	// Rail bending to neighbour.
 	if (status.do_bend)
 	{
