@@ -133,4 +133,18 @@ GeneratorModel for create::images
 			format = "png"
 		}
 	}
+
+	statechart mrw.statechart.CrossingStatechart	
+	{
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+		}
+
+		feature Renderer
+		{
+			format = "png"
+		}
+	}
 }

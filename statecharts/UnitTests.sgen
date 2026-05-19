@@ -206,4 +206,26 @@ GeneratorModel for create::sctunit::cpp
 			testFilenameExtension   = "cpp"
 		}
 	}
+
+	test CrossingTest
+	{
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork\n//\n*"
+		}
+
+		feature Outlet
+		{
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
+			libraryTargetFolder = COMMON
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+			testFilenameExtension   = "cpp"
+		}
+	}
 }

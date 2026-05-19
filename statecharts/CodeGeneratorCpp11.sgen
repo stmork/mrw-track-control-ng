@@ -341,4 +341,41 @@ GeneratorModel for create::cpp
 			getters     = true
 		}
 	}
+
+	statechart mrw.statechart.CrossingStatechart
+	{
+		feature GeneralFeatures
+		{
+			timerService = false
+		}
+
+		feature LicenseHeader
+		{
+			licenseText = "*\n//\n// SPDX-License-Identifier: MIT\n// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork\n//\n*"
+		}
+
+		feature GeneratorOptions
+		{
+			smartPointers = false
+		}
+
+		feature IdentifierSettings
+		{
+			headerFilenameExtension = "h"
+			sourceFilenameExtension = "cpp"
+		}
+
+		feature Outlet
+		{
+			targetProject       = PROJECT
+			targetFolder        = FOLDER
+			libraryTargetFolder = COMMON
+		}
+
+		feature OutEventAPI
+		{
+			observables = false
+			getters     = true
+		}
+	}
 }

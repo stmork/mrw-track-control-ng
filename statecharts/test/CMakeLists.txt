@@ -17,6 +17,8 @@ find_package(GTest REQUIRED)
 set(SOURCES
 	src-gen/ConfigStatechart.cpp
 	src-gen/ConfigTest.cpp
+	src-gen/CrossingStatechart.cpp
+	src-gen/CrossingTest.cpp
 	src-gen/OperatingModeStatechart.cpp
 	src-gen/OperatingModeTest.cpp
 	src-gen/RouteStatechart.cpp
@@ -39,6 +41,7 @@ set(SOURCES
 
 set(HEADERS
 	src-gen/ConfigStatechart.h
+	src-gen/CrossingStatechart.h
 	src-gen/OperatingModeStatechart.h
 	src-gen/RouteStatechart.h
 	src-gen/SectionStatechart.h

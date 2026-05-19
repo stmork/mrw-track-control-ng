@@ -4,6 +4,7 @@
 *.pro.user
 *.o
 *.gcno
+*.gcda
 *.log
 moc_*
 ui_*.h

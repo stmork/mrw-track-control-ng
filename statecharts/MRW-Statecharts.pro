@@ -12,6 +12,7 @@ QMAKE_CXXFLAGS  += -Wno-reorder -Wno-unused-parameter
 
 SOURCES += \
 	ConfigStatechart.cpp \
+	CrossingStatechart.cpp \
 	OperatingModeStatechart.cpp \
 	RouteStatechart.cpp \
 	SectionStatechart.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
 
 HEADERS += \
 	ConfigStatechart.h \
+	CrossingStatechart.h \
 	OperatingModeStatechart.h \
 	RouteStatechart.h \
 	SectionStatechart.h \

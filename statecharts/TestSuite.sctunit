@@ -15,5 +15,6 @@ testsuite TestSuite
 	RouteTest,
 	TrackerTest,
 	ConfigTest,
-	UpdateTest
+	UpdateTest,
+	CrossingTest
 }

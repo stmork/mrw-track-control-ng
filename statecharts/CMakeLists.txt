@@ -1,11 +1,11 @@
 #
 #  SPDX-License-Identifier: MIT
-#  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+#  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 #
 
 cmake_minimum_required(VERSION 3.16)
 
-project(MRW-Statecharts VERSION 2.2
+project(MRW-Statecharts VERSION 2.3
 	DESCRIPTION "MRW statechart library"
 	LANGUAGES CXX)
 
@@ -19,6 +19,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ..)
 
 set(SOURCES
 	ConfigStatechart.cpp
+	CrossingStatechart.cpp
 	OperatingModeStatechart.cpp
 	RouteStatechart.cpp
 	SectionStatechart.cpp
@@ -32,6 +33,7 @@ set(SOURCES
 
 set(HEADERS
 	ConfigStatechart.h
+	CrossingStatechart.h
 	OperatingModeStatechart.h
 	RouteStatechart.h
 	SectionStatechart.h
