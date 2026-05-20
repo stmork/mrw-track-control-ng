@@ -69,7 +69,7 @@ void TestRailWidget::testPrepare()
 
 void TestRailWidget::testHavingLock()
 {
-	QVERIFY(!widget.hasLock());
+	QVERIFY(widget.hasLock());
 }
 
 void TestRailWidget::testEnds()

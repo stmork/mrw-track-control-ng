@@ -101,7 +101,20 @@ bool ControllerWidget::lockVisible(const Device::LockState state) const
 
 void ControllerWidget::drawLock(QPainter & painter, QColor color, const float x, const float y)
 {
-	painter.fillRect(x - LOCK_WIDTH * 0.5, y - LOCK_HEIGHT * 0.5, LOCK_WIDTH, LOCK_HEIGHT, color);
+	QPen pen;
+	pen.setColor(Qt::black);
+	pen.setWidth(4);
+	pen.setStyle(Qt::SolidLine); // Kann auch Qt::DashLine (gestrichelt) etc. sein
+	painter.setPen(pen);
+
+	// 2. Der Pinsel (Brush) bestimmt die Füllung
+	QBrush brush;
+	brush.setColor(color);
+	brush.setStyle(Qt::SolidPattern);
+	painter.setBrush(brush);
+
+	// 3. Das Rechteck zeichnen (X, Y, Breite, Höhe)
+	painter.drawRect(x - LOCK_WIDTH * 0.5, y - LOCK_HEIGHT * 0.5, LOCK_WIDTH, LOCK_HEIGHT);
 }
 
 void ControllerWidget::drawSheared(

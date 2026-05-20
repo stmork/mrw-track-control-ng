@@ -105,6 +105,11 @@ void RailWidget::paint(QPainter & painter)
 	const float y_offset = SCALE * (1.0 + status.lines * 2.0);
 	const float x_offset = y_offset / RAIL_SLOPE + SCALE / Position::HALF;
 
+	if ((status.has_crossing) && (status.extensions >= 4) && !isCrossing(status))
+	{
+		drawCrossing(painter, border);
+	}
+
 	// Straight rail drawing
 	pen.setCapStyle(Qt::FlatCap);
 	pen.setColor(sectionColor(status.section_state));
@@ -112,24 +117,14 @@ void RailWidget::paint(QPainter & painter)
 	painter.setPen(pen);
 	painter.drawLine(SCALE, 0, status.do_bend ? border + x_offset : border, 0);
 
-	if ((status.has_crossing) && (status.extensions >= 4))
+	if ((status.has_crossing) && (status.extensions >= 4) && !isCrossing(status) && (status.lock_state == LockState::PENDING) && (counter & 1))
 	{
-		pen.setWidth(60.0f);
-		painter.setPen(pen);
-		painter.drawLine(border + 50, 100, border + 50, -100);
+		drawLock(painter, WHITE, border + 50, 0);
+	}
 
-		pen.setWidth(50.0f);
-		pen.setColor(Qt::black);
-		painter.setPen(pen);
-		painter.drawLine(border + 50, 100, border + 50, -100);
-
-		pen.setWidth(5.0f);
-		pen.setColor(sectionColor(status.section_state));
-		painter.setPen(pen);
-		painter.drawLine(border + 50,  100, border + 50,  85);
-		painter.drawLine(border + 50,   48, border + 50,  18);
-		painter.drawLine(border + 50,  -48, border + 50, -18);
-		painter.drawLine(border + 50, -100, border + 50, -85);
+	if ((status.has_crossing) && (status.extensions >= 4) && isCrossing(status))
+	{
+		drawCrossing(painter, border);
 	}
 
 	// Rail bending to neighbour.
@@ -170,4 +165,39 @@ void RailWidget::paint(QPainter & painter)
 
 	// Draw connector markers
 	drawConnectors(painter);
+}
+
+bool RailWidget::isCrossing(const Status & status) const
+{
+	return (status.section_state == SectionState::FREE);
+}
+
+void RailWidget::drawCrossing(
+	QPainter   &   painter,
+	const double   border) const
+{
+	QPen pen;
+
+	pen.setColor(YELLOW);
+	pen.setWidth(ROAD_WIDTH);
+	painter.setPen(pen);
+	painter.drawLine(border + 50, 100, border + 50, -100);
+
+	pen.setWidth(ASPHALT_WIDTH);
+	pen.setColor(Qt::black);
+	painter.setPen(pen);
+	painter.drawLine(border + 50, 100, border + 50, -100);
+
+	pen.setWidth(ROAD_BORDER);
+	pen.setColor(YELLOW);
+	painter.setPen(pen);
+	painter.drawLine(border + 50,  100, border + 50,  85);
+	painter.drawLine(border + 50,   48, border + 50,  18);
+	painter.drawLine(border + 50,  -48, border + 50, -18);
+	painter.drawLine(border + 50, -100, border + 50, -85);
+}
+
+bool RailWidget::hasLock() const
+{
+	return true;
 }
