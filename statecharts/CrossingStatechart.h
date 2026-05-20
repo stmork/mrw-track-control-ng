@@ -61,11 +61,12 @@ namespace mrw
 				main_region_Operating_Processing_Locked,
 				main_region_Operating_Processing_Pending,
 				main_region_Operating_Processing_Pending_Crossing_processing_Closing,
-				main_region_Operating_Processing_Pending_Crossing_processing_Opening
+				main_region_Operating_Processing_Pending_Crossing_processing_Opening,
+				main_region_Operating_Processing_Pending_Crossing_processing_Delay
 			};
 
 			/*! The number of states. */
-			static constexpr const sc::integer numStates {9};
+			static constexpr const sc::integer numStates {10};
 			static constexpr const sc::integer scvi_main_region_Wait_For_Start {0};
 			static constexpr const sc::integer scvi_main_region_Failed {0};
 			static constexpr const sc::integer scvi_main_region_Init {0};
@@ -75,6 +76,7 @@ namespace mrw
 			static constexpr const sc::integer scvi_main_region_Operating_Processing_Pending {0};
 			static constexpr const sc::integer scvi_main_region_Operating_Processing_Pending_Crossing_processing_Closing {0};
 			static constexpr const sc::integer scvi_main_region_Operating_Processing_Pending_Crossing_processing_Opening {0};
+			static constexpr const sc::integer scvi_main_region_Operating_Processing_Pending_Crossing_processing_Delay {0};
 
 			/*! Enumeration of all events which are consumed. */
 			enum class Event
@@ -85,7 +87,8 @@ namespace mrw
 				start,
 				response,
 				failed,
-				_te0_main_region_Operating_Processing_Pending_
+				_te0_main_region_Operating_Processing_Pending_,
+				_te1_main_region_Operating_Processing_Pending_Crossing_processing_Delay_
 			};
 
 			class EventInstance
@@ -101,6 +104,8 @@ namespace mrw
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
 			static sc::integer getTimeout()  noexcept;
+			/*! Gets the value of the variable 'delay' that is defined in the default interface scope. */
+			static sc::integer getDelay()  noexcept;
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
 			{
@@ -110,6 +115,8 @@ namespace mrw
 				virtual void inc() = 0;
 
 				virtual void dec() = 0;
+
+				virtual void unregister() = 0;
 
 				virtual bool used() = 0;
 
@@ -174,10 +181,10 @@ namespace mrw
 			bool isStateActive(State state) const noexcept;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount {1};
+			static const sc::integer timeEventsCount {2};
 
 			//! number of time events that can be active at once.
-			static const sc::integer parallelTimeEventsCount {1};
+			static const sc::integer parallelTimeEventsCount {2};
 
 
 		public slots:
@@ -212,6 +219,7 @@ namespace mrw
 			CrossingStatechart & operator=(const CrossingStatechart &);
 
 			static constexpr const sc::integer timeout {2500};
+			static constexpr const sc::integer delay {1000};
 
 
 
@@ -242,8 +250,10 @@ namespace mrw
 			void enact_main_region_Operating_Processing_Pending();
 			void enact_main_region_Operating_Processing_Pending_Crossing_processing_Closing();
 			void enact_main_region_Operating_Processing_Pending_Crossing_processing_Opening();
+			void enact_main_region_Operating_Processing_Pending_Crossing_processing_Delay();
 			void exact_main_region_Init();
 			void exact_main_region_Operating_Processing_Pending();
+			void exact_main_region_Operating_Processing_Pending_Crossing_processing_Delay();
 			void enseq_main_region_Wait_For_Start_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_Init_default();
@@ -252,6 +262,7 @@ namespace mrw
 			void enseq_main_region_Operating_Processing_Locked_default();
 			void enseq_main_region_Operating_Processing_Pending_Crossing_processing_Closing_default();
 			void enseq_main_region_Operating_Processing_Pending_Crossing_processing_Opening_default();
+			void enseq_main_region_Operating_Processing_Pending_Crossing_processing_Delay_default();
 			void enseq_main_region_default();
 			void enseq_main_region_Operating_Processing_default();
 			void exseq_main_region_Wait_For_Start();
@@ -263,6 +274,7 @@ namespace mrw
 			void exseq_main_region_Operating_Processing_Pending();
 			void exseq_main_region_Operating_Processing_Pending_Crossing_processing_Closing();
 			void exseq_main_region_Operating_Processing_Pending_Crossing_processing_Opening();
+			void exseq_main_region_Operating_Processing_Pending_Crossing_processing_Delay();
 			void exseq_main_region();
 			void exseq_main_region_Operating_Processing();
 			void exseq_main_region_Operating_Processing_Pending_Crossing_processing();
@@ -277,6 +289,7 @@ namespace mrw
 			sc::integer main_region_Operating_Processing_Pending_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Pending_Crossing_processing_Closing_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Pending_Crossing_processing_Opening_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_Processing_Pending_Crossing_processing_Delay_react(const sc::integer transitioned_before);
 			void clearInEvents() noexcept;
 			void microStep();
 			void runCycle();

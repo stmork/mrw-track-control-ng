@@ -19,6 +19,8 @@
 
 namespace mrw::ctrl
 {
+	class CrossingController;
+
 	class RailControllerProxy :
 		public RailController,
 		public RailPartInfo
@@ -42,9 +44,9 @@ namespace mrw::ctrl
 		virtual bool            isDirection()  const override;
 
 		virtual mrw::model::Position     *    position() const override;
-		virtual mrw::model::SectionState      state() const override;
-		virtual mrw::model::Device::LockState lock() const override;
-		virtual mrw::model::Position::Bending bending() const override;
+		virtual mrw::model::SectionState      state()    const override;
+		virtual mrw::model::Device::LockState lock()     const override;
+		virtual mrw::model::Position::Bending bending()  const override;
 
 		// Implementations from RailController
 		virtual bool    aEnds() const override;

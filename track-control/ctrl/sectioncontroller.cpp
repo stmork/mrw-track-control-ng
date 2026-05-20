@@ -8,6 +8,7 @@
 #include <util/method.h>
 #include <can/mrwmessage.h>
 #include <model/railpart.h>
+#include <ctrl/crossingcontroller.h>
 #include <ctrl/sectioncontroller.h>
 #include <ctrl/controllerregistry.h>
 #include <statecharts/timerservice.h>
@@ -26,6 +27,19 @@ SectionController::SectionController(
 	ctrl_section(input)
 {
 	ControllerRegistry::instance().registerController(ctrl_section, this);
+
+	ctrl_crossing = ControllerRegistry::instance().find<CrossingController>(section()->crossing());
+	if (ctrl_crossing != nullptr)
+	{
+		connect(
+			&statechart, &SectionStatechart::unregister,
+			ctrl_crossing, &CrossingController::action,
+			Qt::QueuedConnection);
+		connect(
+			&statechart, &SectionStatechart::stateResponse,
+			ctrl_crossing, &CrossingController::action,
+			Qt::QueuedConnection);
+	}
 
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::clear,

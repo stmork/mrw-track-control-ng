@@ -37,6 +37,7 @@ namespace mrw
 				return;
 			}
 			timerService->unsetTimer(this, 0);
+			timerService->unsetTimer(this, 1);
 		}
 
 
@@ -93,6 +94,7 @@ namespace mrw
 				}
 
 			case mrw::statechart::CrossingStatechart::Event::_te0_main_region_Operating_Processing_Pending_:
+			case mrw::statechart::CrossingStatechart::Event::_te1_main_region_Operating_Processing_Pending_Crossing_processing_Delay_:
 				{
 					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::CrossingStatechart::Event::_te0_main_region_Operating_Processing_Pending_)] = true;
 					break;
@@ -222,7 +224,7 @@ namespace mrw
 				}
 			case mrw::statechart::CrossingStatechart::State::main_region_Operating :
 				{
-					return  (stateConfVector[scvi_main_region_Operating] >= mrw::statechart::CrossingStatechart::State::main_region_Operating && stateConfVector[scvi_main_region_Operating] <= mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Opening);
+					return  (stateConfVector[scvi_main_region_Operating] >= mrw::statechart::CrossingStatechart::State::main_region_Operating && stateConfVector[scvi_main_region_Operating] <= mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Delay);
 					break;
 				}
 			case mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Unlocked :
@@ -237,7 +239,7 @@ namespace mrw
 				}
 			case mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending :
 				{
-					return  (stateConfVector[scvi_main_region_Operating_Processing_Pending] >= mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending && stateConfVector[scvi_main_region_Operating_Processing_Pending] <= mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Opening);
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Pending] >= mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending && stateConfVector[scvi_main_region_Operating_Processing_Pending] <= mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Delay);
 					break;
 				}
 			case mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Closing :
@@ -248,6 +250,11 @@ namespace mrw
 			case mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Opening :
 				{
 					return  (stateConfVector[scvi_main_region_Operating_Processing_Pending_Crossing_processing_Opening] == mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Opening);
+					break;
+				}
+			case mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Delay :
+				{
+					return  (stateConfVector[scvi_main_region_Operating_Processing_Pending_Crossing_processing_Delay] == mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Delay);
 					break;
 				}
 			default:
@@ -262,6 +269,11 @@ namespace mrw
 		sc::integer CrossingStatechart::getTimeout() noexcept
 		{
 			return timeout;
+		}
+
+		sc::integer CrossingStatechart::getDelay() noexcept
+		{
+			return delay;
 		}
 
 		void CrossingStatechart::setOperationCallback(OperationCallback * operationCallback) noexcept
@@ -281,8 +293,8 @@ namespace mrw
 		void CrossingStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			ifaceOperationCallback->open();
 			ifaceOperationCallback->inc();
+			ifaceOperationCallback->open();
 		}
 
 		/* Entry action for state 'Unlocked'. */
@@ -322,6 +334,13 @@ namespace mrw
 			ifaceOperationCallback->open();
 		}
 
+		/* Entry action for state 'Delay'. */
+		void CrossingStatechart::enact_main_region_Operating_Processing_Pending_Crossing_processing_Delay()
+		{
+			/* Entry action for state 'Delay'. */
+			timerService->setTimer(this, 1, (static_cast<sc::time> (CrossingStatechart::delay)), false);
+		}
+
 		/* Exit action for state 'Init'. */
 		void CrossingStatechart::exact_main_region_Init()
 		{
@@ -335,6 +354,14 @@ namespace mrw
 			/* Exit action for state 'Pending'. */
 			timerService->unsetTimer(this, 0);
 			ifaceOperationCallback->dec();
+			ifaceOperationCallback->unregister();
+		}
+
+		/* Exit action for state 'Delay'. */
+		void CrossingStatechart::exact_main_region_Operating_Processing_Pending_Crossing_processing_Delay()
+		{
+			/* Exit action for state 'Delay'. */
+			timerService->unsetTimer(this, 1);
 		}
 
 		/* 'default' enter sequence for state Wait For Start */
@@ -403,6 +430,15 @@ namespace mrw
 			/* 'default' enter sequence for state Opening */
 			enact_main_region_Operating_Processing_Pending_Crossing_processing_Opening();
 			stateConfVector[0] = mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Opening;
+			stateConfVectorChanged = true;
+		}
+
+		/* 'default' enter sequence for state Delay */
+		void CrossingStatechart::enseq_main_region_Operating_Processing_Pending_Crossing_processing_Delay_default()
+		{
+			/* 'default' enter sequence for state Delay */
+			enact_main_region_Operating_Processing_Pending_Crossing_processing_Delay();
+			stateConfVector[0] = mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Delay;
 			stateConfVectorChanged = true;
 		}
 
@@ -487,6 +523,14 @@ namespace mrw
 			stateConfVector[0] = mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending;
 		}
 
+		/* Default exit sequence for state Delay */
+		void CrossingStatechart::exseq_main_region_Operating_Processing_Pending_Crossing_processing_Delay()
+		{
+			/* Default exit sequence for state Delay */
+			stateConfVector[0] = mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending;
+			exact_main_region_Operating_Processing_Pending_Crossing_processing_Delay();
+		}
+
 		/* Default exit sequence for region main region */
 		void CrossingStatechart::exseq_main_region()
 		{
@@ -541,6 +585,12 @@ namespace mrw
 					exact_main_region_Operating_Processing_Pending();
 					break;
 				}
+			case mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Delay :
+				{
+					exseq_main_region_Operating_Processing_Pending_Crossing_processing_Delay();
+					exact_main_region_Operating_Processing_Pending();
+					break;
+				}
 			default:
 				/* do nothing */
 				break;
@@ -581,6 +631,12 @@ namespace mrw
 					exact_main_region_Operating_Processing_Pending();
 					break;
 				}
+			case mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Delay :
+				{
+					exseq_main_region_Operating_Processing_Pending_Crossing_processing_Delay();
+					exact_main_region_Operating_Processing_Pending();
+					break;
+				}
 			default:
 				/* do nothing */
 				break;
@@ -602,6 +658,11 @@ namespace mrw
 			case mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Opening :
 				{
 					exseq_main_region_Operating_Processing_Pending_Crossing_processing_Opening();
+					break;
+				}
+			case mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Delay :
+				{
+					exseq_main_region_Operating_Processing_Pending_Crossing_processing_Delay();
 					break;
 				}
 			default:
@@ -809,9 +870,9 @@ namespace mrw
 			{
 				if (response_raised)
 				{
-					exseq_main_region_Operating_Processing_Pending();
-					enseq_main_region_Operating_Processing_Locked_default();
-					main_region_Operating_react(0);
+					exseq_main_region_Operating_Processing_Pending_Crossing_processing_Closing();
+					enseq_main_region_Operating_Processing_Pending_Crossing_processing_Delay_default();
+					main_region_Operating_Processing_Pending_react(0);
 					transitioned_after = 0;
 				}
 			}
@@ -847,6 +908,30 @@ namespace mrw
 			return transitioned_after;
 		}
 
+		sc::integer CrossingStatechart::main_region_Operating_Processing_Pending_Crossing_processing_Delay_react(const sc::integer transitioned_before)
+		{
+			/* The reactions of state Delay. */
+			sc::integer transitioned_after = transitioned_before;
+			if ((transitioned_after) < (0))
+			{
+				if (timeEvents[1])
+				{
+					exseq_main_region_Operating_Processing_Pending();
+					timeEvents[1] = false;
+					enseq_main_region_Operating_Processing_Locked_default();
+					main_region_Operating_react(0);
+					transitioned_after = 0;
+				}
+			}
+			/* If no transition was taken */
+			if ((transitioned_after) == (transitioned_before))
+			{
+				/* then execute local reactions. */
+				transitioned_after = main_region_Operating_Processing_Pending_react(transitioned_before);
+			}
+			return transitioned_after;
+		}
+
 		void CrossingStatechart::clearInEvents() noexcept
 		{
 			action_raised = false;
@@ -855,6 +940,7 @@ namespace mrw
 			response_raised = false;
 			failed_raised = false;
 			timeEvents[0] = false;
+			timeEvents[1] = false;
 		}
 
 		void CrossingStatechart::microStep()
@@ -894,6 +980,11 @@ namespace mrw
 			case mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Opening :
 				{
 					main_region_Operating_Processing_Pending_Crossing_processing_Opening_react(-1);
+					break;
+				}
+			case mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Delay :
+				{
+					main_region_Operating_Processing_Pending_Crossing_processing_Delay_react(-1);
 					break;
 				}
 			default:

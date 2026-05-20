@@ -98,6 +98,75 @@ namespace
 		};
 		FailMock * failMock;
 
+		class UsedMock
+		{
+			typedef bool (UsedMock::*functiontype)();
+		public:
+			CrossingTest * owner;
+			bool (UsedMock::*usedBehaviorDefault)();
+			int callCount;
+
+			UsedMock(CrossingTest * owner) :
+				owner(owner),
+				usedBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			bool used1()
+			{
+				return (false);
+			}
+
+			bool used2()
+			{
+				return (true);
+			}
+
+			bool usedDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void used()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return usedBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (UsedMock::*defaultBehavior)())
+			{
+				usedBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&UsedMock::usedDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		UsedMock * usedMock;
+
 		class IncMock
 		{
 			typedef void (IncMock::*functiontype)();
@@ -219,6 +288,67 @@ namespace
 			}
 		};
 		DecMock * decMock;
+
+		class UnregisterMock
+		{
+			typedef void (UnregisterMock::*functiontype)();
+		public:
+			CrossingTest * owner;
+			void (UnregisterMock::*unregisterBehaviorDefault)();
+			int callCount;
+
+			UnregisterMock(CrossingTest * owner) :
+				owner(owner),
+				unregisterBehaviorDefault(0),
+				callCount(0)
+			{}
+
+
+			void unregister1()
+			{
+			}
+
+			void unregisterDefault()
+			{
+			}
+
+			bool calledAtLeast(const int times)
+			{
+				return (callCount >= times);
+			}
+
+			bool calledAtLeastOnce()
+			{
+				return (callCount > 0);
+			}
+
+			void unregister()
+			{
+				++callCount;
+			}
+
+			functiontype getBehavior()
+			{
+				return unregisterBehaviorDefault;
+			}
+
+			void setDefaultBehavior(void (UnregisterMock::*defaultBehavior)())
+			{
+				unregisterBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&UnregisterMock::unregisterDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+				callCount = 0;
+			}
+		};
+		UnregisterMock * unregisterMock;
 
 		class PendingMock
 		{
@@ -405,9 +535,11 @@ namespace
 
 		class LockMock
 		{
+			typedef void (LockMock::*functiontype)();
 			struct parameters
 			{
 				bool do_it;
+				void (LockMock::*behavior)();
 				int callCount;
 				inline bool operator==(const parameters & other)
 				{
@@ -416,14 +548,25 @@ namespace
 			};
 		public:
 			CrossingTest * owner;
+			std::list<LockMock::parameters> mocks;
 			std::list<LockMock::parameters> paramCount;
+			void (LockMock::*lockBehaviorDefault)();
 			int callCount;
 
 			LockMock(CrossingTest * owner) :
 				owner(owner),
+				lockBehaviorDefault(0),
 				callCount(0)
 			{}
 
+
+			void lock1()
+			{
+			}
+
+			void lockDefault()
+			{
+			}
 
 			bool calledAtLeast(const int times)
 			{
@@ -433,6 +576,20 @@ namespace
 			bool calledAtLeastOnce()
 			{
 				return (callCount > 0);
+			}
+
+			void setLockBehavior(const bool do_it, void (LockMock::*func)())
+			{
+				parameters p;
+				p.do_it = do_it;
+				p.behavior = func;
+
+				std::list<LockMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					mocks.erase(i);
+				}
+				mocks.push_back(p);
 			}
 
 			bool calledAtLeast(const int times, const bool do_it)
@@ -487,64 +644,43 @@ namespace
 				}
 				paramCount.push_back(p);
 			}
-			void reset()
+
+			functiontype getBehavior(const bool do_it)
 			{
-				callCount = 0;
-				paramCount.clear();
-			}
-		};
-		LockMock * lockMock;
+				parameters p;
+				p.do_it = do_it;
 
-		class UsedMock
-		{
-			typedef bool (UsedMock::*functiontype)();
-		public:
-			CrossingTest * owner;
-			bool (UsedMock::*usedBehaviorDefault)();
-
-			UsedMock(CrossingTest * owner) :
-				owner(owner),
-				usedBehaviorDefault(0)
-			{}
-
-
-			bool used1()
-			{
-				return (false);
+				std::list<LockMock::parameters>::iterator i = std::find(mocks.begin(), mocks.end(), p);
+				if (i != mocks.end())
+				{
+					return  i->behavior;
+				}
+				else
+				{
+					return lockBehaviorDefault;
+				}
 			}
 
-			bool used2()
+			void setDefaultBehavior(void (LockMock::*defaultBehavior)())
 			{
-				return (true);
-			}
-
-			bool usedDefault()
-			{
-				bool defaultValue = false;
-				return (defaultValue);
-			}
-
-			functiontype getBehavior()
-			{
-				return usedBehaviorDefault;
-			}
-
-			void setDefaultBehavior(bool (UsedMock::*defaultBehavior)())
-			{
-				usedBehaviorDefault = defaultBehavior;
+				lockBehaviorDefault = defaultBehavior;
+				mocks.clear();
 			}
 
 			void initializeBehavior()
 			{
-				setDefaultBehavior(&UsedMock::usedDefault);
+				setDefaultBehavior(&LockMock::lockDefault);
 			}
 
 			void reset()
 			{
 				initializeBehavior();
+				callCount = 0;
+				paramCount.clear();
+				mocks.clear();
 			}
 		};
-		UsedMock * usedMock;
+		LockMock * lockMock;
 
 		class MockDefault : public mrw::statechart::CrossingStatechart::OperationCallback
 		{
@@ -561,8 +697,14 @@ namespace
 				owner->decMock->dec();
 				return (owner->decMock->*(owner->decMock->getBehavior()))();
 			}
+			void unregister()
+			{
+				owner->unregisterMock->unregister();
+				return (owner->unregisterMock->*(owner->unregisterMock->getBehavior()))();
+			}
 			bool used()
 			{
+				owner->usedMock->used();
 				return (owner->usedMock->*(owner->usedMock->getBehavior()))();
 			}
 			void close()
@@ -588,6 +730,7 @@ namespace
 			void lock(bool do_it)
 			{
 				owner->lockMock->lock(do_it);
+				return (owner->lockMock->*(owner->lockMock->getBehavior(do_it)))();
 			}
 		};
 
@@ -606,10 +749,14 @@ namespace
 			statechart->setTimerService(runner);
 			failMock = new FailMock(this);
 			failMock->initializeBehavior();
+			usedMock = new UsedMock(this);
+			usedMock->initializeBehavior();
 			incMock = new IncMock(this);
 			incMock->initializeBehavior();
 			decMock = new DecMock(this);
 			decMock->initializeBehavior();
+			unregisterMock = new UnregisterMock(this);
+			unregisterMock->initializeBehavior();
 			pendingMock = new PendingMock(this);
 			pendingMock->initializeBehavior();
 			openMock = new OpenMock(this);
@@ -617,20 +764,20 @@ namespace
 			closeMock = new CloseMock(this);
 			closeMock->initializeBehavior();
 			lockMock = new LockMock(this);
-			usedMock = new UsedMock(this);
-			usedMock->initializeBehavior();
+			lockMock->initializeBehavior();
 			defaultMock = new MockDefault(this);
 			statechart->setOperationCallback(defaultMock);
 		}
 		virtual void TearDown()
 		{
-			delete usedMock;
 			delete lockMock;
 			delete closeMock;
 			delete openMock;
 			delete pendingMock;
+			delete unregisterMock;
 			delete decMock;
 			delete incMock;
+			delete usedMock;
 			delete failMock;
 			delete statechart;
 			delete defaultMock;
@@ -651,9 +798,13 @@ namespace
 	{
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Init));
 
+		EXPECT_TRUE(usedMock->calledAtLeast(0));
+
 		EXPECT_TRUE(incMock->calledAtLeast(1));
 
 		EXPECT_TRUE(decMock->calledAtLeast(0));
+
+		EXPECT_TRUE(unregisterMock->calledAtLeast(0));
 
 		EXPECT_TRUE(pendingMock->calledAtLeast(0));
 
@@ -676,6 +827,8 @@ namespace
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Wait_For_Start));
 
 		usedMock->setDefaultBehavior(&UsedMock::used1);
+
+
 
 
 
@@ -724,9 +877,13 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Unlocked));
 
+		EXPECT_TRUE(usedMock->calledAtLeast(0));
+
 		EXPECT_TRUE(incMock->calledAtLeast(0));
 
 		EXPECT_TRUE(decMock->calledAtLeast(1));
+
+		EXPECT_TRUE(unregisterMock->calledAtLeast(0));
 
 		EXPECT_TRUE(pendingMock->calledAtLeast(0));
 
@@ -773,9 +930,13 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Unlocked));
 
+		EXPECT_TRUE(usedMock->calledAtLeast(1));
+
 		EXPECT_TRUE(incMock->calledAtLeast(0));
 
 		EXPECT_TRUE(decMock->calledAtLeast(0));
+
+		EXPECT_TRUE(unregisterMock->calledAtLeast(0));
 
 		EXPECT_TRUE(pendingMock->calledAtLeast(0));
 
@@ -796,9 +957,13 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Closing));
 
+		EXPECT_TRUE(usedMock->calledAtLeast(1));
+
 		EXPECT_TRUE(incMock->calledAtLeast(1));
 
 		EXPECT_TRUE(decMock->calledAtLeast(0));
+
+		EXPECT_TRUE(unregisterMock->calledAtLeast(0));
 
 		EXPECT_TRUE(pendingMock->calledAtLeast(1));
 
@@ -817,11 +982,21 @@ namespace
 
 		statechart->raiseResponse();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Delay));
+
+		runner->proceed_time(statechart->getDelay());
+
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Locked));
+
+		EXPECT_TRUE(usedMock->calledAtLeast(1));
 
 		EXPECT_TRUE(incMock->calledAtLeast(0));
 
 		EXPECT_TRUE(decMock->calledAtLeast(1));
+
+		EXPECT_TRUE(unregisterMock->calledAtLeast(1));
 
 		EXPECT_TRUE(lockMock->calledAtLeast(1));
 
@@ -846,9 +1021,13 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Opening));
 
+		EXPECT_TRUE(usedMock->calledAtLeast(1));
+
 		EXPECT_TRUE(incMock->calledAtLeast(1));
 
 		EXPECT_TRUE(decMock->calledAtLeast(0));
+
+		EXPECT_TRUE(unregisterMock->calledAtLeast(0));
 
 		EXPECT_TRUE(pendingMock->calledAtLeast(1));
 
@@ -871,9 +1050,13 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Locked));
 
+		EXPECT_TRUE(usedMock->calledAtLeast(1));
+
 		EXPECT_TRUE(incMock->calledAtLeast(1));
 
 		EXPECT_TRUE(decMock->calledAtLeast(0));
+
+		EXPECT_TRUE(unregisterMock->calledAtLeast(0));
 
 		EXPECT_TRUE(pendingMock->calledAtLeast(0));
 
@@ -890,9 +1073,13 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Unlocked));
 
+		EXPECT_TRUE(usedMock->calledAtLeast(0));
+
 		EXPECT_TRUE(incMock->calledAtLeast(0));
 
 		EXPECT_TRUE(decMock->calledAtLeast(1));
+
+		EXPECT_TRUE(unregisterMock->calledAtLeast(1));
 
 		EXPECT_TRUE(pendingMock->calledAtLeast(0));
 
@@ -913,9 +1100,13 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Failed));
 
+		EXPECT_TRUE(usedMock->calledAtLeast(0));
+
 		EXPECT_TRUE(incMock->calledAtLeast(0));
 
 		EXPECT_TRUE(decMock->calledAtLeast(1));
+
+		EXPECT_TRUE(unregisterMock->calledAtLeast(1));
 
 		EXPECT_TRUE(pendingMock->calledAtLeast(0));
 
@@ -938,9 +1129,13 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Failed));
 
+		EXPECT_TRUE(usedMock->calledAtLeast(0));
+
 		EXPECT_TRUE(incMock->calledAtLeast(0));
 
 		EXPECT_TRUE(decMock->calledAtLeast(1));
+
+		EXPECT_TRUE(unregisterMock->calledAtLeast(1));
 
 		EXPECT_TRUE(pendingMock->calledAtLeast(0));
 
@@ -963,9 +1158,13 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Failed));
 
+		EXPECT_TRUE(usedMock->calledAtLeast(0));
+
 		EXPECT_TRUE(incMock->calledAtLeast(0));
 
 		EXPECT_TRUE(decMock->calledAtLeast(1));
+
+		EXPECT_TRUE(unregisterMock->calledAtLeast(1));
 
 		EXPECT_TRUE(pendingMock->calledAtLeast(0));
 
@@ -988,9 +1187,13 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Failed));
 
+		EXPECT_TRUE(usedMock->calledAtLeast(0));
+
 		EXPECT_TRUE(incMock->calledAtLeast(0));
 
 		EXPECT_TRUE(decMock->calledAtLeast(1));
+
+		EXPECT_TRUE(unregisterMock->calledAtLeast(1));
 
 		EXPECT_TRUE(pendingMock->calledAtLeast(0));
 
@@ -999,6 +1202,47 @@ namespace
 		EXPECT_TRUE(closeMock->calledAtLeast(0));
 
 		EXPECT_TRUE(failMock->calledAtLeast(1));
+
+	}
+	TEST_F(CrossingTest, doExit)
+	{
+		statechart->enter();
+
+		EXPECT_TRUE(statechart->isActive());
+
+		statechart->exit();
+
+		EXPECT_TRUE(!statechart->isActive());
+
+		waitForStart();
+
+		statechart->exit();
+
+		EXPECT_TRUE(!statechart->isActive());
+
+		initial();
+
+		statechart->exit();
+
+		EXPECT_TRUE(!statechart->isActive());
+
+		operational();
+
+		statechart->exit();
+
+		EXPECT_TRUE(!statechart->isActive());
+
+		failAfterStart();
+
+		statechart->exit();
+
+		EXPECT_TRUE(!statechart->isActive());
+
+		lockUsed();
+
+		statechart->exit();
+
+		EXPECT_TRUE(!statechart->isActive());
 
 	}
 

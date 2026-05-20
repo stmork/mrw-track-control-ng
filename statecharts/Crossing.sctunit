@@ -14,12 +14,14 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	operation initing()
 	{
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Init)
-		assert called inc     1 times
-		assert called dec     0 times
-		assert called pending 0 times
-		assert called open    1 times
-		assert called close   0 times
-		assert called lock    0 times
+		assert called used       0 times
+		assert called inc        1 times
+		assert called dec        0 times
+		assert called unregister 0 times
+		assert called pending    0 times
+		assert called open       1 times
+		assert called close      0 times
+		assert called lock       0 times
 	}
 
 	@Test
@@ -33,10 +35,12 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 		mock used returns (false)
 		mock inc
 		mock dec
-		mock close
-		mock open
-		mock fail
+		mock unregister
 		mock pending
+		mock open
+		mock close
+		mock lock
+		mock fail
 	}
 
 	@Test
@@ -77,12 +81,14 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 		// Then
 		assert active(mrw.^statechart.CrossingStatechart.main_region.Operating)
 		assert active(mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Unlocked)
-		assert called inc     0 times
-		assert called dec     1 times
-		assert called pending 0 times
-		assert called open    0 times
-		assert called close   0 times
-		assert called lock    1 times
+		assert called used       0 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 0 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
+		assert called lock       1 times
 	}
 
 	@Test
@@ -129,11 +135,13 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 
 		// Then
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Unlocked)
-		assert called inc     0 times
-		assert called dec     0 times
-		assert called pending 0 times
-		assert called open    0 times
-		assert called close   0 times
+		assert called used       1 times
+		assert called inc        0 times
+		assert called dec        0 times
+		assert called unregister 0 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
 	}
 
 	@Test
@@ -149,11 +157,13 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 		// Then
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Closing)
-		assert called inc     1 times
-		assert called dec     0 times
-		assert called pending 1 times
-		assert called open    0 times
-		assert called close   1 times
+		assert called used       1 times
+		assert called inc        1 times
+		assert called dec        0 times
+		assert called unregister 0 times
+		assert called pending    1 times
+		assert called open       0 times
+		assert called close      1 times
 	}
 
 	@Test
@@ -164,14 +174,21 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 
 		// When
 		raise response
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Delay)
+
+		// When
+		proceed delay ms
 
 		// Then
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Locked)
-		assert called inc     0 times
-		assert called dec     1 times
-		assert called lock    1 times
-		assert called open    0 times
-		assert called close   0 times
+		assert called used       1 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 1 times
+		assert called lock       1 times
+		assert called open       0 times
+		assert called close      0 times
 	}
 
 	@Test
@@ -187,11 +204,13 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 		// Then
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Opening)
-		assert called inc     1 times
-		assert called dec     0 times
-		assert called pending 1 times
-		assert called open    1 times
-		assert called close   0 times
+		assert called used       1 times
+		assert called inc        1 times
+		assert called dec        0 times
+		assert called unregister 0 times
+		assert called pending    1 times
+		assert called open       1 times
+		assert called close      0 times
 	}
 
 	@Test
@@ -206,11 +225,13 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 
 		// Then
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Locked)
-		assert called inc     1 times
-		assert called dec     0 times
-		assert called pending 0 times
-		assert called open    1 times
-		assert called close   0 times
+		assert called used       1 times
+		assert called inc        1 times
+		assert called dec        0 times
+		assert called unregister 0 times
+		assert called pending    0 times
+		assert called open       1 times
+		assert called close      0 times
 	}
 
 	@Test
@@ -224,11 +245,13 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 
 		// Then
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Unlocked)
-		assert called inc     0 times
-		assert called dec     1 times
-		assert called pending 0 times
-		assert called open    0 times
-		assert called close   0 times
+		assert called used       0 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 1 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
 	}
 
 	@Test
@@ -244,12 +267,14 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 
 		// Then
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Failed)
-		assert called inc     0 times
-		assert called dec     1 times
-		assert called pending 0 times
-		assert called open    0 times
-		assert called close   0 times
-		assert called fail    1 times
+		assert called used       0 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 1 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
+		assert called fail       1 times
 	}
 
 	@Test
@@ -265,12 +290,14 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 
 		// Then
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Failed)
-		assert called inc     0 times
-		assert called dec     1 times
-		assert called pending 0 times
-		assert called open    0 times
-		assert called close   0 times
-		assert called fail    1 times
+		assert called used       0 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 1 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
+		assert called fail       1 times
 	}
 
 	@Test
@@ -286,12 +313,14 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 
 		// Then
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Failed)
-		assert called inc     0 times
-		assert called dec     1 times
-		assert called pending 0 times
-		assert called open    0 times
-		assert called close   0 times
-		assert called fail    1 times
+		assert called used       0 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 1 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
+		assert called fail       1 times
 	}
 
 	@Test
@@ -307,11 +336,43 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 
 		// Then
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Failed)
-		assert called inc     0 times
-		assert called dec     1 times
-		assert called pending 0 times
-		assert called open    0 times
-		assert called close   0 times
-		assert called fail    1 times
+		assert called used       0 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 1 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
+		assert called fail       1 times
+	}
+
+	@Test
+	operation doExit()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		waitForStart()
+		exit
+		assert !is_active
+
+		initial()
+		exit
+		assert !is_active
+
+		operational()
+		exit
+		assert !is_active
+
+		failAfterStart()
+		exit
+		assert !is_active
+
+		lockUsed()
+		exit
+		assert !is_active
 	}
 }

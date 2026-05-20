@@ -61,6 +61,7 @@ namespace mrw::ctrl
 		// Implementations from OperationCallback
 		virtual void inc() override;
 		virtual void dec() override;
+		virtual void unregister() override;
 		virtual bool used() override;
 		virtual void close() override;
 		virtual void open() override;

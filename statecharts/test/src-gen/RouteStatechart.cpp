@@ -324,7 +324,6 @@ namespace mrw
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->disableSections();
 			ifaceOperationCallback->disableSignals();
-			ifaceOperationCallback->turnCrossings();
 			ifaceOperationCallback->tryComplete();
 		}
 
@@ -404,7 +403,6 @@ namespace mrw
 			ifaceOperationCallback->fail();
 			ifaceOperationCallback->disableSections();
 			ifaceOperationCallback->disableSignals();
-			ifaceOperationCallback->turnCrossings();
 		}
 
 		/* Entry action for state 'Unlock'. */

@@ -18,6 +18,8 @@
 
 namespace mrw::ctrl
 {
+	class CrossingController;
+
 	class SectionController :
 		public BaseController,
 		public ControllerRegistrand,
@@ -28,8 +30,9 @@ namespace mrw::ctrl
 
 	private:
 		mrw::statechart::QtStatechart<mrw::statechart::SectionStatechart>  statechart;
-		mrw::model::Section                        *                       ctrl_section = nullptr;
-		SectionController                         *                        next         = nullptr;
+		mrw::model::Section                        *                       ctrl_section  = nullptr;
+		SectionController                         *                        next          = nullptr;
+		CrossingController                        *                        ctrl_crossing = nullptr;
 
 	public:
 		SectionController() = delete;

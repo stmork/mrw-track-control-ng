@@ -92,7 +92,7 @@ Position::Bending CrossingController::bending() const noexcept
 
 bool CrossingController::process(const MrwMessage & message) noexcept
 {
-	qCDebug(log).noquote() << message << "(Crossing)";
+	qCDebug(log).noquote() << message << "(Crossing)" << name();
 
 	switch (message.response())
 	{
@@ -134,8 +134,14 @@ void CrossingController::dec()
 	decrease();
 }
 
+void mrw::ctrl::CrossingController::unregister()
+{
+	setBatch(nullptr);
+}
+
 bool CrossingController::used()
 {
+	qCDebug(log).noquote() << "(Crossing)" << name() << "used:" << ctrl_crossing->isUsed();
 	return ctrl_crossing->isUsed();
 }
 

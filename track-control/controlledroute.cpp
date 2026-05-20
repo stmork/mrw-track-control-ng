@@ -643,9 +643,9 @@ void ControlledRoute::turnCrossings()
 		if (controller != nullptr)
 		{
 			qCDebug(mrw::tools::log).noquote() << "Turn crossing: " << *controller;
+			controller->setBatch(this);
+			controller->action();
 		}
-		BaseController::callback<CrossingController>(
-			controller, &CrossingController::action);
 	}
 }
 
