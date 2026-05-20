@@ -41,9 +41,28 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		mock fail
 		mock pending
 		mock lock
+		mock hasCutOff returns (true)
 		mock isFree returns (true)
 		mock isReserved returns (true)
 		mock doTurnLeft returns (true)
+	}
+
+	@Test
+	operation startWithoutCutOff()
+	{
+		// Given
+		waitForStart()
+		mock hasCutOff returns (false)
+
+		// When
+		raise start
+
+		// Then
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Unlocked)
+		assert called dec 0 times
+		assert started
+		assert called lock
 	}
 
 	@Test

@@ -272,6 +272,11 @@ bool DoubleCrossSwitchControllerProxy::doTurnLeft()
 		(switchState() == DoubleCrossSwitch::State::BD);
 }
 
+bool mrw::ctrl::DoubleCrossSwitchControllerProxy::hasCutOff()
+{
+	return part->hasCutOff();
+}
+
 bool DoubleCrossSwitchControllerProxy::isFree()
 {
 	return section()->isFree();

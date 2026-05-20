@@ -18,7 +18,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 		assert called inc        1 times
 		assert called dec        0 times
 		assert called unregister 0 times
-		assert called pending    0 times
+		assert called pending    1 times
 		assert called open       1 times
 		assert called close      0 times
 		assert called lock       0 times

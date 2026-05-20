@@ -294,6 +294,7 @@ namespace mrw
 		{
 			/* Entry action for state 'Init'. */
 			ifaceOperationCallback->inc();
+			ifaceOperationCallback->pending();
 			ifaceOperationCallback->open();
 		}
 

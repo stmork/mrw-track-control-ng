@@ -617,6 +617,57 @@ namespace
 		};
 		RequestMock * requestMock;
 
+		class HasCutOffMock
+		{
+			typedef bool (HasCutOffMock::*functiontype)();
+		public:
+			SwitchTest * owner;
+			bool (HasCutOffMock::*hasCutOffBehaviorDefault)();
+
+			HasCutOffMock(SwitchTest * owner) :
+				owner(owner),
+				hasCutOffBehaviorDefault(0)
+			{}
+
+
+			bool hasCutOff1()
+			{
+				return (true);
+			}
+
+			bool hasCutOff2()
+			{
+				return (false);
+			}
+
+			bool hasCutOffDefault()
+			{
+				bool defaultValue = false;
+				return (defaultValue);
+			}
+
+			functiontype getBehavior()
+			{
+				return hasCutOffBehaviorDefault;
+			}
+
+			void setDefaultBehavior(bool (HasCutOffMock::*defaultBehavior)())
+			{
+				hasCutOffBehaviorDefault = defaultBehavior;
+			}
+
+			void initializeBehavior()
+			{
+				setDefaultBehavior(&HasCutOffMock::hasCutOffDefault);
+			}
+
+			void reset()
+			{
+				initializeBehavior();
+			}
+		};
+		HasCutOffMock * hasCutOffMock;
+
 		class IsFreeMock
 		{
 			typedef bool (IsFreeMock::*functiontype)();
@@ -799,6 +850,10 @@ namespace
 			{
 				return (owner->doTurnLeftMock->*(owner->doTurnLeftMock->getBehavior()))();
 			}
+			bool hasCutOff()
+			{
+				return (owner->hasCutOffMock->*(owner->hasCutOffMock->getBehavior()))();
+			}
 			bool isFree()
 			{
 				return (owner->isFreeMock->*(owner->isFreeMock->getBehavior()))();
@@ -853,6 +908,8 @@ namespace
 			rightMock->initializeBehavior();
 			requestMock = new RequestMock(this);
 			requestMock->initializeBehavior();
+			hasCutOffMock = new HasCutOffMock(this);
+			hasCutOffMock->initializeBehavior();
 			isFreeMock = new IsFreeMock(this);
 			isFreeMock->initializeBehavior();
 			isReservedMock = new IsReservedMock(this);
@@ -867,6 +924,7 @@ namespace
 			delete doTurnLeftMock;
 			delete isReservedMock;
 			delete isFreeMock;
+			delete hasCutOffMock;
 			delete requestMock;
 			delete rightMock;
 			delete leftMock;
@@ -927,6 +985,8 @@ namespace
 
 
 
+		hasCutOffMock->setDefaultBehavior(&HasCutOffMock::hasCutOff1);
+
 		isFreeMock->setDefaultBehavior(&IsFreeMock::isFree1);
 
 		isReservedMock->setDefaultBehavior(&IsReservedMock::isReserved1);
@@ -937,6 +997,25 @@ namespace
 	TEST_F(SwitchTest, waitForStart)
 	{
 		waitForStart();
+	}
+	TEST_F(SwitchTest, startWithoutCutOff)
+	{
+		waitForStart();
+
+		hasCutOffMock->setDefaultBehavior(&HasCutOffMock::hasCutOff2);
+
+		statechart->raiseStart();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Unlocked));
+
+		EXPECT_TRUE(decMock->calledAtLeast(0));
+
+		EXPECT_TRUE(statechart->isRaisedStarted());
+
+		EXPECT_TRUE(lockMock->calledAtLeastOnce());
+
 	}
 	void SwitchTest::initial()
 	{

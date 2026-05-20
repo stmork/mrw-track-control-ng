@@ -218,8 +218,8 @@ namespace mrw
 			CrossingStatechart(const CrossingStatechart & rhs);
 			CrossingStatechart & operator=(const CrossingStatechart &);
 
-			static constexpr const sc::integer timeout {2500};
-			static constexpr const sc::integer delay {1000};
+			static constexpr const sc::integer timeout {3000};
+			static constexpr const sc::integer delay {1500};
 
 
 

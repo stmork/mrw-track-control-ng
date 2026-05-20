@@ -289,6 +289,11 @@ bool RegularSwitchControllerProxy::isFree()
 	return section()->isFree();
 }
 
+bool RegularSwitchControllerProxy::hasCutOff()
+{
+	return part->hasCutOff();
+}
+
 void RegularSwitchControllerProxy::fail()
 {
 	qCCritical(log).noquote() << String::red(" Switch turn failed!") << name();

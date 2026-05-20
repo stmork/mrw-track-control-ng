@@ -150,6 +150,8 @@ namespace mrw
 
 				virtual bool doTurnLeft() = 0;
 
+				virtual bool hasCutOff() = 0;
+
 				virtual bool isFree() = 0;
 
 				virtual bool isReserved() = 0;
@@ -256,6 +258,7 @@ namespace mrw
 			// prototypes of all internal functions
 
 			void enact_main_region_Init();
+			void enact_main_region_Operating();
 			void enact_main_region_Operating_operating_Unlocked();
 			void enact_main_region_Operating_operating_Locked();
 			void enact_main_region_Operating_operating_Turning();
@@ -291,6 +294,7 @@ namespace mrw
 			void exseq_main_region_Operating_operating_Turning_Turning_process();
 			void react_main_region_Operating_operating__choice_0();
 			void react_main_region_Operating_operating_Turning_Turning_process__choice_0();
+			void react_main_region__choice_0();
 			void react_main_region__entry_Default();
 			void react_main_region_Operating_operating__entry_Default();
 			sc::integer main_region_Wait_for_Start_react(const sc::integer transitioned_before);

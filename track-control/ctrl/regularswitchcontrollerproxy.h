@@ -76,6 +76,7 @@ namespace mrw::ctrl
 		virtual void right() override;
 		virtual void request() override;
 		virtual bool doTurnLeft() override;
+		virtual bool hasCutOff() override;
 		virtual bool isFree() override;
 
 		virtual void fail() override;

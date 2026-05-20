@@ -368,6 +368,13 @@ namespace mrw
 			ifaceOperationCallback->request();
 		}
 
+		/* Entry action for state 'Operating'. */
+		void SwitchStatechart::enact_main_region_Operating()
+		{
+			/* Entry action for state 'Operating'. */
+			started_raised = true;
+		}
+
 		/* Entry action for state 'Unlocked'. */
 		void SwitchStatechart::enact_main_region_Operating_operating_Unlocked()
 		{
@@ -448,6 +455,7 @@ namespace mrw
 		void SwitchStatechart::enseq_main_region_Operating_default()
 		{
 			/* 'default' enter sequence for state Operating */
+			enact_main_region_Operating();
 			enseq_main_region_Operating_operating_default();
 		}
 
@@ -761,6 +769,20 @@ namespace mrw
 			}
 		}
 
+		/* The reactions of state null. */
+		void SwitchStatechart::react_main_region__choice_0()
+		{
+			/* The reactions of state null. */
+			if (ifaceOperationCallback->hasCutOff())
+			{
+				enseq_main_region_Init_default();
+			}
+			else
+			{
+				enseq_main_region_Operating_default();
+			}
+		}
+
 		/* Default react sequence for initial entry  */
 		void SwitchStatechart::react_main_region__entry_Default()
 		{
@@ -784,7 +806,7 @@ namespace mrw
 				if (start_raised)
 				{
 					exseq_main_region_Wait_for_Start();
-					enseq_main_region_Init_default();
+					react_main_region__choice_0();
 					transitioned_after = 0;
 				}
 			}
@@ -806,7 +828,6 @@ namespace mrw
 				if (response_raised)
 				{
 					exseq_main_region_Init();
-					started_raised = true;
 					enseq_main_region_Operating_default();
 					transitioned_after = 0;
 				}

@@ -806,7 +806,7 @@ namespace
 
 		EXPECT_TRUE(unregisterMock->calledAtLeast(0));
 
-		EXPECT_TRUE(pendingMock->calledAtLeast(0));
+		EXPECT_TRUE(pendingMock->calledAtLeast(1));
 
 		EXPECT_TRUE(openMock->calledAtLeast(1));
 
