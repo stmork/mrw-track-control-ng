@@ -1955,6 +1955,7 @@
 <section title="base_controller" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
+<section title="counter" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3"/>
 <section title="FONT_HEIGHT" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#aa2a845fcbce029e14533b7b9444b3990"/>
 <section title="FONT_SIZE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a9758dbbee57c8b9afa11e3278f51045a"/>
 <section title="GREEN" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#aa54d6d78623865a1e29e8ef7afb2df22"/>
@@ -2018,6 +2019,7 @@
 <section title="base_controller" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
+<section title="counter" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3"/>
 <section title="FONT_HEIGHT" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#aa2a845fcbce029e14533b7b9444b3990"/>
 <section title="FONT_SIZE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a9758dbbee57c8b9afa11e3278f51045a"/>
 <section title="GREEN" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#aa54d6d78623865a1e29e8ef7afb2df22"/>
@@ -2085,7 +2087,7 @@
 <section title="drawSheared" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a5ca6a93f56876076ff82e84d05266311"/>
 <section title="extend" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a8bb3d9f6d2249583f9e83d3637018895"/>
 <section title="gridSize" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
-<section title="hasLock" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
+<section title="hasLock" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#ae9a302e6e0f51e4bc969ca2b4e236901"/>
 <section title="isConnector" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a0aee43a24eb6e9d33b4bf15ad3b06259"/>
 <section title="lockVisible" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#ad4ee397c4e0a49be00776bebd2473505"/>
 <section title="mousePressEvent" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a59cf4307c0600aeb72c0a8c827cce776"/>
@@ -2102,6 +2104,7 @@
 <section title="base_controller" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
+<section title="counter" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3"/>
 <section title="FONT_HEIGHT" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#aa2a845fcbce029e14533b7b9444b3990"/>
 <section title="FONT_SIZE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a9758dbbee57c8b9afa11e3278f51045a"/>
 <section title="GREEN" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#aa54d6d78623865a1e29e8ef7afb2df22"/>
@@ -2164,6 +2167,7 @@
 <section title="base_controller" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
+<section title="counter" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3"/>
 <section title="FONT_HEIGHT" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#aa2a845fcbce029e14533b7b9444b3990"/>
 <section title="FONT_SIZE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a9758dbbee57c8b9afa11e3278f51045a"/>
 <section title="GREEN" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#aa54d6d78623865a1e29e8ef7afb2df22"/>
@@ -2232,6 +2236,7 @@
 <section title="base_controller" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
+<section title="counter" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3"/>
 <section title="FONT_HEIGHT" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#aa2a845fcbce029e14533b7b9444b3990"/>
 <section title="FONT_SIZE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a9758dbbee57c8b9afa11e3278f51045a"/>
 <section title="GREEN" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#aa54d6d78623865a1e29e8ef7afb2df22"/>
@@ -4165,6 +4170,7 @@
 <section title="base_controller" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
+<section title="counter" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3"/>
 <section title="FONT_HEIGHT" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#aa2a845fcbce029e14533b7b9444b3990"/>
 <section title="FONT_SIZE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a9758dbbee57c8b9afa11e3278f51045a"/>
 <section title="GREEN" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#aa54d6d78623865a1e29e8ef7afb2df22"/>
@@ -4228,6 +4234,7 @@
 <section title="base_controller" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
+<section title="counter" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3"/>
 <section title="FONT_HEIGHT" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#aa2a845fcbce029e14533b7b9444b3990"/>
 <section title="FONT_SIZE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a9758dbbee57c8b9afa11e3278f51045a"/>
 <section title="GREEN" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#aa54d6d78623865a1e29e8ef7afb2df22"/>
@@ -4295,7 +4302,7 @@
 <section title="drawSheared" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a5ca6a93f56876076ff82e84d05266311"/>
 <section title="extend" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a8bb3d9f6d2249583f9e83d3637018895"/>
 <section title="gridSize" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a93824b7de7c161fe1c5865e95976364f"/>
-<section title="hasLock" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
+<section title="hasLock" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#ae9a302e6e0f51e4bc969ca2b4e236901"/>
 <section title="isConnector" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a0aee43a24eb6e9d33b4bf15ad3b06259"/>
 <section title="lockVisible" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#ad4ee397c4e0a49be00776bebd2473505"/>
 <section title="mousePressEvent" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a59cf4307c0600aeb72c0a8c827cce776"/>
@@ -4312,6 +4319,7 @@
 <section title="base_controller" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
+<section title="counter" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3"/>
 <section title="FONT_HEIGHT" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#aa2a845fcbce029e14533b7b9444b3990"/>
 <section title="FONT_SIZE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a9758dbbee57c8b9afa11e3278f51045a"/>
 <section title="GREEN" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#aa54d6d78623865a1e29e8ef7afb2df22"/>
@@ -4374,6 +4382,7 @@
 <section title="base_controller" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
+<section title="counter" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3"/>
 <section title="FONT_HEIGHT" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#aa2a845fcbce029e14533b7b9444b3990"/>
 <section title="FONT_SIZE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a9758dbbee57c8b9afa11e3278f51045a"/>
 <section title="GREEN" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#aa54d6d78623865a1e29e8ef7afb2df22"/>
@@ -4442,6 +4451,7 @@
 <section title="base_controller" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
+<section title="counter" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3"/>
 <section title="FONT_HEIGHT" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#aa2a845fcbce029e14533b7b9444b3990"/>
 <section title="FONT_SIZE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a9758dbbee57c8b9afa11e3278f51045a"/>
 <section title="GREEN" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#aa54d6d78623865a1e29e8ef7afb2df22"/>
@@ -5034,6 +5044,7 @@
 <keyword name="controllerCount() const" id="mrw::model::ModelRailway::controllerCount_a87a775318874814bebfbce6528535915" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a87a775318874814bebfbce6528535915"/>
 <keyword name="ControllerWidget(QWidget *parent=nullptr, mrw::ctrl::BaseController *ctrl=nullptr)" id="mrw::ui::ControllerWidget::ControllerWidget_a557f85ea485ae2390dfbae1fd257179d" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a557f85ea485ae2390dfbae1fd257179d"/>
 <keyword name="counter" id="mrw::model::Position::counter_a4d7793ec6944ee1f89dec89cc0ea8a12" ref="db/d4f/classmrw_1_1model_1_1Position.html#a4d7793ec6944ee1f89dec89cc0ea8a12"/>
+<keyword name="counter" id="mrw::ui::ControllerWidget::counter_a45624ef3fd3fd765c740ef5dbf0e36f3" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3"/>
 <keyword name="critical(const char *message) const =0" id="mrw::log::LoggerBase::critical_aba5378f886d45227cb61798c38d00d3f" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html#aba5378f886d45227cb61798c38d00d3f"/>
 <keyword name="critical(const char *message) const override" id="mrw::log::StdLogger::critical_ad4244fd80304223ea8d6e0d0370cef7d" ref="d1/d17/classmrw_1_1log_1_1StdLogger.html#ad4244fd80304223ea8d6e0d0370cef7d"/>
 <keyword name="critical(const char *message) const override" id="mrw::log::SysLogger::critical_a81d324a2f378dd1ebf56878d604def4b" ref="d5/d0d/classmrw_1_1log_1_1SysLogger.html#a81d324a2f378dd1ebf56878d604def4b"/>
@@ -5164,6 +5175,7 @@
 <keyword name="hasCutOff() const noexcept" id="mrw::model::SwitchModuleReference::hasCutOff_a2c8e5c0e6dfdf1ec795ab52d23753448" ref="d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#a2c8e5c0e6dfdf1ec795ab52d23753448"/>
 <keyword name="hasLock() const" id="mrw::ui::BaseWidget::hasLock_a10e237ea1c94df68165b97e2509fecab" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#a10e237ea1c94df68165b97e2509fecab"/>
 <keyword name="hasLock() const override" id="mrw::ui::DoubleCrossSwitchWidget::hasLock_ab9e59f5cfda7ceab33b437eedd1502c9" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#ab9e59f5cfda7ceab33b437eedd1502c9"/>
+<keyword name="hasLock() const override" id="mrw::ui::RailWidget::hasLock_ae9a302e6e0f51e4bc969ca2b4e236901" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#ae9a302e6e0f51e4bc969ca2b4e236901"/>
 <keyword name="hasLock() const override" id="mrw::ui::RegularSwitchWidget::hasLock_a164d22f7d6244f4fc7ce7b490558543b" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a164d22f7d6244f4fc7ce7b490558543b"/>
 <keyword name="hasLock() const override" id="mrw::ui::SignalWidget::hasLock_a7b749d27e73b6f8a2c3b8683840d8f8f" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a7b749d27e73b6f8a2c3b8683840d8f8f"/>
 <keyword name="height() const" id="mrw::model::Position::height_a323e205493b37dae99dc97939f096c8a" ref="db/d4f/classmrw_1_1model_1_1Position.html#a323e205493b37dae99dc97939f096c8a"/>

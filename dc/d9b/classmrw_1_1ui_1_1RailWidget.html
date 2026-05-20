@@ -119,12 +119,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3c8847b206d3daaa8540f83ea407635c" id="r_a3c8847b206d3daaa8540f83ea407635c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a3c8847b206d3daaa8540f83ea407635c">RailWidget</a> (QWidget *parent=nullptr, <a class="el" href="../../d3/d59/classmrw_1_1ctrl_1_1RailController.html">mrw::ctrl::RailController</a> *<a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a7181f177f258cc23c90efc0bae993f2a">controller</a>=nullptr)</td></tr>
 <tr class="memitem:ac3304ac9be2399f8e3ce8f723e66721c" id="r_ac3304ac9be2399f8e3ce8f723e66721c"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#ac3304ac9be2399f8e3ce8f723e66721c">computeConnectors</a> () override</td></tr>
 <tr class="memdesc:ac3304ac9be2399f8e3ce8f723e66721c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The orientation of branches has changed and need to be recomputed and redrawn.  <br /></td></tr>
+<tr class="memitem:ae9a302e6e0f51e4bc969ca2b4e236901" id="r_ae9a302e6e0f51e4bc969ca2b4e236901"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#ae9a302e6e0f51e4bc969ca2b4e236901">hasLock</a> () const override</td></tr>
+<tr class="memdesc:ae9a302e6e0f51e4bc969ca2b4e236901"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if a pending state has to be displayed.  <br /></td></tr>
 <tr class="memitem:a2d3ffd8a6cc9dd7b4b6ef603394605e9" id="r_a2d3ffd8a6cc9dd7b4b6ef603394605e9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a2d3ffd8a6cc9dd7b4b6ef603394605e9">setController</a> (<a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html">mrw::ctrl::BaseController</a> *<a class="el" href="../../d1/d18/namespacemrw_1_1ctrl.html">ctrl</a>)</td></tr>
 <tr class="memdesc:a2d3ffd8a6cc9dd7b4b6ef603394605e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This setter provides the corresponding <a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html" title="This controller base class unifies the interface for all widget controller classes.">mrw::ctrl::BaseController</a>.  <br /></td></tr>
 <tr class="memitem:a0aee43a24eb6e9d33b4bf15ad3b06259" id="r_a0aee43a24eb6e9d33b4bf15ad3b06259"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a0aee43a24eb6e9d33b4bf15ad3b06259">isConnector</a> (const QPoint &amp;point) const</td></tr>
 <tr class="memdesc:a0aee43a24eb6e9d33b4bf15ad3b06259"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the given point is equal to any contained connector.  <br /></td></tr>
-<tr class="memitem:a10e237ea1c94df68165b97e2509fecab" id="r_a10e237ea1c94df68165b97e2509fecab"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="../../df/db9/classmrw_1_1ui_1_1BaseWidget.html#a10e237ea1c94df68165b97e2509fecab">hasLock</a> () const</td></tr>
-<tr class="memdesc:a10e237ea1c94df68165b97e2509fecab"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if a pending state has to be displayed.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -155,10 +155,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a59cf4307c0600aeb72c0a8c827cce776" id="r_a59cf4307c0600aeb72c0a8c827cce776"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a59cf4307c0600aeb72c0a8c827cce776">mousePressEvent</a> (QMouseEvent *event) override</td></tr>
 <tr class="memitem:ad4ee397c4e0a49be00776bebd2473505" id="r_ad4ee397c4e0a49be00776bebd2473505"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#ad4ee397c4e0a49be00776bebd2473505">lockVisible</a> (const <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4">mrw::model::Device::LockState</a> state) const</td></tr>
 <tr class="memdesc:ad4ee397c4e0a49be00776bebd2473505"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method shows the actual blinking state of a pending movement of the gadget to show.  <br /></td></tr>
-<tr class="memitem:a0d0ce3c3da9295dbc9e4f6af9b698d2c" id="r_a0d0ce3c3da9295dbc9e4f6af9b698d2c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a0d0ce3c3da9295dbc9e4f6af9b698d2c">drawLock</a> (QPainter &amp;painter, QColor color, const float x, const float y)</td></tr>
-<tr class="memdesc:a0d0ce3c3da9295dbc9e4f6af9b698d2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method draws a lock symbol with the specified color at the specified position.  <br /></td></tr>
-<tr class="memitem:a5ca6a93f56876076ff82e84d05266311" id="r_a5ca6a93f56876076ff82e84d05266311"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5ca6a93f56876076ff82e84d05266311">drawSheared</a> (QPainter &amp;painter, QColor color, const float x, const float y, const float height, const float slope=<a class="el" href="../../df/db9/classmrw_1_1ui_1_1BaseWidget.html#a286d8f74bcd90aeda53db1e5a04e02d3">RAIL_SLOPE</a>)</td></tr>
-<tr class="memdesc:a5ca6a93f56876076ff82e84d05266311"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method draws a sheared rectangle along a centerline from a starting point x and y with the given height and slope.  <br /></td></tr>
 <tr class="memitem:ace62aa587cd8764951a2daace1cbefff" id="r_ace62aa587cd8764951a2daace1cbefff"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#ace62aa587cd8764951a2daace1cbefff">prepareTextColor</a> (QPainter &amp;painter, const bool flank_protection=false)</td></tr>
 <tr class="memdesc:ace62aa587cd8764951a2daace1cbefff"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method prepares the text label to idicate a failed state, a normal state or a flank protection to be drawn.  <br /></td></tr>
 <tr class="memitem:a6d1e323cd00d25421f3085746449cf4a" id="r_a6d1e323cd00d25421f3085746449cf4a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a6d1e323cd00d25421f3085746449cf4a">drawConnectors</a> (QPainter &amp;painter)</td></tr>
@@ -175,6 +171,10 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-static-methods" class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a0d0ce3c3da9295dbc9e4f6af9b698d2c" id="r_a0d0ce3c3da9295dbc9e4f6af9b698d2c"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a0d0ce3c3da9295dbc9e4f6af9b698d2c">drawLock</a> (QPainter &amp;painter, QColor color, const float x, const float y)</td></tr>
+<tr class="memdesc:a0d0ce3c3da9295dbc9e4f6af9b698d2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method draws a lock symbol with the specified color at the specified position.  <br /></td></tr>
+<tr class="memitem:a5ca6a93f56876076ff82e84d05266311" id="r_a5ca6a93f56876076ff82e84d05266311"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5ca6a93f56876076ff82e84d05266311">drawSheared</a> (QPainter &amp;painter, QColor color, const float x, const float y, const float height, const float slope=<a class="el" href="../../df/db9/classmrw_1_1ui_1_1BaseWidget.html#a286d8f74bcd90aeda53db1e5a04e02d3">RAIL_SLOPE</a>)</td></tr>
+<tr class="memdesc:a5ca6a93f56876076ff82e84d05266311"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method draws a sheared rectangle along a centerline from a starting point x and y with the given height and slope.  <br /></td></tr>
 <tr class="memitem:ae7a45cecae7ea77538b9c873804ca323" id="r_ae7a45cecae7ea77538b9c873804ca323"><td class="memItemLeft">static QColor&#160;</td><td class="memItemRight"><a class="el" href="../../df/db9/classmrw_1_1ui_1_1BaseWidget.html#ae7a45cecae7ea77538b9c873804ca323">sectionColor</a> (const <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4ede">mrw::model::SectionState</a> state)</td></tr>
 <tr class="memdesc:ae7a45cecae7ea77538b9c873804ca323"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the color corresponding to a given <a class="el" href="../../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4ede">mrw::model::SectionState</a>.  <br /></td></tr>
 </table><table class="memberdecls">
@@ -184,6 +184,8 @@ Protected Attributes</h2></td></tr>
 <tr class="memdesc:a20f6e80d5a2ed7859465de3f4826dd80"><td class="mdescLeft">&#160;</td><td class="mdescRight">The corresponding <a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html" title="This controller base class unifies the interface for all widget controller classes.">mrw::ctrl::BaseController</a> in the sense of the MVC paradigma.  <br /></td></tr>
 <tr class="memitem:a7e7621b6aea5332d8fc002cdda357178" id="r_a7e7621b6aea5332d8fc002cdda357178"><td class="memItemLeft">QList&lt; QPoint &gt;&#160;</td><td class="memItemRight"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a7e7621b6aea5332d8fc002cdda357178">connector_list</a></td></tr>
 <tr class="memdesc:a7e7621b6aea5332d8fc002cdda357178"><td class="mdescLeft">&#160;</td><td class="mdescRight">The list of possible connection points.  <br /></td></tr>
+<tr class="memitem:a45624ef3fd3fd765c740ef5dbf0e36f3" id="r_a45624ef3fd3fd765c740ef5dbf0e36f3"><td class="memItemLeft">unsigned&#160;</td><td class="memItemRight"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3">counter</a> = 0</td></tr>
+<tr class="memdesc:a45624ef3fd3fd765c740ef5dbf0e36f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This blink counter for drawing pending lock states.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-static-attribs" class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -407,7 +409,7 @@ template&lt;class C&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel inherited">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel protected">protected</span><span class="mlabel inherited">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -467,7 +469,7 @@ template&lt;class C&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel inherited">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel protected">protected</span><span class="mlabel inherited">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -541,8 +543,8 @@ template&lt;class C&gt; </div>
 
 </div>
 </div>
-<a id="a10e237ea1c94df68165b97e2509fecab" name="a10e237ea1c94df68165b97e2509fecab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10e237ea1c94df68165b97e2509fecab">&#9670;&#160;</a></span>hasLock()</h2>
+<a id="ae9a302e6e0f51e4bc969ca2b4e236901" name="ae9a302e6e0f51e4bc969ca2b4e236901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9a302e6e0f51e4bc969ca2b4e236901">&#9670;&#160;</a></span>hasLock()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -551,7 +553,7 @@ template&lt;class C&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool BaseWidget::hasLock </td>
+          <td class="memname">bool RailWidget::hasLock </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -559,7 +561,7 @@ template&lt;class C&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel virtual">virtual</span><span class="mlabel inherited">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -568,7 +570,7 @@ template&lt;class C&gt; </div>
 <p>Mostly some bliking elements has to be drawn.</p>
 <dl class="section return"><dt>Returns</dt><dd>True if there is a pending state to be drawn. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="../../d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#ab9e59f5cfda7ceab33b437eedd1502c9">mrw::ui::DoubleCrossSwitchWidget</a>, <a class="el" href="../../d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a164d22f7d6244f4fc7ce7b490558543b">mrw::ui::RegularSwitchWidget</a>, and <a class="el" href="../../d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a7b749d27e73b6f8a2c3b8683840d8f8f">mrw::ui::SignalWidget</a>.</p>
+<p>Reimplemented from <a class="el" href="../../df/db9/classmrw_1_1ui_1_1BaseWidget.html#a10e237ea1c94df68165b97e2509fecab">mrw::ui::BaseWidget</a>.</p>
 
 </div>
 </div>
@@ -1106,6 +1108,31 @@ mrw::model::SectionState::FAILED </dd></dl>
 </div><div class="memdoc">
 
 <p>The list of possible connection points. </p>
+
+</div>
+</div>
+<a id="a45624ef3fd3fd765c740ef5dbf0e36f3" name="a45624ef3fd3fd765c740ef5dbf0e36f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45624ef3fd3fd765c740ef5dbf0e36f3">&#9670;&#160;</a></span>counter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned mrw::ui::ControllerWidget::counter = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel inherited">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This blink counter for drawing pending lock states. </p>
+<p>It is increased by a timer. When odd the lock should be drawn. </p>
 
 </div>
 </div>
