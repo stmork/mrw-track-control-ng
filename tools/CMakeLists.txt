@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-project(MRW-Tools VERSION 2.2
+project(MRW-Tools VERSION 2.3
 	DESCRIPTION "MRW tools"
 	LANGUAGES CXX)
 
