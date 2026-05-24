@@ -83,8 +83,9 @@ namespace mrw
 				start,
 				response,
 				failed,
-				_te0_main_region_Operating_Processing_Pending_,
-				_te1_main_region_Operating_Processing_Pending_Crossing_processing_Delay_
+				_te0_main_region_Init_,
+				_te1_main_region_Operating_Processing_Pending_,
+				_te2_main_region_Operating_Processing_Pending_Crossing_processing_Delay_
 			};
 
 			class EventInstance
@@ -187,7 +188,7 @@ namespace mrw
 			bool isStateActive(State state) const noexcept;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount {2};
+			static const sc::integer timeEventsCount {3};
 
 			//! number of time events that can be active at once.
 			static const sc::integer parallelTimeEventsCount {2};

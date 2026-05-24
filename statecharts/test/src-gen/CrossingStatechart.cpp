@@ -38,6 +38,7 @@ namespace mrw
 			}
 			timerService->unsetTimer(this, 0);
 			timerService->unsetTimer(this, 1);
+			timerService->unsetTimer(this, 2);
 		}
 
 
@@ -93,10 +94,11 @@ namespace mrw
 					break;
 				}
 
-			case mrw::statechart::CrossingStatechart::Event::_te0_main_region_Operating_Processing_Pending_:
-			case mrw::statechart::CrossingStatechart::Event::_te1_main_region_Operating_Processing_Pending_Crossing_processing_Delay_:
+			case mrw::statechart::CrossingStatechart::Event::_te0_main_region_Init_:
+			case mrw::statechart::CrossingStatechart::Event::_te1_main_region_Operating_Processing_Pending_:
+			case mrw::statechart::CrossingStatechart::Event::_te2_main_region_Operating_Processing_Pending_Crossing_processing_Delay_:
 				{
-					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::CrossingStatechart::Event::_te0_main_region_Operating_Processing_Pending_)] = true;
+					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::CrossingStatechart::Event::_te0_main_region_Init_)] = true;
 					break;
 				}
 			default:
@@ -197,7 +199,7 @@ namespace mrw
 		{
 			if (evid < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::CrossingStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::CrossingStatechart::Event::_te0_main_region_Operating_Processing_Pending_))));
+				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::CrossingStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::CrossingStatechart::Event::_te0_main_region_Init_))));
 				runCycle();
 			}
 		}
@@ -293,6 +295,7 @@ namespace mrw
 		void CrossingStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
+			timerService->setTimer(this, 0, (static_cast<sc::time> (CrossingStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 			ifaceOperationCallback->open();
@@ -316,7 +319,7 @@ namespace mrw
 		void CrossingStatechart::enact_main_region_Operating_Processing_Pending()
 		{
 			/* Entry action for state 'Pending'. */
-			timerService->setTimer(this, 0, (static_cast<sc::time> (CrossingStatechart::timeout)), false);
+			timerService->setTimer(this, 1, (static_cast<sc::time> (CrossingStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}
@@ -339,13 +342,14 @@ namespace mrw
 		void CrossingStatechart::enact_main_region_Operating_Processing_Pending_Crossing_processing_Delay()
 		{
 			/* Entry action for state 'Delay'. */
-			timerService->setTimer(this, 1, (static_cast<sc::time> (CrossingStatechart::delay)), false);
+			timerService->setTimer(this, 2, (static_cast<sc::time> (CrossingStatechart::delay)), false);
 		}
 
 		/* Exit action for state 'Init'. */
 		void CrossingStatechart::exact_main_region_Init()
 		{
 			/* Exit action for state 'Init'. */
+			timerService->unsetTimer(this, 0);
 			ifaceOperationCallback->dec();
 		}
 
@@ -353,7 +357,7 @@ namespace mrw
 		void CrossingStatechart::exact_main_region_Operating_Processing_Pending()
 		{
 			/* Exit action for state 'Pending'. */
-			timerService->unsetTimer(this, 0);
+			timerService->unsetTimer(this, 1);
 			ifaceOperationCallback->dec();
 			ifaceOperationCallback->unregister();
 		}
@@ -362,7 +366,7 @@ namespace mrw
 		void CrossingStatechart::exact_main_region_Operating_Processing_Pending_Crossing_processing_Delay()
 		{
 			/* Exit action for state 'Delay'. */
-			timerService->unsetTimer(this, 1);
+			timerService->unsetTimer(this, 2);
 		}
 
 		/* 'default' enter sequence for state Wait For Start */
@@ -750,6 +754,16 @@ namespace mrw
 						enseq_main_region_Failed_default();
 						transitioned_after = 0;
 					}
+					else
+					{
+						if (timeEvents[0])
+						{
+							exseq_main_region_Init();
+							timeEvents[0] = false;
+							enseq_main_region_Failed_default();
+							transitioned_after = 0;
+						}
+					}
 				}
 			}
 			/* If no transition was taken */
@@ -846,10 +860,10 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (timeEvents[0])
+				if (timeEvents[1])
 				{
 					exseq_main_region_Operating();
-					timeEvents[0] = false;
+					timeEvents[1] = false;
 					enseq_main_region_Failed_default();
 					transitioned_after = 0;
 				}
@@ -915,10 +929,10 @@ namespace mrw
 			sc::integer transitioned_after = transitioned_before;
 			if ((transitioned_after) < (0))
 			{
-				if (timeEvents[1])
+				if (timeEvents[2])
 				{
 					exseq_main_region_Operating_Processing_Pending();
-					timeEvents[1] = false;
+					timeEvents[2] = false;
 					enseq_main_region_Operating_Processing_Locked_default();
 					main_region_Operating_react(0);
 					transitioned_after = 0;
@@ -942,6 +956,7 @@ namespace mrw
 			failed_raised = false;
 			timeEvents[0] = false;
 			timeEvents[1] = false;
+			timeEvents[2] = false;
 		}
 
 		void CrossingStatechart::microStep()

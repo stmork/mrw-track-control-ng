@@ -867,6 +867,15 @@ namespace
 	{
 		failAfterStart();
 	}
+	TEST_F(CrossingTest, timeoutAfterStart)
+	{
+		initial();
+
+		runner->proceed_time(statechart->getTimeout());
+
+		failState();
+
+	}
 	void CrossingTest::operational()
 	{
 		initial();

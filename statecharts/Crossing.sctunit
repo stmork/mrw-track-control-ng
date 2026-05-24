@@ -70,6 +70,19 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	}
 
 	@Test
+	operation timeoutAfterStart()
+	{
+		// Given
+		initial()
+
+		// When
+		proceed timeout ms
+
+		// Then
+		failState()
+	}
+
+	@Test
 	operation operational()
 	{
 		// Given
