@@ -10,169 +10,344 @@
 <section title="Namespaces" ref="namespaces.html">
 <section title="Namespace List" ref="namespaces.html">
 <section title="mrw" ref="d7/dcb/namespacemrw.html">
-<section title="util" ref="d9/d2b/namespacemrw_1_1util.html">
-<section title="AppSupport" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html">
-<section title="blanktime" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#ad339e381dc3cb9f9ca1ba41d759e8bc1"/>
-<section title="hostname" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#af19bde96d35a484b351274db8a1bebbf"/>
-<section title="instance" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#ace9bf992b5af5b66e853eb6f5362f954"/>
-<section title="Singleton&lt; AppSupport &gt;" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#a427a1f075055d61090e7df6f9e4f8eab"/>
+<section title="can" ref="d9/d9b/namespacemrw_1_1can.html">
+<section title="CanSettings" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html">
+<section title="CanSettings" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#a924c0b34f81df37444cd61dfac01f57c"/>
+<section title="interface" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#af96bb342cc0413d092d4428ff408af99"/>
+<section title="operator mrw::util::SettingsGroup" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#a62f446da8ebdf141affcaa9eac663a8b"/>
+<section title="plugin" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#a24a08d487e35eae9a2b7754f898bddc0"/>
 </section>
-<section title="Batch" ref="d8/dde/classmrw_1_1util_1_1Batch.html">
-<section title="Batch" ref="d8/dde/classmrw_1_1util_1_1Batch.html#ac91261f634b1f89c51941e9d188b06a5"/>
-<section title="~Batch" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a87506571dedb476e0de679401a03637e"/>
-<section title="completed" ref="d8/dde/classmrw_1_1util_1_1Batch.html#af06d7235eaafe9e86b171d3f37e64908"/>
-<section title="contains" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a64e6058b09a8eacdb229d5925986a286"/>
-<section title="decrease" ref="d8/dde/classmrw_1_1util_1_1Batch.html#ab6d3b508f66581271f23cff702b7d623"/>
-<section title="dump" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a80716793d4a9a190b33feea735f6c672"/>
-<section title="increase" ref="d8/dde/classmrw_1_1util_1_1Batch.html#af15eea1cb3b0eeddb7c0422268e1ad16"/>
-<section title="isCompleted" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a020909c9b81bae44ac2bbd50dd993d7d"/>
-<section title="reset" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a60ac05642f1f86ced915f28b98f7fc93"/>
-<section title="tryComplete" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a6a172e9045658340078aa3401297cccb"/>
-<section title="BatchParticipant" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a15aae440c6bc60ad50578730d6e9b3c4"/>
-<section title="id" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a7057e4d7f48cf53d741db1e5cb219efe"/>
-<section title="transaction" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a2dd1abb1b487ad2531c3c98f24544e67"/>
+<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html">
+<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ab3258243639f9a5410e76195fedb01c9"/>
+<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a837eea6320f30f3df1f99f0d3c67bf93"/>
+<section title="~MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a73ae1d0363d32fbea5b866180a7c21f2"/>
+<section title="connected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0862edc4130e6b3563f7e23d5ffb3916"/>
+<section title="disconnected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0c930e0da610c26edefcf10b4cd80b31"/>
+<section title="list" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#aee34c1e95d971992f8090c5f1250f092"/>
+<section title="process" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a18b3f3b41d839efbc4fe3163b1d65645"/>
+<section title="receive" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a3e3897a65e13d57bee40fa41829bb050"/>
+<section title="stateChanged" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a7461096e1f4038279302ee46d4aeb6d5"/>
+<section title="valid" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a7bb5f821bb3fe4491d0bddc343b8b8c9"/>
+<section title="write" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a5c5f0523ed079f7c1679b6d2870fc22d"/>
+<section title="can_bus" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ae9add44a66b3c41000569347d5eb8e68"/>
+<section title="can_device" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a84bd068ea88e51a45bac0b3838d66b02"/>
 </section>
-<section title="BatchParticipant" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html">
-<section title="BatchParticipant" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a2f056ac6f0f14b943f345b4f9d629927"/>
-<section title="~BatchParticipant" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a84ea031a5b0d9c71c278169374a50665"/>
-<section title="batch" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#af0c771f2df98cdb2eee447eed5bd9480"/>
-<section title="decrease" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a3df2d32cce94717af8c388718bf4c108"/>
-<section title="increase" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a8b24656692501ab35330ffedbaea1a25"/>
-<section title="name" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#ae034c20e8970a700b23f6183cdc35a27"/>
-<section title="setBatch" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a9f8480b69816d7080102c506790f6842"/>
+<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html">
+<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a60e9a220fb6bc3b615943401084d6be8"/>
+<section title="~MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6ef72a8ee16eb914494052bf27f76869"/>
+<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a3adf124f0faccc84019a52525e3bc8dd"/>
+<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aadd7638b3c8eb8eb4575580c5394edf2"/>
+<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0895080730cbc5ddc088da0e5813ee7d"/>
+<section title="append" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ad9c105a29f210259dbda59c4d39c566d"/>
+<section title="bold" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
+<section title="command" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#abc5b117bce848ab5cb9b5d816116b071"/>
+<section title="eid" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6348ec130e3c76e509c93f91618f1214"/>
+<section title="format" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#adbf185289d3c6a133f3d5150d2fb08c3"/>
+<section title="get" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a35ad89d2f66c888e5dde95d402be2155"/>
+<section title="id" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aec1ba78b7fa70c52566d4727eb7090ed"/>
+<section title="isResponse" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6bc36589acbc90c1d7437b643e6dff5e"/>
+<section title="operator QCanBusFrame" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a600681d641d8c896e7a8654ee84f2a34"/>
+<section title="operator QString" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a52d7f4538b30867ad6e37ccd3d2e7aaf"/>
+<section title="operator[]" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a64e2ae4e67cccbaedc05cb290611a1aa"/>
+<section title="red" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a35b509dcf26d9f00cff8c6dd18a6a5cf"/>
+<section title="response" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aa7afbc78a2e8a8a6b7be6fd0d60f64d5"/>
+<section title="sid" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ab87d09e803430aa877df53387b169de1"/>
+<section title="size" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0021b4ca7d4936a10520582db11351e5"/>
+<section title="toString" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a76e903a76b1f572d7e4a0c3863b53cfe"/>
+<section title="unitNo" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a92096a014295e7c48f83d69917df0969"/>
+<section title="valid" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6d6b488c9ebb160a85e243ddc409063f"/>
+<section title="ALL_OFF" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0211a33a579dc035a945bb9c6c37c27d"/>
+<section title="BLUE_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a99bdb92fafd1dfab6f5d46112f4f6365"/>
+<section title="BOLD_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a40fdb0231da6c6ee8bd39d125031fefe"/>
+<section title="CYAN_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a8026cc002373c31b4dc8193a2a1eb599"/>
+<section title="GREEN_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a97deee27c031921c641a624fb74f8a0e"/>
+<section title="ITALIC_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a16c7225aa46a8feb9f485f6b0764abfb"/>
+<section title="MAGENTA_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a1025ed62ec25b78007d53e0760f21ecf"/>
+<section title="RED_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ad34b779827292c895aad2ee463a031bc"/>
+<section title="UNDERLINE_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a32a8c1059545a2141bc5ddf45203f920"/>
+<section title="WHITE_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a2efce8f49ed761f31c28d513f782ead6"/>
 </section>
-<section title="CleanVector" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html">
-<section title="~CleanVector" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
+<section title="ControllerId" ref="d9/d9b/namespacemrw_1_1can.html#ad3397ba650ef1dbb629a49e0d5f78ba8"/>
+<section title="DeviceKey" ref="d9/d9b/namespacemrw_1_1can.html#ace76a1ef7c615650aaa309b027d1eae2"/>
+<section title="UnitNo" ref="d9/d9b/namespacemrw_1_1can.html#aadc3657d376a3c081b9b0c05feafbce7"/>
+<section title="Command" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fb">
+<section title="SETLFT" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbabca680de579ea58136cd90154e24b7d3"/>
+<section title="SETRGT" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0ed96af8e19ac15fa34de519ccaff478"/>
+<section title="GETDIR" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba3afc6486a2a238d5b9c6f0cec2e5d6fe"/>
+<section title="SETRON" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4f0d9b54aec9270440070bee2b8b9434"/>
+<section title="SETROF" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2"/>
+<section title="GETRBS" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f"/>
+<section title="SETSGN" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd"/>
+<section title="CFGCRX" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0fe39d867d068a8db7e6cb19a542ca3b"/>
+<section title="CFGSWN" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaa587c43942ce005e535b0e9346ef0bb7"/>
+<section title="CFGSWO" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab0cf691463a572e065a978ef836ec510"/>
+<section title="CFGRAI" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4dc929300cab8cfe100efdf301ac43ff"/>
+<section title="CFGPF2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba1301f6a6fa52730e25b8e93453bcfa81"/>
+<section title="CFGPF3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba003a8725f7e1edde0361e49f27e121a9"/>
+<section title="CFGMF2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba85005546e8544c48cb9e4cd2c84714da"/>
+<section title="CFGMF3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba6d16ab40748962f96ecc92444b2a03df"/>
+<section title="CFGPL2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba9ab40ea1a9127c249c1ab4d658584030"/>
+<section title="CFGPL3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbad2251faa181a73b9e964fb79c2829143"/>
+<section title="CFGSL2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaaec6d999d4ccd7498847a153153940b8"/>
+<section title="CFGML2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba708452d023dca3039b7532baa63660b3"/>
+<section title="CFGML3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba91f946824ba8bde964f05ad5209ebbd4"/>
+<section title="CFGML4" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba62d97dbd0db8813be0ccfe13c75379f5"/>
+<section title="CFGLGT" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba1bc181b6f4addad45d82c194ff3351c6"/>
+<section title="CFGSF2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba5cb81a24bc72c80e2b928df446af6274"/>
+<section title="CFGBGN" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba409d8baf4dce3d4f16af8637badb4af7"/>
+<section title="CFGEND" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba96616934e88cb12c9d9a5a6d05c1fd18"/>
+<section title="SET_ID" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba31af7e415cd369c18a237b42cdaf5243"/>
+<section title="PING" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5"/>
+<section title="RESET" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba76de9290d1d3c15587d40a524abb2618"/>
+<section title="GETCFG" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbad58243bb22f8cda288831c272fe020f5"/>
+<section title="GETDVC" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba18921f49887e1f48f001f7edb4264624"/>
+<section title="FLASH_REQ" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaad780ff47d31dc4e0325cd317285c9e7"/>
+<section title="FLASH_DATA" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba62037965b4d2cd72b52e1833e5e65705"/>
+<section title="FLASH_CHECK" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0de250a739db22a7ff532bfacd08ee83"/>
+<section title="QRYBUF" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e"/>
+<section title="QRYERR" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd"/>
+<section title="GETVER" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbae8589d134690ded7397b0320d14e977f"/>
+<section title="SENSOR" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba3158dceb42b0a097b1ec8953b90cf3e8"/>
+<section title="CMD_MASK" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba76d9e364b83d8153dfa8dd5185f18a65"/>
+<section title="CMD_RESPONSE" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba296c8008f99820ac0131a2ae544f831a"/>
+<section title="CMD_ILLEGAL" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab9e59edc6df376023a00ef5ce466c6ae"/>
 </section>
-<section title="SharedVector" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html">
-<section title="PtrType" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html#a037386313d3ff137788cc75be30c215e"/>
+<section title="CommandCategory" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319">
+<section title="CAT_SWITCH" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319aa176ddda94e77820e5786334516c9bfc"/>
+<section title="CAT_RAIL" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a0a027c46afd5167b4571d722a5218a0d"/>
+<section title="CAT_SIGNAL" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a002fe1fa4a7063cc8c2fcb400f1b67ab"/>
+<section title="CAT_CONFIG" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a559bb957de195743eb4dc6a514746191"/>
+<section title="CAT_EXT" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319afaa634b656e8d08c93f2a55a4dd35998"/>
+<section title="CAT_MASK" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319af9dc7fc2724e6be9914637ec023a1739"/>
+<section title="CMD_NEED_UNITNO" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a9af3a157bea71a1e3f14b060ed6d62df"/>
 </section>
-<section title="ClockService" ref="db/d8f/classmrw_1_1util_1_1ClockService.html">
-<section title="Hz1" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#aa097bc71ce6a1a2af55ac34af02d377b"/>
-<section title="Hz2" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#aff9d02e4d105be76c2f683213037b87e"/>
-<section title="Hz4" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#ab987466889f56f4be79d75761e36a019"/>
-<section title="Hz8" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#a46b81845210ba4150aec594ce3bd9606"/>
-<section title="instance" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
-<section title="Singleton&lt; ClockService &gt;" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#ad1de93cfc5c22e4b1d91f8cf7b9798ff"/>
+<section title="Response" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0">
+<section title="MSG_OK" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0aefd1f02de4771e98d840a4d53a1489e8"/>
+<section title="MSG_QUEUE_FULL" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a236e6fe1d193046cb9ae19365d55736c"/>
+<section title="MSG_UNKNOWN_CMD" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a6b035e6fb33265603548d38a868f3a8f"/>
+<section title="MSG_PENDING" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a682aa7e0fbfea53a9334001795465cf5"/>
+<section title="MSG_IGNORED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0ae8cadf55a103717293adab48b1491303"/>
+<section title="MSG_QUEUED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a930c83c472854788f3941d2711b2af02"/>
+<section title="MSG_NOT_CONFIGURED_YET" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a024cefe156ec0392b7cf2444bf63090f"/>
+<section title="MSG_NO_UNITNO_DEFINED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a995dd26acc99ec6af581eb2acc587270"/>
+<section title="MSG_UNITTYPE_WRONG" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a4d3f288b79ed00d2e1f3ab5db9b817ca"/>
+<section title="MSG_RESET_PENDING" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a78b19866ba83620ab9bd61927c65f67c"/>
+<section title="MSG_UNITNO_MISSING" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0aa494b56e42a1cb04980989554f761791"/>
+<section title="MSG_UNIT_NOT_FOUND" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0ad9a39e0a75362d9edc55cd532709c61b"/>
+<section title="MSG_NOT_IN_CONFIG_MODE" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a106d5a4a02b41ee73161b82dd67ed70f"/>
+<section title="MSG_BOOTED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a558a4e7afb7a90a9847909f0a81f6efb"/>
+<section title="MSG_ID_NOT_CHANGED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a06ea4ef47152ddf071a1dec742931993"/>
+<section title="MSG_CHECKSUM_ERROR" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a7b023d9bb8f523ee4bf3ff22ff7bea1a"/>
+<section title="MSG_INFO" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0ad5150815f57a5219a42da2f42f90861e"/>
+<section title="MSG_ID_CHANGE_DISABLED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0ab5133efec8e455a768655911de9e5517"/>
+<section title="MSG_HARDWARE_MISMATCH" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a084c5fbd7fc55eccd3c26c9a55140edd"/>
+<section title="MSG_SWITCH_FAILED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0ac5fd124fa5005d5fb06987f7ef56ddb4"/>
+<section title="MSG_CONFIG_BUFFER_FULL" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a4b25f68d70e218928d6dec22a2997509"/>
+<section title="MSG_NO_RESPONSE" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a6041ce8a8e9b9fd43287aed4e130d020"/>
 </section>
-<section title="ConstantEnumerator" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html">
-<section title="ConstantMapPair" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#a2fb8988f103ebc51fe1395b9d553182a"/>
-<section title="ConstantEnumerator" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#aa2a8f1f9a5e3887f0e1199d66a0e6066"/>
-<section title="findKey" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#ae8370f9272613af9f8a340d2d49f8fc8"/>
-<section title="get" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#a9461ba5fca963e92a476e711808f10db"/>
+<section title="SensorType" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0a">
+<section title="SENSOR_LIGHT" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aaa7865aec2f076513d662d58cc2b210a6"/>
+<section title="SENSOR_TEMP" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aa6cd28db86422557c7b789a7888e74a4a"/>
 </section>
-<section title="DumpHandler" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html">
-<section title="SignalCallback" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a18a7855c6ab74fe326f34ae48eaac3a5"/>
-<section title="DumpHandler" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a9d787765518a5f04aaef46e86e9eee64"/>
-<section title="signal" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
-<section title="sig_pipe" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#ab27fa977d77273a270f53365a056a364"/>
+<section title="SignalAspect" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0">
+<section title="SIGNAL_OFF" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0ac5b227b654dbdc355024c97f0050b9df"/>
+<section title="SIGNAL_HP0" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a841ea08c7d66bef6d9497ca81c803970"/>
+<section title="SIGNAL_HP1" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a9d751b15c140ef565825d51ea2b69e1e"/>
+<section title="SIGNAL_HP2" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a3dbf257139d68a6661a4f87860ff6ae4"/>
+<section title="SIGNAL_VR0" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0ab176463e80a895da6bf23b503ba4247b"/>
+<section title="SIGNAL_VR1" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a43daa05f873a9bd8bf7d14e363f63ba1"/>
+<section title="SIGNAL_VR2" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a7682ef45608866696e0fe3914126ab59"/>
+<section title="SIGNAL_SH0" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a719d06545707b583f58455ebc29c38e1"/>
+<section title="SIGNAL_SH1" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a2d7bd6c8a055925ea28e988620378e00"/>
+<section title="SIGNAL_TST" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a81dcf23e74c0deedaca1426b19438047"/>
+<section title="SIGNAL_CRX" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a8065d200f5a26511459c637b3158d984"/>
+<section title="SIGNAL_MAIN_DISTANT_OFFSET" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a986a1c6d90ab9d6a757efc7032fa868b"/>
 </section>
-<section title="Duration" ref="d2/d87/classmrw_1_1util_1_1Duration.html">
-<section title="Duration" ref="d2/d87/classmrw_1_1util_1_1Duration.html#a409b732a06037bbefe417100f43467e3"/>
-<section title="~Duration" ref="d2/d87/classmrw_1_1util_1_1Duration.html#a32b4f7a84922729de9fd5d2cd6762c42"/>
-<section title="pattern" ref="d2/d87/classmrw_1_1util_1_1Duration.html#ae3d2e59bf766598a94aae087762a558c"/>
-<section title="TIME_STAMP_FORMAT" ref="d2/d87/classmrw_1_1util_1_1Duration.html#a5d7d85ca337156a12663496c60ea7cdf"/>
+<section title="SwitchState" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5a">
+<section title="SWITCH_STATE_LEFT" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aabd971af2ede13a28b76b640b4e85907d"/>
+<section title="SWITCH_STATE_RIGHT" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aae8bf215c336133fe02e0b0bda61004a2"/>
 </section>
-<section title="GlobalBatch" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html">
-<section title="completed" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#ad5782ea3eb0ec5b81054d0fe2bbd0832"/>
-<section title="contains" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a64e6058b09a8eacdb229d5925986a286"/>
-<section title="decrease" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#ab6d3b508f66581271f23cff702b7d623"/>
-<section title="dump" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a80716793d4a9a190b33feea735f6c672"/>
-<section title="increase" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#af15eea1cb3b0eeddb7c0422268e1ad16"/>
-<section title="instance" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
-<section title="isCompleted" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a020909c9b81bae44ac2bbd50dd993d7d"/>
-<section title="reset" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a60ac05642f1f86ced915f28b98f7fc93"/>
-<section title="tryComplete" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a6a172e9045658340078aa3401297cccb"/>
-<section title="Singleton&lt; GlobalBatch &gt;" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a829e37c010521603ab72a94bec0b71cc"/>
-<section title="id" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a7057e4d7f48cf53d741db1e5cb219efe"/>
-<section title="transaction" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a2dd1abb1b487ad2531c3c98f24544e67"/>
+<section title="CAN_BROADCAST_ID" ref="d9/d9b/namespacemrw_1_1can.html#af60507dceb3716970cdf6fa5df53ca27"/>
+<section title="CAN_EID_UNITNO_MASK" ref="d9/d9b/namespacemrw_1_1can.html#a4bf4fa5a47b007939c26cc751241ffa0"/>
+<section title="CAN_GATEWAY_ID" ref="d9/d9b/namespacemrw_1_1can.html#acdbc536a60e49126061acb3a25c30737"/>
+<section title="CAN_SID_MASK" ref="d9/d9b/namespacemrw_1_1can.html#a5bc2dc75cc9bbe49df30ba7ecde4ff7b"/>
+<section title="CAN_SID_SHIFT" ref="d9/d9b/namespacemrw_1_1can.html#a09d78d50b144919ce41199f02a0cc9d4"/>
+<section title="NO_UNITNO" ref="d9/d9b/namespacemrw_1_1can.html#aa9e5a8167acba11155bc8eacd145763a"/>
 </section>
-<section title="HexLine" ref="d0/d55/classmrw_1_1util_1_1HexLine.html">
-<section title="HexLine" ref="d0/d55/classmrw_1_1util_1_1HexLine.html#a855c36b3062227265b35790c3e722f78"/>
-<section title="HexLine" ref="d0/d55/classmrw_1_1util_1_1HexLine.html#ade53720a08e5caf79458ecf6f0e14f79"/>
-<section title="append" ref="d0/d55/classmrw_1_1util_1_1HexLine.html#aeaf6cc8d0ac6f596330c860fb157acb9"/>
-<section title="getAddress" ref="d0/d55/classmrw_1_1util_1_1HexLine.html#a4daff801875b2ec92e754c9f2ad3782c"/>
-<section title="operator bool" ref="d0/d55/classmrw_1_1util_1_1HexLine.html#a840b27bcc104b253d7e4fdf00b16babc"/>
+<section title="ctrl" ref="d1/d18/namespacemrw_1_1ctrl.html">
+<section title="BaseController" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html">
+<section title="Status" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html">
+<section title="bending" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<section title="direction" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
+<section title="expandable" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
+<section title="extensions" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
+<section title="lines" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
+<section title="lock_state" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
+<section title="name" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
+<section title="position" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
+<section title="section_state" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
 </section>
-<section title="Method" ref="d0/def/classmrw_1_1util_1_1Method.html">
-<section title="always" ref="d0/def/classmrw_1_1util_1_1Method.html#aa69a8f0e4deeeb9825fdfb42260d2496"/>
-<section title="never" ref="d0/def/classmrw_1_1util_1_1Method.html#a0b6bad7ed10e28f13a0ca211e3e929d3"/>
-<section title="noop" ref="d0/def/classmrw_1_1util_1_1Method.html#aaca8663dc7d7fa6057733d32ac9ed272"/>
+<section title="BaseController" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ae47bfe51040bb5674d54e9a9ae00c1ce"/>
+<section title="callback" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
+<section title="extensions" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
+<section title="isExpandable" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a304fd3cee2b94ed73e33091126a96a55"/>
+<section title="lines" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
+<section title="lock" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#af9ded43cf50263db4a1fe964aac2a801"/>
+<section title="name" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
+<section title="position" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
+<section title="reposition" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#adae113964b68eccca459674db927f17a"/>
+<section title="status" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a856c0a9289054c71f6d0212bc3007efe"/>
+<section title="update" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
 </section>
-<section title="Properties" ref="d5/d5d/classmrw_1_1util_1_1Properties.html">
-<section title="Properties" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#acc6d280ed1e3d16f27815ef981fb4dac"/>
-<section title="Properties" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#ac4b43aabd1c5fe5b4068d1ff452ebe55"/>
-<section title="lookup" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#ad6f0a73d0b76f90a1931c467cc0fd42f"/>
-<section title="read" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#a0114da8844b82cbce0860dd1ddf67ff7"/>
-<section title="EMPTY" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#a06b63c65466680b565135325a07d5dc8"/>
+<section title="BaseSwitchController" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html">
+<section title="Status" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html">
+<section title="bending" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<section title="direction" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
+<section title="expandable" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
+<section title="extensions" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
+<section title="has_flank_protection" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a33dc8379c42890008405241119aa2562"/>
+<section title="lines" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
+<section title="lock_state" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
+<section title="name" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
+<section title="position" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
+<section title="right_bended" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
+<section title="section_state" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
 </section>
-<section title="Random" ref="d5/d62/classmrw_1_1util_1_1Random.html">
-<section title="engine" ref="d5/d62/classmrw_1_1util_1_1Random.html#a496b866193fddc164558052f97d261f7"/>
-<section title="instance" ref="d5/d62/classmrw_1_1util_1_1Random.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
-<section title="random" ref="d5/d62/classmrw_1_1util_1_1Random.html#a07f6800fb4eb9228c223dcc4ee4d0dd4"/>
-<section title="Singleton&lt; Random &gt;" ref="d5/d62/classmrw_1_1util_1_1Random.html#ad4ba9c502cc704e19f4c21eca8f8ab58"/>
+<section title="BaseSwitchController" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a6898669ecedd594a9a396e8b72684f48"/>
+<section title="callback" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
+<section title="extensions" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
+<section title="isExpandable" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a304fd3cee2b94ed73e33091126a96a55"/>
+<section title="isRightBended" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#ab2e620f81e388484bade8936237721ad"/>
+<section title="lines" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
+<section title="lock" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#af9ded43cf50263db4a1fe964aac2a801"/>
+<section title="name" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
+<section title="position" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
+<section title="reposition" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#adae113964b68eccca459674db927f17a"/>
+<section title="status" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a856c0a9289054c71f6d0212bc3007efe"/>
+<section title="status" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a135f542bfb0e985af710cfa61f38f02b"/>
+<section title="update" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
 </section>
-<section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html">
-<section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a353ec5114e50161f65bdbc4bd5b79d16"/>
-<section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a4339bd86cb111f01b2533f39fd15c4fc"/>
-<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a47e80c93862b9445fa6364b5fa1bc96a"/>
+<section title="DoubleCrossSwitchController" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html">
+<section title="Status" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html">
+<section title="bending" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<section title="direction" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
+<section title="expandable" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
+<section title="extensions" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
+<section title="has_flank_protection" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a33dc8379c42890008405241119aa2562"/>
+<section title="is_a" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a8dbddfa88b349338f951608252c30746"/>
+<section title="is_b" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#ac6ffad226428b644d8ec1d5be50a9946"/>
+<section title="is_c" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a1934508d6f36148d40699b1a8523ec79"/>
+<section title="is_d" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a25d2f592a9167564f37d6070e6e42c98"/>
+<section title="lines" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
+<section title="lock_state" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
+<section title="name" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
+<section title="position" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
+<section title="right_bended" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
+<section title="section_state" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
+<section title="state" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a17352d772aee9749100511405c2f81c3"/>
 </section>
-<section title="Self" ref="d6/dd2/classmrw_1_1util_1_1Self.html">
-<section title="Self" ref="d6/dd2/classmrw_1_1util_1_1Self.html#afaef2efac1c1e871bc4c66ded544f2d5"/>
-<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="d6/dd2/classmrw_1_1util_1_1Self.html#a47e80c93862b9445fa6364b5fa1bc96a"/>
+<section title="DoubleCrossSwitchController" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a26140b0363e5246bab584337394dcfbf"/>
+<section title="callback" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
+<section title="isExpandable" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a304fd3cee2b94ed73e33091126a96a55"/>
+<section title="isRightBended" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#ab2e620f81e388484bade8936237721ad"/>
+<section title="lines" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
+<section title="lock" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#af9ded43cf50263db4a1fe964aac2a801"/>
+<section title="name" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
+<section title="position" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
+<section title="reposition" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#adae113964b68eccca459674db927f17a"/>
+<section title="status" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a856c0a9289054c71f6d0212bc3007efe"/>
+<section title="status" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a135f542bfb0e985af710cfa61f38f02b"/>
+<section title="status" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a64fe8139cf2e4e23e94dc153a507c2de"/>
+<section title="update" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
 </section>
-<section title="Settings" ref="d6/db2/classmrw_1_1util_1_1Settings.html">
-<section title="Settings" ref="d6/db2/classmrw_1_1util_1_1Settings.html#a05676ec48e2b4c57c8b3cfea56ccac8e"/>
+<section title="RailController" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html">
+<section title="Status" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html">
+<section title="a_ends" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a18d5f6f03d53e22a2500d60a995b26e5"/>
+<section title="b_ends" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#af5f774bc7dfd19358fde7a941e9e4e27"/>
+<section title="bending" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<section title="direction" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
+<section title="expandable" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
+<section title="extensions" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
+<section title="has_crossing" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a1b33a032378c455c1fc54e3b4742b603"/>
+<section title="lines" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
+<section title="lock_state" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
+<section title="name" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
+<section title="position" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
+<section title="section_state" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
 </section>
-<section title="SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html">
-<section title="SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#aac49a4a0d15d663378b95d539c464a3d"/>
-<section title="~SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#a56bb81c0462df5edb443a8d9cc5c2622"/>
+<section title="RailController" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a6c4178790755d3de5648160d6aa1b549"/>
+<section title="callback" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
+<section title="extensions" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
+<section title="lines" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
+<section title="lock" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#af9ded43cf50263db4a1fe964aac2a801"/>
+<section title="name" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
+<section title="position" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
+<section title="reposition" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#adae113964b68eccca459674db927f17a"/>
+<section title="status" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a856c0a9289054c71f6d0212bc3007efe"/>
+<section title="status" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a1037e7fdd3af3e5db21c08de06dd0e64"/>
+<section title="update" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
 </section>
-<section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html">
-<section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a3d3e37b31249af3c2216361efaeeeaee"/>
-<section title="callback" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#ad9eeb273d8fa6e3c4526149c1e46cc7b"/>
+<section title="RegularSwitchController" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html">
+<section title="Status" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html">
+<section title="bending" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<section title="direction" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
+<section title="expandable" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
+<section title="extensions" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
+<section title="has_flank_protection" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a33dc8379c42890008405241119aa2562"/>
+<section title="inclined" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abd278afdb704982125d9257348f8d637"/>
+<section title="left" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a2b5d09af6ff2f670d28dfd897bb5220f"/>
+<section title="lines" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
+<section title="lock_state" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
+<section title="name" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
+<section title="position" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
+<section title="right" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abf63160eedfa663a3331e1939f83838c"/>
+<section title="right_bended" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
+<section title="section_state" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
 </section>
-<section title="SigPipeHandler" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html">
-<section title="SigPipeHandler" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#a86c8aa2e1e25e2616be72cf44e2d1ab4"/>
-<section title="signal" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
-<section title="sig_pipe" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#ab27fa977d77273a270f53365a056a364"/>
+<section title="RegularSwitchController" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a648e62fc8463d5b14bef35175681c040"/>
+<section title="callback" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
+<section title="extensions" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
+<section title="isRightBended" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#ab2e620f81e388484bade8936237721ad"/>
+<section title="lines" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
+<section title="lock" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#af9ded43cf50263db4a1fe964aac2a801"/>
+<section title="name" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
+<section title="position" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
+<section title="reposition" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#adae113964b68eccca459674db927f17a"/>
+<section title="status" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a856c0a9289054c71f6d0212bc3007efe"/>
+<section title="status" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a135f542bfb0e985af710cfa61f38f02b"/>
+<section title="status" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#aeef4476c4245275076cad1c73e64adc9"/>
+<section title="update" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
 </section>
-<section title="SigCallbackHandler" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html">
-<section title="SignalCallback" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#a18a7855c6ab74fe326f34ae48eaac3a5"/>
-<section title="SigCallbackHandler" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#ae90e1d133428083349033397aa9847ae"/>
-<section title="signal" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
-<section title="sig_pipe" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#ab27fa977d77273a270f53365a056a364"/>
+<section title="SignalController" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html">
+<section title="Status" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html">
+<section title="bending" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<section title="direction" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
+<section title="distant_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a380bd08548dca28214fdda37f9dcfc41"/>
+<section title="expandable" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
+<section title="extensions" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
+<section title="has_distant" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a1f5b1bb1f6439c832ef2ab1ebd81e468"/>
+<section title="has_main" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#af273dae34687e68fbbf624982da077e8"/>
+<section title="has_shunting" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ae5a73594259c9e173495cbc6807dcf3f"/>
+<section title="lines" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
+<section title="lock_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
+<section title="main_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ad9a851116bd0fdcf30686f8033b77f61"/>
+<section title="name" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
+<section title="position" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
+<section title="section_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
+<section title="shunt_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a70855367f51e4a6e0d8e13b1e4e54cda"/>
 </section>
-<section title="Singleton" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html">
-<section title="Singleton" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ae6f8366470705cd0f158e8b4aed5d2bc"/>
-<section title="Singleton" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9973007ac4e1f0c0709d6f893a10763d"/>
-<section title="instance" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
-<section title="operator=" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ab74b15e4bc2a057127f18f8cd7ae6345"/>
+<section title="SignalController" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#af1969b23b733ab0a5a0e41ff82190eed"/>
+<section title="callback" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
+<section title="extensions" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
+<section title="lines" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
+<section title="lock" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#af9ded43cf50263db4a1fe964aac2a801"/>
+<section title="name" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
+<section title="position" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
+<section title="reposition" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#adae113964b68eccca459674db927f17a"/>
+<section title="status" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a856c0a9289054c71f6d0212bc3007efe"/>
+<section title="status" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#ae93006f11c1a55b253fa2a278772e94f"/>
+<section title="update" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
 </section>
-<section title="String" ref="d0/d55/classmrw_1_1util_1_1String.html">
-<section title="bold" ref="d0/d55/classmrw_1_1util_1_1String.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
-<section title="format" ref="d0/d55/classmrw_1_1util_1_1String.html#adbf185289d3c6a133f3d5150d2fb08c3"/>
-<section title="operator QString" ref="d0/d55/classmrw_1_1util_1_1String.html#a52d7f4538b30867ad6e37ccd3d2e7aaf"/>
-<section title="red" ref="d0/d55/classmrw_1_1util_1_1String.html#a35b509dcf26d9f00cff8c6dd18a6a5cf"/>
-<section title="toString" ref="d0/d55/classmrw_1_1util_1_1String.html#a939a5e4e560f858b3869fc6bec10274e"/>
-<section title="ALL_OFF" ref="d0/d55/classmrw_1_1util_1_1String.html#a0211a33a579dc035a945bb9c6c37c27d"/>
-<section title="BLUE_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a99bdb92fafd1dfab6f5d46112f4f6365"/>
-<section title="BOLD_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a40fdb0231da6c6ee8bd39d125031fefe"/>
-<section title="CYAN_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a8026cc002373c31b4dc8193a2a1eb599"/>
-<section title="GREEN_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a97deee27c031921c641a624fb74f8a0e"/>
-<section title="ITALIC_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a16c7225aa46a8feb9f485f6b0764abfb"/>
-<section title="MAGENTA_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a1025ed62ec25b78007d53e0760f21ecf"/>
-<section title="RED_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#ad34b779827292c895aad2ee463a031bc"/>
-<section title="UNDERLINE_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a32a8c1059545a2141bc5ddf45203f920"/>
-<section title="WHITE_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a2efce8f49ed761f31c28d513f782ead6"/>
-</section>
-<section title="TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html">
-<section title="TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#afcf13d27620bb60da2447f77fe52b632"/>
-<section title="TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a2616c0436b27b5e414c92d5603e72fc5"/>
-<section title="signal" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
-<section title="sig_pipe" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#ab27fa977d77273a270f53365a056a364"/>
-</section>
-<section title="cutScope" ref="d9/d2b/namespacemrw_1_1util.html#aecdce54a6519bb96fd87579c6ce38f8f"/>
 </section>
 <section title="log" ref="d8/d91/namespacemrw_1_1log.html">
 <section title="FileLogger" ref="d8/ded/classmrw_1_1log_1_1FileLogger.html">
@@ -180,11 +355,6 @@
 <section title="~FileLogger" ref="d8/ded/classmrw_1_1log_1_1FileLogger.html#ab08af44f2de3fe1b51158132f9a399dd"/>
 <section title="timeStamp" ref="d8/ded/classmrw_1_1log_1_1FileLogger.html#a2ecff9f11574c33d083c55da29decdb1"/>
 <section title="write" ref="d8/ded/classmrw_1_1log_1_1FileLogger.html#a0fe98aa684ef2e48c4669bfc3f2569a9"/>
-</section>
-<section title="TimestampedFileLogger" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html">
-<section title="TimestampedFileLogger" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html#aaf0d4a2e08710d8cd52d75404b620bc4"/>
-<section title="timeStamp" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html#a2ecff9f11574c33d083c55da29decdb1"/>
-<section title="write" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html#a0fe98aa684ef2e48c4669bfc3f2569a9"/>
 </section>
 <section title="LoggerBase" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html">
 <section title="~LoggerBase" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html#a1c6d7880ada1aae670c7b8c41389ee91"/>
@@ -194,10 +364,6 @@
 <section title="info" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html#a1e1e0f7c03e9e8294c5add884092eeaa"/>
 <section title="timeStamp" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html#a2ecff9f11574c33d083c55da29decdb1"/>
 <section title="warn" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html#a9ca1abea0dbfdd5fa32ed474cf3985ff"/>
-</section>
-<section title="UnifiedLogger" ref="dc/d69/classmrw_1_1log_1_1UnifiedLogger.html">
-<section title="timeStamp" ref="dc/d69/classmrw_1_1log_1_1UnifiedLogger.html#a2ecff9f11574c33d083c55da29decdb1"/>
-<section title="write" ref="dc/d69/classmrw_1_1log_1_1UnifiedLogger.html#a837fb11ee229263bc3c1bcee4260ec0a"/>
 </section>
 <section title="LoggerService" ref="d4/dc7/classmrw_1_1log_1_1LoggerService.html">
 <section title="instance" ref="d4/dc7/classmrw_1_1log_1_1LoggerService.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
@@ -224,6 +390,15 @@
 <section title="info" ref="d5/d0d/classmrw_1_1log_1_1SysLogger.html#a9877a0b8e736fbd2dbaa6fbe96ae3ba3"/>
 <section title="timeStamp" ref="d5/d0d/classmrw_1_1log_1_1SysLogger.html#a2ecff9f11574c33d083c55da29decdb1"/>
 <section title="warn" ref="d5/d0d/classmrw_1_1log_1_1SysLogger.html#a052b258c91729190bb104f1b41f9b598"/>
+</section>
+<section title="TimestampedFileLogger" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html">
+<section title="TimestampedFileLogger" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html#aaf0d4a2e08710d8cd52d75404b620bc4"/>
+<section title="timeStamp" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html#a2ecff9f11574c33d083c55da29decdb1"/>
+<section title="write" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html#a0fe98aa684ef2e48c4669bfc3f2569a9"/>
+</section>
+<section title="UnifiedLogger" ref="dc/d69/classmrw_1_1log_1_1UnifiedLogger.html">
+<section title="timeStamp" ref="dc/d69/classmrw_1_1log_1_1UnifiedLogger.html#a2ecff9f11574c33d083c55da29decdb1"/>
+<section title="write" ref="dc/d69/classmrw_1_1log_1_1UnifiedLogger.html#a837fb11ee229263bc3c1bcee4260ec0a"/>
 </section>
 </section>
 <section title="model" ref="d9/dbc/namespacemrw_1_1model.html">
@@ -431,6 +606,12 @@
 <section title="name" ref="d8/d2c/classmrw_1_1model_1_1Device.html#a096acffad825581a99fbf267ae2c9870"/>
 <section title="setLock" ref="d8/d2c/classmrw_1_1model_1_1Device.html#a0d1f2095bc54b7f57caebc39b3f486a2"/>
 <section title="unitNo" ref="d8/d2c/classmrw_1_1model_1_1Device.html#a262cee73971200e5c6cd308a7621682f"/>
+</section>
+<section title="DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html">
+<section title="DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a631870f95778416f1992bfcbf453c450"/>
+<section title="~DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a71173849da88347e35acc9b26e63cf87"/>
+<section title="DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a1d7468ec02577ad399eb473a3e86f7ac"/>
+<section title="operator()" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a8a07c84acd38a3d6d7bd261b271cfd32"/>
 </section>
 <section title="DoubleCrossSwitch" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html">
 <section title="Bending" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a380b5a8ca4ca1e92ca0a75a4a392caea">
@@ -782,23 +963,6 @@
 <section title="UNDERLINE_ON" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a32a8c1059545a2141bc5ddf45203f920"/>
 <section title="WHITE_ON" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a2efce8f49ed761f31c28d513f782ead6"/>
 </section>
-<section title="MrwStatistic" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html">
-<section title="device_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#afc04c97249244e67e8362bdcb869069c"/>
-<section title="errors" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#a446b2d242df918530d1b49335dd3bb34"/>
-<section title="main_signal_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ab90956fed9672a9201523c80cf8116cd"/>
-<section title="region_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aa3736702fa76a650c37ee3ec960125af"/>
-<section title="section_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ade4d9e7569c4acdd56d0c4a79c15bd9d"/>
-<section title="signal_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#a058a011745e7c922bee44d1250fb07dd"/>
-<section title="signal_group_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aee23e91a5ba44702c352575927d05538"/>
-<section title="switch_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ad80e89ab509758691329c043c06445db"/>
-<section title="warnings" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#add0f80348edc3c628522f7765f1aad3f"/>
-</section>
-<section title="DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html">
-<section title="DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a631870f95778416f1992bfcbf453c450"/>
-<section title="~DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a71173849da88347e35acc9b26e63cf87"/>
-<section title="DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a1d7468ec02577ad399eb473a3e86f7ac"/>
-<section title="operator()" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a8a07c84acd38a3d6d7bd261b271cfd32"/>
-</section>
 <section title="ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html">
 <section title="ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a0cee0b2b7f7fcc1699d8b6c793b56f24"/>
 <section title="ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a62fc2b320e1915b3d3dd7ba9d7a77010"/>
@@ -880,6 +1044,17 @@
 <section title="MAX_PINS_PER_PORT" ref="d3/de7/classmrw_1_1model_1_1Module.html#a90c03e73046041d762d25a2af74a1f36"/>
 <section title="model" ref="d3/de7/classmrw_1_1model_1_1Module.html#ae2b222e4077297b29c0956e2a322c889"/>
 <section title="reference" ref="d3/de7/classmrw_1_1model_1_1Module.html#a75fdcc7651e2f3174e75589035930287"/>
+</section>
+<section title="MrwStatistic" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html">
+<section title="device_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#afc04c97249244e67e8362bdcb869069c"/>
+<section title="errors" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#a446b2d242df918530d1b49335dd3bb34"/>
+<section title="main_signal_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ab90956fed9672a9201523c80cf8116cd"/>
+<section title="region_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aa3736702fa76a650c37ee3ec960125af"/>
+<section title="section_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ade4d9e7569c4acdd56d0c4a79c15bd9d"/>
+<section title="signal_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#a058a011745e7c922bee44d1250fb07dd"/>
+<section title="signal_group_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aee23e91a5ba44702c352575927d05538"/>
+<section title="switch_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ad80e89ab509758691329c043c06445db"/>
+<section title="warnings" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#add0f80348edc3c628522f7765f1aad3f"/>
 </section>
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html">
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a88f58c06e4ec956db5123e6ceeb35fa2"/>
@@ -1489,343 +1664,15 @@
 </section>
 <section title="log" ref="d9/dbc/namespacemrw_1_1model.html#a54293b6364cff162663caeb26d86b587"/>
 </section>
-<section title="can" ref="d9/d9b/namespacemrw_1_1can.html">
-<section title="CanSettings" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html">
-<section title="CanSettings" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#a924c0b34f81df37444cd61dfac01f57c"/>
-<section title="interface" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#af96bb342cc0413d092d4428ff408af99"/>
-<section title="operator mrw::util::SettingsGroup" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#a62f446da8ebdf141affcaa9eac663a8b"/>
-<section title="plugin" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#a24a08d487e35eae9a2b7754f898bddc0"/>
+<section title="statechart" ref="d7/d94/namespacemrw_1_1statechart.html">
+<section title="TimerService" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html">
+<section title="instance" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
+<section title="operator std::shared_ptr&lt; TimerServiceInterface &gt; &amp;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#aafe10010a416f26eb31b84896193af72"/>
+<section title="mrw::util::Singleton&lt; TimerService &gt;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a02d511ee2ea2f228f23719a5eb143915"/>
 </section>
-<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html">
-<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ab3258243639f9a5410e76195fedb01c9"/>
-<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a837eea6320f30f3df1f99f0d3c67bf93"/>
-<section title="~MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a73ae1d0363d32fbea5b866180a7c21f2"/>
-<section title="connected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0862edc4130e6b3563f7e23d5ffb3916"/>
-<section title="disconnected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0c930e0da610c26edefcf10b4cd80b31"/>
-<section title="list" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#aee34c1e95d971992f8090c5f1250f092"/>
-<section title="process" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a18b3f3b41d839efbc4fe3163b1d65645"/>
-<section title="receive" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a3e3897a65e13d57bee40fa41829bb050"/>
-<section title="stateChanged" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a7461096e1f4038279302ee46d4aeb6d5"/>
-<section title="valid" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a7bb5f821bb3fe4491d0bddc343b8b8c9"/>
-<section title="write" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a5c5f0523ed079f7c1679b6d2870fc22d"/>
-<section title="can_bus" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ae9add44a66b3c41000569347d5eb8e68"/>
-<section title="can_device" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a84bd068ea88e51a45bac0b3838d66b02"/>
-</section>
-<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html">
-<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a60e9a220fb6bc3b615943401084d6be8"/>
-<section title="~MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6ef72a8ee16eb914494052bf27f76869"/>
-<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a3adf124f0faccc84019a52525e3bc8dd"/>
-<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aadd7638b3c8eb8eb4575580c5394edf2"/>
-<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0895080730cbc5ddc088da0e5813ee7d"/>
-<section title="append" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ad9c105a29f210259dbda59c4d39c566d"/>
-<section title="bold" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
-<section title="command" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#abc5b117bce848ab5cb9b5d816116b071"/>
-<section title="eid" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6348ec130e3c76e509c93f91618f1214"/>
-<section title="format" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#adbf185289d3c6a133f3d5150d2fb08c3"/>
-<section title="get" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a35ad89d2f66c888e5dde95d402be2155"/>
-<section title="id" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aec1ba78b7fa70c52566d4727eb7090ed"/>
-<section title="isResponse" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6bc36589acbc90c1d7437b643e6dff5e"/>
-<section title="operator QCanBusFrame" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a600681d641d8c896e7a8654ee84f2a34"/>
-<section title="operator QString" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a52d7f4538b30867ad6e37ccd3d2e7aaf"/>
-<section title="operator[]" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a64e2ae4e67cccbaedc05cb290611a1aa"/>
-<section title="red" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a35b509dcf26d9f00cff8c6dd18a6a5cf"/>
-<section title="response" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aa7afbc78a2e8a8a6b7be6fd0d60f64d5"/>
-<section title="sid" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ab87d09e803430aa877df53387b169de1"/>
-<section title="size" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0021b4ca7d4936a10520582db11351e5"/>
-<section title="toString" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a76e903a76b1f572d7e4a0c3863b53cfe"/>
-<section title="unitNo" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a92096a014295e7c48f83d69917df0969"/>
-<section title="valid" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6d6b488c9ebb160a85e243ddc409063f"/>
-<section title="ALL_OFF" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0211a33a579dc035a945bb9c6c37c27d"/>
-<section title="BLUE_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a99bdb92fafd1dfab6f5d46112f4f6365"/>
-<section title="BOLD_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a40fdb0231da6c6ee8bd39d125031fefe"/>
-<section title="CYAN_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a8026cc002373c31b4dc8193a2a1eb599"/>
-<section title="GREEN_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a97deee27c031921c641a624fb74f8a0e"/>
-<section title="ITALIC_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a16c7225aa46a8feb9f485f6b0764abfb"/>
-<section title="MAGENTA_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a1025ed62ec25b78007d53e0760f21ecf"/>
-<section title="RED_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ad34b779827292c895aad2ee463a031bc"/>
-<section title="UNDERLINE_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a32a8c1059545a2141bc5ddf45203f920"/>
-<section title="WHITE_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a2efce8f49ed761f31c28d513f782ead6"/>
-</section>
-<section title="ControllerId" ref="d9/d9b/namespacemrw_1_1can.html#ad3397ba650ef1dbb629a49e0d5f78ba8"/>
-<section title="DeviceKey" ref="d9/d9b/namespacemrw_1_1can.html#ace76a1ef7c615650aaa309b027d1eae2"/>
-<section title="UnitNo" ref="d9/d9b/namespacemrw_1_1can.html#aadc3657d376a3c081b9b0c05feafbce7"/>
-<section title="Command" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fb">
-<section title="SETLFT" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbabca680de579ea58136cd90154e24b7d3"/>
-<section title="SETRGT" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0ed96af8e19ac15fa34de519ccaff478"/>
-<section title="GETDIR" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba3afc6486a2a238d5b9c6f0cec2e5d6fe"/>
-<section title="SETRON" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4f0d9b54aec9270440070bee2b8b9434"/>
-<section title="SETROF" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba6cf39187f40d9908f55bafc2288a5eb2"/>
-<section title="GETRBS" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab16256ad009d9fa8a99ddc328d56376f"/>
-<section title="SETSGN" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba877b8510202d0a89047c3531854c6bbd"/>
-<section title="CFGCRX" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0fe39d867d068a8db7e6cb19a542ca3b"/>
-<section title="CFGSWN" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaa587c43942ce005e535b0e9346ef0bb7"/>
-<section title="CFGSWO" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab0cf691463a572e065a978ef836ec510"/>
-<section title="CFGRAI" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba4dc929300cab8cfe100efdf301ac43ff"/>
-<section title="CFGPF2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba1301f6a6fa52730e25b8e93453bcfa81"/>
-<section title="CFGPF3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba003a8725f7e1edde0361e49f27e121a9"/>
-<section title="CFGMF2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba85005546e8544c48cb9e4cd2c84714da"/>
-<section title="CFGMF3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba6d16ab40748962f96ecc92444b2a03df"/>
-<section title="CFGPL2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba9ab40ea1a9127c249c1ab4d658584030"/>
-<section title="CFGPL3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbad2251faa181a73b9e964fb79c2829143"/>
-<section title="CFGSL2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaaec6d999d4ccd7498847a153153940b8"/>
-<section title="CFGML2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba708452d023dca3039b7532baa63660b3"/>
-<section title="CFGML3" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba91f946824ba8bde964f05ad5209ebbd4"/>
-<section title="CFGML4" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba62d97dbd0db8813be0ccfe13c75379f5"/>
-<section title="CFGLGT" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba1bc181b6f4addad45d82c194ff3351c6"/>
-<section title="CFGSF2" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba5cb81a24bc72c80e2b928df446af6274"/>
-<section title="CFGBGN" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba409d8baf4dce3d4f16af8637badb4af7"/>
-<section title="CFGEND" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba96616934e88cb12c9d9a5a6d05c1fd18"/>
-<section title="SET_ID" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba31af7e415cd369c18a237b42cdaf5243"/>
-<section title="PING" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0f22ae2cbd26e058017d712e4c0db1e5"/>
-<section title="RESET" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba76de9290d1d3c15587d40a524abb2618"/>
-<section title="GETCFG" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbad58243bb22f8cda288831c272fe020f5"/>
-<section title="GETDVC" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba18921f49887e1f48f001f7edb4264624"/>
-<section title="FLASH_REQ" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbaad780ff47d31dc4e0325cd317285c9e7"/>
-<section title="FLASH_DATA" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba62037965b4d2cd72b52e1833e5e65705"/>
-<section title="FLASH_CHECK" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0de250a739db22a7ff532bfacd08ee83"/>
-<section title="QRYBUF" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba0dcb905c0156a8196e593254fc94725e"/>
-<section title="QRYERR" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba005637f307ae952ebb0b21d23d237ccd"/>
-<section title="GETVER" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbae8589d134690ded7397b0320d14e977f"/>
-<section title="SENSOR" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba3158dceb42b0a097b1ec8953b90cf3e8"/>
-<section title="CMD_MASK" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba76d9e364b83d8153dfa8dd5185f18a65"/>
-<section title="CMD_RESPONSE" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fba296c8008f99820ac0131a2ae544f831a"/>
-<section title="CMD_ILLEGAL" ref="d9/d9b/namespacemrw_1_1can.html#ae9a2e6e9bc528c9c7f38b7d26457d4fbab9e59edc6df376023a00ef5ce466c6ae"/>
-</section>
-<section title="CommandCategory" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319">
-<section title="CAT_SWITCH" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319aa176ddda94e77820e5786334516c9bfc"/>
-<section title="CAT_RAIL" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a0a027c46afd5167b4571d722a5218a0d"/>
-<section title="CAT_SIGNAL" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a002fe1fa4a7063cc8c2fcb400f1b67ab"/>
-<section title="CAT_CONFIG" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a559bb957de195743eb4dc6a514746191"/>
-<section title="CAT_EXT" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319afaa634b656e8d08c93f2a55a4dd35998"/>
-<section title="CAT_MASK" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319af9dc7fc2724e6be9914637ec023a1739"/>
-<section title="CMD_NEED_UNITNO" ref="d9/d9b/namespacemrw_1_1can.html#aac851f8e69988e7e7f023fd4888c9319a9af3a157bea71a1e3f14b060ed6d62df"/>
-</section>
-<section title="Response" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0">
-<section title="MSG_OK" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0aefd1f02de4771e98d840a4d53a1489e8"/>
-<section title="MSG_QUEUE_FULL" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a236e6fe1d193046cb9ae19365d55736c"/>
-<section title="MSG_UNKNOWN_CMD" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a6b035e6fb33265603548d38a868f3a8f"/>
-<section title="MSG_PENDING" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a682aa7e0fbfea53a9334001795465cf5"/>
-<section title="MSG_IGNORED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0ae8cadf55a103717293adab48b1491303"/>
-<section title="MSG_QUEUED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a930c83c472854788f3941d2711b2af02"/>
-<section title="MSG_NOT_CONFIGURED_YET" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a024cefe156ec0392b7cf2444bf63090f"/>
-<section title="MSG_NO_UNITNO_DEFINED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a995dd26acc99ec6af581eb2acc587270"/>
-<section title="MSG_UNITTYPE_WRONG" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a4d3f288b79ed00d2e1f3ab5db9b817ca"/>
-<section title="MSG_RESET_PENDING" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a78b19866ba83620ab9bd61927c65f67c"/>
-<section title="MSG_UNITNO_MISSING" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0aa494b56e42a1cb04980989554f761791"/>
-<section title="MSG_UNIT_NOT_FOUND" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0ad9a39e0a75362d9edc55cd532709c61b"/>
-<section title="MSG_NOT_IN_CONFIG_MODE" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a106d5a4a02b41ee73161b82dd67ed70f"/>
-<section title="MSG_BOOTED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a558a4e7afb7a90a9847909f0a81f6efb"/>
-<section title="MSG_ID_NOT_CHANGED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a06ea4ef47152ddf071a1dec742931993"/>
-<section title="MSG_CHECKSUM_ERROR" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a7b023d9bb8f523ee4bf3ff22ff7bea1a"/>
-<section title="MSG_INFO" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0ad5150815f57a5219a42da2f42f90861e"/>
-<section title="MSG_ID_CHANGE_DISABLED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0ab5133efec8e455a768655911de9e5517"/>
-<section title="MSG_HARDWARE_MISMATCH" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a084c5fbd7fc55eccd3c26c9a55140edd"/>
-<section title="MSG_SWITCH_FAILED" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0ac5fd124fa5005d5fb06987f7ef56ddb4"/>
-<section title="MSG_CONFIG_BUFFER_FULL" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a4b25f68d70e218928d6dec22a2997509"/>
-<section title="MSG_NO_RESPONSE" ref="d9/d9b/namespacemrw_1_1can.html#a5fd10e57deed19ffd98acb57774082f0a6041ce8a8e9b9fd43287aed4e130d020"/>
-</section>
-<section title="SensorType" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0a">
-<section title="SENSOR_LIGHT" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aaa7865aec2f076513d662d58cc2b210a6"/>
-<section title="SENSOR_TEMP" ref="d9/d9b/namespacemrw_1_1can.html#aa7e15397b2e2b200856a7f837278ad0aa6cd28db86422557c7b789a7888e74a4a"/>
-</section>
-<section title="SignalAspect" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0">
-<section title="SIGNAL_OFF" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0ac5b227b654dbdc355024c97f0050b9df"/>
-<section title="SIGNAL_HP0" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a841ea08c7d66bef6d9497ca81c803970"/>
-<section title="SIGNAL_HP1" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a9d751b15c140ef565825d51ea2b69e1e"/>
-<section title="SIGNAL_HP2" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a3dbf257139d68a6661a4f87860ff6ae4"/>
-<section title="SIGNAL_VR0" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0ab176463e80a895da6bf23b503ba4247b"/>
-<section title="SIGNAL_VR1" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a43daa05f873a9bd8bf7d14e363f63ba1"/>
-<section title="SIGNAL_VR2" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a7682ef45608866696e0fe3914126ab59"/>
-<section title="SIGNAL_SH0" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a719d06545707b583f58455ebc29c38e1"/>
-<section title="SIGNAL_SH1" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a2d7bd6c8a055925ea28e988620378e00"/>
-<section title="SIGNAL_TST" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a81dcf23e74c0deedaca1426b19438047"/>
-<section title="SIGNAL_CRX" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a8065d200f5a26511459c637b3158d984"/>
-<section title="SIGNAL_MAIN_DISTANT_OFFSET" ref="d9/d9b/namespacemrw_1_1can.html#a0d1e86af238eb817727748135b4a70d0a986a1c6d90ab9d6a757efc7032fa868b"/>
-</section>
-<section title="SwitchState" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5a">
-<section title="SWITCH_STATE_LEFT" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aabd971af2ede13a28b76b640b4e85907d"/>
-<section title="SWITCH_STATE_RIGHT" ref="d9/d9b/namespacemrw_1_1can.html#a6adb46251a933e34bb0c92abfbf60c5aae8bf215c336133fe02e0b0bda61004a2"/>
-</section>
-<section title="CAN_BROADCAST_ID" ref="d9/d9b/namespacemrw_1_1can.html#af60507dceb3716970cdf6fa5df53ca27"/>
-<section title="CAN_EID_UNITNO_MASK" ref="d9/d9b/namespacemrw_1_1can.html#a4bf4fa5a47b007939c26cc751241ffa0"/>
-<section title="CAN_GATEWAY_ID" ref="d9/d9b/namespacemrw_1_1can.html#acdbc536a60e49126061acb3a25c30737"/>
-<section title="CAN_SID_MASK" ref="d9/d9b/namespacemrw_1_1can.html#a5bc2dc75cc9bbe49df30ba7ecde4ff7b"/>
-<section title="CAN_SID_SHIFT" ref="d9/d9b/namespacemrw_1_1can.html#a09d78d50b144919ce41199f02a0cc9d4"/>
-<section title="NO_UNITNO" ref="d9/d9b/namespacemrw_1_1can.html#aa9e5a8167acba11155bc8eacd145763a"/>
-</section>
-<section title="ctrl" ref="d1/d18/namespacemrw_1_1ctrl.html">
-<section title="BaseController" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html">
-<section title="Status" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html">
-<section title="bending" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<section title="direction" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
-<section title="expandable" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
-<section title="extensions" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
-<section title="lines" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
-<section title="lock_state" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
-<section title="name" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
-<section title="position" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
-<section title="section_state" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
-</section>
-<section title="BaseController" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ae47bfe51040bb5674d54e9a9ae00c1ce"/>
-<section title="callback" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
-<section title="extensions" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
-<section title="isExpandable" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a304fd3cee2b94ed73e33091126a96a55"/>
-<section title="lines" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
-<section title="lock" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#af9ded43cf50263db4a1fe964aac2a801"/>
-<section title="name" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
-<section title="position" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
-<section title="reposition" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#adae113964b68eccca459674db927f17a"/>
-<section title="status" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a856c0a9289054c71f6d0212bc3007efe"/>
-<section title="update" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
-</section>
-<section title="BaseSwitchController" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html">
-<section title="Status" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html">
-<section title="bending" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<section title="direction" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
-<section title="expandable" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
-<section title="extensions" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
-<section title="has_flank_protection" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a33dc8379c42890008405241119aa2562"/>
-<section title="lines" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
-<section title="lock_state" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
-<section title="name" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
-<section title="position" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
-<section title="right_bended" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
-<section title="section_state" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
-</section>
-<section title="BaseSwitchController" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a6898669ecedd594a9a396e8b72684f48"/>
-<section title="callback" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
-<section title="extensions" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
-<section title="isExpandable" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a304fd3cee2b94ed73e33091126a96a55"/>
-<section title="isRightBended" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#ab2e620f81e388484bade8936237721ad"/>
-<section title="lines" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
-<section title="lock" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#af9ded43cf50263db4a1fe964aac2a801"/>
-<section title="name" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
-<section title="position" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
-<section title="reposition" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#adae113964b68eccca459674db927f17a"/>
-<section title="status" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a856c0a9289054c71f6d0212bc3007efe"/>
-<section title="status" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a135f542bfb0e985af710cfa61f38f02b"/>
-<section title="update" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
-</section>
-<section title="DoubleCrossSwitchController" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html">
-<section title="Status" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html">
-<section title="bending" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<section title="direction" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
-<section title="expandable" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
-<section title="extensions" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
-<section title="has_flank_protection" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a33dc8379c42890008405241119aa2562"/>
-<section title="is_a" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a8dbddfa88b349338f951608252c30746"/>
-<section title="is_b" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#ac6ffad226428b644d8ec1d5be50a9946"/>
-<section title="is_c" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a1934508d6f36148d40699b1a8523ec79"/>
-<section title="is_d" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a25d2f592a9167564f37d6070e6e42c98"/>
-<section title="lines" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
-<section title="lock_state" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
-<section title="name" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
-<section title="position" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
-<section title="right_bended" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
-<section title="section_state" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
-<section title="state" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a17352d772aee9749100511405c2f81c3"/>
-</section>
-<section title="DoubleCrossSwitchController" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a26140b0363e5246bab584337394dcfbf"/>
-<section title="callback" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
-<section title="isExpandable" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a304fd3cee2b94ed73e33091126a96a55"/>
-<section title="isRightBended" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#ab2e620f81e388484bade8936237721ad"/>
-<section title="lines" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
-<section title="lock" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#af9ded43cf50263db4a1fe964aac2a801"/>
-<section title="name" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
-<section title="position" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
-<section title="reposition" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#adae113964b68eccca459674db927f17a"/>
-<section title="status" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a856c0a9289054c71f6d0212bc3007efe"/>
-<section title="status" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a135f542bfb0e985af710cfa61f38f02b"/>
-<section title="status" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a64fe8139cf2e4e23e94dc153a507c2de"/>
-<section title="update" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
-</section>
-<section title="RailController" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html">
-<section title="Status" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html">
-<section title="a_ends" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a18d5f6f03d53e22a2500d60a995b26e5"/>
-<section title="b_ends" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#af5f774bc7dfd19358fde7a941e9e4e27"/>
-<section title="bending" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<section title="direction" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
-<section title="expandable" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
-<section title="extensions" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
-<section title="has_crossing" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a1b33a032378c455c1fc54e3b4742b603"/>
-<section title="lines" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
-<section title="lock_state" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
-<section title="name" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
-<section title="position" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
-<section title="section_state" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
-</section>
-<section title="RailController" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a6c4178790755d3de5648160d6aa1b549"/>
-<section title="callback" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
-<section title="extensions" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
-<section title="lines" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
-<section title="lock" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#af9ded43cf50263db4a1fe964aac2a801"/>
-<section title="name" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
-<section title="position" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
-<section title="reposition" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#adae113964b68eccca459674db927f17a"/>
-<section title="status" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a856c0a9289054c71f6d0212bc3007efe"/>
-<section title="status" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a1037e7fdd3af3e5db21c08de06dd0e64"/>
-<section title="update" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
-</section>
-<section title="RegularSwitchController" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html">
-<section title="Status" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html">
-<section title="bending" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<section title="direction" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
-<section title="expandable" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
-<section title="extensions" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
-<section title="has_flank_protection" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a33dc8379c42890008405241119aa2562"/>
-<section title="inclined" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abd278afdb704982125d9257348f8d637"/>
-<section title="left" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a2b5d09af6ff2f670d28dfd897bb5220f"/>
-<section title="lines" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
-<section title="lock_state" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
-<section title="name" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
-<section title="position" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
-<section title="right" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abf63160eedfa663a3331e1939f83838c"/>
-<section title="right_bended" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
-<section title="section_state" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
-</section>
-<section title="RegularSwitchController" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a648e62fc8463d5b14bef35175681c040"/>
-<section title="callback" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
-<section title="extensions" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
-<section title="isRightBended" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#ab2e620f81e388484bade8936237721ad"/>
-<section title="lines" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
-<section title="lock" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#af9ded43cf50263db4a1fe964aac2a801"/>
-<section title="name" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
-<section title="position" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
-<section title="reposition" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#adae113964b68eccca459674db927f17a"/>
-<section title="status" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a856c0a9289054c71f6d0212bc3007efe"/>
-<section title="status" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a135f542bfb0e985af710cfa61f38f02b"/>
-<section title="status" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#aeef4476c4245275076cad1c73e64adc9"/>
-<section title="update" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
-</section>
-<section title="SignalController" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html">
-<section title="Status" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html">
-<section title="bending" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<section title="direction" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
-<section title="distant_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a380bd08548dca28214fdda37f9dcfc41"/>
-<section title="expandable" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
-<section title="extensions" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
-<section title="has_distant" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a1f5b1bb1f6439c832ef2ab1ebd81e468"/>
-<section title="has_main" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#af273dae34687e68fbbf624982da077e8"/>
-<section title="has_shunting" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ae5a73594259c9e173495cbc6807dcf3f"/>
-<section title="lines" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
-<section title="lock_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
-<section title="main_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ad9a851116bd0fdcf30686f8033b77f61"/>
-<section title="name" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
-<section title="position" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
-<section title="section_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
-<section title="shunt_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a70855367f51e4a6e0d8e13b1e4e54cda"/>
-</section>
-<section title="SignalController" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#af1969b23b733ab0a5a0e41ff82190eed"/>
-<section title="callback" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
-<section title="extensions" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
-<section title="lines" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
-<section title="lock" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#af9ded43cf50263db4a1fe964aac2a801"/>
-<section title="name" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
-<section title="position" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
-<section title="reposition" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#adae113964b68eccca459674db927f17a"/>
-<section title="status" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a856c0a9289054c71f6d0212bc3007efe"/>
-<section title="status" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#ae93006f11c1a55b253fa2a278772e94f"/>
-<section title="update" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
+<section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html">
+<section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#a3e7ef6e2d57177d1e45464548789f87b"/>
+<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#a47e80c93862b9445fa6364b5fa1bc96a"/>
 </section>
 </section>
 <section title="ui" ref="d1/de6/namespacemrw_1_1ui.html">
@@ -2279,69 +2126,6 @@
 <section title="YELLOW" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
 </section>
 </section>
-<section title="statechart" ref="d7/d94/namespacemrw_1_1statechart.html">
-<section title="TimerService" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html">
-<section title="instance" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
-<section title="operator std::shared_ptr&lt; TimerServiceInterface &gt; &amp;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#aafe10010a416f26eb31b84896193af72"/>
-<section title="mrw::util::Singleton&lt; TimerService &gt;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a02d511ee2ea2f228f23719a5eb143915"/>
-</section>
-<section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html">
-<section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#a3e7ef6e2d57177d1e45464548789f87b"/>
-<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#a47e80c93862b9445fa6364b5fa1bc96a"/>
-</section>
-</section>
-</section>
-<section title="sc" ref="db/d03/namespacesc.html">
-<section title="timer" ref="d3/df0/namespacesc_1_1timer.html">
-<section title="TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html">
-<section title="~TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#abde323c163127b4797dea71adcf1f35d"/>
-<section title="getNumberOfParallelTimeEvents" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#ad96876d6b84af8366141209a2930a313"/>
-<section title="getTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a0569ca1dfc217b99feb88a3f65db2f3c"/>
-<section title="raiseTimeEvent" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#aeb2a340a1252b36828b5d2dc069e9c57"/>
-<section title="setTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a4b30aa5a7a42a697e0dc114691f5f01f"/>
-</section>
-<section title="TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html">
-<section title="~TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac964f1c8dd62c8c30ff369ce66455b77"/>
-<section title="setTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a3b6967b2bbc5a6cfc31b20ed0a180c28"/>
-<section title="unsetTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a43f25c75a536b85d7f0d0b2196c7d1b6"/>
-<section title="unsetTimerRaw" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a912f63105c142bd8c57deb3b320e0dcf"/>
-</section>
-</section>
-<section title="EventDrivenInterface" ref="d8/dd2/classsc_1_1EventDrivenInterface.html">
-<section title="~EventDrivenInterface" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a44f6fe709e586da9c19be13e93c14d09"/>
-<section title="enter" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a05bfa96eaf85a416020533d00d2b79c8"/>
-<section title="exit" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#aaf403e4303d6b7237d8ad68537c3cff6"/>
-<section title="isActive" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a67bc6559cb0d08193fbdefbe80af1c43"/>
-<section title="isFinal" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a94b7c86314714e5ca44945c300a9ac1a"/>
-<section title="triggerWithoutEvent" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a68a8f25dc0d37f7864eef4161de0e64b"/>
-</section>
-<section title="StatemachineInterface" ref="de/d2a/classsc_1_1StatemachineInterface.html">
-<section title="~StatemachineInterface" ref="de/d2a/classsc_1_1StatemachineInterface.html#aa887dba1e9f2fd1b16fc227132375135"/>
-<section title="enter" ref="de/d2a/classsc_1_1StatemachineInterface.html#a05bfa96eaf85a416020533d00d2b79c8"/>
-<section title="exit" ref="de/d2a/classsc_1_1StatemachineInterface.html#aaf403e4303d6b7237d8ad68537c3cff6"/>
-<section title="isActive" ref="de/d2a/classsc_1_1StatemachineInterface.html#a67bc6559cb0d08193fbdefbe80af1c43"/>
-<section title="isFinal" ref="de/d2a/classsc_1_1StatemachineInterface.html#a94b7c86314714e5ca44945c300a9ac1a"/>
-</section>
-<section title="errorCode" ref="db/d03/namespacesc.html#a096327e50db1de10f7c44ec93ef08812"/>
-<section title="eventid" ref="db/d03/namespacesc.html#a778684feb57033c6828435b8b1c5fb6b"/>
-<section title="integer" ref="db/d03/namespacesc.html#ab81e58bda4a1d0525955223d98ccb3df"/>
-<section title="real" ref="db/d03/namespacesc.html#addc5a438cd4d2e5bf27c64edbabad7ce"/>
-<section title="time" ref="db/d03/namespacesc.html#a1bc542877409477b96abd9b10ac01a4c"/>
-<section title="ushort" ref="db/d03/namespacesc.html#a6fd8c6bf037ef38d61541e1d27ddf532"/>
-</section>
-</section>
-<section title="Namespace Members" ref="namespacemembers.html">
-<section title="All" ref="namespacemembers.html"/>
-<section title="Functions" ref="namespacemembers_func.html"/>
-<section title="Variables" ref="namespacemembers_vars.html"/>
-<section title="Typedefs" ref="namespacemembers_type.html"/>
-<section title="Enumerations" ref="namespacemembers_enum.html"/>
-<section title="Enumerator" ref="namespacemembers_eval.html"/>
-</section>
-</section>
-<section title="Classes" ref="annotated.html">
-<section title="Class List" ref="annotated.html">
-<section title="mrw" ref="d7/dcb/namespacemrw.html">
 <section title="util" ref="d9/d2b/namespacemrw_1_1util.html">
 <section title="AppSupport" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html">
 <section title="blanktime" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#ad339e381dc3cb9f9ca1ba41d759e8bc1"/>
@@ -2375,9 +2159,6 @@
 </section>
 <section title="CleanVector" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html">
 <section title="~CleanVector" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
-</section>
-<section title="SharedVector" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html">
-<section title="PtrType" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html#a037386313d3ff137788cc75be30c215e"/>
 </section>
 <section title="ClockService" ref="db/d8f/classmrw_1_1util_1_1ClockService.html">
 <section title="Hz1" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#aa097bc71ce6a1a2af55ac34af02d377b"/>
@@ -2444,14 +2225,14 @@
 <section title="random" ref="d5/d62/classmrw_1_1util_1_1Random.html#a07f6800fb4eb9228c223dcc4ee4d0dd4"/>
 <section title="Singleton&lt; Random &gt;" ref="d5/d62/classmrw_1_1util_1_1Random.html#ad4ba9c502cc704e19f4c21eca8f8ab58"/>
 </section>
+<section title="Self" ref="d6/dd2/classmrw_1_1util_1_1Self.html">
+<section title="Self" ref="d6/dd2/classmrw_1_1util_1_1Self.html#afaef2efac1c1e871bc4c66ded544f2d5"/>
+<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="d6/dd2/classmrw_1_1util_1_1Self.html#a47e80c93862b9445fa6364b5fa1bc96a"/>
+</section>
 <section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html">
 <section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a353ec5114e50161f65bdbc4bd5b79d16"/>
 <section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a4339bd86cb111f01b2533f39fd15c4fc"/>
 <section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a47e80c93862b9445fa6364b5fa1bc96a"/>
-</section>
-<section title="Self" ref="d6/dd2/classmrw_1_1util_1_1Self.html">
-<section title="Self" ref="d6/dd2/classmrw_1_1util_1_1Self.html#afaef2efac1c1e871bc4c66ded544f2d5"/>
-<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="d6/dd2/classmrw_1_1util_1_1Self.html#a47e80c93862b9445fa6364b5fa1bc96a"/>
 </section>
 <section title="Settings" ref="d6/db2/classmrw_1_1util_1_1Settings.html">
 <section title="Settings" ref="d6/db2/classmrw_1_1util_1_1Settings.html#a05676ec48e2b4c57c8b3cfea56ccac8e"/>
@@ -2459,6 +2240,15 @@
 <section title="SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html">
 <section title="SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#aac49a4a0d15d663378b95d539c464a3d"/>
 <section title="~SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#a56bb81c0462df5edb443a8d9cc5c2622"/>
+</section>
+<section title="SharedVector" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html">
+<section title="PtrType" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html#a037386313d3ff137788cc75be30c215e"/>
+</section>
+<section title="SigCallbackHandler" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html">
+<section title="SignalCallback" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#a18a7855c6ab74fe326f34ae48eaac3a5"/>
+<section title="SigCallbackHandler" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#ae90e1d133428083349033397aa9847ae"/>
+<section title="signal" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
+<section title="sig_pipe" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#ab27fa977d77273a270f53365a056a364"/>
 </section>
 <section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html">
 <section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a3d3e37b31249af3c2216361efaeeeaee"/>
@@ -2468,12 +2258,6 @@
 <section title="SigPipeHandler" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#a86c8aa2e1e25e2616be72cf44e2d1ab4"/>
 <section title="signal" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
 <section title="sig_pipe" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#ab27fa977d77273a270f53365a056a364"/>
-</section>
-<section title="SigCallbackHandler" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html">
-<section title="SignalCallback" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#a18a7855c6ab74fe326f34ae48eaac3a5"/>
-<section title="SigCallbackHandler" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#ae90e1d133428083349033397aa9847ae"/>
-<section title="signal" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
-<section title="sig_pipe" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#ab27fa977d77273a270f53365a056a364"/>
 </section>
 <section title="Singleton" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html">
 <section title="Singleton" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ae6f8366470705cd0f158e8b4aed5d2bc"/>
@@ -2504,6 +2288,292 @@
 <section title="signal" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
 <section title="sig_pipe" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#ab27fa977d77273a270f53365a056a364"/>
 </section>
+<section title="cutScope" ref="d9/d2b/namespacemrw_1_1util.html#aecdce54a6519bb96fd87579c6ce38f8f"/>
+</section>
+</section>
+<section title="sc" ref="db/d03/namespacesc.html">
+<section title="timer" ref="d3/df0/namespacesc_1_1timer.html">
+<section title="TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html">
+<section title="~TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#abde323c163127b4797dea71adcf1f35d"/>
+<section title="getNumberOfParallelTimeEvents" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#ad96876d6b84af8366141209a2930a313"/>
+<section title="getTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a0569ca1dfc217b99feb88a3f65db2f3c"/>
+<section title="raiseTimeEvent" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#aeb2a340a1252b36828b5d2dc069e9c57"/>
+<section title="setTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a4b30aa5a7a42a697e0dc114691f5f01f"/>
+</section>
+<section title="TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html">
+<section title="~TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac964f1c8dd62c8c30ff369ce66455b77"/>
+<section title="setTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a3b6967b2bbc5a6cfc31b20ed0a180c28"/>
+<section title="unsetTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a43f25c75a536b85d7f0d0b2196c7d1b6"/>
+<section title="unsetTimerRaw" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a912f63105c142bd8c57deb3b320e0dcf"/>
+</section>
+</section>
+<section title="EventDrivenInterface" ref="d8/dd2/classsc_1_1EventDrivenInterface.html">
+<section title="~EventDrivenInterface" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a44f6fe709e586da9c19be13e93c14d09"/>
+<section title="enter" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a05bfa96eaf85a416020533d00d2b79c8"/>
+<section title="exit" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#aaf403e4303d6b7237d8ad68537c3cff6"/>
+<section title="isActive" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a67bc6559cb0d08193fbdefbe80af1c43"/>
+<section title="isFinal" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a94b7c86314714e5ca44945c300a9ac1a"/>
+<section title="triggerWithoutEvent" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a68a8f25dc0d37f7864eef4161de0e64b"/>
+</section>
+<section title="StatemachineInterface" ref="de/d2a/classsc_1_1StatemachineInterface.html">
+<section title="~StatemachineInterface" ref="de/d2a/classsc_1_1StatemachineInterface.html#aa887dba1e9f2fd1b16fc227132375135"/>
+<section title="enter" ref="de/d2a/classsc_1_1StatemachineInterface.html#a05bfa96eaf85a416020533d00d2b79c8"/>
+<section title="exit" ref="de/d2a/classsc_1_1StatemachineInterface.html#aaf403e4303d6b7237d8ad68537c3cff6"/>
+<section title="isActive" ref="de/d2a/classsc_1_1StatemachineInterface.html#a67bc6559cb0d08193fbdefbe80af1c43"/>
+<section title="isFinal" ref="de/d2a/classsc_1_1StatemachineInterface.html#a94b7c86314714e5ca44945c300a9ac1a"/>
+</section>
+<section title="errorCode" ref="db/d03/namespacesc.html#a096327e50db1de10f7c44ec93ef08812"/>
+<section title="eventid" ref="db/d03/namespacesc.html#a778684feb57033c6828435b8b1c5fb6b"/>
+<section title="integer" ref="db/d03/namespacesc.html#ab81e58bda4a1d0525955223d98ccb3df"/>
+<section title="real" ref="db/d03/namespacesc.html#addc5a438cd4d2e5bf27c64edbabad7ce"/>
+<section title="time" ref="db/d03/namespacesc.html#a1bc542877409477b96abd9b10ac01a4c"/>
+<section title="ushort" ref="db/d03/namespacesc.html#a6fd8c6bf037ef38d61541e1d27ddf532"/>
+</section>
+</section>
+<section title="Namespace Members" ref="namespacemembers.html">
+<section title="All" ref="namespacemembers.html"/>
+<section title="Functions" ref="namespacemembers_func.html"/>
+<section title="Variables" ref="namespacemembers_vars.html"/>
+<section title="Typedefs" ref="namespacemembers_type.html"/>
+<section title="Enumerations" ref="namespacemembers_enum.html"/>
+<section title="Enumerator" ref="namespacemembers_eval.html"/>
+</section>
+</section>
+<section title="Classes" ref="annotated.html">
+<section title="Class List" ref="annotated.html">
+<section title="mrw" ref="d7/dcb/namespacemrw.html">
+<section title="can" ref="d9/d9b/namespacemrw_1_1can.html">
+<section title="CanSettings" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html">
+<section title="CanSettings" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#a924c0b34f81df37444cd61dfac01f57c"/>
+<section title="interface" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#af96bb342cc0413d092d4428ff408af99"/>
+<section title="operator mrw::util::SettingsGroup" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#a62f446da8ebdf141affcaa9eac663a8b"/>
+<section title="plugin" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#a24a08d487e35eae9a2b7754f898bddc0"/>
+</section>
+<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html">
+<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ab3258243639f9a5410e76195fedb01c9"/>
+<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a837eea6320f30f3df1f99f0d3c67bf93"/>
+<section title="~MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a73ae1d0363d32fbea5b866180a7c21f2"/>
+<section title="connected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0862edc4130e6b3563f7e23d5ffb3916"/>
+<section title="disconnected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0c930e0da610c26edefcf10b4cd80b31"/>
+<section title="list" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#aee34c1e95d971992f8090c5f1250f092"/>
+<section title="process" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a18b3f3b41d839efbc4fe3163b1d65645"/>
+<section title="receive" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a3e3897a65e13d57bee40fa41829bb050"/>
+<section title="stateChanged" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a7461096e1f4038279302ee46d4aeb6d5"/>
+<section title="valid" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a7bb5f821bb3fe4491d0bddc343b8b8c9"/>
+<section title="write" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a5c5f0523ed079f7c1679b6d2870fc22d"/>
+<section title="can_bus" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ae9add44a66b3c41000569347d5eb8e68"/>
+<section title="can_device" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a84bd068ea88e51a45bac0b3838d66b02"/>
+</section>
+<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html">
+<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a60e9a220fb6bc3b615943401084d6be8"/>
+<section title="~MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6ef72a8ee16eb914494052bf27f76869"/>
+<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a3adf124f0faccc84019a52525e3bc8dd"/>
+<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aadd7638b3c8eb8eb4575580c5394edf2"/>
+<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0895080730cbc5ddc088da0e5813ee7d"/>
+<section title="append" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ad9c105a29f210259dbda59c4d39c566d"/>
+<section title="bold" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
+<section title="command" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#abc5b117bce848ab5cb9b5d816116b071"/>
+<section title="eid" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6348ec130e3c76e509c93f91618f1214"/>
+<section title="format" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#adbf185289d3c6a133f3d5150d2fb08c3"/>
+<section title="get" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a35ad89d2f66c888e5dde95d402be2155"/>
+<section title="id" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aec1ba78b7fa70c52566d4727eb7090ed"/>
+<section title="isResponse" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6bc36589acbc90c1d7437b643e6dff5e"/>
+<section title="operator QCanBusFrame" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a600681d641d8c896e7a8654ee84f2a34"/>
+<section title="operator QString" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a52d7f4538b30867ad6e37ccd3d2e7aaf"/>
+<section title="operator[]" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a64e2ae4e67cccbaedc05cb290611a1aa"/>
+<section title="red" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a35b509dcf26d9f00cff8c6dd18a6a5cf"/>
+<section title="response" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aa7afbc78a2e8a8a6b7be6fd0d60f64d5"/>
+<section title="sid" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ab87d09e803430aa877df53387b169de1"/>
+<section title="size" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0021b4ca7d4936a10520582db11351e5"/>
+<section title="toString" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a76e903a76b1f572d7e4a0c3863b53cfe"/>
+<section title="unitNo" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a92096a014295e7c48f83d69917df0969"/>
+<section title="valid" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6d6b488c9ebb160a85e243ddc409063f"/>
+<section title="ALL_OFF" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0211a33a579dc035a945bb9c6c37c27d"/>
+<section title="BLUE_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a99bdb92fafd1dfab6f5d46112f4f6365"/>
+<section title="BOLD_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a40fdb0231da6c6ee8bd39d125031fefe"/>
+<section title="CYAN_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a8026cc002373c31b4dc8193a2a1eb599"/>
+<section title="GREEN_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a97deee27c031921c641a624fb74f8a0e"/>
+<section title="ITALIC_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a16c7225aa46a8feb9f485f6b0764abfb"/>
+<section title="MAGENTA_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a1025ed62ec25b78007d53e0760f21ecf"/>
+<section title="RED_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ad34b779827292c895aad2ee463a031bc"/>
+<section title="UNDERLINE_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a32a8c1059545a2141bc5ddf45203f920"/>
+<section title="WHITE_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a2efce8f49ed761f31c28d513f782ead6"/>
+</section>
+</section>
+<section title="ctrl" ref="d1/d18/namespacemrw_1_1ctrl.html">
+<section title="BaseController" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html">
+<section title="Status" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html">
+<section title="bending" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<section title="direction" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
+<section title="expandable" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
+<section title="extensions" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
+<section title="lines" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
+<section title="lock_state" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
+<section title="name" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
+<section title="position" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
+<section title="section_state" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
+</section>
+<section title="BaseController" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ae47bfe51040bb5674d54e9a9ae00c1ce"/>
+<section title="callback" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
+<section title="extensions" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
+<section title="isExpandable" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a304fd3cee2b94ed73e33091126a96a55"/>
+<section title="lines" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
+<section title="lock" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#af9ded43cf50263db4a1fe964aac2a801"/>
+<section title="name" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
+<section title="position" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
+<section title="reposition" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#adae113964b68eccca459674db927f17a"/>
+<section title="status" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a856c0a9289054c71f6d0212bc3007efe"/>
+<section title="update" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
+</section>
+<section title="BaseSwitchController" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html">
+<section title="Status" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html">
+<section title="bending" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<section title="direction" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
+<section title="expandable" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
+<section title="extensions" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
+<section title="has_flank_protection" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a33dc8379c42890008405241119aa2562"/>
+<section title="lines" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
+<section title="lock_state" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
+<section title="name" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
+<section title="position" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
+<section title="right_bended" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
+<section title="section_state" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
+</section>
+<section title="BaseSwitchController" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a6898669ecedd594a9a396e8b72684f48"/>
+<section title="callback" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
+<section title="extensions" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
+<section title="isExpandable" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a304fd3cee2b94ed73e33091126a96a55"/>
+<section title="isRightBended" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#ab2e620f81e388484bade8936237721ad"/>
+<section title="lines" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
+<section title="lock" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#af9ded43cf50263db4a1fe964aac2a801"/>
+<section title="name" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
+<section title="position" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
+<section title="reposition" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#adae113964b68eccca459674db927f17a"/>
+<section title="status" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a856c0a9289054c71f6d0212bc3007efe"/>
+<section title="status" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a135f542bfb0e985af710cfa61f38f02b"/>
+<section title="update" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
+</section>
+<section title="DoubleCrossSwitchController" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html">
+<section title="Status" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html">
+<section title="bending" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<section title="direction" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
+<section title="expandable" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
+<section title="extensions" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
+<section title="has_flank_protection" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a33dc8379c42890008405241119aa2562"/>
+<section title="is_a" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a8dbddfa88b349338f951608252c30746"/>
+<section title="is_b" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#ac6ffad226428b644d8ec1d5be50a9946"/>
+<section title="is_c" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a1934508d6f36148d40699b1a8523ec79"/>
+<section title="is_d" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a25d2f592a9167564f37d6070e6e42c98"/>
+<section title="lines" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
+<section title="lock_state" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
+<section title="name" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
+<section title="position" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
+<section title="right_bended" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
+<section title="section_state" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
+<section title="state" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a17352d772aee9749100511405c2f81c3"/>
+</section>
+<section title="DoubleCrossSwitchController" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a26140b0363e5246bab584337394dcfbf"/>
+<section title="callback" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
+<section title="isExpandable" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a304fd3cee2b94ed73e33091126a96a55"/>
+<section title="isRightBended" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#ab2e620f81e388484bade8936237721ad"/>
+<section title="lines" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
+<section title="lock" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#af9ded43cf50263db4a1fe964aac2a801"/>
+<section title="name" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
+<section title="position" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
+<section title="reposition" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#adae113964b68eccca459674db927f17a"/>
+<section title="status" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a856c0a9289054c71f6d0212bc3007efe"/>
+<section title="status" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a135f542bfb0e985af710cfa61f38f02b"/>
+<section title="status" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a64fe8139cf2e4e23e94dc153a507c2de"/>
+<section title="update" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
+</section>
+<section title="RailController" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html">
+<section title="Status" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html">
+<section title="a_ends" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a18d5f6f03d53e22a2500d60a995b26e5"/>
+<section title="b_ends" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#af5f774bc7dfd19358fde7a941e9e4e27"/>
+<section title="bending" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<section title="direction" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
+<section title="expandable" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
+<section title="extensions" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
+<section title="has_crossing" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a1b33a032378c455c1fc54e3b4742b603"/>
+<section title="lines" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
+<section title="lock_state" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
+<section title="name" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
+<section title="position" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
+<section title="section_state" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
+</section>
+<section title="RailController" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a6c4178790755d3de5648160d6aa1b549"/>
+<section title="callback" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
+<section title="extensions" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
+<section title="lines" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
+<section title="lock" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#af9ded43cf50263db4a1fe964aac2a801"/>
+<section title="name" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
+<section title="position" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
+<section title="reposition" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#adae113964b68eccca459674db927f17a"/>
+<section title="status" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a856c0a9289054c71f6d0212bc3007efe"/>
+<section title="status" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a1037e7fdd3af3e5db21c08de06dd0e64"/>
+<section title="update" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
+</section>
+<section title="RegularSwitchController" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html">
+<section title="Status" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html">
+<section title="bending" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<section title="direction" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
+<section title="expandable" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
+<section title="extensions" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
+<section title="has_flank_protection" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a33dc8379c42890008405241119aa2562"/>
+<section title="inclined" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abd278afdb704982125d9257348f8d637"/>
+<section title="left" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a2b5d09af6ff2f670d28dfd897bb5220f"/>
+<section title="lines" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
+<section title="lock_state" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
+<section title="name" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
+<section title="position" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
+<section title="right" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abf63160eedfa663a3331e1939f83838c"/>
+<section title="right_bended" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
+<section title="section_state" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
+</section>
+<section title="RegularSwitchController" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a648e62fc8463d5b14bef35175681c040"/>
+<section title="callback" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
+<section title="extensions" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
+<section title="isRightBended" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#ab2e620f81e388484bade8936237721ad"/>
+<section title="lines" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
+<section title="lock" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#af9ded43cf50263db4a1fe964aac2a801"/>
+<section title="name" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
+<section title="position" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
+<section title="reposition" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#adae113964b68eccca459674db927f17a"/>
+<section title="status" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a856c0a9289054c71f6d0212bc3007efe"/>
+<section title="status" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a135f542bfb0e985af710cfa61f38f02b"/>
+<section title="status" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#aeef4476c4245275076cad1c73e64adc9"/>
+<section title="update" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
+</section>
+<section title="SignalController" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html">
+<section title="Status" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html">
+<section title="bending" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
+<section title="direction" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
+<section title="distant_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a380bd08548dca28214fdda37f9dcfc41"/>
+<section title="expandable" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
+<section title="extensions" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
+<section title="has_distant" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a1f5b1bb1f6439c832ef2ab1ebd81e468"/>
+<section title="has_main" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#af273dae34687e68fbbf624982da077e8"/>
+<section title="has_shunting" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ae5a73594259c9e173495cbc6807dcf3f"/>
+<section title="lines" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
+<section title="lock_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
+<section title="main_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ad9a851116bd0fdcf30686f8033b77f61"/>
+<section title="name" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
+<section title="position" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
+<section title="section_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
+<section title="shunt_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a70855367f51e4a6e0d8e13b1e4e54cda"/>
+</section>
+<section title="SignalController" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#af1969b23b733ab0a5a0e41ff82190eed"/>
+<section title="callback" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
+<section title="extensions" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
+<section title="lines" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
+<section title="lock" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#af9ded43cf50263db4a1fe964aac2a801"/>
+<section title="name" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
+<section title="position" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
+<section title="reposition" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#adae113964b68eccca459674db927f17a"/>
+<section title="status" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a856c0a9289054c71f6d0212bc3007efe"/>
+<section title="status" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#ae93006f11c1a55b253fa2a278772e94f"/>
+<section title="update" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
+</section>
 </section>
 <section title="log" ref="d8/d91/namespacemrw_1_1log.html">
 <section title="FileLogger" ref="d8/ded/classmrw_1_1log_1_1FileLogger.html">
@@ -2511,11 +2581,6 @@
 <section title="~FileLogger" ref="d8/ded/classmrw_1_1log_1_1FileLogger.html#ab08af44f2de3fe1b51158132f9a399dd"/>
 <section title="timeStamp" ref="d8/ded/classmrw_1_1log_1_1FileLogger.html#a2ecff9f11574c33d083c55da29decdb1"/>
 <section title="write" ref="d8/ded/classmrw_1_1log_1_1FileLogger.html#a0fe98aa684ef2e48c4669bfc3f2569a9"/>
-</section>
-<section title="TimestampedFileLogger" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html">
-<section title="TimestampedFileLogger" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html#aaf0d4a2e08710d8cd52d75404b620bc4"/>
-<section title="timeStamp" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html#a2ecff9f11574c33d083c55da29decdb1"/>
-<section title="write" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html#a0fe98aa684ef2e48c4669bfc3f2569a9"/>
 </section>
 <section title="LoggerBase" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html">
 <section title="~LoggerBase" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html#a1c6d7880ada1aae670c7b8c41389ee91"/>
@@ -2525,10 +2590,6 @@
 <section title="info" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html#a1e1e0f7c03e9e8294c5add884092eeaa"/>
 <section title="timeStamp" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html#a2ecff9f11574c33d083c55da29decdb1"/>
 <section title="warn" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html#a9ca1abea0dbfdd5fa32ed474cf3985ff"/>
-</section>
-<section title="UnifiedLogger" ref="dc/d69/classmrw_1_1log_1_1UnifiedLogger.html">
-<section title="timeStamp" ref="dc/d69/classmrw_1_1log_1_1UnifiedLogger.html#a2ecff9f11574c33d083c55da29decdb1"/>
-<section title="write" ref="dc/d69/classmrw_1_1log_1_1UnifiedLogger.html#a837fb11ee229263bc3c1bcee4260ec0a"/>
 </section>
 <section title="LoggerService" ref="d4/dc7/classmrw_1_1log_1_1LoggerService.html">
 <section title="instance" ref="d4/dc7/classmrw_1_1log_1_1LoggerService.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
@@ -2555,6 +2616,15 @@
 <section title="info" ref="d5/d0d/classmrw_1_1log_1_1SysLogger.html#a9877a0b8e736fbd2dbaa6fbe96ae3ba3"/>
 <section title="timeStamp" ref="d5/d0d/classmrw_1_1log_1_1SysLogger.html#a2ecff9f11574c33d083c55da29decdb1"/>
 <section title="warn" ref="d5/d0d/classmrw_1_1log_1_1SysLogger.html#a052b258c91729190bb104f1b41f9b598"/>
+</section>
+<section title="TimestampedFileLogger" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html">
+<section title="TimestampedFileLogger" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html#aaf0d4a2e08710d8cd52d75404b620bc4"/>
+<section title="timeStamp" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html#a2ecff9f11574c33d083c55da29decdb1"/>
+<section title="write" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html#a0fe98aa684ef2e48c4669bfc3f2569a9"/>
+</section>
+<section title="UnifiedLogger" ref="dc/d69/classmrw_1_1log_1_1UnifiedLogger.html">
+<section title="timeStamp" ref="dc/d69/classmrw_1_1log_1_1UnifiedLogger.html#a2ecff9f11574c33d083c55da29decdb1"/>
+<section title="write" ref="dc/d69/classmrw_1_1log_1_1UnifiedLogger.html#a837fb11ee229263bc3c1bcee4260ec0a"/>
 </section>
 </section>
 <section title="model" ref="d9/dbc/namespacemrw_1_1model.html">
@@ -2762,6 +2832,12 @@
 <section title="name" ref="d8/d2c/classmrw_1_1model_1_1Device.html#a096acffad825581a99fbf267ae2c9870"/>
 <section title="setLock" ref="d8/d2c/classmrw_1_1model_1_1Device.html#a0d1f2095bc54b7f57caebc39b3f486a2"/>
 <section title="unitNo" ref="d8/d2c/classmrw_1_1model_1_1Device.html#a262cee73971200e5c6cd308a7621682f"/>
+</section>
+<section title="DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html">
+<section title="DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a631870f95778416f1992bfcbf453c450"/>
+<section title="~DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a71173849da88347e35acc9b26e63cf87"/>
+<section title="DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a1d7468ec02577ad399eb473a3e86f7ac"/>
+<section title="operator()" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a8a07c84acd38a3d6d7bd261b271cfd32"/>
 </section>
 <section title="DoubleCrossSwitch" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html">
 <section title="Bending" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a380b5a8ca4ca1e92ca0a75a4a392caea">
@@ -3113,23 +3189,6 @@
 <section title="UNDERLINE_ON" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a32a8c1059545a2141bc5ddf45203f920"/>
 <section title="WHITE_ON" ref="d6/d71/classmrw_1_1model_1_1LightSignal.html#a2efce8f49ed761f31c28d513f782ead6"/>
 </section>
-<section title="MrwStatistic" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html">
-<section title="device_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#afc04c97249244e67e8362bdcb869069c"/>
-<section title="errors" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#a446b2d242df918530d1b49335dd3bb34"/>
-<section title="main_signal_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ab90956fed9672a9201523c80cf8116cd"/>
-<section title="region_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aa3736702fa76a650c37ee3ec960125af"/>
-<section title="section_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ade4d9e7569c4acdd56d0c4a79c15bd9d"/>
-<section title="signal_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#a058a011745e7c922bee44d1250fb07dd"/>
-<section title="signal_group_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aee23e91a5ba44702c352575927d05538"/>
-<section title="switch_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ad80e89ab509758691329c043c06445db"/>
-<section title="warnings" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#add0f80348edc3c628522f7765f1aad3f"/>
-</section>
-<section title="DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html">
-<section title="DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a631870f95778416f1992bfcbf453c450"/>
-<section title="~DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a71173849da88347e35acc9b26e63cf87"/>
-<section title="DeviceId" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a1d7468ec02577ad399eb473a3e86f7ac"/>
-<section title="operator()" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a8a07c84acd38a3d6d7bd261b271cfd32"/>
-</section>
 <section title="ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html">
 <section title="ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a0cee0b2b7f7fcc1699d8b6c793b56f24"/>
 <section title="ModelRailway" ref="d3/dab/classmrw_1_1model_1_1ModelRailway.html#a62fc2b320e1915b3d3dd7ba9d7a77010"/>
@@ -3211,6 +3270,17 @@
 <section title="MAX_PINS_PER_PORT" ref="d3/de7/classmrw_1_1model_1_1Module.html#a90c03e73046041d762d25a2af74a1f36"/>
 <section title="model" ref="d3/de7/classmrw_1_1model_1_1Module.html#ae2b222e4077297b29c0956e2a322c889"/>
 <section title="reference" ref="d3/de7/classmrw_1_1model_1_1Module.html#a75fdcc7651e2f3174e75589035930287"/>
+</section>
+<section title="MrwStatistic" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html">
+<section title="device_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#afc04c97249244e67e8362bdcb869069c"/>
+<section title="errors" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#a446b2d242df918530d1b49335dd3bb34"/>
+<section title="main_signal_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ab90956fed9672a9201523c80cf8116cd"/>
+<section title="region_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aa3736702fa76a650c37ee3ec960125af"/>
+<section title="section_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ade4d9e7569c4acdd56d0c4a79c15bd9d"/>
+<section title="signal_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#a058a011745e7c922bee44d1250fb07dd"/>
+<section title="signal_group_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#aee23e91a5ba44702c352575927d05538"/>
+<section title="switch_count" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#ad80e89ab509758691329c043c06445db"/>
+<section title="warnings" ref="dc/df4/structmrw_1_1model_1_1MrwStatistic.html#add0f80348edc3c628522f7765f1aad3f"/>
 </section>
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html">
 <section title="MultiplexConnection" ref="dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a88f58c06e4ec956db5123e6ceeb35fa2"/>
@@ -3810,237 +3880,15 @@
 <section title="unitNo" ref="d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html#a262cee73971200e5c6cd308a7621682f"/>
 </section>
 </section>
-<section title="can" ref="d9/d9b/namespacemrw_1_1can.html">
-<section title="CanSettings" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html">
-<section title="CanSettings" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#a924c0b34f81df37444cd61dfac01f57c"/>
-<section title="interface" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#af96bb342cc0413d092d4428ff408af99"/>
-<section title="operator mrw::util::SettingsGroup" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#a62f446da8ebdf141affcaa9eac663a8b"/>
-<section title="plugin" ref="dd/dea/classmrw_1_1can_1_1CanSettings.html#a24a08d487e35eae9a2b7754f898bddc0"/>
+<section title="statechart" ref="d7/d94/namespacemrw_1_1statechart.html">
+<section title="TimerService" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html">
+<section title="instance" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
+<section title="operator std::shared_ptr&lt; TimerServiceInterface &gt; &amp;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#aafe10010a416f26eb31b84896193af72"/>
+<section title="mrw::util::Singleton&lt; TimerService &gt;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a02d511ee2ea2f228f23719a5eb143915"/>
 </section>
-<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html">
-<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ab3258243639f9a5410e76195fedb01c9"/>
-<section title="MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a837eea6320f30f3df1f99f0d3c67bf93"/>
-<section title="~MrwBusService" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a73ae1d0363d32fbea5b866180a7c21f2"/>
-<section title="connected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0862edc4130e6b3563f7e23d5ffb3916"/>
-<section title="disconnected" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a0c930e0da610c26edefcf10b4cd80b31"/>
-<section title="list" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#aee34c1e95d971992f8090c5f1250f092"/>
-<section title="process" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a18b3f3b41d839efbc4fe3163b1d65645"/>
-<section title="receive" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a3e3897a65e13d57bee40fa41829bb050"/>
-<section title="stateChanged" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a7461096e1f4038279302ee46d4aeb6d5"/>
-<section title="valid" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a7bb5f821bb3fe4491d0bddc343b8b8c9"/>
-<section title="write" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a5c5f0523ed079f7c1679b6d2870fc22d"/>
-<section title="can_bus" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#ae9add44a66b3c41000569347d5eb8e68"/>
-<section title="can_device" ref="d9/d7e/classmrw_1_1can_1_1MrwBusService.html#a84bd068ea88e51a45bac0b3838d66b02"/>
-</section>
-<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html">
-<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a60e9a220fb6bc3b615943401084d6be8"/>
-<section title="~MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6ef72a8ee16eb914494052bf27f76869"/>
-<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a3adf124f0faccc84019a52525e3bc8dd"/>
-<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aadd7638b3c8eb8eb4575580c5394edf2"/>
-<section title="MrwMessage" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0895080730cbc5ddc088da0e5813ee7d"/>
-<section title="append" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ad9c105a29f210259dbda59c4d39c566d"/>
-<section title="bold" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
-<section title="command" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#abc5b117bce848ab5cb9b5d816116b071"/>
-<section title="eid" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6348ec130e3c76e509c93f91618f1214"/>
-<section title="format" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#adbf185289d3c6a133f3d5150d2fb08c3"/>
-<section title="get" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a35ad89d2f66c888e5dde95d402be2155"/>
-<section title="id" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aec1ba78b7fa70c52566d4727eb7090ed"/>
-<section title="isResponse" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6bc36589acbc90c1d7437b643e6dff5e"/>
-<section title="operator QCanBusFrame" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a600681d641d8c896e7a8654ee84f2a34"/>
-<section title="operator QString" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a52d7f4538b30867ad6e37ccd3d2e7aaf"/>
-<section title="operator[]" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a64e2ae4e67cccbaedc05cb290611a1aa"/>
-<section title="red" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a35b509dcf26d9f00cff8c6dd18a6a5cf"/>
-<section title="response" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#aa7afbc78a2e8a8a6b7be6fd0d60f64d5"/>
-<section title="sid" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ab87d09e803430aa877df53387b169de1"/>
-<section title="size" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0021b4ca7d4936a10520582db11351e5"/>
-<section title="toString" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a76e903a76b1f572d7e4a0c3863b53cfe"/>
-<section title="unitNo" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a92096a014295e7c48f83d69917df0969"/>
-<section title="valid" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a6d6b488c9ebb160a85e243ddc409063f"/>
-<section title="ALL_OFF" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a0211a33a579dc035a945bb9c6c37c27d"/>
-<section title="BLUE_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a99bdb92fafd1dfab6f5d46112f4f6365"/>
-<section title="BOLD_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a40fdb0231da6c6ee8bd39d125031fefe"/>
-<section title="CYAN_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a8026cc002373c31b4dc8193a2a1eb599"/>
-<section title="GREEN_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a97deee27c031921c641a624fb74f8a0e"/>
-<section title="ITALIC_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a16c7225aa46a8feb9f485f6b0764abfb"/>
-<section title="MAGENTA_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a1025ed62ec25b78007d53e0760f21ecf"/>
-<section title="RED_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#ad34b779827292c895aad2ee463a031bc"/>
-<section title="UNDERLINE_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a32a8c1059545a2141bc5ddf45203f920"/>
-<section title="WHITE_ON" ref="d1/d80/classmrw_1_1can_1_1MrwMessage.html#a2efce8f49ed761f31c28d513f782ead6"/>
-</section>
-</section>
-<section title="ctrl" ref="d1/d18/namespacemrw_1_1ctrl.html">
-<section title="BaseController" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html">
-<section title="Status" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html">
-<section title="bending" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<section title="direction" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
-<section title="expandable" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
-<section title="extensions" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
-<section title="lines" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
-<section title="lock_state" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
-<section title="name" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
-<section title="position" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
-<section title="section_state" ref="d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
-</section>
-<section title="BaseController" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ae47bfe51040bb5674d54e9a9ae00c1ce"/>
-<section title="callback" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
-<section title="extensions" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
-<section title="isExpandable" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a304fd3cee2b94ed73e33091126a96a55"/>
-<section title="lines" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
-<section title="lock" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#af9ded43cf50263db4a1fe964aac2a801"/>
-<section title="name" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
-<section title="position" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
-<section title="reposition" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#adae113964b68eccca459674db927f17a"/>
-<section title="status" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a856c0a9289054c71f6d0212bc3007efe"/>
-<section title="update" ref="d8/db5/classmrw_1_1ctrl_1_1BaseController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
-</section>
-<section title="BaseSwitchController" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html">
-<section title="Status" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html">
-<section title="bending" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<section title="direction" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
-<section title="expandable" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
-<section title="extensions" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
-<section title="has_flank_protection" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a33dc8379c42890008405241119aa2562"/>
-<section title="lines" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
-<section title="lock_state" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
-<section title="name" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
-<section title="position" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
-<section title="right_bended" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
-<section title="section_state" ref="dc/d79/structmrw_1_1ctrl_1_1BaseSwitchController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
-</section>
-<section title="BaseSwitchController" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a6898669ecedd594a9a396e8b72684f48"/>
-<section title="callback" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
-<section title="extensions" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
-<section title="isExpandable" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a304fd3cee2b94ed73e33091126a96a55"/>
-<section title="isRightBended" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#ab2e620f81e388484bade8936237721ad"/>
-<section title="lines" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
-<section title="lock" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#af9ded43cf50263db4a1fe964aac2a801"/>
-<section title="name" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
-<section title="position" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
-<section title="reposition" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#adae113964b68eccca459674db927f17a"/>
-<section title="status" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a856c0a9289054c71f6d0212bc3007efe"/>
-<section title="status" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#a135f542bfb0e985af710cfa61f38f02b"/>
-<section title="update" ref="df/db5/classmrw_1_1ctrl_1_1BaseSwitchController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
-</section>
-<section title="DoubleCrossSwitchController" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html">
-<section title="Status" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html">
-<section title="bending" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<section title="direction" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
-<section title="expandable" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
-<section title="extensions" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
-<section title="has_flank_protection" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a33dc8379c42890008405241119aa2562"/>
-<section title="is_a" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a8dbddfa88b349338f951608252c30746"/>
-<section title="is_b" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#ac6ffad226428b644d8ec1d5be50a9946"/>
-<section title="is_c" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a1934508d6f36148d40699b1a8523ec79"/>
-<section title="is_d" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a25d2f592a9167564f37d6070e6e42c98"/>
-<section title="lines" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
-<section title="lock_state" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
-<section title="name" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
-<section title="position" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
-<section title="right_bended" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
-<section title="section_state" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
-<section title="state" ref="d8/d27/structmrw_1_1ctrl_1_1DoubleCrossSwitchController_1_1Status.html#a17352d772aee9749100511405c2f81c3"/>
-</section>
-<section title="DoubleCrossSwitchController" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a26140b0363e5246bab584337394dcfbf"/>
-<section title="callback" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
-<section title="isExpandable" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a304fd3cee2b94ed73e33091126a96a55"/>
-<section title="isRightBended" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#ab2e620f81e388484bade8936237721ad"/>
-<section title="lines" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
-<section title="lock" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#af9ded43cf50263db4a1fe964aac2a801"/>
-<section title="name" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
-<section title="position" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
-<section title="reposition" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#adae113964b68eccca459674db927f17a"/>
-<section title="status" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a856c0a9289054c71f6d0212bc3007efe"/>
-<section title="status" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a135f542bfb0e985af710cfa61f38f02b"/>
-<section title="status" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a64fe8139cf2e4e23e94dc153a507c2de"/>
-<section title="update" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
-</section>
-<section title="RailController" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html">
-<section title="Status" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html">
-<section title="a_ends" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a18d5f6f03d53e22a2500d60a995b26e5"/>
-<section title="b_ends" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#af5f774bc7dfd19358fde7a941e9e4e27"/>
-<section title="bending" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<section title="direction" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
-<section title="expandable" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
-<section title="extensions" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
-<section title="has_crossing" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a1b33a032378c455c1fc54e3b4742b603"/>
-<section title="lines" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
-<section title="lock_state" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
-<section title="name" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
-<section title="position" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
-<section title="section_state" ref="db/d92/structmrw_1_1ctrl_1_1RailController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
-</section>
-<section title="RailController" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a6c4178790755d3de5648160d6aa1b549"/>
-<section title="callback" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
-<section title="extensions" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
-<section title="lines" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
-<section title="lock" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#af9ded43cf50263db4a1fe964aac2a801"/>
-<section title="name" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
-<section title="position" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
-<section title="reposition" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#adae113964b68eccca459674db927f17a"/>
-<section title="status" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a856c0a9289054c71f6d0212bc3007efe"/>
-<section title="status" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#a1037e7fdd3af3e5db21c08de06dd0e64"/>
-<section title="update" ref="d3/d59/classmrw_1_1ctrl_1_1RailController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
-</section>
-<section title="RegularSwitchController" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html">
-<section title="Status" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html">
-<section title="bending" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<section title="direction" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
-<section title="expandable" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
-<section title="extensions" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
-<section title="has_flank_protection" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a33dc8379c42890008405241119aa2562"/>
-<section title="inclined" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abd278afdb704982125d9257348f8d637"/>
-<section title="left" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a2b5d09af6ff2f670d28dfd897bb5220f"/>
-<section title="lines" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
-<section title="lock_state" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
-<section title="name" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
-<section title="position" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
-<section title="right" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#abf63160eedfa663a3331e1939f83838c"/>
-<section title="right_bended" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a935a90253d7b2348f3f952dfb87a1692"/>
-<section title="section_state" ref="d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
-</section>
-<section title="RegularSwitchController" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a648e62fc8463d5b14bef35175681c040"/>
-<section title="callback" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
-<section title="extensions" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
-<section title="isRightBended" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#ab2e620f81e388484bade8936237721ad"/>
-<section title="lines" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
-<section title="lock" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#af9ded43cf50263db4a1fe964aac2a801"/>
-<section title="name" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
-<section title="position" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
-<section title="reposition" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#adae113964b68eccca459674db927f17a"/>
-<section title="status" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a856c0a9289054c71f6d0212bc3007efe"/>
-<section title="status" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#a135f542bfb0e985af710cfa61f38f02b"/>
-<section title="status" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#aeef4476c4245275076cad1c73e64adc9"/>
-<section title="update" ref="de/d02/classmrw_1_1ctrl_1_1RegularSwitchController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
-</section>
-<section title="SignalController" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html">
-<section title="Status" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html">
-<section title="bending" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
-<section title="direction" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
-<section title="distant_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a380bd08548dca28214fdda37f9dcfc41"/>
-<section title="expandable" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
-<section title="extensions" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
-<section title="has_distant" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a1f5b1bb1f6439c832ef2ab1ebd81e468"/>
-<section title="has_main" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#af273dae34687e68fbbf624982da077e8"/>
-<section title="has_shunting" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ae5a73594259c9e173495cbc6807dcf3f"/>
-<section title="lines" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ac464aac9c61a781b3b113aa79839753a"/>
-<section title="lock_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a6b8da1ff026fcb8669c72b98088355f6"/>
-<section title="main_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#ad9a851116bd0fdcf30686f8033b77f61"/>
-<section title="name" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a3b39b95e0700389e3b8aa89fefa76c8e"/>
-<section title="position" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a9db6b8209cc5cfed8ca359a73ed75f6c"/>
-<section title="section_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a61907f582144c46e266c18ddf0693364"/>
-<section title="shunt_state" ref="d5/df8/structmrw_1_1ctrl_1_1SignalController_1_1Status.html#a70855367f51e4a6e0d8e13b1e4e54cda"/>
-</section>
-<section title="SignalController" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#af1969b23b733ab0a5a0e41ff82190eed"/>
-<section title="callback" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a9aad6ef99289fda8911e051ecb6c06a0"/>
-<section title="extensions" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#aa82a696f1ab5c364afc14c7c5b6034c6"/>
-<section title="lines" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a0f9c697c31a98f28ca191b1202bcf32b"/>
-<section title="lock" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#af9ded43cf50263db4a1fe964aac2a801"/>
-<section title="name" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38"/>
-<section title="position" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a79df27b63eb3e63d10f8fae3555b8560"/>
-<section title="reposition" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#adae113964b68eccca459674db927f17a"/>
-<section title="status" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#a856c0a9289054c71f6d0212bc3007efe"/>
-<section title="status" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#ae93006f11c1a55b253fa2a278772e94f"/>
-<section title="update" ref="dd/dfc/classmrw_1_1ctrl_1_1SignalController.html#ab260bbe7258e2143720d0e6f04901d5b"/>
+<section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html">
+<section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#a3e7ef6e2d57177d1e45464548789f87b"/>
+<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#a47e80c93862b9445fa6364b5fa1bc96a"/>
 </section>
 </section>
 <section title="ui" ref="d1/de6/namespacemrw_1_1ui.html">
@@ -4494,15 +4342,167 @@
 <section title="YELLOW" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a090628ea165bc9d84b16d9ee79e81e52"/>
 </section>
 </section>
-<section title="statechart" ref="d7/d94/namespacemrw_1_1statechart.html">
-<section title="TimerService" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html">
-<section title="instance" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
-<section title="operator std::shared_ptr&lt; TimerServiceInterface &gt; &amp;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#aafe10010a416f26eb31b84896193af72"/>
-<section title="mrw::util::Singleton&lt; TimerService &gt;" ref="dd/dbf/classmrw_1_1statechart_1_1TimerService.html#a02d511ee2ea2f228f23719a5eb143915"/>
+<section title="util" ref="d9/d2b/namespacemrw_1_1util.html">
+<section title="AppSupport" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html">
+<section title="blanktime" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#ad339e381dc3cb9f9ca1ba41d759e8bc1"/>
+<section title="hostname" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#af19bde96d35a484b351274db8a1bebbf"/>
+<section title="instance" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#ace9bf992b5af5b66e853eb6f5362f954"/>
+<section title="Singleton&lt; AppSupport &gt;" ref="d9/d33/classmrw_1_1util_1_1AppSupport.html#a427a1f075055d61090e7df6f9e4f8eab"/>
 </section>
-<section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html">
-<section title="QtStatechart" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#a3e7ef6e2d57177d1e45464548789f87b"/>
-<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="d4/dfe/classmrw_1_1statechart_1_1QtStatechart.html#a47e80c93862b9445fa6364b5fa1bc96a"/>
+<section title="Batch" ref="d8/dde/classmrw_1_1util_1_1Batch.html">
+<section title="Batch" ref="d8/dde/classmrw_1_1util_1_1Batch.html#ac91261f634b1f89c51941e9d188b06a5"/>
+<section title="~Batch" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a87506571dedb476e0de679401a03637e"/>
+<section title="completed" ref="d8/dde/classmrw_1_1util_1_1Batch.html#af06d7235eaafe9e86b171d3f37e64908"/>
+<section title="contains" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a64e6058b09a8eacdb229d5925986a286"/>
+<section title="decrease" ref="d8/dde/classmrw_1_1util_1_1Batch.html#ab6d3b508f66581271f23cff702b7d623"/>
+<section title="dump" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a80716793d4a9a190b33feea735f6c672"/>
+<section title="increase" ref="d8/dde/classmrw_1_1util_1_1Batch.html#af15eea1cb3b0eeddb7c0422268e1ad16"/>
+<section title="isCompleted" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a020909c9b81bae44ac2bbd50dd993d7d"/>
+<section title="reset" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a60ac05642f1f86ced915f28b98f7fc93"/>
+<section title="tryComplete" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a6a172e9045658340078aa3401297cccb"/>
+<section title="BatchParticipant" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a15aae440c6bc60ad50578730d6e9b3c4"/>
+<section title="id" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a7057e4d7f48cf53d741db1e5cb219efe"/>
+<section title="transaction" ref="d8/dde/classmrw_1_1util_1_1Batch.html#a2dd1abb1b487ad2531c3c98f24544e67"/>
+</section>
+<section title="BatchParticipant" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html">
+<section title="BatchParticipant" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a2f056ac6f0f14b943f345b4f9d629927"/>
+<section title="~BatchParticipant" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a84ea031a5b0d9c71c278169374a50665"/>
+<section title="batch" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#af0c771f2df98cdb2eee447eed5bd9480"/>
+<section title="decrease" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a3df2d32cce94717af8c388718bf4c108"/>
+<section title="increase" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a8b24656692501ab35330ffedbaea1a25"/>
+<section title="name" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#ae034c20e8970a700b23f6183cdc35a27"/>
+<section title="setBatch" ref="d9/d4f/classmrw_1_1util_1_1BatchParticipant.html#a9f8480b69816d7080102c506790f6842"/>
+</section>
+<section title="CleanVector" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html">
+<section title="~CleanVector" ref="d7/d99/classmrw_1_1util_1_1CleanVector.html#a4667df9d9a32bb67fe91f2a73ba45224"/>
+</section>
+<section title="ClockService" ref="db/d8f/classmrw_1_1util_1_1ClockService.html">
+<section title="Hz1" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#aa097bc71ce6a1a2af55ac34af02d377b"/>
+<section title="Hz2" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#aff9d02e4d105be76c2f683213037b87e"/>
+<section title="Hz4" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#ab987466889f56f4be79d75761e36a019"/>
+<section title="Hz8" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#a46b81845210ba4150aec594ce3bd9606"/>
+<section title="instance" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
+<section title="Singleton&lt; ClockService &gt;" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#ad1de93cfc5c22e4b1d91f8cf7b9798ff"/>
+</section>
+<section title="ConstantEnumerator" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html">
+<section title="ConstantMapPair" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#a2fb8988f103ebc51fe1395b9d553182a"/>
+<section title="ConstantEnumerator" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#aa2a8f1f9a5e3887f0e1199d66a0e6066"/>
+<section title="findKey" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#ae8370f9272613af9f8a340d2d49f8fc8"/>
+<section title="get" ref="d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#a9461ba5fca963e92a476e711808f10db"/>
+</section>
+<section title="DumpHandler" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html">
+<section title="SignalCallback" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a18a7855c6ab74fe326f34ae48eaac3a5"/>
+<section title="DumpHandler" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a9d787765518a5f04aaef46e86e9eee64"/>
+<section title="signal" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
+<section title="sig_pipe" ref="d7/dc8/classmrw_1_1util_1_1DumpHandler.html#ab27fa977d77273a270f53365a056a364"/>
+</section>
+<section title="Duration" ref="d2/d87/classmrw_1_1util_1_1Duration.html">
+<section title="Duration" ref="d2/d87/classmrw_1_1util_1_1Duration.html#a409b732a06037bbefe417100f43467e3"/>
+<section title="~Duration" ref="d2/d87/classmrw_1_1util_1_1Duration.html#a32b4f7a84922729de9fd5d2cd6762c42"/>
+<section title="pattern" ref="d2/d87/classmrw_1_1util_1_1Duration.html#ae3d2e59bf766598a94aae087762a558c"/>
+<section title="TIME_STAMP_FORMAT" ref="d2/d87/classmrw_1_1util_1_1Duration.html#a5d7d85ca337156a12663496c60ea7cdf"/>
+</section>
+<section title="GlobalBatch" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html">
+<section title="completed" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#ad5782ea3eb0ec5b81054d0fe2bbd0832"/>
+<section title="contains" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a64e6058b09a8eacdb229d5925986a286"/>
+<section title="decrease" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#ab6d3b508f66581271f23cff702b7d623"/>
+<section title="dump" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a80716793d4a9a190b33feea735f6c672"/>
+<section title="increase" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#af15eea1cb3b0eeddb7c0422268e1ad16"/>
+<section title="instance" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
+<section title="isCompleted" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a020909c9b81bae44ac2bbd50dd993d7d"/>
+<section title="reset" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a60ac05642f1f86ced915f28b98f7fc93"/>
+<section title="tryComplete" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a6a172e9045658340078aa3401297cccb"/>
+<section title="Singleton&lt; GlobalBatch &gt;" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a829e37c010521603ab72a94bec0b71cc"/>
+<section title="id" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a7057e4d7f48cf53d741db1e5cb219efe"/>
+<section title="transaction" ref="d6/d8d/classmrw_1_1util_1_1GlobalBatch.html#a2dd1abb1b487ad2531c3c98f24544e67"/>
+</section>
+<section title="HexLine" ref="d0/d55/classmrw_1_1util_1_1HexLine.html">
+<section title="HexLine" ref="d0/d55/classmrw_1_1util_1_1HexLine.html#a855c36b3062227265b35790c3e722f78"/>
+<section title="HexLine" ref="d0/d55/classmrw_1_1util_1_1HexLine.html#ade53720a08e5caf79458ecf6f0e14f79"/>
+<section title="append" ref="d0/d55/classmrw_1_1util_1_1HexLine.html#aeaf6cc8d0ac6f596330c860fb157acb9"/>
+<section title="getAddress" ref="d0/d55/classmrw_1_1util_1_1HexLine.html#a4daff801875b2ec92e754c9f2ad3782c"/>
+<section title="operator bool" ref="d0/d55/classmrw_1_1util_1_1HexLine.html#a840b27bcc104b253d7e4fdf00b16babc"/>
+</section>
+<section title="Method" ref="d0/def/classmrw_1_1util_1_1Method.html">
+<section title="always" ref="d0/def/classmrw_1_1util_1_1Method.html#aa69a8f0e4deeeb9825fdfb42260d2496"/>
+<section title="never" ref="d0/def/classmrw_1_1util_1_1Method.html#a0b6bad7ed10e28f13a0ca211e3e929d3"/>
+<section title="noop" ref="d0/def/classmrw_1_1util_1_1Method.html#aaca8663dc7d7fa6057733d32ac9ed272"/>
+</section>
+<section title="Properties" ref="d5/d5d/classmrw_1_1util_1_1Properties.html">
+<section title="Properties" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#acc6d280ed1e3d16f27815ef981fb4dac"/>
+<section title="Properties" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#ac4b43aabd1c5fe5b4068d1ff452ebe55"/>
+<section title="lookup" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#ad6f0a73d0b76f90a1931c467cc0fd42f"/>
+<section title="read" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#a0114da8844b82cbce0860dd1ddf67ff7"/>
+<section title="EMPTY" ref="d5/d5d/classmrw_1_1util_1_1Properties.html#a06b63c65466680b565135325a07d5dc8"/>
+</section>
+<section title="Random" ref="d5/d62/classmrw_1_1util_1_1Random.html">
+<section title="engine" ref="d5/d62/classmrw_1_1util_1_1Random.html#a496b866193fddc164558052f97d261f7"/>
+<section title="instance" ref="d5/d62/classmrw_1_1util_1_1Random.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
+<section title="random" ref="d5/d62/classmrw_1_1util_1_1Random.html#a07f6800fb4eb9228c223dcc4ee4d0dd4"/>
+<section title="Singleton&lt; Random &gt;" ref="d5/d62/classmrw_1_1util_1_1Random.html#ad4ba9c502cc704e19f4c21eca8f8ab58"/>
+</section>
+<section title="Self" ref="d6/dd2/classmrw_1_1util_1_1Self.html">
+<section title="Self" ref="d6/dd2/classmrw_1_1util_1_1Self.html#afaef2efac1c1e871bc4c66ded544f2d5"/>
+<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="d6/dd2/classmrw_1_1util_1_1Self.html#a47e80c93862b9445fa6364b5fa1bc96a"/>
+</section>
+<section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html">
+<section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a353ec5114e50161f65bdbc4bd5b79d16"/>
+<section title="SelfPointer" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a4339bd86cb111f01b2533f39fd15c4fc"/>
+<section title="operator std::shared_ptr&lt; T &gt; &amp;" ref="db/d5c/classmrw_1_1util_1_1SelfPointer.html#a47e80c93862b9445fa6364b5fa1bc96a"/>
+</section>
+<section title="Settings" ref="d6/db2/classmrw_1_1util_1_1Settings.html">
+<section title="Settings" ref="d6/db2/classmrw_1_1util_1_1Settings.html#a05676ec48e2b4c57c8b3cfea56ccac8e"/>
+</section>
+<section title="SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html">
+<section title="SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#aac49a4a0d15d663378b95d539c464a3d"/>
+<section title="~SettingsGroup" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#a56bb81c0462df5edb443a8d9cc5c2622"/>
+</section>
+<section title="SharedVector" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html">
+<section title="PtrType" ref="d6/d7d/classmrw_1_1util_1_1SharedVector.html#a037386313d3ff137788cc75be30c215e"/>
+</section>
+<section title="SigCallbackHandler" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html">
+<section title="SignalCallback" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#a18a7855c6ab74fe326f34ae48eaac3a5"/>
+<section title="SigCallbackHandler" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#ae90e1d133428083349033397aa9847ae"/>
+<section title="signal" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
+<section title="sig_pipe" ref="dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html#ab27fa977d77273a270f53365a056a364"/>
+</section>
+<section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html">
+<section title="SignalHandler" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#a3d3e37b31249af3c2216361efaeeeaee"/>
+<section title="callback" ref="de/def/classmrw_1_1util_1_1SignalHandler.html#ad9eeb273d8fa6e3c4526149c1e46cc7b"/>
+</section>
+<section title="SigPipeHandler" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html">
+<section title="SigPipeHandler" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#a86c8aa2e1e25e2616be72cf44e2d1ab4"/>
+<section title="signal" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
+<section title="sig_pipe" ref="df/d24/classmrw_1_1util_1_1SigPipeHandler.html#ab27fa977d77273a270f53365a056a364"/>
+</section>
+<section title="Singleton" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html">
+<section title="Singleton" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ae6f8366470705cd0f158e8b4aed5d2bc"/>
+<section title="Singleton" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9973007ac4e1f0c0709d6f893a10763d"/>
+<section title="instance" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#a9390b21f440faca7e75d1b8363e1dc7b"/>
+<section title="operator=" ref="d0/d4d/classmrw_1_1util_1_1Singleton.html#ab74b15e4bc2a057127f18f8cd7ae6345"/>
+</section>
+<section title="String" ref="d0/d55/classmrw_1_1util_1_1String.html">
+<section title="bold" ref="d0/d55/classmrw_1_1util_1_1String.html#aee674c3216f7e1a4f50db31dc6dda7a6"/>
+<section title="format" ref="d0/d55/classmrw_1_1util_1_1String.html#adbf185289d3c6a133f3d5150d2fb08c3"/>
+<section title="operator QString" ref="d0/d55/classmrw_1_1util_1_1String.html#a52d7f4538b30867ad6e37ccd3d2e7aaf"/>
+<section title="red" ref="d0/d55/classmrw_1_1util_1_1String.html#a35b509dcf26d9f00cff8c6dd18a6a5cf"/>
+<section title="toString" ref="d0/d55/classmrw_1_1util_1_1String.html#a939a5e4e560f858b3869fc6bec10274e"/>
+<section title="ALL_OFF" ref="d0/d55/classmrw_1_1util_1_1String.html#a0211a33a579dc035a945bb9c6c37c27d"/>
+<section title="BLUE_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a99bdb92fafd1dfab6f5d46112f4f6365"/>
+<section title="BOLD_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a40fdb0231da6c6ee8bd39d125031fefe"/>
+<section title="CYAN_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a8026cc002373c31b4dc8193a2a1eb599"/>
+<section title="GREEN_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a97deee27c031921c641a624fb74f8a0e"/>
+<section title="ITALIC_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a16c7225aa46a8feb9f485f6b0764abfb"/>
+<section title="MAGENTA_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a1025ed62ec25b78007d53e0760f21ecf"/>
+<section title="RED_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#ad34b779827292c895aad2ee463a031bc"/>
+<section title="UNDERLINE_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a32a8c1059545a2141bc5ddf45203f920"/>
+<section title="WHITE_ON" ref="d0/d55/classmrw_1_1util_1_1String.html#a2efce8f49ed761f31c28d513f782ead6"/>
+</section>
+<section title="TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html">
+<section title="TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#afcf13d27620bb60da2447f77fe52b632"/>
+<section title="TermHandler" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a2616c0436b27b5e414c92d5603e72fc5"/>
+<section title="signal" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a3ccadc74fd476d0b22c4889866f50e76"/>
+<section title="sig_pipe" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#ab27fa977d77273a270f53365a056a364"/>
 </section>
 </section>
 </section>
@@ -5964,6 +5964,7 @@
 <file>XSwitch_BD_RUF.jpg</file>
 <file>annotated.html</file>
 <file>classes.html</file>
+<file>codefolding.js</file>
 <file>controller.jpg</file>
 <file>d0/d15/structmrw_1_1ctrl_1_1RegularSwitchController_1_1Status.html</file>
 <file>d0/d15/structmrw_1_1model_1_1DeviceId-members.html</file>
@@ -6266,7 +6267,6 @@
 <file>doxygen.svg</file>
 <file>doxygen_blank.html</file>
 <file>doxygen_crawl.html</file>
-<file>dynsections.js</file>
 <file>functions.html</file>
 <file>functions_b.html</file>
 <file>functions_c.html</file>
@@ -6351,7 +6351,6 @@
 <file>inherit_graph_8.png</file>
 <file>inherit_graph_9.png</file>
 <file>inherits.html</file>
-<file>jquery.js</file>
 <file>log-diagram.png</file>
 <file>menu.js</file>
 <file>menudata.js</file>
