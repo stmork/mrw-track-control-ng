@@ -525,6 +525,13 @@ namespace mrw
 			completed = true;
 		}
 
+		/* Entry action for state 'Operating'. */
+		void SectionStatechart::enact_main_region_Operating()
+		{
+			/* Entry action for state 'Operating'. */
+			emit update();
+		}
+
 		/* Entry action for state 'Unlocked'. */
 		void SectionStatechart::enact_main_region_Operating_Processing_Unlocked()
 		{
@@ -580,7 +587,7 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Operating_Processing_Locked_Occupation_Occupied()
 		{
 			/* Entry action for state 'Occupied'. */
-			emit entered();
+			emit enteredSection();
 		}
 
 		/* Entry action for state 'Next Reached'. */
@@ -705,6 +712,7 @@ namespace mrw
 		void SectionStatechart::enseq_main_region_Operating_default()
 		{
 			/* 'default' enter sequence for state Operating */
+			enact_main_region_Operating();
 			enseq_main_region_Operating_Processing_default();
 		}
 
@@ -1798,6 +1806,7 @@ namespace mrw
 					if (stateResponse_raised)
 					{
 						setOccupied(stateResponse_value);
+						emit update();
 					}
 				}
 			}

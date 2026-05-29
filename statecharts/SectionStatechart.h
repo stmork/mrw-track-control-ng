@@ -280,14 +280,20 @@ namespace mrw
 
 
 		signals:
+			/*! Signal representing the out event 'entered' that is defined in the default interface scope. */
+			void entered();
+
 			/*! Signal representing the out event 'started' that is defined in the default interface scope. */
 			void started();
 
 			/*! Signal representing the out event 'stop' that is defined in the default interface scope. */
 			void stop();
 
-			/*! Signal representing the out event 'entered' that is defined in the default interface scope. */
-			void entered();
+			/*! Signal representing the out event 'enteredSection' that is defined in the default interface scope. */
+			void enteredSection();
+
+			/*! Signal representing the out event 'update' that is defined in the default interface scope. */
+			void update();
 
 			/*! Signal representing the out event 'leave' that is defined in the default interface scope. */
 			void leave();
@@ -355,6 +361,7 @@ namespace mrw
 			void enact_main_region_Init_Init_Process_Requesting_relais_Wait();
 			void enact_main_region_Init_Init_Process_Requesting_state_Occupation();
 			void enact_main_region_Init_Init_Process_Requesting_state_Wait();
+			void enact_main_region_Operating();
 			void enact_main_region_Operating_Processing_Unlocked();
 			void enact_main_region_Operating_Processing_Locked();
 			void enact_main_region_Operating_Processing_Locked_Route_active_Passed();

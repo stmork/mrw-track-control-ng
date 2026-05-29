@@ -234,6 +234,12 @@ namespace mrw
 		}
 
 
+		bool mrw::statechart::SectionStatechart::isRaisedEntered() noexcept
+		{
+			return entered_raised;
+		}
+
+
 		bool mrw::statechart::SectionStatechart::isRaisedStarted() noexcept
 		{
 			return started_raised;
@@ -246,9 +252,15 @@ namespace mrw
 		}
 
 
-		bool mrw::statechart::SectionStatechart::isRaisedEntered() noexcept
+		bool mrw::statechart::SectionStatechart::isRaisedEnteredSection() noexcept
 		{
-			return entered_raised;
+			return enteredSection_raised;
+		}
+
+
+		bool mrw::statechart::SectionStatechart::isRaisedUpdate() noexcept
+		{
+			return update_raised;
 		}
 
 
@@ -556,6 +568,13 @@ namespace mrw
 			completed = true;
 		}
 
+		/* Entry action for state 'Operating'. */
+		void SectionStatechart::enact_main_region_Operating()
+		{
+			/* Entry action for state 'Operating'. */
+			update_raised = true;
+		}
+
 		/* Entry action for state 'Unlocked'. */
 		void SectionStatechart::enact_main_region_Operating_Processing_Unlocked()
 		{
@@ -611,7 +630,7 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Operating_Processing_Locked_Occupation_Occupied()
 		{
 			/* Entry action for state 'Occupied'. */
-			entered_raised = true;
+			enteredSection_raised = true;
 		}
 
 		/* Entry action for state 'Next Reached'. */
@@ -736,6 +755,7 @@ namespace mrw
 		void SectionStatechart::enseq_main_region_Operating_default()
 		{
 			/* 'default' enter sequence for state Operating */
+			enact_main_region_Operating();
 			enseq_main_region_Operating_Processing_default();
 		}
 
@@ -1829,6 +1849,7 @@ namespace mrw
 					if (stateResponse_raised)
 					{
 						setOccupied(stateResponse_value);
+						update_raised = true;
 					}
 				}
 			}
@@ -2207,9 +2228,11 @@ namespace mrw
 
 		void SectionStatechart::clearOutEvents() noexcept
 		{
+			entered_raised = false;
 			started_raised = false;
 			stop_raised = false;
-			entered_raised = false;
+			enteredSection_raised = false;
+			update_raised = false;
 			leave_raised = false;
 			leaving_raised = false;
 			left_raised = false;

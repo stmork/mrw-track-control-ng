@@ -161,12 +161,16 @@ namespace mrw
 			void raiseNext();
 			/*! Raises the in event 'unlock' of default interface scope. */
 			void raiseUnlock();
+			/*! Check if event 'entered' of default interface scope is raised. */
+			bool isRaisedEntered() noexcept;
 			/*! Check if event 'started' of default interface scope is raised. */
 			bool isRaisedStarted() noexcept;
 			/*! Check if event 'stop' of default interface scope is raised. */
 			bool isRaisedStop() noexcept;
-			/*! Check if event 'entered' of default interface scope is raised. */
-			bool isRaisedEntered() noexcept;
+			/*! Check if event 'enteredSection' of default interface scope is raised. */
+			bool isRaisedEnteredSection() noexcept;
+			/*! Check if event 'update' of default interface scope is raised. */
+			bool isRaisedUpdate() noexcept;
 			/*! Check if event 'leave' of default interface scope is raised. */
 			bool isRaisedLeave() noexcept;
 			/*! Check if event 'leaving' of default interface scope is raised. */
@@ -331,6 +335,7 @@ namespace mrw
 			void enact_main_region_Init_Init_Process_Requesting_relais_Wait();
 			void enact_main_region_Init_Init_Process_Requesting_state_Occupation();
 			void enact_main_region_Init_Init_Process_Requesting_state_Wait();
+			void enact_main_region_Operating();
 			void enact_main_region_Operating_Processing_Unlocked();
 			void enact_main_region_Operating_Processing_Locked();
 			void enact_main_region_Operating_Processing_Locked_Route_active_Passed();
@@ -480,14 +485,20 @@ namespace mrw
 			/*! Indicates event 'unlock' of default interface scope is active. */
 			bool unlock_raised {false};
 
+			/*! Indicates event 'entered' of default interface scope is active. */
+			bool entered_raised {false};
+
 			/*! Indicates event 'started' of default interface scope is active. */
 			bool started_raised {false};
 
 			/*! Indicates event 'stop' of default interface scope is active. */
 			bool stop_raised {false};
 
-			/*! Indicates event 'entered' of default interface scope is active. */
-			bool entered_raised {false};
+			/*! Indicates event 'enteredSection' of default interface scope is active. */
+			bool enteredSection_raised {false};
+
+			/*! Indicates event 'update' of default interface scope is active. */
+			bool update_raised {false};
 
 			/*! Indicates event 'leave' of default interface scope is active. */
 			bool leave_raised {false};

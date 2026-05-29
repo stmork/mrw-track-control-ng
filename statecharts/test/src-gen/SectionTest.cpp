@@ -1077,6 +1077,10 @@ namespace
 
 		statechart->raiseStateResponse(false);
 
+		EXPECT_TRUE(!statechart->isRaisedUpdate());
+
+		EXPECT_TRUE(!statechart->getOccupied());
+
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_relais_Relay));
@@ -1099,6 +1103,10 @@ namespace
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_state_Occupation));
 
 		statechart->raiseStateResponse(false);
+
+		EXPECT_TRUE(statechart->isRaisedUpdate());
+
+		EXPECT_TRUE(!statechart->getOccupied());
 
 		unlocked();
 
@@ -1470,13 +1478,15 @@ namespace
 
 		statechart->raiseStateResponse(true);
 
+		EXPECT_TRUE(statechart->isRaisedUpdate());
+
 		EXPECT_TRUE(statechart->getOccupied());
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Enabled));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Occupied));
 
-		EXPECT_TRUE(statechart->isRaisedEntered());
+		EXPECT_TRUE(statechart->isRaisedEnteredSection());
 
 		statechart->raiseNext();
 
@@ -1496,6 +1506,8 @@ namespace
 		EXPECT_TRUE(statechart->getOccupied());
 
 		statechart->raiseStateResponse(false);
+
+		EXPECT_TRUE(statechart->isRaisedUpdate());
 
 		EXPECT_TRUE(!statechart->getOccupied());
 
@@ -1530,15 +1542,19 @@ namespace
 
 		statechart->raiseStateResponse(true);
 
+		EXPECT_TRUE(statechart->isRaisedUpdate());
+
 		EXPECT_TRUE(statechart->getOccupied());
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Enabled));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Occupied));
 
-		EXPECT_TRUE(statechart->isRaisedEntered());
+		EXPECT_TRUE(statechart->isRaisedEnteredSection());
 
 		statechart->raiseStateResponse(false);
+
+		EXPECT_TRUE(statechart->isRaisedUpdate());
 
 		EXPECT_TRUE(!statechart->getOccupied());
 
@@ -1578,6 +1594,10 @@ namespace
 		statechart->setAuto_off(false);
 
 		statechart->raiseStateResponse(false);
+
+		EXPECT_TRUE(statechart->isRaisedUpdate());
+
+		EXPECT_TRUE(!statechart->getOccupied());
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked));
 

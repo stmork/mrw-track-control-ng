@@ -74,8 +74,8 @@ SectionController::SectionController(
 		&statechart, &SectionStatechart::start,
 		Qt::QueuedConnection);
 	connect(
-		&statechart, &SectionStatechart::entered,
-		this, &SectionController::entered,
+		&statechart, &SectionStatechart::enteredSection,
+		this, &SectionController::enteredSection,
 		Qt::DirectConnection);
 	connect(
 		&statechart, &SectionStatechart::leaving,
@@ -85,6 +85,9 @@ SectionController::SectionController(
 		&statechart, &SectionStatechart::left,
 		this, &SectionController::left,
 		Qt::DirectConnection);
+	connect(
+		&statechart, &SectionStatechart::update,
+		this, &SectionController::update);
 	connect(
 		&statechart, &SectionStatechart::unregister,
 		this, &SectionController::unregister,
@@ -137,14 +140,14 @@ void SectionController::nextController(SectionController * input)
 		if (next != nullptr)
 		{
 			disconnect(
-				&next->statechart, &SectionStatechart::entered,
+				&next->statechart, &SectionStatechart::enteredSection,
 				&this->statechart, &SectionStatechart::next);
 		}
 		next = input;
 		if (next != nullptr)
 		{
 			connect(
-				&next->statechart, &SectionStatechart::entered,
+				&next->statechart, &SectionStatechart::enteredSection,
 				&this->statechart, &SectionStatechart::next,
 				Qt::QueuedConnection);
 		}
@@ -228,7 +231,6 @@ bool SectionController::process(const MrwMessage & message) noexcept
 	case GETRBS:
 		ctrl_section->setOccupation(message[0] != 0);
 		statechart.stateResponse(ctrl_section->occupation());
-		emit update();
 		return true;
 
 	default:

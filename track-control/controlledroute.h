@@ -64,7 +64,7 @@ signals:
 	void completed() override;
 
 public slots:
-	void entered();
+	void enteredSection();
 	void leaving();
 	void left();
 	void tryUnblock();

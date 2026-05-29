@@ -127,6 +127,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		raise stateResponse : false
 
 		// Then
+		assert !update
+		assert !occupied
 		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Relay)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Wait)
@@ -145,6 +147,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		raise stateResponse : false
 
 		// Then
+		assert update
+		assert !occupied
 		unlocked()
 		assert started
 		assert called dec
@@ -467,10 +471,11 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		raise stateResponse : true
 
 		// Then
+		assert update
 		assert occupied
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Occupied)
-		assert entered
+		assert enteredSection
 
 		// When
 		raise next
@@ -491,6 +496,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		raise stateResponse : false
 
 		// Then
+		assert update
 		assert !occupied
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation._final_)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting)
@@ -514,15 +520,17 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		raise stateResponse : true
 
 		// Then
+		assert update
 		assert occupied
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Occupied)
-		assert entered
+		assert enteredSection
 
 		// When (Note: This may occur on dirty rails!)
 		raise stateResponse : false
 
 		// Then
+		assert update
 		assert !occupied
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Occupied)
@@ -555,6 +563,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 		raise stateResponse : false
 
 		// Then
+		assert update
+		assert !occupied
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked)
 		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
 	}

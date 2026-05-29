@@ -53,7 +53,7 @@ namespace mrw::ctrl
 		void unlock();
 		void failed();
 		void start();
-		void entered();
+		void enteredSection();
 		void leaving();
 		void left();
 		void tryUnblock();

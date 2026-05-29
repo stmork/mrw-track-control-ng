@@ -225,8 +225,8 @@ void ControlledRoute::prepareFlank()
 void ControlledRoute::connectSectionController(SectionController * controller)
 {
 	connect(
-		controller, &SectionController::entered,
-		this, &ControlledRoute::entered,
+		controller, &SectionController::enteredSection,
+		this, &ControlledRoute::enteredSection,
 		Qt::UniqueConnection);
 	connect(
 		controller, &SectionController::leaving,
@@ -278,9 +278,9 @@ void ControlledRoute::rename()
 *************************************************************************/
 
 /**
- * This slot is only a marker that a train has entered a mrw::model::Section.
+ * This slot is only a marker that a train has enteredSection a mrw::model::Section.
  */
-void ControlledRoute::entered()
+void ControlledRoute::enteredSection()
 {
 	const SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
 
@@ -453,8 +453,8 @@ void ControlledRoute::disconnectSectionController(SectionController * controller
 	controller->setBatch(nullptr);
 
 	disconnect(
-		controller, &SectionController::entered,
-		this, &ControlledRoute::entered);
+		controller, &SectionController::enteredSection,
+		this, &ControlledRoute::enteredSection);
 	disconnect(
 		controller, &SectionController::left,
 		this, &ControlledRoute::left);
