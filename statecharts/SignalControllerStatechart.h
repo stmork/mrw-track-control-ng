@@ -336,7 +336,6 @@ namespace mrw
 			bool doCompletion {false};
 			bool isExecuting {false};
 			sc::integer stateConfVectorPosition {0};
-			bool stateConfVectorChanged {false};
 
 
 

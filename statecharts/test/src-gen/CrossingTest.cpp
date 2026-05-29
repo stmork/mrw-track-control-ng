@@ -845,6 +845,8 @@ namespace
 	{
 		waitForStart();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Wait_For_Start));
+
 		statechart->raiseStart();
 
 		initing();
@@ -857,6 +859,8 @@ namespace
 	void CrossingTest::failAfterStart()
 	{
 		initial();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Init));
 
 		statechart->raiseFailed();
 
@@ -871,6 +875,8 @@ namespace
 	{
 		initial();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Init));
+
 		runner->proceed_time(statechart->getTimeout());
 
 		failState();
@@ -879,6 +885,8 @@ namespace
 	void CrossingTest::operational()
 	{
 		initial();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Init));
 
 		statechart->raiseResponse();
 
@@ -911,6 +919,8 @@ namespace
 	{
 		operational();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Unlocked));
+
 		statechart->raiseStart();
 
 		initing();
@@ -919,6 +929,8 @@ namespace
 	TEST_F(CrossingTest, clearing)
 	{
 		failAfterStart();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Failed));
 
 		statechart->raiseClear();
 
@@ -932,6 +944,8 @@ namespace
 	TEST_F(CrossingTest, closeNotUsed)
 	{
 		operational();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Unlocked));
 
 		usedMock->setDefaultBehavior(&UsedMock::used1);
 
@@ -958,9 +972,13 @@ namespace
 	{
 		operational();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Unlocked));
+
 		usedMock->setDefaultBehavior(&UsedMock::used2);
 
 		statechart->raiseAction();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending));
 
@@ -989,13 +1007,19 @@ namespace
 	{
 		closeUsed();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Closing));
+
 		statechart->raiseResponse();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Delay));
 
 		runner->proceed_time(statechart->getDelay());
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Locked));
 
@@ -1022,9 +1046,13 @@ namespace
 	{
 		lockUsed();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Locked));
+
 		usedMock->setDefaultBehavior(&UsedMock::used1);
 
 		statechart->raiseAction();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending));
 
@@ -1053,9 +1081,13 @@ namespace
 	{
 		lockUsed();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Locked));
+
 		usedMock->setDefaultBehavior(&UsedMock::used2);
 
 		statechart->raiseAction();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Locked));
 
@@ -1078,6 +1110,10 @@ namespace
 	{
 		openNotUsed();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Opening));
+
+		usedMock->setDefaultBehavior(&UsedMock::used1);
+
 		statechart->raiseResponse();
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Unlocked));
@@ -1097,11 +1133,40 @@ namespace
 		EXPECT_TRUE(closeMock->calledAtLeast(0));
 
 	}
+	TEST_F(CrossingTest, UsedDuringUnlock)
+	{
+		openNotUsed();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Opening));
+
+		usedMock->setDefaultBehavior(&UsedMock::used2);
+
+		statechart->raiseResponse();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Closing));
+
+		EXPECT_TRUE(usedMock->calledAtLeast(1));
+
+		EXPECT_TRUE(incMock->calledAtLeast(0));
+
+		EXPECT_TRUE(decMock->calledAtLeast(0));
+
+		EXPECT_TRUE(unregisterMock->calledAtLeast(0));
+
+		EXPECT_TRUE(pendingMock->calledAtLeast(0));
+
+		EXPECT_TRUE(openMock->calledAtLeast(0));
+
+		EXPECT_TRUE(closeMock->calledAtLeast(1));
+
+	}
 	TEST_F(CrossingTest, closeTimeout)
 	{
 		closeUsed();
-
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Closing));
 
@@ -1130,8 +1195,6 @@ namespace
 	{
 		openNotUsed();
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending));
-
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Opening));
 
 		runner->proceed_time(statechart->getTimeout());
@@ -1159,8 +1222,6 @@ namespace
 	{
 		closeUsed();
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending));
-
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Closing));
 
 		statechart->raiseFailed();
@@ -1187,8 +1248,6 @@ namespace
 	TEST_F(CrossingTest, openFailed)
 	{
 		openNotUsed();
-
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending));
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Opening));
 

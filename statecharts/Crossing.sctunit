@@ -48,6 +48,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		waitForStart()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Wait_For_Start)
 
 		// When
 		raise start
@@ -61,6 +62,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		initial()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Init)
 
 		// When
 		raise failed
@@ -74,6 +76,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		initial()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Init)
 
 		// When
 		proceed timeout ms
@@ -87,6 +90,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		initial()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Init)
 
 		// When
 		raise response
@@ -109,6 +113,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		operational()
+		assert active(mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Unlocked)
 
 		// When
 		raise start
@@ -122,6 +127,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		failAfterStart()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Failed)
 
 		// When
 		raise clear
@@ -141,6 +147,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		operational()
+		assert active(mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Unlocked)
 		mock used returns (false)
 
 		// When
@@ -162,12 +169,14 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		operational()
+		assert active(mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Unlocked)
 		mock used returns (true)
 
 		// When
 		raise action
 
 		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Closing)
 		assert called used       1 times
@@ -184,9 +193,11 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		closeUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Closing)
 
 		// When
 		raise response
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Delay)
 
@@ -194,6 +205,7 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 		proceed delay ms
 
 		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Locked)
 		assert called used       1 times
 		assert called inc        0 times
@@ -209,12 +221,14 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		lockUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Locked)
 		mock used returns (false)
 
 		// When
 		raise action
 
 		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Opening)
 		assert called used       1 times
@@ -231,12 +245,14 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		lockUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Locked)
 		mock used returns (true)
 
 		// When
 		raise action
 
 		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Locked)
 		assert called used       1 times
 		assert called inc        1 times
@@ -252,6 +268,8 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		openNotUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Opening)
+		mock used returns (false)
 
 		// When
 		raise response
@@ -268,11 +286,34 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	}
 
 	@Test
+	operation UsedDuringUnlock()
+	{
+		// Given
+		openNotUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Opening)
+		mock used returns (true)
+
+		// When
+		raise response
+
+		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating)
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Closing)
+		assert called used       1 times
+		assert called inc        0 times
+		assert called dec        0 times
+		assert called unregister 0 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      1 times
+	}
+
+	@Test
 	operation closeTimeout()
 	{
 		// Given
 		closeUsed()
-		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Closing)
 
 		// When
@@ -295,7 +336,6 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		openNotUsed()
-		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Opening)
 
 		// When
@@ -318,7 +358,6 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		closeUsed()
-		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Closing)
 
 		// When
@@ -341,7 +380,6 @@ testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
 	{
 		// Given
 		openNotUsed()
-		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
 		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Opening)
 
 		// When

@@ -238,7 +238,6 @@ namespace mrw
 			std::shared_ptr<OperationCallback> ifaceOperationCallback {nullptr};
 
 			bool isExecuting {false};
-			bool stateConfVectorChanged {false};
 
 
 
@@ -279,6 +278,7 @@ namespace mrw
 			void exseq_main_region();
 			void exseq_main_region_Operating_Processing();
 			void exseq_main_region_Operating_Processing_Pending_Crossing_processing();
+			void react_main_region_Operating_Processing_Pending_Crossing_processing__choice_0();
 			void react_main_region__entry_Default();
 			void react_main_region_Operating_Processing__entry_Default();
 			sc::integer main_region_Wait_For_Start_react(const sc::integer transitioned_before);

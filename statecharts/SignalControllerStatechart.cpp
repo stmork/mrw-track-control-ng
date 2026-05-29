@@ -34,8 +34,7 @@ namespace mrw
 			completed(false),
 			doCompletion(false),
 			isExecuting(false),
-			stateConfVectorPosition(0),
-			stateConfVectorChanged(false)
+			stateConfVectorPosition(0)
 		{
 			std::fill(std::begin(stateConfVector), std::end(stateConfVector), mrw::statechart::SignalControllerStatechart::State::NO_STATE);
 			clearInEvents();
@@ -758,7 +757,6 @@ namespace mrw
 			/* 'default' enter sequence for state Wait for Start */
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Wait_for_Start;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Init */
@@ -786,7 +784,6 @@ namespace mrw
 			enact_main_region_Init_Init_process_Turning_main_Turn();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_main_Turn;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Completed */
@@ -796,7 +793,6 @@ namespace mrw
 			enact_main_region_Init_Init_process_Turning_main_Completed();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_main_Completed;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Turn */
@@ -806,7 +802,6 @@ namespace mrw
 			enact_main_region_Init_Init_process_Turning_distant_Turn();
 			stateConfVector[1] = mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_distant_Turn;
 			stateConfVectorPosition = 1;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Completed */
@@ -816,7 +811,6 @@ namespace mrw
 			enact_main_region_Init_Init_process_Turning_distant_Completed();
 			stateConfVector[1] = mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_distant_Completed;
 			stateConfVectorPosition = 1;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Turn */
@@ -826,7 +820,6 @@ namespace mrw
 			enact_main_region_Init_Init_process_Turning_shunt_Turn();
 			stateConfVector[2] = mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_shunt_Turn;
 			stateConfVectorPosition = 2;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Completed */
@@ -836,7 +829,6 @@ namespace mrw
 			enact_main_region_Init_Init_process_Turning_shunt_Completed();
 			stateConfVector[2] = mrw::statechart::SignalControllerStatechart::State::main_region_Init_Init_process_Turning_shunt_Completed;
 			stateConfVectorPosition = 2;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Operating */
@@ -854,7 +846,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Unlocked();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Unlocked;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Idle */
@@ -863,7 +854,6 @@ namespace mrw
 			/* 'default' enter sequence for state Idle */
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_State_Processing_Idle;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Extend */
@@ -873,7 +863,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Extend();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Extend;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Stop */
@@ -883,7 +872,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Stop();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Stop;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'mrw.statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting' enter sequence for state Waiting */
@@ -892,7 +880,6 @@ namespace mrw
 			/* 'mrw.statechart.SignalControllerStatechart.main_region.Operating.Processing.Tour_State.Processing.Waiting' enter sequence for state Waiting */
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Stop Main */
@@ -902,7 +889,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Main();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Main;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Stop Distant */
@@ -912,7 +898,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Distant();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Distant;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Off Distant */
@@ -922,7 +907,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Off_Distant();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Off_Distant;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Delay */
@@ -932,7 +916,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Delay();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Delay;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Stop Shunt */
@@ -942,7 +925,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Shunt();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Shunt;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Extend */
@@ -952,7 +934,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Extend();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Extend;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Idle */
@@ -961,7 +942,6 @@ namespace mrw
 			/* 'default' enter sequence for state Idle */
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Tour_State_Processing_Idle;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'mrw.statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending' enter sequence for state Pending */
@@ -970,7 +950,6 @@ namespace mrw
 			/* 'mrw.statechart.SignalControllerStatechart.main_region.Operating.Processing.Pending' enter sequence for state Pending */
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Go Main */
@@ -980,7 +959,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Pending_Pending_Go_Main();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Main;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Go Distant */
@@ -990,7 +968,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Pending_Pending_Go_Distant();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Distant;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Go Shunt */
@@ -1000,7 +977,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Pending_Pending_Go_Shunt();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Go_Shunt;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Delay */
@@ -1010,7 +986,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Pending_Pending_Delay();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Operating_Processing_Pending_Pending_Delay;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Failed */
@@ -1020,7 +995,6 @@ namespace mrw
 			enact_main_region_Failed();
 			stateConfVector[0] = mrw::statechart::SignalControllerStatechart::State::main_region_Failed;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for region main region */
@@ -3099,12 +3073,7 @@ namespace mrw
 						doCompletion = true;
 					}
 					completed = false;
-					do
-					{
-						stateConfVectorChanged = false;
-						microStep();
-					}
-					while (stateConfVectorChanged);
+					microStep();
 					clearInEvents();
 					doCompletion = false;
 				}
@@ -3126,24 +3095,19 @@ namespace mrw
 			isExecuting = true;
 			/* Default enter sequence for statechart SignalControllerStatechart */
 			enseq_main_region_default();
+			doCompletion = false;
 			do
 			{
-				stateConfVectorChanged = false;
-				doCompletion = false;
-				do
+				if (completed)
 				{
-					if (completed)
-					{
-						doCompletion = true;
-					}
-					completed = false;
-					microStep();
-					clearInEvents();
-					doCompletion = false;
+					doCompletion = true;
 				}
-				while (completed);
+				completed = false;
+				microStep();
+				clearInEvents();
+				doCompletion = false;
 			}
-			while (stateConfVectorChanged);
+			while (completed);
 			isExecuting = false;
 		}
 

@@ -320,7 +320,6 @@ namespace mrw
 			bool doCompletion {false};
 			bool isExecuting {false};
 			sc::integer stateConfVectorPosition {0};
-			bool stateConfVectorChanged {false};
 
 
 
@@ -434,7 +433,6 @@ namespace mrw
 			sc::integer main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Locked_Occupation_Free_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Locked_Occupation_Occupied_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_Processing_Locked_Occupation__final__react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Locked_Occupation_Next_Reached_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Pending_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Pending_Relais_processing_Enabling_react(const sc::integer transitioned_before);

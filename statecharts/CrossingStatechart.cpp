@@ -26,8 +26,7 @@ namespace mrw
 			failed_raised(false),
 			timerService(nullptr),
 			ifaceOperationCallback(nullptr),
-			isExecuting(false),
-			stateConfVectorChanged(false)
+			isExecuting(false)
 		{
 			std::fill(std::begin(stateConfVector), std::end(stateConfVector), mrw::statechart::CrossingStatechart::State::NO_STATE);
 			clearInEvents();
@@ -380,7 +379,6 @@ namespace mrw
 		{
 			/* 'default' enter sequence for state Wait For Start */
 			stateConfVector[0] = mrw::statechart::CrossingStatechart::State::main_region_Wait_For_Start;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Failed */
@@ -389,7 +387,6 @@ namespace mrw
 			/* 'default' enter sequence for state Failed */
 			enact_main_region_Failed();
 			stateConfVector[0] = mrw::statechart::CrossingStatechart::State::main_region_Failed;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Init */
@@ -398,7 +395,6 @@ namespace mrw
 			/* 'default' enter sequence for state Init */
 			enact_main_region_Init();
 			stateConfVector[0] = mrw::statechart::CrossingStatechart::State::main_region_Init;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Operating */
@@ -414,7 +410,6 @@ namespace mrw
 			/* 'default' enter sequence for state Unlocked */
 			enact_main_region_Operating_Processing_Unlocked();
 			stateConfVector[0] = mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Unlocked;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Locked */
@@ -423,7 +418,6 @@ namespace mrw
 			/* 'default' enter sequence for state Locked */
 			enact_main_region_Operating_Processing_Locked();
 			stateConfVector[0] = mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Locked;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Closing */
@@ -432,7 +426,6 @@ namespace mrw
 			/* 'default' enter sequence for state Closing */
 			enact_main_region_Operating_Processing_Pending_Crossing_processing_Closing();
 			stateConfVector[0] = mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Closing;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Opening */
@@ -441,7 +434,6 @@ namespace mrw
 			/* 'default' enter sequence for state Opening */
 			enact_main_region_Operating_Processing_Pending_Crossing_processing_Opening();
 			stateConfVector[0] = mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Opening;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Delay */
@@ -450,7 +442,6 @@ namespace mrw
 			/* 'default' enter sequence for state Delay */
 			enact_main_region_Operating_Processing_Pending_Crossing_processing_Delay();
 			stateConfVector[0] = mrw::statechart::CrossingStatechart::State::main_region_Operating_Processing_Pending_Crossing_processing_Delay;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for region main region */
@@ -679,6 +670,22 @@ namespace mrw
 			default:
 				/* do nothing */
 				break;
+			}
+		}
+
+		/* The reactions of state null. */
+		void CrossingStatechart::react_main_region_Operating_Processing_Pending_Crossing_processing__choice_0()
+		{
+			/* The reactions of state null. */
+			if (ifaceOperationCallback->used())
+			{
+				enseq_main_region_Operating_Processing_Pending_Crossing_processing_Closing_default();
+			}
+			else
+			{
+				exseq_main_region_Operating_Processing_Pending();
+				enseq_main_region_Operating_Processing_Unlocked_default();
+				main_region_Operating_react(0);
 			}
 		}
 
@@ -914,9 +921,8 @@ namespace mrw
 			{
 				if (response_raised)
 				{
-					exseq_main_region_Operating_Processing_Pending();
-					enseq_main_region_Operating_Processing_Unlocked_default();
-					main_region_Operating_react(0);
+					exseq_main_region_Operating_Processing_Pending_Crossing_processing_Opening();
+					react_main_region_Operating_Processing_Pending_Crossing_processing__choice_0();
 					transitioned_after = 0;
 				}
 			}
@@ -1026,12 +1032,7 @@ namespace mrw
 			dispatchEvent(getNextEvent());
 			do
 			{
-				do
-				{
-					stateConfVectorChanged = false;
-					microStep();
-				}
-				while (stateConfVectorChanged);
+				microStep();
 				clearInEvents();
 			}
 			while (dispatchEvent(getNextEvent()));
@@ -1050,13 +1051,6 @@ namespace mrw
 			isExecuting = true;
 			/* Default enter sequence for statechart CrossingStatechart */
 			enseq_main_region_default();
-			do
-			{
-				stateConfVectorChanged = false;
-				microStep();
-				clearInEvents();
-			}
-			while (stateConfVectorChanged);
 			isExecuting = false;
 		}
 

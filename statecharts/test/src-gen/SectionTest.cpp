@@ -1003,6 +1003,8 @@ namespace
 	{
 		waitForStart();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Wait_for_Start));
+
 		statechart->raiseStart();
 
 		initing();
@@ -1015,6 +1017,10 @@ namespace
 	void SectionTest::failAfterStart()
 	{
 		initial();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_relais_Relay));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_state_Occupation));
 
 		statechart->raiseFailed();
 
@@ -1029,6 +1035,10 @@ namespace
 	{
 		initial();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_relais_Relay));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_state_Occupation));
+
 		runner->proceed_time(statechart->getTimeout());
 
 		failState();
@@ -1037,6 +1047,10 @@ namespace
 	void SectionTest::sync1()
 	{
 		initial();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_relais_Relay));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_state_Occupation));
 
 		statechart->raiseRelaisResponse();
 
@@ -1057,6 +1071,10 @@ namespace
 	{
 		initial();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_relais_Relay));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_state_Occupation));
+
 		statechart->raiseStateResponse(false);
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting));
@@ -1075,6 +1093,10 @@ namespace
 	void SectionTest::operational()
 	{
 		sync1();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_relais_Wait));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_state_Occupation));
 
 		statechart->raiseStateResponse(false);
 
@@ -1095,6 +1117,10 @@ namespace
 	{
 		sync2();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_relais_Relay));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_state_Wait));
+
 		statechart->raiseRelaisResponse();
 
 		unlocked();
@@ -1114,6 +1140,8 @@ namespace
 	{
 		operational();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked));
+
 		statechart->raiseStart();
 
 		initing();
@@ -1122,6 +1150,8 @@ namespace
 	TEST_F(SectionTest, clearing)
 	{
 		failAfterStart();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Failed));
 
 		statechart->raiseClear();
 
@@ -1135,6 +1165,8 @@ namespace
 	void SectionTest::enabling()
 	{
 		operational();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked));
 
 		statechart->raiseEnable(true);
 
@@ -1159,6 +1191,8 @@ namespace
 	{
 		operational();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked));
+
 		statechart->raiseEnable(false);
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending));
@@ -1181,6 +1215,8 @@ namespace
 	void SectionTest::enabledLocked()
 	{
 		enabling();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling));
 
 		statechart->raiseRelaisResponse();
 
@@ -1207,6 +1243,8 @@ namespace
 	{
 		disabling();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Disabling));
+
 		statechart->raiseRelaisResponse();
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked));
@@ -1231,6 +1269,8 @@ namespace
 	void SectionTest::sectionFree()
 	{
 		operational();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked));
 
 		statechart->setOccupied(false);
 
@@ -1263,6 +1303,8 @@ namespace
 	{
 		operational();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked));
+
 		statechart->setOccupied(true);
 
 		statechart->raiseEnable(true);
@@ -1294,6 +1336,8 @@ namespace
 	{
 		enabling();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling));
+
 		statechart->raiseFailed();
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Failed));
@@ -1305,6 +1349,8 @@ namespace
 	{
 		enabling();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling));
+
 		runner->proceed_time(statechart->getTimeout());
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Failed));
@@ -1315,6 +1361,10 @@ namespace
 	void SectionTest::disablingAfterEnabled()
 	{
 		enabledLocked();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Enabled));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Free));
 
 		statechart->raiseDisable();
 
@@ -1337,6 +1387,10 @@ namespace
 	{
 		disabledLocked();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Disabled));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Free));
+
 		statechart->raiseDisable();
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock));
@@ -1353,6 +1407,8 @@ namespace
 	void SectionTest::disabledAfterEnabled()
 	{
 		disablingAfterEnabled();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling));
 
 		statechart->raiseRelaisResponse();
 
@@ -1371,6 +1427,8 @@ namespace
 	{
 		disabledAfterDisabled();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock));
+
 		statechart->raiseUnlock();
 
 		unlocked();
@@ -1384,6 +1442,8 @@ namespace
 	{
 		disablingAfterEnabled();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling));
+
 		statechart->raiseFailed();
 
 		failState();
@@ -1393,6 +1453,8 @@ namespace
 	{
 		disablingAfterEnabled();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling));
+
 		runner->proceed_time(statechart->getTimeout());
 
 		failState();
@@ -1401,6 +1463,8 @@ namespace
 	void SectionTest::nextReached()
 	{
 		sectionFree();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Free));
 
 		statechart->setAuto_off(true);
 
@@ -1426,6 +1490,10 @@ namespace
 	void SectionTest::leaveSection()
 	{
 		nextReached();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Next_Reached));
+
+		EXPECT_TRUE(statechart->getOccupied());
 
 		statechart->raiseStateResponse(false);
 
@@ -1455,6 +1523,8 @@ namespace
 	TEST_F(SectionTest, leaveBeforeNext)
 	{
 		sectionFree();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Free));
 
 		statechart->setAuto_off(true);
 
@@ -1501,6 +1571,10 @@ namespace
 	{
 		enabledLocked();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Enabled));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Free));
+
 		statechart->setAuto_off(false);
 
 		statechart->raiseStateResponse(false);
@@ -1513,6 +1587,10 @@ namespace
 	TEST_F(SectionTest, autoUnlock)
 	{
 		leaveSection();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation__final_));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left));
 
 		statechart->setAuto_unlock(true);
 
@@ -1530,6 +1608,10 @@ namespace
 	void SectionTest::passedState()
 	{
 		leaveSection();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation__final_));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left));
 
 		statechart->setAuto_unlock(false);
 
@@ -1558,6 +1640,8 @@ namespace
 	{
 		passedState();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Passed));
+
 		statechart->raiseUnlock();
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating));
@@ -1579,6 +1663,10 @@ namespace
 	{
 		disabledLocked();
 
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Disabled));
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Free));
+
 		statechart->raiseEnable(true);
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting));
@@ -1599,6 +1687,8 @@ namespace
 	TEST_F(SectionTest, enabledAfterDisabled)
 	{
 		enablingAfterDisabled();
+
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling));
 
 		statechart->raiseRelaisResponse();
 

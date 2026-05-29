@@ -58,6 +58,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		waitForStart()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Wait_for_Start)
 
 		// When
 		raise start
@@ -71,6 +72,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		initial()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Relay)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
 
 		// When
 		raise failed
@@ -84,6 +87,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		initial()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Relay)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
 
 		// When
 		proceed timeout ms
@@ -97,6 +102,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		initial()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Relay)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
 
 		// When
 		raise relaisResponse
@@ -113,6 +120,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		initial()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Relay)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
 
 		// When
 		raise stateResponse : false
@@ -129,6 +138,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		sync1()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Wait)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Occupation)
 
 		// When
 		raise stateResponse : false
@@ -145,6 +156,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		sync2()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.relais.Relay)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Init.Init_Process.Requesting.state.Wait)
 
 		// When
 		raise relaisResponse
@@ -161,6 +174,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		operational()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
 
 		// When
 		raise start
@@ -174,6 +188,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		failAfterStart()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Failed)
 
 		// When
 		raise clear
@@ -193,6 +208,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		operational()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
 
 		// When
 		raise enable : true
@@ -211,6 +227,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		operational()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
 
 		// When
 		raise enable : false
@@ -229,6 +246,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		enabling()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Enabling)
 
 		// When
 		raise relaisResponse
@@ -248,6 +266,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		disabling()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Disabling)
 
 		// When
 		raise relaisResponse
@@ -267,6 +286,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		operational()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
 		occupied = false
 
 		// When
@@ -293,6 +313,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		operational()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Unlocked)
 		occupied = true
 
 		// When
@@ -319,6 +340,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		enabling()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Enabling)
 
 		// When
 		raise failed
@@ -331,6 +353,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		enabling()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Pending.Relais_processing.Enabling)
 
 		// When
 		proceed timeout ms
@@ -345,6 +368,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		enabledLocked()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
 
 		// When
 		raise disable
@@ -362,6 +387,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		disabledLocked()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Disabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
 
 		// When
 		raise disable
@@ -377,6 +404,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		disablingAfterEnabled()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Disabling)
 
 		// When
 		raise relaisResponse
@@ -392,6 +420,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		disabledAfterDisabled()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Wait_for_Unlock)
 
 		// When
 		raise unlock
@@ -405,6 +434,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		disablingAfterEnabled()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Disabling)
 
 		// When
 		raise failed
@@ -416,6 +446,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		disablingAfterEnabled()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Disabling)
 
 		// When
 		proceed timeout ms
@@ -429,6 +460,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		sectionFree()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
 		auto_off = true
 
 		// When
@@ -452,6 +484,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		nextReached()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Next_Reached)
+		assert occupied
 
 		// When
 		raise stateResponse : false
@@ -473,6 +507,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		sectionFree()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
 		auto_off = true
 
 		// When
@@ -512,6 +547,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		enabledLocked()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Enabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
 		auto_off = false
 
 		// When
@@ -527,6 +564,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		leaveSection()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation._final_)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Left)
 		auto_unlock = true
 
 		// When
@@ -544,6 +583,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		leaveSection()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation._final_)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Left)
 		auto_unlock = false
 
 		// When
@@ -564,6 +605,7 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	{
 		// Given
 		passedState()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Passed)
 
 		// When
 		raise unlock
@@ -580,7 +622,9 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	operation enablingAfterDisabled()
 	{
 		// Given
-		disabledLocked
+		disabledLocked()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Disabled)
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Occupation.Free)
 
 		// When
 		raise enable : true
@@ -597,7 +641,8 @@ testclass SectionTest for statechart mrw.^statechart.SectionStatechart
 	operation enabledAfterDisabled()
 	{
 		// Given
-		enablingAfterDisabled
+		enablingAfterDisabled()
+		assert active (mrw.^statechart.SectionStatechart.main_region.Operating.Processing.Locked.Route_active.Waiting.Relais_processing.Enabling)
 
 		// When
 		raise relaisResponse

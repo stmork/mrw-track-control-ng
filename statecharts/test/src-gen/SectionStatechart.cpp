@@ -703,7 +703,6 @@ namespace mrw
 			enact_main_region_Init_Init_Process_Requesting_relais_Relay();
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_relais_Relay;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Wait */
@@ -713,7 +712,6 @@ namespace mrw
 			enact_main_region_Init_Init_Process_Requesting_relais_Wait();
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_relais_Wait;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Occupation */
@@ -723,7 +721,6 @@ namespace mrw
 			enact_main_region_Init_Init_Process_Requesting_state_Occupation();
 			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_state_Occupation;
 			stateConfVectorPosition = 1;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Wait */
@@ -733,7 +730,6 @@ namespace mrw
 			enact_main_region_Init_Init_Process_Requesting_state_Wait();
 			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_state_Wait;
 			stateConfVectorPosition = 1;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Operating */
@@ -750,7 +746,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Unlocked();
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Unlocked;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Enabled */
@@ -759,7 +754,6 @@ namespace mrw
 			/* 'default' enter sequence for state Enabled */
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Enabled;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Passed */
@@ -769,7 +763,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Locked_Route_active_Passed();
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Passed;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Left */
@@ -779,7 +772,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left();
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Disabling */
@@ -789,7 +781,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling();
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Enabling */
@@ -799,7 +790,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling();
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Disabled */
@@ -808,7 +798,6 @@ namespace mrw
 			/* 'default' enter sequence for state Disabled */
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Disabled;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Wait for Unlock */
@@ -817,7 +806,6 @@ namespace mrw
 			/* 'default' enter sequence for state Wait for Unlock */
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Free */
@@ -826,7 +814,6 @@ namespace mrw
 			/* 'default' enter sequence for state Free */
 			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Free;
 			stateConfVectorPosition = 1;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Occupied */
@@ -836,7 +823,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Locked_Occupation_Occupied();
 			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Occupied;
 			stateConfVectorPosition = 1;
-			stateConfVectorChanged = true;
 		}
 
 		/* Default enter sequence for final state */
@@ -845,7 +831,6 @@ namespace mrw
 			/* Default enter sequence for final state */
 			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation__final_;
 			stateConfVectorPosition = 1;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Next Reached */
@@ -855,7 +840,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Locked_Occupation_Next_Reached();
 			stateConfVector[1] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Next_Reached;
 			stateConfVectorPosition = 1;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Enabling */
@@ -865,7 +849,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Pending_Relais_processing_Enabling();
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Enabling;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Disabling */
@@ -875,7 +858,6 @@ namespace mrw
 			enact_main_region_Operating_Processing_Pending_Relais_processing_Disabling();
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Pending_Relais_processing_Disabling;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Failed */
@@ -885,7 +867,6 @@ namespace mrw
 			enact_main_region_Failed();
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Failed;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for state Wait for Start */
@@ -894,7 +875,6 @@ namespace mrw
 			/* 'default' enter sequence for state Wait for Start */
 			stateConfVector[0] = mrw::statechart::SectionStatechart::State::main_region_Wait_for_Start;
 			stateConfVectorPosition = 0;
-			stateConfVectorChanged = true;
 		}
 
 		/* 'default' enter sequence for region main region */
@@ -1689,12 +1669,6 @@ namespace mrw
 						}
 					}
 				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = transitioned_before;
-				}
 			}
 			return transitioned_after;
 		}
@@ -1702,19 +1676,13 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Init_Init_Process_Requesting_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Requesting. */
-			sc::integer transitioned_after = transitioned_before;
-			if (!(doCompletion))
-			{
-				/* Always execute local reactions. */
-				transitioned_after = main_region_Init_react(transitioned_before);
-			}
-			return transitioned_after;
+			return main_region_Init_react(transitioned_before);
 		}
 
 		sc::integer SectionStatechart::main_region_Init_Init_Process_Requesting_relais_Relay_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Relay. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Init_Init_Process_Requesting_react(transitioned_before);
 			if (!(doCompletion))
 			{
 				if ((transitioned_after) < (0))
@@ -1733,7 +1701,7 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Init_Init_Process_Requesting_relais_Wait_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Wait. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Init_Init_Process_Requesting_react(transitioned_before);
 			if ((isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_state_Wait)) && ((isStateActive(mrw::statechart::SectionStatechart::State::main_region_Init_Init_Process_Requesting_relais_Wait)) && (doCompletion)))
 			{
 				/* Default exit sequence for state Requesting */
@@ -1783,15 +1751,8 @@ namespace mrw
 						exseq_main_region_Init_Init_Process_Requesting_state_Occupation();
 						setOccupied(stateResponse_value);
 						enseq_main_region_Init_Init_Process_Requesting_state_Wait_default();
-						main_region_Init_Init_Process_Requesting_react(0);
 						transitioned_after = 1;
 					}
-				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = main_region_Init_Init_Process_Requesting_react(transitioned_before);
 				}
 			}
 			return transitioned_after;
@@ -1833,12 +1794,6 @@ namespace mrw
 						transitioned_after = 1;
 					}
 				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = main_region_Init_Init_Process_Requesting_react(transitioned_before);
-				}
 			}
 			return transitioned_after;
 		}
@@ -1875,7 +1830,6 @@ namespace mrw
 					{
 						setOccupied(stateResponse_value);
 					}
-					transitioned_after = transitioned_before;
 				}
 			}
 			return transitioned_after;
@@ -1884,7 +1838,7 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Operating_Processing_Unlocked_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Unlocked. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Operating_react(transitioned_before);
 			if (!(doCompletion))
 			{
 				if ((transitioned_after) < (0))
@@ -1894,7 +1848,6 @@ namespace mrw
 						exseq_main_region_Operating_Processing_Unlocked();
 						enact_main_region_Operating_Processing_Pending();
 						enseq_main_region_Operating_Processing_Pending_Relais_processing_Enabling_default();
-						main_region_Operating_react(0);
 						transitioned_after = 0;
 					}
 					else
@@ -1904,16 +1857,9 @@ namespace mrw
 							exseq_main_region_Operating_Processing_Unlocked();
 							enact_main_region_Operating_Processing_Pending();
 							enseq_main_region_Operating_Processing_Pending_Relais_processing_Disabling_default();
-							main_region_Operating_react(0);
 							transitioned_after = 0;
 						}
 					}
-				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = main_region_Operating_react(transitioned_before);
 				}
 			}
 			return transitioned_after;
@@ -1922,19 +1868,13 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Locked. */
-			sc::integer transitioned_after = transitioned_before;
-			if (!(doCompletion))
-			{
-				/* Always execute local reactions. */
-				transitioned_after = main_region_Operating_react(transitioned_before);
-			}
-			return transitioned_after;
+			return main_region_Operating_react(transitioned_before);
 		}
 
 		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Route_active_Enabled_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Enabled. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
 			if (!(doCompletion))
 			{
 				if ((transitioned_after) < (0))
@@ -1965,7 +1905,7 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Route_active_Passed_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Passed. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
 			if (!(doCompletion))
 			{
 				if ((transitioned_after) < (0))
@@ -1974,7 +1914,6 @@ namespace mrw
 					{
 						exseq_main_region_Operating_Processing_Locked();
 						enseq_main_region_Operating_Processing_Unlocked_default();
-						main_region_Operating_react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -1985,7 +1924,7 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Route_active_Waiting_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Waiting. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
 			if (!(doCompletion))
 			{
 				if ((transitioned_after) < (0))
@@ -2005,7 +1944,7 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Left_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Left. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Operating_Processing_Locked_Route_active_Waiting_react(transitioned_before);
 			if (!(doCompletion))
 			{
 				if ((transitioned_after) < (0))
@@ -2018,12 +1957,6 @@ namespace mrw
 						transitioned_after = 0;
 					}
 				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = main_region_Operating_Processing_Locked_Route_active_Waiting_react(transitioned_before);
-				}
 			}
 			return transitioned_after;
 		}
@@ -2031,7 +1964,7 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Disabling_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Disabling. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Operating_Processing_Locked_Route_active_Waiting_react(transitioned_before);
 			if (!(doCompletion))
 			{
 				if ((transitioned_after) < (0))
@@ -2043,12 +1976,6 @@ namespace mrw
 						transitioned_after = 0;
 					}
 				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = main_region_Operating_Processing_Locked_Route_active_Waiting_react(transitioned_before);
-				}
 			}
 			return transitioned_after;
 		}
@@ -2056,7 +1983,7 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Route_active_Waiting_Relais_processing_Enabling_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Enabling. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Operating_Processing_Locked_Route_active_Waiting_react(transitioned_before);
 			if (!(doCompletion))
 			{
 				if ((transitioned_after) < (0))
@@ -2068,12 +1995,6 @@ namespace mrw
 						transitioned_after = 0;
 					}
 				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = main_region_Operating_Processing_Locked_Route_active_Waiting_react(transitioned_before);
-				}
 			}
 			return transitioned_after;
 		}
@@ -2081,7 +2002,7 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Route_active_Disabled_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Disabled. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
 			if (!(doCompletion))
 			{
 				if ((transitioned_after) < (0))
@@ -2110,7 +2031,7 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Wait for Unlock. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
 			if (!(doCompletion))
 			{
 				if ((transitioned_after) < (0))
@@ -2119,7 +2040,6 @@ namespace mrw
 					{
 						exseq_main_region_Operating_Processing_Locked();
 						enseq_main_region_Operating_Processing_Unlocked_default();
-						main_region_Operating_react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -2139,15 +2059,8 @@ namespace mrw
 					{
 						exseq_main_region_Operating_Processing_Locked_Occupation_Free();
 						enseq_main_region_Operating_Processing_Locked_Occupation_Occupied_default();
-						main_region_Operating_Processing_Locked_react(0);
 						transitioned_after = 1;
 					}
-				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
 				}
 			}
 			return transitioned_after;
@@ -2165,24 +2078,11 @@ namespace mrw
 					{
 						exseq_main_region_Operating_Processing_Locked_Occupation_Occupied();
 						enseq_main_region_Operating_Processing_Locked_Occupation_Next_Reached_default();
-						main_region_Operating_Processing_Locked_react(0);
 						transitioned_after = 1;
 					}
 				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
-				}
 			}
 			return transitioned_after;
-		}
-
-		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Occupation__final__react(const sc::integer transitioned_before)
-		{
-			/* The reactions of state null. */
-			return main_region_Operating_Processing_Locked_react(transitioned_before);
 		}
 
 		sc::integer SectionStatechart::main_region_Operating_Processing_Locked_Occupation_Next_Reached_react(const sc::integer transitioned_before)
@@ -2201,12 +2101,6 @@ namespace mrw
 						transitioned_after = 1;
 					}
 				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = main_region_Operating_Processing_Locked_react(transitioned_before);
-				}
 			}
 			return transitioned_after;
 		}
@@ -2214,7 +2108,7 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Operating_Processing_Pending_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Pending. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Operating_react(transitioned_before);
 			if (!(doCompletion))
 			{
 				if ((transitioned_after) < (0))
@@ -2227,12 +2121,6 @@ namespace mrw
 						transitioned_after = 0;
 					}
 				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = main_region_Operating_react(transitioned_before);
-				}
 			}
 			return transitioned_after;
 		}
@@ -2240,7 +2128,7 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Operating_Processing_Pending_Relais_processing_Enabling_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Enabling. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Operating_Processing_Pending_react(transitioned_before);
 			if (!(doCompletion))
 			{
 				if ((transitioned_after) < (0))
@@ -2251,15 +2139,8 @@ namespace mrw
 						enact_main_region_Operating_Processing_Locked();
 						enseq_main_region_Operating_Processing_Locked_Route_active_Enabled_default();
 						enseq_main_region_Operating_Processing_Locked_Occupation_default();
-						main_region_Operating_react(0);
 						transitioned_after = 0;
 					}
-				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = main_region_Operating_Processing_Pending_react(transitioned_before);
 				}
 			}
 			return transitioned_after;
@@ -2268,7 +2149,7 @@ namespace mrw
 		sc::integer SectionStatechart::main_region_Operating_Processing_Pending_Relais_processing_Disabling_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Disabling. */
-			sc::integer transitioned_after = transitioned_before;
+			sc::integer transitioned_after = main_region_Operating_Processing_Pending_react(transitioned_before);
 			if (!(doCompletion))
 			{
 				if ((transitioned_after) < (0))
@@ -2279,15 +2160,8 @@ namespace mrw
 						enact_main_region_Operating_Processing_Locked();
 						enseq_main_region_Operating_Processing_Locked_Route_active_Disabled_default();
 						enseq_main_region_Operating_Processing_Locked_Occupation_default();
-						main_region_Operating_react(0);
 						transitioned_after = 0;
 					}
-				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = main_region_Operating_Processing_Pending_react(transitioned_before);
 				}
 			}
 			return transitioned_after;
@@ -2308,12 +2182,6 @@ namespace mrw
 						transitioned_after = 0;
 					}
 				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = transitioned_before;
-				}
 			}
 			return transitioned_after;
 		}
@@ -2332,12 +2200,6 @@ namespace mrw
 						enseq_main_region_Init_default();
 						transitioned_after = 0;
 					}
-				}
-				/* If no transition was taken */
-				if ((transitioned_after) == (transitioned_before))
-				{
-					/* then execute local reactions. */
-					transitioned_after = transitioned_before;
 				}
 			}
 			return transitioned_after;
@@ -2481,7 +2343,6 @@ namespace mrw
 					}
 				case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation__final_ :
 					{
-						main_region_Operating_Processing_Locked_Occupation__final__react(transitioned);
 						break;
 					}
 				case mrw::statechart::SectionStatechart::State::main_region_Operating_Processing_Locked_Occupation_Next_Reached :
@@ -2516,12 +2377,7 @@ namespace mrw
 						doCompletion = true;
 					}
 					completed = false;
-					do
-					{
-						stateConfVectorChanged = false;
-						microStep();
-					}
-					while (stateConfVectorChanged);
+					microStep();
 					clearInEvents();
 					clearInternalEvents();
 					doCompletion = false;
@@ -2544,25 +2400,20 @@ namespace mrw
 			isExecuting = true;
 			/* Default enter sequence for statechart SectionStatechart */
 			enseq_main_region_default();
+			doCompletion = false;
 			do
 			{
-				stateConfVectorChanged = false;
-				doCompletion = false;
-				do
+				if (completed)
 				{
-					if (completed)
-					{
-						doCompletion = true;
-					}
-					completed = false;
-					microStep();
-					clearInEvents();
-					clearInternalEvents();
-					doCompletion = false;
+					doCompletion = true;
 				}
-				while (completed);
+				completed = false;
+				microStep();
+				clearInEvents();
+				clearInternalEvents();
+				doCompletion = false;
 			}
-			while (stateConfVectorChanged);
+			while (completed);
 			isExecuting = false;
 		}
 
