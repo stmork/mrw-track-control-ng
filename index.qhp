@@ -1799,6 +1799,7 @@
 <section title="sectionColor" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#ae7a45cecae7ea77538b9c873804ca323"/>
 <section title="setController" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a2d3ffd8a6cc9dd7b4b6ef603394605e9"/>
 <section title="setVerbose" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
+<section title="tick" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e"/>
 <section title="base_controller" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
@@ -1863,6 +1864,7 @@
 <section title="sectionColor" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#ae7a45cecae7ea77538b9c873804ca323"/>
 <section title="setController" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a2d3ffd8a6cc9dd7b4b6ef603394605e9"/>
 <section title="setVerbose" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
+<section title="tick" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e"/>
 <section title="base_controller" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
@@ -1948,6 +1950,7 @@
 <section title="sectionColor" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#ae7a45cecae7ea77538b9c873804ca323"/>
 <section title="setController" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a2d3ffd8a6cc9dd7b4b6ef603394605e9"/>
 <section title="setVerbose" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
+<section title="tick" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e"/>
 <section title="base_controller" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
@@ -2011,6 +2014,7 @@
 <section title="sectionColor" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#ae7a45cecae7ea77538b9c873804ca323"/>
 <section title="setController" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a2d3ffd8a6cc9dd7b4b6ef603394605e9"/>
 <section title="setVerbose" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
+<section title="tick" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e"/>
 <section title="base_controller" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
@@ -2080,6 +2084,7 @@
 <section title="sectionColor" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#ae7a45cecae7ea77538b9c873804ca323"/>
 <section title="setController" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a2d3ffd8a6cc9dd7b4b6ef603394605e9"/>
 <section title="setVerbose" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
+<section title="tick" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e"/>
 <section title="base_controller" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
@@ -4015,6 +4020,7 @@
 <section title="sectionColor" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#ae7a45cecae7ea77538b9c873804ca323"/>
 <section title="setController" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a2d3ffd8a6cc9dd7b4b6ef603394605e9"/>
 <section title="setVerbose" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
+<section title="tick" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e"/>
 <section title="base_controller" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
@@ -4079,6 +4085,7 @@
 <section title="sectionColor" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#ae7a45cecae7ea77538b9c873804ca323"/>
 <section title="setController" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a2d3ffd8a6cc9dd7b4b6ef603394605e9"/>
 <section title="setVerbose" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
+<section title="tick" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e"/>
 <section title="base_controller" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
@@ -4164,6 +4171,7 @@
 <section title="sectionColor" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#ae7a45cecae7ea77538b9c873804ca323"/>
 <section title="setController" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a2d3ffd8a6cc9dd7b4b6ef603394605e9"/>
 <section title="setVerbose" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
+<section title="tick" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e"/>
 <section title="base_controller" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="dc/d9b/classmrw_1_1ui_1_1RailWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
@@ -4227,6 +4235,7 @@
 <section title="sectionColor" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#ae7a45cecae7ea77538b9c873804ca323"/>
 <section title="setController" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a2d3ffd8a6cc9dd7b4b6ef603394605e9"/>
 <section title="setVerbose" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
+<section title="tick" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e"/>
 <section title="base_controller" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
@@ -4296,6 +4305,7 @@
 <section title="sectionColor" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#ae7a45cecae7ea77538b9c873804ca323"/>
 <section title="setController" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a2d3ffd8a6cc9dd7b4b6ef603394605e9"/>
 <section title="setVerbose" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
+<section title="tick" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e"/>
 <section title="base_controller" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a20f6e80d5a2ed7859465de3f4826dd80"/>
 <section title="BLUE" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="connector_list" ref="d8/df9/classmrw_1_1ui_1_1SignalWidget.html#a7e7621b6aea5332d8fc002cdda357178"/>
@@ -5597,6 +5607,7 @@
 <keyword name="TermHandler()" id="mrw::util::TermHandler::TermHandler_afcf13d27620bb60da2447f77fe52b632" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#afcf13d27620bb60da2447f77fe52b632"/>
 <keyword name="TermHandler(const std::initializer_list&lt; int &gt; &amp;quit_signals)" id="mrw::util::TermHandler::TermHandler_a2616c0436b27b5e414c92d5603e72fc5" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a2616c0436b27b5e414c92d5603e72fc5"/>
 <keyword name="threshold() const" id="mrw::model::Light::threshold_af3ab18d306698af87c9d18ac614998c5" ref="d0/d3c/classmrw_1_1model_1_1Light.html#af3ab18d306698af87c9d18ac614998c5"/>
+<keyword name="tick()" id="mrw::ui::ControllerWidget::tick_a5e837a523ee2c2e126b94b9c5aa7967e" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e"/>
 <keyword name="TIME_STAMP_FORMAT" id="mrw::util::Duration::TIME_STAMP_FORMAT_a5d7d85ca337156a12663496c60ea7cdf" ref="d2/d87/classmrw_1_1util_1_1Duration.html#a5d7d85ca337156a12663496c60ea7cdf"/>
 <keyword name="timeStamp() noexcept" id="mrw::log::LoggerBase::timeStamp_a2ecff9f11574c33d083c55da29decdb1" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html#a2ecff9f11574c33d083c55da29decdb1"/>
 <keyword name="TimestampedFileLogger(const QString &amp;prefix=&quot;application&quot;)" id="mrw::log::TimestampedFileLogger::TimestampedFileLogger_aaf0d4a2e08710d8cd52d75404b620bc4" ref="d1/da7/classmrw_1_1log_1_1TimestampedFileLogger.html#aaf0d4a2e08710d8cd52d75404b620bc4"/>
