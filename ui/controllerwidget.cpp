@@ -23,14 +23,7 @@ ControllerWidget::ControllerWidget(
 {
 	setController(ctrl);
 
-	connect(&ClockService::instance(), &ClockService::Hz8, [this]()
-	{
-		counter++;
-		if (hasLock() && (base_controller->lock() == LockState::PENDING))
-		{
-			repaint();
-		}
-	});
+	connect(&ClockService::instance(), &ClockService::Hz8, this, &ControllerWidget::tick);
 }
 
 void ControllerWidget::setController(BaseController * ctrl)
@@ -85,6 +78,15 @@ void ControllerWidget::extend()
 void ControllerWidget::computeConnectors()
 {
 	connector_list.clear();
+}
+
+void ControllerWidget::tick()
+{
+	counter++;
+	if (hasLock() && (base_controller->lock() == LockState::PENDING))
+	{
+		repaint();
+	}
 }
 
 void ControllerWidget::mousePressEvent(QMouseEvent * event)

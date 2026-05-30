@@ -105,7 +105,8 @@ void RailWidget::paint(QPainter & painter)
 	const float y_offset = SCALE * (1.0 + status.lines * 2.0);
 	const float x_offset = y_offset / RAIL_SLOPE + SCALE / Position::HALF;
 
-	if ((status.has_crossing) && (status.extensions >= 4) && !isCrossing(status))
+	if ((status.has_crossing) && (status.extensions >= Position::FRACTION) &&
+		!isCrossing(status))
 	{
 		drawCrossing(painter, border);
 	}
@@ -117,12 +118,15 @@ void RailWidget::paint(QPainter & painter)
 	painter.setPen(pen);
 	painter.drawLine(SCALE, 0, status.do_bend ? border + x_offset : border, 0);
 
-	if ((status.has_crossing) && (status.extensions >= 4) && !isCrossing(status) && (status.lock_state == LockState::PENDING) && (counter & 1))
+	if ((status.has_crossing) && (status.extensions >= Position::FRACTION) &&
+		!isCrossing(status) &&
+		(status.lock_state == LockState::PENDING) && (counter & 1))
 	{
 		drawLock(painter, WHITE, border + 50, 0);
 	}
 
-	if ((status.has_crossing) && (status.extensions >= 4) && isCrossing(status))
+	if ((status.has_crossing) && (status.extensions >= Position::FRACTION) &&
+		isCrossing(status))
 	{
 		drawCrossing(painter, border);
 	}

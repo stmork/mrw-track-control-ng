@@ -61,6 +61,7 @@ namespace mrw::test
 		void testHavingLock();
 
 		void testEnds();
+		void testCrossing();
 	};
 }
 

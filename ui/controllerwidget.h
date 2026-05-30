@@ -80,6 +80,8 @@ namespace mrw::ui
 		 */
 		virtual void computeConnectors();
 
+		void tick();
+
 	protected:
 		virtual void mousePressEvent(QMouseEvent * event) override;
 

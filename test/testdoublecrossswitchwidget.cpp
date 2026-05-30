@@ -45,16 +45,19 @@ void TestDoubleCrossSwitchWidget::testPrepare()
 				for (const bool flank : booleans)
 				{
 					mock.setFlankProtection(flank);
-
-					widget.test(status);
-					QCOMPARE(status.direction, dir);
-					QCOMPARE(status.section_state, state);
-					QCOMPARE(status.lock_state, lock);
-					QCOMPARE(status.has_flank_protection, flank);
-					QCOMPARE(status.bending, Bending::STRAIGHT);
-					QCOMPARE(status.extensions, 0.0f);
-					QCOMPARE(status.lines, 0.0f);
-					QCOMPARE(widget.connectors().size(), 2);
+					for (int i = 0; i < 2; i++)
+					{
+						widget.tick();
+						widget.test(status);
+						QCOMPARE(status.direction, dir);
+						QCOMPARE(status.section_state, state);
+						QCOMPARE(status.lock_state, lock);
+						QCOMPARE(status.has_flank_protection, flank);
+						QCOMPARE(status.bending, Bending::STRAIGHT);
+						QCOMPARE(status.extensions, 0.0f);
+						QCOMPARE(status.lines, 0.0f);
+						QCOMPARE(widget.connectors().size(), 2);
+					}
 				}
 			}
 		}
