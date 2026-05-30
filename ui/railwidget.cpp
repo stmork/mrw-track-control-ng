@@ -50,9 +50,18 @@ void RailWidget::prepare(RailWidget::Status & status) const
 	Q_ASSERT(base_controller != nullptr);
 
 	controller<RailController>()->status(status);
+	const bool draw_crossing = (status.has_crossing) && (status.extensions >= Position::FRACTION);
 
 	status.do_bend = (status.bending != Bending::STRAIGHT) && (!status.a_ends);
 	status.any_end = status.a_ends || status.b_ends;
+
+	status.draw_crossing_before = draw_crossing &&
+		(status.section_state != SectionState::FREE);
+	status.draw_lock            = draw_crossing &&
+		(status.section_state != SectionState::FREE) &&
+		(status.lock_state == LockState::PENDING) && (counter & 1);
+	status.draw_crossing_after  = draw_crossing &&
+		(status.section_state == SectionState::FREE);
 }
 
 void RailWidget::paint(QPainter & painter)
@@ -105,8 +114,7 @@ void RailWidget::paint(QPainter & painter)
 	const float y_offset = SCALE * (1.0 + status.lines * 2.0);
 	const float x_offset = y_offset / RAIL_SLOPE + SCALE / Position::HALF;
 
-	if ((status.has_crossing) && (status.extensions >= Position::FRACTION) &&
-		!isCrossing(status))
+	if (status.draw_crossing_before)
 	{
 		drawCrossing(painter, border);
 	}
@@ -118,15 +126,12 @@ void RailWidget::paint(QPainter & painter)
 	painter.setPen(pen);
 	painter.drawLine(SCALE, 0, status.do_bend ? border + x_offset : border, 0);
 
-	if ((status.has_crossing) && (status.extensions >= Position::FRACTION) &&
-		!isCrossing(status) &&
-		(status.lock_state == LockState::PENDING) && (counter & 1))
+	if (status.draw_lock)
 	{
 		drawLock(painter, WHITE, border + 50, 0);
 	}
 
-	if ((status.has_crossing) && (status.extensions >= Position::FRACTION) &&
-		isCrossing(status))
+	if (status.draw_crossing_after)
 	{
 		drawCrossing(painter, border);
 	}
@@ -169,11 +174,6 @@ void RailWidget::paint(QPainter & painter)
 
 	// Draw connector markers
 	drawConnectors(painter);
-}
-
-bool RailWidget::isCrossing(const Status & status) const
-{
-	return (status.section_state == SectionState::FREE);
 }
 
 void RailWidget::drawCrossing(

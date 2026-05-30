@@ -52,8 +52,11 @@ namespace mrw::ui
 	public:
 		struct Status : public mrw::ctrl::RailController::Status
 		{
-			bool do_bend = false;
-			bool any_end = false;
+			bool do_bend          = false;
+			bool any_end          = false;
+			bool draw_lock            = false;
+			bool draw_crossing_before = false;
+			bool draw_crossing_after  = false;
 		};
 
 		explicit RailWidget(
@@ -68,7 +71,6 @@ namespace mrw::ui
 		void paint(QPainter & painter) override;
 
 	private:
-		bool isCrossing(const Status & status) const;
 		void drawCrossing(
 			QPainter   &   painter,
 			const double   border) const;
