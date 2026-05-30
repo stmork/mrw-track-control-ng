@@ -1918,6 +1918,9 @@
 <section title="bending" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
 <section title="direction" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
 <section title="do_bend" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#a2ab1a9d884bd787abb7181109cb64966"/>
+<section title="draw_crossing_after" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#a548ac1b17e71b3f8621993cf75fbf0cc"/>
+<section title="draw_crossing_before" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#a8e7c794b2945c8924b445d6d2de01c14"/>
+<section title="draw_lock" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#ab6091b95877f51acb9fa730a7e22b58b"/>
 <section title="expandable" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
 <section title="extensions" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
 <section title="has_crossing" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#a1b33a032378c455c1fc54e3b4742b603"/>
@@ -4139,6 +4142,9 @@
 <section title="bending" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#ae9cfb02e5f31146d4dd540ee40882104"/>
 <section title="direction" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#aaf94a567d1e4472f488550ff60fefc2d"/>
 <section title="do_bend" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#a2ab1a9d884bd787abb7181109cb64966"/>
+<section title="draw_crossing_after" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#a548ac1b17e71b3f8621993cf75fbf0cc"/>
+<section title="draw_crossing_before" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#a8e7c794b2945c8924b445d6d2de01c14"/>
+<section title="draw_lock" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#ab6091b95877f51acb9fa730a7e22b58b"/>
 <section title="expandable" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#abe4e357536008d37be297be6e92c4176"/>
 <section title="extensions" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#a93d69cb37833ea6002997072534f3834"/>
 <section title="has_crossing" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#a1b33a032378c455c1fc54e3b4742b603"/>
@@ -5094,7 +5100,10 @@
 <keyword name="DoubleCrossSwitch(ModelRailway *model_railway, Section *model_section, const QDomElement &amp;element)" id="mrw::model::DoubleCrossSwitch::DoubleCrossSwitch_a184aa90105fe584a6e06ca900c3aebc0" ref="df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a184aa90105fe584a6e06ca900c3aebc0"/>
 <keyword name="DoubleCrossSwitchController(QObject *parent=nullptr)" id="mrw::ctrl::DoubleCrossSwitchController::DoubleCrossSwitchController_a26140b0363e5246bab584337394dcfbf" ref="d6/d4e/classmrw_1_1ctrl_1_1DoubleCrossSwitchController.html#a26140b0363e5246bab584337394dcfbf"/>
 <keyword name="DoubleCrossSwitchWidget(QWidget *parent=nullptr, mrw::ctrl::DoubleCrossSwitchController *controller=nullptr)" id="mrw::ui::DoubleCrossSwitchWidget::DoubleCrossSwitchWidget_a0eb7dac5823f46ed82990e55e60d1ea5" ref="d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html#a0eb7dac5823f46ed82990e55e60d1ea5"/>
+<keyword name="draw_crossing_after" id="mrw::ui::RailWidget::Status::draw_crossing_after_a548ac1b17e71b3f8621993cf75fbf0cc" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#a548ac1b17e71b3f8621993cf75fbf0cc"/>
+<keyword name="draw_crossing_before" id="mrw::ui::RailWidget::Status::draw_crossing_before_a8e7c794b2945c8924b445d6d2de01c14" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#a8e7c794b2945c8924b445d6d2de01c14"/>
 <keyword name="draw_distant" id="mrw::ui::SignalWidget::Status::draw_distant_a4e2055f578c3cbccd22f5d58b80dfe72" ref="d7/dc3/structmrw_1_1ui_1_1SignalWidget_1_1Status.html#a4e2055f578c3cbccd22f5d58b80dfe72"/>
+<keyword name="draw_lock" id="mrw::ui::RailWidget::Status::draw_lock_ab6091b95877f51acb9fa730a7e22b58b" ref="de/d01/structmrw_1_1ui_1_1RailWidget_1_1Status.html#ab6091b95877f51acb9fa730a7e22b58b"/>
 <keyword name="draw_lock" id="mrw::ui::SignalWidget::Status::draw_lock_a5befd09d4b286ad751efe0e0870cba0e" ref="d7/dc3/structmrw_1_1ui_1_1SignalWidget_1_1Status.html#a5befd09d4b286ad751efe0e0870cba0e"/>
 <keyword name="draw_shunt" id="mrw::ui::SignalWidget::Status::draw_shunt_a77f8f9b723f689f4eccf8fe8cbb1d274" ref="d7/dc3/structmrw_1_1ui_1_1SignalWidget_1_1Status.html#a77f8f9b723f689f4eccf8fe8cbb1d274"/>
 <keyword name="drawConnectors(QPainter &amp;painter)" id="mrw::ui::ControllerWidget::drawConnectors_a6d1e323cd00d25421f3085746449cf4a" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a6d1e323cd00d25421f3085746449cf4a"/>
@@ -5949,15 +5958,15 @@
 <file>RSwitch_AC_IR_RUF.jpg</file>
 <file>RSwitch_AC_nL_RUF.jpg</file>
 <file>RSwitch_AC_nR_RUF.jpg</file>
-<file>Rail____AS_RUF.jpg</file>
-<file>Rail____BS_RUF.jpg</file>
-<file>Rail____IL_RUF.jpg</file>
-<file>Rail____IR_RUF.jpg</file>
-<file>Rail____IS_RUF.jpg</file>
-<file>Rail____IS_RUO.jpg</file>
-<file>Rail____IS_RUP.jpg</file>
-<file>Rail____IS_RUS.jpg</file>
-<file>Rail____IS_RUT.jpg</file>
+<file>Rail____AS__RUF.jpg</file>
+<file>Rail____BS__RUF.jpg</file>
+<file>Rail____IL__RUF.jpg</file>
+<file>Rail____IR__RUF.jpg</file>
+<file>Rail____IS__RUF.jpg</file>
+<file>Rail____IS__RUO.jpg</file>
+<file>Rail____IS__RUP.jpg</file>
+<file>Rail____IS__RUS.jpg</file>
+<file>Rail____IS__RUT.jpg</file>
 <file>Signal__GG__RLT.jpg</file>
 <file>Signal__GS__RLT.jpg</file>
 <file>Signal__G___RLT.jpg</file>
