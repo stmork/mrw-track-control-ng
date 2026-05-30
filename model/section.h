@@ -31,40 +31,43 @@ namespace mrw::model
 	class Signal;
 	class Crossing;
 
+	/**
+	 * This enumeration describes the possible internal Section states.
+	 */
 	enum class SectionState : int
 	{
 		/**
 		 * The Section is in free/available state.
 		 *
-		 * <img src="Rail____IS_RUF.jpg" width="100"/>
+		 * <img src="Rail____IS__RUF.jpg" width="100"/>
 		 */
 		FREE = 0,
 
 		/**
 		 * The section is reserved for shunting.
 		 *
-		 * <img src="Rail____IS_RUS.jpg" width="100"/>
+		 * <img src="Rail____IS__RUS.jpg" width="100"/>
 		 */
 		SHUNTING,
 
 		/**
 		 * The section is reserved for a tour.
 		 *
-		 * <img src="Rail____IS_RUT.jpg" width="100"/>
+		 * <img src="Rail____IS__RUT.jpg" width="100"/>
 		 */
 		TOUR,
 
 		/**
 		 * The section is occupied by a train.
 		 *
-		 * <img src="Rail____IS_RUO.jpg" width="100"/>
+		 * <img src="Rail____IS__RUO.jpg" width="100"/>
 		 */
 		OCCUPIED,
 
 		/**
 		 * The section has left by a train and is still reserved.
 		 *
-		 * <img src="Rail____IS_RUP.jpg" width="100"/>
+		 * <img src="Rail____IS__RUP.jpg" width="100"/>
 		 */
 		PASSED
 	};
@@ -177,6 +180,7 @@ namespace mrw::model
 		 * SectionState::OCCUPIED regardless on the real SectionState.
 		 *
 		 * @return The SectionState of this Section.
+		 * @see SectionState
 		 */
 		SectionState state() const noexcept;
 
@@ -188,6 +192,7 @@ namespace mrw::model
 		 * SectionState::PASSED to mark the Section reserved.
 		 *
 		 * @param input The new SectionState to set.
+		 * @see SectionState
 		 */
 		void setState(const SectionState input) noexcept;
 

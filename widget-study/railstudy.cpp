@@ -205,9 +205,10 @@ QString RailStudy::name() const
 	RailController::Status status;
 
 	mock.status(status);
-	return QString("Rail____%1%2_%3%4%5").
+	return QString("Rail____%1%2_%3%4%5%6").
 		arg(code(status.a_ends, status.b_ends)).
 		arg(code(status.bending)).
+		arg(status.has_crossing ? "X" : "_").
 		arg(direction(status.direction)).
 		arg(lockState(status.lock_state)).
 		arg(sectionState(status.section_state));
