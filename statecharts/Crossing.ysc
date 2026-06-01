@@ -249,7 +249,7 @@
                         <children xsi:type="notation:Shape" xmi:id="_6gd7QFsxEfG1b9oljMmyzw" type="Choice" element="_6ga38FsxEfG1b9oljMmyzw" fontName="Verdana" lineColor="4210752">
                           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_6gd7QVsxEfG1b9oljMmyzw" x="79" y="129" width="27" height="27"/>
                         </children>
-                        <children xsi:type="notation:Shape" xmi:id="_SPRdcFszEfG1b9oljMmyzw" type="Note" fontName="Verdana" description="This may occur when&#xA;a new route starts&#xA;during closing." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+                        <children xsi:type="notation:Shape" xmi:id="_SPRdcFszEfG1b9oljMmyzw" type="Note" fontName="Verdana" description="This may occur when&#xA;a new route starts&#xA;during opening." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
                           <children xsi:type="notation:BasicDecorationNode" xmi:id="_SPSrkFszEfG1b9oljMmyzw" type="DiagramName">
                             <element xsi:nil="true"/>
                           </children>

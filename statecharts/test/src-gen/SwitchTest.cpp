@@ -943,7 +943,7 @@ namespace
 
 	void SwitchTest::turning()
 	{
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending));
 
 		EXPECT_TRUE(incMock->calledAtLeastOnce());
 
@@ -1143,9 +1143,9 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating));
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending));
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Left));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turn_Left));
 
 		EXPECT_TRUE(incMock->calledAtLeastOnce());
 
@@ -1172,9 +1172,9 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating));
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending));
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Right));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turn_Right));
 
 		EXPECT_TRUE(incMock->calledAtLeastOnce());
 
@@ -1191,7 +1191,7 @@ namespace
 	{
 		turnLeft();
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Left));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turn_Left));
 
 		isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
 
@@ -1201,9 +1201,9 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating));
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending));
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Pending));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turning));
 
 		statechart->raiseLeftResponse();
 
@@ -1220,7 +1220,7 @@ namespace
 	{
 		turnRight();
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Right));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turn_Right));
 
 		isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
 
@@ -1230,9 +1230,9 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating));
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending));
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Pending));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turning));
 
 		statechart->raiseRightResponse();
 
@@ -1249,7 +1249,7 @@ namespace
 	{
 		turnLeft();
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Left));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turn_Left));
 
 		isFreeMock->setDefaultBehavior(&IsFreeMock::isFree1);
 
@@ -1259,9 +1259,9 @@ namespace
 
 		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating));
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending));
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Pending));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turning));
 
 		statechart->raiseLeftResponse();
 
@@ -1276,7 +1276,7 @@ namespace
 	{
 		turnRight();
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Right));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turn_Right));
 
 		isFreeMock->setDefaultBehavior(&IsFreeMock::isFree1);
 
@@ -1284,7 +1284,7 @@ namespace
 
 		statechart->raiseQueued();
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Pending));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turning));
 
 		statechart->raiseLeftResponse();
 
@@ -1297,7 +1297,7 @@ namespace
 	{
 		turnLeft();
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Left));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turn_Left));
 
 		isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
 
@@ -1316,7 +1316,7 @@ namespace
 	{
 		turnRight();
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Right));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turn_Right));
 
 		isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
 
@@ -1335,7 +1335,7 @@ namespace
 	{
 		turnLeft();
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Left));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turn_Left));
 
 		isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
 
@@ -1350,7 +1350,7 @@ namespace
 	{
 		turnRight();
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Right));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turn_Right));
 
 		statechart->raiseFailed();
 
@@ -1361,7 +1361,7 @@ namespace
 	{
 		turnLeft();
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Left));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turn_Left));
 
 		isFreeMock->setDefaultBehavior(&IsFreeMock::isFree2);
 
@@ -1376,7 +1376,7 @@ namespace
 	{
 		turnRight();
 
-		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Turning_Turning_process_Turn_Right));
+		EXPECT_TRUE(statechart->isStateActive(mrw::statechart::SwitchStatechart::State::main_region_Operating_operating_Pending_Turning_process_Turn_Right));
 
 		runner->proceed_time(statechart->getTimeout());
 
