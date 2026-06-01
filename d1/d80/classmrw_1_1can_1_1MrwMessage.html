@@ -139,8 +139,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aadd7638b3c8eb8eb4575580c5394edf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This constructor creates a response <a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html" title="This class represents a CAN bus frame in model railway manner.">MrwMessage</a> using always an extended frame format.  <br /></td></tr>
 <tr class="memitem:a0895080730cbc5ddc088da0e5813ee7d" id="r_a0895080730cbc5ddc088da0e5813ee7d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a0895080730cbc5ddc088da0e5813ee7d">MrwMessage</a> (const QCanBusFrame &amp;frame)</td></tr>
 <tr class="memdesc:a0895080730cbc5ddc088da0e5813ee7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This constructor parses a receive CAN frame.  <br /></td></tr>
-<tr class="memitem:a6348ec130e3c76e509c93f91618f1214" id="r_a6348ec130e3c76e509c93f91618f1214"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a6348ec130e3c76e509c93f91618f1214">eid</a> () const noexcept</td></tr>
-<tr class="memitem:ab87d09e803430aa877df53387b169de1" id="r_ab87d09e803430aa877df53387b169de1"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#ab87d09e803430aa877df53387b169de1">sid</a> () const noexcept</td></tr>
+<tr class="memitem:a628226e872ff96330efdc30b900e1f9e" id="r_a628226e872ff96330efdc30b900e1f9e"><td class="memItemLeft">std::uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a628226e872ff96330efdc30b900e1f9e">eid</a> () const noexcept</td></tr>
+<tr class="memitem:a871420a7a74e5837769c1fa4268a1903" id="r_a871420a7a74e5837769c1fa4268a1903"><td class="memItemLeft">std::uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a871420a7a74e5837769c1fa4268a1903">sid</a> () const noexcept</td></tr>
 <tr class="memitem:aec1ba78b7fa70c52566d4727eb7090ed" id="r_aec1ba78b7fa70c52566d4727eb7090ed"><td class="memItemLeft">quint32&#160;</td><td class="memItemRight"><a class="el" href="#aec1ba78b7fa70c52566d4727eb7090ed">id</a> () const noexcept</td></tr>
 <tr class="memitem:a92096a014295e7c48f83d69917df0969" id="r_a92096a014295e7c48f83d69917df0969"><td class="memItemLeft"><a class="el" href="../../d9/d9b/namespacemrw_1_1can.html#aadc3657d376a3c081b9b0c05feafbce7">UnitNo</a>&#160;</td><td class="memItemRight"><a class="el" href="#a92096a014295e7c48f83d69917df0969">unitNo</a> () const noexcept</td></tr>
 <tr class="memdesc:a92096a014295e7c48f83d69917df0969"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">mrw::model::Device</a> unit number.  <br /></td></tr>
@@ -153,12 +153,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a600681d641d8c896e7a8654ee84f2a34" id="r_a600681d641d8c896e7a8654ee84f2a34"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a600681d641d8c896e7a8654ee84f2a34">operator QCanBusFrame</a> () const noexcept</td></tr>
 <tr class="memdesc:a600681d641d8c896e7a8654ee84f2a34"><td class="mdescLeft">&#160;</td><td class="mdescRight">This cast operator converts this <a class="el" href="../../d1/d80/classmrw_1_1can_1_1MrwMessage.html" title="This class represents a CAN bus frame in model railway manner.">MrwMessage</a> into a CAN bus frame ready for sending.  <br /></td></tr>
 <tr class="memitem:a6bc36589acbc90c1d7437b643e6dff5e" id="r_a6bc36589acbc90c1d7437b643e6dff5e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6bc36589acbc90c1d7437b643e6dff5e">isResponse</a> () const noexcept</td></tr>
-<tr class="memitem:a64e2ae4e67cccbaedc05cb290611a1aa" id="r_a64e2ae4e67cccbaedc05cb290611a1aa"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a64e2ae4e67cccbaedc05cb290611a1aa">operator[]</a> (const size_t index) const</td></tr>
-<tr class="memdesc:a64e2ae4e67cccbaedc05cb290611a1aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a payload byte.  <br /></td></tr>
-<tr class="memitem:ad9c105a29f210259dbda59c4d39c566d" id="r_ad9c105a29f210259dbda59c4d39c566d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad9c105a29f210259dbda59c4d39c566d">append</a> (const uint8_t input)</td></tr>
-<tr class="memdesc:ad9c105a29f210259dbda59c4d39c566d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method appends a payload byte.  <br /></td></tr>
-<tr class="memitem:a0021b4ca7d4936a10520582db11351e5" id="r_a0021b4ca7d4936a10520582db11351e5"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a0021b4ca7d4936a10520582db11351e5">size</a> () const noexcept</td></tr>
-<tr class="memdesc:a0021b4ca7d4936a10520582db11351e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the size of the payload.  <br /></td></tr>
+<tr class="memitem:a3cdabcde9cd48ed3b4ed47812277bf1c" id="r_a3cdabcde9cd48ed3b4ed47812277bf1c"><td class="memItemLeft">std::uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a3cdabcde9cd48ed3b4ed47812277bf1c">operator[]</a> (const std::size_t index) const</td></tr>
+<tr class="memdesc:a3cdabcde9cd48ed3b4ed47812277bf1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a payload byte.  <br /></td></tr>
+<tr class="memitem:abfb9bbc51a65c465e6013e5ef88110e4" id="r_abfb9bbc51a65c465e6013e5ef88110e4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abfb9bbc51a65c465e6013e5ef88110e4">append</a> (const std::uint8_t input)</td></tr>
+<tr class="memdesc:abfb9bbc51a65c465e6013e5ef88110e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method appends a payload byte.  <br /></td></tr>
+<tr class="memitem:a6dfe88118ba427a2365b09878756ce21" id="r_a6dfe88118ba427a2365b09878756ce21"><td class="memItemLeft">std::size_t&#160;</td><td class="memItemRight"><a class="el" href="#a6dfe88118ba427a2365b09878756ce21">size</a> () const noexcept</td></tr>
+<tr class="memdesc:a6dfe88118ba427a2365b09878756ce21"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the size of the payload.  <br /></td></tr>
 <tr class="memitem:a76e903a76b1f572d7e4a0c3863b53cfe" id="r_a76e903a76b1f572d7e4a0c3863b53cfe"><td class="memItemLeft">QString&#160;</td><td class="memItemRight"><a class="el" href="#a76e903a76b1f572d7e4a0c3863b53cfe">toString</a> () const noexcept override</td></tr>
 <tr class="memdesc:a76e903a76b1f572d7e4a0c3863b53cfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the contents of this instance in human readable form as QString.  <br /></td></tr>
 <tr class="memitem:a52d7f4538b30867ad6e37ccd3d2e7aaf" id="r_a52d7f4538b30867ad6e37ccd3d2e7aaf"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="../../d0/d55/classmrw_1_1util_1_1String.html#a52d7f4538b30867ad6e37ccd3d2e7aaf">operator QString</a> () const noexcept</td></tr>
@@ -402,8 +402,8 @@ Static Public Attributes</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="ad9c105a29f210259dbda59c4d39c566d" name="ad9c105a29f210259dbda59c4d39c566d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9c105a29f210259dbda59c4d39c566d">&#9670;&#160;</a></span>append()</h2>
+<a id="abfb9bbc51a65c465e6013e5ef88110e4" name="abfb9bbc51a65c465e6013e5ef88110e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfb9bbc51a65c465e6013e5ef88110e4">&#9670;&#160;</a></span>append()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -411,7 +411,7 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">void MrwMessage::append </td>
           <td>(</td>
-          <td class="paramtype">const uint8_t</td>          <td class="paramname"><span class="paramname"><em>input</em></span></td><td>)</td>
+          <td class="paramtype">const std::uint8_t</td>          <td class="paramname"><span class="paramname"><em>input</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -499,8 +499,8 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6348ec130e3c76e509c93f91618f1214" name="a6348ec130e3c76e509c93f91618f1214"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6348ec130e3c76e509c93f91618f1214">&#9670;&#160;</a></span>eid()</h2>
+<a id="a628226e872ff96330efdc30b900e1f9e" name="a628226e872ff96330efdc30b900e1f9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a628226e872ff96330efdc30b900e1f9e">&#9670;&#160;</a></span>eid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -509,7 +509,7 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t MrwMessage::eid </td>
+          <td class="memname">std::uint16_t MrwMessage::eid </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -710,16 +710,16 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a64e2ae4e67cccbaedc05cb290611a1aa" name="a64e2ae4e67cccbaedc05cb290611a1aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64e2ae4e67cccbaedc05cb290611a1aa">&#9670;&#160;</a></span>operator[]()</h2>
+<a id="a3cdabcde9cd48ed3b4ed47812277bf1c" name="a3cdabcde9cd48ed3b4ed47812277bf1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cdabcde9cd48ed3b4ed47812277bf1c">&#9670;&#160;</a></span>operator[]()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t MrwMessage::operator[] </td>
+          <td class="memname">std::uint8_t MrwMessage::operator[] </td>
           <td>(</td>
-          <td class="paramtype">const size_t</td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td class="paramtype">const std::size_t</td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -808,8 +808,8 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab87d09e803430aa877df53387b169de1" name="ab87d09e803430aa877df53387b169de1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab87d09e803430aa877df53387b169de1">&#9670;&#160;</a></span>sid()</h2>
+<a id="a871420a7a74e5837769c1fa4268a1903" name="a871420a7a74e5837769c1fa4268a1903"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a871420a7a74e5837769c1fa4268a1903">&#9670;&#160;</a></span>sid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -818,7 +818,7 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t MrwMessage::sid </td>
+          <td class="memname">std::uint16_t MrwMessage::sid </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -833,8 +833,8 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0021b4ca7d4936a10520582db11351e5" name="a0021b4ca7d4936a10520582db11351e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0021b4ca7d4936a10520582db11351e5">&#9670;&#160;</a></span>size()</h2>
+<a id="a6dfe88118ba427a2365b09878756ce21" name="a6dfe88118ba427a2365b09878756ce21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dfe88118ba427a2365b09878756ce21">&#9670;&#160;</a></span>size()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -843,7 +843,7 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t MrwMessage::size </td>
+          <td class="memname">std::size_t MrwMessage::size </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
