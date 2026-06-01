@@ -197,7 +197,7 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 	}
 }
 
-uint16_t MrwMessage::eid() const noexcept
+std::uint16_t MrwMessage::eid() const noexcept
 {
 	if (is_response)
 	{
@@ -213,7 +213,7 @@ uint16_t MrwMessage::eid() const noexcept
 	}
 }
 
-uint16_t MrwMessage::sid() const noexcept
+std::uint16_t MrwMessage::sid() const noexcept
 {
 	return dst;
 }
@@ -246,7 +246,7 @@ bool MrwMessage::valid() const noexcept
 	}
 }
 
-uint8_t MrwMessage::operator[](const size_t index) const
+std::uint8_t MrwMessage::operator [](const std::size_t index) const
 {
 	if (index >= max())
 	{
@@ -341,7 +341,7 @@ QString MrwMessage::toString() const noexcept
 
 void MrwMessage::append(const uint8_t input)
 {
-	const size_t s = start();
+	const std::size_t s = start();
 
 	if (len < 8)
 	{
@@ -353,7 +353,7 @@ void MrwMessage::append(const uint8_t input)
 	}
 }
 
-size_t MrwMessage::size() const noexcept
+std::size_t MrwMessage::size() const noexcept
 {
 	return len - start();
 }
@@ -365,22 +365,22 @@ QString MrwMessage::get(const SignalAspect state) noexcept
 
 void MrwMessage::copy(QByteArray & array) const noexcept
 {
-	const size_t s = start();
+	const std::size_t s = start();
 
-	for (size_t i = s; i < len; i++)
+	for (std::size_t i = s; i < len; i++)
 	{
 		array.append(info[i - s]);
 	}
 }
 
-size_t MrwMessage::max() const noexcept
+std::size_t MrwMessage::max() const noexcept
 {
-	const size_t s = start();
+	const std::size_t s = start();
 
 	return len < s ? 0 : len - s;
 }
 
-size_t MrwMessage::start() const noexcept
+std::size_t MrwMessage::start() const noexcept
 {
 	return is_response ? IDX_RESPONSE_SIZE : IDX_COMMAND_SIZE;
 }

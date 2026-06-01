@@ -258,7 +258,7 @@ void TestUtil::testRandom()
 
 void TestUtil::testDumpHandler()
 {
-	size_t       count = 0;
+	std::size_t       count = 0;
 	TermHandler  term_handler;
 	DumpHandler  dump_handler( [&] ()
 	{
@@ -351,9 +351,9 @@ void TestUtil::testResetBatch()
 	QSignalSpy      completed(&GlobalBatch::instance(), &GlobalBatch::completed);
 	std::vector<TestParticipant> participants;
 
-	const size_t max = 100;
+	const std::size_t max = 100;
 	participants.reserve(max);
-	for (size_t i = 0; i < max; i++)
+	for (std::size_t i = 0; i < max; i++)
 	{
 		participants.emplace_back(TestParticipant(QString::asprintf("%04zu", i)));
 	}
@@ -441,9 +441,9 @@ void TestUtil::testUnsetCustomBatch()
 {
 	std::vector<TestParticipant> participants;
 
-	const size_t max = 100;
+	const std::size_t max = 100;
 	participants.reserve(max);
-	for (size_t i = 0; i < max; i++)
+	for (std::size_t i = 0; i < max; i++)
 	{
 		participants.emplace_back(TestParticipant(QString::asprintf("%04zu", i)));
 	}
@@ -474,9 +474,9 @@ void TestUtil::testResetCustomBatch()
 	QSignalSpy                   completed(&batch, &TestBatch::completed);
 	std::vector<TestParticipant> participants;
 
-	const size_t max = 100;
+	const std::size_t max = 100;
 	participants.reserve(max);
-	for (size_t i = 0; i < max; i++)
+	for (std::size_t i = 0; i < max; i++)
 	{
 		participants.emplace_back(TestParticipant(QString::asprintf("%04zu", i)));
 	}
@@ -552,7 +552,7 @@ void TestUtil::testHexLine()
 	QCOMPARE(line.getAddress(), unsigned(0x1234));
 	QVERIFY(line);
 	line.append(buffer);
-	QCOMPARE(buffer.size(), size_t(2));
+	QCOMPARE(buffer.size(), std::size_t(2));
 	QCOMPARE(buffer[0], 0xff);
 	QCOMPARE(buffer[1], 0x00);
 
@@ -575,7 +575,7 @@ void TestUtil::testCleanVector()
 
 	container.push_back(a);
 	container.push_back(b);
-	QCOMPARE(container.size(), size_t(2));
+	QCOMPARE(container.size(), std::size_t(2));
 }
 
 void TestUtil::testSharedVector()

@@ -41,6 +41,8 @@ void TestCrossing::testDown()
 	Crossing * crossing = model->connection(0, 0)->crossing(0);
 
 	QVERIFY(crossing != nullptr);
+	QVERIFY(crossing->name().size() > 0);
+	QVERIFY(crossing->isUnlockable());
 	QVERIFY(!crossing->isUsed());
 }
 

@@ -19,9 +19,9 @@ namespace mrw::can
 {
 	Q_DECLARE_LOGGING_CATEGORY(log)
 
-	static constexpr uint16_t CAN_SID_MASK         = 0x07ff;
-	static constexpr uint16_t CAN_EID_UNITNO_MASK  = 0xffff;
-	static constexpr size_t   CAN_SID_SHIFT        = 18;
+	static constexpr std::uint16_t CAN_SID_MASK         = 0x07ff;
+	static constexpr std::uint16_t CAN_EID_UNITNO_MASK  = 0xffff;
+	static constexpr std::size_t   CAN_SID_SHIFT        = 18;
 
 	/**
 	 * This class represents a CAN bus frame in model railway manner. It may
@@ -60,10 +60,10 @@ namespace mrw::can
 
 		Command                    msg_command;
 		Response                   msg_response;
-		size_t                     len;
+		std::size_t                len;
 		bool                       is_response;
 		bool                       is_extended;
-		uint8_t                    info[8];
+		std::uint8_t               info[8];
 
 	public:
 		/**
@@ -120,9 +120,9 @@ namespace mrw::can
 		 */
 		explicit MrwMessage(const QCanBusFrame & frame);
 
-		uint16_t eid() const noexcept;
-		uint16_t sid() const noexcept;
-		quint32  id()  const noexcept;
+		std::uint16_t eid() const noexcept;
+		std::uint16_t sid() const noexcept;
+		quint32       id()  const noexcept;
 
 		/**
 		 * This method returns the mrw::model::Device unit number. In case of a
@@ -191,7 +191,7 @@ namespace mrw::can
 		 * @return The accessed payload byte.
 		 * @exception std::out_of_range if the index exceeds the payload range.
 		 */
-		uint8_t operator[] (const size_t index) const;
+		std::uint8_t operator[] (const std::size_t index) const;
 
 		/**
 		 * This method appends a payload byte. The payload is related to the
@@ -201,7 +201,7 @@ namespace mrw::can
 		 * @param input The byte to append to the payload.
 		 * @exception std::out:of:range If the payload exceeds available space.
 		 */
-		void append(const uint8_t input);
+		void append(const std::uint8_t input);
 
 		/**
 		 * This method returns the size of the payload.
@@ -210,7 +210,7 @@ namespace mrw::can
 		 *
 		 * @return The payload size in sense of this modelrailway.
 		 */
-		size_t size() const noexcept;
+		std::size_t size() const noexcept;
 
 		/**
 		 * This method returns the clear text QString of the SignalState.
@@ -223,9 +223,9 @@ namespace mrw::can
 		QString toString() const noexcept override;
 
 	private:
-		size_t max() const noexcept;
-		size_t start() const noexcept;
-		void   copy(QByteArray & array) const noexcept;
+		std::size_t max() const noexcept;
+		std::size_t start() const noexcept;
+		void        copy(QByteArray & array) const noexcept;
 	};
 }
 

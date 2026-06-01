@@ -59,7 +59,7 @@ Crossing * MultiplexConnection::crossing(const CrossingId index) const
 	return crossings.at(index);
 }
 
-size_t mrw::model::MultiplexConnection::crossingCount() const
+std::size_t MultiplexConnection::crossingCount() const
 {
 	return crossings.size();
 }

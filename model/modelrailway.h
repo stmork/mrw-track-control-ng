@@ -179,7 +179,7 @@ namespace mrw::model
 		 * @param index The zero based index of the Controller.
 		 * @return The found Controller instance.
 		 */
-		Controller * controller(const size_t index) const;
+		Controller * controller(const std::size_t index) const;
 
 		/**
 		 * This method returns a Controller instance based on its ID. This ID

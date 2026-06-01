@@ -186,7 +186,7 @@ void ModelRailway::info()
 	}
 }
 
-Controller * ModelRailway::controller(const size_t index) const
+Controller * ModelRailway::controller(const std::size_t index) const
 {
 	return controllers.at(index);
 }

@@ -223,14 +223,14 @@ void TestCan::testRequestPayload()
 	MrwMessage   message(PING);
 	uint8_t      bytes[7];
 
-	for (size_t t = 0; t < sizeof(bytes); t++)
+	for (std::size_t t = 0; t < sizeof(bytes); t++)
 	{
 		bytes[t] = 0x12 + t + 0x22;
 
 		QCOMPARE(message.size(), t);
 		MRW_THROWS_EXCEPTION(message[t], std::out_of_range);
 		message.append(bytes[t]);
-		for (size_t b = 0; b < t; b++)
+		for (std::size_t b = 0; b < t; b++)
 		{
 			QCOMPARE(message[b], bytes[b]);
 		}
@@ -242,7 +242,7 @@ void TestCan::testRequestPayload()
 	QByteArray   array(frame.payload());
 	QCOMPARE(array.size(), 8);
 	QCOMPARE(array.at(0), PING);
-	for (size_t t = 0; t < sizeof(bytes); t++)
+	for (std::size_t t = 0; t < sizeof(bytes); t++)
 	{
 		uint8_t byte = (unsigned)array.at(1 + t) & 0xff;
 
@@ -255,14 +255,14 @@ void TestCan::testResponsePayload()
 	MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, Response::MSG_OK);
 	uint8_t      bytes[4];
 
-	for (size_t t = 0; t < sizeof(bytes); t++)
+	for (std::size_t t = 0; t < sizeof(bytes); t++)
 	{
 		bytes[t] = 0x12 + t + 0x22;
 
 		QCOMPARE(message.size(), t);
 		MRW_THROWS_EXCEPTION(message[t], std::out_of_range);
 		message.append(bytes[t]);
-		for (size_t b = 0; b < t; b++)
+		for (std::size_t b = 0; b < t; b++)
 		{
 			QCOMPARE(message[b], bytes[b]);
 		}
@@ -277,7 +277,7 @@ void TestCan::testResponsePayload()
 	QCOMPARE(array.size(), 8);
 	QCOMPARE(command, SETLFT | CMD_RESPONSE);
 	QCOMPARE(Response(array.at(1)), Response::MSG_OK);
-	for (size_t t = 0; t < sizeof(bytes); t++)
+	for (std::size_t t = 0; t < sizeof(bytes); t++)
 	{
 		uint8_t byte = (unsigned)array.at(4 + t) & 0xff;
 
@@ -287,9 +287,9 @@ void TestCan::testResponsePayload()
 
 void TestCan::testCopyRequest()
 {
-	const size_t start = 1;
+	const std::size_t start = 1;
 
-	for (size_t i = start; i < 8; i++)
+	for (std::size_t i = start; i < 8; i++)
 	{
 		MrwMessage   message(PING);
 
@@ -311,21 +311,21 @@ void TestCan::testCopyRequest()
 
 		QVERIFY(!frame.hasExtendedFrameFormat());
 		QCOMPARE(frame.frameId(), CAN_BROADCAST_ID);
-		QCOMPARE((size_t)array.size(), i + 1);
+		QCOMPARE((std::size_t)array.size(), i + 1);
 		QCOMPARE(Command(array.at(0)), PING);
 
-		for (size_t v = start; v <= i; v++)
+		for (std::size_t v = start; v <= i; v++)
 		{
-			QCOMPARE((size_t)array.at(v), 0x11 * v);
+			QCOMPARE((std::size_t)array.at(v), 0x11 * v);
 		}
 	}
 }
 
 void TestCan::testCopyResponse()
 {
-	const size_t start = 4;
+	const std::size_t start = 4;
 
-	for (size_t i = start; i < 8; i++)
+	for (std::size_t i = start; i < 8; i++)
 	{
 		MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, Response::MSG_QUEUED);
 
@@ -347,13 +347,13 @@ void TestCan::testCopyResponse()
 
 		QVERIFY(frame.hasExtendedFrameFormat());
 		QCOMPARE(frame.frameId(), TEST_CTRL_ID);
-		QCOMPARE((size_t)array.size(), i + 1);
+		QCOMPARE((std::size_t)array.size(), i + 1);
 		QCOMPARE(Command( array.at(0)), SETLFT | CMD_RESPONSE);
 		QCOMPARE(Response(array.at(1)), Response::MSG_QUEUED);
 
-		for (size_t v = start; v <= i; v++)
+		for (std::size_t v = start; v <= i; v++)
 		{
-			QCOMPARE((size_t)array.at(v), 0x11 * v);
+			QCOMPARE((std::size_t)array.at(v), 0x11 * v);
 		}
 	}
 }
