@@ -87,9 +87,9 @@ var searchData=
   ['counter_84',['counter',['../db/d4f/classmrw_1_1model_1_1Position.html#a4d7793ec6944ee1f89dec89cc0ea8a12',1,'mrw::model::Position::counter'],['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3',1,'mrw::ui::ControllerWidget::counter']]],
   ['critical_85',['critical',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html#aba5378f886d45227cb61798c38d00d3f',1,'mrw::log::LoggerBase::critical()'],['../d1/d17/classmrw_1_1log_1_1StdLogger.html#ad4244fd80304223ea8d6e0d0370cef7d',1,'mrw::log::StdLogger::critical()'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a81d324a2f378dd1ebf56878d604def4b',1,'mrw::log::SysLogger::critical()']]],
   ['crossing_86',['Crossing',['../d6/d5c/classmrw_1_1model_1_1Crossing.html',1,'mrw::model::Crossing'],['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#ac274231929dceb8342d34aff23b2a608',1,'mrw::model::ModelRailway::Crossing()'],['../d6/d5c/classmrw_1_1model_1_1Crossing.html#aa0b3680f59d2137f8bc3f8d93125a992',1,'mrw::model::Crossing::Crossing()']]],
-  ['crossing_87',['crossing',['../dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a2a1a664fa1e2a5842dc9b1dc2948f996',1,'mrw::model::MultiplexConnection::crossing()'],['../de/de1/classmrw_1_1model_1_1Section.html#ad46a71912f7b3de1e7ad4791e1ec4a79',1,'mrw::model::Section::crossing()']]],
-  ['crossingcount_88',['crossingCount',['../dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#a74450c50a7a9397dc1f6f4d885ddc762',1,'mrw::model::MultiplexConnection']]],
-  ['crossingid_89',['CrossingId',['../d9/dbc/namespacemrw_1_1model.html#a5eac39705c21623d157d175879fd9c60',1,'mrw::model']]],
+  ['crossing_87',['crossing',['../de/de1/classmrw_1_1model_1_1Section.html#ad46a71912f7b3de1e7ad4791e1ec4a79',1,'mrw::model::Section']]],
+  ['crossingid_88',['CrossingId',['../d9/dbc/namespacemrw_1_1model.html#a5eac39705c21623d157d175879fd9c60',1,'mrw::model']]],
+  ['crossings_89',['crossings',['../dd/ddd/classmrw_1_1model_1_1MultiplexConnection.html#af54e5fe3e3dabf355f204f32bb8b39c1',1,'mrw::model::MultiplexConnection']]],
   ['crx_5fname_90',['crx_name',['../d6/d5c/classmrw_1_1model_1_1Crossing.html#a1ac759ca4b27a392d3630bc0d81ac57e',1,'mrw::model::Crossing']]],
   ['cutscope_91',['cutScope',['../d9/d2b/namespacemrw_1_1util.html#aecdce54a6519bb96fd87579c6ce38f8f',1,'mrw::util']]],
   ['cyan_5fon_92',['CYAN_ON',['../d0/d55/classmrw_1_1util_1_1String.html#a8026cc002373c31b4dc8193a2a1eb599',1,'mrw::util::String']]]
