@@ -38,7 +38,7 @@ void TestCrossing::testSimple()
 
 void TestCrossing::testDown()
 {
-	Crossing * crossing = model->connection(0, 0)->crossing(0);
+	Crossing * crossing = model->connection(0, 0)->crossings().at(0);
 
 	QVERIFY(crossing != nullptr);
 	QVERIFY(crossing->name().size() > 0);
@@ -48,7 +48,7 @@ void TestCrossing::testDown()
 
 void TestCrossing::testUpper()
 {
-	Crossing * crossing = model->connection(0, 0)->crossing(0);
+	Crossing * crossing = model->connection(0, 0)->crossings().at(0);
 	Rail   *   r11      = dynamic_cast<Rail *>(parts[0]);
 	Rail   *   r15      = dynamic_cast<Rail *>(parts[8]);
 
@@ -64,7 +64,7 @@ void TestCrossing::testUpper()
 
 void TestCrossing::testLower()
 {
-	Crossing * crossing = model->connection(0, 0)->crossing(0);
+	Crossing * crossing = model->connection(0, 0)->crossings().at(0);
 	Rail   *   r21      = dynamic_cast<Rail *>(parts[1]);
 	Rail   *   r25      = dynamic_cast<Rail *>(parts[9]);
 
@@ -80,7 +80,7 @@ void TestCrossing::testLower()
 
 void TestCrossing::testBoth()
 {
-	Crossing * crossing = model->connection(0, 0)->crossing(0);
+	Crossing * crossing = model->connection(0, 0)->crossings().at(0);
 	Rail   *   r11      = dynamic_cast<Rail *>(parts[0]);
 	Rail   *   r15      = dynamic_cast<Rail *>(parts[8]);
 	Rail   *   r21      = dynamic_cast<Rail *>(parts[1]);

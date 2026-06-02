@@ -39,9 +39,9 @@ namespace mrw::model
 		const QDomElement                 reference;
 		const ModuleId                    connection_id;
 
-		std::vector<LightSignal *>        light_signals;
-		mrw::util::CleanVector<Light>     simple_lights;
-		mrw::util::CleanVector<Crossing>  crossings;
+		std::vector<LightSignal *>        light_signal_vector;
+		mrw::util::CleanVector<Light>     simple_light_vector;
+		mrw::util::CleanVector<Crossing>  crossing_vector;
 
 	public:
 		/** The maximum light count connected to one module. */
@@ -63,17 +63,6 @@ namespace mrw::model
 		{
 			return connection_id;
 		}
-
-		/**
-		 * This method returns the nth Crossing.
-		 *
-		 * @param index The zero based index of connected MultiplexConnection
-		 * boards.
-		 * @return The found Crossing instance.
-		 */
-		Crossing * crossing(const CrossingId index) const;
-
-		size_t crossingCount() const;
 
 		/**
 		 * This method verifies if the amount of connected pins is modelled
@@ -99,6 +88,13 @@ namespace mrw::model
 		 * @return The vector of connected Light instances.
 		 */
 		const std::vector<Light *> & lights() const;
+
+		/**
+		 * This method returns the vector of connected Crossing instances.
+		 *
+		 * @return The vector of connected Crossing instances.
+		 */
+		const std::vector<Crossing *> & crossings() const;
 
 	private:
 		void link();

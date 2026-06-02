@@ -178,12 +178,12 @@ void MainWindow::initCrossings()
 		{
 			MultiplexConnection * connection = controller->connection(conn_idx);
 
-			for (size_t crx_idx = 0; crx_idx < connection->crossingCount(); crx_idx++)
+			for (Crossing * crossing : connection->crossings())
 			{
-				Crossing      *      crossing = connection->crossing(crx_idx);
-				CrossingController * ctrl     = new CrossingController(crossing, this);
+				CrossingController * ctrl = new CrossingController(crossing, this);
 
-				// TODO: Connect to RailController.
+				// The crossing controller registers itself and the
+				// SectionController picks it up later.
 				(void)ctrl;
 			}
 		}

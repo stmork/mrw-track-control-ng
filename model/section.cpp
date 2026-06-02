@@ -395,7 +395,7 @@ Crossing * Section::resolveCrossing(const std::string & path) noexcept
 
 		if (mux != nullptr)
 		{
-			return mux->crossing(crossing_idx);
+			return mux->crossings().at(crossing_idx);
 		}
 	}
 	return nullptr;

@@ -818,17 +818,9 @@ void TestModel::testCrossingConfig()
 			MultiplexConnection * module = controller->connection(m);
 
 			QVERIFY(module != nullptr);
-
-			const std::size_t crx_count = module->crossingCount();
-			for (CrossingId crx = 0; crx < crx_count; crx++)
-			{
-				Crossing * crossing = module->crossing(crx);
-
-				QVERIFY(crossing != nullptr);
-
-				crossings.push_back(crossing);
-			}
-			MRW_THROWS_EXCEPTION(module->crossing(crx_count), std::out_of_range);
+			std::copy(
+				module->crossings().begin(), module->crossings().end(),
+				std::back_inserter(crossings));
 		}
 		MRW_THROWS_EXCEPTION(controller->connection(mux_count), std::out_of_range);
 	}

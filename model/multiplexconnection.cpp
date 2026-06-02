@@ -24,7 +24,7 @@ MultiplexConnection::MultiplexConnection(
 {
 	const QDomNodeList & child_nodes = element.childNodes();
 
-	simple_lights.reserve(child_nodes.count());
+	simple_light_vector.reserve(child_nodes.count());
 	for (int n = 0; n < child_nodes.count(); ++n)
 	{
 		const QDomNode & node = child_nodes.at(n);
@@ -38,13 +38,13 @@ MultiplexConnection::MultiplexConnection(
 			{
 				Light * light = new Light(model, controller, child);
 
-				simple_lights.push_back(light);
+				simple_light_vector.push_back(light);
 			}
 			else if (node_name == "crossing")
 			{
 				Crossing * crossing = new Crossing(model, controller, child);
 
-				crossings.push_back(crossing);
+				crossing_vector.push_back(crossing);
 			}
 			else
 			{
@@ -54,21 +54,11 @@ MultiplexConnection::MultiplexConnection(
 	}
 }
 
-Crossing * MultiplexConnection::crossing(const CrossingId index) const
-{
-	return crossings.at(index);
-}
-
-std::size_t MultiplexConnection::crossingCount() const
-{
-	return crossings.size();
-}
-
 bool MultiplexConnection::valid() const
 {
-	size_t pins = simple_lights.size();
+	size_t pins = simple_light_vector.size();
 
-	for (LightSignal * signal : light_signals)
+	for (LightSignal * signal : light_signal_vector)
 	{
 		if (signal == nullptr)
 		{
@@ -81,7 +71,7 @@ bool MultiplexConnection::valid() const
 		pins += signal->usedPins();
 	}
 
-	for (Crossing * crossing : crossings)
+	for (Crossing * crossing : crossing_vector)
 	{
 		if (!crossing->valid())
 		{
@@ -100,7 +90,12 @@ bool MultiplexConnection::isValid(const MultiplexConnection * conn) noexcept
 
 const std::vector<Light *> & MultiplexConnection::lights() const
 {
-	return simple_lights;
+	return simple_light_vector;
+}
+
+const std::vector<Crossing *> & mrw::model::MultiplexConnection::crossings() const
+{
+	return crossing_vector;
 }
 
 void MultiplexConnection::configure(
@@ -109,7 +104,7 @@ void MultiplexConnection::configure(
 {
 	unsigned pin = offset;
 
-	for (const LightSignal * light_signal : light_signals)
+	for (const LightSignal * light_signal : light_signal_vector)
 	{
 		const MrwMessage msg = light_signal->configMsg(pin);
 
@@ -117,7 +112,7 @@ void MultiplexConnection::configure(
 		pin += light_signal->usedPins();
 	}
 
-	for (const Light * light : simple_lights)
+	for (const Light * light : simple_light_vector)
 	{
 		const MrwMessage msg = light->configMsg(pin);
 
@@ -125,7 +120,7 @@ void MultiplexConnection::configure(
 		pin++;
 	}
 
-	for (const Crossing * crossing : crossings)
+	for (const Crossing * crossing : crossing_vector)
 	{
 		const MrwMessage msg = crossing->configMsg(pin);
 
@@ -142,6 +137,6 @@ void MultiplexConnection::link()
 	{
 		LightSignal * signal = dynamic_cast<LightSignal *>(AssemblyPart::resolve(model, signal_reference));
 
-		light_signals.push_back(signal);
+		light_signal_vector.push_back(signal);
 	}
 }
