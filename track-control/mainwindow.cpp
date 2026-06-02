@@ -23,9 +23,7 @@
 
 #include <model/modelrailway.h>
 #include <ctrl/controllerregistry.h>
-#include <ctrl/basecontroller.h>
 #include <ctrl/railcontroller.h>
-#include <ctrl/crossingcontroller.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
 #include <ctrl/signalcontrollerproxy.h>
@@ -73,7 +71,6 @@ MainWindow::MainWindow(
 
 	ui->setupUi(this);
 	setWindowTitle("Modelbased railway control (next generation) - " + repository.modelName());
-	initCrossings();
 	initRegion(dispatcher);
 	BeerModeService::instance().init(repo);
 
@@ -164,30 +161,6 @@ void MainWindow::disableBeerMode()
 {
 	ui->actionBeermodeLeft->setChecked(false);
 	ui->actionBeermodeRight->setChecked(false);
-}
-
-void MainWindow::initCrossings()
-{
-	ModelRailway * model = repo;
-
-	for (size_t ctrl_idx = 0; ctrl_idx < model->controllerCount(); ctrl_idx++)
-	{
-		Controller * controller = model->controller(ctrl_idx);
-
-		for (size_t conn_idx = 0; conn_idx < controller->connectionCount(); conn_idx++)
-		{
-			MultiplexConnection * connection = controller->connection(conn_idx);
-
-			for (Crossing * crossing : connection->crossings())
-			{
-				CrossingController * ctrl = new CrossingController(crossing, this);
-
-				// The crossing controller registers itself and the
-				// SectionController picks it up later.
-				(void)ctrl;
-			}
-		}
-	}
 }
 
 void MainWindow::initRegion(const MrwMessageDispatcher & dispatcher)

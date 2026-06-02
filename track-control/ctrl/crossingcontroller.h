@@ -27,7 +27,7 @@ namespace mrw::ctrl
 		Q_OBJECT
 	private:
 		mrw::statechart::QtStatechart<mrw::statechart::CrossingStatechart>  statechart;
-		mrw::model::Crossing                        *                       ctrl_crossing = nullptr;
+		mrw::model::Crossing                        *                       crossing = nullptr;
 
 	public:
 		CrossingController() = delete;
@@ -40,6 +40,7 @@ namespace mrw::ctrl
 		void action();
 		void start();
 		void update();
+		void failed();
 
 	private:
 		// Implementations from BaseController

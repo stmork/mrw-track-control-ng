@@ -28,9 +28,19 @@ SectionController::SectionController(
 {
 	ControllerRegistry::instance().registerController(ctrl_section, this);
 
-	ctrl_crossing = ControllerRegistry::instance().find<CrossingController>(section()->crossing());
-	if (ctrl_crossing != nullptr)
+	if (section()->crossing() != nullptr)
 	{
+		ctrl_crossing = ControllerRegistry::instance().find<CrossingController>(section()->crossing());
+
+		if (ctrl_crossing == nullptr)
+		{
+			ctrl_crossing = new CrossingController(section()->crossing(), parent);
+		}
+
+		connect(
+			ctrl_crossing, &CrossingController::failed,
+			this, &SectionController::failed,
+			Qt::QueuedConnection);
 		connect(
 			&statechart, &SectionStatechart::unregister,
 			ctrl_crossing, &CrossingController::action,

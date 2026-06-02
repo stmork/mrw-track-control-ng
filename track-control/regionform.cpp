@@ -3,10 +3,12 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
-#include <ctrl/regularswitchcontrollerproxy.h>
+#include <ctrl/crossingcontroller.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
-#include <ctrl/signalcontrollerproxy.h>
+#include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/railcontrollerproxy.h>
+#include <ctrl/signalcontrollerproxy.h>
+#include <ctrl/sectioncontroller.h>
 
 #include <ui/railwidget.h>
 #include <ui/signalwidget.h>

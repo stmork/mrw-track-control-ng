@@ -19,9 +19,9 @@ CrossingController::CrossingController(
 	mrw::model::Crossing * input,
 	QObject        *       parent) :
 	BaseController(parent),
-	ctrl_crossing(input)
+	crossing(input)
 {
-	ControllerRegistry::instance().registerController(ctrl_crossing, this);
+	ControllerRegistry::instance().registerController(crossing, this);
 
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::clear,
@@ -30,6 +30,11 @@ CrossingController::CrossingController(
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::start,
 		&statechart, &CrossingStatechart::start,
+		Qt::QueuedConnection);
+
+	connect(
+		&statechart, &CrossingStatechart::failed,
+		this, &CrossingController::failed,
 		Qt::QueuedConnection);
 
 	connect(
@@ -47,12 +52,12 @@ CrossingController::CrossingController(
 CrossingController::~CrossingController()
 {
 	statechart.exit();
-	ControllerRegistry::instance().unregisterController(ctrl_crossing);
+	ControllerRegistry::instance().unregisterController(crossing);
 }
 
 const QString & CrossingController::name() const noexcept
 {
-	return ctrl_crossing->name();
+	return crossing->name();
 }
 
 float CrossingController::extensions() const noexcept
@@ -82,7 +87,7 @@ SectionState mrw::ctrl::CrossingController::state() const noexcept
 
 Device::LockState CrossingController::lock() const noexcept
 {
-	return ctrl_crossing->lock();
+	return crossing->lock();
 }
 
 Position::Bending CrossingController::bending() const noexcept
@@ -121,7 +126,7 @@ void CrossingController::restart()
 
 QString CrossingController::toString() const
 {
-	return ctrl_crossing->name();
+	return crossing->name();
 }
 
 void CrossingController::inc()
@@ -141,13 +146,13 @@ void mrw::ctrl::CrossingController::unregister()
 
 bool CrossingController::used()
 {
-	qCDebug(log).noquote() << "(Crossing)" << name() << "used:" << ctrl_crossing->isUsed();
-	return ctrl_crossing->isUsed();
+	qCDebug(log).noquote() << "(Crossing)" << name() << "used:" << crossing->isUsed();
+	return crossing->isUsed();
 }
 
 void CrossingController::close()
 {
-	MrwMessage message(ctrl_crossing->command(SETSGN));
+	MrwMessage message(crossing->command(SETSGN));
 
 	message.append(std::underlying_type_t<SignalAspect>(SignalAspect::SIGNAL_CRX));
 	ControllerRegistry::can()->write(message);
@@ -155,7 +160,7 @@ void CrossingController::close()
 
 void CrossingController::open()
 {
-	MrwMessage message(ctrl_crossing->command(SETSGN));
+	MrwMessage message(crossing->command(SETSGN));
 
 	message.append(std::underlying_type_t<SignalAspect>(SignalAspect::SIGNAL_OFF));
 	ControllerRegistry::can()->write(message);
@@ -165,19 +170,19 @@ void CrossingController::fail()
 {
 	qCCritical(log).noquote() << String::red(" Crossing failed!") << name();
 
-	ctrl_crossing->setLock(LockState::FAIL);
+	crossing->setLock(LockState::FAIL);
 	ControllerRegistry::instance().failed();
 	emit update();
 }
 
 void CrossingController::pending()
 {
-	ctrl_crossing->setLock(LockState::PENDING);
+	crossing->setLock(LockState::PENDING);
 	emit update();
 }
 
 void CrossingController::lock(const bool do_it)
 {
-	ctrl_crossing->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
+	crossing->setLock(do_it ? LockState::LOCKED : LockState::UNLOCKED);
 	emit update();
 }
