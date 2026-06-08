@@ -3,7 +3,7 @@ var searchData=
   ['termhandler_0',['TermHandler',['../df/d75/classmrw_1_1util_1_1TermHandler.html',1,'mrw::util::TermHandler'],['../df/d75/classmrw_1_1util_1_1TermHandler.html#afcf13d27620bb60da2447f77fe52b632',1,'mrw::util::TermHandler::TermHandler()'],['../df/d75/classmrw_1_1util_1_1TermHandler.html#a2616c0436b27b5e414c92d5603e72fc5',1,'mrw::util::TermHandler::TermHandler(const std::initializer_list&lt; int &gt; &amp;quit_signals)']]],
   ['threshold_1',['threshold',['../d0/d3c/classmrw_1_1model_1_1Light.html#af3ab18d306698af87c9d18ac614998c5',1,'mrw::model::Light']]],
   ['tick_2',['tick',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e',1,'mrw::ui::ControllerWidget']]],
-  ['time_3',['time',['../db/d03/namespacesc.html#a1bc542877409477b96abd9b10ac01a4c',1,'sc']]],
+  ['time_3',['time',['../db/d03/namespacesc.html#ad9b5def3d48864ce8bdbb6bb6429f99a',1,'sc']]],
   ['time_5fstamp_5fformat_4',['TIME_STAMP_FORMAT',['../d2/d87/classmrw_1_1util_1_1Duration.html#a5d7d85ca337156a12663496c60ea7cdf',1,'mrw::util::Duration']]],
   ['timedinterface_5',['TimedInterface',['../d7/d75/classsc_1_1timer_1_1TimedInterface.html',1,'sc::timer']]],
   ['timerservice_6',['TimerService',['../dd/dbf/classmrw_1_1statechart_1_1TimerService.html',1,'mrw::statechart']]],
