@@ -15,5 +15,5 @@ var searchData=
   ['expandable_12',['expandable',['../d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#abe4e357536008d37be297be6e92c4176',1,'mrw::ctrl::BaseController::Status']]],
   ['extend_13',['extend',['../db/d4f/classmrw_1_1model_1_1Position.html#a2de03d047669039642849f760cbd996d',1,'mrw::model::Position::extend()'],['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a8bb3d9f6d2249583f9e83d3637018895',1,'mrw::ui::ControllerWidget::extend()']]],
   ['extension_14',['extension',['../db/d4f/classmrw_1_1model_1_1Position.html#a36c0e55720dfe2e59bae0752da03308f',1,'mrw::model::Position']]],
-  ['extensions_15',['extensions',['../d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a93d69cb37833ea6002997072534f3834',1,'mrw::ctrl::BaseController::Status::extensions'],['../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#aa82a696f1ab5c364afc14c7c5b6034c6',1,'mrw::ctrl::BaseController::extensions()']]]
+  ['extensions_15',['extensions',['../d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a93d69cb37833ea6002997072534f3834',1,'mrw::ctrl::BaseController::Status::extensions()'],['../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#aa82a696f1ab5c364afc14c7c5b6034c6',1,'mrw::ctrl::BaseController::extensions()']]]
 ];

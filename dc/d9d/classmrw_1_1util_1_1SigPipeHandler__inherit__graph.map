@@ -1,13 +1,8 @@
 <map id="mrw::util::SigPipeHandler" name="mrw::util::SigPipeHandler">
-<area shape="rect" id="Node000001" title="This class implements a signal handler which is thread safe against any event loop using a POSIX pipe..." alt="" coords="113,153,279,178"/>
-<area shape="rect" id="Node000004" href="$dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html" title="This class implements a signal handler which calls a given callback without the need to connect this ..." alt="" coords="5,226,195,252"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="169,190,118,228,114,224,166,186"/>
-<area shape="rect" id="Node000006" href="$df/d75/classmrw_1_1util_1_1TermHandler.html" title="This class registeres a handler for terminating the application." alt="" coords="218,226,368,252"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="226,186,279,224,275,228,223,190"/>
-<area shape="rect" id="Node000002" href="$de/def/classmrw_1_1util_1_1SignalHandler.html" title="This class installs a posix signal callback handler." alt="" coords="118,79,274,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,120,199,152,193,152,193,120"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="161,5,231,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="199,46,199,79,193,79,193,46"/>
-<area shape="rect" id="Node000005" href="$d7/dc8/classmrw_1_1util_1_1DumpHandler.html" title="This class registeres a callback which can be used to dump information during runtime execution." alt="" coords="23,300,177,326"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="103,267,103,300,97,300,97,267"/>
+<area shape="rect" id="node1" title="This class implements a signal handler which is thread safe against any event loop using a POSIX pipe..." alt="" coords="115,152,281,177"/>
+<area shape="rect" id="node4" href="$dd/dd0/classmrw_1_1util_1_1SigCallbackHandler.html" title="This class implements a signal handler which calls a given callback without the need to connect this ..." alt="" coords="5,225,196,251"/>
+<area shape="rect" id="node6" href="$df/d75/classmrw_1_1util_1_1TermHandler.html" title="This class registeres a handler for terminating the application." alt="" coords="220,225,371,251"/>
+<area shape="rect" id="node2" href="$de/def/classmrw_1_1util_1_1SignalHandler.html" title="This class installs a posix signal callback handler." alt="" coords="119,79,277,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="163,5,233,31"/>
+<area shape="rect" id="node5" href="$d7/dc8/classmrw_1_1util_1_1DumpHandler.html" title="This class registeres a callback which can be used to dump information during runtime execution." alt="" coords="23,299,178,324"/>
 </map>

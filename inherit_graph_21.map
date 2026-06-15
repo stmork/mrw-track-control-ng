@@ -1,5 +1,14 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$de/d2a/classsc_1_1StatemachineInterface.html" title=" " alt="" coords="5,5,178,31"/>
-<area shape="rect" id="Node000001" href="$d8/dd2/classsc_1_1EventDrivenInterface.html" title=" " alt="" coords="226,5,388,31"/>
-<area shape="poly" id="edge84_Node000000_Node000001" title=" " alt="" coords="193,16,225,16,225,21,193,21"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,129,77,155"/>
+<area shape="rect" id="node2" href="$df/db9/classmrw_1_1ui_1_1BaseWidget.html" title="The BaseWidget gives basic funtionallity to all derived Widget classes." alt="" coords="125,129,264,155"/>
+<area shape="rect" id="node3" href="$de/d98/classmrw_1_1ui_1_1BarWidget.html" title="The BarWidget displays all important colors needed to show all necessary signal and switch states." alt="" coords="331,5,460,31"/>
+<area shape="rect" id="node4" href="$d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html" title="The CircleLiveWidget shows a rotating bar which represents the responsiveness of the application." alt="" coords="312,55,479,80"/>
+<area shape="rect" id="node5" href="$d8/d73/classmrw_1_1ui_1_1ClockWidget.html" title="The ClockWidget displays the actual time." alt="" coords="324,104,467,129"/>
+<area shape="rect" id="node6" href="$db/d76/classmrw_1_1ui_1_1ControllerWidget.html" title="This is the base class for all derived widget classes which follow the MVC paradigma." alt="" coords="313,153,477,179"/>
+<area shape="rect" id="node11" href="$dc/d55/classmrw_1_1ui_1_1OpModeWidget.html" title="The OpModeWidget displays the operational mode consisting of a single upper case letter." alt="" coords="316,203,475,228"/>
+<area shape="rect" id="node12" href="$d6/da1/classmrw_1_1ui_1_1StationWidget.html" title="The StationWidget displays the region title." alt="" coords="320,252,471,277"/>
+<area shape="rect" id="node7" href="$d8/d02/classmrw_1_1ui_1_1DoubleCrossSwitchWidget.html" title="This class intends to draw all states of a mrw::model::DoubleCrossSwitch which includes:" alt="" coords="532,63,715,103"/>
+<area shape="rect" id="node8" href="$dc/d9b/classmrw_1_1ui_1_1RailWidget.html" title="The RailWidget displays a simple mrw::model::Rail without any active part like switches or signals." alt="" coords="558,128,689,153"/>
+<area shape="rect" id="node9" href="$d5/dd0/classmrw_1_1ui_1_1RegularSwitchWidget.html" title="This class intends to draw all states of a mrw::model::RegularSwitch which includes:" alt="" coords="527,177,720,203"/>
+<area shape="rect" id="node10" href="$d8/df9/classmrw_1_1ui_1_1SignalWidget.html" title="This class intends to draw all states of a combination of mrw::model::Signal instances." alt="" coords="551,227,696,252"/>
 </map>

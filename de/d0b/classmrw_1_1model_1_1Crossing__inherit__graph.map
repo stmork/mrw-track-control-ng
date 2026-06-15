@@ -1,5 +1,4 @@
 <map id="mrw::model::Crossing" name="mrw::model::Crossing">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,150,105"/>
-<area shape="rect" id="Node000002" href="$d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing." alt="" coords="11,5,144,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,46,80,79,75,79,75,46"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,79,151,104"/>
+<area shape="rect" id="node2" href="$d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing." alt="" coords="11,5,145,31"/>
 </map>

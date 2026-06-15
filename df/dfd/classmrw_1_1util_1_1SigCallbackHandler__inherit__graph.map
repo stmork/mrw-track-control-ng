@@ -1,11 +1,7 @@
 <map id="mrw::util::SigCallbackHandler" name="mrw::util::SigCallbackHandler">
-<area shape="rect" id="Node000001" title="This class implements a signal handler which calls a given callback without the need to connect this ..." alt="" coords="5,226,195,252"/>
-<area shape="rect" id="Node000005" href="$d7/dc8/classmrw_1_1util_1_1DumpHandler.html" title="This class registeres a callback which can be used to dump information during runtime execution." alt="" coords="23,300,177,326"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="103,267,103,300,97,300,97,267"/>
-<area shape="rect" id="Node000002" href="$df/d24/classmrw_1_1util_1_1SigPipeHandler.html" title="This class implements a signal handler which is thread safe against any event loop using a POSIX pipe..." alt="" coords="17,153,183,178"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,194,103,226,97,226,97,194"/>
-<area shape="rect" id="Node000003" href="$de/def/classmrw_1_1util_1_1SignalHandler.html" title="This class installs a posix signal callback handler." alt="" coords="22,79,178,105"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="103,120,103,152,97,152,97,120"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="65,5,135,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="103,46,103,79,97,79,97,46"/>
+<area shape="rect" id="node1" title="This class implements a signal handler which calls a given callback without the need to connect this ..." alt="" coords="5,225,196,251"/>
+<area shape="rect" id="node5" href="$d7/dc8/classmrw_1_1util_1_1DumpHandler.html" title="This class registeres a callback which can be used to dump information during runtime execution." alt="" coords="23,299,178,324"/>
+<area shape="rect" id="node2" href="$df/d24/classmrw_1_1util_1_1SigPipeHandler.html" title="This class implements a signal handler which is thread safe against any event loop using a POSIX pipe..." alt="" coords="17,152,184,177"/>
+<area shape="rect" id="node3" href="$de/def/classmrw_1_1util_1_1SignalHandler.html" title="This class installs a posix signal callback handler." alt="" coords="22,79,179,104"/>
+<area shape="rect" id="node4" title=" " alt="" coords="65,5,136,31"/>
 </map>

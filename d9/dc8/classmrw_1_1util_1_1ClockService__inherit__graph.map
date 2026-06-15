@@ -1,7 +1,5 @@
 <map id="mrw::util::ClockService" name="mrw::util::ClockService">
-<area shape="rect" id="Node000001" title="This singleton class provides a regular clock service at the clocks of 1 Hz, 2 Hz,..." alt="" coords="25,94,178,120"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,13,75,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,49,94,92,90,95,56,52"/>
-<area shape="rect" id="Node000003" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="99,5,229,46"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,60,113,95,109,92,137,57"/>
+<area shape="rect" id="node1" title="This singleton class provides a regular clock service at the clocks of 1 Hz, 2 Hz,..." alt="" coords="27,93,180,119"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,13,76,38"/>
+<area shape="rect" id="node3" href="$d0/d4d/classmrw_1_1util_1_1Singleton.html" title=" " alt="" coords="101,5,231,45"/>
 </map>

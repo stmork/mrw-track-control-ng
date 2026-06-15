@@ -1,23 +1,13 @@
 <map id="mrw::model::Device" name="mrw::model::Device">
-<area shape="rect" id="Node000001" title="This class represents device components for which a corresponding CAN command is existing." alt="" coords="5,104,139,130"/>
-<area shape="rect" id="Node000002" href="$d6/d5c/classmrw_1_1model_1_1Crossing.html" title=" " alt="" coords="202,5,346,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,92,140,65,186,40,214,29,216,34,188,45,142,70,103,97"/>
-<area shape="rect" id="Node000003" href="$d0/d3c/classmrw_1_1model_1_1Light.html" title="This class represents a LED or bulb light source which can only simply turn on or off the light." alt="" coords="213,55,336,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="142,97,218,78,219,84,143,102"/>
-<area shape="rect" id="Node000005" href="$d6/d71/classmrw_1_1model_1_1LightSignal.html" title="This class represents the handling of several light signals." alt="" coords="195,104,354,130"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="155,114,195,114,195,120,155,120"/>
-<area shape="rect" id="Node000006" href="$de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection." alt="" coords="206,153,343,179"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="143,131,219,150,218,155,142,137"/>
-<area shape="rect" id="Node000007" href="$d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html" title="This base class represents the connection of an inductive actuator Device to the corresponding Switch..." alt="" coords="187,203,362,244"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="104,137,143,163,188,189,213,200,210,205,185,194,141,168,101,141"/>
-<area shape="rect" id="Node000004" href="$dd/d28/classmrw_1_1model_1_1ProfileLight.html" title="This class represents a LED or bulb light source which can light up using different light up profiles..." alt="" coords="422,55,580,80"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="351,65,421,65,421,70,351,70"/>
-<area shape="rect" id="Node000008" href="$df/db7/classmrw_1_1model_1_1AbstractSwitch.html" title="This class represents any representation of any switch occuring on a model railway." alt="" coords="410,185,592,211"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="377,209,409,206,410,211,378,215"/>
-<area shape="rect" id="Node000011" href="$d4/d8a/classmrw_1_1model_1_1FormSignal.html" title="This class represents the handling of several form signals." alt="" coords="422,235,581,260"/>
-<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="378,232,421,236,421,242,377,237"/>
-<area shape="rect" id="Node000009" href="$df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html" title="This RailPart represents a double cross switch with four connectors." alt="" coords="640,161,848,187"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="608,185,640,182,640,187,608,190"/>
-<area shape="rect" id="Node000010" href="$d5/d3b/classmrw_1_1model_1_1RegularSwitch.html" title="This class represents a simple switch which divides a rail into two rails." alt="" coords="655,211,833,236"/>
-<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="608,207,655,212,654,217,608,212"/>
+<area shape="rect" id="node1" title="This class represents device components for which a corresponding CAN command is existing." alt="" coords="5,104,140,129"/>
+<area shape="rect" id="node2" href="$d6/d5c/classmrw_1_1model_1_1Crossing.html" title=" " alt="" coords="203,5,349,31"/>
+<area shape="rect" id="node3" href="$d0/d3c/classmrw_1_1model_1_1Light.html" title="This class represents a LED or bulb light source which can only simply turn on or off the light." alt="" coords="215,55,337,80"/>
+<area shape="rect" id="node5" href="$d6/d71/classmrw_1_1model_1_1LightSignal.html" title="This class represents the handling of several light signals." alt="" coords="197,104,355,129"/>
+<area shape="rect" id="node6" href="$de/de1/classmrw_1_1model_1_1Section.html" title="A Section manages exactly one occupation state for a RailPart collection." alt="" coords="207,153,345,179"/>
+<area shape="rect" id="node7" href="$d6/d75/classmrw_1_1model_1_1SwitchModuleReference.html" title="This base class represents the connection of an inductive actuator Device to the corresponding Switch..." alt="" coords="188,203,364,243"/>
+<area shape="rect" id="node4" href="$dd/d28/classmrw_1_1model_1_1ProfileLight.html" title="This class represents a LED or bulb light source which can light up using different light up profiles..." alt="" coords="424,55,583,80"/>
+<area shape="rect" id="node8" href="$df/db7/classmrw_1_1model_1_1AbstractSwitch.html" title="This class represents any representation of any switch occuring on a model railway." alt="" coords="412,185,595,211"/>
+<area shape="rect" id="node11" href="$d4/d8a/classmrw_1_1model_1_1FormSignal.html" title="This class represents the handling of several form signals." alt="" coords="423,235,583,260"/>
+<area shape="rect" id="node9" href="$df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html" title="This RailPart represents a double cross switch with four connectors." alt="" coords="643,160,851,185"/>
+<area shape="rect" id="node10" href="$d5/d3b/classmrw_1_1model_1_1RegularSwitch.html" title="This class represents a simple switch which divides a rail into two rails." alt="" coords="657,209,836,235"/>
 </map>
