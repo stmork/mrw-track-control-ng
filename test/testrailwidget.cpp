@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QTest>
@@ -33,32 +33,40 @@ void TestRailWidget::testSimple()
 
 void TestRailWidget::testPrepare()
 {
-	for (const LockState lock : lock_states)
+	for (const bool crossing : booleans)
 	{
-		mock.setLock(lock);
-		for (const SectionState state : section_states)
+		mock.setCrossing(crossing);
+		for (const LockState lock : lock_states)
 		{
-			mock.setSectionState(state);
-			for (const Bending bending : bendings)
+			mock.setLock(lock);
+			for (const SectionState state : section_states)
 			{
-				mock.setBending(bending);
-				for (const bool dir : booleans)
+				mock.setSectionState(state);
+				for (const Bending bending : bendings)
 				{
-					mock.setDirection(dir);
-					for (int ext = 0; ext < 5; ext++)
+					mock.setBending(bending);
+					for (const bool dir : booleans)
 					{
-						mock.setExtension(ext);
-						for (int lines = 0; lines < 5; lines++)
+						mock.setDirection(dir);
+						for (int ext = 0; ext < 5; ext++)
 						{
-							mock.setLines(lines);
-
-							widget.test(status);
-							QCOMPARE(status.direction, dir);
-							QCOMPARE(status.section_state, state);
-							QCOMPARE(status.lock_state, lock);
-							QCOMPARE(status.bending, bending);
-							QCOMPARE(status.extensions, ext);
-							QCOMPARE(status.lines, lines);
+							mock.setExtension(ext);
+							for (int lines = 0; lines < 5; lines++)
+							{
+								mock.setLines(lines);
+								for (int i = 0; i < 2; i++)
+								{
+									widget.tick();
+									widget.test(status);
+									QCOMPARE(status.has_crossing, crossing);
+									QCOMPARE(status.direction, dir);
+									QCOMPARE(status.section_state, state);
+									QCOMPARE(status.lock_state, lock);
+									QCOMPARE(status.bending, bending);
+									QCOMPARE(status.extensions, ext);
+									QCOMPARE(status.lines, lines);
+								}
+							}
 						}
 					}
 				}
@@ -69,7 +77,7 @@ void TestRailWidget::testPrepare()
 
 void TestRailWidget::testHavingLock()
 {
-	QVERIFY(!widget.hasLock());
+	QVERIFY(widget.hasLock());
 }
 
 void TestRailWidget::testEnds()
@@ -113,4 +121,12 @@ void TestRailWidget::testEnds()
 			QCOMPARE(widget.connectors().size(), 0);
 		}
 	}
+}
+
+void TestRailWidget::testCrossing()
+{
+	mock.setCrossing(true);
+	mock.setExtension(Position::FRACTION);
+	widget.test(status);
+	QVERIFY(status.has_crossing);
 }

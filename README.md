@@ -41,8 +41,88 @@ sudo apt update
 sudo apt install mrw-ng
 ```
 
+## Building the project
+
+You have two choices building the complete project *qmake*/*qmake6* or
+*cmake*. Except with *qmake6* you can also cross compile the project for
+different target architectures.
+
+### qmake
+For a host build you can simply build the project using the following command sequence:
+```
+qmake
+build -j `nproc`
+```
+Instead of using *qmake* for Qt5 you can use *qmake6* which selects Qt6.
+Both Qt versions can coexist on the host development machine.
+
+For cross builds using Qt5 you need a custom target development build of Qt.
+This build contains host binaries for preparing the build such as *qmake*,
+*moc* or *uic* and target headers and libraries for compiling and linking.
+So the sysroot does not need any Qt package installation. See the Qt Wiki
+for more details for creating such a cross built Qt. You can cross build
+this project using the following sequence:
+```
+<path-to-dev-qt>/bin/qmake
+build -j `nproc`
+```
+Note that the target architecture and their paths is encoded into the cross built Qt.
+
+### cmake
+Since Qt6 will end support for *qmake* in the future there is also a *cmake*
+build possibility. This *cmake* build does not support Qt5 anymore. There is
+also a simple way to cross compile this project. To build this project
+simply use the usual command sequence:
+```
+cmake -B build
+cmake --build --parallel
+```
+For cross builds the sysroot needs the installation of the Qt6 development
+packages. The build needs three more variables. One for defining the
+toolchain file which describes the cross compiler and the sysroot as usual.
+```
+cmake -B build -DQT_HOST_PATH=/ \
+	-DQT_HOST_PATH_CMAKE_DIR=/usr/lib/x86_64-linux-gnu/cmake \
+	-DCMAKE_TOOLCHAIN_FILE=<fq-path-to-toolchain-file> 
+cmake --build --parallel
+```
+
+### macOS
+If you want to compile on Apple macOS you have to install Xcode, MacPorts
+and Qt for macOS.
+
+#### Xcode
+Simply install Xcode using the macOS preinstalled App Store.
+
+#### MacPorts
+Since there are some more components to use I recommend to
+[install](https://www.macports.org/install.php) them using the MacPorts
+framework. After installing MacPorts you can install the necessary packages
+using the following commands:
+```
+sudo port install cmake gtest doxygen dot astyle
+```
+
+#### Qt for macOS
+Qt provides a net installer for the community edition. You must have a valid
+Qt account to download and
+[install](https://doc.qt.io/qt-6/de/qt-online-installation.html) the Qt
+components. Do not forget to install the additional libraries (hidden under
+the Qt version to install) for
+- Qt Serial Bus
+- Qt Serial Port
+
+#### Build for macOS
+By Default Qt ist installed into a subdirectory of your home directory. Then
+set the *Qt6_DIR* Variable to o$HOME/Qt/<Qt-Version>/macos. After setting
+the environment variable *Qt6_DIR* you can compile using the *cmake* option
+above.
+
 ### Starting the application
-To start the track control software refer to the [README](./track-control/README.md) of the MRW-TrackControl application. It additionally contains information about configuring the CAN bus and prepare the EGL on Raspberry Pi mini computers.
+To start the track control software refer to the
+[README](./track-control/README.md) of the MRW-TrackControl application. It
+additionally contains information about configuring the CAN bus and prepare
+the EGL on Raspberry Pi mini computers.
 
 ## Software packages and namespaces
 

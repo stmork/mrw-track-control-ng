@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -9,6 +9,8 @@
 #define RESETSERVICE_H
 
 #include <unordered_set>
+
+#include <QLoggingCategory>
 
 #include <can/mrwbusservice.h>
 
@@ -20,6 +22,8 @@ class ResetService : public mrw::can::MrwBusService
 	Q_OBJECT
 
 private:
+	QLoggingCategory                                log;
+
 	std::unordered_multiset<mrw::can::ControllerId> controllers;
 
 public:

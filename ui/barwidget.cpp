@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QPainter>
@@ -25,6 +25,7 @@ void BarWidget::paint(QPainter & painter)
 	const int ySize = size().height();
 
 	// Define fonts for color labels.
+	font.setBold(true);
 	font.setPixelSize(ySize / 3);
 	painter.setPen(Qt::white);
 	painter.setFont(font);

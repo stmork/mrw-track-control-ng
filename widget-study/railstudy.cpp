@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include "railstudy.h"
@@ -49,6 +49,8 @@ RailStudy::RailStudy(QWidget * parent) :
 	connect(
 		ui->lineBox, qOverload<int>(&QSpinBox::valueChanged),
 		this, &RailStudy::updateLines);
+	connect(ui->crossingButton, &QCheckBox::clicked,
+		&mock, &RailControllerMock::setCrossing);
 
 	/********************************************************/
 	/*   End rail state                                     */
@@ -203,9 +205,10 @@ QString RailStudy::name() const
 	RailController::Status status;
 
 	mock.status(status);
-	return QString("Rail____%1%2_%3%4%5").
+	return QString("Rail____%1%2_%3%4%5%6").
 		arg(code(status.a_ends, status.b_ends)).
 		arg(code(status.bending)).
+		arg(status.has_crossing ? "X" : "_").
 		arg(direction(status.direction)).
 		arg(lockState(status.lock_state)).
 		arg(sectionState(status.section_state));

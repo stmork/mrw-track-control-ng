@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -55,6 +55,9 @@ namespace mrw::statechart
 		virtual void unsetTimer(
 			std::shared_ptr<sc::timer::TimedInterface> statemachine,
 			sc::eventid                                event) override;
+		virtual void unsetTimerRaw(
+			sc::timer::TimedInterface * statemachine,
+			sc::eventid                 event) override;
 
 	private:
 		/**

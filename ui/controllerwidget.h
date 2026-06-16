@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -80,6 +80,8 @@ namespace mrw::ui
 		 */
 		virtual void computeConnectors();
 
+		void tick();
+
 	protected:
 		virtual void mousePressEvent(QMouseEvent * event) override;
 
@@ -103,7 +105,7 @@ namespace mrw::ui
 		 * @param x The horizontal center position of the lock to draw.
 		 * @param y The vertical center position of the lock to draw.
 		 */
-		void drawLock(
+		static void drawLock(
 			QPainter  & painter,
 			QColor      color,
 			const float x, const float y);
@@ -129,7 +131,7 @@ namespace mrw::ui
 		 * @param height The signed based height of the sheared rectangle.
 		 * @param slope The slope to compute the horizontal offset.
 		 */
-		void drawSheared(
+		static void drawSheared(
 			QPainter  & painter,
 			QColor      color,
 			const float x, const float y,
@@ -180,8 +182,13 @@ namespace mrw::ui
 		 */
 		QList<QPoint>               connector_list;
 
-	private:
+		/**
+		 * This blink counter for drawing pending lock states. It is increased
+		 * by a timer. When odd the lock should be drawn.
+		 */
 		unsigned           counter = 0;
+
+	private:
 		QListWidgetItem    list_item;
 	};
 }

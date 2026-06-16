@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -112,6 +112,8 @@ namespace mrw
 			void raiseFailed();
 
 
+
+
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
 			static sc::integer getTimeout()  noexcept;
 			/*! Gets the value of the variable 'delay_boot' that is defined in the default interface scope. */
@@ -164,6 +166,7 @@ namespace mrw
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent() override;
+
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -222,7 +225,6 @@ namespace mrw
 			bool dispatchEvent(EventInstance * event) noexcept;
 
 
-
 		private:
 			UpdateStatechart(const UpdateStatechart & rhs);
 			UpdateStatechart & operator=(const UpdateStatechart &);
@@ -241,7 +243,7 @@ namespace mrw
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 			static const sc::ushort maxOrthogonalStates {1};
 
-			sc::timer::TimerServiceInterface * timerService;
+			sc::timer::TimerServiceInterface * timerService = {};
 			bool timeEvents[timeEventsCount];
 
 
@@ -305,7 +307,6 @@ namespace mrw
 			void react_main_region__choice_1();
 			void react_main_region__choice_2();
 			void react_main_region__entry_Default();
-			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Ping_react(const sc::integer transitioned_before);
 			sc::integer main_region_Reset_react(const sc::integer transitioned_before);
 			sc::integer main_region_Flash_Request_react(const sc::integer transitioned_before);
@@ -313,10 +314,8 @@ namespace mrw
 			sc::integer main_region_Flash_Rest_react(const sc::integer transitioned_before);
 			sc::integer main_region_Flash_Check_react(const sc::integer transitioned_before);
 			sc::integer main_region_Leave_Bootloader_react(const sc::integer transitioned_before);
-			sc::integer main_region_Booted_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_for_Connect_react(const sc::integer transitioned_before);
 			sc::integer main_region_Test_Hardware_Mismatch_react(const sc::integer transitioned_before);
-			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			void clearInEvents() noexcept;
 			void microStep();
 			void runCycle();
@@ -338,7 +337,6 @@ namespace mrw
 
 			/*! Indicates event 'failed' of default interface scope is active. */
 			bool failed_raised {false};
-
 
 
 		};

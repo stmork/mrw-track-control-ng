@@ -1,9 +1,9 @@
 #
 #  SPDX-License-Identifier: MIT
-#  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+#  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 #
 
-VERSION          = 2.1
+VERSION          = 2.3
 QT              += core xml serialbus
 DEFINES         += QT_DISABLE_DEPRECATED_UP_TO=0x050f00
 

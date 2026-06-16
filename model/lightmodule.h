@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -8,11 +8,10 @@
 #ifndef MRW_MODEL_LIGHTMODEL_H
 #define MRW_MODEL_LIGHTMODEL_H
 
-#include <vector>
-
 #include <QDomElement>
 
 #include <model/module.h>
+#include <util/cleanvector.h>
 
 namespace mrw::model
 {
@@ -30,7 +29,7 @@ namespace mrw::model
 	 */
 	class LightModule : public Module
 	{
-		std::vector<ProfileLight *> profile_lights;
+		mrw::util::CleanVector<ProfileLight> profile_lights;
 
 		static constexpr size_t MAX_LIGHTS = 8;
 
@@ -39,7 +38,7 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			Controller      *     controller,
 			const QDomElement  &  element);
-		virtual ~LightModule();
+		virtual ~LightModule() = default;
 
 		inline size_t ports() const override
 		{

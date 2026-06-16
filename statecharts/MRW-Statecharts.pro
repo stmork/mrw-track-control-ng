@@ -1,6 +1,6 @@
 #
 #  SPDX-License-Identifier: MIT
-#  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+#  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 #
 
 TEMPLATE  = lib
@@ -10,23 +10,9 @@ include(../common.pri)
 
 QMAKE_CXXFLAGS  += -Wno-reorder -Wno-unused-parameter
 
-HEADERS += \
-	ConfigStatechart.h \
-	OperatingModeStatechart.h \
-	RouteStatechart.h \
-	SectionStatechart.h \
-	SignalControllerStatechart.h \
-	SignalStatechart.h \
-	SwitchStatechart.h \
-	TrackerStatechart.h \
-	UpdateStatechart.h \
-	common/sc_statemachine.h \
-	common/sc_timer.h \
-	common/sc_types.h \
-	timerservice.h
-
 SOURCES += \
 	ConfigStatechart.cpp \
+	CrossingStatechart.cpp \
 	OperatingModeStatechart.cpp \
 	RouteStatechart.cpp \
 	SectionStatechart.cpp \
@@ -36,5 +22,22 @@ SOURCES += \
 	TrackerStatechart.cpp \
 	UpdateStatechart.cpp \
 	timerservice.cpp
+
+HEADERS += \
+	ConfigStatechart.h \
+	CrossingStatechart.h \
+	OperatingModeStatechart.h \
+	RouteStatechart.h \
+	SectionStatechart.h \
+	SignalControllerStatechart.h \
+	SignalStatechart.h \
+	SwitchStatechart.h \
+	TrackerStatechart.h \
+	UpdateStatechart.h \
+	common/sc_eventdriven.h \
+	common/sc_statemachine.h \
+	common/sc_timer.h \
+	common/sc_types.h \
+	timerservice.h
 
 QMAKE_CLEAN += $$TARGET

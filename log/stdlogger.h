@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -33,7 +33,7 @@ namespace mrw::log
 		 * classes. This is useful to write all messages into different
 		 * file handles.
 		 *
-		 * @param fd The FILE pointer to log into.
+		 * @param file The FILE pointer to log into.
 		 * @param message The message to log.
 		 * @see FileLogger
 		 */

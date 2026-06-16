@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QDebug>
@@ -65,7 +65,7 @@ bool Signal::setAspect(const SignalAspect new_aspect)
 
 	signal_aspect = new_aspect;
 
-	qDebug().noquote() << toString() << "modified:" << modified;
+	qCDebug(log).noquote() << toString() << "modified:" << modified;
 	return modified;
 }
 

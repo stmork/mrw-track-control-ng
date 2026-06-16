@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QCoreApplication>
@@ -12,6 +12,7 @@
 
 #include "testutil.h"
 #include "testcan.h"
+#include "testcanservice.h"
 #include "testmodel.h"
 #include "testswitch.h"
 #include "testlight.h"
@@ -19,6 +20,7 @@
 #include "testnumbering.h"
 #include "testunknown.h"
 #include "testrouting.h"
+#include "testcrossing.h"
 
 #include "testrailwidget.h"
 #include "testsignalwidget.h"
@@ -45,6 +47,17 @@ static int testCan()
 	QStringList    args
 	{
 		"MRW-Test", "-o", "qtest-can.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
+static int testCanService()
+{
+	TestCanService test;
+	QStringList    args
+	{
+		"MRW-Test", "-o", "qtest-canservice.xml", "-xml"
 	};
 
 	return QTest::qExec(&test, args);
@@ -127,6 +140,17 @@ static int testRouting()
 	return QTest::qExec(&test, args);
 }
 
+static int testCrossing()
+{
+	TestCrossing    test;
+	QStringList     args
+	{
+		"MRW-Test", "-o", "qtest-crossing.xml", "-xml"
+	};
+
+	return QTest::qExec(&test, args);
+}
+
 static int testRailWidget()
 {
 	TestRailWidget  test;
@@ -179,6 +203,7 @@ int main(int argc, char * argv[])
 
 	status += testUtil();
 	status += testCan();
+	status += testCanService();
 	status += testModel();
 	status += testSimpleSwitch();
 	status += testSimpleLight();
@@ -186,6 +211,7 @@ int main(int argc, char * argv[])
 	status += testUnknown();
 	status += testFlankSwitch();
 	status += testRouting();
+	status += testCrossing();
 
 	status += testRailWidget();
 	status += testSignalWidget();

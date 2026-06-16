@@ -1,16 +1,16 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
-#include <QHostInfo>
-
 #include <can/cansettings.h>
+#include <util/appsupport.h>
 
 using namespace mrw::util;
 using namespace mrw::can;
 
-CanSettings::CanSettings() : hostname(QHostInfo::localHostName())
+CanSettings::CanSettings() :
+	hostname(AppSupport::instance().hostname())
 {
 	SettingsGroup group (this, hostname);
 

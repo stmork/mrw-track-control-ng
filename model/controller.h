@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -9,14 +9,14 @@
 #define MRW_MODEL_CONTROLLER_H
 
 #include <cinttypes>
-#include <vector>
 
 #include <QDomElement>
 
-#include <util/stringutil.h>
 #include <can/types.h>
 #include <model/module.h>
 #include <model/multiplexconnection.h>
+#include <util/cleanvector.h>
+#include <util/stringutil.h>
 
 namespace mrw::model
 {
@@ -42,10 +42,10 @@ namespace mrw::model
 	 */
 	class Controller : public mrw::util::String
 	{
-		const mrw::can::ControllerId        controller_id;
-		ModelRailway            *           model = nullptr;
-		std::vector<Module *>               modules;
-		std::vector<MultiplexConnection *>  connections;
+		const mrw::can::ControllerId                 controller_id;
+		ModelRailway                *                model = nullptr;
+		mrw::util::CleanVector<Module>               modules;
+		mrw::util::CleanVector<MultiplexConnection>  connections;
 
 		friend class ModelRailway;
 
@@ -56,7 +56,7 @@ namespace mrw::model
 		explicit Controller(
 			ModelRailway * model_railway,
 			const QDomElement & element);
-		virtual ~Controller();
+		virtual ~Controller() = default;
 
 		/**
 		 * This method returns the controller ID which is part of the
@@ -115,6 +115,15 @@ namespace mrw::model
 		 * @see MultiplexConnection::valid()
 		 */
 		bool valid() const noexcept;
+
+		/**
+		 * This static method checks whether a given Controller is a valid
+		 * instance. The method checks if the input is a valid pointer.
+		 *
+		 * @param controller The non nullptr Controller instance
+		 * @return True if the Controller is valid.
+		 */
+		static bool isValid(const Controller * controller) noexcept;
 
 		/**
 		 * This method collects all configuration messages which describes

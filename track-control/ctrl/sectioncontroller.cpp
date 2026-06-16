@@ -1,13 +1,14 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
-#include <QDebug>
+#include <QCoreApplication>
 
 #include <util/method.h>
 #include <can/mrwmessage.h>
 #include <model/railpart.h>
+#include <ctrl/crossingcontroller.h>
 #include <ctrl/sectioncontroller.h>
 #include <ctrl/controllerregistry.h>
 #include <statecharts/timerservice.h>
@@ -26,6 +27,29 @@ SectionController::SectionController(
 	ctrl_section(input)
 {
 	ControllerRegistry::instance().registerController(ctrl_section, this);
+
+	if (section()->crossing() != nullptr)
+	{
+		ctrl_crossing = ControllerRegistry::instance().find<CrossingController>(section()->crossing());
+
+		if (ctrl_crossing == nullptr)
+		{
+			ctrl_crossing = new CrossingController(section()->crossing(), parent);
+		}
+
+		connect(
+			ctrl_crossing, &CrossingController::failed,
+			this, &SectionController::failed,
+			Qt::QueuedConnection);
+		connect(
+			&statechart, &SectionStatechart::unregister,
+			ctrl_crossing, &CrossingController::action,
+			Qt::QueuedConnection);
+		connect(
+			&statechart, &SectionStatechart::stateResponse,
+			ctrl_crossing, &CrossingController::action,
+			Qt::QueuedConnection);
+	}
 
 	connect(
 		&ControllerRegistry::instance(), &ControllerRegistry::clear,
@@ -60,8 +84,8 @@ SectionController::SectionController(
 		&statechart, &SectionStatechart::start,
 		Qt::QueuedConnection);
 	connect(
-		&statechart, &SectionStatechart::entered,
-		this, &SectionController::entered,
+		&statechart, &SectionStatechart::enteredSection,
+		this, &SectionController::enteredSection,
 		Qt::DirectConnection);
 	connect(
 		&statechart, &SectionStatechart::leaving,
@@ -72,18 +96,23 @@ SectionController::SectionController(
 		this, &SectionController::left,
 		Qt::DirectConnection);
 	connect(
+		&statechart, &SectionStatechart::update,
+		this, &SectionController::update);
+	connect(
 		&statechart, &SectionStatechart::unregister,
 		this, &SectionController::unregister,
 		Qt::DirectConnection);
 	connect(
 		&statechart, &SectionStatechart::entered, [&]()
 	{
-		qDebug().noquote() << ctrl_section->toString() << "Inquiry started.";
+		QCoreApplication::processEvents();
+
+		qCDebug(log).noquote() << ctrl_section->toString() << "Inquiry started.";
 	});
 	connect(
 		&statechart, &SectionStatechart::started, [&]()
 	{
-		qDebug().noquote() << ctrl_section->toString() << "Inquiry completed.";
+		qCDebug(log).noquote() << ctrl_section->toString() << "Inquiry completed.";
 	});
 
 	statechart.setTimerService(TimerService::instance());
@@ -121,14 +150,14 @@ void SectionController::nextController(SectionController * input)
 		if (next != nullptr)
 		{
 			disconnect(
-				&next->statechart, &SectionStatechart::entered,
+				&next->statechart, &SectionStatechart::enteredSection,
 				&this->statechart, &SectionStatechart::next);
 		}
 		next = input;
 		if (next != nullptr)
 		{
 			connect(
-				&next->statechart, &SectionStatechart::entered,
+				&next->statechart, &SectionStatechart::enteredSection,
 				&this->statechart, &SectionStatechart::next,
 				Qt::QueuedConnection);
 		}
@@ -189,7 +218,7 @@ Position::Bending SectionController::bending() const noexcept
 
 bool SectionController::process(const MrwMessage & message) noexcept
 {
-	qDebug().noquote() << message << "(Section)";
+	qCDebug(log).noquote() << message << "(Section)";
 
 	if (message.response() != Response::MSG_OK)
 	{
@@ -212,7 +241,6 @@ bool SectionController::process(const MrwMessage & message) noexcept
 	case GETRBS:
 		ctrl_section->setOccupation(message[0] != 0);
 		statechart.stateResponse(ctrl_section->occupation());
-		emit update();
 		return true;
 
 	default:
@@ -253,12 +281,12 @@ void SectionController::free()
 
 void SectionController::leftBefore()
 {
-	qWarning().noquote() << bold("Left before next reached:") << *section();
+	qCWarning(log).noquote() << bold("Left before next reached:") << *section();
 }
 
 void SectionController::fail()
 {
-	qCritical().noquote() << String::red(" Section failed!") << name();
+	qCCritical(log).noquote() << String::red(" Section failed!") << name();
 
 	section()->setLock(LockState::FAIL);
 	ControllerRegistry::instance().failed();

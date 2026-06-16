@@ -1,14 +1,12 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QCanBusFrame>
 #include <QTest>
-#include <QSignalSpy>
 #include <QList>
 
-#include "can/mrwbusservice.h"
 #include "can/mrwmessage.h"
 
 #include "testcan.h"
@@ -16,51 +14,11 @@
 using namespace mrw::test;
 using namespace mrw::can;
 
-/*************************************************************************
-**                                                                      **
-**       Test implementation of MrwBusService                           **
-**                                                                      **
-*************************************************************************/
-
-class ManualCanService : public MrwBusService
-{
-	QList<MrwMessage> messages;
-
-public:
-	explicit ManualCanService(
-		const bool   auto_connect = false,
-		const char * iface        = "vcan0") :
-		MrwBusService(iface, "socketcan", nullptr, auto_connect)
-	{
-		can_device->setConfigurationParameter(QCanBusDevice::ReceiveOwnKey, true);
-	}
-
-	void connect()
-	{
-		can_device->connectDevice();
-	}
-
-	void disconnect()
-	{
-		can_device->disconnectDevice();
-	}
-
-	void process(const MrwMessage & message) override
-	{
-		MrwBusService::process(message);
-		messages.append(message);
-	}
-
-	int counted() const
-	{
-		return messages.size();
-	}
-
-	const QList<MrwMessage> & list() const
-	{
-		return messages;
-	}
-};
+#if (QT_VERSION < QT_VERSION_CHECK(6, 3, 0))
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_EXCEPTION_THROWN(condition, exception);
+#else
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_THROWS_EXCEPTION(exception, condition);
+#endif
 
 /*************************************************************************
 **                                                                      **
@@ -105,74 +63,6 @@ void TestCan::testInvalidExtendedCanFrame()
 
 	QVERIFY(!message.valid());
 	QVERIFY(message.toString().size() > 0);
-}
-
-void TestCan::testValidService()
-{
-	MrwBusService service("vcan0");
-	MrwMessage    message(PING);
-
-	QVERIFY(service.valid());
-	QVERIFY(service.write(message));
-	service.list();
-}
-
-void TestCan::testTryValidService()
-{
-	MrwBusService service("eth0");
-	MrwMessage    message(PING);
-
-	QVERIFY(service.valid());
-	QVERIFY(service.write(message));
-	service.list();
-}
-
-void TestCan::testInvalidService()
-{
-	MrwBusService service("no-interface", "no-plugin");
-	MrwMessage    message(PING);
-
-	QVERIFY(!service.valid());
-	QVERIFY(!service.write(message));
-	service.list();
-}
-
-void TestCan::testManualConnectService()
-{
-	ManualCanService service;
-	QSignalSpy       spy(&service, &ManualCanService::connected);
-
-	QVERIFY(!service.valid());
-
-	service.connect();
-	QVERIFY(spy.wait(1000));
-	QCOMPARE(spy.count(), 1);
-	QVERIFY(service.valid());
-
-	service.disconnect();
-	QVERIFY(!service.valid());
-}
-
-void TestCan::testReadWrite()
-{
-	ManualCanService service(true);
-
-	QVERIFY(service.valid());
-	QVERIFY(service.write(MrwMessage(PING)));
-
-	QTest::qWait(50);
-	QCOMPARE(service.counted(), 1);
-
-	const MrwMessage & message = service.list().at(0);
-	QVERIFY(message.valid());
-	QVERIFY(!message.isResponse());
-	QCOMPARE(message.command(),  PING);
-	QCOMPARE(message.size(),     0u);
-	QCOMPARE(message.unitNo(),   NO_UNITNO);
-	QCOMPARE(message.response(), Response::MSG_NO_RESPONSE);
-	QCOMPARE(message.id(),       CAN_BROADCAST_ID);
-	QCOMPARE(message.sid(),      CAN_BROADCAST_ID);
-	QCOMPARE(message.eid(),      NO_UNITNO);
 }
 
 void TestCan::testReceivedResult()
@@ -333,26 +223,26 @@ void TestCan::testRequestPayload()
 	MrwMessage   message(PING);
 	uint8_t      bytes[7];
 
-	for (size_t t = 0; t < sizeof(bytes); t++)
+	for (std::size_t t = 0; t < sizeof(bytes); t++)
 	{
 		bytes[t] = 0x12 + t + 0x22;
 
 		QCOMPARE(message.size(), t);
-		QVERIFY_EXCEPTION_THROWN(message[t], std::out_of_range);
+		MRW_THROWS_EXCEPTION(message[t], std::out_of_range);
 		message.append(bytes[t]);
-		for (size_t b = 0; b < t; b++)
+		for (std::size_t b = 0; b < t; b++)
 		{
 			QCOMPARE(message[b], bytes[b]);
 		}
 	}
 
-	QVERIFY_EXCEPTION_THROWN(message.append(0xff), std::out_of_range);
+	MRW_THROWS_EXCEPTION(message.append(0xff), std::out_of_range);
 
 	QCanBusFrame frame(message);
 	QByteArray   array(frame.payload());
 	QCOMPARE(array.size(), 8);
 	QCOMPARE(array.at(0), PING);
-	for (size_t t = 0; t < sizeof(bytes); t++)
+	for (std::size_t t = 0; t < sizeof(bytes); t++)
 	{
 		uint8_t byte = (unsigned)array.at(1 + t) & 0xff;
 
@@ -365,20 +255,20 @@ void TestCan::testResponsePayload()
 	MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, Response::MSG_OK);
 	uint8_t      bytes[4];
 
-	for (size_t t = 0; t < sizeof(bytes); t++)
+	for (std::size_t t = 0; t < sizeof(bytes); t++)
 	{
 		bytes[t] = 0x12 + t + 0x22;
 
 		QCOMPARE(message.size(), t);
-		QVERIFY_EXCEPTION_THROWN(message[t], std::out_of_range);
+		MRW_THROWS_EXCEPTION(message[t], std::out_of_range);
 		message.append(bytes[t]);
-		for (size_t b = 0; b < t; b++)
+		for (std::size_t b = 0; b < t; b++)
 		{
 			QCOMPARE(message[b], bytes[b]);
 		}
 	}
 
-	QVERIFY_EXCEPTION_THROWN(message.append(0xff), std::out_of_range);
+	MRW_THROWS_EXCEPTION(message.append(0xff), std::out_of_range);
 
 	QCanBusFrame frame(message);
 	QByteArray   array(frame.payload());
@@ -387,7 +277,7 @@ void TestCan::testResponsePayload()
 	QCOMPARE(array.size(), 8);
 	QCOMPARE(command, SETLFT | CMD_RESPONSE);
 	QCOMPARE(Response(array.at(1)), Response::MSG_OK);
-	for (size_t t = 0; t < sizeof(bytes); t++)
+	for (std::size_t t = 0; t < sizeof(bytes); t++)
 	{
 		uint8_t byte = (unsigned)array.at(4 + t) & 0xff;
 
@@ -397,9 +287,9 @@ void TestCan::testResponsePayload()
 
 void TestCan::testCopyRequest()
 {
-	const size_t start = 1;
+	const std::size_t start = 1;
 
-	for (size_t i = start; i < 8; i++)
+	for (std::size_t i = start; i < 8; i++)
 	{
 		MrwMessage   message(PING);
 
@@ -421,21 +311,21 @@ void TestCan::testCopyRequest()
 
 		QVERIFY(!frame.hasExtendedFrameFormat());
 		QCOMPARE(frame.frameId(), CAN_BROADCAST_ID);
-		QCOMPARE((size_t)array.size(), i + 1);
+		QCOMPARE((std::size_t)array.size(), i + 1);
 		QCOMPARE(Command(array.at(0)), PING);
 
-		for (size_t v = start; v <= i; v++)
+		for (std::size_t v = start; v <= i; v++)
 		{
-			QCOMPARE((size_t)array.at(v), 0x11 * v);
+			QCOMPARE((std::size_t)array.at(v), 0x11 * v);
 		}
 	}
 }
 
 void TestCan::testCopyResponse()
 {
-	const size_t start = 4;
+	const std::size_t start = 4;
 
-	for (size_t i = start; i < 8; i++)
+	for (std::size_t i = start; i < 8; i++)
 	{
 		MrwMessage   message(TEST_CTRL_ID, TEST_UNIT_NO, SETLFT, Response::MSG_QUEUED);
 
@@ -457,13 +347,13 @@ void TestCan::testCopyResponse()
 
 		QVERIFY(frame.hasExtendedFrameFormat());
 		QCOMPARE(frame.frameId(), TEST_CTRL_ID);
-		QCOMPARE((size_t)array.size(), i + 1);
+		QCOMPARE((std::size_t)array.size(), i + 1);
 		QCOMPARE(Command( array.at(0)), SETLFT | CMD_RESPONSE);
 		QCOMPARE(Response(array.at(1)), Response::MSG_QUEUED);
 
-		for (size_t v = start; v <= i; v++)
+		for (std::size_t v = start; v <= i; v++)
 		{
-			QCOMPARE((size_t)array.at(v), 0x11 * v);
+			QCOMPARE((std::size_t)array.at(v), 0x11 * v);
 		}
 	}
 }

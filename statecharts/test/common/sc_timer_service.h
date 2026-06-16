@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 #ifndef SC_TIMER_SERVICE_H_
@@ -245,6 +245,7 @@ namespace sc
 			/*! Unset the given time event.
 			 */
 			virtual void unsetTimer(TimedInterface * statemachine_, sc::eventid event) override;
+
 
 			/*! Set a timer for running cycles of the given statemachine.
 			 */

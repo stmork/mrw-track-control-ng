@@ -1,12 +1,14 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
-#include <ctrl/regularswitchcontrollerproxy.h>
+#include <ctrl/crossingcontroller.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
-#include <ctrl/signalcontrollerproxy.h>
+#include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/railcontrollerproxy.h>
+#include <ctrl/signalcontrollerproxy.h>
+#include <ctrl/sectioncontroller.h>
 
 #include <ui/railwidget.h>
 #include <ui/signalwidget.h>
@@ -87,6 +89,7 @@ void RegionForm::setOpMode(
 void RegionForm::changeEvent(QEvent * e)
 {
 	QWidget::changeEvent(e);
+
 	switch (e->type())
 	{
 	case QEvent::LanguageChange:
@@ -115,8 +118,8 @@ void RegionForm::setupSize(Region * region)
 	}
 
 	ui->controlWidget->setFixedSize(
-		xMax * BaseWidget::SIZE / Position::FRACTION + BaseWidget::SIZE,
-		yMax * BaseWidget::SIZE / Position::FRACTION + BaseWidget::SIZE);
+		xMax * BaseWidget::gridSize() / Position::FRACTION + BaseWidget::gridSize(),
+		yMax * BaseWidget::gridSize() / Position::FRACTION + BaseWidget::gridSize());
 }
 
 void RegionForm::setupRails(SectionController * controller)
@@ -135,8 +138,8 @@ void RegionForm::setupRails(SectionController * controller)
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
 		connect(
-			controller, &BaseController::update, ctrl,
-			&BaseController::update);
+			controller, &BaseController::update,
+			ctrl,       &BaseController::update);
 	}
 }
 
@@ -160,8 +163,8 @@ void RegionForm::setupSignals(SectionController * controller, const bool directi
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
 		connect(
-			controller, &BaseController::update, ctrl,
-			&BaseController::update);
+			controller, &BaseController::update,
+			ctrl,       &BaseController::update);
 	}
 }
 
@@ -181,8 +184,8 @@ void RegionForm::setupRegularSwitches(SectionController * controller)
 			ctrl, &BaseController::update,
 			widget, qOverload<>(&BaseWidget::repaint));
 		connect(
-			controller, &BaseController::update, ctrl,
-			&BaseController::update);
+			controller, &BaseController::update,
+			ctrl,       &BaseController::update);
 	}
 }
 

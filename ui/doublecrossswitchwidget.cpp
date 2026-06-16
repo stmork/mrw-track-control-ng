@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <ui/doublecrossswitchwidget.h>
@@ -60,6 +60,7 @@ void DoubleCrossSwitchWidget::paint(QPainter & painter)
 	const QRectF  rect(-20, status.right_bended ? -85 : 35, 120, FONT_HEIGHT);
 
 	prepareTextColor(painter, status.has_flank_protection);
+	font.setBold(true);
 	font.setPixelSize(FONT_SIZE);
 	painter.setFont(font);
 	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, status.name);

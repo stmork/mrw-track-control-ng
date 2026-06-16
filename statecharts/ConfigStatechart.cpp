@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -28,23 +28,26 @@ namespace mrw
 			ifaceOperationCallback(nullptr),
 			isExecuting(false)
 		{
-			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
-			{
-				stateConfVector[state_vec_pos] = mrw::statechart::ConfigStatechart::State::NO_STATE;
-			}
-
+			std::fill(std::begin(stateConfVector), std::end(stateConfVector), mrw::statechart::ConfigStatechart::State::NO_STATE);
 			clearInEvents();
 		}
 
 		ConfigStatechart::~ConfigStatechart()
 		{
+			if (!timerService)
+			{
+				return;
+			}
+			timerService->unsetTimerRaw(this, 0);
+			timerService->unsetTimerRaw(this, 1);
+			timerService->unsetTimerRaw(this, 2);
 		}
 
 
 
 		std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance> ConfigStatechart::getNextEvent() noexcept
 		{
-			std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance> nextEvent = 0;
+			std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance> nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -83,7 +86,6 @@ namespace mrw
 					break;
 				}
 
-
 			case mrw::statechart::ConfigStatechart::Event::_te0_main_region_Wait_for_Connect_:
 			case mrw::statechart::ConfigStatechart::Event::_te1_main_region_Configure_:
 			case mrw::statechart::ConfigStatechart::Event::_te2_main_region_Wait_for_Boot_:
@@ -103,8 +105,7 @@ namespace mrw
 		/*! Slot for the in event 'connected' that is defined in the default interface scope. */
 		void mrw::statechart::ConfigStatechart::connected()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance>(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::connected)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance>(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::connected)));
 			runCycle();
 		}
 
@@ -112,8 +113,7 @@ namespace mrw
 		/*! Slot for the in event 'completed' that is defined in the default interface scope. */
 		void mrw::statechart::ConfigStatechart::completed()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance>(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::completed)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::ConfigStatechart::EventInstance>(new mrw::statechart::ConfigStatechart::EventInstance(mrw::statechart::ConfigStatechart::Event::completed)));
 			runCycle();
 		}
 
@@ -211,32 +211,27 @@ namespace mrw
 
 		sc::integer ConfigStatechart::getTimeout() noexcept
 		{
-			return timeout
-				;
+			return timeout;
 		}
 
 		sc::integer ConfigStatechart::getWritetime() noexcept
 		{
-			return writetime
-				;
+			return writetime;
 		}
 
 		sc::integer ConfigStatechart::getFlashtime() noexcept
 		{
-			return flashtime
-				;
+			return flashtime;
 		}
 
 		sc::integer ConfigStatechart::getResettime() noexcept
 		{
-			return resettime
-				;
+			return resettime;
 		}
 
 		sc::integer ConfigStatechart::getIdx() const noexcept
 		{
-			return idx
-				;
+			return idx;
 		}
 
 		void ConfigStatechart::setIdx(sc::integer idx_) noexcept
@@ -245,8 +240,7 @@ namespace mrw
 		}
 		sc::integer ConfigStatechart::getMax() const noexcept
 		{
-			return max
-				;
+			return max;
 		}
 
 		void ConfigStatechart::setMax(sc::integer max_) noexcept
@@ -469,12 +463,6 @@ namespace mrw
 			enseq_main_region_Wait_for_Connect_default();
 		}
 
-		sc::integer ConfigStatechart::react(const sc::integer transitioned_before)
-		{
-			/* State machine reactions. */
-			return transitioned_before;
-		}
-
 		sc::integer ConfigStatechart::main_region_Wait_for_Connect_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Wait for Connect. */
@@ -494,7 +482,6 @@ namespace mrw
 						exseq_main_region_Wait_for_Connect();
 						timeEvents[0] = false;
 						enseq_main_region_Failed_default();
-						react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -503,7 +490,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -526,7 +513,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -542,7 +529,6 @@ namespace mrw
 					exseq_main_region_Wait_for_Boot();
 					timeEvents[2] = false;
 					enseq_main_region_Failed_default();
-					react(0);
 					transitioned_after = 0;
 				}
 				else
@@ -551,7 +537,6 @@ namespace mrw
 					{
 						exseq_main_region_Wait_for_Boot();
 						enseq_main_region_Booted_default();
-						react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -560,26 +545,8 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
-			return transitioned_after;
-		}
-
-		sc::integer ConfigStatechart::main_region_Failed_react(const sc::integer transitioned_before)
-		{
-			/* The reactions of state Failed. */
-			sc::integer transitioned_after = transitioned_before;
-			/* Always execute local reactions. */
-			transitioned_after = react(transitioned_before);
-			return transitioned_after;
-		}
-
-		sc::integer ConfigStatechart::main_region_Booted_react(const sc::integer transitioned_before)
-		{
-			/* The reactions of state Booted. */
-			sc::integer transitioned_after = transitioned_before;
-			/* Always execute local reactions. */
-			transitioned_after = react(transitioned_before);
 			return transitioned_after;
 		}
 
@@ -613,12 +580,10 @@ namespace mrw
 				}
 			case mrw::statechart::ConfigStatechart::State::main_region_Failed :
 				{
-					main_region_Failed_react(-1);
 					break;
 				}
 			case mrw::statechart::ConfigStatechart::State::main_region_Booted :
 				{
-					main_region_Booted_react(-1);
 					break;
 				}
 			default:
@@ -648,6 +613,8 @@ namespace mrw
 		void ConfigStatechart::enter()
 		{
 			/* Activates the state machine. */
+			{
+			};
 			if (isExecuting)
 			{
 				return;
@@ -668,6 +635,7 @@ namespace mrw
 			isExecuting = true;
 			/* Default exit sequence for statechart ConfigStatechart */
 			exseq_main_region();
+			stateConfVector[0] = mrw::statechart::ConfigStatechart::State::NO_STATE;
 			isExecuting = false;
 		}
 
@@ -676,6 +644,7 @@ namespace mrw
 		{
 			runCycle();
 		}
+
 
 	}
 }

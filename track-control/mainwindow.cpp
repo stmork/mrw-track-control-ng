@@ -1,12 +1,20 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <unistd.h>
 
-#include <QScreen>
+#ifdef USE_SYSTEMD
+#include <systemd/sd-daemon.h>
+#endif
 
+#include <QScreen>
+#include <QMouseEvent>
+#include <QTouchEvent>
+#include <QKeyEvent>
+
+#include <util/appsupport.h>
 #include <util/globalbatch.h>
 #include <util/method.h>
 #include <util/random.h>
@@ -15,7 +23,6 @@
 
 #include <model/modelrailway.h>
 #include <ctrl/controllerregistry.h>
-#include <ctrl/basecontroller.h>
 #include <ctrl/railcontroller.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
@@ -28,6 +35,10 @@
 #include "mrwmessagedispatcher.h"
 #include "controlledroute.h"
 #include "beermodeservice.h"
+#include "log.h"
+
+using namespace std::chrono;
+using namespace std::chrono_literals;
 
 using namespace mrw::util;
 using namespace mrw::statechart;
@@ -46,8 +57,15 @@ MainWindow::MainWindow(
 	ui(new Ui::MainWindow),
 	repo(repository)
 {
-	const QScreen * screen = QGuiApplication::primaryScreen();
+	const QScreen * screen = blanker;
+
+	if (screen == nullptr)
+	{
+		throw std::runtime_error("No primary screen available!");
+	}
+
 	const QSize     size   = screen->availableSize();
+	qCInfo(mrw::tools::log).noquote() << "Screen size:" << size << "depth:" << screen->depth();
 
 	BaseWidget::setVerbose(false);
 
@@ -58,7 +76,7 @@ MainWindow::MainWindow(
 
 	QList<ControllerWidget *> widgets = findChildren<ControllerWidget *>();
 
-	for (ControllerWidget * w : widgets)
+	for (const ControllerWidget * w : widgets)
 	{
 		connect(w, &ControllerWidget::clicked, this, &MainWindow::itemClicked);
 	}
@@ -76,8 +94,6 @@ MainWindow::MainWindow(
 	connectEditActions();
 	connectOpModes(dispatcher);
 
-	qInfo().noquote() << "Screen size: " << size;
-
 	Qt::WindowFlags window_flags = windowFlags();
 	window_flags |= Qt::WindowMinimizeButtonHint;
 	window_flags |= Qt::WindowMaximizeButtonHint;
@@ -85,27 +101,39 @@ MainWindow::MainWindow(
 	window_flags |= Qt::WindowSystemMenuHint;
 	setWindowFlags(window_flags);
 
+	setMouseTracking(true);
+	QApplication::instance()->installEventFilter(this);
+
 	status_label = new QLabel(tr("Start."));
 	ui->statusbar->addPermanentWidget(status_label);
 
 	statechart.setTimerService(TimerService::instance());
 	statechart.setOperationCallback(*this);
+	statechart.screen().setOperationCallback(blanker);
 	statechart.can().setOperationCallback(dispatcher);
+	setScreenBlankTimeout();
 
 	Q_ASSERT(statechart.check());
-	statechart.enter();
 
-	static SignalHandler terminator( { SIGTERM, SIGINT }, [&]()
+	static SigCallbackHandler terminator( { SIGTERM, SIGINT }, [this]()
 	{
 		statechart.finalize();
 	});
+	static SigCallbackHandler stopper( { SIGHUP }, [this]()
+	{
+		on_clearAllRoutes_clicked();
+	});
+
+	// And startup!
+	qCDebug(mrw::tools::log, "Starting up...");
+	statechart.enter();
 }
 
 MainWindow::~MainWindow()
 {
 	__METHOD__;
 
-	qInfo("  Quitting main window.");
+	qCInfo(mrw::tools::log, "  Quitting main window.");
 	Q_ASSERT(!MainWindow::hasActiveRoutes());
 	Q_ASSERT(GlobalBatch::instance().isCompleted());
 
@@ -114,13 +142,28 @@ MainWindow::~MainWindow()
 	delete ui;
 }
 
+bool MainWindow::eventFilter(QObject * object, QEvent * event)
+{
+	if ((dynamic_cast<QMouseEvent *>(event) != nullptr) ||
+		(dynamic_cast<QKeyEvent *>(event)   != nullptr) ||
+		(dynamic_cast<QTouchEvent *>(event) != nullptr))
+	{
+#if 0
+		qCDebug(mrw::tools::log) << "Filter:" << object << this << event;
+#endif
+
+		statechart.screen_userInput();
+	}
+	return QMainWindow::eventFilter(object, event);
+}
+
 void MainWindow::disableBeerMode()
 {
 	ui->actionBeermodeLeft->setChecked(false);
 	ui->actionBeermodeRight->setChecked(false);
 }
 
-void MainWindow::initRegion(MrwMessageDispatcher & dispatcher)
+void MainWindow::initRegion(const MrwMessageDispatcher & dispatcher)
 {
 	ModelRailway * model = repo;
 
@@ -411,12 +454,12 @@ Section * MainWindow::manualSection()
 		}
 	});
 
-	return sections.size() == 1 ? *sections.begin() : nullptr;
+	return sections.size() == 1 ? *sections.begin() : nullptr; // always valid since size == 1
 }
 
 void MainWindow::warn(const QString & message)
 {
-	qWarning().noquote() << message;
+	qCWarning(mrw::tools::log()).noquote() << message;
 	ui->statusbar->showMessage(message, 10000);
 }
 
@@ -481,6 +524,7 @@ void MainWindow::extendRoute(ControlledRoute * route)
 	on_clearAllSections_clicked();
 
 	route->turn();
+	statechart.routesChanged();
 }
 
 void MainWindow::addRoute(ControlledRoute * route)
@@ -496,6 +540,7 @@ void MainWindow::addRoute(ControlledRoute * route)
 		Qt::QueuedConnection);
 
 	route->turn();
+	statechart.routesChanged();
 }
 
 void MainWindow::routeFinished()
@@ -531,6 +576,18 @@ void MainWindow::routeFinished()
 	statechart.completed();
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
+	statechart.routesChanged();
+}
+
+void MainWindow::setScreenBlankTimeout()
+{
+	mrw::util::Settings      settings;
+	mrw::util::SettingsGroup group(&settings, AppSupport::instance().hostname());
+	const unsigned           blank_time = AppSupport::instance().blanktime();
+	const sc::integer        timeout    = std::max(settings.value("blank", blank_time).toInt(), (int)blank_time);
+
+	qCInfo(mrw::tools::log).noquote() << "Setting screen blank timeout to" << timeout << "seconds.";
+	statechart.screen().setTimeout(timeout);
 }
 
 /*************************************************************************
@@ -768,6 +825,13 @@ void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Po
 			return;
 		}
 	}
+}
+
+void MainWindow::keepAlive()
+{
+#ifdef USE_SYSTEMD
+	sd_notify (0, "WATCHDOG=1");
+#endif
 }
 
 /*************************************************************************

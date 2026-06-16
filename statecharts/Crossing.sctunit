@@ -1,0 +1,429 @@
+//
+//  SPDX-License-Identifier: MIT
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
+//
+
+testclass CrossingTest for statechart mrw.^statechart.CrossingStatechart
+{
+	operation failState()
+	{
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Failed)
+		assert called fail
+	}
+
+	operation initing()
+	{
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Init)
+		assert called used       0 times
+		assert called inc        1 times
+		assert called dec        0 times
+		assert called unregister 0 times
+		assert called pending    1 times
+		assert called open       1 times
+		assert called close      0 times
+		assert called lock       0 times
+	}
+
+	@Test
+	operation waitForStart()
+	{
+		enter
+		assert  is_active
+		assert !is_final
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Wait_For_Start)
+
+		mock used returns (false)
+		mock inc
+		mock dec
+		mock unregister
+		mock pending
+		mock open
+		mock close
+		mock lock
+		mock fail
+	}
+
+	@Test
+	operation initial()
+	{
+		// Given
+		waitForStart()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Wait_For_Start)
+
+		// When
+		raise start
+
+		// Then
+		initing()
+	}
+
+	@Test
+	operation failAfterStart()
+	{
+		// Given
+		initial()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Init)
+
+		// When
+		raise failed
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation timeoutAfterStart()
+	{
+		// Given
+		initial()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Init)
+
+		// When
+		proceed timeout ms
+
+		// Then
+		failState()
+	}
+
+	@Test
+	operation operational()
+	{
+		// Given
+		initial()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Init)
+
+		// When
+		raise response
+
+		// Then
+		assert active(mrw.^statechart.CrossingStatechart.main_region.Operating)
+		assert active(mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Unlocked)
+		assert called used       0 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 0 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
+		assert called lock       1 times
+	}
+
+	@Test
+	operation restart()
+	{
+		// Given
+		operational()
+		assert active(mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Unlocked)
+
+		// When
+		raise start
+
+		// Then
+		initing()
+	}
+
+	@Test
+	operation clearing()
+	{
+		// Given
+		failAfterStart()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Failed)
+
+		// When
+		raise clear
+
+		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Wait_For_Start)
+
+		// When
+		raise start
+
+		// Then
+		initing()
+	}
+
+	@Test
+	operation closeNotUsed()
+	{
+		// Given
+		operational()
+		assert active(mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Unlocked)
+		mock used returns (false)
+
+		// When
+		raise action
+
+		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Unlocked)
+		assert called used       1 times
+		assert called inc        0 times
+		assert called dec        0 times
+		assert called unregister 0 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
+	}
+
+	@Test
+	operation closeUsed()
+	{
+		// Given
+		operational()
+		assert active(mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Unlocked)
+		mock used returns (true)
+
+		// When
+		raise action
+
+		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating)
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Closing)
+		assert called used       1 times
+		assert called inc        1 times
+		assert called dec        0 times
+		assert called unregister 0 times
+		assert called pending    1 times
+		assert called open       0 times
+		assert called close      1 times
+	}
+
+	@Test
+	operation lockUsed()
+	{
+		// Given
+		closeUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Closing)
+
+		// When
+		raise response
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating)
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Delay)
+
+		// When
+		proceed delay ms
+
+		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating)
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Locked)
+		assert called used       1 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 1 times
+		assert called lock       1 times
+		assert called open       0 times
+		assert called close      0 times
+	}
+
+	@Test
+	operation openNotUsed()
+	{
+		// Given
+		lockUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Locked)
+		mock used returns (false)
+
+		// When
+		raise action
+
+		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating)
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Opening)
+		assert called used       1 times
+		assert called inc        1 times
+		assert called dec        0 times
+		assert called unregister 0 times
+		assert called pending    1 times
+		assert called open       1 times
+		assert called close      0 times
+	}
+
+	@Test
+	operation openUsed()
+	{
+		// Given
+		lockUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Locked)
+		mock used returns (true)
+
+		// When
+		raise action
+
+		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating)
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Locked)
+		assert called used       1 times
+		assert called inc        1 times
+		assert called dec        0 times
+		assert called unregister 0 times
+		assert called pending    0 times
+		assert called open       1 times
+		assert called close      0 times
+	}
+
+	@Test
+	operation unlock()
+	{
+		// Given
+		openNotUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Opening)
+		mock used returns (false)
+
+		// When
+		raise response
+
+		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Unlocked)
+		assert called used       0 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 1 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
+	}
+
+	@Test
+	operation UsedDuringUnlock()
+	{
+		// Given
+		openNotUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Opening)
+		mock used returns (true)
+
+		// When
+		raise response
+
+		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating)
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending)
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Closing)
+		assert called used       1 times
+		assert called inc        0 times
+		assert called dec        0 times
+		assert called unregister 0 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      1 times
+	}
+
+	@Test
+	operation closeTimeout()
+	{
+		// Given
+		closeUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Closing)
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Failed)
+		assert called used       0 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 1 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
+		assert called fail       1 times
+	}
+
+	@Test
+	operation openTimeout()
+	{
+		// Given
+		openNotUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Opening)
+
+		// When
+		proceed timeout ms
+
+		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Failed)
+		assert called used       0 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 1 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
+		assert called fail       1 times
+	}
+
+	@Test
+	operation closeFailed()
+	{
+		// Given
+		closeUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Closing)
+
+		// When
+		raise failed
+
+		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Failed)
+		assert called used       0 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 1 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
+		assert called fail       1 times
+	}
+
+	@Test
+	operation openFailed()
+	{
+		// Given
+		openNotUsed()
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Operating.Processing.Pending.Crossing_processing.Opening)
+
+		// When
+		raise failed
+
+		// Then
+		assert active (mrw.^statechart.CrossingStatechart.main_region.Failed)
+		assert called used       0 times
+		assert called inc        0 times
+		assert called dec        1 times
+		assert called unregister 1 times
+		assert called pending    0 times
+		assert called open       0 times
+		assert called close      0 times
+		assert called fail       1 times
+	}
+
+	@Test
+	operation doExit()
+	{
+		enter
+		assert is_active
+
+		exit
+		assert !is_active
+
+		waitForStart()
+		exit
+		assert !is_active
+
+		initial()
+		exit
+		assert !is_active
+
+		operational()
+		exit
+		assert !is_active
+
+		failAfterStart()
+		exit
+		assert !is_active
+
+		lockUsed()
+		exit
+		assert !is_active
+	}
+}

@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QDebug>
@@ -16,7 +16,7 @@ ControllerRegistrand::ControllerRegistrand()
 
 bool ControllerRegistrand::process(const MrwMessage & message)
 {
-	qInfo().noquote() << "Unprocessed message:" << message;
+	qCInfo(log).noquote() << "Unprocessed message:" << message;
 
 	return false;
 }

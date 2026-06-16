@@ -1,9 +1,9 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
-GeneratorModel for yakindu::images
+GeneratorModel for create::images
 {
 	const PROJECT : string = "statecharts"
 	const FOLDER  : string = "images"
@@ -121,6 +121,20 @@ GeneratorModel for yakindu::images
 	}
 
 	statechart mrw.statechart.UpdateStatechart
+	{
+		feature Outlet
+		{
+			targetProject = PROJECT
+			targetFolder  = FOLDER
+		}
+
+		feature Renderer
+		{
+			format = "png"
+		}
+	}
+
+	statechart mrw.statechart.CrossingStatechart	
 	{
 		feature Outlet
 		{

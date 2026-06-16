@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -24,8 +24,10 @@ namespace mrw::util
 	 * @note The application will terminate gracefully using
 	 * the QCoreApplication::quit() method.
 	 */
-	class TermHandler : public SignalHandler
+	class TermHandler : public SigPipeHandler
 	{
+		Q_OBJECT
+
 	public:
 		/**
 		 * This constructor registers a termination handler which reacts on the

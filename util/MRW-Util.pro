@@ -1,36 +1,42 @@
 #
 #  SPDX-License-Identifier: MIT
-#  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+#  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 #
 
+QT       += network
 TEMPLATE  = lib
 CONFIG   += staticlib
 
 include(../common.pri)
 
 SOURCES += \
+	appsupport.cpp \
 	batch.cpp \
 	batchparticipant.cpp \
-	duration.cpp \
-	globalbatch.cpp \
 	clockservice.cpp \
 	dumphandler.cpp \
+	duration.cpp \
+	globalbatch.cpp \
+	hexline.cpp \
+	log.cpp \
 	properties.cpp \
-	random.cpp \
 	settings.cpp \
 	signalhandler.cpp \
 	stringutil.cpp \
 	termhandler.cpp
 
 HEADERS += \
+	appsupport.h \
 	batch.h \
 	batchparticipant.h \
-	duration.h \
-	globalbatch.h \
+	cleanvector.h \
 	clockservice.h \
 	constantenumerator.h \
-	constantenumerator.h \
 	dumphandler.h \
+	duration.h \
+	globalbatch.h \
+	hexline.h \
+	log.h \
 	method.h \
 	properties.h \
 	random.h \

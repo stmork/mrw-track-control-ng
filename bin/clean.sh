@@ -1,7 +1,8 @@
 #!/bin/bash
 
 test -f Makefile && make clean
-for DIR in api-doc cccc lcov-out rootfs
+rm -rf *.deb
+for DIR in api-doc cccc lcov-out rootfs build
 do
    rm -rf ${DIR}
 done

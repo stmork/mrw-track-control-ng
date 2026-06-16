@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -8,20 +8,20 @@
 #ifndef MRW_MODEL_SECTION_H
 #define MRW_MODEL_SECTION_H
 
-#include <vector>
 #include <regex>
 #include <functional>
 #include <type_traits>
 
 #include <QDomElement>
 
-#include <util/constantenumerator.h>
-#include <util/method.h>
-#include <util/stringutil.h>
 #include <model/assemblypart.h>
 #include <model/module.h>
 #include <model/device.h>
 #include <model/position.h>
+#include <util/cleanvector.h>
+#include <util/constantenumerator.h>
+#include <util/method.h>
+#include <util/stringutil.h>
 
 namespace mrw::model
 {
@@ -29,41 +29,45 @@ namespace mrw::model
 	class Region;
 	class SectionModule;
 	class Signal;
+	class Crossing;
 
+	/**
+	 * This enumeration describes the possible internal Section states.
+	 */
 	enum class SectionState : int
 	{
 		/**
 		 * The Section is in free/available state.
 		 *
-		 * <img src="Rail____IS_RUF.jpg" width="100"/>
+		 * <img src="Rail____IS__RUF.jpg" width="100"/>
 		 */
 		FREE = 0,
 
 		/**
 		 * The section is reserved for shunting.
 		 *
-		 * <img src="Rail____IS_RUS.jpg" width="100"/>
+		 * <img src="Rail____IS__RUS.jpg" width="100"/>
 		 */
 		SHUNTING,
 
 		/**
 		 * The section is reserved for a tour.
 		 *
-		 * <img src="Rail____IS_RUT.jpg" width="100"/>
+		 * <img src="Rail____IS__RUT.jpg" width="100"/>
 		 */
 		TOUR,
 
 		/**
 		 * The section is occupied by a train.
 		 *
-		 * <img src="Rail____IS_RUO.jpg" width="100"/>
+		 * <img src="Rail____IS__RUO.jpg" width="100"/>
 		 */
 		OCCUPIED,
 
 		/**
 		 * The section has left by a train and is still reserved.
 		 *
-		 * <img src="Rail____IS_RUP.jpg" width="100"/>
+		 * <img src="Rail____IS__RUP.jpg" width="100"/>
 		 */
 		PASSED
 	};
@@ -77,27 +81,29 @@ namespace mrw::model
 	{
 		friend class Region;
 
-		static const std::regex                                   path_regex;
+		static const std::regex                                   module_path_regex;
+		static const std::regex                                   crossing_path_regex;
 		static const mrw::util::ConstantEnumerator<SectionState>  state_map;
 
-		const QString                section_name;
-		ModelRailway        *        model              = nullptr;
-		Region           *           section_region     = nullptr;
-		Controller         *         section_controller = nullptr;
-		SectionModule        *       section_module     = nullptr;
-		SectionState                 section_state      = SectionState::FREE;
-		bool                         section_enabled    = false;
-		bool                         section_occupied   = false;
-		std::vector<AssemblyPart *>  assembly_parts;
-		std::vector<Signal *>        forward_signals;
-		std::vector<Signal *>        backward_signals;
+		const QString                         section_name;
+		ModelRailway             *            model              = nullptr;
+		Region                *               section_region     = nullptr;
+		Controller              *             section_controller = nullptr;
+		SectionModule            *            section_module     = nullptr;
+		Crossing               *              section_crossing   = nullptr;
+		SectionState                          section_state      = SectionState::FREE;
+		bool                                  section_enabled    = false;
+		bool                                  section_occupied   = false;
+		mrw::util::CleanVector<AssemblyPart>  assembly_parts;
+		std::vector<Signal *>                 forward_signals;
+		std::vector<Signal *>                 backward_signals;
 
 	public:
 		explicit Section(
 			ModelRailway     *    model_railway,
 			Region        *       region,
 			const QDomElement  &  element);
-		virtual ~Section();
+		virtual ~Section() = default;
 
 		// Implementations from Device
 		const QString    &   name()         const noexcept override;
@@ -174,6 +180,7 @@ namespace mrw::model
 		 * SectionState::OCCUPIED regardless on the real SectionState.
 		 *
 		 * @return The SectionState of this Section.
+		 * @see SectionState
 		 */
 		SectionState state() const noexcept;
 
@@ -185,6 +192,7 @@ namespace mrw::model
 		 * SectionState::PASSED to mark the Section reserved.
 		 *
 		 * @param input The new SectionState to set.
+		 * @see SectionState
 		 */
 		void setState(const SectionState input) noexcept;
 
@@ -221,12 +229,19 @@ namespace mrw::model
 		Region * region() const noexcept;
 
 		/**
+		 * This method returns the Crossing if any is related to.
+		 *
+		 * @return The related Crossing.
+		 */
+		Crossing * crossing() const noexcept;
+
+		/**
 		 * This template class returns all AssemblyPart elements of the given
 		 * type T. The found elements are stored into the given std::vector.
 		 *
 		 * @param result The result vector collecting the AssembyPart elements
 		 * of type T.
-		 * @param guard A labmda to fine select if the type T should added to
+		 * @param guard A lamda to fine select if the type T should added to
 		 * the result vector.
 		 */
 		template <class T> constexpr void parts(
@@ -308,8 +323,8 @@ namespace mrw::model
 	private:
 		void            add(AssemblyPart * rail_part) noexcept;
 		void            link() noexcept;
-		SectionModule * resolve(const std::string & path) noexcept;
-
+		SectionModule * resolveModule(const std::string & path) noexcept;
+		Crossing    *   resolveCrossing(const std::string & path) noexcept;
 	};
 }
 

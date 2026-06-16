@@ -1,11 +1,12 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QPoint>
 
 #include <can/commands.h>
+#include <model/crossing.h>
 #include <ctrl/railcontrollerproxy.h>
 
 using namespace mrw::can;
@@ -66,7 +67,7 @@ SectionState RailControllerProxy::state() const
 
 Device::LockState RailControllerProxy::lock() const
 {
-	return section()->lock();
+	return hasCrossing() ? section()->crossing()->lock() : section()->lock();
 }
 
 Position::Bending RailControllerProxy::bending() const
@@ -82,6 +83,11 @@ bool RailControllerProxy::aEnds() const
 bool RailControllerProxy::bEnds() const
 {
 	return rail->advance(!rail->aIsDir()).empty();
+}
+
+bool RailControllerProxy::hasCrossing() const
+{
+	return section()->crossing() != nullptr;
 }
 
 RailPart * RailControllerProxy::railPart() const

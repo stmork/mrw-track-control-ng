@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -43,6 +43,11 @@ namespace mrw::ctrl
 			 * @see RailController::bEnds()
 			 */
 			bool b_ends = false;
+
+			/**
+			 * True if Rail contains a road crossing.
+			 */
+			bool has_crossing = false;
 		};
 
 		explicit RailController(QObject * parent = nullptr);
@@ -59,7 +64,7 @@ namespace mrw::ctrl
 		void status(RailController::Status & status) const;
 
 	private:
-		virtual bool            isExpandable() const override;
+		virtual bool  isExpandable() const override;
 
 		/**
 		 * The @c a connector does not have any further mrw::model::RailPart
@@ -80,6 +85,13 @@ namespace mrw::ctrl
 		 * @return True if the Rail ends here at the <em>b</em> connection.
 		 */
 		virtual bool  bEnds() const = 0;
+
+		/**
+		 * This returns the existance of a road crossing on this rail.
+		 *
+		 * @return True if the rail contains a road crossing.
+		 */
+		virtual bool hasCrossing() const = 0;
 	};
 }
 

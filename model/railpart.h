@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -177,7 +177,6 @@ namespace mrw::model
 		 * @exception std::invalid_argument one of the RailPart pointer is not
 		 * a neighbour.
 		 */
-		[[nodiscard]]
 		virtual bool setState(
 			const RailPart * prev,
 			const RailPart * succ) = 0;

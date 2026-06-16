@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -89,6 +89,8 @@ namespace mrw
 			void raiseReceived();
 
 
+
+
 			/*! Gets the value of the variable 'start' that is defined in the default interface scope. */
 			static sc::integer getStart()  noexcept;
 			/*! Gets the value of the variable 'step' that is defined in the default interface scope. */
@@ -119,6 +121,7 @@ namespace mrw
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent() override;
+
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -179,7 +182,6 @@ namespace mrw
 			bool dispatchEvent(EventInstance * event) noexcept;
 
 
-
 		private:
 			TrackerStatechart(const TrackerStatechart & rhs);
 			TrackerStatechart & operator=(const TrackerStatechart &);
@@ -194,7 +196,7 @@ namespace mrw
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 			static const sc::ushort maxOrthogonalStates {1};
 
-			sc::timer::TimerServiceInterface * timerService;
+			sc::timer::TimerServiceInterface * timerService = {};
 			bool timeEvents[timeEventsCount];
 
 
@@ -238,7 +240,6 @@ namespace mrw
 			void react_main_region__choice_0();
 			void react_main_region__entry_Default();
 			void react_main_region_Driving_Tracking__entry_Default();
-			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Preparing_react(const sc::integer transitioned_before);
 			sc::integer main_region_Driving_react(const sc::integer transitioned_before);
 			sc::integer main_region_Driving_Tracking_First_react(const sc::integer transitioned_before);
@@ -257,7 +258,6 @@ namespace mrw
 
 			/*! Indicates event 'completed' of internal scope is active. */
 			bool completed_raised {false};
-
 
 
 		};

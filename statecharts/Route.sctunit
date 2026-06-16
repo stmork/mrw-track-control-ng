@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
 testclass RouteTest for statechart mrw.^statechart.RouteStatechart
@@ -40,6 +40,7 @@ testclass RouteTest for statechart mrw.^statechart.RouteStatechart
 		mock isTour returns (true)
 		mock isCompleted returns (true)
 
+		mock turnCrossings
 		mock turnSwitches
 		mock turnFlanks
 		mock enableSignals

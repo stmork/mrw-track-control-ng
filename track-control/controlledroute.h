@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -64,7 +64,7 @@ signals:
 	void completed() override;
 
 public slots:
-	void entered();
+	void enteredSection();
 	void leaving();
 	void left();
 	void tryUnblock();
@@ -117,6 +117,7 @@ private:
 	virtual void fail() override;
 	virtual void tryComplete() override;
 
+	virtual void turnCrossings() override;
 	virtual void turnSwitches() override;
 	virtual void turnFlanks() override;
 	virtual void enableSignals() override;

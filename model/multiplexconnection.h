@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -8,13 +8,13 @@
 #ifndef MRW_MODEL_MULTIPLEXCONNECTION_H
 #define MRW_MODEL_MULTIPLEXCONNECTION_H
 
-#include <vector>
-
+#include <model/crossing.h>
+#include <model/light.h>
 #include <model/module.h>
+#include <util/cleanvector.h>
 
 namespace mrw::model
 {
-	class Light;
 	class LightSignal;
 	class Controller;
 
@@ -34,13 +34,14 @@ namespace mrw::model
 	{
 		friend class Controller;
 
-		ModelRailway    *   model = nullptr;
+		ModelRailway           *          model = nullptr;
 
-		const QDomElement   reference;
-		const ModuleId      connection_id;
+		const QDomElement                 reference;
+		const ModuleId                    connection_id;
 
-		std::vector<LightSignal *> light_signals;
-		std::vector<Light *>       simple_lights;
+		std::vector<LightSignal *>        light_signal_vector;
+		mrw::util::CleanVector<Light>     simple_light_vector;
+		mrw::util::CleanVector<Crossing>  crossing_vector;
 
 	public:
 		/** The maximum light count connected to one module. */
@@ -50,7 +51,7 @@ namespace mrw::model
 			ModelRailway     *    model_railway,
 			Controller      *     controller,
 			const QDomElement  &  element);
-		virtual ~MultiplexConnection();
+		virtual ~MultiplexConnection() = default;
 
 		/**
 		 * This method returns the module ID. This ID is not used to by
@@ -72,7 +73,28 @@ namespace mrw::model
 		 */
 		bool valid() const;
 
+		/**
+		 * This static method checks whether a given MultiplexConnection is a
+		 * valid instance. The method checks if the input is a valid pointer.
+		 *
+		 * @param conn The non nullptr MultiplexConnection instance
+		 * @return True if the MultiplexConnection is valid.
+		 */
+		static bool isValid(const MultiplexConnection * conn) noexcept;
+
+		/**
+		 * This method returns the vector of connected Light instances.
+		 *
+		 * @return The vector of connected Light instances.
+		 */
 		const std::vector<Light *> & lights() const;
+
+		/**
+		 * This method returns the vector of connected Crossing instances.
+		 *
+		 * @return The vector of connected Crossing instances.
+		 */
+		const std::vector<Crossing *> & crossings() const;
 
 	private:
 		void link();

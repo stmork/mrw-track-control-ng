@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <util/method.h>
@@ -21,7 +21,7 @@ ControllerRegistry::~ControllerRegistry()
 {
 	__METHOD__;
 
-	qInfo("  Shutting down controller registry.");
+	qCInfo(log, "  Shutting down controller registry.");
 	Q_ASSERT(registry.empty());
 }
 

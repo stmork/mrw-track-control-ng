@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -40,7 +40,6 @@ namespace mrw::test
 
 		static const mrw::model::Rail * convert(
 			const std::set<mrw::model::RailInfo>::iterator & it);
-		static bool isSimpleLight(const mrw::model::Light * light);
 		static bool hasCutOff(const mrw::model::AbstractSwitch * part);
 
 	private slots:
@@ -68,8 +67,9 @@ namespace mrw::test
 		void testFormSignalConfig();
 		void testSectionConfig();
 		void testSwitchConfig();
-		void testSimpleLightConfig();
 		void testProfileLightConfig();
+		void testSimpleLightConfig();
+		void testCrossingConfig();
 		void testStatistics();
 	};
 }

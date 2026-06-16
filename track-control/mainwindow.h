@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -23,6 +23,7 @@
 #include <statecharts/OperatingModeStatechart.h>
 
 #include "regionform.h"
+#include "screenblankhandler.h"
 #include "ui/sectionlistwidget.h"
 
 QT_BEGIN_NAMESPACE
@@ -34,6 +35,7 @@ QT_END_NAMESPACE
 
 class MrwMessageDispatcher;
 class ControlledRoute;
+class ScreenBlankHandler;
 
 class MainWindow :
 	public QMainWindow,
@@ -47,6 +49,9 @@ public:
 		MrwMessageDispatcher      &      dispatcher,
 		QWidget             *            parent = nullptr);
 	~MainWindow();
+
+protected:
+	virtual bool eventFilter(QObject * object, QEvent * event) override;
 
 public slots:
 	void disableBeerMode();
@@ -95,7 +100,8 @@ private slots:
 
 private:
 
-	void initRegion(MrwMessageDispatcher & dispatcher);
+	void setScreenBlankTimeout();
+	void initRegion(const MrwMessageDispatcher & dispatcher);
 	void connectEditActions();
 	void connectOpModes(MrwMessageDispatcher & dispatcher);
 
@@ -105,6 +111,7 @@ private:
 		mrw::model::Position    *   position);
 
 	// Implementation for OperationCallback
+	void          keepAlive() override;
 	void          resetTransaction() override;
 	bool          isManualValid() override;
 	bool          hasActiveRoutes() override;
@@ -127,6 +134,7 @@ private:
 	QLabel                   *                  status_label = nullptr;
 	mrw::model::ModelRepository        &        repo;
 
+	ScreenBlankHandler                                                         blanker;
 	mrw::statechart::QtStatechart<mrw::statechart::OperatingModeStatechart>    statechart;
 };
 

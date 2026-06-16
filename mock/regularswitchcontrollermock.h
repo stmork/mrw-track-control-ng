@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -32,7 +32,7 @@ namespace mrw::ctrl
 			mrw::model::RegularSwitch::State::AB;
 
 	public:
-		RegularSwitchControllerMock(QObject * parent = nullptr);
+		explicit RegularSwitchControllerMock(QObject * parent = nullptr);
 
 		void reset();
 

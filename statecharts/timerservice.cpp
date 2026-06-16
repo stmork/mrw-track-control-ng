@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <statecharts/timerservice.h>
@@ -28,7 +28,7 @@ void TimerService::setTimer(
 	QTimer  *  timer          = getTimer(statemachine, event);
 	const bool high_precision = (time_ms % 1000) != 0;
 
-	// amor the timer
+	// armor the timer
 	timer->setTimerType(high_precision ? PreciseTimer : CoarseTimer);
 	timer->setInterval(time_ms);
 	timer->setSingleShot(!is_periodic);
@@ -36,22 +36,40 @@ void TimerService::setTimer(
 }
 
 void TimerService::unsetTimer(
-	std::shared_ptr<sc::timer::TimedInterface> statemachine,
-	sc::eventid                                event)
+	std::shared_ptr<TimedInterface> statemachine,
+	sc::eventid                     event)
 {
 	QTimer * timer = this->getTimer(statemachine, event);
 
 	timer->stop();
 }
 
-QTimer * TimerService::getTimer(
-	std::shared_ptr<sc::timer::TimedInterface> & statemachine,
-	sc::eventid                                  event)
+void TimerService::unsetTimerRaw(
+	TimedInterface * statemachine,
+	sc::eventid      event)
 {
-	TimerKey   key{ statemachine.get(), event };
-	QTimer  *  timer;
+	TimerKey key{ statemachine, event };
 
+	if (chart_map.contains(key))
+	{
+		QTimer * timer = chart_map[key];
+
+		Q_ASSERT(timer != nullptr);
+		timer->stop();
+		chart_map.remove(key);
+		delete timer;
+	}
+}
+
+QTimer * TimerService::getTimer(
+	std::shared_ptr<TimedInterface> & statemachine,
+	sc::eventid                       event)
+{
 	Q_ASSERT(statemachine);
+
+	TimerKey   key{ statemachine.get(), event };
+	QTimer  *  timer = nullptr;
+
 	if (chart_map.contains(key))
 	{
 		timer = chart_map[key];

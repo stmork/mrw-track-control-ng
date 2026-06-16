@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -87,7 +87,7 @@ namespace mrw::util
 		 * @return The QString representation of the symbolic value.
 		 */
 		[[nodiscard]]
-		constexpr QString get(const T key) const noexcept
+		QString get(const T key) const noexcept
 		{
 			const auto it = std::unordered_map<T, QString>::find(key);
 
@@ -124,6 +124,8 @@ namespace mrw::util
 			{
 				if (it->second == value)
 				{
+					[[unlikely]];
+
 					break;
 				}
 				++it;

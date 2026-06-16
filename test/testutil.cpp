@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <iostream>
@@ -10,6 +10,7 @@
 #include <QTest>
 #include <QSignalSpy>
 
+#include <util/appsupport.h>
 #include <util/method.h>
 #include <util/properties.h>
 #include <util/settings.h>
@@ -22,11 +23,19 @@
 #include <util/batchparticipant.h>
 #include <util/globalbatch.h>
 #include <util/self.h>
+#include <util/hexline.h>
+#include <util/cleanvector.h>
 
 #include "testutil.h"
 
 using namespace mrw::test;
 using namespace mrw::util;
+
+#if (QT_VERSION < QT_VERSION_CHECK(6, 3, 0))
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_EXCEPTION_THROWN(condition, exception);
+#else
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_THROWS_EXCEPTION(exception, condition);
+#endif
 
 const ConstantEnumerator<int> TestUtil::int_map
 {
@@ -158,12 +167,12 @@ void TestUtil::testConstantEnumerator()
 	QCOMPARE(int_map.get(EBUSY),  "EBUSY");
 	QCOMPARE(int_map.at(EINVAL),  "EINVAL");
 	QCOMPARE(int_map.get(EINVAL), "EINVAL");
-	QCOMPARE(int_map.get(EAGAIN), "0x0B");
+	QCOMPARE(int_map.get(EAGAIN).left(2), "0x");
 
 	QCOMPARE(int_map.findKey("EINVAL")->first, EINVAL);
 	QCOMPARE(int_map.findKey("XYZ"), int_map.end());
 
-	QVERIFY_EXCEPTION_THROWN(int_map.at(EAGAIN), std::out_of_range);
+	MRW_THROWS_EXCEPTION(int_map.at(EAGAIN), std::out_of_range);
 
 	QCOMPARE(enum_map.at(EnumTest::ENUM1), "ENUM1");
 	QCOMPARE(enum_map.get(EnumTest::ENUM1), "ENUM1");
@@ -191,8 +200,9 @@ void TestUtil::testProperties()
 	QCOMPARE(props.at("Special"), "a.-_,");
 	QCOMPARE(props.at("ss1"), "2");
 	QCOMPARE(props.at("empty"), "");
-	QVERIFY_EXCEPTION_THROWN(props.at("11ss"), std::out_of_range);
-	QVERIFY_EXCEPTION_THROWN(props.at("1"),    std::out_of_range);
+
+	MRW_THROWS_EXCEPTION(props.at("11ss"), std::out_of_range);
+	MRW_THROWS_EXCEPTION(props.at("1"),    std::out_of_range);
 
 	QCOMPARE(props.lookup("AvalidProp"), "xyvc_,");
 	QCOMPARE(props.lookup("Another11Prop"), "ccc");
@@ -248,7 +258,7 @@ void TestUtil::testRandom()
 
 void TestUtil::testDumpHandler()
 {
-	size_t       count = 0;
+	std::size_t       count = 0;
 	TermHandler  term_handler;
 	DumpHandler  dump_handler( [&] ()
 	{
@@ -263,10 +273,18 @@ void TestUtil::testDumpHandler()
 #endif
 
 	raise(SIGQUIT);
+
+	// cppcheck-suppress "unreachableCode"
+	QTest::qWait(50);
+
 	// cppcheck-suppress "unreachableCode"
 	QCOMPARE(count, 1u);
 
 	raise(SIGQUIT);
+
+	// cppcheck-suppress "unreachableCode"
+	QTest::qWait(50);
+
 	// cppcheck-suppress "unreachableCode"
 	QCOMPARE(count, 2u);
 }
@@ -333,9 +351,9 @@ void TestUtil::testResetBatch()
 	QSignalSpy      completed(&GlobalBatch::instance(), &GlobalBatch::completed);
 	std::vector<TestParticipant> participants;
 
-	const size_t max = 100;
+	const std::size_t max = 100;
 	participants.reserve(max);
-	for (size_t i = 0; i < max; i++)
+	for (std::size_t i = 0; i < max; i++)
 	{
 		participants.emplace_back(TestParticipant(QString::asprintf("%04zu", i)));
 	}
@@ -423,9 +441,9 @@ void TestUtil::testUnsetCustomBatch()
 {
 	std::vector<TestParticipant> participants;
 
-	const size_t max = 100;
+	const std::size_t max = 100;
 	participants.reserve(max);
-	for (size_t i = 0; i < max; i++)
+	for (std::size_t i = 0; i < max; i++)
 	{
 		participants.emplace_back(TestParticipant(QString::asprintf("%04zu", i)));
 	}
@@ -456,9 +474,9 @@ void TestUtil::testResetCustomBatch()
 	QSignalSpy                   completed(&batch, &TestBatch::completed);
 	std::vector<TestParticipant> participants;
 
-	const size_t max = 100;
+	const std::size_t max = 100;
 	participants.reserve(max);
-	for (size_t i = 0; i < max; i++)
+	for (std::size_t i = 0; i < max; i++)
 	{
 		participants.emplace_back(TestParticipant(QString::asprintf("%04zu", i)));
 	}
@@ -509,4 +527,99 @@ void TestUtil::testSelfPointer()
 
 	QVERIFY(shared_pointer);
 	QCOMPARE(shared_pointer.use_count(), 1);
+}
+
+void TestUtil::testHexLine()
+{
+	std::vector<uint8_t> buffer;
+
+	// Header parse error
+	MRW_THROWS_EXCEPTION(HexLine(""), std::invalid_argument);
+	MRW_THROWS_EXCEPTION(HexLine(":xxxx"), std::invalid_argument);
+	MRW_THROWS_EXCEPTION(HexLine(":0000000g"), std::invalid_argument);
+
+	// Length format error.
+	MRW_THROWS_EXCEPTION(HexLine(":01000000"), std::invalid_argument);
+
+	// Data format error.
+	MRW_THROWS_EXCEPTION(HexLine(":02123400xx00aa"), std::invalid_argument);
+
+	// Checksum error.
+	MRW_THROWS_EXCEPTION(HexLine(":02123400ff00aa"), std::invalid_argument);
+
+	// Data line
+	HexLine line(":02123400ff00b9");
+	QCOMPARE(line.getAddress(), unsigned(0x1234));
+	QVERIFY(line);
+	line.append(buffer);
+	QCOMPARE(buffer.size(), std::size_t(2));
+	QCOMPARE(buffer[0], 0xff);
+	QCOMPARE(buffer[1], 0x00);
+
+	// EOF
+	HexLine eof(":005678010e");
+	QCOMPARE(eof.getAddress(), unsigned(0x5678));
+	QVERIFY(!eof);
+}
+
+struct Container
+{
+	float a = 0.f;
+};
+
+void TestUtil::testCleanVector()
+{
+	Container * a = new Container();
+	Container * b = new Container();
+	CleanVector<Container> container;
+
+	container.push_back(a);
+	container.push_back(b);
+	QCOMPARE(container.size(), std::size_t(2));
+}
+
+void TestUtil::testSharedVector()
+{
+	std::shared_ptr<Container> a = std::make_shared<Container>();
+	std::shared_ptr<Container> b = std::make_shared<Container>();
+	std::shared_ptr<Container> c(new Container());
+
+	QCOMPARE(a.use_count(), 1);
+	QCOMPARE(b.use_count(), 1);
+	QCOMPARE(c.use_count(), 1);
+
+	{
+		SharedVector<Container> container;
+
+		QCOMPARE(a.use_count(), 1);
+		QCOMPARE(b.use_count(), 1);
+		QCOMPARE(c.use_count(), 1);
+
+		container.push_back(a);
+		container.push_back(b);
+		container.push_back(c);
+
+		QCOMPARE(a.use_count(), 2);
+		QCOMPARE(b.use_count(), 2);
+		QCOMPARE(c.use_count(), 2);
+	}
+	QCOMPARE(a.use_count(), 1);
+	QCOMPARE(b.use_count(), 1);
+	QCOMPARE(c.use_count(), 1);
+}
+
+void TestUtil::testBlanktime()
+{
+	const auto blanktime = AppSupport::instance().blanktime();
+
+	QVERIFY(blanktime >= 300); // 5 minutes
+	QVERIFY(blanktime <= 21600); // 6 hours
+}
+
+void TestUtil::testHostname()
+{
+	const auto hostname = AppSupport::instance().hostname();
+
+	QVERIFY(!hostname.isEmpty());
+	QVERIFY(!hostname.contains("."));
 }

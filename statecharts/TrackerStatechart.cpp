@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -25,24 +25,28 @@ namespace mrw
 			ifaceOperationCallback(nullptr),
 			isExecuting(false)
 		{
-			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
-			{
-				stateConfVector[state_vec_pos] = mrw::statechart::TrackerStatechart::State::NO_STATE;
-			}
-
+			std::fill(std::begin(stateConfVector), std::end(stateConfVector), mrw::statechart::TrackerStatechart::State::NO_STATE);
 			clearInEvents();
 			clearInternalEvents();
 		}
 
 		TrackerStatechart::~TrackerStatechart()
 		{
+			if (!timerService)
+			{
+				return;
+			}
+			timerService->unsetTimerRaw(this, 0);
+			timerService->unsetTimerRaw(this, 1);
+			timerService->unsetTimerRaw(this, 2);
+			timerService->unsetTimerRaw(this, 3);
 		}
 
 
 
 		std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance> TrackerStatechart::getNextEvent() noexcept
 		{
-			std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance> nextEvent = 0;
+			std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance> nextEvent = nullptr;
 
 			if (!internalEventQueue.empty())
 			{
@@ -86,7 +90,6 @@ namespace mrw
 					break;
 				}
 
-
 			case mrw::statechart::TrackerStatechart::Event::_te0_main_region_Preparing_:
 			case mrw::statechart::TrackerStatechart::Event::_te1_main_region_Driving_Tracking_First_:
 			case mrw::statechart::TrackerStatechart::Event::_te2_main_region_Driving_Tracking_Occupy_:
@@ -107,8 +110,7 @@ namespace mrw
 		/*! Slot for the in event 'received' that is defined in the default interface scope. */
 		void mrw::statechart::TrackerStatechart::received()
 		{
-			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance>(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::received)))
-			;
+			incomingEventQueue.push_back(std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance>(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::received)));
 			runCycle();
 		}
 
@@ -211,14 +213,12 @@ namespace mrw
 
 		sc::integer TrackerStatechart::getStart() noexcept
 		{
-			return start
-				;
+			return start;
 		}
 
 		sc::integer TrackerStatechart::getStep() noexcept
 		{
-			return step
-				;
+			return step;
 		}
 
 		void TrackerStatechart::setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept
@@ -256,8 +256,7 @@ namespace mrw
 			/* Entry action for state 'Free'. */
 			timerService->setTimer(shared_from_this(), 3, (static_cast<sc::time> (TrackerStatechart::step)), false);
 			ifaceOperationCallback->free();
-			internalEventQueue.push_back(std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance>(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::Internal_completed)))
-			;
+			internalEventQueue.push_back(std::unique_ptr<mrw::statechart::TrackerStatechart::EventInstance>(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::Internal_completed)));
 		}
 
 		/* Entry action for state 'Idle'. */
@@ -369,13 +368,14 @@ namespace mrw
 		{
 			/* Default exit sequence for state Driving */
 			exseq_main_region_Driving_Tracking();
+			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::NO_STATE;
 		}
 
 		/* Default exit sequence for state First */
 		void TrackerStatechart::exseq_main_region_Driving_Tracking_First()
 		{
 			/* Default exit sequence for state First */
-			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::main_region_Driving;
 			exact_main_region_Driving_Tracking_First();
 		}
 
@@ -383,7 +383,7 @@ namespace mrw
 		void TrackerStatechart::exseq_main_region_Driving_Tracking_Occupy()
 		{
 			/* Default exit sequence for state Occupy */
-			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::main_region_Driving;
 			exact_main_region_Driving_Tracking_Occupy();
 		}
 
@@ -391,7 +391,7 @@ namespace mrw
 		void TrackerStatechart::exseq_main_region_Driving_Tracking_Free()
 		{
 			/* Default exit sequence for state Free */
-			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::main_region_Driving;
 			exact_main_region_Driving_Tracking_Free();
 		}
 
@@ -412,6 +412,11 @@ namespace mrw
 			case mrw::statechart::TrackerStatechart::State::main_region_Preparing :
 				{
 					exseq_main_region_Preparing();
+					break;
+				}
+			case mrw::statechart::TrackerStatechart::State::main_region_Driving :
+				{
+					exseq_main_region_Driving();
 					break;
 				}
 			case mrw::statechart::TrackerStatechart::State::main_region_Driving_Tracking_First :
@@ -496,12 +501,6 @@ namespace mrw
 			enseq_main_region_Driving_Tracking_First_default();
 		}
 
-		sc::integer TrackerStatechart::react(const sc::integer transitioned_before)
-		{
-			/* State machine reactions. */
-			return transitioned_before;
-		}
-
 		sc::integer TrackerStatechart::main_region_Preparing_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Preparing. */
@@ -512,7 +511,6 @@ namespace mrw
 				{
 					exseq_main_region_Preparing();
 					enseq_main_region_Preparing_default();
-					react(0);
 					transitioned_after = 0;
 				}
 				else
@@ -530,7 +528,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -545,7 +543,6 @@ namespace mrw
 				{
 					exseq_main_region_Driving();
 					enseq_main_region_Idle_default();
-					react(0);
 					transitioned_after = 0;
 				}
 			}
@@ -553,7 +550,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -640,7 +637,6 @@ namespace mrw
 				{
 					exseq_main_region_Idle();
 					enseq_main_region_Preparing_default();
-					react(0);
 					transitioned_after = 0;
 				}
 			}
@@ -648,7 +644,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -724,6 +720,8 @@ namespace mrw
 		void TrackerStatechart::enter()
 		{
 			/* Activates the state machine. */
+			{
+			};
 			if (isExecuting)
 			{
 				return;
@@ -744,6 +742,7 @@ namespace mrw
 			isExecuting = true;
 			/* Default exit sequence for statechart TrackerStatechart */
 			exseq_main_region();
+			stateConfVector[0] = mrw::statechart::TrackerStatechart::State::NO_STATE;
 			isExecuting = false;
 		}
 
@@ -752,6 +751,7 @@ namespace mrw
 		{
 			runCycle();
 		}
+
 
 	}
 }

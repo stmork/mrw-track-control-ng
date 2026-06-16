@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QTest>
@@ -51,16 +51,19 @@ void TestRegularSwitchWidget::testPrepare()
 						for (int ext = 0; ext < 5; ext++)
 						{
 							mock.setExtension(ext);
-
-							widget.test(status);
-							QCOMPARE(status.direction, dir);
-							QCOMPARE(status.section_state, state);
-							QCOMPARE(status.lock_state, lock);
-							QCOMPARE(status.has_flank_protection, flank);
-							QCOMPARE(status.extensions, ext);
-							QCOMPARE(status.lines, 0.0f);
-							QCOMPARE(status.inclined, inclination);
-							QCOMPARE(widget.connectors().size(), inclination ? 2 : 1);
+							for (int i = 0; i < 2; i++)
+							{
+								widget.tick();
+								widget.test(status);
+								QCOMPARE(status.direction, dir);
+								QCOMPARE(status.section_state, state);
+								QCOMPARE(status.lock_state, lock);
+								QCOMPARE(status.has_flank_protection, flank);
+								QCOMPARE(status.extensions, ext);
+								QCOMPARE(status.lines, 0.0f);
+								QCOMPARE(status.inclined, inclination);
+								QCOMPARE(widget.connectors().size(), inclination ? 2 : 1);
+							}
 						}
 					}
 				}

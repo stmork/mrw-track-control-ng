@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -62,12 +62,14 @@ namespace mrw
 				main_region_Running_operating_Operating,
 				main_region_Running_operating_Editing,
 				main_region_Running_operating_Disable,
+				main_region_Running_blanking_On,
+				main_region_Running_blanking_Off,
 				main_region_Manual,
 				main_region_Wait
 			};
 
 			/*! The number of states. */
-			static constexpr const sc::integer numStates {11};
+			static constexpr const sc::integer numStates {13};
 			static constexpr const sc::integer scvi_main_region_Exit {0};
 			static constexpr const sc::integer scvi_main_region__final_ {0};
 			static constexpr const sc::integer scvi_main_region_Running {0};
@@ -77,6 +79,8 @@ namespace mrw
 			static constexpr const sc::integer scvi_main_region_Running_operating_Operating {0};
 			static constexpr const sc::integer scvi_main_region_Running_operating_Editing {0};
 			static constexpr const sc::integer scvi_main_region_Running_operating_Disable {0};
+			static constexpr const sc::integer scvi_main_region_Running_blanking_On {1};
+			static constexpr const sc::integer scvi_main_region_Running_blanking_Off {1};
 			static constexpr const sc::integer scvi_main_region_Manual {0};
 			static constexpr const sc::integer scvi_main_region_Wait {0};
 
@@ -93,9 +97,14 @@ namespace mrw
 				init,
 				finalize,
 				completed,
+				routesChanged,
 				Can_connected,
-				_te0_main_region_Running_operating_Prepare_Bus_,
-				_te1_main_region_Running_operating_Init_
+				Screen_userInput,
+				_te0_main_region_Running_,
+				_te1_main_region_Running_,
+				_te2_main_region_Running_operating_Prepare_Bus_,
+				_te3_main_region_Running_operating_Init_,
+				_te4_main_region_Running_blanking_On_
 			};
 
 			class EventInstance
@@ -118,6 +127,8 @@ namespace mrw
 			};
 
 
+
+
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
 			static sc::integer getTimeout()  noexcept;
 			//! Inner class for default interface scope operation callbacks.
@@ -125,6 +136,8 @@ namespace mrw
 			{
 			public:
 				virtual ~OperationCallback() = 0;
+
+				virtual void keepAlive() = 0;
 
 				virtual void resetTransaction() = 0;
 
@@ -141,6 +154,36 @@ namespace mrw
 
 			/*! Set the working instance of the operation callback interface 'OperationCallback'. */
 			void setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept;
+			//! Inner class for watchdog interface scope.
+			class Watchdog
+			{
+			public:
+				explicit Watchdog(OperatingModeStatechart * parent) noexcept;
+
+
+				/*! Gets the value of the variable 'timeout' that is defined in the interface scope 'watchdog'. */
+				static sc::integer getTimeout()  noexcept;
+
+
+
+
+			private:
+				friend class OperatingModeStatechart;
+
+				static constexpr const sc::integer timeout {2};
+
+
+				OperatingModeStatechart * parent;
+
+
+
+
+
+			};
+
+			/*! Returns an instance of the interface class 'Watchdog'. */
+			Watchdog & watchdog() noexcept;
+
 			//! Inner class for can interface scope.
 			class Can
 			{
@@ -175,7 +218,7 @@ namespace mrw
 			private:
 				friend class OperatingModeStatechart;
 
-				static constexpr const sc::integer timeout {250};
+				static constexpr const sc::integer timeout {2500};
 
 				/*! Indicates event 'connected' of interface scope 'can' is active. */
 				bool connected_raised {false};
@@ -192,9 +235,67 @@ namespace mrw
 			/*! Returns an instance of the interface class 'Can'. */
 			Can & can() noexcept;
 
+			//! Inner class for screen interface scope.
+			class Screen
+			{
+			public:
+				explicit Screen(OperatingModeStatechart * parent) noexcept;
+
+
+
+
+
+
+				/*! Gets the value of the variable 'timeout' that is defined in the interface scope 'screen'. */
+				sc::integer getTimeout() const noexcept;
+
+				/*! Sets the value of the variable 'timeout' that is defined in the interface scope 'screen'. */
+				void setTimeout(sc::integer timeout) noexcept;
+
+
+				//! Inner class for screen interface scope operation callbacks.
+				class OperationCallback
+				{
+				public:
+					virtual ~OperationCallback() = 0;
+
+					virtual void resetBlank() = 0;
+
+					virtual void blank(bool active) = 0;
+
+					virtual void autoBlank(bool enable) = 0;
+
+
+				};
+
+				/*! Set the working instance of the operation callback interface 'OperationCallback'. */
+				void setOperationCallback(std::shared_ptr<OperationCallback> operationCallback) noexcept;
+
+
+			private:
+				friend class OperatingModeStatechart;
+
+				sc::integer timeout {600};
+
+				/*! Indicates event 'userInput' of interface scope 'screen' is active. */
+				bool userInput_raised {false};
+
+				OperatingModeStatechart * parent;
+
+
+
+				std::shared_ptr<OperationCallback> ifaceScreenOperationCallback;
+
+
+			};
+
+			/*! Returns an instance of the interface class 'Screen'. */
+			Screen & screen() noexcept;
+
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent() override;
+
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -237,10 +338,10 @@ namespace mrw
 			bool isStateActive(State state) const noexcept;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount {2};
+			static const sc::integer timeEventsCount {5};
 
 			//! number of time events that can be active at once.
-			static const sc::integer parallelTimeEventsCount {1};
+			static const sc::integer parallelTimeEventsCount {4};
 
 
 		public slots:
@@ -271,8 +372,14 @@ namespace mrw
 			/*! Slot for the in event 'completed' that is defined in the default interface scope. */
 			void completed();
 
+			/*! Slot for the in event 'routesChanged' that is defined in the default interface scope. */
+			void routesChanged();
+
 			/*! Slot for the in event 'connected' that is defined in the interface scope 'can'. */
 			void can_connected();
+
+			/*! Slot for the in event 'userInput' that is defined in the interface scope 'screen'. */
+			void screen_userInput();
 
 
 		signals:
@@ -311,7 +418,6 @@ namespace mrw
 			bool dispatchEvent(std::unique_ptr<EventInstance> event) noexcept;
 
 
-
 		private:
 			OperatingModeStatechart(const OperatingModeStatechart & rhs);
 			OperatingModeStatechart & operator=(const OperatingModeStatechart &);
@@ -321,51 +427,65 @@ namespace mrw
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-			static const sc::ushort maxOrthogonalStates {1};
+			static const sc::ushort maxOrthogonalStates {2};
 
-			std::shared_ptr<sc::timer::TimerServiceInterface> timerService;
+			std::shared_ptr<sc::timer::TimerServiceInterface> timerService = {};
 			bool timeEvents[timeEventsCount];
 
 
 			State stateConfVector[maxOrthogonalStates];
 
 
+			Watchdog ifaceWatchdog {Watchdog{nullptr}};
 			Can ifaceCan {Can{nullptr}};
+			Screen ifaceScreen {Screen{nullptr}};
 
 			std::shared_ptr<OperationCallback> ifaceOperationCallback {nullptr};
 
 			bool isExecuting {false};
+			sc::integer stateConfVectorPosition {0};
 
 
 
 			// prototypes of all internal functions
 
 			void enact_main_region_Exit();
+			void enact_main_region_Running();
 			void enact_main_region_Running_operating_Failed();
 			void enact_main_region_Running_operating_Prepare_Bus();
 			void enact_main_region_Running_operating_Init();
 			void enact_main_region_Running_operating_Operating();
 			void enact_main_region_Running_operating_Editing();
 			void enact_main_region_Running_operating_Disable();
+			void enact_main_region_Running_blanking_On();
+			void enact_main_region_Running_blanking_Off();
 			void enact_main_region_Manual();
 			void enact_main_region_Wait();
 			void exact_main_region_Exit();
+			void exact_main_region_Running();
 			void exact_main_region_Running_operating_Prepare_Bus();
 			void exact_main_region_Running_operating_Init();
 			void exact_main_region_Running_operating_Operating();
 			void exact_main_region_Running_operating_Editing();
+			void exact_main_region_Running_blanking_On();
+			void exact_main_region_Running_blanking_Off();
 			void exact_main_region_Manual();
 			void enseq_main_region_Exit_default();
 			void enseq_main_region__final__default();
+			void enseq_main_region_Running_default();
 			void enseq_main_region_Running_operating_Failed_default();
 			void enseq_main_region_Running_operating_Prepare_Bus_default();
 			void enseq_main_region_Running_operating_Init_default();
 			void enseq_main_region_Running_operating_Operating_default();
 			void enseq_main_region_Running_operating_Editing_default();
 			void enseq_main_region_Running_operating_Disable_default();
+			void enseq_main_region_Running_blanking_On_default();
+			void enseq_main_region_Running_blanking_Off_default();
 			void enseq_main_region_Manual_default();
 			void enseq_main_region_Wait_default();
 			void enseq_main_region_default();
+			void enseq_main_region_Running_operating_default();
+			void enseq_main_region_Running_blanking_default();
 			void exseq_main_region_Exit();
 			void exseq_main_region__final_();
 			void exseq_main_region_Running();
@@ -375,16 +495,18 @@ namespace mrw
 			void exseq_main_region_Running_operating_Operating();
 			void exseq_main_region_Running_operating_Editing();
 			void exseq_main_region_Running_operating_Disable();
+			void exseq_main_region_Running_blanking_On();
+			void exseq_main_region_Running_blanking_Off();
 			void exseq_main_region_Manual();
-			void exseq_main_region_Wait();
 			void exseq_main_region();
 			void exseq_main_region_Running_operating();
+			void exseq_main_region_Running_blanking();
 			void react_main_region__choice_0();
 			void react_main_region_Running_operating__choice_0();
+			void react_main_region_Running_operating__entry_Default();
+			void react_main_region_Running_blanking__entry_Default();
 			void react_main_region__entry_Default();
-			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Exit_react(const sc::integer transitioned_before);
-			sc::integer main_region__final__react(const sc::integer transitioned_before);
 			sc::integer main_region_Running_react(const sc::integer transitioned_before);
 			sc::integer main_region_Running_operating_Failed_react(const sc::integer transitioned_before);
 			sc::integer main_region_Running_operating_Prepare_Bus_react(const sc::integer transitioned_before);
@@ -392,6 +514,8 @@ namespace mrw
 			sc::integer main_region_Running_operating_Operating_react(const sc::integer transitioned_before);
 			sc::integer main_region_Running_operating_Editing_react(const sc::integer transitioned_before);
 			sc::integer main_region_Running_operating_Disable_react(const sc::integer transitioned_before);
+			sc::integer main_region_Running_blanking_On_react(const sc::integer transitioned_before);
+			sc::integer main_region_Running_blanking_Off_react(const sc::integer transitioned_before);
 			sc::integer main_region_Manual_react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_react(const sc::integer transitioned_before);
 			void clearInEvents() noexcept;
@@ -430,6 +554,8 @@ namespace mrw
 			/*! Indicates event 'completed' of default interface scope is active. */
 			bool completed_raised {false};
 
+			/*! Indicates event 'routesChanged' of default interface scope is active. */
+			bool routesChanged_raised {false};
 
 
 		};
@@ -437,6 +563,7 @@ namespace mrw
 
 		inline OperatingModeStatechart::OperationCallback::~OperationCallback() {}
 		inline OperatingModeStatechart::Can::OperationCallback::~OperationCallback() {}
+		inline OperatingModeStatechart::Screen::OperationCallback::~OperationCallback() {}
 
 	}
 }

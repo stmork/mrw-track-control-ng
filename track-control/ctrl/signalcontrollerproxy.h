@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -35,9 +35,9 @@ namespace mrw::ctrl
 	private:
 		mrw::statechart::QtStatechart<mrw::statechart::SignalControllerStatechart>   statechart;
 
-		MainProxy                                    statechart_main;
-		DistantProxy                                 statechart_distant;
-		ShuntProxy                                   statechart_shunt;
+		MainProxy                      statechart_main;
+		DistantProxy                   statechart_distant;
+		ShuntProxy                     statechart_shunt;
 
 		const bool                     direction  = true;
 		bool                           is_tour    = false;

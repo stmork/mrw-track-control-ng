@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -97,7 +97,7 @@ namespace mrw::ctrl
 		void status(SignalController::Status & status) const;
 
 	private:
-		virtual bool            isExpandable() const override;
+		virtual bool      isExpandable() const override;
 
 		/**
 		 * This method returns true if this mrw::model::Signal group contains a

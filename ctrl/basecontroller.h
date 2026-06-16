@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -60,6 +60,8 @@
  */
 namespace mrw::ctrl
 {
+	Q_DECLARE_LOGGING_CATEGORY(log)
+
 	/**
 	 * This controller base class unifies the interface for all widget
 	 * controller classes. All derived classes have the role as a controller

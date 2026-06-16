@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
 testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerStatechart
@@ -60,6 +60,21 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		assert called dec 0 times
 		assert called pending
 	}
+
+// NOTE: This should work but the generated exit function has an error.
+//	@Test
+//	operation exitInitial()
+//	{
+//		// Given
+//		initial()
+//
+//		// When
+//		exit
+//
+//		// Then
+//		assert !is_active
+//		assert is_final
+//	}
 
 	@Test
 	operation startVersion1()
@@ -943,15 +958,24 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		exit
 		assert !is_active
 
+ 		initial()
+ 		raise completedDistant
+ 		raise completedMain
+ 		raise completedShunt
+		exit
+		assert !is_active
+
 		startVersion1()
+ 		raise completedDistant
+ 		raise completedMain
+ 		raise completedShunt
 		exit
 		assert !is_active
 
 		startVersion2()
-		exit
-		assert !is_active
-
-		initial()
+ 		raise completedDistant
+ 		raise completedMain
+ 		raise completedShunt
 		exit
 		assert !is_active
 
@@ -1050,10 +1074,9 @@ testclass SignalControllerTest for statechart mrw.^statechart.SignalControllerSt
 		failedShunting
 		exit
 		assert !is_active
-/*
+
 		disableTourCombinedForm()
 		exit
 		assert !is_active
-*/
 	}
 }

@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include "model/modelrailway.h"
@@ -17,6 +17,7 @@ LightModule::LightModule(
 {
 	const QDomNodeList & child_nodes = element.childNodes();
 
+	profile_lights.reserve(child_nodes.count());
 	for (int n = 0; n < child_nodes.count(); ++n)
 	{
 		const QDomNode & node = child_nodes.at(n);
@@ -40,22 +41,13 @@ LightModule::LightModule(
 	}
 }
 
-LightModule::~LightModule()
-{
-	for (ProfileLight * light : profile_lights)
-	{
-		delete light;
-	}
-	profile_lights.clear();
-}
-
 bool LightModule::valid() const
 {
-	return std::all_of(profile_lights.begin(), profile_lights.end(),
-			[] (const Light * light)
-	{
-		return light->controller() != nullptr;
-	}) && (profile_lights.size() <= MAX_LIGHTS);
+	const bool is_valid = std::all_of(
+			profile_lights.begin(), profile_lights.end(),
+			&Light::hasController);
+
+	return is_valid && (profile_lights.size() <= MAX_LIGHTS);
 }
 
 const std::vector<ProfileLight *> & LightModule::lights() const

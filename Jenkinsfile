@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
 pipeline
@@ -19,7 +19,7 @@ pipeline
 				sh """
 				rm -rf doc lcov-out cccc */moc_* */ui_* */*.o
 				test -f Makefile && make clean distclean
-				qmake -r CONFIG+=gcov
+				qmake6 -r CONFIG+=gcov CONFIG+=drm-ss CONFIG+=qt-ss
 				make -j `nproc`
 				"""
 			}

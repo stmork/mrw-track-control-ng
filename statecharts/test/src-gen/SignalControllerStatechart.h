@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -174,10 +174,14 @@ namespace mrw
 			void raiseCompletedDistant();
 			/*! Raises the in event 'completedShunt' of default interface scope. */
 			void raiseCompletedShunt();
+			/*! Check if event 'entered' of default interface scope is raised. */
+			bool isRaisedEntered() noexcept;
 			/*! Check if event 'started' of default interface scope is raised. */
 			bool isRaisedStarted() noexcept;
 			/*! Check if event 'cleared' of default interface scope is raised. */
 			bool isRaisedCleared() noexcept;
+
+
 
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
@@ -226,6 +230,7 @@ namespace mrw
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent() override;
+
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -284,12 +289,11 @@ namespace mrw
 			bool dispatchEvent(EventInstance * event) noexcept;
 
 
-
 		private:
 			SignalControllerStatechart(const SignalControllerStatechart & rhs);
 			SignalControllerStatechart & operator=(const SignalControllerStatechart &);
 
-			static constexpr const sc::integer timeout {5000};
+			static constexpr const sc::integer timeout {2500};
 			static constexpr const sc::integer delay {350};
 			sc::integer symbol {SignalControllerStatechart::STOP};
 			static constexpr const sc::integer OFF {-(1)};
@@ -301,7 +305,7 @@ namespace mrw
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 			static const sc::ushort maxOrthogonalStates {3};
 
-			sc::timer::TimerServiceInterface * timerService;
+			sc::timer::TimerServiceInterface * timerService = {};
 			bool timeEvents[timeEventsCount];
 
 
@@ -311,9 +315,10 @@ namespace mrw
 
 			OperationCallback * ifaceOperationCallback;
 
+			bool completed {false};
+			bool doCompletion {false};
 			bool isExecuting {false};
 			sc::integer stateConfVectorPosition {0};
-			bool stateConfVectorChanged {false};
 
 
 
@@ -322,8 +327,11 @@ namespace mrw
 			void enact_main_region_Init();
 			void enact_main_region_Init_Init_process_Turning();
 			void enact_main_region_Init_Init_process_Turning_main_Turn();
+			void enact_main_region_Init_Init_process_Turning_main_Completed();
 			void enact_main_region_Init_Init_process_Turning_distant_Turn();
+			void enact_main_region_Init_Init_process_Turning_distant_Completed();
 			void enact_main_region_Init_Init_process_Turning_shunt_Turn();
+			void enact_main_region_Init_Init_process_Turning_shunt_Completed();
 			void enact_main_region_Operating();
 			void enact_main_region_Operating_Processing_Unlocked();
 			void enact_main_region_Operating_Processing_Shunting_State();
@@ -365,6 +373,7 @@ namespace mrw
 			void enseq_main_region_Operating_Processing_Shunting_State_Processing_Idle_default();
 			void enseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Extend_default();
 			void enseq_main_region_Operating_Processing_Shunting_State_Processing_Waiting_Shunt_waiting_Stop_default();
+			void enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_mrw_statechart_SignalControllerStatechart_main_region_Operating_Processing_Tour_State_Processing_Waiting();
 			void enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Main_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Distant_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Off_Distant_default();
@@ -372,6 +381,7 @@ namespace mrw
 			void enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Stop_Shunt_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Extend_default();
 			void enseq_main_region_Operating_Processing_Tour_State_Processing_Idle_default();
+			void enseq_main_region_Operating_Processing_Pending_mrw_statechart_SignalControllerStatechart_main_region_Operating_Processing_Pending();
 			void enseq_main_region_Operating_Processing_Pending_Pending_Go_Main_default();
 			void enseq_main_region_Operating_Processing_Pending_Pending_Go_Distant_default();
 			void enseq_main_region_Operating_Processing_Pending_Pending_Go_Shunt_default();
@@ -385,7 +395,6 @@ namespace mrw
 			void enseq_main_region_Operating_Processing_default();
 			void exseq_main_region_Wait_for_Start();
 			void exseq_main_region_Init();
-			void exseq_main_region_Init_Init_process_Turning();
 			void exseq_main_region_Init_Init_process_Turning_main_Turn();
 			void exseq_main_region_Init_Init_process_Turning_main_Completed();
 			void exseq_main_region_Init_Init_process_Turning_distant_Turn();
@@ -436,8 +445,6 @@ namespace mrw
 			void react_main_region_Init_Init_process_Turning_shunt__entry_Default();
 			void react_main_region_Init_Init_process__entry_Default();
 			void react_main_region_Operating_Processing__entry_Default();
-			void react_main_region_Init_Init_process__sync0();
-			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_for_Start_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_Init_process_Turning_react(const sc::integer transitioned_before);
@@ -521,12 +528,14 @@ namespace mrw
 			/*! Indicates event 'completedShunt' of default interface scope is active. */
 			bool completedShunt_raised {false};
 
+			/*! Indicates event 'entered' of default interface scope is active. */
+			bool entered_raised {false};
+
 			/*! Indicates event 'started' of default interface scope is active. */
 			bool started_raised {false};
 
 			/*! Indicates event 'cleared' of default interface scope is active. */
 			bool cleared_raised {false};
-
 
 
 		};

@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -111,6 +111,8 @@ namespace mrw
 			};
 
 
+
+
 			/*! Gets the value of the variable 'switch_timeout' that is defined in the default interface scope. */
 			static sc::integer getSwitch_timeout()  noexcept;
 			/*! Gets the value of the variable 'signal_timeout' that is defined in the default interface scope. */
@@ -138,6 +140,8 @@ namespace mrw
 				virtual void fail() = 0;
 
 				virtual void tryComplete() = 0;
+
+				virtual void turnCrossings() = 0;
 
 				virtual void turnSwitches() = 0;
 
@@ -167,6 +171,7 @@ namespace mrw
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent() override;
+
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -247,7 +252,6 @@ namespace mrw
 			bool dispatchEvent(std::unique_ptr<EventInstance> event) noexcept;
 
 
-
 		private:
 			RouteStatechart(const RouteStatechart & rhs);
 			RouteStatechart & operator=(const RouteStatechart &);
@@ -262,7 +266,7 @@ namespace mrw
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 			static const sc::ushort maxOrthogonalStates {1};
 
-			std::shared_ptr<sc::timer::TimerServiceInterface> timerService;
+			std::shared_ptr<sc::timer::TimerServiceInterface> timerService = {};
 			bool timeEvents[timeEventsCount];
 
 
@@ -321,16 +325,13 @@ namespace mrw
 			void exseq_main_region_Active_processing_Completed();
 			void exseq_main_region_Wait();
 			void exseq_main_region_Emergency_Shutdown();
-			void exseq_main_region_Unlock();
 			void exseq_main_region();
 			void exseq_main_region_Active_processing();
 			void react_main_region_Active_processing__choice_0();
 			void react_main_region__choice_0();
 			void react_main_region__entry_Default();
-			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Disable_react(const sc::integer transitioned_before);
 			sc::integer main_region_Start_react(const sc::integer transitioned_before);
-			sc::integer main_region__final__react(const sc::integer transitioned_before);
 			sc::integer main_region_Active_react(const sc::integer transitioned_before);
 			sc::integer main_region_Active_processing_Switch_Turning_react(const sc::integer transitioned_before);
 			sc::integer main_region_Active_processing_Signal_Turning_react(const sc::integer transitioned_before);
@@ -358,7 +359,6 @@ namespace mrw
 
 			/*! Indicates event 'disable' of default interface scope is active. */
 			bool disable_raised {false};
-
 
 
 		};

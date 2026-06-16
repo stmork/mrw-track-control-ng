@@ -1,12 +1,14 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <can/mrwmessage.h>
 
 using namespace mrw::can;
 using namespace mrw::util;
+
+Q_LOGGING_CATEGORY(mrw::can::log, "mrw.can")
 
 const ConstantEnumerator<Command>  MrwMessage::command_map
 {
@@ -20,6 +22,7 @@ const ConstantEnumerator<Command>  MrwMessage::command_map
 
 	CONSTANT(SETSGN),
 
+	CONSTANT(CFGCRX),
 	CONSTANT(CFGSWN),
 	CONSTANT(CFGSWO),
 	CONSTANT(CFGRAI),
@@ -89,7 +92,8 @@ const ConstantEnumerator<SignalAspect> MrwMessage::signal_map
 	{ SignalAspect::SIGNAL_VR2, "Vr2" },
 	{ SignalAspect::SIGNAL_SH0, "Sh0" },
 	{ SignalAspect::SIGNAL_SH1, "Sh1" },
-	CONSTANT(SignalAspect::SIGNAL_TST)
+	CONSTANT(SignalAspect::SIGNAL_TST),
+	CONSTANT(SignalAspect::SIGNAL_CRX)
 };
 
 MrwMessage::MrwMessage(const Command command, const ControllerId id) :
@@ -193,7 +197,7 @@ MrwMessage::MrwMessage(const QCanBusFrame & frame)
 	}
 }
 
-uint16_t MrwMessage::eid() const noexcept
+std::uint16_t MrwMessage::eid() const noexcept
 {
 	if (is_response)
 	{
@@ -209,7 +213,7 @@ uint16_t MrwMessage::eid() const noexcept
 	}
 }
 
-uint16_t MrwMessage::sid() const noexcept
+std::uint16_t MrwMessage::sid() const noexcept
 {
 	return dst;
 }
@@ -242,7 +246,7 @@ bool MrwMessage::valid() const noexcept
 	}
 }
 
-uint8_t MrwMessage::operator[](const size_t index) const
+std::uint8_t MrwMessage::operator [](const std::size_t index) const
 {
 	if (index >= max())
 	{
@@ -279,7 +283,7 @@ MrwMessage::operator QCanBusFrame() const noexcept
 
 QString MrwMessage::toString() const noexcept
 {
-	QString appendix = QByteArray((const char *)info, max()).toHex(' ');
+	QString appendix = QByteArray(reinterpret_cast<const char *>(info), max()).toHex(' ');
 
 	if (is_response)
 	{
@@ -337,7 +341,7 @@ QString MrwMessage::toString() const noexcept
 
 void MrwMessage::append(const uint8_t input)
 {
-	const size_t s = start();
+	const std::size_t s = start();
 
 	if (len < 8)
 	{
@@ -349,7 +353,7 @@ void MrwMessage::append(const uint8_t input)
 	}
 }
 
-size_t MrwMessage::size() const noexcept
+std::size_t MrwMessage::size() const noexcept
 {
 	return len - start();
 }
@@ -361,22 +365,22 @@ QString MrwMessage::get(const SignalAspect state) noexcept
 
 void MrwMessage::copy(QByteArray & array) const noexcept
 {
-	const size_t s = start();
+	const std::size_t s = start();
 
-	for (size_t i = s; i < len; i++)
+	for (std::size_t i = s; i < len; i++)
 	{
 		array.append(info[i - s]);
 	}
 }
 
-size_t MrwMessage::max() const noexcept
+std::size_t MrwMessage::max() const noexcept
 {
-	const size_t s = start();
+	const std::size_t s = start();
 
 	return len < s ? 0 : len - s;
 }
 
-size_t MrwMessage::start() const noexcept
+std::size_t MrwMessage::start() const noexcept
 {
 	return is_response ? IDX_RESPONSE_SIZE : IDX_COMMAND_SIZE;
 }

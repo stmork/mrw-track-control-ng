@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -35,11 +35,6 @@ namespace mrw::test
 		void testEmptyCanFrame();
 		void testInvalidStandardCanFrame();
 		void testInvalidExtendedCanFrame();
-		void testValidService();
-		void testTryValidService();
-		void testInvalidService();
-		void testManualConnectService();
-		void testReadWrite();
 		void testReceivedResult();
 		void testReceivedBroadcast();
 		void testReceivedCommand();

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1243</width>
-    <height>601</height>
+    <width>1100</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,106 +18,180 @@
     <normaloff>:/images/MRW-TrackControl.ico</normaloff>:/images/MRW-TrackControl.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QLabel" name="routeLabel">
-          <property name="text">
-           <string>Fahrstraßen:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="mrw::ui::RouteListWidget" name="routeListWidget">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>1</horstretch>
-            <verstretch>1</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>200</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="routeButtonLayout">
-        <item>
-         <widget class="QPushButton" name="clearRoute">
-          <property name="text">
-           <string>Auflösen</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="clearAllRoutes">
-          <property name="text">
-           <string>Alles auflösen</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <widget class="QLabel" name="sectionLabel">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Gleisabschnitte:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="mrw::ui::SectionListWidget" name="sectionListWidget">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>1</horstretch>
-            <verstretch>1</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>200</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="sectionButtonLayout">
-        <item>
-         <widget class="QPushButton" name="clearSection">
-          <property name="text">
-           <string>Entfernen</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="clearAllSections">
-          <property name="text">
-           <string>Alles entfernen</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
+     <widget class="QWidget" name="leftWidget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>240</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayoutRoutes">
+         <item>
+          <widget class="QLabel" name="routeLabel">
+           <property name="text">
+            <string>Fahrstraßen:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="mrw::ui::RouteListWidget" name="routeListWidget">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>1</horstretch>
+             <verstretch>1</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayoutButtonsRoutes">
+           <item>
+            <widget class="QPushButton" name="clearRoute">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>90</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Auflösen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="clearAllRoutes">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>90</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Alles auflösen</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayoutSections">
+         <item>
+          <widget class="QLabel" name="sectionLabel">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Gleisabschnitte:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="mrw::ui::SectionListWidget" name="sectionListWidget">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>1</horstretch>
+             <verstretch>1</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayoutButtonsSections">
+           <item>
+            <widget class="QPushButton" name="clearSection">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>90</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Entfernen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="clearAllSections">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>90</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Alles entfernen</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
     </item>
     <item>
      <layout class="QVBoxLayout" name="rightLayout">
@@ -138,7 +212,7 @@
           <property name="minimumSize">
            <size>
             <width>150</width>
-            <height>0</height>
+            <height>40</height>
            </size>
           </property>
           <property name="text">
@@ -151,7 +225,7 @@
           <property name="minimumSize">
            <size>
             <width>150</width>
-            <height>0</height>
+            <height>40</height>
            </size>
           </property>
           <property name="text">
@@ -164,7 +238,7 @@
           <property name="minimumSize">
            <size>
             <width>150</width>
-            <height>0</height>
+            <height>40</height>
            </size>
           </property>
           <property name="text">
@@ -177,7 +251,7 @@
           <property name="minimumSize">
            <size>
             <width>150</width>
-            <height>0</height>
+            <height>40</height>
            </size>
           </property>
           <property name="text">
@@ -190,7 +264,7 @@
           <property name="minimumSize">
            <size>
             <width>150</width>
-            <height>0</height>
+            <height>40</height>
            </size>
           </property>
           <property name="text">
@@ -209,7 +283,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1243</width>
+     <width>1100</width>
      <height>22</height>
     </rect>
    </property>

@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QPainterPath>
@@ -12,7 +12,8 @@ using namespace mrw::model;
 using namespace mrw::ui;
 using namespace mrw::ctrl;
 
-using Bending = Position::Bending;
+using Bending   = Position::Bending;
+using LockState = Device::LockState;
 
 RailWidget::RailWidget(
 	QWidget     *    parent,
@@ -49,9 +50,18 @@ void RailWidget::prepare(RailWidget::Status & status) const
 	Q_ASSERT(base_controller != nullptr);
 
 	controller<RailController>()->status(status);
+	const bool draw_crossing = (status.has_crossing) && (status.extensions >= Position::FRACTION);
 
 	status.do_bend = (status.bending != Bending::STRAIGHT) && (!status.a_ends);
 	status.any_end = status.a_ends || status.b_ends;
+
+	status.draw_crossing_before = draw_crossing &&
+		(status.section_state != SectionState::FREE);
+	status.draw_lock            = draw_crossing &&
+		(status.section_state != SectionState::FREE) &&
+		(status.lock_state == LockState::PENDING) && (counter & 1);
+	status.draw_crossing_after  = draw_crossing &&
+		(status.section_state == SectionState::FREE);
 }
 
 void RailWidget::paint(QPainter & painter)
@@ -64,7 +74,7 @@ void RailWidget::paint(QPainter & painter)
 	prepare(status);
 
 	const float border     = -SCALE - status.extensions * SCALE / Position::HALF;
-	const float text_width = status.extensions <= 2 ? 120 : 160;
+	const float text_width = status.extensions <= 2 ? 124 : 164;
 
 	// Unify coordinates
 	const float x_size = Position::FRACTION + status.extensions;
@@ -88,7 +98,12 @@ void RailWidget::paint(QPainter & painter)
 
 	prepareTextColor(painter);
 	font.setPixelSize(FONT_SIZE);
+	font.setBold(true);
 	painter.setFont(font);
+	if (base_controller->lock() == LockState::FAIL)
+	{
+		painter.fillRect(rect, RED);
+	}
 	painter.drawText(rect, Qt::AlignCenter | Qt::AlignHCenter, status.name);
 
 	if (!status.direction)
@@ -99,12 +114,27 @@ void RailWidget::paint(QPainter & painter)
 	const float y_offset = SCALE * (1.0 + status.lines * 2.0);
 	const float x_offset = y_offset / RAIL_SLOPE + SCALE / Position::HALF;
 
+	if (status.draw_crossing_before)
+	{
+		drawCrossing(painter, border);
+	}
+
 	// Straight rail drawing
 	pen.setCapStyle(Qt::FlatCap);
 	pen.setColor(sectionColor(status.section_state));
 	pen.setWidth(RAIL_WIDTH);
 	painter.setPen(pen);
 	painter.drawLine(SCALE, 0, status.do_bend ? border + x_offset : border, 0);
+
+	if (status.draw_lock)
+	{
+		drawLock(painter, WHITE, border + 50, 0);
+	}
+
+	if (status.draw_crossing_after)
+	{
+		drawCrossing(painter, border);
+	}
 
 	// Rail bending to neighbour.
 	if (status.do_bend)
@@ -144,4 +174,34 @@ void RailWidget::paint(QPainter & painter)
 
 	// Draw connector markers
 	drawConnectors(painter);
+}
+
+void RailWidget::drawCrossing(
+	QPainter   &   painter,
+	const double   border) const
+{
+	QPen pen;
+
+	pen.setColor(YELLOW);
+	pen.setWidth(ROAD_WIDTH);
+	painter.setPen(pen);
+	painter.drawLine(border + 50, 100, border + 50, -100);
+
+	pen.setWidth(ASPHALT_WIDTH);
+	pen.setColor(Qt::black);
+	painter.setPen(pen);
+	painter.drawLine(border + 50, 100, border + 50, -100);
+
+	pen.setWidth(ROAD_BORDER);
+	pen.setColor(YELLOW);
+	painter.setPen(pen);
+	painter.drawLine(border + 50,  100, border + 50,  85);
+	painter.drawLine(border + 50,   48, border + 50,  18);
+	painter.drawLine(border + 50,  -48, border + 50, -18);
+	painter.drawLine(border + 50, -100, border + 50, -85);
+}
+
+bool RailWidget::hasLock() const
+{
+	return true;
 }

@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -18,6 +18,8 @@
 
 namespace mrw::ctrl
 {
+	class CrossingController;
+
 	class SectionController :
 		public BaseController,
 		public ControllerRegistrand,
@@ -28,10 +30,12 @@ namespace mrw::ctrl
 
 	private:
 		mrw::statechart::QtStatechart<mrw::statechart::SectionStatechart>  statechart;
-		mrw::model::Section                        *                       ctrl_section;
-		SectionController                         *                        next = nullptr;
+		mrw::model::Section                        *                       ctrl_section  = nullptr;
+		SectionController                         *                        next          = nullptr;
+		CrossingController                        *                        ctrl_crossing = nullptr;
 
 	public:
+		SectionController() = delete;
 		explicit SectionController(
 			mrw::model::Section * input,
 			QObject       *       parent = nullptr);
@@ -49,7 +53,7 @@ namespace mrw::ctrl
 		void unlock();
 		void failed();
 		void start();
-		void entered();
+		void enteredSection();
 		void leaving();
 		void left();
 		void tryUnblock();

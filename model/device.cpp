@@ -1,9 +1,7 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
-
-#include <QDebug>
 
 #include <util/stringutil.h>
 #include <can/mrwmessage.h>
@@ -49,13 +47,13 @@ void Device::setLock(const LockState input) noexcept
 {
 	if (input == LockState::FAIL)
 	{
-		qCritical().noquote() << String::red(" Locking to FAIL!") << name();
+		qCCritical(log).noquote() << String::red(" Locking to FAIL!") << name();
 	}
 	if (lock_state != input)
 	{
 		if ((input == LockState::UNLOCKED) && !isUnlockable())
 		{
-			qWarning().noquote() << String::red("Not unlockable!") << name();
+			qCWarning(log).noquote() << String::red("Not unlockable!") << name();
 		}
 		else
 		{
@@ -76,4 +74,9 @@ MrwMessage Device::command(const Command command) const
 QString Device::get(const Device::LockState & state) noexcept
 {
 	return lock_map.get(state);
+}
+
+bool Device::hasController(const Device * device) noexcept
+{
+	return (device != nullptr) && (device->controller() != nullptr);
 }

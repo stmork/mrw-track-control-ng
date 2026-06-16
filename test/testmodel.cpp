@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QTest>
@@ -27,6 +27,12 @@ using namespace mrw::model;
 using Bending    = Position::Bending;
 using LockState  = Device::LockState;
 using SignalType = Signal::SignalType;
+
+#if (QT_VERSION < QT_VERSION_CHECK(6, 3, 0))
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_EXCEPTION_THROWN(condition, exception);
+#else
+#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_THROWS_EXCEPTION(exception, condition);
+#endif
 
 /*************************************************************************
 **                                                                      **
@@ -106,7 +112,7 @@ void TestModel::testModel()
 
 void TestModel::testControllers()
 {
-	const size_t count = model->controllerCount();
+	const std::size_t count = model->controllerCount();
 
 	for (unsigned c = 0; c < count; c++)
 	{
@@ -121,36 +127,35 @@ void TestModel::testControllers()
 		QCOMPARE(messages.size() > 0, controller->valid());
 	}
 
-	QVERIFY_EXCEPTION_THROWN(model->controller(count), std::out_of_range);
+	MRW_THROWS_EXCEPTION(model->controller(count), std::out_of_range);
 }
 
 void TestModel::testModules()
 {
-	const size_t count = model->controllerCount();
-
+	const std::size_t count = model->controllerCount();
 	for (unsigned c = 0; c < count; c++)
 	{
 		Controller * controller = model->controller(c);
 
 		QVERIFY(controller != nullptr);
 
-		const size_t module_count = controller->moduleCount();
+		const std::size_t module_count = controller->moduleCount();
 		for (unsigned m = 0; m < module_count; m++)
 		{
 			Module * module = controller->module(m);
 
 			testModule(module);
 		}
-		QVERIFY_EXCEPTION_THROWN(controller->module(module_count), std::out_of_range);
+		MRW_THROWS_EXCEPTION(controller->module(module_count), std::out_of_range);
 
-		const size_t mux_count = controller->connectionCount();
+		const std::size_t mux_count = controller->connectionCount();
 		for (unsigned m = 0; m < mux_count; m++)
 		{
 			MultiplexConnection * module = controller->connection(m);
 
 			testMuxConnection(module);
 		}
-		QVERIFY_EXCEPTION_THROWN(controller->connection(mux_count), std::out_of_range);
+		MRW_THROWS_EXCEPTION(controller->connection(mux_count), std::out_of_range);
 	}
 }
 
@@ -170,7 +175,7 @@ void TestModel::testMuxConnection(MultiplexConnection * connection)
 
 void TestModel::testRegions()
 {
-	const size_t count = model->regionCount();
+	const std::size_t count = model->regionCount();
 
 	for (unsigned i = 0; i < count; i++)
 	{
@@ -182,12 +187,12 @@ void TestModel::testRegions()
 		QVERIFY(region->key().contains(name.replace(" ", "")));
 	}
 
-	QVERIFY_EXCEPTION_THROWN(model->region(count), std::out_of_range);
+	MRW_THROWS_EXCEPTION(model->region(count), std::out_of_range);
 }
 
 void TestModel::testSections()
 {
-	const size_t region_count = model->regionCount();
+	const std::size_t region_count = model->regionCount();
 
 	for (unsigned a = 0; a < region_count; a++)
 	{
@@ -195,7 +200,7 @@ void TestModel::testSections()
 
 		QVERIFY(region != nullptr);
 
-		const size_t section_count = region->sectionCount();
+		const std::size_t section_count = region->sectionCount();
 		for (unsigned s = 0; s < section_count; s++)
 		{
 			Section * section = region->section(s);
@@ -203,7 +208,7 @@ void TestModel::testSections()
 			testSection(region, section);
 		}
 
-		QVERIFY_EXCEPTION_THROWN(region->section(section_count), std::out_of_range);
+		MRW_THROWS_EXCEPTION(region->section(section_count), std::out_of_range);
 	}
 }
 
@@ -225,7 +230,7 @@ void TestModel::testRegularSwitchStates()
 		QCOMPARE(part->commandState(), Command::SETRGT);
 
 		part->setState(RegularSwitch::State(0xff));
-		QVERIFY_EXCEPTION_THROWN((void)part->commandState(), std::invalid_argument);
+		MRW_THROWS_EXCEPTION((void)part->commandState(), std::invalid_argument);
 
 		for (RailPart * left : part->advance(true))
 		{
@@ -241,14 +246,14 @@ void TestModel::testRegularSwitchStates()
 					(part->state() == RegularSwitch::State::AB) ||
 					(part->state() == RegularSwitch::State::AC));
 
-				QVERIFY_EXCEPTION_THROWN(part->setState(right, nullptr), std::invalid_argument);
-				QVERIFY_EXCEPTION_THROWN(part->setState(left, nullptr),  std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(right, nullptr), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(left, nullptr),  std::invalid_argument);
 
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, right), std::invalid_argument);
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, left),  std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, right), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, left),  std::invalid_argument);
 
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, nullptr), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, nullptr), std::invalid_argument);
 			}
 		}
 	}
@@ -310,14 +315,14 @@ void TestModel::testDoubleCrossSwitchStates()
 					(part->state() == DoubleCrossSwitch::State::BC) ||
 					(part->state() == DoubleCrossSwitch::State::BD));
 
-				QVERIFY_EXCEPTION_THROWN(part->setState(right, nullptr), std::invalid_argument);
-				QVERIFY_EXCEPTION_THROWN(part->setState(left, nullptr),  std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(right, nullptr), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(left, nullptr),  std::invalid_argument);
 
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, right), std::invalid_argument);
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, left),  std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, right), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, left),  std::invalid_argument);
 
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
-				QVERIFY_EXCEPTION_THROWN(part->setState(nullptr, nullptr), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, nullptr), std::invalid_argument);
+				MRW_THROWS_EXCEPTION(part->setState(nullptr, nullptr), std::invalid_argument);
 			}
 		}
 	}
@@ -595,11 +600,11 @@ void TestModel::testLight()
 {
 	std::vector<Light *> lights;
 
-	for (size_t c = 0; c < model->controllerCount(); c++)
+	for (std::size_t c = 0; c < model->controllerCount(); c++)
 	{
 		Controller * controller = model->controller(c);
 
-		for (size_t m = 0; m < controller->moduleCount(); m++)
+		for (std::size_t m = 0; m < controller->moduleCount(); m++)
 		{
 			LightModule * module = dynamic_cast<LightModule *>(controller->module(m));
 
@@ -614,7 +619,7 @@ void TestModel::testLight()
 			}
 		}
 
-		for (size_t mx = 0; mx < controller->connectionCount(); mx++)
+		for (std::size_t mx = 0; mx < controller->connectionCount(); mx++)
 		{
 			MultiplexConnection * conn = controller->connection(mx);
 
@@ -713,31 +718,35 @@ void TestModel::testSwitchConfig()
 	}
 }
 
-void TestModel::testSimpleLightConfig()
-{
-	std::vector<Light *> lights;
-
-	model->parts<Light>(lights, &TestModel::isSimpleLight);
-
-	for (const Light * light : lights)
-	{
-		QVERIFY(light->isUnlockable());
-		for (unsigned pin = 0; pin < 10; pin++)
-		{
-			const MrwMessage msg = light->configMsg(pin);
-
-			QCOMPARE(msg.size(),    2u);
-			QCOMPARE(msg.command(), CFGLGT);
-			QCOMPARE(msg[0], pin);
-		}
-	}
-}
-
 void TestModel::testProfileLightConfig()
 {
 	std::vector<ProfileLight *> lights;
 
-	model->parts<ProfileLight>(lights);
+	const std::size_t count = model->controllerCount();
+	for (unsigned c = 0; c < count; c++)
+	{
+		Controller * controller = model->controller(c);
+
+		QVERIFY(controller != nullptr);
+
+		const std::size_t module_count = controller->moduleCount();
+		for (std::size_t m = 0; m < module_count; m++)
+		{
+			LightModule * module = dynamic_cast<LightModule *>(controller->module(m));
+
+			if (module != nullptr)
+			{
+				QVERIFY(module->valid());
+				QCOMPARE(module->ports(), 1u);
+
+				std::copy(
+					module->lights().begin(), module->lights().end(),
+					std::back_inserter(lights));
+			}
+		}
+		MRW_THROWS_EXCEPTION(controller->module(module_count), std::out_of_range);
+	}
+	MRW_THROWS_EXCEPTION(model->controller(count), std::out_of_range);
 
 	for (const Light * light : lights)
 	{
@@ -748,6 +757,85 @@ void TestModel::testProfileLightConfig()
 
 			QCOMPARE(msg.size(),    3u);
 			QCOMPARE(msg.command(), CFGLGT);
+			QCOMPARE(msg[0], pin);
+		}
+	}
+}
+
+void TestModel::testSimpleLightConfig()
+{
+	std::vector<Light *> lights;
+
+	const std::size_t count = model->controllerCount();
+	for (unsigned c = 0; c < count; c++)
+	{
+		Controller * controller = model->controller(c);
+
+		QVERIFY(controller != nullptr);
+
+		const std::size_t mux_count = controller->connectionCount();
+		for (unsigned m = 0; m < mux_count; m++)
+		{
+			MultiplexConnection * module = controller->connection(m);
+
+			QVERIFY(module != nullptr);
+			std::copy(
+				module->lights().begin(), module->lights().end(),
+				std::back_inserter(lights));
+		}
+		MRW_THROWS_EXCEPTION(controller->connection(mux_count), std::out_of_range);
+	}
+	MRW_THROWS_EXCEPTION(model->controller(count), std::out_of_range);
+
+	for (const Light * light : lights)
+	{
+		QVERIFY(light->isUnlockable());
+		for (unsigned pin = 0; pin < 10; pin++)
+		{
+			const MrwMessage msg = light->configMsg(pin);
+
+			QCOMPARE(msg.size(),    2u);
+			QCOMPARE(msg.command(), CFGLGT);
+			QCOMPARE(msg[0],        pin);
+		}
+	}
+}
+
+void TestModel::testCrossingConfig()
+{
+	std::vector<Crossing *> crossings;
+
+	const std::size_t count = model->controllerCount();
+	for (unsigned c = 0; c < count; c++)
+	{
+		Controller * controller = model->controller(c);
+
+		QVERIFY(controller != nullptr);
+
+		const std::size_t mux_count = controller->connectionCount();
+		for (unsigned m = 0; m < mux_count; m++)
+		{
+			MultiplexConnection * module = controller->connection(m);
+
+			QVERIFY(module != nullptr);
+			std::copy(
+				module->crossings().begin(), module->crossings().end(),
+				std::back_inserter(crossings));
+		}
+		MRW_THROWS_EXCEPTION(controller->connection(mux_count), std::out_of_range);
+	}
+	MRW_THROWS_EXCEPTION(model->controller(count), std::out_of_range);
+
+	for (const Crossing * crossing : crossings)
+	{
+		QVERIFY(crossing->isUnlockable());
+		QVERIFY(crossing->valid());
+		for (unsigned pin = 0; pin < 10; pin++)
+		{
+			const MrwMessage msg = crossing->configMsg(pin);
+
+			QCOMPARE(msg.size(),    1u);
+			QCOMPARE(msg.command(), CFGCRX);
 			QCOMPARE(msg[0], pin);
 		}
 	}
@@ -790,7 +878,7 @@ void TestModel::testSection(Region * region, Section * section)
 
 	QVERIFY2(module != nullptr, section->name().toStdString().c_str());
 
-	const size_t rail_count = section->assemblyPartCount();
+	const std::size_t rail_count = section->assemblyPartCount();
 	for (unsigned r = 0; r < rail_count; r++)
 	{
 		AssemblyPart * part = section->assemblyPart(r);
@@ -807,7 +895,7 @@ void TestModel::testSection(Region * region, Section * section)
 	QVERIFY(section->isUnlockable());
 	QVERIFY(section->isFree());
 
-	QVERIFY_EXCEPTION_THROWN(section->assemblyPart(rail_count), std::out_of_range);
+	MRW_THROWS_EXCEPTION(section->assemblyPart(rail_count), std::out_of_range);
 }
 
 void TestModel::testAssemblyPart(Section * section, AssemblyPart * part)
@@ -949,11 +1037,6 @@ const Rail * TestModel::convert(const std::set<RailInfo>::iterator & it)
 	const RailPart * part = info;
 
 	return dynamic_cast<const Rail *>(part);
-}
-
-bool TestModel::isSimpleLight(const Light * light)
-{
-	return dynamic_cast<const ProfileLight *>(light) == nullptr;
 }
 
 bool TestModel::hasCutOff(const AbstractSwitch * part)

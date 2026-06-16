@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -26,7 +26,7 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	MainWindow(QWidget * parent = nullptr);
+	explicit MainWindow(QWidget * parent = nullptr);
 	~MainWindow();
 
 private slots:

@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -25,8 +25,10 @@ namespace mrw::util
 	 *
 	 * @see SignalHandler
 	 */
-	class DumpHandler : public SignalHandler
+	class DumpHandler : public SigCallbackHandler
 	{
+		Q_OBJECT
+
 	public:
 		/**
 		 * This constructor registers a callback to react on the POSIX SIGQUIT

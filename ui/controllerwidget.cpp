@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QPainterPath>
@@ -23,14 +23,7 @@ ControllerWidget::ControllerWidget(
 {
 	setController(ctrl);
 
-	connect(&ClockService::instance(), &ClockService::Hz8, [this]()
-	{
-		counter++;
-		if (hasLock() && (base_controller->lock() == LockState::PENDING))
-		{
-			repaint();
-		}
-	});
+	connect(&ClockService::instance(), &ClockService::Hz8, this, &ControllerWidget::tick);
 }
 
 void ControllerWidget::setController(BaseController * ctrl)
@@ -52,26 +45,25 @@ void ControllerWidget::setController(BaseController * ctrl)
 bool ControllerWidget::isConnector(const QPoint & point) const
 {
 	const QPoint base(
-		x() * Position::FRACTION / SIZE,
-		y() * Position::FRACTION / SIZE);
+		x() * Position::FRACTION / gridSize(),
+		y() * Position::FRACTION / gridSize());
 
-	for (const QPoint & local : connector_list)
+	return std::any_of(
+			connector_list.begin(),
+			connector_list.end(),
+			[&] (const QPoint & local)
 	{
 		const QPoint compare = local + base;
 
-		if (compare == point)
-		{
-			return true;
-		}
-	}
-	return false;
+		return compare == point;
+	});
 }
 
 void ControllerWidget::reposition()
 {
-	setFixedHeight(BaseWidget::SIZE * (1.0 + base_controller->lines()));
+	setFixedHeight(gridSize() * (1.0 + base_controller->lines()));
 	extend();
-	move(base_controller->position()->point() * BaseWidget::SIZE / Position::FRACTION);
+	move(base_controller->position()->point() * gridSize() / Position::FRACTION);
 }
 
 void ControllerWidget::extend()
@@ -88,6 +80,15 @@ void ControllerWidget::computeConnectors()
 	connector_list.clear();
 }
 
+void ControllerWidget::tick()
+{
+	counter++;
+	if (hasLock() && (base_controller->lock() == LockState::PENDING))
+	{
+		repaint();
+	}
+}
+
 void ControllerWidget::mousePressEvent(QMouseEvent * event)
 {
 	Q_UNUSED(event);
@@ -102,7 +103,20 @@ bool ControllerWidget::lockVisible(const Device::LockState state) const
 
 void ControllerWidget::drawLock(QPainter & painter, QColor color, const float x, const float y)
 {
-	painter.fillRect(x - LOCK_WIDTH * 0.5, y - LOCK_HEIGHT * 0.5, LOCK_WIDTH, LOCK_HEIGHT, color);
+	QPen pen;
+	pen.setColor(Qt::black);
+	pen.setWidth(4);
+	pen.setStyle(Qt::SolidLine); // Kann auch Qt::DashLine (gestrichelt) etc. sein
+	painter.setPen(pen);
+
+	// 2. Der Pinsel (Brush) bestimmt die Füllung
+	QBrush brush;
+	brush.setColor(color);
+	brush.setStyle(Qt::SolidPattern);
+	painter.setBrush(brush);
+
+	// 3. Das Rechteck zeichnen (X, Y, Breite, Höhe)
+	painter.drawRect(x - LOCK_WIDTH * 0.5, y - LOCK_HEIGHT * 0.5, LOCK_WIDTH, LOCK_HEIGHT);
 }
 
 void ControllerWidget::drawSheared(

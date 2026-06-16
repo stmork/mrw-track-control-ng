@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -39,22 +39,19 @@ namespace mrw::util
 	class Random : public Singleton<Random>
 	{
 		std::random_device  random_device;
-		std::mt19937        random_number_generator;
 
 		friend class Singleton<Random>;
 
-		Random();
-
 	public:
 		/**
-		 * This static access method returns the random generator engine.
+		 * This access method returns the random device.
 		 *
-		 * @return The random generator engine needed for distributions.
+		 * @return The random device needed for distributions.
 		 */
 		[[nodiscard]]
-		inline std::mt19937 & engine() noexcept
+		constexpr std::random_device & engine() noexcept
 		{
-			return random_number_generator;
+			return random_device;
 		}
 
 		/**
@@ -67,7 +64,7 @@ namespace mrw::util
 		 */
 		template<typename T>
 		[[nodiscard]]
-		inline static T random(const T max) noexcept
+		constexpr static T random(const T max) noexcept
 		{
 			std::uniform_int_distribution<T> distribution(0, max);
 

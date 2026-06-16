@@ -1,9 +1,9 @@
 #
 #  SPDX-License-Identifier: MIT
-#  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+#  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 #
 
-QT     += testlib widgets
+QT     += testlib widgets network
 CONFIG += testcase no_testcase_installs
 
 include(../common.pri)
@@ -12,6 +12,8 @@ SOURCES += \
 	collections.cpp \
 	main.cpp \
 	testcan.cpp \
+	testcanservice.cpp \
+	testcrossing.cpp \
 	testdoublecrossswitchwidget.cpp \
 	testflankswitch.cpp \
 	testmodel.cpp \
@@ -29,6 +31,8 @@ SOURCES += \
 HEADERS += \
 	collections.h \
 	testcan.h \
+	testcanservice.h \
+	testcrossing.h \
 	testdef.h \
 	testdoublecrossswitchwidget.h \
 	testflankswitch.h \

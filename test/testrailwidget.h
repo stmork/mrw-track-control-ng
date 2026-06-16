@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -61,6 +61,7 @@ namespace mrw::test
 		void testHavingLock();
 
 		void testEnds();
+		void testCrossing();
 	};
 }
 

@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QDomDocument>
@@ -28,6 +28,8 @@ Controller::Controller(
 {
 	const QDomNodeList & child_nodes = element.childNodes();
 
+	modules.reserve(child_nodes.count());
+	connections.reserve(child_nodes.count());
 	for (int n = 0; n < child_nodes.count(); ++n)
 	{
 		const QDomNode & node = child_nodes.at(n);
@@ -74,22 +76,6 @@ Controller::Controller(
 	}
 }
 
-Controller::~Controller()
-{
-	for (Module * module : modules)
-	{
-		delete module;
-	}
-
-	for (MultiplexConnection * connection : connections)
-	{
-		delete connection;
-	}
-
-	modules.clear();
-	connections.clear();
-}
-
 bool Controller::valid() const noexcept
 {
 	size_t ports = 0;
@@ -107,15 +93,17 @@ bool Controller::valid() const noexcept
 		ports += module->ports();
 	}
 
-	if (!std::all_of(connections.begin(), connections.end(), [](MultiplexConnection * conn)
-{
-	return (conn != nullptr) && conn->valid();
-	}))
+	if (!std::all_of(connections.begin(), connections.end(), &MultiplexConnection::isValid))
 	{
 		return false;
 	}
 
 	return ports <= MAX_PORTS;
+}
+
+bool Controller::isValid(const Controller * controller) noexcept
+{
+	return (controller != nullptr) && (controller->valid());
 }
 
 void Controller::configure(std::vector<MrwMessage> & messages) const

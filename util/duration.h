@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -31,7 +31,7 @@ namespace mrw::util
 		/**
 		 * The constructor logs the entry of a method.
 		 *
-		 * @param method_name The methods name. Use the \c __FUNCTION__ macro here.
+		 * @param naming The methods name. Use the \c __FUNCTION__ macro here.
 		 */
 		explicit Duration(const char * naming);
 

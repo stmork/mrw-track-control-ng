@@ -2,4 +2,4 @@
 
 OS=${1:-ubuntu}
 
-docker run -it "mrw-${OS}" bash
+docker run --network=host -it "mrw-${OS}" bash

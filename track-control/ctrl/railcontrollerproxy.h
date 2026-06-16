@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -8,14 +8,19 @@
 #ifndef MRW_CTRL_RAILCONTROLLERPROXY_H
 #define MRW_CTRL_RAILCONTROLLERPROXY_H
 
+#include <util/batchparticipant.h>
+#include <util/self.h>
 #include <ctrl/railcontroller.h>
 #include <ctrl/railpartinfo.h>
+#include <ctrl/controllerregistrand.h>
 #include <model/region.h>
 #include <model/section.h>
 #include <model/rail.h>
 
 namespace mrw::ctrl
 {
+	class CrossingController;
+
 	class RailControllerProxy :
 		public RailController,
 		public RailPartInfo
@@ -39,13 +44,14 @@ namespace mrw::ctrl
 		virtual bool            isDirection()  const override;
 
 		virtual mrw::model::Position     *    position() const override;
-		virtual mrw::model::SectionState      state() const override;
-		virtual mrw::model::Device::LockState lock() const override;
-		virtual mrw::model::Position::Bending bending() const override;
+		virtual mrw::model::SectionState      state()    const override;
+		virtual mrw::model::Device::LockState lock()     const override;
+		virtual mrw::model::Position::Bending bending()  const override;
 
 		// Implementations from RailController
 		virtual bool    aEnds() const override;
 		virtual bool    bEnds() const override;
+		virtual bool    hasCrossing() const override;
 
 		// Implementation from RailPartInfo
 		virtual mrw::model::RailPart * railPart() const override;

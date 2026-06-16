@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -30,7 +30,7 @@ class RegionForm : public QWidget
 	Q_OBJECT
 
 private:
-	mrw::model::Region             *             form_region;
+	mrw::model::Region * form_region;
 
 public:
 	explicit RegionForm(mrw::model::Region * region, QWidget * parent = nullptr);

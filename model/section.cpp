@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QDebug>
@@ -41,7 +41,29 @@ using SignalType = Signal::SignalType;
 //@controller.7/@module.1
 @endverbatim
  */
-const std::regex  Section::path_regex(R"(^\/\/@controller\.(\d+)\/@module\.(\d+))");
+const std::regex  Section::module_path_regex(R"(^\/\/@controller\.(\d+)\/@module\.(\d+))");
+
+/**
+ * Regular expression prolog:
+ * \d matches one digit.
+ * \s whitespace character
+ * \w matches one digit or case insensitive letter.
+ * "." matches one character.
+ * \d+ matches a number with at least one digit
+ * (\d+) marks a matching group
+ *
+ * Since we use C++11 raw string literals we do not need to escape the '\' char to "\\".
+ *
+ * There is a nice regular expression test site where you can build a regular expression and test it agai
+ * multiple test patterns: https://regex101.com/
+ *
+ * The following test patterns may be used:
+ * @verbatim
+//@controller.3/@anschluesse.0/@crossing.0
+//@controller.7/@anschluesse.1/@crossing.2
+@endverbatim
+ */
+const std::regex  Section::crossing_path_regex(R"(^\/\/@controller\.(\d+)\/@anschluesse\.(\d+)\/@crossing\.(\d+))");
 
 const ConstantEnumerator<SectionState>  Section::state_map
 {
@@ -63,6 +85,7 @@ Section::Section(
 {
 	const QDomNodeList & child_nodes = element.childNodes();
 
+	assembly_parts.reserve(child_nodes.count());
 	for (int n = 0; n < child_nodes.count(); ++n)
 	{
 		const QDomNode & node = child_nodes.at(n);
@@ -133,13 +156,22 @@ Section::Section(
 		}
 	}
 
-	section_module = resolve(ModelRailway::string(element, "modul").toStdString());
+	section_module   = resolveModule(ModelRailway::string(element, "modul").toStdString());
+	section_crossing = resolveCrossing(ModelRailway::string(element, "crossing").toStdString());
+
+	if (section_crossing != nullptr)
+	{
+		section_crossing->add(this);
+	}
 	model->add(this);
 
+	forward_signals.reserve(3);
 	parts<Signal>(forward_signals, [&](const Signal * signal)
 	{
 		return signal->direction();
 	});
+
+	backward_signals.reserve(3);
 	parts<Signal>(backward_signals, [&](const Signal * signal)
 	{
 		return !signal->direction();
@@ -147,15 +179,6 @@ Section::Section(
 
 	std::sort(forward_signals.begin(),  forward_signals.end(),  Signal::less);
 	std::sort(backward_signals.begin(), backward_signals.end(), Signal::less);
-}
-
-Section::~Section()
-{
-	for (AssemblyPart * rail_part : assembly_parts)
-	{
-		delete rail_part;
-	}
-	assembly_parts.clear();
 }
 
 bool Section::valid() const noexcept
@@ -252,6 +275,11 @@ Region * Section::region() const noexcept
 	return section_region;
 }
 
+Crossing * Section::crossing() const noexcept
+{
+	return section_crossing;
+}
+
 void Section::add(AssemblyPart * part) noexcept
 {
 	assembly_parts.push_back(part);
@@ -334,11 +362,11 @@ const std::vector<Signal *> & Section::getSignals(const bool view) const noexcep
 	return view ? forward_signals : backward_signals;
 }
 
-SectionModule * Section::resolve(const std::string & path) noexcept
+SectionModule * Section::resolveModule(const std::string & path) noexcept
 {
 	std::smatch matcher;
 
-	if (std::regex_match(path, matcher, path_regex))
+	if (std::regex_match(path, matcher, module_path_regex))
 	{
 		Q_ASSERT(matcher.size() >= 3);
 
@@ -347,6 +375,28 @@ SectionModule * Section::resolve(const std::string & path) noexcept
 
 		section_controller = model->controller(controller_idx);
 		return dynamic_cast<SectionModule *>(model->module(controller_idx, module_idx));
+	}
+	return nullptr;
+}
+
+Crossing * Section::resolveCrossing(const std::string & path) noexcept
+{
+	std::smatch matcher;
+
+	if (std::regex_match(path, matcher, crossing_path_regex))
+	{
+		Q_ASSERT(matcher.size() >= 4);
+
+		const unsigned controller_idx = std::stoul(matcher[1]);
+		const unsigned connection_idx = std::stoul(matcher[2]);
+		const unsigned crossing_idx   = std::stoul(matcher[3]);
+
+		const MultiplexConnection * mux = model->connection(controller_idx, connection_idx);
+
+		if (mux != nullptr)
+		{
+			return mux->crossings().at(crossing_idx);
+		}
 	}
 	return nullptr;
 }

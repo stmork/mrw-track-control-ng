@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -18,6 +18,8 @@
 
 namespace mrw::model
 {
+	Q_DECLARE_LOGGING_CATEGORY(log);
+
 	class RegularSwitch;
 
 	/**

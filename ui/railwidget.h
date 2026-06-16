@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -40,11 +40,23 @@ namespace mrw::ui
 	{
 		Q_OBJECT
 
+		/** The width of a drawn road crossing a rail. */
+		static constexpr float  ROAD_WIDTH    =  60.0f;
+
+		/** The width of a road border. */
+		static constexpr float  ROAD_BORDER   =  5.0f;
+
+		/** The width of a resulting road asphalt. */
+		static constexpr float  ASPHALT_WIDTH =  ROAD_WIDTH - 2 * ROAD_BORDER;
+
 	public:
 		struct Status : public mrw::ctrl::RailController::Status
 		{
-			bool do_bend = false;
-			bool any_end = false;
+			bool do_bend          = false;
+			bool any_end          = false;
+			bool draw_lock            = false;
+			bool draw_crossing_before = false;
+			bool draw_crossing_after  = false;
 		};
 
 		explicit RailWidget(
@@ -52,10 +64,16 @@ namespace mrw::ui
 			mrw::ctrl::RailController * controller = nullptr);
 
 		virtual void computeConnectors() override;
+		virtual bool hasLock() const override;
 
 	protected:
 		void prepare(Status & status) const;
 		void paint(QPainter & painter) override;
+
+	private:
+		void drawCrossing(
+			QPainter   &   painter,
+			const double   border) const;
 	};
 }
 

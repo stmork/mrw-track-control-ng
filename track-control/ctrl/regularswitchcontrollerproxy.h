@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -76,6 +76,7 @@ namespace mrw::ctrl
 		virtual void right() override;
 		virtual void request() override;
 		virtual bool doTurnLeft() override;
+		virtual bool hasCutOff() override;
 		virtual bool isFree() override;
 
 		virtual void fail() override;

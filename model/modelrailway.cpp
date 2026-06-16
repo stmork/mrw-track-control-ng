@@ -1,10 +1,9 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QFile>
-#include <QDebug>
 #include <QDomElement>
 
 #include "util/method.h"
@@ -17,6 +16,8 @@ using namespace mrw::can;
 using namespace mrw::model;
 
 using SignalType = Signal::SignalType;
+
+Q_LOGGING_CATEGORY(mrw::model::log, "mrw.model")
 
 ModelRailway::ModelRailway(const QString & filename)
 {
@@ -33,21 +34,6 @@ ModelRailway::ModelRailway(const QString & filename)
 	}
 }
 
-ModelRailway::~ModelRailway()
-{
-	for (Controller * controller : controllers)
-	{
-		delete controller;
-	}
-	for (Region * region : regions)
-	{
-		delete region;
-	}
-
-	controllers.clear();
-	regions.clear();
-}
-
 void ModelRailway::xml() const
 {
 	xml(xml_doc.documentElement());
@@ -61,6 +47,9 @@ void ModelRailway::create()
 	const QDomNodeList & child_nodes = model.childNodes();
 
 	name = model.attribute("name");
+
+	controllers.reserve(child_nodes.count());
+	regions.reserve(child_nodes.count());
 	for (int n = 0; n < child_nodes.count(); ++n)
 	{
 		const QDomNode & node = child_nodes.at(n);
@@ -76,14 +65,14 @@ void ModelRailway::create()
 
 				add(controller);
 
-				qDebug().noquote() << *controller;
+				qCDebug(log).noquote() << *controller;
 			}
 			else if (node_name == "gruppe")
 			{
 				Region * region = new Region(this, child.toElement(), type(child) == "Bahnhof");
 
 				regions.push_back(region);
-				qDebug().noquote() << *region;
+				qCDebug(log).noquote() << *region;
 			}
 			else
 			{
@@ -91,7 +80,7 @@ void ModelRailway::create()
 			}
 		}
 	}
-	qDebug() << *this;
+	qCDebug(log) << *this;
 }
 
 void ModelRailway::link()
@@ -164,21 +153,21 @@ void ModelRailway::initStatistics()
 
 void ModelRailway::info()
 {
-	qInfo() << *this;
+	qCInfo(log) << *this;
 
 	for (Controller * controller : controllers)
 	{
-		qInfo() << *controller;
+		qCInfo(log) << *controller;
 	}
 	for (Region * region : regions)
 	{
-		qInfo() << *region;
+		qCInfo(log) << *region;
 
 		for (size_t s = 0; s < region->sectionCount(); s++)
 		{
 			Section * section = region->section(s);
 
-			qInfo() << *section;
+			qCInfo(log) << *section;
 
 			for (size_t a = 0; a < section->assemblyPartCount(); a++)
 			{
@@ -186,18 +175,18 @@ void ModelRailway::info()
 
 				if (part != nullptr)
 				{
-					qInfo() << *part;
+					qCInfo(log) << *part;
 				}
 				else
 				{
-					qInfo("      <-nil->");
+					qCInfo(log, "      <-nil->");
 				}
 			}
 		}
 	}
 }
 
-Controller * ModelRailway::controller(const size_t index) const
+Controller * ModelRailway::controller(const std::size_t index) const
 {
 	return controllers.at(index);
 }
@@ -233,23 +222,20 @@ QString ModelRailway::string(
 void ModelRailway::warning(const QString & message)
 {
 	model_statistics.warnings++;
-	qWarning().noquote() << message;
+	qCWarning(log).noquote() << message;
 }
 
 void ModelRailway::error(const QString & message)
 {
 	model_statistics.errors++;
-	qCritical().noquote() << message;
+	qCCritical(log).noquote() << message;
 }
 
 bool ModelRailway::valid() const
 {
-	const bool ok = std::all_of(controllers.begin(), controllers.end(), [] (Controller * controller)
-	{
-		return controller->valid();
-	});
+	const bool is_valid = std::all_of(controllers.begin(), controllers.end(), &Controller::isValid);
 
-	return ok && (model_statistics.errors == 0);
+	return is_valid && (model_statistics.errors == 0);
 }
 
 void ModelRailway::add(Controller * controller)
@@ -307,7 +293,7 @@ void ModelRailway::xml(const QDomNode & node, const QString & indent) const
 {
 	const QDomNodeList & child_nodes = node.childNodes();
 
-	qDebug().noquote().nospace() << indent << "<" << node.nodeName() << ">";
+	qCDebug(log).noquote().nospace() << indent << "<" << node.nodeName() << ">";
 
 	if (node.isElement())
 	{
@@ -319,7 +305,7 @@ void ModelRailway::xml(const QDomNode & node, const QString & indent) const
 			const QDomAttr & attribute = attributes.item(a).toAttr();
 			const QString  & out       = QString("%0    %1 = %2").arg(indent).arg(attribute.name()).arg(attribute.value());
 
-			qDebug().noquote().nospace() << out;
+			qCDebug(log).noquote().nospace() << out;
 		}
 	}
 
@@ -329,7 +315,7 @@ void ModelRailway::xml(const QDomNode & node, const QString & indent) const
 
 		xml(child, indent + "  ");
 	}
-	qDebug().noquote().nospace() << indent << "</" << node.nodeName() << ">";
+	qCDebug(log).noquote().nospace() << indent << "</" << node.nodeName() << ">";
 }
 
 Controller * ModelRailway::controllerById(const ControllerId id) const

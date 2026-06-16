@@ -1,13 +1,13 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2023 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2025 Steffen A. Mork
 //
 
 testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 {
 	operation turning()
 	{
-		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending)
 		assert called inc
 		assert called pending
 	}
@@ -41,9 +41,29 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		mock fail
 		mock pending
 		mock lock
+		mock hasCutOff returns (true)
 		mock isFree returns (true)
 		mock isReserved returns (true)
 		mock doTurnLeft returns (true)
+	}
+
+	@Test
+	operation startWithoutCutOff()
+	{
+		// Given
+		waitForStart()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Wait_for_Start)
+		mock hasCutOff returns (false)
+
+		// When
+		raise start
+
+		// Then
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Unlocked)
+		assert called dec 0 times
+		assert started
+		assert called lock
 	}
 
 	@Test
@@ -51,6 +71,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		waitForStart()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Wait_for_Start)
 
 		// When
 		raise start
@@ -68,6 +89,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		initial()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Init)
 
 		// When
 		raise failed
@@ -79,6 +101,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		initial()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Init)
 
 		// When
 		proceed timeout ms
@@ -92,6 +115,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		initial()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Init)
 
 		// When
 		raise response
@@ -109,6 +133,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		operational()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Unlocked)
 
 		// When
 		raise start
@@ -125,6 +150,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		failAfterStart()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Failed)
 
 		// When
 		raise clear
@@ -147,6 +173,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		operational()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Unlocked)
 		mock doTurnLeft returns (true)
 		mock isReserved returns (true)
 
@@ -154,7 +181,9 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		raise turn
 
 		// Then
-		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning.Turning_process.Turn_Left)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turn_Left)
 		assert called inc
 		assert called left
 		turning()
@@ -165,6 +194,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		operational()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Unlocked)
 		mock doTurnLeft returns (false)
 		mock isReserved returns (true)
 
@@ -172,7 +202,9 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		raise turn
 
 		// Then
-		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning.Turning_process.Turn_Right)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turn_Right)
 		assert called inc
 		assert called right
 		turning()
@@ -183,6 +215,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		turnLeft()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turn_Left)
 		mock isFree returns (false)
 		mock isReserved returns (true)
 
@@ -190,7 +223,9 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		raise queued
 
 		// Then
-		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning.Turning_process.Pending)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turning)
 
 		// When
 		raise leftResponse
@@ -205,6 +240,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		turnRight()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turn_Right)
 		mock isFree returns (false)
 		mock isReserved returns (true)
 
@@ -212,7 +248,9 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		raise queued
 
 		// Then
-		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning.Turning_process.Pending)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turning)
 
 		// When
 		raise rightResponse
@@ -227,6 +265,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		turnLeft()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turn_Left)
 		mock isFree returns (true)
 		mock isReserved returns (true)
 
@@ -234,12 +273,15 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		raise queued
 
 		// Then
-		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning.Turning_process.Pending)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turning)
 
 		// When
 		raise leftResponse
 
 		// Then
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating)
 		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Unlocked)
 		assert called dec
 	}
@@ -249,6 +291,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		turnRight()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turn_Right)
 		mock isFree returns (true)
 		mock isReserved returns (true)
 
@@ -256,7 +299,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 		raise queued
 
 		// Then
-		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Turning.Turning_process.Pending)
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turning)
 
 		// When
 		raise leftResponse
@@ -271,6 +314,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		turnLeft()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turn_Left)
 		mock isFree returns (false)
 		mock isReserved returns (true)
 
@@ -286,6 +330,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		turnRight()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turn_Right)
 		mock isFree returns (false)
 		mock isReserved returns (true)
 
@@ -301,6 +346,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		turnLeft()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turn_Left)
 		mock isFree returns (false)
 		mock isReserved returns (true)
 
@@ -316,6 +362,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		turnRight()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turn_Right)
 
 		// When
 		raise failed
@@ -329,6 +376,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		turnLeft()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turn_Left)
 		mock isFree returns (false)
 		mock isReserved returns (true)
 
@@ -344,6 +392,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		turnRight()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Pending.Turning_process.Turn_Right)
 
 		// When
 		proceed timeout ms
@@ -357,6 +406,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		okLeft()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Locked)
 
 		// When
 		raise unlock
@@ -370,6 +420,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		okRight()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Locked)
 
 		// When
 		raise unlock
@@ -383,6 +434,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		okLeft()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Locked)
 
 		// When
 		raise response
@@ -396,6 +448,7 @@ testclass SwitchTest for statechart mrw.^statechart.SwitchStatechart
 	{
 		// Given
 		okRight()
+		assert active (mrw.^statechart.SwitchStatechart.main_region.Operating.operating.Locked)
 
 		// When
 		raise response

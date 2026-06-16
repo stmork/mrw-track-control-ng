@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -54,10 +54,10 @@ namespace mrw
 				main_region_Operating,
 				main_region_Operating_operating_Unlocked,
 				main_region_Operating_operating_Locked,
-				main_region_Operating_operating_Turning,
-				main_region_Operating_operating_Turning_Turning_process_Turn_Right,
-				main_region_Operating_operating_Turning_Turning_process_Turn_Left,
-				main_region_Operating_operating_Turning_Turning_process_Pending,
+				main_region_Operating_operating_Pending,
+				main_region_Operating_operating_Pending_Turning_process_Turn_Right,
+				main_region_Operating_operating_Pending_Turning_process_Turn_Left,
+				main_region_Operating_operating_Pending_Turning_process_Turning,
 				main_region_Failed
 			};
 
@@ -68,10 +68,10 @@ namespace mrw
 			static constexpr const sc::integer scvi_main_region_Operating {0};
 			static constexpr const sc::integer scvi_main_region_Operating_operating_Unlocked {0};
 			static constexpr const sc::integer scvi_main_region_Operating_operating_Locked {0};
-			static constexpr const sc::integer scvi_main_region_Operating_operating_Turning {0};
-			static constexpr const sc::integer scvi_main_region_Operating_operating_Turning_Turning_process_Turn_Right {0};
-			static constexpr const sc::integer scvi_main_region_Operating_operating_Turning_Turning_process_Turn_Left {0};
-			static constexpr const sc::integer scvi_main_region_Operating_operating_Turning_Turning_process_Pending {0};
+			static constexpr const sc::integer scvi_main_region_Operating_operating_Pending {0};
+			static constexpr const sc::integer scvi_main_region_Operating_operating_Pending_Turning_process_Turn_Right {0};
+			static constexpr const sc::integer scvi_main_region_Operating_operating_Pending_Turning_process_Turn_Left {0};
+			static constexpr const sc::integer scvi_main_region_Operating_operating_Pending_Turning_process_Turning {0};
 			static constexpr const sc::integer scvi_main_region_Failed {0};
 
 			/*! Enumeration of all events which are consumed. */
@@ -88,7 +88,7 @@ namespace mrw
 				unlock,
 				turn,
 				_te0_main_region_Init_,
-				_te1_main_region_Operating_operating_Turning_
+				_te1_main_region_Operating_operating_Pending_
 			};
 
 			class EventInstance
@@ -124,12 +124,14 @@ namespace mrw
 			bool isRaisedStop() noexcept;
 
 
+
+
+			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
+			static sc::integer getTimeout()  noexcept;
 			/*! Gets the value of the variable 'isManual' that is defined in the default interface scope. */
 			bool getIsManual() const noexcept;
 			/*! Sets the value of the variable 'isManual' that is defined in the default interface scope. */
 			void setIsManual(bool isManual) noexcept;
-			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
-			static sc::integer getTimeout()  noexcept;
 			//! Inner class for default interface scope operation callbacks.
 			class OperationCallback
 			{
@@ -147,6 +149,8 @@ namespace mrw
 				virtual void request() = 0;
 
 				virtual bool doTurnLeft() = 0;
+
+				virtual bool hasCutOff() = 0;
 
 				virtual bool isFree() = 0;
 
@@ -166,6 +170,7 @@ namespace mrw
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent() override;
+
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -224,20 +229,19 @@ namespace mrw
 			bool dispatchEvent(EventInstance * event) noexcept;
 
 
-
 		private:
 			SwitchStatechart(const SwitchStatechart & rhs);
 			SwitchStatechart & operator=(const SwitchStatechart &);
 
+			static constexpr const sc::integer timeout {2500};
 			bool isManual {false};
-			static constexpr const sc::integer timeout {2000};
 
 
 
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 			static const sc::ushort maxOrthogonalStates {1};
 
-			sc::timer::TimerServiceInterface * timerService;
+			sc::timer::TimerServiceInterface * timerService = {};
 			bool timeEvents[timeEventsCount];
 
 
@@ -254,22 +258,24 @@ namespace mrw
 			// prototypes of all internal functions
 
 			void enact_main_region_Init();
+			void enact_main_region_Operating();
 			void enact_main_region_Operating_operating_Unlocked();
 			void enact_main_region_Operating_operating_Locked();
-			void enact_main_region_Operating_operating_Turning();
-			void enact_main_region_Operating_operating_Turning_Turning_process_Turn_Right();
-			void enact_main_region_Operating_operating_Turning_Turning_process_Turn_Left();
+			void enact_main_region_Operating_operating_Pending();
+			void enact_main_region_Operating_operating_Pending_Turning_process_Turn_Right();
+			void enact_main_region_Operating_operating_Pending_Turning_process_Turn_Left();
 			void enact_main_region_Failed();
 			void exact_main_region_Init();
-			void exact_main_region_Operating_operating_Turning();
+			void exact_main_region_Operating_operating_Pending();
 			void enseq_main_region_Wait_for_Start_default();
 			void enseq_main_region_Init_default();
 			void enseq_main_region_Operating_default();
 			void enseq_main_region_Operating_operating_Unlocked_default();
 			void enseq_main_region_Operating_operating_Locked_default();
-			void enseq_main_region_Operating_operating_Turning_Turning_process_Turn_Right_default();
-			void enseq_main_region_Operating_operating_Turning_Turning_process_Turn_Left_default();
-			void enseq_main_region_Operating_operating_Turning_Turning_process_Pending_default();
+			void enseq_main_region_Operating_operating_Pending_mrw_statechart_SwitchStatechart_main_region_Operating_operating_Pending();
+			void enseq_main_region_Operating_operating_Pending_Turning_process_Turn_Right_default();
+			void enseq_main_region_Operating_operating_Pending_Turning_process_Turn_Left_default();
+			void enseq_main_region_Operating_operating_Pending_Turning_process_Turning_default();
 			void enseq_main_region_Failed_default();
 			void enseq_main_region_default();
 			void enseq_main_region_Operating_operating_default();
@@ -278,28 +284,28 @@ namespace mrw
 			void exseq_main_region_Operating();
 			void exseq_main_region_Operating_operating_Unlocked();
 			void exseq_main_region_Operating_operating_Locked();
-			void exseq_main_region_Operating_operating_Turning();
-			void exseq_main_region_Operating_operating_Turning_Turning_process_Turn_Right();
-			void exseq_main_region_Operating_operating_Turning_Turning_process_Turn_Left();
-			void exseq_main_region_Operating_operating_Turning_Turning_process_Pending();
+			void exseq_main_region_Operating_operating_Pending();
+			void exseq_main_region_Operating_operating_Pending_Turning_process_Turn_Right();
+			void exseq_main_region_Operating_operating_Pending_Turning_process_Turn_Left();
+			void exseq_main_region_Operating_operating_Pending_Turning_process_Turning();
 			void exseq_main_region_Failed();
 			void exseq_main_region();
 			void exseq_main_region_Operating_operating();
-			void exseq_main_region_Operating_operating_Turning_Turning_process();
+			void exseq_main_region_Operating_operating_Pending_Turning_process();
 			void react_main_region_Operating_operating__choice_0();
-			void react_main_region_Operating_operating_Turning_Turning_process__choice_0();
+			void react_main_region_Operating_operating_Pending_Turning_process__choice_0();
+			void react_main_region__choice_0();
 			void react_main_region__entry_Default();
 			void react_main_region_Operating_operating__entry_Default();
-			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Wait_for_Start_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_operating_Unlocked_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_operating_Locked_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_operating_Turning_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_operating_Turning_Turning_process_Turn_Right_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_operating_Turning_Turning_process_Turn_Left_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_operating_Turning_Turning_process_Pending_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Pending_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Pending_Turning_process_Turn_Right_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Pending_Turning_process_Turn_Left_react(const sc::integer transitioned_before);
+			sc::integer main_region_Operating_operating_Pending_Turning_process_Turning_react(const sc::integer transitioned_before);
 			sc::integer main_region_Failed_react(const sc::integer transitioned_before);
 			void clearOutEvents() noexcept;
 			void clearInEvents() noexcept;
@@ -343,7 +349,6 @@ namespace mrw
 
 			/*! Indicates event 'stop' of default interface scope is active. */
 			bool stop_raised {false};
-
 
 
 		};

@@ -1,14 +1,15 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
-#include <QDebug>
+#include <QCoreApplication>
 
 #include <util/method.h>
 #include <ctrl/controllerregistry.h>
 
 #include "mrwmessagedispatcher.h"
+#include "log.h"
 
 using namespace mrw::util;
 using namespace mrw::can;
@@ -25,6 +26,11 @@ MrwMessageDispatcher::MrwMessageDispatcher(
 {
 	__METHOD__;
 
+	if (can_device == nullptr)
+	{
+		QCoreApplication::exit(EXIT_FAILURE);
+	}
+
 	ControllerRegistry::instance().registerService(this);
 }
 
@@ -32,7 +38,7 @@ MrwMessageDispatcher::~MrwMessageDispatcher()
 {
 	__METHOD__;
 
-	qInfo("  Shutting down MRW message dispatcher.");
+	qCInfo(mrw::tools::log, "  Shutting down MRW message dispatcher.");
 }
 
 void MrwMessageDispatcher::emergencyStop()
@@ -99,7 +105,7 @@ void MrwMessageDispatcher::process(const MrwMessage & message)
 		}
 	}
 
-	qDebug().noquote() << message << "---";
+	qCDebug(mrw::tools::log).noquote() << message << "---";
 }
 
 bool MrwMessageDispatcher::filter(const MrwMessage & message)
@@ -120,7 +126,7 @@ bool MrwMessageDispatcher::filter(const MrwMessage & message)
 				const unsigned major = message[1];
 				const unsigned minor = message[2] | (message[3] << 8);
 
-				qInfo("Controller: %03u V%u.%u", controller->id(), major, minor);
+				qCInfo(mrw::tools::log, "Controller: %03u V%u.%u", controller->id(), major, minor);
 			}
 			return true;
 
@@ -136,13 +142,14 @@ bool MrwMessageDispatcher::filter(const MrwMessage & message)
 
 void MrwMessageDispatcher::connectBus()
 {
-	if (can_device->state() != QCanBusDevice::ConnectedState)
+	if (!isConnected())
 	{
+		qCDebug(mrw::tools::log, "Connecting CAN device...");
 		can_device->connectDevice();
 	}
 	else
 	{
-		qWarning("CAN bus already connected.");
+		qCWarning(mrw::tools::log, "CAN bus already connected.");
 	}
 }
 

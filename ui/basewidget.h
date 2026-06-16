@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -64,10 +64,7 @@ namespace mrw::ui
 	{
 		Q_OBJECT
 
-	public:
-		/** The recommended pixel size for a widget. */
-		static constexpr int    SIZE        =  40;
-
+	protected:
 		/**
 		 * The transformed half width representing mrw::model::Position::HALF
 		 * units.
@@ -75,10 +72,10 @@ namespace mrw::ui
 		static constexpr float  SCALE       = 100.0f;
 
 		/** The font height inclusive descender. */
-		static constexpr int    FONT_HEIGHT =  55;
+		static constexpr int    FONT_HEIGHT =  65;
 
 		/** The font size used for QFont::setSize(). */
-		static constexpr int    FONT_SIZE   = FONT_HEIGHT * 0.8;
+		static constexpr int    FONT_SIZE   = 45;
 
 		/** The width of a drawn rail. */
 		static constexpr float  RAIL_WIDTH  =  20.0f;
@@ -92,6 +89,7 @@ namespace mrw::ui
 		/** The height of a lock to be drawn. */
 		static constexpr int    LOCK_HEIGHT =  22;
 
+	public:
 		static const     QColor GREEN;
 		static const     QColor WHITE;
 		static const     QColor RED;
@@ -102,6 +100,8 @@ namespace mrw::ui
 		explicit BaseWidget(QWidget * parent = nullptr);
 
 		static void setVerbose(const bool activate = false);
+
+		static int  gridSize();
 
 		/**
 		 * This method returns true if a pending state has to be displayed.
@@ -198,8 +198,10 @@ namespace mrw::ui
 		static bool verbose;
 
 	private:
-		static const std::unordered_map<mrw::model::SectionState, QColor> color_map;
+		/** The recommended pixel size for a widget. */
+		static constexpr int    SIZE        =  40;
 
+		static const std::unordered_map<mrw::model::SectionState, QColor> color_map;
 	};
 }
 

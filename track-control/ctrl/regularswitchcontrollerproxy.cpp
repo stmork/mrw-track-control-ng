@@ -1,9 +1,10 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
-#include <QDebug>
+#include <QCoreApplication>
+#include <QThread>
 
 #include <model/region.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
@@ -63,12 +64,14 @@ RegularSwitchControllerProxy::RegularSwitchControllerProxy(
 	connect(
 		&statechart, &SwitchStatechart::entered, [&]()
 	{
-		qDebug().noquote() << part->toString() << "Inquiry started.";
+		QCoreApplication::processEvents();
+
+		qCDebug(log).noquote() << part->toString() << "Inquiry started.";
 	});
 	connect(
 		&statechart, &SwitchStatechart::started, [&]()
 	{
-		qDebug().noquote() << part->toString() << "Inquiry completed.";
+		qCDebug(log).noquote() << part->toString() << "Inquiry completed.";
 	});
 }
 
@@ -187,7 +190,7 @@ RailPart * RegularSwitchControllerProxy::railPart() const
 
 bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 {
-	qDebug().noquote() << message << "(regular switch)";
+	qCDebug(log).noquote() << message << "(regular switch)";
 
 	switch (message.response())
 	{
@@ -235,7 +238,7 @@ bool RegularSwitchControllerProxy::process(const MrwMessage & message)
 		break;
 
 	default:
-		qCritical().noquote() << "Error switching" << part->toString();
+		qCCritical(log).noquote() << "Error switching" << part->toString();
 		statechart.failed();
 		break;
 	}
@@ -286,9 +289,14 @@ bool RegularSwitchControllerProxy::isFree()
 	return section()->isFree();
 }
 
+bool RegularSwitchControllerProxy::hasCutOff()
+{
+	return part->hasCutOff();
+}
+
 void RegularSwitchControllerProxy::fail()
 {
-	qCritical().noquote() << String::red(" Switch turn failed!") << name();
+	qCCritical(log).noquote() << String::red(" Switch turn failed!") << name();
 
 	part->setLock(LockState::FAIL);
 	ControllerRegistry::instance().failed();

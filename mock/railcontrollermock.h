@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -22,6 +22,7 @@ namespace mrw::ctrl
 		unsigned                       line_count    = 0;
 		bool                           a_ends        = false;
 		bool                           b_ends        = false;
+		bool                           crossing      = false;
 
 		mrw::model::Device::LockState  lock_state    =
 			mrw::model::Device::LockState::UNLOCKED;
@@ -56,6 +57,7 @@ namespace mrw::ctrl
 		// Implementations from RailController
 		virtual bool  aEnds() const override;
 		virtual bool  bEnds() const override;
+		virtual bool  hasCrossing() const override;
 
 	signals:
 		void extend();
@@ -64,6 +66,7 @@ namespace mrw::ctrl
 	public slots:
 		void setExtension(const int ext_count);
 		void setLines(const int line_count);
+		void setCrossing(const bool crossing = false);
 	};
 }
 

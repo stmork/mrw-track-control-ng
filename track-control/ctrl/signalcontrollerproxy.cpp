@@ -1,8 +1,9 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
+#include <QCoreApplication>
 #include <QDebug>
 
 #include <util/method.h>
@@ -194,6 +195,18 @@ void SignalControllerProxy::connectStatechart()
 		this, &SignalControllerProxy::start,
 		&statechart, &SignalControllerStatechart::start,
 		Qt::QueuedConnection);
+	connect(
+		&statechart, &SignalControllerStatechart::entered, [&]()
+	{
+//		QCoreApplication::processEvents();
+
+		qCDebug(log).noquote() << toString() << "Inquiry started.";
+	});
+	connect(
+		&statechart, &SignalControllerStatechart::started, [&]()
+	{
+		qCDebug(log).noquote() << toString() << "Inquiry completed.";
+	});
 }
 
 void SignalControllerProxy::initStatechart()
@@ -470,7 +483,7 @@ bool SignalControllerProxy::isTour()
 
 void SignalControllerProxy::fail()
 {
-	qCritical().noquote() << String::red(" Signal turn failed!") << name();
+	qCCritical(log).noquote() << String::red(" Signal turn failed!") << name();
 
 	statechart_main.fail();
 	statechart_distant.fail();
@@ -487,7 +500,7 @@ void SignalControllerProxy::pending()
 	emit update();
 
 #ifdef VERBOSE
-	qDebug().noquote() << String::bold("Pend:") << *this;
+	qCDebug(log).noquote() << String::bold("Pend:") << *this;
 #endif
 }
 
@@ -497,6 +510,6 @@ void SignalControllerProxy::lock(const bool do_it)
 	emit update();
 
 #ifdef VERBOSE
-	qDebug().noquote() << String::bold("Lock:") << *this;
+	qCDebug(log).noquote() << String::bold("Lock:") << *this;
 #endif
 }

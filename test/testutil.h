@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #pragma once
@@ -70,6 +70,11 @@ namespace mrw::test
 		void testResetCustomBatch();
 		void testDifferentBatch();
 		void testSelfPointer();
+		void testHexLine();
+		void testCleanVector();
+		void testSharedVector();
+		void testBlanktime();
+		void testHostname();
 	};
 }
 

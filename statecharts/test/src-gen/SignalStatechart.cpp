@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -20,11 +20,7 @@ namespace mrw
 
 		SignalStatechart::SignalStatechart() noexcept
 		{
-			for (sc::ushort state_vec_pos = 0; state_vec_pos < maxOrthogonalStates; ++state_vec_pos)
-			{
-				stateConfVector[state_vec_pos] = mrw::statechart::SignalStatechart::State::NO_STATE;
-			}
-
+			std::fill(std::begin(stateConfVector), std::end(stateConfVector), mrw::statechart::SignalStatechart::State::NO_STATE);
 			clearInEvents();
 			clearOutEvents();
 		}
@@ -37,13 +33,18 @@ namespace mrw
 				incomingEventQueue.pop_front();
 				delete nextEvent;
 			}
+			if (!timerService)
+			{
+				return;
+			}
+			timerService->unsetTimer(this, 0);
 		}
 
 
 
 		mrw::statechart::SignalStatechart::EventInstance * SignalStatechart::getNextEvent() noexcept
 		{
-			mrw::statechart::SignalStatechart::EventInstance * nextEvent = 0;
+			mrw::statechart::SignalStatechart::EventInstance * nextEvent = nullptr;
 
 			if (!incomingEventQueue.empty())
 			{
@@ -70,10 +71,9 @@ namespace mrw
 				{
 					mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer> * e = static_cast<mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer> *>(event);
 
-					if (e != 0)
+					if (e != nullptr)
 					{
-						turn_value
-							= e->value;
+						turn_value = e->value;
 						turn_raised = true;
 					}
 					break;
@@ -99,7 +99,6 @@ namespace mrw
 					break;
 				}
 
-
 			case mrw::statechart::SignalStatechart::Event::_te0_main_region_Turning_:
 				{
 					timeEvents[static_cast<sc::integer>(event->eventId) - static_cast<sc::integer>(mrw::statechart::SignalStatechart::Event::_te0_main_region_Turning_)] = true;
@@ -119,8 +118,7 @@ namespace mrw
 		/*! Raises the in event 'turn' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseTurn(sc::integer turn_)
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>(mrw::statechart::SignalStatechart::Event::turn, turn_))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstanceWithValue<sc::integer>(mrw::statechart::SignalStatechart::Event::turn, turn_));
 			runCycle();
 		}
 
@@ -128,8 +126,7 @@ namespace mrw
 		/*! Raises the in event 'queued' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseQueued()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::queued))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::queued));
 			runCycle();
 		}
 
@@ -137,8 +134,7 @@ namespace mrw
 		/*! Raises the in event 'ok' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseOk()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::ok))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::ok));
 			runCycle();
 		}
 
@@ -146,8 +142,7 @@ namespace mrw
 		/*! Raises the in event 'fail' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseFail()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::fail))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::fail));
 			runCycle();
 		}
 
@@ -155,8 +150,7 @@ namespace mrw
 		/*! Raises the in event 'clear' of default interface scope. */
 		void mrw::statechart::SignalStatechart::raiseClear()
 		{
-			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::clear))
-			;
+			incomingEventQueue.push_back(new mrw::statechart::SignalStatechart::EventInstance(mrw::statechart::SignalStatechart::Event::clear));
 			runCycle();
 		}
 
@@ -266,14 +260,12 @@ namespace mrw
 
 		sc::integer SignalStatechart::getTimeout() noexcept
 		{
-			return timeout
-				;
+			return timeout;
 		}
 
 		sc::integer SignalStatechart::getSymbol() const noexcept
 		{
-			return symbol
-				;
+			return symbol;
 		}
 
 		void SignalStatechart::setSymbol(sc::integer symbol_) noexcept
@@ -282,20 +274,17 @@ namespace mrw
 		}
 		sc::integer SignalStatechart::getOFF() noexcept
 		{
-			return OFF
-				;
+			return OFF;
 		}
 
 		sc::integer SignalStatechart::getSTOP() noexcept
 		{
-			return STOP
-				;
+			return STOP;
 		}
 
 		sc::integer SignalStatechart::getGO() noexcept
 		{
-			return GO
-				;
+			return GO;
 		}
 
 		void SignalStatechart::setOperationCallback(OperationCallback * operationCallback) noexcept
@@ -404,6 +393,7 @@ namespace mrw
 		{
 			/* Default exit sequence for state Turning */
 			exseq_main_region_Turning_Turn_processing();
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
 			exact_main_region_Turning();
 		}
 
@@ -411,14 +401,14 @@ namespace mrw
 		void SignalStatechart::exseq_main_region_Turning_Turn_processing_Pending()
 		{
 			/* Default exit sequence for state Pending */
-			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Turning;
 		}
 
 		/* Default exit sequence for state Send */
 		void SignalStatechart::exseq_main_region_Turning_Turn_processing_Send()
 		{
 			/* Default exit sequence for state Send */
-			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::main_region_Turning;
 		}
 
 		/* Default exit sequence for state Fail */
@@ -438,6 +428,11 @@ namespace mrw
 			case mrw::statechart::SignalStatechart::State::main_region_Idle :
 				{
 					exseq_main_region_Idle();
+					break;
+				}
+			case mrw::statechart::SignalStatechart::State::main_region_Turning :
+				{
+					exseq_main_region_Turning();
 					break;
 				}
 			case mrw::statechart::SignalStatechart::State::main_region_Turning_Turn_processing_Pending :
@@ -499,7 +494,6 @@ namespace mrw
 				exseq_main_region_Turning();
 				completed_raised = true;
 				enseq_main_region_Idle_default();
-				react(0);
 			}
 		}
 
@@ -534,12 +528,6 @@ namespace mrw
 			react_main_region_Turning_Turn_processing__choice_0();
 		}
 
-		sc::integer SignalStatechart::react(const sc::integer transitioned_before)
-		{
-			/* State machine reactions. */
-			return transitioned_before;
-		}
-
 		sc::integer SignalStatechart::main_region_Idle_react(const sc::integer transitioned_before)
 		{
 			/* The reactions of state Idle. */
@@ -558,7 +546,6 @@ namespace mrw
 					{
 						exseq_main_region_Idle();
 						enseq_main_region_Fail_default();
-						react(0);
 						transitioned_after = 0;
 					}
 				}
@@ -567,7 +554,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -583,7 +570,6 @@ namespace mrw
 					exseq_main_region_Turning();
 					completed_raised = true;
 					enseq_main_region_Idle_default();
-					react(0);
 					transitioned_after = 0;
 				}
 				else
@@ -592,7 +578,6 @@ namespace mrw
 					{
 						exseq_main_region_Turning();
 						enseq_main_region_Fail_default();
-						react(0);
 						transitioned_after = 0;
 					}
 					else
@@ -602,7 +587,6 @@ namespace mrw
 							exseq_main_region_Turning();
 							timeEvents[0] = false;
 							enseq_main_region_Fail_default();
-							react(0);
 							transitioned_after = 0;
 						}
 					}
@@ -612,7 +596,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -621,12 +605,8 @@ namespace mrw
 		{
 			/* The reactions of state Pending. */
 			sc::integer transitioned_after = transitioned_before;
-			/* If no transition was taken */
-			if ((transitioned_after) == (transitioned_before))
-			{
-				/* then execute local reactions. */
-				transitioned_after = main_region_Turning_react(transitioned_before);
-			}
+			/* Always execute local reactions. */
+			transitioned_after = main_region_Turning_react(transitioned_before);
 			return transitioned_after;
 		}
 
@@ -663,7 +643,6 @@ namespace mrw
 				{
 					exseq_main_region_Fail();
 					enseq_main_region_Idle_default();
-					react(0);
 					transitioned_after = 0;
 				}
 			}
@@ -671,7 +650,7 @@ namespace mrw
 			if ((transitioned_after) == (transitioned_before))
 			{
 				/* then execute local reactions. */
-				transitioned_after = react(transitioned_before);
+				transitioned_after = transitioned_before;
 			}
 			return transitioned_after;
 		}
@@ -744,6 +723,8 @@ namespace mrw
 		void SignalStatechart::enter()
 		{
 			/* Activates the state machine. */
+			{
+			};
 			if (isExecuting)
 			{
 				return;
@@ -764,6 +745,7 @@ namespace mrw
 			isExecuting = true;
 			/* Default exit sequence for statechart SignalStatechart */
 			exseq_main_region();
+			stateConfVector[0] = mrw::statechart::SignalStatechart::State::NO_STATE;
 			isExecuting = false;
 		}
 
@@ -772,6 +754,7 @@ namespace mrw
 		{
 			runCycle();
 		}
+
 
 	}
 }

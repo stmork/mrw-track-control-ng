@@ -11,32 +11,15 @@ PKGCONFIG       += gtest
 PKGCONFIG       += gtest_main
 
 QMAKE_CXXFLAGS  -= -Wsuggest-override
+QMAKE_CXXFLAGS  -= -Wshadow
 
 INCLUDEPATH      = $$PWD/common
-
-QMAKE_CLEAN     += gtest-*.xml $$TARGET
-
-HEADERS += \
-	src-gen/ConfigStatechart.h \
-	src-gen/OperatingModeStatechart.h \
-	src-gen/RouteStatechart.h \
-	src-gen/SectionStatechart.h \
-	src-gen/SignalControllerStatechart.h \
-	src-gen/SignalStatechart.h \
-	src-gen/SwitchStatechart.h \
-	src-gen/TrackerStatechart.h \
-	src-gen/UpdateStatechart.h \
-	common/sc_cyclebased.h \
-	common/sc_eventdriven.h \
-	common/sc_runner_timed.h \
-	common/sc_statemachine.h \
-	common/sc_timer.h \
-	common/sc_timer_service.h \
-	common/sc_types.h
 
 SOURCES += \
 	src-gen/ConfigStatechart.cpp \
 	src-gen/ConfigTest.cpp \
+	src-gen/CrossingStatechart.cpp \
+	src-gen/CrossingTest.cpp \
 	src-gen/OperatingModeStatechart.cpp \
 	src-gen/OperatingModeTest.cpp \
 	src-gen/RouteStatechart.cpp \
@@ -55,3 +38,24 @@ SOURCES += \
 	src-gen/UpdateTest.cpp \
 	common/sc_runner_timed.cpp \
 	common/sc_timer_service.cpp
+
+HEADERS += \
+	src-gen/ConfigStatechart.h \
+	src-gen/CrossingStatechart.h \
+	src-gen/OperatingModeStatechart.h \
+	src-gen/RouteStatechart.h \
+	src-gen/SectionStatechart.h \
+	src-gen/SignalControllerStatechart.h \
+	src-gen/SignalStatechart.h \
+	src-gen/SwitchStatechart.h \
+	src-gen/TrackerStatechart.h \
+	src-gen/UpdateStatechart.h \
+	common/sc_cyclebased.h \
+	common/sc_eventdriven.h \
+	common/sc_runner_timed.h \
+	common/sc_statemachine.h \
+	common/sc_timer.h \
+	common/sc_timer_service.h \
+	common/sc_types.h
+
+QMAKE_CLEAN     += gtest-*.xml $$TARGET

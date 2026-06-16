@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QMetaMethod>
@@ -10,6 +10,7 @@
 #include <util/stringutil.h>
 #include <statecharts/timerservice.h>
 #include <ctrl/controllerregistry.h>
+#include <ctrl/crossingcontroller.h>
 #include <ctrl/regularswitchcontrollerproxy.h>
 #include <ctrl/doublecrossswitchcontrollerproxy.h>
 #include <ctrl/sectioncontroller.h>
@@ -17,6 +18,7 @@
 
 #include "controlledroute.h"
 #include "beermodeservice.h"
+#include "log.h"
 
 using namespace mrw::util;
 using namespace mrw::statechart;
@@ -73,7 +75,7 @@ ControlledRoute::~ControlledRoute()
 	{
 		if (part->batch() == this)
 		{
-			qWarning().noquote() << "Batch participant not deregistered:" << part->name();
+			qCWarning(mrw::tools::log).noquote() << "Batch participant not deregistered:" << part->name();
 			part->setBatch(nullptr);
 		}
 	}
@@ -161,7 +163,7 @@ void ControlledRoute::prepareTrack()
 				Qt::UniqueConnection);
 			dcs->setBatch(this);
 		}
-		qDebug().noquote() << *part;
+		qCDebug(mrw::tools::log).noquote() << *part;
 	}
 }
 
@@ -205,7 +207,7 @@ void ControlledRoute::prepareSignals()
 				Symbol::GO :
 				Symbol::STOP);
 			signal_ctrl->setBatch(this);
-			qDebug().noquote() << *signal_ctrl;
+			qCDebug(mrw::tools::log).noquote() << *signal_ctrl;
 		}
 
 		section_ctrl->nextController(next_ctrl);
@@ -223,8 +225,8 @@ void ControlledRoute::prepareFlank()
 void ControlledRoute::connectSectionController(SectionController * controller)
 {
 	connect(
-		controller, &SectionController::entered,
-		this, &ControlledRoute::entered,
+		controller, &SectionController::enteredSection,
+		this, &ControlledRoute::enteredSection,
 		Qt::UniqueConnection);
 	connect(
 		controller, &SectionController::leaving,
@@ -276,13 +278,13 @@ void ControlledRoute::rename()
 *************************************************************************/
 
 /**
- * This slot is only a marker that a train has entered a mrw::model::Section.
+ * This slot is only a marker that a train has enteredSection a mrw::model::Section.
  */
-void ControlledRoute::entered()
+void ControlledRoute::enteredSection()
 {
-	SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
+	const SectionController * controller = dynamic_cast<SectionController *>(QObject::sender());
 
-	qDebug().noquote() << "Entered:    " << *controller;
+	qCDebug(mrw::tools::log).noquote() << "Entered:    " << *controller;
 }
 
 void ControlledRoute::leaving()
@@ -322,9 +324,9 @@ void ControlledRoute::left()
 	if (signal_ctrl != nullptr)
 	{
 		signal_ctrl->disable();
-		qDebug().noquote() << "Left sig.:  " << *signal_ctrl;
+		qCDebug(mrw::tools::log).noquote() << "Left sig.:  " << *signal_ctrl;
 	}
-	qDebug().noquote() << "Left sec.:  " << *section_ctrl;
+	qCDebug(mrw::tools::log).noquote() << "Left sec.:  " << *section_ctrl;
 }
 
 /**
@@ -345,27 +347,27 @@ void ControlledRoute::tryUnblockCtrl(SectionController * section_ctrl)
 
 	Section        *        section     = section_ctrl->section();
 	SignalControllerProxy * signal_ctrl = getSignalController(section);
-	Signal         *        main_signal = signal_ctrl != nullptr ? signal_ctrl->mainSignal() : nullptr;
+	const Signal      *     main_signal = signal_ctrl != nullptr ? signal_ctrl->mainSignal() : nullptr;
 
 	if (main_signal != nullptr)
 	{
 		Section * first;
 
-		qDebug().noquote() << "Try unblock: until >>>" << *main_signal;
+		qCDebug(mrw::tools::log).noquote() << "Try unblock: until >>>" << *main_signal;
 		do
 		{
 			first = sections.front();
 
-			qDebug().noquote() << "Try unblock:" << *first;
+			qCDebug(mrw::tools::log).noquote() << "Try unblock:" << *first;
 			unregister(first);
 		}
 		while (first != section);
 	}
 	else
 	{
-		qDebug().noquote() << "Try unblock: no signal";
+		qCDebug(mrw::tools::log).noquote() << "Try unblock: no signal";
 	}
-	qDebug().noquote() << "Try unblock:" << countAllocatedSections() << "sections left";
+	qCDebug(mrw::tools::log).noquote() << "Try unblock:" << countAllocatedSections() << "sections left";
 
 	rename();
 	finalize();
@@ -396,7 +398,7 @@ void ControlledRoute::unregister(SectionController * controller)
 
 	disconnectSectionController(controller);
 
-	qDebug().noquote() << "Unregister: " << *controller;
+	qCDebug(mrw::tools::log).noquote() << "Unregister: " << *controller;
 
 	sections.remove(controller->section());
 	controller->nextController(nullptr);
@@ -443,7 +445,7 @@ void ControlledRoute::unregister(SectionController * controller)
 		track.pop_front();
 	}
 
-	qDebug().noquote() << "Unregister: " << countAllocatedSections() << "sections left";
+	qCDebug(mrw::tools::log).noquote() << "Unregister: " << countAllocatedSections() << "sections left";
 }
 
 void ControlledRoute::disconnectSectionController(SectionController * controller)
@@ -451,8 +453,8 @@ void ControlledRoute::disconnectSectionController(SectionController * controller
 	controller->setBatch(nullptr);
 
 	disconnect(
-		controller, &SectionController::entered,
-		this, &ControlledRoute::entered);
+		controller, &SectionController::enteredSection,
+		this, &ControlledRoute::enteredSection);
 	disconnect(
 		controller, &SectionController::left,
 		this, &ControlledRoute::left);
@@ -474,14 +476,14 @@ void ControlledRoute::finalize()
 		if (sections.back() == last_section)
 		{
 			// This marks the complete route reachead.
-			qDebug().noquote() << "Finalize:   " << String::bold("Finished!");
+			qCDebug(mrw::tools::log).noquote() << "Finalize:   " << String::bold("Finished!");
 
 			emit disable();
 		}
 		else
 		{
 			// This marks the next main signal reached.
-			qDebug().noquote() << "Finalize:   " << String::bold("Reached!");
+			qCDebug(mrw::tools::log).noquote() << "Finalize:   " << String::bold("Reached!");
 		}
 	}
 }
@@ -574,12 +576,12 @@ void ControlledRoute::dump() const
 	std::vector<SignalControllerProxy *> controllers;
 
 	Route::dump();
-	qDebug() << "---";
+	qCDebug(mrw::tools::log) << "---";
 	collectSignalControllers(controllers);
 
 	for (const SignalControllerProxy * proxy : controllers)
 	{
-		qDebug().noquote() << "     " << *proxy;
+		qCDebug(mrw::tools::log).noquote() << "     " << *proxy;
 	}
 }
 
@@ -598,7 +600,7 @@ void ControlledRoute::fail()
 {
 	__METHOD__;
 
-	qCritical().noquote() << String::red("Failing route:") << list_item.text();
+	qCCritical(mrw::tools::log).noquote() << String::red("Failing route:") << list_item.text();
 	Batch::dump();
 
 	dump();
@@ -627,6 +629,25 @@ bool ControlledRoute::isTour()
 **       Propose actions to controller proxy instances                  **
 **                                                                      **
 *************************************************************************/
+
+void ControlledRoute::turnCrossings()
+{
+	__METHOD__;
+
+	for (Section * section : sections)
+	{
+		Device       *       device     = section->crossing();
+		CrossingController * controller =
+			ControllerRegistry::instance().find<CrossingController>(device);
+
+		if (controller != nullptr)
+		{
+			qCDebug(mrw::tools::log).noquote() << "Turn crossing: " << *controller;
+			controller->setBatch(this);
+			controller->action();
+		}
+	}
+}
 
 void ControlledRoute::turnSwitches()
 {
@@ -657,7 +678,7 @@ void ControlledRoute::turnFlanks()
 
 		controller->setBatch(this);
 		controller->turn();
-		qDebug().noquote() << *controller;
+		qCDebug(mrw::tools::log).noquote() << *controller;
 	}
 }
 
@@ -673,7 +694,7 @@ void ControlledRoute::enableSignals()
 		SignalControllerProxy * controller = *it;
 
 		controller->enable();
-		qDebug().noquote() << *controller;
+		qCDebug(mrw::tools::log).noquote() << *controller;
 	}
 }
 
@@ -686,7 +707,7 @@ void ControlledRoute::extendSignals()
 		SignalControllerProxy * controller = *it;
 
 		controller->extend();
-		qDebug().noquote() << *controller;
+		qCDebug(mrw::tools::log).noquote() << *controller;
 	}
 }
 

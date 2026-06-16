@@ -1,7 +1,7 @@
 /* *
 //
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+// SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 * */
 
@@ -124,12 +124,16 @@ namespace mrw
 			void raiseNext();
 			/*! Raises the in event 'unlock' of default interface scope. */
 			void raiseUnlock();
+			/*! Check if event 'entered' of default interface scope is raised. */
+			bool isRaisedEntered() noexcept;
 			/*! Check if event 'started' of default interface scope is raised. */
 			bool isRaisedStarted() noexcept;
 			/*! Check if event 'stop' of default interface scope is raised. */
 			bool isRaisedStop() noexcept;
-			/*! Check if event 'entered' of default interface scope is raised. */
-			bool isRaisedEntered() noexcept;
+			/*! Check if event 'enteredSection' of default interface scope is raised. */
+			bool isRaisedEnteredSection() noexcept;
+			/*! Check if event 'update' of default interface scope is raised. */
+			bool isRaisedUpdate() noexcept;
 			/*! Check if event 'leave' of default interface scope is raised. */
 			bool isRaisedLeave() noexcept;
 			/*! Check if event 'leaving' of default interface scope is raised. */
@@ -138,6 +142,8 @@ namespace mrw
 			bool isRaisedLeft() noexcept;
 			/*! Check if event 'unregister' of default interface scope is raised. */
 			bool isRaisedUnregister() noexcept;
+
+
 
 
 			/*! Gets the value of the variable 'timeout' that is defined in the default interface scope. */
@@ -190,6 +196,7 @@ namespace mrw
 
 			/*! Can be used by the client code to trigger a run to completion step without raising an event. */
 			void triggerWithoutEvent() override;
+
 			/*
 			 * Functions inherited from StatemachineInterface
 			 */
@@ -248,12 +255,11 @@ namespace mrw
 			bool dispatchEvent() noexcept;
 
 
-
 		private:
 			SectionStatechart(const SectionStatechart & rhs);
 			SectionStatechart & operator=(const SectionStatechart &);
 
-			static constexpr const sc::integer timeout {600};
+			static constexpr const sc::integer timeout {2500};
 			bool auto_off {true};
 			bool auto_unlock {true};
 			bool occupied {false};
@@ -265,7 +271,7 @@ namespace mrw
 			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 			static const sc::ushort maxOrthogonalStates {2};
 
-			sc::timer::TimerServiceInterface * timerService;
+			sc::timer::TimerServiceInterface * timerService = {};
 			bool timeEvents[timeEventsCount];
 
 
@@ -275,9 +281,10 @@ namespace mrw
 
 			OperationCallback * ifaceOperationCallback;
 
+			bool completed {false};
+			bool doCompletion {false};
 			bool isExecuting {false};
 			sc::integer stateConfVectorPosition {0};
-			bool stateConfVectorChanged {false};
 
 
 
@@ -286,7 +293,10 @@ namespace mrw
 			void enact_main_region_Init();
 			void enact_main_region_Init_Init_Process_Requesting();
 			void enact_main_region_Init_Init_Process_Requesting_relais_Relay();
+			void enact_main_region_Init_Init_Process_Requesting_relais_Wait();
 			void enact_main_region_Init_Init_Process_Requesting_state_Occupation();
+			void enact_main_region_Init_Init_Process_Requesting_state_Wait();
+			void enact_main_region_Operating();
 			void enact_main_region_Operating_Processing_Unlocked();
 			void enact_main_region_Operating_Processing_Locked();
 			void enact_main_region_Operating_Processing_Locked_Route_active_Passed();
@@ -331,7 +341,6 @@ namespace mrw
 			void enseq_main_region_Operating_Processing_default();
 			void enseq_main_region_Operating_Processing_Locked_Occupation_default();
 			void exseq_main_region_Init();
-			void exseq_main_region_Init_Init_Process_Requesting();
 			void exseq_main_region_Init_Init_Process_Requesting_relais_Relay();
 			void exseq_main_region_Init_Init_Process_Requesting_relais_Wait();
 			void exseq_main_region_Init_Init_Process_Requesting_state_Occupation();
@@ -350,7 +359,6 @@ namespace mrw
 			void exseq_main_region_Operating_Processing_Locked_Occupation_Free();
 			void exseq_main_region_Operating_Processing_Locked_Occupation_Occupied();
 			void exseq_main_region_Operating_Processing_Locked_Occupation__final_();
-			void exseq_main_region_Operating_Processing_Locked_Occupation_Next_Reached();
 			void exseq_main_region_Operating_Processing_Pending();
 			void exseq_main_region_Operating_Processing_Pending_Relais_processing_Enabling();
 			void exseq_main_region_Operating_Processing_Pending_Relais_processing_Disabling();
@@ -371,9 +379,7 @@ namespace mrw
 			void react_main_region_Init_Init_Process__entry_Default();
 			void react_main_region_Operating_Processing__entry_Default();
 			void react_main_region_Operating_Processing_Locked_Occupation__entry_Default();
-			void react_main_region_Init_Init_Process__sync0();
 			void react_main_region_Init_Init_Process__sync1();
-			sc::integer react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_Init_Process_Requesting_react(const sc::integer transitioned_before);
 			sc::integer main_region_Init_Init_Process_Requesting_relais_Relay_react(const sc::integer transitioned_before);
@@ -393,7 +399,6 @@ namespace mrw
 			sc::integer main_region_Operating_Processing_Locked_Route_active_Wait_for_Unlock_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Locked_Occupation_Free_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Locked_Occupation_Occupied_react(const sc::integer transitioned_before);
-			sc::integer main_region_Operating_Processing_Locked_Occupation__final__react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Locked_Occupation_Next_Reached_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Pending_react(const sc::integer transitioned_before);
 			sc::integer main_region_Operating_Processing_Pending_Relais_processing_Enabling_react(const sc::integer transitioned_before);
@@ -441,14 +446,20 @@ namespace mrw
 			/*! Indicates event 'unlock' of default interface scope is active. */
 			bool unlock_raised {false};
 
+			/*! Indicates event 'entered' of default interface scope is active. */
+			bool entered_raised {false};
+
 			/*! Indicates event 'started' of default interface scope is active. */
 			bool started_raised {false};
 
 			/*! Indicates event 'stop' of default interface scope is active. */
 			bool stop_raised {false};
 
-			/*! Indicates event 'entered' of default interface scope is active. */
-			bool entered_raised {false};
+			/*! Indicates event 'enteredSection' of default interface scope is active. */
+			bool enteredSection_raised {false};
+
+			/*! Indicates event 'update' of default interface scope is active. */
+			bool update_raised {false};
 
 			/*! Indicates event 'leave' of default interface scope is active. */
 			bool leave_raised {false};
@@ -467,7 +478,6 @@ namespace mrw
 
 			/*! Raises the out event 'local_leave' of internal scope as a local event. */
 			void raiseLocal_leave();
-
 
 
 		};

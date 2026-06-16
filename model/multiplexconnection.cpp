@@ -1,6 +1,6 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <QStringList>
@@ -24,6 +24,7 @@ MultiplexConnection::MultiplexConnection(
 {
 	const QDomNodeList & child_nodes = element.childNodes();
 
+	simple_light_vector.reserve(child_nodes.count());
 	for (int n = 0; n < child_nodes.count(); ++n)
 	{
 		const QDomNode & node = child_nodes.at(n);
@@ -37,30 +38,27 @@ MultiplexConnection::MultiplexConnection(
 			{
 				Light * light = new Light(model, controller, child);
 
-				simple_lights.push_back(light);
+				simple_light_vector.push_back(light);
+			}
+			else if (node_name == "crossing")
+			{
+				Crossing * crossing = new Crossing(model, controller, child);
+
+				crossing_vector.push_back(crossing);
 			}
 			else
 			{
-				model->error("Unknown controller element: " + node_name);
+				model->error("Unknown multiplex element: " + node_name);
 			}
 		}
 	}
 }
 
-MultiplexConnection::~MultiplexConnection()
-{
-	for (Light * light : simple_lights)
-	{
-		delete light;
-	}
-	simple_lights.clear();
-}
-
 bool MultiplexConnection::valid() const
 {
-	size_t pins = simple_lights.size();
+	size_t pins = simple_light_vector.size();
 
-	for (LightSignal * signal : light_signals)
+	for (LightSignal * signal : light_signal_vector)
 	{
 		if (signal == nullptr)
 		{
@@ -73,12 +71,31 @@ bool MultiplexConnection::valid() const
 		pins += signal->usedPins();
 	}
 
+	for (Crossing * crossing : crossing_vector)
+	{
+		if (!crossing->valid())
+		{
+			return false;
+		}
+		pins++;
+	}
+
 	return pins <= MAX_PINS;
+}
+
+bool MultiplexConnection::isValid(const MultiplexConnection * conn) noexcept
+{
+	return (conn != nullptr) && (conn->valid());
 }
 
 const std::vector<Light *> & MultiplexConnection::lights() const
 {
-	return simple_lights;
+	return simple_light_vector;
+}
+
+const std::vector<Crossing *> & mrw::model::MultiplexConnection::crossings() const
+{
+	return crossing_vector;
 }
 
 void MultiplexConnection::configure(
@@ -87,7 +104,7 @@ void MultiplexConnection::configure(
 {
 	unsigned pin = offset;
 
-	for (LightSignal * light_signal : light_signals)
+	for (const LightSignal * light_signal : light_signal_vector)
 	{
 		const MrwMessage msg = light_signal->configMsg(pin);
 
@@ -95,9 +112,17 @@ void MultiplexConnection::configure(
 		pin += light_signal->usedPins();
 	}
 
-	for (Light * light : simple_lights)
+	for (const Light * light : simple_light_vector)
 	{
 		const MrwMessage msg = light->configMsg(pin);
+
+		messages.emplace_back(msg);
+		pin++;
+	}
+
+	for (const Crossing * crossing : crossing_vector)
+	{
+		const MrwMessage msg = crossing->configMsg(pin);
 
 		messages.emplace_back(msg);
 		pin++;
@@ -112,6 +137,6 @@ void MultiplexConnection::link()
 	{
 		LightSignal * signal = dynamic_cast<LightSignal *>(AssemblyPart::resolve(model, signal_reference));
 
-		light_signals.push_back(signal);
+		light_signal_vector.push_back(signal);
 	}
 }

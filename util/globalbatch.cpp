@@ -1,10 +1,11 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
 #include <util/method.h>
 #include <util/globalbatch.h>
+#include <util/log.h>
 
 using namespace mrw::util;
 
@@ -19,5 +20,5 @@ GlobalBatch::~GlobalBatch()
 
 	Q_ASSERT(transaction.empty());
 
-	qInfo("  Global transaction (ID=%u) closed.", id);
+	qCInfo(log, "  Global transaction (ID=%u) closed.", id);
 }

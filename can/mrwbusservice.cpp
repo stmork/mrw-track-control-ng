@@ -1,18 +1,21 @@
 //
 //  SPDX-License-Identifier: MIT
-//  SPDX-FileCopyrightText: Copyright (C) 2008-2024 Steffen A. Mork
+//  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
-#include <unistd.h>
+#include <chrono>
 
 #include <QCanBus>
 #include <QCanBusDeviceInfo>
-#include <QDebug>
+#include <QThread>
 #include <QTimer>
+#include <QVariant>
 
 #include <util/method.h>
 #include <can/mrwbusservice.h>
 
+using namespace std::chrono;
+using namespace std::chrono_literals;
 using namespace mrw::can;
 
 MrwBusService::MrwBusService(
@@ -25,11 +28,12 @@ MrwBusService::MrwBusService(
 
 {
 	QString error;
-	QString selected = select(interface, plugin);
+	const QString selected = select(interface, plugin);
 
 	can_device = can_bus->createDevice(plugin, selected, &error);
 	if (can_device != nullptr)
 	{
+		can_device->setConfigurationParameter(QCanBusDevice::BitRateKey, QVariant());
 		connect(
 			can_device, &QCanBusDevice::framesReceived,
 			this, &MrwBusService::receive,
@@ -40,25 +44,29 @@ MrwBusService::MrwBusService(
 			Qt::QueuedConnection);
 
 		connect(
-			can_device, &QCanBusDevice::errorOccurred, [] (auto reason)
+			can_device, &QCanBusDevice::errorOccurred, [this] (auto reason)
 		{
-			qCritical() << reason;
+			qCCritical(log).noquote() << "CAN bus error occured:" << reason;
+			qCCritical(log).noquote() << "CAN bus status:       " << can_device->busStatus();
 		});
 
 		if (auto_connect)
 		{
-			can_device->connectDevice();
+			if (!can_device->connectDevice())
+			{
+				qCCritical(log).noquote() << "Cannot connect to CAN device!";
+			}
 		}
 	}
 	else
 	{
-		qCritical().noquote() << error;
+		qCCritical(log).noquote() << "Cannot create CAN device:" << error;
 	}
 }
 
 MrwBusService::~MrwBusService()
 {
-	qInfo(" Shutting down MRW bus service.");
+	qCInfo(log, " Shutting down MRW bus service.");
 	if (can_device != nullptr)
 	{
 		can_device->disconnectDevice();
@@ -81,12 +89,12 @@ bool MrwBusService::list() noexcept
 	{
 		QString error;
 
-		qInfo().noquote() << plugin;
+		qCInfo(log).noquote() << plugin;
 		const QList<QCanBusDeviceInfo> & infos = can_bus->availableDevices(plugin, &error);
 
 		if (!error.isEmpty())
 		{
-			qCritical().noquote() << error;
+			qCCritical(log).noquote() << error;
 			success = false;
 		}
 		else
@@ -94,7 +102,7 @@ bool MrwBusService::list() noexcept
 			for (const QCanBusDeviceInfo & info : infos)
 			{
 
-				qInfo().noquote().nospace() << "  " << info.name() << ": " << info.description();
+				qCInfo(log).noquote().nospace() << "  " << info.name() << ": " << info.description();
 			}
 		}
 	}
@@ -103,14 +111,30 @@ bool MrwBusService::list() noexcept
 
 bool MrwBusService::write(const MrwMessage & message) noexcept
 {
-	qDebug().noquote() << message;
+	qCDebug(log).noquote() << message;
 
-	return (can_device != nullptr) && (can_device->writeFrame(message));
+	if (can_device != nullptr)
+	{
+		if (can_device->writeFrame(message))
+		{
+			return true;
+		}
+		else if (can_device->busStatus() == QCanBusDevice::CanBusStatus::Good)
+		{
+			static constexpr microseconds retry = 20ms;
+
+			qCWarning(log, "Retrying...");
+
+			QThread::usleep(retry.count());
+			return can_device->writeFrame(message);
+		}
+	}
+	return false;
 }
 
 void MrwBusService::process(const MrwMessage & message)
 {
-	qDebug() << message;
+	qCDebug(log).noquote() << message;
 }
 
 QString MrwBusService::select(
@@ -137,6 +161,10 @@ QString MrwBusService::select(
 			return infos.first().name();
 		}
 	}
+	else
+	{
+		qCCritical(log).noquote() << "Cannot list available CAN devices: " << error;
+	}
 
 	return "";
 }
@@ -146,15 +174,18 @@ void MrwBusService::stateChanged(QCanBusDevice::CanBusDeviceState state) noexcep
 	switch (state)
 	{
 	case QCanBusDevice::ConnectedState:
+		qCInfo(log, "CAN bus connected.");
 		emit connected();
 		break;
 
 	case QCanBusDevice::UnconnectedState:
+		qCInfo(log, "CAN bus disconnected.");
 		emit disconnected();
 		break;
 
 	default:
-		// States intenionally ignored.
+		// States intentionally ignored.
+		qCDebug(log).noquote() << "CAN bus state change: " << state;
 		break;
 	}
 }
