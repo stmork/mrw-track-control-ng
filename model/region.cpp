@@ -15,9 +15,9 @@ Region::Region(
 	ModelRailway     *    model_railway,
 	const QDomElement  &  element,
 	const bool            station) :
+	model(model_railway),
 	region_name(element.attribute("name")),
-	is_station(station),
-	model(model_railway)
+	is_station(station)
 {
 	const QDomNodeList & child_nodes = element.childNodes();
 

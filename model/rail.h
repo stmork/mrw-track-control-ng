@@ -42,11 +42,11 @@ namespace mrw::model
 	 */
 	class Rail : public RailPart
 	{
-		const bool     is_main;
-		const bool     is_curve;
-
 		RailPart   *   a = nullptr;
 		RailPart   *   b = nullptr;
+
+		const bool     is_main;
+		const bool     is_curve;
 
 	public:
 		explicit Rail(

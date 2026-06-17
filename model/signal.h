@@ -8,6 +8,8 @@
 #ifndef MRW_MODEL_SIGNAL_H
 #define MRW_MODEL_SIGNAL_H
 
+#include <cstdint>
+
 #include <can/commands.h>
 #include <util/constantenumerator.h>
 #include <model/module.h>
@@ -48,7 +50,7 @@ namespace mrw::model
 		 * will be computed into a mrw::can::SignalState later depending on
 		 * the SignalType.
 		 */
-		enum class Symbol : int
+		enum class Symbol : std::int16_t
 		{
 			/** Will always result in SIGNAL_OFF */
 			OFF  = -1,
@@ -70,7 +72,7 @@ namespace mrw::model
 		/**
 		 * This enumeration represents which basic type of the Signal.
 		 */
-		enum class SignalType : unsigned
+		enum class SignalType : std::uint16_t
 		{
 			/**
 			 * Main Signal:
@@ -108,13 +110,13 @@ namespace mrw::model
 
 	protected:
 
-		/** The orientation referenced to the counting direction. */
-		const bool          signal_direction;
-
 		/** The signal type. */
-		const SignalType    signal_type;
+		const SignalType       signal_type;
 
 		mrw::can::SignalAspect signal_aspect = mrw::can::SignalAspect::SIGNAL_OFF;
+
+		/** The orientation referenced to the counting direction. */
+		const bool             signal_direction;
 
 		/**
 		 * This callback retrieves the Signal::Symbol state from another

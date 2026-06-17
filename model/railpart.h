@@ -8,6 +8,7 @@
 #ifndef MRW_MODEL_RAILPART_H
 #define MRW_MODEL_RAILPART_H
 
+#include <cstdint>
 #include <regex>
 #include <set>
 
@@ -29,7 +30,7 @@ namespace mrw::model
 	 */
 	class RailInfo
 	{
-		enum class PreferCode : unsigned
+		enum class PreferCode : std::uint16_t
 		{
 			INFERIOR_FLAG    = 2,
 			CURVED_FLAG      = 1,
@@ -94,9 +95,14 @@ namespace mrw::model
 	{
 		static const std::regex path_regex;
 
-		bool                    is_reserved = false;
 
 	protected:
+		/** All connectors in counting direction. */
+		std::set<RailInfo>      rail_forward;
+
+		/** All connectors against counting direction. */
+		std::set<RailInfo>      rail_backward;
+
 		/**
 		 * The counting direction inversion flag.
 		 *
@@ -104,12 +110,7 @@ namespace mrw::model
 		 * rail part.
 		 */
 		const bool              a_in_dir;
-
-		/** All connectors in counting direction. */
-		std::set<RailInfo>      rail_forward;
-
-		/** All connectors against counting direction. */
-		std::set<RailInfo>      rail_backward;
+		bool                    is_reserved = false;
 
 	public:
 		explicit RailPart(

@@ -30,10 +30,10 @@ namespace mrw::model
 	{
 		friend class ModelRailway;
 
-		const QString                    region_name;
-		const bool                       is_station;
 		ModelRailway          *          model = nullptr;
+		const QString                    region_name;
 		mrw::util::CleanVector<Section>  sections;
+		const bool                       is_station;
 		bool                             direction_view = true;
 
 

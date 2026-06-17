@@ -8,6 +8,8 @@
 #ifndef MRW_MODEL_POSITION_H
 #define MRW_MODEL_POSITION_H
 
+#include <cstdint>
+
 #include <QPoint>
 #include <QSettings>
 
@@ -60,7 +62,7 @@ namespace mrw::model
 		 * swaps into another neighboured widget row. The values are related
 		 * to the counting direction of the displayed component.
 		 */
-		enum class Bending
+		enum class Bending : std::uint16_t
 		{
 			LEFT,      ///< Bend rail to left.
 			STRAIGHT,  ///< Do not bend anyway.
@@ -323,8 +325,8 @@ namespace mrw::model
 		QPoint   position;
 		unsigned ext_count     = 0;
 		unsigned line_count    = 0;
-		bool     inclined      = false;
 		Bending  bending_state = Bending::STRAIGHT;
+		bool     inclined      = false;
 	};
 }
 

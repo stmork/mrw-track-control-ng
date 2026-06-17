@@ -25,9 +25,6 @@ namespace mrw::model
 	 */
 	class DoubleCrossSwitch : public AbstractSwitch
 	{
-		bool         ad_branch;
-		bool         bc_branch;
-
 		RailPart  *  a = nullptr;
 		RailPart  *  b = nullptr;
 		RailPart  *  c = nullptr;
@@ -37,7 +34,7 @@ namespace mrw::model
 		static constexpr unsigned B_MASK = 2;
 		static constexpr unsigned D_MASK = 1;
 
-		enum class State : unsigned
+		enum class State : std::uint16_t
 		{
 			/**
 			 * <img src="XSwitch_AC_RUF.jpg" width="100"/>
@@ -158,7 +155,10 @@ namespace mrw::model
 
 		void collectFlankSwitches() noexcept override;
 
-		State                                              switch_state = State::AC;
+		State        switch_state = State::AC;
+		bool         ad_branch;
+		bool         bc_branch;
+
 		const static mrw::util::ConstantEnumerator<State>  state_map;
 	};
 }

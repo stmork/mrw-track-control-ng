@@ -8,6 +8,8 @@
 #ifndef MRW_MODEL_REGULARSWITCH_H
 #define MRW_MODEL_REGULARSWITCH_H
 
+#include <cstdint>
+
 #include <util/constantenumerator.h>
 #include <model/abstractswitch.h>
 
@@ -28,17 +30,12 @@ namespace mrw::model
 		friend class DoubleCrossSwitch;
 		friend class AbstractSwitch;
 
-		bool         left_branch;
-		bool         right_branch;
-		const bool   left_prio;
-		const bool   right_prio;
-
 		RailPart  *  a = nullptr;
 		RailPart  *  b = nullptr;
 		RailPart  *  c = nullptr;
 
 	public:
-		enum class State : unsigned
+		enum class State : std::uint16_t
 		{
 			/**
 			 * The turned left RegularSwitch:
@@ -157,6 +154,12 @@ namespace mrw::model
 		void collectFlankSwitches() noexcept override;
 
 		State switch_state = State::AB;
+		bool         left_branch;
+		bool         right_branch;
+		const bool   left_prio;
+		const bool   right_prio;
+
+
 		const static mrw::util::ConstantEnumerator<State>  state_map;
 	};
 }

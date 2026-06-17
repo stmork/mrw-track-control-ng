@@ -8,6 +8,7 @@
 #ifndef MRW_MODEL_SECTION_H
 #define MRW_MODEL_SECTION_H
 
+#include <cstdint>
 #include <regex>
 #include <functional>
 #include <type_traits>
@@ -34,7 +35,7 @@ namespace mrw::model
 	/**
 	 * This enumeration describes the possible internal Section states.
 	 */
-	enum class SectionState : int
+	enum class SectionState : std::uint16_t
 	{
 		/**
 		 * The Section is in free/available state.

@@ -8,6 +8,8 @@
 #ifndef MRW_MODEL_DEVICE_H
 #define MRW_MODEL_DEVICE_H
 
+#include <cstdint>
+
 #include <util/constantenumerator.h>
 #include <can/commands.h>
 #include <model/module.h>
@@ -30,13 +32,11 @@ namespace mrw::model
 	 */
 	class Device
 	{
-		const mrw::can::UnitNo   unit_no = 0;
-
 	public:
 		/**
 		 * This enumeration represents the processing state of this Device.
 		 */
-		enum class LockState : int
+		enum class LockState : std::int16_t
 		{
 			/** An error occured during pending processing. */
 			FAIL = -1,
@@ -161,6 +161,7 @@ namespace mrw::model
 
 	private:
 		LockState                lock_state = LockState::UNLOCKED;
+		const mrw::can::UnitNo   unit_no = 0;
 
 		static const mrw::util::ConstantEnumerator<LockState>  lock_map;
 	};

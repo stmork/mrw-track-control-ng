@@ -38,8 +38,8 @@ Signal::Signal(
 	const QDomElement  &  element,
 	const SignalType      type) :
 	AssemblyPart(model_railway, model_section, element),
-	signal_direction(ModelRailway::boolean(element, "inZaehlrichtung")),
-	signal_type(type)
+	signal_type(type),
+	signal_direction(ModelRailway::boolean(element, "inZaehlrichtung"))
 {
 }
 
