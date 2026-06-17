@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['fail_0',['FAIL',['../d8/d2c/classmrw_1_1model_1_1Device.html#a5aeac6a51c26164ebb6964d807d5c3a4ac2759effffc94bb9acc71d69fe3e8a1f',1,'mrw::model::Device::FAIL()'],['../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a1a462292eecb5d40e19aec3af07c93e1ac2759effffc94bb9acc71d69fe3e8a1f',1,'mrw::model::DoubleCrossSwitch::FAIL()'],['../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a340b068f7e7d7340ecf8a8c8c9e89dd2ac2759effffc94bb9acc71d69fe3e8a1f',1,'mrw::model::RegularSwitch::FAIL()']]],
+  ['fail_0',['FAIL',['../d8/d2c/classmrw_1_1model_1_1Device.html#acc135c45f3443edd4b802a8df4008fb7ac2759effffc94bb9acc71d69fe3e8a1f',1,'mrw::model::Device::FAIL()'],['../df/d32/classmrw_1_1model_1_1DoubleCrossSwitch.html#a9f36de6cafd6a00e8793795b4a069d5fac2759effffc94bb9acc71d69fe3e8a1f',1,'mrw::model::DoubleCrossSwitch::FAIL()'],['../d5/d3b/classmrw_1_1model_1_1RegularSwitch.html#a688c591de221fd25a7d0c225c049ad4aac2759effffc94bb9acc71d69fe3e8a1f',1,'mrw::model::RegularSwitch::FAIL()']]],
   ['fatal_1',['fatal',['../d1/d28/classmrw_1_1log_1_1LoggerBase.html#ab8c1ce6e79b2e507846dbe0a18733ae8',1,'mrw::log::LoggerBase::fatal()'],['../d1/d17/classmrw_1_1log_1_1StdLogger.html#a933218cb3ab2e3efd6227acc4468e1d0',1,'mrw::log::StdLogger::fatal()'],['../d5/d0d/classmrw_1_1log_1_1SysLogger.html#a85b55e62280b3986297709c44dd23d3c',1,'mrw::log::SysLogger::fatal()']]],
   ['filelogger_2',['FileLogger',['../d8/ded/classmrw_1_1log_1_1FileLogger.html#acf55310eb7aff654d9d888a92f083a1b',1,'mrw::log::FileLogger::FileLogger()'],['../d8/ded/classmrw_1_1log_1_1FileLogger.html',1,'mrw::log::FileLogger']]],
   ['findkey_3',['findKey',['../d3/d25/classmrw_1_1util_1_1ConstantEnumerator.html#ae8370f9272613af9f8a340d2d49f8fc8',1,'mrw::util::ConstantEnumerator']]],
@@ -18,5 +18,5 @@ var searchData=
   ['formsignal_15',['FormSignal',['../d4/d8a/classmrw_1_1model_1_1FormSignal.html#a299f4f928e530af0ca4226a50e9ee8b2',1,'mrw::model::FormSignal::FormSignal()'],['../d4/d8a/classmrw_1_1model_1_1FormSignal.html',1,'mrw::model::FormSignal']]],
   ['fraction_16',['FRACTION',['../db/d4f/classmrw_1_1model_1_1Position.html#a6630bd39d1f8d47f1e894c5d4d6b3735',1,'mrw::model::Position']]],
   ['free_17',['free',['../de/de1/classmrw_1_1model_1_1Section.html#aca0237aa56ce93a027a63c5a29e41a68',1,'mrw::model::Section']]],
-  ['free_18',['FREE',['../d9/dbc/namespacemrw_1_1model.html#a5c0de0ceba8c321d726fb3cc699b4edea88c189a42c87aa49d667fc8ab76bc323',1,'mrw::model']]]
+  ['free_18',['FREE',['../d9/dbc/namespacemrw_1_1model.html#a45d0f776d946b5661be56d2a673bd81da88c189a42c87aa49d667fc8ab76bc323',1,'mrw::model']]]
 ];
