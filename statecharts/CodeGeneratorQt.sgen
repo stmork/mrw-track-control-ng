@@ -7,7 +7,7 @@ GeneratorModel for create::cpp::qt
 {
 	const PROJECT : string = "statecharts"
 	const FOLDER  : string = "."
-	const COMMON :  string = "common"
+	const COMMON  : string = "common"
 
 	statechart mrw.statechart.OperatingModeStatechart
 	{

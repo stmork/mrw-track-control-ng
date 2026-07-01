@@ -7,7 +7,7 @@ GeneratorModel for create::cpp
 {
 	const PROJECT : string = "statecharts"
 	const FOLDER  : string = "test/src-gen"
-	const COMMON :  string = "test/common"
+	const COMMON  : string = "test/common"
 
 	statechart mrw.statechart.OperatingModeStatechart
 	{
