@@ -11,12 +11,16 @@ ClockService::ClockService() : QObject(nullptr)
 {
 	timer_1hz.setInterval(1000);
 	timer_1hz.setSingleShot(false);
+	timer_1hz.setTimerType(Qt::PreciseTimer);
 	timer_2hz.setInterval(500);
 	timer_2hz.setSingleShot(false);
+	timer_2hz.setTimerType(Qt::PreciseTimer);
 	timer_4hz.setInterval(250);
 	timer_4hz.setSingleShot(false);
+	timer_4hz.setTimerType(Qt::PreciseTimer);
 	timer_8hz.setInterval(125);
 	timer_8hz.setSingleShot(false);
+	timer_8hz.setTimerType(Qt::PreciseTimer);
 
 	connect(&timer_1hz, &QTimer::timeout, this, &ClockService::Hz1);
 	connect(&timer_2hz, &QTimer::timeout, this, &ClockService::Hz2);
