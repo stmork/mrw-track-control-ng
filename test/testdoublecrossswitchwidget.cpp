@@ -45,9 +45,9 @@ void TestDoubleCrossSwitchWidget::testPrepare()
 				for (const bool flank : booleans)
 				{
 					mock.setFlankProtection(flank);
-					for (int i = 0; i < 2; i++)
+					for (unsigned i = 0; i < 2; i++)
 					{
-						widget.tick();
+						widget.tick(i);
 						widget.test(status);
 						QCOMPARE(status.direction, dir);
 						QCOMPARE(status.section_state, state);

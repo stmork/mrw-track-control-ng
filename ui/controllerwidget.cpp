@@ -80,9 +80,9 @@ void ControllerWidget::computeConnectors()
 	connector_list.clear();
 }
 
-void ControllerWidget::tick()
+void ControllerWidget::tick(const unsigned counter)
 {
-	counter++;
+	tick_counter = counter;
 	if (hasLock() && (base_controller->lock() == LockState::PENDING))
 	{
 		repaint();
@@ -98,7 +98,7 @@ void ControllerWidget::mousePressEvent(QMouseEvent * event)
 
 bool ControllerWidget::lockVisible(const Device::LockState state) const
 {
-	return (state != Device::LockState::PENDING) || (counter & 1);
+	return (state != Device::LockState::PENDING) || (tick_counter & 1);
 }
 
 void ControllerWidget::drawLock(QPainter & painter, QColor color, const float x, const float y)

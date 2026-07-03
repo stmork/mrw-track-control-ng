@@ -4,6 +4,7 @@
 //
 
 #include <QPainter>
+#include <QTime>
 
 #include <ui/circlelivewidget.h>
 #include <util/clockservice.h>
@@ -15,11 +16,9 @@ const QPen CircleLiveWidget::pen(WHITE, 15.0);
 
 CircleLiveWidget::CircleLiveWidget(QWidget * parent) : BaseWidget(parent)
 {
-	connect(&ClockService::instance(), &ClockService::Hz2, [this] ()
-	{
-		repaint();
-		counter++;
-	});
+	connect(
+		&ClockService::instance(), &ClockService::Hz2,
+		this, &CircleLiveWidget::tick);
 }
 
 void CircleLiveWidget::paint(QPainter & painter)
@@ -27,7 +26,13 @@ void CircleLiveWidget::paint(QPainter & painter)
 	// Unify coordinates
 	rescale(painter, 200.0, 200.0);
 
-	painter.rotate(counter * 45.0);
+	painter.rotate(tick_counter * 45.0);
 	painter.setPen(pen);
 	painter.drawLine(-100, 0, 100, 0);
+}
+
+void CircleLiveWidget::tick(const unsigned int counter)
+{
+	tick_counter = counter;
+	repaint();
 }

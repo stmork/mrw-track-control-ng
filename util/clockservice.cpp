@@ -3,32 +3,48 @@
 //  SPDX-FileCopyrightText: Copyright (C) 2008-2026 Steffen A. Mork
 //
 
+#include <QTime>
+
 #include "clockservice.h"
 
 using namespace mrw::util;
 
 ClockService::ClockService() : QObject(nullptr)
 {
-	timer_1hz.setInterval(1000);
-	timer_1hz.setSingleShot(false);
-	timer_1hz.setTimerType(Qt::PreciseTimer);
-	timer_2hz.setInterval(500);
-	timer_2hz.setSingleShot(false);
-	timer_2hz.setTimerType(Qt::PreciseTimer);
-	timer_4hz.setInterval(250);
-	timer_4hz.setSingleShot(false);
-	timer_4hz.setTimerType(Qt::PreciseTimer);
-	timer_8hz.setInterval(125);
-	timer_8hz.setSingleShot(false);
-	timer_8hz.setTimerType(Qt::PreciseTimer);
+	timer.setInterval(125);
+	timer.setSingleShot(false);
+	timer.setTimerType(Qt::PreciseTimer);
 
-	connect(&timer_1hz, &QTimer::timeout, this, &ClockService::Hz1);
-	connect(&timer_2hz, &QTimer::timeout, this, &ClockService::Hz2);
-	connect(&timer_4hz, &QTimer::timeout, this, &ClockService::Hz4);
-	connect(&timer_8hz, &QTimer::timeout, this, &ClockService::Hz8);
+	connect(&timer, &QTimer::timeout, this, &ClockService::tick);
 
-	timer_1hz.start();
-	timer_2hz.start();
-	timer_4hz.start();
-	timer_8hz.start();
+	const int millies = QTime::currentTime().msec();
+
+	QTimer::singleShot(1005 - millies, this, [this]()
+	{
+		tick_counter = QTime::currentTime().msec() / 125;
+
+		timer.start();
+	});
+}
+
+void ClockService::tick()
+{
+	tick_counter++;
+
+	emit Hz8(tick_counter);
+
+	if ((tick_counter & 0b001) == 0)
+	{
+		emit Hz4(tick_counter >> 1);
+	}
+
+	if ((tick_counter & 0b011) == 0)
+	{
+		emit Hz2(tick_counter >> 2);
+	}
+
+	if ((tick_counter & 0b111) == 0)
+	{
+		emit Hz1(tick_counter >> 3);
+	}
 }

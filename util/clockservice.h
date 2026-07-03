@@ -26,11 +26,10 @@ namespace mrw::util
 
 		Q_OBJECT
 
+		unsigned tick_counter = 0;
+
 	private:
-		QTimer timer_1hz;
-		QTimer timer_2hz;
-		QTimer timer_4hz;
-		QTimer timer_8hz;
+		QTimer timer;
 
 		ClockService();
 
@@ -38,22 +37,25 @@ namespace mrw::util
 		/**
 		 * The one per second clock.
 		 */
-		void Hz1();
+		void Hz1(const unsigned counter);
 
 		/**
 		 * The two per second clock.
 		 */
-		void Hz2();
+		void Hz2(const unsigned counter);
 
 		/**
 		 * The four per second clock.
 		 */
-		void Hz4();
+		void Hz4(const unsigned counter);
 
 		/**
 		 * The eight per second clock.
 		 */
-		void Hz8();
+		void Hz8(const unsigned counter);
+
+	private slots:
+		void tick();
 	};
 }
 

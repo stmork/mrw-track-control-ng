@@ -15,14 +15,14 @@ using namespace mrw::util;
 ClockWidget::ClockWidget(QWidget * parent) : BaseWidget(parent)
 {
 	connect(
-		&ClockService::instance(), &ClockService::Hz1,
+		&ClockService::instance(), &ClockService::Hz2,
 		this, qOverload<>(&QWidget::update));
 }
 
 void ClockWidget::paint(QPainter & painter)
 {
-	QFont        font = painter.font();
-	QTime        now  = QTime::currentTime();
+	QFont  font = painter.font();
+	QTime  now  = QTime::currentTime();
 
 	const int xSize = size().width();
 	const int ySize = size().height();

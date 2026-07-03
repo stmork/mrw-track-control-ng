@@ -215,17 +215,48 @@ void TestUtil::testProperties()
 
 void TestUtil::testClockService()
 {
-	QSignalSpy spy_1Hz(&ClockService::instance(), &ClockService::Hz1);
-	QSignalSpy spy_2Hz(&ClockService::instance(), &ClockService::Hz2);
-	QSignalSpy spy_4Hz(&ClockService::instance(), &ClockService::Hz4);
-	QSignalSpy spy_8Hz(&ClockService::instance(), &ClockService::Hz8);
+	ClockService & instance = ClockService::instance();
+
+	// Wait a complete second to ensure ticking timers.
+	QTest::qWait(1000);
+
+	QSignalSpy spy_1Hz(&instance, &ClockService::Hz1);
+	QSignalSpy spy_2Hz(&instance, &ClockService::Hz2);
+	QSignalSpy spy_4Hz(&instance, &ClockService::Hz4);
+	QSignalSpy spy_8Hz(&instance, &ClockService::Hz8);
 
 	QTest::qWait(2100);
 
-	QVERIFY(spy_1Hz.count() >=  1);
-	QVERIFY(spy_2Hz.count() >=  3);
-	QVERIFY(spy_4Hz.count() >=  7);
-	QVERIFY(spy_8Hz.count() >= 15);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 4, 0))
+	QVERIFY(spy_1Hz.count() >=  2);
+	QVERIFY(spy_2Hz.count() >=  4);
+	QVERIFY(spy_4Hz.count() >=  8);
+	QVERIFY(spy_8Hz.count() >= 16);
+#else
+	QCOMPARE_GE(spy_1Hz.count(),  2);
+	QCOMPARE_GE(spy_2Hz.count(),  4);
+	QCOMPARE_GE(spy_4Hz.count(),  8);
+	QCOMPARE_GE(spy_8Hz.count(), 16);
+
+	QCOMPARE_LE(spy_1Hz.count(),  3);
+	QCOMPARE_LE(spy_2Hz.count(),  5);
+	QCOMPARE_LE(spy_4Hz.count(),  9);
+	QCOMPARE_LE(spy_8Hz.count(), 17);
+#endif
+
+	for (const QSignalSpy & spy :
+		{
+			std::ref(spy_1Hz),
+			std::ref(spy_2Hz),
+			std::ref(spy_4Hz),
+			std::ref(spy_8Hz)
+		})
+	{
+		for (int i = 1; i < spy.count(); i++)
+		{
+			QCOMPARE(spy.at(i).at(0).toUInt() - spy.at(i - 1).at(0).toUInt(), 1u);
+		}
+	}
 }
 
 void TestUtil::testRandom()

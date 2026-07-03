@@ -51,9 +51,9 @@ void TestRegularSwitchWidget::testPrepare()
 						for (int ext = 0; ext < 5; ext++)
 						{
 							mock.setExtension(ext);
-							for (int i = 0; i < 2; i++)
+							for (unsigned i = 0; i < 2; i++)
 							{
-								widget.tick();
+								widget.tick(i);
 								widget.test(status);
 								QCOMPARE(status.direction, dir);
 								QCOMPARE(status.section_state, state);

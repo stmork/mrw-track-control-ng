@@ -80,7 +80,7 @@ namespace mrw::ui
 		 */
 		virtual void computeConnectors();
 
-		void tick();
+		void tick(const unsigned int counter);
 
 	protected:
 		virtual void mousePressEvent(QMouseEvent * event) override;
@@ -186,7 +186,7 @@ namespace mrw::ui
 		 * This blink counter for drawing pending lock states. It is increased
 		 * by a timer. When odd the lock should be drawn.
 		 */
-		unsigned           counter = 0;
+		unsigned           tick_counter = 0;
 
 	private:
 		QListWidgetItem    list_item;

@@ -25,13 +25,16 @@ namespace mrw::ui
 
 	private:
 		static const QPen pen;
-		unsigned          counter = 0;
+		unsigned          tick_counter = 0;
 
 	public:
 		explicit CircleLiveWidget(QWidget * parent = nullptr);
 
 	protected:
 		void paint(QPainter & painter) override;
+
+	private slots:
+		void tick(const unsigned counter);
 	};
 }
 

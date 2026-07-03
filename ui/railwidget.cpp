@@ -59,7 +59,7 @@ void RailWidget::prepare(RailWidget::Status & status) const
 		(status.section_state != SectionState::FREE);
 	status.draw_lock            = draw_crossing &&
 		(status.section_state != SectionState::FREE) &&
-		(status.lock_state == LockState::PENDING) && (counter & 1);
+		(status.lock_state == LockState::PENDING) && (tick_counter & 1);
 	status.draw_crossing_after  = draw_crossing &&
 		(status.section_state == SectionState::FREE);
 }

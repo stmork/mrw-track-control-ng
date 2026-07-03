@@ -54,9 +54,9 @@ void TestRailWidget::testPrepare()
 							for (int lines = 0; lines < 5; lines++)
 							{
 								mock.setLines(lines);
-								for (int i = 0; i < 2; i++)
+								for (unsigned i = 0; i < 2; i++)
 								{
-									widget.tick();
+									widget.tick(i);
 									widget.test(status);
 									QCOMPARE(status.has_crossing, crossing);
 									QCOMPARE(status.direction, dir);
