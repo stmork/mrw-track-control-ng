@@ -8,7 +8,7 @@ var searchData=
   ['the_20mrw_3a_3aui_20namespace_5',['The mrw::ui namespace',['../d2/db2/md_ui_README.html',1,'']]],
   ['the_20mrw_3a_3autil_20namespace_6',['The mrw::util namespace',['../d1/d15/md_util_README.html',1,'']]],
   ['threshold_7',['threshold',['../d0/d3c/classmrw_1_1model_1_1Light.html#af3ab18d306698af87c9d18ac614998c5',1,'mrw::model::Light']]],
-  ['tick_8',['tick',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e',1,'mrw::ui::ControllerWidget']]],
+  ['tick_8',['tick',['../db/d8f/classmrw_1_1util_1_1ClockService.html#a134a368f4a66be25a3a50cbd44ad046e',1,'mrw::util::ClockService::tick()'],['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e',1,'mrw::ui::ControllerWidget::tick()']]],
   ['time_9',['time',['../db/d03/namespacesc.html#ad9b5def3d48864ce8bdbb6bb6429f99a',1,'sc']]],
   ['time_5fstamp_5fformat_10',['TIME_STAMP_FORMAT',['../d2/d87/classmrw_1_1util_1_1Duration.html#a5d7d85ca337156a12663496c60ea7cdf',1,'mrw::util::Duration']]],
   ['timedinterface_11',['TimedInterface',['../d7/d75/classsc_1_1timer_1_1TimedInterface.html',1,'sc::timer']]],
