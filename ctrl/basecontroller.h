@@ -60,8 +60,6 @@
  */
 namespace mrw::ctrl
 {
-	Q_DECLARE_LOGGING_CATEGORY(log)
-
 	/**
 	 * This controller base class unifies the interface for all widget
 	 * controller classes. All derived classes have the role as a controller
