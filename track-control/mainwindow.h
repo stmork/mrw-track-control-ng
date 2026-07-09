@@ -100,7 +100,7 @@ private slots:
 
 private:
 
-	void setScreenBlankTimeout();
+	void setupConfig();
 	void initRegion(const MrwMessageDispatcher & dispatcher);
 	void connectEditActions();
 	void connectOpModes(MrwMessageDispatcher & dispatcher);
@@ -133,6 +133,7 @@ private:
 	Ui::MainWindow               *              ui;
 	QLabel                   *                  status_label = nullptr;
 	mrw::model::ModelRepository        &        repo;
+	bool                                        permit_editing = true;
 
 	ScreenBlankHandler                                                         blanker;
 	mrw::statechart::QtStatechart<mrw::statechart::OperatingModeStatechart>    statechart;

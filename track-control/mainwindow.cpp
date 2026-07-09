@@ -111,7 +111,7 @@ MainWindow::MainWindow(
 	statechart.setOperationCallback(*this);
 	statechart.screen().setOperationCallback(blanker);
 	statechart.can().setOperationCallback(dispatcher);
-	setScreenBlankTimeout();
+	setupConfig();
 
 	Q_ASSERT(statechart.check());
 
@@ -155,6 +155,18 @@ bool MainWindow::eventFilter(QObject * object, QEvent * event)
 		statechart.screen_userInput();
 	}
 	return QMainWindow::eventFilter(object, event);
+}
+
+void MainWindow::setupConfig()
+{
+	mrw::util::Settings      settings;
+	mrw::util::SettingsGroup group(&settings, AppSupport::instance().hostname());
+	const unsigned           blank_time = AppSupport::instance().blanktime();
+	const sc::integer        timeout    = std::max(settings.value("blank", blank_time).toInt(), (int)blank_time);
+
+	qCInfo(mrw::tools::log).noquote() << "Setting screen blank timeout to" << timeout << "seconds.";
+	statechart.screen().setTimeout(timeout);
+	permit_editing = settings.value("permit_editing", true).toBool();
 }
 
 void MainWindow::disableBeerMode()
@@ -339,7 +351,7 @@ void MainWindow::enable()
 	ui->actionLineDown->setEnabled(editing);
 
 	ui->actionOperate->setEnabled(editing);
-	ui->actionEdit->setEnabled((operating && !hasActiveRoutes()) || failed);
+	ui->actionEdit->setEnabled(((operating && !hasActiveRoutes()) || failed) && permit_editing);
 	ui->actionManual->setEnabled((operating && isManualValid()) || manual);
 	ui->actionClear->setEnabled(failed);
 	ui->actionInit->setEnabled(operating);
@@ -577,17 +589,6 @@ void MainWindow::routeFinished()
 	enable();
 	ui->regionTabWidget->currentWidget()->update();
 	statechart.routesChanged();
-}
-
-void MainWindow::setScreenBlankTimeout()
-{
-	mrw::util::Settings      settings;
-	mrw::util::SettingsGroup group(&settings, AppSupport::instance().hostname());
-	const unsigned           blank_time = AppSupport::instance().blanktime();
-	const sc::integer        timeout    = std::max(settings.value("blank", blank_time).toInt(), (int)blank_time);
-
-	qCInfo(mrw::tools::log).noquote() << "Setting screen blank timeout to" << timeout << "seconds.";
-	statechart.screen().setTimeout(timeout);
 }
 
 /*************************************************************************
