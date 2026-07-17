@@ -1746,6 +1746,7 @@
 <section title="rescale" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#ad8d338e6d961e599a617f9af77556e89"/>
 <section title="sectionColor" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#ae7a45cecae7ea77538b9c873804ca323"/>
 <section title="setVerbose" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
+<section title="tick" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a4e4d173f5b4a4c4e2107b7d20df4077a"/>
 <section title="BLUE" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="FONT_HEIGHT" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#aa2a845fcbce029e14533b7b9444b3990"/>
 <section title="FONT_SIZE" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a9758dbbee57c8b9afa11e3278f51045a"/>
@@ -3975,6 +3976,7 @@
 <section title="rescale" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#ad8d338e6d961e599a617f9af77556e89"/>
 <section title="sectionColor" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#ae7a45cecae7ea77538b9c873804ca323"/>
 <section title="setVerbose" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
+<section title="tick" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a4e4d173f5b4a4c4e2107b7d20df4077a"/>
 <section title="BLUE" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a2ab2e86ed30d31f026d41c76886c00aa"/>
 <section title="FONT_HEIGHT" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#aa2a845fcbce029e14533b7b9444b3990"/>
 <section title="FONT_SIZE" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a9758dbbee57c8b9afa11e3278f51045a"/>
@@ -5645,6 +5647,7 @@
 <keyword name="TermHandler(const std::initializer_list&lt; int &gt; &amp;quit_signals)" id="mrw::util::TermHandler::TermHandler_a2616c0436b27b5e414c92d5603e72fc5" ref="df/d75/classmrw_1_1util_1_1TermHandler.html#a2616c0436b27b5e414c92d5603e72fc5"/>
 <keyword name="threshold() const" id="mrw::model::Light::threshold_af3ab18d306698af87c9d18ac614998c5" ref="d0/d3c/classmrw_1_1model_1_1Light.html#af3ab18d306698af87c9d18ac614998c5"/>
 <keyword name="tick()" id="mrw::util::ClockService::tick_a134a368f4a66be25a3a50cbd44ad046e" ref="db/d8f/classmrw_1_1util_1_1ClockService.html#a134a368f4a66be25a3a50cbd44ad046e"/>
+<keyword name="tick()" id="mrw::ui::CircleLiveWidget::tick_a4e4d173f5b4a4c4e2107b7d20df4077a" ref="d6/d19/classmrw_1_1ui_1_1CircleLiveWidget.html#a4e4d173f5b4a4c4e2107b7d20df4077a"/>
 <keyword name="tick()" id="mrw::ui::ControllerWidget::tick_a5e837a523ee2c2e126b94b9c5aa7967e" ref="db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e"/>
 <keyword name="TIME_STAMP_FORMAT" id="mrw::util::Duration::TIME_STAMP_FORMAT_a5d7d85ca337156a12663496c60ea7cdf" ref="d2/d87/classmrw_1_1util_1_1Duration.html#a5d7d85ca337156a12663496c60ea7cdf"/>
 <keyword name="timeStamp() noexcept" id="mrw::log::LoggerBase::timeStamp_a2ecff9f11574c33d083c55da29decdb1" ref="d1/d28/classmrw_1_1log_1_1LoggerBase.html#a2ecff9f11574c33d083c55da29decdb1"/>
