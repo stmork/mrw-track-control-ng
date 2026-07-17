@@ -8,7 +8,7 @@ var searchData=
   ['can_5fsid_5fmask_5',['CAN_SID_MASK',['../d9/d9b/namespacemrw_1_1can.html#a2edbccb26775abf89a8a1475825fb88a',1,'mrw::can']]],
   ['can_5fsid_5fshift_6',['CAN_SID_SHIFT',['../d9/d9b/namespacemrw_1_1can.html#a773b487895407f4c785f4a30a5caaa8c',1,'mrw::can']]],
   ['connector_5flist_7',['connector_list',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a7e7621b6aea5332d8fc002cdda357178',1,'mrw::ui::ControllerWidget']]],
-  ['counter_8',['counter',['../db/d4f/classmrw_1_1model_1_1Position.html#a4d7793ec6944ee1f89dec89cc0ea8a12',1,'mrw::model::Position::counter()'],['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3',1,'mrw::ui::ControllerWidget::counter()']]],
+  ['counter_8',['counter',['../db/d4f/classmrw_1_1model_1_1Position.html#a4d7793ec6944ee1f89dec89cc0ea8a12',1,'mrw::model::Position']]],
   ['crx_5fname_9',['crx_name',['../d6/d5c/classmrw_1_1model_1_1Crossing.html#a1ac759ca4b27a392d3630bc0d81ac57e',1,'mrw::model::Crossing']]],
   ['cyan_5fon_10',['CYAN_ON',['../d0/d55/classmrw_1_1util_1_1String.html#a8026cc002373c31b4dc8193a2a1eb599',1,'mrw::util::String']]]
 ];

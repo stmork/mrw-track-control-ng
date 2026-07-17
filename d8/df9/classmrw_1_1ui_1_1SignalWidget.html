@@ -167,8 +167,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a8bb3d9f6d2249583f9e83d3637018895"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a8bb3d9f6d2249583f9e83d3637018895">extend</a> ()</td></tr>
 <tr class="memdesc:a8bb3d9f6d2249583f9e83d3637018895"><td class="mdescLeft">&#160;</td><td class="mdescRight">The extension in the model has changed and need to be redrawn.  <a href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a8bb3d9f6d2249583f9e83d3637018895">More...</a><br /></td></tr>
 <tr class="separator:a8bb3d9f6d2249583f9e83d3637018895"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e837a523ee2c2e126b94b9c5aa7967e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a5e837a523ee2c2e126b94b9c5aa7967e">tick</a> ()</td></tr>
-<tr class="separator:a5e837a523ee2c2e126b94b9c5aa7967e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a839778a154a3d777836b755213867baa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a839778a154a3d777836b755213867baa">tick</a> (const unsigned int counter)</td></tr>
+<tr class="separator:a839778a154a3d777836b755213867baa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59cf4307c0600aeb72c0a8c827cce776"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a59cf4307c0600aeb72c0a8c827cce776">mousePressEvent</a> (QMouseEvent *event) override</td></tr>
 <tr class="separator:a59cf4307c0600aeb72c0a8c827cce776"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4ee397c4e0a49be00776bebd2473505"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#ad4ee397c4e0a49be00776bebd2473505">lockVisible</a> (const <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html#acc135c45f3443edd4b802a8df4008fb7">mrw::model::Device::LockState</a> state) const</td></tr>
@@ -214,9 +214,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a7e7621b6aea5332d8fc002cdda357178"><td class="memItemLeft" align="right" valign="top">QList&lt; QPoint &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a7e7621b6aea5332d8fc002cdda357178">connector_list</a></td></tr>
 <tr class="memdesc:a7e7621b6aea5332d8fc002cdda357178"><td class="mdescLeft">&#160;</td><td class="mdescRight">The list of possible connection points.  <a href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a7e7621b6aea5332d8fc002cdda357178">More...</a><br /></td></tr>
 <tr class="separator:a7e7621b6aea5332d8fc002cdda357178"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45624ef3fd3fd765c740ef5dbf0e36f3"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3">counter</a> = 0</td></tr>
-<tr class="memdesc:a45624ef3fd3fd765c740ef5dbf0e36f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This blink counter for drawing pending lock states.  <a href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a45624ef3fd3fd765c740ef5dbf0e36f3">More...</a><br /></td></tr>
-<tr class="separator:a45624ef3fd3fd765c740ef5dbf0e36f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a813fca1033f92b6d9f48423da36be86c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a813fca1033f92b6d9f48423da36be86c">tick_counter</a> = 0</td></tr>
+<tr class="memdesc:a813fca1033f92b6d9f48423da36be86c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This blink counter for drawing pending lock states.  <a href="../../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a813fca1033f92b6d9f48423da36be86c">More...</a><br /></td></tr>
+<tr class="separator:a813fca1033f92b6d9f48423da36be86c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -1157,8 +1157,8 @@ mrw::model::SectionState::FAILED </dd></dl>
 
 </div>
 </div>
-<a id="a5e837a523ee2c2e126b94b9c5aa7967e" name="a5e837a523ee2c2e126b94b9c5aa7967e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e837a523ee2c2e126b94b9c5aa7967e">&#9670;&#160;</a></span>tick()</h2>
+<a id="a839778a154a3d777836b755213867baa" name="a839778a154a3d777836b755213867baa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a839778a154a3d777836b755213867baa">&#9670;&#160;</a></span>tick()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1169,7 +1169,8 @@ mrw::model::SectionState::FAILED </dd></dl>
         <tr>
           <td class="memname">void ControllerWidget::tick </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>counter</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1250,31 +1251,6 @@ mrw::model::SectionState::FAILED </dd></dl>
 </div><div class="memdoc">
 
 <p>The list of possible connection points. </p>
-
-</div>
-</div>
-<a id="a45624ef3fd3fd765c740ef5dbf0e36f3" name="a45624ef3fd3fd765c740ef5dbf0e36f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45624ef3fd3fd765c740ef5dbf0e36f3">&#9670;&#160;</a></span>counter</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned mrw::ui::ControllerWidget::counter = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>This blink counter for drawing pending lock states. </p>
-<p >It is increased by a timer. When odd the lock should be drawn. </p>
 
 </div>
 </div>
@@ -1509,6 +1485,31 @@ mrw::model::SectionState::FAILED </dd></dl>
 </div><div class="memdoc">
 
 <p>The transformed half width representing <a class="el" href="../../db/d4f/classmrw_1_1model_1_1Position.html#adc06dce2c59482cd16412ea864892b00" title="The fractional units of the half controlled widget.">mrw::model::Position::HALF</a> units. </p>
+
+</div>
+</div>
+<a id="a813fca1033f92b6d9f48423da36be86c" name="a813fca1033f92b6d9f48423da36be86c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a813fca1033f92b6d9f48423da36be86c">&#9670;&#160;</a></span>tick_counter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned mrw::ui::ControllerWidget::tick_counter = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This blink counter for drawing pending lock states. </p>
+<p >It is increased by a timer. When odd the lock should be drawn. </p>
 
 </div>
 </div>

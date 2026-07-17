@@ -12,8 +12,8 @@ var searchData=
   ['height_9',['height',['../db/d4f/classmrw_1_1model_1_1Position.html#a323e205493b37dae99dc97939f096c8a',1,'mrw::model::Position']]],
   ['hexline_10',['HexLine',['../d0/d55/classmrw_1_1util_1_1HexLine.html#a855c36b3062227265b35790c3e722f78',1,'mrw::util::HexLine::HexLine()=delete'],['../d0/d55/classmrw_1_1util_1_1HexLine.html#ade53720a08e5caf79458ecf6f0e14f79',1,'mrw::util::HexLine::HexLine(const QString &amp;input)'],['../d0/d55/classmrw_1_1util_1_1HexLine.html',1,'mrw::util::HexLine']]],
   ['hostname_11',['hostname',['../d9/d33/classmrw_1_1util_1_1AppSupport.html#af19bde96d35a484b351274db8a1bebbf',1,'mrw::util::AppSupport']]],
-  ['hz1_12',['Hz1',['../db/d8f/classmrw_1_1util_1_1ClockService.html#aa097bc71ce6a1a2af55ac34af02d377b',1,'mrw::util::ClockService']]],
-  ['hz2_13',['Hz2',['../db/d8f/classmrw_1_1util_1_1ClockService.html#aff9d02e4d105be76c2f683213037b87e',1,'mrw::util::ClockService']]],
-  ['hz4_14',['Hz4',['../db/d8f/classmrw_1_1util_1_1ClockService.html#ab987466889f56f4be79d75761e36a019',1,'mrw::util::ClockService']]],
-  ['hz8_15',['Hz8',['../db/d8f/classmrw_1_1util_1_1ClockService.html#a46b81845210ba4150aec594ce3bd9606',1,'mrw::util::ClockService']]]
+  ['hz1_12',['Hz1',['../db/d8f/classmrw_1_1util_1_1ClockService.html#a415fbc59e5eb4c1631a2596d7054a945',1,'mrw::util::ClockService']]],
+  ['hz2_13',['Hz2',['../db/d8f/classmrw_1_1util_1_1ClockService.html#a3d6be94a7e1180de65e781e3c49ea9cb',1,'mrw::util::ClockService']]],
+  ['hz4_14',['Hz4',['../db/d8f/classmrw_1_1util_1_1ClockService.html#a61d42128f905b8f7d2d133ad59e7328d',1,'mrw::util::ClockService']]],
+  ['hz8_15',['Hz8',['../db/d8f/classmrw_1_1util_1_1ClockService.html#a0888dadad9979970ed2186c4413748db',1,'mrw::util::ClockService']]]
 ];
