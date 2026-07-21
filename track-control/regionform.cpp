@@ -16,6 +16,7 @@
 #include <ui/doublecrossswitchwidget.h>
 
 #include <model/rail.h>
+#include <ui/style.h>
 
 #include "regionform.h"
 #include "ui_regionform.h"
@@ -23,10 +24,6 @@
 using namespace mrw::model;
 using namespace mrw::ctrl;
 using namespace mrw::ui;
-
-// set black background
-// Qt::black / "#000000" / "black"
-const QPalette RegionForm::background_color(QPalette::Window, Qt::black);
 
 RegionForm::RegionForm(Region * region, QWidget * parent) :
 	QWidget(parent),
@@ -36,7 +33,7 @@ RegionForm::RegionForm(Region * region, QWidget * parent) :
 	ui->setupUi(this);
 	ui->stationWidget->setStationLabel(region->name());
 	setAutoFillBackground(true);
-	setPalette(background_color);
+	Style::setEstwStyle(this);
 
 	for (size_t s = 0; s < region->sectionCount(); s++)
 	{

@@ -20,6 +20,7 @@
 #include <log/filelogger.h>
 #include <log/syslogger.h>
 #include <log/loggerservice.h>
+#include <ui/style.h>
 
 #include "mainwindow.h"
 #include "mrwmessagedispatcher.h"
@@ -28,6 +29,7 @@
 using namespace mrw::util;
 using namespace mrw::log;
 using namespace mrw::model;
+using namespace mrw::ui;
 
 int main(int argc, char * argv[])
 {
@@ -51,6 +53,8 @@ int main(int argc, char * argv[])
 
 			model->info();
 		});
+
+		Style::setEstwStyle(app);
 
 		try
 		{

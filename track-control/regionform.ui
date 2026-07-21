@@ -145,6 +145,7 @@ background-color: transparent;
 border: 2px solid white;
 border-radius: 0;
 text-align: center;
+color: gray;
 padding: 2px;
 }
 

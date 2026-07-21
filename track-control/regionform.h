@@ -64,7 +64,6 @@ private:
 	void setupDoubleCrossSwitches(mrw::ctrl::SectionController * controller);
 
 	Ui::RegionForm * ui;
-	static const QPalette    background_color;
 };
 
 #endif

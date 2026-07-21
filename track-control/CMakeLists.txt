@@ -68,6 +68,7 @@ set(SOURCES
 	screenblankhandler.cpp
 	ui/routelistwidget.cpp
 	ui/sectionlistwidget.cpp
+	ui/style.cpp
 )
 
 set(HEADERS
@@ -92,6 +93,7 @@ set(HEADERS
 	screenblankhandler.h
 	ui/routelistwidget.h
 	ui/sectionlistwidget.h
+	ui/style.h
 )
 
 set(FORMS

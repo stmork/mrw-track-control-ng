@@ -49,7 +49,8 @@ SOURCES += \
 	routebatch.cpp \
 	screenblankhandler.cpp \
 	ui/routelistwidget.cpp \
-	ui/sectionlistwidget.cpp
+	ui/sectionlistwidget.cpp \
+	ui/style.cpp
 
 HEADERS += \
 	beermodeservice.h \
@@ -72,7 +73,8 @@ HEADERS += \
 	routebatch.h \
 	screenblankhandler.h \
 	ui/routelistwidget.h \
-	ui/sectionlistwidget.h
+	ui/sectionlistwidget.h \
+	ui/style.h
 
 FORMS += \
 	mainwindow.ui \
