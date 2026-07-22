@@ -18,6 +18,7 @@
 #include <model/switchmodule.h>
 #include <model/profilelight.h>
 
+#include "testbase.h"
 #include "testmodel.h"
 
 using namespace mrw::can;
@@ -27,12 +28,6 @@ using namespace mrw::model;
 using Bending    = Position::Bending;
 using LockState  = Device::LockState;
 using SignalType = Signal::SignalType;
-
-#if (QT_VERSION < QT_VERSION_CHECK(6, 3, 0))
-#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_EXCEPTION_THROWN(condition, exception);
-#else
-#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_THROWS_EXCEPTION(exception, condition);
-#endif
 
 /*************************************************************************
 **                                                                      **

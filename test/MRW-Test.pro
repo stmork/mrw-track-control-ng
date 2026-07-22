@@ -30,6 +30,7 @@ SOURCES += \
 
 HEADERS += \
 	collections.h \
+	testbase.h \
 	testcan.h \
 	testcanservice.h \
 	testcrossing.h \

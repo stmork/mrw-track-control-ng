@@ -27,6 +27,10 @@ Route::Route(
 
 	bool      loop = true;
 
+	if (first->reserved())
+	{
+		throw std::invalid_argument("First RailPart already reserved.");
+	}
 	first_section = first->section();
 	do
 	{

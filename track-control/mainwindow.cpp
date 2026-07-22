@@ -330,6 +330,7 @@ void MainWindow::enable()
 	const bool   editing      = statechart.isStateActive(OperatingModeStatechart::State::main_region_Running_operating_Editing);
 	const bool   failed       = statechart.isStateActive(OperatingModeStatechart::State::main_region_Running_operating_Failed);
 	const bool   manual       = statechart.isStateActive(OperatingModeStatechart::State::main_region_Manual);
+	const bool   first_free   = ui->sectionListWidget->isFirstFree();
 	const size_t switch_count =
 		ui->sectionListWidget->typedCount<RegularSwitchController>() +
 		ui->sectionListWidget->typedCount<DoubleCrossSwitchController>();
@@ -368,22 +369,22 @@ void MainWindow::enable()
 	ui->clearAllSections->setEnabled(ui->sectionListWidget->count() > 0);
 
 	ui->tourLeftPushButton->setEnabled(
-		operating &&
+		operating && first_free &&
 		(rail_count >= 2) && (switch_count == 0));
 	ui->shuntLeftPushButton->setEnabled(
-		operating &&
+		operating && first_free &&
 		ui->sectionListWidget->isSameRegion() &&
 		(rail_count >= 2) && (switch_count == 0));
 	ui->extendPushButton->setEnabled(
-		operating &&
+		operating && first_free &&
 		(ui->routeListWidget->currentItem() != nullptr) &&
 		(rail_count > 0) && (switch_count == 0));
 	ui->shuntRightPushButton->setEnabled(
-		operating &&
+		operating && first_free &&
 		ui->sectionListWidget->isSameRegion() &&
 		(rail_count >= 2) && (switch_count == 0));
 	ui->tourRightPushButton->setEnabled(
-		operating &&
+		operating && first_free &&
 		(rail_count >= 2) && (switch_count == 0));
 }
 
@@ -489,16 +490,27 @@ Route * MainWindow::createRoute(const bool direction, const SectionState state)
 
 	ui->sectionListWidget->collect(infos);
 
-	ControlledRoute * route = new ControlledRoute(direction, state, infos[0]->railPart());
+	RailPart * first = infos[0]->railPart();
 
-	for (size_t i = 1; i < infos.size(); i++)
+	if (first->reserved())
+	{
+		const QString message = tr("Fahrstraße für erstes Element %1 ist schon besetzt!").arg(first->partName());
+
+		warn(message);
+
+		return nullptr;
+	}
+
+	ControlledRoute * route = new ControlledRoute(direction, state, first);
+
+	for (std::size_t i = 1; i < infos.size(); i++)
 	{
 		RailPart * part = infos[i]->railPart();
 
 		if (!route->append(part))
 		{
-			QListWidgetItem * route_item = *route;
-			QString           message    =
+			const QListWidgetItem * route_item = *route;
+			const QString           message    =
 				tr("Fahrstraße %1 kann nicht bis %2 angelegt werden!").arg(route_item->text()).arg(part->partName());
 
 			warn(message);

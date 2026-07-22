@@ -9,16 +9,11 @@
 
 #include "can/mrwmessage.h"
 
+#include "testbase.h"
 #include "testcan.h"
 
 using namespace mrw::test;
 using namespace mrw::can;
-
-#if (QT_VERSION < QT_VERSION_CHECK(6, 3, 0))
-#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_EXCEPTION_THROWN(condition, exception);
-#else
-#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_THROWS_EXCEPTION(exception, condition);
-#endif
 
 /*************************************************************************
 **                                                                      **

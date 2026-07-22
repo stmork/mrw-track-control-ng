@@ -8,18 +8,13 @@
 #include <can/mrwmessage.h>
 #include <model/regularswitch.h>
 
+#include "testbase.h"
 #include "testunknown.h"
 #include "testdef.h"
 
 using namespace mrw::test;
 using namespace mrw::can;
 using namespace mrw::model;
-
-#if (QT_VERSION < QT_VERSION_CHECK(6, 3, 0))
-#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_EXCEPTION_THROWN(condition, exception);
-#else
-#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_THROWS_EXCEPTION(exception, condition);
-#endif
 
 TestUnknown::TestUnknown() : TestModelBase("Test-Unknown")
 {

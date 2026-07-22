@@ -66,6 +66,21 @@ void SectionListWidget::collect(std::vector<RailPartInfo *> & rails) const
 	});
 }
 
+bool SectionListWidget::isFirstFree() const
+{
+	if (count() > 0)
+	{
+		BaseController * ctrl = controller(0);
+		RailPartInfo  *  info = dynamic_cast<RailPartInfo *>(ctrl);
+
+		if (info != nullptr)
+		{
+			return !info->railPart()->reserved();
+		}
+	}
+	return false;
+}
+
 bool SectionListWidget::isSameRegion() const
 {
 	std::unordered_set<Region *> regions;

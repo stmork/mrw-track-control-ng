@@ -34,6 +34,7 @@ namespace mrw::ui
 		void traverse(PositionCallback    callback) const;
 		void collect(std::vector<mrw::ctrl::RailPartInfo *> & rails) const;
 
+		bool isFirstFree() const;
 		bool isSameRegion() const;
 		mrw::ctrl::BaseController * controller(const int index) const;
 

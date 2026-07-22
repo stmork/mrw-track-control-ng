@@ -11,6 +11,7 @@
 #include <model/regularswitch.h>
 #include <model/doublecrossswitch.h>
 
+#include "testbase.h"
 #include "testrouting.h"
 #include "testroute.h"
 
@@ -414,6 +415,19 @@ void TestRouting::testFlankLocked()
 	QVERIFY(reserved.size() > 1u);
 	route.doFlank();
 	QCOMPARE(flanks.size(), 2u);
+}
+
+void TestRouting::testFirstReserved()
+{
+	Rail    *    r11 = dynamic_cast<Rail *>(parts[0]);
+	const Rail * r26 = dynamic_cast<Rail *>(parts[20]);
+
+	QVERIFY(r11 != nullptr);
+	QVERIFY(r26 != nullptr);
+
+	r11->reserve();
+
+	MRW_THROWS_EXCEPTION(Route(true, SectionState::SHUNTING, r11), std::invalid_argument);
 }
 
 bool TestRouting::verify(const Route & route, const bool verify_lock) const

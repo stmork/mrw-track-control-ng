@@ -35,6 +35,7 @@ namespace mrw::test
 		void testLockedDoubleCrossSwitch();
 		void testFlank();
 		void testFlankLocked();
+		void testFirstReserved();
 
 	private:
 		bool verify(const model::Route & route, const bool verify_lock = true) const;

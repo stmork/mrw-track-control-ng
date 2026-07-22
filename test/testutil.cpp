@@ -26,16 +26,11 @@
 #include <util/hexline.h>
 #include <util/cleanvector.h>
 
+#include "testbase.h"
 #include "testutil.h"
 
 using namespace mrw::test;
 using namespace mrw::util;
-
-#if (QT_VERSION < QT_VERSION_CHECK(6, 3, 0))
-#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_EXCEPTION_THROWN(condition, exception);
-#else
-#	define MRW_THROWS_EXCEPTION(condition, exception) QVERIFY_THROWS_EXCEPTION(exception, condition);
-#endif
 
 const ConstantEnumerator<int> TestUtil::int_map
 {
