@@ -9,6 +9,7 @@
 #include <systemd/sd-daemon.h>
 #endif
 
+#include <QGuiApplication>
 #include <QScreen>
 #include <QMouseEvent>
 #include <QTouchEvent>
@@ -64,8 +65,16 @@ MainWindow::MainWindow(
 		throw std::runtime_error("No primary screen available!");
 	}
 
-	const QSize     size   = screen->availableSize();
+	const QSize   size     = screen->availableSize();
+	const QString platform = QGuiApplication::platformName();
+
 	qCInfo(mrw::tools::log).noquote() << "Screen size:" << size << "depth:" << screen->depth();
+	qCInfo(mrw::tools::log).noquote() << "Platform:   " << platform;
+
+	if ("eglfs" == platform)
+	{
+		setFixedSize(size);
+	}
 
 	BaseWidget::setVerbose(false);
 
