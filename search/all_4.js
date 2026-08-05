@@ -12,8 +12,7 @@ var searchData=
   ['eventdriveninterface_9',['EventDrivenInterface',['../d8/dd2/classsc_1_1EventDrivenInterface.html',1,'sc']]],
   ['eventid_10',['eventid',['../db/d03/namespacesc.html#a778684feb57033c6828435b8b1c5fb6b',1,'sc']]],
   ['exit_11',['exit',['../de/d2a/classsc_1_1StatemachineInterface.html#aaf403e4303d6b7237d8ad68537c3cff6',1,'sc::StatemachineInterface']]],
-  ['expandable_12',['expandable',['../d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#abe4e357536008d37be297be6e92c4176',1,'mrw::ctrl::BaseController::Status']]],
-  ['extend_13',['extend',['../db/d4f/classmrw_1_1model_1_1Position.html#a2de03d047669039642849f760cbd996d',1,'mrw::model::Position::extend()'],['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a8bb3d9f6d2249583f9e83d3637018895',1,'mrw::ui::ControllerWidget::extend()']]],
-  ['extension_14',['extension',['../db/d4f/classmrw_1_1model_1_1Position.html#a36c0e55720dfe2e59bae0752da03308f',1,'mrw::model::Position']]],
-  ['extensions_15',['extensions',['../d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a93d69cb37833ea6002997072534f3834',1,'mrw::ctrl::BaseController::Status::extensions()'],['../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#aa82a696f1ab5c364afc14c7c5b6034c6',1,'mrw::ctrl::BaseController::extensions()']]]
+  ['expand_12',['expand',['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#ae8f0683208779b0629f9d0c7073c9bc2',1,'mrw::ui::ControllerWidget::expand()'],['../db/d4f/classmrw_1_1model_1_1Position.html#a70a54b9ec5548042b419d0a9a42029a3',1,'mrw::model::Position::expand()']]],
+  ['expandable_13',['expandable',['../d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#abe4e357536008d37be297be6e92c4176',1,'mrw::ctrl::BaseController::Status']]],
+  ['expansion_14',['expansion',['../d5/d0f/structmrw_1_1ctrl_1_1BaseController_1_1Status.html#a414603e02451311930c880a8480901ce',1,'mrw::ctrl::BaseController::Status::expansion()'],['../db/d4f/classmrw_1_1model_1_1Position.html#a58c251c689ccd0a97c5b7c57907b85ce',1,'mrw::model::Position::expansion()'],['../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#af4475b4b7ceb8a66bdd9cda1d6aebf7b',1,'mrw::ctrl::BaseController::expansion()']]]
 ];

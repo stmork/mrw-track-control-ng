@@ -7,7 +7,6 @@ var searchData=
   ['enter_4',['enter',['../de/d2a/classsc_1_1StatemachineInterface.html#a05bfa96eaf85a416020533d00d2b79c8',1,'sc::StatemachineInterface']]],
   ['error_5',['error',['../d3/dab/classmrw_1_1model_1_1ModelRailway.html#acdb2a322b3cb3a5fa3e04ebf9e74b36d',1,'mrw::model::ModelRailway']]],
   ['exit_6',['exit',['../de/d2a/classsc_1_1StatemachineInterface.html#aaf403e4303d6b7237d8ad68537c3cff6',1,'sc::StatemachineInterface']]],
-  ['extend_7',['extend',['../db/d4f/classmrw_1_1model_1_1Position.html#a2de03d047669039642849f760cbd996d',1,'mrw::model::Position::extend()'],['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#a8bb3d9f6d2249583f9e83d3637018895',1,'mrw::ui::ControllerWidget::extend()']]],
-  ['extension_8',['extension',['../db/d4f/classmrw_1_1model_1_1Position.html#a36c0e55720dfe2e59bae0752da03308f',1,'mrw::model::Position']]],
-  ['extensions_9',['extensions',['../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#aa82a696f1ab5c364afc14c7c5b6034c6',1,'mrw::ctrl::BaseController']]]
+  ['expand_7',['expand',['../db/d4f/classmrw_1_1model_1_1Position.html#a70a54b9ec5548042b419d0a9a42029a3',1,'mrw::model::Position::expand()'],['../db/d76/classmrw_1_1ui_1_1ControllerWidget.html#ae8f0683208779b0629f9d0c7073c9bc2',1,'mrw::ui::ControllerWidget::expand()']]],
+  ['expansion_8',['expansion',['../db/d4f/classmrw_1_1model_1_1Position.html#a58c251c689ccd0a97c5b7c57907b85ce',1,'mrw::model::Position::expansion()'],['../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#af4475b4b7ceb8a66bdd9cda1d6aebf7b',1,'mrw::ctrl::BaseController::expansion()']]]
 ];

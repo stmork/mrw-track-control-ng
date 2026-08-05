@@ -117,9 +117,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abd4dcd1ea9701a6349fa1d1cd77f1e38"><td class="memItemLeft" align="right" valign="top">virtual const QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38">name</a> () const =0</td></tr>
 <tr class="memdesc:abd4dcd1ea9701a6349fa1d1cd77f1e38"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the name of the controlled <a class="el" href="../../d8/d2c/classmrw_1_1model_1_1Device.html" title="This class represents device components for which a corresponding CAN command is existing.">mrw::model::Device</a>.  <a href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#abd4dcd1ea9701a6349fa1d1cd77f1e38">More...</a><br /></td></tr>
 <tr class="separator:abd4dcd1ea9701a6349fa1d1cd77f1e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa82a696f1ab5c364afc14c7c5b6034c6"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#aa82a696f1ab5c364afc14c7c5b6034c6">extensions</a> () const =0</td></tr>
-<tr class="memdesc:aa82a696f1ab5c364afc14c7c5b6034c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the extensions of the controlled <a class="el" href="../../d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section.">mrw::model::AssemblyPart</a>.  <a href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#aa82a696f1ab5c364afc14c7c5b6034c6">More...</a><br /></td></tr>
-<tr class="separator:aa82a696f1ab5c364afc14c7c5b6034c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4475b4b7ceb8a66bdd9cda1d6aebf7b"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#af4475b4b7ceb8a66bdd9cda1d6aebf7b">expansion</a> () const =0</td></tr>
+<tr class="memdesc:af4475b4b7ceb8a66bdd9cda1d6aebf7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the expansion of the controlled <a class="el" href="../../d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section.">mrw::model::AssemblyPart</a>.  <a href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#af4475b4b7ceb8a66bdd9cda1d6aebf7b">More...</a><br /></td></tr>
+<tr class="separator:af4475b4b7ceb8a66bdd9cda1d6aebf7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f9c697c31a98f28ca191b1202bcf32b"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a0f9c697c31a98f28ca191b1202bcf32b">lines</a> () const</td></tr>
 <tr class="memdesc:a0f9c697c31a98f28ca191b1202bcf32b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the number of <em>extended</em> line counts.  <a href="../../d8/db5/classmrw_1_1ctrl_1_1BaseController.html#a0f9c697c31a98f28ca191b1202bcf32b">More...</a><br /></td></tr>
 <tr class="separator:a0f9c697c31a98f28ca191b1202bcf32b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -230,8 +230,8 @@ template&lt;class CTRL &gt; </div>
 
 </div>
 </div>
-<a id="aa82a696f1ab5c364afc14c7c5b6034c6" name="aa82a696f1ab5c364afc14c7c5b6034c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa82a696f1ab5c364afc14c7c5b6034c6">&#9670;&#160;</a></span>extensions()</h2>
+<a id="af4475b4b7ceb8a66bdd9cda1d6aebf7b" name="af4475b4b7ceb8a66bdd9cda1d6aebf7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4475b4b7ceb8a66bdd9cda1d6aebf7b">&#9670;&#160;</a></span>expansion()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -240,7 +240,7 @@ template&lt;class CTRL &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual float mrw::ctrl::BaseController::extensions </td>
+          <td class="memname">virtual float mrw::ctrl::BaseController::expansion </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -253,9 +253,9 @@ template&lt;class CTRL &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>This method returns the extensions of the controlled <a class="el" href="../../d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section.">mrw::model::AssemblyPart</a>. </p>
-<dl class="section return"><dt>Returns</dt><dd>The extension count of the controlled <a class="el" href="../../d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section.">mrw::model::AssemblyPart</a>. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd>mrw::model::Position::extensions() </dd></dl>
+<p>This method returns the expansion of the controlled <a class="el" href="../../d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section.">mrw::model::AssemblyPart</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The expansion count of the controlled <a class="el" href="../../d5/d26/classmrw_1_1model_1_1AssemblyPart.html" title="This abstract base class represents all elements contained in a Section.">mrw::model::AssemblyPart</a>. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../db/d4f/classmrw_1_1model_1_1Position.html#a58c251c689ccd0a97c5b7c57907b85ce" title="This getter returns the half expansion unit of the controlling widget size.">mrw::model::Position::expansion()</a> </dd></dl>
 
 </div>
 </div>
