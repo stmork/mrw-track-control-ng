@@ -19,7 +19,7 @@ RailControllerMock::RailControllerMock(QObject * parent) :
 void RailControllerMock::reset()
 {
 	setDirection();
-	setExtension(0);
+	setExpansion(0);
 	setLines(0);
 	setSectionState(SectionState::FREE);
 	setLock(LockState::UNLOCKED);
@@ -98,9 +98,9 @@ bool RailControllerMock::hasCrossing() const
 	return crossing;
 }
 
-float RailControllerMock::extensions() const
+float RailControllerMock::expansion() const
 {
-	return ext_count;
+	return exp_count;
 }
 
 float RailControllerMock::lines() const
@@ -113,10 +113,10 @@ Position::Bending RailControllerMock::bending() const
 	return bending_state;
 }
 
-void RailControllerMock::setExtension(const int input)
+void RailControllerMock::setExpansion(const int input)
 {
-	ext_count = input;
-	emit extend();
+	exp_count = input;
+	emit expand();
 	emit computeConnectors();
 	emit update();
 }
@@ -124,7 +124,7 @@ void RailControllerMock::setExtension(const int input)
 void RailControllerMock::setLines(const int input)
 {
 	line_count = input;
-	emit extend();
+	emit expand();
 	emit computeConnectors();
 	emit update();
 }

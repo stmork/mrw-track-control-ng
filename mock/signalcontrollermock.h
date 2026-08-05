@@ -19,7 +19,7 @@ namespace mrw::ctrl
 	private:
 		mutable   QString   signal_name;
 
-		unsigned  extension      = 0;
+		unsigned  exp_count      = 0;
 		bool      direction      = true;
 		bool      shunting       = false;
 		bool      distant_signal = false;
@@ -54,7 +54,7 @@ namespace mrw::ctrl
 
 		// Implementations from BaseController
 		virtual const QString & name() const override;
-		virtual float           extensions() const override;
+		virtual float           expansion() const override;
 		virtual bool            isDirection() const override;
 
 		virtual mrw::model::SectionState      state() const override;
@@ -71,11 +71,11 @@ namespace mrw::ctrl
 		virtual mrw::model::Signal::Symbol shunt()   const override;
 
 	signals:
-		void extend();
+		void expand();
 		void computeConnectors();
 
 	public slots:
-		void setExtension(const int extension);
+		void setExpansion(const int new_expansion);
 
 		void setShuntStop();
 		void setShuntGo();

@@ -48,9 +48,9 @@ void TestRegularSwitchWidget::testPrepare()
 					for (const bool flank : booleans)
 					{
 						mock.setFlankProtection(flank);
-						for (int ext = 0; ext < 5; ext++)
+						for (int exp = 0; exp < 5; exp++)
 						{
-							mock.setExtension(ext);
+							mock.setExpansion(exp);
 							for (unsigned i = 0; i < 2; i++)
 							{
 								widget.tick(i);
@@ -59,7 +59,7 @@ void TestRegularSwitchWidget::testPrepare()
 								QCOMPARE(status.section_state, state);
 								QCOMPARE(status.lock_state, lock);
 								QCOMPARE(status.has_flank_protection, flank);
-								QCOMPARE(status.extensions, ext);
+								QCOMPARE(status.expansion, exp);
 								QCOMPARE(status.lines, 0.0f);
 								QCOMPARE(status.inclined, inclination);
 								QCOMPARE(widget.connectors().size(), inclination ? 2 : 1);

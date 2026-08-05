@@ -48,9 +48,9 @@ void TestRailWidget::testPrepare()
 					for (const bool dir : booleans)
 					{
 						mock.setDirection(dir);
-						for (int ext = 0; ext < 5; ext++)
+						for (int exp = 0; exp < 5; exp++)
 						{
-							mock.setExtension(ext);
+							mock.setExpansion(exp);
 							for (int lines = 0; lines < 5; lines++)
 							{
 								mock.setLines(lines);
@@ -63,7 +63,7 @@ void TestRailWidget::testPrepare()
 									QCOMPARE(status.section_state, state);
 									QCOMPARE(status.lock_state, lock);
 									QCOMPARE(status.bending, bending);
-									QCOMPARE(status.extensions, ext);
+									QCOMPARE(status.expansion, exp);
 									QCOMPARE(status.lines, lines);
 								}
 							}
@@ -83,7 +83,7 @@ void TestRailWidget::testHavingLock()
 void TestRailWidget::testEnds()
 {
 	mock.setLines(0);
-	mock.setExtension(Position::FRACTION);
+	mock.setExpansion(Position::FRACTION);
 	for (const bool dir : booleans)
 	{
 		mock.setDirection(dir);
@@ -126,7 +126,7 @@ void TestRailWidget::testEnds()
 void TestRailWidget::testCrossing()
 {
 	mock.setCrossing(true);
-	mock.setExtension(Position::FRACTION);
+	mock.setExpansion(Position::FRACTION);
 	widget.test(status);
 	QVERIFY(status.has_crossing);
 }

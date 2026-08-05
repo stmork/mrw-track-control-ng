@@ -37,12 +37,12 @@ void SignalWidget::computeConnectors()
 
 	base_controller->status(status);
 	connector_list.clear();
-	if ((status.bending != Bending::STRAIGHT) && (status.extensions >= Position::FRACTION))
+	if ((status.bending != Bending::STRAIGHT) && (status.expansion >= Position::FRACTION))
 	{
 		if (status.direction)
 		{
 			connector_list.append(QPoint(
-					Position::FRACTION + status.extensions - Position::QUARTER,
+					Position::FRACTION + status.expansion - Position::QUARTER,
 					status.bending == Bending::RIGHT ? 4 : 0));
 		}
 		else
@@ -63,7 +63,7 @@ void SignalWidget::prepare(SignalWidget::Status & status) const
 	status.draw_lock     =
 		(status.lock_state == LockState::PENDING) ||
 		(status.lock_state == LockState::LOCKED);
-	status.do_bend       = status.extensions >= Position::FRACTION ?
+	status.do_bend       = status.expansion >= Position::FRACTION ?
 		status.bending : Bending::STRAIGHT;
 
 	status.draw_distant  = false;
@@ -131,12 +131,12 @@ void SignalWidget::paint(QPainter & painter)
 
 	prepare(status);
 
-	const float shift  = SCALE * status.extensions / Position::FRACTION;
+	const float shift  = SCALE * status.expansion / Position::FRACTION;
 	const float border = SCALE + shift;
 	const float start  = SCALE - border;
 
 	// Unify coordinates
-	rescale(painter, (Position::FRACTION + status.extensions) * SCALE / Position::HALF);
+	rescale(painter, (Position::FRACTION + status.expansion) * SCALE / Position::HALF);
 
 	// Draw switch name before rotating to prevent rotated font drawing.
 	prepareTextColor(painter);

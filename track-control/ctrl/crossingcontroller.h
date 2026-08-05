@@ -45,7 +45,7 @@ namespace mrw::ctrl
 	private:
 		// Implementations from BaseController
 		virtual const QString & name()         const noexcept override;
-		virtual float           extensions()   const noexcept override;
+		virtual float           expansion()    const noexcept override;
 		virtual bool            isDirection()  const noexcept override;
 		virtual bool            isExpandable() const noexcept override;
 

@@ -179,9 +179,9 @@ const QString & SectionController::name() const noexcept
 	return ctrl_section->name();
 }
 
-float SectionController::extensions() const noexcept
+float SectionController::expansion() const noexcept
 {
-	return position()->extension();
+	return position()->expansion();
 }
 
 bool SectionController::isDirection() const noexcept

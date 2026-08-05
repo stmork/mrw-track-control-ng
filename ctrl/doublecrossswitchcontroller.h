@@ -82,7 +82,7 @@ namespace mrw::ctrl
 
 	private:
 
-		virtual float extensions() const override;
+		virtual float expansion() const override;
 
 		/**
 		 * This returns actual the mrw::model::DoubleCrossSwitch::State.

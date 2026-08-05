@@ -110,9 +110,9 @@ bool RegularSwitchControllerProxy::isDirection() const noexcept
 	return !part->aIsDir() == part->section()->region()->direction();
 }
 
-float RegularSwitchControllerProxy::extensions() const noexcept
+float RegularSwitchControllerProxy::expansion() const noexcept
 {
-	return part->extension();
+	return part->expansion();
 }
 
 Position * RegularSwitchControllerProxy::position() const noexcept

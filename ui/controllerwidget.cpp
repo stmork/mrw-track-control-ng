@@ -62,15 +62,15 @@ bool ControllerWidget::isConnector(const QPoint & point) const
 void ControllerWidget::reposition()
 {
 	setFixedHeight(gridSize() * (1.0 + base_controller->lines()));
-	extend();
+	expand();
 	move(base_controller->position()->point() * gridSize() / Position::FRACTION);
 }
 
-void ControllerWidget::extend()
+void ControllerWidget::expand()
 {
 	const float rel_height = height() / (1.0 + base_controller->lines());
 
-	setFixedWidth(rel_height * (1.0 + base_controller->extensions() / Position::FRACTION));
+	setFixedWidth(rel_height * (1.0 + base_controller->expansion() / Position::FRACTION));
 
 	computeConnectors();
 }
@@ -165,7 +165,7 @@ void ControllerWidget::drawConnectors(QPainter & painter)
 		for (const QPoint & conn : connector_list)
 		{
 			const QPoint point(
-				conn.x() * width()  / ( base_controller->extensions() + Position::FRACTION),
+				conn.x() * width()  / ( base_controller->expansion() + Position::FRACTION),
 				conn.y() * height() / ((base_controller->lines() + 1.0) * Position::FRACTION));
 
 			painter.fillRect(point.x() - 2, point.y() - 2, 5, 5, Qt::magenta);

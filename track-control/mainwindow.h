@@ -77,7 +77,7 @@ private slots:
 	void on_actionExpand_triggered();
 	void on_actionInclination_triggered();
 	void move(int right, int down);
-	void extend(int inc);
+	void expand(int inc);
 	void lineup(int inc);
 	void bend(const mrw::model::Position::Bending bend);
 

@@ -29,30 +29,30 @@ void RegularSwitchWidget::computeConnectors()
 	connector_list.clear();
 	if (status.inclined)
 	{
-		const int ext = status.direction ? 0 : status.extensions;
+		const int exp = status.direction ? 0 : status.expansion;
 
 		if (status.right_bended)
 		{
-			connector_list.append(QPoint(3 + ext, 0));
-			connector_list.append(QPoint(1 + ext, 4));
+			connector_list.append(QPoint(3 + exp, 0));
+			connector_list.append(QPoint(1 + exp, 4));
 		}
 		else
 		{
-			connector_list.append(QPoint(1 + ext, 0));
-			connector_list.append(QPoint(3 + ext, 4));
+			connector_list.append(QPoint(1 + exp, 0));
+			connector_list.append(QPoint(3 + exp, 4));
 		}
 	}
 	else
 	{
-		const int ext = status.direction ? status.extensions : 0;
+		const int exp = status.direction ? status.expansion : 0;
 
 		if (status.direction != status.right_bended)
 		{
-			connector_list.append(QPoint(2 + ext, 0));
+			connector_list.append(QPoint(2 + exp, 0));
 		}
 		else
 		{
-			connector_list.append(QPoint(2 + ext, 4));
+			connector_list.append(QPoint(2 + exp, 4));
 		}
 	}
 }
@@ -78,7 +78,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	prepare(status);
 
 	// Unify coordinates
-	const float x_size = Position::FRACTION + status.extensions;
+	const float x_size = Position::FRACTION + status.expansion;
 	const float y_size = Position::FRACTION * (1.0 + status.lines);
 	const float x_pos  = status.direction != status.inclined ?
 		x_size - Position::HALF :
@@ -131,7 +131,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	}
 	else
 	{
-		painter.drawLine(-SCALE - status.extensions * SCALE * 0.5f, 0.0f, -70.0f, 0.0f);
+		painter.drawLine(-SCALE - status.expansion * SCALE * 0.5f, 0.0f, -70.0f, 0.0f);
 	}
 
 	// Draw curved part of switch
@@ -145,7 +145,7 @@ void RegularSwitchWidget::paint(QPainter & painter)
 	painter.setPen(pen);
 	painter.drawLine(
 		!status.is_turn_out && status.pending ? (status.inclined ? 20 : -20.0f) : 80.0f, 0.0f,
-		100.0f + status.extensions * SCALE, 0.0f);
+		100.0f + status.expansion * SCALE, 0.0f);
 
 	// Draw connector markers
 	drawConnectors(painter);

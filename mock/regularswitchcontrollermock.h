@@ -18,7 +18,7 @@ namespace mrw::ctrl
 		Q_OBJECT
 
 	private:
-		unsigned              extension        = 0;
+		unsigned              exp_count        = 0;
 		bool                  inclined         = false;
 		bool                  a_is_dir         = false;
 		bool                  left_handed      = true;
@@ -45,7 +45,7 @@ namespace mrw::ctrl
 		// Implementations from BaseController
 		virtual const QString & name()        const override;
 		virtual bool            isDirection() const override;
-		virtual float           extensions()  const override;
+		virtual float           expansion()   const override;
 
 		virtual mrw::model::SectionState      state()   const override;
 		virtual mrw::model::Device::LockState lock()    const override;
@@ -61,7 +61,7 @@ namespace mrw::ctrl
 		virtual bool    isInclined() const override;
 
 	signals:
-		void extend();
+		void expand();
 		void computeConnectors();
 
 	public slots:
@@ -70,7 +70,7 @@ namespace mrw::ctrl
 		void setLeftHanded(const bool left = true);
 		void setRightHanded(const bool right = true);
 		void setInclined(const bool inclined = true);
-		void setExtension(const int extension);
+		void setExpansion(const int new_expansion);
 		void setFlankProtection(const bool flank = false);
 	};
 }

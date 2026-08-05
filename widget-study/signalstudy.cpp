@@ -42,8 +42,8 @@ SignalStudy::SignalStudy(QWidget * parent) :
 		mock.setDirection(true);
 	});
 	connect(
-		ui->extensionBox, qOverload<int>(&QSpinBox::valueChanged),
-		&mock, &SignalControllerMock::setExtension);
+		ui->expansionBox, qOverload<int>(&QSpinBox::valueChanged),
+		&mock, &SignalControllerMock::setExpansion);
 
 	/********************************************************/
 	/*   Bended state                                       */
@@ -160,8 +160,8 @@ SignalStudy::SignalStudy(QWidget * parent) :
 		&mock, &SignalControllerMock::update,
 		ui->bigSignalWidget, qOverload<>(&QWidget::repaint));
 	connect(
-		&mock, &SignalControllerMock::extend,
-		ui->bigSignalWidget, &SignalWidget::extend);
+		&mock, &SignalControllerMock::expand,
+		ui->bigSignalWidget, &SignalWidget::expand);
 	connect(
 		&mock, &SignalControllerMock::computeConnectors,
 		ui->bigSignalWidget, &SignalWidget::computeConnectors);
@@ -169,8 +169,8 @@ SignalStudy::SignalStudy(QWidget * parent) :
 		&mock, &SignalControllerMock::update,
 		ui->smallSignalWidget, qOverload<>(&QWidget::repaint));
 	connect(
-		&mock, &SignalControllerMock::extend,
-		ui->smallSignalWidget, &SignalWidget::extend);
+		&mock, &SignalControllerMock::expand,
+		ui->smallSignalWidget, &SignalWidget::expand);
 	connect(
 		&mock, &SignalControllerMock::computeConnectors,
 		ui->smallSignalWidget, &SignalWidget::computeConnectors);

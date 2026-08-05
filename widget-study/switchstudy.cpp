@@ -41,8 +41,8 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 		ui->rightHandedButton, &QRadioButton::clicked,
 		&mock, &RegularSwitchControllerMock::setRightHanded);
 	connect(
-		ui->extensionBox, qOverload<int>(&QSpinBox::valueChanged),
-		&mock, &RegularSwitchControllerMock::setExtension);
+		ui->expansionBox, qOverload<int>(&QSpinBox::valueChanged),
+		&mock, &RegularSwitchControllerMock::setExpansion);
 
 	/********************************************************/
 	/*  Switch direction                                    */
@@ -136,8 +136,8 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 		&mock, &RegularSwitchControllerMock::update,
 		ui->bigSwitchWidget, qOverload<>(&QWidget::repaint));
 	connect(
-		&mock, &RegularSwitchControllerMock::extend,
-		ui->bigSwitchWidget, &RegularSwitchWidget::extend);
+		&mock, &RegularSwitchControllerMock::expand,
+		ui->bigSwitchWidget, &RegularSwitchWidget::expand);
 	connect(
 		&mock, &RegularSwitchControllerMock::computeConnectors,
 		ui->bigSwitchWidget, &RegularSwitchWidget::computeConnectors);
@@ -145,8 +145,8 @@ SwitchStudy::SwitchStudy(QWidget * parent) :
 		&mock, &RegularSwitchControllerMock::update,
 		ui->smallSwitchWidget, qOverload<>(&QWidget::repaint));
 	connect(
-		&mock, &RegularSwitchControllerMock::extend,
-		ui->smallSwitchWidget, &RegularSwitchWidget::extend);
+		&mock, &RegularSwitchControllerMock::expand,
+		ui->smallSwitchWidget, &RegularSwitchWidget::expand);
 	connect(
 		&mock, &RegularSwitchControllerMock::computeConnectors,
 		ui->smallSwitchWidget, &RegularSwitchWidget::computeConnectors);

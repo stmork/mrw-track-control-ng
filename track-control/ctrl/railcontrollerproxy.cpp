@@ -26,9 +26,9 @@ const QString & RailControllerProxy::name() const
 	return rail->partName();
 }
 
-float RailControllerProxy::extensions() const
+float RailControllerProxy::expansion() const
 {
-	return rail->extension();
+	return rail->expansion();
 }
 
 float RailControllerProxy::lines() const

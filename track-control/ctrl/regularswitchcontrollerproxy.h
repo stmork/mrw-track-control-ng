@@ -47,7 +47,7 @@ namespace mrw::ctrl
 		// Implementations from BaseController
 		virtual const QString & name()         const noexcept override;
 		virtual bool            isDirection()  const noexcept override;
-		virtual float           extensions()   const noexcept override;
+		virtual float           expansion()    const noexcept override;
 
 		virtual mrw::model::Position     *    position() const noexcept override;
 		virtual mrw::model::SectionState      state()    const noexcept override;

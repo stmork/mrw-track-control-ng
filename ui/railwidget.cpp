@@ -39,7 +39,7 @@ void RailWidget::computeConnectors()
 		else
 		{
 			connector_list.append(QPoint(
-					Position::FRACTION + status.extensions - Position::QUARTER,
+					Position::FRACTION + status.expansion - Position::QUARTER,
 					status.bending == Bending::RIGHT ? 4 * (1 + status.lines) : 0));
 		}
 	}
@@ -50,7 +50,7 @@ void RailWidget::prepare(RailWidget::Status & status) const
 	Q_ASSERT(base_controller != nullptr);
 
 	controller<RailController>()->status(status);
-	const bool draw_crossing = (status.has_crossing) && (status.extensions >= Position::FRACTION);
+	const bool draw_crossing = (status.has_crossing) && (status.expansion >= Position::FRACTION);
 
 	status.do_bend = (status.bending != Bending::STRAIGHT) && (!status.a_ends);
 	status.any_end = status.a_ends || status.b_ends;
@@ -73,11 +73,11 @@ void RailWidget::paint(QPainter & painter)
 
 	prepare(status);
 
-	const float border     = -SCALE - status.extensions * SCALE / Position::HALF;
-	const float text_width = status.extensions <= 2 ? 124 : 164;
+	const float border     = -SCALE - status.expansion * SCALE / Position::HALF;
+	const float text_width = status.expansion <= 2 ? 124 : 164;
 
 	// Unify coordinates
-	const float x_size = Position::FRACTION + status.extensions;
+	const float x_size = Position::FRACTION + status.expansion;
 	const float y_size = Position::FRACTION * (1.0 + status.lines);
 	const float x_pos  = status.direction ?
 		x_size - Position::HALF :

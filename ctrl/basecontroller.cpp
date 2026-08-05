@@ -15,7 +15,7 @@ void BaseController::status(BaseController::Status & status) const
 {
 	status.name          = name();
 	status.position      = position();
-	status.extensions    = extensions();
+	status.expansion     = expansion();
 	status.lines         = lines();
 	status.section_state = state();
 	status.bending       = bending();

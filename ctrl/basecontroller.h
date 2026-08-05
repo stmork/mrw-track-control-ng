@@ -96,7 +96,7 @@ namespace mrw::ctrl
 			 *
 			 * @see BaseController::extensions()
 			 */
-			float                           extensions = 0.0f;
+			float                           expansion = 0.0f;
 
 			/**
 			 * The multiple height of the widget.
@@ -154,14 +154,14 @@ namespace mrw::ctrl
 		virtual const QString & name() const = 0;
 
 		/**
-		 * This method returns the extensions of the controlled
+		 * This method returns the expansion of the controlled
 		 * mrw::model::AssemblyPart.
 		 *
-		 * @return The extension count of the controlled
+		 * @return The expansion count of the controlled
 		 * mrw::model::AssemblyPart.
-		 * @see mrw::model::Position::extensions()
+		 * @see mrw::model::Position::expansion()
 		 */
-		virtual float extensions() const = 0;
+		virtual float expansion() const = 0;
 
 		/**
 		 * This method returns the number of <em>extended</em> line counts. One

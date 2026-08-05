@@ -299,9 +299,9 @@ const QString & SignalControllerProxy::name() const noexcept
 #endif
 }
 
-float SignalControllerProxy::extensions() const noexcept
+float SignalControllerProxy::expansion() const noexcept
 {
-	return base_signal->extension();
+	return base_signal->expansion();
 }
 
 bool SignalControllerProxy::isDirection() const noexcept

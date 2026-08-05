@@ -62,7 +62,7 @@ void Position::parse(const QString & value)
 	}
 
 	inclined      = false;
-	ext_count     = 0;
+	exp_count     = 0;
 	line_count    = 0;
 	bending_state = Bending::STRAIGHT;
 	if (tokens.size() >= 3)
@@ -78,7 +78,7 @@ void Position::parse(const QString & value)
 
 			case 'x':
 			case 'X':
-				ext_count++;
+				exp_count++;
 				break;
 
 			case 'v':
@@ -138,7 +138,7 @@ QString Position::value() const
 	}
 
 	// Add extensions
-	for (unsigned i = 0; i < ext_count; i++)
+	for (unsigned i = 0; i < exp_count; i++)
 	{
 		ext += 'X';
 	}
@@ -178,9 +178,9 @@ QString Position::value() const
 	return value;
 }
 
-unsigned Position::extension() const
+unsigned Position::expansion() const
 {
-	return ext_count;
+	return exp_count;
 }
 
 unsigned Position::lines() const
@@ -193,11 +193,11 @@ void Position::toggleInclination()
 	inclined = !inclined;
 }
 
-void Position::extend(const int inc)
+void Position::expand(const int inc)
 {
-	const int result = ext_count + inc;
+	const int result = exp_count + inc;
 
-	ext_count = std::clamp(result, 0, 40);
+	exp_count = std::clamp(result, 0, 40);
 }
 
 void Position::lineup(const int inc)
@@ -219,7 +219,7 @@ const QPoint & Position::point() const
 
 int Position::width() const
 {
-	return FRACTION + ext_count;
+	return FRACTION + exp_count;
 }
 
 int Position::height() const
@@ -232,7 +232,7 @@ bool Position::operator==(const Position & other) const
 	return
 		(position.x()               == other.position.x()) &&
 		((position.y()) / FRACTION  == (other.position.y() / FRACTION)) &&
-		(ext_count                  == other.ext_count) &&
+		(exp_count                  == other.exp_count) &&
 		(line_count                 == other.line_count) &&
 		(inclined                   == other.inclined) &&
 		(bending_state              == other.bending_state);

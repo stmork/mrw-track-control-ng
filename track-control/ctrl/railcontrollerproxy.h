@@ -39,7 +39,7 @@ namespace mrw::ctrl
 
 		// Implementations from BaseController
 		virtual const QString & name()         const override;
-		virtual float           extensions()   const override;
+		virtual float           expansion()    const override;
 		virtual float           lines()        const override;
 		virtual bool            isDirection()  const override;
 

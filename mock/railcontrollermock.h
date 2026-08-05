@@ -18,7 +18,7 @@ namespace mrw::ctrl
 
 	private:
 		bool                           a_is_dir      = false;
-		unsigned                       ext_count     = 0;
+		unsigned                       exp_count     = 0;
 		unsigned                       line_count    = 0;
 		bool                           a_ends        = false;
 		bool                           b_ends        = false;
@@ -46,7 +46,7 @@ namespace mrw::ctrl
 
 		// Implementations from BaseController
 		virtual const QString & name()        const override;
-		virtual float           extensions()  const override;
+		virtual float           expansion()   const override;
 		virtual float           lines()       const override;
 		virtual bool            isDirection() const override;
 
@@ -60,11 +60,11 @@ namespace mrw::ctrl
 		virtual bool  hasCrossing() const override;
 
 	signals:
-		void extend();
+		void expand();
 		void computeConnectors();
 
 	public slots:
-		void setExtension(const int ext_count);
+		void setExpansion(const int new_expansion);
 		void setLines(const int line_count);
 		void setCrossing(const bool crossing = false);
 	};

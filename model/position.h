@@ -134,12 +134,12 @@ namespace mrw::model
 		void setX(const int x);
 
 		/**
-		 * This getter returns the half extension unit of the controlling widget
+		 * This getter returns the half expansion unit of the controlling widget
 		 * size.
 		 *
-		 * @return The extension size in half controlling widget size.
+		 * @return The expansion size in half controlling widget size.
 		 */
-		unsigned extension() const;
+		unsigned expansion() const;
 
 		/**
 		 * This method returns the number of <em>extended</em> line counts. One
@@ -158,20 +158,19 @@ namespace mrw::model
 		void toggleInclination();
 
 		/**
-		 * This method extends a rail drawing away from quadratic rendering.
+		 * This method expands a rail drawing away from quadratic rendering.
 		 * Negative increments are allowed but the the resulting extends does
 		 * not underflow zero.
 		 *
-		 * @param inc The increment to add to the extension.
+		 * @param inc The increment to add to the expansion.
 		 */
-		void extend(const int inc = 1);
+		void expand(const int inc = 1);
 
 		/**
-		 * This method extends a rail drawing away from quadratic rendering.
-		 * Negative increments are allowed but the the resulting extends does
-		 * not underflow zero.
+		 * This method expands the vertical line count. Negative increments are
+		 * allowed but the the resulting line extensions do not underflow zero.
 		 *
-		 * @param inc The increment to add to the extension.
+		 * @param inc The increment to add to the vertical expansion.
 		 */
 		void lineup(const int inc = 1);
 
@@ -323,7 +322,7 @@ namespace mrw::model
 
 	private:
 		QPoint   position;
-		unsigned ext_count     = 0;
+		unsigned exp_count     = 0;
 		unsigned line_count    = 0;
 		Bending  bending_state = Bending::STRAIGHT;
 		bool     inclined      = false;

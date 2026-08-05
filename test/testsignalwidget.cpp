@@ -49,14 +49,14 @@ void TestSignalWidget::testPrepare()
 					mock.setDirection(dir);
 					for (int ext = 0; ext < 5; ext++)
 					{
-						mock.setExtension(ext);
+						mock.setExpansion(ext);
 
 						widget.test(status);
 						QCOMPARE(status.direction, dir);
 						QCOMPARE(status.section_state, state);
 						QCOMPARE(status.lock_state, lock);
 						QCOMPARE(status.bending, bending);
-						QCOMPARE(status.extensions, ext);
+						QCOMPARE(status.expansion, ext);
 						QCOMPARE(status.lines, 0.0f);
 					}
 				}
@@ -478,10 +478,10 @@ void TestSignalWidget::testConnections()
 		for (const bool dir : booleans)
 		{
 			mock.setDirection(dir);
-			mock.setExtension(0);
+			mock.setExpansion(0);
 			QCOMPARE(widget.connectors().size(), 0);
 
-			mock.setExtension(Position::FRACTION);
+			mock.setExpansion(Position::FRACTION);
 			QCOMPARE(widget.connectors().size(), bending != Bending::STRAIGHT ? 1 : 0);
 		}
 	}
@@ -491,7 +491,7 @@ void TestSignalWidget::testBending()
 {
 	for (unsigned ext = 0; ext <= Position::FRACTION; ext++)
 	{
-		mock.setExtension(ext);
+		mock.setExpansion(ext);
 		for (const Bending bending : bendings)
 		{
 			mock.setBending(bending);

@@ -60,7 +60,7 @@ const QString & CrossingController::name() const noexcept
 	return crossing->name();
 }
 
-float CrossingController::extensions() const noexcept
+float CrossingController::expansion() const noexcept
 {
 	return 0.0;
 }

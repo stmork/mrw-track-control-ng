@@ -20,7 +20,7 @@ SignalControllerMock::SignalControllerMock(QObject * parent) :
 void SignalControllerMock::reset()
 {
 	setDirection();
-	setExtension(0);
+	setExpansion(0);
 	setSectionState(SectionState::FREE);
 	setLock(LockState::UNLOCKED);
 	setBending(Bending::STRAIGHT);
@@ -96,10 +96,10 @@ void SignalControllerMock::setShuntSymbol(const Symbol symbol)
 	emit update();
 }
 
-void SignalControllerMock::setExtension(const int new_extension)
+void SignalControllerMock::setExpansion(const int input)
 {
-	extension = new_extension;
-	emit extend();
+	exp_count = input;
+	emit expand();
 	emit computeConnectors();
 	emit update();
 }
@@ -184,9 +184,9 @@ Position::Bending SignalControllerMock::bending() const
 	return bending_state;
 }
 
-float SignalControllerMock::extensions() const
+float SignalControllerMock::expansion() const
 {
-	return extension;
+	return exp_count;
 }
 
 const QString & SignalControllerMock::name() const

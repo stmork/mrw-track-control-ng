@@ -70,9 +70,9 @@ namespace mrw::ui
 		void reposition();
 
 		/**
-		 * The extension in the model has changed and need to be redrawn.
+		 * The expansion in the model has changed and need to be redrawn.
 		 */
-		void extend();
+		void expand();
 
 		/**
 		 * The orientation of branches has changed and need to be recomputed

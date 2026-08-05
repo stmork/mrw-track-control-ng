@@ -44,8 +44,8 @@ RailStudy::RailStudy(QWidget * parent) :
 		mock.setDirection(true);
 	});
 	connect(
-		ui->extensionBox, qOverload<int>(&QSpinBox::valueChanged),
-		&mock, &RailControllerMock::setExtension);
+		ui->expansionBox, qOverload<int>(&QSpinBox::valueChanged),
+		&mock, &RailControllerMock::setExpansion);
 	connect(
 		ui->lineBox, qOverload<int>(&QSpinBox::valueChanged),
 		this, &RailStudy::updateLines);
@@ -155,8 +155,8 @@ RailStudy::RailStudy(QWidget * parent) :
 		&mock, &RailControllerMock::update,
 		ui->bigRailWidget, qOverload<>(&QWidget::repaint));
 	connect(
-		&mock, &RailControllerMock::extend,
-		ui->bigRailWidget, &RailWidget::extend);
+		&mock, &RailControllerMock::expand,
+		ui->bigRailWidget, &RailWidget::expand);
 	connect(
 		&mock, &RailControllerMock::computeConnectors,
 		ui->bigRailWidget, &RailWidget::computeConnectors);
@@ -164,8 +164,8 @@ RailStudy::RailStudy(QWidget * parent) :
 		&mock, &RailControllerMock::update,
 		ui->smallRailWidget, qOverload<>(&QWidget::repaint));
 	connect(
-		&mock, &RailControllerMock::extend,
-		ui->smallRailWidget, &RailWidget::extend);
+		&mock, &RailControllerMock::expand,
+		ui->smallRailWidget, &RailWidget::expand);
 	connect(
 		&mock, &RailControllerMock::computeConnectors,
 		ui->smallRailWidget, &RailWidget::computeConnectors);

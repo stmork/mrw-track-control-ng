@@ -37,7 +37,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="extensionBox">
+         <widget class="QSpinBox" name="expansionBox">
           <property name="maximum">
            <number>8</number>
           </property>
@@ -322,7 +322,7 @@
  <tabstops>
   <tabstop>backwardButton</tabstop>
   <tabstop>forwardButton</tabstop>
-  <tabstop>extensionBox</tabstop>
+  <tabstop>expansionBox</tabstop>
   <tabstop>freeButton</tabstop>
   <tabstop>shuntButton</tabstop>
   <tabstop>tourButton</tabstop>

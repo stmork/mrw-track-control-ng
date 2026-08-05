@@ -231,11 +231,11 @@ void MainWindow::connectEditActions()
 
 	connect(ui->actionExtend,     &QAction::triggered, [this] ()
 	{
-		extend(1);
+		expand(1);
 	});
 	connect(ui->actionReduce,     &QAction::triggered, [this] ()
 	{
-		extend(-1);
+		expand(-1);
 	});
 
 	connect(ui->actionLineUp,     &QAction::triggered, [this] ()
@@ -742,11 +742,11 @@ void MainWindow::move(int right, int down)
 	ui->sectionListWidget->traverse(callback);
 }
 
-void MainWindow::extend(int inc)
+void MainWindow::expand(int inc)
 {
 	PositionCallback callback = [inc](BaseController * controller, Position * position)
 	{
-		position->extend(inc);
+		position->expand(inc);
 
 		emit controller->reposition();
 	};
@@ -835,13 +835,13 @@ void MainWindow::expandBorder(RegionForm * form, BaseController * controller, Po
 			{
 				const Position * next = positions[i + 1];
 				const int        inc  = next->point().x() - position->point().x() - Position::FRACTION;
-				const int        diff = inc - position->extension();
+				const int        diff = inc - position->expansion();
 
-				position->extend(diff);
+				position->expand(diff);
 			}
 			else
 			{
-				position->extend(20);
+				position->expand(20);
 			}
 			controller->reposition();
 			return;

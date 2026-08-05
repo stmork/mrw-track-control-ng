@@ -19,7 +19,7 @@ RegularSwitchControllerMock::RegularSwitchControllerMock(QObject * parent) :
 void RegularSwitchControllerMock::reset()
 {
 	setDirection();
-	setExtension(0);
+	setExpansion(0);
 	setSectionState(SectionState::FREE);
 	setLock(LockState::UNLOCKED);
 	setFlankProtection(false);
@@ -61,10 +61,10 @@ void RegularSwitchControllerMock::setInclined(const bool incl)
 	emit update();
 }
 
-void RegularSwitchControllerMock::setExtension(const int input)
+void RegularSwitchControllerMock::setExpansion(const int input)
 {
-	extension = input;
-	emit extend();
+	exp_count = input;
+	emit expand();
 	emit computeConnectors();
 	emit update();
 }
@@ -121,9 +121,9 @@ const QString & RegularSwitchControllerMock::name() const
 	return switch_name;
 }
 
-float RegularSwitchControllerMock::extensions() const
+float RegularSwitchControllerMock::expansion() const
 {
-	return extension;
+	return exp_count;
 }
 
 Bending RegularSwitchControllerMock::bending() const
