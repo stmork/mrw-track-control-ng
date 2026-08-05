@@ -385,7 +385,7 @@ void MainWindow::enable()
 		ui->sectionListWidget->isSameRegion() &&
 		(rail_count >= 2) && (switch_count == 0));
 	ui->extendPushButton->setEnabled(
-		operating && first_free &&
+		operating &&
 		(ui->routeListWidget->currentItem() != nullptr) &&
 		(rail_count > 0) && (switch_count == 0));
 	ui->shuntRightPushButton->setEnabled(
