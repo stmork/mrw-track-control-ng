@@ -39,12 +39,11 @@ namespace mrw
 
 		SwitchStatechart::~SwitchStatechart()
 		{
-			if (!timerService)
+			if (timerService != nullptr)
 			{
-				return;
+				timerService->unsetTimerRaw(this, 0);
+				timerService->unsetTimerRaw(this, 1);
 			}
-			timerService->unsetTimerRaw(this, 0);
-			timerService->unsetTimerRaw(this, 1);
 		}
 
 
@@ -255,11 +254,11 @@ namespace mrw
 			return parallelTimeEventsCount;
 		}
 
-		void SwitchStatechart::raiseTimeEvent(sc::eventid evid)
+		void SwitchStatechart::raiseTimeEvent(sc::eventid event)
 		{
-			if (evid < timeEventsCount)
+			if (event < timeEventsCount)
 			{
-				incomingEventQueue.push_back(std::unique_ptr< EventInstance>(new EventInstance(static_cast<mrw::statechart::SwitchStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::SwitchStatechart::Event::_te0_main_region_Init_)))));
+				incomingEventQueue.push_back(std::unique_ptr< EventInstance>(new EventInstance(static_cast<mrw::statechart::SwitchStatechart::Event>(event + static_cast<sc::integer>(mrw::statechart::SwitchStatechart::Event::_te0_main_region_Init_)))));
 				runCycle();
 			}
 		}
@@ -352,7 +351,7 @@ namespace mrw
 		void SwitchStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(shared_from_this(), 0, (static_cast<sc::time> (SwitchStatechart::timeout)), false);
+			timerService->setTimer(shared_from_this(), 0, (static_cast<::sc::time> (SwitchStatechart::timeout)), false);
 			emit entered();
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
@@ -384,7 +383,7 @@ namespace mrw
 		void SwitchStatechart::enact_main_region_Operating_operating_Pending()
 		{
 			/* Entry action for state 'Pending'. */
-			timerService->setTimer(shared_from_this(), 1, (static_cast<sc::time> (SwitchStatechart::timeout)), false);
+			timerService->setTimer(shared_from_this(), 1, (static_cast<::sc::time> (SwitchStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}

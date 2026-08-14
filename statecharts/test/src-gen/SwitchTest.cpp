@@ -821,6 +821,7 @@ namespace
 		public:
 			SwitchTest * owner;
 			MockDefault(SwitchTest * owner) : owner(owner) {}
+			virtual ~MockDefault() = default;
 			void inc()
 			{
 				owner->incMock->inc();

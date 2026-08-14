@@ -386,6 +386,7 @@ namespace
 		public:
 			TrackerTest * owner;
 			MockDefault(TrackerTest * owner) : owner(owner) {}
+			virtual ~MockDefault() = default;
 			void first()
 			{
 				owner->firstMock->first();

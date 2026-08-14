@@ -933,6 +933,7 @@ namespace
 		public:
 			OperatingModeTest * owner;
 			MockDefault(OperatingModeTest * owner) : owner(owner) {}
+			virtual ~MockDefault() = default;
 			void keepAlive()
 			{
 				owner->keepAliveMock->keepAlive();
@@ -968,6 +969,7 @@ namespace
 		public:
 			OperatingModeTest * owner;
 			MockCan(OperatingModeTest * owner) : owner(owner) {}
+			virtual ~MockCan() = default;
 			void connectBus()
 			{
 				owner->canConnectBusMock->connectBus();
@@ -982,6 +984,7 @@ namespace
 		public:
 			OperatingModeTest * owner;
 			MockScreen(OperatingModeTest * owner) : owner(owner) {}
+			virtual ~MockScreen() = default;
 			void resetBlank()
 			{
 				owner->screenResetBlankMock->resetBlank();

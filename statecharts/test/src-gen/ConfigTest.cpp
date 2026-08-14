@@ -543,6 +543,7 @@ namespace
 		public:
 			ConfigTest * owner;
 			MockDefault(ConfigTest * owner) : owner(owner) {}
+			virtual ~MockDefault() = default;
 			sc::integer configure(sc::integer idx)
 			{
 				owner->configureMock->configure(idx);

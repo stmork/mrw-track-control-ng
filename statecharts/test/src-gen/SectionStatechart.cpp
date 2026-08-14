@@ -18,7 +18,9 @@ namespace mrw
 
 
 
-		SectionStatechart::SectionStatechart() noexcept
+		SectionStatechart::SectionStatechart() noexcept :
+			sc::timer::TimedInterface(),
+			sc::EventDrivenInterface()
 		{
 			std::fill(std::begin(stateConfVector), std::end(stateConfVector), mrw::statechart::SectionStatechart::State::NO_STATE);
 			clearInEvents();
@@ -40,13 +42,12 @@ namespace mrw
 				incomingEventQueue.pop_front();
 				delete nextEvent;
 			}
-			if (!timerService)
+			if (timerService != nullptr)
 			{
-				return;
+				timerService->unsetTimer(this, 0);
+				timerService->unsetTimer(this, 1);
+				timerService->unsetTimer(this, 2);
 			}
-			timerService->unsetTimer(this, 0);
-			timerService->unsetTimer(this, 1);
-			timerService->unsetTimer(this, 2);
 		}
 
 
@@ -337,11 +338,11 @@ namespace mrw
 			return parallelTimeEventsCount;
 		}
 
-		void SectionStatechart::raiseTimeEvent(sc::eventid evid)
+		void SectionStatechart::raiseTimeEvent(sc::eventid event)
 		{
-			if (evid < timeEventsCount)
+			if (event < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::SectionStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::SectionStatechart::Event::_te0_main_region_Init_))));
+				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::SectionStatechart::Event>(event + static_cast<sc::integer>(mrw::statechart::SectionStatechart::Event::_te0_main_region_Init_))));
 				runCycle();
 			}
 		}
@@ -532,7 +533,7 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(this, 0, (static_cast<sc::time> (SectionStatechart::timeout)), false);
+			timerService->setTimer(this, 0, (static_cast<::sc::time> (SectionStatechart::timeout)), false);
 			entered_raised = true;
 			ifaceOperationCallback->inc();
 		}
@@ -601,7 +602,7 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Operating_Processing_Locked_Route_active_Waiting()
 		{
 			/* Entry action for state 'Waiting'. */
-			timerService->setTimer(this, 1, (static_cast<sc::time> (SectionStatechart::timeout)), false);
+			timerService->setTimer(this, 1, (static_cast<::sc::time> (SectionStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 		}
 
@@ -649,7 +650,7 @@ namespace mrw
 		void SectionStatechart::enact_main_region_Operating_Processing_Pending()
 		{
 			/* Entry action for state 'Pending'. */
-			timerService->setTimer(this, 2, (static_cast<sc::time> (SectionStatechart::timeout)), false);
+			timerService->setTimer(this, 2, (static_cast<::sc::time> (SectionStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}

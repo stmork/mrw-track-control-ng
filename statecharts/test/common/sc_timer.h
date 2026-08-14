@@ -26,13 +26,11 @@ namespace sc
 		{
 		public:
 
-			virtual ~TimedInterface() = 0;
-
 			/*!
 			Set the timer service for the state machine. It must be set
 			externally on a timed state machine before a run cycle can be executed.
 			*/
-			virtual void setTimerService(sc::timer::TimerServiceInterface * timerService) = 0;
+			virtual void setTimerService(sc::timer::TimerServiceInterface * timerService_) = 0;
 
 			/*!
 			Return the currently used timer service.
@@ -49,9 +47,9 @@ namespace sc
 			*/
 			virtual sc::integer getNumberOfParallelTimeEvents() = 0;
 
+		protected:
+			~TimedInterface() noexcept = default;
 		};
-
-		inline TimedInterface::~TimedInterface() {}
 
 
 		/*! \file
@@ -60,8 +58,6 @@ namespace sc
 		class TimerServiceInterface
 		{
 		public:
-
-			virtual ~TimerServiceInterface() = 0;
 
 			/*!
 			Starts the timing for a time event.
@@ -72,9 +68,10 @@ namespace sc
 			Unsets the given time event.
 			*/
 			virtual void unsetTimer(TimedInterface * statemachine, sc::eventid event) = 0;
-		};
 
-		inline TimerServiceInterface::~TimerServiceInterface() {}
+		protected:
+			~TimerServiceInterface() noexcept = default;
+		};
 
 	} /* namespace sc::timer */
 } /* namespace sc */

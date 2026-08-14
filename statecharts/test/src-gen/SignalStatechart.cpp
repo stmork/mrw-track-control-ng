@@ -18,7 +18,9 @@ namespace mrw
 
 
 
-		SignalStatechart::SignalStatechart() noexcept
+		SignalStatechart::SignalStatechart() noexcept :
+			sc::timer::TimedInterface(),
+			sc::EventDrivenInterface()
 		{
 			std::fill(std::begin(stateConfVector), std::end(stateConfVector), mrw::statechart::SignalStatechart::State::NO_STATE);
 			clearInEvents();
@@ -33,11 +35,10 @@ namespace mrw
 				incomingEventQueue.pop_front();
 				delete nextEvent;
 			}
-			if (!timerService)
+			if (timerService != nullptr)
 			{
-				return;
+				timerService->unsetTimer(this, 0);
 			}
-			timerService->unsetTimer(this, 0);
 		}
 
 
@@ -210,11 +211,11 @@ namespace mrw
 			return parallelTimeEventsCount;
 		}
 
-		void SignalStatechart::raiseTimeEvent(sc::eventid evid)
+		void SignalStatechart::raiseTimeEvent(sc::eventid event)
 		{
-			if (evid < timeEventsCount)
+			if (event < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::SignalStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::SignalStatechart::Event::_te0_main_region_Turning_))));
+				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::SignalStatechart::Event>(event + static_cast<sc::integer>(mrw::statechart::SignalStatechart::Event::_te0_main_region_Turning_))));
 				runCycle();
 			}
 		}
@@ -301,7 +302,7 @@ namespace mrw
 		void SignalStatechart::enact_main_region_Turning()
 		{
 			/* Entry action for state 'Turning'. */
-			timerService->setTimer(this, 0, (static_cast<sc::time> (SignalStatechart::timeout)), false);
+			timerService->setTimer(this, 0, (static_cast<::sc::time> (SignalStatechart::timeout)), false);
 			setModified(ifaceOperationCallback->prepare());
 		}
 

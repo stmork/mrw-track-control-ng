@@ -477,7 +477,7 @@
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_-1BgsVsxEfG1b9oljMmyzw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_-1Bgs1sxEfG1b9oljMmyzw" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_-1BgslsxEfG1b9oljMmyzw" points="[4, -52, 2, 254]$[4, -266, 2, 40]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_-1BgslsxEfG1b9oljMmyzw" points="[0, -13, -1, 63]$[0, -66, -1, 10]"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_-1Cu0FsxEfG1b9oljMmyzw" id="(0.5294117647058824,0.8113207547169812)"/>
     </edges>
     <edges xmi:id="_A1-EwFsyEfG1b9oljMmyzw" type="Transition" element="_A182oFsyEfG1b9oljMmyzw" source="_6gd7QFsxEfG1b9oljMmyzw" target="_eE-FQFOBEfG0wcQfQBRr_A">

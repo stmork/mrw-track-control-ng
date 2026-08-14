@@ -18,7 +18,9 @@ namespace mrw
 
 
 
-		SwitchStatechart::SwitchStatechart() noexcept
+		SwitchStatechart::SwitchStatechart() noexcept :
+			sc::timer::TimedInterface(),
+			sc::EventDrivenInterface()
 		{
 			std::fill(std::begin(stateConfVector), std::end(stateConfVector), mrw::statechart::SwitchStatechart::State::NO_STATE);
 			clearInEvents();
@@ -33,12 +35,11 @@ namespace mrw
 				incomingEventQueue.pop_front();
 				delete nextEvent;
 			}
-			if (!timerService)
+			if (timerService != nullptr)
 			{
-				return;
+				timerService->unsetTimer(this, 0);
+				timerService->unsetTimer(this, 1);
 			}
-			timerService->unsetTimer(this, 0);
-			timerService->unsetTimer(this, 1);
 		}
 
 
@@ -264,11 +265,11 @@ namespace mrw
 			return parallelTimeEventsCount;
 		}
 
-		void SwitchStatechart::raiseTimeEvent(sc::eventid evid)
+		void SwitchStatechart::raiseTimeEvent(sc::eventid event)
 		{
-			if (evid < timeEventsCount)
+			if (event < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::SwitchStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::SwitchStatechart::Event::_te0_main_region_Init_))));
+				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::SwitchStatechart::Event>(event + static_cast<sc::integer>(mrw::statechart::SwitchStatechart::Event::_te0_main_region_Init_))));
 				runCycle();
 			}
 		}
@@ -361,7 +362,7 @@ namespace mrw
 		void SwitchStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(this, 0, (static_cast<sc::time> (SwitchStatechart::timeout)), false);
+			timerService->setTimer(this, 0, (static_cast<::sc::time> (SwitchStatechart::timeout)), false);
 			entered_raised = true;
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
@@ -393,7 +394,7 @@ namespace mrw
 		void SwitchStatechart::enact_main_region_Operating_operating_Pending()
 		{
 			/* Entry action for state 'Pending'. */
-			timerService->setTimer(this, 1, (static_cast<sc::time> (SwitchStatechart::timeout)), false);
+			timerService->setTimer(this, 1, (static_cast<::sc::time> (SwitchStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}

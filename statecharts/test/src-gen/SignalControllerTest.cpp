@@ -663,6 +663,7 @@ namespace
 		public:
 			SignalControllerTest * owner;
 			MockDefault(SignalControllerTest * owner) : owner(owner) {}
+			virtual ~MockDefault() = default;
 			void inc()
 			{
 				owner->incMock->inc();

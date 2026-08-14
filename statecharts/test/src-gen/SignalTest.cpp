@@ -263,6 +263,7 @@ namespace
 		public:
 			SignalTest * owner;
 			MockDefault(SignalTest * owner) : owner(owner) {}
+			virtual ~MockDefault() = default;
 			bool hasSignal()
 			{
 				return (owner->hasSignalMock->*(owner->hasSignalMock->getBehavior()))();

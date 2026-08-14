@@ -20,14 +20,13 @@ namespace sc
 	{
 	public:
 
-		virtual ~EventDrivenInterface() = 0;
-
 		/*! Start a run-to-completion step without any event.
 		*/
 		virtual void triggerWithoutEvent() = 0;
-	};
 
-	inline EventDrivenInterface::~EventDrivenInterface() {}
+	protected:
+		~EventDrivenInterface() noexcept = default;
+	};
 
 } /* namespace sc */
 

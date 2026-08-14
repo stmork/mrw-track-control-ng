@@ -37,11 +37,10 @@ namespace mrw
 
 		SignalStatechart::~SignalStatechart()
 		{
-			if (!timerService)
+			if (timerService != nullptr)
 			{
-				return;
+				timerService->unsetTimerRaw(this, 0);
 			}
-			timerService->unsetTimerRaw(this, 0);
 		}
 
 
@@ -205,11 +204,11 @@ namespace mrw
 			return parallelTimeEventsCount;
 		}
 
-		void SignalStatechart::raiseTimeEvent(sc::eventid evid)
+		void SignalStatechart::raiseTimeEvent(sc::eventid event)
 		{
-			if (evid < timeEventsCount)
+			if (event < timeEventsCount)
 			{
-				incomingEventQueue.push_back(std::unique_ptr< EventInstance>(new EventInstance(static_cast<mrw::statechart::SignalStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::SignalStatechart::Event::_te0_main_region_Turning_)))));
+				incomingEventQueue.push_back(std::unique_ptr< EventInstance>(new EventInstance(static_cast<mrw::statechart::SignalStatechart::Event>(event + static_cast<sc::integer>(mrw::statechart::SignalStatechart::Event::_te0_main_region_Turning_)))));
 				runCycle();
 			}
 		}
@@ -296,7 +295,7 @@ namespace mrw
 		void SignalStatechart::enact_main_region_Turning()
 		{
 			/* Entry action for state 'Turning'. */
-			timerService->setTimer(shared_from_this(), 0, (static_cast<sc::time> (SignalStatechart::timeout)), false);
+			timerService->setTimer(shared_from_this(), 0, (static_cast<::sc::time> (SignalStatechart::timeout)), false);
 			setModified(ifaceOperationCallback->prepare());
 		}
 

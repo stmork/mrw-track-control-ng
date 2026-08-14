@@ -18,7 +18,9 @@ namespace mrw
 
 
 
-		TrackerStatechart::TrackerStatechart() noexcept
+		TrackerStatechart::TrackerStatechart() noexcept :
+			sc::timer::TimedInterface(),
+			sc::EventDrivenInterface()
 		{
 			std::fill(std::begin(stateConfVector), std::end(stateConfVector), mrw::statechart::TrackerStatechart::State::NO_STATE);
 			clearInEvents();
@@ -39,14 +41,13 @@ namespace mrw
 				incomingEventQueue.pop_front();
 				delete nextEvent;
 			}
-			if (!timerService)
+			if (timerService != nullptr)
 			{
-				return;
+				timerService->unsetTimer(this, 0);
+				timerService->unsetTimer(this, 1);
+				timerService->unsetTimer(this, 2);
+				timerService->unsetTimer(this, 3);
 			}
-			timerService->unsetTimer(this, 0);
-			timerService->unsetTimer(this, 1);
-			timerService->unsetTimer(this, 2);
-			timerService->unsetTimer(this, 3);
 		}
 
 
@@ -162,11 +163,11 @@ namespace mrw
 			return parallelTimeEventsCount;
 		}
 
-		void TrackerStatechart::raiseTimeEvent(sc::eventid evid)
+		void TrackerStatechart::raiseTimeEvent(sc::eventid event)
 		{
-			if (evid < timeEventsCount)
+			if (event < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::TrackerStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::TrackerStatechart::Event::_te0_main_region_Preparing_))));
+				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::TrackerStatechart::Event>(event + static_cast<sc::integer>(mrw::statechart::TrackerStatechart::Event::_te0_main_region_Preparing_))));
 				runCycle();
 			}
 		}
@@ -235,14 +236,14 @@ namespace mrw
 		void TrackerStatechart::enact_main_region_Preparing()
 		{
 			/* Entry action for state 'Preparing'. */
-			timerService->setTimer(this, 0, (static_cast<sc::time> (TrackerStatechart::start)), false);
+			timerService->setTimer(this, 0, (static_cast<::sc::time> (TrackerStatechart::start)), false);
 		}
 
 		/* Entry action for state 'First'. */
 		void TrackerStatechart::enact_main_region_Driving_Tracking_First()
 		{
 			/* Entry action for state 'First'. */
-			timerService->setTimer(this, 1, (static_cast<sc::time> (TrackerStatechart::step)), false);
+			timerService->setTimer(this, 1, (static_cast<::sc::time> (TrackerStatechart::step)), false);
 			ifaceOperationCallback->first();
 		}
 
@@ -250,7 +251,7 @@ namespace mrw
 		void TrackerStatechart::enact_main_region_Driving_Tracking_Occupy()
 		{
 			/* Entry action for state 'Occupy'. */
-			timerService->setTimer(this, 2, (static_cast<sc::time> (TrackerStatechart::step)), false);
+			timerService->setTimer(this, 2, (static_cast<::sc::time> (TrackerStatechart::step)), false);
 			ifaceOperationCallback->occupy();
 		}
 
@@ -258,7 +259,7 @@ namespace mrw
 		void TrackerStatechart::enact_main_region_Driving_Tracking_Free()
 		{
 			/* Entry action for state 'Free'. */
-			timerService->setTimer(this, 3, (static_cast<sc::time> (TrackerStatechart::step)), false);
+			timerService->setTimer(this, 3, (static_cast<::sc::time> (TrackerStatechart::step)), false);
 			ifaceOperationCallback->free();
 			internalEventQueue.push_back(new mrw::statechart::TrackerStatechart::EventInstance(mrw::statechart::TrackerStatechart::Event::Internal_completed));
 		}

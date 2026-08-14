@@ -1109,6 +1109,7 @@ namespace
 		public:
 			RouteTest * owner;
 			MockDefault(RouteTest * owner) : owner(owner) {}
+			virtual ~MockDefault() = default;
 			void prepareRoute()
 			{
 				owner->prepareRouteMock->prepareRoute();

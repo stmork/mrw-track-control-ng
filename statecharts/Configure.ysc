@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
   <sgraph:Statechart xmi:id="_1i6JoJZpEe2UoL03hwgeFg" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;const timeout : integer = 1000&#xA;const writetime : integer = 50&#xA;const flashtime : integer = 200&#xA;const resettime : integer = 3500&#xA;var readonly idx : integer = 0&#xA;var readonly max : integer = 0&#xA;&#xA;in event connected&#xA;in event completed&#xA;&#xA;operation configure(idx : integer) : integer&#xA;operation hasMore(idx : integer) : boolean&#xA;operation booting() : void&#xA;operation quit() : void&#xA;operation fail() : void&#xA;&#xA;internal:&#xA;var written : integer" namespace="mrw.statechart" name="ConfigStatechart">
     <regions xmi:id="_1i6wu5ZpEe2UoL03hwgeFg" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_1i6wvJZpEe2UoL03hwgeFg">
@@ -168,21 +168,21 @@
     <edges xmi:id="_1i7YBZZpEe2UoL03hwgeFg" type="Transition" element="_1i6wwZZpEe2UoL03hwgeFg" source="_1i7X2pZpEe2UoL03hwgeFg" target="_2ClSwJZqEe2UoL03hwgeFg">
       <children xsi:type="notation:DecorationNode" xmi:id="_1i7YBpZpEe2UoL03hwgeFg" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_1i7YB5ZpEe2UoL03hwgeFg"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_1i7YCJZpEe2UoL03hwgeFg" x="-44" y="10"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_1i7YCJZpEe2UoL03hwgeFg" x="-36" y="10"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_1i7YCZZpEe2UoL03hwgeFg" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_1i7YCpZpEe2UoL03hwgeFg" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_1i7YC5ZpEe2UoL03hwgeFg" points="[-68, 41, -122, -202]$[-68, 251, -122, 8]$[42, 251, -12, 8]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_1i7YC5ZpEe2UoL03hwgeFg" points="[-78, 41, -113, -202]$[-78, 242, -113, -1]$[16, 242, -19, -1]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_1i7YDJZpEe2UoL03hwgeFg" id="(0.7241379310344828,0.22641509433962265)"/>
     </edges>
     <edges xmi:id="_1i7YDpZpEe2UoL03hwgeFg" type="Transition" element="_1i6wy5ZpEe2UoL03hwgeFg" source="_1i7X5pZpEe2UoL03hwgeFg" target="_2ClSwJZqEe2UoL03hwgeFg">
       <children xsi:type="notation:DecorationNode" xmi:id="_1i7YD5ZpEe2UoL03hwgeFg" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_1i7YEJZpEe2UoL03hwgeFg"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_1i7YEZZpEe2UoL03hwgeFg" x="-30" y="12"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_1i7YEZZpEe2UoL03hwgeFg" x="-28" y="12"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_1i7YEpZpEe2UoL03hwgeFg" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_1i7YE5ZpEe2UoL03hwgeFg" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_1i7YFJZpEe2UoL03hwgeFg" points="[19, 14, 4, -110]$[19, 107, 4, -17]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_1i7YFJZpEe2UoL03hwgeFg" points="[14, 14, -1, -110]$[14, 105, -1, -19]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_1i7YFZZpEe2UoL03hwgeFg" id="(0.25862068965517243,0.8301886792452831)"/>
     </edges>
     <edges xmi:id="_LVoPEJZqEe2UoL03hwgeFg" type="Transition" element="_LVnA8JZqEe2UoL03hwgeFg" source="_1i7X2pZpEe2UoL03hwgeFg" target="_GPzvUJZrEe2UoL03hwgeFg">

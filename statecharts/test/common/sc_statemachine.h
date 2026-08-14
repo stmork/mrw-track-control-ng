@@ -18,8 +18,6 @@ namespace sc
 	{
 	public:
 
-		virtual ~StatemachineInterface() = 0;
-
 		/*!
 		Enters the state machine. Sets the state machine into a defined state.
 		*/
@@ -34,16 +32,17 @@ namespace sc
 		Checks whether the state machine is active.
 		A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
 		*/
-		virtual	bool isActive() const = 0;
+		virtual bool isActive() const = 0;
 
 		/*!
 		Checks if all active states are final.
 		If there are no active states then the state machine is considered being inactive. In this case this method returns false.
 		*/
 		virtual bool isFinal() const = 0;
-	};
 
-	inline StatemachineInterface::~StatemachineInterface() {}
+	protected:
+		~StatemachineInterface() noexcept = default;
+	};
 
 } /* namespace sc */
 

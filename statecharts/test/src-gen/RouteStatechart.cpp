@@ -18,7 +18,9 @@ namespace mrw
 
 
 
-		RouteStatechart::RouteStatechart() noexcept
+		RouteStatechart::RouteStatechart() noexcept :
+			sc::timer::TimedInterface(),
+			sc::EventDrivenInterface()
 		{
 			std::fill(std::begin(stateConfVector), std::end(stateConfVector), mrw::statechart::RouteStatechart::State::NO_STATE);
 			clearInEvents();
@@ -33,18 +35,17 @@ namespace mrw
 				incomingEventQueue.pop_front();
 				delete nextEvent;
 			}
-			if (!timerService)
+			if (timerService != nullptr)
 			{
-				return;
+				timerService->unsetTimer(this, 0);
+				timerService->unsetTimer(this, 1);
+				timerService->unsetTimer(this, 2);
+				timerService->unsetTimer(this, 3);
+				timerService->unsetTimer(this, 4);
+				timerService->unsetTimer(this, 5);
+				timerService->unsetTimer(this, 6);
+				timerService->unsetTimer(this, 7);
 			}
-			timerService->unsetTimer(this, 0);
-			timerService->unsetTimer(this, 1);
-			timerService->unsetTimer(this, 2);
-			timerService->unsetTimer(this, 3);
-			timerService->unsetTimer(this, 4);
-			timerService->unsetTimer(this, 5);
-			timerService->unsetTimer(this, 6);
-			timerService->unsetTimer(this, 7);
 		}
 
 
@@ -202,11 +203,11 @@ namespace mrw
 			return parallelTimeEventsCount;
 		}
 
-		void RouteStatechart::raiseTimeEvent(sc::eventid evid)
+		void RouteStatechart::raiseTimeEvent(sc::eventid event)
 		{
-			if (evid < timeEventsCount)
+			if (event < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::RouteStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::RouteStatechart::Event::_te0_main_region_Disable_))));
+				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::RouteStatechart::Event>(event + static_cast<sc::integer>(mrw::statechart::RouteStatechart::Event::_te0_main_region_Disable_))));
 				runCycle();
 			}
 		}
@@ -320,7 +321,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Disable()
 		{
 			/* Entry action for state 'Disable'. */
-			timerService->setTimer(this, 0, (static_cast<sc::time> (RouteStatechart::emergency)), false);
+			timerService->setTimer(this, 0, (static_cast<::sc::time> (RouteStatechart::emergency)), false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->disableSections();
 			ifaceOperationCallback->disableSignals();
@@ -331,7 +332,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Active_processing_Switch_Turning()
 		{
 			/* Entry action for state 'Switch Turning'. */
-			timerService->setTimer(this, 1, (static_cast<sc::time> (RouteStatechart::switch_timeout)), false);
+			timerService->setTimer(this, 1, (static_cast<::sc::time> (RouteStatechart::switch_timeout)), false);
 			ifaceOperationCallback->prepareRoute();
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->turnCrossings();
@@ -343,7 +344,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Active_processing_Signal_Turning()
 		{
 			/* Entry action for state 'Signal Turning'. */
-			timerService->setTimer(this, 2, (static_cast<sc::time> (RouteStatechart::signal_timeout)), false);
+			timerService->setTimer(this, 2, (static_cast<::sc::time> (RouteStatechart::signal_timeout)), false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->enableSignals();
 			ifaceOperationCallback->tryComplete();
@@ -353,7 +354,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Active_processing_Section_Activation()
 		{
 			/* Entry action for state 'Section Activation'. */
-			timerService->setTimer(this, 3, (static_cast<sc::time> (RouteStatechart::section_timeout)), false);
+			timerService->setTimer(this, 3, (static_cast<::sc::time> (RouteStatechart::section_timeout)), false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->enableSections();
 			ifaceOperationCallback->tryComplete();
@@ -363,7 +364,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Active_processing_Signal_Updating()
 		{
 			/* Entry action for state 'Signal Updating'. */
-			timerService->setTimer(this, 4, (static_cast<sc::time> (RouteStatechart::signal_timeout)), false);
+			timerService->setTimer(this, 4, (static_cast<::sc::time> (RouteStatechart::signal_timeout)), false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->extendSignals();
 			ifaceOperationCallback->tryComplete();
@@ -373,7 +374,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Active_processing_Flank_Turning()
 		{
 			/* Entry action for state 'Flank Turning'. */
-			timerService->setTimer(this, 5, (static_cast<sc::time> (RouteStatechart::switch_timeout)), false);
+			timerService->setTimer(this, 5, (static_cast<::sc::time> (RouteStatechart::switch_timeout)), false);
 			ifaceOperationCallback->resetTransaction();
 			ifaceOperationCallback->prepareFlank();
 			ifaceOperationCallback->turnFlanks();
@@ -391,7 +392,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Wait()
 		{
 			/* Entry action for state 'Wait'. */
-			timerService->setTimer(this, 6, (static_cast<sc::time> (RouteStatechart::emergency)), false);
+			timerService->setTimer(this, 6, (static_cast<::sc::time> (RouteStatechart::emergency)), false);
 			ifaceOperationCallback->tryComplete();
 		}
 
@@ -399,7 +400,7 @@ namespace mrw
 		void RouteStatechart::enact_main_region_Emergency_Shutdown()
 		{
 			/* Entry action for state 'Emergency Shutdown'. */
-			timerService->setTimer(this, 7, (static_cast<sc::time> (RouteStatechart::section_timeout)), false);
+			timerService->setTimer(this, 7, (static_cast<::sc::time> (RouteStatechart::section_timeout)), false);
 			ifaceOperationCallback->fail();
 			ifaceOperationCallback->disableSections();
 			ifaceOperationCallback->disableSignals();

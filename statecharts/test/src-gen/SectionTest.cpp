@@ -817,6 +817,7 @@ namespace
 		public:
 			SectionTest * owner;
 			MockDefault(SectionTest * owner) : owner(owner) {}
+			virtual ~MockDefault() = default;
 			void inc()
 			{
 				owner->incMock->inc();

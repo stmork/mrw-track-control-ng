@@ -18,7 +18,9 @@ namespace mrw
 
 
 
-		OperatingModeStatechart::OperatingModeStatechart() noexcept
+		OperatingModeStatechart::OperatingModeStatechart() noexcept :
+			sc::timer::TimedInterface(),
+			sc::EventDrivenInterface()
 		{
 			this->ifaceWatchdog.parent = this;
 			this->ifaceCan.parent = this;
@@ -36,15 +38,14 @@ namespace mrw
 				incomingEventQueue.pop_front();
 				delete nextEvent;
 			}
-			if (!timerService)
+			if (timerService != nullptr)
 			{
-				return;
+				timerService->unsetTimer(this, 0);
+				timerService->unsetTimer(this, 1);
+				timerService->unsetTimer(this, 2);
+				timerService->unsetTimer(this, 3);
+				timerService->unsetTimer(this, 4);
 			}
-			timerService->unsetTimer(this, 0);
-			timerService->unsetTimer(this, 1);
-			timerService->unsetTimer(this, 2);
-			timerService->unsetTimer(this, 3);
-			timerService->unsetTimer(this, 4);
 		}
 
 		OperatingModeStatechart::Watchdog::Watchdog(OperatingModeStatechart * parent_) noexcept :
@@ -378,11 +379,11 @@ namespace mrw
 			return parallelTimeEventsCount;
 		}
 
-		void OperatingModeStatechart::raiseTimeEvent(sc::eventid evid)
+		void OperatingModeStatechart::raiseTimeEvent(sc::eventid event)
 		{
-			if (evid < timeEventsCount)
+			if (event < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::OperatingModeStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::OperatingModeStatechart::Event::_te0_main_region_Running_))));
+				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::OperatingModeStatechart::Event>(event + static_cast<sc::integer>(mrw::statechart::OperatingModeStatechart::Event::_te0_main_region_Running_))));
 				runCycle();
 			}
 		}
@@ -545,8 +546,8 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Running()
 		{
 			/* Entry action for state 'Running'. */
-			timerService->setTimer(this, 0, ((static_cast<sc::time> (OperatingModeStatechart::Watchdog::timeout)) * 1000), true);
-			timerService->setTimer(this, 1, ((static_cast<sc::time> (30)) * 1000), true);
+			timerService->setTimer(this, 0, ((static_cast<::sc::time> (OperatingModeStatechart::Watchdog::timeout)) * 1000), true);
+			timerService->setTimer(this, 1, ((static_cast<::sc::time> (30)) * 1000), true);
 			ifaceScreen.ifaceScreenOperationCallback->blank(false);
 		}
 
@@ -561,7 +562,7 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Running_operating_Prepare_Bus()
 		{
 			/* Entry action for state 'Prepare Bus'. */
-			timerService->setTimer(this, 2, (static_cast<sc::time> (OperatingModeStatechart::Can::timeout)), false);
+			timerService->setTimer(this, 2, (static_cast<::sc::time> (OperatingModeStatechart::Can::timeout)), false);
 			ifaceCan.ifaceCanOperationCallback->connectBus();
 		}
 
@@ -569,7 +570,7 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Running_operating_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(this, 3, (static_cast<sc::time> (OperatingModeStatechart::timeout)), false);
+			timerService->setTimer(this, 3, (static_cast<::sc::time> (OperatingModeStatechart::timeout)), false);
 			ifaceOperationCallback->resetTransaction();
 			start_raised = true;
 		}
@@ -601,7 +602,7 @@ namespace mrw
 		void OperatingModeStatechart::enact_main_region_Running_blanking_On()
 		{
 			/* Entry action for state 'On'. */
-			timerService->setTimer(this, 4, ((static_cast<sc::time> (ifaceScreen.timeout)) * 1000), false);
+			timerService->setTimer(this, 4, ((static_cast<::sc::time> (ifaceScreen.timeout)) * 1000), false);
 		}
 
 		/* Entry action for state 'Off'. */

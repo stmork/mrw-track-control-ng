@@ -125,8 +125,6 @@ namespace mrw
 			class OperationCallback
 			{
 			public:
-				virtual ~OperationCallback() = 0;
-
 				virtual void prepareRoute() = 0;
 
 				virtual void prepareFlank() = 0;
@@ -162,6 +160,10 @@ namespace mrw
 				virtual void unlockRailParts() = 0;
 
 				virtual void unlockSections() = 0;
+
+
+			protected:
+				~OperationCallback() noexcept = default;
 
 
 			};
@@ -214,10 +216,10 @@ namespace mrw
 			bool isStateActive(State state) const noexcept;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount {8};
+			static constexpr sc::integer timeEventsCount {8};
 
 			//! number of time events that can be active at once.
-			static const sc::integer parallelTimeEventsCount {1};
+			static constexpr sc::integer parallelTimeEventsCount {1};
 
 
 		public slots:
@@ -263,14 +265,13 @@ namespace mrw
 
 
 
-			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-			static const sc::ushort maxOrthogonalStates {1};
+			static constexpr sc::ushort maxOrthogonalStates {1};
 
 			std::shared_ptr<sc::timer::TimerServiceInterface> timerService = {};
-			bool timeEvents[timeEventsCount];
+			bool timeEvents[timeEventsCount] = {};
 
 
-			State stateConfVector[maxOrthogonalStates];
+			State stateConfVector[maxOrthogonalStates] = {};
 
 
 
@@ -364,7 +365,6 @@ namespace mrw
 		};
 
 
-		inline RouteStatechart::OperationCallback::~OperationCallback() {}
 
 	}
 }

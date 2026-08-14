@@ -34,13 +34,12 @@ namespace mrw
 
 		CrossingStatechart::~CrossingStatechart()
 		{
-			if (!timerService)
+			if (timerService != nullptr)
 			{
-				return;
+				timerService->unsetTimerRaw(this, 0);
+				timerService->unsetTimerRaw(this, 1);
+				timerService->unsetTimerRaw(this, 2);
 			}
-			timerService->unsetTimerRaw(this, 0);
-			timerService->unsetTimerRaw(this, 1);
-			timerService->unsetTimerRaw(this, 2);
 		}
 
 
@@ -200,11 +199,11 @@ namespace mrw
 			return parallelTimeEventsCount;
 		}
 
-		void CrossingStatechart::raiseTimeEvent(sc::eventid evid)
+		void CrossingStatechart::raiseTimeEvent(sc::eventid event)
 		{
-			if (evid < timeEventsCount)
+			if (event < timeEventsCount)
 			{
-				incomingEventQueue.push_back(std::unique_ptr< EventInstance>(new EventInstance(static_cast<mrw::statechart::CrossingStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::CrossingStatechart::Event::_te0_main_region_Init_)))));
+				incomingEventQueue.push_back(std::unique_ptr< EventInstance>(new EventInstance(static_cast<mrw::statechart::CrossingStatechart::Event>(event + static_cast<sc::integer>(mrw::statechart::CrossingStatechart::Event::_te0_main_region_Init_)))));
 				runCycle();
 			}
 		}
@@ -300,7 +299,7 @@ namespace mrw
 		void CrossingStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(shared_from_this(), 0, (static_cast<sc::time> (CrossingStatechart::timeout)), false);
+			timerService->setTimer(shared_from_this(), 0, (static_cast<::sc::time> (CrossingStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 			ifaceOperationCallback->open();
@@ -324,7 +323,7 @@ namespace mrw
 		void CrossingStatechart::enact_main_region_Operating_Processing_Pending()
 		{
 			/* Entry action for state 'Pending'. */
-			timerService->setTimer(shared_from_this(), 1, (static_cast<sc::time> (CrossingStatechart::timeout)), false);
+			timerService->setTimer(shared_from_this(), 1, (static_cast<::sc::time> (CrossingStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}
@@ -347,7 +346,7 @@ namespace mrw
 		void CrossingStatechart::enact_main_region_Operating_Processing_Pending_Crossing_processing_Delay()
 		{
 			/* Entry action for state 'Delay'. */
-			timerService->setTimer(shared_from_this(), 2, (static_cast<sc::time> (CrossingStatechart::delay)), false);
+			timerService->setTimer(shared_from_this(), 2, (static_cast<::sc::time> (CrossingStatechart::delay)), false);
 		}
 
 		/* Exit action for state 'Init'. */

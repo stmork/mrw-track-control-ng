@@ -111,8 +111,6 @@ namespace mrw
 			class OperationCallback
 			{
 			public:
-				virtual ~OperationCallback() = 0;
-
 				virtual void inc() = 0;
 
 				virtual void dec() = 0;
@@ -130,6 +128,10 @@ namespace mrw
 				virtual void pending() = 0;
 
 				virtual void lock(bool do_it) = 0;
+
+
+			protected:
+				~OperationCallback() noexcept = default;
 
 
 			};
@@ -182,10 +184,10 @@ namespace mrw
 			bool isStateActive(State state) const noexcept;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount {3};
+			static constexpr sc::integer timeEventsCount {3};
 
 			//! number of time events that can be active at once.
-			static const sc::integer parallelTimeEventsCount {2};
+			static constexpr sc::integer parallelTimeEventsCount {2};
 
 
 		public slots:
@@ -224,14 +226,13 @@ namespace mrw
 
 
 
-			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-			static const sc::ushort maxOrthogonalStates {1};
+			static constexpr sc::ushort maxOrthogonalStates {1};
 
 			std::shared_ptr<sc::timer::TimerServiceInterface> timerService = {};
-			bool timeEvents[timeEventsCount];
+			bool timeEvents[timeEventsCount] = {};
 
 
-			State stateConfVector[maxOrthogonalStates];
+			State stateConfVector[maxOrthogonalStates] = {};
 
 
 
@@ -316,7 +317,6 @@ namespace mrw
 		};
 
 
-		inline CrossingStatechart::OperationCallback::~OperationCallback() {}
 
 	}
 }

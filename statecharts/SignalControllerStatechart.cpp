@@ -42,16 +42,15 @@ namespace mrw
 
 		SignalControllerStatechart::~SignalControllerStatechart()
 		{
-			if (!timerService)
+			if (timerService != nullptr)
 			{
-				return;
+				timerService->unsetTimerRaw(this, 0);
+				timerService->unsetTimerRaw(this, 1);
+				timerService->unsetTimerRaw(this, 2);
+				timerService->unsetTimerRaw(this, 3);
+				timerService->unsetTimerRaw(this, 4);
+				timerService->unsetTimerRaw(this, 5);
 			}
-			timerService->unsetTimerRaw(this, 0);
-			timerService->unsetTimerRaw(this, 1);
-			timerService->unsetTimerRaw(this, 2);
-			timerService->unsetTimerRaw(this, 3);
-			timerService->unsetTimerRaw(this, 4);
-			timerService->unsetTimerRaw(this, 5);
 		}
 
 
@@ -266,11 +265,11 @@ namespace mrw
 			return parallelTimeEventsCount;
 		}
 
-		void SignalControllerStatechart::raiseTimeEvent(sc::eventid evid)
+		void SignalControllerStatechart::raiseTimeEvent(sc::eventid event)
 		{
-			if (evid < timeEventsCount)
+			if (event < timeEventsCount)
 			{
-				incomingEventQueue.push_back(std::unique_ptr< EventInstance>(new EventInstance(static_cast<mrw::statechart::SignalControllerStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::SignalControllerStatechart::Event::_te0_main_region_Init_)))));
+				incomingEventQueue.push_back(std::unique_ptr< EventInstance>(new EventInstance(static_cast<mrw::statechart::SignalControllerStatechart::Event>(event + static_cast<sc::integer>(mrw::statechart::SignalControllerStatechart::Event::_te0_main_region_Init_)))));
 				runCycle();
 			}
 		}
@@ -488,7 +487,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Init()
 		{
 			/* Entry action for state 'Init'. */
-			timerService->setTimer(shared_from_this(), 0, (static_cast<sc::time> (SignalControllerStatechart::timeout)), false);
+			timerService->setTimer(shared_from_this(), 0, (static_cast<::sc::time> (SignalControllerStatechart::timeout)), false);
 			emit entered();
 			ifaceOperationCallback->inc();
 		}
@@ -575,7 +574,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Shunting_State_Processing_Waiting()
 		{
 			/* Entry action for state 'Waiting'. */
-			timerService->setTimer(shared_from_this(), 1, (static_cast<sc::time> (SignalControllerStatechart::timeout)), false);
+			timerService->setTimer(shared_from_this(), 1, (static_cast<::sc::time> (SignalControllerStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 		}
 
@@ -604,7 +603,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Processing_Waiting()
 		{
 			/* Entry action for state 'Waiting'. */
-			timerService->setTimer(shared_from_this(), 2, (static_cast<sc::time> (SignalControllerStatechart::timeout)), false);
+			timerService->setTimer(shared_from_this(), 2, (static_cast<::sc::time> (SignalControllerStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 		}
 
@@ -633,7 +632,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Tour_State_Processing_Waiting_Tour_waiting_Delay()
 		{
 			/* Entry action for state 'Delay'. */
-			timerService->setTimer(shared_from_this(), 3, (static_cast<sc::time> (SignalControllerStatechart::delay)), false);
+			timerService->setTimer(shared_from_this(), 3, (static_cast<::sc::time> (SignalControllerStatechart::delay)), false);
 		}
 
 		/* Entry action for state 'Stop Shunt'. */
@@ -654,7 +653,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Pending()
 		{
 			/* Entry action for state 'Pending'. */
-			timerService->setTimer(shared_from_this(), 4, (static_cast<sc::time> (SignalControllerStatechart::timeout)), false);
+			timerService->setTimer(shared_from_this(), 4, (static_cast<::sc::time> (SignalControllerStatechart::timeout)), false);
 			ifaceOperationCallback->inc();
 			ifaceOperationCallback->pending();
 		}
@@ -688,7 +687,7 @@ namespace mrw
 		void SignalControllerStatechart::enact_main_region_Operating_Processing_Pending_Pending_Delay()
 		{
 			/* Entry action for state 'Delay'. */
-			timerService->setTimer(shared_from_this(), 5, (static_cast<sc::time> (SignalControllerStatechart::delay)), false);
+			timerService->setTimer(shared_from_this(), 5, (static_cast<::sc::time> (SignalControllerStatechart::delay)), false);
 		}
 
 		/* Entry action for state 'Failed'. */

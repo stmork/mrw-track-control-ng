@@ -687,6 +687,7 @@ namespace
 		public:
 			CrossingTest * owner;
 			MockDefault(CrossingTest * owner) : owner(owner) {}
+			virtual ~MockDefault() = default;
 			void inc()
 			{
 				owner->incMock->inc();

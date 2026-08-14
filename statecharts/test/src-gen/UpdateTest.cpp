@@ -808,6 +808,7 @@ namespace
 		public:
 			UpdateTest * owner;
 			MockDefault(UpdateTest * owner) : owner(owner) {}
+			virtual ~MockDefault() = default;
 			void init(sc::integer count)
 			{
 				owner->initMock->init(count);

@@ -118,7 +118,7 @@ namespace mrw
 					EventInstance(id),
 					value(val)
 				{}
-				virtual ~EventInstanceWithValue() = default;
+				~EventInstanceWithValue() noexcept override = default;
 				const T value;
 			};
 			/*! Raises the in event 'clear' of default interface scope. */
@@ -175,8 +175,6 @@ namespace mrw
 			class OperationCallback
 			{
 			public:
-				virtual ~OperationCallback() = 0;
-
 				virtual void keepAlive() = 0;
 
 				virtual void resetTransaction() = 0;
@@ -188,6 +186,10 @@ namespace mrw
 				virtual void disableRoutes() = 0;
 
 				virtual void activateManual(bool active) = 0;
+
+
+			protected:
+				~OperationCallback() noexcept = default;
 
 
 			};
@@ -244,11 +246,13 @@ namespace mrw
 				class OperationCallback
 				{
 				public:
-					virtual ~OperationCallback() = 0;
-
 					virtual void connectBus() = 0;
 
 					virtual bool isConnected() = 0;
+
+
+				protected:
+					~OperationCallback() noexcept = default;
 
 
 				};
@@ -301,13 +305,15 @@ namespace mrw
 				class OperationCallback
 				{
 				public:
-					virtual ~OperationCallback() = 0;
-
 					virtual void resetBlank() = 0;
 
 					virtual void blank(bool active) = 0;
 
 					virtual void autoBlank(bool enable) = 0;
+
+
+				protected:
+					~OperationCallback() noexcept = default;
 
 
 				};
@@ -382,10 +388,10 @@ namespace mrw
 			bool isStateActive(State state) const noexcept;
 
 			//! number of time events used by the state machine.
-			static const sc::integer timeEventsCount {5};
+			static constexpr sc::integer timeEventsCount {5};
 
 			//! number of time events that can be active at once.
-			static const sc::integer parallelTimeEventsCount {4};
+			static constexpr sc::integer parallelTimeEventsCount {4};
 
 
 		protected:
@@ -406,14 +412,13 @@ namespace mrw
 
 
 
-			//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-			static const sc::ushort maxOrthogonalStates {2};
+			static constexpr sc::ushort maxOrthogonalStates {2};
 
 			sc::timer::TimerServiceInterface * timerService = {};
-			bool timeEvents[timeEventsCount];
+			bool timeEvents[timeEventsCount] = {};
 
 
-			State stateConfVector[maxOrthogonalStates];
+			State stateConfVector[maxOrthogonalStates] = {};
 
 
 			Watchdog ifaceWatchdog {Watchdog{nullptr}};
@@ -578,9 +583,6 @@ namespace mrw
 		};
 
 
-		inline OperatingModeStatechart::OperationCallback::~OperationCallback() {}
-		inline OperatingModeStatechart::Can::OperationCallback::~OperationCallback() {}
-		inline OperatingModeStatechart::Screen::OperationCallback::~OperationCallback() {}
 
 	}
 }

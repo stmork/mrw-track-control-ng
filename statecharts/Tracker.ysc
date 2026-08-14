@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
   <sgraph:Statechart xmi:id="_M42vgIRaEe2CDNGUus-J0w" specification="namespace mrw.statechart&#xA;&#xA;@EventDriven&#xA;@SuperSteps(no)&#xA;&#xA;interface:&#xA;const start : integer = 1000&#xA;const step : integer = 300&#xA;&#xA;in event received&#xA;&#xA;operation first() : void&#xA;operation free() : void&#xA;operation occupy() : void&#xA;operation valid() : boolean&#xA;operation last() : boolean&#xA;operation clear() : void&#xA;&#xA;internal:&#xA;event completed&#xA;" namespace="mrw.statechart" name="TrackerStatechart">
     <regions xmi:id="_M42vjIRaEe2CDNGUus-J0w" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_M42vjYRaEe2CDNGUus-J0w">
@@ -270,11 +270,11 @@
     <edges xmi:id="_9RPE8IRaEe2CDNGUus-J0w" type="Transition" element="_9ROd4IRaEe2CDNGUus-J0w" source="_M43WuYRaEe2CDNGUus-J0w" target="_DzJV8IRfEe2CDNGUus-J0w">
       <children xsi:type="notation:DecorationNode" xmi:id="_9RPsAYRaEe2CDNGUus-J0w" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_9RPsAoRaEe2CDNGUus-J0w"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_9RPsA4RaEe2CDNGUus-J0w" x="-11" y="40"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_9RPsA4RaEe2CDNGUus-J0w" x="-12" y="37"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_9RPE8YRaEe2CDNGUus-J0w" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_9RPsAIRaEe2CDNGUus-J0w" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_9RPE8oRaEe2CDNGUus-J0w" points="[40, -11, -123, -150]$[174, -11, 11, -150]$[174, 125, 11, -14]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_9RPE8oRaEe2CDNGUus-J0w" points="[40, -11, -123, -150]$[171, -11, 8, -150]$[171, 125, 8, -14]"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_9RQ6IIRaEe2CDNGUus-J0w" id="(0.23529411764705882,0.4411764705882353)"/>
     </edges>
     <edges xmi:id="_FadSAIRfEe2CDNGUus-J0w" type="Transition" element="_Facq8IRfEe2CDNGUus-J0w" source="_DzJV8IRfEe2CDNGUus-J0w" target="_M43WxYRaEe2CDNGUus-J0w">
@@ -290,11 +290,11 @@
     <edges xmi:id="_IZwUsIRfEe2CDNGUus-J0w" type="Transition" element="_IZvtoIRfEe2CDNGUus-J0w" source="_DzJV8IRfEe2CDNGUus-J0w" target="_SYZLQIRjEe2CDNGUus-J0w">
       <children xsi:type="notation:DecorationNode" xmi:id="_IZwUtIRfEe2CDNGUus-J0w" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_IZwUtYRfEe2CDNGUus-J0w"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_IZwUtoRfEe2CDNGUus-J0w" x="-57" y="-7"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_IZwUtoRfEe2CDNGUus-J0w" x="-56" y="-7"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_IZwUsYRfEe2CDNGUus-J0w" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_IZwUs4RfEe2CDNGUus-J0w" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_IZwUsoRfEe2CDNGUus-J0w" points="[-13, 4, 384, 145]$[-378, 4, 19, 145]$[-378, -111, 19, 30]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_IZwUsoRfEe2CDNGUus-J0w" points="[-16, -1, 381, 140]$[-378, -1, 19, 140]$[-378, -111, 19, 30]"/>
     </edges>
     <edges xmi:id="_V0kXMIRjEe2CDNGUus-J0w" type="Transition" element="_V0jwIIRjEe2CDNGUus-J0w" source="_SYZLQIRjEe2CDNGUus-J0w" target="_M43WuYRaEe2CDNGUus-J0w">
       <children xsi:type="notation:DecorationNode" xmi:id="_V0kXNIRjEe2CDNGUus-J0w" type="TransitionExpression">

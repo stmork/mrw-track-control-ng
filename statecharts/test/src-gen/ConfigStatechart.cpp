@@ -18,7 +18,9 @@ namespace mrw
 
 
 
-		ConfigStatechart::ConfigStatechart() noexcept
+		ConfigStatechart::ConfigStatechart() noexcept :
+			sc::timer::TimedInterface(),
+			sc::EventDrivenInterface()
 		{
 			std::fill(std::begin(stateConfVector), std::end(stateConfVector), mrw::statechart::ConfigStatechart::State::NO_STATE);
 			clearInEvents();
@@ -32,13 +34,12 @@ namespace mrw
 				incomingEventQueue.pop_front();
 				delete nextEvent;
 			}
-			if (!timerService)
+			if (timerService != nullptr)
 			{
-				return;
+				timerService->unsetTimer(this, 0);
+				timerService->unsetTimer(this, 1);
+				timerService->unsetTimer(this, 2);
 			}
-			timerService->unsetTimer(this, 0);
-			timerService->unsetTimer(this, 1);
-			timerService->unsetTimer(this, 2);
 		}
 
 
@@ -156,11 +157,11 @@ namespace mrw
 			return parallelTimeEventsCount;
 		}
 
-		void ConfigStatechart::raiseTimeEvent(sc::eventid evid)
+		void ConfigStatechart::raiseTimeEvent(sc::eventid event)
 		{
-			if (evid < timeEventsCount)
+			if (event < timeEventsCount)
 			{
-				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::ConfigStatechart::Event>(evid + static_cast<sc::integer>(mrw::statechart::ConfigStatechart::Event::_te0_main_region_Wait_for_Connect_))));
+				incomingEventQueue.push_back(new EventInstance(static_cast<mrw::statechart::ConfigStatechart::Event>(event + static_cast<sc::integer>(mrw::statechart::ConfigStatechart::Event::_te0_main_region_Wait_for_Connect_))));
 				runCycle();
 			}
 		}
@@ -256,7 +257,7 @@ namespace mrw
 		void ConfigStatechart::enact_main_region_Wait_for_Connect()
 		{
 			/* Entry action for state 'Wait for Connect'. */
-			timerService->setTimer(this, 0, (static_cast<sc::time> (ConfigStatechart::timeout)), false);
+			timerService->setTimer(this, 0, (static_cast<::sc::time> (ConfigStatechart::timeout)), false);
 			setIdx(0);
 			setMax(0);
 		}
@@ -265,7 +266,7 @@ namespace mrw
 		void ConfigStatechart::enact_main_region_Configure()
 		{
 			/* Entry action for state 'Configure'. */
-			timerService->setTimer(this, 1, (static_cast<sc::time> (ConfigStatechart::writetime)), false);
+			timerService->setTimer(this, 1, (static_cast<::sc::time> (ConfigStatechart::writetime)), false);
 			setWritten(ifaceOperationCallback->configure(idx));
 			setMax((written) > (max) ? written : max);
 		}
@@ -274,7 +275,7 @@ namespace mrw
 		void ConfigStatechart::enact_main_region_Wait_for_Boot()
 		{
 			/* Entry action for state 'Wait for Boot'. */
-			timerService->setTimer(this, 2, (((static_cast<sc::time> (ConfigStatechart::flashtime)) * max) + ConfigStatechart::resettime), false);
+			timerService->setTimer(this, 2, (((static_cast<::sc::time> (ConfigStatechart::flashtime)) * max) + ConfigStatechart::resettime), false);
 			ifaceOperationCallback->booting();
 		}
 
