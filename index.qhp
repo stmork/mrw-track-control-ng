@@ -2314,21 +2314,21 @@
 <section title="sc" ref="db/d03/namespacesc.html">
 <section title="timer" ref="d3/df0/namespacesc_1_1timer.html">
 <section title="TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html">
-<section title="~TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#abde323c163127b4797dea71adcf1f35d"/>
+<section title="~TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#adecf7f957f0f89ec5a515830f4804f45"/>
 <section title="getNumberOfParallelTimeEvents" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#ad96876d6b84af8366141209a2930a313"/>
 <section title="getTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a0569ca1dfc217b99feb88a3f65db2f3c"/>
 <section title="raiseTimeEvent" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#aeb2a340a1252b36828b5d2dc069e9c57"/>
-<section title="setTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a4b30aa5a7a42a697e0dc114691f5f01f"/>
+<section title="setTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a088683605e5a26f04834a30b21f4288a"/>
 </section>
 <section title="TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html">
-<section title="~TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac964f1c8dd62c8c30ff369ce66455b77"/>
+<section title="~TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac403688f9fd6b012437b58acb68f2f62"/>
 <section title="setTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a3b6967b2bbc5a6cfc31b20ed0a180c28"/>
 <section title="unsetTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a43f25c75a536b85d7f0d0b2196c7d1b6"/>
 <section title="unsetTimerRaw" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a912f63105c142bd8c57deb3b320e0dcf"/>
 </section>
 </section>
 <section title="EventDrivenInterface" ref="d8/dd2/classsc_1_1EventDrivenInterface.html">
-<section title="~EventDrivenInterface" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a44f6fe709e586da9c19be13e93c14d09"/>
+<section title="~EventDrivenInterface" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a1eb2a451d44f72ab0e8e13b3a0068373"/>
 <section title="enter" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a05bfa96eaf85a416020533d00d2b79c8"/>
 <section title="exit" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#aaf403e4303d6b7237d8ad68537c3cff6"/>
 <section title="isActive" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a67bc6559cb0d08193fbdefbe80af1c43"/>
@@ -2336,7 +2336,7 @@
 <section title="triggerWithoutEvent" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a68a8f25dc0d37f7864eef4161de0e64b"/>
 </section>
 <section title="StatemachineInterface" ref="de/d2a/classsc_1_1StatemachineInterface.html">
-<section title="~StatemachineInterface" ref="de/d2a/classsc_1_1StatemachineInterface.html#aa887dba1e9f2fd1b16fc227132375135"/>
+<section title="~StatemachineInterface" ref="de/d2a/classsc_1_1StatemachineInterface.html#a504db95ec9b316c0c42d36be8966f8bb"/>
 <section title="enter" ref="de/d2a/classsc_1_1StatemachineInterface.html#a05bfa96eaf85a416020533d00d2b79c8"/>
 <section title="exit" ref="de/d2a/classsc_1_1StatemachineInterface.html#aaf403e4303d6b7237d8ad68537c3cff6"/>
 <section title="isActive" ref="de/d2a/classsc_1_1StatemachineInterface.html#a67bc6559cb0d08193fbdefbe80af1c43"/>
@@ -4543,21 +4543,21 @@
 <section title="sc" ref="db/d03/namespacesc.html">
 <section title="timer" ref="d3/df0/namespacesc_1_1timer.html">
 <section title="TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html">
-<section title="~TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#abde323c163127b4797dea71adcf1f35d"/>
+<section title="~TimedInterface" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#adecf7f957f0f89ec5a515830f4804f45"/>
 <section title="getNumberOfParallelTimeEvents" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#ad96876d6b84af8366141209a2930a313"/>
 <section title="getTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a0569ca1dfc217b99feb88a3f65db2f3c"/>
 <section title="raiseTimeEvent" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#aeb2a340a1252b36828b5d2dc069e9c57"/>
-<section title="setTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a4b30aa5a7a42a697e0dc114691f5f01f"/>
+<section title="setTimerService" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a088683605e5a26f04834a30b21f4288a"/>
 </section>
 <section title="TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html">
-<section title="~TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac964f1c8dd62c8c30ff369ce66455b77"/>
+<section title="~TimerServiceInterface" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac403688f9fd6b012437b58acb68f2f62"/>
 <section title="setTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a3b6967b2bbc5a6cfc31b20ed0a180c28"/>
 <section title="unsetTimer" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a43f25c75a536b85d7f0d0b2196c7d1b6"/>
 <section title="unsetTimerRaw" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a912f63105c142bd8c57deb3b320e0dcf"/>
 </section>
 </section>
 <section title="EventDrivenInterface" ref="d8/dd2/classsc_1_1EventDrivenInterface.html">
-<section title="~EventDrivenInterface" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a44f6fe709e586da9c19be13e93c14d09"/>
+<section title="~EventDrivenInterface" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a1eb2a451d44f72ab0e8e13b3a0068373"/>
 <section title="enter" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a05bfa96eaf85a416020533d00d2b79c8"/>
 <section title="exit" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#aaf403e4303d6b7237d8ad68537c3cff6"/>
 <section title="isActive" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a67bc6559cb0d08193fbdefbe80af1c43"/>
@@ -4565,7 +4565,7 @@
 <section title="triggerWithoutEvent" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a68a8f25dc0d37f7864eef4161de0e64b"/>
 </section>
 <section title="StatemachineInterface" ref="de/d2a/classsc_1_1StatemachineInterface.html">
-<section title="~StatemachineInterface" ref="de/d2a/classsc_1_1StatemachineInterface.html#aa887dba1e9f2fd1b16fc227132375135"/>
+<section title="~StatemachineInterface" ref="de/d2a/classsc_1_1StatemachineInterface.html#a504db95ec9b316c0c42d36be8966f8bb"/>
 <section title="enter" ref="de/d2a/classsc_1_1StatemachineInterface.html#a05bfa96eaf85a416020533d00d2b79c8"/>
 <section title="exit" ref="de/d2a/classsc_1_1StatemachineInterface.html#aaf403e4303d6b7237d8ad68537c3cff6"/>
 <section title="isActive" ref="de/d2a/classsc_1_1StatemachineInterface.html#a67bc6559cb0d08193fbdefbe80af1c43"/>
@@ -5552,7 +5552,7 @@
 <keyword name="setStationLabel(const QString &amp;label)" id="mrw::ui::StationWidget::setStationLabel_a43ed5e88f4feb27f6ae49099c9c354ee" ref="d6/da1/classmrw_1_1ui_1_1StationWidget.html#a43ed5e88f4feb27f6ae49099c9c354ee"/>
 <keyword name="setSymbolCallback(std::function&lt; Symbol(void)&gt; callback)" id="mrw::model::Signal::setSymbolCallback_aa5557f631ffd86b3ac04154fa7e31c83" ref="db/d9c/classmrw_1_1model_1_1Signal.html#aa5557f631ffd86b3ac04154fa7e31c83"/>
 <keyword name="setTimer(std::shared_ptr&lt; TimedInterface &gt; statemachine, sc::eventid event, sc::time time_ms, bool isPeriodic)=0" id="sc::timer::TimerServiceInterface::setTimer_a3b6967b2bbc5a6cfc31b20ed0a180c28" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a3b6967b2bbc5a6cfc31b20ed0a180c28"/>
-<keyword name="setTimerService(std::shared_ptr&lt; sc::timer::TimerServiceInterface &gt; timerService)=0" id="sc::timer::TimedInterface::setTimerService_a4b30aa5a7a42a697e0dc114691f5f01f" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a4b30aa5a7a42a697e0dc114691f5f01f"/>
+<keyword name="setTimerService(std::shared_ptr&lt; sc::timer::TimerServiceInterface &gt; timerService_)=0" id="sc::timer::TimedInterface::setTimerService_a088683605e5a26f04834a30b21f4288a" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#a088683605e5a26f04834a30b21f4288a"/>
 <keyword name="Settings(const QString &amp;app_name=&quot;model&quot;, QObject *parent=nullptr)" id="mrw::util::Settings::Settings_a05676ec48e2b4c57c8b3cfea56ccac8e" ref="d6/db2/classmrw_1_1util_1_1Settings.html#a05676ec48e2b4c57c8b3cfea56ccac8e"/>
 <keyword name="SettingsGroup(QSettings *settings, const QString &amp;prefix)" id="mrw::util::SettingsGroup::SettingsGroup_aac49a4a0d15d663378b95d539c464a3d" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#aac49a4a0d15d663378b95d539c464a3d"/>
 <keyword name="setVerbose(const bool activate=false)" id="mrw::ui::BaseWidget::setVerbose_aa85c616e7a66cc8a21f52ff82eb058e0" ref="df/db9/classmrw_1_1ui_1_1BaseWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0"/>
@@ -5733,7 +5733,7 @@
 <keyword name="~Crossing()=default" id="mrw::model::Crossing::~Crossing_a924c05c223abae2579ec66fd9bdcb827" ref="d6/d5c/classmrw_1_1model_1_1Crossing.html#a924c05c223abae2579ec66fd9bdcb827"/>
 <keyword name="~DeviceId()=default" id="mrw::model::DeviceId::~DeviceId_a71173849da88347e35acc9b26e63cf87" ref="d0/daa/structmrw_1_1model_1_1DeviceId.html#a71173849da88347e35acc9b26e63cf87"/>
 <keyword name="~Duration()" id="mrw::util::Duration::~Duration_a32b4f7a84922729de9fd5d2cd6762c42" ref="d2/d87/classmrw_1_1util_1_1Duration.html#a32b4f7a84922729de9fd5d2cd6762c42"/>
-<keyword name="~EventDrivenInterface()=0" id="sc::EventDrivenInterface::~EventDrivenInterface_a44f6fe709e586da9c19be13e93c14d09" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a44f6fe709e586da9c19be13e93c14d09"/>
+<keyword name="~EventDrivenInterface() noexcept=default" id="sc::EventDrivenInterface::~EventDrivenInterface_a1eb2a451d44f72ab0e8e13b3a0068373" ref="d8/dd2/classsc_1_1EventDrivenInterface.html#a1eb2a451d44f72ab0e8e13b3a0068373"/>
 <keyword name="~FileLogger()" id="mrw::log::FileLogger::~FileLogger_ab08af44f2de3fe1b51158132f9a399dd" ref="d8/ded/classmrw_1_1log_1_1FileLogger.html#ab08af44f2de3fe1b51158132f9a399dd"/>
 <keyword name="~Light()=default" id="mrw::model::Light::~Light_a6ebd93b4230cc648bcfa602d004da06f" ref="d0/d3c/classmrw_1_1model_1_1Light.html#a6ebd93b4230cc648bcfa602d004da06f"/>
 <keyword name="~LightModule()=default" id="mrw::model::LightModule::~LightModule_ae51d974c5a1515af87f6779f1b9b1c67" ref="d2/d9d/classmrw_1_1model_1_1LightModule.html#ae51d974c5a1515af87f6779f1b9b1c67"/>
@@ -5749,10 +5749,10 @@
 <keyword name="~Route()" id="mrw::model::Route::~Route_a41212532f2bce3298d8f9468f82c62ab" ref="d7/dfb/classmrw_1_1model_1_1Route.html#a41212532f2bce3298d8f9468f82c62ab"/>
 <keyword name="~Section()=default" id="mrw::model::Section::~Section_aeb22813e156ba7fb2bbcc857fa5ad006" ref="de/de1/classmrw_1_1model_1_1Section.html#aeb22813e156ba7fb2bbcc857fa5ad006"/>
 <keyword name="~SettingsGroup()" id="mrw::util::SettingsGroup::~SettingsGroup_a56bb81c0462df5edb443a8d9cc5c2622" ref="de/d0d/classmrw_1_1util_1_1SettingsGroup.html#a56bb81c0462df5edb443a8d9cc5c2622"/>
-<keyword name="~StatemachineInterface()=0" id="sc::StatemachineInterface::~StatemachineInterface_aa887dba1e9f2fd1b16fc227132375135" ref="de/d2a/classsc_1_1StatemachineInterface.html#aa887dba1e9f2fd1b16fc227132375135"/>
+<keyword name="~StatemachineInterface() noexcept=default" id="sc::StatemachineInterface::~StatemachineInterface_a504db95ec9b316c0c42d36be8966f8bb" ref="de/d2a/classsc_1_1StatemachineInterface.html#a504db95ec9b316c0c42d36be8966f8bb"/>
 <keyword name="~SysLogger()" id="mrw::log::SysLogger::~SysLogger_af0121ecb4f50cf05cf240bf5bb077333" ref="d5/d0d/classmrw_1_1log_1_1SysLogger.html#af0121ecb4f50cf05cf240bf5bb077333"/>
-<keyword name="~TimedInterface()=0" id="sc::timer::TimedInterface::~TimedInterface_abde323c163127b4797dea71adcf1f35d" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#abde323c163127b4797dea71adcf1f35d"/>
-<keyword name="~TimerServiceInterface()=0" id="sc::timer::TimerServiceInterface::~TimerServiceInterface_ac964f1c8dd62c8c30ff369ce66455b77" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac964f1c8dd62c8c30ff369ce66455b77"/>
+<keyword name="~TimedInterface() noexcept=default" id="sc::timer::TimedInterface::~TimedInterface_adecf7f957f0f89ec5a515830f4804f45" ref="d7/d75/classsc_1_1timer_1_1TimedInterface.html#adecf7f957f0f89ec5a515830f4804f45"/>
+<keyword name="~TimerServiceInterface() noexcept=default" id="sc::timer::TimerServiceInterface::~TimerServiceInterface_ac403688f9fd6b012437b58acb68f2f62" ref="df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#ac403688f9fd6b012437b58acb68f2f62"/>
 <keyword name="CAN_BROADCAST_ID" id="mrw::can::CAN_BROADCAST_ID_af60507dceb3716970cdf6fa5df53ca27" ref="d9/d9b/namespacemrw_1_1can.html#af60507dceb3716970cdf6fa5df53ca27"/>
 <keyword name="CAN_EID_UNITNO_MASK" id="mrw::can::CAN_EID_UNITNO_MASK_adbff980b0aabd956dfdba5e367b36748" ref="d9/d9b/namespacemrw_1_1can.html#adbff980b0aabd956dfdba5e367b36748"/>
 <keyword name="CAN_GATEWAY_ID" id="mrw::can::CAN_GATEWAY_ID_acdbc536a60e49126061acb3a25c30737" ref="d9/d9b/namespacemrw_1_1can.html#acdbc536a60e49126061acb3a25c30737"/>

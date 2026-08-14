@@ -38,7 +38,7 @@ var searchData=
   ['setstationlabel_35',['setStationLabel',['../d6/da1/classmrw_1_1ui_1_1StationWidget.html#a43ed5e88f4feb27f6ae49099c9c354ee',1,'mrw::ui::StationWidget']]],
   ['setsymbolcallback_36',['setSymbolCallback',['../db/d9c/classmrw_1_1model_1_1Signal.html#aa5557f631ffd86b3ac04154fa7e31c83',1,'mrw::model::Signal']]],
   ['settimer_37',['setTimer',['../df/d18/classsc_1_1timer_1_1TimerServiceInterface.html#a3b6967b2bbc5a6cfc31b20ed0a180c28',1,'sc::timer::TimerServiceInterface']]],
-  ['settimerservice_38',['setTimerService',['../d7/d75/classsc_1_1timer_1_1TimedInterface.html#a4b30aa5a7a42a697e0dc114691f5f01f',1,'sc::timer::TimedInterface']]],
+  ['settimerservice_38',['setTimerService',['../d7/d75/classsc_1_1timer_1_1TimedInterface.html#a088683605e5a26f04834a30b21f4288a',1,'sc::timer::TimedInterface']]],
   ['settings_39',['Settings',['../d6/db2/classmrw_1_1util_1_1Settings.html',1,'mrw::util::Settings'],['../d6/db2/classmrw_1_1util_1_1Settings.html#a05676ec48e2b4c57c8b3cfea56ccac8e',1,'mrw::util::Settings::Settings()']]],
   ['settingsgroup_40',['SettingsGroup',['../de/d0d/classmrw_1_1util_1_1SettingsGroup.html',1,'mrw::util::SettingsGroup'],['../de/d0d/classmrw_1_1util_1_1SettingsGroup.html#aac49a4a0d15d663378b95d539c464a3d',1,'mrw::util::SettingsGroup::SettingsGroup()']]],
   ['setverbose_41',['setVerbose',['../df/db9/classmrw_1_1ui_1_1BaseWidget.html#aa85c616e7a66cc8a21f52ff82eb058e0',1,'mrw::ui::BaseWidget']]],
